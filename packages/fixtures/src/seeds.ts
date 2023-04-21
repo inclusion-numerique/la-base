@@ -30,6 +30,7 @@ const seed = async (transaction: TransactionClient, random?: number) => {
       }),
     ),
   )
+  await prismaClient.ressource.createMany({ data: ressources(random) })
 }
 
 const main = async (eraseAllData: boolean, random?: number) => {

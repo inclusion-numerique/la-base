@@ -6,7 +6,7 @@ const PublicLayout = ({ children }: PropsWithChildren) => (
   <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
     <PublicHeader />
     <div style={{ flex: 1 }}>
-      <div>{children}</div>
+      <div className="fr-container">{children}</div>
     </div>
     <PublicFooter />
   </div>
