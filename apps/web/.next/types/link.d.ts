@@ -27,10 +27,9 @@ declare namespace __next_route_internal_types__ {
   type OptionalCatchAllSlug<S extends string> =
     S extends `${string}${SearchOrHash}` ? never : S
 
-  type StaticRoutes = 
+  type StaticRoutes =
     | `/`
     | `/403`
-    | `/401`
     | `/404`
     | `/500`
     | `/accessibilite`
@@ -40,25 +39,27 @@ declare namespace __next_route_internal_types__ {
     | `/connexion/login`
     | `/connexion/verification`
     | `/mentions-legales`
+    | `/resources`
     | `/robots.txt`
     | `/api/health`
     | `/api/file/upload`
     | `/api/file/get`
     | `/api/test/index.api.spec`
+    | `/api/test`
     | `/api/test/service.spec`
     | `/api/test/service`
     | `/api/test`
     | `/api/test/type.spec`
     | `/api/test/type`
-  type DynamicRoutes<T extends string = string> = 
-    | `/api/auth/${CatchAllSlug<T>}`
+  type DynamicRoutes<T extends string = string> =
+    | `/resources/${SafeSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`
+    | `/api/auth/${CatchAllSlug<T>}`
 
-  type RouteImpl<T> = 
+  type RouteImpl<T> =
     | StaticRoutes
     | `${StaticRoutes}${SearchOrHash}`
     | (T extends `${DynamicRoutes<infer _>}${Suffix}` ? T : never)
-    
 }
 
 declare module 'next' {
@@ -73,7 +74,7 @@ declare module 'next/link' {
   import type { LinkProps as OriginalLinkProps } from 'next/dist/client/link'
   import type { AnchorHTMLAttributes } from 'react'
   import type { UrlObject } from 'url'
-  
+
   type LinkRestProps = Omit<
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof OriginalLinkProps> &
       OriginalLinkProps,
@@ -88,29 +89,42 @@ declare module 'next/link' {
     href: __next_route_internal_types__.RouteImpl<T> | UrlObject
   }
 
-  export default function Link<RouteType>(props: LinkProps<RouteType>): JSX.Element
+  export default function Link<RouteType>(
+    props: LinkProps<RouteType>,
+  ): JSX.Element
 }
 
 declare module 'next/navigation' {
   export * from 'next/dist/client/components/navigation'
 
-  import type { NavigateOptions, AppRouterInstance as OriginalAppRouterInstance } from 'next/dist/shared/lib/app-router-context'
+  import type {
+    NavigateOptions,
+    AppRouterInstance as OriginalAppRouterInstance,
+  } from 'next/dist/shared/lib/app-router-context'
   interface AppRouterInstance extends OriginalAppRouterInstance {
     /**
      * Navigate to the provided href.
      * Pushes a new history entry.
      */
-    push<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>, options?: NavigateOptions): void
+    push<RouteType>(
+      href: __next_route_internal_types__.RouteImpl<RouteType>,
+      options?: NavigateOptions,
+    ): void
     /**
      * Navigate to the provided href.
      * Replaces the current history entry.
      */
-    replace<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>, options?: NavigateOptions): void
+    replace<RouteType>(
+      href: __next_route_internal_types__.RouteImpl<RouteType>,
+      options?: NavigateOptions,
+    ): void
     /**
      * Prefetch the provided href.
      */
-    prefetch<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>): void
+    prefetch<RouteType>(
+      href: __next_route_internal_types__.RouteImpl<RouteType>,
+    ): void
   }
 
-  export declare function useRouter(): AppRouterInstance;
+  export declare function useRouter(): AppRouterInstance
 }

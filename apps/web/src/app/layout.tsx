@@ -7,6 +7,7 @@ import { Matomo } from '@app/web/app/Matomo'
 import { PreloadResources } from '@app/web/app/PreloadResources'
 import { EnvInformation } from '@app/web/app/EnvInformation'
 import { getServerBaseUrl } from '@app/web/utils/baseUrl'
+import { StartDsfr } from './StartDsfr'
 
 export const generateMetadata = (): Metadata => ({
   metadataBase: new URL(getServerBaseUrl()),
@@ -34,6 +35,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html lang="fr" data-fr-theme="light" data-fr-scheme="light">
       <body>
         <PreloadResources />
+        <StartDsfr />
         <Dsfr nonce={nonce} />
         <Matomo nonce={nonce} />
         <EnvInformation />

@@ -20,7 +20,8 @@
       "@app/scaleway/*": ["../../packages/cdk/.gen/providers/scaleway/*"],
       "@app/storybook/*": ["../../packages/storybook/src/*"],
       "@app/test/*": ["../../packages/test/src/*"],
-      "@app/ui/*": ["../../packages/ui/src/*"]
+      "@app/ui/*": ["../../packages/ui/src/*"],
+      "@app/fixtures/*": ["../../packages/fixtures/src/*"]
     },
     "baseUrl": "."
   },

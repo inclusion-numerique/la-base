@@ -8,7 +8,6 @@ export const PublicHeaderNav = () => {
     // TODO This is an error in typings of next/navigation in 13.2, remove this casting when next fix this
     (navigation as unknown as { usePathname: () => string }).usePathname() ??
     '/'
-
   return (
     <ul className="fr-nav__list">
       <li className="fr-nav__item">
@@ -18,6 +17,15 @@ export const PublicHeaderNav = () => {
           href="/"
         >
           Accueil
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="fr-nav__link"
+          aria-current={pathname === '/resources' ? 'page' : undefined}
+          href="/resources"
+        >
+          Resources
         </Link>
       </li>
     </ul>

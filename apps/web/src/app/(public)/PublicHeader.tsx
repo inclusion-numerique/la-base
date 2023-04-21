@@ -93,6 +93,15 @@ const PublicHeader = () => (
                 Accueil
               </Link>
             </li>
+            <li>
+              <Link
+                className="fr-btn"
+                href="/resources"
+                aria-controls="modal-menu-mobile"
+              >
+                Resources
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
