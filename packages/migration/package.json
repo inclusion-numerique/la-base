@@ -4,6 +4,7 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
+    "execute": "ts-node -r tsconfig-paths/register src/main.ts -c",
     "lint": "eslint src",
     "test": "jest",
     "tsc": "tsc --noEmit",
@@ -30,6 +31,8 @@
     "html-minifier": "^4.0.0",
     "undici": "^5.21.2",
     "uuid": "^9.0.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

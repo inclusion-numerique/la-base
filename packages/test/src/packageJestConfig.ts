@@ -61,6 +61,8 @@ export const packageJestConfig = ({
       '^@lb/config/(.*)$': '<rootDir>/../../packages/config/src/$1',
       '^@lb/fixtures/(.*)$': '<rootDir>/../../packages/fixtures/src/$1',
       '^@lb/migration/(.*)$': '<rootDir>/../../packages/migration/src/$1',
+      '^@prisma/client$':
+        '<rootDir>/../../apps/web/node_modules/@prisma/client',
       '^@prisma/migration-client$':
         '<rootDir>/../../packages/migration/prisma/migration-client',
       '^@lb/ui/(.*)$': '<rootDir>/../../packages/ui/src/$1',

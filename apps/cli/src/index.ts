@@ -11,6 +11,7 @@ import { createTfVarsFileFromEnvironment } from '@lb/cli/commands/infrastructure
 import { checkDeploymentStatus } from '@lb/cli/commands/deployment/checkDeploymentStatus'
 import { getDatabasePasswordSecret } from '@lb/cli/commands/secrets/getDatabasePasswordSecret'
 import { addNextPublicVariablesToDotEnv } from '@lb/cli/commands/infrastructure/addNextPublicVariablesToDotEnv'
+import { importLegacyDatabase } from '@lb/cli/commands/legacy/importLegacyDatabase'
 
 const program = new Command()
 
@@ -26,5 +27,6 @@ program.addCommand(updateGithubDeployment)
 program.addCommand(deactivateGithubDeployment)
 program.addCommand(createTfVarsFileFromEnvironment)
 program.addCommand(checkDeploymentStatus)
+program.addCommand(importLegacyDatabase)
 
 program.parse()
