@@ -15,7 +15,7 @@ const PublicHeader = () => (
                   href="/"
                   aria-current="page"
                   target="_self"
-                  title={process.env.NEXT_PUBLIC_APP_NAME}
+                  title={PublicWebAppConfig.projectTitle}
                 >
                   <picture>
                     <img
