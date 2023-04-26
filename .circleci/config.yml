@@ -509,10 +509,6 @@ jobs:
           command: |
             echo "export MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> ${BASH_ENV}
       - run:
-          name: 'Add debug variable'
-          command: |
-            echo 'export DEBUG="prisma*"' >> ${BASH_ENV}
-      - run:
           name: 'Add connection pool parameters to database URL'
           command: |
             echo "DATABASE_URL='$DATABASE_URL?connection_limit=1&pool_timeout=60'" >> .env
