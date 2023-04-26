@@ -1,6 +1,6 @@
 import { prismaClient } from '@app/web/prismaClient'
 
-export const getResourcesList = async () =>
+export const getResourcesList = async (take?: number, skip?: number) =>
   prismaClient.resource.findMany({
     select: {
       title: true,
@@ -11,6 +11,8 @@ export const getResourcesList = async () =>
         created: 'desc',
       },
     ],
+    skip,
+    take,
   })
 
 export const getResource = async (slug: string) =>

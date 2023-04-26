@@ -6,7 +6,7 @@ import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 export const revalidate = 0
 
 const Ressources = async () => {
-  const resources = await getResourcesList()
+  const resources = await getResourcesList(10)
 
   return (
     <>
