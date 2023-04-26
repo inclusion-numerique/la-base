@@ -21,7 +21,8 @@ import { runPromisesSequentially } from '@app/web/utils/runPromisesSequentially'
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 100
+// Connection pool size is 37 in CI env
+const chunkSize = 20
 
 export const executeMigration = async () => {
   const start = new Date()
