@@ -45,8 +45,3 @@ export const resources: (
     },
   ]
 }
-
-export const cleanResources = async () => {
-  await prismaClient.resource.deleteMany()
-  await prismaClient.resource.createMany({ data: await resources() })
-}
