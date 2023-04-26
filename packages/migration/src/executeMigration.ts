@@ -42,8 +42,11 @@ export const executeMigration = async () => {
   )
 
   output('')
-  output('Executing model migrations transaction')
-  const result = await prismaClient.$transaction(async (transaction) => {
+  output('Executing model migrations')
+  // eslint-disable-next-line no-async-promise-executor
+  const result = await (async () => {
+    const transaction = prismaClient
+
     output(`- Migrating users...`)
 
     const migratedUsers = await Promise.all(
@@ -57,7 +60,7 @@ export const executeMigration = async () => {
             if (index % 100 === 0) {
               output(
                 `-- Migrated ${index + 1} users ${(
-                  (index + 1) /
+                  ((index + 1) * 100) /
                   legacyUsers.length
                 ).toFixed(0)}%`,
               )
@@ -152,7 +155,7 @@ export const executeMigration = async () => {
     output(`- Updated ${updatedResourceLinks.length} resources links`)
 
     return { migratedUsers, migratedBases, migratedResources }
-  })
+  })()
 
   const end = new Date()
 
