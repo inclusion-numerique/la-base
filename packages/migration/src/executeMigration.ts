@@ -53,33 +53,33 @@ export const executeMigration = async () => {
 
     output(`- Migrating ${legacyUsers.length} users...`)
 
-    const migratedUsers = (
-      await runPromisesSequentially(
-        chunk(legacyUsers, chunkSize).map((legacyUsersChunk, chunkIndex) =>
-          Promise.all(
-            legacyUsersChunk.map((legacyUser, userIndex) =>
-              migrateUser({ legacyUser, transaction })
-                .catch((error) => {
-                  output('Error migrating user', legacyUser)
-                  throw error
-                })
-                .then((migratedUser) => {
-                  const userCount = chunkIndex * chunkSize + (userIndex + 1)
-                  if (userCount % 100 === 0) {
-                    output(
-                      `-- ${userCount} ${(
-                        (userCount * 100) /
-                        legacyUsers.length
-                      ).toFixed(0)}%`,
-                    )
-                  }
-                  return migratedUser
-                }),
-            ),
+    const migratedUsersChunks = await runPromisesSequentially(
+      chunk(legacyUsers, chunkSize).map((legacyUsersChunk, chunkIndex) =>
+        Promise.all(
+          legacyUsersChunk.map((legacyUser, userIndex) =>
+            migrateUser({ legacyUser, transaction })
+              .catch((error) => {
+                output('Error migrating user', legacyUser)
+                throw error
+              })
+              .then((migratedUser) => {
+                const userCount = chunkIndex * chunkSize + (userIndex + 1)
+                if (userCount % 100 === 0) {
+                  output(
+                    `-- ${userCount} ${(
+                      (userCount * 100) /
+                      legacyUsers.length
+                    ).toFixed(0)}%`,
+                  )
+                }
+                return migratedUser
+              }),
           ),
         ),
-      )
-    ).flat()
+      ),
+    )
+
+    const migratedUsers = migratedUsersChunks.flat()
     output(`- Migrated ${migratedUsers.length} users`)
 
     const userIdFromLegacyId = createLegacyToNewIdHelper(
