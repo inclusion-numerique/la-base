@@ -7,9 +7,9 @@ export const resources: (
   random?: number,
 ) => Promise<
   Exclude<
-    Parameters<typeof prismaClient.resource.createMany>[0],
+    Parameters<typeof prismaClient.resource.upsert>[0]['create'],
     undefined
-  >['data']
+  >[]
 > = async (random) => {
   if (random) {
     const user = await prismaClient.user.findFirst()
@@ -34,14 +34,14 @@ export const resources: (
         '10 raisons de venir sur la base, la deuxième va vous laisser sans voix !',
       slug: '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
       description: 'TODO...',
-      createdById: '99afd613-9d54-4110-9062-065c627eda8a',
+      createdById: 'eecac657-f415-47e1-8087-c4508ea16191',
     },
     {
       id: '35eef26e-cc63-4adb-a761-eb44cef48361',
       title: "Tester c'est pour les devs qui écrivent des bugs...",
       slug: 'tester-c-est-pour-les-devs-qui-écrivent-des-bugs',
       description: 'TODO...',
-      createdById: '99afd613-9d54-4110-9062-065c627eda8a',
+      createdById: 'eecac657-f415-47e1-8087-c4508ea16191',
     },
   ]
 }

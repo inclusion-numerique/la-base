@@ -5,13 +5,13 @@ import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 
 export const revalidate = 0
 
-const Resources = async () => {
+const Ressources = async () => {
   const resources = await getResourcesList()
 
   return (
     <>
       <Breadcrumb
-        currentPageLabel="Resources"
+        currentPageLabel="Ressources"
         homeLinkProps={{
           href: '/',
         }}
@@ -24,4 +24,4 @@ const Resources = async () => {
   )
 }
 
-export default Resources
+export default Ressources

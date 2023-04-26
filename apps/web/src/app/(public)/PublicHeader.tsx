@@ -96,10 +96,10 @@ const PublicHeader = () => (
             <li>
               <Link
                 className="fr-btn"
-                href="/resources"
+                href="/ressources"
                 aria-controls="modal-menu-mobile"
               >
-                Resources
+                Ressources
               </Link>
             </li>
           </ul>

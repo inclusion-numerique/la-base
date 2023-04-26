@@ -22,10 +22,10 @@ export const PublicHeaderNav = () => {
       <li>
         <Link
           className="fr-nav__link"
-          aria-current={pathname === '/resources' ? 'page' : undefined}
-          href="/resources"
+          aria-current={pathname === '/ressources' ? 'page' : undefined}
+          href="/ressources"
         >
-          Resources
+          Ressources
         </Link>
       </li>
     </ul>

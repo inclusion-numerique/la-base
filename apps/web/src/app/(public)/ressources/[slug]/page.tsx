@@ -5,7 +5,7 @@ import { getResource } from '@app/web/server/resources'
 
 export const revalidate = 0
 
-const ResourcePage = async ({ params }: { params: { slug: string } }) => {
+const RessourcePage = async ({ params }: { params: { slug: string } }) => {
   const resource = await getResource(decodeURI(params.slug))
   if (!resource) {
     notFound()
@@ -18,11 +18,11 @@ const ResourcePage = async ({ params }: { params: { slug: string } }) => {
         homeLinkProps={{
           href: '/',
         }}
-        segments={[{ label: 'Resources', linkProps: { href: '/resources' } }]}
+        segments={[{ label: 'Ressources', linkProps: { href: '/ressources' } }]}
       />
       <h1>{resource.title}</h1>
     </>
   )
 }
 
-export default ResourcePage
+export default RessourcePage

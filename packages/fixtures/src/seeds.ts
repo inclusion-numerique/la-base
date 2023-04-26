@@ -31,7 +31,18 @@ const seed = async (transaction: TransactionClient, random?: number) => {
       }),
     ),
   )
-  await prismaClient.resource.createMany({ data: await resources(random) })
+
+  const newResources = await resources(random)
+  await Promise.all(
+    newResources.map((resource) =>
+      transaction.resource.upsert({
+        where: { id: resource.id },
+        create: resource,
+        update: resource,
+        select: { id: true },
+      }),
+    ),
+  )
 }
 
 const main = async (eraseAllData: boolean, random?: number) => {
