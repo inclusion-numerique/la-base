@@ -49,8 +49,10 @@ export const executeMigration = async () => {
 
     output(`- Migrating users...`)
 
+    const debugUsers = legacyUsers.slice(0, 2)
+
     const migratedUsers = await Promise.all(
-      legacyUsers.map((legacyUser, index) =>
+      debugUsers.map((legacyUser, index) =>
         migrateUser({ legacyUser, transaction })
           .catch((error) => {
             output('Error migrating user', legacyUser)
@@ -70,6 +72,10 @@ export const executeMigration = async () => {
       ),
     )
     output(`- Migrated ${migratedUsers.length} users`)
+
+    if (debugUsers) {
+      throw new Error('Debugging migrations')
+    }
 
     const userIdFromLegacyId = createLegacyToNewIdHelper(
       migratedUsers,
