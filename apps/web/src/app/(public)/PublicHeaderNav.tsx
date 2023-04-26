@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import * as navigation from 'next/navigation'
+import { menu } from './menu'
 
 export const PublicHeaderNav = () => {
   const pathname =
@@ -10,24 +11,17 @@ export const PublicHeaderNav = () => {
     '/'
   return (
     <ul className="fr-nav__list">
-      <li className="fr-nav__item">
-        <Link
-          className="fr-nav__link"
-          aria-current={pathname === '/' ? 'page' : undefined}
-          href="/"
-        >
-          Accueil
-        </Link>
-      </li>
-      <li>
-        <Link
-          className="fr-nav__link"
-          aria-current={pathname === '/ressources' ? 'page' : undefined}
-          href="/ressources"
-        >
-          Ressources
-        </Link>
-      </li>
+      {menu.map((item) => (
+        <li className="fr-nav__item" key={item.name}>
+          <Link
+            className="fr-nav__link"
+            aria-current={pathname === item.href ? 'page' : undefined}
+            href={item.href}
+          >
+            {item.name}
+          </Link>
+        </li>
+      ))}
     </ul>
   )
 }
