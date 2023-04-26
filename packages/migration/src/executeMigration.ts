@@ -45,12 +45,20 @@ export const executeMigration = async () => {
   output('Executing model migrations transaction')
   const result = await prismaClient.$transaction(async (transaction) => {
     output(`- Migrating users...`)
+
     const migratedUsers = await Promise.all(
-      legacyUsers.map((legacyUser) =>
-        migrateUser({ legacyUser, transaction }).catch((error) => {
-          output('Error migrating user', legacyUser)
-          throw error
-        }),
+      legacyUsers.map((legacyUser, index) =>
+        migrateUser({ legacyUser, transaction })
+          .catch((error) => {
+            output('Error migrating user', legacyUser)
+            throw error
+          })
+          .then((migratedUser) => {
+            if (index % 100 === 0) {
+              output(`- Migrated ${index + 1} users / ${legacyUsers.length}`)
+            }
+            return migratedUser
+          }),
       ),
     )
     output(`- Migrated ${migratedUsers.length} users`)
