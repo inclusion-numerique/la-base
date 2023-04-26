@@ -55,7 +55,12 @@ export const executeMigration = async () => {
           })
           .then((migratedUser) => {
             if (index % 100 === 0) {
-              output(`- Migrated ${index + 1} users / ${legacyUsers.length}`)
+              output(
+                `-- Migrated ${index + 1} users ${(
+                  (index + 1) /
+                  legacyUsers.length
+                ).toFixed(0)}%`,
+              )
             }
             return migratedUser
           }),
