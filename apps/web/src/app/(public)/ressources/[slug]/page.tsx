@@ -1,7 +1,7 @@
 import React from 'react'
-import BreadCrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 import { notFound } from 'next/navigation'
 import { getResource } from '@app/web/server/resources'
+import { Breadcrumbs } from '@app/web/components/Breadcrumbs'
 
 export const revalidate = 0
 
@@ -13,12 +13,9 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      <BreadCrumb
-        currentPageLabel={resource.title}
-        homeLinkProps={{
-          href: '/',
-        }}
-        segments={[{ label: 'Ressources', linkProps: { href: '/ressources' } }]}
+      <Breadcrumbs
+        currentPage={resource.title}
+        parents={[{ label: 'Ressources', linkProps: { href: '/ressources' } }]}
       />
       <h1>{resource.title}</h1>
     </>
