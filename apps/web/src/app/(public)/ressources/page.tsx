@@ -1,6 +1,6 @@
 import React from 'react'
 import { getResourcesList } from '@app/web/server/resources'
-import ResourceCard from '@app/web/components/Resource'
+import ResourceCard from '@app/web/components/Resource/Card'
 import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 
 export const revalidate = 0

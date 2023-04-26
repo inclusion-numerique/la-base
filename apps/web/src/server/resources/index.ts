@@ -5,6 +5,8 @@ export const getResourcesList = async (take?: number, skip?: number) =>
     select: {
       title: true,
       slug: true,
+      created: true,
+      description: true,
     },
     orderBy: [
       {
