@@ -15,9 +15,13 @@ import {
   getLegacyResources,
   migrateResource,
 } from '@app/migration/modelMigrations/migrateResource'
+import { chunk } from 'lodash'
+import { runPromisesSequentially } from '@app/web/utils/runPromisesSequentially'
 
 // eslint-disable-next-line no-console
 const output = console.log
+
+const chunkSize = 100
 
 export const executeMigration = async () => {
   const start = new Date()
@@ -47,35 +51,36 @@ export const executeMigration = async () => {
   const result = await (async () => {
     const transaction = prismaClient
 
-    output(`- Migrating users...`)
+    output(`- Migrating ${legacyUsers.length} users...`)
 
-    const debugUsers = legacyUsers.slice(0, 2)
-
-    const migratedUsers = await Promise.all(
-      debugUsers.map((legacyUser, index) =>
-        migrateUser({ legacyUser, transaction })
-          .catch((error) => {
-            output('Error migrating user', legacyUser)
-            throw error
-          })
-          .then((migratedUser) => {
-            if (index % 100 === 0) {
-              output(
-                `-- Migrated ${index + 1} users ${(
-                  ((index + 1) * 100) /
-                  legacyUsers.length
-                ).toFixed(0)}%`,
-              )
-            }
-            return migratedUser
-          }),
-      ),
-    )
+    const migratedUsers = (
+      await runPromisesSequentially(
+        chunk(legacyUsers, chunkSize).map((legacyUsersChunk, chunkIndex) =>
+          Promise.all(
+            legacyUsersChunk.map((legacyUser, userIndex) =>
+              migrateUser({ legacyUser, transaction })
+                .catch((error) => {
+                  output('Error migrating user', legacyUser)
+                  throw error
+                })
+                .then((migratedUser) => {
+                  const userCount = chunkIndex * chunkSize + (userIndex + 1)
+                  if (userCount % 100 === 0) {
+                    output(
+                      `-- ${userCount} ${(
+                        (userCount * 100) /
+                        legacyUsers.length
+                      ).toFixed(0)}%`,
+                    )
+                  }
+                  return migratedUser
+                }),
+            ),
+          ),
+        ),
+      )
+    ).flat()
     output(`- Migrated ${migratedUsers.length} users`)
-
-    if (debugUsers) {
-      throw new Error('Debugging migrations')
-    }
 
     const userIdFromLegacyId = createLegacyToNewIdHelper(
       migratedUsers,
