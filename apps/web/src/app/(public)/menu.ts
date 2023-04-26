@@ -4,4 +4,7 @@ type MenuItem = {
   name: string
   href: Route
 }
-export const menu: MenuItem[] = [{ name: 'Accueil', href: '/' }]
+export const menu: MenuItem[] = [
+  { name: 'Accueil', href: '/' },
+  { name: 'Ressources', href: '/ressources' },
+]
