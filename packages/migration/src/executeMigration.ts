@@ -22,7 +22,7 @@ const output = console.log
 
 // Connection pool size is 37 in CI env
 // const chunkSize = 20
-const chunkSize = 1
+const chunkSize = 50
 
 export const executeMigration = async () => {
   const start = new Date()
