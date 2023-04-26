@@ -1,60 +1,25 @@
-import Link from 'next/link'
-import classNames from 'classnames'
+import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 import { Route } from 'next'
+import { LinkRestProps } from 'next/link'
 
-export type BreadCrumbParent = {
-  title: string
-  path: string
+export type BreadcrumbParent = {
+  label: string
+  linkProps: Omit<LinkRestProps & { href: Route }, 'children'>
 }
-export type BreadCrumbParents = BreadCrumbParent[]
+export type BreadcrumbParents = BreadcrumbParent[]
 
 export const Breadcrumbs = ({
   currentPage,
   parents = [],
-  hideRoot,
-  className,
 }: {
   currentPage: string
-  parents?: BreadCrumbParents
-  hideRoot?: boolean
-  className?: string
+  parents?: BreadcrumbParents
 }) => (
-  <nav
-    role="navigation"
-    className={classNames('fr-breadcrumb', className)}
-    aria-label="vous êtes ici :"
-  >
-    <button
-      className="fr-breadcrumb__button"
-      type="button"
-      aria-expanded="false"
-      aria-controls="breadcrumbs"
-    >
-      Voir le fil d&apos;Ariane
-    </button>
-    <div className="fr-collapse" id="breadcrumbs">
-      <ol className="fr-breadcrumb__list">
-        {hideRoot ? null : (
-          <li>
-            <Link className="fr-breadcrumb__link" href="/">
-              Accueil
-            </Link>
-          </li>
-        )}
-        {parents.map(({ title, path }) => (
-          <li key={path}>
-            {/* TODO actually type BreadcrumbParent with a valid Route */}
-            <Link className="fr-breadcrumb__link" href={path as Route}>
-              {title}
-            </Link>
-          </li>
-        ))}
-        <li>
-          <span className="fr-breadcrumb__link" aria-current="page">
-            {currentPage}
-          </span>
-        </li>
-      </ol>
-    </div>
-  </nav>
+  <Breadcrumb
+    currentPageLabel={currentPage}
+    homeLinkProps={{
+      href: '/',
+    }}
+    segments={parents}
+  />
 )
