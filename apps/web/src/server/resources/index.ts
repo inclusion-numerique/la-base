@@ -1,10 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
 
-export const getResourcesSlug = async () =>
-  prismaClient.resource.findMany({
-    select: { slug: true },
-  })
-
 export const getResourcesList = async () =>
   prismaClient.resource.findMany({
     select: {

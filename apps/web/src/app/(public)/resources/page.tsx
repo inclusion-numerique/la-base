@@ -3,6 +3,8 @@ import { getResourcesList } from '@app/web/server/resources'
 import ResourceCard from '@app/web/components/Resource'
 import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 
+export const revalidate = 0
+
 const Resources = async () => {
   const resources = await getResourcesList()
 
