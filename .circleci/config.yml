@@ -505,6 +505,10 @@ jobs:
             pnpm --silent cli dotenv:from-cdk web
       - add_dotenv_vars_to_bash_env
       - run:
+          name: 'Add migration database in env after cdk vars have been added'
+          command: |
+            echo "export MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> ${BASH_ENV}
+      - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID
       - run:
