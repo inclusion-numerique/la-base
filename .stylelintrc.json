@@ -1,6 +1,9 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
-    "selector-class-pattern": ["^(([a-z][a-z0-9]*)((-{1,2}|_{1,2})[a-z0-9]+)*)|(([a-z]+[A-Z]+\\w+)+)$"]
+    "selector-class-pattern": [
+      "^(([a-z][a-z0-9]*)((-{1,2}|_{1,2})[a-z0-9]+)*)|(([a-z]+[A-Z]+\\w+)+)$"
+    ],
+    "media-feature-range-notation": "prefix"
   }
 }
