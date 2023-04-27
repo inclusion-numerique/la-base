@@ -50,8 +50,9 @@ export type MigrateResourceInput = {
   slug: string
 }
 
-// I created a new resource with id 1336 in the legacy app to debug this migration
-const debugLegacyResourceId = 1336
+// I created a legacy resource with id 1336 in the legacy app to debug this migration
+// const debugLegacyResourceId = 1336
+const debugLegacyResourceId = null
 
 export const migrateResource = async ({
   legacyResource,

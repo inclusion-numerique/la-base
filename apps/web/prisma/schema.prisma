@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "jsonProtocol"]
   binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 

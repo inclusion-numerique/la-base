@@ -6,7 +6,7 @@ import { arrayFromEnvironmentVariable } from './arrayFromEnvironmentVariable'
 
 export const projectTitle = process.env.NEXT_PUBLIC_APP_NAME || ''
 export const projectSlug = process.env.NEXT_PUBLIC_APP_SLUG || ''
-export const mainLiveUrl = `https://${projectSlug}.incubateur.anct.gouv.fr`
+export const mainLiveUrl = `https://v2.labase.incubateur.anct.gouv.fr`
 export const repositoryUrl = `https://github.com/inclusion-numerique/${projectSlug}`
 
 export const cypressProjectId = 'ppk369'

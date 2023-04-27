@@ -1,10 +1,11 @@
 import {
+  getExistingUsers,
   getLegacyUsers,
   migrateUser,
 } from '@app/migration/modelMigrations/migrateUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  getExistingBaseSlugs,
+  getExistingBases,
   getLegacyBases,
   migrateBase,
 } from '@app/migration/modelMigrations/migrateBase'
@@ -15,9 +16,12 @@ import {
   getLegacyResources,
   migrateResource,
 } from '@app/migration/modelMigrations/migrateResource'
+import { runPromisesInChunks } from '@app/web/utils/runPromisesInChunks'
 
 // eslint-disable-next-line no-console
 const output = console.log
+
+const chunkSize = 200
 
 export const executeMigration = async () => {
   const start = new Date()
@@ -28,12 +32,15 @@ export const executeMigration = async () => {
   output('Fetching legacy data and context data in new database')
   const legacyUsers = await getLegacyUsers()
   output(`- Found ${legacyUsers.length} users to migrate`)
+  const existingUsers = await getExistingUsers()
+  output(`- Found ${existingUsers.idMap.size} already migrated users`)
   const legacyBases = await getLegacyBases()
   output(`- Found ${legacyBases.length} bases to migrate`)
-  const existingBaseSlugs = await getExistingBaseSlugs()
+  const existingBases = await getExistingBases()
   output(
-    `- Found ${existingBaseSlugs.size} existing base slugs for uniqueness checks`,
+    `- Found ${existingBases.slugMap.size} existing base slugs for uniqueness checks`,
   )
+  output(`- Found ${existingBases.idMap.size} already migrated bases`)
   const legacyResources = await getLegacyResources()
   output(`- Found ${legacyResources.length} resources to migrate`)
   const existingResourceSlugs = await getExistingResourceSlugs()
@@ -42,104 +49,151 @@ export const executeMigration = async () => {
   )
 
   output('')
-  output('Executing model migrations transaction')
-  const result = await prismaClient.$transaction(async (transaction) => {
-    output(`- Migrating users...`)
-    const migratedUsers = await Promise.all(
-      legacyUsers.map((legacyUser) =>
-        migrateUser({ legacyUser, transaction }).catch((error) => {
+  output('Executing model migrations')
+
+  output(`- Migrating ${legacyUsers.length} users...`)
+
+  let migratedUserCount = 0
+  const migratedUsers = await runPromisesInChunks(
+    legacyUsers.map((legacyUser) =>
+      migrateUser({ legacyUser, transaction: prismaClient })
+        .then((migratedUser) => {
+          migratedUserCount += 1
+          if (migratedUserCount % 1000 === 0) {
+            output(
+              `-- ${migratedUserCount} ${(
+                (migratedUserCount * 100) /
+                legacyUsers.length
+              ).toFixed(0)}%`,
+            )
+          }
+          return migratedUser
+        })
+        .catch((error) => {
           output('Error migrating user', legacyUser)
           throw error
         }),
-      ),
-    )
-    output(`- Migrated ${migratedUsers.length} users`)
+    ),
+    chunkSize,
+    async () => {
+      output('Resetting connection to avoid connection pool integration errors')
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
+  )
 
-    const userIdFromLegacyId = createLegacyToNewIdHelper(
-      migratedUsers,
-      ({ legacyId }) => `User with legacyId ${legacyId} not found`,
-    )
+  output(`- Migrated ${migratedUsers.length} users`)
 
-    output(`- Migrating bases...`)
+  const userIdFromLegacyId = createLegacyToNewIdHelper(
+    migratedUsers,
+    ({ legacyId }) => `User with legacyId ${legacyId} not found`,
+  )
 
-    const migratedBases = await Promise.all(
-      legacyBases.map((legacyBase) => {
-        const slug = computeSlugAndUpdateExistingSlugs(
-          legacyBase,
-          existingBaseSlugs,
-        )
-        return migrateBase({
-          legacyBase,
-          transaction,
-          slug,
-          userIdFromLegacyId,
+  output(`- Migrating bases...`)
+
+  const migratedBases = await Promise.all(
+    legacyBases.map((legacyBase) => {
+      const slug = computeSlugAndUpdateExistingSlugs(
+        legacyBase,
+        existingBases.slugMap,
+      )
+      return migrateBase({
+        legacyBase,
+        transaction: prismaClient,
+        slug,
+        userIdFromLegacyId,
+      })
+    }),
+  )
+  output(`- Migrated ${migratedBases.length} bases`)
+
+  const baseIdFromLegacyId = createLegacyToNewIdHelper(
+    migratedBases,
+    ({ legacyId }) => `Base with legacyId ${legacyId} not found`,
+  )
+
+  output(`- Migrating resources...`)
+
+  let migratedResourceCount = 0
+
+  const migratedResources = await runPromisesInChunks(
+    legacyResources.map((legacyResource) => {
+      const slug = computeSlugAndUpdateExistingSlugs(
+        legacyResource,
+        existingResourceSlugs,
+      )
+      return migrateResource({
+        legacyResource,
+        transaction: prismaClient,
+        slug,
+        userIdFromLegacyId,
+        baseIdFromLegacyId,
+      })
+        .then((migratedResource) => {
+          migratedResourceCount += 1
+          if (migratedResourceCount % 200 === 0) {
+            output(
+              `-- ${migratedResourceCount} ${(
+                (migratedResourceCount * 100) /
+                legacyResources.length
+              ).toFixed(0)}%`,
+            )
+          }
+          return migratedResource
         })
-      }),
-    )
-    output(`- Migrated ${migratedBases.length} bases`)
-
-    const baseIdFromLegacyId = createLegacyToNewIdHelper(
-      migratedBases,
-      ({ legacyId }) => `Base with legacyId ${legacyId} not found`,
-    )
-
-    output(`- Migrating resources...`)
-    const migratedResources = await Promise.all(
-      legacyResources.map((legacyResource) => {
-        const slug = computeSlugAndUpdateExistingSlugs(
-          legacyResource,
-          existingResourceSlugs,
-        )
-        return migrateResource({
-          legacyResource,
-          transaction,
-          slug,
-          userIdFromLegacyId,
-          baseIdFromLegacyId,
+        .catch((error) => {
+          output('Error migrating resource', legacyResource)
+          throw error
         })
+    }),
+    chunkSize,
+    async () => {
+      output('Resetting connection to avoid connection pool integration errors')
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
+  )
+
+  output(`- Migrated ${migratedResources.length} resources`)
+
+  const resourceIdFromLegacyId = createLegacyToNewIdHelper(
+    migratedResources.map(({ resource }) => resource),
+    ({ legacyId }) => `Resource with legacyId ${legacyId} not found`,
+  )
+
+  output(`- Updating resource links in contents...`)
+
+  // TODO Move this code in its own file
+  const resourceLinkContents = migratedResources.flatMap((migrated) =>
+    migrated.contents.filter(
+      (
+        content,
+      ): content is (typeof migratedResources)[number]['contents'][number] & {
+        legacyLinkedResourceId: number
+      } => !!content.legacyLinkedResourceId,
+    ),
+  )
+
+  const updatedResourceLinks = await Promise.all(
+    resourceLinkContents.map((content) =>
+      prismaClient.content.update({
+        where: { id: content.id },
+        data: {
+          linkedResourceId: resourceIdFromLegacyId(
+            content.legacyLinkedResourceId,
+          ),
+        },
+        select: {
+          id: true,
+          legacyLinkedResourceId: true,
+          linkedResourceId: true,
+        },
       }),
-    )
-    output(`- Migrated ${migratedResources.length} resources`)
+    ),
+  )
+  output(`- Updated ${updatedResourceLinks.length} resources links`)
 
-    const resourceIdFromLegacyId = createLegacyToNewIdHelper(
-      migratedResources.map(({ resource }) => resource),
-      ({ legacyId }) => `Resource with legacyId ${legacyId} not found`,
-    )
-
-    output(`- Updating resource links in contents...`)
-
-    // TODO Move this code in its own file
-    const resourceLinkContents = migratedResources.flatMap((migrated) =>
-      migrated.contents.filter(
-        (
-          content,
-        ): content is (typeof migratedResources)[number]['contents'][number] & {
-          legacyLinkedResourceId: number
-        } => !!content.legacyLinkedResourceId,
-      ),
-    )
-
-    const updatedResourceLinks = await Promise.all(
-      resourceLinkContents.map((content) =>
-        transaction.content.update({
-          where: { id: content.id },
-          data: {
-            linkedResourceId: resourceIdFromLegacyId(
-              content.legacyLinkedResourceId,
-            ),
-          },
-          select: {
-            id: true,
-            legacyLinkedResourceId: true,
-            linkedResourceId: true,
-          },
-        }),
-      ),
-    )
-    output(`- Updated ${updatedResourceLinks.length} resources links`)
-
-    return { migratedUsers, migratedBases, migratedResources }
-  })
+  const result = { migratedUsers, migratedBases, migratedResources }
 
   const end = new Date()
 
