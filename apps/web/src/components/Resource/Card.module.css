@@ -7,9 +7,9 @@
 .header {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
 
   @media (min-width: 992px) {
+    align-items: center;
     flex-direction: row;
   }
 }
@@ -24,8 +24,7 @@
 }
 
 .content {
-  gap: 16px 24px;
-  align-items: center;
+  gap: 0 24px;
   flex-direction: column-reverse;
 }
 

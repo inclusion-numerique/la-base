@@ -26,20 +26,23 @@ const ResourceCard = ({
           </Link>
         </span>
       </div>
-      <span className="fr-text--xs fr-mb-0">
+      <div className="fr-hidden fr-unhidden-lg fr-text--xs fr-mb-0">
         Modifié le {dateAsDay(resource.created)}
-      </span>
+      </div>
     </div>
     <div className={styles.content}>
       <div>
         <h6 className={styles.title}>{resource.title}</h6>
         <div className="fr-text--sm fr-mb-0">{resource.description}</div>
       </div>
+      <div className="fr-hidden-lg fr-text--xs fr-mb-1w">
+        Modifié le {dateAsDay(resource.created)}
+      </div>
       {withImage && (
         <img className={styles.image} src="https://fakeimg.pl/140x80/" alt="" />
       )}
     </div>
-    <Badge className="fr-hidden-lg" noIcon severity="success">
+    <Badge className="fr-hidden-lg fr-mt-1w" noIcon severity="success">
       Très recommandée
     </Badge>
     <div className={styles.footer}>
