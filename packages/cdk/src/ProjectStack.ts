@@ -143,6 +143,9 @@ export class ProjectStack extends TerraformStack {
       backupScheduleRetention: 14,
       volumeType: 'bssd', // Block storage
       volumeSizeInGb: 15,
+      settings: {
+        max_connections: '500',
+      },
     })
 
     const cockpit = new Cockpit(this, 'cockpit', {})
