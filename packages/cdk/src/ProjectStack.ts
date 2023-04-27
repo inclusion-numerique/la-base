@@ -144,7 +144,15 @@ export class ProjectStack extends TerraformStack {
       volumeType: 'bssd', // Block storage
       volumeSizeInGb: 15,
       settings: {
+        // Custom max connections
         max_connections: '500',
+
+        // Default values (if we define settings the are deleted)
+        effective_cache_size: '2700',
+        maintenance_work_mem: '300',
+        max_parallel_workers: '1',
+        max_parallel_workers_per_gather: '0',
+        work_mem: '8',
       },
     })
 
