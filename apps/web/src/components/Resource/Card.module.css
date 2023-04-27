@@ -3,24 +3,24 @@
   padding-top: 16px;
 }
 
+.header {
+  margin-bottom: 8px;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    align-items: center;
+    margin-bottom: 16px;
+  }
+}
+
 .content,
 .header {
   display: flex;
   justify-content: space-between;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     align-items: center;
     flex-direction: row;
-  }
-}
-
-.header {
-  margin-bottom: 8px;
-  flex-direction: column;
-
-  @media (min-width: 992px) {
-    align-items: center;
-    margin-bottom: 16px;
   }
 }
 
@@ -47,7 +47,7 @@
 .title {
   margin-bottom: 8px;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     margin-bottom: 12px;
   }
 }
@@ -70,4 +70,12 @@
 
 .iconLink {
   background-image: none !important;
+}
+
+.spanMdDisplay {
+  display: none;
+  
+  @media (min-width: 768px) {
+    display: inline;
+  }
 }
