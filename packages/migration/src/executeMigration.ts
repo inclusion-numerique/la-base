@@ -57,10 +57,6 @@ export const executeMigration = async () => {
   const migratedUsers = await runPromisesInChunks(
     legacyUsers.map((legacyUser) =>
       migrateUser({ legacyUser, transaction: prismaClient })
-        .catch((error) => {
-          output('Error migrating user', legacyUser)
-          throw error
-        })
         .then((migratedUser) => {
           migratedUserCount += 1
           if (migratedUserCount % 1000 === 0) {
@@ -72,6 +68,10 @@ export const executeMigration = async () => {
             )
           }
           return migratedUser
+        })
+        .catch((error) => {
+          output('Error migrating user', legacyUser)
+          throw error
         }),
     ),
     chunkSize,
@@ -129,10 +129,6 @@ export const executeMigration = async () => {
         userIdFromLegacyId,
         baseIdFromLegacyId,
       })
-        .catch((error) => {
-          output('Error migrating resource', legacyResource)
-          throw error
-        })
         .then((migratedResource) => {
           migratedResourceCount += 1
           if (migratedResourceCount % 200 === 0) {
@@ -144,6 +140,10 @@ export const executeMigration = async () => {
             )
           }
           return migratedResource
+        })
+        .catch((error) => {
+          output('Error migrating resource', legacyResource)
+          throw error
         })
     }),
     chunkSize,
