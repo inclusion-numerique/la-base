@@ -21,7 +21,7 @@ import { runPromisesInChunks } from '@app/web/utils/runPromisesInChunks'
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 100
+const chunkSize = 200
 
 export const executeMigration = async () => {
   const start = new Date()
@@ -75,6 +75,11 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
+    async () => {
+      output('Resetting connection to avoid connection pool integration errors')
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
@@ -142,6 +147,11 @@ export const executeMigration = async () => {
         })
     }),
     chunkSize,
+    async () => {
+      output('Resetting connection to avoid connection pool integration errors')
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
   )
 
   output(`- Migrated ${migratedResources.length} resources`)
