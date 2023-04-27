@@ -17,6 +17,7 @@
 .header {
   margin-bottom: 8px;
   flex-direction: column;
+
   @media (min-width: 992px) {
     align-items: center;
     margin-bottom: 16px;
@@ -45,6 +46,7 @@
 
 .title {
   margin-bottom: 8px;
+
   @media (min-width: 992px) {
     margin-bottom: 12px;
   }

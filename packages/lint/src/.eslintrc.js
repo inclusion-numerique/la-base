@@ -43,6 +43,7 @@ module.exports = {
         },
       },
     ],
+    'media-feature-range-notation': 'off',
   },
   parserOptions: {
     sourceType: 'module',
