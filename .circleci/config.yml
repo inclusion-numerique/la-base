@@ -511,8 +511,8 @@ jobs:
       - run:
           name: 'Add connection pool parameters to database URL'
           command: |
-            echo "DATABASE_URL='$DATABASE_URL?connection_limit=1&pool_timeout=60'" >> .env
-            echo "export DATABASE_URL='$DATABASE_URL?connection_limit=1&pool_timeout=60'" >> ${BASH_ENV}
+            echo "DATABASE_URL='$DATABASE_URL?connection_limit=60&pool_timeout=60'" >> .env
+            echo "export DATABASE_URL='$DATABASE_URL?connection_limit=60&pool_timeout=60'" >> ${BASH_ENV}
       - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID

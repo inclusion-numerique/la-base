@@ -22,7 +22,7 @@ const output = console.log
 
 // Connection pool size is 37 in CI env
 // const chunkSize = 20
-const chunkSize = 50
+const chunkSize = 100
 
 export const executeMigration = async () => {
   const start = new Date()
@@ -73,6 +73,11 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
+    async () => {
+      output('Resetting connection to avoid connection pool integration errors')
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
