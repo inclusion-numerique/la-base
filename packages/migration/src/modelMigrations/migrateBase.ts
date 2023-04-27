@@ -5,17 +5,35 @@ import type { Prisma } from '@prisma/client'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import { prismaClient } from '@app/web/prismaClient'
 import { SlugToLegacyIdMap } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
+import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
 
 export const getLegacyBases = () => migrationPrismaClient.main_base.findMany()
 
 export type LegacyBase = FindManyItemType<typeof getLegacyBases>
 
-export const getExistingBaseSlugs = (): Promise<SlugToLegacyIdMap> =>
-  prismaClient.base
-    .findMany({ select: { slug: true, legacyId: true } })
-    .then(
-      (bases) => new Map(bases.map(({ slug, legacyId }) => [slug, legacyId])),
-    )
+export const getExistingBases = async (): Promise<{
+  slugMap: SlugToLegacyIdMap
+  idMap: LegacyIdMap
+}> => {
+  const bases = await prismaClient.base.findMany({
+    select: { slug: true, legacyId: true, id: true },
+  })
+
+  const slugMap = new Map<string, number | null>(
+    bases.map(({ slug, legacyId }) => [slug, legacyId]),
+  )
+
+  const idMap = new Map<number, string>(
+    bases
+      .filter(
+        (base): base is (typeof bases)[0] & { legacyId: number } =>
+          !!base.legacyId,
+      )
+      .map(({ id, legacyId }) => [legacyId, id]),
+  )
+
+  return { slugMap, idMap }
+}
 
 export type MigrateBaseInput = {
   legacyBase: LegacyBase

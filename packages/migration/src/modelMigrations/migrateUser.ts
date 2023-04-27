@@ -2,10 +2,34 @@ import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { v4 } from 'uuid'
 import type { Prisma } from '@prisma/client'
+import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
+import { prismaClient } from '@app/web/prismaClient'
 
 export const getLegacyUsers = () => migrationPrismaClient.main_user.findMany()
 
 export type LegacyUser = FindManyItemType<typeof getLegacyUsers>
+
+export const getExistingUsers = async (): Promise<{
+  idMap: LegacyIdMap
+}> => {
+  const users = await prismaClient.user.findMany({
+    select: { legacyId: true, id: true },
+    where: {
+      legacyId: { not: null },
+    },
+  })
+
+  const idMap = new Map<number, string>(
+    users
+      .filter(
+        (user): user is (typeof users)[0] & { legacyId: number } =>
+          !!user.legacyId,
+      )
+      .map(({ id, legacyId }) => [legacyId, id]),
+  )
+
+  return { idMap }
+}
 
 export type MigrateUserInput = {
   legacyUser: LegacyUser

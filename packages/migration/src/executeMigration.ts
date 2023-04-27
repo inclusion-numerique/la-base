@@ -1,10 +1,11 @@
 import {
+  getExistingUsers,
   getLegacyUsers,
   migrateUser,
 } from '@app/migration/modelMigrations/migrateUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  getExistingBaseSlugs,
+  getExistingBases,
   getLegacyBases,
   migrateBase,
 } from '@app/migration/modelMigrations/migrateBase'
@@ -20,8 +21,6 @@ import { runPromisesInChunks } from '@app/web/utils/runPromisesInChunks'
 // eslint-disable-next-line no-console
 const output = console.log
 
-// Connection pool size is 37 in CI env
-// const chunkSize = 20
 const chunkSize = 100
 
 export const executeMigration = async () => {
@@ -33,12 +32,15 @@ export const executeMigration = async () => {
   output('Fetching legacy data and context data in new database')
   const legacyUsers = await getLegacyUsers()
   output(`- Found ${legacyUsers.length} users to migrate`)
+  const existingUsers = await getExistingUsers()
+  output(`- Found ${existingUsers.idMap.size} already migrated users`)
   const legacyBases = await getLegacyBases()
   output(`- Found ${legacyBases.length} bases to migrate`)
-  const existingBaseSlugs = await getExistingBaseSlugs()
+  const existingBases = await getExistingBases()
   output(
-    `- Found ${existingBaseSlugs.size} existing base slugs for uniqueness checks`,
+    `- Found ${existingBases.slugMap.size} existing base slugs for uniqueness checks`,
   )
+  output(`- Found ${existingBases.idMap.size} already migrated bases`)
   const legacyResources = await getLegacyResources()
   output(`- Found ${legacyResources.length} resources to migrate`)
   const existingResourceSlugs = await getExistingResourceSlugs()
@@ -61,7 +63,7 @@ export const executeMigration = async () => {
         })
         .then((migratedUser) => {
           migratedUserCount += 1
-          if (migratedUserCount % 100 === 0) {
+          if (migratedUserCount % 1000 === 0) {
             output(
               `-- ${migratedUserCount} ${(
                 (migratedUserCount * 100) /
@@ -73,11 +75,6 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
-    async () => {
-      output('Resetting connection to avoid connection pool integration errors')
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
@@ -93,7 +90,7 @@ export const executeMigration = async () => {
     legacyBases.map((legacyBase) => {
       const slug = computeSlugAndUpdateExistingSlugs(
         legacyBase,
-        existingBaseSlugs,
+        existingBases.slugMap,
       )
       return migrateBase({
         legacyBase,
@@ -111,7 +108,10 @@ export const executeMigration = async () => {
   )
 
   output(`- Migrating resources...`)
-  const migratedResources = await Promise.all(
+
+  let migratedResourceCount = 0
+
+  const migratedResources = await runPromisesInChunks(
     legacyResources.map((legacyResource) => {
       const slug = computeSlugAndUpdateExistingSlugs(
         legacyResource,
@@ -124,8 +124,26 @@ export const executeMigration = async () => {
         userIdFromLegacyId,
         baseIdFromLegacyId,
       })
+        .catch((error) => {
+          output('Error migrating resource', legacyResource)
+          throw error
+        })
+        .then((migratedResource) => {
+          migratedResourceCount += 1
+          if (migratedResourceCount % 200 === 0) {
+            output(
+              `-- ${migratedResourceCount} ${(
+                (migratedResourceCount * 100) /
+                legacyResources.length
+              ).toFixed(0)}%`,
+            )
+          }
+          return migratedResource
+        })
     }),
+    chunkSize,
   )
+
   output(`- Migrated ${migratedResources.length} resources`)
 
   const resourceIdFromLegacyId = createLegacyToNewIdHelper(
