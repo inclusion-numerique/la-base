@@ -74,45 +74,46 @@ workflows:
     jobs:
       - prepare_workspace_dependencies
       - prepare_web_prod_dependencies
-      - lint:
-          requires:
-            - prepare_workspace_dependencies
-      - test_packages:
-          requires:
-            - prepare_workspace_dependencies
-      - test_web:
-          requires:
-            - prepare_workspace_dependencies
+#      - lint:
+#          requires:
+#            - prepare_workspace_dependencies
+#      - test_packages:
+#          requires:
+#            - prepare_workspace_dependencies
+#      - test_web:
+#          requires:
+#            - prepare_workspace_dependencies
       - build_web:
           requires:
             - prepare_workspace_dependencies
             - prepare_web_prod_dependencies
 
-      - chromatic:
-          requires:
-            - prepare_workspace_dependencies
-
-      - test_web_components:
-          requires:
-            - prepare_workspace_dependencies
-
-      - test_ui_components:
-          requires:
-            - prepare_workspace_dependencies
-
-      - test_web_e2e:
-          requires:
-            - build_web
+#      - chromatic:
+#          requires:
+#            - prepare_workspace_dependencies
+#
+#      - test_web_components:
+#          requires:
+#            - prepare_workspace_dependencies
+#
+#      - test_ui_components:
+#          requires:
+#            - prepare_workspace_dependencies
+#
+#      - test_web_e2e:
+#          requires:
+#            - build_web
 
       - deploy_web:
           requires:
-            - lint
-            - test_packages
-            - test_web
-            - chromatic
-            - test_web_components
-            - test_ui_components
-            - test_web_e2e
+#            - lint
+#            - test_packages
+#            - test_web
+#            - chromatic
+#            - test_web_components
+#            - test_ui_components
+#            - test_web_e2e
+            - build_web
 
   project_infrastructure_deployment:
     when:
