@@ -19,11 +19,39 @@ export default {
 type Story = StoryObj<typeof Card>
 
 export const Default: Story = {
+  name: 'Resource',
   args: {
     resource,
   },
 }
+
+export const WithImage: Story = {
+  name: 'Resource avec image',
+  args: {
+    resource,
+    withImage: true,
+  },
+}
+
+export const WithImageConnected: Story = {
+  name: 'Resource utilisateur connecté avec image',
+  args: {
+    resource,
+    connected: true,
+    withImage: true,
+  },
+}
+
+export const WithoutImageConnected: Story = {
+  name: 'Resource utilisateur connecté',
+  args: {
+    resource,
+    connected: true,
+  },
+}
+
 export const DefaultMobile: Story = {
+  name: 'Mobile - Resource',
   parameters: {
     viewport: {
       defaultViewport: 'mobile1',
@@ -34,24 +62,15 @@ export const DefaultMobile: Story = {
   },
 }
 
-export const WithImage: Story = {
-  args: {
-    resource,
-    withImage: true,
+export const WithImageMobile: Story = {
+  name: 'Mobile - Resource avec image',
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
   },
-}
-
-export const WithoutImageConnected: Story = {
   args: {
     resource,
-    connected: true,
-  },
-}
-
-export const WithImageConnected: Story = {
-  args: {
-    resource,
-    connected: true,
     withImage: true,
   },
 }

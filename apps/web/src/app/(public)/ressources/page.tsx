@@ -18,7 +18,11 @@ const Ressources = async () => {
         segments={[]}
       />
       {resources.map((resource) => (
-        <ResourceCard key={resource.title} resource={resource} />
+        <>
+          <ResourceCard key={resource.title} resource={resource} />
+          <br />
+          <br />
+        </>
       ))}
     </>
   )

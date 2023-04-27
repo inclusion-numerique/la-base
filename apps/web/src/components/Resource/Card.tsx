@@ -39,18 +39,27 @@ const ResourceCard = ({
         <img className={styles.image} src="https://fakeimg.pl/140x80/" alt="" />
       )}
     </div>
+    <Badge className="fr-hidden-lg" noIcon severity="success">
+      Très recommandée
+    </Badge>
     <div className={styles.footer}>
       <div className={classNames(styles.footerLeft, 'fr-text--sm', 'fr-mb-0')}>
         <span className="fr-icon-eye-line fr-icon--sm" />
         <div>
-          <b>45</b> Vues
+          <b>45</b>
+          <span className="fr-hidden fr-unhidden-lg"> Vues</span>
         </div>
         <div>.</div>
         <span className="fr-icon-bookmark-line fr-icon--sm" />
         <div>
-          <b>45</b> Enregistrements
+          <b>45</b>
+          <span className="fr-hidden fr-unhidden-lg"> Enregistrements</span>
         </div>
-        <Badge noIcon severity="success">
+        <Badge
+          className="fr-hidden fr-unhidden-lg fr-mb-1w"
+          noIcon
+          severity="success"
+        >
           Très recommandée
         </Badge>
       </div>
