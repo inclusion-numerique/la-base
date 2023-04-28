@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/instance_ip
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstanceIpConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#id InstanceIp#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#id InstanceIp#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,36 +17,36 @@ export interface InstanceIpConfig extends cdktf.TerraformMetaArguments {
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#project_id InstanceIp#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#project_id InstanceIp#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with the ip
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#tags InstanceIp#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#tags InstanceIp#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#zone InstanceIp#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#zone InstanceIp#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#timeouts InstanceIp#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#timeouts InstanceIp#timeouts}
   */
   readonly timeouts?: InstanceIpTimeouts;
 }
 export interface InstanceIpTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip#default InstanceIp#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip#default InstanceIp#default}
   */
   readonly default?: string;
 }
 
-export function instanceIpTimeoutsToTerraform(struct?: InstanceIpTimeoutsOutputReference | InstanceIpTimeouts | cdktf.IResolvable): any {
+export function instanceIpTimeoutsToTerraform(struct?: InstanceIpTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -65,7 +65,7 @@ export class InstanceIpTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): InstanceIpTimeouts | cdktf.IResolvable | undefined {
@@ -116,7 +116,7 @@ export class InstanceIpTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip scaleway_instance_ip}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip scaleway_instance_ip}
 */
 export class InstanceIp extends cdktf.TerraformResource {
 
@@ -130,7 +130,7 @@ export class InstanceIp extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip scaleway_instance_ip} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip scaleway_instance_ip} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -141,7 +141,7 @@ export class InstanceIp extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_ip',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/function_token
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,38 +8,38 @@ import * as cdktf from 'cdktf';
 
 export interface FunctionTokenConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#description FunctionToken#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#description FunctionToken#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#expires_at FunctionToken#expires_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#expires_at FunctionToken#expires_at}
   */
   readonly expiresAt?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#function_id FunctionToken#function_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#function_id FunctionToken#function_id}
   */
   readonly functionId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#id FunctionToken#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#id FunctionToken#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#namespace_id FunctionToken#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#namespace_id FunctionToken#namespace_id}
   */
   readonly namespaceId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function_token#region FunctionToken#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token#region FunctionToken#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/function_token scaleway_function_token}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token scaleway_function_token}
 */
 export class FunctionToken extends cdktf.TerraformResource {
 
@@ -53,7 +53,7 @@ export class FunctionToken extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/function_token scaleway_function_token} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token scaleway_function_token} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -64,7 +64,7 @@ export class FunctionToken extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_function_token',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

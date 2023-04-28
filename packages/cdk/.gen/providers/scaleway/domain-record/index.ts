@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/domain_record
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DomainRecordConfig extends cdktf.TerraformMetaArguments {
   /**
   * The data of the record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
   /**
   * The zone you want to add the record in
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#dns_zone DomainRecord#dns_zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#dns_zone DomainRecord#dns_zone}
   */
   readonly dnsZone: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#id DomainRecord#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#id DomainRecord#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,67 +29,67 @@ export interface DomainRecordConfig extends cdktf.TerraformMetaArguments {
   /**
   * When destroy a resource record, if a zone have only NS, delete the zone
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#keep_empty_zone DomainRecord#keep_empty_zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#keep_empty_zone DomainRecord#keep_empty_zone}
   */
   readonly keepEmptyZone?: boolean | cdktf.IResolvable;
   /**
   * The name of the record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#name DomainRecord#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#name DomainRecord#name}
   */
   readonly name?: string;
   /**
   * The priority of the record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#priority DomainRecord#priority}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#priority DomainRecord#priority}
   */
   readonly priority?: number;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#project_id DomainRecord#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#project_id DomainRecord#project_id}
   */
   readonly projectId?: string;
   /**
   * The ttl of the record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#ttl DomainRecord#ttl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#ttl DomainRecord#ttl}
   */
   readonly ttl?: number;
   /**
   * The type of the record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#type DomainRecord#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#type DomainRecord#type}
   */
   readonly type: string;
   /**
   * geo_ip block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#geo_ip DomainRecord#geo_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#geo_ip DomainRecord#geo_ip}
   */
   readonly geoIp?: DomainRecordGeoIp;
   /**
   * http_service block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#http_service DomainRecord#http_service}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#http_service DomainRecord#http_service}
   */
   readonly httpService?: DomainRecordHttpService;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#timeouts DomainRecord#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#timeouts DomainRecord#timeouts}
   */
   readonly timeouts?: DomainRecordTimeouts;
   /**
   * view block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#view DomainRecord#view}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#view DomainRecord#view}
   */
   readonly view?: DomainRecordView[] | cdktf.IResolvable;
   /**
   * weighted block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#weighted DomainRecord#weighted}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#weighted DomainRecord#weighted}
   */
   readonly weighted?: DomainRecordWeighted[] | cdktf.IResolvable;
 }
@@ -97,19 +97,19 @@ export interface DomainRecordGeoIpMatches {
   /**
   * List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code: https://api.scaleway.com/domain-private/v2beta1/continents
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#continents DomainRecord#continents}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#continents DomainRecord#continents}
   */
   readonly continents?: string[];
   /**
   * List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#countries DomainRecord#countries}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#countries DomainRecord#countries}
   */
   readonly countries?: string[];
   /**
   * The data of the match result
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
 }
@@ -251,7 +251,7 @@ export interface DomainRecordGeoIp {
   /**
   * matches block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#matches DomainRecord#matches}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#matches DomainRecord#matches}
   */
   readonly matches: DomainRecordGeoIpMatches[] | cdktf.IResolvable;
 }
@@ -315,31 +315,31 @@ export interface DomainRecordHttpService {
   /**
   * IPs to check
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#ips DomainRecord#ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#ips DomainRecord#ips}
   */
   readonly ips: string[];
   /**
   * Text to search
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#must_contain DomainRecord#must_contain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#must_contain DomainRecord#must_contain}
   */
   readonly mustContain: string;
   /**
   * Strategy to return an IP from the IPs list
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#strategy DomainRecord#strategy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#strategy DomainRecord#strategy}
   */
   readonly strategy: string;
   /**
   * URL to match the must_contain text to validate an IP
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#url DomainRecord#url}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#url DomainRecord#url}
   */
   readonly url: string;
   /**
   * User-agent used when checking the URL
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#user_agent DomainRecord#user_agent}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#user_agent DomainRecord#user_agent}
   */
   readonly userAgent?: string;
 }
@@ -484,28 +484,28 @@ export class DomainRecordHttpServiceOutputReference extends cdktf.ComplexObject 
 }
 export interface DomainRecordTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#create DomainRecord#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#create DomainRecord#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#default DomainRecord#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#default DomainRecord#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#delete DomainRecord#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#delete DomainRecord#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#read DomainRecord#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#read DomainRecord#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#update DomainRecord#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#update DomainRecord#update}
   */
   readonly update?: string;
 }
 
-export function domainRecordTimeoutsToTerraform(struct?: DomainRecordTimeoutsOutputReference | DomainRecordTimeouts | cdktf.IResolvable): any {
+export function domainRecordTimeoutsToTerraform(struct?: DomainRecordTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -528,7 +528,7 @@ export class DomainRecordTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): DomainRecordTimeouts | cdktf.IResolvable | undefined {
@@ -669,13 +669,13 @@ export interface DomainRecordView {
   /**
   * The data of the view record
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
   /**
   * The subnet of the view
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#subnet DomainRecord#subnet}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#subnet DomainRecord#subnet}
   */
   readonly subnet: string;
 }
@@ -791,13 +791,13 @@ export interface DomainRecordWeighted {
   /**
   * The weighted IP
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#ip DomainRecord#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#ip DomainRecord#ip}
   */
   readonly ip: string;
   /**
   * The weight of the IP
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record#weight DomainRecord#weight}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record#weight DomainRecord#weight}
   */
   readonly weight: number;
 }
@@ -911,7 +911,7 @@ export class DomainRecordWeightedList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record scaleway_domain_record}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record scaleway_domain_record}
 */
 export class DomainRecord extends cdktf.TerraformResource {
 
@@ -925,7 +925,7 @@ export class DomainRecord extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/domain_record scaleway_domain_record} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/domain_record scaleway_domain_record} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -936,7 +936,7 @@ export class DomainRecord extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_domain_record',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

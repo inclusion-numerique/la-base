@@ -1,3 +1,3 @@
 # `scaleway_container`
 
-Refer to the Terraform Registory for docs: [`scaleway_container`](https://www.terraform.io/docs/providers/scaleway/r/container).
+Refer to the Terraform Registory for docs: [`scaleway_container`](https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container).

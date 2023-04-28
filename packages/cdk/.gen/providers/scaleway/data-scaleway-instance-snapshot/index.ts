@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInstanceSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot#id DataScalewayInstanceSnapshot#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot#id DataScalewayInstanceSnapshot#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayInstanceSnapshotConfig extends cdktf.TerraformMetaA
   /**
   * The name of the snapshot
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot#name DataScalewayInstanceSnapshot#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot#name DataScalewayInstanceSnapshot#name}
   */
   readonly name?: string;
   /**
   * The ID of the snapshot
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot#snapshot_id DataScalewayInstanceSnapshot#snapshot_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot#snapshot_id DataScalewayInstanceSnapshot#snapshot_id}
   */
   readonly snapshotId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot#zone DataScalewayInstanceSnapshot#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot#zone DataScalewayInstanceSnapshot#zone}
   */
   readonly zone?: string;
 }
@@ -104,7 +104,7 @@ export class DataScalewayInstanceSnapshotImportList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot scaleway_instance_snapshot}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot scaleway_instance_snapshot}
 */
 export class DataScalewayInstanceSnapshot extends cdktf.TerraformDataSource {
 
@@ -118,7 +118,7 @@ export class DataScalewayInstanceSnapshot extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/instance_snapshot scaleway_instance_snapshot} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/instance_snapshot scaleway_instance_snapshot} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -129,7 +129,7 @@ export class DataScalewayInstanceSnapshot extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_snapshot',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

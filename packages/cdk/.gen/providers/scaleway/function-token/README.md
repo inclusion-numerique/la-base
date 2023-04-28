@@ -1,3 +1,3 @@
 # `scaleway_function_token`
 
-Refer to the Terraform Registory for docs: [`scaleway_function_token`](https://www.terraform.io/docs/providers/scaleway/r/function_token).
+Refer to the Terraform Registory for docs: [`scaleway_function_token`](https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/function_token).

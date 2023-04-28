@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayRdbPrivilegeConfig extends cdktf.TerraformMetaArgum
   /**
   * Database name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege#database_name DataScalewayRdbPrivilege#database_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege#database_name DataScalewayRdbPrivilege#database_name}
   */
   readonly databaseName: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege#id DataScalewayRdbPrivilege#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege#id DataScalewayRdbPrivilege#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface DataScalewayRdbPrivilegeConfig extends cdktf.TerraformMetaArgum
   /**
   * Instance on which the database is created
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege#instance_id DataScalewayRdbPrivilege#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege#instance_id DataScalewayRdbPrivilege#instance_id}
   */
   readonly instanceId: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege#region DataScalewayRdbPrivilege#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege#region DataScalewayRdbPrivilege#region}
   */
   readonly region?: string;
   /**
   * User name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege#user_name DataScalewayRdbPrivilege#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege#user_name DataScalewayRdbPrivilege#user_name}
   */
   readonly userName: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege scaleway_rdb_privilege}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege scaleway_rdb_privilege}
 */
 export class DataScalewayRdbPrivilege extends cdktf.TerraformDataSource {
 
@@ -55,7 +55,7 @@ export class DataScalewayRdbPrivilege extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/rdb_privilege scaleway_rdb_privilege} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/rdb_privilege scaleway_rdb_privilege} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -66,7 +66,7 @@ export class DataScalewayRdbPrivilege extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_rdb_privilege',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

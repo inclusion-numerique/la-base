@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/tem_domain
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface TemDomainConfig extends cdktf.TerraformMetaArguments {
   /**
   * Accept the Scaleway Terms of Service
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#accept_tos TemDomain#accept_tos}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#accept_tos TemDomain#accept_tos}
   */
   readonly acceptTos: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#id TemDomain#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#id TemDomain#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,40 +23,40 @@ export interface TemDomainConfig extends cdktf.TerraformMetaArguments {
   /**
   * The domain name used when sending emails
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#name TemDomain#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#name TemDomain#name}
   */
   readonly name: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#project_id TemDomain#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#project_id TemDomain#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#region TemDomain#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#region TemDomain#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#timeouts TemDomain#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#timeouts TemDomain#timeouts}
   */
   readonly timeouts?: TemDomainTimeouts;
 }
 export interface TemDomainTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#default TemDomain#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#default TemDomain#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain#delete TemDomain#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain#delete TemDomain#delete}
   */
   readonly delete?: string;
 }
 
-export function temDomainTimeoutsToTerraform(struct?: TemDomainTimeoutsOutputReference | TemDomainTimeouts | cdktf.IResolvable): any {
+export function temDomainTimeoutsToTerraform(struct?: TemDomainTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -76,7 +76,7 @@ export class TemDomainTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): TemDomainTimeouts | cdktf.IResolvable | undefined {
@@ -149,7 +149,7 @@ export class TemDomainTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain scaleway_tem_domain}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain scaleway_tem_domain}
 */
 export class TemDomain extends cdktf.TerraformResource {
 
@@ -163,7 +163,7 @@ export class TemDomain extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/tem_domain scaleway_tem_domain} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/tem_domain scaleway_tem_domain} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -174,7 +174,7 @@ export class TemDomain extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_tem_domain',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,
@@ -299,6 +299,36 @@ export class TemDomain extends cdktf.TerraformResource {
   // revoked_at - computed: true, optional: false, required: false
   public get revokedAt() {
     return this.getStringAttribute('revoked_at');
+  }
+
+  // smtp_host - computed: true, optional: false, required: false
+  public get smtpHost() {
+    return this.getStringAttribute('smtp_host');
+  }
+
+  // smtp_port - computed: true, optional: false, required: false
+  public get smtpPort() {
+    return this.getNumberAttribute('smtp_port');
+  }
+
+  // smtp_port_alternative - computed: true, optional: false, required: false
+  public get smtpPortAlternative() {
+    return this.getNumberAttribute('smtp_port_alternative');
+  }
+
+  // smtp_port_unsecure - computed: true, optional: false, required: false
+  public get smtpPortUnsecure() {
+    return this.getNumberAttribute('smtp_port_unsecure');
+  }
+
+  // smtps_port - computed: true, optional: false, required: false
+  public get smtpsPort() {
+    return this.getNumberAttribute('smtps_port');
+  }
+
+  // smtps_port_alternative - computed: true, optional: false, required: false
+  public get smtpsPortAlternative() {
+    return this.getNumberAttribute('smtps_port_alternative');
   }
 
   // spf_config - computed: true, optional: false, required: false

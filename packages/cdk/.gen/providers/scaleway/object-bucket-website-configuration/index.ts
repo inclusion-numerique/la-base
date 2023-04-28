@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface ObjectBucketWebsiteConfigurationConfig extends cdktf.TerraformM
   /**
   * The bucket name.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#bucket ObjectBucketWebsiteConfiguration#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#bucket ObjectBucketWebsiteConfiguration#bucket}
   */
   readonly bucket: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#id ObjectBucketWebsiteConfiguration#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#id ObjectBucketWebsiteConfiguration#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,31 @@ export interface ObjectBucketWebsiteConfigurationConfig extends cdktf.TerraformM
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#project_id ObjectBucketWebsiteConfiguration#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#project_id ObjectBucketWebsiteConfiguration#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#region ObjectBucketWebsiteConfiguration#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#region ObjectBucketWebsiteConfiguration#region}
   */
   readonly region?: string;
   /**
   * error_document block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#error_document ObjectBucketWebsiteConfiguration#error_document}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#error_document ObjectBucketWebsiteConfiguration#error_document}
   */
   readonly errorDocument?: ObjectBucketWebsiteConfigurationErrorDocument;
   /**
   * index_document block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#index_document ObjectBucketWebsiteConfiguration#index_document}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#index_document ObjectBucketWebsiteConfiguration#index_document}
   */
   readonly indexDocument: ObjectBucketWebsiteConfigurationIndexDocument;
 }
 export interface ObjectBucketWebsiteConfigurationErrorDocument {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#key ObjectBucketWebsiteConfiguration#key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#key ObjectBucketWebsiteConfiguration#key}
   */
   readonly key: string;
 }
@@ -109,7 +109,7 @@ export class ObjectBucketWebsiteConfigurationErrorDocumentOutputReference extend
 }
 export interface ObjectBucketWebsiteConfigurationIndexDocument {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration#suffix ObjectBucketWebsiteConfiguration#suffix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration#suffix ObjectBucketWebsiteConfiguration#suffix}
   */
   readonly suffix: string;
 }
@@ -171,7 +171,7 @@ export class ObjectBucketWebsiteConfigurationIndexDocumentOutputReference extend
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration scaleway_object_bucket_website_configuration}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration scaleway_object_bucket_website_configuration}
 */
 export class ObjectBucketWebsiteConfiguration extends cdktf.TerraformResource {
 
@@ -185,7 +185,7 @@ export class ObjectBucketWebsiteConfiguration extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_website_configuration scaleway_object_bucket_website_configuration} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/object_bucket_website_configuration scaleway_object_bucket_website_configuration} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -196,7 +196,7 @@ export class ObjectBucketWebsiteConfiguration extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_object_bucket_website_configuration',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

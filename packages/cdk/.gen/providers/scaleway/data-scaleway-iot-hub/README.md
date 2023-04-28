@@ -1,3 +1,3 @@
 # `data_scaleway_iot_hub`
 
-Refer to the Terraform Registory for docs: [`data_scaleway_iot_hub`](https://www.terraform.io/docs/providers/scaleway/d/iot_hub).
+Refer to the Terraform Registory for docs: [`data_scaleway_iot_hub`](https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/iot_hub).

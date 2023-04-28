@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/function
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayFunctionConfig extends cdktf.TerraformMetaArguments
   /**
   * The ID of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/function#function_id DataScalewayFunction#function_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function#function_id DataScalewayFunction#function_id}
   */
   readonly functionId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/function#id DataScalewayFunction#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function#id DataScalewayFunction#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayFunctionConfig extends cdktf.TerraformMetaArguments
   /**
   * The name of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/function#name DataScalewayFunction#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function#name DataScalewayFunction#name}
   */
   readonly name?: string;
   /**
   * The namespace ID associated with this function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/function#namespace_id DataScalewayFunction#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function#namespace_id DataScalewayFunction#namespace_id}
   */
   readonly namespaceId: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/function scaleway_function}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function scaleway_function}
 */
 export class DataScalewayFunction extends cdktf.TerraformDataSource {
 
@@ -49,7 +49,7 @@ export class DataScalewayFunction extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/function scaleway_function} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/function scaleway_function} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -60,7 +60,7 @@ export class DataScalewayFunction extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_function',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

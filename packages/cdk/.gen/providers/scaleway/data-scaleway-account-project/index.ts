@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/account_project
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayAccountProjectConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/account_project#id DataScalewayAccountProject#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project#id DataScalewayAccountProject#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayAccountProjectConfig extends cdktf.TerraformMetaArg
   /**
   * The name of the project
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/account_project#name DataScalewayAccountProject#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project#name DataScalewayAccountProject#name}
   */
   readonly name?: string;
   /**
   * The organization_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/account_project#organization_id DataScalewayAccountProject#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project#organization_id DataScalewayAccountProject#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The ID of the SSH key
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/account_project#project_id DataScalewayAccountProject#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project#project_id DataScalewayAccountProject#project_id}
   */
   readonly projectId?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/account_project scaleway_account_project}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project scaleway_account_project}
 */
 export class DataScalewayAccountProject extends cdktf.TerraformDataSource {
 
@@ -49,7 +49,7 @@ export class DataScalewayAccountProject extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/account_project scaleway_account_project} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/account_project scaleway_account_project} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -60,7 +60,7 @@ export class DataScalewayAccountProject extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_account_project',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

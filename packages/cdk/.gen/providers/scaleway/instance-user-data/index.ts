@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/instance_user_data
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstanceUserDataConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#id InstanceUserData#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#id InstanceUserData#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,58 +17,58 @@ export interface InstanceUserDataConfig extends cdktf.TerraformMetaArguments {
   /**
   * The key of the user data to set.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#key InstanceUserData#key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#key InstanceUserData#key}
   */
   readonly key: string;
   /**
   * The ID of the server
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#server_id InstanceUserData#server_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#server_id InstanceUserData#server_id}
   */
   readonly serverId: string;
   /**
   * The value of the user data to set.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#value InstanceUserData#value}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#value InstanceUserData#value}
   */
   readonly value: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#zone InstanceUserData#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#zone InstanceUserData#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#timeouts InstanceUserData#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#timeouts InstanceUserData#timeouts}
   */
   readonly timeouts?: InstanceUserDataTimeouts;
 }
 export interface InstanceUserDataTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#create InstanceUserData#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#create InstanceUserData#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#default InstanceUserData#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#default InstanceUserData#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#delete InstanceUserData#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#delete InstanceUserData#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#read InstanceUserData#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#read InstanceUserData#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data#update InstanceUserData#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data#update InstanceUserData#update}
   */
   readonly update?: string;
 }
 
-export function instanceUserDataTimeoutsToTerraform(struct?: InstanceUserDataTimeoutsOutputReference | InstanceUserDataTimeouts | cdktf.IResolvable): any {
+export function instanceUserDataTimeoutsToTerraform(struct?: InstanceUserDataTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -91,7 +91,7 @@ export class InstanceUserDataTimeoutsOutputReference extends cdktf.ComplexObject
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): InstanceUserDataTimeouts | cdktf.IResolvable | undefined {
@@ -230,7 +230,7 @@ export class InstanceUserDataTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data scaleway_instance_user_data}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data scaleway_instance_user_data}
 */
 export class InstanceUserData extends cdktf.TerraformResource {
 
@@ -244,7 +244,7 @@ export class InstanceUserData extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/instance_user_data scaleway_instance_user_data} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_user_data scaleway_instance_user_data} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -255,7 +255,7 @@ export class InstanceUserData extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_user_data',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

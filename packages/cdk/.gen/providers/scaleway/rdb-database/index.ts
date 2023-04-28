@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/rdb_database
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface RdbDatabaseConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#id RdbDatabase#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#id RdbDatabase#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,44 +17,44 @@ export interface RdbDatabaseConfig extends cdktf.TerraformMetaArguments {
   /**
   * Instance on which the database is created
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#instance_id RdbDatabase#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#instance_id RdbDatabase#instance_id}
   */
   readonly instanceId: string;
   /**
   * Database name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#name RdbDatabase#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#name RdbDatabase#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#region RdbDatabase#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#region RdbDatabase#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#timeouts RdbDatabase#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#timeouts RdbDatabase#timeouts}
   */
   readonly timeouts?: RdbDatabaseTimeouts;
 }
 export interface RdbDatabaseTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#create RdbDatabase#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#create RdbDatabase#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#default RdbDatabase#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#default RdbDatabase#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database#delete RdbDatabase#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database#delete RdbDatabase#delete}
   */
   readonly delete?: string;
 }
 
-export function rdbDatabaseTimeoutsToTerraform(struct?: RdbDatabaseTimeoutsOutputReference | RdbDatabaseTimeouts | cdktf.IResolvable): any {
+export function rdbDatabaseTimeoutsToTerraform(struct?: RdbDatabaseTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -75,7 +75,7 @@ export class RdbDatabaseTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): RdbDatabaseTimeouts | cdktf.IResolvable | undefined {
@@ -170,7 +170,7 @@ export class RdbDatabaseTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database scaleway_rdb_database}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database scaleway_rdb_database}
 */
 export class RdbDatabase extends cdktf.TerraformResource {
 
@@ -184,7 +184,7 @@ export class RdbDatabase extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_database scaleway_rdb_database} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/rdb_database scaleway_rdb_database} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -195,7 +195,7 @@ export class RdbDatabase extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_rdb_database',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

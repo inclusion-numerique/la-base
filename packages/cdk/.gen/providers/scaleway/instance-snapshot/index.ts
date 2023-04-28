@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstanceSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#id InstanceSnapshot#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#id InstanceSnapshot#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,49 +17,49 @@ export interface InstanceSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the snapshot
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#name InstanceSnapshot#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#name InstanceSnapshot#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#project_id InstanceSnapshot#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#project_id InstanceSnapshot#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with the snapshot
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#tags InstanceSnapshot#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#tags InstanceSnapshot#tags}
   */
   readonly tags?: string[];
   /**
   * The snapshot's volume type
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#type InstanceSnapshot#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#type InstanceSnapshot#type}
   */
   readonly type?: string;
   /**
   * ID of the volume to take a snapshot from
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#volume_id InstanceSnapshot#volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#volume_id InstanceSnapshot#volume_id}
   */
   readonly volumeId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#zone InstanceSnapshot#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#zone InstanceSnapshot#zone}
   */
   readonly zone?: string;
   /**
   * import block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#import InstanceSnapshot#import}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#import InstanceSnapshot#import}
   */
   readonly import?: InstanceSnapshotImport;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#timeouts InstanceSnapshot#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#timeouts InstanceSnapshot#timeouts}
   */
   readonly timeouts?: InstanceSnapshotTimeouts;
 }
@@ -67,13 +67,13 @@ export interface InstanceSnapshotImport {
   /**
   * Bucket containing qcow
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#bucket InstanceSnapshot#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#bucket InstanceSnapshot#bucket}
   */
   readonly bucket: string;
   /**
   * Key of the qcow file in the specified bucket
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#key InstanceSnapshot#key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#key InstanceSnapshot#key}
   */
   readonly key: string;
 }
@@ -155,20 +155,20 @@ export class InstanceSnapshotImportOutputReference extends cdktf.ComplexObject {
 }
 export interface InstanceSnapshotTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#create InstanceSnapshot#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#create InstanceSnapshot#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#default InstanceSnapshot#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#default InstanceSnapshot#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot#delete InstanceSnapshot#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot#delete InstanceSnapshot#delete}
   */
   readonly delete?: string;
 }
 
-export function instanceSnapshotTimeoutsToTerraform(struct?: InstanceSnapshotTimeoutsOutputReference | InstanceSnapshotTimeouts | cdktf.IResolvable): any {
+export function instanceSnapshotTimeoutsToTerraform(struct?: InstanceSnapshotTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -189,7 +189,7 @@ export class InstanceSnapshotTimeoutsOutputReference extends cdktf.ComplexObject
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): InstanceSnapshotTimeouts | cdktf.IResolvable | undefined {
@@ -284,7 +284,7 @@ export class InstanceSnapshotTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot scaleway_instance_snapshot}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot scaleway_instance_snapshot}
 */
 export class InstanceSnapshot extends cdktf.TerraformResource {
 
@@ -298,7 +298,7 @@ export class InstanceSnapshot extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/instance_snapshot scaleway_instance_snapshot} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_snapshot scaleway_instance_snapshot} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -309,7 +309,7 @@ export class InstanceSnapshot extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_snapshot',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

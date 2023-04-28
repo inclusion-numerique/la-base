@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstanceIpReverseDnsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#id InstanceIpReverseDns#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#id InstanceIpReverseDns#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,44 +17,44 @@ export interface InstanceIpReverseDnsConfig extends cdktf.TerraformMetaArguments
   /**
   * The IP ID or IP address
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#ip_id InstanceIpReverseDns#ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#ip_id InstanceIpReverseDns#ip_id}
   */
   readonly ipId: string;
   /**
   * The reverse DNS for this IP
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#reverse InstanceIpReverseDns#reverse}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#reverse InstanceIpReverseDns#reverse}
   */
   readonly reverse: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#zone InstanceIpReverseDns#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#zone InstanceIpReverseDns#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#timeouts InstanceIpReverseDns#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#timeouts InstanceIpReverseDns#timeouts}
   */
   readonly timeouts?: InstanceIpReverseDnsTimeouts;
 }
 export interface InstanceIpReverseDnsTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#create InstanceIpReverseDns#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#create InstanceIpReverseDns#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#default InstanceIpReverseDns#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#default InstanceIpReverseDns#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns#update InstanceIpReverseDns#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns#update InstanceIpReverseDns#update}
   */
   readonly update?: string;
 }
 
-export function instanceIpReverseDnsTimeoutsToTerraform(struct?: InstanceIpReverseDnsTimeoutsOutputReference | InstanceIpReverseDnsTimeouts | cdktf.IResolvable): any {
+export function instanceIpReverseDnsTimeoutsToTerraform(struct?: InstanceIpReverseDnsTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -75,7 +75,7 @@ export class InstanceIpReverseDnsTimeoutsOutputReference extends cdktf.ComplexOb
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): InstanceIpReverseDnsTimeouts | cdktf.IResolvable | undefined {
@@ -170,7 +170,7 @@ export class InstanceIpReverseDnsTimeoutsOutputReference extends cdktf.ComplexOb
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns scaleway_instance_ip_reverse_dns}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns scaleway_instance_ip_reverse_dns}
 */
 export class InstanceIpReverseDns extends cdktf.TerraformResource {
 
@@ -184,7 +184,7 @@ export class InstanceIpReverseDns extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/instance_ip_reverse_dns scaleway_instance_ip_reverse_dns} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/instance_ip_reverse_dns scaleway_instance_ip_reverse_dns} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -195,7 +195,7 @@ export class InstanceIpReverseDns extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_ip_reverse_dns',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

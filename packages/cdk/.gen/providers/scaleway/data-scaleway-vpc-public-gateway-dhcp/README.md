@@ -1,3 +1,3 @@
 # `data_scaleway_vpc_public_gateway_dhcp`
 
-Refer to the Terraform Registory for docs: [`data_scaleway_vpc_public_gateway_dhcp`](https://www.terraform.io/docs/providers/scaleway/d/vpc_public_gateway_dhcp).
+Refer to the Terraform Registory for docs: [`data_scaleway_vpc_public_gateway_dhcp`](https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/vpc_public_gateway_dhcp).

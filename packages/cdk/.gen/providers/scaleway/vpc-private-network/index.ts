@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface VpcPrivateNetworkConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network#id VpcPrivateNetwork#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network#id VpcPrivateNetwork#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface VpcPrivateNetworkConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the private network
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network#name VpcPrivateNetwork#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network#name VpcPrivateNetwork#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network#project_id VpcPrivateNetwork#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network#project_id VpcPrivateNetwork#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with private network
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network#tags VpcPrivateNetwork#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network#tags VpcPrivateNetwork#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network#zone VpcPrivateNetwork#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network#zone VpcPrivateNetwork#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network scaleway_vpc_private_network}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network scaleway_vpc_private_network}
 */
 export class VpcPrivateNetwork extends cdktf.TerraformResource {
 
@@ -55,7 +55,7 @@ export class VpcPrivateNetwork extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_private_network scaleway_vpc_private_network} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/vpc_private_network scaleway_vpc_private_network} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -66,7 +66,7 @@ export class VpcPrivateNetwork extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_private_network',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

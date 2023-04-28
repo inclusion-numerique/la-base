@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/container_namespace
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface ContainerNamespaceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The description of the container namespace
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#description ContainerNamespace#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#description ContainerNamespace#description}
   */
   readonly description?: string;
   /**
   * Destroy registry on deletion
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#destroy_registry ContainerNamespace#destroy_registry}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#destroy_registry ContainerNamespace#destroy_registry}
   */
   readonly destroyRegistry?: boolean | cdktf.IResolvable;
   /**
   * The environment variables of the container namespace
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#environment_variables ContainerNamespace#environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#environment_variables ContainerNamespace#environment_variables}
   */
   readonly environmentVariables?: { [key: string]: string };
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#id ContainerNamespace#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#id ContainerNamespace#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,58 +35,58 @@ export interface ContainerNamespaceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the container namespace
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#name ContainerNamespace#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#name ContainerNamespace#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#project_id ContainerNamespace#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#project_id ContainerNamespace#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#region ContainerNamespace#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#region ContainerNamespace#region}
   */
   readonly region?: string;
   /**
   * The secret environment variables of the container namespace
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#secret_environment_variables ContainerNamespace#secret_environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#secret_environment_variables ContainerNamespace#secret_environment_variables}
   */
   readonly secretEnvironmentVariables?: { [key: string]: string };
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#timeouts ContainerNamespace#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#timeouts ContainerNamespace#timeouts}
   */
   readonly timeouts?: ContainerNamespaceTimeouts;
 }
 export interface ContainerNamespaceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#create ContainerNamespace#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#create ContainerNamespace#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#default ContainerNamespace#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#default ContainerNamespace#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#delete ContainerNamespace#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#delete ContainerNamespace#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#read ContainerNamespace#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#read ContainerNamespace#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace#update ContainerNamespace#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace#update ContainerNamespace#update}
   */
   readonly update?: string;
 }
 
-export function containerNamespaceTimeoutsToTerraform(struct?: ContainerNamespaceTimeoutsOutputReference | ContainerNamespaceTimeouts | cdktf.IResolvable): any {
+export function containerNamespaceTimeoutsToTerraform(struct?: ContainerNamespaceTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -109,7 +109,7 @@ export class ContainerNamespaceTimeoutsOutputReference extends cdktf.ComplexObje
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): ContainerNamespaceTimeouts | cdktf.IResolvable | undefined {
@@ -248,7 +248,7 @@ export class ContainerNamespaceTimeoutsOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace scaleway_container_namespace}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace scaleway_container_namespace}
 */
 export class ContainerNamespace extends cdktf.TerraformResource {
 
@@ -262,7 +262,7 @@ export class ContainerNamespace extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/container_namespace scaleway_container_namespace} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/container_namespace scaleway_container_namespace} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -273,7 +273,7 @@ export class ContainerNamespace extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_container_namespace',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

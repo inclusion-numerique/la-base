@@ -1,3 +1,3 @@
 # `data_scaleway_iot_device`
 
-Refer to the Terraform Registory for docs: [`data_scaleway_iot_device`](https://www.terraform.io/docs/providers/scaleway/d/iot_device).
+Refer to the Terraform Registory for docs: [`data_scaleway_iot_device`](https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/iot_device).

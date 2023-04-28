@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/mnq_credential
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MnqCredentialConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#id MnqCredential#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#id MnqCredential#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface MnqCredentialConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the Credential
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#name MnqCredential#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#name MnqCredential#name}
   */
   readonly name?: string;
   /**
   * The ID of the Namespace associated to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#namespace_id MnqCredential#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#namespace_id MnqCredential#namespace_id}
   */
   readonly namespaceId: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#region MnqCredential#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#region MnqCredential#region}
   */
   readonly region?: string;
   /**
   * nats_credentials block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#nats_credentials MnqCredential#nats_credentials}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#nats_credentials MnqCredential#nats_credentials}
   */
   readonly natsCredentials?: MnqCredentialNatsCredentials;
   /**
   * sqs_sns_credentials block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#sqs_sns_credentials MnqCredential#sqs_sns_credentials}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#sqs_sns_credentials MnqCredential#sqs_sns_credentials}
   */
   readonly sqsSnsCredentials?: MnqCredentialSqsSnsCredentials;
 }
@@ -92,19 +92,19 @@ export interface MnqCredentialSqsSnsCredentialsPermissions {
   /**
   * Allow manage the associated resource
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#can_manage MnqCredential#can_manage}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#can_manage MnqCredential#can_manage}
   */
   readonly canManage?: boolean | cdktf.IResolvable;
   /**
   * Allow publish messages to the service
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#can_publish MnqCredential#can_publish}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#can_publish MnqCredential#can_publish}
   */
   readonly canPublish?: boolean | cdktf.IResolvable;
   /**
   * Allow receive messages from the service
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#can_receive MnqCredential#can_receive}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#can_receive MnqCredential#can_receive}
   */
   readonly canReceive?: boolean | cdktf.IResolvable;
 }
@@ -217,7 +217,7 @@ export interface MnqCredentialSqsSnsCredentials {
   /**
   * permissions block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential#permissions MnqCredential#permissions}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential#permissions MnqCredential#permissions}
   */
   readonly permissions?: MnqCredentialSqsSnsCredentialsPermissions;
 }
@@ -292,7 +292,7 @@ export class MnqCredentialSqsSnsCredentialsOutputReference extends cdktf.Complex
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential scaleway_mnq_credential}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential scaleway_mnq_credential}
 */
 export class MnqCredential extends cdktf.TerraformResource {
 
@@ -306,7 +306,7 @@ export class MnqCredential extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/mnq_credential scaleway_mnq_credential} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/resources/mnq_credential scaleway_mnq_credential} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -317,7 +317,7 @@ export class MnqCredential extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_credential',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

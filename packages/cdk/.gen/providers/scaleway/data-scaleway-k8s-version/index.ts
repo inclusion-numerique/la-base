@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/k8s_version
+// https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayK8SVersionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/k8s_version#id DataScalewayK8SVersion#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version#id DataScalewayK8SVersion#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayK8SVersionConfig extends cdktf.TerraformMetaArgumen
   /**
   * Name of the Kubernetes version
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/k8s_version#name DataScalewayK8SVersion#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version#name DataScalewayK8SVersion#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/k8s_version#region DataScalewayK8SVersion#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version#region DataScalewayK8SVersion#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/k8s_version scaleway_k8s_version}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version scaleway_k8s_version}
 */
 export class DataScalewayK8SVersion extends cdktf.TerraformDataSource {
 
@@ -43,7 +43,7 @@ export class DataScalewayK8SVersion extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/k8s_version scaleway_k8s_version} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.17.0/docs/data-sources/k8s_version scaleway_k8s_version} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -54,7 +54,7 @@ export class DataScalewayK8SVersion extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_k8s_version',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.17.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,
