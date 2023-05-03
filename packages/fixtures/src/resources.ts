@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { prismaClient } from '@app/web/prismaClient'
+import { createSlug } from '@app/web/utils/createSlug'
 
 const BASE_NUMBER = 10
 
@@ -19,9 +20,11 @@ export const resources: (
 
     return Array.from({ length: random * BASE_NUMBER }, () => {
       const text = faker.lorem.text()
+      const slug = createSlug(text)
       return {
         title: text,
-        slug: text.replaceAll(' ', '-').toLowerCase(),
+        slug,
+        titleDuplicationCheckSlug: slug,
         description: faker.lorem.paragraph(),
         createdById: user?.id,
       }
@@ -33,6 +36,8 @@ export const resources: (
       title:
         '10 raisons de venir sur la base, la deuxième va vous laisser sans voix !',
       slug: '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
+      titleDuplicationCheckSlug:
+        '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
       description: 'TODO...',
       createdById: 'eecac657-f415-47e1-8087-c4508ea16191',
     },
@@ -40,6 +45,8 @@ export const resources: (
       id: '35eef26e-cc63-4adb-a761-eb44cef48361',
       title: "Tester c'est pour les devs qui écrivent des bugs...",
       slug: 'tester-c-est-pour-les-devs-qui-écrivent-des-bugs',
+      titleDuplicationCheckSlug:
+        'tester-c-est-pour-les-devs-qui-écrivent-des-bugs',
       description: 'TODO...',
       createdById: 'eecac657-f415-47e1-8087-c4508ea16191',
     },

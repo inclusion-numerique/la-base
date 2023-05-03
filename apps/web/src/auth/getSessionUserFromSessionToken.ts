@@ -31,6 +31,7 @@ export const getSessionUserFromSessionToken = async (
           updated: true,
           ownedBases: {
             select: {
+              id: true,
               slug: true,
               title: true,
             },

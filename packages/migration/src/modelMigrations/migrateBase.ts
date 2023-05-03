@@ -6,6 +6,7 @@ import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import { prismaClient } from '@app/web/prismaClient'
 import { SlugToLegacyIdMap } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const getLegacyBases = () => migrationPrismaClient.main_base.findMany()
 
@@ -55,6 +56,7 @@ export const migrateBase = async ({
     title: legacyBase.title,
     description: legacyBase.description,
     slug,
+    titleDuplicationCheckSlug: createSlug(legacyBase.title),
     created: legacyBase.created,
     updated: legacyBase.modified,
   } satisfies Parameters<typeof transaction.base.upsert>[0]['update']

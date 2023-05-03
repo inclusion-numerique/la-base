@@ -69,13 +69,15 @@ model VerificationToken {
 }
 
 model Base {
-  id          String  @id @default(uuid()) @db.Uuid
-  legacyId    Int?    @unique
-  title       String
-  slug        String  @unique
-  description String?
-  owner       User    @relation(fields: [ownerId], references: [id])
-  ownerId     String  @db.Uuid
+  id                        String  @id @default(uuid()) @db.Uuid
+  legacyId                  Int?    @unique
+  title                     String
+  slug                      String  @unique
+  // Slug that can be duplicated, only based on title
+  titleDuplicationCheckSlug String
+  description               String?
+  owner                     User    @relation(fields: [ownerId], references: [id])
+  ownerId                   String  @db.Uuid
 
   created   DateTime   @default(now())
   updated   DateTime   @default(now())
@@ -83,10 +85,12 @@ model Base {
 }
 
 model Resource {
-  id       String @id @default(uuid()) @db.Uuid
-  legacyId Int?   @unique
-  title    String
-  slug     String @unique
+  id                        String @id @default(uuid()) @db.Uuid
+  legacyId                  Int?   @unique
+  title                     String
+  slug                      String @unique
+  // Slug that can be duplicated, only based on title
+  titleDuplicationCheckSlug String
 
   description String
 

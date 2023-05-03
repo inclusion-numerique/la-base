@@ -39,7 +39,9 @@ const isAuthenticated = middleware(({ ctx, next }) => {
  * users are active
  */
 const isActive = middleware(({ ctx, next }) => {
-  if (ctx.user?.emailVerified) {
+  const { user } = ctx
+
+  if (!user || !user.emailVerified) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
       message: 'User status non active',
@@ -47,8 +49,9 @@ const isActive = middleware(({ ctx, next }) => {
   }
   return next({
     ctx: {
-      // infers the user as non-nullable
-      user: ctx.user,
+      ...ctx,
+      // Infer the user as non nullable in next execution
+      user,
     },
   })
 })

@@ -29,20 +29,22 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/`
+    | `/401`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
     | `/creer-un-compte`
     | `/deconnexion`
-    | `/401`
     | `/403`
     | `/404`
     | `/500`
-    | `/accessibilite`
-    | `/bases`
     | `/confidentialite`
+    | `/bases`
+    | `/accessibilite`
+    | `/creer-une-ressource`
     | `/mentions-legales`
     | `/ressources`
+    | `/(.)creer-une-ressource`
     | `/robots.txt`
     | `/api/health`
     | `/api/file/get`

@@ -6,6 +6,7 @@ import { prismaClient } from '@app/web/prismaClient'
 import { v4 } from 'uuid'
 import { SlugToLegacyIdMap } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { migrateContent } from '@app/migration/modelMigrations/migrateContent'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const getLegacyResources = () =>
   migrationPrismaClient.main_resource.findMany({
@@ -76,6 +77,7 @@ export const migrateResource = async ({
   const data = {
     title: legacyResource.title,
     slug,
+    titleDuplicationCheckSlug: createSlug(legacyResource.title),
     description: legacyResource.description ?? '',
     createdById: userIdFromLegacyId(Number(legacyResource.creator_id)),
     baseId: legacyResource.root_base_id

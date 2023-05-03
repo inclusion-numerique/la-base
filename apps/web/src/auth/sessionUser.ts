@@ -8,5 +8,5 @@ export type SessionUser = Omit<
   emailVerified: string | null
   created: string | null
   updated: string | null
-  ownedBases: Pick<Base, 'slug' | 'title'>[]
+  ownedBases: Pick<Base, 'slug' | 'title' | 'id'>[]
 }

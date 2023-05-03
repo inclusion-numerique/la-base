@@ -29,12 +29,17 @@ const SigninPanel = ({
     <h5>Se connecter avec son email</h5>
     <EmailSigninForm callbackUrl={callbackUrl} />
     <hr className="fr-mt-6v" />
-    <h5 className="fr-mt-4v">Vous n’avez pas de compte ?</h5>
+    <h5 className="fr-mt-4v">Vous n’avez pas de compte ?</h5>
     <ButtonsGroup
       buttons={[
         {
           children: 'Créer un compte',
-          linkProps: { href: '/creer-un-compte' },
+          linkProps: {
+            href:
+              callbackUrl === '/'
+                ? '/creer-un-compte'
+                : `/creer-un-compte?suivant=${callbackUrl}`,
+          },
           priority: 'secondary',
         },
       ]}

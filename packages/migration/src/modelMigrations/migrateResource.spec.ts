@@ -5,6 +5,7 @@ import {
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
 import { mockReset } from 'jest-mock-extended'
 import { createLegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
+import { createSlug } from '@app/web/utils/createSlug'
 
 jest.mock('uuid', () => ({ v4: () => '0000' }))
 
@@ -70,6 +71,7 @@ describe('migrateResource', () => {
         legacyId: 1238,
         slug: 'test-slug',
         title: legacyResource.title,
+        titleDuplicationCheckSlug: createSlug(legacyResource.title),
         created: legacyResource.created,
         updated: legacyResource.modified,
       },
@@ -85,6 +87,7 @@ describe('migrateResource', () => {
           "L'Annuaire des Collectivités est un service public numérique développé par l'Incubateur des Territoires ANCT permettant aux communes de disposer d'une interface web centralisant des informations fiables et utiles pour le citoyens : horaires d'ouverture de la mairie, liens vers les démarches administratives (acte de naissance, renouvellement de CNU), présentation des élus...",
         slug: 'test-slug',
         title: legacyResource.title,
+        titleDuplicationCheckSlug: createSlug(legacyResource.title),
         created: legacyResource.created,
         updated: legacyResource.modified,
       },

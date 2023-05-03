@@ -5,6 +5,7 @@ import {
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
 import { mockReset } from 'jest-mock-extended'
 import { createLegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
+import { createSlug } from '@app/web/utils/createSlug'
 
 jest.mock('uuid', () => ({ v4: () => '0000' }))
 
@@ -67,6 +68,7 @@ describe('migrateBase', () => {
           "proposition de jeu type memory pour l'animation d'atelier de manière dé-connecté",
         ownerId: '0000',
         slug: 'test-slug',
+        titleDuplicationCheckSlug: createSlug(legacyBase.title),
         title: legacyBase.title,
         created: legacyBase.created,
         updated: legacyBase.modified,
@@ -78,6 +80,7 @@ describe('migrateBase', () => {
         legacyId: 129,
         ownerId: '0000',
         slug: 'test-slug',
+        titleDuplicationCheckSlug: createSlug(legacyBase.title),
         title: legacyBase.title,
         created: legacyBase.created,
         updated: legacyBase.modified,

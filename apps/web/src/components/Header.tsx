@@ -82,7 +82,10 @@ const Header = ({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="fr-btn fr-icon-edit-box-line">
+                  <Link
+                    href="/creer-une-ressource"
+                    className="fr-btn fr-icon-edit-box-line"
+                  >
                     Créer une ressource
                   </Link>
                 </li>

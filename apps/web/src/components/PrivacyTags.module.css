@@ -1,0 +1,4 @@
+.public {
+  color: var(--text-default-success);
+  background-color: var(--background-contrast-success)
+}

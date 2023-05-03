@@ -1,7 +1,13 @@
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import React, { HTMLInputTypeAttribute, HTMLProps } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  PathValue,
+} from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
 
 type CommonProps<T extends FieldValues> = {
@@ -13,6 +19,7 @@ type CommonProps<T extends FieldValues> = {
   placeholder?: string
   valid?: string
   icon?: string
+  infoText?: string | ((value: PathValue<T, Path<T>>) => string)
 }
 
 type InputProps = {
@@ -41,6 +48,7 @@ const InputFormField = <T extends FieldValues>({
   'data-testid': dataTestId,
   valid,
   icon,
+  infoText,
   ...rest
 }: UiComponentProps & InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`
@@ -72,7 +80,7 @@ const InputFormField = <T extends FieldValues>({
               className,
             )}
           >
-            <label className="fr-label" htmlFor={id}>
+            <label className="fr-label fr-mb-1v" htmlFor={id}>
               {label}
               {hint && <span className="fr-hint-text">{hint}</span>}
             </label>
@@ -107,13 +115,18 @@ const InputFormField = <T extends FieldValues>({
                 />
               )}
             </div>
+            {infoText && (
+              <p id={`${id}__info`} className="fr-hint-text fr-mt-1v fr-mb-0">
+                {typeof infoText === 'string' ? infoText : infoText(value)}
+              </p>
+            )}
             {error && (
-              <p id={`${id}__error`} className="fr-error-text">
+              <p id={`${id}__error`} className="fr-error-text fr-mt-1v">
                 {error.message}
               </p>
             )}
             {valid && isTouched && !invalid && (
-              <p id={`${id}__valid`} className="fr-valid-text">
+              <p id={`${id}__valid`} className="fr-valid-text fr-mt-1v">
                 {valid}
               </p>
             )}
