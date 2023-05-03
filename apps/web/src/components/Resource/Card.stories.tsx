@@ -18,21 +18,21 @@ const resource = {
 } satisfies ResourceListItem
 
 export default {
-  title: 'Resource/Card',
+  title: 'Ressource/Card',
   component: Card,
 } as Meta<typeof Card>
 
 type Story = StoryObj<typeof Card>
 
 export const Default: Story = {
-  name: 'Resource',
+  name: 'Ressource',
   args: {
     resource,
   },
 }
 
 export const WithImage: Story = {
-  name: 'Resource avec image',
+  name: 'Ressource avec image',
   args: {
     resource,
     withImage: true,
@@ -40,7 +40,7 @@ export const WithImage: Story = {
 }
 
 export const WithImageConnected: Story = {
-  name: 'Resource utilisateur connecté avec image',
+  name: 'Ressource utilisateur connecté avec image',
   args: {
     resource,
     connected: true,
@@ -49,7 +49,7 @@ export const WithImageConnected: Story = {
 }
 
 export const WithoutImageConnected: Story = {
-  name: 'Resource utilisateur connecté',
+  name: 'Ressource utilisateur connecté',
   args: {
     resource,
     connected: true,
@@ -57,7 +57,7 @@ export const WithoutImageConnected: Story = {
 }
 
 export const DefaultMobile: Story = {
-  name: 'Mobile - Resource',
+  name: 'Mobile - Ressource',
   parameters: {
     viewport: {
       defaultViewport: 'mobile1',
@@ -69,7 +69,7 @@ export const DefaultMobile: Story = {
 }
 
 export const WithImageMobile: Story = {
-  name: 'Mobile - Resource avec image',
+  name: 'Mobile - Ressource avec image',
   parameters: {
     viewport: {
       defaultViewport: 'mobile1',
