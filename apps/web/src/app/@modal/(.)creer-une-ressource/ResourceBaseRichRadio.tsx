@@ -1,4 +1,3 @@
-/* eslint react/jsx-props-no-spreading: 0 */
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
@@ -7,8 +6,60 @@ import {
   BasePrivacyTag,
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styles from './ResourceBaseRichRadio.module.css'
+
+const ResourceBaseRichRadioElement = ({
+  id,
+  name,
+  disabled,
+  value,
+  radioValue,
+  onChange,
+  children,
+}: PropsWithChildren<{
+  id: string
+  name: string
+  disabled?: boolean
+  radioValue: string | null
+  value: string | null
+  onChange: (value: string | null) => void
+}>) => (
+  <div className="fr-fieldset__element">
+    <div
+      className={classNames('fr-radio-group', 'fr-radio-rich', styles.radio)}
+    >
+      <input
+        id={id}
+        type="radio"
+        onChange={() => {
+          onChange(radioValue)
+        }}
+        name={name}
+        checked={value === radioValue}
+        value={radioValue === null ? '' : radioValue}
+        disabled={disabled}
+      />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-element-interactions */}
+      <label
+        className="fr-label"
+        htmlFor={id}
+        onClick={() => {
+          // XXX React dsfr seems to not trigger input event on a label click
+          // Keyboard tab + space still works
+          onChange(value)
+        }}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            onChange(value)
+          }
+        }}
+      >
+        {children}
+      </label>
+    </div>
+  </div>
+)
 
 const ResourceBaseRichRadio = <T extends FieldValues>({
   user,
@@ -30,94 +81,44 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
     <Controller
       control={control}
       name={path}
-      render={({
-        field: { onChange, name, value },
-        fieldState: { invalid, error, isDirty },
-      }) => (
+      render={({ field: { onChange, name, value }, fieldState: { error } }) => (
         <fieldset
           className="fr-fieldset"
           id="radio-rich"
           aria-labelledby="radio-rich-legend radio-rich-messages"
         >
-          <div className="fr-fieldset__element">
-            <div
-              className={classNames(
-                'fr-radio-group',
-                'fr-radio-rich',
-                styles.radio,
-              )}
-            >
-              <input
-                id={profileRadioId}
-                type="radio"
-                onChange={(event) => {
-                  console.log('ON PROFILE CHANGE', event)
-                  onChange(null)
-                }}
-                name={name}
-                checked={value === null}
-                value=""
-                disabled={disabled}
-              />
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label
-                className="fr-label"
-                htmlFor={profileRadioId}
-                onClick={() => {
-                  // XXX React dsfr seems to not triger input event on a label click
-                  // Keyboard tab + space still works
-                  onChange(null)
-                }}
-              >
-                <span>Ajouter à mon profil</span>
-                <ProfilePrivacyTag isPublic />
-              </label>
-            </div>
-          </div>
+          <ResourceBaseRichRadioElement
+            id={profileRadioId}
+            name={name}
+            value={null}
+            radioValue={value}
+            disabled={disabled}
+            onChange={onChange}
+          >
+            <span>Ajouter à mon profil</span>
+            <ProfilePrivacyTag isPublic />
+          </ResourceBaseRichRadioElement>
+
           <p
             className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-4v"
             id="radio-rich-legend"
           >
             Ajouter cette ressource à l’une de vos bases&nbsp;:
           </p>
-          {bases.map((base, index) => {
-            const baseRadioId = `base-radio-${index.toString()}`
-            return (
-              <div key={base.id} className="fr-fieldset__element">
-                <div
-                  className={classNames(
-                    'fr-radio-group',
-                    'fr-radio-rich',
-                    styles.radio,
-                  )}
-                >
-                  <input
-                    id={id}
-                    type="radio"
-                    onChange={() => {
-                      onChange(base.id)
-                    }}
-                    checked={value === base.id}
-                    value={base.id}
-                    name={name}
-                    disabled={disabled}
-                  />
-                  <label
-                    className="fr-label"
-                    htmlFor={baseRadioId}
-                    onClick={() => {
-                      // XXX React dsfr seems to not triger input event on a label click
-                      // Keyboard tab + space still works
-                      onChange(base.id)
-                    }}
-                  >
-                    <span>{base.title}</span>
-                    <BasePrivacyTag />
-                  </label>
-                </div>
-              </div>
-            )
-          })}
+          {bases.map((base, index) => (
+            <ResourceBaseRichRadioElement
+              key={base.id}
+              id={`base-radio-${index.toString()}`}
+              name={name}
+              value={value}
+              radioValue={base.id}
+              disabled={disabled}
+              onChange={onChange}
+            >
+              <span>{base.title}</span>
+              <BasePrivacyTag />
+            </ResourceBaseRichRadioElement>
+          ))}
           {error && (
             <div
               className="fr-messages-group"

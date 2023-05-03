@@ -29,32 +29,32 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/`
-    | `/401`
+    | `/creer-un-compte`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
-    | `/creer-un-compte`
     | `/deconnexion`
     | `/403`
-    | `/404`
+    | `/401`
     | `/500`
-    | `/confidentialite`
-    | `/bases`
+    | `/404`
     | `/accessibilite`
+    | `/bases`
+    | `/confidentialite`
     | `/creer-une-ressource`
     | `/mentions-legales`
     | `/ressources`
-    | `/(.)creer-une-ressource`
     | `/robots.txt`
+    | `/(.)creer-une-ressource`
     | `/api/health`
-    | `/api/file/get`
-    | `/api/file/upload`
     | `/api/test/index.api.spec`
     | `/api/test`
     | `/api/test/service.spec`
     | `/api/test/service`
     | `/api/test/type`
     | `/api/test/type.spec`
+    | `/api/file/get`
+    | `/api/file/upload`
   type DynamicRoutes<T extends string = string> = 
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`

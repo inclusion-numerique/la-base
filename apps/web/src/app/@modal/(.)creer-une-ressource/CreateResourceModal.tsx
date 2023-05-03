@@ -24,10 +24,11 @@ const descriptionInfoText = (description: string | null) =>
   `${description?.length ?? 0}/${createResourceDescriptionMaxLength} caractères`
 
 const CreateResourceModal = ({ user }: { user: SessionUser }) => {
+  // Step 0: Title and description
+  // Step 1: Base selection ONLY if user has bases
   const [step, setStep] = useState(0)
-  const router = useRouter()
 
-  // TODO Props for available user bases
+  const router = useRouter()
 
   const createResource = trpc.resource.create.useMutation()
 
@@ -35,28 +36,27 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
     control,
     handleSubmit,
     formState: { isSubmitting },
-    watch,
     setError,
   } = useForm<CreateResource>({
     resolver: zodResolver(CreateResourceValidation),
     defaultValues: {
-      // baseId: null,
-      baseId: '93ed248d-962f-4f5f-a5cc-744c6ee7e23b',
+      baseId: null,
     },
   })
 
-  const { confirmLabel } =
+  const { confirmLabel, canCreate } =
     step === 1 || user.ownedBases.length === 0
       ? {
           confirmLabel: 'Commencer l’édition',
+          canCreate: true,
         }
       : {
           confirmLabel: 'Continuer',
+          canCreate: false,
         }
 
   const onSubmit = async (data: CreateResource) => {
-    console.log('SUBMITING', data)
-    if (step === 0) {
+    if (!canCreate) {
       setStep(1)
       return
     }
@@ -71,16 +71,13 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
 
   const disabled = isSubmitting
 
-  const baseId = watch('baseId')
-  console.log('BASE ID', baseId)
-
   return (
     <LayoutModal>
       <form onSubmit={handleSubmit(onSubmit)}>
         {step === 0 ? (
           <div className="fr-modal__content">
-            <h1 id="modal-title" className="fr-modal__title">
-              Créer une ressource
+            <h1 id="modal-title" className="fr-modal__title fr-mb-8v">
+              Créer une nouvelle ressource
             </h1>
             <InputFormField
               control={control}
@@ -99,17 +96,11 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
               disabled={disabled}
               infoText={descriptionInfoText}
             />
-            <ResourceBaseRichRadio
-              control={control}
-              path="baseId"
-              user={user}
-              disabled={disabled}
-            />
           </div>
         ) : (
           <div className="fr-modal__content">
-            <h1 id="modal-title" className="fr-modal__title">
-              Où souhaitez-vous ajouter cette ressource ?
+            <h1 id="modal-title" className="fr-modal__title fr-mb-8v">
+              Où souhaitez-vous ajouter cette ressource&nbsp;?
             </h1>
             <ResourceBaseRichRadio
               control={control}

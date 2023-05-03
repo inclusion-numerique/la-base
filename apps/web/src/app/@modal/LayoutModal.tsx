@@ -6,8 +6,6 @@ const LayoutModal = ({ children }: PropsWithChildren) => (
     id="modal"
     aria-labelledby="modal-title"
     className="fr-modal fr-modal--opened"
-    data-fr-js-modal="true"
-    data-fr-js-modal-actionee="true"
     aria-modal="true"
     open
   >
