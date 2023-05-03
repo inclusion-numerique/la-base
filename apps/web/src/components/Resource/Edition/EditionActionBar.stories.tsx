@@ -4,7 +4,7 @@ import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
 
 export default {
-  title: 'Resource/EditionActionBar',
+  title: 'Ressource/EditionActionBar',
   component: EditionActionBar,
 } as Meta<typeof EditionActionBar>
 
