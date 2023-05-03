@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+}
+
+.button {
+  margin-bottom: 0 !important;
+}
+
+.contents {
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  background-color: white;
+  width: 100%;
+  border-right: var(--slim-grey-border);
+  border-left: var(--slim-grey-border);
+  border-bottom: var(--slim-grey-border);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;  
+  
+  &:hover {
+    background-color: var(--hover);
+  }
+
+  &:not(:last-child) {
+    border-bottom:  var(--slim-grey-border);
+  }
+}

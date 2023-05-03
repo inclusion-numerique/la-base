@@ -39,6 +39,20 @@ export const getResource = async (slug: string) =>
   prismaClient.resource.findUnique({
     select: {
       title: true,
+      description: true,
+      slug: true,
+      createdBy: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
+      base: {
+        select: {
+          title: true,
+          slug: true,
+        },
+      },
     },
     where: {
       slug,

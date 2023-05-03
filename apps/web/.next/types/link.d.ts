@@ -51,11 +51,12 @@ declare namespace __next_route_internal_types__ {
     | `/api/test`
     | `/api/test/service.spec`
     | `/api/test/service`
-    | `/api/test/type`
     | `/api/test/type.spec`
+    | `/api/test/type`
   type DynamicRoutes<T extends string = string> = 
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
     | `/api/auth/${CatchAllSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`
 

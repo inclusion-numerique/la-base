@@ -1,0 +1,12 @@
+.container {
+  border: 1px dashed var(--border-default-grey);
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.grey {
+  color: var(--grey-425-625);
+}
