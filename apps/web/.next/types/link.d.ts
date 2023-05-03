@@ -48,8 +48,8 @@ declare namespace __next_route_internal_types__ {
     | `/api/file/get`
     | `/api/file/upload`
     | `/api/test/index.api.spec`
-    | `/api/test`
     | `/api/test/service.spec`
+    | `/api/test`
     | `/api/test/service`
     | `/api/test/type.spec`
     | `/api/test/type`

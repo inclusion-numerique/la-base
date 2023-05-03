@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client'
 import { users } from './users'
 import TransactionClient = Prisma.TransactionClient
 import { resources } from './resources'
+import { bases } from './bases'
 
 function myParseInt(value: string) {
   const parsedValue = Number.parseInt(value, 10)
@@ -27,6 +28,18 @@ const seed = async (transaction: TransactionClient, random?: number) => {
         where: { id: user.id },
         create: user,
         update: user,
+        select: { id: true },
+      }),
+    ),
+  )
+
+  const newBases = await bases(random)
+  await Promise.all(
+    newBases.map((base) =>
+      transaction.base.upsert({
+        where: { id: base.id },
+        create: base,
+        update: base,
         select: { id: true },
       }),
     ),
