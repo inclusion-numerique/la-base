@@ -18,9 +18,9 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import ResourceBaseRichRadio from '@app/web/app/@modal/(.)creer-une-ressource/ResourceBaseRichRadio'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 
-const titleInfoText = (title: string | null) =>
+const titleInfo = (title: string | null) =>
   `${title?.length ?? 0}/${createResourceTitleMaxLength} caractères`
-const descriptionInfoText = (description: string | null) =>
+const descriptionInfo = (description: string | null) =>
   `${description?.length ?? 0}/${createResourceDescriptionMaxLength} caractères`
 
 const CreateResourceModal = ({ user }: { user: SessionUser }) => {
@@ -89,7 +89,7 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
                 path="title"
                 label="Titre de la ressource"
                 disabled={disabled}
-                infoText={titleInfoText}
+                info={titleInfo}
               />
               <InputFormField
                 control={control}
@@ -99,7 +99,7 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
                 label="Description courte de la ressource"
                 hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
                 disabled={disabled}
-                infoText={descriptionInfoText}
+                info={descriptionInfo}
               />
             </>
           ) : (

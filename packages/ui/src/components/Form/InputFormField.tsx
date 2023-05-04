@@ -19,7 +19,7 @@ type CommonProps<T extends FieldValues> = {
   placeholder?: string
   valid?: string
   icon?: string
-  infoText?: string | ((value: PathValue<T, Path<T>>) => string)
+  info?: string | ((value: PathValue<T, Path<T>>) => string)
 }
 
 type InputProps = {
@@ -48,7 +48,7 @@ const InputFormField = <T extends FieldValues>({
   'data-testid': dataTestId,
   valid,
   icon,
-  infoText,
+  info,
   ...rest
 }: UiComponentProps & InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`
@@ -115,9 +115,9 @@ const InputFormField = <T extends FieldValues>({
                 />
               )}
             </div>
-            {infoText && (
+            {info && (
               <p id={`${id}__info`} className="fr-hint-text fr-mt-1v fr-mb-0">
-                {typeof infoText === 'string' ? infoText : infoText(value)}
+                {typeof info === 'string' ? info : info(value)}
               </p>
             )}
             {error && (
