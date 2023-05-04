@@ -27,7 +27,7 @@ const TitleEdition = ({
 }) => {
   const [editionMode, setEditionMode] = useState(false)
 
-  const { control, handleSubmit, formState } = useForm<EditResourceTitle>({
+  const { control, handleSubmit } = useForm<EditResourceTitle>({
     resolver: zodResolver(EditResourceTitleValidation),
     defaultValues: {
       id: resource.id,
@@ -37,11 +37,7 @@ const TitleEdition = ({
   })
 
   const onSubmit = async (data: EditResourceTitle) => {
-    if (formState.isDirty) {
-      await updateResource(data)
-    } else {
-      setModificationState(null)
-    }
+    await updateResource(data)
     setEditionMode(false)
   }
 

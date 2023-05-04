@@ -16,17 +16,22 @@ import AddContentButton from './AddContentButton'
 import TitleEdition from './TitleEdition'
 import styles from './Edition.module.css'
 
+const hasChanged = (resource: Resource, updatedResource: Resource) =>
+  resource.title !== updatedResource.title ||
+  resource.description !== updatedResource.description
+
 const Edition = ({ resource }: { resource: Resource }) => {
   const [modificationState, setModificationState] =
     useState<ResourceModificationState | null>(null)
-  const [pusblishedState, setPusblishedState] =
-    useState<ResourcePublishedState>(ResourcePublishedState.PUBLIC)
 
   const [updatedResource, setUpdatedResource] = useState<Resource>(resource)
+  const [publishedResource, setPublishedResource] = useState<Resource>(resource)
+
+  const canPublished = hasChanged(publishedResource, updatedResource)
+
   const updateTitleMutation = trpc.resource.editTitle.useMutation()
 
   const updateResource = async (data: EditResourceTitle) => {
-    setPusblishedState(ResourcePublishedState.DRAFT)
     setModificationState(ResourceModificationState.SAVING)
     const result = await updateTitleMutation.mutateAsync(data)
     setUpdatedResource(result)
@@ -53,9 +58,22 @@ const Edition = ({ resource }: { resource: Resource }) => {
         <AddContentButton />
       </div>
       <EditionActionBar
-        publishedState={pusblishedState}
-        modificationState={modificationState}
+        publishedState={
+          canPublished
+            ? ResourcePublishedState.DRAFT
+            : ResourcePublishedState.PUBLIC
+        }
+        modificationState={
+          modificationState === ResourceModificationState.SAVED && !canPublished
+            ? null
+            : modificationState
+        }
+        actionDisabled={!canPublished}
         actionLabel="Publier la ressource"
+        action={() => {
+          setModificationState(null)
+          setPublishedResource(updatedResource)
+        }}
       />
     </>
   )

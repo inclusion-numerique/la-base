@@ -35,9 +35,7 @@ export type ResourceListItem = Exclude<
   null
 >[number]
 
-export const getResourceSelect: Parameters<
-  typeof prismaClient.resource.findUnique
->[0]['select'] = {
+export const getResourceSelect = {
   id: true,
   title: true,
   description: true,
@@ -54,7 +52,7 @@ export const getResourceSelect: Parameters<
       slug: true,
     },
   },
-}
+} satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
 
 export const getResource = async (slug: string) =>
   prismaClient.resource.findUnique({
