@@ -19,7 +19,7 @@ const Ressources = async () => {
       />
       {resources.map((resource) => (
         <>
-          <ResourceCard key={resource.title} resource={resource} />
+          <ResourceCard key={resource.slug} resource={resource} />
           <br />
           <br />
         </>
