@@ -11,6 +11,10 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
    *  - https://www.figma.com/proto/Rk4NNQVYRBE0bJZ6i5mrfU/La-Base---V.2?node-id=617-99265&scaling=min-zoom&page-id=566%3A89449&starting-point-node-id=617%3A99265
    */
 
+  beforeEach(() => {
+    cy.execute('deleteAllData', undefined)
+  })
+
   it('Acceptation 0 - Fermeture modale', () => {
     cy.createUserAndSignin(createTestUser())
     cy.visit('/creer-une-ressource')
@@ -46,7 +50,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       .findByLabelText(/^Description/)
       .type('Une description')
     cy.get('@modal').find('button').contains('Commencer').click()
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
   })
 
   it('Acceptation 2 - Utilisateur membre d’aucune base avec profil privé', () => {
@@ -62,10 +66,10 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       .findByLabelText(/^Description/)
       .type('Une description')
     cy.get('@modal').find('button').contains('Commencer').click()
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
   })
 
-  it.only('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée', () => {
+  it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée', () => {
     const titre = `Test - ${v4()}`
     const base1Title = `Test - ${v4()}`
     const base2Title = `Test - ${v4()}`
@@ -116,6 +120,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.get('@modal').find('button').contains('Commencer').click()
 
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
   })
 })
