@@ -22,8 +22,8 @@ export const WithBases: Story = {
     user: {
       ...testSessionUser,
       ownedBases: [
-        { id: 'a', title: 'Ma première base', slug: 'a' },
-        { id: 'b', title: 'Une autre base', slug: 'b' },
+        { id: 'a', title: 'Ma première base', slug: 'a', isPublic: true },
+        { id: 'b', title: 'Une autre base', slug: 'b', isPublic: false },
       ],
     },
   },
