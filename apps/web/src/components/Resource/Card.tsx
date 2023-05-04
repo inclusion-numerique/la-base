@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Badge from '@codegouvfr/react-dsfr/Badge'
 import { ResourceListItem } from '@app/web/server/resources'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import ResourcesViewsAndMetadata from '@app/web/components/Resource/View/ResourcesViewsAndMetadata'
 import styles from './Card.module.css'
 import PublishedInInformation from './PublishedInInformation'
 import IconLink from '../Icon/IconLink'
@@ -27,24 +28,26 @@ const ResourceCard = ({
           Modifié le {dateAsDay(resource.updated)}
         </div>
       </div>
-      <Link href={`/ressources/${resource.slug}`}>
-        <div className={styles.content}>
-          <div>
+      <div className={styles.content}>
+        <div>
+          <Link href={`/ressources/${resource.slug}`}>
             <h6 className={styles.title}>{resource.title}</h6>
-            <div className="fr-text--sm fr-mb-0">{resource.description}</div>
-          </div>
-          <div className="fr-hidden-md fr-text--xs fr-mb-1w">
-            Modifié le {dateAsDay(resource.updated)}
-          </div>
-          {withImage && (
-            <img
-              className={styles.image}
-              src="https://fakeimg.pl/140x80/"
-              alt=""
-            />
-          )}
+          </Link>
+          <Link href={`/ressources/${resource.slug}`}>
+            <p className="fr-text--sm fr-mb-0">{resource.description}</p>
+          </Link>
         </div>
-      </Link>
+        <div className="fr-hidden-md fr-text--xs fr-mb-1w">
+          Modifié le {dateAsDay(resource.updated)}
+        </div>
+        {withImage && (
+          <img
+            className={styles.image}
+            src="https://fakeimg.pl/140x80/"
+            alt=""
+          />
+        )}
+      </div>
       <Badge className="fr-hidden-md fr-mt-1w" noIcon severity="success">
         Très recommandée
       </Badge>
@@ -52,24 +55,7 @@ const ResourceCard = ({
         <div
           className={classNames(styles.footerLeft, 'fr-text--sm', 'fr-mb-0')}
         >
-          <span className="fr-icon-eye-line fr-icon--sm" />
-          <div>
-            <b>45</b>
-            <span className={styles.spanMdDisplay}> Vues</span>
-          </div>
-          <div>.</div>
-          <span className="fr-icon-bookmark-line fr-icon--sm" />
-          <div>
-            <b>45</b>
-            <span className={styles.spanMdDisplay}> Enregistrements</span>
-          </div>
-          <Badge
-            className="fr-hidden fr-unhidden-md fr-mb-1w"
-            noIcon
-            severity="success"
-          >
-            Très recommandée
-          </Badge>
+          <ResourcesViewsAndMetadata />
         </div>
         <div
           className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}

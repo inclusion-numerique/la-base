@@ -87,12 +87,13 @@ model Base {
 }
 
 model Resource {
-  id                        String @id @default(uuid()) @db.Uuid
-  legacyId                  Int?   @unique
+  id                        String  @id @default(uuid()) @db.Uuid
+  legacyId                  Int?    @unique
   title                     String
-  slug                      String @unique
+  slug                      String  @unique
   // Slug that can be duplicated, only based on title
   titleDuplicationCheckSlug String
+  isPublic                  Boolean @default(false)
 
   description String
 
