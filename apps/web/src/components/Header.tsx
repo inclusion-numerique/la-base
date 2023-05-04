@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { Route } from 'next'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import classNames from 'classnames'
+import { Route } from 'next'
 
 const Header = ({
   user,
-  backLink: _backLink,
+  backLink,
 }: {
   user?: SessionUser | null
   backLink?: Route
@@ -18,9 +18,9 @@ const Header = ({
         <div className="fr-header__body-row">
           <div className="fr-header__brand fr-enlarge-link">
             <div className="fr-header__brand-top">
-              {_backLink ? (
+              {backLink ? (
                 <Link
-                  href={_backLink}
+                  href={backLink}
                   className={classNames(
                     'fr-btn',
                     'fr-btn--sm',

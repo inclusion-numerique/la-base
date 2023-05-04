@@ -5,13 +5,13 @@
   left: 0;
   right: 0;
   background-color: white;
+  border-top: var(--slim-grey-border);
 }
 
 .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: var(--slim-grey-border);
   padding-top: 24px;
   padding-bottom: 24px;
 }
