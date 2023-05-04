@@ -53,6 +53,7 @@ model User {
   description   String?
   accounts      Account[]
   sessions      Session[]
+  isPublic      Boolean   @default(false)
 
   created          DateTime   @default(now())
   updated          DateTime   @default(now())
@@ -78,6 +79,7 @@ model Base {
   description               String?
   owner                     User    @relation(fields: [ownerId], references: [id])
   ownerId                   String  @db.Uuid
+  isPublic                  Boolean @default(false)
 
   created   DateTime   @default(now())
   updated   DateTime   @default(now())

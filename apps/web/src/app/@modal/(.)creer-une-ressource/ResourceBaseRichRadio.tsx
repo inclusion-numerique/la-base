@@ -96,7 +96,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
             onChange={onChange}
           >
             <span>Ajouter à mon profil</span>
-            <ProfilePrivacyTag isPublic />
+            <ProfilePrivacyTag isPublic={user.isPublic} />
           </ResourceBaseRichRadioElement>
 
           <p
@@ -116,7 +116,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
               onChange={onChange}
             >
               <span>{base.title}</span>
-              <BasePrivacyTag />
+              <BasePrivacyTag isPublic={base.isPublic} />
             </ResourceBaseRichRadioElement>
           ))}
           {error && (

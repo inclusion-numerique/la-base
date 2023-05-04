@@ -2,6 +2,7 @@ import '@testing-library/cypress/add-commands'
 import type { Tasks as CustomTasks } from './tasks'
 import Timeoutable = Cypress.Timeoutable
 import Loggable = Cypress.Loggable
+import type { CreateUserInput } from '../e2e/authentication/user.tasks'
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -47,18 +48,10 @@ Cypress.Commands.add('signin', ({ email }: { email: string }) => {
     cy.setCookie('next-auth.session-token', session.sessionToken)
   })
 })
-Cypress.Commands.add(
-  'createUserAndSignin',
-  (user: {
-    email: string
-    firstName: string
-    lastName: string
-    name: string
-  }) => {
-    cy.task('createUser', user)
-    cy.signin(user)
-  },
-)
+Cypress.Commands.add('createUserAndSignin', (user: CreateUserInput) => {
+  cy.task('createUser', user)
+  cy.signin(user)
+})
 
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
@@ -73,12 +66,7 @@ declare global {
         args: Parameters<CustomTasks[T]>[0],
       ): Chainable<Awaited<ReturnType<CustomTasks[T]>>>
 
-      createUserAndSignin(user: {
-        email: string
-        firstName: string
-        lastName: string
-        name: string
-      }): Chainable<void>
+      createUserAndSignin(user: CreateUserInput): Chainable<void>
       signin(user: { email: string }): Chainable<void>
       dsfrShouldBeStarted(): Chainable<void>
 
