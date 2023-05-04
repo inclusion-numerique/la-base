@@ -1,35 +1,25 @@
-import { PropsWithChildren } from 'react'
-import classNames from 'classnames'
-import styles from './PrivacyTags.module.css'
+import CustomTag, { TagColor } from './CustomTag'
 
-const PublicTag = ({ children }: PropsWithChildren) => (
-  <span
-    className={classNames(
-      'fr-tag',
-      'fr-tag--icon-left',
-      'fr-icon-earth-fill',
-      'fr-text--medium',
-      styles.public,
-    )}
-  >
-    {children}
-  </span>
-)
-const PrivateTag = ({ children }: PropsWithChildren) => (
-  <span className="fr-tag fr-tag--icon-left fr-icon-lock-line fr-text--medium">
-    {children}
-  </span>
-)
+const publicValues = {
+  color: TagColor.GREEN,
+  icon: 'fr-icon-earth-fill',
+}
+
+const privateValues = {
+  color: TagColor.GREY,
+  icon: 'fr-icon-lock-line',
+}
 
 export const ProfilePrivacyTag = ({ isPublic }: { isPublic?: boolean }) =>
   isPublic ? (
-    <PublicTag>Profil public</PublicTag>
+    <CustomTag {...publicValues} label="Profil public" />
   ) : (
-    <PrivateTag>Profil privé</PrivateTag>
+    <CustomTag {...privateValues} label="Profil privé" />
   )
+
 export const BasePrivacyTag = ({ isPublic }: { isPublic?: boolean }) =>
   isPublic ? (
-    <PublicTag>Base publique</PublicTag>
+    <CustomTag {...publicValues} label="Base publique" />
   ) : (
-    <PrivateTag>Base privée</PrivateTag>
+    <CustomTag {...privateValues} label="Base privée" />
   )

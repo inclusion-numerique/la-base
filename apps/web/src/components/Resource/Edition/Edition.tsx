@@ -5,10 +5,11 @@ import EditionActionBar from './EditionActionBar'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import Separator from '../../Separator/Separator'
 import EditableContent from './EditableContent'
-import styles from './Edition.module.css'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
 import EditableImage from './EditableImage'
 import AddContentButton from './AddContentButton'
+import TitleEdition from './TitleEdition'
+import styles from './Edition.module.css'
 
 const Edition = ({ resource }: { resource: Resource }) => (
   <>
@@ -20,11 +21,7 @@ const Edition = ({ resource }: { resource: Resource }) => (
       <div className="fr-mb-5w">
         <EditableImage />
       </div>
-      <EditableContent>
-        <div className={styles.title}>Titre & description de la ressource</div>
-      </EditableContent>
-      <h3>{resource.title}</h3>
-      <div className="fr-text--xl">{resource.description}</div>
+      <TitleEdition resource={resource} />
       <Separator className="fr-my-4w" />
       <div className={styles.title}>Contenu de la ressource</div>
       <AddContentButton />

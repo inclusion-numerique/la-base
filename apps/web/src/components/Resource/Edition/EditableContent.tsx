@@ -1,11 +1,27 @@
-import React, { ReactNode } from 'react'
-import IconLink from '../../Icon/IconLink'
+import React, { MouseEventHandler, ReactNode } from 'react'
 import styles from './EditableContent.module.css'
 
-const EditableContent = ({ children }: { children: ReactNode }) => (
+const EditableContent = ({
+  children,
+  showIcon,
+  onEditClick,
+}: {
+  children: ReactNode
+  showIcon?: boolean
+  onEditClick: MouseEventHandler<HTMLButtonElement>
+}) => (
   <div className={styles.container}>
     <div>{children}</div>
-    <IconLink title="Editer" href="/" icon="fr-icon-edit-line" small />
+    {showIcon && (
+      <button
+        type="button"
+        className="fr-link"
+        title="Editer"
+        onClick={onEditClick}
+      >
+        <span className="fr-icon--sm fr-icon-edit-line" />
+      </button>
+    )}
   </div>
 )
 

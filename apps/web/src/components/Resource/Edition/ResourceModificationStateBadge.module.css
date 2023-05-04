@@ -1,3 +1,7 @@
 .badge {
   color: var(--grey-200-850);
 }
+
+.icon {
+  margin-right: 4px;
+}
