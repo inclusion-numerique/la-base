@@ -40,12 +40,12 @@ declare namespace __next_route_internal_types__ {
     | `/500`
     | `/bases`
     | `/accessibilite`
-    | `/creer-une-ressource`
     | `/confidentialite`
     | `/mentions-legales`
     | `/ressources`
-    | `/(.)creer-une-ressource`
+    | `/creer-une-ressource`
     | `/robots.txt`
+    | `/(.)creer-une-ressource`
     | `/api/health`
     | `/api/file/upload`
     | `/api/file/get`

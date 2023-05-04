@@ -6,7 +6,13 @@ import { ResourceModificationState } from '../enums/ResourceModificationState'
 export default {
   title: 'Ressource/EditionActionBar',
   component: EditionActionBar,
-  argTypes: { action: { action: 'clicked' } },
+  argTypes: {
+    action: { action: 'clicked' },
+    modificationState: {
+      options: [...Object.values(ResourceModificationState), null],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta<typeof EditionActionBar>
 
 type Story = StoryObj<typeof EditionActionBar>
