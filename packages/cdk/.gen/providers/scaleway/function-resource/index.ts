@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/function
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,35 +10,35 @@ export interface FunctionResourceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Define if the function should be deployed, terraform will wait for function to be deployed
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#deploy FunctionResource#deploy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#deploy FunctionResource#deploy}
   */
   readonly deploy?: boolean | cdktf.IResolvable;
   /**
   * The description of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#description FunctionResource#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#description FunctionResource#description}
   */
   readonly description?: string;
   /**
   * The environment variables of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#environment_variables FunctionResource#environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#environment_variables FunctionResource#environment_variables}
   */
   readonly environmentVariables?: { [key: string]: string };
   /**
   * Handler of the function. Depends on the runtime https://developers.scaleway.com/en/products/functions/api/#create-a-function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#handler FunctionResource#handler}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#handler FunctionResource#handler}
   */
   readonly handler: string;
   /**
   * HTTP traffic configuration
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#http_option FunctionResource#http_option}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#http_option FunctionResource#http_option}
   */
   readonly httpOption?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#id FunctionResource#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#id FunctionResource#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -47,112 +47,112 @@ export interface FunctionResourceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Maximum replicas for your function (defaults to 20), our system will scale your functions automatically based on incoming workload, but will never scale the number of replicas above the configured max_scale.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#max_scale FunctionResource#max_scale}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#max_scale FunctionResource#max_scale}
   */
   readonly maxScale?: number;
   /**
   * Memory limit in MB for your function, defaults to 128MB
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#memory_limit FunctionResource#memory_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#memory_limit FunctionResource#memory_limit}
   */
   readonly memoryLimit?: number;
   /**
   * Minimum replicas for your function, defaults to 0, Note that a function is billed when it gets executed, and using a min_scale greater than 0 will cause your function to run all the time.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#min_scale FunctionResource#min_scale}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#min_scale FunctionResource#min_scale}
   */
   readonly minScale?: number;
   /**
   * The name of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#name FunctionResource#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#name FunctionResource#name}
   */
   readonly name?: string;
   /**
   * The namespace ID associated with this function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#namespace_id FunctionResource#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#namespace_id FunctionResource#namespace_id}
   */
   readonly namespaceId: string;
   /**
   * Privacy of the function. Can be either `private` or `public`
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#privacy FunctionResource#privacy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#privacy FunctionResource#privacy}
   */
   readonly privacy: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#project_id FunctionResource#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#project_id FunctionResource#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#region FunctionResource#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#region FunctionResource#region}
   */
   readonly region?: string;
   /**
   * Runtime of the function
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#runtime FunctionResource#runtime}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#runtime FunctionResource#runtime}
   */
   readonly runtime: string;
   /**
   * The secret environment variables to be injected into your function at runtime.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#secret_environment_variables FunctionResource#secret_environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#secret_environment_variables FunctionResource#secret_environment_variables}
   */
   readonly secretEnvironmentVariables?: { [key: string]: string };
   /**
   * Holds the max duration (in seconds) the function is allowed for responding to a request
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#timeout FunctionResource#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#timeout FunctionResource#timeout}
   */
   readonly timeout?: number;
   /**
   * Location of the zip file to upload containing your function sources
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#zip_file FunctionResource#zip_file}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#zip_file FunctionResource#zip_file}
   */
   readonly zipFile?: string;
   /**
   * The hash of your source zip file, changing it will re-apply function. Can be any string
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#zip_hash FunctionResource#zip_hash}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#zip_hash FunctionResource#zip_hash}
   */
   readonly zipHash?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#timeouts FunctionResource#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#timeouts FunctionResource#timeouts}
   */
   readonly timeouts?: FunctionResourceTimeouts;
 }
 export interface FunctionResourceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#create FunctionResource#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#create FunctionResource#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#default FunctionResource#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#default FunctionResource#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#delete FunctionResource#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#delete FunctionResource#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#read FunctionResource#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#read FunctionResource#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/function#update FunctionResource#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function#update FunctionResource#update}
   */
   readonly update?: string;
 }
 
-export function functionResourceTimeoutsToTerraform(struct?: FunctionResourceTimeoutsOutputReference | FunctionResourceTimeouts | cdktf.IResolvable): any {
+export function functionResourceTimeoutsToTerraform(struct?: FunctionResourceTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -175,7 +175,7 @@ export class FunctionResourceTimeoutsOutputReference extends cdktf.ComplexObject
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): FunctionResourceTimeouts | cdktf.IResolvable | undefined {
@@ -314,7 +314,7 @@ export class FunctionResourceTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/function scaleway_function}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function scaleway_function}
 */
 export class FunctionResource extends cdktf.TerraformResource {
 
@@ -328,7 +328,7 @@ export class FunctionResource extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/function scaleway_function} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/function scaleway_function} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -339,7 +339,7 @@ export class FunctionResource extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_function',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

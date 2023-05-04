@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/iam_policy
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface IamPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
   * Application id
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#application_id IamPolicy#application_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#application_id IamPolicy#application_id}
   */
   readonly applicationId?: string;
   /**
   * The description of the iam policy
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#description IamPolicy#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#description IamPolicy#description}
   */
   readonly description?: string;
   /**
   * Group id
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#group_id IamPolicy#group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#group_id IamPolicy#group_id}
   */
   readonly groupId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#id IamPolicy#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#id IamPolicy#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,31 +35,31 @@ export interface IamPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the iam policy
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#name IamPolicy#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#name IamPolicy#name}
   */
   readonly name?: string;
   /**
   * Deactivate policy to a principal
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#no_principal IamPolicy#no_principal}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#no_principal IamPolicy#no_principal}
   */
   readonly noPrincipal?: boolean | cdktf.IResolvable;
   /**
   * ID of organization the resource is associated to.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#organization_id IamPolicy#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#organization_id IamPolicy#organization_id}
   */
   readonly organizationId?: string;
   /**
   * User id
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#user_id IamPolicy#user_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#user_id IamPolicy#user_id}
   */
   readonly userId?: string;
   /**
   * rule block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#rule IamPolicy#rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#rule IamPolicy#rule}
   */
   readonly rule: IamPolicyRule[] | cdktf.IResolvable;
 }
@@ -67,19 +67,19 @@ export interface IamPolicyRule {
   /**
   * ID of organization scoped to the rule. Only one of project_ids and organization_id may be set.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#organization_id IamPolicy#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#organization_id IamPolicy#organization_id}
   */
   readonly organizationId?: string;
   /**
   * Names of permission sets bound to the rule.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#permission_set_names IamPolicy#permission_set_names}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#permission_set_names IamPolicy#permission_set_names}
   */
   readonly permissionSetNames: string[];
   /**
   * List of project IDs scoped to the rule. Only one of project_ids and organization_id may be set.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy#project_ids IamPolicy#project_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy#project_ids IamPolicy#project_ids}
   */
   readonly projectIds?: string[];
 }
@@ -219,7 +219,7 @@ export class IamPolicyRuleList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy scaleway_iam_policy}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy scaleway_iam_policy}
 */
 export class IamPolicy extends cdktf.TerraformResource {
 
@@ -233,7 +233,7 @@ export class IamPolicy extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/iam_policy scaleway_iam_policy} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_policy scaleway_iam_policy} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -244,7 +244,7 @@ export class IamPolicy extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iam_policy',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

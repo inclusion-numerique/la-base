@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/instance_volume
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInstanceVolumeConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume#id DataScalewayInstanceVolume#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume#id DataScalewayInstanceVolume#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayInstanceVolumeConfig extends cdktf.TerraformMetaArg
   /**
   * The name of the volume
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume#name DataScalewayInstanceVolume#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume#name DataScalewayInstanceVolume#name}
   */
   readonly name?: string;
   /**
   * The ID of the volume
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume#volume_id DataScalewayInstanceVolume#volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume#volume_id DataScalewayInstanceVolume#volume_id}
   */
   readonly volumeId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume#zone DataScalewayInstanceVolume#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume#zone DataScalewayInstanceVolume#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume scaleway_instance_volume}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume scaleway_instance_volume}
 */
 export class DataScalewayInstanceVolume extends cdktf.TerraformDataSource {
 
@@ -49,7 +49,7 @@ export class DataScalewayInstanceVolume extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/instance_volume scaleway_instance_volume} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_volume scaleway_instance_volume} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -60,7 +60,7 @@ export class DataScalewayInstanceVolume extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_volume',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

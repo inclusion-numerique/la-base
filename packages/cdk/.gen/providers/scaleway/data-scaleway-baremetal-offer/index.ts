@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayBaremetalOfferConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#id DataScalewayBaremetalOffer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#id DataScalewayBaremetalOffer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface DataScalewayBaremetalOfferConfig extends cdktf.TerraformMetaArg
   /**
   * Include disabled offers
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#include_disabled DataScalewayBaremetalOffer#include_disabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#include_disabled DataScalewayBaremetalOffer#include_disabled}
   */
   readonly includeDisabled?: boolean | cdktf.IResolvable;
   /**
   * Exact name of the desired offer
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#name DataScalewayBaremetalOffer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#name DataScalewayBaremetalOffer#name}
   */
   readonly name?: string;
   /**
   * ID of the desired offer
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#offer_id DataScalewayBaremetalOffer#offer_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#offer_id DataScalewayBaremetalOffer#offer_id}
   */
   readonly offerId?: string;
   /**
   * Period of subscription the desired offer
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#subscription_period DataScalewayBaremetalOffer#subscription_period}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#subscription_period DataScalewayBaremetalOffer#subscription_period}
   */
   readonly subscriptionPeriod?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer#zone DataScalewayBaremetalOffer#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer#zone DataScalewayBaremetalOffer#zone}
   */
   readonly zone?: string;
 }
@@ -274,7 +274,7 @@ export class DataScalewayBaremetalOfferMemoryList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer scaleway_baremetal_offer}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer scaleway_baremetal_offer}
 */
 export class DataScalewayBaremetalOffer extends cdktf.TerraformDataSource {
 
@@ -288,7 +288,7 @@ export class DataScalewayBaremetalOffer extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_offer scaleway_baremetal_offer} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_offer scaleway_baremetal_offer} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -299,7 +299,7 @@ export class DataScalewayBaremetalOffer extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_baremetal_offer',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

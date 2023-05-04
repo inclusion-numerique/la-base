@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/tem_domain
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayTemDomainConfig extends cdktf.TerraformMetaArgument
   /**
   * The ID of the tem domain
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain#domain_id DataScalewayTemDomain#domain_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain#domain_id DataScalewayTemDomain#domain_id}
   */
   readonly domainId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain#id DataScalewayTemDomain#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain#id DataScalewayTemDomain#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayTemDomainConfig extends cdktf.TerraformMetaArgument
   /**
   * The domain name used when sending emails
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain#name DataScalewayTemDomain#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain#name DataScalewayTemDomain#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain#region DataScalewayTemDomain#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain#region DataScalewayTemDomain#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain scaleway_tem_domain}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain scaleway_tem_domain}
 */
 export class DataScalewayTemDomain extends cdktf.TerraformDataSource {
 
@@ -49,7 +49,7 @@ export class DataScalewayTemDomain extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/tem_domain scaleway_tem_domain} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/tem_domain scaleway_tem_domain} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -60,7 +60,7 @@ export class DataScalewayTemDomain extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_tem_domain',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,
@@ -183,6 +183,36 @@ export class DataScalewayTemDomain extends cdktf.TerraformDataSource {
   // revoked_at - computed: true, optional: false, required: false
   public get revokedAt() {
     return this.getStringAttribute('revoked_at');
+  }
+
+  // smtp_host - computed: true, optional: false, required: false
+  public get smtpHost() {
+    return this.getStringAttribute('smtp_host');
+  }
+
+  // smtp_port - computed: true, optional: false, required: false
+  public get smtpPort() {
+    return this.getNumberAttribute('smtp_port');
+  }
+
+  // smtp_port_alternative - computed: true, optional: false, required: false
+  public get smtpPortAlternative() {
+    return this.getNumberAttribute('smtp_port_alternative');
+  }
+
+  // smtp_port_unsecure - computed: true, optional: false, required: false
+  public get smtpPortUnsecure() {
+    return this.getNumberAttribute('smtp_port_unsecure');
+  }
+
+  // smtps_port - computed: true, optional: false, required: false
+  public get smtpsPort() {
+    return this.getNumberAttribute('smtps_port');
+  }
+
+  // smtps_port_alternative - computed: true, optional: false, required: false
+  public get smtpsPortAlternative() {
+    return this.getNumberAttribute('smtps_port_alternative');
   }
 
   // spf_config - computed: true, optional: false, required: false

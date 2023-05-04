@@ -1,3 +1,3 @@
 # `scaleway_cockpit`
 
-Refer to the Terraform Registory for docs: [`scaleway_cockpit`](https://www.terraform.io/docs/providers/scaleway/r/cockpit).
+Refer to the Terraform Registory for docs: [`scaleway_cockpit`](https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/cockpit).

@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/instance_image
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayInstanceImageConfig extends cdktf.TerraformMetaArgu
   /**
   * Architecture of the desired image
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#architecture DataScalewayInstanceImage#architecture}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#architecture DataScalewayInstanceImage#architecture}
   */
   readonly architecture?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#id DataScalewayInstanceImage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#id DataScalewayInstanceImage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,37 +23,37 @@ export interface DataScalewayInstanceImageConfig extends cdktf.TerraformMetaArgu
   /**
   * ID of the desired image
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#image_id DataScalewayInstanceImage#image_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#image_id DataScalewayInstanceImage#image_id}
   */
   readonly imageId?: string;
   /**
   * Select most recent image if multiple match
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#latest DataScalewayInstanceImage#latest}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#latest DataScalewayInstanceImage#latest}
   */
   readonly latest?: boolean | cdktf.IResolvable;
   /**
   * Exact name of the desired image
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#name DataScalewayInstanceImage#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#name DataScalewayInstanceImage#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#project_id DataScalewayInstanceImage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#project_id DataScalewayInstanceImage#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image#zone DataScalewayInstanceImage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image#zone DataScalewayInstanceImage#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image scaleway_instance_image}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image scaleway_instance_image}
 */
 export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
 
@@ -67,7 +67,7 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/instance_image scaleway_instance_image} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/instance_image scaleway_instance_image} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -78,7 +78,7 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_image',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface RdbPrivilegeConfig extends cdktf.TerraformMetaArguments {
   /**
   * Database name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#database_name RdbPrivilege#database_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#database_name RdbPrivilege#database_name}
   */
   readonly databaseName: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#id RdbPrivilege#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#id RdbPrivilege#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,58 +23,58 @@ export interface RdbPrivilegeConfig extends cdktf.TerraformMetaArguments {
   /**
   * Instance on which the database is created
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#instance_id RdbPrivilege#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#instance_id RdbPrivilege#instance_id}
   */
   readonly instanceId: string;
   /**
   * Privilege
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#permission RdbPrivilege#permission}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#permission RdbPrivilege#permission}
   */
   readonly permission: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#region RdbPrivilege#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#region RdbPrivilege#region}
   */
   readonly region?: string;
   /**
   * User name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#user_name RdbPrivilege#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#user_name RdbPrivilege#user_name}
   */
   readonly userName: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#timeouts RdbPrivilege#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#timeouts RdbPrivilege#timeouts}
   */
   readonly timeouts?: RdbPrivilegeTimeouts;
 }
 export interface RdbPrivilegeTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#create RdbPrivilege#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#create RdbPrivilege#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#default RdbPrivilege#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#default RdbPrivilege#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#delete RdbPrivilege#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#delete RdbPrivilege#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#read RdbPrivilege#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#read RdbPrivilege#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege#update RdbPrivilege#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege#update RdbPrivilege#update}
   */
   readonly update?: string;
 }
 
-export function rdbPrivilegeTimeoutsToTerraform(struct?: RdbPrivilegeTimeoutsOutputReference | RdbPrivilegeTimeouts | cdktf.IResolvable): any {
+export function rdbPrivilegeTimeoutsToTerraform(struct?: RdbPrivilegeTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -97,7 +97,7 @@ export class RdbPrivilegeTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): RdbPrivilegeTimeouts | cdktf.IResolvable | undefined {
@@ -236,7 +236,7 @@ export class RdbPrivilegeTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege scaleway_rdb_privilege}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege scaleway_rdb_privilege}
 */
 export class RdbPrivilege extends cdktf.TerraformResource {
 
@@ -250,7 +250,7 @@ export class RdbPrivilege extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/rdb_privilege scaleway_rdb_privilege} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/rdb_privilege scaleway_rdb_privilege} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -261,7 +261,7 @@ export class RdbPrivilege extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_rdb_privilege',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

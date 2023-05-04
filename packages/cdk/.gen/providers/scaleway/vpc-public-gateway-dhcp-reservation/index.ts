@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface VpcPublicGatewayDhcpReservationConfig extends cdktf.TerraformMe
   /**
   * The ID of the owning GatewayNetwork (UUID format).
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#gateway_network_id VpcPublicGatewayDhcpReservation#gateway_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#gateway_network_id VpcPublicGatewayDhcpReservation#gateway_network_id}
   */
   readonly gatewayNetworkId: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#id VpcPublicGatewayDhcpReservation#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#id VpcPublicGatewayDhcpReservation#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,48 +23,48 @@ export interface VpcPublicGatewayDhcpReservationConfig extends cdktf.TerraformMe
   /**
   * The IP address to give to the machine (IPv4 address).
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#ip_address VpcPublicGatewayDhcpReservation#ip_address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#ip_address VpcPublicGatewayDhcpReservation#ip_address}
   */
   readonly ipAddress: string;
   /**
   * The MAC address to give a static entry to.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#mac_address VpcPublicGatewayDhcpReservation#mac_address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#mac_address VpcPublicGatewayDhcpReservation#mac_address}
   */
   readonly macAddress: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#zone VpcPublicGatewayDhcpReservation#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#zone VpcPublicGatewayDhcpReservation#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#timeouts VpcPublicGatewayDhcpReservation#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#timeouts VpcPublicGatewayDhcpReservation#timeouts}
   */
   readonly timeouts?: VpcPublicGatewayDhcpReservationTimeouts;
 }
 export interface VpcPublicGatewayDhcpReservationTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#create VpcPublicGatewayDhcpReservation#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#create VpcPublicGatewayDhcpReservation#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#default VpcPublicGatewayDhcpReservation#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#default VpcPublicGatewayDhcpReservation#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#delete VpcPublicGatewayDhcpReservation#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#delete VpcPublicGatewayDhcpReservation#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation#update VpcPublicGatewayDhcpReservation#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation#update VpcPublicGatewayDhcpReservation#update}
   */
   readonly update?: string;
 }
 
-export function vpcPublicGatewayDhcpReservationTimeoutsToTerraform(struct?: VpcPublicGatewayDhcpReservationTimeoutsOutputReference | VpcPublicGatewayDhcpReservationTimeouts | cdktf.IResolvable): any {
+export function vpcPublicGatewayDhcpReservationTimeoutsToTerraform(struct?: VpcPublicGatewayDhcpReservationTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -86,7 +86,7 @@ export class VpcPublicGatewayDhcpReservationTimeoutsOutputReference extends cdkt
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): VpcPublicGatewayDhcpReservationTimeouts | cdktf.IResolvable | undefined {
@@ -203,7 +203,7 @@ export class VpcPublicGatewayDhcpReservationTimeoutsOutputReference extends cdkt
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation}
 */
 export class VpcPublicGatewayDhcpReservation extends cdktf.TerraformResource {
 
@@ -217,7 +217,7 @@ export class VpcPublicGatewayDhcpReservation extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -228,7 +228,7 @@ export class VpcPublicGatewayDhcpReservation extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_public_gateway_dhcp_reservation',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,
