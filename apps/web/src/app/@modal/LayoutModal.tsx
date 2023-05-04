@@ -3,7 +3,7 @@ import CloseModalButton from '@app/web/app/@modal/CloseModalButton'
 
 const LayoutModal = ({ children }: PropsWithChildren) => (
   <dialog
-    id="modal"
+    id="layout-modal"
     aria-labelledby="modal-title"
     className="fr-modal fr-modal--opened"
     aria-modal="true"

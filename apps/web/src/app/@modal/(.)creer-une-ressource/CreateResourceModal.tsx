@@ -14,9 +14,9 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import ResourceBaseRichRadio from '@app/web/app/@modal/(.)creer-une-ressource/ResourceBaseRichRadio'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
 
 const titleInfoText = (title: string | null) =>
   `${title?.length ?? 0}/${createResourceTitleMaxLength} caractères`
@@ -54,6 +54,10 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
           confirmLabel: 'Continuer',
           canCreate: false,
         }
+  const modalTitle =
+    step === 0
+      ? 'Créer une nouvelle ressource'
+      : 'Où souhaitez-vous ajouter cette ressource ?'
 
   const onSubmit = async (data: CreateResource) => {
     if (!canCreate) {
@@ -74,42 +78,40 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
   return (
     <LayoutModal>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {step === 0 ? (
-          <div className="fr-modal__content">
-            <h1 id="modal-title" className="fr-modal__title fr-mb-8v">
-              Créer une nouvelle ressource
-            </h1>
-            <InputFormField
-              control={control}
-              path="title"
-              label="Titre de la ressource"
-              disabled={disabled}
-              infoText={titleInfoText}
-            />
-            <InputFormField
-              control={control}
-              path="description"
-              type="textarea"
-              rows={5}
-              label="Description courte de la ressource"
-              hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
-              disabled={disabled}
-              infoText={descriptionInfoText}
-            />
-          </div>
-        ) : (
-          <div className="fr-modal__content">
-            <h1 id="modal-title" className="fr-modal__title fr-mb-8v">
-              Où souhaitez-vous ajouter cette ressource&nbsp;?
-            </h1>
+        <div className="fr-modal__content">
+          <h1 id="modal-title" className="fr-modal__title fr-mb-8v">
+            {modalTitle}
+          </h1>
+          {step === 0 ? (
+            <>
+              <InputFormField
+                control={control}
+                path="title"
+                label="Titre de la ressource"
+                disabled={disabled}
+                infoText={titleInfoText}
+              />
+              <InputFormField
+                control={control}
+                path="description"
+                type="textarea"
+                rows={5}
+                label="Description courte de la ressource"
+                hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
+                disabled={disabled}
+                infoText={descriptionInfoText}
+              />
+            </>
+          ) : (
             <ResourceBaseRichRadio
               control={control}
               path="baseId"
               user={user}
               disabled={disabled}
             />
-          </div>
-        )}
+          )}
+        </div>
+
         <div className="fr-modal__footer">
           <ul className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
             <li>

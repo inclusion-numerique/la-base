@@ -3,16 +3,14 @@ import z from 'zod'
 export const createResourceTitleMaxLength = 100
 export const createResourceDescriptionMaxLength = 560
 
-export const createResourceValidationTitle = z
-  .string({ required_error: 'Veuillez renseigner le titre' })
-  .trim()
-  .max(
-    createResourceTitleMaxLength,
-    `Le titre ne doit pas dépasser ${createResourceTitleMaxLength} caractères`,
-  )
-
 export const CreateResourceValidation = z.object({
-  title: createResourceValidationTitle,
+  title: z
+    .string({ required_error: 'Veuillez renseigner le titre' })
+    .trim()
+    .max(
+      createResourceTitleMaxLength,
+      `Le titre ne doit pas dépasser ${createResourceTitleMaxLength} caractères`,
+    ),
   description: z
     .string({ required_error: 'Veuillez renseigner une description' })
     .trim()
