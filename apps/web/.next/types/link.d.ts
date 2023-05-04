@@ -31,19 +31,22 @@ declare namespace __next_route_internal_types__ {
     | `/`
     | `/creer-un-compte`
     | `/connexion`
-    | `/connexion/erreur`
     | `/connexion/verification`
+    | `/connexion/erreur`
+    | `/creer-un-compte`
     | `/deconnexion`
     | `/403`
     | `/404`
     | `/401`
     | `/500`
-    | `/accessibilite`
     | `/bases`
+    | `/accessibilite`
     | `/confidentialite`
     | `/mentions-legales`
     | `/ressources`
+    | `/creer-une-ressource`
     | `/robots.txt`
+    | `/(.)creer-une-ressource`
     | `/api/health`
     | `/api/file/get`
     | `/api/file/upload`

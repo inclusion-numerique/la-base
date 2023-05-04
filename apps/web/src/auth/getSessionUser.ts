@@ -6,6 +6,7 @@ import {
   sessionCookie,
 } from '@app/web/auth/getSessionTokenFromCookies'
 import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
+import { cache } from 'react'
 
 export const getSessionToken = (): string | null => {
   const allCookies = cookies()
@@ -26,6 +27,11 @@ export const getAuthenticatedSessionToken = (): string => {
   return token
 }
 
+// User session is cached per request https://beta.nextjs.org/docs/data-fetching/caching#per-request-caching
+const cachedGetSessionUserFromSessionToken = cache(
+  getSessionUserFromSessionToken,
+)
+
 export const getSessionUser = async (): Promise<SessionUser | null> => {
   const sessionToken = getSessionToken()
 
@@ -33,7 +39,7 @@ export const getSessionUser = async (): Promise<SessionUser | null> => {
     return null
   }
 
-  return getSessionUserFromSessionToken(sessionToken)
+  return cachedGetSessionUserFromSessionToken(sessionToken)
 }
 
 export const getAuthenticatedSessionUser = () =>

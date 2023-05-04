@@ -1,12 +1,10 @@
 import { prismaClient } from '@app/web/prismaClient'
 import * as uuid from 'uuid'
 
-export const createUser = async (user: {
-  email: string
-  firstName: string
-  lastName: string
-  name: string
-}) => {
+export type CreateUserInput = Parameters<
+  typeof prismaClient.user.create
+>[0]['data']
+export const createUser = async (user: CreateUserInput) => {
   const created = await prismaClient.user.create({ data: user })
 
   return created

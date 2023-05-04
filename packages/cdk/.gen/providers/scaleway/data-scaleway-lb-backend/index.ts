@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/lb_backend
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbBackendConfig extends cdktf.TerraformMetaArgument
   /**
   * The ID of the backend
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend#backend_id DataScalewayLbBackend#backend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend#backend_id DataScalewayLbBackend#backend_id}
   */
   readonly backendId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend#id DataScalewayLbBackend#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend#id DataScalewayLbBackend#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,13 @@ export interface DataScalewayLbBackendConfig extends cdktf.TerraformMetaArgument
   /**
   * The load-balancer ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend#lb_id DataScalewayLbBackend#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend#lb_id DataScalewayLbBackend#lb_id}
   */
   readonly lbId?: string;
   /**
   * The name of the backend
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend#name DataScalewayLbBackend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend#name DataScalewayLbBackend#name}
   */
   readonly name?: string;
 }
@@ -257,7 +257,7 @@ export class DataScalewayLbBackendHealthCheckTcpList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend scaleway_lb_backend}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend scaleway_lb_backend}
 */
 export class DataScalewayLbBackend extends cdktf.TerraformDataSource {
 
@@ -271,7 +271,7 @@ export class DataScalewayLbBackend extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/lb_backend scaleway_lb_backend} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend scaleway_lb_backend} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -282,7 +282,7 @@ export class DataScalewayLbBackend extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_backend',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

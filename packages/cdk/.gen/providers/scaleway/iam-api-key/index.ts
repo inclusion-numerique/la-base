@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/iam_api_key
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,29 +10,29 @@ export interface IamApiKeyConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of the application attached to the api key
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#application_id IamApiKey#application_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#application_id IamApiKey#application_id}
   */
   readonly applicationId?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#default_project_id IamApiKey#default_project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#default_project_id IamApiKey#default_project_id}
   */
   readonly defaultProjectId?: string;
   /**
   * The description of the iam api key
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#description IamApiKey#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#description IamApiKey#description}
   */
   readonly description?: string;
   /**
   * The date and time of the expiration of the iam api key. Cannot be changed afterwards
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#expires_at IamApiKey#expires_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#expires_at IamApiKey#expires_at}
   */
   readonly expiresAt?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#id IamApiKey#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#id IamApiKey#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -41,13 +41,13 @@ export interface IamApiKeyConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of the user attached to the api key
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key#user_id IamApiKey#user_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key#user_id IamApiKey#user_id}
   */
   readonly userId?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key scaleway_iam_api_key}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key scaleway_iam_api_key}
 */
 export class IamApiKey extends cdktf.TerraformResource {
 
@@ -61,7 +61,7 @@ export class IamApiKey extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/iam_api_key scaleway_iam_api_key} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iam_api_key scaleway_iam_api_key} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -72,7 +72,7 @@ export class IamApiKey extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iam_api_key',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

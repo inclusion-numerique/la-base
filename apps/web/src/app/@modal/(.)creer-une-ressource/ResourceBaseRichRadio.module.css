@@ -1,0 +1,11 @@
+.radio {
+  label {
+    padding-right: 1.5rem !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    :first-child {
+      flex: 1;
+    }
+  }
+}

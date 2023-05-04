@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/baremetal_option
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayBaremetalOptionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option#id DataScalewayBaremetalOption#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option#id DataScalewayBaremetalOption#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayBaremetalOptionConfig extends cdktf.TerraformMetaAr
   /**
   * Exact label of the desired option
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option#name DataScalewayBaremetalOption#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option#name DataScalewayBaremetalOption#name}
   */
   readonly name?: string;
   /**
   * The ID of the option
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option#option_id DataScalewayBaremetalOption#option_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option#option_id DataScalewayBaremetalOption#option_id}
   */
   readonly optionId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option#zone DataScalewayBaremetalOption#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option#zone DataScalewayBaremetalOption#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option scaleway_baremetal_option}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option scaleway_baremetal_option}
 */
 export class DataScalewayBaremetalOption extends cdktf.TerraformDataSource {
 
@@ -49,7 +49,7 @@ export class DataScalewayBaremetalOption extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/baremetal_option scaleway_baremetal_option} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/baremetal_option scaleway_baremetal_option} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -60,7 +60,7 @@ export class DataScalewayBaremetalOption extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_baremetal_option',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

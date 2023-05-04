@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/d/lb_acls
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbAclsConfig extends cdktf.TerraformMetaArguments {
   /**
   * ACLs with a frontend id like it are listed.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls#frontend_id DataScalewayLbAcls#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls#frontend_id DataScalewayLbAcls#frontend_id}
   */
   readonly frontendId: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls#id DataScalewayLbAcls#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls#id DataScalewayLbAcls#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,21 +23,95 @@ export interface DataScalewayLbAclsConfig extends cdktf.TerraformMetaArguments {
   /**
   * ACLs with a name like it are listed.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls#name DataScalewayLbAcls#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls#name DataScalewayLbAcls#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls#project_id DataScalewayLbAcls#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls#project_id DataScalewayLbAcls#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls#zone DataScalewayLbAcls#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls#zone DataScalewayLbAcls#zone}
   */
   readonly zone?: string;
+}
+export interface DataScalewayLbAclsAclsActionRedirect {
+}
+
+export function dataScalewayLbAclsAclsActionRedirectToTerraform(struct?: DataScalewayLbAclsAclsActionRedirect): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+export class DataScalewayLbAclsAclsActionRedirectOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayLbAclsAclsActionRedirect | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayLbAclsAclsActionRedirect | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // code - computed: true, optional: false, required: false
+  public get code() {
+    return this.getNumberAttribute('code');
+  }
+
+  // target - computed: true, optional: false, required: false
+  public get target() {
+    return this.getStringAttribute('target');
+  }
+
+  // type - computed: true, optional: false, required: false
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+}
+
+export class DataScalewayLbAclsAclsActionRedirectList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayLbAclsAclsActionRedirectOutputReference {
+    return new DataScalewayLbAclsAclsActionRedirectOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface DataScalewayLbAclsAclsAction {
 }
@@ -77,6 +151,12 @@ export class DataScalewayLbAclsAclsActionOutputReference extends cdktf.ComplexOb
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
     }
+  }
+
+  // redirect - computed: true, optional: false, required: false
+  private _redirect = new DataScalewayLbAclsAclsActionRedirectList(this, "redirect", false);
+  public get redirect() {
+    return this._redirect;
   }
 
   // type - computed: true, optional: false, required: false
@@ -295,7 +375,7 @@ export class DataScalewayLbAclsAclsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls scaleway_lb_acls}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls scaleway_lb_acls}
 */
 export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
 
@@ -309,7 +389,7 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/d/lb_acls scaleway_lb_acls} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_acls scaleway_lb_acls} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -320,7 +400,7 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_acls',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

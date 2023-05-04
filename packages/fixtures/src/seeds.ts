@@ -15,10 +15,22 @@ function myParseInt(value: string) {
 }
 
 const deleteAll = async (transaction: TransactionClient) => {
-  await transaction.content.deleteMany()
-  await transaction.resource.deleteMany()
-  await transaction.base.deleteMany()
-  await transaction.user.deleteMany()
+  const tables = await transaction.$queryRaw<
+    { table_name: string }[]
+  >`SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'public'
+      AND table_type = 'BASE TABLE'
+      AND table_name != '_prisma_migrations' 
+      AND table_name != '_prisma_migrations_lock'`
+
+  await transaction.$queryRawUnsafe(
+    `TRUNCATE TABLE "${tables
+      .map(({ table_name }) => table_name)
+      .join('", "')}" CASCADE`,
+  )
+
+  return tables.map(({ table_name }) => table_name)
 }
 
 const seed = async (transaction: TransactionClient, random?: number) => {

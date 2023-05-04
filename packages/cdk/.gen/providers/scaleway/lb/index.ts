@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/lb
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface LbConfig extends cdktf.TerraformMetaArguments {
   /**
   * The description of the lb
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#description Lb#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#description Lb#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#id Lb#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#id Lb#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,61 +23,61 @@ export interface LbConfig extends cdktf.TerraformMetaArguments {
   /**
   * The load-balance public IP ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#ip_id Lb#ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#ip_id Lb#ip_id}
   */
   readonly ipId: string;
   /**
   * Name of the lb
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#name Lb#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#name Lb#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#project_id Lb#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#project_id Lb#project_id}
   */
   readonly projectId?: string;
   /**
   * Release the IPs related to this load-balancer
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#release_ip Lb#release_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#release_ip Lb#release_ip}
   */
   readonly releaseIp?: boolean | cdktf.IResolvable;
   /**
   * Enforces minimal SSL version (in SSL/TLS offloading context)
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#ssl_compatibility_level Lb#ssl_compatibility_level}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#ssl_compatibility_level Lb#ssl_compatibility_level}
   */
   readonly sslCompatibilityLevel?: string;
   /**
   * Array of tags to associate with the load-balancer
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#tags Lb#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#tags Lb#tags}
   */
   readonly tags?: string[];
   /**
   * The type of load-balancer you want to create
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#type Lb#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#type Lb#type}
   */
   readonly type: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#zone Lb#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#zone Lb#zone}
   */
   readonly zone?: string;
   /**
   * private_network block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#private_network Lb#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#private_network Lb#private_network}
   */
   readonly privateNetwork?: LbPrivateNetwork[] | cdktf.IResolvable;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#timeouts Lb#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#timeouts Lb#timeouts}
   */
   readonly timeouts?: LbTimeouts;
 }
@@ -85,25 +85,25 @@ export interface LbPrivateNetwork {
   /**
   * Set to true if you want to let DHCP assign IP addresses
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#dhcp_config Lb#dhcp_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#dhcp_config Lb#dhcp_config}
   */
   readonly dhcpConfig?: boolean | cdktf.IResolvable;
   /**
   * The Private Network ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#private_network_id Lb#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#private_network_id Lb#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#static_config Lb#static_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#static_config Lb#static_config}
   */
   readonly staticConfig?: string[];
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#zone Lb#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#zone Lb#zone}
   */
   readonly zone?: string;
 }
@@ -271,28 +271,28 @@ export class LbPrivateNetworkList extends cdktf.ComplexList {
 }
 export interface LbTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#create Lb#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#create Lb#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#default Lb#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#default Lb#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#delete Lb#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#delete Lb#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#read Lb#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#read Lb#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb#update Lb#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb#update Lb#update}
   */
   readonly update?: string;
 }
 
-export function lbTimeoutsToTerraform(struct?: LbTimeoutsOutputReference | LbTimeouts | cdktf.IResolvable): any {
+export function lbTimeoutsToTerraform(struct?: LbTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -315,7 +315,7 @@ export class LbTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): LbTimeouts | cdktf.IResolvable | undefined {
@@ -454,7 +454,7 @@ export class LbTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/lb scaleway_lb}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb scaleway_lb}
 */
 export class Lb extends cdktf.TerraformResource {
 
@@ -468,7 +468,7 @@ export class Lb extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/lb scaleway_lb} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb scaleway_lb} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -479,7 +479,7 @@ export class Lb extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

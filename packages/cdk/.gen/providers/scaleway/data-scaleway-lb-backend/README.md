@@ -1,3 +1,3 @@
 # `data_scaleway_lb_backend`
 
-Refer to the Terraform Registory for docs: [`data_scaleway_lb_backend`](https://www.terraform.io/docs/providers/scaleway/d/lb_backend).
+Refer to the Terraform Registory for docs: [`data_scaleway_lb_backend`](https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_backend).

@@ -77,6 +77,7 @@ export * as vpcPublicGatewayIpReverseDns from './vpc-public-gateway-ip-reverse-d
 export * as vpcPublicGatewayPatRule from './vpc-public-gateway-pat-rule';
 export * as dataScalewayAccountProject from './data-scaleway-account-project';
 export * as dataScalewayAccountSshKey from './data-scaleway-account-ssh-key';
+export * as dataScalewayAvailabilityZones from './data-scaleway-availability-zones';
 export * as dataScalewayBaremetalOffer from './data-scaleway-baremetal-offer';
 export * as dataScalewayBaremetalOption from './data-scaleway-baremetal-option';
 export * as dataScalewayBaremetalOs from './data-scaleway-baremetal-os';

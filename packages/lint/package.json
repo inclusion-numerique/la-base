@@ -12,7 +12,7 @@
     "node": "^18.15"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.21.3",
+    "@babel/eslint-parser": "^7.21.8",
     "@next/eslint-plugin-next": "^13.3.4",
     "@types/node": "^18.16.3",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
@@ -38,7 +38,7 @@
     "eslint-plugin-unicorn": "46.0.0",
     "jest": "^29.5.0",
     "prettier": "^2.8.8",
-    "stylelint": "^15.6.0",
+    "stylelint": "^15.6.1",
     "stylelint-config-standard": "^33.0.0",
     "typescript": "^5.0.4"
   }

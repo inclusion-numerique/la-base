@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface ObjectBucketLockConfigurationConfig extends cdktf.TerraformMeta
   /**
   * The bucket name.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#bucket ObjectBucketLockConfiguration#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#bucket ObjectBucketLockConfiguration#bucket}
   */
   readonly bucket: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#id ObjectBucketLockConfiguration#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#id ObjectBucketLockConfiguration#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface ObjectBucketLockConfigurationConfig extends cdktf.TerraformMeta
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#project_id ObjectBucketLockConfiguration#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#project_id ObjectBucketLockConfiguration#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#region ObjectBucketLockConfiguration#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#region ObjectBucketLockConfiguration#region}
   */
   readonly region?: string;
   /**
   * rule block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#rule ObjectBucketLockConfiguration#rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#rule ObjectBucketLockConfiguration#rule}
   */
   readonly rule: ObjectBucketLockConfigurationRule;
 }
@@ -43,19 +43,19 @@ export interface ObjectBucketLockConfigurationRuleDefaultRetention {
   /**
   * The number of days that you want to specify for the default retention period.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#days ObjectBucketLockConfiguration#days}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#days ObjectBucketLockConfiguration#days}
   */
   readonly days?: number;
   /**
   * The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#mode ObjectBucketLockConfiguration#mode}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#mode ObjectBucketLockConfiguration#mode}
   */
   readonly mode: string;
   /**
   * The number of years that you want to specify for the default retention period.
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#years ObjectBucketLockConfiguration#years}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#years ObjectBucketLockConfiguration#years}
   */
   readonly years?: number;
 }
@@ -165,7 +165,7 @@ export interface ObjectBucketLockConfigurationRule {
   /**
   * default_retention block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration#default_retention ObjectBucketLockConfiguration#default_retention}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration#default_retention ObjectBucketLockConfiguration#default_retention}
   */
   readonly defaultRetention: ObjectBucketLockConfigurationRuleDefaultRetention;
 }
@@ -227,7 +227,7 @@ export class ObjectBucketLockConfigurationRuleOutputReference extends cdktf.Comp
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration scaleway_object_bucket_lock_configuration}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration scaleway_object_bucket_lock_configuration}
 */
 export class ObjectBucketLockConfiguration extends cdktf.TerraformResource {
 
@@ -241,7 +241,7 @@ export class ObjectBucketLockConfiguration extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/object_bucket_lock_configuration scaleway_object_bucket_lock_configuration} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_lock_configuration scaleway_object_bucket_lock_configuration} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -252,7 +252,7 @@ export class ObjectBucketLockConfiguration extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_object_bucket_lock_configuration',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

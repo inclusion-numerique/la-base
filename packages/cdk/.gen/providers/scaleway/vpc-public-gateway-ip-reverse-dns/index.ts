@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface VpcPublicGatewayIpReverseDnsConfig extends cdktf.TerraformMetaA
   /**
   * The IP ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#gateway_ip_id VpcPublicGatewayIpReverseDns#gateway_ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#gateway_ip_id VpcPublicGatewayIpReverseDns#gateway_ip_id}
   */
   readonly gatewayIpId: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#id VpcPublicGatewayIpReverseDns#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#id VpcPublicGatewayIpReverseDns#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,38 +23,38 @@ export interface VpcPublicGatewayIpReverseDnsConfig extends cdktf.TerraformMetaA
   /**
   * The reverse DNS for this IP
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#reverse VpcPublicGatewayIpReverseDns#reverse}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#reverse VpcPublicGatewayIpReverseDns#reverse}
   */
   readonly reverse: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#zone VpcPublicGatewayIpReverseDns#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#zone VpcPublicGatewayIpReverseDns#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#timeouts VpcPublicGatewayIpReverseDns#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#timeouts VpcPublicGatewayIpReverseDns#timeouts}
   */
   readonly timeouts?: VpcPublicGatewayIpReverseDnsTimeouts;
 }
 export interface VpcPublicGatewayIpReverseDnsTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#create VpcPublicGatewayIpReverseDns#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#create VpcPublicGatewayIpReverseDns#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#default VpcPublicGatewayIpReverseDns#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#default VpcPublicGatewayIpReverseDns#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns#update VpcPublicGatewayIpReverseDns#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns#update VpcPublicGatewayIpReverseDns#update}
   */
   readonly update?: string;
 }
 
-export function vpcPublicGatewayIpReverseDnsTimeoutsToTerraform(struct?: VpcPublicGatewayIpReverseDnsTimeoutsOutputReference | VpcPublicGatewayIpReverseDnsTimeouts | cdktf.IResolvable): any {
+export function vpcPublicGatewayIpReverseDnsTimeoutsToTerraform(struct?: VpcPublicGatewayIpReverseDnsTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -75,7 +75,7 @@ export class VpcPublicGatewayIpReverseDnsTimeoutsOutputReference extends cdktf.C
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): VpcPublicGatewayIpReverseDnsTimeouts | cdktf.IResolvable | undefined {
@@ -170,7 +170,7 @@ export class VpcPublicGatewayIpReverseDnsTimeoutsOutputReference extends cdktf.C
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns scaleway_vpc_public_gateway_ip_reverse_dns}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns scaleway_vpc_public_gateway_ip_reverse_dns}
 */
 export class VpcPublicGatewayIpReverseDns extends cdktf.TerraformResource {
 
@@ -184,7 +184,7 @@ export class VpcPublicGatewayIpReverseDns extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/vpc_public_gateway_ip_reverse_dns scaleway_vpc_public_gateway_ip_reverse_dns} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/vpc_public_gateway_ip_reverse_dns scaleway_vpc_public_gateway_ip_reverse_dns} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -195,7 +195,7 @@ export class VpcPublicGatewayIpReverseDns extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_public_gateway_ip_reverse_dns',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,

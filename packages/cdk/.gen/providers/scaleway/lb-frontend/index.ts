@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/scaleway/r/lb_frontend
+// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface LbFrontendConfig extends cdktf.TerraformMetaArguments {
   /**
   * The load-balancer backend ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#backend_id LbFrontend#backend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#backend_id LbFrontend#backend_id}
   */
   readonly backendId: string;
   /**
   * Collection of Certificate IDs related to the load balancer and domain
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#certificate_ids LbFrontend#certificate_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#certificate_ids LbFrontend#certificate_ids}
   */
   readonly certificateIds?: string[];
   /**
   * Activates HTTP/3 protocol
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#enable_http3 LbFrontend#enable_http3}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#enable_http3 LbFrontend#enable_http3}
   */
   readonly enableHttp3?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#id LbFrontend#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#id LbFrontend#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,47 +35,210 @@ export interface LbFrontendConfig extends cdktf.TerraformMetaArguments {
   /**
   * TCP port to listen on the front side
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#inbound_port LbFrontend#inbound_port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#inbound_port LbFrontend#inbound_port}
   */
   readonly inboundPort: number;
   /**
   * The load-balancer ID
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#lb_id LbFrontend#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#lb_id LbFrontend#lb_id}
   */
   readonly lbId: string;
   /**
   * The name of the frontend
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#name LbFrontend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#name LbFrontend#name}
   */
   readonly name?: string;
   /**
   * Set the maximum inactivity time on the client side
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#timeout_client LbFrontend#timeout_client}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#timeout_client LbFrontend#timeout_client}
   */
   readonly timeoutClient?: string;
   /**
   * acl block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#acl LbFrontend#acl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#acl LbFrontend#acl}
   */
   readonly acl?: LbFrontendAcl[] | cdktf.IResolvable;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#timeouts LbFrontend#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#timeouts LbFrontend#timeouts}
   */
   readonly timeouts?: LbFrontendTimeouts;
+}
+export interface LbFrontendAclActionRedirect {
+  /**
+  * The HTTP redirect code to use
+  * 
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#code LbFrontend#code}
+  */
+  readonly code?: number;
+  /**
+  * An URL can be used in case of a location redirect 
+  * 
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#target LbFrontend#target}
+  */
+  readonly target?: string;
+  /**
+  * The redirect type
+  * 
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#type LbFrontend#type}
+  */
+  readonly type?: string;
+}
+
+export function lbFrontendAclActionRedirectToTerraform(struct?: LbFrontendAclActionRedirect | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    code: cdktf.numberToTerraform(struct!.code),
+    target: cdktf.stringToTerraform(struct!.target),
+    type: cdktf.stringToTerraform(struct!.type),
+  }
+}
+
+export class LbFrontendAclActionRedirectOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): LbFrontendAclActionRedirect | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._code !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.code = this._code;
+    }
+    if (this._target !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.target = this._target;
+    }
+    if (this._type !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.type = this._type;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: LbFrontendAclActionRedirect | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._code = undefined;
+      this._target = undefined;
+      this._type = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._code = value.code;
+      this._target = value.target;
+      this._type = value.type;
+    }
+  }
+
+  // code - computed: false, optional: true, required: false
+  private _code?: number; 
+  public get code() {
+    return this.getNumberAttribute('code');
+  }
+  public set code(value: number) {
+    this._code = value;
+  }
+  public resetCode() {
+    this._code = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get codeInput() {
+    return this._code;
+  }
+
+  // target - computed: false, optional: true, required: false
+  private _target?: string; 
+  public get target() {
+    return this.getStringAttribute('target');
+  }
+  public set target(value: string) {
+    this._target = value;
+  }
+  public resetTarget() {
+    this._target = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetInput() {
+    return this._target;
+  }
+
+  // type - computed: false, optional: true, required: false
+  private _type?: string; 
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+  public resetType() {
+    this._type = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get typeInput() {
+    return this._type;
+  }
+}
+
+export class LbFrontendAclActionRedirectList extends cdktf.ComplexList {
+  public internalValue? : LbFrontendAclActionRedirect[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): LbFrontendAclActionRedirectOutputReference {
+    return new LbFrontendAclActionRedirectOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface LbFrontendAclAction {
   /**
   * The action type
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#type LbFrontend#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#type LbFrontend#type}
   */
   readonly type: string;
+  /**
+  * redirect block
+  * 
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#redirect LbFrontend#redirect}
+  */
+  readonly redirect?: LbFrontendAclActionRedirect[] | cdktf.IResolvable;
 }
 
 export function lbFrontendAclActionToTerraform(struct?: LbFrontendAclActionOutputReference | LbFrontendAclAction): any {
@@ -85,6 +248,7 @@ export function lbFrontendAclActionToTerraform(struct?: LbFrontendAclActionOutpu
   }
   return {
     type: cdktf.stringToTerraform(struct!.type),
+    redirect: cdktf.listMapper(lbFrontendAclActionRedirectToTerraform, true)(struct!.redirect),
   }
 }
 
@@ -106,6 +270,10 @@ export class LbFrontendAclActionOutputReference extends cdktf.ComplexObject {
       hasAnyValues = true;
       internalValueResult.type = this._type;
     }
+    if (this._redirect?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.redirect = this._redirect?.internalValue;
+    }
     return hasAnyValues ? internalValueResult : undefined;
   }
 
@@ -113,10 +281,12 @@ export class LbFrontendAclActionOutputReference extends cdktf.ComplexObject {
     if (value === undefined) {
       this.isEmptyObject = false;
       this._type = undefined;
+      this._redirect.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._type = value.type;
+      this._redirect.internalValue = value.redirect;
     }
   }
 
@@ -132,36 +302,52 @@ export class LbFrontendAclActionOutputReference extends cdktf.ComplexObject {
   public get typeInput() {
     return this._type;
   }
+
+  // redirect - computed: false, optional: true, required: false
+  private _redirect = new LbFrontendAclActionRedirectList(this, "redirect", false);
+  public get redirect() {
+    return this._redirect;
+  }
+  public putRedirect(value: LbFrontendAclActionRedirect[] | cdktf.IResolvable) {
+    this._redirect.internalValue = value;
+  }
+  public resetRedirect() {
+    this._redirect.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get redirectInput() {
+    return this._redirect.internalValue;
+  }
 }
 export interface LbFrontendAclMatch {
   /**
   * The HTTP filter to match
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#http_filter LbFrontend#http_filter}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#http_filter LbFrontend#http_filter}
   */
   readonly httpFilter?: string;
   /**
   * You can use this field with http_header_match acl type to set the header name to filter
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#http_filter_option LbFrontend#http_filter_option}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#http_filter_option LbFrontend#http_filter_option}
   */
   readonly httpFilterOption?: string;
   /**
   * A list of possible values to match for the given HTTP filter
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#http_filter_value LbFrontend#http_filter_value}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#http_filter_value LbFrontend#http_filter_value}
   */
   readonly httpFilterValue?: string[];
   /**
   * If set to true, the condition will be of type "unless"
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#invert LbFrontend#invert}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#invert LbFrontend#invert}
   */
   readonly invert?: boolean | cdktf.IResolvable;
   /**
   * A list of IPs or CIDR v4/v6 addresses of the client of the session to match
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#ip_subnet LbFrontend#ip_subnet}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#ip_subnet LbFrontend#ip_subnet}
   */
   readonly ipSubnet?: string[];
 }
@@ -320,19 +506,19 @@ export interface LbFrontendAcl {
   /**
   * The ACL name
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#name LbFrontend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#name LbFrontend#name}
   */
   readonly name?: string;
   /**
   * action block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#action LbFrontend#action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#action LbFrontend#action}
   */
   readonly action: LbFrontendAclAction;
   /**
   * match block
   * 
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#match LbFrontend#match}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#match LbFrontend#match}
   */
   readonly match: LbFrontendAclMatch;
 }
@@ -469,24 +655,24 @@ export class LbFrontendAclList extends cdktf.ComplexList {
 }
 export interface LbFrontendTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#create LbFrontend#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#create LbFrontend#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#default LbFrontend#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#default LbFrontend#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#delete LbFrontend#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#delete LbFrontend#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend#update LbFrontend#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend#update LbFrontend#update}
   */
   readonly update?: string;
 }
 
-export function lbFrontendTimeoutsToTerraform(struct?: LbFrontendTimeoutsOutputReference | LbFrontendTimeouts | cdktf.IResolvable): any {
+export function lbFrontendTimeoutsToTerraform(struct?: LbFrontendTimeouts | cdktf.IResolvable): any {
   if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
   if (cdktf.isComplexElement(struct)) {
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
@@ -508,7 +694,7 @@ export class LbFrontendTimeoutsOutputReference extends cdktf.ComplexObject {
   * @param terraformAttribute The attribute on the parent resource this class is referencing
   */
   public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
-    super(terraformResource, terraformAttribute, false, 0);
+    super(terraformResource, terraformAttribute, false);
   }
 
   public get internalValue(): LbFrontendTimeouts | cdktf.IResolvable | undefined {
@@ -625,7 +811,7 @@ export class LbFrontendTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend scaleway_lb_frontend}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend scaleway_lb_frontend}
 */
 export class LbFrontend extends cdktf.TerraformResource {
 
@@ -639,7 +825,7 @@ export class LbFrontend extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/scaleway/r/lb_frontend scaleway_lb_frontend} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_frontend scaleway_lb_frontend} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -650,7 +836,7 @@ export class LbFrontend extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_frontend',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.16.3',
+        providerVersion: '2.18.0',
         providerVersionConstraint: '>= 2.16.3'
       },
       provider: config.provider,
