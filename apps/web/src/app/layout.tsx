@@ -47,12 +47,6 @@ const RootLayout = ({
   const nonce = undefined
   return (
     <html lang="fr" data-fr-theme="light" data-fr-scheme="light">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
-        />
-      </head>
       <body>
         <PreloadResources />
         <Dsfr nonce={nonce} />
