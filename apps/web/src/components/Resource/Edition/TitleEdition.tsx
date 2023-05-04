@@ -1,33 +1,47 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { Resource } from '@app/web/server/resources'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import {
+  EditResourceTitle,
+  EditResourceTitleValidation,
+} from '@app/web/server/rpc/resource/editResource'
 import EditableContent from './EditableContent'
 import styles from './Edition.module.css'
+import { ResourceModificationState } from '../enums/ResourceModificationState'
 
-const TitleFormValidation = z.object({
-  title: z.string(),
-  description: z.string(),
-})
-type TitleFormData = z.infer<typeof TitleFormValidation>
-
-const TitleEdition = ({ resource }: { resource: Resource }) => {
+const TitleEdition = ({
+  resource,
+  setModificationState,
+  updateResource,
+}: {
+  resource: Resource
+  setModificationState: Dispatch<
+    SetStateAction<ResourceModificationState | null>
+  >
+  updateResource: (data: EditResourceTitle) => Promise<void>
+}) => {
   const [editionMode, setEditionMode] = useState(false)
-  const form = useForm<TitleFormData>({
-    resolver: zodResolver(TitleFormValidation),
+
+  const { control, handleSubmit, formState } = useForm<EditResourceTitle>({
+    resolver: zodResolver(EditResourceTitleValidation),
     defaultValues: {
+      id: resource.id,
       title: resource.title,
       description: resource.description,
     },
   })
 
-  const onSubmit = (data: TitleFormData) => {
-    console.log(data)
+  const onSubmit = async (data: EditResourceTitle) => {
+    if (formState.isDirty) {
+      await updateResource(data)
+    } else {
+      setModificationState(null)
+    }
     setEditionMode(false)
   }
 
@@ -35,19 +49,22 @@ const TitleEdition = ({ resource }: { resource: Resource }) => {
     <>
       <EditableContent
         showIcon={!editionMode}
-        onEditClick={() => setEditionMode(true)}
+        onEditClick={() => {
+          setModificationState(ResourceModificationState.MODIFIED)
+          setEditionMode(true)
+        }}
       >
         <div className={styles.title}>Titre & description de la ressource</div>
       </EditableContent>
       {editionMode ? (
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <InputFormField
-            control={form.control}
+            control={control}
             path="title"
             label="Titre de la ressource"
           />
           <InputFormField
-            control={form.control}
+            control={control}
             path="description"
             type="textarea"
             label="Description courte de la ressource"

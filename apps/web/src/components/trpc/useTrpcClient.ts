@@ -23,7 +23,10 @@ const clientOptions: CreateTRPCClientOptions<AppRouter> = {
   transformer,
 }
 
+export const queryClient = new QueryClient()
+export const trpcClient = trpc.createClient(clientOptions)
+
 export const useTrpcClient = create(() => ({
-  queryClient: new QueryClient(),
-  trpcClient: trpc.createClient(clientOptions),
+  queryClient,
+  trpcClient,
 }))

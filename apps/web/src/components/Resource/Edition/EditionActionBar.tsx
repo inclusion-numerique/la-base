@@ -15,7 +15,7 @@ const EditionActionBar = ({
   actionDisabled,
 }: {
   publishedState: ResourcePublishedState
-  modificationState?: ResourceModificationState
+  modificationState: ResourceModificationState | null
   actionLabel: string
   actionDisabled?: boolean
 }) => (

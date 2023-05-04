@@ -8,7 +8,7 @@ const EditableContent = ({
 }: {
   children: ReactNode
   showIcon?: boolean
-  onEditClick: MouseEventHandler<HTMLButtonElement>
+  onEditClick?: MouseEventHandler<HTMLButtonElement>
 }) => (
   <div className={styles.container}>
     <div>{children}</div>
