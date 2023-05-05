@@ -1,5 +1,10 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Resource } from '@app/web/server/resources'
+import { trpc } from '@app/web/trpc'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { EditResourceTitle } from '@app/web/server/rpc/resource/editResource'
 import PublishedInInformation from '../PublishedInInformation'
 import EditionActionBar from './EditionActionBar'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
@@ -11,27 +16,67 @@ import AddContentButton from './AddContentButton'
 import TitleEdition from './TitleEdition'
 import styles from './Edition.module.css'
 
-const Edition = ({ resource }: { resource: Resource }) => (
-  <>
-    <div className="fr-container fr-pb-30v">
-      <EditableContent>
-        <PublishedInInformation resource={resource} />
-      </EditableContent>
-      <Separator className="fr-my-4w" />
-      <div className="fr-mb-5w">
-        <EditableImage />
-      </div>
-      <TitleEdition resource={resource} />
-      <Separator className="fr-my-4w" />
-      <div className={styles.title}>Contenu de la ressource</div>
-      <AddContentButton />
-    </div>
-    <EditionActionBar
-      publishedState={ResourcePublishedState.DRAFT}
-      modificationState={ResourceModificationState.MODIFIED}
-      actionLabel="Publier la ressource"
-    />
-  </>
-)
+const hasChanged = (resource: Resource, updatedResource: Resource) =>
+  resource.title !== updatedResource.title ||
+  resource.description !== updatedResource.description
 
-export default Edition
+const Edition = ({ resource }: { resource: Resource }) => {
+  const [modificationState, setModificationState] =
+    useState<ResourceModificationState | null>(null)
+
+  const [updatedResource, setUpdatedResource] = useState<Resource>(resource)
+  const [publishedResource, setPublishedResource] = useState<Resource>(resource)
+
+  const canPublished = hasChanged(publishedResource, updatedResource)
+
+  const updateTitleMutation = trpc.resource.editTitle.useMutation()
+
+  const updateResource = async (data: EditResourceTitle) => {
+    setModificationState(ResourceModificationState.SAVING)
+    const result = await updateTitleMutation.mutateAsync(data)
+    setUpdatedResource(result)
+    setModificationState(ResourceModificationState.SAVED)
+  }
+
+  return (
+    <>
+      <div className="fr-container fr-pb-30v">
+        <EditableContent showIcon>
+          <PublishedInInformation resource={updatedResource} />
+        </EditableContent>
+        <Separator className="fr-my-4w" />
+        <div className="fr-mb-5w">
+          <EditableImage />
+        </div>
+        <TitleEdition
+          resource={updatedResource}
+          updateResource={updateResource}
+          setModificationState={setModificationState}
+        />
+        <Separator className="fr-my-4w" />
+        <div className={styles.title}>Contenu de la ressource</div>
+        <AddContentButton />
+      </div>
+      <EditionActionBar
+        publishedState={
+          canPublished
+            ? ResourcePublishedState.DRAFT
+            : ResourcePublishedState.PUBLIC
+        }
+        modificationState={
+          modificationState === ResourceModificationState.SAVED && !canPublished
+            ? null
+            : modificationState
+        }
+        actionDisabled={!canPublished}
+        actionLabel="Publier la ressource"
+        action={() => {
+          setModificationState(null)
+          setPublishedResource(updatedResource)
+        }}
+      />
+    </>
+  )
+}
+
+export default withTrpc(Edition)

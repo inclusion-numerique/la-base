@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import styles from './EditionActionBar.module.css'
@@ -6,18 +6,20 @@ import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
 import IconLink from '../../Icon/IconLink'
 import ResourcePublishedStateBadge from './ResourcePublishedStateBadge'
-import ResourceModificationStateBadge from './ResourceModificationState'
+import ResourceModificationStateBadge from './ResourceModificationStateBadge'
 
 const EditionActionBar = ({
   publishedState,
   modificationState,
   actionLabel,
   actionDisabled,
+  action,
 }: {
   publishedState: ResourcePublishedState
-  modificationState?: ResourceModificationState
+  modificationState: ResourceModificationState | null
   actionLabel: string
   actionDisabled?: boolean
+  action: MouseEventHandler<HTMLButtonElement>
 }) => (
   <div className={styles.container}>
     <div className={classNames('fr-container', styles.content)}>
@@ -34,7 +36,9 @@ const EditionActionBar = ({
           href="/"
           icon="fr-icon-user-add-line"
         />
-        <Button disabled={actionDisabled}>{actionLabel}</Button>
+        <Button disabled={actionDisabled} onClick={action}>
+          {actionLabel}
+        </Button>
       </div>
     </div>
   </div>
