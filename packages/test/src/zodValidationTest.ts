@@ -20,7 +20,6 @@ export const expectZodValidationToFail = <
   errors: { path: string[]; message: string }[],
 ) => {
   const result = validation.safeParse({ ...validObject, ...fields })
-  expect(result.success).toBeTrue()
 
   if (result.success) {
     console.error(
@@ -28,6 +27,7 @@ export const expectZodValidationToFail = <
         .map((error) => error.message)
         .join(', ')}`,
     )
+    expect(result.success).toBeFalse()
     return
   }
 
