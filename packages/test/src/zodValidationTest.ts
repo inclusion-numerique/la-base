@@ -14,14 +14,16 @@ export const expectZodValidationToFail = <
   U extends object,
   V extends z.ZodRawShape,
 >(
-  validation: z.ZodObject<V, 'strict', z.ZodTypeAny, T, T>,
+  validation: z.ZodObject<V, 'strict' | 'strip', z.ZodTypeAny, T, T>,
   validObject: T,
   fields: U,
   errors: { path: string[]; message: string }[],
 ) => {
   const result = validation.safeParse({ ...validObject, ...fields })
+  expect(result.success).toBeTrue()
+
   if (result.success) {
-    expect.fail(
+    console.error(
       `Fields should not be valid. Expected errors: ${errors
         .map((error) => error.message)
         .join(', ')}`,
