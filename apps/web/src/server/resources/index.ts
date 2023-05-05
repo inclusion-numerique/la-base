@@ -36,10 +36,33 @@ export type ResourceListItem = Exclude<
 >[number]
 
 export const getResourceSelect = {
-  id: true,
   title: true,
   description: true,
   slug: true,
+  created: true,
+  updated: true,
+  isPublic: true,
+  contents: {
+    select: {
+      title: true,
+      type: true,
+      caption: true,
+      altText: true,
+      image: true,
+      file: true,
+      showPreview: true,
+      url: true,
+      linkedResource: {
+        select: {
+          slug: true,
+          title: true,
+          description: true,
+        },
+      },
+      text: true,
+    },
+    orderBy: { order: 'asc' },
+  },
   createdBy: {
     select: {
       name: true,
@@ -50,42 +73,6 @@ export const getResourceSelect = {
     select: {
       title: true,
       slug: true,
-      created: true,
-      updated: true,
-      isPublic: true,
-      contents: {
-        select: {
-          title: true,
-          type: true,
-          caption: true,
-          altText: true,
-          image: true,
-          file: true,
-          showPreview: true,
-          url: true,
-          linkedResource: {
-            select: {
-              slug: true,
-              title: true,
-              description: true,
-            },
-          },
-          text: true,
-        },
-        orderBy: { order: 'asc' },
-      },
-      createdBy: {
-        select: {
-          name: true,
-          id: true,
-        },
-      },
-      base: {
-        select: {
-          title: true,
-          slug: true,
-        },
-      },
     },
   },
 } satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']

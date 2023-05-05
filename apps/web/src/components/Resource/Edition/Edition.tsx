@@ -20,6 +20,16 @@ const hasChanged = (resource: Resource, updatedResource: Resource) =>
   resource.title !== updatedResource.title ||
   resource.description !== updatedResource.description
 
+const publishedState = (canPublished: boolean, resource: Resource) => {
+  if (canPublished) {
+    return ResourcePublishedState.DRAFT
+  }
+
+  return resource.isPublic
+    ? ResourcePublishedState.PUBLIC
+    : ResourcePublishedState.PRIVATE
+}
+
 const Edition = ({ resource }: { resource: Resource }) => {
   const [modificationState, setModificationState] =
     useState<ResourceModificationState | null>(null)
