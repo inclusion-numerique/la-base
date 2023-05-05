@@ -7,7 +7,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { useForm } from 'react-hook-form'
 import {
   CreateResource,
-  CreateResourceValidation,
+  createResourceValidation,
 } from '@app/web/server/rpc/resource/createResource'
 import {
   resourceDescriptionMaxLength,
@@ -40,7 +40,7 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
     formState: { isSubmitting },
     setError,
   } = useForm<CreateResource>({
-    resolver: zodResolver(CreateResourceValidation),
+    resolver: zodResolver(createResourceValidation),
     defaultValues: {
       baseId: null,
     },

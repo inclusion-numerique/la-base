@@ -7,7 +7,7 @@ import ResourceBaseRichRadio from '@app/web/app/@modal/(.)creer-une-ressource/Re
 import { Resource } from '@app/web/server/resources'
 import {
   EditResourceBase,
-  EditResourceBaseValidation,
+  editResourceBaseValidation,
 } from '@app/web/server/rpc/resource/editResource'
 import EditableContent from './EditableContent'
 import PublishedInInformation from '../PublishedInInformation'
@@ -31,7 +31,7 @@ const BaseEdition = ({
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<EditResourceBase>({
-    resolver: zodResolver(EditResourceBaseValidation),
+    resolver: zodResolver(editResourceBaseValidation),
     defaultValues: {
       id: resource.id,
       baseId: resource.baseId,

@@ -8,11 +8,20 @@ import { Resource } from '@app/web/server/resources'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import {
   EditResourceTitle,
-  EditResourceTitleValidation,
+  editResourceTitleValidation,
 } from '@app/web/server/rpc/resource/editResource'
+import {
+  resourceDescriptionMaxLength,
+  resourceTitleMaxLength,
+} from '@app/web/server/rpc/resource/utils'
 import EditableContent from './EditableContent'
 import styles from './Edition.module.css'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
+
+const titleInfo = (title: string | null) =>
+  `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
+const descriptionInfo = (description: string | null) =>
+  `${description?.length ?? 0}/${resourceDescriptionMaxLength} caractères`
 
 const TitleEdition = ({
   resource,
@@ -32,7 +41,8 @@ const TitleEdition = ({
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<EditResourceTitle>({
-    resolver: zodResolver(EditResourceTitleValidation),
+    resolver: zodResolver(editResourceTitleValidation),
+    mode: 'onChange',
     defaultValues: {
       id: resource.id,
       title: resource.title,
@@ -63,6 +73,7 @@ const TitleEdition = ({
             control={control}
             path="title"
             label="Titre de la ressource"
+            info={titleInfo}
             data-testid="edit-title-input"
           />
           <InputFormField
@@ -71,6 +82,7 @@ const TitleEdition = ({
             type="textarea"
             label="Description courte de la ressource"
             hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
+            info={descriptionInfo}
             data-testid="edit-description-input"
           />
           <Button

@@ -42,10 +42,10 @@ declare namespace __next_route_internal_types__ {
     | `/bases`
     | `/confidentialite`
     | `/mentions-legales`
-    | `/creer-une-ressource`
     | `/ressources`
-    | `/(.)creer-une-ressource`
+    | `/creer-une-ressource`
     | `/robots.txt`
+    | `/(.)creer-une-ressource`
     | `/api/health`
     | `/api/test/index.api.spec`
     | `/api/test/service`
@@ -56,9 +56,9 @@ declare namespace __next_route_internal_types__ {
     | `/api/file/get`
     | `/api/file/upload`
   type DynamicRoutes<T extends string = string> = 
-    | `/ressources/${SafeSlug<T>}/editer`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
     | `/api/auth/${CatchAllSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`
 
