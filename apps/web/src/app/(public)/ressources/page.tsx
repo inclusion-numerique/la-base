@@ -1,11 +1,13 @@
 import React from 'react'
+import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getResourcesList } from '@app/web/server/resources'
 import ResourceCard from '@app/web/components/Resource/Card'
-import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 
 export const revalidate = 0
 
 const Ressources = async () => {
+  const user = await getSessionUser()
   const resources = await getResourcesList(200)
 
   return (
@@ -19,7 +21,7 @@ const Ressources = async () => {
       />
       {resources.map((resource) => (
         <>
-          <ResourceCard key={resource.slug} resource={resource} />
+          <ResourceCard key={resource.slug} resource={resource} user={user} />
           <br />
           <br />
         </>

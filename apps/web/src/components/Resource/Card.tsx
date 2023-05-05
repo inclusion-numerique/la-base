@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import classNames from 'classnames'
 import Badge from '@codegouvfr/react-dsfr/Badge'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { ResourceListItem } from '@app/web/server/resources'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import ResourcesViewsAndMetadata from '@app/web/components/Resource/View/ResourcesViewsAndMetadata'
@@ -13,11 +14,11 @@ import Separator from '../Separator/Separator'
 const ResourceCard = ({
   resource,
   withImage,
-  connected,
+  user,
 }: {
   resource: ResourceListItem
   withImage?: boolean
-  connected?: boolean
+  user: SessionUser | null
 }) => (
   <>
     <Separator />
@@ -60,8 +61,13 @@ const ResourceCard = ({
         <div
           className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}
         >
-          {connected && (
-            <IconLink title="Editer" href="/" icon="fr-icon-edit-line" small />
+          {user && (
+            <IconLink
+              title="Editer"
+              href={`/ressources/${resource.slug}/editer`}
+              icon="fr-icon-edit-line"
+              small
+            />
           )}
           <IconLink
             title="Mettre en favoris"

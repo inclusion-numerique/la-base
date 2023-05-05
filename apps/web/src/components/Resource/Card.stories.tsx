@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { ResourceListItem } from '@app/web/server/resources'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 import Card from './Card'
 
 const resource = {
@@ -43,7 +44,7 @@ export const WithImageConnected: Story = {
   name: 'Ressource utilisateur connecté avec image',
   args: {
     resource,
-    connected: true,
+    user: testSessionUser,
     withImage: true,
   },
 }
@@ -52,7 +53,7 @@ export const WithoutImageConnected: Story = {
   name: 'Ressource utilisateur connecté',
   args: {
     resource,
-    connected: true,
+    user: testSessionUser,
   },
 }
 
