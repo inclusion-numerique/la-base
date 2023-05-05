@@ -1,4 +1,4 @@
-import { objectFormValidation } from '@app/web/pages/api/test/type'
+import z from 'zod'
 
 export const normalizeZodErrorForTestExpect = (
   errors: { path: (string | number)[]; message: string }[],
@@ -9,12 +9,17 @@ export const normalizeZodErrorForTestExpect = (
       .sort((a, b) => a[0].localeCompare(b[0])),
   )
 
-export const expectZodValidationToFail = <T extends object, V extends object>(
+export const expectZodValidationToFail = <
+  T,
+  U extends object,
+  V extends z.ZodRawShape,
+>(
+  validation: z.ZodObject<V, 'strict', z.ZodTypeAny, T, T>,
   validObject: T,
-  fields: V,
+  fields: U,
   errors: { path: string[]; message: string }[],
 ) => {
-  const result = objectFormValidation.safeParse({ ...validObject, ...fields })
+  const result = validation.safeParse({ ...validObject, ...fields })
   if (result.success) {
     expect.fail(
       `Fields should not be valid. Expected errors: ${errors

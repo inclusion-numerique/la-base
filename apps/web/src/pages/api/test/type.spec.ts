@@ -13,13 +13,17 @@ describe('objectFormValidation', () => {
   })
 
   it('does not allow empty name', () => {
-    expectZodValidationToFail(validObject, { name: undefined }, [
-      { path: ['name'], message: 'Required' },
-    ])
+    expectZodValidationToFail(
+      objectFormValidation,
+      validObject,
+      { name: undefined },
+      [{ path: ['name'], message: 'Required' }],
+    )
   })
 
   it('does not allow additional field', () => {
     expectZodValidationToFail(
+      objectFormValidation,
       validObject,
       { otherName: 'Jane Dane', fridayIsHard: true },
       [
