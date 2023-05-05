@@ -36,7 +36,11 @@ const EditionActionBar = ({
           href="/"
           icon="fr-icon-user-add-line"
         />
-        <Button disabled={actionDisabled} onClick={action}>
+        <Button
+          disabled={actionDisabled}
+          onClick={action}
+          data-testid="publish-resource-button"
+        >
           {actionLabel}
         </Button>
       </div>

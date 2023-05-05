@@ -27,7 +27,11 @@ const TitleEdition = ({
 }) => {
   const [editionMode, setEditionMode] = useState(false)
 
-  const { control, handleSubmit } = useForm<EditResourceTitle>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<EditResourceTitle>({
     resolver: zodResolver(EditResourceTitleValidation),
     defaultValues: {
       id: resource.id,
@@ -37,8 +41,8 @@ const TitleEdition = ({
   })
 
   const onSubmit = async (data: EditResourceTitle) => {
-    await updateResource(data)
     setEditionMode(false)
+    await updateResource(data)
   }
 
   return (
@@ -49,6 +53,7 @@ const TitleEdition = ({
           setModificationState(ResourceModificationState.MODIFIED)
           setEditionMode(true)
         }}
+        data-testid="edit-title-button"
       >
         <div className={styles.title}>Titre & description de la ressource</div>
       </EditableContent>
@@ -58,6 +63,7 @@ const TitleEdition = ({
             control={control}
             path="title"
             label="Titre de la ressource"
+            data-testid="edit-title-input"
           />
           <InputFormField
             control={control}
@@ -65,11 +71,14 @@ const TitleEdition = ({
             type="textarea"
             label="Description courte de la ressource"
             hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
+            data-testid="edit-description-input"
           />
           <Button
             priority="tertiary no outline"
             type="submit"
             iconId="fr-icon-check-line"
+            disabled={isSubmitting}
+            data-testid="edit-validation-button"
           >
             Valider
           </Button>

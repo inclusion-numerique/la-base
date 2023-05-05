@@ -2,7 +2,11 @@ import '@testing-library/cypress/add-commands'
 import type { Tasks as CustomTasks } from './tasks'
 import Timeoutable = Cypress.Timeoutable
 import Loggable = Cypress.Loggable
-import type { CreateUserInput } from '../e2e/authentication/user.tasks'
+import type {
+  CreateBaseInput,
+  CreateResourceInput,
+  CreateUserInput,
+} from '../e2e/authentication/user.tasks'
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -52,6 +56,15 @@ Cypress.Commands.add('createUserAndSignin', (user: CreateUserInput) => {
   cy.task('createUser', user)
   cy.signin(user)
 })
+Cypress.Commands.add('createUser', (user: CreateUserInput) => {
+  cy.task('createUser', user)
+})
+Cypress.Commands.add('createBase', (base: CreateBaseInput) => {
+  cy.task('createBase', base)
+})
+Cypress.Commands.add('createResource', (resource: CreateResourceInput) => {
+  cy.task('createResource', resource)
+})
 
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
@@ -67,6 +80,9 @@ declare global {
       ): Chainable<Awaited<ReturnType<CustomTasks[T]>>>
 
       createUserAndSignin(user: CreateUserInput): Chainable<void>
+      createUser(user: CreateUserInput): Chainable<void>
+      createBase(base: CreateBaseInput): Chainable<void>
+      createResource(resource: CreateResourceInput): Chainable<void>
       signin(user: { email: string }): Chainable<void>
       dsfrShouldBeStarted(): Chainable<void>
 

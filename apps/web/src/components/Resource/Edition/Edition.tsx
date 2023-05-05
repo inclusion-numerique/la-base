@@ -1,24 +1,31 @@
 'use client'
 
 import React, { useState } from 'react'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { Resource } from '@app/web/server/resources'
 import { trpc } from '@app/web/trpc'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { EditResourceTitle } from '@app/web/server/rpc/resource/editResource'
-import PublishedInInformation from '../PublishedInInformation'
+import {
+  EditResourceBase,
+  EditResourceTitle,
+} from '@app/web/server/rpc/resource/editResource'
+import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
 import EditionActionBar from './EditionActionBar'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import Separator from '../../Separator/Separator'
-import EditableContent from './EditableContent'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
 import EditableImage from './EditableImage'
 import AddContentButton from './AddContentButton'
 import TitleEdition from './TitleEdition'
 import styles from './Edition.module.css'
+import BaseEdition from './BaseEdition'
 
 const hasChanged = (resource: Resource, updatedResource: Resource) =>
-  resource.title !== updatedResource.title ||
-  resource.description !== updatedResource.description
+  Object.keys(resourceEditionValues).some(
+    (key) =>
+      resource[key as keyof Resource] !==
+      updatedResource[key as keyof Resource],
+  )
 
 const publishedState = (canPublished: boolean, resource: Resource) => {
   if (canPublished) {
@@ -30,7 +37,13 @@ const publishedState = (canPublished: boolean, resource: Resource) => {
     : ResourcePublishedState.PRIVATE
 }
 
-const Edition = ({ resource }: { resource: Resource }) => {
+const Edition = ({
+  resource,
+  user,
+}: {
+  resource: Resource
+  user: SessionUser
+}) => {
   const [modificationState, setModificationState] =
     useState<ResourceModificationState | null>(null)
 
@@ -40,10 +53,18 @@ const Edition = ({ resource }: { resource: Resource }) => {
   const canPublished = hasChanged(publishedResource, updatedResource)
 
   const updateTitleMutation = trpc.resource.editTitle.useMutation()
+  const updateBaseMutation = trpc.resource.editBase.useMutation()
 
-  const updateResource = async (data: EditResourceTitle) => {
+  const updateTitleResource = async (data: EditResourceTitle) => {
     setModificationState(ResourceModificationState.SAVING)
     const result = await updateTitleMutation.mutateAsync(data)
+    setUpdatedResource(result)
+    setModificationState(ResourceModificationState.SAVED)
+  }
+
+  const updateBaseResource = async (data: EditResourceBase) => {
+    setModificationState(ResourceModificationState.SAVING)
+    const result = await updateBaseMutation.mutateAsync(data)
     setUpdatedResource(result)
     setModificationState(ResourceModificationState.SAVED)
   }
@@ -51,16 +72,18 @@ const Edition = ({ resource }: { resource: Resource }) => {
   return (
     <>
       <div className="fr-container fr-pb-30v">
-        <EditableContent showIcon>
-          <PublishedInInformation resource={updatedResource} />
-        </EditableContent>
+        <BaseEdition
+          resource={updatedResource}
+          user={user}
+          updateResource={updateBaseResource}
+        />
         <Separator className="fr-my-4w" />
         <div className="fr-mb-5w">
           <EditableImage />
         </div>
         <TitleEdition
           resource={updatedResource}
-          updateResource={updateResource}
+          updateResource={updateTitleResource}
           setModificationState={setModificationState}
         />
         <Separator className="fr-my-4w" />
@@ -68,11 +91,7 @@ const Edition = ({ resource }: { resource: Resource }) => {
         <AddContentButton />
       </div>
       <EditionActionBar
-        publishedState={
-          canPublished
-            ? ResourcePublishedState.DRAFT
-            : ResourcePublishedState.PUBLIC
-        }
+        publishedState={publishedState(canPublished, resource)}
         modificationState={
           modificationState === ResourceModificationState.SAVED && !canPublished
             ? null

@@ -3,7 +3,10 @@ import { prismaClient } from '@app/web/prismaClient'
 import { v4 } from 'uuid'
 import { createSlug } from '@app/web/utils/createSlug'
 import { CreateResourceValidation } from '@app/web/server/rpc/resource/createResource'
-import { EditResourceTitleValidation } from './editResource'
+import {
+  EditResourceBaseValidation,
+  EditResourceTitleValidation,
+} from './editResource'
 import { notFoundError } from '../trpcErrors'
 import { getResourceSelect } from '../../resources'
 
@@ -55,6 +58,31 @@ export const resourceRouter = router({
         data: {
           title,
           description,
+        },
+        where: {
+          id,
+        },
+        select: getResourceSelect,
+      })
+    }),
+  editBase: protectedProcedure
+    .input(EditResourceBaseValidation)
+    .mutation(async ({ input: { baseId, id } }) => {
+      const existingResource = await prismaClient.resource.findFirst({
+        where: { id },
+        select: {
+          createdById: true,
+        },
+      })
+
+      // TODO manage createdById
+      if (!existingResource) {
+        throw notFoundError()
+      }
+
+      return prismaClient.resource.update({
+        data: {
+          baseId,
         },
         where: {
           id,

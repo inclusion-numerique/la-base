@@ -4,11 +4,20 @@ import * as uuid from 'uuid'
 export type CreateUserInput = Parameters<
   typeof prismaClient.user.create
 >[0]['data']
-export const createUser = async (user: CreateUserInput) => {
-  const created = await prismaClient.user.create({ data: user })
+export const createUser = async (user: CreateUserInput) =>
+  prismaClient.user.create({ data: user })
 
-  return created
-}
+export type CreateBaseInput = Parameters<
+  typeof prismaClient.base.create
+>[0]['data']
+export const createBase = async (base: CreateBaseInput) =>
+  prismaClient.base.create({ data: base })
+
+export type CreateResourceInput = Parameters<
+  typeof prismaClient.resource.create
+>[0]['data']
+export const createResource = async (resource: CreateResourceInput) =>
+  prismaClient.resource.create({ data: resource })
 
 export const deleteUser = async (user: { email: string }) => {
   const exists = await prismaClient.user.findUnique({

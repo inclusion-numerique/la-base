@@ -36,6 +36,7 @@ export type ResourceListItem = Exclude<
 >[number]
 
 export const getResourceSelect = {
+  id: true,
   title: true,
   description: true,
   slug: true,
@@ -69,6 +70,7 @@ export const getResourceSelect = {
       id: true,
     },
   },
+  baseId: true,
   base: {
     select: {
       title: true,

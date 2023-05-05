@@ -28,7 +28,10 @@ const ResourceModificationStateBadge = ({
 }) => {
   const information = informations[state]
   return (
-    <div className={classNames('fr-text--sm', 'fr-mb-0', styles.badge)}>
+    <div
+      className={classNames('fr-text--sm', 'fr-mb-0', styles.badge)}
+      data-testid="resource-modification-state"
+    >
       <span className={classNames(styles.icon, information.icon)} />
       <span className="fr-text--medium">{information.label}</span>
     </div>

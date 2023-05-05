@@ -1,5 +1,6 @@
-import classNames from 'classnames'
 import React from 'react'
+import classNames from 'classnames'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import styles from './CustomTag.module.css'
 
 export enum TagColor {
@@ -11,7 +12,8 @@ const CustomTag = ({
   label,
   icon,
   color,
-}: {
+  'data-testid': dataTestId,
+}: UiComponentProps & {
   label: string
   icon: string
   color: TagColor
@@ -24,6 +26,7 @@ const CustomTag = ({
       icon,
       styles[color],
     )}
+    data-testid={dataTestId}
   >
     {label}
   </span>

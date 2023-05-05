@@ -7,10 +7,12 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { useForm } from 'react-hook-form'
 import {
   CreateResource,
-  createResourceDescriptionMaxLength,
-  createResourceTitleMaxLength,
   CreateResourceValidation,
 } from '@app/web/server/rpc/resource/createResource'
+import {
+  resourceDescriptionMaxLength,
+  resourceTitleMaxLength,
+} from '@app/web/server/rpc/resource/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
@@ -19,9 +21,9 @@ import ResourceBaseRichRadio from '@app/web/app/@modal/(.)creer-une-ressource/Re
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 
 const titleInfo = (title: string | null) =>
-  `${title?.length ?? 0}/${createResourceTitleMaxLength} caractères`
+  `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
 const descriptionInfo = (description: string | null) =>
-  `${description?.length ?? 0}/${createResourceDescriptionMaxLength} caractères`
+  `${description?.length ?? 0}/${resourceDescriptionMaxLength} caractères`
 
 const CreateResourceModal = ({ user }: { user: SessionUser }) => {
   // Step 0: Title and description

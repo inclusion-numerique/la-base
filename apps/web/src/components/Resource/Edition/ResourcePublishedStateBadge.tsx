@@ -1,6 +1,6 @@
 import React from 'react'
+import CustomTag, { TagColor } from '@app/ui/components/CustomTag'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
-import CustomTag, { TagColor } from '../../CustomTag'
 
 const informations: Record<
   ResourcePublishedState,
@@ -27,6 +27,8 @@ const ResourcePublishedStateBadge = ({
   state,
 }: {
   state: ResourcePublishedState
-}) => <CustomTag {...informations[state]} />
+}) => (
+  <CustomTag {...informations[state]} data-testid="resource-published-state" />
+)
 
 export default ResourcePublishedStateBadge

@@ -1,5 +1,5 @@
 import React from 'react'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getResource } from '@app/web/server/resources'
 import Edition from '@app/web/components/Resource/Edition/Edition'
@@ -12,6 +12,9 @@ const ResourceEditionPage = async ({
   params: { slug: string }
 }) => {
   const user = await getSessionUser()
+  if (!user) {
+    redirect(`/connexion?suivant=/resources/${params.slug}/editer`)
+  }
 
   const resource = await getResource(decodeURI(params.slug))
   if (!resource) {
@@ -32,7 +35,7 @@ const ResourceEditionPage = async ({
             ]}
           />
         </div>
-        <Edition resource={resource} />
+        <Edition resource={resource} user={user} />
       </div>
     </div>
   )

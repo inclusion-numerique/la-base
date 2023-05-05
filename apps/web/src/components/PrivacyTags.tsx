@@ -1,4 +1,4 @@
-import CustomTag, { TagColor } from './CustomTag'
+import CustomTag, { TagColor } from '@app/ui/components/CustomTag'
 
 const publicValues = {
   color: TagColor.GREEN,
