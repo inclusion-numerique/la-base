@@ -35,9 +35,6 @@ executors:
         environment:
           MAILDEV_INCOMING_USER: mailuser
           MAILDEV_INCOMING_PASS: mailpassword
-#        ports:
-#          - "1080:1080"
-#          - "1025:1025"
       - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: postgres
@@ -45,7 +42,7 @@ executors:
 parameters:
   cache_version:
     type: string
-    default: '2023-04-21-04'
+    default: '2023-05-06-01'
   virtual_store_dir:
     type: string
     default: './.pnpm'
