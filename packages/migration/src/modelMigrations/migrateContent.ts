@@ -77,7 +77,6 @@ export const migrateContent = async ({
     data = {
       ...commonData,
       type: 'File',
-      file: legacyContent.main_filecontent.file,
     }
     // TODO Missing info here
   } else {

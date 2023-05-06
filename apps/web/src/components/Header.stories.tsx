@@ -33,5 +33,5 @@ export const SignedInWithBases: Story = {
 
 export const SignedOutBacklink: Story = {
   name: 'Avec lien de retour',
-  args: { backLink: '/' },
+  args: { backLink: true },
 }

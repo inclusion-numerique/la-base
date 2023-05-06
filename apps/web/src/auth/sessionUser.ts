@@ -1,9 +1,9 @@
 import { Base, User } from '@prisma/client'
 
 // Serializable user interface
-export type SessionUser = Omit<
+export type SessionUser = Pick<
   User,
-  'created' | 'updated' | 'emailVerified'
+  'id' | 'firstName' | 'lastName' | 'name' | 'email' | 'isPublic' | 'legacyId'
 > & {
   emailVerified: string | null
   created: string | null

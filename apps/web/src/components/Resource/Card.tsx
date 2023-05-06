@@ -6,6 +6,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { ResourceListItem } from '@app/web/server/resources'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import ResourcesViewsAndMetadata from '@app/web/components/Resource/View/ResourcesViewsAndMetadata'
+import { Route } from 'next'
 import styles from './Card.module.css'
 import PublishedInInformation from './PublishedInInformation'
 import IconLink from '../Icon/IconLink'
@@ -64,7 +65,7 @@ const ResourceCard = ({
           {user && (
             <IconLink
               title="Editer"
-              href={`/ressources/${resource.slug}/editer`}
+              href={`/ressources/${resource.slug}/editer` as Route}
               icon="fr-icon-edit-line"
               small
             />
