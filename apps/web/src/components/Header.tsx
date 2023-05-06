@@ -2,15 +2,14 @@ import Link from 'next/link'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
-import classNames from 'classnames'
-import { Route } from 'next'
+import HeaderBackLink from '@app/web/components/HeaderBackLink'
 
 const Header = ({
   user,
   backLink,
 }: {
   user?: SessionUser | null
-  backLink?: Route
+  backLink?: boolean
 }) => (
   <header role="banner" className="fr-header">
     <div className="fr-header__body">
@@ -19,17 +18,7 @@ const Header = ({
           <div className="fr-header__brand fr-enlarge-link">
             <div className="fr-header__brand-top">
               {backLink ? (
-                <Link
-                  href={backLink}
-                  className={classNames(
-                    'fr-btn',
-                    'fr-btn--sm',
-                    'fr-btn--tertiary-no-outline',
-                  )}
-                >
-                  <span className="fr-icon-arrow-left-line fr-icon--sm fr-mr-1w" />
-                  Retour
-                </Link>
+                <HeaderBackLink />
               ) : (
                 <>
                   <div className="fr-header__logo">
