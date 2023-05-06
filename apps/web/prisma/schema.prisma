@@ -14,10 +14,10 @@ datasource db {
 // Underscored names are from there too
 model Account {
   id                String  @id @default(cuid())
-  userId            String  @db.Uuid
+  userId            String  @map("user_id") @db.Uuid
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String  @map("provider_account_id")
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -29,36 +29,43 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("account")
 }
 
 model Session {
   id           String   @id @default(uuid()) @db.Uuid
-  sessionToken String   @unique
-  userId       String   @db.Uuid
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id") @db.Uuid
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
 }
 
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  legacyId      Int?      @unique
-  firstName     String?
-  lastName      String?
+  legacyId      Int?      @unique @map("legacy_id")
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
   name          String?
   email         String    @unique
-  emailVerified DateTime?
-  image         String?
+  emailVerified DateTime? @map("email_verified")
+  image         Image?    @relation(fields: [imageId], references: [id])
+  imageId       String?   @unique @map("image_id") @db.Uuid
   location      String?
   title         String?
   description   String?
   accounts      Account[]
   sessions      Session[]
-  isPublic      Boolean   @default(false)
+  isPublic      Boolean   @default(false) @map("is_public")
 
   created          DateTime   @default(now())
   updated          DateTime   @default(now())
   ownedBases       Base[]
   createdResources Resource[]
+  uploads          Upload[]
+
+  @@map("user")
 }
 
 model VerificationToken {
@@ -67,46 +74,58 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_token")
 }
 
 model Base {
-  id                        String  @id @default(uuid()) @db.Uuid
-  legacyId                  Int?    @unique
-  title                     String
+  id       String @id @default(uuid()) @db.Uuid
+  legacyId Int?   @unique @map("legacy_id")
+  title    String
+
+  image   Image?  @relation(fields: [imageId], references: [id])
+  imageId String? @unique @map("image_id") @db.Uuid
+
   slug                      String  @unique
   // Slug that can be duplicated, only based on title
-  titleDuplicationCheckSlug String
+  titleDuplicationCheckSlug String  @map("title_duplication_check_slug")
   description               String?
   owner                     User    @relation(fields: [ownerId], references: [id])
-  ownerId                   String  @db.Uuid
-  isPublic                  Boolean @default(false)
+  ownerId                   String  @map("owner_id") @db.Uuid
+  isPublic                  Boolean @default(false) @map("is_public")
 
   created   DateTime   @default(now())
   updated   DateTime   @default(now())
   resources Resource[]
+
+  @@map("base")
 }
 
 model Resource {
   id                        String  @id @default(uuid()) @db.Uuid
-  legacyId                  Int?    @unique
+  legacyId                  Int?    @unique @map("legacy_id")
   title                     String
   slug                      String  @unique
   // Slug that can be duplicated, only based on title
-  titleDuplicationCheckSlug String
-  isPublic                  Boolean @default(false)
+  titleDuplicationCheckSlug String  @map("title_duplication_check_slug")
+  isPublic                  Boolean @default(false) @map("is_public")
+
+  image   Image?  @relation(fields: [imageId], references: [id])
+  imageId String? @unique @map("image_id") @db.Uuid
 
   description String
 
   createdBy   User   @relation(fields: [createdById], references: [id])
-  createdById String @db.Uuid
+  createdById String @map("created_by_id") @db.Uuid
 
   base   Base?   @relation(fields: [baseId], references: [id])
-  baseId String? @db.Uuid
+  baseId String? @map("base_id") @db.Uuid
 
   created  DateTime  @default(now())
   updated  DateTime  @default(now())
   contents Content[]
   linkedBy Content[] @relation(name: "contentLinkedResource")
+
+  @@map("resource")
 }
 
 enum ContentType {
@@ -122,13 +141,13 @@ model Content {
   id String @id @default(uuid()) @db.Uuid
 
   // Legacy content can be imported from content blocks or sections
-  legacyContentId Int? @unique
-  legacySectionId Int? @unique
+  legacyContentId Int? @unique @map("legacy_content_id")
+  legacySectionId Int? @unique @map("legacy_section_id")
 
   order Int
 
   resource   Resource @relation(fields: [resourceId], references: [id])
-  resourceId String   @db.Uuid
+  resourceId String   @map("resource_id") @db.Uuid
 
   // Data of this model depend on the type
   type ContentType
@@ -140,24 +159,68 @@ model Content {
   caption String?
 
   // Image
-  altText String?
-  image   String?
+  altText String? @map("alt_text")
+  image   Image?  @relation(fields: [imageId], references: [id])
+  imageId String? @unique @map("image_id") @db.Uuid
 
   // File
-  file String?
+  file    Upload? @relation(fields: [fileKey], references: [key])
+  fileKey String? @unique @map("file_key")
 
   // Link
-  showPreview Boolean?
+  showPreview Boolean? @map("show_preview")
   url         String?
 
   // ResourceLink
   linkedResource         Resource? @relation(name: "contentLinkedResource", fields: [linkedResourceId], references: [id])
-  linkedResourceId       String?   @db.Uuid
-  legacyLinkedResourceId Int?
+  linkedResourceId       String?   @map("linked_resource_id") @db.Uuid
+  legacyLinkedResourceId Int?      @map("legacy_linked_resource_id")
 
   // Text
   text String?
 
   created DateTime @default(now())
   updated DateTime @default(now())
+
+  @@map("content")
+}
+
+model Image {
+  id String @id @default(uuid()) @db.Uuid
+
+  // Relative height crop
+  cropHeight Float @default(1) @map("crop_height")
+  // Relative width crop
+  cropWidth  Float @default(1) @map("crop_width")
+  // Relative top crop
+  cropTop    Float @default(0) @map("crop_top")
+  // Relative left crop
+  cropLeft   Float @default(0) @map("crop_left")
+
+  upload    Upload    @relation(fields: [uploadKey], references: [key])
+  uploadKey String    @unique @map("upload_key")
+  content   Content?
+  resource  Resource?
+  user      User?
+  base      Base?
+
+  @@map("image")
+}
+
+model Upload {
+  key      String @id
+  mimeType String @map("mime_type")
+  name     String
+
+  // Size in bytes
+  size Int?
+
+  uploadedBy   User   @relation(fields: [uploadedById], references: [id])
+  uploadedById String @map("uploaded_by_id") @db.Uuid
+
+  created DateTime @default(now())
+  content Content?
+  image   Image?
+
+  @@map("upload")
 }
