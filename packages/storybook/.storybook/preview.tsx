@@ -29,6 +29,9 @@ const preview: Preview = {
         // inline: false,
       },
     },
+    nextjs: {
+      appDirectory: true,
+    },
   },
   decorators: [
     (Story) => {
