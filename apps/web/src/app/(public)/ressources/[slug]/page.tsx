@@ -8,6 +8,7 @@ import ResourceContents from '@app/web/components/Resource/View/ResourceContents
 
 const RessourcePage = async ({ params }: { params: { slug: string } }) => {
   const resource = await getResource(decodeURI(params.slug))
+
   if (!resource) {
     notFound()
   }

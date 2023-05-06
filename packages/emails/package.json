@@ -9,7 +9,7 @@
     "tsc": "tsc --noEmit"
   },
   "engines": {
-    "node": "^18.15"
+    "node": "^20.1"
   },
   "dependencies": {
     "@luma-team/mjml-react": "^0.3.0-0",
@@ -24,9 +24,9 @@
     "@types/jest": "^29.5.1",
     "@types/mjml": "^4.7.1",
     "@types/mjml-react": "^2.0.6",
-    "@types/node": "^18.16.3",
-    "@types/react": "^18.2.3",
-    "eslint": "^8.39.0",
+    "@types/node": "^20.1.0",
+    "@types/react": "^18.2.5",
+    "eslint": "^8.40.0",
     "jest": "^29.5.0",
     "typescript": "^5.0.4"
   }

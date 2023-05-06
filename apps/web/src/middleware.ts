@@ -23,7 +23,7 @@ const contentSecurityPolicy = `
   base-uri 'self';
   ${isProduction ? 'upgrade-insecure-requests true;' : ''}
 `
-  .replace(/\s{2,}/g, ' ')
+  .replaceAll(/\s{2,}/g, ' ')
   .trim()
 
 const middleware = (request: NextRequest) => {

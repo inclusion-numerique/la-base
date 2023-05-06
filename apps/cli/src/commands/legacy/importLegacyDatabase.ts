@@ -89,12 +89,13 @@ export const importLegacyDatabase = new Command()
       }),
     )
 
-    if (!backups.Contents || backups.Contents.length === 0) {
+    const mostRecentBackup = backups.Contents?.at(-1)
+
+    if (!mostRecentBackup) {
       console.error('Could not access sql backups')
       process.exit(1)
       return
     }
-    const mostRecentBackup = backups.Contents[backups.Contents.length - 1]
 
     if (
       !mostRecentBackup.Key ||

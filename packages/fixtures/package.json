@@ -9,13 +9,13 @@
     "test": "jest --passWithNoTests"
   },
   "engines": {
-    "node": "^18.15"
+    "node": "^20.1"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^10.0.3",
     "@faker-js/faker": "^7.6.0",
     "@prisma/client": "^4.13.0",
-    "@types/node": "^18.16.3",
+    "@types/node": "^20.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },

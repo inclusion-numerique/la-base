@@ -25,7 +25,7 @@ describe('ETQ Utilisateur non connecté, lorsque je veux éditer une ressource, 
 
     cy.url().should(
       'equal',
-      appUrl(`/connexion?suivant=/resources/${resource.slug}/editer`),
+      appUrl(`/connexion?suivant=/ressources/${resource.slug}/editer`),
     )
   })
 })

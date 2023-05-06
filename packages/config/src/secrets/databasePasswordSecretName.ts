@@ -4,11 +4,11 @@ export const databasePasswordSecretName = (namespace: string) =>
   `DATABASE_PASSWORD_${shortenNamespace(
     namespace
       // Secrets name should not include digits
-      .replace(/\d/g, '')
+      .replaceAll(/\d/g, '')
       // Secrets name should not include dashes
-      .replace(/-/g, '_')
+      .replaceAll('-', '_')
       // When digits are removed, there might be multiple underscores in a row
-      .replace(/__+/g, '_')
+      .replaceAll(/__+/g, '_')
       // Remove prefix underscore
       .replace(/^_/, ''),
     // Shorten namespace will remove trailing hyphen

@@ -25,4 +25,13 @@ describe("Page d'accueil", () => {
       .click()
     cy.get('#header-user-menu').should('be.visible').contains('Se déconnecter')
   })
+
+  it('Un utilisateur avec un token invalide peut accéder au site', () => {
+    const user = createTestUser()
+    cy.createUserAndSignin(user).then((sessionToken) => {
+      cy.execute('deleteSession', sessionToken)
+    })
+    cy.visit('/')
+    cy.get('.fr-header__tools').contains('Se connecter')
+  })
 })

@@ -28,25 +28,16 @@ declare namespace __next_route_internal_types__ {
     S extends `${string}${SearchOrHash}` ? never : S
 
   type StaticRoutes = 
-    | `/api/health`
-    | `/api/file/get`
-    | `/api/file/upload`
-    | `/api/test/index.api.spec`
-    | `/api/test`
-    | `/api/test/service.spec`
-    | `/api/test/service`
-    | `/api/test/type.spec`
-    | `/api/test/type`
     | `/`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
     | `/creer-un-compte`
     | `/deconnexion`
-    | `/403`
     | `/401`
-    | `/404`
+    | `/403`
     | `/500`
+    | `/404`
     | `/accessibilite`
     | `/bases`
     | `/confidentialite`
@@ -55,12 +46,21 @@ declare namespace __next_route_internal_types__ {
     | `/ressources`
     | `/(.)creer-une-ressource`
     | `/robots.txt`
+    | `/api/health`
+    | `/api/file/upload`
+    | `/api/file/get`
+    | `/api/test`
+    | `/api/test/index.api.spec`
+    | `/api/test/service.spec`
+    | `/api/test/service`
+    | `/api/test/type`
+    | `/api/test/type.spec`
   type DynamicRoutes<T extends string = string> = 
-    | `/api/auth/${CatchAllSlug<T>}`
-    | `/api/trpc/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
-    | `/ressources/${SafeSlug<T>}/editer`
+    | `/api/auth/${CatchAllSlug<T>}`
+    | `/api/trpc/${SafeSlug<T>}`
 
   type RouteImpl<T> = 
     | StaticRoutes

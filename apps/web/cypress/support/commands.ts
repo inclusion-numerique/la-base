@@ -46,15 +46,16 @@ Cypress.Commands.add(
   ) => cy.task(task, args, options),
 )
 
-Cypress.Commands.add('signin', ({ email }: { email: string }) => {
+Cypress.Commands.add('signin', ({ email }: { email: string }) =>
   cy.execute('createSession', { email }).then((session) => {
     console.log('SESSION CREATED', session)
     cy.setCookie('next-auth.session-token', session.sessionToken)
-  })
-})
+    return cy.wrap(session.sessionToken)
+  }),
+)
 Cypress.Commands.add('createUserAndSignin', (user: CreateUserInput) => {
   cy.task('createUser', user)
-  cy.signin(user)
+  return cy.signin(user)
 })
 Cypress.Commands.add('createUser', (user: CreateUserInput) => {
   cy.task('createUser', user)
@@ -79,11 +80,11 @@ declare global {
         args: Parameters<CustomTasks[T]>[0],
       ): Chainable<Awaited<ReturnType<CustomTasks[T]>>>
 
-      createUserAndSignin(user: CreateUserInput): Chainable<void>
+      createUserAndSignin(user: CreateUserInput): Chainable<string>
       createUser(user: CreateUserInput): Chainable<void>
       createBase(base: CreateBaseInput): Chainable<void>
       createResource(resource: CreateResourceInput): Chainable<void>
-      signin(user: { email: string }): Chainable<void>
+      signin(user: { email: string }): Chainable<string>
       dsfrShouldBeStarted(): Chainable<void>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

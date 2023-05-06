@@ -13,7 +13,7 @@ const ResourceEditionPage = async ({
 }) => {
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/resources/${params.slug}/editer`)
+    redirect(`/connexion?suivant=/ressources/${params.slug}/editer`)
   }
 
   const resource = await getResource(decodeURI(params.slug))

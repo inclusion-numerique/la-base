@@ -5,11 +5,11 @@ export const getBranch = () => process.env.CDK_FORCE_BRANCH || gitBranch()
 export const computeBranchNamespace = (branch: string) =>
   branch
     // Replace special characters with hyphen
-    .replace(/[./@_]/g, '-')
+    .replaceAll(/[./@_]/g, '-')
     // Do not include digits
-    .replace(/\d/g, '')
+    .replaceAll(/\d/g, '')
     // When digits are removed, there might be multiple hyphens in a row
-    .replace(/--+/g, '-')
+    .replaceAll(/--+/g, '-')
     // Remove prefix hyphen
     .replace(/^-/, '')
     // Namespace should be shorter than 32 chars to ensure all resources can be deployed

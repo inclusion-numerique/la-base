@@ -4,6 +4,7 @@ import {
   createBase,
   createResource,
   deleteUser,
+  deleteSession,
 } from '../e2e/authentication/user.tasks'
 import { deleteAllData } from '../e2e/deleteAllData'
 
@@ -16,6 +17,7 @@ export const tasks = {
   createResource,
   deleteUser,
   createSession,
+  deleteSession,
   deleteAllData,
 }
 

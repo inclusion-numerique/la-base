@@ -49,3 +49,13 @@ export const createSession = async ({ email }: { email: string }) => {
 
   return created
 }
+export const deleteSession = async (sessionToken: string) => {
+  const exists = await prismaClient.session.findUnique({
+    where: { sessionToken },
+  })
+  if (!exists) {
+    return null
+  }
+  await prismaClient.session.delete({ where: { sessionToken } })
+  return null
+}
