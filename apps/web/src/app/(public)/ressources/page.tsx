@@ -8,10 +8,10 @@ export const revalidate = 0
 
 const Ressources = async () => {
   const user = await getSessionUser()
-  const resources = await getResourcesList(200)
+  const resources = await getResourcesList(50)
 
   return (
-    <>
+    <div className="fr-pb-20v">
       <Breadcrumb
         currentPageLabel="Ressources"
         homeLinkProps={{
@@ -20,13 +20,9 @@ const Ressources = async () => {
         segments={[]}
       />
       {resources.map((resource) => (
-        <>
-          <ResourceCard key={resource.slug} resource={resource} user={user} />
-          <br />
-          <br />
-        </>
+        <ResourceCard key={resource.slug} resource={resource} user={user} />
       ))}
-    </>
+    </div>
   )
 }
 

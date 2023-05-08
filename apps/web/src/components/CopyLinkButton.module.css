@@ -1,0 +1,13 @@
+.button {
+    position: relative;
+}
+
+.copiedHover {
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    top: -36px;
+    right: 0;
+}

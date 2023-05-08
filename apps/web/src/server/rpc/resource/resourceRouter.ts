@@ -11,8 +11,12 @@ import { notFoundError } from '../trpcErrors'
 import { getResourceSelect } from '../../resources'
 
 const createUniqueSlug = async (title: string) => {
-  const resourcesCount = await prismaClient.resource.count()
-  return `${createSlug(title)}-${resourcesCount + 1}`
+  const slug = createSlug(title)
+  const [existing, count] = await Promise.all([
+    prismaClient.resource.findUnique({ where: { slug }, select: { id: true } }),
+    prismaClient.resource.count(),
+  ])
+  return existing ? `${slug}-${count + 1}` : slug
 }
 
 export const resourceRouter = router({

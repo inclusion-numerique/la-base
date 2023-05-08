@@ -50,7 +50,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       .findByLabelText(/^Description/)
       .type('Une description')
     cy.get('@modal').find('button').contains('Commencer').click()
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
   })
 
   it('Acceptation 2 - Utilisateur membre d’aucune base avec profil privé', () => {
@@ -66,7 +66,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       .findByLabelText(/^Description/)
       .type('Une description')
     cy.get('@modal').find('button').contains('Commencer').click()
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
   })
 
   it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée', () => {
@@ -120,6 +120,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.get('@modal').find('button').contains('Commencer').click()
 
-    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}-1`))
+    cy.url().should('equal', appUrl(`/ressources/${createSlug(titre)}`))
   })
 })

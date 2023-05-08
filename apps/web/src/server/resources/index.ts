@@ -8,6 +8,12 @@ export const getResourcesList = async (take?: number, skip?: number) =>
       created: true,
       updated: true,
       description: true,
+      image: {
+        select: {
+          id: true,
+          altText: true,
+        },
+      },
       createdBy: {
         select: {
           name: true,
@@ -43,14 +49,44 @@ export const getResourceSelect = {
   created: true,
   updated: true,
   isPublic: true,
+  createdBy: {
+    select: {
+      name: true,
+      id: true,
+    },
+  },
+  base: {
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+    },
+  },
+  image: {
+    select: {
+      id: true,
+      altText: true,
+    },
+  },
   contents: {
     select: {
+      id: true,
       title: true,
       type: true,
       caption: true,
-      altText: true,
-      image: true,
-      file: true,
+      image: {
+        select: {
+          id: true,
+          altText: true,
+        },
+      },
+      file: {
+        select: {
+          mimeType: true,
+          key: true,
+          name: true,
+        },
+      },
       showPreview: true,
       url: true,
       linkedResource: {
@@ -63,19 +99,6 @@ export const getResourceSelect = {
       text: true,
     },
     orderBy: { order: 'asc' },
-  },
-  createdBy: {
-    select: {
-      name: true,
-      id: true,
-    },
-  },
-  baseId: true,
-  base: {
-    select: {
-      title: true,
-      slug: true,
-    },
   },
 } satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
 

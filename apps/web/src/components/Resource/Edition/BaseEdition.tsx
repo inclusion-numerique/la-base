@@ -34,7 +34,7 @@ const BaseEdition = ({
     resolver: zodResolver(editResourceBaseValidation),
     defaultValues: {
       id: resource.id,
-      baseId: resource.baseId,
+      baseId: resource.base?.id ?? null,
     },
   })
 

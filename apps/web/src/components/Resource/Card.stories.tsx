@@ -16,6 +16,7 @@ const resource = {
     id: '1',
     name: 'Jean Biche',
   },
+  image: null,
 } satisfies ResourceListItem
 
 export default {
@@ -36,7 +37,6 @@ export const WithImage: Story = {
   name: 'Ressource avec image',
   args: {
     resource,
-    withImage: true,
   },
 }
 
@@ -45,7 +45,6 @@ export const WithImageConnected: Story = {
   args: {
     resource,
     user: testSessionUser,
-    withImage: true,
   },
 }
 
@@ -78,6 +77,5 @@ export const WithImageMobile: Story = {
   },
   args: {
     resource,
-    withImage: true,
   },
 }

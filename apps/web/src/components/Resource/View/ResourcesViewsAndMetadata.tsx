@@ -16,7 +16,7 @@ const ResourcesViewsAndMetadata = () => (
       <b>45</b>
       <span className={styles.spanMdDisplay}> Enregistrements</span>
     </div>
-    <Badge className="fr-hidden fr-unhidden-md" noIcon severity="success">
+    <Badge className="fr-hidden fr-unhidden-md" small noIcon severity="success">
       Très recommandée
     </Badge>
   </div>
