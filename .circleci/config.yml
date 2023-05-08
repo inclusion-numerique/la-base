@@ -637,7 +637,7 @@ commands:
     steps:
       - run:
           name: 'Install pnpm'
-          command: sudo corepack enable && corepack prepare pnpm@latest --activate
+          command: sudo npm install -g pnpm
 
   install_terraform:
     steps:
