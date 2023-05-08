@@ -29,7 +29,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("account")
+  @@map("accounts")
 }
 
 model Session {
@@ -39,7 +39,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("session")
+  @@map("sessions")
 }
 
 model User {
@@ -65,7 +65,7 @@ model User {
   createdResources Resource[]
   uploads          Upload[]
 
-  @@map("user")
+  @@map("users")
 }
 
 model VerificationToken {
@@ -74,7 +74,7 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verification_token")
+  @@map("verification_tokens")
 }
 
 model Base {
@@ -97,7 +97,7 @@ model Base {
   updated   DateTime   @default(now())
   resources Resource[]
 
-  @@map("base")
+  @@map("bases")
 }
 
 model Resource {
@@ -125,7 +125,7 @@ model Resource {
   contents Content[]
   linkedBy Content[] @relation(name: "contentLinkedResource")
 
-  @@map("resource")
+  @@map("resources")
 }
 
 enum ContentType {
@@ -159,7 +159,6 @@ model Content {
   caption String?
 
   // Image
-  altText String? @map("alt_text")
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
 
@@ -168,8 +167,12 @@ model Content {
   fileKey String? @unique @map("file_key")
 
   // Link
-  showPreview Boolean? @map("show_preview")
-  url         String?
+  showPreview     Boolean? @map("show_preview")
+  url             String?
+  // Link - Preview data (e.g. open graph) fetched from the url for preview
+  linkDescription String?
+  linkTitle       String?
+  linkImageUrl    String?
 
   // ResourceLink
   linkedResource         Resource? @relation(name: "contentLinkedResource", fields: [linkedResourceId], references: [id])
@@ -182,11 +185,14 @@ model Content {
   created DateTime @default(now())
   updated DateTime @default(now())
 
-  @@map("content")
+  @@map("contents")
 }
 
 model Image {
-  id String @id @default(uuid()) @db.Uuid
+  id       String @id @default(uuid()) @db.Uuid
+  legacyId Int?   @unique @map("legacy_id")
+
+  altText String? @map("alt_text")
 
   // Relative height crop
   cropHeight Float @default(1) @map("crop_height")
@@ -204,23 +210,29 @@ model Image {
   user      User?
   base      Base?
 
-  @@map("image")
+  @@map("images")
 }
 
 model Upload {
-  key      String @id
-  mimeType String @map("mime_type")
-  name     String
+  key       String  @id
+  legacyKey String? @unique @map("legacy_key")
+  mimeType  String  @map("mime_type")
+  name      String
 
   // Size in bytes
   size Int?
 
-  uploadedBy   User   @relation(fields: [uploadedById], references: [id])
-  uploadedById String @map("uploaded_by_id") @db.Uuid
+  // Migrated legacy files do not have an uploaded by user
+  uploadedBy   User?   @relation(fields: [uploadedById], references: [id])
+  uploadedById String? @map("uploaded_by_id") @db.Uuid
 
   created DateTime @default(now())
-  content Content?
-  image   Image?
 
-  @@map("upload")
+  // Is a file that is used in a fileContent for download
+  content Content?
+
+  // Is an image
+  image Image?
+
+  @@map("uploads")
 }
