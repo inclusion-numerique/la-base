@@ -216,11 +216,6 @@ export const executeMigration = async () => {
         })
     }),
     chunkSize,
-    async () => {
-      output('Resetting connection to avoid connection pool integration errors')
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
   )
 
   output(`- Migrated ${migratedResources.length} resources`)

@@ -28,40 +28,38 @@ declare namespace __next_route_internal_types__ {
     S extends `${string}${SearchOrHash}` ? never : S
 
   type StaticRoutes = 
-    | `/`
-    | `/creer-un-compte`
-    | `/deconnexion`
-    | `/connexion`
-    | `/connexion/erreur`
-    | `/connexion/verification`
-    | `/403`
-    | `/401`
-    | `/404`
-    | `/500`
-    | `/accessibilite`
-    | `/confidentialite`
-    | `/bases`
-    | `/mentions-legales`
-    | `/creer-une-ressource`
-    | `/ressources`
-    | `/(.)creer-une-ressource`
-    | `/robots.txt`
-    | `/api/health`
     | `/api/file/get`
+    | `/api/health`
     | `/api/file/upload`
     | `/api/test/index.api.spec`
     | `/api/test`
     | `/api/test/service.spec`
-    | `/api/test/service`
     | `/api/test/type.spec`
-    | `/api/test/type`
+    | `/robots.txt`
+    | `/`
+    | `/(.)creer-une-ressource`
+    | `/404`
+    | `/500`
+    | `/401`
+    | `/403`
+    | `/creer-une-ressource`
+    | `/ressources`
+    | `/mentions-legales`
+    | `/accessibilite`
+    | `/confidentialite`
+    | `/bases`
+    | `/connexion`
+    | `/creer-un-compte`
+    | `/deconnexion`
+    | `/connexion/verification`
+    | `/connexion/erreur`
   type DynamicRoutes<T extends string = string> = 
+    | `/api/auth/${CatchAllSlug<T>}`
+    | `/api/trpc/${SafeSlug<T>}`
+    | `/uploads/image/${SafeSlug<T>}`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}/editer`
-    | `/uploads/image/${SafeSlug<T>}`
-    | `/api/auth/${CatchAllSlug<T>}`
-    | `/api/trpc/${SafeSlug<T>}`
 
   type RouteImpl<T> = 
     | StaticRoutes
