@@ -29,36 +29,37 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/`
+    | `/creer-un-compte`
+    | `/deconnexion`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
-    | `/creer-un-compte`
-    | `/deconnexion`
-    | `/401`
     | `/403`
-    | `/500`
+    | `/401`
     | `/404`
+    | `/500`
     | `/accessibilite`
-    | `/bases`
     | `/confidentialite`
-    | `/creer-une-ressource`
+    | `/bases`
     | `/mentions-legales`
+    | `/creer-une-ressource`
     | `/ressources`
     | `/(.)creer-une-ressource`
     | `/robots.txt`
     | `/api/health`
-    | `/api/file/upload`
     | `/api/file/get`
-    | `/api/test`
+    | `/api/file/upload`
     | `/api/test/index.api.spec`
+    | `/api/test`
     | `/api/test/service.spec`
     | `/api/test/service`
-    | `/api/test/type`
     | `/api/test/type.spec`
+    | `/api/test/type`
   type DynamicRoutes<T extends string = string> = 
-    | `/ressources/${SafeSlug<T>}/editer`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
+    | `/uploads/image/${SafeSlug<T>}`
     | `/api/auth/${CatchAllSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`
 
