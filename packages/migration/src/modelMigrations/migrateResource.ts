@@ -47,13 +47,11 @@ export type MigrateResourceInput = {
   transaction: Prisma.TransactionClient
   userIdFromLegacyId: LegacyToNewIdHelper
   baseIdFromLegacyId: LegacyToNewIdHelper
+  imageIdFromLegacyId: LegacyToNewIdHelper
+  uploadKeyFromLegacyKey: (legacyKey: string) => string
   // Deduplicated slug
   slug: string
 }
-
-// I created a legacy resource with id 1336 in the legacy app to debug this migration
-// const debugLegacyResourceId = 1336
-const debugLegacyResourceId = null
 
 export const migrateResource = async ({
   legacyResource,
@@ -61,18 +59,10 @@ export const migrateResource = async ({
   transaction,
   userIdFromLegacyId,
   baseIdFromLegacyId,
+  imageIdFromLegacyId,
+  uploadKeyFromLegacyKey,
 }: MigrateResourceInput) => {
   const legacyId = Number(legacyResource.id)
-
-  if (debugLegacyResourceId === legacyId) {
-    console.log('=== START DEBUG RESOURCE ===')
-    console.log('Resource', legacyResource)
-    console.log('Sections')
-    for (const section of legacyResource.main_contentsection) {
-      console.log(section)
-    }
-    console.log('=== END DEBUG RESOURCE ===')
-  }
 
   const data = {
     title: legacyResource.title,
@@ -85,6 +75,9 @@ export const migrateResource = async ({
       : null,
     created: legacyResource.created,
     updated: legacyResource.modified,
+    imageId: legacyResource.profile_image_id
+      ? imageIdFromLegacyId(Number(legacyResource.profile_image_id))
+      : null,
   } satisfies Parameters<typeof transaction.resource.upsert>[0]['update']
 
   const resource = await transaction.resource.upsert({
@@ -119,6 +112,8 @@ export const migrateResource = async ({
         resource,
         legacyContent,
         transaction,
+        imageIdFromLegacyId,
+        uploadKeyFromLegacyKey,
         order: index,
       }),
     ),

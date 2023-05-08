@@ -57,6 +57,9 @@ describe('migrateBase', () => {
       userIdFromLegacyId: createLegacyToNewIdHelper([
         { legacyId: Number(legacyBase.owner_id), id: '0000' },
       ]),
+      imageIdFromLegacyId: createLegacyToNewIdHelper([
+        { legacyId: Number(legacyBase.profile_image_id), id: '1111' },
+      ]),
     })
 
     expect(mockTransaction.base.upsert).toHaveBeenCalledOnceWith({
@@ -67,6 +70,7 @@ describe('migrateBase', () => {
         description:
           "proposition de jeu type memory pour l'animation d'atelier de manière dé-connecté",
         ownerId: '0000',
+        imageId: '1111',
         slug: 'test-slug',
         titleDuplicationCheckSlug: createSlug(legacyBase.title),
         title: legacyBase.title,
@@ -79,6 +83,7 @@ describe('migrateBase', () => {
         id: '0000',
         legacyId: 129,
         ownerId: '0000',
+        imageId: '1111',
         slug: 'test-slug',
         titleDuplicationCheckSlug: createSlug(legacyBase.title),
         title: legacyBase.title,

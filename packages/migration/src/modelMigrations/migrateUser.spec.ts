@@ -34,6 +34,7 @@ describe('migrateUser', () => {
     await migrateUser({
       transaction: mockTransaction,
       legacyUser,
+      emailMap: new Map(),
     })
 
     expect(mockTransaction.user.upsert).toHaveBeenCalledOnceWith({
@@ -47,6 +48,8 @@ describe('migrateUser', () => {
         name: 'A A',
         updated: legacyUser.modified,
         created: legacyUser.created,
+        emailVerified: legacyUser.created,
+        legacyId: 8,
       },
       create: {
         email: 'a.a@a.a',
@@ -57,6 +60,7 @@ describe('migrateUser', () => {
         name: 'A A',
         updated: legacyUser.modified,
         created: legacyUser.created,
+        emailVerified: legacyUser.created,
       },
       select: {
         id: true,

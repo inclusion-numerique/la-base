@@ -2,11 +2,14 @@ import { v4 } from 'uuid'
 import { LegacyResource } from '@app/migration/modelMigrations/migrateResource'
 import type { Prisma } from '@prisma/client'
 import { Resource } from '@prisma/client'
+import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 
 export type MigrateContentInput = {
   legacyResource: LegacyResource
   resource: Pick<Resource, 'id' | 'legacyId'>
   transaction: Prisma.TransactionClient
+  imageIdFromLegacyId: LegacyToNewIdHelper
+  uploadKeyFromLegacyKey: (legacyKey: string) => string
   legacyContent:
     | LegacyResource['main_contentsection'][number]['main_contentblock'][number]
     | LegacyResource['main_contentsection'][number]
@@ -22,6 +25,8 @@ export const migrateContent = async ({
   legacyContent,
   transaction,
   order,
+  imageIdFromLegacyId,
+  uploadKeyFromLegacyKey,
 }: MigrateContentInput) => {
   const legacyId = Number(legacyContent.id)
 
@@ -59,9 +64,10 @@ export const migrateContent = async ({
       url: legacyContent.main_linkcontent.link,
       showPreview: legacyContent.main_linkcontent.with_preview,
       caption: legacyContent.main_linkcontent.target_description,
+      linkDescription: legacyContent.main_linkcontent.target_description,
+      linkTitle: legacyContent.main_linkcontent.target_title,
+      linkImageUrl: legacyContent.main_linkcontent.target_image,
     }
-    // TODO Add link preview data ?
-    // TODO We should have a system to scrap link previews periodically
   } else if (legacyContent.main_linkedresourcecontent) {
     const legacyLinkedResourceId =
       legacyContent.main_linkedresourcecontent.linked_resource_id
@@ -74,11 +80,23 @@ export const migrateContent = async ({
       legacyLinkedResourceId: Number(legacyLinkedResourceId),
     }
   } else if (legacyContent.main_filecontent) {
-    data = {
-      ...commonData,
-      type: 'File',
-    }
-    // TODO Missing info here
+    // Legacy file content can be an image (when preview = true) or a file
+    const {
+      contentblock_ptr_id: id,
+      file,
+      with_preview: withPreview,
+    } = legacyContent.main_filecontent
+    data = withPreview
+      ? {
+          ...commonData,
+          type: 'Image',
+          imageId: imageIdFromLegacyId(Number(id)),
+        }
+      : {
+          ...commonData,
+          type: 'File',
+          fileKey: uploadKeyFromLegacyKey(file),
+        }
   } else {
     throw new Error('Could not determine content type')
   }

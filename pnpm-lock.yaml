@@ -686,6 +686,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      mime-types:
+        specifier: ^2.1.35
+        version: 2.1.35
       node-html-parser:
         specifier: ^6.1.5
         version: 6.1.5
@@ -720,6 +723,9 @@ importers:
       '@types/lodash':
         specifier: ^4.14.194
         version: 4.14.194
+      '@types/mime-types':
+        specifier: ^2.1.1
+        version: 2.1.1
       '@types/node':
         specifier: ^20.1.0
         version: 20.1.0

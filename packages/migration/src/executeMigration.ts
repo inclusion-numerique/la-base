@@ -9,7 +9,10 @@ import {
   getLegacyBases,
   migrateBase,
 } from '@app/migration/modelMigrations/migrateBase'
-import { createLegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
+import {
+  createLegacyToNewIdHelper,
+  createLegacyToNewKeyHelper,
+} from '@app/migration/legacyToNewIdHelper'
 import { computeSlugAndUpdateExistingSlugs } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import {
   getExistingResourceSlugs,
@@ -17,11 +20,24 @@ import {
   migrateResource,
 } from '@app/migration/modelMigrations/migrateResource'
 import { runPromisesInChunks } from '@app/web/utils/runPromisesInChunks'
+import {
+  getExistingImages,
+  getLegacyImages,
+  migrateImage,
+} from '@app/migration/modelMigrations/migrateImage'
+import {
+  getExistingUploads,
+  getLegacyUploads,
+  migrateUpload,
+} from '@app/migration/modelMigrations/migrateUpload'
 
 // eslint-disable-next-line no-console
 const output = console.log
 
 const chunkSize = 200
+
+const formatDuration = (start: Date, end: Date) =>
+  `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
 
 export const executeMigration = async () => {
   const start = new Date()
@@ -30,6 +46,11 @@ export const executeMigration = async () => {
   output('')
 
   output('Fetching legacy data and context data in new database')
+
+  const legacyUploads = await getLegacyUploads()
+  output(`- Found ${legacyUploads.length} uploads to migrate`)
+  const existingUploads = await getExistingUploads()
+  output(`- Found ${existingUploads.keyMap.size} already migrated uploads`)
   const legacyUsers = await getLegacyUsers()
   output(`- Found ${legacyUsers.length} users to migrate`)
   const existingUsers = await getExistingUsers()
@@ -47,7 +68,13 @@ export const executeMigration = async () => {
   output(
     `- Found ${existingResourceSlugs.size} existing resource slugs for uniqueness checks`,
   )
+  const legacyImages = await getLegacyImages()
+  output(`- Found ${legacyImages.length} images to migrate`)
+  const existingImages = await getExistingImages()
+  output(`- Found ${existingImages.idMap.size} already migrated images`)
 
+  const endFetchContext = new Date()
+  output(`⏱️ Context fetching took ${formatDuration(start, endFetchContext)}`)
   output('')
   output('Executing model migrations')
 
@@ -56,7 +83,11 @@ export const executeMigration = async () => {
   let migratedUserCount = 0
   const migratedUsers = await runPromisesInChunks(
     legacyUsers.map((legacyUser) =>
-      migrateUser({ legacyUser, transaction: prismaClient })
+      migrateUser({
+        legacyUser,
+        transaction: prismaClient,
+        emailMap: existingUsers.emailMap,
+      })
         .then((migratedUser) => {
           migratedUserCount += 1
           if (migratedUserCount % 1000 === 0) {
@@ -75,11 +106,10 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
-    async () => {
-      output('Resetting connection to avoid connection pool integration errors')
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
+    // async () => {
+    //   await prismaClient.$disconnect()
+    //   await prismaClient.$connect()
+    // },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
@@ -87,6 +117,42 @@ export const executeMigration = async () => {
   const userIdFromLegacyId = createLegacyToNewIdHelper(
     migratedUsers,
     ({ legacyId }) => `User with legacyId ${legacyId} not found`,
+  )
+
+  output(`- Migrating uploads...`)
+
+  const migratedUploads = await runPromisesInChunks(
+    legacyUploads.map((legacyUpload) =>
+      migrateUpload({
+        legacyUpload,
+        transaction: prismaClient,
+      }),
+    ),
+    chunkSize,
+  )
+  output(`- Migrated ${migratedUploads.length} uploads`)
+
+  const uploadKeyFromLegacyKey = createLegacyToNewKeyHelper(
+    migratedUploads,
+    ({ legacyKey }) => `Upload with legacyKey ${legacyKey} not found`,
+  )
+
+  output(`- Migrating images...`)
+
+  const migratedImages = await Promise.all(
+    legacyImages.map((legacyImage) =>
+      migrateImage({
+        legacyImage,
+        transaction: prismaClient,
+        uploadKeyFromLegacyKey,
+      }),
+    ),
+  )
+  output(`- Migrated ${migratedImages.length} images`)
+
+  const imageIdFromLegacyId = createLegacyToNewIdHelper(
+    migratedImages,
+    ({ legacyId }) => `Image with legacyId ${legacyId} not found`,
   )
 
   output(`- Migrating bases...`)
@@ -102,6 +168,7 @@ export const executeMigration = async () => {
         transaction: prismaClient,
         slug,
         userIdFromLegacyId,
+        imageIdFromLegacyId,
       })
     }),
   )
@@ -128,6 +195,8 @@ export const executeMigration = async () => {
         slug,
         userIdFromLegacyId,
         baseIdFromLegacyId,
+        imageIdFromLegacyId,
+        uploadKeyFromLegacyKey,
       })
         .then((migratedResource) => {
           migratedResourceCount += 1
@@ -192,10 +261,19 @@ export const executeMigration = async () => {
     ),
   )
   output(`- Updated ${updatedResourceLinks.length} resources links`)
+  const endModelMigrations = new Date()
+  output(
+    `⏱️ Model migrations took ${formatDuration(
+      endFetchContext,
+      endModelMigrations,
+    )}`,
+  )
 
   const result = { migratedUsers, migratedBases, migratedResources }
 
-  const end = new Date()
-
-  return { result, time: end.getTime() - start.getTime() }
+  output('')
+  output(
+    `👍️ Migrated successfully in ${formatDuration(start, endModelMigrations)}`,
+  )
+  return { result, time: endModelMigrations.getTime() - start.getTime() }
 }

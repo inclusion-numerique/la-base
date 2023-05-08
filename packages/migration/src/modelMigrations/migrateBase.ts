@@ -40,6 +40,7 @@ export type MigrateBaseInput = {
   legacyBase: LegacyBase
   transaction: Prisma.TransactionClient
   userIdFromLegacyId: LegacyToNewIdHelper
+  imageIdFromLegacyId: LegacyToNewIdHelper
   // Deduplicated slug
   slug: string
 }
@@ -49,6 +50,7 @@ export const migrateBase = async ({
   slug,
   transaction,
   userIdFromLegacyId,
+  imageIdFromLegacyId,
 }: MigrateBaseInput) => {
   const legacyId = Number(legacyBase.id)
   const data = {
@@ -57,6 +59,9 @@ export const migrateBase = async ({
     description: legacyBase.description,
     slug,
     titleDuplicationCheckSlug: createSlug(legacyBase.title),
+    imageId: legacyBase.profile_image_id
+      ? imageIdFromLegacyId(Number(legacyBase.profile_image_id))
+      : null,
     created: legacyBase.created,
     updated: legacyBase.modified,
   } satisfies Parameters<typeof transaction.base.upsert>[0]['update']

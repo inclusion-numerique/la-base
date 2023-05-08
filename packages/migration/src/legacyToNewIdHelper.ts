@@ -26,3 +26,30 @@ export const createLegacyToNewIdHelper = <T extends MigratedModel>(
     return newId
   }
 }
+
+export const createLegacyToNewKeyHelper = <
+  T extends { legacyKey: string | null; key: string },
+>(
+  data: T[],
+  createNotFoundErrorMessage?: (model: { legacyKey: string }) => string,
+): ((legacyKey: string) => string) => {
+  const keysMap = new Map(
+    data
+      .filter(
+        (item): item is T & { legacyKey: string } => item.legacyKey !== null,
+      )
+      .map(({ legacyKey, key }) => [legacyKey, key]),
+  )
+
+  return (legacyKey: string) => {
+    const newKey = keysMap.get(legacyKey)
+    if (!newKey) {
+      throw new Error(
+        createNotFoundErrorMessage
+          ? createNotFoundErrorMessage({ legacyKey })
+          : `Model with legacyKey ${legacyKey} not found`,
+      )
+    }
+    return newKey
+  }
+}
