@@ -34,8 +34,11 @@ export const authOptions: NextAuthOptions = {
       profile: (profile: KeycloakProfile) => ({
         id: profile.sub,
         name: profile.name ?? profile.preferred_username,
+        firstName: profile.given_name,
+        lastName: profile.family_name,
         email: profile.email,
         image: profile.picture,
+        provider: inclusionConnectProviderId,
       }),
     }),
   ],

@@ -1,6 +1,7 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { prismaClient } from '@app/web/prismaClient'
-import type { Adapter } from 'next-auth/adapters'
+import type { Adapter, AdapterUser } from 'next-auth/adapters'
+import { inclusionConnectProviderId } from '@app/web/auth/inclusionConnect'
 
 const prismaAdapter = PrismaAdapter(prismaClient)
 
@@ -15,6 +16,16 @@ const removeNonStandardFields = <T extends Record<string, unknown>>(
 
 export const nextAuthAdapter: Adapter = {
   ...prismaAdapter,
+  createUser: async (user) => {
+    const { provider, ...rest } = user as Omit<AdapterUser, 'id'> & {
+      // We pass the provider along from Keycloak provider to be able to detect if the user comes from Inclusion Connect
+      provider?: typeof inclusionConnectProviderId
+    }
+    if (provider === inclusionConnectProviderId) {
+      return prismaAdapter.createUser({ ...rest, emailVerified: new Date() })
+    }
+    return prismaAdapter.createUser(rest)
+  },
   // Better handle case of missing session when deleting. It should not crash auth process.
   deleteSession: async (sessionToken) => {
     try {
