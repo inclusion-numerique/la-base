@@ -106,10 +106,6 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
-    // async () => {
-    //   await prismaClient.$disconnect()
-    //   await prismaClient.$connect()
-    // },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
