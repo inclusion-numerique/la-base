@@ -419,12 +419,17 @@ jobs:
             pnpm --silent -F @app/web prisma db push --skip-generate --accept-data-loss
       - restore_cache:
           key: << pipeline.id >>-web-build
+      - add_dotenv_vars_to_bash_env
       - run:
-          name: Running next server
+          name: Isolate built standalone application to correctly e2e test node_modules bundling and run
           background: true
+          # Reproducing Dockerfile COPY instructions to isolate built standalone application from project node_modules
           command: |
-            pnpm --silent -F @app/web standalone:configure
-            pnpm --silent -F @app/web standalone:start
+            mv apps/web/.next/standalone ~/dist
+            mv apps/web/public ~/dist/apps/web/public
+            mv apps/web/.next/static ~/dist/apps/web/.next/static
+            cd ~/dist
+            node apps/web/server.js
       - run:
           name: 'Run cypress e2e tests'
           command: |
