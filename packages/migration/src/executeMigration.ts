@@ -1,7 +1,7 @@
 import {
   getExistingUsers,
   getLegacyUsers,
-  migrateUser,
+  migrateUsers,
 } from '@app/migration/modelMigrations/migrateUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
@@ -34,7 +34,7 @@ import {
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 400
+const chunkSize = 200
 
 const formatDuration = (start: Date, end: Date) =>
   `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
@@ -80,38 +80,7 @@ export const executeMigration = async () => {
 
   output(`- Migrating ${legacyUsers.length} users...`)
 
-  let migratedUserCount = 0
-  const migratedUsers = await runPromisesInChunks(
-    legacyUsers.map((legacyUser) =>
-      migrateUser({
-        legacyUser,
-        transaction: prismaClient,
-        emailMap: existingUsers.emailMap,
-      })
-        .then((migratedUser) => {
-          migratedUserCount += 1
-          if (migratedUserCount % 1000 === 0) {
-            output(
-              `-- ${migratedUserCount} ${(
-                (migratedUserCount * 100) /
-                legacyUsers.length
-              ).toFixed(0)}%`,
-            )
-          }
-          return migratedUser
-        })
-        .catch((error) => {
-          output('Error migrating user', legacyUser)
-          output(error)
-          throw error
-        }),
-    ),
-    chunkSize,
-    // async () => {
-    //   await prismaClient.$disconnect()
-    //   await prismaClient.$connect()
-    // },
-  )
+  const migratedUsers = await migrateUsers()
 
   output(`- Migrated ${migratedUsers.length} users`)
 
@@ -121,24 +90,12 @@ export const executeMigration = async () => {
   )
 
   output(`- Migrating uploads...`)
-  let migratedUploadCount = 0
 
   const migratedUploads = await runPromisesInChunks(
     legacyUploads.map((legacyUpload) =>
       migrateUpload({
         legacyUpload,
         transaction: prismaClient,
-      }).then((migratedUpload) => {
-        migratedUploadCount += 1
-        if (migratedUploadCount % 1000 === 0) {
-          output(
-            `-- ${migratedUploadCount} ${(
-              (migratedUploadCount * 100) /
-              legacyUsers.length
-            ).toFixed(0)}%`,
-          )
-        }
-        return migratedUpload
       }),
     ),
     chunkSize,
