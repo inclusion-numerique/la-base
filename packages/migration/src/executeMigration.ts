@@ -34,7 +34,7 @@ import {
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 10_000
+const chunkSize = 400
 
 const formatDuration = (start: Date, end: Date) =>
   `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
@@ -102,6 +102,7 @@ export const executeMigration = async () => {
         })
         .catch((error) => {
           output('Error migrating user', legacyUser)
+          output(error)
           throw error
         }),
     ),
