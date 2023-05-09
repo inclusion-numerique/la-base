@@ -1,7 +1,7 @@
 import {
   getExistingUsers,
   getLegacyUsers,
-  migrateUser,
+  migrateUsers,
 } from '@app/migration/modelMigrations/migrateUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
@@ -80,37 +80,7 @@ export const executeMigration = async () => {
 
   output(`- Migrating ${legacyUsers.length} users...`)
 
-  let migratedUserCount = 0
-  const migratedUsers = await runPromisesInChunks(
-    legacyUsers.map((legacyUser) =>
-      migrateUser({
-        legacyUser,
-        transaction: prismaClient,
-        emailMap: existingUsers.emailMap,
-      })
-        .then((migratedUser) => {
-          migratedUserCount += 1
-          if (migratedUserCount % 1000 === 0) {
-            output(
-              `-- ${migratedUserCount} ${(
-                (migratedUserCount * 100) /
-                legacyUsers.length
-              ).toFixed(0)}%`,
-            )
-          }
-          return migratedUser
-        })
-        .catch((error) => {
-          output('Error migrating user', legacyUser)
-          throw error
-        }),
-    ),
-    chunkSize,
-    async () => {
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
-  )
+  const migratedUsers = await migrateUsers({ transaction: prismaClient })
 
   output(`- Migrated ${migratedUsers.length} users`)
 
