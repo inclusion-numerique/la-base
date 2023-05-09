@@ -34,7 +34,7 @@ import {
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 100
+const chunkSize = 10_000
 
 const formatDuration = (start: Date, end: Date) =>
   `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
@@ -106,10 +106,10 @@ export const executeMigration = async () => {
         }),
     ),
     chunkSize,
-    async () => {
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
+    // async () => {
+    //   await prismaClient.$disconnect()
+    //   await prismaClient.$connect()
+    // },
   )
 
   output(`- Migrated ${migratedUsers.length} users`)
@@ -141,10 +141,6 @@ export const executeMigration = async () => {
       }),
     ),
     chunkSize,
-    async () => {
-      await prismaClient.$disconnect()
-      await prismaClient.$connect()
-    },
   )
   output(`- Migrated ${migratedUploads.length} uploads`)
 
