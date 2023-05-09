@@ -34,7 +34,7 @@ import {
 // eslint-disable-next-line no-console
 const output = console.log
 
-const chunkSize = 200
+const chunkSize = 100
 
 const formatDuration = (start: Date, end: Date) =>
   `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
@@ -120,15 +120,31 @@ export const executeMigration = async () => {
   )
 
   output(`- Migrating uploads...`)
+  let migratedUploadCount = 0
 
   const migratedUploads = await runPromisesInChunks(
     legacyUploads.map((legacyUpload) =>
       migrateUpload({
         legacyUpload,
         transaction: prismaClient,
+      }).then((migratedUpload) => {
+        migratedUploadCount += 1
+        if (migratedUploadCount % 1000 === 0) {
+          output(
+            `-- ${migratedUploadCount} ${(
+              (migratedUploadCount * 100) /
+              legacyUsers.length
+            ).toFixed(0)}%`,
+          )
+        }
+        return migratedUpload
       }),
     ),
     chunkSize,
+    async () => {
+      await prismaClient.$disconnect()
+      await prismaClient.$connect()
+    },
   )
   output(`- Migrated ${migratedUploads.length} uploads`)
 
