@@ -3,9 +3,9 @@ import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { v4 } from 'uuid'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
 import { prismaClient } from '@app/web/prismaClient'
-import { CreateManyDataType } from '@app/migration/utils/createManyDataType'
 import { output } from '@app/cli/output'
 import { chunk } from 'lodash'
+import { UpsertCreateType } from '@app/migration/utils/UpsertCreateType'
 
 export const getLegacyUsers = () => migrationPrismaClient.main_user.findMany()
 
@@ -35,12 +35,13 @@ export const getExistingUsers = async (): Promise<{
   return { idMap, emailMap }
 }
 
-export type MigrateUserInput = {
+export const transformUser = ({
+  legacyUser,
+  emailMap,
+}: {
   legacyUser: LegacyUser
   emailMap: Map<string, string>
-}
-
-export const migrateUser = ({ legacyUser, emailMap }: MigrateUserInput) => {
+}) => {
   const legacyId = Number(legacyUser.id)
 
   // We manage the edge case of a new user created in new app with same email as not yet migrated legacy user
@@ -56,7 +57,7 @@ export const migrateUser = ({ legacyUser, emailMap }: MigrateUserInput) => {
     updated: legacyUser.modified,
     emailVerified: legacyUser.is_active ? legacyUser.created : null,
     legacyId,
-  } satisfies CreateManyDataType<typeof prismaClient.user.createMany>
+  } satisfies UpsertCreateType<typeof prismaClient.user.upsert>
 
   return data
 }
@@ -64,16 +65,20 @@ export const migrateUser = ({ legacyUser, emailMap }: MigrateUserInput) => {
 export const migrateUsers = async () => {
   const legacyUsers = await getLegacyUsers()
   output(`- Found ${legacyUsers.length} users to migrate`)
+
   const existingUsers = await getExistingUsers()
   output(`- Found ${existingUsers.idMap.size} already migrated users`)
+
   const usersData = legacyUsers.map((legacyUser) =>
-    migrateUser({
+    transformUser({
       legacyUser,
       emailMap: existingUsers.emailMap,
     }),
   )
+
   const chunkSize = 200
   let migratedUserCount = 0
+
   const upserted = await Promise.all(
     chunk(usersData, chunkSize).map((userChunk) =>
       prismaClient
@@ -103,5 +108,6 @@ export const migrateUsers = async () => {
         }),
     ),
   )
+
   return upserted.flat()
 }

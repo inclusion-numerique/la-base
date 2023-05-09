@@ -1,7 +1,7 @@
 import {
   LegacyUser,
-  migrateUser,
-} from '@app/migration/modelMigrations/migrateUser'
+  transformUser,
+} from '@app/migration/modelMigrations/migrateUsers'
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
 import { mockReset } from 'jest-mock-extended'
 
@@ -32,7 +32,7 @@ describe('migrateUser', () => {
     } satisfies LegacyUser
 
     expect(
-      migrateUser({
+      transformUser({
         legacyUser,
         emailMap: new Map(),
       }),

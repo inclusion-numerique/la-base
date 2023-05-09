@@ -1,9 +1,11 @@
-import type { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import mime from 'mime-types'
 import { legacyS3Client } from '@app/web/server/s3/legacyS3'
 import { ServerWebAppConfig } from '@app/web/webAppConfig'
+import { output } from '@app/cli/output'
+import { chunk } from 'lodash'
+import { UpsertCreateType } from '@app/migration/utils/UpsertCreateType'
 
 // There is ~4500 files uploaded dated 2023-05-07
 // There is also ~4000 cropped images of low quality that we will discard
@@ -77,27 +79,58 @@ export const getExistingUploads = async (): Promise<{
   return { keyMap }
 }
 
-export type MigrateUploadInput = {
-  legacyUpload: LegacyUpload
-  transaction: Prisma.TransactionClient
-}
-
-export const migrateUpload = async ({
-  transaction,
+export const transformUpload = ({
   legacyUpload,
-}: MigrateUploadInput) => {
+}: {
+  legacyUpload: LegacyUpload
+}) => {
   const data = {
     key: `legacy/${legacyUpload.Key}`,
     legacyKey: legacyUpload.Key,
     name: legacyUpload.Key,
     mimeType: mime.lookup(legacyUpload.Key) || 'application/octet-stream',
     size: legacyUpload.Size,
-  } satisfies Parameters<typeof transaction.upload.upsert>[0]['create']
+  } satisfies UpsertCreateType<typeof prismaClient.upload.upsert>
 
-  return transaction.upload.upsert({
-    where: { legacyKey: legacyUpload.Key },
-    create: data,
-    update: data,
-    select: { key: true, legacyKey: true },
-  })
+  return data
+}
+
+export const migrateUploads = async () => {
+  const legacyUploads = await getLegacyUploads()
+  output(`- Found ${legacyUploads.length} uploads to migrate`)
+  const existingUploads = await getExistingUploads()
+  output(`- Found ${existingUploads.keyMap.size} already migrated uploads`)
+  const uploadsData = legacyUploads.map((legacyUpload) =>
+    transformUpload({
+      legacyUpload,
+    }),
+  )
+  const chunkSize = 200
+  let migratedUploadCount = 0
+  const upserted = await Promise.all(
+    chunk(uploadsData, chunkSize).map((uploadChunk) =>
+      prismaClient
+        .$transaction(
+          uploadChunk.map((upload) =>
+            prismaClient.upload.upsert({
+              where: { legacyKey: upload.legacyKey },
+              create: upload,
+              update: upload,
+              select: { key: true, legacyKey: true },
+            }),
+          ),
+        )
+        .then((uploads) => {
+          migratedUploadCount += uploads.length
+          output(
+            `-- ${migratedUploadCount} ${(
+              (migratedUploadCount * 100) /
+              legacyUploads.length
+            ).toFixed(0)}%`,
+          )
+          return uploads
+        }),
+    ),
+  )
+  return upserted.flat()
 }

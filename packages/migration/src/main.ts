@@ -10,11 +10,7 @@ executeMigration()
   .then(async (result) => {
     await disconnect()
     console.log('Migration successful')
-    console.log(`- duration : ${(result.time / 1000).toFixed(2)}s`)
-    console.log('Migrated models :')
-    console.log(`- ${result.result.migratedUsers.length} users`)
-    console.log(`- ${result.result.migratedBases.length} bases`)
-    console.log(`- ${result.result.migratedResources.length} resources`)
+    console.log(`- Total duration : ${(result.time / 1000).toFixed(2)}s`)
   })
   // eslint-disable-next-line unicorn/prefer-top-level-await
   .catch(async (error) => {

@@ -1,8 +1,4 @@
-import {
-  getExistingUsers,
-  getLegacyUsers,
-  migrateUsers,
-} from '@app/migration/modelMigrations/migrateUser'
+import { migrateUsers } from '@app/migration/modelMigrations/migrateUsers'
 import { prismaClient } from '@app/web/prismaClient'
 import {
   getExistingBases,
@@ -17,9 +13,8 @@ import { computeSlugAndUpdateExistingSlugs } from '@app/migration/utils/computeS
 import {
   getExistingResourceSlugs,
   getLegacyResources,
-  migrateResource,
-} from '@app/migration/modelMigrations/migrateResource'
-import { runPromisesInChunks } from '@app/web/utils/runPromisesInChunks'
+  migrateResources,
+} from '@app/migration/modelMigrations/migrateResources'
 import {
   getExistingImages,
   getLegacyImages,
@@ -28,13 +23,11 @@ import {
 import {
   getExistingUploads,
   getLegacyUploads,
-  migrateUpload,
-} from '@app/migration/modelMigrations/migrateUpload'
+  migrateUploads,
+} from '@app/migration/modelMigrations/migrateUploads'
 
 // eslint-disable-next-line no-console
 const output = console.log
-
-const chunkSize = 200
 
 const formatDuration = (start: Date, end: Date) =>
   `${((end.getTime() - start.getTime()) / 1000).toFixed(1)}s`
@@ -51,10 +44,6 @@ export const executeMigration = async () => {
   output(`- Found ${legacyUploads.length} uploads to migrate`)
   const existingUploads = await getExistingUploads()
   output(`- Found ${existingUploads.keyMap.size} already migrated uploads`)
-  const legacyUsers = await getLegacyUsers()
-  output(`- Found ${legacyUsers.length} users to migrate`)
-  const existingUsers = await getExistingUsers()
-  output(`- Found ${existingUsers.idMap.size} already migrated users`)
   const legacyBases = await getLegacyBases()
   output(`- Found ${legacyBases.length} bases to migrate`)
   const existingBases = await getExistingBases()
@@ -78,7 +67,7 @@ export const executeMigration = async () => {
   output('')
   output('Executing model migrations')
 
-  output(`- Migrating ${legacyUsers.length} users...`)
+  output(`- Migrating users...`)
 
   const migratedUsers = await migrateUsers()
 
@@ -91,15 +80,7 @@ export const executeMigration = async () => {
 
   output(`- Migrating uploads...`)
 
-  const migratedUploads = await runPromisesInChunks(
-    legacyUploads.map((legacyUpload) =>
-      migrateUpload({
-        legacyUpload,
-        transaction: prismaClient,
-      }),
-    ),
-    chunkSize,
-  )
+  const migratedUploads = await migrateUploads()
   output(`- Migrated ${migratedUploads.length} uploads`)
 
   const uploadKeyFromLegacyKey = createLegacyToNewKeyHelper(
@@ -151,61 +132,30 @@ export const executeMigration = async () => {
 
   output(`- Migrating resources...`)
 
-  let migratedResourceCount = 0
-
-  const migratedResources = await runPromisesInChunks(
-    legacyResources.map((legacyResource) => {
-      const slug = computeSlugAndUpdateExistingSlugs(
-        legacyResource,
-        existingResourceSlugs,
-      )
-      return migrateResource({
-        legacyResource,
-        transaction: prismaClient,
-        slug,
-        userIdFromLegacyId,
-        baseIdFromLegacyId,
-        imageIdFromLegacyId,
-        uploadKeyFromLegacyKey,
-      })
-        .then((migratedResource) => {
-          migratedResourceCount += 1
-          if (migratedResourceCount % 200 === 0) {
-            output(
-              `-- ${migratedResourceCount} ${(
-                (migratedResourceCount * 100) /
-                legacyResources.length
-              ).toFixed(0)}%`,
-            )
-          }
-          return migratedResource
-        })
-        .catch((error) => {
-          output('Error migrating resource', legacyResource)
-          throw error
-        })
-    }),
-    chunkSize,
-  )
+  const { migratedResources, migratedContents } = await migrateResources({
+    userIdFromLegacyId,
+    baseIdFromLegacyId,
+    imageIdFromLegacyId,
+    uploadKeyFromLegacyKey,
+    existingResourceSlugs,
+  })
 
   output(`- Migrated ${migratedResources.length} resources`)
+  output(`- Migrated ${migratedContents.length} contents`)
 
   const resourceIdFromLegacyId = createLegacyToNewIdHelper(
-    migratedResources.map(({ resource }) => resource),
+    migratedResources,
     ({ legacyId }) => `Resource with legacyId ${legacyId} not found`,
   )
 
   output(`- Updating resource links in contents...`)
 
-  // TODO Move this code in its own file
-  const resourceLinkContents = migratedResources.flatMap((migrated) =>
-    migrated.contents.filter(
-      (
-        content,
-      ): content is (typeof migratedResources)[number]['contents'][number] & {
-        legacyLinkedResourceId: number
-      } => !!content.legacyLinkedResourceId,
-    ),
+  const resourceLinkContents = migratedContents.filter(
+    (
+      content,
+    ): content is (typeof migratedContents)[number] & {
+      legacyLinkedResourceId: number
+    } => !!content.legacyLinkedResourceId,
   )
 
   const updatedResourceLinks = await Promise.all(
