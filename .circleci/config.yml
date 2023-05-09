@@ -372,6 +372,7 @@ jobs:
           keys:
             - << pipeline.parameters.cache_version >>-cypress-{{ checksum "<< pipeline.parameters.lockfile >>" }}
       - create_dotenv_file
+      - add_secrets_to_dotenv_file
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate

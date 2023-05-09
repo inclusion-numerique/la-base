@@ -15,7 +15,9 @@ export const addNextPublicVariablesToDotEnv = new Command()
     await appendEnvVariablesToDotEnvFile({
       comment: 'Next public environment needed at build time',
       environmentVariables: [
-        { name: 'NEXT_PUBLIC_SENTRY_ENVIRONMENT', value: namespace },
+        targetEnv === 'local'
+          ? { name: 'NEXT_PUBLIC_SENTRY_DSN', value: '' }
+          : { name: 'NEXT_PUBLIC_SENTRY_ENVIRONMENT', value: namespace },
         {
           name: 'NEXT_PUBLIC_INCLUSION_CONNECT_ISSUER',
           value: `$INCLUSION_CONNECT_${targetEnv.toUpperCase()}_ISSUER`,
