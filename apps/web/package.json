@@ -67,7 +67,7 @@
     "lodash": "^4.17.21",
     "maplibre-gl": "^2.4.0",
     "nanoid": "^3.3.6",
-    "next": "^13.4.1",
+    "next": "^13.4.2-canary.3",
     "next-auth": "4.22.1",
     "node-html-parser": "^6.1.5",
     "nodemailer": "^6.9.1",
