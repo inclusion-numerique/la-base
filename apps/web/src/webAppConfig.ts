@@ -65,9 +65,6 @@ export const PublicWebAppConfig = {
   projectTitle,
   mainLiveUrl,
   repository: repositoryUrl,
-  disableLinkPrefetch:
-    NodeEnvironment === 'development' &&
-    process.env.NEXT_PUBLIC_DEVELOPMENT_DISABLE_LINK_PREFETCH === 'true',
   InclusionConnect: {
     issuer: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_ISSUER ?? '',
     clientId: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_CLIENT_ID ?? '',

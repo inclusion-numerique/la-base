@@ -77,7 +77,6 @@ workflows:
       equal: [ web_app_deployment, << pipeline.parameters.trigger_workflow >> ]
     jobs:
       - prepare_workspace_dependencies
-      - prepare_web_prod_dependencies
       - lint:
           requires:
             - prepare_workspace_dependencies
@@ -90,7 +89,6 @@ workflows:
       - build_web:
           requires:
             - prepare_workspace_dependencies
-            - prepare_web_prod_dependencies
 
       - test_web_components:
           requires:
@@ -175,6 +173,7 @@ jobs:
             - << pipeline.parameters.virtual_store_dir >>
             - ./node_modules
             - ./apps/web/node_modules
+            - ./apps/web/public/dsfr
             - ./apps/cli/node_modules
             - ./packages/cdk/node_modules
             - ./packages/config/node_modules
@@ -185,31 +184,11 @@ jobs:
             - ./packages/ui/node_modules
             - ./packages/fixtures/node_modules
             - ./packages/migration/node_modules
+            - ./packages/migration/prisma/migration-client
       - save_cache:
           key: << pipeline.parameters.cache_version >>-cypress-{{ checksum "<< pipeline.parameters.lockfile >>" }}
           paths:
             - /home/circleci/.cache/Cypress
-
-  prepare_web_prod_dependencies:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - skip/skip_unchanged:
-          paths: pnpm-lock.yaml
-      - install_pnpm
-      - run:
-          name: 'Install dependencies'
-          command: |
-            pnpm install -F @app/web --prod --frozen-lockfile
-      - run:
-          name: 'Monorepo manypkg check'
-          command: pnpm manypkg check
-      - save_cache:
-          key: << pipeline.parameters.cache_version >>-web-prod-{{ checksum "<< pipeline.parameters.lockfile >>" }}
-          paths:
-            - ./node_modules
-            - ./apps/web/node_modules
 
   lint:
     executor: node
@@ -291,18 +270,17 @@ jobs:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
       - add_secrets_to_dotenv_file
-      - add_dotenv_vars_to_bash_env
       - setup_docker_web_env
-      - setup_next_public_env
       - run:
-          name: 'Install DSFR'
-          command: pnpm --silent -F @app/web setup:dsfr
+          name: "Add NEXT_PUBLIC_* env to .env"
+          command: |
+            pnpm --silent cli dotenv:add-next-public $NAMESPACE
       - restore_cache:
           keys:
             - << pipeline.parameters.cache_version >>-next-{{ checksum "<< pipeline.parameters.lockfile >>" }}
       - run:
           name: 'Build next app'
-          command: DATABASE_URL=$CI_DATABASE_URL pnpm --silent -F @app/web build
+          command: pnpm --silent -F @app/web build
       - save_cache:
           key: << pipeline.parameters.cache_version >>-next-{{ checksum "<< pipeline.parameters.lockfile >>" }}
           paths:
@@ -334,9 +312,6 @@ jobs:
           command: pnpm --silent -F @app/web prisma generate
       - add_secrets_to_dotenv_file
       - run:
-          name: 'Setup DSFR'
-          command: pnpm --silent -F @app/web setup:dsfr
-      - run:
           name: 'Build storybook and deploy on chromatic'
           command: pnpm --silent -F @app/storybook chromatic
 
@@ -356,10 +331,6 @@ jobs:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
       - add_secrets_to_dotenv_file
-      - add_dotenv_vars_to_bash_env
-      - run:
-          name: 'Install DSFR'
-          command: pnpm --silent -F @app/web setup:dsfr
       - run:
           name: 'Run Cypress component testing'
           command: pnpm --silent -F @app/web cy run --component --record --parallel --group web/components
@@ -377,10 +348,6 @@ jobs:
             - << pipeline.parameters.cache_version >>-cypress-{{ checksum "<< pipeline.parameters.lockfile >>" }}
       - create_dotenv_file
       - add_secrets_to_dotenv_file
-      - add_dotenv_vars_to_bash_env
-      - run:
-          name: 'Install DSFR'
-          command: pnpm --silent -F @app/ui setup:dsfr
       - run:
           name: 'Run Cypress component testing'
           command: pnpm --silent -F @app/ui cy run --component --record --parallel --group ui/components
@@ -400,7 +367,18 @@ jobs:
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
-      - add_secrets_to_dotenv_file
+      - setup_docker_web_env
+      - run:
+          name: "Add NEXT_PUBLIC_* env to .env"
+          command: |
+            pnpm --silent cli dotenv:add-next-public --local $NAMESPACE
+      - restore_cache:
+          keys:
+            - << pipeline.parameters.cache_version >>-next-{{ checksum "<< pipeline.parameters.lockfile >>" }}
+      - run:
+          # We build in the e2e job, using --local NEXT_PUBLIC_* env variables as they are inlined at compile time
+          name: 'Build next app'
+          command: pnpm --silent -F @app/web build
       - run:
           name: 'Add e2e vars to .env'
           command: |
@@ -410,8 +388,6 @@ jobs:
             echo "SMTP_USERNAME=mailuser" >> .env
             echo "SMTP_PASSWORD=mailpassword" >> .env
             echo "SMTP_SERVER=localhost" >> .env
-            echo 'NEXT_PUBLIC_INCLUSION_CONNECT_ISSUER=$INCLUSION_CONNECT_LOCAL_ISSUER' >> .env
-            echo 'NEXT_PUBLIC_INCLUSION_CONNECT_CLIENT_ID=$INCLUSION_CONNECT_LOCAL_CLIENT_ID' >> .env
             echo 'INCLUSION_CONNECT_CLIENT_SECRET=$INCLUSION_CONNECT_LOCAL_CLIENT_SECRET' >> .env
       - run:
           name: 'Create CI database schema'
@@ -419,7 +395,6 @@ jobs:
             pnpm --silent -F @app/web prisma db push --skip-generate --accept-data-loss
       - restore_cache:
           key: << pipeline.id >>-web-build
-      - add_dotenv_vars_to_bash_env
       - run:
           name: Isolate built standalone application to correctly e2e test node_modules bundling and run
           background: true
@@ -446,7 +421,6 @@ jobs:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
       - add_secrets_to_dotenv_file
-      - add_dotenv_vars_to_bash_env
       - setup_docker_web_env
       - run:
           name: 'Setup and export database password'
@@ -470,7 +444,7 @@ jobs:
       - run:
           name: 'Add migration database in env'
           command: |
-            echo "export MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> ${BASH_ENV}
+            echo "MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> .env
       - run:
           name: 'Generate Prisma migration client'
           command: |
@@ -478,7 +452,7 @@ jobs:
       - run:
           name: 'Restore latest legacy database dump'
           command: |
-            pnpm --silent -F cli cli legacy:import-database
+            pnpm --silent cli legacy:import-database
       - queue/until_front_of_line:
           time: '3'
       - run:
@@ -498,17 +472,11 @@ jobs:
           name: 'Create .env file from deployment outputs'
           command: |
             pnpm --silent cli dotenv:from-cdk web
-      - add_dotenv_vars_to_bash_env
-      - run:
-          name: 'Add migration database in env after cdk vars have been added'
-          command: |
-            echo "export MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> ${BASH_ENV}
       - run:
           name: 'Add connection pool parameters to database URL'
           # https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#disabling-the-pool-timeout
           command: |
             echo "DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> .env
-            echo "export DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> ${BASH_ENV}
       - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID
@@ -660,13 +628,6 @@ commands:
           name: "Add secrets to .env"
           command: |
             SCW_ACCESS_KEY=$CI_SCW_ACCESS_KEY SCW_SECRET_KEY=$CI_SCW_SECRET_KEY pnpm --silent cli dotenv:from-secrets
-
-  setup_next_public_env:
-    steps:
-      - run:
-          name: "Add NEXT_PUBLIC_* env to .env"
-          command: |
-            pnpm --silent cli dotenv:add-next-public $NAMESPACE
 
   add_dotenv_vars_to_bash_env:
     steps:

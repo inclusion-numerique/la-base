@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "load": "ts-node -r tsconfig-paths/register src/seeds.ts",
+    "load": "dotenv -e ../../.env -- ts-node -r tsconfig-paths/register src/seeds.ts",
     "lint": "eslint src",
     "tsc": "tsc --noEmit",
     "test": "jest --passWithNoTests"
@@ -16,6 +16,7 @@
     "@faker-js/faker": "^7.6.0",
     "@prisma/client": "^4.13.0",
     "@types/node": "^18.16.6",
+    "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },

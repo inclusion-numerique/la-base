@@ -565,6 +565,9 @@ importers:
       '@types/node':
         specifier: ^18.16.6
         version: 18.16.6
+      dotenv:
+        specifier: ^16.0.3
+        version: 16.0.3
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.16.6)(typescript@5.0.4)
