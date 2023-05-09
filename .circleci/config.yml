@@ -118,10 +118,7 @@ workflows:
 
       - chromatic:
           requires:
-            - lint
-            - test_web_e2e
-            - test_web_components
-            - test_ui_components
+            - deploy_web
 
   project_infrastructure_deployment:
     when:
@@ -486,7 +483,7 @@ jobs:
           name: 'Add connection pool parameters to database URL'
           # https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#disabling-the-pool-timeout
           command: |
-            echo "DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> .env
+            echo "DATABASE_URL=$DATABASE_URL?connection_limit=50&pool_timeout=0" >> .env
       - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID
