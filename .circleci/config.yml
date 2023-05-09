@@ -66,6 +66,10 @@ parameters:
     ## project_stack_deployment
     default: "web_app_deployment"
   # Name of the environment to scrap
+  web_app_docker_registry:
+    # This is redundant with .env.dist but needed as jobs are way simpler to configure with this parameter
+    type: string
+    default: 'rg.fr-par.scw.cloud/la-base-web-app'
   preview_deletion_branch:
     type: string
     default: ""
@@ -100,7 +104,7 @@ workflows:
 
       - test_web_e2e:
           requires:
-            - build_web
+            - lint
 
       - deploy_web:
           requires:
@@ -641,7 +645,7 @@ commands:
       - run:
           name: "Set docker env vars"
           command: |
-            echo "export WEB_APP_DOCKER_REGISTRY='$WEB_APP_DOCKER_REGISTRY'" >> ${BASH_ENV}
+            echo "export WEB_APP_DOCKER_REGISTRY='<< pipeline.parameters.web_app_docker_registry >>'" >> ${BASH_ENV}
             echo "export BRANCH='<< pipeline.git.branch >>'" >> ${BASH_ENV}
             echo "export NAMESPACE=$(echo '<< pipeline.git.branch >>' | sed -e 's/\//-/g')" >> ${BASH_ENV}
             echo "export IMAGE_NAME=$(echo 'stack-web-<< pipeline.git.branch >>' | sed -e 's/\//-/g')" >> ${BASH_ENV}

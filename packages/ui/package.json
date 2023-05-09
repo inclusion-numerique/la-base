@@ -8,9 +8,10 @@
     "test": "jest --passWithNoTests",
     "tsc": "tsc --noEmit",
     "postinstall": "pnpm --silent setup:dsfr",
+    "with-env": "dotenv -e ../../.env --",
     "setup:dsfr": "FROM=\"./node_modules/@gouvfr/dsfr/dist\"; TO=\"public/dsfr\"; if [ ! -d \"$FROM\" ]; then FROM=\"../../node_modules/@gouvfr/dsfr/dist\"; fi; mkdir -p $TO/utility && cp $FROM/dsfr.module.min.js $TO/ && cp $FROM/dsfr.module.min.js.map $TO/ && cp $FROM/dsfr.nomodule.min.js $TO/ && cp $FROM/dsfr.nomodule.min.js.map $TO/ && cp $FROM/dsfr.min.css $TO/ && cp $FROM/utility/utility.min.css $TO/utility/ && cp -R $FROM/icons $TO/ && cp -R $FROM/artwork $TO/ && cp -R $FROM/fonts $TO/",
-    "cy": "cypress",
-    "cy:open": "cypress open"
+    "cy": "pnpm --silent with-env cypress",
+    "cy:open": "pnpm --silent with-env cypress open"
   },
   "engines": {
     "node": "^18.16"
@@ -20,6 +21,7 @@
     "@gouvfr/dsfr": "^1.9.2",
     "@hookform/resolvers": "^3.1.0",
     "classnames": "^2.3.2",
+    "dotenv": "^16.0.3",
     "next": "^13.4.2-canary.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
