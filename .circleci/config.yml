@@ -188,7 +188,6 @@ jobs:
             - ./packages/ui/node_modules
             - ./packages/fixtures/node_modules
             - ./packages/migration/node_modules
-            - ./packages/migration/prisma/migration-client
       - save_cache:
           key: << pipeline.parameters.cache_version >>-cypress-{{ checksum "<< pipeline.parameters.lockfile >>" }}
           paths:
