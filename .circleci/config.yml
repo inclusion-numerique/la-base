@@ -484,6 +484,7 @@ jobs:
           name: 'Add connection pool parameters to database URL'
           # https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#disabling-the-pool-timeout
           command: |
+            echo "DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> .env
             echo "export DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> ${BASH_ENV}
       - run:
           name: Set deployment status to migration
