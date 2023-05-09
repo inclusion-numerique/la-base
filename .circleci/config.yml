@@ -104,11 +104,12 @@ workflows:
 
       - test_web_e2e:
           requires:
-            - lint
+            - prepare_workspace_dependencies
 
       - deploy_web:
           requires:
             - lint
+            - build_web
             - test_packages
             - test_web
             - test_web_components
@@ -117,7 +118,10 @@ workflows:
 
       - chromatic:
           requires:
-            - deploy_web
+            - lint
+            - test_web_e2e
+            - test_web_components
+            - test_ui_components
 
   project_infrastructure_deployment:
     when:
