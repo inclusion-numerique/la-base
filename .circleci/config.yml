@@ -404,6 +404,7 @@ jobs:
             pnpm --silent -F @app/web prisma db push --skip-generate --accept-data-loss
       - restore_cache:
           key: << pipeline.id >>-web-build
+      - add_dotenv_vars_to_bash_env
       - run:
           name: Isolate built standalone application to correctly e2e test node_modules bundling and run
           background: true
