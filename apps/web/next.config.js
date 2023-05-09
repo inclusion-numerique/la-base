@@ -30,7 +30,7 @@ const externalServerPackagesForFasterDevelopmentUx = isDevelopment
       ...Object.keys(packageJson.dependencies),
       ...Object.keys(packageJson.devDependencies),
     ].filter((packageName) => !alwaysBundledPackages.has(packageName))
-  : []
+  : undefined
 
 const nextConfig = {
   output: 'standalone',
@@ -40,12 +40,14 @@ const nextConfig = {
     typedRoutes: true,
     appDir: true,
     // See https://beta.nextjs.org/docs/api-reference/next.config.js#servercomponentsexternalpackages
-    serverComponentsExternalPackages: [
-      'nanoid',
-      'mjml',
-      'mjml-core',
-      ...externalServerPackagesForFasterDevelopmentUx,
-    ],
+    serverComponentsExternalPackages:
+      externalServerPackagesForFasterDevelopmentUx,
+    // serverComponentsExternalPackages: [
+    //   'nanoid',
+    //   'mjml',
+    //   'mjml-core',
+    //   ...externalServerPackagesForFasterDevelopmentUx,
+    // ],
     // This includes files from the monorepo base two directories up
     outputFileTracingRoot: path.join(__dirname, '../../'),
     // outputFileTracingExcludes: {
