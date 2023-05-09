@@ -2,6 +2,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+const path = require('node:path')
 const packageJson = require('./package.json')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -32,8 +33,7 @@ const externalServerPackagesForFasterDevelopmentUx = isDevelopment
   : []
 
 const nextConfig = {
-  // FIXME standalone does not support app directory for now
-  // output: 'standalone',
+  output: 'standalone',
   reactStrictMode: true,
   transpilePackages: ['@app/emails'],
   experimental: {
@@ -46,6 +46,14 @@ const nextConfig = {
       'mjml-core',
       ...externalServerPackagesForFasterDevelopmentUx,
     ],
+    // This includes files from the monorepo base two directories up
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+    // outputFileTracingExcludes: {
+    //   '/api/hello': ['./un-necessary-folder/**/*'],
+    // },
+    // outputFileTracingIncludes: {
+    //   '/api/another': ['./necessary-folder/**/*'],
+    // },
   },
   modularizeImports,
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

@@ -308,22 +308,6 @@ jobs:
           paths:
             - ./apps/web/.next/cache
       - run:
-          name: 'Clear dependencies to install only prod dependencies'
-          command: |
-            rm -rf node_modules
-            rm -rf apps/web/node_modules
-      - restore_cache:
-          keys:
-            - << pipeline.parameters.cache_version >>-web-prod-{{ checksum "<< pipeline.parameters.lockfile >>" }}
-      - run:
-          name: 'Re-generate Prisma after cleaning dependencies'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Cleanup build'
-          command: |
-            # standalone not needed for plain build
-            rm -rf apps/web/.next/standalone
-      - run:
           name: 'Build docker image'
           command: DOCKER_BUILDKIT=1 docker build --progress=plain -t $IMAGE_BUILD_TAG -f docker/web/Dockerfile .
       - run:
@@ -334,7 +318,7 @@ jobs:
       - save_cache:
           key: << pipeline.id >>-web-build
           paths:
-            - ./apps/web/.next
+            - ./apps/web/.next/standalone
             - ./apps/web/public
 
   chromatic:
@@ -438,7 +422,8 @@ jobs:
           name: Running next server
           background: true
           command: |
-            pnpm --silent -F @app/web with-env next start
+            pnpm --silent -F @app/web standalone:configure
+            pnpm --silent -F @app/web standalone:start
       - run:
           name: 'Run cypress e2e tests'
           command: |

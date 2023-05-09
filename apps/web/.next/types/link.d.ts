@@ -29,8 +29,8 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/api/file/get`
-    | `/api/health`
     | `/api/file/upload`
+    | `/api/health`
     | `/api/test/index.api.spec`
     | `/api/test`
     | `/api/test/service.spec`
@@ -38,21 +38,21 @@ declare namespace __next_route_internal_types__ {
     | `/robots.txt`
     | `/`
     | `/(.)creer-une-ressource`
-    | `/404`
-    | `/500`
     | `/401`
     | `/403`
-    | `/creer-une-ressource`
-    | `/ressources`
-    | `/mentions-legales`
+    | `/404`
     | `/accessibilite`
-    | `/confidentialite`
+    | `/500`
     | `/bases`
+    | `/confidentialite`
+    | `/creer-une-ressource`
+    | `/mentions-legales`
+    | `/ressources`
     | `/connexion`
     | `/creer-un-compte`
     | `/deconnexion`
-    | `/connexion/verification`
     | `/connexion/erreur`
+    | `/connexion/verification`
   type DynamicRoutes<T extends string = string> = 
     | `/api/auth/${CatchAllSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`

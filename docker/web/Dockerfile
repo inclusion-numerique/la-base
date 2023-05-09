@@ -7,25 +7,18 @@ RUN apt-get update && apt-get install -y openssl dumb-init
 ENV PORT 8080
 ENV NODE_ENV production
 
-# App will have structure :
-# /node_modules -> Root dependencies
-# /apps/web
-#      /node_modules -> apps/web dependencies
-#      /.next -> next build
-#      /src
-#      /public
-#      /...other stuff
+# Copy Build
+# Build directory as same structure than monorepo
+COPY apps/web/.next/standalone .
 
-# Copy root workspace dependencies
-COPY node_modules ./node_modules
+# Copy public assets
+COPY apps/web/public ./apps/web/public
 
-# Copy apps/web
-COPY apps/web ./apps/web
+# Copy static built assets (js and css)
+COPY apps/web/.next/static ./apps/web/.next/static
 
 EXPOSE $PORT
 
-WORKDIR /app/apps/web
-
 ENTRYPOINT ["dumb-init", "--"]
 
-CMD ["node_modules/.bin/next", "start"]
+CMD ["node", "./apps/web/server.js"]

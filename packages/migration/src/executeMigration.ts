@@ -20,11 +20,7 @@ import {
   getLegacyImages,
   migrateImage,
 } from '@app/migration/modelMigrations/migrateImage'
-import {
-  getExistingUploads,
-  getLegacyUploads,
-  migrateUploads,
-} from '@app/migration/modelMigrations/migrateUploads'
+import { migrateUploads } from '@app/migration/modelMigrations/migrateUploads'
 
 // eslint-disable-next-line no-console
 const output = console.log
@@ -40,10 +36,6 @@ export const executeMigration = async () => {
 
   output('Fetching legacy data and context data in new database')
 
-  const legacyUploads = await getLegacyUploads()
-  output(`- Found ${legacyUploads.length} uploads to migrate`)
-  const existingUploads = await getExistingUploads()
-  output(`- Found ${existingUploads.keyMap.size} already migrated uploads`)
   const legacyBases = await getLegacyBases()
   output(`- Found ${legacyBases.length} bases to migrate`)
   const existingBases = await getExistingBases()
