@@ -4,9 +4,6 @@ import { v4 } from 'uuid'
 import type { Prisma } from '@prisma/client'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
 import { prismaClient } from '@app/web/prismaClient'
-import { CreateManyDataType } from '@app/migration/utils/createManyDataType'
-import { output } from '@app/cli/output'
-import { split } from '@app/migration/utils/split'
 
 export const getLegacyUsers = () => migrationPrismaClient.main_user.findMany()
 
@@ -38,17 +35,21 @@ export const getExistingUsers = async (): Promise<{
 
 export type MigrateUserInput = {
   legacyUser: LegacyUser
+  transaction: Prisma.TransactionClient
   emailMap: Map<string, string>
 }
 
-export const migrateUser = ({ legacyUser, emailMap }: MigrateUserInput) => {
+export const migrateUser = async ({
+  legacyUser,
+  transaction,
+  emailMap,
+}: MigrateUserInput) => {
   const legacyId = Number(legacyUser.id)
 
   // We manage the edge case of a new user created in new app with same email as not yet migrated legacy user
   const existingIdFromEmail = emailMap.get(legacyUser.email)
 
   const data = {
-    id: existingIdFromEmail ?? v4(),
     email: legacyUser.email,
     firstName: legacyUser.first_name,
     lastName: legacyUser.last_name,
@@ -57,49 +58,12 @@ export const migrateUser = ({ legacyUser, emailMap }: MigrateUserInput) => {
     updated: legacyUser.modified,
     emailVerified: legacyUser.is_active ? legacyUser.created : null,
     legacyId,
-  } satisfies CreateManyDataType<typeof prismaClient.user.createMany>
+  } satisfies Parameters<typeof transaction.user.upsert>[0]['update']
 
-  return data
-}
-
-export const migrateUsers = async ({
-  transaction,
-}: {
-  transaction: Prisma.TransactionClient
-}) => {
-  const legacyUsers = await getLegacyUsers()
-  output(`- Found ${legacyUsers.length} users to migrate`)
-  const existingUsers = await getExistingUsers()
-  output(`- Found ${existingUsers.idMap.size} already migrated users`)
-  const usersData = legacyUsers.map((legacyUser) =>
-    migrateUser({
-      legacyUser,
-      emailMap: existingUsers.emailMap,
-    }),
-  )
-
-  const [usersToCreate, usersToUpdate] = split(
-    usersData,
-    ({ legacyId, email }) =>
-      !existingUsers.idMap.has(legacyId) && !existingUsers.emailMap.has(email),
-  )
-
-  const created = await Promise.all(
-    usersToCreate.map((user) =>
-      transaction.user.create({
-        data: user,
-        select: { id: true, legacyId: true },
-      }),
-    ),
-  )
-  const updated = await Promise.all(
-    usersToUpdate.map((user) =>
-      transaction.user.update({
-        data: user,
-        where: { legacyId: user.legacyId },
-        select: { id: true, legacyId: true },
-      }),
-    ),
-  )
-  return [...created, ...updated]
+  return transaction.user.upsert({
+    where: existingIdFromEmail ? { id: existingIdFromEmail } : { legacyId },
+    create: { id: v4(), ...data },
+    update: data,
+    select: { id: true, legacyId: true },
+  })
 }
