@@ -1,0 +1,9 @@
+.sideMenu {
+  @media (min-width: 768px) {
+    margin: 48px 0 0 24px;
+
+    :global(.fr-sidemenu__inner) {
+      box-shadow: unset;
+    }
+  }
+}

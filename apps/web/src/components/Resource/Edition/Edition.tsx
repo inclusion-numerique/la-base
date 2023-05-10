@@ -10,7 +10,6 @@ import {
 } from '@app/web/server/rpc/resource/editResource'
 import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
-import Separator from '../../Separator/Separator'
 import { ResourceModificationState } from '../enums/ResourceModificationState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import AddContentButton from './AddContentButton'
@@ -77,7 +76,7 @@ const Edition = ({
           user={user}
           updateResource={updateBaseResource}
         />
-        <Separator className="fr-my-4w" />
+        <hr className="fr-my-4w" />
         <div className="fr-mb-5w">
           <EditableImage />
         </div>
@@ -86,7 +85,7 @@ const Edition = ({
           updateResource={updateTitleResource}
           setModificationState={setModificationState}
         />
-        <Separator className="fr-my-4w" />
+        <hr className="fr-my-4w" />
         <div className={styles.title}>Contenu de la ressource</div>
         <AddContentButton />
       </div>

@@ -1,0 +1,10 @@
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 24px;
+  gap: 8px;
+
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
+}

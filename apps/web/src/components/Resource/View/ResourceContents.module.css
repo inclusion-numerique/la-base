@@ -1,3 +1,14 @@
+.dateInformations {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 32px;
+  }
+}
+
 .header {
   display: flex;
 }

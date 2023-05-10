@@ -1,0 +1,40 @@
+.container {
+  position: sticky;
+  top: 24px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.button {
+  display: none;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    display: inline-flex;
+  }
+}
+
+.alwaysVisibleButton {
+  display: inline-flex;
+  width: fit-content;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+}
+
+.button,
+.alwaysVisibleButton {
+  justify-content: center;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}

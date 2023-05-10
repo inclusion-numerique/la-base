@@ -1,0 +1,18 @@
+.headerSeparator {
+  width: 100%;
+  margin-top: 16px;
+
+  hr {
+    padding-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.user {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
