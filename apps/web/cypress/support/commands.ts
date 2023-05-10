@@ -70,6 +70,12 @@ Cypress.Commands.add('createResource', (resource: CreateResourceInput) => {
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
 })
+
+Cypress.Commands.add('dsfrModalsShouldBeBound', () => {
+  cy.get('dialog.fr-modal').each((modal) =>
+    cy.wrap(modal).should('have.attr', 'data-fr-js-modal', 'true'),
+  )
+})
 Cypress.Commands.add('testId', (testId: string) =>
   cy.get(`[data-testid="${testId}"]`),
 )
@@ -89,6 +95,7 @@ declare global {
       createResource(resource: CreateResourceInput): Chainable<void>
       signin(user: { email: string }): Chainable<string>
       dsfrShouldBeStarted(): Chainable<void>
+      dsfrModalsShouldBeBound(): Chainable<void>
       testId(testId: string): Chainable<JQuery<HTMLElement>>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
