@@ -1,11 +1,5 @@
-import { ServerWebAppConfig } from '@app/web/webAppConfig'
-
-// Disallow indexing of preview environments
+// Disallow indexing while not in production
 export const GET = () =>
-  ServerWebAppConfig.isMain
-    ? new Response(`User-agent: *
-Allow: /
-`)
-    : new Response(`User-agent: *
+  new Response(`User-agent: *
 Disallow: /
 `)

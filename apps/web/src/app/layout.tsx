@@ -6,7 +6,6 @@ import { Dsfr } from '@app/web/app/Dsfr'
 import { Matomo } from '@app/web/app/Matomo'
 import { PreloadResources } from '@app/web/app/PreloadResources'
 import { EnvInformation } from '@app/web/app/EnvInformation'
-import { getServerBaseUrl } from '@app/web/utils/baseUrl'
 import Link from 'next/link'
 import { setLink } from '@codegouvfr/react-dsfr/link'
 
@@ -20,10 +19,11 @@ setLink({
   Link,
 })
 
-export const generateMetadata = (): Metadata => ({
-  metadataBase: new URL(getServerBaseUrl()),
+export const metadata: Metadata = {
   title: PublicWebAppConfig.projectTitle,
   themeColor: '#000091',
+  // Do not index while we are not in production
+  robots: 'noindex, nofollow',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon/favicon.ico',
@@ -36,7 +36,7 @@ export const generateMetadata = (): Metadata => ({
   },
   description: PublicWebAppConfig.projectTitle,
   manifest: '/favicon/manifest.webmanifest',
-})
+}
 
 const RootLayout = ({
   children,
