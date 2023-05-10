@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import PublicFooter from '@app/web/app/(public)/PublicFooter'
-import PublicHeader from '@app/web/app/(public)/PublicHeader'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
-import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
 import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
+import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
 
 const PublicLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()

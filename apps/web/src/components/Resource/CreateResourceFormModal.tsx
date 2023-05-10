@@ -1,30 +1,30 @@
 'use client'
 
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import InputFormField from '@app/ui/components/Form/InputFormField'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import {
+  CreateResourceModal,
+  closeCreateResourceModal,
+  createResourceModalId,
+  openCreateResourceModal,
+} from '@app/web/components/Resource/CreateResourceModal'
+import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
+import {
+  CreateResource,
+  createResourceValidation,
+} from '@app/web/server/rpc/resource/createResource'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
-import { useForm } from 'react-hook-form'
-import {
-  CreateResource,
-  createResourceValidation,
-} from '@app/web/server/rpc/resource/createResource'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { useRouter, useSearchParams } from 'next/navigation'
-import InputFormField from '@app/ui/components/Form/InputFormField'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import {
-  closeCreateResourceModal,
-  CreateResourceModal,
-  createResourceModalId,
-  openCreateResourceModal,
-} from '@app/web/components/Resource/CreateResourceModal'
-import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
-import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
 
 const titleInfo = (title: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`

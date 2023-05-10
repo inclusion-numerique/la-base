@@ -1,5 +1,5 @@
-import { isBrowser } from '@app/web/utils/isBrowser'
 import { useState } from 'react'
+import { isBrowser } from '@app/web/utils/isBrowser'
 
 let observer: MutationObserver
 

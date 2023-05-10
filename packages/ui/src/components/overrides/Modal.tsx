@@ -1,17 +1,17 @@
 /* eslint no-use-before-define: 0, react/no-unused-prop-types: 0, react/prop-types: 0, @typescript-eslint/no-use-before-define: 0, @typescript-eslint/naming-convention:0, @typescript-eslint/no-unsafe-call:0, unicorn/prefer-query-selector: 0, default-case: 0, @typescript-eslint/no-explicit-any:0, react/no-array-index-key:0, jsx-a11y/no-redundant-roles:0, @typescript-eslint/no-unsafe-return:0  */
 import React, {
   type CSSProperties,
+  type ReactNode,
   forwardRef,
   memo,
-  type ReactNode,
 } from 'react'
-import { assert } from 'tsafe/assert'
-import { symToStr } from 'tsafe/symToStr'
 import type { Equals } from 'tsafe'
+import { assert } from 'tsafe/assert'
 import { capitalize } from 'tsafe/capitalize'
-import { uncapitalize } from 'tsafe/uncapitalize'
-import { typeGuard } from 'tsafe/typeGuard'
 import { overwriteReadonlyProp } from 'tsafe/lab/overwriteReadonlyProp'
+import { symToStr } from 'tsafe/symToStr'
+import { typeGuard } from 'tsafe/typeGuard'
+import { uncapitalize } from 'tsafe/uncapitalize'
 import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import type {
   FrIconClassName,

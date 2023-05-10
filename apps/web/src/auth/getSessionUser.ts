@@ -6,6 +6,7 @@ import {
   sessionCookie,
 } from '@app/web/auth/getSessionTokenFromCookies'
 import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
+import { SessionUser } from '@app/web/auth/sessionUser'
 
 export const getSessionToken = (): string | null => {
   const allCookies = cookies()

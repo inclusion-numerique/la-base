@@ -1,7 +1,6 @@
 /* eslint react/jsx-props-no-spreading: off */
-
-import { createModal } from '@app/ui/components/overrides/Modal'
 import React from 'react'
+import { createModal } from '@app/ui/components/overrides/Modal'
 
 export const {
   CreateResourceModal,
