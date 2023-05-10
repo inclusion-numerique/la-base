@@ -5,12 +5,9 @@ import {
 } from '../../support/helpers'
 
 const testDefaultState = () => {
-  cy.get('[data-testid="resource-published-state"]').should(
-    'have.text',
-    'Privée',
-  )
-  cy.get('[data-testid="resource-modification-state"]').should('not.exist')
-  cy.get('[data-testid="publish-resource-button"]')
+  cy.testId('resource-published-state').should('have.text', 'Privée')
+  cy.testId('resource-modification-state').should('not.exist')
+  cy.testId('publish-resource-button')
     .should('be.disabled')
     .should('have.text', 'Publier la ressource')
 }
@@ -35,68 +32,60 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux éditer
     cy.visit(`/ressources/${resource.slug}/editer`)
 
     cy.intercept('/api/trpc/resource.editTitle?*').as('editTitleMutation')
+    cy.dsfrShouldBeStarted()
   })
 
   it("Acceptation 0 - Statut d'édition par défaut", () => {
     testDefaultState()
   })
 
-  it.only('Acceptation 1 - Edition de la base', () => {
+  it('Acceptation 1 - Edition de la base', () => {
     cy.findByRole('dialog').should('not.exist')
-    cy.get('[data-testid="edit-base-button"]').click()
-    /*
-     Not working...
-     cy.findByRole('dialog').as('modal')
-     cy.get('@modal').contains('Où souhaitez-vous ajouter cette ressource ?')
-     */
+    cy.testId('edit-base-button').click()
+    cy.findByRole('dialog').as('modal')
+    cy.get('@modal').contains('Où souhaitez-vous ajouter cette ressource ?')
   })
 
   it('Acceptation 2 - Edition du titre', () => {
-    cy.get('[data-testid="edit-title-input"]').should('not.exist')
-    cy.get('[data-testid="edit-description-input"]').should('not.exist')
-    cy.get('[data-testid="edit-validation-button"]').should('not.exist')
+    cy.testId('edit-title-input').should('not.exist')
+    cy.testId('edit-description-input').should('not.exist')
+    cy.testId('edit-validation-button').should('not.exist')
 
-    cy.get('[data-testid="edit-title-button"]').click()
+    cy.testId('edit-title-button').click()
 
-    cy.get('[data-testid="edit-title-input"]').should('exist')
-    cy.get('[data-testid="edit-description-input"]').should('exist')
-    cy.get('[data-testid="edit-validation-button"]')
-      .should('have.text', 'Valider')
-      .click()
-    cy.get('[data-testid="resource-modification-state"]').should('not.exist')
+    cy.testId('edit-title-input').should('exist')
+    cy.testId('edit-description-input').should('exist')
+    cy.testId('edit-validation-button').should('have.text', 'Valider').click()
+    cy.testId('resource-modification-state').should('not.exist')
 
     // Probably not needed
     cy.wait('@editTitleMutation')
     // No change of status
     testDefaultState()
 
-    cy.get('[data-testid="edit-title-button"]').click()
-    cy.get('[data-testid="edit-title-input"]').clear().type('title modified')
-    cy.get('[data-testid="edit-description-input"]')
-      .clear()
-      .type('description modified')
-    cy.get('[data-testid="edit-validation-button"]').click()
+    cy.testId('edit-title-button').click()
+    cy.testId('edit-title-input').clear().type('Titre modifié')
+    cy.testId('edit-description-input').clear().type('Description modifiée')
+    cy.testId('edit-validation-button').click()
 
     /* To fast...
-    cy.get('[data-testid="resource-published-state"]').should(
+    cy.testId('resource-published-state').should(
       'have.text',
       'Brouillon',
     )
-    cy.get('[data-testid="resource-modification-state"]').should(
+    cy.testId('resource-modification-state').should(
       'have.text',
       'Enregistrement',
     )
     */
 
     cy.wait('@editTitleMutation')
-    cy.get('[data-testid="resource-modification-state"]').should(
-      'have.text',
-      'Enregistré',
-    )
+    cy.testId('edit-validation-button').should('not.exist')
+    cy.contains('Titre modifié')
+    cy.contains('Description modifiée')
+    cy.testId('resource-modification-state').should('have.text', 'Enregistré')
 
-    cy.get('[data-testid="publish-resource-button"]')
-      .should('not.be.disabled')
-      .click()
+    cy.testId('publish-resource-button').should('not.be.disabled').click()
 
     testDefaultState()
   })

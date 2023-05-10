@@ -68,7 +68,7 @@ const CreateResourceModal = ({ user }: { user: SessionUser }) => {
     }
     try {
       const created = await createResource.mutateAsync(data)
-      router.push(`/ressources/${created.slug}`)
+      router.push(`/ressources/${created.slug}/editer`)
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, setError)
       setStep(0)

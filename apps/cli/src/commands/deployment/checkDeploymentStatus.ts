@@ -19,7 +19,7 @@ export const checkDeploymentStatus = new Command()
       retryDelay: (retryCount) => retryCount * 3000,
     })
 
-    const statusResponse = await client.get<{ status: string }>('/api/health')
+    const statusResponse = await client.get<{ status: string }>('/health')
     output(`Status is ${statusResponse.data.status}`)
 
     const homePageResponse = await client.get<string>('/')

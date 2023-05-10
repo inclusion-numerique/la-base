@@ -27,44 +27,35 @@ declare namespace __next_route_internal_types__ {
   type OptionalCatchAllSlug<S extends string> =
     S extends `${string}${SearchOrHash}` ? never : S
 
-  type StaticRoutes =
-    | `/api/file/get`
-    | `/api/file/upload`
-    | `/api/health`
-    | `/api/test/index.api.spec`
-    | `/api/test`
-    | `/api/test/service.spec`
-    | `/api/test/type.spec`
-    | `/robots.txt`
-    | `/`
+  type StaticRoutes = 
     | `/(.)creer-une-ressource`
-    | `/401`
-    | `/403`
-    | `/404`
+    | `/`
+    | `/connexion`
+    | `/connexion/erreur`
+    | `/connexion/verification`
+    | `/creer-un-compte`
+    | `/deconnexion`
     | `/accessibilite`
-    | `/500`
-    | `/bases`
     | `/confidentialite`
+    | `/bases`
     | `/creer-une-ressource`
     | `/mentions-legales`
     | `/ressources`
-    | `/connexion`
-    | `/creer-un-compte`
-    | `/deconnexion`
-    | `/connexion/erreur`
-    | `/connexion/verification`
-  type DynamicRoutes<T extends string = string> =
-    | `/api/auth/${CatchAllSlug<T>}`
-    | `/api/trpc/${SafeSlug<T>}`
-    | `/uploads/image/${SafeSlug<T>}`
+    | `/health`
+    | `/robots.txt`
+  type DynamicRoutes<T extends string = string> = 
+    | `/ressources/${SafeSlug<T>}/editer`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
-    | `/ressources/${SafeSlug<T>}/editer`
+    | `/uploads/image/${SafeSlug<T>}`
+    | `/api/auth/${CatchAllSlug<T>}`
+    | `/api/trpc/${SafeSlug<T>}`
 
-  type RouteImpl<T> =
+  type RouteImpl<T> = 
     | StaticRoutes
     | `${StaticRoutes}${SearchOrHash}`
     | (T extends `${DynamicRoutes<infer _>}${Suffix}` ? T : never)
+    
 }
 
 declare module 'next' {
@@ -79,7 +70,7 @@ declare module 'next/link' {
   import type { LinkProps as OriginalLinkProps } from 'next/dist/client/link'
   import type { AnchorHTMLAttributes } from 'react'
   import type { UrlObject } from 'url'
-
+  
   type LinkRestProps = Omit<
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof OriginalLinkProps> &
       OriginalLinkProps,
@@ -94,42 +85,29 @@ declare module 'next/link' {
     href: __next_route_internal_types__.RouteImpl<T> | UrlObject
   }
 
-  export default function Link<RouteType>(
-    props: LinkProps<RouteType>,
-  ): JSX.Element
+  export default function Link<RouteType>(props: LinkProps<RouteType>): JSX.Element
 }
 
 declare module 'next/navigation' {
   export * from 'next/dist/client/components/navigation'
 
-  import type {
-    NavigateOptions,
-    AppRouterInstance as OriginalAppRouterInstance,
-  } from 'next/dist/shared/lib/app-router-context'
+  import type { NavigateOptions, AppRouterInstance as OriginalAppRouterInstance } from 'next/dist/shared/lib/app-router-context'
   interface AppRouterInstance extends OriginalAppRouterInstance {
     /**
      * Navigate to the provided href.
      * Pushes a new history entry.
      */
-    push<RouteType>(
-      href: __next_route_internal_types__.RouteImpl<RouteType>,
-      options?: NavigateOptions,
-    ): void
+    push<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>, options?: NavigateOptions): void
     /**
      * Navigate to the provided href.
      * Replaces the current history entry.
      */
-    replace<RouteType>(
-      href: __next_route_internal_types__.RouteImpl<RouteType>,
-      options?: NavigateOptions,
-    ): void
+    replace<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>, options?: NavigateOptions): void
     /**
      * Prefetch the provided href.
      */
-    prefetch<RouteType>(
-      href: __next_route_internal_types__.RouteImpl<RouteType>,
-    ): void
+    prefetch<RouteType>(href: __next_route_internal_types__.RouteImpl<RouteType>): void
   }
 
-  export declare function useRouter(): AppRouterInstance
+  export declare function useRouter(): AppRouterInstance;
 }

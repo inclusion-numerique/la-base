@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 
+export const revalidate = 0
+
 const SignoutPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const onLogout = async () => {

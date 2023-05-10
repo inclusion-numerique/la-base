@@ -3,6 +3,8 @@ import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 
+export const revalidate = 0
+
 const errorMessage = (error?: string): string | undefined => {
   if (error === 'Verification') {
     return "Le lien de connexion n'est plus valide. Il a peut-être déjà été utilisé ou est expiré."

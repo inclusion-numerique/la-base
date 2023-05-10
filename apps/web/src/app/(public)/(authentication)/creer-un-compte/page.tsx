@@ -7,6 +7,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 
+export const revalidate = 0
 const SigninPage = async ({
   searchParams: { error, email, raison, suivant } = {},
 }: {

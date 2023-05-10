@@ -1,5 +1,6 @@
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 
+export const revalidate = 0
 const AccessibilityStatementPage = () => (
   <div className="fr-container landing-main-container fr-my-8w">
     <h1>Déclaration d’accessibilité</h1>

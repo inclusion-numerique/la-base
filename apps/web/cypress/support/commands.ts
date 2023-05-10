@@ -71,6 +71,9 @@ Cypress.Commands.add('createResource', (resource: CreateResourceInput) => {
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
 })
+Cypress.Commands.add('testId', (testId: string) =>
+  cy.get(`[data-testid="${testId}"]`),
+)
 
 //
 declare global {
@@ -87,6 +90,7 @@ declare global {
       createResource(resource: CreateResourceInput): Chainable<void>
       signin(user: { email: string }): Chainable<string>
       dsfrShouldBeStarted(): Chainable<void>
+      testId(testId: string): Chainable<JQuery<HTMLElement>>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
