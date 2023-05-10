@@ -112,8 +112,8 @@ importers:
         specifier: ^3.329.0
         version: 3.329.0
       '@codegouvfr/react-dsfr':
-        specifier: ^0.53.0
-        version: 0.53.0(react@18.2.0)
+        specifier: ^0.54.0
+        version: 0.54.0(react@18.2.0)
       '@gouvfr/dsfr':
         specifier: ^1.9.2
         version: 1.9.2
@@ -912,8 +912,8 @@ importers:
   packages/ui:
     dependencies:
       '@codegouvfr/react-dsfr':
-        specifier: ^0.53.0
-        version: 0.53.0(react@18.2.0)
+        specifier: ^0.54.0
+        version: 0.54.0(react@18.2.0)
       '@gouvfr/dsfr':
         specifier: ^1.9.2
         version: 1.9.2
@@ -3774,8 +3774,8 @@ packages:
       - ts-node
     dev: false
 
-  /@codegouvfr/react-dsfr@0.53.0(react@18.2.0):
-    resolution: {integrity: sha512-3t8b4Ke+jMHtuh4VqBIx8pjQzibPG10B4oBhyLc/lVdDaR21ASrcTgAfY112XoG2i7GH3ijW6TGex+RXinV0Ew==}
+  /@codegouvfr/react-dsfr@0.54.0(react@18.2.0):
+    resolution: {integrity: sha512-v97OWcHwpx1ngCbn6FdCuoAMjnC5bIfEa3Pp3jiYAh8gCfTC+AxH/zbqzhiexUsTWhwRpe4DhEMoq4fVHS1t/w==}
     hasBin: true
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0

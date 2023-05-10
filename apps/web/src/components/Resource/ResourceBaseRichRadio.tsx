@@ -99,26 +99,30 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
             <ProfilePrivacyTag isPublic={user.isPublic} />
           </ResourceBaseRichRadioElement>
 
-          <p
-            className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-4v"
-            id="radio-rich-legend"
-          >
-            Ajouter cette ressource à l’une de vos bases&nbsp;:
-          </p>
-          {bases.map((base, index) => (
-            <ResourceBaseRichRadioElement
-              key={base.id}
-              id={`base-radio-${index.toString()}`}
-              name={name}
-              value={value}
-              radioValue={base.id}
-              disabled={disabled}
-              onChange={onChange}
-            >
-              <span>{base.title}</span>
-              <BasePrivacyTag isPublic={base.isPublic} />
-            </ResourceBaseRichRadioElement>
-          ))}
+          {bases.length === 0 ? null : (
+            <>
+              <p
+                className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-4v"
+                id="radio-rich-legend"
+              >
+                Ajouter cette ressource à l’une de vos bases&nbsp;:
+              </p>
+              {bases.map((base, index) => (
+                <ResourceBaseRichRadioElement
+                  key={base.id}
+                  id={`base-radio-${index.toString()}`}
+                  name={name}
+                  value={value}
+                  radioValue={base.id}
+                  disabled={disabled}
+                  onChange={onChange}
+                >
+                  <span>{base.title}</span>
+                  <BasePrivacyTag isPublic={base.isPublic} />
+                </ResourceBaseRichRadioElement>
+              ))}
+            </>
+          )}
           {error && (
             <div
               className="fr-messages-group"

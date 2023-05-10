@@ -1,16 +1,18 @@
+'use client'
+
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ResourceBaseRichRadio from '@app/web/app/@modal/(.)creer-une-ressource/ResourceBaseRichRadio'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { Resource } from '@app/web/server/resources'
 import {
   EditResourceBase,
   editResourceBaseValidation,
 } from '@app/web/server/rpc/resource/editResource'
-import PublishedInInformation from '../PublishedInInformation'
+import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import EditableContent from './EditableContent'
+import PublishedInInformation from '../PublishedInInformation'
 
 const { BaseModal, openBaseModal } = createModal({
   name: 'base',
@@ -37,6 +39,7 @@ const BaseEdition = ({
       baseId: resource.base?.id ?? null,
     },
   })
+  const disabled = isSubmitting
 
   return (
     <EditableContent
@@ -45,30 +48,36 @@ const BaseEdition = ({
       data-testid="edit-base-button"
     >
       <PublishedInInformation resource={resource} />
-      <BaseModal
-        title="Où souhaitez-vous ajouter cette ressource ?"
-        buttons={[
-          {
-            title: 'Annuler',
-            priority: 'secondary',
-            doClosesModal: true,
-            children: 'Annuler',
-          },
-          {
-            title: 'Valider',
-            doClosesModal: true,
-            children: 'Valider',
-            onClick: handleSubmit(updateResource),
-          },
-        ]}
-      >
-        <ResourceBaseRichRadio
-          control={control}
-          path="baseId"
-          user={user}
-          disabled={isSubmitting}
-        />
-      </BaseModal>
+      <form onSubmit={handleSubmit(updateResource)}>
+        <BaseModal
+          title="Où souhaitez-vous ajouter cette ressource ?"
+          buttons={[
+            {
+              title: 'Annuler',
+              priority: 'secondary',
+              doClosesModal: true,
+              children: 'Annuler',
+              type: 'button',
+              disabled,
+            },
+            {
+              title: 'Valider',
+              doClosesModal: true,
+              children: 'Valider',
+              onClick: handleSubmit(updateResource),
+              type: 'submit',
+              disabled,
+            },
+          ]}
+        >
+          <ResourceBaseRichRadio
+            control={control}
+            path="baseId"
+            user={user}
+            disabled={isSubmitting}
+          />
+        </BaseModal>
+      </form>
     </EditableContent>
   )
 }

@@ -1,15 +1,27 @@
 import Link from 'next/link'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import HeaderBackLink from '@app/web/components/HeaderBackLink'
-import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import HeaderBackLink from '@app/web/components/HeaderBackLink'
+import React, { ReactNode } from 'react'
+
+const createResourceConnectionLink = (
+  <Link
+    href="/connexion?suivant=/?creer-une-ressource"
+    className="fr-btn fr-icon-edit-box-line"
+  >
+    Créer une ressource
+  </Link>
+)
 
 const Header = ({
   user,
   backLink,
+  createResource = createResourceConnectionLink,
 }: {
   user?: SessionUser | null
   backLink?: boolean
+  createResource?: ReactNode
 }) => (
   <header role="banner" className="fr-header">
     <div className="fr-header__body">
@@ -70,14 +82,7 @@ const Header = ({
                     Rechercher
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/creer-une-ressource"
-                    className="fr-btn fr-icon-edit-box-line"
-                  >
-                    Créer une ressource
-                  </Link>
-                </li>
+                <li>{createResource}</li>
                 <li>
                   <Link href="/" className="fr-btn" title="Aide">
                     <span className="fr-icon-question-line fr-icon--sm" />

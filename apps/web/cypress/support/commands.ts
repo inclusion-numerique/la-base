@@ -49,7 +49,6 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('signin', ({ email }: { email: string }) =>
   cy.execute('createSession', { email }).then((session) => {
-    console.log('SESSION CREATED', session)
     cy.setCookie('next-auth.session-token', session.sessionToken)
     return cy.wrap(session.sessionToken)
   }),

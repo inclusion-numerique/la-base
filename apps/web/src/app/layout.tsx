@@ -1,5 +1,5 @@
 import '@app/web/app/app.css'
-import { PropsWithChildren, ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 import { Metadata } from 'next'
 import Link from 'next/link'
@@ -42,10 +42,7 @@ export const metadata: Metadata = {
   manifest: '/favicon/manifest.webmanifest',
 }
 
-const RootLayout = ({
-  children,
-  modal,
-}: PropsWithChildren<{ modal: ReactNode }>) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   // Do we want to disable SSG for CSFR on this website ?
   // const nonce = headers().get('x-sde-script-nonce') ?? undefined
   const nonce = undefined
@@ -57,7 +54,6 @@ const RootLayout = ({
         <Matomo nonce={nonce} />
         <EnvInformation />
         {children}
-        {modal}
       </body>
     </html>
   )

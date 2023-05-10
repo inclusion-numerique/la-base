@@ -28,7 +28,6 @@ declare namespace __next_route_internal_types__ {
     S extends `${string}${SearchOrHash}` ? never : S
 
   type StaticRoutes = 
-    | `/(.)creer-une-ressource`
     | `/`
     | `/connexion`
     | `/connexion/erreur`
@@ -36,9 +35,8 @@ declare namespace __next_route_internal_types__ {
     | `/creer-un-compte`
     | `/deconnexion`
     | `/accessibilite`
-    | `/confidentialite`
     | `/bases`
-    | `/creer-une-ressource`
+    | `/confidentialite`
     | `/mentions-legales`
     | `/ressources`
     | `/health`
@@ -48,8 +46,8 @@ declare namespace __next_route_internal_types__ {
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
     | `/uploads/image/${SafeSlug<T>}`
-    | `/api/auth/${CatchAllSlug<T>}`
     | `/api/trpc/${SafeSlug<T>}`
+    | `/api/auth/${CatchAllSlug<T>}`
 
   type RouteImpl<T> = 
     | StaticRoutes

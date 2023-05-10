@@ -1,5 +1,6 @@
 import React, { MouseEventHandler, ReactNode } from 'react'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
+import Button from '@codegouvfr/react-dsfr/Button'
 import styles from './EditableContent.module.css'
 
 const EditableContent = ({
@@ -15,15 +16,14 @@ const EditableContent = ({
   <div className={styles.container}>
     <div>{children}</div>
     {showIcon && (
-      <button
-        data-testid={dataTestId}
-        type="button"
-        className="fr-link"
+      <Button
         title="Editer"
+        data-testid={dataTestId}
+        iconId="fr-icon-edit-line"
+        size="small"
         onClick={onEditClick}
-      >
-        <span className="fr-icon--sm fr-icon-edit-line" />
-      </button>
+        priority="tertiary no outline"
+      />
     )}
   </div>
 )

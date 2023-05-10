@@ -18,6 +18,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
   it('Acceptation 0 - Fermeture modale', () => {
     cy.createUserAndSignin(createTestUser())
     cy.visit('/')
+    cy.dsfrShouldBeStarted()
     cy.get('header').contains('Créer une ressource').click()
     cy.log('Can close with close button')
     cy.findByRole('dialog').as('modal')
@@ -28,21 +29,21 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.url().should('equal', appUrl('/'))
 
     cy.log('Can close with cancel button')
-    cy.visit('/creer-une-ressource')
+    cy.visit('/?creer-une-ressource')
     cy.log('Can close with close button')
     cy.findByRole('dialog').as('modal')
     cy.get('@modal')
       .should('be.visible')
       .contains('Créer une nouvelle ressource')
     cy.get('@modal').find('button').contains('Annuler').click()
-    cy.url().should('equal', appUrl('/'))
+    cy.url().should('equal', appUrl('/?creer-une-ressource'))
     cy.get('@modal').should('not.exist')
   })
 
   it('Acceptation 1 - Utilisateur membre d’aucune base avec profil public', () => {
     const titre = `Test - ${v4()}`
     cy.createUserAndSignin({ ...createTestUser(), isPublic: true })
-    cy.visit('/creer-une-ressource')
+    cy.visit('/?creer-une-ressource')
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')
     cy.get('@modal')
@@ -60,7 +61,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
   it('Acceptation 2 - Utilisateur membre d’aucune base avec profil privé', () => {
     const titre = `Test - ${v4()}`
     cy.createUserAndSignin({ ...createTestUser(), isPublic: false })
-    cy.visit('/creer-une-ressource')
+    cy.visit('/?creer-une-ressource')
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')
     cy.get('@modal')
