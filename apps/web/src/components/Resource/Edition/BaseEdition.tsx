@@ -62,7 +62,6 @@ const BaseEdition = ({
               title: 'Valider',
               doClosesModal: true,
               children: 'Valider',
-              onClick: handleSubmit(updateResource),
               type: 'submit',
               disabled,
             },
