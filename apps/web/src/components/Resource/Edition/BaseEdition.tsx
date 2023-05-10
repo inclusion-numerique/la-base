@@ -10,12 +10,14 @@ import {
   editResourceBaseValidation,
 } from '@app/web/server/rpc/resource/editResource'
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
-import {
-  BaseModal,
-  openBaseModal,
-} from '@app/web/components/Resource/Edition/BaseEditionModal'
+import { createModal } from '@app/ui/components/overrides/Modal'
 import EditableContent from './EditableContent'
 import PublishedInInformation from '../PublishedInInformation'
+
+const { BaseModal, openBaseModal } = createModal({
+  name: 'base',
+  isOpenedByDefault: false,
+})
 
 const BaseEdition = ({
   resource,

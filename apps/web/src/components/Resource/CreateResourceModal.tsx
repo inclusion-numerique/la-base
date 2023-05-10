@@ -1,6 +1,6 @@
 /* eslint react/jsx-props-no-spreading: off */
 
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { createModal } from '@app/ui/components/overrides/Modal'
 import React from 'react'
 
 export const {
