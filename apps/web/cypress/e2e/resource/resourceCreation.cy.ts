@@ -104,7 +104,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
         },
       },
     })
-    cy.visit('/creer-une-ressource')
+    cy.visit('/?creer-une-ressource')
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')
     cy.get('@modal')

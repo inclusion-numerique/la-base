@@ -36,9 +36,9 @@ export const createTestResource = (createdById: string, baseId?: string) =>
     id: v4(),
     title:
       'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
-    slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-lignes',
+    slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     titleDuplicationCheckSlug:
-      'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-lignes',
+      'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     description:
       'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
     createdById,

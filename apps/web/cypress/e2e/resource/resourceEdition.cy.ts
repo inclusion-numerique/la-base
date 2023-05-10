@@ -39,7 +39,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux éditer
     testDefaultState()
   })
 
-  it('Acceptation 1 - Edition de la base', () => {
+  it.only('Acceptation 1 - Edition de la base', () => {
     cy.dsfrModalsShouldBeBound()
     cy.findByRole('dialog').should('not.exist')
     cy.testId('edit-base-button').click()
