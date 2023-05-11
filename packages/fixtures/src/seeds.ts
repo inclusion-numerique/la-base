@@ -1,9 +1,9 @@
 import { Command, InvalidArgumentError } from '@commander-js/extra-typings'
 import { prismaClient } from '@app/web/prismaClient'
 import { Prisma } from '@prisma/client'
-import { bases } from './bases'
-import { resources } from './resources'
-import { users } from './users'
+import { bases, randomBases } from './bases'
+import { randomResources, resources } from './resources'
+import { randomUsers, users } from './users'
 
 import TransactionClient = Prisma.TransactionClient
 
@@ -35,40 +35,45 @@ const deleteAll = async (transaction: TransactionClient) => {
 }
 
 const seed = async (transaction: TransactionClient, random?: number) => {
-  await Promise.all(
-    users(random).map((user) =>
-      transaction.user.upsert({
-        where: { id: user.id },
-        create: user,
-        update: user,
-        select: { id: true },
-      }),
-    ),
-  )
+  if (random) {
+    await transaction.user.createMany({ data: randomUsers(random) })
+    const newBases = await randomBases(random)
+    await transaction.base.createMany({ data: newBases })
 
-  const newBases = await bases(random)
-  await Promise.all(
-    newBases.map((base) =>
-      transaction.base.upsert({
-        where: { id: base.id },
-        create: base,
-        update: base,
-        select: { id: true },
-      }),
-    ),
-  )
-
-  const newResources = await resources(random)
-  await Promise.all(
-    newResources.map((resource) =>
-      transaction.resource.upsert({
-        where: { id: resource.id },
-        create: resource,
-        update: resource,
-        select: { id: true },
-      }),
-    ),
-  )
+    const newResources = await randomResources(random)
+    await transaction.resource.createMany({ data: newResources })
+  } else {
+    await Promise.all(
+      users.map((user) =>
+        transaction.user.upsert({
+          where: { id: user.id },
+          create: user,
+          update: user,
+          select: { id: true },
+        }),
+      ),
+    )
+    await Promise.all(
+      bases.map((base) =>
+        transaction.base.upsert({
+          where: { id: base.id },
+          create: base,
+          update: base,
+          select: { id: true },
+        }),
+      ),
+    )
+    await Promise.all(
+      resources.map((resource) =>
+        transaction.resource.upsert({
+          where: { id: resource.id },
+          create: resource,
+          update: resource,
+          select: { id: true },
+        }),
+      ),
+    )
+  }
 }
 
 const main = async (eraseAllData: boolean, random?: number) => {
@@ -89,7 +94,7 @@ const main = async (eraseAllData: boolean, random?: number) => {
 }
 
 const program = new Command()
-  .option('--erase-all-data', 'Erase all data', false)
+  .option('-e, --erase-all-data', 'Erase all data', false)
   .option(
     '-r, --random [number]',
     'Number of random items to seed',
