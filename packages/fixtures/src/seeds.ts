@@ -3,7 +3,7 @@ import { prismaClient } from '@app/web/prismaClient'
 import { Prisma } from '@prisma/client'
 import { bases } from './bases'
 import { resources } from './resources'
-import { users } from './users'
+import { randomUsers, users } from './users'
 
 import TransactionClient = Prisma.TransactionClient
 
@@ -35,16 +35,18 @@ const deleteAll = async (transaction: TransactionClient) => {
 }
 
 const seed = async (transaction: TransactionClient, random?: number) => {
-  await Promise.all(
-    users(random).map((user) =>
-      transaction.user.upsert({
-        where: { id: user.id },
-        create: user,
-        update: user,
-        select: { id: true },
-      }),
-    ),
-  )
+  await (random
+    ? transaction.user.createMany({ data: randomUsers(random) })
+    : Promise.all(
+      users.map((user) =>
+        transaction.user.upsert({
+          where: { id: user.id },
+          create: user,
+          update: user,
+          select: { id: true },
+        }),
+      ),
+    ))
 
   const newBases = await bases(random)
   await Promise.all(
@@ -89,7 +91,7 @@ const main = async (eraseAllData: boolean, random?: number) => {
 }
 
 const program = new Command()
-  .option('--erase-all-data', 'Erase all data', false)
+  .option('-e, --erase-all-data', 'Erase all data', false)
   .option(
     '-r, --random [number]',
     'Number of random items to seed',

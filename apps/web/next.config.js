@@ -42,20 +42,8 @@ const nextConfig = {
     // See https://beta.nextjs.org/docs/api-reference/next.config.js#servercomponentsexternalpackages
     serverComponentsExternalPackages:
       externalServerPackagesForFasterDevelopmentUx,
-    // serverComponentsExternalPackages: [
-    //   'nanoid',
-    //   'mjml',
-    //   'mjml-core',
-    //   ...externalServerPackagesForFasterDevelopmentUx,
-    // ],
     // This includes files from the monorepo base two directories up
     outputFileTracingRoot: path.join(__dirname, '../../'),
-    // outputFileTracingExcludes: {
-    //   '/api/hello': ['./un-necessary-folder/**/*'],
-    // },
-    // outputFileTracingIncludes: {
-    //   '/api/another': ['./necessary-folder/**/*'],
-    // },
   },
   modularizeImports,
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
