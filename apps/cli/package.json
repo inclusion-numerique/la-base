@@ -29,7 +29,7 @@
     "slug": "^8.2.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "undici": "^5.22.1",
+    "undici": "^5.22.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
