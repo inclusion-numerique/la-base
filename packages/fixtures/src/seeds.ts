@@ -38,15 +38,15 @@ const seed = async (transaction: TransactionClient, random?: number) => {
   await (random
     ? transaction.user.createMany({ data: randomUsers(random) })
     : Promise.all(
-      users.map((user) =>
-        transaction.user.upsert({
-          where: { id: user.id },
-          create: user,
-          update: user,
-          select: { id: true },
-        }),
-      ),
-    ))
+        users.map((user) =>
+          transaction.user.upsert({
+            where: { id: user.id },
+            create: user,
+            update: user,
+            select: { id: true },
+          }),
+        ),
+      ))
 
   const newBases = await bases(random)
   await Promise.all(
