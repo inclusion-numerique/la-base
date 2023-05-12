@@ -4,7 +4,7 @@ import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 
 export type BreadcrumbParent = {
   label: string
-  linkProps: Omit<LinkProps<unknown> & { href: Route }, 'children'>
+  linkProps: Omit<LinkProps & { href: Route }, 'children'>
 }
 export type BreadcrumbParents = BreadcrumbParent[]
 
