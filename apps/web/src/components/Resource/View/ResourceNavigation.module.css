@@ -1,3 +1,20 @@
+.modal {
+  :global(.fr-modal__header) {
+    display: none;
+  }
+  
+  :global(.fr-modal__content) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .container {
   position: sticky;
   top: 24px;
