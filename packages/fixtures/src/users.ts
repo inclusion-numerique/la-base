@@ -30,10 +30,15 @@ export const randomUsers: (
   Parameters<typeof prismaClient.user.create>[0]['data'],
   undefined
 >[] = (random) =>
-  Array.from({ length: random * BASE_NUMBER }, (_, index) => ({
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    email: faker.internet.email(),
-    emailVerified: index % 3 ? null : new Date(),
-  }))
+  Array.from({ length: random * BASE_NUMBER }, (_, index) => {
+    const firstName = faker.name.firstName()
+    const lastName = faker.name.lastName()
+
+    return {
+      firstName,
+      lastName,
+      name: `${firstName} ${lastName}`,
+      email: faker.internet.email(),
+      emailVerified: index % 3 ? null : new Date(),
+    }
+  })
