@@ -17,8 +17,8 @@ export type EditContentCommand = z.infer<typeof EditContentCommandValidation>
 export type ContentEditedV1 = {
   __version: 1
   id: string
-  title: string
-  text: string
+  title?: string
+  text?: string
 }
 
 export type ContentEdited = {

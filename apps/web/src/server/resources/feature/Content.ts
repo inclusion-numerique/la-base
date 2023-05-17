@@ -21,7 +21,27 @@ const TextPayloadCommandValidation = z.object({
     .nonempty('Veuillez renseigner le text'),
 })
 
+const ImagePayloadCommandValidation = z.object({
+  type: z.literal('Image'),
+})
+
+const LinkPayloadCommandValidation = z.object({
+  type: z.literal('Link'),
+})
+
+const ResourceLinkPayloadCommandValidation = z.object({
+  type: z.literal('ResourceLink'),
+})
+
+const FilePayloadCommandValidation = z.object({
+  type: z.literal('File'),
+})
+
 export const ContentPayloadCommandValidation = z.discriminatedUnion('type', [
   SectionTitlePayloadCommandValidation,
   TextPayloadCommandValidation,
+  ImagePayloadCommandValidation,
+  LinkPayloadCommandValidation,
+  ResourceLinkPayloadCommandValidation,
+  FilePayloadCommandValidation,
 ])

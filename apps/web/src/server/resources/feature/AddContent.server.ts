@@ -34,13 +34,15 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
   contents: [
     ...resource.contents,
     {
-      ...data,
+      title: null,
+      text: null,
       linkedResourceId: null,
       fileKey: null,
       imageId: null,
       caption: null,
       url: null,
       showPreview: null,
+      ...data,
     },
   ],
   updated: timestamp,

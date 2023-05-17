@@ -17,8 +17,8 @@ export type ContentAddedV1 = {
   id: string
   type: ContentType
   // TODO add the other content types
-  title: string
-  text: string
+  title?: string
+  text?: string
 }
 
 export type ContentAdded = {

@@ -7,14 +7,12 @@ const TextEdition = ({
   form: { control },
 }: {
   form: UseFormReturn<AddContentCommand | EditContentCommand>
-}) => {
-  return (
-    <InputFormField
-      control={control}
-      path="payload.text"
-      label="Tapez votre texte"
-    />
-  )
-}
+}) => (
+  <InputFormField
+    control={control}
+    path="payload.text"
+    label="Tapez votre texte"
+  />
+)
 
 export default TextEdition
