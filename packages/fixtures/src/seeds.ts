@@ -1,9 +1,9 @@
 import { Command, InvalidArgumentError } from '@commander-js/extra-typings'
 import { prismaClient } from '@app/web/prismaClient'
+import { createResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { Prisma } from '@prisma/client'
 import { bases, randomBases } from './bases'
-import { randomResources, resources } from './resources'
-import { randomResourcesContents } from './resourcesContents'
+import { randomResourcesEvents, resources } from './resources'
 import { randomUsers, users } from './users'
 
 import TransactionClient = Prisma.TransactionClient
@@ -38,14 +38,33 @@ const deleteAll = async (transaction: TransactionClient) => {
 const seed = async (transaction: TransactionClient, random?: number) => {
   if (random) {
     await transaction.user.createMany({ data: randomUsers(random) })
-    const newBases = await randomBases(random)
+    const newBases = await randomBases(transaction, random)
     await transaction.base.createMany({ data: newBases })
 
-    const newResources = await randomResources(random)
-    await transaction.resource.createMany({ data: newResources })
+    const newResourcesEvents = await randomResourcesEvents(transaction, random)
+    const projections = newResourcesEvents.map(createResourceProjection)
+    await transaction.resource.createMany({
+      data: projections.map((projection) => ({
+        ...projection,
+        titleDuplicationCheckSlug: projection.slug,
+        contents: undefined,
+      })),
+    })
 
-    const newContents = await randomResourcesContents(random)
-    await transaction.content.createMany({ data: newContents })
+    await transaction.content.createMany({
+      data: projections.flatMap((projection) =>
+        projection.contents.map((content, index) => ({
+          ...content,
+          order: index,
+          resourceId: projection.id,
+          __version: undefined,
+        })),
+      ),
+    })
+
+    await transaction.resourceEvent.createMany({
+      data: newResourcesEvents.flat(),
+    })
   } else {
     await Promise.all(
       users.map((user) =>
@@ -81,19 +100,22 @@ const seed = async (transaction: TransactionClient, random?: number) => {
 }
 
 const main = async (eraseAllData: boolean, random?: number) => {
-  await prismaClient.$transaction(async (transaction) => {
-    if (eraseAllData) {
-      console.log('Erasing all data...')
-      await deleteAll(transaction)
-    }
+  await prismaClient.$transaction(
+    async (transaction) => {
+      if (eraseAllData) {
+        console.log('Erasing all data...')
+        await deleteAll(transaction)
+      }
 
-    console.log(
-      `Generating ${
-        random ? `${random} set of random` : 'non-random fixtures'
-      } data`,
-    )
-    await seed(transaction, random)
-  })
+      console.log(
+        `Generating ${
+          random ? `${random} set of random` : 'non-random fixtures'
+        } data`,
+      )
+      await seed(transaction, random)
+    },
+    { maxWait: 60_000 },
+  )
   console.log(`Fixtures loaded successfully`)
 }
 

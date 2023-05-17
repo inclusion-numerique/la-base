@@ -31,8 +31,8 @@ export const randomUsers: (
   undefined
 >[] = (random) =>
   Array.from({ length: random * BASE_NUMBER }, (_, index) => {
-    const firstName = faker.name.firstName()
-    const lastName = faker.name.lastName()
+    const firstName = faker.person.firstName()
+    const lastName = faker.person.lastName()
 
     return {
       firstName,

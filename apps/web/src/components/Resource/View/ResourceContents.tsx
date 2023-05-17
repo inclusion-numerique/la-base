@@ -15,7 +15,9 @@ const ResourceContents = ({
   visibleRefIndex,
 }: {
   resource: Resource
-  contentRefs: React.MutableRefObject<React.RefObject<HTMLDivElement>[]>
+  contentRefs: React.MutableRefObject<
+    Record<string, React.RefObject<HTMLDivElement>>
+  >
   visibleRefIndex: number | null
 }) => {
   const publishedDay = dateAsDay(created)
@@ -70,11 +72,11 @@ const ResourceContents = ({
         />
       </div>
       <hr className="fr-mt-6v fr-mb-2v" />
-      {contents.map((content, index) => (
+      {contents.map((content) => (
         <div
           key={content.id}
-          ref={contentRefs.current[index]}
-          id={`section-${index + 1}`}
+          ref={contentRefs.current[content.id]}
+          id={`section-${content.id}`}
           className={styles.content}
         >
           <ContentView content={content} />

@@ -5,6 +5,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { contentEditionValues } from '@app/web/server/resources/feature/Content'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { Resource } from '@app/web/server/resources/getResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -21,12 +22,38 @@ import TitleEdition from './TitleEdition'
 const hasChanged = (
   resource: Resource,
   updatedResource: ResourceProjectionWithContext,
-) =>
-  Object.keys(resourceEditionValues).some(
-    (key) =>
-      resource[key as keyof Resource] !==
-      updatedResource[key as keyof ResourceProjectionWithContext],
-  )
+) => {
+  if (
+    Object.keys(resourceEditionValues).some(
+      (key) =>
+        resource[key as keyof Resource] !==
+        updatedResource[key as keyof ResourceProjectionWithContext],
+    )
+  ) {
+    return true
+  }
+
+  if (resource.contents.length !== updatedResource.contents.length) {
+    return true
+  }
+
+  return resource.contents.some((content) => {
+    const updatedContent = updatedResource.contents.find(
+      (x) => content.id === x.id,
+    )
+
+    if (!updatedContent) {
+      return true
+    }
+    return Object.keys(contentEditionValues).some(
+      (key) =>
+        content[key as keyof Resource['contents'][number]] !==
+        updatedContent[
+          key as keyof ResourceProjectionWithContext['contents'][number]
+        ],
+    )
+  })
+}
 
 const publishedState = (canPublished: boolean, resource: Resource) => {
   if (canPublished) {

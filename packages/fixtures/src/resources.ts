@@ -1,9 +1,16 @@
 import { faker } from '@faker-js/faker'
 import { prismaClient } from '@app/web/prismaClient'
-import { ResourceCreatedDataV1 } from '@app/web/server/resources/feature/CreateResource'
+import {
+  ResourceCreated,
+  ResourceCreatedDataV1,
+} from '@app/web/server/resources/feature/CreateResource'
+import { MutationHistoryResourceEvent } from '@app/web/server/resources/feature/features'
 import { createSlug } from '@app/web/utils/createSlug'
+import { ContentTypeValues } from '@app/web/utils/prismaEnums'
+import { Prisma } from '@prisma/client'
 
 const BASE_NUMBER = 10
+const managedTypes = [ContentTypeValues.SectionTitle, ContentTypeValues.Text]
 
 export const resources: Exclude<
   Parameters<typeof prismaClient.resource.upsert>[0]['create'],
@@ -112,57 +119,141 @@ export const resources: Exclude<
   },
 ]
 
-export const randomResources: (
+const getRandomResourceContentEvent = (id: string, type: ContentTypeValues) => {
+  switch (type) {
+    case 'SectionTitle': {
+      return {
+        id,
+        __version: 1 as const,
+        title: faker.lorem.words({ min: 2, max: 10 }),
+      }
+    }
+    case 'Text': {
+      return {
+        id,
+        __version: 1 as const,
+        text: faker.lorem.words({ min: 2, max: 10 }),
+      }
+    }
+    default: {
+      throw new Error('Type not managed yet')
+    }
+  }
+}
+
+export const randomResourcesEvents: (
+  transaction: Prisma.TransactionClient,
   random: number,
 ) => Promise<
-  Exclude<
-    Exclude<
-      Parameters<typeof prismaClient.resource.createMany>[0],
-      undefined
-    >['data'],
-    undefined
-  >
-> = async (random) => {
-  const user = await prismaClient.user.findFirst()
+  [
+    ResourceCreated & { resourceId: string },
+    ...(MutationHistoryResourceEvent & { resourceId: string })[],
+  ][]
+> = async (transaction, random) => {
+  const user = await transaction.user.findFirst()
   if (!user) {
     return []
   }
 
-  return Array.from({ length: random * BASE_NUMBER }, () => {
-    const title = faker.lorem.text()
+  const bases = await transaction.base.findMany({
+    select: { id: true },
+  })
+
+  return Array.from({ length: random * BASE_NUMBER }).map(() => {
+    const creationDate = faker.date.past()
+    const title = faker.lorem.words({ min: 2, max: 10 })
     const description = faker.lorem.paragraph()
     const slug = createSlug(title)
-    const eventId = faker.datatype.uuid()
-    const reourceId = faker.datatype.uuid()
-    return {
-      id: reourceId,
-      title,
-      slug,
-      titleDuplicationCheckSlug: slug,
-      description,
-      createdById: user.id,
-      events: {
-        connectOrCreate: {
-          where: {
-            id: eventId,
-          },
-          create: {
-            id: eventId,
-            byId: user.id,
-            type: 'Created',
-            timestamp: new Date('2021-01-01T00:00:00.000Z'),
-            data: {
-              __version: 1,
-              id: reourceId,
-              byId: user.id,
-              title,
-              description,
-              slug,
-              baseId: null,
-            } satisfies ResourceCreatedDataV1,
-          },
-        },
+    const resourceId = faker.string.uuid()
+
+    const baseChangedEvents = Array.from({
+      length: random * Math.random() * 5,
+    }).map(() => ({
+      id: faker.string.uuid(),
+      resourceId,
+      byId: user.id,
+      type: 'BaseChanged' as const,
+      timestamp: faker.date.between({ from: creationDate, to: new Date() }),
+      data: {
+        __version: 1 as const,
+        baseId: faker.helpers.arrayElement(bases).id,
       },
-    }
+    }))
+
+    const titleAndDescriptionEditedEvents = Array.from({
+      length: random * Math.random() * 5,
+    }).map(() => ({
+      id: faker.string.uuid(),
+      resourceId,
+      byId: user.id,
+      type: 'TitleAndDescriptionEdited' as const,
+      timestamp: faker.date.between({ from: creationDate, to: new Date() }),
+      data: {
+        __version: 1 as const,
+        title: faker.lorem.words({ min: 2, max: 10 }),
+        description: faker.lorem.paragraph(),
+      },
+    }))
+
+    const contentsEvents = Array.from(
+      { length: Math.random() * 10 * random },
+      () => {
+        const type = faker.helpers.arrayElement(managedTypes)
+        const contentId = faker.string.uuid()
+        const contentCreationDate = faker.date.between({
+          from: creationDate,
+          to: new Date(),
+        })
+
+        const editionEvents = Array.from(
+          { length: Math.random() * 2 * random },
+          () => ({
+            id: faker.string.uuid(),
+            resourceId,
+            byId: user.id,
+            type: 'ContentEdited' as const,
+            timestamp: faker.date.between({
+              from: contentCreationDate,
+              to: new Date(),
+            }),
+            data: getRandomResourceContentEvent(contentId, type),
+          }),
+        )
+
+        return [
+          {
+            id: faker.string.uuid(),
+            resourceId,
+            byId: user.id,
+            type: 'ContentAdded' as const,
+            timestamp: contentCreationDate,
+            data: { ...getRandomResourceContentEvent(contentId, type), type },
+          },
+          ...editionEvents,
+        ]
+      },
+    )
+
+    return [
+      {
+        id: faker.string.uuid(),
+        resourceId,
+        byId: user.id,
+        type: 'Created' as const,
+        timestamp: creationDate,
+        data: {
+          __version: 1 as const,
+          id: resourceId,
+          byId: user.id,
+          title,
+          description,
+          slug,
+          baseId: null,
+        } satisfies ResourceCreatedDataV1,
+      },
+      ...baseChangedEvents,
+      ...titleAndDescriptionEditedEvents,
+      ...contentsEvents.flat(),
+    ]
   })
 }

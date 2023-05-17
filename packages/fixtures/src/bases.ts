@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { prismaClient } from '@app/web/prismaClient'
+import { Prisma } from '@prisma/client'
 
 const BASE_NUMBER = 10
 
@@ -20,6 +21,7 @@ export const bases: Exclude<
 ]
 
 export const randomBases: (
+  transaction: Prisma.TransactionClient,
   random: number,
 ) => Promise<
   Exclude<
@@ -29,14 +31,14 @@ export const randomBases: (
     >['data'],
     undefined
   >
-> = async (random) => {
-  const user = await prismaClient.user.findFirst()
+> = async (transaction, random) => {
+  const user = await transaction.user.findFirst()
   if (!user) {
     return []
   }
 
   return Array.from({ length: random * BASE_NUMBER }, () => {
-    const text = faker.lorem.text()
+    const text = faker.lorem.words({ min: 2, max: 10 })
     const slug = text.replaceAll(' ', '-').toLowerCase()
     return {
       title: text,
