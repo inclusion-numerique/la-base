@@ -50,7 +50,6 @@ const ContentForm = ({
           defaultValues: {
             name: 'AddContent',
             payload: {
-              type,
               resourceId: resource.id,
               type,
             },
