@@ -166,6 +166,7 @@ jobs:
       - skip/skip_unchanged:
           paths: pnpm-lock.yaml
       - install_dependencies
+      - install_terraform
       - run:
           name: 'Fetch dependencies'
           command: pnpm install --virtual-store-dir << pipeline.parameters.virtual_store_dir >> --frozen-lockfile
