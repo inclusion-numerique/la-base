@@ -41,7 +41,6 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
       caption: null,
       url: null,
       showPreview: null,
-      text: null,
     },
   ],
   updated: timestamp,

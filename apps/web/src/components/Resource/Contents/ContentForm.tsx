@@ -21,6 +21,7 @@ import { ResourceMutationCommand } from '@app/web/server/resources/feature/featu
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'
 import { ContentType } from '@prisma/client'
+import TextEdition from './TextEdition'
 
 const ContentForm = ({
   content,
@@ -50,6 +51,7 @@ const ContentForm = ({
             name: 'AddContent',
             payload: {
               resourceId: resource.id,
+              type,
             },
           },
         }
@@ -102,6 +104,10 @@ const ContentForm = ({
   switch (type) {
     case 'SectionTitle': {
       formContent = <SectionTitleEdition form={form} />
+      break
+    }
+    case 'Text': {
+      formContent = <TextEdition form={form} />
       break
     }
     default: {
