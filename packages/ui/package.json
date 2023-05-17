@@ -17,7 +17,7 @@
     "node": "^18.16"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^0.54.1",
+    "@codegouvfr/react-dsfr": "^0.54.7",
     "@gouvfr/dsfr": "^1.9.2",
     "@hookform/resolvers": "^3.1.0",
     "classnames": "^2.3.2",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@storybook/jest": "^0.1.0",
-    "@storybook/react": "^7.0.10",
+    "@storybook/react": "^7.0.12",
     "@storybook/testing-library": "^0.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/jest": "^29.5.1",
