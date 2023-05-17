@@ -105,6 +105,10 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
       .contains(inclusionConnectUser.firstName)
       .contains(inclusionConnectUser.lastName)
       .click()
+    // Dsfr transition time is .3s
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(300)
+
     cy.get('#header-user-menu').should('be.visible')
 
     cy.get('#header-user-menu').contains('Se déconnecter').click()
