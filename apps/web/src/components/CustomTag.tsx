@@ -23,6 +23,7 @@ const CustomTag = ({
       'fr-tag',
       'fr-tag--icon-left',
       'fr-text--medium',
+      styles.tag,
       icon,
       styles[color],
     )}
