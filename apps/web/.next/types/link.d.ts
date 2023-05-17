@@ -28,27 +28,27 @@ declare namespace __next_route_internal_types__ {
     S extends `${string}${SearchOrHash}` ? never : S
 
   type StaticRoutes = 
+    | `/health`
+    | `/robots.txt`
     | `/`
+    | `/bases`
+    | `/ressources`
+    | `/confidentialite`
+    | `/accessibilite`
+    | `/mentions-legales`
     | `/creer-un-compte`
+    | `/deconnexion`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
-    | `/deconnexion`
-    | `/bases`
-    | `/accessibilite`
-    | `/confidentialite`
-    | `/mentions-legales`
-    | `/ressources`
-    | `/health`
-    | `/robots.txt`
   type DynamicRoutes<T extends string = string> = 
+    | `/api/trpc/${SafeSlug<T>}`
+    | `/api/auth/${CatchAllSlug<T>}`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
-    | `/ressources/${SafeSlug<T>}/editer`
-    | `/uploads/image/${SafeSlug<T>}`
     | `/uploads/images/${SafeSlug<T>}`
-    | `/api/auth/${CatchAllSlug<T>}`
-    | `/api/trpc/${SafeSlug<T>}`
+    | `/uploads/image/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
 
   type RouteImpl<T> = 
     | StaticRoutes
