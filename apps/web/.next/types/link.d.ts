@@ -29,22 +29,22 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/`
+    | `/creer-un-compte`
     | `/connexion`
     | `/connexion/erreur`
     | `/connexion/verification`
-    | `/creer-un-compte`
     | `/deconnexion`
-    | `/accessibilite`
     | `/bases`
+    | `/accessibilite`
     | `/confidentialite`
     | `/mentions-legales`
     | `/ressources`
     | `/health`
     | `/robots.txt`
   type DynamicRoutes<T extends string = string> = 
-    | `/ressources/${SafeSlug<T>}/editer`
     | `/bases/${SafeSlug<T>}`
     | `/ressources/${SafeSlug<T>}`
+    | `/ressources/${SafeSlug<T>}/editer`
     | `/uploads/image/${SafeSlug<T>}`
     | `/uploads/images/${SafeSlug<T>}`
     | `/api/auth/${CatchAllSlug<T>}`

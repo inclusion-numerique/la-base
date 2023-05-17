@@ -25,7 +25,7 @@ export const editContentSecurityRules: ResourceCommandSecurityRule<
 > = () => true
 
 export const applyContentEdited: ResourceMutationEventApplier<ContentEdited> = (
-  { timestamp, data: { title, id } },
+  { timestamp, data: { id, ...otherData } },
   resource,
 ) => ({
   ...resource,
@@ -33,7 +33,7 @@ export const applyContentEdited: ResourceMutationEventApplier<ContentEdited> = (
     if (id === content.id) {
       return {
         ...content,
-        title,
+        ...otherData,
       }
     }
     return content
