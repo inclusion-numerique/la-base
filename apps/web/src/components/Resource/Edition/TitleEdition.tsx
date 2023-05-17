@@ -9,8 +9,8 @@ import {
   EditTitleAndDescriptionCommand,
   EditTitleAndDescriptionCommandValidation,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
@@ -30,7 +30,7 @@ const TitleEdition = ({
   setEditing,
   editing,
 }: {
-  resource: ResourceProjection
+  resource: ResourceProjectionWithContext
   sendCommand: (command: ResourceMutationCommand) => Promise<void>
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>

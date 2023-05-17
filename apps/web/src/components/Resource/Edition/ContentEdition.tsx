@@ -3,11 +3,9 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import ContentForm from '@app/web/components/Resource/Contents/ContentForm'
 import ContentView from '@app/web/components/Resource/Contents/ContentView'
 import styles from '@app/web/components/Resource/Edition/Edition.module.css'
-import {
-  ContentProjection,
-  ResourceProjection,
-} from '@app/web/server/resources/feature/createResourceProjection'
+import { ContentProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 
 const ContentEdition = ({
   editing,
@@ -16,7 +14,7 @@ const ContentEdition = ({
   resource,
   content,
 }: {
-  resource: ResourceProjection
+  resource: ResourceProjectionWithContext
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
   sendCommand: (command: ResourceMutationCommand) => Promise<void>

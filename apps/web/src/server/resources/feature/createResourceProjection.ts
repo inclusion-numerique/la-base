@@ -70,6 +70,9 @@ export const createResourceProjection = ([
   creationEvent,
   ...mutationEvents
 ]: HistoryEventsForResource): ResourceProjection => {
+  if (!creationEvent) {
+    throw new Error('No creation event found')
+  }
   const resource = applyCreationEvent(creationEvent)
 
   return updateResourceProjection(resource, mutationEvents)

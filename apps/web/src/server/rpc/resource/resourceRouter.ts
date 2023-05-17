@@ -21,7 +21,10 @@ import {
   ResourceMutationCommandsValidation,
   executeSideEffect,
 } from '@app/web/server/resources/feature/features'
-import { getResourceFromEvents } from '@app/web/server/resources/getResourceFromEvents'
+import {
+  getResourceFromEvents,
+  getResourceProjectionContext,
+} from '@app/web/server/resources/getResourceFromEvents'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { forbiddenError, notFoundError } from '../trpcErrors'
 
@@ -87,8 +90,10 @@ export const resourceRouter = router({
         }
       })
 
+      const resourceWithContext = await getResourceProjectionContext(resource)
+
       return {
-        resource,
+        resource: resourceWithContext,
         events: [creationEvent, ...mutationEvents],
       }
     }),
@@ -139,9 +144,10 @@ export const resourceRouter = router({
           await executeSideEffect(event, resource, { transaction })
         }
       })
+      const resourceWithContext = await getResourceProjectionContext(resource)
 
       return {
-        resource,
+        resource: resourceWithContext,
         events: mutationEvents,
       }
     }),

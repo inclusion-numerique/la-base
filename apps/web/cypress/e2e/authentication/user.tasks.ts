@@ -1,5 +1,6 @@
-import * as uuid from 'uuid'
+import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
+import { ResourceCreated } from '@app/web/server/resources/feature/CreateResource'
 
 export type CreateUserInput = Parameters<
   typeof prismaClient.user.create
@@ -15,9 +16,39 @@ export const createBase = async (base: CreateBaseInput) =>
 
 export type CreateResourceInput = Parameters<
   typeof prismaClient.resource.create
->[0]['data']
-export const createResource = async (resource: CreateResourceInput) =>
-  prismaClient.resource.create({ data: resource })
+>[0]['data'] & { createdById: string }
+export const createResource = async ({
+  createdById,
+  id,
+  ...resourceData
+}: CreateResourceInput) => {
+  const resourceId = id || v4()
+  const createdEvent: ResourceCreated = {
+    type: 'Created',
+    timestamp: resourceData.created
+      ? new Date(resourceData.created)
+      : new Date(),
+    data: {
+      __version: 1,
+      id: resourceId,
+      ...resourceData,
+      byId: createdById,
+      baseId: resourceData.baseId || null,
+    },
+  }
+  return prismaClient.resource.create({
+    data: {
+      id: resourceId,
+      ...resourceData,
+      createdById,
+      events: {
+        create: {
+          ...createdEvent,
+        },
+      },
+    },
+  })
+}
 
 export const deleteUser = async (user: { email: string }) => {
   const exists = await prismaClient.user.findUnique({
@@ -38,8 +69,8 @@ export const createSession = async ({ email }: { email: string }) => {
 
   const created = await prismaClient.session.create({
     data: {
-      id: uuid.v4(),
-      sessionToken: uuid.v4(),
+      id: v4(),
+      sessionToken: v4(),
       expires,
       user: {
         connect: { email },

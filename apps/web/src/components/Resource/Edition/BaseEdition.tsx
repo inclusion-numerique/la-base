@@ -10,9 +10,8 @@ import {
   ChangeBaseCommand,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
-import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
-import type { Resource } from '@app/web/server/resources/getResource'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import PublishedInInformation from '../PublishedInInformation'
 import EditableContent from './EditableContent'
@@ -26,13 +25,9 @@ const BaseEdition = ({
   resource,
   user,
   sendCommand,
-  draftBase,
-  draftCreatedBy,
 }: {
-  resource: ResourceProjection
+  resource: ResourceProjectionWithContext
   user: SessionUser
-  draftBase: Resource['base']
-  draftCreatedBy: Resource['createdBy']
   sendCommand: (command: ResourceMutationCommand) => Promise<void>
 }) => {
   const {
@@ -65,9 +60,11 @@ const BaseEdition = ({
       onEditClick={openBaseModal}
       data-testid="edit-base-button"
     >
-      <PublishedInInformation
-        resource={{ base: draftBase, createdBy: draftCreatedBy }}
-      />
+      {!!resource.base && !!resource.createdBy && (
+        <PublishedInInformation
+          resource={{ base: resource.base, createdBy: resource.createdBy }}
+        />
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <BaseModal
           title="Où souhaitez-vous ajouter cette ressource ?"

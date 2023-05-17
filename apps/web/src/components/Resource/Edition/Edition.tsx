@@ -5,9 +5,9 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { Resource } from '@app/web/server/resources/getResource'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
@@ -18,11 +18,14 @@ import styles from './Edition.module.css'
 import EditionActionBar from './EditionActionBar'
 import TitleEdition from './TitleEdition'
 
-const hasChanged = (resource: Resource, updatedResource: ResourceProjection) =>
+const hasChanged = (
+  resource: Resource,
+  updatedResource: ResourceProjectionWithContext,
+) =>
   Object.keys(resourceEditionValues).some(
     (key) =>
       resource[key as keyof Resource] !==
-      updatedResource[key as keyof ResourceProjection],
+      updatedResource[key as keyof ResourceProjectionWithContext],
   )
 
 const publishedState = (canPublished: boolean, resource: Resource) => {
@@ -38,16 +41,10 @@ const publishedState = (canPublished: boolean, resource: Resource) => {
 const Edition = ({
   resource,
   draftResource,
-  draftBase,
-  draftCreatedBy,
-  draftImage: _draftImage,
   user,
 }: {
   resource: Resource
-  draftResource: ResourceProjection
-  draftCreatedBy: Resource['createdBy']
-  draftBase: Resource['base']
-  draftImage: Resource['image']
+  draftResource: ResourceProjectionWithContext
   user: SessionUser
 }) => {
   // Content or resource data currently being edited
@@ -56,7 +53,7 @@ const Edition = ({
 
   // Resource data currently being edited, will update after each edition save
   const [updatedDraftResource, setUpdatedDraftResource] =
-    useState<ResourceProjection>(draftResource)
+    useState<ResourceProjectionWithContext>(draftResource)
 
   // Published ressource, not being edited, can be several versions behind
   const [publishedResource] = useState<Resource>(resource)
@@ -92,8 +89,6 @@ const Edition = ({
       <div className="fr-container fr-pb-30v">
         <BaseEdition
           resource={updatedDraftResource}
-          draftBase={draftBase}
-          draftCreatedBy={draftCreatedBy}
           user={user}
           sendCommand={sendCommand}
         />
