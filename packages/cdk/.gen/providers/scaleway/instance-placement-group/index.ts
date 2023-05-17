@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstancePlacementGroupConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#id InstancePlacementGroup#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#id InstancePlacementGroup#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,49 +17,49 @@ export interface InstancePlacementGroupConfig extends cdktf.TerraformMetaArgumen
   /**
   * The name of the placement group
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#name InstancePlacementGroup#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#name InstancePlacementGroup#name}
   */
   readonly name?: string;
   /**
   * One of the two policy_mode may be selected: enforced or optional.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#policy_mode InstancePlacementGroup#policy_mode}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#policy_mode InstancePlacementGroup#policy_mode}
   */
   readonly policyMode?: string;
   /**
   * The operating mode is selected by a policy_type
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#policy_type InstancePlacementGroup#policy_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#policy_type InstancePlacementGroup#policy_type}
   */
   readonly policyType?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#project_id InstancePlacementGroup#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#project_id InstancePlacementGroup#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with the placement group
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#tags InstancePlacementGroup#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#tags InstancePlacementGroup#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#zone InstancePlacementGroup#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#zone InstancePlacementGroup#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#timeouts InstancePlacementGroup#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#timeouts InstancePlacementGroup#timeouts}
   */
   readonly timeouts?: InstancePlacementGroupTimeouts;
 }
 export interface InstancePlacementGroupTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group#default InstancePlacementGroup#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group#default InstancePlacementGroup#default}
   */
   readonly default?: string;
 }
@@ -134,7 +134,7 @@ export class InstancePlacementGroupTimeoutsOutputReference extends cdktf.Complex
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group scaleway_instance_placement_group}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group scaleway_instance_placement_group}
 */
 export class InstancePlacementGroup extends cdktf.TerraformResource {
 
@@ -148,7 +148,7 @@ export class InstancePlacementGroup extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_placement_group scaleway_instance_placement_group} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_placement_group scaleway_instance_placement_group} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -159,8 +159,8 @@ export class InstancePlacementGroup extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_placement_group',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbCertificateConfig extends cdktf.TerraformMetaArgu
   /**
   * The ID of the certificate
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate#certificate_id DataScalewayLbCertificate#certificate_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate#certificate_id DataScalewayLbCertificate#certificate_id}
   */
   readonly certificateId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate#id DataScalewayLbCertificate#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate#id DataScalewayLbCertificate#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,13 @@ export interface DataScalewayLbCertificateConfig extends cdktf.TerraformMetaArgu
   /**
   * The load-balancer ID
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate#lb_id DataScalewayLbCertificate#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate#lb_id DataScalewayLbCertificate#lb_id}
   */
   readonly lbId?: string;
   /**
   * The name of the load-balancer certificate
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate#name DataScalewayLbCertificate#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate#name DataScalewayLbCertificate#name}
   */
   readonly name?: string;
 }
@@ -168,7 +168,7 @@ export class DataScalewayLbCertificateLetsencryptList extends cdktf.ComplexList 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate scaleway_lb_certificate}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate scaleway_lb_certificate}
 */
 export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
 
@@ -182,7 +182,7 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/data-sources/lb_certificate scaleway_lb_certificate} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_certificate scaleway_lb_certificate} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -193,8 +193,8 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_certificate',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

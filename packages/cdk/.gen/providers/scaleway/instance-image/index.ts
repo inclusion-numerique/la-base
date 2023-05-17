@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface InstanceImageConfig extends cdktf.TerraformMetaArguments {
   /**
   * The IDs of the additional volumes attached to the image
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#additional_volume_ids InstanceImage#additional_volume_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#additional_volume_ids InstanceImage#additional_volume_ids}
   */
   readonly additionalVolumeIds?: string[];
   /**
   * Architecture of the image (default = x86_64)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#architecture InstanceImage#architecture}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#architecture InstanceImage#architecture}
   */
   readonly architecture?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#id InstanceImage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#id InstanceImage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,43 +29,43 @@ export interface InstanceImageConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the image
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#name InstanceImage#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#name InstanceImage#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#project_id InstanceImage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#project_id InstanceImage#project_id}
   */
   readonly projectId?: string;
   /**
   * If true, the image will be public
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#public InstanceImage#public}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#public InstanceImage#public}
   */
   readonly public?: boolean | cdktf.IResolvable;
   /**
   * UUID of the snapshot from which the image is to be created
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#root_volume_id InstanceImage#root_volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#root_volume_id InstanceImage#root_volume_id}
   */
   readonly rootVolumeId: string;
   /**
   * List of tags ["tag1", "tag2", ...] attached to the image
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#tags InstanceImage#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#tags InstanceImage#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#zone InstanceImage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#zone InstanceImage#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#timeouts InstanceImage#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#timeouts InstanceImage#timeouts}
   */
   readonly timeouts?: InstanceImageTimeouts;
 }
@@ -196,23 +196,23 @@ export class InstanceImageAdditionalVolumesList extends cdktf.ComplexList {
 }
 export interface InstanceImageTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#create InstanceImage#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#create InstanceImage#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#default InstanceImage#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#default InstanceImage#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#delete InstanceImage#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#delete InstanceImage#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#read InstanceImage#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#read InstanceImage#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image#update InstanceImage#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image#update InstanceImage#update}
   */
   readonly update?: string;
 }
@@ -379,7 +379,7 @@ export class InstanceImageTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image scaleway_instance_image}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image scaleway_instance_image}
 */
 export class InstanceImage extends cdktf.TerraformResource {
 
@@ -393,7 +393,7 @@ export class InstanceImage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/instance_image scaleway_instance_image} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_image scaleway_instance_image} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -404,8 +404,8 @@ export class InstanceImage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_image',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

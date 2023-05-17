@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface ObjectBucketPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
   * The bucket name.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#bucket ObjectBucketPolicy#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#bucket ObjectBucketPolicy#bucket}
   */
   readonly bucket: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#id ObjectBucketPolicy#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#id ObjectBucketPolicy#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,31 @@ export interface ObjectBucketPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
   * The text of the policy.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#policy ObjectBucketPolicy#policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#policy ObjectBucketPolicy#policy}
   */
   readonly policy: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#project_id ObjectBucketPolicy#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#project_id ObjectBucketPolicy#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#region ObjectBucketPolicy#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#region ObjectBucketPolicy#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#timeouts ObjectBucketPolicy#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#timeouts ObjectBucketPolicy#timeouts}
   */
   readonly timeouts?: ObjectBucketPolicyTimeouts;
 }
 export interface ObjectBucketPolicyTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy#default ObjectBucketPolicy#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy#default ObjectBucketPolicy#default}
   */
   readonly default?: string;
 }
@@ -122,7 +122,7 @@ export class ObjectBucketPolicyTimeoutsOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy scaleway_object_bucket_policy}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy scaleway_object_bucket_policy}
 */
 export class ObjectBucketPolicy extends cdktf.TerraformResource {
 
@@ -136,7 +136,7 @@ export class ObjectBucketPolicy extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/object_bucket_policy scaleway_object_bucket_policy} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/object_bucket_policy scaleway_object_bucket_policy} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -147,8 +147,8 @@ export class ObjectBucketPolicy extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_object_bucket_policy',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface ContainerCronConfig extends cdktf.TerraformMetaArguments {
   /**
   * Cron arguments as json object to pass through during execution.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#args ContainerCron#args}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#args ContainerCron#args}
   */
   readonly args: string;
   /**
   * The Container ID to link with your trigger.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#container_id ContainerCron#container_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#container_id ContainerCron#container_id}
   */
   readonly containerId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#id ContainerCron#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#id ContainerCron#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,35 +29,35 @@ export interface ContainerCronConfig extends cdktf.TerraformMetaArguments {
   /**
   * Cron format string, e.g. 0 * * * * or @hourly, as schedule time of its jobs to be created and executed.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#schedule ContainerCron#schedule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#schedule ContainerCron#schedule}
   */
   readonly schedule: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#timeouts ContainerCron#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#timeouts ContainerCron#timeouts}
   */
   readonly timeouts?: ContainerCronTimeouts;
 }
 export interface ContainerCronTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#create ContainerCron#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#create ContainerCron#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#default ContainerCron#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#default ContainerCron#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#delete ContainerCron#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#delete ContainerCron#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#read ContainerCron#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#read ContainerCron#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron#update ContainerCron#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron#update ContainerCron#update}
   */
   readonly update?: string;
 }
@@ -224,7 +224,7 @@ export class ContainerCronTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron scaleway_container_cron}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron scaleway_container_cron}
 */
 export class ContainerCron extends cdktf.TerraformResource {
 
@@ -238,7 +238,7 @@ export class ContainerCron extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/container_cron scaleway_container_cron} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/container_cron scaleway_container_cron} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -249,8 +249,8 @@ export class ContainerCron extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_container_cron',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

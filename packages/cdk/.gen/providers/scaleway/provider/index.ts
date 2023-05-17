@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,61 +10,61 @@ export interface ScalewayProviderConfig {
   /**
   * The Scaleway access key.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#access_key ScalewayProvider#access_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#access_key ScalewayProvider#access_key}
   */
   readonly accessKey?: string;
   /**
   * The Scaleway API URL to use.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#api_url ScalewayProvider#api_url}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#api_url ScalewayProvider#api_url}
   */
   readonly apiUrl?: string;
   /**
   * The Scaleway organization ID.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#organization_id ScalewayProvider#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#organization_id ScalewayProvider#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The Scaleway profile to use.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#profile ScalewayProvider#profile}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#profile ScalewayProvider#profile}
   */
   readonly profile?: string;
   /**
   * The Scaleway project ID.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#project_id ScalewayProvider#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#project_id ScalewayProvider#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#region ScalewayProvider#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#region ScalewayProvider#region}
   */
   readonly region?: string;
   /**
   * The Scaleway secret Key.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#secret_key ScalewayProvider#secret_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#secret_key ScalewayProvider#secret_key}
   */
   readonly secretKey?: string;
   /**
   * The zone you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#zone ScalewayProvider#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#zone ScalewayProvider#zone}
   */
   readonly zone?: string;
   /**
   * Alias name
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs#alias ScalewayProvider#alias}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs#alias ScalewayProvider#alias}
   */
   readonly alias?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs scaleway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs scaleway}
 */
 export class ScalewayProvider extends cdktf.TerraformProvider {
 
@@ -78,7 +78,7 @@ export class ScalewayProvider extends cdktf.TerraformProvider {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs scaleway} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs scaleway} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -89,8 +89,8 @@ export class ScalewayProvider extends cdktf.TerraformProvider {
       terraformResourceType: 'scaleway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       terraformProviderSource: 'scaleway/scaleway'
     });

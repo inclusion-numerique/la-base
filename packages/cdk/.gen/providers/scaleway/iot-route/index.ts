@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface IotRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the route's hub
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#hub_id IotRoute#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#hub_id IotRoute#hub_id}
   */
   readonly hubId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#id IotRoute#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#id IotRoute#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface IotRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the route
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#name IotRoute#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#name IotRoute#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#region IotRoute#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#region IotRoute#region}
   */
   readonly region?: string;
   /**
   * The Topic the route subscribes to (wildcards allowed)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#topic IotRoute#topic}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#topic IotRoute#topic}
   */
   readonly topic: string;
   /**
   * database block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#database IotRoute#database}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#database IotRoute#database}
   */
   readonly database?: IotRouteDatabase;
   /**
   * rest block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#rest IotRoute#rest}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#rest IotRoute#rest}
   */
   readonly rest?: IotRouteRest;
   /**
   * s3 block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#s3 IotRoute#s3}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#s3 IotRoute#s3}
   */
   readonly s3?: IotRouteS3;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#timeouts IotRoute#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#timeouts IotRoute#timeouts}
   */
   readonly timeouts?: IotRouteTimeouts;
 }
@@ -67,37 +67,37 @@ export interface IotRouteDatabase {
   /**
   * The database name
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#dbname IotRoute#dbname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#dbname IotRoute#dbname}
   */
   readonly dbname: string;
   /**
   * The database hostname
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#host IotRoute#host}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#host IotRoute#host}
   */
   readonly host: string;
   /**
   * The database password
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#password IotRoute#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#password IotRoute#password}
   */
   readonly password: string;
   /**
   * The database port
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#port IotRoute#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#port IotRoute#port}
   */
   readonly port: number;
   /**
   * SQL query to be executed ($TOPIC and $PAYLOAD variables are available, see documentation)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#query IotRoute#query}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#query IotRoute#query}
   */
   readonly query: string;
   /**
   * The database username
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#username IotRoute#username}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#username IotRoute#username}
   */
   readonly username: string;
 }
@@ -261,19 +261,19 @@ export interface IotRouteRest {
   /**
   * The HTTP call extra headers
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#headers IotRoute#headers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#headers IotRoute#headers}
   */
   readonly headers: { [key: string]: string };
   /**
   * The URI of the REST endpoint
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#uri IotRoute#uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#uri IotRoute#uri}
   */
   readonly uri: string;
   /**
   * The HTTP Verb used to call REST URI
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#verb IotRoute#verb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#verb IotRoute#verb}
   */
   readonly verb: string;
 }
@@ -377,25 +377,25 @@ export interface IotRouteS3 {
   /**
   * The name of the S3 route's destination bucket
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#bucket_name IotRoute#bucket_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#bucket_name IotRoute#bucket_name}
   */
   readonly bucketName: string;
   /**
   * The region of the S3 route's destination bucket
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#bucket_region IotRoute#bucket_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#bucket_region IotRoute#bucket_region}
   */
   readonly bucketRegion: string;
   /**
   * The string to prefix object names with
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#object_prefix IotRoute#object_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#object_prefix IotRoute#object_prefix}
   */
   readonly objectPrefix?: string;
   /**
   * How the S3 route's objects will be created: one per topic or one per message
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#strategy IotRoute#strategy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#strategy IotRoute#strategy}
   */
   readonly strategy: string;
 }
@@ -520,11 +520,11 @@ export class IotRouteS3OutputReference extends cdktf.ComplexObject {
 }
 export interface IotRouteTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#create IotRoute#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#create IotRoute#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route#default IotRoute#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route#default IotRoute#default}
   */
   readonly default?: string;
 }
@@ -622,7 +622,7 @@ export class IotRouteTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route scaleway_iot_route}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route scaleway_iot_route}
 */
 export class IotRoute extends cdktf.TerraformResource {
 
@@ -636,7 +636,7 @@ export class IotRoute extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_route scaleway_iot_route} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_route scaleway_iot_route} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -647,8 +647,8 @@ export class IotRoute extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iot_route',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

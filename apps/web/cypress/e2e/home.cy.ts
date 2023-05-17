@@ -20,6 +20,7 @@ describe("Page d'accueil", () => {
     cy.visit('/')
     cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
     cy.dsfrShouldBeStarted()
+    cy.dsfrCollapsesShouldBeBound()
     cy.get('.fr-header__tools button[aria-controls="header-user-menu"]')
       .contains(user.name)
       .click()

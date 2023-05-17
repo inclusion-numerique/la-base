@@ -101,13 +101,11 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Check that the user can logout')
 
     cy.dsfrShouldBeStarted()
+    cy.dsfrCollapsesShouldBeBound()
     cy.get('.fr-header__tools button[aria-controls="header-user-menu"]')
       .contains(inclusionConnectUser.firstName)
       .contains(inclusionConnectUser.lastName)
       .click()
-    // Dsfr transition time is .3s
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(300)
 
     cy.get('#header-user-menu').should('be.visible')
 
@@ -165,6 +163,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Check that the user can logout')
 
     cy.dsfrShouldBeStarted()
+    cy.dsfrCollapsesShouldBeBound()
     cy.get('.fr-header__tools button[aria-controls="header-user-menu"]')
       .contains(emailUser.name)
       .click()

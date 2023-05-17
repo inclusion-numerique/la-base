@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,29 +10,29 @@ export interface IotDeviceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Allow plain and server-authenticated SSL connections in addition to mutually-authenticated ones
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#allow_insecure IotDevice#allow_insecure}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#allow_insecure IotDevice#allow_insecure}
   */
   readonly allowInsecure?: boolean | cdktf.IResolvable;
   /**
   * Allow multiple connections
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#allow_multiple_connections IotDevice#allow_multiple_connections}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#allow_multiple_connections IotDevice#allow_multiple_connections}
   */
   readonly allowMultipleConnections?: boolean | cdktf.IResolvable;
   /**
   * The description of the device
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#description IotDevice#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#description IotDevice#description}
   */
   readonly description?: string;
   /**
   * The ID of the hub on which this device will be created
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#hub_id IotDevice#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#hub_id IotDevice#hub_id}
   */
   readonly hubId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#id IotDevice#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#id IotDevice#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -41,25 +41,25 @@ export interface IotDeviceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the device
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#name IotDevice#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#name IotDevice#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#region IotDevice#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#region IotDevice#region}
   */
   readonly region?: string;
   /**
   * certificate block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#certificate IotDevice#certificate}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#certificate IotDevice#certificate}
   */
   readonly certificate?: IotDeviceCertificate;
   /**
   * message_filters block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#message_filters IotDevice#message_filters}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#message_filters IotDevice#message_filters}
   */
   readonly messageFilters?: IotDeviceMessageFilters;
 }
@@ -67,7 +67,7 @@ export interface IotDeviceCertificate {
   /**
   * X509 PEM encoded certificate of the device
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#crt IotDevice#crt}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#crt IotDevice#crt}
   */
   readonly crt?: string;
 }
@@ -139,13 +139,13 @@ export interface IotDeviceMessageFiltersPublish {
   /**
   * Publish message filter policy
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#policy IotDevice#policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#policy IotDevice#policy}
   */
   readonly policy?: string;
   /**
   * List of topics in the set
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#topics IotDevice#topics}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#topics IotDevice#topics}
   */
   readonly topics?: string[];
 }
@@ -235,13 +235,13 @@ export interface IotDeviceMessageFiltersSubscribe {
   /**
   * Subscribe message filter policy
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#policy IotDevice#policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#policy IotDevice#policy}
   */
   readonly policy?: string;
   /**
   * List of topics in the set
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#topics IotDevice#topics}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#topics IotDevice#topics}
   */
   readonly topics?: string[];
 }
@@ -331,13 +331,13 @@ export interface IotDeviceMessageFilters {
   /**
   * publish block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#publish IotDevice#publish}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#publish IotDevice#publish}
   */
   readonly publish?: IotDeviceMessageFiltersPublish;
   /**
   * subscribe block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device#subscribe IotDevice#subscribe}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device#subscribe IotDevice#subscribe}
   */
   readonly subscribe?: IotDeviceMessageFiltersSubscribe;
 }
@@ -425,7 +425,7 @@ export class IotDeviceMessageFiltersOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device scaleway_iot_device}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device scaleway_iot_device}
 */
 export class IotDevice extends cdktf.TerraformResource {
 
@@ -439,7 +439,7 @@ export class IotDevice extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/iot_device scaleway_iot_device} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/iot_device scaleway_iot_device} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -450,8 +450,8 @@ export class IotDevice extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iot_device',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

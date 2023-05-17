@@ -166,7 +166,6 @@ jobs:
       - skip/skip_unchanged:
           paths: pnpm-lock.yaml
       - install_dependencies
-      - install_terraform
       - run:
           name: 'Fetch dependencies'
           command: pnpm install --virtual-store-dir << pipeline.parameters.virtual_store_dir >> --frozen-lockfile
@@ -182,7 +181,6 @@ jobs:
             - ./apps/web/public/dsfr
             - ./apps/cli/node_modules
             - ./packages/cdk/node_modules
-            - ./packages/cdk/.gen
             - ./packages/config/node_modules
             - ./packages/emails/node_modules
             - ./packages/lint/node_modules

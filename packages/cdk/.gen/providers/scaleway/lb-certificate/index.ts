@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate
+// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface LbCertificateConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#id LbCertificate#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#id LbCertificate#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface LbCertificateConfig extends cdktf.TerraformMetaArguments {
   /**
   * The load-balancer ID
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#lb_id LbCertificate#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#lb_id LbCertificate#lb_id}
   */
   readonly lbId: string;
   /**
   * The name of the load-balancer certificate
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#name LbCertificate#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#name LbCertificate#name}
   */
   readonly name?: string;
   /**
   * custom_certificate block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#custom_certificate LbCertificate#custom_certificate}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#custom_certificate LbCertificate#custom_certificate}
   */
   readonly customCertificate?: LbCertificateCustomCertificate;
   /**
   * letsencrypt block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#letsencrypt LbCertificate#letsencrypt}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#letsencrypt LbCertificate#letsencrypt}
   */
   readonly letsencrypt?: LbCertificateLetsencrypt;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#timeouts LbCertificate#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#timeouts LbCertificate#timeouts}
   */
   readonly timeouts?: LbCertificateTimeouts;
 }
@@ -49,7 +49,7 @@ export interface LbCertificateCustomCertificate {
   /**
   * The full PEM-formatted certificate chain
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#certificate_chain LbCertificate#certificate_chain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#certificate_chain LbCertificate#certificate_chain}
   */
   readonly certificateChain: string;
 }
@@ -113,13 +113,13 @@ export interface LbCertificateLetsencrypt {
   /**
   * The main domain name of the certificate
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#common_name LbCertificate#common_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#common_name LbCertificate#common_name}
   */
   readonly commonName: string;
   /**
   * The alternative domain names of the certificate
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#subject_alternative_name LbCertificate#subject_alternative_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#subject_alternative_name LbCertificate#subject_alternative_name}
   */
   readonly subjectAlternativeName?: string[];
 }
@@ -204,23 +204,23 @@ export class LbCertificateLetsencryptOutputReference extends cdktf.ComplexObject
 }
 export interface LbCertificateTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#create LbCertificate#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#create LbCertificate#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#default LbCertificate#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#default LbCertificate#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#delete LbCertificate#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#delete LbCertificate#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#read LbCertificate#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#read LbCertificate#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate#update LbCertificate#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate#update LbCertificate#update}
   */
   readonly update?: string;
 }
@@ -387,7 +387,7 @@ export class LbCertificateTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate scaleway_lb_certificate}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate scaleway_lb_certificate}
 */
 export class LbCertificate extends cdktf.TerraformResource {
 
@@ -401,7 +401,7 @@ export class LbCertificate extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.18.0/docs/resources/lb_certificate scaleway_lb_certificate} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/lb_certificate scaleway_lb_certificate} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -412,8 +412,8 @@ export class LbCertificate extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_certificate',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.18.0',
-        providerVersionConstraint: '>= 2.16.3'
+        providerVersion: '2.19.0',
+        providerVersionConstraint: '= 2.19.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
