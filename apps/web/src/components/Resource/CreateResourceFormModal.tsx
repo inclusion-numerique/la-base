@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
@@ -15,6 +15,7 @@ import {
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
+import { useModalVisibility } from '@app/web/hooks/useModalVisibility'
 import {
   CreateResourceCommand,
   CreateResourceCommandClientPayloadValidation,
@@ -32,11 +33,24 @@ const titleInfo = (title: string | null) =>
 const descriptionInfo = (description: string | null) =>
   `${description?.length ?? 0}/${resourceDescriptionMaxLength} caractères`
 
+const defaultValues = {
+  baseId: null,
+}
+
 const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   // Step 0: Title and description
   // Step 1: Base selection ONLY if user has bases
   const [step, setStep] = useState(0)
   const router = useRouter()
+
+  // Forward ref do not work with modal, we have to make a workaround with form ref
+  // TODO Make an issue or contrib to react dsfr Modal component
+  const formRef = useRef<HTMLFormElement>(null)
+  const modalRef = useRef<HTMLDialogElement>()
+  if (!modalRef.current) {
+    // Will only execute while first form element render is done
+    modalRef.current = formRef.current?.querySelector('dialog') ?? undefined
+  }
 
   const createResourceIsInSearchParams =
     typeof useSearchParams()?.get('creer-une-ressource') === 'string'
@@ -52,13 +66,18 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   const create = trpc.resource.create.useMutation()
   const {
     control,
+    reset,
     handleSubmit,
     formState: { isSubmitting },
     setError,
   } = useForm<CreateResourceCommand['payload']>({
     resolver: zodResolver(CreateResourceCommandClientPayloadValidation),
-    defaultValues: {
-      baseId: null,
+    defaultValues,
+  })
+
+  useModalVisibility(modalRef.current, {
+    onClosed: () => {
+      reset(defaultValues)
     },
   })
 
@@ -102,7 +121,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   const disabled = isSubmitting
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
       <CreateResourceModal
         title={modalTitle}
         buttons={[
