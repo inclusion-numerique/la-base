@@ -158,7 +158,7 @@ model ResourceEvent {
   by         User?    @relation(fields: [byId], references: [id])
   byId       String?  @map("by_id") @db.Uuid
 
-  @@map("resource_event")
+  @@map("resource_events")
 }
 
 enum ContentType {
