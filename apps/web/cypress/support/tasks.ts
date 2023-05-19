@@ -1,6 +1,7 @@
 import {
   createBase,
   createResource,
+  createResourceContents,
   createSession,
   createUser,
   deleteSession,
@@ -15,6 +16,7 @@ export const tasks = {
   createUser,
   createBase,
   createResource,
+  createResourceContents,
   deleteUser,
   createSession,
   deleteSession,

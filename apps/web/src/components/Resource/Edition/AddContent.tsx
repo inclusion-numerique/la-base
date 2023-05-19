@@ -23,13 +23,18 @@ const AddContent = ({
     setAdding(contentType)
   }
 
+  const onSendCommand = async (command: ResourceMutationCommand) => {
+    await sendCommand(command)
+    setAdding(null)
+  }
+
   return adding ? (
     <ContentForm
       type={adding}
       mode="add"
       resource={resource}
       setEditing={setEditing}
-      sendCommand={sendCommand}
+      sendCommand={onSendCommand}
     />
   ) : (
     <AddContentButton disabled={!!editing && editing !== 'add'} onAdd={onAdd} />

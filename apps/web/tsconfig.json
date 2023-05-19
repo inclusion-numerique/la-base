@@ -9,7 +9,13 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "module": "esnext",
-    "types": ["cypress", "@testing-library/cypress", "jest", "node"],
+    "types": [
+      "cypress",
+      "cypress-real-events",
+      "@testing-library/cypress",
+      "jest",
+      "node"
+    ],
     "paths": {
       "@app/cli/*": ["../../apps/cli/src/*"],
       "@app/web/*": ["src/*"],

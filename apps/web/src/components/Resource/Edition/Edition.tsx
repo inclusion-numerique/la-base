@@ -135,6 +135,7 @@ const Edition = ({
         {updatedDraftResource.contents.map((content, index) => (
           <div
             key={content.id}
+            data-testid={`content-${content.type}-edition`}
             id={`content-${index + 1}`}
             className={styles.content}
           >

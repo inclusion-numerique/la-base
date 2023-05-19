@@ -7,7 +7,11 @@ const SectionTitleView = ({
   content: Pick<ResourceContent, 'title'>
 }) =>
   title ? (
-    <h2 id={createSlug(title)} className="fr-mb-0">
+    <h2
+      data-testid="content-section-title"
+      id={createSlug(title)}
+      className="fr-mb-0"
+    >
       {title}
     </h2>
   ) : null

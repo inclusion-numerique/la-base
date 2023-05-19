@@ -15,6 +15,7 @@ const SectionTitleEdition = ({
   const title = watch('payload.title')
   return (
     <InputFormField
+      data-testid="section-title-input"
       control={control}
       path="payload.title"
       label="Titre de la section"

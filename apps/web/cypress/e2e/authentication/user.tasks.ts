@@ -1,5 +1,6 @@
 import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
+import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
 import { ResourceCreated } from '@app/web/server/resources/feature/CreateResource'
 
 export type CreateUserInput = Parameters<
@@ -49,6 +50,43 @@ export const createResource = async ({
     },
   })
 }
+
+export type CreateResourceContentsInput = {
+  contents: ContentAdded[]
+  byId: string
+  resourceId: string
+}
+export const createResourceContents = async ({
+  contents,
+  byId,
+  resourceId,
+}: CreateResourceContentsInput) =>
+  Promise.all(
+    contents.flatMap((content, index) => {
+      const contentId = content.data.id || v4()
+      const { __version, ...rest } = content.data
+      return [
+        prismaClient.resourceEvent.create({
+          data: {
+            id: contentId,
+            resourceId,
+            byId,
+            type: 'ContentAdded',
+            timestamp: new Date(content.timestamp),
+            data: content.data,
+          },
+        }),
+        prismaClient.content.create({
+          data: {
+            resource: { connect: { id: resourceId } },
+            created: new Date(content.timestamp),
+            order: index,
+            ...rest,
+          },
+        }),
+      ]
+    }),
+  )
 
 export const deleteUser = async (user: { email: string }) => {
   const exists = await prismaClient.user.findUnique({

@@ -1,4 +1,5 @@
 import { v4 } from 'uuid'
+import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
 import {
   CreateBaseInput,
   CreateResourceInput,
@@ -34,6 +35,7 @@ export const createTestBase = (ownerId: string) =>
 export const createTestResource = (createdById: string, baseId?: string) =>
   ({
     id: v4(),
+    created: new Date(),
     title:
       'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
     slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
@@ -44,3 +46,18 @@ export const createTestResource = (createdById: string, baseId?: string) =>
     createdById,
     baseId,
   } satisfies CreateResourceInput)
+
+export const createTestResourceContents = () => {
+  return [
+    {
+      type: 'ContentAdded',
+      timestamp: new Date(),
+      data: {
+        __version: 1,
+        id: v4(),
+        type: 'SectionTitle',
+        title: 'Et ca continue encore et encore...',
+      },
+    },
+  ] satisfies ContentAdded[]
+}

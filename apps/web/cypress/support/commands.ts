@@ -1,6 +1,7 @@
 import '@testing-library/cypress/add-commands'
 import type {
   CreateBaseInput,
+  CreateResourceContentsInput,
   CreateResourceInput,
   CreateUserInput,
 } from '../e2e/authentication/user.tasks'
@@ -66,6 +67,12 @@ Cypress.Commands.add('createBase', (base: CreateBaseInput) => {
 Cypress.Commands.add('createResource', (resource: CreateResourceInput) => {
   cy.task('createResource', resource)
 })
+Cypress.Commands.add(
+  'createResourceContents',
+  (contents: CreateResourceContentsInput) => {
+    cy.task('createResourceContents', contents)
+  },
+)
 
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
@@ -84,6 +91,10 @@ Cypress.Commands.add('dsfrCollapsesShouldBeBound', () => {
 Cypress.Commands.add('testId', (testId: string) =>
   cy.get(`[data-testid="${testId}"]`),
 )
+Cypress.Commands.add('removeHover', () =>
+  // reset hovering by putting mouse away (e.g. here top left corner of body)
+  cy.get('body').realHover({ position: 'topLeft' }),
+)
 
 //
 declare global {
@@ -98,11 +109,15 @@ declare global {
       createUser(user: CreateUserInput): Chainable<void>
       createBase(base: CreateBaseInput): Chainable<void>
       createResource(resource: CreateResourceInput): Chainable<void>
+      createResourceContents(
+        contents: CreateResourceContentsInput,
+      ): Chainable<void>
       signin(user: { email: string }): Chainable<string>
       dsfrShouldBeStarted(): Chainable<void>
       dsfrModalsShouldBeBound(): Chainable<void>
       dsfrCollapsesShouldBeBound(): Chainable<void>
       testId(testId: string): Chainable<JQuery<HTMLElement>>
+      removeHover(): Chainable<JQuery<HTMLElement>>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

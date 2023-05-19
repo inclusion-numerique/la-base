@@ -66,6 +66,7 @@ const AddContentButton = ({
             priority: 'secondary',
             iconId: 'fr-icon-add-line',
             children: 'Ajouter un contenu',
+            nativeButtonProps: { 'data-testid': 'add-content-button' },
             className: styles.button,
             disabled,
           },
@@ -76,6 +77,7 @@ const AddContentButton = ({
           {contents.map((content) => (
             <button
               type="button"
+              data-testid={`add-${content.type}-content-button`}
               onClick={() => onAdd(content.type)}
               key={content.type}
               className={styles.content}

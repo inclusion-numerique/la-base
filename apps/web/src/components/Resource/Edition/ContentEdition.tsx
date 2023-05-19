@@ -34,6 +34,7 @@ const ContentEdition = ({
             className={styles.dragButton}
           />
           <Button
+            data-testid="content-edition-button"
             priority="tertiary no outline"
             iconId="fr-icon-edit-line"
             onClick={() => {
