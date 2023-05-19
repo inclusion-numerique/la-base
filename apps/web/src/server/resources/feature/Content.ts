@@ -11,9 +11,9 @@ export const contentEditionValues = {
       `Le titre ne doit pas dépasser ${resourceTitleMaxLength} caractères`,
     ),
   text: z
-    .string({ required_error: 'Veuillez renseigner le text' })
+    .string({ required_error: 'Veuillez renseigner le texte' })
     .trim()
-    .nonempty('Veuillez renseigner le text'),
+    .nonempty('Veuillez renseigner le texte'),
 }
 
 const SectionTitlePayloadCommandValidation = z.object({

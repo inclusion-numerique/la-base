@@ -170,5 +170,11 @@ module.exports = {
         'unicorn/no-useless-undefined': 'off',
       },
     },
+    {
+      files: '**/*.spec.ts',
+      rules: {
+        'jest/valid-title': 'off',
+      },
+    },
   ],
 }
