@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
@@ -17,16 +16,6 @@ import EditableImage from './EditableImage'
 import styles from './Edition.module.css'
 import EditionActionBar from './EditionActionBar'
 import TitleEdition from './TitleEdition'
-
-const publishedState = (canPublish: boolean, resource: Resource) => {
-  if (!resource.published) {
-    return ResourcePublishedState.DRAFT
-  }
-
-  return resource.isPublic
-    ? ResourcePublishedState.PUBLIC
-    : ResourcePublishedState.PRIVATE
-}
 
 export type SendCommandResult = Awaited<
   ReturnType<ReturnType<typeof trpc.resource.mutate.useMutation>['mutateAsync']>
@@ -55,13 +44,17 @@ const Edition = ({
   // Mutation used to send commands to change the draft resource (and publish)
   const mutate = trpc.resource.mutate.useMutation()
 
-  const sendCommand: SendCommand = async (command: ResourceMutationCommand) => {
-    const result = await mutate.mutateAsync(command)
-    setUpdatedDraftResource(result.resource)
-    return result
-  }
+  const isPublished = !!updatedDraftResource.published
 
-  const router = useRouter()
+  const hasUnpublishedChanges =
+    updatedDraftResource.published?.getTime() !==
+    updatedDraftResource.updated.getTime()
+
+  const publishedState: ResourcePublishedState = isPublished
+    ? updatedDraftResource.isPublic
+      ? ResourcePublishedState.PUBLIC
+      : ResourcePublishedState.PRIVATE
+    : ResourcePublishedState.DRAFT
 
   // Current edition state displayed in the action bar
   const editionState: ResourceEditionState =
@@ -71,30 +64,38 @@ const Edition = ({
         : ResourceEditionState.SAVED
       : ResourceEditionState.EDITING
 
+  // Do not display state in action bar if no changes have been made
+  const actionBarEditionState =
+    editionState === ResourceEditionState.SAVED && !hasUnpublishedChanges
+      ? null
+      : editionState
+
   // Publish command is only available if publishedResource is older than updatedDraftResource
   const canPublish =
-    editionState === ResourceEditionState.SAVED &&
-    updatedDraftResource.published?.getTime() !==
-      updatedDraftResource.updated.getTime()
+    editionState === ResourceEditionState.SAVED && hasUnpublishedChanges
 
-  const publishButtonLabel = resource.published
+  const publishButtonLabel = isPublished
     ? 'Publier les modifications'
     : 'Publier la ressource'
+
+  const sendCommand: SendCommand = async (command: ResourceMutationCommand) => {
+    const result = await mutate.mutateAsync(command)
+    setUpdatedDraftResource(result.resource)
+
+    return result
+  }
 
   // eslint-disable-next-line unicorn/consistent-function-scoping
   const onPublish = async () => {
     try {
       // TODO this will first navigate to a "Publication" page for additional input
-
-      const published = await sendCommand({
+      await sendCommand({
         name: 'Publish',
         payload: {
           resourceId: resource.id,
           isPublic: true,
         },
       })
-
-      router.push(`/ressources/${published.resource.slug}`)
     } catch (error) {
       console.error('Could not publish resource', error)
       // TODO Have a nice error and handle edge cases server side
@@ -148,19 +149,11 @@ const Edition = ({
         />
       </div>
       <EditionActionBar
-        publishedState={publishedState(canPublish, resource)}
-        editionState={
-          editionState === ResourceEditionState.SAVED && !canPublish
-            ? null
-            : editionState
-        }
+        publishedState={publishedState}
+        editionState={actionBarEditionState}
         actionDisabled={!canPublish}
         actionLabel={publishButtonLabel}
-        unPublishedEdits={
-          !!updatedDraftResource.published &&
-          updatedDraftResource.published.getTime() !==
-            updatedDraftResource.updated.getTime()
-        }
+        unPublishedEdits={isPublished && hasUnpublishedChanges}
         action={onPublish}
       />
     </>

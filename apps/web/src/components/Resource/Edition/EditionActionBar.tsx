@@ -27,7 +27,6 @@ const EditionActionBar = ({
     <div className={classNames('fr-container', styles.content)}>
       <div className={styles.block}>
         <ResourcePublishedStateBadge state={publishedState} />
-        {editionState && <ResourceEditionStateBadge state={editionState} />}
         {unPublishedEdits && (
           <CustomTag
             icon="fr-icon-edit-line"
@@ -37,6 +36,7 @@ const EditionActionBar = ({
             className="fr-ml-1w"
           />
         )}
+        {editionState && <ResourceEditionStateBadge state={editionState} />}
       </div>
       <div className={styles.block}>
         <Button

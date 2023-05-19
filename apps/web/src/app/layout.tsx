@@ -1,12 +1,14 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { setLink } from '@codegouvfr/react-dsfr/link'
 import { Dsfr } from '@app/web/app/Dsfr'
 import { EnvInformation } from '@app/web/app/EnvInformation'
 import { Matomo } from '@app/web/app/Matomo'
 import { PreloadResources } from '@app/web/app/PreloadResources'
 import '@app/web/app/app.css'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 
 declare module '@codegouvfr/react-dsfr/link' {
@@ -38,9 +40,11 @@ export const metadata: Metadata = {
   manifest: '/favicon/manifest.webmanifest',
 }
 
-const RootLayout = ({ children }: PropsWithChildren) => {
+const RootLayout = async ({ children }: PropsWithChildren) => {
   // Do we want to disable SSG for CSFR on this website ?
   // const nonce = headers().get('x-sde-script-nonce') ?? undefined
+  const user = await getSessionUser()
+
   const nonce = undefined
   return (
     <html lang="fr" data-fr-theme="light" data-fr-scheme="light">
@@ -50,6 +54,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
         <Matomo nonce={nonce} />
         <EnvInformation />
         {children}
+        {user ? <CreateResourceFormModal user={user} /> : null}
       </body>
     </html>
   )
