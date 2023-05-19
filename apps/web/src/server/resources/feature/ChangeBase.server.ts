@@ -3,12 +3,12 @@ import {
   ChangeBaseCommand,
 } from '@app/web/server/resources/feature/ChangeBase'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
-export const handleChangeBase: ResourceCommandHandler<
+export const handleChangeBase: ResourceMutationCommandHandler<
   ChangeBaseCommand,
   BaseChanged
 > = ({ payload: { resourceId: _, ...rest } }) => ({

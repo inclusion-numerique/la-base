@@ -8,6 +8,11 @@
   color: var(--grey-50-1000);
 }
 
+.orange {
+  background-color: var(--background-contrast-brown-caramel);
+  color: var(--text-action-high-brown-caramel);
+}
+
 .tag {
   /* fr-tag has a z-index of 1 that makes tags visible e.g. over modal footer so we need to set it back to initial */
   z-index: initial;

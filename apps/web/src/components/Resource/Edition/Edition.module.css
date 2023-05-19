@@ -10,8 +10,9 @@
   justify-content: space-between;
 }
 
-.contentHoverableAction {
-  display: none;
+.contentHoverableAction{
+  opacity: 0;
+  pointer-events: none;
 }
 
 .content {
@@ -19,8 +20,9 @@
 
   &:hover {
     .contentHoverableAction {
-      display: flex;
-    }  
+      opacity: 1;
+      pointer-events: initial;
+    }
   }
 }
 

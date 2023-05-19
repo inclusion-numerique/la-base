@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { MouseEventHandler } from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
-import IconLink from '../../Icon/IconLink'
+import CustomTag, { TagColor } from '@app/web/components/CustomTag'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import styles from './EditionActionBar.module.css'
@@ -11,12 +11,14 @@ import ResourcePublishedStateBadge from './ResourcePublishedStateBadge'
 const EditionActionBar = ({
   publishedState,
   editionState,
+  unPublishedEdits,
   actionLabel,
   actionDisabled,
   action,
 }: {
   publishedState: ResourcePublishedState
   editionState: ResourceEditionState | null
+  unPublishedEdits?: boolean
   actionLabel: string
   actionDisabled?: boolean
   action: MouseEventHandler<HTMLButtonElement>
@@ -26,15 +28,31 @@ const EditionActionBar = ({
       <div className={styles.block}>
         <ResourcePublishedStateBadge state={publishedState} />
         {editionState && <ResourceEditionStateBadge state={editionState} />}
+        {unPublishedEdits && (
+          <CustomTag
+            icon="fr-icon-edit-line"
+            label="Modifications non publiées"
+            color={TagColor.ORANGE}
+            data-testid="unpublished-edits-tag"
+            className="fr-ml-1w"
+          />
+        )}
       </div>
       <div className={styles.block}>
-        <IconLink title="Supprimer" href="/" icon="fr-icon-delete-line" />
-        <IconLink
-          title="Ajouter un contributeur"
-          href="/"
-          icon="fr-icon-user-add-line"
+        <Button
+          type="button"
+          title="Supprimer"
+          priority="tertiary no outline"
+          iconId="fr-icon-delete-line"
         />
         <Button
+          type="button"
+          title="Ajouter un contributeur"
+          priority="tertiary no outline"
+          iconId="fr-icon-user-add-line"
+        />
+        <Button
+          type="button"
           disabled={actionDisabled}
           onClick={action}
           data-testid="publish-resource-button"

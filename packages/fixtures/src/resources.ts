@@ -45,6 +45,8 @@ export const resources: Exclude<
             description:
               'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
             slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+            titleDuplicationCheckSlug:
+              'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
             baseId: 'cb08cddb-1657-49ac-a2f9-d9212b428690',
             id: 'cb08cddb-1657-49ac-a2f9-d9212b428690',
           } satisfies ResourceCreatedDataV1,
@@ -79,6 +81,8 @@ export const resources: Exclude<
               '10 raisons de venir sur la base, la deuxième va vous laisser sans voix !',
             description: 'TODO...',
             slug: '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
+            titleDuplicationCheckSlug:
+              '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
             baseId: null,
           } satisfies ResourceCreatedDataV1,
         },
@@ -110,7 +114,9 @@ export const resources: Exclude<
             title:
               '10 raisons de venir sur la base, la deuxième va vous laisser sans voix !',
             description: 'TODO...',
-            slug: '10-raisons-de-venir-sur-la-base-la-deuxième-va-vous-laisser-sans-voix',
+            slug: 'tester-c-est-pour-les-devs-qui-écrivent-des-bugs',
+            titleDuplicationCheckSlug:
+              'tester-c-est-pour-les-devs-qui-écrivent-des-bugs',
             baseId: null,
           } satisfies ResourceCreatedDataV1,
         },
@@ -248,6 +254,7 @@ export const randomResourcesEvents: (
           title,
           description,
           slug,
+          titleDuplicationCheckSlug: slug,
           baseId: null,
         } satisfies ResourceCreatedDataV1,
       },

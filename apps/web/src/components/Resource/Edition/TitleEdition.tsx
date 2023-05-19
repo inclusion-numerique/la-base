@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import {
   EditTitleAndDescriptionCommand,
   EditTitleAndDescriptionCommandValidation,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   resourceDescriptionMaxLength,
@@ -31,7 +31,7 @@ const TitleEdition = ({
   editing,
 }: {
   resource: ResourceProjectionWithContext
-  sendCommand: (command: ResourceMutationCommand) => Promise<void>
+  sendCommand: SendCommand
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
 }) => {

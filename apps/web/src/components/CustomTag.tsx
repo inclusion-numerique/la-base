@@ -6,6 +6,7 @@ import styles from './CustomTag.module.css'
 export enum TagColor {
   GREEN = 'green',
   GREY = 'grey',
+  ORANGE = 'orange',
 }
 
 const CustomTag = ({
@@ -13,6 +14,7 @@ const CustomTag = ({
   icon,
   color,
   'data-testid': dataTestId,
+  className,
 }: UiComponentProps & {
   label: string
   icon: string
@@ -26,6 +28,7 @@ const CustomTag = ({
       styles.tag,
       icon,
       styles[color],
+      className,
     )}
     data-testid={dataTestId}
   >

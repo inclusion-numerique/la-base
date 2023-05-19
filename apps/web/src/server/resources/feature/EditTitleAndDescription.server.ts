@@ -3,12 +3,12 @@ import {
   TitleAndDescriptionEdited,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
-export const handleEditTitleAndDescription: ResourceCommandHandler<
+export const handleEditTitleAndDescription: ResourceMutationCommandHandler<
   EditTitleAndDescriptionCommand,
   TitleAndDescriptionEdited
 > = ({ payload: { resourceId: _, ...rest } }) => ({

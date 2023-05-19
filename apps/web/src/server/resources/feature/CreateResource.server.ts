@@ -1,26 +1,17 @@
-import { prismaClient } from '@app/web/prismaClient'
+import { createUniqueSlug } from '@app/web/server/resources/createUniqueSlug'
 import {
   CreateResourceCommand,
   ResourceCreated,
 } from '@app/web/server/resources/feature/CreateResource'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceCreationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { createSlug } from '@app/web/utils/createSlug'
 
-const createUniqueSlug = async (title: string) => {
-  const slug = createSlug(title)
-  const [existing, count] = await Promise.all([
-    prismaClient.resource.findUnique({ where: { slug }, select: { id: true } }),
-    prismaClient.resource.count(),
-  ])
-  return existing ? `${slug}-${count + 1}` : slug
-}
-
-export const handleCreateResource: ResourceCommandHandler<
+export const handleCreateResource: ResourceCreationCommandHandler<
   CreateResourceCommand,
   ResourceCreated
 > = async ({ payload }, { user }) => {
@@ -33,6 +24,7 @@ export const handleCreateResource: ResourceCommandHandler<
     data: {
       __version: 1,
       slug,
+      titleDuplicationCheckSlug: createSlug(payload.title),
       id: resourceId,
       byId: user.id,
       ...rest,
@@ -54,6 +46,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   baseId,
   created: timestamp,
   updated: timestamp,
+  published: null,
   createdById: byId,
   imageId: null,
   isPublic: false,

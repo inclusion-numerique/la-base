@@ -4,6 +4,7 @@ import Alert from '@codegouvfr/react-dsfr/Alert'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import SectionTitleEdition from '@app/web/components/Resource/Contents/SectionTitleEdition'
+import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import styles from '@app/web/components/Resource/Edition/Edition.module.css'
 import {
   AddContentCommand,
@@ -17,7 +18,6 @@ import {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
-import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'
 import { ContentType } from '@prisma/client'
@@ -34,7 +34,7 @@ const ContentForm = ({
   type: ContentType
   resource: ResourceProjection
   setEditing: Dispatch<SetStateAction<string | null>>
-  sendCommand: (command: ResourceMutationCommand) => Promise<void>
+  sendCommand: SendCommand
 } & (
   | { mode: 'add'; content?: undefined }
   | { mode: 'edit'; content: ContentProjection }
@@ -71,10 +71,15 @@ const ContentForm = ({
   const {
     handleSubmit,
     setError,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isDirty },
   } = form
 
   const onSubmit = async (data: AddContentCommand | EditContentCommand) => {
+    if (!isDirty) {
+      // No change
+      setEditing(null)
+      return
+    }
     try {
       await sendCommand(data)
       setEditing(null)
@@ -88,6 +93,7 @@ const ContentForm = ({
       setEditing(null)
       return
     }
+    // TODO add confirmation modal
     try {
       await sendCommand({
         name: 'RemoveContent',
@@ -135,8 +141,9 @@ const ContentForm = ({
         )}
         <Button
           priority="tertiary no outline"
-          iconId="fr-icon-edit-line"
+          iconId="fr-icon-check-line"
           type="submit"
+          size="small"
           disabled={isSubmitting}
         >
           Valider

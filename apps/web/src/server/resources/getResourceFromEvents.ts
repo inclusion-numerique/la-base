@@ -17,7 +17,10 @@ export const getResourceFromEvents = async (
         select: {
           id: true,
           type: true,
+          timestamp: true,
+          sequence: true,
           data: true,
+          byId: true,
         },
         orderBy: [{ timestamp: 'asc' }, { sequence: 'asc' }],
       },

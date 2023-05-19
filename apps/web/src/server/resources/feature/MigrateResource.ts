@@ -2,8 +2,8 @@ import z from 'zod'
 import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
 import { ResourceCreated } from '@app/web/server/resources/feature/CreateResource'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceCreationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
 
@@ -22,7 +22,7 @@ export type MigrateResourceCommand = z.infer<
   typeof MigrateResourceCommandValidation
 >
 
-export const handleMigrateResource: ResourceCommandHandler<
+export const handleMigrateResource: ResourceCreationCommandHandler<
   MigrateResourceCommand,
   ResourceCreated | ContentAdded
 > = ({ payload }, { user }) => {
@@ -39,6 +39,7 @@ export const handleMigrateResource: ResourceCommandHandler<
         __version: 1,
         id: resourceId,
         byId: user.id,
+        titleDuplicationCheckSlug: rest.slug,
         ...rest,
       },
     },

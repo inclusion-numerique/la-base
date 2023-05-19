@@ -4,9 +4,10 @@ import {
   CreateResourceCommand,
   CreateResourceCommandClientValidation,
 } from '@app/web/server/resources/feature/CreateResource'
+import { getPersistedResource } from '@app/web/server/resources/feature/PersistedResource'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import {
   applyCreationEvent,
@@ -26,7 +27,7 @@ import {
   getResourceProjectionContext,
 } from '@app/web/server/resources/getResourceFromEvents'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { forbiddenError, notFoundError } from '../trpcErrors'
+import { forbiddenError, notFoundError } from '@app/web/server/rpc/trpcErrors'
 
 export const resourceRouter = router({
   create: protectedProcedure
@@ -45,13 +46,8 @@ export const resourceRouter = router({
         throw forbiddenError()
       }
 
-      const inputWithId = {
-        ...input,
-        payload: { ...input.payload, resourceId: v4() },
-      }
-
       const handlerResult = await ResourceCreationCommandHandlers[input.name](
-        inputWithId,
+        command,
         {
           user,
         },
@@ -77,6 +73,8 @@ export const resourceRouter = router({
           resource = applyMutationEvent(event, resource)
 
           // eslint-disable-next-line no-await-in-loop
+          await executeSideEffect(event, resource, { transaction })
+          // eslint-disable-next-line no-await-in-loop
           await transaction.resourceEvent.create({
             data: {
               id: v4(),
@@ -85,8 +83,6 @@ export const resourceRouter = router({
               ...event,
             },
           })
-          // eslint-disable-next-line no-await-in-loop
-          await executeSideEffect(event, resource, { transaction })
         }
       })
 
@@ -111,16 +107,19 @@ export const resourceRouter = router({
 
       const { resourceId } = command.payload
 
-      const initialResource = await getResourceFromEvents({ id: resourceId })
-      if (!initialResource) {
+      const [initialResource, persistedResource] = await Promise.all([
+        getResourceFromEvents({ id: resourceId }),
+        getPersistedResource(resourceId),
+      ])
+      if (!initialResource || !persistedResource) {
         throw notFoundError()
       }
 
       const handlerResult = await (
-        ResourceMutationCommandHandlers[command.name] as ResourceCommandHandler<
-          typeof command
-        >
-      )(command, { user })
+        ResourceMutationCommandHandlers[
+          command.name
+        ] as ResourceMutationCommandHandler<typeof command>
+      )(command, { user, resource: initialResource, persistedResource })
       const mutationEvents = (
         Array.isArray(handlerResult) ? handlerResult : [handlerResult]
       ) as MutationHistoryResourceEvent[]
@@ -132,6 +131,11 @@ export const resourceRouter = router({
           resource = applyMutationEvent(event, resource)
 
           // eslint-disable-next-line no-await-in-loop
+          await executeSideEffect(event, resource, {
+            transaction,
+            persistedResource,
+          })
+          // eslint-disable-next-line no-await-in-loop
           await transaction.resourceEvent.create({
             data: {
               id: v4(),
@@ -140,8 +144,6 @@ export const resourceRouter = router({
               ...event,
             },
           })
-          // eslint-disable-next-line no-await-in-loop
-          await executeSideEffect(event, resource, { transaction })
         }
       })
       const resourceWithContext = await getResourceProjectionContext(resource)

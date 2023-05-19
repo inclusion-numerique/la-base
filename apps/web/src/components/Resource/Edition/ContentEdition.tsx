@@ -2,9 +2,9 @@ import React, { Dispatch, SetStateAction } from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
 import ContentForm from '@app/web/components/Resource/Contents/ContentForm'
 import ContentView from '@app/web/components/Resource/Contents/ContentView'
+import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import styles from '@app/web/components/Resource/Edition/Edition.module.css'
 import { ContentProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 
 const ContentEdition = ({
@@ -17,12 +17,23 @@ const ContentEdition = ({
   resource: ResourceProjectionWithContext
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
-  sendCommand: (command: ResourceMutationCommand) => Promise<void>
+  sendCommand: SendCommand
   content: ContentProjection
 }) => {
   const editionMode = editing === content.id
 
   if (!editionMode) {
+    const onDelete = async () => {
+      // TODO: add confirmation modal
+      await sendCommand({
+        name: 'RemoveContent',
+        payload: {
+          resourceId: resource.id,
+          id: content.id,
+        },
+      })
+    }
+
     return (
       <>
         <ContentView content={content} />
@@ -32,10 +43,13 @@ const ContentEdition = ({
             title="Drag"
             priority="tertiary no outline"
             className={styles.dragButton}
+            type="button"
           />
           <Button
             priority="tertiary no outline"
             iconId="fr-icon-edit-line"
+            type="button"
+            size="small"
             onClick={() => {
               setEditing(content.id)
             }}
@@ -47,6 +61,8 @@ const ContentEdition = ({
             priority="tertiary no outline"
             iconId="fr-icon-delete-line"
             size="small"
+            type="button"
+            onClick={onDelete}
           />
         </div>
       </>

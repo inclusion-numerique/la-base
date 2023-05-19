@@ -1,15 +1,14 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { contentEditionValues } from '@app/web/server/resources/feature/Content'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { Resource } from '@app/web/server/resources/getResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
@@ -19,44 +18,8 @@ import styles from './Edition.module.css'
 import EditionActionBar from './EditionActionBar'
 import TitleEdition from './TitleEdition'
 
-const hasChanged = (
-  resource: Resource,
-  updatedResource: ResourceProjectionWithContext,
-) => {
-  if (
-    Object.keys(resourceEditionValues).some(
-      (key) =>
-        resource[key as keyof Resource] !==
-        updatedResource[key as keyof ResourceProjectionWithContext],
-    )
-  ) {
-    return true
-  }
-
-  if (resource.contents.length !== updatedResource.contents.length) {
-    return true
-  }
-
-  return resource.contents.some((content) => {
-    const updatedContent = updatedResource.contents.find(
-      (x) => content.id === x.id,
-    )
-
-    if (!updatedContent) {
-      return true
-    }
-    return Object.keys(contentEditionValues).some(
-      (key) =>
-        content[key as keyof Resource['contents'][number]] !==
-        updatedContent[
-          key as keyof ResourceProjectionWithContext['contents'][number]
-        ],
-    )
-  })
-}
-
-const publishedState = (canPublished: boolean, resource: Resource) => {
-  if (canPublished) {
+const publishedState = (canPublish: boolean, resource: Resource) => {
+  if (!resource.published) {
     return ResourcePublishedState.DRAFT
   }
 
@@ -64,6 +27,13 @@ const publishedState = (canPublished: boolean, resource: Resource) => {
     ? ResourcePublishedState.PUBLIC
     : ResourcePublishedState.PRIVATE
 }
+
+export type SendCommandResult = Awaited<
+  ReturnType<ReturnType<typeof trpc.resource.mutate.useMutation>['mutateAsync']>
+>
+export type SendCommand = (
+  command: ResourceMutationCommand,
+) => Promise<SendCommandResult>
 
 const Edition = ({
   resource,
@@ -82,16 +52,16 @@ const Edition = ({
   const [updatedDraftResource, setUpdatedDraftResource] =
     useState<ResourceProjectionWithContext>(draftResource)
 
-  // Published ressource, not being edited, can be several versions behind
-  const [publishedResource] = useState<Resource>(resource)
-
   // Mutation used to send commands to change the draft resource (and publish)
   const mutate = trpc.resource.mutate.useMutation()
 
-  const sendCommand = async (command: ResourceMutationCommand) => {
+  const sendCommand: SendCommand = async (command: ResourceMutationCommand) => {
     const result = await mutate.mutateAsync(command)
     setUpdatedDraftResource(result.resource)
+    return result
   }
+
+  const router = useRouter()
 
   // Current edition state displayed in the action bar
   const editionState: ResourceEditionState =
@@ -104,11 +74,33 @@ const Edition = ({
   // Publish command is only available if publishedResource is older than updatedDraftResource
   const canPublish =
     editionState === ResourceEditionState.SAVED &&
-    hasChanged(publishedResource, updatedDraftResource)
+    updatedDraftResource.published?.getTime() !==
+      updatedDraftResource.updated.getTime()
+
+  const publishButtonLabel = resource.published
+    ? 'Publier les modifications'
+    : 'Publier la ressource'
 
   // eslint-disable-next-line unicorn/consistent-function-scoping
-  const onPublish = () => {
-    // TODO sendCommand(PublishCommand) etc...
+  const onPublish = async () => {
+    try {
+      // TODO this will first navigate to a "Publication" page for additional input
+
+      const published = await sendCommand({
+        name: 'Publish',
+        payload: {
+          resourceId: resource.id,
+          isPublic: true,
+        },
+      })
+
+      router.push(`/ressources/${published.resource.slug}`)
+    } catch (error) {
+      console.error('Could not publish resource', error)
+      // TODO Have a nice error and handle edge cases server side
+      // TODO for example a linked base or file or resource has been deleted since last publication
+      throw error
+    }
   }
 
   return (
@@ -163,7 +155,12 @@ const Edition = ({
             : editionState
         }
         actionDisabled={!canPublish}
-        actionLabel="Publier la ressource"
+        actionLabel={publishButtonLabel}
+        unPublishedEdits={
+          !!updatedDraftResource.published &&
+          updatedDraftResource.published.getTime() !==
+            updatedDraftResource.updated.getTime()
+        }
         action={onPublish}
       />
     </>

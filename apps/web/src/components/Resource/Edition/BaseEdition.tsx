@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import {
   ChangeBaseCommand,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
-import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import PublishedInInformation from '../PublishedInInformation'
@@ -28,7 +28,7 @@ const BaseEdition = ({
 }: {
   resource: ResourceProjectionWithContext
   user: SessionUser
-  sendCommand: (command: ResourceMutationCommand) => Promise<void>
+  sendCommand: SendCommand
 }) => {
   const {
     control,
@@ -60,7 +60,7 @@ const BaseEdition = ({
       onEditClick={openBaseModal}
       data-testid="edit-base-button"
     >
-      {!!resource.base && !!resource.createdBy && (
+      {!!resource.createdBy && (
         <PublishedInInformation
           resource={{ base: resource.base, createdBy: resource.createdBy }}
         />

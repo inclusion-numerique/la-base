@@ -3,12 +3,12 @@ import {
   EditContentCommand,
 } from '@app/web/server/resources/feature/EditContent'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
-export const handleEditContent: ResourceCommandHandler<
+export const handleEditContent: ResourceMutationCommandHandler<
   EditContentCommand,
   ContentEdited
 > = ({ payload: { resourceId: _, ...rest } }) => ({
@@ -25,7 +25,7 @@ export const editContentSecurityRules: ResourceCommandSecurityRule<
 > = () => true
 
 export const applyContentEdited: ResourceMutationEventApplier<ContentEdited> = (
-  { timestamp, data: { id, ...otherData } },
+  { timestamp, data: { __version, id, ...otherData } },
   resource,
 ) => ({
   ...resource,

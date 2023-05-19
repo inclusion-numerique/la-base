@@ -30,6 +30,7 @@ export type ResourceCreatedDataV1 = {
   id: string
   title: string
   slug: string
+  titleDuplicationCheckSlug: string
   description: string
   baseId: string | null
   byId: string

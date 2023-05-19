@@ -51,6 +51,16 @@ import {
   migrateResourceSecurityRules,
 } from '@app/web/server/resources/feature/MigrateResource'
 import {
+  PublishCommandValidation,
+  ResourcePublished,
+} from '@app/web/server/resources/feature/PublishResource'
+import {
+  applyResourcePublished,
+  handlePublish,
+  onPublished,
+  publishSecurityRules,
+} from '@app/web/server/resources/feature/PublishResource.server'
+import {
   ContentRemoved,
   RemoveContentCommandValidation,
 } from '@app/web/server/resources/feature/RemoveContent'
@@ -60,8 +70,9 @@ import {
   removeContentSecurityRules,
 } from '@app/web/server/resources/feature/RemoveContent.server'
 import {
-  ResourceCommandHandler,
   ResourceCommandSecurityRule,
+  ResourceCreationCommandHandler,
+  ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import {
   ApplierResourceEvent,
@@ -90,6 +101,7 @@ export const ResourceMutationCommandsValidation = z.discriminatedUnion('name', [
   AddContentCommandValidation,
   EditContentCommandValidation,
   RemoveContentCommandValidation,
+  PublishCommandValidation,
 ])
 
 export type ResourceCreationCommand = z.infer<
@@ -101,7 +113,7 @@ export type ResourceMutationCommand = z.infer<
 export type ResourceCommand = ResourceCreationCommand | ResourceMutationCommand
 
 export const ResourceCreationCommandHandlers: {
-  [Name in ResourceCreationCommand['name']]: ResourceCommandHandler<
+  [Name in ResourceCreationCommand['name']]: ResourceCreationCommandHandler<
     ResourceCreationCommand & { name: Name },
     ApplierResourceEvent
   >
@@ -110,7 +122,7 @@ export const ResourceCreationCommandHandlers: {
   MigrateResource: handleMigrateResource,
 }
 export const ResourceMutationCommandHandlers: {
-  [Name in ResourceMutationCommand['name']]: ResourceCommandHandler<
+  [Name in ResourceMutationCommand['name']]: ResourceMutationCommandHandler<
     ResourceMutationCommand & { name: Name },
     ApplierResourceEvent
   >
@@ -120,6 +132,7 @@ export const ResourceMutationCommandHandlers: {
   AddContent: handleAddContent,
   EditContent: handleEditContent,
   RemoveContent: handleRemoveContent,
+  Publish: handlePublish,
 }
 
 export const ResourceCommandSecurityRules: {
@@ -134,6 +147,7 @@ export const ResourceCommandSecurityRules: {
   AddContent: addContentSecurityRules,
   EditContent: editContentSecurityRules,
   RemoveContent: removeContentSecurityRules,
+  Publish: publishSecurityRules,
 }
 
 /**
@@ -148,6 +162,7 @@ export type HistoryResourceEvent =
   | ContentAdded
   | ContentEdited
   | ContentRemoved
+  | ResourcePublished
 
 export type CreationHistoryResourceEvent = ResourceCreated
 export type MutationHistoryResourceEvent = Exclude<
@@ -159,6 +174,14 @@ export type HistoryEventsForResource = [
   ...MutationHistoryResourceEvent[],
 ]
 
+export const CreationEventAppliers: {
+  [Type in CreationHistoryResourceEvent['type']]: ResourceCreationEventApplier<
+    CreationHistoryResourceEvent & { type: Type }
+  >
+} = {
+  Created: applyResourceCreated,
+}
+
 export const MutationEventAppliers: {
   [Type in MutationHistoryResourceEvent['type']]: ResourceMutationEventApplier<
     MutationHistoryResourceEvent & { type: Type }
@@ -169,14 +192,7 @@ export const MutationEventAppliers: {
   ContentEdited: applyContentEdited,
   ContentRemoved: applyContentRemoved,
   BaseChanged: applyBaseChanged,
-}
-
-export const CreationEventAppliers: {
-  [Type in CreationHistoryResourceEvent['type']]: ResourceCreationEventApplier<
-    CreationHistoryResourceEvent & { type: Type }
-  >
-} = {
-  Created: applyResourceCreated,
+  Published: applyResourcePublished,
 }
 
 export const EventSideEffects: {
@@ -185,6 +201,7 @@ export const EventSideEffects: {
   >
 } = {
   Created: onCreated,
+  Published: onPublished,
 }
 
 export const executeSideEffect = <Event extends HistoryResourceEvent>(

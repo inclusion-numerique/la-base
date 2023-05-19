@@ -3,10 +3,9 @@ import React from 'react'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import styles from './ResourceEditionStateBadge.module.css'
 
-const informations: Record<
-  ResourceEditionState,
-  { label: string; icon: string }
-> = {
+const informations: {
+  [state in ResourceEditionState]: { label: string; icon: string }
+} = {
   [ResourceEditionState.EDITING]: {
     label: 'Edition en cours',
     icon: 'ri-loader-line',
