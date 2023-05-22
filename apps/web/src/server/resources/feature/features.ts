@@ -47,9 +47,14 @@ import {
 } from '@app/web/server/resources/feature/EditTitleAndDescription.server'
 import {
   MigrateResourceCommandValidation,
+  ResourceMigrated,
+} from '@app/web/server/resources/feature/MigrateResource'
+import {
+  applyResourceMigrated,
   handleMigrateResource,
   migrateResourceSecurityRules,
-} from '@app/web/server/resources/feature/MigrateResource'
+  onMigrated,
+} from '@app/web/server/resources/feature/MigrateResource.server'
 import {
   PublishCommandValidation,
   ResourcePublished,
@@ -157,6 +162,7 @@ export const ResourceCommandSecurityRules: {
  */
 export type HistoryResourceEvent =
   | ResourceCreated
+  | ResourceMigrated
   | BaseChanged
   | TitleAndDescriptionEdited
   | ContentAdded
@@ -164,7 +170,7 @@ export type HistoryResourceEvent =
   | ContentRemoved
   | ResourcePublished
 
-export type CreationHistoryResourceEvent = ResourceCreated
+export type CreationHistoryResourceEvent = ResourceCreated | ResourceMigrated
 export type MutationHistoryResourceEvent = Exclude<
   HistoryResourceEvent,
   CreationHistoryResourceEvent
@@ -180,6 +186,7 @@ export const CreationEventAppliers: {
   >
 } = {
   Created: applyResourceCreated,
+  Migrated: applyResourceMigrated,
 }
 
 export const MutationEventAppliers: {
@@ -201,6 +208,7 @@ export const EventSideEffects: {
   >
 } = {
   Created: onCreated,
+  Migrated: onMigrated,
   Published: onPublished,
 }
 

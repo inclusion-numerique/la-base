@@ -1,0 +1,114 @@
+import { v4 } from 'uuid'
+import { createUniqueSlug } from '@app/web/server/resources/createUniqueSlug'
+import {
+  MigrateResourceCommand,
+  ResourceMigrated,
+} from '@app/web/server/resources/feature/MigrateResource'
+import {
+  ResourceCommandSecurityRule,
+  ResourceCreationCommandHandler,
+} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
+import { createSlug } from '@app/web/utils/createSlug'
+
+export const handleMigrateResource: ResourceCreationCommandHandler<
+  MigrateResourceCommand,
+  ResourceMigrated
+> = async ({
+  payload: {
+    resourceId,
+    title,
+    created,
+    updated,
+    published,
+    contents,
+    ...rest
+  },
+}) => {
+  const slug = await createUniqueSlug(title)
+  const timestamp = new Date()
+
+  return [
+    {
+      type: 'Migrated',
+      timestamp,
+      data: {
+        __version: 1,
+        title,
+        slug,
+        created: created.toISOString(),
+        updated: updated.toISOString(),
+        published: published?.toISOString() ?? null,
+        titleDuplicationCheckSlug: createSlug(title),
+        id: resourceId,
+        contents: contents.map(
+          ({
+            created: contentCreated,
+            updated: contentUpdated,
+            ...contentRest
+          }) => ({
+            id: v4(),
+            created: contentCreated.toISOString(),
+            updated: contentUpdated.toISOString(),
+            ...contentRest,
+          }),
+        ),
+        ...rest,
+      },
+    },
+  ]
+}
+
+export const migrateResourceSecurityRules: ResourceCommandSecurityRule<
+  MigrateResourceCommand
+> = () => false
+
+export const applyResourceMigrated: ResourceCreationEventApplier<
+  ResourceMigrated
+> = ({
+  data: { __version, id, byId, created, updated, published, contents, ...rest },
+}) => ({
+  id,
+  created: new Date(created),
+  updated: new Date(updated),
+  published: published ? new Date(published) : null,
+  createdById: byId,
+  ...rest,
+  contents: contents.map(
+    ({ created: contentCreated, updated: contetUpdated, ...contentRest }) => ({
+      created: new Date(contentCreated),
+      updated: new Date(contetUpdated),
+      ...contentRest,
+    }),
+  ),
+})
+
+export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
+  { data: { id, byId, legacyId, contents, ...rest } },
+  resource,
+  { transaction },
+) => {
+  await transaction.content.deleteMany({
+    where: {
+      resource: { legacyId },
+    },
+  })
+  await transaction.resource.delete({
+    where: {
+      legacyId,
+    },
+  })
+  await transaction.resource.create({
+    data: {
+      id,
+      createdById: byId,
+      ...rest,
+      contents: {
+        createMany: {
+          data: contents,
+        },
+      },
+    },
+  })
+}
