@@ -32,6 +32,7 @@ const ContentEdition = ({
           id: content.id,
         },
       })
+      setEditing(null)
     }
 
     return (

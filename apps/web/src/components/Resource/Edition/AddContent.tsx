@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import ContentForm from '@app/web/components/Resource/Contents/ContentForm'
 import AddContentButton from '@app/web/components/Resource/Edition/AddContentButton'
 import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
@@ -16,30 +16,28 @@ const AddContent = ({
   setEditing: Dispatch<SetStateAction<string | null>>
   sendCommand: SendCommand
 }) => {
-  const [adding, setAdding] = useState<ContentType | null>(null)
-
   const onAdd = (contentType: ContentType) => {
-    setEditing('add')
-    setAdding(contentType)
+    setEditing(`add-${contentType}`)
   }
 
-  const onSendCommand: SendCommand = async (command) => {
-    const result = await sendCommand(command)
-    setAdding(null)
+  const isAddingContentType =
+    !!editing && editing.startsWith('add-')
+      ? (editing?.split('-')[1] as ContentType)
+      : null
 
-    return result
-  }
-
-  return adding ? (
+  return isAddingContentType ? (
     <ContentForm
-      type={adding}
+      type={isAddingContentType}
       mode="add"
       resource={resource}
       setEditing={setEditing}
-      sendCommand={onSendCommand}
+      sendCommand={sendCommand}
     />
   ) : (
-    <AddContentButton disabled={!!editing && editing !== 'add'} onAdd={onAdd} />
+    <AddContentButton
+      disabled={!!editing && !isAddingContentType}
+      onAdd={onAdd}
+    />
   )
 }
 
