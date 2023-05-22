@@ -169,7 +169,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('content-SectionTitle-edition-form').should('not.exist')
         cy.testId('content-edition-button').should('not.be.visible')
 
-        cy.testId('content-section-title').realHover()
+        cy.testId('content-section-title').first().realHover()
         cy.testId('content-edition-button').first().should('be.visible')
         cy.testId('content-edition-button').first().click()
         cy.removeHover()
