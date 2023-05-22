@@ -175,7 +175,7 @@ export const migrateResources = async ({
         }
       > => !('error' in command),
     )
-  const chunkSize = 50
+  const chunkSize = 10
   let migratedResourceCount = 0
   const migratedContents: ResourceProjection['contents'] = []
 
