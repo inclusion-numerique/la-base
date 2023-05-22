@@ -1,4 +1,3 @@
-import { chunk } from 'lodash'
 import { v4 } from 'uuid'
 import { output } from '@app/cli/output'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
@@ -175,36 +174,30 @@ export const migrateResources = async ({
         }
       > => !('error' in command),
     )
-  const chunkSize = 10
-  let migratedResourceCount = 0
+  const migratedResources: ResourceProjection[] = []
   const migratedContents: ResourceProjection['contents'] = []
 
   output(`- Migrating ${commands.length} resources`)
 
-  const migratedResources = await Promise.all(
-    chunk(commands, chunkSize).map((commandChunk) =>
-      Promise.all(
-        commandChunk.map((command) =>
-          handleResourceCreationCommand(command, { user: undefined }),
-        ),
-      ).then((results) => {
-        migratedResourceCount += results.length
-        for (const result of results) {
-          migratedContents.push(...result.resource.contents)
-        }
-        output(
-          `-- ${migratedResourceCount} ${(
-            (migratedResourceCount * 100) /
-            legacyResources.length
-          ).toFixed(0)}%`,
-        )
-        return results.map(({ resource }) => resource)
-      }),
-    ),
-  )
+  for (const command of commands) {
+    // eslint-disable-next-line no-await-in-loop
+    const result = await handleResourceCreationCommand(command, {
+      user: undefined,
+    })
+    migratedResources.push(result.resource)
+    migratedContents.push(...result.resource.contents)
+    if (migratedResources.length % 25 === 0) {
+      output(
+        `-- ${migratedResources.length} ${(
+          (migratedResources.length * 100) /
+          commands.length
+        ).toFixed(0)}%`,
+      )
+    }
+  }
 
   return {
-    migratedResources: migratedResources.flat(),
+    migratedResources,
     migratedContents,
   }
 }
