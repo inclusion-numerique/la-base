@@ -1,3 +1,4 @@
+import { chunk } from 'lodash'
 import { v4 } from 'uuid'
 import { output } from '@app/cli/output'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
@@ -179,8 +180,7 @@ export const migrateResources = async ({
 
   output(`- Migrating ${commands.length} resources`)
 
-  for (const command of commands) {
-    // eslint-disable-next-line no-await-in-loop
+  const executeCommand = async (command: MigrateResourceCommand) => {
     const result = await handleResourceCreationCommand(command, {
       user: undefined,
     })
@@ -194,6 +194,12 @@ export const migrateResources = async ({
         ).toFixed(0)}%`,
       )
     }
+  }
+
+  const chunkSize = 10
+  for (const commandChunk of chunk(commands, chunkSize)) {
+    // eslint-disable-next-line no-await-in-loop
+    await Promise.all(commandChunk.map(executeCommand))
   }
 
   return {
