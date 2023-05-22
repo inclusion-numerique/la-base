@@ -196,7 +196,7 @@ export const migrateResources = async ({
     }
   }
 
-  const chunkSize = 10
+  const chunkSize = 50
   for (const commandChunk of chunk(commands, chunkSize)) {
     // eslint-disable-next-line no-await-in-loop
     await Promise.all(commandChunk.map(executeCommand))
