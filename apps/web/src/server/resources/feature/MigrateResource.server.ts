@@ -1,5 +1,3 @@
-import { v4 } from 'uuid'
-import { createUniqueSlug } from '@app/web/server/resources/createUniqueSlug'
 import {
   MigrateResourceCommand,
   ResourceMigrated,
@@ -10,12 +8,11 @@ import {
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
-import { createSlug } from '@app/web/utils/createSlug'
 
 export const handleMigrateResource: ResourceCreationCommandHandler<
   MigrateResourceCommand,
   ResourceMigrated
-> = async ({
+> = ({
   payload: {
     resourceId,
     title,
@@ -26,7 +23,6 @@ export const handleMigrateResource: ResourceCreationCommandHandler<
     ...rest
   },
 }) => {
-  const slug = await createUniqueSlug(title)
   const timestamp = new Date()
 
   return [
@@ -36,11 +32,9 @@ export const handleMigrateResource: ResourceCreationCommandHandler<
       data: {
         __version: 1,
         title,
-        slug,
         created: created.toISOString(),
         updated: updated.toISOString(),
         published: published?.toISOString() ?? null,
-        titleDuplicationCheckSlug: createSlug(title),
         id: resourceId,
         contents: contents.map(
           ({
@@ -48,7 +42,6 @@ export const handleMigrateResource: ResourceCreationCommandHandler<
             updated: contentUpdated,
             ...contentRest
           }) => ({
-            id: v4(),
             created: contentCreated.toISOString(),
             updated: contentUpdated.toISOString(),
             ...contentRest,
@@ -85,20 +78,21 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
 })
 
 export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
-  { data: { id, byId, legacyId, contents, ...rest } },
+  { data: { __version, id, byId, legacyId, contents, ...rest } },
   resource,
   { transaction },
 ) => {
-  await transaction.content.deleteMany({
-    where: {
-      resource: { legacyId },
-    },
+  const existing = await transaction.resource.findUnique({
+    where: { legacyId },
+    select: { id: true },
   })
-  await transaction.resource.delete({
-    where: {
-      legacyId,
-    },
-  })
+  if (existing) {
+    await transaction.resource.delete({
+      where: {
+        legacyId,
+      },
+    })
+  }
   await transaction.resource.create({
     data: {
       id,

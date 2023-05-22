@@ -8,9 +8,8 @@ import {
   transformResource,
 } from '@app/migration/modelMigrations/migrateResources'
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
-import { createSlug } from '@app/web/utils/createSlug'
 
-jest.mock('uuid', () => ({ v4: () => '0000' }))
+jest.mock('uuid', () => ({ v4: () => 'testuuid' }))
 
 describe('migrateResource', () => {
   const mockTransaction = createMockPrisma()
@@ -40,7 +39,7 @@ describe('migrateResource', () => {
       license_text_id: null,
       profile_image_id: 740n,
       can_evaluate: true,
-      created: new Date('2022-06-30'),
+      created: new Date('2022-03-30'),
       modified: new Date('2022-06-30'),
       main_contentblock: [],
       main_basesection_resources: [],
@@ -63,49 +62,25 @@ describe('migrateResource', () => {
     })
 
     expect(result).toEqual({
-      resourceUpsert: {
-        create: {
-          baseId: 'aaaa',
-          createdById: '0000',
-          description:
-            "L'Annuaire des Collectivités est un service public numérique développé par l'Incubateur des Territoires ANCT permettant aux communes de disposer d'une interface web centralisant des informations fiables et utiles pour le citoyens : horaires d'ouverture de la mairie, liens vers les démarches administratives (acte de naissance, renouvellement de CNU), présentation des élus...",
-          id: '0000',
-          legacyId: 1238,
-          slug: 'test-slug',
-          imageId: 'bbbb',
-          title: legacyResource.title,
-          titleDuplicationCheckSlug: createSlug(legacyResource.title),
-          created: legacyResource.created,
-          updated: legacyResource.modified,
-        },
-        select: {
-          createdBy: true,
-          id: true,
-          legacyId: true,
-        },
-        update: {
-          baseId: 'aaaa',
-          createdById: '0000',
-          description:
-            "L'Annuaire des Collectivités est un service public numérique développé par l'Incubateur des Territoires ANCT permettant aux communes de disposer d'une interface web centralisant des informations fiables et utiles pour le citoyens : horaires d'ouverture de la mairie, liens vers les démarches administratives (acte de naissance, renouvellement de CNU), présentation des élus...",
-          slug: 'test-slug',
-          imageId: 'bbbb',
-          title: legacyResource.title,
-          titleDuplicationCheckSlug: createSlug(legacyResource.title),
-          created: legacyResource.created,
-          updated: legacyResource.modified,
-        },
-        where: {
-          legacyId: 1238,
-        },
-      },
-      contentsCreate: [],
-      deleteExistingContents: {
-        where: {
-          resource: {
-            legacyId: 1238,
-          },
-        },
+      name: 'MigrateResource',
+      payload: {
+        resourceId: 'testuuid',
+        baseId: 'aaaa',
+        byId: '0000',
+        contents: [],
+        created: legacyResource.created,
+        updated: legacyResource.modified,
+        published: legacyResource.modified,
+        description:
+          "L'Annuaire des Collectivités est un service public numérique développé par l'Incubateur des Territoires ANCT permettant aux communes de disposer d'une interface web centralisant des informations fiables et utiles pour le citoyens : horaires d'ouverture de la mairie, liens vers les démarches administratives (acte de naissance, renouvellement de CNU), présentation des élus...",
+        imageId: 'bbbb',
+        isPublic: true,
+        legacyId: 1238,
+        slug: 'test-slug',
+        title:
+          'Diffuser simplement les informations utiles aux habitants de sa commune',
+        titleDuplicationCheckSlug:
+          'diffuser-simplement-les-informations-utiles-aux-habitants-de-sa-commune',
       },
     })
   })

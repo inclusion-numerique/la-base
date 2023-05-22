@@ -4,13 +4,15 @@ import { output } from '@app/cli/output'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import { transformContent } from '@app/migration/modelMigrations/transformContent'
-import { UpsertCreateType } from '@app/migration/utils/UpsertCreateType'
 import {
   SlugToLegacyIdMap,
   computeSlugAndUpdateExistingSlugs,
 } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { prismaClient } from '@app/web/prismaClient'
+import { MigrateResourceCommand } from '@app/web/server/resources/feature/MigrateResource'
+import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { createSlug } from '@app/web/utils/createSlug'
 
 export const getLegacyResources = () =>
@@ -62,19 +64,23 @@ export const transformResource = ({
   uploadKeyFromLegacyKey: (legacyKey: string) => string
   // Deduplicated slug
   slug: string
-}) => {
+}):
+  | MigrateResourceCommand
+  | { error: string; legacyResource: LegacyResource } => {
   const legacyId = Number(legacyResource.id)
 
   if (!legacyResource.creator_id) {
     return { error: 'No creator', legacyResource }
   }
 
-  const data = {
+  const payload = {
+    resourceId: v4(),
+    legacyId,
     title: legacyResource.title,
     slug,
     titleDuplicationCheckSlug: createSlug(legacyResource.title),
     description: legacyResource.description ?? '',
-    createdById: userIdFromLegacyId(Number(legacyResource.creator_id)),
+    byId: userIdFromLegacyId(Number(legacyResource.creator_id)),
     baseId: legacyResource.root_base_id
       ? baseIdFromLegacyId(Number(legacyResource.root_base_id))
       : null,
@@ -83,23 +89,11 @@ export const transformResource = ({
     imageId: legacyResource.profile_image_id
       ? imageIdFromLegacyId(Number(legacyResource.profile_image_id))
       : null,
-  } satisfies UpsertCreateType<typeof prismaClient.resource.upsert>
-
-  const resourceUpsert = {
-    where: { legacyId },
-    create: {
-      id: v4(),
-      legacyId,
-      ...data,
-    },
-    update: data,
-    select: { id: true, createdBy: true, legacyId: true },
-  } satisfies Parameters<typeof prismaClient.resource.upsert>[0]
-
-  // Instead of merging the content blocks, we delete all the existing ones and recreate them
-  const deleteExistingContents = {
-    where: { resource: { legacyId } },
-  } satisfies Parameters<typeof prismaClient.content.deleteMany>[0]
+    contents: [] as MigrateResourceCommand['payload']['contents'],
+    // TODO what rule for this ?
+    isPublic: true,
+    published: legacyResource.modified,
+  } satisfies MigrateResourceCommand['payload']
 
   const orderedLegacyResourcesOrSectionTitle =
     legacyResource.main_contentsection.flatMap((legacySection) => {
@@ -112,18 +106,24 @@ export const transformResource = ({
       return [legacySection, ...legacySection.main_contentblock]
     })
 
-  const contentsCreate = orderedLegacyResourcesOrSectionTitle.map(
-    (legacyContent, index) =>
+  for (const [
+    index,
+    content,
+  ] of orderedLegacyResourcesOrSectionTitle.entries()) {
+    payload.contents.push(
       transformContent({
-        legacyResource,
-        legacyContent,
+        legacyContent: content,
         imageIdFromLegacyId,
         uploadKeyFromLegacyKey,
         order: index,
       }),
-  )
+    )
+  }
 
-  return { resourceUpsert, deleteExistingContents, contentsCreate }
+  return {
+    name: 'MigrateResource',
+    payload,
+  }
 }
 
 export const migrateResources = async ({
@@ -141,13 +141,13 @@ export const migrateResources = async ({
 }) => {
   const legacyResources = await getLegacyResources()
   output(`- Found ${legacyResources.length} resources to migrate`)
-  const resourcesOperationsData = legacyResources
+  const commands = legacyResources
     .map((legacyResource) => {
       const slug = computeSlugAndUpdateExistingSlugs(
         legacyResource,
         existingResourceSlugs,
       )
-      const resourceOperationData = transformResource({
+      const command = transformResource({
         slug,
         legacyResource,
         userIdFromLegacyId,
@@ -156,104 +156,55 @@ export const migrateResources = async ({
         uploadKeyFromLegacyKey,
       })
 
-      if (resourceOperationData.error) {
+      if ('error' in command) {
         output(
-          `-- ⚠️ Could not migrate resource ${legacyResource.id}: ${resourceOperationData.error}`,
+          `-- ⚠️ Could not migrate resource ${legacyResource.id}: ${command.error}`,
           legacyResource,
         )
       }
-      return resourceOperationData
+      return command
     })
     .filter(
       (
-        data,
-      ): data is Exclude<
+        command,
+      ): command is Exclude<
         ReturnType<typeof transformResource>,
         {
           error: string
           legacyResource: LegacyResource
         }
-      > => !data.error,
+      > => !('error' in command),
     )
   const chunkSize = 50
   let migratedResourceCount = 0
-  let migratedContentCount = 0
+  const migratedContents: ResourceProjection['contents'] = []
 
-  const resourceUpserts = resourcesOperationsData.map(
-    ({ resourceUpsert }) => resourceUpsert,
-  )
-  const contentsDelete = resourcesOperationsData.map(
-    ({ deleteExistingContents }) => deleteExistingContents,
-  )
-
-  const contentsCreateData = resourcesOperationsData.flatMap(
-    ({ contentsCreate }) => contentsCreate,
-  )
-
-  output(`- Migrating ${resourceUpserts.length} resources`)
+  output(`- Migrating ${commands.length} resources`)
 
   const migratedResources = await Promise.all(
-    chunk(resourceUpserts, chunkSize).map((resourceChunk) =>
-      prismaClient
-        .$transaction(
-          resourceChunk.map((params) => prismaClient.resource.upsert(params)),
+    chunk(commands, chunkSize).map((commandChunk) =>
+      Promise.all(
+        commandChunk.map((command) =>
+          handleResourceCreationCommand(command, { user: undefined }),
+        ),
+      ).then((results) => {
+        migratedResourceCount += results.length
+        for (const result of results) {
+          migratedContents.push(...result.resource.contents)
+        }
+        output(
+          `-- ${migratedResourceCount} ${(
+            (migratedResourceCount * 100) /
+            legacyResources.length
+          ).toFixed(0)}%`,
         )
-        .then((resources) => {
-          migratedResourceCount += resources.length
-          output(
-            `-- ${migratedResourceCount} ${(
-              (migratedResourceCount * 100) /
-              legacyResources.length
-            ).toFixed(0)}%`,
-          )
-          return resources
-        }),
-    ),
-  )
-
-  output(`- Cleaning resource contents before re-creating them`)
-
-  await Promise.all(
-    chunk(contentsDelete, chunkSize).map((deleteChunk) =>
-      prismaClient.$transaction(
-        deleteChunk.map((params) => prismaClient.content.deleteMany(params)),
-      ),
-    ),
-  )
-  output(`- Migrating ${contentsCreateData.length} contents`)
-
-  const migratedContents = await Promise.all(
-    chunk(contentsCreateData, chunkSize).map((contentsChunk) =>
-      prismaClient
-        .$transaction(
-          contentsChunk.map((data) =>
-            prismaClient.content.create({
-              data,
-              select: {
-                id: true,
-                legacyContentId: true,
-                legacySectionId: true,
-                resourceId: true,
-                legacyLinkedResourceId: true,
-              },
-            }),
-          ),
-        )
-        .then((resources) => {
-          migratedContentCount += resources.length
-          output(
-            `-- ${migratedContentCount} ${(
-              (migratedContentCount * 100) /
-              contentsCreateData.length
-            ).toFixed(0)}%`,
-          )
-          return resources
-        }),
+        return results.map(({ resource }) => resource)
+      }),
     ),
   )
 
   return {
     migratedResources: migratedResources.flat(),
-    migratedContents: migratedContents.flat(),
+    migratedContents,
   }
 }

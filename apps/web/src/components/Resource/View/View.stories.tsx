@@ -8,6 +8,7 @@ import { testSessionUser } from '@app/web/test/testSessionUser'
 
 const resource = {
   id: '1',
+  legacyId: null,
   title:
     'Titre d’une ressource sur deux ligne très longues comme comme sur deux ligne très longues',
   slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-ligne-très-longues',

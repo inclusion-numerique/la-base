@@ -16,7 +16,7 @@ import { getResourceProjectionContext } from '@app/web/server/resources/getResou
 
 export const handleResourceCreationCommand = async (
   command: ResourceCreationCommand,
-  { user }: { user: SessionUser },
+  { user }: { user?: SessionUser },
 ) => {
   const handlerResult = await (
     ResourceCreationCommandHandlers[
@@ -38,7 +38,7 @@ export const handleResourceCreationCommand = async (
       data: {
         id: v4(),
         resourceId: resource.id,
-        byId: user.id,
+        byId: creationEvent.data.byId,
         ...creationEvent,
       },
     })
@@ -52,7 +52,7 @@ export const handleResourceCreationCommand = async (
         data: {
           id: v4(),
           resourceId: resource.id,
-          byId: user.id,
+          byId: creationEvent.data.byId,
           ...event,
         },
       })

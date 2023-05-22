@@ -16,7 +16,7 @@ export type HandlerResourceCommand<
 }
 
 export type ResourceCommandHandlerContext = {
-  user: SessionUser
+  user?: SessionUser
 }
 export type ResourceCreationCommandHandler<
   Command extends ResourceCreationCommand = ResourceCreationCommand,

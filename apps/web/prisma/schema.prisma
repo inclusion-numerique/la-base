@@ -179,7 +179,7 @@ model Content {
 
   order Int
 
-  resource   Resource @relation(fields: [resourceId], references: [id])
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
   resourceId String   @map("resource_id") @db.Uuid
 
   // Data of this model depend on the type

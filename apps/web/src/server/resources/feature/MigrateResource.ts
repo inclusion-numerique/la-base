@@ -7,6 +7,8 @@ export const MigrateResourceCommandValidation = z.object({
   payload: CreateResourceCommandPayloadValidation.extend({
     legacyId: z.number(),
     byId: z.string().uuid(),
+    slug: z.string(),
+    titleDuplicationCheckSlug: z.string(),
     imageId: z.string().uuid().nullable(),
     created: z.date(),
     updated: z.date(),
@@ -15,6 +17,7 @@ export const MigrateResourceCommandValidation = z.object({
     contents: z.array(
       // We do not reuse other command payload as migration is less restrictive
       z.object({
+        id: z.string().uuid(),
         legacyContentId: z.number().nullable(),
         legacySectionId: z.number().nullable(),
         order: z.number().int(),

@@ -18,6 +18,9 @@ export const handleCreateResource: ResourceCreationCommandHandler<
   const slug = await createUniqueSlug(payload.title)
   const { resourceId, ...rest } = payload
 
+  if (!user) {
+    throw new Error('Create resource command must have a user in context')
+  }
   return {
     type: 'Created',
     timestamp: new Date(),
@@ -44,6 +47,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   title,
   description,
   baseId,
+  legacyId: null,
   created: timestamp,
   updated: timestamp,
   published: null,

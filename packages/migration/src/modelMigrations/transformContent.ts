@@ -1,27 +1,24 @@
 import { v4 } from 'uuid'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import { LegacyResource } from '@app/migration/modelMigrations/migrateResources'
-import type { Prisma } from '@prisma/client'
+import { MigrateResourceCommand } from '@app/web/server/resources/feature/MigrateResource'
 
-type CreateContentData = Parameters<
-  Prisma.TransactionClient['content']['create']
->[0]['data']
+type TransformContentResult =
+  MigrateResourceCommand['payload']['contents'][number]
 
 export const transformContent = ({
-  legacyResource,
   legacyContent,
   order,
   imageIdFromLegacyId,
   uploadKeyFromLegacyKey,
 }: {
-  legacyResource: LegacyResource
   imageIdFromLegacyId: LegacyToNewIdHelper
   uploadKeyFromLegacyKey: (legacyKey: string) => string
   legacyContent:
     | LegacyResource['main_contentsection'][number]['main_contentblock'][number]
     | LegacyResource['main_contentsection'][number]
   order: number
-}): CreateContentData => {
+}): TransformContentResult => {
   const legacyId = Number(legacyContent.id)
 
   const legacyIdsData =
@@ -32,13 +29,25 @@ export const transformContent = ({
   const commonData = {
     id: v4(),
     ...legacyIdsData,
-    resource: { connect: { legacyId: Number(legacyResource.id) } },
     order,
     // All relevant contents have a title
     title: legacyContent.title,
     created: legacyContent.created,
     updated: legacyContent.modified,
-  } as const satisfies Partial<CreateContentData>
+    legacyContentId: null,
+    legacySectionId: null,
+    caption: null,
+    imageId: null,
+    fileKey: null,
+    showPreview: null,
+    url: null,
+    linkDescription: null,
+    linkTitle: null,
+    linkImageUrl: null,
+    linkedResourceId: null,
+    legacyLinkedResourceId: null,
+    text: null,
+  } as const satisfies Omit<TransformContentResult, 'type'>
 
   // We migrate sections as SectionTitle
   if ('main_contentblock' in legacyContent) {
@@ -86,12 +95,12 @@ export const transformContent = ({
       ? {
           ...commonData,
           type: 'Image',
-          image: { connect: { id: imageIdFromLegacyId(Number(id)) } },
+          imageId: imageIdFromLegacyId(Number(id)),
         }
       : {
           ...commonData,
           type: 'File',
-          file: { connect: { key: uploadKeyFromLegacyKey(file) } },
+          fileKey: uploadKeyFromLegacyKey(file),
         }
   }
 

@@ -10,6 +10,7 @@ export const getResourceSelect = {
   updated: true,
   isPublic: true,
   createdById: true,
+  legacyId: true,
   createdBy: {
     select: {
       name: true,
@@ -56,6 +57,7 @@ export const getResourceSelect = {
       showPreview: true,
       url: true,
       linkedResourceId: true,
+      legacyLinkedResourceId: true,
       linkedResource: {
         select: {
           slug: true,
