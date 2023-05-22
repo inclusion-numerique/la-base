@@ -1,2 +1,2 @@
 export const sortContents = <T extends { order: number }>(a: T, b: T) =>
-  a.order - b.order
+  b.order - a.order

@@ -30,11 +30,13 @@ const ContentForm = ({
   resource,
   mode,
   type,
+  'data-testid': dataTestId,
 }: {
   type: ContentType
   resource: ResourceProjection
   setEditing: Dispatch<SetStateAction<string | null>>
   sendCommand: SendCommand
+  'data-testid'?: string
 } & (
   | { mode: 'add'; content?: undefined }
   | { mode: 'edit'; content: ContentProjection }
@@ -127,10 +129,7 @@ const ContentForm = ({
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      data-testid={`content-${type}-edition-form`}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} data-testid={dataTestId}>
       {formContent}
       <div className={styles.contentAction}>
         {mode === 'edit' && (
@@ -143,7 +142,7 @@ const ContentForm = ({
           />
         )}
         <Button
-          data-testid="content-validation-button"
+          data-testid={dataTestId && `${dataTestId}__submit`}
           priority="tertiary no outline"
           iconId="fr-icon-check-line"
           type="submit"
@@ -153,6 +152,7 @@ const ContentForm = ({
           Valider
         </Button>
         <Button
+          data-testid={dataTestId && `${dataTestId}__delete`}
           type="button"
           title="Supprimer le contenu"
           priority="tertiary no outline"

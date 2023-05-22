@@ -1,22 +1,17 @@
-import { Simulate } from 'react-dom/test-utils'
 import { v4 } from 'uuid'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
 import {
   ResourceCreationCommand,
   ResourceMutationCommand,
 } from '@app/web/server/resources/feature/features'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { runPromisesSequentially } from '@app/web/utils/runPromisesSequentially'
 import {
   Serialized,
   deserialize,
   serialize,
 } from '@app/web/utils/serialization'
-
-import input = Simulate.input
 
 export type CreateUserInput = Parameters<
   typeof prismaClient.user.create
@@ -49,13 +44,13 @@ export const sendResourceCommands = async (
     return serialize(resource)
   }
 
-  const mutated = await runPromisesSequentially(
-    mutateCommands.map((command) =>
-      handleResourceMutationCommand(command, { user }),
-    ),
-  )
+  let mutatedResource = resource
+  for (const command of mutateCommands) {
+    const result = await handleResourceMutationCommand(command, { user })
+    mutatedResource = result.resource
+  }
 
-  return serialize(mutated[mutated.length - 1].resource)
+  return serialize(mutatedResource)
 }
 
 export const deleteUser = async (user: { email: string }) => {

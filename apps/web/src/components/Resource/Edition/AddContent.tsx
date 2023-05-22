@@ -28,6 +28,7 @@ const AddContent = ({
   return isAddingContentType ? (
     <ContentForm
       type={isAddingContentType}
+      data-testid="add-content_form"
       mode="add"
       resource={resource}
       setEditing={setEditing}

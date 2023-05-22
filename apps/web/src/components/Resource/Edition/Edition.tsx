@@ -127,23 +127,27 @@ const Edition = ({
         <hr className="fr-mt-4w" />
         <div className={styles.title}>Contenu de la ressource</div>
         <hr className="fr-mt-4w fr-mb-2w" />
-        {updatedDraftResource.contents.map((content, index) => (
-          <div
-            key={content.id}
-            data-testid={`content-${content.type}-edition`}
-            id={`content-${index + 1}`}
-            className={styles.content}
-          >
-            <ContentEdition
-              content={content}
-              resource={draftResource}
-              sendCommand={sendCommand}
-              editing={editing}
-              setEditing={setEditing}
-            />
-            <hr className="fr-mt-5w fr-mb-2w" />
-          </div>
-        ))}
+        {updatedDraftResource.contents.map((content, index) => {
+          const testId = `content-edition_${content.type}-${index}`
+          return (
+            <div
+              key={content.id}
+              data-testid={testId}
+              id={`content-${index + 1}`}
+              className={styles.content}
+            >
+              <ContentEdition
+                data-testid={testId}
+                content={content}
+                resource={draftResource}
+                sendCommand={sendCommand}
+                editing={editing}
+                setEditing={setEditing}
+              />
+              <hr className="fr-mt-5w fr-mb-2w" />
+            </div>
+          )
+        })}
         <AddContent
           resource={draftResource}
           sendCommand={sendCommand}
