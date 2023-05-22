@@ -18,7 +18,7 @@ import { notFoundError } from '@app/web/server/rpc/trpcErrors'
 
 export const handleResourceMutationCommand = async (
   command: ResourceMutationCommand,
-  { user }: { user: SessionUser },
+  { user }: { user: Pick<SessionUser, 'id'> },
 ) => {
   const { resourceId } = command.payload
 

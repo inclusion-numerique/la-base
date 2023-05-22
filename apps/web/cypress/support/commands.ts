@@ -1,10 +1,17 @@
 import '@testing-library/cypress/add-commands'
+import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import {
+  Serialized,
+  deserialize,
+  serialize,
+} from '@app/web/utils/serialization'
 import type {
   CreateBaseInput,
-  CreateResourceContentsInput,
-  CreateResourceInput,
   CreateUserInput,
+  SendResourceCommandsInput,
 } from '../e2e/authentication/user.tasks'
+import { sendResourceCommands } from '../e2e/authentication/user.tasks'
 import type { Tasks as CustomTasks } from './tasks'
 
 import Timeoutable = Cypress.Timeoutable
@@ -64,16 +71,14 @@ Cypress.Commands.add('createUser', (user: CreateUserInput) => {
 Cypress.Commands.add('createBase', (base: CreateBaseInput) => {
   cy.task('createBase', base)
 })
-Cypress.Commands.add('createResource', (resource: CreateResourceInput) => {
-  cy.task('createResource', resource)
-})
 Cypress.Commands.add(
-  'createResourceContents',
-  (contents: CreateResourceContentsInput) => {
-    cy.task('createResourceContents', contents)
+  'sendResourceCommands',
+  (input: SendResourceCommandsInput) => {
+    cy.task('sendResourceCommands', serialize(input)).then((result) =>
+      deserialize(result as Serialized<ResourceProjectionWithContext>),
+    )
   },
 )
-
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
   cy.get('html').should('have.attr', 'data-fr-js', 'true')
 })
@@ -108,10 +113,9 @@ declare global {
       createUserAndSignin(user: CreateUserInput): Chainable<string>
       createUser(user: CreateUserInput): Chainable<void>
       createBase(base: CreateBaseInput): Chainable<void>
-      createResource(resource: CreateResourceInput): Chainable<void>
-      createResourceContents(
-        contents: CreateResourceContentsInput,
-      ): Chainable<void>
+      sendResourceCommands(
+        input: SendResourceCommandsInput,
+      ): Chainable<ResourceProjection>
       signin(user: { email: string }): Chainable<string>
       dsfrShouldBeStarted(): Chainable<void>
       dsfrModalsShouldBeBound(): Chainable<void>

@@ -47,7 +47,9 @@ const Edition = ({
   const isPublished = !!updatedDraftResource.published
 
   const hasUnpublishedChanges =
-    updatedDraftResource.published?.getTime() !==
+    // Has been updated after published (or created) event
+    (updatedDraftResource.published?.getTime() ??
+      updatedDraftResource.created.getTime()) !==
     updatedDraftResource.updated.getTime()
 
   const publishedState: ResourcePublishedState = isPublished

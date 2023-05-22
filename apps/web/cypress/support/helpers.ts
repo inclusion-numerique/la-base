@@ -1,9 +1,14 @@
 import { v4 } from 'uuid'
-import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
+import {
+  AddContentCommand,
+  ContentAdded,
+} from '@app/web/server/resources/feature/AddContent'
+import { CreateResourceCommand } from '@app/web/server/resources/feature/CreateResource'
+import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import {
   CreateBaseInput,
-  CreateResourceInput,
   CreateUserInput,
+  sendResourceCommands,
 } from '../e2e/authentication/user.tasks'
 
 export const appUrl = (path: string) =>
@@ -12,6 +17,7 @@ export const appUrl = (path: string) =>
 export const createTestUser = () =>
   ({
     id: v4(),
+    legacyId: null,
     email: `test-${v4()}@example.com`,
     firstName: 'Jean',
     lastName: 'Biche',
@@ -32,20 +38,44 @@ export const createTestBase = (ownerId: string) =>
     ownerId,
   } satisfies CreateBaseInput)
 
-export const createTestResource = (createdById: string, baseId?: string) =>
-  ({
-    id: v4(),
-    created: new Date(),
-    title:
-      'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
-    slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
-    titleDuplicationCheckSlug:
-      'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
-    description:
-      'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
-    createdById,
-    baseId,
-  } satisfies CreateResourceInput)
+export const createTestResourceCommands = ({
+  baseId,
+  resourceId: resourceIdParam,
+}: {
+  baseId?: string
+  resourceId?: string
+}) => {
+  const resourceId = resourceIdParam || v4()
+  return [
+    {
+      name: 'CreateResource',
+      payload: {
+        resourceId,
+        baseId: baseId || null,
+        title:
+          'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
+        description:
+          'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
+      },
+    },
+    {
+      name: 'AddContent',
+      payload: {
+        resourceId,
+        title: 'Mon premier titre de section',
+        type: 'SectionTitle',
+      },
+    },
+    {
+      name: 'AddContent',
+      payload: {
+        resourceId,
+        type: 'Text',
+        text: '<p>Mon premier paragraphe</p>',
+      },
+    },
+  ] satisfies [CreateResourceCommand, ...ResourceMutationCommand[]]
+}
 
 export const createTestResourceContents = () => {
   return [

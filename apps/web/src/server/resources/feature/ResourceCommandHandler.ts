@@ -15,26 +15,28 @@ export type HandlerResourceCommand<
   payload: Payload
 }
 
-export type ResourceCommandHandlerContext = {
-  user?: SessionUser
+export type ResourceCreationCommandHandlerContext = {
+  user?: Pick<SessionUser, 'id'>
 }
 export type ResourceCreationCommandHandler<
   Command extends ResourceCreationCommand = ResourceCreationCommand,
   Event extends ApplierResourceEvent = ApplierResourceEvent,
 > = (
   command: Command,
-  context: ResourceCommandHandlerContext,
+  context: ResourceCreationCommandHandlerContext,
 ) => Event | Event[] | Promise<Event | Event[]>
 
+export type ResourceMutationCommandHandlerContext = {
+  user: Pick<SessionUser, 'id'>
+  resource: ResourceProjection
+  persistedResource: PersistedResource
+}
 export type ResourceMutationCommandHandler<
   Command extends ResourceMutationCommand = ResourceMutationCommand,
   Event extends ApplierResourceEvent = ApplierResourceEvent,
 > = (
   command: Command,
-  context: ResourceCommandHandlerContext & {
-    resource: ResourceProjection
-    persistedResource: PersistedResource
-  },
+  context: ResourceMutationCommandHandlerContext,
 ) => Event | Event[] | Promise<Event | Event[]>
 
 export type ResourceCommandHandler =

@@ -1,7 +1,7 @@
 import {
   appUrl,
   createTestBase,
-  createTestResource,
+  createTestResourceCommands,
   createTestUser,
 } from '../../support/helpers'
 
@@ -13,19 +13,23 @@ describe('ETQ Utilisateur non connecté, lorsque je veux éditer une ressource, 
   it('Acceptation 0 - Redirection vers connexion', () => {
     const user = createTestUser()
     const base = createTestBase(user.id)
-    const resource = createTestResource(user.id, base.id)
 
     cy.createUser(user)
     cy.createBase(base)
-    cy.createResource(resource)
+    const [creationCommand] = createTestResourceCommands({ baseId: base.id })
 
-    cy.visit(`/ressources/${resource.slug}/editer`)
-    // Ignoring NEXT_REDIRECT error
-    Cypress.on('uncaught:exception', () => false)
-
-    cy.url().should(
-      'equal',
-      appUrl(`/connexion?suivant=/ressources/${resource.slug}/editer`),
+    cy.createUserAndSignin(user)
+    cy.createBase(base)
+    cy.sendResourceCommands({ user, commands: [creationCommand] }).then(
+      ({ slug }) => {
+        cy.visit(`/ressources/${slug}/editer`)
+        // Ignoring NEXT_REDIRECT error
+        Cypress.on('uncaught:exception', () => false)
+        cy.url().should(
+          'equal',
+          appUrl(`/connexion?suivant=/ressources/${slug}/editer`),
+        )
+      },
     )
   })
 })

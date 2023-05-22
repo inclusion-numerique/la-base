@@ -16,7 +16,7 @@ import { getResourceProjectionContext } from '@app/web/server/resources/getResou
 
 export const handleResourceCreationCommand = async (
   command: ResourceCreationCommand,
-  { user }: { user?: SessionUser },
+  { user }: { user?: Pick<SessionUser, 'id'> },
 ) => {
   const handlerResult = await (
     ResourceCreationCommandHandlers[
