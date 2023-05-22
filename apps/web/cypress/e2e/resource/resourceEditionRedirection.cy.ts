@@ -18,8 +18,6 @@ describe('ETQ Utilisateur non connecté, lorsque je veux éditer une ressource, 
     cy.createBase(base)
     const [creationCommand] = createTestResourceCommands({ baseId: base.id })
 
-    cy.createUserAndSignin(user)
-    cy.createBase(base)
     cy.sendResourceCommands({ user, commands: [creationCommand] }).then(
       ({ slug }) => {
         cy.visit(`/ressources/${slug}/editer`)

@@ -87,6 +87,9 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     })
 
     cy.get('input[name="username"]').type(inclusionConnectUser.email)
+
+    // Inclusion connect has frontend uncaught exceptions
+    Cypress.on('uncaught:exception', () => false)
     cy.get('input[name="password"]').type(
       `${inclusionConnectUser.password}{enter}`,
     )
