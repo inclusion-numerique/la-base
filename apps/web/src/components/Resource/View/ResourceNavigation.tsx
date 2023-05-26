@@ -33,6 +33,7 @@ const ResourceNavigation = ({
       <Link
         className={classNames(
           'fr-btn',
+          'fr-btn--sm',
           'fr-btn--secondary',
           'fr-btn--icon-left',
           'fr-icon-bookmark-line',
@@ -43,7 +44,7 @@ const ResourceNavigation = ({
         Enregistrer
       </Link>
       <Button
-        size="large"
+        size="small"
         className="fr-hidden-md"
         title="Plus d'action"
         priority="tertiary no outline"

@@ -36,14 +36,20 @@ export const Default: Story = {
 export const WithImage: Story = {
   name: 'Ressource avec image',
   args: {
-    resource,
+    resource: {
+      ...resource,
+      image: { id: 'placeholder-600x400', altText: 'palceholder' },
+    },
   },
 }
 
 export const WithImageConnected: Story = {
   name: 'Ressource utilisateur connecté avec image',
   args: {
-    resource,
+    resource: {
+      ...resource,
+      image: { id: 'placeholder-600x400', altText: 'palceholder' },
+    },
     user: testSessionUser,
   },
 }
@@ -78,6 +84,9 @@ export const WithImageMobile: Story = {
     },
   },
   args: {
-    resource,
+    resource: {
+      ...resource,
+      image: { id: 'placeholder-600x400', altText: 'palceholder' },
+    },
   },
 }

@@ -17,11 +17,16 @@ const IconLink = ({
 }) => (
   <Link
     title={title}
-    className={classNames('fr-link', styles.iconLink)}
+    className={classNames(
+      'fr-btn',
+      'fr-btn--tertiary-no-outline',
+      'fr-btn--sm',
+      icon,
+      styles.iconLink,
+      { 'fr-icon--sm': small },
+    )}
     href={href}
-  >
-    <span className={classNames(icon, { 'fr-icon--sm': small })} />
-  </Link>
+  />
 )
 
 export default IconLink

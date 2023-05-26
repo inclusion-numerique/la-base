@@ -32,11 +32,11 @@
 .header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
-    margin-bottom: 16px;
   }
 }
 
