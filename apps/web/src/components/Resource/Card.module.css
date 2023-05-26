@@ -15,28 +15,30 @@
   background: none;
   width: 100%;
   min-height: 100px;
-
+  margin-bottom: 16px;
+  
+  img {
+    max-height: 200px;
+    max-width: 100%;
+  }
+  
   @media (min-width: 768px) {
+    margin-bottom: 0;
     align-items: flex-start;
     flex-shrink: 0;
     width: 340px;
     min-width: 340px;
-  }
-
-  img {
-    max-height: 200px;
-    max-width: 100%;
   }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
-    margin-bottom: 16px;
   }
 }
 

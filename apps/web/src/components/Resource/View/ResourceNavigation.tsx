@@ -43,7 +43,6 @@ const ResourceNavigation = ({
         Enregistrer
       </Link>
       <Button
-        size="large"
         className="fr-hidden-md"
         title="Plus d'action"
         priority="tertiary no outline"

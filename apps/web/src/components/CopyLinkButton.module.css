@@ -1,13 +1,14 @@
-.button {
+.container {
   position: relative;
 }
 
 .copiedHover {
   position: absolute;
   background-color: black;
+  font-size: 11px;
   color: white;
-  padding: 4px;
+  padding: 2px 4px;
   border-radius: 4px;
-  top: -36px;
+  top: -24px;
   right: 0;
 }

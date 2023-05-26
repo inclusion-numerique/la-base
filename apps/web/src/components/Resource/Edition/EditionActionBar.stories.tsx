@@ -40,6 +40,6 @@ export const Edition: Story = {
   args: {
     publishedState: ResourcePublishedState.PUBLIC,
     editionState: ResourceEditionState.EDITING,
-    actionLabel: 'Publier les editions',
+    actionLabel: 'Publier les modifications',
   },
 }

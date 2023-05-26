@@ -41,7 +41,7 @@ const Header = ({
                     >
                       <picture>
                         <img
-                          style={{ verticalAlign: 'middle', height: 26 }}
+                          style={{ verticalAlign: 'top', height: 24 }}
                           src="/images/logo.svg"
                           alt="Logo"
                         />
@@ -84,15 +84,15 @@ const Header = ({
                 </li>
                 <li>{createResource}</li>
                 <li>
-                  <Link href="/" className="fr-btn" title="Aide">
+                  <Link href="/" className="fr-btn icon-only" title="Aide">
                     <span className="fr-icon-question-line fr-icon--sm" />
                     <span className="fr-hidden-lg fr-ml-1w">Aide</span>
                   </Link>
                 </li>
-                <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-pb-5v fr-pt-1v">
+                <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-pt-1w">
                   <span
                     style={{
-                      height: '100%',
+                      height: '24px',
                       borderLeft: '1px solid var(--border-default-grey)',
                     }}
                   />

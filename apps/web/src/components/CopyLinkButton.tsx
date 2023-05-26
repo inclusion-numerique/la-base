@@ -21,20 +21,23 @@ const CopyLinkButton = ({
   }
 
   return (
-    <button
-      className={classNames(
-        'fr-btn fr-btn--sm fr-btn--tertiary-no-outline',
-        styles.button,
-        className,
-      )}
-      type="button"
-      title={title || `Copier le lien ${url} dans le presse-papier`}
-      onClick={onCopy}
-      onKeyDown={(event) => event.key === 'Enter' && onCopy()}
-    >
+    <div className={styles.container}>
       {copied && <span className={styles.copiedHover}>Copié</span>}
-      <span className="fr-icon-links-line fr-icon--sm" aria-hidden="true" />
-    </button>
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+      <button
+        className={classNames(
+          'fr-btn',
+          'fr-btn--sm',
+          'fr-btn--tertiary-no-outline',
+          'fr-icon-links-line',
+          'fr-icon--sm',
+          className,
+        )}
+        type="button"
+        title={title || `Copier le lien ${url} dans le presse-papier`}
+        onClick={onCopy}
+      />
+    </div>
   )
 }
 

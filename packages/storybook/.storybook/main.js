@@ -33,7 +33,7 @@ module.exports = {
       nextConfigPath: resolve(__dirname, '../../../apps/web/next.config.js'),
     },
   },
-  staticDirs: ['../../../apps/web/public'],
+  staticDirs: ['../../../apps/web/public', '../public'],
   features: {
     interactionsDebugger: true,
   },
