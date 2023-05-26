@@ -33,7 +33,7 @@ const SigninPanel = ({
     <ButtonsGroup
       buttons={[
         {
-          children: 'Créer un compte',
+          children: 'Se créer un compte',
           linkProps: {
             href:
               callbackUrl === '/'

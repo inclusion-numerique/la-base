@@ -1,6 +1,6 @@
 import { appUrl, createTestUser } from '../../support/helpers'
 
-describe('ETQ Utilisateur, lorsque je clique sur “Créer un compte”, je peux créer un compte avec mon mail', () => {
+describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je peux créer un compte avec mon mail', () => {
   /**
    * US https://www.notion.so/ETQ-Utilisateur-lorsque-je-clique-sur-Cr-er-un-compte-je-peux-cr-er-un-compte-avec-mon-mail-19ceedd5ad574940af80f3f51d6943cf?pvs=4
    * Parcours https://www.figma.com/file/4wfmwOaKRnMhgiGEF256qS/La-Base---Parcours-utilisateurs?node-id=0-1&t=FqCnK7P9epO9Wpc4-0

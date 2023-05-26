@@ -45,7 +45,7 @@ const SelectFormField = <T extends FieldValues>({
           <div
             className={classNames('fr-select-group', {
               'fr-select-group--error': error,
-              'fr-select-group--valid': isDirty && !invalid,
+              'fr-select-group--valid': valid && isDirty && !invalid,
               'fr-select-group--disabled': disabled,
             })}
           >

@@ -26,6 +26,8 @@ const EmailSignupForm = ({
 }) => {
   const form = useForm<UserSignup>({
     resolver: zodResolver(UserSignupValidation),
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
     defaultValues: { email },
   })
 
@@ -59,7 +61,6 @@ const EmailSignupForm = ({
         control={form.control}
         path="email"
         label="Email"
-        type="email"
         disabled={disabled}
       />
       <InputFormField

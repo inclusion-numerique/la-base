@@ -35,7 +35,11 @@ const Template = ({
       form.setValue(path, form.getValues(path), {
         shouldTouch: true,
         shouldValidate: true,
+        shouldDirty: true,
       })
+      if (path === 'email2') {
+        form.setError('email2', { message: 'invalid Email' })
+      }
     }
   })
 

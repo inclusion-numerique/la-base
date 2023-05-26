@@ -55,7 +55,7 @@ const RadioFormField = <T extends FieldValues>({
                 {
                   'fr-fieldset--error': error,
                   'fr-fieldset--disabled': disabled,
-                  'fr-fieldset--valid': isDirty && !invalid,
+                  'fr-fieldset--valid': valid && isDirty && !invalid,
                 },
                 className,
               )}

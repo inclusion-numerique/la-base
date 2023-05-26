@@ -21,12 +21,12 @@ const SignupPanel = ({
       </div>
     ) : null}
 
-    <h5>Créer un compte avec InclusionConnect</h5>
+    <h5>Se créer un compte avec InclusionConnect</h5>
     <div className="fr-connect-group">
       <InclusionConnectSigninButton callbackUrl={callbackUrl} />
     </div>
     <p className="fr-hr-or fr-mt-6v">ou</p>
-    <h5>Créer un compte avec son email</h5>
+    <h5>Se créer un compte avec son email</h5>
     <EmailSignupForm callbackUrl={callbackUrl} email={email} />
     <hr className="fr-mt-6v" />
     <h5 className="fr-mt-4v">Vous avez déjà un compte ?</h5>

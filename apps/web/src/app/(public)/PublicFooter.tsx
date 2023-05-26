@@ -25,11 +25,6 @@ const PublicFooter = () => (
         linkProps: { href: '/confidentialite' },
       },
       {
-        iconId: 'fr-icon-user-setting-line',
-        text: 'Espace ANCT',
-        linkProps: { href: '/connexion' },
-      },
-      {
         text: 'Code source',
         linkProps: {
           href: {

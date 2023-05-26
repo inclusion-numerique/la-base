@@ -26,7 +26,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.url().should('equal', appUrl('/connexion'))
 
     cy.log('Check that the signup CTA is linked correctly')
-    cy.contains('Créer un compte').click()
+    cy.contains('Se créer un compte').click()
     cy.url().should('equal', appUrl('/creer-un-compte'))
 
     cy.log('Check that the signin CTA is linked correctly')
@@ -40,7 +40,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.visit('/connexion')
 
     cy.log('We should not be able to login with unexisting user email')
-    cy.get('input[type="email"]')
+    cy.get('input[id="input-form-field__email"]')
       .should('have.length', 1)
       .type(`${emailUser.email}{enter}`)
 
@@ -51,12 +51,15 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
       ),
     )
 
-    cy.contains('Créer un compte avec son email')
+    cy.contains('Se créer un compte avec son email')
 
     cy.log(
       'Create account using email. It should be pre-completed after failed login attempt',
     )
-    cy.get('input[type="email"]').should('have.value', emailUser.email)
+    cy.get('input[id="input-form-field__email"]').should(
+      'have.value',
+      emailUser.email,
+    )
   })
 
   it('Acceptation 1 - Connexion avec Inclusion Connect', () => {

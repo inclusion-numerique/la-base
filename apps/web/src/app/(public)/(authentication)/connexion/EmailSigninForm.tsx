@@ -12,6 +12,7 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 const SigninFormValidation = z.object({
   email: z
     .string({ required_error: 'Veuillez renseigner votre email' })
+    .nonempty('Veuillez renseigner votre email')
     .email('Merci de renseigner un email valide'),
 })
 type SigninFormData = z.infer<typeof SigninFormValidation>
@@ -25,6 +26,8 @@ export const EmailSigninForm = ({
 }) => {
   const form = useForm<SigninFormData>({
     resolver: zodResolver(SigninFormValidation),
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   const onSubmit = ({ email }: SigninFormData) => {
@@ -47,7 +50,6 @@ export const EmailSigninForm = ({
         control={form.control}
         path="email"
         label="Email"
-        type="email"
         disabled={disabled}
       />
       <ButtonsGroup

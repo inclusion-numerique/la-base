@@ -31,9 +31,19 @@ textarea {
 .fr-header {
   filter: none;
 
+  /* Custom user menu */
   .fr-header__menu-links {
     &::after {
       margin-top: 0;
+    }
+
+    .fr-btn {
+      margin-bottom: 0;
+      justify-content: flex-start !important;
+      padding: 12px 0 !important;
+      font-size: 16px !important;
+      line-height: 24px !important;
+      border-top: var(--slim-grey-border) !important;
     }
   }
 

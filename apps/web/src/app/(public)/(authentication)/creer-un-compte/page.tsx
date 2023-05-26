@@ -27,7 +27,7 @@ const SigninPage = async ({
 
   return (
     <>
-      <Breadcrumbs currentPage="Créer un compte" />
+      <Breadcrumbs currentPage="Se créer un compte" />
       <h2>Création de compte sur {PublicWebAppConfig.projectTitle}</h2>
       {raison === 'connexion-sans-compte' ? (
         <Alert
