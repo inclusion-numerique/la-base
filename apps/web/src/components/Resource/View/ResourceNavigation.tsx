@@ -4,15 +4,17 @@ import Link from 'next/link'
 import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { Resource } from '@app/web/server/resources'
+import { Resource } from '@app/web/server/resources/getResource'
 import styles from './ResourceNavigation.module.css'
 import ResourceSideMenu from './ResourceSideMenu'
 
-const { ResourceNavigationModal, resourceNavigationModalNativeButtonProps } =
-  createModal({
-    name: 'resourceNavigation',
-    isOpenedByDefault: false,
-  })
+const {
+  Component: ResourceNavigationModal,
+  buttonProps: resourceNavigationModalNativeButtonProps,
+} = createModal({
+  id: 'resourceNavigation',
+  isOpenedByDefault: false,
+})
 
 const ResourceNavigation = ({
   resource: { slug, contents },
@@ -138,10 +140,7 @@ const ResourceNavigation = ({
         </Link>
       </div>
       <div className="fr-hidden fr-unhidden-md">
-        <ResourceSideMenu
-          visibleRefIndex={visibleRefIndex}
-          contents={contents}
-        />
+        <ResourceSideMenu contents={contents} />
       </div>
     </div>
   </>
