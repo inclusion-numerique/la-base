@@ -18,7 +18,7 @@ export const transformContent = ({
     | LegacyResource['main_contentsection'][number]['main_contentblock'][number]
     | LegacyResource['main_contentsection'][number]
   order: number
-}): TransformContentResult => {
+}): TransformContentResult | null => {
   const legacyId = Number(legacyContent.id)
 
   const legacyIdsData =
@@ -52,9 +52,15 @@ export const transformContent = ({
 
   // We migrate sections as SectionTitle
   if ('main_contentblock' in legacyContent) {
+    if (!legacyContent.title?.trim()) {
+      return null
+    }
     return { ...commonData, type: 'SectionTitle' }
   }
   if (legacyContent.main_textcontent) {
+    if (!legacyContent.main_textcontent.text?.trim()) {
+      return null
+    }
     return {
       ...commonData,
       type: 'Text',
@@ -62,6 +68,9 @@ export const transformContent = ({
     }
   }
   if (legacyContent.main_linkcontent) {
+    if (!legacyContent.main_linkcontent.link?.trim()) {
+      return null
+    }
     return {
       ...commonData,
       type: 'Link',

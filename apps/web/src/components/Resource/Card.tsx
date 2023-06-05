@@ -29,7 +29,7 @@ const ResourceCard = ({
       </div>
     </div>
     <div className={styles.content}>
-      <div>
+      <div className={styles.textAndDescription}>
         <p className="fr-hidden-md fr-text--xs fr-mb-1w">
           Mis à jour le {dateAsDay(resource.updated)}
         </p>

@@ -110,14 +110,16 @@ export const transformResource = ({
     index,
     content,
   ] of orderedLegacyResourcesOrSectionTitle.entries()) {
-    payload.contents.push(
-      transformContent({
-        legacyContent: content,
-        imageIdFromLegacyId,
-        uploadKeyFromLegacyKey,
-        order: index,
-      }),
-    )
+    const transformedContent = transformContent({
+      legacyContent: content,
+      imageIdFromLegacyId,
+      uploadKeyFromLegacyKey,
+      order: index,
+    })
+    if (!transformedContent) {
+      continue
+    }
+    payload.contents.push(transformedContent)
   }
 
   return {

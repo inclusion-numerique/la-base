@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import React from 'react'
 import Badge from '@codegouvfr/react-dsfr/Badge'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -42,17 +41,18 @@ const ResourceContents = ({
         </div>
       </div>
       {image ? (
-        <ResponsiveUploadedImage
-          id={image.id}
-          alt={image.altText ?? ''}
-          className={classNames('fr-mb-4w', styles.image)}
-          breakpoints={[
-            { media: '(max-width: 320px)', width: 320 - 32 },
-            { media: '(max-width: 576px)', width: 576 - 32 },
-            { media: '(max-width: 768px)', width: 768 - 32 },
-            { media: '(min-width: 768px)', width: 800 },
-          ]}
-        />
+        <div className={styles.imageContainer}>
+          <ResponsiveUploadedImage
+            id={image.id}
+            alt={image.altText ?? ''}
+            breakpoints={[
+              { media: '(max-width: 320px)', width: 320 - 32 },
+              { media: '(max-width: 576px)', width: 576 - 32 },
+              { media: '(max-width: 768px)', width: 768 - 32 },
+              { media: '(min-width: 768px)', width: 800 },
+            ]}
+          />
+        </div>
       ) : null}{' '}
       <h3 className="fr-mb-2w">{title}</h3>
       <p className="fr-text--lg fr-mb-0">{description}</p>

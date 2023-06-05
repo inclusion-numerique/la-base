@@ -9,6 +9,22 @@
   }
 }
 
+.imageContainer {
+  width: 100%;
+  background: var(--background-contrast-info);
+  display: block;
+  overflow:hidden;
+  aspect-ratio: 1.4;
+  margin-bottom: 32px;
+
+  img {
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+  }
+}
+
 .header {
   display: flex;
 }

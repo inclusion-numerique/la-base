@@ -20,7 +20,7 @@ import {
   imageMaxSize,
 } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
-import styles from './EditableImage.module.css'
+import styles from './ResourceImageEdition.module.css'
 
 const imageFileValidation = fileValidation({
   ...imageFileValidationOptions,
@@ -144,27 +144,29 @@ const ResourceImageEdition = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={image ? styles.container : styles.emptyContainer}>
-        {image ? (
-          <ResponsiveUploadedImage
-            id={image.id}
-            alt={image.altText ?? ''}
-            data-testid="resource-image"
-            breakpoints={[
-              { media: '(max-width: 320px)', width: 320 - 32 },
-              { media: '(max-width: 576px)', width: 576 - 32 },
-              { media: '(max-width: 768px)', width: 768 - 32 },
-              { media: '(min-width: 768px)', width: 800 },
-            ]}
-          />
-        ) : (
-          <Image
-            src="/images/image-placeholder.svg"
-            alt="Image vide"
-            data-testid="resource-image-placeholder"
-            width={56}
-            height={56}
-          />
-        )}
+        <div className={styles.imageContainer}>
+          {image ? (
+            <ResponsiveUploadedImage
+              id={image.id}
+              alt={image.altText ?? ''}
+              data-testid="resource-image"
+              breakpoints={[
+                { media: '(max-width: 320px)', width: 320 - 32 },
+                { media: '(max-width: 576px)', width: 576 - 32 },
+                { media: '(max-width: 768px)', width: 768 - 32 },
+                { media: '(min-width: 768px)', width: 800 },
+              ]}
+            />
+          ) : (
+            <Image
+              src="/images/image-placeholder.svg"
+              alt="Image vide"
+              data-testid="resource-image-placeholder"
+              width={56}
+              height={56}
+            />
+          )}
+        </div>
         <div className={styles.inputContainer}>
           <FileFormField
             label={

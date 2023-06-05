@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { prismaClient } from '@app/web/prismaClient'
 import { getImageData } from '@app/web/server/image/getImageData'
+import { getOriginalImageData } from '@app/web/server/image/getOriginalImageData'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -47,7 +48,10 @@ export const GET = async (request: NextRequest) => {
     return notFoundResponse()
   }
 
-  const imageData = await getImageData({ image, quality, width: targetWidth })
+  const imageData =
+    format === 'original'
+      ? await getOriginalImageData({ image })
+      : await getImageData({ image, quality, width: targetWidth })
 
   return new Response(imageData, {
     status: 200,

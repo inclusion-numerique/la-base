@@ -2,18 +2,6 @@
 
 .container {
     border: var(--slim-grey-border);
-
-    img {
-        width: 100%;
-        max-height: 240px;
-        object-fit: contain;
-        display: block;
-        min-width: 168px;
-
-        @media (min-width: 768px) {
-            min-height: 168px;
-        }
-    }
 }
 
 .emptyContainer {
@@ -55,11 +43,33 @@
     }
 }
 
+.imageContainer {
+    width: 100%;
+    background: var(--background-contrast-info);
+    display: block;
+    overflow:hidden;
+    aspect-ratio: 1.4;
+    max-height: 240px;
+    min-width: 168px;
+
+    @media (min-width: 768px) {
+        max-width: 240px;
+        min-height: 168px;
+    }
+
+    img {
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        height: 100%;
+    }
+}
 
 .inputContainer{
     display: flex;
     align-items: flex-end;
     padding: 16px;
+    width: 100%;
 
     @media (min-width: 768px) {
         padding: 24px;
