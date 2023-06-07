@@ -2,10 +2,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+}
+
+.publishedAndUpdatedSeparator{
+  height: 8px;
+  width: 0;
+  border-right: var(--slim-grey-border);
+  display: inline-block;
+  margin-right: -4px;
+}
+
+.title {
+  margin-top: 8px;
 
   @media (min-width: 768px) {
-    margin-bottom: 32px;
+    margin-top: 32px;
   }
 }
 
@@ -15,13 +26,18 @@
   display: block;
   overflow:hidden;
   aspect-ratio: 1.4;
-  margin-bottom: 32px;
+
+  @media (min-width: 768px) {
+    margin-top: 16px;
+  }
 
   img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     margin: 0 auto;
-    height: 100%;
   }
 }
 
@@ -38,5 +54,27 @@
 
 .content {
   border-top: var(--slim-grey-border);
-  padding: 24px 0;
+  padding-top: 12px;
+  padding-bottom: 32px;
+
+  @media (min-width: 768px) {
+    padding-top: 16px;
+    padding-bottom: 40px;
+
+    &:global(.is-first){
+      padding-top: 32px;
+    }
+
+    &:last-child{
+      padding-bottom: 32px;
+    }
+  }
+}
+
+.viewsAndMetadata{
+  padding-bottom: 0;
+
+  @media (min-width: 768px) {
+    padding-bottom: 24px;
+  }
 }

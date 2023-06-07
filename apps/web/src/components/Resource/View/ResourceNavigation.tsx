@@ -26,7 +26,7 @@ const ResourceNavigation = ({
         )}
         href={user ? `/ressources/${slug}/editer` : '/'}
       >
-        {user ? 'Modifier' : 'Demander à contribuer'}
+        {user ? 'Modifier' : 'Demander à contribuer'}
       </Link>
       <Link
         className={classNames(

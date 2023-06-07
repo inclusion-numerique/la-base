@@ -39,7 +39,7 @@ export const WithImage: Story = {
   args: {
     resource: {
       ...resource,
-      image: { id: 'placeholder-600x400.webp', altText: 'Texte alternatif' },
+      image: { id: 'portrait.webp', altText: 'Texte alternatif' },
     },
   },
 }
@@ -49,7 +49,7 @@ export const WithImageConnected: Story = {
   args: {
     resource: {
       ...resource,
-      image: { id: 'placeholder-600x400.webp', altText: 'Texte alternatif' },
+      image: { id: 'paysage.webp', altText: 'Texte alternatif' },
     },
     user: testSessionUser,
   },
@@ -87,7 +87,7 @@ export const WithImageMobile: Story = {
   args: {
     resource: {
       ...resource,
-      image: { id: 'placeholder-600x400.webp', altText: 'Texte alternatif' },
+      image: { id: 'paysage.webp', altText: 'Texte alternatif' },
     },
   },
 }

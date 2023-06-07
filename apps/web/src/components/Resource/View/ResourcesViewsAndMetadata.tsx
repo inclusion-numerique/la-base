@@ -4,14 +4,7 @@ import Badge from '@codegouvfr/react-dsfr/Badge'
 import styles from './ResourcesViewsAndMetadata.module.css'
 
 const ResourcesViewsAndMetadata = ({ className }: { className?: string }) => (
-  <div
-    className={classNames(
-      styles.container,
-      'fr-text--sm',
-      'fr-mb-0',
-      className,
-    )}
-  >
+  <div className={classNames(styles.container, 'fr-text--sm', className)}>
     <span className="fr-icon-eye-line fr-icon--sm" />
     <div>
       <b>45</b>

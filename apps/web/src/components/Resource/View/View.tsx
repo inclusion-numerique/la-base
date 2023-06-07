@@ -17,15 +17,15 @@ const View = ({
   resource: Resource
   user: User | null
 }) => (
-  <>
+  <div className={styles.container}>
     <div className="fr-grid-row">
-      <div className="fr-col-12 fr-col-lg-8">
+      <div className={classNames(styles.leftColumn)}>
         <PublishedInInformation resource={resource} />
       </div>
       <div className={styles.headerSeparator}>
         <hr />
       </div>
-      <div className="fr-col-12 fr-col-offset-lg-1 fr-col-lg-3">
+      <div className={classNames(styles.rightColumn)}>
         {user ? (
           <ResourcePublicStateBadge isPublic={resource.isPublic} />
         ) : (
@@ -39,27 +39,29 @@ const View = ({
       </div>
     </div>
 
-    <div className="fr-grid-row fr-mt-4v">
-      <div className="fr-col-12 fr-col-lg-8">
+    <div className={classNames('fr-grid-row', styles.separatorRow)}>
+      <div className={classNames(styles.leftColumn)}>
         <hr />
       </div>
-      <div className="fr-col-0 fr-col-offset-lg-1 fr-col-lg-3">
+      <div
+        className={classNames('fr-hidden fr-unhidden-lg', styles.rightColumn)}
+      >
         <hr />
       </div>
     </div>
 
     <div className="fr-grid-row" style={{ flexDirection: 'row-reverse' }}>
-      <div className="fr-col-12 fr-col-offset-lg-1 fr-col-lg-3">
+      <div className={classNames(styles.rightColumn)}>
         <ResourceNavigation resource={resource} user={user} />
       </div>
-      <div className="fr-col-12 fr-col-lg-8" id="contents-container">
+      <div className={classNames(styles.leftColumn)} id="contents-container">
         <div id="contenu">
           <ResourceContents resource={resource} />
         </div>
         <ResourceInformations />
       </div>
     </div>
-  </>
+  </div>
 )
 
 export default View

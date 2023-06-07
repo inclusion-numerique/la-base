@@ -1,51 +1,58 @@
-import { Route } from 'next'
 import React from 'react'
 import { Tag } from '@codegouvfr/react-dsfr/Tag'
+import classNames from 'classnames'
 import styles from './ResourceInformations.module.css'
 
-const thematiques = [
-  'Insertion professionnelle',
-  ' Communication en ligne / réseaux sociaux',
-  'Insertion professionnelle 2',
+// TODO pass resource in props and construct this object from it
+const resourceInfo = [
+  {
+    title: 'Thématiques',
+    tags: [
+      'Insertion professionnelle',
+      'Communication en ligne / réseaux sociaux',
+      'Insertion professionnelle 2',
+    ],
+  },
+  {
+    title: 'Type de support',
+    tags: ['Support pédagogique', 'Logiciel / Application'],
+  },
+  {
+    title: 'Publics cibles',
+    tags: ['Public cible 1', 'Public cible 2'],
+  },
 ]
-const supports = ['Support pédagogique', 'Logiciel / Application']
-const publics = ['Public cible 1', 'Public cible 2']
 
 const ResourceInformations = () => (
   <>
     <h6 id="informations" className={styles.title}>
       Informations sur la resource
     </h6>
-    <p className="fr-text--sm fr-mb-1w">
-      <b>Thématiques</b>
-    </p>
-    <div className={styles.tags}>
-      {thematiques.map((thematique) => (
-        <Tag key={thematique} linkProps={{ href: '#' as Route }}>
-          {thematique}
-        </Tag>
-      ))}
-    </div>
-    <p className="fr-text--sm fr-mb-1w">
-      <b>Type de support</b>
-    </p>
-    <div className={styles.tags}>
-      {supports.map((support) => (
-        <Tag key={support} linkProps={{ href: '#' as Route }}>
-          {support}
-        </Tag>
-      ))}
-    </div>
-    <p className="fr-text--sm fr-mb-1w">
-      <b>Publics cibles</b>
-    </p>
-    <div className={styles.tags}>
-      {publics.map((p) => (
-        <Tag key={p} linkProps={{ href: '#' as Route }}>
-          {p}
-        </Tag>
-      ))}
-    </div>
+    {resourceInfo.map(({ title, tags }, index) => (
+      <>
+        <p
+          key={title}
+          className={classNames(
+            'fr-text--sm fr-text--medium fr-mb-1w',
+            index === 0 ? 'fr-mt-4v' : 'fr-mt-6v',
+          )}
+        >
+          {title}
+        </p>
+        <div key={`${title}_tags`} className={styles.tags}>
+          {tags.map((tag) => (
+            <Tag
+              key={tag}
+              linkProps={{ href: '/rechercher' }}
+              small
+              className={classNames(styles.tag)}
+            >
+              {tag}
+            </Tag>
+          ))}
+        </div>
+      </>
+    ))}
   </>
 )
 

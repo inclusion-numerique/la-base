@@ -1,15 +1,18 @@
 .title {
   border-top: var(--slim-grey-border);
-  padding-top: 24px;
+  padding-top: 16px;
+  margin-bottom: 16px;
 }
 
 .tags {
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   gap: 8px;
+}
 
+.tag{
   @media (min-width: 768px) {
-    gap: 16px;
+    margin-top: 4px;
   }
 }

@@ -11,6 +11,55 @@
   }
 }
 
+.container {
+  max-width: 948px;
+  margin: 0 auto;
+  padding-top: 16px;
+
+  @media (min-width: 768px) {
+    padding-top: 32px;
+  }
+}
+
+.leftColumn {
+  width: 100%;
+
+  @media (min-width: 768px) {
+    /* UI does not respects grid system */
+    flex: 0 0 62%;
+    max-width: 62%;
+    width: 62%
+  }
+}
+
+.rightColumn {
+  width: 100%;
+
+  @media (min-width: 768px) {
+    /* UI does not respects grid system */
+    margin-left: 13.3%;
+    flex: 0 0 24.7%;
+    max-width: 24.7%;
+    width: 24.7%
+  }
+}
+
+
+.separatorRow{
+  margin-top: 16px;
+
+  @media (min-width: 768px) {
+  margin-top: 32px;}
+
+  hr {
+    padding-bottom: 16px;
+
+    @media (min-width: 768px) {
+      padding-bottom: 32px;
+    }
+  }
+}
+
 .user {
   white-space: nowrap;
   overflow: hidden;
