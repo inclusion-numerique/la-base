@@ -3,6 +3,7 @@ import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import ResourceCard from '@app/web/components/Resource/Card'
 import { getResourcesList } from '@app/web/server/resources/getResourcesList'
+import styles from './ResourcesPage.module.css'
 
 export const revalidate = 0
 
@@ -19,9 +20,11 @@ const Ressources = async () => {
         }}
         segments={[]}
       />
-      {resources.map((resource) => (
-        <ResourceCard key={resource.slug} resource={resource} user={user} />
-      ))}
+      <div className={styles.resources}>
+        {resources.map((resource) => (
+          <ResourceCard key={resource.slug} resource={resource} user={user} />
+        ))}
+      </div>
     </div>
   )
 }

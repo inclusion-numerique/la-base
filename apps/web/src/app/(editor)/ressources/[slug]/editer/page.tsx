@@ -1,12 +1,10 @@
 import { notFound, redirect } from 'next/navigation'
 import React from 'react'
-import classNames from 'classnames'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Edition from '@app/web/components/Resource/Edition/Edition'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import styles from './ResourceEditionPage.module.css'
 
 const ResourceEditionPage = async ({
   params,
@@ -29,11 +27,15 @@ const ResourceEditionPage = async ({
 
   return (
     <>
-      <div className={classNames('fr-container', styles.container)}>
+      <div className="fr-container">
         <Breadcrumbs
-          currentPage={resource.title}
+          currentPage="Éditer"
           parents={[
             { label: 'Ressources', linkProps: { href: '/ressources' } },
+            {
+              label: resource.title,
+              linkProps: { href: `/ressources/${resource.slug}` },
+            },
           ]}
         />
       </div>
