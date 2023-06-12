@@ -135,36 +135,6 @@ export const linkFailUseCases = (
     ],
   },
   {
-    name: 'fails with no caption',
-    values: {
-      payload: {
-        ...base.payload,
-        caption: undefined,
-      },
-    },
-    errors: [
-      {
-        path: ['payload', 'caption'],
-        message: 'Veuillez renseigner la légende',
-      },
-    ],
-  },
-  {
-    name: 'fails with empty caption',
-    values: {
-      payload: {
-        ...base.payload,
-        caption: ' ',
-      },
-    },
-    errors: [
-      {
-        path: ['payload', 'caption'],
-        message: 'Veuillez renseigner la légende',
-      },
-    ],
-  },
-  {
     name: 'fails with too long caption',
     values: {
       payload: {

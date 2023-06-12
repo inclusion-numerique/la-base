@@ -54,9 +54,11 @@ const LinkView = ({
         </div>
       )
     )}
-    <p className="fr-text--sm fr-mb-0" data-testid="link-caption">
-      {caption}
-    </p>
+    {!!caption && (
+      <p className="fr-text--sm fr-mt-4v fr-mb-0" data-testid="link-caption">
+        {caption}
+      </p>
+    )}
   </div>
 )
 

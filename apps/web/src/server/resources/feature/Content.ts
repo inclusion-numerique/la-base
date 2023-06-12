@@ -59,11 +59,11 @@ const LinkPayloadCommandValidation = z.object({
   caption: z
     .string({ required_error: 'Veuillez renseigner la légende' })
     .trim()
-    .nonempty('Veuillez renseigner la légende')
     .max(
       linkCaptionMaxLength,
       `La légende ne doit pas dépasser ${linkCaptionMaxLength} caractères`,
-    ),
+    )
+    .nullish(),
   showPreview: z.boolean().optional(),
   linkDescription: z.string().nullish(),
   linkTitle: z.string().nullish(),

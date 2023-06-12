@@ -19,7 +19,7 @@ export type ContentEditedV1 = {
   id: string
   title?: string
   text?: string
-  caption?: string
+  caption?: string | null
   url?: string
   showPreview?: boolean
   linkDescription?: string | null
