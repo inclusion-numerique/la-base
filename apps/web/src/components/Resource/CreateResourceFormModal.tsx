@@ -78,6 +78,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   useModalVisibility(modalRef.current, {
     onClosed: () => {
       reset(defaultValues)
+      setStep(0)
     },
   })
 
