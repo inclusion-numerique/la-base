@@ -132,16 +132,18 @@ model Resource {
 }
 
 enum ResourceEventType {
-  Created
-  Migrated
-  Published
-  TitleAndDescriptionEdited
-  ImageEdited
-  BaseChanged
-  ContentAdded
-  ContentEdited
-  ContentRemoved
-  ContentReordered
+  Created                   @map("created")
+  Migrated                  @map("migrated")
+  Published                 @map("published")
+  TitleAndDescriptionEdited @map("title_and_description_edited")
+  ImageEdited               @map("image_edited")
+  BaseChanged               @map("base_changed")
+  ContentAdded              @map("content_added")
+  ContentEdited             @map("content_edited")
+  ContentRemoved            @map("content_removed")
+  ContentReordered          @map("content_reordered")
+
+  @@map("resource_event_type")
 }
 
 model ResourceEvent {
@@ -162,11 +164,13 @@ model ResourceEvent {
 }
 
 enum ContentType {
-  SectionTitle
-  File
-  Image
-  Link
-  Text
+  SectionTitle @map("section_title")
+  File         @map("file")
+  Image        @map("image")
+  Link         @map("link")
+  Text         @map("text")
+
+  @@map("content_type")
 }
 
 model Content {

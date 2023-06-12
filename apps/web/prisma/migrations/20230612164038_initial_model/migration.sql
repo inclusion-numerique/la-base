@@ -1,8 +1,8 @@
 -- CreateEnum
-CREATE TYPE "ResourceEventType" AS ENUM ('Created', 'Migrated', 'Published', 'TitleAndDescriptionEdited', 'BaseChanged', 'ContentAdded', 'ContentEdited', 'ContentRemoved', 'ContentReordered');
+CREATE TYPE "resource_event_type" AS ENUM ('created', 'migrated', 'published', 'title_and_description_edited', 'image_edited', 'base_changed', 'content_added', 'content_edited', 'content_removed', 'content_reordered');
 
 -- CreateEnum
-CREATE TYPE "ContentType" AS ENUM ('SectionTitle', 'File', 'Image', 'Link', 'ResourceLink', 'Text');
+CREATE TYPE "content_type" AS ENUM ('section_title', 'file', 'image', 'link', 'text');
 
 -- CreateTable
 CREATE TABLE "accounts" (
@@ -98,16 +98,16 @@ CREATE TABLE "resources" (
 );
 
 -- CreateTable
-CREATE TABLE "resource_event" (
+CREATE TABLE "resource_events" (
     "id" UUID NOT NULL,
-    "type" "ResourceEventType" NOT NULL,
+    "type" "resource_event_type" NOT NULL,
     "data" JSONB NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL,
     "sequence" INTEGER NOT NULL DEFAULT 0,
     "resource_id" UUID NOT NULL,
     "by_id" UUID,
 
-    CONSTRAINT "resource_event_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "resource_events_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -115,9 +115,10 @@ CREATE TABLE "contents" (
     "id" UUID NOT NULL,
     "legacy_content_id" INTEGER,
     "legacy_section_id" INTEGER,
+    "legacy_linked_resource_id" INTEGER,
     "order" INTEGER NOT NULL,
     "resource_id" UUID NOT NULL,
-    "type" "ContentType" NOT NULL,
+    "type" "content_type" NOT NULL,
     "title" TEXT,
     "caption" TEXT,
     "image_id" UUID,
@@ -127,8 +128,7 @@ CREATE TABLE "contents" (
     "linkDescription" TEXT,
     "linkTitle" TEXT,
     "linkImageUrl" TEXT,
-    "linked_resource_id" UUID,
-    "legacy_linked_resource_id" INTEGER,
+    "linkFaviconUrl" TEXT,
     "text" TEXT,
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -141,10 +141,15 @@ CREATE TABLE "images" (
     "id" UUID NOT NULL,
     "legacy_id" INTEGER,
     "alt_text" TEXT,
+    "blur_url" TEXT,
+    "original_heigth" INTEGER,
+    "original_width" INTEGER,
     "crop_height" DOUBLE PRECISION NOT NULL DEFAULT 1,
     "crop_width" DOUBLE PRECISION NOT NULL DEFAULT 1,
     "crop_top" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "crop_left" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "height" INTEGER,
+    "width" INTEGER,
     "upload_key" TEXT NOT NULL,
 
     CONSTRAINT "images_pkey" PRIMARY KEY ("id")
@@ -245,22 +250,19 @@ ALTER TABLE "resources" ADD CONSTRAINT "resources_created_by_id_fkey" FOREIGN KE
 ALTER TABLE "resources" ADD CONSTRAINT "resources_base_id_fkey" FOREIGN KEY ("base_id") REFERENCES "bases"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "resource_event" ADD CONSTRAINT "resource_event_resource_id_fkey" FOREIGN KEY ("resource_id") REFERENCES "resources"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "resource_events" ADD CONSTRAINT "resource_events_resource_id_fkey" FOREIGN KEY ("resource_id") REFERENCES "resources"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "resource_event" ADD CONSTRAINT "resource_event_by_id_fkey" FOREIGN KEY ("by_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "resource_events" ADD CONSTRAINT "resource_events_by_id_fkey" FOREIGN KEY ("by_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "contents" ADD CONSTRAINT "contents_resource_id_fkey" FOREIGN KEY ("resource_id") REFERENCES "resources"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "contents" ADD CONSTRAINT "contents_resource_id_fkey" FOREIGN KEY ("resource_id") REFERENCES "resources"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "contents" ADD CONSTRAINT "contents_image_id_fkey" FOREIGN KEY ("image_id") REFERENCES "images"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "contents" ADD CONSTRAINT "contents_file_key_fkey" FOREIGN KEY ("file_key") REFERENCES "uploads"("key") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "contents" ADD CONSTRAINT "contents_linked_resource_id_fkey" FOREIGN KEY ("linked_resource_id") REFERENCES "resources"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "images" ADD CONSTRAINT "images_upload_key_fkey" FOREIGN KEY ("upload_key") REFERENCES "uploads"("key") ON DELETE RESTRICT ON UPDATE CASCADE;
