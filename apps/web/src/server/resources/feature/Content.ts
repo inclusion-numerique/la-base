@@ -3,6 +3,7 @@ import z from 'zod'
 import {
   linkCaptionMaxLength,
   linkTitleMaxLength,
+  resourceSectionTitleMaxLength,
   resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 
@@ -12,8 +13,8 @@ export const contentEditionValues = {
     .trim()
     .nonempty('Veuillez renseigner le titre')
     .max(
-      resourceTitleMaxLength,
-      `Le titre ne doit pas dépasser ${resourceTitleMaxLength} caractères`,
+      resourceSectionTitleMaxLength,
+      `Le titre ne doit pas dépasser ${resourceSectionTitleMaxLength} caractères`,
     ),
   text: z
     .string({ required_error: 'Veuillez renseigner le texte' })

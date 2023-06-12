@@ -80,6 +80,7 @@ const LinkEdition = ({
         />
       )}
       <InputFormField
+        className="fr-mt-4v"
         type="textarea"
         data-testid="link-caption-input"
         control={control}

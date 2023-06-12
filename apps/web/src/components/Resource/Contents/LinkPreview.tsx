@@ -48,13 +48,15 @@ const LinkPreview = ({
       </div>
     </div>
     {!!imageUrl && (
-      <picture>
-        <img
-          src={externalImageLoader({ src: imageUrl, width: 200 })}
-          className={styles.image}
-          alt={title ?? ''}
-        />
-      </picture>
+      <div className={styles.imageContainer}>
+        <picture>
+          <img
+            src={externalImageLoader({ src: imageUrl, width: 200 })}
+            className={styles.image}
+            alt={title ?? ''}
+          />
+        </picture>
+      </div>
     )}
   </Link>
 )
