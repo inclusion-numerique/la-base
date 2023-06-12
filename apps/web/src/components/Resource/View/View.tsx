@@ -44,9 +44,9 @@ const View = ({
         <hr />
       </div>
       <div
-        className={classNames('fr-hidden fr-unhidden-lg', styles.rightColumn)}
+        className={classNames('fr-hidden fr-unhidden-md', styles.rightColumn)}
       >
-        <hr />
+        <hr style={{ width: '100%' }} />
       </div>
     </div>
 
@@ -55,9 +55,7 @@ const View = ({
         <ResourceNavigation resource={resource} user={user} />
       </div>
       <div className={classNames(styles.leftColumn)} id="contents-container">
-        <div id="contenu">
-          <ResourceContents resource={resource} />
-        </div>
+        <ResourceContents resource={resource} />
         <ResourceInformations />
       </div>
     </div>

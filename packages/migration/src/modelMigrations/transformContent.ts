@@ -71,11 +71,18 @@ export const transformContent = ({
     if (!legacyContent.main_linkcontent.link?.trim()) {
       return null
     }
+
+    const canShowPreview =
+      !!legacyContent.main_linkcontent.target_description ||
+      !!legacyContent.main_linkcontent.target_title ||
+      !!legacyContent.main_linkcontent.target_image
+
     return {
       ...commonData,
       type: 'Link',
       url: legacyContent.main_linkcontent.link,
-      showPreview: legacyContent.main_linkcontent.with_preview,
+      showPreview:
+        canShowPreview && legacyContent.main_linkcontent.with_preview,
       caption: legacyContent.main_linkcontent.target_description,
       linkDescription: legacyContent.main_linkcontent.target_description,
       linkTitle: legacyContent.main_linkcontent.target_title,

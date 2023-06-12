@@ -86,7 +86,7 @@ const ResourceContents = ({
     <Badge className="fr-hidden-md fr-my-1w" small noIcon severity="success">
       Très recommandée
     </Badge>
-    <hr className="fr-hidden fr-unhidden-md fr-mt-8v" />
+    <hr id="contenu" className="fr-hidden fr-unhidden-md fr-mt-8v" />
     <ResourcesViewsAndMetadata className={styles.viewsAndMetadata} />
     <div className="fr-hidden-md fr-mb-8v">
       <ResourceSideMenu contents={contents} />

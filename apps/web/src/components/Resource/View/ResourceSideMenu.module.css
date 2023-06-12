@@ -1,8 +1,10 @@
 .sideMenu {
-  margin: 32px 0;
+  margin-top: 32px;
+  margin-bottom: 32px;
 
   @media (min-width: 768px) {
-    margin: 48px 0 0 24px;
+    margin-top: 48px;
+    margin-bottom: 0;
     padding-right: 0;
 
     :global(.fr-sidemenu__inner) {

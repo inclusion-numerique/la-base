@@ -40,7 +40,7 @@ const LinkView = ({
       />
     ) : (
       url && (
-        <div className="fr-mb-2w">
+        <div className={styles.urlContainer}>
           <span
             className={classNames(
               styles.iconLink,
