@@ -43,7 +43,7 @@ const CheckboxFormField = <T extends FieldValues>({
         }
 
         return (
-          <div className="fr-form-group" data-testid={dataTestId}>
+          <div className="fr-form-group">
             <fieldset
               className={classNames(
                 'fr-fieldset',
@@ -67,6 +67,7 @@ const CheckboxFormField = <T extends FieldValues>({
                 >
                   <input
                     type="checkbox"
+                    data-testid={dataTestId}
                     id={id}
                     defaultChecked={value}
                     disabled={disabled}

@@ -63,7 +63,7 @@ const LinkEdition = ({
         placeholder="https://"
       />
       <CheckboxFormField
-        data-testid="link-show-preview-radio"
+        data-testid="link-show-preview-checkbox"
         control={control}
         path="showPreview"
         disabled={!urlValid}

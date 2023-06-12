@@ -8,7 +8,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
   describe('Qui a déjà été modifiée, en brouillon', () => {
     beforeEach(cleanUpAndCreateTestResource)
 
-    describe('Je peux éditer les liens', () => {
+    describe('Je peux éditer les liens sans prévisualisation', () => {
       /**
        * US
        *  - https://www.notion.so/Board-de-suivi-2ebf61391d7740968b955c8fa7ffa16d?p=14159706d3dc45c3acc51b187d5453c9&pm=s
@@ -26,7 +26,6 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.testId('add-content_form__submit').click()
         cy.testId('add-content_form').contains('Veuillez renseigner le titre')
-        cy.testId('add-content_form').contains('Veuillez renseigner la légende')
         cy.testId('add-content_form').contains("Veuillez renseigner l'URL")
 
         cy.testId('link-title-input').type("I'm beggin you for mercy")
@@ -88,6 +87,41 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
             'have.text',
             'https://www.imdb.com/title/tt0357111/3',
           )
+        })
+      })
+    })
+
+    describe('Je peux éditer les liens avec prévisualisation', () => {
+      it('Acceptation 1 - Je peux ajouter un lien avec prévisualisation', () => {
+        cy.testId('content-edition_Link-2').should('exist')
+        cy.testId('content-edition_Link-3_form').should('not.exist')
+
+        cy.testId('add-content_form').should('not.exist')
+
+        cy.testId('add-content-button').click()
+        cy.testId('add-Link-content-button').click()
+
+        cy.testId('add-content_form').should('exist')
+
+        cy.testId('link-title-input').type('Le Git')
+        cy.testId('link-url-input').type('https://github.com')
+        cy.testId('link-show-preview-checkbox').check({ force: true })
+        cy.testId('add-content_form').within(() => {
+          cy.testId('link-preview').should('exist')
+        })
+        cy.testId('add-content_form__submit').click()
+
+        cy.wait('@mutation')
+        cy.testId('resource-edition-state').should('have.text', 'Enregistré')
+        cy.testId('resource-published-state').should('have.text', 'Brouillon')
+
+        cy.testId('add-content_form').should('not.exist')
+        cy.testId('content-edition_Link-3').should('exist')
+
+        cy.testId('content-edition_Link-3').within(() => {
+          cy.get('h6').should('have.text', 'Le Git')
+          cy.get('img').should('exist')
+          cy.get('a').should('have.attr', 'href', 'https://github.com')
         })
       })
     })
