@@ -61,15 +61,6 @@ export const getResourceSelect = {
       linkTitle: true,
       linkImageUrl: true,
       linkFaviconUrl: true,
-      linkedResourceId: true,
-      legacyLinkedResourceId: true,
-      linkedResource: {
-        select: {
-          slug: true,
-          title: true,
-          description: true,
-        },
-      },
       text: true,
     },
     orderBy: { order: 'asc' },

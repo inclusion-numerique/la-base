@@ -59,6 +59,7 @@ describe('migrateResource', () => {
       imageIdFromLegacyId: createLegacyToNewIdHelper([
         { legacyId: 740, id: 'bbbb' },
       ]),
+      migratedResourcesByLegacyId: new Map(),
     })
 
     expect(result).toEqual({

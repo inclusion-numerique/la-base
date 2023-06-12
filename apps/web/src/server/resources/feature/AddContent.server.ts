@@ -37,7 +37,6 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
       title: null,
       text: null,
       legacyLinkedResourceId: null,
-      linkedResourceId: null,
       fileKey: null,
       imageId: null,
       caption: null,

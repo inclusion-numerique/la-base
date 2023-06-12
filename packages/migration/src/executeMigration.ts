@@ -130,44 +130,12 @@ export const executeMigration = async () => {
     imageIdFromLegacyId,
     uploadKeyFromLegacyKey,
     existingResourceSlugs,
+    legacyResources,
   })
 
   output(`- Migrated ${migratedResources.length} resources`)
   output(`- Migrated ${migratedContents.length} contents`)
 
-  const resourceIdFromLegacyId = createLegacyToNewIdHelper(
-    migratedResources,
-    ({ legacyId }) => `Resource with legacyId ${legacyId} not found`,
-  )
-
-  output(`- Updating resource links in contents...`)
-
-  const resourceLinkContents = migratedContents.filter(
-    (
-      content,
-    ): content is (typeof migratedContents)[number] & {
-      legacyLinkedResourceId: number
-    } => !!content.legacyLinkedResourceId,
-  )
-
-  const updatedResourceLinks = await Promise.all(
-    resourceLinkContents.map((content) =>
-      prismaClient.content.update({
-        where: { id: content.id },
-        data: {
-          linkedResourceId: resourceIdFromLegacyId(
-            content.legacyLinkedResourceId,
-          ),
-        },
-        select: {
-          id: true,
-          legacyLinkedResourceId: true,
-          linkedResourceId: true,
-        },
-      }),
-    ),
-  )
-  output(`- Updated ${updatedResourceLinks.length} resources links`)
   const endModelMigrations = new Date()
   output(
     `⏱️ Model migrations took ${formatDuration(

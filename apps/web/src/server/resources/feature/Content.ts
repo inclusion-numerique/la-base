@@ -72,13 +72,6 @@ const LinkPayloadCommandValidation = z.object({
 })
 export type LinkPayload = z.infer<typeof LinkPayloadCommandValidation>
 
-const ResourceLinkPayloadCommandValidation = z.object({
-  type: z.literal('ResourceLink'),
-})
-export type ResourceLinkPayload = z.infer<
-  typeof ResourceLinkPayloadCommandValidation
->
-
 const FilePayloadCommandValidation = z.object({
   type: z.literal('File'),
 })
@@ -89,7 +82,6 @@ export const ContentPayloadCommandValidation = z.discriminatedUnion('type', [
   TextPayloadCommandValidation,
   ImagePayloadCommandValidation,
   LinkPayloadCommandValidation,
-  ResourceLinkPayloadCommandValidation,
   FilePayloadCommandValidation,
 ])
 
@@ -98,5 +90,4 @@ export type ContentPayload =
   | TextPayload
   | LinkPayload
   | ImagePayload
-  | ResourceLinkPayload
   | FilePayload

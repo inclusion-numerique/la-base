@@ -126,7 +126,6 @@ model Resource {
   created  DateTime        @default(now())
   updated  DateTime        @default(now())
   contents Content[]
-  linkedBy Content[]       @relation(name: "contentLinkedResource")
   events   ResourceEvent[]
 
   @@map("resources")
@@ -167,7 +166,6 @@ enum ContentType {
   File
   Image
   Link
-  ResourceLink
   Text
 }
 
@@ -175,8 +173,10 @@ model Content {
   id String @id @default(uuid()) @db.Uuid
 
   // Legacy content can be imported from content blocks or sections
-  legacyContentId Int? @unique @map("legacy_content_id")
-  legacySectionId Int? @unique @map("legacy_section_id")
+  legacyContentId        Int? @unique @map("legacy_content_id")
+  legacySectionId        Int? @unique @map("legacy_section_id")
+  // Legacy content can be a linked resource. It will be transformed to a simple Link content during migration
+  legacyLinkedResourceId Int? @map("legacy_linked_resource_id")
 
   order Int
 
@@ -208,11 +208,6 @@ model Content {
   linkTitle       String?
   linkImageUrl    String?
   linkFaviconUrl  String?
-
-  // ResourceLink
-  linkedResource         Resource? @relation(name: "contentLinkedResource", fields: [linkedResourceId], references: [id])
-  linkedResourceId       String?   @map("linked_resource_id") @db.Uuid
-  legacyLinkedResourceId Int?      @map("legacy_linked_resource_id")
 
   // Text
   text String?

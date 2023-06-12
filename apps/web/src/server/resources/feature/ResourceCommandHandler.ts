@@ -27,7 +27,7 @@ export type ResourceCreationCommandHandler<
 ) => Event | Event[] | Promise<Event | Event[]>
 
 export type ResourceMutationCommandHandlerContext = {
-  user: Pick<SessionUser, 'id'>
+  user?: Pick<SessionUser, 'id'>
   resource: ResourceProjection
   persistedResource: PersistedResource
 }

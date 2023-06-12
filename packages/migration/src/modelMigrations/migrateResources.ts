@@ -8,15 +8,15 @@ import { chunk } from 'lodash'
 import { v4 } from 'uuid'
 import type { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import {
-  SlugToLegacyIdMap,
   computeSlugAndUpdateExistingSlugs,
+  SlugToLegacyIdMap,
 } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { transformContent } from '@app/migration/modelMigrations/transformContent'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import type { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 
-export const getLegacyResources = () =>
-  migrationPrismaClient.main_resource.findMany({
+export const getLegacyResources = async () => {
+  const all = await migrationPrismaClient.main_resource.findMany({
     include: {
       main_basesection_resources: true,
       // Each content seems to be inside a section. With a null title if at the "root", or with a "title" if inside a section
@@ -37,7 +37,55 @@ export const getLegacyResources = () =>
       // TODO Do not know if this is useful
       main_contentblock: true,
     },
+    orderBy: {
+      id: 'asc',
+    },
   })
+
+  // We put resources that depends on other at the end of the migration process
+
+  const linkedResources: typeof all = []
+  const dependencyFree: typeof all = []
+  const withLinkedResources: typeof all = []
+
+  const linkedResourceIds = new Set<bigint>()
+  const withLinkedResourceIds = new Set<bigint>()
+
+  for (const resource of all) {
+    for (const section of resource.main_contentsection) {
+      for (const [index, block] of section.main_contentblock.entries()) {
+        const linkedResourceId =
+          block.main_linkedresourcecontent?.linked_resource_id
+        if (!linkedResourceId) {
+          continue
+        }
+        // We DO NOT migrate contents that link to the same resource
+        if (linkedResourceId === resource.id) {
+          section.main_contentblock = section.main_contentblock.filter(
+            (_block, _blockIndex) => _blockIndex !== index,
+          )
+          continue
+        }
+        linkedResourceIds.add(linkedResourceId)
+        withLinkedResourceIds.add(resource.id)
+      }
+    }
+  }
+
+  for (const resource of all) {
+    if (linkedResourceIds.has(resource.id)) {
+      linkedResources.push(resource)
+      continue
+    }
+    if (withLinkedResourceIds.has(resource.id)) {
+      withLinkedResources.push(resource)
+      continue
+    }
+    dependencyFree.push(resource)
+  }
+
+  return [...linkedResources, ...dependencyFree, ...withLinkedResources]
+}
 
 export type LegacyResource = FindManyItemType<typeof getLegacyResources>
 
@@ -56,12 +104,14 @@ export const transformResource = ({
   baseIdFromLegacyId,
   imageIdFromLegacyId,
   uploadKeyFromLegacyKey,
+  migratedResourcesByLegacyId,
 }: {
   legacyResource: LegacyResource
   userIdFromLegacyId: LegacyToNewIdHelper
   baseIdFromLegacyId: LegacyToNewIdHelper
   imageIdFromLegacyId: LegacyToNewIdHelper
   uploadKeyFromLegacyKey: (legacyKey: string) => string
+  migratedResourcesByLegacyId: Map<number, ResourceProjection>
   // Deduplicated slug
   slug: string
 }):
@@ -115,6 +165,7 @@ export const transformResource = ({
       imageIdFromLegacyId,
       uploadKeyFromLegacyKey,
       order: index,
+      migratedResourcesByLegacyId,
     })
     if (!transformedContent) {
       continue
@@ -134,74 +185,91 @@ export const migrateResources = async ({
   imageIdFromLegacyId,
   uploadKeyFromLegacyKey,
   existingResourceSlugs,
+  legacyResources,
 }: {
   userIdFromLegacyId: LegacyToNewIdHelper
   baseIdFromLegacyId: LegacyToNewIdHelper
   imageIdFromLegacyId: LegacyToNewIdHelper
   uploadKeyFromLegacyKey: (legacyKey: string) => string
   existingResourceSlugs: SlugToLegacyIdMap
+  legacyResources: LegacyResource[]
 }) => {
-  const legacyResources = await getLegacyResources()
   output(`- Found ${legacyResources.length} resources to migrate`)
-  const commands = legacyResources
-    .map((legacyResource) => {
-      const slug = computeSlugAndUpdateExistingSlugs(
-        legacyResource,
-        existingResourceSlugs,
-      )
-      const command = transformResource({
-        slug,
-        legacyResource,
-        userIdFromLegacyId,
-        baseIdFromLegacyId,
-        imageIdFromLegacyId,
-        uploadKeyFromLegacyKey,
-      })
+  const migratedResourcesByLegacyId = new Map<number, ResourceProjection>()
 
-      if ('error' in command) {
-        output(
-          `-- ⚠️ Could not migrate resource ${legacyResource.id}: ${command.error}`,
-          legacyResource,
-        )
-      }
-      return command
-    })
-    .filter(
-      (
-        command,
-      ): command is Exclude<
-        ReturnType<typeof transformResource>,
-        {
-          error: string
-          legacyResource: LegacyResource
-        }
-      > => !('error' in command),
+  const legacyResourceToCommand = (legacyResource: LegacyResource) => {
+    const slug = computeSlugAndUpdateExistingSlugs(
+      legacyResource,
+      existingResourceSlugs,
     )
-  const migratedResources: ResourceProjection[] = []
-  const migratedContents: ResourceProjection['contents'] = []
+    const command = transformResource({
+      slug,
+      legacyResource,
+      userIdFromLegacyId,
+      baseIdFromLegacyId,
+      imageIdFromLegacyId,
+      uploadKeyFromLegacyKey,
+      migratedResourcesByLegacyId,
+    })
 
-  output(`- Migrating ${commands.length} resources`)
+    if ('error' in command) {
+      output(
+        `-- ⚠️ Could not migrate resource ${legacyResource.id}: ${command.error}`,
+        legacyResource,
+      )
+    }
+    return command
+  }
+
+  const filterCommand = (
+    command:
+      | MigrateResourceCommand
+      | { error: string; legacyResource: LegacyResource },
+  ): command is Exclude<
+    ReturnType<typeof transformResource>,
+    {
+      error: string
+      legacyResource: LegacyResource
+    }
+  > => !('error' in command)
+
+  const migratedResources: ResourceProjection[] = []
+  const migratedContents: (ResourceProjection['contents'][number] & {
+    resourceId: string
+  })[] = []
+
+  output(`- Migrating ${legacyResources.length} resources`)
 
   const executeCommand = async (command: MigrateResourceCommand) => {
     const result = await handleResourceCreationCommand(command, {
       user: undefined,
     })
+    migratedResourcesByLegacyId.set(command.payload.legacyId, result.resource)
     migratedResources.push(result.resource)
-    migratedContents.push(...result.resource.contents)
+    migratedContents.push(
+      ...result.resource.contents.map((content) => ({
+        ...content,
+        resourceId: result.resource.id,
+      })),
+    )
     if (migratedResources.length % 25 === 0) {
       output(
         `-- ${migratedResources.length} ${(
           (migratedResources.length * 100) /
-          commands.length
+          legacyResources.length
         ).toFixed(0)}%`,
       )
     }
   }
 
   const chunkSize = 50
-  for (const commandChunk of chunk(commands, chunkSize)) {
+  for (const resourcesChunk of chunk(legacyResources, chunkSize)) {
+    const commands = resourcesChunk
+      .map(legacyResourceToCommand)
+      .filter(filterCommand)
+
     // eslint-disable-next-line no-await-in-loop
-    await Promise.all(commandChunk.map(executeCommand))
+    await Promise.all(commands.map(executeCommand))
   }
 
   return {
