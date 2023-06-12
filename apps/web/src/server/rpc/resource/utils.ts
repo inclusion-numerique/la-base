@@ -5,7 +5,7 @@ export const linkTitleMaxLength = 50
 export const linkCaptionMaxLength = 280
 export const resourceTitleMaxLength = 100
 export const resourceDescriptionMaxLength = 560
-export const resourceSectionTitleMaxLength = 200
+export const resourceSectionTitleMaxLength = 100
 
 export const resourceEditionValues = {
   id: z.string(),

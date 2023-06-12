@@ -4,7 +4,6 @@ import {
   linkCaptionMaxLength,
   linkTitleMaxLength,
   resourceSectionTitleMaxLength,
-  resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 
 export const contentEditionValues = {
