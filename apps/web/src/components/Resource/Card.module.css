@@ -87,6 +87,12 @@
   }
 }
 
+.title, .description {
+  a {
+    background: none;
+  }
+}
+
 .footerRight {
   display: flex;
   gap: 8px;

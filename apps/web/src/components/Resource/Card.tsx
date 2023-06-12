@@ -33,12 +33,17 @@ const ResourceCard = ({
         <p className="fr-hidden-md fr-text--xs fr-mb-1w">
           Mis à jour le {dateAsDay(resource.updated)}
         </p>
-        <Link href={`/ressources/${resource.slug}`}>
-          <h6 className={styles.title}>{resource.title}</h6>
-        </Link>
-        <Link href={`/ressources/${resource.slug}`}>
-          <p className="fr-text--sm fr-mb-0">{resource.description}</p>
-        </Link>
+
+        <h6 className={styles.title}>
+          <Link tabIndex={0} href={`/ressources/${resource.slug}`}>
+            {resource.title}
+          </Link>
+        </h6>
+        <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
+          <Link tabIndex={-1} href={`/ressources/${resource.slug}`}>
+            {resource.description}
+          </Link>
+        </p>
       </div>
       {!!resource.image && (
         <Link
