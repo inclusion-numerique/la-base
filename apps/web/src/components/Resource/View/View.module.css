@@ -14,7 +14,7 @@
 .container {
   max-width: 948px;
   margin: 0 auto;
-  padding-top: 16px;
+  padding-top: 0;
 
   @media (min-width: 768px) {
     padding-top: 16px;

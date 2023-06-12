@@ -72,6 +72,18 @@ textarea {
       padding: 8px 12px !important;
     }
   }
+  .fr-header__logo{
+    margin-right: 0;
+  }
+
+  .fr-header__operator {
+    padding-left: 4px;
+    padding-right: 0;
+    @media (min-width: 992px){
+      padding-left: 0;
+      margin-right: 16px;
+    }
+  }
 
   .fr-header__brand {
     filter: none;
