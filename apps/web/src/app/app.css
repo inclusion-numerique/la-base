@@ -1,7 +1,7 @@
-/* Import dsfr with url, outside of webpack build, as a static file */
-@import url('/dsfr/dsfr.min.css');
-@import url('/dsfr/utility/utility.min.css');
-@import url('https://cdn.jsdelivr.net/npm/remixicon@3.3.0/fonts/remixicon.css');
+/* Import order is not respected  (see https://github.com/vercel/next.js/issues/16630) */
+
+/* We (reluctantly) have to copy this import to the first css module to be bundled in the layout css chunk */
+@import '../app/dsfr-import.css'; /* stylelint-disable-line import-notation */
 
 /* Layout setup */
 html,
