@@ -26,10 +26,14 @@ const PublishedAndUpdated = ({
   return (
     <div className={classNames('fr-text--xs fr-mb-0', className)}>
       <b className="fr-mr-1w">Publié le {dateAsDay(created)}</b>
-      <span className={styles.publishedAndUpdatedSeparator} />
-      <span className="fr-ml-1w">
-        {publishedDay !== updatedDay && ` Mis à jour le ${updatedDay}`}
-      </span>
+      {publishedDay !== updatedDay && (
+        <>
+          <span className={styles.publishedAndUpdatedSeparator} />
+          <span className="fr-ml-1w">
+            {publishedDay !== updatedDay && ` Mis à jour le ${updatedDay}`}
+          </span>
+        </>
+      )}
     </div>
   )
 }

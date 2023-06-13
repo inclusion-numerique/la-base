@@ -27,7 +27,7 @@ const FileView = ({
       >
         {file.name}
       </span>
-      <span className="fr-hint-text">· {formatByteSize(file.size)}</span>
+      <span className="fr-hint-text">·&nbsp;{formatByteSize(file.size)}</span>
       <span style={{ flexGrow: 1 }} />
 
       <DownloadFileButton

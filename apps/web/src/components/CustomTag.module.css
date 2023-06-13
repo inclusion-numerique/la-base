@@ -1,3 +1,12 @@
+/* Import order is not respected  (see https://github.com/vercel/next.js/issues/16630) */
+
+/* As a (desperate) workaround we use @import() in this module as it is bundled first with app.css */
+
+/* Move these import accordingly if another global css module is added */
+@import url('/dsfr/dsfr.min.css');
+@import url('/dsfr/utility/utility.min.css');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@3.3.0/fonts/remixicon.css');
+
 .green {
   color: var(--text-default-success);
   background-color: var(--background-contrast-success);

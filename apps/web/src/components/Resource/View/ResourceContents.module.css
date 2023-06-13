@@ -5,11 +5,12 @@
 }
 
 .publishedAndUpdatedSeparator{
+  margin-top: 6px;
   height: 8px;
   width: 0;
   border-right: var(--slim-grey-border);
   display: inline-block;
-  margin-right: -4px;
+  margin-right: -2px;
 }
 
 .title {
