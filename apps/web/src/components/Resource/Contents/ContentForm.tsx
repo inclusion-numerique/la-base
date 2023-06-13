@@ -1,6 +1,5 @@
 import React, { Dispatch, ReactNode, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
-import Alert from '@codegouvfr/react-dsfr/Alert'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ContentType } from '@prisma/client'
@@ -19,6 +18,8 @@ import {
   ContentPayload,
   ContentPayloadCommandValidation,
 } from '@app/web/server/resources/feature/Content'
+import ImageEdition from '@app/web/components/Resource/Contents/ImageEdition'
+import FileEdition from '@app/web/components/Resource/Contents/FileEdition'
 import LinkEdition from './LinkEdition'
 import TextEdition from './TextEdition'
 
@@ -99,13 +100,17 @@ const ContentForm = ({
       formContent = <LinkEdition form={form} />
       break
     }
+    case 'Image': {
+      formContent = <ImageEdition form={form} />
+      break
+    }
+    case 'File': {
+      formContent = <FileEdition form={form} />
+      break
+    }
     default: {
-      formContent = (
-        <Alert
-          severity="info"
-          title={`Formulaire de contenu ${type} en cours d'implémentation`}
-        />
-      )
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      throw new Error(`Invalid content type ${type}`)
     }
   }
 

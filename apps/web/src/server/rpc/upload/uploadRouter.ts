@@ -5,9 +5,14 @@ import {
   createSignedGetUrl,
   createSignedUploadUrl,
 } from '@app/web/server/createSignedUrl'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { forbiddenError, notFoundError } from '@app/web/server/rpc/trpcErrors'
+import {
+  protectedProcedure,
+  publicProcedure,
+  router,
+} from '@app/web/server/rpc/createRouter'
+import { notFoundError } from '@app/web/server/rpc/trpcErrors'
 import { ServerWebAppConfig } from '@app/web/webAppConfig'
+import { createLegacySignedUrl } from '@app/web/server/createLegacySignedUrl'
 
 export const uploadRouter = router({
   create: protectedProcedure
@@ -29,9 +34,9 @@ export const uploadRouter = router({
 
       return result
     }),
-  generateDownloadUrl: protectedProcedure
+  generateDownloadUrl: publicProcedure
     .input(z.object({ key: z.string() }))
-    .mutation(async ({ input: { key }, ctx: { user } }) => {
+    .mutation(async ({ input: { key } }) => {
       // You can put your own security logic here
       const file = await prismaClient.upload.findUnique({
         where: {
@@ -42,10 +47,14 @@ export const uploadRouter = router({
         throw notFoundError()
       }
 
-      if (file.uploadedById !== user.id) {
-        throw forbiddenError()
-      }
+      if (key.startsWith('legacy/')) {
+        const { url } = await createLegacySignedUrl({
+          key: key.replace(/^legacy\//, ''),
+          bucket: ServerWebAppConfig.LegacyS3.uploadsBucket,
+        })
 
+        return { url }
+      }
       const { url } = await createSignedGetUrl({
         key,
         bucket: ServerWebAppConfig.S3.uploadsBucket,

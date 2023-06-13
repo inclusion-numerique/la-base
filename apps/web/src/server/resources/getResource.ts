@@ -44,6 +44,14 @@ export const getResourceSelect = {
         select: {
           id: true,
           altText: true,
+          width: true,
+          height: true,
+          upload: {
+            select: {
+              key: true,
+              name: true,
+            },
+          },
         },
       },
       fileKey: true,
@@ -52,6 +60,7 @@ export const getResourceSelect = {
           mimeType: true,
           key: true,
           name: true,
+          size: true,
         },
       },
       order: true,

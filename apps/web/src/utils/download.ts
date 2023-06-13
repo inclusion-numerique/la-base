@@ -9,6 +9,7 @@ export const download = (url: string, filename: string) => {
   link.style.display = 'none'
   link.href = url
   link.download = filename
+  link.target = '_blank'
 
   // It needs to be added to the DOM so it can be clicked
   document.body.append(link)

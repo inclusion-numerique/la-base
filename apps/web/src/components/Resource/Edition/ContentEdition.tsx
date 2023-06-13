@@ -5,8 +5,10 @@ import ContentView from '@app/web/components/Resource/Contents/ContentView'
 import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import styles from '@app/web/components/Resource/Edition/Edition.module.css'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
-import { ContentProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import {
+  ContentProjectionWithContext,
+  ResourceProjectionWithContext,
+} from '@app/web/server/resources/getResourceFromEvents'
 
 const ContentEdition = ({
   editing,
@@ -22,7 +24,7 @@ const ContentEdition = ({
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
   sendCommand: SendCommand
-  content: ContentProjection
+  content: ContentProjectionWithContext
   'data-testid'?: string
   editionState: ResourceEditionState
   onDelete: () => void | Promise<void>

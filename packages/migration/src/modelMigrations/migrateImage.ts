@@ -1,6 +1,7 @@
 import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
 import type { Prisma } from '@prisma/client'
+import { ImageCropInformation } from '@app/web/utils/imageCrop'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
@@ -52,6 +53,11 @@ export type MigrateImageInput = {
   uploadKeyFromLegacyKey: (legacyKey: string) => string
 }
 
+/**
+ * We have some wierd legacy data with some negative crop values
+ */
+const between0and1 = (value: number) => Math.min(Math.max(value, 0), 1)
+
 export const migrateImage = async ({
   legacyImage,
   transaction,
@@ -68,10 +74,10 @@ export const migrateImage = async ({
           altText: legacyImage.image_alt,
         }
       : ({
-          cropHeight: legacyImage.relative_height,
-          cropWidth: legacyImage.relative_width,
-          cropTop: legacyImage.relative_top,
-          cropLeft: legacyImage.relative_left,
+          cropHeight: between0and1(legacyImage.relative_height),
+          cropWidth: between0and1(legacyImage.relative_width),
+          cropTop: between0and1(legacyImage.relative_top),
+          cropLeft: between0and1(legacyImage.relative_left),
           uploadKey: uploadKeyFromLegacyKey(legacyImage.image),
         } satisfies Parameters<typeof transaction.image.upsert>[0]['update'])
 

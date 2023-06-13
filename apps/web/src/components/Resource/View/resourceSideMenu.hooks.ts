@@ -66,8 +66,6 @@ export const useResourceNavigation = (contents: ResourceContent[]) => {
             break
           }
         }
-
-        console.table([...visibleElements.entries()])
       },
       {
         threshold: 1,

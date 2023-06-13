@@ -4,8 +4,10 @@ import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import styles from '@app/web/components/Resource/Edition/Edition.module.css'
 import type { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
-import type { ContentProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type {
+  ContentProjectionWithContext,
+  ResourceProjectionWithContext,
+} from '@app/web/server/resources/getResourceFromEvents'
 import DraggableContentEdition from '@app/web/components/Resource/Edition/DraggableContentEdition'
 
 /**
@@ -30,7 +32,7 @@ const ContentListEdition = ({
   setEditing: Dispatch<SetStateAction<string | null>>
   sendCommand: SendCommand
   editionState: ResourceEditionState
-  contents: ContentProjection[]
+  contents: ContentProjectionWithContext[]
 }) => {
   // The state is used to reorder the items while dragging, it is derived from the props
   const [orderedContents, setOrderedContents] = useState(contents)
@@ -39,7 +41,7 @@ const ContentListEdition = ({
   useOnDiff(contents, setOrderedContents)
 
   // The onReorder is called when the user is dragging an item over other items
-  const onReorder = (items: ContentProjection[]) => {
+  const onReorder = (items: ContentProjectionWithContext[]) => {
     setOrderedContents(items)
   }
 

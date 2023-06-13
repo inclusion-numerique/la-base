@@ -17,7 +17,7 @@ const CopyLinkButton = ({
   const onCopy = () => {
     setCopied(true)
     setTimeout(() => setCopied(false), 1000)
-    navigator.clipboard.writeText(url)
+    navigator.clipboard.writeText(url).catch()
   }
 
   return (

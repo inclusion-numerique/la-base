@@ -1,0 +1,22 @@
+
+.fileContainer {
+    border: var(--slim-grey-border);
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    margin-top: 16px;
+
+    @media (min-width: 768px) {
+        padding: 24px 32px;
+    }
+}
+
+.name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.icon {
+    color: var(--blue-france-sun-113-625)
+}

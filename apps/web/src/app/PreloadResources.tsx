@@ -3,7 +3,7 @@
 import ReactDOM from 'react-dom'
 
 // React 18.3 does not yet include type definitions for ReactDOM.preload, ReactDOM.preconnect, and ReactDOM.preconnectDNS. You can use // @ts-ignore as a temporary solution to avoid type errors.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 const Rd = ReactDOM as any
 const fontsToPreload = ['Marianne-Regular', 'Marianne-Bold', 'Marianne-Medium']
 

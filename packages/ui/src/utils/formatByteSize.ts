@@ -4,7 +4,11 @@ const giga = 1_000_000_000
 
 const withUnit = (value: number, unit: string) =>
   // eslint-disable-next-line no-irregular-whitespace
-  `${value.toFixed(2).replace('.', ',')} ${unit}`
+  `${value
+    .toFixed(2)
+    // Remove trailing zeros
+    .replace(/(\d+(\.\d+[1-9])?)(\.?0+$)/, '$1')
+    .replace('.', ',')} ${unit}`
 
 export const formatByteSize = (sizeInBytes: number | null): string => {
   if (!sizeInBytes) {

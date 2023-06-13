@@ -103,6 +103,9 @@ export type ResourceProjectionWithContext = Awaited<
   ReturnType<typeof getResourceProjectionContext>
 >
 
+export type ContentProjectionWithContext =
+  ResourceProjectionWithContext['contents'][number]
+
 export const getResourceProjectionWithContext = async (
   where: { slug: string } | { id: string },
 ): Promise<ResourceProjectionWithContext | null> => {
