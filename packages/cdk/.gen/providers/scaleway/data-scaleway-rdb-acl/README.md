@@ -1,3 +1,3 @@
 # `data_scaleway_rdb_acl`
 
-Refer to the Terraform Registory for docs: [`data_scaleway_rdb_acl`](https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_acl).
+Refer to the Terraform Registory for docs: [`data_scaleway_rdb_acl`](https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_acl).

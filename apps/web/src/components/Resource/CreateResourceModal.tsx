@@ -3,12 +3,12 @@ import React from 'react'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 
 export const {
-  CreateResourceModal,
-  openCreateResourceModal,
-  closeCreateResourceModal,
-  createResourceModalNativeButtonProps,
+  Component: CreateResourceModal,
+  open: openCreateResourceModal,
+  close: closeCreateResourceModal,
+  buttonProps: createResourceModalNativeButtonProps,
 } = createModal({
-  name: 'createResource',
+  id: 'createResource',
   isOpenedByDefault: false,
 })
 

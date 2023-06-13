@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MnqNamespaceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#id MnqNamespace#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#id MnqNamespace#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,53 +17,53 @@ export interface MnqNamespaceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the mnq namespace
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#name MnqNamespace#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#name MnqNamespace#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#project_id MnqNamespace#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#project_id MnqNamespace#project_id}
   */
   readonly projectId?: string;
   /**
   * The Namespace protocol
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#protocol MnqNamespace#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#protocol MnqNamespace#protocol}
   */
   readonly protocol: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#region MnqNamespace#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#region MnqNamespace#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#timeouts MnqNamespace#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#timeouts MnqNamespace#timeouts}
   */
   readonly timeouts?: MnqNamespaceTimeouts;
 }
 export interface MnqNamespaceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#create MnqNamespace#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#create MnqNamespace#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#default MnqNamespace#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#default MnqNamespace#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#delete MnqNamespace#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#delete MnqNamespace#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#read MnqNamespace#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#read MnqNamespace#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace#update MnqNamespace#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace#update MnqNamespace#update}
   */
   readonly update?: string;
 }
@@ -230,7 +230,7 @@ export class MnqNamespaceTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace scaleway_mnq_namespace}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace scaleway_mnq_namespace}
 */
 export class MnqNamespace extends cdktf.TerraformResource {
 
@@ -244,7 +244,7 @@ export class MnqNamespace extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_namespace scaleway_mnq_namespace} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_namespace scaleway_mnq_namespace} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -255,8 +255,8 @@ export class MnqNamespace extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_namespace',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

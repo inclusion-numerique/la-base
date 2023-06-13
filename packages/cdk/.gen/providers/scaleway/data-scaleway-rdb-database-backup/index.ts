@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayRdbDatabaseBackupConfig extends cdktf.TerraformMeta
   /**
   * The ID of the Backup
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup#backup_id DataScalewayRdbDatabaseBackup#backup_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup#backup_id DataScalewayRdbDatabaseBackup#backup_id}
   */
   readonly backupId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup#id DataScalewayRdbDatabaseBackup#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup#id DataScalewayRdbDatabaseBackup#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface DataScalewayRdbDatabaseBackupConfig extends cdktf.TerraformMeta
   /**
   * Instance on which the user is created
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup#instance_id DataScalewayRdbDatabaseBackup#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup#instance_id DataScalewayRdbDatabaseBackup#instance_id}
   */
   readonly instanceId?: string;
   /**
   * Name of the backup.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup#name DataScalewayRdbDatabaseBackup#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup#name DataScalewayRdbDatabaseBackup#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup#region DataScalewayRdbDatabaseBackup#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup#region DataScalewayRdbDatabaseBackup#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup scaleway_rdb_database_backup}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup scaleway_rdb_database_backup}
 */
 export class DataScalewayRdbDatabaseBackup extends cdktf.TerraformDataSource {
 
@@ -55,7 +55,7 @@ export class DataScalewayRdbDatabaseBackup extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/rdb_database_backup scaleway_rdb_database_backup} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/rdb_database_backup scaleway_rdb_database_backup} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -66,8 +66,8 @@ export class DataScalewayRdbDatabaseBackup extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_rdb_database_backup',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

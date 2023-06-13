@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/vpc_public_gateway_dhcp
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/vpc_public_gateway_dhcp
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayVpcPublicGatewayDhcpConfig extends cdktf.TerraformM
   /**
   * The ID of the public gateway DHCP configuration
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/vpc_public_gateway_dhcp#dhcp_id DataScalewayVpcPublicGatewayDhcp#dhcp_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/vpc_public_gateway_dhcp#dhcp_id DataScalewayVpcPublicGatewayDhcp#dhcp_id}
   */
   readonly dhcpId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/vpc_public_gateway_dhcp#id DataScalewayVpcPublicGatewayDhcp#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/vpc_public_gateway_dhcp#id DataScalewayVpcPublicGatewayDhcp#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,7 +23,7 @@ export interface DataScalewayVpcPublicGatewayDhcpConfig extends cdktf.TerraformM
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/vpc_public_gateway_dhcp scaleway_vpc_public_gateway_dhcp}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/vpc_public_gateway_dhcp scaleway_vpc_public_gateway_dhcp}
 */
 export class DataScalewayVpcPublicGatewayDhcp extends cdktf.TerraformDataSource {
 
@@ -37,7 +37,7 @@ export class DataScalewayVpcPublicGatewayDhcp extends cdktf.TerraformDataSource 
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/vpc_public_gateway_dhcp scaleway_vpc_public_gateway_dhcp} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/vpc_public_gateway_dhcp scaleway_vpc_public_gateway_dhcp} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -48,8 +48,8 @@ export class DataScalewayVpcPublicGatewayDhcp extends cdktf.TerraformDataSource 
       terraformResourceType: 'scaleway_vpc_public_gateway_dhcp',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

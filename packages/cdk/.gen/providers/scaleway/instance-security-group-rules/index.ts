@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstanceSecurityGroupRulesConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#id InstanceSecurityGroupRules#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#id InstanceSecurityGroupRules#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface InstanceSecurityGroupRulesConfig extends cdktf.TerraformMetaArg
   /**
   * The security group associated with this volume
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#security_group_id InstanceSecurityGroupRules#security_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#security_group_id InstanceSecurityGroupRules#security_group_id}
   */
   readonly securityGroupId: string;
   /**
   * inbound_rule block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#inbound_rule InstanceSecurityGroupRules#inbound_rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#inbound_rule InstanceSecurityGroupRules#inbound_rule}
   */
   readonly inboundRule?: InstanceSecurityGroupRulesInboundRule[] | cdktf.IResolvable;
   /**
   * outbound_rule block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#outbound_rule InstanceSecurityGroupRules#outbound_rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#outbound_rule InstanceSecurityGroupRules#outbound_rule}
   */
   readonly outboundRule?: InstanceSecurityGroupRulesOutboundRule[] | cdktf.IResolvable;
   /**
   * timeouts block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#timeouts InstanceSecurityGroupRules#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#timeouts InstanceSecurityGroupRules#timeouts}
   */
   readonly timeouts?: InstanceSecurityGroupRulesTimeouts;
 }
@@ -43,37 +43,37 @@ export interface InstanceSecurityGroupRulesInboundRule {
   /**
   * Action when rule match request (drop or accept)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#action InstanceSecurityGroupRules#action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#action InstanceSecurityGroupRules#action}
   */
   readonly action: string;
   /**
   * Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#ip InstanceSecurityGroupRules#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#ip InstanceSecurityGroupRules#ip}
   */
   readonly ip?: string;
   /**
   * Ip range for this rule (e.g: 192.168.1.0/24). Only one of ip or ip_range should be provided
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#ip_range InstanceSecurityGroupRules#ip_range}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#ip_range InstanceSecurityGroupRules#ip_range}
   */
   readonly ipRange?: string;
   /**
   * Network port for this rule
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#port InstanceSecurityGroupRules#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#port InstanceSecurityGroupRules#port}
   */
   readonly port?: number;
   /**
   * Computed port range for this rule (e.g: 1-1024, 22-22)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#port_range InstanceSecurityGroupRules#port_range}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#port_range InstanceSecurityGroupRules#port_range}
   */
   readonly portRange?: string;
   /**
   * Protocol for this rule (TCP, UDP, ICMP or ANY)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#protocol InstanceSecurityGroupRules#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#protocol InstanceSecurityGroupRules#protocol}
   */
   readonly protocol?: string;
 }
@@ -284,37 +284,37 @@ export interface InstanceSecurityGroupRulesOutboundRule {
   /**
   * Action when rule match request (drop or accept)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#action InstanceSecurityGroupRules#action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#action InstanceSecurityGroupRules#action}
   */
   readonly action: string;
   /**
   * Ip address for this rule (e.g: 1.1.1.1). Only one of ip or ip_range should be provided
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#ip InstanceSecurityGroupRules#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#ip InstanceSecurityGroupRules#ip}
   */
   readonly ip?: string;
   /**
   * Ip range for this rule (e.g: 192.168.1.0/24). Only one of ip or ip_range should be provided
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#ip_range InstanceSecurityGroupRules#ip_range}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#ip_range InstanceSecurityGroupRules#ip_range}
   */
   readonly ipRange?: string;
   /**
   * Network port for this rule
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#port InstanceSecurityGroupRules#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#port InstanceSecurityGroupRules#port}
   */
   readonly port?: number;
   /**
   * Computed port range for this rule (e.g: 1-1024, 22-22)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#port_range InstanceSecurityGroupRules#port_range}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#port_range InstanceSecurityGroupRules#port_range}
   */
   readonly portRange?: string;
   /**
   * Protocol for this rule (TCP, UDP, ICMP or ANY)
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#protocol InstanceSecurityGroupRules#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#protocol InstanceSecurityGroupRules#protocol}
   */
   readonly protocol?: string;
 }
@@ -523,7 +523,7 @@ export class InstanceSecurityGroupRulesOutboundRuleList extends cdktf.ComplexLis
 }
 export interface InstanceSecurityGroupRulesTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules#default InstanceSecurityGroupRules#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules#default InstanceSecurityGroupRules#default}
   */
   readonly default?: string;
 }
@@ -598,7 +598,7 @@ export class InstanceSecurityGroupRulesTimeoutsOutputReference extends cdktf.Com
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules scaleway_instance_security_group_rules}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules scaleway_instance_security_group_rules}
 */
 export class InstanceSecurityGroupRules extends cdktf.TerraformResource {
 
@@ -612,7 +612,7 @@ export class InstanceSecurityGroupRules extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/instance_security_group_rules scaleway_instance_security_group_rules} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/instance_security_group_rules scaleway_instance_security_group_rules} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -623,8 +623,8 @@ export class InstanceSecurityGroupRules extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_security_group_rules',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

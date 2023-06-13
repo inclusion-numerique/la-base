@@ -16,8 +16,8 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import PublishedInInformation from '../PublishedInInformation'
 import EditableContent from './EditableContent'
 
-const { BaseModal, openBaseModal } = createModal({
-  name: 'base',
+const { Component: BaseModal, open: openBaseModal } = createModal({
+  id: 'base',
   isOpenedByDefault: false,
 })
 

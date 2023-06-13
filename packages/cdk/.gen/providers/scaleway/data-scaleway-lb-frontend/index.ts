@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbFrontendConfig extends cdktf.TerraformMetaArgumen
   /**
   * The ID of the frontend
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend#frontend_id DataScalewayLbFrontend#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend#frontend_id DataScalewayLbFrontend#frontend_id}
   */
   readonly frontendId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend#id DataScalewayLbFrontend#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend#id DataScalewayLbFrontend#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,13 @@ export interface DataScalewayLbFrontendConfig extends cdktf.TerraformMetaArgumen
   /**
   * The load-balancer ID
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend#lb_id DataScalewayLbFrontend#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend#lb_id DataScalewayLbFrontend#lb_id}
   */
   readonly lbId?: string;
   /**
   * The name of the frontend
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend#name DataScalewayLbFrontend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend#name DataScalewayLbFrontend#name}
   */
   readonly name?: string;
 }
@@ -307,6 +307,16 @@ export class DataScalewayLbFrontendAclOutputReference extends cdktf.ComplexObjec
     return this._action;
   }
 
+  // created_at - computed: true, optional: false, required: false
+  public get createdAt() {
+    return this.getStringAttribute('created_at');
+  }
+
+  // description - computed: true, optional: false, required: false
+  public get description() {
+    return this.getStringAttribute('description');
+  }
+
   // match - computed: true, optional: false, required: false
   private _match = new DataScalewayLbFrontendAclMatchList(this, "match", false);
   public get match() {
@@ -316,6 +326,11 @@ export class DataScalewayLbFrontendAclOutputReference extends cdktf.ComplexObjec
   // name - computed: true, optional: false, required: false
   public get name() {
     return this.getStringAttribute('name');
+  }
+
+  // updated_at - computed: true, optional: false, required: false
+  public get updatedAt() {
+    return this.getStringAttribute('updated_at');
   }
 }
 
@@ -339,7 +354,7 @@ export class DataScalewayLbFrontendAclList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend scaleway_lb_frontend}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend scaleway_lb_frontend}
 */
 export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
 
@@ -353,7 +368,7 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/lb_frontend scaleway_lb_frontend} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/lb_frontend scaleway_lb_frontend} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -364,8 +379,8 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_frontend',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -409,6 +424,11 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   // enable_http3 - computed: true, optional: false, required: false
   public get enableHttp3() {
     return this.getBooleanAttribute('enable_http3');
+  }
+
+  // external_acls - computed: true, optional: false, required: false
+  public get externalAcls() {
+    return this.getBooleanAttribute('external_acls');
   }
 
   // frontend_id - computed: false, optional: true, required: false

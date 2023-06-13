@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MnqQueueConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#id MnqQueue#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#id MnqQueue#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,43 +17,43 @@ export interface MnqQueueConfig extends cdktf.TerraformMetaArguments {
   /**
   * The number of seconds the queue retains a message.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#message_max_age MnqQueue#message_max_age}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#message_max_age MnqQueue#message_max_age}
   */
   readonly messageMaxAge?: number;
   /**
   * The maximum size of a message. Should be in bytes.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#message_max_size MnqQueue#message_max_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#message_max_size MnqQueue#message_max_size}
   */
   readonly messageMaxSize?: number;
   /**
   * The name of the queue. Conflicts with name_prefix.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#name MnqQueue#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#name MnqQueue#name}
   */
   readonly name?: string;
   /**
   * Creates a unique name beginning with the specified prefix. Conflicts with name.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#name_prefix MnqQueue#name_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#name_prefix MnqQueue#name_prefix}
   */
   readonly namePrefix?: string;
   /**
   * The ID of the Namespace associated to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#namespace_id MnqQueue#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#namespace_id MnqQueue#namespace_id}
   */
   readonly namespaceId: string;
   /**
   * nats block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#nats MnqQueue#nats}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#nats MnqQueue#nats}
   */
   readonly nats?: MnqQueueNats;
   /**
   * sqs block
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#sqs MnqQueue#sqs}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#sqs MnqQueue#sqs}
   */
   readonly sqs?: MnqQueueSqs;
 }
@@ -61,19 +61,19 @@ export interface MnqQueueNats {
   /**
   * Line jump separated key and seed
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#credentials MnqQueue#credentials}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#credentials MnqQueue#credentials}
   */
   readonly credentials: string;
   /**
   * The endpoint of the NATS queue. Can contain a {region} placeholder.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#endpoint MnqQueue#endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#endpoint MnqQueue#endpoint}
   */
   readonly endpoint?: string;
   /**
   * The retention policy of the queue. See https://docs.nats.io/nats-concepts/jetstream/streams#retentionpolicy for more information.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#retention_policy MnqQueue#retention_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#retention_policy MnqQueue#retention_policy}
   */
   readonly retentionPolicy?: string;
 }
@@ -183,37 +183,37 @@ export interface MnqQueueSqs {
   /**
   * The access key of the SQS queue
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#access_key MnqQueue#access_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#access_key MnqQueue#access_key}
   */
   readonly accessKey: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#content_based_deduplication MnqQueue#content_based_deduplication}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#content_based_deduplication MnqQueue#content_based_deduplication}
   */
   readonly contentBasedDeduplication?: boolean | cdktf.IResolvable;
   /**
   * The endpoint of the SQS queue. Can contain a {region} placeholder.
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#endpoint MnqQueue#endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#endpoint MnqQueue#endpoint}
   */
   readonly endpoint?: string;
   /**
   * Whether the queue is a FIFO queue. If true, the queue name must end with .fifo
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#fifo_queue MnqQueue#fifo_queue}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#fifo_queue MnqQueue#fifo_queue}
   */
   readonly fifoQueue?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#receive_wait_time_seconds MnqQueue#receive_wait_time_seconds}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#receive_wait_time_seconds MnqQueue#receive_wait_time_seconds}
   */
   readonly receiveWaitTimeSeconds?: number;
   /**
   * The secret key of the SQS queue
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#secret_key MnqQueue#secret_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#secret_key MnqQueue#secret_key}
   */
   readonly secretKey: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue#visibility_timeout_seconds MnqQueue#visibility_timeout_seconds}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue#visibility_timeout_seconds MnqQueue#visibility_timeout_seconds}
   */
   readonly visibilityTimeoutSeconds?: number;
 }
@@ -415,7 +415,7 @@ export class MnqQueueSqsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue scaleway_mnq_queue}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue scaleway_mnq_queue}
 */
 export class MnqQueue extends cdktf.TerraformResource {
 
@@ -429,7 +429,7 @@ export class MnqQueue extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/resources/mnq_queue scaleway_mnq_queue} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/resources/mnq_queue scaleway_mnq_queue} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -440,8 +440,8 @@ export class MnqQueue extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_queue',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

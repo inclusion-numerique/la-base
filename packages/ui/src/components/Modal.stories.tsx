@@ -3,8 +3,8 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 
-const { BaseModal, openBaseModal } = createModal({
-  name: 'base',
+const { Component: BaseModal, open: openBaseModal } = createModal({
+  id: 'base',
   isOpenedByDefault: false,
 })
 

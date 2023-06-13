@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device
+// https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DataScalewayIotDeviceConfig extends cdktf.TerraformMetaArgument
   /**
   * The ID of the IOT Device
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device#device_id DataScalewayIotDevice#device_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device#device_id DataScalewayIotDevice#device_id}
   */
   readonly deviceId?: string;
   /**
   * The ID of the hub on which this device will be created
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device#hub_id DataScalewayIotDevice#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device#hub_id DataScalewayIotDevice#hub_id}
   */
   readonly hubId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device#id DataScalewayIotDevice#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device#id DataScalewayIotDevice#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,13 +29,13 @@ export interface DataScalewayIotDeviceConfig extends cdktf.TerraformMetaArgument
   /**
   * The name of the device
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device#name DataScalewayIotDevice#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device#name DataScalewayIotDevice#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   * 
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device#region DataScalewayIotDevice#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device#region DataScalewayIotDevice#region}
   */
   readonly region?: string;
 }
@@ -319,7 +319,7 @@ export class DataScalewayIotDeviceMessageFiltersList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device scaleway_iot_device}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device scaleway_iot_device}
 */
 export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
 
@@ -333,7 +333,7 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.19.0/docs/data-sources/iot_device scaleway_iot_device} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.21.0/docs/data-sources/iot_device scaleway_iot_device} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -344,8 +344,8 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iot_device',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.19.0',
-        providerVersionConstraint: '= 2.19.0'
+        providerVersion: '2.21.0',
+        providerVersionConstraint: '>= 2.21.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
