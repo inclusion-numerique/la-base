@@ -40,6 +40,7 @@ export const getResourceSelect = {
       type: true,
       caption: true,
       imageId: true,
+      imageAltText: true,
       image: {
         select: {
           id: true,

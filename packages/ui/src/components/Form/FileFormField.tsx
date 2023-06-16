@@ -21,6 +21,7 @@ export type FileFormFieldProps<T extends FieldValues> = {
   accept?: string
   className?: string
   valid?: string
+  error?: string
   info?: string | ((value: PathValue<T, Path<T>>) => string)
   'data-testid'?: string
 } & Omit<
@@ -39,6 +40,7 @@ const FileFormField = <T extends FieldValues>({
   className,
   valid,
   info,
+  error: errorProp,
   'data-testid': dataTestId,
 }: FileFormFieldProps<T>) => {
   const id = `file-form-field__${path}`
@@ -53,6 +55,7 @@ const FileFormField = <T extends FieldValues>({
       }) => {
         const inputValue =
           (value as { filename: string } | undefined)?.filename ?? ''
+
         return (
           <div
             className={classNames(
@@ -104,12 +107,12 @@ const FileFormField = <T extends FieldValues>({
                 {typeof info === 'string' ? info : info(value)}
               </p>
             )}
-            {error && (
+            {(errorProp || error) && (
               <p
                 id={`${id}__error`}
                 className={classNames('fr-error-text', { 'fr-mt-1v': !!info })}
               >
-                {error.message}
+                {error?.message || errorProp || null}
               </p>
             )}
             {valid && isTouched && !invalid && (

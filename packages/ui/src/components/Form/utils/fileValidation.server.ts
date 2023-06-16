@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 
+export const maximumFileSizeInBytes = 100_000_000
+
 export const fileMimeTypeValidation = (
   allowedTypes: string[],
   message?: string,
@@ -34,7 +36,7 @@ export type ServerFileValidationOptions = {
 }
 export const fileValidation = ({
   requiredMessage = 'Veuillez choisir un fichier',
-  maxSizeInBytes,
+  maxSizeInBytes = maximumFileSizeInBytes,
   maxSizeMessage = fileSizeValidationErrorMessage,
   acceptedMimeTypes,
   acceptedMimeTypesMessage = "Ce type de fichier n'est pas accepté",
@@ -77,4 +79,4 @@ export const fileValidation = ({
 }
 
 export const optionalFileValidation = (options: ServerFileValidationOptions) =>
-  fileValidation(options).nullable()
+  fileValidation(options).nullish()

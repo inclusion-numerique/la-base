@@ -1,14 +1,16 @@
 .container {
     border: var(--slim-grey-border);
+    align-items: stretch;
+
 }
 
 .emptyContainer {
     border: 1px dashed var(--border-default-grey);
+    align-items: center;
 }
 
 .container, .emptyContainer {
     width: 100%;
-    align-items: center;
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
@@ -20,14 +22,13 @@
 
     }
 
-    label {
+    :global(.fr-label) {
         font-size: 14px;
         line-height: 24px;
         font-weight: 500;
 
-        span {
-            margin-top: 0 !important;
-            line-height: 24px;
+        :global(.fr-hint-text) {
+            margin-top: 4px !important;
             font-weight: 400;
         }
     }
@@ -70,7 +71,7 @@
 
 .inputContainer{
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 16px;
     width: 100%;
 
@@ -81,6 +82,7 @@
     label {
         margin-bottom: 0 !important;
     }
+
 }
 
 .grey {

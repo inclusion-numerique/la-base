@@ -20,6 +20,9 @@ export type ContentEditedV1 = {
   title?: string
   text?: string
   caption?: string | null
+  imageId?: string | null
+  imageAltText?: string | null
+  fileKey?: string | null
   url?: string
   showPreview?: boolean
   linkDescription?: string | null

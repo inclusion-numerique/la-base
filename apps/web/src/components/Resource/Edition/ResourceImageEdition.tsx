@@ -1,15 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import * as Sentry from '@sentry/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FileFormField from '@app/ui/components/Form/FileFormField'
 import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
-import Button from '@codegouvfr/react-dsfr/Button'
 import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
@@ -20,6 +18,7 @@ import {
   imageMaxSize,
 } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
+import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
 import styles from './ResourceImageEdition.module.css'
 
 const imageFileValidation = fileValidation({
@@ -39,7 +38,7 @@ const ResourceImageEdition = ({
   setEditing,
   editing,
 }: {
-  resource: ResourceProjectionWithContext
+  resource: Pick<ResourceProjectionWithContext, 'id' | 'image'>
   sendCommand: SendCommand
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
@@ -50,22 +49,19 @@ const ResourceImageEdition = ({
   const isEditingAnotherContent = !!editing && !isEditingImage
 
   // File upload hooks for storage
-  const [uploadProgressInfo, setUploadProgressInfo] = useState('')
-  const fileUpload = useFileUpload({
-    onProgress: (progress) => {
-      setUploadProgressInfo(`Téléversement de l'image en cours... ${progress}%`)
-    },
-  })
+  const fileUpload = useFileUpload()
 
   // Image creation mutation
   const createImage = trpc.image.create.useMutation()
 
   const {
     control,
+    setValue,
     formState: { isSubmitting },
     reset,
     handleSubmit,
     watch,
+    setError,
   } = useForm<ImageEditionFormData>({
     resolver: zodResolver(ImageEditionFormValidation),
   })
@@ -78,7 +74,14 @@ const ResourceImageEdition = ({
 
     // 2. We create a signed url and upload the file to the storage
     const uploaded = await fileUpload.upload(data.file)
-    if (!uploaded) {
+    if ('error' in uploaded) {
+      setEditing(null)
+
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setValue('file', undefined as unknown as File)
+      setError('file', {
+        message: uploaded.error,
+      })
       // Upload failed, error will be displayed from hooks states
       return
     }
@@ -100,7 +103,7 @@ const ResourceImageEdition = ({
     // 5. We reset the form
     setEditing(null)
     reset()
-    setUploadProgressInfo('')
+    fileUpload.reset()
   }
 
   const onDelete = async () => {
@@ -120,13 +123,12 @@ const ResourceImageEdition = ({
     // 3. We reset the form
     setEditing(null)
     reset()
-    setUploadProgressInfo('')
+    fileUpload.reset()
   }
 
   const fileFieldHint = `Taille maximale : ${formatByteSize(
     imageMaxSize,
-  )}. Formats
-              supportés : ${imageAllowedExtensions.join(', ')}.`
+  )}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`
   const disabled = isSubmitting || isEditingAnotherContent
 
   // Form is automatically submited without user validation on image file change
@@ -139,7 +141,7 @@ const ResourceImageEdition = ({
       }
     })
     return () => subscription.unsubscribe()
-  }, [watch, isEditingImage, setEditing])
+  }, [watch, isEditingImage, setEditing, handleSubmit, onSubmit])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -171,34 +173,24 @@ const ResourceImageEdition = ({
             />
           )}
         </div>
-        <div className={styles.inputContainer}>
-          <FileFormField
-            label={
-              image
-                ? "Remplacer l'image de présentation"
-                : 'Ajouter une image de présentation pour attirer les visiteurs'
-            }
-            hint={fileFieldHint}
-            data-testid="resource-image-file-field"
-            control={control}
-            path="file"
-            disabled={disabled}
-            info={uploadProgressInfo}
-          />
-          {!!image && (
-            <Button
-              iconId="fr-icon-delete-bin-line"
-              type="button"
-              size="small"
-              title="Supprimer l'image de présentation"
-              priority="tertiary no outline"
-              onClick={onDelete}
-              nativeButtonProps={{
-                'data-testid': 'resource-image-delete',
-              }}
-            />
-          )}
-        </div>
+
+        <FileUploadForm
+          label={
+            image
+              ? "Remplacer l'image de présentation"
+              : 'Ajouter une image de présentation pour attirer les visiteurs'
+          }
+          fileFieldHint={fileFieldHint}
+          disabled={disabled}
+          canDelete={!!image}
+          deleteButtonTitle="Supprimer l'image de présentation"
+          deleteButtonTestId="resource-image-delete"
+          fileUpload={fileUpload}
+          onDelete={onDelete}
+          control={control}
+          path="file"
+          className={styles.inputContainer}
+        />
       </div>
     </form>
   )

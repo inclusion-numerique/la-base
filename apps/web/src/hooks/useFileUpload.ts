@@ -1,87 +1,131 @@
-import axios from 'axios'
-import { useState } from 'react'
+import axios, { CanceledError } from 'axios'
+import { useCallback, useRef, useState } from 'react'
+import EventEmitter from 'eventemitter3'
+import * as Sentry from '@sentry/nextjs'
 import { trpc } from '@app/web/trpc'
 
-export const useFileUpload = ({
-  onProgress,
-}: {
-  onProgress?: (progressPercentage: number) => void
-}) => {
-  const [uploadError, setUploadError] = useState<string | null>(null)
+export const useFileUpload = () => {
   const [uploading, setUploading] = useState<boolean>(false)
+
+  const progressEmitterRef = useRef(
+    // eslint-disable-next-line unicorn/prefer-event-target
+    new EventEmitter<'progress', number | null>(),
+  )
+
+  const [filename, setFilename] = useState<string | null>(null)
+
+  const abortControllerRef = useRef<AbortController>()
 
   const generateUploadUrl = trpc.upload.generateUploadUrl.useMutation()
 
-  const upload = async (
-    file: File,
-  ): Promise<
-    undefined | { key: string; mimeType: string; name: string; size: number }
-  > => {
-    setUploadError(null)
-    setUploading(true)
-    onProgress?.(0)
-    const uploadInfo = await generateUploadUrl
-      .mutateAsync({
-        filename: file.name,
-        mimeType: file.type,
-      })
-      .catch((error) => {
-        // TODO Sentry capture exception
-        console.error(error)
-        setUploadError(
-          "Une erreur est survenue lors de l'envoi du fichier. Veuillez réessayer.",
-        )
-        setUploading(false)
-      })
-
-    if (!uploadInfo) {
-      return
+  const abort = useCallback(() => {
+    if (abortControllerRef.current) {
+      // This will throw an error in the axios request in the upload() method
+      abortControllerRef.current.abort()
     }
+  }, [setUploading, progressEmitterRef])
 
-    let totalUploaded = 0
+  const reset = useCallback(() => {
+    abort()
+    setUploading(false)
+    progressEmitterRef.current.emit('progress', null)
+    setFilename(null)
+  }, [setUploading, progressEmitterRef, abort])
 
-    await axios
-      .put(uploadInfo.url, file, {
-        headers: {
-          'Content-Type': file.type,
-          'Access-Control-Allow-Origin': '*',
-        },
-        onUploadProgress: onProgress
-          ? (progressEvent) => {
-              if (!progressEvent.total || progressEvent.total === 0) {
-                return
-              }
-              if (totalUploaded !== progressEvent.total) {
-                totalUploaded = progressEvent.total
-              }
-              const percentCompleted = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total,
-              )
+  const upload = useCallback(
+    async (
+      file: File,
+    ): Promise<
+      | { error: string; reason: 'signedUrl' | 'canceled' | 'uploadRequest' }
+      | {
+          key: string
+          mimeType: string
+          name: string
+          size: number
+        }
+    > => {
+      abort()
+      abortControllerRef.current = new AbortController()
 
-              onProgress(percentCompleted)
+      setUploading(true)
+      setFilename(file.name)
+      progressEmitterRef.current.emit('progress', 0)
+      const uploadInfo = await generateUploadUrl
+        .mutateAsync({
+          filename: file.name,
+          mimeType: file.type,
+        })
+        .catch((error) => {
+          Sentry.captureException(error)
+          setUploading(false)
+        })
+
+      if (!uploadInfo) {
+        return {
+          error:
+            "Une erreur est survenue lors de l'envoi du fichier. Veuillez réessayer.",
+          reason: 'signedUrl',
+        }
+      }
+
+      let totalUploaded = 0
+
+      try {
+        await axios.put(uploadInfo.url, file, {
+          signal: abortControllerRef.current.signal,
+          headers: {
+            'Content-Type': file.type,
+            'Access-Control-Allow-Origin': '*',
+          },
+          onUploadProgress: (progressEvent) => {
+            if (!progressEvent.total || progressEvent.total === 0) {
+              return
             }
-          : undefined,
-      })
-      .catch((error) => {
-        // TODO Sentry capture exception
-        console.error(error)
-        setUploadError(
-          "Une erreur est survenue lors de l'envoi du fichier. Veuillez réessayer.",
-        )
-        setUploading(false)
-      })
+            if (totalUploaded !== progressEvent.total) {
+              totalUploaded = progressEvent.total
+            }
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            )
+            progressEmitterRef.current.emit('progress', percentCompleted)
+          },
+        })
 
-    return {
-      key: uploadInfo.key,
-      name: file.name,
-      mimeType: file.type,
-      size: totalUploaded,
-    }
-  }
+        return {
+          key: uploadInfo.key,
+          name: file.name,
+          mimeType: file.type,
+          size: totalUploaded,
+        }
+      } catch (error) {
+        if (error instanceof CanceledError) {
+          return {
+            error: "L'envoi du fichier a été annulé.",
+            reason: 'canceled',
+          }
+        }
+        Sentry.captureException(error)
+        return {
+          error:
+            "Une erreur est survenue lors de l'envoi du fichier. Veuillez réessayer.",
+          reason: 'uploadRequest',
+        }
+      } finally {
+        setUploading(false)
+        progressEmitterRef.current.emit('progress', null)
+      }
+    },
+    [abort, generateUploadUrl, progressEmitterRef, setUploading],
+  )
 
   return {
-    error: uploadError ?? generateUploadUrl.error?.message ?? null,
     uploading,
+    abort,
+    reset,
     upload,
+    filename,
+    progressEmitter: progressEmitterRef.current,
   }
 }
+
+export type UseFileUploadReturn = ReturnType<typeof useFileUpload>

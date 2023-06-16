@@ -79,3 +79,6 @@ export const fileValidation = ({
 
   return validation
 }
+
+export const optionalFileValidation = (options: FileValidationOptions) =>
+  fileValidation(options).nullish()

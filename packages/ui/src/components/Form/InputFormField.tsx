@@ -13,6 +13,7 @@ type CommonProps<T extends FieldValues> = {
   placeholder?: string
   valid?: string
   icon?: string
+  error?: string
   info?: string | ((value?: string | null) => string)
 }
 
@@ -43,6 +44,7 @@ const InputFormField = <T extends FieldValues>({
   valid,
   icon,
   info,
+  error: errorProp,
   ...rest
 }: UiComponentProps & InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`
@@ -119,12 +121,12 @@ const InputFormField = <T extends FieldValues>({
                 {typeof info === 'string' ? info : info(value)}
               </p>
             )}
-            {error && (
+            {(error || errorProp) && (
               <p
                 id={`${id}__error`}
                 className={classNames('fr-error-text', { 'fr-mt-1v': !!info })}
               >
-                {error.message}
+                {error?.message || errorProp || null}
               </p>
             )}
             {valid && isTouched && !invalid && (

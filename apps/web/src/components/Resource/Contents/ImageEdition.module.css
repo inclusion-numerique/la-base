@@ -1,0 +1,33 @@
+.imageContainer {
+    border: var(--slim-grey-border);
+}
+
+.inputContainer {
+    margin-top: 16px;
+
+    /* Top padding is from image info container */
+    padding: 0 24px 20px;
+
+    @media (min-width: 768px) {
+        padding: 0 32px 24px;
+    }
+}
+
+.imagePreview {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 16px;
+}
+
+.imageInfoContainer {
+    margin-top: 0;
+
+    /* Bottom padding is from inputContainer */
+    padding: 20px 24px 0;
+
+    @media (min-width: 768px) {
+        padding: 24px 32px 0;
+    }
+}

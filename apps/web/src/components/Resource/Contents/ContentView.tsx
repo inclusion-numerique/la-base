@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import ImageView from '@app/web/components/Resource/Contents/ImageView'
 import FileView from '@app/web/components/Resource/Contents/FileView'
 import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -10,7 +11,7 @@ const ContentView = ({
 }: {
   content: ContentProjectionWithContext
 }) => {
-  const { type, image, file } = content
+  const { type, image, file, id } = content
   switch (type) {
     case 'Text': {
       return <TextView content={content} />
@@ -23,13 +24,23 @@ const ContentView = ({
     }
     case 'Image': {
       if (!image) {
-        throw new Error('Image content has no image')
+        Sentry.captureException(new Error('Image content has no image'), {
+          extra: {
+            contentId: id,
+          },
+        })
+        return null
       }
       return <ImageView content={{ ...content, image }} />
     }
     case 'File': {
       if (!file) {
-        throw new Error('File content has no file')
+        Sentry.captureException(new Error('File content has no file'), {
+          extra: {
+            contentId: id,
+          },
+        })
+        return null
       }
       return <FileView content={{ ...content, file }} />
     }

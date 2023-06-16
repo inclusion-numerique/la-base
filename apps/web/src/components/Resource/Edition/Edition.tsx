@@ -102,7 +102,9 @@ const Edition = ({
           isPublic: true,
         },
       })
-      router.push(`/ressources/${result.resource.slug}`)
+      router.push(`/ressources/${result.resource.slug}`, {
+        unstable_skipClientCache: true,
+      })
     } catch (error) {
       console.error('Could not publish resource', error)
       // TODO Have a nice error and handle edge cases server side

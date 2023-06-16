@@ -10,13 +10,3 @@
         padding: 24px 32px;
     }
 }
-
-.name {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-}
-
-.icon {
-    color: var(--blue-france-sun-113-625)
-}

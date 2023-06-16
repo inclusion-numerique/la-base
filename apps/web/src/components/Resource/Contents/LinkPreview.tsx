@@ -21,9 +21,18 @@ const LinkPreview = ({
     <div className={styles.contents} data-testid="link-preview">
       {(!!title || !!description) && (
         <div className={styles.titleAndDescription}>
-          {!!title && <p className="fr-text--bold">{title}</p>}
+          {!!title && (
+            <p className={classNames('fr-text--bold', styles.title)}>{title}</p>
+          )}
           {!!description && (
-            <p className="fr-hint-text fr-mt-2v">{description}</p>
+            <p
+              className={classNames(
+                'fr-hint-text fr-mt-2v',
+                styles.description,
+              )}
+            >
+              {description}
+            </p>
           )}
         </div>
       )}

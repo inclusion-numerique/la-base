@@ -13,11 +13,12 @@ export const Default: Story = {
   args: {
     content: {
       title: 'Titre de l’image',
+      imageAltText: 'Image de paysage',
       image: {
         id: 'paysage.webp',
         width: 3156,
         height: 1476,
-        altText: 'Image de paysage',
+        altText: '',
         upload: {
           name: 'paysage.webp',
           key: 'image-key',
@@ -34,11 +35,12 @@ export const MobileDefault: Story = {
   args: {
     content: {
       title: 'Titre de l’image',
+      imageAltText: 'Image de paysage',
       image: {
         id: 'portrait.webp',
         width: 1920,
         height: 2880,
-        altText: 'Image de paysage',
+        altText: '',
         upload: {
           name: 'portrait.webp',
           key: 'image-key',

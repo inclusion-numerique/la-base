@@ -41,6 +41,7 @@ export const transformContent = ({
     legacySectionId: null,
     caption: null,
     imageId: null,
+    imageAltText: null,
     fileKey: null,
     showPreview: null,
     url: null,

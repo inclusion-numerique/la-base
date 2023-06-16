@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { mobileStory } from '@app/storybook/storyHelper'
 import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
 
 const meta: Meta<typeof SignupPanel> = {
@@ -12,10 +13,5 @@ type Story = StoryObj<typeof SignupPanel>
 
 export const Desktop: Story = {}
 export const Mobile: Story = {
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
+  parameters: mobileStory,
 }

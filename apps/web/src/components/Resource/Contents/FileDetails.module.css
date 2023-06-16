@@ -1,0 +1,47 @@
+.container {
+display: flex;
+align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+}
+
+.name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.icon {
+    color: var(--blue-france-sun-113-625)
+}
+
+.nameAndSize{
+    display: flex;
+    align-items: center;
+
+    /* no min width to force ellipsis */
+    min-width: 0;
+}
+
+.actions {
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.externalLinkWithIcon {
+    /* Disable open in new window icon */
+    @media (max-width: 767px) {
+        &::before {
+            content: '' !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        &::after {
+            mask-image: url("/dsfr/icons/system/eye-line.svg") !important;
+        }
+    }
+}

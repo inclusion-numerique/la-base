@@ -4,9 +4,13 @@
     display: flex;
     padding: 0;
     flex-direction: column-reverse;
+    justify-content: stretch;
+    overflow: hidden;
 
     @media (min-width: 576px) {
         flex-direction: row;
+        justify-content: space-between;
+        max-height: 112px;
     }
 
     &::after {
@@ -24,19 +28,14 @@
 .contents {
     padding: 16px;
     display: flex;
-    flex-grow: 1;
-    width: 100%;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 0;
 
     p {
         font-size: 12px;
         line-height: 16px;
         margin-bottom: 0;
-    }
-
-    @media (min-width: 576px) {
-        width: calc(100% - 200px);
     }
 }
 
@@ -56,6 +55,21 @@
     margin: 0;
 }
 
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+}
+
+.description {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .url {
     color: var(--blue-france-sun-113-625);
     text-decoration: underline;
@@ -66,7 +80,6 @@
 }
 
 .imageContainer {
-    width: 100%;
     background: var(--background-contrast-info);
     display: block;
     overflow:hidden;
@@ -74,7 +87,7 @@
     flex-shrink: 0;
 
     @media (min-width: 576px) {
-        width: 200px;
+        height: 112px;
     }
 }
 

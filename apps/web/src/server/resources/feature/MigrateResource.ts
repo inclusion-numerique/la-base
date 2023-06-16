@@ -25,6 +25,7 @@ export const MigrateResourceCommandValidation = z.object({
         title: z.string().nullable(),
         caption: z.string().nullable(),
         imageId: z.string().uuid().nullable(),
+        imageAltText: z.string().nullable(),
         fileKey: z.string().nullable(),
         showPreview: z.boolean().nullable(),
         url: z.string().nullable(),
@@ -70,6 +71,7 @@ export type ResourceMigratedDataV1 = {
     title: string | null
     caption: string | null
     imageId: string | null
+    imageAltText: string | null
     fileKey: string | null
     showPreview: boolean | null
     url: string | null

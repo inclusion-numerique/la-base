@@ -1,0 +1,16 @@
+.fileContainer {
+    border: var(--slim-grey-border);
+    padding: 20px 24px;
+
+    @media (min-width: 768px) {
+        padding: 24px 32px;
+    }
+}
+
+.filePreview {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 16px;
+}

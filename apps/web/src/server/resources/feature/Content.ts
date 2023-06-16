@@ -1,8 +1,8 @@
 import sanitizeHtml from 'sanitize-html'
 import z from 'zod'
 import {
-  linkCaptionMaxLength,
-  linkTitleMaxLength,
+  contentCaptionMaxLength,
+  contentTitleMaxLength,
   resourceSectionTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 
@@ -22,7 +22,7 @@ export const contentEditionValues = {
     .transform((text) => sanitizeHtml(text)),
 }
 
-const SectionTitlePayloadCommandValidation = z.object({
+export const SectionTitlePayloadCommandValidation = z.object({
   type: z.literal('SectionTitle'),
   title: contentEditionValues.title,
 })
@@ -30,26 +30,54 @@ export type SectionTitlePayload = z.infer<
   typeof SectionTitlePayloadCommandValidation
 >
 
-const TextPayloadCommandValidation = z.object({
+export const TextPayloadCommandValidation = z.object({
   type: z.literal('Text'),
   text: contentEditionValues.text,
 })
 export type TextPayload = z.infer<typeof TextPayloadCommandValidation>
 
-const ImagePayloadCommandValidation = z.object({
+export const ImagePayloadCommandValidation = z.object({
   type: z.literal('Image'),
+  imageId: z
+    .string({ required_error: 'Veuillez choisir une image' })
+    .uuid()
+    .nonempty('Veuillez choisir une image'),
+  title: z
+    .string({ required_error: 'Veuillez renseigner le titre' })
+    .trim()
+    .nonempty('Veuillez renseigner le titre')
+    .max(
+      contentTitleMaxLength,
+      `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
+    ),
+  imageAltText: z
+    .string()
+    .trim()
+    .max(
+      contentCaptionMaxLength,
+      `Le texte alternatif ne doit pas dépasser ${contentCaptionMaxLength} caractères`,
+    )
+    .nullish(),
+  caption: z
+    .string()
+    .trim()
+    .max(
+      contentCaptionMaxLength,
+      `La légende ne doit pas dépasser ${contentCaptionMaxLength} caractères`,
+    )
+    .nullish(),
 })
 export type ImagePayload = z.infer<typeof ImagePayloadCommandValidation>
 
-const LinkPayloadCommandValidation = z.object({
+export const LinkPayloadCommandValidation = z.object({
   type: z.literal('Link'),
   title: z
     .string({ required_error: 'Veuillez renseigner le titre' })
     .trim()
     .nonempty('Veuillez renseigner le titre')
     .max(
-      linkTitleMaxLength,
-      `Le titre ne doit pas dépasser ${linkTitleMaxLength} caractères`,
+      contentTitleMaxLength,
+      `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
     ),
   url: z
     .string({ required_error: "Veuillez renseigner l'URL" })
@@ -60,8 +88,8 @@ const LinkPayloadCommandValidation = z.object({
     .string({ required_error: 'Veuillez renseigner la légende' })
     .trim()
     .max(
-      linkCaptionMaxLength,
-      `La légende ne doit pas dépasser ${linkCaptionMaxLength} caractères`,
+      contentCaptionMaxLength,
+      `La légende ne doit pas dépasser ${contentCaptionMaxLength} caractères`,
     )
     .nullish(),
   showPreview: z.boolean().optional(),
@@ -72,8 +100,27 @@ const LinkPayloadCommandValidation = z.object({
 })
 export type LinkPayload = z.infer<typeof LinkPayloadCommandValidation>
 
-const FilePayloadCommandValidation = z.object({
+export const FilePayloadCommandValidation = z.object({
   type: z.literal('File'),
+  fileKey: z
+    .string({ required_error: 'Veuillez choisir un fichier' })
+    .nonempty('Veuillez choisir un fichier'),
+  title: z
+    .string({ required_error: 'Veuillez renseigner le titre' })
+    .trim()
+    .nonempty('Veuillez renseigner le titre')
+    .max(
+      contentTitleMaxLength,
+      `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
+    ),
+  caption: z
+    .string({ required_error: 'Veuillez renseigner la légende' })
+    .trim()
+    .max(
+      contentCaptionMaxLength,
+      `La légende ne doit pas dépasser ${contentCaptionMaxLength} caractères`,
+    )
+    .nullish(),
 })
 export type FilePayload = z.infer<typeof FilePayloadCommandValidation>
 

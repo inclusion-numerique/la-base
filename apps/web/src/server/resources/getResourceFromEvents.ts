@@ -106,6 +106,16 @@ export type ResourceProjectionWithContext = Awaited<
 export type ContentProjectionWithContext =
   ResourceProjectionWithContext['contents'][number]
 
+export type ContentProjectionWithContextImage = Exclude<
+  ContentProjectionWithContext['image'],
+  null
+>
+
+export type ContentProjectionWithContextFile = Exclude<
+  ContentProjectionWithContext['file'],
+  null
+>
+
 export const getResourceProjectionWithContext = async (
   where: { slug: string } | { id: string },
 ): Promise<ResourceProjectionWithContext | null> => {

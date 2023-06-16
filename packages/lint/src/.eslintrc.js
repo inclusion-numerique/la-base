@@ -155,6 +155,8 @@ module.exports = {
           'error',
           {
             allowList: {
+              prop: true,
+              Prop: true,
               Props: true,
               props: true,
               args: true,

@@ -1,5 +1,8 @@
+.container {
+    width: 100%;
+}
+
 .imageContainer {
-    margin-top: 16px;
     width: 100%;
     background: var(--background-contrast-info);
     display: block;
@@ -11,11 +14,13 @@
 }
 
 
-
-.imageFileContainer {
+.infoContainer {
+    margin-top: 16px;
     display: flex;
     align-items: center;
-    margin-top: 16px;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
 }
 
 .name {
@@ -28,11 +33,11 @@
     color: var(--text-default-grey)
 }
 
-.fullScreenLink{
+.fullScreenLink {
     background-image: none !important;
     padding: 4px 12px;
 
-    &::after{
+    &::after {
         content: none !important;
     }
 
@@ -41,8 +46,24 @@
     }
 
     img {
-     vertical-align: top;
+        vertical-align: top;
         margin-top: 4px;
         height: 16px;
     }
+}
+
+
+.nameAndSize {
+    display: flex;
+    align-items: center;
+
+    /* no min width to force ellipsis */
+    min-width: 0;
+}
+
+.actions {
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }

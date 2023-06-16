@@ -16,10 +16,12 @@ export type ContentAddedV1 = {
   __version: 1
   id: string
   type: ContentType
-  // TODO add the other content types
   title?: string
   text?: string
   caption?: string | null
+  imageId?: string | null
+  imageAltText?: string | null
+  fileKey?: string | null
   url?: string
   showPreview?: boolean
   linkDescription?: string | null

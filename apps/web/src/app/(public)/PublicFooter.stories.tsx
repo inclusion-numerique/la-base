@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import PublicFooter from '@app/web/app/(public)/PublicFooter'
 
 export default {
@@ -10,10 +11,5 @@ type Story = StoryObj<typeof PublicFooter>
 
 export const Desktop: Story = {}
 export const Mobile: Story = {
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
+  parameters: mobileStoryParameters,
 }

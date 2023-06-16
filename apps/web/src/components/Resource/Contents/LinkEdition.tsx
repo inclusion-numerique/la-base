@@ -4,24 +4,24 @@ import { UseFormReturn } from 'react-hook-form'
 import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import {
-  linkCaptionMaxLength,
-  linkTitleMaxLength,
+  contentCaptionMaxLength,
+  contentTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { ContentPayload } from '@app/web/server/resources/feature/Content'
 import { Metadata } from '@app/web/server/rpc/metadata/getMetadataFromDocument'
 import DynamicLinkEditionPreview from '@app/web/components/Resource/Contents/DynamicLinkEditionPreview'
+import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 
 const titleInfo = (title?: string | null) =>
-  `${title?.length ?? 0}/${linkTitleMaxLength} caractères`
+  `${title?.length ?? 0}/${contentTitleMaxLength} caractères`
 
 const captionInfo = (caption?: string | null) =>
-  `${caption?.length ?? 0}/${linkCaptionMaxLength} caractères`
+  `${caption?.length ?? 0}/${contentCaptionMaxLength} caractères`
 
 const LinkEdition = ({
   form: { watch, setValue, getFieldState, control },
 }: {
-  form: UseFormReturn<ContentPayload>
+  form: UseFormReturn<ClientContentPayload>
 }) => {
   const showPreview = watch('showPreview')
   const url = watch('url')

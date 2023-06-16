@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { ComponentProps } from 'react'
+import { ResourcesListWrapper } from '@app/storybook/components/ResourcesListWrapper'
+import { mobileStory } from '@app/storybook/storyHelper'
 import { testSessionUser } from '@app/web/test/testSessionUser'
+import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import Card from './Card'
 
 const resource = {
@@ -27,25 +30,36 @@ export default {
 
 type Story = StoryObj<typeof Card>
 
-export const Default: Story = {
-  name: 'Ressource',
+const Template = (props: ComponentProps<typeof Card>) => (
+  <ResourcesListWrapper>
+    <Card {...props} />
+  </ResourcesListWrapper>
+)
+
+const render = (props: ComponentProps<typeof Card>) => <Template {...props} />
+
+export const SansImage: Story = {
   args: {
     resource,
   },
+  render,
 }
 
-export const WithImage: Story = {
-  name: 'Ressource avec image',
+export const SansImageMobile = mobileStory(SansImage)
+
+export const AvecImage: Story = {
   args: {
     resource: {
       ...resource,
       image: { id: 'portrait.webp', altText: 'Texte alternatif' },
     },
   },
+  render,
 }
 
-export const WithImageConnected: Story = {
-  name: 'Ressource utilisateur connecté avec image',
+export const AvecImageMobile = mobileStory(AvecImage)
+
+export const UtilisateurConnectéAvecImage: Story = {
   args: {
     resource: {
       ...resource,
@@ -53,41 +67,19 @@ export const WithImageConnected: Story = {
     },
     user: testSessionUser,
   },
+  render,
 }
+export const UtilisateurConnectéAvecImageMobile = mobileStory(
+  UtilisateurConnectéAvecImage,
+)
 
-export const WithoutImageConnected: Story = {
-  name: 'Ressource utilisateur connecté',
+export const UtilisateurConnectéSansImage: Story = {
   args: {
     resource,
     user: testSessionUser,
   },
+  render,
 }
-
-export const DefaultMobile: Story = {
-  name: 'Mobile - Ressource',
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
-  args: {
-    resource,
-  },
-}
-
-export const WithImageMobile: Story = {
-  name: 'Mobile - Ressource avec image',
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
-  args: {
-    resource: {
-      ...resource,
-      image: { id: 'paysage.webp', altText: 'Texte alternatif' },
-    },
-  },
-}
+export const UtilisateurConnectéSansImageMobile = mobileStory(
+  UtilisateurConnectéSansImage,
+)

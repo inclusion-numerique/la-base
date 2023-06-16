@@ -1,0 +1,60 @@
+.progressSection {
+    width: 100%;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.inputSection {
+    position: relative;
+    width: 100%;
+
+    >div:not(:last-child) {
+        input {
+            /* Space for the delete button if present */
+            padding-right: 32px;
+        }
+    }
+
+    >button:last-child {
+        /* Place the delete button absolute to keep space for labels */
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    :global(.fr-upload-group) {
+        :global(.fr-hint-text) {
+            margin-top: 8px;
+        }
+
+        :global(.fr-upload){
+            margin-top: 16px;
+        }
+    }
+
+}
+
+.progressContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+
+    }
+}
+
+.progressFooter {
+display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (min-width: 768px) {
+        padding-left: 16px;
+
+    }
+}
