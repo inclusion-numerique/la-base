@@ -45,11 +45,11 @@ export const ImagePayloadCommandValidation = z.object({
   title: z
     .string({ required_error: 'Veuillez renseigner le titre' })
     .trim()
-    .nonempty('Veuillez renseigner le titre')
     .max(
       contentTitleMaxLength,
       `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
-    ),
+    )
+    .nullish(),
   imageAltText: z
     .string()
     .trim()
@@ -74,11 +74,11 @@ export const LinkPayloadCommandValidation = z.object({
   title: z
     .string({ required_error: 'Veuillez renseigner le titre' })
     .trim()
-    .nonempty('Veuillez renseigner le titre')
     .max(
       contentTitleMaxLength,
       `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
-    ),
+    )
+    .nullish(),
   url: z
     .string({ required_error: "Veuillez renseigner l'URL" })
     .trim()
@@ -108,11 +108,11 @@ export const FilePayloadCommandValidation = z.object({
   title: z
     .string({ required_error: 'Veuillez renseigner le titre' })
     .trim()
-    .nonempty('Veuillez renseigner le titre')
     .max(
       contentTitleMaxLength,
       `Le titre ne doit pas dépasser ${contentTitleMaxLength} caractères`,
-    ),
+    )
+    .nullish(),
   caption: z
     .string({ required_error: 'Veuillez renseigner la légende' })
     .trim()

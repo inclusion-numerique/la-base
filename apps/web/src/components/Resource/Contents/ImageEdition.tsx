@@ -36,7 +36,7 @@ const ImageEdition = ({
   content,
 }: {
   form: UseFormReturn<ClientContentPayload & { type: 'Image' }>
-  content?: ContentProjectionWithContext
+  content?: Pick<ContentProjectionWithContext, 'image' | 'imageAltText'>
 }) => {
   const imageUploadValue = watch('imageUploadFile')
 

@@ -1,4 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { ComponentProps } from 'react'
+import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import SectionTitleView from './SectionTitleView'
 
 export default {
@@ -8,8 +10,19 @@ export default {
 
 type Story = StoryObj<typeof SectionTitleView>
 
+const Template = (props: ComponentProps<typeof SectionTitleView>) => (
+  <ResourceWrapper>
+    <SectionTitleView {...props} />
+  </ResourceWrapper>
+)
+
+const render = (props: ComponentProps<typeof SectionTitleView>) => (
+  <Template {...props} />
+)
+
 export const Default: Story = {
-  name: 'View',
+  name: 'Desktop',
+  render,
   args: {
     content: { title: 'Titre de la section' },
   },

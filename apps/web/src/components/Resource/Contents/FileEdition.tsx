@@ -33,7 +33,7 @@ const FileEdition = ({
   content,
 }: {
   form: UseFormReturn<ClientContentPayload & { type: 'File' }>
-  content?: ContentProjectionWithContext
+  content?: Pick<ContentProjectionWithContext, 'file'>
 }) => {
   const uploadFileValue = watch('uploadFile')
   const fileKeyError = errors.fileKey?.message

@@ -19,7 +19,7 @@ const SectionTitleEdition = ({
       path="title"
       label="Titre de la section"
       hint="Les titres de sections permettent de créer des ancres afin que les visiteurs se rendent directement sur une position précise de votre ressource."
-      info={titleInfo(title)}
+      info={titleInfo(title ?? '')}
     />
   )
 }

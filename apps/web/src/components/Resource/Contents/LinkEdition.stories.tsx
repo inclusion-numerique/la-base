@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Meta, StoryObj } from '@storybook/react'
+import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
+import { mobileStory } from '@app/storybook/storyHelper'
 import { EditContentCommandValidation } from '@app/web/server/resources/feature/EditContent'
 import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 import LinkEdition from './LinkEdition'
@@ -23,13 +25,16 @@ const Template = () => {
   })
 
   return (
-    <form>
-      <LinkEdition form={form} />
-    </form>
+    <ResourceWrapper>
+      <form>
+        <LinkEdition form={form} />
+      </form>
+    </ResourceWrapper>
   )
 }
 
-export const Default: Story = {
-  name: 'Edition',
+export const Desktop: Story = {
   render: () => <Template />,
 }
+
+export const Mobile = mobileStory(Desktop)

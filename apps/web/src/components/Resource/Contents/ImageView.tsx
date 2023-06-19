@@ -10,14 +10,12 @@ const ImageView = ({
   }
 }) => (
   <div data-testid="content-image">
-    <h6 data-testid="content-image-title" className="fr-mb-0">
-      {title}
-    </h6>
-    <ImageDetails
-      className="fr-mt-4v"
-      image={image}
-      imageAltText={imageAltText}
-    />
+    {!!title && (
+      <h6 data-testid="content-image-title" className="fr-mb-4v">
+        {title}
+      </h6>
+    )}
+    <ImageDetails image={image} imageAltText={imageAltText} />
     {!!caption && <p className="fr-mb-0 fr-mt-4v fr-text--sm">{caption}</p>}
   </div>
 )

@@ -16,7 +16,7 @@ export type ContentAddedV1 = {
   __version: 1
   id: string
   type: ContentType
-  title?: string
+  title?: string | null
   text?: string
   caption?: string | null
   imageId?: string | null
