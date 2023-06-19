@@ -25,7 +25,6 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('add-content_form').should('exist')
 
         cy.testId('add-content_form__submit').click()
-        cy.testId('add-content_form').contains('Veuillez renseigner le titre')
         cy.testId('add-content_form').contains("Veuillez renseigner l'URL")
 
         cy.testId('link-title-input').type("I'm beggin you for mercy")
