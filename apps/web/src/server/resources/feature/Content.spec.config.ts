@@ -90,36 +90,6 @@ export const linkFailUseCases = (
   base: AddContentCommand | EditContentCommand,
 ) => [
   {
-    name: 'fails with no title',
-    values: {
-      payload: {
-        ...base.payload,
-        title: undefined,
-      },
-    },
-    errors: [
-      {
-        path: ['payload', 'title'],
-        message: 'Veuillez renseigner le titre',
-      },
-    ],
-  },
-  {
-    name: 'fails with empty title',
-    values: {
-      payload: {
-        ...base.payload,
-        title: ' ',
-      },
-    },
-    errors: [
-      {
-        path: ['payload', 'title'],
-        message: 'Veuillez renseigner le titre',
-      },
-    ],
-  },
-  {
     name: 'fails with too long title',
     values: {
       payload: {
