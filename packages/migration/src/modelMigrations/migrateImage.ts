@@ -10,7 +10,13 @@ export const getLegacyImages = async () => {
   // But also in the main_filecontent table (not resized images)
   // for image file types (marked with with_preview = true in the main_filecontent table)
   const resizableImages =
-    await migrationPrismaClient.main_resizableimage.findMany()
+    await migrationPrismaClient.main_resizableimage.findMany({
+      where: {
+        image: {
+          not: '',
+        },
+      },
+    })
   const fileContentImages =
     await migrationPrismaClient.main_filecontent.findMany({
       where: {
