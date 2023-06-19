@@ -17,6 +17,5 @@ export const mobileStory = <T>(story: StoryObj<T>): StoryObj<T> => {
   return {
     ...story,
     parameters: mobileStoryParams,
-    name: `${story.name ?? 'Composant'} - Mobile`,
   }
 }
