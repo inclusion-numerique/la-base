@@ -1,4 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { ComponentProps } from 'react'
+import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
+import { mobileStory } from '@app/storybook/storyHelper'
 import FileView from './FileView'
 
 export default {
@@ -8,13 +11,23 @@ export default {
 
 type Story = StoryObj<typeof FileView>
 
-export const Default: Story = {
-  name: 'Desktop',
+const Template = (props: ComponentProps<typeof FileView>) => (
+  <ResourceWrapper>
+    <FileView {...props} />
+  </ResourceWrapper>
+)
+
+const render = (props: ComponentProps<typeof FileView>) => (
+  <Template {...props} />
+)
+
+export const Desktop: Story = {
+  render,
   args: {
     content: {
       title: 'Titre du fichier',
       file: {
-        name: 'PDF68.pdf',
+        name: 'PDF68_version-longue.pdf',
         size: 73_000,
         key: 'file-key',
         mimeType: 'application/pdf',
@@ -25,25 +38,4 @@ export const Default: Story = {
   },
 }
 
-export const MobileDefault: Story = {
-  name: 'Mobile',
-  args: {
-    content: {
-      title: 'Titre du fichier',
-      file: {
-        name: 'PDF68.pdf',
-        size: 73_000,
-        key: 'file-key',
-        mimeType: 'application/pdf',
-      },
-      caption:
-        'Cras gravida dolor volutpat orci eleifend, sit amet lacinia mi egestas. Vivamus non lorem vitae justo rhoncus tincidunt. Nulla pulvinar nisi vitae odio elementum, nec sollicitudin dui dapibus.',
-    },
-  },
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
-}
+export const Mobile = mobileStory(Desktop)

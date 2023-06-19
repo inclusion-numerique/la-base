@@ -1,4 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { ComponentProps } from 'react'
+import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
+import { mobileStory } from '@app/storybook/storyHelper'
 import ImageView from './ImageView'
 
 export default {
@@ -8,8 +11,18 @@ export default {
 
 type Story = StoryObj<typeof ImageView>
 
-export const Default: Story = {
-  name: 'Desktop',
+const Template = (props: ComponentProps<typeof ImageView>) => (
+  <ResourceWrapper>
+    <ImageView {...props} />
+  </ResourceWrapper>
+)
+
+const render = (props: ComponentProps<typeof ImageView>) => (
+  <Template {...props} />
+)
+
+export const Paysage: Story = {
+  render,
   args: {
     content: {
       title: 'Titre de l’image',
@@ -30,8 +43,10 @@ export const Default: Story = {
   },
 }
 
-export const MobileDefault: Story = {
-  name: 'Mobile',
+export const PaysageMobile = mobileStory(Paysage)
+
+export const Portrait: Story = {
+  render,
   args: {
     content: {
       title: 'Titre de l’image',
@@ -50,10 +65,6 @@ export const MobileDefault: Story = {
         'Cras gravida dolor volutpat orci eleifend, sit amet lacinia mi egestas. Vivamus non lorem vitae justo rhoncus tincidunt. Nulla pulvinar nisi vitae odio elementum, nec sollicitudin dui dapibus.',
     },
   },
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-  },
 }
+
+export const PortraitMobile = mobileStory(Portrait)

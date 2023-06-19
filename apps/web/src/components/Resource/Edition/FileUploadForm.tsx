@@ -64,7 +64,7 @@ const FileUploadForm = <T extends FieldValues>({
         <div className={styles.progressContainer}>
           <ProgressBar progress={progress} />
           <div className={styles.progressFooter}>
-            <p className="fr-text--sm">{progress || 24}%</p>
+            <p className="fr-text--sm">{progress}%</p>
             <Button
               iconId="fr-icon-close-circle-line"
               size="small"

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ComponentProps } from 'react'
+import { mobileStory } from '@app/storybook/storyHelper'
 import View from '@app/web/components/Resource/View/View'
 import type {
   Resource,
@@ -105,54 +106,25 @@ export default {
 
 type Story = StoryObj<typeof View>
 
-export const Default: Story = {
-  name: 'Défaut',
+export const AvecImage: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource('paysage.webp'),
   },
 }
 
-export const DefaultMobile: Story = {
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-    layout: 'fullscreen',
-  },
-  name: 'Défaut mobile',
-  render: (args) => <Template {...args} />,
-  args: {
-    resource: resource('paysage.webp'),
-  },
-}
+export const AvecImageMobile = mobileStory(AvecImage)
 
-export const WithoutImage: Story = {
-  name: 'Sans image',
+export const SansImage: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource(null),
   },
 }
 
-export const WithoutImageMobile: Story = {
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-    layout: 'fullscreen',
-  },
-  name: 'Sans image mobile',
-  render: (args) => <Template {...args} />,
-  args: {
-    resource: resource(null),
-  },
-}
+export const SansImageMobile = mobileStory(SansImage)
 
-export const ConnectedUser: Story = {
-  name: 'Utilisateur connecté',
+export const UtilisateurConnecté: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource('portrait.webp'),
@@ -160,18 +132,4 @@ export const ConnectedUser: Story = {
   },
 }
 
-export const ConnectedUserMobile: Story = {
-  parameters: {
-    chromatic: { viewports: [320, 568] },
-    viewport: {
-      defaultViewport: 'mobile1',
-    },
-    layout: 'fullscreen',
-  },
-  name: 'Utilisateur connecté mobile',
-  render: (args) => <Template {...args} />,
-  args: {
-    resource: resource('portrait.webp'),
-    user: testSessionUser,
-  },
-}
+export const UtilisateurConnectéMobile = mobileStory(UtilisateurConnecté)

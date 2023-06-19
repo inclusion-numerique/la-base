@@ -6,7 +6,8 @@ import React, { PropsWithChildren } from 'react'
 export const ResourcesListWrapper = ({ children }: PropsWithChildren) => (
   <div
     style={{
-      maxWidth: 792,
+      maxWidth: 792 + 32,
+      padding: 16,
       margin: '0 auto',
     }}
   >

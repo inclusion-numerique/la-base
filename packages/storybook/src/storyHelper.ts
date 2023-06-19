@@ -2,6 +2,7 @@ import { StoryObj } from '@storybook/react'
 
 export const mobileStoryParameters = {
   chromatic: { viewports: [320, 568] },
+  layout: 'fullscreen',
   viewport: {
     defaultViewport: 'mobile1',
   },
