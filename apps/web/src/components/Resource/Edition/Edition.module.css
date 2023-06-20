@@ -36,6 +36,7 @@
 
 .contentHoverableAction{
   opacity: 0;
+  transition: opacity 200ms ease-in-out;
   pointer-events: none;
 }
 
@@ -45,6 +46,7 @@
   pointer-events: none;
   cursor: grab;
   top: 12px;
+  transition: opacity 200ms ease-in-out;
 
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
