@@ -8,13 +8,6 @@ const TextEdition = ({
   form,
 }: {
   form: UseFormReturn<ClientContentPayload>
-}) => (
-  <RichInputFormField
-    data-testid="text-input"
-    form={form}
-    path="text"
-    label="Tapez votre texte"
-  />
-)
+}) => <RichInputFormField data-testid="text-input" form={form} path="text" />
 
 export default TextEdition

@@ -30,6 +30,7 @@ const ContentEdition = ({
   onDelete: () => void | Promise<void>
 }) => {
   const editionMode = editing === content.id
+  console.log('EDITING', editing)
 
   if (!editionMode) {
     return (

@@ -62,6 +62,7 @@ const ContentForm = ({
   } = form
 
   const onSubmit = async (data: ClientContentPayload) => {
+    console.log('ON SUBMIT OF CONTENT FORM', data, { isDirty })
     if (!isDirty) {
       // No change
       setEditing(null)

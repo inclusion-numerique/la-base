@@ -85,7 +85,7 @@ textarea {
   }
 }
 
-.fr-input-group:not(:last-child), .fr-select-group:not(:last-child) {
+.fr-input-group, .fr-select-group {
   margin-bottom: 16px;
 }
 

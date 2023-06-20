@@ -1,26 +1,51 @@
-.buttons {
-  display: flex;
+
+
+.menuBar {
+  --menu-size: 32px;
+  --menu-size-lg: 40px;
   background-color: var(--background-contrast-grey);
-  padding: 0px 24px;
-  border-bottom: var(--slim-grey-border);
+  box-shadow: inset 0 -1px 0 var(--border-default-grey);
+  display: flex;
+  height: var(--menu-size);
+  @media (min-width: 576px) {
+    height: var(--menu-size-lg);
+  }
 }
 
-.button,
-.iconButton {
-  padding-top: 6px;
-  &:hover {
-    background-color: var(--background-contrast-grey-hover) !important;
+.button {
+  display: inline-block;
+  width: var(--menu-size);
+  height: var(--menu-size);
+  outline-offset: 0 !important;
+  &:hover&:not(.active) {
+    background-color: var(--grey-975-75-hover) !important;
   }
   &:active {
-    background-color: var(--background-contrast-grey-active) !important;
+    /*background-color: var(--grey-950-100-active) !important;*/
+  }
+  &::before {
+    width: 16px;
+    height: 16px;
+    vertical-align: -4px;
+  }
+  @media (min-width: 576px) {
+    width: var(--menu-size-lg);
+    height: var(--menu-size-lg);
+    &::before {
+      width: 20px;
+      height: 20px;
+      vertical-align: -7px;
+    }
   }
 }
 
 .active {
-  background-color: var(--background-contrast-grey-active) !important;
+  background-color: var(--grey-950-100-active) !important;
 }
 
 .separator {
-  border: 1px solid #929292;
-  margin: 4px;
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  background: var(--border-default-grey);
 }
