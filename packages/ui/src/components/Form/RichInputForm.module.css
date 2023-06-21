@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .input {
   background-color: var(--background-contrast-grey);
 

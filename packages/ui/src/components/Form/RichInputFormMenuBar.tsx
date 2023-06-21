@@ -1,10 +1,12 @@
 import classNames from 'classnames'
 import React, { MouseEventHandler, useState } from 'react'
 import { Editor } from '@tiptap/react'
-import RichInputLinkModalForm, {
-  RichInputLink,
-  RichInputLinkModal,
-} from '@app/ui/components/Form/RichInputLinkModalForm'
+import RichInputLinkModalForm from '@app/ui/components/Form/RichInputLinkModalForm'
+import {
+  EditLinkOptions,
+  isSelectionOkForLink,
+  linkCommandHandler,
+} from '@app/ui/components/Form/richInputLinkFeature'
 import styles from './RichInputFormMenuBar.module.css'
 
 const MenuButton = ({
@@ -41,128 +43,6 @@ const MenuButton = ({
     }}
   />
 )
-
-type EditLinkOptions = {
-  text?: string
-  url?: string
-  onSubmit: (data: RichInputLink) => void
-  onCancel?: () => void
-}
-
-const getSelectedText = ({ selection, doc }: Editor['view']['state']) => {
-  const textParts: string[] = []
-  if (selection.from === selection.to) {
-    return
-  }
-  doc.nodesBetween(selection.from, selection.to, (node, position) => {
-    // we only processing text, must be a selection
-    if (!node.isTextblock) {
-      return
-    }
-    // calculate the section to replace
-    // const startPosition = Math.max(position + 1, selection.from)
-    // const endPosition = Math.min(position + node.nodeSize, selection.to)
-
-    // grab the content
-    const substringFrom = Math.max(0, selection.from - position - 1)
-    const substringTo = Math.max(0, selection.to - position - 1)
-    const textPart = node.textContent.substring(substringFrom, substringTo)
-    textParts.push(textPart)
-
-    console.log('NODE AND PART', position, node.textContent, textPart)
-  })
-
-  return textParts.join(' ')
-}
-
-const linkCommandHandler =
-  (editor: Editor, setEditLink: (options: EditLinkOptions) => void) => () => {
-    const command = editor.chain().focus()
-    const { selection } = editor.state
-    const currentUrl = editor.getAttributes('link').href as string | undefined
-
-    const removeLink = () => command.unsetLink()
-    const setLinkUrl = (url: string) =>
-      command.extendMarkRange('link').setLink({
-        href: url,
-      })
-
-    if (currentUrl) {
-      // We are editing an existing link
-      // The text is the content of the link element
-      // The url is the already existing one
-      const currentText = selection.$head.parent.textContent
-
-      setEditLink({
-        url: currentUrl,
-        text: currentText,
-        onSubmit: (data) => {
-          // On save we update the link and the text content of the link element
-
-          RichInputLinkModal.close()
-          // We update text content
-          command.setContent(data.text)
-
-          if (data.url) {
-            setLinkUrl(data.url)
-          } else {
-            removeLink()
-          }
-
-          command.run()
-        },
-        onCancel: () => {
-          removeLink()
-          command.run()
-        },
-      })
-      RichInputLinkModal.open()
-
-      return
-    }
-
-    // On link creation, current text is from selection
-    const currentText = getSelectedText(editor.state)
-
-    // No link yet
-    setEditLink({
-      text: currentText,
-      url: undefined,
-      onSubmit: (data) => {
-        console.log('MODAL SUBMIT ADD', data)
-        RichInputLinkModal.close()
-
-        if (data.url) {
-          setLinkUrl(data.url)
-        }
-
-        // We replace the selected content with the form text
-        // This will flatten nodes (this is what we want) e.g. for bold stuff
-        command.insertContentAt(
-          {
-            from: selection.from,
-            to: selection.to,
-          },
-          data.text,
-        )
-
-        command.run()
-      },
-    })
-    RichInputLinkModal.open()
-  }
-
-// Cannot link multiple element of a list
-const isSelectionOkForLink = (editor: Editor) => {
-  const { selection } = editor.view.state
-  if (selection.empty) {
-    // Cannot create link without selected text
-    return false
-  }
-
-  // TODO Can only link if the selected content is not multiple items of a list
-  return true
-}
 
 const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
   const [editLink, setEditLink] = useState<EditLinkOptions>({
