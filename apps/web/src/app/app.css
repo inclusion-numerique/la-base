@@ -85,6 +85,17 @@ textarea {
   }
 }
 
+/* Fix notice padding right bug and add border radius */
+.fr-notice {
+  border-radius: 8px;
+}
+
+.fr-notice__body{
+  padding-right: 0;
+  display: flex;
+  align-items: center;
+}
+
 .fr-input-group, .fr-select-group {
   margin-bottom: 16px;
 }

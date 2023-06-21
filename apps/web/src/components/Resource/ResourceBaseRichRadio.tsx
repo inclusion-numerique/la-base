@@ -8,6 +8,7 @@ import {
   PathValue,
 } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
+import Notice from '@codegouvfr/react-dsfr/Notice'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   BasePrivacyTag,
@@ -93,25 +94,33 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
           id="radio-rich"
           aria-labelledby="radio-rich-legend radio-rich-messages"
         >
-          <ResourceBaseRichRadioElement
-            id={profileRadioId}
-            name={name}
-            value={null}
-            radioValue={value}
-            disabled={disabled}
-            onChange={onChange}
-          >
-            <span>Ajouter à mon profil</span>
-            <ProfilePrivacyTag isPublic={user.isPublic} />
-          </ResourceBaseRichRadioElement>
-
-          {bases.length === 0 ? null : (
+          {bases.length === 0 ? (
+            <Notice
+              className="fr-mx-2v fr-mt-4v"
+              title="Actuellement, vous n’êtes pas membre d’une base. Cette ressource sera donc ajoutée à votre profil."
+            />
+          ) : (
             <>
+              <Notice
+                className="fr-mx-2v fr-mt-4v fr-mb-4v"
+                title="En tant que créateur de cette ressource, elle sera directement ajoutée à votre profil."
+              />
+              <ResourceBaseRichRadioElement
+                id={profileRadioId}
+                name={name}
+                value={null}
+                radioValue={value}
+                disabled={disabled}
+                onChange={onChange}
+              >
+                <span>Ajouter uniquement à mon profil</span>
+                <ProfilePrivacyTag isPublic={user.isPublic} />
+              </ResourceBaseRichRadioElement>
               <p
                 className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-4v"
                 id="radio-rich-legend"
               >
-                Ajouter cette ressource à l’une de vos bases&nbsp;:
+                Ajouter également cette ressource à l’une de vos bases&nbsp;:
               </p>
               {bases.map((base, index) => (
                 <ResourceBaseRichRadioElement

@@ -83,14 +83,17 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   })
 
   const { confirmLabel, canCreate } =
-    step === 1 || user.ownedBases.length === 0
+    step === 0
       ? {
-          confirmLabel: 'Commencer l’édition',
-          canCreate: true,
-        }
-      : {
           confirmLabel: 'Continuer',
           canCreate: false,
+        }
+      : {
+          confirmLabel:
+            user.ownedBases.length === 0
+              ? "J'ai compris"
+              : 'Commencer l’édition',
+          canCreate: true,
         }
   const modalTitle =
     step === 0
