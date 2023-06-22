@@ -71,19 +71,9 @@ const Edition = ({
         : ResourceEditionState.SAVED
       : ResourceEditionState.EDITING
 
-  // Do not display state in action bar if no changes have been made
-  const actionBarEditionState =
-    editionState === ResourceEditionState.SAVED && !hasUnpublishedChanges
-      ? null
-      : editionState
-
   // Publish command is only available if publishedResource is older than updatedDraftResource
   const canPublish =
     editionState === ResourceEditionState.SAVED && hasUnpublishedChanges
-
-  const publishButtonLabel = isPublished
-    ? 'Publier les modifications'
-    : 'Publier la ressource'
 
   // If the user has made an edit, we ask for confirmation before leaving page
   const [askConfirmationBeforeLeaving, setAskConfirmationBeforeLeaving] =
@@ -195,11 +185,10 @@ const Edition = ({
       </div>
       <EditionActionBar
         publishedState={publishedState}
-        editionState={actionBarEditionState}
-        actionDisabled={!canPublish}
-        actionLabel={publishButtonLabel}
+        editionState={editionState}
+        canPublish={canPublish}
         unPublishedEdits={isPublished && hasUnpublishedChanges}
-        action={onPublish}
+        onPublish={onPublish}
       />
     </>
   )

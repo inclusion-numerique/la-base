@@ -21,3 +21,41 @@
   gap: 16px;
   align-items: center;
 }
+
+.moreWrapper {
+  position: relative;
+}
+
+.collapse {
+  position: absolute;
+  bottom: calc(100% + 4px) !important;
+
+  /* left: calc(-100% + 58px) !important; */
+  right: 0;
+  background: white;
+  border-top: 1px solid var(--border-open-blue-france);
+  border-bottom: 1px solid var(--border-open-blue-france);
+  box-shadow: var(--big-smooth-shadow);
+
+  .collapseButton {
+    color: var(--text-action-high-grey);
+    font-weight: 400;
+    font-size: 14px;
+    width: 100%;
+    padding: 12px 16px;
+    white-space: nowrap;
+
+    &::before {
+      color: var(--blue-france-sun-113-625);
+      margin-right: 10px;
+    }
+  }
+
+  .separator {
+    padding:0;
+    height: 1px;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    background: var(--border-default-grey);
+  }
+}

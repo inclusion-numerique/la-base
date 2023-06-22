@@ -12,12 +12,12 @@ const informations: Record<
     color: TagColor.GREY,
   },
   [ResourcePublishedState.PUBLIC]: {
-    label: 'Publiée - Publique',
+    label: 'Publique',
     icon: 'fr-icon-earth-fill',
     color: TagColor.GREEN,
   },
   [ResourcePublishedState.PRIVATE]: {
-    label: 'Publiée - Privée',
+    label: 'Privée',
     icon: 'fr-icon-lock-line',
     color: TagColor.GREY,
   },

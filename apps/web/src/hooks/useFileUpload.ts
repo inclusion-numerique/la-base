@@ -23,7 +23,7 @@ export const useFileUpload = () => {
       // This will throw an error in the axios request in the upload() method
       abortControllerRef.current.abort()
     }
-  }, [setUploading, progressEmitterRef])
+  }, [abortControllerRef])
 
   const reset = useCallback(() => {
     abort()

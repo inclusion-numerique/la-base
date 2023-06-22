@@ -17,29 +17,58 @@ export default {
 
 type Story = StoryObj<typeof EditionActionBar>
 
-export const Default: Story = {
-  name: 'Ressource sans contenu crée',
-  args: {
-    publishedState: ResourcePublishedState.DRAFT,
-    actionLabel: 'Publier la ressource',
-    actionDisabled: true,
-  },
-}
-
-export const NewContent: Story = {
-  name: 'Nouveau contenu ajouté',
+export const Brouillon: Story = {
   args: {
     publishedState: ResourcePublishedState.DRAFT,
     editionState: ResourceEditionState.SAVED,
-    actionLabel: 'Publier la ressource',
+    canPublish: false,
+    unPublishedEdits: false,
   },
 }
 
-export const Edition: Story = {
-  name: "Edition d'une ressource déjà publiée",
+export const BrouillonEnregistrement: Story = {
+  args: {
+    publishedState: ResourcePublishedState.DRAFT,
+    editionState: ResourceEditionState.SAVING,
+    canPublish: false,
+    unPublishedEdits: false,
+  },
+}
+
+export const BrouillonModifié: Story = {
+  args: {
+    publishedState: ResourcePublishedState.DRAFT,
+    editionState: ResourceEditionState.SAVED,
+    canPublish: true,
+    unPublishedEdits: true,
+  },
+}
+
+export const Publique: Story = {
   args: {
     publishedState: ResourcePublishedState.PUBLIC,
-    editionState: ResourceEditionState.EDITING,
-    actionLabel: 'Publier les modifications',
+    editionState: ResourceEditionState.SAVED,
+    canPublish: false,
+    unPublishedEdits: false,
+  },
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export const PrivéeEnregistrement: Story = {
+  args: {
+    publishedState: ResourcePublishedState.PRIVATE,
+    editionState: ResourceEditionState.SAVING,
+    canPublish: false,
+    unPublishedEdits: false,
+  },
+}
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export const PubliqueModifiée: Story = {
+  args: {
+    publishedState: ResourcePublishedState.PUBLIC,
+    editionState: ResourceEditionState.SAVED,
+    canPublish: true,
+    unPublishedEdits: true,
   },
 }

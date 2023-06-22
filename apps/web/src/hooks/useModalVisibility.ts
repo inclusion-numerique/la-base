@@ -60,5 +60,5 @@ export const useModalVisibility = (
         )
       }
     }
-  }, [modal])
+  }, [modal, onOpened, onClosed])
 }

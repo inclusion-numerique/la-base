@@ -1,39 +1,57 @@
 import classNames from 'classnames'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
+import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import styles from './ResourceEditionStateBadge.module.css'
 
-const informations: {
-  [state in ResourceEditionState]: { label: string; icon: string }
-} = {
-  [ResourceEditionState.EDITING]: {
-    label: 'Edition en cours',
-    icon: 'ri-loader-line',
-  },
-  [ResourceEditionState.SAVING]: {
-    label: 'Enregistrement...',
-    icon: 'ri-loader-line',
-  },
-  [ResourceEditionState.SAVED]: {
-    label: 'Enregistré',
-    icon: 'fr-icon--sm fr-mb-0 fr-icon-check-line',
-  },
-}
+const ResourceEditionStateWrapper = ({ children }: PropsWithChildren) => (
+  <p
+    className={classNames('fr-text--sm', 'fr-mb-0', styles.badge)}
+    data-testid="resource-edition-state"
+  >
+    {children}
+  </p>
+)
 
 const ResourceEditionStateBadge = ({
-  state,
+  publishedState,
+  editionState,
+  unPublishedEdits,
 }: {
-  state: ResourceEditionState
+  publishedState: ResourcePublishedState
+  editionState: ResourceEditionState
+  unPublishedEdits: boolean
 }) => {
-  const information = informations[state]
+  // Do not display state while editing
+  if (editionState === ResourceEditionState.EDITING) {
+    return null
+  }
+
+  // Do not display state in action bar if no changes have been made
+  if (editionState === ResourceEditionState.SAVED && !unPublishedEdits) {
+    return null
+  }
+
+  if (editionState === ResourceEditionState.SAVING) {
+    return (
+      <ResourceEditionStateWrapper>
+        <span>SPINNER</span>
+        <span className="fr-ml-1w">Enregistrement&hellip;</span>
+      </ResourceEditionStateWrapper>
+    )
+  }
+
+  // Saved and unpublished edits
+  const label =
+    publishedState === ResourcePublishedState.DRAFT
+      ? 'Enregistrée'
+      : 'Enregistrée · Modifications non publiées'
+
   return (
-    <div
-      className={classNames('fr-text--sm', 'fr-mb-0', styles.badge)}
-      data-testid="resource-edition-state"
-    >
-      <span className={classNames(styles.icon, information.icon)} />
-      <span className="fr-text--medium">{information.label}</span>
-    </div>
+    <ResourceEditionStateWrapper>
+      <span className="fr-icon--sm fr-mb-0 fr-icon-check-line" />
+      <span className="fr-ml-1w">{label}</span>
+    </ResourceEditionStateWrapper>
   )
 }
 
