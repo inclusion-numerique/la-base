@@ -26,5 +26,5 @@
     overflow-x:hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
-    margin: 0 16px 0 0;
+    margin: 4px 12px;
 }

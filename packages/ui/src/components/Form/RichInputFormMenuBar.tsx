@@ -129,7 +129,6 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
       <RichInputLinkModalForm
         onSubmit={editLink.onSubmit}
         url={editLink.url}
-        text={editLink.text}
         onCancel={editLink.onCancel}
       />
     </>

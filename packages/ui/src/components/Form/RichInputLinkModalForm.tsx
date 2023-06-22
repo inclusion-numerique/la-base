@@ -1,13 +1,31 @@
 'use client'
 
-import React, { FormEventHandler, useEffect, useRef } from 'react'
+import React, {
+  FormEventHandler,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useRef,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useModalVisibility } from '@app/web/hooks/useModalVisibility'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import z from 'zod'
-import { createPortal } from 'react-dom'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import ReactDOM from 'react-dom'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+
+// React-dom types are broken at the moment !
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+const { createPortal } = ReactDOM as {
+  createPortal: (
+    children: ReactNode,
+    container: Element | DocumentFragment,
+    key?: null | string,
+  ) => ReactPortal
+}
 
 export const RichInputLinkModal = createModal({
   id: 'rich-input-form-link-config',
@@ -15,8 +33,9 @@ export const RichInputLinkModal = createModal({
 })
 
 const RichInputLinkValidation = z.object({
-  text: z.string(),
-  url: z.string().url().nullish(),
+  url: z
+    .string({ required_error: 'Veuillez renseigner le lien' })
+    .url({ message: 'Veuillez renseigner un lien valide' }),
 })
 export type RichInputLink = z.infer<typeof RichInputLinkValidation>
 
@@ -24,14 +43,11 @@ const RichInputLinkModalForm = ({
   onSubmit: onSubmitProp,
   onCancel: onCancelProp,
   url,
-  text,
 }: {
   onSubmit: (data: RichInputLink) => void
   onCancel?: () => void
-  text?: string
   url?: string
 }) => {
-  console.log('MODAL FORM', url)
   const { title, cancelLabel, confirmLabel } = url
     ? {
         title: 'Modifier le lien',
@@ -59,21 +75,19 @@ const RichInputLinkModalForm = ({
   } = useForm<RichInputLink>({
     resolver: zodResolver(RichInputLinkValidation),
     defaultValues: {
-      text,
       url,
     },
   })
 
   useModalVisibility(modalRef.current, {
     onClosed: () => {
-      reset({ text: undefined, url: undefined })
+      reset({ url: undefined })
     },
   })
 
   const onSubmitHandler: FormEventHandler = (event) => {
     event.stopPropagation()
     handleSubmit((data: RichInputLink) => {
-      console.log('SUBMITED', data)
       if (isSubmitting) {
         return
       }
@@ -82,9 +96,8 @@ const RichInputLinkModalForm = ({
   }
 
   useEffect(() => {
-    console.log('RESETTING FORM', { url, text })
-    reset({ url, text })
-  }, [reset, url, text])
+    reset({ url })
+  }, [reset, url])
 
   const disabled = isSubmitting
 
@@ -112,20 +125,13 @@ const RichInputLinkModalForm = ({
           },
         ]}
       >
-        <>
-          <InputFormField
-            control={control}
-            path="text"
-            label="Texte du lien"
-            disabled={disabled}
-          />
-          <InputFormField
-            control={control}
-            path="url"
-            label="Copier le lien ici"
-            disabled={disabled}
-          />
-        </>
+        <InputFormField
+          control={control}
+          path="url"
+          label="Copier le lien ici"
+          placeholder="https://"
+          disabled={disabled}
+        />
       </RichInputLinkModal.Component>
     </form>,
     document.body,

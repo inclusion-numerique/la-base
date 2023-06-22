@@ -11,6 +11,13 @@
     outline-offset: 0 !important;
   }
 
+  a {
+    &::after {
+      content: none;
+    }
+    cursor: text;
+  }
+
   :last-child {
     margin-bottom: 0;
   }
