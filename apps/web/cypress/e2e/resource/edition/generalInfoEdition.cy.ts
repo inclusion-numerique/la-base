@@ -69,7 +69,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('edit-validation-button').should('not.exist')
         cy.contains('Titre modifié')
         cy.contains('Description modifiée')
-        cy.testId('resource-edition-state').should('have.text', 'Enregistré')
+        cy.testId('resource-edition-state').should('have.text', 'Enregistrée')
         cy.testId('resource-published-state').should('have.text', 'Brouillon')
       })
 

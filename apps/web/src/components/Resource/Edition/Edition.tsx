@@ -187,7 +187,7 @@ const Edition = ({
         publishedState={publishedState}
         editionState={editionState}
         canPublish={canPublish}
-        unPublishedEdits={isPublished && hasUnpublishedChanges}
+        unPublishedEdits={hasUnpublishedChanges}
         onPublish={onPublish}
       />
     </>

@@ -40,7 +40,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('add-content_form__submit').click()
 
         cy.wait('@mutation')
-        cy.testId('resource-edition-state').should('have.text', 'Enregistré')
+        cy.testId('resource-edition-state').should('have.text', 'Enregistrée')
         cy.testId('resource-published-state').should('have.text', 'Brouillon')
 
         cy.testId('add-content_form').should('not.exist')
@@ -111,7 +111,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('add-content_form__submit').click()
 
         cy.wait('@mutation')
-        cy.testId('resource-edition-state').should('have.text', 'Enregistré')
+        cy.testId('resource-edition-state').should('have.text', 'Enregistrée')
         cy.testId('resource-published-state').should('have.text', 'Brouillon')
 
         cy.testId('add-content_form').should('not.exist')

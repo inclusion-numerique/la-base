@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { PropsWithChildren } from 'react'
 import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
+import { Spinner } from '@app/web/ui/Spinner'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import styles from './ResourceEditionStateBadge.module.css'
 
@@ -35,7 +36,7 @@ const ResourceEditionStateBadge = ({
   if (editionState === ResourceEditionState.SAVING) {
     return (
       <ResourceEditionStateWrapper>
-        <span>SPINNER</span>
+        <Spinner size="small" />
         <span className="fr-ml-1w">Enregistrement&hellip;</span>
       </ResourceEditionStateWrapper>
     )

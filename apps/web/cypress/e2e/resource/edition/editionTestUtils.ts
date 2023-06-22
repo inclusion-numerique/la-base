@@ -22,7 +22,7 @@ export const cleanUpAndCreateTestResource = () => {
 
 export const expectActionBarStatusWithDraftEdits = () => {
   cy.testId('resource-published-state').should('have.text', 'Brouillon')
-  cy.testId('resource-edition-state').should('have.text', 'Enregistré')
+  cy.testId('resource-edition-state').should('have.text', 'Enregistrée')
   cy.testId('publish-resource-button')
     .should('not.be.disabled')
     .should('have.text', 'Publier la ressource')
@@ -47,7 +47,7 @@ export const submitValidContentEdition = (contentId: string) => {
   cy.testId(`content-edition_${contentId}_form__submit`).click()
 
   cy.wait('@mutation')
-  cy.testId(`resource-edition-state`).should('have.text', 'Enregistré')
+  cy.testId(`resource-edition-state`).should('have.text', 'Enregistrée')
   cy.testId(`resource-published-state`).should('have.text', 'Brouillon')
 
   cy.testId(`content-edition_${contentId}_edit-button`).should('not.be.visible')
