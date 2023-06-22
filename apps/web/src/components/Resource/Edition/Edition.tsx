@@ -95,6 +95,7 @@ const Edition = ({
   ) {
     setAskConfirmationBeforeLeaving(true)
   }
+  const confirmationText = `Souhaitez-vous quitter l'éditeur sans publier les modifications apportées à ${resource.title} ? Les modifications sont enregistrées, vous pouvez également les publier plus tard.`
 
   useEffect(() => {
     if (!askConfirmationBeforeLeaving) {
@@ -102,16 +103,12 @@ const Edition = ({
     }
     const nativeBrowserHandler = (event: BeforeUnloadEvent) => {
       event.preventDefault()
-      return 'Vous avez des modifications non publiées, voulez-vous vraiment quitter la page ?'
+      return confirmationText
     }
 
-    const nextNavigationHandler = (url) => {
-      console.log('CHANGE HANDLER', url)
-      if (
-        !window.confirm(
-          'Vous avez des modifications non publiées, voulez-vous vraiment quitter la page ?',
-        )
-      ) {
+    // TODO When implemented by next app router, show a modal instead of a browser confirm
+    const nextNavigationHandler = () => {
+      if (!window.confirm(confirmationText)) {
         Router.events.emit('routeChangeError')
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw "Navigation annulée par l'utilisateur"
