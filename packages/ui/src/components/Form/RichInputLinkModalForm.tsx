@@ -51,7 +51,7 @@ const RichInputLinkModalForm = ({
   const { title, cancelLabel, confirmLabel } = url
     ? {
         title: 'Modifier le lien',
-        cancelLabel: 'Supprimer',
+        cancelLabel: 'Supprimer le lien',
         confirmLabel: 'Modifier',
       }
     : {
