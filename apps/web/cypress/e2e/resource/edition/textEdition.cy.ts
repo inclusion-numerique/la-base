@@ -28,9 +28,9 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('add-content_form__submit').click()
         cy.testId('add-content_form').contains('Veuillez renseigner le text')
 
-        cy.testId('Titre 2-button').click()
+        cy.testId('Titre 1-button').click()
         cy.testId('text-input').type('Babysitting blues...{enter}')
-        cy.testId('Titre 3-button').click()
+        cy.testId('Titre 2-button').click()
         cy.testId('text-input').type(
           "C'est le blues de papa maman qui s'en vont au restaurant",
         )
@@ -58,11 +58,11 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.testId('content-text').should('not.exist')
         cy.testId('content-edition_Text-1_form').should('exist')
-        cy.testId('Titre 4-button').click()
+        cy.testId('Titre 3-button').click()
         cy.testId('text-input').type(
           "And I don't think that i'll do it again{enter}",
         )
-        cy.testId('Titre 4-button').click()
+        cy.testId('Titre 3-button').click()
 
         submitValidContentEdition('Text-1')
 
