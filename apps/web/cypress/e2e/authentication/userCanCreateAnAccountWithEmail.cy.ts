@@ -17,7 +17,9 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName).type('{enter}')
 
-    cy.url().should('equal', appUrl('/connexion/verification'))
+    cy.url().should('equal', appUrl('/connexion/verification'), {
+      timeout: 10_000,
+    })
 
     cy.log('Magic link sent confirmation with email displayed')
     cy.contains('Un lien de connexion sécurisé a été envoyé')

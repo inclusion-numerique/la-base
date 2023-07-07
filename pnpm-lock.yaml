@@ -104,7 +104,7 @@ importers:
   apps/web:
     dependencies:
       '@app/emails':
-        specifier: ^0.1.0
+        specifier: '*'
         version: link:../../packages/emails
       '@aws-sdk/client-s3':
         specifier: ^3.358.0
@@ -116,8 +116,8 @@ importers:
         specifier: ^3.357.0
         version: 3.357.0
       '@codegouvfr/react-dsfr':
-        specifier: ^0.63.2
-        version: 0.63.2
+        specifier: ^0.66.6
+        version: 0.66.6
       '@gouvfr/dsfr':
         specifier: ^1.9.3
         version: 1.9.3
@@ -937,8 +937,8 @@ importers:
   packages/ui:
     dependencies:
       '@codegouvfr/react-dsfr':
-        specifier: ^0.63.2
-        version: 0.63.2
+        specifier: ^0.66.6
+        version: 0.66.6
       '@gouvfr/dsfr':
         specifier: ^1.9.3
         version: 1.9.3
@@ -4889,8 +4889,8 @@ packages:
       - supports-color
     dev: false
 
-  /@codegouvfr/react-dsfr@0.63.2:
-    resolution: {integrity: sha512-WWZ/9ltzao6wAqs/m0xcorMEygQAo+frU557u2Py/KA5rpndTwrIGlZ6hnssalfmwo+9hJkzdijZvR6DAKl7JA==}
+  /@codegouvfr/react-dsfr@0.66.6:
+    resolution: {integrity: sha512-hCQlwBamnJzUYg02sVxTjvq1XjXpXBX01fLoldQu5mZhtvoiu0wpDb83Y5qH1u857ZmZplz+K4gzPoHf3ajALA==}
     hasBin: true
     dependencies:
       tsafe: 1.6.4
@@ -10917,7 +10917,10 @@ packages:
     peerDependencies:
       constructs: ^10.0.25
     dependencies:
+      archiver: 5.3.1
       constructs: 10.2.57
+      json-stable-stringify: 1.0.2
+      semver: 7.5.1
     dev: false
     bundledDependencies:
       - archiver
@@ -12396,7 +12399,7 @@ packages:
     dependencies:
       semver: 7.5.1
       shelljs: 0.8.5
-      typescript: 5.2.0-dev.20230625
+      typescript: 5.2.0-dev.20230707
     dev: false
 
   /duplexer2@0.1.4:
@@ -16441,7 +16444,7 @@ packages:
       semver: 7.5.1
       semver-intersect: 1.4.0
       stream-json: 1.8.0
-      typescript: 5.1.3
+      typescript: 5.1.6
       workerpool: 6.4.0
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -16499,7 +16502,7 @@ packages:
       semver-intersect: 1.4.0
       sort-json: 2.0.1
       spdx-license-list: 6.6.0
-      typescript: 5.1.3
+      typescript: 5.1.6
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
@@ -16529,6 +16532,12 @@ packages:
   /json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
+
+  /json-stable-stringify@1.0.2:
+    resolution: {integrity: sha512-eunSSaEnxV12z+Z73y/j5N37/In40GK4GmsSy+tEHJMxknvqnA7/djeYtAgW0GsWHUfg+847WJjKaEylk2y09g==}
+    dependencies:
+      jsonify: 0.0.1
+    dev: false
 
   /json-stringify-pretty-compact@3.0.0:
     resolution: {integrity: sha512-Rc2suX5meI0S3bfdZuA7JMFBGkJ875ApfVyq2WHELjBiiG22My/l7/8zPpH/CfFVQHuVLd8NLR0nv6vi0BYYKA==}
@@ -16565,6 +16574,10 @@ packages:
       universalify: 2.0.0
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  /jsonify@0.0.1:
+    resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
+    dev: false
 
   /jsonwebtoken@9.0.0:
     resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==}
@@ -22747,14 +22760,14 @@ packages:
     engines: {node: '>=12.20'}
     hasBin: true
 
-  /typescript@5.1.3:
-    resolution: {integrity: sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==}
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
 
-  /typescript@5.2.0-dev.20230625:
-    resolution: {integrity: sha512-WMaChlTzClBshpE4Btm2fnl2W2Rr3LmC5ZrngUCWO78/ZVdJdbctSBWDcrqI8caZLHQmHwcW3GYedZX2OJoaUg==}
+  /typescript@5.2.0-dev.20230707:
+    resolution: {integrity: sha512-uVIbqrU5EP4PAZfnN3VdGJ0B4wkmyzz/GbBfXbBBvp9YUdwvgZK0jM24LEgO8Cjes0sQf6gV16Dc6WiqCKLPGQ==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false

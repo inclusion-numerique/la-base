@@ -38,14 +38,14 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     })
 
     cy.get('button[title="S\'identifier avec InclusionConnect"]').click()
-    cy.url().should('contain', 'connect.inclusion.beta.gouv.fr/realms')
+    cy.url().should('contain', 'connect.inclusion.beta.gouv.fr')
 
     cy.intercept(/\/api\/auth\/callback/, (request) => {
       // Add our cookies back
       request.headers.cookie = authenticationCookies.join('; ')
     })
 
-    cy.get('input[name="username"]').type(email)
+    cy.get('input[name="email"]').type(email)
 
     // Inclusion connect has frontend uncaught exceptions
     Cypress.on('uncaught:exception', () => false)

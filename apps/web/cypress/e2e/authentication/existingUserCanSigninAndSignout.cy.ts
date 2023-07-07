@@ -82,14 +82,14 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     })
 
     cy.get('button[title="S\'identifier avec InclusionConnect"]').click()
-    cy.url().should('contain', 'connect.inclusion.beta.gouv.fr/realms')
+    cy.url().should('contain', 'connect.inclusion.beta.gouv.fr')
 
     cy.intercept(/\/api\/auth\/callback/, (request) => {
       // Add our cookies back
       request.headers.cookie = authenticationCookies.join('; ')
     })
 
-    cy.get('input[name="username"]').type(inclusionConnectUser.email)
+    cy.get('input[name="email"]').type(inclusionConnectUser.email)
 
     // Inclusion connect has frontend uncaught exceptions
     Cypress.on('uncaught:exception', () => false)
@@ -131,7 +131,9 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Signin form fill and submit')
     cy.findByLabelText('Email').type(`${email}{enter}`)
 
-    cy.url().should('equal', appUrl('/connexion/verification'))
+    cy.url().should('equal', appUrl('/connexion/verification'), {
+      timeout: 10_000,
+    })
 
     cy.log('Magic link sent confirmation with email displayed')
     cy.contains('Un lien de connexion sécurisé a été envoyé')

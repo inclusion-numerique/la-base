@@ -66,6 +66,7 @@ export const PublicWebAppConfig = {
   mainLiveUrl,
   repository: repositoryUrl,
   InclusionConnect: {
+    iss: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_ISS ?? '',
     issuer: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_ISSUER ?? '',
     clientId: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_CLIENT_ID ?? '',
   },

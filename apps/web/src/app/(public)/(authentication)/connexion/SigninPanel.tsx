@@ -1,4 +1,7 @@
+'use client'
+
 import { Route } from 'next'
+import { signIn } from 'next-auth/react'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { signinErrorMessage } from '@app/web/app/(public)/(authentication)/authenticationErrorMessage'
