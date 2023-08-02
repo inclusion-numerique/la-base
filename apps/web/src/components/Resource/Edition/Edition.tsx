@@ -143,6 +143,25 @@ const Edition = ({
     }
   }
 
+  const onDelete = async () => {
+    try {
+      await sendCommand({
+        name: 'Delete',
+        payload: {
+          resourceId: resource.id,
+        },
+      })
+      router.push('/ressources', {
+        unstable_skipClientCache: true,
+      })
+    } catch (error) {
+      console.error('Could not delete resource', error)
+      // TODO Have a nice error and handle edge cases server side
+      // TODO for example a linked base or file or resource has been deleted since last publication
+      throw error
+    }
+  }
+
   return (
     <>
       <div className={classNames('fr-container', styles.container)}>
@@ -189,6 +208,7 @@ const Edition = ({
         canPublish={canPublish}
         unPublishedEdits={hasUnpublishedChanges}
         onPublish={onPublish}
+        onDelete={onDelete}
       />
     </>
   )

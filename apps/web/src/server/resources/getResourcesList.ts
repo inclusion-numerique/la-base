@@ -15,15 +15,18 @@ export const getResourcesList = async ({
     base: { isPublic: true },
   }
 
-  const where = user
-    ? {
-        OR: [
-          whereResourceIsPublic,
-          // Public or created by user
-          { createdById: user.id },
-        ],
-      }
-    : whereResourceIsPublic
+  const where = {
+    ...(user
+      ? {
+          OR: [
+            whereResourceIsPublic,
+            // Public or created by user
+            { createdById: user.id },
+          ],
+        }
+      : whereResourceIsPublic),
+    deleted: null,
+  }
 
   return prismaClient.resource.findMany({
     where,

@@ -21,7 +21,7 @@ const ResourceCard = ({
   resource: ResourceListItem
   user: SessionUser | null
 }) => (
-  <div className={styles.container}>
+  <div className={styles.container} data-testid="resource-card">
     <div className={styles.header}>
       <PublishedInInformation resource={resource} />
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">

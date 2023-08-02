@@ -119,6 +119,7 @@ model Resource {
   createdById String @map("created_by_id") @db.Uuid
 
   published DateTime?
+  deleted   DateTime?
 
   base   Base?   @relation(fields: [baseId], references: [id])
   baseId String? @map("base_id") @db.Uuid
@@ -135,6 +136,7 @@ enum ResourceEventType {
   Created                   @map("created")
   Migrated                  @map("migrated")
   Published                 @map("published")
+  Deleted                   @map("deleted")
   TitleAndDescriptionEdited @map("title_and_description_edited")
   ImageEdited               @map("image_edited")
   BaseChanged               @map("base_changed")

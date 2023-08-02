@@ -78,9 +78,12 @@ export const getResourceSelect = {
 } satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
 
 export const getResource = async (where: { slug: string } | { id: string }) =>
-  prismaClient.resource.findUnique({
+  prismaClient.resource.findFirst({
     select: getResourceSelect,
-    where,
+    where: {
+      ...where,
+      deleted: null,
+    },
   })
 
 export type Resource = Exclude<Awaited<ReturnType<typeof getResource>>, null>
