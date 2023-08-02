@@ -151,9 +151,12 @@ const Edition = ({
           resourceId: resource.id,
         },
       })
-      router.push('/ressources', {
-        unstable_skipClientCache: true,
-      })
+
+      // TODO There is a router bug here, unstable_skipClientCache does not work and we see our resource in the list after deletion
+      // While waiting for https://github.com/vercel/next.js/issues/42991, router.refresh() will invalidate router client cache
+      // See https://nextjs.org/docs/app/building-your-application/caching#invalidation-1
+      router.refresh()
+      router.push(`/ressources`)
     } catch (error) {
       console.error('Could not delete resource', error)
       // TODO Have a nice error and handle edge cases server side
