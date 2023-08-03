@@ -4,14 +4,30 @@ import {
   createTestUser,
 } from '../../../support/helpers'
 
-export const cleanUpAndCreateTestResource = () => {
+export const cleanUpAndCreateTestResource = (publicBase?: boolean) => {
   cy.execute('deleteAllData', undefined)
   const user = createTestUser()
-  const base = createTestBase(user.id)
+  const base = createTestBase(user.id, publicBase)
   const commands = createTestResourceCommands({ baseId: base.id })
 
   cy.createUserAndSignin(user)
   cy.createBase(base)
+  cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
+    cy.visit(`/ressources/${slug}/editer`)
+  })
+
+  cy.intercept('/api/trpc/resource.mutate?*').as('mutation')
+  cy.dsfrShouldBeStarted()
+}
+
+export const cleanUpAndCreateTestResourceInProfile = (
+  publicProfile?: boolean,
+) => {
+  cy.execute('deleteAllData', undefined)
+  const user = createTestUser(publicProfile)
+  const commands = createTestResourceCommands({})
+
+  cy.createUserAndSignin(user)
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
     cy.visit(`/ressources/${slug}/editer`)
   })

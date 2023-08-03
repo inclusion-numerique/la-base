@@ -6,11 +6,13 @@ import styles from './EditableContent.module.css'
 const EditableContent = ({
   children,
   showIcon,
+  iconText,
   onEditClick,
   'data-testid': dataTestId,
 }: UiComponentProps & {
   children: ReactNode
   showIcon?: boolean
+  iconText?: string
   onEditClick?: MouseEventHandler<HTMLButtonElement>
 }) => (
   <div className={styles.container}>
@@ -20,10 +22,13 @@ const EditableContent = ({
         title="Editer"
         data-testid={dataTestId}
         iconId="fr-icon-edit-line"
+        iconPosition="right"
         size="small"
         onClick={onEditClick}
         priority="tertiary no outline"
-      />
+      >
+        {iconText}
+      </Button>
     )}
   </div>
 )

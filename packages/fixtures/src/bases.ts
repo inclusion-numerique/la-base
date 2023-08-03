@@ -18,6 +18,26 @@ export const bases: Exclude<
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
     ownerId: 'eecac657-f415-47e1-8087-c4508ea16191',
   },
+  {
+    id: '1e6679e3-64e5-4ae8-a34c-8f43af7eb999',
+    title: 'Chanson française',
+    slug: 'chanson-francaise',
+    titleDuplicationCheckSlug: 'chanson-francaise',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
+    ownerId: 'f1826416-af31-402c-9d92-379d4ea7509e',
+    isPublic: true,
+  },
+  {
+    id: '1bf8c6f3-4628-407d-adce-408de1cda60f',
+    title: 'Mes futurs hits',
+    slug: 'mes-futurs-hits',
+    titleDuplicationCheckSlug: 'mes-futurs-hits',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
+    ownerId: 'f1826416-af31-402c-9d92-379d4ea7509e',
+    isPublic: false,
+  },
 ]
 
 export const randomBases: (

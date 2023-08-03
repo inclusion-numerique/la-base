@@ -14,7 +14,7 @@ import {
 export const appUrl = (path: string) =>
   `${Cypress.config().baseUrl}${encodeURI(path)}`
 
-export const createTestUser = () =>
+export const createTestUser = (publicProfile?: boolean) =>
   ({
     id: v4(),
     legacyId: null,
@@ -23,10 +23,10 @@ export const createTestUser = () =>
     lastName: 'Biche',
     name: 'Jean Biche',
     emailVerified: new Date('2023-04-01'),
-    isPublic: false,
+    isPublic: publicProfile || false,
   } satisfies CreateUserInput)
 
-export const createTestBase = (ownerId: string) =>
+export const createTestBase = (ownerId: string, isPublic?: boolean) =>
   ({
     id: v4(),
     title: 'Conseiller numérique France Services - contributions',
@@ -36,6 +36,7 @@ export const createTestBase = (ownerId: string) =>
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
     ownerId,
+    isPublic,
   } satisfies CreateBaseInput)
 
 export const createTestResourceCommands = ({

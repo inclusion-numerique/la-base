@@ -17,3 +17,8 @@
   /* fr-tag has a z-index of 1 that makes tags visible e.g. over modal footer so we need to set it back to initial */
   z-index: initial;
 }
+
+.iconOnly {
+  padding: 16px;
+  border-radius: 8px;
+}

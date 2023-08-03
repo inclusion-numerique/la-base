@@ -14,6 +14,15 @@ export const users: Exclude<
     name: 'Edith Piaf',
     email: 'edith@piaf.com',
     emailVerified: new Date(),
+    isPublic: true,
+  },
+  {
+    id: 'f1826416-af31-402c-9d92-379d4ea7509e',
+    firstName: 'Joe',
+    lastName: 'Dassin',
+    name: 'Joe Dassin',
+    email: 'joe@dassin.com',
+    emailVerified: new Date(),
   },
   {
     id: 'eecac657-f415-47e1-8087-c4508ea16191',

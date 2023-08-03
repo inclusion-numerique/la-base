@@ -1,0 +1,8 @@
+.container {
+    /* We copy values from Edition.module for the top of the page to be aligned with edition page */
+
+    /* We need padding for the drag button absolute positioning on the left of the contents */
+    max-width: calc(var(--edition-container-max-width));
+    padding-left: var(--edition-container-x-padding);
+    padding-right: var(--edition-container-x-padding);
+}

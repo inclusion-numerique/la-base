@@ -25,7 +25,10 @@ const View = ({
       <div className={styles.headerSeparator}>
         <hr />
       </div>
-      <div className={classNames(styles.rightColumn)}>
+      <div
+        className={classNames(styles.rightColumn)}
+        data-testid="resource-public-state-badge"
+      >
         {user ? (
           <ResourcePublicStateBadge isPublic={resource.isPublic} />
         ) : (
@@ -56,7 +59,7 @@ const View = ({
       </div>
       <div className={classNames(styles.leftColumn)} id="contents-container">
         <ResourceContents resource={resource} />
-        <ResourceInformations />
+        <ResourceInformations resource={resource} />
       </div>
     </div>
   </div>

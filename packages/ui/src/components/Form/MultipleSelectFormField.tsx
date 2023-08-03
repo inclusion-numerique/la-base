@@ -46,11 +46,12 @@ export type MultipleSelectFormFieldProps<T extends FieldValues> = {
   asterisk?: boolean
   defaultOption?: boolean
   defaultOptionLabel?: string
-  hint?: string
+  hint?: ReactNode
   placeholder?: string
   badgeSize?: 'sm' | 'md'
   options: SelectOption[]
   limit?: number
+  'data-testid'?: string
 }
 
 const MultipleSelectFormField = <T extends FieldValues>({
@@ -66,6 +67,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
   badgeSize,
   options,
   limit,
+  'data-testid': dataTestId,
 }: MultipleSelectFormFieldProps<T>) => {
   const id = `select-tags-form-field__${path}`
 
@@ -85,6 +87,8 @@ const MultipleSelectFormField = <T extends FieldValues>({
           event,
         ) => {
           onChange(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore: force type as string[]
             value ? [...value, event.target.value] : [event.target.value],
           )
         }
@@ -96,7 +100,8 @@ const MultipleSelectFormField = <T extends FieldValues>({
         // Remove value on badge click
         const onTagClick = (option: SelectOption) => {
           onChange(
-            (value as string[]).filter(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
+            value.filter(
               (selectedValue: string) => selectedValue !== option.value,
             ),
           )
@@ -115,6 +120,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
               {hint ? <span className="fr-hint-text">{hint}</span> : null}
             </label>
             <select
+              data-testid={dataTestId}
               className="fr-select fr-select--error"
               aria-describedby="text-select-error-desc-error"
               id={id}

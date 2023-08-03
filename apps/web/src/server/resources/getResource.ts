@@ -33,6 +33,9 @@ export const getResourceSelect = {
       altText: true,
     },
   },
+  thematics: true,
+  supportTypes: true,
+  publics: true,
   contents: {
     select: {
       id: true,

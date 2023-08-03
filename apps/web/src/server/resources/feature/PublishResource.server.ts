@@ -30,7 +30,7 @@ export const handlePublish: ResourceMutationCommandHandler<
     type: 'Published',
     timestamp: new Date(),
     data: {
-      __version: 1,
+      __version: 2,
       slug,
       titleDuplicationCheckSlug,
       ...rest,

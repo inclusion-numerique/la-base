@@ -14,8 +14,10 @@ const informations = {
   },
 }
 
-const ResourcePublicStateBadge = ({ isPublic }: { isPublic: boolean }) => (
-  <CustomTag {...(isPublic ? informations.public : informations.private)} />
-)
+const ResourcePublicStateBadge = ({
+  isPublic,
+}: {
+  isPublic: boolean | null
+}) => <CustomTag {...(isPublic ? informations.public : informations.private)} />
 
 export default ResourcePublicStateBadge

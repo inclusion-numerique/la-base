@@ -1,0 +1,24 @@
+.title {
+  color: var(--blue-france-sun-113-625);
+  margin-bottom: 12px;
+}
+
+.card {
+  border: var(--slim-grey-border);
+  padding: 32px;
+}
+
+.baseInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baseName {
+  display: flex;
+  align-items: center;
+}
+
+.red {
+  color: var(--background-flat-error)
+}

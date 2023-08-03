@@ -15,12 +15,14 @@ const EditionActionBar = ({
   unPublishedEdits,
   canPublish,
   onPublish,
+  publishMode,
 }: {
   publishedState: ResourcePublishedState
   editionState: ResourceEditionState
   unPublishedEdits: boolean
   canPublish: boolean
   onPublish: () => void
+  publishMode?: boolean
 }) => {
   const router = useRouter()
   const onCancelClick = () => {
@@ -123,7 +125,9 @@ const EditionActionBar = ({
             onClick={onPublish}
             data-testid="publish-resource-button"
           >
-            {publishedState === ResourcePublishedState.DRAFT
+            {publishMode
+              ? 'Publier maintenant'
+              : publishedState === ResourcePublishedState.DRAFT
               ? 'Publier la ressource'
               : 'Publier les modifications'}
           </Button>

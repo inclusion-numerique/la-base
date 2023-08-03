@@ -16,15 +16,18 @@ const CustomTag = ({
   'data-testid': dataTestId,
   className,
 }: UiComponentProps & {
-  label: string
+  label?: string
   icon: string
   color: TagColor
 }) => (
   <span
     className={classNames(
-      'fr-tag',
-      'fr-tag--icon-left',
-      'fr-text--medium',
+      {
+        'fr-tag': label,
+        'fr-tag--icon-left': label,
+        'fr-text--medium': label,
+        [styles.iconOnly]: !label,
+      },
       styles.tag,
       icon,
       styles[color],

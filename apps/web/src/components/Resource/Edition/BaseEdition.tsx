@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,10 +25,14 @@ const BaseEdition = ({
   resource,
   user,
   sendCommand,
+  children,
+  iconText,
 }: {
   resource: ResourceProjectionWithContext
   user: SessionUser
   sendCommand: SendCommand
+  children?: ReactNode
+  iconText?: string
 }) => {
   const {
     control,
@@ -59,12 +63,14 @@ const BaseEdition = ({
       showIcon
       onEditClick={openBaseModal}
       data-testid="edit-base-button"
+      iconText={iconText}
     >
-      {!!resource.createdBy && (
-        <PublishedInInformation
-          resource={{ base: resource.base, createdBy: resource.createdBy }}
-        />
-      )}
+      {children ||
+        (!!resource.createdBy && (
+          <PublishedInInformation
+            resource={{ base: resource.base, createdBy: resource.createdBy }}
+          />
+        ))}
       <form onSubmit={handleSubmit(onSubmit)}>
         <BaseModal
           title="Où souhaitez-vous ajouter cette ressource ?"
