@@ -52,6 +52,10 @@ const BaseEdition = ({
   const disabled = isSubmitting
   const onSubmit = async (data: ChangeBaseCommand) => {
     try {
+      if (data.payload.baseId === resource.baseId) {
+        // No-op on same base selected
+        return
+      }
       await sendCommand(data)
     } catch (error) {
       applyZodValidationMutationErrorsToForm(error, setError)

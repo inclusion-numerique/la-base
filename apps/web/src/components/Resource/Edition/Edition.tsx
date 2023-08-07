@@ -143,42 +143,43 @@ const Edition = ({
     ? updatedDraftResource.base.isPublic
     : user.isPublic
 
-  const { control, getValues, formState } = useForm<PublishCommand['payload']>({
+  const publicationForm = useForm<PublishCommand>({
     resolver: zodResolver(PublishCommandValidation),
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
-      resourceId: resource.id,
-      isPublic: defaultPublic ? undefined : false,
+      name: 'Publish',
+      payload: {
+        resourceId: resource.id,
+        isPublic: defaultPublic ? undefined : false,
+      },
     },
   })
 
   // Publish command is only available if publishedResource is older than updatedDraftResource
   const canPublish = isPublishable(
     // TODO: should be formState.isValid => not refreshed...
-    true,
+    publicationForm.formState.isValid,
     editionState,
     hasUnpublishedChanges,
     publishMode,
   )
 
-  const onPublish = async () => {
+  const onPublish = () => {
     if (publishMode) {
-      try {
-        // TODO this will first navigate to a "Publication" page for additional input
-        const result = await sendCommand({
-          name: 'Publish',
-          payload: getValues(),
-        })
-        router.push(`/ressources/${result.resource.slug}`, {
-          unstable_skipClientCache: true,
-        })
-      } catch (error) {
-        console.error('Could not publish resource', error)
-        // TODO Have a nice error and handle edge cases server side
-        // TODO for example a linked base or file or resource has been deleted since last publication
-        throw error
-      }
+      publicationForm.handleSubmit(async (data: PublishCommand) => {
+        try {
+          const result = await sendCommand(data)
+          router.push(`/ressources/${result.resource.slug}`, {
+            unstable_skipClientCache: true,
+          })
+        } catch (error) {
+          console.error('Could not publish resource', error)
+          // TODO Have a nice error and handle edge cases server side
+          // TODO for example a linked base or file or resource has been deleted since last publication
+          throw error
+        }
+      })()
     } else {
       router.push(`/ressources/${resource.slug}/publier`)
     }
@@ -192,7 +193,7 @@ const Edition = ({
             resource={updatedDraftResource}
             user={user}
             sendCommand={sendCommand}
-            control={control}
+            form={publicationForm}
           />
         ) : (
           <>

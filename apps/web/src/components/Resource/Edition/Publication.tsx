@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import { Control, Controller } from 'react-hook-form'
+import { Controller, UseFormReturn } from 'react-hook-form'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
 import {
-  PublishCommand,
   publicsLimit,
+  PublishCommand,
   supportTypesLimit,
   thematicsLimit,
 } from '@app/web/server/resources/feature/PublishResource'
@@ -26,12 +26,12 @@ const Publication = ({
   resource,
   user,
   sendCommand,
-  control,
+  form: { control },
 }: {
   resource: ResourceProjectionWithContext
   user: SessionUser
   sendCommand: SendCommand
-  control: Control<PublishCommand['payload']>
+  form: UseFormReturn<PublishCommand>
 }) => {
   const canBePublic = resource.base ? resource.base.isPublic : user.isPublic
   const [isPublic, setIsPublic] = useState<boolean | null>(
@@ -81,7 +81,7 @@ const Publication = ({
         <hr className="fr-mt-4w fr-pb-4w" />
         <Controller
           control={control}
-          name="isPublic"
+          name="payload.isPublic"
           render={({ field: { onChange, name, value } }) => (
             <fieldset
               className="fr-fieldset"
@@ -167,7 +167,7 @@ const Publication = ({
             }
             control={control}
             limit={thematicsLimit}
-            path="thematics"
+            path="payload.thematics"
             defaultOption
             defaultOptionLabel="Selectionnez une thématique"
             options={[
@@ -192,7 +192,7 @@ const Publication = ({
             }
             control={control}
             limit={supportTypesLimit}
-            path="supportTypes"
+            path="payload.supportTypes"
             defaultOption
             defaultOptionLabel="Selectionnez une type de support"
             options={[
@@ -216,7 +216,7 @@ const Publication = ({
             }
             control={control}
             limit={publicsLimit}
-            path="publics"
+            path="payload.publics"
             defaultOption
             defaultOptionLabel="Selectionnez un public"
             options={[
