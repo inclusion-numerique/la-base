@@ -42,11 +42,17 @@ const ResourceBaseRichRadioElement = <T extends FieldValues>({
         className="fr-label"
         htmlFor={id}
         onClick={() => {
+          if (disabled) {
+            return
+          }
           // XXX React dsfr seems to not trigger input event on a label click
           // Keyboard tab + space still works
           onChange(value as PathValue<T, Path<T>>)
         }}
         onKeyDown={(event) => {
+          if (disabled) {
+            return
+          }
           if (event.key === 'Enter') {
             onChange(value as PathValue<T, Path<T>>)
           }

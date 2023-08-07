@@ -110,7 +110,7 @@ const Publication = ({
                   onChange(true)
                 }}
               >
-                <span>Ressource publique</span>
+                <span className="fr-mr-1w">Ressource publique</span>
                 <PrivacyTag isPublic />
               </ResourceBaseRichRadioElement>
               <ResourceBaseRichRadioElement
@@ -128,7 +128,7 @@ const Publication = ({
                   onChange(false)
                 }}
               >
-                <span>Ressource privée</span>
+                <span className="fr-mr-1w">Ressource privée</span>
                 <PrivacyTag />
               </ResourceBaseRichRadioElement>
             </fieldset>

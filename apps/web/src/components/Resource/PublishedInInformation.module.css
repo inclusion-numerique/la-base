@@ -10,4 +10,5 @@
   background-color: #e8edff;
   border-radius: 50%;
   margin-right: 8px;
+  flex-shrink: 0;
 }
