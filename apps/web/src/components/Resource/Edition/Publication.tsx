@@ -230,7 +230,7 @@ const Publication = ({
       {isPublic === false && (
         <div
           className={classNames('fr-mt-3w', styles.card)}
-          data-testid="contibutors-box"
+          data-testid="contributors-box"
         >
           <h5 className="fr-mb-1w">Contributeurs</h5>
           <p className="fr-text--sm fr-mb-1w">
