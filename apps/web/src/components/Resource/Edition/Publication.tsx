@@ -4,10 +4,10 @@ import { Controller, UseFormReturn } from 'react-hook-form'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
 import {
-  publicsLimit,
+  targetAudiencesLimit,
   PublishCommand,
   supportTypesLimit,
-  thematicsLimit,
+  themesLimit,
 } from '@app/web/server/resources/feature/PublishResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { SessionUser } from '@app/web/auth/sessionUser'
@@ -151,7 +151,7 @@ const Publication = ({
           </p>
           <hr className="fr-mt-4w fr-pb-4w" />
           <MultipleSelectFormField
-            data-testid="indexation-thematics-select"
+            data-testid="indexation-themes-select"
             label={
               <>
                 Thématiques <span className={styles.red}>*</span>
@@ -162,18 +162,18 @@ const Publication = ({
                 Quelles sont les principales thématiques abordées par la
                 ressource ?
                 <br />
-                Sélectionnez jusqu’à {thematicsLimit} thématiques.
+                Sélectionnez jusqu’à {themesLimit} thématiques.
               </>
             }
             control={control}
-            limit={thematicsLimit}
-            path="payload.thematics"
+            limit={themesLimit}
+            path="payload.themes"
             defaultOption
             defaultOptionLabel="Selectionnez une thématique"
             options={[
-              { name: 'Thématique 1', value: 'thematic-1' },
-              { name: 'Thématique 2', value: 'thematic-2' },
-              { name: 'Thématique 3', value: 'thematic-3' },
+              { name: 'Thématique 1', value: 'theme-1' },
+              { name: 'Thématique 2', value: 'theme-2' },
+              { name: 'Thématique 3', value: 'theme-3' },
             ]}
           />
           <MultipleSelectFormField
@@ -196,13 +196,13 @@ const Publication = ({
             defaultOption
             defaultOptionLabel="Selectionnez une type de support"
             options={[
-              { name: 'Thématique 1', value: 'thematic-1' },
-              { name: 'Thématique 2', value: 'thematic-2' },
-              { name: 'Thématique 3', value: 'thematic-3' },
+              { name: 'Thématique 1', value: 'theme-1' },
+              { name: 'Thématique 2', value: 'theme-2' },
+              { name: 'Thématique 3', value: 'theme-3' },
             ]}
           />
           <MultipleSelectFormField
-            data-testid="indexation-publics-select"
+            data-testid="indexation-targetAudiences-select"
             label={
               <>
                 Publics cibles <span className={styles.red}>*</span>
@@ -211,18 +211,18 @@ const Publication = ({
             hint={
               <>
                 Quel est le public visé par la ressource ?<br />
-                Sélectionnez jusqu’à {publicsLimit} thématiques.
+                Sélectionnez jusqu’à {targetAudiencesLimit} thématiques.
               </>
             }
             control={control}
-            limit={publicsLimit}
-            path="payload.publics"
+            limit={targetAudiencesLimit}
+            path="payload.targetAudiences"
             defaultOption
             defaultOptionLabel="Selectionnez un public"
             options={[
-              { name: 'Thématique 1', value: 'thematic-1' },
-              { name: 'Thématique 2', value: 'thematic-2' },
-              { name: 'Thématique 3', value: 'thematic-3' },
+              { name: 'Thématique 1', value: 'theme-1' },
+              { name: 'Thématique 2', value: 'theme-2' },
+              { name: 'Thématique 3', value: 'theme-3' },
             ]}
           />
         </div>

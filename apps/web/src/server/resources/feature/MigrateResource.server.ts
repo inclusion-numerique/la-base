@@ -75,9 +75,9 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
       ...contentRest,
     }),
   ),
-  thematics: [],
+  themes: [],
   supportTypes: [],
-  publics: [],
+  targetAudiences: [],
 })
 
 export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (

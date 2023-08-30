@@ -55,9 +55,9 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   imageId: null,
   isPublic: null,
   contents: [],
-  thematics: [],
+  themes: [],
   supportTypes: [],
-  publics: [],
+  targetAudiences: [],
 })
 
 export const onCreated: ResourceEventSideEffect<ResourceCreated> = async (

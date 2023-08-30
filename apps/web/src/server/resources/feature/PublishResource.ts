@@ -1,8 +1,8 @@
 import z from 'zod'
 
-export const thematicsLimit = 5
+export const themesLimit = 5
 export const supportTypesLimit = 4
-export const publicsLimit = 5
+export const targetAudiencesLimit = 5
 
 export const PublishCommandValidation = z.object({
   name: z.literal('Publish'),
@@ -10,9 +10,9 @@ export const PublishCommandValidation = z.object({
     z.object({
       resourceId: z.string().uuid(),
       isPublic: z.literal(true),
-      thematics: z.array(z.string()).min(1).max(thematicsLimit),
+      themes: z.array(z.string()).min(1).max(themesLimit),
       supportTypes: z.array(z.string()).min(1).max(supportTypesLimit),
-      publics: z.array(z.string()).min(1).max(publicsLimit),
+      targetAudiences: z.array(z.string()).min(1).max(targetAudiencesLimit),
     }),
     z.object({
       resourceId: z.string().uuid(),
@@ -38,9 +38,9 @@ export type ResourcePublishedV2 = {
 } & (
   | {
       isPublic: true
-      thematics: string[]
+      themes: string[]
       supportTypes: string[]
-      publics: string[]
+      targetAudiences: string[]
     }
   | {
       isPublic: false

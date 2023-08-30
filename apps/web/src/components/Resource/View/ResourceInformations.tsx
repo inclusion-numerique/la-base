@@ -5,14 +5,14 @@ import { Resource } from '@app/web/server/resources/getResource'
 import styles from './ResourceInformations.module.css'
 
 const ResourceInformations = ({
-  resource: { thematics, publics, supportTypes },
+  resource: { themes, targetAudiences, supportTypes },
 }: {
   resource: Resource
 }) => {
   const resourceInfo = [
     {
       title: 'Thématiques',
-      tags: thematics,
+      tags: themes,
     },
     {
       title: 'Type de support',
@@ -20,7 +20,7 @@ const ResourceInformations = ({
     },
     {
       title: 'Publics cibles',
-      tags: publics,
+      tags: targetAudiences,
     },
   ]
   return (
