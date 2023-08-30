@@ -170,9 +170,12 @@ const Edition = ({
       publicationForm.handleSubmit(async (data: PublishCommand) => {
         try {
           const result = await sendCommand(data)
-          router.push(`/ressources/${result.resource.slug}`, {
-            unstable_skipClientCache: true,
-          })
+          router.push(
+            `/ressources/${result.resource.slug}?updated=${Date.now()}`,
+            {
+              unstable_skipClientCache: true,
+            },
+          )
         } catch (error) {
           console.error('Could not publish resource', error)
           // TODO Have a nice error and handle edge cases server side

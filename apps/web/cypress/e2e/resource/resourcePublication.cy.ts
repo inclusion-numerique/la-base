@@ -33,7 +33,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.wait('@mutation')
     cy.url().should(
-      'equal',
+      'contain',
       appUrl(
         `/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes`,
       ),
@@ -63,7 +63,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.wait('@mutation')
     cy.url().should(
-      'equal',
+      'contain',
       appUrl(
         `/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes`,
       ),
@@ -89,7 +89,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.wait('@mutation')
     cy.url().should(
-      'equal',
+      'contain',
       appUrl(
         `/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes`,
       ),
@@ -115,7 +115,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.wait('@mutation')
     cy.url().should(
-      'equal',
+      'contain',
       appUrl(
         `/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes`,
       ),
