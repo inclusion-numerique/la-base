@@ -5,7 +5,9 @@ import {
 
 describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
   describe('Qui a déjà été modifiée, en brouillon', () => {
-    beforeEach(cleanUpAndCreateTestResource)
+    beforeEach(() => {
+      cleanUpAndCreateTestResource()
+    })
 
     it("Acceptation 0 - Le statut d'édition montre un brouillon avec modifications", () => {
       // Resource has been created, and has 2 contents not published

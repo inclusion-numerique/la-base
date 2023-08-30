@@ -6,7 +6,9 @@ import {
 
 describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
   describe('Qui a déjà été modifiée, en brouillon', () => {
-    beforeEach(cleanUpAndCreateTestResource)
+    beforeEach(() => {
+      cleanUpAndCreateTestResource()
+    })
 
     describe('Je peux éditer les titres de section', () => {
       /**
