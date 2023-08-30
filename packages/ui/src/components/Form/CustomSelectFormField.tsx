@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import { FieldPath, Path, PathValue } from 'react-hook-form/dist/types/path'
 import classNames from 'classnames'
 import type { PropsValue } from 'react-select'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
@@ -65,8 +65,8 @@ const CustomSelectFormField = <T extends FieldValues>({
           ariaDescribedBy = `${id}__valid`
         }
         const onChangeProperty: CustomSelectProps['onChange'] = (newValue) => {
-          const changeValue =
-            (newValue as null | { value: string })?.value ?? ''
+          const changeValue = ((newValue as null | { value: string })?.value ??
+            '') as PathValue<T, Path<T>>
           onChange(changeValue)
         }
 
