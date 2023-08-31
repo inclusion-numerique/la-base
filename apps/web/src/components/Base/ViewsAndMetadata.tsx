@@ -1,14 +1,15 @@
-import classNames from 'classnames'
 import React from 'react'
+import classNames from 'classnames'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import { BasePrivacyTag } from '../PrivacyTags'
+import { BaseListItem } from '@app/web/server/bases/getBasesList'
+import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import styles from './ViewsAndMetadata.module.css'
 
 const ViewsAndMetadata = ({
   base,
   className,
 }: {
-  base: BasePageData
+  base: BasePageData | BaseListItem
   className?: string
 }) => (
   <div className={classNames(styles.container, 'fr-text--sm', className)}>
@@ -20,7 +21,7 @@ const ViewsAndMetadata = ({
     <div>·</div>
     <span className="fr-icon-file-text-line fr-icon--sm" />
     <div>
-      <b>{base.resources.length}</b>
+      <b>{(base as BasePageData).resources?.length || 45}</b>
       <span className={styles.spanMdDisplay}> Ressources</span>
     </div>
     <div>·</div>

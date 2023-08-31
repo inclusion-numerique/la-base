@@ -3,8 +3,9 @@ import React from 'react'
 import { basePageQuery } from '@app/web/server/bases/getBase'
 import Header from '@app/web/components/Base/Header'
 import Menu from '@app/web/components/Base/Menu'
-import Resources from '@app/web/components/Base/Resources/Resources'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import EmptyResources from '@app/web/components/Base/EmptyResources'
+import Resources from '@app/web/components/Resource/List/Resources'
 
 const BasePage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -24,7 +25,11 @@ const BasePage = async ({ params }: { params: { slug: string } }) => {
       <Header base={base} isMember={isMember} />
       <Menu base={base} />
       <div className="fr-container fr-mb-4w">
-        <Resources resources={base.resources} isMember={isMember} user={user} />
+        {base.resources.length === 0 ? (
+          <EmptyResources isMember={isMember} />
+        ) : (
+          <Resources resources={base.resources} user={user} />
+        )}
       </div>
     </>
   )

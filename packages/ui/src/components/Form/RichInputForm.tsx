@@ -41,13 +41,15 @@ const RichInputForm = <T extends FieldValues>({
   placeholder?: string
   disabled?: boolean
   ['data-testid']?: string
-  onChange: (text: PathValue<T, Path<T>>) => void
+  onChange?: (text: PathValue<T, Path<T>>) => void
 }) => {
   const editor = useEditor({
     extensions: [StarterKit, CustomLink],
     content: form.getValues(path),
     onUpdate: (event) => {
-      onChange(event.editor.getHTML() as PathValue<T, Path<T>>)
+      if (onChange) {
+        onChange(event.editor.getHTML() as PathValue<T, Path<T>>)
+      }
     },
   })
 

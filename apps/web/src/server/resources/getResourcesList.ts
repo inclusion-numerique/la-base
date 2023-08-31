@@ -31,10 +31,15 @@ export const resourceListSelect = {
 
 export const getWhereResourcesList = (
   user?: Pick<SessionUser, 'id'> | null,
+  where: Exclude<
+    Parameters<typeof prismaClient.resource.findMany>[0],
+    undefined
+  >['where'] = {},
 ) => {
   const whereResourceIsPublic = {
     isPublic: true,
     base: { isPublic: true },
+    ...where,
   }
 
   return {
@@ -72,6 +77,34 @@ export const getResourcesList = async ({
     ],
     skip,
     take,
+  })
+}
+
+export const getProfileResources = async (
+  profileId: string,
+  user: Pick<SessionUser, 'id'>,
+) => {
+  const where = getWhereResourcesList(user, { createdById: profileId })
+
+  return prismaClient.resource.findMany({
+    where,
+    select: resourceListSelect,
+    orderBy: [
+      {
+        created: 'desc',
+      },
+    ],
+  })
+}
+
+export const getProfileResourcesCount = async (
+  profileId: string,
+  user: Pick<SessionUser, 'id'>,
+) => {
+  const where = getWhereResourcesList(user, { createdById: profileId })
+
+  return prismaClient.resource.count({
+    where,
   })
 }
 

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+
+  h1 {
+    color: var(--blue-france-sun-113-625);
+  }
+}
+
+.red {
+  color: var(--background-flat-error)
+}

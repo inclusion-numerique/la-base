@@ -52,7 +52,7 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       <li>
         <Link
           className="fr-nav__link"
-          href="/"
+          href={`/profils/${user.id}`}
           style={{
             boxShadow: 'none',
             borderBottom: 'var(--slim-grey-border)',
@@ -77,17 +77,14 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
               Mes bases
             </p>
           </li>
-          {bases.map(({ slug, title }, index) => (
+          {bases.map(({ slug, title }) => (
             <li key={slug}>
               <Link
                 className="fr-nav__link"
                 href={`/bases/${slug}`}
                 style={{
                   boxShadow: 'none',
-                  borderBottom:
-                    index === bases.length - 1
-                      ? 'var(--slim-grey-border)'
-                      : undefined,
+                  borderBottom: undefined,
                 }}
               >
                 <span
@@ -102,6 +99,22 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
           ))}
         </>
       ) : null}
+      <li>
+        <Link
+          className="fr-nav__link"
+          href="/bases/creer"
+          style={{
+            boxShadow: 'none',
+            borderBottom: 'var(--slim-grey-border)',
+          }}
+        >
+          <span
+            className="fr-icon-add-line fr-icon--sm fr-mr-1w"
+            style={{ color: 'var(--blue-france-sun-113-625)' }}
+          />
+          Créer une base
+        </Link>
+      </li>
       <li>
         <Link className="fr-nav__link" href="/deconnexion">
           <span

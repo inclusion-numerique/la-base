@@ -1,0 +1,23 @@
+.container {
+  background-color: var(--background-alt-blue-france);
+}
+
+.logo {
+  border-radius: 50%;
+  height: 128px;
+  width: 128px;
+  background-color: #BFCCFB;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 48px 0 84px;
+
+  h2 {
+    color: var(--blue-france-sun-113-625);
+    margin: 0 16px 8px 0;
+    display: inline-block;
+  }
+}

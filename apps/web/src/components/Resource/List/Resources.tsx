@@ -3,18 +3,15 @@ import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { BaseResource } from '@app/web/server/bases/getBase'
 import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
-import Empty from './Empty'
-import styles from './Resources.module.css'
 import ResourceTab from './ResourceTab'
+import styles from './Resources.module.css'
 
 const Resources = ({
   resources,
   user,
-  isMember,
 }: {
   resources: BaseResource[]
   user: SessionUser
-  isMember: boolean
 }) => {
   const drafts = useMemo(
     () => resources.filter((resource) => resource.isPublic === null),
@@ -29,9 +26,7 @@ const Resources = ({
     [resources],
   )
 
-  return resources.length === 0 ? (
-    <Empty isMember={isMember} />
-  ) : (
+  return (
     <div className={styles.container} data-testid="base-resources">
       <div className={styles.header}>
         <h3 className="fr-mb-0">Ressources · {resources.length}</h3>

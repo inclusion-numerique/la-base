@@ -1,0 +1,44 @@
+.logos {
+  position: relative;
+}
+
+.logo {
+  border-radius: 50%;
+  height: 128px;
+  width: 128px;
+  background-color: #BFCCFB;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 48px 0 84px;
+
+  h2 {
+    color: var(--blue-france-sun-113-625);
+    margin: 0 16px 8px 0;
+    display: inline-block;
+  }
+}
+
+.pictureModification {
+  position: absolute;
+  bottom: 0;
+  left: 88px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: var(--slim-grey-border);
+  background-image: none;
+  color: var(--blue-france-sun-113-625);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--hover) !important;
+  }
+}

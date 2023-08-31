@@ -1,0 +1,19 @@
+.container {
+  padding: 24px 32px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  border: var(--slim-grey-border);
+  background-image: none;
+
+  &:not(:first-of-type) {
+    margin-top: 24px;
+  }
+}
+
+.logo {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  background-color: #E8EDFF;
+}

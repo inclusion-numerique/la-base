@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+
+  h1 {
+    color: var(--blue-france-sun-113-625);
+  }
+}
+
+.card {
+  width: 588px;
+  max-width: 100%;
+  border: var(--slim-grey-border);
+  padding: 32px;
+}
+
+.red {
+  color: var(--background-flat-error)
+}

@@ -1,15 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
-import { CreateResourceButton } from '../../Resource/CreateResourceModal'
-import styles from './Empty.module.css'
+import { CreateResourceButton } from '../Resource/CreateResourceModal'
+import EmptyBox from '../EmptyBox'
 
-const Empty = ({ isMember }: { isMember: boolean }) => (
-  <div className={styles.container} data-testid="base-ressources-empty-state">
-    <h6 className="fr-mb-1w">
-      {isMember
+const EmptyResources = ({ isMember }: { isMember: boolean }) => (
+  <EmptyBox
+    title={
+      isMember
         ? "Vous n'avez pas de ressources dans votre base."
-        : 'Aucune ressources sont actuellement publiées sur cette base'}
-    </h6>
+        : 'Aucune ressources sont actuellement publiées sur cette base'
+    }
+  >
     {isMember ? (
       <>
         <div>
@@ -17,7 +18,7 @@ const Empty = ({ isMember }: { isMember: boolean }) => (
           diffusées <br />
           auprès d’un large public.{' '}
           <Link href="/" className="fr-link">
-            En savoir plus
+            En savoir plus --TODO--
           </Link>
         </div>
         <CreateResourceButton className="fr-mt-4w" />
@@ -25,7 +26,7 @@ const Empty = ({ isMember }: { isMember: boolean }) => (
     ) : (
       'Revenez plus tard ou ajoutez cette base à vos favoris afin de suivre leurs prochaines publications.'
     )}
-  </div>
+  </EmptyBox>
 )
 
-export default Empty
+export default EmptyResources

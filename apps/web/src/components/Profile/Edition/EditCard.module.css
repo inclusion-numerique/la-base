@@ -1,0 +1,17 @@
+.card {
+  width: 588px;
+  max-width: 100%;
+  border: var(--slim-grey-border);
+  padding: 32px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.description {
+  margin-top: 4px;
+}
