@@ -46,6 +46,7 @@ const seed = async (transaction: TransactionClient, random?: number) => {
     await transaction.resource.createMany({
       data: projections.map((projection) => ({
         ...projection,
+        isPublic: true,
         titleDuplicationCheckSlug: projection.slug,
         contents: undefined,
       })),

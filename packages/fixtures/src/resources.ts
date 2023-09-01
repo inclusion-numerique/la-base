@@ -265,6 +265,18 @@ export const randomResourcesEvents: (
       },
     )
 
+    const deletionEvent = {
+      id: faker.string.uuid(),
+      resourceId,
+      byId: user.id,
+      type: 'Deleted' as const,
+      timestamp: faker.date.future(),
+      data: {
+        id: faker.string.uuid(),
+        __version: 1 as const,
+      },
+    }
+
     return [
       {
         id: faker.string.uuid(),
@@ -286,6 +298,7 @@ export const randomResourcesEvents: (
       ...baseChangedEvents,
       ...titleAndDescriptionEditedEvents,
       ...contentsEvents.flat(),
+      ...(Math.floor(Math.random() * 20) % 20 === 0 ? [deletionEvent] : []),
     ]
   })
 }

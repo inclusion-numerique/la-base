@@ -188,6 +188,28 @@ const Edition = ({
     }
   }
 
+  const onDelete = async () => {
+    try {
+      await sendCommand({
+        name: 'Delete',
+        payload: {
+          resourceId: resource.id,
+        },
+      })
+
+      // TODO There is a router bug here, unstable_skipClientCache does not work and we see our resource in the list after deletion
+      // While waiting for https://github.com/vercel/next.js/issues/42991, router.refresh() will invalidate router client cache
+      // See https://nextjs.org/docs/app/building-your-application/caching#invalidation-1
+      router.refresh()
+      router.push(`/ressources`)
+    } catch (error) {
+      console.error('Could not delete resource', error)
+      // TODO Have a nice error and handle edge cases server side
+      // TODO for example a linked base or file or resource has been deleted since last publication
+      throw error
+    }
+  }
+
   return (
     <>
       <div className={classNames('fr-container', styles.container)}>
@@ -246,6 +268,7 @@ const Edition = ({
         canPublish={canPublish}
         unPublishedEdits={hasUnpublishedChanges}
         onPublish={onPublish}
+        onDelete={onDelete}
       />
     </>
   )

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { useRef } from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { useRouter } from 'next/navigation'
 import { useOnClickOutside } from 'usehooks-ts'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
@@ -9,20 +10,28 @@ import styles from './EditionActionBar.module.css'
 import ResourceEditionStateBadge from './ResourceEditionStateBadge'
 import ResourcePublishedStateBadge from './ResourcePublishedStateBadge'
 
+const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
+  createModal({
+    id: 'deleteResource',
+    isOpenedByDefault: false,
+  })
+
 const EditionActionBar = ({
   publishedState,
   editionState,
   unPublishedEdits,
   canPublish,
-  onPublish,
   publishMode,
+  onPublish,
+  onDelete,
 }: {
   publishedState: ResourcePublishedState
   editionState: ResourceEditionState
   unPublishedEdits: boolean
   canPublish: boolean
-  onPublish: () => void
   publishMode?: boolean
+  onPublish: () => void
+  onDelete: () => void
 }) => {
   const router = useRouter()
   const onCancelClick = () => {
@@ -50,90 +59,124 @@ const EditionActionBar = ({
   useOnClickOutside(collapseRef, onClickOutsideDropdown)
 
   return (
-    <div className={styles.container}>
-      <div className={classNames('fr-container', styles.content)}>
-        <div className={styles.block}>
-          <ResourcePublishedStateBadge state={publishedState} />
-          <ResourceEditionStateBadge
-            editionState={editionState}
-            unPublishedEdits={unPublishedEdits}
-            publishedState={publishedState}
-          />
-        </div>
-        <div className={styles.block}>
-          <div className={styles.moreWrapper}>
+    <>
+      <div className={styles.container}>
+        <div className={classNames('fr-container', styles.content)}>
+          <div className={styles.block}>
+            <ResourcePublishedStateBadge state={publishedState} />
+            <ResourceEditionStateBadge
+              editionState={editionState}
+              unPublishedEdits={unPublishedEdits}
+              publishedState={publishedState}
+            />
+          </div>
+          <div className={styles.block}>
+            <div className={styles.moreWrapper}>
+              <Button
+                ref={buttonRef}
+                type="button"
+                title="Voir plus d'options"
+                priority="tertiary no outline"
+                iconId="fr-icon-more-line"
+                nativeButtonProps={{
+                  'aria-expanded': 'false',
+                  'aria-controls': 'edition-action-bar-more',
+                  'data-testid': 'edition-action-bar-more-actions',
+                }}
+              />
+              <div
+                className={classNames('fr-collapse', styles.collapse)}
+                id="edition-action-bar-more"
+                ref={collapseRef}
+              >
+                <Button
+                  className={styles.collapseButton}
+                  type="button"
+                  priority="tertiary no outline"
+                  iconId="fr-icon-settings-5-line"
+                >
+                  Paramètres de la ressource
+                </Button>
+                <hr className={styles.separator} />
+                <Button
+                  className={styles.collapseButton}
+                  type="button"
+                  priority="tertiary no outline"
+                  iconId="fr-icon-eye-line"
+                >
+                  Prévisualiser la ressource
+                </Button>
+                <hr className={styles.separator} />
+                <Button
+                  className={styles.collapseButton}
+                  type="button"
+                  priority="tertiary no outline"
+                  iconId="fr-icon-user-add-line"
+                >
+                  Inviter un contributeur
+                </Button>
+                <hr className={styles.separator} />
+                <Button
+                  className={styles.collapseButton}
+                  type="button"
+                  priority="tertiary no outline"
+                  iconId="fr-icon-delete-line"
+                  nativeButtonProps={{
+                    'data-testid': 'edition-action-bar-delete-modal',
+                  }}
+                  onClick={openDeleteResourceModal}
+                >
+                  Supprimer la ressource
+                </Button>
+              </div>
+            </div>
+            {publishedState === ResourcePublishedState.DRAFT && (
+              <Button type="button" priority="tertiary" onClick={onCancelClick}>
+                Conserver en brouillon
+              </Button>
+            )}
             <Button
               type="button"
-              title="Voir plus d'options"
-              priority="tertiary no outline"
-              iconId="fr-icon-more-line"
-              nativeButtonProps={{
-                'aria-expanded': 'false',
-                'aria-controls': 'edition-action-bar-more',
-              }}
-            />
-            <div
-              className={classNames('fr-collapse', styles.collapse)}
-              id="edition-action-bar-more"
-              ref={collapseRef}
+              disabled={!canPublish}
+              onClick={onPublish}
+              data-testid="publish-resource-button"
             >
-              <Button
-                className={styles.collapseButton}
-                type="button"
-                priority="tertiary no outline"
-                iconId="fr-icon-settings-5-line"
-              >
-                Paramètres de la ressource
-              </Button>
-              <hr className={styles.separator} />
-              <Button
-                className={styles.collapseButton}
-                type="button"
-                priority="tertiary no outline"
-                iconId="fr-icon-eye-line"
-              >
-                Prévisualiser la ressource
-              </Button>
-              <hr className={styles.separator} />
-              <Button
-                className={styles.collapseButton}
-                type="button"
-                priority="tertiary no outline"
-                iconId="fr-icon-user-add-line"
-              >
-                Inviter un contributeur
-              </Button>
-              <hr className={styles.separator} />
-              <Button
-                className={styles.collapseButton}
-                type="button"
-                priority="tertiary no outline"
-                iconId="fr-icon-delete-line"
-              >
-                Supprimer la ressource
-              </Button>
-            </div>
-          </div>
-          {publishedState === ResourcePublishedState.DRAFT && (
-            <Button type="button" priority="tertiary" onClick={onCancelClick}>
-              Conserver en brouillon
+              {publishMode
+                ? 'Publier maintenant'
+                : publishedState === ResourcePublishedState.DRAFT
+                ? 'Publier la ressource'
+                : 'Publier les modifications'}
             </Button>
-          )}
-          <Button
-            type="button"
-            disabled={!canPublish}
-            onClick={onPublish}
-            data-testid="publish-resource-button"
-          >
-            {publishMode
-              ? 'Publier maintenant'
-              : publishedState === ResourcePublishedState.DRAFT
-              ? 'Publier la ressource'
-              : 'Publier les modifications'}
-          </Button>
+          </div>
         </div>
       </div>
-    </div>
+      <DeleteResourceModal
+        title="Supprimer la ressource"
+        buttons={[
+          {
+            title: 'Annuler',
+            priority: 'secondary',
+            doClosesModal: true,
+            children: 'Annuler',
+            type: 'button',
+          },
+          {
+            title: 'Supprimer',
+            doClosesModal: true,
+            children: 'Supprimer',
+            type: 'submit',
+            onClick: onDelete,
+            nativeButtonProps: {
+              className: 'fr-btn--danger',
+              'data-testid': 'edition-action-bar-delete',
+            },
+          },
+        ]}
+      >
+        Confirmez-vous la suppression de la ressource ? Tous les contenus de la
+        ressource seront supprimés avec elle.
+      </DeleteResourceModal>
+    </>
   )
 }
 

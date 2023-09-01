@@ -66,6 +66,7 @@ export const randomBases: (
       titleDuplicationCheckSlug: slug,
       description: faker.lorem.paragraph(),
       ownerId: user.id,
+      isPublic: true,
     }
   })
 }
