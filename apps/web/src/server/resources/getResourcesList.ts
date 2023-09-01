@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
@@ -31,10 +32,7 @@ export const resourceListSelect = {
 
 export const getWhereResourcesList = (
   user?: Pick<SessionUser, 'id'> | null,
-  where: Exclude<
-    Parameters<typeof prismaClient.resource.findMany>[0],
-    undefined
-  >['where'] = {},
+  where: Prisma.ResourceWhereInput = {},
 ) => {
   const whereResourceIsPublic = {
     isPublic: true,

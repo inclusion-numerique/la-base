@@ -1,12 +1,10 @@
+import type { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
 const getWhereBasesList = (
   user?: Pick<SessionUser, 'id'> | null,
-  where: Exclude<
-    Parameters<typeof prismaClient.base.findMany>[0],
-    undefined
-  >['where'] = {},
+  where: Prisma.BaseWhereInput = {},
 ) => {
   const whereBaseIsPublic = {
     isPublic: true,

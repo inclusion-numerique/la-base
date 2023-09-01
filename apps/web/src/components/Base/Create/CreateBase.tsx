@@ -61,17 +61,9 @@ const CreateBase = () => {
               disabled={isSubmitting}
               asterisk
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label
-              className="fr-label fr-mb-1w"
-              htmlFor="base-description-input"
-            >
-              Description
-              <span className="fr-hint-text">
-                Texte de description additionnel
-              </span>
-            </label>
             <RichInputForm
+              label="Description"
+              hint="Text de description additionnel"
               form={form}
               path="description"
               id="base-description-input"
@@ -79,7 +71,7 @@ const CreateBase = () => {
           </div>
 
           <div className={classNames('fr-mt-3w', styles.card)}>
-            <h5 className="fr-mb-0">Visibilité de la base</h5>
+            <h5 className="fr-mb-1w">Visibilité de la base</h5>
             Choisissez la visibilité de votre base. Vous pourrez modifier sa
             visibilité à tout moment.
             <hr className="fr-mt-4w fr-pb-4w" />
@@ -134,7 +126,13 @@ const CreateBase = () => {
               )}
             />
           </div>
-          <Button type="submit" className="fr-mt-4w" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            className={classNames(
+              'fr-mt-4w',
+              isSubmitting && 'fr-btn--loading',
+            )}
+          >
             Créer
           </Button>
         </form>
