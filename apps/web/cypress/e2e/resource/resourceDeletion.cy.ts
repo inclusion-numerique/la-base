@@ -2,7 +2,9 @@ import { cleanUpAndCreateTestResource } from './edition/editionTestUtils'
 import { appUrl } from 'cypress/support/helpers'
 
 describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supprimer", () => {
-  beforeEach(cleanUpAndCreateTestResource)
+  beforeEach(() => {
+    cleanUpAndCreateTestResource()
+  })
 
   /**
    * US
