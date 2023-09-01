@@ -77,7 +77,7 @@ export const onCreated: ResourceEventSideEffect<ResourceCreated> = async (
       created: event.timestamp,
       updated: event.timestamp,
       createdById: event.data.byId,
-      isPublic: false,
+      isPublic: null,
     },
   })
 }

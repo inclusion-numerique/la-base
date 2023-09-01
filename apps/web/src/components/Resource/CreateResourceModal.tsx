@@ -1,6 +1,7 @@
 /* eslint react/jsx-props-no-spreading: off */
 import React from 'react'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import classNames from 'classnames'
 
 export const {
   Component: CreateResourceModal,
@@ -15,10 +16,13 @@ export const {
 export const createResourceModalId =
   createResourceModalNativeButtonProps['aria-controls']
 
-export const CreateResourceButton = () => (
+export const CreateResourceButton = ({ className }: { className?: string }) => (
   <button
     type="button"
-    className="fr-btn fr-icon-edit-box-line"
+    className={classNames(
+      'fr-btn fr-btn--icon-left fr-icon-edit-box-line',
+      className,
+    )}
     {...createResourceModalNativeButtonProps}
   >
     Créer une ressource

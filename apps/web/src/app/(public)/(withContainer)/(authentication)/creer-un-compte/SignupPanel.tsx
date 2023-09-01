@@ -1,9 +1,9 @@
 import { Route } from 'next'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
-import { signinErrorMessage } from '@app/web/app/(public)/(authentication)/authenticationErrorMessage'
-import InclusionConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/InclusionConnectSigninButton'
-import EmailSignupForm from '@app/web/app/(public)/(authentication)/creer-un-compte/EmailSignupForm'
+import { AuthCard } from '@app/web/app/(public)/(withContainer)/(authentication)/AuthCard'
+import { signinErrorMessage } from '@app/web/app/(public)/(withContainer)/(authentication)/authenticationErrorMessage'
+import InclusionConnectSigninButton from '@app/web/app/(public)/(withContainer)/(authentication)/connexion/InclusionConnectSigninButton'
+import EmailSignupForm from '@app/web/app/(public)/(withContainer)/(authentication)/creer-un-compte/EmailSignupForm'
 
 const SignupPanel = ({
   error,

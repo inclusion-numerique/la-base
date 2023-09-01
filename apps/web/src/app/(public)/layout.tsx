@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import PublicFooter from '@app/web/app/(public)/PublicFooter'
+import PublicFooter from '@app/web/app/(public)/(withContainer)/PublicFooter'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
 import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
@@ -14,9 +14,7 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
         user={user}
         createResource={user ? <CreateResourceButton /> : undefined}
       />
-      <div style={{ flex: 1 }}>
-        <div className="fr-container">{children}</div>
-      </div>
+      {children}
       <PublicFooter />
     </div>
   )

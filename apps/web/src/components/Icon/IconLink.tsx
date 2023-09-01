@@ -9,13 +9,16 @@ const IconLink = ({
   icon,
   href,
   small,
+  'data-testid': dataTestId,
 }: {
   title: string
   icon: string
   href: Route
   small?: boolean
+  ['data-testid']?: string
 }) => (
   <Link
+    data-testid={dataTestId}
     title={title}
     className={classNames(
       'fr-btn',

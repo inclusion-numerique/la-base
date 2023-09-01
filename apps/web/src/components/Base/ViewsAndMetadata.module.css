@@ -1,0 +1,15 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.spanMdDisplay {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: inline;
+  }
+}

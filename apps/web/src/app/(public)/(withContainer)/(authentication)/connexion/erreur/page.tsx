@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
+import { AuthCard } from '@app/web/app/(public)/(withContainer)/(authentication)/AuthCard'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
 

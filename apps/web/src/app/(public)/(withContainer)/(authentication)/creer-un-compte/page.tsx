@@ -1,7 +1,7 @@
 import { Route } from 'next'
 import { redirect } from 'next/navigation'
 import Alert from '@codegouvfr/react-dsfr/Alert'
-import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
+import SignupPanel from '@app/web/app/(public)/(withContainer)/(authentication)/creer-un-compte/SignupPanel'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getServerUrl } from '@app/web/utils/baseUrl'

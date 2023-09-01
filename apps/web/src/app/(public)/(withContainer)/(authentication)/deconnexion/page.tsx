@@ -3,7 +3,7 @@
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
+import { AuthCard } from '@app/web/app/(public)/(withContainer)/(authentication)/AuthCard'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 
 export const revalidate = 0

@@ -36,6 +36,18 @@ export const cleanUpAndCreateTestResourceInProfile = (
   cy.dsfrShouldBeStarted()
 }
 
+export const cleanUpAndCreateTestBase = (publicBase?: boolean) => {
+  cy.execute('deleteAllData', undefined)
+  const user = createTestUser()
+  const base = createTestBase(user.id, publicBase)
+
+  cy.createUserAndSignin(user)
+  cy.createBase(base)
+  cy.visit(`/bases/${base.slug}`)
+
+  cy.dsfrShouldBeStarted()
+}
+
 export const expectActionBarStatusWithDraftEdits = () => {
   cy.testId('resource-published-state').should('have.text', 'Brouillon')
   cy.testId('resource-edition-state').should('have.text', 'Enregistrée')

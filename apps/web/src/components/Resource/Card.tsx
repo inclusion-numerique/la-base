@@ -73,6 +73,7 @@ const ResourceCard = ({
       <div className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}>
         {user && (
           <IconLink
+            data-testid="resource-card-edit-link"
             title="Editer"
             href={`/ressources/${resource.slug}/editer` as Route}
             icon="fr-icon-edit-line"
