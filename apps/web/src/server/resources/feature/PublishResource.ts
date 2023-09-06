@@ -10,9 +10,33 @@ export const PublishCommandValidation = z.object({
     z.object({
       resourceId: z.string().uuid(),
       isPublic: z.literal(true),
-      themes: z.array(z.string()).min(1).max(themesLimit),
-      supportTypes: z.array(z.string()).min(1).max(supportTypesLimit),
-      targetAudiences: z.array(z.string()).min(1).max(targetAudiencesLimit),
+      themes: z
+        .array(z.string(), {
+          required_error: "Merci d'ajouter au moins une thématique",
+        })
+        .min(1, "Merci d'ajouter au moins une thématique")
+        .max(
+          themesLimit,
+          `Vous ne pouvez pas ajouter plus de ${themesLimit} thématiques`,
+        ),
+      supportTypes: z
+        .array(z.string(), {
+          required_error: "Merci d'ajouter au moins un type de support",
+        })
+        .min(1, "Merci d'ajouter au moins un type de support")
+        .max(
+          supportTypesLimit,
+          `Vous ne pouvez pas ajouter plus de ${supportTypesLimit} types de support`,
+        ),
+      targetAudiences: z
+        .array(z.string(), {
+          required_error: "Merci d'ajouter au moins un public visé",
+        })
+        .min(1, "Merci d'ajouter au moins un public visé")
+        .max(
+          targetAudiencesLimit,
+          `Vous ne pouvez pas ajouter plus de ${targetAudiencesLimit} publics visés`,
+        ),
     }),
     z.object({
       resourceId: z.string().uuid(),

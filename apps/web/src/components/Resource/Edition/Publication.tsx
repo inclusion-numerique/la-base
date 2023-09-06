@@ -88,12 +88,21 @@ const Publication = ({
               id="radio-rich"
               aria-labelledby="radio-rich-legend radio-rich-messages"
             >
-              {!resource.base?.isPublic && (
-                <Notice
-                  className="fr-mx-2v fr-mt-4v fr-mb-4v"
-                  title="En publiant votre ressource dans une base privée, vous ne pourrez pas la rendre publique."
-                />
-              )}
+              {resource.base
+                ? !resource.base.isPublic && (
+                    <Notice
+                      data-testid="notice-private-base"
+                      className="fr-mx-2v fr-mt-4v fr-mb-4v"
+                      title="En publiant votre ressource dans une base privée, vous ne pourrez pas la rendre publique."
+                    />
+                  )
+                : !user.isPublic && (
+                    <Notice
+                      data-testid="notice-private-profile"
+                      className="fr-mx-2v fr-mt-4v fr-mb-4v"
+                      title="En publiant votre ressource dans un profil privée, vous ne pourrez pas la rendre publique."
+                    />
+                  )}
               <ResourceBaseRichRadioElement
                 id="radio-resource-public"
                 data-testid="visibility-radio-resource-public"

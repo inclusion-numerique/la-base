@@ -16,6 +16,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('not.exist')
+    cy.testId('notice-private-base').should('not.exist')
+    cy.testId('notice-private-profile').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('not.be.checked')
     cy.testId('publish-resource-button').should('be.disabled')
@@ -51,6 +53,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('not.exist')
+    cy.testId('notice-private-base').should('not.exist')
+    cy.testId('notice-private-profile').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('not.be.checked')
     cy.testId('publish-resource-button').should('be.disabled')
@@ -81,6 +85,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('exist')
+    cy.testId('notice-private-base').should('exist')
+    cy.testId('notice-private-profile').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-public').should('be.disabled')
     cy.testId('visibility-radio-resource-private').should('be.checked')
@@ -107,6 +113,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('exist')
+    cy.testId('notice-private-base').should('not.exist')
+    cy.testId('notice-private-profile').should('exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-public').should('be.disabled')
     cy.testId('visibility-radio-resource-private').should('be.checked')
