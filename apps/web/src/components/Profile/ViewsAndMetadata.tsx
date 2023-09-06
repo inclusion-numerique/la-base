@@ -12,7 +12,7 @@ const ViewsAndMetadata = ({ resourcesCount }: { resourcesCount: number }) => (
     <div>·</div>
     <span className="fr-icon-user-heart-line fr-icon--sm" />
     <div>
-      <b>45</b>
+      <b className="wip">45</b>
       <span className={styles.spanMdDisplay}> Favoris</span>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import classNames from 'classnames'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import ViewsAndMetadata from '../ViewsAndMetadata'
 import styles from './Card.module.css'
@@ -7,7 +8,7 @@ import styles from './Card.module.css'
 const BaseCard = ({ base }: { base: BaseListItem }) => (
   <Link
     href={`/bases/${base.slug}`}
-    className={styles.container}
+    className={classNames(styles.container, 'wip')}
     data-testid="base-card"
   >
     <div className={styles.logo} />

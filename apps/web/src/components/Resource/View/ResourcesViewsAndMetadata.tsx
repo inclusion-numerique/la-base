@@ -7,13 +7,13 @@ const ResourcesViewsAndMetadata = ({ className }: { className?: string }) => (
   <div className={classNames(styles.container, 'fr-text--sm', className)}>
     <span className="fr-icon-eye-line fr-icon--sm" />
     <div>
-      <b>45</b>
+      <b className="wip">45</b>
       <span className={styles.spanMdDisplay}> Vues</span>
     </div>
     <div>·</div>
     <span className="fr-icon-bookmark-line fr-icon--sm" />
     <div className={styles.lastLeft}>
-      <b>45</b>
+      <b className="wip">45</b>
       <span className={styles.spanMdDisplay}> Enregistrements</span>
     </div>
     <Badge className="fr-hidden fr-unhidden-md" small noIcon severity="success">

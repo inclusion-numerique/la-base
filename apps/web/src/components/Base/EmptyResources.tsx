@@ -17,8 +17,8 @@ const EmptyResources = ({ isMember }: { isMember: boolean }) => (
           Présentez, valorisez & publiez vos ressources afin qu’elles soient
           diffusées <br />
           auprès d’un large public.{' '}
-          <Link href="/" className="fr-link">
-            En savoir plus --TODO--
+          <Link href="/" className="fr-link wip">
+            En savoir plus
           </Link>
         </div>
         <CreateResourceButton className="fr-mt-4w" />

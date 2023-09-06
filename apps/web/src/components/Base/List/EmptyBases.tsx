@@ -11,8 +11,8 @@ const EmptyBases = ({ isConnectedUser }: { isConnectedUser: boolean }) => (
         & contribuer à des ressources dans une démarche collaborative. Vous
         pouvez créer votre propre base ou rejoindre une base existante en vous
         faisant inviter par un administrateur de cette base.
-        <Link href="/" className="fr-link">
-          En savoir plus --TODO--
+        <Link href="/" className="fr-link wip">
+          En savoir plus
         </Link>
         <div className="fr-mt-4w">
           <CreateBaseButton className="fr-btn--secondary" />
