@@ -101,6 +101,36 @@ Cypress.Commands.add('removeHover', () =>
   cy.get('body').realHover({ position: 'topLeft' }),
 )
 
+// From https://github.com/cypress-io/cypress/issues/877
+Cypress.Commands.add(
+  'positionToViewport',
+  (
+    testId: string,
+    position: 'inside' | 'above' | 'below' | 'left' | 'right',
+  ) => {
+    cy.testId(testId).then(($el) => {
+      const height = Cypress.$(cy.state('window')).height()
+      const width = Cypress.$(cy.state('window')).width()
+      const rect = $el[0].getBoundingClientRect()
+
+      if (position == 'inside') {
+        expect(rect.top + rect.height / 2).to.be.greaterThan(0)
+        expect(rect.top + rect.height / 2).to.be.lessThan(height)
+        expect(rect.left + rect.width / 2).to.be.greaterThan(0)
+        expect((rect.left, +(rect.width / 2))).to.be.lessThan(width)
+      } else if (position == 'above') {
+        expect(rect.top + rect.height / 2).to.be.lessThan(0)
+      } else if (position == 'below') {
+        expect(rect.top + rect.height / 2).to.be.greaterThan(height)
+      } else if (position == 'left') {
+        expect(rect.left + rect.width / 2).to.be.lessThan(0)
+      } else if (position == 'right') {
+        expect(rect.left + rect.width / 2).to.be.greaterThan(width)
+      }
+    })
+  },
+)
+
 //
 declare global {
   namespace Cypress {
@@ -122,6 +152,11 @@ declare global {
       dsfrCollapsesShouldBeBound(): Chainable<void>
       testId(testId: string): Chainable<JQuery<HTMLElement>>
       removeHover(): Chainable<JQuery<HTMLElement>>
+      positionToViewport(
+        testId: string,
+        position: 'inside' | 'above' | 'below' | 'left' | 'right',
+      ): Chainable<void>
+      state(type: string): Chainable<any>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

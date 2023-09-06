@@ -96,6 +96,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
               slug: createSlug(base1Title),
               titleDuplicationCheckSlug: createSlug(base1Title),
               isPublic: true,
+              email: 'e@mail.fr',
+              emailIsPublic: true,
             },
             {
               id: v4(),
@@ -103,6 +105,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
               slug: createSlug(base2Title),
               titleDuplicationCheckSlug: createSlug(base2Title),
               isPublic: false,
+              email: 'e@mail.fr',
+              emailIsPublic: true,
             },
           ],
         },

@@ -89,10 +89,19 @@ model Base {
   slug                      String  @unique
   // Slug that can be duplicated, only based on title
   titleDuplicationCheckSlug String  @map("title_duplication_check_slug")
+  base                      String?
   description               String?
+  department                String?
   owner                     User    @relation(fields: [ownerId], references: [id])
   ownerId                   String  @map("owner_id") @db.Uuid
   isPublic                  Boolean @default(false) @map("is_public")
+
+  email         String
+  emailIsPublic Boolean @map("email_is_public")
+  website       String?
+  facebook      String?
+  twitter       String?
+  linkedin      String?
 
   created   DateTime   @default(now())
   updated   DateTime   @default(now())

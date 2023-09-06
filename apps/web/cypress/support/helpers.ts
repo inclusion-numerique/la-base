@@ -37,6 +37,8 @@ export const createTestBase = (ownerId: string, isPublic?: boolean) =>
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
     ownerId,
     isPublic,
+    email: 'test@mail.fr',
+    emailIsPublic: true,
   } satisfies CreateBaseInput)
 
 export const createTestResourceCommands = ({

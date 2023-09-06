@@ -29,6 +29,7 @@ const Menu = ({
           </li>
           <li className="fr-nav__item">
             <Link
+              data-testid="bases-menu-button"
               className="fr-nav__link fr-link--md"
               href={`/profils/${profile.id}/bases`}
               aria-current={currentPage === '/bases' ? 'page' : undefined}

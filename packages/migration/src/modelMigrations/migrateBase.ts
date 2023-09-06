@@ -65,6 +65,12 @@ export const migrateBase = async ({
     created: legacyBase.created,
     updated: legacyBase.modified,
     isPublic: legacyBase.state === 'public',
+    email: legacyBase.contact || 'contact@contact.fr',
+    emailIsPublic: true,
+    facebook: legacyBase.social_media_facebook,
+    linkedin: legacyBase.social_media_linkedin,
+    twitter: legacyBase.social_media_twitter,
+    website: legacyBase.website,
   } satisfies Parameters<typeof transaction.base.upsert>[0]['update']
 
   return transaction.base.upsert({

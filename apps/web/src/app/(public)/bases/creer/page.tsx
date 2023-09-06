@@ -10,12 +10,14 @@ const BasePage = async () => {
     redirect(`/connexion?suivant=/bases/creer`)
   }
   return (
-    <div className="fr-container">
-      <Breadcrumbs currentPage="Créer une base" />
+    <>
+      <div className="fr-container">
+        <Breadcrumbs currentPage="Créer une base" />
+      </div>
       <div className="fr-mt-6w">
         <CreateBase />
       </div>
-    </div>
+    </>
   )
 }
 

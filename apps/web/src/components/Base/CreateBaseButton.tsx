@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 export const CreateBaseButton = ({ className }: { className?: string }) => (
   <Link
+    data-testid="create-base-button"
     className={classNames(
       'fr-btn fr-btn--icon-left fr-icon-add-line',
       className,
