@@ -36,6 +36,7 @@ const Resources = ({
         tabs={[
           {
             label: `Brouillons · ${drafts.length}`,
+            iconId: 'fr-icon-draft-line',
             content: (
               <ResourceTab
                 resources={drafts}
@@ -47,6 +48,7 @@ const Resources = ({
           },
           {
             label: `Publiées · ${publics.length}`,
+            iconId: 'fr-icon-earth-line',
             content: (
               <ResourceTab
                 resources={publics}
@@ -58,6 +60,7 @@ const Resources = ({
           },
           {
             label: `Privées · ${privates.length}`,
+            iconId: 'fr-icon-lock-line',
             content: (
               <ResourceTab
                 resources={privates}
