@@ -9,6 +9,10 @@
     gap: 8px;
   }
 
+  :global(.fr-modal__footer) {
+    border-top: var(--slim-grey-border);
+  }
+
   a {
     width: 100%;
     justify-content: center;
