@@ -9,6 +9,7 @@ import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import styles from './EditionActionBar.module.css'
 import ResourceEditionStateBadge from './ResourceEditionStateBadge'
 import ResourcePublishedStateBadge from './ResourcePublishedStateBadge'
+import { deleteResourceModalProps } from './DeleteResourceModalContent'
 
 const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
   createModal({
@@ -150,32 +151,7 @@ const EditionActionBar = ({
           </div>
         </div>
       </div>
-      <DeleteResourceModal
-        title="Supprimer la ressource"
-        buttons={[
-          {
-            title: 'Annuler',
-            priority: 'secondary',
-            doClosesModal: true,
-            children: 'Annuler',
-            type: 'button',
-          },
-          {
-            title: 'Supprimer',
-            doClosesModal: true,
-            children: 'Supprimer',
-            type: 'submit',
-            onClick: onDelete,
-            nativeButtonProps: {
-              className: 'fr-btn--danger',
-              'data-testid': 'edition-action-bar-delete',
-            },
-          },
-        ]}
-      >
-        Confirmez-vous la suppression de la ressource ? Tous les contenus de la
-        ressource seront supprimés avec elle.
-      </DeleteResourceModal>
+      <DeleteResourceModal {...deleteResourceModalProps(onDelete)} />
     </>
   )
 }

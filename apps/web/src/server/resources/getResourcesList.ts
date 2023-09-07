@@ -3,10 +3,12 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
 export const resourceListSelect = {
+  id: true,
   title: true,
   slug: true,
   created: true,
   updated: true,
+  published: true,
   description: true,
   isPublic: true,
   image: {

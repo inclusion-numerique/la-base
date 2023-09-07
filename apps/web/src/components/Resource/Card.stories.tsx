@@ -6,14 +6,17 @@ import { testSessionUser } from '@app/web/test/testSessionUser'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import Card from './Card'
 
+const date = new Date('1998-07-12')
 const resource = {
+  id: '7a7a8e12-3fdb-4485-8f9d-112bce55d302',
   title:
     'Titre d’une ressource sur deux ligne très longues comme comme sur deux ligne très longues',
   slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-ligne-tres-longues',
   description:
     'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae turpis sed vitae vel. Venenatis adipiscing elit.',
-  created: new Date('1998-07-12'),
-  updated: new Date('2022-07-12'),
+  created: date,
+  updated: date,
+  published: date,
   base: { title: 'Titre de la base', slug: 'titre-de-la-base', isPublic: true },
   isPublic: true,
   createdBy: {
@@ -22,6 +25,7 @@ const resource = {
   },
   image: null,
 } satisfies ResourceListItem
+const creatorUser = { ...testSessionUser, id: resource.createdBy.id }
 
 export default {
   title: 'Ressource/Card',
@@ -38,48 +42,106 @@ const Template = (props: ComponentProps<typeof Card>) => (
 
 const render = (props: ComponentProps<typeof Card>) => <Template {...props} />
 
-export const SansImage: Story = {
+export const BrouillonSansImage: Story = {
   args: {
-    resource,
+    resource: { ...resource, published: null },
+    user: creatorUser,
   },
   render,
 }
 
-export const SansImageMobile = mobileStory(SansImage)
+export const BrouillonAvecImage: Story = {
+  args: {
+    resource: {
+      ...resource,
+      published: null,
+      image: { id: 'portrait.webp', altText: 'Texte alternatif' },
+    },
+    user: creatorUser,
+  },
+  render,
+}
 
-export const AvecImage: Story = {
+export const BrouillonModifiéSansImage: Story = {
+  args: {
+    resource: { ...resource, updated: new Date(), published: null },
+    user: creatorUser,
+  },
+  render,
+}
+
+export const BrouillonModifiéAvecImage: Story = {
+  args: {
+    resource: {
+      ...resource,
+      updated: new Date(),
+      published: null,
+      image: { id: 'portrait.webp', altText: 'Texte alternatif' },
+    },
+    user: creatorUser,
+  },
+  render,
+}
+
+export const SansImageVueContributeur: Story = {
+  args: {
+    resource,
+    user: creatorUser,
+  },
+  render,
+}
+
+export const AvecImageVueContributeur: Story = {
   args: {
     resource: {
       ...resource,
       image: { id: 'portrait.webp', altText: 'Texte alternatif' },
     },
+    user: creatorUser,
   },
   render,
 }
 
-export const AvecImageMobile = mobileStory(AvecImage)
-
-export const UtilisateurConnectéAvecImage: Story = {
-  args: {
-    resource: {
-      ...resource,
-      image: { id: 'paysage.webp', altText: 'Texte alternatif' },
-    },
-    user: testSessionUser,
-  },
-  render,
-}
-export const UtilisateurConnectéAvecImageMobile = mobileStory(
-  UtilisateurConnectéAvecImage,
-)
-
-export const UtilisateurConnectéSansImage: Story = {
+export const SansImageVueVisiteur: Story = {
   args: {
     resource,
     user: testSessionUser,
   },
   render,
 }
-export const UtilisateurConnectéSansImageMobile = mobileStory(
-  UtilisateurConnectéSansImage,
-)
+
+export const AvecImageVueVisiteur: Story = {
+  args: {
+    resource: {
+      ...resource,
+      image: { id: 'portrait.webp', altText: 'Texte alternatif' },
+    },
+    user: testSessionUser,
+  },
+  render,
+}
+
+export const ModificationsNonPubliéesSansImageVueContributeur: Story = {
+  args: {
+    resource: { ...resource, updated: new Date() },
+    user: creatorUser,
+  },
+  render,
+}
+
+export const ModificationsNonPubliéesAvecImageVueContributeur: Story = {
+  args: {
+    resource: {
+      ...resource,
+      updated: new Date(),
+      image: { id: 'portrait.webp', altText: 'Texte alternatif' },
+    },
+    user: creatorUser,
+  },
+  render,
+}
+
+export const AvecImageVueVisiteurMobile = mobileStory(AvecImageVueVisiteur)
+
+export const ModificationsNonPubliéesAvecImageVueContributeurMobile =
+  mobileStory(ModificationsNonPubliéesAvecImageVueContributeur)

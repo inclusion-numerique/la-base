@@ -13,7 +13,7 @@ const PublishedInInformation = ({
     <div className={styles.circle} />
     {base ? (
       <span className="fr-text--xs fr-mb-0">
-        Publié dans la base{' '}
+        Dans la base{' '}
         <Link href={`/bases/${base.slug}`} className="fr-link fr-text--xs">
           {base.title}
         </Link>
