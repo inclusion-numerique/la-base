@@ -13,10 +13,6 @@
   padding: 32px;
 }
 
-.red {
-  color: var(--background-flat-error)
-}
-
 .buttons {
   margin-top: 120px;
   border-top: var(--slim-grey-border);

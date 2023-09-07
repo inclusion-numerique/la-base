@@ -11,6 +11,7 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
 import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { departmentsOptions } from '@app/web/utils/departments'
@@ -69,8 +70,7 @@ const CreateBase = () => {
           >
             <h5 className="fr-mb-1w">Informations de la base</h5>
             <p className="fr-text--sm fr-hint-text fr-mb-0">
-              Les champs avec <span className={styles.red}>*</span> sont
-              obligatoires.
+              Les champs avec <RedAsterisk /> sont obligatoires.
             </p>
             <hr className="fr-mt-4w fr-pb-4w" />
             <InputFormField
@@ -105,8 +105,7 @@ const CreateBase = () => {
           <div className={classNames('fr-mt-3w', styles.card)} id="contacts">
             <h5 className="fr-mb-1w">Contacts</h5>
             <p className="fr-text--sm fr-hint-text fr-mb-0">
-              Les champs avec <span className={styles.red}>*</span> sont
-              obligatoires.
+              Les champs avec <RedAsterisk /> sont obligatoires.
             </p>
             <hr className="fr-mt-4w fr-pb-4w" />
             <InputFormField

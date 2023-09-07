@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import {
   targetAudiencesLimit,
   PublishCommand,
@@ -146,17 +147,13 @@ const Publication = ({
             votre ressource via le moteur de recherche.
           </p>
           <p className="fr-text--sm fr-hint-text fr-mb-0">
-            Les champs avec <span className={styles.red}>*</span> sont
-            obligatoires.
+            Les champs avec <RedAsterisk /> sont obligatoires.
           </p>
           <hr className="fr-mt-4w fr-pb-4w" />
           <MultipleSelectFormField
             data-testid="indexation-themes-select"
-            label={
-              <>
-                Thématiques <span className={styles.red}>*</span>
-              </>
-            }
+            asterisk
+            label="Thématiques"
             hint={
               <>
                 Quelles sont les principales thématiques abordées par la
@@ -178,11 +175,7 @@ const Publication = ({
           />
           <MultipleSelectFormField
             data-testid="indexation-support-types-select"
-            label={
-              <>
-                Type de support <span className={styles.red}>*</span>
-              </>
-            }
+            label="Type de support"
             hint={
               <>
                 Type de support (article, fiche, guide...).
@@ -203,11 +196,7 @@ const Publication = ({
           />
           <MultipleSelectFormField
             data-testid="indexation-targetAudiences-select"
-            label={
-              <>
-                Publics cibles <span className={styles.red}>*</span>
-              </>
-            }
+            label="Publics cibles"
             hint={
               <>
                 Quel est le public visé par la ressource ?<br />
