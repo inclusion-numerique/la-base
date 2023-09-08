@@ -4,7 +4,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import CreateBase from '@app/web/components/Base/Create/CreateBase'
 
-const BasePage = async () => {
+const BaseCreationPage = async () => {
   const user = await getSessionUser()
   if (!user) {
     redirect(`/connexion?suivant=/bases/creer`)
@@ -21,4 +21,4 @@ const BasePage = async () => {
   )
 }
 
-export default BasePage
+export default BaseCreationPage

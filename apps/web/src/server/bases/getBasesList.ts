@@ -5,21 +5,24 @@ import { prismaClient } from '@app/web/prismaClient'
 const getWhereBasesList = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.BaseWhereInput = {},
-) => {
+): Prisma.BaseWhereInput => {
   const whereBaseIsPublic = {
     isPublic: true,
     ...where,
   }
 
-  return user
-    ? {
-        OR: [
-          whereBaseIsPublic,
-          // Public or created by user
-          { ownerId: user.id },
-        ],
-      }
-    : whereBaseIsPublic
+  return {
+    ...(user
+      ? {
+          OR: [
+            whereBaseIsPublic,
+            // Public or created by user
+            { ownerId: user.id },
+          ],
+        }
+      : whereBaseIsPublic),
+    deleted: null,
+  }
 }
 
 export const getProfileBasesCount = async (

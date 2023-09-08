@@ -23,7 +23,7 @@ const Header = ({
         {isConnectedUser && (
           <Link
             className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
-            href={`/profils/${profile.id}/modifier`}
+            href={`/profils/${profile.id}/editer`}
           >
             Modifier le profil
           </Link>

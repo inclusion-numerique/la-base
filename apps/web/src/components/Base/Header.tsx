@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
+import Link from 'next/link'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import Breadcrumbs from '../Breadcrumbs'
 import styles from './Header.module.css'
@@ -21,13 +21,12 @@ const Header = ({
         <h2>{base.title}</h2>
         <ViewsAndMetadata base={base} />
         {isMember && (
-          <Button
-            className="fr-mt-2w"
-            priority="secondary"
-            iconId="fr-icon-edit-line"
+          <Link
+            className="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-edit-line fr-mt-2w"
+            href={`/bases/${base.slug}/editer`}
           >
             Modifier la base
-          </Button>
+          </Link>
         )}
       </div>
     </div>

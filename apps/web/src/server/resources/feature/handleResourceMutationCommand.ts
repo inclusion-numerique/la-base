@@ -15,10 +15,12 @@ import {
   getResourceProjectionContext,
 } from '@app/web/server/resources/getResourceFromEvents'
 import { notFoundError } from '@app/web/server/rpc/trpcErrors'
+import { PrismaTransaction } from '@app/web/utils/prismaTypes'
 
 export const handleResourceMutationCommand = async (
   command: ResourceMutationCommand,
   { user }: { user?: Pick<SessionUser, 'id'> },
+  transaction?: PrismaTransaction,
 ) => {
   const { resourceId } = command.payload
 
@@ -41,17 +43,17 @@ export const handleResourceMutationCommand = async (
 
   let resource = initialResource
 
-  await prismaClient.$transaction(async (transaction) => {
+  const transactionEvents = async (prismaTransaction: PrismaTransaction) => {
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
 
       // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, {
-        transaction,
+        transaction: prismaTransaction,
         persistedResource,
       })
       // eslint-disable-next-line no-await-in-loop
-      await transaction.resourceEvent.create({
+      await prismaTransaction.resourceEvent.create({
         data: {
           id: v4(),
           resourceId: resource.id,
@@ -60,7 +62,11 @@ export const handleResourceMutationCommand = async (
         },
       })
     }
-  })
+  }
+
+  await (transaction
+    ? transactionEvents(transaction)
+    : prismaClient.$transaction(transactionEvents))
   const resourceWithContext = await getResourceProjectionContext(resource)
 
   return {

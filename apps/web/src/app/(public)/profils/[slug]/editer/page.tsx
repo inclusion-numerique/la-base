@@ -9,7 +9,7 @@ import EditProfile from '@app/web/components/Profile/Edition/EditProfile'
 const EditProfilPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/profils/${params.slug}/modifier`)
+    redirect(`/connexion?suivant=/profils/${params.slug}/editer`)
   }
 
   if (user.id !== params.slug) {

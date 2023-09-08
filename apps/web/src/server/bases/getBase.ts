@@ -9,8 +9,9 @@ export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'>,
 ) =>
-  prismaClient.base.findUnique({
+  prismaClient.base.findFirst({
     select: {
+      id: true,
       slug: true,
       title: true,
       isPublic: true,
@@ -20,7 +21,7 @@ export const basePageQuery = async (
         where: getWhereResourcesList(user),
       },
     },
-    where: { slug },
+    where: { slug, deleted: null },
   })
 
 export type BasePageData = Exclude<

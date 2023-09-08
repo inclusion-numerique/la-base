@@ -105,6 +105,7 @@ model Base {
 
   created   DateTime   @default(now())
   updated   DateTime   @default(now())
+  deleted   DateTime?
   resources Resource[]
 
   @@map("bases")

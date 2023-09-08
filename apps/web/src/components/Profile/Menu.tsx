@@ -20,6 +20,7 @@ const Menu = ({
         <ul className="fr-nav__list">
           <li className="fr-nav__item">
             <Link
+              data-testid="ressources-menu-button"
               className="fr-nav__link fr-link--md"
               href={`/profils/${profile.id}`}
               aria-current={currentPage === '/' ? 'page' : undefined}
