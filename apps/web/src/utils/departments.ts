@@ -1,3 +1,12 @@
+export const getDepartmentName = (department: string) => {
+  const values = department.split(' - ')
+  if (values.length === 2) {
+    return values[1]
+  }
+
+  return department
+}
+
 const departments = [
   '01 - Ain',
   '02 - Aisne',

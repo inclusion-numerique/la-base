@@ -19,7 +19,7 @@ const Header = ({
       <div className={styles.logo} />
       <div className={styles.baseInfo}>
         <h2>{base.title}</h2>
-        <ViewsAndMetadata base={base} />
+        <ViewsAndMetadata base={base} withBadge />
         {isMember && (
           <Button
             className="fr-mt-2w"

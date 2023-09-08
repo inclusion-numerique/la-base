@@ -8,9 +8,11 @@ import styles from './ViewsAndMetadata.module.css'
 const ViewsAndMetadata = ({
   base,
   className,
+  withBadge,
 }: {
   base: BasePageData | BaseListItem
   className?: string
+  withBadge?: boolean
 }) => (
   <div className={classNames(styles.container, 'fr-text--sm', className)}>
     <span className="fr-icon-eye-line fr-icon--sm" />
@@ -21,7 +23,12 @@ const ViewsAndMetadata = ({
     <div>·</div>
     <span className="fr-icon-file-text-line fr-icon--sm" />
     <div>
-      <b className="wip">{(base as BasePageData).resources?.length || 45}</b>
+      <b>
+        {(base as BasePageData).resources
+          ? (base as BasePageData).resources.length
+          : // eslint-disable-next-line no-underscore-dangle
+            (base as BaseListItem)._count.resources}
+      </b>
       <span className={styles.spanMdDisplay}> Ressources</span>
     </div>
     <div>·</div>
@@ -30,8 +37,13 @@ const ViewsAndMetadata = ({
       <b className="wip">45</b>
       <span className={styles.spanMdDisplay}> Favoris</span>
     </div>
-    <div>·</div>
-    <BasePrivacyTag isPublic={base.isPublic} />
+    {withBadge && (
+      <>
+        <div>·</div>
+        <BasePrivacyTag isPublic={base.isPublic} />
+      </>
+    )}
   </div>
 )
+
 export default ViewsAndMetadata

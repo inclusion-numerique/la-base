@@ -38,12 +38,22 @@ export const getProfileBases = async (
   user: Pick<SessionUser, 'id'>,
 ) => {
   const where = getWhereBasesList(user, { ownerId: profileId })
-
   return prismaClient.base.findMany({
     select: {
+      id: true,
       title: true,
       isPublic: true,
       slug: true,
+      department: true,
+      _count: {
+        select: {
+          resources: {
+            where: {
+              deleted: null,
+            },
+          },
+        },
+      },
     },
     where,
   })

@@ -11,6 +11,38 @@
   }
 }
 
+.content {
+  flex: 1;
+}
+
+.footer,
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  color: var(--text-mention-grey);
+}
+
+.badge {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icons {
+  display: flex;
+  gap: 8px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
 .logo {
   width: 116px;
   height: 116px;
