@@ -35,24 +35,38 @@ export const resourceListSelect = {
 export const getWhereResourcesList = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.ResourceWhereInput = {},
-) => {
+): Prisma.ResourceWhereInput => {
   const whereResourceIsPublic = {
     isPublic: true,
     base: { isPublic: true },
     ...where,
   }
 
+  const authorizationWhere = user
+    ? {
+        OR: [
+          whereResourceIsPublic,
+          // Public or created by user
+          { createdById: user.id },
+        ],
+      }
+    : whereResourceIsPublic
+
+  const baseNotDeleted: Prisma.ResourceWhereInput[] = [
+    {
+      base: {
+        deleted: null,
+      },
+    },
+    { base: null },
+  ]
+
   return {
-    ...(user
-      ? {
-          OR: [
-            whereResourceIsPublic,
-            // Public or created by user
-            { createdById: user.id },
-          ],
-        }
-      : whereResourceIsPublic),
+    ...authorizationWhere,
     deleted: null,
+    ...(authorizationWhere.OR
+      ? { AND: [{ OR: authorizationWhere.OR }, { OR: baseNotDeleted }] }
+      : { OR: baseNotDeleted }),
   }
 }
 

@@ -86,6 +86,14 @@ export const getResource = async (where: { slug: string } | { id: string }) =>
     where: {
       ...where,
       deleted: null,
+      OR: [
+        {
+          base: {
+            deleted: null,
+          },
+        },
+        { base: null },
+      ],
     },
   })
 
