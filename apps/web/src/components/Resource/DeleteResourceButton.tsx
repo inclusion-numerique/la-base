@@ -8,13 +8,13 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { deleteResourceModalProps } from './Edition/DeleteResourceModalContent'
 
-const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
-  createModal({
-    id: 'deleteResource',
-    isOpenedByDefault: false,
-  })
-
 const DeleteResourceButton = ({ resourceId }: { resourceId: string }) => {
+  const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
+    createModal({
+      id: `deleteResource-${resourceId}`,
+      isOpenedByDefault: false,
+    })
+
   const router = useRouter()
   const mutate = trpc.resource.mutate.useMutation()
 
