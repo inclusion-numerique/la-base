@@ -1,0 +1,8 @@
+.label {
+  color: var(--text-mention-grey);
+}
+
+.value {
+  font-weight: 500;
+  color: var(--text-label-grey)
+}

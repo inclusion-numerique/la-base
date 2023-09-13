@@ -5,3 +5,7 @@
     color: var(--blue-france-sun-113-625);
   }
 }
+
+.cards {
+  flex: 1;
+}

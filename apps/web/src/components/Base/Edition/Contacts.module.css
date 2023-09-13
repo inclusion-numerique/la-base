@@ -1,0 +1,9 @@
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contactColumn {
+  width: 50%;
+  min-width: 250px;
+}

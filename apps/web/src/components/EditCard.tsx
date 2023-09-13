@@ -6,35 +6,34 @@ import { UseFormReturn } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { UpdateProfileCommand } from '@app/web/server/profiles/updateProfile'
+import { UpdateProfileCommand } from '../server/profiles/updateProfile'
+import { UpdateBaseCommand } from '../server/bases/updateBase'
 import styles from './EditCard.module.css'
 
-const EditCard = <T extends UpdateProfileCommand>({
+const EditCard = <T extends UpdateProfileCommand | UpdateBaseCommand>({
   className,
   title,
   description,
   edition,
   view,
   form,
+  mutation,
 }: {
   className?: string
   title: string
-  description: string
+  description?: string
   edition: ReactNode
   view: ReactNode
   form: UseFormReturn<T>
+  mutation: (data: T) => Promise<void>
 }) => {
   const router = useRouter()
   const [editMode, setEditMode] = useState(false)
 
-  const mutate = trpc.profile.mutate.useMutation()
-
   const onSubmit = async (data: T) => {
     try {
-      await mutate.mutateAsync(data)
+      await mutation(data)
       setEditMode(false)
       router.refresh()
     } catch (error) {
@@ -49,6 +48,7 @@ const EditCard = <T extends UpdateProfileCommand>({
           <h5 className="fr-mb-0">{title}</h5>
           {!editMode && (
             <Button
+              data-testid="edit-card-button"
               priority="secondary"
               iconId="fr-icon-edit-line"
               title="Modifier"
@@ -80,6 +80,9 @@ const EditCard = <T extends UpdateProfileCommand>({
                 children: 'Enregistrer',
                 type: 'submit',
                 disabled: form.formState.isSubmitting,
+                nativeButtonProps: {
+                  'data-testid': 'edit-card-save-button',
+                },
               },
             ]}
           />
@@ -91,4 +94,4 @@ const EditCard = <T extends UpdateProfileCommand>({
   )
 }
 
-export default withTrpc(EditCard)
+export default EditCard

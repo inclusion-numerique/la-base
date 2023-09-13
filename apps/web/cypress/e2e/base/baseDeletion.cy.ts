@@ -10,12 +10,11 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
   beforeEach(() => {
     cleanUpAndCreateTestResource()
     cy.intercept('/api/trpc/base.delete?*').as('deleteMutation')
+    cy.visit('/bases/conseiller-numérique-france-services-contributions/editer')
+    cy.dsfrShouldBeStarted()
   })
 
   it('Acceptation 1 - le créateur de la base peut la supprimer', () => {
-    cy.visit('/bases/conseiller-numérique-france-services-contributions/editer')
-    cy.dsfrShouldBeStarted()
-
     cy.findByRole('dialog').should('not.exist')
 
     cy.testId('delete-button').click()

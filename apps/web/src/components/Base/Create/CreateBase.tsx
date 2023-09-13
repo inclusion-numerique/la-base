@@ -3,25 +3,26 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, UseFormReturn, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import InputFormField from '@app/ui/components/Form/InputFormField'
-import SelectFormField from '@app/ui/components/Form/SelectFormField'
-import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
-import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { departmentsOptions } from '@app/web/utils/departments'
 import { trpc } from '@app/web/trpc'
+import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
 import {
   CreateBaseCommand,
   CreateBaseCommandValidation,
-} from '@app/web/server/rpc/base/createBase'
-import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
+} from '@app/web/server/bases/createBase'
 import { PrivacyTag } from '@app/web/components/PrivacyTags'
+import {
+  UpdateBaseContactsCommand,
+  UpdateBaseInformationsCommand,
+} from '@app/web/server/bases/updateBase'
+import BaseInformationsEdition from '../BaseInformationsEdition'
+import BaseContactsEdition from '../BaseContactsEdition'
 import BaseSideMenu from './SideMenu'
 import styles from './CreateBase.module.css'
 
@@ -73,32 +74,12 @@ const CreateBase = () => {
               Les champs avec <RedAsterisk /> sont obligatoires.
             </p>
             <hr className="fr-mt-4w fr-pb-4w" />
-            <InputFormField
-              data-testid="base-title-input"
-              control={control}
-              path="title"
-              label="Nom de la base "
-              disabled={isSubmitting}
-              asterisk
-            />
-            <SelectFormField
-              control={control}
-              path="department"
-              label="Département"
-              options={[
-                {
-                  name: 'Selectionner une option',
-                  value: '',
-                  disabled: true,
-                },
-                ...departmentsOptions,
-              ]}
-            />
-            <RichInputFormField
-              label="Description"
-              hint="Text de description additionnel"
-              form={form}
-              path="description"
+            <BaseInformationsEdition
+              form={
+                form as UseFormReturn<
+                  CreateBaseCommand | UpdateBaseInformationsCommand
+                >
+              }
             />
           </div>
 
@@ -108,46 +89,12 @@ const CreateBase = () => {
               Les champs avec <RedAsterisk /> sont obligatoires.
             </p>
             <hr className="fr-mt-4w fr-pb-4w" />
-            <InputFormField
-              className="fr-mb-3v"
-              data-testid="base-email-input"
-              control={control}
-              path="email"
-              label="Adresse e-mail"
-              disabled={isSubmitting}
-              asterisk
-            />
-            <div className="fr-input-group">
-              <CheckboxFormField
-                control={control}
-                path="emailIsPublic"
-                label="Rendre publique cette information"
-                disabled={isSubmitting}
-              />
-            </div>
-            <InputFormField
-              control={control}
-              path="website"
-              label="Site internet"
-              disabled={isSubmitting}
-            />
-            <InputFormField
-              control={control}
-              path="facebook"
-              label="Facebook"
-              disabled={isSubmitting}
-            />
-            <InputFormField
-              control={control}
-              path="twitter"
-              label="Twitter"
-              disabled={isSubmitting}
-            />
-            <InputFormField
-              control={control}
-              path="linkedin"
-              label="LinkedIn"
-              disabled={isSubmitting}
+            <BaseContactsEdition
+              form={
+                form as UseFormReturn<
+                  CreateBaseCommand | UpdateBaseContactsCommand
+                >
+              }
             />
           </div>
 

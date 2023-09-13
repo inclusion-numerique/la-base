@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import {
   FieldPath,
   FieldValues,
@@ -52,14 +52,21 @@ const RichInputForm = <T extends FieldValues>({
     content: form.getValues(path),
     onUpdate: (event) => {
       if (onChange) {
-        onChange(event.editor.getHTML() as PathValue<T, Path<T>>)
+        const html = event.editor.getHTML()
+        // An empty html still contains a paragraph
+        onChange((html === '<p></p>' ? '' : html) as PathValue<T, Path<T>>)
       }
     },
+    editable: !disabled,
   })
 
   // Custom tooltip hover logic
   const [hoveredLinkElement, setHoveredLinkElement] =
     useState<HTMLAnchorElement | null>(null)
+
+  useEffect(() => {
+    editor?.setEditable(!disabled)
+  }, [editor, disabled])
 
   return (
     <>
@@ -71,7 +78,7 @@ const RichInputForm = <T extends FieldValues>({
       )}
       {editor ? (
         <div className={styles.container}>
-          <RichInputFormMenuBar editor={editor} />
+          <RichInputFormMenuBar editor={editor} disabled={disabled} />
           <EditorContent
             editor={editor}
             className={styles.input}

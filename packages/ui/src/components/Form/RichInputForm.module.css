@@ -5,6 +5,11 @@
 .input {
   background-color: var(--background-contrast-grey);
 
+  &[disabled] {
+    color: var(--text-disabled-grey);
+    cursor: not-allowed;
+  }
+
   :global(.ProseMirror) {
     padding: 8px 16px;
     min-height: 260px;

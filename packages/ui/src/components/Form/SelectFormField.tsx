@@ -26,6 +26,7 @@ const SelectFormField = <T extends FieldValues>({
   disabled,
   valid,
   asterisk,
+  'data-testid': dataTestId,
 }: UiComponentProps & SelectFormFieldProps<T>) => {
   const id = `select-form-field__${path}`
 
@@ -69,6 +70,7 @@ const SelectFormField = <T extends FieldValues>({
               onBlur={onBlur}
               ref={ref}
               value={value || ''}
+              data-testid={dataTestId}
             >
               {options.map((option) => (
                 <option

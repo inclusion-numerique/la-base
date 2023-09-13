@@ -1,4 +1,4 @@
-import { appUrl, createTestUser } from '../../support/helpers'
+import { appUrl } from '../../support/helpers'
 import { cleanUpAndCreateTestBase } from '../resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses ressources', () => {

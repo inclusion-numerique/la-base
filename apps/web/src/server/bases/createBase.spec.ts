@@ -91,6 +91,19 @@ describe('CreateBaseCommand', () => {
     )
   })
 
+  it('sanitize description', () => {
+    const result = CreateBaseCommandValidation.safeParse({
+      ...validCommand,
+      description: '<body><b>Broken html</b>',
+    })
+    expect(result.success).toEqual(true)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Success is true
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(result.data.description).toEqual('<b>Broken html</b>')
+  })
+
   it('does not allow empty visibility', () => {
     expectZodValidationToFail(
       CreateBaseCommandValidation,

@@ -2,7 +2,7 @@ import z from 'zod'
 
 export const UpdateProfileVisibilityCommandValidation = z.object({
   isPublic: z.boolean({
-    required_error: 'Veuillez spécifier la visibilité de la base',
+    required_error: 'Veuillez spécifier la visibilité du profil',
   }),
 })
 

@@ -6,30 +6,31 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
-import { PrivacyTag, ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
+import { BasePrivacyTag, PrivacyTag } from '@app/web/components/PrivacyTags'
 import EditCard from '@app/web/components/EditCard'
 import {
-  UpdateProfileVisibilityCommand,
-  UpdateProfileVisibilityCommandValidation,
-} from '@app/web/server/profiles/updateProfile'
+  UpdateBaseVisibilityCommand,
+  UpdateBaseVisibilityCommandValidation,
+} from '@app/web/server/bases/updateBase'
+import { BasePageData } from '@app/web/server/bases/getBase'
 
-const Visibility = ({ isPublic }: { isPublic: boolean }) => {
-  const form = useForm<UpdateProfileVisibilityCommand>({
-    resolver: zodResolver(UpdateProfileVisibilityCommandValidation),
+const Visibility = ({ base }: { base: BasePageData }) => {
+  const form = useForm<UpdateBaseVisibilityCommand>({
+    resolver: zodResolver(UpdateBaseVisibilityCommandValidation),
     defaultValues: {
-      isPublic,
+      isPublic: base.isPublic,
     },
   })
-  const mutate = trpc.profile.mutate.useMutation()
+  const mutate = trpc.base.mutate.useMutation()
 
   return (
     <EditCard
       mutation={async (data) => {
-        await mutate.mutateAsync(data)
+        await mutate.mutateAsync({ id: base.id, data })
       }}
       className="fr-mt-3w"
-      title="Visibilité du profil"
-      description="Choisissez la visibilité de votre profil."
+      title="Visibilité de la base"
+      description="Choisissez la visibilité de votre base."
       form={form}
       edition={
         <Controller
@@ -45,8 +46,8 @@ const Visibility = ({ isPublic }: { isPublic: boolean }) => {
               aria-labelledby="radio-rich-legend radio-rich-messages"
             >
               <ResourceBaseRichRadioElement
-                id="radio-profile-public"
-                data-testid="visibility-radio-profile-public"
+                id="radio-base-public"
+                data-testid="visibility-radio-base-public"
                 name={name}
                 value={
                   value === undefined || value === null
@@ -59,7 +60,7 @@ const Visibility = ({ isPublic }: { isPublic: boolean }) => {
                 }}
               >
                 <div className="fr-mr-1w">
-                  Profil public
+                  Base publique
                   <p className="fr-text--xs fr-hint-text fr-mb-0">
                     Visible par tous les visiteurs.
                   </p>
@@ -67,8 +68,8 @@ const Visibility = ({ isPublic }: { isPublic: boolean }) => {
                 <PrivacyTag isPublic />
               </ResourceBaseRichRadioElement>
               <ResourceBaseRichRadioElement
-                id="radio-profile-private"
-                data-testid="visibility-radio-profile-private"
+                id="radio-base-private"
+                data-testid="visibility-radio-base-private"
                 name={name}
                 value={
                   value === undefined || value === null
@@ -81,9 +82,10 @@ const Visibility = ({ isPublic }: { isPublic: boolean }) => {
                 }}
               >
                 <div className="fr-mr-1w">
-                  Profil privé
+                  Base privée
                   <p className="fr-text--xs fr-hint-text fr-mb-0">
-                    Votre profil n’est pas visible.
+                    Accessible uniquement aux membres et aux administrateurs que
+                    vous inviterez.
                   </p>
                 </div>
                 <PrivacyTag />
@@ -95,12 +97,12 @@ const Visibility = ({ isPublic }: { isPublic: boolean }) => {
       }
       view={
         <>
-          <p className="fr-text--sm">
-            {isPublic
-              ? 'Votre profil est public. Vous pouvez passez votre profil en privé si vous le souhaitez.'
-              : 'Votre profil est privé. Vous pouvez passez votre profil en public si vous le souhaitez.'}
+          <p className="fr-text--sm" data-testid="base-visibility">
+            {base.isPublic
+              ? 'Votre base est publique. Vous pouvez passez votre base en privée si vous le souhaitez.'
+              : 'Votre base est privée. Vous pouvez passez votre base en publique si vous le souhaitez.'}
           </p>
-          <ProfilePrivacyTag isPublic={isPublic} />
+          <BasePrivacyTag isPublic={base.isPublic} />
         </>
       }
     />

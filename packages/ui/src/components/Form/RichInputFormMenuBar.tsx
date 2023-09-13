@@ -44,7 +44,13 @@ const MenuButton = ({
   />
 )
 
-const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
+const RichInputFormMenuBar = ({
+  editor,
+  disabled,
+}: {
+  editor: Editor
+  disabled?: boolean
+}) => {
   const [editLink, setEditLink] = useState<EditLinkOptions>({
     onSubmit: () => {},
   })
@@ -64,6 +70,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }}
           active={editor.isActive('heading', { level: 2 })}
+          disabled={disabled}
         />
         <MenuButton
           title="Titre 2"
@@ -72,6 +79,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }}
           active={editor.isActive('heading', { level: 3 })}
+          disabled={disabled}
         />
         <MenuButton
           title="Titre 3"
@@ -80,6 +88,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleHeading({ level: 4 }).run()
           }}
           active={editor.isActive('heading', { level: 4 })}
+          disabled={disabled}
         />
         <div className={styles.separator} />
         <MenuButton
@@ -89,6 +98,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleBold().run()
           }}
           active={editor.isActive('bold')}
+          disabled={disabled}
         />
         <MenuButton
           title="Italique"
@@ -97,6 +107,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleItalic().run()
           }}
           active={editor.isActive('italic')}
+          disabled={disabled}
         />
         <div className={styles.separator} />
         <MenuButton
@@ -106,6 +117,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleOrderedList().run()
           }}
           active={editor.isActive('orderedList')}
+          disabled={disabled}
         />
         <MenuButton
           title="Liste non ordonnée"
@@ -114,6 +126,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
             editor.chain().focus().toggleBulletList().run()
           }}
           active={editor.isActive('bulletList')}
+          disabled={disabled}
         />
         <div className={styles.separator} />
         <MenuButton
@@ -122,7 +135,7 @@ const RichInputFormMenuBar = ({ editor }: { editor: Editor }) => {
           onClick={() => {
             onLinkClick()
           }}
-          disabled={!canEditLink}
+          disabled={disabled || !canEditLink}
           active={linkActive}
         />
       </div>

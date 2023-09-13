@@ -1,6 +1,6 @@
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { prismaClient } from '@app/web/prismaClient'
-import { UpdateProfileVisibilityCommandValidation } from '../../profiles/updateProfile'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { UpdateProfileVisibilityCommandValidation } from '@app/web/server/profiles/updateProfile'
 
 export const profileRouter = router({
   mutate: protectedProcedure
