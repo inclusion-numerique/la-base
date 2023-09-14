@@ -38,7 +38,6 @@ export const getWhereResourcesList = (
 ): Prisma.ResourceWhereInput => {
   const whereResourceIsPublic = {
     isPublic: true,
-    base: { isPublic: true },
     ...where,
   }
 

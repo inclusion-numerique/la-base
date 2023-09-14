@@ -2,12 +2,16 @@ import Link from 'next/link'
 import React from 'react'
 import { Resource } from '@app/web/server/resources/getResource'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { FilteredResource } from '@app/web/server/resources/authorization'
 import styles from './PublishedInInformation.module.css'
 
 const PublishedInInformation = ({
   resource: { createdBy, base },
 }: {
-  resource: Pick<ResourceListItem | Resource, 'createdBy' | 'base'>
+  resource: Pick<
+    ResourceListItem | Resource | FilteredResource,
+    'createdBy' | 'base'
+  >
 }) => (
   <div className="fr-grid-row fr-grid-row--middle">
     <div className={styles.circle} />

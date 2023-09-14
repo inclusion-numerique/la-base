@@ -6,7 +6,6 @@ import type {
   Resource,
   ResourceContent,
 } from '@app/web/server/resources/getResource'
-import { testSessionUser } from '@app/web/test/testSessionUser'
 
 const resource = (imageId: string | null) =>
   ({
@@ -127,12 +126,12 @@ export const SansImage: Story = {
 
 export const SansImageMobile = mobileStory(SansImage)
 
-export const UtilisateurConnecté: Story = {
+export const Contributeur: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource('portrait.webp'),
-    user: testSessionUser,
+    isContributor: true,
   },
 }
 
-export const UtilisateurConnectéMobile = mobileStory(UtilisateurConnecté)
+export const ContributeurMobile = mobileStory(Contributeur)

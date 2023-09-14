@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 import { SessionUser } from '../auth/sessionUser'
 import { BasePageData } from '../server/bases/getBase'
-import { ResourceListItem } from '../server/resources/getResourcesList'
+import { Resource } from '../server/resources/getResource'
 
 export const createTestUser = (publicProfile?: boolean) =>
   ({
@@ -18,9 +18,14 @@ export const createTestUser = (publicProfile?: boolean) =>
     ownedBases: [],
   } satisfies SessionUser)
 
-export const createTestResource = (owner: SessionUser, base: BasePageData) =>
+export const createTestResource = (
+  owner: SessionUser,
+  isPublic?: boolean,
+  base?: BasePageData,
+) =>
   ({
     id: v4(),
+    legacyId: 123,
     title:
       'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
     slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-lignes',
@@ -29,18 +34,28 @@ export const createTestResource = (owner: SessionUser, base: BasePageData) =>
     published: new Date('2023-09-14'),
     description:
       'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
-    isPublic: true,
+    isPublic: isPublic || false,
+    imageId: null,
     image: null,
     createdBy: {
       name: owner.name,
       id: owner.id,
     },
-    base: {
-      title: base.title,
-      slug: base.slug,
-      isPublic: base.isPublic,
-    },
-  } satisfies ResourceListItem)
+    createdById: owner.id,
+    baseId: base ? base.id : null,
+    base: base
+      ? {
+          id: base.id,
+          title: base.title,
+          slug: base.slug,
+          isPublic: base.isPublic,
+        }
+      : null,
+    themes: ['theme-1'],
+    supportTypes: ['support-1'],
+    targetAudiences: ['target-1'],
+    contents: [],
+  } satisfies Resource)
 
 export const createTestBase = (owner: SessionUser, isPublic?: boolean) => {
   const id = v4()
@@ -64,8 +79,8 @@ export const createTestBase = (owner: SessionUser, isPublic?: boolean) => {
   return {
     ...base,
     resources: [
-      createTestResource(owner, base),
-      createTestResource(owner, base),
+      createTestResource(owner, true, base),
+      createTestResource(owner, true, base),
     ],
   }
 }

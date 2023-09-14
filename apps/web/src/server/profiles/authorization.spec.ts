@@ -1,6 +1,5 @@
-import { createTestBase, createTestUser } from '@app/web/test/helpers'
+import { createTestUser } from '@app/web/test/helpers'
 import { filterAccess } from './authorization'
-import { ProfilePageData } from './getProfile'
 
 describe('Profile authorization', () => {
   describe('Public profile', () => {

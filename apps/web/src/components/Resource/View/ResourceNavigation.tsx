@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { User } from 'next-auth'
 import Link from 'next/link'
 import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -18,10 +17,10 @@ const {
 
 const ResourceNavigation = ({
   resource: { slug, contents },
-  user,
+  isContributor,
 }: {
   resource: Resource
-  user: User | null
+  isContributor: boolean
 }) => (
   <>
     <ResourceNavigationModal
@@ -42,9 +41,9 @@ const ResourceNavigation = ({
           'fr-btn--icon-left',
           'fr-icon-edit-line',
         )}
-        href={user ? `/ressources/${slug}/editer` : '/'}
+        href={isContributor ? `/ressources/${slug}/editer` : '/'}
       >
-        {user ? 'Modifier' : 'Demander à contribuer'}
+        {isContributor ? 'Modifier' : 'Demander à contribuer'}
       </Link>
       <Link
         className={classNames(
@@ -83,6 +82,7 @@ const ResourceNavigation = ({
     <div className={styles.container}>
       <div className={styles.buttons}>
         <Link
+          data-testid="resource-edition-button"
           className={classNames(
             'fr-btn',
             'fr-btn--secondary',
@@ -90,9 +90,9 @@ const ResourceNavigation = ({
             'fr-icon-edit-line',
             styles.button,
           )}
-          href={user ? `/ressources/${slug}/editer` : '/'}
+          href={isContributor ? `/ressources/${slug}/editer` : '/'}
         >
-          {user ? 'Modifier' : 'Demander à contribuer'}
+          {isContributor ? 'Modifier' : 'Demander à contribuer'}
         </Link>
         <Link
           className={classNames(

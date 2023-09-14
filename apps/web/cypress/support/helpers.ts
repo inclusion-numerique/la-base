@@ -10,6 +10,7 @@ import {
   CreateUserInput,
   sendResourceCommands,
 } from '../e2e/authentication/user.tasks'
+import { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 
 export const appUrl = (path: string) =>
   `${Cypress.config().baseUrl}${encodeURI(path)}`
@@ -41,13 +42,30 @@ export const createTestBase = (ownerId: string, isPublic?: boolean) =>
     emailIsPublic: true,
   } satisfies CreateBaseInput)
 
+export const createTestPublishResourceCommand = (
+  resourceId: string,
+  isPublic?: boolean,
+) =>
+  ({
+    name: 'Publish',
+    payload: isPublic
+      ? {
+          resourceId,
+          isPublic: true,
+          themes: ['theme-1'],
+          supportTypes: ['support-1'],
+          targetAudiences: ['target-1'],
+        }
+      : { resourceId, isPublic: false },
+  } satisfies PublishCommand)
+
 export const createTestResourceCommands = ({
   baseId,
   resourceId: resourceIdParam,
 }: {
   baseId?: string
   resourceId?: string
-}) => {
+}): [CreateResourceCommand, ...ResourceMutationCommand[]] => {
   const resourceId = resourceIdParam || v4()
   return [
     {

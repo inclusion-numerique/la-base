@@ -5,6 +5,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Edition from '@app/web/components/Resource/Edition/Edition'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { filterAccess } from '@app/web/server/resources/authorization'
 
 const ResourceEditionPage = async ({
   params,
@@ -23,6 +24,10 @@ const ResourceEditionPage = async ({
 
   if (!resource || !draftResource) {
     notFound()
+  }
+  const authorizations = filterAccess(resource, user)
+  if (!authorizations.authorized || !authorizations.isContributor) {
+    redirect(`/ressources/${params.slug}`)
   }
 
   return (

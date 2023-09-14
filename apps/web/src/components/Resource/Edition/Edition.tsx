@@ -212,7 +212,10 @@ const Edition = ({
 
   return (
     <>
-      <div className={classNames('fr-container', styles.container)}>
+      <div
+        className={classNames('fr-container', styles.container)}
+        data-testid={publishMode ? 'resource-publication' : 'resource-edition'}
+      >
         {publishMode ? (
           <Publication
             resource={updatedDraftResource}
