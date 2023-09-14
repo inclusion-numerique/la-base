@@ -1,0 +1,8 @@
+.container {
+  max-width: 696px;
+  width: 100%;
+  margin: 48px auto;
+  padding: 48px;
+  background-color: var(--background-alt-blue-france);
+  text-align: center;
+}

@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
+import { FilteredBase } from '@app/web/server/bases/authorization'
 import styles from './ViewsAndMetadata.module.css'
 
 const ViewsAndMetadata = ({
@@ -10,7 +11,7 @@ const ViewsAndMetadata = ({
   className,
   withBadge,
 }: {
-  base: BasePageData | BaseListItem
+  base: BasePageData | BaseListItem | FilteredBase
   className?: string
   withBadge?: boolean
 }) => (
@@ -27,7 +28,7 @@ const ViewsAndMetadata = ({
         {(base as BasePageData).resources
           ? (base as BasePageData).resources.length
           : // eslint-disable-next-line no-underscore-dangle
-            (base as BaseListItem)._count.resources}
+            (base as BaseListItem | FilteredBase)._count.resources}
       </b>
       <span className={styles.spanMdDisplay}> Ressources</span>
     </div>

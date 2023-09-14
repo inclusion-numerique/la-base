@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { FilteredBase } from '@app/web/server/bases/authorization'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import Breadcrumbs from '../Breadcrumbs'
 import styles from './Header.module.css'
@@ -9,8 +10,8 @@ const Header = ({
   base,
   isMember,
 }: {
-  base: BasePageData
-  isMember: boolean
+  base: FilteredBase | BasePageData
+  isMember?: boolean
 }) => (
   <div className={styles.container}>
     <div className="fr-container">
@@ -22,6 +23,7 @@ const Header = ({
         <ViewsAndMetadata base={base} withBadge />
         {isMember && (
           <Link
+            data-testid="base-edition-button"
             className="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-edit-line fr-mt-2w"
             href={`/bases/${base.slug}/editer`}
           >
