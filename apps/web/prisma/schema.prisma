@@ -64,7 +64,8 @@ model User {
   ownedBases       Base[]
   createdResources Resource[]
   uploads          Upload[]
-  ResourceEvent    ResourceEvent[]
+  resourceEvent    ResourceEvent[]
+  bases            BaseMembers[]
 
   @@map("users")
 }
@@ -103,12 +104,28 @@ model Base {
   twitter       String?
   linkedin      String?
 
-  created   DateTime   @default(now())
-  updated   DateTime   @default(now())
+  created   DateTime      @default(now())
+  updated   DateTime      @default(now())
   deleted   DateTime?
   resources Resource[]
+  members   BaseMembers[]
 
   @@map("bases")
+}
+
+model BaseMembers {
+  id String @id @default(uuid()) @db.Uuid
+
+  member   User   @relation(fields: [memberId], references: [id])
+  memberId String @map("member_id") @db.Uuid
+
+  base   Base   @relation(fields: [baseId], references: [id])
+  baseId String @map("base_id") @db.Uuid
+
+  isAdmin Boolean @default(false) @map("is_admin")
+
+  @@unique([memberId, baseId])
+  @@map("base_members")
 }
 
 model Resource {

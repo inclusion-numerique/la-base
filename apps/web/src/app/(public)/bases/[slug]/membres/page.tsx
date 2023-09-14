@@ -5,9 +5,9 @@ import Header from '@app/web/components/Base/Header'
 import Menu from '@app/web/components/Base/Menu'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import EmptyResources from '@app/web/components/Base/EmptyResources'
-import Resources from '@app/web/components/Resource/List/Resources'
 import { filterAccess } from '@app/web/server/bases/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
+import Members from '@app/web/components/Base/List/Members'
 
 const BasePage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -25,12 +25,12 @@ const BasePage = async ({ params }: { params: { slug: string } }) => {
   return authorizations.authorized ? (
     <>
       <Header base={base} isMember={authorizations.isMember} />
-      <Menu base={base} current="resources" />
+      <Menu base={base} current="members" />
       <div className="fr-container fr-mb-4w">
-        {base.resources.length === 0 ? (
+        {base.members.length === 0 ? (
           <EmptyResources isMember={authorizations.isMember} />
         ) : (
-          <Resources resources={base.resources} user={user} />
+          <Members members={base.members} isAdmin={authorizations.isAdmin} />
         )}
       </div>
     </>

@@ -1,0 +1,30 @@
+.container {
+  border-top: var(--slim-grey-border);
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  padding: 24px 0;
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--text-action-high-grey);
+  background-image: none;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #BFCCFB;
+}
+
+
+.actions {
+  padding: 24px 0;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}

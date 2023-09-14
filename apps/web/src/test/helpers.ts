@@ -57,7 +57,12 @@ export const createTestResource = (
     contents: [],
   } satisfies Resource)
 
-export const createTestBase = (owner: SessionUser, isPublic?: boolean) => {
+export const createTestBase = (
+  owner: SessionUser,
+  isPublic: boolean,
+  admins: SessionUser[],
+  members: SessionUser[],
+) => {
   const id = v4()
   const base = {
     id,
@@ -75,6 +80,18 @@ export const createTestBase = (owner: SessionUser, isPublic?: boolean) => {
     facebook: null,
     twitter: null,
     resources: [],
+    members: [
+      ...admins.map((admin) => ({
+        baseId: id,
+        member: { id: admin.id, name: admin.name },
+        isAdmin: true,
+      })),
+      ...members.map((member) => ({
+        baseId: id,
+        member: { id: member.id, name: member.name },
+        isAdmin: false,
+      })),
+    ],
   } satisfies BasePageData
   return {
     ...base,

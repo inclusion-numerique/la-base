@@ -36,28 +36,38 @@ export const getProfileBasesCount = async (
   })
 }
 
+const baseSelect = {
+  id: true,
+  title: true,
+  isPublic: true,
+  slug: true,
+  department: true,
+  _count: {
+    select: {
+      resources: {
+        where: {
+          deleted: null,
+        },
+      },
+    },
+  },
+} satisfies Prisma.BaseSelect
+
 export const getProfileBases = async (
   profileId: string,
   user: Pick<SessionUser, 'id'>,
 ) => {
   const where = getWhereBasesList(user, { ownerId: profileId })
   return prismaClient.base.findMany({
-    select: {
-      id: true,
-      title: true,
-      isPublic: true,
-      slug: true,
-      department: true,
-      _count: {
-        select: {
-          resources: {
-            where: {
-              deleted: null,
-            },
-          },
-        },
-      },
-    },
+    select: baseSelect,
+    where,
+  })
+}
+
+export const getBases = async (user: Pick<SessionUser, 'id'>) => {
+  const where = getWhereBasesList(user)
+  return prismaClient.base.findMany({
+    select: baseSelect,
     where,
   })
 }

@@ -2,10 +2,11 @@ import { createTestBase, createTestUser } from '@app/web/test/helpers'
 import { filterAccess } from './authorization'
 
 describe('Base authorization', () => {
+  const admin = createTestUser()
+  const member = createTestUser()
+  const otherUser = createTestUser()
   describe('Public base', () => {
-    const creator = createTestUser()
-    const otherUser = createTestUser()
-    const publicBase = createTestBase(creator, true)
+    const publicBase = createTestBase(admin, true, [admin], [member])
 
     it('Anyone can access', () => {
       const authorizations = filterAccess(publicBase, otherUser)
@@ -13,11 +14,24 @@ describe('Base authorization', () => {
       expect(authorizations.base).toEqual(publicBase)
     })
 
-    it('Creator is a member', () => {
-      const authorizations = filterAccess(publicBase, creator)
+    it('Admin is a member and an admin', () => {
+      const authorizations = filterAccess(publicBase, admin)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isMember).toBe(true)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(true)
+    })
+
+    it('Member is only a member', () => {
+      const authorizations = filterAccess(publicBase, member)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isMember).toBe(true)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(false)
     })
 
     it('Anyone is not a member', () => {
@@ -25,13 +39,14 @@ describe('Base authorization', () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isMember).toBe(false)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(false)
     })
   })
 
   describe('Private base', () => {
-    const creator = createTestUser()
-    const otherUser = createTestUser()
-    const privateBase = createTestBase(creator, false)
+    const privateBase = createTestBase(admin, false, [admin], [member])
 
     const filteredBase = {
       slug: privateBase.slug,
@@ -40,8 +55,14 @@ describe('Base authorization', () => {
       _count: { resources: privateBase.resources.length },
     }
 
-    it('Creator can access', () => {
-      const authorizations = filterAccess(privateBase, creator)
+    it('Admin can access', () => {
+      const authorizations = filterAccess(privateBase, admin)
+      expect(authorizations.authorized).toBe(true)
+      expect(authorizations.base).toEqual(privateBase)
+    })
+
+    it('Member can access', () => {
+      const authorizations = filterAccess(privateBase, member)
       expect(authorizations.authorized).toBe(true)
       expect(authorizations.base).toEqual(privateBase)
     })
@@ -52,14 +73,30 @@ describe('Base authorization', () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isMember).toBe(undefined)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(undefined)
       expect(authorizations.base).toEqual(filteredBase)
     })
 
-    it('Creator is a member', () => {
-      const authorizations = filterAccess(privateBase, creator)
+    it('Admin is a member and an admin', () => {
+      const authorizations = filterAccess(privateBase, admin)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isMember).toBe(true)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(true)
+    })
+
+    it('Member is only a member', () => {
+      const authorizations = filterAccess(privateBase, member)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isMember).toBe(true)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(false)
     })
   })
 })

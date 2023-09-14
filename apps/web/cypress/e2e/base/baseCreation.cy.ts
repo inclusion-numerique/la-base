@@ -61,7 +61,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('create-button').click()
 
     cy.wait('@mutation')
-    cy.url().should('contain', appUrl(`/bases/ma-declaration`))
+    cy.url().should('contain', appUrl('/bases/ma-declaration'))
+
+    cy.visit('/bases/ma-declaration/membres')
+    cy.testId('base-invite-member-button').should('exist')
   })
 
   it('Acceptation 5 - Annulation de la création', () => {

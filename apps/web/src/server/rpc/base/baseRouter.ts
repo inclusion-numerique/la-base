@@ -18,6 +18,7 @@ export const baseRouter = router({
           slug,
           titleDuplicationCheckSlug: slug,
           ownerId: user.id,
+          members: { create: [{ memberId: user.id, isAdmin: true }] },
         },
       })
     }),

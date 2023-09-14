@@ -40,6 +40,7 @@ export const createTestBase = (ownerId: string, isPublic?: boolean) =>
     isPublic,
     email: 'test@mail.fr',
     emailIsPublic: true,
+    members: { create: [{ memberId: ownerId, isAdmin: true }] },
   } satisfies CreateBaseInput)
 
 export const createTestPublishResourceCommand = (

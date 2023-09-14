@@ -47,7 +47,7 @@ export const randomUsers: (
       firstName,
       lastName,
       name: `${firstName} ${lastName}`,
-      email: faker.internet.email(),
+      email: faker.internet.email().toLowerCase(),
       emailVerified: index % 3 ? null : new Date(),
     }
   })

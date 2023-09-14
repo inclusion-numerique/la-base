@@ -38,12 +38,18 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     )
   })
 
-  it('Acceptation 3 - Membre de la base', () => {
+  it('Acceptation 3 - Admin de la base', () => {
     cleanUpAndCreateTestBase(false)
 
     cy.testId('empty-box').should('exist')
     cy.testId('base-edition-button').should('exist')
     cy.testId('private-base-box').should('not.exist')
+
+    // TODO: invite a member and check it's permission
+    cy.visit(
+      '/bases/conseiller-numérique-france-services-contributions/membres',
+    )
+    cy.testId('base-invite-member-button').should('exist')
 
     cy.visit('/bases/conseiller-numérique-france-services-contributions/editer')
     cy.url().should(

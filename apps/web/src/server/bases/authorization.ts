@@ -12,14 +12,21 @@ export const filterAccess = (
   | {
       authorized: true
       isMember: boolean
+      isAdmin: boolean
       base: BasePageData
     }
   | {
       authorized: false
       base: FilteredBase
     } => {
-  if (base.isPublic || base.ownerId === user.id) {
-    return { authorized: true, isMember: base.ownerId === user.id, base }
+  const baseMember = base.members.find((member) => member.member.id === user.id)
+  if (base.isPublic || baseMember) {
+    return {
+      authorized: true,
+      isMember: !!baseMember,
+      isAdmin: !!baseMember && baseMember.isAdmin,
+      base,
+    }
   }
 
   return {

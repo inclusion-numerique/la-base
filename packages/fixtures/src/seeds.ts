@@ -5,6 +5,7 @@ import { Prisma } from '@prisma/client'
 import { bases, randomBases } from './bases'
 import { randomResourcesEvents, resources } from './resources'
 import { randomUsers, users } from './users'
+import { randomMembers } from './members'
 
 import TransactionClient = Prisma.TransactionClient
 
@@ -40,6 +41,8 @@ const seed = async (transaction: TransactionClient, random?: number) => {
     await transaction.user.createMany({ data: randomUsers(random) })
     const newBases = await randomBases(transaction, random)
     await transaction.base.createMany({ data: newBases })
+    const members = await randomMembers(transaction)
+    await transaction.baseMembers.createMany({ data: members })
 
     const newResourcesEvents = await randomResourcesEvents(transaction, random)
     const projections = newResourcesEvents.map(createResourceProjection)
