@@ -5,7 +5,7 @@ const EmptyBox = ({
   title,
   children,
 }: { title: string } & PropsWithChildren) => (
-  <div className={styles.container} data-testid="base-ressources-empty-state">
+  <div className={styles.container} data-testid="empty-box">
     <h6 className="fr-mb-1w">{title}</h6>
     {children}
   </div>

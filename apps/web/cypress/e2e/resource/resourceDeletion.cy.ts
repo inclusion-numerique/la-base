@@ -39,11 +39,11 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
     })
 
     cy.visit('/bases/conseiller-numérique-france-services-contributions')
-    cy.testId('base-ressources-empty-state').should('exist')
+    cy.testId('empty-box').should('exist')
 
     cy.get('#header-user-menu')
       .contains('Voir mon profil')
       .click({ force: true })
-    cy.testId('base-ressources-empty-state').should('exist')
+    cy.testId('empty-box').should('exist')
   })
 })

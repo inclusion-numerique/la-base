@@ -1,11 +1,9 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { BasePageData } from './getBase'
+import { BaseListItem } from './getBasesList'
 
-export type FilteredBase = Pick<BasePageData, 'slug' | 'title' | 'isPublic'> & {
-  _count: {
-    resources: number
-  }
-}
+export type FilteredBase = Pick<BasePageData, 'slug' | 'title' | 'isPublic'> &
+  Pick<BaseListItem, '_count'>
 
 export const filterAccess = (
   base: BasePageData,

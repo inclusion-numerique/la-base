@@ -7,7 +7,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import EmptyResources from '@app/web/components/Base/EmptyResources'
 import Resources from '@app/web/components/Resource/List/Resources'
 import { filterAccess } from '@app/web/server/bases/authorization'
-import PrivateBase from '@app/web/components/Base/PrivateBase'
+import PrivateBox from '@app/web/components/PrivateBox'
 
 const BasePage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -37,7 +37,7 @@ const BasePage = async ({ params }: { params: { slug: string } }) => {
   ) : (
     <>
       <Header base={authorizations.base} />
-      <PrivateBase />
+      <PrivateBox type="Base" />
     </>
   )
 }

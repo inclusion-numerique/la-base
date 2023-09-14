@@ -14,9 +14,9 @@ import {
 export const appUrl = (path: string) =>
   `${Cypress.config().baseUrl}${encodeURI(path)}`
 
-export const createTestUser = (publicProfile?: boolean) =>
+export const createTestUser = (publicProfile?: boolean, userId?: string) =>
   ({
-    id: v4(),
+    id: userId || v4(),
     legacyId: null,
     email: `test-${v4()}@example.com`,
     firstName: 'Jean',

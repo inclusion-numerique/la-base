@@ -5,6 +5,7 @@ import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResourcesCount } from '@app/web/server/resources/getResourcesList'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
+import { filterAccess } from '@app/web/server/profiles/authorization'
 
 const ProfilEditionPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -12,13 +13,14 @@ const ProfilEditionPage = async ({ params }: { params: { slug: string } }) => {
     redirect(`/connexion?suivant=/profils/${params.slug}/editer`)
   }
 
-  if (user.id !== params.slug) {
-    redirect(`/profils/${params.slug}`)
-  }
-
   const profile = await getProfilePageQuery(decodeURI(params.slug))
   if (!profile) {
     notFound()
+  }
+
+  const authorizations = filterAccess(profile, user)
+  if (!authorizations.authorized || !authorizations.isUser) {
+    redirect(`/profils/${params.slug}`)
   }
 
   const resourcesCount = await getProfileResourcesCount(profile.id, user)

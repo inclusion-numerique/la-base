@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import Link from 'next/link'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
+import { FilteredProfile } from '@app/web/server/profiles/authorization'
 import ViewsAndMetadata from './ViewsAndMetadata'
 import styles from './ProfileInformations.module.css'
 
@@ -11,7 +12,7 @@ const ProfileInformations = ({
   children,
   editMode,
 }: {
-  profile: ProfilePageData
+  profile: ProfilePageData | FilteredProfile
   resourcesCount: number
   editMode?: boolean
 } & PropsWithChildren) => (

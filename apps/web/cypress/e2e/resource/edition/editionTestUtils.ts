@@ -36,9 +36,9 @@ export const cleanUpAndCreateTestResourceInProfile = (
   cy.dsfrShouldBeStarted()
 }
 
-export const cleanUp = () => {
+export const cleanUp = (publicProfile?: boolean, userId?: string) => {
   cy.execute('deleteAllData', undefined)
-  const user = createTestUser()
+  const user = createTestUser(publicProfile, userId)
 
   cy.createUserAndSignin(user)
   cy.visit('/')

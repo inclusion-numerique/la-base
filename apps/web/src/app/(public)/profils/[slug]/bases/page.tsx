@@ -8,6 +8,8 @@ import { getProfileResourcesCount } from '@app/web/server/resources/getResources
 import { getProfileBases } from '@app/web/server/bases/getBasesList'
 import Bases from '@app/web/components/Base/List/Bases'
 import EmptyBases from '@app/web/components/Base/List/EmptyBases'
+import { filterAccess } from '@app/web/server/profiles/authorization'
+import PrivateBox from '@app/web/components/PrivateBox'
 
 const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -25,27 +27,35 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
     getProfileBases(profile.id, user),
   ])
 
-  const isConnectedUser = profile.id === user.id
-  return (
+  const authorizations = filterAccess(profile, user)
+  return authorizations.authorized ? (
     <>
       <Header
-        profile={profile}
-        isConnectedUser={isConnectedUser}
+        profile={authorizations.profile}
+        isConnectedUser={authorizations.isUser}
         resourcesCount={resourcesCount}
       />
       <Menu
-        profile={profile}
+        profile={authorizations.profile}
         resourcesCount={resourcesCount}
         basesCount={bases.length}
         currentPage="/bases"
       />
       <div className="fr-container fr-mb-4w">
         {bases.length === 0 ? (
-          <EmptyBases isConnectedUser={isConnectedUser} />
+          <EmptyBases isConnectedUser={authorizations.isUser} />
         ) : (
           <Bases bases={bases} />
         )}
       </div>
+    </>
+  ) : (
+    <>
+      <Header
+        profile={authorizations.profile}
+        resourcesCount={resourcesCount}
+      />
+      <PrivateBox type="Profil" />
     </>
   )
 }

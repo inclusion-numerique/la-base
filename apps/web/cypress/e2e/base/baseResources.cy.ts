@@ -12,12 +12,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 0 - Empty state', () => {
-    cy.testId('base-ressources-empty-state').should('exist')
+    cy.testId('empty-box').should('exist')
 
     cy.log('Create a resource')
-    cy.testId('base-ressources-empty-state')
-      .contains('Créer une ressource')
-      .click()
+    cy.testId('empty-box').contains('Créer une ressource').click()
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')
     cy.get('@modal')
