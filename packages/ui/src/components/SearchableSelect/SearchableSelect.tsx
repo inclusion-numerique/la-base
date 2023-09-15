@@ -1,5 +1,6 @@
 import React, {
   Dispatch,
+  ReactNode,
   SetStateAction,
   useCallback,
   useMemo,
@@ -20,6 +21,8 @@ type Category<T extends string> = {
 }
 
 const SearchableSelect = <T extends string>({
+  label,
+  withoutButton,
   placeholder,
   categories,
   noResultMessage,
@@ -27,6 +30,8 @@ const SearchableSelect = <T extends string>({
   limit,
   setSelected,
 }: {
+  label?: ReactNode
+  withoutButton?: boolean
   placeholder?: string
   noResultMessage?: string
   setSelected: Dispatch<SetStateAction<string>>
@@ -97,22 +102,24 @@ const SearchableSelect = <T extends string>({
 
   return (
     <div className={styles.input}>
-      <button
-        type="button"
-        title="Effacer la recherche"
-        className={styles.icon}
-        onClick={unselect}
-      >
-        <span
-          className={classNames({
-            'fr-icon-close-circle-fill': inputValue,
-            'fr-icon-search-line': !inputValue,
-            [styles.searchIcon]: !inputValue,
-          })}
-        />
-      </button>
+      {!withoutButton && (
+        <button
+          type="button"
+          title="Effacer la recherche"
+          className={styles.icon}
+          onClick={unselect}
+        >
+          <span
+            className={classNames({
+              'fr-icon-close-circle-fill': inputValue,
+              'fr-icon-search-line': !inputValue,
+              [styles.searchIcon]: !inputValue,
+            })}
+          />
+        </button>
+      )}
       <Input
-        label=""
+        label={label}
         className="fr-mb-0"
         nativeInputProps={{
           placeholder,

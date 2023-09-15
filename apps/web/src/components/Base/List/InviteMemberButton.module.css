@@ -1,0 +1,45 @@
+.modal {
+  :global(.fr-container) {
+    overflow: visible !important;
+  }
+
+  :global(.input-container) {
+    padding-right: 133px;
+  }
+
+  :global(.fr-modal__body) {
+    overflow: visible !important;
+  }
+
+  :global(.fr-modal__content) {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.select {
+  position: absolute;
+  right: 8px;
+  height: 100%;
+  transform: translateY(calc(-50% + 6px));
+  
+  select {
+    appearance: auto;
+    font-weight: 500 !important;
+  }
+}
+
+.selectWithError {
+  transform: translateY(calc(-50% - 10px));
+}

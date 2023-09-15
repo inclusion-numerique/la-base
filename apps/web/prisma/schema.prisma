@@ -124,6 +124,9 @@ model BaseMembers {
 
   isAdmin Boolean @default(false) @map("is_admin")
 
+  accepted         DateTime?
+  acceptationToken String?   @map("acceptation_token")
+
   @@unique([memberId, baseId])
   @@map("base_members")
 }

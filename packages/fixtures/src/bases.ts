@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { prismaClient } from '@app/web/prismaClient'
 import { Prisma } from '@prisma/client'
 
-const BASE_NUMBER = 10
+const BASE_NUMBER = 100
 
 export const bases: Exclude<
   Parameters<typeof prismaClient.base.upsert>[0]['create'],

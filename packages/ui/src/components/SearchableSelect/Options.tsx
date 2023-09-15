@@ -14,13 +14,20 @@ const Options = <T extends string>({
   select,
   limit,
   noResultMessage,
+  hideNoResultMessage,
+  'data-testid': dataTestId,
 }: {
   options: Option<T>[]
   select: (option: Option<T>) => void
   limit: number
   noResultMessage?: string
+  hideNoResultMessage?: boolean
+  'data-testid'?: string
 }) => {
   if (options.length === 0) {
+    if (hideNoResultMessage) {
+      return null
+    }
     return (
       <option className={classNames(styles.option, styles.disabled)}>
         {noResultMessage || 'Aucun résultat'}
@@ -29,9 +36,10 @@ const Options = <T extends string>({
   }
   return (
     <>
-      {options.slice(0, limit).map((option) => (
+      {options.slice(0, limit).map((option, index) => (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
+          data-testid={dataTestId ? `${dataTestId}-option-${index}` : undefined}
           key={option.value}
           defaultValue={option.value}
           className={classNames(styles.option, {

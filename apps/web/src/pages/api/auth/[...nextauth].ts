@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     EmailProvider({
-      ...ServerWebAppConfig.Auth.Email,
+      ...ServerWebAppConfig.Email,
       sendVerificationRequest,
     }),
     {

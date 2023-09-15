@@ -2,6 +2,22 @@
   position: relative;
 }
 
+.inputContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 16px;
+  max-height: unset !important;
+}
+
+.internalInput {
+  flex: 1;
+  outline-width: 0;
+  height: 32px;
+  padding: 0;
+  box-shadow: unset;
+}
+
 .icon {
   position: absolute;
   right: 8px;

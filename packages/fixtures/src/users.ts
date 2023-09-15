@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { prismaClient } from '@app/web/prismaClient'
 
-const BASE_NUMBER = 10
+const BASE_NUMBER = 100
 
 export const users: Exclude<
   Parameters<typeof prismaClient.user.upsert>[0]['create'],
@@ -49,5 +49,6 @@ export const randomUsers: (
       name: `${firstName} ${lastName}`,
       email: faker.internet.email().toLowerCase(),
       emailVerified: index % 3 ? null : new Date(),
+      isPublic: Math.random() > 0.1,
     }
   })

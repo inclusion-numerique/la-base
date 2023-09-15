@@ -1,8 +1,9 @@
-import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from 'react'
+import React, { ChangeEventHandler, ReactNode } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { SelectOption } from './utils/options'
+import { OptionBadge } from './OptionBadge'
 
 const OptionsList = ({ options }: { options: SelectOption[] }) => (
   <>
@@ -13,29 +14,6 @@ const OptionsList = ({ options }: { options: SelectOption[] }) => (
     ))}
     )
   </>
-)
-
-const OptionBadge = ({
-  option,
-  onClick,
-  disabled,
-  size,
-}: {
-  option: SelectOption
-  onClick: MouseEventHandler
-  disabled?: boolean
-  size?: 'sm' | 'md'
-}) => (
-  <button
-    type="button"
-    className={`fr-tag fr-mr-1w fr-mb-2v ${size === 'sm' ? 'fr-tag--sm' : ''}`}
-    disabled={disabled || option.disabled}
-    onClick={disabled ? undefined : onClick}
-    aria-label={`Retirer ${option.name}`}
-  >
-    {option.name}
-    <span className="fr-icon-close-line fr-ml-1w fr-icon--sm" />
-  </button>
 )
 
 export type MultipleSelectFormFieldProps<T extends FieldValues> = {
@@ -147,6 +125,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
                   disabled={disabled}
                   size={badgeSize}
                   onClick={() => onTagClick(option)}
+                  className="fr-mb-2v"
                 />
               ))}
             </div>

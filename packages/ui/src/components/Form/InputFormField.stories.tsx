@@ -24,7 +24,6 @@ const Template = ({
     reValidateMode: 'onChange',
     mode: 'all',
     defaultValues: {
-      name: 'John Doe',
       email: 'john.doe@gmail.fr',
       email2: 'john.doe',
     },
@@ -64,6 +63,7 @@ export const Default: Story = {
   render: (args) => <Template {...args} path="name" />,
   args: {
     label: 'Label',
+    placeholder: 'test',
   },
 }
 

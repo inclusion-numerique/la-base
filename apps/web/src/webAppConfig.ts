@@ -23,13 +23,11 @@ export const ServerWebAppConfig = {
   Chromatic: {
     appId: process.env.CHROMATIC_APP_ID ?? '',
   },
-  Auth: {
-    Email: {
-      server: emailServer,
-      from: `${process.env.EMAIL_FROM_NAME ?? ''} <${
-        process.env.EMAIL_FROM_ADDRESS ?? ''
-      }>`,
-    },
+  Email: {
+    server: emailServer,
+    from: `${process.env.EMAIL_FROM_NAME ?? ''} <${
+      process.env.EMAIL_FROM_ADDRESS ?? ''
+    }>`,
   },
   S3: {
     uploadsBucket: process.env.UPLOADS_BUCKET ?? '',

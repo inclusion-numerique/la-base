@@ -9,7 +9,7 @@ import { createSlug } from '@app/web/utils/createSlug'
 import { ContentTypeValues } from '@app/web/utils/prismaEnums'
 import { Prisma } from '@prisma/client'
 
-const BASE_NUMBER = 10
+const BASE_NUMBER = 100
 const managedTypes = [
   ContentTypeValues.SectionTitle,
   ContentTypeValues.Text,
