@@ -17,7 +17,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
     cy.testId('edition-action-bar-delete').click()
     cy.wait('@mutation')
 
-    cy.url().should('equal', appUrl('/ressources'))
+    cy.url().should('equal', appUrl('/rechercher'))
     cy.testId('resource-card').should('not.exist')
 
     cy.request({

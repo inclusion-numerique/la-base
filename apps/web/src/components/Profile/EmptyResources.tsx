@@ -8,7 +8,7 @@ const EmptyResources = ({ isConnectedUser }: { isConnectedUser: boolean }) => (
     title={
       isConnectedUser
         ? 'Vous n’avez pas encore créée de ressources.'
-        : 'Aucune ressources sont actuellement publiées sur ce profil'
+        : 'Aucunes ressources ne sont actuellement publiées sur ce profil'
     }
   >
     {isConnectedUser ? (

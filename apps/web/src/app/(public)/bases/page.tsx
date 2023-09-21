@@ -12,7 +12,7 @@ const Bases = async () => {
   if (!user) {
     return notFound()
   }
-  const bases = await getBases(user)
+  const bases = await getBases({ user })
   return (
     <>
       <Breadcrumbs currentPage="Bases" />

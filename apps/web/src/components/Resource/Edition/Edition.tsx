@@ -201,7 +201,7 @@ const Edition = ({
       // While waiting for https://github.com/vercel/next.js/issues/42991, router.refresh() will invalidate router client cache
       // See https://nextjs.org/docs/app/building-your-application/caching#invalidation-1
       router.refresh()
-      router.push(`/ressources`)
+      router.push(`/rechercher`)
     } catch (error) {
       console.error('Could not delete resource', error)
       // TODO Have a nice error and handle edge cases server side

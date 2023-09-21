@@ -1,9 +1,9 @@
 import React from 'react'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import styles from './Members.module.css'
+import ProfileCard from '@app/web/components/Profile/Card/Card'
 import AdminMemberCard from './AdminMemberCard'
 import InviteMemberButton from './InviteMemberButton'
-import MemberCard from './MemberCard'
+import styles from './Members.module.css'
 
 const Members = ({
   base,
@@ -22,7 +22,7 @@ const Members = ({
           <AdminMemberCard member={member} key={member.member.id} />
         ))
       : base.members.map((member) => (
-          <MemberCard member={member} key={member.member.id} />
+          <ProfileCard profile={member.member} key={member.member.id} />
         ))}
   </div>
 )

@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import React from 'react'
 import Header from '@app/web/components/Profile/Header'
 import Menu from '@app/web/components/Profile/Menu'
@@ -13,10 +13,6 @@ import PrivateBox from '@app/web/components/PrivateBox'
 
 const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
-  if (!user) {
-    redirect(`/connexion?suivant=/profils/${params.slug}`)
-  }
-
   const profile = await getProfilePageQuery(decodeURI(params.slug))
   if (!profile) {
     notFound()
@@ -40,6 +36,7 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
         resourcesCount={resourcesCount}
         basesCount={bases.length}
         currentPage="/bases"
+        isConnectedUser={authorizations.isUser}
       />
       <div className="fr-container fr-mb-4w">
         {bases.length === 0 ? (

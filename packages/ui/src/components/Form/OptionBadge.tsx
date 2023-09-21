@@ -12,7 +12,7 @@ export const OptionBadge = ({
   size,
   className,
 }: {
-  option: SelectOptionValid
+  option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'name'>
   onClick: MouseEventHandler
   disabled?: boolean
   size?: 'sm' | 'md'

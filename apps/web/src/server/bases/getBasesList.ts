@@ -25,9 +25,19 @@ const getWhereBasesList = (
   }
 }
 
+const getWhereBasesQuery = (
+  query?: string,
+): Prisma.BaseWhereInput | undefined => {
+  if (!query) {
+    return undefined
+  }
+
+  return { title: { contains: query, mode: 'insensitive' } }
+}
+
 export const getProfileBasesCount = async (
   profileId: string,
-  user: Pick<SessionUser, 'id'>,
+  user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereBasesList(user, { ownerId: profileId })
 
@@ -55,7 +65,7 @@ const baseSelect = {
 
 export const getProfileBases = async (
   profileId: string,
-  user: Pick<SessionUser, 'id'>,
+  user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereBasesList(user, { ownerId: profileId })
   return prismaClient.base.findMany({
@@ -64,13 +74,30 @@ export const getProfileBases = async (
   })
 }
 
-export const getBases = async (user: Pick<SessionUser, 'id'>) => {
-  const where = getWhereBasesList(user)
+export const getBases = async ({
+  user,
+  query,
+}: {
+  user?: Pick<SessionUser, 'id'> | null
+  query?: string
+}) => {
+  const where = getWhereBasesList(user, getWhereBasesQuery(query))
   return prismaClient.base.findMany({
     select: baseSelect,
     where,
   })
 }
+
+export const getBasesCount = ({
+  user,
+  query,
+}: {
+  user?: Pick<SessionUser, 'id'> | null
+  query?: string
+}) =>
+  prismaClient.base.count({
+    where: getWhereBasesList(user, getWhereBasesQuery(query)),
+  })
 
 export type BaseListItem = Exclude<
   Awaited<ReturnType<typeof getProfileBases>>,

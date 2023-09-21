@@ -69,7 +69,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
       '/bases/conseiller-numérique-france-services-contributions/membres',
     )
     cy.testId('member-card-admin').should('not.exist')
-    cy.testId('member-card').should('have.length', 2)
+    cy.testId('profile-card').should('have.length', 2)
   })
 
   it("Acceptation 2 - En tant qu'admin je peux changer le role d'un membre", () => {

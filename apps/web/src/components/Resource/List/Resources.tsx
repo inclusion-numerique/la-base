@@ -9,9 +9,11 @@ import styles from './Resources.module.css'
 const Resources = ({
   resources,
   user,
+  isConnectedUser,
 }: {
   resources: BaseResource[]
-  user: SessionUser
+  user: SessionUser | null
+  isConnectedUser: boolean
 }) => {
   const drafts = useMemo(
     () => resources.filter((resource) => resource.isPublic === null),
@@ -41,7 +43,11 @@ const Resources = ({
               <ResourceTab
                 resources={drafts}
                 user={user}
-                emptyText="Vous n'avez pas de brouillons."
+                emptyText={
+                  isConnectedUser
+                    ? "Vous n'avez pas de brouillons."
+                    : "Cet utilisateur n'a pas de brouillons."
+                }
                 data-testid="resources-draft-tab"
               />
             ),
@@ -53,7 +59,11 @@ const Resources = ({
               <ResourceTab
                 resources={publics}
                 user={user}
-                emptyText="Vous n'avez pas de ressources publiées."
+                emptyText={
+                  isConnectedUser
+                    ? "Vous n'avez pas de ressources publiées."
+                    : "Cet utilisateur n'a pas de ressources publiées."
+                }
                 data-testid="resources-public-tab"
               />
             ),
@@ -65,7 +75,11 @@ const Resources = ({
               <ResourceTab
                 resources={privates}
                 user={user}
-                emptyText="Vous n'avez pas de ressources privées."
+                emptyText={
+                  isConnectedUser
+                    ? "Vous n'avez pas de ressources privées."
+                    : "Cet utilisateur n'a pas de ressources privées."
+                }
                 data-testid="resources-private-tab"
               />
             ),

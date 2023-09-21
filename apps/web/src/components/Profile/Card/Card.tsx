@@ -3,14 +3,14 @@ import Link from 'next/link'
 import IconLink from '@app/web/components/Icon/IconLink'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { getServerUrl } from '@app/web/utils/baseUrl'
-import { BaseMember } from '@app/web/server/bases/getBase'
-import styles from './MemberCard.module.css'
+import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import styles from './Card.module.css'
 
-const MemberCard = ({ member }: { member: BaseMember }) => (
-  <div className={styles.container} data-testid="member-card">
-    <Link className={styles.content} href={`/profils/${member.member.id}`}>
+const ProfileCard = ({ profile }: { profile: ProfileListItem }) => (
+  <div className={styles.container} data-testid="profile-card">
+    <Link className={styles.content} href={`/profils/${profile.id}`}>
       <div className={styles.logo} />
-      {member.member.name}
+      {profile.name}
     </Link>
     <div className={styles.iconActions}>
       <IconLink
@@ -19,11 +19,9 @@ const MemberCard = ({ member }: { member: BaseMember }) => (
         icon="fr-icon-heart-line"
         small
       />
-      <CopyLinkButton
-        url={getServerUrl(`/profils/${member.member.id}`, true)}
-      />
+      <CopyLinkButton url={getServerUrl(`/profils/${profile.id}`, true)} />
     </div>
   </div>
 )
 
-export default MemberCard
+export default ProfileCard

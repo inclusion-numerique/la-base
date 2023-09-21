@@ -1,0 +1,9 @@
+.menu {
+  display: flex;
+  border-bottom: var(--slim-grey-border);
+  margin-bottom: 28px;
+
+  :global(.fr-nav__list) {
+    justify-content: center;
+  }
+}

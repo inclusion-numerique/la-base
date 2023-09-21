@@ -22,7 +22,7 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
     <>
       <Breadcrumbs
         currentPage={authorizations.resource.title}
-        parents={[{ label: 'Ressources', linkProps: { href: '/ressources' } }]}
+        parents={[{ label: 'Ressources', linkProps: { href: '/rechercher' } }]}
       />
       {authorizations.authorized ? (
         <View

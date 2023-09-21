@@ -11,7 +11,7 @@ const ResourceTab = ({
   'data-testid': dataTestId,
 }: {
   resources: BaseResource[]
-  user: SessionUser
+  user: SessionUser | null
   emptyText: string
   ['data-testid']: string
 }) => (

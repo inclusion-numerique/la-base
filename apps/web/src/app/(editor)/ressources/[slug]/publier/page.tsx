@@ -36,7 +36,7 @@ const ResourcePublicationPage = async ({
         <Breadcrumbs
           currentPage="Publication de la ressource"
           parents={[
-            { label: 'Ressources', linkProps: { href: '/ressources' } },
+            { label: 'Ressources', linkProps: { href: '/rechercher' } },
             {
               label: resource.title,
               linkProps: { href: `/ressources/${resource.slug}` },

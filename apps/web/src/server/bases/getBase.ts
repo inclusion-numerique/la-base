@@ -5,8 +5,9 @@ import {
   getWhereResourcesList,
   resourceListSelect,
 } from '../resources/getResourcesList'
+import { profileSelect } from '../profiles/getProfilesList'
 
-const baseSelect = (user: Pick<SessionUser, 'id'>) =>
+const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
   ({
     id: true,
     slug: true,
@@ -30,10 +31,7 @@ const baseSelect = (user: Pick<SessionUser, 'id'>) =>
         isAdmin: true,
         baseId: true,
         member: {
-          select: {
-            id: true,
-            name: true,
-          },
+          select: profileSelect,
         },
       },
       orderBy: { accepted: 'desc' },
@@ -48,7 +46,7 @@ export const getBase = async (id: string, user: Pick<SessionUser, 'id'>) =>
 
 export const basePageQuery = async (
   slug: string,
-  user: Pick<SessionUser, 'id'>,
+  user: Pick<SessionUser, 'id'> | null,
 ) =>
   prismaClient.base.findFirst({
     select: baseSelect(user),

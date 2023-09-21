@@ -76,7 +76,7 @@ const Header = ({
               <ul className="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left">
                 <li>
                   <Link
-                    href="/ressources"
+                    href="/rechercher"
                     className="fr-btn fr-icon-search-line"
                   >
                     Rechercher

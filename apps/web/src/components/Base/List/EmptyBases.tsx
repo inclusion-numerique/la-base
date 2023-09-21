@@ -4,7 +4,13 @@ import EmptyBox from '@app/web/components/EmptyBox'
 import { CreateBaseButton } from '../CreateBaseButton'
 
 const EmptyBases = ({ isConnectedUser }: { isConnectedUser: boolean }) => (
-  <EmptyBox title="Actuellement, vous n’êtes pas membre d’une base.">
+  <EmptyBox
+    title={
+      isConnectedUser
+        ? 'Actuellement, vous n’êtes pas membre d’une base.'
+        : "Ce profil n'est membre d'aucune base"
+    }
+  >
     {isConnectedUser ? (
       <>
         Une base est une communauté d’utilisateurs qui souhaitent créer, publier

@@ -36,7 +36,7 @@ const ResourceEditionPage = async ({
         <Breadcrumbs
           currentPage="Éditer"
           parents={[
-            { label: 'Ressources', linkProps: { href: '/ressources' } },
+            { label: 'Ressources', linkProps: { href: '/rechercher' } },
             {
               label: resource.title,
               linkProps: { href: `/ressources/${resource.slug}` },

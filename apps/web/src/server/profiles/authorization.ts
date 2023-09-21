@@ -5,7 +5,7 @@ export type FilteredProfile = Pick<ProfilePageData, 'id' | 'name' | 'isPublic'>
 
 export const filterAccess = (
   profile: ProfilePageData,
-  user: SessionUser,
+  user: SessionUser | null,
 ):
   | {
       authorized: true
@@ -16,8 +16,9 @@ export const filterAccess = (
       authorized: false
       profile: FilteredProfile
     } => {
-  if (profile.isPublic || profile.id === user.id) {
-    return { authorized: true, isUser: profile.id === user.id, profile }
+  const isUser = !!user && user.id === profile.id
+  if (profile.isPublic || isUser) {
+    return { authorized: true, isUser, profile }
   }
 
   return {

@@ -38,7 +38,6 @@ export const getWhereResourcesList = (
 ): Prisma.ResourceWhereInput => {
   const whereResourceIsPublic = {
     isPublic: true,
-    ...where,
   }
 
   const authorizationWhere = user
@@ -51,21 +50,35 @@ export const getWhereResourcesList = (
       }
     : whereResourceIsPublic
 
-  const baseNotDeleted: Prisma.ResourceWhereInput[] = [
-    {
-      base: {
-        deleted: null,
+  const baseNotDeleted: Prisma.ResourceWhereInput = {
+    OR: [
+      {
+        base: {
+          deleted: null,
+        },
       },
-    },
-    { base: null },
-  ]
+      { baseId: null },
+    ],
+  }
 
   return {
-    ...authorizationWhere,
     deleted: null,
-    ...(authorizationWhere.OR
-      ? { AND: [{ OR: authorizationWhere.OR }, { OR: baseNotDeleted }] }
-      : { OR: baseNotDeleted }),
+    AND: [authorizationWhere, baseNotDeleted, where],
+  }
+}
+
+const getWhereResourcesQuery = (
+  query?: string,
+): Prisma.ResourceWhereInput | undefined => {
+  if (!query) {
+    return undefined
+  }
+
+  return {
+    OR: [
+      { title: { contains: query, mode: 'insensitive' } },
+      { description: { contains: query, mode: 'insensitive' } },
+    ],
   }
 }
 
@@ -73,12 +86,14 @@ export const getResourcesList = async ({
   take,
   user,
   skip,
+  query,
 }: {
   take?: number
   skip?: number
   user?: Pick<SessionUser, 'id'> | null
+  query?: string
 }) => {
-  const where = getWhereResourcesList(user)
+  const where = getWhereResourcesList(user, getWhereResourcesQuery(query))
 
   return prismaClient.resource.findMany({
     where,
@@ -93,9 +108,20 @@ export const getResourcesList = async ({
   })
 }
 
+export const getResourcesCount = ({
+  user,
+  query,
+}: {
+  user?: Pick<SessionUser, 'id'> | null
+  query?: string
+}) =>
+  prismaClient.resource.count({
+    where: getWhereResourcesList(user, getWhereResourcesQuery(query)),
+  })
+
 export const getProfileResources = async (
   profileId: string,
-  user: Pick<SessionUser, 'id'>,
+  user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereResourcesList(user, { createdById: profileId })
 
@@ -112,7 +138,7 @@ export const getProfileResources = async (
 
 export const getProfileResourcesCount = async (
   profileId: string,
-  user: Pick<SessionUser, 'id'>,
+  user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereResourcesList(user, { createdById: profileId })
 

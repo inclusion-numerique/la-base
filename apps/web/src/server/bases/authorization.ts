@@ -7,7 +7,7 @@ export type FilteredBase = Pick<BasePageData, 'slug' | 'title' | 'isPublic'> &
 
 export const filterAccess = (
   base: BasePageData,
-  user: SessionUser,
+  user: SessionUser | null,
 ):
   | {
       authorized: true
@@ -19,7 +19,8 @@ export const filterAccess = (
       authorized: false
       base: FilteredBase
     } => {
-  const baseMember = base.members.find((member) => member.member.id === user.id)
+  const baseMember =
+    user && base.members.find((member) => member.member.id === user.id)
   if (base.isPublic || baseMember) {
     return {
       authorized: true,
