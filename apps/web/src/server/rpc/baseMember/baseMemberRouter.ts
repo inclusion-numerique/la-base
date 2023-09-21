@@ -57,6 +57,32 @@ export const baseMemberRouter = router({
         }
       }
     }),
+  mutate: protectedProcedure
+    .input(
+      z.object({
+        baseId: z.string(),
+        memberId: z.string(),
+        isAdmin: z.boolean(),
+      }),
+    )
+    .mutation(async ({ input, ctx: { user } }) => {
+      const base = await getBase(input.baseId, user)
+      if (!base) {
+        return notFoundError()
+      }
+
+      const authorizations = filterAccess(base, user)
+      if (!authorizations.authorized || !authorizations.isAdmin) {
+        return forbiddenError()
+      }
+
+      return prismaClient.baseMembers.update({
+        data: { isAdmin: input.isAdmin },
+        where: {
+          memberId_baseId: { baseId: input.baseId, memberId: input.memberId },
+        },
+      })
+    }),
   remove: protectedProcedure
     .input(z.object({ baseId: z.string(), memberId: z.string() }))
     .mutation(async ({ input, ctx: { user } }) => {

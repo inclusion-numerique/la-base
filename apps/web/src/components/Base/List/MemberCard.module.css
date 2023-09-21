@@ -21,10 +21,26 @@
   background-color: #BFCCFB;
 }
 
+.select {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-france-sun-113-625);
+  appearance: auto;
+  padding: 4px 8px 4px 12px;
+  text-align: right;
+}
 
+.iconActions,
 .actions {
   padding: 24px 0;
   display: flex;
-  gap: 24px;
   align-items: center;
+}
+
+.actions {
+  gap: 24px;
+}
+
+.iconActions {
+  gap: 8px;
 }

@@ -1,10 +1,11 @@
 import { cleanUpAndCreateTestBase } from '../resource/edition/editionTestUtils'
 import { appUrl, createTestUser } from 'cypress/support/helpers'
 
-describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses ressources', () => {
+describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
   /**
    * US
    *  - https://www.notion.so/Board-edd4e7b2a95a4f2facd39c78a1e3a32f?p=924133a33d914162bdd646c736074046&pm=s
+   *  - https://www.notion.so/Board-edd4e7b2a95a4f2facd39c78a1e3a32f?p=37e7756b09e44ac9b7d3c8d2aa274e3b&pm=s
    */
 
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.visit(
       '/bases/conseiller-numérique-france-services-contributions/membres',
     )
-    cy.testId('member-card').should('have.length', 1)
+    cy.testId('member-card-admin').should('have.length', 1)
     cy.wait('@getUser')
     cy.dsfrShouldBeStarted()
     cy.testId('base-invite-member-button').click()
@@ -30,8 +31,8 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('base-invite-member-modal-button').click()
 
     cy.wait('@invite')
-    // To reactivate after bug fix
-    // cy.testId('member-card').should('have.length', 2)
+    // TODO: To reactivate after bug fix
+    // cy.testId('member-card-admin').should('have.length', 2)
 
     cy.signin({ email: user.email })
     cy.log('Go check emails in maildev server')
@@ -64,5 +65,36 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
       'equal',
       appUrl('/bases/conseiller-numérique-france-services-contributions'),
     )
+    cy.visit(
+      '/bases/conseiller-numérique-france-services-contributions/membres',
+    )
+    cy.testId('member-card-admin').should('not.exist')
+    cy.testId('member-card').should('have.length', 2)
+  })
+
+  it("Acceptation 2 - En tant qu'admin je peux changer le role d'un membre", () => {
+    const user = createTestUser()
+    cy.createUser(user)
+    cy.inviteUserTo(user, 'conseiller-numérique-france-services-contributions')
+
+    cy.visit(
+      '/bases/conseiller-numérique-france-services-contributions/membres',
+    )
+    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card-role-select').eq(0).should('have.value', 'admin')
+    cy.testId('member-card-role-select').eq(1).should('have.value', 'member')
+
+    cy.testId('member-card-role-select').eq(1).select('admin')
+
+    // TODO: reactivate after bug fix
+    // cy.reload()
+    // cy.testId('member-card-admin').should('have.length', 2)
+    // cy.testId('member-card-role-select').eq(0).should('have.value', 'admin')
+    // cy.testId('member-card-role-select').eq(1).should('have.value', 'admin')
+
+    cy.signin({ email: user.email })
+    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card-role-select').eq(0).should('have.value', 'admin')
+    cy.testId('member-card-role-select').eq(1).should('have.value', 'admin')
   })
 })

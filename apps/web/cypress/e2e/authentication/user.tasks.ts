@@ -93,3 +93,27 @@ export const deleteSession = async (sessionToken: string) => {
   await prismaClient.session.delete({ where: { sessionToken } })
   return null
 }
+
+export const inviteUserTo = async ({
+  user,
+  slug,
+}: {
+  user: string
+  slug: string
+}) => {
+  const base = await prismaClient.base.findFirst({
+    select: { id: true },
+    where: { slug },
+  })
+  if (base === null) {
+    throw new Error(`Base ${slug} not found`)
+  }
+  return prismaClient.baseMembers.create({
+    data: {
+      baseId: base.id,
+      memberId: user,
+      isAdmin: false,
+      accepted: new Date(),
+    },
+  })
+}

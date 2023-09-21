@@ -71,6 +71,9 @@ Cypress.Commands.add('createUser', (user: CreateUserInput) => {
 Cypress.Commands.add('createBase', (base: CreateBaseInput) => {
   cy.task('createBase', base)
 })
+Cypress.Commands.add('inviteUserTo', (user: CreateUserInput, base: string) => {
+  cy.task('inviteUserTo', { user: user.id, base })
+})
 Cypress.Commands.add(
   'sendResourceCommands',
   (input: SendResourceCommandsInput) => {
@@ -143,6 +146,7 @@ declare global {
       createUserAndSignin(user: CreateUserInput): Chainable<string>
       createUser(user: CreateUserInput): Chainable<void>
       createBase(base: CreateBaseInput): Chainable<void>
+      inviteUserTo(user: CreateUserInput, base: string): Chainable<void>
       sendResourceCommands(
         input: SendResourceCommandsInput,
       ): Chainable<ResourceProjection>

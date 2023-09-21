@@ -5,6 +5,7 @@ import {
   deleteSession,
   deleteUser,
   sendResourceCommands,
+  inviteUserTo,
 } from '../e2e/authentication/user.tasks'
 import { deleteAllData } from '../e2e/deleteAllData'
 
@@ -19,6 +20,7 @@ export const tasks = {
   createSession,
   deleteSession,
   deleteAllData,
+  inviteUserTo,
 }
 
 export type Tasks = typeof tasks

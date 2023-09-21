@@ -20,7 +20,7 @@ export const randomMembers: (
         memberId: user.id,
         baseId: base.id,
         isAdmin: Math.random() < 0.2,
-        accepted: Math.random() > 0.9 ? faker.date.past() : null,
+        accepted: Math.random() < 0.9 ? faker.date.past() : null,
       })),
   )
 }
