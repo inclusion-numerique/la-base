@@ -21,6 +21,7 @@ import {
 import { migrateUploads } from '@app/migration/modelMigrations/migrateUploads'
 import { migrateUsers } from '@app/migration/modelMigrations/migrateUsers'
 import { computeSlugAndUpdateExistingSlugs } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
+import { migrateBaseMembers } from '@app/migration/modelMigrations/migrateBaseMembers'
 
 // eslint-disable-next-line no-console
 const output = console.log
@@ -135,6 +136,13 @@ export const executeMigration = async () => {
 
   output(`- Migrated ${migratedResources.length} resources`)
   output(`- Migrated ${migratedContents.length} contents`)
+
+  const migratedBaseMembers = await migrateBaseMembers({
+    userIdFromLegacyId,
+    baseIdFromLegacyId,
+  })
+
+  output(`- Migrated ${migratedBaseMembers.length} base members`)
 
   const endModelMigrations = new Date()
   output(
