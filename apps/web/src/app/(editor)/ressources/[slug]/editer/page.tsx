@@ -26,7 +26,7 @@ const ResourceEditionPage = async ({
     notFound()
   }
   const authorizations = filterAccess(resource, user)
-  if (!authorizations.authorized || !authorizations.isContributor) {
+  if (!authorizations.authorized || !authorizations.isAdmin) {
     redirect(`/ressources/${params.slug}`)
   }
 

@@ -17,7 +17,11 @@ export const baseMemberRouter = router({
         return notFoundError()
       }
       const authorizations = filterAccess(base, user)
-      if (!authorizations.authorized || !authorizations.isAdmin) {
+      if (!authorizations.authorized || !authorizations.isMember) {
+        return forbiddenError()
+      }
+
+      if (input.isAdmin && !authorizations.isAdmin) {
         return forbiddenError()
       }
 
@@ -76,6 +80,14 @@ export const baseMemberRouter = router({
         return forbiddenError()
       }
 
+      if (
+        !base.members.some(
+          (member) => member.memberId !== input.memberId && member.isAdmin,
+        )
+      ) {
+        return forbiddenError()
+      }
+
       return prismaClient.baseMembers.update({
         data: { isAdmin: input.isAdmin },
         where: {
@@ -92,6 +104,14 @@ export const baseMemberRouter = router({
       }
       const authorizations = filterAccess(base, user)
       if (!authorizations.authorized || !authorizations.isAdmin) {
+        return forbiddenError()
+      }
+
+      if (
+        !base.members.some(
+          (member) => member.memberId !== input.memberId && member.isAdmin,
+        )
+      ) {
         return forbiddenError()
       }
 

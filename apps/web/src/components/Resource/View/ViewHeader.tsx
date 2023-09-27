@@ -9,10 +9,10 @@ import styles from './View.module.css'
 
 const ViewHeader = ({
   resource,
-  isContributor,
+  isAdmin,
 }: {
   resource: Resource | FilteredResource
-  isContributor?: boolean
+  isAdmin?: boolean
 }) => (
   <div className="fr-grid-row">
     <div className={classNames(styles.leftColumn)}>
@@ -25,7 +25,7 @@ const ViewHeader = ({
       className={classNames(styles.rightColumn)}
       data-testid="resource-public-state-badge"
     >
-      {isContributor ? (
+      {isAdmin ? (
         <ResourcePublicStateBadge isPublic={resource.isPublic} />
       ) : (
         <p className={classNames('fr-text--xs', 'fr-mb-0', styles.user)}>

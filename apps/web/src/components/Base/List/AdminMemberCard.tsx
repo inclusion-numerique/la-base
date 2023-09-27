@@ -8,7 +8,13 @@ import styles from '@app/web/components/Profile/Card/Card.module.css'
 import { trpc } from '@app/web/trpc'
 import RemoveMemberButton from './RemoveMemberButton'
 
-const AdminMemberCard = ({ member }: { member: BaseMember }) => {
+const AdminMemberCard = ({
+  member,
+  onlyAdmin,
+}: {
+  member: BaseMember
+  onlyAdmin: boolean
+}) => {
   const [isAdmin, setIsAdmin] = useState(member.isAdmin)
   const mutate = trpc.baseMember.mutate.useMutation()
 
@@ -32,16 +38,22 @@ const AdminMemberCard = ({ member }: { member: BaseMember }) => {
         {member.member.name}
       </Link>
       <div className={styles.actions}>
-        <select
-          data-testid="member-card-role-select"
-          onChange={onChange}
-          className={styles.select}
-          value={isAdmin ? 'admin' : 'member'}
-        >
-          <option value="admin">Administrateur</option>
-          <option value="member">Membre</option>
-        </select>
-        <RemoveMemberButton member={member} />
+        {onlyAdmin && isAdmin ? (
+          <div className={styles.select}>Administrateur</div>
+        ) : (
+          <>
+            <select
+              data-testid="member-card-role-select"
+              onChange={onChange}
+              className={styles.select}
+              value={isAdmin ? 'admin' : 'member'}
+            >
+              <option value="admin">Administrateur</option>
+              <option value="member">Membre</option>
+            </select>
+            <RemoveMemberButton member={member} />
+          </>
+        )}
       </div>
     </div>
   )

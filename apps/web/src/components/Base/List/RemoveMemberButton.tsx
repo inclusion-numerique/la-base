@@ -28,6 +28,7 @@ const RemoveMemberButton = ({ member }: { member: BaseMember }) => {
       priority="tertiary no outline"
       iconId="fr-icon-delete-line"
       title="Retirer le membre de la base"
+      data-testid="remove-member-button"
       size="small"
       onClick={onRemove}
     />

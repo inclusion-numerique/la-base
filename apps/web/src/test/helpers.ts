@@ -49,6 +49,7 @@ export const createTestResource = (
           title: base.title,
           slug: base.slug,
           isPublic: base.isPublic,
+          members: base.members,
         }
       : null,
     themes: ['theme-1'],
@@ -83,12 +84,16 @@ export const createTestBase = (
     members: [
       ...admins.map((admin) => ({
         baseId: id,
+        memberId: admin.id,
         member: { id: admin.id, name: admin.name },
+        accepted: new Date(),
         isAdmin: true,
       })),
       ...members.map((member) => ({
         baseId: id,
+        memberId: member.id,
         member: { id: member.id, name: member.name },
+        accepted: new Date(),
         isAdmin: false,
       })),
     ],

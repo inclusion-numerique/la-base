@@ -27,7 +27,7 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
       {authorizations.authorized ? (
         <View
           resource={authorizations.resource}
-          isContributor={authorizations.isContributor}
+          isAdmin={authorizations.isAdmin}
         />
       ) : (
         <>

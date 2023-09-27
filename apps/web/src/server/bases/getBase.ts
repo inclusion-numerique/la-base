@@ -30,6 +30,8 @@ const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
       select: {
         isAdmin: true,
         baseId: true,
+        memberId: true,
+        accepted: true,
         member: {
           select: profileSelect,
         },

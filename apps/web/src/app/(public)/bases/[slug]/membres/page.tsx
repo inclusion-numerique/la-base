@@ -26,7 +26,11 @@ const BasePage = async ({ params }: { params: { slug: string } }) => {
         {base.members.length === 0 ? (
           <EmptyResources isMember={authorizations.isMember} />
         ) : (
-          <Members base={base} isAdmin={authorizations.isAdmin} />
+          <Members
+            base={base}
+            isMember={authorizations.isMember}
+            isAdmin={authorizations.isAdmin}
+          />
         )}
       </div>
     </>

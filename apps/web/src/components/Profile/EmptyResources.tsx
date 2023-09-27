@@ -21,7 +21,9 @@ const EmptyResources = ({ isConnectedUser }: { isConnectedUser: boolean }) => (
             En savoir plus
           </Link>
         </div>
-        <CreateResourceButton className="fr-mt-4w" />
+        <div data-testid="create-resource-button">
+          <CreateResourceButton className="fr-mt-4w" />
+        </div>
       </>
     ) : (
       'Revenez plus tard ou ajoutez ce profil à vos favoris afin de suivre ses prochaines publications.'

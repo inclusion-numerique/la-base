@@ -39,7 +39,7 @@ const BaseEdition = ({ base }: { base: BasePageData }) => {
     <>
       <Button
         className="fr-btn--danger"
-        data-testid="delete-button"
+        data-testid="delete-base-button"
         {...deleteModalNativeButtonProps}
       >
         Supprimer la base

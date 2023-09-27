@@ -28,7 +28,13 @@ const {
   isOpenedByDefault: false,
 })
 
-const InviteMemberButton = ({ base }: { base: BasePageData }) => {
+const InviteMemberButton = ({
+  base,
+  isAdmin,
+}: {
+  base: BasePageData
+  isAdmin: boolean
+}) => {
   const form = useForm<InviteMemberCommand>({
     resolver: zodResolver(InviteMemberCommandValidation),
     defaultValues: { baseId: base.id, isAdmin: false },
@@ -124,6 +130,7 @@ const InviteMemberButton = ({ base }: { base: BasePageData }) => {
                       })}
                     >
                       <select
+                        data-testid="base-invite-member-role-select"
                         onChange={(event) => {
                           form.setValue(
                             'isAdmin',
@@ -131,8 +138,20 @@ const InviteMemberButton = ({ base }: { base: BasePageData }) => {
                           )
                         }}
                       >
-                        <option value="member">Membre</option>
-                        <option value="admin">Administrateur</option>
+                        <option
+                          value="member"
+                          data-testid="base-invite-member-role-member"
+                        >
+                          Membre
+                        </option>
+                        {isAdmin && (
+                          <option
+                            value="admin"
+                            data-testid="base-invite-member-role-admin"
+                          >
+                            Administrateur
+                          </option>
+                        )}
                       </select>
                     </div>
                   </>

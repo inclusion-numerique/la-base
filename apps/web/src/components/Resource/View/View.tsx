@@ -10,18 +10,18 @@ import ViewSeparators from './ViewSeparators'
 
 const View = ({
   resource,
-  isContributor,
+  isAdmin,
 }: {
   resource: Resource
-  isContributor: boolean
+  isAdmin: boolean
 }) => (
   <div className={styles.container} data-testid="resource-view">
-    <ViewHeader resource={resource} isContributor={isContributor} />
+    <ViewHeader resource={resource} isAdmin={isAdmin} />
     <ViewSeparators />
 
     <div className="fr-grid-row" style={{ flexDirection: 'row-reverse' }}>
       <div className={classNames(styles.rightColumn)}>
-        <ResourceNavigation resource={resource} isContributor={isContributor} />
+        <ResourceNavigation resource={resource} isAdmin={isAdmin} />
       </div>
       <div className={classNames(styles.leftColumn)} id="contents-container">
         <ResourceContents resource={resource} />

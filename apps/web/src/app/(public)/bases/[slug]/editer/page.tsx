@@ -25,7 +25,7 @@ const BaseEditionPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <Header base={base} />
-      <BaseEdition base={base} />
+      <BaseEdition base={base} isAdmin={authorizations.isAdmin} />
     </>
   )
 }

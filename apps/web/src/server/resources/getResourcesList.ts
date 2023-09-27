@@ -40,12 +40,23 @@ export const getWhereResourcesList = (
     isPublic: true,
   }
 
-  const authorizationWhere = user
+  const authorizationWhere: Prisma.ResourceWhereInput = user
     ? {
         OR: [
           whereResourceIsPublic,
           // Public or created by user
           { createdById: user.id },
+          // User is member of base
+          {
+            base: {
+              members: {
+                some: {
+                  accepted: { not: null },
+                  memberId: user.id,
+                },
+              },
+            },
+          },
         ],
       }
     : whereResourceIsPublic

@@ -22,7 +22,11 @@ export const createTestUser = (publicProfile?: boolean, userId?: string) =>
     isPublic: publicProfile || false,
   }) satisfies CreateUserInput
 
-export const createTestBase = (ownerId: string, isPublic?: boolean) =>
+export const createTestBase = (
+  ownerId: string,
+  isPublic?: boolean,
+  members?: string[],
+) =>
   ({
     id: v4(),
     title: 'Conseiller numérique France Services - contributions',
@@ -35,7 +39,16 @@ export const createTestBase = (ownerId: string, isPublic?: boolean) =>
     isPublic,
     email: 'test@mail.fr',
     emailIsPublic: true,
-    members: { create: [{ memberId: ownerId, isAdmin: true }] },
+    members: {
+      create: [
+        ...(members?.map((memberId) => ({
+          memberId,
+          isAdmin: false,
+          accepted: new Date('2022-01-01'),
+        })) || []),
+        { memberId: ownerId, isAdmin: true, accepted: new Date('2023-01-01') },
+      ],
+    },
   }) satisfies CreateBaseInput
 
 export const createTestPublishResourceCommand = (

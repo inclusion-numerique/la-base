@@ -32,7 +32,9 @@ const Resources = ({
     <div className={styles.container} data-testid="base-resources">
       <div className={styles.header}>
         <h3 className="fr-mb-0">Ressources · {resources.length}</h3>
-        <CreateResourceButton className="fr-btn--secondary" />
+        <div data-testid="create-resource-button">
+          <CreateResourceButton className="fr-btn--secondary" />
+        </div>
       </div>
       <Tabs
         tabs={[

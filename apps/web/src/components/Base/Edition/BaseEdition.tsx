@@ -9,7 +9,13 @@ import styles from './BaseEdition.module.css'
 import Visibility from './Visibility'
 import Contacts from './Contacts'
 
-const BaseEdition = ({ base }: { base: BasePageData }) => (
+const BaseEdition = ({
+  base,
+  isAdmin,
+}: {
+  base: BasePageData
+  isAdmin: boolean
+}) => (
   <div className={classNames('fr-container', styles.container)}>
     <SideMenu />
     <div className={baseStyles.cards}>
@@ -22,7 +28,7 @@ const BaseEdition = ({ base }: { base: BasePageData }) => (
           Texte explicatif sur la suppression des données ?
         </p>
         <hr className="fr-mt-4w fr-pb-4w" />
-        <BaseDeletion base={base} />
+        {isAdmin && <BaseDeletion base={base} />}
       </div>
     </div>
   </div>

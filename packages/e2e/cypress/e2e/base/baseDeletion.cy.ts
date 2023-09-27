@@ -17,7 +17,7 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
   it('Acceptation 1 - le créateur de la base peut la supprimer', () => {
     cy.findByRole('dialog').should('not.exist')
 
-    cy.testId('delete-button').click()
+    cy.testId('delete-base-button').click()
     cy.findByRole('dialog').should('exist')
 
     cy.testId('modal-delete-button').should('be.disabled')

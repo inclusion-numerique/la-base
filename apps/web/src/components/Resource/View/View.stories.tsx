@@ -25,6 +25,7 @@ const resource = (imageId: string | null) =>
       title: 'Titre de la base',
       slug: 'titre-de-la-base',
       isPublic: true,
+      members: [],
     },
     createdById: '1',
     createdBy: {
@@ -130,7 +131,7 @@ export const Contributeur: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource('portrait.webp'),
-    isContributor: true,
+    isAdmin: true,
   },
 }
 

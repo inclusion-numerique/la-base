@@ -17,10 +17,10 @@ const {
 
 const ResourceNavigation = ({
   resource: { slug, contents },
-  isContributor,
+  isAdmin,
 }: {
   resource: Resource
-  isContributor: boolean
+  isAdmin: boolean
 }) => (
   <>
     <ResourceNavigationModal
@@ -41,9 +41,9 @@ const ResourceNavigation = ({
           'fr-btn--icon-left',
           'fr-icon-edit-line',
         )}
-        href={isContributor ? `/ressources/${slug}/editer` : '/'}
+        href={isAdmin ? `/ressources/${slug}/editer` : '/'}
       >
-        {isContributor ? 'Modifier' : 'Demander à contribuer'}
+        {isAdmin ? 'Modifier' : 'Demander à contribuer'}
       </Link>
       <Link
         className={classNames(
@@ -90,9 +90,9 @@ const ResourceNavigation = ({
             'fr-icon-edit-line',
             styles.button,
           )}
-          href={isContributor ? `/ressources/${slug}/editer` : '/'}
+          href={isAdmin ? `/ressources/${slug}/editer` : '/'}
         >
-          {isContributor ? 'Modifier' : 'Demander à contribuer'}
+          {isAdmin ? 'Modifier' : 'Demander à contribuer'}
         </Link>
         <Link
           className={classNames(

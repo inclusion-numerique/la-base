@@ -7,24 +7,34 @@ import styles from './Members.module.css'
 
 const Members = ({
   base,
+  isMember,
   isAdmin,
 }: {
   base: BasePageData
+  isMember: boolean
   isAdmin: boolean
-}) => (
-  <div className={styles.container} data-testid="base-members">
-    <div className={styles.header}>
-      <h3 className="fr-mb-0">Membres · {base.members.length}</h3>
-      {isAdmin && <InviteMemberButton base={base} />}
+}) => {
+  const onlyAdmin = base.members.filter((member) => member.isAdmin).length < 2
+
+  return (
+    <div className={styles.container} data-testid="base-members">
+      <div className={styles.header}>
+        <h3 className="fr-mb-0">Membres · {base.members.length}</h3>
+        {isMember && <InviteMemberButton base={base} isAdmin={isAdmin} />}
+      </div>
+      {isAdmin
+        ? base.members.map((member) => (
+            <AdminMemberCard
+              member={member}
+              key={member.member.id}
+              onlyAdmin={onlyAdmin}
+            />
+          ))
+        : base.members.map((member) => (
+            <ProfileCard profile={member.member} key={member.member.id} />
+          ))}
     </div>
-    {isAdmin
-      ? base.members.map((member) => (
-          <AdminMemberCard member={member} key={member.member.id} />
-        ))
-      : base.members.map((member) => (
-          <ProfileCard profile={member.member} key={member.member.id} />
-        ))}
-  </div>
-)
+  )
+}
 
 export default Members

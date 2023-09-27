@@ -24,6 +24,12 @@ export const getResourceSelect = {
       title: true,
       slug: true,
       isPublic: true,
+      members: {
+        select: {
+          accepted: true,
+          memberId: true,
+        },
+      },
     },
   },
   imageId: true,

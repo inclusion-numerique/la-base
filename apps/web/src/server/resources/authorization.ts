@@ -12,17 +12,24 @@ export const filterAccess = (
 ):
   | {
       authorized: true
-      isContributor: boolean
+      isAdmin: boolean
       resource: Resource
     }
   | {
       authorized: false
       resource: FilteredResource
     } => {
-  if (resource.isPublic || (user && resource.createdById === user.id)) {
+  const isCreator = !!user && resource.createdById === user.id
+  const isBaseMember =
+    !!user &&
+    !!resource.base &&
+    resource.base.members.some(
+      (member) => member.accepted !== null && member.memberId === user.id,
+    )
+  if (resource.isPublic || isCreator || isBaseMember) {
     return {
       authorized: true,
-      isContributor: !!user && resource.createdById === user.id,
+      isAdmin: isCreator || isBaseMember,
       resource,
     }
   }

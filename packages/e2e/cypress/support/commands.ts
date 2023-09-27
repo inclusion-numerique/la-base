@@ -60,6 +60,9 @@ Cypress.Commands.add('signin', ({ email }: { email: string }) =>
     return cy.wrap(session.sessionToken)
   }),
 )
+
+Cypress.Commands.add('logout', () => cy.clearCookie('next-auth.session-token'))
+
 Cypress.Commands.add('createUserAndSignin', (user: CreateUserInput) => {
   cy.task('createUser', user)
   return cy.signin(user)
@@ -189,6 +192,7 @@ declare global {
         input: SendResourceCommandsInput,
       ): Chainable<ResourceProjection>
       signin(user: { email: string }): Chainable<string>
+      logout(): Chainable<null>
 
       dsfrStylesShouldBeLoaded(): Chainable<void>
 
