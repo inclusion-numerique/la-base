@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { SelectOption } from './utils/options'
 import styles from './OptionBadge.module.css'
 
-export type SelectOptionValid = SelectOption & { invalid?: boolean }
+export type SelectOptionValid = SelectOption<string> & { invalid?: boolean }
 
 export const OptionBadge = ({
   option,

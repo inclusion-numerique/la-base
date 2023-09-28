@@ -95,7 +95,7 @@ export const deleteSession = async (sessionToken: string) => {
   return null
 }
 
-export const inviteUserTo = async ({
+export const inviteUserToBase = async ({
   user,
   slug,
 }: {
@@ -115,6 +115,29 @@ export const inviteUserTo = async ({
       memberId: user,
       isAdmin: false,
       accepted: new Date(),
+    },
+  })
+}
+
+export const inviteUserToResource = async ({
+  user,
+  slug,
+}: {
+  user: string
+  slug: string
+}) => {
+  const resource = await prismaClient.resource.findFirst({
+    select: { id: true },
+    where: { slug },
+  })
+  if (resource === null) {
+    throw new Error(`Resource ${slug} not found`)
+  }
+  return prismaClient.resourceContributors.create({
+    data: {
+      resourceId: resource.id,
+      contributorId: user,
+      added: new Date(),
     },
   })
 }

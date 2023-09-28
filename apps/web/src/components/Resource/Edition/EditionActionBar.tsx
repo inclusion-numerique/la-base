@@ -1,9 +1,12 @@
-import classNames from 'classnames'
 import React, { useRef } from 'react'
+import Link from 'next/link'
+import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { useRouter } from 'next/navigation'
 import { useOnClickOutside } from 'usehooks-ts'
+import { Resource } from '@app/web/server/resources/getResource'
+import InviteContributors from '../Contributors/InviteContributors'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import styles from './EditionActionBar.module.css'
@@ -17,7 +20,17 @@ const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
     isOpenedByDefault: false,
   })
 
+const {
+  Component: InviteContributorsModal,
+  open: openInviteContributorsModal,
+  close: closeInviteContributorsModal,
+} = createModal({
+  id: 'inviteContributors',
+  isOpenedByDefault: false,
+})
+
 const EditionActionBar = ({
+  resource,
   publishedState,
   editionState,
   unPublishedEdits,
@@ -26,6 +39,7 @@ const EditionActionBar = ({
   onPublish,
   onDelete,
 }: {
+  resource: Resource
   publishedState: ResourcePublishedState
   editionState: ResourceEditionState
   unPublishedEdits: boolean
@@ -90,17 +104,21 @@ const EditionActionBar = ({
                 id="edition-action-bar-more"
                 ref={collapseRef}
               >
-                <Button
-                  className={styles.collapseButton}
-                  type="button"
-                  priority="tertiary no outline"
-                  iconId="fr-icon-settings-5-line"
+                <Link
+                  className={classNames(
+                    styles.collapseButton,
+                    'fr-btn',
+                    'fr-btn--tertiary-no-outline',
+                    'fr-icon-settings-5-line',
+                    'fr-btn--icon-left',
+                  )}
+                  href={`/ressources/${resource.slug}/parametres`}
                 >
                   Paramètres de la ressource
-                </Button>
+                </Link>
                 <hr className={styles.separator} />
                 <Button
-                  className={styles.collapseButton}
+                  className={classNames(styles.collapseButton, 'wip')}
                   type="button"
                   priority="tertiary no outline"
                   iconId="fr-icon-eye-line"
@@ -113,6 +131,11 @@ const EditionActionBar = ({
                   type="button"
                   priority="tertiary no outline"
                   iconId="fr-icon-user-add-line"
+                  nativeButtonProps={{
+                    'data-testid':
+                      'edition-action-bar-invite-contributors-modal',
+                  }}
+                  onClick={openInviteContributorsModal}
                 >
                   Inviter un contributeur
                 </Button>
@@ -152,6 +175,16 @@ const EditionActionBar = ({
         </div>
       </div>
       <DeleteResourceModal {...deleteResourceModalProps(onDelete)} />
+      <InviteContributorsModal title="Inviter des contributeurs">
+        <p className="fr-mb-4w">
+          Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs
+          et supprimer la ressource.
+        </p>
+        <InviteContributors
+          resource={resource}
+          onSuccess={closeInviteContributorsModal}
+        />
+      </InviteContributorsModal>
     </>
   )
 }

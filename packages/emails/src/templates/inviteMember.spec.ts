@@ -12,7 +12,7 @@ describe('Template: inviteMember', () => {
     })
 
     expect(mjml).toContain(
-      'Vous êtes invité par Abd Al Malik à rejoindre la Base Ma base.',
+      'Vous êtes invité par Abd Al Malik à rejoindre la base Ma base.',
     )
     expect(mjml).toContain('https://test.local?token=oui')
 

@@ -20,17 +20,17 @@ import { emailAssetUrl } from '@app/emails/emailAssetUrl'
 const brandColor = '#000091'
 const backgroundColor = '#F6F6F6'
 
-export const inviteMember = {
-  text: ({ url, baseTitle }: { url: string; baseTitle: string }): string =>
+export const inviteContributor = {
+  text: ({ resourceTitle }: { resourceTitle: string }): string =>
     // eslint-disable-next-line no-irregular-whitespace
-    `Pour accepter l'invitation à la base ${baseTitle}, merci d'utiliser le lien suivant :\n${url}\n\n`,
+    `Vous êtes invité à contribuer à la ressource ${resourceTitle}`,
   mjml: ({
     url,
-    baseTitle,
+    resourceTitle,
     from,
   }: {
     url: string
-    baseTitle: string
+    resourceTitle: string
     from: string
   }): string =>
     renderToMjml(
@@ -50,9 +50,9 @@ export const inviteMember = {
             />
             <MjmlText fontSize="16px" lineHeight="24px" fontWeight={400} />
           </MjmlAttributes>
-          <MjmlTitle>{`Invitation à la base ${baseTitle}`}</MjmlTitle>
+          <MjmlTitle>{`Invitation à la ressource ${resourceTitle}`}</MjmlTitle>
           <MjmlPreview>
-            {`Vous avez été invité par ${from} à rejoindre la base ${baseTitle}`}
+            {`Vous avez été invité par ${from} à contribuer à la ressource ${resourceTitle}`}
           </MjmlPreview>
         </MjmlHead>
         <MjmlBody backgroundColor={backgroundColor}>
@@ -88,21 +88,22 @@ export const inviteMember = {
                 Bonjour,
                 <br />
                 <br />
-                Vous êtes invité par {from} à rejoindre la base {baseTitle}.
+                Vous êtes invité par {from} à contribuer à la ressource{' '}
+                {resourceTitle}.
               </MjmlText>
               <MjmlSpacer height="32px" />
               <MjmlText fontWeight={400} fontSize="16px" color="#3A3A3A">
-                En rejoignant cette base, vous pourrez :
+                Cette invitation à contribuer à cette ressource vous permet :
                 <br />
                 <br />
-                - Créer & publier des ressources
+                - D’apporter des modifications/améliorations à cette ressource
                 <br />
-                - Contribuer à des ressources publiés sur cette base
-                <br />- Inviter d’autres membres
+                - Modifier les paramètres de publication de cette ressource
+                <br />- Inviter d’autres contributeurs
               </MjmlText>
               <MjmlSpacer height="32px" />
               <MjmlButton width="100%" href={emailAssetUrl(url)}>
-                Accepter l&lsquo;invitation
+                Voir la ressource
               </MjmlButton>
               <MjmlSpacer height="32px" />
             </MjmlColumn>

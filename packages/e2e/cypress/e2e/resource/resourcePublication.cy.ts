@@ -49,6 +49,11 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
   it('Acceptation 2 - Resource privée dans une base publique', () => {
     cleanUpAndCreateTestResource(true)
+
+    cy.intercept('/api/trpc/profile.getMatchingUsers?*').as('getUser')
+    cy.intercept('/api/trpc/resourceContributor.delete?*').as('delete')
+    cy.intercept('/api/trpc/resourceContributor.invite?*').as('invite')
+
     cy.testId('publish-resource-button').click()
 
     cy.testId('indexation-box').should('not.exist')
@@ -62,6 +67,17 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('visibility-radio-resource-private').click({ force: true })
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('exist')
+
+    cy.wait('@getUser')
+    cy.testId('contributors-box').within(() => {
+      cy.testId('contributors-creator').should('exist')
+      cy.testId('contributors-contributor').should('not.exist')
+      cy.testId('invite-member-modal-input').type('t')
+      cy.wait('@getUser')
+      cy.testId('invite-member-modal-input-option-0').click()
+      cy.testId('invite-member-modal-button').click()
+      cy.wait('@invite')
+    })
 
     cy.testId('publish-resource-button').click()
 

@@ -32,6 +32,11 @@ export const getResourceSelect = {
       },
     },
   },
+  contributors: {
+    select: {
+      contributorId: true,
+    },
+  },
   imageId: true,
   image: {
     select: {

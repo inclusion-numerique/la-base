@@ -20,16 +20,21 @@ export const filterAccess = (
       resource: FilteredResource
     } => {
   const isCreator = !!user && resource.createdById === user.id
+  const isContributor =
+    !!user &&
+    resource.contributors.some(
+      (contributor) => contributor.contributorId === user.id,
+    )
   const isBaseMember =
     !!user &&
     !!resource.base &&
     resource.base.members.some(
       (member) => member.accepted !== null && member.memberId === user.id,
     )
-  if (resource.isPublic || isCreator || isBaseMember) {
+  if (resource.isPublic || isCreator || isBaseMember || isContributor) {
     return {
       authorized: true,
-      isAdmin: isCreator || isBaseMember,
+      isAdmin: isCreator || isBaseMember || isContributor,
       resource,
     }
   }

@@ -59,13 +59,14 @@ model User {
   sessions      Session[]
   isPublic      Boolean   @default(false) @map("is_public")
 
-  created          DateTime        @default(now())
-  updated          DateTime        @default(now())
+  created          DateTime               @default(now())
+  updated          DateTime               @default(now())
   ownedBases       Base[]
   createdResources Resource[]
   uploads          Upload[]
   resourceEvent    ResourceEvent[]
   bases            BaseMembers[]
+  resources        ResourceContributors[]
 
   @@map("users")
 }
@@ -131,6 +132,21 @@ model BaseMembers {
   @@map("base_members")
 }
 
+model ResourceContributors {
+  id String @id @default(uuid()) @db.Uuid
+
+  contributor   User   @relation(fields: [contributorId], references: [id])
+  contributorId String @map("contributor_id") @db.Uuid
+
+  resource   Resource @relation(fields: [resourceId], references: [id])
+  resourceId String   @map("resource_id") @db.Uuid
+
+  added DateTime?
+
+  @@unique([contributorId, resourceId])
+  @@map("resource_contributors")
+}
+
 model Resource {
   id                        String   @id @default(uuid()) @db.Uuid
   legacyId                  Int?     @unique @map("legacy_id")
@@ -159,10 +175,11 @@ model Resource {
   base   Base?   @relation(fields: [baseId], references: [id])
   baseId String? @map("base_id") @db.Uuid
 
-  created  DateTime        @default(now())
-  updated  DateTime        @default(now())
-  contents Content[]
-  events   ResourceEvent[]
+  created      DateTime               @default(now())
+  updated      DateTime               @default(now())
+  contents     Content[]
+  events       ResourceEvent[]
+  contributors ResourceContributors[]
 
   @@map("resources")
 }
@@ -170,6 +187,7 @@ model Resource {
 enum ResourceEventType {
   Created                   @map("created")
   Migrated                  @map("migrated")
+  Republished               @map("republished")
   Published                 @map("published")
   Deleted                   @map("deleted")
   TitleAndDescriptionEdited @map("title_and_description_edited")

@@ -39,6 +39,7 @@ const resource = (imageId: string | null) =>
     themes: [],
     targetAudiences: [],
     supportTypes: [],
+    contributors: [],
     contents: [
       {
         id: '1',

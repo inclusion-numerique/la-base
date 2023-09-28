@@ -1,12 +1,27 @@
 import { prismaClient } from '@app/web/prismaClient'
 
-export const getMatchingProfils = async (filter: string, baseId: string) =>
+export const getMatchingProfils = async (
+  filter: string,
+  baseId?: string,
+  resourceId?: string,
+) =>
   prismaClient.user.findMany({
     select: { id: true, name: true, email: true },
     where: {
-      bases: {
-        none: { baseId },
-      },
+      ...(baseId
+        ? {
+            bases: {
+              none: { baseId },
+            },
+          }
+        : {}),
+      ...(resourceId
+        ? {
+            resources: {
+              none: { resourceId },
+            },
+          }
+        : {}),
       OR: [
         { firstName: { contains: filter, mode: 'insensitive' } },
         { lastName: { contains: filter, mode: 'insensitive' } },

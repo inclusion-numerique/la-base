@@ -28,15 +28,15 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.wait('@getUser')
     cy.dsfrShouldBeStarted()
     cy.testId('base-invite-member-button').click()
-    cy.testId('base-invite-member-modal-input').type('t')
+    cy.testId('invite-member-modal-input').type('t')
     cy.wait('@getUser')
-    cy.testId('base-invite-member-modal-input-option-0').click()
+    cy.testId('invite-member-modal-input-option-0').click()
 
     cy.testId('base-invite-member-role-member').should('exist')
     cy.testId('base-invite-member-role-admin').should('exist')
     cy.testId('base-invite-member-role-select').select(1)
 
-    cy.testId('base-invite-member-modal-button').click()
+    cy.testId('invite-member-modal-button').click()
     cy.wait('@invite')
     cy.testId('member-card-admin').should('have.length', 2)
 
@@ -64,7 +64,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.log('Check mail contents')
     // We should not have the email html version in full
     cy.contains(
-      'Vous êtes invité par Jean Biche à rejoindre la Base Conseiller numérique France Services - contributions.',
+      'Vous êtes invité par Jean Biche à rejoindre la base Conseiller numérique France Services - contributions.',
     )
     cy.contains('Accepter').invoke('attr', 'target', '_self').click()
     cy.url().should(
@@ -82,7 +82,10 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cleanUpAndCreateTestBase()
     const user = createTestUser()
     cy.createUser(user)
-    cy.inviteUserTo(user, 'conseiller-numérique-france-services-contributions')
+    cy.inviteUserToBase(
+      user,
+      'conseiller-numérique-france-services-contributions',
+    )
 
     cy.visit(
       '/bases/conseiller-numérique-france-services-contributions/membres',
@@ -116,14 +119,14 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.wait('@getUser')
     cy.dsfrShouldBeStarted()
     cy.testId('base-invite-member-button').click()
-    cy.testId('base-invite-member-modal-input').type('t')
+    cy.testId('invite-member-modal-input').type('t')
     cy.wait('@getUser')
-    cy.testId('base-invite-member-modal-input-option-0').click()
+    cy.testId('invite-member-modal-input-option-0').click()
     cy.testId('base-invite-member-role-member').should('exist')
     cy.testId('base-invite-member-role-admin').should('not.exist')
     cy.testId('base-invite-member-role-select').select(0)
 
-    cy.testId('base-invite-member-modal-button').click()
+    cy.testId('invite-member-modal-button').click()
 
     cy.wait('@invite')
 
@@ -151,7 +154,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.log('Check mail contents')
     // We should not have the email html version in full
     cy.contains(
-      'Vous êtes invité par Jean Biche à rejoindre la Base Conseiller numérique France Services - contributions.',
+      'Vous êtes invité par Jean Biche à rejoindre la base Conseiller numérique France Services - contributions.',
     )
     cy.contains('Accepter').invoke('attr', 'target', '_self').click()
     cy.url().should(

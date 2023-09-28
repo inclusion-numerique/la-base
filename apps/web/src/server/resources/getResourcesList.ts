@@ -46,6 +46,14 @@ export const getWhereResourcesList = (
           whereResourceIsPublic,
           // Public or created by user
           { createdById: user.id },
+          // User is a contributor
+          {
+            contributors: {
+              some: {
+                contributorId: user.id,
+              },
+            },
+          },
           // User is member of base
           {
             base: {

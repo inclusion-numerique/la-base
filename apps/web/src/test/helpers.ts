@@ -22,6 +22,7 @@ export const createTestResource = (
   owner: SessionUser,
   isPublic?: boolean,
   base?: BasePageData,
+  contributor?: SessionUser,
 ) =>
   ({
     id: v4(),
@@ -56,6 +57,13 @@ export const createTestResource = (
     supportTypes: ['support-1'],
     targetAudiences: ['target-1'],
     contents: [],
+    contributors: contributor
+      ? [
+          {
+            contributorId: contributor.id,
+          },
+        ]
+      : [],
   }) satisfies Resource
 
 export const createTestBase = (

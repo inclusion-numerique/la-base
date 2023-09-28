@@ -114,6 +114,16 @@ import {
   handleDelete,
   onDeleted,
 } from './DeleteResource.server'
+import {
+  RepublishCommandValidation,
+  ResourceRepublished,
+} from './RepublishResource'
+import {
+  applyResourceRepublished,
+  handleRepublish,
+  onRepublished,
+  republishSecurityRules,
+} from './RepublishResource.server'
 
 /**
  * This module exports all the commands that can be applied to a resource and their handlers.
@@ -134,6 +144,7 @@ export const ResourceMutationCommandsValidation = z.discriminatedUnion('name', [
   ReorderContentCommandValidation,
   RemoveContentCommandValidation,
   PublishCommandValidation,
+  RepublishCommandValidation,
   DeleteCommandValidation,
 ])
 
@@ -168,6 +179,7 @@ export const ResourceMutationCommandHandlers: {
   ReorderContent: handleReorderContent,
   RemoveContent: handleRemoveContent,
   Publish: handlePublish,
+  Republish: handleRepublish,
   Delete: handleDelete,
 }
 
@@ -186,6 +198,7 @@ export const ResourceCommandSecurityRules: {
   ReorderContent: reorderContentSecurityRules,
   RemoveContent: removeContentSecurityRules,
   Publish: publishSecurityRules,
+  Republish: republishSecurityRules,
   Delete: deleteSecurityRules,
 }
 
@@ -205,6 +218,7 @@ export type HistoryResourceEvent =
   | ContentReordered
   | ContentRemoved
   | ResourcePublished
+  | ResourceRepublished
   | ResourceDeleted
 
 export type CreationHistoryResourceEvent = ResourceCreated | ResourceMigrated
@@ -239,6 +253,7 @@ export const MutationEventAppliers: {
   ContentRemoved: applyContentRemoved,
   BaseChanged: applyBaseChanged,
   Published: applyResourcePublished,
+  Republished: applyResourceRepublished,
   Deleted: applyResourceDeleted,
 }
 
@@ -250,6 +265,7 @@ export const EventSideEffects: {
   Created: onCreated,
   Migrated: onMigrated,
   Published: onPublished,
+  Republished: onRepublished,
   Deleted: onDeleted,
 }
 

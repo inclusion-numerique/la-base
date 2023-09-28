@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
+import { v4 } from 'uuid'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -15,8 +16,7 @@ import {
   InviteMemberCommand,
   InviteMemberCommandValidation,
 } from '@app/web/server/baseMembers/inviteMember'
-import MultipleSearchableSelect from '../../MultipleSearchableSelect'
-import InviteMemberCard from './InviteMemberCard'
+import InviteUsers from '../../InviteUsers'
 import styles from './InviteMemberButton.module.css'
 
 const {
@@ -39,15 +39,9 @@ const InviteMemberButton = ({
     resolver: zodResolver(InviteMemberCommandValidation),
     defaultValues: { baseId: base.id, isAdmin: false },
   })
+  const ref = useRef(v4())
 
-  const [filter, setFilter] = useState('')
   const [emailErrors, setEmailsError] = useState(false)
-
-  // TODO : debounce
-  const { data: members } = trpc.profile.getMatchingUsers.useQuery({
-    filter,
-    baseId: base.id,
-  })
 
   const mutate = trpc.baseMember.invite.useMutation()
   const router = useRouter()
@@ -62,6 +56,7 @@ const InviteMemberButton = ({
     }
     try {
       await mutate.mutateAsync(data)
+      ref.current = v4()
       close()
       router.refresh()
     } catch (mutationError) {
@@ -99,31 +94,14 @@ const InviteMemberButton = ({
                 name="members"
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <>
-                    <MultipleSearchableSelect
-                      data-testid="base-invite-member-modal-input"
+                    <InviteUsers
+                      key={ref.current}
                       label="Ajouter un membre"
-                      placeholder="Adresse email, nom de profil"
-                      setSelecteds={(selections) => {
-                        setEmailsError(
-                          selections.some((selection) => selection.invalid),
-                        )
-                        onChange(selections.map((selection) => selection.value))
-                      }}
-                      filter={() => true}
-                      setInput={setFilter}
-                      options={
-                        members
-                          ? members.map((user) => ({
-                              name: user.email,
-                              value: user.id,
-                              component: <InviteMemberCard member={user} />,
-                            }))
-                          : []
-                      }
+                      setEmailsError={setEmailsError}
+                      error={error}
+                      onChange={onChange}
+                      baseId={base.id}
                     />
-                    {error?.message && (
-                      <p className="fr-error-text">{error.message}</p>
-                    )}
                     <div
                       className={classNames(styles.select, {
                         [styles.selectWithError]: error,
@@ -164,7 +142,7 @@ const InviteMemberButton = ({
               })}
               type="submit"
               nativeButtonProps={{
-                'data-testid': 'base-invite-member-modal-button',
+                'data-testid': 'invite-member-modal-button',
               }}
             >
               Inviter

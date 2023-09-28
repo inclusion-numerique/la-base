@@ -1,0 +1,48 @@
+.inviteInput {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.input {
+  flex: 1;
+}
+
+.contributors {
+  padding: 16px 24px;
+  background-color: #E8EDFF;
+  border-radius: 8px;
+  font-size: 14px;
+
+  span {
+    color: #0063CB;
+    margin-right: 16px;
+  }
+}
+
+.contributor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 10px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: #BFCCFB;
+}
+
+.creator {
+  color: var(--text-mention-grey);
+}

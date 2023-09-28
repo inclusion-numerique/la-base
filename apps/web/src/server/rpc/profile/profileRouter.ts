@@ -6,9 +6,17 @@ import { getMatchingProfils } from '@app/web/server/profiles/getProfile'
 
 export const profileRouter = router({
   getMatchingUsers: protectedProcedure
-    .input(z.object({ filter: z.string(), baseId: z.string() }))
+    .input(
+      z.object({
+        filter: z.string(),
+        baseId: z.string().optional(),
+        resourceId: z.string().optional(),
+      }),
+    )
     .query(async ({ input }) =>
-      input.filter ? getMatchingProfils(input.filter, input.baseId) : [],
+      input.filter
+        ? getMatchingProfils(input.filter, input.baseId, input.resourceId)
+        : [],
     ),
   mutate: protectedProcedure
     .input(UpdateProfileVisibilityCommandValidation)

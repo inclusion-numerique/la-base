@@ -23,15 +23,15 @@ const ResourceInformations = ({
       tags: targetAudiences,
     },
   ]
+
   return (
     <>
       <h6 id="informations" className={styles.title}>
         Informations sur la resource
       </h6>
       {resourceInfo.map(({ title, tags }, index) => (
-        <>
+        <div key={title}>
           <p
-            key={title}
             className={classNames(
               'fr-text--sm fr-text--medium fr-mb-1w',
               index === 0 ? 'fr-mt-4v' : 'fr-mt-6v',
@@ -39,7 +39,7 @@ const ResourceInformations = ({
           >
             {title}
           </p>
-          <div key={`${title}_tags`} className={styles.tags}>
+          <div className={styles.tags}>
             {tags.map((tag) => (
               <Tag
                 key={tag}
@@ -51,7 +51,7 @@ const ResourceInformations = ({
               </Tag>
             ))}
           </div>
-        </>
+        </div>
       ))}
     </>
   )

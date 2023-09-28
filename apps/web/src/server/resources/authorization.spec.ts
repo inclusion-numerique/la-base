@@ -9,7 +9,13 @@ describe('Resource authorization', () => {
   describe('Public resource', () => {
     const creator = createTestUser()
     const otherUser = createTestUser()
-    const publicResource = createTestResource(creator, true)
+    const contributor = createTestUser()
+    const publicResource = createTestResource(
+      creator,
+      true,
+      undefined,
+      contributor,
+    )
 
     it('Not connected can access', () => {
       const authorizations = filterAccess(publicResource, null)
@@ -44,14 +50,27 @@ describe('Resource authorization', () => {
       // @ts-ignore authorization should be true
       expect(authorizations.isAdmin).toBe(false)
     })
+
+    it('Contributor is an admin', () => {
+      const authorizations = filterAccess(publicResource, contributor)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(true)
+    })
   })
 
   describe('Resource in a base', () => {
     const creator = createTestUser()
     const otherUser = createTestUser()
     const member = createTestUser()
+    const contributor = createTestUser()
     const base = createTestBase(creator, true, [], [member])
-    const privateResource = createTestResource(creator, false, base)
+    const privateResource = createTestResource(
+      creator,
+      false,
+      base,
+      contributor,
+    )
 
     const filteredResource = {
       slug: privateResource.slug,
@@ -105,12 +124,25 @@ describe('Resource authorization', () => {
       )
       expect(authorizations.authorized).toBe(false)
     })
+
+    it('Contributor is an admin', () => {
+      const authorizations = filterAccess(privateResource, contributor)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(true)
+    })
   })
 
   describe('Private resource', () => {
     const creator = createTestUser()
     const otherUser = createTestUser()
-    const privateResource = createTestResource(creator, false)
+    const contributor = createTestUser()
+    const privateResource = createTestResource(
+      creator,
+      false,
+      undefined,
+      contributor,
+    )
 
     const filteredResource = {
       slug: privateResource.slug,
@@ -146,6 +178,13 @@ describe('Resource authorization', () => {
 
     it('Creator is an admin', () => {
       const authorizations = filterAccess(privateResource, creator)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore authorization should be true
+      expect(authorizations.isAdmin).toBe(true)
+    })
+
+    it('Contributor is an admin', () => {
+      const authorizations = filterAccess(privateResource, contributor)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isAdmin).toBe(true)

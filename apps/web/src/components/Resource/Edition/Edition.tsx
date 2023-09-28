@@ -165,15 +165,13 @@ const Edition = ({
     publishMode,
   )
 
-  const onPublish = () => {
+  const onPublish = async () => {
     if (publishMode) {
       publicationForm.handleSubmit(async (data: PublishCommand) => {
         try {
           const result = await sendCommand(data)
           router.refresh()
-          router.push(
-            `/ressources/${result.resource.slug}?updated=${Date.now()}`,
-          )
+          router.push(`/ressources/${result.resource.slug}`)
         } catch (error) {
           console.error('Could not publish resource', error)
           // TODO Have a nice error and handle edge cases server side
@@ -181,8 +179,24 @@ const Edition = ({
           throw error
         }
       })()
-    } else {
+    } else if (publishedState === ResourcePublishedState.DRAFT) {
       router.push(`/ressources/${resource.slug}/publier`)
+    } else {
+      try {
+        const result = await sendCommand({
+          name: 'Republish',
+          payload: {
+            resourceId: resource.id,
+          },
+        })
+        router.refresh()
+        router.push(`/ressources/${result.resource.slug}`)
+      } catch (error) {
+        console.error('Could not publish resource', error)
+        // TODO Have a nice error and handle edge cases server side
+        // TODO for example a linked base or file or resource has been deleted since last publication
+        throw error
+      }
     }
   }
 
@@ -263,6 +277,7 @@ const Edition = ({
         )}
       </div>
       <EditionActionBar
+        resource={resource}
         publishMode={publishMode}
         publishedState={publishedState}
         editionState={editionState}

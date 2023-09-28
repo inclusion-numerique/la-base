@@ -223,4 +223,36 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     )
     cy.testId('resource-publication').should('exist')
   })
+
+  it('Acceptation 7 - Contributeur', () => {
+    cleanUpAndCreateTestPublishedResource(true, false)
+    const contributor = createTestUser()
+    cy.createUser(contributor)
+    cy.inviteUserToResource(
+      contributor,
+      'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+    )
+
+    cy.signin({ email: contributor.email })
+    cy.visit(
+      '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+    )
+    cy.dsfrShouldBeStarted()
+    cy.log('Je peux voir la ressource')
+    cy.testId('resource-view').should('exist')
+    cy.testId('resource-edition-button').should('have.text', 'Modifier')
+    cy.testId('private-base-box').should('not.exist')
+
+    cy.log('Je peux editer la ressource')
+    cy.visit(
+      '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/editer',
+    )
+    cy.testId('resource-edition').should('exist')
+
+    cy.log('Je peux publier la ressource')
+    cy.visit(
+      '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/publier',
+    )
+    cy.testId('resource-publication').should('exist')
+  })
 })

@@ -142,6 +142,7 @@ const MultipleSearchableSelect = ({
             />
           ))}
           <input
+            type="text"
             data-testid={dataTestId}
             id={id}
             className={classNames('fr-input', styles.internalInput)}

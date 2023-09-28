@@ -20,6 +20,8 @@ import {
 } from '@app/web/components/PrivacyTags'
 import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
 import baseStyles from '@app/web/components/Resource/PublishedInInformation.module.css'
+import Card from '../../Card'
+import InviteContributors from '../Contributors/InviteContributors'
 import BaseEdition from './BaseEdition'
 import styles from './Publication.module.css'
 
@@ -46,7 +48,6 @@ const Publication = ({
         Choisissez qui peut voir et/ou éditer votre ressource. Vous pourrez
         modifier vos choix à tout moment dans les paramètres de votre ressource.
       </p>
-
       <div className={styles.card}>
         <BaseEdition
           resource={resource}
@@ -77,9 +78,7 @@ const Publication = ({
           )
         )}
       </div>
-      <div className={classNames('fr-mt-3w', styles.card)}>
-        <h5 className="fr-mb-0">Visibilité de la ressource</h5>
-        <hr className="fr-mt-4w fr-pb-4w" />
+      <Card title="Visibilité de la ressource" className="fr-mt-3w">
         <Controller
           control={control}
           name="payload.isPublic"
@@ -144,7 +143,7 @@ const Publication = ({
             </fieldset>
           )}
         />
-      </div>
+      </Card>
       {isPublic && (
         <div
           className={classNames('fr-mt-3w', styles.card)}
@@ -228,17 +227,14 @@ const Publication = ({
         </div>
       )}
       {isPublic === false && (
-        <div
-          className={classNames('fr-mt-3w', styles.card)}
+        <Card
+          title="Contributeurs"
+          description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
+          className="fr-mt-3w"
           data-testid="contributors-box"
         >
-          <h5 className="fr-mb-1w">Contributeurs</h5>
-          <p className="fr-text--sm fr-mb-1w">
-            Les contributeurs peuvent voir, éditer, inviter d’autres
-            contributeurs et supprimer la ressource.
-          </p>
-          <hr className="fr-mt-4w fr-pb-4w" />
-        </div>
+          <InviteContributors resource={resource} />
+        </Card>
       )}
     </>
   )

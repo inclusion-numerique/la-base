@@ -78,6 +78,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   themes: [],
   supportTypes: [],
   targetAudiences: [],
+  contributors: [],
 })
 
 export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
