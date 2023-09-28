@@ -30,7 +30,10 @@ const ViewHeader = ({
       ) : (
         <p className={classNames('fr-text--xs', 'fr-mb-0', styles.user)}>
           Créé par{' '}
-          <Link href="/" className="fr-text--xs fr-link">
+          <Link
+            href={`/profils/${resource.createdBy.id}`}
+            className="fr-text--xs fr-link"
+          >
             {resource.createdBy.name}
           </Link>
         </p>

@@ -24,6 +24,7 @@ export const getProfilePageQuery = async (id: string) =>
       name: true,
       firstName: true,
       isPublic: true,
+      email: true,
     },
     where: { id },
   })

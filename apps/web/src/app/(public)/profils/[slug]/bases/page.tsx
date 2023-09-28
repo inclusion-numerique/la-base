@@ -42,7 +42,7 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
         {bases.length === 0 ? (
           <EmptyBases isConnectedUser={authorizations.isUser} />
         ) : (
-          <Bases bases={bases} />
+          <Bases bases={bases} isConnectedUser={authorizations.isUser} />
         )}
       </div>
     </>

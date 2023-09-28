@@ -35,6 +35,7 @@ describe('Profile authorization', () => {
       id: creator.id,
       name: creator.name,
       isPublic: creator.isPublic,
+      email: creator.email,
     }
 
     it('Creator can access', () => {

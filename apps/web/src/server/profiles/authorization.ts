@@ -1,7 +1,10 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { ProfilePageData } from './getProfile'
 
-export type FilteredProfile = Pick<ProfilePageData, 'id' | 'name' | 'isPublic'>
+export type FilteredProfile = Pick<
+  ProfilePageData,
+  'id' | 'name' | 'isPublic' | 'email'
+>
 
 export const filterAccess = (
   profile: ProfilePageData,
@@ -27,6 +30,7 @@ export const filterAccess = (
       id: profile.id,
       name: profile.name,
       isPublic: profile.isPublic,
+      email: profile.email,
     },
   }
 }

@@ -21,3 +21,9 @@
     display: inline-block;
   }
 }
+
+.buttons {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}

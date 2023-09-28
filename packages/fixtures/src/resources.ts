@@ -181,10 +181,7 @@ export const randomResourcesEvents: (
     ...(MutationHistoryResourceEvent & { resourceId: string })[],
   ][]
 > = async (transaction, random) => {
-  const user = await transaction.user.findFirst()
-  if (!user) {
-    return []
-  }
+  const users = await transaction.user.findMany({ select: { id: true } })
 
   const bases = await transaction.base.findMany({
     select: { id: true },
@@ -202,7 +199,7 @@ export const randomResourcesEvents: (
     }).map(() => ({
       id: faker.string.uuid(),
       resourceId,
-      byId: user.id,
+      byId: faker.helpers.arrayElement(users).id,
       type: 'BaseChanged' as const,
       timestamp: faker.date.between({ from: creationDate, to: new Date() }),
       data: {
@@ -216,7 +213,7 @@ export const randomResourcesEvents: (
     }).map(() => ({
       id: faker.string.uuid(),
       resourceId,
-      byId: user.id,
+      byId: faker.helpers.arrayElement(users).id,
       type: 'TitleAndDescriptionEdited' as const,
       timestamp: faker.date.between({ from: creationDate, to: new Date() }),
       data: {
@@ -241,7 +238,7 @@ export const randomResourcesEvents: (
           () => ({
             id: faker.string.uuid(),
             resourceId,
-            byId: user.id,
+            byId: faker.helpers.arrayElement(users).id,
             type: 'ContentEdited' as const,
             timestamp: faker.date.between({
               from: contentCreationDate,
@@ -255,7 +252,7 @@ export const randomResourcesEvents: (
           {
             id: faker.string.uuid(),
             resourceId,
-            byId: user.id,
+            byId: faker.helpers.arrayElement(users).id,
             type: 'ContentAdded' as const,
             timestamp: contentCreationDate,
             data: { ...getRandomResourceContentEvent(contentId, type), type },
@@ -268,7 +265,7 @@ export const randomResourcesEvents: (
     const deletionEvent = {
       id: faker.string.uuid(),
       resourceId,
-      byId: user.id,
+      byId: faker.helpers.arrayElement(users).id,
       type: 'Deleted' as const,
       timestamp: faker.date.future(),
       data: {
@@ -281,13 +278,13 @@ export const randomResourcesEvents: (
       {
         id: faker.string.uuid(),
         resourceId,
-        byId: user.id,
+        byId: faker.helpers.arrayElement(users).id,
         type: 'Created' as const,
         timestamp: creationDate,
         data: {
           __version: 1 as const,
           id: resourceId,
-          byId: user.id,
+          byId: faker.helpers.arrayElement(users).id,
           title,
           description,
           slug,
