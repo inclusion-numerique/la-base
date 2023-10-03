@@ -177,9 +177,11 @@ export const migrateBaseMembers = async ({
     return !legacyMembers.has(compositeId)
   })
 
-  const membersToUpdate = membersData.filter((member) =>
-    // Admin may be different in v1 and v2
-    existingMembers.has(getCompositeId(member.memberId, member.baseId)),
+  const membersToUpdate = membersData.filter(
+    (member) =>
+      // Admin may be different in v1 and v2
+      existingMembers.get(getCompositeId(member.memberId, member.baseId)) !==
+      member.isAdmin,
   )
 
   const membersToCreate = membersData.filter(
@@ -204,7 +206,10 @@ export const migrateBaseMembers = async ({
         where: {
           memberId_baseId: { memberId: member.memberId, baseId: member.baseId },
         },
-        data: member,
+        data: {
+          isAdmin: member.isAdmin,
+          accepted: member.accepted,
+        },
       }),
     ),
     prismaClient.baseMembers.createMany({

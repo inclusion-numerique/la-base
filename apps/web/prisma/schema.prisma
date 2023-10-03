@@ -119,10 +119,10 @@ model BaseMembers {
   // Legacy id is not unique because members come from 2 different v1 tables
   legacyId Int?   @map("legacy_id")
 
-  member   User   @relation(fields: [memberId], references: [id])
+  member   User   @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId String @map("member_id") @db.Uuid
 
-  base   Base   @relation(fields: [baseId], references: [id])
+  base   Base   @relation(fields: [baseId], references: [id], onDelete: Cascade)
   baseId String @map("base_id") @db.Uuid
 
   isAdmin Boolean @default(false) @map("is_admin")
@@ -138,10 +138,12 @@ model BaseMembers {
 model ResourceContributors {
   id String @id @default(uuid()) @db.Uuid
 
-  contributor   User   @relation(fields: [contributorId], references: [id])
+  legacyId Int? @unique @map("legacy_id")
+
+  contributor   User   @relation(fields: [contributorId], references: [id], onDelete: Cascade)
   contributorId String @map("contributor_id") @db.Uuid
 
-  resource   Resource @relation(fields: [resourceId], references: [id])
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
   resourceId String   @map("resource_id") @db.Uuid
 
   added DateTime @default(now())
