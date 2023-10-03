@@ -1,4 +1,3 @@
-import { chunk } from 'lodash'
 import { v4 } from 'uuid'
 import { output } from '@app/cli/output'
 import { prismaClient } from '@app/web/prismaClient'
@@ -26,6 +25,7 @@ export const getExistingMembers = async (): Promise<{
     id: string
     legacyId: number | null
     memberId: string
+    isAdmin: boolean
     baseId: string
   }[]
 }> => {
@@ -96,6 +96,10 @@ export const transformMember = ({
   return data
 }
 
+export type TransformedLegacyMember = ReturnType<typeof transformMember>
+
+const getCompositeId = (userId: string, baseId: string) => `${userId}#${baseId}`
+
 export const migrateBaseMembers = async ({
   userIdFromLegacyId,
   baseIdFromLegacyId,
@@ -115,72 +119,98 @@ export const migrateBaseMembers = async ({
     await getExistingMembers()
 
   const membersData = [
-    ...legacyBaseAdmins.map((legacyBaseAdmin) =>
-      transformMember({
-        contributorIdMap,
-        adminIdMap,
-        isAdmin: true,
-        legacyMember: legacyBaseAdmin,
-        userIdFromLegacyId,
-        baseIdFromLegacyId,
-      }),
-    ),
-    ...legacyBaseContributors.map((legacyBaseContributor) =>
-      transformMember({
-        contributorIdMap,
-        adminIdMap,
-        isAdmin: false,
-        legacyMember: legacyBaseContributor,
-        userIdFromLegacyId,
-        baseIdFromLegacyId,
-      }),
-    ),
+    ...new Map<string, TransformedLegacyMember>([
+      ...legacyBaseContributors.map(
+        (legacyBaseContributor): [string, TransformedLegacyMember] => {
+          const data = transformMember({
+            contributorIdMap,
+            adminIdMap,
+            isAdmin: false,
+            legacyMember: legacyBaseContributor,
+            userIdFromLegacyId,
+            baseIdFromLegacyId,
+          })
+          return [getCompositeId(data.memberId, data.baseId), data]
+        },
+      ),
+      ...legacyBaseAdmins.map(
+        (legacyBaseAdmin): [string, TransformedLegacyMember] => {
+          const data = transformMember({
+            contributorIdMap,
+            adminIdMap,
+            isAdmin: true,
+            legacyMember: legacyBaseAdmin,
+            userIdFromLegacyId,
+            baseIdFromLegacyId,
+          })
+          return [getCompositeId(data.memberId, data.baseId), data]
+        },
+      ),
+    ]).values(),
   ]
 
-  // Remove duplicates based on memberId and legacyId
-  const uniqueIdsIndex = new Set<string>()
-  const uniqueMembersData = membersData.filter((member) => {
-    const key = `${member.memberId}-${member.baseId}`
-    if (uniqueIdsIndex.has(key)) {
+  // Have existing v2 members in a Map of composite id => isAdmin
+  const existingMembers = new Map<string, boolean>()
+  for (const member of newMembers) {
+    existingMembers.set(
+      getCompositeId(member.memberId, member.baseId),
+      member.isAdmin,
+    )
+  }
+
+  // Have v1 members in a Map of composite id => isAdmin
+  const legacyMembers = new Map<string, boolean>()
+  for (const member of membersData) {
+    legacyMembers.set(
+      getCompositeId(member.memberId, member.baseId),
+      member.isAdmin,
+    )
+  }
+
+  // Remove migrated members that are no longer present in v1
+  const existingMembersToRemove = newMembers.filter((member) => {
+    // Do not remove members that were not migrated from v1
+    if (!member.legacyId) {
       return false
     }
-    uniqueIdsIndex.add(key)
-    return true
+    const compositeId = getCompositeId(member.memberId, member.baseId)
+    return !legacyMembers.has(compositeId)
   })
 
-  const chunkSize = 200
-  let migratedMembersCount = 0
-
-  const upserted = await Promise.all(
-    chunk(uniqueMembersData, chunkSize).map((membersChunk) =>
-      prismaClient
-        .$transaction(
-          membersChunk.map((member) =>
-            prismaClient.baseMembers.upsert({
-              where: {
-                memberId_baseId: {
-                  memberId: member.memberId,
-                  baseId: member.baseId,
-                },
-              },
-              create: member,
-              update: member,
-              select: { id: true, legacyId: true },
-            }),
-          ),
-        )
-        .then((members) => {
-          migratedMembersCount += members.length
-          output(
-            `-- ${migratedMembersCount} ${(
-              (migratedMembersCount * 100) /
-              membersData.length
-            ).toFixed(0)}%`,
-          )
-          return members
-        }),
-    ),
+  const membersToUpdate = membersData.filter((member) =>
+    // Admin may be different in v1 and v2
+    existingMembers.has(getCompositeId(member.memberId, member.baseId)),
   )
 
-  return upserted.flat()
+  const membersToCreate = membersData.filter(
+    (member) =>
+      !existingMembers.has(getCompositeId(member.memberId, member.baseId)),
+  )
+
+  output(`-- ${existingMembersToRemove.length} members to remove`)
+  output(`-- ${membersToUpdate.length} members to update`)
+  output(`-- ${membersToCreate.length} members to create`)
+
+  await prismaClient.$transaction([
+    ...existingMembersToRemove.map((member) =>
+      prismaClient.baseMembers.delete({
+        where: {
+          memberId_baseId: { memberId: member.memberId, baseId: member.baseId },
+        },
+      }),
+    ),
+    ...membersToUpdate.map((member) =>
+      prismaClient.baseMembers.update({
+        where: {
+          memberId_baseId: { memberId: member.memberId, baseId: member.baseId },
+        },
+        data: member,
+      }),
+    ),
+    prismaClient.baseMembers.createMany({
+      data: membersToCreate,
+    }),
+  ])
+
+  return membersData
 }
