@@ -1,0 +1,6 @@
+.emptyIndexation {
+  p {
+    color: var(--text-default-grey);
+    font-weight: 400 !important;
+  }
+}

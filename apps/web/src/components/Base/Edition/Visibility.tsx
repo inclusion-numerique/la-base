@@ -25,6 +25,7 @@ const Visibility = ({ base }: { base: BasePageData }) => {
 
   return (
     <EditCard
+      id="visibilite"
       mutation={async (data) => {
         await mutate.mutateAsync({ id: base.id, data })
       }}

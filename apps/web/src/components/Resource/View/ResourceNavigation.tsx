@@ -16,7 +16,7 @@ const {
 })
 
 const ResourceNavigation = ({
-  resource: { slug, contents },
+  resource,
   isAdmin,
 }: {
   resource: Resource
@@ -41,7 +41,7 @@ const ResourceNavigation = ({
           'fr-btn--icon-left',
           'fr-icon-edit-line',
         )}
-        href={isAdmin ? `/ressources/${slug}/editer` : '/'}
+        href={isAdmin ? `/ressources/${resource.slug}/editer` : '/'}
       >
         {isAdmin ? 'Modifier' : 'Demander à contribuer'}
       </Link>
@@ -90,7 +90,7 @@ const ResourceNavigation = ({
             'fr-icon-edit-line',
             styles.button,
           )}
-          href={isAdmin ? `/ressources/${slug}/editer` : '/'}
+          href={isAdmin ? `/ressources/${resource.slug}/editer` : '/'}
         >
           {isAdmin ? 'Modifier' : 'Demander à contribuer'}
         </Link>
@@ -140,7 +140,7 @@ const ResourceNavigation = ({
         </Link>
       </div>
       <div className="fr-hidden fr-unhidden-md">
-        <ResourceSideMenu contents={contents} />
+        <ResourceSideMenu resource={resource} />
       </div>
     </div>
   </>

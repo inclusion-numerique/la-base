@@ -24,5 +24,12 @@ export const BasePrivacyTag = ({ isPublic }: { isPublic?: boolean }) =>
     <CustomTag {...privateValues} label="Base privée" />
   )
 
+export const ResourcePrivacyTag = ({ isPublic }: { isPublic?: boolean }) =>
+  isPublic ? (
+    <CustomTag {...publicValues} label="Resource publique" />
+  ) : (
+    <CustomTag {...privateValues} label="Resource privée" />
+  )
+
 export const PrivacyTag = ({ isPublic }: { isPublic?: boolean }) =>
   isPublic ? <CustomTag {...publicValues} /> : <CustomTag {...privateValues} />

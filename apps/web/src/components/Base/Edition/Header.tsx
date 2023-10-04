@@ -6,7 +6,6 @@ import styles from './Header.module.css'
 const Header = ({ base }: { base: BasePageData }) => (
   <div className="fr-container">
     <div className="fr-mb-6w">
-      {' '}
       <Breadcrumbs
         parents={[
           {

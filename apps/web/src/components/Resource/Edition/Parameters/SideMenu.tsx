@@ -9,19 +9,19 @@ const ParametersSideMenu = () => (
         sticky
         items={[
           {
-            text: <div className="wip">Ressource publié dans</div>,
+            text: 'Ressource publié dans',
             linkProps: {
               href: '#publication',
             },
           },
           {
-            text: <div className="wip">Visibilité de la ressource</div>,
+            text: 'Visibilité de la ressource',
             linkProps: {
               href: '#visibilite',
             },
           },
           {
-            text: <div className="wip">Indexation</div>,
+            text: 'Indexation',
             linkProps: {
               href: '#indexation',
             },
@@ -29,11 +29,11 @@ const ParametersSideMenu = () => (
           {
             text: 'Contributeurs',
             linkProps: {
-              href: '#supprimer',
+              href: '#contributeurs',
             },
           },
           {
-            text: <div className="wip">Supprimer la ressource</div>,
+            text: 'Supprimer la ressource',
             linkProps: {
               href: '#supprimer',
             },

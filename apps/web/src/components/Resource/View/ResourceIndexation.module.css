@@ -1,0 +1,18 @@
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.tag{
+  @media (min-width: 768px) {
+    margin-top: 4px;
+  }
+}
+
+.empty {
+  color: var(--text-mention-grey);
+  margin-top: 2px;
+}

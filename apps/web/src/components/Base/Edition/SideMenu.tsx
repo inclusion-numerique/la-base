@@ -9,19 +9,19 @@ const BaseSideMenu = () => (
         sticky
         items={[
           {
-            text: <div className="wip">Informations de la base</div>,
+            text: 'Informations de la base',
             linkProps: {
               href: '#informations',
             },
           },
           {
-            text: <div className="wip">Contacts</div>,
+            text: 'Contacts',
             linkProps: {
               href: '#contacts',
             },
           },
           {
-            text: <div className="wip">Visibilité de la base</div>,
+            text: 'Visibilité de la base',
             linkProps: {
               href: '#visibilite',
             },

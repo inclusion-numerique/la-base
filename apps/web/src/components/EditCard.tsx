@@ -7,9 +7,13 @@ import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { UpdateProfileCommand } from '../server/profiles/updateProfile'
 import { UpdateBaseCommand } from '../server/bases/updateBase'
+import { UpdateResourceCommand } from '../server/resources/parameters'
 import Card from './Card'
 
-const EditCard = <T extends UpdateProfileCommand | UpdateBaseCommand>({
+const EditCard = <
+  T extends UpdateProfileCommand | UpdateBaseCommand | UpdateResourceCommand,
+>({
+  id,
   className,
   title,
   description,
@@ -18,6 +22,7 @@ const EditCard = <T extends UpdateProfileCommand | UpdateBaseCommand>({
   form,
   mutation,
 }: {
+  id?: string
   className?: string
   title: string
   description?: string
@@ -41,6 +46,7 @@ const EditCard = <T extends UpdateProfileCommand | UpdateBaseCommand>({
 
   return (
     <Card
+      id={id}
       title={title}
       description={description}
       editMode={editMode}

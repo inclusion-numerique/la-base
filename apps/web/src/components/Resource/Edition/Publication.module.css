@@ -7,19 +7,3 @@
   border: var(--slim-grey-border);
   padding: 32px;
 }
-
-.baseInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  
-  :global .fr-tag {
-    flex-shrink: 0;
-  }
-}
-
-.baseName {
-  display: flex;
-  align-items: center;
-}

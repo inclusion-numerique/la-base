@@ -42,7 +42,7 @@ const ResourceParametersPage = async ({
       </div>
 
       <div className="fr-mt-1w fr-mb-4w">
-        <Parameters resource={resource} />
+        <Parameters resource={resource} user={user} />
       </div>
     </>
   )

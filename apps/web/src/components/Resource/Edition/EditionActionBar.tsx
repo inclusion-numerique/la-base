@@ -113,6 +113,7 @@ const EditionActionBar = ({
                     'fr-btn--icon-left',
                   )}
                   href={`/ressources/${resource.slug}/parametres`}
+                  data-testid="edition-action-bar-parameters-modal"
                 >
                   Paramètres de la ressource
                 </Link>

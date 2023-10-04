@@ -3,16 +3,3 @@
   padding-top: 16px;
   margin-bottom: 16px;
 }
-
-.tags {
-  display: flex;
-  flex-flow: row wrap;
-  margin-bottom: 16px;
-  gap: 8px;
-}
-
-.tag{
-  @media (min-width: 768px) {
-    margin-top: 4px;
-  }
-}

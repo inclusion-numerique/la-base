@@ -1,5 +1,6 @@
 import { v4 } from 'uuid'
 import type { CreateUserInput } from '@app/e2e/e2e/authentication/user.tasks'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   createTestBase,
   createTestPublishResourceCommand,
@@ -30,6 +31,7 @@ export const cleanUpAndCreateTestResource = (
 export const cleanUpAndCreateTestPublishedResource = (
   publicBase?: boolean,
   publicResource?: boolean,
+  additionalSetup?: (user: Pick<SessionUser, 'id'>) => void,
 ) => {
   cy.execute('deleteAllData', {})
   const user = createTestUser()
@@ -44,6 +46,7 @@ export const cleanUpAndCreateTestPublishedResource = (
   cy.createUserAndSignin(user)
   cy.createBase(base)
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
+    additionalSetup?.(user)
     cy.visit(`/ressources/${slug}`)
   })
   cy.dsfrShouldBeStarted()

@@ -47,6 +47,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
                 title="En tant que créateur de cette ressource, elle sera directement ajoutée à votre profil."
               />
               <ResourceBaseRichRadioElement
+                data-testid="resource-base-profil"
                 id={profileRadioId}
                 name={name}
                 value={null}
@@ -66,6 +67,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
               {bases.map((base, index) => (
                 <ResourceBaseRichRadioElement
                   key={base.id}
+                  data-testid={`resource-base-${index.toString()}`}
                   id={`base-radio-${index.toString()}`}
                   name={name}
                   value={value}

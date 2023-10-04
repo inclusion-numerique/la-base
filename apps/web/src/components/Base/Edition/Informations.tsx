@@ -29,6 +29,7 @@ const Informations = ({ base }: { base: BasePageData }) => {
 
   return (
     <EditCard
+      id="informations"
       mutation={async (data) => {
         await mutate.mutateAsync({ id: base.id, data })
       }}
@@ -58,7 +59,7 @@ const Informations = ({ base }: { base: BasePageData }) => {
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(base.description || ''),
             }}
-          />{' '}
+          />
         </>
       }
     />
