@@ -2,7 +2,10 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { BasePageData } from './getBase'
 import { BaseListItem } from './getBasesList'
 
-export type FilteredBase = Pick<BasePageData, 'slug' | 'title' | 'isPublic'> &
+export type FilteredBase = Pick<
+  BasePageData,
+  'slug' | 'title' | 'isPublic' | 'email'
+> &
   Pick<BaseListItem, '_count'>
 
 export const filterAccess = (
@@ -26,7 +29,12 @@ export const filterAccess = (
       authorized: true,
       isMember: !!baseMember,
       isAdmin: !!baseMember && baseMember.isAdmin,
-      base,
+      base: baseMember
+        ? base
+        : {
+            ...base,
+            email: base.emailIsPublic ? base.email : '',
+          },
     }
   }
 
@@ -36,6 +44,7 @@ export const filterAccess = (
       slug: base.slug,
       title: base.title,
       isPublic: base.isPublic,
+      email: base.emailIsPublic ? base.email : '',
       _count: { resources: base.resources.length },
     },
   }

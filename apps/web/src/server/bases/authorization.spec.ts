@@ -43,6 +43,29 @@ describe('Base authorization', () => {
       // @ts-ignore authorization should be true
       expect(authorizations.isAdmin).toBe(false)
     })
+
+    it('Anyone do not see private email', () => {
+      const authorizations = filterAccess(
+        { ...publicBase, emailIsPublic: false },
+        otherUser,
+      )
+      expect(authorizations.base).toEqual({
+        ...publicBase,
+        emailIsPublic: false,
+        email: '',
+      })
+    })
+
+    it('Base member see private email', () => {
+      const authorizations = filterAccess(
+        { ...publicBase, emailIsPublic: false },
+        member,
+      )
+      expect(authorizations.base).toEqual({
+        ...publicBase,
+        emailIsPublic: false,
+      })
+    })
   })
 
   describe('Private base', () => {
@@ -52,6 +75,7 @@ describe('Base authorization', () => {
       slug: privateBase.slug,
       title: privateBase.title,
       isPublic: privateBase.isPublic,
+      email: privateBase.email,
       _count: { resources: privateBase.resources.length },
     }
 
@@ -97,6 +121,28 @@ describe('Base authorization', () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore authorization should be true
       expect(authorizations.isAdmin).toBe(false)
+    })
+
+    it('Anyone do not see private email', () => {
+      const authorizations = filterAccess(
+        { ...privateBase, emailIsPublic: false },
+        otherUser,
+      )
+      expect(authorizations.base).toEqual({
+        ...filteredBase,
+        email: '',
+      })
+    })
+
+    it('Base member see private email', () => {
+      const authorizations = filterAccess(
+        { ...privateBase, emailIsPublic: false },
+        member,
+      )
+      expect(authorizations.base).toEqual({
+        ...privateBase,
+        emailIsPublic: false,
+      })
     })
   })
 })

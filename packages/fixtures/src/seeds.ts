@@ -52,6 +52,7 @@ const seed = async (transaction: TransactionClient, random?: number) => {
         isPublic: true,
         titleDuplicationCheckSlug: projection.slug,
         contents: undefined,
+        contributors: undefined,
       })),
     })
 

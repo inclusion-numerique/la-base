@@ -28,3 +28,9 @@
     margin-bottom: 8px;
   }
 }
+
+.buttons {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
