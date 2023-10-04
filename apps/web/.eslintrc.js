@@ -4,4 +4,12 @@ module.exports = {
   parserOptions: {
     project: 'tsconfig.json',
   },
+  rules: {
+    'jest/expect-expect': [
+      2,
+      {
+        assertFunctionNames: ['expect', 'expectZodValidationToFail'],
+      },
+    ],
+  },
 }
