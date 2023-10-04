@@ -152,6 +152,37 @@ model ResourceContributors {
   @@map("resource_contributors")
 }
 
+enum Theme {
+  DiagnosticDeCompetencesNumeriques            @map("diagnostic_de_competences_numeriques")
+  DemarchesEtServicesEnLigne                   @map("demarches_et_services_en_ligne")
+  MaitriseDesOutilsNumeriques                  @map("maitrise_des_outils_numeriques")
+  NavigationSurInternet                        @map("navigation_sur_internet")
+  UsageDuMaterielInformatique                  @map("usage_du_materiel_informatique")
+  SobrieteNumerique                            @map("sobriete_numerique")
+  MaterielReconditionne                        @map("materiel_reconditionne")
+  Mobilites                                    @map("mobilites")
+  Accessibilite                                @map("accessibilite")
+  ActeursDuNumerique                           @map("acteurs_du_numerique")
+  ArtsEtCulture                                @map("arts_et_culture")
+  CitoyenneteEtEngagement                      @map("citoyennete_et_engagement")
+  CodeEtProgrammation                          @map("code_et_programmation")
+  CommunicationEnLigneEtReseauxSociaux         @map("communication_en_ligne_et_reseaux_sociaux")
+  EducationEtFormation                         @map("education_et_formation")
+  EmploiEtEntrepreunariat                      @map("emploi_et_entrepreunariat")
+  JeuxVideos                                   @map("jeux_videos")
+  NumeriqueEnSante                             @map("numerique_en_sante")
+  Parentalite                                  @map("parentalite")
+  RisquesCyberEtProtection                     @map("risques_cyber_et_protection")
+  CommunsNumeriques                            @map("communs_numeriques")
+  EconomieNumerique                            @map("economie_numerique")
+  GouvernancesPartagees                        @map("gouvernances_partagees")
+  IntelligenceArtificielle                     @map("intelligence_artificielle")
+  OpenSourceEtLicencesLibres                   @map("open_source_et_licences_libres")
+  SouveraineteNumeriqueEtHebergementDesDonnees @map("souverainete_numerique_et_hebergement_des_donnees")
+
+  @@map("theme")
+}
+
 model Resource {
   id                        String   @id @default(uuid()) @db.Uuid
   legacyId                  Int?     @unique @map("legacy_id")
@@ -162,9 +193,9 @@ model Resource {
   // isPublic is null when the user created the resource but did not publish it
   isPublic                  Boolean? @map("is_public")
 
-  themes          String[]
-  supportTypes    String[]
-  targetAudiences String[]
+  themes          Theme[]
+  supportTypes    String[] @map("support_types")
+  targetAudiences String[] @map("target_audiences")
 
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
@@ -186,6 +217,9 @@ model Resource {
   events       ResourceEvent[]
   contributors ResourceContributors[]
 
+  @@index(themes, name: "resources_themes_idx", type: Gin)
+  @@index(supportTypes, name: "resources_support_type_idx", type: Gin)
+  @@index(targetAudiences, name: "resources_target_audiences_idx", type: Gin)
   @@map("resources")
 }
 

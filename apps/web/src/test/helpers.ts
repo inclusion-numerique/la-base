@@ -53,7 +53,7 @@ export const createTestResource = (
           members: base.members,
         }
       : null,
-    themes: ['theme-1'],
+    themes: ['ArtsEtCulture'],
     supportTypes: ['support-1'],
     targetAudiences: ['target-1'],
     contents: [],

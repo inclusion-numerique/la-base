@@ -8,6 +8,7 @@ import {
   transformResource,
 } from '@app/migration/modelMigrations/migrateResources'
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
+import { Theme } from '@prisma/client'
 
 jest.mock('uuid', () => ({ v4: () => 'testuuid' }))
 
@@ -44,6 +45,17 @@ describe('migrateResource', () => {
       main_contentblock: [],
       main_basesection_resources: [],
       main_contentsection: [],
+      main_resource_tags: [
+        {
+          tag_id: 91n,
+        },
+        {
+          tag_id: 89n,
+        },
+        {
+          tag_id: 78n,
+        },
+      ],
     } satisfies LegacyResource
 
     const result = transformResource({
@@ -69,6 +81,7 @@ describe('migrateResource', () => {
         baseId: 'aaaa',
         byId: '0000',
         contents: [],
+        themes: [Theme.MaitriseDesOutilsNumeriques, Theme.SobrieteNumerique],
         created: legacyResource.created,
         updated: legacyResource.modified,
         published: legacyResource.modified,

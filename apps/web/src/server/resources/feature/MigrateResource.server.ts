@@ -60,7 +60,17 @@ export const migrateResourceSecurityRules: ResourceCommandSecurityRule<
 export const applyResourceMigrated: ResourceCreationEventApplier<
   ResourceMigrated
 > = ({
-  data: { __version, id, byId, created, updated, published, contents, ...rest },
+  data: {
+    __version,
+    id,
+    byId,
+    created,
+    updated,
+    published,
+    themes,
+    contents,
+    ...rest
+  },
 }) => ({
   id,
   created: new Date(created),
@@ -75,7 +85,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
       ...contentRest,
     }),
   ),
-  themes: [],
+  themes: themes ?? [],
   supportTypes: [],
   targetAudiences: [],
   contributors: [],

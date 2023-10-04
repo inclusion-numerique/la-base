@@ -14,6 +14,7 @@ import {
 import { transformContent } from '@app/migration/modelMigrations/transformContent'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import type { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
+import { getThemesFromLegacyTags } from '@app/migration/modelMigrations/legacyResourcesThemeResourceMapping'
 
 export const getLegacyResources = async () => {
   const all = await migrationPrismaClient.main_resource.findMany({
@@ -32,6 +33,11 @@ export const getLegacyResources = async () => {
               main_textcontent: true,
             },
           },
+        },
+      },
+      main_resource_tags: {
+        select: {
+          tag_id: true,
         },
       },
       // TODO Do not know if this is useful
@@ -128,6 +134,7 @@ export const transformResource = ({
     legacyId,
     title: legacyResource.title,
     slug,
+    themes: getThemesFromLegacyTags(legacyResource.main_resource_tags),
     titleDuplicationCheckSlug: createSlug(legacyResource.title),
     description: legacyResource.description ?? '',
     byId: userIdFromLegacyId(Number(legacyResource.creator_id)),

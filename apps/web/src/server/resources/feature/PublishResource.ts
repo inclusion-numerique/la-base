@@ -1,4 +1,5 @@
 import z from 'zod'
+import { Theme } from '@prisma/client'
 
 export const themesLimit = 5
 export const supportTypesLimit = 4
@@ -6,7 +7,7 @@ export const targetAudiencesLimit = 5
 
 export const indexationCommand = {
   themes: z
-    .array(z.string(), {
+    .array(z.nativeEnum(Theme), {
       required_error: "Merci d'ajouter au moins une thématique",
     })
     .max(
@@ -74,7 +75,7 @@ export type ResourcePublishedV2 = {
 } & (
   | {
       isPublic: true
-      themes: string[]
+      themes: Theme[]
       supportTypes: string[]
       targetAudiences: string[]
     }
