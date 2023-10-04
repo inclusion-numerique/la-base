@@ -13,6 +13,14 @@ export const getLegacyBaseAdmins = () =>
 export const getLegacyBaseContributors = () =>
   migrationPrismaClient.main_base_contributors.findMany()
 
+export const getLegacyBaseOwners = () =>
+  migrationPrismaClient.main_base.findMany({
+    select: {
+      id: true,
+      owner_id: true,
+    },
+  })
+
 export type LegacyBaseAdmin = FindManyItemType<typeof getLegacyBaseAdmins>
 export type LegacyBaseContributor = FindManyItemType<
   typeof getLegacyBaseContributors
@@ -107,6 +115,9 @@ export const migrateBaseMembers = async ({
   userIdFromLegacyId: LegacyToNewIdHelper
   baseIdFromLegacyId: LegacyToNewIdHelper
 }) => {
+  const legacyBaseOwners = await getLegacyBaseOwners()
+  output(`- Found ${legacyBaseOwners.length} base owners to migrate`)
+
   const legacyBaseAdmins = await getLegacyBaseAdmins()
   output(`- Found ${legacyBaseAdmins.length} base admins to migrate`)
 
@@ -140,6 +151,23 @@ export const migrateBaseMembers = async ({
             adminIdMap,
             isAdmin: true,
             legacyMember: legacyBaseAdmin,
+            userIdFromLegacyId,
+            baseIdFromLegacyId,
+          })
+          return [getCompositeId(data.memberId, data.baseId), data]
+        },
+      ),
+      ...legacyBaseOwners.map(
+        (legacyBaseOwner): [string, TransformedLegacyMember] => {
+          const data = transformMember({
+            contributorIdMap,
+            adminIdMap,
+            isAdmin: true,
+            legacyMember: {
+              id: 0n,
+              base_id: legacyBaseOwner.id,
+              user_id: legacyBaseOwner.owner_id,
+            },
             userIdFromLegacyId,
             baseIdFromLegacyId,
           })
@@ -180,8 +208,9 @@ export const migrateBaseMembers = async ({
   const membersToUpdate = membersData.filter(
     (member) =>
       // Admin may be different in v1 and v2
+      existingMembers.has(getCompositeId(member.memberId, member.baseId)) &&
       existingMembers.get(getCompositeId(member.memberId, member.baseId)) !==
-      member.isAdmin,
+        member.isAdmin,
   )
 
   const membersToCreate = membersData.filter(
