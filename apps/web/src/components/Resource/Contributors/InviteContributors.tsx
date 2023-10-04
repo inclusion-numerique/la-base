@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import { Controller, useForm } from 'react-hook-form'
-import { v4 } from 'uuid'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -32,8 +31,6 @@ const InviteContributors = ({
     defaultValues: { resourceId: resource.id },
   })
 
-  const ref = useRef(v4())
-
   const [emailErrors, setEmailsError] = useState(false)
 
   const deleteMutate = trpc.resourceContributor.delete.useMutation()
@@ -43,8 +40,6 @@ const InviteContributors = ({
     trpc.resourceContributor.getContributors.useQuery({
       resourceId: resource.id,
     })
-
-  console.log('Contributors', contributors)
 
   const onDelete = async (contributorId: string) => {
     try {
@@ -66,7 +61,6 @@ const InviteContributors = ({
     }
     try {
       await invitationMutate.mutateAsync(data)
-      ref.current = v4()
       await refetch()
       if (onSuccess) {
         onSuccess()
@@ -87,7 +81,6 @@ const InviteContributors = ({
               name="contributors"
               render={({ field: { onChange }, fieldState: { error } }) => (
                 <InviteUsers
-                  key={ref.current}
                   label="Ajouter un membre"
                   setEmailsError={setEmailsError}
                   error={error}

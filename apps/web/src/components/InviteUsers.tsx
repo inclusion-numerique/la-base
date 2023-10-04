@@ -15,7 +15,6 @@ const InviteUsers = ({
   onChange,
   baseId,
   resourceId,
-  key,
 }: {
   label: string
   setEmailsError: Dispatch<SetStateAction<boolean>>
@@ -23,7 +22,6 @@ const InviteUsers = ({
   onChange: (event: string[]) => void
   baseId?: string
   resourceId?: string
-  key: string
 }) => {
   const [filter, setFilter] = useState('')
 
@@ -37,7 +35,6 @@ const InviteUsers = ({
   return (
     <>
       <MultipleSearchableSelect
-        key={key}
         data-testid="invite-member-modal-input"
         label={label}
         placeholder="Adresse email, nom de profil"

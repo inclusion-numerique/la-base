@@ -175,7 +175,10 @@ const EditionActionBar = ({
         </div>
       </div>
       <DeleteResourceModal {...deleteResourceModalProps(onDelete)} />
-      <InviteContributorsModal title="Inviter des contributeurs">
+      <InviteContributorsModal
+        title="Inviter des contributeurs"
+        className="overflowModal"
+      >
         <p className="fr-mb-4w">
           Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs
           et supprimer la ressource.

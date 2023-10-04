@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
-import { v4 } from 'uuid'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -39,7 +38,6 @@ const InviteMemberButton = ({
     resolver: zodResolver(InviteMemberCommandValidation),
     defaultValues: { baseId: base.id, isAdmin: false },
   })
-  const ref = useRef(v4())
 
   const [emailErrors, setEmailsError] = useState(false)
 
@@ -56,7 +54,6 @@ const InviteMemberButton = ({
     }
     try {
       await mutate.mutateAsync(data)
-      ref.current = v4()
       close()
       router.refresh()
     } catch (mutationError) {
@@ -76,7 +73,10 @@ const InviteMemberButton = ({
       >
         Inviter un membre
       </Button>
-      <InviteModal title="Inviter des membres" className={styles.modal}>
+      <InviteModal
+        title="Inviter des membres"
+        className={classNames(styles.modal, 'overflowModal')}
+      >
         <>
           <div className="fr-mb-4w">
             Les membres peuvent voir, créer, publier et contribuer à l’ensemble
@@ -95,7 +95,6 @@ const InviteMemberButton = ({
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <>
                     <InviteUsers
-                      key={ref.current}
                       label="Ajouter un membre"
                       setEmailsError={setEmailsError}
                       error={error}
