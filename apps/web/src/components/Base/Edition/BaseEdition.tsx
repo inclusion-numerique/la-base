@@ -18,11 +18,11 @@ const BaseEdition = ({
   isAdmin: boolean
 }) => (
   <div className={classNames('fr-container', styles.container)}>
-    <SideMenu />
+    <SideMenu isAdmin={isAdmin} />
     <div className={baseStyles.cards}>
       <Informations base={base} />
       <Contacts base={base} />
-      <Visibility base={base} />
+      <Visibility base={base} className={isAdmin ? 'fr-mt-3w' : 'fr-my-3w'} />
       {isAdmin && (
         <Card
           className="fr-my-3w wip"

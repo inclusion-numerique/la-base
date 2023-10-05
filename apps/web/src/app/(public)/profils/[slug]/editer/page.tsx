@@ -2,7 +2,7 @@ import React from 'react'
 import { notFound, redirect } from 'next/navigation'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
-import { getProfileResourcesCount } from '@app/web/server/resources/getResourcesList'
+import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import { filterAccess } from '@app/web/server/profiles/authorization'
@@ -23,7 +23,7 @@ const ProfilEditionPage = async ({ params }: { params: { slug: string } }) => {
     redirect(`/profils/${params.slug}`)
   }
 
-  const resourcesCount = await getProfileResourcesCount(profile.id, user)
+  const resources = await getProfileResources(profile.id, user)
 
   return (
     <div className="fr-container">
@@ -37,7 +37,7 @@ const ProfilEditionPage = async ({ params }: { params: { slug: string } }) => {
         currentPage="Modifier mon profil"
       />
       <div className="fr-mt-6w fr-mb-4w">
-        <ProfilEdition profile={profile} resourcesCount={resourcesCount} />
+        <ProfilEdition profile={profile} resources={resources} />
       </div>
     </div>
   )

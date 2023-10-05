@@ -7,11 +7,18 @@ import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { UpdateProfileCommand } from '../server/profiles/updateProfile'
 import { UpdateBaseCommand } from '../server/bases/updateBase'
-import { UpdateResourceCommand } from '../server/resources/parameters'
+import { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'
+import { ChangeVisibilityCommand } from '../server/resources/feature/ChangeVisibility'
+import { ChangeIndexationCommand } from '../server/resources/feature/ChangeIndexation'
 import Card from './Card'
 
 const EditCard = <
-  T extends UpdateProfileCommand | UpdateBaseCommand | UpdateResourceCommand,
+  T extends
+    | UpdateProfileCommand
+    | UpdateBaseCommand
+    | ChangeBaseCommand
+    | ChangeVisibilityCommand
+    | ChangeIndexationCommand,
 >({
   id,
   className,
@@ -21,6 +28,7 @@ const EditCard = <
   view,
   form,
   mutation,
+  noRefresh,
 }: {
   id?: string
   className?: string
@@ -30,6 +38,7 @@ const EditCard = <
   view: ReactNode
   form: UseFormReturn<T>
   mutation: (data: T) => Promise<void>
+  noRefresh?: boolean
 }) => {
   const router = useRouter()
   const [editMode, setEditMode] = useState(false)
@@ -38,7 +47,9 @@ const EditCard = <
     try {
       await mutation(data)
       setEditMode(false)
-      router.refresh()
+      if (!noRefresh) {
+        router.refresh()
+      }
     } catch (error) {
       applyZodValidationMutationErrorsToForm(error, form.setError)
     }

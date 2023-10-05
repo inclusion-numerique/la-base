@@ -60,9 +60,9 @@ const IndexationEdition = <T extends FieldValues>({
       defaultOption
       defaultOptionLabel="Selectionnez une type de support"
       options={[
-        { name: 'Thématique 1', value: 'theme-1' },
-        { name: 'Thématique 2', value: 'theme-2' },
-        { name: 'Thématique 3', value: 'theme-3' },
+        { name: 'Support 1', value: 'support-1' },
+        { name: 'Support 2', value: 'support-2' },
+        { name: 'Support 3', value: 'support-3' },
       ]}
     />
     <MultipleSelectFormField
@@ -72,7 +72,7 @@ const IndexationEdition = <T extends FieldValues>({
       hint={
         <>
           Quel est le public visé par la ressource ?<br />
-          Sélectionnez jusqu’à {targetAudiencesLimit} thématiques.
+          Sélectionnez jusqu’à {targetAudiencesLimit} publics.
         </>
       }
       control={control}
@@ -81,9 +81,9 @@ const IndexationEdition = <T extends FieldValues>({
       defaultOption
       defaultOptionLabel="Selectionnez un public"
       options={[
-        { name: 'Thématique 1', value: 'theme-1' },
-        { name: 'Thématique 2', value: 'theme-2' },
-        { name: 'Thématique 3', value: 'theme-3' },
+        { name: 'Target 1', value: 'target-1' },
+        { name: 'Target 2', value: 'target-2' },
+        { name: 'Target 3', value: 'target-3' },
       ]}
     />
   </>

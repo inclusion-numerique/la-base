@@ -51,7 +51,7 @@ const ResourceIndexation = ({
             ? tags.map((tag) => (
                 <Tag
                   key={tag}
-                  data-testId={`resource-indexation-${title}-${tag}`}
+                  data-testid={`resource-indexation-${title}-${tag}`}
                   linkProps={{ href: '/rechercher' }}
                   small
                   className={styles.tag}

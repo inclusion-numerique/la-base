@@ -10,13 +10,19 @@ export const ChangeBaseCommandValidation = z.object({
 
 export type ChangeBaseCommand = z.infer<typeof ChangeBaseCommandValidation>
 
-export type BaseChangedDataV1 = {
+type BaseChangedDataV1 = {
   __version: 1
   baseId: string | null
+}
+
+type BaseChangedDataV2 = {
+  __version: 2
+  baseId: string | null
+  isPublic: boolean
 }
 
 export type BaseChanged = {
   type: 'BaseChanged'
   timestamp: Date
-  data: BaseChangedDataV1
+  data: BaseChangedDataV1 | BaseChangedDataV2
 }

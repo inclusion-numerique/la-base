@@ -28,8 +28,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('publish-resource-button').should('be.disabled')
     cy.testId('indexation-themes-select').select('theme-1')
-    cy.testId('indexation-support-types-select').select('theme-1')
-    cy.testId('indexation-targetAudiences-select').select('theme-1')
+    cy.testId('indexation-support-types-select').select('support-1')
+    cy.testId('indexation-targetAudiences-select').select('target-1')
 
     cy.testId('publish-resource-button').click()
 

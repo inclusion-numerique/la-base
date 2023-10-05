@@ -9,9 +9,9 @@ import { trpc } from '@app/web/trpc'
 import { Resource } from '@app/web/server/resources/getResource'
 import { ResourcePrivacyTag } from '@app/web/components/PrivacyTags'
 import {
-  UpdateResourceVisibilityCommand,
-  UpdateResourceVisibilityCommandValidation,
-} from '@app/web/server/resources/parameters'
+  ChangeVisibilityCommand,
+  ChangeVisibilityCommandValidation,
+} from '@app/web/server/resources/feature/ChangeVisibility'
 import EditCard from '@app/web/components/EditCard'
 import VisibilityEdition from './VisibilityEdition'
 
@@ -22,13 +22,17 @@ const Visibility = ({
   resource: Resource
   user: SessionUser
 }) => {
-  const form = useForm<UpdateResourceVisibilityCommand>({
-    resolver: zodResolver(UpdateResourceVisibilityCommandValidation),
+  const form = useForm<ChangeVisibilityCommand>({
+    resolver: zodResolver(ChangeVisibilityCommandValidation),
     defaultValues: {
-      isPublic: resource.isPublic === null ? undefined : resource.isPublic,
+      name: 'ChangeVisibility',
+      payload: {
+        resourceId: resource.id,
+        isPublic: resource.isPublic === null ? undefined : resource.isPublic,
+      },
     },
   })
-  const mutate = trpc.resource.mutateParameters.useMutation()
+  const mutate = trpc.resource.mutate.useMutation()
 
   return (
     <EditCard
@@ -38,13 +42,13 @@ const Visibility = ({
       description="Choisissez la visibilité de votre ressource."
       form={form}
       mutation={async (data) => {
-        await mutate.mutateAsync({ id: resource.id, data })
+        await mutate.mutateAsync(data)
       }}
       edition={
         <VisibilityEdition
           resource={resource}
           user={user}
-          path="isPublic"
+          path="payload.isPublic"
           control={form.control}
         />
       }

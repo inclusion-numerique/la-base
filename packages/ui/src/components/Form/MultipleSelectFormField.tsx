@@ -126,6 +126,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
                   size={badgeSize}
                   onClick={() => onTagClick(option)}
                   className="fr-mb-2v"
+                  data-testid={`${dataTestId}-${option.value}`}
                 />
               ))}
             </div>

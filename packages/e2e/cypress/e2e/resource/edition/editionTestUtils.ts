@@ -1,5 +1,8 @@
 import { v4 } from 'uuid'
-import type { CreateUserInput } from '@app/e2e/e2e/authentication/user.tasks'
+import type {
+  CreateBaseInput,
+  CreateUserInput,
+} from '@app/e2e/e2e/authentication/user.tasks'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   createTestBase,
@@ -15,7 +18,9 @@ export const cleanUpAndCreateTestResource = (
   cy.execute('deleteAllData', {})
   const user = createTestUser()
   const base = createTestBase(user.id, publicBase)
-  const commands = createTestResourceCommands({ baseId: base.id })
+  const commands = createTestResourceCommands({
+    baseId: base.id,
+  })
 
   cy.createUserAndSignin(user)
   cy.createBase(base)
@@ -31,7 +36,13 @@ export const cleanUpAndCreateTestResource = (
 export const cleanUpAndCreateTestPublishedResource = (
   publicBase?: boolean,
   publicResource?: boolean,
-  additionalSetup?: (user: Pick<SessionUser, 'id'>) => void,
+  additionalSetup?: ({
+    user,
+    base,
+  }: {
+    user: Pick<SessionUser, 'id'>
+    base: CreateBaseInput
+  }) => void,
 ) => {
   cy.execute('deleteAllData', {})
   const user = createTestUser()
@@ -46,24 +57,26 @@ export const cleanUpAndCreateTestPublishedResource = (
   cy.createUserAndSignin(user)
   cy.createBase(base)
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
-    additionalSetup?.(user)
+    additionalSetup?.({ user, base })
     cy.visit(`/ressources/${slug}`)
   })
   cy.dsfrShouldBeStarted()
 }
 
 export const cleanUpAndCreateTestPublishedResourceInProfile = (
-  publicProfile?: boolean,
+  userData: Partial<CreateUserInput>,
   publicResource?: boolean,
+  additionalSetup?: ({ user }: { user: Pick<SessionUser, 'id'> }) => void,
 ) => {
   cy.execute('deleteAllData', {})
-  const user = createTestUser({ isPublic: publicProfile })
+  const user = createTestUser(userData)
   const id = v4()
   const commands = createTestResourceCommands({ resourceId: id })
   commands.push(createTestPublishResourceCommand(id, publicResource))
 
   cy.createUserAndSignin(user)
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
+    additionalSetup?.({ user })
     cy.visit(`/ressources/${slug}`)
   })
   cy.dsfrShouldBeStarted()

@@ -6,11 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { Resource } from '@app/web/server/resources/getResource'
 import {
-  UpdateResourceIndexationCommand,
-  UpdateResourceIndexationCommandValidation,
-} from '@app/web/server/resources/parameters'
+  ChangeIndexationCommand,
+  ChangeIndexationCommandValidation,
+} from '@app/web/server/resources/feature/ChangeIndexation'
+import { Resource } from '@app/web/server/resources/getResource'
 import EditCard from '@app/web/components/EditCard'
 import { hasIndexation } from '@app/web/utils/indexation'
 import ResourceIndexation from '../../View/ResourceIndexation'
@@ -18,15 +18,19 @@ import IndexationEdition from './IndexationEdition'
 import styles from './Indexation.module.css'
 
 const Indexation = ({ resource }: { resource: Resource }) => {
-  const form = useForm<UpdateResourceIndexationCommand>({
-    resolver: zodResolver(UpdateResourceIndexationCommandValidation),
+  const form = useForm<ChangeIndexationCommand>({
+    resolver: zodResolver(ChangeIndexationCommandValidation),
     defaultValues: {
-      themes: resource.themes,
-      supportTypes: resource.supportTypes,
-      targetAudiences: resource.targetAudiences,
+      name: 'ChangeIndexation',
+      payload: {
+        resourceId: resource.id,
+        themes: resource.themes,
+        supportTypes: resource.supportTypes,
+        targetAudiences: resource.targetAudiences,
+      },
     },
   })
-  const mutate = trpc.resource.mutateParameters.useMutation()
+  const mutate = trpc.resource.mutate.useMutation()
   return (
     <EditCard
       className="fr-mt-3w"
@@ -35,14 +39,14 @@ const Indexation = ({ resource }: { resource: Resource }) => {
       description="L’indexation permettra aux autres utilisateurs de la base de trouver votre ressource via le moteur de recherche."
       form={form}
       mutation={async (data) => {
-        await mutate.mutateAsync({ id: resource.id, data })
+        await mutate.mutateAsync(data)
       }}
       edition={
         <IndexationEdition
           control={form.control}
-          themesPath="themes"
-          supportTypesPath="supportTypes"
-          targetAudiencesPath="targetAudiences"
+          themesPath="payload.themes"
+          supportTypesPath="payload.supportTypes"
+          targetAudiencesPath="payload.targetAudiences"
         />
       }
       view={
@@ -50,7 +54,7 @@ const Indexation = ({ resource }: { resource: Resource }) => {
           <ResourceIndexation resource={resource} withDescription />
         ) : (
           <Notice
-            data-testId="resource-empty-indexation"
+            data-testid="resource-empty-indexation"
             className={styles.emptyIndexation}
             title="Vous n’avez pas renseigné d’indexation pour votre ressource."
           />

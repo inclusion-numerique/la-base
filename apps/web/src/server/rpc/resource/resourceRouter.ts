@@ -1,6 +1,4 @@
 import { v4 } from 'uuid'
-import { Resource } from '@prisma/client'
-import { prismaClient } from '@app/web/prismaClient'
 import {
   CreateResourceCommand,
   CreateResourceCommandClientValidation,
@@ -14,7 +12,6 @@ import { handleResourceCreationCommand } from '@app/web/server/resources/feature
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { forbiddenError } from '@app/web/server/rpc/trpcErrors'
-import { UpdateResourceCommandValidation } from '../../resources/parameters'
 
 export const resourceRouter = router({
   create: protectedProcedure
@@ -48,38 +45,5 @@ export const resourceRouter = router({
       }
 
       return handleResourceMutationCommand(command, { user })
-    }),
-  mutateParameters: protectedProcedure
-    .input(UpdateResourceCommandValidation)
-    .mutation(async ({ input }) => {
-      const resource = {
-        ...(await prismaClient.resource.findUnique({
-          where: { id: input.id },
-        })),
-        ...input.data,
-      }
-
-      let canBePublic
-      if (resource.baseId) {
-        const base = await prismaClient.base.findUnique({
-          where: { id: resource.baseId },
-        })
-        canBePublic = base?.isPublic
-      } else {
-        const user = await prismaClient.user.findUnique({
-          where: { id: resource.createdById },
-        })
-        canBePublic = user?.isPublic
-      }
-
-      const enrichedData: Partial<Resource> = { ...input.data }
-      if (!canBePublic) {
-        enrichedData.isPublic = false
-      }
-
-      return prismaClient.resource.update({
-        where: { id: input.id },
-        data: enrichedData,
-      })
     }),
 })

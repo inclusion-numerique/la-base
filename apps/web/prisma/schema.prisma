@@ -194,6 +194,8 @@ enum ResourceEventType {
   TitleAndDescriptionEdited @map("title_and_description_edited")
   ImageEdited               @map("image_edited")
   BaseChanged               @map("base_changed")
+  IndexationChanged         @map("indexation_changed")
+  VisibilityChanged         @map("visibility_changed")
   ContentAdded              @map("content_added")
   ContentEdited             @map("content_edited")
   ContentRemoved            @map("content_removed")

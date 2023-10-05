@@ -6,11 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { Resource } from '@app/web/server/resources/getResource'
 import {
-  UpdateResourcePublicationCommand,
-  UpdateResourcePublicationCommandValidation,
-} from '@app/web/server/resources/parameters'
+  ChangeBaseCommand,
+  ChangeBaseCommandValidation,
+} from '@app/web/server/resources/feature/ChangeBase'
+import { Resource } from '@app/web/server/resources/getResource'
 import EditCard from '@app/web/components/EditCard'
 import ResourceBaseRichRadio from '../../ResourceBaseRichRadio'
 import PublicationView from './PublicationView'
@@ -22,13 +22,17 @@ const Publication = ({
   resource: Resource
   user: SessionUser
 }) => {
-  const form = useForm<UpdateResourcePublicationCommand>({
-    resolver: zodResolver(UpdateResourcePublicationCommandValidation),
+  const form = useForm<ChangeBaseCommand>({
+    resolver: zodResolver(ChangeBaseCommandValidation),
     defaultValues: {
-      baseId: resource.baseId,
+      name: 'ChangeBase',
+      payload: {
+        resourceId: resource.id,
+        baseId: resource.baseId,
+      },
     },
   })
-  const mutate = trpc.resource.mutateParameters.useMutation()
+  const mutate = trpc.resource.mutate.useMutation()
 
   return (
     <EditCard
@@ -36,12 +40,12 @@ const Publication = ({
       title="Ressource publiée dans"
       form={form}
       mutation={async (data) => {
-        await mutate.mutateAsync({ id: resource.id, data })
+        await mutate.mutateAsync(data)
       }}
       edition={
         <ResourceBaseRichRadio
           control={form.control}
-          path="baseId"
+          path="payload.baseId"
           user={user}
           disabled={form.formState.isSubmitting}
         />

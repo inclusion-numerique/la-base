@@ -3,6 +3,7 @@ import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
 import { UpdateBaseCommandValidation } from '@app/web/server/bases/updateBase'
+import { handleResourceMutationCommand } from '../../resources/feature/handleResourceMutationCommand'
 import { createUniqueSlug } from './createUniqueSlug'
 
 // TODO - Check user permission
@@ -24,9 +25,37 @@ export const baseRouter = router({
     }),
   mutate: protectedProcedure
     .input(UpdateBaseCommandValidation)
-    .mutation(async ({ input }) =>
-      prismaClient.base.update({ where: { id: input.id }, data: input.data }),
-    ),
+    .mutation(async ({ input, ctx: { user } }) => {
+      if ('isPublic' in input.data && input.data.isPublic === false) {
+        const resources = await prismaClient.resource.findMany({
+          select: { id: true },
+          where: { baseId: input.id, isPublic: true },
+        })
+
+        return prismaClient.$transaction(async (transaction) =>
+          Promise.all([
+            ...resources.map((resource) =>
+              handleResourceMutationCommand(
+                {
+                  name: 'ChangeVisibility',
+                  payload: { resourceId: resource.id, isPublic: false },
+                },
+                { user },
+                transaction,
+              ),
+            ),
+            transaction.base.update({
+              where: { id: input.id },
+              data: input.data,
+            }),
+          ]),
+        )
+      }
+      return prismaClient.base.update({
+        where: { id: input.id },
+        data: input.data,
+      })
+    }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {

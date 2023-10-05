@@ -11,14 +11,17 @@ export const OptionBadge = ({
   disabled,
   size,
   className,
+  'data-testid': dataTestId,
 }: {
   option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'name'>
   onClick: MouseEventHandler
   disabled?: boolean
   size?: 'sm' | 'md'
   className?: string
+  'data-testid'?: string
 }) => (
   <button
+    data-testid={dataTestId}
     type="button"
     className={classNames(
       `fr-tag fr-mr-1w ${size === 'sm' ? 'fr-tag--sm' : ''}`,

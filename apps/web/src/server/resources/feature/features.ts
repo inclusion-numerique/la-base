@@ -16,6 +16,7 @@ import {
   applyBaseChanged,
   changeBaseSecurityRules,
   handleChangeBase,
+  onBaseChanged,
 } from '@app/web/server/resources/feature/ChangeBase.server'
 import {
   CreateResourceCommandValidation,
@@ -124,6 +125,26 @@ import {
   onRepublished,
   republishSecurityRules,
 } from './RepublishResource.server'
+import {
+  ChangeIndexationSecurityRules,
+  applyIndexationChanged,
+  handleChangeIndexation,
+  onIndexationChanged,
+} from './ChangeIndexation.server'
+import {
+  ChangeIndexationCommandValidation,
+  IndexationChanged,
+} from './ChangeIndexation'
+import {
+  ChangeVisibilitySecurityRules,
+  applyVisibilityChanged,
+  handleChangeVisibility,
+  onVisibilityChanged,
+} from './ChangeVisibility.server'
+import {
+  ChangeVisibilityCommandValidation,
+  VisibilityChanged,
+} from './ChangeVisibility'
 
 /**
  * This module exports all the commands that can be applied to a resource and their handlers.
@@ -139,6 +160,8 @@ export const ResourceMutationCommandsValidation = z.discriminatedUnion('name', [
   EditTitleAndDescriptionCommandValidation,
   EditImageCommandValidation,
   ChangeBaseCommandValidation,
+  ChangeIndexationCommandValidation,
+  ChangeVisibilityCommandValidation,
   AddContentCommandValidation,
   EditContentCommandValidation,
   ReorderContentCommandValidation,
@@ -174,6 +197,8 @@ export const ResourceMutationCommandHandlers: {
   EditTitleAndDescription: handleEditTitleAndDescription,
   EditImage: handleEditImage,
   ChangeBase: handleChangeBase,
+  ChangeIndexation: handleChangeIndexation,
+  ChangeVisibility: handleChangeVisibility,
   AddContent: handleAddContent,
   EditContent: handleEditContent,
   ReorderContent: handleReorderContent,
@@ -193,6 +218,8 @@ export const ResourceCommandSecurityRules: {
   EditTitleAndDescription: editTitleAndDescriptionSecurityRules,
   EditImage: editImageSecurityRules,
   ChangeBase: changeBaseSecurityRules,
+  ChangeIndexation: ChangeIndexationSecurityRules,
+  ChangeVisibility: ChangeVisibilitySecurityRules,
   AddContent: addContentSecurityRules,
   EditContent: editContentSecurityRules,
   ReorderContent: reorderContentSecurityRules,
@@ -211,6 +238,8 @@ export type HistoryResourceEvent =
   | ResourceCreated
   | ResourceMigrated
   | BaseChanged
+  | VisibilityChanged
+  | IndexationChanged
   | TitleAndDescriptionEdited
   | ImageEdited
   | ContentAdded
@@ -252,6 +281,8 @@ export const MutationEventAppliers: {
   ContentReordered: applyContentReordered,
   ContentRemoved: applyContentRemoved,
   BaseChanged: applyBaseChanged,
+  IndexationChanged: applyIndexationChanged,
+  VisibilityChanged: applyVisibilityChanged,
   Published: applyResourcePublished,
   Republished: applyResourceRepublished,
   Deleted: applyResourceDeleted,
@@ -265,6 +296,9 @@ export const EventSideEffects: {
   Created: onCreated,
   Migrated: onMigrated,
   Published: onPublished,
+  BaseChanged: onBaseChanged,
+  IndexationChanged: onIndexationChanged,
+  VisibilityChanged: onVisibilityChanged,
   Republished: onRepublished,
   Deleted: onDeleted,
 }

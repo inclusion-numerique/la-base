@@ -58,7 +58,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-base-profil').click({
       force: true,
     })
-    /*
+
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
@@ -78,11 +78,10 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'have.text',
       'Ressource privée',
     )
-    */
   })
 
   it('Acceptation 3 - Si je passe la ressource dans une base privé, elle devient privée', () => {
-    cleanUpAndCreateTestPublishedResource(true, true, (user) => {
+    cleanUpAndCreateTestPublishedResource(true, true, ({ user }) => {
       const base = createTestBase(user.id, false)
       cy.createBase({ ...base, slug: `${base.slug}-1` })
     })
@@ -129,12 +128,19 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('resource-empty-indexation').should('exist')
-
+    cy.testId('resource-empty-indexation').should('not.exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select').select('theme-1')
-    cy.testId('indexation-support-types-select').select('theme-1')
-    cy.testId('indexation-targetAudiences-select').select('theme-1')
+    cy.testId('indexation-themes-select-theme-1').click()
+    cy.testId('indexation-support-types-select-support-1').click()
+    cy.testId('indexation-targetAudiences-select-target-1').click()
+    cy.testId('edit-card-save-button').click()
+    cy.wait('@mutation')
+
+    cy.testId('resource-empty-indexation').should('exist')
+    cy.testId('edit-card-button').eq(2).click()
+    cy.testId('indexation-themes-select').select('theme-2')
+    cy.testId('indexation-support-types-select').select('support-2')
+    cy.testId('indexation-targetAudiences-select').select('target-2')
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
@@ -143,9 +149,9 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
 
-    cy.testId('resource-indexation-Thématiques-theme-1').should('exist')
-    cy.testId('resource-indexation-Type de support-theme-1').should('exist')
-    cy.testId('resource-indexation-Publics cibles-theme-1').should('exist')
+    cy.testId('resource-indexation-Thématiques-theme-2').should('exist')
+    cy.testId('resource-indexation-Type de support-support-2').should('exist')
+    cy.testId('resource-indexation-Publics cibles-target-2').should('exist')
   })
 
   it('Acceptation 5 - Je peux changer supprimer ma ressource', () => {

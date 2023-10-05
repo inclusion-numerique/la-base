@@ -50,8 +50,8 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
                 data-testid="resource-base-profil"
                 id={profileRadioId}
                 name={name}
-                value={null}
-                radioValue={value}
+                value={value}
+                radioValue={null}
                 disabled={disabled}
                 onChange={onChange}
               >
