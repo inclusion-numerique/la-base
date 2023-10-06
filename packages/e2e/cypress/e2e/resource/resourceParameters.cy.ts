@@ -131,8 +131,8 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-empty-indexation').should('not.exist')
     cy.testId('edit-card-button').eq(2).click()
     cy.testId('indexation-themes-select-EconomieNumerique').click()
-    cy.testId('indexation-support-types-select-support-1').click()
-    cy.testId('indexation-targetAudiences-select-target-1').click()
+    cy.testId('indexation-support-types-select-Article').click()
+    cy.testId('indexation-targetAudiences-select-Particuliers').click()
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 

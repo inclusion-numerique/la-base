@@ -183,6 +183,57 @@ enum Theme {
   @@map("theme")
 }
 
+enum SupportType {
+  SupportPedagogique @map("support_pedagogique")
+  Tutoriel           @map("tutoriel")
+  Jeu                @map("jeu")
+  Methodologie       @map("methodologie")
+  SiteWeb            @map("site_web")
+  BoiteOutils        @map("boite_outils")
+  Logiciel           @map("logiciel")
+  Questionnaire      @map("questionnaire")
+  Cartographie       @map("cartographie")
+  Annuaire           @map("annuaire")
+  ModeleNotice       @map("modele_notice")
+  Article            @map("article")
+  Infographie        @map("infographie")
+  Video              @map("video")
+
+  @@map("support_type")
+}
+
+enum TargetAudience {
+  TousPublics                          @map("tous_publics")
+  MediateursNumeriques                 @map("mediateurs_numeriques")
+  TravailleursSociaux                  @map("travailleurs_sociaux")
+  AssociationsActeursEss               @map("associations_acteurs_ess")
+  Entreprises                          @map("entreprises")
+  CollectivitesTerritoriales           @map("collectivites_territoriales")
+  AdministrationsEtablissementsPublics @map("administrations_etablissements_publics")
+  Elus                                 @map("elus")
+  AidantsNumeriques                    @map("aidants_numeriques")
+  AutresProfessionnels                 @map("autres_professionnels")
+  EnseignantsProfessionnelsFormation   @map("enseignants_professionnels_formation")
+  Particuliers                         @map("particuliers")
+  JeunesEnfants6                       @map("jeunes_enfants_6")
+  Enfants6_12                          @map("enfants_6_12")
+  Adolescents12_18                     @map("adolescents_12_18")
+  JeunesAdultes18_25                   @map("jeunes_adultes_18_25")
+  Adultes                              @map("adultes")
+  Parents                              @map("parents")
+  SeniorsPersonnesAgees                @map("seniors_personnes_agees")
+  PersonnesTresEloigneesNumerique      @map("personnes_tres_eloignees_numerique")
+  PersonnesInsertionProfessionnelle    @map("personnes_insertion_professionnelle")
+  PersonnesEnInsertionSociale          @map("personnes_en_insertion_sociale")
+  PersonnesPerteAutonomie              @map("personnes_perte_autonomie")
+  RefugiesDemandeursAsile              @map("refugies_demandeurs_asile")
+  PersonneSituationIlletrisme          @map("personne_situation_illetrisme")
+  PersonneAllophone                    @map("personne_allophone")
+  PersonneSituationHandicap            @map("personne_situation_handicap")
+
+  @@map("target_audience")
+}
+
 model Resource {
   id                        String   @id @default(uuid()) @db.Uuid
   legacyId                  Int?     @unique @map("legacy_id")
@@ -194,8 +245,8 @@ model Resource {
   isPublic                  Boolean? @map("is_public")
 
   themes          Theme[]
-  supportTypes    String[] @map("support_types")
-  targetAudiences String[] @map("target_audiences")
+  supportTypes    SupportType[]    @map("support_types")
+  targetAudiences TargetAudience[] @map("target_audiences")
 
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid

@@ -14,15 +14,6 @@ export const categories = [
 export type Category = (typeof categories)[number]
 
 export const themeLabels: { [theme in Theme]: string } = {
-  [Theme.DiagnosticDeCompetencesNumeriques]:
-    'Diagnostic de compétences numériques',
-  [Theme.DemarchesEtServicesEnLigne]: 'Démarches et services en ligne',
-  [Theme.MaitriseDesOutilsNumeriques]: 'Maîtrise des outils numériques',
-  [Theme.NavigationSurInternet]: 'Navigation sur Internet',
-  [Theme.UsageDuMaterielInformatique]: 'Usage du matériel informatique',
-  [Theme.SobrieteNumerique]: 'Sobriété numérique',
-  [Theme.MaterielReconditionne]: 'Matériel reconditionné',
-  [Theme.Mobilites]: 'Mobilités',
   [Theme.Accessibilite]: 'Accessibilité',
   [Theme.ActeursDuNumerique]: 'Acteurs du numérique',
   [Theme.ArtsEtCulture]: 'Arts et culture',
@@ -30,19 +21,28 @@ export const themeLabels: { [theme in Theme]: string } = {
   [Theme.CodeEtProgrammation]: 'Code & programmation',
   [Theme.CommunicationEnLigneEtReseauxSociaux]:
     'Communication en ligne & réseaux sociaux',
+  [Theme.CommunsNumeriques]: 'Communs numériques',
+  [Theme.DemarchesEtServicesEnLigne]: 'Démarches et services en ligne',
+  [Theme.DiagnosticDeCompetencesNumeriques]:
+    'Diagnostic de compétences numériques',
+  [Theme.EconomieNumerique]: 'Économie numérique',
   [Theme.EducationEtFormation]: 'Education & formation',
   [Theme.EmploiEtEntrepreunariat]: 'Emploi & entrepreunariat',
-  [Theme.JeuxVideos]: 'Jeux vidéos',
-  [Theme.NumeriqueEnSante]: 'Numérique en santé',
-  [Theme.Parentalite]: 'Parentalité',
-  [Theme.RisquesCyberEtProtection]: 'Risques cyber et protection',
-  [Theme.CommunsNumeriques]: 'Communs numériques',
-  [Theme.EconomieNumerique]: 'Économie numérique',
   [Theme.GouvernancesPartagees]: 'Gouvernances partagées',
   [Theme.IntelligenceArtificielle]: 'Intelligence artificielle',
+  [Theme.JeuxVideos]: 'Jeux vidéos',
+  [Theme.MaitriseDesOutilsNumeriques]: 'Maîtrise des outils numériques',
+  [Theme.MaterielReconditionne]: 'Matériel reconditionné',
+  [Theme.Mobilites]: 'Mobilités',
+  [Theme.NavigationSurInternet]: 'Navigation sur Internet',
+  [Theme.NumeriqueEnSante]: 'Numérique en santé',
   [Theme.OpenSourceEtLicencesLibres]: 'Open source et licences libres',
+  [Theme.Parentalite]: 'Parentalité',
+  [Theme.RisquesCyberEtProtection]: 'Risques cyber et protection',
+  [Theme.SobrieteNumerique]: 'Sobriété numérique',
   [Theme.SouveraineteNumeriqueEtHebergementDesDonnees]:
     'Souveraineté numérique & hébergement des données',
+  [Theme.UsageDuMaterielInformatique]: 'Usage du matériel informatique',
 }
 
 export const themeCategories: { [theme in Theme]: Category } = {

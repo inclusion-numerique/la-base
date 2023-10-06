@@ -7,6 +7,8 @@ import {
   themesLimit,
 } from '@app/web/server/resources/feature/PublishResource'
 import { themeOptions } from '@app/web/themes/themes'
+import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
+import { supportTypeOptions } from '@app/web/themes/supportTypes'
 
 const IndexationEdition = <T extends FieldValues>({
   control,
@@ -56,11 +58,7 @@ const IndexationEdition = <T extends FieldValues>({
       path={supportTypesPath}
       defaultOption
       defaultOptionLabel="Selectionnez une type de support"
-      options={[
-        { name: 'Support 1', value: 'support-1' },
-        { name: 'Support 2', value: 'support-2' },
-        { name: 'Support 3', value: 'support-3' },
-      ]}
+      options={supportTypeOptions}
     />
     <MultipleSelectFormField
       data-testid="indexation-targetAudiences-select"
@@ -77,11 +75,7 @@ const IndexationEdition = <T extends FieldValues>({
       path={targetAudiencesPath}
       defaultOption
       defaultOptionLabel="Selectionnez un public"
-      options={[
-        { name: 'Public 1', value: 'target-1' },
-        { name: 'Public 2', value: 'target-2' },
-        { name: 'Public 3', value: 'target-3' },
-      ]}
+      options={targetAudienceOptions}
     />
   </>
 )

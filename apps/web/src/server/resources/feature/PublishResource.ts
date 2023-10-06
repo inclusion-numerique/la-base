@@ -1,5 +1,5 @@
 import z from 'zod'
-import { Theme } from '@prisma/client'
+import { SupportType, TargetAudience, Theme } from '@prisma/client'
 
 export const themesLimit = 5
 export const supportTypesLimit = 4
@@ -15,7 +15,7 @@ export const indexationCommand = {
       `Vous ne pouvez pas ajouter plus de ${themesLimit} thématiques`,
     ),
   supportTypes: z
-    .array(z.string(), {
+    .array(z.nativeEnum(SupportType), {
       required_error: "Merci d'ajouter au moins un type de support",
     })
     .max(
@@ -23,7 +23,7 @@ export const indexationCommand = {
       `Vous ne pouvez pas ajouter plus de ${supportTypesLimit} types de support`,
     ),
   targetAudiences: z
-    .array(z.string(), {
+    .array(z.nativeEnum(TargetAudience), {
       required_error: "Merci d'ajouter au moins un public visé",
     })
     .max(
@@ -76,8 +76,8 @@ export type ResourcePublishedV2 = {
   | {
       isPublic: true
       themes: Theme[]
-      supportTypes: string[]
-      targetAudiences: string[]
+      supportTypes: SupportType[]
+      targetAudiences: TargetAudience[]
     }
   | {
       isPublic: false

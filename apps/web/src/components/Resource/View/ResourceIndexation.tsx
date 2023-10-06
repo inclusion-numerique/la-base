@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import { Resource } from '@app/web/server/resources/getResource'
 import { themeLabels } from '@app/web/themes/themes'
+import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import styles from './ResourceIndexation.module.css'
 
 const ResourceIndexation = ({
@@ -25,12 +27,16 @@ const ResourceIndexation = ({
       {
         title: 'Type de support',
         description: 'Type de support (article, fiche, guide...).',
-        tags: resource.supportTypes,
+        tags: resource.supportTypes.map(
+          (supportType) => supportTypeLabels[supportType],
+        ),
       },
       {
         title: 'Publics cibles',
         description: 'Quel est le public visé par la ressource ?',
-        tags: resource.targetAudiences,
+        tags: resource.targetAudiences.map(
+          (targetAudience) => targetAudienceLabels[targetAudience],
+        ),
       },
     ],
     [resource],
