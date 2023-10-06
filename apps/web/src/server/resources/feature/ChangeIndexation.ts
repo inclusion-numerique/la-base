@@ -1,4 +1,5 @@
 import z from 'zod'
+import type { Theme } from '@prisma/client'
 import { indexationCommand } from './PublishResource'
 
 export const ChangeIndexationCommandValidation = z.object({
@@ -15,7 +16,7 @@ export type ChangeIndexationCommand = z.infer<
 
 type IndexationChangedDataV1 = {
   __version: 1
-  themes: string[]
+  themes: Theme[]
   supportTypes: string[]
   targetAudiences: string[]
 }

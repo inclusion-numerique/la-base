@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import classNames from 'classnames'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import { Resource } from '@app/web/server/resources/getResource'
+import { themeLabels } from '@app/web/themes/themes'
 import styles from './ResourceIndexation.module.css'
 
 const ResourceIndexation = ({
@@ -19,7 +20,7 @@ const ResourceIndexation = ({
         title: 'Thématiques',
         description:
           'Quelles sont les principales thématiques abordées par la ressource ?',
-        tags: resource.themes,
+        tags: resource.themes.map((theme) => themeLabels[theme]),
       },
       {
         title: 'Type de support',
