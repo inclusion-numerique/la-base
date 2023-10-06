@@ -45,14 +45,20 @@ const getWhereProfilesQuery = (
 export const getProfiles = async ({
   user,
   query,
+  take,
+  skip,
 }: {
   user?: Pick<SessionUser, 'id'> | null
   query?: string
+  take?: number
+  skip?: number
 }) => {
   const where = getWhereProfilesList(user, getWhereProfilesQuery(query))
   return prismaClient.user.findMany({
     select: profileSelect,
     where,
+    take,
+    skip,
   })
 }
 

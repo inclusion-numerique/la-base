@@ -25,7 +25,6 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-invite-contributors-modal').click()
 
-    cy.wait('@getUser')
     cy.testId('contributors-creator').should('exist')
     cy.testId('contributors-contributor').should('not.exist')
     cy.testId('invite-member-modal-input').should('be.visible')
@@ -101,7 +100,6 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-invite-contributors-modal').click()
 
-    cy.wait('@getUser')
     cy.testId('contributors-creator').should('exist')
     cy.testId('contributors-contributor').should('exist')
     cy.testId('remove-contributor-button').click()

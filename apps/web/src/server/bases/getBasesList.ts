@@ -8,20 +8,22 @@ const getWhereBasesList = (
 ): Prisma.BaseWhereInput => {
   const whereBaseIsPublic = {
     isPublic: true,
-    ...where,
   }
 
   return {
-    ...(user
-      ? {
-          OR: [
-            whereBaseIsPublic,
-            // Public or created by user
-            { ownerId: user.id },
-          ],
-        }
-      : whereBaseIsPublic),
     deleted: null,
+    AND: [
+      user
+        ? {
+            OR: [
+              whereBaseIsPublic,
+              // Public or created by user
+              { ownerId: user.id },
+            ],
+          }
+        : whereBaseIsPublic,
+      where,
+    ],
   }
 }
 
@@ -77,14 +79,20 @@ export const getProfileBases = async (
 export const getBases = async ({
   user,
   query,
+  take,
+  skip,
 }: {
   user?: Pick<SessionUser, 'id'> | null
   query?: string
+  take?: number
+  skip?: number
 }) => {
   const where = getWhereBasesList(user, getWhereBasesQuery(query))
   return prismaClient.base.findMany({
     select: baseSelect,
     where,
+    take,
+    skip,
   })
 }
 

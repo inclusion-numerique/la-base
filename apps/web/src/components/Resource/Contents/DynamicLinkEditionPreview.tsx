@@ -20,6 +20,7 @@ const DynamicLinkEditionPreview = ({
   const { isFetching, isError, error } = trpc.metaData.get.useQuery(
     { url },
     {
+      enabled: !!url,
       onSuccess: (metadata) => {
         if ('error' in metadata) {
           setMetadataError(

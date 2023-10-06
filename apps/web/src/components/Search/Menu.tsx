@@ -22,7 +22,7 @@ const Menu = ({
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher?q=${query || ''}`}
+              href={`/rechercher?q=${encodeURI(query || '')}`}
               aria-current={current === 'resources' ? 'page' : undefined}
             >
               Ressources · <b>{resourcesCount}</b>
@@ -31,7 +31,7 @@ const Menu = ({
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher/bases?q=${query || ''}`}
+              href={`/rechercher/bases?q=${encodeURI(query || '')}`}
               aria-current={current === 'bases' ? 'page' : undefined}
             >
               Bases · <b>{basesCount}</b>
@@ -40,7 +40,7 @@ const Menu = ({
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher/createurs?q=${query || ''}`}
+              href={`/rechercher/createurs?q=${encodeURI(query || '')}`}
               aria-current={current === 'profiles' ? 'page' : undefined}
             >
               Créateurs · <b>{profilesCount}</b>

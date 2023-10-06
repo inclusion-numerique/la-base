@@ -68,7 +68,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('indexation-box').should('not.exist')
     cy.testId('contributors-box').should('exist')
 
-    cy.wait('@getUser')
     cy.testId('contributors-box').within(() => {
       cy.testId('contributors-creator').should('exist')
       cy.testId('contributors-contributor').should('not.exist')

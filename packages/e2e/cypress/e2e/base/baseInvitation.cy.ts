@@ -25,7 +25,6 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
       '/bases/conseiller-numérique-france-services-contributions/membres',
     )
     cy.testId('member-card-admin').should('have.length', 1)
-    cy.wait('@getUser')
     cy.dsfrShouldBeStarted()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('t')
@@ -118,7 +117,6 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
       '/bases/conseiller-numérique-france-services-contributions/membres',
     )
     cy.testId('profile-card').should('have.length', 2)
-    cy.wait('@getUser')
     cy.dsfrShouldBeStarted()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('t')

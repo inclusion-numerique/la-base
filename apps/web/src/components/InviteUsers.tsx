@@ -26,11 +26,16 @@ const InviteUsers = ({
   const [filter, setFilter] = useState('')
 
   // TODO : debounce
-  const { data: users } = trpc.profile.getMatchingUsers.useQuery({
-    filter,
-    baseId,
-    resourceId,
-  })
+  const { data: users } = trpc.profile.getMatchingUsers.useQuery(
+    {
+      filter,
+      baseId,
+      resourceId,
+    },
+    {
+      enabled: !!filter,
+    },
+  )
 
   return (
     <>
