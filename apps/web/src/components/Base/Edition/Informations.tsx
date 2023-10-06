@@ -58,7 +58,7 @@ const Informations = ({ base }: { base: BasePageData }) => {
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(base.description || ''),
             }}
-          />{' '}
+          />
         </>
       }
     />

@@ -1,0 +1,20 @@
+.container {
+  max-width: 792px;
+  width: 100%;
+  margin: auto;
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.subtitle {
+  color: var(--text-mention-grey);
+  margin-bottom: 0;
+}
+
+.websites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px
+}

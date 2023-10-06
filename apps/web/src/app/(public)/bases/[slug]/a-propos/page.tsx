@@ -4,12 +4,11 @@ import { basePageQuery } from '@app/web/server/bases/getBase'
 import Header from '@app/web/components/Base/Header'
 import Menu from '@app/web/components/Base/Menu'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import EmptyResources from '@app/web/components/Base/EmptyResources'
 import { filterAccess } from '@app/web/server/bases/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
-import Members from '@app/web/components/Base/List/Members'
+import Details from '@app/web/components/Base/Details'
 
-const BaseMembersPage = async ({ params }: { params: { slug: string } }) => {
+const BaseDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
   const base = await basePageQuery(decodeURI(params.slug), user)
 
@@ -21,18 +20,8 @@ const BaseMembersPage = async ({ params }: { params: { slug: string } }) => {
   return authorizations.authorized ? (
     <>
       <Header base={base} isMember={authorizations.isMember} />
-      <Menu base={base} current="members" />
-      <div className="fr-container fr-mb-4w">
-        {base.members.length === 0 ? (
-          <EmptyResources isMember={authorizations.isMember} />
-        ) : (
-          <Members
-            base={base}
-            isMember={authorizations.isMember}
-            isAdmin={authorizations.isAdmin}
-          />
-        )}
-      </div>
+      <Menu base={base} current="a-propos" />
+      <Details base={base} />
     </>
   ) : (
     <>
@@ -42,4 +31,4 @@ const BaseMembersPage = async ({ params }: { params: { slug: string } }) => {
   )
 }
 
-export default BaseMembersPage
+export default BaseDetailsPage
