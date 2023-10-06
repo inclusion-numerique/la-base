@@ -1,3 +1,4 @@
+import { SelectOption } from '@app/ui/components/Form/utils/options'
 import { Theme } from '@prisma/client'
 
 /**
@@ -80,8 +81,8 @@ export const themeCategories: { [theme in Theme]: Category } = {
     'Communs & souveraineté',
 }
 
-export const categoryThemes = (() => {
-  const index: { [category in Category]: Theme[] } = {
+export const categoryThemesOptions = (() => {
+  const index: { [category in Category]: SelectOption[] } = {
     'Médiation & compétences numériques': [],
     'Ecologie & soutenabilité': [],
     'Culture numérique': [],
@@ -89,7 +90,10 @@ export const categoryThemes = (() => {
   }
 
   for (const [theme, category] of Object.entries(themeCategories)) {
-    index[category].push(theme as Theme)
+    index[category].push({
+      name: themeLabels[theme as Theme],
+      value: theme as Theme,
+    })
   }
 
   return index

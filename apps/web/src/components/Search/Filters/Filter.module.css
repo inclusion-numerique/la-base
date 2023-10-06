@@ -1,0 +1,37 @@
+.options {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
+}
+
+.separator {
+  padding: 0;
+  height: 1px;
+  margin: 0 16px;
+
+  &:last-child {
+    display: none;
+  }
+}
+
+.optionCategory {
+  color: var(--blue-france-sun-113-625);
+  font-weight: 700;
+}
+
+.optionCategory,
+.option {
+  cursor: pointer;
+  padding: 8px 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 64px;
+  font-size: 14px;
+  line-height: 24px;
+
+  &:hover {
+    background-color: var(--background-default-grey-hover);
+  }
+}

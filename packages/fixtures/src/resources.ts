@@ -7,7 +7,10 @@ import {
 import { MutationHistoryResourceEvent } from '@app/web/server/resources/feature/features'
 import { createSlug } from '@app/web/utils/createSlug'
 import { ContentTypeValues } from '@app/web/utils/prismaEnums'
-import { Prisma } from '@prisma/client'
+import { themeLabels } from '@app/web/themes/themes'
+import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { Prisma, Theme, TargetAudience, SupportType } from '@prisma/client'
 
 const BASE_NUMBER = 100
 const managedTypes = [
@@ -269,9 +272,35 @@ export const randomResourcesEvents: (
       type: 'Deleted' as const,
       timestamp: faker.date.future(),
       data: {
-        id: faker.string.uuid(),
         __version: 1 as const,
       },
+    }
+
+    const isPublic = faker.datatype.boolean()
+    const publicationEvent = {
+      id: faker.string.uuid(),
+      resourceId,
+      byId: faker.helpers.arrayElement(users).id,
+      type: 'Published' as const,
+      timestamp: faker.date.future(),
+      data: isPublic
+        ? {
+            __version: 2 as const,
+            isPublic,
+            themes: faker.helpers.arrayElements(
+              Object.keys(themeLabels),
+            ) as Theme[],
+            supportTypes: faker.helpers.arrayElements(
+              Object.keys(supportTypeLabels),
+            ) as SupportType[],
+            targetAudiences: faker.helpers.arrayElements(
+              Object.keys(targetAudienceLabels),
+            ) as TargetAudience[],
+          }
+        : {
+            __version: 2 as const,
+            isPublic,
+          },
     }
 
     return [
@@ -295,7 +324,8 @@ export const randomResourcesEvents: (
       ...baseChangedEvents,
       ...titleAndDescriptionEditedEvents,
       ...contentsEvents.flat(),
-      ...(Math.floor(Math.random() * 20) % 20 === 0 ? [deletionEvent] : []),
+      ...(Math.random() > 0.05 ? [publicationEvent] : []),
+      ...(Math.random() > 0.95 ? [deletionEvent] : []),
     ]
   })
 }

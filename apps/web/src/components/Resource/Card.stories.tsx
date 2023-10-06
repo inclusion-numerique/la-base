@@ -24,6 +24,7 @@ const resource = {
     name: 'Jean Biche',
   },
   image: null,
+  themes: [],
 } satisfies ResourceListItem
 const creatorUser = { ...testSessionUser, id: resource.createdBy.id }
 

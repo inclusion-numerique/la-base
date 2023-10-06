@@ -2,8 +2,8 @@ import React from 'react'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { departmentsOptions } from '@app/web/utils/departments'
 import BaseCard from '../Base/Card/Card'
-import Filters from '../Filters'
 import EmptyBox from '../EmptyBox'
+import Filters from './Filters/Filters'
 import styles from './Content.module.css'
 
 const Bases = ({ bases }: { bases: BaseListItem[] }) => (
@@ -12,8 +12,11 @@ const Bases = ({ bases }: { bases: BaseListItem[] }) => (
       <Filters
         className="fr-mb-6w"
         label="Affiner la recherche"
+        query=""
+        basePath="/rechercher/bases"
         categories={[
           {
+            multiple: false,
             id: 'department',
             label: 'Département',
             options: departmentsOptions,

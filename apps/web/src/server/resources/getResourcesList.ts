@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client'
+import type { Prisma, Theme } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
@@ -11,6 +11,7 @@ export const resourceListSelect = {
   published: true,
   description: true,
   isPublic: true,
+  themes: true,
   image: {
     select: {
       id: true,
@@ -88,17 +89,29 @@ export const getWhereResourcesList = (
 
 const getWhereResourcesQuery = (
   query?: string,
+  themes?: string[],
 ): Prisma.ResourceWhereInput | undefined => {
-  if (!query) {
-    return undefined
+  const whereQuery: Prisma.ResourceWhereInput[] = []
+  if (query) {
+    whereQuery.push({
+      OR: [
+        { title: { contains: query, mode: 'insensitive' } },
+        { description: { contains: query, mode: 'insensitive' } },
+      ],
+    })
   }
 
-  return {
-    OR: [
-      { title: { contains: query, mode: 'insensitive' } },
-      { description: { contains: query, mode: 'insensitive' } },
-    ],
+  if (themes) {
+    for (const theme of themes) {
+      whereQuery.push({ themes: { has: theme as Theme } })
+    }
   }
+
+  return whereQuery.length > 0
+    ? {
+        AND: whereQuery,
+      }
+    : undefined
 }
 
 export const getResourcesList = async ({
@@ -106,13 +119,18 @@ export const getResourcesList = async ({
   user,
   skip,
   query,
+  themes,
 }: {
   take?: number
   skip?: number
   user?: Pick<SessionUser, 'id'> | null
   query?: string
+  themes?: string[]
 }) => {
-  const where = getWhereResourcesList(user, getWhereResourcesQuery(query))
+  const where = getWhereResourcesList(
+    user,
+    getWhereResourcesQuery(query, themes),
+  )
 
   return prismaClient.resource.findMany({
     where,

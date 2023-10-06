@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useOnClickOutside } from 'usehooks-ts'
 import { SearchBar as DSFRSearchBar } from '@codegouvfr/react-dsfr/SearchBar'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { QuickSearchResults } from '@app/web/server/search/quicksearch'
@@ -13,7 +14,12 @@ const SearchBar = ({ query }: { query?: string }) => {
   const router = useRouter()
 
   const [value, setValue] = useState(query)
+  const [hasBeenFocused, setHasBeenFocused] = useState(false)
   const [results, setResults] = useState<QuickSearchResults | null>()
+
+  const quickSearchRef = useRef(null)
+  useOnClickOutside(quickSearchRef, () => setResults(null))
+
   const onSearch = (text: string) => {
     router.push(`/rechercher?q=${encodeURI(text)}`)
   }
@@ -30,6 +36,7 @@ const SearchBar = ({ query }: { query?: string }) => {
 
   useEffect(() => {
     setValue(query)
+    setHasBeenFocused(false)
   }, [query])
 
   const count = results
@@ -41,16 +48,18 @@ const SearchBar = ({ query }: { query?: string }) => {
       className={styles.input}
       onButtonClick={onSearch}
       renderInput={({ className, id, type }) => (
-        <>
+        <div className={styles.quickSearch} ref={quickSearchRef}>
           <input
             value={value}
             onChange={(event) => setValue(event.target.value)}
+            onFocus={() => setHasBeenFocused(true)}
+            onBlur={() => setResults(null)}
             className={className}
             id={id}
             type={type}
             placeholder="Rechercher une ressource, une base, un profil..."
           />
-          {value && !isFetching && results && (
+          {hasBeenFocused && value && !isFetching && results && (
             <div className={styles.resultsContainer}>
               {count > 0 ? (
                 <>
@@ -119,7 +128,7 @@ const SearchBar = ({ query }: { query?: string }) => {
               )}
             </div>
           )}
-        </>
+        </div>
       )}
     />
   )

@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+.quickSearch {
+  width: 100%;
+}
+
 .resultsContainer {
   width: 100%;
   position: absolute;

@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
-import Filters from '@app/web/components/Filters'
+import Filters from '@app/web/components/Search/Filters/Filters'
+import { categoryThemesOptions } from '@app/web/themes/themes'
 
 export default {
   title: 'component/Filters',
@@ -14,24 +15,13 @@ export const Default: Story = {
     label: 'Affiner la recherche',
     categories: [
       {
+        multiple: true,
         id: 'thematics',
         label: 'Thématique',
-        options: [
-          {
-            value: '1',
-            name: 'Thématique 1',
-          },
-          {
-            value: '2',
-            name: 'Thématique 2',
-          },
-          {
-            value: '3',
-            name: 'Thématique 3',
-          },
-        ],
+        options: categoryThemesOptions,
       },
       {
+        multiple: false,
         id: 'supports',
         label: 'Type de support',
         options: [
@@ -50,6 +40,7 @@ export const Default: Story = {
         ],
       },
       {
+        multiple: false,
         id: 'publics',
         label: 'Public cible',
         options: [

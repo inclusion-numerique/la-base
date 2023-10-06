@@ -1,17 +1,25 @@
 import React from 'react'
+import { Theme } from '@prisma/client'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
 import ResourceCard from '../Resource/Card'
-import Filters from '../Filters'
 import EmptyBox from '../EmptyBox'
+import Filters from './Filters/Filters'
 import styles from './Content.module.css'
 
 const Resources = ({
   resources,
   user,
+  basePath,
+  query,
+  themes,
 }: {
   resources: ResourceListItem[]
   user: SessionUser | null
+  basePath: string
+  query?: string
+  themes?: Theme[]
 }) => (
   //  Todo Plural
 
@@ -20,26 +28,24 @@ const Resources = ({
       <Filters
         className="fr-mb-6w"
         label="Affiner la recherche"
+        basePath={basePath}
+        query={query}
+        initialValues={themes?.map((theme) => ({
+          category: 'themes',
+          option: {
+            value: theme,
+            name: themeLabels[theme],
+          },
+        }))}
         categories={[
           {
-            id: 'thematics',
+            multiple: true,
+            id: 'themes',
             label: 'Thématique',
-            options: [
-              {
-                value: '1',
-                name: 'Thématique 1',
-              },
-              {
-                value: '2',
-                name: 'Thématique 2',
-              },
-              {
-                value: '3',
-                name: 'Thématique 3',
-              },
-            ],
+            options: categoryThemesOptions,
           },
           {
+            multiple: false,
             id: 'supports',
             label: 'Type de support',
             options: [
@@ -58,6 +64,7 @@ const Resources = ({
             ],
           },
           {
+            multiple: false,
             id: 'publics',
             label: 'Public cible',
             options: [
