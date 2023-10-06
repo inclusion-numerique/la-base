@@ -4,7 +4,7 @@ import { createLegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import {
   LegacyBase,
   migrateBase,
-} from '@app/migration/modelMigrations/migrateBase'
+} from '@app/migration/modelMigrations/migrateBases'
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
 
 jest.mock('uuid', () => ({ v4: () => '0000' }))

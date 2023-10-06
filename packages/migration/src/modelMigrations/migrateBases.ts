@@ -4,9 +4,13 @@ import { createSlug } from '@app/web/utils/createSlug'
 import type { Prisma } from '@prisma/client'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
-import { SlugToLegacyIdMap } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
+import {
+  computeSlugAndUpdateExistingSlugs,
+  SlugToLegacyIdMap,
+} from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
+import { legacyBasesIdsToTransformToProfile } from '@app/migration/modelMigrations/legacyBasesToTransformToProfile'
 
 export const getLegacyBases = () => migrationPrismaClient.main_base.findMany()
 
@@ -35,6 +39,8 @@ export const getExistingBases = async (): Promise<{
 
   return { slugMap, idMap }
 }
+
+export type ExistingBases = Awaited<ReturnType<typeof getExistingBases>>
 
 export type MigrateBaseInput = {
   legacyBase: LegacyBase
@@ -84,3 +90,39 @@ export const migrateBase = async ({
     select: { id: true, ownerId: true, legacyId: true },
   })
 }
+
+export type MigrateBasesInput = {
+  legacyBases: LegacyBase[]
+  existingBases: ExistingBases
+  transaction: Prisma.TransactionClient
+  userIdFromLegacyId: LegacyToNewIdHelper
+  imageIdFromLegacyId: LegacyToNewIdHelper
+}
+
+export const migrateBases = async ({
+  legacyBases,
+  existingBases,
+  userIdFromLegacyId,
+  imageIdFromLegacyId,
+}: MigrateBasesInput) =>
+  Promise.all(
+    legacyBases
+      // Filter out bases that will be migrated as profile only
+      .filter(
+        (legacyBase) =>
+          !legacyBasesIdsToTransformToProfile.has(Number(legacyBase.id)),
+      )
+      .map((legacyBase) => {
+        const slug = computeSlugAndUpdateExistingSlugs(
+          legacyBase,
+          existingBases.slugMap,
+        )
+        return migrateBase({
+          legacyBase,
+          transaction: prismaClient,
+          slug,
+          userIdFromLegacyId,
+          imageIdFromLegacyId,
+        })
+      }),
+  )

@@ -6,20 +6,45 @@ import { UpsertCreateType } from '@app/migration/utils/UpsertCreateType'
 import { FindManyItemType } from '@app/migration/utils/findManyItemType'
 import { LegacyIdMap } from '@app/migration/utils/legacyIdMap'
 import { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
+import { legacyBasesIdsToTransformToProfile } from '@app/migration/modelMigrations/legacyBasesToTransformToProfile'
 
 export const getLegacyBaseAdmins = () =>
-  migrationPrismaClient.main_base_admins.findMany()
+  migrationPrismaClient.main_base_admins
+    .findMany()
+    // Remove bases that will be transformed to profiles
+    .then((items) =>
+      items.filter(
+        ({ base_id }) =>
+          !legacyBasesIdsToTransformToProfile.has(Number(base_id)),
+      ),
+    )
+
 // Means members in v2 base
 export const getLegacyBaseContributors = () =>
-  migrationPrismaClient.main_base_contributors.findMany()
+  migrationPrismaClient.main_base_contributors
+    .findMany()
+    // Remove bases that will be transformed to profiles
+    .then((items) =>
+      items.filter(
+        ({ base_id }) =>
+          !legacyBasesIdsToTransformToProfile.has(Number(base_id)),
+      ),
+    )
 
 export const getLegacyBaseOwners = () =>
-  migrationPrismaClient.main_base.findMany({
-    select: {
-      id: true,
-      owner_id: true,
-    },
-  })
+  migrationPrismaClient.main_base
+    .findMany({
+      select: {
+        id: true,
+        owner_id: true,
+      },
+    })
+    // Remove bases that will be transformed to profiles
+    .then((items) =>
+      items.filter(
+        ({ id }) => !legacyBasesIdsToTransformToProfile.has(Number(id)),
+      ),
+    )
 
 export type LegacyBaseAdmin = FindManyItemType<typeof getLegacyBaseAdmins>
 export type LegacyBaseContributor = FindManyItemType<

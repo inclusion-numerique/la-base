@@ -6,8 +6,8 @@ import {
 import {
   getExistingBases,
   getLegacyBases,
-  migrateBase,
-} from '@app/migration/modelMigrations/migrateBase'
+  migrateBases,
+} from '@app/migration/modelMigrations/migrateBases'
 import {
   getExistingImages,
   getLegacyImages,
@@ -20,9 +20,9 @@ import {
 } from '@app/migration/modelMigrations/migrateResources'
 import { migrateUploads } from '@app/migration/modelMigrations/migrateUploads'
 import { migrateUsers } from '@app/migration/modelMigrations/migrateUsers'
-import { computeSlugAndUpdateExistingSlugs } from '@app/migration/utils/computeSlugAndUpdateExistingSlugs'
 import { migrateBaseMembers } from '@app/migration/modelMigrations/migrateBaseMembers'
 import { migrateResourceContributors } from '@app/migration/modelMigrations/migrateResourceContributors'
+import { updateBaseAndProfileVisibility } from '@app/migration/modelMigrations/updateBaseAndProfileVisibility'
 
 // eslint-disable-next-line no-console
 const output = console.log
@@ -102,21 +102,14 @@ export const executeMigration = async () => {
 
   output(`- Migrating bases...`)
 
-  const migratedBases = await Promise.all(
-    legacyBases.map((legacyBase) => {
-      const slug = computeSlugAndUpdateExistingSlugs(
-        legacyBase,
-        existingBases.slugMap,
-      )
-      return migrateBase({
-        legacyBase,
-        transaction: prismaClient,
-        slug,
-        userIdFromLegacyId,
-        imageIdFromLegacyId,
-      })
-    }),
-  )
+  const migratedBases = await migrateBases({
+    legacyBases,
+    existingBases,
+    userIdFromLegacyId,
+    imageIdFromLegacyId,
+    transaction: prismaClient,
+  })
+
   output(`- Migrated ${migratedBases.length} bases`)
 
   const baseIdFromLegacyId = createLegacyToNewIdHelper(
@@ -143,6 +136,7 @@ export const executeMigration = async () => {
   output(`- Migrated ${migratedResources.length} resources`)
   output(`- Migrated ${migratedContents.length} contents`)
 
+  output(`- Migrating base members...`)
   const migratedBaseMembers = await migrateBaseMembers({
     userIdFromLegacyId,
     baseIdFromLegacyId,
@@ -150,6 +144,7 @@ export const executeMigration = async () => {
 
   output(`- Migrated ${migratedBaseMembers.length} base members`)
 
+  output(`- Migrating resource contributors...`)
   const migratedResourceContributors = await migrateResourceContributors({
     userIdFromLegacyId,
     resourceIdFromLegacyId,
@@ -158,6 +153,12 @@ export const executeMigration = async () => {
   output(
     `- Migrated ${migratedResourceContributors.length} resource contributors`,
   )
+
+  output(`- Updating base and profile visibility for public resources...`)
+  const updatedVisibility = await updateBaseAndProfileVisibility()
+  output('- Updated visibility for:')
+  output(`  - ${updatedVisibility.updatedBases.count} bases`)
+  output(`  - ${updatedVisibility.updatedProfiles.count} profiles`)
 
   const endModelMigrations = new Date()
   output(
