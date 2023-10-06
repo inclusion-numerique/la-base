@@ -130,17 +130,21 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-empty-indexation').should('not.exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select-EconomieNumerique').click()
+
+    // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
+    cy.testId('indexation-themes-select-DemarchesEtServicesEnLigne').click()
     cy.testId('indexation-support-types-select-Article').click()
     cy.testId('indexation-targetAudiences-select-Particuliers').click()
+    cy.testId('indexation-targetAudiences-select-AidantsNumeriques').click()
+
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
     cy.testId('resource-empty-indexation').should('exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select').select('theme-2')
-    cy.testId('indexation-support-types-select').select('support-2')
-    cy.testId('indexation-targetAudiences-select').select('target-2')
+    cy.testId('indexation-themes-select').select('ActeursDuNumerique')
+    cy.testId('indexation-support-types-select').select('Tutoriel')
+    cy.testId('indexation-targetAudiences-select').select('Adultes')
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
@@ -149,9 +153,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
 
-    cy.testId('resource-indexation-Thématiques-theme-2').should('exist')
-    cy.testId('resource-indexation-Type de support-support-2').should('exist')
-    cy.testId('resource-indexation-Publics cibles-target-2').should('exist')
+    cy.testId('resource-indexation-Thématiques-Acteurs du numérique').should(
+      'exist',
+    )
+    cy.testId('resource-indexation-Type de support-Tutoriel').should('exist')
+    cy.testId('resource-indexation-Publics cibles-Adultes').should('exist')
   })
 
   it('Acceptation 5 - Je peux changer supprimer ma ressource', () => {
