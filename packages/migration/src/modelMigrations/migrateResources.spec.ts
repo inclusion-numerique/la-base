@@ -8,7 +8,7 @@ import {
   transformResource,
 } from '@app/migration/modelMigrations/migrateResources'
 import { createMockPrisma } from '@app/migration/test/createPrismaMock'
-import { Theme } from '@prisma/client'
+import { SupportType, TargetAudience, Theme } from '@prisma/client'
 
 jest.mock('uuid', () => ({ v4: () => 'testuuid' }))
 
@@ -46,6 +46,7 @@ describe('migrateResource', () => {
       main_basesection_resources: [],
       main_contentsection: [],
       main_resource_tags: [
+        // Themes
         {
           tag_id: 91n,
         },
@@ -54,6 +55,23 @@ describe('migrateResource', () => {
         },
         {
           tag_id: 78n,
+        },
+        // Support
+        {
+          tag_id: 27n,
+        },
+        {
+          tag_id: 45n,
+        },
+        {
+          tag_id: 33n,
+        },
+        // Target audience
+        {
+          tag_id: 145n,
+        },
+        {
+          tag_id: 134n,
         },
       ],
     } satisfies LegacyResource
@@ -82,6 +100,8 @@ describe('migrateResource', () => {
         byId: '0000',
         contents: [],
         themes: [Theme.MaitriseDesOutilsNumeriques, Theme.SobrieteNumerique],
+        supportTypes: [SupportType.Annuaire, SupportType.Tutoriel],
+        targetAudiences: [TargetAudience.AdministrationsEtablissementsPublics],
         created: legacyResource.created,
         updated: legacyResource.modified,
         published: legacyResource.modified,

@@ -14,8 +14,10 @@ import {
 import { transformContent } from '@app/migration/modelMigrations/transformContent'
 import { migrationPrismaClient } from '@app/migration/migrationPrismaClient'
 import type { LegacyToNewIdHelper } from '@app/migration/legacyToNewIdHelper'
-import { getThemesFromLegacyTags } from '@app/migration/modelMigrations/legacyResourcesThemeResourceMapping'
+import { getThemesFromLegacyTags } from '@app/migration/modelMigrations/legacyResourcesThemeMapping'
 import { legacyBasesIdsToTransformToProfile } from '@app/migration/modelMigrations/legacyBasesToTransformToProfile'
+import { getSupportTypeFromLegacyTags } from '@app/migration/modelMigrations/legacyResourcesSupportTypeMapping'
+import { getTargetAudienceFromLegacyTags } from '@app/migration/modelMigrations/legacyResourcesTargetAudienceMapping'
 
 export const getLegacyResources = async () => {
   const all = await migrationPrismaClient.main_resource.findMany({
@@ -39,6 +41,14 @@ export const getLegacyResources = async () => {
       main_resource_tags: {
         select: {
           tag_id: true,
+        },
+        where: {
+          main_tag: {
+            category_id: {
+              // Thématiques, Publics cibbles ,Types de support
+              in: [10, 1, 8],
+            },
+          },
         },
       },
       // TODO Do not know if this is useful
@@ -149,6 +159,12 @@ export const transformResource = ({
     title: legacyResource.title,
     slug,
     themes: getThemesFromLegacyTags(legacyResource.main_resource_tags),
+    supportTypes: getSupportTypeFromLegacyTags(
+      legacyResource.main_resource_tags,
+    ),
+    targetAudiences: getTargetAudienceFromLegacyTags(
+      legacyResource.main_resource_tags,
+    ),
     titleDuplicationCheckSlug: createSlug(legacyResource.title),
     description: legacyResource.description ?? '',
     byId: userIdFromLegacyId(Number(legacyResource.creator_id)),

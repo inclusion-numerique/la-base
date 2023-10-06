@@ -1,6 +1,6 @@
 import { Theme } from '@prisma/client'
 
-export const legacyResourcesThemeResourceMapping: {
+export const legacyResourcesThemeMapping: {
   [legacyId: number]: Theme
 } = {
   // 623,Accessibilité
@@ -17,6 +17,8 @@ export const legacyResourcesThemeResourceMapping: {
   73: Theme.EmploiEtEntrepreunariat,
   // 62,Harcèlement
   62: Theme.RisquesCyberEtProtection,
+  // 655,cyberharcèlement
+  655: Theme.RisquesCyberEtProtection,
   // 84,Intelligence artificielle
   84: Theme.IntelligenceArtificielle,
   // 77,Jeux Vidéos
@@ -51,6 +53,16 @@ export const legacyResourcesThemeResourceMapping: {
   89: Theme.SobrieteNumerique,
   // 78,Energie / éco-gestes
   78: Theme.SobrieteNumerique,
+  // 80, Illectronisme
+  80: Theme.InclusionNumerique,
+  // 81,Exclusion numérique
+  81: Theme.InclusionNumerique,
+  // 82,Numérique inclusif
+  82: Theme.InclusionNumerique,
+  // 545,Données
+  // 633,Données personnelles
+  545: Theme.Donnees,
+  633: Theme.Donnees,
 }
 
 export const getThemesFromLegacyTags = (
@@ -59,7 +71,7 @@ export const getThemesFromLegacyTags = (
   // Use a set to have unique themes only
   const themes = new Set<Theme>()
   for (const tag of resourceTags) {
-    const theme = legacyResourcesThemeResourceMapping[Number(tag.tag_id)]
+    const theme = legacyResourcesThemeMapping[Number(tag.tag_id)]
     if (theme) {
       themes.add(theme)
     }
