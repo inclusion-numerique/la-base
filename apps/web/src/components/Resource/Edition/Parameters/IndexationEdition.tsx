@@ -81,9 +81,9 @@ const IndexationEdition = <T extends FieldValues>({
       defaultOption
       defaultOptionLabel="Selectionnez un public"
       options={[
-        { name: 'Target 1', value: 'target-1' },
-        { name: 'Target 2', value: 'target-2' },
-        { name: 'Target 3', value: 'target-3' },
+        { name: 'Public 1', value: 'target-1' },
+        { name: 'Public 2', value: 'target-2' },
+        { name: 'Public 3', value: 'target-3' },
       ]}
     />
   </>
