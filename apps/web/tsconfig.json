@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "module": "esnext",
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "change-case"],
     "paths": {
       "@app/cli/*": ["../../apps/cli/src/*"],
       "@app/web/*": ["src/*"],

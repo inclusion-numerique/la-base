@@ -5,16 +5,16 @@
     width: 100%;
     row-gap: 8px;
     padding: 12px 0;
+
     p {
         font-weight: 400;
     }
 
     /* Not a regular breakpoint, optimized for homepage */
     @media (min-width: 800px) {
-        flex-direction: row;
+        flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
     }
 
 
@@ -34,6 +34,7 @@
 .categoryInfoSeparator {
     display: none;
     margin: 0 8px;
+
     @media (min-width: 576px) {
         display: initial;
     }
@@ -49,6 +50,7 @@
     column-gap: 8px;
     row-gap: 12px;
     padding-top: 8px;
+
     :global .fr-tag{
         white-space: nowrap;
     }

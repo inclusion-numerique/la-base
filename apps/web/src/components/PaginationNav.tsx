@@ -56,7 +56,7 @@ const PaginationNav = ({
             <a
               className="fr-pagination__link fr-pagination__link--first"
               aria-disabled="true"
-              role="link"
+              href={createPageLink(1)}
             >
               Première page
             </a>
@@ -76,7 +76,7 @@ const PaginationNav = ({
             <a
               className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
               aria-disabled="true"
-              role="link"
+              href={createPageLink(1)}
             >
               Page précédente
             </a>
@@ -95,6 +95,7 @@ const PaginationNav = ({
         {linkablePages.map((linkNumber) =>
           typeof linkNumber === 'string' ? (
             <li key={linkNumber}>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a className="fr-pagination__link">...</a>
             </li>
           ) : (
@@ -116,7 +117,7 @@ const PaginationNav = ({
             <a
               className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
               aria-disabled="true"
-              role="link"
+              href={createPageLink(totalPages)}
             >
               Page suivante
             </a>
@@ -136,7 +137,7 @@ const PaginationNav = ({
             <a
               className="fr-pagination__link fr-pagination__link--last"
               aria-disabled="true"
-              role="link"
+              href={createPageLink(totalPages)}
             >
               Dernière page
             </a>

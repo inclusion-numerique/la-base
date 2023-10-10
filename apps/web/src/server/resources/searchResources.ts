@@ -6,6 +6,7 @@ import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { resourceListSelect } from '@app/web/server/resources/getResourcesList'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
+import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
@@ -69,14 +70,6 @@ export const countResources = async (
 `
 
   return result[0]?.count ?? 0
-}
-
-export const cleanSearchTerm = (query?: string | null) => {
-  const trimmedSearch = query?.trim() ?? ''
-  if (!trimmedSearch) {
-    return null
-  }
-  return trimmedSearch
 }
 
 export const rankResources = async (

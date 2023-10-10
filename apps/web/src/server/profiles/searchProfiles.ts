@@ -1,13 +1,12 @@
-import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { cleanSearchTerm } from '@app/web/server/resources/searchResources'
 import {
   defaultSearchParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { profileSelect } from '@app/web/server/profiles/getProfilesList'
+import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
@@ -47,7 +46,7 @@ export const countProfiles = async (
   return result[0]?.count ?? 0
 }
 
-export const rankProfiles = async <T extends Prisma.UserSelect>(
+export const rankProfiles = async (
   searchParams: SearchParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {

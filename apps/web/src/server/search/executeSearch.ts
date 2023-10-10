@@ -21,11 +21,18 @@ import {
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 
+const fakeDelay = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(null)
+    }, 2000)
+  })
+
 export const executeSearch = async (
   searchParams: SearchParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await fakeDelay()
 
   const start = Date.now()
 
@@ -71,7 +78,7 @@ export const executeQuickSearch = async (
     query,
     perPage: 3,
   }
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await fakeDelay()
 
   const start = Date.now()
 

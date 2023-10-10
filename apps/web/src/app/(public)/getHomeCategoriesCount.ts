@@ -3,9 +3,7 @@ import { getResourcesCountByTheme } from '@app/web/server/resources/getResources
 import { categoryThemes, themeLabels } from '@app/web/themes/themes'
 
 export const getHomeCategoriesCount = async () => {
-  const categoriesCount = await getResourcesCountByTheme({
-    user: null,
-  })
+  const categoriesCount = await getResourcesCountByTheme()
 
   return Object.entries(categoryThemes).map(([category, themes]) => {
     let resourcesCount = 0

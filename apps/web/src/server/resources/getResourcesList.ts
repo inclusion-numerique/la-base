@@ -158,28 +158,7 @@ export const getResourcesList = async ({
   })
 }
 
-export const getResourcesCount = ({
-  user,
-  query,
-}: {
-  user?: Pick<SessionUser, 'id'> | null
-  query?: string
-}) =>
-  prismaClient.resource.count({
-    where: computeResourcesListWhereForUser(
-      user,
-      computeResourceSearchWhere(query),
-    ),
-  })
-
-// TODO We have to use raw query for certain type of operations, make the where clause work in those cases
-export const getResourcesCountByTheme = async ({
-  user,
-  query,
-}: {
-  user?: Pick<SessionUser, 'id'> | null
-  query?: string
-}) => {
+export const getResourcesCountByTheme = async () => {
   // theme is snake_case in database
   const counts = await prismaClient.$queryRaw<
     { theme: Theme; count: number }[]
@@ -198,7 +177,7 @@ export const getResourcesCountByTheme = async ({
   // Add the counts for each theme that have some resources
   // Convert snake case from db to enum value
   for (const { theme, count } of counts) {
-    result[pascalCase(theme)] = count
+    result[pascalCase(theme) as Theme] = count
   }
 
   return result

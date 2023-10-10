@@ -1,13 +1,12 @@
-import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { cleanSearchTerm } from '@app/web/server/resources/searchResources'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
 import {
   defaultSearchParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
+import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.

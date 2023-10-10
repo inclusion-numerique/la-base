@@ -19,7 +19,7 @@ import styles from './SearchBar.module.css'
 const SearchBar = ({ searchParams }: { searchParams?: SearchParams }) => {
   const router = useRouter()
 
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement>(null)
   const quickSearchContainerRef = useRef<HTMLDivElement>(null)
 
   const [inputHasChanged, setInputHasChanged] = useState(false)
