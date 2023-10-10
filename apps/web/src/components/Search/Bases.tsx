@@ -1,6 +1,7 @@
 import React from 'react'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { departmentsOptions } from '@app/web/utils/departments'
+import { sPluriel } from '@app/web/utils/sPluriel'
 import BaseCard from '../Base/Card/Card'
 import EmptyBox from '../EmptyBox'
 import Filters from './Filters/Filters'
@@ -32,7 +33,9 @@ const Bases = ({
     )}
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
-        <b>{totalCount} Bases</b>
+        <b>
+          {totalCount} Base{sPluriel(totalCount)}
+        </b>
       </p>
       <div className={styles.select}>
         Trier par :

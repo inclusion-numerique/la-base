@@ -56,14 +56,12 @@ const SearchResults = async ({
           <Bases
             totalCount={searchResults.basesCount}
             bases={searchResults.bases}
-            user={user}
           />
         )}
         {searchParams.tab === 'profils' && (
           <Profiles
             totalCount={searchResults.profilesCount}
             profiles={searchResults.profiles}
-            user={user}
           />
         )}
         {itemsCount > 0 && (

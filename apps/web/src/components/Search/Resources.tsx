@@ -3,6 +3,7 @@ import { Theme } from '@prisma/client'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
+import { sPluriel } from '@app/web/utils/sPluriel'
 import ResourceCard from '../Resource/Card'
 import EmptyBox from '../EmptyBox'
 import Filters from './Filters/Filters'
@@ -89,7 +90,9 @@ const Resources = ({
     )}
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
-        <b>{totalCount} Ressources</b>
+        <b>
+          {totalCount} Ressource{sPluriel(totalCount)}
+        </b>
       </p>
       <div className={styles.select}>
         Trier par :

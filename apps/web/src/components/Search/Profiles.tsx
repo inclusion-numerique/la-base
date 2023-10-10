@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import { sPluriel } from '@app/web/utils/sPluriel'
 import ProfileCard from '../Profile/Card/Card'
 import EmptyBox from '../EmptyBox'
 import styles from './Content.module.css'
@@ -14,7 +15,9 @@ const Profiles = ({
   <div className={styles.container}>
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
-        <b>{totalCount} Profils</b>
+        <b>
+          {totalCount} Profil{sPluriel(totalCount)}
+        </b>
       </p>
       <div className={styles.select}>
         Trier par :

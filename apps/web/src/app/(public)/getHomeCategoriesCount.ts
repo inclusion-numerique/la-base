@@ -1,3 +1,4 @@
+import { Theme } from '@prisma/client'
 import { getResourcesCountByTheme } from '@app/web/server/resources/getResourcesList'
 import { categoryThemes, themeLabels } from '@app/web/themes/themes'
 
@@ -8,7 +9,11 @@ export const getHomeCategoriesCount = async () => {
 
   return Object.entries(categoryThemes).map(([category, themes]) => {
     let resourcesCount = 0
-    const themesInfo: { title: string; count: number }[] = []
+    const themesInfo: {
+      title: string
+      count: number
+      theme: Theme
+    }[] = []
 
     for (const theme of themes) {
       const themeResourcesCount = categoriesCount[theme]

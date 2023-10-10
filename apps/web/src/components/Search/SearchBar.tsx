@@ -71,7 +71,8 @@ const SearchBar = ({ searchParams }: { searchParams?: SearchParams }) => {
   }
 
   // Close quick search on click outside of it
-  useOnClickOutside(quickSearchContainerRef, (event) => {
+  // TODO Cancel if click on search bar ?
+  useOnClickOutside(quickSearchContainerRef, () => {
     setQuickSearchOpen(false)
   })
 
@@ -89,7 +90,8 @@ const SearchBar = ({ searchParams }: { searchParams?: SearchParams }) => {
   const displayQuickSearch = quickSearchOpen && quicksearchQueryEnabled
   // quickSearchOpen && !!query && (isFetching || quickSearchResult)
   const displayQuickSearchLoader = isFetching
-  const displayQuickSearchResults = !isFetching && quickSearchTotalCount > 0
+  const displayQuickSearchResults =
+    !isFetching && quickSearchTotalCount > 0 && quickSearchResult
   const displayQuickSearchEmptyResults =
     !isFetching && quickSearchTotalCount === 0
 
