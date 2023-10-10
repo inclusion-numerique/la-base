@@ -1,6 +1,6 @@
 import React from 'react'
+import SearchBar from '@app/web/components/Search/SearchBar'
 import styles from './Banner.module.css'
-import SearchBar from './Search/SearchBar'
 
 const Banner = () => (
   <div className={styles.container}>

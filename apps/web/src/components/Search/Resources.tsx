@@ -9,12 +9,14 @@ import Filters from './Filters/Filters'
 import styles from './Content.module.css'
 
 const Resources = ({
+  totalCount,
   resources,
   user,
   basePath,
   query,
   themes,
 }: {
+  totalCount: number
   resources: ResourceListItem[]
   user: SessionUser | null
   basePath: string
@@ -87,7 +89,7 @@ const Resources = ({
     )}
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
-        <b>{resources.length} Ressources</b>
+        <b>{totalCount} Ressources</b>
       </p>
       <div className={styles.select}>
         Trier par :

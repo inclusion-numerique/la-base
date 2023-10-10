@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  getWhereResourcesList,
+  computeResourcesListWhereForUser,
   resourceListSelect,
 } from '../resources/getResourcesList'
 import { profileSelect } from '../profiles/getProfilesList'
@@ -24,7 +24,7 @@ const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     ownerId: true,
     resources: {
       select: resourceListSelect,
-      where: getWhereResourcesList(user),
+      where: computeResourcesListWhereForUser(user),
     },
     members: {
       select: {

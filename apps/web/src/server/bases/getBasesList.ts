@@ -48,7 +48,7 @@ export const getProfileBasesCount = async (
   })
 }
 
-const baseSelect = {
+export const baseSelect = {
   id: true,
   title: true,
   isPublic: true,

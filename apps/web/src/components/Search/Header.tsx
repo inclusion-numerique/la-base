@@ -1,14 +1,15 @@
 import React from 'react'
-import Breadcrumbs from '../Breadcrumbs'
-import SearchResource from './SearchBar'
+import { SearchParams } from '@app/web/server/search/searchQueryParams'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import SearchBar from '@app/web/components/Search/SearchBar'
 import styles from './Header.module.css'
 
-const Header = ({ query }: { query?: string }) => (
+const Header = ({ searchParams }: { searchParams: SearchParams }) => (
   <div className={styles.container}>
     <div className="fr-container">
       <Breadcrumbs currentPage="Rechercher" />
       <div className="fr-my-6w">
-        <SearchResource query={query} />
+        <SearchBar searchParams={searchParams} />
       </div>
     </div>
   </div>

@@ -1,11 +1,16 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, ReactNode } from 'react'
+import classNames from 'classnames'
 import styles from './EmptyBox.module.css'
 
 const EmptyBox = ({
   title,
   children,
-}: { title: string } & PropsWithChildren) => (
-  <div className={styles.container} data-testid="empty-box">
+  className,
+}: { title: ReactNode; className?: string } & PropsWithChildren) => (
+  <div
+    className={classNames(styles.container, className)}
+    data-testid="empty-box"
+  >
     <h6 className="fr-mb-1w">{title}</h6>
     {children}
   </div>

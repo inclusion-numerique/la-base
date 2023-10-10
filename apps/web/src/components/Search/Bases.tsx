@@ -6,7 +6,13 @@ import EmptyBox from '../EmptyBox'
 import Filters from './Filters/Filters'
 import styles from './Content.module.css'
 
-const Bases = ({ bases }: { bases: BaseListItem[] }) => (
+const Bases = ({
+  bases,
+  totalCount,
+}: {
+  bases: BaseListItem[]
+  totalCount: number
+}) => (
   <div className={styles.container}>
     {bases.length > 0 && (
       <Filters
@@ -26,7 +32,7 @@ const Bases = ({ bases }: { bases: BaseListItem[] }) => (
     )}
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
-        <b>{bases.length} Bases</b>
+        <b>{totalCount} Bases</b>
       </p>
       <div className={styles.select}>
         Trier par :

@@ -1,19 +1,28 @@
 import React from 'react'
 import Link from 'next/link'
+import {
+  SearchParams,
+  searchParamsToUrl,
+} from '@app/web/server/search/searchQueryParams'
 import styles from './Menu.module.css'
 
+// While loading put spaces instead of the count to minimize layout shifts
+const menuCount = (count: number | null) =>
+  count === null ? '   ' : ` · ${count}`
+
+/**
+ * Null counts means it's loading
+ */
 const Menu = ({
-  query,
+  searchParams,
   resourcesCount,
   profilesCount,
   basesCount,
-  current,
 }: {
-  query?: string
-  resourcesCount: number
-  profilesCount: number
-  basesCount: number
-  current: 'resources' | 'profiles' | 'bases'
+  searchParams: SearchParams
+  resourcesCount: number | null
+  profilesCount: number | null
+  basesCount: number | null
 }) => (
   // Todo Plural
 
@@ -24,28 +33,42 @@ const Menu = ({
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher?q=${encodeURI(query || '')}`}
-              aria-current={current === 'resources' ? 'page' : undefined}
+              href={searchParamsToUrl({
+                ...searchParams,
+                tab: 'ressources',
+              })}
+              aria-current={
+                searchParams.tab === 'ressources' ? 'page' : undefined
+              }
             >
-              Ressources · <b>{resourcesCount}</b>
+              Ressources
+              {menuCount(resourcesCount)}
             </Link>
           </li>
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher/bases?q=${encodeURI(query || '')}`}
-              aria-current={current === 'bases' ? 'page' : undefined}
+              href={searchParamsToUrl({
+                ...searchParams,
+                tab: 'bases',
+              })}
+              aria-current={searchParams.tab === 'bases' ? 'page' : undefined}
             >
-              Bases · <b>{basesCount}</b>
+              Bases
+              {menuCount(basesCount)}
             </Link>
           </li>
           <li className="fr-nav__item">
             <Link
               className="fr-nav__link fr-link--md"
-              href={`/rechercher/createurs?q=${encodeURI(query || '')}`}
-              aria-current={current === 'profiles' ? 'page' : undefined}
+              href={searchParamsToUrl({
+                ...searchParams,
+                tab: 'profils',
+              })}
+              aria-current={searchParams.tab === 'profils' ? 'page' : undefined}
             >
-              Profils · <b>{profilesCount}</b>
+              Profils
+              {menuCount(profilesCount)}
             </Link>
           </li>
         </ul>

@@ -1,6 +1,17 @@
-import type { Prisma, Theme } from '@prisma/client'
+import type { Prisma } from '@prisma/client'
+import { Theme } from '@prisma/client'
+import { pascalCase } from 'change-case'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { themeCategories } from '@app/web/themes/themes'
+import { SearchParams } from '@app/web/server/search/searchQueryParams'
+
+const pageSize = 4
+
+const takeAndSkip = (page: number) => ({
+  take: pageSize,
+  skip: (page - 1) * pageSize,
+})
 
 export const resourceListSelect = {
   id: true,
@@ -11,7 +22,6 @@ export const resourceListSelect = {
   published: true,
   description: true,
   isPublic: true,
-  themes: true,
   image: {
     select: {
       id: true,
@@ -33,7 +43,7 @@ export const resourceListSelect = {
   },
 } satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
 
-export const getWhereResourcesList = (
+export const computeResourcesListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.ResourceWhereInput = {},
 ): Prisma.ResourceWhereInput => {
@@ -87,49 +97,53 @@ export const getWhereResourcesList = (
   }
 }
 
-const getWhereResourcesQuery = (
-  query?: string,
-  themes?: string[],
+const computeResourceSearchWhere = (
+  searchParams: SearchParams,
 ): Prisma.ResourceWhereInput | undefined => {
-  const whereQuery: Prisma.ResourceWhereInput[] = []
-  if (query) {
-    whereQuery.push({
+  const conditions: Prisma.ResourceWhereInput[] = []
+
+  if (searchParams.query) {
+    conditions.push({
       OR: [
-        { title: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
+        { title: { contains: searchParams.query, mode: 'insensitive' } },
+        { description: { contains: searchParams.query, mode: 'insensitive' } },
       ],
     })
   }
 
-  if (themes) {
-    for (const theme of themes) {
-      whereQuery.push({ themes: { has: theme as Theme } })
-    }
+  if (searchParams.themes) {
+    conditions.push({
+      themes: { hasSome: searchParams.themes },
+    })
   }
 
-  return whereQuery.length > 0
-    ? {
-        AND: whereQuery,
-      }
-    : undefined
+  if (searchParams.targetAudiences) {
+    conditions.push({
+      targetAudiences: { hasSome: searchParams.targetAudiences },
+    })
+  }
+
+  if (searchParams.supportTypes) {
+    conditions.push({
+      supportTypes: { hasSome: searchParams.supportTypes },
+    })
+  }
+
+  return {
+    AND: conditions,
+  }
 }
 
 export const getResourcesList = async ({
-  take,
   user,
-  skip,
-  query,
-  themes,
+  searchParams,
 }: {
-  take?: number
-  skip?: number
+  searchParams: SearchParams
   user?: Pick<SessionUser, 'id'> | null
-  query?: string
-  themes?: string[]
 }) => {
-  const where = getWhereResourcesList(
+  const where = computeResourcesListWhereForUser(
     user,
-    getWhereResourcesQuery(query, themes),
+    computeResourceSearchWhere(searchParams),
   )
 
   return prismaClient.resource.findMany({
@@ -140,8 +154,7 @@ export const getResourcesList = async ({
         created: 'desc',
       },
     ],
-    skip,
-    take,
+    ...takeAndSkip(searchParams.page),
   })
 }
 
@@ -153,14 +166,51 @@ export const getResourcesCount = ({
   query?: string
 }) =>
   prismaClient.resource.count({
-    where: getWhereResourcesList(user, getWhereResourcesQuery(query)),
+    where: computeResourcesListWhereForUser(
+      user,
+      computeResourceSearchWhere(query),
+    ),
   })
+
+// TODO We have to use raw query for certain type of operations, make the where clause work in those cases
+export const getResourcesCountByTheme = async ({
+  user,
+  query,
+}: {
+  user?: Pick<SessionUser, 'id'> | null
+  query?: string
+}) => {
+  // theme is snake_case in database
+  const counts = await prismaClient.$queryRaw<
+    { theme: Theme; count: number }[]
+  >`
+      SELECT unnest(themes) AS theme, CAST(COUNT(*) AS integer) AS "count"
+      FROM resources
+      GROUP BY theme
+      ORDER BY theme ASC;
+  `
+
+  // Initialize object with every theme (so that we have 0 for themes with no resources)
+  const result = Object.fromEntries(
+    Object.keys(themeCategories).map((theme) => [theme, 0]),
+  ) as { [theme in Theme]: number }
+
+  // Add the counts for each theme that have some resources
+  // Convert snake case from db to enum value
+  for (const { theme, count } of counts) {
+    result[pascalCase(theme)] = count
+  }
+
+  return result
+}
 
 export const getProfileResources = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = getWhereResourcesList(user, { createdById: profileId })
+  const where = computeResourcesListWhereForUser(user, {
+    createdById: profileId,
+  })
 
   return prismaClient.resource.findMany({
     where,
@@ -177,7 +227,9 @@ export const getProfileResourcesCount = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = getWhereResourcesList(user, { createdById: profileId })
+  const where = computeResourcesListWhereForUser(user, {
+    createdById: profileId,
+  })
 
   return prismaClient.resource.count({
     where,

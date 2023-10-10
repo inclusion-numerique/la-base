@@ -1,6 +1,7 @@
-.input {
+.searchBar {
   max-width: 588px;
   margin: auto;
+  position: relative;
 }
 
 .quickSearch {
@@ -17,19 +18,26 @@
   max-width: 588px;
   margin: auto;
   text-align: left;
+  padding: 16px;
 }
 
-.resultsContent {
-  padding: 16px;
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0;
+  color: var(--grey-425-625) !important;
 }
 
 .resultsFooter {
   padding: 16px 32px;
   border-top: var(--slim-grey-border);
 
-  a {
+  button {
     justify-content: center;
     width: 100%;
+    margin: 0;
   }
 }
 
@@ -64,9 +72,10 @@
 .resource,
 .base,
 .profile {
-  display: block;
+  display: flex;
   background-image: none;
   padding: 8px 16px;
+  flex-wrap: nowrap;
 
   &:hover {
     background-color: var(--background-default-grey-hover) !important;
@@ -79,4 +88,6 @@
   border-radius: 50%;
   background-color: var(--background-contrast-info);
   margin-right: 8px;
+  flex-shrink: 0;
 }
+

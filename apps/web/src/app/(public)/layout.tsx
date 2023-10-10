@@ -14,7 +14,9 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
         user={user}
         createResource={user ? <CreateResourceButton /> : undefined}
       />
-      {children}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {children}
+      </div>
       <PublicFooter />
     </div>
   )
