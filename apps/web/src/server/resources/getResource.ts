@@ -15,6 +15,7 @@ export const getResourceSelect = {
     select: {
       name: true,
       id: true,
+      isPublic: true,
     },
   },
   baseId: true,

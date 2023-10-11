@@ -39,6 +39,7 @@ export const createTestResource = (
     imageId: null,
     image: null,
     createdBy: {
+      isPublic: owner.isPublic,
       name: owner.name,
       id: owner.id,
     },

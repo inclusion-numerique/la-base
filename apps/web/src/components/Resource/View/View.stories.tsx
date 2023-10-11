@@ -31,6 +31,7 @@ const resource = (imageId: string | null) =>
     createdBy: {
       id: '1',
       name: 'Nom_utilisateur long long vraiment long tellement long que ca me soule !!!',
+      isPublic: true,
     },
     imageId,
     image: imageId
