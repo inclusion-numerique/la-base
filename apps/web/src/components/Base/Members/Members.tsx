@@ -1,7 +1,7 @@
 import React from 'react'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import ProfileCard from '@app/web/components/Profile/Card/Card'
-import AdminMemberCard from './AdminMemberCard'
+import AdminMemberCard from '../List/AdminMemberCard'
 import InviteMemberButton from './InviteMemberButton'
 import styles from './Members.module.css'
 

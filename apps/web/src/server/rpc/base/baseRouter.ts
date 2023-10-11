@@ -1,9 +1,11 @@
 import z from 'zod'
+import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
 import { UpdateBaseCommandValidation } from '@app/web/server/bases/updateBase'
 import { handleResourceMutationCommand } from '../../resources/feature/handleResourceMutationCommand'
+import { sendInviteMemberEmail } from '../baseMember/invitationEmail'
 import { createUniqueSlug } from './createUniqueSlug'
 
 // TODO - Check user permission
@@ -13,15 +15,50 @@ export const baseRouter = router({
     .mutation(async ({ input, ctx: { user } }) => {
       const slug = await createUniqueSlug(input.title)
 
-      return prismaClient.base.create({
+      const members = await prismaClient.user.findMany({
+        select: { id: true, email: true },
+        where: {
+          id: { in: input.members.filter((member) => member !== user.id) },
+        },
+      })
+
+      const tokens: Record<string, string> = {}
+      for (const member of members) {
+        tokens[member.id] = v4()
+      }
+
+      const base = await prismaClient.base.create({
         data: {
           ...input,
           slug,
           titleDuplicationCheckSlug: slug,
           ownerId: user.id,
-          members: { create: [{ memberId: user.id, isAdmin: true }] },
+          members: {
+            create: [
+              { memberId: user.id, isAdmin: true },
+              ...members.map((member) => ({
+                memberId: member.id,
+                acceptationToken: tokens[member.id],
+              })),
+            ],
+          },
         },
       })
+
+      Promise.all([
+        members.map((member) =>
+          sendInviteMemberEmail({
+            baseTitle: input.title,
+            from: user,
+            url: `/bases/${slug}/invitations/accepter/${tokens[member.id]}`,
+            email: member.email,
+          }),
+        ),
+      ])
+        // TODO: a sentry here would be nice
+        .catch(() => console.log('Email non envoyé'))
+
+      return base
     }),
   mutate: protectedProcedure
     .input(UpdateBaseCommandValidation)

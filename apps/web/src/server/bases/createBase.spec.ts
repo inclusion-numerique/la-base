@@ -6,6 +6,7 @@ const validCommand: CreateBaseCommand = {
   isPublic: true,
   email: 'e@mail.fr',
   emailIsPublic: true,
+  members: [],
 }
 
 describe('CreateBaseCommand', () => {
@@ -23,6 +24,7 @@ describe('CreateBaseCommand', () => {
       facebook: 'https://facebook.fr',
       twitter: 'https://twitter.fr',
       linkedin: 'https://linkedin.fr',
+      members: ['member-1', 'member-2'],
     })
     expect(result.success).toEqual(true)
   })

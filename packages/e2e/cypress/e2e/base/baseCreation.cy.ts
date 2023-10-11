@@ -1,4 +1,4 @@
-import { appUrl } from '@app/e2e/support/helpers'
+import { appUrl, createTestUser } from '@app/e2e/support/helpers'
 import { cleanUp } from '../resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses ressources', () => {
@@ -83,5 +83,75 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('cancel-button').click()
     cy.testId('cancel-modal-button').click()
     cy.url().should('contain', appUrl(`/`))
+  })
+
+  it('Acceptation 6 - tentative de création de base avec mauvaises adresses', () => {
+    cy.visit('/bases/creer')
+
+    cy.testId('base-title-input').type('Ma déclaration')
+    cy.testId('base-email-input').type('france@gall.fr')
+    cy.testId('visibility-radio-base-public').click({ force: true })
+
+    cy.testId('invite-member-modal-input').type('t{enter}')
+
+    cy.testId('create-button').click()
+
+    cy.testId('invite-members-error').should(
+      'have.text',
+      'Merci de vérifier la liste des profils que vous souhaitez inviter.',
+    )
+  })
+
+  it.only('Acceptation 7 - Création de base avec membres', () => {
+    cy.intercept('/api/trpc/profile.getMatchingUsers?*').as('getUser')
+
+    cy.visit('/bases/creer')
+    const user = createTestUser({ firstName: 'Leila', lastName: 'Huissoud' })
+    cy.createUser(user)
+
+    cy.testId('base-title-input').type('Ma déclaration')
+    cy.testId('base-email-input').type('france@gall.fr')
+    cy.testId('visibility-radio-base-public').click({ force: true })
+
+    cy.testId('invite-member-modal-input').type('huissoud')
+    cy.wait('@getUser')
+    cy.testId('invite-member-modal-input-option-0').click()
+
+    cy.testId('create-button').click()
+    cy.visit('/bases/ma-declaration/membres')
+
+    cy.testId('member-card-admin').should('have.length', 2)
+
+    cy.signin({ email: user.email })
+    cy.log('Go check emails in maildev server')
+    // Go to maildev server to checkout the email and get the magic link
+    cy.visit('localhost:1080')
+    cy.get('.email-list li a').first().click()
+
+    cy.get('.email-meta .subject').should(
+      'contain',
+      'Invitation à rejoindre la base',
+    )
+
+    // Cypress does not work well with iframes, we go to the html source of the email that is
+    // included in the iframe preview of maildev ui
+    cy.url().then((url) => {
+      const emailPath = url.split('#').at(-1)
+      if (!emailPath) {
+        throw new Error('Could not find email content path from maildev url')
+      }
+      cy.visit(`localhost:1080${emailPath}/html`)
+    })
+
+    cy.log('Check mail contents')
+    // We should not have the email html version in full
+    cy.contains(
+      'Vous êtes invité par Jean Biche à rejoindre la base Ma déclaration.',
+    )
+    cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+    cy.url().should('equal', appUrl('/bases/ma-declaration'))
+    cy.visit('/bases/ma-declaration/membres')
+    cy.testId('profile-card').should('have.length', 2)
+    cy.testId('member-card-admin').should('not.exist')
   })
 })

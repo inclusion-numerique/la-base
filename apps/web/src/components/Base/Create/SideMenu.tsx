@@ -29,7 +29,7 @@ const BaseSideMenu = () => (
             },
           },
           {
-            text: <div className="wip">Inviter des membres</div>,
+            text: 'Inviter des membres',
             linkProps: {
               href: '#inviter',
             },

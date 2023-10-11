@@ -59,7 +59,11 @@ const InviteUsers = ({
             : []
         }
       />
-      {error?.message && <p className="fr-error-text">{error.message}</p>}
+      {error?.message && (
+        <p className="fr-error-text" data-testid="invite-members-error">
+          {error.message}
+        </p>
+      )}
     </>
   )
 }

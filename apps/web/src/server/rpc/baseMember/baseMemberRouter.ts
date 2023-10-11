@@ -51,7 +51,7 @@ export const baseMemberRouter = router({
           })
 
           sendInviteMemberEmail({
-            base,
+            baseTitle: base.title,
             from: user,
             url: `/bases/${base.slug}/invitations/accepter/${acceptationToken}`,
             email: member.email,

@@ -6,13 +6,6 @@
   }
 }
 
-.card {
-  width: 100%;
-  max-width: 588px;
-  border: var(--slim-grey-border);
-  padding: 32px;
-}
-
 .buttons {
   margin-top: 120px;
   border-top: var(--slim-grey-border);

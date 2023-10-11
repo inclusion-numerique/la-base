@@ -7,7 +7,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import EmptyResources from '@app/web/components/Base/EmptyResources'
 import { filterAccess } from '@app/web/server/bases/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
-import Members from '@app/web/components/Base/List/Members'
+import Members from '@app/web/components/Base/Members/Members'
 
 const BaseMembersPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()

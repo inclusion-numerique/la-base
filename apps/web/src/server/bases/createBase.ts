@@ -20,6 +20,7 @@ export const CreateBaseCommandValidation = z.object({
   facebook: siteValidation,
   twitter: siteValidation,
   linkedin: siteValidation,
+  members: z.array(z.string()),
 })
 
 export type CreateBaseCommand = z.infer<typeof CreateBaseCommandValidation>

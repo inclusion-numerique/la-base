@@ -1,28 +1,29 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import { Controller, UseFormReturn, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
 import {
   CreateBaseCommand,
   CreateBaseCommandValidation,
 } from '@app/web/server/bases/createBase'
-import { PrivacyTag } from '@app/web/components/PrivacyTags'
 import {
   UpdateBaseContactsCommand,
   UpdateBaseInformationsCommand,
+  UpdateBaseVisibilityCommand,
 } from '@app/web/server/bases/updateBase'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
+import Card from '../../Card'
+import VisibilityEdition from '../Edition/VisibilityEdition'
+import InviteUsers from '../../InviteUsers'
 import BaseSideMenu from './SideMenu'
 import styles from './CreateBase.module.css'
 
@@ -44,13 +45,24 @@ const CreateBase = () => {
     },
   })
   const {
-    control,
     handleSubmit,
     setError,
     formState: { isSubmitting },
+    control,
   } = form
+
+  const [emailErrors, setEmailsError] = useState(false)
+
   const mutate = trpc.base.create.useMutation()
   const onSubmit = async (data: CreateBaseCommand) => {
+    if (emailErrors) {
+      form.setError('members', {
+        message:
+          'Merci de vérifier la liste des profils que vous souhaitez inviter.',
+      })
+      return
+    }
+
     try {
       const base = await mutate.mutateAsync(data)
       router.refresh()
@@ -66,15 +78,12 @@ const CreateBase = () => {
         <BaseSideMenu />
         <div>
           <h1 className="fr-mb-6w">Créer une base</h1>
-          <div
-            className={classNames('fr-mt-3w', styles.card)}
+          <Card
+            title="Informations"
+            className="fr-mt-3w"
             id="informations"
+            asterisk
           >
-            <h5 className="fr-mb-1w">Informations de la base</h5>
-            <p className="fr-text--sm fr-hint-text fr-mb-0">
-              Les champs avec <RedAsterisk /> sont obligatoires.
-            </p>
-            <hr className="fr-mt-4w fr-pb-4w" />
             <BaseInformationsEdition
               form={
                 form as UseFormReturn<
@@ -82,14 +91,8 @@ const CreateBase = () => {
                 >
               }
             />
-          </div>
-
-          <div className={classNames('fr-mt-3w', styles.card)} id="contacts">
-            <h5 className="fr-mb-1w">Contacts</h5>
-            <p className="fr-text--sm fr-hint-text fr-mb-0">
-              Les champs avec <RedAsterisk /> sont obligatoires.
-            </p>
-            <hr className="fr-mt-4w fr-pb-4w" />
+          </Card>
+          <Card title="Contacts" className="fr-mt-3w" id="contacts" asterisk>
             <BaseContactsEdition
               form={
                 form as UseFormReturn<
@@ -97,93 +100,51 @@ const CreateBase = () => {
                 >
               }
             />
-          </div>
+          </Card>
+          <Card
+            title="Visibilité de la base"
+            className="fr-mt-3w"
+            id="visibilite"
+            description="Choisissez la visibilité de votre base. Vous pourrez modifier sa visibilité à tout moment."
+          >
+            <VisibilityEdition
+              control={
+                (
+                  form as UseFormReturn<
+                    CreateBaseCommand | UpdateBaseVisibilityCommand
+                  >
+                ).control
+              }
+            />
+          </Card>
 
-          <div className={classNames('fr-mt-3w', styles.card)} id="visibilite">
-            <h5 className="fr-mb-1w">Visibilité de la base</h5>
-            Choisissez la visibilité de votre base. Vous pourrez modifier sa
-            visibilité à tout moment.
-            <hr className="fr-mt-4w fr-pb-4w" />
+          <Card
+            className="fr-mt-3w"
+            title="Inviter des membres"
+            description="Les membres peuvent voir, créer, publier et contribuer à l’ensemble des ressources liées à votre base. Vous pouvez également ajouter des administrateurs qui pourront inviter et gérer les membres de la base."
+          >
             <Controller
               control={control}
-              name="isPublic"
-              render={({
-                field: { onChange, name, value },
-                fieldState: { error },
-              }) => (
-                <fieldset
-                  className="fr-fieldset"
-                  id="radio-rich"
-                  aria-labelledby="radio-rich-legend radio-rich-messages"
-                >
-                  <ResourceBaseRichRadioElement
-                    id="radio-base-public"
-                    data-testid="visibility-radio-base-public"
-                    name={name}
-                    value={
-                      value === undefined || value === null
-                        ? null
-                        : value.toString()
-                    }
-                    radioValue="true"
-                    onChange={() => {
-                      onChange(true)
-                    }}
-                  >
-                    <span className="fr-mr-1w">Base publique</span>
-                    <PrivacyTag isPublic />
-                  </ResourceBaseRichRadioElement>
-                  <ResourceBaseRichRadioElement
-                    id="radio-base-private"
-                    data-testid="visibility-radio-base-private"
-                    name={name}
-                    value={
-                      value === undefined || value === null
-                        ? null
-                        : value.toString()
-                    }
-                    radioValue="false"
-                    onChange={() => {
-                      onChange(false)
-                    }}
-                  >
-                    <span className="fr-mr-1w">Base privée</span>
-                    <PrivacyTag />
-                  </ResourceBaseRichRadioElement>
-                  {error && (
-                    <p
-                      className="fr-error-text"
-                      id="input-form-field__isPublic__error"
-                    >
-                      {error.message}
-                    </p>
-                  )}
-                </fieldset>
+              name="members"
+              render={({ field: { onChange }, fieldState: { error } }) => (
+                <InviteUsers
+                  label="Ajouter un membre"
+                  setEmailsError={setEmailsError}
+                  error={error}
+                  onChange={onChange}
+                />
               )}
             />
-          </div>
+          </Card>
 
-          <div
-            className={classNames('fr-mt-3w', 'wip', styles.card)}
-            id="inviter"
-          >
-            <h5 className="fr-mb-1w">Inviter des memebres</h5>
-            Les membres peuvent voir, créer, publier et contribuer à l’ensemble
-            des ressources liées à votre base. Vous pouvez également ajouter des
-            administrateurs qui pourront inviter et gérer les membres de la
-            base.
-            <hr className="fr-mt-4w fr-pb-4w" />
-          </div>
-
-          <div
-            className={classNames('fr-mt-3w', 'wip', styles.card)}
+          <Card
+            className="fr-mt-3w wip"
             id="photos"
+            title="Photo de profil & couverture"
+            description="Ajouter une image de profil & une image de couverture pour vous rendre identifiable et attirer les visiteurs."
           >
-            <h5 className="fr-mb-1w">Photo de profil & couverture</h5>
-            Ajouter une image de profil & une image de couverture pour vous
-            rendre identifiable et attirer les visiteurs.
-            <hr className="fr-mt-4w fr-pb-4w" />
-          </div>
+            TODO
+          </Card>
         </div>
       </div>
       <div className={styles.buttons}>

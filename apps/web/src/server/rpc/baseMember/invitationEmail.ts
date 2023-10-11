@@ -3,27 +3,26 @@ import { compileMjml } from '@app/emails/mjml'
 import { inviteMember } from '@app/emails/templates/inviteMember'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { ServerWebAppConfig } from '@app/web/webAppConfig'
-import { BasePageData } from '../../bases/getBase'
 
 export const sendInviteMemberEmail = async ({
   url,
   email,
-  base,
+  baseTitle,
   from,
 }: {
   url: string
   email: string
-  base: BasePageData
+  baseTitle: string
   from: SessionUser
 }) => {
   const transport = createTransport(ServerWebAppConfig.Email.server)
   const result = await transport.sendMail({
     to: email,
     from: ServerWebAppConfig.Email.from,
-    subject: `Invitation à rejoindre la base ${base.title}`,
-    text: inviteMember.text({ url, baseTitle: base.title }),
+    subject: `Invitation à rejoindre la base ${baseTitle}`,
+    text: inviteMember.text({ url, baseTitle }),
     html: compileMjml(
-      inviteMember.mjml({ url, baseTitle: base.title, from: from.name || '' }),
+      inviteMember.mjml({ url, baseTitle, from: from.name || '' }),
     ),
   })
 
