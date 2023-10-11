@@ -4,6 +4,10 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import HeaderBackLink from '@app/web/components/HeaderBackLink'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import { PublicWebAppConfig } from '@app/web/webAppConfig'
+import {
+  defaultSearchParams,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 
 const createResourceConnectionLink = (
   <Link
@@ -76,7 +80,7 @@ const Header = ({
               <ul className="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left">
                 <li>
                   <Link
-                    href="/rechercher"
+                    href={searchUrl('ressources', defaultSearchParams)}
                     className="fr-btn fr-icon-search-line"
                   >
                     Rechercher

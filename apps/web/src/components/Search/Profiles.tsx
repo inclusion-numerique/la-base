@@ -12,7 +12,7 @@ const Profiles = ({
   profiles: ProfileListItem[]
   totalCount: number
 }) => (
-  <div className={styles.container}>
+  <div>
     <div className={styles.header}>
       <p className="fr-text--lg fr-mb-0">
         <b>

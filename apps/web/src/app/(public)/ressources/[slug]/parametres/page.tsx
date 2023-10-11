@@ -5,6 +5,10 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getResource } from '@app/web/server/resources/getResource'
 import { filterAccess } from '@app/web/server/resources/authorization'
 import Parameters from '@app/web/components/Resource/Edition/Parameters/Parameters'
+import {
+  defaultSearchParams,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 
 const ResourceParametersPage = async ({
   params,
@@ -32,7 +36,10 @@ const ResourceParametersPage = async ({
         <Breadcrumbs
           currentPage="Paramètres de la ressource"
           parents={[
-            { label: 'Ressources', linkProps: { href: '/rechercher' } },
+            {
+              label: 'Ressources',
+              linkProps: { href: searchUrl('ressources', defaultSearchParams) },
+            },
             {
               label: resource.title,
               linkProps: { href: `/ressources/${resource.slug}` },

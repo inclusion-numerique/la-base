@@ -18,6 +18,10 @@ import {
   PublishCommand,
   PublishCommandValidation,
 } from '@app/web/server/resources/feature/PublishResource'
+import {
+  defaultSearchParams,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import BaseEdition from './BaseEdition'
@@ -214,7 +218,7 @@ const Edition = ({
       // While waiting for https://github.com/vercel/next.js/issues/42991, router.refresh() will invalidate router client cache
       // See https://nextjs.org/docs/app/building-your-application/caching#invalidation-1
       router.refresh()
-      router.push(`/rechercher`)
+      router.push(searchUrl('ressources', defaultSearchParams))
     } catch (error) {
       console.error('Could not delete resource', error)
       // TODO Have a nice error and handle edge cases server side

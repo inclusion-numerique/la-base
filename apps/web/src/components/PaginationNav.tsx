@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
 import Link from 'next/link'
+import classNames from 'classnames'
 
 // Only display at most 6 pages numbered links
 /**
@@ -35,10 +36,12 @@ export const createPagesNumbersToDisplay = (
 export type PaginationNavProps = ComponentProps<typeof PaginationNav>
 
 const PaginationNav = ({
+  className,
   createPageLink,
   totalPages,
   pageNumber,
 }: {
+  className?: string
   pageNumber: number
   totalPages: number
   createPageLink: (pageNumber: number) => string
@@ -49,14 +52,21 @@ const PaginationNav = ({
   const linkablePages = createPagesNumbersToDisplay(totalPages, pageNumber)
 
   return (
-    <nav role="navigation" aria-label="Pagination" className="fr-pagination">
+    <nav
+      role="navigation"
+      aria-label="Pagination"
+      className={classNames(
+        'fr-pagination fr-flex fr-justify-content-center',
+        className,
+      )}
+    >
       <ul className="fr-pagination__list">
         <li>
           {isFirstPage ? (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--first"
               aria-disabled="true"
-              href={createPageLink(1)}
             >
               Première page
             </a>
@@ -73,10 +83,10 @@ const PaginationNav = ({
         </li>
         <li>
           {isFirstPage ? (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
               aria-disabled="true"
-              href={createPageLink(1)}
             >
               Page précédente
             </a>
@@ -114,10 +124,10 @@ const PaginationNav = ({
         )}
         <li>
           {isLastPage ? (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
               aria-disabled="true"
-              href={createPageLink(totalPages)}
             >
               Page suivante
             </a>
@@ -134,10 +144,10 @@ const PaginationNav = ({
         </li>
         <li>
           {isLastPage ? (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--last"
               aria-disabled="true"
-              href={createPageLink(totalPages)}
             >
               Dernière page
             </a>

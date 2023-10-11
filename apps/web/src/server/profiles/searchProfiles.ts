@@ -1,7 +1,9 @@
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
+  defaultPaginationParams,
   defaultSearchParams,
+  PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
@@ -26,28 +28,30 @@ export const countProfiles = async (
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-    SELECT count(*)::integer as count 
-    FROM users
-      WHERE
-         (
-              coalesce(${searchTerm}, '___empty___') = '___empty___' 
-              OR to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||  ' ' || coalesce(users.title, '') ||  ' ' || coalesce(users.description, ''))) @@
+      SELECT count(*)::integer as count
+      FROM users
+      WHERE (
+                  coalesce(${searchTerm}, '___empty___') = '___empty___'
+              OR to_tsvector('french',
+                             unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
+                                      coalesce(users.title, '') || ' ' || coalesce(users.description, ''))) @@
                  plainto_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
           /* Authorization*/
           /* User is public  */
-                users.is_public = true
+                  users.is_public = true
               /* User is private and user is self */
               OR users.id = ${userId}::uuid
           )
-`
+  `
 
   return result[0]?.count ?? 0
 }
 
 export const rankProfiles = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   // To keep good dev ux, we first fetch the ids of the resources matching the search
@@ -66,19 +70,26 @@ export const rankProfiles = async (
     }[]
   >`
       SELECT users.id,
-             to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||  ' ' || coalesce(users.title, '') ||  ' ' || coalesce(users.description, '')))::text AS document_tsv,
-             plainto_tsquery('french', unaccent(${searchTerm}))::text                               AS query,
-             ts_rank(to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||  ' ' || coalesce(users.title, '') ||  ' ' || coalesce(users.description, ''))),
-                     plainto_tsquery('french', unaccent(${searchTerm})))                            AS rank,
-             ts_rank_cd(to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||  ' ' || coalesce(users.title, '') ||  ' ' || coalesce(users.description, ''))),
-                        plainto_tsquery('french', unaccent(${searchTerm})))                         AS rank_cd
+             to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
+                                            coalesce(users.title, '') || ' ' ||
+                                            coalesce(users.description, '')))::text AS document_tsv,
+             plainto_tsquery('french', unaccent(${searchTerm}))::text               AS query,
+             ts_rank(to_tsvector('french',
+                                 unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
+                                          coalesce(users.title, '') || ' ' || coalesce(users.description, ''))),
+                     plainto_tsquery('french', unaccent(${searchTerm})))            AS rank,
+             ts_rank_cd(to_tsvector('french',
+                                    unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
+                                             coalesce(users.title, '') || ' ' || coalesce(users.description, ''))),
+                        plainto_tsquery('french', unaccent(${searchTerm})))         AS rank_cd
       FROM users
-      WHERE
-          (
-                      coalesce(${searchTerm}, '___empty___') = '___empty___'
-                  OR to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||  ' ' || coalesce(users.title, '') ||  ' ' || coalesce(users.description, ''))) @@
-                     plainto_tsquery('french', unaccent(${searchTerm}))
-              )
+      WHERE (
+                  coalesce(${searchTerm}, '___empty___') = '___empty___'
+              OR to_tsvector('french',
+                             unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
+                                      coalesce(users.title, '') || ' ' || coalesce(users.description, ''))) @@
+                 plainto_tsquery('french', unaccent(${searchTerm}))
+          )
         AND (
           /* Authorization*/
           /* User is public  */
@@ -88,8 +99,8 @@ export const rankProfiles = async (
           )
       /* Order by updated desc to have most recent first on empty query */
       ORDER BY rank DESC, users.updated DESC
-      LIMIT ${searchParams.perPage} OFFSET ${
-        (searchParams.page - 1) * searchParams.perPage
+      LIMIT ${paginationParams.perPage} OFFSET ${
+        (paginationParams.page - 1) * paginationParams.perPage
       };
   `
   // Where IN does not garantee same order as the ids array so we have to sort the results in memory
@@ -105,10 +116,12 @@ export const rankProfiles = async (
 
 export const searchProfiles = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const { searchResults, resultIndexById } = await rankProfiles(
     searchParams,
+    paginationParams,
     user,
   )
 
@@ -131,7 +144,8 @@ export const quickSearchProfiles = async (
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const { searchResults, resultIndexById } = await rankProfiles(
-    { ...defaultSearchParams, query, perPage: 3 },
+    { ...defaultSearchParams, query },
+    { ...defaultPaginationParams, perPage: 3 },
     user,
   )
 

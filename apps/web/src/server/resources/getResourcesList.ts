@@ -4,14 +4,6 @@ import { pascalCase } from 'change-case'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { themeCategories } from '@app/web/themes/themes'
-import { SearchParams } from '@app/web/server/search/searchQueryParams'
-
-const pageSize = 4
-
-const takeAndSkip = (page: number) => ({
-  take: pageSize,
-  skip: (page - 1) * pageSize,
-})
 
 export const resourceListSelect = {
   id: true,
@@ -97,67 +89,6 @@ export const computeResourcesListWhereForUser = (
   }
 }
 
-const computeResourceSearchWhere = (
-  searchParams: SearchParams,
-): Prisma.ResourceWhereInput | undefined => {
-  const conditions: Prisma.ResourceWhereInput[] = []
-
-  if (searchParams.query) {
-    conditions.push({
-      OR: [
-        { title: { contains: searchParams.query, mode: 'insensitive' } },
-        { description: { contains: searchParams.query, mode: 'insensitive' } },
-      ],
-    })
-  }
-
-  if (searchParams.themes) {
-    conditions.push({
-      themes: { hasSome: searchParams.themes },
-    })
-  }
-
-  if (searchParams.targetAudiences) {
-    conditions.push({
-      targetAudiences: { hasSome: searchParams.targetAudiences },
-    })
-  }
-
-  if (searchParams.supportTypes) {
-    conditions.push({
-      supportTypes: { hasSome: searchParams.supportTypes },
-    })
-  }
-
-  return {
-    AND: conditions,
-  }
-}
-
-export const getResourcesList = async ({
-  user,
-  searchParams,
-}: {
-  searchParams: SearchParams
-  user?: Pick<SessionUser, 'id'> | null
-}) => {
-  const where = computeResourcesListWhereForUser(
-    user,
-    computeResourceSearchWhere(searchParams),
-  )
-
-  return prismaClient.resource.findMany({
-    where,
-    select: resourceListSelect,
-    orderBy: [
-      {
-        created: 'desc',
-      },
-    ],
-    ...takeAndSkip(searchParams.page),
-  })
-}
-
 export const getResourcesCountByTheme = async () => {
   // theme is snake_case in database
   const counts = await prismaClient.$queryRaw<
@@ -215,7 +146,6 @@ export const getProfileResourcesCount = async (
   })
 }
 
-export type ResourceListItem = Exclude<
-  Awaited<ReturnType<typeof getResourcesList>>,
-  null
+export type ResourceListItem = Awaited<
+  ReturnType<typeof getProfileResources>
 >[number]

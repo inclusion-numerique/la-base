@@ -1,78 +1,48 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { redirect } from 'next/navigation'
 import {
+  PaginationParams,
   SearchParams,
-  searchParamsToUrl,
+  SearchTab,
+  searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import Menu from '@app/web/components/Search/Menu'
-import Resources from '@app/web/components/Search/Resources'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import PaginationNav from '@app/web/components/PaginationNav'
-import Bases from '@app/web/components/Search/Bases'
-import Profiles from '@app/web/components/Search/Profiles'
-import { executeSearch } from '@app/web/server/search/executeSearch'
 
-const SearchResults = async ({
+const SearchResults = ({
   searchParams,
-  user,
-}: {
+  paginationParams,
+  tab,
+  count,
+  children,
+}: PropsWithChildren<{
+  count: number
+  tab: SearchTab
   searchParams: SearchParams
-  user: SessionUser | null
-}) => {
-  const searchResults = await executeSearch(searchParams, user)
-
-  // Only the relevant items depending on current tab
-  const itemsCount =
-    searchResults.resources.length +
-    searchResults.bases.length +
-    searchResults.profiles.length
-
-  const totalPages = Math.ceil(itemsCount / searchParams.perPage)
+  paginationParams: PaginationParams
+}>) => {
+  const totalPages = Math.ceil(count / paginationParams.perPage)
 
   // Redirect user to last page if the current page is out of bounds with new search params
-  if (totalPages > 0 && searchParams.page > totalPages) {
-    redirect(searchParamsToUrl({ ...searchParams, page: totalPages }))
+  if (totalPages > 0 && paginationParams.page > totalPages) {
+    redirect(
+      searchUrl(tab, searchParams, { ...paginationParams, page: totalPages }),
+    )
   }
   const createPageLink = (pageNumber: number) =>
-    searchParamsToUrl({ ...searchParams, page: pageNumber })
+    searchUrl(tab, searchParams, { ...paginationParams, page: pageNumber })
 
   return (
-    <>
-      <Menu
-        searchParams={searchParams}
-        resourcesCount={searchResults.resourcesCount}
-        profilesCount={searchResults.profilesCount}
-        basesCount={searchResults.basesCount}
-      />
-      <div className="fr-container">
-        {searchParams.tab === 'ressources' && (
-          <Resources
-            totalCount={searchResults.resourcesCount}
-            resources={searchResults.resources}
-            user={user}
-          />
-        )}
-        {searchParams.tab === 'bases' && (
-          <Bases
-            totalCount={searchResults.basesCount}
-            bases={searchResults.bases}
-          />
-        )}
-        {searchParams.tab === 'profils' && (
-          <Profiles
-            totalCount={searchResults.profilesCount}
-            profiles={searchResults.profiles}
-          />
-        )}
-        {itemsCount > 0 && (
-          <PaginationNav
-            pageNumber={searchParams.page}
-            totalPages={totalPages}
-            createPageLink={createPageLink}
-          />
-        )}
-      </div>
-    </>
+    <div className="fr-container fr-container--medium fr-mb-30v">
+      {children}
+      {count > 0 && (
+        <PaginationNav
+          className="fr-mt-12v"
+          pageNumber={paginationParams.page}
+          totalPages={totalPages}
+          createPageLink={createPageLink}
+        />
+      )}
+    </div>
   )
 }
 

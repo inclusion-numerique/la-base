@@ -1,28 +1,46 @@
+// import * as queryString from 'node:querystring'
 import { SupportType, TargetAudience, Theme } from '@prisma/client'
 import { themeLabels } from '@app/web/themes/themes'
 import { supportTypeLabels } from '@app/web/themes/supportTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { searchParamsFromQueryString } from '@app/web/utils/searchParamsFromQueryString'
 
 export const searchTabs = ['ressources', 'bases', 'profils'] as const
 export type SearchTab = (typeof searchTabs)[number]
+export const searchTabFromString = (
+  tab: string | string[] | null,
+): SearchTab => {
+  if (typeof tab !== 'string') {
+    return 'ressources'
+  }
+  return searchTabs.includes(tab as SearchTab)
+    ? (tab as SearchTab)
+    : 'ressources'
+}
 
-export const sortOptions = [
+// We need a segment, even when there is no active search term
+export const searchSegmentAll = 'tout'
+
+export const sorting = [
   'pertinence',
   'recent',
   'ancien',
   'vues',
   'enregistrements',
 ] as const
-export type SortOption = (typeof sortOptions)[number]
+export type Sorting = (typeof sorting)[number]
 
 // Unsanitized params from the URL
 export type UrlSearchQueryParams = {
-  recherche?: string | string[] | null
+  r?: string | string[] | null
   thematiques?: string | string[] | null
   types?: string | string[] | null
   publics?: string | string[] | null
   departements?: string | string[] | null
   onglet?: string | string[] | null
+}
+
+export type UrlPaginationParams = {
   page?: string | string[] | null
   tri?: string | string[] | null
 }
@@ -34,19 +52,23 @@ export type SearchParams = {
   supportTypes: SupportType[]
   targetAudiences: TargetAudience[]
   departements: string[]
-  tab: SearchTab
+}
+
+export type PaginationParams = {
   page: number
   perPage: number
-  sort: SortOption
+  sort: Sorting
 }
 
 export const defaultSearchParams: Readonly<SearchParams> = {
   query: null,
-  tab: 'ressources',
   themes: [],
   supportTypes: [],
   targetAudiences: [],
   departements: [],
+}
+
+export const defaultPaginationParams: Readonly<PaginationParams> = {
   page: 1,
   perPage: 16,
   sort: 'pertinence',
@@ -74,19 +96,9 @@ export const sanitizeUrlSearchQueryParams = (
 
   const departementsAsArray = queryParamToArray(params?.departements)
 
-  const trimmedRecherche =
-    typeof params?.recherche === 'string' ? params.recherche.trim() : ''
+  const trimmedRecherche = typeof params?.r === 'string' ? params.r.trim() : ''
 
   const query = trimmedRecherche || null
-
-  const sortOptionString =
-    typeof params?.tri === 'string' ? params.tri.trim() : ''
-
-  const sort = sortOptions.includes(sortOptionString as SortOption)
-    ? (sortOptionString as SortOption)
-    : query
-    ? 'pertinence'
-    : 'recent'
 
   const themes = thematiquesAsArray.filter(
     (theme) => theme in themeLabels,
@@ -100,23 +112,41 @@ export const sanitizeUrlSearchQueryParams = (
     (target) => target in targetAudienceLabels,
   ) as TargetAudience[]
 
-  const page =
-    typeof params?.page === 'string' ? Number.parseInt(params.page, 10) || 1 : 1
-
   return {
     query,
     themes,
     supportTypes,
     targetAudiences,
     departements: departementsAsArray,
+  }
+}
+
+export const searchParamsFromSegment = (segment: string) => {
+  if (segment === searchSegmentAll) {
+    return defaultSearchParams
+  }
+
+  const parsed = searchParamsFromQueryString(segment)
+
+  return sanitizeUrlSearchQueryParams(parsed)
+}
+
+export const sanitizeUrlPaginationParams = (
+  params?: UrlPaginationParams,
+): PaginationParams => {
+  const page =
+    typeof params?.page === 'string' ? Number.parseInt(params.page, 10) || 1 : 1
+
+  const sortOptionString =
+    typeof params?.tri === 'string' ? params.tri.trim() : ''
+
+  const sort = sorting.includes(sortOptionString as Sorting)
+    ? (sortOptionString as Sorting)
+    : 'pertinence'
+
+  return {
     page: page > 0 ? page : 1,
-    tab:
-      params?.onglet &&
-      typeof params.onglet === 'string' &&
-      searchTabs.includes(params.onglet as SearchTab)
-        ? (params.onglet as SearchTab)
-        : 'ressources',
-    perPage: defaultSearchParams.perPage,
+    perPage: defaultPaginationParams.perPage,
     sort,
   }
 }
@@ -125,38 +155,65 @@ export const sanitizeUrlSearchQueryParams = (
 const searchParamsToUrlQueryParams = (
   params: SearchParams,
 ): UrlSearchQueryParams => ({
-  recherche: params.query ?? undefined,
+  r: params.query ?? undefined,
   thematiques: params.themes.length > 0 ? params.themes : undefined,
   departements:
     params.departements.length > 0 ? params.departements : undefined,
   types: params.supportTypes.length > 0 ? params.supportTypes : undefined,
   publics:
     params.targetAudiences.length > 0 ? params.targetAudiences : undefined,
-  onglet: params.tab === 'ressources' ? undefined : params.tab,
-  page: params.page > 1 ? params.page.toString(10) : undefined,
-  tri: params.query
-    ? params.sort === 'pertinence'
-      ? undefined
-      : params.sort
-    : params.sort === 'recent'
-    ? undefined
-    : params.sort,
 })
 
-export const searchParamsToUrl = (params: SearchParams): string => {
-  const urlParams = searchParamsToUrlQueryParams(params)
+export const paginationParamsToUrlQueryParams = (
+  params: PaginationParams,
+): UrlPaginationParams => ({
+  page: params.page > 1 ? params.page.toString(10) : undefined,
+  tri: params.sort === 'pertinence' ? undefined : params.sort,
+})
+
+const objectToQueryString = (params: Record<string, unknown>): string => {
   const urlSafeParams = new URLSearchParams()
-  for (const [key, value] of Object.entries(urlParams)) {
+  for (const [key, value] of Object.entries(params)) {
     if (!value) {
       continue
     }
     if (Array.isArray(value)) {
       for (const element of value) {
-        urlSafeParams.append(key, element)
+        if (typeof element === 'string') {
+          urlSafeParams.append(key, element)
+        }
       }
       continue
     }
-    urlSafeParams.append(key, value)
+    if (typeof value === 'string') {
+      urlSafeParams.append(key, value)
+    }
   }
-  return `/rechercher?${urlSafeParams.toString()}`
+  return urlSafeParams.toString()
+}
+
+const searchParamsToUrl = (params: SearchParams): string => {
+  const urlParams = searchParamsToUrlQueryParams(params)
+  return objectToQueryString(urlParams)
+}
+
+const paginationParamsToUrl = (params: PaginationParams): string => {
+  const urlParams = paginationParamsToUrlQueryParams(params)
+  return objectToQueryString(urlParams)
+}
+
+export const searchUrl = (
+  tab: SearchTab,
+  params: SearchParams,
+  pagination?: PaginationParams,
+): string => {
+  const searchPart = searchParamsToUrl(params)
+  // We always need a segment, even if it's empty
+  const searchSegment = searchPart || searchSegmentAll
+
+  const paginationPart = pagination ? paginationParamsToUrl(pagination) : ''
+
+  const paginationQuery = paginationPart ? `?${paginationPart}` : ''
+
+  return `/rechercher/${searchSegment}/${tab}${paginationQuery}`
 }

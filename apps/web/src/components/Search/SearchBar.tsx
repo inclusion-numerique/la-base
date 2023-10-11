@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import Link from 'next/link'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
@@ -10,13 +10,27 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import {
   defaultSearchParams,
-  SearchParams,
-  searchParamsToUrl,
+  searchParamsFromSegment,
+  searchTabFromString,
+  searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 import { Spinner } from '@app/web/ui/Spinner'
 import styles from './SearchBar.module.css'
 
-const SearchBar = ({ searchParams }: { searchParams?: SearchParams }) => {
+const SearchBar = ({
+  searchParamsFromUrl,
+}: {
+  searchParamsFromUrl?: boolean
+}) => {
+  const [searchSegment, tabSegment] = useSelectedLayoutSegments()
+
+  const tab = searchTabFromString(tabSegment)
+
+  const searchParams =
+    searchParamsFromUrl && searchSegment
+      ? searchParamsFromSegment(searchSegment)
+      : undefined
+
   const router = useRouter()
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -44,11 +58,10 @@ const SearchBar = ({ searchParams }: { searchParams?: SearchParams }) => {
 
   const goToSearchPage = (searchParamsQuery: string) => {
     router.push(
-      searchParamsToUrl({
+      searchUrl(tab, {
         ...defaultSearchParams,
         ...searchParams,
         query: searchParamsQuery,
-        page: 1,
       }),
     )
   }

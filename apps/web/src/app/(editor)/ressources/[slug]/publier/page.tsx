@@ -6,6 +6,10 @@ import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import Edition from '@app/web/components/Resource/Edition/Edition'
 import { filterAccess } from '@app/web/server/resources/authorization'
+import {
+  defaultSearchParams,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 
 const ResourcePublicationPage = async ({
   params,
@@ -36,7 +40,10 @@ const ResourcePublicationPage = async ({
         <Breadcrumbs
           currentPage="Publication de la ressource"
           parents={[
-            { label: 'Ressources', linkProps: { href: '/rechercher' } },
+            {
+              label: 'Ressources',
+              linkProps: { href: searchUrl('ressources', defaultSearchParams) },
+            },
             {
               label: resource.title,
               linkProps: { href: `/ressources/${resource.slug}` },

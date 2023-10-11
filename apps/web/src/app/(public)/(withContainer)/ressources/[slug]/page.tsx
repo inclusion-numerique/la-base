@@ -8,6 +8,10 @@ import { filterAccess } from '@app/web/server/resources/authorization'
 import ViewHeader from '@app/web/components/Resource/View/ViewHeader'
 import PrivateBox from '@app/web/components/PrivateBox'
 import ViewSeparators from '@app/web/components/Resource/View/ViewSeparators'
+import {
+  defaultSearchParams,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 
 const RessourcePage = async ({ params }: { params: { slug: string } }) => {
   const resource = await getResource({ slug: decodeURI(params.slug) })
@@ -22,7 +26,12 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
     <>
       <Breadcrumbs
         currentPage={authorizations.resource.title}
-        parents={[{ label: 'Ressources', linkProps: { href: '/rechercher' } }]}
+        parents={[
+          {
+            label: 'Ressources',
+            linkProps: { href: searchUrl('ressources', defaultSearchParams) },
+          },
+        ]}
       />
       {authorizations.authorized ? (
         <View

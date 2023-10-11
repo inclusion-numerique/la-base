@@ -14,7 +14,7 @@ const Bases = ({
   bases: BaseListItem[]
   totalCount: number
 }) => (
-  <div className={styles.container}>
+  <div>
     {bases.length > 0 && (
       <Filters
         className="fr-mb-6w"

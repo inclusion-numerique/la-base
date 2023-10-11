@@ -26,7 +26,7 @@ const Resources = ({
 }) => (
   //  Todo Plural
 
-  <div className={styles.container}>
+  <div>
     {resources.length > 0 && (
       <Filters
         className="fr-mb-6w"

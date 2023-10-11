@@ -2,7 +2,9 @@ import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
 import {
+  defaultPaginationParams,
   defaultSearchParams,
+  PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
@@ -14,13 +16,11 @@ import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
  * Raw SQL queries are only in search function files.
  * ⚠️ Keep in sync with prisma where filters for user rights / visibility
  * ⚠️ We cannot reuse query fragments from prismaClient with raw sql without opting out of security features. Keep conditions in sync in the 2 functions.
- * ⚠️ If you make changes in the to_tsvector search, you have to update the index in the db using a manual migration
- *    ( see 20231010132236_search/migration.sql)
  */
 
 // TODO Département
 export const countBases = async (
-  searchParams: Pick<SearchParams, 'query'>,
+  searchParams: Pick<SearchParams, 'query' | 'departements'>,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const searchTerm = cleanSearchTerm(searchParams.query)
@@ -53,6 +53,10 @@ export const countBases = async (
               /* User is member of base */
               OR base_members.id IS NOT NULL
           )
+        AND (
+              ${searchParams.departements.length === 0}
+              OR bases.department = ANY (${searchParams.departements}::text[])
+          )
 `
 
   return result[0]?.count ?? 0
@@ -62,6 +66,7 @@ export const countBases = async (
 
 export const rankBases = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   // To keep good dev ux, we first fetch the ids of the resources matching the search
@@ -111,11 +116,14 @@ export const rankBases = async (
               /* User is member of base */
               OR base_members.id IS NOT NULL
           )
-      /* TODO tags */
+        AND (
+            ${searchParams.departements.length === 0}
+            OR bases.department = ANY (${searchParams.departements}::text[])
+          )
       /* Order by updated desc to have most recent first on empty query */
       ORDER BY rank DESC, bases.updated DESC
-      LIMIT ${searchParams.perPage} OFFSET ${
-        (searchParams.page - 1) * searchParams.perPage
+      LIMIT ${paginationParams.perPage} OFFSET ${
+        (paginationParams.page - 1) * paginationParams.perPage
       };
   `
   // Where IN does not garantee same order as the ids array so we have to sort the results in memory
@@ -131,9 +139,14 @@ export const rankBases = async (
 
 export const searchBases = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const { searchResults, resultIndexById } = await rankBases(searchParams, user)
+  const { searchResults, resultIndexById } = await rankBases(
+    searchParams,
+    paginationParams,
+    user,
+  )
 
   const unsortedBases = await prismaClient.base.findMany({
     where: {
@@ -154,7 +167,8 @@ export const quickSearchBases = async (
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const { searchResults, resultIndexById } = await rankBases(
-    { ...defaultSearchParams, query, perPage: 3 },
+    { ...defaultSearchParams, query },
+    { ...defaultPaginationParams, perPage: 3 },
     user,
   )
 

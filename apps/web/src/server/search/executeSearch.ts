@@ -3,13 +3,11 @@ import {
   countResources,
   quickSearchResources,
   searchResources,
-  SearchResourcesResult,
 } from '@app/web/server/resources/searchResources'
 import {
   countBases,
   quickSearchBases,
   searchBases,
-  SearchBasesResult,
 } from '@app/web/server/bases/searchBases'
 import {
   countProfiles,
@@ -18,6 +16,7 @@ import {
 } from '@app/web/server/profiles/searchProfiles'
 import {
   defaultSearchParams,
+  PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 
@@ -25,10 +24,10 @@ const fakeDelay = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(null)
-    }, 2000)
+    }, 500)
   })
 
-export const executeSearch = async (
+export const countSearchResults = async (
   searchParams: SearchParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
@@ -36,25 +35,10 @@ export const executeSearch = async (
 
   const start = Date.now()
 
-  const [
-    resourcesCount,
-    basesCount,
-    profilesCount,
-    resources,
-    bases,
-    profiles,
-  ] = await Promise.all([
+  const [resourcesCount, basesCount, profilesCount] = await Promise.all([
     countResources(searchParams, user),
     countBases(searchParams, user),
     countProfiles(searchParams, user),
-    // Only search item if the requested tab matches the item type
-    searchParams.tab === 'ressources'
-      ? searchResources(searchParams, user)
-      : ([] as SearchResourcesResult),
-    searchParams.tab === 'bases'
-      ? searchBases(searchParams, user)
-      : ([] as SearchBasesResult),
-    searchParams.tab === 'profils' ? searchProfiles(searchParams, user) : [],
   ])
   const end = Date.now()
 
@@ -62,8 +46,71 @@ export const executeSearch = async (
     resourcesCount,
     basesCount,
     profilesCount,
+    duration: end - start,
+  }
+}
+
+export const executeResourcesSearch = async (
+  searchParams: SearchParams,
+  paginationParams: PaginationParams,
+  user: Pick<SessionUser, 'id'> | null,
+) => {
+  await fakeDelay()
+
+  const start = Date.now()
+
+  const [resourcesCount, resources] = await Promise.all([
+    countResources(searchParams, user),
+    searchResources(searchParams, paginationParams, user),
+  ])
+  const end = Date.now()
+
+  return {
+    resourcesCount,
     resources,
+    duration: end - start,
+  }
+}
+
+export const executeBasesSearch = async (
+  searchParams: SearchParams,
+  paginationParams: PaginationParams,
+  user: Pick<SessionUser, 'id'> | null,
+) => {
+  await fakeDelay()
+
+  const start = Date.now()
+
+  const [basesCount, bases] = await Promise.all([
+    countBases(searchParams, user),
+    searchBases(searchParams, paginationParams, user),
+  ])
+  const end = Date.now()
+
+  return {
+    basesCount,
     bases,
+    duration: end - start,
+  }
+}
+
+export const executeProfilesSearch = async (
+  searchParams: SearchParams,
+  paginationParams: PaginationParams,
+  user: Pick<SessionUser, 'id'> | null,
+) => {
+  await fakeDelay()
+
+  const start = Date.now()
+
+  const [profilesCount, profiles] = await Promise.all([
+    countProfiles(searchParams, user),
+    searchProfiles(searchParams, paginationParams, user),
+  ])
+  const end = Date.now()
+
+  return {
+    profilesCount,
     profiles,
     duration: end - start,
   }
