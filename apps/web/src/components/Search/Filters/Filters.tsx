@@ -1,22 +1,21 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { OptionBadge } from '@app/ui/components/Form/OptionBadge'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
+import { SearchParams } from '@app/web/server/search/searchQueryParams'
 import styles from './Filters.module.css'
 import Filter, { Category } from './Filter'
 
 const Filters = ({
-  basePath,
-  query,
+  searchParams,
   className,
   label,
   categories,
   initialValues,
 }: {
-  basePath: string
-  query?: string
+  searchParams: SearchParams
   className?: string
   label: string
   categories: Category[]
@@ -26,17 +25,6 @@ const Filters = ({
   const [selecteds, setSelecteds] = useState<
     { category: string; option: SelectOption }[]
   >(initialValues || [])
-
-  useEffect(() => {
-    router.push(
-      `${basePath}?q=${query || ''}&${selecteds
-        .map((selected) => `${selected.category}=${selected.option.value}`)
-        .join('&')}`,
-      {
-        scroll: false,
-      },
-    )
-  }, [router, basePath, query, selecteds])
 
   const onSelect = (option: SelectOption, category: string) => {
     setSelecteds([

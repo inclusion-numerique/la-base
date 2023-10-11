@@ -81,6 +81,21 @@ export const themeCategories: { [theme in Theme]: Category } = {
     'Communs & souveraineté',
 }
 
+export const categoryThemes = (() => {
+  const index: { [category in Category]: Theme[] } = {
+    'Médiation & compétences numériques': [],
+    'Ecologie & soutenabilité': [],
+    'Culture numérique': [],
+    'Communs & souveraineté': [],
+  }
+
+  for (const [theme, category] of Object.entries(themeCategories)) {
+    index[category].push(theme as Theme)
+  }
+
+  return index
+})()
+
 export const categoryThemesOptions = (() => {
   const index: { [category in Category]: SelectOption[] } = {
     'Médiation & compétences numériques': [],

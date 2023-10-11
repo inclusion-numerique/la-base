@@ -4,6 +4,7 @@ import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
 import { sPluriel } from '@app/web/utils/sPluriel'
+import { SearchParams } from '@app/web/server/search/searchQueryParams'
 import ResourceCard from '../Resource/Card'
 import EmptyBox from '../EmptyBox'
 import Filters from './Filters/Filters'
@@ -14,6 +15,7 @@ const Resources = ({
   resources,
   user,
   basePath,
+  searchParams,
   query,
   themes,
 }: {
@@ -22,6 +24,7 @@ const Resources = ({
   user: SessionUser | null
   basePath: string
   query?: string
+  searchParams: SearchParams
   themes?: Theme[]
 }) => (
   //  Todo Plural
@@ -31,7 +34,7 @@ const Resources = ({
       <Filters
         className="fr-mb-6w"
         label="Affiner la recherche"
-        basePath={basePath}
+        searchParams={searchParams}
         query={query}
         initialValues={themes?.map((theme) => ({
           category: 'themes',
@@ -95,7 +98,7 @@ const Resources = ({
         </b>
       </p>
       <div className={styles.select}>
-        Trier par :
+        Trier par :
         <select>
           <option>Les plus récentes</option>
         </select>
