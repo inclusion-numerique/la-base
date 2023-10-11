@@ -1,5 +1,7 @@
 import {
+  defaultPaginationParams,
   defaultSearchParams,
+  PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { prismaClient } from '@app/web/prismaClient'
@@ -7,6 +9,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { resourceListSelect } from '@app/web/server/resources/getResourcesList'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
+import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
@@ -14,8 +17,6 @@ import { cleanSearchTerm } from '@app/web/server/search/cleanSearchTerm'
  * Raw SQL queries are only in search function files.
  * ⚠️ Keep in sync with prisma where filters for user rights / visibility
  * ⚠️ We cannot reuse query fragments from prismaClient with raw sql without opting out of security features. Keep conditions in sync in the 2 functions.
- * ⚠️ If you make changes in the to_tsvector search, you have to update the index in the db using a manual migration
- *    ( see 20231010132236_search/migration.sql)
  */
 
 export const countResources = async (
@@ -29,8 +30,8 @@ export const countResources = async (
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-    SELECT count(*)::integer as count 
-    FROM resources
+      SELECT count(*)::integer as count
+      FROM resources
                /* Join user contributor only to have only one row per resource */
                /* Null will never match as contributor_id is not nullable */
                LEFT JOIN resource_contributors
@@ -47,7 +48,7 @@ export const countResources = async (
           resources.deleted IS NULL
           /* Search term check */
         AND (
-              coalesce(${searchTerm}, '___empty___') = '___empty___' 
+                  coalesce(${searchTerm}, '___empty___') = '___empty___'
               OR to_tsvector('french', unaccent(resources.title || ' ' || resources.description)) @@
                  plainto_tsquery('french', unaccent(${searchTerm}))
           )
@@ -67,13 +68,32 @@ export const countResources = async (
           /* Unexisting base or base non deleted */
           bases.deleted IS NULL
           )
-`
+        AND (
+              ${searchParams.themes.length === 0} OR
+              resources.themes && ${enumArrayToSnakeCaseStringArray(
+                searchParams.themes,
+              )}::theme[]
+          )
+        AND (
+              ${searchParams.supportTypes.length === 0} OR
+              resources.support_types && ${enumArrayToSnakeCaseStringArray(
+                searchParams.supportTypes,
+              )}::support_type[]
+          )
+        AND (
+              ${searchParams.targetAudiences.length === 0} OR
+              resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
+                searchParams.targetAudiences,
+              )}::target_audience[]
+          )
+  `
 
   return result[0]?.count ?? 0
 }
 
 export const rankResources = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   // To keep good dev ux, we first fetch the ids of the resources matching the search
@@ -116,7 +136,7 @@ export const rankResources = async (
           /* Search term check */
           /* TODO condition if query is empty ? */
         AND (
-              coalesce(${searchTerm}, '___empty___') = '___empty___' 
+                  coalesce(${searchTerm}, '___empty___') = '___empty___'
               OR to_tsvector('french', unaccent(resources.title || ' ' || resources.description)) @@
                  plainto_tsquery('french', unaccent(${searchTerm}))
           )
@@ -136,11 +156,28 @@ export const rankResources = async (
           /* Unexisting base or base non deleted */
           bases.deleted IS NULL
           )
-      /* TODO tags */
+        AND (
+              ${searchParams.themes.length === 0} OR
+              resources.themes && ${enumArrayToSnakeCaseStringArray(
+                searchParams.themes,
+              )}::theme[]
+          )
+        AND (
+              ${searchParams.supportTypes.length === 0} OR
+              resources.support_types && ${enumArrayToSnakeCaseStringArray(
+                searchParams.supportTypes,
+              )}::support_type[]
+          )
+        AND (
+              ${searchParams.targetAudiences.length === 0} OR
+              resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
+                searchParams.targetAudiences,
+              )}::target_audience[]
+          )
       /* Order by updated desc to have most recent first on empty query */
       ORDER BY rank DESC, resources.updated DESC
-      LIMIT ${searchParams.perPage} OFFSET ${
-        (searchParams.page - 1) * searchParams.perPage
+      LIMIT ${paginationParams.perPage} OFFSET ${
+        (paginationParams.page - 1) * paginationParams.perPage
       };
   `
   // Where IN does not garantee same order as the ids array so we have to sort the results in memory
@@ -153,10 +190,12 @@ export const rankResources = async (
 
 export const searchResources = async (
   searchParams: SearchParams,
+  paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const { searchResults, resultIndexById } = await rankResources(
     searchParams,
+    paginationParams,
     user,
   )
 
@@ -179,7 +218,8 @@ export const quickSearchResources = async (
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const { searchResults, resultIndexById } = await rankResources(
-    { ...defaultSearchParams, query, perPage: 3 },
+    { ...defaultSearchParams, query },
+    { ...defaultPaginationParams, perPage: 3 },
     user,
   )
 
