@@ -22,7 +22,7 @@ const Profiles = ({
       <div className={styles.select}>
         Trier par :
         <select>
-          <option>Les plus récents</option>
+          <option>Les plus pertinents</option>
         </select>
       </div>
     </div>

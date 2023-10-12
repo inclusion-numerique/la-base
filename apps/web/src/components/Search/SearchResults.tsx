@@ -31,6 +31,8 @@ const SearchResults = ({
   const createPageLink = (pageNumber: number) =>
     searchUrl(tab, searchParams, { ...paginationParams, page: pageNumber })
 
+  console.log('CREATE PAGE LINK', tab, createPageLink(2))
+
   return (
     <div className="fr-container fr-container--medium fr-mb-30v">
       {children}

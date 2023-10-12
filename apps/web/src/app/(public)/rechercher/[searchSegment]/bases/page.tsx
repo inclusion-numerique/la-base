@@ -38,7 +38,7 @@ const BasesSearchResultPage = async ({
 
   return (
     <SearchResults
-      tab="ressources"
+      tab="bases"
       searchParams={searchParams}
       paginationParams={paginationParams}
       count={basesCount}

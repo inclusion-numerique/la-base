@@ -38,7 +38,7 @@ const ProfilesSearchResultPage = async ({
 
   return (
     <SearchResults
-      tab="ressources"
+      tab="profils"
       searchParams={searchParams}
       paginationParams={paginationParams}
       count={profilesCount}
