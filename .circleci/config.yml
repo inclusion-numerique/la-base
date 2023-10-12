@@ -51,7 +51,7 @@ parameters:
     default: './pnpm-lock.yaml'
   image:
     type: string
-    default: la-base-web-<< pipeline.git.branch >> | tr '[:lower:]' | sed -e 's/\//-/g'
+    default: la-base-web-<< pipeline.git.branch >> | sed -e 's/\//-/g'
   deploy_version:
     type: string
     default: latest
@@ -657,8 +657,8 @@ commands:
           command: |
             echo "export WEB_APP_DOCKER_REGISTRY='<< pipeline.parameters.web_app_docker_registry >>'" >> ${BASH_ENV}
             echo "export BRANCH='<< pipeline.git.branch >>'" >> ${BASH_ENV}
-            echo "export NAMESPACE=$(echo '<< pipeline.git.branch >>' | tr '[:lower:]' | sed -e 's/\//-/g')" >> ${BASH_ENV}
-            echo "export IMAGE_NAME=$(echo 'la-base-web-<< pipeline.git.branch >>' | tr '[:lower:]' | sed -e 's/\//-/g')" >> ${BASH_ENV}
+            echo "export NAMESPACE=$(echo '<< pipeline.git.branch >>' | sed -e 's/\//-/g')" >> ${BASH_ENV}
+            echo "export IMAGE_NAME=$(echo 'la-base-web-<< pipeline.git.branch >>' | sed -e 's/\//-/g')" >> ${BASH_ENV}
             echo "export IMAGE_BUILD_TAG=$(echo '$WEB_APP_DOCKER_REGISTRY/$IMAGE_NAME:<< pipeline.number >>')" >> ${BASH_ENV}
             echo "export IMAGE_DEPLOY_TAG=$(echo '$WEB_APP_DOCKER_REGISTRY/$IMAGE_NAME:<< pipeline.parameters.deploy_version >>')" >> ${BASH_ENV}
             echo "export IMAGE_E2E_TAG=$(echo '$WEB_APP_DOCKER_REGISTRY/$IMAGE_NAME:<< pipeline.parameters.e2e_version >>')" >> ${BASH_ENV}
