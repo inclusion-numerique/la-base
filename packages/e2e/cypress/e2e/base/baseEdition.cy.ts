@@ -31,7 +31,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
 
       cy.testId('base-title-input').clear()
       cy.testId('base-title-input').type('La quete')
-      cy.testId('base-department-select').select('93 - Seine-Saint-Denis')
+      cy.testId('base-department-select').select('93')
       cy.testId('base-description-input').clear()
       cy.testId('base-description-input').type(
         "Ce qui compte c'est pas l'arrivée c'est la quete",
@@ -43,7 +43,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.testId('base-information-title').should('have.text', 'La quete')
       cy.testId('base-information-department').should(
         'have.text',
-        '93 - Seine-Saint-Denis',
+        'Seine-Saint-Denis (93)',
       )
       cy.testId('base-information-description').should(
         'have.text',
