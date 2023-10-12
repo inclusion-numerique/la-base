@@ -96,6 +96,7 @@ export const getResourcesCountByTheme = async () => {
   >`
       SELECT unnest(themes) AS theme, CAST(COUNT(*) AS integer) AS "count"
       FROM resources
+      WHERE resources.is_public = true
       GROUP BY theme
       ORDER BY theme ASC;
   `
