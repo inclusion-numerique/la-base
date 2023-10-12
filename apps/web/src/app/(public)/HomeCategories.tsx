@@ -8,6 +8,7 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { categories } from '@app/web/themes/themes'
 import styles from './HomeCategories.module.css'
 
 const themeSearchResultHref = (theme: Theme) =>
@@ -17,7 +18,7 @@ const themeSearchResultHref = (theme: Theme) =>
   })
 
 const HomeCategories = async () => {
-  const categories = await getHomeCategoriesCount()
+  const categoriesCount = await getHomeCategoriesCount()
 
   return (
     <div className="fr-container fr-pt-20v fr-pb-30v">
@@ -26,12 +27,12 @@ const HomeCategories = async () => {
           Découvrez les ressources grâce aux thématiques
         </h3>
         <p className="fr-text--xl fr-mb-12v">
-          Découvrez les ressources publiées grâce aux thématiques organisés en 3
-          grandes catégories.
+          Découvrez les ressources publiées grâce aux thématiques organisés en{' '}
+          {categories.length} grandes catégories.
         </p>
       </div>
       <div className="fr-accordions-group">
-        {categories.map(({ title, resourcesCount, themes }) => (
+        {categoriesCount.map(({ title, resourcesCount, themes }) => (
           <Accordion
             key={title}
             label={
