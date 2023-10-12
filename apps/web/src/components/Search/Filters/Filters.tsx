@@ -79,7 +79,7 @@ const Filters = ({
 
   return (
     <div className={className}>
-      <p className="wip fr-mb-1w">{label}</p>
+      <p className="fr-mb-1w">{label}</p>
       <div className={styles.buttons}>
         {categories.map((category) => (
           <div key={category.id}>
