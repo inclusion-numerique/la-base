@@ -1,6 +1,13 @@
+
+.filterContainer{
+  position: relative;
+}
+
 .options {
   position: absolute;
   z-index: 1;
+  left: 0;
+  min-width: 100%;
   background-color: white;
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
 }
@@ -18,10 +25,12 @@
 .optionCategory {
   color: var(--blue-france-sun-113-625);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .optionCategory,
 .option {
+  white-space: nowrap;
   cursor: pointer;
   padding: 8px 16px;
   width: 100%;

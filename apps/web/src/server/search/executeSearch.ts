@@ -20,19 +20,10 @@ import {
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 
-const fakeDelay = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(null)
-    }, 500)
-  })
-
 export const countSearchResults = async (
   searchParams: SearchParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  await fakeDelay()
-
   const start = Date.now()
 
   const [resourcesCount, basesCount, profilesCount] = await Promise.all([
@@ -55,8 +46,6 @@ export const executeResourcesSearch = async (
   paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  await fakeDelay()
-
   const start = Date.now()
 
   const [resourcesCount, resources] = await Promise.all([
@@ -77,8 +66,6 @@ export const executeBasesSearch = async (
   paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  await fakeDelay()
-
   const start = Date.now()
 
   const [basesCount, bases] = await Promise.all([
@@ -99,8 +86,6 @@ export const executeProfilesSearch = async (
   paginationParams: PaginationParams,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  await fakeDelay()
-
   const start = Date.now()
 
   const [profilesCount, profiles] = await Promise.all([
@@ -125,7 +110,6 @@ export const executeQuickSearch = async (
     query,
     perPage: 3,
   }
-  await fakeDelay()
 
   const start = Date.now()
 

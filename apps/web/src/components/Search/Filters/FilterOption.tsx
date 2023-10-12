@@ -19,7 +19,6 @@ const FilterOption = ({
       }}
     >
       <div>{option.name}</div>
-      <div>00</div>
     </button>
     <hr className={styles.separator} />
   </>

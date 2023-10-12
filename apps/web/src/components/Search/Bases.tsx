@@ -1,7 +1,11 @@
 import React from 'react'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { departmentsOptions } from '@app/web/utils/departments'
+import {
+  departmentsOptions,
+  getDepartmentName,
+} from '@app/web/utils/departments'
 import { sPluriel } from '@app/web/utils/sPluriel'
+import { SearchParams } from '@app/web/server/search/searchQueryParams'
 import BaseCard from '../Base/Card/Card'
 import EmptyBox from '../EmptyBox'
 import Filters from './Filters/Filters'
@@ -10,21 +14,31 @@ import styles from './Content.module.css'
 const Bases = ({
   bases,
   totalCount,
+  searchParams,
 }: {
   bases: BaseListItem[]
   totalCount: number
+
+  searchParams: SearchParams
 }) => (
   <div>
-    {bases.length > 0 && (
+    {(bases.length > 0 || searchParams.departements.length > 0) && (
       <Filters
+        initialValues={searchParams.departements.map((departementCode) => ({
+          category: 'departements',
+          option: {
+            value: departementCode,
+            name: getDepartmentName(departementCode),
+          },
+        }))}
         className="fr-mb-6w"
         label="Affiner la recherche"
-        query=""
-        basePath="/rechercher/bases"
+        searchParams={searchParams}
+        tab="bases"
         categories={[
           {
             multiple: false,
-            id: 'department',
+            id: 'departements',
             label: 'Département',
             options: departmentsOptions,
           },
@@ -40,7 +54,7 @@ const Bases = ({
       <div className={styles.select}>
         Trier par :
         <select>
-          <option>Les plus récentes</option>
+          <option>Les plus pertinentes</option>
         </select>
       </div>
     </div>

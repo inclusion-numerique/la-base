@@ -4,9 +4,18 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { OptionBadge } from '@app/ui/components/Form/OptionBadge'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
-import { SearchParams } from '@app/web/server/search/searchQueryParams'
+import {
+  SearchParams,
+  SearchTab,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
 import styles from './Filters.module.css'
-import Filter, { Category } from './Filter'
+import Filter, { Category, FilterKey } from './Filter'
+
+export type FiltersInitialValue = {
+  category: FilterKey
+  option: SelectOption
+}
 
 const Filters = ({
   searchParams,
@@ -14,19 +23,21 @@ const Filters = ({
   label,
   categories,
   initialValues,
+  tab,
 }: {
   searchParams: SearchParams
   className?: string
+  tab: SearchTab
   label: string
   categories: Category[]
-  initialValues?: { category: string; option: SelectOption }[]
+  initialValues?: FiltersInitialValue[]
 }) => {
   const router = useRouter()
   const [selecteds, setSelecteds] = useState<
-    { category: string; option: SelectOption }[]
+    { category: FilterKey; option: SelectOption }[]
   >(initialValues || [])
 
-  const onSelect = (option: SelectOption, category: string) => {
+  const onSelect = (option: SelectOption, category: FilterKey) => {
     setSelecteds([
       ...selecteds,
       {
@@ -34,13 +45,19 @@ const Filters = ({
         option,
       },
     ])
+    router.push(
+      searchUrl(tab, {
+        ...searchParams,
+        [category]: [...searchParams[category], option.value],
+      }),
+    )
   }
 
   const unselect = ({
     category,
     option,
   }: {
-    category: string
+    category: FilterKey
     option: SelectOption
   }) => {
     setSelecteds(
@@ -49,6 +66,14 @@ const Filters = ({
           selected.category !== category ||
           selected.option.value !== option.value,
       ),
+    )
+    router.push(
+      searchUrl(tab, {
+        ...searchParams,
+        [category]: searchParams[category].filter(
+          (value) => value !== option.value,
+        ),
+      }),
     )
   }
 

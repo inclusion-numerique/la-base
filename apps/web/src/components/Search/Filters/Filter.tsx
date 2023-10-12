@@ -5,11 +5,18 @@ import { SelectOption } from '@app/ui/components/Form/utils/options'
 import FilterOption from './FilterOption'
 import styles from './Filter.module.css'
 
+// Synced with SearchParams
+export type FilterKey =
+  | 'themes'
+  | 'supportTypes'
+  | 'targetAudiences'
+  | 'departements'
+
 export type Category =
-  | { multiple: false; id: string; label: string; options: SelectOption[] }
+  | { multiple: false; id: FilterKey; label: string; options: SelectOption[] }
   | {
       multiple: true
-      id: string
+      id: FilterKey
       label: string
       options: { [key in string]: SelectOption[] }
     }
@@ -19,7 +26,7 @@ const Filter = ({
   onSelect,
 }: {
   category: Category
-  onSelect: (option: SelectOption, category: string) => void
+  onSelect: (option: SelectOption, category: FilterKey) => void
 }) => {
   const [open, setOpen] = useState(false)
   const [openedCategory, setOpenedCategory] = useState('')
@@ -27,7 +34,7 @@ const Filter = ({
   useOnClickOutside(optionsRef, () => setOpen(false))
 
   return (
-    <div ref={optionsRef}>
+    <div className={styles.filterContainer} ref={optionsRef}>
       <Button
         priority="tertiary"
         iconId={`fr-icon-arrow-${open ? 'up' : 'down'}-s-line`}
@@ -60,9 +67,8 @@ const Filter = ({
                         />
                         {key}
                       </div>
-                      <div>00</div>
                     </button>
-                    <hr className={styles.separator} />
+                    <hr key={`${key}_separator`} className={styles.separator} />
                     {currentCategory &&
                       options.map((option) => (
                         <FilterOption
