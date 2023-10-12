@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import sanitizeHtml from 'sanitize-html'
 import { BasePageData } from '@app/web/server/bases/getBase'
+import { getDepartmentName } from '@app/web/utils/departments'
 import styles from './Details.module.css'
 
 const Details = ({ base }: { base: BasePageData }) => (
@@ -24,7 +25,7 @@ const Details = ({ base }: { base: BasePageData }) => (
         {base.department && (
           <div className="fr-mt-3w">
             <p className={styles.subtitle}>Département</p>
-            {base.department}
+            {getDepartmentName(base.department)}
           </div>
         )}
       </div>
