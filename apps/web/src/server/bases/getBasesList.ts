@@ -16,9 +16,12 @@ const getWhereBasesList = (
       user
         ? {
             OR: [
+              // Public
               whereBaseIsPublic,
-              // Public or created by user
+              // Created by user
               { ownerId: user.id },
+              // user is member,
+              { members: { some: { memberId: user.id } } },
             ],
           }
         : whereBaseIsPublic,
@@ -26,6 +29,17 @@ const getWhereBasesList = (
     ],
   }
 }
+
+const getWhereBasesProfileList = (
+  profileId: string,
+  user?: Pick<SessionUser, 'id'> | null,
+) =>
+  getWhereBasesList(user, {
+    OR: [
+      { ownerId: profileId },
+      { members: { some: { memberId: profileId } } },
+    ],
+  })
 
 const getWhereBasesQuery = (
   query?: string,
@@ -41,7 +55,7 @@ export const getProfileBasesCount = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = getWhereBasesList(user, { ownerId: profileId })
+  const where = getWhereBasesProfileList(profileId, user)
 
   return prismaClient.base.count({
     where,
@@ -69,7 +83,7 @@ export const getProfileBases = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = getWhereBasesList(user, { ownerId: profileId })
+  const where = getWhereBasesProfileList(profileId, user)
   return prismaClient.base.findMany({
     select: baseSelect,
     where,

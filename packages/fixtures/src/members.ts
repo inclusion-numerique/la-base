@@ -15,7 +15,7 @@ export const randomMembers: (
 
   return bases.flatMap((base) =>
     users
-      .filter(() => Math.random() < 0.2)
+      .filter(() => Math.random() < 0.05)
       .map((user) => ({
         memberId: user.id,
         baseId: base.id,

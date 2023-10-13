@@ -89,6 +89,25 @@ export const computeResourcesListWhereForUser = (
   }
 }
 
+const computeResourcesListWhereForUserAndProfile = (
+  profileId: string,
+  user?: Pick<SessionUser, 'id'> | null,
+) =>
+  computeResourcesListWhereForUser(user, {
+    OR: [
+      {
+        createdById: profileId,
+      },
+      {
+        contributors: {
+          some: {
+            contributorId: profileId,
+          },
+        },
+      },
+    ],
+  })
+
 export const getResourcesCountByTheme = async () => {
   // theme is snake_case in database
   const counts = await prismaClient.$queryRaw<
@@ -119,9 +138,7 @@ export const getProfileResources = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = computeResourcesListWhereForUser(user, {
-    createdById: profileId,
-  })
+  const where = computeResourcesListWhereForUserAndProfile(profileId, user)
 
   return prismaClient.resource.findMany({
     where,
@@ -138,9 +155,7 @@ export const getProfileResourcesCount = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const where = computeResourcesListWhereForUser(user, {
-    createdById: profileId,
-  })
+  const where = computeResourcesListWhereForUserAndProfile(profileId, user)
 
   return prismaClient.resource.count({
     where,
