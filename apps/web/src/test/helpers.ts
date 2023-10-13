@@ -96,6 +96,7 @@ export const createTestBase = (
     twitter: null,
     resources: [],
     image: null,
+    coverImage: null,
     members: [
       ...admins.map((admin) => ({
         baseId: id,

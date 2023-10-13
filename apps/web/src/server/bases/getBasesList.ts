@@ -71,7 +71,11 @@ export const baseSelect = {
   image: {
     select: {
       id: true,
-      altText: true,
+    },
+  },
+  coverImage: {
+    select: {
+      id: true,
     },
   },
   _count: {

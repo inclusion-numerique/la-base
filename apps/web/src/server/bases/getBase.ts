@@ -22,10 +22,14 @@ const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     website: true,
     isPublic: true,
     ownerId: true,
+    coverImage: {
+      select: {
+        id: true,
+      },
+    },
     image: {
       select: {
         id: true,
-        altText: true,
       },
     },
     resources: {

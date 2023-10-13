@@ -5,8 +5,10 @@ import { PrivacyTag } from '../../PrivacyTags'
 
 const VisibilityEdition = ({
   control,
+  disabled,
 }: {
   control: Control<{ isPublic: boolean }>
+  disabled?: boolean
 }) => (
   <Controller
     control={control}
@@ -19,6 +21,7 @@ const VisibilityEdition = ({
       >
         <ResourceBaseRichRadioElement
           id="radio-base-public"
+          disabled={disabled}
           data-testid="visibility-radio-base-public"
           name={name}
           value={
@@ -41,6 +44,7 @@ const VisibilityEdition = ({
         </ResourceBaseRichRadioElement>
         <ResourceBaseRichRadioElement
           id="radio-base-private"
+          disabled={disabled}
           data-testid="visibility-radio-base-private"
           name={name}
           value={

@@ -1,0 +1,13 @@
+.banner {
+  margin-top: 8px;
+  width: 100%;
+  aspect-ratio: 4.8;
+  height: auto;
+  background-color: #e3e3fd;
+}
+
+.logo {
+  margin: -64px auto 0;
+  position: relative;
+  z-index: 1;
+}

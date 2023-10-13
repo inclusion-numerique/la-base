@@ -4,7 +4,7 @@ import { BaseListItem } from './getBasesList'
 
 export type FilteredBase = Pick<
   BasePageData,
-  'slug' | 'title' | 'isPublic' | 'email' | 'image'
+  'slug' | 'title' | 'isPublic' | 'email' | 'image' | 'coverImage'
 > &
   Pick<BaseListItem, '_count'>
 
@@ -45,6 +45,7 @@ export const filterAccess = (
       title: base.title,
       isPublic: base.isPublic,
       image: base.image,
+      coverImage: base.coverImage,
       email: base.emailIsPublic ? base.email : '',
       _count: { resources: base.resources.length },
     },

@@ -33,6 +33,7 @@ const MultipleSearchableSelect = ({
   hint,
   asterisk,
   'data-testid': dataTestId,
+  disabled,
 }: {
   placeholder?: string
   noResultMessage?: string
@@ -46,6 +47,7 @@ const MultipleSearchableSelect = ({
   limit?: number
   options: SelectOption[]
   'data-testid'?: string
+  disabled?: boolean
 }) => {
   const [internalSelecteds, setInternalSelecteds] = useState<
     SelectOptionValid[]
@@ -139,13 +141,17 @@ const MultipleSearchableSelect = ({
               key={selected.value}
               option={selected}
               onClick={() => unselect(selected)}
+              disabled={disabled}
             />
           ))}
           <input
             type="text"
+            disabled={disabled}
             data-testid={dataTestId}
             id={id}
-            className={classNames('fr-input', styles.internalInput)}
+            className={classNames('fr-input', styles.internalInput, {
+              'fr-input-group--disabled': disabled,
+            })}
             placeholder={internalSelecteds.length > 0 ? '' : placeholder}
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}

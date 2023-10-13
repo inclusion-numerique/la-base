@@ -9,6 +9,7 @@ const base = {
   isPublic: true,
   department: '08 - Ardennes',
   image: null,
+  coverImage: null,
   _count: { resources: 8 },
 } satisfies BaseListItem
 

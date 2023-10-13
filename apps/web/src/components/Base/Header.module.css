@@ -2,16 +2,6 @@
   background-color: var(--background-alt-blue-france);
 }
 
-.banner {
-  margin-top: 8px;
-  height: 250px;
-  background-color: #e3e3fd;
-}
-
-.logo {
-  margin: -64px auto 0;
-}
-
 .baseInfo {
   display: flex;
   align-items: center;

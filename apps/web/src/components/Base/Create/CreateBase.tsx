@@ -7,6 +7,9 @@ import { Controller, UseFormReturn, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import CroppedUpload, {
+  CroppedImage,
+} from '@app/ui/components/CroppedUpload/CroppedUpload'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -19,6 +22,8 @@ import {
   UpdateBaseInformationsCommand,
   UpdateBaseVisibilityCommand,
 } from '@app/web/server/bases/updateBase'
+import { useFileUpload } from '@app/web/hooks/useFileUpload'
+import { getZodValidationMutationError } from '@app/web/utils/getZodValidationMutationError'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
 import Card from '../../Card'
@@ -52,11 +57,44 @@ const CreateBase = () => {
   } = form
 
   const [emailErrors, setEmailsError] = useState(false)
+  const [profilePicture, setProfilePicture] = useState<CroppedImage>()
+  const [coverImage, setCoverImage] = useState<CroppedImage>()
+
+  // File upload hooks for storage
+  const imageUpload = useFileUpload()
+
+  // Image creation mutation
+  const createImage = trpc.image.create.useMutation()
 
   const mutate = trpc.base.create.useMutation()
+
+  const uploadImage = async (
+    image: CroppedImage,
+    type: 'imageId' | 'coverImageId',
+  ) => {
+    try {
+      const uploaded = await imageUpload.upload(image.file)
+      if ('error' in uploaded) {
+        setError(type, { message: uploaded.error })
+        return null
+      }
+
+      return await createImage.mutateAsync({
+        ...image,
+        file: uploaded,
+      })
+    } catch (error) {
+      const zodError = getZodValidationMutationError(error)
+      if (zodError && zodError.length > 0) {
+        setError(type, { message: zodError[0].message })
+      }
+      return null
+    }
+  }
+
   const onSubmit = async (data: CreateBaseCommand) => {
     if (emailErrors) {
-      form.setError('members', {
+      setError('members', {
         message:
           'Merci de vérifier la liste des profils que vous souhaitez inviter.',
       })
@@ -64,7 +102,24 @@ const CreateBase = () => {
     }
 
     try {
-      const base = await mutate.mutateAsync(data)
+      const [profilePictureUploaded, coverImageUploaded] = await Promise.all([
+        profilePicture
+          ? await uploadImage(profilePicture, 'imageId')
+          : Promise.resolve(),
+        coverImage
+          ? await uploadImage(coverImage, 'coverImageId')
+          : Promise.resolve(),
+      ])
+
+      if (profilePictureUploaded === null || coverImageUploaded === null) {
+        return
+      }
+
+      const base = await mutate.mutateAsync({
+        ...data,
+        imageId: profilePictureUploaded?.id,
+        coverImageId: coverImageUploaded?.id,
+      })
       router.refresh()
       router.push(`/bases/${base.slug}`)
     } catch (error) {
@@ -115,6 +170,7 @@ const CreateBase = () => {
                   >
                 ).control
               }
+              disabled={isSubmitting}
             />
           </Card>
 
@@ -128,6 +184,7 @@ const CreateBase = () => {
               name="members"
               render={({ field: { onChange }, fieldState: { error } }) => (
                 <InviteUsers
+                  disabled={isSubmitting}
                   label="Ajouter un membre"
                   setEmailsError={setEmailsError}
                   error={error}
@@ -138,12 +195,43 @@ const CreateBase = () => {
           </Card>
 
           <Card
-            className="fr-mt-3w wip"
+            className="fr-mt-3w"
             id="photos"
             title="Photo de profil & couverture"
             description="Ajouter une image de profil & une image de couverture pour vous rendre identifiable et attirer les visiteurs."
           >
-            TODO
+            <Controller
+              control={control}
+              name="imageId"
+              render={({ fieldState: { error } }) => (
+                <CroppedUpload
+                  ratio={1}
+                  round
+                  label="de profil"
+                  height={522 / 4.8}
+                  id="profile"
+                  disabled={isSubmitting}
+                  error={error ? error.message : undefined}
+                  onChange={setProfilePicture}
+                />
+              )}
+            />
+            <hr className="fr-mt-4w fr-pb-4w" />
+            <Controller
+              control={control}
+              name="coverImageId"
+              render={({ fieldState: { error } }) => (
+                <CroppedUpload
+                  ratio={4.8}
+                  label="de couverture"
+                  height={522 / 4.8}
+                  id="cover"
+                  onChange={setCoverImage}
+                  disabled={isSubmitting}
+                  error={error ? error.message : undefined}
+                />
+              )}
+            />
           </Card>
         </div>
       </div>

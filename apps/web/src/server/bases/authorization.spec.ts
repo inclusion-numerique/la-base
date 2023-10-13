@@ -77,6 +77,7 @@ describe('Base authorization', () => {
       isPublic: privateBase.isPublic,
       email: privateBase.email,
       image: null,
+      coverImage: null,
       _count: { resources: privateBase.resources.length },
     }
 

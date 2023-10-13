@@ -7,15 +7,13 @@ import { z } from 'zod'
 import * as Sentry from '@sentry/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
-import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import type { SendCommand } from '@app/web/components/Resource/Edition/Edition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
-  imageAllowedExtensions,
+  imageUploadHint,
   imageFileValidationOptions,
-  imageMaxSize,
 } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
 import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
@@ -126,9 +124,6 @@ const ResourceImageEdition = ({
     fileUpload.reset()
   }
 
-  const fileFieldHint = `Taille maximale : ${formatByteSize(
-    imageMaxSize,
-  )}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`
   const disabled = isSubmitting || isEditingAnotherContent
 
   // Form is automatically submited without user validation on image file change
@@ -180,7 +175,7 @@ const ResourceImageEdition = ({
               ? "Remplacer l'image de présentation"
               : 'Ajouter une image de présentation pour attirer les visiteurs'
           }
-          fileFieldHint={fileFieldHint}
+          fileFieldHint={imageUploadHint}
           disabled={disabled}
           canDelete={!!image}
           deleteButtonTitle="Supprimer l'image de présentation"

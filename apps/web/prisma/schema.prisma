@@ -85,8 +85,11 @@ model Base {
   legacyId Int?   @unique @map("legacy_id")
   title    String
 
-  image   Image?  @relation(fields: [imageId], references: [id])
+  image   Image?  @relation(fields: [imageId], references: [id], name: "image")
   imageId String? @unique @map("image_id") @db.Uuid
+
+  coverImage   Image?  @relation(fields: [coverImageId], references: [id], name: "cover_image")
+  coverImageId String? @unique @map("cover_image_id") @db.Uuid
 
   slug                      String  @unique
   // Slug that can be duplicated, only based on title
@@ -399,12 +402,13 @@ model Image {
   height Int?
   width  Int?
 
-  upload    Upload    @relation(fields: [uploadKey], references: [key])
-  uploadKey String    @unique @map("upload_key")
-  content   Content?
-  resource  Resource?
-  user      User?
-  base      Base?
+  upload         Upload    @relation(fields: [uploadKey], references: [key])
+  uploadKey      String    @unique @map("upload_key")
+  content        Content?
+  resource       Resource?
+  user           User?
+  baseCoverImage Base?     @relation(name: "cover_image")
+  base           Base?     @relation(name: "image")
 
   @@map("images")
 }

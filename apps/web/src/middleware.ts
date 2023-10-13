@@ -10,10 +10,10 @@ const contentSecurityPolicy = `
   script-src 'self' https://matomo.incubateur.anct.gouv.fr 'unsafe-inline' 'unsafe-eval';
   script-src-attr 'none';
   style-src 'self' https: 'unsafe-inline';
-  img-src 'self' data:;
+  img-src 'self' data: blob:;
   frame-src https://www.youtube-nocookie.com/;
   object-src 'none';
-  connect-src 'self' https://${ServerWebAppConfig.S3.uploadsBucket}.${
+  connect-src 'self' blob: https://${ServerWebAppConfig.S3.uploadsBucket}.${
     ServerWebAppConfig.S3.host
   } https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.net https://openmaptiles.geo.data.gouv.fr https://openmaptiles.github.io https://aides-territoires.beta.gouv.fr;
   worker-src 'self' blob:;

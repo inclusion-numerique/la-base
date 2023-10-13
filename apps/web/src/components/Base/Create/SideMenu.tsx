@@ -35,7 +35,7 @@ const BaseSideMenu = () => (
             },
           },
           {
-            text: <div className="wip">Photo de profil & courverture</div>,
+            text: 'Photo de profil & courverture',
             linkProps: {
               href: '#photos',
             },
