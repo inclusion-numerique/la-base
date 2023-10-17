@@ -37,7 +37,7 @@ const CroppedUpload = ({
   height: number
   ratio: number
   round?: boolean
-  onChange: (data: CroppedImage) => void
+  onChange: (data?: CroppedImage) => void
   disabled?: boolean
   error?: string
 }) => {
@@ -59,6 +59,8 @@ const CroppedUpload = ({
   const cropperRef = useRef<ReactCropperElement>(null)
   const [imageBox, setImageBox] = useState<Cropper.ImageData>()
   const [croppedBox, setCroppedBox] = useState<Cropper.Data>()
+  const [croppedBoxData, setCroppedBoxData] = useState<Cropper.CropBoxData>()
+  const [canvasData, setCanvasData] = useState<Cropper.CanvasData>()
   const [imageToUpload, setImageToUpload] = useState<ImageWithName | null>(null)
   const [imageToUploadUrl, setImageToUploadUrl] = useState('')
 
@@ -81,6 +83,8 @@ const CroppedUpload = ({
             }
           : defaultCropping),
       })
+    } else {
+      onChange()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageToUpload, imageBox, croppedBox, defaultCropping])
@@ -108,6 +112,10 @@ const CroppedUpload = ({
                   if (cropperRef.current) {
                     setImageBox(cropperRef.current.cropper.getImageData())
                     setCroppedBox(cropperRef.current.cropper.getData())
+                    setCanvasData(cropperRef.current.cropper.getCanvasData())
+                    setCroppedBoxData(
+                      cropperRef.current.cropper.getCropBoxData(),
+                    )
                   }
                 },
               },
@@ -216,7 +224,13 @@ const CroppedUpload = ({
                 type="button"
                 priority="tertiary no outline"
                 iconId="fr-icon-crop-line"
-                onClick={openCropModal}
+                onClick={() => {
+                  openCropModal()
+                  if (cropperRef.current && croppedBoxData && canvasData) {
+                    cropperRef.current.cropper.setCropBoxData(croppedBoxData)
+                    cropperRef.current.cropper.setCanvasData(canvasData)
+                  }
+                }}
               >
                 Recadrer
               </Button>
