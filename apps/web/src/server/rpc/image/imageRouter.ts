@@ -2,7 +2,10 @@ import { prismaClient } from '@app/web/prismaClient'
 import { computeImageMetadata } from '@app/web/server/image/computeImageMetadata'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { ImageValidation } from '@app/web/server/rpc/image/imageValidation'
+import {
+  ImageValidation,
+  UpdateImageValidation,
+} from '@app/web/server/rpc/image/imageValidation'
 
 export const imageRouter = router({
   create: protectedProcedure
@@ -37,4 +40,17 @@ export const imageRouter = router({
         },
       })
     }),
+  update: protectedProcedure
+    .input(UpdateImageValidation)
+    .mutation(async ({ input: { id, ...cropping }, ctx: { user } }) =>
+      prismaClient.image.update({
+        data: cropping,
+        where: {
+          id,
+          upload: {
+            uploadedById: user.id,
+          },
+        },
+      }),
+    ),
 })

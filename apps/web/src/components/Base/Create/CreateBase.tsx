@@ -7,9 +7,8 @@ import { Controller, UseFormReturn, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import CroppedUpload, {
-  CroppedImage,
-} from '@app/ui/components/CroppedUpload/CroppedUpload'
+import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
+import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -57,8 +56,8 @@ const CreateBase = () => {
   } = form
 
   const [emailErrors, setEmailsError] = useState(false)
-  const [profilePicture, setProfilePicture] = useState<CroppedImage>()
-  const [coverImage, setCoverImage] = useState<CroppedImage>()
+  const [profilePicture, setProfilePicture] = useState<CroppedImageType>()
+  const [coverImage, setCoverImage] = useState<CroppedImageType>()
 
   // File upload hooks for storage
   const imageUpload = useFileUpload()
@@ -69,7 +68,7 @@ const CreateBase = () => {
   const mutate = trpc.base.create.useMutation()
 
   const uploadImage = async (
-    image: CroppedImage,
+    image: CroppedImageType,
     type: 'imageId' | 'coverImageId',
   ) => {
     try {

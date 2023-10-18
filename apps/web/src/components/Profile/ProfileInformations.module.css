@@ -20,23 +20,3 @@
 .profileEditionHeader {
   margin-top: 0;
 }
-
-.pictureModification {
-  position: absolute;
-  bottom: 0;
-  left: 88px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: white;
-  border: var(--slim-grey-border);
-  background-image: none;
-  color: var(--blue-france-sun-113-625);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background-color: var(--hover) !important;
-  }
-}
