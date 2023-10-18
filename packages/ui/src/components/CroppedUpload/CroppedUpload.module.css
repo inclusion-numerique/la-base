@@ -68,6 +68,11 @@
     }
 }
 
+.cropper {
+    min-height: 350px;
+    min-width: 250px;
+}
+
 .croppingRound {
 
     :global(.cropper-view-box),

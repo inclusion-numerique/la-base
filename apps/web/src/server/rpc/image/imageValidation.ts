@@ -38,4 +38,13 @@ export const ImageValidation = z.object({
   cropLeft: z.number().min(0).max(1).default(defaultCropValues.cropLeft),
 })
 
+export const UpdateImageValidation = z.object({
+  id: z.string(),
+  cropHeight: z.number().min(0).max(1).default(defaultCropValues.cropHeight),
+  cropWidth: z.number().min(0).max(1).default(defaultCropValues.cropWidth),
+  cropTop: z.number().min(0).max(1).default(defaultCropValues.cropTop),
+  cropLeft: z.number().min(0).max(1).default(defaultCropValues.cropLeft),
+})
+
 export type ImageData = z.infer<typeof ImageValidation>
+export type UpdateImageData = z.infer<typeof UpdateImageValidation>

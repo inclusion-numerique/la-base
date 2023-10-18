@@ -1,7 +1,10 @@
 import { z } from 'zod'
 import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { UpdateProfileVisibilityCommandValidation } from '@app/web/server/profiles/updateProfile'
+import {
+  UpdateProfileImageCommandValidation,
+  UpdateProfileVisibilityCommandValidation,
+} from '@app/web/server/profiles/updateProfile'
 import { getMatchingProfils } from '@app/web/server/profiles/getProfile'
 import { handleResourceMutationCommand } from '../../resources/feature/handleResourceMutationCommand'
 
@@ -46,4 +49,12 @@ export const profileRouter = router({
       }
       return prismaClient.user.update({ where: { id: user.id }, data: input })
     }),
+  updateImage: protectedProcedure
+    .input(UpdateProfileImageCommandValidation)
+    .mutation(async ({ input, ctx: { user } }) =>
+      prismaClient.user.update({
+        where: { id: user.id },
+        data: { imageId: input.imageId || null },
+      }),
+    ),
 })
