@@ -1,3 +1,8 @@
+.banner,
+.logoContainer {
+  position: relative
+}
+
 .banner {
   margin-top: 8px;
   width: 100%;
@@ -21,11 +26,11 @@
   position: relative;
   z-index: 1;
 
-  @media (min-width: 320px){
+  @media (min-width: 320px) {
     margin-top: -16px;
   }
 
-  @media (min-width: 576px){
+  @media (min-width: 576px) {
     margin-top: -46px;
   }
 

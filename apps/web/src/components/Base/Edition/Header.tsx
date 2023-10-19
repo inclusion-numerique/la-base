@@ -17,7 +17,7 @@ const Header = ({ base }: { base: BasePageData }) => (
       ]}
       currentPage="Modifier la base"
     />
-    <Images base={base} />
+    <Images base={base} editMode />
     <div className={styles.baseInfo}>
       <h2 className="fr-mb-0">{base.title}</h2>
     </div>

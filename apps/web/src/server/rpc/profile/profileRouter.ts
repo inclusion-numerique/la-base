@@ -54,7 +54,7 @@ export const profileRouter = router({
     .mutation(async ({ input, ctx: { user } }) =>
       prismaClient.user.update({
         where: { id: user.id },
-        data: { imageId: input.imageId || null },
+        data: { imageId: input.imageId },
       }),
     ),
 })

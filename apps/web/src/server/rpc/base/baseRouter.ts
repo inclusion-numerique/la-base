@@ -3,7 +3,10 @@ import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
-import { UpdateBaseCommandValidation } from '@app/web/server/bases/updateBase'
+import {
+  UpdateBaseCommandValidation,
+  UpdateBaseImageCommandValidation,
+} from '@app/web/server/bases/updateBase'
 import { handleResourceMutationCommand } from '../../resources/feature/handleResourceMutationCommand'
 import { sendInviteMemberEmail } from '../baseMember/invitationEmail'
 import { createUniqueSlug } from './createUniqueSlug'
@@ -105,4 +108,12 @@ export const baseRouter = router({
         where: { id: input.id },
       })
     }),
+  updateImage: protectedProcedure
+    .input(UpdateBaseImageCommandValidation)
+    .mutation(async ({ input: { id, ...images } }) =>
+      prismaClient.base.update({
+        where: { id },
+        data: images,
+      }),
+    ),
 })

@@ -1,7 +1,7 @@
 import z from 'zod'
 
 export const UpdateProfileImageCommandValidation = z.object({
-  imageId: z.string().uuid().optional(),
+  imageId: z.string().uuid().nullable(),
 })
 
 export type UpdateProfileImageCommand = z.infer<

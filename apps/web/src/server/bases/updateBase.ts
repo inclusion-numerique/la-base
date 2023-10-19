@@ -59,6 +59,7 @@ export const UpdateBaseCommandValidation = z.object({
 export type UpdateBaseInformationsCommand = z.infer<
   typeof UpdateBaseInformationsCommandValidation
 >
+
 export type UpdateBaseVisibilityCommand = z.infer<
   typeof UpdateBaseVisibilityCommandValidation
 >
@@ -71,3 +72,13 @@ export type UpdateBaseCommand =
   | UpdateBaseInformationsCommand
   | UpdateBaseVisibilityCommand
   | UpdateBaseContactsCommand
+
+export const UpdateBaseImageCommandValidation = z.object({
+  id: z.string({ required_error: "Veuillez renseigner l'id de la base" }),
+  imageId: z.string().uuid().nullable().optional(),
+  coverImageId: z.string().uuid().nullable().optional(),
+})
+
+export type UpdateBaseImageCmmand = z.infer<
+  typeof UpdateBaseImageCommandValidation
+>
