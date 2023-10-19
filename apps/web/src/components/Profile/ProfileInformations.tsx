@@ -5,7 +5,7 @@ import { FilteredProfile } from '@app/web/server/profiles/authorization'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import ViewsAndMetadata from './ViewsAndMetadata'
 import styles from './ProfileInformations.module.css'
-import PhotoEdition from './Edition/PhotoEdition'
+import ImageEdition from './Edition/ImageEdition'
 
 const ProfileInformations = ({
   profile,
@@ -22,7 +22,7 @@ const ProfileInformations = ({
   >
     <div className={styles.profileImageContainer}>
       <RoundProfileImage user={profile} size={128} borderWidth={1} />
-      {editMode && <PhotoEdition profile={profile} />}
+      {editMode && <ImageEdition profile={profile} />}
     </div>
     <div>
       <h2>{profile.name}</h2>

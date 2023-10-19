@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Button from '@codegouvfr/react-dsfr/Button'
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
 import { useRouter } from 'next/navigation'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -15,9 +14,10 @@ import {
   UpdateProfileImageCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
 import RoundProfileImage from '../../RoundProfileImage'
-import styles from './PhotoEdition.module.css'
+import EditImageButton from '../../EditImageButton'
+import styles from './ImageEdition.module.css'
 
-const PhotoEdition = ({
+const ImageEdition = ({
   profile,
 }: {
   profile: ProfilePageData | FilteredProfile
@@ -63,15 +63,13 @@ const PhotoEdition = ({
         }
         initialImageId={profile.image ? profile.image.id : ''}
       />
-      <Button
+      <EditImageButton
         onClick={() => setOpen(true)}
         title="Modifier la photo de profil"
-        iconId="fr-icon-camera-line"
-        priority="tertiary"
         className={styles.pictureModification}
       />
     </>
   )
 }
 
-export default withTrpc(PhotoEdition)
+export default withTrpc(ImageEdition)

@@ -4,8 +4,15 @@ import { BasePageData } from '@app/web/server/bases/getBase'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import RoundImage from '../RoundImage'
 import styles from './Images.module.css'
+import ImageEdition from './Edition/ImageEdition'
 
-const Images = ({ base }: { base: BasePageData | FilteredBase }) => (
+const Images = ({
+  base,
+  editMode,
+}: {
+  base: BasePageData | FilteredBase
+  editMode?: boolean
+}) => (
   <>
     <div className={styles.banner}>
       {base.coverImage ? (
@@ -20,13 +27,17 @@ const Images = ({ base }: { base: BasePageData | FilteredBase }) => (
           ]}
         />
       ) : null}
+      {editMode && <ImageEdition base={base} type="coverImage" />}
     </div>
-    <RoundImage
-      className={styles.logo}
-      size={128}
-      image={base.image}
-      borderWidth={2}
-    />
+    <div className={styles.logoContainer}>
+      <RoundImage
+        className={styles.logo}
+        size={128}
+        image={base.image}
+        borderWidth={2}
+      />
+      {editMode && <ImageEdition base={base} type="image" />}
+    </div>
   </>
 )
 

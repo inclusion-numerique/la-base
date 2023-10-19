@@ -42,7 +42,7 @@ const CroppedUploadModal = <T extends FieldValues>({
   height: number
   ratio: number
   round?: boolean
-  onChange: (imageId?: string) => void
+  onChange: (imageId: string | null) => void
   emptyChildren?: ReactNode
 }) => {
   const [croppingMode, setCroppingMode] = useState(false)
@@ -78,7 +78,7 @@ const CroppedUploadModal = <T extends FieldValues>({
 
   const onSubmit = async () => {
     try {
-      let createdImage: string | undefined
+      let createdImage: string | null = null
 
       const cropValues =
         imageBox && croppedBox
