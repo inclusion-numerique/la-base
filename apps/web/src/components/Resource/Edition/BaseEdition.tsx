@@ -93,6 +93,9 @@ const BaseEdition = ({
               children: 'Valider',
               type: 'submit',
               disabled,
+              nativeButtonProps: {
+                'data-testid': 'validate-base-button',
+              },
             },
           ]}
         >

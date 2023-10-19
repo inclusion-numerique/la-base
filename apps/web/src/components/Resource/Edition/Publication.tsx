@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -16,7 +16,7 @@ const Publication = ({
   resource,
   user,
   sendCommand,
-  form: { control },
+  form: { control, setValue },
 }: {
   resource: ResourceProjectionWithContext
   user: SessionUser
@@ -27,6 +27,16 @@ const Publication = ({
     const canBePublic = resource.base ? resource.base.isPublic : user.isPublic
     return canBePublic ? null : false
   })
+
+  useEffect(() => {
+    if (isPublic) {
+      const canBePublic = resource.base ? resource.base.isPublic : user.isPublic
+      if (!canBePublic) {
+        setIsPublic(false)
+        setValue('payload.isPublic', false)
+      }
+    }
+  }, [resource, user, isPublic, setValue])
 
   return (
     <>

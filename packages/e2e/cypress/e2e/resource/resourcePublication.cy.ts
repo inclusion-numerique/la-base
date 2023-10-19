@@ -20,13 +20,11 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('notice-private-profile').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('not.be.checked')
-    cy.testId('publish-resource-button').should('be.disabled')
 
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-box').should('exist')
     cy.testId('contributors-box').should('not.exist')
 
-    cy.testId('publish-resource-button').should('be.disabled')
     cy.testId('indexation-themes-select').select('IntelligenceArtificielle')
     cy.testId('indexation-support-types-select').select('Article')
     cy.testId('indexation-targetAudiences-select').select('Particuliers')
@@ -62,7 +60,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('notice-private-profile').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('not.be.checked')
-    cy.testId('publish-resource-button').should('be.disabled')
 
     cy.testId('visibility-radio-resource-private').click({ force: true })
     cy.testId('indexation-box').should('not.exist')
@@ -158,6 +155,52 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('contributors-box').should('not.exist')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('not.be.checked')
-    cy.testId('publish-resource-button').should('be.disabled')
+
+    cy.testId('publish-resource-button').click()
+    cy.testId('input-form-field__isPublic__error').should('exist')
+    cy.testId('input-form-field__isPublic__error').should(
+      'have.text',
+      'Veuillez specifier la visibilité de la ressource',
+    )
+  })
+
+  it('Acceptation 6 - Resource publique dans un cas impossible', () => {
+    cleanUpAndCreateTestResourceInProfile(true, true)
+    cy.testId('publish-resource-button').click()
+
+    cy.testId('indexation-box').should('not.exist')
+    cy.testId('contributors-box').should('not.exist')
+    cy.testId('notice-private-base').should('not.exist')
+    cy.testId('notice-private-profile').should('not.exist')
+    cy.testId('visibility-radio-resource-public').should('not.be.checked')
+    cy.testId('visibility-radio-resource-private').should('not.be.checked')
+
+    cy.testId('visibility-radio-resource-public').click({ force: true })
+    cy.testId('indexation-box').should('exist')
+    cy.testId('contributors-box').should('not.exist')
+
+    cy.testId('edit-base-button').click()
+    cy.testId('resource-base-0').click({ force: true })
+    cy.testId('validate-base-button').click()
+
+    cy.testId('visibility-radio-resource-public').should('not.be.checked')
+    cy.testId('visibility-radio-resource-private').should('be.checked')
+    cy.testId('indexation-box').should('not.exist')
+    cy.testId('contributors-box').should('exist')
+
+    cy.testId('publish-resource-button').click()
+
+    cy.wait('@mutation')
+    cy.url().should(
+      'contain',
+      appUrl(
+        `/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes`,
+      ),
+    )
+
+    cy.testId('resource-public-state-badge').should(
+      'have.text',
+      'Ressource privée',
+    )
   })
 })

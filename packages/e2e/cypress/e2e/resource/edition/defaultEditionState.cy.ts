@@ -29,9 +29,10 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
       // Resource has been created, and has 2 contents not published
       cy.testId('resource-published-state').should('have.text', 'Brouillon')
       cy.testId('resource-edition-state').should('not.exist')
-      cy.testId('publish-resource-button')
-        .should('be.disabled')
-        .should('have.text', 'Publier la ressource')
+      cy.testId('publish-resource-button').should(
+        'have.text',
+        'Publier la ressource',
+      )
     })
 
     it('Acceptation 1 - Seulement la premiere edition redirige vers la publication', () => {
@@ -43,7 +44,6 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
       cy.wait('@mutation')
 
       cy.testId('publish-resource-button')
-        .should('not.be.disabled')
         .should('have.text', 'Publier la ressource')
         .click()
 
@@ -75,7 +75,6 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
       cy.wait('@mutation')
 
       cy.testId('publish-resource-button')
-        .should('not.be.disabled')
         .should('have.text', 'Publier les modifications')
         .click()
 

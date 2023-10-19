@@ -34,28 +34,36 @@ export const indexationCommand = {
 
 export const PublishCommandValidation = z.object({
   name: z.literal('Publish'),
-  payload: z.discriminatedUnion('isPublic', [
-    z.object({
-      resourceId: z.string().uuid(),
-      isPublic: z.literal(true),
-      themes: indexationCommand.themes.min(
-        1,
-        "Merci d'ajouter au moins une thématique",
-      ),
-      supportTypes: indexationCommand.supportTypes.min(
-        1,
-        "Merci d'ajouter au moins un type de support",
-      ),
-      targetAudiences: indexationCommand.targetAudiences.min(
-        1,
-        "Merci d'ajouter au moins un public visé",
-      ),
-    }),
-    z.object({
-      resourceId: z.string().uuid(),
-      isPublic: z.literal(false),
-    }),
-  ]),
+  payload: z.discriminatedUnion(
+    'isPublic',
+    [
+      z.object({
+        resourceId: z.string().uuid(),
+        isPublic: z.literal(true),
+        themes: indexationCommand.themes.min(
+          1,
+          "Merci d'ajouter au moins une thématique",
+        ),
+        supportTypes: indexationCommand.supportTypes.min(
+          1,
+          "Merci d'ajouter au moins un type de support",
+        ),
+        targetAudiences: indexationCommand.targetAudiences.min(
+          1,
+          "Merci d'ajouter au moins un public visé",
+        ),
+      }),
+      z.object({
+        resourceId: z.string().uuid(),
+        isPublic: z.literal(false),
+      }),
+    ],
+    {
+      errorMap: () => ({
+        message: 'Veuillez specifier la visibilité de la ressource',
+      }),
+    },
+  ),
 })
 
 export type PublishCommand = z.infer<typeof PublishCommandValidation>

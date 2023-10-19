@@ -34,7 +34,7 @@ const EditionActionBar = ({
   publishedState,
   editionState,
   unPublishedEdits,
-  canPublish,
+  isSubmitting,
   publishMode,
   onPublish,
   onDelete,
@@ -43,7 +43,7 @@ const EditionActionBar = ({
   publishedState: ResourcePublishedState
   editionState: ResourceEditionState
   unPublishedEdits: boolean
-  canPublish: boolean
+  isSubmitting: boolean
   publishMode?: boolean
   onPublish: () => void
   onDelete: () => void
@@ -162,7 +162,7 @@ const EditionActionBar = ({
             )}
             <Button
               type="button"
-              disabled={!canPublish}
+              className={classNames({ 'fr-btn--loading': isSubmitting })}
               onClick={onPublish}
               data-testid="publish-resource-button"
             >

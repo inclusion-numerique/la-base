@@ -84,12 +84,18 @@ export const cleanUpAndCreateTestPublishedResourceInProfile = (
 
 export const cleanUpAndCreateTestResourceInProfile = (
   publicProfile?: boolean,
+  withBase?: boolean,
 ) => {
   cy.execute('deleteAllData', {})
   const user = createTestUser({ isPublic: publicProfile })
-  const commands = createTestResourceCommands({})
-
   cy.createUserAndSignin(user)
+
+  if (withBase) {
+    const base = createTestBase(user.id)
+    cy.createBase(base)
+  }
+
+  const commands = createTestResourceCommands({})
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
     cy.visit(`/ressources/${slug}/editer`)
   })

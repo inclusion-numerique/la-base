@@ -23,7 +23,7 @@ const VisibilityEdition = <T extends FieldValues>({
   <Controller
     control={control}
     name={path}
-    render={({ field: { onChange, name, value } }) => {
+    render={({ field: { onChange, name, value }, fieldState: { error } }) => {
       const booleanValue = value as boolean | null | undefined
       const stringValue =
         booleanValue === undefined || booleanValue === null
@@ -84,6 +84,15 @@ const VisibilityEdition = <T extends FieldValues>({
             <span className="fr-mr-1w">Ressource privée</span>
             <PrivacyTag />
           </ResourceBaseRichRadioElement>
+          {error && (
+            <p
+              className="fr-error-text"
+              id="input-form-field__isPublic__error"
+              data-testid="input-form-field__isPublic__error"
+            >
+              {error.message}
+            </p>
+          )}
         </fieldset>
       )
     }}

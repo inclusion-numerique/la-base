@@ -38,19 +38,6 @@ export type SendCommand = (
   command: ResourceMutationCommand,
 ) => Promise<SendCommandResult>
 
-const isPublishable = (
-  publishState: boolean,
-  editionState: ResourceEditionState,
-  hasUnpublishedChanges: boolean,
-  publishMode?: boolean,
-) => {
-  if (publishMode) {
-    return publishState
-  }
-
-  return editionState === ResourceEditionState.SAVED && hasUnpublishedChanges
-}
-
 const Edition = ({
   resource,
   draftResource,
@@ -160,15 +147,6 @@ const Edition = ({
       },
     },
   })
-
-  // Publish command is only available if publishedResource is older than updatedDraftResource
-  const canPublish = isPublishable(
-    // TODO: should be formState.isValid => not refreshed...
-    publicationForm.formState.isValid,
-    editionState,
-    hasUnpublishedChanges,
-    publishMode,
-  )
 
   const onPublish = async () => {
     if (publishMode) {
@@ -286,7 +264,7 @@ const Edition = ({
         publishMode={publishMode}
         publishedState={publishedState}
         editionState={editionState}
-        canPublish={canPublish}
+        isSubmitting={publicationForm.formState.isSubmitting}
         unPublishedEdits={hasUnpublishedChanges}
         onPublish={onPublish}
         onDelete={onDelete}
