@@ -1,12 +1,10 @@
 import { faker } from '@faker-js/faker'
+import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 
 const BASE_NUMBER = 100
 
-export const users: Exclude<
-  Parameters<typeof prismaClient.user.upsert>[0]['create'],
-  undefined
->[] = [
+export const users: Prisma.UserCreateManyInput[] = [
   {
     id: '99afd613-9d54-4110-9062-065c627eda8a',
     firstName: 'Edith',

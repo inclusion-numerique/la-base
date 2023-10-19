@@ -52,12 +52,14 @@ export const ResourcePrivacyTag = ({
 export const PrivacyTag = ({
   isPublic,
   small,
+  label,
 }: {
   isPublic?: boolean
   small?: boolean
+  label?: string
 }) =>
   isPublic ? (
-    <CustomTag {...publicValues} small={small} />
+    <CustomTag {...publicValues} small={small} label={label} />
   ) : (
-    <CustomTag {...privateValues} small={small} />
+    <CustomTag {...privateValues} small={small} label={label} />
   )

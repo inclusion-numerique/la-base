@@ -5,12 +5,11 @@ import Menu from '@app/web/components/Profile/Menu'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResourcesCount } from '@app/web/server/resources/getResourcesList'
-import { getProfileCollectionsCount } from '@app/web/server/collections/getCollectionsList'
-import { getProfileBases } from '@app/web/server/bases/getBasesList'
-import Bases from '@app/web/components/Base/List/Bases'
-import EmptyBases from '@app/web/components/Base/List/EmptyBases'
+import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
+import { getProfileBasesCount } from '@app/web/server/bases/getBasesList'
 import { filterAccess } from '@app/web/server/profiles/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
+import Collections from '@app/web/components/Collection/List/Collections'
 
 const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -19,10 +18,10 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
-  const [resourcesCount, bases, collectionsCount] = await Promise.all([
+  const [resourcesCount, basesCount, collections] = await Promise.all([
     getProfileResourcesCount(profile.id, user),
-    getProfileBases(profile.id, user),
-    getProfileCollectionsCount(profile.id, user),
+    getProfileBasesCount(profile.id, user),
+    getProfileCollections(profile.id, user),
   ])
 
   const authorizations = filterAccess(profile, user)
@@ -36,17 +35,16 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
       <Menu
         profile={authorizations.profile}
         resourcesCount={resourcesCount}
-        collectionsCount={collectionsCount}
-        basesCount={bases.length}
-        currentPage="/bases"
+        collectionsCount={collections.length}
+        basesCount={basesCount}
+        currentPage="/collections"
         isConnectedUser={authorizations.isUser}
       />
       <div className="fr-container fr-mb-4w">
-        {bases.length === 0 ? (
-          <EmptyBases isConnectedUser={authorizations.isUser} />
-        ) : (
-          <Bases bases={bases} isConnectedUser={authorizations.isUser} />
-        )}
+        <Collections
+          collections={collections}
+          isConnectedUser={authorizations.isUser}
+        />
       </div>
     </>
   ) : (
