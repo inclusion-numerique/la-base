@@ -113,11 +113,22 @@ const computeResourcesListWhereForUserAndProfile = (
         createdById: profileId,
       },
       {
-        contributors: {
-          some: {
-            contributorId: profileId,
+        AND: [
+          {
+            contributors: {
+              some: {
+                contributorId: profileId,
+              },
+            },
           },
-        },
+          {
+            events: {
+              some: {
+                byId: profileId,
+              },
+            },
+          },
+        ],
       },
     ],
   })
