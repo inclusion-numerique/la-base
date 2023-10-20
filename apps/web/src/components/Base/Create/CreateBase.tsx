@@ -19,7 +19,6 @@ import {
 import {
   UpdateBaseContactsCommand,
   UpdateBaseInformationsCommand,
-  UpdateBaseVisibilityCommand,
 } from '@app/web/server/bases/updateBase'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { getZodValidationMutationError } from '@app/web/utils/getZodValidationMutationError'
@@ -162,13 +161,8 @@ const CreateBase = () => {
             description="Choisissez la visibilité de votre base. Vous pourrez modifier sa visibilité à tout moment."
           >
             <VisibilityEdition
-              control={
-                (
-                  form as UseFormReturn<
-                    CreateBaseCommand | UpdateBaseVisibilityCommand
-                  >
-                ).control
-              }
+              label="Base"
+              control={control}
               disabled={isSubmitting}
             />
           </Card>

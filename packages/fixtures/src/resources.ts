@@ -184,11 +184,12 @@ export const randomResourcesEvents: (
     ...(MutationHistoryResourceEvent & { resourceId: string })[],
   ][]
 > = async (transaction, random) => {
-  const users = await transaction.user.findMany({ select: { id: true } })
-
-  const bases = await transaction.base.findMany({
-    select: { id: true },
-  })
+  const [users, bases] = await Promise.all([
+    transaction.user.findMany({ select: { id: true } }),
+    transaction.base.findMany({
+      select: { id: true },
+    }),
+  ])
 
   return Array.from({ length: random * BASE_NUMBER }).map(() => {
     const creationDate = faker.date.past()

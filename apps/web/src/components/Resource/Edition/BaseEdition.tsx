@@ -72,7 +72,8 @@ const BaseEdition = ({
       {children ||
         (!!resource.createdBy && (
           <PublishedInInformation
-            resource={{ base: resource.base, createdBy: resource.createdBy }}
+            user={resource.createdBy}
+            base={resource.base}
           />
         ))}
       <form onSubmit={handleSubmit(onSubmit)}>

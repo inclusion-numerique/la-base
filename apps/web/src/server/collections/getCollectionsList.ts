@@ -52,6 +52,12 @@ export const collectionSelect = {
   title: true,
   description: true,
   isPublic: true,
+  image: {
+    select: {
+      id: true,
+      altText: true,
+    },
+  },
   owner: {
     select: {
       id: true,
@@ -60,6 +66,15 @@ export const collectionSelect = {
       lastName: true,
       image: { select: { altText: true, id: true } },
     },
+  },
+  resources: {
+    select: {
+      image: { select: { id: true, altText: true } },
+    },
+    where: {
+      deleted: null,
+    },
+    take: 3,
   },
   _count: {
     select: {

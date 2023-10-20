@@ -1,18 +1,20 @@
 import React from 'react'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, Path } from 'react-hook-form'
 import ResourceBaseRichRadioElement from '../../Resource/ResourceBaseRichRadioElement'
 import { PrivacyTag } from '../../PrivacyTags'
 
-const VisibilityEdition = ({
+const VisibilityEdition = <T extends { isPublic: boolean }>({
   control,
   disabled,
+  label,
 }: {
-  control: Control<{ isPublic: boolean }>
+  control: Control<T>
   disabled?: boolean
+  label: 'Base' | 'Collection'
 }) => (
   <Controller
     control={control}
-    name="isPublic"
+    name={'isPublic' as Path<T>}
     render={({ field: { onChange, name, value }, fieldState: { error } }) => (
       <fieldset
         className="fr-fieldset"
@@ -20,9 +22,9 @@ const VisibilityEdition = ({
         aria-labelledby="radio-rich-legend radio-rich-messages"
       >
         <ResourceBaseRichRadioElement
-          id="radio-base-public"
+          id={`radio-${label.toLowerCase()}-public`}
           disabled={disabled}
-          data-testid="visibility-radio-base-public"
+          data-testid={`visibility-radio-${label.toLowerCase()}-public`}
           name={name}
           value={
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -35,7 +37,7 @@ const VisibilityEdition = ({
           }}
         >
           <div className="fr-mr-1w">
-            Base publique
+            {label} publique
             <p className="fr-text--xs fr-hint-text fr-mb-0">
               Visible par tous les visiteurs.
             </p>
@@ -43,9 +45,9 @@ const VisibilityEdition = ({
           <PrivacyTag isPublic />
         </ResourceBaseRichRadioElement>
         <ResourceBaseRichRadioElement
-          id="radio-base-private"
+          id={`radio-${label.toLowerCase()}-private`}
           disabled={disabled}
-          data-testid="visibility-radio-base-private"
+          data-testid={`visibility-radio-${label.toLowerCase()}-private`}
           name={name}
           value={
             value === undefined || value === null ? null : value.toString()
@@ -56,7 +58,7 @@ const VisibilityEdition = ({
           }}
         >
           <div className="fr-mr-1w">
-            Base privée
+            {label} privée
             <p className="fr-text--xs fr-hint-text fr-mb-0">
               Accessible uniquement aux membres et aux administrateurs que vous
               inviterez.

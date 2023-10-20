@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { Prisma } from '@prisma/client'
 
-const BASE_NUMBER = 100
+const BASE_NUMBER = 20
 
 export const randomCollections: (
   transaction: Prisma.TransactionClient,
@@ -26,4 +26,26 @@ export const randomCollections: (
       deleted: Math.random() < 0.05 ? faker.date.past() : undefined,
     })),
   ]
+}
+
+export const randomResourcesInCollections: (
+  transaction: Prisma.TransactionClient,
+) => Promise<{ resourceId: string; collectionId: string }[]> = async (
+  transaction,
+) => {
+  const [resources, collections] = await Promise.all([
+    transaction.resource.findMany({
+      select: { id: true },
+    }),
+    transaction.collection.findMany({ select: { id: true } }),
+  ])
+
+  return collections.flatMap((collection) =>
+    faker.helpers
+      .arrayElements(resources, { min: 2, max: 20 })
+      .map((resource) => ({
+        resourceId: resource.id,
+        collectionId: collection.id,
+      })),
+  )
 }

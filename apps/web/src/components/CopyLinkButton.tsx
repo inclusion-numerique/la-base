@@ -34,7 +34,7 @@ const CopyLinkButton = ({
           'fr-btn',
           'fr-btn--sm',
           `fr-btn--${
-            priority ? priority.replace(' ', '-') : 'tertiary-no-outline'
+            priority ? priority.replaceAll(' ', '-') : 'tertiary-no-outline'
           }`,
           'fr-icon-links-line',
           'fr-icon--sm',

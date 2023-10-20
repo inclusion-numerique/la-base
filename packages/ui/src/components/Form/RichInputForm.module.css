@@ -20,10 +20,18 @@
     &::after {
       content: none;
     }
+
     cursor: text;
   }
 
   :last-child {
     margin-bottom: 0;
+  }
+}
+
+.small {
+
+  :global(.ProseMirror) {
+    min-height: 64px;
   }
 }

@@ -1,20 +1,20 @@
 import Link from 'next/link'
 import React from 'react'
-import { Resource } from '@app/web/server/resources/getResource'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import { FilteredResource } from '@app/web/server/resources/authorization'
-import RoundImage from '@app/web/components/RoundImage'
+import { User } from '@prisma/client'
+import RoundImage, { RoundImageProps } from '@app/web/components/RoundImage'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import { BasePageData } from '@app/web/server/bases/getBase'
 
 const PublishedInInformation = ({
-  resource: { createdBy, base },
+  user,
+  base,
 }: {
-  resource: Pick<
-    ResourceListItem | Resource | FilteredResource,
-    'createdBy' | 'base'
-  >
+  user: Pick<User, 'firstName' | 'lastName' | 'name' | 'id'> & {
+    image: RoundImageProps['image']
+  }
+  base: Pick<BasePageData, 'slug' | 'image' | 'title'> | null
 }) => {
-  const image = base ? base.image : createdBy.image
+  const image = base ? base.image : user.image
 
   return (
     <div className="fr-grid-row fr-grid-row--middle">
@@ -30,9 +30,12 @@ const PublishedInInformation = ({
         </>
       ) : (
         <>
-          <RoundProfileImage className="fr-mr-1w" user={createdBy} />
+          <RoundProfileImage className="fr-mr-1w" user={user} />
           <span className="fr-text--xs fr-mb-0">
-            Publié par {createdBy.name}
+            Publié par{' '}
+            <Link href={`/profils/${user.id}`} className="fr-link fr-text--xs">
+              {user.name}
+            </Link>
           </span>
         </>
       )}

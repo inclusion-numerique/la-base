@@ -11,6 +11,7 @@ import {
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Link } from '@tiptap/extension-link'
+import classNames from 'classnames'
 import RichInputFormLinkTooltip from '@app/ui/components/Form/RichInputFormLinkTooltip'
 import styles from './RichInputForm.module.css'
 import RichInputFormMenuBar from './RichInputFormMenuBar'
@@ -36,6 +37,7 @@ const RichInputForm = <T extends FieldValues>({
   'data-testid': dataTestId,
   onChange,
   onBlur,
+  size,
 }: {
   label?: ReactNode
   hint?: ReactNode
@@ -48,6 +50,7 @@ const RichInputForm = <T extends FieldValues>({
   ['data-testid']?: string
   onChange?: (text: PathValue<T, Path<T>>) => void
   onBlur?: () => void
+  size?: 'medium' | 'small'
 }) => {
   // First onUpdate call is triggered by the first render
   // In a form context we don't want to trigger the onChange on first render
@@ -100,7 +103,9 @@ const RichInputForm = <T extends FieldValues>({
           <RichInputFormMenuBar editor={editor} disabled={disabled} />
           <EditorContent
             editor={editor}
-            className={styles.input}
+            className={classNames(styles.input, {
+              [styles.small]: size === 'small',
+            })}
             aria-describedby={ariaDescribedBy}
             disabled={disabled}
             id={id}

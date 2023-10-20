@@ -9,7 +9,7 @@ import { randomUsers, users } from './users'
 import { randomMembers } from './members'
 import { randomContributors } from './contributors'
 
-import { randomCollections } from './collections'
+import { randomCollections, randomResourcesInCollections } from './collections'
 import TransactionClient = Prisma.TransactionClient
 
 function myParseInt(value: string) {
@@ -78,6 +78,19 @@ const seed = async (transaction: TransactionClient, random?: number) => {
 
     const contributors = await randomContributors(transaction)
     await transaction.resourceContributors.createMany({ data: contributors })
+
+    const resourcesInCollections =
+      await randomResourcesInCollections(transaction)
+    await Promise.all(
+      resourcesInCollections.map(({ resourceId, collectionId }) =>
+        transaction.resource.update({
+          data: {
+            collectionId,
+          },
+          where: { id: resourceId },
+        }),
+      ),
+    )
   } else {
     await Promise.all(
       users.map((user) =>

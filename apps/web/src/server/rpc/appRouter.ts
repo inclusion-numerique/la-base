@@ -1,3 +1,4 @@
+import { collectionRouter } from '@app/web/server/rpc/collection/collectionRouter'
 import { router } from '@app/web/server/rpc/createRouter'
 import { imageRouter } from '@app/web/server/rpc/image/imageRouter'
 import { resourceRouter } from '@app/web/server/rpc/resource/resourceRouter'
@@ -17,6 +18,7 @@ export const appRouter = router({
   base: baseRouter,
   baseMember: baseMemberRouter,
   profile: profileRouter,
+  collection: collectionRouter,
   metaData: metadataRouter,
   upload: uploadRouter,
   image: imageRouter,

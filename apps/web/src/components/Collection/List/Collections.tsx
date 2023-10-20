@@ -26,7 +26,7 @@ const Collections = ({
           {
             label: `Mes collections · ${collections.length}`,
             content: (
-              <div className={styles.cards}>
+              <div className={styles.tabCards}>
                 {collections.map((collection) => (
                   <CollectionCard collection={collection} key={collection.id} />
                 ))}
@@ -46,7 +46,7 @@ const Collections = ({
         ]}
       />
     ) : (
-      <div className={styles.card}>
+      <div className={styles.cards}>
         {collections.map((collection) => (
           <CollectionCard collection={collection} key={collection.id} />
         ))}

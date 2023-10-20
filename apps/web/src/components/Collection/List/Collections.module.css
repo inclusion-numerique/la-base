@@ -9,11 +9,14 @@
   margin-bottom: 48px;
 }
 
-.cards {
+.cards,
+.tabCards {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+}
 
+.tabCards {
   @media (min-width: 48em) {
     margin: 0 -32px;
   }
