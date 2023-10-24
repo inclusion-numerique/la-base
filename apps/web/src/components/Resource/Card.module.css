@@ -9,6 +9,9 @@
 
 .textAndDescription {
   flex-direction: column;
+
+  /* This fixes text overflow (see .description ) */
+  min-width: 0;
 }
 
 .imageContainer {
@@ -99,6 +102,8 @@
 
 .title,
 .description {
+  overflow-wrap: break-word;
+
   a {
     background: none;
   }
