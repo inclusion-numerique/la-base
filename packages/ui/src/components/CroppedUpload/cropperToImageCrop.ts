@@ -42,8 +42,9 @@ export const imageCropToCropperInitialData = ({
   cropTop,
   cropLeft,
 }: ImageCropData) => ({
-  x: 0,
-  y: 0,
-  width: 10,
-  height: 10,
+  // TODO check if ok relative to Cropper img size
+  height: cropHeight * originalHeight,
+  width: cropWidth * originalWidth,
+  y: cropTop * originalHeight,
+  x: cropLeft * originalWidth,
 })
