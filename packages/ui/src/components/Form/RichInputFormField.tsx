@@ -18,6 +18,7 @@ export type RichInputFormFieldProps<T extends FieldValues> = {
   icon?: string
   info?: string | ((value: string) => string)
   size?: 'medium' | 'small'
+  allowHeadings?: boolean // Default true
 }
 
 const RichInputFormField = <T extends FieldValues>({
@@ -33,6 +34,7 @@ const RichInputFormField = <T extends FieldValues>({
   icon,
   info,
   size,
+  allowHeadings,
 }: UiComponentProps & RichInputFormFieldProps<T>) => {
   const id = `rich-input-form-field__${path}`
 
@@ -63,6 +65,7 @@ const RichInputFormField = <T extends FieldValues>({
             onBlur={onBlur}
             onChange={onChange}
             size={size}
+            allowHeadings={allowHeadings}
           />
         )
 

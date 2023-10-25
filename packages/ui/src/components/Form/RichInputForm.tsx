@@ -38,6 +38,7 @@ const RichInputForm = <T extends FieldValues>({
   onChange,
   onBlur,
   size,
+  allowHeadings = true,
 }: {
   label?: ReactNode
   hint?: ReactNode
@@ -51,6 +52,7 @@ const RichInputForm = <T extends FieldValues>({
   onChange?: (text: PathValue<T, Path<T>>) => void
   onBlur?: () => void
   size?: 'medium' | 'small'
+  allowHeadings?: boolean
 }) => {
   // First onUpdate call is triggered by the first render
   // In a form context we don't want to trigger the onChange on first render
@@ -100,7 +102,11 @@ const RichInputForm = <T extends FieldValues>({
       )}
       {editor ? (
         <div className={styles.container}>
-          <RichInputFormMenuBar editor={editor} disabled={disabled} />
+          <RichInputFormMenuBar
+            editor={editor}
+            disabled={disabled}
+            allowHeadings={allowHeadings}
+          />
           <EditorContent
             editor={editor}
             className={classNames(styles.input, {

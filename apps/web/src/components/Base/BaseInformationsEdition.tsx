@@ -43,6 +43,7 @@ const BaseInformationsEdition = ({
       hint="Text de description additionnel"
       form={form}
       path="description"
+      allowHeadings={false}
     />
   </>
 )
