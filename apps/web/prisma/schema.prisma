@@ -67,7 +67,7 @@ model User {
   resourceEvent    ResourceEvent[]
   bases            BaseMembers[]
   resources        ResourceContributors[]
-  Collection       Collection[]
+  collections      Collection[]
 
   @@map("users")
 }
@@ -109,12 +109,12 @@ model Base {
   twitter       String?
   linkedin      String?
 
-  created    DateTime      @default(now())
-  updated    DateTime      @default(now())
-  deleted    DateTime?
-  resources  Resource[]
-  members    BaseMembers[]
-  Collection Collection[]
+  created     DateTime      @default(now())
+  updated     DateTime      @default(now())
+  deleted     DateTime?
+  resources   Resource[]
+  members     BaseMembers[]
+  collections Collection[]
 
   @@map("bases")
 }
@@ -278,7 +278,7 @@ model Resource {
   contents     Content[]
   events       ResourceEvent[]
   contributors ResourceContributors[]
-  Collection   Collection?            @relation(fields: [collectionId], references: [id])
+  collection   Collection?            @relation(fields: [collectionId], references: [id])
   collectionId String?                @db.Uuid
 
   @@index(themes, name: "resources_themes_idx", type: Gin)
@@ -417,7 +417,7 @@ model Image {
   user           User?
   baseCoverImage Base?       @relation(name: "cover_image")
   base           Base?       @relation(name: "image")
-  Collection     Collection?
+  collection     Collection?
 
   @@map("images")
 }
