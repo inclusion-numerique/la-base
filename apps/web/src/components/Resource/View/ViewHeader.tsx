@@ -16,7 +16,7 @@ const ViewHeader = ({
 }) => (
   <div className="fr-grid-row">
     <div className={classNames(styles.leftColumn)}>
-      <PublishedInInformation resource={resource} />
+      <PublishedInInformation user={resource.createdBy} base={resource.base} />
     </div>
     <div className={styles.headerSeparator}>
       <hr />

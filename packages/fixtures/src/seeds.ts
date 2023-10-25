@@ -2,12 +2,14 @@ import { Command, InvalidArgumentError } from '@commander-js/extra-typings'
 import { prismaClient } from '@app/web/prismaClient'
 import { createResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { Prisma } from '@prisma/client'
+import { faker } from '@faker-js/faker'
 import { bases, randomBases } from './bases'
 import { randomResourcesEvents, resources } from './resources'
 import { randomUsers, users } from './users'
 import { randomMembers } from './members'
 import { randomContributors } from './contributors'
 
+import { randomCollections, randomResourcesInCollections } from './collections'
 import TransactionClient = Prisma.TransactionClient
 
 function myParseInt(value: string) {
@@ -44,6 +46,8 @@ const seed = async (transaction: TransactionClient, random?: number) => {
     await transaction.base.createMany({ data: newBases })
     const members = await randomMembers(transaction)
     await transaction.baseMembers.createMany({ data: members })
+    const collections = await randomCollections(transaction, random)
+    await transaction.collection.createMany({ data: collections })
 
     const newResourcesEvents = await randomResourcesEvents(transaction, random)
     const projections = newResourcesEvents.map(createResourceProjection)
@@ -74,6 +78,19 @@ const seed = async (transaction: TransactionClient, random?: number) => {
 
     const contributors = await randomContributors(transaction)
     await transaction.resourceContributors.createMany({ data: contributors })
+
+    const resourcesInCollections =
+      await randomResourcesInCollections(transaction)
+    await Promise.all(
+      resourcesInCollections.map(({ resourceId, collectionId }) =>
+        transaction.resource.update({
+          data: {
+            collectionId,
+          },
+          where: { id: resourceId },
+        }),
+      ),
+    )
   } else {
     await Promise.all(
       users.map((user) =>
@@ -81,7 +98,18 @@ const seed = async (transaction: TransactionClient, random?: number) => {
           where: { id: user.id },
           create: user,
           update: user,
-          select: { id: true },
+        }),
+      ),
+    )
+    await Promise.all(
+      users.map((user) =>
+        transaction.collection.create({
+          data: {
+            id: faker.string.uuid(),
+            title: 'Mes favoris',
+            ownerId: user.id as string,
+            isPublic: false,
+          },
         }),
       ),
     )
@@ -91,7 +119,6 @@ const seed = async (transaction: TransactionClient, random?: number) => {
           where: { id: base.id },
           create: base,
           update: base,
-          select: { id: true },
         }),
       ),
     )
@@ -101,7 +128,6 @@ const seed = async (transaction: TransactionClient, random?: number) => {
           where: { id: resource.id },
           create: resource,
           update: resource,
-          select: { id: true },
         }),
       ),
     )

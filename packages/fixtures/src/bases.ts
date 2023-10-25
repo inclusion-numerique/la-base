@@ -58,10 +58,7 @@ export const randomBases: (
     undefined
   >
 > = async (transaction, random) => {
-  const user = await transaction.user.findFirst()
-  if (!user) {
-    return []
-  }
+  const users = await transaction.user.findMany()
 
   return Array.from({ length: random * BASE_NUMBER }, () => {
     const text = faker.lorem.words({ min: 2, max: 10 })
@@ -71,7 +68,7 @@ export const randomBases: (
       slug,
       titleDuplicationCheckSlug: slug,
       description: faker.lorem.paragraph(),
-      ownerId: user.id,
+      ownerId: faker.helpers.arrayElement(users).id,
       isPublic: faker.datatype.boolean(),
       email: faker.internet.email(),
       emailIsPublic: faker.datatype.boolean(),

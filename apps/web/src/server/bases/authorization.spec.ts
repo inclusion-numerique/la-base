@@ -72,6 +72,7 @@ describe('Base authorization', () => {
     const privateBase = createTestBase(admin, false, [admin], [member])
 
     const filteredBase = {
+      id: privateBase.id,
       slug: privateBase.slug,
       title: privateBase.title,
       isPublic: privateBase.isPublic,

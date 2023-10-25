@@ -1,0 +1,10 @@
+.container {
+  max-width: 792px;
+  margin: 0 auto;
+}
+
+.collection {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}

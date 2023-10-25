@@ -1,0 +1,23 @@
+.container {
+  max-width: 792px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.cards,
+.tabCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.tabCards {
+  @media (min-width: 48em) {
+    margin: 0 -32px;
+  }
+}

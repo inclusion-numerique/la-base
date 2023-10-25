@@ -1,7 +1,11 @@
 import React from 'react'
 import styles from './PrivateBox.module.css'
 
-const PrivateBox = ({ type }: { type: 'Base' | 'Profil' | 'Ressource' }) => (
+const PrivateBox = ({
+  type,
+}: {
+  type: 'Base' | 'Profil' | 'Ressource' | 'Collection'
+}) => (
   <div
     className={styles.container}
     data-testid={`private-${type.toLowerCase()}-box`}

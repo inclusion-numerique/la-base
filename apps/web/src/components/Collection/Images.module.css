@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  height: 195px;
+}
+
+.images {
+  width: 50%;
+}

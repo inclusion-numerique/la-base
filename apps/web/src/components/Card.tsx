@@ -17,7 +17,7 @@ const Card = ({
 }: {
   id?: string
   className?: string
-  title: string
+  title?: string
   description?: string
   editMode?: boolean
   setEditMode?: Dispatch<SetStateAction<boolean>>
@@ -30,20 +30,22 @@ const Card = ({
     data-testid={dataTestid}
     id={id}
   >
-    <div>
-      <div className={styles.title}>
-        <h5 className="fr-mb-0">{title}</h5>
-        {!editMode && setEditMode && (
-          <Button
-            data-testid="edit-card-button"
-            priority="secondary"
-            iconId="fr-icon-edit-line"
-            title="Modifier"
-            onClick={() => setEditMode(true)}
-          />
-        )}
+    {title && (
+      <div>
+        <div className={styles.title}>
+          <h5 className="fr-mb-0">{title}</h5>
+          {!editMode && setEditMode && (
+            <Button
+              data-testid="edit-card-button"
+              priority="secondary"
+              iconId="fr-icon-edit-line"
+              title="Modifier"
+              onClick={() => setEditMode(true)}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    )}
     {description && (
       <div className={styles.description}>
         <span className="fr-text--sm fr-mb-0">{description}</span>

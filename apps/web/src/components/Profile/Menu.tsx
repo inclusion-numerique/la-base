@@ -7,12 +7,14 @@ const Menu = ({
   profile,
   resourcesCount,
   basesCount,
+  collectionsCount,
   currentPage,
   isConnectedUser,
 }: {
   profile: ProfilePageData
   resourcesCount: number
   basesCount: number
+  collectionsCount: number
   currentPage: string
   isConnectedUser: boolean
 }) => (
@@ -29,6 +31,17 @@ const Menu = ({
             >
               {isConnectedUser ? 'Mes ressources' : 'Ressources'} ·{' '}
               <b>{resourcesCount}</b>
+            </Link>
+          </li>
+          <li className="fr-nav__item">
+            <Link
+              data-testid="collections-menu-button"
+              className="fr-nav__link fr-link--md"
+              href={`/profils/${profile.id}/collections`}
+              aria-current={currentPage === '/collections' ? 'page' : undefined}
+            >
+              {isConnectedUser ? 'Mes collections' : 'Collections'} ·{' '}
+              <b>{collectionsCount}</b>
             </Link>
           </li>
           <li className="fr-nav__item">

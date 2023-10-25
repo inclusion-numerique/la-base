@@ -6,6 +6,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import { getProfileBasesCount } from '@app/web/server/bases/getBasesList'
+import { getProfileCollectionsCount } from '@app/web/server/collections/getCollectionsList'
 import EmptyResources from '@app/web/components/Profile/EmptyResources'
 import Resources from '@app/web/components/Resource/List/Resources'
 import { filterAccess } from '@app/web/server/profiles/authorization'
@@ -18,9 +19,10 @@ const ProfilePage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
-  const [resources, basesCount] = await Promise.all([
+  const [resources, basesCount, collectionsCount] = await Promise.all([
     getProfileResources(profile.id, user),
     getProfileBasesCount(profile.id, user),
+    getProfileCollectionsCount(profile.id, user),
   ])
 
   const authorizations = filterAccess(profile, user)
@@ -36,6 +38,7 @@ const ProfilePage = async ({ params }: { params: { slug: string } }) => {
         resourcesCount={resources.length}
         isConnectedUser={authorizations.isUser}
         basesCount={basesCount}
+        collectionsCount={collectionsCount}
         currentPage="/"
       />
       <div className="fr-container fr-mb-4w">

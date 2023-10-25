@@ -1,0 +1,12 @@
+.container {
+  background: var(--background-contrast-info);
+  border: 1px solid var(--background-action-low-blue-france);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.small {
+  height: 50%;
+}

@@ -5,6 +5,7 @@ import Menu from '@app/web/components/Profile/Menu'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResourcesCount } from '@app/web/server/resources/getResourcesList'
+import { getProfileCollectionsCount } from '@app/web/server/collections/getCollectionsList'
 import { getProfileBases } from '@app/web/server/bases/getBasesList'
 import Bases from '@app/web/components/Base/List/Bases'
 import EmptyBases from '@app/web/components/Base/List/EmptyBases'
@@ -18,9 +19,10 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
-  const [resourcesCount, bases] = await Promise.all([
+  const [resourcesCount, bases, collectionsCount] = await Promise.all([
     getProfileResourcesCount(profile.id, user),
     getProfileBases(profile.id, user),
+    getProfileCollectionsCount(profile.id, user),
   ])
 
   const authorizations = filterAccess(profile, user)
@@ -34,6 +36,7 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
       <Menu
         profile={authorizations.profile}
         resourcesCount={resourcesCount}
+        collectionsCount={collectionsCount}
         basesCount={bases.length}
         currentPage="/bases"
         isConnectedUser={authorizations.isUser}

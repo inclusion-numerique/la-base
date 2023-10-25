@@ -52,7 +52,10 @@ const ResourceCard = ({
   return (
     <div className={styles.container} data-testid="resource-card">
       <div className={styles.header}>
-        <PublishedInInformation resource={resource} />
+        <PublishedInInformation
+          user={resource.createdBy}
+          base={resource.base}
+        />
         <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
           {dates}
         </div>

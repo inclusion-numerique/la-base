@@ -104,7 +104,7 @@ const Visibility = ({
         title="Visibilité de la base"
         description="Choisissez la visibilité de votre base."
         form={form}
-        edition={<VisibilityEdition control={form.control} />}
+        edition={<VisibilityEdition control={form.control} label="Base" />}
         view={
           <>
             <p className="fr-text--sm" data-testid="base-visibility">
