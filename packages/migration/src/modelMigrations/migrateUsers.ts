@@ -11,12 +11,21 @@ export const getLegacyUsers = () => migrationPrismaClient.main_user.findMany()
 
 export type LegacyUser = FindManyItemType<typeof getLegacyUsers>
 
-export const getExistingUsers = async (): Promise<{
-  idMap: LegacyIdMap
-  emailMap: Map<string, string>
-}> => {
+export const getExistingUsers = async () => {
   const users = await prismaClient.user.findMany({
-    select: { legacyId: true, id: true, email: true },
+    select: {
+      legacyId: true,
+      id: true,
+      email: true,
+      collections: {
+        select: {
+          id: true,
+        },
+        where: {
+          isFavorites: true,
+        },
+      },
+    },
   })
 
   const idMap = new Map<number, string>(
@@ -26,21 +35,25 @@ export const getExistingUsers = async (): Promise<{
           !!user.legacyId,
       )
       .map(({ id, legacyId }) => [legacyId, id]),
-  )
+  ) satisfies LegacyIdMap
 
   const emailMap = new Map<string, string>(
     users.map(({ id, email }) => [email, id]),
   )
 
-  return { idMap, emailMap }
+  return { idMap, emailMap, users }
 }
+
+type ExistingUsers = Awaited<ReturnType<typeof getExistingUsers>>
 
 export const transformUser = ({
   legacyUser,
   emailMap,
+  existingUser,
 }: {
   legacyUser: LegacyUser
   emailMap: Map<string, string>
+  existingUser: ExistingUsers['users'][number] | undefined
 }) => {
   const legacyId = Number(legacyUser.id)
 
@@ -57,6 +70,14 @@ export const transformUser = ({
     updated: legacyUser.modified,
     emailVerified: legacyUser.is_active ? legacyUser.created : null,
     legacyId,
+    collections: existingUser?.collections.length
+      ? undefined
+      : {
+          create: {
+            title: 'Mes favoris',
+            isFavorites: true,
+          },
+        },
   } satisfies UpsertCreateType<typeof prismaClient.user.upsert>
 
   return data
@@ -69,12 +90,20 @@ export const migrateUsers = async () => {
   const existingUsers = await getExistingUsers()
   output(`- Found ${existingUsers.idMap.size} already migrated users`)
 
-  const usersData = legacyUsers.map((legacyUser) =>
-    transformUser({
+  const existingUsersById = new Map(
+    existingUsers.users.map((user) => [user.id, user]),
+  )
+
+  const usersData = legacyUsers.map((legacyUser) => {
+    const existingUserId = existingUsers.idMap.get(Number(legacyUser.id))
+    return transformUser({
       legacyUser,
       emailMap: existingUsers.emailMap,
-    }),
-  )
+      existingUser: existingUserId
+        ? existingUsersById.get(existingUserId)
+        : undefined,
+    })
+  })
 
   const chunkSize = 200
   let migratedUserCount = 0

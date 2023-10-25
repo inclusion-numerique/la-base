@@ -35,6 +35,7 @@ describe('migrateUser', () => {
       transformUser({
         legacyUser,
         emailMap: new Map(),
+        existingUser: undefined,
       }),
     ).toEqual({
       email: 'a.a@a.a',
@@ -46,6 +47,12 @@ describe('migrateUser', () => {
       updated: legacyUser.modified,
       created: legacyUser.created,
       emailVerified: legacyUser.created,
+      collections: {
+        create: {
+          title: 'Mes favoris',
+          isFavorites: true,
+        },
+      },
     })
   })
 })
