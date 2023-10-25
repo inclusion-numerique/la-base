@@ -131,7 +131,7 @@ const CroppedImage = ({
         disabled={disabled}
         state={error ? 'error' : 'default'}
         stateRelatedMessage={error}
-        label={`Modifier la photo${label ? ` ${label}` : ''}`}
+        label={label}
         hint={imageUploadHint}
         nativeInputProps={{
           value: imageToUpload ? imageToUpload.filename : '',

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import {
-  ServerFileValidationOptions,
   fileValidation,
+  ServerFileValidationOptions,
 } from '@app/ui/components/Form/utils/fileValidation.server'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
@@ -29,21 +29,28 @@ export const imageFileValidationOptions = {
   )}`,
 } satisfies ServerFileValidationOptions
 
+const cropErrorMessage = 'Veuillez choisir une zone à recadrer valide'
+const normalizedCropValue = z
+  .number()
+  .min(0, cropErrorMessage)
+  .max(1, cropErrorMessage)
+
+const cropValidation = {
+  cropHeight: normalizedCropValue.default(defaultCropValues.cropHeight),
+  cropWidth: normalizedCropValue.default(defaultCropValues.cropWidth),
+  cropTop: normalizedCropValue.default(defaultCropValues.cropTop),
+  cropLeft: normalizedCropValue.default(defaultCropValues.cropLeft),
+}
+
 export const ImageValidation = z.object({
   file: fileValidation(imageFileValidationOptions),
   altText: z.string().nullish(),
-  cropHeight: z.number().min(0).max(1).default(defaultCropValues.cropHeight),
-  cropWidth: z.number().min(0).max(1).default(defaultCropValues.cropWidth),
-  cropTop: z.number().min(0).max(1).default(defaultCropValues.cropTop),
-  cropLeft: z.number().min(0).max(1).default(defaultCropValues.cropLeft),
+  ...cropValidation,
 })
 
 export const UpdateImageValidation = z.object({
   id: z.string(),
-  cropHeight: z.number().min(0).max(1).default(defaultCropValues.cropHeight),
-  cropWidth: z.number().min(0).max(1).default(defaultCropValues.cropWidth),
-  cropTop: z.number().min(0).max(1).default(defaultCropValues.cropTop),
-  cropLeft: z.number().min(0).max(1).default(defaultCropValues.cropLeft),
+  ...cropValidation,
 })
 
 export type ImageData = z.infer<typeof ImageValidation>

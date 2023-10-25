@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {
   computeResourcesListWhereForUser,
   resourceListSelect,
@@ -26,12 +27,28 @@ const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
       select: {
         id: true,
         altText: true,
+        ...imageCropSelect,
+        upload: {
+          select: {
+            name: true,
+            size: true,
+            mimeType: true,
+          },
+        },
       },
     },
     image: {
       select: {
         id: true,
         altText: true,
+        ...imageCropSelect,
+        upload: {
+          select: {
+            name: true,
+            size: true,
+            mimeType: true,
+          },
+        },
       },
     },
     resources: {

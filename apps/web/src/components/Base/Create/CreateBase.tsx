@@ -35,7 +35,17 @@ const {
   close: closeCancelModal,
   buttonProps: cancelModalNativeButtonProps,
 } = createModal({
-  id: 'cancel',
+  id: 'cancel-base-creation',
+  isOpenedByDefault: false,
+})
+
+const addImageCropModal = createModal({
+  id: `add-base-image`,
+  isOpenedByDefault: false,
+})
+
+const addCoverImageCropModal = createModal({
+  id: `add-cover-image`,
   isOpenedByDefault: false,
 })
 
@@ -190,8 +200,8 @@ const CreateBase = () => {
           <Card
             className="fr-mt-3w"
             id="photos"
-            title="Photo de profil & couverture"
-            description="Ajouter une image de profil & une image de couverture pour vous rendre identifiable et attirer les visiteurs."
+            title="Image & couverture"
+            description="Ajouter une image et une image de couverture pour rendre votre base identifiable et attirer les visiteurs."
           >
             <Controller
               control={control}
@@ -200,9 +210,9 @@ const CreateBase = () => {
                 <CroppedUpload
                   ratio={1}
                   round
-                  label="de profil"
+                  label="Image de la base"
                   height={522 / 4.8}
-                  id="profile"
+                  modal={addImageCropModal}
                   disabled={isSubmitting}
                   error={error ? error.message : undefined}
                   onChange={setProfilePicture}
@@ -216,9 +226,9 @@ const CreateBase = () => {
               render={({ fieldState: { error } }) => (
                 <CroppedUpload
                   ratio={4.8}
-                  label="de couverture"
+                  label="Image de couverture"
                   height={522 / 4.8}
-                  id="cover"
+                  modal={addCoverImageCropModal}
                   onChange={setCoverImage}
                   disabled={isSubmitting}
                   error={error ? error.message : undefined}

@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { FilteredBase } from '@app/web/server/bases/authorization'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import {
   UpdateBaseImageCmmand,
@@ -48,7 +47,7 @@ const ImageEdition = ({
   base,
   type,
 }: {
-  base: BasePageData | FilteredBase
+  base: BasePageData
   type: 'image' | 'coverImage'
 }) => {
   const router = useRouter()
@@ -63,6 +62,11 @@ const ImageEdition = ({
   const mutate = trpc.base.updateImage.useMutation()
   const { title, modal, height, ratio, round, label, buttonClassName } =
     params[type]
+
+  const image = base[type]
+
+  // TODO use image to initialize crop parameters
+  console.log('IMAGE', image)
 
   return (
     <>

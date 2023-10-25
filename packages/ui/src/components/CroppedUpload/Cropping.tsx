@@ -4,8 +4,54 @@ import Cropper, { ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
-import { DEFAULT_CROP, ImageWithName } from './utils'
+import {
+  ImageCropData,
+  imageCropToCropperInitialData,
+} from '@app/ui/components/CroppedUpload/cropperToImageCrop'
+import { getEventDsfrOpenedModalParent } from '@app/ui/utils/getEventDsfrOpenedModalParent'
+import { ImageWithName } from './utils'
 import styles from './CroppedUpload.module.css'
+import CropStartEvent = Cropper.CropStartEvent
+import CropEndEvent = Cropper.CropEndEvent // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
+
+// If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
+// This function will stop the event from propagating further on the
+const stopDsfrModalClosePropagation = (event: Event) => {
+  const openedModalParent = getEventDsfrOpenedModalParent(event)
+
+  if (openedModalParent && event.target === openedModalParent) {
+    event.stopPropagation()
+  }
+}
+
+const onCropStart = (event: CropStartEvent) => {
+  const openedModalParent = getEventDsfrOpenedModalParent(event)
+
+  if (openedModalParent) {
+    // Use capturing phase to catch the click event before any other listener does
+    openedModalParent.addEventListener(
+      'click',
+      stopDsfrModalClosePropagation,
+      true,
+    )
+  }
+}
+
+const onCropEnd = (event: CropEndEvent) => {
+  // We want to remove the listener after the event has been processed/canceled
+  setTimeout(() => {
+    const openedModalParent = getEventDsfrOpenedModalParent(event)
+
+    if (openedModalParent) {
+      // Remove our capturing event listener
+      openedModalParent.removeEventListener(
+        'click',
+        stopDsfrModalClosePropagation,
+        true,
+      )
+    }
+  }, 0)
+}
 
 const Cropping = ({
   ratio,
@@ -13,18 +59,24 @@ const Cropping = ({
   imageSource,
   imageToUpload,
   cropperRef,
+  initialImageCropData,
 }: {
   ratio: number
   round?: boolean
   imageSource: string
   imageToUpload: ImageWithName | null
   cropperRef: RefObject<ReactCropperElement>
+  initialImageCropData?: ImageCropData
 }) => {
-  const zoomTo = (value: number) => {
+  const zoomTo = (value: number) => () => {
     if (cropperRef.current) {
       cropperRef.current.cropper.zoom(value)
     }
   }
+
+  const data = initialImageCropData
+    ? imageCropToCropperInitialData(initialImageCropData)
+    : undefined
 
   return (
     <>
@@ -35,6 +87,7 @@ const Cropping = ({
         })}
       >
         <Cropper
+          data={data}
           className={styles.cropper}
           responsive
           viewMode={2}
@@ -42,7 +95,10 @@ const Cropping = ({
           src={imageSource}
           guides={false}
           aspectRatio={ratio}
-          autoCropArea={DEFAULT_CROP}
+          cropstart={onCropStart}
+          cropend={onCropEnd}
+          autoCrop
+          autoCropArea={1}
         />
         <div className={styles.zoomButtons}>
           <Button
@@ -51,9 +107,7 @@ const Cropping = ({
             title="Zoomer"
             iconId="fr-icon-add-line"
             size="small"
-            onClick={() => {
-              zoomTo(0.2)
-            }}
+            onClick={zoomTo(0.2)}
           />
           <Button
             type="button"
@@ -61,9 +115,7 @@ const Cropping = ({
             title="Dézoomer"
             iconId="fr-icon-subtract-line"
             size="small"
-            onClick={() => {
-              zoomTo(-0.2)
-            }}
+            onClick={zoomTo(-0.2)}
           />
         </div>
       </div>

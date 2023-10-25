@@ -3,6 +3,7 @@ import sanitizeHtml from 'sanitize-html'
 import Image from 'next/image'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import PublishedInInformation from '../Resource/PublishedInInformation'
 import ResourceCard from '../Resource/Card'
 import styles from './View.module.css'
@@ -13,7 +14,7 @@ const View = ({
   user,
   isOwner,
 }: {
-  collection: CollectionPageData
+  collection: Omit<CollectionPageData, 'image'> & WithMinimalImageData
   user: SessionUser | null
   isOwner: boolean
 }) => (

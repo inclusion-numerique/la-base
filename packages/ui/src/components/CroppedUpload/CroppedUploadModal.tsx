@@ -6,6 +6,7 @@ import { trpc } from '@app/web/trpc'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { ReactCropperElement } from 'react-cropper'
+import { createPortal } from 'react-dom'
 import { CreateModalReturn } from '@app/ui/utils/modalTypes'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { getDefaultCropping, ImageWithName } from './utils'
@@ -106,7 +107,7 @@ const CroppedUploadModal = <T extends FieldValues>({
         }
         setCroppingMode(false)
       }
-    : onSubmit
+    : form.handleSubmit(onSubmit)
 
   useModalVisibility(modal.id, {
     onClosed: () => {
@@ -114,7 +115,7 @@ const CroppedUploadModal = <T extends FieldValues>({
     },
   })
 
-  return (
+  return createPortal(
     <Controller
       control={form.control}
       name={path}
@@ -179,7 +180,8 @@ const CroppedUploadModal = <T extends FieldValues>({
           </div>
         </modal.Component>
       )}
-    />
+    />,
+    document.body,
   )
 }
 

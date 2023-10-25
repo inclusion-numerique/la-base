@@ -4,6 +4,7 @@ import { User } from '@prisma/client'
 import RoundImage, { RoundImageProps } from '@app/web/components/RoundImage'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { BasePageData } from '@app/web/server/bases/getBase'
+import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 
 const PublishedInInformation = ({
   user,
@@ -12,7 +13,7 @@ const PublishedInInformation = ({
   user: Pick<User, 'firstName' | 'lastName' | 'name' | 'id'> & {
     image: RoundImageProps['image']
   }
-  base: Pick<BasePageData, 'slug' | 'image' | 'title'> | null
+  base: (Pick<BasePageData, 'slug' | 'title'> & WithMinimalImageData) | null
 }) => {
   const image = base ? base.image : user.image
 

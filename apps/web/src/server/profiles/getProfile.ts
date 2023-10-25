@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 
 export const getMatchingProfils = async (
   filter: string,
@@ -46,7 +47,20 @@ export const getProfilePageQuery = async (id: string) =>
       name: true,
       firstName: true,
       lastName: true,
-      image: { select: { id: true, altText: true } },
+      image: {
+        select: {
+          id: true,
+          altText: true,
+          ...imageCropSelect,
+          upload: {
+            select: {
+              name: true,
+              size: true,
+              mimeType: true,
+            },
+          },
+        },
+      },
       isPublic: true,
       email: true,
     },

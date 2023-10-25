@@ -5,7 +5,13 @@ import { Control, Controller, Path } from 'react-hook-form'
 import RadioButtons from '@codegouvfr/react-dsfr/RadioButtons'
 import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
 import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Images from '../Images'
+
+const collectionImageCropModal = createModal({
+  id: 'collection-image-crop-modal',
+  isOpenedByDefault: false,
+})
 
 const ImageEdition = <T extends { imageId?: string | null }>({
   control,
@@ -48,7 +54,7 @@ const ImageEdition = <T extends { imageId?: string | null }>({
         render={({ fieldState: { error } }) =>
           imageType === 'image' ? (
             <CroppedUpload
-              id="osef"
+              modal={collectionImageCropModal}
               disabled={disabled}
               ratio={2}
               height={195}
