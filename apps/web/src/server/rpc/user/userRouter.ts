@@ -26,6 +26,7 @@ export const userRouter = router({
             id: v4(),
             title: 'Mes favoris',
             ownerId: user.id,
+            isFavorites: true,
           },
         })
         return user

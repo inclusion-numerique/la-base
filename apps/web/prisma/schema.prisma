@@ -447,11 +447,13 @@ model Upload {
 }
 
 model Collection {
-  id String @id @default(uuid()) @db.Uuid
+  id       String @id @default(uuid()) @db.Uuid
+  legacyId Int?   @unique @map("legacy_id")
 
   title       String
   description String?
   isPublic    Boolean @default(false) @map("is_public")
+  isFavorites Boolean @default(false) @map("is_favorites")
 
   created DateTime  @default(now())
   deleted DateTime?

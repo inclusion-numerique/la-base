@@ -17,6 +17,7 @@ export const randomCollections: (
       title: 'Mes favoris',
       ownerId: user.id,
       isPublic: false,
+      isFavorites: true,
     })),
     ...Array.from({ length: random * BASE_NUMBER }, () => ({
       title: faker.lorem.words({ min: 2, max: 5 }),

@@ -109,6 +109,7 @@ const seed = async (transaction: TransactionClient, random?: number) => {
             title: 'Mes favoris',
             ownerId: user.id as string,
             isPublic: false,
+            isFavorites: true,
           },
         }),
       ),
