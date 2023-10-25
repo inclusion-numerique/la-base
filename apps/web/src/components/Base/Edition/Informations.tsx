@@ -14,6 +14,8 @@ import {
   UpdateBaseInformationsCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { getDepartmentName } from '@app/web/utils/departments'
+import MaybeEmptyValue from '@app/web/components/MaybeEmptyValue'
+import EmptyValue from '@app/web/components/EmptyValue'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import styles from './Edition.module.css'
 
@@ -46,25 +48,34 @@ const Informations = ({ base }: { base: BasePageData }) => {
           >
             {base.title}
           </div>
-          {base.department && (
-            <>
-              <div className={styles.label}>Département</div>
-              <div
-                className={classNames(styles.value, 'fr-mb-2w')}
-                data-testid="base-information-department"
-              >
-                {getDepartmentName(base.department)}
-              </div>
-            </>
-          )}
+          <>
+            <div className={styles.label}>Département</div>
+            <div
+              className={classNames(styles.value, 'fr-mb-2w')}
+              data-testid="base-information-department"
+            >
+              <MaybeEmptyValue
+                value={base.department && getDepartmentName(base.department)}
+              />
+            </div>
+          </>
           <div className={styles.label}>Description</div>
-          <div
-            className={styles.value}
-            data-testid="base-information-description"
-            dangerouslySetInnerHTML={{
-              __html: sanitizeHtml(base.description || ''),
-            }}
-          />
+          {base.description ? (
+            <div
+              className={styles.value}
+              data-testid="base-information-description"
+              dangerouslySetInnerHTML={{
+                __html: sanitizeHtml(base.description),
+              }}
+            />
+          ) : (
+            <div
+              className={styles.value}
+              data-testid="base-information-description"
+            >
+              <EmptyValue />
+            </div>
+          )}
         </>
       }
     />

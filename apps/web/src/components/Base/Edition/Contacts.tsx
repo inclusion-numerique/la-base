@@ -12,6 +12,7 @@ import {
   UpdateBaseContactsCommand,
   UpdateBaseContactsCommandValidation,
 } from '@app/web/server/bases/updateBase'
+import MaybeEmptyValue from '@app/web/components/MaybeEmptyValue'
 import BaseContactsEdition from '../BaseContactsEdition'
 import editionStyles from './Edition.module.css'
 import styles from './Contacts.module.css'
@@ -49,7 +50,7 @@ const Contacts = ({ base }: { base: BasePageData }) => {
                 className={editionStyles.value}
                 data-testid="base-contacts-email"
               >
-                {base.email}
+                <MaybeEmptyValue value={base.email} />
               </div>
             </div>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
@@ -58,7 +59,7 @@ const Contacts = ({ base }: { base: BasePageData }) => {
                 className={editionStyles.value}
                 data-testid="base-contacts-website"
               >
-                {base.website}
+                <MaybeEmptyValue value={base.website} />
               </div>
             </div>
           </div>
@@ -69,7 +70,7 @@ const Contacts = ({ base }: { base: BasePageData }) => {
                 className={editionStyles.value}
                 data-testid="base-contacts-linkedin"
               >
-                {base.linkedin}
+                <MaybeEmptyValue value={base.linkedin} />
               </div>
             </div>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
@@ -78,7 +79,7 @@ const Contacts = ({ base }: { base: BasePageData }) => {
                 className={editionStyles.value}
                 data-testid="base-contacts-twitter"
               >
-                {base.twitter}
+                <MaybeEmptyValue value={base.twitter} />
               </div>
             </div>
           </div>
@@ -89,7 +90,7 @@ const Contacts = ({ base }: { base: BasePageData }) => {
                 className={editionStyles.value}
                 data-testid="base-contacts-facebook"
               >
-                {base.facebook}
+                <MaybeEmptyValue value={base.facebook} />
               </div>
             </div>
           </div>
