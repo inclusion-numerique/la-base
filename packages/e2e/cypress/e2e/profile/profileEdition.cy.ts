@@ -25,7 +25,7 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
       },
     )
 
-    cy.visit(`/profils/${id}/editer`)
+    cy.visit(`/profils/${id}/modifier`)
     cy.dsfrShouldBeStarted()
     cy.testId('profile-visibility').should(
       'have.text',
@@ -63,7 +63,7 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
       'Ressource publique',
     )
 
-    cy.visit(`/profils/${id}/editer`)
+    cy.visit(`/profils/${id}/modifier`)
     cy.dsfrShouldBeStarted()
 
     cy.testId('profile-visibility').should(

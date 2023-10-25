@@ -15,8 +15,11 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer le profil', ()
     cy.testId('private-profil-box').should('not.exist')
     cy.testId('create-resource-button').should('not.exist')
 
-    cy.visit(`/profils/${id}/editer`)
-    cy.url().should('equal', appUrl(`/connexion?suivant=/profils/${id}/editer`))
+    cy.visit(`/profils/${id}/modifier`)
+    cy.url().should(
+      'equal',
+      appUrl(`/connexion?suivant=/profils/${id}/modifier`),
+    )
   })
 
   it('Acceptation 2 - Visiteur sur un profile privé', () => {
@@ -31,8 +34,11 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer le profil', ()
     cy.testId('private-profil-box').should('exist')
     cy.testId('create-resource-button').should('not.exist')
 
-    cy.visit(`/profils/${id}/editer`)
-    cy.url().should('equal', appUrl(`/connexion?suivant=/profils/${id}/editer`))
+    cy.visit(`/profils/${id}/modifier`)
+    cy.url().should(
+      'equal',
+      appUrl(`/connexion?suivant=/profils/${id}/modifier`),
+    )
   })
 
   it('Acceptation 3 - Utilisateur connecté sur un profile publique', () => {
@@ -49,7 +55,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer le profil', ()
     cy.testId('private-profil-box').should('not.exist')
     cy.testId('create-resource-button').should('not.exist')
 
-    cy.visit(`/profils/${id}/editer`)
+    cy.visit(`/profils/${id}/modifier`)
     cy.url().should('equal', appUrl(`/profils/${id}`))
   })
 
@@ -67,7 +73,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer le profil', ()
     cy.testId('private-profil-box').should('exist')
     cy.testId('create-resource-button').should('not.exist')
 
-    cy.visit(`/profils/${id}/editer`)
+    cy.visit(`/profils/${id}/modifier`)
     cy.url().should('equal', appUrl(`/profils/${id}`))
   })
 
@@ -82,7 +88,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer le profil', ()
     cy.testId('private-profil-box').should('not.exist')
     cy.testId('create-resource-button').should('exist')
 
-    cy.visit(`/profils/${id}/editer`)
-    cy.url().should('equal', appUrl(`/profils/${id}/editer`))
+    cy.visit(`/profils/${id}/modifier`)
+    cy.url().should('equal', appUrl(`/profils/${id}/modifier`))
   })
 })
