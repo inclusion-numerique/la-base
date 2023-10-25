@@ -5,15 +5,14 @@ import React, {
   ReactNode,
   ReactPortal,
   useEffect,
-  useRef,
 } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useModalVisibility } from '@app/web/hooks/useModalVisibility'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import z from 'zod'
 import ReactDOM from 'react-dom'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 
 // React-dom types are broken at the moment !
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
@@ -58,13 +57,6 @@ const RichInputLinkModalForm = ({
         confirmLabel: 'Ajouter',
       }
 
-  // Forward ref do not work with modal, we have to make a workaround with form ref
-  const formRef = useRef<HTMLFormElement>(null)
-  const modalRef = useRef<HTMLDialogElement>()
-  if (!modalRef.current) {
-    // Will only execute while first form element render is done
-    modalRef.current = formRef.current?.querySelector('dialog') ?? undefined
-  }
   const {
     control,
     reset,
@@ -77,7 +69,7 @@ const RichInputLinkModalForm = ({
     },
   })
 
-  useModalVisibility(modalRef.current, {
+  useModalVisibility(RichInputLinkModal.id, {
     onClosed: () => {
       reset({ url: undefined })
     },
@@ -100,7 +92,7 @@ const RichInputLinkModalForm = ({
   const disabled = isSubmitting
 
   return createPortal(
-    <form ref={formRef} onSubmit={onSubmitHandler}>
+    <form onSubmit={onSubmitHandler}>
       <RichInputLinkModal.Component
         title={title}
         buttons={[

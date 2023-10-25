@@ -1,31 +1,23 @@
 'use client'
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useRef, useState } from 'react'
 import { Controller, FieldValues, Path, UseFormReturn } from 'react-hook-form'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { trpc } from '@app/web/trpc'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { ReactCropperElement } from 'react-cropper'
-import { ImageWithName, getDefaultCropping } from './utils'
+import { CreateModalReturn } from '@app/ui/utils/modalTypes'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
+import { getDefaultCropping, ImageWithName } from './utils'
 import CroppedImage from './CroppedImage'
 import Cropping from './Cropping'
-
-const {
-  Component: Modal,
-  open: openModal,
-  close: closeModal,
-} = createModal({
-  id: 'croppedUpload',
-  isOpenedByDefault: false,
-})
 
 const CroppedUploadModal = <T extends FieldValues>({
   form,
   path,
+  modal,
+  title,
   initialImageId,
-  open,
-  onClose,
   label,
   height,
   ratio,
@@ -33,11 +25,11 @@ const CroppedUploadModal = <T extends FieldValues>({
   onChange,
   emptyChildren,
 }: {
+  title: string
+  modal: CreateModalReturn
   form: UseFormReturn<T>
   path: Path<T>
   initialImageId?: string
-  open: boolean
-  onClose: () => void
   label?: string
   height: number
   ratio: number
@@ -55,19 +47,6 @@ const CroppedUploadModal = <T extends FieldValues>({
   const [imageSource, setImageSource] = useState(
     initialImageId ? `/images/${initialImageId}.original` : '',
   )
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore : Wait for modal to be loaded
-    if (window.dsfr) {
-      if (open) {
-        setCroppingMode(false)
-        openModal()
-      } else {
-        closeModal()
-      }
-    }
-  }, [open])
 
   // File upload hooks for storage
   const imageUpload = useFileUpload()
@@ -115,42 +94,47 @@ const CroppedUploadModal = <T extends FieldValues>({
     }
   }
 
+  const onCancel = croppingMode ? () => setCroppingMode(false) : modal.close
+
+  const onConfirm = croppingMode
+    ? () => {
+        if (cropperRef.current) {
+          setImageBox(cropperRef.current.cropper.getImageData())
+          setCroppedBox(cropperRef.current.cropper.getData())
+          setCanvasData(cropperRef.current.cropper.getCanvasData())
+          setCroppedBoxData(cropperRef.current.cropper.getCropBoxData())
+        }
+        setCroppingMode(false)
+      }
+    : onSubmit
+
+  useModalVisibility(modal.id, {
+    onClosed: () => {
+      setCroppingMode(false)
+    },
+  })
+
   return (
     <Controller
       control={form.control}
       name={path}
       render={({ fieldState: { error }, formState: { isSubmitting } }) => (
-        <Modal
-          title="Modifier la photo de profil"
+        <modal.Component
+          title={title}
           buttons={[
             {
               doClosesModal: false,
-              title: 'Annuler',
               priority: 'secondary',
-              onClick: croppingMode ? () => setCroppingMode(false) : onClose,
+              onClick: onCancel,
               children: 'Annuler',
               type: 'button',
             },
             {
               doClosesModal: false,
-              title: croppingMode ? 'Valider' : 'Enregistrer',
               type: 'button',
-              disabled: isSubmitting,
               className: isSubmitting ? 'fr-btn--loading' : '',
               children: croppingMode ? 'Valider' : 'Enregistrer',
-              onClick: croppingMode
-                ? () => {
-                    if (cropperRef.current) {
-                      setImageBox(cropperRef.current.cropper.getImageData())
-                      setCroppedBox(cropperRef.current.cropper.getData())
-                      setCanvasData(cropperRef.current.cropper.getCanvasData())
-                      setCroppedBoxData(
-                        cropperRef.current.cropper.getCropBoxData(),
-                      )
-                    }
-                    setCroppingMode(false)
-                  }
-                : onSubmit,
+              onClick: onConfirm,
             },
           ]}
         >
@@ -193,7 +177,7 @@ const CroppedUploadModal = <T extends FieldValues>({
               }}
             />
           </div>
-        </Modal>
+        </modal.Component>
       )}
     />
   )

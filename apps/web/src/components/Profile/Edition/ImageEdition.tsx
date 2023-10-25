@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
 import { useRouter } from 'next/navigation'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { FilteredProfile } from '@app/web/server/profiles/authorization'
@@ -17,6 +18,11 @@ import RoundProfileImage from '../../RoundProfileImage'
 import EditImageButton from '../../EditImageButton'
 import styles from './ImageEdition.module.css'
 
+const ProfileImageEditionModal = createModal({
+  id: 'profileImageEdition',
+  isOpenedByDefault: false,
+})
+
 const ImageEdition = ({
   profile,
 }: {
@@ -24,7 +30,6 @@ const ImageEdition = ({
 }) => {
   const router = useRouter()
 
-  const [open, setOpen] = useState(false)
   const form = useForm<UpdateProfileImageCommand>({
     resolver: zodResolver(UpdateProfileImageCommandValidation),
     defaultValues: {
@@ -39,8 +44,8 @@ const ImageEdition = ({
       <CroppedUploadModal
         form={form}
         path="imageId"
-        open={open}
-        onClose={() => setOpen(false)}
+        title="Modifier la photo de profil"
+        modal={ProfileImageEditionModal}
         label="de profil"
         height={128}
         ratio={1}
@@ -52,7 +57,7 @@ const ImageEdition = ({
             })
           }
           router.refresh()
-          setOpen(false)
+          ProfileImageEditionModal.close()
         }}
         emptyChildren={
           <RoundProfileImage
@@ -64,7 +69,7 @@ const ImageEdition = ({
         initialImageId={profile.image ? profile.image.id : ''}
       />
       <EditImageButton
-        onClick={() => setOpen(true)}
+        onClick={ProfileImageEditionModal.open}
         title="Modifier la photo de profil"
         className={styles.pictureModification}
       />

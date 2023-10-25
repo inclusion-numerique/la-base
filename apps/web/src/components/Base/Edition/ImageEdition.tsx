@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
 import { useRouter } from 'next/navigation'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { FilteredBase } from '@app/web/server/bases/authorization'
@@ -21,17 +22,25 @@ const params = {
     ratio: 1,
     height: 128,
     round: true,
-    className: styles.editImage,
+    buttonClassName: styles.editImage,
     label: 'de la base',
     title: 'Modifier la photo de la base',
+    modal: createModal({
+      id: 'baseImageEdition',
+      isOpenedByDefault: false,
+    }),
   },
   coverImage: {
     ratio: 4.8,
     height: 100,
     round: false,
-    className: styles.editCoverImage,
+    buttonClassName: styles.editCoverImage,
     label: 'de la couverture',
     title: 'Modifier la photo de couverture',
+    modal: createModal({
+      id: 'baseCoverImageEdition',
+      isOpenedByDefault: false,
+    }),
   },
 }
 
@@ -44,7 +53,6 @@ const ImageEdition = ({
 }) => {
   const router = useRouter()
 
-  const [open, setOpen] = useState(false)
   const form = useForm<UpdateBaseImageCmmand>({
     resolver: zodResolver(UpdateBaseImageCommandValidation),
     defaultValues: {
@@ -53,18 +61,20 @@ const ImageEdition = ({
   })
 
   const mutate = trpc.base.updateImage.useMutation()
-  const param = params[type]
+  const { title, modal, height, ratio, round, label, buttonClassName } =
+    params[type]
+
   return (
     <>
       <CroppedUploadModal
+        title={title}
+        modal={modal}
         form={form}
         path={`${type}Id`}
-        open={open}
-        onClose={() => setOpen(false)}
-        label={param.label}
-        height={param.height}
-        ratio={param.ratio}
-        round={param.round}
+        label={label}
+        height={height}
+        ratio={ratio}
+        round={round}
         onChange={async (imageId) => {
           if (imageId !== base[type]?.id) {
             await mutate.mutateAsync({
@@ -73,14 +83,14 @@ const ImageEdition = ({
             } as UpdateBaseImageCmmand)
           }
           router.refresh()
-          setOpen(false)
+          modal.close()
         }}
         initialImageId={base[type]?.id || ''}
       />
       <EditImageButton
-        onClick={() => setOpen(true)}
-        title={param.title}
-        className={param.className}
+        onClick={modal.open}
+        title={title}
+        className={buttonClassName}
       />
     </>
   )

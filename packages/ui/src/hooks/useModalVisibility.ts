@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
 
 export type UseModalVisibilityOptions =
   | {
@@ -18,10 +19,20 @@ export type UseModalVisibilityOptions =
  * Allow to execute callbacks AFTER modal close/open animation is finished
  */
 export const useModalVisibility = (
-  modal: HTMLDialogElement | undefined,
+  modalId: string,
   { onOpened, onClosed }: UseModalVisibilityOptions,
 ) => {
-  const listenedModal = useRef<HTMLDialogElement | undefined>(modal)
+  const modalIsBound = useDsfrModalIsBound(modalId)
+
+  const modalRef = useRef<HTMLDialogElement>()
+  if (modalIsBound && !modalRef.current) {
+    modalRef.current =
+      document.body.querySelector<HTMLDialogElement>(
+        `dialog[id="${modalId}"]`,
+      ) ?? undefined
+  }
+
+  const listenedModal = useRef<HTMLDialogElement | undefined>(modalRef.current)
   const listener = useRef<() => void>()
 
   useEffect(() => {
@@ -32,6 +43,8 @@ export const useModalVisibility = (
         listener.current,
       )
     }
+
+    const modal = modalRef.current
 
     if (modal) {
       const listenerCallback = () => {
@@ -60,5 +73,5 @@ export const useModalVisibility = (
         )
       }
     }
-  }, [modal, onOpened, onClosed])
+  }, [modalIsBound, onOpened, onClosed])
 }
