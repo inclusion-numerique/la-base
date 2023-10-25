@@ -22,8 +22,8 @@ const params = {
     height: 128,
     round: true,
     buttonClassName: styles.editImage,
-    label: 'de la base',
-    title: 'Modifier la photo de la base',
+    label: 'Image de la base',
+    title: 'Modifier l’image de la base',
     modal: createModal({
       id: 'baseImageEdition',
       isOpenedByDefault: false,
@@ -34,8 +34,8 @@ const params = {
     height: 100,
     round: false,
     buttonClassName: styles.editCoverImage,
-    label: 'de la couverture',
-    title: 'Modifier la photo de couverture',
+    label: 'Image de couverture',
+    title: 'Modifier l’image de couverture',
     modal: createModal({
       id: 'baseCoverImageEdition',
       isOpenedByDefault: false,

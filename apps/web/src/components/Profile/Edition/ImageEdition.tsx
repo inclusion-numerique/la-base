@@ -46,7 +46,7 @@ const ImageEdition = ({
         path="imageId"
         title="Modifier la photo de profil"
         modal={ProfileImageEditionModal}
-        label="de profil"
+        label="Photo de profil"
         height={128}
         ratio={1}
         round
