@@ -28,7 +28,7 @@ const Header = ({
           <Link
             data-testid="profile-edition-button"
             className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
-            href={`/profils/${profile.id}/editer`}
+            href={`/profils/${profile.id}/modifier`}
           >
             Modifier le profil
           </Link>

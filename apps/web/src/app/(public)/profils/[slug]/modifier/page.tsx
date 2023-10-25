@@ -10,7 +10,7 @@ import { filterAccess } from '@app/web/server/profiles/authorization'
 const ProfilEditionPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/profils/${params.slug}/editer`)
+    redirect(`/connexion?suivant=/profils/${params.slug}/modifier`)
   }
 
   const profile = await getProfilePageQuery(decodeURI(params.slug))

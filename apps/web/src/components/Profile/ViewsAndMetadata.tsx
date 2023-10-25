@@ -15,7 +15,7 @@ const ViewsAndMetadata = ({ resourcesCount }: { resourcesCount: number }) => (
     <span className="fr-icon-user-heart-line fr-icon--sm" />
     <div>
       <b className="wip">45</b>
-      <span className={styles.spanMdDisplay}> Suivi(e)s</span>
+      <span className={styles.spanMdDisplay}> Suivis</span>
     </div>
   </div>
 )
