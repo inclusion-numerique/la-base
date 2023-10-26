@@ -122,6 +122,7 @@ const CroppedImage = ({
               type="button"
               priority="tertiary no outline"
               iconId="fr-icon-crop-line"
+              iconPosition="right"
               onClick={onCrop}
             >
               Recadrer
@@ -131,6 +132,7 @@ const CroppedImage = ({
               type="button"
               priority="tertiary no outline"
               iconId="fr-icon-delete-line"
+              iconPosition="right"
               onClick={onRemove}
             >
               Supprimer

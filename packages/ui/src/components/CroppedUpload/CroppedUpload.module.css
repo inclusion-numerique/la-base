@@ -17,23 +17,6 @@
     align-items: center;
 }
 
-
-.icon {
-    color: var(--blue-france-sun-113-625) !important;
-}
-
-.imageName {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.imageSize {
-    flex-shrink: 0;
-    color: var(--text-mention-grey);
-    text-wrap: nowrap;
-}
-
 .imageActions {
     flex-shrink: 0;
     display: flex;
