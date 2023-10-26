@@ -1,5 +1,8 @@
 import { createTestBase } from '@app/e2e/support/helpers'
-import { cleanUpAndCreateTestPublishedResource } from './edition/editionTestUtils'
+import {
+  cleanUpAndCreateTestPublishedResource,
+  cleanUpAndCreateTestPublishedResourceInProfile,
+} from './edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modifer ses parametres', () => {
   /**
@@ -70,6 +73,53 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-button').eq(1).click()
     cy.testId('notice-private-profile').should('exist')
     cy.testId('visibility-radio-resource-public').should('be.disabled')
+    cy.testId('visibility-radio-resource-public').should('not.be.checked')
+    cy.testId('visibility-radio-resource-private').should('be.checked')
+
+    cy.visit(
+      '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+    )
+    cy.testId('resource-public-state-badge').should(
+      'have.text',
+      'Ressource privée',
+    )
+  })
+
+  it('Acceptation 2 bis - Resource publique dans un cas impossible', () => {
+    cleanUpAndCreateTestPublishedResourceInProfile(
+      { isPublic: true },
+      true,
+      ({ user }) => {
+        const base = createTestBase(user.id)
+        cy.createBase(base)
+      },
+    )
+    cy.testId('resource-edition-button').click()
+
+    cy.testId('edition-action-bar-more-actions').click()
+    cy.testId('edition-action-bar-parameters-modal').click()
+
+    cy.testId('resource-visibility').should(
+      'have.text',
+      'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.',
+    )
+
+    cy.testId('edit-card-button').eq(0).click()
+    cy.testId('resource-base-0').click({ force: true })
+
+    cy.testId('edit-card-save-button').click()
+    cy.wait('@mutation')
+
+    cy.testId('resource-visibility').should(
+      'have.text',
+      'Votre ressource est dans une base privée. Vous ne pouvez pas changer sa visibilité.',
+    )
+    cy.testId('edit-card-button').eq(1).click()
+    cy.testId('visibility-radio-resource-public').should('not.be.checked')
+    cy.testId('visibility-radio-resource-private').should('be.checked')
+
+    cy.testId('edit-card-save-button').click()
+    cy.wait('@mutation')
 
     cy.visit(
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',

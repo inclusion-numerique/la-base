@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SessionUser } from '@app/web/auth/sessionUser'
@@ -48,6 +48,16 @@ const Visibility = ({
       },
     },
   })
+
+  useEffect(() => {
+    if (form.getValues('payload.isPublic')) {
+      const canBePublic = resource.base ? resource.base.isPublic : user.isPublic
+      if (!canBePublic) {
+        form.setValue('payload.isPublic', false)
+      }
+    }
+  }, [resource, user])
+
   const mutate = trpc.resource.mutate.useMutation()
 
   return (
