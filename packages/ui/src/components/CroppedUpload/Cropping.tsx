@@ -4,7 +4,6 @@ import Cropper, { ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { ImageForForm } from '@app/web/server/image/imageTypes' // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
-import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import {
   ImageCropData,
   imageCropToCropperInitialData,
