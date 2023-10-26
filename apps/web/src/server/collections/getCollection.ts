@@ -6,7 +6,7 @@ import {
   resourceListSelect,
 } from '../resources/getResourcesList'
 
-const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
+export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
   ({
     id: true,
     title: true,
@@ -32,6 +32,7 @@ const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
         },
       },
     },
+    baseId: true,
     base: {
       select: {
         title: true,

@@ -2,9 +2,7 @@ import React from 'react'
 import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import { getServerUrl } from '@app/web/utils/baseUrl'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { PrivacyTag } from '../PrivacyTags'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './CollectionMetaData.module.css'
@@ -14,11 +12,13 @@ const CollectionMetaData = ({
   count,
   priority,
   isOwner,
+  withButtons,
 }: {
-  collection: CollectionListItem | CollectionPageData
-  priority: ButtonProps.Common['priority']
+  collection: { isPublic: boolean; id: string }
+  priority?: ButtonProps.Common['priority']
   count: number
   isOwner?: boolean
+  withButtons?: boolean
 }) => (
   <div className={styles.container}>
     <div className={styles.informations}>
@@ -33,34 +33,36 @@ const CollectionMetaData = ({
         label={collection.isPublic ? 'Publique' : 'Privée'}
       />
     </div>
-    <div className={styles.buttons}>
-      {isOwner && (
-        <Link
-          href="/"
-          className={classNames(
-            'fr-btn',
-            'fr-btn--sm',
-            `fr-btn--${
-              priority ? priority.replace(' ', '-') : 'tertiary-no-outline'
-            }`,
-            'fr-icon-edit-line',
-            'fr-btn--icon-right',
-          )}
-        >
-          Modifier
-        </Link>
-      )}
-      <Button
-        title="Marquer comme favoris"
-        iconId="fr-icon-bookmark-line"
-        size="small"
-        priority={priority}
-      />
-      <CopyLinkButton
-        url={getServerUrl(`/collections/${collection.id}`, true)}
-        priority={priority}
-      />
-    </div>
+    {withButtons && (
+      <div className={styles.buttons}>
+        {isOwner && (
+          <Link
+            href="/"
+            className={classNames(
+              'fr-btn',
+              'fr-btn--sm',
+              `fr-btn--${
+                priority ? priority.replace(' ', '-') : 'tertiary-no-outline'
+              }`,
+              'fr-icon-edit-line',
+              'fr-btn--icon-right',
+            )}
+          >
+            Modifier
+          </Link>
+        )}
+        <Button
+          title="Marquer comme favoris"
+          iconId="fr-icon-bookmark-line"
+          size="small"
+          priority={priority}
+        />
+        <CopyLinkButton
+          url={getServerUrl(`/collections/${collection.id}`, true)}
+          priority={priority}
+        />
+      </div>
+    )}
   </div>
 )
 

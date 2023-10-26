@@ -35,6 +35,7 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
       />
       {authorizations.authorized ? (
         <View
+          user={user}
           resource={authorizations.resource}
           isAdmin={authorizations.isAdmin}
         />

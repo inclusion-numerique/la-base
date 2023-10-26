@@ -20,6 +20,7 @@ export const createTestUser = (publicProfile?: boolean) =>
     bases: [],
     createdResources: [],
     resources: [],
+    collections: [],
   }) satisfies SessionUser
 
 export const createTestResource = (

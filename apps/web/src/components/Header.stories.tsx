@@ -34,6 +34,7 @@ export const SignedInWithBases: Story = {
             title: 'Une autre base',
             slug: 'b',
             isPublic: false,
+            collections: [],
           },
         },
       ],

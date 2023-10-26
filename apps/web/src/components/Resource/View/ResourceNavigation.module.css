@@ -13,7 +13,8 @@
     border-top: var(--slim-grey-border);
   }
 
-  a {
+  a,
+  button {
     width: 100%;
     justify-content: center;
   }

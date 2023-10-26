@@ -12,7 +12,7 @@ import {
 } from '../collections/getCollectionsList'
 import { profileSelect } from '../profiles/getProfilesList'
 
-const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
+export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
   ({
     id: true,
     slug: true,

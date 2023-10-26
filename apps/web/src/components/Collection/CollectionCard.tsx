@@ -40,6 +40,7 @@ const CollectionCard = ({ collection }: { collection: CollectionListItem }) => {
           collection={collection}
           count={resourcesCount}
           priority="tertiary no outline"
+          withButtons
         />
       </div>
     </div>

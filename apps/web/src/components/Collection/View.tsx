@@ -49,6 +49,7 @@ const View = ({
       collection={collection}
       count={collection.resources.length}
       isOwner={isOwner}
+      withButtons
       priority="secondary"
     />
     {collection.resources.map((resource) => (

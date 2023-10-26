@@ -4,6 +4,8 @@ import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { Resource } from '@app/web/server/resources/getResource'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import SaveResourceInCollectionButton from '../SaveResourceInCollectionButton'
 import styles from './ResourceNavigation.module.css'
 import ResourceSideMenu from './ResourceSideMenu'
 
@@ -17,9 +19,11 @@ const {
 
 const ResourceNavigation = ({
   resource,
+  user,
   isAdmin,
 }: {
   resource: Resource
+  user: SessionUser | null
   isAdmin: boolean
 }) => (
   <>
@@ -55,18 +59,11 @@ const ResourceNavigation = ({
       >
         {isAdmin ? 'Modifier' : 'Demander à contribuer'}
       </Link>
-      <Link
-        className={classNames(
-          'fr-btn',
-          'fr-btn--secondary',
-          'fr-btn--icon-left',
-          'fr-icon-bookmark-line',
-          'wip',
-        )}
-        href="/"
-      >
-        Enregistrer
-      </Link>
+      <SaveResourceInCollectionButton
+        resourceId={resource.id}
+        id="mobile-modal"
+        user={user}
+      />
       <Link
         className={classNames(
           'fr-btn',
@@ -118,19 +115,11 @@ const ResourceNavigation = ({
         >
           {isAdmin ? 'Modifier' : 'Demander à contribuer'}
         </Link>
-        <Link
-          className={classNames(
-            'fr-btn',
-            'fr-btn--secondary',
-            'fr-btn--icon-left',
-            'fr-icon-bookmark-line',
-            styles.alwaysVisibleButton,
-            'wip',
-          )}
-          href="/"
-        >
-          Enregistrer
-        </Link>
+        <SaveResourceInCollectionButton
+          resourceId={resource.id}
+          user={user}
+          className={styles.button}
+        />
         <Button
           size="large"
           className="fr-hidden-md"

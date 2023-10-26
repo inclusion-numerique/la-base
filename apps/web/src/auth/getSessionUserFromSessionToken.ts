@@ -50,6 +50,18 @@ export const getSessionUserFromSessionToken = async (
                   slug: true,
                   title: true,
                   isPublic: true,
+                  collections: {
+                    select: {
+                      id: true,
+                      isPublic: true,
+                      title: true,
+                      resources: {
+                        select: { id: true },
+                        where: { deleted: null },
+                      },
+                    },
+                    where: { deleted: null },
+                  },
                 },
               },
             },
@@ -61,6 +73,18 @@ export const getSessionUserFromSessionToken = async (
                 deleted: null,
               },
             },
+          },
+          collections: {
+            select: {
+              id: true,
+              isPublic: true,
+              title: true,
+              resources: {
+                select: { id: true },
+                where: { deleted: null },
+              },
+            },
+            where: { deleted: null },
           },
           resources: {
             select: {

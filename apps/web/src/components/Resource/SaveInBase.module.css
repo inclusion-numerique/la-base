@@ -1,0 +1,43 @@
+.container,
+.clickableContainer {
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: var(--slim-grey-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+.clickableContainer {
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--hover);
+  }
+}
+
+.arrow {
+  color: var(--blue-france-sun-113-625);
+}
+
+.content {
+  text-align: left;
+}
+
+.collections {
+  font-size: 14px;
+  color: var(--text-default-grey);
+  display: flex;
+  gap: 8px;
+}
+
+.emptyBase {
+  margin-top: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-mention-grey);
+  border: var(--slim-grey-border);
+  border-radius: 8px;
+}
