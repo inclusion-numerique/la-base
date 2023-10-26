@@ -82,6 +82,7 @@ const ImageEdition = ({
   return (
     <>
       <CroppedUploadModal
+        key={image?.id ?? 'empty'}
         title={title}
         modal={modal}
         form={form}

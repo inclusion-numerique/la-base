@@ -42,6 +42,7 @@ const ImageEdition = ({
   return (
     <>
       <CroppedUploadModal
+        key={profile.image?.id ?? 'empty'}
         form={form}
         path="imageId"
         title="Modifier la photo de profil"
