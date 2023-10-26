@@ -1,0 +1,6 @@
+
+.container {
+    display: flex;
+    min-width: 0;
+    gap: 8px;
+}

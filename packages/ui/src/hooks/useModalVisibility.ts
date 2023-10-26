@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
+import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 
 export type UseModalVisibilityOptions =
   | {
@@ -36,33 +36,35 @@ export const useModalVisibility = (
   const listener = useRef<() => void>()
 
   useEffect(() => {
-    // Disable observer on previous element if element change
-    if (listener.current) {
-      listenedModal.current?.removeEventListener(
-        'transitionend',
-        listener.current,
-      )
-    }
-
-    const modal = modalRef.current
-
-    if (modal) {
-      const listenerCallback = () => {
-        if (listenedModal.current !== modal) {
-          return
-        }
-
-        const isModalOpen = modal.classList.contains('fr-modal--opened')
-        if (isModalOpen && onOpened) {
-          onOpened()
-        } else if (!isModalOpen && onClosed) {
-          onClosed()
-        }
+    if (modalIsBound) {
+      // Disable observer on previous element if element change
+      if (listener.current) {
+        listenedModal.current?.removeEventListener(
+          'transitionend',
+          listener.current,
+        )
       }
-      modal.addEventListener('transitionend', listenerCallback)
 
-      listenedModal.current = modal
-      listener.current = listenerCallback
+      const modal = modalRef.current
+
+      if (modal) {
+        const listenerCallback = () => {
+          if (listenedModal.current !== modal) {
+            return
+          }
+
+          const isModalOpen = modal.classList.contains('fr-modal--opened')
+          if (isModalOpen && onOpened) {
+            onOpened()
+          } else if (!isModalOpen && onClosed) {
+            onClosed()
+          }
+        }
+        modal.addEventListener('transitionend', listenerCallback)
+
+        listenedModal.current = modal
+        listener.current = listenerCallback
+      }
     }
 
     return () => {

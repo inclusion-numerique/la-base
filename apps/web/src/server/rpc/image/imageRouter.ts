@@ -1,3 +1,4 @@
+import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
 import { computeImageMetadata } from '@app/web/server/image/computeImageMetadata'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
@@ -43,13 +44,18 @@ export const imageRouter = router({
   update: protectedProcedure
     .input(UpdateImageValidation)
     .mutation(async ({ input: { id, ...cropping }, ctx: { user } }) =>
+      // TODO SECURITY: check if the user can update this image
+      // An updated image has to change its id to override browser caches
       prismaClient.image.update({
-        data: cropping,
+        data: { ...cropping, id: v4() },
         where: {
           id,
           upload: {
             uploadedById: user.id,
           },
+        },
+        include: {
+          upload: true,
         },
       }),
     ),

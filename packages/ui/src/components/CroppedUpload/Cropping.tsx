@@ -3,16 +3,18 @@ import classNames from 'classnames'
 import Cropper, { ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { ImageForForm } from '@app/web/server/image/imageTypes' // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import {
   ImageCropData,
   imageCropToCropperInitialData,
 } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
 import { getEventDsfrOpenedModalParent } from '@app/ui/utils/getEventDsfrOpenedModalParent'
+import ImageInfo from '@app/ui/components/ImageInfo'
 import { ImageWithName } from './utils'
 import styles from './CroppedUpload.module.css'
 import CropStartEvent = Cropper.CropStartEvent
-import CropEndEvent = Cropper.CropEndEvent // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
+import CropEndEvent = Cropper.CropEndEvent
 
 // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
 // This function will stop the event from propagating further on the
@@ -59,11 +61,13 @@ const Cropping = ({
   imageSource,
   imageToUpload,
   cropperRef,
+  image,
   initialImageCropData,
 }: {
   ratio: number
   round?: boolean
   imageSource: string
+  image?: ImageForForm | null
   imageToUpload: ImageWithName | null
   cropperRef: RefObject<ReactCropperElement>
   initialImageCropData?: ImageCropData
@@ -119,21 +123,12 @@ const Cropping = ({
           />
         </div>
       </div>
-      {imageToUpload && (
-        <div className={styles.imageInformations}>
-          <span
-            className={classNames(
-              styles.icon,
-              'fr-icon-image-line',
-              'fr-icon--sm',
-            )}
-          />
-          <div className={styles.imageName}>{imageToUpload.name}</div>·
-          <div className={styles.imageSize}>
-            {formatByteSize(imageToUpload.size)}
-          </div>
-        </div>
-      )}
+      {imageToUpload || image ? (
+        <ImageInfo
+          name={imageToUpload?.name ?? image?.upload.name ?? ''}
+          size={imageToUpload?.size ?? image?.upload.size ?? null}
+        />
+      ) : null}
     </>
   )
 }

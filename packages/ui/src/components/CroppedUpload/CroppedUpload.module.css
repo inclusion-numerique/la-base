@@ -17,11 +17,6 @@
     align-items: center;
 }
 
-.imageInformations {
-    display: flex;
-    min-width: 0;
-    gap: 8px;
-}
 
 .icon {
     color: var(--blue-france-sun-113-625) !important;

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
+import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   CreateResourceModal,
@@ -13,7 +14,6 @@ import {
 } from '@app/web/components/Resource/CreateResourceModal'
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { useDsfrModalIsBound } from '@app/web/hooks/useDsfrModalIsBound'
 import {
   CreateResourceCommand,
   CreateResourceCommandClientPayloadValidation,
@@ -46,6 +46,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
 
   const modalIsBound = useDsfrModalIsBound(createResourceModalId)
 
+  // Auto open modal when create is in search params and the modal is bound
   useEffect(() => {
     if (createResourceIsInSearchParams && modalIsBound) {
       CreateResourceModal.open()

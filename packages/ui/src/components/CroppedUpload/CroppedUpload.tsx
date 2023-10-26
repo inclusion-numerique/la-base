@@ -9,6 +9,7 @@ import React, {
 } from 'react'
 import { ReactCropperElement } from 'react-cropper'
 import { createPortal } from 'react-dom'
+import { ImageForForm } from '@app/web/server/image/imageTypes'
 import type { CreateModalReturn } from '@app/ui/utils/modalTypes'
 import { cropperToImageCrop } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
 import { CroppedImageType, ImageWithName } from './utils'
@@ -24,6 +25,7 @@ const CroppedUpload = ({
   onChange,
   disabled,
   error,
+  image,
 }: {
   modal: CreateModalReturn
   label?: string
@@ -33,6 +35,7 @@ const CroppedUpload = ({
   onChange: (data?: CroppedImageType) => void
   disabled?: boolean
   error?: string
+  image?: ImageForForm | null
 }) => {
   const cropperRef = useRef<ReactCropperElement>(null)
 
@@ -41,8 +44,11 @@ const CroppedUpload = ({
   const [croppedBoxData, setCroppedBoxData] = useState<Cropper.CropBoxData>()
   const [canvasData, setCanvasData] = useState<Cropper.CanvasData>()
   const [imageToUpload, setImageToUpload] = useState<ImageWithName | null>(null)
-  const [imageSource, setImageSource] = useState('')
+  const [imageSource, setImageSource] = useState(
+    image ? `/images/${image.id}.original` : '',
+  )
 
+  // TODO edition
   useEffect(() => {
     if (imageToUpload) {
       onChange({
@@ -112,6 +118,7 @@ const CroppedUpload = ({
                 imageToUpload={imageToUpload}
                 ratio={ratio}
                 round={round}
+                image={image}
               />
             </modal.Component>
           </form>,
@@ -125,6 +132,7 @@ const CroppedUpload = ({
         disabled={disabled}
         error={error}
         croppedBox={croppedBox}
+        image={image}
         imageBox={imageBox}
         imageSource={imageSource}
         imageToUpload={imageToUpload}

@@ -11,7 +11,7 @@ const {
   Component: ResourceNavigationModal,
   buttonProps: resourceNavigationModalNativeButtonProps,
 } = createModal({
-  id: 'resourceNavigation',
+  id: 'resource-navigation',
   isOpenedByDefault: false,
 })
 

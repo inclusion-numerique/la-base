@@ -19,7 +19,7 @@ import EditImageButton from '../../EditImageButton'
 import styles from './ImageEdition.module.css'
 
 const ProfileImageEditionModal = createModal({
-  id: 'profileImageEdition',
+  id: 'profile-picture-edition',
   isOpenedByDefault: false,
 })
 
@@ -66,7 +66,7 @@ const ImageEdition = ({
             borderWidth={1}
           />
         }
-        initialImageId={profile.image ? profile.image.id : ''}
+        image={profile.image}
       />
       <EditImageButton
         onClick={ProfileImageEditionModal.open}

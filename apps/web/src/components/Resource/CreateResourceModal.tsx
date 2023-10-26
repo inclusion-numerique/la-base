@@ -4,7 +4,7 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 
 export const CreateResourceModal = createModal({
-  id: 'createResource',
+  id: 'create-resource',
   isOpenedByDefault: false,
 })
 

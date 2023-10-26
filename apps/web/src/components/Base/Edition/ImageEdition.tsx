@@ -10,7 +10,7 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  UpdateBaseImageCmmand,
+  UpdateBaseImageCommand,
   UpdateBaseImageCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import EditImageButton from '../../EditImageButton'
@@ -24,8 +24,9 @@ const params = {
     buttonClassName: styles.editImage,
     label: 'Image de la base',
     title: 'Modifier l’image de la base',
+    path: 'imageId' as const,
     modal: createModal({
-      id: 'baseImageEdition',
+      id: 'base-image-edition',
       isOpenedByDefault: false,
     }),
   },
@@ -36,8 +37,9 @@ const params = {
     buttonClassName: styles.editCoverImage,
     label: 'Image de couverture',
     title: 'Modifier l’image de couverture',
+    path: 'coverImageId' as const,
     modal: createModal({
-      id: 'baseCoverImageEdition',
+      id: 'base-cover-image-edition',
       isOpenedByDefault: false,
     }),
   },
@@ -51,22 +53,31 @@ const ImageEdition = ({
   type: 'image' | 'coverImage'
 }) => {
   const router = useRouter()
-
-  const form = useForm<UpdateBaseImageCmmand>({
-    resolver: zodResolver(UpdateBaseImageCommandValidation),
-    defaultValues: {
-      [`${type}Id`]: base[type]?.id,
-    },
-  })
-
-  const mutate = trpc.base.updateImage.useMutation()
-  const { title, modal, height, ratio, round, label, buttonClassName } =
+  const { title, modal, path, height, ratio, round, label, buttonClassName } =
     params[type]
 
   const image = base[type]
 
-  // TODO use image to initialize crop parameters
-  console.log('IMAGE', image)
+  const form = useForm<UpdateBaseImageCommand>({
+    resolver: zodResolver(UpdateBaseImageCommandValidation),
+    defaultValues: {
+      id: base.id,
+      [path]: base[type]?.id,
+    },
+  })
+
+  const mutate = trpc.base.updateImage.useMutation()
+
+  const onChange = async (imageId: string | null) => {
+    if (imageId !== base[type]?.id) {
+      await mutate.mutateAsync({
+        id: base.id,
+        [path]: imageId || null,
+      } as UpdateBaseImageCommand)
+    }
+    modal.close()
+    router.refresh()
+  }
 
   return (
     <>
@@ -74,22 +85,13 @@ const ImageEdition = ({
         title={title}
         modal={modal}
         form={form}
-        path={`${type}Id`}
+        path={path}
         label={label}
         height={height}
         ratio={ratio}
         round={round}
-        onChange={async (imageId) => {
-          if (imageId !== base[type]?.id) {
-            await mutate.mutateAsync({
-              id: base.id,
-              [`${type}Id`]: imageId || null,
-            } as UpdateBaseImageCmmand)
-          }
-          router.refresh()
-          modal.close()
-        }}
-        initialImageId={base[type]?.id || ''}
+        image={image}
+        onChange={onChange}
       />
       <EditImageButton
         onClick={modal.open}

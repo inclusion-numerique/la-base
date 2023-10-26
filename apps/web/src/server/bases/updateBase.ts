@@ -79,6 +79,6 @@ export const UpdateBaseImageCommandValidation = z.object({
   coverImageId: z.string().uuid().nullable().optional(),
 })
 
-export type UpdateBaseImageCmmand = z.infer<
+export type UpdateBaseImageCommand = z.infer<
   typeof UpdateBaseImageCommandValidation
 >

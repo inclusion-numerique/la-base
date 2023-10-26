@@ -3,4 +3,6 @@ export const imageCropSelect = {
   cropLeft: true,
   cropWidth: true,
   cropHeight: true,
+  originalHeight: true,
+  originalWidth: true,
 }

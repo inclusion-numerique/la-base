@@ -16,7 +16,7 @@ import { deleteResourceModalProps } from './DeleteResourceModalContent'
 
 const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
   createModal({
-    id: 'deleteResource',
+    id: 'delete-resource',
     isOpenedByDefault: false,
   })
 
@@ -25,7 +25,7 @@ const {
   open: openInviteContributorsModal,
   close: closeInviteContributorsModal,
 } = createModal({
-  id: 'inviteContributors',
+  id: 'invite-contributors',
   isOpenedByDefault: false,
 })
 

@@ -7,9 +7,12 @@ import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { ReactCropperElement } from 'react-cropper'
 import { createPortal } from 'react-dom'
+import { ImageForForm } from '@app/web/server/image/imageTypes'
+import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
 import { CreateModalReturn } from '@app/ui/utils/modalTypes'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
-import { getDefaultCropping, ImageWithName } from './utils'
+import { cropperDataToImageCrop } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
+import { ImageWithName } from './utils'
 import CroppedImage from './CroppedImage'
 import Cropping from './Cropping'
 
@@ -18,25 +21,25 @@ const CroppedUploadModal = <T extends FieldValues>({
   path,
   modal,
   title,
-  initialImageId,
   label,
   height,
   ratio,
   round,
   onChange,
   emptyChildren,
+  image,
 }: {
   title: string
   modal: CreateModalReturn
   form: UseFormReturn<T>
   path: Path<T>
-  initialImageId?: string
   label?: string
   height: number
   ratio: number
   round?: boolean
   onChange: (imageId: string | null) => void
   emptyChildren?: ReactNode
+  image?: ImageForForm | null
 }) => {
   const [croppingMode, setCroppingMode] = useState(false)
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -46,7 +49,7 @@ const CroppedUploadModal = <T extends FieldValues>({
   const [canvasData, setCanvasData] = useState<Cropper.CanvasData>()
   const [imageToUpload, setImageToUpload] = useState<ImageWithName | null>(null)
   const [imageSource, setImageSource] = useState(
-    initialImageId ? `/images/${initialImageId}.original` : '',
+    image ? `/images/${image.id}.original` : '',
   )
 
   // File upload hooks for storage
@@ -56,20 +59,21 @@ const CroppedUploadModal = <T extends FieldValues>({
   const createImage = trpc.image.create.useMutation()
   const updateImage = trpc.image.update.useMutation()
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const onSubmit = async () => {
+    setIsSubmitting(true)
+
+    const cropValues =
+      imageBox && croppedBox
+        ? cropperDataToImageCrop({
+            imageData: imageBox,
+            data: croppedBox,
+          })
+        : defaultCropValues
+
+    // TODO Toast on error
     try {
-      let createdImage: string | null = null
-
-      const cropValues =
-        imageBox && croppedBox
-          ? {
-              cropHeight: croppedBox.height / imageBox.naturalHeight,
-              cropWidth: croppedBox.width / imageBox.naturalWidth,
-              cropTop: croppedBox.y / imageBox.naturalHeight,
-              cropLeft: croppedBox.x / imageBox.naturalWidth,
-            }
-          : getDefaultCropping(ratio)
-
       if (imageToUpload) {
         const uploaded = await imageUpload.upload(imageToUpload)
         if ('error' in uploaded) {
@@ -81,15 +85,18 @@ const CroppedUploadModal = <T extends FieldValues>({
           ...cropValues,
           file: uploaded,
         })
-        createdImage = result.id
-      } else if (imageSource && initialImageId) {
-        await updateImage.mutateAsync({
-          id: initialImageId,
+        onChange(result.id)
+        return
+      }
+      if (imageSource && image) {
+        const newImage = await updateImage.mutateAsync({
+          id: image.id,
           ...cropValues,
         })
-        createdImage = initialImageId
+        onChange(newImage.id)
+        return
       }
-      onChange(createdImage)
+      onChange(null)
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)
     }
@@ -107,11 +114,12 @@ const CroppedUploadModal = <T extends FieldValues>({
         }
         setCroppingMode(false)
       }
-    : form.handleSubmit(onSubmit)
+    : onSubmit
 
   useModalVisibility(modal.id, {
     onClosed: () => {
       setCroppingMode(false)
+      setIsSubmitting(false)
     },
   })
 
@@ -119,7 +127,7 @@ const CroppedUploadModal = <T extends FieldValues>({
     <Controller
       control={form.control}
       name={path}
-      render={({ fieldState: { error }, formState: { isSubmitting } }) => (
+      render={({ fieldState: { error } }) => (
         <modal.Component
           title={title}
           buttons={[
@@ -146,6 +154,7 @@ const CroppedUploadModal = <T extends FieldValues>({
               imageToUpload={imageToUpload}
               ratio={ratio}
               round={round}
+              image={image}
             />
           )}
           <div className={croppingMode ? 'fr-hidden' : ''}>
@@ -158,6 +167,7 @@ const CroppedUploadModal = <T extends FieldValues>({
               disabled={isSubmitting}
               error={error ? error.message : undefined}
               croppedBox={croppedBox}
+              image={image}
               imageBox={imageBox}
               imageSource={imageSource}
               imageToUpload={imageToUpload}
