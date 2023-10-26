@@ -11,6 +11,7 @@ export const randomCollections: (
   random,
 ) => {
   const users = await transaction.user.findMany()
+  const bases = await transaction.base.findMany()
 
   return [
     ...users.map((user) => ({
@@ -22,6 +23,8 @@ export const randomCollections: (
     ...Array.from({ length: random * BASE_NUMBER }, () => ({
       title: faker.lorem.words({ min: 2, max: 5 }),
       ownerId: faker.helpers.arrayElement(users).id,
+      baseId:
+        Math.random() < 0.5 ? faker.helpers.arrayElement(bases).id : undefined,
       isPublic: faker.datatype.boolean(),
       description: Math.random() > 0.75 ? faker.lorem.paragraph() : undefined,
       deleted: Math.random() < 0.05 ? faker.date.past() : undefined,

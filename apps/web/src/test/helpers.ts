@@ -100,6 +100,7 @@ export const createTestBase = (
     resources: [],
     image: null,
     coverImage: null,
+    collections: [],
     members: [
       ...admins.map((admin) => ({
         baseId: id,

@@ -6,6 +6,10 @@ import {
   computeResourcesListWhereForUser,
   resourceListSelect,
 } from '../resources/getResourcesList'
+import {
+  computeCollectionsListWhereForUser,
+  collectionSelect,
+} from '../collections/getCollectionsList'
 import { profileSelect } from '../profiles/getProfilesList'
 
 const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
@@ -54,6 +58,10 @@ const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     resources: {
       select: resourceListSelect,
       where: computeResourcesListWhereForUser(user),
+    },
+    collections: {
+      select: collectionSelect,
+      where: computeCollectionsListWhereForUser(user),
     },
     members: {
       select: {

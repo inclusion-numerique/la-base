@@ -2,7 +2,7 @@ import type { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
-const getWhereCollectionsList = (
+export const computeCollectionsListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.CollectionWhereInput = {},
 ): Prisma.CollectionWhereInput => {
@@ -32,7 +32,7 @@ const getWhereCollectionsProfileList = (
   profileId: string,
   user?: Pick<SessionUser, 'id'> | null,
 ) =>
-  getWhereCollectionsList(user, {
+  computeCollectionsListWhereForUser(user, {
     ownerId: profileId,
   })
 

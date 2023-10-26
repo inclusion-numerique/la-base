@@ -10,6 +10,7 @@ import { getProfileBasesCount } from '@app/web/server/bases/getBasesList'
 import { filterAccess } from '@app/web/server/profiles/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
 import Collections from '@app/web/components/Collection/List/Collections'
+import EmptyBox from '@app/web/components/EmptyBox'
 
 const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -43,7 +44,15 @@ const ProfileBasesPage = async ({ params }: { params: { slug: string } }) => {
       <div className="fr-container fr-mb-4w">
         <Collections
           collections={collections}
-          isConnectedUser={authorizations.isUser}
+          withCreation={authorizations.isUser}
+          withTabs={authorizations.isUser}
+          collectionsLabel="Mes collections"
+          emptySavedBox={
+            <EmptyBox title="Vous n’avez pas enregistré de collections.">
+              Enregistrez la liste de quelqu&lsquo;un d&lsquo;autre et elle
+              apparaîtra ici.
+            </EmptyBox>
+          }
         />
       </div>
     </>

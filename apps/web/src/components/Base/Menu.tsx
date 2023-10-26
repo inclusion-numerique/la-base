@@ -8,7 +8,7 @@ const Menu = ({
   current,
 }: {
   base: BasePageData
-  current: 'resources' | 'members' | 'a-propos'
+  current: 'resources' | 'members' | 'a-propos' | 'collections'
 }) => (
   <div className={styles.menu}>
     <div className="fr-container">
@@ -21,6 +21,15 @@ const Menu = ({
               aria-current={current === 'resources' ? 'page' : undefined}
             >
               Ressources · <b>{base.resources.length}</b>
+            </Link>
+          </li>
+          <li className="fr-nav__item">
+            <Link
+              className="fr-nav__link fr-link--md"
+              href={`/bases/${base.slug}/collections`}
+              aria-current={current === 'collections' ? 'page' : undefined}
+            >
+              Collections · <b>{base.collections.length}</b>
             </Link>
           </li>
           <li className="fr-nav__item">
