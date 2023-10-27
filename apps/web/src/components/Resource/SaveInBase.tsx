@@ -12,7 +12,12 @@ const SaveInBase = ({
   user: SessionUser
   onClick: () => void
 }) => (
-  <button className={styles.clickableContainer} onClick={onClick} type="button">
+  <button
+    className={styles.clickableContainer}
+    onClick={onClick}
+    type="button"
+    data-testid="add-in-collection-bases"
+  >
     <div className={styles.content}>
       <b>{base ? base.title : `${user.name} - Mes collections`}</b>
       <div className={styles.collections}>

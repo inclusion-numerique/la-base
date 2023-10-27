@@ -62,7 +62,11 @@ const ResourceCard = ({
           {dates}
         </div>
       </div>
-      <Link href={`/ressources/${resource.slug}`} className={styles.content}>
+      <Link
+        href={`/ressources/${resource.slug}`}
+        className={styles.content}
+        data-testid="resource-card-link"
+      >
         <div className={styles.textAndDescription}>
           <div
             className={classNames(

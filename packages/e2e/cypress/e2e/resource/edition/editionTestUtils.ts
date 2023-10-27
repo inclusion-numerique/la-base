@@ -6,6 +6,7 @@ import type {
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   createTestBase,
+  createTestCollection,
   createTestPublishResourceCommand,
   createTestResourceCommands,
   createTestUser,
@@ -173,4 +174,82 @@ export const submitValidContentEdition = (contentId: string) => {
   cy.testId(`content-edition_${contentId}_edit-button`).should('not.be.visible')
   cy.testId(`content-edition_${contentId}_form`).should('not.exist')
   cy.testId(`content-edition_${contentId}`).should('exist')
+}
+
+type CleanUpAndCreateTestCollectionAndResourceIds = {
+  user: string
+  otherUser: string
+  baseWithoutCollection: string
+  baseWithCollection: string
+  otherBaseWithCollection: string
+  collectionInBase1?: string
+  collectionInBase2?: string
+  collectionInOtherBase?: string
+  collection1?: string
+  collection2?: string
+}
+export const cleanUpAndCreateTestCollectionAndResource = (
+  withCollection?: boolean,
+  withBases?: boolean,
+) => {
+  const ids: Partial<CleanUpAndCreateTestCollectionAndResourceIds> = {}
+  cy.execute('deleteAllData', {})
+  const user = createTestUser()
+  ids.user = user.id
+  const otherUser = createTestUser()
+  ids.otherUser = otherUser.id
+  const collections = []
+
+  cy.createUser(otherUser)
+  cy.createUserAndSignin(user)
+
+  if (withBases) {
+    const baseWithoutCollection = createTestBase(user.id)
+    ids.baseWithoutCollection = baseWithoutCollection.slug
+    const baseWithCollection = createTestBase(otherUser.id, true, [user.id])
+    baseWithCollection.slug = v4()
+    ids.baseWithCollection = baseWithCollection.slug
+    const otherBaseWithCollection = createTestBase(otherUser.id)
+    otherBaseWithCollection.slug = v4()
+    ids.otherBaseWithCollection = otherBaseWithCollection.slug
+
+    cy.createBase(baseWithoutCollection)
+    cy.createBase(baseWithCollection)
+    cy.createBase(otherBaseWithCollection)
+
+    collections.push(
+      createTestCollection(user.id, baseWithCollection.id),
+      createTestCollection(user.id, baseWithCollection.id),
+      createTestCollection(otherUser.id, otherBaseWithCollection.id),
+    )
+
+    ids.collectionInBase1 = collections[0].id
+    ids.collectionInBase2 = collections[1].id
+    ids.collectionInOtherBase = collections[2].id
+  }
+
+  if (withCollection) {
+    collections.push(
+      createTestCollection(user.id),
+      createTestCollection(otherUser.id),
+    )
+
+    ids.collection1 = collections.at(-2)?.id
+    ids.collection2 = collections.at(-1)?.id
+  }
+
+  for (const collection of collections) {
+    cy.createCollection(collection)
+  }
+
+  const id = v4()
+  const commands = createTestResourceCommands({
+    resourceId: id,
+  })
+  commands.push(createTestPublishResourceCommand(id, true))
+  cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
+    cy.visit(`/ressources/${slug}`)
+  })
+  cy.dsfrShouldBeStarted()
+  return ids
 }

@@ -22,15 +22,20 @@ const SaveResourceInCollectionButton = ({
   user,
   resource,
   iconOnly,
+                                          'data-testid': dataTestid,
 }: {
   className?: string
   user: SessionUser | null
   resource: { id: string; slug: string }
   iconOnly?: boolean
+  'data-testid'?: string
 }) =>
   user ? (
     <OpenSaveResourceInCollectionModalButton
       {...(iconOnly ? buttonIconOnlyProps : buttonProps)}
+      nativeButtonProps={{
+        'data-testid': dataTestid,
+      }}
       className={className}
       resourceId={resource.id}
     />
@@ -38,6 +43,9 @@ const SaveResourceInCollectionButton = ({
     <Button
       {...(iconOnly ? buttonIconOnlyProps : buttonProps)}
       className={className}
+      nativeButtonProps={{
+        'data-testid': dataTestid,
+      }}
       linkProps={{
         href: loginUrl({
           intent: 'enregistrer-ressource-dans-collection',

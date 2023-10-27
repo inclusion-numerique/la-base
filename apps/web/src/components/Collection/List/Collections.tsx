@@ -33,12 +33,15 @@ const Collections = ({
             content:
               collections.length > 0 ? (
                 <div className={styles.tabCards}>
-                  {collections.map((collection) => (
-                    <CollectionCard
-                      collection={collection}
-                      key={collection.id}
-                    />
-                  ))}
+                  {collections
+                    // eslint-disable-next-line no-underscore-dangle
+                    .sort((a, b) => b._count.resources - a._count.resources)
+                    .map((collection) => (
+                      <CollectionCard
+                        collection={collection}
+                        key={collection.id}
+                      />
+                    ))}
                 </div>
               ) : (
                 emptyBox
@@ -53,9 +56,12 @@ const Collections = ({
       />
     ) : (
       <div className={styles.cards}>
-        {collections.map((collection) => (
-          <CollectionCard collection={collection} key={collection.id} />
-        ))}
+        {collections
+          // eslint-disable-next-line no-underscore-dangle
+          .sort((a, b) => b._count.resources - a._count.resources)
+          .map((collection) => (
+            <CollectionCard collection={collection} key={collection.id} />
+          ))}
       </div>
     )}
   </div>

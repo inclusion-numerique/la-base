@@ -19,6 +19,12 @@ export type CreateUserInput = Parameters<
 export const createUser = async (user: CreateUserInput) =>
   prismaClient.user.create({ data: user })
 
+export type CreateCollectionInput = Parameters<
+  typeof prismaClient.collection.create
+>[0]['data']
+export const createCollection = async (collection: CreateCollectionInput) =>
+  prismaClient.collection.create({ data: collection })
+
 export type CreateBaseInput = Parameters<
   typeof prismaClient.base.create
 >[0]['data']

@@ -1,5 +1,6 @@
 import {
   createBase,
+  createCollection,
   createSession,
   createUser,
   deleteSession,
@@ -15,6 +16,7 @@ import { deleteAllData } from '../e2e/deleteAllData'
  */
 export const tasks = {
   createUser,
+  createCollection,
   createBase,
   sendResourceCommands,
   deleteUser,

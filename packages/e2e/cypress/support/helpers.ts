@@ -19,6 +19,13 @@ export const createTestUser = (data?: Partial<CreateUserInput>) =>
     name: `${data?.firstName || 'Jean'} ${data?.lastName || 'Biche'}`,
     emailVerified: new Date('2023-04-01'),
     isPublic: false,
+    collections: {
+      create: {
+        id: v4(),
+        title: 'Mes favoris',
+        isFavorites: true,
+      },
+    },
     ...data,
   }) as CreateUserInput & {
     id: string
@@ -123,3 +130,11 @@ export const createTestResourceCommands = ({
     },
   ] satisfies [CreateResourceCommand, ...ResourceMutationCommand[]]
 }
+
+export const createTestCollection = (ownerId: string, baseId?: string) => ({
+  id: v4(),
+  title: 'Des ressources, des ressources toujours des ressources',
+  ownerId,
+  isPublic: true,
+  baseId,
+})

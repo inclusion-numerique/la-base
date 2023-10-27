@@ -15,7 +15,7 @@ const SaveInCollection = ({
   onClick: () => void
   isLoading: boolean
 }) => (
-  <div className={styles.container}>
+  <div className={styles.container} data-testid="add-in-collection-section">
     <div className={styles.content}>
       <b>{collection.title}</b>
       <div className={styles.collections}>
@@ -26,7 +26,14 @@ const SaveInCollection = ({
       </div>
     </div>
     {collection.resources.some((resource) => resource.id === resourceId) ? (
-      <Button disabled priority="secondary" iconId="fr-icon-check-line">
+      <Button
+        disabled
+        priority="secondary"
+        iconId="fr-icon-check-line"
+        nativeButtonProps={{
+          'data-testid': 'added-in-collection-button',
+        }}
+      >
         Déjà ajouté
       </Button>
     ) : (
@@ -35,6 +42,9 @@ const SaveInCollection = ({
         onClick={onClick}
         className={isLoading ? 'fr-btn--loading' : ''}
         disabled={isLoading}
+        nativeButtonProps={{
+          'data-testid': 'add-in-collection-button',
+        }}
       >
         Ajouter
       </Button>

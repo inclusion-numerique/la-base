@@ -9,6 +9,7 @@ import {
 import type {
   CreateBaseInput,
   CreateUserInput,
+  CreateCollectionInput,
   SendResourceCommandsInput,
 } from '@app/e2e/e2e/authentication/user.tasks'
 import { appUrl } from '@app/e2e/support/helpers'
@@ -70,6 +71,12 @@ Cypress.Commands.add('createUserAndSignin', (user: CreateUserInput) => {
 Cypress.Commands.add('createUser', (user: CreateUserInput) => {
   cy.task('createUser', user)
 })
+Cypress.Commands.add(
+  'createCollection',
+  (collection: CreateCollectionInput) => {
+    cy.task('createCollection', collection)
+  },
+)
 Cypress.Commands.add('createBase', (base: CreateBaseInput) => {
   cy.task('createBase', base)
 })
@@ -200,6 +207,8 @@ declare global {
       createUserAndSignin(user: CreateUserInput): Chainable<string>
 
       createUser(user: CreateUserInput): Chainable<void>
+
+      createCollection(collection: CreateCollectionInput): Chainable<void>
 
       createBase(base: CreateBaseInput): Chainable<void>
       inviteUserToBase(user: CreateUserInput, base: string): Chainable<void>
