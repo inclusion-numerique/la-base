@@ -3,6 +3,7 @@ import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import { sPluriel } from '@app/web/utils/sPluriel'
 import { PrivacyTag } from '../PrivacyTags'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './CollectionMetaData.module.css'
@@ -24,7 +25,7 @@ const CollectionMetaData = ({
     <div className={styles.informations}>
       <span className="fr-icon-file-text-line fr-icon--sm" />
       <span>
-        <b>{count}</b> Ressources
+        <b>{count}</b> Ressource{sPluriel(count)}
       </span>
       <span>•</span>
       <PrivacyTag
