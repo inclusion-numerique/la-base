@@ -53,6 +53,7 @@ export const createTestResource = (
     },
     createdById: owner.id,
     baseId: base ? base.id : null,
+    collection: null,
     base: base
       ? {
           id: base.id,
@@ -74,7 +75,7 @@ export const createTestResource = (
           },
         ]
       : [],
-  }) satisfies Resource
+  }) satisfies Resource | BasePageData['resources'][number]
 
 export const createTestBase = (
   owner: SessionUser,
@@ -137,5 +138,5 @@ export const createTestBase = (
       createTestResource(owner, true, base),
       createTestResource(owner, true, base),
     ],
-  }
+  } satisfies BasePageData
 }

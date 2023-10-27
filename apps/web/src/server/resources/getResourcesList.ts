@@ -37,7 +37,7 @@ export const resourceListSelect = (user: { id: string } | null) =>
     },
     contributors: {
       select: {
-        id: true,
+        contributorId: true,
       },
       where: {
         contributorId: user?.id,
@@ -55,7 +55,7 @@ export const resourceListSelect = (user: { id: string } | null) =>
           },
         },
         members: {
-          select: { id: true, isAdmin: true },
+          select: { accepted: true, memberId: true, isAdmin: true },
           where: {
             accepted: { not: null },
             memberId: user?.id,

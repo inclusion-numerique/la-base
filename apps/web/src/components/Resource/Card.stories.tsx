@@ -22,6 +22,7 @@ const resource = {
     slug: 'titre-de-la-base',
     isPublic: true,
     image: null,
+    members: [],
   },
   isPublic: true,
   createdBy: {
@@ -32,6 +33,8 @@ const resource = {
     image: null,
   },
   image: null,
+  collection: null,
+  contributors: [],
 } satisfies ResourceListItem
 const creatorUser = { ...testSessionUser, id: resource.createdBy.id }
 

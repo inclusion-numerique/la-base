@@ -100,6 +100,7 @@ const resource = (imageId: string | null) =>
       },
     ] as ResourceContent[],
     isPublic: true,
+    collection: null,
   }) satisfies Resource
 
 const Template = (props: ComponentProps<typeof View>) => (

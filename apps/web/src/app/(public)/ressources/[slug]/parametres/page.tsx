@@ -20,7 +20,7 @@ const ResourceParametersPage = async ({
     redirect(`/connexion?suivant=/ressources/${params.slug}/parametres`)
   }
 
-  const resource = await getResource({ slug: decodeURI(params.slug) })
+  const resource = await getResource({ slug: decodeURI(params.slug) }, user)
   if (!resource) {
     notFound()
   }

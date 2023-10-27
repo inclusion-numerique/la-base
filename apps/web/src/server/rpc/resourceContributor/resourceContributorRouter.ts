@@ -36,7 +36,7 @@ export const resourceContributorRouter = router({
   delete: protectedProcedure
     .input(z.object({ resourceId: z.string(), contributorId: z.string() }))
     .mutation(async ({ input, ctx: { user } }) => {
-      const resource = await getResource({ id: input.resourceId })
+      const resource = await getResource({ id: input.resourceId }, user)
       if (!resource) {
         return notFoundError()
       }
@@ -56,7 +56,7 @@ export const resourceContributorRouter = router({
   invite: protectedProcedure
     .input(InviteContributorCommandValidation)
     .mutation(async ({ input, ctx: { user } }) => {
-      const resource = await getResource({ id: input.resourceId })
+      const resource = await getResource({ id: input.resourceId }, user)
       if (!resource) {
         return notFoundError()
       }

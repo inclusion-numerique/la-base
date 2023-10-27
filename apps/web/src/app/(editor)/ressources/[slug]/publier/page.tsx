@@ -22,7 +22,7 @@ const ResourcePublicationPage = async ({
   }
 
   const [resource, draftResource] = await Promise.all([
-    getResource({ slug: decodeURI(params.slug) }),
+    getResource({ slug: decodeURI(params.slug) }, user),
     getResourceProjectionWithContext({ slug: decodeURI(params.slug) }),
   ])
 

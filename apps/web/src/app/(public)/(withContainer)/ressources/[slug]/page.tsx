@@ -14,8 +14,8 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 
 const RessourcePage = async ({ params }: { params: { slug: string } }) => {
-  const resource = await getResource({ slug: decodeURI(params.slug) })
   const user = await getSessionUser()
+  const resource = await getResource({ slug: decodeURI(params.slug) }, user)
 
   if (!resource) {
     notFound()

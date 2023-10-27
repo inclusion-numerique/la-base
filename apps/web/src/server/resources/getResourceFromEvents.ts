@@ -45,23 +45,24 @@ export const getResourceProjectionContext = async (
 ) => {
   const client = transaction || prismaClient
 
+  const resourceSelect = getResourceSelect(null)
   // TODO better algorithm, resource contents can be done in one query per table, then matching ids with contents
   const [createdBy, base, image, contentImages, contentFiles] =
     await Promise.all([
       client.user.findUnique({
         where: { id: resourceProjection.createdById },
-        select: getResourceSelect.createdBy.select,
+        select: resourceSelect.createdBy.select,
       }),
       resourceProjection.baseId
         ? client.base.findUnique({
             where: { id: resourceProjection.baseId },
-            select: getResourceSelect.base.select,
+            select: resourceSelect.base.select,
           })
         : null,
       resourceProjection.imageId
         ? client.image.findUnique({
             where: { id: resourceProjection.imageId },
-            select: getResourceSelect.image.select,
+            select: resourceSelect.image.select,
           })
         : null,
       Promise.all(
@@ -69,7 +70,7 @@ export const getResourceProjectionContext = async (
           content.imageId
             ? client.image.findUnique({
                 where: { id: content.imageId },
-                select: getResourceSelect.contents.select.image.select,
+                select: resourceSelect.contents.select.image.select,
               })
             : null,
         ),
@@ -79,7 +80,7 @@ export const getResourceProjectionContext = async (
           content.fileKey
             ? client.upload.findUnique({
                 where: { key: content.fileKey },
-                select: getResourceSelect.contents.select.file.select,
+                select: resourceSelect.contents.select.file.select,
               })
             : null,
         ),
