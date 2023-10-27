@@ -56,12 +56,17 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
       },
     },
     resources: {
-      select: resourceListSelect,
+      select: resourceListSelect(user),
       where: computeResourcesListWhereForUser(user),
     },
     collections: {
       select: collectionSelect,
       where: computeCollectionsListWhereForUser(user),
+      orderBy: {
+        resources: {
+          _count: 'desc',
+        },
+      },
     },
     members: {
       select: {

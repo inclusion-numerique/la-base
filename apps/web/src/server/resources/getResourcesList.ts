@@ -5,49 +5,73 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { themeCategories } from '@app/web/themes/themes'
 
-export const resourceListSelect = {
-  id: true,
-  title: true,
-  slug: true,
-  created: true,
-  updated: true,
-  published: true,
-  description: true,
-  isPublic: true,
-  image: {
-    select: {
-      id: true,
-      altText: true,
+export const resourceListSelect = (user: { id: string } | null) =>
+  ({
+    id: true,
+    title: true,
+    slug: true,
+    created: true,
+    updated: true,
+    published: true,
+    description: true,
+    isPublic: true,
+    image: {
+      select: {
+        id: true,
+        altText: true,
+      },
     },
-  },
-  createdBy: {
-    select: {
-      name: true,
-      id: true,
-      firstName: true,
-      lastName: true,
-      image: {
-        select: {
-          id: true,
-          altText: true,
+    createdBy: {
+      select: {
+        name: true,
+        id: true,
+        firstName: true,
+        lastName: true,
+        image: {
+          select: {
+            id: true,
+            altText: true,
+          },
         },
       },
     },
-  },
-  base: {
-    select: {
-      title: true,
-      slug: true,
-      isPublic: true,
-      image: {
-        select: {
-          id: true,
-          altText: true,
+    contributors: {
+      select: {
+        id: true,
+      },
+      where: {
+        contributorId: user?.id,
+      },
+    },
+    base: {
+      select: {
+        title: true,
+        slug: true,
+        isPublic: true,
+        image: {
+          select: {
+            id: true,
+            altText: true,
+          },
+        },
+        members: {
+          select: { id: true, isAdmin: true },
+          where: {
+            accepted: { not: null },
+            memberId: user?.id,
+          },
         },
       },
     },
-  },
-} satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
+    collection: {
+      select: {
+        id: true,
+      },
+      where: {
+        ownerId: user?.id,
+      },
+    },
+  }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
 
 export const computeResourcesListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
@@ -167,7 +191,7 @@ export const getProfileResources = async (
 
   return prismaClient.resource.findMany({
     where,
-    select: resourceListSelect,
+    select: resourceListSelect(user),
     orderBy: [
       {
         created: 'desc',

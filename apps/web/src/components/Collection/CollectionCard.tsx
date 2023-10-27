@@ -24,15 +24,12 @@ const CollectionCard = ({ collection }: { collection: CollectionListItem }) => {
             <RoundProfileImage user={collection.owner} />
             <Link
               className="fr-text--xs fr-link"
-              href={`/profiles/${collection.owner.id}`}
+              href={`/profils/${collection.owner.id}`}
             >
               {collection.owner.name}
             </Link>
           </div>
-          <Link
-            href={href}
-            data-testid="collection-card-link"
-          >
+          <Link href={href} data-testid="collection-card-link">
             <h6 className={styles.title}>{collection.title}</h6>
             {collection.description && (
               <div

@@ -205,7 +205,7 @@ export const searchResources = async (
         in: searchResults.map(({ id }) => id),
       },
     },
-    select: resourceListSelect,
+    select: resourceListSelect(user),
   })
 
   return orderItemsByIndexMap(unsortedResources, resultIndexById)

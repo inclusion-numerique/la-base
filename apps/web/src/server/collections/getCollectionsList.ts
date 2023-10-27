@@ -67,12 +67,16 @@ export const collectionSelect = {
       image: { select: { altText: true, id: true } },
     },
   },
+  // Resources only for image previews
   resources: {
     select: {
       image: { select: { id: true, altText: true } },
     },
     where: {
       deleted: null,
+      image: {
+        isNot: null,
+      },
     },
     take: 3,
   },
@@ -95,6 +99,11 @@ export const getProfileCollections = async (
   return prismaClient.collection.findMany({
     select: collectionSelect,
     where,
+    orderBy: {
+      resources: {
+        _count: 'desc',
+      },
+    },
   })
 }
 

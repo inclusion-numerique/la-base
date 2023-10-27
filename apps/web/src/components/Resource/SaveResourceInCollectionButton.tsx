@@ -22,7 +22,7 @@ const SaveResourceInCollectionButton = ({
   user,
   resource,
   iconOnly,
-                                          'data-testid': dataTestid,
+  'data-testid': dataTestid,
 }: {
   className?: string
   user: SessionUser | null
@@ -43,9 +43,7 @@ const SaveResourceInCollectionButton = ({
     <Button
       {...(iconOnly ? buttonIconOnlyProps : buttonProps)}
       className={className}
-      nativeButtonProps={{
-        'data-testid': dataTestid,
-      }}
+      data-testid={dataTestid}
       linkProps={{
         href: loginUrl({
           intent: 'enregistrer-ressource-dans-collection',

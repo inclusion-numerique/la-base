@@ -92,9 +92,8 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       )}
       {!!resourceId &&
         (selected === 'profil' || (!selected && user.bases.length === 0) ? (
-        <>
-          {user.collections
-            .map((collection) => (
+          <>
+            {user.collections.map((collection) => (
               <SaveInCollection
                 isLoading={isLoading}
                 key={collection.id}
@@ -103,11 +102,10 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 onClick={() => onSave(collection.id)}
               />
             ))}
-        </>
-      ) : selectedBase ? (
-        selectedBase.collections.length > 0 ? (
-          selectedBase.collections
-            .map((collection) => (
+          </>
+        ) : selectedBase ? (
+          selectedBase.collections.length > 0 ? (
+            selectedBase.collections.map((collection) => (
               <SaveInCollection
                 isLoading={isLoading}
                 key={collection.id}
@@ -116,31 +114,31 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 onClick={() => onSave(collection.id)}
               />
             ))
-        ) : (
-          <div
-            className={styles.emptyBase}
+          ) : (
+            <div
+              className={styles.emptyBase}
               data-testid="base-without-collection"
-          >
-            Vous n&lsquo;avez pas de collection dans votre base
-          </div>
-        )
-      ) : (
-        <>
-          <SaveInBase user={user} onClick={() => setSelected('profil')} />
-          {user.bases
-            .sort(
-              (a, b) => b.base.collections.length - a.base.collections.length,
-            )
-            .map(({ base }) => (
-              <SaveInBase
-                key={base.id}
-                user={user}
-                base={base}
-                onClick={() => setSelected(base.id)}
-              />
-            ))}
-        </>
-      ))}
+            >
+              Vous n&lsquo;avez pas de collection dans votre base
+            </div>
+          )
+        ) : (
+          <>
+            <SaveInBase user={user} onClick={() => setSelected('profil')} />
+            {user.bases
+              .sort(
+                (a, b) => b.base.collections.length - a.base.collections.length,
+              )
+              .map(({ base }) => (
+                <SaveInBase
+                  key={base.id}
+                  user={user}
+                  base={base}
+                  onClick={() => setSelected(base.id)}
+                />
+              ))}
+          </>
+        ))}
     </SaveResourceInCollectionDynamicModal.Component>
   )
 }

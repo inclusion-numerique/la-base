@@ -46,7 +46,7 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
       },
     },
     resources: {
-      select: resourceListSelect,
+      select: resourceListSelect(user),
       where: computeResourcesListWhereForUser(user),
     },
   }) satisfies Prisma.CollectionSelect

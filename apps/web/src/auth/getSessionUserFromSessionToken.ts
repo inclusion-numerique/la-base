@@ -85,6 +85,11 @@ export const getSessionUserFromSessionToken = async (
               },
             },
             where: { deleted: null },
+            orderBy: {
+              resources: {
+                _count: 'desc',
+              },
+            },
           },
           resources: {
             select: {
