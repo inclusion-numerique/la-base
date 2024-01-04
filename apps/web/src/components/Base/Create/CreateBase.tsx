@@ -24,11 +24,11 @@ import {
 } from '@app/web/server/bases/updateBase'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMenu'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { useImageUpload } from '../../../hooks/useImageUpload'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
 import Card from '../../Card'
-import BaseVisibilityEdition from '../Edition/BaseVisibilityEdition'
 import InviteUsers from '../../InviteUsers'
 import styles from './CreateBase.module.css'
 
@@ -167,10 +167,12 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             id="visibilite"
             description="Choisissez la visibilité de votre base. Vous pourrez modifier sa visibilité à tout moment."
           >
-            <BaseVisibilityEdition
-              model="Base"
+            <VisibilityField
+              model="base"
               control={control}
               disabled={isLoading}
+              publicTitle="Base publique"
+              privateTitle="Base privée"
             />
           </Card>
 

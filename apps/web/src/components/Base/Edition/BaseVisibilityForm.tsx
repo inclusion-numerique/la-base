@@ -9,12 +9,12 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import EditCard from '@app/web/components/EditCard'
+import VisibilityField from '@app/web/components/VisibilityField'
 import {
   UpdateBaseVisibilityCommand,
   UpdateBaseVisibilityCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import BaseVisibilityEdition from './BaseVisibilityEdition'
 
 const {
   Component: PrivateModal,
@@ -104,7 +104,14 @@ const BaseVisibilityForm = ({
         title="Visibilité de la base"
         description="Choisissez la visibilité de votre base."
         form={form}
-        edition={<BaseVisibilityEdition control={form.control} model="Base" />}
+        edition={
+          <VisibilityField
+            model="base"
+            control={form.control}
+            publicTitle="Base publique"
+            privateTitle="Base privée"
+          />
+        }
         view={
           <>
             <p className="fr-text--sm" data-testid="base-visibility">

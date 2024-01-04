@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import EditableCardForm from '@app/web/components/EditableCardForm'
+import CustomTag, { TagColor } from '@app/web/components/CustomTag'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import {
@@ -11,8 +13,6 @@ import {
   UpdateCollectionVisibilityCommandValidation,
 } from '@app/web/server/collections/updateCollection'
 import { trpc } from '@app/web/trpc'
-import BaseVisibilityEdition from '@app/web/components/Base/Edition/BaseVisibilityEdition'
-import CustomTag, { TagColor } from '../../CustomTag'
 
 const CollectionVisibilityEdition = ({
   collection,
@@ -70,10 +70,12 @@ const CollectionVisibilityEdition = ({
         )
       }
       editing={
-        <BaseVisibilityEdition
-          model="Collection"
+        <VisibilityField
+          model="collection"
           control={form.control}
           disabled={isLoading}
+          publicTitle="Collection publique"
+          privateTitle="Collection privée"
         />
       }
     />

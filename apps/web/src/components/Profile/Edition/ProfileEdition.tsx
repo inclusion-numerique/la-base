@@ -4,7 +4,7 @@ import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import ProfileInformations from '../ProfileInformations'
 import ProfileSideMenu from './ProfileEditionSideMenu'
 import styles from './ProfileEdition.module.css'
-import Visibility from './ProfileVisibilityForm'
+import ProfileVisibilityEdition from './ProfileVisibilityForm'
 
 const ProfileEdition = ({
   profile,
@@ -21,7 +21,7 @@ const ProfileEdition = ({
         resourcesCount={resources.length}
         editMode
       />
-      <Visibility profile={profile} resources={resources} />
+      <ProfileVisibilityEdition profile={profile} resources={resources} />
     </div>
   </div>
 )

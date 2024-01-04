@@ -2,20 +2,20 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
-import { PrivacyTag, ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
-import EditCard from '@app/web/components/EditCard'
 import {
   UpdateProfileVisibilityCommand,
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import EditableCardForm from '@app/web/components/EditableCardForm'
+import CustomTag, { TagColor } from '@app/web/components/CustomTag'
+import VisibilityField from '@app/web/components/VisibilityField'
 
 const {
   Component: PrivateModal,
@@ -45,7 +45,18 @@ const ProfileVisibilityForm = ({
     },
   })
   const mutate = trpc.profile.mutate.useMutation()
+  const isLoading = form.formState.isSubmitting || mutate.isPending
   const hasPublicResources = resources.some((resource) => resource.isPublic)
+
+  const handleSave = async (data: UpdateProfileVisibilityCommand) => {
+    if (data.isPublic || !hasPublicResources) {
+      await mutate.mutateAsync(data)
+      router.refresh()
+    } else {
+      setVisibility(data)
+      openPrivateModal()
+    }
+  }
 
   return (
     <>
@@ -87,91 +98,48 @@ const ProfileVisibilityForm = ({
           part des éventuels contributeurs invités sur vos ressources.
         </PrivateModal>
       )}
-      <EditCard
-        mutation={async (data) => {
-          if (data.isPublic || !hasPublicResources) {
-            await mutate.mutateAsync(data)
-            router.refresh()
-          } else {
-            setVisibility(data)
-            openPrivateModal()
-          }
-        }}
-        className="fr-mt-3w"
+      <EditableCardForm
+        id="visibilite"
         title="Visibilité du profil"
-        description="Choisissez la visibilité de votre profil."
+        subtitle="Choisissez la visibilité du profil."
         form={form}
-        edition={
-          <Controller
-            control={form.control}
-            name="isPublic"
-            render={({
-              field: { onChange, name, value },
-              fieldState: { error },
-            }) => (
-              <fieldset
-                className="fr-fieldset"
-                id="radio-rich"
-                aria-labelledby="radio-rich-legend radio-rich-messages"
-              >
-                <ResourceBaseRichRadioElement
-                  id="radio-profile-public"
-                  data-testid="visibility-radio-profile-public"
-                  name={name}
-                  value={
-                    value === undefined || value === null
-                      ? null
-                      : value.toString()
-                  }
-                  radioValue="true"
-                  onChange={() => {
-                    onChange(true)
-                  }}
-                >
-                  <div className="fr-mr-1w">
-                    Profil public
-                    <p className="fr-text--xs fr-hint-text fr-mb-0">
-                      Visible par tous les visiteurs.
-                    </p>
-                  </div>
-                  <PrivacyTag isPublic />
-                </ResourceBaseRichRadioElement>
-                <ResourceBaseRichRadioElement
-                  id="radio-profile-private"
-                  data-testid="visibility-radio-profile-private"
-                  name={name}
-                  value={
-                    value === undefined || value === null
-                      ? null
-                      : value.toString()
-                  }
-                  radioValue="false"
-                  onChange={() => {
-                    onChange(false)
-                  }}
-                >
-                  <div className="fr-mr-1w">
-                    Profil privé
-                    <p className="fr-text--xs fr-hint-text fr-mb-0">
-                      Votre profil n’est pas visible.
-                    </p>
-                  </div>
-                  <PrivacyTag />
-                </ResourceBaseRichRadioElement>
-                {error && <p className="fr-error-text">{error.message}</p>}
-              </fieldset>
-            )}
-          />
+        onSave={handleSave}
+        preview={
+          profile.isPublic ? (
+            <>
+              <p>
+                Votre profil est public. Vous pouvez passez votre profil en
+                privé si vous le souhaitez.
+              </p>
+              <CustomTag
+                color={TagColor.GREEN}
+                icon="fr-icon-earth-fill"
+                label="Profil publique"
+              />
+            </>
+          ) : (
+            <>
+              <p>
+                Votre profil est privé. Vous pouvez passez votre profil en
+                publique si vous le souhaitez.
+              </p>
+              <CustomTag
+                color={TagColor.GREY}
+                icon="fr-icon-lock-line"
+                label="Profil privé"
+              />
+            </>
+          )
         }
-        view={
-          <>
-            <p className="fr-text--sm" data-testid="profile-visibility">
-              {profile.isPublic
-                ? 'Votre profil est public. Vous pouvez passer votre profil en privé si vous le souhaitez.'
-                : 'Votre profil est privé. Vous pouvez passer votre profil en public si vous le souhaitez.'}
-            </p>
-            <ProfilePrivacyTag isPublic={profile.isPublic} />
-          </>
+        editing={
+          <VisibilityField
+            model="profil"
+            control={form.control}
+            disabled={isLoading}
+            publicTitle="Profil publique"
+            privateTitle="Profil privé"
+            privateHint="Votre profil n'est pas visible."
+          />
         }
       />
     </>

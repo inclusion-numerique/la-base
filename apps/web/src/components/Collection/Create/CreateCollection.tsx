@@ -18,9 +18,9 @@ import {
   CreateCollectionCommandValidation,
 } from '@app/web/server/collections/createCollection'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { useImageUpload } from '../../../hooks/useImageUpload'
 import Card from '../../Card'
-import BaseVisibilityEdition from '../../Base/Edition/BaseVisibilityEdition'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CollectionSideMenu from './SideMenu'
@@ -151,10 +151,12 @@ const CreateCollection = ({
                 }
               />
             ) : (
-              <BaseVisibilityEdition
-                model="Collection"
+              <VisibilityField
+                model="collection"
                 control={control}
                 disabled={isLoading}
+                publicTitle="Collection publique"
+                privateTitle="Collection privée"
               />
             )}
           </Card>
