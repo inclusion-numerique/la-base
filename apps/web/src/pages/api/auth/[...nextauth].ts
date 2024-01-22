@@ -5,6 +5,12 @@ import '@app/web/auth/nextAuthSetup'
 import { sendVerificationRequest } from '@app/web/auth/sendVerificationRequest'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { InclusionConnectProvider } from '@app/web/auth/InclusionConnectProvider'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+
+console.log('AUTH DEBUG', {
+  ...PublicWebAppConfig.InclusionConnect,
+  ...ServerWebAppConfig.InclusionConnect,
+})
 
 export const authOptions: NextAuthOptions = {
   // debug: process.env.NODE_ENV !== 'production',
