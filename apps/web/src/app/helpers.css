@@ -68,6 +68,10 @@
     flex-direction: row;
 }
 
+.fr-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
 .fr-align-self-center {
     align-self: center;
 }
@@ -192,6 +196,10 @@
 
     .fr-direction-md-row {
         flex-direction: row;
+    }
+
+    .fr-direction-md-row-reverse {
+        flex-direction: row-reverse;
     }
 
     .fr-align-self-md-center {

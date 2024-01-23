@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
-import styles from '@app/web/components/Resource/View/ResourceContents.module.css'
+import styles from '@app/web/components/Resource/View/ResourceView.module.css'
 
 const ResourceDates = ({
   className,

@@ -13,7 +13,9 @@ const Resources = ({
   resources,
   user,
   isConnectedUser,
+  baseId,
 }: {
+  baseId: string | null
   resources: BaseResource[]
   user: SessionUser | null
   isConnectedUser: boolean
@@ -37,7 +39,13 @@ const Resources = ({
         <h3 className="fr-mb-0">Ressources · {resources.length}</h3>
         {isConnectedUser && (
           <div data-testid="create-resource-button">
-            <CreateResourceButton className="fr-btn--secondary" />
+            <CreateResourceButton
+              baseId={baseId}
+              data-testid={
+                baseId ? 'create-resource-in-base-button' : undefined
+              }
+              className="fr-btn--secondary"
+            />
           </div>
         )}
       </div>
@@ -84,7 +92,7 @@ const Resources = ({
         />
       ) : (
         resources.map((resource) => (
-          <ResourceCard key={resource.slug} resource={resource} user={user} />
+          <ResourceCard key={resource.id} resource={resource} user={user} />
         ))
       )}
       {!!user && <SaveResourceInCollectionModal user={user} />}

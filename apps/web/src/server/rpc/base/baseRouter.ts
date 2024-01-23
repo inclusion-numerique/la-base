@@ -12,8 +12,9 @@ import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
-import { handleResourceMutationCommand } from '../../resources/feature/handleResourceMutationCommand'
-import { sendInviteMemberEmail } from '../baseMember/invitationEmail'
+import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
+import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
+import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
 
 // TODO - Check user permission
 export const baseRouter = router({
@@ -37,6 +38,7 @@ export const baseRouter = router({
       const base = await prismaClient.base.create({
         data: {
           ...input,
+          excerpt: generateBaseExcerpt(input.description),
           slug,
           titleDuplicationCheckSlug: slug,
           ownerId: user.id,
@@ -90,6 +92,15 @@ export const baseRouter = router({
         ? await findFirstAvailableSlug(afterSlug, 'bases')
         : undefined
 
+      const dataWithSlug = {
+        ...input.data,
+        slug,
+        excerpt:
+          'description' in input.data
+            ? generateBaseExcerpt(input.data.description)
+            : undefined,
+      }
+
       if ('isPublic' in input.data && input.data.isPublic === false) {
         // All public resources must be made private
         const resources = await prismaClient.resource.findMany({
@@ -127,13 +138,13 @@ export const baseRouter = router({
 
           return transaction.base.update({
             where: { id: input.id },
-            data: { ...input.data, slug },
+            data: dataWithSlug,
           })
         })
       }
       return prismaClient.base.update({
         where: { id: input.id },
-        data: { ...input.data, slug },
+        data: dataWithSlug,
       })
     }),
   delete: protectedProcedure

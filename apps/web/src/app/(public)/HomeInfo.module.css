@@ -1,7 +1,11 @@
 
 .container {
-    padding: 80px 0 120px;
+    padding: 48px 0 64px;
     background-color: var(--background-alt-blue-france);
+
+    @media (min-width: 768px) {
+        padding: 80px 0 120px;
+    }
 }
 
 .cardsContainer {

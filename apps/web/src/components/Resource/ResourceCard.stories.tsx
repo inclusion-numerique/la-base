@@ -5,6 +5,8 @@ import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import { testResourceDescription } from '@app/web/test/helpers'
 
 const date = new Date('1998-07-12')
 const resource = {
@@ -12,8 +14,7 @@ const resource = {
   title:
     'Titre d’une ressource sur deux ligne très longues comme comme sur deux ligne très longues',
   slug: 'titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-ligne-tres-longues',
-  description:
-    'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae turpis sed vitae vel. Venenatis adipiscing elit.',
+  excerpt: generateResourceExcerpt(testResourceDescription),
   created: date,
   updated: date,
   published: date,

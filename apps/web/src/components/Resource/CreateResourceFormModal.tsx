@@ -9,7 +9,7 @@ import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  CreateResourceModal,
+  CreateResourceDynamicModal,
   createResourceModalId,
 } from '@app/web/components/Resource/CreateResourceModal'
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
@@ -25,6 +25,7 @@ import {
 } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 
 const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
@@ -46,10 +47,14 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
 
   const modalIsBound = useDsfrModalIsBound(createResourceModalId)
 
+  const { baseId } = CreateResourceDynamicModal.useState()
+
+  const bases = getBasesFromSessionUser(user)
+
   // Auto open modal when create is in search params and the modal is bound
   useEffect(() => {
     if (createResourceIsInSearchParams && modalIsBound) {
-      CreateResourceModal.open()
+      CreateResourceDynamicModal.open()
     }
   }, [createResourceIsInSearchParams, modalIsBound])
 
@@ -60,12 +65,16 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
     handleSubmit,
     formState: { isSubmitting },
     setError,
+    setValue,
   } = useForm<CreateResourceCommand['payload']>({
     resolver: zodResolver(CreateResourceCommandClientPayloadValidation),
     defaultValues,
   })
 
   useModalVisibility(createResourceModalId, {
+    onOpened: () => {
+      setValue('baseId', baseId)
+    },
     onClosed: () => {
       reset(defaultValues)
       setStep(0)
@@ -80,9 +89,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
         }
       : {
           confirmLabel:
-            user.ownedBases.length === 0
-              ? "J'ai compris"
-              : 'Commencer l’édition',
+            bases.length === 0 ? "J'ai compris" : 'Commencer l’édition',
           canCreate: true,
         }
   const modalTitle =
@@ -101,11 +108,11 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
     try {
       const created = await create.mutateAsync({
         name: 'CreateResource',
-        payload: data,
+        payload: { ...data, baseId },
       })
       router.refresh()
       router.push(`/ressources/${created.resource.slug}/editer`)
-      CreateResourceModal.close()
+      CreateResourceDynamicModal.close()
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, setError)
       setStep(0)
@@ -117,7 +124,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CreateResourceModal.Component
+      <CreateResourceDynamicModal.Component
         title={modalTitle}
         buttons={[
           {
@@ -166,7 +173,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
             disabled={disabled}
           />
         )}
-      </CreateResourceModal.Component>
+      </CreateResourceDynamicModal.Component>
     </form>
   )
 }

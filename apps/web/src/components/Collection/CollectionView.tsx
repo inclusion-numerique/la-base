@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
@@ -21,23 +22,21 @@ const CollectionView = ({
   isOwner: boolean
 }) => (
   <div className="fr-width-full">
-    <div className="fr-mb-4w">
-      <OwnershipInformation
-        user={collection.owner}
-        base={collection.base}
-        attributionWording="collection"
-      />
-    </div>
-    <hr className="fr-mt-4w fr-pb-4w" />
-    <div className={styles.header}>
-      <div className={styles.imageContainer}>
+    <OwnershipInformation
+      user={collection.owner}
+      base={collection.base}
+      attributionWording="collection"
+    />
+    <hr className="fr-separator-4v fr-separator-md-8v" />
+    <div className="fr-flex fr-justify-content-space-between fr-flex-gap-4v fr-direction-column fr-direction-md-row-reverse">
+      <div className={classNames(styles.imageContainer)}>
         <Images
           resources={collection.resources.map(({ resource }) => resource)}
           image={collection.image}
         />
       </div>
       <div>
-        <h3>{collection.title}</h3>
+        <h3 className="fr-mb-4v">{collection.title}</h3>
         {collection.description && (
           <div
             className="fr-text--lg fr-mb-0"
@@ -48,7 +47,7 @@ const CollectionView = ({
         )}
       </div>
     </div>
-    <hr className="fr-mt-4w fr-pb-1v" />
+    <hr className="fr-mt-4v fr-mt-md-8v fr-pb-1v" />
     {collection.slug && (
       <CollectionMetaData
         user={user}
@@ -63,8 +62,13 @@ const CollectionView = ({
         context="view"
       />
     )}
-    {collection.resources.map(({ resource }) => (
-      <ResourceCard key={resource.id} resource={resource} user={user} />
+    {collection.resources.map(({ resource }, index) => (
+      <ResourceCard
+        key={resource.id}
+        resource={resource}
+        user={user}
+        className={index === 0 ? 'fr-pt-12v' : undefined}
+      />
     ))}
     {!!user && <SaveResourceInCollectionModal user={user} />}
     {!!user && <SaveCollectionModal user={user} />}

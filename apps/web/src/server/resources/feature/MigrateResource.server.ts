@@ -8,6 +8,7 @@ import {
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 
 export const handleMigrateResource: ResourceCreationCommandHandler<
   MigrateResourceCommand,
@@ -71,6 +72,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
     targetAudiences,
     supportTypes,
     contents,
+    description,
     ...rest
   },
 }) => ({
@@ -79,6 +81,8 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   updated: new Date(updated),
   published: published ? new Date(published) : null,
   createdById: byId,
+  description,
+  excerpt: generateResourceExcerpt(description),
   ...rest,
   contents: contents.map(
     ({ created: contentCreated, updated: contetUpdated, ...contentRest }) => ({
@@ -99,7 +103,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
 })
 
 export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
-  { data: { __version, id, byId, legacyId, contents, ...rest } },
+  { data: { __version, id, byId, legacyId, contents, description, ...rest } },
   resource,
   { transaction },
 ) => {
@@ -122,6 +126,8 @@ export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
       id,
       legacyId,
       createdById: byId,
+      description,
+      excerpt: generateResourceExcerpt(description),
       ...rest,
       contents: {
         createMany: {

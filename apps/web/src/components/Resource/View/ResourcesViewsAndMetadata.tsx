@@ -9,7 +9,7 @@ const ResourcesViewsAndMetadata = ({
   resource,
 }: {
   className?: string
-  resource: ResourceListItem
+  resource: Pick<ResourceListItem, '_count'>
 }) => (
   <div
     className={classNames(

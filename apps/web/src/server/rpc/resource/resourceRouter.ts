@@ -23,6 +23,8 @@ export const resourceRouter = router({
   create: protectedProcedure
     .input(CreateResourceCommandClientValidation)
     .mutation(async ({ input, ctx: { user } }) => {
+      // TODO Security check on baseId
+
       const command: CreateResourceCommand = {
         ...input,
         payload: { ...input.payload, resourceId: v4() },

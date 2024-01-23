@@ -21,7 +21,7 @@ const ResourceParametersPage = async ({
   }
 
   const resource = await getResource({ slug: decodeURI(params.slug) }, user)
-  if (!resource) {
+  if (!resource || !resource.published) {
     notFound()
   }
 

@@ -12,7 +12,9 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
     >
       <Header
         user={user}
-        createResource={user ? <CreateResourceButton /> : undefined}
+        createResource={
+          user ? <CreateResourceButton baseId={null} /> : undefined
+        }
       />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {children}

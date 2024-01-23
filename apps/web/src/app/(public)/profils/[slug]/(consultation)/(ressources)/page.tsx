@@ -20,6 +20,7 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
       resources={resources}
       isConnectedUser={authorizations.isUser}
       user={user}
+      baseId={null}
     />
   )
 }

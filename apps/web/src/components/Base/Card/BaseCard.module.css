@@ -35,7 +35,7 @@
 }
 
 .exerpt {
-    max-height: 72px;
+  max-height: 72px;
 
   /* Standard ellipsis does not work on multiline */
   display: -webkit-box;

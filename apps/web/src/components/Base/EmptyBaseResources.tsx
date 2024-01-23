@@ -2,7 +2,13 @@ import React from 'react'
 import { CreateResourceButton } from '../Resource/CreateResourceModal'
 import EmptyBox from '../EmptyBox'
 
-const EmptyBaseResources = ({ isMember }: { isMember: boolean }) => (
+const EmptyBaseResources = ({
+  isMember,
+  baseId,
+}: {
+  isMember: boolean
+  baseId: string | null
+}) => (
   <EmptyBox
     title={
       isMember
@@ -18,7 +24,11 @@ const EmptyBaseResources = ({ isMember }: { isMember: boolean }) => (
           auprès d’un large public.
         </div>
         <div data-testid="create-resource-button">
-          <CreateResourceButton className="fr-mt-4w" />
+          <CreateResourceButton
+            className="fr-mt-4w"
+            baseId={baseId}
+            data-testid="create-resource-in-base-button"
+          />
         </div>
       </>
     ) : (

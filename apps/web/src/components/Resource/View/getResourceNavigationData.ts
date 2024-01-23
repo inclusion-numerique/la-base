@@ -3,10 +3,12 @@ import { WithAnchorIdAndHref } from '@app/web/components/Resource/View/addAnchor
 
 export const getResourceNavigationData = ({
   title,
+  slug,
   contentsWithAnchor,
   hasInformationSection,
 }: {
   title: string
+  slug: string
   contentsWithAnchor: WithAnchorIdAndHref<Resource['contents'][number]>[]
   hasInformationSection: boolean
 }) => {
@@ -27,7 +29,7 @@ export const getResourceNavigationData = ({
   items.unshift({
     text: title,
     linkProps: {
-      href: '#',
+      href: `#${slug}`,
     },
   })
 

@@ -1,5 +1,6 @@
 import { v4 } from 'uuid'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import { SessionUser } from '../auth/sessionUser'
 import { BasePageData } from '../server/bases/getBase'
 import { Resource } from '../server/resources/getResource'
@@ -50,6 +51,13 @@ export const createTestProfile = (publicProfile?: boolean) =>
     },
   }) satisfies ProfilePageData
 
+export const testResourceDescription =
+  "A Love Supreme est un album-concept de John Coltrane enregistré en 1964. Il est considéré comme un album majeur du jazz, l'un de ses plus grands chefs-d’œuvre, l'un des plus connus et des plus accessibles.\n" +
+  ' ' +
+  "Il s'agit d'une composition en quatre mouvements enregistrée en une seule séance le 9 décembre 19641 au studio de Rudy Van Gelder (Englewood Cliffs, New Jersey, USA) et produit par Bob Thiele pour le label Impulse!. L'album fait suite à Crescent, enregistré la même année, plus contemplatif mais qui déjà amorçait un virage dans la carrière de Coltrane." +
+  ' ' +
+  "Le quartet mythique de Coltrane, alors en pleine maturité, était sur le chemin d'une inéluctable séparation2. Deux autres versions de Acknowledgement ont été enregistrées le lendemain (le 10 décembre 1964) avec le saxophoniste ténor Archie Shepp et le bassiste Art Davis. L'unique version enregistrée en direct de la suite A Love Supreme date du 26 juillet 1965 lors du festival d'Antibes, et a été publiée officiellement par Impulse! avec l'album original3."
+
 export const createTestResource = (
   owner: SessionUser,
   isPublic?: boolean,
@@ -65,8 +73,8 @@ export const createTestResource = (
     created: new Date('2023-09-14'),
     updated: new Date('2023-09-14'),
     published: new Date('2023-09-14'),
-    description:
-      'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae...',
+    description: testResourceDescription,
+    excerpt: generateResourceExcerpt(testResourceDescription),
     isPublic: isPublic || false,
     imageId: null,
     image: null,

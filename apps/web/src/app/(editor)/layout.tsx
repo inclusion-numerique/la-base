@@ -12,7 +12,9 @@ const EditorLayout = async ({ children }: PropsWithChildren) => {
     >
       <Header
         user={user}
-        createResource={user ? <CreateResourceButton /> : undefined}
+        createResource={
+          user ? <CreateResourceButton baseId={null} /> : undefined
+        }
         backLink
       />
       <div style={{ flex: 1 }}>{children}</div>

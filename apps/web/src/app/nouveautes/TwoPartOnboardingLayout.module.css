@@ -52,13 +52,18 @@
     overflow: visible;
 }
 
+/* Fix for Safari */
+.illustrationWrapper {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
 .illustration {
     object-fit: cover;
     min-width: 100%;
     height: 100%;
     object-position: 0 0;
-    overflow: visible;
-
 }
 
 .illustrationBackgroundBlueFrance925125 {

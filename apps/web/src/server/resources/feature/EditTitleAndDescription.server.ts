@@ -9,6 +9,7 @@ import {
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 
 export const handleEditTitleAndDescription: ResourceMutationCommandHandler<
   EditTitleAndDescriptionCommand,
@@ -46,6 +47,7 @@ export const applyTitleAndDescriptionEdited: ResourceMutationEventApplier<
   ...resource,
   title: event.data.title,
   description: event.data.description,
+  excerpt: generateResourceExcerpt(event.data.description),
   updated: event.timestamp,
   slug: event.data.slug ?? resource.slug,
 })

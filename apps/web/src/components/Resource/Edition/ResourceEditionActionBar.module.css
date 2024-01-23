@@ -27,6 +27,7 @@
 }
 
 .collapse {
+  transition: none !important;
   position: absolute;
   bottom: calc(100% + 4px) !important;
 
@@ -36,6 +37,10 @@
   border-top: 1px solid var(--border-open-blue-france);
   border-bottom: 1px solid var(--border-open-blue-france);
   box-shadow: var(--big-smooth-shadow);
+
+  &::before{
+    transition: none !important;
+  }
 
   .collapseButton {
     color: var(--text-action-high-grey);

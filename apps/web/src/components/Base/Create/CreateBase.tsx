@@ -107,8 +107,8 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
         imageId: profilePictureUploaded?.id,
         coverImageId: coverImageUploaded?.id,
       })
-      router.refresh()
       router.push(`/bases/${base.slug}`)
+      router.refresh()
       createToast({
         priority: 'success',
         message: (

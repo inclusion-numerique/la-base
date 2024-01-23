@@ -1,5 +1,7 @@
 .badge {
   color: var(--grey-200-850);
+  display: flex;
+  align-items: center;
 }
 
 .icon {

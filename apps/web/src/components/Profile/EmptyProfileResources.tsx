@@ -22,7 +22,7 @@ const EmptyProfileResources = ({
           auprès d’un large public.
         </div>
         <div data-testid="create-resource-button">
-          <CreateResourceButton className="fr-mt-4w" />
+          <CreateResourceButton baseId={null} className="fr-mt-4w" />
         </div>
       </>
     ) : (

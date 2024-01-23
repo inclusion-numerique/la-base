@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
@@ -16,45 +15,48 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
+  const parents = collection.base
+    ? [
+        {
+          label: collection.base.title,
+          linkProps: { href: `/bases/${collection.base.slug}` },
+        },
+        {
+          label: 'Collections',
+          linkProps: { href: `/bases/${collection.base.slug}/collections` },
+        },
+      ]
+    : [
+        {
+          label: collection.owner.name || 'Profil anonyme',
+          linkProps: { href: `/profils/${collection.owner.slug}` },
+        },
+        {
+          label: 'Collections',
+          linkProps: { href: `/profils/${collection.owner.slug}/collections` },
+        },
+      ]
+
   const authorizations = filterAccess(collection, user)
-  return authorizations.authorized ? (
-    <div className="fr-container">
-      {user && (
-        <Breadcrumbs
-          parents={[
-            {
-              label: 'Mon profil',
-              linkProps: { href: `/profils/${user.slug}` },
-            },
-            {
-              label: 'Mes collections',
-              linkProps: { href: `/profils/${user.slug}/collections` },
-            },
-          ]}
-          currentPage={collection.title}
-        />
-      )}
-      <div className="fr-container fr-container--medium fr-my-4w">
-        {user && (
-          <div className="fr-mb-4w">
-            <Link
-              href={`/profils/${user.slug}/collections`}
-              className="fr-link fr-mb-4w"
-            >
-              <span className="fr-icon-arrow-left-line fr-icon--sm fr-mr-1w" />
-              Retour
-            </Link>
+  return (
+    <>
+      <div className="fr-container">
+        <Breadcrumbs parents={parents} currentPage={collection.title} />
+      </div>
+      <div className="fr-container fr-container--medium fr-mb-20v fr-pb-20v">
+        {authorizations.authorized ? (
+          <CollectionView
+            collection={collection}
+            user={user}
+            isOwner={authorizations.isOwner}
+          />
+        ) : (
+          <div className="fr-container fr-container--medium fr-my-4w">
+            <PrivateBox type="Collection" />
           </div>
         )}
-        <CollectionView
-          collection={collection}
-          user={user}
-          isOwner={authorizations.isOwner}
-        />
       </div>
-    </div>
-  ) : (
-    <PrivateBox type="Collection" />
+    </>
   )
 }
 

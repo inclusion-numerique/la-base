@@ -45,7 +45,7 @@ const BaseDetails = ({ base }: { base: BasePageData }) => (
         {base.website && (
           <div className="fr-mt-2w">
             <p className={styles.subtitle}>Site internet</p>
-            <Link href={`mailto:${base.website}`} className="fr-link">
+            <Link href={base.website} className="fr-link" target="_blank">
               {base.website}
             </Link>
           </div>
@@ -55,19 +55,19 @@ const BaseDetails = ({ base }: { base: BasePageData }) => (
             <h6 className="fr-mt-3w fr-mb-2w">Nous suivre</h6>
             <div className={styles.websites}>
               {base.twitter && (
-                <Link href={base.twitter} className="fr-link ">
+                <Link href={base.twitter} className="fr-link" target="_blank">
                   <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
                   Twitter
                 </Link>
               )}
               {base.linkedin && (
-                <Link href={base.linkedin} className="fr-link ">
+                <Link href={base.linkedin} className="fr-link" target="_blank">
                   <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
                   LinkedIn
                 </Link>
               )}
               {base.facebook && (
-                <Link href={base.facebook} className="fr-link ">
+                <Link href={base.facebook} className="fr-link" target="_blank">
                   <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
                   Facebook
                 </Link>

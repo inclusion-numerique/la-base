@@ -5,8 +5,8 @@ export const searchToTsQueryInput = (search?: string | null) => {
   }
 
   const cleanedInput = trimmed
-    // Replace "-" or "_" by spaces
-    .replaceAll(/[_-]/g, ' ')
+    // Replace "-", "'", "’", or "_" by spaces
+    .replaceAll(/['_’-]/g, ' ')
     // Remove all characters that are not letters, digits, or spaces
     // and include accented characters
     .replaceAll(/[^\s\wÀ-ÖØ-öø-ÿ]/g, '')

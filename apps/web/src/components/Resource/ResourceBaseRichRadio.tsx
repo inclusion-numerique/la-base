@@ -7,6 +7,7 @@ import {
   BasePrivacyTag,
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
+import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import ResourceBaseRichRadioElement from './ResourceBaseRichRadioElement'
 
 const ResourceBaseRichRadio = <T extends FieldValues>({
@@ -20,8 +21,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
   path: FieldPath<T>
   disabled?: boolean
 }) => {
-  // There will be bases with collaboration access in the future
-  const bases = user.ownedBases
+  const bases = getBasesFromSessionUser(user)
   const profileRadioId = `base-profile-radio`
   const id = 'resource-base-rich-radio'
 
@@ -44,7 +44,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
             <>
               <Notice
                 className="fr-mx-2v fr-mt-4v fr-mb-4v"
-                title="En tant que créateur de cette ressource, elle sera directement ajoutée à votre profil."
+                title="En tant que créateur de cette ressource, elle sera toujours visible sur votre profil."
               />
               <ResourceBaseRichRadioElement
                 data-testid="resource-base-profil"

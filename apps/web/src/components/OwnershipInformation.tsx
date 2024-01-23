@@ -42,7 +42,12 @@ const OwnershipInformation = ({
     attributionWordings[attributionWording][base ? 'base' : 'user']
 
   return (
-    <div className={classNames('fr-grid-row fr-grid-row--middle', className)}>
+    <div
+      className={classNames(
+        'fr-flex fr-align-items-center fr-flex-gap-2v',
+        className,
+      )}
+    >
       {base ? (
         <>
           <BaseImage className="fr-mr-1w" base={base} />

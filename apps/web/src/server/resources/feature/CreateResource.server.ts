@@ -10,6 +10,7 @@ import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { createSlug } from '@app/web/utils/createSlug'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 
 export const handleCreateResource: ResourceCreationCommandHandler<
   CreateResourceCommand,
@@ -46,6 +47,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   slug,
   title,
   description,
+  excerpt: generateResourceExcerpt(description),
   baseId,
   legacyId: null,
   created: timestamp,
@@ -79,6 +81,7 @@ export const onCreated: ResourceEventSideEffect<ResourceCreated> = async (
       published: null,
       title: event.data.title,
       description: event.data.description,
+      excerpt: generateResourceExcerpt(event.data.description),
       baseId: event.data.baseId,
       created: event.timestamp,
       updated: event.timestamp,

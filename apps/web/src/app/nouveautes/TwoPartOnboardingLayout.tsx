@@ -107,7 +107,9 @@ const TwoPartOnboardingLayout = ({
         paddingRight: illustrationRight,
       }}
     >
-      <img src={illustrationSrc} className={styles.illustration} alt="" />
+      <div className={styles.illustrationWrapper}>
+        <img src={illustrationSrc} className={styles.illustration} alt="" />
+      </div>
     </div>
   </>
 )

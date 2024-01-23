@@ -104,29 +104,24 @@ const ResourceEditionActionBar = ({
                 id="edition-action-bar-more"
                 ref={collapseRef}
               >
-                <Link
-                  className={classNames(
-                    styles.collapseButton,
-                    'fr-btn',
-                    'fr-btn--tertiary-no-outline',
-                    'fr-icon-settings-5-line',
-                    'fr-btn--icon-left',
-                  )}
-                  href={`/ressources/${resource.slug}/parametres`}
-                  data-testid="edition-action-bar-parameters-modal"
-                >
-                  Paramètres de la ressource
-                </Link>
-                <hr className={styles.separator} />
-                <Button
-                  className={classNames(styles.collapseButton, 'wip')}
-                  type="button"
-                  priority="tertiary no outline"
-                  iconId="fr-icon-eye-line"
-                >
-                  Prévisualiser la ressource
-                </Button>
-                <hr className={styles.separator} />
+                {!!resource.published && (
+                  <>
+                    <Link
+                      className={classNames(
+                        styles.collapseButton,
+                        'fr-btn',
+                        'fr-btn--tertiary-no-outline',
+                        'fr-icon-settings-5-line',
+                        'fr-btn--icon-left',
+                      )}
+                      href={`/ressources/${resource.slug}/parametres`}
+                      data-testid="edition-action-bar-parameters-modal"
+                    >
+                      Paramètres de la ressource
+                    </Link>
+                    <hr className={styles.separator} />
+                  </>
+                )}
                 <Button
                   className={styles.collapseButton}
                   type="button"

@@ -115,6 +115,7 @@ model Base {
   titleDuplicationCheckSlug String  @map("title_duplication_check_slug")
   base                      String?
   description               String?
+  excerpt                   String? // Used in cards, 300 first chars from description with html tags stripped
   department                String?
   owner                     User    @relation(fields: [ownerId], references: [id])
   ownerId                   String  @map("owner_id") @db.Uuid
@@ -288,6 +289,7 @@ model Resource {
   imageId String? @unique @map("image_id") @db.Uuid
 
   description String
+  excerpt     String // Used in cards, 300 first chars from description
 
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String @map("created_by_id") @db.Uuid

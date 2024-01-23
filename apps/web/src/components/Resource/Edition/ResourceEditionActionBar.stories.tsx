@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { createTestResource, createTestUser } from '@app/web/test/helpers'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceEditionActionBar from './ResourceEditionActionBar'
@@ -17,11 +18,18 @@ export default {
 
 type Story = StoryObj<typeof ResourceEditionActionBar>
 
+const resource = createTestResource(createTestUser())
+
 export const Brouillon: Story = {
   args: {
     publishedState: ResourcePublishedState.DRAFT,
     editionState: ResourceEditionState.SAVED,
     unPublishedEdits: false,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }
 
@@ -30,6 +38,11 @@ export const BrouillonEnregistrement: Story = {
     publishedState: ResourcePublishedState.DRAFT,
     editionState: ResourceEditionState.SAVING,
     unPublishedEdits: false,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }
 
@@ -38,6 +51,11 @@ export const BrouillonModifié: Story = {
     publishedState: ResourcePublishedState.DRAFT,
     editionState: ResourceEditionState.SAVED,
     unPublishedEdits: true,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }
 
@@ -46,6 +64,11 @@ export const Publique: Story = {
     publishedState: ResourcePublishedState.PUBLIC,
     editionState: ResourceEditionState.SAVED,
     unPublishedEdits: false,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }
 
@@ -55,6 +78,11 @@ export const PrivéeEnregistrement: Story = {
     publishedState: ResourcePublishedState.PRIVATE,
     editionState: ResourceEditionState.SAVING,
     unPublishedEdits: false,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }
 
@@ -64,5 +92,10 @@ export const PubliqueModifiée: Story = {
     publishedState: ResourcePublishedState.PUBLIC,
     editionState: ResourceEditionState.SAVED,
     unPublishedEdits: true,
+    resource,
+    isSubmitting: false,
+    onDelete: () => {},
+    onPublish: () => {},
+    publishMode: false,
   },
 }

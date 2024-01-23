@@ -12,7 +12,10 @@
 .imageContainer {
   width: 100%;
 
+  /* 576px breakpoint - padding */
+  max-width: 544px;
+
  @media (min-width: 768px) {
-   width: 281px;
+   width: 280px;
  }
 }

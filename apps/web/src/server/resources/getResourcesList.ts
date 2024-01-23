@@ -13,7 +13,7 @@ export const resourceListSelect = (user: { id: string } | null) =>
     created: true,
     updated: true,
     published: true,
-    description: true,
+    excerpt: true,
     isPublic: true,
     image: {
       select: {
@@ -208,7 +208,7 @@ export const getProfileResources = async (
     select: resourceListSelect(user),
     orderBy: [
       {
-        created: 'desc',
+        updated: 'desc',
       },
     ],
   })

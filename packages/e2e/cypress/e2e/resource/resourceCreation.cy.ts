@@ -1,6 +1,7 @@
 import { v4 } from 'uuid'
 import { createSlug } from '@app/web/utils/createSlug'
 import { givenUser } from '@app/e2e/support/given/givenUser'
+import { cleanUpAndCreateTestBaseAsMember } from '@app/e2e/e2e/resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je créé une ressource, je peux renseigner le titre, description', () => {
   /**
@@ -139,5 +140,34 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.appUrlShouldBe(`/ressources/${createSlug(titre)}/editer`)
     cy.contains(titre)
     cy.get('@modal').should('not.exist')
+  })
+
+  it('Acceptation 4 - Si je créé une ressource depuis une page de base dont je suis membre, elle est créée dans la base par défault', () => {
+    const title = 'Titre de ressource'
+    const { base } = cleanUpAndCreateTestBaseAsMember(false)
+    cy.dsfrModalsShouldBeBound()
+
+    cy.testId('create-resource-in-base-button').click()
+    cy.findByRole('dialog').as('modal')
+    cy.get('@modal').contains('Créer une nouvelle ressource')
+    cy.get('@modal')
+      .findByLabelText(/^Titre/)
+      .type(title)
+    cy.get('@modal')
+      .findByLabelText(/^Description/)
+      .type('Une description')
+    cy.get('@modal').find('button').contains('Continuer').click()
+    cy.get('@modal').contains('ajouter cette ressource')
+    cy.get('@modal').find('label').first().contains('mon profil')
+    cy.get('@modal').find('label').first().contains('Privé')
+
+    cy.get('@modal').find('label').eq(1).contains(base.title)
+
+    cy.get('@modal').find('button').contains('Commencer').click()
+
+    cy.appUrlShouldBe(`/ressources/${createSlug(title)}/editer`)
+    cy.get('@modal').should('not.exist')
+    cy.contains(title)
+    cy.contains(`Publiée dans la base ${base.title}`)
   })
 })

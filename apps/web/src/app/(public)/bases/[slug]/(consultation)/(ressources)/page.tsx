@@ -6,16 +6,16 @@ import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consulta
 const BaseResourcesPage = async ({ params }: { params: { slug: string } }) => {
   const { user, authorizations, base } = await getBasePageContext(params.slug)
 
-  // TODO security and filtering check, separate query for ressources
-  const { resources } = base
+  const { resources, id } = base
 
   return resources.length === 0 ? (
-    <EmptyBaseResources isMember={authorizations.isMember} />
+    <EmptyBaseResources isMember={authorizations.isMember} baseId={id} />
   ) : (
     <Resources
       resources={resources}
       user={user}
       isConnectedUser={authorizations.isMember}
+      baseId={id}
     />
   )
 }

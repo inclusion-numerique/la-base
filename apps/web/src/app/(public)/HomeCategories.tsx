@@ -20,7 +20,7 @@ const themeSearchResultHref = (theme: Theme) =>
 const HomeCategories = async () => {
   const categoriesCount = await getHomeCategoriesCount()
   return (
-    <div className="fr-container fr-pt-20v fr-pb-30v">
+    <div className="fr-container fr-pt-12v fr-pb-16v fr-pb-md-30v fr-pt-md-20v">
       <div className="fr-text--center">
         <h3 className="fr-mb-4v">
           Découvrez les ressources grâce aux thématiques

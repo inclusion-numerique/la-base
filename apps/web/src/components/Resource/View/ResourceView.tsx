@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { Resource } from '@app/web/server/resources/getResource'
 import { hasIndexation } from '@app/web/utils/indexation'
 import { SessionUser } from '@app/web/auth/sessionUser'
@@ -10,9 +11,14 @@ import ResourcePublicStateBadge from '@app/web/components/Resource/View/Resource
 import ResourceDesktopNavigation from '@app/web/components/Resource/View/ResourceDesktopNavigation'
 import { getResourceNavigationData } from '@app/web/components/Resource/View/getResourceNavigationData'
 import { addAnchorIdsToResourceContents } from '@app/web/components/Resource/View/addAnchorIdsToResourceContents'
-import ResourceContents from './ResourceContents'
-import ResourceInformations from './ResourceInformations'
+import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
+import ResourcesViewsAndMetadata from '@app/web/components/Resource/View/ResourcesViewsAndMetadata'
+import ResourceActions from '@app/web/components/Resource/View/ResourceActions'
+import ResourceMobileNavigation from '@app/web/components/Resource/View/ResourceMobileNavigation'
+import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
+import RegisterResourceView from '@app/web/components/Resource/View/RegisterResourceView'
 import styles from './ResourceView.module.css'
+import ResourceInformations from './ResourceInformations'
 
 const ResourceView = ({
   resource,
@@ -26,6 +32,7 @@ const ResourceView = ({
   const hasInformationSection = resource.isPublic || hasIndexation(resource)
   const contentsWithAnchor = addAnchorIdsToResourceContents(resource.contents)
   const navigationData = getResourceNavigationData({
+    slug: resource.slug,
     title: resource.title,
     contentsWithAnchor,
     hasInformationSection,
@@ -43,28 +50,62 @@ const ResourceView = ({
       </div>
       <div className="fr-col-12 fr-col-md-7 fr-col-md-6 fr-pb-20v">
         <div className={styles.contentColumn}>
-          <OwnershipInformation
-            user={resource.createdBy}
-            base={resource.base}
-            attributionWording="resource"
-          />
-          <hr className="fr-separator-4v fr-separator-md-6v" />
-          <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
-            <ResourceDates
-              created={resource.created}
-              updated={resource.updated}
+          {/* This div is used for top anchor */}
+          <div id={resource.slug} className="fr-width-full">
+            <OwnershipInformation
+              user={resource.createdBy}
+              base={resource.base}
+              attributionWording="resource"
             />
-            {isAdmin && (
-              <ResourcePublicStateBadge small isPublic={resource.isPublic} />
-            )}
+            <hr className="fr-separator-4v fr-separator-md-6v" />
+            <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
+              <ResourceDates
+                created={resource.created}
+                updated={resource.updated}
+              />
+              {isAdmin && (
+                <ResourcePublicStateBadge small isPublic={resource.isPublic} />
+              )}
+            </div>
+            {resource.image ? (
+              <div className={styles.imageContainer}>
+                <ResponsiveUploadedImage
+                  id={resource.image.id}
+                  alt={resource.image.altText ?? ''}
+                  breakpoints={[
+                    { media: '(max-width: 320px)', width: 320 - 32 },
+                    { media: '(max-width: 576px)', width: 576 - 32 },
+                    { media: '(max-width: 768px)', width: 768 - 32 },
+                    { media: '(min-width: 768px)', width: 588 },
+                  ]}
+                />
+              </div>
+            ) : null}
+            <h3 className="fr-mt-4v fr-mb-0 fr-mt-md-8v">{resource.title}</h3>
+            <p className="fr-text--lg fr-mt-2v fr-mt-md-3v fr-mb-0">
+              {resource.description}
+            </p>
+            <ResourcesViewsAndMetadata
+              resource={resource}
+              className="fr-my-4v fr-my-md-6v"
+            />
+            <ResourceActions
+              resource={resource}
+              user={user}
+              isAdmin={isAdmin}
+            />
+            <ResourceMobileNavigation navigationData={navigationData} />
           </div>
-          <ResourceContents
-            navigationData={navigationData}
-            contentsWithAnchor={contentsWithAnchor}
-            resource={resource}
-            user={user}
-            isAdmin={isAdmin}
-          />
+          {contentsWithAnchor.map((content, index) => (
+            <div
+              key={content.id}
+              id={content.anchorId}
+              className={classNames('fr-py-4v', index === 0 && 'fr-pt-6v')}
+            >
+              <ResourceContentView content={content} />
+            </div>
+          ))}
+          <RegisterResourceView resourceSlug={resource.slug} />
           {(resource.isPublic || hasIndexation(resource)) && (
             <ResourceInformations resource={resource} />
           )}

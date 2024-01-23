@@ -66,7 +66,7 @@ export const baseSelect = (user: { id: string } | null) =>
   ({
     id: true,
     title: true,
-    description: true,
+    excerpt: true,
     isPublic: true,
     slug: true,
     department: true,

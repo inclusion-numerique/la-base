@@ -60,6 +60,7 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
     resources: {
       select: { resource: { select: resourceListSelect(user) } },
       where: { resource: computeResourcesListWhereForUser(user) },
+      orderBy: { resource: { updated: 'desc' } },
     },
   }) satisfies Prisma.CollectionSelect
 

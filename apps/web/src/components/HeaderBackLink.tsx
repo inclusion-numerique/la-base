@@ -12,6 +12,7 @@ const HeaderBackLink = () => {
         'fr-btn',
         'fr-btn--sm',
         'fr-btn--tertiary-no-outline',
+        'fr-my-4v',
       )}
       onClick={router.back}
     >

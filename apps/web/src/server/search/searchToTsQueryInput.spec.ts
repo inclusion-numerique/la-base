@@ -19,4 +19,10 @@ describe('searchToTsQueryInput', () => {
   test('handles strings with leading/trailing white spaces', () => {
     expect(searchToTsQueryInput(' word ')).toBe('word:*')
   })
+
+  test('removes quotes', () => {
+    expect(searchToTsQueryInput("par l'impact, pour l’hiver")).toBe(
+      'par:* & l:* & impact:* & pour:* & l:* & hiver:*',
+    )
+  })
 })

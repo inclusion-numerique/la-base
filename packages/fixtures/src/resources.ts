@@ -1,5 +1,6 @@
 import { ResourceCreatedDataV1 } from '@app/web/server/resources/feature/CreateResource'
 import type { Prisma } from '@prisma/client'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import { jmAvecTout } from '@app/fixtures/users'
 import { baseFixtureAvecTout } from '@app/fixtures/bases'
 
@@ -77,6 +78,9 @@ export const resourcePubliqueDansBase = {
   titleDuplicationCheckSlug:
     resourcePubliqueDansBaseConstant.titleDuplicationCheckSlug,
   description: resourcePubliqueDansBaseConstant.description,
+  excerpt: generateResourceExcerpt(
+    resourcePubliqueDansBaseConstant.description,
+  ),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
@@ -121,6 +125,7 @@ export const resourcePriveeDansBase = {
   titleDuplicationCheckSlug:
     resourcePriveeDansBaseConstant.titleDuplicationCheckSlug,
   description: resourcePriveeDansBaseConstant.description,
+  excerpt: generateResourceExcerpt(resourcePriveeDansBaseConstant.description),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
@@ -166,6 +171,9 @@ export const resourceBrouillonDansBase = {
   titleDuplicationCheckSlug:
     resourceBrouillonDansBaseConstant.titleDuplicationCheckSlug,
   description: resourceBrouillonDansBaseConstant.description,
+  excerpt: generateResourceExcerpt(
+    resourceBrouillonDansBaseConstant.description,
+  ),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
@@ -209,6 +217,9 @@ export const resourcePubliqueDansProfil = {
   titleDuplicationCheckSlug:
     resourcePubliqueDansProfilConstant.titleDuplicationCheckSlug,
   description: resourcePubliqueDansProfilConstant.description,
+  excerpt: generateResourceExcerpt(
+    resourcePubliqueDansProfilConstant.description,
+  ),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
@@ -249,6 +260,9 @@ export const resourcePriveeDansProfil = {
   titleDuplicationCheckSlug:
     resourcePriveeDansProfilConstant.titleDuplicationCheckSlug,
   description: resourcePriveeDansProfilConstant.description,
+  excerpt: generateResourceExcerpt(
+    resourcePriveeDansProfilConstant.description,
+  ),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
@@ -288,6 +302,9 @@ export const resourceBrouillonDansProfil = {
   titleDuplicationCheckSlug:
     resourceBrouillonDansProfilConstant.titleDuplicationCheckSlug,
   description: resourceBrouillonDansProfilConstant.description,
+  excerpt: generateResourceExcerpt(
+    resourceBrouillonDansProfilConstant.description,
+  ),
   createdBy: {
     connect: {
       id: jmAvecTout.id,
