@@ -5,7 +5,10 @@ import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
 import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import { departmentsOptions } from '@app/web/utils/departments'
 import { CreateBaseCommand } from '@app/web/server/bases/createBase'
-import { UpdateBaseInformationsCommand } from '@app/web/server/bases/updateBase'
+import {
+  baseTitleInfoText,
+  UpdateBaseInformationsCommand,
+} from '@app/web/server/bases/updateBase'
 
 const BaseInformationsEdition = ({
   form,
@@ -20,6 +23,7 @@ const BaseInformationsEdition = ({
       label="Nom de la base "
       disabled={form.formState.isSubmitting}
       asterisk
+      info={baseTitleInfoText}
     />
     <SelectFormField
       data-testid="base-department-select"

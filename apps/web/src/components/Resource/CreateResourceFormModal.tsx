@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
+import { createToast } from '@app/ui/toast/createToast'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   CreateResourceDynamicModal,
@@ -110,8 +111,17 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
         name: 'CreateResource',
         payload: { ...data, baseId },
       })
-      router.refresh()
       router.push(`/ressources/${created.resource.slug}/editer`)
+      router.refresh()
+      createToast({
+        priority: 'success',
+        message: (
+          <>
+            La ressource <strong>{created.resource.title}</strong> a bien été
+            créée
+          </>
+        ),
+      })
       CreateResourceDynamicModal.close()
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, setError)

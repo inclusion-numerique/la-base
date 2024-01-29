@@ -168,6 +168,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.appUrlShouldBe(`/ressources/${createSlug(title)}/editer`)
     cy.get('@modal').should('not.exist')
     cy.contains(title)
-    cy.contains(`Publiée dans la base ${base.title}`)
+    cy.contains(`Créée dans la base ${base.title}`)
   })
 })

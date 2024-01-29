@@ -1,7 +1,11 @@
 .menu {
   display: flex;
   border-bottom: var(--slim-grey-border);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 48px;
+  }
 
   :global(.fr-nav__list) {
     justify-content: center;

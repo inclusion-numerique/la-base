@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
@@ -95,6 +96,15 @@ const BaseVisibilityForm = ({
           if (data.isPublic || !hasPublicResources) {
             await mutate.mutateAsync({ id: base.id, data })
             router.refresh()
+            createToast({
+              priority: 'success',
+              message: (
+                <>
+                  La visibilité de la base <strong>{base.title}</strong> a bien
+                  été modifiée
+                </>
+              ),
+            })
           } else {
             setVisibility(data)
             openPrivateModal()

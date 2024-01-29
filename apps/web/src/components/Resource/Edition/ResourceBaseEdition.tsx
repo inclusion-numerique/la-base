@@ -74,7 +74,9 @@ const ResourceBaseEdition = ({
           <OwnershipInformation
             user={resource.createdBy}
             base={resource.base}
-            attributionWording="resource"
+            attributionWording={
+              resource.published ? 'resource' : 'draft-resource'
+            }
           />
         ))}
       <form onSubmit={handleSubmit(onSubmit)}>

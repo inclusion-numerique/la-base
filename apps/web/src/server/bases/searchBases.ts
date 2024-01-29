@@ -39,8 +39,8 @@ export const countBases = async (
           bases.deleted IS NULL
           /* Search term check */
         AND (
-                  coalesce(${searchTerm}, '___empty___') = '___empty___'
-              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(bases.description, ''))) @@
+              ${searchTerm ?? ''} = '' 
+              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), ''))) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
@@ -85,17 +85,10 @@ export const rankBases = async (
     }[]
   >`
       SELECT bases.id,
-             to_tsvector('french',
-                         unaccent(bases.title || ' ' || coalesce(bases.description, '')))::text AS document_tsv,
-             to_tsquery('french', unaccent(${searchTerm}))::text                                AS query,
-             ts_rank(to_tsvector('french', unaccent(bases.title || ' ' || coalesce(bases.description, ''))),
-                     to_tsquery('french', unaccent(${searchTerm})))                             AS rank,
-             ts_rank(to_tsvector('french', unaccent(bases.title)),
+             ts_rank_cd(to_tsvector('french', unaccent(bases.title)),
                      to_tsquery('french', unaccent(${searchTerm})))                             AS rank_title,
-             ts_rank(to_tsvector('french', unaccent(coalesce(bases.description, ''))),
-                     to_tsquery('french', unaccent(${searchTerm})))                             AS rank_description,
-             ts_rank_cd(to_tsvector('french', unaccent(bases.title || ' ' || coalesce(bases.description, ''))),
-                        to_tsquery('french', unaccent(${searchTerm})))                          AS rank_cd
+             ts_rank_cd(to_tsvector('french', coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), '')),
+                     to_tsquery('french', unaccent(${searchTerm})))                             AS rank_description
       FROM bases
                /* Join base member only to have only one row per base */
                /* Null will never match as member_id is not nullable */
@@ -107,8 +100,8 @@ export const rankBases = async (
           bases.deleted IS NULL
           /* Search term check */
         AND (
-                  coalesce(${searchTerm}, '___empty___') = '___empty___'
-              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(bases.description, ''))) @@
+            ${searchTerm ?? ''} = ''
+              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), ''))) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (

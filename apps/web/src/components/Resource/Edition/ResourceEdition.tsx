@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Router from 'next/router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { createToast } from '@app/ui/toast/createToast'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentListEdition from '@app/web/components/Resource/Edition/ContentListEdition'
@@ -155,6 +156,15 @@ const ResourceEdition = ({
           const result = await sendCommand(data)
           router.refresh()
           router.push(`/ressources/${result.resource.slug}`)
+          createToast({
+            priority: 'success',
+            message: (
+              <>
+                La ressource <strong>{resource.title}</strong> a bien été
+                publiée
+              </>
+            ),
+          })
           // Wierd cache behavior without refreshing a second time
           // TODO check if this is still needed after next update (this is tested e2e)
           router.refresh()
@@ -162,6 +172,15 @@ const ResourceEdition = ({
           console.error('Could not publish resource', error)
           // TODO Have a nice error and handle edge cases server side
           // TODO for example a linked base or file or resource has been deleted since last publication
+          createToast({
+            priority: 'error',
+            message: (
+              <>
+                Une erreur est survenue lors de la publication de la ressource,
+                veuillez réessayer ultérieurement
+              </>
+            ),
+          })
           throw error
         }
       })()
@@ -177,8 +196,25 @@ const ResourceEdition = ({
         })
         router.refresh()
         router.push(`/ressources/${result.resource.slug}`)
+        createToast({
+          priority: 'success',
+          message: (
+            <>
+              La ressource <strong>{resource.title}</strong> a bien été publiée
+            </>
+          ),
+        })
       } catch (error) {
         console.error('Could not publish resource', error)
+        createToast({
+          priority: 'error',
+          message: (
+            <>
+              Une erreur est survenue lors de la publication de la ressource,
+              veuillez réessayer ultérieurement
+            </>
+          ),
+        })
         // TODO Have a nice error and handle edge cases server side
         // TODO for example a linked base or file or resource has been deleted since last publication
         throw error

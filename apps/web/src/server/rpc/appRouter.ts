@@ -12,6 +12,7 @@ import { metadataRouter } from '@app/web/server/rpc/metadata/metadataRouter'
 import { searchRouter } from '@app/web/server/rpc/search/searchRouter'
 import { reportRouter } from '@app/web/server/rpc/report/reportRouter'
 import { followRouter } from '@app/web/server/rpc/follow/followRouter'
+import { feedbackRouter } from '@app/web/server/rpc/feedback/feedbackRouter'
 
 export const appRouter = router({
   user: userRouter,
@@ -27,6 +28,7 @@ export const appRouter = router({
   search: searchRouter,
   report: reportRouter,
   follow: followRouter,
+  feedback: feedbackRouter,
 })
 
 // export type definition of API

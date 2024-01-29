@@ -86,6 +86,7 @@ model User {
   profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
   followedBy          ProfileFollow[]        @relation(name: "profile_follow_followed")
   searches            SearchExecution[]
+  Feedback            Feedback[]
 
   @@map("users")
 }
@@ -678,4 +679,40 @@ model SearchExecution {
 
   @@index([userId])
   @@map("search_executions")
+}
+
+enum DifficultyArea {
+  Search      @map("search")
+  Resources   @map("resources")
+  Collections @map("collections")
+  Profile     @map("profile")
+  Bases       @map("bases")
+  Other       @map("other")
+
+  @@map("difficulty_area")
+}
+
+// Questionnaire de satisfaction
+model Feedback {
+  id String @id @default(uuid()) @db.Uuid
+
+  sentBy   User?   @relation(fields: [sentById], references: [id])
+  sentById String? @map("sent_by_id") @db.Uuid
+
+  // Note de 0 à 10
+  rating Int
+
+  hadDifficulty     Boolean         @default(false) @map("had_difficulty")
+  difficultyArea    DifficultyArea? @map("difficulty_area")
+  difficultyComment String?         @map("difficulty_comment")
+
+  comment String?
+
+  // Email de contact si l’utilisateur souhaite être recontacté
+  wantsToBeContacted String? @map("wants_to_be_contacted")
+
+  created DateTime @default(now())
+
+  @@index([sentById])
+  @@map("feedback")
 }

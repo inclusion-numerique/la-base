@@ -29,7 +29,7 @@ export const countProfiles = async (
       SELECT count(*)::integer as count
       FROM users
       WHERE (
-          coalesce(${searchTerm}, '___empty___') = '___empty___'
+          ${searchTerm ?? ''} = ''
               OR to_tsvector('french',
                              unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
                                       coalesce(users.title, '') || ' ' || coalesce(users.description, ''))) @@
@@ -71,18 +71,10 @@ export const rankProfiles = async (
     }[]
   >`
       SELECT users.id,
-             to_tsvector('french', unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
-                                            coalesce(users.title, '') || ' ' ||
-                                            coalesce(users.description, '')))::text AS document_tsv,
-             to_tsquery('french', unaccent(${searchTerm}))::text                    AS query,
-             ts_rank(to_tsvector('french',
-                                 unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
-                                          coalesce(users.title, '') || ' ' || coalesce(users.description, ''))),
-                     to_tsquery('french', unaccent(${searchTerm})))                 AS rank,
              ts_rank_cd(to_tsvector('french',
                                     unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
                                              coalesce(users.title, '') || ' ' || coalesce(users.description, ''))),
-                        to_tsquery('french', unaccent(${searchTerm})))              AS rank_cd
+                        to_tsquery('french', unaccent(${searchTerm})))              AS rank
       FROM users
       WHERE (
           coalesce(${searchTerm}, '___empty___') = '___empty___'

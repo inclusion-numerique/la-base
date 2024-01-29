@@ -247,7 +247,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-delete').click()
     cy.wait('@mutation')
 
-    cy.appUrlShouldBe('/')
+    cy.appUrlShouldBe('/bases/pole-inclusion-numerique-tests-e2e')
     cy.request({
       url: '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
       followRedirect: false,

@@ -14,7 +14,7 @@ const OnboardingThemesPage = () => (
   >
     <p>
       Découvrez de nouvelles ressources sur les thématiques qui vous
-      intéressent, organisés en 4 grandes catégories du numérique d’intérêt
+      intéressent, organisées en 4 grandes catégories du numérique d’intérêt
       général.
     </p>
   </TwoPartOnboardingLayout>

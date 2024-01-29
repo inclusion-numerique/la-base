@@ -30,10 +30,19 @@ const CollectionCreationPage = async ({
     return null
   }
 
+  const parents = base
+    ? [
+        {
+          label: base.title,
+          linkProps: { href: `/bases/${base.slug}` },
+        },
+      ]
+    : []
+
   return (
     <>
       <div className="fr-container">
-        <Breadcrumbs currentPage="Créer une collection" />
+        <Breadcrumbs parents={parents} currentPage="Créer une collection" />
       </div>
       <div className="fr-mt-1w">
         <CreateCollection user={user} base={base} />

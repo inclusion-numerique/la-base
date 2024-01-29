@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
@@ -56,6 +57,15 @@ const InviteBaseMemberButton = ({
       await mutate.mutateAsync(data)
       close()
       router.refresh()
+      createToast({
+        priority: 'success',
+        message: (
+          <>
+            Un email d’invitation a été envoyé aux profils que vous souhaitez
+            inviter
+          </>
+        ),
+      })
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)
     }

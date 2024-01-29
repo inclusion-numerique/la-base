@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import MaybeEmptyValue from '@app/ui/components/MaybeEmptyValue'
 import EmptyValue from '@app/ui/components/EmptyValue'
 import { useRouter } from 'next/navigation'
+import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import EditCard from '@app/web/components/EditCard'
@@ -36,6 +37,10 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
         const result = await mutate.mutateAsync({ id: base.id, data })
         router.push(`/bases/${result.slug}/editer`)
         router.refresh()
+        createToast({
+          priority: 'success',
+          message: <>Les informations ont bien été enregistrées</>,
+        })
       }}
       noRefresh
       form={form}

@@ -17,6 +17,7 @@ import ResourceActions from '@app/web/components/Resource/View/ResourceActions'
 import ResourceMobileNavigation from '@app/web/components/Resource/View/ResourceMobileNavigation'
 import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
 import RegisterResourceView from '@app/web/components/Resource/View/RegisterResourceView'
+import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResource'
 import styles from './ResourceView.module.css'
 import ResourceInformations from './ResourceInformations'
 
@@ -37,6 +38,7 @@ const ResourceView = ({
     contentsWithAnchor,
     hasInformationSection,
   })
+  const canEdit = isAdmin
 
   return (
     <div className="fr-grid-row fr-pb-20v" data-testid="resource-view">
@@ -55,16 +57,19 @@ const ResourceView = ({
             <OwnershipInformation
               user={resource.createdBy}
               base={resource.base}
-              attributionWording="resource"
+              attributionWording={
+                resource.published ? 'resource' : 'draft-resource'
+              }
             />
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
               <ResourceDates
                 created={resource.created}
                 updated={resource.updated}
+                published={resource.published}
               />
               {isAdmin && (
-                <ResourcePublicStateBadge small isPublic={resource.isPublic} />
+                <ResourcePublicStateBadge small resource={resource} />
               )}
             </div>
             {resource.image ? (
@@ -111,6 +116,15 @@ const ResourceView = ({
           )}
         </div>
         {!!user && <SaveResourceInCollectionModal user={user} />}
+        {canEdit && (
+          <DeleteResource
+            redirectTo={
+              resource.base
+                ? `/bases/${resource.base.slug}`
+                : `/profils/${resource.createdBy.slug}`
+            }
+          />
+        )}
         <ResourceReport resourceId={resource.id} />
       </div>
     </div>

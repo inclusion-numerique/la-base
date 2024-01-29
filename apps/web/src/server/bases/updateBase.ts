@@ -1,10 +1,20 @@
 import z from 'zod'
 import sanitizeHtml from 'sanitize-html'
+import { resourceTitleMaxLength } from '@app/web/server/rpc/resource/utils'
+
+export const baseTitleMaxLength = 100
+
+export const baseTitleInfoText = (title?: string | null) =>
+  `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
 
 export const titleValidation = z
   .string({ required_error: 'Veuillez renseigner le nom de la base' })
   .trim()
   .nonempty('Veuillez renseigner le nom de la base')
+  .max(
+    baseTitleMaxLength,
+    'Le nom de la base ne peut pas dépasser 100 caractères',
+  )
 export const departmentValidation = z.string().trim().optional()
 export const descriptionValidation = z
   .string()
@@ -24,9 +34,13 @@ export const emailValidation = z
 export const emailIsPublicValidation = z.boolean()
 export const siteValidation = z
   .string()
-  .url('Veuillez renseigner une URL valide')
   .trim()
-  .optional()
+  .url('Veuillez renseigner une URL valide')
+  // Accept empty string
+  .or(z.literal(''))
+  // Empty string -> null
+  .transform((url) => url || null)
+  .nullish()
 
 export const UpdateBaseInformationsCommandValidation = z.object({
   title: titleValidation,

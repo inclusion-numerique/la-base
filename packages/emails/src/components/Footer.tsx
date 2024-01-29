@@ -4,7 +4,6 @@ import {
   MjmlImage,
   MjmlSection,
 } from '@faire/mjml-react'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import React from 'react'
 import { emailAssetUrl } from '@app/emails/emailAssetUrl'
 
@@ -32,7 +31,7 @@ const Footer = ({ padding = '0 0' }: { padding?: string | number }) => (
           align="left"
           width={200}
           src={emailAssetUrl('/email/logo_anct.svg')}
-          alt={PublicWebAppConfig.projectTitle}
+          alt="Logo ANCT"
         />
       </MjmlColumn>
     </MjmlSection>

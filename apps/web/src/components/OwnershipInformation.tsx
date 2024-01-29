@@ -13,6 +13,10 @@ const attributionWordings = {
     base: 'Publiée dans la base ',
     user: 'Publiée par ',
   },
+  'draft-resource': {
+    base: 'Créée dans la base ',
+    user: 'Créée par ',
+  },
   collection: {
     base: 'Collection de la base ',
     user: 'Collection de ',
@@ -36,7 +40,7 @@ const OwnershipInformation = ({
     | (Pick<BasePageData, 'slug' | 'title' | 'id'> & WithMinimalImageData)
     | null
   className?: string
-  attributionWording: 'resource' | 'collection' | 'none'
+  attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
 }) => {
   const attribution =
     attributionWordings[attributionWording][base ? 'base' : 'user']

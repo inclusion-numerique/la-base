@@ -48,8 +48,15 @@ export const countResources = async (
           resources.deleted IS NULL
           /* Search term check */
         AND (
-                  coalesce(${searchTerm}, '___empty___') = '___empty___'
-              OR to_tsvector('french', unaccent(resources.title || ' ' || resources.description)) @@
+              ${searchTerm ?? ''} = ''
+              OR to_tsvector('french', unaccent(
+                                               resources.title || ' '
+                                                   || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                                                   || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                                                   || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                                                   || resources.description || ' '
+
+                                       )) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
@@ -112,12 +119,16 @@ export const rankResources = async (
     }[]
   >`
       SELECT resources.id,
-             to_tsvector('french', unaccent(resources.title || ' ' || resources.description))::text AS document_tsv,
-             to_tsquery('french', unaccent(${searchTerm}))::text                                    AS query,
-             ts_rank(to_tsvector('french', unaccent(resources.title || ' ' || resources.description)),
-                     to_tsquery('french', unaccent(${searchTerm})))                                 AS rank,
-             ts_rank_cd(to_tsvector('french', unaccent(resources.title || ' ' || resources.description)),
-                        to_tsquery('french', unaccent(${searchTerm})))                              AS rank_cd
+             ts_rank_cd(
+                 to_tsvector('french', unaccent(
+                     resources.title || ' '
+                     || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                     || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                     || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                    || resources.description || ' '
+                )),
+                to_tsquery('french', unaccent(${searchTerm}))
+              ) AS rank
       FROM resources
                /* Join user contributor only to have only one row per resource */
                /* Null will never match as contributor_id is not nullable */
@@ -136,8 +147,15 @@ export const rankResources = async (
           /* Search term check */
           /* TODO condition if query is empty ? */
         AND (
-                  coalesce(${searchTerm}, '___empty___') = '___empty___'
-              OR to_tsvector('french', unaccent(resources.title || ' ' || resources.description)) @@
+            ${searchTerm ?? ''}  = ''
+              OR to_tsvector('french', unaccent(
+                  resources.title || ' '
+                      || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                      || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                      || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                      || resources.description || ' '
+
+                                       )) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (

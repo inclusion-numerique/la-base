@@ -129,6 +129,50 @@ workflows:
             - test_components
             - test_web_e2e
 
+release_deployment:
+  triggers:
+    - schedule:
+        cron: "0 17 * * *"
+        filters:
+          branches:
+            only:
+              - main
+              - dev
+  jobs:
+    - prepare_workspace_dependencies
+    - lint_web:
+        requires:
+          - prepare_workspace_dependencies
+    - lint_packages:
+        requires:
+          - prepare_workspace_dependencies
+    - test_packages:
+        requires:
+          - prepare_workspace_dependencies
+    - test_web:
+        requires:
+          - prepare_workspace_dependencies
+    - test_web_integration:
+        requires:
+          - prepare_workspace_dependencies
+    - build_web:
+        requires:
+          - prepare_workspace_dependencies
+
+    - test_components:
+        requires:
+          - prepare_workspace_dependencies
+
+    - deploy_web:
+        requires:
+          - lint_web
+          - lint_packages
+          - build_web
+          - test_packages
+          - test_web
+          - test_web_integration
+          - test_components
+
   project_infrastructure_deployment:
     when:
       equal: [ project_stack_deployment, << pipeline.parameters.trigger_workflow >> ]

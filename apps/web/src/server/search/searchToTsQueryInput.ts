@@ -19,5 +19,5 @@ export const searchToTsQueryInput = (search?: string | null) => {
 
   // Add prefix search for each word
   // Join these words with the '&' operator
-  return words.map((word) => `${word}:*`).join(' & ')
+  return words.map((word) => `${word}:*`).join(' | ')
 }

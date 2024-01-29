@@ -16,7 +16,7 @@ export const DeleteResourceDynamicModal = createDynamicModal({
   },
 })
 
-const DeleteResource = () => {
+const DeleteResource = ({ redirectTo }: { redirectTo?: string }) => {
   const { resourceId } = DeleteResourceDynamicModal.useState()
 
   const router = useRouter()
@@ -33,7 +33,14 @@ const DeleteResource = () => {
           resourceId,
         },
       })
+      if (redirectTo) {
+        router.push(redirectTo)
+      }
       router.refresh()
+      createToast({
+        priority: 'success',
+        message: <>La ressource a bien été supprimée</>,
+      })
     } catch {
       createToast({
         priority: 'error',

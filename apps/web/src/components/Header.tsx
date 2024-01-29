@@ -11,6 +11,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
+import { feedbackModalId } from '@app/web/components/Feedback/feedbackModalProps'
 
 const createResourceConnectionLink = (
   <Link
@@ -79,6 +80,19 @@ const Header = ({
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
               <ul className="fr-btns-group">
+                <li>
+                  <Button
+                    key="feedback"
+                    type="button"
+                    priority="tertiary"
+                    iconId="fr-icon-feedback-line"
+                    aria-controls={feedbackModalId}
+                    data-fr-opened={false}
+                    id="header-feedback-control-button"
+                  >
+                    Je donne mon avis
+                  </Button>
+                </li>
                 <li>
                   <Button
                     linkProps={{

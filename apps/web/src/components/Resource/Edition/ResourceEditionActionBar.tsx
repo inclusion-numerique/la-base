@@ -3,7 +3,6 @@ import Link from 'next/link'
 import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { useRouter } from 'next/navigation'
 import { useOnClickOutside } from 'usehooks-ts'
 import { Resource } from '@app/web/server/resources/getResource'
 import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
@@ -48,11 +47,6 @@ const ResourceEditionActionBar = ({
   onPublish: () => void
   onDelete: () => void
 }) => {
-  const router = useRouter()
-  const onCancelClick = () => {
-    router.back()
-  }
-
   // The click outside default behavior from dsfr js do not work in this case 🤷‍
   // So we have to use client component and hooks to handle the click outside
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -151,7 +145,12 @@ const ResourceEditionActionBar = ({
               </div>
             </div>
             {publishedState === ResourcePublishedState.DRAFT && (
-              <Button type="button" priority="tertiary" onClick={onCancelClick}>
+              <Button
+                priority="tertiary"
+                linkProps={{
+                  href: `/ressources/${resource.slug}`,
+                }}
+              >
                 Conserver en brouillon
               </Button>
             )}

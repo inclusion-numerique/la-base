@@ -8,12 +8,12 @@ describe('searchToTsQueryInput', () => {
 
   test('handles basic alphanumeric strings', () => {
     expect(searchToTsQueryInput('word anotherWord')).toBe(
-      'word:* & anotherWord:*',
+      'word:* | anotherWord:*',
     )
   })
 
   test('removes special characters but not accented ones', () => {
-    expect(searchToTsQueryInput('w@#ord!@#$$% éè|&à')).toBe('word:* & éèà:*')
+    expect(searchToTsQueryInput('w@#ord!@#$$% éè|&à')).toBe('word:* | éèà:*')
   })
 
   test('handles strings with leading/trailing white spaces', () => {
@@ -22,7 +22,7 @@ describe('searchToTsQueryInput', () => {
 
   test('removes quotes', () => {
     expect(searchToTsQueryInput("par l'impact, pour l’hiver")).toBe(
-      'par:* & l:* & impact:* & pour:* & l:* & hiver:*',
+      'par:* | l:* | impact:* | pour:* | l:* | hiver:*',
     )
   })
 })

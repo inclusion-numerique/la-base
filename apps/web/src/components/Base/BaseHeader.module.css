@@ -18,4 +18,10 @@
   margin-top: 24px;
   display: flex;
   gap: 16px;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
 }

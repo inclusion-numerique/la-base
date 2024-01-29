@@ -10,7 +10,6 @@ const path = require('node:path')
 // https://github.com/vercel/next.js/tree/canary/examples/modularize-imports
 const modularizeImports = {
   'date-fns': { transform: 'date-fns/{{member}}' },
-  'chart.js': { transform: 'chart.js/{{member}}' },
 }
 
 const serverComponentsExternalPackages = ['html-minifier']

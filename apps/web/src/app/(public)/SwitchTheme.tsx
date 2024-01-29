@@ -59,7 +59,7 @@ const SwitchTheme = () => {
     >
       <span
         className={classNames(
-          'fr-icon--sm fr-mr-1v',
+          'fr-icon--sm fr-mr-1-5v',
           changeThemeTo === 'light' ? 'fr-icon-sun-line' : 'fr-icon-moon-line',
         )}
       />

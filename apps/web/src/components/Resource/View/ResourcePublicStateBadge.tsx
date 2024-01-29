@@ -12,18 +12,27 @@ const informations = {
     icon: 'fr-icon-lock-line',
     color: TagColor.GREY,
   },
+  draft: {
+    label: 'Brouillon',
+    icon: 'fr-icon-draft-line',
+    color: TagColor.GREY,
+  },
 }
 
 const ResourcePublicStateBadge = ({
-  isPublic,
+  resource: { isPublic, published },
   small,
 }: {
-  isPublic: boolean | null
+  resource: { isPublic: boolean | null; published: Date | null }
   small?: boolean
 }) => (
   <CustomTag
     data-testid="resource-public-state-badge"
-    {...(isPublic ? informations.public : informations.private)}
+    {...(published
+      ? isPublic
+        ? informations.public
+        : informations.private
+      : informations.draft)}
     small={small}
   />
 )

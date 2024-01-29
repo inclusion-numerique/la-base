@@ -10,7 +10,7 @@ describe("Page d'accueil", () => {
     )
     cy.get('.fr-header__tools .fr-btn')
       .first()
-      .should('contain', 'Rechercher')
+      .should('contain', 'Je donne mon avis')
       .should('have.css', 'color', 'rgb(0, 0, 145)')
     cy.get('.fr-header__tools').contains('Se connecter')
   })

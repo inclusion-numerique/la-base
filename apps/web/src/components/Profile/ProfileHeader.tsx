@@ -24,7 +24,9 @@ const ProfileHeader = ({
   <div className={styles.container}>
     <div className="fr-container">
       <Breadcrumbs
-        currentPage={isConnectedUser ? 'Mon Profil' : `${profile.name || ''}`}
+        currentPage={
+          isConnectedUser ? 'Mon Profil' : `${profile.name || 'Profil'}`
+        }
       />
       <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
         {isConnectedUser ? (

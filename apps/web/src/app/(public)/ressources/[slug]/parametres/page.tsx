@@ -1,14 +1,35 @@
 import { notFound, redirect } from 'next/navigation'
 import React from 'react'
+import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getResource } from '@app/web/server/resources/getResource'
 import { filterAccess } from '@app/web/server/resources/authorization'
 import ResourceParameters from '@app/web/components/Resource/Edition/Parameters/ResourceParameters'
-import {
-  defaultSearchParams,
-  searchUrl,
-} from '@app/web/server/search/searchQueryParams'
+import { prismaClient } from '@app/web/prismaClient'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
+
+export const generateMetadata = async ({
+  params: { slug },
+}: {
+  params: { slug: string }
+}): Promise<Metadata> => {
+  const resource = await prismaClient.resource.findUnique({
+    where: {
+      slug,
+    },
+    select: {
+      title: true,
+    },
+  })
+  if (!resource) {
+    notFound()
+  }
+
+  return {
+    title: metadataTitle(`${resource.title} - Paramètres`),
+  }
+}
 
 const ResourceParametersPage = async ({
   params,
@@ -33,21 +54,11 @@ const ResourceParametersPage = async ({
   return (
     <>
       <div className="fr-container">
-        <Breadcrumbs
-          currentPage="Paramètres de la ressource"
-          parents={[
-            {
-              label: 'Ressources',
-              linkProps: { href: searchUrl('ressources', defaultSearchParams) },
-            },
-            {
-              label: resource.title,
-              linkProps: { href: `/ressources/${resource.slug}` },
-            },
-          ]}
+        <ResourceBreadcrumbs
+          resource={resource}
+          currentChildPage="Paramètres"
         />
       </div>
-
       <div className="fr-mt-1w fr-mb-4w">
         <ResourceParameters resource={resource} user={user} />
       </div>

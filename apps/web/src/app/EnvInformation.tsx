@@ -19,7 +19,7 @@ export const EnvInformation = () => {
     `is:pr head:${branch}`,
   )}`
 
-  const storybookLink = `https://${branch}--${chromatic.appId}.chromatic.com`
+  const storybookLink = `https://${branch.replaceAll('/', '-')}--${chromatic.appId}.chromatic.com`
 
   return (
     <div id="environment-information" className="fr-notice fr-notice--info">

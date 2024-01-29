@@ -18,16 +18,18 @@
     "lint": "turbo lint",
     "tsc": "turbo tsc",
     "test": "turbo test",
+    "test:integration": "pnpm -F web test:integration",
+    "test:e2e": "pnpm -F e2e cy open",
     "with-env": "dotenv --",
     "scw": "pnpm with-env scw",
     "manypkg": "manypkg",
     "start:web": "pnpm -F web dev",
     "fixtures:load": "pnpm -F fixtures load",
-    "db:reset": "pnpm db:stop && docker volume rm la-base_pgdata && pnpm db:start && pnpm -F web prisma generate && pnpm -F web prisma migrate deploy",
-    "db:start": "docker-compose -f ./docker-compose.dev.yml up --build -d",
-    "db:stop": "docker-compose -f ./docker-compose.dev.yml down",
-    "docker:build:web": "docker buildx build --platform linux/amd64 -t rg.fr-par.scw.cloud/mec-web/mec-web-dev:latest -f docker/web/Dockerfile .",
-    "docker:build:web:debug": "DOCKER_BUILDKIT=0 docker build -t mec-web/mec-web-dev:debug -f docker/web/Dockerfile ."
+    "prisma:generate-migration": "pnpm --silent -F @app/web prisma migrate dev --name",
+    "db:init": "pnpm -F web prisma generate && pnpm -F web prisma migrate deploy",
+    "docker:start": "docker compose -f ./docker-compose.dev.yml -p la-base up -d",
+    "docker:stop": "docker compose -f ./docker-compose.dev.yml -p la-base down",
+    "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init"
   },
   "pnpm": {
     "overrides": {}

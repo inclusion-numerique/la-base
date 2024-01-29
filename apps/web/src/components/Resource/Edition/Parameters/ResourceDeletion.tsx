@@ -33,7 +33,19 @@ const ResourceDeletion = ({ resource }: { resource: Resource }) => {
       })
       closeDeleteModal()
       router.refresh()
-      router.push('/')
+      router.push(
+        resource.base
+          ? `/bases/${resource.base.slug}`
+          : `/profils/${resource.createdBy.slug}`,
+      )
+      createToast({
+        priority: 'success',
+        message: (
+          <>
+            La ressource <strong>{resource.title}</strong> a bien été supprimée
+          </>
+        ),
+      })
     } catch {
       createToast({
         priority: 'error',

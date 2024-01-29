@@ -122,6 +122,7 @@ export const collectionSelect = {
       },
     },
     take: 3,
+    orderBy: { resource: { updated: 'desc' } },
   },
   _count: {
     select: {

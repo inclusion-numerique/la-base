@@ -3,7 +3,7 @@ import { Resource } from './getResource'
 
 export type FilteredResource = Pick<
   Resource,
-  'slug' | 'title' | 'isPublic' | 'createdBy' | 'base'
+  'slug' | 'title' | 'isPublic' | 'createdBy' | 'base' | 'published'
 >
 
 export const filterAccess = (
@@ -46,6 +46,7 @@ export const filterAccess = (
       title: resource.title,
       isPublic: resource.isPublic,
       createdBy: resource.createdBy,
+      published: resource.published,
       base: resource.base,
     },
   }

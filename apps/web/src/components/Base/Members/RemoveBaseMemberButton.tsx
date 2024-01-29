@@ -3,6 +3,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { BaseMember } from '@app/web/server/bases/getBase'
@@ -18,6 +19,10 @@ const RemoveBaseMemberButton = ({ member }: { member: BaseMember }) => {
         memberId: member.member.id,
       })
       router.refresh()
+      createToast({
+        priority: 'success',
+        message: <>Le membre a bien été retiré</>,
+      })
     } catch {
       console.error('Something went wrong...')
     }

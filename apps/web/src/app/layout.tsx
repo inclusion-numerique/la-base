@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React, { PropsWithChildren } from 'react'
 import { setLink } from '@codegouvfr/react-dsfr/link'
 import Toaster from '@app/ui/toast/Toaster'
+import dynamic from 'next/dynamic'
 import { Dsfr } from '@app/web/app/Dsfr'
 import { EnvInformation } from '@app/web/app/EnvInformation'
 import { Matomo } from '@app/web/app/Matomo'
@@ -37,13 +38,20 @@ export const metadata: Metadata = {
       type: 'image/svg+xml',
     },
   },
-  description: PublicWebAppConfig.projectTitle,
+  description:
+    'La plateforme collaborative de partage de ressources & communs numériques: Inclusion, environnement, culture, sécurité.... Inspirez-vous, produisez, diffusez, contribuez.',
   manifest: '/favicon/manifest.webmanifest',
 }
 
 export const viewport: Viewport = {
   themeColor: '#000091',
 }
+
+// Only load feedback modal lazyly, in a different chunk, on browser
+const LazyFeedbackModal = dynamic(
+  () => import('@app/web/components/Feedback/FeedbackModal'),
+  { ssr: false },
+)
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   // Do we want to disable SSG for CSFR on this website ?
@@ -69,6 +77,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
         {children}
         {user ? <CreateResourceFormModal user={user} /> : null}
         <Toaster />
+        <LazyFeedbackModal />
       </body>
     </html>
   )

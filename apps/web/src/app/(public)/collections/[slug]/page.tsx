@@ -1,11 +1,36 @@
 import { notFound } from 'next/navigation'
 import React from 'react'
+import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { filterAccess } from '@app/web/server/collections/authorization'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import PrivateBox from '@app/web/components/PrivateBox'
 import { getCollection } from '@app/web/server/collections/getCollection'
 import CollectionView from '@app/web/components/Collection/CollectionView'
+import { prismaClient } from '@app/web/prismaClient'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+
+export const generateMetadata = async ({
+  params: { slug },
+}: {
+  params: { slug: string }
+}): Promise<Metadata> => {
+  const collection = await prismaClient.collection.findUnique({
+    where: {
+      slug,
+    },
+    select: {
+      title: true,
+    },
+  })
+  if (!collection) {
+    notFound()
+  }
+
+  return {
+    title: metadataTitle(collection.title),
+  }
+}
 
 const CollectionPage = async ({ params }: { params: { slug: string } }) => {
   const user = await getSessionUser()
@@ -15,33 +40,11 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
-  const parents = collection.base
-    ? [
-        {
-          label: collection.base.title,
-          linkProps: { href: `/bases/${collection.base.slug}` },
-        },
-        {
-          label: 'Collections',
-          linkProps: { href: `/bases/${collection.base.slug}/collections` },
-        },
-      ]
-    : [
-        {
-          label: collection.owner.name || 'Profil anonyme',
-          linkProps: { href: `/profils/${collection.owner.slug}` },
-        },
-        {
-          label: 'Collections',
-          linkProps: { href: `/profils/${collection.owner.slug}/collections` },
-        },
-      ]
-
   const authorizations = filterAccess(collection, user)
   return (
     <>
       <div className="fr-container">
-        <Breadcrumbs parents={parents} currentPage={collection.title} />
+        <CollectionBreadcrumbs collection={collection} />
       </div>
       <div className="fr-container fr-container--medium fr-mb-20v fr-pb-20v">
         {authorizations.authorized ? (

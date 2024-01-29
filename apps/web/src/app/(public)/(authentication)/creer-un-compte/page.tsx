@@ -1,11 +1,17 @@
 import { Route } from 'next'
 import { redirect } from 'next/navigation'
 import Alert from '@codegouvfr/react-dsfr/Alert'
+import type { Metadata } from 'next'
 import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+
+export const metadata: Metadata = {
+  title: metadataTitle('Créer un compte'),
+}
 
 export const revalidate = 0
 const SigninPage = async ({
@@ -27,7 +33,7 @@ const SigninPage = async ({
 
   return (
     <>
-      <Breadcrumbs currentPage="Se créer un compte" />
+      <Breadcrumbs currentPage="Créer un compte" />
       <div className="fr-container fr-container--narrow">
         <h2>Création de compte sur {PublicWebAppConfig.projectTitle}</h2>
         {raison === 'connexion-sans-compte' ? (

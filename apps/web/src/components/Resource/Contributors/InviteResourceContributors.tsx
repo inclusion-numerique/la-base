@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import {
@@ -66,6 +67,15 @@ const InviteResourceContributors = ({
       if (onSuccess) {
         onSuccess()
       }
+      createToast({
+        priority: 'success',
+        message: (
+          <>
+            Un email d’invitation à été envoyé aux profils que vous souhaitez
+            inviter.
+          </>
+        ),
+      })
       router.refresh()
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)

@@ -7,17 +7,23 @@ const ResourceDates = ({
   className,
   updated,
   created,
+  published,
 }: {
   className?: string
   created: Date
   updated: Date
+  published: Date | null
 }) => {
-  const publishedDay = dateAsDay(created)
+  const publishedDay = dateAsDay(published ?? created)
   const updatedDay = dateAsDay(updated)
 
   return (
     <div className={classNames('fr-text--xs fr-mb-0', className)}>
-      <span className="fr-mr-1w">Publiée le {dateAsDay(created)}</span>
+      {published ? (
+        <span className="fr-mr-1w">Publiée le {dateAsDay(published)}</span>
+      ) : (
+        <span className="fr-mr-1w">Créée le {dateAsDay(created)}</span>
+      )}
       {publishedDay !== updatedDay && (
         <>
           <span className={styles.publishedAndUpdatedSeparator} />

@@ -4,11 +4,25 @@
 }
 
 .banner {
-  margin-top: 8px;
-  width: 100%;
-  aspect-ratio: 4.8;
+  /* Go over container width on mobile layout */
+  margin: 0 -16px;
+  width: calc(100% + 32px);
+
+  /* Real aspect-ratio is 4.8 but its too narrow for mobile */
+  aspect-ratio: 2.4;
   background-color: var(--blue-france-925-125);
   overflow: hidden;
+
+
+  @media (min-width: 576px) {
+    aspect-ratio: 4.8;
+  }
+
+
+  @media (min-width: 768px) {
+    width: 100%;
+    margin: 8px 0 0;
+  }
 
   img {
     object-fit: cover;
@@ -22,17 +36,18 @@
 }
 
 .logo {
-  margin: -8px auto 0;
+  margin: -48px auto 0;
   position: relative;
   z-index: 1;
 
   @media (min-width: 320px) {
-    margin-top: -16px;
+    margin-top: -54px;
   }
 
   @media (min-width: 576px) {
     margin-top: -46px;
   }
+
 
   @media (min-width: 768px) {
     margin-top: -62px;

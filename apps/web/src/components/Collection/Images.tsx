@@ -1,19 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
-import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import styles from './Images.module.css'
-import EmptyImage from './EmptyImage'
 
-/**
- * For now we reuse resource card breakpoints to minimize the number of image processed on the backend
- * And also to minimize the number of images downloaded by the client (same size is not downloaded twice)
- */
-const collectionMainImageBreakpoints = resourceCardImageBreakpoints
-
-const collectionBigImageBreakpoints = resourceCardImageBreakpoints
-
-const collectionSmallImageBreakpoints = resourceCardImageBreakpoints
+const collectionImageBreakpoints = [
+  { media: '(max-width: 320px)', width: 320 - 32 },
+  // Image width is limited to 576 - 32 on non-desktop devices
+  // { media: '(max-width: 576px)', width: 576 - 32 },
+  { media: '(max-width: 768px)', width: 576 - 32 },
+  { media: '(min-width: 768px)', width: 180 },
+]
 
 const Images = ({
   className,
@@ -32,7 +28,7 @@ const Images = ({
         <ResponsiveUploadedImage
           id={image.id}
           alt={image.altText ?? ''}
-          breakpoints={collectionMainImageBreakpoints}
+          breakpoints={collectionImageBreakpoints}
         />
       </div>
     )
@@ -50,42 +46,32 @@ const Images = ({
 
   return (
     <div className={classNames(styles.container, className)}>
-      <div className={styles.column}>
-        <div className={styles.firstImageContainer}>
-          {bigImage ? (
-            <ResponsiveUploadedImage
-              id={bigImage.id}
-              alt={bigImage.altText ?? ''}
-              breakpoints={collectionBigImageBreakpoints}
-            />
-          ) : (
-            <EmptyImage size="medium" />
-          )}
-        </div>
+      <div className={styles.imageContainer}>
+        {bigImage ? (
+          <ResponsiveUploadedImage
+            id={bigImage.id}
+            alt={bigImage.altText ?? ''}
+            breakpoints={collectionImageBreakpoints}
+          />
+        ) : null}
       </div>
-      <div className={styles.column}>
-        <div className={styles.smallImageContainer}>
-          {secondImage ? (
-            <ResponsiveUploadedImage
-              id={secondImage.id}
-              alt={secondImage.altText ?? ''}
-              breakpoints={collectionSmallImageBreakpoints}
-            />
-          ) : (
-            <EmptyImage size="small" position="top" />
-          )}
-        </div>
-        <div className={styles.smallImageContainer}>
-          {thirdImage ? (
-            <ResponsiveUploadedImage
-              id={thirdImage.id}
-              alt={thirdImage.altText ?? ''}
-              breakpoints={collectionSmallImageBreakpoints}
-            />
-          ) : (
-            <EmptyImage size="small" position="bottom" />
-          )}
-        </div>
+      <div className={styles.imageContainer}>
+        {secondImage ? (
+          <ResponsiveUploadedImage
+            id={secondImage.id}
+            alt={secondImage.altText ?? ''}
+            breakpoints={collectionImageBreakpoints}
+          />
+        ) : null}
+      </div>
+      <div className={styles.imageContainer}>
+        {thirdImage ? (
+          <ResponsiveUploadedImage
+            id={thirdImage.id}
+            alt={thirdImage.altText ?? ''}
+            breakpoints={collectionImageBreakpoints}
+          />
+        ) : null}
       </div>
     </div>
   )

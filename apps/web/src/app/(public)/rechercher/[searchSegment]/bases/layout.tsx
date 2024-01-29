@@ -32,7 +32,7 @@ const BasesSearchLayout = ({
               name: getDepartmentName(departementCode),
             },
           }))}
-          className="fr-mb-6w"
+          className="fr-mb-8v fr-mb-md-12v"
           label="Affiner la recherche"
           searchParams={searchParams}
           tab="bases"

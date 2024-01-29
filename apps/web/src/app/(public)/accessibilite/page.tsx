@@ -1,5 +1,10 @@
+import type { Metadata } from 'next'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 
+export const metadata: Metadata = {
+  title: metadataTitle('Déclaration d’accessibilité'),
+}
 export const revalidate = 0
 const AccessibilityStatementPage = () => (
   <div className="fr-container landing-main-container fr-my-8w">
@@ -16,7 +21,7 @@ const AccessibilityStatementPage = () => (
       Cette déclaration d’accessibilité s’applique à{' '}
       <strong>{process.env.NEXT_PUBLIC_APP_NAME}</strong>{' '}
       <span>
-        (<span>https://{process.env.NEXT_PUBLIC_APP_SLUG}.gouv.fr</span>)
+        (<span>https://{process.env.NEXT_PUBLIC_APP_SLUG}.anct.gouv.fr</span>)
       </span>
       .
     </p>

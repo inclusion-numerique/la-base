@@ -1,11 +1,17 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import { defaultPaginationParams } from '@app/web/server/search/searchQueryParams'
 import BaseCardSkeleton from '@app/web/components/Base/Card/BaseCardSkeleton'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const skeletons = defaultPaginationParams.perPage
+
+export const metadata: Metadata = {
+  title: metadataTitle('Rechercher des bases'),
+}
 
 const ResultContentLoading = () => (
   <>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { notFound, redirect } from 'next/navigation'
+import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
@@ -7,7 +8,11 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import { filterAccess } from '@app/web/server/profiles/authorization'
 import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 
+export const metadata: Metadata = {
+  title: metadataTitle('Modifier mon profil'),
+}
 const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
   const user = await getSessionUser()
   if (!user) {
@@ -34,11 +39,13 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
       <Breadcrumbs
         parents={[
           {
-            label: 'Mon profil',
+            label: authorizations.isUser
+              ? 'Mon Profil'
+              : `${profile.name || 'Profil'}`,
             linkProps: { href: `/profils/${params.slug}` },
           },
         ]}
-        currentPage="Modifier mon profil"
+        currentPage="Modifier"
       />
       <div className="fr-mt-6w fr-mb-4w">
         <ProfilEdition profile={profile} resources={resources} />

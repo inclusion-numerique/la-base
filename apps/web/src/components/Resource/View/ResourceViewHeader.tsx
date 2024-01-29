@@ -18,14 +18,14 @@ const ResourceViewHeader = ({
       <OwnershipInformation
         user={resource.createdBy}
         base={resource.base}
-        attributionWording="resource"
+        attributionWording={resource.published ? 'resource' : 'draft-resource'}
       />
     </div>
     <div className={styles.headerSeparator}>
       <hr />
     </div>
     <div className={classNames(styles.rightColumn)}>
-      {isAdmin && <ResourcePublicStateBadge isPublic={resource.isPublic} />}
+      {isAdmin && <ResourcePublicStateBadge resource={resource} />}
     </div>
   </div>
 )
