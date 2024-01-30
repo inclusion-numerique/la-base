@@ -30,13 +30,15 @@ const ProfileHeader = ({
       />
       <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
         {isConnectedUser ? (
-          <Link
-            data-testid="profile-edition-button"
-            className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
-            href={`/profils/${profile.slug}/modifier`}
-          >
-            Modifier le profil
-          </Link>
+          <div className={styles.buttons}>
+            <Link
+              data-testid="profile-edition-button"
+              className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
+              href={`/profils/${profile.slug}/modifier`}
+            >
+              Modifier le profil
+            </Link>
+          </div>
         ) : (
           <div className={styles.buttons}>
             <FollowButton

@@ -7,6 +7,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createToast } from '@app/ui/toast/createToast'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import {
@@ -102,13 +103,14 @@ const InviteResourceContributors = ({
             />
           </div>
           <Button
-            className={classNames('fr-mt-5w', {
-              'fr-btn--loading': form.formState.isSubmitting,
-            })}
             type="submit"
             nativeButtonProps={{
               'data-testid': 'invite-member-modal-button',
             }}
+            {...buttonLoadingClassname(
+              form.formState.isSubmitting,
+              styles.inviteButton,
+            )}
           >
             Inviter
           </Button>

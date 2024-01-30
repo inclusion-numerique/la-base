@@ -25,8 +25,10 @@ const ProfileInformations = ({
       {editMode && <ImageEdition profile={profile} />}
     </div>
     <div>
-      <h2>{profile.name}</h2>
-      <ProfilePrivacyTag isPublic={profile.isPublic} />
+      <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-center fr-width-full fr-flex-gap-4v">
+        <h2>{profile.name}</h2>
+        <ProfilePrivacyTag isPublic={profile.isPublic} />
+      </div>
       <ProfileMetadata
         resourcesCount={resourcesCount}
         followedByCount={profile._count.followedBy}

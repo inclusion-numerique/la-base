@@ -2,10 +2,28 @@
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 100%;
+
+  @media(min-width: 768px) {
+    width: auto;
+    flex-direction: row;
+  }
 }
 
 .input {
+  width: 100%;
+
+  @media(min-width: 768px) {
   flex: 1;
+  }
+}
+
+.inviteButton{
+  @media(min-width: 768px) {
+    margin-top: 40px;
+  }
 }
 
 .contributors {

@@ -126,13 +126,13 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').find('button').contains('Continuer').click()
     cy.get('@modal').contains('ajouter cette ressource')
     cy.get('@modal').find('label').first().contains('mon profil')
-    cy.get('@modal').find('label').first().contains('Privé')
+    cy.get('@modal').find('label').first().contains('Profil privé')
 
     cy.get('@modal').find('label').eq(1).contains(base1Title)
-    cy.get('@modal').find('label').eq(1).contains('Publique')
+    cy.get('@modal').find('label').eq(1).contains('Base publique')
 
     cy.get('@modal').find('label').eq(2).contains(base2Title)
-    cy.get('@modal').find('label').eq(2).contains('Privée')
+    cy.get('@modal').find('label').eq(2).contains('Base privée')
     cy.get('@modal').find('label').eq(2).click()
 
     cy.get('@modal').find('button').contains('Commencer').click()
@@ -159,7 +159,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').find('button').contains('Continuer').click()
     cy.get('@modal').contains('ajouter cette ressource')
     cy.get('@modal').find('label').first().contains('mon profil')
-    cy.get('@modal').find('label').first().contains('Privé')
+    cy.get('@modal').find('label').first().contains('Profil privé')
 
     cy.get('@modal').find('label').eq(1).contains(base.title)
 

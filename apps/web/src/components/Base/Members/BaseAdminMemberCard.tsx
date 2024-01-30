@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useCallback, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import classNames from 'classnames'
 import styles from '@app/web/components/Profile/Card/ProfileCard.module.css'
 import { BaseMember } from '@app/web/server/bases/getBase'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -37,11 +38,14 @@ const BaseAdminMemberCard = ({
 
   return (
     <div className={styles.container} data-testid="member-card-admin">
-      <Link className={styles.content} href={`/profils/${member.member.slug}`}>
+      <Link
+        className={classNames(styles.link, styles.content)}
+        href={`/profils/${member.member.slug}`}
+      >
         <RoundProfileImage user={member.member} />
         {member.member.name}
       </Link>
-      <div className={styles.actions}>
+      <div className="fr-py-2v fr-py-md-4v">
         {!canChangeAccessLevel && isAdmin ? (
           <div className={styles.select}>Administrateur</div>
         ) : (

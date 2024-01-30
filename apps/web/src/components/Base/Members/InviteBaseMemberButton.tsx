@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
@@ -71,6 +72,8 @@ const InviteBaseMemberButton = ({
     }
   }
 
+  const isLoading = mutate.isSuccess || mutate.isSuccess
+
   return (
     <>
       <Button
@@ -83,82 +86,81 @@ const InviteBaseMemberButton = ({
       >
         Inviter un membre
       </Button>
-      <InviteModal
-        title="Inviter des membres"
-        className={classNames(styles.modal, 'overflowModal')}
-      >
-        <>
-          <div className="fr-mb-4w">
-            Les membres peuvent voir, créer, publier et contribuer à l’ensemble
-            des ressources liées à votre base. Vous pouvez également ajouter des
-            administrateurs qui pourront inviter et gérer les membres de la
-            base.
-          </div>
-          <form
-            className={styles.actions}
-            onSubmit={form.handleSubmit(onInvit)}
-          >
-            <div className={styles.search}>
-              <Controller
-                control={form.control}
-                name="members"
-                render={({ field: { onChange }, fieldState: { error } }) => (
-                  <>
-                    <InviteUsers
-                      label="Ajouter un membre"
-                      setEmailsError={setEmailsError}
-                      error={error}
-                      onChange={onChange}
-                      baseId={base.id}
-                    />
-                    <div
-                      className={classNames(styles.select, {
-                        [styles.selectWithError]: error,
-                      })}
-                    >
-                      <select
-                        data-testid="base-invite-member-role-select"
-                        onChange={(event) => {
-                          form.setValue(
-                            'isAdmin',
-                            event.target.value === 'admin',
-                          )
-                        }}
-                      >
-                        <option
-                          value="member"
-                          data-testid="base-invite-member-role-member"
-                        >
-                          Membre
-                        </option>
-                        {isAdmin && (
-                          <option
-                            value="admin"
-                            data-testid="base-invite-member-role-admin"
-                          >
-                            Administrateur
-                          </option>
-                        )}
-                      </select>
-                    </div>
-                  </>
-                )}
-              />
-            </div>
-            <Button
-              className={classNames('fr-mt-5w', {
-                'fr-btn--loading': form.formState.isSubmitting,
-              })}
-              type="submit"
-              nativeButtonProps={{
+      <form onSubmit={form.handleSubmit(onInvit)}>
+        <InviteModal
+          title="Inviter des membres"
+          className={classNames(styles.modal, 'overflowModal')}
+          buttons={[
+            {
+              iconId: 'fr-icon-user-setting-line',
+              children: 'Inviter',
+              type: 'submit',
+              nativeButtonProps: {
                 'data-testid': 'invite-member-modal-button',
-              }}
-            >
-              Inviter
-            </Button>
-          </form>
-        </>
-      </InviteModal>
+              },
+              ...buttonLoadingClassname(isLoading),
+            },
+          ]}
+        >
+          <>
+            <div className="fr-mb-4w">
+              Les membres peuvent voir, créer, publier et contribuer à
+              l’ensemble des ressources liées à votre base. Vous pouvez
+              également ajouter des administrateurs qui pourront inviter et
+              gérer les membres de la base.
+            </div>
+            <div className={styles.actions}>
+              <div className={styles.search}>
+                <Controller
+                  control={form.control}
+                  name="members"
+                  render={({ field: { onChange }, fieldState: { error } }) => (
+                    <>
+                      <InviteUsers
+                        label="Ajouter un membre"
+                        setEmailsError={setEmailsError}
+                        error={error}
+                        onChange={onChange}
+                        baseId={base.id}
+                      />
+                      <div
+                        className={classNames(styles.select, {
+                          [styles.selectWithError]: error,
+                        })}
+                      >
+                        <select
+                          data-testid="base-invite-member-role-select"
+                          onChange={(event) => {
+                            form.setValue(
+                              'isAdmin',
+                              event.target.value === 'admin',
+                            )
+                          }}
+                        >
+                          <option
+                            value="member"
+                            data-testid="base-invite-member-role-member"
+                          >
+                            Membre
+                          </option>
+                          {isAdmin && (
+                            <option
+                              value="admin"
+                              data-testid="base-invite-member-role-admin"
+                            >
+                              Administrateur
+                            </option>
+                          )}
+                        </select>
+                      </div>
+                    </>
+                  )}
+                />
+              </div>
+            </div>
+          </>
+        </InviteModal>
+      </form>
     </>
   )
 }

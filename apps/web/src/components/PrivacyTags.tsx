@@ -18,9 +18,9 @@ export const ProfilePrivacyTag = ({
   small?: boolean
 }) =>
   isPublic ? (
-    <CustomTag {...publicValues} small={small} label="Public" />
+    <CustomTag {...publicValues} small={small} label="Profil public" />
   ) : (
-    <CustomTag {...privateValues} small={small} label="Privé" />
+    <CustomTag {...privateValues} small={small} label="Profil privé" />
   )
 
 export const BasePrivacyTag = ({
@@ -31,9 +31,9 @@ export const BasePrivacyTag = ({
   small?: boolean
 }) =>
   isPublic ? (
-    <CustomTag {...publicValues} small={small} label="Publique" />
+    <CustomTag {...publicValues} small={small} label="Base publique" />
   ) : (
-    <CustomTag {...privateValues} small={small} label="Privée" />
+    <CustomTag {...privateValues} small={small} label="Base privée" />
   )
 
 export const ResourcePrivacyTag = ({
@@ -44,9 +44,9 @@ export const ResourcePrivacyTag = ({
   small?: boolean
 }) =>
   isPublic ? (
-    <CustomTag {...publicValues} small={small} label="Publique" />
+    <CustomTag {...publicValues} small={small} label="Ressource publique" />
   ) : (
-    <CustomTag {...privateValues} small={small} label="Privée" />
+    <CustomTag {...privateValues} small={small} label="Ressource privée" />
   )
 
 export const PrivacyTag = ({

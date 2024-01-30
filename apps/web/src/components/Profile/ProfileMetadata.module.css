@@ -3,6 +3,13 @@
   display: flex;
   gap: 8px;
   margin-bottom: 0;
+  margin-top: 8px;
+  justify-content: center;
+  width: 100%;
+
+    @media (min-width: 768px) {
+        justify-content: flex-start;
+    }
 }
 
 .spanMdDisplay {
