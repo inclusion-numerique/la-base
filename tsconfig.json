@@ -24,12 +24,10 @@
       "@app/emails/*": ["packages/emails/src/*"],
       "@app/lint/*": ["packages/lint/src/*"],
       "@app/fixtures/*": ["packages/fixtures/src/*"],
-      "@app/migration/*": ["packages/migration/src/*"],
       "@app/scaleway/*": ["packages/cdk/.gen/providers/scaleway/*"],
       "@app/storybook/*": ["packages/storybook/src/*"],
       "@app/ui/*": ["packages/ui/src/*"],
       "@app/test/*": ["packages/test/src/*"],
-      "@prisma/migration-client": ["packages/migration/prisma/migration-client"],
       "@prisma/client": ["node_modules/.pnpm/@prisma+client@5.7.1_prisma@5.7.1/node_modules/@prisma/client"]
     }
   },

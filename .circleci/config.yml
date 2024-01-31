@@ -128,51 +128,6 @@ workflows:
             - test_web_integration
             - test_components
             - test_web_e2e
-  release_deployment:
-    triggers:
-      - schedule:
-          cron: "0 2 * * *"
-          filters:
-            branches:
-              only:
-                - main
-                - dev
-    when:
-      equal: [ web_app_deployment, << pipeline.parameters.trigger_workflow >> ]
-    jobs:
-      - prepare_workspace_dependencies
-      - lint_web:
-          requires:
-            - prepare_workspace_dependencies
-      - lint_packages:
-          requires:
-            - prepare_workspace_dependencies
-      - test_packages:
-          requires:
-            - prepare_workspace_dependencies
-      - test_web:
-          requires:
-            - prepare_workspace_dependencies
-      - test_web_integration:
-          requires:
-            - prepare_workspace_dependencies
-      - build_web:
-          requires:
-            - prepare_workspace_dependencies
-
-      - test_components:
-          requires:
-            - prepare_workspace_dependencies
-
-      - deploy_web:
-          requires:
-            - lint_web
-            - lint_packages
-            - build_web
-            - test_packages
-            - test_web
-            - test_web_integration
-            - test_components
 
   project_infrastructure_deployment:
     when:
@@ -244,7 +199,6 @@ jobs:
             - ./packages/ui/node_modules
             - ./packages/ui/public/dsfr
             - ./packages/fixtures/node_modules
-            - ./packages/migration/node_modules
       - save_cache:
           key: << pipeline.parameters.cache_version >>-cypress-{{ checksum "<< pipeline.parameters.lockfile >>" }}
           paths:
@@ -259,9 +213,6 @@ jobs:
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Prisma (migration) generate'
-          command: pnpm --silent -F @app/migration prisma generate
       - run:
           name: 'Tsc'
           command: pnpm tsc
@@ -279,9 +230,6 @@ jobs:
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Prisma (migration) generate'
-          command: pnpm --silent -F @app/migration prisma generate
       - run:
           name: 'Tsc'
           command: pnpm tsc
@@ -316,9 +264,6 @@ jobs:
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Prisma (migration) generate'
-          command: pnpm --silent -F @app/migration prisma generate
       - run:
           name: 'Test all packages except @app/web'
           command: pnpm -F '!@app/web' test
@@ -544,23 +489,6 @@ jobs:
           name: 'Generate Prisma client for this platform'
           command: |
             pnpm --silent -F @app/web prisma generate
-      # Prepare migration from Legacy database
-      - run:
-          name: 'Create migration database'
-          command: |
-            psql $CI_PG_ADMIN_URL -c 'CREATE DATABASE test;'
-      - run:
-          name: 'Add migration database in env'
-          command: |
-            echo "MIGRATION_DATABASE_URL=$CI_DATABASE_URL" >> .env
-      - run:
-          name: 'Generate Prisma migration client'
-          command: |
-            pnpm --silent -F @app/migration prisma generate
-      - run:
-          name: 'Restore latest legacy database dump'
-          command: |
-            pnpm --silent cli legacy:import-database
       - queue/until_front_of_line:
           time: '3'
       - run:
@@ -607,10 +535,6 @@ jobs:
                 name: 'Load fixtures on preview envs'
                 command: |
                   pnpm --silent -F @app/fixtures load
-      - run:
-          name: 'Execute migration from legacy data'
-          command: |
-            pnpm --silent -F @app/migration execute
       - run:
           name: Check that deployed container status is ok
           command: |

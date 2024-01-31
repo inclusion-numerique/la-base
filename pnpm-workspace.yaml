@@ -6,7 +6,6 @@ packages:
   - packages/e2e
   - packages/emails
   - packages/lint
-  - packages/migration
   - packages/ui
   - packages/storybook
   - packages/test

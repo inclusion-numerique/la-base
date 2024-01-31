@@ -137,7 +137,7 @@ Construit les applications `cli` et `web` :
 
 ### `pnpm test`
 
-Lance l'exécution de tests avec Jest de l'ensemble des applications et packages du monorepo sauf `e2e` : `app/cli`, `app/web`, `packages/cdk`, `packages/config`, `packages/emails`, `packages/fixtures`, `packages/lint`, `packages/migration`, `packages/storybook`, `packages/test`, `packages/ui`
+Lance l'exécution de tests avec Jest de l'ensemble des applications et packages du monorepo sauf `e2e` : `app/cli`, `app/web`, `packages/cdk`, `packages/config`, `packages/emails`, `packages/fixtures`, `packages/lint`, `packages/storybook`, `packages/test`, `packages/ui`
 
 ### `pnpm test:integration`
 

@@ -43,7 +43,6 @@ Les `Packages` contiennent des outils de support et des communs dont l'origine p
 - [emails](packages/emails) : Templates pour les emails utilisés par l'application.
 - [fixtures](packages/fixtures) : Ensemble de données à insérer dans la base de données pour avoir un ensemble cohérent plutôt qu'un projet vide.
 - [lint](packages/lint) : Configuration des règles de syntaxes à respecter dans le projet.
-- [migration](packages/migration) : Ensemble de scripts de migration pour importer les données depuis la V1 de la base.
 - [storybook](packages/storybook) : Configuration de storybook, utilisé pour administrer une bibliothèque des composants disponibles dans l'application.
 - [test](packages/test) : Configuration de jest, utilisé pour les tests unitaires et les tests d'intégration.
 - [ui](packages/ui) : Composants et utilitaires génériques provenant de la [stack](https://github.com/inclusion-numerique/stack/tree/main/packages/ui).

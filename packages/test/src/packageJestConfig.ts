@@ -62,11 +62,8 @@ export const packageJestConfig = ({
       '^@app/cdk/(.*)$': '<rootDir>/../../packages/cdk/src/$1',
       '^@app/config/(.*)$': '<rootDir>/../../packages/config/src/$1',
       '^@app/fixtures/(.*)$': '<rootDir>/../../packages/fixtures/src/$1',
-      '^@app/migration/(.*)$': '<rootDir>/../../packages/migration/src/$1',
       '^@prisma/client$':
         '<rootDir>/../../apps/web/node_modules/@prisma/client',
-      '^@prisma/migration-client$':
-        '<rootDir>/../../packages/migration/prisma/migration-client',
       '^@app/ui/(.*)$': '<rootDir>/../../packages/ui/src/$1',
       '^@app/emails/(.*)$': '<rootDir>/../../packages/emails/src/$1',
       '^@app/lint/(.*)$': '<rootDir>/../../packages/lint/src/$1',

@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prismaClient } from '@app/web/prismaClient'
-// eslint-disable-next-line import/no-relative-packages
-import { legacyBaseOwnerFromLegacyBaseId } from '../../../../packages/migration/legacyBaseOwnerFromLegacyBaseId'
+import { legacyBaseOwnerFromLegacyBaseId } from '@app/web/legacyRedirection/legacyBaseOwnerFromLegacyBaseId'
 
 const legacyHostname = process.env.LEGACY_HOSTNAME
 

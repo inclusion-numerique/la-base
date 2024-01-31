@@ -1,5 +1,4 @@
-
-// This file is generated during migration from getLegacyBaseOwnerFromLegacyBaseId.ts
+// This file was generated during migration from getLegacyBaseOwnerFromLegacyBaseId.ts
 // This is the ids of legacy user for which base have been transformed to v2 profile
 export const legacyBaseOwnerFromLegacyBaseId = new Map([
   [1, 1],
@@ -402,4 +401,3 @@ export const legacyBaseOwnerFromLegacyBaseId = new Map([
   [643, 2128],
   [645, 7927],
 ])
- 
