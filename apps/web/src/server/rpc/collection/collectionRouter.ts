@@ -113,7 +113,7 @@ export const collectionRouter = router({
 
       return prismaClient.collection.update({
         where: { id },
-        data: { ...informations, slug },
+        data: { ...informations, slug, updated: new Date() },
       })
     }),
   updateImage: protectedProcedure
@@ -121,7 +121,7 @@ export const collectionRouter = router({
     .mutation(async ({ input: { id, imageId } }) =>
       prismaClient.collection.update({
         where: { id },
-        data: { imageId },
+        data: { imageId, updated: new Date() },
       }),
     ),
   updateVisibility: protectedProcedure
@@ -129,7 +129,7 @@ export const collectionRouter = router({
     .mutation(async ({ input: { id, isPublic } }) =>
       prismaClient.collection.update({
         where: { id },
-        data: { isPublic },
+        data: { isPublic, updated: new Date() },
       }),
     ),
   delete: protectedProcedure

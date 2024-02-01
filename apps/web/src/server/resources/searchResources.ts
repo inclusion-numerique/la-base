@@ -193,7 +193,7 @@ export const rankResources = async (
               )}::target_audience[]
           )
       /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank DESC, resources.updated DESC
+      ORDER BY rank DESC, resources.published DESC, resources.updated DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };

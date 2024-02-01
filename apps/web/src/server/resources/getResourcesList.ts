@@ -178,7 +178,7 @@ export const getResourcesCountByTheme = async () => {
   >`
       SELECT unnest(themes) AS theme, CAST(COUNT(*) AS integer) AS "count"
       FROM resources
-      WHERE resources.is_public = true
+      WHERE resources.is_public = true AND resources.deleted IS NULL
       GROUP BY theme
       ORDER BY theme ASC;
   `
@@ -207,6 +207,7 @@ export const getProfileResources = async (
     where,
     select: resourceListSelect(user),
     orderBy: [
+      { published: 'desc' },
       {
         updated: 'desc',
       },

@@ -122,7 +122,7 @@ export const collectionSelect = {
       },
     },
     take: 3,
-    orderBy: { resource: { updated: 'desc' } },
+    orderBy: { resource: { published: 'desc' } },
   },
   _count: {
     select: {
