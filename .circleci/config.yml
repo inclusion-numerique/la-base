@@ -64,6 +64,7 @@ parameters:
     ## web_app_deployment
     ## web_app_preview_deletion
     ## project_stack_deployment
+    ## backup_main_database
     default: "web_app_deployment"
   # Name of the environment to scrap
   web_app_docker_registry:
@@ -128,6 +129,62 @@ workflows:
             - test_web_integration
             - test_components
             - test_web_e2e
+
+  manual_backup_main_database:
+    when:
+      equal: [ backup_main_database, << pipeline.parameters.trigger_workflow >> ]
+    jobs:
+      - prepare_workspace_dependencies
+      - backup_main_database:
+          requires:
+            - prepare_workspace_dependencies
+
+  weekly_backup_main_database:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - prepare_workspace_dependencies
+      - backup_main_database:
+          backup_type: weekly
+          expires_in_days: 600
+          requires:
+            - prepare_workspace_dependencies
+
+  daily_backup_main_database:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - prepare_workspace_dependencies
+      - backup_main_database:
+          backup_type: daily
+          expires_in_days: 90
+          requires:
+            - prepare_workspace_dependencies
+  hourly_backup_main_database:
+    triggers:
+      - schedule:
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - prepare_workspace_dependencies
+      - backup_main_database:
+          backup_type: hourly
+          expires_in_days: 7
+          requires:
+            - prepare_workspace_dependencies
 
   project_infrastructure_deployment:
     when:
@@ -589,6 +646,50 @@ jobs:
           name: 'Deploy project infrastructure stack'
           command: |
             pnpm --silent -F @app/cdk cdktf deploy project --var-file .tfvars.json --auto-approve --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs
+
+  backup_main_database:
+    executor: node
+    resource_class: large
+    parameters:
+      backup_type:
+          type: string
+          default: manual
+      expires_in_days:
+          type: integer
+          default: 90
+    steps:
+      - checkout
+      - install_dependencies
+      - create_dotenv_file
+      - add_secrets_to_dotenv_file
+      - add_dotenv_vars_to_bash_env
+      - run:
+          name: 'Set backup file name'
+          command: |
+            BACKUP_FILE_NAME="backup_${BACKUP_DATABASE_NAME}_<< parameters.backup_type >>_$(date -u +'%Y-%m-%d-%H%M%S')"
+            echo "export BACKUP_FILE_NAME=$BACKUP_FILE_NAME" >> ${BASH_ENV}
+            echo "Backup file name: $BACKUP_FILE_NAME"
+      - run:
+          name: 'Set expires at'
+          # Set the BACKUP_EXPIRES_AT env variable to iso 8601 format to now + number of days in {{parameters.expires_in_days}}
+          command: |
+            BACKUP_EXPIRES_AT=$(date -u -d "+<< parameters.expires_in_days >> days" +'%Y-%m-%dT%H:%M:%SZ')
+            echo "export BACKUP_EXPIRES_AT=$BACKUP_EXPIRES_AT" >> ${BASH_ENV}
+            echo "Backup expires at: $BACKUP_EXPIRES_AT"
+      - run:
+          name: "Create backup file"
+          command: |
+            curl -X POST \
+                -H "X-Auth-Token: $CI_SCW_SECRET_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{
+                \"database_name\": \"$BACKUP_DATABASE_NAME\",
+                \"instance_id\": \"$DATABASE_INSTANCE_ID\",
+                \"name\": \"$BACKUP_FILE_NAME\",
+                \"expires_at\": \"$BACKUP_EXPIRES_AT\"
+              }" \
+                "https://api.scaleway.com/rdb/v1/regions/fr-par/backups"
+      
 
   web_app_preview_deletion:
     executor: node
