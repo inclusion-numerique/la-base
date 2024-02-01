@@ -33,22 +33,26 @@ const deletedUser = (id: string, timestamp: Date) => ({
   updated: timestamp,
 })
 
-const resourcesToDelete = () => ({
+const resourcesToDelete = (userId: string) => ({
   where: {
+    createdById: userId,
     contributors: { none: {} },
     deleted: null,
   },
 })
 
-const basesToDelete = (memberId: string) => ({
+const basesToDelete = (userId: string) => ({
   where: {
-    members: { every: { memberId } },
+    ownerId: userId,
+    members: { every: { memberId: userId } },
     deleted: null,
   },
 })
 
-const collectionsToDelete = () => ({
+const collectionsToDelete = (userId: string) => ({
   where: {
+    ownerId: userId,
+    baseId: null,
     savedCollection: { none: {} },
     deleted: null,
   },
@@ -185,30 +189,30 @@ export const profileRouter = router({
   delete: protectedProcedure.mutation(
     async ({
       ctx: {
-        user: { id },
+        user: { id: userId },
       },
     }) => {
       const timestamp = new Date()
 
       await prismaClient.resource.updateMany({
-        ...resourcesToDelete(),
+        ...resourcesToDelete(userId),
         ...softDelete(timestamp),
       })
 
       await prismaClient.base.updateMany({
-        ...basesToDelete(id),
+        ...basesToDelete(userId),
         ...softDelete(timestamp),
       })
 
       await prismaClient.collection.updateMany({
-        ...collectionsToDelete(),
+        ...collectionsToDelete(userId),
         ...softDelete(timestamp),
       })
 
       return prismaClient.user.update({
-        where: { id },
+        where: { id: userId },
         data: {
-          ...deletedUser(id, timestamp),
+          ...deletedUser(userId, timestamp),
           accounts: { deleteMany: {} },
           sessions: { deleteMany: {} },
         },

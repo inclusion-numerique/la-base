@@ -6,6 +6,7 @@ import { CreateCollectionCommandValidation } from '@app/web/server/collections/c
 import { SaveCollectionValidation } from '@app/web/server/collections/SaveCollection'
 import { forbiddenError, invalidError } from '@app/web/server/rpc/trpcErrors'
 import {
+  collectionIdValidation,
   UpdateCollectionImageCommandValidation,
   UpdateCollectionInformationsCommandValidation,
   UpdateCollectionVisibilityCommandValidation,
@@ -132,7 +133,7 @@ export const collectionRouter = router({
       }),
     ),
   delete: protectedProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: collectionIdValidation }))
     .mutation(async ({ input }) => {
       const timestamp = new Date()
       return prismaClient.collection.update({

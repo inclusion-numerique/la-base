@@ -6,9 +6,11 @@ import {
   collectionTitleMaxLength,
 } from './collectionConstraints'
 
-export const collectionIdValidation = z.string({
-  required_error: "Veuillez renseigner l'id de la collection",
-})
+export const collectionIdValidation = z
+  .string({
+    required_error: "Veuillez renseigner l'id de la collection",
+  })
+  .uuid()
 
 export const titleValidation = z
   .string({ required_error: 'Veuillez renseigner le nom de la collection' })

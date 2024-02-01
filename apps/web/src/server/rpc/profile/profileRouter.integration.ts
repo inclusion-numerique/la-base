@@ -404,11 +404,25 @@ describe('profileRouter', () => {
       })
 
       const resources = await prismaClient.resource.findMany({
-        where: { contributors: { none: {} } },
+        where: {
+          createdById: givenUserId,
+          contributors: { none: {} },
+        },
       })
 
       const collections = await prismaClient.collection.findMany({
-        where: { savedCollection: { none: {} } },
+        where: {
+          ownerId: givenUserId,
+          savedCollection: { none: {} },
+          baseId: null,
+        },
+      })
+      const collectionsInBase = await prismaClient.collection.findMany({
+        where: {
+          ownerId: givenUserId,
+          savedCollection: { none: {} },
+          baseId: { not: null },
+        },
       })
 
       await expect(user.email).toBe(
@@ -425,12 +439,19 @@ describe('profileRouter', () => {
       await expect(user.twitter).toBeNull()
       await expect(user.linkedin).toBeNull()
       await expect(user.deleted).not.toBeNull()
+
       await expect(bases.every((base) => base.deleted != null)).toBe(true)
       await expect(
         resources.every((resource) => resource.deleted != null),
       ).toBe(true)
+      // Should delete his collections
       await expect(
         collections.every((collection) => collection.deleted != null),
+      ).toBe(true)
+
+      // Should not delete collections in bases
+      await expect(
+        collectionsInBase.every((collection) => collection.deleted == null),
       ).toBe(true)
     })
   })
