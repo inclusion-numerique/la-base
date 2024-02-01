@@ -10,6 +10,7 @@ export const getPersistedResource = (id: string) =>
       slug: true,
       title: true,
       published: true,
+      lastPublished: true,
       created: true,
       updated: true,
       createdById: true,

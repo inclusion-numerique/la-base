@@ -30,7 +30,7 @@ const contents = [
     type: 'Link',
     image: '/images/add-link.svg',
     label: 'Lien',
-    description: 'Vers un site externe ou une ressource internet à La Base.',
+    description: 'Vers un site externe ou une ressource interne Les Bases.',
   },
   {
     type: 'SectionTitle',

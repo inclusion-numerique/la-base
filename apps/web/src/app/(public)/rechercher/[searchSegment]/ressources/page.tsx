@@ -45,6 +45,7 @@ const ResourcesSearchResultPage = async ({
       >
         <ResourcesSearchResults
           searchParams={searchParams}
+          paginationParams={paginationParams}
           resources={resources}
           user={user}
           totalCount={resourcesCount}

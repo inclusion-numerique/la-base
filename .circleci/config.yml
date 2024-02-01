@@ -688,6 +688,7 @@ jobs:
                 \"name\": \"$BACKUP_FILE_NAME\",
                 \"expires_at\": \"$BACKUP_EXPIRES_AT\"
               }" \
+              --fail --include \
                 "https://api.scaleway.com/rdb/v1/regions/fr-par/backups"
       
 

@@ -2,13 +2,16 @@ import { Meta, StoryObj } from '@storybook/react'
 import { ComponentProps } from 'react'
 import { ResourcesListWrapper } from '@app/storybook/components/ResourcesListWrapper'
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
+import { addDays } from 'date-fns'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import { testResourceDescription } from '@app/web/test/helpers'
 
-const date = new Date('1998-07-12')
+const date = new Date('2023-01-31')
+const nextDay = addDays(date, 1)
+
 const resource = {
   id: '7a7a8e12-3fdb-4485-8f9d-112bce55d302',
   title:
@@ -18,6 +21,7 @@ const resource = {
   created: date,
   updated: date,
   published: date,
+  lastPublished: date,
   base: {
     id: 'base-id',
     title: 'Titre de la base',
@@ -64,7 +68,7 @@ const render = (props: ComponentProps<typeof ResourceCard>) => (
 
 const BrouillonSansImageStory: Story = {
   args: {
-    resource: { ...resource, published: null },
+    resource: { ...resource, published: null, lastPublished: null },
     user: creatorUser,
   },
   render,
@@ -78,6 +82,7 @@ const BrouillonAvecImageStory: Story = {
     resource: {
       ...resource,
       published: null,
+      lastPublished: null,
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
@@ -90,7 +95,13 @@ export const BrouillonAvecImageMobile = mobileStory(BrouillonAvecImageStory)
 
 const BrouillonModifiéSansImageStory: Story = {
   args: {
-    resource: { ...resource, updated: new Date(), published: null, base: null },
+    resource: {
+      ...resource,
+      updated: new Date(),
+      published: null,
+      lastPublished: null,
+      base: null,
+    },
     user: creatorUser,
   },
   render,
@@ -109,6 +120,7 @@ const BrouillonModifiéAvecImageStory: Story = {
       ...resource,
       updated: new Date(),
       published: null,
+      lastPublished: null,
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
@@ -123,7 +135,7 @@ export const BrouillonModifiéAvecImageMobile = mobileStory(
   BrouillonModifiéAvecImageStory,
 )
 
-const SansImageVueContributeurStory: Story = {
+const PublieeSansImageVueContributeurStory: Story = {
   args: {
     resource,
     user: creatorUser,
@@ -131,17 +143,18 @@ const SansImageVueContributeurStory: Story = {
   render,
 }
 
-export const SansImageVueContributeur = mediumContainerStory(
-  SansImageVueContributeurStory,
+export const PublieeSansImageVueContributeur = mediumContainerStory(
+  PublieeSansImageVueContributeurStory,
 )
-export const SansImageVueContributeurMobile = mobileStory(
-  SansImageVueContributeurStory,
+export const PublieeSansImageVueContributeurMobile = mobileStory(
+  PublieeSansImageVueContributeurStory,
 )
 
-const AvecImageVueContributeurStory: Story = {
+const RePublieeAvecImageVueContributeurStory: Story = {
   args: {
     resource: {
       ...resource,
+      lastPublished: nextDay,
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
@@ -149,11 +162,11 @@ const AvecImageVueContributeurStory: Story = {
   render,
 }
 
-export const AvecImageVueContributeur = mediumContainerStory(
-  AvecImageVueContributeurStory,
+export const RePublieeAvecImageVueContributeur = mediumContainerStory(
+  RePublieeAvecImageVueContributeurStory,
 )
-export const AvecImageVueContributeurMobile = mobileStory(
-  AvecImageVueContributeurStory,
+export const RePublieeAvecImageVueContributeurMobile = mobileStory(
+  RePublieeAvecImageVueContributeurStory,
 )
 
 const SansImageVueVisiteurStory: Story = {
@@ -169,10 +182,11 @@ export const SansImageVueVisiteur = mediumContainerStory(
 )
 export const SansImageVueVisiteurMobile = mobileStory(SansImageVueVisiteurStory)
 
-const AvecImageVueVisiteurStory: Story = {
+const ModificationsNonPubliéesAvecImageVueVisiteurStory: Story = {
   args: {
     resource: {
       ...resource,
+      updated: nextDay,
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: testSessionUser,
@@ -180,14 +194,15 @@ const AvecImageVueVisiteurStory: Story = {
   render,
 }
 
-export const AvecImageVueVisiteur = mediumContainerStory(
-  AvecImageVueVisiteurStory,
+export const ModificationsNonPubliéesAvecImageVueVisiteur =
+  mediumContainerStory(ModificationsNonPubliéesAvecImageVueVisiteurStory)
+export const ModificationsNonPubliéesAvecImageVueVisiteurMobile = mobileStory(
+  ModificationsNonPubliéesAvecImageVueVisiteurStory,
 )
-export const AvecImageVueVisiteurMobile = mobileStory(AvecImageVueVisiteurStory)
 
 const ModificationsNonPubliéesSansImageVueContributeurStory: Story = {
   args: {
-    resource: { ...resource, updated: new Date() },
+    resource: { ...resource, updated: nextDay },
     user: creatorUser,
   },
   render,

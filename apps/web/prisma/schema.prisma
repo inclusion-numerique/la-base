@@ -295,8 +295,9 @@ model Resource {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String @map("created_by_id") @db.Uuid
 
-  published DateTime?
-  deleted   DateTime?
+  published     DateTime? // The first publication date
+  lastPublished DateTime? @map("last_published") // The most recent re-publication date
+  deleted       DateTime?
 
   base   Base?   @relation(fields: [baseId], references: [id])
   baseId String? @map("base_id") @db.Uuid

@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
@@ -6,6 +7,7 @@ import {
   defaultSearchParams,
   PaginationParams,
   SearchParams,
+  type Sorting,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { searchToTsQueryInput } from '@app/web/server/search/searchToTsQueryInput'
@@ -39,14 +41,16 @@ export const countBases = async (
           bases.deleted IS NULL
           /* Search term check */
         AND (
-              ${searchTerm ?? ''} = '' 
-              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), ''))) @@
+          ${searchTerm ?? ''} = ''
+              OR to_tsvector('french', unaccent(bases.title || ' ' ||
+                                                coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
+                                                         ''))) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
           /* Authorization*/
           /* Base is public  */
-                  bases.is_public = true
+          bases.is_public = true
               /* Base is private and user is owner */
               /* Null will never match as owner_id is not nullable */
               OR bases.owner_id = ${userId}::uuid
@@ -54,7 +58,7 @@ export const countBases = async (
               OR base_members.id IS NOT NULL
           )
         AND (
-              ${searchParams.departements.length === 0}
+          ${searchParams.departements.length === 0}
               OR bases.department = ANY (${searchParams.departements}::text[])
           )
   `
@@ -86,9 +90,9 @@ export const rankBases = async (
   >`
       SELECT bases.id,
              ts_rank_cd(to_tsvector('french', unaccent(bases.title)),
-                     to_tsquery('french', unaccent(${searchTerm})))                             AS rank_title,
+                        to_tsquery('french', unaccent(${searchTerm}))) AS rank_title,
              ts_rank_cd(to_tsvector('french', coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), '')),
-                     to_tsquery('french', unaccent(${searchTerm})))                             AS rank_description
+                        to_tsquery('french', unaccent(${searchTerm}))) AS rank_description
       FROM bases
                /* Join base member only to have only one row per base */
                /* Null will never match as member_id is not nullable */
@@ -100,14 +104,16 @@ export const rankBases = async (
           bases.deleted IS NULL
           /* Search term check */
         AND (
-            ${searchTerm ?? ''} = ''
-              OR to_tsvector('french', unaccent(bases.title || ' ' || coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), ''))) @@
+          ${searchTerm ?? ''} = ''
+              OR to_tsvector('french', unaccent(bases.title || ' ' ||
+                                                coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
+                                                         ''))) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
           /* Authorization*/
           /* Base is public  */
-                  bases.is_public = true
+          bases.is_public = true
               /* Base is private and user is owner */
               /* Null will never match as owner_id is not nullable */
               OR bases.owner_id = ${userId}::uuid
@@ -115,11 +121,11 @@ export const rankBases = async (
               OR base_members.id IS NOT NULL
           )
         AND (
-              ${searchParams.departements.length === 0}
+          ${searchParams.departements.length === 0}
               OR bases.department = ANY (${searchParams.departements}::text[])
           )
       /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank_title DESC, rank_description DESC, bases.updated DESC
+      ORDER BY rank_title DESC, rank_description DESC, bases.created DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -135,6 +141,26 @@ export const rankBases = async (
   }
 }
 
+export const baseOrderBySorting = (
+  sorting: Sorting,
+):
+  | undefined
+  | Prisma.BaseOrderByWithRelationAndSearchRelevanceInput
+  | Prisma.BaseOrderByWithRelationAndSearchRelevanceInput[] => {
+  if (sorting === 'recent') {
+    return { created: 'desc' }
+  }
+  if (sorting === 'ancien') {
+    return { created: 'asc' }
+  }
+  if (sorting === 'suivis') {
+    return [{ followedBy: { _count: 'desc' } }, { created: 'desc' }]
+  }
+
+  // No order by for 'pertinent' because rank from search query will be used
+  return undefined
+}
+
 export const searchBases = async (
   searchParams: SearchParams,
   paginationParams: PaginationParams,
@@ -146,16 +172,19 @@ export const searchBases = async (
     user,
   )
 
-  const unsortedBases = await prismaClient.base.findMany({
+  const bases = await prismaClient.base.findMany({
     where: {
       id: {
         in: searchResults.map(({ id }) => id),
       },
     },
     select: baseSelect(user),
+    orderBy: baseOrderBySorting(paginationParams.sort),
   })
 
-  return orderItemsByIndexMap(unsortedBases, resultIndexById)
+  return paginationParams.sort === 'pertinence'
+    ? orderItemsByIndexMap(bases, resultIndexById)
+    : bases
 }
 
 export type SearchBasesResult = Awaited<ReturnType<typeof searchBases>>

@@ -6,7 +6,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResourceReport from '@app/web/components/Resource/View/ResourceReport'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
-import ResourceDates from '@app/web/components/Resource/View/ResourceDates'
+import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import ResourcePublicStateBadge from '@app/web/components/Resource/View/ResourcePublicStateBadge'
 import ResourceDesktopNavigation from '@app/web/components/Resource/View/ResourceDesktopNavigation'
 import { getResourceNavigationData } from '@app/web/components/Resource/View/getResourceNavigationData'
@@ -63,11 +63,9 @@ const ResourceView = ({
             />
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
-              <ResourceDates
-                created={resource.created}
-                updated={resource.updated}
-                published={resource.published}
-              />
+              <div className="fr-text--xs fr-mb-0 fr-flex">
+                <ResourceDates resource={resource} />
+              </div>
               {isAdmin && (
                 <ResourcePublicStateBadge small resource={resource} />
               )}

@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
@@ -5,6 +6,7 @@ import {
   defaultSearchParams,
   PaginationParams,
   SearchParams,
+  type Sorting,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
@@ -94,7 +96,7 @@ export const rankProfiles = async (
           users.deleted IS NULL
         )
       /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank DESC, users.updated DESC
+      ORDER BY rank DESC, users.created DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -110,6 +112,26 @@ export const rankProfiles = async (
   }
 }
 
+export const profileOrderBySorting = (
+  sorting: Sorting,
+):
+  | undefined
+  | Prisma.UserOrderByWithRelationAndSearchRelevanceInput
+  | Prisma.UserOrderByWithRelationAndSearchRelevanceInput[] => {
+  if (sorting === 'recent') {
+    return { created: 'desc' }
+  }
+  if (sorting === 'ancien') {
+    return { created: 'asc' }
+  }
+  if (sorting === 'suivis') {
+    return [{ followedBy: { _count: 'desc' } }, { created: 'desc' }]
+  }
+
+  // No order by for 'pertinent' because rank from search query will be used
+  return undefined
+}
+
 export const searchProfiles = async (
   searchParams: SearchParams,
   paginationParams: PaginationParams,
@@ -121,16 +143,19 @@ export const searchProfiles = async (
     user,
   )
 
-  const unsortedUsers = await prismaClient.user.findMany({
+  const users = await prismaClient.user.findMany({
     where: {
       id: {
         in: searchResults.map(({ id }) => id),
       },
     },
     select: profileListSelect(user),
+    orderBy: profileOrderBySorting(paginationParams.sort),
   })
 
-  return orderItemsByIndexMap(unsortedUsers, resultIndexById)
+  return paginationParams.sort === 'pertinence'
+    ? orderItemsByIndexMap(users, resultIndexById)
+    : users
 }
 
 export type SearchProfilesResult = Awaited<ReturnType<typeof searchProfiles>>

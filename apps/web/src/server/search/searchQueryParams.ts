@@ -27,8 +27,59 @@ export const sorting = [
   'ancien',
   'vues',
   'enregistrements',
+  'suivis',
 ] as const
 export type Sorting = (typeof sorting)[number]
+
+export const masculineSortingLabels: { [key in Sorting]: string } = {
+  pertinence: 'Les plus pertinents',
+  recent: 'Les plus récents',
+  ancien: 'Les plus anciens',
+  vues: 'Les plus vus',
+  enregistrements: 'Les plus enregistrés',
+  suivis: 'Les plus suivis',
+}
+
+export const feminineSortingLabels: { [key in Sorting]: string } = {
+  pertinence: 'Les plus pertinentes',
+  recent: 'Les plus récentes',
+  ancien: 'Les plus anciennes',
+  vues: 'Les plus vues',
+  enregistrements: 'Les plus enregistrées',
+  suivis: 'Les plus suivies',
+}
+
+export const resourcesSorting = [
+  'pertinence',
+  'recent',
+  'ancien',
+  'vues',
+  'enregistrements',
+] as const satisfies Sorting[]
+
+export const profilesSorting = [
+  'pertinence',
+  'recent',
+  'ancien',
+  'suivis',
+] as const satisfies Sorting[]
+
+export const basesSorting = profilesSorting
+
+export const resourcesSortingOptions = resourcesSorting.map((value) => ({
+  value,
+  name: feminineSortingLabels[value],
+}))
+
+export const profilesSortingOptions = profilesSorting.map((value) => ({
+  value,
+  name: masculineSortingLabels[value],
+}))
+
+export const basesSortingOptions = basesSorting.map((value) => ({
+  value,
+  name: feminineSortingLabels[value],
+}))
 
 // Unsanitized params from the URL
 export type UrlSearchQueryParams = {

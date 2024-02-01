@@ -55,6 +55,7 @@ export const applyResourcePublished: ResourceMutationEventApplier<
 ) => ({
   ...resource,
   published: timestamp,
+  lastPublished: timestamp,
   updated: timestamp,
   ...(slug && { slug }),
   ...(titleDuplicationCheckSlug && { titleDuplicationCheckSlug }),
@@ -84,6 +85,7 @@ export const onPublished: ResourceEventSideEffect<ResourcePublished> = async (
       },
       ...rest,
       published: timestamp,
+      lastPublished: timestamp,
       created: timestamp,
       updated: timestamp,
     },

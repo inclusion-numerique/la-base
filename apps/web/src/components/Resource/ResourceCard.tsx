@@ -11,8 +11,41 @@ import { dateAsDay } from '@app/web/utils/dateAsDay'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
+import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import styles from './ResourceCard.module.css'
 import DeleteResourceButton from './DeleteResourceButton'
+
+const getResourceDates = (resource: ResourceListItem) => {
+  const lastPublishedDay = resource.lastPublished
+    ? dateAsDay(resource.lastPublished)
+    : null
+  const publishedDay = resource.published ? dateAsDay(resource.published) : null
+
+  // If published, we show the latest publication date
+  if (lastPublishedDay) {
+    // Published multiple times in different days, we show the latest publication date
+    if (lastPublishedDay !== publishedDay) {
+      return <div>Mise à jour le {lastPublishedDay}</div>
+    }
+    // Published once, we show the publication date
+    return <div>Publiée le {publishedDay}</div>
+  }
+
+  const updatedDay = dateAsDay(resource.updated)
+  const createdDay = dateAsDay(resource.created)
+
+  if (updatedDay !== createdDay) {
+    return (
+      <>
+        <div>Créée le {dateAsDay(resource.created)}</div>
+        <div className={styles.separator} />
+        <div>Modifiée le {dateAsDay(resource.updated)}</div>
+      </>
+    )
+  }
+
+  return <div>Créée le {dateAsDay(resource.created)}</div>
+}
 
 const ResourceCard = ({
   resource,
@@ -23,38 +56,17 @@ const ResourceCard = ({
   user: SessionUser | null
   className?: string
 }) => {
+  // TODO Security this it not the right condition
   const isContributor = user && user.id === resource.createdBy.id
 
-  const hasUnpublishedModifications =
-    resource.published &&
-    isContributor &&
-    resource.updated.getTime() !== resource.published.getTime()
+  const isPublished = !!resource.published
 
-  const dates = resource.published ? (
-    hasUnpublishedModifications ? (
-      <>
-        <Badge small severity="info">
-          Modifications non publiées
-        </Badge>
-        <div
-          className={classNames(styles.separator, 'fr-hidden fr-unhidden-md')}
-        />
-        <div>Mise à jour le {dateAsDay(resource.published)}</div>
-      </>
-    ) : (
-      <div>Mise à jour le {dateAsDay(resource.published)}</div>
-    )
-  ) : (
-    <>
-      <div>Créée le {dateAsDay(resource.created)}</div>
-      {dateAsDay(resource.created) !== dateAsDay(resource.updated) && (
-        <>
-          <div className={styles.separator} />
-          <div>Modifiée le {dateAsDay(resource.updated)}</div>
-        </>
-      )}
-    </>
-  )
+  const showUnpublishedModifications =
+    isPublished &&
+    !!isContributor &&
+    resource.updated.getTime() !== resource.published?.getTime()
+
+  const dates = getResourceDates(resource)
 
   return (
     <article
@@ -68,7 +80,20 @@ const ResourceCard = ({
           attributionWording="none"
         />
         <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
-          {dates}
+          {showUnpublishedModifications && (
+            <>
+              <Badge small severity="info">
+                Modifications non publiées
+              </Badge>
+              <div
+                className={classNames(
+                  styles.separator,
+                  'fr-hidden fr-unhidden-md',
+                )}
+              />
+            </>
+          )}
+          <ResourceDates resource={resource} />
         </div>
       </div>
       <Link
@@ -80,7 +105,7 @@ const ResourceCard = ({
           <div
             className={classNames(
               styles.dates,
-              hasUnpublishedModifications && styles.unpublishedInfosContainer,
+              showUnpublishedModifications && styles.unpublishedInfosContainer,
               'fr-hidden-md fr-text--xs fr-mb-1w',
             )}
           >

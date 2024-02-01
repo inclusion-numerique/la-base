@@ -52,7 +52,7 @@ export const onRepublished: ResourceEventSideEffect<
         deleteMany: {},
         createMany: { data: newContents },
       },
-      published: timestamp,
+      lastPublished: timestamp,
       updated: timestamp,
     },
   })

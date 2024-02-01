@@ -2,23 +2,29 @@ import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { SearchParams } from '@app/web/server/search/searchQueryParams'
+import {
+  PaginationParams,
+  SearchParams,
+} from '@app/web/server/search/searchQueryParams'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResource'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import EmptyBox from '@app/web/components/EmptyBox'
+import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
 import styles from './SearchContents.module.css'
 
 const ResourcesSearchResults = ({
   totalCount,
   resources,
   user,
-  searchParams: _willBeUsedForSorting,
+  searchParams,
+  paginationParams,
 }: {
   totalCount: number
   resources: ResourceListItem[]
   user: SessionUser | null
   searchParams: SearchParams
+  paginationParams: PaginationParams
 }) => (
   <>
     <div className={styles.header}>
@@ -27,12 +33,11 @@ const ResourcesSearchResults = ({
           {totalCount} Ressource{sPluriel(totalCount)}
         </b>
       </p>
-      <div className={styles.select}>
-        Trier par :
-        <select>
-          <option>Les plus pertinentes</option>
-        </select>
-      </div>
+      <ResultSortingSelect
+        paginationParams={paginationParams}
+        searchParams={searchParams}
+        tab="ressources"
+      />
     </div>
     {resources.length > 0 ? (
       resources.map((resource) => (

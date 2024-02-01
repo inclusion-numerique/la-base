@@ -39,7 +39,7 @@ const ResourceIndexationEdition = <T extends FieldValues>({
       limit={themesLimit}
       path={themesPath}
       defaultOption
-      defaultOptionLabel="Selectionnez une thématique"
+      defaultOptionLabel="Sélectionnez une thématique"
       options={themeOptions}
     />
     <MultipleSelectFormField
@@ -57,7 +57,7 @@ const ResourceIndexationEdition = <T extends FieldValues>({
       limit={supportTypesLimit}
       path={supportTypesPath}
       defaultOption
-      defaultOptionLabel="Selectionnez une type de support"
+      defaultOptionLabel="Sélectionnez une type de support"
       options={supportTypeOptions}
     />
     <MultipleSelectFormField
@@ -74,7 +74,7 @@ const ResourceIndexationEdition = <T extends FieldValues>({
       limit={targetAudiencesLimit}
       path={targetAudiencesPath}
       defaultOption
-      defaultOptionLabel="Selectionnez un public"
+      defaultOptionLabel="Sélectionnez un public"
       options={targetAudienceOptions}
     />
   </>

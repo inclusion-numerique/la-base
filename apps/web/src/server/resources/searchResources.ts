@@ -1,11 +1,13 @@
+import type { Prisma } from '@prisma/client'
 import {
   defaultPaginationParams,
   defaultSearchParams,
-  PaginationParams,
-  SearchParams,
+  type PaginationParams,
+  type SearchParams,
+  type Sorting,
 } from '@app/web/server/search/searchQueryParams'
 import { prismaClient } from '@app/web/prismaClient'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { resourceListSelect } from '@app/web/server/resources/getResourcesList'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
@@ -48,21 +50,20 @@ export const countResources = async (
           resources.deleted IS NULL
           /* Search term check */
         AND (
-              ${searchTerm ?? ''} = ''
+          ${searchTerm ?? ''} = ''
               OR to_tsvector('french', unaccent(
-                                               resources.title || ' '
-                                                   || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                                                   || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                                                   || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
-                                                   || resources.description || ' '
-
+                  resources.title || ' '
+                      || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                      || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                      || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                      || resources.description || ' '
                                        )) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
           /* Authorization*/
           /* Resource is public  */
-                  resources.is_public = true
+          resources.is_public = true
               /* Resource is private and user is creator */
               /* Null will never match as created_by_id is not nullable */
               OR resources.created_by_id = ${userId}::uuid
@@ -76,22 +77,22 @@ export const countResources = async (
           bases.deleted IS NULL
           )
         AND (
-              ${searchParams.themes.length === 0} OR
-              resources.themes && ${enumArrayToSnakeCaseStringArray(
-                searchParams.themes,
-              )}::theme[]
+          ${searchParams.themes.length === 0} OR
+          resources.themes && ${enumArrayToSnakeCaseStringArray(
+            searchParams.themes,
+          )}::theme[]
           )
         AND (
-              ${searchParams.supportTypes.length === 0} OR
-              resources.support_types && ${enumArrayToSnakeCaseStringArray(
-                searchParams.supportTypes,
-              )}::support_type[]
+          ${searchParams.supportTypes.length === 0} OR
+          resources.support_types && ${enumArrayToSnakeCaseStringArray(
+            searchParams.supportTypes,
+          )}::support_type[]
           )
         AND (
-              ${searchParams.targetAudiences.length === 0} OR
-              resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
-                searchParams.targetAudiences,
-              )}::target_audience[]
+          ${searchParams.targetAudiences.length === 0} OR
+          resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
+            searchParams.targetAudiences,
+          )}::target_audience[]
           )
   `
 
@@ -120,15 +121,15 @@ export const rankResources = async (
   >`
       SELECT resources.id,
              ts_rank_cd(
-                 to_tsvector('french', unaccent(
-                     resources.title || ' '
-                     || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                     || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                     || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
-                    || resources.description || ' '
-                )),
-                to_tsquery('french', unaccent(${searchTerm}))
-              ) AS rank
+                     to_tsvector('french', unaccent(
+                             resources.title || ' '
+                                 || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                                 || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                                 || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                                 || resources.description || ' '
+                                           )),
+                     to_tsquery('french', unaccent(${searchTerm}))
+             ) AS rank
       FROM resources
                /* Join user contributor only to have only one row per resource */
                /* Null will never match as contributor_id is not nullable */
@@ -147,21 +148,20 @@ export const rankResources = async (
           /* Search term check */
           /* TODO condition if query is empty ? */
         AND (
-            ${searchTerm ?? ''}  = ''
+          ${searchTerm ?? ''} = ''
               OR to_tsvector('french', unaccent(
                   resources.title || ' '
                       || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
                       || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
                       || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
                       || resources.description || ' '
-
                                        )) @@
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
           /* Authorization*/
           /* Resource is public  */
-                  resources.is_public = true
+          resources.is_public = true
               /* Resource is private and user is creator */
               /* Null will never match as created_by_id is not nullable */
               OR resources.created_by_id = ${userId}::uuid
@@ -175,25 +175,24 @@ export const rankResources = async (
           bases.deleted IS NULL
           )
         AND (
-              ${searchParams.themes.length === 0} OR
-              resources.themes && ${enumArrayToSnakeCaseStringArray(
-                searchParams.themes,
-              )}::theme[]
+          ${searchParams.themes.length === 0} OR
+          resources.themes && ${enumArrayToSnakeCaseStringArray(
+            searchParams.themes,
+          )}::theme[]
           )
         AND (
-              ${searchParams.supportTypes.length === 0} OR
-              resources.support_types && ${enumArrayToSnakeCaseStringArray(
-                searchParams.supportTypes,
-              )}::support_type[]
+          ${searchParams.supportTypes.length === 0} OR
+          resources.support_types && ${enumArrayToSnakeCaseStringArray(
+            searchParams.supportTypes,
+          )}::support_type[]
           )
         AND (
-              ${searchParams.targetAudiences.length === 0} OR
-              resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
-                searchParams.targetAudiences,
-              )}::target_audience[]
+          ${searchParams.targetAudiences.length === 0} OR
+          resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
+            searchParams.targetAudiences,
+          )}::target_audience[]
           )
-      /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank DESC, resources.published DESC, resources.updated DESC
+      ORDER BY rank DESC, resources.last_published DESC, resources.updated DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -204,6 +203,40 @@ export const rankResources = async (
   )
 
   return { searchResults, resultIndexById }
+}
+
+export const resourceOrderBySorting = (
+  sorting: Sorting,
+):
+  | undefined
+  | Prisma.ResourceOrderByWithRelationAndSearchRelevanceInput
+  | Prisma.ResourceOrderByWithRelationAndSearchRelevanceInput[] => {
+  if (sorting === 'recent') {
+    return [{ lastPublished: 'desc' }, { updated: 'desc' }]
+  }
+  if (sorting === 'ancien') {
+    return [
+      { lastPublished: { sort: 'asc', nulls: 'last' } },
+      { created: 'asc' },
+    ]
+  }
+  if (sorting === 'vues') {
+    return [
+      { views: { _count: 'desc' } },
+      { lastPublished: 'desc' },
+      { updated: 'desc' },
+    ]
+  }
+  if (sorting === 'enregistrements') {
+    return [
+      { collections: { _count: 'desc' } },
+      { lastPublished: 'desc' },
+      { updated: 'desc' },
+    ]
+  }
+
+  // No order by for 'pertinent' because rank from search query will be used
+  return undefined
 }
 
 export const searchResources = async (
@@ -217,16 +250,19 @@ export const searchResources = async (
     user,
   )
 
-  const unsortedResources = await prismaClient.resource.findMany({
+  const resources = await prismaClient.resource.findMany({
     where: {
       id: {
         in: searchResults.map(({ id }) => id),
       },
     },
     select: resourceListSelect(user),
+    orderBy: resourceOrderBySorting(paginationParams.sort),
   })
 
-  return orderItemsByIndexMap(unsortedResources, resultIndexById)
+  return paginationParams.sort === 'pertinence'
+    ? orderItemsByIndexMap(resources, resultIndexById)
+    : resources
 }
 
 export type SearchResourcesResult = Awaited<ReturnType<typeof searchResources>>

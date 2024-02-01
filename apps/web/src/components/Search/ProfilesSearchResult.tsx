@@ -4,15 +4,24 @@ import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import EmptyBox from '@app/web/components/EmptyBox'
+import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
+import {
+  PaginationParams,
+  SearchParams,
+} from '@app/web/server/search/searchQueryParams'
 import styles from './SearchContents.module.css'
 
 const ProfilesSearchResult = ({
   profiles,
   totalCount,
   user,
+  searchParams,
+  paginationParams,
 }: {
   profiles: ProfileListItem[]
   totalCount: number
+  searchParams: SearchParams
+  paginationParams: PaginationParams
   user: SessionUser | null
 }) => (
   <>
@@ -22,12 +31,11 @@ const ProfilesSearchResult = ({
           {totalCount} Profil{sPluriel(totalCount)}
         </b>
       </p>
-      <div className={styles.select}>
-        Trier par :
-        <select>
-          <option>Les plus pertinents</option>
-        </select>
-      </div>
+      <ResultSortingSelect
+        paginationParams={paginationParams}
+        searchParams={searchParams}
+        tab="profils"
+      />
     </div>
     {profiles.length > 0 ? (
       profiles.map((profile) => (

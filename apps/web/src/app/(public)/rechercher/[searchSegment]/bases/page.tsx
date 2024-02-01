@@ -45,6 +45,7 @@ const BasesSearchResultPage = async ({
           user={user}
           bases={bases}
           searchParams={searchParams}
+          paginationParams={paginationParams}
           totalCount={basesCount}
         />
       </SearchResults>

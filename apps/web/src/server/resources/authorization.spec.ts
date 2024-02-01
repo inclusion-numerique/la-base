@@ -78,6 +78,7 @@ describe('Resource authorization', () => {
       isPublic: privateResource.isPublic,
       createdBy: privateResource.createdBy,
       published: privateResource.published,
+      lastPublished: privateResource.lastPublished,
       base: privateResource.base,
     }
 
@@ -151,6 +152,7 @@ describe('Resource authorization', () => {
       isPublic: privateResource.isPublic,
       createdBy: privateResource.createdBy,
       published: privateResource.published,
+      lastPublished: privateResource.lastPublished,
       base: privateResource.base,
     }
 

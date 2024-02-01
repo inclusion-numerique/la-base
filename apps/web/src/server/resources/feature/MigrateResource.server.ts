@@ -80,6 +80,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   created: new Date(created),
   updated: new Date(updated),
   published: published ? new Date(published) : null,
+  lastPublished: published ? new Date(published) : null,
   createdById: byId,
   description,
   excerpt: generateResourceExcerpt(description),

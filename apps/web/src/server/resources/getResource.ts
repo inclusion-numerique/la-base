@@ -7,6 +7,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
     description: true,
     slug: true,
     published: true,
+    lastPublished: true,
     created: true,
     updated: true,
     isPublic: true,

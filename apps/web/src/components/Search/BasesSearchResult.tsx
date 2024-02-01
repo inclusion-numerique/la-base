@@ -1,8 +1,12 @@
 import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { SearchParams } from '@app/web/server/search/searchQueryParams'
+import {
+  PaginationParams,
+  SearchParams,
+} from '@app/web/server/search/searchQueryParams'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
 import BaseCard from '../Base/Card/BaseCard'
 import EmptyBox from '../EmptyBox'
 import styles from './SearchContents.module.css'
@@ -10,12 +14,14 @@ import styles from './SearchContents.module.css'
 const BasesSearchResult = ({
   bases,
   totalCount,
-  searchParams: _willBeUsedForSorting,
+  searchParams,
+  paginationParams,
   user,
 }: {
   bases: BaseListItem[]
   totalCount: number
   searchParams: SearchParams
+  paginationParams: PaginationParams
   user: SessionUser | null
 }) => (
   <>
@@ -25,12 +31,11 @@ const BasesSearchResult = ({
           {totalCount} Base{sPluriel(totalCount)}
         </b>
       </p>
-      <div className={styles.select}>
-        Trier par :
-        <select>
-          <option>Les plus pertinentes</option>
-        </select>
-      </div>
+      <ResultSortingSelect
+        paginationParams={paginationParams}
+        searchParams={searchParams}
+        tab="bases"
+      />
     </div>
     {bases.length > 0 ? (
       bases.map((base) => <BaseCard key={base.slug} user={user} base={base} />)

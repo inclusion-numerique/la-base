@@ -19,6 +19,7 @@ const resource = (imageId: string | null) =>
     created: new Date('1998-07-12'),
     updated: new Date('2022-07-12'),
     published: new Date('2022-07-12'),
+    lastPublished: new Date('2022-07-12'),
     baseId: '2',
     base: {
       id: '2',
@@ -134,6 +135,16 @@ export const AvecImage: Story = {
 }
 
 export const AvecImageMobile = mobileStory(AvecImage)
+
+export const AvecImageBrouillon: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: { ...resource('paysage'), published: null, lastPublished: null },
+    isAdmin: true,
+  },
+}
+
+export const AvecImagBrouilloneMobile = mobileStory(AvecImageBrouillon)
 
 export const SansImage: Story = {
   render: (args) => <Template {...args} />,
