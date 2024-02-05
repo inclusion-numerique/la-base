@@ -67,13 +67,9 @@ const ResultSortingSelect = ({
   return (
     <div className={styles.select}>
       Trier par&nbsp;:
-      <select onChange={onSelect}>
+      <select onChange={onSelect} value={selected}>
         {options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            selected={option.value === selected}
-          >
+          <option key={option.value} value={option.value}>
             {option.name}
           </option>
         ))}

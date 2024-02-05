@@ -177,6 +177,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           </Card>
 
           <Card
+            id="inviter"
             className="fr-mt-3w"
             title="Inviter des membres"
             description="Les membres peuvent voir, créer, publier et contribuer à l’ensemble des ressources liées à votre base. Vous pouvez également ajouter des administrateurs qui pourront inviter et gérer les membres de la base."

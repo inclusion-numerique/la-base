@@ -64,7 +64,7 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       cy.visit(`/profils/${visitor.slug}/collections`)
       cy.contains('Collections enregistrées · 0')
       cy.findByRole('tab', { name: /collections enregistrées/i }).click()
-      cy.contains('Vous n’avez pas enregistré de collections.')
+      cy.contains('Vous n’avez pas enregistré de collections')
 
       cy.log('Visitor should be able to save a collection')
       cy.visit(`/collections/${collection.slug}`)
@@ -106,7 +106,7 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       cy.visit(`/profils/${visitor.slug}/collections`)
       cy.contains('Collections enregistrées · 0')
       cy.findByRole('tab', { name: /collections enregistrées/i }).click()
-      cy.contains('Vous n’avez pas enregistré de collections.')
+      cy.contains('Vous n’avez pas enregistré de collections')
     },
   )
 
@@ -151,7 +151,7 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
     cy.visit(`/profils/${creator.slug}/collections`)
     cy.contains('Collections enregistrées · 0')
     cy.findByRole('tab', { name: /collections enregistrées/i }).click()
-    cy.contains('Vous n’avez pas enregistré de collections.')
+    cy.contains('Vous n’avez pas enregistré de collections')
 
     cy.log('Visitor should see the saved collection in its base')
     cy.visit(`/bases/${base.slug}`)

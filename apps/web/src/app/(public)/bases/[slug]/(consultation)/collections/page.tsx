@@ -24,23 +24,23 @@ const BaseCollectionsPage = async ({
       collectionsLabel="Collections de la base"
       emptyBox={
         authorizations.isMember ? (
-          <EmptyBox title="Vous n’avez pas de collections dans cette base.">
+          <EmptyBox title="Vous n’avez pas de collections dans cette base">
             <div data-testid="create-resource-button">
               <CreateCollectionButton />
             </div>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Pas de collections enregistrées dans cette base." />
+          <EmptyBox title="Pas de collections enregistrées dans cette base" />
         )
       }
       emptySavedBox={
         authorizations.isMember ? (
-          <EmptyBox title="Vous n’avez pas enregistré de collections dans cette base.">
+          <EmptyBox title="Vous n’avez pas enregistré de collections dans cette base">
             Enregistrez la collection de quelqu&lsquo;un d&lsquo;autre et elle
             apparaîtra ici.
           </EmptyBox>
         ) : (
-          <EmptyBox title="Pas de collections enregistrées dans cette base." />
+          <EmptyBox title="Pas de collections enregistrées dans cette base" />
         )
       }
     />

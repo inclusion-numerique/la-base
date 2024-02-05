@@ -8,9 +8,10 @@ import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
  * This is not ideal but not a bottleneck for now
  */
 export const countProfileResources = (profile: ProfileListItem) => {
-  const allResources = new Set(
-    [...profile.resources, ...profile.createdResources].map(({ id }) => id),
-  )
+  const allResources = new Set([
+    ...profile.resources.map(({ resourceId }) => resourceId),
+    ...profile.createdResources.map(({ id }) => id),
+  ])
 
   return profile.resourceEvent.filter(({ resourceId }) =>
     allResources.has(resourceId),

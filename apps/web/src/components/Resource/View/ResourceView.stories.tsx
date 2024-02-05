@@ -158,7 +158,7 @@ export const SansImageMobile = mobileStory(SansImage)
 export const Contributeur: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    resource: resource('portrait'),
+    resource: { ...resource('portrait'), updated: new Date('2023-12-12') },
     isAdmin: true,
   },
 }

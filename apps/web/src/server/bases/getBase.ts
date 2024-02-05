@@ -73,7 +73,7 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
       where: computeResourcesListWhereForUser(user),
       orderBy: [
         {
-          published: 'desc',
+          lastPublished: 'desc',
         },
         { updated: 'desc' },
       ],

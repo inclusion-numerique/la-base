@@ -575,6 +575,16 @@ jobs:
       - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID
+      - when:
+          condition:
+            and:
+              - not:
+                  equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: 'Import main database dump on preview envs'
+                command: |
+                  pnpm --silent cli backup:locally-restore-latest-main
       - run:
           name: 'Migrate database'
           command: |

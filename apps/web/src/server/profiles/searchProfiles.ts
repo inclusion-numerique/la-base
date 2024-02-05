@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
@@ -28,7 +27,7 @@ export const countProfiles = async (
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-      SELECT count(*)::integer as count
+      SELECT COUNT(DISTINCT users.id)::integer as count
       FROM users
       WHERE (
           ${searchTerm ?? ''} = ''
@@ -46,7 +45,7 @@ export const countProfiles = async (
           )
         AND (
           users.deleted IS NULL
-        )
+          )
   `
 
   return result[0]?.count ?? 0
@@ -72,31 +71,66 @@ export const rankProfiles = async (
       rank_cd: number
     }[]
   >`
-      SELECT users.id,
-             ts_rank_cd(to_tsvector('french',
-                                    unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
-                                             coalesce(users.title, '') || ' ' || coalesce(users.description, ''))),
-                        to_tsquery('french', unaccent(${searchTerm})))              AS rank
-      FROM users
-      WHERE (
-          coalesce(${searchTerm}, '___empty___') = '___empty___'
-              OR to_tsvector('french',
-                             unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') || ' ' ||
-                                      coalesce(users.title, '') || ' ' || coalesce(users.description, ''))) @@
-                 to_tsquery('french', unaccent(${searchTerm}))
-          )
-        AND (
-          /* Authorization*/
-          /* User is public  */
-          users.is_public = true
-              /* User is private and user is self */
-              OR users.id = ${userId}::uuid
-          )
-        AND (
-          users.deleted IS NULL
-        )
-      /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank DESC, users.created DESC
+      WITH data AS (SELECT users.id                                                  AS id,
+                           users.slug                                                AS slug,
+                           users.created                                             AS created,
+                           ts_rank_cd(to_tsvector('french',
+                                                  unaccent(coalesce(users.name, '') || ' ' ||
+                                                           coalesce(users.location, '') || ' ' ||
+                                                           coalesce(users.title, '') || ' ' ||
+                                                           coalesce(users.description, ''))),
+                                      to_tsquery('french', unaccent(${searchTerm}))) AS rank,
+                           COUNT(DISTINCT profile_follows.id)                        AS follows_count,
+                           COUNT(DISTINCT filtered_resource_events.resource_id)      AS resources_count
+                    FROM users
+                             LEFT JOIN profile_follows ON users.id = profile_follows.profile_id
+                             LEFT JOIN (
+                        /* To find the resources on which the user is a contributor, we find the events where the user is the author */
+                        SELECT resource_events.resource_id AS resource_id, resource_events.by_id AS by_id
+                        FROM resource_events
+                                 /* We right join to filter only public and available resources */
+                                 RIGHT JOIN resources ON resource_events.resource_id = resources.id
+                        WHERE resources.deleted IS NULL
+                          AND resources.is_public = true
+                          AND resources.published IS NOT NULL) AS filtered_resource_events
+                                       ON users.id = filtered_resource_events.by_id
+                    WHERE (
+                        coalesce(${searchTerm}, '___empty___') = '___empty___'
+                            OR to_tsvector('french',
+                                           unaccent(coalesce(users.name, '') || ' ' || coalesce(users.location, '') ||
+                                                    ' ' ||
+                                                    coalesce(users.title, '') || ' ' ||
+                                                    coalesce(users.description, ''))) @@
+                               to_tsquery('french', unaccent(${searchTerm}))
+                        )
+                      AND (
+                        /* Authorization*/
+                        /* User is public  */
+                        users.is_public = true
+                            /* User is private and user is self */
+                            OR users.id = ${userId}::uuid
+                        )
+                      AND (
+                        users.deleted IS NULL
+                        )
+                    GROUP BY users.id)
+      SELECT *
+      FROM data
+      ORDER BY CASE
+                   /* This is the only ASC order */
+                   WHEN ${paginationParams.sort === 'ancien'} THEN created
+                   END ASC,
+               CASE
+                   /* Order by DESC the right data depending on the sort */
+                   WHEN ${paginationParams.sort === 'pertinence'} THEN rank
+                   WHEN ${paginationParams.sort === 'suivis'} THEN follows_count
+                   WHEN ${paginationParams.sort === 'ressources'} THEN resources_count
+                   END DESC,
+               CASE
+                   /* All these sort options use the most recent in case of equality */
+                   WHEN ${(['recent', 'pertinence', 'suivis', 'ressources'] satisfies Sorting[] as Sorting[]).includes(paginationParams.sort)}
+                       THEN created
+                   END DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -110,26 +144,6 @@ export const rankProfiles = async (
     searchResults,
     resultIndexById,
   }
-}
-
-export const profileOrderBySorting = (
-  sorting: Sorting,
-):
-  | undefined
-  | Prisma.UserOrderByWithRelationAndSearchRelevanceInput
-  | Prisma.UserOrderByWithRelationAndSearchRelevanceInput[] => {
-  if (sorting === 'recent') {
-    return { created: 'desc' }
-  }
-  if (sorting === 'ancien') {
-    return { created: 'asc' }
-  }
-  if (sorting === 'suivis') {
-    return [{ followedBy: { _count: 'desc' } }, { created: 'desc' }]
-  }
-
-  // No order by for 'pertinent' because rank from search query will be used
-  return undefined
 }
 
 export const searchProfiles = async (
@@ -150,12 +164,9 @@ export const searchProfiles = async (
       },
     },
     select: profileListSelect(user),
-    orderBy: profileOrderBySorting(paginationParams.sort),
   })
 
-  return paginationParams.sort === 'pertinence'
-    ? orderItemsByIndexMap(users, resultIndexById)
-    : users
+  return orderItemsByIndexMap(users, resultIndexById)
 }
 
 export type SearchProfilesResult = Awaited<ReturnType<typeof searchProfiles>>

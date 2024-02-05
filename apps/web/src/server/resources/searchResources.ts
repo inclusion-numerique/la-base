@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client'
 import {
   defaultPaginationParams,
   defaultSearchParams,
@@ -32,7 +31,7 @@ export const countResources = async (
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-      SELECT count(*)::integer as count
+      SELECT COUNT(DISTINCT resources.id)::integer as count
       FROM resources
                /* Join user contributor only to have only one row per resource */
                /* Null will never match as contributor_id is not nullable */
@@ -119,80 +118,107 @@ export const rankResources = async (
       rank_cd: number
     }[]
   >`
-      SELECT resources.id,
-             ts_rank_cd(
-                     to_tsvector('french', unaccent(
-                             resources.title || ' '
-                                 || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                                 || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                                 || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
-                                 || resources.description || ' '
-                                           )),
-                     to_tsquery('french', unaccent(${searchTerm}))
-             ) AS rank
-      FROM resources
-               /* Join user contributor only to have only one row per resource */
-               /* Null will never match as contributor_id is not nullable */
-               LEFT JOIN resource_contributors
-                         ON resources.id = resource_contributors.resource_id AND
-                            resource_contributors.contributor_id = ${userId}::uuid
-               LEFT JOIN bases ON resources.base_id = bases.id
-          /* Join base member only to have only one row per resource */
-          /* Null will never match as member_id is not nullable */
-               LEFT JOIN base_members
-                         ON bases.id = base_members.base_id AND base_members.member_id = ${userId}::uuid AND
-                            base_members.accepted IS NOT NULL
-      WHERE
-          /* Resource status check */
-          resources.deleted IS NULL
-          /* Search term check */
-          /* TODO condition if query is empty ? */
-        AND (
-          ${searchTerm ?? ''} = ''
-              OR to_tsvector('french', unaccent(
-                  resources.title || ' '
-                      || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                      || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                      || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
-                      || resources.description || ' '
-                                       )) @@
-                 to_tsquery('french', unaccent(${searchTerm}))
-          )
-        AND (
-          /* Authorization*/
-          /* Resource is public  */
-          resources.is_public = true
-              /* Resource is private and user is creator */
-              /* Null will never match as created_by_id is not nullable */
-              OR resources.created_by_id = ${userId}::uuid
-              /* User is contributor */
-              OR resource_contributors.id IS NOT NULL
-              /* User is member of base */
-              OR base_members.id IS NOT NULL
-          )
-        AND (
-          /* Unexisting base or base non deleted */
-          bases.deleted IS NULL
-          )
-        AND (
-          ${searchParams.themes.length === 0} OR
-          resources.themes && ${enumArrayToSnakeCaseStringArray(
-            searchParams.themes,
-          )}::theme[]
-          )
-        AND (
-          ${searchParams.supportTypes.length === 0} OR
-          resources.support_types && ${enumArrayToSnakeCaseStringArray(
-            searchParams.supportTypes,
-          )}::support_type[]
-          )
-        AND (
-          ${searchParams.targetAudiences.length === 0} OR
-          resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
-            searchParams.targetAudiences,
-          )}::target_audience[]
-          )
-      ORDER BY rank DESC, resources.last_published DESC, resources.updated DESC
+      WITH data AS (SELECT resources.id,
+                           ts_rank_cd(
+                                   to_tsvector('french', unaccent(
+                                           resources.title || ' '
+                                               || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                                               || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ||
+                                           ' '
+                                               || replace(array_to_string(resources.support_types, ' '), '_', ' ') ||
+                                           ' '
+                                               || resources.description || ' '
+                                                         )),
+                                   to_tsquery('french', unaccent(${searchTerm}))
+                           )                              AS rank,
+                           resources.created              AS created,
+                           resources.updated              AS updated,
+                           resources.published            AS published,
+                           resources.last_published       AS last_published,
+                           COUNT(DISTINCT resource_views.id)       AS views_count,
+                           COUNT(DISTINCT collection_resources.id) AS collections_count
+                    FROM resources
+                             /* Join user contributor only to have only one row per resource */
+                             /* Null will never match as contributor_id is not nullable */
+                             LEFT JOIN resource_contributors
+                                       ON resources.id = resource_contributors.resource_id AND
+                                          resource_contributors.contributor_id = ${userId}::uuid
+                             LEFT JOIN bases ON resources.base_id = bases.id
+                        /* Join base member only to have only one row per resource */
+                        /* Null will never match as member_id is not nullable */
+                             LEFT JOIN base_members
+                                       ON bases.id = base_members.base_id AND
+                                          base_members.member_id = ${userId}::uuid AND
+                                          base_members.accepted IS NOT NULL
+                             LEFT JOIN resource_views ON resource_views.resource_id = resources.id
+                             LEFT JOIN collection_resources ON collection_resources.resource_id = resources.id
+                    WHERE
+                        /* Resource status check */
+                        resources.deleted IS NULL
+                        /* Search term check */
+                      AND (
+                        ${searchTerm ?? ''} = ''
+                            OR to_tsvector('french', unaccent(
+                                resources.title || ' '
+                                    || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
+                                    || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
+                                    || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                                    || resources.description || ' '
+                                                     )) @@
+                               to_tsquery('french', unaccent(${searchTerm}))
+                        )
+                      AND (
+                        /* Authorization*/
+                        /* Resource is public  */
+                        resources.is_public = true
+                            /* Resource is private and user is creator */
+                            /* Null will never match as created_by_id is not nullable */
+                            OR resources.created_by_id = ${userId}::uuid
+                            /* User is contributor */
+                            OR resource_contributors.id IS NOT NULL
+                            /* User is member of base */
+                            OR base_members.id IS NOT NULL
+                        )
+                      AND (
+                        /* Unexisting base or base non deleted */
+                        bases.deleted IS NULL
+                        )
+                      AND (
+                        ${searchParams.themes.length === 0} OR
+                        resources.themes && ${enumArrayToSnakeCaseStringArray(
+                          searchParams.themes,
+                        )}::theme[]
+                        )
+                      AND (
+                        ${searchParams.supportTypes.length === 0} OR
+                        resources.support_types && ${enumArrayToSnakeCaseStringArray(
+                          searchParams.supportTypes,
+                        )}::support_type[]
+                        )
+                      AND (
+                        ${searchParams.targetAudiences.length === 0} OR
+                        resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
+                          searchParams.targetAudiences,
+                        )}::target_audience[]
+                        )
+                    GROUP BY resources.id)
+      SELECT *
+      FROM data
+      ORDER BY CASE
+                   /* This is the only ASC order, using publication date and fallback to created for drafts */
+                   WHEN ${paginationParams.sort === 'ancien'} THEN COALESCE(published, created)
+                   END ASC,
+               CASE
+                   /* Order by DESC the right data depending on the sort */
+                   WHEN ${paginationParams.sort === 'pertinence'} THEN rank
+                   WHEN ${paginationParams.sort === 'vues'} THEN views_count
+                   WHEN ${paginationParams.sort === 'enregistrements'} THEN collections_count
+                   END DESC,
+               CASE
+                   /* All these sort options use the most recent resources in case of equality */
+                   WHEN ${(['recent', 'pertinence', 'vues', 'enregistrements'] satisfies Sorting[] as Sorting[]).includes(paginationParams.sort)}
+                       THEN COALESCE(last_published, updated)
+                   END DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -203,40 +229,6 @@ export const rankResources = async (
   )
 
   return { searchResults, resultIndexById }
-}
-
-export const resourceOrderBySorting = (
-  sorting: Sorting,
-):
-  | undefined
-  | Prisma.ResourceOrderByWithRelationAndSearchRelevanceInput
-  | Prisma.ResourceOrderByWithRelationAndSearchRelevanceInput[] => {
-  if (sorting === 'recent') {
-    return [{ lastPublished: 'desc' }, { updated: 'desc' }]
-  }
-  if (sorting === 'ancien') {
-    return [
-      { lastPublished: { sort: 'asc', nulls: 'last' } },
-      { created: 'asc' },
-    ]
-  }
-  if (sorting === 'vues') {
-    return [
-      { views: { _count: 'desc' } },
-      { lastPublished: 'desc' },
-      { updated: 'desc' },
-    ]
-  }
-  if (sorting === 'enregistrements') {
-    return [
-      { collections: { _count: 'desc' } },
-      { lastPublished: 'desc' },
-      { updated: 'desc' },
-    ]
-  }
-
-  // No order by for 'pertinent' because rank from search query will be used
-  return undefined
 }
 
 export const searchResources = async (
@@ -257,12 +249,9 @@ export const searchResources = async (
       },
     },
     select: resourceListSelect(user),
-    orderBy: resourceOrderBySorting(paginationParams.sort),
   })
 
-  return paginationParams.sort === 'pertinence'
-    ? orderItemsByIndexMap(resources, resultIndexById)
-    : resources
+  return orderItemsByIndexMap(resources, resultIndexById)
 }
 
 export type SearchResourcesResult = Awaited<ReturnType<typeof searchResources>>

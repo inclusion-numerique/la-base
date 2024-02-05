@@ -23,7 +23,7 @@ import { useImageUpload } from '../../../hooks/useImageUpload'
 import Card from '../../Card'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
-import CollectionSideMenu from './SideMenu'
+import CreateCollectionSideMenu from './CreateCollectionSideMenu'
 import styles from './CreateCollection.module.css'
 
 const {
@@ -98,7 +98,7 @@ const CreateCollection = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classNames('fr-container', styles.container)}>
-        <CollectionSideMenu />
+        <CreateCollectionSideMenu />
         <div>
           <h1 className="fr-mb-6w">Créer une collection</h1>
           <Card

@@ -75,7 +75,7 @@ const InviteBaseMemberButton = ({
   const isLoading = mutate.isSuccess || mutate.isSuccess
 
   return (
-    <>
+    <div>
       <Button
         priority="secondary"
         iconId="fr-icon-user-add-line"
@@ -161,7 +161,7 @@ const InviteBaseMemberButton = ({
           </>
         </InviteModal>
       </form>
-    </>
+    </div>
   )
 }
 

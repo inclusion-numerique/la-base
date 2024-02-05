@@ -1,7 +1,7 @@
 import React from 'react'
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 
-const gouvernanceFormSections = [
+const profileSections = [
   { id: 'informations', title: 'Informations' },
   { id: 'contacts', title: 'Contacts' },
   { id: 'visibilite', title: 'Visibilité du profil' },
@@ -12,12 +12,12 @@ const ProfileEditionSideMenu = () => (
   <div className="fr-hidden fr-unhidden-lg fr-col-3">
     <div className="fr-width-full">
       <NavigationSideMenu
-        items={gouvernanceFormSections.map(({ id, title }) => ({
+        items={profileSections.map(({ id, title }) => ({
           text: title,
           linkProps: { href: `#${id}` },
         }))}
-        burgerMenuButtonText="Sections"
-        contentId="gouvernance-form"
+        burgerMenuButtonText="Contenus"
+        contentId="profile-edition-content"
         sticky
       />
     </div>

@@ -28,6 +28,7 @@ export const sorting = [
   'vues',
   'enregistrements',
   'suivis',
+  'ressources',
 ] as const
 export type Sorting = (typeof sorting)[number]
 
@@ -38,6 +39,7 @@ export const masculineSortingLabels: { [key in Sorting]: string } = {
   vues: 'Les plus vus',
   enregistrements: 'Les plus enregistrés',
   suivis: 'Les plus suivis',
+  ressources: 'Le plus de ressources',
 }
 
 export const feminineSortingLabels: { [key in Sorting]: string } = {
@@ -47,6 +49,7 @@ export const feminineSortingLabels: { [key in Sorting]: string } = {
   vues: 'Les plus vues',
   enregistrements: 'Les plus enregistrées',
   suivis: 'Les plus suivies',
+  ressources: 'Le plus de ressources',
 }
 
 export const resourcesSorting = [
@@ -62,6 +65,7 @@ export const profilesSorting = [
   'recent',
   'ancien',
   'suivis',
+  'ressources',
 ] as const satisfies Sorting[]
 
 export const basesSorting = profilesSorting

@@ -120,6 +120,10 @@
     flex-wrap: wrap;
 }
 
+.fr-flex-gap-0 {
+    gap: 0;
+}
+
 .fr-flex-gap-1v {
     gap: 4px;
 }
@@ -252,6 +256,10 @@
 
     .fr-flex-wrap-md {
         flex-wrap: wrap;
+    }
+
+    .fr-flex-gap-md-0 {
+        gap: 0;
     }
 
     .fr-flex-gap-md-1v {

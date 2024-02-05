@@ -1,46 +1,25 @@
 import React from 'react'
-import classNames from 'classnames'
-import SideMenu from '@codegouvfr/react-dsfr/SideMenu'
-import styles from './CreateBaseSideMenu.module.css'
+import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
+
+const baseSections = [
+  { id: 'informations', title: 'Informations' },
+  { id: 'contacts', title: 'Contacts' },
+  { id: 'visibilite', title: 'Visibilité de la base' },
+  { id: 'inviter', title: 'Inviter des membres' },
+  { id: 'photos', title: 'Photo de profil & courverture' },
+]
 
 const CreateBaseSideMenu = () => (
-  <div className={classNames(styles.container, 'fr-hidden', 'fr-unhidden-lg')}>
-    <div>
-      <SideMenu
+  <div className="fr-hidden fr-unhidden-lg fr-col-3">
+    <div className="fr-width-full">
+      <NavigationSideMenu
+        items={baseSections.map(({ id, title }) => ({
+          text: title,
+          linkProps: { href: `#${id}` },
+        }))}
         burgerMenuButtonText="Contenus"
+        contentId="create-base-content"
         sticky
-        items={[
-          {
-            text: 'Informations',
-            linkProps: {
-              href: '#informations',
-            },
-          },
-          {
-            text: 'Contacts',
-            linkProps: {
-              href: '#contacts',
-            },
-          },
-          {
-            text: 'Visibilité de la base',
-            linkProps: {
-              href: '#visibilite',
-            },
-          },
-          {
-            text: 'Inviter des membres',
-            linkProps: {
-              href: '#inviter',
-            },
-          },
-          {
-            text: 'Photo de profil & courverture',
-            linkProps: {
-              href: '#photos',
-            },
-          },
-        ]}
       />
     </div>
   </div>

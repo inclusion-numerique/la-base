@@ -18,16 +18,28 @@ const FollowsList = ({
   baseFollows,
   profileFollows,
   user,
+  isConnectedUser,
 }: {
   baseFollows: BaseFollowListItem[]
   profileFollows: ProfileFollowListItem
   user: SessionUser | null
+  isConnectedUser: boolean
 }) =>
   baseFollows.length === 0 && profileFollows.length === 0 ? (
-    <EmptyBox title="Vous ne suivez pas de base ni de profil">
-      Retrouvez vos bases et vos profils préféré(e)s ici en les suivant. Et
-      prochainement, vous pourrez voir l’ensemble des ressources qu’ils auront
-      publiés sur votre fil d’actualité personnalisé.
+    <EmptyBox
+      title={
+        isConnectedUser
+          ? 'Vous ne suivez pas de base ni de profil'
+          : 'Ce profil ne suit pas de base ou d’autres profils'
+      }
+    >
+      {isConnectedUser && (
+        <>
+          Retrouvez vos bases et vos profils préféré(e)s ici en les suivant. Et
+          prochainement, vous pourrez voir l’ensemble des ressources qu’ils
+          auront publiés sur votre fil d’actualité personnalisé.
+        </>
+      )}
       <div className="fr-mt-4w">
         <Link
           className="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-search-line fr-ml-2w"

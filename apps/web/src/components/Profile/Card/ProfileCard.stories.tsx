@@ -21,7 +21,7 @@ const profile = {
   ],
   resources: [
     {
-      id: 'b',
+      resourceId: 'b',
     },
   ],
   createdResources: [

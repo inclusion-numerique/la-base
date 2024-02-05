@@ -64,7 +64,7 @@ const ResourceView = ({
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
               <div className="fr-text--xs fr-mb-0 fr-flex">
-                <ResourceDates resource={resource} />
+                <ResourceDates canEdit={canEdit} resource={resource} />
               </div>
               {isAdmin && (
                 <ResourcePublicStateBadge small resource={resource} />

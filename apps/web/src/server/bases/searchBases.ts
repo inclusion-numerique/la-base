@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
@@ -29,7 +28,7 @@ export const countBases = async (
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-      SELECT count(*)::integer as count
+      SELECT COUNT(DISTINCT bases.id)::integer as count
       FROM bases
                /* Join base member only to have only one row per base */
                /* Null will never match as member_id is not nullable */
@@ -88,44 +87,72 @@ export const rankBases = async (
       rank_cd: number
     }[]
   >`
-      SELECT bases.id,
-             ts_rank_cd(to_tsvector('french', unaccent(bases.title)),
-                        to_tsquery('french', unaccent(${searchTerm}))) AS rank_title,
-             ts_rank_cd(to_tsvector('french', coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), '')),
-                        to_tsquery('french', unaccent(${searchTerm}))) AS rank_description
-      FROM bases
-               /* Join base member only to have only one row per base */
-               /* Null will never match as member_id is not nullable */
-               LEFT JOIN base_members
-                         ON bases.id = base_members.base_id AND base_members.member_id = ${userId}::uuid AND
-                            base_members.accepted IS NOT NULL
-      WHERE
-          /* base status check */
-          bases.deleted IS NULL
-          /* Search term check */
-        AND (
-          ${searchTerm ?? ''} = ''
-              OR to_tsvector('french', unaccent(bases.title || ' ' ||
-                                                coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
-                                                         ''))) @@
-                 to_tsquery('french', unaccent(${searchTerm}))
-          )
-        AND (
-          /* Authorization*/
-          /* Base is public  */
-          bases.is_public = true
-              /* Base is private and user is owner */
-              /* Null will never match as owner_id is not nullable */
-              OR bases.owner_id = ${userId}::uuid
-              /* User is member of base */
-              OR base_members.id IS NOT NULL
-          )
-        AND (
-          ${searchParams.departements.length === 0}
-              OR bases.department = ANY (${searchParams.departements}::text[])
-          )
-      /* Order by updated desc to have most recent first on empty query */
-      ORDER BY rank_title DESC, rank_description DESC, bases.created DESC
+      WITH data AS (SELECT bases.id                                                  AS id,
+                           bases.slug                                                AS slug,
+                           bases.created                                             AS created,
+                           COUNT(DISTINCT base_follows.id)                           AS follows_count,
+                           COUNT(DISTINCT resources.id)                              AS resources_count,
+                           ts_rank_cd(to_tsvector('french', unaccent(bases.title)),
+                                      to_tsquery('french', unaccent(${searchTerm}))) AS rank_title,
+                           ts_rank_cd(to_tsvector('french',
+                                                  coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), '')),
+                                      to_tsquery('french', unaccent(${searchTerm}))) AS rank_description
+                    FROM bases
+                             /* Join base member only to have only one row per base */
+                             /* Null will never match as member_id is not nullable */
+                             LEFT JOIN base_members
+                                       ON bases.id = base_members.base_id AND
+                                          base_members.member_id = ${userId}::uuid AND
+                                          base_members.accepted IS NOT NULL
+                             LEFT JOIN base_follows ON bases.id = base_follows.base_id
+                             LEFT JOIN resources ON bases.id = resources.base_id AND
+                                                    resources.deleted IS NULL AND
+                                                    resources.is_public = true AND
+                                                    resources.published IS NOT NULL
+                    WHERE
+                        /* base status check */
+                        bases.deleted IS NULL
+                        /* Search term check */
+                      AND (
+                        ${searchTerm ?? ''} = ''
+                            OR to_tsvector('french', unaccent(bases.title || ' ' ||
+                                                              coalesce(
+                                                                      regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
+                                                                      ''))) @@
+                               to_tsquery('french', unaccent(${searchTerm}))
+                        )
+                      AND (
+                        /* Authorization*/
+                        /* Base is public  */
+                        bases.is_public = true
+                            /* Base is private and user is owner */
+                            /* Null will never match as owner_id is not nullable */
+                            OR bases.owner_id = ${userId}::uuid
+                            /* User is member of base */
+                            OR base_members.id IS NOT NULL
+                        )
+                      AND (
+                        ${searchParams.departements.length === 0}
+                            OR bases.department = ANY (${searchParams.departements}::text[])
+                        )
+                    GROUP BY bases.id)
+      SELECT *
+      FROM data
+      ORDER BY CASE
+                   /* This is the only ASC order */
+                   WHEN ${paginationParams.sort === 'ancien'} THEN created
+                   END ASC,
+               CASE
+                   /* Order by DESC the right data depending on the sort */
+                   WHEN ${paginationParams.sort === 'pertinence'} THEN ((8 * rank_title) + rank_description)
+                   WHEN ${paginationParams.sort === 'suivis'} THEN follows_count
+                   WHEN ${paginationParams.sort === 'ressources'} THEN resources_count
+                   END DESC,
+               CASE
+                   /* All these sort options use the most recent in case of equality */
+                   WHEN ${(['recent', 'pertinence', 'suivis', 'ressources'] satisfies Sorting[] as Sorting[]).includes(paginationParams.sort)}
+                       THEN created
+                   END DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
         (paginationParams.page - 1) * paginationParams.perPage
       };
@@ -139,26 +166,6 @@ export const rankBases = async (
     searchResults,
     resultIndexById,
   }
-}
-
-export const baseOrderBySorting = (
-  sorting: Sorting,
-):
-  | undefined
-  | Prisma.BaseOrderByWithRelationAndSearchRelevanceInput
-  | Prisma.BaseOrderByWithRelationAndSearchRelevanceInput[] => {
-  if (sorting === 'recent') {
-    return { created: 'desc' }
-  }
-  if (sorting === 'ancien') {
-    return { created: 'asc' }
-  }
-  if (sorting === 'suivis') {
-    return [{ followedBy: { _count: 'desc' } }, { created: 'desc' }]
-  }
-
-  // No order by for 'pertinent' because rank from search query will be used
-  return undefined
 }
 
 export const searchBases = async (
@@ -179,12 +186,9 @@ export const searchBases = async (
       },
     },
     select: baseSelect(user),
-    orderBy: baseOrderBySorting(paginationParams.sort),
   })
 
-  return paginationParams.sort === 'pertinence'
-    ? orderItemsByIndexMap(bases, resultIndexById)
-    : bases
+  return orderItemsByIndexMap(bases, resultIndexById)
 }
 
 export type SearchBasesResult = Awaited<ReturnType<typeof searchBases>>

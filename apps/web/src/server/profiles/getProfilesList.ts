@@ -52,7 +52,7 @@ export const profileListSelect = (user: { id: string } | null) =>
     },
     resources: {
       select: {
-        id: true,
+        resourceId: true,
       },
       where: {
         resource: {

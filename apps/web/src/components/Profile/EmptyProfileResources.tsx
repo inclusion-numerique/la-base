@@ -10,7 +10,7 @@ const EmptyProfileResources = ({
   <EmptyBox
     title={
       isConnectedUser
-        ? 'Vous n’avez pas encore créé de ressources.'
+        ? 'Vous n’avez pas encore créé de ressources'
         : `Aucune ressource n'est actuellement publiée sur ce profil`
     }
   >

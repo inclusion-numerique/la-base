@@ -93,6 +93,8 @@ export const baseSelect = (user: { id: string } | null) =>
         resources: {
           where: {
             deleted: null,
+            published: { not: null },
+            isPublic: true,
           },
         },
         followedBy: true,
