@@ -60,16 +60,8 @@ export const countResources = async (
                  to_tsquery('french', unaccent(${searchTerm}))
           )
         AND (
-          /* Authorization*/
           /* Resource is public  */
           resources.is_public = true
-              /* Resource is private and user is creator */
-              /* Null will never match as created_by_id is not nullable */
-              OR resources.created_by_id = ${userId}::uuid
-              /* User is contributor */
-              OR resource_contributors.id IS NOT NULL
-              /* User is member of base */
-              OR base_members.id IS NOT NULL
           )
         AND (
           /* Unexisting base or base non deleted */
@@ -168,16 +160,8 @@ export const rankResources = async (
                                to_tsquery('french', unaccent(${searchTerm}))
                         )
                       AND (
-                        /* Authorization*/
                         /* Resource is public  */
                         resources.is_public = true
-                            /* Resource is private and user is creator */
-                            /* Null will never match as created_by_id is not nullable */
-                            OR resources.created_by_id = ${userId}::uuid
-                            /* User is contributor */
-                            OR resource_contributors.id IS NOT NULL
-                            /* User is member of base */
-                            OR base_members.id IS NOT NULL
                         )
                       AND (
                         /* Unexisting base or base non deleted */
