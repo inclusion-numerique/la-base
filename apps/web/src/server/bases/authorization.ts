@@ -12,6 +12,7 @@ export type FilteredBase = Pick<
   | 'image'
   | 'coverImage'
   | 'followedBy'
+  | 'emailIsPublic'
 > &
   Pick<BaseListItem, '_count'>
 
@@ -42,7 +43,7 @@ export const filterAccess = (
         ? base
         : {
             ...base,
-            email: base.emailIsPublic ? base.email : '',
+            email: base.email,
           },
     }
   }
@@ -58,7 +59,8 @@ export const filterAccess = (
       isPublic: base.isPublic,
       image: base.image,
       coverImage: base.coverImage,
-      email: base.emailIsPublic ? base.email : '',
+      email: base.email,
+      emailIsPublic: base.emailIsPublic,
       followedBy: base.followedBy,
       _count: {
         resources: base.resources.length,

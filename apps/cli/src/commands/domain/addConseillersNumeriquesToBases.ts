@@ -31,6 +31,10 @@ export const addConseillersNumeriquesToBases = new Command(
       throw new Error('Contribution base not found')
     }
 
+    output(
+      `Found contribution base ${contributionBase.slug} (${contributionBase.id})`,
+    )
+
     // Conseillers numeriques will follow this base
     const conseillersBase = await prismaClient.base.findUnique({
       where: {
@@ -45,6 +49,10 @@ export const addConseillersNumeriquesToBases = new Command(
     if (!conseillersBase) {
       throw new Error('Conseillers base not found')
     }
+
+    output(
+      `Found conseillers base ${conseillersBase.slug} (${conseillersBase.id})`,
+    )
 
     const conseillersNumeriques = await prismaClient.user.findMany({
       where: {
@@ -63,6 +71,7 @@ export const addConseillersNumeriquesToBases = new Command(
           select: {
             id: true,
             baseId: true,
+            followed: true,
           },
         },
         bases: {
@@ -72,6 +81,7 @@ export const addConseillersNumeriquesToBases = new Command(
           select: {
             baseId: true,
             id: true,
+            added: true,
             accepted: true,
           },
         },
@@ -82,15 +92,17 @@ export const addConseillersNumeriquesToBases = new Command(
 
     const timestamp = new Date()
 
+    const conseillersWithoutFollow = conseillersNumeriques.filter(
+      ({ baseFollows }) => baseFollows.length === 0,
+    )
+
     // Creating follows
     const follows = await prismaClient.baseFollow.createMany({
-      data: conseillersNumeriques
-        .filter(({ baseFollows }) => baseFollows.length === 0)
-        .map(({ id }) => ({
-          followerId: id,
-          baseId: conseillersBase.id,
-          followed: timestamp,
-        })),
+      data: conseillersWithoutFollow.map(({ id }) => ({
+        followerId: id,
+        baseId: conseillersBase.id,
+        followed: timestamp,
+      })),
     })
 
     output(`Created ${follows.count} follows`)

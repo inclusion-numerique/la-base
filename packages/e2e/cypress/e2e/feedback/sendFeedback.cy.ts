@@ -33,12 +33,14 @@ describe('Utilisateur, je peux donner mon avis', () => {
       // Click on first radio button
       cy.findByLabelText('Avez-vous rencontré des difficultés ? *')
         .find('label')
-        .first()
+        .last()
         .click()
 
       cy.findByLabelText(/souhaitez-vous nous en dire davantage ?/i).type(
         'd’avantage',
       )
+
+      cy.findByLabelText(/adresse email de contact */i).type('test@test.com')
 
       cy.findByRole('button', { name: /envoyer/i }).click()
     })

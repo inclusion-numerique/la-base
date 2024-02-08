@@ -1,8 +1,7 @@
 import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import React, { useEffect, useState } from 'react'
-import { maximumFileSizeInBytes } from '@app/ui/components/Form/utils/fileValidation.server'
-import { formatByteSize } from '@app/ui/utils/formatByteSize'
+import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
 import * as Sentry from '@sentry/nextjs'
 import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
 import {
@@ -98,9 +97,7 @@ const FileContentEdition = ({
         )}
         <FileUploadForm
           label={fileInfo ? 'Remplacer le fichier' : 'Ajouter un fichier'}
-          fileFieldHint={`Taille maximale : ${formatByteSize(
-            maximumFileSizeInBytes,
-          )}. Tous les formats sont supportés.`}
+          fileFieldHint={fileUploadHint}
           fileUpload={fileUpload}
           control={control}
           path="uploadFile"

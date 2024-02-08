@@ -30,7 +30,10 @@ const BaseCollectionsPage = async ({
             </div>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Pas de collections enregistrées dans cette base" />
+          <EmptyBox title="Cette base n’a pas créé de collections">
+            Revenez plus tard ou suivez cette base afin d’être tenu informé de
+            ses prochaines publications.
+          </EmptyBox>
         )
       }
       emptySavedBox={
@@ -40,7 +43,10 @@ const BaseCollectionsPage = async ({
             apparaîtra ici.
           </EmptyBox>
         ) : (
-          <EmptyBox title="Pas de collections enregistrées dans cette base" />
+          <EmptyBox title="Cette base n’a pas enregistré de collections">
+            Revenez plus tard ou suivez cette base afin d’être tenu informé de
+            ses prochaines publications.
+          </EmptyBox>
         )
       }
     />

@@ -1,7 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import React, { useEffect, useState } from 'react'
-import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import * as Sentry from '@sentry/nextjs'
 import ImageContentDetails from '@app/web/components/Resource/Contents/ImageContentDetails'
 import {
@@ -13,10 +12,7 @@ import { ContentProjectionWithContext } from '@app/web/server/resources/getResou
 import { trpc } from '@app/web/trpc'
 import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
-import {
-  imageAllowedExtensions,
-  imageMaxSize,
-} from '@app/web/server/rpc/image/imageValidation'
+import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import styles from './ImageContentEdition.module.css'
 
 const titleInfo = (title?: string | null) =>
@@ -104,9 +100,7 @@ const ImageContentEdition = ({
         )}
         <FileUploadForm
           label={imageInfo ? "Remplacer l'image" : 'Ajouter une image'}
-          fileFieldHint={`Taille maximale : ${formatByteSize(
-            imageMaxSize,
-          )}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`}
+          fileFieldHint={imageUploadHint}
           fileUpload={imageUpload}
           path="imageUploadFile"
           control={control}

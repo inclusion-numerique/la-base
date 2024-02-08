@@ -23,7 +23,9 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
       collections={collections}
       savedCollections={savedCollections.map(({ collection }) => collection)}
       withCreation={authorizations.isUser}
-      collectionsLabel="Mes collections"
+      collectionsLabel={
+        authorizations.isUser ? 'Mes collections' : 'Collections du profil'
+      }
       emptyBox={
         authorizations.isUser ? (
           <EmptyBox title="Vous n’avez pas crée de collections">
@@ -38,7 +40,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
             </Link>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Ce profil n’a pas crée de collections">
+          <EmptyBox title="Ce profil n’a pas créé de collections">
             Revenez plus tard ou suivez ce profil afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>

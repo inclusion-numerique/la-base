@@ -76,6 +76,9 @@ export const countResources = async (
           bases.deleted IS NULL
           )
         AND (
+          resources.published IS NOT NULL
+          )
+        AND (
           ${searchParams.themes.length === 0} OR
           resources.themes && ${enumArrayToSnakeCaseStringArray(
             searchParams.themes,
@@ -182,6 +185,9 @@ export const rankResources = async (
                       AND (
                         /* Unexisting base or base non deleted */
                         bases.deleted IS NULL
+                        )
+                      AND (
+                        resources.published IS NOT NULL
                         )
                       AND (
                         ${searchParams.themes.length === 0} OR

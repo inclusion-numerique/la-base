@@ -3,6 +3,10 @@ import { formatByteSize } from '@app/ui/utils/formatByteSize'
 
 export const maximumFileSizeInBytes = 100_000_000
 
+export const fileUploadHint: string = `Taille maximale : ${formatByteSize(
+  maximumFileSizeInBytes,
+)}. Tous les formats sont supportés.`
+
 export const fileMimeTypeValidation = (
   allowedTypes: string[],
   message?: string,

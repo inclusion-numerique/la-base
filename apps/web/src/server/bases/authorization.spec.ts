@@ -52,7 +52,6 @@ describe('Base authorization', () => {
       expect(authorizations.base).toEqual({
         ...publicBase,
         emailIsPublic: false,
-        email: '',
       })
     })
 
@@ -77,6 +76,7 @@ describe('Base authorization', () => {
       title: privateBase.title,
       isPublic: privateBase.isPublic,
       email: privateBase.email,
+      emailIsPublic: privateBase.emailIsPublic,
       image: null,
       coverImage: null,
       followedBy: [],
@@ -138,7 +138,7 @@ describe('Base authorization', () => {
       )
       expect(authorizations.base).toEqual({
         ...filteredBase,
-        email: '',
+        emailIsPublic: false,
       })
     })
 

@@ -119,8 +119,8 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     )
   })
 
-  it('Acceptation 4 - Resource dans un profil privée', () => {
-    cleanUpAndCreateTestResourceInProfile()
+  it.only('Acceptation 4 - Resource dans un profil privée', () => {
+    cleanUpAndCreateTestResourceInProfile(false)
     cy.testId('publish-resource-button').click()
 
     cy.testId('indexation-box').should('not.exist')

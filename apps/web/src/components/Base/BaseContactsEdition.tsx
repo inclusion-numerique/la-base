@@ -24,7 +24,7 @@ const BaseContactsEdition = ({
       <CheckboxFormField
         control={form.control}
         path="emailIsPublic"
-        label="Rendre publique cette information"
+        label="Je veux pouvoir être contacté par les visiteurs de la plateforme"
         disabled={form.formState.isSubmitting}
       />
     </div>

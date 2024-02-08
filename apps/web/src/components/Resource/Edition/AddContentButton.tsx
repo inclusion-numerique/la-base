@@ -6,6 +6,8 @@ import { useOnClickOutside } from 'usehooks-ts'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { ContentType } from '@prisma/client'
 import classNames from 'classnames'
+import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
+import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import styles from './AddContentButton.module.css'
 
 const contents = [
@@ -18,13 +20,13 @@ const contents = [
     type: 'File',
     image: '/images/add-file.svg',
     label: 'Fichier',
-    description: 'Taille maximale : 20 Mo. Tout formats acceptés.',
+    description: fileUploadHint,
   },
   {
     type: 'Image',
     image: '/images/add-image.svg',
     label: 'Image',
-    description: 'Taille maximale : 20 Mo. Formats : jpg, png, pdf..',
+    description: imageUploadHint,
   },
   {
     type: 'Link',

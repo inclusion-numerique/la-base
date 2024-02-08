@@ -36,23 +36,25 @@ const BaseHeader = ({
             Modifier la base
           </Link>
         ) : (
-          <div className={styles.buttons}>
-            <FollowButton followPriority="primary" user={user} base={base} />
-            {base.email && (
-              <Link
-                className="fr-btn--sm fr-btn fr-btn--secondary fr-icon-mail-line fr-btn--icon-left"
-                href={`mailto:${base.email}`}
+          base.isPublic && (
+            <div className={styles.buttons}>
+              <FollowButton followPriority="primary" user={user} base={base} />
+              {!!base.email && base.emailIsPublic && (
+                <Link
+                  className="fr-btn--sm fr-btn fr-btn--secondary fr-icon-mail-line fr-btn--icon-left"
+                  href={`mailto:${base.email}`}
+                >
+                  Contacter
+                </Link>
+              )}
+              <CopyLinkButton
+                url={getServerUrl(`/bases/${base.slug}`, true)}
+                priority="secondary"
               >
-                Contacter
-              </Link>
-            )}
-            <CopyLinkButton
-              url={getServerUrl(`/bases/${base.slug}`, true)}
-              priority="secondary"
-            >
-              Partager
-            </CopyLinkButton>
-          </div>
+                Partager
+              </CopyLinkButton>
+            </div>
+          )
         )}
       </div>
     </div>

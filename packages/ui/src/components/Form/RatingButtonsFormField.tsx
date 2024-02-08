@@ -89,6 +89,7 @@ const RatingButtonsFormField = <T extends FieldValues>({
                 {ratings.map((rating) => (
                   <Button
                     id={`${id}__${rating.value}`}
+                    className="fr-border-radius--8"
                     size="small"
                     key={rating.value}
                     type="button"

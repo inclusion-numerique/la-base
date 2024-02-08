@@ -567,12 +567,6 @@ jobs:
             pnpm --silent cli dotenv:from-cdk web
       - add_dotenv_vars_to_bash_env
       - run:
-          name: 'Add connection pool parameters to database URL'
-          # https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#disabling-the-pool-timeout
-          command: |
-            echo "DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> .env
-            echo "export DATABASE_URL='$DATABASE_URL?connection_limit=50&pool_timeout=0'" >> ${BASH_ENV}
-      - run:
           name: Set deployment status to migration
           command: pnpm --silent cli github:deployment:update $DEPLOYMENT_ID in_progress -d 'Executing database migrations' -l https://app.circleci.com/pipelines/workflows/$CIRCLE_WORKFLOW_ID
       - when:

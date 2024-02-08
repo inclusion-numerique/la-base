@@ -13,6 +13,7 @@ export type FilteredProfile = Pick<
   | 'image'
   | 'followedBy'
   | '_count'
+  | 'emailIsPublic'
 >
 
 export const filterAccess = (
@@ -46,6 +47,7 @@ export const filterAccess = (
       image: profile.image,
       isPublic: profile.isPublic,
       email: profile.email,
+      emailIsPublic: profile.emailIsPublic,
       followedBy: profile.followedBy,
       _count: {
         followedBy: profile._count.followedBy,

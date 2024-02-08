@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { Controller, useForm, UseFormReturn } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
 import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
@@ -30,7 +29,6 @@ import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
 import Card from '../../Card'
 import InviteUsers from '../../InviteUsers'
-import styles from './CreateBase.module.css'
 
 const {
   Component: CancelModal,
@@ -134,10 +132,10 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classNames('fr-container', styles.container)}>
+      <div className="fr-container fr-flex">
         <CreateBaseSideMenu />
         <div>
-          <h1 className="fr-mb-6w">Créer une base</h1>
+          <h1 className="fr-page-title">Créer une base</h1>
           <Card
             title="Informations"
             className="fr-mt-3w"
@@ -196,7 +194,6 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               )}
             />
           </Card>
-
           <Card
             className="fr-mt-3w"
             id="photos"
@@ -236,40 +233,44 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               )}
             />
           </Card>
+
+          <ButtonsGroup
+            className="fr-mt-3w"
+            buttons={[
+              {
+                nativeButtonProps: { 'data-testid': 'create-button' },
+                type: 'submit',
+                children: 'Créer la base',
+                ...buttonLoadingClassname(isLoading),
+              },
+              {
+                nativeButtonProps: { 'data-testid': 'cancel-button' },
+                type: 'button',
+                children: 'Annuler',
+                priority: 'secondary',
+                ...cancelModalNativeButtonProps,
+              },
+            ]}
+          />
+          <CancelModal
+            title="Annuler la création de la base"
+            buttons={[
+              {
+                priority: 'secondary',
+                children: 'Revenir à la création',
+                type: 'button',
+                onClick: closeCancelModal,
+                nativeButtonProps: { 'data-testid': 'back-modal-button' },
+              },
+              {
+                children: <div data-testid="cancel-modal-button">Annuler</div>,
+                linkProps: { href: `/profils/${user.slug}/bases` },
+              },
+            ]}
+          >
+            Êtes-vous sûr de vouloir annuler la création votre base ?
+          </CancelModal>
         </div>
-      </div>
-      <div className={styles.buttons}>
-        <Button
-          data-testid="cancel-button"
-          priority="secondary"
-          {...cancelModalNativeButtonProps}
-        >
-          Annuler
-        </Button>
-        <Button
-          data-testid="create-button"
-          type="submit"
-          {...buttonLoadingClassname(isLoading)}
-        >
-          Créer la base
-        </Button>
-        <CancelModal
-          title="Annuler la création de la base"
-          buttons={[
-            {
-              priority: 'secondary',
-              children: 'Revenir à la création',
-              onClick: closeCancelModal,
-              nativeButtonProps: { 'data-testid': 'back-modal-button' },
-            },
-            {
-              children: <div data-testid="cancel-modal-button">Annuler</div>,
-              linkProps: { href: '/' },
-            },
-          ]}
-        >
-          Êtes-vous sûr de vouloir annuler la création votre base ?
-        </CancelModal>
       </div>
     </form>
   )

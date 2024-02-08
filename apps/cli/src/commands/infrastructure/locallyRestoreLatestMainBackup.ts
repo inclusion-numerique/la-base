@@ -6,13 +6,15 @@ import { createWriteStream } from 'node:fs'
 import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
+import { varDirectory } from '@app/config/varDirectory'
+import { createVarDirectory } from '@app/config/createVarDirectory'
+import { prismaClient } from '@app/web/prismaClient'
 import { output } from '@app/cli/output'
 
 const exec = promisify(callbackExec)
 
-const downloadDirectory = pathResolve(__dirname, '../../../../../var')
 const mainBackupFile = pathResolve(
-  downloadDirectory,
+  varDirectory,
   `${process.env.BACKUP_DATABASE_NAME}_backup.dump.sql`,
 )
 
@@ -73,10 +75,6 @@ export const locallyRestoreLatestMainBackup = new Command(
         throw new Error(`Missing env var ${key}`)
       }
     }
-
-    // Replace database (path) with "postgres" for connecting to the postgres database and execute admin commands
-    const posgresDatabaseUrl = new URL(databaseUrl)
-    posgresDatabaseUrl.pathname = '/postgres'
 
     const client = axios.create({
       baseURL: 'https://api.scaleway.com/rdb/v1/regions/fr-par',
@@ -154,6 +152,8 @@ export const locallyRestoreLatestMainBackup = new Command(
     output(`Backup is ready for download at ${latestBackup.download_url}`)
     output(`Downloading backup to ${mainBackupFile}`)
 
+    createVarDirectory()
+
     const downloadResponse = await axios.get<NodeJS.ReadableStream>(
       latestBackup.download_url,
       {
@@ -171,21 +171,47 @@ export const locallyRestoreLatestMainBackup = new Command(
       writeStream.on('error', reject)
     })
 
-    output('Closing connections to database')
+    output('Clearing database tables and enum types before loading data')
 
-    await exec(
-      `psql ${posgresDatabaseUrl.toString()} -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${database}' AND pid <> pg_backend_pid();"`,
-    )
+    const tables = await prismaClient.$queryRaw<
+      { tablename: string }[]
+    >` SELECT tablename
+       FROM pg_tables
+       WHERE schemaname = current_schema()`
 
-    output('Dropping and recreating database')
+    if (tables.length > 0) {
+      await prismaClient.$queryRawUnsafe(
+        `DROP TABLE IF EXISTS "${tables
+          .map(({ tablename }) => tablename)
+          .join('", "')}" CASCADE`,
+      )
+    }
 
-    await exec(
-      `psql ${posgresDatabaseUrl.toString()} -c 'DROP DATABASE IF EXISTS "${database}";'`,
-    )
+    const enums = await prismaClient.$queryRaw<
+      {
+        schema: string
+        name: string
+      }[]
+    >`
+        SELECT n.nspname as schema, t.typname as name
+        FROM pg_type t
+                 LEFT JOIN pg_enum e ON t.oid = e.enumtypid
+                 LEFT JOIN pg_catalog.pg_namespace n ON n.oid = t.typnamespace
+        WHERE pg_catalog.pg_type_is_visible(t.oid)
+          AND n.nspname = current_schema()
+          AND t.typcategory = 'E'
+        GROUP BY schema, name
+    `
 
-    await exec(
-      `psql ${posgresDatabaseUrl.toString()} -c 'CREATE DATABASE "${database}";'`,
-    )
+    // Delete all enum types
+    if (enums.length > 0) {
+      for (const { name } of enums) {
+        // eslint-disable-next-line no-await-in-loop
+        await prismaClient.$queryRawUnsafe(
+          `DROP TYPE IF EXISTS "${name}" CASCADE`,
+        )
+      }
+    }
 
     output('Restoring database from backup file')
     await exec(
@@ -197,8 +223,8 @@ export const locallyRestoreLatestMainBackup = new Command(
 
     output(`Granting all privileges to "${user}" role`)
     await exec(
-      `psql ${posgresDatabaseUrl.toString()} -c 'GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";'`,
+      `psql ${databaseUrl} -c 'GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";'`,
     )
 
-    output(`Restoring database to ${host}/${database} for "${user}" role`)
+    output(`Restored database to ${host}/${database} for "${user}" role`)
   })

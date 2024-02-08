@@ -26,7 +26,7 @@ const HomeCategories = async () => {
           Découvrez les ressources grâce aux thématiques
         </h3>
         <p className="fr-text--xl fr-mb-12v">
-          Découvrez les ressources publiées grâce aux thématiques organisés en{' '}
+          Découvrez les ressources publiées grâce aux thématiques organisées en{' '}
           {categories.length} grandes catégories.
         </p>
       </div>

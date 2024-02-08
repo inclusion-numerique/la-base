@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { createToast } from '@app/ui/toast/createToast'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
@@ -24,7 +24,6 @@ import Card from '../../Card'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CreateCollectionSideMenu from './CreateCollectionSideMenu'
-import styles from './CreateCollection.module.css'
 
 const {
   Component: CancelModal,
@@ -97,10 +96,10 @@ const CreateCollection = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classNames('fr-container', styles.container)}>
+      <div className="fr-container fr-flex">
         <CreateCollectionSideMenu />
         <div>
-          <h1 className="fr-mb-6w">Créer une collection</h1>
+          <h1 className="fr-page-title">Créer une collection</h1>
           <Card
             title="Informations"
             className="fr-mt-3w"
@@ -160,40 +159,43 @@ const CreateCollection = ({
               />
             )}
           </Card>
+          <ButtonsGroup
+            className="fr-mt-3w"
+            buttons={[
+              {
+                nativeButtonProps: { 'data-testid': 'create-button' },
+                type: 'submit',
+                children: 'Créer la collection',
+                ...buttonLoadingClassname(isLoading),
+              },
+              {
+                nativeButtonProps: { 'data-testid': 'cancel-button' },
+                type: 'button',
+                children: 'Annuler',
+                priority: 'secondary',
+                ...cancelModalNativeButtonProps,
+              },
+            ]}
+          />
+          <CancelModal
+            title="Annuler la création de la collection"
+            buttons={[
+              {
+                priority: 'secondary',
+                children: 'Revenir à la création',
+                type: 'button',
+                onClick: closeCancelModal,
+                nativeButtonProps: { 'data-testid': 'back-modal-button' },
+              },
+              {
+                children: <div data-testid="cancel-modal-button">Annuler</div>,
+                linkProps: { href: `/profils/${user.slug}/collections` },
+              },
+            ]}
+          >
+            Êtes-vous sûr de vouloir annuler la création votre collection ?
+          </CancelModal>
         </div>
-      </div>
-      <div className={styles.buttons}>
-        <Button
-          data-testid="cancel-button"
-          priority="secondary"
-          {...cancelModalNativeButtonProps}
-        >
-          Annuler
-        </Button>
-        <Button
-          data-testid="create-button"
-          type="submit"
-          className={classNames(isLoading && 'fr-btn--loading')}
-        >
-          Créer la collection
-        </Button>
-        <CancelModal
-          title="Annuler la création de la collection"
-          buttons={[
-            {
-              priority: 'secondary',
-              children: 'Revenir à la création',
-              onClick: closeCancelModal,
-              nativeButtonProps: { 'data-testid': 'back-modal-button' },
-            },
-            {
-              children: <div data-testid="cancel-modal-button">Annuler</div>,
-              linkProps: { href: '/' },
-            },
-          ]}
-        >
-          Êtes-vous sûr de vouloir annuler la création votre collection ?
-        </CancelModal>
       </div>
     </form>
   )

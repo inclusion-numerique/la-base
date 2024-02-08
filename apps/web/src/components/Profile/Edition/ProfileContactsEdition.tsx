@@ -119,7 +119,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             control={form.control}
             path="emailIsPublic"
             disabled={form.formState.isSubmitting}
-            label="Rendre publique cette information"
+            label="Je veux pouvoir être contacté par les visiteurs de la plateforme"
           />
           <InputFormField
             data-testid="profile-website-input"

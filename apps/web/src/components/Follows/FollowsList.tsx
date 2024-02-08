@@ -30,7 +30,7 @@ const FollowsList = ({
       title={
         isConnectedUser
           ? 'Vous ne suivez pas de base ni de profil'
-          : 'Ce profil ne suit pas de base ou d’autres profils'
+          : 'Ce profil ne suit pas de bases ou d’autres profils'
       }
     >
       {isConnectedUser && (

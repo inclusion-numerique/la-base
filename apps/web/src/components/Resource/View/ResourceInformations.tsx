@@ -6,7 +6,7 @@ import ResourceIndexationView from './ResourceIndexationView'
 const ResourceInformations = ({ resource }: { resource: Resource }) => (
   <>
     <h6 id="informations" className={styles.title}>
-      Informations sur la resource
+      Informations sur la ressource
     </h6>
     <ResourceIndexationView
       resource={resource}

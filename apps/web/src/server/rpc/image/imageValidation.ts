@@ -6,7 +6,7 @@ import {
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
 
-export const imageMaxSize = 5_000_000
+export const imageMaxSize = 10_000_000
 export const imageAllowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp']
 
 export const imageAllowedExtensions = imageAllowedMimeTypes.map(
