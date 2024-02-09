@@ -16,12 +16,16 @@ const getWhereBasesList = (
       user
         ? {
             OR: [
-              // Public
-              whereBaseIsPublic,
               // Created by user
               { createdById: user.id },
-              // user is member,
-              { members: { some: { memberId: user.id } } },
+              // user has accepted to be member
+              {
+                members: {
+                  some: {
+                    AND: [{ memberId: user.id }, { accepted: { not: null } }],
+                  },
+                },
+              },
             ],
           }
         : whereBaseIsPublic,
@@ -40,16 +44,6 @@ const getWhereBasesProfileList = (
       { members: { some: { memberId: profileId } } },
     ],
   })
-
-const getWhereBasesQuery = (
-  query?: string,
-): Prisma.BaseWhereInput | undefined => {
-  if (!query) {
-    return undefined
-  }
-
-  return { title: { contains: query, mode: 'insensitive' } }
-}
 
 export const getProfileBasesCount = async (
   profileId: string,
@@ -112,37 +106,6 @@ export const getProfileBases = async (
     where,
   })
 }
-
-export const getBases = async ({
-  user,
-  query,
-  take,
-  skip,
-}: {
-  user?: Pick<SessionUser, 'id'> | null
-  query?: string
-  take?: number
-  skip?: number
-}) => {
-  const where = getWhereBasesList(user, getWhereBasesQuery(query))
-  return prismaClient.base.findMany({
-    select: baseSelect(user ?? null),
-    where,
-    take,
-    skip,
-  })
-}
-
-export const getBasesCount = ({
-  user,
-  query,
-}: {
-  user?: Pick<SessionUser, 'id'> | null
-  query?: string
-}) =>
-  prismaClient.base.count({
-    where: getWhereBasesList(user, getWhereBasesQuery(query)),
-  })
 
 export type BaseListItem = Exclude<
   Awaited<ReturnType<typeof getProfileBases>>,

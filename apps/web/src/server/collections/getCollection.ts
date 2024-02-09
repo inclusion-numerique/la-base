@@ -14,6 +14,7 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
     slug: true,
     description: true,
     isPublic: true,
+    deleted: true,
     image: {
       select: {
         id: true,

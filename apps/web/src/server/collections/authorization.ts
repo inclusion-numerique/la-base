@@ -1,34 +1,44 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
+import {
+  CollectionRole,
+  CollectionRoles,
+  getCollectionRoles,
+} from '../../authorization/models/collectionAuthorization'
 import { CollectionPageData } from './getCollection'
 
 export type FilteredCollection = Pick<CollectionPageData, 'title'>
 
+type AccessGranted = {
+  authorized: true
+  collection: CollectionPageData
+  canUpdate: boolean
+}
+
+type AccessDenied = {
+  authorized: false
+  base: FilteredCollection
+}
+
+const authorizedRoles = new Set([
+  CollectionRoles.CollectionCreator,
+  CollectionRoles.CollectionContributor,
+])
+
+const hasAuthorizedRole = (roles: CollectionRole[]) =>
+  roles.some((role) => authorizedRoles.has(role))
+
 export const filterAccess = (
   collection: CollectionPageData,
   user: SessionUser | null,
-):
-  | {
-      authorized: true
-      collection: CollectionPageData
-      isOwner: boolean
-    }
-  | {
-      authorized: false
-      base: FilteredCollection
-    } => {
-  const isOwner = !!user && collection.createdBy.id === user.id
-  if (collection.isPublic || isOwner) {
-    return {
-      authorized: true,
-      isOwner,
-      collection,
-    }
-  }
+): AccessGranted | AccessDenied => {
+  const canUpdate = hasAuthorizedRole(
+    getCollectionRoles(
+      { ...collection, createdById: collection.createdBy.id },
+      user,
+    ),
+  )
 
-  return {
-    authorized: false,
-    base: {
-      title: collection.title,
-    },
-  }
+  return collection.isPublic || canUpdate
+    ? { authorized: true, canUpdate, collection }
+    : { authorized: false, base: { title: collection.title } }
 }

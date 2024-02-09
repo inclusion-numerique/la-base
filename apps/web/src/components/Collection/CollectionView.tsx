@@ -15,11 +15,11 @@ import styles from './CollectionView.module.css'
 const CollectionView = ({
   collection,
   user,
-  isOwner,
+  canUpdate,
 }: {
   collection: Omit<CollectionPageData, 'image'> & WithMinimalImageData
   user: SessionUser | null
-  isOwner: boolean
+  canUpdate: boolean
 }) => (
   <div className="fr-width-full">
     <OwnershipInformation
@@ -57,7 +57,7 @@ const CollectionView = ({
           isPublic: collection.isPublic,
         }}
         count={collection.resources.length}
-        isOwner={isOwner}
+        canUpdate={canUpdate}
         priority="secondary"
         context="view"
       />

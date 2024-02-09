@@ -91,7 +91,7 @@ export const resourceRouter = router({
           }
         } else {
           const authorizations = filterCollectionAccess(collection, user)
-          if (!authorizations.authorized || !authorizations.isOwner) {
+          if (!authorizations.authorized || !authorizations.canUpdate) {
             throw forbiddenError()
           }
         }
@@ -155,7 +155,7 @@ export const resourceRouter = router({
           }
         } else {
           const authorizations = filterCollectionAccess(collection, user)
-          if (!authorizations.authorized || !authorizations.isOwner) {
+          if (!authorizations.authorized || !authorizations.canUpdate) {
             throw forbiddenError()
           }
         }

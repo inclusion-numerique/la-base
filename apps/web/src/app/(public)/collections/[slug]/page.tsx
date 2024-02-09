@@ -16,20 +16,10 @@ export const generateMetadata = async ({
   params: { slug: string }
 }): Promise<Metadata> => {
   const collection = await prismaClient.collection.findUnique({
-    where: {
-      slug,
-    },
-    select: {
-      title: true,
-    },
+    where: { slug },
+    select: { title: true },
   })
-  if (!collection) {
-    notFound()
-  }
-
-  return {
-    title: metadataTitle(collection.title),
-  }
+  return collection ? { title: metadataTitle(collection.title) } : notFound()
 }
 
 const CollectionPage = async ({ params }: { params: { slug: string } }) => {
@@ -51,7 +41,7 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
           <CollectionView
             collection={collection}
             user={user}
-            isOwner={authorizations.isOwner}
+            canUpdate={authorizations.canUpdate}
           />
         ) : (
           <div className="fr-container fr-container--medium fr-my-4w">

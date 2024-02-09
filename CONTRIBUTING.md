@@ -51,6 +51,15 @@ Créer le fichier `.env` contenant les variables d'environnement à partir de [.
 cp .env.dist .env
 ```
 
+Pour pouvoir récupérer les mails émis par l'application dans le service d'interception des mails `MailDev`, il faut modifier la configuration suivante :
+
+```
+SMTP_SERVER=localhost
+SMTP_PORT=1025
+SMTP_USERNAME=mailuser
+SMTP_PASSWORD=mailpassword
+```
+
 ### 5. Démarrer les services de mail et de base de données en local
 
 #### Avec Docker
