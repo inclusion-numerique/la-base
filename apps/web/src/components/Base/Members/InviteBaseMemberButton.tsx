@@ -89,7 +89,7 @@ const InviteBaseMemberButton = ({
       <form onSubmit={form.handleSubmit(onInvit)}>
         <InviteModal
           title="Inviter des membres"
-          className={classNames(styles.modal, 'overflowModal')}
+          className={classNames(styles.modal, 'fr-modal--overflow-visible')}
           buttons={[
             {
               iconId: 'fr-icon-user-setting-line',

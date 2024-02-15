@@ -336,17 +336,12 @@
 
 /* With overflow */
 
-.overflowModal {
+.fr-modal--overflow-visible {
   .fr-container {
     overflow: visible !important;
   }
 
   .fr-modal__body {
     overflow: visible !important;
-  }
-
-  .fr-modal__content {
-    padding-bottom: 40px;
-    margin-bottom: 40px;
   }
 }

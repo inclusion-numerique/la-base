@@ -182,7 +182,7 @@ workflows:
       - prepare_workspace_dependencies
       - backup_main_database:
           backup_type: hourly
-          expires_in_days: 7
+          expires_in_days: 4
           requires:
             - prepare_workspace_dependencies
 

@@ -31,7 +31,8 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       buttonRef.current?.click()
     }
   }
-  const onClickOutsideDropdown = (event: MouseEvent) => {
+
+  useOnClickOutside(collapseRef, (event) => {
     // Let the event propagate if clicked on the control button
     if (event.target === buttonRef?.current) {
       return
@@ -43,8 +44,7 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
     }
 
     buttonRef.current.click()
-  }
-  useOnClickOutside(collapseRef, onClickOutsideDropdown)
+  })
 
   const menuContent = (
     <ul className="fr-menu__list">
