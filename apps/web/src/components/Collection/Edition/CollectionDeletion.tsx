@@ -31,7 +31,7 @@ const CollectionDeletion = ({
   const handleDeleteCollection = async () => {
     try {
       await mutation.mutateAsync({ id: collection.id })
-      router.push(`/profils/${collection.owner.slug}/collections`)
+      router.push(`/profils/${collection.createdBy.slug}/collections`)
       router.refresh()
       createToast({
         priority: 'success',

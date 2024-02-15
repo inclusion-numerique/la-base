@@ -151,7 +151,7 @@ const ResourceEdition = ({
 
   const onPublish = async () => {
     if (publishMode) {
-      publicationForm.handleSubmit(async (data: PublishCommand) => {
+      await publicationForm.handleSubmit(async (data: PublishCommand) => {
         try {
           const result = await sendCommand(data)
           router.refresh()

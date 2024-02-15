@@ -112,11 +112,6 @@ export type ContentProjectionWithContextImage = Exclude<
   null
 >
 
-export type ContentProjectionWithContextFile = Exclude<
-  ContentProjectionWithContext['file'],
-  null
->
-
 export const getResourceProjectionWithContext = async (
   where: { slug: string } | { id: string },
 ): Promise<ResourceProjectionWithContext | null> => {

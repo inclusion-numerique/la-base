@@ -111,7 +111,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
   describe('Modification de la visibilité', () => {
     it('Acceptation 5 - Modification de la visibilité', () => {
       cleanUpAndCreateTestPublishedResource({
-        signinAsResourceOwner: true,
+        signinAsResourceCreator: true,
         publicBase: true,
         additionalSetup: ({ base, user }) => {
           const id = v4()
@@ -146,7 +146,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
 
     it('Acceptation 6 - Modification de la visibilité avec ressource publique', () => {
       cleanUpAndCreateTestPublishedResource({
-        signinAsResourceOwner: true,
+        signinAsResourceCreator: true,
         publicBase: true,
         publicResource: true,
         visitResourcePage: true,

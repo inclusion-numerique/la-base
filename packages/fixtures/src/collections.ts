@@ -7,7 +7,7 @@ const favoritesCollections = users.map(
       id: user.id,
       title: 'Mes favoris',
       slug: `${user.slug}-favoris`,
-      ownerId: user.id,
+      createdById: user.id,
       isPublic: false,
       isFavorites: true,
     }) satisfies Prisma.CollectionCreateManyInput,

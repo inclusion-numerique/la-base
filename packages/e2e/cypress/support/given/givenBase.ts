@@ -19,7 +19,7 @@ export const defaultTestBaseSlug = createSlug(defaultTestBaseTitle)
 
 export const givenBase = (
   data: Partial<Omit<CreateBaseInput, 'members'>> & {
-    ownerId: string
+    createdById: string
     isPublic: boolean
   },
   { acceptedMemberIds }: { acceptedMemberIds?: string[] } = {},
@@ -32,7 +32,7 @@ export const givenBase = (
       data.titleDuplicationCheckSlug ??
       createSlug(data.title ?? defaultTestBaseTitle),
     description: defaultTestBaseDescription,
-    ownerId: data.ownerId,
+    createdById: data.createdById,
     isPublic: data.isPublic,
     email: defaultTestBaseEmail,
     emailIsPublic: true,
@@ -41,10 +41,10 @@ export const givenBase = (
     department: data.department,
     deleted: data.deleted,
     members: {
-      // Owner is always admin
+      // Creator always have automatically created admin membre
       create: [
         {
-          memberId: data.ownerId,
+          memberId: data.createdById,
           isAdmin: true,
           accepted: new Date('2022-01-01'),
         },

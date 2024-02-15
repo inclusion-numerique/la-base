@@ -20,7 +20,7 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
 
   it('Acceptation 1 - Je ne peux pas signaler de resource si je ne suis pas connecté', () => {
     const user = givenUser()
-    const base = givenBase({ ownerId: user.id, isPublic: true })
+    const base = givenBase({ createdById: user.id, isPublic: true })
     const resourceId = v4()
     const commands = createTestResourceCommands({
       baseId: base.id,
@@ -39,7 +39,7 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
 
   it('Acceptation 2 - Je peux signaler une resource, et le modérateur est prévenu', () => {
     const user = givenUser()
-    const base = givenBase({ ownerId: user.id, isPublic: true })
+    const base = givenBase({ createdById: user.id, isPublic: true })
     const resourceId = v4()
     const commands = createTestResourceCommands({
       baseId: base.id,

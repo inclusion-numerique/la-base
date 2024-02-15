@@ -110,7 +110,7 @@ describe('baseRouter', () => {
           data: {
             ...givenBase,
             isPublic: true,
-            ownerId: givenUserId,
+            createdById: givenUserId,
             email: givenUserEmail,
             collections: {
               createMany: {
@@ -122,7 +122,7 @@ describe('baseRouter', () => {
                       givenPublicCollection.slug,
                       'collections',
                     ),
-                    ownerId: givenUserId,
+                    createdById: givenUserId,
                     isPublic: true,
                   },
                   {
@@ -132,7 +132,7 @@ describe('baseRouter', () => {
                       givenPrivateCollection.slug,
                       'collections',
                     ),
-                    ownerId: givenUserId,
+                    createdById: givenUserId,
                     isPublic: false,
                   },
                 ],

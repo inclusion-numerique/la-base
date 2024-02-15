@@ -1,5 +1,8 @@
 import { z } from 'zod'
-import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.server'
+import {
+  fileValidation,
+  maximumFileSizeInBytes,
+} from '@app/ui/components/Form/utils/fileValidation.server'
 import { prismaClient } from '@app/web/prismaClient'
 import {
   createSignedGetUrl,
@@ -19,7 +22,7 @@ export const uploadRouter = router({
     .input(
       z.object({
         file: fileValidation({
-          maxSizeInBytes: 20_000_000,
+          maxSizeInBytes: maximumFileSizeInBytes,
         }),
       }),
     )

@@ -18,7 +18,7 @@ export const cleanUpAndCreateTestResource = (
 ) => {
   cy.execute('deleteAllData', {})
   const user = givenUser()
-  const base = givenBase({ ownerId: user.id, isPublic: !!publicBase })
+  const base = givenBase({ createdById: user.id, isPublic: !!publicBase })
   const commands = createTestResourceCommands({
     baseId: base.id,
   })
@@ -41,12 +41,12 @@ export const cleanUpAndCreateTestPublishedResource = ({
   publicResource,
   visitResourcePage,
   additionalSetup,
-  signinAsResourceOwner,
+  signinAsResourceCreator,
 }: {
   visitResourcePage?: boolean
   publicBase?: boolean
   publicResource?: boolean
-  signinAsResourceOwner?: boolean
+  signinAsResourceCreator?: boolean
   additionalSetup?: ({
     user,
     base,
@@ -57,7 +57,7 @@ export const cleanUpAndCreateTestPublishedResource = ({
 }) => {
   cy.execute('deleteAllData', {})
   const user = givenUser()
-  const base = givenBase({ ownerId: user.id, isPublic: !!publicBase })
+  const base = givenBase({ createdById: user.id, isPublic: !!publicBase })
   const resourceId = v4()
   const commands = createTestResourceCommands({
     baseId: base.id,
@@ -65,7 +65,7 @@ export const cleanUpAndCreateTestPublishedResource = ({
   })
   commands.push(createTestPublishResourceCommand(resourceId, publicResource))
 
-  if (signinAsResourceOwner) {
+  if (signinAsResourceCreator) {
     cy.createUserAndSignin(user)
   } else {
     cy.createUser(user)
@@ -113,7 +113,7 @@ export const cleanUpAndCreateTestResourceInProfile = (
 
   let base: CreateBaseInput | undefined
   if (withBase) {
-    base = givenBase({ ownerId: user.id, isPublic: false })
+    base = givenBase({ createdById: user.id, isPublic: false })
     cy.createBase(base)
   }
 
@@ -142,7 +142,7 @@ export const cleanUp = (userData?: Partial<CreateUserInput>) => {
 export const cleanUpAndCreateTestBase = (publicBase?: boolean) => {
   cy.execute('deleteAllData', {})
   const user = givenUser()
-  const base = givenBase({ ownerId: user.id, isPublic: !!publicBase })
+  const base = givenBase({ createdById: user.id, isPublic: !!publicBase })
 
   cy.createUserAndSignin(user)
   cy.createBase(base)
@@ -158,7 +158,7 @@ export const cleanUpAndCreateTestBaseAsMember = (publicBase?: boolean) => {
   const admin = givenUser()
   const user = givenUser()
   const base = givenBase(
-    { ownerId: admin.id, isPublic: !!publicBase },
+    { createdById: admin.id, isPublic: !!publicBase },
     { acceptedMemberIds: [user.id] },
   )
 
@@ -237,7 +237,7 @@ export const cleanUpAndCreateTestCollectionAndResource = (
   if (withBases) {
     const baseWithoutCollection = givenBase({
       title: 'Base sans collections',
-      ownerId: user.id,
+      createdById: user.id,
       isPublic: false,
     })
 
@@ -245,7 +245,7 @@ export const cleanUpAndCreateTestCollectionAndResource = (
     const baseWithCollection = givenBase(
       {
         title: 'Base avec collections',
-        ownerId: otherUser.id,
+        createdById: otherUser.id,
         isPublic: false,
       },
       { acceptedMemberIds: [user.id] },
@@ -254,7 +254,7 @@ export const cleanUpAndCreateTestCollectionAndResource = (
     baseWithCollection.slug = v4()
     ids.baseWithCollection = baseWithCollection.slug
     const otherBaseWithCollection = givenBase({
-      ownerId: otherUser.id,
+      createdById: otherUser.id,
       isPublic: false,
     })
     otherBaseWithCollection.slug = v4()
@@ -266,19 +266,19 @@ export const cleanUpAndCreateTestCollectionAndResource = (
 
     collections.push(
       givenCollection({
-        ownerId: user.id,
+        createdById: user.id,
         baseId: baseWithCollection.id,
         isPublic: true,
         title: 'Première collection',
       }),
       givenCollection({
-        ownerId: user.id,
+        createdById: user.id,
         baseId: baseWithCollection.id,
         isPublic: true,
         title: 'Seconde collection',
       }),
       givenCollection({
-        ownerId: otherUser.id,
+        createdById: otherUser.id,
         baseId: otherBaseWithCollection.id,
         isPublic: true,
         title: 'Collection dans une autre base',
@@ -293,12 +293,12 @@ export const cleanUpAndCreateTestCollectionAndResource = (
   if (withCollection) {
     collections.push(
       givenCollection({
-        ownerId: user.id,
+        createdById: user.id,
         isPublic: true,
         title: 'Collection sur mon profil avec un titre long',
       }),
       givenCollection({
-        ownerId: otherUser.id,
+        createdById: otherUser.id,
         isPublic: true,
         title: 'Collection sur le profil de quelqu’un d’autre',
       }),

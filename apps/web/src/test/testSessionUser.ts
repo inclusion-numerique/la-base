@@ -7,6 +7,7 @@ export const testSessionUser = {
   lastName: 'Biche',
   name: 'Jean Biche',
   slug: 'jean-biche',
+  role: 'User',
   image: null,
   legacyId: null,
   updated: new Date('2023-05-05').toISOString(),
@@ -20,4 +21,4 @@ export const testSessionUser = {
   resources: [],
   collections: [],
   savedCollections: [],
-} satisfies SessionUser
+} as const satisfies SessionUser

@@ -19,9 +19,13 @@ const getWhereBasesList = (
               // Public
               whereBaseIsPublic,
               // Created by user
-              { ownerId: user.id },
+              { createdById: user.id },
               // user is member,
-              { members: { some: { memberId: user.id } } },
+              {
+                members: {
+                  some: { memberId: user.id, accepted: { not: null } },
+                },
+              },
             ],
           }
         : whereBaseIsPublic,
@@ -36,7 +40,7 @@ const getWhereBasesProfileList = (
 ) =>
   getWhereBasesList(user, {
     OR: [
-      { ownerId: profileId },
+      { createdById: profileId },
       { members: { some: { memberId: profileId } } },
     ],
   })

@@ -26,7 +26,7 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     twitter: true,
     website: true,
     isPublic: true,
-    owner: {
+    createdBy: {
       select: {
         id: true,
         slug: true,

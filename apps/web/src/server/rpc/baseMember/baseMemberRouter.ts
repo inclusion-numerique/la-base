@@ -58,7 +58,7 @@ export const baseMemberRouter = router({
           sendInviteMemberEmail({
             baseTitle: base.title,
             from: user,
-            url: `/bases/${base.slug}/invitations/accepter/${acceptationToken}`,
+            url: `/invitations/base/${acceptationToken}`,
             email: member.email,
           }).catch((error) => Sentry.captureException(error))
         }

@@ -136,7 +136,7 @@ describe('profileRouter', () => {
         data: {
           ...givenBase,
           isPublic: true,
-          ownerId: givenUserId,
+          createdById: givenUserId,
           email: givenUserEmail,
           collections: {
             createMany: {
@@ -148,7 +148,7 @@ describe('profileRouter', () => {
                     givenPublicCollectionInBase.title,
                     'bases',
                   ),
-                  ownerId: givenUserId,
+                  createdById: givenUserId,
                   isPublic: true,
                 },
               ],
@@ -166,7 +166,7 @@ describe('profileRouter', () => {
               givenPublicCollection.title,
               'collections',
             ),
-            ownerId: givenUserId,
+            createdById: givenUserId,
             isPublic: true,
           },
           {
@@ -176,7 +176,7 @@ describe('profileRouter', () => {
               givenPrivateCollection.title,
               'collections',
             ),
-            ownerId: givenUserId,
+            createdById: givenUserId,
             isPublic: false,
           },
         ],
@@ -400,7 +400,7 @@ describe('profileRouter', () => {
       })
 
       const bases = await prismaClient.base.findMany({
-        where: { ownerId: givenUserId },
+        where: { createdById: givenUserId },
       })
 
       const resources = await prismaClient.resource.findMany({
@@ -412,14 +412,14 @@ describe('profileRouter', () => {
 
       const collections = await prismaClient.collection.findMany({
         where: {
-          ownerId: givenUserId,
+          createdById: givenUserId,
           savedCollection: { none: {} },
           baseId: null,
         },
       })
       const collectionsInBase = await prismaClient.collection.findMany({
         where: {
-          ownerId: givenUserId,
+          createdById: givenUserId,
           savedCollection: { none: {} },
           baseId: { not: null },
         },

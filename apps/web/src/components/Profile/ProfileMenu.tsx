@@ -86,14 +86,16 @@ const ProfileMenu = ({
             >
               {isConnectedUser ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
             </MenuItem>
-            <MenuItem
-              tab="suivis"
-              currentTab={currentTab}
-              href={`/profils/${profile.slug}/suivis`}
-            >
-              {isConnectedUser ? 'Mes suivis' : 'Suivis'} ·{' '}
-              <b>{followsCount}</b>
-            </MenuItem>
+            {isConnectedUser && (
+              <MenuItem
+                tab="suivis"
+                currentTab={currentTab}
+                href={`/profils/${profile.slug}/suivis`}
+              >
+                {isConnectedUser ? 'Mes suivis' : 'Suivis'} ·{' '}
+                <b>{followsCount}</b>
+              </MenuItem>
+            )}
             <MenuItem
               tab="a-propos"
               currentTab={currentTab}

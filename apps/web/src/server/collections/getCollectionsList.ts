@@ -19,9 +19,9 @@ export const computeCollectionsListWhereForUser = (
               // Public
               whereCollectionIsPublic,
               // Created by user
-              { ownerId: user.id },
+              { createdById: user.id },
               // In base owned by user
-              { base: { ownerId: user.id } },
+              { base: { createdById: user.id } },
               // In base where user is active member
               {
                 base: {
@@ -48,7 +48,7 @@ export const getWhereCollectionsProfileList = (
   user?: Pick<SessionUser, 'id'> | null,
 ) =>
   computeCollectionsListWhereForUser(user, {
-    ownerId: profileId,
+    createdById: profileId,
     baseId: null,
   })
 
@@ -86,7 +86,7 @@ export const collectionSelect = {
       altText: true,
     },
   },
-  owner: {
+  createdBy: {
     select: {
       id: true,
       slug: true,

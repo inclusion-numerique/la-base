@@ -50,9 +50,9 @@ export const countBases = async (
           /* Authorization*/
           /* Base is public  */
           bases.is_public = true
-              /* Base is private and user is owner */
-              /* Null will never match as owner_id is not nullable */
-              OR bases.owner_id = ${userId}::uuid
+              /* Base is private and user is creator */
+              /* Null will never match as created_by_id is not nullable */
+              OR bases.created_by_id = ${userId}::uuid
               /* User is member of base */
               OR base_members.id IS NOT NULL
           )
@@ -125,9 +125,9 @@ export const rankBases = async (
                         /* Authorization*/
                         /* Base is public  */
                         bases.is_public = true
-                            /* Base is private and user is owner */
-                            /* Null will never match as owner_id is not nullable */
-                            OR bases.owner_id = ${userId}::uuid
+                            /* Base is private and user is creator */
+                            /* Null will never match as created_by_id is not nullable */
+                            OR bases.created_by_id = ${userId}::uuid
                             /* User is member of base */
                             OR base_members.id IS NOT NULL
                         )

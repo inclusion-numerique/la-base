@@ -16,7 +16,7 @@ export const filterAccess = (
       authorized: false
       base: FilteredCollection
     } => {
-  const isOwner = !!user && collection.owner.id === user.id
+  const isOwner = !!user && collection.createdBy.id === user.id
   if (collection.isPublic || isOwner) {
     return {
       authorized: true,

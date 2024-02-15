@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import {
   getProfileBaseFollows,
   getProfileProfileFollows,
@@ -18,13 +19,14 @@ const ProfileSuivisPage = async ({ params }: ProfilRouteParams) => {
     getProfileProfileFollows(profile.id),
   ])
 
-  return (
+  return authorizations.isUser ? (
     <FollowsList
       user={user}
-      isConnectedUser={authorizations.isUser}
       profileFollows={profileFollows}
       baseFollows={baseFollows}
     />
+  ) : (
+    notFound()
   )
 }
 

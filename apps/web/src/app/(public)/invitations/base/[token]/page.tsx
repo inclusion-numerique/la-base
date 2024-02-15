@@ -1,32 +1,26 @@
 import { notFound, redirect } from 'next/navigation'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getInvitation } from '@app/web/server/baseMembers/getInvitation'
+import { getBaseInvitation } from '@app/web/server/baseMembers/getBaseInvitation'
 import { acceptInvitation } from '@app/web/server/baseMembers/acceptInvitation'
 
 const AcceptBaseInvitation = async ({
   params,
 }: {
-  params: { slug: string; token: string }
+  params: { token: string }
 }) => {
   const user = await getSessionUser()
   if (!user) {
-    redirect(
-      `/connexion?suivant=/bases/${params.slug}/invitations/accepter/${params.token}`,
-    )
+    redirect(`/connexion?suivant=/invitations/base/${params.token}`)
   }
 
-  const invitation = await getInvitation(
-    decodeURI(params.slug),
-    decodeURI(params.token),
-    user,
-  )
+  const invitation = await getBaseInvitation(decodeURI(params.token), user)
 
   if (!invitation) {
     notFound()
   }
 
   await acceptInvitation(invitation.id)
-  redirect(`/bases/${params.slug}`)
+  redirect(`/bases/${invitation.base.slug}`)
 }
 
 export default AcceptBaseInvitation

@@ -9,7 +9,7 @@ const CollectionBreadcrumbs = ({
     title: string
     slug: string
     base: { title: string; slug: string } | null
-    owner: { name: string | null; slug: string }
+    createdBy: { name: string | null; slug: string }
   }
   currentChildPage?: string
 }) => {
@@ -26,12 +26,14 @@ const CollectionBreadcrumbs = ({
       ]
     : [
         {
-          label: collection.owner.name || 'Profil anonyme',
-          linkProps: { href: `/profils/${collection.owner.slug}` },
+          label: collection.createdBy.name || 'Profil anonyme',
+          linkProps: { href: `/profils/${collection.createdBy.slug}` },
         },
         {
           label: 'Collections',
-          linkProps: { href: `/profils/${collection.owner.slug}/collections` },
+          linkProps: {
+            href: `/profils/${collection.createdBy.slug}/collections`,
+          },
         },
       ]
 

@@ -8,7 +8,10 @@ export const defaultTestCollectionDescription =
   "<p>Vous êtes fatigué de naviguer sur Internet sans but ?</p><p>Vous vous sentez submergé par le déluge constant d'informations numériques? Ne cherchez plus! Notre liste de ressources sur le numérique est la panacée que vous attendiez tous ! Préparez-vous à une transformation totale de votre vie grâce à ces ressources inestimables.</p>"
 
 export const givenCollection = (
-  data: Partial<CreateCollectionInput> & { ownerId: string; isPublic: boolean },
+  data: Partial<CreateCollectionInput> & {
+    createdById: string
+    isPublic: boolean
+  },
 ) =>
   ({
     id: data.id ?? v4(),

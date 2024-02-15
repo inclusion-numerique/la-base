@@ -37,7 +37,7 @@ export const reportRouter = router({
         })
 
         // There will be an email sent to the sentBy user
-        // There will be an email sent to the resource owner ?
+        // There will be an email sent to the resource creator ?
 
         await sendResourceReportModeratorEmail({
           report,

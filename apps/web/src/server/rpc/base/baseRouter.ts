@@ -41,7 +41,7 @@ export const baseRouter = router({
           excerpt: generateBaseExcerpt(input.description),
           slug,
           titleDuplicationCheckSlug: slug,
-          ownerId: user.id,
+          createdById: user.id,
           members: {
             create: [
               { memberId: user.id, isAdmin: true },
@@ -59,7 +59,7 @@ export const baseRouter = router({
           sendInviteMemberEmail({
             baseTitle: input.title,
             from: user,
-            url: `/bases/${slug}/invitations/accepter/${tokens[member.id]}`,
+            url: `/invitations/base/${tokens[member.id]}`,
             email: member.email,
           }),
         ),

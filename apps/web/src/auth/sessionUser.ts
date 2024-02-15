@@ -40,6 +40,7 @@ export type SessionUser = Pick<
   | 'email'
   | 'isPublic'
   | 'legacyId'
+  | 'role'
 > & {
   image: {
     id: string

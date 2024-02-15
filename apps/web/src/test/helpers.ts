@@ -14,6 +14,7 @@ export const createTestUser = (publicProfile?: boolean) =>
     lastName: 'Biche',
     slug: 'jean-biche',
     name: 'Jean Biche',
+    role: 'User',
     image: null,
     emailVerified: '2023-04-01',
     isPublic: publicProfile || false,
@@ -59,7 +60,7 @@ export const testResourceDescription =
   "Le quartet mythique de Coltrane, alors en pleine maturité, était sur le chemin d'une inéluctable séparation2. Deux autres versions de Acknowledgement ont été enregistrées le lendemain (le 10 décembre 1964) avec le saxophoniste ténor Archie Shepp et le bassiste Art Davis. L'unique version enregistrée en direct de la suite A Love Supreme date du 26 juillet 1965 lors du festival d'Antibes, et a été publiée officiellement par Impulse! avec l'album original3."
 
 export const createTestResource = (
-  owner: SessionUser,
+  createdBy: SessionUser,
   isPublic?: boolean,
   base?: BasePageData,
   contributor?: SessionUser,
@@ -80,15 +81,15 @@ export const createTestResource = (
     imageId: null,
     image: null,
     createdBy: {
-      isPublic: owner.isPublic,
-      name: owner.name,
-      id: owner.id,
-      slug: owner.slug,
-      lastName: owner.lastName,
-      firstName: owner.firstName,
+      isPublic: createdBy.isPublic,
+      name: createdBy.name,
+      id: createdBy.id,
+      slug: createdBy.slug,
+      lastName: createdBy.lastName,
+      firstName: createdBy.firstName,
       image: null,
     },
-    createdById: owner.id,
+    createdById: createdBy.id,
     baseId: base ? base.id : null,
     collections: [],
     base: base
@@ -119,7 +120,7 @@ export const createTestResource = (
   }) satisfies Resource | BasePageData['resources'][number]
 
 export const createTestBase = (
-  owner: SessionUser,
+  createdBy: SessionUser,
   isPublic: boolean,
   admins: SessionUser[],
   members: SessionUser[],
@@ -131,7 +132,7 @@ export const createTestBase = (
     slug: 'conseiller-numérique-france-services-contributions',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas cursus ante non laoreet dictum. Sed tempus ultrices arcu ut auctor. Phasellus porta sapien varius dapibus porttitor. Fusce porttitor molestie nisi, a maximus augue tempus a. Praesent ut dictum risus. Mauris hendrerit luctus massa. Aenean felis turpis, facilisis eget porttitor at, tempor ut quam.',
-    owner: { id: owner.id, slug: owner.slug },
+    createdBy: { id: createdBy.id, slug: createdBy.slug },
     isPublic: isPublic || false,
     email: 'test@mail.fr',
     emailIsPublic: true,
@@ -197,8 +198,8 @@ export const createTestBase = (
   return {
     ...base,
     resources: [
-      createTestResource(owner, true, base),
-      createTestResource(owner, true, base),
+      createTestResource(createdBy, true, base),
+      createTestResource(createdBy, true, base),
     ],
   } satisfies BasePageData
 }

@@ -15,7 +15,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 
@@ -50,7 +50,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
   it('Acceptation 2 - Visiteur sur une ressource privée', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
     cy.logout()
@@ -84,7 +84,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 
@@ -120,7 +120,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
   it('Acceptation 4 - Utilisateur connecté sur une ressource privée', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 
@@ -156,7 +156,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: false,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 
@@ -188,7 +188,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cy.createUserAndSignin(member)
 
     const base = givenBase(
-      { ownerId: creator.id, isPublic: false },
+      { createdById: creator.id, isPublic: false },
       { acceptedMemberIds: [member.id] },
     )
     const id = v4()
@@ -228,7 +228,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: false,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
     const contributor = givenUser()

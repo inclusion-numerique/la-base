@@ -43,10 +43,11 @@ const ImageContentDetails = ({
           id={id}
           alt={imageAltText ?? altText ?? ''}
           breakpoints={[
+            { media: '(min-width: 768px)', width: 620 - 32 },
+            { media: '(min-width: 620px)', width: 800 - 32 },
+            { media: '(min-width: 576px)', width: 620 - 32 },
+            { media: '(min-width: 320px)', width: 576 - 32 },
             { media: '(max-width: 320px)', width: 320 - 32 },
-            { media: '(max-width: 576px)', width: 576 - 32 },
-            { media: '(max-width: 768px)', width: 768 - 32 },
-            { media: '(min-width: 768px)', width: 588 },
           ]}
         />
       </div>

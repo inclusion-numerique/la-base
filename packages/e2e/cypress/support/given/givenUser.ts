@@ -21,6 +21,7 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
     firstName,
     lastName,
     name,
+    role: 'User',
     // eslint-disable-next-line no-plusplus
     slug,
     emailVerified: new Date('2023-04-01'),

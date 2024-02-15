@@ -9,7 +9,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
     beforeEach(() => {
       cy.execute('deleteAllData', {})
       const user = givenUser()
-      const base = givenBase({ ownerId: user.id, isPublic: false })
+      const base = givenBase({ createdById: user.id, isPublic: false })
       const [creationCommand] = createTestResourceCommands({ baseId: base.id })
 
       cy.createUserAndSignin(user)

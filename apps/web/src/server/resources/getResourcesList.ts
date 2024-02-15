@@ -72,7 +72,7 @@ export const resourceListSelect = (user: { id: string } | null) =>
       },
       where: {
         collection: {
-          ownerId: user?.id,
+          createdById: user?.id,
         },
       },
     },

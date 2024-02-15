@@ -19,7 +19,7 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
   it('Acceptation 1 : ouverture de la modale d’enregistrement depuis une carte collection et impossibilité d’enregistrer sa propre collection sans base', () => {
     const user = givenUser()
     const collection = givenCollection({
-      ownerId: user.id,
+      createdById: user.id,
       isPublic: true,
       title: 'Collection sur mon profil avec un titre long',
     })
@@ -52,7 +52,7 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       })
       const visitor = givenUser()
       const collection = givenCollection({
-        ownerId: creator.id,
+        createdById: creator.id,
         isPublic: true,
         title: 'Collection sur mon profil avec un titre long',
       })
@@ -116,12 +116,12 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       lastName: 'Dupont',
     })
     const collection = givenCollection({
-      ownerId: creator.id,
+      createdById: creator.id,
       isPublic: true,
       title: 'Collection sur mon profil avec un titre long',
     })
     const base = givenBase({
-      ownerId: creator.id,
+      createdById: creator.id,
       isPublic: false,
     })
     cy.createUserAndSignin(creator)
@@ -170,8 +170,11 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       firstName: 'Michel',
       lastName: 'Dupont',
     })
-    const collection = givenCollection({ ownerId: creator.id, isPublic: true })
-    const base = givenBase({ ownerId: visitor.id, isPublic: false })
+    const collection = givenCollection({
+      createdById: creator.id,
+      isPublic: true,
+    })
+    const base = givenBase({ createdById: visitor.id, isPublic: false })
 
     cy.createUser(creator)
     cy.createUserAndSignin(visitor)
@@ -210,10 +213,13 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
       firstName: 'Michel',
       lastName: 'Dupont',
     })
-    const collection = givenCollection({ ownerId: creator.id, isPublic: true })
+    const collection = givenCollection({
+      createdById: creator.id,
+      isPublic: true,
+    })
     const base = givenBase(
       {
-        ownerId: creator.id,
+        createdById: creator.id,
         isPublic: false,
         savedCollections: {
           create: {

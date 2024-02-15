@@ -75,7 +75,7 @@ export const collectionRouter = router({
           data: {
             ...collectionData,
             slug,
-            ownerId: user.id,
+            createdById: user.id,
             resources: addResourceId
               ? {
                   create: {

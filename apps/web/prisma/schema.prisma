@@ -42,13 +42,22 @@ model Session {
   @@map("sessions")
 }
 
+enum UserRole {
+  User    @map("user")
+  Support @map("support")
+  Admin   @map("admin")
+
+  @@map("user_role")
+}
+
 model User {
-  id        String  @id @default(uuid()) @db.Uuid
-  slug      String  @unique
-  legacyId  Int?    @unique @map("legacy_id")
-  firstName String? @map("first_name")
-  lastName  String? @map("last_name")
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique
+  legacyId  Int?     @unique @map("legacy_id")
+  firstName String?  @map("first_name")
+  lastName  String?  @map("last_name")
   name      String?
+  role      UserRole @default(User)
 
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
@@ -86,7 +95,7 @@ model User {
   profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
   followedBy          ProfileFollow[]        @relation(name: "profile_follow_followed")
   searches            SearchExecution[]
-  Feedback            Feedback[]
+  feedbacks           Feedback[]
 
   @@map("users")
 }
@@ -118,8 +127,8 @@ model Base {
   description               String?
   excerpt                   String? // Used in cards, 300 first chars from description with html tags stripped
   department                String?
-  owner                     User    @relation(fields: [ownerId], references: [id])
-  ownerId                   String  @map("owner_id") @db.Uuid
+  createdBy                 User    @relation(fields: [createdById], references: [id])
+  createdById               String  @map("created_by_id") @db.Uuid
   isPublic                  Boolean @default(false) @map("is_public")
 
   email         String  @default("contact@contact.fr")
@@ -138,7 +147,7 @@ model Base {
   savedCollections SavedCollection[]
   followedBy       BaseFollow[]
 
-  @@index([ownerId])
+  @@index([createdById])
   @@map("bases")
 }
 
@@ -535,8 +544,8 @@ model Collection {
   updated DateTime  @default(now())
   deleted DateTime?
 
-  owner   User   @relation(fields: [ownerId], references: [id])
-  ownerId String @map("owner_id") @db.Uuid
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String @map("created_by_id") @db.Uuid
 
   base   Base?   @relation(fields: [baseId], references: [id])
   baseId String? @map("base_id") @db.Uuid
@@ -548,7 +557,7 @@ model Collection {
   savedCollection SavedCollection[]
 
   @@index([baseId])
-  @@index([ownerId])
+  @@index([createdById])
   @@map("collections")
 }
 
@@ -650,6 +659,8 @@ enum SearchType {
   Resources   @map("resources")
   Bases       @map("bases")
   Profiles    @map("profiles")
+
+  @@map("search_type")
 }
 
 model SearchExecution {

@@ -14,7 +14,7 @@ describe('Utilisateur connecté, je peux suivre une base', () => {
 
   it('Acceptation 1 : je suis redirigé vers la connexion si je ne suis pas connecté', () => {
     const creator = givenUser()
-    const base = givenBase({ isPublic: true, ownerId: creator.id })
+    const base = givenBase({ isPublic: true, createdById: creator.id })
     cy.createUser(creator)
     cy.createBase(base)
 
@@ -28,7 +28,7 @@ describe('Utilisateur connecté, je peux suivre une base', () => {
 
   it('Acceptation 2 : je peux suivre une base depuis la page d’une base puis ne plus la suivre', () => {
     const creator = givenUser()
-    const base = givenBase({ isPublic: true, ownerId: creator.id })
+    const base = givenBase({ isPublic: true, createdById: creator.id })
     const visitor = givenUser({ firstName: 'Yves', lastName: 'Visiteur' })
     cy.createUser(creator)
     cy.createBase(base)
@@ -71,7 +71,7 @@ describe('Utilisateur connecté, je peux suivre une base', () => {
 
   it('Acceptation 3 : je peux suivre une base depuis la carte d’une base puis ne plus la suivre', () => {
     const creator = givenUser()
-    const base = givenBase({ isPublic: true, ownerId: creator.id })
+    const base = givenBase({ isPublic: true, createdById: creator.id })
     const visitor = givenUser({ firstName: 'Yves', lastName: 'Visiteur' })
     cy.createUser(creator)
     cy.createBase(base)

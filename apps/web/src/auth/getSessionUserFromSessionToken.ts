@@ -88,6 +88,7 @@ export const getSessionUserFromSessionToken = async (
           id: true,
           slug: true,
           legacyId: true,
+          role: true,
           email: true,
           firstName: true,
           lastName: true,

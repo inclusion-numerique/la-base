@@ -32,7 +32,7 @@ const CollectionCard = ({
           <OwnershipInformation
             className="fr-mb-4v"
             base={collection.base}
-            user={collection.owner}
+            user={collection.createdBy}
             attributionWording="none"
           />
           <Link href={href} data-testid="collection-card-link">

@@ -18,7 +18,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
   it('Acceptation 1 - Je peux changer la visibilité de ma ressource', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
     cy.testId('resource-edition-button').filter(':visible').click()
@@ -54,7 +54,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 
@@ -101,7 +101,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       { isPublic: true },
       true,
       ({ user }) => {
-        const base = givenBase({ ownerId: user.id, isPublic: false })
+        const base = givenBase({ createdById: user.id, isPublic: false })
         cy.createBase(base)
       },
     )
@@ -145,10 +145,10 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
       additionalSetup: ({ user }) => {
-        const base = givenBase({ ownerId: user.id, isPublic: false })
+        const base = givenBase({ createdById: user.id, isPublic: false })
         cy.createBase({ ...base, slug: `${base.slug}-1` })
       },
     })
@@ -193,7 +193,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
     cy.testId('resource-edition-button').filter(':visible').click()
@@ -234,7 +234,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
   it('Acceptation 5 - Je peux changer supprimer ma ressource', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
-      signinAsResourceOwner: true,
+      signinAsResourceCreator: true,
       visitResourcePage: true,
     })
 

@@ -23,7 +23,7 @@ const CollectionView = ({
 }) => (
   <div className="fr-width-full">
     <OwnershipInformation
-      user={collection.owner}
+      user={collection.createdBy}
       base={collection.base}
       attributionWording="collection"
     />

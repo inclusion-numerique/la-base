@@ -28,7 +28,7 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
         },
       },
     },
-    owner: {
+    createdBy: {
       select: {
         id: true,
         slug: true,

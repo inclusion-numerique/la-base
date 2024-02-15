@@ -36,7 +36,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
       },
       where: {
         collection: {
-          ownerId: user?.id,
+          createdById: user?.id,
         },
       },
     },

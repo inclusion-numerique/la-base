@@ -43,7 +43,7 @@ const resourcesToDelete = (userId: string) => ({
 
 const basesToDelete = (userId: string) => ({
   where: {
-    ownerId: userId,
+    createdById: userId,
     members: { every: { memberId: userId } },
     deleted: null,
   },
@@ -51,7 +51,7 @@ const basesToDelete = (userId: string) => ({
 
 const collectionsToDelete = (userId: string) => ({
   where: {
-    ownerId: userId,
+    createdById: userId,
     baseId: null,
     savedCollection: { none: {} },
     deleted: null,
@@ -93,7 +93,7 @@ export const profileRouter = router({
         // All public collections not in a base must be made private
         const collections = await prismaClient.collection.findMany({
           select: { id: true },
-          where: { ownerId: user.id, baseId: null, isPublic: true },
+          where: { createdById: user.id, baseId: null, isPublic: true },
         })
 
         return prismaClient.$transaction(async (transaction) => {
