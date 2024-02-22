@@ -5,6 +5,7 @@ const resourceDraft = {
   title: 'Hello draft',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab asperiores consectetur corporis cum cumque debitis deserunt, eligendi est illo magnam minima natus possimus quae reiciendis tempora veritatis vero voluptatibus. A accusantium ad animi asperiores atque consequuntur debitis dolore ducimus eligendi et explicabo iste laboriosam, maxime possimus ratione rem sit tempora voluptatem.',
+  image: null,
 }
 
 describe('resource draft', () => {
@@ -15,6 +16,7 @@ describe('resource draft', () => {
       published: null,
       excerpt:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab asperiores consectetur corporis cum cumque debitis deserunt, eligendi est illo magnam minima natus possimus quae reiciendis tempora veritatis vero voluptatibus. A accusantium ad animi asperiores atque consequuntur debitis dolore ducimus ',
+      image: null,
     })
   })
 
@@ -45,6 +47,7 @@ describe('resource draft', () => {
       published: null,
       excerpt:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab asperiores consectetur corporis cum cumque debitis deserunt, eligendi est illo magnam minima natus possimus quae reiciendis tempora veritatis vero voluptatibus. A accusantium ad animi asperiores atque consequuntur debitis dolore ducimus ',
+      image: null,
     })
   })
 })

@@ -9,6 +9,8 @@ import CollectionView from '@app/web/components/Collection/CollectionView'
 import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -43,10 +45,14 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
   const authorizations = filterAccess(collection, user)
   return (
     <>
+      <SkipLinksPortal links={defaultSkipLinks} />
       <div className="fr-container">
         <CollectionBreadcrumbs collection={collection} />
       </div>
-      <div className="fr-container fr-container--medium fr-mb-20v fr-pb-20v">
+      <main
+        id={contentId}
+        className="fr-container fr-container--medium fr-mb-20v fr-pb-20v"
+      >
         {authorizations.authorized ? (
           <CollectionView
             collection={collection}
@@ -58,7 +64,7 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
             <PrivateBox type="Collection" />
           </div>
         )}
-      </div>
+      </main>
     </>
   )
 }

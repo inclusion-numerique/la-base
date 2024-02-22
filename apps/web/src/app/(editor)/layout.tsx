@@ -10,6 +10,7 @@ const EditorLayout = async ({ children }: PropsWithChildren) => {
     <div
       style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}
     >
+      <div id="skip-links" />
       <Header
         user={user}
         createResource={

@@ -65,7 +65,12 @@ const ResourceVisibilityFormField = <T extends FieldValues>({
               onChange(true)
             }}
           >
-            <span className="fr-mr-1w">Ressource publique</span>
+            <div className="fr-mr-1w">
+              Ressource publique
+              <p className="fr-text--xs fr-hint-text fr-mb-0">
+                Visible par tous les visiteurs.
+              </p>
+            </div>
             <PrivacyTag isPublic />
           </ResourceBaseRichRadioElement>
           <ResourceBaseRichRadioElement
@@ -81,7 +86,13 @@ const ResourceVisibilityFormField = <T extends FieldValues>({
               onChange(false)
             }}
           >
-            <span className="fr-mr-1w">Ressource privée</span>
+            <div className="fr-mr-1w">
+              Ressource privée
+              <p className="fr-text--xs fr-hint-text fr-mb-0">
+                Visible uniquement par vous et les contributeurs que vous avez
+                invités.
+              </p>
+            </div>
             <PrivacyTag />
           </ResourceBaseRichRadioElement>
           {error && (

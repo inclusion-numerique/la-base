@@ -28,7 +28,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est privée. Vous pouvez passer votre ressource en publique si vous le souhaitez.',
+      'Visible uniquement par vous et les contributeurs que vous avez invités.',
     )
 
     cy.testId('edit-card-button').eq(1).click()
@@ -38,7 +38,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.',
+      'Visible par tous les visiteurs.',
     )
 
     cy.visit(
@@ -65,7 +65,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.',
+      'Visible par tous les visiteurs.',
     )
 
     cy.testId('edit-card-button').eq(0).click()
@@ -78,7 +78,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est dans un profil privé. Vous ne pouvez pas changer sa visibilité.',
+      'Visible uniquement par vous et les contributeurs que vous avez invités.',
     )
 
     cy.testId('edit-card-button').eq(1).click()
@@ -112,7 +112,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.',
+      'Visible par tous les visiteurs.',
     )
 
     cy.testId('edit-card-button').eq(0).click()
@@ -123,7 +123,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est dans une base privée. Vous ne pouvez pas changer sa visibilité.',
+      'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
     cy.testId('edit-card-button').eq(1).click()
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
@@ -160,7 +160,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.',
+      'Visible par tous les visiteurs.',
     )
 
     cy.testId('edit-card-button').eq(0).click()
@@ -173,7 +173,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-visibility').should(
       'have.text',
-      'Votre ressource est dans une base privée. Vous ne pouvez pas changer sa visibilité.',
+      'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
 
     cy.testId('edit-card-button').eq(1).click()

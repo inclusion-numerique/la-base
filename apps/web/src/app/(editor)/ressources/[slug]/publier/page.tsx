@@ -8,6 +8,8 @@ import Edition from '@app/web/components/Resource/Edition/ResourceEdition'
 import { filterAccess } from '@app/web/server/resources/authorization'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, contentSkipLink } from '@app/web/utils/skipLinks'
 
 export const metadata: Metadata = {
   title: metadataTitle('Publication de la ressource'),
@@ -38,15 +40,18 @@ const ResourcePublicationPage = async ({
 
   return (
     <>
+      <SkipLinksPortal links={[contentSkipLink]} />
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} currentChildPage="Publier" />
       </div>
-      <Edition
-        publishMode
-        resource={resource}
-        draftResource={draftResource}
-        user={user}
-      />
+      <main id={contentId}>
+        <Edition
+          publishMode
+          resource={resource}
+          draftResource={draftResource}
+          user={user}
+        />
+      </main>
     </>
   )
 }

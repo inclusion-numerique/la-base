@@ -98,7 +98,7 @@ const ResourceEdition = ({
   const confirmationText = `Souhaitez-vous quitter l'éditeur sans publier les modifications apportées à ${resource.title} ? Les modifications sont enregistrées, vous pouvez également les publier plus tard.`
 
   useEffect(() => {
-    if (!askConfirmationBeforeLeaving) {
+    if (!askConfirmationBeforeLeaving || !editing) {
       return
     }
     const nativeBrowserHandler = (event: BeforeUnloadEvent) => {
@@ -122,7 +122,7 @@ const ResourceEdition = ({
       window.removeEventListener('beforeunload', nativeBrowserHandler)
       Router.events.off('beforeHistoryChange', nextNavigationHandler)
     }
-  }, [askConfirmationBeforeLeaving])
+  }, [askConfirmationBeforeLeaving, editing])
 
   const sendCommand: SendCommand = async (command: ResourceMutationCommand) => {
     const result = await mutate.mutateAsync(command)
@@ -200,7 +200,8 @@ const ResourceEdition = ({
           priority: 'success',
           message: (
             <>
-              La ressource <strong>{resource.title}</strong> a bien été publiée
+              La ressource <strong>{result.resource.title}</strong> a bien été
+              publiée
             </>
           ),
         })

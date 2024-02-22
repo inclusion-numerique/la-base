@@ -1,7 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import type { Metadata } from 'next'
-import SearchHeader from '@app/web/components/Search/SearchHeader'
+import SearchHeader, {
+  rechercherId,
+} from '@app/web/components/Search/SearchHeader'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { footerSkipLink } from '@app/web/utils/skipLinks'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -10,6 +14,13 @@ export const metadata: Metadata = {
   title: metadataTitle('Rechercher'),
 }
 
+const resultsId = 'resultats'
+const skipLinks = [
+  { label: 'Faire une recherche', anchor: `#${rechercherId}` },
+  { label: 'Résultats', anchor: `#${resultsId}` },
+  footerSkipLink,
+]
+
 /**
  * This is the first layout without any query to quickly display loading state to user.
  * Then there is a sub layout for the tabs count
@@ -17,8 +28,9 @@ export const metadata: Metadata = {
  */
 const SearchLayout = ({ children }: PropsWithChildren) => (
   <>
+    <SkipLinksPortal links={skipLinks} />
     <SearchHeader />
-    {children}
+    <main id={resultsId}>{children}</main>
   </>
 )
 

@@ -4,6 +4,9 @@ import Breadcrumbs from '../../Breadcrumbs'
 import BaseImages from '../BaseImages'
 import styles from './BaseEditionHeader.module.css'
 
+const headerId = 'header'
+export const headerSkipLink = { label: 'Entête', anchor: `#${headerId}` }
+
 const BaseEditionHeader = ({ base }: { base: BasePageData }) => (
   <div className="fr-container">
     <Breadcrumbs
@@ -17,9 +20,11 @@ const BaseEditionHeader = ({ base }: { base: BasePageData }) => (
       ]}
       currentPage="Modifier la base"
     />
-    <BaseImages base={base} editMode />
-    <div className={styles.baseInfo}>
-      <h2 className="fr-mb-0">{base.title}</h2>
+    <div id={headerId}>
+      <BaseImages base={base} editMode />
+      <div className={styles.baseInfo}>
+        <h2 className="fr-mb-0">{base.title}</h2>
+      </div>
     </div>
   </div>
 )

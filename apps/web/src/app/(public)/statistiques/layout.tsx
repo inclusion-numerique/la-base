@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const metadata: Metadata = {
   title: metadataTitle('Statistiques'),
@@ -10,17 +12,18 @@ export const metadata: Metadata = {
 
 const StatisticsLayout = ({ children }: PropsWithChildren) => (
   <>
+    <SkipLinksPortal links={defaultSkipLinks} />
     <div className="fr-container">
       <Breadcrumbs currentPage="Statistiques" />
     </div>
-    <div className="fr-container fr-pb-20v">
+    <main id={contentId} className="fr-container fr-pb-20v">
       <h1 className="fr-text-title--blue-france">Statistiques</h1>
       <Notice
         title="Cette page est en cours de construction"
         className="fr-mb-8v"
       />
       {children}
-    </div>
+    </main>
   </>
 )
 

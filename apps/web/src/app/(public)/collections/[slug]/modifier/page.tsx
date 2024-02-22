@@ -7,6 +7,8 @@ import { getCollection } from '@app/web/server/collections/getCollection'
 import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -44,16 +46,18 @@ const CollectionEditionPage = async ({
   }
 
   return (
-    <div className="fr-container">
-      <CollectionBreadcrumbs
-        collection={collection}
-        currentChildPage="Modifier"
-      />
-
-      <div className="fr-mt-6w fr-mb-4w">
-        <CollectionEdition collection={collection} />
+    <>
+      <SkipLinksPortal links={defaultSkipLinks} />
+      <div className="fr-container">
+        <CollectionBreadcrumbs
+          collection={collection}
+          currentChildPage="Modifier"
+        />
+        <main id={contentId} className="fr-mt-6w fr-mb-4w">
+          <CollectionEdition collection={collection} />
+        </main>
       </div>
-    </div>
+    </>
   )
 }
 

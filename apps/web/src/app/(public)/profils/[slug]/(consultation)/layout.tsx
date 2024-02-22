@@ -1,7 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import ProfileHeader from '@app/web/components/Profile/ProfileHeader'
+import ProfileHeader, {
+  headerSkipLink,
+} from '@app/web/components/Profile/ProfileHeader'
 import PrivateBox from '@app/web/components/PrivateBox'
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
@@ -9,6 +11,8 @@ import { getProfilePageCounts } from '@app/web/app/(public)/profils/[slug]/(cons
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
 import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -46,6 +50,7 @@ const ProfileLayout = async ({
   if (!authorizations.authorized) {
     return (
       <>
+        <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
         <ProfileHeader
           profile={authorizations.profile}
           resourcesCount={resourcesCount}
@@ -57,23 +62,26 @@ const ProfileLayout = async ({
   }
   return (
     <>
+      <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <ProfileHeader
         profile={authorizations.profile}
         isConnectedUser={authorizations.isUser}
         resourcesCount={resourcesCount}
         user={user}
       />
-      <ProfileMenu
-        profile={authorizations.profile}
-        resourcesCount={resourcesCount}
-        isConnectedUser={authorizations.isUser}
-        basesCount={basesCount}
-        collectionsCount={collectionsCount.total}
-        followsCount={followsCount.total}
-      />
-      <div className="fr-container fr-container--medium fr-mb-50v">
-        {children}
-      </div>
+      <main id={contentId}>
+        <ProfileMenu
+          profile={authorizations.profile}
+          resourcesCount={resourcesCount}
+          isConnectedUser={authorizations.isUser}
+          basesCount={basesCount}
+          collectionsCount={collectionsCount.total}
+          followsCount={followsCount.total}
+        />
+        <div className="fr-container fr-container--medium fr-mb-50v">
+          {children}
+        </div>
+      </main>
     </>
   )
 }

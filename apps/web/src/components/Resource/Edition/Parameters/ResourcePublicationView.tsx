@@ -30,7 +30,7 @@ const ResourcePublicationView = ({
       <div className={styles.baseInfo}>
         <div className={styles.baseName}>
           <RoundProfileImage className="fr-mr-1w" user={resource.createdBy} />
-          <span>Publié par {resource.createdBy.name}</span>
+          {resource.createdBy.name}
         </div>
         <ProfilePrivacyTag isPublic={user.isPublic} />
       </div>

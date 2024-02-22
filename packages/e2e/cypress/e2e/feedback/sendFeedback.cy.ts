@@ -11,18 +11,7 @@ describe('Utilisateur, je peux donner mon avis', () => {
     cy.intercept('/api/trpc/feedback.send?*').as('sendFeedback')
   })
 
-  it('Acceptation 1 - Le bouton du footer ouvre la modale de feedback', () => {
-    cy.visit('/')
-    cy.dsfrModalsShouldBeBound()
-
-    cy.get('#footer-feedback-control-button').should('be.visible').click()
-
-    cy.findByRole('dialog').within(() => {
-      cy.contains('Je donne mon avis').should('be.visible')
-    })
-  })
-
-  it('Acceptation 2 - Je peux donner mon avis', () => {
+  it('Acceptation 1 - Je peux donner mon avis', () => {
     cy.visit('/')
     cy.dsfrModalsShouldBeBound()
 

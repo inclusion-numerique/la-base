@@ -8,6 +8,8 @@ import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
+import Link from 'next/link'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
   UserSignup,
@@ -76,6 +78,33 @@ const EmailSignupForm = ({
         label="Nom"
         disabled={isLoading}
       />
+      <CheckboxFormField
+        control={form.control}
+        path="policyAccepted"
+        data-testid="cgu"
+        label={
+          <span>
+            J&lsquo;ai lu et j&lsquo;accepte les 
+            <Link
+              href="/cgu"
+              target="_blank"
+              className="fr-btn--no-after fr-link"
+            >
+              conditions générales d’utilisation du service
+            </Link>
+             ainsi que la{' '}
+            <Link
+              href="/confidentialite"
+              target="_blank"
+              className="fr-btn--no-after fr-link"
+            >
+              politique de confidentialité.
+            </Link>
+          </span>
+        }
+        disabled={isLoading}
+      />
+
       <ButtonsGroup
         className="fr-mt-12v"
         buttons={[

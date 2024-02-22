@@ -7,28 +7,24 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { Resource } from '@app/web/server/resources/getResource'
-import { ResourcePrivacyTag } from '@app/web/components/PrivacyTags'
 import {
   ChangeVisibilityCommand,
   ChangeVisibilityCommandValidation,
 } from '@app/web/server/resources/feature/ChangeVisibility'
 import EditCard from '@app/web/components/EditCard'
+import { PrivacyTag } from '../../../PrivacyTags'
 import ResourceVisibilityFormField from './ResourceVisibilityFormField'
 
 const getVisibilityText = (resource: Resource) => {
   if (resource.isPublic) {
-    return 'Votre ressource est publique. Vous pouvez passer votre ressource en privée si vous le souhaitez.'
+    return 'Visible par tous les visiteurs.'
   }
 
-  if (resource.base) {
-    if (!resource.base.isPublic) {
-      return 'Votre ressource est dans une base privée. Vous ne pouvez pas changer sa visibilité.'
-    }
-  } else if (!resource.createdBy.isPublic) {
-    return 'Votre ressource est dans un profil privé. Vous ne pouvez pas changer sa visibilité.'
+  if (resource.base && !resource.base.isPublic) {
+    return 'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.'
   }
 
-  return 'Votre ressource est privée. Vous pouvez passer votre ressource en publique si vous le souhaitez.'
+  return 'Visible uniquement par vous et les contributeurs que vous avez invités.'
 }
 
 const ResourceVisibilityForm = ({
@@ -65,7 +61,7 @@ const ResourceVisibilityForm = ({
       className="fr-mt-3w"
       id="visibilite"
       title="Visibilité de la ressource"
-      description="Choisissez la visibilité de votre ressource."
+      description="Choisissez qui peut voir votre ressource."
       form={form}
       mutation={async (data) => {
         await mutate.mutateAsync(data)
@@ -79,12 +75,22 @@ const ResourceVisibilityForm = ({
         />
       }
       view={
-        <>
-          <p className="fr-text--sm" data-testid="resource-visibility">
-            {getVisibilityText(resource)}
-          </p>
-          <ResourcePrivacyTag isPublic={resource.isPublic || false} />
-        </>
+        <div className="fr-flex fr-align-items-center">
+          <div className="fr-flex-grow-1 fr-mr-1w">
+            <span className="fr-text-label--grey">
+              {resource.isPublic ? 'Ressource publique' : 'Ressource privée'}
+            </span>
+            <p
+              className="fr-text--xs fr-hint-text "
+              data-testid="resource-visibility"
+            >
+              {getVisibilityText(resource)}
+            </p>
+          </div>
+          <div>
+            <PrivacyTag isPublic={resource.isPublic ?? undefined} />
+          </div>
+        </div>
       }
     />
   )

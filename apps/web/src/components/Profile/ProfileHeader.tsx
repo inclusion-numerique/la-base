@@ -10,6 +10,9 @@ import CopyLinkButton from '../CopyLinkButton'
 import styles from './ProfileHeader.module.css'
 import ProfileInformations from './ProfileInformations'
 
+const headerId = 'header'
+export const headerSkipLink = { label: 'Entête', anchor: `#${headerId}` }
+
 const ProfileHeader = ({
   profile,
   isConnectedUser,
@@ -28,43 +31,45 @@ const ProfileHeader = ({
           isConnectedUser ? 'Mon Profil' : `${profile.name || 'Profil'}`
         }
       />
-      <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
-        {isConnectedUser ? (
-          <div className={styles.buttons}>
-            <Link
-              data-testid="profile-edition-button"
-              className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
-              href={`/profils/${profile.slug}/modifier`}
-            >
-              Modifier le profil
-            </Link>
-          </div>
-        ) : (
-          profile.isPublic && (
+      <div id={headerId}>
+        <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
+          {isConnectedUser ? (
             <div className={styles.buttons}>
-              <FollowButton
-                user={user}
-                profile={profile}
-                followPriority="primary"
-              />
-              {profile.emailIsPublic && (
-                <Link
-                  className="fr-btn--sm fr-btn fr-btn--secondary fr-icon-mail-line fr-btn--icon-left"
-                  href={`mailto:${profile.email}`}
-                >
-                  Contacter
-                </Link>
-              )}
-              <CopyLinkButton
-                url={getServerUrl(`/profils/${profile.slug}`, true)}
-                priority="secondary"
+              <Link
+                data-testid="profile-edition-button"
+                className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left"
+                href={`/profils/${profile.slug}/modifier`}
               >
-                Partager
-              </CopyLinkButton>
+                Modifier le profil
+              </Link>
             </div>
-          )
-        )}
-      </ProfileInformations>
+          ) : (
+            profile.isPublic && (
+              <div className={styles.buttons}>
+                <FollowButton
+                  user={user}
+                  profile={profile}
+                  followPriority="primary"
+                />
+                {profile.emailIsPublic && (
+                  <Link
+                    className="fr-btn--sm fr-btn fr-btn--secondary fr-icon-mail-line fr-btn--icon-left"
+                    href={`mailto:${profile.email}`}
+                  >
+                    Contacter
+                  </Link>
+                )}
+                <CopyLinkButton
+                  url={getServerUrl(`/profils/${profile.slug}`, true)}
+                  priority="secondary"
+                >
+                  Partager
+                </CopyLinkButton>
+              </div>
+            )
+          )}
+        </ProfileInformations>
+      </div>
     </div>
   </div>
 )

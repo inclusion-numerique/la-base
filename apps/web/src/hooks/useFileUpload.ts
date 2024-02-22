@@ -48,11 +48,11 @@ export const useFileUpload = () => {
       abortControllerRef.current = new AbortController()
 
       setUploading(true)
-      setFilename(file.name)
+      setFilename(file.name.normalize('NFC'))
       progressEmitterRef.current.emit('progress', 0)
       const uploadInfo = await generateUploadUrl
         .mutateAsync({
-          filename: file.name,
+          filename: file.name.normalize('NFC'),
           mimeType: file.type,
         })
         .catch((error) => {
@@ -93,7 +93,7 @@ export const useFileUpload = () => {
 
         return {
           key: uploadInfo.key,
-          name: file.name,
+          name: file.name.normalize('NFC'),
           mimeType: file.type,
           size: totalUploaded,
         }

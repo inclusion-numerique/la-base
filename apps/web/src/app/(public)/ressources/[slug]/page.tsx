@@ -13,6 +13,8 @@ import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import { applyDraft } from '@app/web/utils/resourceDraft'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -55,22 +57,27 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
   const authorizations = filterAccess(resource, user)
 
   return (
-    <div className="fr-container">
-      <ResourceBreadcrumbs resource={resource} />
-      {authorizations.authorized ? (
-        <ResourceView
-          user={user}
-          resource={authorizations.resource}
-          isAdmin={authorizations.isAdmin}
-        />
-      ) : (
-        <>
-          <ResourceViewHeader resource={authorizations.resource} />
-          <ResourceViewSeparators onlyLeft withoutPadding />
-          <PrivateBox type="Ressource" />
-        </>
-      )}
-    </div>
+    <>
+      <SkipLinksPortal links={defaultSkipLinks} />
+      <div className="fr-container">
+        <ResourceBreadcrumbs resource={resource} />
+        <main id={contentId}>
+          {authorizations.authorized ? (
+            <ResourceView
+              user={user}
+              resource={authorizations.resource}
+              isAdmin={authorizations.isAdmin}
+            />
+          ) : (
+            <>
+              <ResourceViewHeader resource={authorizations.resource} />
+              <ResourceViewSeparators onlyLeft withoutPadding />
+              <PrivateBox type="Ressource" />
+            </>
+          )}
+        </main>
+      </div>
+    </>
   )
 }
 

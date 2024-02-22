@@ -40,7 +40,7 @@ const ResourcePublication = ({
 
   return (
     <>
-      <h3 className={styles.title}>Qui peut consulter votre ressource ?</h3>
+      <h1 className={styles.title}>Qui peut consulter votre ressource ?</h1>
       <p>
         Choisissez qui peut voir et/ou éditer votre ressource. Vous pourrez
         modifier vos choix à tout moment dans les paramètres de votre ressource.
@@ -50,14 +50,17 @@ const ResourcePublication = ({
           resource={resource}
           user={user}
           sendCommand={sendCommand}
-          iconText="Modifier"
         >
           <h5 className="fr-mb-0">Ressource publiée dans</h5>
         </ResourceBaseEdition>
         <hr className="fr-mt-4w fr-pb-4w" />
         <ResourcePublicationView resource={resource} user={user} />
       </div>
-      <Card title="Visibilité de la ressource" className="fr-mt-3w">
+      <Card
+        title="Visibilité de la ressource"
+        description="Choisissez qui peut voir votre ressource."
+        className="fr-mt-3w"
+      >
         <ResourceVisibilityFormField
           resource={resource}
           user={user}

@@ -11,6 +11,9 @@ import BaseMetadata from './BaseMetadata'
 import styles from './BaseHeader.module.css'
 import BaseImages from './BaseImages'
 
+const headerId = 'header'
+export const headerSkipLink = { label: 'Entête', anchor: `#${headerId}` }
+
 const BaseHeader = ({
   base,
   isMember,
@@ -24,7 +27,7 @@ const BaseHeader = ({
     <div className="fr-container">
       <Breadcrumbs currentPage={base.title} />
       <BaseImages base={base} />
-      <div className={styles.baseInfo}>
+      <div id={headerId} className={styles.baseInfo}>
         <h2>{base.title}</h2>
         <BaseMetadata base={base} withBadge />
         {isMember ? (

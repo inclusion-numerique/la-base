@@ -9,6 +9,8 @@ import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import { filterAccess } from '@app/web/server/profiles/authorization'
 import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const metadata: Metadata = {
   title: metadataTitle('Modifier mon profil'),
@@ -35,22 +37,25 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
   const resources = await getProfileResources(profile.id, user)
 
   return (
-    <div className="fr-container">
-      <Breadcrumbs
-        parents={[
-          {
-            label: authorizations.isUser
-              ? 'Mon Profil'
-              : `${profile.name || 'Profil'}`,
-            linkProps: { href: `/profils/${params.slug}` },
-          },
-        ]}
-        currentPage="Modifier"
-      />
-      <div className="fr-mt-6w fr-mb-4w">
-        <ProfilEdition profile={profile} resources={resources} />
+    <>
+      <SkipLinksPortal links={defaultSkipLinks} />
+      <div className="fr-container">
+        <Breadcrumbs
+          parents={[
+            {
+              label: authorizations.isUser
+                ? 'Mon Profil'
+                : `${profile.name || 'Profil'}`,
+              linkProps: { href: `/profils/${params.slug}` },
+            },
+          ]}
+          currentPage="Modifier"
+        />
+        <main id={contentId} className="fr-mt-6w fr-mb-4w">
+          <ProfilEdition profile={profile} resources={resources} />
+        </main>
       </div>
-    </div>
+    </>
   )
 }
 

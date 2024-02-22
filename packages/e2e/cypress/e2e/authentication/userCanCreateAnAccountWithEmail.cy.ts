@@ -9,14 +9,25 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
   // Unique user for this test
   const { email, firstName, lastName } = givenUser()
 
-  it('Acceptation 1 - Création de compte', () => {
+  it('Acceptation 0 - Création de compte par email sans valider les CGU', () => {
     cy.visit('/creer-un-compte')
 
     cy.log('Signup form fill and submit')
     cy.findByLabelText('Email').type(email)
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName).type('{enter}')
+    cy.contains(`Veuillez accepter les conditions générales d'utilisation`)
+  })
 
+  it('Acceptation 1 - Création de compte par email', () => {
+    cy.visit('/creer-un-compte')
+
+    cy.log('Signup form fill and submit')
+    cy.findByLabelText('Email').type(email)
+    cy.findByLabelText('Prénom').type(firstName)
+    cy.findByLabelText('Nom').type(lastName)
+    cy.get('#input-form-field__policyAccepted').check({ force: true })
+    cy.findByText('Valider').click()
     cy.appUrlShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
@@ -61,7 +72,9 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.log('Signup form fill and submit')
     cy.findByLabelText('Email').type(email)
     cy.findByLabelText('Prénom').type(firstName)
-    cy.findByLabelText('Nom').type(lastName).type('{enter}')
+    cy.findByLabelText('Nom').type(lastName)
+    cy.get('#input-form-field__policyAccepted').check({ force: true })
+    cy.findByText('Valider').click()
 
     cy.appUrlShouldBe('/creer-un-compte')
     cy.contains('Un compte existe déjà avec cet email')
