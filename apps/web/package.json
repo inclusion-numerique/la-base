@@ -109,7 +109,7 @@
     "react-use-css-custom-property": "^0.1.1",
     "recharts": "^2.10.4",
     "remixicon": "^4.1.0",
-    "sanitize-html": "^2.11.0",
+    "sanitize-html": "^2.12.1",
     "scroll-into-view-if-needed": "^3.1.0",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
