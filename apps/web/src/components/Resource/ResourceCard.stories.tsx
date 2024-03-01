@@ -22,6 +22,9 @@ const resource = {
   updated: date,
   published: date,
   lastPublished: date,
+  deleted: null,
+  createdById: '1',
+  baseId: 'base-id',
   base: {
     id: 'base-id',
     title: 'Titre de la base',
@@ -70,6 +73,7 @@ const BrouillonSansImageStory: Story = {
   args: {
     resource: { ...resource, published: null, lastPublished: null },
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -86,6 +90,7 @@ const BrouillonAvecImageStory: Story = {
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -103,6 +108,7 @@ const BrouillonModifiéSansImageStory: Story = {
       base: null,
     },
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -124,6 +130,7 @@ const BrouillonModifiéAvecImageStory: Story = {
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -139,6 +146,7 @@ const PublieeSansImageVueContributeurStory: Story = {
   args: {
     resource,
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -158,6 +166,7 @@ const RePublieeAvecImageVueContributeurStory: Story = {
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
+    isContributor: true,
   },
   render,
 }
@@ -173,6 +182,7 @@ const SansImageVueVisiteurStory: Story = {
   args: {
     resource,
     user: testSessionUser,
+    isContributor: false,
   },
   render,
 }
@@ -190,6 +200,7 @@ const ModificationsNonPubliéesAvecImageVueVisiteurStory: Story = {
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: testSessionUser,
+    isContributor: false,
   },
   render,
 }
@@ -204,6 +215,7 @@ const ModificationsNonPubliéesSansImageVueContributeurStory: Story = {
   args: {
     resource: { ...resource, updated: nextDay },
     user: creatorUser,
+    isContributor: false,
   },
   render,
 }
@@ -221,6 +233,7 @@ const ModificationsNonPubliéesAvecImageVueContributeurStory: Story = {
       image: { id: 'portrait', altText: 'Texte alternatif' },
     },
     user: creatorUser,
+    isContributor: false,
   },
   render,
 }

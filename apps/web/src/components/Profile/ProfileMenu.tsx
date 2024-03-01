@@ -46,14 +46,14 @@ const ProfileMenu = ({
   basesCount,
   collectionsCount,
   followsCount,
-  isConnectedUser,
+  isOwner,
 }: {
   profile: ProfilePageData
   resourcesCount: number
   basesCount: number
   collectionsCount: number
   followsCount: number
-  isConnectedUser: boolean
+  isOwner: boolean
 }) => {
   const path = usePathname()
   const currentTab = getCurrentTabFromPath(path ?? '')
@@ -68,7 +68,7 @@ const ProfileMenu = ({
               currentTab={currentTab}
               href={`/profils/${profile.slug}`}
             >
-              {isConnectedUser ? 'Mes ressources' : 'Ressources'} ·{' '}
+              {isOwner ? 'Mes ressources' : 'Ressources'} ·{' '}
               <b>{resourcesCount}</b>
             </MenuItem>
             <MenuItem
@@ -76,7 +76,7 @@ const ProfileMenu = ({
               currentTab={currentTab}
               href={`/profils/${profile.slug}/collections`}
             >
-              {isConnectedUser ? 'Mes collections' : 'Collections'} ·{' '}
+              {isOwner ? 'Mes collections' : 'Collections'} ·{' '}
               <b>{collectionsCount}</b>
             </MenuItem>
             <MenuItem
@@ -84,16 +84,15 @@ const ProfileMenu = ({
               currentTab={currentTab}
               href={`/profils/${profile.slug}/bases`}
             >
-              {isConnectedUser ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
+              {isOwner ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
             </MenuItem>
-            {isConnectedUser && (
+            {isOwner && (
               <MenuItem
                 tab="suivis"
                 currentTab={currentTab}
                 href={`/profils/${profile.slug}/suivis`}
               >
-                {isConnectedUser ? 'Mes suivis' : 'Suivis'} ·{' '}
-                <b>{followsCount}</b>
+                Mes suivis · <b>{followsCount}</b>
               </MenuItem>
             )}
             <MenuItem

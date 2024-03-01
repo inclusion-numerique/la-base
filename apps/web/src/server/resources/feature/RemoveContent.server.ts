@@ -2,10 +2,7 @@ import {
   ContentRemoved,
   RemoveContentCommand,
 } from '@app/web/server/resources/feature/RemoveContent'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleRemoveContent: ResourceMutationCommandHandler<
@@ -19,10 +16,6 @@ export const handleRemoveContent: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const removeContentSecurityRules: ResourceCommandSecurityRule<
-  RemoveContentCommand
-> = () => true
 
 export const applyContentRemoved: ResourceMutationEventApplier<
   ContentRemoved

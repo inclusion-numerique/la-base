@@ -31,10 +31,10 @@ const {
 
 const InviteBaseMemberButton = ({
   base,
-  isAdmin,
+  canAddAdmin,
 }: {
   base: BasePageData
-  isAdmin: boolean
+  canAddAdmin: boolean
 }) => {
   const form = useForm<InviteMemberCommand>({
     resolver: zodResolver(InviteMemberCommandValidation),
@@ -143,7 +143,7 @@ const InviteBaseMemberButton = ({
                           >
                             Membre
                           </option>
-                          {isAdmin && (
+                          {canAddAdmin && (
                             <option
                               value="admin"
                               data-testid="base-invite-member-role-admin"

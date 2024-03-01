@@ -1,17 +1,17 @@
-import { UserSecurityRole } from '@app/web/authorization/userSecurityRole'
-import {
+import type { UserSecurityRole } from '@app/web/authorization/userSecurityRole'
+import type {
   ProfilePermission,
   ProfileRole,
 } from '@app/web/authorization/models/profileAuthorization'
-import {
+import type {
   ResourcePermission,
   ResourceRole,
 } from '@app/web/authorization/models/resourceAuthorization'
-import {
+import type {
   BasePermission,
   BaseRole,
 } from '@app/web/authorization/models/baseAuthorization'
-import {
+import type {
   CollectionPermission,
   CollectionRole,
 } from '@app/web/authorization/models/collectionAuthorization'

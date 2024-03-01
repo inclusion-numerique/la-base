@@ -2,10 +2,7 @@ import {
   IndexationChanged,
   ChangeIndexationCommand,
 } from '@app/web/server/resources/feature/ChangeIndexation'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
@@ -20,10 +17,6 @@ export const handleChangeIndexation: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const ChangeIndexationSecurityRules: ResourceCommandSecurityRule<
-  ChangeIndexationCommand
-> = () => true
 
 export const applyIndexationChanged: ResourceMutationEventApplier<
   IndexationChanged

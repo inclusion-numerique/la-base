@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import React from 'react'
 import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
@@ -9,6 +9,10 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import {
+  collectionAuthorization,
+  CollectionPermissions,
+} from '@app/web/authorization/models/collectionAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -37,12 +41,24 @@ const CollectionEditionPage = async ({
 }: {
   params: { slug: string }
 }) => {
-  // TODO comment "security check" , we will do a security pass everywhere in a few weeks
   const user = await getSessionUser()
   const collection = await getCollection({ slug: decodeURI(params.slug) }, user)
 
-  if (!collection || !user) {
+  if (!collection) {
     notFound()
+  }
+  const { hasPermission } = collectionAuthorization(collection, user)
+
+  const canReadGeneralInformation = hasPermission(
+    CollectionPermissions.ReadGeneralCollectionInformation,
+  )
+  if (!canReadGeneralInformation) {
+    notFound()
+  }
+
+  const canWrite = hasPermission(CollectionPermissions.WriteCollection)
+  if (!canWrite) {
+    redirect(`/collections/${collection.slug}`)
   }
 
   return (

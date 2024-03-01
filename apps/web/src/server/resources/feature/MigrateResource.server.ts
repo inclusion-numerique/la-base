@@ -2,10 +2,7 @@ import {
   MigrateResourceCommand,
   ResourceMigrated,
 } from '@app/web/server/resources/feature/MigrateResource'
-import {
-  ResourceCommandSecurityRule,
-  ResourceCreationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
@@ -54,10 +51,6 @@ export const handleMigrateResource: ResourceCreationCommandHandler<
   ]
 }
 
-export const migrateResourceSecurityRules: ResourceCommandSecurityRule<
-  MigrateResourceCommand
-> = () => false
-
 export const applyResourceMigrated: ResourceCreationEventApplier<
   ResourceMigrated
 > = ({
@@ -79,6 +72,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   id,
   created: new Date(created),
   updated: new Date(updated),
+  deleted: null,
   published: published ? new Date(published) : null,
   lastPublished: published ? new Date(published) : null,
   createdById: byId,

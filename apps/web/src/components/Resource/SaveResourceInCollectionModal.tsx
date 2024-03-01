@@ -13,16 +13,16 @@ import RawModal from '@app/ui/components/Modal/RawModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import * as Sentry from '@sentry/nextjs'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import {
   CreateCollectionCommand,
   CreateCollectionCommandValidation,
 } from '@app/web/server/collections/createCollection'
+import { collectionTitleMaxLength } from '@app/web/server/collections/collectionConstraints'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import BaseVisibilityEdition from '@app/web/components/Base/Edition/BaseVisibilityEdition'
-import { collectionTitleMaxLength } from '../../server/collections/collectionConstraints'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import VisibilityField from '@app/web/components/VisibilityField'
 import AddOrRemoveResourceFromCollection from './AddOrRemoveResourceFromCollection'
 import SaveInNestedCollection from './SaveInNestedCollection'
 import styles from './SaveResourceInCollectionModal.module.css'
@@ -438,12 +438,17 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   }
                 />
               ) : (
-                <BaseVisibilityEdition
+                <VisibilityField
+                  model="Collection"
+                  path="isPublic"
+                  control={createCollectionForm.control}
+                  disabled={createCollectionForm.formState.isSubmitting}
+                  privateTitle="Collection privée"
+                  publicTitle="Collection publique"
+                  publicHint="Visible par tous les visiteurs."
+                  privateHint="Accessible uniquement aux membres et aux administrateurs que vous inviterez."
                   label="Visibilité de la collection"
                   asterisk
-                  control={createCollectionForm.control}
-                  model="Collection"
-                  disabled={createCollectionForm.formState.isSubmitting}
                 />
               )}
             </>

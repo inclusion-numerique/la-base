@@ -3,13 +3,16 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getResource } from '@app/web/server/resources/getResource'
-import { filterAccess } from '@app/web/server/resources/authorization'
 import ResourceParameters from '@app/web/components/Resource/Edition/Parameters/ResourceParameters'
 import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import {
+  resourceAuthorization,
+  ResourcePermissions,
+} from '@app/web/authorization/models/resourceAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -48,8 +51,11 @@ const ResourceParametersPage = async ({
     notFound()
   }
 
-  const authorizations = filterAccess(resource, user)
-  if (!authorizations.authorized || !authorizations.isAdmin) {
+  const canWrite = resourceAuthorization(resource, user).hasPermission(
+    ResourcePermissions.WriteResource,
+  )
+
+  if (!canWrite) {
     redirect(`/ressources/${params.slug}`)
   }
 

@@ -26,9 +26,9 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
-      'Visible uniquement par vous et les contributeurs que vous avez invités.',
+      'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
 
     cy.testId('edit-card-button').eq(1).click()
@@ -36,7 +36,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible par tous les visiteurs.',
     )
@@ -63,7 +63,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible par tous les visiteurs.',
     )
@@ -76,7 +76,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible uniquement par vous et les contributeurs que vous avez invités.',
     )
@@ -110,7 +110,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible par tous les visiteurs.',
     )
@@ -121,7 +121,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
@@ -158,7 +158,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible par tous les visiteurs.',
     )
@@ -171,7 +171,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
       'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )

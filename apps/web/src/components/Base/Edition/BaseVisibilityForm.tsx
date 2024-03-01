@@ -8,7 +8,6 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import EditCard from '@app/web/components/EditCard'
 import VisibilityField from '@app/web/components/VisibilityField'
 import {
@@ -16,6 +15,7 @@ import {
   UpdateBaseVisibilityCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { BasePageData } from '@app/web/server/bases/getBase'
+import Visibility from '@app/web/components/Visibility'
 
 const {
   Component: PrivateModal,
@@ -25,6 +25,15 @@ const {
   id: 'base-private-visibility',
   isOpenedByDefault: false,
 })
+
+const visibilityTexts = {
+  publicTitle: 'Base publique',
+  privateTitle: 'Base privée',
+  publicHint:
+    'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
+  privateHint:
+    'Les contenus & informations de votre base sont masqués aux visiteurs.',
+}
 
 const BaseVisibilityForm = ({
   base,
@@ -117,20 +126,13 @@ const BaseVisibilityForm = ({
         edition={
           <VisibilityField
             model="base"
+            path="isPublic"
             control={form.control}
-            publicTitle="Base publique"
-            privateTitle="Base privée"
+            {...visibilityTexts}
           />
         }
         view={
-          <>
-            <p className="fr-text--sm" data-testid="base-visibility">
-              {base.isPublic
-                ? 'Votre base est publique. Vous pouvez passer votre base en privée si vous le souhaitez.'
-                : 'Votre base est privée. Vous pouvez passer votre base en publique si vous le souhaitez.'}
-            </p>
-            <BasePrivacyTag isPublic={base.isPublic} />
-          </>
+          <Visibility isPublic={base.isPublic ?? false} {...visibilityTexts} />
         }
       />
     </>

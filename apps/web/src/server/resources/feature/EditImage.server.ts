@@ -2,10 +2,7 @@ import {
   EditImageCommand,
   ImageEdited,
 } from '@app/web/server/resources/feature/EditImage'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleEditImage: ResourceMutationCommandHandler<
@@ -19,10 +16,6 @@ export const handleEditImage: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const editImageSecurityRules: ResourceCommandSecurityRule<
-  EditImageCommand
-> = () => true
 
 export const applyImageEdited: ResourceMutationEventApplier<ImageEdited> = (
   event,

@@ -70,6 +70,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/editer',
     )
     cy.dsfrCollapsesShouldBeBound()
+    cy.dsfrModalsShouldBeBound()
 
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-invite-contributors-modal').click()
@@ -93,6 +94,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     })
 
     cy.dsfrCollapsesShouldBeBound()
+    cy.dsfrModalsShouldBeBound()
 
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-invite-contributors-modal').click()
@@ -105,12 +107,13 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.testId('contributors-contributor').should('not.exist')
 
     cy.signin({ email: contributor.email })
-    cy.visit(
-      '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
-    )
 
-    cy.testId('resource-view').should('not.exist')
-    cy.testId('resource-edition-button').should('not.exist')
-    cy.testId('private-ressource-box').should('exist')
+    // Expect 404, private draft resource is not reachable
+    cy.request({
+      url: '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+      failOnStatusCode: false,
+    })
+      .its('status')
+      .should('equal', 404)
   })
 })

@@ -10,16 +10,18 @@ import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(con
 
 const ProfileSuivisPage = async ({ params }: ProfilRouteParams) => {
   // Auth and profile has been checked in layout
-  const { profile, user, authorizations } = await getProfilePageContext(
-    params.slug,
-  )
+  const {
+    profile,
+    user,
+    authorization: { hasRole },
+  } = await getProfilePageContext(params.slug)
 
   const [baseFollows, profileFollows] = await Promise.all([
     getProfileBaseFollows(profile.id),
     getProfileProfileFollows(profile.id),
   ])
 
-  return authorizations.isUser ? (
+  return hasRole('ProfileOwner') ? (
     <FollowsList
       user={user}
       profileFollows={profileFollows}

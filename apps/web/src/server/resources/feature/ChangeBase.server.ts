@@ -3,10 +3,7 @@ import {
   BaseChanged,
   ChangeBaseCommand,
 } from '@app/web/server/resources/feature/ChangeBase'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
@@ -41,10 +38,6 @@ export const handleChangeBase: ResourceMutationCommandHandler<
     },
   }
 }
-
-export const changeBaseSecurityRules: ResourceCommandSecurityRule<
-  ChangeBaseCommand
-> = () => true
 
 export const applyBaseChanged: ResourceMutationEventApplier<BaseChanged> = (
   event,

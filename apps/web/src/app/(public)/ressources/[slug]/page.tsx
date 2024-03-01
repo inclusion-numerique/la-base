@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import ResourceView from '@app/web/components/Resource/View/ResourceView'
 import { getResource } from '@app/web/server/resources/getResource'
-import { filterAccess } from '@app/web/server/resources/authorization'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import ResourceViewHeader from '@app/web/components/Resource/View/ResourceViewHeader'
 import PrivateBox from '@app/web/components/PrivateBox'
@@ -15,6 +14,10 @@ import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import { applyDraft } from '@app/web/utils/resourceDraft'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import {
+  resourceAuthorization,
+  ResourcePermissions,
+} from '@app/web/authorization/models/resourceAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -54,7 +57,18 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
     notFound()
   }
 
-  const authorizations = filterAccess(resource, user)
+  const { hasPermission } = resourceAuthorization(resource, user)
+
+  const canReadGeneralInformation = hasPermission(
+    ResourcePermissions.ReadGeneralResourceInformation,
+  )
+  if (!canReadGeneralInformation) {
+    notFound()
+  }
+
+  const canWrite = hasPermission(ResourcePermissions.WriteResource)
+  const canReadContent = hasPermission(ResourcePermissions.ReadResourceContent)
+  const canDelete = hasPermission(ResourcePermissions.DeleteResource)
 
   return (
     <>
@@ -62,15 +76,16 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} />
         <main id={contentId}>
-          {authorizations.authorized ? (
+          {canReadContent ? (
             <ResourceView
               user={user}
-              resource={authorizations.resource}
-              isAdmin={authorizations.isAdmin}
+              resource={resource}
+              canWrite={canWrite}
+              canDelete={canDelete}
             />
           ) : (
             <>
-              <ResourceViewHeader resource={authorizations.resource} />
+              <ResourceViewHeader resource={resource} />
               <ResourceViewSeparators onlyLeft withoutPadding />
               <PrivateBox type="Ressource" />
             </>

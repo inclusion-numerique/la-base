@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import { FilteredProfile } from '@app/web/server/profiles/authorization'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
@@ -15,25 +14,25 @@ export const headerSkipLink = { label: 'Entête', anchor: `#${headerId}` }
 
 const ProfileHeader = ({
   profile,
-  isConnectedUser,
+  canWrite,
+  isOwner,
   resourcesCount,
   user,
 }: {
-  profile: ProfilePageData | FilteredProfile
-  isConnectedUser?: boolean
+  profile: ProfilePageData
+  canWrite: boolean
+  isOwner: boolean
   resourcesCount: number
   user: SessionUser | null
 }) => (
   <div className={styles.container}>
     <div className="fr-container">
       <Breadcrumbs
-        currentPage={
-          isConnectedUser ? 'Mon Profil' : `${profile.name || 'Profil'}`
-        }
+        currentPage={isOwner ? 'Mon Profil' : `${profile.name || 'Profil'}`}
       />
       <div id={headerId}>
         <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
-          {isConnectedUser ? (
+          {canWrite ? (
             <div className={styles.buttons}>
               <Link
                 data-testid="profile-edition-button"

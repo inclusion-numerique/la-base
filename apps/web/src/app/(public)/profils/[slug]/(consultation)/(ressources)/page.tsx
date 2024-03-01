@@ -5,16 +5,23 @@ import EmptyProfileResources from '@app/web/components/Profile/EmptyProfileResou
 import Resources from '@app/web/components/Resource/List/Resources'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
 import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import {
+  ProfilePermissions,
+  ProfileRoles,
+} from '@app/web/authorization/models/profileAuthorization'
 import { applyDraft } from '@app/web/utils/resourceDraft'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 
 const ProfilePage = async ({ params }: ProfilRouteParams) => {
   // Auth and profile has been checked in layout
-  const { profile, user, authorizations } = await getProfilePageContext(
+  const { profile, user, authorization } = await getProfilePageContext(
     params.slug,
   )
 
   const resources = await getProfileResources(profile.id, user)
+
+  const canWrite = authorization.hasPermission(ProfilePermissions.WriteProfile)
+  const isOwner = authorization.hasRole(ProfileRoles.ProfileOwner)
 
   // Array of resources with their draft if they are in draft state
   const ressourcesAndDrafts = await Promise.all(
@@ -39,11 +46,11 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
     .filter(isDefinedAndNotNull)
 
   return ressourcesWithAppliedDraft.length === 0 ? (
-    <EmptyProfileResources isConnectedUser={authorizations.isUser} />
+    <EmptyProfileResources canWrite={canWrite} isOwner={isOwner} />
   ) : (
     <Resources
       resources={ressourcesWithAppliedDraft}
-      isConnectedUser={authorizations.isUser}
+      canWrite={canWrite}
       user={user}
       baseId={null}
     />

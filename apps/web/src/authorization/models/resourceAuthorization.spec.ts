@@ -199,7 +199,9 @@ describe('Authorization - Ressources', () => {
       ])(
         '$title, je n’ai pas de permissions sur une ressource privée',
         ({ roles }) => {
-          expect(getResourcePermissions(privateResource, roles)).toEqual([])
+          expect(getResourcePermissions(privateResource, roles)).toEqual([
+            ResourcePermissions.ReadGeneralResourceInformation,
+          ])
         },
       )
     })

@@ -14,8 +14,8 @@ import {
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import EditableCardForm from '@app/web/components/EditableCardForm'
-import CustomTag, { TagColor } from '@app/web/components/CustomTag'
 import VisibilityField from '@app/web/components/VisibilityField'
+import Visibility from '@app/web/components/Visibility'
 
 const {
   Component: PrivateModal,
@@ -25,6 +25,15 @@ const {
   id: 'profile-private-visibility',
   isOpenedByDefault: false,
 })
+
+const visibilityTexts = {
+  publicTitle: 'Profil public',
+  privateTitle: 'Profil privé',
+  publicHint:
+    'Tout le monde peut vous suivre et visiter votre page profil pour y retrouver vos contenus publics.',
+  privateHint:
+    'Les contenus & informations de votre page profil sont masqués aux visiteurs.',
+}
 
 const ProfileVisibilityForm = ({
   profile,
@@ -105,40 +114,15 @@ const ProfileVisibilityForm = ({
         form={form}
         onSave={handleSave}
         preview={
-          profile.isPublic ? (
-            <>
-              <p data-testid="profile-visibility">
-                Votre profil est public. Vous pouvez passer votre profil en
-                privé si vous le souhaitez.
-              </p>
-              <CustomTag
-                color={TagColor.GREEN}
-                icon="fr-icon-earth-fill"
-                label="Profil public"
-              />
-            </>
-          ) : (
-            <>
-              <p data-testid="profile-visibility">
-                Votre profil est privé. Vous pouvez passer votre profil en
-                public si vous le souhaitez.
-              </p>
-              <CustomTag
-                color={TagColor.GREY}
-                icon="fr-icon-lock-line"
-                label="Profil privé"
-              />
-            </>
-          )
+          <Visibility isPublic={profile.isPublic} {...visibilityTexts} />
         }
         editing={
           <VisibilityField
             model="profile"
+            path="isPublic"
             control={form.control}
             disabled={isLoading}
-            publicTitle="Profil public"
-            privateTitle="Profil privé"
-            privateHint="Votre profil n'est pas visible."
+            {...visibilityTexts}
           />
         }
       />

@@ -9,14 +9,18 @@ import {
   UpdateBaseImageCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { invalidError } from '@app/web/server/rpc/trpcErrors'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import {
+  baseAuthorization,
+  BasePermissions,
+} from '@app/web/authorization/models/baseAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 
-// TODO - Check user permission
 export const baseRouter = router({
   create: protectedProcedure
     .input(CreateBaseCommandValidation)
@@ -44,7 +48,7 @@ export const baseRouter = router({
           createdById: user.id,
           members: {
             create: [
-              { memberId: user.id, isAdmin: true },
+              { memberId: user.id, isAdmin: true, accepted: new Date() },
               ...members.map((member) => ({
                 memberId: member.id,
                 acceptationToken: tokens[member.id],
@@ -72,12 +76,15 @@ export const baseRouter = router({
     .mutation(async ({ input, ctx: { user } }) => {
       const base = await prismaClient.base.findUnique({
         where: { id: input.id },
-        select: { slug: true },
+        select: { ...baseAuthorizationTargetSelect, slug: true },
       })
-      // TODO Check security
+
       if (!base) {
         throw invalidError('Base not found')
       }
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase),
+      )
 
       /**
        * We update the slug if the title has changed
@@ -149,7 +156,20 @@ export const baseRouter = router({
     }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx: { user } }) => {
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.id },
+        select: baseAuthorizationTargetSelect,
+      })
+
+      if (!base) {
+        throw invalidError('Base not found')
+      }
+
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(BasePermissions.DeleteBase),
+      )
+
       const timestamp = new Date()
       return prismaClient.base.update({
         data: {
@@ -161,10 +181,23 @@ export const baseRouter = router({
     }),
   updateImage: protectedProcedure
     .input(UpdateBaseImageCommandValidation)
-    .mutation(async ({ input: { id, ...images } }) =>
+    .mutation(async ({ input: { id, ...images }, ctx: { user } }) => {
+      const base = await prismaClient.base.findUnique({
+        where: { id },
+        select: baseAuthorizationTargetSelect,
+      })
+
+      if (!base) {
+        throw invalidError('Base not found')
+      }
+
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase),
+      )
+
       prismaClient.base.update({
         where: { id },
         data: images,
-      }),
-    ),
+      })
+    }),
 })

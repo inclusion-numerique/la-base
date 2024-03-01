@@ -12,14 +12,13 @@ import {
   followProfileIconOnlyButtonProps,
 } from '@app/web/components/Follows/followButtonProps'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import { FilteredBase } from '@app/web/server/bases/authorization'
 
 export type FollowButtonProps = {
   user: SessionUser | null
   iconOnly?: boolean
   followPriority?: ButtonProps['priority']
 } & (
-  | { base: BaseListItem | BasePageData | FilteredBase; profile?: undefined }
+  | { base: BaseListItem | BasePageData; profile?: undefined }
   | {
       profile: Pick<ProfileListItem, 'id' | 'followedBy' | 'name'>
       base?: undefined

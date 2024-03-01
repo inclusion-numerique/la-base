@@ -12,6 +12,7 @@ export const getProfilePageQuery = async (
     select: {
       id: true,
       slug: true,
+      deleted: true,
       name: true,
       firstName: true,
       lastName: true,

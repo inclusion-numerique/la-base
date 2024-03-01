@@ -3,10 +3,15 @@ import React from 'react'
 import CreateCollection from '@app/web/components/Collection/Create/CreateCollection'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import { getBase } from '@app/web/server/bases/getBase'
 import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { prismaClient } from '@app/web/prismaClient'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import {
+  baseAuthorization,
+  BasePermissions,
+} from '@app/web/authorization/models/baseAuthorization'
 
 const CollectionCreationPage = async ({
   searchParams = {},
@@ -22,14 +27,19 @@ const CollectionCreationPage = async ({
     )
   }
 
-  // TODO Security check on base
   const base = searchParams.base
-    ? await getBase(searchParams.base, user)
+    ? await prismaClient.base.findUnique({
+        where: { id: searchParams.base },
+        select: { title: true, slug: true, ...baseAuthorizationTargetSelect },
+      })
     : undefined
 
-  if (searchParams.base && !base) {
+  if (
+    searchParams.base &&
+    (!base ||
+      !baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase))
+  ) {
     notFound()
-    return null
   }
 
   const parents = base

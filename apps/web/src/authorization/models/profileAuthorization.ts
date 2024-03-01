@@ -4,6 +4,7 @@ import {
   UserSecurityRole,
   UserSecurityRoles,
 } from '@app/web/authorization/userSecurityRole'
+import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
 
 export const ProfileRoles = {
   ProfileOwner: 'ProfileOwner',
@@ -88,3 +89,8 @@ export const getProfilePermissions = (
 
   return permissions
 }
+
+export const profileAuthorization = createAuthorizer(
+  getProfileRoles,
+  getProfilePermissions,
+)

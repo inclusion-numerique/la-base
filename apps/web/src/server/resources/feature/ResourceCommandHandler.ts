@@ -42,14 +42,3 @@ export type ResourceMutationCommandHandler<
 export type ResourceCommandHandler =
   | ResourceCreationCommand
   | ResourceMutationCommandHandler
-
-export type ResourceCommandSecurityRuleContext = {
-  user: SessionUser
-}
-
-export type ResourceCommandSecurityRule<
-  Command extends HandlerResourceCommand = HandlerResourceCommand,
-> = (
-  command: Command,
-  context: ResourceCommandSecurityRuleContext,
-) => Promise<boolean> | boolean

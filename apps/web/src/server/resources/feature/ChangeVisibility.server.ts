@@ -2,10 +2,7 @@ import {
   VisibilityChanged,
   ChangeVisibilityCommand,
 } from '@app/web/server/resources/feature/ChangeVisibility'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
@@ -20,10 +17,6 @@ export const handleChangeVisibility: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const ChangeVisibilitySecurityRules: ResourceCommandSecurityRule<
-  ChangeVisibilityCommand
-> = () => true
 
 export const applyVisibilityChanged: ResourceMutationEventApplier<
   VisibilityChanged

@@ -4,7 +4,6 @@ import {
   ContentAdded,
 } from '@app/web/server/resources/feature/AddContent'
 import {
-  addContentSecurityRules,
   applyContentAdded,
   handleAddContent,
 } from '@app/web/server/resources/feature/AddContent.server'
@@ -14,7 +13,6 @@ import {
 } from '@app/web/server/resources/feature/ChangeBase'
 import {
   applyBaseChanged,
-  changeBaseSecurityRules,
   handleChangeBase,
   onBaseChanged,
 } from '@app/web/server/resources/feature/ChangeBase.server'
@@ -24,7 +22,6 @@ import {
 } from '@app/web/server/resources/feature/CreateResource'
 import {
   applyResourceCreated,
-  createResourceSecurityRules,
   handleCreateResource,
   onCreated,
 } from '@app/web/server/resources/feature/CreateResource.server'
@@ -34,7 +31,6 @@ import {
 } from '@app/web/server/resources/feature/EditContent'
 import {
   applyContentEdited,
-  editContentSecurityRules,
   handleEditContent,
 } from '@app/web/server/resources/feature/EditContent.server'
 import {
@@ -43,7 +39,6 @@ import {
 } from '@app/web/server/resources/feature/EditImage'
 import {
   applyImageEdited,
-  editImageSecurityRules,
   handleEditImage,
 } from '@app/web/server/resources/feature/EditImage.server'
 import {
@@ -52,7 +47,6 @@ import {
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
 import {
   applyTitleAndDescriptionEdited,
-  editTitleAndDescriptionSecurityRules,
   handleEditTitleAndDescription,
 } from '@app/web/server/resources/feature/EditTitleAndDescription.server'
 import {
@@ -62,7 +56,6 @@ import {
 import {
   applyResourceMigrated,
   handleMigrateResource,
-  migrateResourceSecurityRules,
   onMigrated,
 } from '@app/web/server/resources/feature/MigrateResource.server'
 import {
@@ -73,7 +66,6 @@ import {
   applyResourcePublished,
   handlePublish,
   onPublished,
-  publishSecurityRules,
 } from '@app/web/server/resources/feature/PublishResource.server'
 import {
   ContentRemoved,
@@ -82,7 +74,6 @@ import {
 import {
   applyContentRemoved,
   handleRemoveContent,
-  removeContentSecurityRules,
 } from '@app/web/server/resources/feature/RemoveContent.server'
 import {
   ContentReordered,
@@ -91,10 +82,8 @@ import {
 import {
   applyContentReordered,
   handleReorderContent,
-  reorderContentSecurityRules,
 } from '@app/web/server/resources/feature/ReorderContent.server'
 import {
-  ResourceCommandSecurityRule,
   ResourceCreationCommandHandler,
   ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
@@ -111,7 +100,6 @@ import type { ResourceProjection } from '@app/web/server/resources/feature/creat
 import { DeleteCommandValidation, ResourceDeleted } from './DeleteResource'
 import {
   applyResourceDeleted,
-  deleteSecurityRules,
   handleDelete,
   onDeleted,
 } from './DeleteResource.server'
@@ -123,10 +111,8 @@ import {
   applyResourceRepublished,
   handleRepublish,
   onRepublished,
-  republishSecurityRules,
 } from './RepublishResource.server'
 import {
-  ChangeIndexationSecurityRules,
   applyIndexationChanged,
   handleChangeIndexation,
   onIndexationChanged,
@@ -136,7 +122,6 @@ import {
   IndexationChanged,
 } from './ChangeIndexation'
 import {
-  ChangeVisibilitySecurityRules,
   applyVisibilityChanged,
   handleChangeVisibility,
   onVisibilityChanged,
@@ -206,27 +191,6 @@ export const ResourceMutationCommandHandlers: {
   Publish: handlePublish,
   Republish: handleRepublish,
   Delete: handleDelete,
-}
-
-export const ResourceCommandSecurityRules: {
-  [Name in ResourceCommand['name']]: ResourceCommandSecurityRule<
-    ResourceCommand & { name: Name }
-  >
-} = {
-  CreateResource: createResourceSecurityRules,
-  MigrateResource: migrateResourceSecurityRules,
-  EditTitleAndDescription: editTitleAndDescriptionSecurityRules,
-  EditImage: editImageSecurityRules,
-  ChangeBase: changeBaseSecurityRules,
-  ChangeIndexation: ChangeIndexationSecurityRules,
-  ChangeVisibility: ChangeVisibilitySecurityRules,
-  AddContent: addContentSecurityRules,
-  EditContent: editContentSecurityRules,
-  ReorderContent: reorderContentSecurityRules,
-  RemoveContent: removeContentSecurityRules,
-  Publish: publishSecurityRules,
-  Republish: republishSecurityRules,
-  Delete: deleteSecurityRules,
 }
 
 /**

@@ -7,16 +7,20 @@ import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRo
 
 const ProfileBasesPage = async ({ params }: ProfilRouteParams) => {
   // Auth and profile has been checked in layout
-  const { profile, user, authorizations } = await getProfilePageContext(
-    params.slug,
-  )
+  const {
+    profile,
+    user,
+    authorization: { hasPermission, hasRole },
+  } = await getProfilePageContext(params.slug)
 
   const bases = await getProfileBases(profile.id, user)
 
+  const canWrite = hasPermission('WriteProfile')
+
   return bases.length === 0 ? (
-    <EmptyBases isConnectedUser={authorizations.isUser} />
+    <EmptyBases canWrite={canWrite} isOwner={hasRole('ProfileOwner')} />
   ) : (
-    <Bases user={user} bases={bases} isConnectedUser={authorizations.isUser} />
+    <Bases user={user} bases={bases} canWrite={canWrite} />
   )
 }
 

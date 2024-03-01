@@ -43,7 +43,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
           ) : (
             <>
               <Notice
-                className="fr-mx-2v fr-mt-4v fr-mb-4v"
+                className="fr-mx-2v fr-my-4v"
                 title="En tant que créateur de cette ressource, elle sera toujours visible sur votre profil."
               />
               <ResourceBaseRichRadioElement

@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Notice from '@codegouvfr/react-dsfr/Notice'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -12,20 +13,17 @@ import {
   ChangeVisibilityCommandValidation,
 } from '@app/web/server/resources/feature/ChangeVisibility'
 import EditCard from '@app/web/components/EditCard'
-import { PrivacyTag } from '../../../PrivacyTags'
-import ResourceVisibilityFormField from './ResourceVisibilityFormField'
+import Visibility from '@app/web/components/Visibility'
+import VisibilityField from '@app/web/components/VisibilityField'
 
-const getVisibilityText = (resource: Resource) => {
-  if (resource.isPublic) {
-    return 'Visible par tous les visiteurs.'
-  }
-
-  if (resource.base && !resource.base.isPublic) {
-    return 'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.'
-  }
-
-  return 'Visible uniquement par vous et les contributeurs que vous avez invités.'
-}
+const visibilityTexts = (base: { id: string } | null) => ({
+  publicTitle: 'Ressource publique',
+  privateTitle: 'Ressource privée',
+  publicHint: 'Visible par tous les visiteurs.',
+  privateHint: base
+    ? 'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.'
+    : 'Visible uniquement par vous et les contributeurs que vous avez invités.',
+})
 
 const ResourceVisibilityForm = ({
   resource,
@@ -67,30 +65,36 @@ const ResourceVisibilityForm = ({
         await mutate.mutateAsync(data)
       }}
       edition={
-        <ResourceVisibilityFormField
-          resource={resource}
-          user={user}
-          path="payload.isPublic"
-          control={form.control}
-        />
+        <>
+          {resource.base
+            ? !resource.base.isPublic && (
+                <Notice
+                  data-testid="notice-private-base"
+                  className="fr-mx-2v fr-my-4v"
+                  title="En publiant votre ressource dans une base privée, vous ne pourrez pas la rendre publique."
+                />
+              )
+            : !user.isPublic && (
+                <Notice
+                  data-testid="notice-private-profile"
+                  className="fr-mx-2v fr-my-4v"
+                  title="En publiant votre ressource dans un profil privé, vous ne pourrez pas la rendre publique."
+                />
+              )}
+          <VisibilityField
+            model="resource"
+            path="payload.isPublic"
+            control={form.control}
+            disabled={!(resource.base ? resource.base.isPublic : user.isPublic)}
+            {...visibilityTexts(resource.base)}
+          />
+        </>
       }
       view={
-        <div className="fr-flex fr-align-items-center">
-          <div className="fr-flex-grow-1 fr-mr-1w">
-            <span className="fr-text-label--grey">
-              {resource.isPublic ? 'Ressource publique' : 'Ressource privée'}
-            </span>
-            <p
-              className="fr-text--xs fr-hint-text "
-              data-testid="resource-visibility"
-            >
-              {getVisibilityText(resource)}
-            </p>
-          </div>
-          <div>
-            <PrivacyTag isPublic={resource.isPublic ?? undefined} />
-          </div>
-        </div>
+        <Visibility
+          isPublic={resource.isPublic ?? false}
+          {...visibilityTexts(resource.base)}
+        />
       }
     />
   )

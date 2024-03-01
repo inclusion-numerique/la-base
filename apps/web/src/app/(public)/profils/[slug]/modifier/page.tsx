@@ -6,11 +6,11 @@ import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
-import { filterAccess } from '@app/web/server/profiles/authorization'
 import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { profileAuthorization } from '@app/web/authorization/models/profileAuthorization'
 
 export const metadata: Metadata = {
   title: metadataTitle('Modifier mon profil'),
@@ -29,8 +29,11 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
     notFound()
   }
 
-  const authorizations = filterAccess(profile, user)
-  if (!authorizations.authorized || !authorizations.isUser) {
+  const { hasRole, hasPermission } = profileAuthorization(profile, user)
+  const isOwner = hasRole('ProfileOwner')
+  const canWrite = hasPermission('WriteProfile')
+
+  if (!canWrite) {
     redirect(`/profils/${params.slug}`)
   }
 
@@ -43,9 +46,7 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
         <Breadcrumbs
           parents={[
             {
-              label: authorizations.isUser
-                ? 'Mon Profil'
-                : `${profile.name || 'Profil'}`,
+              label: isOwner ? 'Mon Profil' : `${profile.name || 'Profil'}`,
               linkProps: { href: `/profils/${params.slug}` },
             },
           ]}

@@ -8,6 +8,7 @@ import { handleResourceCreationCommand } from '@app/web/server/resources/feature
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { SessionUser } from '@app/web/auth/sessionUser'
 
 describe('baseRouter', () => {
   // Helper function to easily test procedures
@@ -73,14 +74,42 @@ describe('baseRouter', () => {
 
   describe('mutate', () => {
     describe('UpdateBaseVisibilityCommand', () => {
-      const executeUpdateBaseVisibilityProcedure = (input: {
-        id: string
-        data: UpdateBaseVisibilityCommand
+      const executeUpdateBaseVisibilityProcedure = (
+        input: {
+          id: string
+          data: UpdateBaseVisibilityCommand
+        },
+        user?: SessionUser,
         // eslint-disable-next-line unicorn/consistent-function-scoping
-      }) =>
+      ) =>
         baseRouter
-          .createCaller(createTestContext({ user: givenUser }))
+          .createCaller(createTestContext({ user: user ?? givenUser }))
           .mutate(input)
+
+      it('should throw forbidden error if user has no permission to mutate', async () => {
+        // Given a private base
+        const givenBase = createTestIdTitleAndSlug('Forbidden error')
+
+        basesToDelete.push(givenBase.id)
+
+        await prismaClient.base.create({
+          data: {
+            ...givenBase,
+            createdById: givenUserId,
+          },
+        })
+
+        return expect(
+          executeUpdateBaseVisibilityProcedure({
+            id: givenBase.id,
+            data: {
+              isPublic: true,
+            },
+          }),
+        ).rejects.toThrow(
+          'Vous n’avez pas l’authorisation d’effectuer cette opération.',
+        )
+      })
 
       it('should change visibility to private of children collections and resources', async () => {
         // Given a public base with public and private collections and resources
@@ -106,12 +135,19 @@ describe('baseRouter', () => {
           givenDraftResource.id,
         )
 
+        const baseData = {
+          ...givenBase,
+          isPublic: true,
+          createdById: givenUserId,
+          email: givenUserEmail,
+        }
+
         await prismaClient.base.create({
           data: {
-            ...givenBase,
-            isPublic: true,
-            createdById: givenUserId,
-            email: givenUserEmail,
+            ...baseData,
+            members: {
+              create: { memberId: givenUserId, isAdmin: false },
+            },
             collections: {
               createMany: {
                 data: [
@@ -202,12 +238,23 @@ describe('baseRouter', () => {
           { user: givenUser },
         )
 
-        const base = await executeUpdateBaseVisibilityProcedure({
-          id: givenBase.id,
-          data: {
-            isPublic: false,
+        const base = await executeUpdateBaseVisibilityProcedure(
+          {
+            id: givenBase.id,
+            data: {
+              isPublic: false,
+            },
           },
-        })
+          {
+            ...givenUser,
+            bases: [
+              {
+                base: { ...baseData, collections: [], savedCollections: [] },
+                isAdmin: false,
+              },
+            ],
+          },
+        )
 
         const [
           publicCollection,

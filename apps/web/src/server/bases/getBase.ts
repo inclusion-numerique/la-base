@@ -17,6 +17,8 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     id: true,
     slug: true,
     title: true,
+    deleted: true,
+    createdById: true,
     description: true,
     department: true,
     email: true,

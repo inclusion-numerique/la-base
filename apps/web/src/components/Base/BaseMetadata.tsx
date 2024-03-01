@@ -4,7 +4,6 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
-import { FilteredBase } from '@app/web/server/bases/authorization'
 import styles from './BaseMetadata.module.css'
 
 const BaseMetadata = ({
@@ -13,7 +12,7 @@ const BaseMetadata = ({
   withBadge,
   smallBadge,
 }: {
-  base: BasePageData | BaseListItem | FilteredBase
+  base: BasePageData | BaseListItem
   className?: string
   withBadge?: boolean
   smallBadge?: boolean

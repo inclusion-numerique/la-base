@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { FilteredProfile } from '@app/web/server/profiles/authorization'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
   UpdateProfileImageCommand,
@@ -23,11 +22,7 @@ const ProfileImageEditionModal = createModal({
   isOpenedByDefault: false,
 })
 
-const ProfileImageEdition = ({
-  profile,
-}: {
-  profile: ProfilePageData | FilteredProfile
-}) => {
+const ProfileImageEdition = ({ profile }: { profile: ProfilePageData }) => {
   const router = useRouter()
 
   const form = useForm<UpdateProfileImageCommand>({

@@ -21,14 +21,14 @@ const {
 const ResourceActions = ({
   resource,
   user,
-  isAdmin,
+  canDelete,
+  canWrite,
 }: {
   resource: Resource
   user: SessionUser | null
-  isAdmin: boolean
+  canWrite: boolean
+  canDelete: boolean
 }) => {
-  const canEdit = isAdmin
-
   const isPublished = !!resource.published
 
   const canSaveInCollection = isPublished
@@ -40,7 +40,7 @@ const ResourceActions = ({
       <div className={styles.container}>
         {/* Destkop left actions */}
         <div className="fr-hidden fr-unhidden-md">
-          {canEdit && (
+          {canWrite && (
             <Button
               data-testid="resource-edition-button"
               priority="secondary"
@@ -71,7 +71,7 @@ const ResourceActions = ({
         {/* Mobile left actions */}
         <div className="fr-hidden-md">
           {/* Only display the first button in mobile */}
-          {canEdit && (
+          {canWrite && (
             <Button
               data-testid="resource-edition-button"
               priority="secondary"
@@ -90,14 +90,14 @@ const ResourceActions = ({
               resource={resource}
               user={user}
               data-testid="save-resource-in-collection-button"
-              variant={canEdit ? 'icon-only' : undefined}
+              variant={canWrite ? 'icon-only' : undefined}
             />
           )}
         </div>
 
         {/* Desktop right actions */}
         <div className="fr-hidden fr-unhidden-md">
-          {!isPublished && canEdit && (
+          {!isPublished && canDelete && (
             <DeleteResourceButton resourceId={resource.id} variant="tertiary" />
           )}
           {isPublished && (
@@ -114,7 +114,7 @@ const ResourceActions = ({
 
         {/* Mobile right actions */}
         <div className="fr-hidden-md">
-          {!isPublished && canEdit && (
+          {!isPublished && canDelete && (
             <DeleteResourceButton
               resourceId={resource.id}
               variant="icon-only"
@@ -142,7 +142,7 @@ const ResourceActions = ({
           },
         ]}
       >
-        {!isPublished && canEdit && (
+        {!isPublished && canDelete && (
           <DeleteResourceButton resourceId={resource.id} />
         )}
         <ResourceReportButton />

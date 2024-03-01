@@ -5,11 +5,14 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import ResourceEdition from '@app/web/components/Resource/Edition/ResourceEdition'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { filterAccess } from '@app/web/server/resources/authorization'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, contentSkipLink } from '@app/web/utils/skipLinks'
+import {
+  resourceAuthorization,
+  ResourcePermissions,
+} from '@app/web/authorization/models/resourceAuthorization'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -36,8 +39,11 @@ const ResourceEditionPage = async ({
   if (!resource || !draftResource) {
     notFound()
   }
-  const authorizations = filterAccess(resource, user)
-  if (!authorizations.authorized || !authorizations.isAdmin) {
+  const canWrite = resourceAuthorization(resource, user).hasPermission(
+    ResourcePermissions.WriteResource,
+  )
+
+  if (!canWrite) {
     redirect(`/ressources/${params.slug}`)
   }
 

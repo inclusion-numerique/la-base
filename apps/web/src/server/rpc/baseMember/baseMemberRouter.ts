@@ -2,47 +2,56 @@ import z from 'zod'
 import { v4 } from 'uuid'
 import * as Sentry from '@sentry/nextjs'
 import { prismaClient } from '@app/web/prismaClient'
-import { getBase } from '@app/web/server/bases/getBase'
-import { filterAccess } from '@app/web/server/bases/authorization'
+import { baseSelect } from '@app/web/server/bases/getBase'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { InviteMemberCommandValidation } from '@app/web/server/baseMembers/inviteMember'
 import {
-  forbiddenError,
+  authorizeOrThrow,
   invalidError,
   notFoundError,
 } from '@app/web/server/rpc/trpcErrors'
 import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import {
+  baseAuthorization,
+  BasePermissions,
+} from '@app/web/authorization/models/baseAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 
 export const baseMemberRouter = router({
   invite: protectedProcedure
     .input(InviteMemberCommandValidation)
     .mutation(async ({ input, ctx: { user } }) => {
-      const base = await getBase(input.baseId, user)
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.baseId },
+        select: {
+          ...baseAuthorizationTargetSelect,
+          ...baseSelect(user),
+        },
+      })
       if (!base) {
         return notFoundError()
       }
-      const authorizations = filterAccess(base, user)
-      if (!authorizations.authorized || !authorizations.isMember) {
-        return forbiddenError()
-      }
 
-      if (input.isAdmin && !authorizations.isAdmin) {
-        return forbiddenError()
-      }
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(
+          input.isAdmin ? 'AddBaseAdmin' : 'AddBaseMember',
+        ),
+      )
 
-      if (
-        base.members.some((member) => input.members.includes(member.member.id))
-      ) {
-        return invalidError()
-      }
+      /**
+       * Do not re-add existing members
+       */
+      const memberUserIds = input.members.filter(
+        (id) => !base.members.some((member) => member.member.id === id),
+      )
 
       const members = await prismaClient.user.findMany({
         select: { id: true, email: true },
-        where: { id: { in: input.members } },
+        where: { id: { in: memberUserIds } },
       })
 
       for (const member of members) {
-        const memberId = input.members.find((x) => x === member.id)
+        const memberId = memberUserIds.find((x) => x === member.id)
         if (memberId) {
           const acceptationToken = v4()
           // eslint-disable-next-line no-await-in-loop
@@ -64,7 +73,7 @@ export const baseMemberRouter = router({
         }
       }
     }),
-  mutate: protectedProcedure
+  changeRole: protectedProcedure
     .input(
       z.object({
         baseId: z.string(),
@@ -73,22 +82,35 @@ export const baseMemberRouter = router({
       }),
     )
     .mutation(async ({ input, ctx: { user } }) => {
-      const base = await getBase(input.baseId, user)
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.baseId },
+        select: {
+          ...baseAuthorizationTargetSelect,
+          ...baseSelect(user),
+        },
+      })
+
       if (!base) {
         return notFoundError()
       }
 
-      const authorizations = filterAccess(base, user)
-      if (!authorizations.authorized || !authorizations.isAdmin) {
-        return forbiddenError()
-      }
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(
+          BasePermissions.ChangeBaseMemberRole,
+        ),
+      )
 
-      if (
-        !base.members.some(
-          (member) => member.memberId !== input.memberId && member.isAdmin,
+      /**
+       * Do not allow removal of last admin
+       */
+      const hasRemainingAdmin = base.members.some(
+        (member) => member.memberId !== input.memberId && member.isAdmin,
+      )
+
+      if (!hasRemainingAdmin) {
+        return invalidError(
+          'Vous ne pouvez pas supprimer le dernier administrateur de cette base',
         )
-      ) {
-        return forbiddenError()
       }
 
       return prismaClient.baseMembers.update({
@@ -101,21 +123,35 @@ export const baseMemberRouter = router({
   remove: protectedProcedure
     .input(z.object({ baseId: z.string(), memberId: z.string() }))
     .mutation(async ({ input, ctx: { user } }) => {
-      const base = await getBase(input.baseId, user)
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.baseId },
+        select: {
+          ...baseAuthorizationTargetSelect,
+          ...baseSelect(user),
+        },
+      })
+
       if (!base) {
         return notFoundError()
       }
-      const authorizations = filterAccess(base, user)
-      if (!authorizations.authorized || !authorizations.isAdmin) {
-        return forbiddenError()
-      }
 
-      if (
-        !base.members.some(
-          (member) => member.memberId !== input.memberId && member.isAdmin,
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(
+          BasePermissions.RemoveBaseMember,
+        ),
+      )
+
+      /**
+       * Do not allow removal of last admin
+       */
+      const hasRemainingAdmin = base.members.some(
+        (member) => member.memberId !== input.memberId && member.isAdmin,
+      )
+
+      if (!hasRemainingAdmin) {
+        return invalidError(
+          'Vous ne pouvez pas supprimer le dernier administrateur de cette base',
         )
-      ) {
-        return forbiddenError()
       }
 
       return prismaClient.baseMembers.delete({

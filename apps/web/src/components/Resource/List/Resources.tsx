@@ -7,18 +7,22 @@ import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteRe
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import {
+  resourceAuthorization,
+  ResourceRoles,
+} from '@app/web/authorization/models/resourceAuthorization'
 import styles from './Resources.module.css'
 
 const Resources = ({
   resources,
   user,
-  isConnectedUser,
+  canWrite,
   baseId,
 }: {
   baseId: string | null
   resources: BaseResource[]
   user: SessionUser | null
-  isConnectedUser: boolean
+  canWrite: boolean
 }) => {
   const drafts = useMemo(
     () => resources.filter((resource) => resource.isPublic === null),
@@ -37,7 +41,7 @@ const Resources = ({
     <div data-testid="base-resources">
       <div className={styles.header}>
         <h3 className="fr-mb-0">Ressources · {resources.length}</h3>
-        {isConnectedUser && (
+        {canWrite && (
           <div data-testid="create-resource-button">
             <CreateResourceButton
               baseId={baseId}
@@ -49,7 +53,7 @@ const Resources = ({
           </div>
         )}
       </div>
-      {isConnectedUser ? (
+      {canWrite ? (
         <Tabs
           tabs={[
             {
@@ -92,7 +96,14 @@ const Resources = ({
         />
       ) : (
         resources.map((resource) => (
-          <ResourceCard key={resource.id} resource={resource} user={user} />
+          <ResourceCard
+            isContributor={resourceAuthorization(resource, user).hasRole(
+              ResourceRoles.ResourceContributor,
+            )}
+            key={resource.id}
+            resource={resource}
+            user={user}
+          />
         ))
       )}
       {!!user && <SaveResourceInCollectionModal user={user} />}

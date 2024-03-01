@@ -70,7 +70,7 @@ const SaveResourceInCollectionButton = ({
 }: {
   className?: string
   user: SessionUser | null
-  resource: { id: string; slug: string }
+  resource: { id: string; slug: string; title: string }
   iconOnly?: boolean
   'data-testid'?: string
   variant?: 'card' | 'icon-only'
@@ -81,11 +81,13 @@ const SaveResourceInCollectionButton = ({
   const buttonProps = getButtonProps(alreadySaved, variant)
 
   if (user) {
+    const accessibilityTitle = `Enregistrer "${resource.title}" dans une collection`
     return (
       <OpenSaveResourceInCollectionModalButton
         {...buttonProps}
         nativeButtonProps={{
           'data-testid': dataTestid,
+          title: accessibilityTitle,
         }}
         className={className}
         resourceId={resource.id}
@@ -102,6 +104,7 @@ const SaveResourceInCollectionButton = ({
           intent: 'enregistrer-ressource-dans-collection',
           next: `/ressources/${resource.slug}`,
         }),
+        title: `Se connecter pour enregistrer "${resource.title}" dans une collection`,
       }}
     />
   )

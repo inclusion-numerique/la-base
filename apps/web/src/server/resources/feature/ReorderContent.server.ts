@@ -2,10 +2,7 @@ import {
   ContentReordered,
   ReorderContentCommand,
 } from '@app/web/server/resources/feature/ReorderContent'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { sortContents } from '@app/web/server/resources/sortContents'
 
@@ -20,10 +17,6 @@ export const handleReorderContent: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const reorderContentSecurityRules: ResourceCommandSecurityRule<
-  ReorderContentCommand
-> = () => true
 
 export const applyContentReordered: ResourceMutationEventApplier<
   ContentReordered

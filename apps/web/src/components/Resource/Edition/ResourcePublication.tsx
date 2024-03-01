@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
+import Notice from '@codegouvfr/react-dsfr/Notice'
 import { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
-import Card from '../../Card'
+import Card from '@app/web/components/Card'
+import VisibilityField from '@app/web/components/VisibilityField'
 import InviteContributors from '../Contributors/InviteResourceContributors'
 import ResourcePublicationView from './Parameters/ResourcePublicationView'
 import ResourceBaseEdition from './ResourceBaseEdition'
 import styles from './ResourcePublication.module.css'
-import ResourceVisibilityFormField from './Parameters/ResourceVisibilityFormField'
 import ResourceIndexationEdition from './Parameters/ResourceIndexationEdition'
+
+const visibilityTexts = (base: { id: string } | null) => ({
+  publicTitle: 'Ressource publique',
+  privateTitle: 'Ressource privée',
+  publicHint: 'Visible par tous les visiteurs.',
+  privateHint: base
+    ? 'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.'
+    : 'Visible uniquement par vous et les contributeurs que vous avez invités.',
+})
 
 const ResourcePublication = ({
   resource,
@@ -61,12 +71,28 @@ const ResourcePublication = ({
         description="Choisissez qui peut voir votre ressource."
         className="fr-mt-3w"
       >
-        <ResourceVisibilityFormField
-          resource={resource}
-          user={user}
-          control={control}
+        {resource.base
+          ? !resource.base.isPublic && (
+              <Notice
+                data-testid="notice-private-base"
+                className="fr-mx-2v fr-my-4v"
+                title="En publiant votre ressource dans une base privée, vous ne pourrez pas la rendre publique."
+              />
+            )
+          : !user.isPublic && (
+              <Notice
+                data-testid="notice-private-profile"
+                className="fr-mx-2v fr-my-4v"
+                title="En publiant votre ressource dans un profil privé, vous ne pourrez pas la rendre publique."
+              />
+            )}
+        <VisibilityField
+          model="resource"
           path="payload.isPublic"
+          control={control}
+          disabled={!(resource.base ? resource.base.isPublic : user.isPublic)}
           setIsPublic={setIsPublic}
+          {...visibilityTexts(resource.base)}
         />
       </Card>
       {isPublic && (
@@ -82,8 +108,6 @@ const ResourcePublication = ({
             supportTypesPath="payload.supportTypes"
             targetAudiencesPath="payload.targetAudiences"
             required
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: resource is public !
             control={control}
           />
         </Card>

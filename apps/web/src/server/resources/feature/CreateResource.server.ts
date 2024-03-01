@@ -2,10 +2,7 @@ import {
   CreateResourceCommand,
   ResourceCreated,
 } from '@app/web/server/resources/feature/CreateResource'
-import {
-  ResourceCommandSecurityRule,
-  ResourceCreationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { createSlug } from '@app/web/utils/createSlug'
@@ -36,10 +33,6 @@ export const handleCreateResource: ResourceCreationCommandHandler<
   }
 }
 
-export const createResourceSecurityRules: ResourceCommandSecurityRule<
-  CreateResourceCommand
-> = () => true
-
 export const applyResourceCreated: ResourceCreationEventApplier<
   ResourceCreated
 > = ({ timestamp, data: { id, slug, title, description, baseId, byId } }) => ({
@@ -53,6 +46,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   created: timestamp,
   updated: timestamp,
   published: null,
+  deleted: null,
   lastPublished: null,
   createdById: byId,
   imageId: null,

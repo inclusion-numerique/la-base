@@ -19,7 +19,10 @@ const hasContact = (profile: ProfilePageData): boolean =>
   (profile.emailIsPublic && profile.email != null) || profile.website != null
 
 const AProposPage = async ({ params }: ProfilRouteParams) => {
-  const { profile, authorizations } = await getProfilePageContext(params.slug)
+  const {
+    profile,
+    authorization: { hasPermission, hasRole },
+  } = await getProfilePageContext(params.slug)
 
   return hasInformations(profile) ||
     hasInformations(profile) ||
@@ -73,7 +76,7 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
             )}
             {hasSocialNetwork(profile) && (
               <>
-                <h3 className="fr-h6 fr-mb-1w">Nous suivre</h3>
+                <h3 className="fr-h6 fr-mb-1w">Me suivre</h3>
                 <div className="fr-flex fr-flex-wrap fr-flex-gap-5v">
                   <ExternalLink
                     href={profile.facebook}
@@ -98,7 +101,10 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
       </div>
     </>
   ) : (
-    <EmptyProfileInformations isConnectedUser={authorizations.isUser} />
+    <EmptyProfileInformations
+      canWrite={hasPermission('WriteProfile')}
+      isOwner={hasRole('ProfileOwner')}
+    />
   )
 }
 

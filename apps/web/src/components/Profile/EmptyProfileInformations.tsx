@@ -3,18 +3,20 @@ import Link from 'next/link'
 import EmptyBox from '../EmptyBox'
 
 const EmptyProfileInformations = ({
-  isConnectedUser,
+  isOwner,
+  canWrite,
 }: {
-  isConnectedUser: boolean
+  isOwner: boolean
+  canWrite: boolean
 }) => (
   <EmptyBox
     title={
-      isConnectedUser
+      isOwner
         ? 'Vous n’avez pas encore partagé vos informations sur votre profil'
         : 'Ce profil ne partage pas d’informations'
     }
   >
-    {isConnectedUser ? (
+    {canWrite ? (
       <>
         <div>Présentez-vous et partagez vos informations de contact.</div>
         <Link

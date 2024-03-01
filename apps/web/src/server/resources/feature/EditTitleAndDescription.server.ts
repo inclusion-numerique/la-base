@@ -2,10 +2,7 @@ import {
   EditTitleAndDescriptionCommand,
   TitleAndDescriptionEdited,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
@@ -36,10 +33,6 @@ export const handleEditTitleAndDescription: ResourceMutationCommandHandler<
     },
   }
 }
-
-export const editTitleAndDescriptionSecurityRules: ResourceCommandSecurityRule<
-  EditTitleAndDescriptionCommand
-> = () => true
 
 export const applyTitleAndDescriptionEdited: ResourceMutationEventApplier<
   TitleAndDescriptionEdited

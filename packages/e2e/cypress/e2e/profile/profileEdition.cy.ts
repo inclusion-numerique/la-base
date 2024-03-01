@@ -28,9 +28,9 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
 
     cy.visit(`/profils/${slug}/modifier`)
     cy.dsfrShouldBeStarted()
-    cy.testId('profile-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
-      'Votre profil est public. Vous pouvez passer votre profil en privé si vous le souhaitez.',
+      'Tout le monde peut vous suivre et visiter votre page profil pour y retrouver vos contenus publics.',
     )
 
     cy.testId('visibilite-edit-card-button').eq(0).click()
@@ -39,9 +39,9 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
     cy.testId('editable-card-form-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('profile-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
-      'Votre profil est privé. Vous pouvez passer votre profil en public si vous le souhaitez.',
+      'Les contenus & informations de votre page profil sont masqués aux visiteurs.',
     )
   })
 
@@ -68,9 +68,9 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
     cy.visit(`/profils/${slug}/modifier`)
     cy.dsfrShouldBeStarted()
 
-    cy.testId('profile-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
-      'Votre profil est public. Vous pouvez passer votre profil en privé si vous le souhaitez.',
+      'Tout le monde peut vous suivre et visiter votre page profil pour y retrouver vos contenus publics.',
     )
 
     cy.testId('visibilite-edit-card-button').eq(0).click()
@@ -80,9 +80,9 @@ describe('Utilisateur connecté, je peux modifier mon profile', () => {
     cy.testId('visibility-modal-continue-button').click()
     cy.wait('@mutation')
 
-    cy.testId('profile-visibility').should(
+    cy.testId('visibility').should(
       'have.text',
-      'Votre profil est privé. Vous pouvez passer votre profil en public si vous le souhaitez.',
+      'Les contenus & informations de votre page profil sont masqués aux visiteurs.',
     )
 
     cy.visit(

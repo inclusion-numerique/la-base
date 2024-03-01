@@ -3,10 +3,7 @@ import {
   AddContentCommand,
   ContentAdded,
 } from '@app/web/server/resources/feature/AddContent'
-import {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleAddContent: ResourceMutationCommandHandler<
@@ -21,10 +18,6 @@ export const handleAddContent: ResourceMutationCommandHandler<
     ...rest,
   },
 })
-
-export const addContentSecurityRules: ResourceCommandSecurityRule<
-  AddContentCommand
-> = () => true
 
 export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
   { timestamp, data: { __version, ...rest } },

@@ -38,23 +38,31 @@ const ProfileLayout = async ({
   params,
   children,
 }: PropsWithChildren<ProfilRouteParams>) => {
-  const { profile, user, authorizations } = await getProfilePageContext(
-    params.slug,
-  )
+  const {
+    profile,
+    user,
+    authorization: { hasPermission, hasRole },
+  } = await getProfilePageContext(params.slug)
 
   if (!profile.slug) return
 
   const { resourcesCount, followsCount, collectionsCount, basesCount } =
     await getProfilePageCounts(profile.slug)
 
-  if (!authorizations.authorized) {
+  const canView = hasPermission('ReadProfileData')
+  const canWrite = hasPermission('WriteProfile')
+  const isOwner = hasRole('ProfileOwner')
+
+  if (!canView) {
     return (
       <>
         <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
         <ProfileHeader
-          profile={authorizations.profile}
+          profile={profile}
           resourcesCount={resourcesCount}
           user={user}
+          canWrite={canWrite}
+          isOwner={isOwner}
         />
         <PrivateBox type="Profil" />
       </>
@@ -64,16 +72,17 @@ const ProfileLayout = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <ProfileHeader
-        profile={authorizations.profile}
-        isConnectedUser={authorizations.isUser}
+        profile={profile}
+        canWrite={canWrite}
+        isOwner={isOwner}
         resourcesCount={resourcesCount}
         user={user}
       />
       <main id={contentId}>
         <ProfileMenu
-          profile={authorizations.profile}
+          profile={profile}
           resourcesCount={resourcesCount}
-          isConnectedUser={authorizations.isUser}
+          isOwner={isOwner}
           basesCount={basesCount}
           collectionsCount={collectionsCount.total}
           followsCount={followsCount.total}

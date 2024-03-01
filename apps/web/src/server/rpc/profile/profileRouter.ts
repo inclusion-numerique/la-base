@@ -8,10 +8,15 @@ import {
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
 import { searchMember } from '@app/web/server/profiles/searchMember'
-import { invalidError } from '@app/web/server/rpc/trpcErrors'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
+import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
+import {
+  profileAuthorization,
+  ProfilePermissions,
+} from '@app/web/authorization/models/profileAuthorization'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,
@@ -83,6 +88,20 @@ export const profileRouter = router({
   updateVisibility: protectedProcedure
     .input(UpdateProfileVisibilityCommandValidation)
     .mutation(async ({ input, ctx: { user } }) => {
+      const profile = await prismaClient.user.findUnique({
+        where: { id: user.id, deleted: null },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
+      })
+
+      if (!profile) {
+        throw invalidError('User not found')
+      }
+
+      authorizeOrThrow(
+        profileAuthorization(profile, user).hasPermission(
+          ProfilePermissions.WriteProfile,
+        ),
+      )
       if (input.isPublic === false) {
         // All public resources not in a base must be made private
         const resources = await prismaClient.resource.findMany({
@@ -130,15 +149,20 @@ export const profileRouter = router({
   updateInformations: protectedProcedure
     .input(UpdateProfileInformationsCommandValidation)
     .mutation(async ({ input: informations, ctx: { user } }) => {
-      // TODO security check
       const profile = await prismaClient.user.findUnique({
         where: { id: user.id, deleted: null },
-        select: { slug: true },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
       })
 
       if (!profile) {
         throw invalidError('User not found')
       }
+
+      authorizeOrThrow(
+        profileAuthorization(profile, user).hasPermission(
+          ProfilePermissions.WriteProfile,
+        ),
+      )
 
       const firstName = informations.firstName?.trim() || null
       const lastName = informations.lastName?.trim() || null
@@ -166,8 +190,22 @@ export const profileRouter = router({
     }),
   updateContacts: protectedProcedure
     .input(UpdateProfileContactsCommandValidation)
-    .mutation(async ({ input: contacts, ctx: { user } }) =>
-      prismaClient.user.update({
+    .mutation(async ({ input: contacts, ctx: { user } }) => {
+      const profile = await prismaClient.user.findUnique({
+        where: { id: user.id, deleted: null },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
+      })
+
+      if (!profile) {
+        throw invalidError('User not found')
+      }
+
+      authorizeOrThrow(
+        profileAuthorization(profile, user).hasPermission(
+          ProfilePermissions.WriteProfile,
+        ),
+      )
+      return prismaClient.user.update({
         where: { id: user.id },
         data: {
           emailIsPublic: contacts.emailIsPublic,
@@ -176,47 +214,70 @@ export const profileRouter = router({
           twitter: contacts.twitter === '' ? null : contacts.twitter,
           linkedin: contacts.linkedin === '' ? null : contacts.linkedin,
         },
-      }),
-    ),
+      })
+    }),
   updateImage: protectedProcedure
     .input(UpdateProfileImageCommandValidation)
-    .mutation(async ({ input, ctx: { user } }) =>
-      prismaClient.user.update({
+    .mutation(async ({ input, ctx: { user } }) => {
+      const profile = await prismaClient.user.findUnique({
+        where: { id: user.id, deleted: null },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
+      })
+
+      if (!profile) {
+        throw invalidError('User not found')
+      }
+
+      authorizeOrThrow(
+        profileAuthorization(profile, user).hasPermission(
+          ProfilePermissions.WriteProfile,
+        ),
+      )
+      return prismaClient.user.update({
         where: { id: user.id },
         data: { imageId: input.imageId },
-      }),
-    ),
-  delete: protectedProcedure.mutation(
-    async ({
-      ctx: {
-        user: { id: userId },
+      })
+    }),
+  delete: protectedProcedure.mutation(async ({ ctx: { user } }) => {
+    const profile = await prismaClient.user.findUnique({
+      where: { id: user.id, deleted: null },
+      select: { slug: true, ...profileAuthorizationTargetSelect },
+    })
+
+    if (!profile) {
+      throw invalidError('User not found')
+    }
+
+    authorizeOrThrow(
+      profileAuthorization(profile, user).hasPermission(
+        ProfilePermissions.WriteProfile,
+      ),
+    )
+
+    const timestamp = new Date()
+
+    await prismaClient.resource.updateMany({
+      ...resourcesToDelete(user.id),
+      ...softDelete(timestamp),
+    })
+
+    await prismaClient.base.updateMany({
+      ...basesToDelete(user.id),
+      ...softDelete(timestamp),
+    })
+
+    await prismaClient.collection.updateMany({
+      ...collectionsToDelete(user.id),
+      ...softDelete(timestamp),
+    })
+
+    return prismaClient.user.update({
+      where: { id: user.id },
+      data: {
+        ...deletedUser(user.id, timestamp),
+        accounts: { deleteMany: {} },
+        sessions: { deleteMany: {} },
       },
-    }) => {
-      const timestamp = new Date()
-
-      await prismaClient.resource.updateMany({
-        ...resourcesToDelete(userId),
-        ...softDelete(timestamp),
-      })
-
-      await prismaClient.base.updateMany({
-        ...basesToDelete(userId),
-        ...softDelete(timestamp),
-      })
-
-      await prismaClient.collection.updateMany({
-        ...collectionsToDelete(userId),
-        ...softDelete(timestamp),
-      })
-
-      return prismaClient.user.update({
-        where: { id: userId },
-        data: {
-          ...deletedUser(userId, timestamp),
-          accounts: { deleteMany: {} },
-          sessions: { deleteMany: {} },
-        },
-      })
-    },
-  ),
+    })
+  }),
 })

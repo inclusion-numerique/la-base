@@ -23,11 +23,11 @@ import {
 } from '@app/web/server/bases/updateBase'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMenu'
+import Card from '@app/web/components/Card'
 import VisibilityField from '@app/web/components/VisibilityField'
-import { useImageUpload } from '../../../hooks/useImageUpload'
+import { useImageUpload } from '@app/web/hooks/useImageUpload'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
-import Card from '../../Card'
 import InviteUsers from '../../InviteUsers'
 
 const {
@@ -167,10 +167,13 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           >
             <VisibilityField
               model="base"
+              path="isPublic"
               control={control}
               disabled={isLoading}
               publicTitle="Base publique"
               privateTitle="Base privée"
+              publicHint="Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics."
+              privateHint="Les contenus & informations de votre base sont masqués aux visiteurs."
             />
           </Card>
 

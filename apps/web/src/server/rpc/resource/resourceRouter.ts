@@ -4,38 +4,53 @@ import {
   CreateResourceCommand,
   CreateResourceCommandClientValidation,
 } from '@app/web/server/resources/feature/CreateResource'
-import { ResourceCommandSecurityRule } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import {
-  ResourceCommandSecurityRules,
-  ResourceMutationCommandsValidation,
-} from '@app/web/server/resources/feature/features'
+import { ResourceMutationCommandsValidation } from '@app/web/server/resources/feature/features'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { forbiddenError, notFoundError } from '@app/web/server/rpc/trpcErrors'
+import { authorizeOrThrow, notFoundError } from '@app/web/server/rpc/trpcErrors'
 import { prismaClient } from '@app/web/prismaClient'
-import { collectionSelect } from '@app/web/server/collections/getCollection'
-import { baseSelect } from '@app/web/server/bases/getBase'
-import { filterAccess as filterCollectionAccess } from '../../collections/authorization'
-import { filterAccess as filterBaseAccess } from '../../bases/authorization'
+import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
+import { collectionAuthorizationTargetSelect } from '@app/web/authorization/models/collectionAuthorizationTargetSelect'
+import {
+  resourceAuthorization,
+  ResourcePermissions,
+} from '@app/web/authorization/models/resourceAuthorization'
+import {
+  collectionAuthorization,
+  CollectionPermissions,
+} from '@app/web/authorization/models/collectionAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import {
+  baseAuthorization,
+  BasePermissions,
+} from '@app/web/authorization/models/baseAuthorization'
 
 export const resourceRouter = router({
   create: protectedProcedure
     .input(CreateResourceCommandClientValidation)
     .mutation(async ({ input, ctx: { user } }) => {
-      // TODO Security check on baseId
+      // Security is handled in this mutation as it is the responsibility of this layer and not the event sourcing layer
+      if (input.payload.baseId) {
+        const base = await prismaClient.base.findUnique({
+          where: { id: input.payload.baseId },
+          select: baseAuthorizationTargetSelect,
+        })
+
+        if (!base) {
+          throw notFoundError()
+        }
+
+        authorizeOrThrow(
+          baseAuthorization(base, user).hasPermission(
+            BasePermissions.WriteBase,
+          ),
+        )
+      }
 
       const command: CreateResourceCommand = {
         ...input,
         payload: { ...input.payload, resourceId: v4() },
-      }
-
-      const securityCheck = await ResourceCommandSecurityRules[input.name](
-        command,
-        { user },
-      )
-      if (!securityCheck) {
-        throw forbiddenError()
       }
 
       return handleResourceCreationCommand(command, { user })
@@ -43,14 +58,43 @@ export const resourceRouter = router({
   mutate: protectedProcedure
     .input(ResourceMutationCommandsValidation)
     .mutation(async ({ input: command, ctx: { user } }) => {
-      const securityCheck = await (
-        ResourceCommandSecurityRules[
-          command.name
-        ] as ResourceCommandSecurityRule<typeof command>
-      )(command, { user })
-      if (!securityCheck) {
-        throw forbiddenError()
+      // Security is handled in this mutation as it is the responsibility of this layer and not the event sourcing layer
+
+      const resource = await prismaClient.resource.findUnique({
+        where: { id: command.payload.resourceId },
+        select: resourceAuthorizationTargetSelect,
+      })
+
+      if (!resource) {
+        throw notFoundError()
       }
+
+      // Check that the user has write access to the destination base
+      if (command.name === 'ChangeBase' && command.payload.baseId) {
+        const base = await prismaClient.base.findUnique({
+          where: { id: command.payload.baseId },
+          select: baseAuthorizationTargetSelect,
+        })
+
+        if (!base) {
+          throw notFoundError()
+        }
+
+        authorizeOrThrow(
+          baseAuthorization(base, user).hasPermission(
+            BasePermissions.WriteBase,
+          ),
+        )
+      }
+
+      // Check special delete permission
+      authorizeOrThrow(
+        resourceAuthorization(resource, user).hasPermission(
+          command.name === 'Delete'
+            ? ResourcePermissions.DeleteResource
+            : ResourcePermissions.WriteResource,
+        ),
+      )
 
       return handleResourceMutationCommand(command, { user })
     }),
@@ -58,43 +102,32 @@ export const resourceRouter = router({
     .input(z.object({ resourceId: z.string(), collectionId: z.string() }))
     .mutation(
       async ({ input: { resourceId, collectionId }, ctx: { user } }) => {
-        // TODO mutialize security code
         const collection = await prismaClient.collection.findUnique({
           where: { id: collectionId },
-          select: collectionSelect(user),
+          select: collectionAuthorizationTargetSelect,
         })
 
         const resource = await prismaClient.resource.findUnique({
           where: { id: resourceId },
-          select: {
-            id: true,
-            title: true,
-          },
+          select: resourceAuthorizationTargetSelect,
         })
 
         if (!collection || !resource) {
           throw notFoundError()
         }
 
-        if (collection.baseId) {
-          const base = await prismaClient.base.findUnique({
-            where: { id: collection.baseId },
-            select: baseSelect(user),
-          })
-          if (!base) {
-            throw notFoundError()
-          }
+        // Can only add a accessible resource to collection
+        authorizeOrThrow(
+          resourceAuthorization(resource, user).hasPermission(
+            ResourcePermissions.ReadResourceContent,
+          ),
+        )
 
-          const authorizations = filterBaseAccess(base, user)
-          if (!authorizations.authorized || !authorizations.isMember) {
-            throw forbiddenError()
-          }
-        } else {
-          const authorizations = filterCollectionAccess(collection, user)
-          if (!authorizations.authorized || !authorizations.isOwner) {
-            throw forbiddenError()
-          }
-        }
+        authorizeOrThrow(
+          collectionAuthorization(collection, user).hasPermission(
+            CollectionPermissions.AddToCollection,
+          ),
+        )
 
         const resultCollection = await prismaClient.collection.update({
           where: { id: collectionId },
@@ -122,43 +155,32 @@ export const resourceRouter = router({
     .input(z.object({ resourceId: z.string(), collectionId: z.string() }))
     .mutation(
       async ({ input: { resourceId, collectionId }, ctx: { user } }) => {
-        // TODO mutialize security code
         const collection = await prismaClient.collection.findUnique({
           where: { id: collectionId },
-          select: collectionSelect(user),
+          select: collectionAuthorizationTargetSelect,
         })
 
         const resource = await prismaClient.resource.findUnique({
           where: { id: resourceId },
-          select: {
-            id: true,
-            title: true,
-          },
+          select: resourceAuthorizationTargetSelect,
         })
 
         if (!collection || !resource) {
           throw notFoundError()
         }
 
-        if (collection.baseId) {
-          const base = await prismaClient.base.findUnique({
-            where: { id: collection.baseId },
-            select: baseSelect(user),
-          })
-          if (!base) {
-            throw notFoundError()
-          }
+        // Can only add a accessible resource to collection
+        authorizeOrThrow(
+          resourceAuthorization(resource, user).hasPermission(
+            ResourcePermissions.ReadResourceContent,
+          ),
+        )
 
-          const authorizations = filterBaseAccess(base, user)
-          if (!authorizations.authorized || !authorizations.isMember) {
-            throw forbiddenError()
-          }
-        } else {
-          const authorizations = filterCollectionAccess(collection, user)
-          if (!authorizations.authorized || !authorizations.isOwner) {
-            throw forbiddenError()
-          }
-        }
+        authorizeOrThrow(
+          collectionAuthorization(collection, user).hasPermission(
+            CollectionPermissions.AddToCollection,
+          ),
+        )
 
         const resultCollection = await prismaClient.collection.update({
           where: {

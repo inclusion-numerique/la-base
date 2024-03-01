@@ -17,103 +17,98 @@ const ResourceCard = ({
   resource,
   user,
   className,
+  isContributor,
 }: {
   resource: ResourceListItem
   user: SessionUser | null
   className?: string
-}) => {
-  // TODO Security this it not the right condition
-  const isContributor = !!user && user.id === resource.createdBy.id
-
-  return (
-    <article
-      className={classNames(styles.container, className)}
-      data-testid="resource-card"
+  isContributor: boolean
+}) => (
+  <article
+    className={classNames(styles.container, className)}
+    data-testid="resource-card"
+  >
+    <div className={styles.header}>
+      <OwnershipInformation
+        user={resource.createdBy}
+        base={resource.base}
+        attributionWording="none"
+      />
+      <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
+        <ResourceDates canEdit={isContributor} resource={resource} />
+      </div>
+    </div>
+    <Link
+      href={`/ressources/${resource.slug}`}
+      className={styles.content}
+      data-testid="resource-card-link"
     >
-      <div className={styles.header}>
-        <OwnershipInformation
-          user={resource.createdBy}
-          base={resource.base}
-          attributionWording="none"
-        />
-        <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
+      <div className={styles.textAndDescription}>
+        <div
+          className={classNames(
+            styles.dates,
+            'fr-hidden-md fr-text--xs fr-mb-1w',
+          )}
+        >
           <ResourceDates canEdit={isContributor} resource={resource} />
         </div>
+        <h6 className={styles.title}>{resource.title}</h6>
+        <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
+          {resource.excerpt}
+        </p>
       </div>
-      <Link
-        href={`/ressources/${resource.slug}`}
-        className={styles.content}
-        data-testid="resource-card-link"
-      >
-        <div className={styles.textAndDescription}>
-          <div
-            className={classNames(
-              styles.dates,
-              'fr-hidden-md fr-text--xs fr-mb-1w',
+      {!!resource.image && (
+        <div className={styles.imageContainer}>
+          <ResponsiveUploadedImage
+            id={resource.image.id}
+            alt={resource.image.altText ?? ''}
+            breakpoints={resourceCardImageBreakpoints}
+          />
+        </div>
+      )}
+    </Link>
+    <div className={styles.footer}>
+      {resource.published && (
+        <div className="fr-text--sm fr-mb-0">
+          <ResourcesViewsAndMetadata resource={resource} />
+        </div>
+      )}
+      <div className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}>
+        {isContributor && (
+          <>
+            <Button
+              data-testid="resource-card-edit-link"
+              iconId="fr-icon-edit-line"
+              size="small"
+              priority="tertiary no outline"
+              linkProps={{
+                href: `/ressources/${resource.slug}/editer`,
+              }}
+              iconPosition="right"
+            >
+              Modifier
+            </Button>
+            {resource.published === null ? (
+              <DeleteResourceButton resourceId={resource.id} />
+            ) : (
+              <SaveResourceInCollectionButton
+                user={user}
+                resource={resource}
+                variant="icon-only"
+              />
             )}
-          >
-            <ResourceDates canEdit={isContributor} resource={resource} />
-          </div>
-          <h6 className={styles.title}>{resource.title}</h6>
-          <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
-            {resource.excerpt}
-          </p>
-        </div>
-        {!!resource.image && (
-          <div className={styles.imageContainer}>
-            <ResponsiveUploadedImage
-              id={resource.image.id}
-              alt={resource.image.altText ?? ''}
-              breakpoints={resourceCardImageBreakpoints}
-            />
-          </div>
+          </>
         )}
-      </Link>
-      <div className={styles.footer}>
-        {resource.published && (
-          <div className="fr-text--sm fr-mb-0">
-            <ResourcesViewsAndMetadata resource={resource} />
-          </div>
+        {!isContributor && (
+          <SaveResourceInCollectionButton
+            user={user}
+            resource={resource}
+            variant="card"
+          />
         )}
-        <div
-          className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}
-        >
-          {isContributor && (
-            <>
-              <Button
-                data-testid="resource-card-edit-link"
-                iconId="fr-icon-edit-line"
-                size="small"
-                priority="tertiary no outline"
-                linkProps={{
-                  href: `/ressources/${resource.slug}/editer`,
-                }}
-                iconPosition="right"
-              >
-                Modifier
-              </Button>
-              {resource.published === null ? (
-                <DeleteResourceButton resourceId={resource.id} />
-              ) : (
-                <SaveResourceInCollectionButton
-                  user={user}
-                  resource={resource}
-                  variant="icon-only"
-                />
-              )}
-            </>
-          )}
-          {!isContributor && (
-            <SaveResourceInCollectionButton
-              user={user}
-              resource={resource}
-              variant="card"
-            />
-          )}
-        </div>
       </div>
-    </article>
-  )
-}
+    </div>
+  </article>
+)
 
 export default ResourceCard

@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import * as Sentry from '@sentry/nextjs'
 import { prismaClient } from '@app/web/prismaClient'
-import { filterAccess } from '@app/web/server/resources/authorization'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { resourceAuthorization } from '@app/web/authorization/models/resourceAuthorization'
 import { InviteContributorCommandValidation } from '../../resourceContributors/inviteContributors'
 import { getResource } from '../../resources/getResource'
-import { forbiddenError, notFoundError, invalidError } from '../trpcErrors'
+import { authorizeOrThrow, invalidError, notFoundError } from '../trpcErrors'
 import { sendNewContributorEmail } from './invitationEmail'
 
 export const resourceContributorRouter = router({
@@ -41,10 +41,12 @@ export const resourceContributorRouter = router({
       if (!resource) {
         return notFoundError()
       }
-      const authorizations = filterAccess(resource, user)
-      if (!authorizations.authorized || !authorizations.isAdmin) {
-        return forbiddenError()
-      }
+      authorizeOrThrow(
+        resourceAuthorization(resource, user).hasPermission(
+          'RemoveResourceContributor',
+        ),
+      )
+
       await prismaClient.resourceContributors.delete({
         where: {
           contributorId_resourceId: {
@@ -61,10 +63,13 @@ export const resourceContributorRouter = router({
       if (!resource) {
         return notFoundError()
       }
-      const authorizations = filterAccess(resource, user)
-      if (!authorizations.authorized || !authorizations.isAdmin) {
-        return forbiddenError()
-      }
+
+      authorizeOrThrow(
+        resourceAuthorization(resource, user).hasPermission(
+          'AddResourceContributor',
+        ),
+      )
+
       if (
         resource.contributors.some(({ contributorId }) =>
           input.contributors.includes(contributorId),
@@ -95,11 +100,9 @@ export const resourceContributorRouter = router({
             url: `/ressources/${resource.slug}`,
             email: contributor.email,
             resource,
+          }).catch((error) => {
+            Sentry.captureException(error)
           })
-            // TODO: a sentry here would be nice
-            .catch((error) => {
-              Sentry.captureException(error)
-            })
         }
       }
     }),

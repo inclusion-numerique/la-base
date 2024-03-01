@@ -19,7 +19,7 @@ const BaseAdminMemberCard = ({
   canChangeAccessLevel: boolean
 }) => {
   const [isAdmin, setIsAdmin] = useState(member.isAdmin)
-  const mutate = trpc.baseMember.mutate.useMutation()
+  const mutate = trpc.baseMember.changeRole.useMutation()
   const router = useRouter()
 
   const onChange = useCallback(

@@ -4,7 +4,7 @@ export const forbiddenError = (message?: string) =>
   new TRPCError({
     code: 'FORBIDDEN',
     message:
-      message ?? "Vous n'êtes pas autoriser a effectuer cette opération.",
+      message ?? 'Vous n’avez pas l’authorisation d’effectuer cette opération.',
   })
 
 export const notFoundError = (message?: string) =>
@@ -19,3 +19,9 @@ export const invalidError = (message?: string) =>
     message:
       message ?? 'Opération invalide. Veuillez réessayer ultérieurement.',
   })
+
+export const authorizeOrThrow = (authorized: boolean, message?: string) => {
+  if (!authorized) {
+    throw forbiddenError(message)
+  }
+}

@@ -127,9 +127,9 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
 
       cy.dsfrShouldBeStarted()
-      cy.testId('base-visibility').should(
+      cy.testId('visibility').should(
         'have.text',
-        'Votre base est publique. Vous pouvez passer votre base en privée si vous le souhaitez.',
+        'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
       cy.testId('edit-card-button').eq(2).click()
@@ -138,9 +138,9 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.testId('edit-card-save-button').click()
       cy.wait('@mutation')
 
-      cy.testId('base-visibility').should(
+      cy.testId('visibility').should(
         'have.text',
-        'Votre base est privée. Vous pouvez passer votre base en publique si vous le souhaitez.',
+        'Les contenus & informations de votre base sont masqués aux visiteurs.',
       )
     })
 
@@ -169,9 +169,9 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
 
       cy.dsfrShouldBeStarted()
 
-      cy.testId('base-visibility').should(
+      cy.testId('visibility').should(
         'have.text',
-        'Votre base est publique. Vous pouvez passer votre base en privée si vous le souhaitez.',
+        'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
       cy.testId('edit-card-button').eq(2).click()
@@ -182,9 +182,9 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.testId('visibility-modal-continue-button').click()
       cy.wait('@mutation')
 
-      cy.testId('base-visibility').should(
+      cy.testId('visibility').should(
         'have.text',
-        'Votre base est publique. Vous pouvez passer votre base en privée si vous le souhaitez.',
+        'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
       cy.visit(

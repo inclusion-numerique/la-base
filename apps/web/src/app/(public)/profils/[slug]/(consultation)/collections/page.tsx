@@ -8,26 +8,29 @@ import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/pro
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
 
 const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
-  const { profile, user, authorizations } = await getProfilePageContext(
-    params.slug,
-  )
+  const {
+    profile,
+    user,
+    authorization: { hasRole, hasPermission },
+  } = await getProfilePageContext(params.slug)
 
   const [collections, savedCollections] = await Promise.all([
     getProfileCollections(profile.id, user),
     getProfileSavedCollections(profile.id, user),
   ])
 
+  const isOwner = hasRole('ProfileOwner')
+  const canWrite = hasPermission('WriteProfile')
+
   return (
     <Collections
       user={user}
       collections={collections}
       savedCollections={savedCollections.map(({ collection }) => collection)}
-      withCreation={authorizations.isUser}
-      collectionsLabel={
-        authorizations.isUser ? 'Mes collections' : 'Collections du profil'
-      }
+      withCreation={canWrite}
+      collectionsLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
       emptyBox={
-        authorizations.isUser ? (
+        canWrite ? (
           <EmptyBox title="Vous n’avez pas crée de collections">
             Créez une collection directement associée à votre profil et elle
             apparaîtra ici.
@@ -47,7 +50,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
         )
       }
       emptySavedBox={
-        authorizations.isUser ? (
+        isOwner ? (
           <EmptyBox title="Vous n’avez pas enregistré de collections">
             Enregistrez la collection de quelqu’un d’autre et elle apparaîtra
             ici.

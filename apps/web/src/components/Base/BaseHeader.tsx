@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { FilteredBase } from '@app/web/server/bases/authorization'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { SessionUser } from '@app/web/auth/sessionUser'
@@ -16,11 +15,11 @@ export const headerSkipLink = { label: 'Entête', anchor: `#${headerId}` }
 
 const BaseHeader = ({
   base,
-  isMember,
+  canWrite,
   user,
 }: {
-  base: FilteredBase | BasePageData
-  isMember?: boolean
+  base: BasePageData
+  canWrite?: boolean
   user: SessionUser | null
 }) => (
   <div className={styles.container}>
@@ -30,7 +29,7 @@ const BaseHeader = ({
       <div id={headerId} className={styles.baseInfo}>
         <h2>{base.title}</h2>
         <BaseMetadata base={base} withBadge />
-        {isMember ? (
+        {canWrite ? (
           <Link
             data-testid="base-edition-button"
             className="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-edit-line fr-mt-2w"

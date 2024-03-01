@@ -3,20 +3,20 @@ import { CreateResourceButton } from '../Resource/CreateResourceModal'
 import EmptyBox from '../EmptyBox'
 
 const EmptyBaseResources = ({
-  isMember,
+  canCreateResource,
   baseId,
 }: {
-  isMember: boolean
+  canCreateResource: boolean
   baseId: string | null
 }) => (
   <EmptyBox
     title={
-      isMember
+      canCreateResource
         ? "Vous n'avez pas de ressources dans votre base."
         : `Aucune ressource n'est actuellement publiée sur cette base`
     }
   >
-    {isMember ? (
+    {canCreateResource ? (
       <>
         <div>
           Présentez, valorisez & publiez vos ressources afin qu’elles soient

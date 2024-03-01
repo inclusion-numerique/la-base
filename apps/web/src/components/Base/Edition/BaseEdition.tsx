@@ -9,21 +9,21 @@ import Card from '@app/web/components/Card'
 
 const BaseEdition = ({
   base,
-  isAdmin,
+  canDelete,
 }: {
   base: BasePageData
-  isAdmin: boolean
+  canDelete: boolean
 }) => (
   <div className="fr-container fr-flex">
-    <BaseEditionSideMenu isAdmin={isAdmin} />
+    <BaseEditionSideMenu canDelete={canDelete} />
     <div className="fr-flex-grow-1">
       <BaseEditionInformation base={base} />
       <BaseEditionContacts base={base} />
       <BaseVisibilityForm
         base={base}
-        className={isAdmin ? 'fr-mt-3w' : 'fr-my-3w'}
+        className={canDelete ? 'fr-mt-3w' : 'fr-my-3w'}
       />
-      {isAdmin && (
+      {canDelete && (
         <Card
           className="fr-my-3w"
           id="supprimer"

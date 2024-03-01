@@ -15,14 +15,14 @@ const CollectionMetaData = ({
   collection,
   count,
   priority,
-  isOwner,
+  canWrite,
   context,
 }: {
   user: SessionUser | null
   collection: { isPublic: boolean; id: string; slug: string }
   priority?: ButtonProps.Common['priority']
   count: number
-  isOwner?: boolean
+  canWrite?: boolean
   context: 'card' | 'view' | 'collectionModal'
 }) => {
   const withButtons = context === 'card' || context === 'view'
@@ -42,7 +42,7 @@ const CollectionMetaData = ({
       </div>
       {withButtons && (
         <div className={styles.buttons}>
-          {isOwner && (
+          {canWrite && (
             <Link
               href={`./${collection.slug}/modifier`}
               className={classNames(

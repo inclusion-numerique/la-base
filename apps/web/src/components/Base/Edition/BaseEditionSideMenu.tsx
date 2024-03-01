@@ -1,18 +1,18 @@
 import React from 'react'
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 
-const baseSections = (isAdmin: boolean) => [
+const baseSections = (canDelete: boolean) => [
   { id: 'informations', title: 'Informations de la base' },
   { id: 'contacts', title: 'Contacts' },
   { id: 'visibilite', title: 'Visibilité de la base' },
-  ...(isAdmin ? [{ id: 'supprimer', title: 'Supprimer la base' }] : []),
+  ...(canDelete ? [{ id: 'supprimer', title: 'Supprimer la base' }] : []),
 ]
 
-const BaseEditionSideMenu = ({ isAdmin }: { isAdmin: boolean }) => (
+const BaseEditionSideMenu = ({ canDelete }: { canDelete: boolean }) => (
   <div className="fr-hidden fr-unhidden-lg fr-col-3">
     <div className="fr-width-full">
       <NavigationSideMenu
-        items={baseSections(isAdmin).map(({ id, title }) => ({
+        items={baseSections(canDelete).map(({ id, title }) => ({
           text: title,
           linkProps: { href: `#${id}` },
         }))}

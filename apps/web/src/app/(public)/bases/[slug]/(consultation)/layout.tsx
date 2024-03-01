@@ -34,17 +34,20 @@ const BaseLayout = async ({
   params,
   children,
 }: PropsWithChildren<BaseRouteParams>) => {
-  const { user, authorizations } = await getBasePageContext(params.slug)
+  const {
+    user,
+    authorization: { hasPermission },
+    base,
+  } = await getBasePageContext(params.slug)
 
-  if (!authorizations.authorized) {
+  const canWrite = hasPermission('WriteBase')
+  const canView = hasPermission('ReadBaseData')
+
+  if (!canView) {
     return (
       <>
         <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
-        <BaseHeader
-          base={authorizations.base}
-          isMember={authorizations.isMember}
-          user={user}
-        />
+        <BaseHeader base={base} canWrite={false} user={user} />
         <main id={contentId}>
           <PrivateBox type="Base" />
         </main>
@@ -54,13 +57,9 @@ const BaseLayout = async ({
   return (
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
-      <BaseHeader
-        base={authorizations.base}
-        isMember={authorizations.isMember}
-        user={user}
-      />
+      <BaseHeader base={base} canWrite={canWrite} user={user} />
       <main id={contentId}>
-        <BaseMenu base={authorizations.base} />
+        <BaseMenu base={base} />
         <div className="fr-container fr-container--medium fr-mb-50v">
           {children}
         </div>

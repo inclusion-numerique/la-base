@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { filterAccess } from '@app/web/server/collections/authorization'
 import PrivateBox from '@app/web/components/PrivateBox'
 import { getCollection } from '@app/web/server/collections/getCollection'
 import CollectionView from '@app/web/components/Collection/CollectionView'
@@ -11,6 +10,10 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import {
+  collectionAuthorization,
+  CollectionPermissions,
+} from '@app/web/authorization/models/collectionAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -41,8 +44,20 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
   if (!collection) {
     notFound()
   }
+  const { hasPermission } = collectionAuthorization(collection, user)
 
-  const authorizations = filterAccess(collection, user)
+  const canReadGeneralInformation = hasPermission(
+    CollectionPermissions.ReadGeneralCollectionInformation,
+  )
+  if (!canReadGeneralInformation) {
+    notFound()
+  }
+
+  const canReadContent = hasPermission(
+    CollectionPermissions.ReadCollectionContent,
+  )
+  const canWrite = hasPermission(CollectionPermissions.WriteCollection)
+
   return (
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
@@ -53,11 +68,11 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
         id={contentId}
         className="fr-container fr-container--medium fr-mb-20v fr-pb-20v"
       >
-        {authorizations.authorized ? (
+        {canReadContent ? (
           <CollectionView
             collection={collection}
             user={user}
-            isOwner={authorizations.isOwner}
+            canWrite={canWrite}
           />
         ) : (
           <div className="fr-container fr-container--medium fr-my-4w">

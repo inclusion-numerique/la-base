@@ -1,5 +1,4 @@
 import React from 'react'
-import { FilteredBase } from '@app/web/server/bases/authorization'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import BaseImage from '@app/web/components/BaseImage'
@@ -13,7 +12,7 @@ const BaseImages = (
         editMode: true
       }
     | {
-        base: FilteredBase | BasePageData
+        base: BasePageData
         editMode?: false
       },
 ) => {

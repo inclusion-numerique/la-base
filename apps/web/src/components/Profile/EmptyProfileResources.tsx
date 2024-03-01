@@ -3,18 +3,20 @@ import { CreateResourceButton } from '../Resource/CreateResourceModal'
 import EmptyBox from '../EmptyBox'
 
 const EmptyProfileResources = ({
-  isConnectedUser,
+  canWrite,
+  isOwner,
 }: {
-  isConnectedUser: boolean
+  canWrite: boolean
+  isOwner: boolean
 }) => (
   <EmptyBox
     title={
-      isConnectedUser
+      isOwner
         ? 'Vous n’avez pas encore créé de ressources'
         : `Aucune ressource n'est actuellement publiée sur ce profil`
     }
   >
-    {isConnectedUser ? (
+    {canWrite ? (
       <>
         <div>
           Présentez, valorisez & publiez vos ressources afin qu’elles soient

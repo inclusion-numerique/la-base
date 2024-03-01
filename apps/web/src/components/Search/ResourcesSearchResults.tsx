@@ -11,6 +11,10 @@ import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteRe
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import EmptyBox from '@app/web/components/EmptyBox'
 import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
+import {
+  resourceAuthorization,
+  ResourceRoles,
+} from '@app/web/authorization/models/resourceAuthorization'
 import styles from './SearchContents.module.css'
 
 const ResourcesSearchResults = ({
@@ -41,7 +45,14 @@ const ResourcesSearchResults = ({
     </div>
     {resources.length > 0 ? (
       resources.map((resource) => (
-        <ResourceCard key={resource.slug} resource={resource} user={user} />
+        <ResourceCard
+          key={resource.slug}
+          isContributor={resourceAuthorization(resource, user).hasRole(
+            ResourceRoles.ResourceContributor,
+          )}
+          resource={resource}
+          user={user}
+        />
       ))
     ) : (
       <EmptyBox

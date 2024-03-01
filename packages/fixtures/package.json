@@ -15,9 +15,9 @@
   "dependencies": {
     "@commander-js/extra-typings": "^11.1.0",
     "@faker-js/faker": "^8.3.1",
-    "@prisma/client": "^5.9.1",
+    "@prisma/client": "^5.10.2",
     "dotenv": "^16.3.1",
-    "prisma": "^5.9.1",
+    "prisma": "^5.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },

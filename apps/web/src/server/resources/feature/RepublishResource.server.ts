@@ -2,10 +2,7 @@ import type {
   RepublishCommand,
   ResourceRepublished,
 } from '@app/web/server/resources/feature/RepublishResource'
-import type {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { sortContents } from '@app/web/server/resources/sortContents'
@@ -20,10 +17,6 @@ export const handleRepublish: ResourceMutationCommandHandler<
     __version: 1,
   },
 })
-
-export const republishSecurityRules: ResourceCommandSecurityRule<
-  RepublishCommand
-> = () => true
 
 export const applyResourceRepublished: ResourceMutationEventApplier<
   ResourceRepublished
@@ -46,6 +39,7 @@ export const onRepublished: ResourceEventSideEffect<
       title: resource.title,
       imageId: resource.imageId,
       description: resource.description,
+      excerpt: resource.excerpt,
       baseId: resource.baseId,
       slug: resource.slug,
       // Deleting and recreating contents

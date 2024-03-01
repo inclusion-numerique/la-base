@@ -7,15 +7,21 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { CreateBaseButton } from '../CreateBaseButton'
 
-const EmptyBases = ({ isConnectedUser }: { isConnectedUser: boolean }) => (
+const EmptyBases = ({
+  canWrite,
+  isOwner,
+}: {
+  canWrite: boolean
+  isOwner: boolean
+}) => (
   <EmptyBox
     title={
-      isConnectedUser
+      isOwner
         ? 'Actuellement, vous n’êtes pas membre d’une base'
         : "Ce profil n'est membre d’aucune base"
     }
   >
-    {isConnectedUser ? (
+    {canWrite ? (
       <>
         Une base est une communauté d’utilisateurs qui souhaitent créer, publier
         & contribuer à des ressources dans une démarche collaborative. Vous

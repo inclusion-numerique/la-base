@@ -2,10 +2,7 @@ import type {
   DeleteCommand,
   ResourceDeleted,
 } from '@app/web/server/resources/feature/DeleteResource'
-import type {
-  ResourceCommandSecurityRule,
-  ResourceMutationCommandHandler,
-} from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 
@@ -19,10 +16,6 @@ export const handleDelete: ResourceMutationCommandHandler<
     __version: 1,
   },
 })
-
-export const deleteSecurityRules: ResourceCommandSecurityRule<
-  DeleteCommand
-> = () => true
 
 export const applyResourceDeleted: ResourceMutationEventApplier<
   ResourceDeleted

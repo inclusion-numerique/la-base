@@ -2,6 +2,10 @@ import React from 'react'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { BaseResource } from '@app/web/server/bases/getBase'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import {
+  resourceAuthorization,
+  ResourceRoles,
+} from '@app/web/authorization/models/resourceAuthorization'
 import styles from './ResourceTab.module.css'
 
 const ResourceTab = ({
@@ -20,7 +24,14 @@ const ResourceTab = ({
       <div className={styles.emptyBox}>{emptyText}</div>
     ) : (
       resources.map((resource) => (
-        <ResourceCard key={resource.slug} resource={resource} user={user} />
+        <ResourceCard
+          key={resource.slug}
+          isContributor={resourceAuthorization(resource, user).hasRole(
+            ResourceRoles.ResourceContributor,
+          )}
+          resource={resource}
+          user={user}
+        />
       ))
     )}
   </div>

@@ -24,11 +24,13 @@ import ResourceInformations from './ResourceInformations'
 const ResourceView = ({
   resource,
   user,
-  isAdmin,
+  canDelete,
+  canWrite,
 }: {
   resource: Resource
   user: SessionUser | null
-  isAdmin: boolean
+  canWrite: boolean
+  canDelete: boolean
 }) => {
   const hasInformationSection = resource.isPublic || hasIndexation(resource)
   const contentsWithAnchor = addAnchorIdsToResourceContents(resource.contents)
@@ -38,7 +40,6 @@ const ResourceView = ({
     contentsWithAnchor,
     hasInformationSection,
   })
-  const canEdit = isAdmin
 
   return (
     <div className="fr-grid-row fr-pb-20v" data-testid="resource-view">
@@ -64,9 +65,9 @@ const ResourceView = ({
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
               <div className="fr-text--xs fr-mb-0 fr-flex">
-                <ResourceDates canEdit={canEdit} resource={resource} />
+                <ResourceDates canEdit={canWrite} resource={resource} />
               </div>
-              {isAdmin && (
+              {canWrite && (
                 <ResourcePublicStateBadge small resource={resource} />
               )}
             </div>
@@ -96,7 +97,8 @@ const ResourceView = ({
             <ResourceActions
               resource={resource}
               user={user}
-              isAdmin={isAdmin}
+              canWrite={canWrite}
+              canDelete={canDelete}
             />
             <ResourceMobileNavigation navigationData={navigationData} />
           </div>
@@ -115,7 +117,7 @@ const ResourceView = ({
           )}
         </div>
         {!!user && <SaveResourceInCollectionModal user={user} />}
-        {canEdit && (
+        {canDelete && (
           <DeleteResource
             redirectTo={
               resource.base
