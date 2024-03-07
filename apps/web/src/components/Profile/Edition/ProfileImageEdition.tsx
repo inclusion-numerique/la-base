@@ -44,6 +44,7 @@ const ProfileImageEdition = ({ profile }: { profile: ProfilePageData }) => {
         modal={ProfileImageEditionModal}
         label="Photo de profil"
         height={128}
+        size={{ w: 384, h: 384 }}
         ratio={1}
         round
         onChange={async (imageId) => {

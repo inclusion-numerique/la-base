@@ -10,6 +10,7 @@ import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
 import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { createToast } from '@app/ui/toast/createToast'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -134,13 +135,19 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="fr-container fr-flex">
         <CreateBaseSideMenu />
-        <div>
+        <div className="fr-container--slim">
           <h1 className="fr-page-title">Créer une base</h1>
           <Card
             title="Informations"
+            titleAs="h2"
             className="fr-mt-3w"
             id="informations"
-            asterisk
+            description={
+              <span className="fr-text--sm fr-hint-text fr-mb-0">
+                Les champs avec <RedAsterisk /> sont obligatoires.
+              </span>
+            }
+            contentSeparator
           >
             <BaseInformationsEdition
               form={
@@ -150,7 +157,18 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               }
             />
           </Card>
-          <Card title="Contacts" className="fr-mt-3w" id="contacts" asterisk>
+          <Card
+            title="Contacts"
+            titleAs="h2"
+            className="fr-mt-3w"
+            id="contacts"
+            description={
+              <span className="fr-text--sm fr-hint-text fr-mb-0">
+                Les champs avec <RedAsterisk /> sont obligatoires.
+              </span>
+            }
+            contentSeparator
+          >
             <BaseContactsEdition
               form={
                 form as UseFormReturn<
@@ -161,9 +179,11 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           </Card>
           <Card
             title="Visibilité de la base"
+            titleAs="h2"
             className="fr-mt-3w"
             id="visibilite"
             description="Choisissez la visibilité de votre base. Vous pourrez modifier sa visibilité à tout moment."
+            contentSeparator
           >
             <VisibilityField
               model="base"
@@ -176,12 +196,13 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               privateHint="Les contenus & informations de votre base sont masqués aux visiteurs."
             />
           </Card>
-
           <Card
             id="inviter"
             className="fr-mt-3w"
             title="Inviter des membres"
+            titleAs="h2"
             description="Les membres peuvent voir, créer, publier et contribuer à l’ensemble des ressources liées à votre base. Vous pouvez également ajouter des administrateurs qui pourront inviter et gérer les membres de la base."
+            contentSeparator
           >
             <Controller
               control={control}
@@ -201,7 +222,9 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             className="fr-mt-3w"
             id="photos"
             title="Image & couverture"
+            titleAs="h2"
             description="Ajouter une image et une image de couverture pour rendre votre base identifiable et attirer les visiteurs."
+            contentSeparator
           >
             <Controller
               control={control}
@@ -211,7 +234,8 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
                   ratio={1}
                   round="quarter"
                   label="Image de la base"
-                  height={522 / 4.8}
+                  height={128}
+                  size={{ w: 384, h: 384 }}
                   modal={addImageCropModal}
                   disabled={isLoading}
                   error={error ? error.message : undefined}
@@ -228,6 +252,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
                   ratio={4.8}
                   label="Image de couverture"
                   height={522 / 4.8}
+                  size={{ w: 2400, h: 500 }}
                   modal={addCoverImageCropModal}
                   onChange={setCoverImage}
                   disabled={isLoading}

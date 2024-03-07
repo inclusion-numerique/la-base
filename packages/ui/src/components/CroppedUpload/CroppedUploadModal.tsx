@@ -29,6 +29,7 @@ const CroppedUploadModal = <T extends FieldValues>({
   onChange,
   emptyChildren,
   image,
+  size,
 }: {
   title: string
   modal: CreateModalReturn
@@ -41,6 +42,7 @@ const CroppedUploadModal = <T extends FieldValues>({
   onChange: (imageId: string | null) => void
   emptyChildren?: ReactNode
   image?: ImageForForm | null
+  size?: { w: number; h: number }
 }) => {
   const [croppingMode, setCroppingMode] = useState(false)
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -178,6 +180,7 @@ const CroppedUploadModal = <T extends FieldValues>({
               emptyChildren={emptyChildren}
               label={label}
               height={height}
+              size={size}
               ratio={ratio}
               round={round}
               disabled={isSubmitting}

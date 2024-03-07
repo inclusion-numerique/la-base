@@ -15,6 +15,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   it('Acceptation 0 - Empty state', () => {
     cy.testId('empty-box').should('exist')
 
+    cy.dsfrModalsShouldBeBound()
     cy.log('Create a resource')
     cy.testId('empty-box').contains('Créer une ressource').click()
     cy.findByRole('dialog').as('modal')
@@ -33,9 +34,11 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
     cy.log('Check new state')
     cy.visit(`/bases/${defaultTestBaseSlug}`)
+
+    cy.dsfrModalsShouldBeBound()
     cy.testId('base-resources').should('contain', 'Ressources · 1')
     cy.testId('base-resources').should('contain', 'Brouillons · 1')
-    cy.testId('base-resources').should('contain', 'Publiées · 0')
+    cy.testId('base-resources').should('contain', 'Publiques · 0')
     cy.testId('base-resources').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')
@@ -51,7 +54,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
       .should('have.length', 0)
     cy.get('@public').should(
       'contain',
-      "Vous n'avez pas de ressources publiées.",
+      "Vous n'avez pas de ressources publiques.",
     )
 
     cy.log('Check private resources empty state')
@@ -78,9 +81,11 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
     cy.log('Check new state')
     cy.visit(`/bases/${defaultTestBaseSlug}`)
+
+    cy.dsfrModalsShouldBeBound()
     cy.testId('base-resources').should('contain', 'Ressources · 1')
     cy.testId('base-resources').should('contain', 'Brouillons · 0')
-    cy.testId('base-resources').should('contain', 'Publiées · 0')
+    cy.testId('base-resources').should('contain', 'Publiques · 0')
     cy.testId('base-resources').should('contain', 'Privées · 1')
 
     cy.log('Check draft resources')
@@ -97,7 +102,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
       .should('have.length', 0)
     cy.get('@public').should(
       'contain',
-      "Vous n'avez pas de ressources publiées.",
+      "Vous n'avez pas de ressources publiques.",
     )
 
     cy.log('Check private resources empty state')
@@ -108,6 +113,8 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
     cy.log('Change resource visibility to private')
     cy.visit(`/ressources/un-titre/publier`)
+
+    cy.dsfrModalsShouldBeBound()
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-themes-select').select('IntelligenceArtificielle')
     cy.testId('indexation-support-types-select').select('Article')
@@ -117,9 +124,11 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
     cy.log('Check new state')
     cy.visit(`/bases/${defaultTestBaseSlug}`)
+
+    cy.dsfrModalsShouldBeBound()
     cy.testId('base-resources').should('contain', 'Ressources · 1')
     cy.testId('base-resources').should('contain', 'Brouillons · 0')
-    cy.testId('base-resources').should('contain', 'Publiées · 1')
+    cy.testId('base-resources').should('contain', 'Publiques · 1')
     cy.testId('base-resources').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')

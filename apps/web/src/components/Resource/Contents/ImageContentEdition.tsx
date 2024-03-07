@@ -100,7 +100,7 @@ const ImageContentEdition = ({
         )}
         <FileUploadForm
           label={imageInfo ? "Remplacer l'image" : 'Ajouter une image'}
-          fileFieldHint={imageUploadHint}
+          fileFieldHint={imageUploadHint({ w: 1764, h: 1260 })}
           fileUpload={imageUpload}
           path="imageUploadFile"
           control={control}

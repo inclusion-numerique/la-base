@@ -16,7 +16,7 @@ const BaseEdition = ({
 }) => (
   <div className="fr-container fr-flex">
     <BaseEditionSideMenu canDelete={canDelete} />
-    <div className="fr-flex-grow-1">
+    <div className="fr-flex-grow-1 fr-container--slim">
       <BaseEditionInformation base={base} />
       <BaseEditionContacts base={base} />
       <BaseVisibilityForm
@@ -28,7 +28,9 @@ const BaseEdition = ({
           className="fr-my-3w"
           id="supprimer"
           title="Supprimer la base"
+          titleAs="h2"
           description="Cette action est irréversible et entraîne la suppression définitive de toutes les ressources de la Base. Utilisez cette fonction avec précaution."
+          contentSeparator
         >
           <BaseDeletion base={base} />
         </Card>

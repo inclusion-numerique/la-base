@@ -1,0 +1,24 @@
+.fr-progress {
+  --progress-height: 12px;
+
+  display: flex;
+  height: var(--progress-height);
+  overflow: hidden;
+  background-color: var(--blue-cumulus-950-100);
+}
+
+.fr-progress__bar {
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-default-grey);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--text-action-high-blue-france);
+}
+
+.fr-progress--sm {
+  --progress-height: 8px;
+}

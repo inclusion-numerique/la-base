@@ -7,12 +7,12 @@ import styles from './BaseDetails.module.css'
 const BaseDetails = ({ base }: { base: BasePageData }) => (
   <div className="fr-width-full">
     <div className={styles.header}>
-      <h3 className="fr-mb-0">À propos</h3>
+      <h2 className="fr-mb-0 fr-h3">À propos</h2>
     </div>
     <hr />
     <div className="fr-grid-row fr-grid-row--gutters fr-mb-4w">
       <div className="fr-col-12 fr-col-lg-8 fr-mt-3w">
-        <h6>Informations</h6>
+        <h3 className="fr-h6">Informations</h3>
         <div>
           <p className={styles.subtitle}>Description</p>
           {base.description ? (
@@ -35,7 +35,7 @@ const BaseDetails = ({ base }: { base: BasePageData }) => (
         )}
       </div>
       <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
-        <h6 className="fr-mb-2w">Contact</h6>
+        <h3 className="fr-mb-2w fr-h6">Contact</h3>
         <div>
           <p className={styles.subtitle}>Adresse mail de contact</p>
           <Link href={`mailto:${base.email}`} className="fr-link">
@@ -52,7 +52,7 @@ const BaseDetails = ({ base }: { base: BasePageData }) => (
         )}
         {(base.facebook || base.twitter || base.linkedin) && (
           <>
-            <h6 className="fr-mt-3w fr-mb-2w">Nous suivre</h6>
+            <h3 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h3>
             <div className={styles.websites}>
               {base.twitter && (
                 <Link href={base.twitter} className="fr-link" target="_blank">

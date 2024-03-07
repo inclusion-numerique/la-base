@@ -16,21 +16,21 @@ const SigninPanel = ({
   callbackUrl: Route
 }) => (
   <AuthCard>
-    <h4>{getLoginTitle(intent)}</h4>
+    <h1 className="fr-h4">{getLoginTitle(intent)}</h1>
     {error ? (
       <div className="fr-alert fr-alert--error fr-alert--sm fr-mb-6v">
         <p>{signinErrorMessage(error)}</p>
       </div>
     ) : null}
-    <h5>Se connecter avec InclusionConnect</h5>
+    <h2 className="fr-h5">Se connecter avec InclusionConnect</h2>
     <div className="fr-connect-group">
       <InclusionConnectSigninButton callbackUrl={callbackUrl} />
     </div>
     <p className="fr-hr-or fr-mt-6v">ou</p>
-    <h5>Se connecter avec son email</h5>
+    <h2 className="fr-h5">Se connecter avec son email</h2>
     <EmailSigninForm callbackUrl={callbackUrl} />
     <hr className="fr-mt-6v" />
-    <h5 className="fr-mt-4v">Vous n’avez pas de compte ?</h5>
+    <h2 className="fr-mt-4v fr-h5">Vous n’avez pas de compte ?</h2>
     <ButtonsGroup
       buttons={[
         {

@@ -70,6 +70,7 @@ const CroppedImage = ({
   onUpload,
   emptyChildren,
   image,
+  size,
 }: {
   label?: string
   height: number
@@ -86,6 +87,7 @@ const CroppedImage = ({
   onUpload: (file: ImageWithName) => void
   emptyChildren?: ReactNode
   image?: ImageForForm | null
+  size?: { w: number; h: number }
 }) => (
   <>
     {imageSource ? (
@@ -160,7 +162,7 @@ const CroppedImage = ({
       state={error ? 'error' : 'default'}
       stateRelatedMessage={error}
       label={label}
-      hint={imageUploadHint}
+      hint={imageUploadHint(size)}
       nativeInputProps={{
         value: imageToUpload ? imageToUpload.filename : '',
         accept: imageAllowedMimeTypes.join(','),

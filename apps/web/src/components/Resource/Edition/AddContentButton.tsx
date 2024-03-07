@@ -12,6 +12,12 @@ import styles from './AddContentButton.module.css'
 
 const contents = [
   {
+    type: 'SectionTitle',
+    image: '/images/add-title.svg',
+    label: 'Titre de section',
+    description: 'Structurez votre ressource avec des ancres.',
+  },
+  {
     type: 'Text',
     image: '/images/add-text.svg',
     label: 'Texte',
@@ -26,19 +32,13 @@ const contents = [
     type: 'Image',
     image: '/images/add-image.svg',
     label: 'Image',
-    description: imageUploadHint,
+    description: imageUploadHint(),
   },
   {
     type: 'Link',
     image: '/images/add-link.svg',
     label: 'Lien',
     description: 'Vers un site externe ou une ressource interne Les Bases.',
-  },
-  {
-    type: 'SectionTitle',
-    image: '/images/add-title.svg',
-    label: 'Titre de section',
-    description: 'Structurez votre ressource avec des ancres.',
   },
 ] satisfies {
   type: ContentType

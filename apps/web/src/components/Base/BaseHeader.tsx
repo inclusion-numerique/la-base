@@ -27,7 +27,7 @@ const BaseHeader = ({
       <Breadcrumbs currentPage={base.title} />
       <BaseImages base={base} />
       <div id={headerId} className={styles.baseInfo}>
-        <h2>{base.title}</h2>
+        <h1 className="fr-h2">{base.title}</h1>
         <BaseMetadata base={base} withBadge />
         {canWrite ? (
           <Link

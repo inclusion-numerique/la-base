@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 import Link from 'next/link'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
@@ -36,7 +37,9 @@ const CollectionCard = ({
             attributionWording="none"
           />
           <Link href={href} data-testid="collection-card-link">
-            <h6 className={styles.title}>{collection.title}</h6>
+            <h3 className={classNames(styles.title, 'fr-h6')}>
+              {collection.title}
+            </h3>
             {collection.description && (
               <div
                 className="fr-text--sm fr-mb-0"

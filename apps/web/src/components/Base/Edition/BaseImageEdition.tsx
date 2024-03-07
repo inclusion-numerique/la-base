@@ -20,6 +20,7 @@ const params = {
   image: {
     ratio: 1,
     height: 128,
+    size: { w: 384, h: 384 },
     round: 'quarter' as const,
     buttonClassName: styles.editImage,
     label: 'Image de la base',
@@ -33,6 +34,7 @@ const params = {
   coverImage: {
     ratio: 4.8,
     height: 100,
+    size: { w: 2400, h: 500 },
     round: false,
     buttonClassName: styles.editCoverImage,
     label: 'Image de couverture',
@@ -53,8 +55,17 @@ const BaseImageEdition = ({
   type: 'image' | 'coverImage'
 }) => {
   const router = useRouter()
-  const { title, modal, path, height, ratio, round, label, buttonClassName } =
-    params[type]
+  const {
+    title,
+    modal,
+    path,
+    height,
+    ratio,
+    round,
+    label,
+    buttonClassName,
+    size,
+  } = params[type]
 
   const image = base[type]
 
@@ -93,6 +104,7 @@ const BaseImageEdition = ({
         round={round}
         image={image}
         onChange={onChange}
+        size={size}
       />
       <EditImageButton
         onClick={modal.open}

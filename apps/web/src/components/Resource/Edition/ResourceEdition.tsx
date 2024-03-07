@@ -154,8 +154,8 @@ const ResourceEdition = ({
       await publicationForm.handleSubmit(async (data: PublishCommand) => {
         try {
           const result = await sendCommand(data)
-          router.refresh()
           router.push(`/ressources/${result.resource.slug}`)
+          router.refresh()
           createToast({
             priority: 'success',
             message: (

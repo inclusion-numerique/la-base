@@ -59,6 +59,7 @@ const ResourceVisibilityForm = ({
       className="fr-mt-3w"
       id="visibilite"
       title="Visibilité de la ressource"
+      titleAs="h2"
       description="Choisissez qui peut voir votre ressource."
       form={form}
       mutation={async (data) => {

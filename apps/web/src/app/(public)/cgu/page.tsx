@@ -88,10 +88,9 @@ const ContentPolicyPage = () => (
             <strong>2) Utilisation</strong>
           </h3>
 
-          <h6>Inscription</h6>
+          <h4 className="fr-h6">Inscription</h4>
           <p>
-            Les ressources publiques publiées sont accessibles sans création de
-            compte.
+            Les ressources publiques sont accessibles sans création de compte.
           </p>
           <p>
             L&#39;inscription sur Les Bases permet d&#39;administrer une base
@@ -100,7 +99,7 @@ const ContentPolicyPage = () => (
             utilisateur et utilisatrice de définir les modalités d&#39;ouverture
             de la base qu&#39;il ou elle administre.
           </p>
-          <h6>Publication d&#39;une ressource</h6>
+          <h4 className="fr-h6">Publication d&#39;une ressource</h4>
           <p>
             La publication d&#39;une ressource par un utilisateur ou une
             utilisatrice induit une vigilance particulière en matière de droits
@@ -123,7 +122,7 @@ const ContentPolicyPage = () => (
             l&#39;utilisateur-rice a obtenu l&#39;autorisation de son
             créateur-rice de la partager sur Les Bases.
           </p>
-          <h6>Choix de la licence de la ressource</h6>
+          <h4 className="fr-h6">Choix de la licence de la ressource</h4>
 
           <p>
             L&#39;utilisateur ou l&#39;utilisatrice peut choisir une licence

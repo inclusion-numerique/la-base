@@ -31,7 +31,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
       collectionsLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
       emptyBox={
         canWrite ? (
-          <EmptyBox title="Vous n’avez pas crée de collections">
+          <EmptyBox title="Vous n’avez pas crée de collections" titleAs="h3">
             Créez une collection directement associée à votre profil et elle
             apparaîtra ici.
             <Link
@@ -43,7 +43,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
             </Link>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Ce profil n’a pas créé de collections">
+          <EmptyBox title="Ce profil n’a pas créé de collections" titleAs="h3">
             Revenez plus tard ou suivez ce profil afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>
@@ -51,12 +51,18 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
       }
       emptySavedBox={
         isOwner ? (
-          <EmptyBox title="Vous n’avez pas enregistré de collections">
+          <EmptyBox
+            title="Vous n’avez pas enregistré de collections"
+            titleAs="h3"
+          >
             Enregistrez la collection de quelqu’un d’autre et elle apparaîtra
             ici.
           </EmptyBox>
         ) : (
-          <EmptyBox title="Ce profil n’a pas enregistré de collections">
+          <EmptyBox
+            title="Ce profil n’a pas enregistré de collections"
+            titleAs="h3"
+          >
             Revenez plus tard ou suivez ce profil afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>

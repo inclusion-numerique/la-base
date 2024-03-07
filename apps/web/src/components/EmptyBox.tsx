@@ -6,12 +6,17 @@ const EmptyBox = ({
   title,
   children,
   className,
-}: { title: ReactNode; className?: string } & PropsWithChildren) => (
+  titleAs: EmptyBoxTitle = 'h2',
+}: {
+  title: ReactNode
+  className?: string
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+} & PropsWithChildren) => (
   <div
     className={classNames(styles.container, className)}
     data-testid="empty-box"
   >
-    <h6 className="fr-mb-1w">{title}</h6>
+    <EmptyBoxTitle className="fr-mb-1w fr-h6">{title}</EmptyBoxTitle>
     {children}
   </div>
 )

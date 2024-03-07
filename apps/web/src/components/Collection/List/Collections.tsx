@@ -28,9 +28,9 @@ const Collections = ({
 }) => (
   <div data-testid="collections-list">
     <div className={styles.header}>
-      <h3 className="fr-mb-0">
+      <h2 className="fr-mb-0 fr-h3">
         Collections · {collections.length + savedCollections.length}
-      </h3>
+      </h2>
       {withCreation && (
         <CreateCollectionButton className="fr-btn--secondary" baseId={baseId} />
       )}

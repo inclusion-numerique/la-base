@@ -29,13 +29,16 @@ const BaseCollectionsPage = async ({
       collectionsLabel="Collections de la base"
       emptyBox={
         canWrite ? (
-          <EmptyBox title="Vous n’avez pas de collections dans cette base">
+          <EmptyBox
+            title="Vous n’avez pas de collections dans cette base"
+            titleAs="h3"
+          >
             <div data-testid="create-resource-button">
               <CreateCollectionButton baseId={id} />
             </div>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Cette base n’a pas créé de collections">
+          <EmptyBox title="Cette base n’a pas créé de collections" titleAs="h3">
             Revenez plus tard ou suivez cette base afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>
@@ -43,12 +46,18 @@ const BaseCollectionsPage = async ({
       }
       emptySavedBox={
         canWrite ? (
-          <EmptyBox title="Vous n’avez pas enregistré de collections dans cette base">
+          <EmptyBox
+            title="Vous n’avez pas enregistré de collections dans cette base"
+            titleAs="h3"
+          >
             Enregistrez la collection de quelqu&lsquo;un d&lsquo;autre et elle
             apparaîtra ici.
           </EmptyBox>
         ) : (
-          <EmptyBox title="Cette base n’a pas enregistré de collections">
+          <EmptyBox
+            title="Cette base n’a pas enregistré de collections"
+            titleAs="h3"
+          >
             Revenez plus tard ou suivez cette base afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { SessionUser } from '@app/web/auth/sessionUser'
@@ -61,15 +62,17 @@ const ResourcePublication = ({
           user={user}
           sendCommand={sendCommand}
         >
-          <h5 className="fr-mb-0">Ressource publiée dans</h5>
+          <h2 className="fr-mb-0 fr-h5">Ressource publiée dans</h2>
         </ResourceBaseEdition>
         <hr className="fr-mt-4w fr-pb-4w" />
         <ResourcePublicationView resource={resource} user={user} />
       </div>
       <Card
         title="Visibilité de la ressource"
+        titleAs="h2"
         description="Choisissez qui peut voir votre ressource."
         className="fr-mt-3w"
+        contentSeparator
       >
         {resource.base
           ? !resource.base.isPublic && (
@@ -97,11 +100,21 @@ const ResourcePublication = ({
       </Card>
       {isPublic && (
         <Card
-          className="fr-mt-3w"
           data-testid="indexation-box"
+          className="fr-mt-3w"
           title="Indexation"
-          description="L’indexation permettra aux autres utilisateurs de la base de trouver votre ressource via le moteur de recherche."
-          asterisk
+          titleAs="h2"
+          description={
+            <>
+              L’indexation permettra aux autres utilisateurs de la base de
+              trouver votre ressource via le moteur de recherche.
+              <br />
+              <span className="fr-text--sm fr-hint-text fr-mb-0">
+                Les champs avec <RedAsterisk /> sont obligatoires.
+              </span>
+            </>
+          }
+          contentSeparator
         >
           <ResourceIndexationEdition
             themesPath="payload.themes"
@@ -114,10 +127,12 @@ const ResourcePublication = ({
       )}
       {isPublic === false && (
         <Card
-          title="Contributeurs"
-          description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
-          className="fr-mt-3w"
           data-testid="contributors-box"
+          className="fr-mt-3w"
+          title="Contributeurs"
+          titleAs="h2"
+          description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
+          contentSeparator
         >
           <InviteContributors resource={resource} />
         </Card>

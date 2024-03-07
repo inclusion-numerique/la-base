@@ -3,6 +3,7 @@
 import React, { ReactNode, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { UpdateBaseCommand } from '../server/bases/updateBase'
@@ -22,6 +23,7 @@ const EditCard = <
   id,
   className,
   title,
+  titleAs: CardTitle = 'h3',
   description,
   edition,
   view,
@@ -32,6 +34,7 @@ const EditCard = <
   id?: string
   className?: string
   title: string
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   description?: string
   edition: ReactNode
   view: ReactNode
@@ -57,11 +60,24 @@ const EditCard = <
   return (
     <Card
       id={id}
-      title={title}
-      description={description}
-      editMode={editMode}
-      setEditMode={setEditMode}
       className={className}
+      title={
+        <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
+          <CardTitle className="fr-mb-0">{title}</CardTitle>
+          {!editMode && setEditMode && (
+            <Button
+              data-testid="edit-card-button"
+              priority="secondary"
+              iconId="fr-icon-edit-line"
+              title="Modifier"
+              onClick={() => setEditMode(true)}
+            />
+          )}
+        </div>
+      }
+      description={description}
+      titleAs="div"
+      contentSeparator
     >
       {editMode ? (
         <form onSubmit={form.handleSubmit(onSubmit)}>

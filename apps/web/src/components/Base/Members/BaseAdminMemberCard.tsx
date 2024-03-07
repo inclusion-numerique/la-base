@@ -43,7 +43,9 @@ const BaseAdminMemberCard = ({
         href={`/profils/${member.member.slug}`}
       >
         <RoundProfileImage user={member.member} />
-        {member.member.name}
+        <h3 className="fr-text--md fr-text--regular fr-my-auto">
+          {member.member.name}
+        </h3>
       </Link>
       <div className="fr-py-2v fr-py-md-4v">
         {!canChangeAccessLevel && isAdmin ? (

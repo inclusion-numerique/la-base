@@ -1,13 +1,15 @@
 import React from 'react'
 import { Resource } from '@app/web/server/resources/getResource'
-import styles from './ResourceInformations.module.css'
 import ResourceIndexationView from './ResourceIndexationView'
 
 const ResourceInformations = ({ resource }: { resource: Resource }) => (
   <>
-    <h6 id="informations" className={styles.title}>
+    <h2
+      id="informations"
+      className="fr-my-2w fr-pt-2w fr-border-top--slim-grey fr-h6"
+    >
       Informations sur la ressource
-    </h6>
+    </h2>
     <ResourceIndexationView
       resource={resource}
       withLink

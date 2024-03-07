@@ -11,9 +11,9 @@ const ImageContentView = ({
 }) => (
   <div data-testid="content-image">
     {!!title && (
-      <h6 data-testid="content-image-title" className="fr-mb-4v">
+      <h2 data-testid="content-image-title" className="fr-mb-4v fr-h6">
         {title}
-      </h6>
+      </h2>
     )}
     <ImageContentDetails image={image} imageAltText={imageAltText} />
     {!!caption && <p className="fr-mb-0 fr-mt-4v fr-text--sm">{caption}</p>}

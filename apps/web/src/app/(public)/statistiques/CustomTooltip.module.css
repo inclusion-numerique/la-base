@@ -1,0 +1,31 @@
+
+.tooltip {
+    /* Colors are hard coded as background is not in dsfr palette and it should be same in light or dark mode */
+    --tooltip-background: hsl(246deg 53% 22% / 80%);
+
+    color: #F6F6F6;
+    background: var(--tooltip-background);
+    border-radius: 8px;
+    padding: 20px 24px 12px;
+
+    .title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 18px;
+        margin-bottom: 8px;
+    }
+
+    .series {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        &(:last-child) {
+            margin-bottom: 0;
+        }
+    }
+}

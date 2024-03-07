@@ -20,18 +20,10 @@ const BaseMembers = ({
   const canChangeAccessLevelOfAdmins =
     base.members.filter((member) => member.isAdmin).length > 1
 
-  console.log({
-    base,
-    canAddAdmin,
-    canAddMember,
-    canChangeMemberRole,
-    canChangeAccessLevelOfAdmins,
-  })
-
   return (
     <div className={styles.container} data-testid="base-members">
       <div className={styles.header}>
-        <h3 className="fr-mb-0">Membres · {base.members.length}</h3>
+        <h2 className="fr-mb-0 fr-h3">Membres · {base.members.length}</h2>
         {canAddMember && (
           <InviteBaseMemberButton base={base} canAddAdmin={canAddAdmin} />
         )}
@@ -46,6 +38,7 @@ const BaseMembers = ({
           ))
         : base.members.map((member) => (
             <ProfileCard
+              titleAs="h3"
               profile={member.member}
               key={member.member.id}
               user={null}

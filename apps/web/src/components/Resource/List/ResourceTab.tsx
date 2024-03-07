@@ -25,6 +25,7 @@ const ResourceTab = ({
     ) : (
       resources.map((resource) => (
         <ResourceCard
+          titleAs="h3"
           key={resource.slug}
           isContributor={resourceAuthorization(resource, user).hasRole(
             ResourceRoles.ResourceContributor,

@@ -45,6 +45,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
       noRefresh
       form={form}
       title="Informations de la base"
+      titleAs="h2"
       edition={<BaseInformationsEdition form={form} />}
       view={
         <>

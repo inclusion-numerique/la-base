@@ -109,7 +109,7 @@ const ResourceTitleEdition = ({
         </form>
       ) : (
         <>
-          <h3 className="fr-mb-4v">{resource.title}</h3>
+          <h1 className="fr-mb-4v fr-h3">{resource.title}</h1>
           <div className="fr-text--xl">{resource.description}</div>
         </>
       )}

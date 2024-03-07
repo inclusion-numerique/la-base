@@ -1,63 +1,52 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react'
+import React, { ReactNode } from 'react'
+import Link from 'next/link'
 import classNames from 'classnames'
-import Button from '@codegouvfr/react-dsfr/Button'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import styles from './Card.module.css'
 
 const Card = ({
   id,
   className,
-  title,
-  description,
-  editMode,
-  setEditMode,
-  children,
   'data-testid': dataTestid,
-  asterisk,
+  title,
+  titleAs: CardTitle = 'h3',
+  href,
+  enlargeLink = href != null,
+  description,
+  children,
+  contentSeparator = false,
 }: {
   id?: string
   className?: string
-  title?: string
-  description?: string
-  editMode?: boolean
-  setEditMode?: Dispatch<SetStateAction<boolean>>
-  children: ReactNode
   'data-testid'?: string
-  asterisk?: boolean
+  title: ReactNode
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div'
+  href?: string
+  enlargeLink?: boolean
+  description?: ReactNode
+  children?: ReactNode
+  contentSeparator?: boolean
 }) => (
   <div
-    className={classNames(className, styles.card)}
-    data-testid={dataTestid}
     id={id}
+    data-testid={dataTestid}
+    className={classNames(
+      className,
+      `fr-card ${enlargeLink && 'fr-enlarge-link'}`,
+    )}
   >
-    {title && (
-      <div>
-        <div className={styles.title}>
-          <h5 className="fr-mb-0">{title}</h5>
-          {!editMode && setEditMode && (
-            <Button
-              data-testid="edit-card-button"
-              priority="secondary"
-              iconId="fr-icon-edit-line"
-              title="Modifier"
-              onClick={() => setEditMode(true)}
-            />
-          )}
-        </div>
+    <div className="fr-card__body">
+      <div className="fr-card__content">
+        <CardTitle className="fr-card__title">
+          {href ? <Link href={href}>{title}</Link> : title}
+        </CardTitle>
+        {description && <div className="fr-card__desc">{description}</div>}
+        {children && (
+          <div className="fr-card__end">
+            {contentSeparator && <hr className="fr-pb-4w" />}
+            {children}
+          </div>
+        )}
       </div>
-    )}
-    {description && (
-      <div className={styles.description}>
-        <span className="fr-text--sm fr-mb-0">{description}</span>
-      </div>
-    )}
-    {asterisk && (
-      <p className="fr-text--sm fr-hint-text fr-mb-0">
-        Les champs avec <RedAsterisk /> sont obligatoires.
-      </p>
-    )}
-    <hr className="fr-mt-4w fr-pb-4w" />
-    {children}
+    </div>
   </div>
 )
 

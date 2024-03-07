@@ -26,6 +26,7 @@ const CroppedUpload = ({
   disabled,
   error,
   image,
+  size,
 }: {
   modal: CreateModalReturn
   label?: string
@@ -36,6 +37,7 @@ const CroppedUpload = ({
   disabled?: boolean
   error?: string
   image?: ImageForForm | null
+  size?: { w: number; h: number }
 }) => {
   const cropperRef = useRef<ReactCropperElement>(null)
 
@@ -138,6 +140,7 @@ const CroppedUpload = ({
         label={label}
         height={height}
         ratio={ratio}
+        size={size}
         round={round}
         disabled={disabled}
         error={error}

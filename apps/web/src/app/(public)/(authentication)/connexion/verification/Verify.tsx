@@ -15,9 +15,9 @@ export const Verify = () => {
           />
         </picture>
       </div>
-      <h2 style={{ textAlign: 'center' }} className="fr-mt-4v">
+      <h1 style={{ textAlign: 'center' }} className="fr-mt-4v fr-h2">
         Rendez-vous dans votre boite email
-      </h2>
+      </h1>
       <p style={{ textAlign: 'center' }}>
         {email ? (
           <>

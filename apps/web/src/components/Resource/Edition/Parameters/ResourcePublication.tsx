@@ -38,6 +38,7 @@ const ResourcePublication = ({
     <EditCard
       id="publication"
       title="Ressource publiée dans"
+      titleAs="h2"
       form={form}
       mutation={async (data) => {
         await mutate.mutateAsync(data)

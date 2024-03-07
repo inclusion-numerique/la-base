@@ -36,6 +36,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
       className="fr-mt-3w"
       id="indexation"
       title="Indexation"
+      titleAs="h2"
       description="L’indexation permettra aux autres utilisateurs de la base de trouver votre ressource via le moteur de recherche."
       form={form}
       mutation={async (data) => {

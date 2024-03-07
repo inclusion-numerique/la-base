@@ -18,11 +18,13 @@ const ResourceCard = ({
   user,
   className,
   isContributor,
+  titleAs: ResourceTitle = 'h2',
 }: {
   resource: ResourceListItem
   user: SessionUser | null
   className?: string
   isContributor: boolean
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -52,7 +54,9 @@ const ResourceCard = ({
         >
           <ResourceDates canEdit={isContributor} resource={resource} />
         </div>
-        <h6 className={styles.title}>{resource.title}</h6>
+        <ResourceTitle className="fr-mb-md-3v fr-mb-1w fr-h6">
+          {resource.title}
+        </ResourceTitle>
         <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
           {resource.excerpt}
         </p>

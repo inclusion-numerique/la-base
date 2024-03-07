@@ -40,6 +40,10 @@
   width: 100%;
 }
 
+.fr-height-full {
+  height: 100%;
+}
+
 .fr-position-relative {
   position: relative;
 }
@@ -110,6 +114,18 @@
 
 .fr-justify-content-space-between {
   justify-content: space-between;
+}
+
+.fr-justify-content-space-around {
+  justify-content: space-around;
+}
+
+.fr-justify-content-space-evenly {
+  justify-content: space-evenly;
+}
+
+.fr-justify-content-stretch {
+  justify-content: stretch;
 }
 
 .fr-flex-nowrap {
@@ -244,6 +260,19 @@
 
   .fr-justify-content-md-space-between {
     justify-content: space-between;
+  }
+
+
+  .fr-justify-content-md-space-around {
+    justify-content: space-around;
+  }
+
+  .fr-justify-content-md-space-evenly {
+    justify-content: space-evenly;
+  }
+
+  .fr-justify-content-md-stretch {
+    justify-content: stretch;
   }
 
   .fr-flex-shrink-md-0 {
@@ -408,6 +437,11 @@
     /* lg */
     max-width: 636px;
   }
+}
+
+.fr-container--slim {
+  /* 524 + padding */
+  max-width: 588px;
 }
 
 .fr-container--medium {

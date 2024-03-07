@@ -44,6 +44,7 @@ const ImageEdition = <T extends { imageId?: string | null }>({
               disabled={disabled}
               ratio={1.66}
               height={195}
+              size={{ w: 1764, h: 1060 }}
               onChange={onChange}
               error={error?.message}
             />

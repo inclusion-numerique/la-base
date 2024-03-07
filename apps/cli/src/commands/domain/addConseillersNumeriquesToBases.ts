@@ -19,7 +19,7 @@ export const addConseillersNumeriquesToBases = new Command(
     // Conseillers numeriques will be a member of this base
     const contributionBase = await prismaClient.base.findUnique({
       where: {
-        slug: 'conseiller-numerique-france-services-contributions',
+        slug: 'conseiller-numerique-contributions',
       },
       select: {
         id: true,

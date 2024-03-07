@@ -1,30 +1,20 @@
 import Accordion from '@codegouvfr/react-dsfr/Accordion'
 import Link from 'next/link'
 import classNames from 'classnames'
-import type { Theme } from '@prisma/client'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { getHomeCategoriesCount } from '@app/web/app/(public)/getHomeCategoriesCount'
-import {
-  defaultSearchParams,
-  searchUrl,
-} from '@app/web/server/search/searchQueryParams'
 import { categories } from '@app/web/themes/themes'
+import { searchResultThemeHref } from '@app/web/themes/searchResultHrefHelpers'
 import styles from './HomeCategories.module.css'
-
-const themeSearchResultHref = (theme: Theme) =>
-  searchUrl('ressources', {
-    ...defaultSearchParams,
-    themes: [theme],
-  })
 
 const HomeCategories = async () => {
   const categoriesCount = await getHomeCategoriesCount()
   return (
     <div className="fr-container fr-pt-12v fr-pb-16v fr-pb-md-30v fr-pt-md-20v">
       <div className="fr-text--center">
-        <h3 className="fr-mb-4v">
+        <h2 className="fr-mb-4v fr-h3">
           Découvrez les ressources grâce aux thématiques
-        </h3>
+        </h2>
         <p className="fr-text--xl fr-mb-12v">
           Découvrez les ressources publiées grâce aux thématiques organisées en{' '}
           {categories.length} grandes catégories.
@@ -36,7 +26,7 @@ const HomeCategories = async () => {
             key={title}
             label={
               <div className={styles.accordionTitle}>
-                <h6 className="fr-mb-0">{title}</h6>
+                <span className="fr-mb-0 fr-h6">{title}</span>
                 <p
                   className={classNames(
                     'fr-mr-8v fr-text-default--grey',
@@ -64,7 +54,7 @@ const HomeCategories = async () => {
               {themes.map((item) => (
                 <Link
                   key={item.theme}
-                  href={themeSearchResultHref(item.theme)}
+                  href={searchResultThemeHref(item.theme)}
                   className="fr-tag"
                 >
                   {item.title}&nbsp;·&nbsp;<strong>{item.count}</strong>

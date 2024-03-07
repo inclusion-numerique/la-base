@@ -57,6 +57,7 @@ const Header = ({
                   <div className="fr-header__operator">
                     <Link href="/" className="fr-text--medium">
                       {PublicWebAppConfig.projectTitle}
+                      <span className="fr-sr-only"> - Retour à l’accueil</span>
                     </Link>
                   </div>
                 </>

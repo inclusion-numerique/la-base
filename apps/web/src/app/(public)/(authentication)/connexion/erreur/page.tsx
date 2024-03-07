@@ -34,11 +34,11 @@ const ErrorPage = ({
     />
     <main id={contentId}>
       <AuthCard>
-        <h2 style={{ textAlign: 'center' }} className="fr-mb-12v">
+        <h1 style={{ textAlign: 'center' }} className="fr-mb-12v fr-h2">
           Connexion à {PublicWebAppConfig.projectTitle}
-        </h2>
+        </h1>
         <div className="fr-alert fr-alert--error fr-alert--sm fr-mb-6v">
-          <h6>Connexion impossible</h6>
+          <h2 className="h6">Connexion impossible</h2>
           <p>{errorMessage(error)}</p>
         </div>
 

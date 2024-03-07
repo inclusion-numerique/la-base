@@ -40,7 +40,7 @@ const CollectionView = ({
         />
       </div>
       <div>
-        <h3 className="fr-mb-4v">{collection.title}</h3>
+        <h1 className="fr-mb-4v fr-h3">{collection.title}</h1>
         {collection.description && (
           <div
             className="fr-text--lg fr-mb-0"

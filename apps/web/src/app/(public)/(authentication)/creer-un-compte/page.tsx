@@ -39,7 +39,9 @@ const SigninPage = async ({
       <Breadcrumbs currentPage="Créer un compte" />
       <main id={contentId}>
         <div className="fr-container fr-container--narrow">
-          <h2>Création de compte sur {PublicWebAppConfig.projectTitle}</h2>
+          <h1 className="fr-h2">
+            Création de compte sur {PublicWebAppConfig.projectTitle}
+          </h1>
           {raison === 'connexion-sans-compte' ? (
             <Alert
               className="fr-mt-6v"

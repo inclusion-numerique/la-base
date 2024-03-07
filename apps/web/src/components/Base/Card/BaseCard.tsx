@@ -13,10 +13,12 @@ const BaseCard = ({
   base,
   user,
   compact = false,
+  titleAs: BaseTitle = 'h2',
 }: {
   base: BaseListItem
   user: SessionUser | null
   compact?: boolean
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }) => (
   <article className={styles.container} data-testid="base-card">
     <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
@@ -24,7 +26,7 @@ const BaseCard = ({
     </Link>
     <div className={styles.content}>
       <Link href={`/bases/${base.slug}`}>
-        <h6 className="fr-mb-0">{base.title}</h6>
+        <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
       </Link>
       <div className={styles.midContent}>
         {!compact && !!base.excerpt && (

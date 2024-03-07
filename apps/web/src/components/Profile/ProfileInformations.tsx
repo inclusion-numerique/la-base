@@ -25,7 +25,9 @@ const ProfileInformations = ({
     </div>
     <div>
       <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-center fr-width-full fr-flex-gap-4v">
-        <h2>{profile.name}</h2>
+        <h1 className="fr-h2 fr-m-0 fr-text-title--blue-france">
+          {profile.name}
+        </h1>
         <ProfilePrivacyTag isPublic={profile.isPublic} />
       </div>
       <ProfileMetadata

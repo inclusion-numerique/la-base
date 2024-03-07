@@ -2,6 +2,7 @@
 @import url('./dsfr-overrides.css');
 @import url('./helpers.css');
 @import url('./skeleton.css');
+@import url('./progress.css');
 
 /* Layout setup */
 html,

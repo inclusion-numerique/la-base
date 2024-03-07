@@ -62,7 +62,11 @@ const FileUploadForm = <T extends FieldValues>({
           <span className="fr-hint-text fr-mt-2v">{fileFieldHint}</span>
         </p>
         <div className={styles.progressContainer}>
-          <ProgressBar progress={progress} />
+          <ProgressBar
+            progress={progress}
+            size="small"
+            ariaLabel="Progression du chargement"
+          />
           <div className={styles.progressFooter}>
             <p className="fr-text--sm">{progress}%</p>
             <Button

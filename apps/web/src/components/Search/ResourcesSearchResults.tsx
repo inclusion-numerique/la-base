@@ -32,11 +32,9 @@ const ResourcesSearchResults = ({
 }) => (
   <>
     <div className={styles.header}>
-      <p className="fr-text--lg fr-mb-0">
-        <b>
-          {totalCount} Ressource{sPluriel(totalCount)}
-        </b>
-      </p>
+      <h1 className="fr-text--lg fr-mb-0">
+        {totalCount} Ressource{sPluriel(totalCount)}
+      </h1>
       <ResultSortingSelect
         paginationParams={paginationParams}
         searchParams={searchParams}

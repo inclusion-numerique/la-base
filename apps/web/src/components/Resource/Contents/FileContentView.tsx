@@ -10,9 +10,9 @@ const FileContentView = ({
   }
 }) => (
   <div data-testid="content-file">
-    <h6 data-testid="content-file-title" className="fr-mb-0">
+    <h2 data-testid="content-file-title fr-h6" className="fr-mb-0">
       {title}
-    </h6>
+    </h2>
     <div className={styles.fileContainer}>
       <FileContentDetails file={file} />
     </div>

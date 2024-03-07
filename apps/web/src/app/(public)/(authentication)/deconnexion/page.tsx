@@ -19,7 +19,7 @@ const SignoutPage = () => (
     <Breadcrumbs currentPage="Déconnexion" />
     <main id={contentId}>
       <AuthCard>
-        <h2>Déconnexion</h2>
+        <h1 className="fr-h2">Déconnexion</h1>
         <p>Êtes-vous sur de vouloir vous déconnecter&nbsp;?</p>
         <ul className="fr-btns-group">
           <li>

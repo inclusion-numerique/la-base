@@ -23,7 +23,7 @@ const BaseEditionHeader = ({ base }: { base: BasePageData }) => (
     <div id={headerId}>
       <BaseImages base={base} editMode />
       <div className={styles.baseInfo}>
-        <h2 className="fr-mb-0">{base.title}</h2>
+        <h1 className="fr-mb-0 fr-h2">{base.title}</h1>
       </div>
     </div>
   </div>

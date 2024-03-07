@@ -13,9 +13,17 @@ export const imageAllowedExtensions = imageAllowedMimeTypes.map(
   (mimeType) => mimeType.split('/')[1],
 )
 
-export const imageUploadHint = `Taille maximale : ${formatByteSize(
-  imageMaxSize,
-)}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`
+export const imageUploadHint = (
+  size?: { h: number; w: number } | null,
+): string => {
+  const hintSize: string = size
+    ? `Taille recommandée : ${size.w}x${size.h} px. `
+    : ``
+
+  return `${hintSize}Poids maximum : ${formatByteSize(
+    imageMaxSize,
+  )}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`
+}
 
 export const imageFileValidationOptions = {
   maxSizeInBytes: imageMaxSize,

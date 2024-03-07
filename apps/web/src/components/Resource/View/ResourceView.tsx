@@ -86,7 +86,9 @@ const ResourceView = ({
                 />
               </div>
             ) : null}
-            <h3 className="fr-mt-4v fr-mb-0 fr-mt-md-8v">{resource.title}</h3>
+            <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h3">
+              {resource.title}
+            </h1>
             <p className="fr-text--lg fr-mt-2v fr-mt-md-3v fr-mb-0">
               {resource.description}
             </p>

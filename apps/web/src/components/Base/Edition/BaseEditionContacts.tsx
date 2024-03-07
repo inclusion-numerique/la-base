@@ -39,6 +39,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
       form={form}
       className="fr-mt-3w"
       title="Contacts"
+      titleAs="h2"
       edition={<BaseContactsEdition form={form} />}
       view={
         <>

@@ -9,6 +9,7 @@ import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { createToast } from '@app/ui/toast/createToast'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { trpc } from '@app/web/trpc'
@@ -98,20 +99,28 @@ const CreateCollection = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="fr-container fr-flex">
         <CreateCollectionSideMenu />
-        <div>
+        <div className="fr-container--slim">
           <h1 className="fr-page-title">Créer une collection</h1>
           <Card
             title="Informations"
+            titleAs="h2"
             className="fr-mt-3w"
             id="informations"
-            asterisk
+            description={
+              <span className="fr-text--sm fr-hint-text fr-mb-0">
+                Les champs avec <RedAsterisk /> sont obligatoires.
+              </span>
+            }
+            contentSeparator
           >
             <CollectionInformationsEdition form={form} />
           </Card>
           <Card
             title="Aperçu de la collection"
+            titleAs="h2"
             className="fr-mt-3w"
             id="apercu"
+            contentSeparator
           >
             <ImageEdition
               control={control}
@@ -121,9 +130,11 @@ const CreateCollection = ({
           </Card>
           <Card
             title="Visibilité de la collection"
+            titleAs="h2"
             className="fr-mt-3w"
             id="visibilite"
             description="Choisissez la visibilité de votre collection."
+            contentSeparator
           >
             {collectionCannotBePublic && (
               <Notice

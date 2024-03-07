@@ -13,10 +13,12 @@ const ProfileCard = ({
   profile,
   user,
   canFollow = true,
+  titleAs: ProfileTitle = 'h2',
 }: {
   profile: ProfileListItem
   user: SessionUser | null
   canFollow?: boolean
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }) => (
   <article className={styles.container} data-testid="profile-card">
     <div className={styles.content}>
@@ -25,13 +27,12 @@ const ProfileCard = ({
       </Link>
       <div className={styles.info}>
         <Link
-          className={classNames(
-            styles.link,
-            'fr-text--medium fr-text--bold fr-mb-0',
-          )}
+          className={classNames(styles.link)}
           href={`/profils/${profile.slug}`}
         >
-          {profile.name}
+          <ProfileTitle className="fr-text--md fr-text--medium fr-mb-0">
+            {profile.name}
+          </ProfileTitle>
         </Link>
         <ProfileMetadata
           className="fr-text-mention--grey"
