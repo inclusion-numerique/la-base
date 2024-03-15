@@ -133,7 +133,7 @@ const ResourceActions = ({
       </div>
       <ResourceMoreActionsModal
         className={styles.moreActionsModal}
-        title=""
+        title="Options disponibles"
         buttons={[
           {
             title: 'Annuler',

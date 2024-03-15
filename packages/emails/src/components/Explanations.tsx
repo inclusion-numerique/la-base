@@ -29,10 +29,6 @@ const Explanations = () => (
           La plateforme collaborative qui permet de partager toutes les
           ressources & communs numériques au service de l’intérêt général.
         </MjmlText>
-        <MjmlText fontSize="18px" fontWeight="400" color="#3A3A3A">
-          La plateforme collaborative qui permet de partager toutes les
-          ressources & communs numériques au service de l’intérêt général.
-        </MjmlText>
       </MjmlColumn>
     </MjmlSection>
     <MjmlSection>

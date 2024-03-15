@@ -195,7 +195,7 @@ export const baseRouter = router({
         baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase),
       )
 
-      prismaClient.base.update({
+      return prismaClient.base.update({
         where: { id },
         data: images,
       })

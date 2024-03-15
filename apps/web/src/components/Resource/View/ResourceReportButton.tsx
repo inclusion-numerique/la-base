@@ -5,15 +5,13 @@ import { ResourceReportModal } from '@app/web/components/Resource/View/ResourceR
 
 const ResourceReportButton = ({
   priority = 'secondary',
-  className,
 }: {
-  className?: string
   priority?: ButtonProps['priority']
 }) => (
   <Button
+    className="fr-width-full fr-justify-content-center"
     iconId="fr-icon-warning-line"
     priority={priority}
-    className={className}
     size="small"
     onClick={ResourceReportModal.open}
   >

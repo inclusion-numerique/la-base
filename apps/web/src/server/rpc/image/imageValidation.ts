@@ -17,10 +17,10 @@ export const imageUploadHint = (
   size?: { h: number; w: number } | null,
 ): string => {
   const hintSize: string = size
-    ? `Taille recommandée : ${size.w}x${size.h} px. `
+    ? `Résolution recommandée : ${size.w}x${size.h} px. `
     : ``
 
-  return `${hintSize}Poids maximum : ${formatByteSize(
+  return `${hintSize}Taille maximale : ${formatByteSize(
     imageMaxSize,
   )}. Formats supportés : ${imageAllowedExtensions.join(', ')}.`
 }

@@ -262,7 +262,6 @@
     justify-content: space-between;
   }
 
-
   .fr-justify-content-md-space-around {
     justify-content: space-around;
   }
@@ -454,8 +453,28 @@
   }
 }
 
-.fr-border--slim-grey {
+.fr-border {
   border: var(--slim-grey-border);
+}
+
+.fr-border-top {
+  border-top: var(--slim-grey-border);
+}
+
+.fr-border-bottom {
+  border-bottom: var(--slim-grey-border);
+}
+
+.fr-border-right {
+  border-right: var(--slim-grey-border);
+}
+
+.fr-border-left {
+  border-left: var(--slim-grey-border);
+}
+
+.fr-border--blue-france {
+  border-color: var(--blue-france-main-525);
 }
 
 .fr-border-radius--4 {

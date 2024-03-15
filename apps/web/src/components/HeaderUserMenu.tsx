@@ -15,6 +15,11 @@ import OpenOnboardingForMigratedUserThatHasNotSeenIt from '@app/web/app/nouveaut
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import styles from './HeaderUserMenu.module.css'
 
+const hasKey = (
+  event: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
+): event is React.KeyboardEvent<HTMLDivElement> =>
+  Object.prototype.hasOwnProperty.call(event, 'key')
+
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
   const bases = getBasesFromSessionUser(user)
 
@@ -26,6 +31,8 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
   const onClickOrEnterInsideDropdown = (
     event: KeyboardEvent<HTMLDivElement> | ReactMouseEvent<HTMLDivElement>,
   ) => {
+    if (hasKey(event) && (event.key === 'Tab' || event.key === 'Shift')) return
+
     // Close the dropdown if a link has been clicked
     if (event.target instanceof HTMLAnchorElement) {
       buttonRef.current?.click()
@@ -157,7 +164,12 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         role="navigation"
-        className={classNames('fr-collapse', 'fr-menu', styles.collapse)}
+        className={classNames(
+          'fr-collapse',
+          'fr-menu',
+          'fr-mt-1w',
+          styles.collapse,
+        )}
         id="header-user-menu"
         ref={collapseRef}
         onClick={onClickOrEnterInsideDropdown}

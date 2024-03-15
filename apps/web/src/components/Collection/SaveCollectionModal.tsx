@@ -162,7 +162,7 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
             />
           ))}
       {collectionOwnedByUser && hasNoBases && (
-        <div className="fr-border--slim-grey fr-border-radius--8 fr-text-mention--grey fr-p-8v fr-mt-8v fr-width-full fr-text--center fr-width-full">
+        <div className="fr-border fr-border-radius--8 fr-text-mention--grey fr-p-8v fr-mt-8v fr-width-full fr-text--center fr-width-full">
           <p className="fr-text--md fr-text--bold fr-mb-2v">
             Actuellement, vous n’êtes pas membre d’une base.
           </p>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CollectionCardSkeleton = () => (
-  <div className="fr-border--slim-grey fr-flex fr-direction-column fr-mb-1v">
+  <div className="fr-border fr-flex fr-direction-column fr-mb-1v">
     <div className="skeleton-rectangle skeleton-image--230" />
     <div className="fr-p-3w">
       <div className="fr-flex fr-align-items-center fr-mb-2w">
