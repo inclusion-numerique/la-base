@@ -15,6 +15,7 @@ import { locallyRestoreLatestMainBackup } from '@app/cli/commands/infrastructure
 import { addConseillersNumeriquesToBases } from '@app/cli/commands/domain/addConseillersNumeriquesToBases'
 import { removeInactiveConseillersNumeriques } from '@app/cli/commands/domain/removeInactiveConseillersNumeriques'
 import { executeJobCommand } from '@app/cli/commands/jobs/executeJobCommand'
+import { convertResourcesToTxt } from '@app/cli/commands/ia/convertResourcesToTxt'
 
 const program = new Command()
 
@@ -34,5 +35,6 @@ program.addCommand(checkDeploymentStatus)
 program.addCommand(locallyRestoreLatestMainBackup)
 program.addCommand(addConseillersNumeriquesToBases)
 program.addCommand(removeInactiveConseillersNumeriques)
+program.addCommand(convertResourcesToTxt)
 
 program.parse()

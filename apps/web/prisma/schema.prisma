@@ -1,12 +1,13 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "nativeDistinct", "relationJoins"]
+  previewFeatures = ["fullTextSearch", "nativeDistinct", "relationJoins", "postgresqlExtensions"]
   binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 // Account, Session, User and VerificationToken
@@ -323,6 +324,9 @@ model Resource {
   views            ResourceView[]
   reports          ResourceReport[]
   resourceFeedback ResourceFeedback[]
+
+  embedding   Unsupported("vector(1024)")?
+
 
   @@index([baseId])
   @@index([createdById])

@@ -19,6 +19,8 @@
     "@commander-js/extra-typings": "^12.1.0",
     "@octokit/core": "^6.1.2",
     "@octokit/plugin-rest-endpoint-methods": "^13.2.4",
+    "@prisma/client": "^5.10.2",
+    "bottleneck" : "^2.19.5",
     "axios": "^1.7.5",
     "axios-retry": "^4.5.0",
     "commander": "^12.1.0",
