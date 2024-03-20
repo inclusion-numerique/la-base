@@ -18,7 +18,6 @@ export const AssistantForm = () => {
     reValidateMode: 'onChange',
   })
 
-  const onSubmit = () => console.log('submit')
   const disabled = formState.isSubmitting || formState.isSubmitSuccessful
   return (
     <form onSubmit={handleSubmit(() => console.log('submit'))}>
