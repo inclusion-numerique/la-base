@@ -16,7 +16,7 @@ export const executeMistralChat = async ({
   onChunk: (chunk: string) => void
 }) => {
   const chatStreamResponse = mistralClient.chatStream({
-    model: 'mistral-tiny',
+    model: 'mistral-medium',
     messages,
   })
 
