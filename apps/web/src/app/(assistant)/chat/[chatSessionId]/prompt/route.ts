@@ -25,6 +25,7 @@ export const POST = async (
   // Get prompt from request json body
   const body = (await request.json()) as { prompt?: string }
   const { prompt } = body
+  let contextPrompt = ''
 
   if (!prompt) {
     return new Response('Prompt is required', {
@@ -33,6 +34,19 @@ export const POST = async (
   }
 
   const similarResources = await getSimilarResources(prompt)
+
+  if (similarResources) {
+    contextPrompt = `
+    Les informations de contexte sont en dessous.
+    ---------------------
+    Ressources similaires:
+      ${similarResources}
+    ---------------------
+      Avec ce contexte, et en oubliant les connaissances précédentes, réponds à la question
+      Question: ${prompt}
+    Réponse:
+      `
+  }
 
   await prismaClient.assistantChatMessage.create({
     data: {
@@ -51,18 +65,7 @@ export const POST = async (
       'Tu peux aussi leur donner des conseils sur la médiation numérique.' +
       'Répond de manière concise et précise aux questions des médiateurs numériques. Si tu ne comprends pas une question, demande des précisions.' +
       'Tu vas recevoir des ressources que tu peux recommander sous cette forme : ' +
-      `[
-      {
-        title: 'Administration Numérique pour les Etrangers en France (ac)',
-        url: 'https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac',
-        description: "Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France)."
-      },
-      {
-         title: 'ANEF',
-         url: 'https://lesbases.anct.gouv.fr/ressources/anef',
-         description: "C'est quoi l'Anef ? L'Administration Numérique pour les Etrangers en France (ANEF) a pour objectif de dématérialiser toutes les démarches concernant les étrangers en France : séjour et accès à la nationalité"
-      },
-      ]` +
+      ` title: 'Administration Numérique pour les Etrangers en France (ac)', url: 'https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac', description: "Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France)."` +
       'Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien vers la ressource' +
       `
       ######
@@ -79,7 +82,7 @@ export const POST = async (
     ...chatSession.messages.map(assistantMessageToMistralMessage),
     {
       role: 'user',
-      content: prompt,
+      content: similarResources ? contextPrompt : prompt,
     },
   ]
 
