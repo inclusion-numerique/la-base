@@ -13,8 +13,13 @@ import { isBrowser } from '@app/web/utils/isBrowser'
 import { CreateModalReturn } from '@app/ui/utils/modalTypes'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { cropperDataToImageCrop } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
+import CroppedImagePreview from '../CroppedImagePreview/CroppedImagePreview'
+import ImageInfo from '../ImageInfo'
+import UploadImage from '../UploadImage/UploadImage'
+import CropButton from './CropButton'
+import DeleteButton from './DeleteButton'
+import EmptyImagePlaceholder from './EmptyImagePlaceholder'
 import { ImageWithName } from './utils'
-import CroppedImage from './CroppedImage'
 import Cropping from './Cropping'
 
 const CroppedUploadModal = <T extends FieldValues>({
@@ -140,6 +145,23 @@ const CroppedUploadModal = <T extends FieldValues>({
     return null
   }
 
+  const handleUpload = (file: ImageWithName) => {
+    setImageToUpload(file)
+    setImageSource(URL.createObjectURL(file))
+  }
+
+  const handleRemove = () => {
+    setImageToUpload(null)
+    setImageSource('')
+  }
+
+  const handleCrop = () => {
+    setCroppingMode(true)
+    if (croppedBoxData == null || canvasData == null) return
+    cropperRef.current?.cropper.setCropBoxData(croppedBoxData)
+    cropperRef.current?.cropper.setCanvasData(canvasData)
+  }
+
   // Create portal to be able to use a form with submit inside the modal which is probably inside another form
   return createPortal(
     <Controller
@@ -176,35 +198,45 @@ const CroppedUploadModal = <T extends FieldValues>({
             />
           )}
           <div className={croppingMode ? 'fr-hidden' : ''}>
-            <CroppedImage
-              emptyChildren={emptyChildren}
+            {imageSource ? (
+              <>
+                <CroppedImagePreview
+                  height={height}
+                  ratio={ratio}
+                  round={round}
+                  croppedBox={croppedBox}
+                  imageBox={imageBox}
+                  imageSource={imageSource}
+                />
+                <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-flex-gap-8v fr-mb-2w">
+                  <ImageInfo
+                    name={imageToUpload?.name ?? image?.upload?.name}
+                    size={imageToUpload?.size ?? image?.upload?.size}
+                  />
+                  <CropButton onCrop={handleCrop} disabled={isSubmitting}>
+                    Recadrer
+                  </CropButton>
+                  <DeleteButton onRemove={handleRemove} disabled={isSubmitting}>
+                    Supprimer
+                  </DeleteButton>
+                </div>
+              </>
+            ) : (
+              <EmptyImagePlaceholder
+                height={height}
+                ratio={ratio}
+                round={round}
+                emptyChildren={emptyChildren}
+              />
+            )}
+            <UploadImage
               label={label}
-              height={height}
-              size={size}
-              ratio={ratio}
-              round={round}
               disabled={isSubmitting}
               error={error ? error.message : undefined}
-              croppedBox={croppedBox}
-              image={image}
-              imageBox={imageBox}
-              imageSource={imageSource}
               imageToUpload={imageToUpload}
-              onCrop={() => {
-                setCroppingMode(true)
-                if (cropperRef.current && croppedBoxData && canvasData) {
-                  cropperRef.current.cropper.setCropBoxData(croppedBoxData)
-                  cropperRef.current.cropper.setCanvasData(canvasData)
-                }
-              }}
-              onRemove={() => {
-                setImageSource('')
-                setImageToUpload(null)
-              }}
-              onUpload={(file: ImageWithName) => {
-                setImageToUpload(file)
-                setImageSource(URL.createObjectURL(file))
-              }}
+              onRemove={handleRemove}
+              onUpload={handleUpload}
+              size={size}
             />
           </div>
         </modal.Component>

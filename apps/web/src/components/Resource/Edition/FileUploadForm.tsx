@@ -95,20 +95,6 @@ const FileUploadForm = <T extends FieldValues>({
           disabled={disabled}
           error={errorProperty}
         />
-        {canDelete && (
-          <Button
-            iconId="fr-icon-delete-bin-line"
-            type="button"
-            size="small"
-            title={deleteButtonTitle ?? 'Supprimer le fichier'}
-            priority="tertiary no outline"
-            onClick={onDelete}
-            disabled={disabled}
-            nativeButtonProps={{
-              'data-testid': deleteButtonTestId,
-            }}
-          />
-        )}
       </div>
     </div>
   )
