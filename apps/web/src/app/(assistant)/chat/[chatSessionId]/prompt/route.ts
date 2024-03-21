@@ -4,6 +4,7 @@ import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
 import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
 import { executeMistralChat } from '@app/web/assistant/mistralChat'
 import { prismaClient } from '@app/web/prismaClient'
+import { getSimilarResources } from '@app/web/assistant/rag'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -30,6 +31,8 @@ export const POST = async (
       status: 400,
     })
   }
+
+  await getSimilarResources(prompt)
 
   await prismaClient.assistantChatMessage.create({
     data: {

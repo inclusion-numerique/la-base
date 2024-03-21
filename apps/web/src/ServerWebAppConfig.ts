@@ -1,8 +1,6 @@
 // TODO Enable server-only when next-auth (v5) is in app router
 // import 'server-only'
 
-import * as process from 'node:process'
-
 /**
  * Only use ServerWebAppConfig on server side
  * It contains secrets that must not be sent to the client
