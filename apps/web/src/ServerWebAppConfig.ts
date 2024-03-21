@@ -50,4 +50,7 @@ export const ServerWebAppConfig = {
       process.env.REPORT_MODERATOR_EMAIL ?? ''
     }>`,
   },
+  Mistral: {
+    apiKey: process.env.MISTRAL_API_KEY ?? '',
+  },
 }

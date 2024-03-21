@@ -98,8 +98,13 @@ const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
 
           const text = new TextDecoder().decode(value)
           streamContent += text
-          streamingResponseMessageRef.current &&
-            (streamingResponseMessageRef.current.textContent += text)
+
+          if (streamingResponseMessageRef.current) {
+            const htmlWithLineBreaks = (
+              streamingResponseMessageRef.current.innerHTML + text
+            ).replaceAll('\n', '<br>')
+            streamingResponseMessageRef.current.innerHTML = htmlWithLineBreaks
+          }
 
           scrollToBottomOfMessages()
         }
