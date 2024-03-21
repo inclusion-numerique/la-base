@@ -1,10 +1,8 @@
 import { NextRequest } from 'next/server'
-import { v4 } from 'uuid'
+import cookie from 'cookie'
+import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
+import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCookies'
 import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
-import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
-import { executeMistralChat } from '@app/web/assistant/mistralChat'
-import { prismaClient } from '@app/web/prismaClient'
-import { getSimilarities } from '@app/web/assistant/rag'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -123,7 +121,7 @@ export const POST = async (
         .catch((error) => controller.error(error))
     },
     cancel() {
-      console.log('Stream cancelled by client.')
+      console.log('Stream cancelled by the client.')
     },
   })
 
