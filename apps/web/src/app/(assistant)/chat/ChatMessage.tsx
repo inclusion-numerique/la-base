@@ -16,7 +16,10 @@ const ChatMessage = ({
     <div className={classNames('fr-mb-2v fr-text--bold')}>
       {role === 'Assistant' ? 'Assistant' : 'Vous'}
     </div>
-    <div ref={contentRef}>{content}</div>
+    <div
+      ref={contentRef}
+      dangerouslySetInnerHTML={{ __html: content.replaceAll('\n', '<br/>') }}
+    />
   </div>
 )
 

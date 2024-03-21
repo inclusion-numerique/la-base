@@ -1,8 +1,9 @@
 import { NextRequest } from 'next/server'
-import cookie from 'cookie'
-import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
-import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCookies'
+import { v4 } from 'uuid'
 import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
+import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
+import { executeMistralChat } from '@app/web/assistant/mistralChat'
+import { prismaClient } from '@app/web/prismaClient'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -20,30 +21,61 @@ export const POST = async (
     return notFoundResponse()
   }
 
-  const cookies = cookie.parse(request.headers.get('cookie') || '')
-  const sessionToken = getSessionTokenFromCookies(cookies)
-  const user = sessionToken
-    ? await getSessionUserFromSessionToken(sessionToken)
-    : null
+  // Get prompt from request json body
+  const body = (await request.json()) as { prompt?: string }
+  const { prompt } = body
+
+  if (!prompt) {
+    return new Response('Prompt is required', {
+      status: 400,
+    })
+  }
+
+  await prismaClient.assistantChatMessage.create({
+    data: {
+      id: v4(),
+      sessionId: chatSession.id,
+      role: 'User',
+      content: prompt,
+    },
+  })
+
+  const systemMessage = {
+    role: 'system',
+    content:
+      'Répond TOUJOURS en français sauf si l’utilisateur demand de traduire',
+  }
+
+  const messages = [
+    systemMessage,
+    ...chatSession.messages.map(assistantMessageToMistralMessage),
+    {
+      role: 'user',
+      content: prompt,
+    },
+  ]
 
   const stream = new ReadableStream({
     start(controller) {
-      // Function to enqueue fake message every x second
-      const pushMessage = () => {
-        controller.enqueue('blah ')
-      }
-
-      // Call pushMessage every 1 second for 8 seconds
-      const intervalId = setInterval(pushMessage, 75)
-
-      // Stop the stream and clear the interval after 8 seconds
-      setTimeout(() => {
-        clearInterval(intervalId) // Stop the interval
-        controller.close() // Close the stream, completing the response
-      }, 3500)
+      executeMistralChat({
+        messages,
+        onChunk: (chunk) => controller.enqueue(chunk),
+      })
+        .then((response) => {
+          controller.close()
+          return prismaClient.assistantChatMessage.create({
+            data: {
+              id: v4(),
+              sessionId: chatSession.id,
+              role: 'Assistant',
+              content: response,
+            },
+          })
+        })
+        .catch((error) => controller.error(error))
     },
     cancel() {
-      console.log('Stream cancelled by the client.')
+      console.log('Stream cancelled by client.')
     },
   })
 
