@@ -50,6 +50,7 @@ export const webAppStackSensitiveVariables = [
   'DATABASE_PASSWORD',
   'PROCONNECT_PREVIEW_CLIENT_SECRET',
   'PROCONNECT_MAIN_CLIENT_SECRET',
+  'MISTRAL_API_KEY',
   'INTERNAL_API_PRIVATE_KEY',
 ] as const
 
@@ -203,6 +204,7 @@ export class WebAppStack extends TerraformStack {
       },
       secretEnvironmentVariables: {
         DATABASE_URL: databaseUrl,
+        MISTRAL_API_KEY: sensitiveEnvironmentVariables.MISTRAL_API_KEY.value,
         PROCONNECT_CLIENT_SECRET: isMain
           ? sensitiveEnvironmentVariables.PROCONNECT_MAIN_CLIENT_SECRET.value
           : sensitiveEnvironmentVariables.PROCONNECT_PREVIEW_CLIENT_SECRET
