@@ -25,7 +25,6 @@ export const POST = async (
   // Get prompt from request json body
   const body = (await request.json()) as { prompt?: string }
   const { prompt } = body
-  let contextPrompt = ''
 
   if (!prompt) {
     return new Response('Prompt is required', {
@@ -35,18 +34,21 @@ export const POST = async (
 
   const similarResources = await getSimilarResources(prompt)
 
-  if (similarResources) {
-    contextPrompt = `
-    Les informations de contexte sont en dessous.
-    ---------------------
-    Ressources similaires:
-      ${similarResources}
-    ---------------------
-      Avec ce contexte, et en oubliant les connaissances précédentes, réponds à la question
-      Question: ${prompt}
-    Réponse:
-      `
-  }
+  const similarResourcesMessage = similarResources
+    ? {
+        role: 'user',
+        content: `Pour répondre à ma prochaine question, voici des ressources sur le site Les Bases qui seraient utiles au format JSON.
+        
+        \`\`\`json
+        ${JSON.stringify(similarResources, null, 2)}
+        \`\`\`
+        
+        Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien au format markdown vers la ressource.
+        Exemples : 
+              - [titre](url) : description.
+        `,
+      }
+    : null
 
   await prismaClient.assistantChatMessage.create({
     data: {
@@ -60,29 +62,20 @@ export const POST = async (
   const systemMessage = {
     role: 'system',
     content:
-      'Tu es assistant pour les médiateurs numériques. Tu parles français, sauf si on te demande de traduire.' +
+      'Tu es assistant pour les médiateurs numériques. Tu REPONDS TOUJOURS EN FRANÇAIS, sauf si on te demande de traduire.' +
       'Ton objectif est d’aider les médiateurs numériques à trouver des ressources pertinentes pour leur public.' +
       'Tu peux aussi leur donner des conseils sur la médiation numérique.' +
       'Répond de manière concise et précise aux questions des médiateurs numériques. Si tu ne comprends pas une question, demande des précisions.' +
-      'Tu vas recevoir des ressources que tu peux recommander sous cette forme : ' +
-      ` title: 'Administration Numérique pour les Etrangers en France (ac)', url: 'https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac', description: "Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France)."` +
-      'Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien vers la ressource' +
-      `
-      ######
-      Voici quelques exemples :
-      
-      Voici quelques ressources qui pourrait vous intéresser :
-      - [Administration Numérique pour les Etrangers en France (ac)](https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac) : Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France).
-      - [ANEF](https://lesbases.anct.gouv.fr/ressources/anef) : L'Administration Numérique pour les Etrangers en France (ANEF) a pour objectif de dématérialiser toutes les démarches concernant les étrangers en France : séjour et accès à la nationalité.
-      `,
+      'Tu dois toujours répondre en français et au format Markdown',
   }
 
   const messages = [
     systemMessage,
     ...chatSession.messages.map(assistantMessageToMistralMessage),
+    ...[similarResourcesMessage].filter(Boolean),
     {
       role: 'user',
-      content: similarResources ? contextPrompt : prompt,
+      content: prompt,
     },
   ]
 
