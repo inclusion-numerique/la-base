@@ -4,7 +4,7 @@ import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
 import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
 import { executeMistralChat } from '@app/web/assistant/mistralChat'
 import { prismaClient } from '@app/web/prismaClient'
-import { getSimilarResources } from '@app/web/assistant/rag'
+import { getSimilarities } from '@app/web/assistant/rag'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -32,36 +32,37 @@ export const POST = async (
     })
   }
 
-  const similarResources = await getSimilarResources(prompt)
+  const { similarResources, similarBases } = await getSimilarities(prompt)
 
   const promptMessage =
-    similarResources.length > 0
+    similarResources.length > 0 || similarBases.length > 0
       ? {
           role: 'user',
           content: `
         
         Les informations de contexte sont en dessous.
-    Les seules ressources que tu peux recommander sont celles dans le contexte Ressources similaires en dessous. Elles sont au format JSON.
-    Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner une url vers la ressource' 
+        Les seules ressources que tu peux recommander sont celles dans le contexte Ressources similaires en dessous. Elles sont au format JSON.
+        Les seules bases que tu peux recommander sont celles dans le contexte Bases similaires en dessous. Elles sont au format JSON. 
  
- 
+        ######
+        Ressources similaires:
         \`\`\`json
         ${JSON.stringify(similarResources, null, 2)}
         \`\`\`
         
-        Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien au format markdown vers la ressource.
         ######
-      Exemples :
-      
-      Question: Comment puis-je obtenir un titre de séjour en France ?
-      Réponse: Pour obtenir un titre de séjour en France, vous devez d'abord vous rendre sur le site de l'administration numérique pour les étrangers en France (ANEF) et suivre les instructions pour demander un titre de séjour en ligne.
-      
-      Voici quelques ressources qui pourrait vous intéresser :
-      - [Administration Numérique pour les Etrangers en France (ac)](https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac) : Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France).
-      - [ANEF](https://lesbases.anct.gouv.fr/ressources/anef) : L'Administration Numérique pour les Etrangers en France (ANEF) a pour objectif de dématérialiser toutes les démarches concernant les étrangers en France : séjour et accès à la nationalité.
+        Bases similaires:
+        \`\`\`json
+        ${JSON.stringify(similarBases, null, 2)}
+        \`\`\`
+        
+        Lorsque tu recommandes une ressource ou une base, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien au format markdown vers la ressource.
+        Ordonne les recommendations de ressources ensemble, puis les recommendations de bases ensemble.
+        
+       
 
-      ######
-      Question: ${prompt}
+      <<<<<>>>>>
+      La question est la suivante : ${prompt}
         `,
         }
       : {
