@@ -9,6 +9,7 @@ import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { ChatSessionData } from '@app/web/app/(assistant)/chat/getChatSession'
 import ChatMessage from '@app/web/app/(assistant)/chat/ChatMessage'
 import styles from './ChatSession.module.css'
+import { renderMarkdown } from '@app/web/app/(assistant)/chat/markdownRenderer'
 
 const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
   const form = useForm<{ prompt: string }>()
@@ -100,10 +101,8 @@ const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
           streamContent += text
 
           if (streamingResponseMessageRef.current) {
-            const htmlWithLineBreaks = (
-              streamingResponseMessageRef.current.innerHTML + text
-            ).replaceAll('\n', '<br>')
-            streamingResponseMessageRef.current.innerHTML = htmlWithLineBreaks
+            streamingResponseMessageRef.current.innerHTML =
+              renderMarkdown(streamContent)
           }
 
           scrollToBottomOfMessages()

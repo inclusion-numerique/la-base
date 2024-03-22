@@ -16,10 +16,10 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.495.0",
     "@commander-js/extra-typings": "^11.1.0",
-    "axios": "^1.6.5",
     "@prisma/client": "^5.10.2",
-    "bottleneck" : "^2.19.5",
+    "axios": "^1.6.5",
     "axios-retry": "^3.9.1",
+    "bottleneck": "^2.19.5",
     "commander": "^11.1.0",
     "csv-parse": "^5.5.3",
     "csv-stringify": "^6.4.5",
