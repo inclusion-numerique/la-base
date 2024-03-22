@@ -37,15 +37,30 @@ export const POST = async (
   const similarResourcesMessage = similarResources
     ? {
         role: 'user',
-        content: `Pour répondre à ma prochaine question, voici des ressources sur le site Les Bases qui seraient utiles au format JSON.
+        content: `
         
+        Les informations de contexte sont en dessous.
+    Les seules ressources que tu peux recommander sont celles dans le contexte Ressources similaires en dessous. Elles sont au format JSON.
+    Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner une url vers la ressource' 
+ 
+ 
         \`\`\`json
         ${JSON.stringify(similarResources, null, 2)}
         \`\`\`
         
         Lorsque tu recommandes une ressource, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien au format markdown vers la ressource.
-        Exemples : 
-              - [titre](url) : description.
+        ######
+      Exemples :
+      
+      Question: Comment puis-je obtenir un titre de séjour en France ?
+      Réponse: Pour obtenir un titre de séjour en France, vous devez d'abord vous rendre sur le site de l'administration numérique pour les étrangers en France (ANEF) et suivre les instructions pour demander un titre de séjour en ligne.
+      
+      Voici quelques ressources qui pourrait vous intéresser :
+      - [Administration Numérique pour les Etrangers en France (ac)](https://lesbases.anct.gouv.fr/ressources/administration-numerique-pour-les-etrangers-en-france-ac) : Le ministère de l'intérieur a ouvert un téléservice de demande en ligne des titres de séjour, au bénéfice des étudiants étrangers, appelé ANEF-séjour (Administration Numérique pour les Étrangers en France).
+      - [ANEF](https://lesbases.anct.gouv.fr/ressources/anef) : L'Administration Numérique pour les Etrangers en France (ANEF) a pour objectif de dématérialiser toutes les démarches concernant les étrangers en France : séjour et accès à la nationalité.
+
+      ######
+      Question: ${prompt}
         `,
       }
     : null
@@ -62,11 +77,10 @@ export const POST = async (
   const systemMessage = {
     role: 'system',
     content:
-      'Tu es assistant pour les médiateurs numériques. Tu REPONDS TOUJOURS EN FRANÇAIS, sauf si on te demande de traduire.' +
-      'Ton objectif est d’aider les médiateurs numériques à trouver des ressources pertinentes pour leur public.' +
-      'Tu peux aussi leur donner des conseils sur la médiation numérique.' +
-      'Répond de manière concise et précise aux questions des médiateurs numériques. Si tu ne comprends pas une question, demande des précisions.' +
-      'Tu dois toujours répondre en français et au format Markdown',
+      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général.` +
+      'Répond de manière concise.' +
+      `Parle uniquement français, sauf si on te demande de traduire` +
+      `Propose des solutions pas à pas pour répondre aux questions`,
   }
 
   const messages = [
