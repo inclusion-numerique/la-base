@@ -50,6 +50,7 @@ export const webAppStackSensitiveVariables = [
   'DATABASE_PASSWORD',
   'INCLUSION_CONNECT_PREVIEW_CLIENT_SECRET',
   'INCLUSION_CONNECT_MAIN_CLIENT_SECRET',
+  'MISTRAL_API_KEY',
   'INTERNAL_API_PRIVATE_KEY',
 ] as const
 
@@ -202,6 +203,7 @@ export class WebAppStack extends TerraformStack {
       },
       secretEnvironmentVariables: {
         DATABASE_URL: databaseUrl,
+        MISTRAL_API_KEY: sensitiveEnvironmentVariables.MISTRAL_API_KEY.value,
         INCLUSION_CONNECT_CLIENT_SECRET: isMain
           ? sensitiveEnvironmentVariables.INCLUSION_CONNECT_MAIN_CLIENT_SECRET
               .value
