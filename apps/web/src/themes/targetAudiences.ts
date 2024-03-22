@@ -32,7 +32,7 @@ export const targetAudienceLabels: {
   Parents: 'Parents',
   PersonneAllophone: 'Personne allophone',
   PersonneSituationHandicap: 'Personne en situation de handicap',
-  PersonneSituationIlletrisme: 'Personne en situation d’illetrisme',
+  PersonneSituationIlletrisme: 'Personne en situation d’illettrisme',
   PersonnesEnInsertionSociale: 'Personnes en insertion sociale',
   PersonnesInsertionProfessionnelle: 'Personnes en insertion professionnelle',
   PersonnesPerteAutonomie: 'Personnes en perte d’autonomie',

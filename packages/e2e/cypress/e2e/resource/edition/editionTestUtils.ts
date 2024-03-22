@@ -33,7 +33,7 @@ export const cleanUpAndCreateTestResource = (
   cy.intercept('/api/trpc/resource.mutate?*').as('mutation')
   cy.dsfrShouldBeStarted()
 
-  return { user }
+  return { user, commands }
 }
 
 export const cleanUpAndCreateTestPublishedResource = ({
@@ -153,18 +153,30 @@ export const cleanUpAndCreateTestBase = (publicBase?: boolean) => {
   return { user, base }
 }
 
-export const cleanUpAndCreateTestBaseAsMember = (publicBase?: boolean) => {
-  cy.execute('deleteAllData', {})
+export const createTestBaseAsMember = (
+  user: CreateUserInput & { id: string },
+  publicBase?: boolean,
+  title?: string,
+) => {
   const admin = givenUser()
-  const user = givenUser()
+  cy.createUser(admin)
+
   const base = givenBase(
-    { createdById: admin.id, isPublic: !!publicBase },
+    { createdById: admin.id, isPublic: !!publicBase, title },
     { acceptedMemberIds: [user.id] },
   )
 
-  cy.createUser(admin)
-  cy.createUserAndSignin(user)
   cy.createBase(base)
+
+  return { admin, user, base }
+}
+
+export const cleanUpAndCreateTestBaseAsMember = (publicBase?: boolean) => {
+  cy.execute('deleteAllData', {})
+  const user = givenUser()
+  cy.createUserAndSignin(user)
+
+  const { admin, base } = createTestBaseAsMember(user, publicBase)
 
   cy.visit(`/bases/${base.slug}`)
 

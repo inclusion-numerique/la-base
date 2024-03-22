@@ -1,3 +1,5 @@
+import { EditTitleAndDescriptionCommand } from '@app/web/server/resources/feature/EditTitleAndDescription'
+import { createSlug } from '@app/web/utils/createSlug'
 import { v4 } from 'uuid'
 import { givenUser } from '@app/e2e/support/given/givenUser'
 import { givenBase } from '@app/e2e/support/given/givenBase'
@@ -8,6 +10,7 @@ import {
 import {
   cleanUp,
   cleanUpAndCreateTestPublishedResource,
+  cleanUpAndCreateTestResource,
 } from './edition/editionTestUtils'
 
 describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource', () => {
@@ -152,7 +155,18 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     )
   })
 
-  it('Acceptation 5 - Créateur', () => {
+  it('Acceptation 5 - Utilisateur connecté sur une ressource en brouillon', () => {
+    const { commands } = cleanUpAndCreateTestResource()
+    const [ressourceCommand, TitleContentCommand] = commands
+
+    const slug = createSlug(ressourceCommand.payload.title)
+    cy.visit(`/ressources/${slug}`)
+    cy.contains(
+      (TitleContentCommand as EditTitleAndDescriptionCommand).payload.title,
+    )
+  })
+
+  it('Acceptation 6 - Créateur', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: false,
@@ -180,7 +194,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cy.testId('resource-publication').should('exist')
   })
 
-  it('Acceptation 6 - Membre de la base', () => {
+  it('Acceptation 7 - Membre de la base', () => {
     cleanUp()
     const creator = givenUser()
     const member = givenUser()
@@ -224,7 +238,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cy.testId('resource-publication').should('exist')
   })
 
-  it('Acceptation 7 - Contributeur', () => {
+  it('Acceptation 8 - Contributeur', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: false,

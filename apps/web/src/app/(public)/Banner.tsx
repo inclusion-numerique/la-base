@@ -1,6 +1,7 @@
 import React from 'react'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import Button from '@codegouvfr/react-dsfr/Button'
+import Link from 'next/link'
 import SearchBar from '@app/web/components/Search/SearchBar'
 import styles from './Banner.module.css'
 
@@ -30,6 +31,12 @@ const Banner = () => (
         }
       />
       <SearchBar />
+      <div className="fr-my-4v">
+        <Link href="/rechercher/tout/ressources" className="fr-link">
+          <span className="fr-icon--sm fr-icon-file-text-line fr-mr-1v" />
+          Voir toutes les ressources
+        </Link>
+      </div>
     </div>
   </div>
 )

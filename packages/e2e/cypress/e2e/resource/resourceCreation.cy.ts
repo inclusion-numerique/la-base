@@ -1,7 +1,10 @@
 import { v4 } from 'uuid'
 import { createSlug } from '@app/web/utils/createSlug'
 import { givenUser } from '@app/e2e/support/given/givenUser'
-import { cleanUpAndCreateTestBaseAsMember } from '@app/e2e/e2e/resource/edition/editionTestUtils'
+import {
+  cleanUpAndCreateTestBaseAsMember,
+  createTestBaseAsMember,
+} from '@app/e2e/e2e/resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je créé une ressource, je peux renseigner le titre, description', () => {
   /**
@@ -81,39 +84,26 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').should('not.exist')
   })
 
-  it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée', () => {
-    const titre = `Test - ${v4()}`
-    const base1Title = `Test - ${v4()}`
-    const base2Title = `Test - ${v4()}`
-    cy.createUserAndSignin(
-      givenUser({
-        isPublic: false,
-        ownedBases: {
-          createMany: {
-            data: [
-              {
-                id: v4(),
-                title: base1Title,
-                slug: createSlug(base1Title),
-                titleDuplicationCheckSlug: createSlug(base1Title),
-                isPublic: true,
-                email: 'e@mail.fr',
-                emailIsPublic: true,
-              },
-              {
-                id: v4(),
-                title: base2Title,
-                slug: createSlug(base2Title),
-                titleDuplicationCheckSlug: createSlug(base2Title),
-                isPublic: false,
-                email: 'e@mail.fr',
-                emailIsPublic: true,
-              },
-            ],
-          },
-        },
-      }),
+  it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée, ajoute une collection à une base privée', () => {
+    const user = givenUser({
+      isPublic: false,
+    })
+
+    cy.createUserAndSignin(user)
+
+    const { base: publicBase } = createTestBaseAsMember(
+      user,
+      true,
+      `Test - ${v4()}`,
     )
+    const { base: privateBase } = createTestBaseAsMember(
+      user,
+      false,
+      `Test - ${v4()}`,
+    )
+
+    const titre = `Test - ${v4()}`
+
     cy.visit('/?creer-une-ressource')
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')
@@ -128,10 +118,10 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').find('label').first().contains('mon profil')
     cy.get('@modal').find('label').first().contains('Profil privé')
 
-    cy.get('@modal').find('label').eq(1).contains(base1Title)
+    cy.get('@modal').find('label').eq(1).contains(publicBase.title)
     cy.get('@modal').find('label').eq(1).contains('Base publique')
 
-    cy.get('@modal').find('label').eq(2).contains(base2Title)
+    cy.get('@modal').find('label').eq(2).contains(privateBase.title)
     cy.get('@modal').find('label').eq(2).contains('Base privée')
     cy.get('@modal').find('label').eq(2).click()
 
@@ -139,6 +129,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.appUrlShouldBe(`/ressources/${createSlug(titre)}/editer`)
     cy.contains(titre)
+    cy.contains(privateBase.title)
     cy.get('@modal').should('not.exist')
   })
 

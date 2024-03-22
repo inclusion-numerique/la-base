@@ -109,7 +109,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
     try {
       const created = await create.mutateAsync({
         name: 'CreateResource',
-        payload: { ...data, baseId },
+        payload: data,
       })
       router.push(`/ressources/${created.resource.slug}/editer`)
       router.refresh()
