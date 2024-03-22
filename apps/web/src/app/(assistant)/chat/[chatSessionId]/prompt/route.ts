@@ -34,7 +34,7 @@ export const POST = async (
 
   const similarResources = await getSimilarResources(prompt)
 
-  const similarResourcesMessage = similarResources
+  const promptMessage = similarResources
     ? {
         role: 'user',
         content: `
@@ -63,7 +63,10 @@ export const POST = async (
       Question: ${prompt}
         `,
       }
-    : null
+    : {
+        role: 'user',
+        content: prompt,
+      }
 
   await prismaClient.assistantChatMessage.create({
     data: {
@@ -86,11 +89,7 @@ export const POST = async (
   const messages = [
     systemMessage,
     ...chatSession.messages.map(assistantMessageToMistralMessage),
-    ...[similarResourcesMessage].filter(Boolean),
-    {
-      role: 'user',
-      content: prompt,
-    },
+    promptMessage,
   ]
 
   const stream = new ReadableStream({
