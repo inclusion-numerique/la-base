@@ -47,7 +47,7 @@ const generateEmbeddings = limiter.wrap(
   },
 )
 
-export const convertResourcesToTxt = new Command()
+export const embedResources = new Command()
   .command('ia:convert-resources')
   .description(
     'convert title and description on resources to txt and store in vector db',
@@ -83,6 +83,48 @@ export const convertResourcesToTxt = new Command()
       await prismaClient.$executeRaw`UPDATE "resources" SET embedding = ${embedding}::real[] WHERE id = ${resource.id}::uuid`
 
       return `${resource.title}\n`
+    })
+
+    await Promise.all(conversionPromises)
+    console.log('Conversion terminée')
+  })
+
+export const embedBases = new Command()
+  .command('ia:convert-bases')
+  .description(
+    'convert title and description on bases to txt and store in vector db',
+  )
+  .action(async () => {
+    // get all resources
+    const bases = await prismaClient.base.findMany({
+      where: {
+        isPublic: true,
+        deleted: null,
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+      },
+    })
+
+    const conversionPromises = bases.map(async (base) => {
+      const basesText: string[] = [
+        htmlToText(`${base.title}\n${base.description}\n\n`),
+      ]
+      output('Embedding for ', base.title)
+      const embeddingResponse = await generateEmbeddings(basesText)
+
+      output('Response : ', embeddingResponse)
+
+      const { embedding } = embeddingResponse.data[0]
+
+      output('Inserting embedding id', embeddingResponse.id)
+      output('Embeddings : ', embedding)
+
+      await prismaClient.$executeRaw`UPDATE "bases" SET embedding_base = ${embedding}::real[] WHERE id = ${base.id}::uuid`
+
+      return `${base.title}\n`
     })
 
     await Promise.all(conversionPromises)
