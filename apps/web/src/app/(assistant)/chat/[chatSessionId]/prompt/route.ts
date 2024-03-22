@@ -34,10 +34,11 @@ export const POST = async (
 
   const similarResources = await getSimilarResources(prompt)
 
-  const promptMessage = similarResources
-    ? {
-        role: 'user',
-        content: `
+  const promptMessage =
+    similarResources.length > 0
+      ? {
+          role: 'user',
+          content: `
         
         Les informations de contexte sont en dessous.
     Les seules ressources que tu peux recommander sont celles dans le contexte Ressources similaires en dessous. Elles sont au format JSON.
@@ -62,11 +63,11 @@ export const POST = async (
       ######
       Question: ${prompt}
         `,
-      }
-    : {
-        role: 'user',
-        content: prompt,
-      }
+        }
+      : {
+          role: 'user',
+          content: prompt,
+        }
 
   await prismaClient.assistantChatMessage.create({
     data: {
