@@ -34,7 +34,7 @@ export const getSimilarResources = async (prompt: string): Promise<string> => {
       (resource) =>
         `Title: ${resource.title}, URL: ${resource.url}, Description: ${resource.description}`,
     )
-    .join('')
+    .join('\n')
 
   console.log('matching ressources', resourcesString)
 
