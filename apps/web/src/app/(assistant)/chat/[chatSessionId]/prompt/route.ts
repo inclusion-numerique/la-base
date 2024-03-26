@@ -39,29 +39,17 @@ export const POST = async (
       ? {
           role: 'user',
           content: `
-        
         Les informations de contexte sont en dessous.
-        Les seules ressources que tu peux recommander sont celles dans le contexte Ressources similaires en dessous. Elles sont au format JSON.
-        Les seules bases que tu peux recommander sont celles dans le contexte Bases similaires en dessous. Elles sont au format JSON. 
- 
+        
         ######
-        Ressources similaires:
-        \`\`\`json
+        Ressources :
         ${JSON.stringify(similarResources, null, 2)}
-        \`\`\`
         
         ######
-        Bases similaires:
-        \`\`\`json
+        Bases :
         ${JSON.stringify(similarBases, null, 2)}
-        \`\`\`
         
-        Lorsque tu recommandes une ressource ou une base, tu dois la présenter en quelques mots pour expliquer pourquoi elle est pertinente, puis donner un lien au format markdown vers la ressource.
-        Ordonne les recommendations de ressources ensemble, puis les recommendations de bases ensemble.
         
-       
-
-      <<<<<>>>>>
       La question est la suivante : ${prompt}
         `,
         }
@@ -85,7 +73,14 @@ export const POST = async (
       `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général.` +
       'Répond de manière concise.' +
       `Parle uniquement français, sauf si on te demande de traduire` +
-      `Propose des solutions pas à pas pour répondre aux questions`,
+      `Propose des solutions pas à pas pour répondre aux questions` +
+      `Si tu ne comprends pas une question, dis-le` +
+      `Les seules ressources que tu peux recommander sont celles dans ton contexte. Elles sont au format JSON.
+       Les seules bases que tu peux recommander sont celles dans ton contexte. Elles sont au format JSON. 
+       Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
+      `Si tu utilises des ressources ou des bases, ajoute leur lien au format markdown. Ces liens redirigent vers des ressources ou des bases` +
+      `Ne mentionne pas de lien vers autre chose que des ressources ou des bases.` +
+      `Ne mentionne pas les informations de ce contexte dans ta réponse.`,
   }
 
   const messages = [

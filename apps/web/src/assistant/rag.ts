@@ -24,7 +24,7 @@ const getSimilarResources = async (embeddedPrompt: EmbeddingResponse) => {
     Resource[]
   >`SELECT title, slug, description, 1 - (embedding <=> ${embeddedPrompt.data[0].embedding}::vector) as similarity
     FROM "resources"
-    WHERE 1 - (embedding <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.7
+    WHERE 1 - (embedding <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.8
     ORDER BY similarity
             DESC
     LIMIT 3;`
@@ -47,7 +47,7 @@ const getSimilarBases = async (embeddedPrompt: EmbeddingResponse) => {
     Base[]
   >`SELECT title, slug, description, 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) as similarity
     FROM "bases"
-    WHERE 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.7
+    WHERE 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.8
     ORDER BY similarity
             DESC
     LIMIT 3;`
@@ -73,6 +73,9 @@ export const getSimilarities = async (
 
   const resources = await getSimilarResources(embeddedPrompt)
   const bases = await getSimilarBases(embeddedPrompt)
+
+  console.log('resources', resources)
+  console.log('bases', bases)
 
   return { similarResources: resources, similarBases: bases }
 }
