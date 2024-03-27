@@ -1,23 +1,24 @@
 'use client'
 
-import Image from 'next/image'
+import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
+import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, Path, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import * as Sentry from '@sentry/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
-import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import {
-  imageUploadHint,
-  imageFileValidationOptions,
-} from '@app/web/server/rpc/image/imageValidation'
+import { imageFileValidationOptions } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
-import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
-import styles from './ResourceImageEdition.module.css'
+
+const CropImageModal = createModal({
+  id: 'crop-resource-image',
+  isOpenedByDefault: false,
+})
 
 const imageFileValidation = fileValidation({
   ...imageFileValidationOptions,
@@ -41,8 +42,6 @@ const ResourceImageEdition = ({
   editing: string | null
   setEditing: Dispatch<SetStateAction<string | null>>
 }) => {
-  const { id, image } = resource
-
   const isEditingImage = editing === 'image'
   const isEditingAnotherContent = !!editing && !isEditingImage
 
@@ -64,7 +63,8 @@ const ResourceImageEdition = ({
     resolver: zodResolver(ImageEditionFormValidation),
   })
 
-  const onSubmit = async (data: ImageEditionFormData) => {
+  const onSubmit = async (data: CroppedImageType) => {
+    if (data.file == null) return
     // When the user submits a file, it has been validated client side by fileValidation()
 
     // 1. We set edition state to avoid other operations while uploading
@@ -86,6 +86,7 @@ const ResourceImageEdition = ({
 
     // 3. We create an image based on the uploaded file
     const imageCreationResult = await createImage.mutateAsync({
+      ...data,
       file: uploaded,
     })
 
@@ -94,7 +95,7 @@ const ResourceImageEdition = ({
       name: 'EditImage',
       payload: {
         imageId: imageCreationResult.id,
-        resourceId: id,
+        resourceId: resource.id,
       },
     })
 
@@ -114,7 +115,7 @@ const ResourceImageEdition = ({
       name: 'EditImage',
       payload: {
         imageId: null,
-        resourceId: id,
+        resourceId: resource.id,
       },
     })
 
@@ -138,53 +139,35 @@ const ResourceImageEdition = ({
     return () => subscription.unsubscribe()
   }, [watch, isEditingImage, setEditing, handleSubmit, onSubmit])
 
+  const handleCropImage = async (data?: CroppedImageType) => {
+    if (data?.file != null) {
+      await onSubmit(data)
+    } else if (data?.id == null) {
+      await onDelete()
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={image ? styles.container : styles.emptyContainer}>
-        <div
-          className={
-            image ? styles.imageContainer : styles.imagePlaceholderContainer
-          }
-        >
-          {image ? (
-            <ResponsiveUploadedImage
-              id={image.id}
-              alt={image.altText ?? ''}
-              data-testid="resource-image"
-              breakpoints={[
-                { media: '(min-width: 768px)', width: 300 },
-                { media: '(min-width: 320px)', width: 650 },
-                { media: '(max-width: 320px)', width: 300 },
-              ]}
-            />
-          ) : (
-            <Image
-              src="/images/image-placeholder.svg"
-              alt="Image vide"
-              data-testid="resource-image-placeholder"
-              width={56}
-              height={56}
-            />
-          )}
+      <div className="fr-border">
+        <div className="fr-px-3w">
+          <Controller
+            control={control}
+            name={'imageId' as Path<{ file: File }>}
+            render={({ fieldState: { error } }) => (
+              <CroppedUpload
+                image={resource.image}
+                modal={CropImageModal}
+                disabled={disabled}
+                ratio={1.66}
+                height={195}
+                size={{ w: 1764, h: 1060 }}
+                onChange={handleCropImage}
+                error={error?.message}
+              />
+            )}
+          />
         </div>
-
-        <FileUploadForm
-          label={
-            image
-              ? "Remplacer l'image de présentation"
-              : 'Ajouter une image de présentation pour attirer les visiteurs'
-          }
-          fileFieldHint={imageUploadHint({ w: 1764, h: 1260 })}
-          disabled={disabled}
-          canDelete={!!image}
-          deleteButtonTitle="Supprimer l'image de présentation"
-          deleteButtonTestId="resource-image-delete"
-          fileUpload={fileUpload}
-          onDelete={onDelete}
-          control={control}
-          path="file"
-          className={styles.inputContainer}
-        />
       </div>
     </form>
   )

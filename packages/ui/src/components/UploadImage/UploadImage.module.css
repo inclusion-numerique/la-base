@@ -1,0 +1,85 @@
+.imageContainer {
+    display: block;
+    overflow: hidden;
+    margin: 0 auto 16px;
+}
+
+.round {
+    width: 128px;
+    border-radius: 50%;
+}
+
+.roundQuarter {
+    width: 128px;
+    border-radius: 12.5%;
+}
+
+.existingImage {
+    display: flex;
+    margin-bottom: 16px;
+    gap: 32px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageActions {
+    flex-shrink: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.cropping {
+    margin: 16px 0;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    :global(.cropper-modal) {
+        background-color: var(--background-action-low-blue-france);
+        opacity: 0.8;
+    }
+
+    :global(.cropper-center::before),
+    :global(.cropper-center::after),
+    :global(.cropper-line),
+    :global(.cropper-point) {
+        background-color: var(--background-alt-blue-france);
+    }
+
+    :global(.cropper-view-box) {
+        outline-color: var(--background-alt-blue-france);
+    }
+}
+
+.cropper {
+    min-height: 350px;
+    min-width: 250px;
+}
+
+.croppingRound {
+    :global(.cropper-view-box),
+    :global(.cropper-face) {
+        border-radius: 50%;
+    }
+
+    :global(.cropper-line),
+    :global(.point-ne),
+    :global(.point-nw),
+    :global(.point-se),
+    :global(.point-sw) {
+        display: none;
+    }
+}
+
+.croppingRoundQuarter {
+    :global(.cropper-view-box),
+    :global(.cropper-face) {
+        border-radius: 25%;
+    }
+}
+
+.zoomButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

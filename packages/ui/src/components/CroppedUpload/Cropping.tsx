@@ -123,12 +123,12 @@ const Cropping = ({
           />
         </div>
       </div>
-      {imageToUpload || image ? (
+      {(imageToUpload || image) && (
         <ImageInfo
-          name={imageToUpload?.name ?? image?.upload.name ?? ''}
-          size={imageToUpload?.size ?? image?.upload.size ?? null}
+          name={imageToUpload?.name ?? image?.upload?.name ?? ''}
+          size={imageToUpload?.size ?? image?.upload?.size ?? null}
         />
-      ) : null}
+      )}
     </>
   )
 }

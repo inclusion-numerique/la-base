@@ -497,6 +497,18 @@
   border-radius: 64px;
 }
 
+.fr-border-radius-rounded {
+  border-radius: 12.5%;
+}
+
+.fr-border-radius-circle {
+  border-radius: 50%;
+}
+
+.fr-overflow-hidden {
+  overflow: hidden;
+}
+
 /* No underline when not hovered */
 .fr-link--underline-on-hover {
   &:not(:hover) {

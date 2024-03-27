@@ -9,18 +9,22 @@ const ImageInfo = ({
   className,
 }: {
   className?: string
-  name: string
-  size: number | null
-}) => (
-  <div className={classNames(styles.container, className)}>
-    <span
-      className={classNames(styles.icon, 'fr-icon-image-line', 'fr-icon--sm')}
-    />
-    <div className={styles.imageName} title={name}>
-      {name}
+  name?: string | null
+  size?: number | null
+}) =>
+  name == null ? null : (
+    <div className={classNames(styles.container, className)}>
+      <span
+        className={classNames(styles.icon, 'fr-icon-image-line', 'fr-icon--sm')}
+      />
+      <div className={styles.imageName} title={name ?? ''}>
+        {name}
+      </div>
+      ·
+      <div className={styles.imageSize}>
+        {size ? formatByteSize(size) : null}
+      </div>
     </div>
-    ·
-    <div className={styles.imageSize}>{size ? formatByteSize(size) : null}</div>
-  </div>
-)
+  )
+
 export default ImageInfo

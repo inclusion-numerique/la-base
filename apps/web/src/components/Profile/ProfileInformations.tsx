@@ -4,7 +4,7 @@ import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import ProfileMetadata from './ProfileMetadata'
 import styles from './ProfileInformations.module.css'
-import ImageEdition from './Edition/ProfileImageEdition'
+import ProfileImageEdition from './Edition/ProfileImageEdition'
 
 const ProfileInformations = ({
   profile,
@@ -21,7 +21,7 @@ const ProfileInformations = ({
   >
     <div className={styles.profileImageContainer}>
       <RoundProfileImage user={profile} size={128} borderWidth={1} />
-      {editMode && <ImageEdition profile={profile} />}
+      {editMode && <ProfileImageEdition profile={profile} />}
     </div>
     <div>
       <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-center fr-width-full fr-flex-gap-4v">
