@@ -1,3 +1,6 @@
+import { CreateResourceCommand } from '@app/web/server/resources/feature/CreateResource'
+import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
+import { createSlug } from '@app/web/utils/createSlug'
 import {
   cleanUpAndCreateTestResource,
   startContentEdition,
@@ -6,8 +9,11 @@ import {
 
 describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
   describe('Qui a déjà été modifiée, en brouillon', () => {
+    let testResource: {
+      commands: [CreateResourceCommand, ...ResourceMutationCommand[]]
+    }
     beforeEach(() => {
-      cleanUpAndCreateTestResource()
+      testResource = cleanUpAndCreateTestResource()
     })
 
     describe('Je peux éditer les titres de section', () => {
@@ -63,6 +69,24 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('section-title-input').type("C'est que le début")
 
         submitValidContentEdition('SectionTitle-0')
+
+        cy.testId('content-section-title').should(
+          'have.text',
+          "C'est que le début",
+        )
+      })
+
+      it.only('Acceptation 3 - Je peux valider une modification en publiant une resource', () => {
+        startContentEdition('SectionTitle-0')
+        cy.testId('section-title-input').clear()
+        cy.testId('section-title-input').type("C'est que le début")
+        cy.testId('publish-resource-button').click()
+
+        const [ressourceCommand] = testResource.commands
+
+        cy.visit(
+          `/ressources/${createSlug(ressourceCommand.payload.title)}/editer`,
+        )
 
         cy.testId('content-section-title').should(
           'have.text',

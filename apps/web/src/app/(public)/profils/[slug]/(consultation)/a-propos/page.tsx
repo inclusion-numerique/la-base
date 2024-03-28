@@ -1,6 +1,7 @@
 import React from 'react'
 import ExternalLink from '@app/ui/components/ExternalLink'
 import BlockWithLabel from '@app/ui/components/BlockWithLabel'
+import Link from 'next/link'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { getDepartmentName } from '@app/web/utils/departments'
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
@@ -60,9 +61,9 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
                   label="Adresse mail de contact"
                   canDisplay={profile.emailIsPublic && profile.email}
                 >
-                  <ExternalLink href={profile.email}>
+                  <Link href={`mailto:${profile.email}`} className="fr-link">
                     {profile.email}
-                  </ExternalLink>
+                  </Link>
                 </BlockWithLabel>
                 <BlockWithLabel
                   label="Site internet"

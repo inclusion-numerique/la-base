@@ -157,12 +157,12 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
 
   it('Acceptation 5 - Utilisateur connecté sur une ressource en brouillon', () => {
     const { commands } = cleanUpAndCreateTestResource()
-    const [ressourceCommand, TitleContentCommand] = commands
+    const [ressourceCommand, titleContentCommand] = commands
 
     const slug = createSlug(ressourceCommand.payload.title)
     cy.visit(`/ressources/${slug}`)
     cy.contains(
-      (TitleContentCommand as EditTitleAndDescriptionCommand).payload.title,
+      (titleContentCommand as EditTitleAndDescriptionCommand).payload.title,
     )
   })
 

@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Router from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -51,6 +51,9 @@ const ResourceEdition = ({
   publishMode?: boolean
 }) => {
   const router = useRouter()
+
+  const contentFormButtonRef: React.ForwardedRef<HTMLButtonElement> =
+    useRef(null)
 
   // Content or resource data currently being edited
   // Determines which component is in edition mode, and other component cannot switch to edit mode
@@ -150,6 +153,8 @@ const ResourceEdition = ({
   })
 
   const onPublish = async () => {
+    contentFormButtonRef.current?.click()
+
     if (publishMode) {
       await publicationForm.handleSubmit(async (data: PublishCommand) => {
         try {
@@ -283,6 +288,7 @@ const ResourceEdition = ({
             <hr className="fr-mt-4w" />
             <p className={styles.title}>Contenu de la ressource</p>
             <ContentListEdition
+              ref={contentFormButtonRef}
               contents={updatedDraftResource.contents}
               resource={draftResource}
               sendCommand={sendCommand}
@@ -291,6 +297,7 @@ const ResourceEdition = ({
               setEditing={setEditing}
             />
             <AddContent
+              ref={contentFormButtonRef}
               resource={updatedDraftResource}
               sendCommand={sendCommand}
               editing={editing}

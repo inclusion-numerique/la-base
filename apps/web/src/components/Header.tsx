@@ -4,6 +4,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import HeaderBackLink from '@app/web/components/HeaderBackLink'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import { HelpMenu } from '@app/web/components/HelpMenu'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   defaultSearchParams,
@@ -11,7 +12,6 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
-import { feedbackModalId } from '@app/web/components/Feedback/feedbackModalProps'
 
 const createResourceConnectionLink = (
   <Link
@@ -83,19 +83,6 @@ const Header = ({
               <ul className="fr-btns-group">
                 <li>
                   <Button
-                    key="feedback"
-                    type="button"
-                    priority="tertiary"
-                    iconId="fr-icon-feedback-line"
-                    aria-controls={feedbackModalId}
-                    data-fr-opened={false}
-                    id="header-feedback-control-button"
-                  >
-                    Je donne mon avis
-                  </Button>
-                </li>
-                <li>
-                  <Button
                     linkProps={{
                       href: searchUrl('ressources', defaultSearchParams),
                     }}
@@ -105,17 +92,9 @@ const Header = ({
                   </Button>
                 </li>
                 <li>{createResource}</li>
-                {/* We do not have support featurees for now */}
-                {/* <li> */}
-                {/*  <Button */}
-                {/*    linkProps={{ */}
-                {/*      href: '/', */}
-                {/*    }} */}
-                {/*    iconId="fr-icon-question-line" */}
-                {/*  > */}
-                {/*    Aide */}
-                {/*  </Button> */}
-                {/* </li> */}
+                <li className="fr-position-relative">
+                  <HelpMenu />
+                </li>
                 <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
                   <span
                     style={{
@@ -124,7 +103,7 @@ const Header = ({
                     }}
                   />
                 </li>
-                <li style={{ position: 'relative' }}>
+                <li className="fr-position-relative">
                   {user ? (
                     <HeaderUserMenu user={user} />
                   ) : (

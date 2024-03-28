@@ -4,7 +4,7 @@ import { BaseResource } from '@app/web/server/bases/getBase'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import {
   resourceAuthorization,
-  ResourceRoles,
+  ResourcePermissions,
 } from '@app/web/authorization/models/resourceAuthorization'
 import styles from './ResourceTab.module.css'
 
@@ -27,8 +27,8 @@ const ResourceTab = ({
         <ResourceCard
           titleAs="h3"
           key={resource.slug}
-          isContributor={resourceAuthorization(resource, user).hasRole(
-            ResourceRoles.ResourceContributor,
+          isContributor={resourceAuthorization(resource, user).hasPermission(
+            ResourcePermissions.WriteResource,
           )}
           resource={resource}
           user={user}

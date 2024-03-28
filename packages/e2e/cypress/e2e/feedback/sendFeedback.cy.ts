@@ -15,6 +15,8 @@ describe('Utilisateur, je peux donner mon avis', () => {
     cy.visit('/')
     cy.dsfrModalsShouldBeBound()
 
+    cy.contains('Aide').click()
+
     cy.get('#header-feedback-control-button').should('be.visible').click()
 
     cy.findByRole('dialog').within(() => {

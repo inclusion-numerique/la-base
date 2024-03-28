@@ -12,6 +12,7 @@ const Card = ({
   enlargeLink = href != null,
   description,
   children,
+  header,
   contentSeparator = false,
 }: {
   id?: string
@@ -23,6 +24,7 @@ const Card = ({
   enlargeLink?: boolean
   description?: ReactNode
   children?: ReactNode
+  header?: ReactNode
   contentSeparator?: boolean
 }) => (
   <div
@@ -47,6 +49,7 @@ const Card = ({
         )}
       </div>
     </div>
+    {header ?? <div className="fr-card__header">{header}</div>}
   </div>
 )
 
