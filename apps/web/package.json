@@ -81,6 +81,7 @@
     "js-file-downloader": "^1.1.25",
     "langchain": "^0.1.35",
     "lodash": "^4.17.21",
+    "langchain": "^0.1.30",
     "maplibre-gl": "^3.6.2",
     "markdown-it": "^14.1.0",
     "mjml": "^4.15.3",
