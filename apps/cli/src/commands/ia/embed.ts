@@ -1,9 +1,13 @@
 import { Command } from '@commander-js/extra-typings'
 import { prismaClient } from '@app/web/prismaClient'
+import { DocumentHelp } from '@prisma/client'
 import { htmlToText } from '@app/web/utils/htmlToText'
 import axios from 'axios'
 import Bottleneck from 'bottleneck'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import markdownToText from 'markdown-to-text'
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
+import { NotionLoader } from 'langchain/document_loaders/fs/notion'
 import { output } from '@app/cli/output'
 
 interface EmbeddingResponse {
@@ -129,4 +133,54 @@ export const embedBases = new Command()
 
     await Promise.all(conversionPromises)
     console.log('Conversion terminée')
+  })
+
+export const embedHelp = new Command()
+  .command('ia:convert-help')
+  .description('store help center in vector db')
+  .action(async () => {
+    const directoryPath = 'docs'
+    const loader = new NotionLoader(directoryPath)
+    const notionHelpCenterDocuments = await loader.load()
+
+    const splitter = RecursiveCharacterTextSplitter.fromLanguage('markdown')
+
+    const chunkedDocuments = await splitter.splitDocuments(
+      notionHelpCenterDocuments,
+    )
+
+    // Transformation des chunks en documents Prisma
+    const prismaDocuments: DocumentHelp[] = chunkedDocuments.map(
+      (chunk, index) => ({
+        id: index.toString(), // Génération d'un identifiant unique pour chaque document
+        content: chunk.pageContent, // Le contenu du chunk
+        source: chunk.metadata.source, // La source du document
+      }),
+    )
+
+    const insertionPromise = prismaDocuments.map(
+      async ({ id, content, source }) => {
+        const convertedText = markdownToText(content)
+        await prismaClient.documentHelp.upsert({
+          where: { id },
+          update: { content: convertedText, source },
+          create: { id, content: convertedText, source },
+        })
+      },
+    )
+
+    await Promise.all(insertionPromise)
+
+    const conversionPromises = prismaDocuments.map(async (document) => {
+      const embeddingResponse = await generateEmbeddings([document.content])
+      output('Response : ', embeddingResponse)
+      const { embedding } = embeddingResponse.data[0]
+
+      output('Inserting embedding id', embeddingResponse.id)
+      output('Embeddings : ', embedding)
+
+      await prismaClient.$executeRaw`UPDATE "help_center" SET vector = ${embedding}::real[] WHERE id = ${document.id}`
+    })
+
+    await Promise.all(conversionPromises)
   })

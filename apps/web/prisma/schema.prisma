@@ -768,6 +768,17 @@ model AssistantChatMessage {
   created   DateTime             @default(now())
 }
 
+
+model DocumentHelp {
+  id        String                 @id @default(cuid())
+  content   String
+  source    String
+  vector    Unsupported("vector")?
+
+  @@map("help_center")
+
+}
+
 model JobExecution {
   id String @id @default(uuid()) @db.Uuid
 

@@ -32,31 +32,44 @@ export const POST = async (
     })
   }
 
-  const { similarResources, similarBases } = await getSimilarities(prompt)
+  const { similarResources, similarBases, similarHelps } =
+    await getSimilarities(prompt)
 
-  const promptMessage =
-    similarResources.length > 0 || similarBases.length > 0
-      ? {
-          role: 'user',
-          content: `
+  const promptMessage = {
+    role: 'user',
+    content: `
         Les informations de contexte sont en dessous.
-        
-        ######
-        Ressources :
-        ${JSON.stringify(similarResources, null, 2)}
-        
-        ######
-        Bases :
-        ${JSON.stringify(similarBases, null, 2)}
-        
-        
+    
+        ${
+          similarResources.length > 0
+            ? `
+        ######        
+        Ressources que tu peux recommander:
+        ${JSON.stringify(similarResources, null, 2)}`
+            : `Tu ne recommandes pas de ressources. Tu ne propose pas d'hyperlien pour les ressources.`
+        }
+        ${
+          similarBases.length > 0
+            ? `######
+        Bases que tu peux recommander:
+        ${JSON.stringify(similarBases, null, 2)}`
+            : `Tu ne recommandes pas de bases. Tu ne propose pas d'hyperlien pour les bases.`
+        }
+        ${
+          similarHelps.length > 0
+            ? `######
+        Informations d'aide pour l'utilisateur sur Les Bases d'intérêt général :
+        ${similarHelps.map((help) => help.content).join('')}`
+            : `Tu ne recommandes pas d'information spécifique au site.`
+        }
       La question est la suivante : ${prompt}
         `,
-        }
-      : {
-          role: 'user',
-          content: prompt,
-        }
+  }
+
+  console.log(
+    '------------------------------------promptMessage',
+    promptMessage,
+  )
 
   await prismaClient.assistantChatMessage.create({
     data: {
@@ -70,17 +83,18 @@ export const POST = async (
   const systemMessage = {
     role: 'system',
     content:
-      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général.` +
+      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, pour Les Bases du Numérique d'intérêt général` +
+      `N'utilise jamais de lien url, sauf s'ils sont dans ton contexte.` +
+      `Recommande des ressources seulement si elles sont dans ton contexte. Elles sont au format JSON.
+       Recommande des bases seulement si elles sont  dans ton contexte. Elles sont au format JSON. 
+       Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
       'Répond de manière concise.' +
       `Parle uniquement français, sauf si on te demande de traduire` +
-      `Propose des solutions pas à pas pour répondre aux questions` +
-      `Si tu ne comprends pas une question, dis-le` +
-      `Les seules ressources que tu peux recommander sont celles dans ton contexte. Elles sont au format JSON.
-       Les seules bases que tu peux recommander sont celles dans ton contexte. Elles sont au format JSON. 
-       Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
+      `N'utilise pas le format JSON dans ta réponse.` +
+      `Ne mentionne pas les informations de ce contexte dans ta réponse.` +
       `Si tu utilises des ressources ou des bases, ajoute leur lien au format markdown. Ces liens redirigent vers des ressources ou des bases` +
-      `Ne mentionne pas de lien vers autre chose que des ressources ou des bases.` +
-      `Ne mentionne pas les informations de ce contexte dans ta réponse.`,
+      `Si tu as des informations d'aide pour l'utilisateur en contexte, utilise le en priorité` +
+      `Si tu ne connais pas la réponse, dis-le, n'essaie pas d'inventer une réponse.`,
   }
 
   const messages = [

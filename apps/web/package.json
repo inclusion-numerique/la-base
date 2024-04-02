@@ -88,6 +88,7 @@
     "js-file-downloader": "^1.1.25",
     "jsonwebtoken": "^9.0.2",
     "lodash-es": "^4.17.21",
+    "langchain": "^0.1.30",
     "maplibre-gl": "^4.6.0",
     "markdown-it": "^14.1.0",
     "mjml": "^4.15.3",
