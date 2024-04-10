@@ -89,6 +89,7 @@ export const rankBases = async (
   >`
       WITH data AS (SELECT bases.id                                                  AS id,
                            bases.slug                                                AS slug,
+                           bases.title                                               AS title,
                            bases.created                                             AS created,
                            COUNT(DISTINCT base_follows.id)                           AS follows_count,
                            COUNT(DISTINCT resources.id)                              AS resources_count,
@@ -142,6 +143,12 @@ export const rankBases = async (
                    /* This is the only ASC order */
                    WHEN ${paginationParams.sort === 'ancien'} THEN created
                    END ASC,
+               CASE
+                   WHEN ${paginationParams.sort === 'a-z'} THEN LOWER(title)
+                   END ASC,
+               CASE
+                   WHEN ${paginationParams.sort === 'z-a'} THEN LOWER(title)
+                   END DESC,
                CASE
                    /* Order by DESC the right data depending on the sort */
                    WHEN ${paginationParams.sort === 'pertinence'} THEN ((8 * rank_title) + rank_description)

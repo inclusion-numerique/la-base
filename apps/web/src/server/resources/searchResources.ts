@@ -52,9 +52,9 @@ export const countResources = async (
           ${searchTerm ?? ''} = ''
               OR to_tsvector('french', unaccent(
                   resources.title || ' '
-                      || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                      || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                      || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                      || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                      || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                      || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
                       || resources.description || ' '
                                        )) @@
                  to_tsquery('french', unaccent(${searchTerm}))
@@ -125,11 +125,9 @@ export const rankResources = async (
                            ts_rank_cd(
                                    to_tsvector('french', unaccent(
                                            resources.title || ' '
-                                               || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                                               || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ||
-                                           ' '
-                                               || replace(array_to_string(resources.support_types, ' '), '_', ' ') ||
-                                           ' '
+                                               || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                                               || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                                               || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
                                                || resources.description || ' '
                                                          )),
                                    to_tsquery('french', unaccent(${searchTerm}))
@@ -163,11 +161,11 @@ export const rankResources = async (
                         ${searchTerm ?? ''} = ''
                             OR to_tsvector('french', unaccent(
                                 resources.title || ' '
-                                    || replace(array_to_string(resources.themes, ' '), '_', ' ') || ' '
-                                    || replace(array_to_string(resources.target_audiences, ' '), '_', ' ') || ' '
-                                    || replace(array_to_string(resources.support_types, ' '), '_', ' ') || ' '
+                                    || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
                                     || resources.description || ' '
-                                                     )) @@
+                               )) @@
                                to_tsquery('french', unaccent(${searchTerm}))
                         )
                       AND (

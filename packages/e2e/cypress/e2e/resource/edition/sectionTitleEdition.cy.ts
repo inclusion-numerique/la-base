@@ -76,7 +76,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         )
       })
 
-      it.only('Acceptation 3 - Je peux valider une modification en publiant une resource', () => {
+      it('Acceptation 3 - Je peux valider une modification en publiant une resource', () => {
         startContentEdition('SectionTitle-0')
         cy.testId('section-title-input').clear()
         cy.testId('section-title-input').type("C'est que le début")

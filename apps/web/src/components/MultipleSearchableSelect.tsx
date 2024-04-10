@@ -59,11 +59,7 @@ const MultipleSearchableSelect = ({
   const filteredOptions = useMemo(
     () =>
       allOptions.filter((option) =>
-        filter
-          ? filter(option)
-          : option.name
-              .toLocaleLowerCase()
-              .includes(inputValue.toLocaleLowerCase()),
+        filter ? filter(option) : option.name.toLocaleLowerCase(),
       ),
     [filter, inputValue, allOptions],
   )

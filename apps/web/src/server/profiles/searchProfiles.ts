@@ -74,6 +74,7 @@ export const rankProfiles = async (
       WITH data AS (SELECT users.id                                                  AS id,
                            users.slug                                                AS slug,
                            users.created                                             AS created,
+                           users.last_name                                           AS last_name,
                            ts_rank_cd(to_tsvector('french',
                                                   unaccent(coalesce(users.name, '') || ' ' ||
                                                            coalesce(users.location, '') || ' ' ||
@@ -120,6 +121,12 @@ export const rankProfiles = async (
                    /* This is the only ASC order */
                    WHEN ${paginationParams.sort === 'ancien'} THEN created
                    END ASC,
+               CASE
+                   WHEN ${paginationParams.sort === 'a-z'} THEN LOWER(last_name)
+                   END ASC,
+               CASE
+                   WHEN ${paginationParams.sort === 'z-a'} THEN LOWER(last_name)
+                   END DESC,
                CASE
                    /* Order by DESC the right data depending on the sort */
                    WHEN ${paginationParams.sort === 'pertinence'} THEN rank

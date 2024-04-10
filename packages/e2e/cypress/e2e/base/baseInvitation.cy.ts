@@ -3,6 +3,8 @@ import {
   defaultTestBaseSlug,
   defaultTestBaseTitle,
 } from '@app/e2e/support/given/givenBase'
+import { goToMostRecentEmailReceived } from '@app/e2e/e2e/goToMostRecentEmailReceived'
+import { appUrl } from '@app/e2e/support/helpers'
 import {
   cleanUpAndCreateTestBase,
   cleanUpAndCreateTestBaseAsMember,
@@ -41,25 +43,8 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.wait('@invite')
     cy.testId('member-card-admin').should('have.length', 2)
 
-    cy.signin({ email: user.email })
-    cy.log('Go check emails in maildev server')
-    // Go to maildev server to checkout the email and get the magic link
-    cy.visit('localhost:1080')
-    cy.get('.email-list li a').first().click()
-
-    cy.get('.email-meta .subject').should(
-      'contain',
-      'Invitation à rejoindre la base',
-    )
-
-    // Cypress does not work well with iframes, we go to the html source of the email that is
-    // included in the iframe preview of maildev ui
-    cy.url().then((url) => {
-      const emailPath = url.split('#').at(-1)
-      if (!emailPath) {
-        throw new Error('Could not find email content path from maildev url')
-      }
-      cy.visit(`localhost:1080${emailPath}/html`)
+    goToMostRecentEmailReceived({
+      subjectInclude: 'Invitation à rejoindre la base',
     })
 
     cy.log('Check mail contents')
@@ -68,6 +53,10 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
     cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+
+    cy.url().should('contain', appUrl('/connexion?suivant=/invitations/base/'))
+    cy.signin({ email: user.email })
+    cy.reload()
     cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}`)
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
@@ -123,25 +112,8 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.wait('@invite')
 
-    cy.signin({ email: user.email })
-    cy.log('Go check emails in maildev server')
-    // Go to maildev server to checkout the email and get the magic link
-    cy.visit('localhost:1080')
-    cy.get('.email-list li a').first().click()
-
-    cy.get('.email-meta .subject').should(
-      'contain',
-      'Invitation à rejoindre la base',
-    )
-
-    // Cypress does not work well with iframes, we go to the html source of the email that is
-    // included in the iframe preview of maildev ui
-    cy.url().then((url) => {
-      const emailPath = url.split('#').at(-1)
-      if (!emailPath) {
-        throw new Error('Could not find email content path from maildev url')
-      }
-      cy.visit(`localhost:1080${emailPath}/html`)
+    goToMostRecentEmailReceived({
+      subjectInclude: 'Invitation à rejoindre la base',
     })
 
     cy.log('Check mail contents')
@@ -150,6 +122,9 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
     cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+    cy.url().should('contain', appUrl('/connexion?suivant=/invitations/base/'))
+    cy.signin({ email: user.email })
+    cy.reload()
     cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}`)
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 

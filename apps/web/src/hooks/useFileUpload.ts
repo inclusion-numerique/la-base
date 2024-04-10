@@ -4,6 +4,12 @@ import EventEmitter from 'eventemitter3'
 import * as Sentry from '@sentry/nextjs'
 import { trpc } from '@app/web/trpc'
 
+const FORBIDDEN_CHARS_REGEXP = /[#“”]/g
+const EMPTY_STRING = ''
+
+const formatFileName = (fileName: string) =>
+  fileName.normalize('NFC').replaceAll(FORBIDDEN_CHARS_REGEXP, EMPTY_STRING)
+
 export const useFileUpload = () => {
   const [uploading, setUploading] = useState<boolean>(false)
 
@@ -48,11 +54,11 @@ export const useFileUpload = () => {
       abortControllerRef.current = new AbortController()
 
       setUploading(true)
-      setFilename(file.name.normalize('NFC'))
+      setFilename(formatFileName(file.name))
       progressEmitterRef.current.emit('progress', 0)
       const uploadInfo = await generateUploadUrl
         .mutateAsync({
-          filename: file.name.normalize('NFC'),
+          filename: formatFileName(file.name),
           mimeType: file.type,
         })
         .catch((error) => {
@@ -93,7 +99,7 @@ export const useFileUpload = () => {
 
         return {
           key: uploadInfo.key,
-          name: file.name.normalize('NFC'),
+          name: formatFileName(file.name),
           mimeType: file.type,
           size: totalUploaded,
         }

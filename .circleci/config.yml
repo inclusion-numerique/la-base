@@ -455,7 +455,6 @@ jobs:
             echo "SMTP_PORT=1025" >> .env
             echo "SMTP_USERNAME=mailuser" >> .env
             echo "SMTP_PASSWORD=mailpassword" >> .env
-            echo "SMTP_SERVER=localhost" >> .env
             echo 'INCLUSION_CONNECT_CLIENT_SECRET=$INCLUSION_CONNECT_LOCAL_CLIENT_SECRET' >> .env
       - run:
           name: 'Create CI database schema'
@@ -500,7 +499,6 @@ jobs:
             echo "SMTP_PORT=1025" >> .env
             echo "SMTP_USERNAME=mailuser" >> .env
             echo "SMTP_PASSWORD=mailpassword" >> .env
-            echo "SMTP_SERVER=localhost" >> .env
       - run:
           name: 'Prisma generate'
           command: pnpm --silent -F @app/web prisma generate

@@ -579,13 +579,13 @@ importers:
     dependencies:
       '@cypress/react18':
         specifier: ^2.0.0
-        version: 2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.48)(cypress@13.6.1)(react-dom@18.2.0)(react@18.2.0)
+        version: 2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.48)(cypress@13.7.2)(react-dom@18.2.0)(react@18.2.0)
       cypress:
-        specifier: 13.6.1
-        version: 13.6.1
+        specifier: 13.7.2
+        version: 13.7.2
       cypress-real-events:
-        specifier: ^1.11.0
-        version: 1.11.0(cypress@13.6.1)
+        specifier: ^1.12.0
+        version: 1.12.0(cypress@13.7.2)
       next:
         specifier: ^14.1.2
         version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
@@ -604,7 +604,7 @@ importers:
     devDependencies:
       '@testing-library/cypress':
         specifier: ^10.0.1
-        version: 10.0.1(cypress@13.6.1)
+        version: 10.0.1(cypress@13.7.2)
       '@types/node':
         specifier: ^20.11.5
         version: 20.11.5
@@ -4053,7 +4053,7 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.15
 
-  /@cypress/react18@2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.48)(cypress@13.6.1)(react-dom@18.2.0)(react@18.2.0):
+  /@cypress/react18@2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.48)(cypress@13.7.2)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-I4iEzyPvSmADPUFT7fuihuo21zu5j5OdgB73KnuCI7VjFT6RaYnag8zBeSkXuwSBO1fbD4jeJWoDyPNLqwLspg==}
     peerDependencies:
       '@types/react': ^18
@@ -4067,7 +4067,7 @@ packages:
     dependencies:
       '@types/react': 18.2.48
       '@types/react-dom': 18.2.18
-      cypress: 13.6.1
+      cypress: 13.7.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -8257,7 +8257,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@testing-library/cypress@10.0.1(cypress@13.6.1):
+  /@testing-library/cypress@10.0.1(cypress@13.7.2):
     resolution: {integrity: sha512-e8uswjTZIBhaIXjzEcrQQ8nHRWHgZH7XBxKuIWxZ/T7FxfWhCR48nFhUX5nfPizjVOKSThEfOSv67jquc1ASkw==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -8265,7 +8265,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.8
       '@testing-library/dom': 9.3.4
-      cypress: 13.6.1
+      cypress: 13.7.2
     dev: true
 
   /@testing-library/dom@9.3.4:
@@ -11797,23 +11797,22 @@ packages:
     resolution: {integrity: sha512-SPu1Vnh8U5EnzpNOi1NDBL5jU5Rx7DVHr15DNg9LXDTAbQlAVAmEbVt16wZvEW9Fu9Qt4Ji8kmeCJ2B1+4rFTQ==}
     dev: false
 
-  /cypress-real-events@1.11.0(cypress@13.6.1):
-    resolution: {integrity: sha512-4LXVRsyq+xBh5TmlEyO1ojtBXtN7xw720Pwb9rEE9rkJuXmeH3VyoR1GGayMGr+Itqf11eEjfDewtDmcx6PWPQ==}
+  /cypress-real-events@1.12.0(cypress@13.7.2):
+    resolution: {integrity: sha512-oiy+4kGKkzc2PT36k3GGQqkGxNiVypheWjMtfyi89iIk6bYmTzeqxapaLHS3pnhZOX1IEbTDUVxh8T4Nhs1tyQ==}
     peerDependencies:
       cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x
     dependencies:
-      cypress: 13.6.1
+      cypress: 13.7.2
     dev: false
 
-  /cypress@13.6.1:
-    resolution: {integrity: sha512-k1Wl5PQcA/4UoTffYKKaxA0FJKwg8yenYNYRzLt11CUR0Kln+h7Udne6mdU1cUIdXBDTVZWtmiUjzqGs7/pEpw==}
+  /cypress@13.7.2:
+    resolution: {integrity: sha512-FF5hFI5wlRIHY8urLZjJjj/YvfCBrRpglbZCLr/cYcL9MdDe0+5usa8kTIrDHthlEc9lwihbkb5dmwqBDNS2yw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@cypress/request': 3.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
-      '@types/node': 18.19.8
       '@types/sinonjs__fake-timers': 8.1.1
       '@types/sizzle': 2.3.8
       arch: 2.2.0
@@ -12472,7 +12471,7 @@ packages:
     dependencies:
       semver: 7.5.4
       shelljs: 0.8.5
-      typescript: 5.5.0-dev.20240307
+      typescript: 5.5.0-dev.20240405
     dev: false
 
   /duplexer3@0.1.5:
@@ -23671,8 +23670,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  /typescript@5.5.0-dev.20240307:
-    resolution: {integrity: sha512-9QgBAVHg1keeajSXIqq1ngFy3yTA0um5YWoLNVSfPtIwqqYoVqRjmh4oJKJL4YM15C2HY8IXL/UEUBIjXm/tjg==}
+  /typescript@5.5.0-dev.20240405:
+    resolution: {integrity: sha512-gMeTgpfC2KDhKDbOu7niDwLmSA+Jgbl5lGunCrVnmvoxh3FbTRjAzZ1IRrqB+cph3wWLeCdy8bxQoff1uHLXMg==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
