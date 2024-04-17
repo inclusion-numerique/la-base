@@ -16,7 +16,7 @@
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.16",
+    "@swc/core": "^1.4.15",
     "@swc/jest": "^0.2.36",
     "@testing-library/jest-dom": "^6.4.2",
     "@types/jest": "^29.5.12",
@@ -30,6 +30,6 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
-    "zod": "^3.22.5"
+    "zod": "^3.22.4"
   }
 }
