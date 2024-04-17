@@ -17,6 +17,8 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.637.0",
     "@commander-js/extra-typings": "^12.1.0",
+    "@langchain/community": "^0.0.43",
+    "@langchain/mistralai": "^0.0.16",
     "@mistralai/mistralai": "^1.1.0",
     "@octokit/core": "^6.1.2",
     "@octokit/plugin-rest-endpoint-methods": "^13.2.4",
