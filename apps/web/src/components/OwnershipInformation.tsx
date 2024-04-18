@@ -10,20 +10,24 @@ import BaseImage from '@app/web/components/BaseImage'
 
 const attributionWordings = {
   resource: {
-    base: 'Publiée dans la base ',
-    user: 'Publiée par ',
+    what: 'Publiée',
+    where: ' dans la base ',
+    by: ' par ',
   },
   'draft-resource': {
-    base: 'Créée dans la base ',
-    user: 'Créée par ',
+    what: 'Créée',
+    where: ' dans la base ',
+    by: ' par ',
   },
   collection: {
-    base: 'Collection de la base ',
-    user: 'Collection de ',
+    what: 'Collection',
+    where: ' de la base ',
+    by: ' par ',
   },
   none: {
-    base: '',
-    user: '',
+    what: '',
+    where: '',
+    by: '',
   },
 }
 
@@ -32,8 +36,12 @@ const OwnershipInformation = ({
   base,
   className,
   attributionWording,
+  displayUser = true,
 }: {
-  user: Pick<User, 'firstName' | 'lastName' | 'name' | 'slug' | 'id'> & {
+  user: Pick<
+    User,
+    'firstName' | 'lastName' | 'name' | 'slug' | 'id' | 'isPublic'
+  > & {
     image: RoundImageProps['image']
   }
   base:
@@ -41,46 +49,45 @@ const OwnershipInformation = ({
     | null
   className?: string
   attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
-}) => {
-  const attribution =
-    attributionWordings[attributionWording][base ? 'base' : 'user']
-
-  return (
-    <div
-      className={classNames(
-        'fr-flex fr-align-items-center fr-flex-gap-2v',
-        className,
-      )}
-    >
-      {base ? (
+  displayUser?: boolean
+}) => (
+  <div
+    className={classNames(
+      'fr-flex fr-align-items-center fr-flex-gap-2v',
+      className,
+    )}
+  >
+    {base ? (
+      <BaseImage className="fr-mr-1w" base={base} />
+    ) : (
+      <RoundProfileImage className="fr-mr-1w" user={user} />
+    )}
+    <span className="fr-text--xs fr-mb-0">
+      {attributionWordings[attributionWording].what}
+      {base != null && (
         <>
-          <BaseImage className="fr-mr-1w" base={base} />
-          <span className="fr-text--xs fr-mb-0">
-            {attribution}
-            <Link
-              href={`/bases/${base.slug}`}
-              className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
-            >
-              {base.title}
-            </Link>
-          </span>
-        </>
-      ) : (
-        <>
-          <RoundProfileImage className="fr-mr-1w" user={user} />
-          <span className="fr-text--xs fr-mb-0">
-            {attribution}
-            <Link
-              href={`/profils/${user.slug}`}
-              className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
-            >
-              {user.name}
-            </Link>
-          </span>
+          {attributionWordings[attributionWording].where}
+          <Link
+            href={`/bases/${base.slug}`}
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+          >
+            {base.title}
+          </Link>
         </>
       )}
-    </div>
-  )
-}
+      {(!base || (user.isPublic && displayUser)) && (
+        <>
+          {attributionWordings[attributionWording].by}
+          <Link
+            href={`/profils/${user.slug}`}
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+          >
+            {user.name}
+          </Link>
+        </>
+      )}
+    </span>
+  </div>
+)
 
 export default OwnershipInformation

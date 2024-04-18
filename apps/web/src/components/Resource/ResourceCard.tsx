@@ -19,12 +19,14 @@ const ResourceCard = ({
   className,
   isContributor,
   titleAs: ResourceTitle = 'h2',
+  isDraft = false,
 }: {
   resource: ResourceListItem
   user: SessionUser | null
   className?: string
   isContributor: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  isDraft?: boolean
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -34,7 +36,8 @@ const ResourceCard = ({
       <OwnershipInformation
         user={resource.createdBy}
         base={resource.base}
-        attributionWording="none"
+        attributionWording={isDraft ? 'draft-resource' : 'resource'}
+        displayUser={false}
       />
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
         <ResourceDates canEdit={isContributor} resource={resource} />

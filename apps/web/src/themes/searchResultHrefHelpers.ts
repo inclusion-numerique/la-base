@@ -4,10 +4,10 @@ import {
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 
-export const searchResultThemeHref = (theme: Theme) =>
+export const searchResultThemeHref = (...themes: Theme[]) =>
   searchUrl('ressources', {
     ...defaultSearchParams,
-    themes: [theme],
+    themes,
   })
 
 export const searchResultTargetAudienceHref = (

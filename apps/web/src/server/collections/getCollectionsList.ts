@@ -92,6 +92,7 @@ export const collectionSelect = {
       firstName: true,
       lastName: true,
       image: { select: { altText: true, id: true } },
+      isPublic: true,
     },
   },
   base: {

@@ -1,4 +1,5 @@
 import Accordion from '@codegouvfr/react-dsfr/Accordion'
+import { Theme } from '@prisma/client'
 import Link from 'next/link'
 import classNames from 'classnames'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
@@ -6,6 +7,10 @@ import { getHomeCategoriesCount } from '@app/web/app/(public)/getHomeCategoriesC
 import { categories } from '@app/web/themes/themes'
 import { searchResultThemeHref } from '@app/web/themes/searchResultHrefHelpers'
 import styles from './HomeCategories.module.css'
+
+const sum = (total: number, { count }: { count: number }) => total + count
+
+const toNames = ({ theme }: { theme: Theme }) => theme
 
 const HomeCategories = async () => {
   const categoriesCount = await getHomeCategoriesCount()
@@ -51,6 +56,13 @@ const HomeCategories = async () => {
             }
           >
             <div className={styles.tags}>
+              <Link
+                href={searchResultThemeHref(...themes.map(toNames))}
+                className="fr-tag"
+              >
+                Toutes les thématiques&nbsp;·&nbsp;
+                <strong>{themes.reduce(sum, 0)}</strong>
+              </Link>
               {themes.map((item) => (
                 <Link
                   key={item.theme}

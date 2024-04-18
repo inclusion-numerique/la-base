@@ -9,11 +9,14 @@ import {
   UsageStatisticsResult,
 } from './usageStatistics'
 
-export type StatisticsTimeframe = 'semaine' | 'mois' | 'total'
+type RechercheTimeframe = 'semaine' | 'mois' | 'total'
+type CreationTimeframe = 'semaine' | 'mois' | 'total'
+type UsageTimeframe = 'mois' | 'six-mois' | 'total'
 
 export type StatisticsParams = {
-  recherche?: StatisticsTimeframe
-  fonctionnalites?: StatisticsTimeframe
+  recherche?: RechercheTimeframe
+  creation?: CreationTimeframe
+  usage?: UsageTimeframe
 }
 
 type KpiStatisticsResult = [
@@ -35,13 +38,12 @@ type SearchStatisticsResult = {
   resource_views: number
 }[]
 
-export const statisticsTimeframeLabels: {
-  [key in StatisticsTimeframe]: string
-} = {
-  semaine: 'Par semaine',
-  mois: 'Par mois',
-  total: 'Cumulé',
-}
+const MILLISECONDS_IN_MONTH = 1000 * 60 * 60 * 24 * 30
+
+const elapsedMonthsSince = (date: Date) =>
+  Math.floor((Date.now() - date.getTime()) / MILLISECONDS_IN_MONTH)
+
+const FOUR_LAST_MONTHS = 4
 
 export const getStatistics = async (_params: StatisticsParams) => {
   const [
@@ -96,11 +98,16 @@ export const getStatistics = async (_params: StatisticsParams) => {
     },
   }
 
-  const searchStatisticsDaysInterval = 7
+  const searchStatisticsDaysInterval =
+    _params.recherche === 'mois' || _params.recherche === 'total' ? 30 : 7
+  const searchStatisticsSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2022-07-01'))
+      : FOUR_LAST_MONTHS
 
   const searchStatisticsResult =
     await prismaClient.$queryRawUnsafe<SearchStatisticsResult>(`
-        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval * 4} days',
+        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval * searchStatisticsSeriesCount} days',
                                                CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval} days',
                                                '${searchStatisticsDaysInterval} days'::interval) AS start_date),
              range AS (SELECT start_date, (start_date + INTERVAL '${searchStatisticsDaysInterval} days') AS end_date
@@ -116,16 +123,21 @@ export const getStatistics = async (_params: StatisticsParams) => {
                (SELECT COUNT(*)::integer
                 FROM resource_views
                 WHERE timestamp BETWEEN start_date AND end_date)                                              AS resource_views,
-               'Du ' || TO_CHAR(start_date, 'DD/MM') || ' au ' || TO_CHAR(end_date, 'DD/MM')                  AS period,
+               'Du ' || TO_CHAR(start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(end_date, 'DD/MM/YY')                  AS period,
                TO_CHAR(start_date, 'DD/MM')                                                                   AS start_date,
                TO_CHAR(end_date, 'DD/MM')                                                                     AS end_date
         FROM range`)
 
-  const creationStatisticsDaysInterval = 7
+  const creationStatisticsDaysInterval =
+    _params.creation || _params.creation === 'total' ? 30 : 7
+  const creationStatisticsSeriesCount =
+    _params.creation === 'total'
+      ? elapsedMonthsSince(new Date('2022-04-01'))
+      : FOUR_LAST_MONTHS
 
   const creationStatisticsResult =
     await prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
-        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval * 4} days',
+        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval * creationStatisticsSeriesCount} days',
                                                CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval} days',
                                                '${creationStatisticsDaysInterval} days'::interval) AS start_date),
              range AS (SELECT start_date, (start_date + INTERVAL '${creationStatisticsDaysInterval} days') AS end_date
@@ -150,27 +162,34 @@ export const getStatistics = async (_params: StatisticsParams) => {
                (SELECT COUNT(*)::integer
                 FROM bases pr_b
                 WHERE pr_b.created BETWEEN start_date AND end_date AND pr_b.is_public IS false)   AS private_bases,
-               'Du ' || TO_CHAR(start_date, 'DD/MM') || ' au ' || TO_CHAR(end_date, 'DD/MM')      AS period,
+               'Du ' || TO_CHAR(start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(end_date, 'DD/MM/YY')      AS period,
                TO_CHAR(start_date, 'DD/MM')                                                       AS start_date,
                TO_CHAR(end_date, 'DD/MM')                                                         AS end_date
         FROM range`)
+
+  const isTotal = _params.usage === 'total'
+  const usageStatisticsDaysInterval = _params.usage === 'six-mois' ? 6 * 30 : 30
+  const startDate = new Date()
+  startDate.setDate(new Date().getDate() - usageStatisticsDaysInterval)
 
   const usageStatisticsResult =
     await prismaClient.$queryRaw<UsageStatisticsResult>`
         SELECT type,
                key,
                COUNT(*)::integer AS value
-        FROM (SELECT 'target_audiences'             AS type,
+        FROM (SELECT 'target_audiences' AS type,
                      unnest(target_audiences)::text AS key
               FROM resources
               WHERE published IS NOT NULL
+                AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
                 AND deleted IS NULL
                 AND is_public IS true
               UNION ALL
-              SELECT 'themes'             AS column_name,
+              SELECT 'themes' AS column_name,
                      unnest(themes)::text AS key
               FROM resources
               WHERE published IS NOT NULL
+                AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
                 AND deleted IS NULL
                 AND is_public IS true) AS combined_data
         GROUP BY type, key

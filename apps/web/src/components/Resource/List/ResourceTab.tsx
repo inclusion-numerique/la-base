@@ -13,11 +13,13 @@ const ResourceTab = ({
   user,
   emptyText,
   'data-testid': dataTestId,
+  isDraft = false,
 }: {
   resources: BaseResource[]
   user: SessionUser | null
   emptyText: string
   ['data-testid']: string
+  isDraft?: boolean
 }) => (
   <div data-testid={dataTestId}>
     {resources.length === 0 ? (
@@ -32,6 +34,7 @@ const ResourceTab = ({
           )}
           resource={resource}
           user={user}
+          isDraft={isDraft}
         />
       ))
     )}

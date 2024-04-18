@@ -65,6 +65,7 @@ const Resources = ({
                   user={user}
                   emptyText="Vous n'avez pas de brouillons."
                   data-testid="resources-draft-tab"
+                  isDraft
                 />
               ),
             },

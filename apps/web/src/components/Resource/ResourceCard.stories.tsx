@@ -41,6 +41,7 @@ const resource = {
     firstName: 'Jean',
     lastName: 'Biche',
     image: { id: 'portrait', altText: 'Texte alternatif' },
+    isPublic: true,
   },
   image: null,
   collections: [],

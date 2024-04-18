@@ -20,7 +20,6 @@ const ResourceDates = ({
     : null
   const publishedDay = resource.published ? dateAsDay(resource.published) : null
 
-  // If published, we show the latest publication date
   if (lastPublishedDay) {
     const unpublishedModifications =
       canEdit &&
@@ -35,12 +34,17 @@ const ResourceDates = ({
         </>
       ) : null
 
-    const dateContent =
-      lastPublishedDay === publishedDay ? (
-        <div>Publiée&nbsp;le&nbsp;{publishedDay}</div>
-      ) : (
-        <div>Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}</div>
-      )
+    const dateContent = (
+      <>
+        Publiée&nbsp;le&nbsp;{publishedDay}
+        {lastPublishedDay !== publishedDay && (
+          <>
+            <span className="fr-mx-1v fr-text--bold">︱</span>
+            Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
+          </>
+        )}
+      </>
+    )
 
     if (unpublishedModifications) {
       return (

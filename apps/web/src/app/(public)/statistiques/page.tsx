@@ -2,22 +2,20 @@ import {
   getStatistics,
   StatisticsParams,
 } from '@app/web/server/statistiques/getStatistics'
-import StatisticsBarChart from '@app/web/app/(public)/statistiques/StatisticsBarChart'
 import Card from '@app/web/components/Card'
 import { numberToString } from '@app/web/utils/formatNumber'
+import StatisticsChart from './StatisticsChart'
 import KeyFigureTitle from './KeyFigureTitle'
+import SelectPeriod from './SelectPeriod'
 import TargetAudiences from './TargetAudiences'
 import Thematiques from './Thematiques'
 
 const StatisticsPage = async ({
-  searchParams: { fonctionnalites, recherche },
+  searchParams,
 }: {
   searchParams: StatisticsParams
 }) => {
-  const { kpi, search, creation, usage } = await getStatistics({
-    recherche,
-    fonctionnalites,
-  })
+  const { kpi, search, creation, usage } = await getStatistics(searchParams)
 
   return (
     <>
@@ -77,17 +75,29 @@ const StatisticsPage = async ({
       </section>
       <hr className="fr-separator-6v fr-separator-md-12v" />
       <section>
-        <h2 className="fr-h3 fr-mb-4w">
-          Données pour comprendre l’usage de la recherche
-        </h2>
+        <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
+          <div>
+            <h2 className="fr-h3 fr-mb-0">
+              Données pour comprendre l’usage de la recherche
+            </h2>
+          </div>
+          <SelectPeriod
+            param="recherche"
+            segments={[
+              { label: 'Par semaine', param: 'semaine' },
+              { label: 'Par mois', param: 'mois' },
+              { label: 'En cumulé', param: 'total' },
+            ]}
+          />
+        </div>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de recherches effectuées"
               data={search}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['search_executions']}
+              dataKeys={['search_executions']}
               legends={[
                 {
                   label: 'Recherches effectuées',
@@ -97,12 +107,12 @@ const StatisticsPage = async ({
             />
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de vues de ressources"
               data={search}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['resource_views']}
+              dataKeys={['resource_views']}
               legends={[
                 {
                   label: 'Vues de ressources',
@@ -112,12 +122,12 @@ const StatisticsPage = async ({
             />
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de ressources enregistrées"
               data={search}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['collection_resources']}
+              dataKeys={['collection_resources']}
               legends={[
                 {
                   label: 'Ressources enregistrées',
@@ -130,20 +140,32 @@ const StatisticsPage = async ({
       </section>
       <hr className="fr-separator-6v fr-separator-md-12v" />
       <section>
-        <h2 className="fr-h3 fr-mb-4w">
-          Données pour comprendre
-          <br />
-          la création de ressources, bases & profils
-        </h2>
+        <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
+          <div>
+            <h2 className="fr-h3 fr-mb-0">
+              Données pour comprendre
+              <br />
+              la création de ressources, bases & profils
+            </h2>
+          </div>
+          <SelectPeriod
+            param="creation"
+            segments={[
+              { label: 'Par semaine', param: 'semaine' },
+              { label: 'Par mois', param: 'mois' },
+              { label: 'En cumulé', param: 'total' },
+            ]}
+          />
+        </div>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de ressources publiées"
               titleClassName="fr-h6"
               data={creation.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['private_resources', 'public_resources']}
+              dataKeys={['private_resources', 'public_resources']}
               legends={[
                 {
                   label: 'Ressources privées',
@@ -160,12 +182,12 @@ const StatisticsPage = async ({
             />
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de profils créés"
               data={creation.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['private_users', 'public_users']}
+              dataKeys={['private_users', 'public_users']}
               legends={[
                 {
                   label: 'Profils privés',
@@ -182,12 +204,12 @@ const StatisticsPage = async ({
             />
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsBarChart
+            <StatisticsChart
               title="Nombre de bases créées"
               data={creation.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              barsDataKey={['private_bases', 'public_bases']}
+              dataKeys={['private_bases', 'public_bases']}
               legends={[
                 {
                   label: 'Bases privées',
@@ -207,11 +229,22 @@ const StatisticsPage = async ({
       </section>
       <hr className="fr-separator-6v fr-separator-md-12v" />
       <section>
-        <h2 className="fr-h3 fr-mb-4w">
-          Données pour comprendre
-          <br />
-          le contenu des ressources ainsi que les publics visés
-        </h2>
+        <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
+          <div>
+            <h2 className="fr-h3 fr-mb-0">
+              Données pour comprendre le contenu des ressources ainsi que les
+              publics visés
+            </h2>
+          </div>
+          <SelectPeriod
+            param="usage"
+            segments={[
+              { label: 'Sur les 30 derniers jours', param: 'mois' },
+              { label: 'Sur les 6 derniers mois', param: 'six-mois' },
+              { label: 'Depuis le début', param: 'total' },
+            ]}
+          />
+        </div>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-lg-6">
             <Thematiques thematiques={usage.thematiques} />

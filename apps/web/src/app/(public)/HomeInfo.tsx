@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import styles from './HomeInfo.module.css'
 
 const contents = [
@@ -25,9 +26,17 @@ const contents = [
 const HomeInfo = () => (
   <div className={styles.container}>
     <div className="fr-container">
-      <h2 className="fr-mb-12v fr-text--center fr-h3">
-        Comment l’utiliser&nbsp;?
-      </h2>
+      <div className="fr-text--center">
+        <h2 className="fr-mb-4v fr-h3">
+          Comment utiliser cette plateforme&nbsp;?
+        </h2>
+        <p className="fr-text--xl fr-mb-12v">
+          Pour en savoir plus, vous pouvez visiter notre{' '}
+          <Link href="/centre-d-aide" className="fr-link fr-text--xl">
+            centre d&apos;aide
+          </Link>
+        </p>
+      </div>
 
       <div className={styles.cardsContainer}>
         {contents.map(({ title, icon, content }) => (
