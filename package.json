@@ -7,7 +7,6 @@
   "engines": {
     "node": "^20.7"
   },
-  "packageManager": "pnpm@7.25.1",
   "scripts": {
     "build": "turbo build",
     "cli": "dotenv -- ./apps/cli/node_modules/.bin/ts-node -r tsconfig-paths/register apps/cli/src/index.ts",
