@@ -11,7 +11,6 @@ const secondaryButtonProps = {
   iconId: defaultIconId,
   priority: 'secondary',
   children: 'Enregistrer',
-  size: 'small',
 } as const
 
 const alreadySavedSecondaryButtonProps = {
@@ -22,7 +21,6 @@ const alreadySavedSecondaryButtonProps = {
 
 const cardButtonProps = {
   iconId: defaultIconId,
-  size: 'small',
   iconPosition: 'right',
   children: 'Enregistrer',
   priority: 'tertiary no outline',
@@ -37,7 +35,6 @@ const alreadySavedCardButtonProps = {
 const buttonIconOnlyProps = {
   iconId: defaultIconId,
   title: secondaryButtonProps.children,
-  size: 'small',
   priority: 'tertiary no outline',
 } as const
 

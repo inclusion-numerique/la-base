@@ -49,10 +49,7 @@ const BaseHeader = ({
                   Contacter
                 </Link>
               )}
-              <CopyLinkButton
-                url={getServerUrl(`/bases/${base.slug}`, true)}
-                priority="secondary"
-              >
+              <CopyLinkButton url={getServerUrl(`/bases/${base.slug}`, true)}>
                 Partager
               </CopyLinkButton>
             </div>

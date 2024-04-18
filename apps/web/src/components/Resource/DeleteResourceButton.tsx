@@ -20,7 +20,6 @@ const DeleteResourceButton = ({
     <Button
       title="Supprimer la ressource"
       iconId="fr-icon-delete-line"
-      size="small"
       priority="tertiary no outline"
       onClick={() => open({ resourceId })}
       className={className}
@@ -28,7 +27,6 @@ const DeleteResourceButton = ({
   ) : (
     <Button
       iconId="fr-icon-delete-line"
-      size="small"
       priority="tertiary"
       onClick={() => open({ resourceId })}
       className={className}

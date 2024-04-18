@@ -65,7 +65,6 @@ const CollectionMetaData = ({
           />
           <CopyLinkButton
             url={getServerUrl(`/collections/${collection.slug}`, true)}
-            priority={priority}
           />
         </div>
       )}

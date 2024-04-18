@@ -60,7 +60,6 @@ const ProfileHeader = ({
                 )}
                 <CopyLinkButton
                   url={getServerUrl(`/profils/${profile.slug}`, true)}
-                  priority="secondary"
                 >
                   Partager
                 </CopyLinkButton>

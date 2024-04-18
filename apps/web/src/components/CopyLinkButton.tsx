@@ -1,24 +1,17 @@
 'use client'
 
-import classNames from 'classnames'
 import React, { ReactNode, useState } from 'react'
-import { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import Button from '@codegouvfr/react-dsfr/Button'
 import styles from './CopyLinkButton.module.css'
 
 const CopyLinkButton = ({
   url,
   title,
-  className,
   children,
-  priority,
-  size = 'small',
 }: {
   url: string
   title?: string
-  className?: string
   children?: ReactNode
-  priority?: ButtonProps.Common['priority']
-  size?: 'medium' | 'small'
 }) => {
   const [copied, setCopied] = useState(false)
   const onCopy = () => {
@@ -35,26 +28,16 @@ const CopyLinkButton = ({
         </span>
       )}
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        className={classNames(
-          'fr-btn',
-          size === 'small' && 'fr-btn--sm',
-          `fr-btn--${
-            priority ? priority.replaceAll(' ', '-') : 'tertiary-no-outline'
-          }`,
-          'fr-icon-links-line',
-          'fr-icon--sm',
-          className,
-          {
-            'fr-btn--icon-left': children,
-          },
-        )}
+      <Button
+        className="fr-width-full fr-justify-content-center fr-pl-2w"
+        iconId="fr-icon-links-line"
+        priority="tertiary"
         type="button"
         title={title || `Copier le lien ${url} dans le presse-papier`}
         onClick={onCopy}
       >
         {children}
-      </button>
+      </Button>
     </div>
   )
 }
