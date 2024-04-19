@@ -1,0 +1,5 @@
+.fr-hidden-print {
+  @media print {
+    display: none !important;
+  }
+}

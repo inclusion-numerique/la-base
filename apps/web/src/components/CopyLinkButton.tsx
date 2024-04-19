@@ -8,10 +8,16 @@ const CopyLinkButton = ({
   url,
   title,
   children,
+  size = 'medium',
+  full = false,
+  priority = 'tertiary',
 }: {
   url: string
   title?: string
   children?: ReactNode
+  size?: 'medium' | 'small'
+  full?: boolean
+  priority?: 'tertiary' | 'tertiary-no-outline'
 }) => {
   const [copied, setCopied] = useState(false)
   const onCopy = () => {
@@ -21,7 +27,11 @@ const CopyLinkButton = ({
   }
 
   return (
-    <div className={styles.container}>
+    <span
+      className={
+        full ? 'fr-width-full fr-position-relative' : 'fr-position-relative'
+      }
+    >
       {copied && (
         <span className={styles.copiedHover}>
           Lien copié dans le presse-papier
@@ -29,16 +39,17 @@ const CopyLinkButton = ({
       )}
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <Button
-        className="fr-width-full fr-justify-content-center fr-pl-2w"
+        className={full ? 'fr-width-full fr-justify-content-center' : ''}
         iconId="fr-icon-links-line"
-        priority="tertiary"
+        size={size}
+        priority={priority}
         type="button"
         title={title || `Copier le lien ${url} dans le presse-papier`}
         onClick={onCopy}
       >
         {children}
       </Button>
-    </div>
+    </span>
   )
 }
 

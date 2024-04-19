@@ -1,10 +1,10 @@
 .container {
   padding-top: 16px;
   padding-bottom: 32px;
-  border-bottom: var(--slim-grey-border);
+  border-bottom: 1px solid var(--border-default-grey);
 
   &:first-of-type {
-    border-top: var(--slim-grey-border);
+    border-top: 1px solid var(--border-default-grey);
   }
 
   @media (min-width: 576px) {
@@ -64,7 +64,7 @@
 }
 
 .separator {
-  border-right: var(--slim-grey-border);
+  border-right: 1px solid var(--border-default-grey);
   margin: 6px 8px;
 }
 
@@ -98,8 +98,6 @@
     align-items: center;
   }
 }
-
-
 
 .footer {
   display: flex;

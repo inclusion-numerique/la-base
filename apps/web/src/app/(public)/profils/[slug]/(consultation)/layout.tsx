@@ -87,7 +87,7 @@ const ProfileLayout = async ({
           collectionsCount={collectionsCount.total}
           followsCount={followsCount.total}
         />
-        <div className="fr-container fr-container--medium fr-mb-50v">
+        <div className="fr-container fr-container--medium fr-mb-16w">
           {children}
         </div>
       </main>

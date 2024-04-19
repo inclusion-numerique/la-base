@@ -1,0 +1,43 @@
+.fr-border {
+  border: 1px solid var(--border-default-grey);
+}
+
+.fr-border-top {
+  border-top: 1px solid var(--border-default-grey);
+}
+
+.fr-border-bottom {
+  border-bottom: 1px solid var(--border-default-grey);
+}
+
+.fr-border-right {
+  border-right: 1px solid var(--border-default-grey);
+}
+
+.fr-border-left {
+  border-left: 1px solid var(--border-default-grey);
+}
+
+.fr-border--blue-france {
+  border-color: var(--blue-france-main-525);
+}
+
+.fr-border-radius--4 {
+  border-radius: 4px;
+}
+
+.fr-border-radius--8 {
+  border-radius: 8px;
+}
+
+.fr-border-radius--16 {
+  border-radius: 16px;
+}
+
+.fr-border-radius--32 {
+  border-radius: 32px;
+}
+
+.fr-border-radius--64 {
+  border-radius: 64px;
+}

@@ -1,0 +1,44 @@
+.fr-container--narrow {
+  /* 588 + padding */
+  max-width: 620px;
+
+  @media (min-width: 62em) {
+    /* lg */
+    max-width: 636px;
+  }
+}
+
+.fr-container--slim {
+  /* 524 + padding */
+  max-width: 588px;
+}
+
+.fr-container--medium {
+  /* 792 + padding */
+  max-width: 824px;
+
+  @media (min-width: 62em) {
+    /* lg */
+    max-width: 840px;
+  }
+}
+
+.fr-container--800 {
+  /* 800 + padding */
+  max-width: 832px;
+
+  @media (min-width: 62em) {
+    /* lg */
+    max-width: 848px;
+  }
+}
+
+.fr-container--large {
+  /* 996 + padding */
+  max-width: 1028px;
+
+  @media (min-width: 62em) {
+    /* lg */
+    max-width: 1044px;
+  }
+}

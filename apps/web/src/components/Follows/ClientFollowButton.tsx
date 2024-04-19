@@ -29,6 +29,7 @@ const ClientFollowButton = ({
   user,
   iconOnly,
   followPriority,
+  className,
 }: FollowButtonProps) => {
   const followBaseMutation = trpc.follow.followBase.useMutation()
   const followProfileMutation = trpc.follow.followProfile.useMutation()
@@ -147,7 +148,7 @@ const ClientFollowButton = ({
   return (
     <Button
       {...(buttonPropsWithPriority as ButtonProps.IconOnly)}
-      {...buttonLoadingClassname(isLoading)}
+      {...buttonLoadingClassname(isLoading, className)}
       type="button"
       onClick={onFollow}
     />

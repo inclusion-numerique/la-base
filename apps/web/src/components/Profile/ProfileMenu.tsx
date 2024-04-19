@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultation)/ProfileTab'
-import styles from './ProfileMenu.module.css'
 
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],
@@ -59,9 +58,9 @@ const ProfileMenu = ({
   const currentTab = getCurrentTabFromPath(path ?? '')
 
   return (
-    <div className={styles.menu}>
-      <div className="fr-container">
-        <nav className="fr-nav">
+    <div className="fr-border-bottom fr-mb-md-6w fr-mb-4w">
+      <div className="fr-container fr-flex-lg">
+        <nav className="fr-nav fr-mx-auto">
           <ul className="fr-nav__list">
             <MenuItem
               tab="ressources"

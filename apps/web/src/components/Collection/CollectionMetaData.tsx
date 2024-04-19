@@ -17,6 +17,7 @@ const CollectionMetaData = ({
   priority,
   canWrite,
   context,
+  hideRessourceLabelOnSmallDevices = false,
 }: {
   user: SessionUser | null
   collection: { isPublic: boolean; id: string; slug: string }
@@ -24,14 +25,20 @@ const CollectionMetaData = ({
   count: number
   canWrite?: boolean
   context: 'card' | 'view' | 'collectionModal'
+  hideRessourceLabelOnSmallDevices?: boolean
 }) => {
   const withButtons = context === 'card' || context === 'view'
   return (
     <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-6v">
       <div className={styles.informations}>
         <span className="fr-icon-file-text-line fr-icon--sm" />
-        <span>
-          <b>{count}</b> Ressource{sPluriel(count)}
+        <b>{count}</b>
+        <span
+          className={
+            hideRessourceLabelOnSmallDevices ? 'fr-hidden fr-unhidden-sm' : ''
+          }
+        >
+          Ressource{sPluriel(count)}
         </span>
         <span>•</span>
         <PrivacyTag
@@ -64,6 +71,8 @@ const CollectionMetaData = ({
             context={context}
           />
           <CopyLinkButton
+            size="small"
+            priority="tertiary-no-outline"
             url={getServerUrl(`/collections/${collection.slug}`, true)}
           />
         </div>

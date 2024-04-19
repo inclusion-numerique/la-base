@@ -29,17 +29,17 @@
   color: var(--grey-425-625) !important;
 }
 
-.optionsContainer{
+.optionsContainer {
   width: 100%;
   padding: 16px;
 }
 
 .resultsFooter {
   padding: 16px;
-  border-top: var(--slim-grey-border);
+  border-top: 1px solid var(--border-default-grey);
 }
 
-.allResultsButton{
+.allResultsButton {
   ::before {
     content: '';
     display: none !important;
@@ -58,7 +58,7 @@
     margin: 0 16px;
     width: calc(100% - 32px);
     padding-bottom: 11px;
-    border-bottom: var(--slim-grey-border);
+    border-bottom: 1px solid var(--border-default-grey);
   }
 }
 

@@ -1,0 +1,6 @@
+/* sm spaces */
+@media (min-width: 36em) {
+  .fr-mt-sm-0 {
+    margin-top: 0 !important;
+  }
+}

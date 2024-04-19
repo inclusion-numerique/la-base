@@ -1,0 +1,8 @@
+/* sm grid rules */
+@media (min-width: 36em) {
+  .fr-col-sm-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: initial;
+  }
+}

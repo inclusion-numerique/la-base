@@ -1,5 +1,5 @@
 .container {
-  border-top: var(--slim-grey-border);
+  border-top: 1px solid var(--border-default-grey);
   padding: 16px 0 24px;
   display: flex;
   justify-content: space-between;
@@ -8,7 +8,7 @@
   /* md */
   @media (min-width: 48em) {
     padding: 24px 0;
-    border-bottom: var(--slim-grey-border);
+    border-bottom: 1px solid var(--border-default-grey);
   }
 
   > * {

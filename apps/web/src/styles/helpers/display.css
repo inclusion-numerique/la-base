@@ -1,0 +1,18 @@
+.fr-flex {
+  display: flex;
+}
+
+.fr-display-block {
+  display: block;
+}
+
+.fr-display-inline-block {
+  display: inline-block;
+}
+
+/* md separators */
+@media (min-width: 48em) {
+  .fr-display-inline-md {
+    display: inline !important;
+  }
+}

@@ -1,0 +1,86 @@
+.fr-separator-1px {
+  padding-bottom: 1px;
+}
+
+.fr-separator-1v {
+  padding-bottom: 1px;
+  margin: 8px 0;
+}
+
+.fr-separator-2v {
+  padding-bottom: 1px;
+  margin: 8px 0;
+}
+
+.fr-separator-4v {
+  padding-bottom: 1px;
+  margin: 16px 0;
+}
+
+.fr-separator-6v {
+  padding-bottom: 1px;
+  margin: 24px 0;
+}
+
+.fr-separator-8v {
+  padding-bottom: 1px;
+  margin: 32px 0;
+}
+
+.fr-separator-10v {
+  padding-bottom: 1px;
+  margin: 40px 0;
+}
+
+.fr-separator-12v {
+  padding-bottom: 1px;
+  margin: 48px 0;
+}
+
+/* md separators */
+@media (min-width: 48em) {
+  .fr-separator-md-1v {
+    padding-bottom: 1px;
+    margin: 8px 0;
+  }
+
+  .fr-separator-md-2v {
+    padding-bottom: 1px;
+    margin: 8px 0;
+  }
+
+  .fr-separator-md-4v {
+    padding-bottom: 1px;
+    margin: 16px 0;
+  }
+
+  .fr-separator-md-6v {
+    padding-bottom: 1px;
+    margin: 24px 0;
+  }
+
+  .fr-separator-md-8v {
+    padding-bottom: 1px;
+    margin: 32px 0;
+  }
+
+  .fr-separator-md-10v {
+    padding-bottom: 1px;
+    margin: 40px 0;
+  }
+
+  .fr-separator-md-12v {
+    padding-bottom: 1px;
+    margin: 48px 0;
+  }
+
+  .fr-separator-md-16v {
+    padding-bottom: 1px;
+    margin: 64px 0;
+  }
+
+  .fr-separator-md-20v {
+    padding-bottom: 1px;
+    margin: 80px 0;
+  }
+}

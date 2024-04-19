@@ -2,7 +2,7 @@ import { mount } from 'cypress/react18'
 // eslint-disable-next-line import/no-relative-packages
 import '../../../../apps/web/public/dsfr/dsfr.module.min'
 // eslint-disable-next-line import/no-relative-packages
-import '../../../../apps/web/src/app/app.css'
+import '@app/web/styles/styles.css'
 import './commands'
 import './component.css'
 

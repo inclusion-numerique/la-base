@@ -1,0 +1,11 @@
+/* No underline when not hovered */
+.fr-link--underline-on-hover {
+  &:not(:hover) {
+    background-image: none !important;
+  }
+
+  &:hover,
+  &:active {
+    --underline-hover-width: 1px !important;
+  }
+}
