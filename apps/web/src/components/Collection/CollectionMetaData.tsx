@@ -17,6 +17,7 @@ const CollectionMetaData = ({
   priority,
   canWrite,
   context,
+  actionsClassName,
   hideRessourceLabelOnSmallDevices = false,
 }: {
   user: SessionUser | null
@@ -25,12 +26,13 @@ const CollectionMetaData = ({
   count: number
   canWrite?: boolean
   context: 'card' | 'view' | 'collectionModal'
+  actionsClassName?: string
   hideRessourceLabelOnSmallDevices?: boolean
 }) => {
   const withButtons = context === 'card' || context === 'view'
   return (
     <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-6v">
-      <div className={styles.informations}>
+      <div className="fr-flex fr-flex-gap-2v fr-text--sm fr-mb-0">
         <span className="fr-icon-file-text-line fr-icon--sm" />
         <b>{count}</b>
         <span
@@ -48,7 +50,7 @@ const CollectionMetaData = ({
         />
       </div>
       {withButtons && (
-        <div className={styles.buttons}>
+        <div className="fr-flex fr-flex-gap-2v fr-hidden fr-unhidden-md">
           {canWrite && (
             <Link
               href={`./${collection.slug}/modifier`}
@@ -66,13 +68,14 @@ const CollectionMetaData = ({
             </Link>
           )}
           <SaveCollectionButton
+            priority="tertiary"
             user={user}
             collection={collection}
             context={context}
           />
           <CopyLinkButton
             size="small"
-            priority="tertiary-no-outline"
+            priority="tertiary"
             url={getServerUrl(`/collections/${collection.slug}`, true)}
           />
         </div>

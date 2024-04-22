@@ -17,7 +17,7 @@ const ProfileInformations = ({
 } & PropsWithChildren) => (
   <div className="fr-flex-md fr-direction-row fr-flex-gap-8v fr-justify-content-center fr-text--center">
     <RoundProfileImage user={profile} size={128} borderWidth={1} />
-    <div className="fr-flex-md fr-direction-column fr-align-items-md-start fr-align-items-center">
+    <div className="fr-flex-md fr-direction-column fr-align-items-md-start fr-align-items-center fr-my-auto">
       {editMode && <ImageEdition profile={profile} />}
       <div className="fr-flex-md fr-flex-column fr-flex-gap-4v fr-align-items-baseline">
         <div>

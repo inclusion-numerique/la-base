@@ -39,16 +39,21 @@ const Resources = ({
 
   return (
     <div data-testid="base-resources">
-      <div className={styles.header}>
-        <h2 className="fr-mb-0 fr-h3">Ressources · {resources.length}</h2>
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+        <div className="fr-col-sm-auto fr-col-12">
+          <h2 className="fr-mb-0 fr-h3">Ressources · {resources.length}</h2>
+        </div>
         {canWrite && (
-          <div data-testid="create-resource-button">
+          <div
+            data-testid="create-resource-button"
+            className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w"
+          >
             <CreateResourceButton
-              baseId={baseId}
               data-testid={
                 baseId ? 'create-resource-in-base-button' : undefined
               }
-              className="fr-btn--secondary"
+              className="fr-btn--secondary fr-width-full fr-justify-content-center"
+              baseId={baseId}
             />
           </div>
         )}

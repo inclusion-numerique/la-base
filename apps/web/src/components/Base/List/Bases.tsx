@@ -14,9 +14,15 @@ const Bases = ({
   canWrite: boolean
 }) => (
   <div data-testid="base-resources">
-    <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
-      <h2 className="fr-mb-0 fr-h3">Bases · {bases.length}</h2>
-      {canWrite && <CreateBaseButton className="fr-btn--secondary" />}
+    <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+      <div className="fr-col-sm-auto fr-col-12">
+        <h2 className="fr-mb-0 fr-h3">Bases · {bases.length}</h2>
+      </div>
+      {canWrite && (
+        <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+          <CreateBaseButton className="fr-btn--secondary fr-width-full fr-justify-content-center" />
+        </div>
+      )}
     </div>
     {bases.map((base) => (
       <BaseCard user={user} base={base} key={base.slug} titleAs="h3" />
