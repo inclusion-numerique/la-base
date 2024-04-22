@@ -7,7 +7,6 @@ import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import Breadcrumbs from '../Breadcrumbs'
 import CopyLinkButton from '../CopyLinkButton'
 import BaseMetadata from './BaseMetadata'
-import styles from './BaseHeader.module.css'
 import BaseImages from './BaseImages'
 
 const headerId = 'header'
@@ -22,36 +21,60 @@ const BaseHeader = ({
   canWrite?: boolean
   user: SessionUser | null
 }) => (
-  <div className={styles.container}>
+  <div className="fr-background-alt--blue-france">
     <div className="fr-container">
       <Breadcrumbs currentPage={base.title} />
       <BaseImages base={base} />
-      <div id={headerId} className={styles.baseInfo}>
-        <h1 className="fr-h2">{base.title}</h1>
-        <BaseMetadata base={base} withBadge />
+      <div
+        id={headerId}
+        className="fr-flex-sm fr-align-items-center fr-direction-column fr-text--center fr-mt-3w fr-mb-6w"
+      >
+        <h1 className="fr-h2 fr-page-title fr-mb-1v">{base.title}</h1>
+        <BaseMetadata
+          className="fr-justify-content-center"
+          base={base}
+          withBadge
+        />
         {canWrite ? (
-          <Link
-            data-testid="base-edition-button"
-            className="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-edit-line fr-mt-2w"
-            href={`/bases/${base.slug}/editer`}
-          >
-            Modifier la base
-          </Link>
+          <div>
+            <Link
+              data-testid="base-edition-button"
+              className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left fr-width-full fr-justify-content-center"
+              href={`/bases/${base.slug}/editer`}
+            >
+              Modifier la base
+            </Link>
+          </div>
         ) : (
           base.isPublic && (
-            <div className={styles.buttons}>
-              <FollowButton followPriority="primary" user={user} base={base} />
+            <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-sm-row fr-mt-2w fr-width-full fr-justify-content-center">
+              <div>
+                <FollowButton
+                  className="fr-width-full fr-justify-content-center"
+                  followPriority="primary"
+                  user={user}
+                  base={base}
+                />
+              </div>
               {!!base.email && base.emailIsPublic && (
-                <Link
-                  className="fr-btn--sm fr-btn fr-btn--secondary fr-icon-mail-line fr-btn--icon-left"
-                  href={`mailto:${base.email}`}
-                >
-                  Contacter
-                </Link>
+                <div>
+                  <Link
+                    className="fr-btn--sm fr-btn fr-btn--tertiary fr-icon-mail-line fr-btn--icon-left fr-justify-content-center fr-width-full"
+                    href={`mailto:${base.email}`}
+                  >
+                    Contacter
+                  </Link>
+                </div>
               )}
-              <CopyLinkButton url={getServerUrl(`/bases/${base.slug}`, true)}>
-                Partager
-              </CopyLinkButton>
+              <div>
+                <CopyLinkButton
+                  size="small"
+                  className="fr-justify-content-center fr-width-full"
+                  url={getServerUrl(`/bases/${base.slug}`, true)}
+                >
+                  Partager
+                </CopyLinkButton>
+              </div>
             </div>
           )
         )}
