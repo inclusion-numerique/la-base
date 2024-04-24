@@ -1,3 +1,4 @@
+import { v4 } from 'uuid'
 import type {
   DeleteCommand,
   ResourceDeleted,
@@ -32,6 +33,7 @@ export const onDeleted: ResourceEventSideEffect<ResourceDeleted> = async (
   await transaction.resource.update({
     where: { id: resource.id },
     data: {
+      slug: `${resource.slug}-deleted-${v4()}`,
       deleted: timestamp,
       updated: timestamp,
     },
