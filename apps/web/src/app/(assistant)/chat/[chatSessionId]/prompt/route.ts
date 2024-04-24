@@ -1,8 +1,11 @@
 import { NextRequest } from 'next/server'
-import cookie from 'cookie'
-import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
-import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCookies'
+
+import { v4 } from 'uuid'
 import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
+import { getSimilarities } from '@app/web/assistant/rag'
+import { prismaClient } from '@app/web/prismaClient'
+import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
+import { executeMistralChat } from '@app/web/assistant/mistralChat'
 
 const notFoundResponse = () =>
   new Response('', {
