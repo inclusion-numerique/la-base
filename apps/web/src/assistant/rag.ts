@@ -54,7 +54,7 @@ const getSimilarBases = async (embeddedPrompt: EmbeddingResponse) => {
     Base[]
   >`SELECT title, slug, description, 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) as similarity
     FROM "bases"
-    WHERE 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.8
+    WHERE 1 - (embedding_base <=> ${embeddedPrompt.data[0].embedding}::vector) >= 0.7
     ORDER BY similarity
             DESC
     LIMIT 3;`

@@ -39,8 +39,8 @@ export const POST = async (
   const promptMessage = {
     role: 'user',
     content: `
-        Les informations de contexte sont en dessous.
-    
+        Tiens compte uniquement des informations de contexte systeme et des informations de contextes ci-dessous.
+        Ajoute les url au format markdown.
         ${
           similarResources.length > 0
             ? `
@@ -63,6 +63,7 @@ export const POST = async (
         ${similarHelps.map((help) => help.content).join('')}`
             : `Tu ne recommandes pas d'information spécifique au site.`
         }
+        
       La question est la suivante : ${prompt}
         `,
   }
@@ -84,18 +85,20 @@ export const POST = async (
   const systemMessage = {
     role: 'system',
     content:
-      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, pour Les Bases du Numérique d'intérêt général` +
-      `N'utilise jamais de lien url, sauf s'ils sont dans ton contexte.` +
+      `Contexte systeme en dessous :` +
+      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, pour Les Bases du Numérique d'intérêt général 
+      N'utilise jamais d'hyperliens, sauf s'ils sont dans ton contexte.` +
       `Recommande des ressources seulement si elles sont dans ton contexte. Elles sont au format JSON.
        Recommande des bases seulement si elles sont  dans ton contexte. Elles sont au format JSON. 
        Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
-      'Répond de manière concise.' +
+      `Si tu utilises des ressources ou des bases, ajoute leur url au format markdown. Ces url redirigent vers des ressources ou des bases` +
+      `Répond de manière concise.` +
       `Parle uniquement français, sauf si on te demande de traduire` +
       `N'utilise pas le format JSON dans ta réponse.` +
       `Ne mentionne pas les informations de ce contexte dans ta réponse.` +
-      `Si tu utilises des ressources ou des bases, ajoute leur lien au format markdown. Ces liens redirigent vers des ressources ou des bases` +
       `Si tu as des informations d'aide pour l'utilisateur en contexte, utilise le en priorité` +
-      `Si tu ne connais pas la réponse, dis-le, n'essaie pas d'inventer une réponse.`,
+      `Si tu ne connais pas la réponse, dis-le, n'essaie pas d'inventer une réponse.` +
+      `----------------`,
   }
 
   const messages = [
