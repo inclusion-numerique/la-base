@@ -74,23 +74,20 @@ export const embedResources = new Command()
       const resourceText: string[] = [
         htmlToText(`${resource.title}\n${resource.description}\n\n`),
       ]
-      output('Embedding for ', resource.title)
       const embeddingResponse = await generateEmbeddings(resourceText)
-
-      output('Response : ', embeddingResponse)
 
       const { embedding } = embeddingResponse.data[0]
 
-      output('Inserting embedding id', embeddingResponse.id)
-      output('Embeddings : ', embedding)
-
-      await prismaClient.$executeRaw`UPDATE "resources" SET embedding = ${embedding}::real[] WHERE id = ${resource.id}::uuid`
+      await prismaClient.$executeRaw`UPDATE "resources"
+                                     SET embedding = ${embedding}::real[]
+                                     WHERE id = ${resource.id}::uuid`
 
       return `${resource.title}\n`
     })
 
     await Promise.all(conversionPromises)
-    console.log('Conversion terminée')
+
+    output(`${conversionPromises.length} resources embeddings generated`)
   })
 
 export const embedBases = new Command()
@@ -116,23 +113,19 @@ export const embedBases = new Command()
       const basesText: string[] = [
         htmlToText(`${base.title}\n${base.description}\n\n`),
       ]
-      output('Embedding for ', base.title)
       const embeddingResponse = await generateEmbeddings(basesText)
-
-      output('Response : ', embeddingResponse)
 
       const { embedding } = embeddingResponse.data[0]
 
-      output('Inserting embedding id', embeddingResponse.id)
-      output('Embeddings : ', embedding)
-
-      await prismaClient.$executeRaw`UPDATE "bases" SET embedding_base = ${embedding}::real[] WHERE id = ${base.id}::uuid`
+      await prismaClient.$executeRaw`UPDATE "bases"
+                                     SET embedding_base = ${embedding}::real[]
+                                     WHERE id = ${base.id}::uuid`
 
       return `${base.title}\n`
     })
 
     await Promise.all(conversionPromises)
-    console.log('Conversion terminée')
+    console.log(`${conversionPromises.length} bases embeddings generated`)
   })
 
 export const embedHelp = new Command()
@@ -173,14 +166,14 @@ export const embedHelp = new Command()
 
     const conversionPromises = prismaDocuments.map(async (document) => {
       const embeddingResponse = await generateEmbeddings([document.content])
-      output('Response : ', embeddingResponse)
       const { embedding } = embeddingResponse.data[0]
 
-      output('Inserting embedding id', embeddingResponse.id)
-      output('Embeddings : ', embedding)
-
-      await prismaClient.$executeRaw`UPDATE "help_center" SET vector = ${embedding}::real[] WHERE id = ${document.id}`
+      await prismaClient.$executeRaw`UPDATE "help_center"
+                                     SET vector = ${embedding}::real[]
+                                     WHERE id = ${document.id}`
     })
 
     await Promise.all(conversionPromises)
+
+    output(`${conversionPromises.length} help center embeddings generated`)
   })
