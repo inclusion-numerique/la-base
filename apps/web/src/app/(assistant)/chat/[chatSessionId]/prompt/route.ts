@@ -40,26 +40,27 @@ export const POST = async (
     role: 'user',
     content: `
         Tiens compte uniquement des informations de contexte systeme et des informations de contextes ci-dessous.
-        Ajoute les url au format markdown.
         ${
           similarResources.length > 0
             ? `
-        ######        
-        Ressources que tu peux recommander:
+        ###### 
+        Si tu recommandes des ressources, tu dois donner leur hyperlien :      
+        Ressources que tu recommandes si c'est pertinent:
         ${JSON.stringify(similarResources, null, 2)}`
             : `Tu ne recommandes pas de ressources. Tu ne propose pas d'hyperlien pour les ressources.`
         }
         ${
           similarBases.length > 0
             ? `######
-        Bases que tu peux recommander:
+        Si tu recommandes des bases, tu dois donner leur hyperlien :       
+        Bases que tu recommandes si c'est pertinent:
         ${JSON.stringify(similarBases, null, 2)}`
             : `Tu ne recommandes pas de bases. Tu ne propose pas d'hyperlien pour les bases.`
         }
         ${
           similarHelps.length > 0
             ? `######
-        Informations d'aide pour l'utilisateur sur Les Bases d'intérêt général :
+        Informations d'aide pour l'utilisateur sur Les Bases d'intérêt général. Mentionne les uniquement si c'est pertinent :
         ${similarHelps.map((help) => help.content).join('')}`
             : `Tu ne recommandes pas d'information spécifique au site.`
         }
@@ -89,9 +90,9 @@ export const POST = async (
       `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, pour Les Bases du Numérique d'intérêt général 
       N'utilise jamais d'hyperliens, sauf s'ils sont dans ton contexte.` +
       `Recommande des ressources seulement si elles sont dans ton contexte. Elles sont au format JSON.
-       Recommande des bases seulement si elles sont  dans ton contexte. Elles sont au format JSON. 
+       Recommande des bases seulement si elles sont dans ton contexte. Elles sont au format JSON. 
        Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
-      `Si tu utilises des ressources ou des bases, ajoute leur url au format markdown. Ces url redirigent vers des ressources ou des bases` +
+      `Si tu utilises des ressources ou des bases, ajoute leur url avec leur nom et un descriptif. Ces url redirigent vers des ressources ou des bases` +
       `Répond de manière concise.` +
       `Parle uniquement français, sauf si on te demande de traduire` +
       `N'utilise pas le format JSON dans ta réponse.` +
@@ -124,7 +125,10 @@ export const POST = async (
             },
           })
         })
-        .catch((error) => controller.error(error))
+        .catch((error) => {
+          console.error(error)
+          controller.error(error)
+        })
     },
     cancel() {
       console.log('Stream cancelled by the client.')

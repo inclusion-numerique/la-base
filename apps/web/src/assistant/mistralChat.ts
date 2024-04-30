@@ -18,7 +18,7 @@ export const executeMistralChat = async ({
   const chatStreamResponse = mistralClient.chatStream({
     model: 'open-mixtral-8x7b',
     messages,
-    temperature: 0.1,
+    temperature: 0,
   })
 
   let reponse = ''
