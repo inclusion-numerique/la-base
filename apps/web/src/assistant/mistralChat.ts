@@ -1,5 +1,6 @@
-import type { ToolCalls } from '@mistralai/mistralai'
+import { ToolCalls, type ToolChoice } from '@mistralai/mistralai'
 import { mistralClient } from '@app/web/assistant/mistralClient'
+import { mistralModels } from '@app/web/assistant/mistralModels'
 
 export type MistralChatMessage = {
   role: string
@@ -8,7 +9,7 @@ export type MistralChatMessage = {
   tool_calls?: ToolCalls[]
 }
 
-export const executeMistralChat = async ({
+export const executeMistralChatStream = async ({
   onChunk,
   messages,
 }: {
@@ -16,9 +17,11 @@ export const executeMistralChat = async ({
   onChunk: (chunk: string) => void
 }) => {
   const chatStreamResponse = mistralClient.chatStream({
-    model: 'open-mixtral-8x7b',
+    model: mistralModels.MistralSmall.name,
     messages,
     temperature: 0,
+    safePrompt: false,
+    toolChoice: 'none' as ToolChoice,
   })
 
   let reponse = ''
@@ -31,4 +34,18 @@ export const executeMistralChat = async ({
     }
   }
   return reponse
+}
+
+export const executeMistralChat = async ({
+  messages,
+}: {
+  messages: MistralChatMessage[]
+}) => {
+  const chatStreamResponse = await mistralClient.chat({
+    model: mistralModels.MistralSmall.name,
+    messages,
+    temperature: 0,
+  })
+
+  return chatStreamResponse.choices[0].message.content
 }

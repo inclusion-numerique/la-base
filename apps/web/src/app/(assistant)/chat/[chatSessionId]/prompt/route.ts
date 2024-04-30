@@ -1,11 +1,13 @@
 import { NextRequest } from 'next/server'
-
 import { v4 } from 'uuid'
+import type { MistralChatMessage } from '@app/web/assistant/mistralChat'
+import { executeMistralChatStream } from '@app/web/assistant/mistralChat'
+
 import { getChatSession } from '@app/web/app/(assistant)/chat/getChatSession'
 import { getSimilarities } from '@app/web/assistant/rag'
 import { prismaClient } from '@app/web/prismaClient'
+import { summarizeDiscussion } from '@app/web/assistant/summarizeDiscussion'
 import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
-import { executeMistralChat } from '@app/web/assistant/mistralChat'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -25,92 +27,71 @@ export const POST = async (
 
   // Get prompt from request json body
   const body = (await request.json()) as { prompt?: string }
-  const { prompt } = body
+  const { prompt: userPrompt } = body
 
-  if (!prompt) {
+  if (!userPrompt) {
     return new Response('Prompt is required', {
       status: 400,
     })
   }
 
-  const { similarResources, similarBases, similarHelps } =
-    await getSimilarities(prompt)
+  const [summarizedDiscussion, ragResults] = await Promise.all([
+    summarizeDiscussion(chatSession.messages.slice(0, -2)),
+    getSimilarities(userPrompt),
+  ])
 
-  const promptMessage = {
+  const userPromptMessage = {
     role: 'user',
-    content: `
-        Tiens compte uniquement des informations de contexte systeme et des informations de contextes ci-dessous.
-        ${
-          similarResources.length > 0
-            ? `
-        ###### 
-        Si tu recommandes des ressources, tu dois donner leur hyperlien :      
-        Ressources que tu recommandes si c'est pertinent:
-        ${JSON.stringify(similarResources, null, 2)}`
-            : `Tu ne recommandes pas de ressources. Tu ne propose pas d'hyperlien pour les ressources.`
-        }
-        ${
-          similarBases.length > 0
-            ? `######
-        Si tu recommandes des bases, tu dois donner leur hyperlien :       
-        Bases que tu recommandes si c'est pertinent:
-        ${JSON.stringify(similarBases, null, 2)}`
-            : `Tu ne recommandes pas de bases. Tu ne propose pas d'hyperlien pour les bases.`
-        }
-        ${
-          similarHelps.length > 0
-            ? `######
-        Informations d'aide pour l'utilisateur sur Les Bases d'intérêt général. Mentionne les uniquement si c'est pertinent :
-        ${similarHelps.map((help) => help.content).join('')}`
-            : `Tu ne recommandes pas d'information spécifique au site.`
-        }
-        
-      La question est la suivante : ${prompt}
-        `,
+    content: userPrompt,
   }
 
-  console.log(
-    '------------------------------------promptMessage',
-    promptMessage,
-  )
+  console.log('------- SUMMARIZED DISCUSSION', summarizedDiscussion)
+
+  console.log('--------RAG TOOL MESSAGE', ragResults.toolMessages)
+
+  console.log('--------USER PROMPT MESSAGE', userPromptMessage)
 
   await prismaClient.assistantChatMessage.create({
     data: {
       id: v4(),
       sessionId: chatSession.id,
       role: 'User',
-      content: prompt,
+      content: userPrompt,
     },
   })
 
   const systemMessage = {
     role: 'system',
-    content:
-      `Contexte systeme en dessous :` +
-      `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, pour Les Bases du Numérique d'intérêt général 
-      N'utilise jamais d'hyperliens, sauf s'ils sont dans ton contexte.` +
-      `Recommande des ressources seulement si elles sont dans ton contexte. Elles sont au format JSON.
-       Recommande des bases seulement si elles sont dans ton contexte. Elles sont au format JSON. 
-       Si tu ne recommandes pas de ressources ou de bases, ne le mentionne pas.` +
-      `Si tu utilises des ressources ou des bases, ajoute leur url avec leur nom et un descriptif. Ces url redirigent vers des ressources ou des bases` +
-      `Répond de manière concise.` +
-      `Parle uniquement français, sauf si on te demande de traduire` +
-      `N'utilise pas le format JSON dans ta réponse.` +
-      `Ne mentionne pas les informations de ce contexte dans ta réponse.` +
-      `Si tu as des informations d'aide pour l'utilisateur en contexte, utilise le en priorité` +
-      `Si tu ne connais pas la réponse, dis-le, n'essaie pas d'inventer une réponse.` +
-      `----------------`,
+    content: `Tu es un assistant qui répond à des questions autour du numérique d'intérêt général, intégré à la plateforme [Les Bases du Numérique d'intérêt général](https://lesbases.anct.gouv.fr) 
+N'utilise jamais d'hyperliens, sauf s'ils sont en résultat de tools.
+Répond TOUJOURS au format markdown.
+Sois toujours de bonne humeur, cherchant à aider l’utilisateur au mieux.
+Parle uniquement français, sauf si on te demande de traduire.
+Si tu ne connais pas la réponse, dis-le, n'essaie pas d'inventer une réponse.`,
   }
 
-  const messages = [
-    systemMessage,
-    ...chatSession.messages.map(assistantMessageToMistralMessage),
-    promptMessage,
-  ]
+  const messages: MistralChatMessage[] = [systemMessage]
+
+  // Include summary of older than 2 messages
+  if (summarizedDiscussion) {
+    messages.push({
+      role: 'assistant',
+      content: `Voici un résumé de notre discussion jusqu’à présent : \n\n ${summarizedDiscussion}`,
+    })
+  }
+
+  messages.push(
+    // Include always 2 last history messages
+    ...chatSession.messages.slice(-2).map(assistantMessageToMistralMessage),
+    // Include new user prompt message
+    userPromptMessage,
+    // include rag results (they will be empty if no matches in rag)
+    ...ragResults.toolMessages,
+  )
 
   const stream = new ReadableStream({
     start(controller) {
-      executeMistralChat({
+      executeMistralChatStream({
         messages,
         onChunk: (chunk) => controller.enqueue(chunk),
       })
