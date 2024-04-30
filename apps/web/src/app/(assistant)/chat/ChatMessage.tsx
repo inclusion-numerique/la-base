@@ -1,8 +1,8 @@
 import type { AssistantChatMessage } from '@prisma/client'
 import { CSSProperties } from 'react'
 import classNames from 'classnames'
-import styles from './ChatSession.module.css'
 import { renderMarkdown } from '@app/web/app/(assistant)/chat/markdownRenderer'
+import styles from './ChatSession.module.css'
 
 const ChatMessage = ({
   message: { content, role },
@@ -17,10 +17,14 @@ const ChatMessage = ({
     <div className={classNames('fr-mb-2v fr-text--bold')}>
       {role === 'Assistant' ? 'Assistant' : 'Vous'}
     </div>
-    <div
-      ref={contentRef}
-      dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
-    />
+    {role === 'User' ? (
+      <div>{content}</div>
+    ) : (
+      <div
+        ref={contentRef}
+        dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
+      />
+    )}
   </div>
 )
 

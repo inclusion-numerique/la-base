@@ -1,5 +1,6 @@
 import { Base, Resource, DocumentHelp } from '@prisma/client'
 import { EmbeddingResponse } from '@mistralai/mistralai'
+import { ChatMistralAI } from '@langchain/mistralai'
 import { prismaClient } from '@app/web/prismaClient'
 import { mistralEmbedding } from '@app/web/assistant/mistralEmbedding'
 
@@ -116,3 +117,8 @@ export const getSimilarities = async (
     similarHelps: helps,
   }
 }
+
+const llm = new ChatMistralAI({
+  modelName: 'open-mixtral-8x7b',
+  temperature: 0,
+})

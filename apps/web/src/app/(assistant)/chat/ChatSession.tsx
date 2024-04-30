@@ -8,8 +8,8 @@ import classNames from 'classnames'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { ChatSessionData } from '@app/web/app/(assistant)/chat/getChatSession'
 import ChatMessage from '@app/web/app/(assistant)/chat/ChatMessage'
-import styles from './ChatSession.module.css'
 import { renderMarkdown } from '@app/web/app/(assistant)/chat/markdownRenderer'
+import styles from './ChatSession.module.css'
 
 const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
   const form = useForm<{ prompt: string }>()
@@ -197,6 +197,18 @@ const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
             )}
           </div>
         </form>
+        <div className="fr-width-full fr-flex fr-justify-content-end">
+          <Button
+            priority="tertiary"
+            iconId="fr-icon-add-line"
+            size="small"
+            linkProps={{
+              href: '/chat',
+            }}
+          >
+            Nouvelle discussion
+          </Button>
+        </div>
       </div>
     </div>
   )
