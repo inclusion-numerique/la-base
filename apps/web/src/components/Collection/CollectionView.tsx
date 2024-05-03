@@ -96,7 +96,6 @@ const CollectionView = ({
         canWrite={canWrite}
         priority="secondary"
         context="view"
-        actionsClassName="fr-hidden fr-unhidden-md"
       />
     )}
     {collection.resources.map(({ resource }, index) => (

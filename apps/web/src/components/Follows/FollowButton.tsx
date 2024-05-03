@@ -27,7 +27,7 @@ export type FollowButtonProps = {
 )
 
 export const FollowButton = (props: FollowButtonProps) => {
-  const { profile, base, user, iconOnly, followPriority } = props
+  const { className, profile, base, user, iconOnly, followPriority } = props
 
   if (!profile && !base) {
     return null
@@ -55,6 +55,8 @@ export const FollowButton = (props: FollowButtonProps) => {
 
     return (
       <Button
+        className={className}
+        {...buttonProps}
         {...buttonProps}
         linkProps={{
           href,
@@ -73,7 +75,7 @@ export const FollowButton = (props: FollowButtonProps) => {
 
   return (
     <Button
-      className={props.className}
+      className={className}
       {...buttonProps}
       linkProps={{
         href,

@@ -11,7 +11,6 @@ import {
   resourceAuthorization,
   ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
-import styles from './Resources.module.css'
 
 const Resources = ({
   resources,

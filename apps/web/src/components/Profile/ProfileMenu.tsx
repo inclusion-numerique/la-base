@@ -61,7 +61,7 @@ const ProfileMenu = ({
     <div className="fr-border-bottom fr-mb-md-6w fr-mb-4w">
       <div className="fr-container fr-flex-lg">
         <nav className="fr-nav fr-mx-auto">
-          <ul className="fr-nav__list">
+          <ul className="fr-nav__list fr-justify-content-center">
             <MenuItem
               tab="ressources"
               currentTab={currentTab}

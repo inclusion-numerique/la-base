@@ -8,7 +8,6 @@ import SaveCollectionButton from '@app/web/components/Collection/SaveCollectionB
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { PrivacyTag } from '../PrivacyTags'
 import CopyLinkButton from '../CopyLinkButton'
-import styles from './CollectionMetaData.module.css'
 
 const CollectionMetaData = ({
   user,
@@ -17,7 +16,6 @@ const CollectionMetaData = ({
   priority,
   canWrite,
   context,
-  actionsClassName,
   hideRessourceLabelOnSmallDevices = false,
 }: {
   user: SessionUser | null
@@ -26,7 +24,6 @@ const CollectionMetaData = ({
   count: number
   canWrite?: boolean
   context: 'card' | 'view' | 'collectionModal'
-  actionsClassName?: string
   hideRessourceLabelOnSmallDevices?: boolean
 }) => {
   const withButtons = context === 'card' || context === 'view'
