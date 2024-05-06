@@ -10,6 +10,10 @@
   border-bottom: 1px solid var(--border-default-grey);
 }
 
+.fr-border-bottom-0 {
+  border-bottom: 0 !important;
+}
+
 .fr-border-right {
   border-right: 1px solid var(--border-default-grey);
 }

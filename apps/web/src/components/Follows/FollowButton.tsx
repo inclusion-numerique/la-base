@@ -57,7 +57,6 @@ export const FollowButton = (props: FollowButtonProps) => {
       <Button
         className={className}
         {...buttonProps}
-        {...buttonProps}
         linkProps={{
           href,
         }}

@@ -1,67 +1,20 @@
 'use client'
 
-import classNames from 'classnames'
 import Link from 'next/link'
-import React, {
-  KeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-  useRef,
-} from 'react'
-import { useOnClickOutside } from 'usehooks-ts'
+import React from 'react'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { getUserDisplayName } from '@app/web/utils/user'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
-import OpenOnboardingForMigratedUserThatHasNotSeenIt from '@app/web/app/nouveautes/OpenOnboardingForMigratedUserThatHasNotSeenIt'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import styles from './HeaderUserMenu.module.css'
-
-const hasKey = (
-  event: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
-): event is React.KeyboardEvent<HTMLDivElement> =>
-  Object.prototype.hasOwnProperty.call(event, 'key')
+import { getBasesFromSessionUser } from '../bases/getBasesFromSessionUser'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
-  const bases = getBasesFromSessionUser(user)
+  const bases = user ? getBasesFromSessionUser(user) : []
 
-  // The click outside default behavior from dsfr js do not work in this case 🤷‍
-  // So we have to use client component and hooks to handle the click outside
-  const buttonRef = useRef<HTMLButtonElement>(null)
-  const collapseRef = useRef<HTMLDivElement>(null)
-  const displayName = getUserDisplayName(user)
-  const onClickOrEnterInsideDropdown = (
-    event: KeyboardEvent<HTMLDivElement> | ReactMouseEvent<HTMLDivElement>,
-  ) => {
-    if (hasKey(event) && (event.key === 'Tab' || event.key === 'Shift')) return
-
-    // Close the dropdown if a link has been clicked
-    if (event.target instanceof HTMLAnchorElement) {
-      buttonRef.current?.click()
-    }
-  }
-  useOnClickOutside(collapseRef, (event) => {
-    // Let the event propagate if clicked on the control button
-    if (event.target === buttonRef?.current) {
-      return
-    }
-
-    // Close the dropdown if open on outside click
-    if (buttonRef.current?.getAttribute('aria-expanded') !== 'true') {
-      return
-    }
-
-    buttonRef.current.click()
-  })
-
-  const menuContent = (
-    <ul className="fr-menu__list">
-      <li>
+  return (
+    <ul>
+      <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w">
         <Link
-          className="fr-nav__link fr-flex fr-align-items-center"
+          className="fr-btn fr-flex fr-align-items-center fr-border-bottom-0"
           href={`/profils/${user.slug}`}
-          style={{
-            boxShadow: 'none',
-            borderBottom: 'var(--slim-grey-border)',
-          }}
         >
           <RoundProfileImage className="fr-mr-3v" user={user} />
           <span>
@@ -86,31 +39,21 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       {bases.length > 0 ? (
         <>
           <li>
-            <p
-              className="fr-text--sm fr-nav__link fr-text-default--grey fr-pb-2v"
-              style={{
-                boxShadow: 'none',
-              }}
-            >
+            <p className="fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
               Mes bases
             </p>
           </li>
           {bases.map(({ slug, title }) => (
             <li key={slug}>
               <Link
-                className="fr-nav__link"
+                className="fr-btn fr-border-bottom-0"
                 href={`/bases/${slug}`}
                 style={{
                   boxShadow: 'none',
                   borderBottom: undefined,
                 }}
               >
-                <span
-                  className="fr-icon-home-4-line fr-icon--sm fr-mr-1w"
-                  style={{
-                    color: 'var(--blue-france-sun-113-625)',
-                  }}
-                />
+                <span className="fr-icon-home-4-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
                 {title}
               </Link>
             </li>
@@ -119,69 +62,20 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       ) : null}
       <li>
         <Link
-          className="fr-nav__link fr-border--bottom"
+          className="fr-btn fr-border-bottom-0"
           href="/bases/creer"
           style={{ boxShadow: 'none' }}
         >
-          <span
-            className="fr-icon-add-line fr-icon--sm fr-mr-1w"
-            style={{ color: 'var(--blue-france-sun-113-625)' }}
-          />
+          <span className="fr-icon-add-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
           Créer une base
         </Link>
       </li>
-      <li>
-        <Link className="fr-nav__link" href="/deconnexion">
-          <span
-            className="fr-icon-logout-box-r-line fr-icon--sm fr-mr-1w"
-            style={{ color: 'var(--blue-france-sun-113-625)' }}
-          />
+      <li className="">
+        <Link className="fr-btn fr-border-top" href="/deconnexion">
+          <span className="fr-icon-logout-box-r-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
           Se déconnecter
         </Link>
       </li>
     </ul>
-  )
-
-  /**
-   * In mobile, the user menu is displayed in the menu modal.
-   * In desktop, the user menu is a button + a dropdown.
-   */
-  return (
-    <>
-      <button
-        className="fr-nav__btn fr-btn fr-btn--sm fr-hidden fr-unhidden-lg"
-        type="button"
-        aria-expanded="false"
-        aria-controls="header-user-menu"
-        ref={buttonRef}
-      >
-        {displayName}
-      </button>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <div
-        role="navigation"
-        className={classNames(
-          'fr-collapse',
-          'fr-menu',
-          'fr-mt-1w',
-          styles.collapse,
-        )}
-        id="header-user-menu"
-        ref={collapseRef}
-        onClick={onClickOrEnterInsideDropdown}
-        onKeyDown={onClickOrEnterInsideDropdown}
-      >
-        {menuContent}
-      </div>
-      <div
-        role="navigation"
-        className={classNames('fr-hidden-lg', 'fr-px-1w', styles.mobile)}
-      >
-        {menuContent}
-      </div>
-      {!user.hasSeenV2Onboarding && !!user.legacyId && (
-        <OpenOnboardingForMigratedUserThatHasNotSeenIt user={user} />
-      )}
-    </>
   )
 }

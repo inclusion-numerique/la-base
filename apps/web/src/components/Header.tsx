@@ -1,86 +1,63 @@
 import Link from 'next/link'
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import HeaderBackLink from '@app/web/components/HeaderBackLink'
-import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
-import { HelpMenu } from '@app/web/components/HelpMenu'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { getUserDisplayName } from '@app/web/utils/user'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import { HelpMenu } from '@app/web/components/HelpMenu'
+import { Dropdown } from './Dropdown/Dropdown'
+import LesBasesSvgLogo from './LesBasesSvgLogo'
+import { CreateResourceButton } from './Resource/CreateResourceModal'
 
-import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
-
-const createResourceConnectionLink = (
-  <Link
-    href="/connexion?suivant=/?creer-une-ressource"
-    className="fr-btn fr-icon-edit-box-line"
-  >
-    Créer une ressource
-  </Link>
-)
-
-const Header = ({
-  user,
-  backLink,
-  createResource = createResourceConnectionLink,
-}: {
-  user?: SessionUser | null
-  backLink?: boolean
-  createResource?: ReactNode
-}) => (
+const Header = ({ user }: { user?: SessionUser | null }) => (
   <header role="banner" className="fr-header">
     <div className="fr-header__body">
       <div className="fr-container">
         <div className="fr-header__body-row">
           <div className="fr-header__brand fr-enlarge-link">
             <div className="fr-header__brand-top">
-              {backLink ? (
-                <HeaderBackLink />
-              ) : (
-                <>
-                  <div className="fr-header__logo">
-                    <Link
-                      href="/"
-                      title={PublicWebAppConfig.projectTitle}
-                      className="fr-text--medium"
-                    >
-                      <LesBasesSvgLogo
-                        style={{
-                          verticalAlign: 'top',
-                        }}
-                      />
-                    </Link>
-                  </div>
-                  <div className="fr-header__operator">
-                    <Link href="/" className="fr-text--medium">
-                      {PublicWebAppConfig.projectTitle}
-                      <span className="fr-sr-only"> - Retour à l’accueil</span>
-                    </Link>
-                  </div>
-                </>
-              )}
+              <div className="fr-header__logo">
+                <Link
+                  href="/"
+                  title={PublicWebAppConfig.projectTitle}
+                  className="fr-text--medium"
+                >
+                  <LesBasesSvgLogo
+                    style={{
+                      verticalAlign: 'top',
+                    }}
+                  />
+                </Link>
+              </div>
               <div className="fr-header__navbar">
                 <button
-                  id="header-mobile-menu-button"
-                  data-fr-opened="false"
-                  aria-controls="modal-menu-mobile"
-                  aria-haspopup="menu"
-                  title="Menu"
                   type="button"
                   className="fr-btn--menu fr-btn"
-                  data-fr-js-modal-button="true"
+                  data-fr-opened="false"
+                  aria-controls="header-modal"
+                  aria-haspopup="menu"
+                  id="header-modal-button"
+                  title="Menu"
                 >
                   Menu
                 </button>
               </div>
             </div>
+            <div className="fr-header__service fr-pl-0">
+              <Link href="/" className="fr-text--medium">
+                {PublicWebAppConfig.projectTitle}
+                <span className="fr-sr-only"> - Retour à l’accueil</span>
+              </Link>
+            </div>
           </div>
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
-              <ul className="fr-btns-group">
+              <ul className="fr-btns-group fr-align-items-center">
                 <li>
                   <Button
                     linkProps={{
@@ -91,9 +68,40 @@ const Header = ({
                     Rechercher
                   </Button>
                 </li>
-                <li>{createResource}</li>
-                <li className="fr-position-relative">
-                  <HelpMenu />
+                <li>
+                  {user ? (
+                    <CreateResourceButton baseId={null} />
+                  ) : (
+                    <Link
+                      href="/connexion?suivant=/?creer-une-ressource"
+                      className="fr-btn fr-icon-edit-box-line"
+                    >
+                      Créer une ressource
+                    </Link>
+                  )}
+                </li>
+                <li>
+                  <div className="fr-hidden fr-unhidden-lg">
+                    <Dropdown
+                      id="header-help-menu"
+                      alignRight
+                      control={
+                        <>
+                          <span
+                            role="img"
+                            className="ri-question-line ri-lg fr-py-1v"
+                            aria-hidden
+                          />
+                          <span className="fr-sr-only">Aide</span>
+                        </>
+                      }
+                    >
+                      <HelpMenu />
+                    </Dropdown>
+                  </div>
+                  <div className="fr-hidden-lg">
+                    <HelpMenu />
+                  </div>
                 </li>
                 <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
                   <span
@@ -105,7 +113,20 @@ const Header = ({
                 </li>
                 <li className="fr-position-relative">
                   {user ? (
-                    <HeaderUserMenu user={user} />
+                    <>
+                      <div className="fr-hidden fr-unhidden-lg">
+                        <Dropdown
+                          id="header-user-menu"
+                          alignRight
+                          control={getUserDisplayName(user)}
+                        >
+                          <HeaderUserMenu user={user} />
+                        </Dropdown>
+                      </div>
+                      <div className="fr-hidden-lg">
+                        <HeaderUserMenu user={user} />
+                      </div>
+                    </>
                   ) : (
                     <Button
                       linkProps={{
@@ -124,34 +145,20 @@ const Header = ({
       </div>
     </div>
     <div
-      id="modal-menu-mobile"
       className="fr-header__menu fr-modal"
-      title="Menu"
-      aria-labelledby="header-mobile-menu-button"
+      id="header-modal"
+      aria-labelledby="header-modal-button"
     >
       <div className="fr-container">
         <button
-          aria-controls="modal-menu-mobile"
-          className="fr-btn--close fr-btn"
           type="button"
+          className="fr-btn--close fr-btn"
+          aria-controls="header-modal"
+          title="Fermer"
         >
           Fermer
         </button>
-        <div className="fr-header__menu-links">
-          <ul className="fr-btns-group">
-            {/* {menu.map((item) => ( */}
-            {/*  <li key={item.name}> */}
-            {/*    <Link */}
-            {/*      className="fr-btn" */}
-            {/*      href={item.href} */}
-            {/*      aria-controls="modal-menu-mobile" */}
-            {/*    > */}
-            {/*      {item.name} */}
-            {/*    </Link> */}
-            {/*  </li> */}
-            {/* ))} */}
-          </ul>
-        </div>
+        <div className="fr-header__menu-links" />
       </div>
     </div>
   </header>
