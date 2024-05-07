@@ -9,8 +9,10 @@ import {
   SearchTab,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { Category, FilterKey } from './filter'
+import { FiltersModal } from './FiltersModal'
 import styles from './SearchFilters.module.css'
-import SearchFilter, { Category, FilterKey } from './SearchFilter'
+import SearchFilter from './SearchFilter'
 
 export type FiltersInitialValue = {
   category: FilterKey
@@ -19,14 +21,12 @@ export type FiltersInitialValue = {
 
 const SearchFilters = ({
   searchParams,
-  className,
   label,
   categories,
   initialValues,
   tab,
 }: {
   searchParams: SearchParams
-  className?: string
   tab: SearchTab
   label: string
   categories: Category[]
@@ -72,27 +72,43 @@ const SearchFilters = ({
   }
 
   return (
-    <div className={className}>
-      <p className="fr-mb-1w">{label}</p>
-      <div className={styles.buttons}>
-        {categories.map((category) => (
-          <div key={category.id}>
-            <SearchFilter
-              selected={
-                new Set(
-                  selected
-                    .filter(
-                      (selectedItem) => selectedItem.category === category.id,
-                    )
-                    .map((selectedItem) => selectedItem.option.value),
-                )
-              }
-              onUnselect={onUnselect}
-              onSelect={onSelect}
-              category={category}
-            />
-          </div>
-        ))}
+    <div className="fr-mb-3w fr-mb-md-6w">
+      <div className="fr-unhidden fr-hidden-md">
+        <FiltersModal
+          categories={categories}
+          selected={
+            new Set(
+              selected
+                // .filter((selectedItem) => selectedItem.category === category.id)
+                .map((selectedItem) => selectedItem.option.value),
+            )
+          }
+          onUnselect={onUnselect}
+          onSelect={onSelect}
+        />
+      </div>
+      <div className="fr-unhidden-md fr-hidden">
+        <p className="fr-mb-1w">{label}</p>
+        <div className={styles.buttons}>
+          {categories.map((category) => (
+            <div key={category.id}>
+              <SearchFilter
+                selected={
+                  new Set(
+                    selected
+                      .filter(
+                        (selectedItem) => selectedItem.category === category.id,
+                      )
+                      .map((selectedItem) => selectedItem.option.value),
+                  )
+                }
+                onUnselect={onUnselect}
+                onSelect={onSelect}
+                category={category}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       {selected.length > 0 && (
         <div className={styles.selected}>
