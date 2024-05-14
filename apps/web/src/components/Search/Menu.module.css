@@ -1,6 +1,6 @@
 .menu {
   display: flex;
-  border-bottom: var(--slim-grey-border);
+  border-bottom: 1px solid var(--border-default-grey);
   margin-bottom: 32px;
 
   @media (min-width: 768px) {

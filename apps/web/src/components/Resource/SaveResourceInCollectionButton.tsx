@@ -11,7 +11,6 @@ const secondaryButtonProps = {
   iconId: defaultIconId,
   priority: 'secondary',
   children: 'Enregistrer',
-  size: 'small',
 } as const
 
 const alreadySavedSecondaryButtonProps = {
@@ -22,7 +21,6 @@ const alreadySavedSecondaryButtonProps = {
 
 const cardButtonProps = {
   iconId: defaultIconId,
-  size: 'small',
   iconPosition: 'right',
   children: 'Enregistrer',
   priority: 'tertiary no outline',
@@ -37,7 +35,6 @@ const alreadySavedCardButtonProps = {
 const buttonIconOnlyProps = {
   iconId: defaultIconId,
   title: secondaryButtonProps.children,
-  size: 'small',
   priority: 'tertiary no outline',
 } as const
 
@@ -67,6 +64,7 @@ const SaveResourceInCollectionButton = ({
   resource,
   variant,
   'data-testid': dataTestid,
+  size,
 }: {
   className?: string
   user: SessionUser | null
@@ -74,6 +72,7 @@ const SaveResourceInCollectionButton = ({
   iconOnly?: boolean
   'data-testid'?: string
   variant?: 'card' | 'icon-only'
+  size?: 'small'
 }) => {
   const alreadySaved = user?.collections.some((collection) =>
     collection.resources.some(({ resourceId }) => resourceId === resource.id),
@@ -84,6 +83,7 @@ const SaveResourceInCollectionButton = ({
     const accessibilityTitle = `Enregistrer "${resource.title}" dans une collection`
     return (
       <OpenSaveResourceInCollectionModalButton
+        size={size}
         {...buttonProps}
         nativeButtonProps={{
           'data-testid': dataTestid,
@@ -97,6 +97,7 @@ const SaveResourceInCollectionButton = ({
   return (
     <Button
       {...buttonProps}
+      size="small"
       className={className}
       data-testid={dataTestid}
       linkProps={{

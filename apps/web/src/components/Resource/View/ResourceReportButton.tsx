@@ -12,7 +12,6 @@ const ResourceReportButton = ({
     className="fr-width-full fr-justify-content-center"
     iconId="fr-icon-warning-line"
     priority={priority}
-    size="small"
     onClick={ResourceReportModal.open}
   >
     Signaler

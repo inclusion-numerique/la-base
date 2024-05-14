@@ -1,0 +1,19 @@
+.fr-text--medium {
+  font-weight: 500 !important;
+}
+
+.fr-text--center {
+  text-align: center !important;
+}
+
+.fr-text--right {
+  text-align: right !important;
+}
+
+.fr-text--justify {
+  text-align: justify !important;
+}
+
+.fr-text--break-all {
+  word-break: break-all;
+}

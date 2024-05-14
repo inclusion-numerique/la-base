@@ -1,9 +1,3 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 48px;
-}
-
 .cards,
 .tabCards {
   display: grid;

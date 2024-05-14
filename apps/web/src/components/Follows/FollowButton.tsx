@@ -15,6 +15,7 @@ import { BasePageData } from '@app/web/server/bases/getBase'
 
 export type FollowButtonProps = {
   user: SessionUser | null
+  className?: string
   iconOnly?: boolean
   followPriority?: ButtonProps['priority']
 } & (
@@ -26,7 +27,7 @@ export type FollowButtonProps = {
 )
 
 export const FollowButton = (props: FollowButtonProps) => {
-  const { profile, base, user, iconOnly, followPriority } = props
+  const { className, profile, base, user, iconOnly, followPriority } = props
 
   if (!profile && !base) {
     return null
@@ -54,6 +55,7 @@ export const FollowButton = (props: FollowButtonProps) => {
 
     return (
       <Button
+        className={className}
         {...buttonProps}
         linkProps={{
           href,
@@ -72,6 +74,7 @@ export const FollowButton = (props: FollowButtonProps) => {
 
   return (
     <Button
+      className={className}
       {...buttonProps}
       linkProps={{
         href,

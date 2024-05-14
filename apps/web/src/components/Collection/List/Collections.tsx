@@ -27,12 +27,19 @@ const Collections = ({
   baseId?: string
 }) => (
   <div data-testid="collections-list">
-    <div className={styles.header}>
-      <h2 className="fr-mb-0 fr-h3">
-        Collections · {collections.length + savedCollections.length}
-      </h2>
+    <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+      <div className="fr-col-sm-auto fr-col-12">
+        <h2 className="fr-mb-0 fr-h3">
+          Collections · {collections.length + savedCollections.length}
+        </h2>
+      </div>
       {withCreation && (
-        <CreateCollectionButton className="fr-btn--secondary" baseId={baseId} />
+        <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+          <CreateCollectionButton
+            className="fr-btn--secondary fr-width-full fr-justify-content-center"
+            baseId={baseId}
+          />
+        </div>
       )}
     </div>
 

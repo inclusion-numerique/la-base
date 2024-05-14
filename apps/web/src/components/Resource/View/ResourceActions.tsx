@@ -44,7 +44,6 @@ const ResourceActions = ({
             <Button
               data-testid="resource-edition-button"
               priority="secondary"
-              size="small"
               iconId="fr-icon-edit-line"
               linkProps={{
                 href: `/ressources/${resource.slug}/editer`,
@@ -55,6 +54,7 @@ const ResourceActions = ({
           )}
           {canSaveInCollection && (
             <SaveResourceInCollectionButton
+              size="small"
               resource={resource}
               user={user}
               data-testid="save-resource-in-collection-button"
@@ -62,12 +62,11 @@ const ResourceActions = ({
           )}
           {canCopyLink && (
             <CopyLinkButton
+              size="small"
               url={getServerUrl(`/ressources/${resource.slug}`, true)}
-              priority="secondary"
             />
           )}
         </div>
-
         {/* Mobile left actions */}
         <div className="fr-hidden-md">
           {/* Only display the first button in mobile */}
@@ -75,7 +74,6 @@ const ResourceActions = ({
             <Button
               data-testid="resource-edition-button"
               priority="secondary"
-              size="small"
               iconId="fr-icon-edit-line"
               linkProps={{
                 href: `/ressources/${resource.slug}/editer`,
@@ -94,7 +92,6 @@ const ResourceActions = ({
             />
           )}
         </div>
-
         {/* Desktop right actions */}
         <div className="fr-hidden fr-unhidden-md">
           {!isPublished && canDelete && (
@@ -111,7 +108,6 @@ const ResourceActions = ({
             </Button>
           )}
         </div>
-
         {/* Mobile right actions */}
         <div className="fr-hidden-md">
           {!isPublished && canDelete && (
@@ -122,7 +118,6 @@ const ResourceActions = ({
           )}
           {isPublished && (
             <Button
-              size="small"
               title="Plus d’options"
               priority="tertiary no outline"
               iconId="fr-icon-more-fill"
@@ -145,15 +140,15 @@ const ResourceActions = ({
         {!isPublished && canDelete && (
           <DeleteResourceButton resourceId={resource.id} />
         )}
-        <ResourceReportButton />
+        <div className="fr-my-2w">
+          <ResourceReportButton />
+        </div>
         {canCopyLink && (
           <>
             {/* Copy Link is always available in left options in desktop */}
             <CopyLinkButton
-              className="fr-hidden-md"
+              className="fr-width-full fr-justify-content-center"
               url={getServerUrl(`/ressources/${resource.slug}`, true)}
-              priority="secondary"
-              size="medium"
             >
               Partager le lien
             </CopyLinkButton>

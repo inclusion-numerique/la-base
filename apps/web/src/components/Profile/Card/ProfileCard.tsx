@@ -15,11 +15,15 @@ const ProfileCard = ({
   user,
   canFollow = true,
   titleAs: ProfileTitle = 'h2',
+  isAdmin,
+  displayProfileMetadata = true,
 }: {
   profile: ProfileListItem
   user: SessionUser | null
   canFollow?: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  isAdmin?: boolean
+  displayProfileMetadata?: boolean
 }) => (
   <article className={styles.container} data-testid="profile-card">
     <div className={styles.content}>
@@ -35,11 +39,18 @@ const ProfileCard = ({
             {profile.name && formatName(profile.name)}
           </ProfileTitle>
         </Link>
-        <ProfileMetadata
-          className="fr-text-mention--grey"
-          resourcesCount={countProfileResources(profile)}
-          followedByCount={profile._count.followedBy}
-        />
+        {displayProfileMetadata && (
+          <ProfileMetadata
+            className="fr-text-mention--grey"
+            resourcesCount={countProfileResources(profile)}
+            followedByCount={profile._count.followedBy}
+          />
+        )}
+        {isAdmin != null && (
+          <div className="fr-text-mention--grey fr-mt-1v">
+            {isAdmin ? 'Admin' : 'Membre'}
+          </div>
+        )}
       </div>
     </div>
     {canFollow && profile.id !== user?.id ? (

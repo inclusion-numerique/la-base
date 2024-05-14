@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import styles from './ProfileMetadata.module.css'
 
 const ProfileMetadata = ({
   resourcesCount,
@@ -12,24 +11,24 @@ const ProfileMetadata = ({
   followedByCount: number
   className?: string
 }) => (
-  <div className={classNames(styles.container, 'fr-text--sm', className)}>
-    <span className="fr-icon-file-text-line fr-icon--sm" />
-    <div>
+  <div className={classNames('fr-flex-md fr-text--sm fr-mb-0', className)}>
+    <span className="fr-icon-file-text-line fr-icon--sm fr-pr-1w" />
+    <span>
       <b>{resourcesCount}</b>
-      <span className={styles.spanMdDisplay}>
+      <span className="fr-hidden fr-display-inline-md">
         {' '}
         Ressource{sPluriel(resourcesCount)}
       </span>
-    </div>
-    <div>·</div>
-    <span className="fr-icon-user-heart-line fr-icon--sm" />
-    <div>
+    </span>
+    <span className="fr-px-1w">·</span>
+    <span className="fr-icon-user-heart-line fr-icon--sm fr-pr-1w" />
+    <span>
       <b>{followedByCount}</b>
-      <span className={styles.spanMdDisplay}>
+      <span className="fr-hidden fr-display-inline-md">
         {' '}
         Suivi{sPluriel(followedByCount)}
       </span>
-    </div>
+    </span>
   </div>
 )
 export default ProfileMetadata

@@ -1,0 +1,13 @@
+.fr-table--nowrap {
+  * {
+    white-space: nowrap !important;
+  }
+}
+
+.fr-cell--nowrap {
+  white-space: nowrap !important;
+}
+
+.fr-cell--wrap {
+  white-space: normal !important;
+}

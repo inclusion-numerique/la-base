@@ -32,9 +32,11 @@ const {
 const InviteBaseMemberButton = ({
   base,
   canAddAdmin,
+  className,
 }: {
   base: BasePageData
   canAddAdmin: boolean
+  className?: string
 }) => {
   const form = useForm<InviteMemberCommand>({
     resolver: zodResolver(InviteMemberCommandValidation),
@@ -77,6 +79,7 @@ const InviteBaseMemberButton = ({
   return (
     <div>
       <Button
+        className={className}
         priority="secondary"
         iconId="fr-icon-user-add-line"
         nativeButtonProps={{

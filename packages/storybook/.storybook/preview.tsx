@@ -1,5 +1,5 @@
 import React from 'react'
-import '@app/web/app/app.css'
+import '@app/web/styles/index.css'
 import { useRef } from '@storybook/addons'
 import { Preview } from '@storybook/react'
 import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'

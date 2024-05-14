@@ -1,65 +1,65 @@
 .container {
-    background: var(--background-contrast-info) !important;
-    flex-shrink: 0;
-    display: block;
-    overflow: hidden;
-    width: var(--size);
-    height: var(--size);
+  background: var(--background-contrast-info) !important;
+  flex-shrink: 0;
+  display: inline-block;
+  overflow: hidden;
+  width: var(--size);
+  height: var(--size);
 
-    img {
-        object-fit: cover;
-        object-position: center;
-        display: block;
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-    }
+  img {
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
 }
 
 .size24 {
-    --size: 24px;
+  --size: 24px;
 }
 
 .size32 {
-    --size: 32px;
+  --size: 32px;
 }
 
 .size48 {
-    --size: 48px;
+  --size: 48px;
 }
 
 .size96 {
-    --size: 96px;
+  --size: 96px;
 }
 
 .size116 {
-    --size: 116px;
+  --size: 116px;
 }
 
 .size128 {
-    --size: 128px;
+  --size: 128px;
 }
 
 .borderWidth1 {
-    width: calc(var(--size) - 2px);
-    height: calc(var(--size) - 2px);
-    border: 1px solid var(--grey-1000-50);
+  width: calc(var(--size) - 2px);
+  height: calc(var(--size) - 2px);
+  border: 1px solid var(--grey-1000-50);
 }
 
 .borderWidth2 {
-    width: calc(var(--size) - 4px);
-    height: calc(var(--size) - 4px);
-    border: 2px solid var(--grey-1000-50);
+  width: calc(var(--size) - 4px);
+  height: calc(var(--size) - 4px);
+  border: 2px solid var(--grey-1000-50);
 }
 
 .radiusFull {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .radiusHalf {
-    border-radius: 25%
+  border-radius: 25%;
 }
 
 .radiusQuarter {
-    border-radius: 12.5%;
+  border-radius: 12.5%;
 }

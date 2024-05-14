@@ -1,23 +1,22 @@
-
 .container {
-    display: flex;
-    min-width: 0;
-    gap: 8px;
+  display: flex;
+  min-width: 0;
+  gap: 8px;
+  justify-content: center;
 }
 
-
 .icon {
-    color: var(--blue-france-sun-113-625) !important;
+  color: var(--blue-france-sun-113-625) !important;
 }
 
 .imageName {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .imageSize {
-    flex-shrink: 0;
-    color: var(--text-mention-grey);
-    text-wrap: nowrap;
+  flex-shrink: 0;
+  color: var(--text-mention-grey);
+  text-wrap: nowrap;
 }

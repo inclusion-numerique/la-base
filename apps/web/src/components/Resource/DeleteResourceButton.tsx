@@ -19,8 +19,8 @@ const DeleteResourceButton = ({
   return variant === 'icon-only' ? (
     <Button
       title="Supprimer la ressource"
-      iconId="fr-icon-delete-line"
       size="small"
+      iconId="fr-icon-delete-line"
       priority="tertiary no outline"
       onClick={() => open({ resourceId })}
       className={className}
@@ -28,7 +28,6 @@ const DeleteResourceButton = ({
   ) : (
     <Button
       iconId="fr-icon-delete-line"
-      size="small"
       priority="tertiary"
       onClick={() => open({ resourceId })}
       className={className}

@@ -1,0 +1,7 @@
+.wip {
+  background-color: rgb(255 209 110 / 30%);
+}
+
+.wip-outline {
+  box-shadow: inset 0 0 0 2px rgb(255 209 110 / 30%) !important;
+}

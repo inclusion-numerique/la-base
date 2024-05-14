@@ -24,12 +24,14 @@ const SaveCollectionButton = ({
   collection,
   'data-testid': dataTestid,
   context,
+  priority,
 }: {
   className?: string
   user: SessionUser | null
   collection: { id: string; slug: string }
   'data-testid'?: string
   context: 'card' | 'view'
+  priority: 'primary' | 'secondary' | 'tertiary' | 'tertiary no outline'
 }) => {
   const alreadySavedInProfile = !!user?.savedCollections.some(
     (savedCollection) => savedCollection.collectionId === collection.id,
@@ -59,6 +61,7 @@ const SaveCollectionButton = ({
         }}
         className={className}
         collectionId={collection.id}
+        priority={priority}
       />
     )
   }
@@ -67,6 +70,7 @@ const SaveCollectionButton = ({
       {...buttonProps}
       className={className}
       data-testid={dataTestid}
+      priority={priority}
       linkProps={{
         href: loginUrl({
           intent: 'enregistrer-collection',

@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  border-bottom: var(--slim-grey-border);
+  border-bottom: 1px solid var(--border-default-grey);
   gap: 16px;
   padding: 16px 0;
 
   &:first-of-type {
-    border-top: var(--slim-grey-border);
+    border-top: 1px solid var(--border-default-grey);
   }
 
   @media (min-width: 576px) {
