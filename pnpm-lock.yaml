@@ -41,10 +41,10 @@ importers:
         version: 11.1.0(commander@11.1.0)
       '@langchain/community':
         specifier: ^0.0.43
-        version: 0.0.43(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
+        version: 0.0.43(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
       '@langchain/mistralai':
         specifier: ^0.0.16
-        version: 0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+        version: 0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       '@prisma/client':
         specifier: ^5.13.0
         version: 5.14.0(prisma@5.14.0)
@@ -74,7 +74,7 @@ importers:
         version: 4.0.0
       langchain:
         specifier: ^0.1.35
-        version: 0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
+        version: 0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -95,7 +95,7 @@ importers:
         version: 8.2.3
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -120,7 +120,7 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
       joi:
         specifier: ^17.13.0
         version: 17.13.1
@@ -134,11 +134,11 @@ importers:
         specifier: workspace:^
         version: link:../../packages/emails
       '@auth/core':
-        specifier: ^0.18.6
+        specifier: 0.18.6
         version: 0.18.6(nodemailer@6.9.13)
       '@auth/prisma-adapter':
-        specifier: ^1.6.0
-        version: 1.6.0(@prisma/client@5.14.0(prisma@5.14.0))(nodemailer@6.9.13)
+        specifier: 1.0.17
+        version: 1.0.17(@prisma/client@5.14.0(prisma@5.14.0))(nodemailer@6.9.13)
       '@aws-sdk/client-s3':
         specifier: ^3.556.0
         version: 3.556.0(aws-crt@1.21.2)
@@ -162,10 +162,10 @@ importers:
         version: 3.3.4(react-hook-form@7.51.3(react@18.2.0))
       '@langchain/core':
         specifier: ^0.1.60
-        version: 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+        version: 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       '@langchain/mistralai':
         specifier: ^0.0.16
-        version: 0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+        version: 0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       '@mistralai/mistralai':
         specifier: ^0.1.3
         version: 0.1.3(encoding@0.1.13)
@@ -183,7 +183,7 @@ importers:
         version: 7.116.0
       '@sentry/nextjs':
         specifier: ^7.112.2
-        version: 7.116.0(encoding@0.1.13)(next@14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2))(react@18.2.0)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))
+        version: 7.116.0(encoding@0.1.13)(next@14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2))(react@18.2.0)(webpack@5.91.0(uglify-js@3.17.4))
       '@tanstack/react-query':
         specifier: ^5.32.0
         version: 5.40.0(react@18.2.0)
@@ -276,7 +276,7 @@ importers:
         version: 1.1.25
       langchain:
         specifier: ^0.1.35
-        version: 0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
+        version: 0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -315,7 +315,7 @@ importers:
         version: 15.1.0(postcss@8.4.38)
       postcss-loader:
         specifier: ^7.3.4
-        version: 7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))
+        version: 7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(uglify-js@3.17.4))
       postcss-nested:
         specifier: ^6.0.1
         version: 6.0.1(postcss@8.4.38)
@@ -396,7 +396,7 @@ importers:
         version: 1.13.3
       typescript-plugin-css-modules:
         specifier: ^5.1.0
-        version: 5.1.0(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5)
+        version: 5.1.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5)
       uglify-js:
         specifier: ^3.17.4
         version: 3.17.4
@@ -421,7 +421,7 @@ importers:
         version: 22.0.5
       '@storybook/jest':
         specifier: ^0.2.3
-        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       '@storybook/react':
         specifier: ^7.6.18
         version: 7.6.19(encoding@0.1.13)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)
@@ -430,7 +430,7 @@ importers:
         version: 0.2.2
       '@testing-library/jest-dom':
         specifier: ^6.4.2
-        version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+        version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       '@types/change-case':
         specifier: ^2.3.1
         version: 2.3.1
@@ -484,19 +484,19 @@ importers:
         version: 9.0.8
       css-loader:
         specifier: ^6.11.0
-        version: 6.11.0(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))
+        version: 6.11.0(webpack@5.91.0(uglify-js@3.17.4))
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-mock:
         specifier: ^29.7.0
         version: 29.7.0
       jest-mock-extended:
         specifier: ^3.0.6
-        version: 3.0.6(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
+        version: 3.0.6(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
       joi:
         specifier: ^17.13.0
         version: 17.13.1
@@ -520,10 +520,10 @@ importers:
         version: 1.1.6(@types/react@18.2.79)(react@18.2.0)
       style-loader:
         specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))
+        version: 3.3.4(webpack@5.91.0(uglify-js@3.17.4))
       ts-jest:
         specifier: ^29.1.2
-        version: 29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(esbuild@0.18.20)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
+        version: 29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -566,10 +566,10 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -603,10 +603,10 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
@@ -704,7 +704,7 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -728,7 +728,7 @@ importers:
         version: 5.14.0
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -744,7 +744,7 @@ importers:
         version: 11.1.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
 
   packages/lint:
     dependencies:
@@ -808,7 +808,7 @@ importers:
         version: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)
       eslint-plugin-jest:
         specifier: 27.6.0
-        version: 27.6.0(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
+        version: 27.6.0(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))(typescript@5.4.5)
       eslint-plugin-json:
         specifier: ^3.1.0
         version: 3.1.0
@@ -829,7 +829,7 @@ importers:
         version: 49.0.0(eslint@8.57.0)
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -874,7 +874,7 @@ importers:
         version: 7.6.19
       '@storybook/jest':
         specifier: ^0.2.3
-        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))
       '@storybook/nextjs':
         specifier: ^7.6.18
         version: 7.6.19(@swc/core@1.5.24(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild@0.18.20)(next@14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2)(type-fest@4.18.3)(typescript@5.4.5)(webpack-hot-middleware@2.26.1)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20))
@@ -929,7 +929,7 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
       node-polyfill-webpack-plugin:
         specifier: ^3.0.0
         version: 3.0.0(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20))
@@ -1038,7 +1038,7 @@ importers:
         version: 16.4.5
       next:
         specifier: ^14.2.2
-        version: 14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2)
+        version: 14.2.2(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1066,7 +1066,7 @@ importers:
     devDependencies:
       '@storybook/jest':
         specifier: ^0.2.3
-        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+        version: 0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       '@storybook/react':
         specifier: ^7.6.18
         version: 7.6.19(encoding@0.1.13)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)
@@ -1075,7 +1075,7 @@ importers:
         version: 0.2.2
       '@testing-library/jest-dom':
         specifier: ^6.4.2
-        version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+        version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -1096,13 +1096,13 @@ importers:
         version: 8.57.0
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+        version: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
       typescript-plugin-css-modules:
         specifier: ^5.1.0
-        version: 5.1.0(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5)
+        version: 5.1.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5)
 
 packages:
 
@@ -1127,22 +1127,16 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/core@0.29.0':
-    resolution: {integrity: sha512-MdfEjU6WRjUnPG1+XeBWrTIlAsLZU6V0imCIqVDDDPxLI6UZWldXVqAA2EsDazGofV78jqiCLHaN85mJITDqdg==}
+  '@auth/core@0.23.0':
+    resolution: {integrity: sha512-vReM7RIX4BDj/EKyM6OiYnEw4u0MOEC+c2tB7V0qoZy2JZ/hn1xEuDMJwmdcvZNCjQ6kp4cW/6eTcCcEDsRbEA==}
     peerDependencies:
-      '@simplewebauthn/browser': ^9.0.1
-      '@simplewebauthn/server': ^9.0.2
       nodemailer: ^6.8.0
     peerDependenciesMeta:
-      '@simplewebauthn/browser':
-        optional: true
-      '@simplewebauthn/server':
-        optional: true
       nodemailer:
         optional: true
 
-  '@auth/prisma-adapter@1.6.0':
-    resolution: {integrity: sha512-PQU8/Oi5gfjzb0MkhMGVX0Dg877phPzsQdK54+C7ubukCeZPjyvuSAx1vVtWEYVWp2oQvjgG/C6QiDoeC7S10A==}
+  '@auth/prisma-adapter@1.0.17':
+    resolution: {integrity: sha512-R+FYCczU08zM742x8D2lEDa4yH6bubaE71ulzlHVcUr/e0tGpFuvoqOZxgjVUoFHFZp4aHKI/WBw0IGUFK6R6g==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
 
@@ -13309,7 +13303,7 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.9.13
 
-  '@auth/core@0.29.0(nodemailer@6.9.13)':
+  '@auth/core@0.23.0(nodemailer@6.9.13)':
     dependencies:
       '@panva/hkdf': 1.1.1
       '@types/cookie': 0.6.0
@@ -13321,13 +13315,11 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.9.13
 
-  '@auth/prisma-adapter@1.6.0(@prisma/client@5.14.0(prisma@5.14.0))(nodemailer@6.9.13)':
+  '@auth/prisma-adapter@1.0.17(@prisma/client@5.14.0(prisma@5.14.0))(nodemailer@6.9.13)':
     dependencies:
-      '@auth/core': 0.29.0(nodemailer@6.9.13)
+      '@auth/core': 0.23.0(nodemailer@6.9.13)
       '@prisma/client': 5.14.0(prisma@5.14.0)
     transitivePeerDependencies:
-      - '@simplewebauthn/browser'
-      - '@simplewebauthn/server'
       - nodemailer
 
   '@aw-web-design/x-default-browser@1.4.126':
@@ -15494,6 +15486,41 @@ snapshots:
       jest-util: 29.7.0
       slash: 3.0.0
 
+  '@jest/core@29.7.0(babel-plugin-macros@3.1.0)':
+    dependencies:
+      '@jest/console': 29.7.0
+      '@jest/reporters': 29.7.0
+      '@jest/test-result': 29.7.0
+      '@jest/transform': 29.7.0
+      '@jest/types': 29.6.3
+      '@types/node': 20.12.7
+      ansi-escapes: 4.3.2
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-changed-files: 29.7.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
+      jest-haste-map: 29.7.0
+      jest-message-util: 29.7.0
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-resolve-dependencies: 29.7.0
+      jest-runner: 29.7.0
+      jest-runtime: 29.7.0
+      jest-snapshot: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      jest-watcher: 29.7.0
+      micromatch: 4.0.7
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-ansi: 6.0.1
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
   '@jest/core@29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))':
     dependencies:
       '@jest/console': 29.7.0
@@ -15509,6 +15536,76 @@ snapshots:
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
       jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest-haste-map: 29.7.0
+      jest-message-util: 29.7.0
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-resolve-dependencies: 29.7.0
+      jest-runner: 29.7.0
+      jest-runtime: 29.7.0
+      jest-snapshot: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      jest-watcher: 29.7.0
+      micromatch: 4.0.7
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-ansi: 6.0.1
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  '@jest/core@29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))':
+    dependencies:
+      '@jest/console': 29.7.0
+      '@jest/reporters': 29.7.0
+      '@jest/test-result': 29.7.0
+      '@jest/transform': 29.7.0
+      '@jest/types': 29.6.3
+      '@types/node': 20.12.7
+      ansi-escapes: 4.3.2
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-changed-files: 29.7.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      jest-haste-map: 29.7.0
+      jest-message-util: 29.7.0
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-resolve-dependencies: 29.7.0
+      jest-runner: 29.7.0
+      jest-runtime: 29.7.0
+      jest-snapshot: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      jest-watcher: 29.7.0
+      micromatch: 4.0.7
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-ansi: 6.0.1
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  '@jest/core@29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))':
+    dependencies:
+      '@jest/console': 29.7.0
+      '@jest/reporters': 29.7.0
+      '@jest/test-result': 29.7.0
+      '@jest/transform': 29.7.0
+      '@jest/types': 29.6.3
+      '@types/node': 20.12.7
+      ansi-escapes: 4.3.2
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-changed-files: 29.7.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -15708,17 +15805,16 @@ snapshots:
       url-join: 5.0.0
       url-template: 3.1.1
 
-  '@langchain/community@0.0.43(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)':
+  '@langchain/community@0.0.43(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)':
     dependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
-      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
       expr-eval: 2.0.2
       flat: 5.0.2
-      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       uuid: 9.0.1
       zod: 3.23.8
     optionalDependencies:
-      '@aws-crypto/sha256-js': 3.0.0
       '@aws-sdk/credential-provider-node': 3.556.0(aws-crt@1.21.2)
       '@smithy/eventstream-codec': 2.2.0
       '@smithy/protocol-http': 3.3.0
@@ -15734,18 +15830,17 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/community@0.0.57(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)':
+  '@langchain/community@0.0.57(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)':
     dependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
-      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
       expr-eval: 2.0.2
       flat: 5.0.2
-      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       uuid: 9.0.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
     optionalDependencies:
-      '@aws-crypto/sha256-js': 3.0.0
       '@aws-sdk/credential-provider-node': 3.556.0(aws-crt@1.21.2)
       '@smithy/eventstream-codec': 2.2.0
       '@smithy/protocol-http': 3.3.0
@@ -15761,13 +15856,13 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
+  '@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.12
-      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       ml-distance: 4.0.1
       mustache: 4.2.0
       p-queue: 6.6.2
@@ -15779,9 +15874,9 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/mistralai@0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
+  '@langchain/mistralai@0.0.16(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
     dependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       '@mistralai/mistralai': 0.1.3(encoding@0.1.13)
       zod: 3.23.8
       zod-to-json-schema: 3.23.0(zod@3.23.8)
@@ -15790,9 +15885,9 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/openai@0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))':
+  '@langchain/openai@0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))':
     dependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       js-tiktoken: 1.0.12
       openai: 4.47.2(encoding@0.1.13)
       zod: 3.23.8
@@ -15801,9 +15896,9 @@ snapshots:
       - encoding
       - langchain
 
-  '@langchain/textsplitters@0.0.2(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
+  '@langchain/textsplitters@0.0.2(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))':
     dependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -16575,7 +16670,7 @@ snapshots:
       '@sentry/utils': 7.116.0
       localforage: 1.10.0
 
-  '@sentry/nextjs@7.116.0(encoding@0.1.13)(next@14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2))(react@18.2.0)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))':
+  '@sentry/nextjs@7.116.0(encoding@0.1.13)(next@14.2.2(@babel/core@7.24.6)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2))(react@18.2.0)(webpack@5.91.0(uglify-js@3.17.4))':
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0(rollup@2.78.0)
       '@sentry/core': 7.116.0
@@ -16593,7 +16688,7 @@ snapshots:
       rollup: 2.78.0
       stacktrace-parser: 0.1.10
     optionalDependencies:
-      webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)
+      webpack: 5.91.0(uglify-js@3.17.4)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -17502,10 +17597,22 @@ snapshots:
       '@vitest/utils': 0.34.7
       util: 0.12.5
 
-  '@storybook/jest@0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))':
+  '@storybook/jest@0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))':
     dependencies:
       '@storybook/expect': 28.1.3-5
-      '@testing-library/jest-dom': 6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))
+      '@testing-library/jest-dom': 6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
+      '@types/jest': 28.1.3
+      jest-mock: 27.5.1
+    transitivePeerDependencies:
+      - '@jest/globals'
+      - '@types/bun'
+      - jest
+      - vitest
+
+  '@storybook/jest@0.2.3(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))':
+    dependencies:
+      '@storybook/expect': 28.1.3-5
+      '@testing-library/jest-dom': 6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))
       '@types/jest': 28.1.3
       jest-mock: 27.5.1
     transitivePeerDependencies:
@@ -17850,6 +17957,23 @@ snapshots:
   '@swc/core-win32-x64-msvc@1.5.24':
     optional: true
 
+  '@swc/core@1.5.24':
+    dependencies:
+      '@swc/counter': 0.1.3
+      '@swc/types': 0.1.7
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.5.24
+      '@swc/core-darwin-x64': 1.5.24
+      '@swc/core-linux-arm-gnueabihf': 1.5.24
+      '@swc/core-linux-arm64-gnu': 1.5.24
+      '@swc/core-linux-arm64-musl': 1.5.24
+      '@swc/core-linux-x64-gnu': 1.5.24
+      '@swc/core-linux-x64-musl': 1.5.24
+      '@swc/core-win32-arm64-msvc': 1.5.24
+      '@swc/core-win32-ia32-msvc': 1.5.24
+      '@swc/core-win32-x64-msvc': 1.5.24
+    optional: true
+
   '@swc/core@1.5.24(@swc/helpers@0.5.5)':
     dependencies:
       '@swc/counter': 0.1.3
@@ -17923,7 +18047,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))':
+  '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))':
     dependencies:
       '@adobe/css-tools': 4.3.3
       '@babel/runtime': 7.24.6
@@ -17936,7 +18060,22 @@ snapshots:
     optionalDependencies:
       '@jest/globals': 29.7.0
       '@types/jest': 28.1.3
-      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
+
+  '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@28.1.3)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))':
+    dependencies:
+      '@adobe/css-tools': 4.3.3
+      '@babel/runtime': 7.24.6
+      aria-query: 5.3.0
+      chalk: 3.0.0
+      css.escape: 1.5.1
+      dom-accessibility-api: 0.6.3
+      lodash: 4.17.21
+      redent: 3.0.0
+    optionalDependencies:
+      '@jest/globals': 29.7.0
+      '@types/jest': 28.1.3
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
 
   '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))':
     dependencies:
@@ -17952,6 +18091,21 @@ snapshots:
       '@jest/globals': 29.7.0
       '@types/jest': 29.5.12
       jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+
+  '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))':
+    dependencies:
+      '@adobe/css-tools': 4.3.3
+      '@babel/runtime': 7.24.6
+      aria-query: 5.3.0
+      chalk: 3.0.0
+      css.escape: 1.5.1
+      dom-accessibility-api: 0.6.3
+      lodash: 4.17.21
+      redent: 3.0.0
+    optionalDependencies:
+      '@jest/globals': 29.7.0
+      '@types/jest': 29.5.12
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
 
   '@testing-library/user-event@14.5.2(@testing-library/dom@9.3.4)':
     dependencies:
@@ -20044,6 +20198,21 @@ snapshots:
       safe-buffer: 5.2.1
       sha.js: 2.4.11
 
+  create-jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0):
+    dependencies:
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
+      jest-util: 29.7.0
+      prompts: 2.4.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
   create-jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       '@jest/types': 29.6.3
@@ -20051,6 +20220,36 @@ snapshots:
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest-util: 29.7.0
+      prompts: 2.4.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  create-jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      jest-util: 29.7.0
+      prompts: 2.4.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  create-jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      exit: 0.1.2
+      graceful-fs: 4.2.11
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -20119,19 +20318,6 @@ snapshots:
       postcss-selector-parser: 6.1.0
       postcss-value-parser: 4.2.0
 
-  css-loader@6.11.0(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.38)
-      postcss: 8.4.38
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.38)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.38)
-      postcss-modules-scope: 3.2.0(postcss@8.4.38)
-      postcss-modules-values: 4.0.0(postcss@8.4.38)
-      postcss-value-parser: 4.2.0
-      semver: 7.6.2
-    optionalDependencies:
-      webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)
-
   css-loader@6.11.0(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.38)
@@ -20144,6 +20330,19 @@ snapshots:
       semver: 7.6.2
     optionalDependencies:
       webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)
+
+  css-loader@6.11.0(webpack@5.91.0(uglify-js@3.17.4)):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.38)
+      postcss: 8.4.38
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.38)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.38)
+      postcss-modules-scope: 3.2.0(postcss@8.4.38)
+      postcss-modules-values: 4.0.0(postcss@8.4.38)
+      postcss-value-parser: 4.2.0
+      semver: 7.6.2
+    optionalDependencies:
+      webpack: 5.91.0(uglify-js@3.17.4)
 
   css-prefers-color-scheme@9.0.1(postcss@8.4.38):
     dependencies:
@@ -21109,13 +21308,13 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jest@27.6.0(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
+  eslint-plugin-jest@27.6.0(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))(typescript@5.4.5):
     dependencies:
       '@typescript-eslint/utils': 5.62.0(eslint@8.57.0)(typescript@5.4.5)
       eslint: 8.57.0
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
-      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -22846,6 +23045,25 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
+  jest-cli@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)
+      '@jest/test-result': 29.7.0
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      create-jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
+      exit: 0.1.2
+      import-local: 3.1.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
   jest-cli@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
@@ -22864,6 +23082,74 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+
+  jest-cli@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      '@jest/test-result': 29.7.0
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      create-jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      exit: 0.1.2
+      import-local: 3.1.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  jest-cli@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
+      '@jest/test-result': 29.7.0
+      '@jest/types': 29.6.3
+      chalk: 4.1.2
+      create-jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
+      exit: 0.1.2
+      import-local: 3.1.0
+      jest-config: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  jest-config@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0):
+    dependencies:
+      '@babel/core': 7.24.6
+      '@jest/test-sequencer': 29.7.0
+      '@jest/types': 29.6.3
+      babel-jest: 29.7.0(@babel/core@7.24.6)
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.7.0(babel-plugin-macros@3.1.0)
+      jest-environment-node: 29.7.0
+      jest-get-type: 29.6.3
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-runner: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      micromatch: 4.0.7
+      parse-json: 5.2.0
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 20.12.7
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
 
   jest-config@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
@@ -22892,6 +23178,68 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.12.7
       ts-node: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
+  jest-config@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@babel/core': 7.24.6
+      '@jest/test-sequencer': 29.7.0
+      '@jest/types': 29.6.3
+      babel-jest: 29.7.0(@babel/core@7.24.6)
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.7.0(babel-plugin-macros@3.1.0)
+      jest-environment-node: 29.7.0
+      jest-get-type: 29.6.3
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-runner: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      micromatch: 4.0.7
+      parse-json: 5.2.0
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 20.12.7
+      ts-node: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
+  jest-config@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@babel/core': 7.24.6
+      '@jest/test-sequencer': 29.7.0
+      '@jest/types': 29.6.3
+      babel-jest: 29.7.0(@babel/core@7.24.6)
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.7.0(babel-plugin-macros@3.1.0)
+      jest-environment-node: 29.7.0
+      jest-get-type: 29.6.3
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-runner: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      micromatch: 4.0.7
+      parse-json: 5.2.0
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 20.12.7
+      ts-node: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -23012,9 +23360,9 @@ snapshots:
       slash: 3.0.0
       stack-utils: 2.0.6
 
-  jest-mock-extended@3.0.6(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
+  jest-mock-extended@3.0.6(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
-      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       ts-essentials: 9.4.2(typescript@5.4.5)
       typescript: 5.4.5
 
@@ -23174,12 +23522,48 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
+  jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)
+      '@jest/types': 29.6.3
+      import-local: 3.1.0
+      jest-cli: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
   jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
       '@jest/types': 29.6.3
       import-local: 3.1.0
       jest-cli: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+      '@jest/types': 29.6.3
+      import-local: 3.1.0
+      jest-cli: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5))
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - supports-color
+      - ts-node
+
+  jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
+    dependencies:
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
+      '@jest/types': 29.6.3
+      import-local: 3.1.0
+      jest-cli: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -23494,19 +23878,19 @@ snapshots:
 
   known-css-properties@0.29.0: {}
 
-  langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0):
+  langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1(encoding@0.1.13)
-      '@langchain/community': 0.0.57(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
-      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
-      '@langchain/textsplitters': 0.0.2(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/community': 0.0.57(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(encoding@0.1.13)(html-to-text@9.0.5)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      '@langchain/openai': 0.0.34(encoding@0.1.13)(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))
+      '@langchain/textsplitters': 0.0.2(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.12
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      langsmith: 0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
@@ -23599,16 +23983,16 @@ snapshots:
 
   langchainhub@0.0.11: {}
 
-  ? langsmith@0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
-  : dependencies:
+  langsmith@0.1.30(@langchain/core@0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)))(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13)):
+    dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
       p-queue: 6.6.2
       p-retry: 4.6.2
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
-      langchain: 0.1.37(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
+      '@langchain/core': 0.1.63(langchain@0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0))(openai@4.47.2(encoding@0.1.13))
+      langchain: 0.1.37(@aws-sdk/client-s3@3.556.0(aws-crt@1.21.2))(@aws-sdk/credential-provider-node@3.556.0(aws-crt@1.21.2))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(encoding@0.1.13)(fast-xml-parser@4.2.5)(handlebars@4.7.8)(html-to-text@9.0.5)(ignore@5.3.1)(jsdom@20.0.3)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.47.2(encoding@0.1.13))(ws@8.17.0)
       openai: 4.47.2(encoding@0.1.13)
 
   language-subtag-registry@0.3.23: {}
@@ -24627,6 +25011,32 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+  next@14.2.2(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2):
+    dependencies:
+      '@next/env': 14.2.2
+      '@swc/helpers': 0.5.5
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001623
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.1.1(babel-plugin-macros@3.1.0)(react@18.2.0)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.2.2
+      '@next/swc-darwin-x64': 14.2.2
+      '@next/swc-linux-arm64-gnu': 14.2.2
+      '@next/swc-linux-arm64-musl': 14.2.2
+      '@next/swc-linux-x64-gnu': 14.2.2
+      '@next/swc-linux-x64-musl': 14.2.2
+      '@next/swc-win32-arm64-msvc': 14.2.2
+      '@next/swc-win32-ia32-msvc': 14.2.2
+      '@next/swc-win32-x64-msvc': 14.2.2
+      sass: 1.77.2
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
   next@14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.77.2):
     dependencies:
       '@next/env': 14.2.2
@@ -25475,23 +25885,13 @@ snapshots:
       '@csstools/utilities': 1.0.0(postcss@8.4.38)
       postcss: 8.4.38
 
-  postcss-load-config@3.1.4(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)):
+  postcss-load-config@3.1.4(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       lilconfig: 2.1.0
       yaml: 1.10.2
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)
-
-  postcss-loader@7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)):
-    dependencies:
-      cosmiconfig: 8.3.6(typescript@5.4.5)
-      jiti: 1.21.0
-      postcss: 8.4.38
-      semver: 7.6.2
-      webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)
-    transitivePeerDependencies:
-      - typescript
+      ts-node: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
 
   postcss-loader@7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)):
     dependencies:
@@ -25500,6 +25900,16 @@ snapshots:
       postcss: 8.4.38
       semver: 7.6.2
       webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)
+    transitivePeerDependencies:
+      - typescript
+
+  postcss-loader@7.3.4(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(uglify-js@3.17.4)):
+    dependencies:
+      cosmiconfig: 8.3.6(typescript@5.4.5)
+      jiti: 1.21.0
+      postcss: 8.4.38
+      semver: 7.6.2
+      webpack: 5.91.0(uglify-js@3.17.4)
     transitivePeerDependencies:
       - typescript
 
@@ -27102,13 +27512,13 @@ snapshots:
 
   strnum@1.0.5: {}
 
-  style-loader@3.3.4(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)):
-    dependencies:
-      webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)
-
   style-loader@3.3.4(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)):
     dependencies:
       webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)
+
+  style-loader@3.3.4(webpack@5.91.0(uglify-js@3.17.4)):
+    dependencies:
+      webpack: 5.91.0(uglify-js@3.17.4)
 
   style-search@0.1.0: {}
 
@@ -27136,6 +27546,13 @@ snapshots:
       react: 18.2.0
     optionalDependencies:
       '@babel/core': 7.24.6
+      babel-plugin-macros: 3.1.0
+
+  styled-jsx@5.1.1(babel-plugin-macros@3.1.0)(react@18.2.0):
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+    optionalDependencies:
       babel-plugin-macros: 3.1.0
 
   styled-jsx@5.1.1(react@18.2.0):
@@ -27349,19 +27766,6 @@ snapshots:
       supports-hyperlinks: 2.3.0
     optional: true
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.31.0
-      webpack: 5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)
-    optionalDependencies:
-      '@swc/core': 1.5.24(@swc/helpers@0.5.5)
-      esbuild: 0.18.20
-      uglify-js: 3.17.4
-
   terser-webpack-plugin@5.3.10(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -27373,6 +27777,17 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.5.24(@swc/helpers@0.5.5)
       esbuild: 0.18.20
+
+  terser-webpack-plugin@5.3.10(uglify-js@3.17.4)(webpack@5.91.0(uglify-js@3.17.4)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.31.0
+      webpack: 5.91.0(uglify-js@3.17.4)
+    optionalDependencies:
+      uglify-js: 3.17.4
 
   terser@5.31.0:
     dependencies:
@@ -27479,7 +27894,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.4.5
 
-  ts-jest@29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(esbuild@0.18.20)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
+  ts-jest@29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
@@ -27495,13 +27910,12 @@ snapshots:
       '@babel/core': 7.24.6
       '@jest/types': 29.6.3
       babel-jest: 29.7.0(@babel/core@7.24.6)
-      esbuild: 0.18.20
 
-  ts-jest@29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
+  ts-jest@29.1.2(@babel/core@7.24.6)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.6))(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      jest: 29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
@@ -27533,6 +27947,45 @@ snapshots:
       yn: 3.1.1
     optionalDependencies:
       '@swc/core': 1.5.24(@swc/helpers@0.5.5)
+
+  ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.7)(typescript@5.4.5):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.12.7
+      acorn: 8.11.3
+      acorn-walk: 8.3.2
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.4.5
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optionalDependencies:
+      '@swc/core': 1.5.24
+
+  ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.12.7
+      acorn: 8.11.3
+      acorn-walk: 8.3.2
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.4.5
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optional: true
 
   ts-pnp@1.2.0(typescript@5.4.5):
     optionalDependencies:
@@ -27682,7 +28135,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typescript-plugin-css-modules@5.1.0(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5):
+  typescript-plugin-css-modules@5.1.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
       '@types/postcss-modules-local-by-default': 4.0.2
       '@types/postcss-modules-scope': 3.0.4
@@ -27691,7 +28144,7 @@ snapshots:
       less: 4.2.0
       lodash.camelcase: 4.3.0
       postcss: 8.4.38
-      postcss-load-config: 3.1.4(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24(@swc/helpers@0.5.5))(@types/node@20.12.7)(typescript@5.4.5))
+      postcss-load-config: 3.1.4(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       postcss-modules-extract-imports: 3.1.0(postcss@8.4.38)
       postcss-modules-local-by-default: 4.0.5(postcss@8.4.38)
       postcss-modules-scope: 3.2.0(postcss@8.4.38)
@@ -28100,7 +28553,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4):
+  webpack@5.91.0(uglify-js@3.17.4):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -28123,7 +28576,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4)(webpack@5.91.0(@swc/core@1.5.24(@swc/helpers@0.5.5))(esbuild@0.18.20)(uglify-js@3.17.4))
+      terser-webpack-plugin: 5.3.10(uglify-js@3.17.4)(webpack@5.91.0(uglify-js@3.17.4))
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
