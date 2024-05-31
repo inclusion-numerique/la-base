@@ -50,8 +50,10 @@ const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
 
   const streamingResponseMessageRef = useRef<HTMLDivElement>(null)
 
-  const onSubmit = form.handleSubmit((data) => {
-    if (!data.prompt?.trim()) return
+  const onSubmit = form.handleSubmit(async (data) => {
+    if (!data.prompt?.trim()) {
+      return
+    }
 
     setError(null)
     const controller = new AbortController() // To be able to cancel the fetch request
@@ -59,78 +61,81 @@ const ChatSession = ({ chatSession }: { chatSession: ChatSessionData }) => {
 
     setIsSendingPrompt(true)
 
-    fetch(`/chat/${chatSession.id}/prompt`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'text/event-stream',
-      },
-      body: JSON.stringify({ prompt: data.prompt }),
-      signal: controller.signal,
-    })
-      .then(async (response) => {
-        setIsSendingPrompt(false)
-        form.reset({ prompt: '' })
+    try {
+      const response = await fetch(`/chat/${chatSession.id}/prompt`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream',
+        },
+        body: JSON.stringify({ prompt: data.prompt }),
+        signal: controller.signal,
+      })
 
-        setMessages((previousMessages) => [
-          ...previousMessages,
-          {
-            id: new Date().toISOString(),
-            content: data.prompt,
-            role: 'User',
-            sessionId: chatSession.id,
-            created,
-          },
-        ])
+      setIsSendingPrompt(false)
+      form.reset({ prompt: '' })
 
-        setIsStreamingResponse(true)
+      const created = new Date()
 
-        const created = new Date()
+      setMessages((previousMessages) => [
+        ...previousMessages,
+        {
+          id: new Date().toISOString(),
+          content: data.prompt,
+          role: 'User',
+          sessionId: chatSession.id,
+          created,
+        },
+      ])
 
-        const reader = response.body?.getReader()
-        let streamContent = '' // To accumulate streaming response content
+      setIsStreamingResponse(true)
 
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-          if (!reader) break
-          // eslint-disable-next-line no-await-in-loop
-          const { done, value } = await reader.read()
-          if (done) break
+      const reader = response.body?.getReader()
+      let streamContent = '' // To accumulate streaming response content
 
-          const text = new TextDecoder().decode(value)
-          streamContent += text
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        if (!reader) break
+        // eslint-disable-next-line no-await-in-loop
+        const { done, value } = await reader.read()
+        if (done) break
 
-          if (streamingResponseMessageRef.current) {
-            streamingResponseMessageRef.current.innerHTML =
-              renderMarkdown(streamContent)
-          }
+        const text = new TextDecoder().decode(value)
+        streamContent += text
 
-          scrollToBottomOfMessages()
+        if (streamingResponseMessageRef.current) {
+          streamingResponseMessageRef.current.innerHTML =
+            renderMarkdown(streamContent)
         }
 
-        setIsStreamingResponse(false)
-        streamingResponseMessageRef.current &&
-          (streamingResponseMessageRef.current.textContent = '')
+        scrollToBottomOfMessages()
+      }
 
-        setMessages((previousMessages) => [
-          ...previousMessages,
-          {
-            id: new Date().toISOString(),
-            content: streamContent,
-            role: 'Assistant',
-            sessionId: chatSession.id,
-            created,
-          },
-        ])
-      })
-      .catch((error) => {
-        console.error('Fetch error:', error)
-        setError('Une erreur est survenue')
-        setIsStreamingResponse(false)
-        setIsSendingPrompt(false)
-        streamingResponseMessageRef.current &&
-          (streamingResponseMessageRef.current.textContent = '')
-      })
+      setIsStreamingResponse(false)
+
+      if (streamingResponseMessageRef.current) {
+        streamingResponseMessageRef.current.textContent = ''
+      }
+
+      setMessages((previousMessages) => [
+        ...previousMessages,
+        {
+          id: new Date().toISOString(),
+          content: streamContent,
+          role: 'Assistant',
+          sessionId: chatSession.id,
+          created,
+        },
+      ])
+    } catch (fetchError) {
+      console.error('Fetch error:', fetchError)
+      setError('Une erreur est survenue')
+      setIsStreamingResponse(false)
+      setIsSendingPrompt(false)
+      if (streamingResponseMessageRef.current) {
+        streamingResponseMessageRef.current.textContent = ''
+      }
+    }
 
     // Cleanup function to abort fetch on unmount
     return () => controller.abort()
