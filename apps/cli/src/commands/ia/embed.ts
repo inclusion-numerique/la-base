@@ -147,7 +147,7 @@ export const embedHelp = new Command()
       (chunk, index) => ({
         id: index.toString(), // Génération d'un identifiant unique pour chaque document
         content: chunk.pageContent, // Le contenu du chunk
-        source: chunk.metadata.source, // La source du document
+        source: chunk.metadata.source as string, // La source du document
       }),
     )
 
