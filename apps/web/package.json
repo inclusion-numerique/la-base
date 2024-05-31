@@ -44,6 +44,7 @@
     "@gouvfr-anct/lieux-de-mediation-numerique": "^2.0.1",
     "@gouvfr-anct/timetable-to-osm-opening-hours": "^2.1.0",
     "@gouvfr/dsfr": "^1.12.1",
+    "@langchain/core": "^0.1.60",
     "@hookform/resolvers": "^3.9.0",
     "@langchain/mistralai": "^0.0.16",
     "@mistralai/mistralai": "^1.1.0",
