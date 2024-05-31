@@ -1,12 +1,13 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "nativeDistinct", "relationJoins"]
+  previewFeatures = ["fullTextSearch", "nativeDistinct", "relationJoins", "postgresqlExtensions"]
   binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 // Account, Session, User and VerificationToken
@@ -79,23 +80,24 @@ model User {
   deleted             DateTime?
   hasSeenV2Onboarding DateTime? @map("has_seen_v2_onboarding")
 
-  created             DateTime               @default(now())
-  updated             DateTime               @default(now())
-  ownedBases          Base[]
-  createdResources    Resource[]
-  uploads             Upload[]
-  resourceEvent       ResourceEvent[]
-  bases               BaseMembers[]
-  resources           ResourceContributors[]
-  collections         Collection[]
-  resourceViews       ResourceView[]
-  savedCollections    SavedCollection[]
-  sentResourceReports ResourceReport[]
-  baseFollows         BaseFollow[]
-  profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
-  followedBy          ProfileFollow[]        @relation(name: "profile_follow_followed")
-  searches            SearchExecution[]
-  feedbacks           Feedback[]
+  created              DateTime               @default(now())
+  updated              DateTime               @default(now())
+  ownedBases           Base[]
+  createdResources     Resource[]
+  uploads              Upload[]
+  resourceEvent        ResourceEvent[]
+  bases                BaseMembers[]
+  resources            ResourceContributors[]
+  collections          Collection[]
+  resourceViews        ResourceView[]
+  savedCollections     SavedCollection[]
+  sentResourceReports  ResourceReport[]
+  baseFollows          BaseFollow[]
+  profileFollows       ProfileFollow[]        @relation(name: "profile_follow_follower")
+  followedBy           ProfileFollow[]        @relation(name: "profile_follow_followed")
+  searches             SearchExecution[]
+  feedbacks            Feedback[]
+  AssistantChatSession AssistantChatSession[]
 
   @@map("users")
 }
@@ -131,6 +133,7 @@ model Base {
   createdById               String  @map("created_by_id") @db.Uuid
   isPublic                  Boolean @default(false) @map("is_public")
 
+
   email         String  @default("contact@contact.fr")
   emailIsPublic Boolean @default(false) @map("email_is_public")
   website       String?
@@ -146,6 +149,8 @@ model Base {
   collections      Collection[]
   savedCollections SavedCollection[]
   followedBy       BaseFollow[]
+
+  embeddingBase   Unsupported("vector(1024)")? @map("embedding_base")
 
   @@index([createdById])
   @@map("bases")
@@ -319,6 +324,9 @@ model Resource {
   collections  CollectionResource[]
   views        ResourceView[]
   reports      ResourceReport[]
+
+  embedding   Unsupported("vector(1024)")?
+
 
   @@index([baseId])
   @@index([createdById])
@@ -728,6 +736,44 @@ model Feedback {
   @@index([sentById])
   @@map("feedback")
 }
+
+model AssistantChatSession {
+  id          String  @id @default(uuid()) @db.Uuid
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+  createdById String? @map("created_by_id") @db.Uuid
+
+  context String
+
+  created  DateTime               @default(now())
+  updated  DateTime               @default(now())
+  messages AssistantChatMessage[]
+}
+
+enum AssistantChatRole {
+  User      @map("user")
+  Assistant @map("assistant")
+}
+
+model AssistantChatMessage {
+  id        String               @id @default(uuid()) @db.Uuid
+  role      AssistantChatRole
+  session   AssistantChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String               @map("session_id") @db.Uuid
+  content   String
+  created   DateTime             @default(now())
+}
+
+
+model DocumentHelp {
+  id        String                 @id @default(cuid())
+  content   String
+  source    String
+  vector    Unsupported("vector")?
+
+  @@map("help_center")
+
+}
+
 
 model JobExecution {
   id String @id @default(uuid()) @db.Uuid

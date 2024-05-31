@@ -14,6 +14,11 @@ import { setupDatabaseSecret } from '@app/cli/commands/secrets/setupDatabaseSecr
 import { locallyRestoreLatestMainBackup } from '@app/cli/commands/infrastructure/locallyRestoreLatestMainBackup'
 import { addConseillersNumeriquesToBases } from '@app/cli/commands/domain/addConseillersNumeriquesToBases'
 import { removeInactiveConseillersNumeriques } from '@app/cli/commands/domain/removeInactiveConseillersNumeriques'
+import {
+  embedBases,
+  embedHelp,
+  embedResources,
+} from '@app/cli/commands/ia/embed'
 
 const program = new Command()
 
@@ -32,5 +37,8 @@ program.addCommand(checkDeploymentStatus)
 program.addCommand(locallyRestoreLatestMainBackup)
 program.addCommand(addConseillersNumeriquesToBases)
 program.addCommand(removeInactiveConseillersNumeriques)
+program.addCommand(embedResources)
+program.addCommand(embedBases)
+program.addCommand(embedHelp)
 
 program.parse()

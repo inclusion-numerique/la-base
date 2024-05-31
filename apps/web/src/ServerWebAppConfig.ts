@@ -59,4 +59,7 @@ export const ServerWebAppConfig = {
   Database: {
     instanceId: process.env.DATABASE_INSTANCE_ID ?? '', // like fr-par/uuid
   },
+  Mistral: {
+    apiKey: process.env.MISTRAL_API_KEY ?? '',
+  },
 }

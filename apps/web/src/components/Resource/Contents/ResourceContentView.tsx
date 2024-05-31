@@ -51,4 +51,6 @@ const ResourceContentView = ({
   }
 }
 
+// test CI
+
 export default ResourceContentView
