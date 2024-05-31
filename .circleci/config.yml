@@ -17,7 +17,7 @@ executors:
           TZ: 'UTC'
           CI_PG_ADMIN_URL: postgresql://postgres@localhost
           CI_DATABASE_URL: postgresql://postgres@localhost/test
-      - image: cimg/postgres:14.12-postgis
+      - image: huguesm/circleci-postgres:14.12-vector
         environment:
           POSTGRES_USER: postgres
   node-browsers:
@@ -35,7 +35,7 @@ executors:
         environment:
           MAILDEV_INCOMING_USER: mailuser
           MAILDEV_INCOMING_PASS: mailpassword
-      - image: cimg/postgres:14.12-postgis
+      - image: huguesm/circleci-postgres:14.12-vector
         environment:
           POSTGRES_USER: postgres
 
