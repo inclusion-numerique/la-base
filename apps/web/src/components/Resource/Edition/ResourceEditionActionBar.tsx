@@ -4,13 +4,15 @@ import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { useOnClickOutside } from 'usehooks-ts'
-import { Resource } from '@app/web/server/resources/getResource'
 import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import ResourcePublishedStateBadge from '@app/web/components/Resource/Edition/ResourcePublishedStateBadge'
 import ResourceEditionStateBadge from '@app/web/components/Resource/Edition/ResourceEditionStateBadge'
 import { deleteResourceModalProps } from '@app/web/components/Resource/Edition/DeleteResourceModalContent'
-import InviteResourceContributors from '@app/web/components/Resource/Contributors/InviteResourceContributors'
+import { Resource } from '@app/web/server/resources/getResource'
+import InviteContributorModal from '../Contributors/InviteContributorModal'
+import OpenInviteContributorModalButton from '../Contributors/OpenInviteContributorModalButton'
+
 import styles from './ResourceEditionActionBar.module.css'
 
 const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
@@ -18,15 +20,6 @@ const { Component: DeleteResourceModal, open: openDeleteResourceModal } =
     id: 'delete-resource',
     isOpenedByDefault: false,
   })
-
-const {
-  Component: InviteContributorsModal,
-  open: openInviteContributorsModal,
-  close: closeInviteContributorsModal,
-} = createModal({
-  id: 'invite-contributors',
-  isOpenedByDefault: false,
-})
 
 const ResourceEditionActionBar = ({
   resource,
@@ -115,19 +108,16 @@ const ResourceEditionActionBar = ({
                     <hr className={styles.separator} />
                   </>
                 )}
-                <Button
-                  className={styles.collapseButton}
-                  type="button"
+                <OpenInviteContributorModalButton
+                  resource={resource}
                   priority="tertiary no outline"
-                  iconId="fr-icon-user-add-line"
-                  nativeButtonProps={{
-                    'data-testid':
-                      'edition-action-bar-invite-contributors-modal',
-                  }}
-                  onClick={openInviteContributorsModal}
                 >
+                  <span
+                    className="ri-user-add-line fr-mr-1w fr-text-label--blue-france"
+                    aria-hidden
+                  />
                   Inviter un contributeur
-                </Button>
+                </OpenInviteContributorModalButton>
                 <hr className={styles.separator} />
                 <Button
                   className={styles.collapseButton}
@@ -169,19 +159,7 @@ const ResourceEditionActionBar = ({
         </div>
       </div>
       <DeleteResourceModal {...deleteResourceModalProps(onDelete)} />
-      <InviteContributorsModal
-        title="Inviter des contributeurs"
-        className="fr-modal--overflow-visible"
-      >
-        <p className="fr-mb-4w">
-          Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs
-          et supprimer la ressource.
-        </p>
-        <InviteResourceContributors
-          resource={resource}
-          onSuccess={closeInviteContributorsModal}
-        />
-      </InviteContributorsModal>
+      <InviteContributorModal />
     </>
   )
 }

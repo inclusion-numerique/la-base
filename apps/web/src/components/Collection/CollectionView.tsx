@@ -1,10 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
 import classNames from 'classnames'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
-import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResource'
+import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import Images from '@app/web/components/Collection/Images'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
@@ -14,7 +15,10 @@ import {
   resourceAuthorization,
   ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
+import { getServerUrl } from '@app/web/utils/baseUrl'
+import CopyLinkButton from '../CopyLinkButton'
 import styles from './CollectionView.module.css'
+import SaveCollectionButton from './SaveCollectionButton'
 
 const CollectionView = ({
   collection,
@@ -32,6 +36,34 @@ const CollectionView = ({
       attributionWording="collection"
     />
     <hr className="fr-separator-4v fr-separator-md-8v" />
+    <div className="fr-flex fr-flex-gap-2v fr-mb-2w fr-hidden-md">
+      {canWrite && (
+        <Link
+          href={`./${collection.slug}/modifier`}
+          className={classNames(
+            'fr-btn',
+            'fr-btn--sm',
+            `fr-btn--secondary`,
+            'fr-icon-edit-line',
+            'fr-btn--icon-right',
+          )}
+        >
+          Modifier
+        </Link>
+      )}
+
+      <SaveCollectionButton
+        priority="tertiary"
+        user={user}
+        collection={collection}
+        context="view"
+      />
+      <CopyLinkButton
+        size="small"
+        priority="tertiary"
+        url={getServerUrl(`/collections/${collection.slug}`, true)}
+      />
+    </div>
     <div className="fr-flex fr-justify-content-space-between fr-flex-gap-4v fr-direction-column fr-direction-md-row-reverse">
       <div className={classNames(styles.imageContainer)}>
         <Images
@@ -79,7 +111,7 @@ const CollectionView = ({
     ))}
     {!!user && <SaveResourceInCollectionModal user={user} />}
     {!!user && <SaveCollectionModal user={user} />}
-    {!!user && <DeleteResource />}
+    <DeleteResourceModal />
   </div>
 )
 

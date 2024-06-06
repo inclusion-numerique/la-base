@@ -6,6 +6,7 @@ const resourceSections = [
   { id: 'visibilite', title: 'Visibilité de la ressource' },
   { id: 'indexation', title: 'Indexation' },
   { id: 'contributeurs', title: 'Contributeurs' },
+  { id: 'avis', title: 'Avis sur la ressource' },
   { id: 'supprimer', title: 'Supprimer la ressource' },
 ]
 

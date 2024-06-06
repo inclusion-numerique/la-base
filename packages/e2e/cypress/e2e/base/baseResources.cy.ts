@@ -1,5 +1,5 @@
 import { defaultTestBaseSlug } from '@app/e2e/support/given/givenBase'
-import { appUrl } from '../../support/helpers'
+import { appUrl } from '@app/e2e/support/helpers'
 import { cleanUpAndCreateTestBase } from '../resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses ressources', () => {

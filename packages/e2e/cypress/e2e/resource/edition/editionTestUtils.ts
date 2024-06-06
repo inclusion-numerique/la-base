@@ -11,6 +11,7 @@ import {
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
 import { givenCollection } from '@app/e2e/support/given/givenCollection'
+import { addFeedbackToResource } from '../avis/avisTestUtils'
 
 export const cleanUpAndCreateTestResource = (
   publicBase?: boolean,
@@ -42,6 +43,7 @@ export const cleanUpAndCreateTestPublishedResource = ({
   visitResourcePage,
   additionalSetup,
   signinAsResourceCreator,
+  feedbacks = [],
 }: {
   visitResourcePage?: boolean
   publicBase?: boolean
@@ -54,6 +56,11 @@ export const cleanUpAndCreateTestPublishedResource = ({
     user: Pick<SessionUser, 'id'>
     base: CreateBaseInput
   }) => void
+  feedbacks?: {
+    comment?: string
+    rate: 1 | 2 | 3 | 4
+    user: Partial<CreateUserInput>
+  }[]
 }) => {
   cy.execute('deleteAllData', {})
   const user = givenUser()
@@ -73,6 +80,11 @@ export const cleanUpAndCreateTestPublishedResource = ({
   cy.createBase(base)
   cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
     additionalSetup?.({ user, base })
+    if (feedbacks.length > 0) {
+      addFeedbackToResource({ slug, feedbacks })
+      if (signinAsResourceCreator) cy.signin(user)
+    }
+
     if (visitResourcePage) {
       cy.visit(`/ressources/${slug}`)
       cy.dsfrShouldBeStarted()

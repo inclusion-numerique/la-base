@@ -4,7 +4,7 @@ describe("Page d'accueil", () => {
   it("La page d'accueil s'affiche correctement, avec les styles du DSFR", () => {
     cy.visit('/')
     cy.dsfrStylesShouldBeLoaded()
-    cy.get('.fr-header__operator a').should(
+    cy.get('.fr-header__brand a').should(
       'contain',
       'Les Bases du numérique d’intérêt général',
     )
@@ -27,13 +27,16 @@ describe("Page d'accueil", () => {
     cy.createUserAndSignin(user)
     cy.visit('/')
     cy.dsfrStylesShouldBeLoaded()
-    cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
+    cy.get('.fr-header__tools')
+      .filter(':visible')
+      .should('not.contain', 'Se connecter')
     cy.dsfrShouldBeStarted()
     cy.dsfrCollapsesShouldBeBound()
-    cy.get('.fr-header__tools button[aria-controls="header-user-menu"]')
+    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+      .filter(':visible')
       .contains(user.name)
       .click()
-    cy.get('#header-user-menu').should('be.visible').contains('Se déconnecter')
+    cy.get('.fr-dropdown__pane').contains('Se déconnecter')
   })
 
   it('Un utilisateur avec un token invalide peut accéder au site', () => {

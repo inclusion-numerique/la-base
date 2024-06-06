@@ -3,7 +3,6 @@ import { BasePageData } from '@app/web/server/bases/getBase'
 import BaseAdminMemberCard from '@app/web/components/Base/Members/BaseAdminMemberCard'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import InviteBaseMemberButton from '@app/web/components/Base/Members/InviteBaseMemberButton'
-import styles from './BaseMembers.module.css'
 
 const BaseMembers = ({
   base,
@@ -21,11 +20,19 @@ const BaseMembers = ({
     base.members.filter((member) => member.isAdmin).length > 1
 
   return (
-    <div className={styles.container} data-testid="base-members">
-      <div className={styles.header}>
-        <h2 className="fr-mb-0 fr-h3">Membres · {base.members.length}</h2>
+    <div data-testid="base-members">
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+        <div className="fr-col-sm-auto fr-col-12">
+          <h2 className="fr-mb-0 fr-h3">Membres · {base.members.length}</h2>
+        </div>
         {canAddMember && (
-          <InviteBaseMemberButton base={base} canAddAdmin={canAddAdmin} />
+          <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+            <InviteBaseMemberButton
+              className="fr-width-full fr-justify-content-center"
+              base={base}
+              canAddAdmin={canAddAdmin}
+            />
+          </div>
         )}
       </div>
       {canChangeMemberRole
@@ -43,6 +50,8 @@ const BaseMembers = ({
               key={member.member.id}
               user={null}
               canFollow={false}
+              isAdmin={member.isAdmin}
+              displayProfileMetadata={false}
             />
           ))}
     </div>

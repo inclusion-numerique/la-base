@@ -97,6 +97,15 @@ import {
   ResourceSideEffectContext,
 } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import {
+  PublicFeedbackChanged,
+  ChangePublicFeedbackCommandValidation,
+} from './ChangePublicFeedback'
+import {
+  applyPublicFeedbackChanged,
+  handleChangePublicFeedback,
+  onPublicFeedbackChanged,
+} from './ChangePublicFeedback.server'
 import { DeleteCommandValidation, ResourceDeleted } from './DeleteResource'
 import {
   applyResourceDeleted,
@@ -147,6 +156,7 @@ export const ResourceMutationCommandsValidation = z.discriminatedUnion('name', [
   ChangeBaseCommandValidation,
   ChangeIndexationCommandValidation,
   ChangeVisibilityCommandValidation,
+  ChangePublicFeedbackCommandValidation,
   AddContentCommandValidation,
   EditContentCommandValidation,
   ReorderContentCommandValidation,
@@ -184,6 +194,7 @@ export const ResourceMutationCommandHandlers: {
   ChangeBase: handleChangeBase,
   ChangeIndexation: handleChangeIndexation,
   ChangeVisibility: handleChangeVisibility,
+  ChangePublicFeedback: handleChangePublicFeedback,
   AddContent: handleAddContent,
   EditContent: handleEditContent,
   ReorderContent: handleReorderContent,
@@ -204,6 +215,7 @@ export type HistoryResourceEvent =
   | BaseChanged
   | VisibilityChanged
   | IndexationChanged
+  | PublicFeedbackChanged
   | TitleAndDescriptionEdited
   | ImageEdited
   | ContentAdded
@@ -247,6 +259,7 @@ export const MutationEventAppliers: {
   BaseChanged: applyBaseChanged,
   IndexationChanged: applyIndexationChanged,
   VisibilityChanged: applyVisibilityChanged,
+  PublicFeedbackChanged: applyPublicFeedbackChanged,
   Published: applyResourcePublished,
   Republished: applyResourceRepublished,
   Deleted: applyResourceDeleted,
@@ -263,6 +276,7 @@ export const EventSideEffects: {
   BaseChanged: onBaseChanged,
   IndexationChanged: onIndexationChanged,
   VisibilityChanged: onVisibilityChanged,
+  PublicFeedbackChanged: onPublicFeedbackChanged,
   Republished: onRepublished,
   Deleted: onDeleted,
 }

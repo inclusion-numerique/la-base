@@ -4,7 +4,7 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
-import { Resource } from '../../resources/getResource'
+import { Resource } from '@app/web/server/resources/getResource'
 
 export const sendNewContributorEmail = async ({
   url,

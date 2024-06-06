@@ -81,14 +81,21 @@ const CroppedImage = ({
             />
           )}
         </div>
-        <div className={styles.existingImage}>
+        <div
+          className={classNames(
+            styles.existingImage,
+            'fr-flex-sm fr-display-block',
+          )}
+        >
           {imageToUpload || image ? (
             <ImageInfo
               name={imageToUpload?.name ?? image?.upload.name ?? ''}
               size={imageToUpload?.size ?? image?.upload.size ?? null}
             />
           ) : null}
-          <div className={styles.imageActions}>
+          <div
+            className={classNames(styles.imageActions, 'fr-mt-sm-0 fr-mt-2w')}
+          >
             <Button
               disabled={disabled}
               type="button"

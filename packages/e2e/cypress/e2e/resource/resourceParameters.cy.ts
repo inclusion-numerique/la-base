@@ -231,7 +231,27 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
   })
 
-  it('Acceptation 5 - Je peux changer supprimer ma ressource', () => {
+  it("Acceptation 5 - Je peux changer la visibilité des avis pour qu'ils soient privés", () => {
+    cleanUpAndCreateTestPublishedResource({
+      publicBase: true,
+      signinAsResourceCreator: true,
+      visitResourcePage: true,
+    })
+    cy.testId('resource-edition-button').filter(':visible').click()
+
+    cy.testId('edition-action-bar-more-actions').click()
+    cy.testId('edition-action-bar-parameters-modal').click()
+
+    cy.testId('resource-feedback').click()
+
+    cy.wait('@mutation')
+
+    cy.getToast(
+      'Les avis sont désactivés pour la ressource Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
+    )
+  })
+
+  it('Acceptation 6 - Je peux supprimer ma ressource', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       signinAsResourceCreator: true,

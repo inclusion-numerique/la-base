@@ -70,7 +70,7 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(resp.redirectedToUrl).to.be.undefined
     })
-    cy.get('#header-user-menu')
+    cy.get('#header_user_menu')
       .contains('Voir mon profil')
       .click({ force: true })
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import cardStyles from './ProfileCard.module.css'
 
 const ProfileCardSkeleton = () => (
-  <article className={cardStyles.container} data-testid="profile-skeleton">
-    <div className={cardStyles.content}>
+  <article className="fr-border-top" data-testid="profile-skeleton">
+    <div className="fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">
       <div className="skeleton-quarter skeleton--48 fr-mr-1w" />
       <div className="fr-width-full">
         <div className="skeleton-rectangle skeleton-rectangle--120" />

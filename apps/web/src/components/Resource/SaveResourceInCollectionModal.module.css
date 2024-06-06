@@ -1,63 +1,61 @@
 .container,
 .clickableContainer {
-    width: 100%;
-    padding: 16px 0;
-    border-bottom: var(--slim-grey-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-default-grey);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
 }
 
 .clickableContainer {
-    cursor: pointer;
+  cursor: pointer;
 
-    &:hover {
-        background-color: var(--hover);
-    }
+  &:hover {
+    background-color: var(--hover);
+  }
 }
 
-.backToBasesButton{
-    border-top: var(--slim-grey-border);
+.backToBasesButton {
+  border-top: 1px solid var(--border-default-grey);
 }
 
 .arrow {
-    color: var(--blue-france-sun-113-625);
+  color: var(--blue-france-sun-113-625);
 }
 
 .content {
-    text-align: left;
+  text-align: left;
 }
 
 .collections {
-    font-size: 14px;
-    color: var(--text-default-grey);
-    display: flex;
-    gap: 8px;
+  font-size: 14px;
+  color: var(--text-default-grey);
+  display: flex;
+  gap: 8px;
 }
 
 .emptyBase {
-    margin-top: 16px;
-    padding: 48px 32px;
-    text-align: center;
-    font-weight: 700;
-    color: var(--text-mention-grey);
-    border: var(--slim-grey-border);
-    border-radius: 8px;
+  margin-top: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-mention-grey);
+  border: 1px solid var(--border-default-grey);
+  border-radius: 8px;
 }
 
 .modal:has(.createCollectionButton) {
-    :global .fr-modal__footer {
-        border-top: var(--slim-grey-border);
+  :global .fr-modal__footer {
+    border-top: 1px solid var(--border-default-grey);
 
-        li {
-            width: 100%;
-        }
+    li {
+      width: 100%;
     }
+  }
 }
 
 .createCollectionButton {
-    width: calc(100% - 1rem) !important;
+  width: calc(100% - 1rem) !important;
 }
-
-

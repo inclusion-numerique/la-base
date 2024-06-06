@@ -24,7 +24,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.dsfrCollapsesShouldBeBound()
 
     cy.testId('edition-action-bar-more-actions').click()
-    cy.testId('edition-action-bar-invite-contributors-modal').click()
+    cy.testId('open-invite-contributor-modal-button').click()
 
     cy.testId('contributors-creator').should('exist')
     cy.testId('contributors-contributor').should('not.exist')
@@ -59,7 +59,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.dsfrModalsShouldBeBound()
 
     cy.testId('edition-action-bar-more-actions').click()
-    cy.testId('edition-action-bar-invite-contributors-modal').click()
+    cy.testId('open-invite-contributor-modal-button').click()
 
     cy.testId('contributors-creator').should('exist')
     cy.testId('contributors-contributor').should('exist')
@@ -83,7 +83,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.dsfrModalsShouldBeBound()
 
     cy.testId('edition-action-bar-more-actions').click()
-    cy.testId('edition-action-bar-invite-contributors-modal').click()
+    cy.testId('open-invite-contributor-modal-button').click()
 
     cy.testId('contributors-creator').should('exist')
     cy.testId('contributors-contributor').should('exist')

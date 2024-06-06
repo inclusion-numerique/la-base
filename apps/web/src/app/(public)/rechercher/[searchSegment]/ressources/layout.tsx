@@ -70,7 +70,6 @@ const ResourcesSearchLayout = ({
       <SearchMenu activeTab="ressources" searchParams={searchParams} />
       <div className="fr-container fr-container--medium fr-mb-30v">
         <SearchFilters
-          className="fr-mb-8v fr-mb-md-12v"
           label="Affiner la recherche"
           tab="ressources"
           searchParams={searchParams}

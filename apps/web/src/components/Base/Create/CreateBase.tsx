@@ -27,9 +27,9 @@ import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMe
 import Card from '@app/web/components/Card'
 import VisibilityField from '@app/web/components/VisibilityField'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
+import InviteUsers from '@app/web/components/InviteUsers'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 import BaseContactsEdition from '../BaseContactsEdition'
-import InviteUsers from '../../InviteUsers'
 
 const {
   Component: CancelModal,

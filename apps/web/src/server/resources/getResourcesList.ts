@@ -41,6 +41,14 @@ export const resourceListSelect = (user: { id: string } | null) =>
         },
       },
     },
+    resourceFeedback: {
+      where: {
+        deleted: null,
+      },
+      select: {
+        rating: true,
+      },
+    },
     contributors: {
       select: {
         contributorId: true,
@@ -84,6 +92,9 @@ export const resourceListSelect = (user: { id: string } | null) =>
       select: {
         collections: true,
         views: true,
+        resourceFeedback: {
+          where: { deleted: null },
+        },
       },
     },
   }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
@@ -202,13 +213,28 @@ export const getResourcesCountByTheme = async () => {
   return result
 }
 
+const toRatingsSum = (ratingSum: number, { rating }: { rating: number }) =>
+  ratingSum + rating
+
+export const toResourceWithFeedbackAverage = <T>(
+  resource: T & { resourceFeedback: { rating: number }[] },
+) => {
+  const { resourceFeedback, ...nextResource } = resource
+
+  return {
+    ...nextResource,
+    feedbackAverage:
+      resourceFeedback.reduce(toRatingsSum, 0) / resourceFeedback.length,
+  }
+}
+
 export const getProfileResources = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = computeResourcesListWhereForUserAndProfile(profileId, user)
 
-  return prismaClient.resource.findMany({
+  const profileResources = await prismaClient.resource.findMany({
     where,
     select: resourceListSelect(user),
     orderBy: [
@@ -218,6 +244,8 @@ export const getProfileResources = async (
       },
     ],
   })
+
+  return profileResources.map(toResourceWithFeedbackAverage)
 }
 
 export const getProfileResourcesCount = async (

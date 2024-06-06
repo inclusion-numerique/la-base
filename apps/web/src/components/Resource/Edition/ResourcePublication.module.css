@@ -4,6 +4,6 @@
 }
 
 .card {
-  border: var(--slim-grey-border);
+  border: 1px solid var(--border-default-grey);
   padding: 32px;
 }

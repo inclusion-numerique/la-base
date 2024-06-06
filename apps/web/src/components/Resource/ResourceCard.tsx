@@ -3,15 +3,20 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import ResourcesViewsAndMetadata from '@app/web/components/Resource/View/ResourcesViewsAndMetadata'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import ResourceDates from '@app/web/components/Resource/ResourceDates'
+import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
+import { getServerUrl } from '../../utils/baseUrl'
+import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'
-import DeleteResourceButton from './DeleteResourceButton'
+import { ResourceMoreActionsDropdown } from './ResourceMoreActionsDropdown'
+import ResourcesViewsAndMetadata from './ResourcesViewsAndMetadata'
+
+const CUSTOM_THRESHOLD: [number, number, number, number] = [3.25, 2.5, 1, 0]
 
 const ResourceCard = ({
   resource,
@@ -74,13 +79,23 @@ const ResourceCard = ({
         </div>
       )}
     </Link>
-    <div className={styles.footer}>
+    <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
       {resource.published && (
         <div className="fr-text--sm fr-mb-0">
-          <ResourcesViewsAndMetadata resource={resource} />
+          <ResourcesViewsAndMetadata resource={resource}>
+            {resource._count.resourceFeedback > 0 && (
+              <>
+                <FeedbackBadge
+                  value={resource.feedbackAverage}
+                  customThresholds={CUSTOM_THRESHOLD}
+                />
+                {resource._count.resourceFeedback}&nbsp;avis
+              </>
+            )}
+          </ResourcesViewsAndMetadata>
         </div>
       )}
-      <div className={classNames(styles.footerRight, 'fr-text--sm', 'fr-mb-0')}>
+      <div className="fr-flex fr-align-items-center fr-ml-auto">
         {isContributor && (
           <>
             <Button
@@ -95,23 +110,29 @@ const ResourceCard = ({
             >
               Modifier
             </Button>
-            {resource.published === null ? (
-              <DeleteResourceButton resourceId={resource.id} />
-            ) : (
-              <SaveResourceInCollectionButton
-                user={user}
-                resource={resource}
-                variant="icon-only"
-              />
-            )}
+            <ResourceMoreActionsDropdown
+              resource={resource}
+              copyLink={false}
+              canWrite
+            />
           </>
         )}
         {!isContributor && (
-          <SaveResourceInCollectionButton
-            user={user}
-            resource={resource}
-            variant="card"
-          />
+          <>
+            <SaveResourceInCollectionButton
+              size="small"
+              priority="tertiary no outline"
+              user={user}
+              resource={resource}
+            >
+              Enregistrer
+            </SaveResourceInCollectionButton>
+            <CopyLinkButton
+              size="small"
+              priority="tertiary no outline"
+              url={getServerUrl(`/ressources/${resource.slug}`, true)}
+            />
+          </>
         )}
       </div>
     </div>

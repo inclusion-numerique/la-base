@@ -4,7 +4,6 @@ import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import ProfileMetadata from './ProfileMetadata'
-import styles from './ProfileInformations.module.css'
 import ImageEdition from './Edition/ProfileImageEdition'
 
 const ProfileInformations = ({
@@ -17,24 +16,33 @@ const ProfileInformations = ({
   resourcesCount: number
   editMode?: boolean
 } & PropsWithChildren) => (
-  <div
-    className={editMode ? styles.profileEditionHeader : styles.profileHeader}
-  >
-    <div className={styles.profileImageContainer}>
+  <div className="fr-flex-md fr-direction-row fr-justify-content-center fr-flex-gap-6v fr-align-items-center fr-text--center">
+    <div className="fr-my-2w fr-position-relative">
       <RoundProfileImage user={profile} size={128} borderWidth={1} />
       {editMode && <ImageEdition profile={profile} />}
     </div>
     <div>
-      <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-center fr-width-full fr-flex-gap-4v">
-        <h1 className="fr-h2 fr-m-0 fr-text-title--blue-france">
-          {profile.name && formatName(profile.name)}
-        </h1>
-        <ProfilePrivacyTag isPublic={profile.isPublic} />
+      <div className="fr-flex-md fr-flex-column fr-flex-gap-4v fr-align-items-baseline">
+        <div>
+          <div className="fr-flex fr-flex-gap-4v fr-align-items-center fr-justify-content-center ">
+            <h1 className="fr-h2 fr-text-title--blue-france fr-mb-0">
+              {profile.name && formatName(profile.name)}
+            </h1>
+            <div className="fr-unhidden-md fr-hidden">
+              <ProfilePrivacyTag isPublic={profile.isPublic} />
+            </div>
+          </div>
+          <div className="fr-mt-1v">
+            <ProfileMetadata
+              resourcesCount={resourcesCount}
+              followedByCount={profile._count.followedBy}
+            />
+          </div>
+        </div>
+        <div className="fr-unhidden fr-hidden-md fr-mt-2w">
+          <ProfilePrivacyTag isPublic={profile.isPublic} />
+        </div>
       </div>
-      <ProfileMetadata
-        resourcesCount={resourcesCount}
-        followedByCount={profile._count.followedBy}
-      />
       {children}
     </div>
   </div>

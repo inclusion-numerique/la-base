@@ -56,7 +56,7 @@ export const EmailSigninForm = ({
         buttons={[
           {
             disabled,
-            iconId: 'fr-icon-user-setting-line',
+            iconId: 'fr-icon-account-circle-line',
             children: 'Se connecter',
             type: 'submit',
           },

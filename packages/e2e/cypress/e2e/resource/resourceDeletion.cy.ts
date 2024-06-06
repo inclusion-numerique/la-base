@@ -43,7 +43,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
     cy.visit(`/bases/${defaultTestBaseSlug}`)
     cy.testId('empty-box').should('exist')
 
-    cy.get('#header-user-menu')
+    cy.get('#header_user_menu')
       .contains('Voir mon profil')
       .click({ force: true })
     cy.testId('empty-box').should('exist')

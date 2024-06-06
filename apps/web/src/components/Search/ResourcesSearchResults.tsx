@@ -7,7 +7,7 @@ import {
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
-import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResource'
+import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import EmptyBox from '@app/web/components/EmptyBox'
 import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
@@ -45,9 +45,14 @@ const ResourcesSearchResults = ({
       resources.map((resource) => (
         <ResourceCard
           key={resource.slug}
-          isContributor={resourceAuthorization(resource, user).hasRole(
-            ResourceRoles.ResourceContributor,
-          )}
+          isContributor={
+            resourceAuthorization(resource, user).hasRole(
+              ResourceRoles.ResourceContributor,
+            ) ||
+            resourceAuthorization(resource, user).hasRole(
+              ResourceRoles.ResourceCreator,
+            )
+          }
           resource={resource}
           user={user}
         />
@@ -61,7 +66,7 @@ const ResourcesSearchResults = ({
       </EmptyBox>
     )}
     {!!user && <SaveResourceInCollectionModal user={user} />}
-    {!!user && <DeleteResource />}
+    <DeleteResourceModal />
   </>
 )
 

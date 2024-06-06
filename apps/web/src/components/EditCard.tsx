@@ -63,7 +63,7 @@ const EditCard = <
       className={className}
       title={
         <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
-          <CardTitle className="fr-mb-0">{title}</CardTitle>
+          <CardTitle className="fr-mb-0 fr-h5">{title}</CardTitle>
           {!editMode && setEditMode && (
             <Button
               data-testid="edit-card-button"

@@ -3,7 +3,7 @@ import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { BaseResource } from '@app/web/server/bases/getBase'
 import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
-import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResource'
+import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
@@ -11,7 +11,8 @@ import {
   resourceAuthorization,
   ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
-import styles from './Resources.module.css'
+import InviteContributorModal from '../Contributors/InviteContributorModal'
+import SaveCollectionModal from '../../Collection/SaveCollectionModal'
 
 const Resources = ({
   resources,
@@ -25,36 +26,49 @@ const Resources = ({
   canWrite: boolean
 }) => {
   const drafts = useMemo(
-    () => resources.filter((resource) => resource.isPublic === null),
+    () => resources.filter((resource) => resource.published === null),
     [resources],
   )
   const publics = useMemo(
-    () => resources.filter((resource) => resource.isPublic === true),
+    () =>
+      resources.filter(
+        (resource) => resource.isPublic === true && resource.published !== null,
+      ),
     [resources],
   )
   const privates = useMemo(
-    () => resources.filter((resource) => resource.isPublic === false),
+    () =>
+      resources.filter(
+        (resource) =>
+          resource.isPublic === false && resource.published !== null,
+      ),
     [resources],
   )
 
   return (
     <div data-testid="base-resources">
-      <div className={styles.header}>
-        <h2 className="fr-mb-0 fr-h3">Ressources · {resources.length}</h2>
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+        <div className="fr-col-sm-auto fr-col-12">
+          <h2 className="fr-mb-0 fr-h3">Ressources · {resources.length}</h2>
+        </div>
         {canWrite && (
-          <div data-testid="create-resource-button">
+          <div
+            data-testid="create-resource-button"
+            className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w"
+          >
             <CreateResourceButton
-              baseId={baseId}
               data-testid={
                 baseId ? 'create-resource-in-base-button' : undefined
               }
-              className="fr-btn--secondary"
+              className="fr-btn--secondary fr-width-full fr-justify-content-center"
+              baseId={baseId}
             />
           </div>
         )}
       </div>
       {canWrite ? (
         <Tabs
+          className="fr-overflow-visible"
           tabs={[
             {
               label: `Brouillons · ${drafts.length}`,
@@ -108,7 +122,9 @@ const Resources = ({
         ))
       )}
       {!!user && <SaveResourceInCollectionModal user={user} />}
-      {!!user && <DeleteResource />}
+      {!!user && <SaveCollectionModal user={user} />}
+      <DeleteResourceModal />
+      <InviteContributorModal />
     </div>
   )
 }

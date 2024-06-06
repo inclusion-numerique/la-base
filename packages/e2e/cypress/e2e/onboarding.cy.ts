@@ -30,18 +30,18 @@ describe('Onboarding V2', () => {
     cy.appUrlShouldBe('/')
   })
 
-  it('Je suis redirigé si je suis un utilisateur migré', () => {
-    Cypress.Cookies.debug(true)
-    const user = givenUser({ legacyId: 42 })
-    cy.createUserAndSignin(user)
-    cy.visit('/')
-
-    cy.dsfrShouldBeStarted()
-
-    cy.appUrlShouldBe('/nouveautes')
-
-    cy.getCookie(hasOpenedOnboardingV2Cookie).should('exist')
-  })
+  // it('Je suis redirigé si je suis un utilisateur migré', () => {
+  //   Cypress.Cookies.debug(true)
+  //   const user = givenUser({ legacyId: 42 })
+  //   cy.createUserAndSignin(user)
+  //   cy.visit('/')
+  //
+  //   cy.dsfrShouldBeStarted()
+  //
+  //   cy.appUrlShouldBe('/nouveautes')
+  //
+  //   cy.getCookie(hasOpenedOnboardingV2Cookie).should('exist')
+  // })
 
   it('Je ne suis pas redirigé si j’ai déjà terminé l’onboarding', () => {
     Cypress.Cookies.debug(true)

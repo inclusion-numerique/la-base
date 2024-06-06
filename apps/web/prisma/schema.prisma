@@ -96,6 +96,7 @@ model User {
   followedBy          ProfileFollow[]        @relation(name: "profile_follow_followed")
   searches            SearchExecution[]
   feedbacks           Feedback[]
+  resourceFeedback    ResourceFeedback[]
 
   @@map("users")
 }
@@ -294,6 +295,7 @@ model Resource {
   themes          Theme[]
   supportTypes    SupportType[]    @map("support_types")
   targetAudiences TargetAudience[] @map("target_audiences")
+  publicFeedback  Boolean          @default(true)
 
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
@@ -311,14 +313,15 @@ model Resource {
   base   Base?   @relation(fields: [baseId], references: [id])
   baseId String? @map("base_id") @db.Uuid
 
-  created      DateTime               @default(now())
-  updated      DateTime               @default(now())
-  contents     Content[]
-  events       ResourceEvent[]
-  contributors ResourceContributors[]
-  collections  CollectionResource[]
-  views        ResourceView[]
-  reports      ResourceReport[]
+  created          DateTime               @default(now())
+  updated          DateTime               @default(now())
+  contents         Content[]
+  events           ResourceEvent[]
+  contributors     ResourceContributors[]
+  collections      CollectionResource[]
+  views            ResourceView[]
+  reports          ResourceReport[]
+  resourceFeedback ResourceFeedback[]
 
   @@index([baseId])
   @@index([createdById])
@@ -339,6 +342,7 @@ enum ResourceEventType {
   BaseChanged               @map("base_changed")
   IndexationChanged         @map("indexation_changed")
   VisibilityChanged         @map("visibility_changed")
+  PublicFeedbackChanged     @map("public_feedback_changed")
   ContentAdded              @map("content_added")
   ContentEdited             @map("content_edited")
   ContentRemoved            @map("content_removed")
@@ -743,4 +747,24 @@ model JobExecution {
   error     String?
 
   @@map("job_executions")
+}
+
+model ResourceFeedback {
+  rating Int
+  comment String?
+
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
+  deleted DateTime?
+
+  sentBy   User   @relation(fields: [sentById], references: [id])
+  sentById String @map("sent_by_id") @db.Uuid
+
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  resourceId String   @map("resource_id") @db.Uuid
+
+  @@index([sentById])
+  @@index([resourceId])
+  @@id([sentById, resourceId])
+  @@map("resource_feedback")
 }

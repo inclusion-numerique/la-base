@@ -45,7 +45,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
       preview={
         <div className="fr-grid-row">
           <LabelAndValue
-            className="fr-mb-2w fr-col-6 fr-text--break-all"
+            className="fr-mb-2w fr-col-12 fr-col-md-6 fr-text--break-all"
             defaultValue="-"
             value={profile.email}
             inline={false}
@@ -54,7 +54,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             Adresse mail
           </LabelAndValue>
           <LabelAndValue
-            className="fr-mb-2w fr-col-6 fr-text--break-all"
+            className="fr-mb-2w fr-col-12 fr-col-md-6 fr-text--break-all"
             defaultValue="-"
             value={profile.website}
             inline={false}
@@ -63,7 +63,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             Site internet
           </LabelAndValue>
           <LabelAndValue
-            className="fr-mb-2w fr-col-6 fr-text--break-all"
+            className="fr-mb-2w fr-col-12 fr-col-md-6 fr-text--break-all"
             defaultValue="-"
             value={
               lastPartFromUrl(profile.facebook) &&
@@ -75,7 +75,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             Facebook
           </LabelAndValue>
           <LabelAndValue
-            className="fr-mb-2w fr-col-6 fr-text--break-all"
+            className="fr-mb-2w fr-col-12 fr-col-md-6 fr-text--break-all"
             defaultValue="-"
             value={
               lastPartFromUrl(profile.twitter) &&
@@ -87,7 +87,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             X (Twitter)
           </LabelAndValue>
           <LabelAndValue
-            className="fr-mb-2w fr-col-6 fr-text--break-all"
+            className="fr-mb-2w fr-col-12 fr-col-md-6 fr-text--break-all"
             defaultValue="-"
             value={
               lastPartFromUrl(profile.linkedin) &&

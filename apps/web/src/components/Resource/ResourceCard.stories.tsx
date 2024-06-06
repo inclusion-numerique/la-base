@@ -43,10 +43,12 @@ const resource = {
     image: { id: 'portrait', altText: 'Texte alternatif' },
     isPublic: true,
   },
+  feedbackAverage: 0,
   image: null,
   collections: [],
   contributors: [],
   _count: {
+    resourceFeedback: 0,
     collections: 0,
     views: 0,
   },

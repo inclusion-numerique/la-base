@@ -1,0 +1,332 @@
+.fr-direction-column {
+  flex-direction: column;
+}
+
+.fr-direction-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.fr-direction-row {
+  flex-direction: row;
+}
+
+.fr-direction-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.fr-align-self-center {
+  align-self: center;
+}
+
+.fr-align-self-stretch {
+  align-self: stretch;
+}
+
+.fr-align-items-center {
+  align-items: center;
+}
+
+.fr-align-items-baseline {
+  align-items: baseline;
+}
+
+.fr-align-items-start {
+  align-items: flex-start;
+}
+
+.fr-align-items-end {
+  align-items: flex-end;
+}
+
+.fr-align-items-stretch {
+  align-items: stretch;
+}
+
+.fr-justify-content-center {
+  justify-content: center;
+}
+
+.fr-justify-content-start {
+  justify-content: flex-start;
+}
+
+.fr-justify-content-end {
+  justify-content: flex-end;
+}
+
+.fr-justify-content-space-between {
+  justify-content: space-between;
+}
+
+.fr-justify-content-space-around {
+  justify-content: space-around;
+}
+
+.fr-justify-content-space-evenly {
+  justify-content: space-evenly;
+}
+
+.fr-justify-content-stretch {
+  justify-content: stretch;
+}
+
+.fr-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.fr-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.fr-flex-gap-0 {
+  gap: 0;
+}
+
+.fr-flex-gap-1v {
+  gap: 4px;
+}
+
+.fr-flex-gap-2v {
+  gap: 8px;
+}
+
+.fr-flex-gap-3v {
+  gap: 12px;
+}
+
+.fr-flex-gap-4v {
+  gap: 16px;
+}
+
+.fr-flex-gap-5v {
+  gap: 20px;
+}
+
+.fr-flex-gap-6v {
+  gap: 24px;
+}
+
+.fr-flex-gap-7v {
+  gap: 28px;
+}
+
+.fr-flex-gap-8v {
+  gap: 32px;
+}
+
+.fr-flex-gap-9v {
+  gap: 36px;
+}
+
+.fr-flex-gap-10v {
+  gap: 40px;
+}
+
+.fr-flex-gap-11v {
+  gap: 44px;
+}
+
+.fr-flex-gap-12v {
+  gap: 48px;
+}
+
+.fr-flex-gap-16v {
+  gap: 64px;
+}
+
+.fr-flex-basis-0 {
+  flex-basis: 0;
+}
+
+.fr-flex-grow-0 {
+  flex-grow: 0;
+}
+
+.fr-flex-grow-1 {
+  flex-grow: 1;
+}
+
+.fr-flex-grow-2 {
+  flex-grow: 2;
+}
+
+.fr-flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.fr-flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+.fr-flex-shrink-2 {
+  flex-shrink: 2;
+}
+
+/* lg flex rules */
+@media (min-width: 62em) {
+  .fr-flex-lg {
+    display: flex;
+  }
+
+  .fr-direction-lg-row {
+    flex-direction: row;
+  }
+
+  .fr-align-items-lg-center {
+    align-items: center;
+  }
+}
+
+/* md flex rules */
+@media (min-width: 48em) {
+  .fr-flex-md {
+    display: flex;
+  }
+
+  .fr-direction-md-column {
+    flex-direction: column;
+  }
+
+  .fr-direction-md-row {
+    flex-direction: row;
+  }
+
+  .fr-direction-md-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .fr-align-self-md-center {
+    align-self: center;
+  }
+
+  .fr-align-self-md-stretch {
+    align-self: stretch;
+  }
+
+  .fr-align-items-md-center {
+    align-items: center;
+  }
+
+  .fr-align-items-md-start {
+    align-items: flex-start;
+  }
+
+  .fr-align-items-md-end {
+    align-items: flex-end;
+  }
+
+  .fr-align-items-md-stretch {
+    align-items: stretch;
+  }
+
+  .fr-justify-content-md-center {
+    justify-content: center;
+  }
+
+  .fr-justify-content-md-start {
+    justify-content: flex-start;
+  }
+
+  .fr-justify-content-md-end {
+    justify-content: flex-end;
+  }
+
+  .fr-justify-content-md-space-between {
+    justify-content: space-between;
+  }
+
+  .fr-justify-content-md-space-around {
+    justify-content: space-around;
+  }
+
+  .fr-justify-content-md-space-evenly {
+    justify-content: space-evenly;
+  }
+
+  .fr-justify-content-md-stretch {
+    justify-content: stretch;
+  }
+
+  .fr-flex-shrink-md-0 {
+    flex-shrink: 0;
+  }
+
+  .fr-flex-nowrap-md {
+    flex-wrap: nowrap;
+  }
+
+  .fr-flex-wrap-md {
+    flex-wrap: wrap;
+  }
+
+  .fr-flex-gap-md-0 {
+    gap: 0;
+  }
+
+  .fr-flex-gap-md-1v {
+    gap: 4px;
+  }
+
+  .fr-flex-gap-md-2v {
+    gap: 8px;
+  }
+
+  .fr-flex-gap-md-3v {
+    gap: 12px;
+  }
+
+  .fr-flex-gap-md-4v {
+    gap: 16px;
+  }
+
+  .fr-flex-gap-md-5v {
+    gap: 20px;
+  }
+
+  .fr-flex-gap-md-6v {
+    gap: 24px;
+  }
+
+  .fr-flex-gap-md-7v {
+    gap: 28px;
+  }
+
+  .fr-flex-gap-md-8v {
+    gap: 32px;
+  }
+
+  .fr-flex-gap-md-9v {
+    gap: 36px;
+  }
+
+  .fr-flex-gap-md-10v {
+    gap: 40px;
+  }
+}
+
+/* sm flex rules */
+@media (min-width: 36em) {
+  .fr-flex-sm {
+    display: flex;
+  }
+
+  .fr-direction-sm-column {
+    flex-direction: column;
+  }
+
+  .fr-direction-sm-row {
+    flex-direction: row;
+  }
+
+  .fr-direction-sm-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .fr-align-items-sm-center {
+    align-items: center;
+  }
+
+  .fr-align-self-sm-center {
+    align-self: center;
+  }
+}

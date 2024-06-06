@@ -2,23 +2,27 @@
 
 import classNames from 'classnames'
 import React, { ReactNode, useState } from 'react'
-import { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import Button from '@codegouvfr/react-dsfr/Button'
 import styles from './CopyLinkButton.module.css'
 
 const CopyLinkButton = ({
+  className,
   url,
   title,
-  className,
   children,
-  priority,
-  size = 'small',
+  size = 'medium',
+  full = false,
+  priority = 'tertiary',
+  displayIcon = true,
 }: {
+  className?: string
   url: string
   title?: string
-  className?: string
   children?: ReactNode
-  priority?: ButtonProps.Common['priority']
   size?: 'medium' | 'small'
+  full?: boolean
+  priority?: 'primary' | 'secondary' | 'tertiary' | 'tertiary no outline'
+  displayIcon?: boolean
 }) => {
   const [copied, setCopied] = useState(false)
   const onCopy = () => {
@@ -28,34 +32,33 @@ const CopyLinkButton = ({
   }
 
   return (
-    <div className={styles.container}>
+    <span
+      className={classNames(
+        full ? 'fr-width-full fr-position-relative' : 'fr-position-relative',
+        className,
+      )}
+    >
       {copied && (
         <span className={styles.copiedHover}>
           Lien copié dans le presse-papier
         </span>
       )}
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
+      <Button
         className={classNames(
-          'fr-btn',
-          size === 'small' && 'fr-btn--sm',
-          `fr-btn--${
-            priority ? priority.replaceAll(' ', '-') : 'tertiary-no-outline'
-          }`,
-          'fr-icon-links-line',
-          'fr-icon--sm',
+          full ? 'fr-width-full fr-justify-content-center' : '',
           className,
-          {
-            'fr-btn--icon-left': children,
-          },
         )}
+        iconId={displayIcon ? 'fr-icon-links-line' : undefined}
+        size={size}
+        priority={priority}
         type="button"
         title={title || `Copier le lien ${url} dans le presse-papier`}
         onClick={onCopy}
       >
         {children}
-      </button>
-    </div>
+      </Button>
+    </span>
   )
 }
 

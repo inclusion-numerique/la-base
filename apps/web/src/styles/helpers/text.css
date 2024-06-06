@@ -1,0 +1,38 @@
+.fr-text--medium {
+  font-weight: 500 !important;
+}
+
+.fr-text--center {
+  text-align: center !important;
+}
+
+.fr-text--transform-uppercase {
+  text-transform: uppercase;
+}
+
+.fr-text--right {
+  text-align: right !important;
+}
+
+.fr-text--justify {
+  text-align: justify !important;
+}
+
+.fr-text--break-all {
+  word-break: break-all;
+}
+
+.fr-text--semi-bold {
+  font-weight: 500 !important;
+}
+
+.fr-text--nowrap {
+  text-wrap: nowrap;
+}
+
+/* sm flex rules */
+@media (min-width: 36em) {
+  .fr-text-sm--right {
+    text-align: right !important;
+  }
+}

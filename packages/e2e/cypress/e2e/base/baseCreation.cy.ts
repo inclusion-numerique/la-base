@@ -14,8 +14,14 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 1 - Création de base via profil', () => {
-    cy.get('.fr-header__tools button[aria-controls="header-user-menu"]').click()
-    cy.get('#header-user-menu').contains('Voir mon profil').click()
+    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+      .filter(':visible')
+      .click()
+
+    cy.get('.fr-dropdown__pane')
+      .filter(':visible')
+      .contains('Voir mon profil')
+      .click()
 
     cy.url().should('contain', appUrl('/profils/'))
     cy.testId('bases-menu-button').click()
@@ -25,8 +31,14 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 2 - création de base via menu déroulant', () => {
-    cy.get('.fr-header__tools button[aria-controls="header-user-menu"]').click()
-    cy.get('#header-user-menu').contains('Créer une base').click()
+    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+      .filter(':visible')
+      .click()
+
+    cy.get('.fr-dropdown__pane')
+      .filter(':visible')
+      .contains('Créer une base')
+      .click()
 
     cy.appUrlShouldBe('/bases/creer')
   })

@@ -1,11 +1,12 @@
 import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { imageCropSelect } from '../image/imageCropSelect'
 import {
   computeResourcesListWhereForUser,
   resourceListSelect,
-} from '../resources/getResourcesList'
+  toResourceWithFeedbackAverage,
+} from '@app/web/server/resources/getResourcesList'
+import { imageCropSelect } from '../image/imageCropSelect'
 
 export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
   ({
@@ -76,11 +77,21 @@ export const getCollection = async (
     id,
   }: { slug: string; id?: undefined } | { slug?: undefined; id: string },
   user: Pick<SessionUser, 'id'> | null,
-) =>
-  prismaClient.collection.findFirst({
+) => {
+  const collection = await prismaClient.collection.findFirst({
     select: collectionSelect(user),
     where: { id, slug, deleted: null },
   })
+
+  return collection == null
+    ? null
+    : {
+        ...collection,
+        resources: collection.resources.map((resource) => ({
+          resource: toResourceWithFeedbackAverage(resource.resource),
+        })),
+      }
+}
 
 export type CollectionPageData = Exclude<
   Awaited<ReturnType<typeof getCollection>>,

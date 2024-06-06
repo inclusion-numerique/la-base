@@ -1,5 +1,5 @@
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
+import React, { ReactNode } from 'react'
+import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import OpenSaveResourceInCollectionModalButton from '@app/web/components/Resource/OpenSaveResourceInCollectionModalButton'
 import { loginUrl } from '@app/web/security/login'
@@ -11,7 +11,6 @@ const secondaryButtonProps = {
   iconId: defaultIconId,
   priority: 'secondary',
   children: 'Enregistrer',
-  size: 'small',
 } as const
 
 const alreadySavedSecondaryButtonProps = {
@@ -22,7 +21,6 @@ const alreadySavedSecondaryButtonProps = {
 
 const cardButtonProps = {
   iconId: defaultIconId,
-  size: 'small',
   iconPosition: 'right',
   children: 'Enregistrer',
   priority: 'tertiary no outline',
@@ -37,8 +35,7 @@ const alreadySavedCardButtonProps = {
 const buttonIconOnlyProps = {
   iconId: defaultIconId,
   title: secondaryButtonProps.children,
-  size: 'small',
-  priority: 'tertiary no outline',
+  priority: 'secondary',
 } as const
 
 const alreadySavedButtonIconOnlyProps = {
@@ -67,6 +64,9 @@ const SaveResourceInCollectionButton = ({
   resource,
   variant,
   'data-testid': dataTestid,
+  priority,
+  size,
+  children,
 }: {
   className?: string
   user: SessionUser | null
@@ -74,16 +74,24 @@ const SaveResourceInCollectionButton = ({
   iconOnly?: boolean
   'data-testid'?: string
   variant?: 'card' | 'icon-only'
+  priority?: ButtonProps['priority']
+  size?: 'small'
+  children?: ReactNode
 }) => {
   const alreadySaved = user?.collections.some((collection) =>
     collection.resources.some(({ resourceId }) => resourceId === resource.id),
   )
-  const buttonProps = getButtonProps(alreadySaved, variant)
+  const buttonProps = {
+    ...getButtonProps(alreadySaved, variant),
+    children,
+    priority,
+  }
 
   if (user) {
     const accessibilityTitle = `Enregistrer "${resource.title}" dans une collection`
     return (
       <OpenSaveResourceInCollectionModalButton
+        size={size}
         {...buttonProps}
         nativeButtonProps={{
           'data-testid': dataTestid,
@@ -97,6 +105,7 @@ const SaveResourceInCollectionButton = ({
   return (
     <Button
       {...buttonProps}
+      size="small"
       className={className}
       data-testid={dataTestid}
       linkProps={{

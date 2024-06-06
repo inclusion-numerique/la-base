@@ -3,8 +3,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
-import styles from '@app/web/components/Profile/Card/ProfileCard.module.css'
 import { BaseMember } from '@app/web/server/bases/getBase'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -37,33 +35,40 @@ const BaseAdminMemberCard = ({
   )
 
   return (
-    <div className={styles.container} data-testid="member-card-admin">
-      <Link
-        className={classNames(styles.link, styles.content)}
-        href={`/profils/${member.member.slug}`}
-      >
+    <div className="fr-border-top" data-testid="member-card-admin">
+      <div className="fr-enlarge-link fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">
         <RoundProfileImage user={member.member} />
-        <h3 className="fr-text--md fr-text--regular fr-my-auto">
-          {member.member.name}
-        </h3>
-      </Link>
-      <div className="fr-py-2v fr-py-md-4v">
-        {!canChangeAccessLevel && isAdmin ? (
-          <div className={styles.select}>Administrateur</div>
-        ) : (
-          <>
-            <select
-              data-testid="member-card-role-select"
-              onChange={onChange}
-              className={styles.select}
-              value={isAdmin ? 'admin' : 'member'}
-            >
-              <option value="admin">Administrateur</option>
-              <option value="member">Membre</option>
-            </select>
-            <RemoveBaseMemberButton member={member} />
-          </>
-        )}
+        <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full">
+          <Link
+            className="fr-p-1v fr-flex-grow-1"
+            href={`/profils/${member.member.slug}`}
+          >
+            <h3 className="fr-text--md fr-text--regular fr-my-auto">
+              {member.member.name}
+            </h3>
+          </Link>
+          <div className="fr-position-relative" style={{ zIndex: 1 }}>
+            {!canChangeAccessLevel && isAdmin ? (
+              <div className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-text-label--blue-france">
+                Administrateur
+              </div>
+            ) : (
+              <>
+                <select
+                  data-testid="member-card-role-select"
+                  onChange={onChange}
+                  className="fr-text--left fr-text-sm--right fr-text--semi-bold fr-text-label--blue-france"
+                  style={{ appearance: 'auto' }}
+                  value={isAdmin ? 'admin' : 'member'}
+                >
+                  <option value="admin">Administrateur</option>
+                  <option value="member">Membre</option>
+                </select>
+                <RemoveBaseMemberButton member={member} />
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

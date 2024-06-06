@@ -1,5 +1,4 @@
 import React from 'react'
-import { Resource } from '@app/web/server/resources/getResource'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   BasePrivacyTag,
@@ -14,7 +13,7 @@ const ResourcePublicationView = ({
   resource,
   user,
 }: {
-  resource: ResourceProjectionWithContext | Resource
+  resource: ResourceProjectionWithContext
   user: SessionUser
 }) =>
   resource.base ? (

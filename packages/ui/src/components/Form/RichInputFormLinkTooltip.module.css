@@ -1,7 +1,7 @@
 .tooltip {
   position: absolute;
   background: var(--background-default-grey);
-  border: var(--slim-grey-border);
+  border: 1px solid var(--border-default-grey);
   filter: drop-shadow(var(--lifted-shadow));
   max-width: calc(min(100%, 360px));
   display: flex;

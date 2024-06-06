@@ -5,7 +5,8 @@ import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {
   computeResourcesListWhereForUser,
   resourceListSelect,
-} from '../resources/getResourcesList'
+  toResourceWithFeedbackAverage,
+} from '@app/web/server/resources/getResourcesList'
 import {
   collectionSelect,
   computeCollectionsListWhereForUser,
@@ -126,11 +127,19 @@ export const getBase = async (id: string, user: Pick<SessionUser, 'id'>) =>
 export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'> | null,
-) =>
-  prismaClient.base.findFirst({
+) => {
+  const basePage = await prismaClient.base.findFirst({
     select: baseSelect(user),
     where: { slug, deleted: null },
   })
+
+  return basePage == null
+    ? null
+    : {
+        ...basePage,
+        resources: basePage.resources.map(toResourceWithFeedbackAverage),
+      }
+}
 
 export type BasePageData = Exclude<
   Awaited<ReturnType<typeof basePageQuery>>,

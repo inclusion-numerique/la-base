@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -15,17 +15,17 @@ import {
   InviteContributorCommandValidation,
 } from '@app/web/server/resourceContributors/inviteContributors'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { Resource } from '@app/web/server/resources/getResource'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import InviteUsers from '../../InviteUsers'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import InviteUsers from '@app/web/components/InviteUsers'
 import styles from './InviteResourceContributors.module.css'
 
 const InviteResourceContributors = ({
   resource,
   onSuccess,
 }: {
-  resource: Resource | ResourceProjectionWithContext
+  resource: ResourceListItem | ResourceProjectionWithContext
   onSuccess?: () => void
 }) => {
   const router = useRouter()
@@ -119,7 +119,7 @@ const InviteResourceContributors = ({
       <p className="fr-mt-4w fr-mb-1w">
         Liste des contributeurs de la ressource
       </p>
-      {resource.base && (
+      {resource.base?.title && (
         <div className={styles.contributors}>
           <span className="fr-icon-team-line" />
           Tous les membres de <b>‘{resource.base.title}’</b> sont contributeurs

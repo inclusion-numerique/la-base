@@ -8,7 +8,6 @@ import SaveCollectionButton from '@app/web/components/Collection/SaveCollectionB
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { PrivacyTag } from '../PrivacyTags'
 import CopyLinkButton from '../CopyLinkButton'
-import styles from './CollectionMetaData.module.css'
 
 const CollectionMetaData = ({
   user,
@@ -17,6 +16,7 @@ const CollectionMetaData = ({
   priority,
   canWrite,
   context,
+  hideRessourceLabelOnSmallDevices = false,
 }: {
   user: SessionUser | null
   collection: { isPublic: boolean; id: string; slug: string }
@@ -24,14 +24,20 @@ const CollectionMetaData = ({
   count: number
   canWrite?: boolean
   context: 'card' | 'view' | 'collectionModal'
+  hideRessourceLabelOnSmallDevices?: boolean
 }) => {
   const withButtons = context === 'card' || context === 'view'
   return (
     <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-6v">
-      <div className={styles.informations}>
+      <div className="fr-flex fr-flex-gap-2v fr-text--sm fr-mb-0">
         <span className="fr-icon-file-text-line fr-icon--sm" />
-        <span>
-          <b>{count}</b> Ressource{sPluriel(count)}
+        <b>{count}</b>
+        <span
+          className={
+            hideRessourceLabelOnSmallDevices ? 'fr-hidden fr-unhidden-sm' : ''
+          }
+        >
+          Ressource{sPluriel(count)}
         </span>
         <span>•</span>
         <PrivacyTag
@@ -41,7 +47,7 @@ const CollectionMetaData = ({
         />
       </div>
       {withButtons && (
-        <div className={styles.buttons}>
+        <div className="fr-flex fr-flex-gap-2v fr-hidden fr-unhidden-md">
           {canWrite && (
             <Link
               href={`./${collection.slug}/modifier`}
@@ -59,13 +65,15 @@ const CollectionMetaData = ({
             </Link>
           )}
           <SaveCollectionButton
+            priority="tertiary"
             user={user}
             collection={collection}
             context={context}
           />
           <CopyLinkButton
+            size="small"
+            priority="tertiary"
             url={getServerUrl(`/collections/${collection.slug}`, true)}
-            priority={priority}
           />
         </div>
       )}

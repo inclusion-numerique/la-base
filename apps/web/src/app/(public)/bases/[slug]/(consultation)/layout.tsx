@@ -60,7 +60,7 @@ const BaseLayout = async ({
       <BaseHeader base={base} canWrite={canWrite} user={user} />
       <main id={contentId}>
         <BaseMenu base={base} />
-        <div className="fr-container fr-container--medium fr-mb-50v">
+        <div className="fr-container fr-container--medium fr-mb-16w">
           {children}
         </div>
       </main>

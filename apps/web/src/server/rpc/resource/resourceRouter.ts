@@ -1,30 +1,31 @@
 import { v4 } from 'uuid'
 import z from 'zod'
 import {
+  baseAuthorization,
+  BasePermissions,
+} from '@app/web/authorization/models/baseAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import {
+  collectionAuthorization,
+  CollectionPermissions,
+} from '@app/web/authorization/models/collectionAuthorization'
+import { collectionAuthorizationTargetSelect } from '@app/web/authorization/models/collectionAuthorizationTargetSelect'
+import {
+  resourceAuthorization,
+  ResourcePermissions,
+} from '@app/web/authorization/models/resourceAuthorization'
+import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
+import { prismaClient } from '@app/web/prismaClient'
+import {
   CreateResourceCommand,
   CreateResourceCommandClientValidation,
 } from '@app/web/server/resources/feature/CreateResource'
 import { ResourceMutationCommandsValidation } from '@app/web/server/resources/feature/features'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
+import { SendResourceFeedbackValidation } from '@app/web/server/resources/sendResourceFeedback'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, notFoundError } from '@app/web/server/rpc/trpcErrors'
-import { prismaClient } from '@app/web/prismaClient'
-import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
-import { collectionAuthorizationTargetSelect } from '@app/web/authorization/models/collectionAuthorizationTargetSelect'
-import {
-  resourceAuthorization,
-  ResourcePermissions,
-} from '@app/web/authorization/models/resourceAuthorization'
-import {
-  collectionAuthorization,
-  CollectionPermissions,
-} from '@app/web/authorization/models/collectionAuthorization'
-import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
-import {
-  baseAuthorization,
-  BasePermissions,
-} from '@app/web/authorization/models/baseAuthorization'
 
 export const resourceRouter = router({
   create: protectedProcedure
@@ -206,4 +207,41 @@ export const resourceRouter = router({
         }
       },
     ),
+  feedback: protectedProcedure
+    .input(SendResourceFeedbackValidation)
+    .mutation(async ({ input, ctx: { user } }) =>
+      prismaClient.resourceFeedback.upsert({
+        where: {
+          sentById_resourceId: {
+            sentById: user.id,
+            resourceId: input.resourceId,
+          },
+        },
+        create: { ...input, sentById: user.id },
+        update: {
+          ...input,
+          sentById: user.id,
+          updated: new Date(),
+          deleted: null,
+        },
+      }),
+    ),
+  deleteFeedback: protectedProcedure
+    .input(z.object({ resourceId: z.string() }))
+    .mutation(async ({ input, ctx: { user } }) => {
+      const timestamp = new Date()
+
+      return prismaClient.resourceFeedback.update({
+        data: {
+          deleted: timestamp,
+          updated: timestamp,
+        },
+        where: {
+          sentById_resourceId: {
+            sentById: user.id,
+            resourceId: input.resourceId,
+          },
+        },
+      })
+    }),
 })

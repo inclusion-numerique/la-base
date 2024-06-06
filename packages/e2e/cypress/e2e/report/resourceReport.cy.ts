@@ -34,11 +34,21 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
       cy.visit(`/ressources/${slug}`)
     })
 
-    cy.findByRole('button', { name: /signaler/i }).should('not.exist')
+    cy.findAllByTitle(/signaler la ressource/i)
+      .filter(':visible')
+      .click()
+
+    cy.appUrlShouldBe(
+      '/connexion?suivant=/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
+    )
   })
 
   it('Acceptation 2 - Je peux signaler une resource, et le modérateur est prévenu', () => {
     const user = givenUser()
+    const anotherUser = givenUser({
+      firstName: 'John',
+      lastName: 'Doe',
+    })
     const base = givenBase({ createdById: user.id, isPublic: true })
     const resourceId = v4()
     const commands = createTestResourceCommands({
@@ -50,14 +60,16 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
     cy.createUserAndSignin(user)
     cy.createBase(base)
     cy.sendResourceCommands({ user, commands }).then(({ slug }) => {
+      cy.logout()
+      cy.createUserAndSignin(anotherUser)
       cy.visit(`/ressources/${slug}`)
     })
 
     cy.dsfrModalsShouldBeBound()
 
-    cy.findByRole('button', { name: /plus d’options/i }).click()
-
-    cy.findByRole('button', { name: /signaler/i }).click()
+    cy.findAllByTitle(/signaler la ressource/i)
+      .filter(':visible')
+      .click()
 
     cy.findByRole('dialog').within(() => {
       // Should not submit with empty form
@@ -82,7 +94,7 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
       const report = reports[0]
       cy.wrap(report.sentBy?.id).should(
         'equal',
-        user.id,
+        anotherUser.id,
         'Sent by user should be the current user',
       )
       cy.wrap(report.reason).should(
@@ -108,6 +120,6 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
 
     cy.contains('Titre d’une ressource')
     cy.contains('localhost:3000/ressources/titre-d-une-ressource')
-    cy.contains('Jean Biche')
+    cy.contains('John Doe')
   })
 })

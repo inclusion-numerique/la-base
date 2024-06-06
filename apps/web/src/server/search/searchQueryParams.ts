@@ -27,6 +27,7 @@ export const sorting = [
   'ancien',
   'vues',
   'enregistrements',
+  'recommandations',
   'suivis',
   'ressources',
   'a-z',
@@ -40,6 +41,7 @@ export const masculineSortingLabels: { [key in Sorting]: string } = {
   ancien: 'Les plus anciens',
   vues: 'Les plus vus',
   enregistrements: 'Les plus enregistrés',
+  recommandations: 'Les plus recommandés',
   suivis: 'Les plus suivis',
   ressources: 'Le plus de ressources',
   'a-z': 'Alphabétique : A → Z',
@@ -52,6 +54,7 @@ export const feminineSortingLabels: { [key in Sorting]: string } = {
   ancien: 'Les plus anciennes',
   vues: 'Les plus vues',
   enregistrements: 'Les plus enregistrées',
+  recommandations: 'Les plus recommandées',
   suivis: 'Les plus suivies',
   ressources: 'Le plus de ressources',
   'a-z': 'Alphabétique : A → Z',
@@ -63,6 +66,7 @@ export const resourcesSorting = [
   'recent',
   'ancien',
   'vues',
+  'recommandations',
   'enregistrements',
 ] as const satisfies Sorting[]
 

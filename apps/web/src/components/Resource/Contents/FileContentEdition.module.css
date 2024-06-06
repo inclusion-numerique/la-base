@@ -1,5 +1,5 @@
 .fileContainer {
-  border: var(--slim-grey-border);
+  border: 1px solid var(--border-default-grey);
   padding: 20px 24px;
 
   @media (min-width: 768px) {

@@ -1,0 +1,33 @@
+.fr-radio--card {
+  @media (min-width: 36em) {
+    .fr-fieldset__element {
+      flex: 1;
+    }
+  }
+
+  .fr-radio-group {
+    flex-direction: column;
+    max-width: 100%;
+
+    .fr-label {
+      border: 2px solid var(--border-default-grey);
+      border-radius: 8px;
+      padding: 1rem 1rem 0.75rem;
+    }
+
+    input[type='radio'] {
+      & + label {
+        background-image: none;
+      }
+
+      &:checked + label {
+        border-color: var(--blue-france-sun-113-625);
+      }
+
+      &:disabled + label,
+      &:disabled:checked + label {
+        background-image: none;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   margin: 16px -16px 0;
   padding: 32px 48px;
   text-align: center;
-  border: var(--slim-grey-border);
+  border: 1px solid var(--border-default-grey);
 
   @media (min-width: 768px) {
     margin: 16px -32px 0;

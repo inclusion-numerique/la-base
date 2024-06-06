@@ -34,7 +34,7 @@ const AddOrRemoveResourceFromCollection = ({
               isPublic: collection.isPublic,
             }}
             count={collection.resources.length}
-            context="collectionModal"
+            context="view"
           />
         )}
       </div>

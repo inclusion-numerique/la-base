@@ -22,7 +22,7 @@
   width: 100%;
   display: none;
   background-color: var(--background-default-grey);
-  border-top: var(--slim-grey-border);
+  border-top: 1px solid var(--border-default-grey);
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
   max-height: 400px;
   overflow-y: scroll;
@@ -34,5 +34,5 @@
 
 .category {
   padding: 12px 16px;
-  border-bottom: var(--slim-grey-border);
+  border-bottom: 1px solid var(--border-default-grey);
 }

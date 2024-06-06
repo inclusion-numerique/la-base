@@ -9,6 +9,7 @@ import ResourceVisibilityForm from '@app/web/components/Resource/Edition/Paramet
 import ResourceIndexation from '@app/web/components/Resource/Edition/Parameters/ResourceIndexation'
 import ResourceDeletion from '@app/web/components/Resource/Edition/Parameters/ResourceDeletion'
 import InviteResourceContributors from '@app/web/components/Resource/Contributors/InviteResourceContributors'
+import ResourceFeedback from './ResourceFeedback'
 import styles from './ResourceParameters.module.css'
 
 const ResourceParameters = ({
@@ -34,6 +35,16 @@ const ResourceParameters = ({
         contentSeparator
       >
         <InviteResourceContributors resource={resource} />
+      </Card>
+      <Card
+        className="fr-my-3w"
+        id="avis"
+        title="Avis sur la ressource"
+        titleAs="h2"
+        description="Les visiteurs peuvent laisser des avis sur vos ressources afin de contribuer à leur amélioration, partager des retours d’expériences, des suggestions d’améliorations..."
+        contentSeparator
+      >
+        <ResourceFeedback resource={resource} />
       </Card>
       <Card
         className="fr-my-3w"
