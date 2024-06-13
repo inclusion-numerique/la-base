@@ -72,7 +72,8 @@ const OwnershipInformation = ({
           </Link>
         </>
       )}
-      {!base && displayUser && (
+      {(!base ||
+        (user.isPublic && displayUser && attributionWording !== 'none')) && (
         <>
           {attributionWordings[attributionWording].by}
           <Link

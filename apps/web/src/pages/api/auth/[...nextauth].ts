@@ -1,10 +1,12 @@
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { nextAuthAdapter } from '@app/web/auth/nextAuthAdapter'
 import '@app/web/auth/nextAuthSetup'
 import { sendVerificationRequest } from '@app/web/auth/sendVerificationRequest'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { InclusionConnectProvider } from '@app/web/auth/InclusionConnectProvider'
+import { isFirewallUserAgent } from '@app/web/pages/api/auth/isFirewallUserAgent'
 
 export const authOptions: NextAuthOptions = {
   // debug: process.env.NODE_ENV !== 'production',
@@ -56,4 +58,12 @@ export const authOptions: NextAuthOptions = {
   },
 }
 
-export default NextAuth(authOptions)
+export default function auth(request: NextApiRequest, res: NextApiResponse) {
+  // https://next-auth.js.org/tutorials/avoid-corporate-link-checking-email-provider
+  if (isFirewallUserAgent(request)) {
+    return res.status(400).end()
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return NextAuth(request, res, authOptions)
+}
