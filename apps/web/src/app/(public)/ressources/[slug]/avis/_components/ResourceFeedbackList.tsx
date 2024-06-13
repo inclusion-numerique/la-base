@@ -67,7 +67,10 @@ export const ResourceFeedbackList = ({
           const isOwner = feedback.sentById === user?.id
 
           return isOwner && isEditing ? (
-            <div className="fr-border fr-border-radius--8 fr-pt-3w fr-px-3w fr-mb-3w">
+            <div
+              key={feedback.sentBy.slug}
+              className="fr-border fr-border-radius--8 fr-pt-3w fr-px-3w fr-mb-3w"
+            >
               <ResourceFeedbackForm
                 resource={resource}
                 user={user}
@@ -78,10 +81,10 @@ export const ResourceFeedbackList = ({
             </div>
           ) : (
             <ResourceFeedback
+              key={feedback.sentBy.slug}
               feedback={feedback}
               isOwner={isOwner}
               canSendMail={!canGiveFeedback}
-              key={`${feedback.sentById}_${feedback.resourceId}`}
               onEdit={() => setIsEditing(true)}
             />
           )

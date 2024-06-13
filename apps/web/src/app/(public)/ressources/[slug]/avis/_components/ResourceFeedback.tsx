@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
@@ -10,6 +12,15 @@ import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/Feedba
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { ReadMore } from './ReadMore'
 import { ResourceFeedbackActions } from './ResourceFeedbackActions'
+
+const {
+  Component: DeleteModal,
+  close: closeDeleteModal,
+  buttonProps: deleteModalNativeButtonProps,
+} = createModal({
+  id: `delete-resource-feedback`,
+  isOpenedByDefault: false,
+})
 
 const ResourceFeedback = ({
   feedback,
@@ -41,7 +52,7 @@ const ResourceFeedback = ({
   const mutate = trpc.resource.deleteFeedback.useMutation()
   const isLoading = mutate.isPending
 
-  const onDelete = async (closeDeleteModal: () => void) => {
+  const onDelete = async () => {
     try {
       await mutate.mutateAsync({ resourceId: feedback.resourceId })
 
@@ -100,10 +111,9 @@ const ResourceFeedback = ({
             </Link>
           )}
           <ResourceFeedbackActions
-            className="fr-hidden fr-unhidden-sm"
-            isLoading={isLoading}
+            className="fr-unhidden-sm fr-hidden"
+            nativeButtonProps={deleteModalNativeButtonProps}
             isOwner={isOwner}
-            onDelete={onDelete}
             onEdit={onEdit}
           />
         </div>
@@ -117,12 +127,29 @@ const ResourceFeedback = ({
         )}
         <ResourceFeedbackActions
           className="fr-hidden-sm fr-mt-2w fr-flex fr-direction-row-reverse"
-          isLoading={isLoading}
+          nativeButtonProps={deleteModalNativeButtonProps}
           isOwner={isOwner}
-          onDelete={onDelete}
           onEdit={onEdit}
         />
       </div>
+      <DeleteModal
+        title="Supprimer votre avis"
+        buttons={[
+          {
+            children: 'Annuler',
+            priority: 'secondary',
+            disabled: isLoading,
+            onClick: closeDeleteModal,
+          },
+          {
+            children: 'Supprimer',
+            ...buttonLoadingClassname(isLoading, 'fr-btn--danger'),
+            onClick: () => onDelete(),
+          },
+        ]}
+      >
+        Êtes-vous sûr de vouloir supprimer votre avis sur cette ressource ?
+      </DeleteModal>
     </article>
   )
 }

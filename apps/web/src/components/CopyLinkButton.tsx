@@ -49,7 +49,7 @@ const CopyLinkButton = ({
           full ? 'fr-width-full fr-justify-content-center' : '',
           className,
         )}
-        iconId={displayIcon ? 'fr-icon-links-line' : undefined}
+        iconId={displayIcon ? 'fr-icon-link' : undefined}
         size={size}
         priority={priority}
         type="button"

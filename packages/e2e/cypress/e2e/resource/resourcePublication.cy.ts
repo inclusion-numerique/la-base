@@ -39,10 +39,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       ),
     )
 
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource publique',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Publique')
   })
 
   it('Acceptation 2 - Resource privée dans une base publique', () => {
@@ -85,10 +82,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       ),
     )
 
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it('Acceptation 3 - Resource dans une base privée', () => {
@@ -113,10 +107,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       ),
     )
 
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it('Acceptation 4 - Resource dans un profil privée', () => {
@@ -141,10 +132,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       ),
     )
 
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it.skip('Acceptation 5 - Resource dans un profil publique', () => {
@@ -198,9 +186,6 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
       ),
     )
 
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 })

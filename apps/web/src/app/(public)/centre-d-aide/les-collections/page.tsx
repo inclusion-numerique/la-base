@@ -165,7 +165,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Vous pourrez modifier à tout moment les informations & les
                       paramètres de votre collection en allant dans votre
                       collection et en cliquant sur le bouton{' '}
@@ -176,7 +176,7 @@ const ContentPolicyPage = () => (
                       >
                         En savoir plus ici
                       </Link>
-                    </p>
+                    </span>
                   }
                 />
                 <h2
@@ -224,13 +224,13 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mt-3w fr-mb-6w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Par défaut, vous avez une collection{' '}
                       <strong>‘Ressources enregistrées’</strong> créée dans
                       votre profil afin de pouvoir collecter directement des
                       ressources sans avoir à passer par la création d’une
                       collection.
-                    </p>
+                    </span>
                   }
                 />
                 <h2

@@ -72,18 +72,18 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-7w"
                   title={
-                    <div className="fr-text--regular">
+                    <span className="fr-text--regular">
                       <span className="fr-text-default--grey fr-text--bold">
                         À savoir pour les utilisateurs de la 1ère version de la
                         plateforme
                       </span>
-                      <p className="fr-text-default--grey fr-mt-2w">
+                      <span className="fr-text-default--grey fr-mt-2w fr-display-block">
                         Si vous aviez créé une base personnelle, c’est-à-dire
                         portant votre nom et prénom, et sur laquelle vous étiez
                         le ou la seule à publier du contenu, celle-ci est
                         automatiquement devenue un profil sur Les Bases.
-                      </p>
-                    </div>
+                      </span>
+                    </span>
                   }
                 />
                 <hr />
@@ -144,11 +144,11 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-3w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Si vous ne souhaitez pas utiliser votre profil comme un
                       espace personnel de publication, vous pouvez modifier la
                       visibilité de votre profil et passer à un profil privé.
-                    </p>
+                    </span>
                   }
                 />
                 <h3 id="profil-prive" className="fr-mt-5w">
@@ -165,12 +165,12 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-3w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Avec un profil “privé”, vous pouvez toujours devenir
                       membre d’une base et publier des ressources sur cette
                       base. Vous pouvez donc toujours participer à des espaces
                       de publications communs.
-                    </p>
+                    </span>
                   }
                 />
                 <p>
@@ -256,12 +256,12 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-my-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Dans le cas d’un profil public, ses informations seront
                       visibles via votre page de profil public dans l’onglet{' '}
                       <strong>‘À propos’</strong>. Sur un profil privé, seul
                       votre nom & prénom seront visibles.
-                    </p>
+                    </span>
                   }
                 />
                 <h3 className="fr-mt-5w">Contacts</h3>
@@ -284,11 +284,11 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-my-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Dans le cas d’un profil public, ses informations seront
                       visibles via votre page de profil public dans l’onglet{' '}
                       <strong>‘À propos’</strong>.
-                    </p>
+                    </span>
                   }
                 />
                 <h3 id="visibilite-profil" className="fr-mt-5w">

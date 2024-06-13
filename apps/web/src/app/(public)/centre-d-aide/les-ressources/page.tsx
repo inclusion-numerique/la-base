@@ -304,12 +304,12 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       <strong>Bon à savoir&nbsp;:</strong> ces 3 champs
                       d’indexations permettent ensuite aux visiteurs de
                       retrouver vos ressources grâce aux 3 filtres mise à
                       disposition afin d’affiner la recherche
-                    </p>
+                    </span>
                   }
                 />
                 <p>
@@ -329,7 +329,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-6w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Vous pouvez retrouvez cette ressource à tout moment depuis
                       votre profil et modifier l’ensemble des éléments (espace
                       de publication, contenus, visibilité, contributeurs et les
@@ -338,7 +338,7 @@ const ContentPolicyPage = () => (
                       <strong>‘Modifier’</strong> présent sur l’aperçu ou lors
                       de la consultation de votre ressource. En savoir plus ci-
                       dessous
-                    </p>
+                    </span>
                   }
                 />
                 <hr />

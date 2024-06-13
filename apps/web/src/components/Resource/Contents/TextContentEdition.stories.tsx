@@ -20,7 +20,7 @@ const Template = () => {
     reValidateMode: 'onChange',
     mode: 'all',
     defaultValues: {
-      text: `<h2>Edit me</h2><p><b>please...</b></p><p>ps: C'est pas encore fou pour <a href='https://tiptap.dev/api/marks/link' target='_blank'>les liens</a>`,
+      text: `<h5>Edit me</h5><p><b>please...</b></p><p>ps: C'est pas encore fou pour <a href='https://tiptap.dev/api/marks/link' target='_blank'>les liens</a>`,
     },
   })
 

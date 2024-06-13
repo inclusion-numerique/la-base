@@ -95,20 +95,22 @@ const ResourceCard = ({
           </ResourcesViewsAndMetadata>
         </div>
       )}
-      <div className="fr-flex fr-align-items-center fr-ml-auto">
+      <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
         {isContributor && (
           <>
             <Button
               data-testid="resource-card-edit-link"
-              iconId="fr-icon-edit-line"
+              title="Modifier"
               size="small"
               priority="tertiary no outline"
               linkProps={{
                 href: `/ressources/${resource.slug}/editer`,
               }}
-              iconPosition="right"
             >
-              Modifier
+              <span className="fr-unhidden-sm fr-hidden fr-mr-1w">
+                Modifier
+              </span>
+              <span className="ri-edit-line" aria-hidden />
             </Button>
             <ResourceMoreActionsDropdown
               resource={resource}
@@ -120,12 +122,13 @@ const ResourceCard = ({
         {!isContributor && (
           <>
             <SaveResourceInCollectionButton
+              className="fr-pl-md-3v fr-pl-0"
               size="small"
               priority="tertiary no outline"
               user={user}
               resource={resource}
             >
-              Enregistrer
+              <span className="fr-unhidden-sm fr-hidden">Enregistrer</span>
             </SaveResourceInCollectionButton>
             <CopyLinkButton
               size="small"

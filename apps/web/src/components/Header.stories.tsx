@@ -5,6 +5,20 @@ import { testSessionUser } from '@app/web/test/testSessionUser'
 export default {
   title: 'Header',
   component: Header,
+  parameters: {
+    design: [
+      {
+        name: 'Header',
+        type: 'figma',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=609-103798&t=MbwOB3HnF8uqKTBI-1',
+      },
+      {
+        name: 'Menu',
+        type: 'figma',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=8128-59572&t=MbwOB3HnF8uqKTBI-4',
+      },
+    ],
+  },
 } as Meta<typeof Header>
 
 type Story = StoryObj<typeof Header>

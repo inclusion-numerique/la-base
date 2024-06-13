@@ -160,10 +160,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
           cy.sendResourceCommands({ user, commands })
         },
       })
-      cy.testId('resource-public-state-badge').should(
-        'have.text',
-        'Ressource publique',
-      )
+      cy.testId('resource-public-state-badge').should('have.text', 'Publique')
 
       cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
 
@@ -190,10 +187,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.visit(
         '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/',
       )
-      cy.testId('resource-public-state-badge').should(
-        'have.text',
-        'Ressource privée',
-      )
+      cy.testId('resource-public-state-badge').should('have.text', 'Privée')
     })
   })
 })

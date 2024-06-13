@@ -1,6 +1,7 @@
 'use client'
 
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import classNames from 'classnames'
 import React, {
   KeyboardEvent,
   MouseEvent as ReactMouseEvent,
@@ -22,6 +23,8 @@ export const Dropdown = ({
   alignRight = false,
   title,
   priority,
+  modalPriority,
+  modalControlClassName,
   size,
   displayDropdownArrow = true,
 }: {
@@ -31,6 +34,8 @@ export const Dropdown = ({
   alignRight?: boolean
   title?: string
   priority?: ButtonProps['priority']
+  modalPriority?: ButtonProps['priority']
+  modalControlClassName?: string
   size?: ButtonProps['size']
   displayDropdownArrow?: boolean
 }) => {
@@ -73,7 +78,11 @@ export const Dropdown = ({
     <>
       <div className="fr-hidden-md">
         <Button
-          priority={priority}
+          className={classNames(
+            displayDropdownArrow ? 'fr-dropdown__btn' : '',
+            modalControlClassName,
+          )}
+          priority={modalPriority || priority}
           title={title}
           type="button"
           size={size}
@@ -87,7 +96,6 @@ export const Dropdown = ({
             className="fr-dropdown__modal"
             style={{ [alignRight ? 'right' : 'left']: 0 }}
             id={formattedId}
-            ref={collapseRef}
           >
             {children}
           </div>

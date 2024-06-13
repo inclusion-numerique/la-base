@@ -25,20 +25,20 @@ describe("Les visites d'une ressource sont comptées", () => {
     })
     cy.log('Je peux voir la ressource')
     // Visit counts for non connected users
-    cy.testId('resource-views-count').should('have.text', '0')
+    cy.testId('resource-views-count').should('contain.text', '0')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register0)
 
     // Visit only counted once
     const register1 = interceptRegisterView()
     cy.reload()
-    cy.testId('resource-views-count').should('have.text', '1')
+    cy.testId('resource-views-count').should('contain.text', '1')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register1)
 
     const register2 = interceptRegisterView()
     cy.reload()
-    cy.testId('resource-views-count').should('have.text', '1')
+    cy.testId('resource-views-count').should('contain.text', '1')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register2)
   })
@@ -58,20 +58,20 @@ describe("Les visites d'une ressource sont comptées", () => {
 
     cy.log('Je peux voir la ressource')
     // Visit counts for non connected users
-    cy.testId('resource-views-count').should('have.text', '0')
+    cy.testId('resource-views-count').should('contain.text', '0')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register0)
 
     // Visit only counted once
     const register1 = interceptRegisterView()
     cy.reload()
-    cy.testId('resource-views-count').should('have.text', '1')
+    cy.testId('resource-views-count').should('contain.text', '1')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register1)
 
     const register2 = interceptRegisterView()
     cy.reload()
-    cy.testId('resource-views-count').should('have.text', '1')
+    cy.testId('resource-views-count').should('contain.text', '1')
     cy.getCookie('visit-hash').should('exist')
     cy.wait(register2)
   })

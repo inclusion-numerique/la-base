@@ -69,12 +69,14 @@ const ResourceView = ({
               }
             />
             <hr className="fr-separator-4v fr-separator-md-6v" />
-            <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-align-items-start fr-align-items-md-center fr-flex-gap-3v fr-mb-4v fr-mb-md-6v">
+            <div className="fr-flex fr-flex-gap-3v fr-justify-content-space-between fr-flex-wrap fr-my-md-6v fr-my-2w">
               <div className="fr-text--xs fr-mb-0 fr-flex">
                 <ResourceDates canEdit={canWrite} resource={resource} />
               </div>
-              {canWrite && (
-                <ResourcePublicStateBadge small resource={resource} />
+              {(canWrite || !resource.isPublic) && (
+                <span>
+                  <ResourcePublicStateBadge small resource={resource} />
+                </span>
               )}
             </div>
             {resource.image ? (
@@ -95,30 +97,33 @@ const ResourceView = ({
             <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h3">
               {resource.title}
             </h1>
-            <p className="fr-text--lg fr-mt-2v fr-mt-md-3v fr-mb-0">
+            <p className="fr-text--lg fr-mt-2v fr-mt-md-3v">
               {resource.description}
             </p>
-            <ResourcesViewsAndMetadata
-              resource={resource}
-              className="fr-my-4v fr-my-md-6v"
-            >
-              {resource._count.resourceFeedback > 0 && (
-                <>
-                  <FeedbackBadge
-                    value={resource.feedbackAverage}
-                    customThresholds={CUSTOM_THRESHOLD}
-                  />
-                  <Link href={`/ressources/${resource.slug}/avis`}>
-                    {resource._count.resourceFeedback}&nbsp;avis
-                  </Link>
-                </>
-              )}
-            </ResourcesViewsAndMetadata>
+            {resource.published && (
+              <ResourcesViewsAndMetadata
+                resource={resource}
+                showLabels
+                showPrivate={false}
+                className="fr-my-4v fr-my-md-6v"
+              >
+                {resource._count.resourceFeedback > 0 && (
+                  <>
+                    <FeedbackBadge
+                      value={resource.feedbackAverage}
+                      customThresholds={CUSTOM_THRESHOLD}
+                    />
+                    <Link href={`/ressources/${resource.slug}/avis`}>
+                      {resource._count.resourceFeedback}&nbsp;avis
+                    </Link>
+                  </>
+                )}
+              </ResourcesViewsAndMetadata>
+            )}
             <ResourceActions
               resource={resource}
               user={user}
               canWrite={canWrite}
-              canDelete={canDelete}
             />
             <ResourceMobileNavigation navigationData={navigationData} />
           </div>

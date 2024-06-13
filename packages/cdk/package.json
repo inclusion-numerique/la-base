@@ -21,8 +21,8 @@
     }
   },
   "dependencies": {
-    "cdktf": "^0.19.2",
-    "cdktf-cli": "^0.19.2",
+    "cdktf": "^0.20.7",
+    "cdktf-cli": "^0.20.7",
     "constructs": "^10.3.0",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",

@@ -222,7 +222,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-3w"
                   title={
-                    <div>
+                    <>
                       <span className="fr-text-default--grey">
                         À savoir pour les utilisateurs de la 1ère version de la
                         plateforme
@@ -230,7 +230,7 @@ const ContentPolicyPage = () => (
                       <Link className="fr-link" href="le-profil#un-profil">
                         En savoir plus ici
                       </Link>
-                    </div>
+                    </>
                   }
                 />
                 <p>Grâce à votre profil, vous pouvez&nbsp;:</p>

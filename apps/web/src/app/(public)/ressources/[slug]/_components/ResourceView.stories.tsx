@@ -11,6 +11,9 @@ import ResourceView from './ResourceView'
 const description =
   'Lorem Ipsul Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum quam mauris sit lacinia turpis sed vitae vel. Venenatis in in neque interdum nec facilisi mauris nunc vitae turpis sed vitae vel. Venenatis adipiscing elit.'
 
+const past = new Date('1998-07-12')
+const present = new Date('2022-07-12')
+
 const resource = (imageId: string | null) =>
   ({
     id: '1',
@@ -20,10 +23,10 @@ const resource = (imageId: string | null) =>
     slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-ligne-très-longues',
     description,
     excerpt: generateResourceExcerpt(description),
-    created: new Date('1998-07-12'),
-    updated: new Date('2022-07-12'),
-    published: new Date('2022-07-12'),
-    lastPublished: new Date('2022-07-12'),
+    created: past,
+    updated: present,
+    published: present,
+    lastPublished: present,
     deleted: null,
     baseId: '2',
     base: {
@@ -114,8 +117,8 @@ const resource = (imageId: string | null) =>
     isPublic: true,
     collections: [],
     _count: {
-      collections: 0,
-      views: 0,
+      collections: 45,
+      views: 45,
       resourceFeedback: 0,
     },
     resourceFeedback: [],
@@ -129,55 +132,343 @@ const resource = (imageId: string | null) =>
     publicFeedback: true,
   }) satisfies Resource
 
+export default {
+  title: 'Ressource/Consultation d’une ressource',
+  component: ResourceView,
+} as Meta<typeof ResourceView>
+
+type Story = StoryObj<typeof ResourceView>
+
 const Template = (props: ComponentProps<typeof ResourceView>) => (
   <div className="fr-container fr-pt-4v">
     <ResourceView {...props} />
   </div>
 )
 
-export default {
-  title: 'Ressource/View',
-  component: ResourceView,
-} as Meta<typeof ResourceView>
-
-type Story = StoryObj<typeof ResourceView>
-
-export const AvecImage: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    resource: resource('paysage'),
+// region Contributeur - Brouillon
+export const Draft: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Brouillon',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-46945',
+      },
+    ],
   },
-}
-
-export const AvecImageMobile = mobileStory(AvecImage)
-
-export const AvecImageBrouillon: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    resource: { ...resource('paysage'), published: null, lastPublished: null },
+    resource: {
+      ...resource('paysage'),
+      baseId: null,
+      base: null,
+      created: past,
+      updated: past,
+      published: null,
+      lastPublished: null,
+    },
     canWrite: true,
     canDelete: true,
   },
 }
+Draft.storyName = 'Contributeur - Brouillon'
 
-export const AvecImagBrouilloneMobile = mobileStory(AvecImageBrouillon)
+export const DraftMobile = mobileStory({
+  ...Draft,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Brouillon (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49816',
+      },
+    ],
+  },
+})
+DraftMobile.storyName = 'Contributeur - Brouillon (mobile)'
+// endregion
 
+// region Contributeur - Brouillon mis à jour
+export const DraftUpdated: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Brouillon mis à jour',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-47001',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: {
+      ...resource('paysage'),
+      baseId: null,
+      base: null,
+      created: past,
+      updated: present,
+      published: null,
+      lastPublished: null,
+    },
+    canWrite: true,
+    canDelete: true,
+  },
+}
+DraftUpdated.storyName = 'Contributeur - Brouillon mis à jour'
+
+export const DraftUpdatedMobile = mobileStory({
+  ...DraftUpdated,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Brouillon mis à jour (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49817',
+      },
+    ],
+  },
+})
+DraftUpdatedMobile.storyName = 'Contributeur - Brouillon mis à jour (mobile)'
+// endregion
+
+// region Contributeur - Publiée en Public
+export const EditorPublishedPublic: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en Public',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-47068',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: { ...resource('portrait') },
+    canWrite: true,
+    canDelete: true,
+  },
+}
+EditorPublishedPublic.storyName = 'Contributeur - Publiée en Public'
+
+export const EditorPublishedPublicMobile = mobileStory({
+  ...EditorPublishedPublic,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en Public (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49823',
+      },
+    ],
+  },
+})
+EditorPublishedPublicMobile.storyName =
+  'Contributeur - Publiée en Public (mobile)'
+// endregion
+
+// region Contributeur - Publiée en Privé
+export const EditorPublishedPrivate: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en Privé',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-47686',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: { ...resource('portrait'), isPublic: false },
+    canWrite: true,
+    canDelete: true,
+  },
+}
+EditorPublishedPrivate.storyName = 'Contributeur - Publiée en Privé'
+
+export const EditorPublishedPrivateMobile = mobileStory({
+  ...EditorPublishedPrivate,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en Privé (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49833',
+      },
+    ],
+  },
+})
+EditorPublishedPrivateMobile.storyName =
+  'Contributeur - Publiée en Privé (mobile)'
+// endregion
+
+// region Contributeur - Publiée en public avec des avis
+export const EditorPublishedWithFeedback: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en public avec des avis',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-47068',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: {
+      ...resource('portrait'),
+      _count: {
+        collections: 45,
+        views: 45,
+        resourceFeedback: 4,
+      },
+      feedbackAverage: 4,
+    },
+    canWrite: true,
+    canDelete: true,
+  },
+}
+EditorPublishedWithFeedback.storyName =
+  'Contributeur - Publiée en public avec des avis'
+
+export const EditorPublishedWithFeedbackMobile = mobileStory({
+  ...EditorPublishedWithFeedback,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée en public avec des avis (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49823',
+      },
+    ],
+  },
+})
+EditorPublishedWithFeedbackMobile.storyName =
+  'Contributeur - Publiée en public avec des avis (mobile)'
+// endregion
+
+// region Contributeur - Publiée avec des modifications en attente
+export const EditorPublishedPendingUpdate: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée avec des modifications en attente',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10994-47605',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: {
+      ...resource('portrait'),
+      published: past,
+      lastPublished: past,
+      updated: present,
+    },
+    canWrite: true,
+    canDelete: true,
+  },
+}
+EditorPublishedPendingUpdate.storyName =
+  'Contributeur - Publiée avec des modifications en attente'
+
+export const EditorPublishedPendingUpdateMobile = mobileStory({
+  ...EditorPublishedPendingUpdate,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Contributeur - Publiée avec des modifications en attente (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49829',
+      },
+    ],
+  },
+})
+EditorPublishedPendingUpdateMobile.storyName =
+  'Contributeur - Publiée avec des modifications en attente (mobile)'
+// endregion
+
+// region Visiteur - Publiée en Public
+export const VisitorPublishedPublic: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Visiteur - Publiée en Public',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-48055',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: { ...resource('portrait') },
+    canWrite: false,
+    canDelete: false,
+  },
+}
+VisitorPublishedPublic.storyName = 'Visiteur - Publiée en Public'
+
+export const VisitorPublishedPublicMobile = mobileStory({
+  ...VisitorPublishedPublic,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Visiteur - Publiée en Public (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49846',
+      },
+    ],
+  },
+})
+VisitorPublishedPublicMobile.storyName = 'Visiteur - Publiée en Public (mobile)'
+// endregion
+
+// region Visiteur - Publiée en Privé
+export const VisitorPublishedPrivate: Story = {
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Visiteur - Publiée en Privé',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-48065',
+      },
+    ],
+  },
+  render: (args) => <Template {...args} />,
+  args: {
+    resource: { ...resource('portrait'), isPublic: false },
+    canWrite: false,
+    canDelete: false,
+  },
+}
+VisitorPublishedPrivate.storyName = 'Visiteur - Publiée en Privé'
+
+export const VisitorPublishedPrivateMobile = mobileStory({
+  ...VisitorPublishedPrivate,
+  parameters: {
+    design: [
+      {
+        type: 'figma',
+        name: 'Visiteur - Publiée en Privé (mobile)',
+        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-49853',
+      },
+    ],
+  },
+})
+VisitorPublishedPrivateMobile.storyName = 'Visiteur - Publiée en Privé (mobile)'
+// endregion
+
+// region Visiteur - Sans image
 export const SansImage: Story = {
   render: (args) => <Template {...args} />,
   args: {
     resource: resource(null),
   },
 }
+SansImage.storyName = 'Visiteur - Sans image'
 
 export const SansImageMobile = mobileStory(SansImage)
-
-export const Contributeur: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    resource: { ...resource('portrait'), updated: new Date('2023-12-12') },
-    canWrite: true,
-    canDelete: true,
-  },
-}
-
-export const ContributeurMobile = mobileStory(Contributeur)
+SansImageMobile.storyName = 'Visiteur - Sans image (mobile)'
+// endregion

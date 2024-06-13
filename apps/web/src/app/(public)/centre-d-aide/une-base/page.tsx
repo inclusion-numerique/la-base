@@ -134,11 +134,11 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-3w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Si vous ne souhaitez pas utiliser votre base comme un
                       espace de publication commun, vous pouvez modifier la
                       visibilité de votre base et passer à une base privée.
-                    </p>
+                    </span>
                   }
                 />
                 <h3 id="base-privee" className="fr-mt-5w">
@@ -228,7 +228,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-6w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Vous pourrez modifier à tout moment les informations & les
                       paramètres de votre base en allant sur la page de votre
                       base et en cliquant sur le bouton ‘Modifier votre base’
@@ -236,7 +236,7 @@ const ContentPolicyPage = () => (
                       <Link className="fr-link" href="une-base#infos-base">
                         En savoir plus ici
                       </Link>
-                    </p>
+                    </span>
                   }
                 />
                 <hr />
@@ -552,11 +552,11 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Tous les membres d’une base peuvent ajouter des membres.
                       Si vous êtes administrateur, vous pouvez choisir leur
                       rôle.
-                    </p>
+                    </span>
                   }
                 />
                 <h4 className="fr-text--lead fr-mb-0">Supprimer un membre</h4>
@@ -569,10 +569,10 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-6w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Seuls les administrateurs peuvent supprimer les membres
                       d’une base
-                    </p>
+                    </span>
                   }
                 />
                 <hr />
@@ -636,7 +636,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-4w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Lorsque l’emplacement pour le logo de la base est vide, un
                       icône provenant de la libraire Open Source{' '}
                       <Link
@@ -648,7 +648,7 @@ const ContentPolicyPage = () => (
                         avvvatars.com
                       </Link>{' '}
                       est intégré par défaut.
-                    </p>
+                    </span>
                   }
                 />
                 <p className="fr-text--bold">
@@ -677,12 +677,12 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-my-2w"
                   title={
-                    <p className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--regular fr-text-default--grey">
                       Dans le cas d’un profil public, ses informations seront
                       visibles via votre page de profil public dans l’onglet{' '}
                       <strong>‘À propos’.</strong> Sur un profil privé, seul
                       votre nom & prénom seront visibles.
-                    </p>
+                    </span>
                   }
                 />
                 <h3 className="fr-mt-5w">Contacts</h3>

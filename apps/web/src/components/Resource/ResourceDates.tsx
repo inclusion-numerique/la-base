@@ -35,7 +35,7 @@ const ResourceDates = ({
       ) : null
 
     const dateContent = (
-      <>
+      <span>
         Publiée&nbsp;le&nbsp;{publishedDay}
         {lastPublishedDay !== publishedDay && (
           <>
@@ -43,7 +43,7 @@ const ResourceDates = ({
             Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
           </>
         )}
-      </>
+      </span>
     )
 
     if (unpublishedModifications) {

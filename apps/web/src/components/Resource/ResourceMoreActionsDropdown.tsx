@@ -15,16 +15,22 @@ export const ResourceMoreActionsDropdown = ({
   resource,
   user,
   priority = 'tertiary no outline',
+  modalPriority = 'tertiary no outline',
+  modalControlClassName,
   children,
   saveResourceInCollection = true,
+  size = 'small',
   copyLink = true,
   canWrite = false,
 }: {
   resource: ResourceListItem
   user?: SessionUser | null
   priority?: ButtonProps['priority']
+  modalPriority?: ButtonProps['priority']
+  modalControlClassName?: string
   children?: ReactNode
-  saveResourceInCollection?: boolean
+  saveResourceInCollection?: boolean | 'sm'
+  size?: ButtonProps['size']
   copyLink?: boolean
   canWrite?: boolean
 }) => (
@@ -32,7 +38,9 @@ export const ResourceMoreActionsDropdown = ({
     id={`more_actions_for_${resource.slug}`}
     title="Options sur la ressource"
     priority={priority}
-    size="small"
+    modalPriority={modalPriority}
+    modalControlClassName={modalControlClassName}
+    size={size}
     alignRight
     displayDropdownArrow={false}
     control={
@@ -44,7 +52,13 @@ export const ResourceMoreActionsDropdown = ({
   >
     <ul>
       {resource.published && saveResourceInCollection && (
-        <li>
+        <li
+          className={
+            saveResourceInCollection === true
+              ? ''
+              : `fr-unhidden fr-hidden-${saveResourceInCollection}`
+          }
+        >
           <OpenSaveResourceInCollectionModalButton
             size="small"
             title={`Enregistrer "${resource.title}" dans une collection`}

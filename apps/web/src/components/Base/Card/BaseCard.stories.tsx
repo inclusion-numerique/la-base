@@ -52,6 +52,12 @@ const base = {
 export default {
   title: 'Base/Card',
   component: BaseCard,
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=5593-83850&t=IaARn0o9n5mR7w18-4',
+    },
+  },
 } as Meta<typeof BaseCard>
 
 type Story = StoryObj<typeof BaseCard>

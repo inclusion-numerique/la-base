@@ -3,18 +3,18 @@ import CustomTag, { TagColor } from '@app/web/components/CustomTag'
 
 const informations = {
   public: {
-    label: 'Ressource publique',
+    label: 'Publique',
     icon: 'fr-icon-earth-fill',
     color: TagColor.GREEN,
   },
   private: {
-    label: 'Ressource privée',
+    label: 'Privée',
     icon: 'fr-icon-lock-line',
     color: TagColor.GREY,
   },
   draft: {
     label: 'Brouillon',
-    icon: 'fr-icon-draft-line',
+    icon: 'fr-icon-draft-fill',
     color: TagColor.GREY,
   },
 }

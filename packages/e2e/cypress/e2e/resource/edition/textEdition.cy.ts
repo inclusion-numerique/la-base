@@ -47,8 +47,8 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('content-edition_Text-3').should('exist')
 
         cy.testId('content-edition_Text-3').within(() => {
-          cy.get('h2').should('have.text', 'Babysitting blues...')
-          cy.get('h3').should(
+          cy.get('h4').should('have.text', 'Babysitting blues...')
+          cy.get('h5').should(
             'have.text',
             "C'est le blues de papa maman qui s'en vont au restaurant",
           )
@@ -69,7 +69,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         submitValidContentEdition('Text-1')
 
         cy.testId('content-edition_Text-1').within(() => {
-          cy.get('h4').should(
+          cy.get('h6').should(
             'have.text',
             "And I don't think that i'll do it again",
           )

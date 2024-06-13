@@ -118,7 +118,8 @@ workflows:
             - test_web_integration
             - test_components
             - test_web_e2e
-      - chromatic:
+      - execute_chromatic:
+          type: approval
           requires:
             - lint_web
             - lint_packages
@@ -128,6 +129,9 @@ workflows:
             - test_web_integration
             - test_components
             - test_web_e2e
+      - chromatic:
+          requires:
+            - execute_chromatic
 
   project_infrastructure_deployment:
     when:

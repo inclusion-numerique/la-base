@@ -67,6 +67,7 @@ const SaveResourceInCollectionButton = ({
   priority,
   size,
   children,
+  iconPosition = 'right',
 }: {
   className?: string
   user: SessionUser | null
@@ -77,6 +78,7 @@ const SaveResourceInCollectionButton = ({
   priority?: ButtonProps['priority']
   size?: 'small'
   children?: ReactNode
+  iconPosition?: 'right' | 'left'
 }) => {
   const alreadySaved = user?.collections.some((collection) =>
     collection.resources.some(({ resourceId }) => resourceId === resource.id),
@@ -85,6 +87,7 @@ const SaveResourceInCollectionButton = ({
     ...getButtonProps(alreadySaved, variant),
     children,
     priority,
+    iconPosition,
   }
 
   if (user) {

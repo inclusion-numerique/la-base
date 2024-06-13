@@ -44,10 +44,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.visit(
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource publique',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Publique')
   })
 
   it('Acceptation 2 - Si je passe la ressource dans un profil privé, elle devient privée', () => {
@@ -90,10 +87,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.visit(
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it('Acceptation 2 bis - Resource publique dans un cas impossible', () => {
@@ -135,10 +129,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.visit(
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it('Acceptation 3 - Si je passe la ressource dans une base privé, elle devient privée', () => {
@@ -183,10 +174,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.visit(
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
-    cy.testId('resource-public-state-badge').should(
-      'have.text',
-      'Ressource privée',
-    )
+    cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
   it('Acceptation 4 - Je peux changer l’indexation de ma ressource', () => {
