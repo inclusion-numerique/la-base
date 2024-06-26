@@ -1,0 +1,125 @@
+button.fr-tag--green-archipel[aria-pressed='true']:disabled,
+button.fr-tag--green-bourgeon[aria-pressed='true']:disabled,
+button.fr-tag--pink-tuile[aria-pressed='true']:disabled,
+button.fr-tag--yellow-tournesol[aria-pressed='true']:disabled,
+input[type='button'].fr-tag--green-archipel[aria-pressed='true']:disabled,
+input[type='button'].fr-tag--green-bourgeon[aria-pressed='true']:disabled,
+input[type='button'].fr-tag--pink-tuile[aria-pressed='true']:disabled,
+input[type='button'].fr-tag--yellow-tournesol[aria-pressed='true']:disabled {
+  background-color: var(--background-disabled-grey);
+  background-image: none;
+}
+
+.fr-tag--green-archipel[aria-pressed='false'] {
+  --idle: transparent;
+  --hover: var(--background-action-low-green-archipel);
+  --active: var(--background-action-low-green-archipel-active);
+
+  background-color: var(--background-alt-green-archipel);
+  color: var(--text-label-grey);
+}
+
+button.fr-tag--green-archipel[aria-pressed='true']:not(:disabled),
+input[type='button'].fr-tag--green-archipel[aria-pressed='true']:not(
+    :disabled
+  ) {
+  background-color: var(--background-alt-green-archipel);
+  background-image: none;
+  color: var(--text-label-green-archipel);
+  box-shadow: inset 0 0 0 2px var(--background-action-high-green-archipel);
+
+  &:hover {
+    background-image: none;
+    background-color: var(--background-action-low-green-archipel);
+  }
+}
+
+button.fr-tag--green-archipel[aria-pressed='true']::after,
+input[type='button'].fr-tag--green-archipel[aria-pressed='true']::after {
+  display: none;
+}
+
+.fr-tag--green-bourgeon[aria-pressed='false'] {
+  --idle: transparent;
+  --hover: var(--background-action-low-green-bourgeon);
+  --active: var(--background-action-low-green-bourgeon-active);
+
+  background-color: var(--background-alt-green-bourgeon);
+  color: var(--text-label-grey);
+}
+
+button.fr-tag--green-bourgeon[aria-pressed='true']:not(:disabled),
+input[type='button'].fr-tag--green-bourgeon[aria-pressed='true']:not(
+    :disabled
+  ) {
+  background-color: var(--background-alt-green-bourgeon);
+  background-image: none;
+  color: var(--text-label-green-bourgeon);
+  box-shadow: inset 0 0 0 2px var(--background-action-high-green-bourgeon);
+
+  &:hover {
+    background-image: none;
+    background-color: var(--background-action-low-green-bourgeon);
+  }
+}
+
+button.fr-tag--green-bourgeon[aria-pressed='true']::after,
+input[type='button'].fr-tag--green-bourgeon[aria-pressed='true']::after {
+  display: none;
+}
+
+.fr-tag--pink-tuile[aria-pressed='false'] {
+  --idle: transparent;
+  --hover: var(--background-action-low-pink-tuile);
+  --active: var(--background-action-low-pink-tuile-active);
+
+  background-color: var(--background-alt-pink-tuile);
+  color: var(--text-label-grey);
+}
+
+button.fr-tag--pink-tuile[aria-pressed='true']:not(:disabled),
+input[type='button'].fr-tag--pink-tuile[aria-pressed='true']:not(:disabled) {
+  background-color: var(--background-alt-pink-tuile);
+  background-image: none;
+  color: var(--text-label-pink-tuile);
+  box-shadow: inset 0 0 0 2px var(--background-action-high-pink-tuile);
+
+  &:hover {
+    background-image: none;
+    background-color: var(--background-action-low-pink-tuile);
+  }
+}
+
+button.fr-tag--pink-tuile[aria-pressed='true']::after,
+input[type='button'].fr-tag--pink-tuile[aria-pressed='true']::after {
+  display: none;
+}
+
+.fr-tag--yellow-tournesol[aria-pressed='false'] {
+  --idle: transparent;
+  --hover: var(--background-action-low-yellow-tournesol);
+  --active: var(--background-action-low-yellow-tournesol-active);
+
+  background-color: var(--background-alt-yellow-tournesol);
+  color: var(--text-label-grey);
+}
+
+button.fr-tag--yellow-tournesol[aria-pressed='true']:not(:disabled),
+input[type='button'].fr-tag--yellow-tournesol[aria-pressed='true']:not(
+    :disabled
+  ) {
+  background-color: var(--background-alt-yellow-tournesol);
+  background-image: none;
+  color: var(--text-label-yellow-tournesol);
+  box-shadow: inset 0 0 0 2px var(--background-action-high-yellow-tournesol);
+
+  &:hover {
+    background-image: none;
+    background-color: var(--background-action-low-yellow-tournesol);
+  }
+}
+
+button.fr-tag--yellow-tournesol[aria-pressed='true']::after,
+input[type='button'].fr-tag--yellow-tournesol[aria-pressed='true']::after {
+  display: none;
+}

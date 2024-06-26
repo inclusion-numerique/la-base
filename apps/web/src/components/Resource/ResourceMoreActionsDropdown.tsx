@@ -17,6 +17,7 @@ export const ResourceMoreActionsDropdown = ({
   priority = 'tertiary no outline',
   modalPriority = 'tertiary no outline',
   modalControlClassName,
+  dropdownControlClassName,
   children,
   saveResourceInCollection = true,
   size = 'small',
@@ -28,6 +29,7 @@ export const ResourceMoreActionsDropdown = ({
   priority?: ButtonProps['priority']
   modalPriority?: ButtonProps['priority']
   modalControlClassName?: string
+  dropdownControlClassName?: string
   children?: ReactNode
   saveResourceInCollection?: boolean | 'sm'
   size?: ButtonProps['size']
@@ -40,6 +42,7 @@ export const ResourceMoreActionsDropdown = ({
     priority={priority}
     modalPriority={modalPriority}
     modalControlClassName={modalControlClassName}
+    dropdownControlClassName={dropdownControlClassName}
     size={size}
     alignRight
     displayDropdownArrow={false}

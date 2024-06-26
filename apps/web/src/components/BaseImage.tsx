@@ -19,7 +19,6 @@ const BaseImage = ({
 }: Omit<RoundImageProps, 'image'> & {
   base: {
     id: string
-    title: string
     image: RoundImageProps['image']
   }
 }) => (

@@ -3,6 +3,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import {
   sanitizeUrlPaginationParams,
   searchParamsFromSegment,
+  searchUrl,
   UrlPaginationParams,
 } from '@app/web/server/search/searchQueryParams'
 import SearchResults from '@app/web/components/Search/SearchResults'
@@ -11,6 +12,7 @@ import {
   executeBasesSearch,
 } from '@app/web/server/search/executeSearch'
 import BasesSearchResult from '@app/web/components/Search/BasesSearchResult'
+import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
 import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
 
 export const dynamic = 'force-dynamic'
@@ -36,18 +38,19 @@ const BasesSearchResultPage = async ({
     <>
       <SynchronizeTabCounts tabCounts={tabCounts} />
       <SearchResults
-        tab="bases"
-        searchParams={searchParams}
         paginationParams={paginationParams}
         count={basesCount}
+        createPageLink={(page: number) =>
+          searchUrl('bases', searchParams, { ...paginationParams, page })
+        }
       >
-        <BasesSearchResult
-          user={user}
-          bases={bases}
-          searchParams={searchParams}
-          paginationParams={paginationParams}
-          totalCount={basesCount}
-        />
+        <BasesSearchResult user={user} bases={bases} totalCount={basesCount}>
+          <SearchUrlResultSortingSelect
+            paginationParams={paginationParams}
+            searchParams={searchParams}
+            tab="bases"
+          />
+        </BasesSearchResult>
       </SearchResults>
     </>
   )

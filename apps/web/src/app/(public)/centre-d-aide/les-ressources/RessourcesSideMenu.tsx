@@ -6,7 +6,7 @@ import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 const RESSOURCES_SECTIONS = [
   {
     id: 'ressources',
-    title: 'Une ressource, c’est quoi ?',
+    title: 'Une ressource, c’est quoi ?',
   },
   { id: 'creation-ressource', title: 'Création d’une ressource' },
   { id: 'parametre-ressource', title: 'Paramètres d’une ressource' },

@@ -30,6 +30,10 @@
   text-wrap: nowrap;
 }
 
+.fr-text--uppercase {
+  text-transform: uppercase !important;
+}
+
 /* sm flex rules */
 @media (min-width: 36em) {
   .fr-text-sm--right {

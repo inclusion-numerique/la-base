@@ -7,3 +7,12 @@
     color: var(--green-emeraude-main-632) !important;
   }
 }
+
+.fr-badge--lg {
+  font-size: 1rem;
+  padding: 0.5rem;
+
+  &::before {
+    --icon-size: 1.5rem;
+  }
+}

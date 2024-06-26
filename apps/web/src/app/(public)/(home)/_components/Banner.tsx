@@ -12,8 +12,11 @@ const Banner = () => (
         numériques à l’échelle nationale.
       </p>
       <SearchBar />
-      <div className="fr-my-4v">
-        <Link href="/rechercher/tout/ressources" className="fr-link">
+      <div className="fr-mt-3w">
+        <Link
+          href="/rechercher/tout/ressources"
+          className="fr-link fr-text--lg"
+        >
           <span className="fr-icon--sm fr-icon-file-text-line fr-mr-1v" />
           Voir toutes les ressources
         </Link>

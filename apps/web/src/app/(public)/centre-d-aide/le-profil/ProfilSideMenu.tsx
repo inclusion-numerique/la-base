@@ -6,9 +6,9 @@ import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 const PROFIL_SECTIONS = [
   {
     id: 'un-profil',
-    title: 'Un profil... c’est quoi ?',
+    title: 'Un profil... c’est quoi ?',
   },
-  { id: 'utiliser', title: 'Comment utiliser votre profil ?' },
+  { id: 'utiliser', title: 'Comment utiliser votre profil ?' },
   { id: 'info-profil', title: 'Informations & paramètres du profil' },
 ]
 

@@ -3,14 +3,16 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import {
   sanitizeUrlPaginationParams,
   searchParamsFromSegment,
+  searchUrl,
   UrlPaginationParams,
 } from '@app/web/server/search/searchQueryParams'
-import SearchResults from '@app/web/components/Search/SearchResults'
 import {
   countSearchResults,
   executeResourcesSearch,
 } from '@app/web/server/search/executeSearch'
+import SearchResults from '@app/web/components/Search/SearchResults'
 import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
+import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
 import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
 
 export const dynamic = 'force-dynamic'
@@ -38,18 +40,23 @@ const ResourcesSearchResultPage = async ({
     <>
       <SynchronizeTabCounts tabCounts={tabCounts} />
       <SearchResults
-        tab="ressources"
-        searchParams={searchParams}
         paginationParams={paginationParams}
         count={resourcesCount}
+        createPageLink={(page: number) =>
+          searchUrl('ressources', searchParams, { ...paginationParams, page })
+        }
       >
         <ResourcesSearchResults
-          searchParams={searchParams}
-          paginationParams={paginationParams}
           resources={resources}
           user={user}
           totalCount={resourcesCount}
-        />
+        >
+          <SearchUrlResultSortingSelect
+            paginationParams={paginationParams}
+            searchParams={searchParams}
+            tab="ressources"
+          />
+        </ResourcesSearchResults>
       </SearchResults>
     </>
   )

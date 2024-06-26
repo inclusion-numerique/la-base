@@ -9,7 +9,6 @@ import {
   resourcesSortingOptions,
   SearchParams,
   SearchTab,
-  searchUrl,
   Sorting,
 } from '@app/web/server/search/searchQueryParams'
 import styles from '@app/web/components/Search/ResultSortingSelect.module.css'
@@ -33,10 +32,12 @@ const ResultSortingSelect = ({
   searchParams,
   paginationParams,
   tab,
+  createSortingLink,
 }: {
   searchParams: SearchParams
   paginationParams: PaginationParams
   tab: SearchTab
+  createSortingLink: (sort: Sorting) => string
 }) => {
   const router = useRouter()
 
@@ -54,14 +55,7 @@ const ResultSortingSelect = ({
   const onSelect: ChangeEventHandler<HTMLSelectElement> = (event) => {
     const value = event.target.value as Sorting
     setSelected(value)
-    router.push(
-      // Replace the sorting parameter and reset to page 1
-      searchUrl(tab, searchParams, {
-        ...paginationParams,
-        sort: value,
-        page: 1,
-      }),
-    )
+    router.push(createSortingLink(value))
   }
 
   return (

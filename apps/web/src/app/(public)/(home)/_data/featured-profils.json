@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "jean-michel-avec-tout",
+    "firstName": "Jean-Michel",
+    "lastName": "Avec Tout",
+    "name": "Jean-Michel Avec Tout"
+  },
+  {
+    "slug": "prenom-nom",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "name": "Prénom Nom"
+  },
+  {
+    "slug": "prenom-nom",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "name": "Prénom Nom"
+  }
+]

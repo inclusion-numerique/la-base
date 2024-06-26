@@ -45,6 +45,8 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
     user,
   )
 
+  console.log('RESOURCE', savedResource)
+
   const draftResource = savedResource?.published
     ? null
     : await getResourceProjectionWithContext({

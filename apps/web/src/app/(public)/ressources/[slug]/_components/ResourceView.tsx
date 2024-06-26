@@ -113,7 +113,10 @@ const ResourceView = ({
                       value={resource.feedbackAverage}
                       customThresholds={CUSTOM_THRESHOLD}
                     />
-                    <Link href={`/ressources/${resource.slug}/avis`}>
+                    <Link
+                      className="fr-text--semi-bold"
+                      href={`/ressources/${resource.slug}/avis`}
+                    >
                       {resource._count.resourceFeedback}&nbsp;avis
                     </Link>
                   </>

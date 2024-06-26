@@ -25,6 +25,7 @@ export const Dropdown = ({
   priority,
   modalPriority,
   modalControlClassName,
+  dropdownControlClassName,
   size,
   displayDropdownArrow = true,
 }: {
@@ -36,6 +37,7 @@ export const Dropdown = ({
   priority?: ButtonProps['priority']
   modalPriority?: ButtonProps['priority']
   modalControlClassName?: string
+  dropdownControlClassName?: string
   size?: ButtonProps['size']
   displayDropdownArrow?: boolean
 }) => {
@@ -103,7 +105,10 @@ export const Dropdown = ({
       </div>
       <div className="fr-dropdown fr-hidden fr-unhidden-md">
         <Button
-          className={displayDropdownArrow ? 'fr-dropdown__btn' : ''}
+          className={classNames(
+            displayDropdownArrow ? 'fr-dropdown__btn' : '',
+            dropdownControlClassName,
+          )}
           priority={priority}
           title={title}
           type="button"

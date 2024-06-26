@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Les ressources de NEC 2023",
+    "slug": "les-ressources-de-nec-2023",
+    "published": "2024-01-30",
+    "base": {
+      "id": "1",
+      "title": "Numérique en Commun[s]",
+      "slug": "numerique-en-communs",
+      "image": null
+    }
+  },
+  {
+    "title": "Figma, outil de design à interface collaborative",
+    "slug": "figma-outil-de-design-a-interface-collaborative",
+    "published": "2024-06-13",
+    "createdBy": {
+      "id": "1",
+      "slug": "jean-michel-avec-tout",
+      "firstName": "Jean-Michel",
+      "lastName": "Avec Tout",
+      "name": "Jean-Michel Avec Tout",
+      "isPublic": true,
+      "image": null
+    }
+  },
+  {
+    "title": "Les ressources de NEC 2023",
+    "slug": "les-ressources-de-nec-2023",
+    "published": "2024-01-30",
+    "base": {
+      "id": "1",
+      "title": "Numérique en Commun[s]",
+      "slug": "numerique-en-communs",
+      "image": null
+    }
+  },
+  {
+    "title": "Figma, outil de design à interface collaborative",
+    "slug": "figma-outil-de-design-a-interface-collaborative",
+    "published": "2024-06-13",
+    "base": {
+      "id": "1",
+      "title": "Numérique en Commun[s]",
+      "slug": "numerique-en-communs",
+      "image": null
+    }
+  },
+  {
+    "title": "Les ressources de NEC 2023",
+    "slug": "les-ressources-de-nec-2023",
+    "published": "2024-01-30",
+    "base": {
+      "id": "1",
+      "title": "Numérique en Commun[s]",
+      "slug": "numerique-en-communs",
+      "image": null
+    }
+  },
+  {
+    "title": "Figma, outil de design à interface collaborative",
+    "slug": "figma-outil-de-design-a-interface-collaborative",
+    "published": "2024-06-13",
+    "base": {
+      "id": "1",
+      "title": "Numérique en Commun[s]",
+      "slug": "numerique-en-communs",
+      "image": null
+    }
+  }
+]

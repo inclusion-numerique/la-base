@@ -24,7 +24,7 @@ const Webinaire = () => (
           </Link>
         </div>
         <div className="fr-border-right fr-border--blue-france fr-mx-md-10w" />
-        <div className="fr-border-bottom fr-border--blue-france fr-my-6w fr-hidden-md" />
+        <div className="fr-border-bottom fr-border--blue-france fr-my-3w fr-hidden-md" />
         <div>
           <h2 className="fr-mb-1w fr-h4">Nous contacter</h2>
           <p>

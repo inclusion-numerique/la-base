@@ -86,10 +86,13 @@ const ResourceCard = ({
             {resource._count.resourceFeedback > 0 && (
               <>
                 <FeedbackBadge
+                  className="fr-mb-sm-0 fr-mb-3v"
                   value={resource.feedbackAverage}
                   customThresholds={CUSTOM_THRESHOLD}
                 />
-                {resource._count.resourceFeedback}&nbsp;avis
+                <span className="fr-text--semi-bold fr-mb-sm-0 fr-mb-3v">
+                  {resource._count.resourceFeedback}&nbsp;Avis
+                </span>
               </>
             )}
           </ResourcesViewsAndMetadata>
@@ -113,6 +116,8 @@ const ResourceCard = ({
               <span className="ri-edit-line" aria-hidden />
             </Button>
             <ResourceMoreActionsDropdown
+              modalControlClassName="ri-lg"
+              dropdownControlClassName="fr-text--bold"
               resource={resource}
               copyLink={false}
               canWrite

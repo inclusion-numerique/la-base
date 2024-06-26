@@ -1,7 +1,8 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
 import { useState } from 'react'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { CropText } from '@app/web/components/CropText/CropText'
 
 export const ReadMore = ({
   limit,
@@ -28,7 +29,7 @@ export const ReadMore = ({
     </>
   ) : (
     <>
-      {children.slice(0, limit).replace(/[\s!,.;?]+$/, '')}...
+      <CropText limit={limit}>children</CropText>
       <Button
         type="button"
         className="fr-display-block fr-mt-1w"

@@ -24,11 +24,19 @@ const ProfileCard = ({
   displayProfileMetadata?: boolean
 }) => (
   <article className="fr-border-top" data-testid="profile-card">
-    <div className="fr-enlarge-link fr-py-2w fr-flex fr-flex-gap-4v fr-align-items-sm-center fr-direction-sm-row fr-direction-column">
+    <div className="fr-py-2w fr-flex fr-flex-gap-4v fr-align-items-sm-center fr-direction-sm-row fr-direction-column">
       <div className="fr-flex fr-flex-gap-4v fr-align-items-center fr-flex-grow-1 ">
-        <RoundProfileImage size={48} user={profile} />
+        <Link
+          href={`/profils/${profile.slug}`}
+          className="fr-link--no-underline"
+        >
+          <RoundProfileImage size={48} user={profile} />
+        </Link>
         <div className="fr-flex fr-direction-column fr-flex-gap-2v">
-          <Link className="fr-flex-grow-1" href={`/profils/${profile.slug}`}>
+          <Link
+            className="fr-flex-grow-1 fr-link--no-underline"
+            href={`/profils/${profile.slug}`}
+          >
             <ProfileTitle className="fr-text--md fr-text--medium fr-mb-0">
               {profile.name && formatName(profile.name)}
             </ProfileTitle>

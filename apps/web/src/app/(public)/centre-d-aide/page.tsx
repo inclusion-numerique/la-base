@@ -45,7 +45,7 @@ const ContentPolicyPage = () => (
       <Breadcrumbs currentPage="Centre d'aide" />
       <div className="fr-text--center fr-mb-6w">
         <h1 className="fr-text-title--blue-france">
-          Comment pouvons-nous vous aider ?
+          Comment pouvons-nous vous aider&nbsp;?
         </h1>
         <p className="fr-text--xl">
           Retrouvez différentes catégories pour vous guider dans l’usage de la

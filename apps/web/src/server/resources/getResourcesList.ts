@@ -1,9 +1,13 @@
 import type { Prisma } from '@prisma/client'
 import { Theme } from '@prisma/client'
-import { pascalCase } from 'change-case'
+import { pascalCase, snakeCase } from 'change-case'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { themeCategories } from '@app/web/themes/themes'
+import {
+  Category,
+  categoryThemes,
+  themeCategories,
+} from '@app/web/themes/themes'
 
 export const resourceListSelect = (user: { id: string } | null) =>
   ({
@@ -192,25 +196,76 @@ export const getResourcesCountByTheme = async () => {
   const counts = await prismaClient.$queryRaw<
     { theme: Theme; count: number }[]
   >`
-      SELECT unnest(themes) AS theme, CAST(COUNT(*) AS integer) AS "count"
+      SELECT unnest(themes) AS theme, CAST(COUNT(DISTINCT resources.id) AS integer) AS "count"
       FROM resources
-      WHERE resources.is_public = true AND resources.deleted IS NULL
+      LEFT JOIN bases ON resources.base_id = bases.id
+      WHERE resources.is_public = true
+        AND resources.deleted IS NULL
+        AND (bases.id IS NULL OR bases.deleted IS NULL)
       GROUP BY theme
       ORDER BY theme ASC;
   `
 
   // Initialize object with every theme (so that we have 0 for themes with no resources)
-  const result = Object.fromEntries(
+  const themes = Object.fromEntries(
     Object.keys(themeCategories).map((theme) => [theme, 0]),
   ) as { [theme in Theme]: number }
 
   // Add the counts for each theme that have some resources
   // Convert snake case from db to enum value
   for (const { theme, count } of counts) {
-    result[pascalCase(theme) as Theme] = count
+    themes[pascalCase(theme) as Theme] = count
   }
 
-  return result
+  return themes
+}
+
+export const getResourcesCountByCategory = async () => {
+  // The categoryThemes object is a map of category to themes[]
+  // Convert categoryThemes object to a string suitable for SQL WITH clause
+  const categoryThemesSQL = Object.entries(categoryThemes)
+    .map(
+      ([category, themes]) =>
+        `SELECT '${category}' AS category, ARRAY[${themes
+          .map((theme) => `'${snakeCase(theme)}'::theme`)
+          .join(', ')}]::theme[] AS themes`,
+    )
+    .join(' UNION ALL ')
+
+  console.log('CATEGORIES SQL', categoryThemesSQL)
+
+  const querySql = `
+      WITH categories AS (${categoryThemesSQL})
+      SELECT categories.category, CAST(COUNT(DISTINCT resources.id) AS integer) AS count
+      FROM resources
+        JOIN categories ON resources.themes && categories.themes
+        LEFT JOIN bases ON resources.base_id = bases.id
+      WHERE resources.is_public = true
+        AND resources.deleted IS NULL
+        AND resources.published IS NOT NULL
+        AND (bases.id IS NULL OR bases.deleted IS NULL)
+      GROUP BY categories.category
+      ORDER BY categories.category ASC;
+  `
+
+  console.log('FINAL SQL', querySql)
+
+  // Use the categoryThemesSQL in the WITH clause
+  const counts =
+    await prismaClient.$queryRawUnsafe<{ category: Category; count: number }[]>(
+      querySql,
+    )
+  // Initialize object with every category (so that we have 0 for categories with no resources)
+  const categories = Object.fromEntries(
+    Object.keys(categoryThemes).map((category) => [category, 0]),
+  ) as { [category in Category]: number }
+
+  // Add the counts for each category that have some resources
+  for (const { category, count } of counts) {
+    categories[category as Category] = count
+  }
+
+  return categories
 }
 
 const toRatingsSum = (ratingSum: number, { rating }: { rating: number }) =>

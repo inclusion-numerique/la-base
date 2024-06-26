@@ -1,39 +1,28 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import {
-  PaginationParams,
-  SearchParams,
-} from '@app/web/server/search/searchQueryParams'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import ResultSortingSelect from '@app/web/components/Search/ResultSortingSelect'
 import BaseCard from '../Base/Card/BaseCard'
 import EmptyBox from '../EmptyBox'
 import styles from './SearchContents.module.css'
 
 const BasesSearchResult = ({
-  bases,
   totalCount,
-  searchParams,
-  paginationParams,
+  bases,
   user,
+  children,
 }: {
-  bases: BaseListItem[]
   totalCount: number
-  searchParams: SearchParams
-  paginationParams: PaginationParams
+  bases: BaseListItem[]
   user: SessionUser | null
+  children: ReactNode
 }) => (
   <>
     <div className={styles.header}>
       <h1 className="fr-text--lg fr-mb-0">
         {totalCount} Base{sPluriel(totalCount)}
       </h1>
-      <ResultSortingSelect
-        paginationParams={paginationParams}
-        searchParams={searchParams}
-        tab="bases"
-      />
+      {children}
     </div>
     {bases.length > 0 ? (
       bases.map((base) => <BaseCard key={base.slug} user={user} base={base} />)

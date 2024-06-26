@@ -1,14 +1,13 @@
 .container {
-  padding: 48px 0;
+  padding: 48px 0 64px;
   background-color: var(--background-alt-blue-france);
   text-align: center;
 
   @media (min-width: 768px) {
     padding: 80px 0;
-
   }
 
-    h1 {
+  h1 {
     color: var(--blue-france-sun-113-625);
   }
 }

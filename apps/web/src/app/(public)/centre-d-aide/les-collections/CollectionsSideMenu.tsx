@@ -6,7 +6,7 @@ import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 const COLLECTIONS_SECTIONS = [
   {
     id: 'collection',
-    title: 'Une collection, c’est quoi ?',
+    title: 'Une collection, c’est quoi ?',
   },
   { id: 'creation-collection', title: 'Création d’une collection' },
   {

@@ -9,10 +9,6 @@ import { SessionUser } from '@app/web/auth/sessionUser'
  * See baseSelect & profileSelect for more info on implementation of the queries
  */
 export const isFollowedBy = (
-  {
-    followedBy,
-  }: {
-    followedBy: { id: string }[]
-  },
+  { followedBy }: { followedBy: { id: string }[] },
   user: Pick<SessionUser, 'id'> | null,
 ) => !!user && followedBy.length > 0
