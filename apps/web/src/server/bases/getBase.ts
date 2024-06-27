@@ -82,7 +82,7 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
       ],
     },
     collections: {
-      select: collectionSelect,
+      select: collectionSelect(user),
       where: computeCollectionsListWhereForUser(user),
       orderBy: {
         updated: 'desc',
@@ -90,7 +90,7 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
     },
     savedCollections: {
       select: {
-        collection: { select: collectionSelect },
+        collection: { select: collectionSelect(user) },
       },
       where: {
         collection: computeCollectionsListWhereForUser(user),

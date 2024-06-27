@@ -15,7 +15,11 @@ export const getProfileSavedCollections = async (
       savedById: profileId,
       collection: computeCollectionsListWhereForUser(user),
     },
-    select: { id: true, saved: true, collection: { select: collectionSelect } },
+    select: {
+      id: true,
+      saved: true,
+      collection: { select: collectionSelect(user) },
+    },
     orderBy: {
       saved: 'desc',
     },

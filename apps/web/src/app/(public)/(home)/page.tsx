@@ -84,8 +84,8 @@ const HomePage = async () => {
               et publient leurs ressources pour
             </span>
             <span className="fr-display-block">
-              participer à l’évolution du secteur. Rejoignez vous aussi la
-              communauté !
+              participer à l’évolution du secteur. Rejoignez la
+              communauté&nbsp;!
             </span>
           </p>
         </div>
@@ -139,7 +139,8 @@ const HomePage = async () => {
             <div className="fr-col">
               <h2 className="fr-mb-1w">Découvrez les profils de créateurs</h2>
               <p className="fr-mb-0">
-                Ce sont les acteurs qui participent à la communauté...
+                Acteurs, professionnels ou particuliers, partageant des
+                ressources et contribuant à la communauté des Bases
               </p>
             </div>
             <div className="fr-col-auto fr-flex fr-unhidden-md fr-hidden">

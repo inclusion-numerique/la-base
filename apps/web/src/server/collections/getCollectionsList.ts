@@ -1,6 +1,7 @@
 import type { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { computeResourcesListWhereForUser } from '@app/web/server/resources/getResourcesList'
 
 export const computeCollectionsListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
@@ -72,69 +73,66 @@ export const getProfileCollectionsCount = async (
   }
 }
 
-export const collectionSelect = {
-  id: true,
-  title: true,
-  slug: true,
-  description: true,
-  isPublic: true,
-  image: {
-    select: {
-      id: true,
-      altText: true,
-    },
-  },
-  createdBy: {
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      firstName: true,
-      lastName: true,
-      image: { select: { altText: true, id: true } },
-      isPublic: true,
-    },
-  },
-  base: {
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      image: { select: { altText: true, id: true } },
-    },
-  },
-  // Resources only for image previews
-  resources: {
-    select: {
-      resource: {
-        select: {
-          image: { select: { id: true, altText: true } },
-        },
+export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>
+  ({
+    id: true,
+    title: true,
+    slug: true,
+    description: true,
+    isPublic: true,
+    image: {
+      select: {
+        id: true,
+        altText: true,
       },
     },
-    where: {
-      resource: {
-        deleted: null,
-        image: {
-          isNot: null,
-        },
+    createdBy: {
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        firstName: true,
+        lastName: true,
+        image: { select: { altText: true, id: true } },
+        isPublic: true,
       },
     },
-    take: 3,
-    orderBy: { resource: { lastPublished: 'desc' } },
-  },
-  _count: {
-    select: {
-      resources: {
-        where: {
-          resource: {
-            deleted: null,
+    base: {
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        image: { select: { altText: true, id: true } },
+      },
+    },
+    // Resources only for image previews
+    resources: {
+      select: {
+        resource: {
+          select: {
+            image: { select: { id: true, altText: true } },
           },
         },
       },
+      where: {
+        resource: {
+          deleted: null,
+          image: {
+            isNot: null,
+          },
+        },
+      },
+      take: 3,
+      orderBy: { resource: { lastPublished: 'desc' } },
     },
-  },
-} satisfies Prisma.CollectionSelect
+    _count: {
+      select: {
+        resources: {
+          where: { resource: computeResourcesListWhereForUser(user) },
+        },
+      },
+    },
+  }) satisfies Prisma.CollectionSelect
 
 export const getProfileCollections = async (
   profileId: string,
@@ -142,7 +140,7 @@ export const getProfileCollections = async (
 ) => {
   const where = getWhereCollectionsProfileList(profileId, user)
   return prismaClient.collection.findMany({
-    select: collectionSelect,
+    select: collectionSelect(user),
     where,
     orderBy: {
       created: 'desc',
