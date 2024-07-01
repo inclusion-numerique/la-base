@@ -232,8 +232,6 @@ export const getResourcesCountByCategory = async () => {
     )
     .join(' UNION ALL ')
 
-  console.log('CATEGORIES SQL', categoryThemesSQL)
-
   const querySql = `
       WITH categories AS (${categoryThemesSQL})
       SELECT categories.category, CAST(COUNT(DISTINCT resources.id) AS integer) AS count
@@ -247,8 +245,6 @@ export const getResourcesCountByCategory = async () => {
       GROUP BY categories.category
       ORDER BY categories.category ASC;
   `
-
-  console.log('FINAL SQL', querySql)
 
   // Use the categoryThemesSQL in the WITH clause
   const counts =
