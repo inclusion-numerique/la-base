@@ -8,46 +8,36 @@ import {
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
 const featuredBaseIds = [
-  // pix
-  '56da871e-f299-4f5f-a4ec-337957871a5e',
-  // ACIAH, Accessibilité, Accompagnement du Handicap
-  'b01dc678-89eb-4337-ac50-fc0ce4745f66',
-  // Institut du numérique responsable
-  '83a638a4-62b2-45df-9664-2467a5d1e53b',
-  // Ma Culture Numérique
-  // '9324c807-74cb-422f-b4d8-7f0f44c96825',
-  // Numericatous
-  // '3b4549e1-5c7c-4cca-b717-c311c8645b1d',
-  // Rés’in
-  // '40bcfd54-d644-4260-9971-001510fcced3',
-  // Cybermalveillance.gouv.fr
-  // '3f76ddd8-60ad-43ef-a4cc-b93d9a9dd116',
-  // Internet Sans Crainte (Tralalère)
-  // '35dcef50-e7e6-4ae8-aea5-2bca06ed8094',
+  // solidarite-numerique
+  '4ebed26b-3e89-4af0-aec2-44781aa527d6',
+  // panoramax
+  'c4027f6b-3800-4483-bd85-b4687958df2d',
+  // la-veille-et-les-ressources-du-collectif-coll-in
+  'c16cb46e-f254-4be2-9396-2f0b85fb7fcf',
 ]
 
 const featuredResourceIds = [
-  // France Numérique Ensemble : c'est quoi ?
-  'f3cf7aef-a9e0-4b76-bebb-06ab903feadb',
-  // Souris adaptée pour personne en situation de handicap - Lauréat AMI Outiller la médiation numérique
-  '463c92c1-8f4c-4b93-8758-5ec28d16c75d',
-  // Achats en ligne
-  'd0643a35-a406-4994-934c-79b907652f2f',
-  // Mémo Geste
-  'db077fd8-2bbd-40d1-be9a-0746bb18e2f4',
-  // A vous de jouer : Réduisez votre impact numérique !
-  '5693e198-c6bb-4b64-ab28-7741d4ea6a37',
-  // Glossaire des acteurs et dispositifs de l'inclusion numérique
-  '0e909581-7f23-4117-8932-0f95a125ad4a',
+  // tutoriel-des-communs-numeriques
+  '74f03c0f-2853-4450-9243-59ccd292386a',
+  // le-puzzle-de-la-mediation-numerique-version-grand-est
+  '8c5e247d-091c-4bef-a0c9-1f4aaf2a685f',
+  // guide-contre-la-desinformation-dicod
+  '73669768-57b8-442e-9d46-afae2963db05',
+  // introduction-a-la-demarche-numerique-responsable
+  '80c49d94-e9d3-4dab-bc11-f91e4218a92f',
+  // comment-securiser-ses-achats-sur-internet
+  '5d820fd5-1660-47e1-83f9-3bf8dacee5b9',
+  // repertoire-d-annuaires-d-intelligences-artificielles
+  '06c26cec-33a5-4fbc-b1c9-f254bdba66dc',
 ]
 
 const featuredProfileIds = [
-  // Guillaume Gobert
-  '636945f7-ee25-41c6-b912-93e861ea0a93',
-  // Tiffanie Train
-  '2fc666cb-4bb7-42b5-a8d4-a94f6a91f9f2',
-  // Othman Ben Brahim
-  '5379dd60-4f2d-406f-9538-155f074814a6',
+  // eleonore-geneix
+  '010ba393-75bf-4627-ad2a-969ab9fc71d1',
+  // lionel-rauch
+  'd6ced44c-354d-483a-99d0-a7f4de48e484',
+  // garlann-nizon
+  '589e8b7f-52f1-4d6a-8123-cc5b235a3b64',
 ]
 
 export const getFeatured = async ({ user }: { user: SessionUser | null }) => {
