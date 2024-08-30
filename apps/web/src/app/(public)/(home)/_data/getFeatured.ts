@@ -7,6 +7,7 @@ import {
 } from '@app/web/server/resources/getResourcesList'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
+// Updated on 2024-08-30
 const featuredBaseIds = [
   // pimms-mediation-cenon
   'd9effe0e-3169-4698-9e7a-31a45379939c',
