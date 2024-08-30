@@ -5,9 +5,9 @@ import Link from 'next/link'
 import React from 'react'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 import SkipLinksPortal from '../../../../components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '../../../../utils/skipLinks'
-import Webinaire from '../../Webinaire'
 import BaseSideMenu from './BaseSideMenu'
 
 export const revalidate = 0
@@ -986,7 +986,7 @@ const ContentPolicyPage = () => (
         </div>
       </div>
     </main>
-    <Webinaire />
+    <Newsletter />
   </>
 )
 

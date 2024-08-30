@@ -5,7 +5,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Card from '@app/web/components/Card'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
-import Webinaire from '../Webinaire'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 
 export const revalidate = 0
 export const metadata: Metadata = {
@@ -137,7 +137,7 @@ const ContentPolicyPage = () => (
         </div>
       </div>
     </main>
-    <Webinaire />
+    <Newsletter />
   </>
 )
 export default ContentPolicyPage

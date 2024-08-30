@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Webinaire from '@app/web/app/(public)/Webinaire'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import { getFeatured } from '@app/web/app/(public)/(home)/_data/getFeatured'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 import { FeaturedBase } from './_components/FeaturedBase'
 import { FeaturedProfil } from './_components/FeaturedProfil'
 import HomeCategories from './_components/HomeCategories'
@@ -240,7 +240,7 @@ const HomePage = async () => {
           </div>
         </div>
         <HomeInfo />
-        <Webinaire />
+        <Newsletter />
       </main>
     </>
   )

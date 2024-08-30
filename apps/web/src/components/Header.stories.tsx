@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import Header from '@app/web/components/Header'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 
@@ -27,9 +28,20 @@ export const SignedOut: Story = {
   name: 'Utilisateur non connecté',
 }
 
+export const SignedOutMobile: Story = {
+  name: 'Utilisateur non connecté - mobile',
+  parameters: mobileStoryParameters,
+}
+
 export const SignedInNoBases: Story = {
   name: 'Utilisateur connecté - Sans bases',
   args: { user: testSessionUser },
+}
+
+export const SignedInNoBasesMobile: Story = {
+  name: 'Utilisateur connecté - Sans bases - Mobile',
+  args: { user: testSessionUser },
+  parameters: mobileStoryParameters,
 }
 
 export const SignedInWithBases: Story = {
@@ -64,6 +76,41 @@ export const SignedInWithBases: Story = {
       resources: [],
     },
   },
+}
+
+export const SignedInWithBasesMobile: Story = {
+  name: 'Utilisateur connecté - Avec bases - Mobile',
+  args: {
+    user: {
+      ...testSessionUser,
+      ownedBases: [
+        {
+          id: 'a',
+          title: 'Ma première base',
+          slug: 'a',
+          isPublic: true,
+          collections: [],
+          savedCollections: [],
+        },
+      ],
+      bases: [
+        {
+          isAdmin: true,
+          base: {
+            id: 'b',
+            title: 'Une autre base',
+            slug: 'b',
+            isPublic: false,
+            collections: [],
+            savedCollections: [],
+          },
+        },
+      ],
+      createdResources: [],
+      resources: [],
+    },
+  },
+  parameters: mobileStoryParameters,
 }
 
 /* TODO: components not working, issue with storybook and next/navigation

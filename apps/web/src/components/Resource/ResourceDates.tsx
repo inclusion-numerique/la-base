@@ -39,7 +39,7 @@ const ResourceDates = ({
         Publiée&nbsp;le&nbsp;{publishedDay}
         {lastPublishedDay !== publishedDay && (
           <>
-            <span className="fr-mx-1v fr-text--bold">︱</span>
+            <span className="fr-mx-1v fr-text--bold">&nbsp;︱&nbsp;</span>
             Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
           </>
         )}

@@ -31,7 +31,8 @@ const resource = (imageId: string | null) =>
     baseId: '2',
     base: {
       id: '2',
-      title: 'Titre de la base',
+      title:
+        'Titre de la base particulièrement long au point de revenir à la ligne',
       slug: 'titre-de-la-base',
       isPublic: true,
       members: [],

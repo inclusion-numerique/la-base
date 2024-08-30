@@ -1,0 +1,7 @@
+.steps {
+  font-size: 12px;
+
+  @media (min-width: 30em) {
+    font-size: 16px;
+  }
+}

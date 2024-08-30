@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   getStatistics,
   StatisticsParams,
@@ -17,6 +18,8 @@ const StatisticsPage = async ({
 }) => {
   const { kpi, search, creation, usage } = await getStatistics(searchParams)
 
+  console.log('USERS', kpi.recentUsers)
+
   return (
     <>
       <section>
@@ -24,7 +27,7 @@ const StatisticsPage = async ({
           Chiffres clés pour suivre l’usage du service
         </h2>
         <div className="fr-grid-row fr-grid-row--gutters">
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
             <Card
               title={
                 <KeyFigureTitle type="publications">
@@ -40,7 +43,7 @@ const StatisticsPage = async ({
               </div>
             </Card>
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
             <Card
               title={
                 <KeyFigureTitle type="views">
@@ -56,7 +59,7 @@ const StatisticsPage = async ({
               </div>
             </Card>
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
             <Card
               title={
                 <KeyFigureTitle type="rates">
@@ -68,6 +71,21 @@ const StatisticsPage = async ({
               Indice de satisfaction globale
               <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
                 sur {numberToString(kpi.rates.count)} avis
+              </div>
+            </Card>
+          </div>
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
+            <Card
+              title={
+                <KeyFigureTitle type="users">
+                  {numberToString(kpi.recentUsers)}
+                </KeyFigureTitle>
+              }
+              titleAs="div"
+            >
+              Nombre de membres avec une activité
+              <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
+                sur les 30 derniers jours
               </div>
             </Card>
           </div>

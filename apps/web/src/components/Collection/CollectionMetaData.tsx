@@ -28,7 +28,7 @@ const CollectionMetaData = ({
 }) => {
   const withButtons = context === 'card' || context === 'view'
   return (
-    <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-6v">
+    <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-2v">
       <div className="fr-flex fr-flex-gap-2v fr-text--sm fr-mb-0">
         <span className="fr-icon-file-text-line fr-icon--sm" />
         <b>{count}</b>
@@ -47,7 +47,7 @@ const CollectionMetaData = ({
         />
       </div>
       {withButtons && (
-        <div className="fr-flex fr-flex-gap-2v fr-hidden fr-unhidden-md">
+        <div className="fr-flex fr-flex-gap-2v">
           {canWrite && (
             <Link
               href={`./${collection.slug}/modifier`}
@@ -65,14 +65,15 @@ const CollectionMetaData = ({
             </Link>
           )}
           <SaveCollectionButton
-            priority="tertiary"
+            priority={context === 'view' ? 'tertiary' : 'tertiary no outline'}
             user={user}
             collection={collection}
             context={context}
           />
           <CopyLinkButton
             size="small"
-            priority="tertiary"
+            className="fr-hidden fr-unhidden-md"
+            priority={context === 'view' ? 'tertiary' : 'tertiary no outline'}
             url={getServerUrl(`/collections/${collection.slug}`, true)}
           />
         </div>

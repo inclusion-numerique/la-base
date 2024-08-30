@@ -175,68 +175,10 @@ const VisitorPublishedPrivateUpdatedArguments: ComponentProps<
 
 export const VisitorPublishedInBase: Story = mediumContainerStory({
   parameters: {
-    design: [
-      {
-        type: 'figma',
-        name: 'Visiteur - Publiée en public',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29255&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Visiteur - Publiée en public avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29258&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Visiteur - Publiée en privée',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29264&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Visiteur - Publiée en privée avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29267&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Brouillon',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29228&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Brouillon modifié',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29231&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en public',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29234&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en public avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29237&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en public avec des modifications non publiées',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29240&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en privé',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29243&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en privé avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29246&t=i9GYiv7b09UnqrXx-4',
-      },
-      {
-        type: 'figma',
-        name: 'Contributeur - Publiée en privé avec des modifications non publiées',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29249&t=i9GYiv7b09UnqrXx-4',
-      },
-    ],
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10993-29255&t=i9GYiv7b09UnqrXx-4',
+    },
   },
   render: () => (
     <>
@@ -259,68 +201,10 @@ VisitorPublishedInBase.storyName = 'Ressource publiée dans une base'
 
 export const VisitorPublishedInBaseMobile: Story = mobileStory({
   parameters: {
-    design: [
-      {
-        type: 'figma',
-        name: 'Publiée en public',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56871&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en public avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56874&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en privée',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56878&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en privée avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56881&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Brouillon',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56841&t=tJEhYVuIudlgV5I5-4',
-      },
-      {
-        type: 'figma',
-        name: 'Brouillon modifié',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56844&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en public',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56848&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en public avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56851&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en public avec des modifications non publiées',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56854&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en privé',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56858&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en privé avec mise à jour',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56861&t=2gdxVbP0ENf648Yt-4',
-      },
-      {
-        type: 'figma',
-        name: 'Publiée en privé avec des modifications non publiées',
-        url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56864&t=2gdxVbP0ENf648Yt-4',
-      },
-    ],
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/Rk4NNQVYRBE0bJZ6i5mrfU/Les-Bases---V.2?node-id=10998-56871&t=2gdxVbP0ENf648Yt-4',
+    },
   },
   render: () => (
     <>

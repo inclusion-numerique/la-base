@@ -82,6 +82,50 @@ export const getStatistics = async (_params: StatisticsParams) => {
       ORDER BY category
   `
 
+  const recentUsersCountResult = await prismaClient.$queryRaw<
+    { count: number }[]
+  >`
+      SELECT COUNT(DISTINCT u.id)::integer AS count
+      FROM users u
+               LEFT JOIN (
+          SELECT by_id, MAX(timestamp) AS last_resource_event
+          FROM resource_events
+          GROUP BY by_id
+      ) re ON re.by_id = u.id
+               LEFT JOIN (
+          SELECT created_by_id, MAX(created) AS last_base_created
+          FROM bases
+          GROUP BY created_by_id
+      ) bc ON bc.created_by_id = u.id
+               LEFT JOIN (
+          SELECT member_id, MAX(accepted) AS last_membership_accepted
+          FROM base_members
+          GROUP BY member_id
+      ) bm ON bm.member_id = u.id
+               LEFT JOIN (
+          SELECT follower_id, MAX(followed) AS last_followed
+          FROM profile_follows
+          GROUP BY follower_id
+      ) pf ON pf.follower_id = u.id
+               LEFT JOIN (
+          SELECT user_id, MAX(timestamp) AS last_resource_viewed
+          FROM resource_views
+          GROUP BY user_id
+      ) rv ON rv.user_id = u.id
+      WHERE GREATEST(
+                    COALESCE(re.last_resource_event, '1970-01-01'),
+                    COALESCE(bc.last_base_created, '1970-01-01'),
+                    COALESCE(bm.last_membership_accepted, '1970-01-01'),
+                    COALESCE(pf.last_followed, '1970-01-01'),
+                    COALESCE(rv.last_resource_viewed, '1970-01-01'),
+                    u.created
+            ) >= CURRENT_DATE - INTERVAL '30 days'
+  `
+
+  const recentUsersCount = recentUsersCountResult[0]?.count ?? 0
+
+  const userCount = await prismaClient.user.count()
+
   const kpi = {
     publications: {
       count: publicResource.count + privateResource.count,
@@ -96,6 +140,8 @@ export const getStatistics = async (_params: StatisticsParams) => {
       count: feedback.count,
       average: feedbackAverage.count,
     },
+    recentUsers: recentUsersCount,
+    users: userCount,
   }
 
   const searchStatisticsDaysInterval =

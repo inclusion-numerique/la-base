@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import classNames from 'classnames'
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import CustomTag, { TagColor } from '../CustomTag'
 
@@ -40,10 +41,13 @@ const ResourcesViewsAndMetadata = ({
         <span className="fr-text--nowrap">
           {resource._count.collections}
           {showLabels && (
-            <span className="fr-hidden fr-unhidden-sm"> Enregistrements</span>
+            <span className="fr-hidden fr-unhidden-sm">
+              {' '}
+              Enregistrement{sPluriel(resource._count.collections)}
+            </span>
           )}
           <span className="fr-hidden-sm fr-unhidden fr-sr-only">
-            Enregistrements
+            Enregistrement{sPluriel(resource._count.collections)}
           </span>
         </span>
       </span>

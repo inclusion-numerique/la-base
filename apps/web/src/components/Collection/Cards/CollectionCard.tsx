@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import CollectionMetaData from '../CollectionMetaData'
+import Images from '../Images'
 import styles from './CollectionCard.module.css'
-import Images from './Images'
-import CollectionMetaData from './CollectionMetaData'
 
 const CollectionCard = ({
   collection,
@@ -42,7 +42,7 @@ const CollectionCard = ({
             </h3>
             {collection.description && (
               <div
-                className="fr-text--sm fr-mb-0"
+                className="fr-text--sm fr-mb-3v"
                 dangerouslySetInnerHTML={{
                   __html: collection.description,
                 }}
@@ -59,8 +59,8 @@ const CollectionCard = ({
               isPublic: collection.isPublic,
             }}
             count={resourcesCount}
-            priority="tertiary no outline"
             context="card"
+            hideRessourceLabelOnSmallDevices
           />
         )}
       </div>

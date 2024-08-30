@@ -3,8 +3,8 @@ import Tabs from '@codegouvfr/react-dsfr/Tabs'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
 import { CreateCollectionButton } from '../CreateCollectionButton'
-import CollectionCard from '../CollectionCard'
 import styles from './Collections.module.css'
 
 const Collections = ({

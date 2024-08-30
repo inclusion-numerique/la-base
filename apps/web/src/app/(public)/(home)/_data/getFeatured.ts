@@ -8,36 +8,36 @@ import {
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
 const featuredBaseIds = [
-  // solidarite-numerique
-  '4ebed26b-3e89-4af0-aec2-44781aa527d6',
-  // panoramax
-  'c4027f6b-3800-4483-bd85-b4687958df2d',
-  // la-veille-et-les-ressources-du-collectif-coll-in
-  'c16cb46e-f254-4be2-9396-2f0b85fb7fcf',
+  // pimms-mediation-cenon
+  'd9effe0e-3169-4698-9e7a-31a45379939c',
+  // mission-numerique-responsable-anct
+  '1bad9b9e-e965-4f93-8118-b1a476809a3d',
+  // les-enovateurs
+  'bb63fe55-9c08-48ac-89dd-a23374e9d68f',
 ]
 
 const featuredResourceIds = [
-  // tutoriel-des-communs-numeriques
-  '74f03c0f-2853-4450-9243-59ccd292386a',
-  // le-puzzle-de-la-mediation-numerique-version-grand-est
-  '8c5e247d-091c-4bef-a0c9-1f4aaf2a685f',
-  // guide-contre-la-desinformation-dicod
-  '73669768-57b8-442e-9d46-afae2963db05',
-  // introduction-a-la-demarche-numerique-responsable
-  '80c49d94-e9d3-4dab-bc11-f91e4218a92f',
-  // comment-securiser-ses-achats-sur-internet
-  '5d820fd5-1660-47e1-83f9-3bf8dacee5b9',
-  // repertoire-d-annuaires-d-intelligences-artificielles
-  '06c26cec-33a5-4fbc-b1c9-f254bdba66dc',
+  // kit-atelier-college-bienvenue-les-6eme-cycle-3-et-4-8-12-ans
+  '73f567f8-914b-4885-b716-7eda9994a9f7',
+  // aie-aie-ia
+  'fe0f0069-c0e5-49bc-a92e-9323736370d7',
+  // memo-les-risques-du-numerique
+  '12795fc5-ce46-4d80-9ff9-735ff9b04a65',
+  // stirling-pdf-service-auto-heberge-de-manipulation-de-pdf
+  'b48d4392-9c5d-4269-8953-85144410e90b',
+  // les-cookies-informatiques
+  'c1968dbe-d922-4c23-b677-593bdfe07a4d',
+  // conference-le-monde-x-nec-internet-et-les-jeunes-de-quoi-avons-nous-peur
+  '416520f9-84d5-4d44-a271-c716b39339ec',
 ]
 
 const featuredProfileIds = [
-  // eleonore-geneix
-  '010ba393-75bf-4627-ad2a-969ab9fc71d1',
-  // lionel-rauch
-  'd6ced44c-354d-483a-99d0-a7f4de48e484',
-  // garlann-nizon
-  '589e8b7f-52f1-4d6a-8123-cc5b235a3b64',
+  // paul-emile-guyon-gellin
+  '74ace0b1-0c5d-491c-9468-a887f43b7178',
+  // laura-jarnet
+  'f48eb463-497d-4af4-8ad0-839f4900be7f',
+  // elise-derose
+  'dfb0cfc7-219b-4ac6-b2b5-9852a23342a4',
 ]
 
 export const getFeatured = async ({ user }: { user: SessionUser | null }) => {

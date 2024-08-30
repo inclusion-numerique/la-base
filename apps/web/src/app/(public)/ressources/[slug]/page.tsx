@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import PrivateBox from '@app/web/components/PrivateBox'
 import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
@@ -16,8 +15,7 @@ import {
   ResourcePermissions,
 } from '@app/web/authorization/models/resourceAuthorization'
 import ResourceView from './_components/ResourceView'
-import ResourceViewHeader from './_components/ResourceViewHeader'
-import ResourceViewSeparators from './_components/ResourceViewSeparators'
+import PrivateResourceView from './_components/PrivateResourceView'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -84,11 +82,7 @@ const RessourcePage = async ({ params }: { params: { slug: string } }) => {
               canDelete={canDelete}
             />
           ) : (
-            <>
-              <ResourceViewHeader resource={resource} />
-              <ResourceViewSeparators onlyLeft withoutPadding />
-              <PrivateBox type="Ressource" />
-            </>
+            <PrivateResourceView resource={resource} />
           )}
         </main>
       </div>

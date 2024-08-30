@@ -17,9 +17,9 @@ import SearchResults from '@app/web/components/Search/SearchResults'
 import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
 import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
 import { ThematicLinkSortingSelect } from '@app/web/components/Search/ThematicLinkResultSortingSelect'
-import Webinaire from '@app/web/app/(public)/Webinaire'
 import { type Category, categoryThemesOptions } from '@app/web/themes/themes'
 import { categoryStyles } from '@app/web/app/(public)/(categories)/_helpers/categoryStyles'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 
 export type CategoryPageUrlParams = {
   page?: string | string[] | null
@@ -123,7 +123,7 @@ const CategoryPage = async ({
           </main>
         </div>
       </div>
-      <Webinaire />
+      <Newsletter />
     </>
   )
 }

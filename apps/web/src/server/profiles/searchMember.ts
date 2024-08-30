@@ -31,6 +31,7 @@ export const searchMember = async ({
             },
           }
         : {}),
+      emailVerified: { not: null },
       OR: [
         { firstName: { contains: query, mode: 'insensitive' } },
         { lastName: { contains: query, mode: 'insensitive' } },

@@ -85,18 +85,20 @@ const CollectionView = ({
     </div>
     <hr className="fr-mt-4v fr-mt-md-8v fr-pb-1v" />
     {collection.slug && (
-      <CollectionMetaData
-        user={user}
-        collection={{
-          id: collection.id,
-          slug: collection.slug,
-          isPublic: collection.isPublic,
-        }}
-        count={collection.resources.length}
-        canWrite={canWrite}
-        priority="secondary"
-        context="view"
-      />
+      <div className="fr-my-5v">
+        <CollectionMetaData
+          user={user}
+          collection={{
+            id: collection.id,
+            slug: collection.slug,
+            isPublic: collection.isPublic,
+          }}
+          count={collection.resources.length}
+          canWrite={canWrite}
+          priority="primary"
+          context="view"
+        />
+      </div>
     )}
     {collection.resources.map(({ resource }, index) => (
       <ResourceCard

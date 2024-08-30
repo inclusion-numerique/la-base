@@ -22,7 +22,8 @@ export const resource = {
   baseId: 'base-id',
   base: {
     id: 'base-id',
-    title: 'Titre de la base',
+    title:
+      'Titre de la base particulièrement long au point de revenir à la ligne',
     slug: 'titre-de-la-base',
     isPublic: true,
     image: null,

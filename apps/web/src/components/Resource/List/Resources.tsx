@@ -68,7 +68,6 @@ const Resources = ({
       </div>
       {canWrite ? (
         <Tabs
-          className="fr-overflow-visible"
           tabs={[
             {
               label: `Brouillons · ${drafts.length}`,

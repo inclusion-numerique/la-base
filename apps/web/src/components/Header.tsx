@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import {
   defaultSearchParams,
   searchUrl,
@@ -13,6 +14,7 @@ import { HelpMenu } from '@app/web/components/HelpMenu'
 import { Dropdown } from './Dropdown/Dropdown'
 import LesBasesSvgLogo from './LesBasesSvgLogo'
 import { CreateResourceButton } from './Resource/CreateResourceModal'
+import styles from './Header.module.css'
 
 const Header = ({ user }: { user?: SessionUser | null }) => (
   <header role="banner" className="fr-header">
@@ -34,7 +36,16 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                   />
                 </Link>
               </div>
-              <div className="fr-header__navbar">
+              <div className="fr-header__operator fr-pl-0">
+                <Link
+                  href="/"
+                  className={classNames(`fr-text--medium`, styles.steps)}
+                >
+                  {PublicWebAppConfig.projectTitle}
+                  <span className="fr-sr-only"> - Retour à l’accueil</span>
+                </Link>
+              </div>
+              <div className="fr-header__navbar fr-unhidden fr-hidden-lg">
                 <button
                   type="button"
                   className="fr-btn--menu fr-btn"
@@ -47,12 +58,6 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                   Menu
                 </button>
               </div>
-            </div>
-            <div className="fr-header__service fr-pl-0">
-              <Link href="/" className="fr-text--medium">
-                {PublicWebAppConfig.projectTitle}
-                <span className="fr-sr-only"> - Retour à l’accueil</span>
-              </Link>
             </div>
           </div>
           <div className="fr-header__tools">
