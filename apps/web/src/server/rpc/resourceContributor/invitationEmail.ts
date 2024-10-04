@@ -5,6 +5,7 @@ import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
 import { Resource } from '@app/web/server/resources/getResource'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const sendNewContributorEmail = async ({
   url,
@@ -20,6 +21,8 @@ export const sendNewContributorEmail = async ({
   const result = await emailTransport.sendMail({
     to: email,
     from: ServerWebAppConfig.Email.from,
+    replyTo: PublicWebAppConfig.contactEmail,
+
     subject: `Invitation à contribuer à la ressource ${resource.title}`,
     text: inviteContributor.text({ resourceTitle: resource.title }),
     html: compileMjml(

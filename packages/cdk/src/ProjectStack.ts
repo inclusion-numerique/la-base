@@ -45,7 +45,6 @@ export const projectStackVariables = [
   'BACKUPS_BUCKET',
   'WEB_APP_DOCKER_REGISTRY_NAME',
   'S3_HOST',
-  'LEGACY_UPLOADS_S3_HOST',
   'LEGACY_UPLOADS_S3_BUCKET',
   'LEGACY_HOSTNAME',
 ] as const
@@ -58,8 +57,6 @@ export const projectStackSensitiveVariables = [
   'SMTP_PASSWORD',
   'SMTP_SERVER',
   'SMTP_USERNAME',
-  'LEGACY_UPLOADS_S3_ACCESS_KEY',
-  'LEGACY_UPLOADS_S3_SECRET_KEY',
 ] as const
 
 /**
@@ -131,6 +128,20 @@ export class ProjectStack extends TerraformStack {
           maxAgeSeconds: 3000,
           exposeHeaders: ['Etag'],
           allowedOrigins: ['http://localhost:3000', 'http://localhost'],
+        },
+      ],
+    })
+
+    // Uploads bucket for migration of legacy v1 uploads
+    new ObjectBucket(this, 'legacyUploads', {
+      name: environmentVariables.LEGACY_UPLOADS_S3_BUCKET.value,
+      corsRule: [
+        {
+          allowedHeaders: ['*'],
+          allowedMethods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
+          maxAgeSeconds: 3000,
+          exposeHeaders: ['Etag'],
+          allowedOrigins: ['*'],
         },
       ],
     })
@@ -249,8 +260,6 @@ export class ProjectStack extends TerraformStack {
         SCW_DEFAULT_REGION: region,
         AWS_DEFAULT_REGION: region,
         S3_HOST: environmentVariables.S3_HOST.value,
-        LEGACY_UPLOADS_S3_HOST:
-          environmentVariables.LEGACY_UPLOADS_S3_HOST.value,
         LEGACY_UPLOADS_S3_BUCKET:
           environmentVariables.LEGACY_UPLOADS_S3_BUCKET.value,
         LEGACY_HOSTNAME: environmentVariables.LEGACY_HOSTNAME.value,
@@ -266,10 +275,6 @@ export class ProjectStack extends TerraformStack {
         AWS_ACCESS_KEY_ID: sensitiveEnvironmentVariables.SCW_ACCESS_KEY.value,
         AWS_SECRET_ACCESS_KEY:
           sensitiveEnvironmentVariables.SCW_SECRET_KEY.value,
-        LEGACY_UPLOADS_S3_ACCESS_KEY:
-          sensitiveEnvironmentVariables.LEGACY_UPLOADS_S3_ACCESS_KEY.value,
-        LEGACY_UPLOADS_S3_SECRET_KEY:
-          sensitiveEnvironmentVariables.LEGACY_UPLOADS_S3_SECRET_KEY.value,
         SENTRY_AUTH_TOKEN:
           sensitiveEnvironmentVariables.SENTRY_AUTH_TOKEN.value,
         SMTP_PASSWORD: sensitiveEnvironmentVariables.SMTP_PASSWORD.value,
@@ -324,12 +329,20 @@ export class ProjectStack extends TerraformStack {
       data: `v=spf1 ${transactionalEmailDomain.spfConfig} -all`,
       ttl: 3600,
     })
+    // DMARC
+    new DomainRecord(this, 'dmarc', {
+      dnsZone: emailDomainZone.id,
+      type: 'TXT',
+      name: '_dmarc',
+      data: `v=DMARC1; p=none`,
+      ttl: 3600,
+    })
     // MX is recommended for improved deverability
     new DomainRecord(this, 'mx', {
       dnsZone: emailDomainZone.id,
       type: 'MX',
       name: '',
-      data: '1 incubateur.anct.gouv.fr.',
+      data: '1 blackhole.scw-tem.cloud.',
       ttl: 3600,
     })
     new DomainRecord(this, 'dkim', {

@@ -5,6 +5,7 @@ import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFai
 import { resourceReportReasonLabels } from '@app/web/resources/resourceReport'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const sendResourceReportModeratorEmail = async ({
   report,
@@ -24,6 +25,8 @@ export const sendResourceReportModeratorEmail = async ({
   const result = await emailTransport.sendMail({
     to: ServerWebAppConfig.ReportModerator.to,
     from: ServerWebAppConfig.Email.from,
+    replyTo: PublicWebAppConfig.contactEmail,
+
     subject: `Signalement de ressource`,
     html: `
 <html lang="fr">

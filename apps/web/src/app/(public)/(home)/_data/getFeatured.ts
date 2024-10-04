@@ -9,36 +9,36 @@ import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
 // Updated on 2024-08-30
 const featuredBaseIds = [
-  // pimms-mediation-cenon
-  'd9effe0e-3169-4698-9e7a-31a45379939c',
-  // mission-numerique-responsable-anct
-  '1bad9b9e-e965-4f93-8118-b1a476809a3d',
-  // les-enovateurs
-  'bb63fe55-9c08-48ac-89dd-a23374e9d68f',
+  // direction-interministerielle-du-numerique-dinum
+  '7e552766-ec7a-4531-9bf4-eb81f364ac96',
+  // la-coop-de-la-mediation-numerique
+  '13c42351-4658-4f93-becf-1dac55264e01',
+  // parentalite-et-numerique
+  '543f91bc-8215-4b27-a9af-a7fb14348324',
 ]
 
 const featuredResourceIds = [
-  // kit-atelier-college-bienvenue-les-6eme-cycle-3-et-4-8-12-ans
-  '73f567f8-914b-4885-b716-7eda9994a9f7',
-  // aie-aie-ia
-  'fe0f0069-c0e5-49bc-a92e-9323736370d7',
-  // memo-les-risques-du-numerique
-  '12795fc5-ce46-4d80-9ff9-735ff9b04a65',
-  // stirling-pdf-service-auto-heberge-de-manipulation-de-pdf
-  'b48d4392-9c5d-4269-8953-85144410e90b',
-  // les-cookies-informatiques
-  'c1968dbe-d922-4c23-b677-593bdfe07a4d',
-  // conference-le-monde-x-nec-internet-et-les-jeunes-de-quoi-avons-nous-peur
-  '416520f9-84d5-4d44-a271-c716b39339ec',
+  // exposition-legende-urbaine-la-story-de-mon-smartphone
+  '5c24658d-a639-4878-a6b7-effbdfca7191',
+  // jeu-numetco
+  '66c217db-1f70-48fd-bb88-715344de628f',
+  // decouverte-du-tableur-avec-libre-office-calc
+  '318e2f87-14db-4074-9452-bb3d61dc82fa',
+  // diagnostiquer-son-ordinateur
+  '4577136a-fb5a-4816-b2f8-e13bcca77fe5',
+  // initiation-intelligence-artificielle-ia
+  '2770adc6-286a-4469-8115-6b631b7c0168',
+  // panorama-sur-les-reseaux-sociaux-chiffres-et-bonnes-pratiques-pour-les-comprendre-et-les-utiliser
+  'd766f682-4d63-434a-9a6c-46c4226bbe81',
 ]
 
 const featuredProfileIds = [
-  // paul-emile-guyon-gellin
-  '74ace0b1-0c5d-491c-9468-a887f43b7178',
-  // laura-jarnet
-  'f48eb463-497d-4af4-8ad0-839f4900be7f',
-  // elise-derose
-  'dfb0cfc7-219b-4ac6-b2b5-9852a23342a4',
+  // louis-derrac
+  'df80840b-be80-4dfa-847b-b4246aee5c54',
+  // eric-antier
+  '434e6b82-ddb0-4ecd-992c-9aacfaf07ab7',
+  // claire-bl
+  'fce7f55b-56a1-4a3e-b80c-c0a75dd10d4d',
 ]
 
 export const getFeatured = async ({ user }: { user: SessionUser | null }) => {

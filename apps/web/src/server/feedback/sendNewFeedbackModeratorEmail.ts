@@ -4,6 +4,7 @@ import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { difficultyAreaLabels } from '@app/web/feedback/SendFeedback'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const sendNewFeedbackModeratorEmail = async ({
   feedback: {
@@ -21,6 +22,8 @@ export const sendNewFeedbackModeratorEmail = async ({
   const result = await emailTransport.sendMail({
     to: ServerWebAppConfig.ReportModerator.to,
     from: ServerWebAppConfig.Email.from,
+    replyTo: PublicWebAppConfig.contactEmail,
+
     subject: `Questionnaire de satisfaction`,
     html: `
 <html lang='fr'>

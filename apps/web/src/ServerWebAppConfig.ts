@@ -35,10 +35,10 @@ export const ServerWebAppConfig = {
   },
   LegacyS3: {
     uploadsBucket: process.env.LEGACY_UPLOADS_S3_BUCKET ?? '',
-    host: process.env.LEGACY_UPLOADS_S3_HOST ?? '',
-    region: 'legacy',
-    accessKey: process.env.LEGACY_UPLOADS_S3_ACCESS_KEY ?? '',
-    secretKey: process.env.LEGACY_UPLOADS_S3_SECRET_KEY ?? '',
+    host: process.env.S3_HOST ?? '',
+    region: process.env.SCW_DEFAULT_REGION ?? '',
+    accessKey: process.env.SCW_ACCESS_KEY ?? '',
+    secretKey: process.env.SCW_SECRET_KEY ?? '',
   },
   Cockpit: {
     metricsUrl: process.env.COCKPIT_METRICS_URL ?? '',
