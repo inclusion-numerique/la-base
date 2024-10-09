@@ -8,6 +8,8 @@ import { getSimilarities } from '@app/web/assistant/rag'
 import { prismaClient } from '@app/web/prismaClient'
 import { summarizeDiscussion } from '@app/web/assistant/summarizeDiscussion'
 import { assistantMessageToMistralMessage } from '@app/web/assistant/assistantMessageToMistralMessage'
+import { executeMistralChat } from '@app/web/assistant/mistralChat'
+import { prismaClient } from '@app/web/prismaClient'
 
 const notFoundResponse = () =>
   new Response('', {
