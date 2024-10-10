@@ -1,8 +1,8 @@
 import { v4 } from 'uuid'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { getPersistedResource } from '@app/web/server/resources/feature/PersistedResource'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { applyMutationEvent } from '@app/web/server/resources/feature/createResourceProjection'
 import {
   MutationHistoryResourceEvent,
@@ -44,8 +44,9 @@ export const handleResourceMutationCommand = async (
   let resource = initialResource
 
   const transactionEvents = async (t: PrismaTransaction) => {
-    for (const event of mutationEvents) {
+    for (const [index, event] of mutationEvents.entries()) {
       resource = applyMutationEvent(event, resource)
+      const sequence = initialResource._count.events + index
 
       // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, {
@@ -59,6 +60,7 @@ export const handleResourceMutationCommand = async (
           resourceId: resource.id,
           byId: user?.id,
           ...event,
+          sequence,
         },
       })
     }

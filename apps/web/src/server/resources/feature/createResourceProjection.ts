@@ -23,7 +23,12 @@ export type ContentProjection = Omit<ResourceContent, 'image' | 'file'>
 export type ResourceProjection = Omit<
   Resource,
   'contents' | 'createdBy' | 'base' | 'image'
-> & { contents: ContentProjection[] }
+> & {
+  contents: ContentProjection[]
+  _count: {
+    events: number
+  }
+}
 
 export const applyMutationEvent = (
   event: MutationHistoryResourceEvent,
@@ -35,6 +40,8 @@ export const applyMutationEvent = (
   if (!mutationApplier) {
     throw new Error(`Unknown mutation event type: "${event.type}"`)
   }
+  // eslint-disable-next-line no-param-reassign
+  resource._count.events += 1
   return mutationApplier(event, resource)
 }
 

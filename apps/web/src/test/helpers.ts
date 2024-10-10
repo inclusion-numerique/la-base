@@ -119,6 +119,7 @@ export const createTestResource = (
       collections: 2,
       views: 4,
       resourceFeedback: 0,
+      events: 1,
     },
     resourceFeedback: [],
     feedbackAverage: 0,

@@ -95,6 +95,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
     collections: 0,
     views: 0,
     resourceFeedback: 0,
+    events: 1,
   },
   resourceFeedback: [],
   feedbackAverage: 0,

@@ -33,6 +33,8 @@ export const onRepublished: ResourceEventSideEffect<
     ...content,
   }))
 
+  console.log('ON REPUBLISH', resource)
+
   await transaction.resource.update({
     where: { id: resource.id },
     data: {

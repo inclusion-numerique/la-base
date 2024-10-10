@@ -22,7 +22,7 @@ export const getResourceFromEvents = async (
           data: true,
           byId: true,
         },
-        orderBy: [{ timestamp: 'asc' }, { sequence: 'asc' }],
+        orderBy: [{ sequence: 'asc' }, { timestamp: 'asc' }],
       },
     },
   })
@@ -30,6 +30,8 @@ export const getResourceFromEvents = async (
   if (!resourceWithEvents) {
     return null
   }
+
+  console.log('RESOURCE WITH EVENTS', resourceWithEvents)
 
   return createResourceProjection(
     resourceWithEvents.events as unknown as HistoryEventsForResource,

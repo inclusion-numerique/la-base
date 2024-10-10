@@ -169,6 +169,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
         },
         collections: true,
         views: true,
+        events: true,
       },
     },
   }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
