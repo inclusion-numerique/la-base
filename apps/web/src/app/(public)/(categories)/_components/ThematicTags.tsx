@@ -3,7 +3,8 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import Tag from '@codegouvfr/react-dsfr/Tag'
-import { Sorting } from '@app/web/server/search/searchQueryParams'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { Sorting } from '@app/web/server/search/searchQueryParams'
 import { createThematicLink } from '../_helpers/createThematicLink'
 
 // helper for filter() method
@@ -18,7 +19,7 @@ export const ThematicTags = ({
   className,
 }: {
   categoryPath: string
-  themeOptions: { name: string; value: string }[]
+  themeOptions: SelectOption[]
   selected: string[]
   page?: number
   tri?: Sorting
@@ -45,8 +46,8 @@ export const ThematicTags = ({
 
   return (
     <ul className="fr-tags-group fr-justify-content-center">
-      {themeOptions.map(({ name, value }) => (
-        <li key={name}>
+      {themeOptions.map(({ label, value }) => (
+        <li key={value}>
           <Tag
             className={className}
             pressed={activeTags.includes(value)}
@@ -55,7 +56,7 @@ export const ThematicTags = ({
                 activeTags.includes(value) ? unselect(value) : select(value),
             }}
           >
-            {name}
+            {label}
           </Tag>
         </li>
       ))}

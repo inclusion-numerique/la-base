@@ -1,6 +1,6 @@
-import { CreateUserInput } from '@app/e2e/e2e/authentication/user.tasks'
 import { v4 } from 'uuid'
 import { createSlug } from '@app/web/utils/createSlug'
+import type { CreateUserInput } from '@app/e2e/tasks/handlers/user.tasks'
 
 // Unique per cypress run
 const slugHash = v4().split('-')[0]

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayInstanceImageConfig extends cdktf.TerraformMetaArgu
   /**
   * Architecture of the desired image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#architecture DataScalewayInstanceImage#architecture}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#architecture DataScalewayInstanceImage#architecture}
   */
   readonly architecture?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#id DataScalewayInstanceImage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#id DataScalewayInstanceImage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,37 +23,37 @@ export interface DataScalewayInstanceImageConfig extends cdktf.TerraformMetaArgu
   /**
   * ID of the desired image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#image_id DataScalewayInstanceImage#image_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#image_id DataScalewayInstanceImage#image_id}
   */
   readonly imageId?: string;
   /**
   * Select most recent image if multiple match
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#latest DataScalewayInstanceImage#latest}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#latest DataScalewayInstanceImage#latest}
   */
   readonly latest?: boolean | cdktf.IResolvable;
   /**
   * Exact name of the desired image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#name DataScalewayInstanceImage#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#name DataScalewayInstanceImage#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#project_id DataScalewayInstanceImage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#project_id DataScalewayInstanceImage#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#zone DataScalewayInstanceImage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#zone DataScalewayInstanceImage#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image scaleway_instance_image}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image scaleway_instance_image}
 */
 export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
 
@@ -69,7 +69,7 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInstanceImage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInstanceImage to import
-  * @param importFromId The id of the existing DataScalewayInstanceImage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInstanceImage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInstanceImage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -81,7 +81,7 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/instance_image scaleway_instance_image} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/instance_image scaleway_instance_image} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -92,8 +92,8 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_image',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -287,5 +287,55 @@ export class DataScalewayInstanceImage extends cdktf.TerraformDataSource {
       project_id: cdktf.stringToTerraform(this._projectId),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      architecture: {
+        value: cdktf.stringToHclTerraform(this._architecture),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      image_id: {
+        value: cdktf.stringToHclTerraform(this._imageId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      latest: {
+        value: cdktf.booleanToHclTerraform(this._latest),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

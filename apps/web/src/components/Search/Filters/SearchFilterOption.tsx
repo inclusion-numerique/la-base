@@ -21,7 +21,7 @@ const SearchFilterOption = ({
         onSelect(option)
       }}
     >
-      <div>{option.name}</div>
+      <div>{option.label}</div>
       <span
         className={classNames(
           'fr-icon--sm fr-icon-check-line fr-text-title--blue-france',

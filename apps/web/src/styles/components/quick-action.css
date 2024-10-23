@@ -1,0 +1,23 @@
+.fr-quick-action {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: 100% !important;
+  background-color: var(--background-alt-blue-france) !important;
+  border: 2px solid var(--background-alt-blue-france);
+  color: var(--text-label-blue-france) !important;
+  font-weight: bold !important;
+  padding: 1.5em 2em !important;
+  background-image: none !important;
+  border-radius: 16px;
+  text-align: start;
+
+  &:hover {
+    background-color: var(--background-alt-blue-france-hover) !important;
+    border: 2px solid var(--border-default-blue-france);
+  }
+
+  &:active {
+    background-color: var(--background-alt-blue-france-active) !important;
+  }
+}

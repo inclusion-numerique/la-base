@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayBillingConsumptionsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions#id DataScalewayBillingConsumptions#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions#id DataScalewayBillingConsumptions#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,7 +17,7 @@ export interface DataScalewayBillingConsumptionsConfig extends cdktf.TerraformMe
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions#project_id DataScalewayBillingConsumptions#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions#project_id DataScalewayBillingConsumptions#project_id}
   */
   readonly projectId?: string;
 }
@@ -31,6 +31,17 @@ export function dataScalewayBillingConsumptionsConsumptionsToTerraform(struct?: 
   }
   return {
   }
+}
+
+
+export function dataScalewayBillingConsumptionsConsumptionsToHclTerraform(struct?: DataScalewayBillingConsumptionsConsumptions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayBillingConsumptionsConsumptionsOutputReference extends cdktf.ComplexObject {
@@ -117,7 +128,7 @@ export class DataScalewayBillingConsumptionsConsumptionsList extends cdktf.Compl
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions scaleway_billing_consumptions}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions scaleway_billing_consumptions}
 */
 export class DataScalewayBillingConsumptions extends cdktf.TerraformDataSource {
 
@@ -133,7 +144,7 @@ export class DataScalewayBillingConsumptions extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayBillingConsumptions resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayBillingConsumptions to import
-  * @param importFromId The id of the existing DataScalewayBillingConsumptions that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayBillingConsumptions that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayBillingConsumptions to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -145,7 +156,7 @@ export class DataScalewayBillingConsumptions extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/billing_consumptions scaleway_billing_consumptions} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_consumptions scaleway_billing_consumptions} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -156,8 +167,8 @@ export class DataScalewayBillingConsumptions extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_billing_consumptions',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -232,5 +243,25 @@ export class DataScalewayBillingConsumptions extends cdktf.TerraformDataSource {
       id: cdktf.stringToTerraform(this._id),
       project_id: cdktf.stringToTerraform(this._projectId),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

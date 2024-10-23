@@ -2,8 +2,9 @@ import { Route } from 'next'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { signinErrorMessage } from '@app/web/app/(public)/(authentication)/authenticationErrorMessage'
+import ProConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/ProConnectSigninButton'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { EmailSigninForm } from '@app/web/app/(public)/(authentication)/connexion/EmailSigninForm'
-import InclusionConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/InclusionConnectSigninButton'
 import { getLoginTitle, LoginIntent } from '@app/web/security/login'
 
 const SigninPanel = ({
@@ -22,10 +23,23 @@ const SigninPanel = ({
         <p>{signinErrorMessage(error)}</p>
       </div>
     ) : null}
-    <h2 className="fr-h5">Se connecter avec InclusionConnect</h2>
-    <div className="fr-connect-group">
-      <InclusionConnectSigninButton callbackUrl={callbackUrl} />
-    </div>
+    {PublicWebAppConfig.isPreview ? (
+      <p>
+        La connexion avec ProConnect est uniquement disponible sur les
+        environnement de production <i>main</i> et de recette <i>dev</i>.
+        <br />
+        <br />
+        Sur cette environnement de preview <i>{PublicWebAppConfig.Branch}</i>,
+        vous pouvez vous connecter avec votre email.
+      </p>
+    ) : (
+      <div className="fr-connect-group">
+        <ProConnectSigninButton
+          className="fr-mt-8v"
+          callbackUrl={callbackUrl}
+        />
+      </div>
+    )}
     <p className="fr-hr-or fr-mt-6v">ou</p>
     <h2 className="fr-h5">Se connecter avec son email</h2>
     <EmailSigninForm callbackUrl={callbackUrl} />

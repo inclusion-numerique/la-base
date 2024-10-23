@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Newsletter from '@app/web/app/(public)/Newsletter'
 import CollectionsSideMenu from './CollectionsSideMenu'
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const ContentPolicyPage = () => (
   <>
-    <SkipLinksPortal links={defaultSkipLinks} />
+    <SkipLinksPortal />
     <div className="fr-container">
       <Breadcrumbs
         parents={[
@@ -24,8 +24,8 @@ const ContentPolicyPage = () => (
         currentPage="Les Collections"
       />
     </div>
-    <main id={contentId} className="fr-mt-1w fr-mb-15w">
-      <div className="fr-container fr-flex">
+    <main id={contentId} className="fr-mb-15w">
+      <div className="fr-container fr-flex fr-mt-6w">
         <CollectionsSideMenu />
         <div className="fr-flex-grow-1">
           <div className="fr-container landing-main-container">

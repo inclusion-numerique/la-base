@@ -2,17 +2,17 @@ version: 2.1
 
 orbs:
   skip: theodo/skip@0.1.2
-  queue: eddiewebb/queue@1.8.4
+  queue: eddiewebb/queue@3.2.1
 executors:
   node:
     docker:
-      - image: cimg/node:20.11.0
+      - image: cimg/node:22.9.0
         environment:
           TZ: 'UTC'
 
   node-postgres:
     docker:
-      - image: cimg/node:20.11.0
+      - image: cimg/node:22.9.0
         environment:
           TZ: 'UTC'
           CI_PG_ADMIN_URL: postgresql://postgres@localhost
@@ -22,12 +22,12 @@ executors:
           POSTGRES_USER: postgres
   node-browsers:
     docker:
-      - image: cimg/node:20.11.0-browsers
+      - image: cimg/node:22.9.0-browsers
         environment:
           TZ: 'UTC'
   node-e2e:
     docker:
-      - image: cimg/node:20.11.0-browsers
+      - image: cimg/node:22.9.0-browsers
         environment:
           TZ: 'UTC'
           CI_DATABASE_URL: postgresql://postgres@localhost/test
@@ -42,7 +42,7 @@ executors:
 parameters:
   cache_version:
     type: string
-    default: '2024-02-29-01'
+    default: '2024-10-03-01'
   virtual_store_dir:
     type: string
     default: './.pnpm'
@@ -118,20 +118,23 @@ workflows:
             - test_web_integration
             - test_components
             - test_web_e2e
-      - execute_chromatic:
-          type: approval
+
+  chromatic_deployment:
+    when:
+      equal: [ chromatic_deployment, << pipeline.parameters.trigger_workflow >> ]
+    jobs:
+      - prepare_workspace_dependencies
+      - lint_web:
           requires:
-            - lint_web
-            - lint_packages
-            - build_web
-            - test_packages
-            - test_web
-            - test_web_integration
-            - test_components
-            - test_web_e2e
+            - prepare_workspace_dependencies
+      - lint_packages:
+          requires:
+            - prepare_workspace_dependencies
       - chromatic:
           requires:
-            - execute_chromatic
+            - prepare_workspace_dependencies
+            - lint_web
+            - lint_packages
 
   project_infrastructure_deployment:
     when:
@@ -312,7 +315,7 @@ jobs:
             - << pipeline.parameters.cache_version >>-next-prod-{{ checksum "<< pipeline.parameters.lockfile >>" }}-{{ checksum "./.env" }}
       - run:
           name: 'Build next app'
-          command: pnpm --silent -F @app/web build
+          command: SENTRY_RELEASE=true pnpm --silent -F @app/web build
       - save_cache:
           key: << pipeline.parameters.cache_version >>-next-prod-{{ checksum "<< pipeline.parameters.lockfile >>" }}-{{ checksum "./.env" }}
           paths:
@@ -331,6 +334,7 @@ jobs:
             - ./apps/web/.next/standalone
             - ./apps/web/.next/static
             - ./apps/web/public
+            - ./apps/web/private-static
 
   chromatic:
     executor: node
@@ -394,7 +398,10 @@ jobs:
             echo "SMTP_PORT=1025" >> .env
             echo "SMTP_USERNAME=mailuser" >> .env
             echo "SMTP_PASSWORD=mailpassword" >> .env
-            echo 'INCLUSION_CONNECT_CLIENT_SECRET=$INCLUSION_CONNECT_LOCAL_CLIENT_SECRET' >> .env
+            echo "IS_E2E=true" >> .env
+            echo 'PROCONNECT_CLIENT_SECRET=$PROCONNECT_LOCAL_CLIENT_SECRET' >> .env
+            echo 'CYPRESS_PROCONNECT_TEST_USER_EMAIL=$PROCONNECT_TEST_USER_EMAIL' >> .env
+            echo 'CYPRESS_PROCONNECT_TEST_USER_PASSWORD=$PROCONNECT_TEST_USER_PASSWORD' >> .env
       - add_dotenv_vars_to_bash_env
       - restore_cache:
           keys:
@@ -418,6 +425,7 @@ jobs:
           command: |
             mv apps/web/.next/standalone ~/dist
             mv apps/web/public ~/dist/apps/web/public
+            cp -r apps/web/private-static ~/dist/apps/web/private-static
             mv apps/web/.next/static ~/dist/apps/web/.next/static
             cd ~/dist
             NODE_TLS_REJECT_UNAUTHORIZED="0" HOSTNAME=localhost node apps/web/server.js
@@ -492,7 +500,7 @@ jobs:
           command: |
             pnpm --silent -F @app/web prisma generate
       - queue/until_front_of_line:
-          time: '3'
+          my-pipeline: <<pipeline.number>>
       - run:
           name: Create Pending Deployment
           command: |

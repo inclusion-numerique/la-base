@@ -3,12 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import SkipLinks from '@codegouvfr/react-dsfr/SkipLinks'
+import { defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 const SkipLinksPortal = ({
-  links,
+  links = defaultSkipLinks,
   elementId = 'skip-links',
 }: {
-  links: { label: string; anchor: string }[]
+  links?: { label: string; anchor: string }[]
   elementId?: string
 }) => {
   const [isMounted, setIsMounted] = useState(false)

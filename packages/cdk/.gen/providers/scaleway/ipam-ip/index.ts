@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface IpamIpConfig extends cdktf.TerraformMetaArguments {
   /**
   * Request a specific IP in the requested source pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#address IpamIp#address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#address IpamIp#address}
   */
   readonly address?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#id IpamIp#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#id IpamIp#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,31 @@ export interface IpamIpConfig extends cdktf.TerraformMetaArguments {
   /**
   * Request an IPv6 instead of an IPv4
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#is_ipv6 IpamIp#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#is_ipv6 IpamIp#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#project_id IpamIp#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#project_id IpamIp#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#region IpamIp#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#region IpamIp#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#tags IpamIp#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#tags IpamIp#tags}
   */
   readonly tags?: string[];
   /**
   * source block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#source IpamIp#source}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#source IpamIp#source}
   */
   readonly source: IpamIpSource[] | cdktf.IResolvable;
 }
@@ -61,6 +61,17 @@ export function ipamIpResourceToTerraform(struct?: IpamIpResource): any {
   }
   return {
   }
+}
+
+
+export function ipamIpResourceToHclTerraform(struct?: IpamIpResource): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class IpamIpResourceOutputReference extends cdktf.ComplexObject {
@@ -142,6 +153,17 @@ export function ipamIpReversesToTerraform(struct?: IpamIpReverses): any {
   }
 }
 
+
+export function ipamIpReversesToHclTerraform(struct?: IpamIpReverses): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class IpamIpReversesOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -203,19 +225,19 @@ export interface IpamIpSource {
   /**
   * Private Network the IP lives in if the IP is a private IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#private_network_id IpamIp#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#private_network_id IpamIp#private_network_id}
   */
   readonly privateNetworkId?: string;
   /**
   * Private Network subnet the IP lives in if the IP is a private IP in a Private Network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#subnet_id IpamIp#subnet_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#subnet_id IpamIp#subnet_id}
   */
   readonly subnetId?: string;
   /**
   * Zone the IP lives in if the IP is a public zoned one
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#zonal IpamIp#zonal}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#zonal IpamIp#zonal}
   */
   readonly zonal?: string;
 }
@@ -230,6 +252,37 @@ export function ipamIpSourceToTerraform(struct?: IpamIpSource | cdktf.IResolvabl
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     zonal: cdktf.stringToTerraform(struct!.zonal),
   }
+}
+
+
+export function ipamIpSourceToHclTerraform(struct?: IpamIpSource | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    private_network_id: {
+      value: cdktf.stringToHclTerraform(struct!.privateNetworkId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    subnet_id: {
+      value: cdktf.stringToHclTerraform(struct!.subnetId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    zonal: {
+      value: cdktf.stringToHclTerraform(struct!.zonal),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IpamIpSourceOutputReference extends cdktf.ComplexObject {
@@ -358,7 +411,7 @@ export class IpamIpSourceList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip scaleway_ipam_ip}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip scaleway_ipam_ip}
 */
 export class IpamIp extends cdktf.TerraformResource {
 
@@ -374,7 +427,7 @@ export class IpamIp extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IpamIp resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IpamIp to import
-  * @param importFromId The id of the existing IpamIp that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IpamIp that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IpamIp to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -386,7 +439,7 @@ export class IpamIp extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip scaleway_ipam_ip} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip scaleway_ipam_ip} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -397,8 +450,8 @@ export class IpamIp extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_ipam_ip',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -571,5 +624,55 @@ export class IpamIp extends cdktf.TerraformResource {
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       source: cdktf.listMapper(ipamIpSourceToTerraform, true)(this._source.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      address: {
+        value: cdktf.stringToHclTerraform(this._address),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      is_ipv6: {
+        value: cdktf.booleanToHclTerraform(this._isIpv6),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      source: {
+        value: cdktf.listMapperHcl(ipamIpSourceToHclTerraform, true)(this._source.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IpamIpSourceList",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

@@ -5,7 +5,7 @@ import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import HeaderBackLink from '@app/web/components/HeaderBackLink'
 import { prismaClient } from '@app/web/prismaClient'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getResource } from '@app/web/server/resources/getResource'
@@ -64,7 +64,7 @@ const ResourceFeedbackPage = async ({
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} currentChildPage="Avis" />
         <main className="fr-mx-auto fr-container--slim" id={contentId}>

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "module": "ESNext",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -9,10 +10,12 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
@@ -60,7 +63,7 @@
         "packages/test/src/*"
       ],
       "@prisma/client": [
-        "node_modules/.pnpm/@prisma+client@5.7.1_prisma@5.7.1/node_modules/@prisma/client"
+        "node_modules/.pnpm/@prisma+client@5.20.0_prisma@5.20.0/node_modules/@prisma/client"
       ]
     }
   },
@@ -72,8 +75,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "ts-node": {
-    "experimentalResolver": true
-  }
+  ]
 }

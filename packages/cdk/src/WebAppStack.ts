@@ -48,8 +48,8 @@ export const webAppStackSensitiveVariables = [
   'SCW_ACCESS_KEY',
   'SCW_SECRET_KEY',
   'DATABASE_PASSWORD',
-  'INCLUSION_CONNECT_PREVIEW_CLIENT_SECRET',
-  'INCLUSION_CONNECT_MAIN_CLIENT_SECRET',
+  'PROCONNECT_PREVIEW_CLIENT_SECRET',
+  'PROCONNECT_MAIN_CLIENT_SECRET',
   'INTERNAL_API_PRIVATE_KEY',
 ] as const
 
@@ -145,6 +145,7 @@ export class WebAppStack extends TerraformStack {
           allowedOrigins: [`https://${hostname}`],
         },
       ],
+      forceDestroy: !isMain,
     })
 
     output('uploadsBucketName', uploadsBucket.name)
@@ -189,6 +190,7 @@ export class WebAppStack extends TerraformStack {
         STACK_WEB_IMAGE: environmentVariables.WEB_CONTAINER_IMAGE.value,
         UPLOADS_BUCKET: uploadsBucket.name,
         BASE_URL: hostname,
+        NEXTAUTH_URL: hostname,
         BRANCH: branch,
         NAMESPACE: namespace,
         // This env variable is reserved at the level of container namespace. We inject it here even if its shared.
@@ -202,11 +204,10 @@ export class WebAppStack extends TerraformStack {
       },
       secretEnvironmentVariables: {
         DATABASE_URL: databaseUrl,
-        INCLUSION_CONNECT_CLIENT_SECRET: isMain
-          ? sensitiveEnvironmentVariables.INCLUSION_CONNECT_MAIN_CLIENT_SECRET
-              .value
-          : sensitiveEnvironmentVariables
-              .INCLUSION_CONNECT_PREVIEW_CLIENT_SECRET.value,
+        PROCONNECT_CLIENT_SECRET: isMain
+          ? sensitiveEnvironmentVariables.PROCONNECT_MAIN_CLIENT_SECRET.value
+          : sensitiveEnvironmentVariables.PROCONNECT_PREVIEW_CLIENT_SECRET
+              .value,
       },
       name: containerName,
       minScale: isMain ? 2 : namespace === 'dev' ? 1 : 0,

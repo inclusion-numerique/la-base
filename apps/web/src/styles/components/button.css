@@ -1,0 +1,11 @@
+.fr-btn--responsive {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 36em) {
+  .fr-btn--responsive-sm {
+    width: 100%;
+    justify-content: center;
+  }
+}

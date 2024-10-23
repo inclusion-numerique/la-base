@@ -1,4 +1,4 @@
-import { TRPCError, initTRPC } from '@trpc/server'
+import { initTRPC, TRPCError } from '@trpc/server'
 import { AppContext } from '@app/web/server/rpc/createContext'
 import { transformer } from '@app/web/utils/serialization'
 
@@ -39,9 +39,9 @@ const isAuthenticated = middleware(({ ctx, next }) => {
  * users are active
  */
 const isActive = middleware(({ ctx, next }) => {
-  const { user } = ctx
+  const { user, sessionToken } = ctx
 
-  if (!user || !user.emailVerified) {
+  if (!user || !user.emailVerified || !sessionToken) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
       message: 'User status non active',
@@ -52,6 +52,7 @@ const isActive = middleware(({ ctx, next }) => {
       ...ctx,
       // Infer the user as non nullable in next execution
       user,
+      sessionToken,
     },
   })
 })

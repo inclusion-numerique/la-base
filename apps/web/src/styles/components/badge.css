@@ -1,6 +1,6 @@
 .fr-badge--triumph {
-  background-color: var(--green-emeraude-950-100);
-  color: var(--green-emeraude-sun-425-moon-753);
+  background-color: var(--green-emeraude-950-100) !important;
+  color: var(--green-emeraude-sun-425-moon-753) !important;
 
   [class^='ri-'],
   [class*=' ri-'] {

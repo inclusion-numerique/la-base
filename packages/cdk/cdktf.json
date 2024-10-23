@@ -1,8 +1,8 @@
 {
   "language": "typescript",
-  "app": "ts-node -r tsconfig-paths/register src/main.ts",
+  "app": "tsx src/main.ts",
   "terraformProviders": [
-    "scaleway/scaleway@>= 2.39.0"
+    "scaleway/scaleway@>= 2.42.1"
   ],
   "projectId": "f672f07b-f112-42d9-a275-c1511adf05af"
 }

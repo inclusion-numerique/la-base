@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DataScalewayIotDeviceConfig extends cdktf.TerraformMetaArgument
   /**
   * The ID of the IOT Device
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#device_id DataScalewayIotDevice#device_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#device_id DataScalewayIotDevice#device_id}
   */
   readonly deviceId?: string;
   /**
   * The ID of the hub on which this device will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#hub_id DataScalewayIotDevice#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#hub_id DataScalewayIotDevice#hub_id}
   */
   readonly hubId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#id DataScalewayIotDevice#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#id DataScalewayIotDevice#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,13 +29,13 @@ export interface DataScalewayIotDeviceConfig extends cdktf.TerraformMetaArgument
   /**
   * The name of the device
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#name DataScalewayIotDevice#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#name DataScalewayIotDevice#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#region DataScalewayIotDevice#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#region DataScalewayIotDevice#region}
   */
   readonly region?: string;
 }
@@ -49,6 +49,17 @@ export function dataScalewayIotDeviceCertificateToTerraform(struct?: DataScalewa
   }
   return {
   }
+}
+
+
+export function dataScalewayIotDeviceCertificateToHclTerraform(struct?: DataScalewayIotDeviceCertificate): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayIotDeviceCertificateOutputReference extends cdktf.ComplexObject {
@@ -120,6 +131,17 @@ export function dataScalewayIotDeviceMessageFiltersPublishToTerraform(struct?: D
   }
 }
 
+
+export function dataScalewayIotDeviceMessageFiltersPublishToHclTerraform(struct?: DataScalewayIotDeviceMessageFiltersPublish): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayIotDeviceMessageFiltersPublishOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -187,6 +209,17 @@ export function dataScalewayIotDeviceMessageFiltersSubscribeToTerraform(struct?:
   }
   return {
   }
+}
+
+
+export function dataScalewayIotDeviceMessageFiltersSubscribeToHclTerraform(struct?: DataScalewayIotDeviceMessageFiltersSubscribe): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayIotDeviceMessageFiltersSubscribeOutputReference extends cdktf.ComplexObject {
@@ -258,6 +291,17 @@ export function dataScalewayIotDeviceMessageFiltersToTerraform(struct?: DataScal
   }
 }
 
+
+export function dataScalewayIotDeviceMessageFiltersToHclTerraform(struct?: DataScalewayIotDeviceMessageFilters): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayIotDeviceMessageFiltersOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -319,7 +363,7 @@ export class DataScalewayIotDeviceMessageFiltersList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device scaleway_iot_device}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device scaleway_iot_device}
 */
 export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
 
@@ -335,7 +379,7 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayIotDevice resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayIotDevice to import
-  * @param importFromId The id of the existing DataScalewayIotDevice that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayIotDevice that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayIotDevice to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -347,7 +391,7 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/iot_device scaleway_iot_device} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iot_device scaleway_iot_device} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -358,8 +402,8 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iot_device',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -524,5 +568,43 @@ export class DataScalewayIotDevice extends cdktf.TerraformDataSource {
       name: cdktf.stringToTerraform(this._name),
       region: cdktf.stringToTerraform(this._region),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      device_id: {
+        value: cdktf.stringToHclTerraform(this._deviceId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      hub_id: {
+        value: cdktf.stringToHclTerraform(this._hubId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

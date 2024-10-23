@@ -99,7 +99,7 @@ const ResourceReport = ({ resourceId }: { resourceId: string }) => {
           label="Motif du signalement"
           asterisk
           options={[
-            { value: '', name: 'Sélectionnez un motif' },
+            { value: '', label: 'Sélectionnez un motif' },
             ...resourceReportReasonOptions,
           ]}
           className="fr-mb-8v"

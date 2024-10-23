@@ -72,10 +72,12 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
     defaultValues,
   })
 
+  // Set form baseId based on state baseId
+  useEffect(() => {
+    setValue('baseId', baseId)
+  }, [baseId, setValue])
+
   useModalVisibility(createResourceModalId, {
-    onOpened: () => {
-      setValue('baseId', baseId)
-    },
     onClosed: () => {
       reset(defaultValues)
       setStep(0)

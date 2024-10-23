@@ -1,0 +1,22 @@
+.fr-modal {
+  .fr-modal__header {
+    .fr-btn.fr-btn--close {
+      font-weight: 400;
+    }
+  }
+}
+
+.fr-modal--overflow-visible {
+  .fr-container {
+    overflow: visible !important;
+  }
+
+  .fr-modal__body {
+    overflow: visible !important;
+  }
+
+  .fr-modal__content {
+    padding-bottom: 40px;
+    margin-bottom: 180px;
+  }
+}

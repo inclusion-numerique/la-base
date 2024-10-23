@@ -1,5 +1,7 @@
-.fr-progress {
+.fr-progress,
+.fr-progress-stacked {
   --progress-height: 12px;
+  --progress-radius: 16px;
 
   display: flex;
   height: var(--progress-height);
@@ -9,6 +11,7 @@
 
 .fr-progress__bar {
   font-size: 0.75rem;
+  border-radius: var(--progress-radius);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,4 +24,21 @@
 
 .fr-progress--sm {
   --progress-height: 8px;
+}
+
+.fr-progress--lg {
+  --progress-height: 24px;
+}
+
+.fr-progress:last-child .fr-progress__bar {
+  border-start-end-radius: var(--progress-radius);
+  border-end-end-radius: var(--progress-radius);
+}
+
+.fr-progress-stacked > .fr-progress {
+  overflow: visible;
+}
+
+.fr-progress-stacked > .fr-progress > .fr-progress__bar {
+  width: 100%;
 }

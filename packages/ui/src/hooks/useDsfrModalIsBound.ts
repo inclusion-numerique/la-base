@@ -5,7 +5,10 @@ import { isBrowser } from '@app/web/utils/isBrowser'
  * DSFR Modal need to be bound by dsfr js lib before being used.
  * This hooks allow to wait for the binding on first load before rendering.
  */
-export const useDsfrModalIsBound = (dialogId: string) => {
+export const useDsfrModalIsBound = (
+  dialogId: string,
+  onBound?: (element: HTMLElement) => void,
+) => {
   const [bound, setBound] = useState(
     // eslint-disable-next-line unicorn/prefer-query-selector
     isBrowser ? !!document.getElementById(dialogId)?.dataset.frJsModal : false,
@@ -25,6 +28,7 @@ export const useDsfrModalIsBound = (dialogId: string) => {
         // Bind if state is already ok
         if (element.dataset.frJsModal === 'true') {
           setBound(true)
+          onBound?.(element)
         } else {
           const observer = new MutationObserver((records) => {
             // There should be only one record
@@ -56,7 +60,7 @@ export const useDsfrModalIsBound = (dialogId: string) => {
       observerRef.current?.disconnect()
       observerRef.current = undefined
     }
-  }, [bound, dialogId, setBound])
+  }, [bound, dialogId, onBound, setBound])
 
   return bound
 }

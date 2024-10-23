@@ -7,7 +7,7 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Newsletter from '@app/web/app/(public)/Newsletter'
 import SkipLinksPortal from '../../../../components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '../../../../utils/skipLinks'
+import { contentId } from '../../../../utils/skipLinks'
 import BaseSideMenu from './BaseSideMenu'
 
 export const revalidate = 0
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 const ContentPolicyPage = () => (
   <>
-    <SkipLinksPortal links={defaultSkipLinks} />
+    <SkipLinksPortal />
     <div className="fr-container">
       <Breadcrumbs
         parents={[
@@ -27,8 +27,8 @@ const ContentPolicyPage = () => (
         currentPage="Une base"
       />
     </div>
-    <main id={contentId} className="fr-mt-1w fr-mb-15w">
-      <div className="fr-container fr-flex">
+    <main id={contentId} className="fr-mb-15w">
+      <div className="fr-container fr-flex fr-mt-6w">
         <BaseSideMenu />
         <div className="fr-flex-grow-1 ">
           <div className="fr-container landing-main-container">

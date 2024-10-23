@@ -16,10 +16,13 @@ export type CheckboxFormFieldProps<T extends FieldValues> = {
   path: FieldPath<T>
   disabled?: boolean
   label?: ReactNode
-  hint?: string
+  hint?: ReactNode
   valid?: string
   small?: boolean
   asterisk?: boolean
+  classes?: {
+    label?: string
+  }
 }
 
 const CheckboxFormField = <T extends FieldValues>({
@@ -32,6 +35,7 @@ const CheckboxFormField = <T extends FieldValues>({
   small,
   asterisk,
   className,
+  classes,
   'data-testid': dataTestId,
 }: UiComponentProps & CheckboxFormFieldProps<T>) => {
   const id = `input-form-field__${path}`
@@ -52,17 +56,13 @@ const CheckboxFormField = <T extends FieldValues>({
         }
 
         return (
-          <div className="fr-form-group">
+          <div className={classNames('fr-form-group', className)}>
             <fieldset
-              className={classNames(
-                'fr-fieldset',
-                {
-                  'fr-fieldset--error': error,
-                  'fr-fieldset--disabled': disabled,
-                  'fr-fieldset--valid': valid && isDirty && !invalid,
-                },
-                className,
-              )}
+              className={classNames('fr-fieldset fr-mb-0', {
+                'fr-fieldset--error': error,
+                'fr-fieldset--disabled': disabled,
+                'fr-fieldset--valid': valid && isDirty && !invalid,
+              })}
               aria-labelledby={`${id}__legend${
                 ariaLabelBy ? ` ${ariaLabelBy}` : ''
               }`}
@@ -80,7 +80,6 @@ const CheckboxFormField = <T extends FieldValues>({
                       'undefined'
                     }`}
                     type="checkbox"
-                    data-testid={dataTestId}
                     id={id}
                     defaultChecked={value}
                     disabled={disabled}
@@ -88,10 +87,14 @@ const CheckboxFormField = <T extends FieldValues>({
                     onChange={(event) => {
                       onChange(event.target.checked as PathValue<T, Path<T>>)
                     }}
+                    data-testid={dataTestId}
                     name={name}
                     ref={ref}
                   />
-                  <label className="fr-label" htmlFor={id}>
+                  <label
+                    className={classNames('fr-label', classes?.label)}
+                    htmlFor={id}
+                  >
                     {label} {asterisk && <RedAsterisk />}
                     {hint && <span className="fr-hint-text">{hint}</span>}
                   </label>

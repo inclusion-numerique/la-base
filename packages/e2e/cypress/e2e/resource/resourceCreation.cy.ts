@@ -84,7 +84,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').should('not.exist')
   })
 
-  it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée, ajoute une collection à une base privée', () => {
+  it('Acceptation 3 - Utilisateur membre d’une base publique et d’une base privée, ajoute une ressource à une base privée', () => {
     const user = givenUser({
       isPublic: false,
     })
@@ -94,12 +94,12 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     const { base: publicBase } = createTestBaseAsMember(
       user,
       true,
-      `Test - ${v4()}`,
+      `Test - A ${v4()}`,
     )
     const { base: privateBase } = createTestBaseAsMember(
       user,
       false,
-      `Test - ${v4()}`,
+      `Test - B ${v4()}`,
     )
 
     const titre = `Test - ${v4()}`
@@ -157,6 +157,9 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal').find('button').contains('Commencer').click()
 
     cy.appUrlShouldBe(`/ressources/${createSlug(title)}/editer`)
+
+    cy.getToast(/bien été créée/i)
+
     cy.get('@modal').should('not.exist')
     cy.contains(title)
     cy.contains(`Créée dans la base ${base.title}`)

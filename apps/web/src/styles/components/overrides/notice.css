@@ -1,0 +1,96 @@
+.fr-notice--flex .fr-notice__title {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix notice padding right bug and add border radius */
+.fr-notice {
+  border-radius: 8px;
+
+  .fr-notice__body {
+    padding-right: 0;
+
+    &::before {
+      top: calc(50% - 12px);
+    }
+
+    .fr-notice__title {
+      font-weight: 500;
+    }
+  }
+}
+
+.fr-notice--success {
+  background: var(--background-contrast-success);
+
+  --hover: var(--background-contrast-success-hover);
+  --active: var(--background-contrast-success-active);
+
+  color: var(--text-default-success);
+}
+
+.fr-notice--success .fr-notice__title::before {
+  mask-image: url('/dsfr/icons/system/check-line.svg') !important;
+  content: '';
+}
+
+.fr-notice--warning {
+  background: var(--background-contrast-warning);
+
+  --hover: var(--background-contrast-warning-hover);
+  --active: var(--background-contrast-warning-active);
+
+  color: var(--text-default-warning);
+}
+
+.fr-notice--warning .fr-notice__title::before {
+  mask-image: url('/dsfr/icons/system/fr--warning-fill.svg') !important;
+  content: '';
+}
+
+.fr-notice--new {
+  background: var(--background-contrast-yellow-moutarde);
+
+  --hover: var(--background-contrast-yellow-tournesol-hover);
+  --active: var(--background-contrast-yellow-tournesol-active);
+
+  color: var(--text-action-high-yellow-tournesol);
+}
+
+.fr-notice--hint {
+  background: var(--background-alt-blue-france);
+
+  --hover: var(--background-alt-blue-france-hover);
+  --active: var(--background-alt-blue-france-active);
+
+  color: var(--text-action-high-blue-france);
+}
+
+.fr-notice--new .fr-notice__title::before {
+  mask-image: url('/dsfr/icons/weather/flashlight-fill.svg') !important;
+  content: '';
+}
+
+.fr-notice.fr-notice--no-icon {
+  .fr-notice__body {
+    padding-left: 0;
+  }
+
+  .fr-notice__body::before {
+    display: none;
+  }
+}
+
+.fr-notice--error {
+  background: var(--background-contrast-error);
+
+  --hover: var(--background-contrast-error-hover);
+  --active: var(--background-contrast-error-active);
+
+  color: var(--text-default-error);
+}
+
+.fr-notice--error .fr-notice__title::before {
+  mask-image: url('/dsfr/icons/system/fr--error-line.svg') !important;
+  content: '';
+}

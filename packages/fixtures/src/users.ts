@@ -21,4 +21,4 @@ export const jmAvecTout = {
   emailVerified: new Date(),
 } satisfies Prisma.UserCreateManyInput
 
-export const users = [jmAvecTout, jmSansRien]
+export const fixtureUsers = [jmAvecTout, jmSansRien]

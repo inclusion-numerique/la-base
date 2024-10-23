@@ -1,3 +1,5 @@
+import { SelectOption } from '@app/ui/components/Form/utils/options'
+
 const departments: Record<string, string> = {
   '01': 'Ain',
   '02': 'Aisne',
@@ -118,9 +120,9 @@ export const getDepartmentName = (departmentCode: string) => {
   return `${name} (${departmentCode})`
 }
 
-export const departmentsOptions = Object.keys(departments)
+export const departmentsOptions: SelectOption[] = Object.keys(departments)
   .map((departmentCode) => ({
     value: departmentCode,
-    name: getDepartmentName(departmentCode),
+    label: getDepartmentName(departmentCode),
   }))
   .sort((a, b) => a.value.localeCompare(b.value))

@@ -1,7 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
-import SearchFilters from '@app/web/components/Search/Filters/SearchFilters'
+import SearchFilters, {
+  type FiltersInitialValue,
+} from '@app/web/components/Search/Filters/SearchFilters'
 import {
   departmentsOptions,
   getDepartmentName,
@@ -20,18 +22,22 @@ const BasesSearchLayout = ({
 }>) => {
   const searchParams = searchParamsFromSegment(params.searchSegment)
 
+  const initialValues = searchParams.departements.map(
+    (departementCode): FiltersInitialValue => ({
+      category: 'departements',
+      option: {
+        value: departementCode,
+        label: getDepartmentName(departementCode),
+      },
+    }),
+  )
+
   return (
     <>
       <SearchMenu activeTab="bases" searchParams={searchParams} />
       <div className="fr-container fr-container--medium fr-mb-30v">
         <SearchFilters
-          initialValues={searchParams.departements.map((departementCode) => ({
-            category: 'departements',
-            option: {
-              value: departementCode,
-              name: getDepartmentName(departementCode),
-            },
-          }))}
+          initialValues={initialValues}
           label="Affiner la recherche"
           searchParams={searchParams}
           tab="bases"

@@ -1,6 +1,6 @@
 import type { ResourceReportReason } from '@prisma/client'
 import z from 'zod'
-import { labelsToOptions } from '@app/web/utils/options'
+import { labelsToOptions } from '@app/ui/components/Form/utils/options'
 
 export const resourceReportReasonLabels: {
   [key in ResourceReportReason]: string

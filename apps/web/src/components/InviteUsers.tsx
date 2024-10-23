@@ -65,6 +65,13 @@ const InviteUsers = ({
     }
   }, [mutationError])
 
+  const userOptions =
+    users?.map((user) => ({
+      label: user.name ?? '',
+      value: user.id,
+      component: <InviteMemberCard user={user} />,
+    })) ?? []
+
   return (
     <>
       <MultipleSearchableSelect
@@ -74,15 +81,7 @@ const InviteUsers = ({
         placeholder="Adresse email, nom de profil"
         onSelect={onSelect}
         onInputChange={setUserSearchQuery}
-        options={
-          users
-            ? users.map((user) => ({
-                name: user.name ?? '',
-                value: user.id,
-                component: <InviteMemberCard user={user} />,
-              }))
-            : []
-        }
+        options={userOptions}
       />
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">

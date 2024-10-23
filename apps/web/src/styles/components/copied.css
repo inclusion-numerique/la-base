@@ -1,0 +1,14 @@
+.copied {
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+  word-break: keep-all;
+  background-color: var(--grey-50-1000);
+  font-size: 11px;
+  color: var(--background-default-grey);
+  padding: 4px;
+  border-radius: 4px;
+  top: -36px;
+  right: 0;
+  left: 0;
+}

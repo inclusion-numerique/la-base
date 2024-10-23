@@ -53,21 +53,21 @@ type Story = StoryObj<typeof SelectFormField>
 
 const options: SelectOption[] = [
   {
-    name: 'Selectionnez une option',
+    label: 'Selectionnez une option',
     value: '',
     disabled: true,
     hidden: true,
   },
   {
-    name: 'Choix 1',
+    label: 'Choix 1',
     value: 'choice-1',
   },
   {
-    name: 'Choix 2',
+    label: 'Choix 2',
     value: 'choice-2',
   },
   {
-    name: 'Choix 3',
+    label: 'Choix 3',
     value: 'choice-3',
   },
 ]

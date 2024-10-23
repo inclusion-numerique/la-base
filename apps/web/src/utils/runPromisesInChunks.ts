@@ -1,4 +1,4 @@
-import { chunk } from 'lodash'
+import { chunk } from 'lodash-es'
 import { runPromisesSequentially } from '@app/web/utils/runPromisesSequentially'
 
 export const runPromisesInChunks = async <T>(

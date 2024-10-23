@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 
 const userCollectionFragment = {
@@ -21,8 +21,8 @@ const userCollectionFragment = {
   select: Prisma.CollectionSelect
   where: Prisma.CollectionWhereInput
   orderBy:
-    | Prisma.CollectionOrderByWithRelationAndSearchRelevanceInput
-    | Prisma.CollectionOrderByWithRelationAndSearchRelevanceInput[]
+    | Prisma.CollectionOrderByWithRelationInput
+    | Prisma.CollectionOrderByWithRelationInput[]
 }
 
 const baseCollectionFragment = {
@@ -44,8 +44,8 @@ const baseCollectionFragment = {
   select: Prisma.CollectionSelect
   where: Prisma.CollectionWhereInput
   orderBy:
-    | Prisma.CollectionOrderByWithRelationAndSearchRelevanceInput
-    | Prisma.CollectionOrderByWithRelationAndSearchRelevanceInput[]
+    | Prisma.CollectionOrderByWithRelationInput
+    | Prisma.CollectionOrderByWithRelationInput[]
 }
 
 const userSavedCollectionFragment = {

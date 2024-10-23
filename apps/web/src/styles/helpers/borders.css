@@ -1,25 +1,21 @@
 .fr-border {
-  border: 1px solid var(--border-default-grey);
+  border: var(--slim-grey-border);
 }
 
 .fr-border-top {
-  border-top: 1px solid var(--border-default-grey);
+  border-top: var(--slim-grey-border);
 }
 
 .fr-border-bottom {
-  border-bottom: 1px solid var(--border-default-grey);
-}
-
-.fr-border-bottom-0 {
-  border-bottom: 0 !important;
+  border-bottom: var(--slim-grey-border);
 }
 
 .fr-border-right {
-  border-right: 1px solid var(--border-default-grey);
+  border-right: var(--slim-grey-border);
 }
 
 .fr-border-left {
-  border-left: 1px solid var(--border-default-grey);
+  border-left: var(--slim-grey-border);
 }
 
 .fr-border--blue-france {
@@ -34,6 +30,26 @@
   border-radius: 8px;
 }
 
+.fr-border-radius-top--8 {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.fr-border-radius-bottom--8 {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.fr-border-radius-left--8 {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.fr-border-radius-right--8 {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 .fr-border-radius--16 {
   border-radius: 16px;
 }
@@ -44,4 +60,39 @@
 
 .fr-border-radius--64 {
   border-radius: 64px;
+}
+
+.fr-border-radius-bottom--0 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fr-border-radius-top--0 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.fr-border--bottom {
+  border-bottom: var(--border-width) var(--border-style)
+    var(--border-default-grey);
+}
+
+.fr-border--top {
+  border-top: var(--border-width) var(--border-style) var(--border-default-grey);
+}
+
+.fr-border--start {
+  border-left: var(--border-width) var(--border-style)
+    var(--border-default-grey);
+}
+
+.fr-border--end {
+  border-right: var(--border-width) var(--border-style)
+    var(--border-default-grey);
+}
+
+@media (max-width: 48em) {
+  .fr-border-md-none {
+    border: none;
+  }
 }

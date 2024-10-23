@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DomainRecordConfig extends cdktf.TerraformMetaArguments {
   /**
   * The data of the record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
   /**
   * The zone you want to add the record in
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#dns_zone DomainRecord#dns_zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#dns_zone DomainRecord#dns_zone}
   */
   readonly dnsZone: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#id DomainRecord#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#id DomainRecord#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,67 +29,67 @@ export interface DomainRecordConfig extends cdktf.TerraformMetaArguments {
   /**
   * When destroy a resource record, if a zone have only NS, delete the zone
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#keep_empty_zone DomainRecord#keep_empty_zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#keep_empty_zone DomainRecord#keep_empty_zone}
   */
   readonly keepEmptyZone?: boolean | cdktf.IResolvable;
   /**
   * The name of the record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#name DomainRecord#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#name DomainRecord#name}
   */
   readonly name?: string;
   /**
   * The priority of the record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#priority DomainRecord#priority}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#priority DomainRecord#priority}
   */
   readonly priority?: number;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#project_id DomainRecord#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#project_id DomainRecord#project_id}
   */
   readonly projectId?: string;
   /**
   * The ttl of the record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#ttl DomainRecord#ttl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#ttl DomainRecord#ttl}
   */
   readonly ttl?: number;
   /**
   * The type of the record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#type DomainRecord#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#type DomainRecord#type}
   */
   readonly type: string;
   /**
   * geo_ip block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#geo_ip DomainRecord#geo_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#geo_ip DomainRecord#geo_ip}
   */
   readonly geoIp?: DomainRecordGeoIp;
   /**
   * http_service block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#http_service DomainRecord#http_service}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#http_service DomainRecord#http_service}
   */
   readonly httpService?: DomainRecordHttpService;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#timeouts DomainRecord#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#timeouts DomainRecord#timeouts}
   */
   readonly timeouts?: DomainRecordTimeouts;
   /**
   * view block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#view DomainRecord#view}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#view DomainRecord#view}
   */
   readonly view?: DomainRecordView[] | cdktf.IResolvable;
   /**
   * weighted block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#weighted DomainRecord#weighted}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#weighted DomainRecord#weighted}
   */
   readonly weighted?: DomainRecordWeighted[] | cdktf.IResolvable;
 }
@@ -97,19 +97,19 @@ export interface DomainRecordGeoIpMatches {
   /**
   * List of continents (eg: EU for Europe, NA for North America, AS for Asia...). List of all continents code: https://api.scaleway.com/domain-private/v2beta1/continents
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#continents DomainRecord#continents}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#continents DomainRecord#continents}
   */
   readonly continents?: string[];
   /**
   * List of countries (eg: FR for France, US for the United States, GB for Great Britain...). List of all countries code: https://api.scaleway.com/domain-private/v2beta1/countries
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#countries DomainRecord#countries}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#countries DomainRecord#countries}
   */
   readonly countries?: string[];
   /**
   * The data of the match result
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
 }
@@ -124,6 +124,37 @@ export function domainRecordGeoIpMatchesToTerraform(struct?: DomainRecordGeoIpMa
     countries: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.countries),
     data: cdktf.stringToTerraform(struct!.data),
   }
+}
+
+
+export function domainRecordGeoIpMatchesToHclTerraform(struct?: DomainRecordGeoIpMatches | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    continents: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.continents),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    countries: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.countries),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    data: {
+      value: cdktf.stringToHclTerraform(struct!.data),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordGeoIpMatchesOutputReference extends cdktf.ComplexObject {
@@ -251,7 +282,7 @@ export interface DomainRecordGeoIp {
   /**
   * matches block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#matches DomainRecord#matches}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#matches DomainRecord#matches}
   */
   readonly matches: DomainRecordGeoIpMatches[] | cdktf.IResolvable;
 }
@@ -264,6 +295,25 @@ export function domainRecordGeoIpToTerraform(struct?: DomainRecordGeoIpOutputRef
   return {
     matches: cdktf.listMapper(domainRecordGeoIpMatchesToTerraform, true)(struct!.matches),
   }
+}
+
+
+export function domainRecordGeoIpToHclTerraform(struct?: DomainRecordGeoIpOutputReference | DomainRecordGeoIp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    matches: {
+      value: cdktf.listMapperHcl(domainRecordGeoIpMatchesToHclTerraform, true)(struct!.matches),
+      isBlock: true,
+      type: "list",
+      storageClassType: "DomainRecordGeoIpMatchesList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordGeoIpOutputReference extends cdktf.ComplexObject {
@@ -315,31 +365,31 @@ export interface DomainRecordHttpService {
   /**
   * IPs to check
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#ips DomainRecord#ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#ips DomainRecord#ips}
   */
   readonly ips: string[];
   /**
   * Text to search
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#must_contain DomainRecord#must_contain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#must_contain DomainRecord#must_contain}
   */
   readonly mustContain: string;
   /**
   * Strategy to return an IP from the IPs list
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#strategy DomainRecord#strategy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#strategy DomainRecord#strategy}
   */
   readonly strategy: string;
   /**
   * URL to match the must_contain text to validate an IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#url DomainRecord#url}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#url DomainRecord#url}
   */
   readonly url: string;
   /**
   * User-agent used when checking the URL
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#user_agent DomainRecord#user_agent}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#user_agent DomainRecord#user_agent}
   */
   readonly userAgent?: string;
 }
@@ -356,6 +406,49 @@ export function domainRecordHttpServiceToTerraform(struct?: DomainRecordHttpServ
     url: cdktf.stringToTerraform(struct!.url),
     user_agent: cdktf.stringToTerraform(struct!.userAgent),
   }
+}
+
+
+export function domainRecordHttpServiceToHclTerraform(struct?: DomainRecordHttpServiceOutputReference | DomainRecordHttpService): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    ips: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.ips),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    must_contain: {
+      value: cdktf.stringToHclTerraform(struct!.mustContain),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    strategy: {
+      value: cdktf.stringToHclTerraform(struct!.strategy),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    url: {
+      value: cdktf.stringToHclTerraform(struct!.url),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    user_agent: {
+      value: cdktf.stringToHclTerraform(struct!.userAgent),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordHttpServiceOutputReference extends cdktf.ComplexObject {
@@ -484,23 +577,23 @@ export class DomainRecordHttpServiceOutputReference extends cdktf.ComplexObject 
 }
 export interface DomainRecordTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#create DomainRecord#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#create DomainRecord#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#default DomainRecord#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#default DomainRecord#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#delete DomainRecord#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#delete DomainRecord#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#read DomainRecord#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#read DomainRecord#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#update DomainRecord#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#update DomainRecord#update}
   */
   readonly update?: string;
 }
@@ -517,6 +610,49 @@ export function domainRecordTimeoutsToTerraform(struct?: DomainRecordTimeouts | 
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function domainRecordTimeoutsToHclTerraform(struct?: DomainRecordTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -669,13 +805,13 @@ export interface DomainRecordView {
   /**
   * The data of the view record
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#data DomainRecord#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#data DomainRecord#data}
   */
   readonly data: string;
   /**
   * The subnet of the view
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#subnet DomainRecord#subnet}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#subnet DomainRecord#subnet}
   */
   readonly subnet: string;
 }
@@ -689,6 +825,31 @@ export function domainRecordViewToTerraform(struct?: DomainRecordView | cdktf.IR
     data: cdktf.stringToTerraform(struct!.data),
     subnet: cdktf.stringToTerraform(struct!.subnet),
   }
+}
+
+
+export function domainRecordViewToHclTerraform(struct?: DomainRecordView | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    data: {
+      value: cdktf.stringToHclTerraform(struct!.data),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    subnet: {
+      value: cdktf.stringToHclTerraform(struct!.subnet),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordViewOutputReference extends cdktf.ComplexObject {
@@ -791,13 +952,13 @@ export interface DomainRecordWeighted {
   /**
   * The weighted IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#ip DomainRecord#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#ip DomainRecord#ip}
   */
   readonly ip: string;
   /**
   * The weight of the IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#weight DomainRecord#weight}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#weight DomainRecord#weight}
   */
   readonly weight: number;
 }
@@ -811,6 +972,31 @@ export function domainRecordWeightedToTerraform(struct?: DomainRecordWeighted | 
     ip: cdktf.stringToTerraform(struct!.ip),
     weight: cdktf.numberToTerraform(struct!.weight),
   }
+}
+
+
+export function domainRecordWeightedToHclTerraform(struct?: DomainRecordWeighted | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    ip: {
+      value: cdktf.stringToHclTerraform(struct!.ip),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    weight: {
+      value: cdktf.numberToHclTerraform(struct!.weight),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class DomainRecordWeightedOutputReference extends cdktf.ComplexObject {
@@ -911,7 +1097,7 @@ export class DomainRecordWeightedList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record scaleway_domain_record}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record scaleway_domain_record}
 */
 export class DomainRecord extends cdktf.TerraformResource {
 
@@ -927,7 +1113,7 @@ export class DomainRecord extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a DomainRecord resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DomainRecord to import
-  * @param importFromId The id of the existing DomainRecord that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DomainRecord that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DomainRecord to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -939,7 +1125,7 @@ export class DomainRecord extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/domain_record scaleway_domain_record} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/domain_record scaleway_domain_record} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -950,8 +1136,8 @@ export class DomainRecord extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_domain_record',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1227,5 +1413,97 @@ export class DomainRecord extends cdktf.TerraformResource {
       view: cdktf.listMapper(domainRecordViewToTerraform, true)(this._view.internalValue),
       weighted: cdktf.listMapper(domainRecordWeightedToTerraform, true)(this._weighted.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      data: {
+        value: cdktf.stringToHclTerraform(this._data),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      dns_zone: {
+        value: cdktf.stringToHclTerraform(this._dnsZone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      keep_empty_zone: {
+        value: cdktf.booleanToHclTerraform(this._keepEmptyZone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      priority: {
+        value: cdktf.numberToHclTerraform(this._priority),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ttl: {
+        value: cdktf.numberToHclTerraform(this._ttl),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      type: {
+        value: cdktf.stringToHclTerraform(this._type),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      geo_ip: {
+        value: domainRecordGeoIpToHclTerraform(this._geoIp.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "DomainRecordGeoIpList",
+      },
+      http_service: {
+        value: domainRecordHttpServiceToHclTerraform(this._httpService.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "DomainRecordHttpServiceList",
+      },
+      timeouts: {
+        value: domainRecordTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "DomainRecordTimeouts",
+      },
+      view: {
+        value: cdktf.listMapperHcl(domainRecordViewToHclTerraform, true)(this._view.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "DomainRecordViewList",
+      },
+      weighted: {
+        value: cdktf.listMapperHcl(domainRecordWeightedToHclTerraform, true)(this._weighted.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "DomainRecordWeightedList",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

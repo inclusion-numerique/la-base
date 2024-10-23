@@ -6,8 +6,8 @@ const SelectOptionsList = ({ options }: { options: SelectInputOption[] }) => (
     {options.map((option) =>
       option.hidden ? null : 'options' in option ? (
         <optgroup
-          key={option.name}
-          label={option.name}
+          key={option.label}
+          label={option.label}
           disabled={option.disabled}
         >
           <SelectOptionsList options={option.options} />
@@ -18,7 +18,7 @@ const SelectOptionsList = ({ options }: { options: SelectInputOption[] }) => (
           value={option.value}
           disabled={option.disabled}
         >
-          {option.name}
+          {option.label}
         </option>
       ),
     )}

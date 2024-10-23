@@ -6,7 +6,9 @@ Object.defineProperty(exports, 'baremetalServer', { get: function () { return re
 Object.defineProperty(exports, 'blockSnapshot', { get: function () { return require('./block-snapshot'); } });
 Object.defineProperty(exports, 'blockVolume', { get: function () { return require('./block-volume'); } });
 Object.defineProperty(exports, 'cockpit', { get: function () { return require('./cockpit'); } });
+Object.defineProperty(exports, 'cockpitAlertManager', { get: function () { return require('./cockpit-alert-manager'); } });
 Object.defineProperty(exports, 'cockpitGrafanaUser', { get: function () { return require('./cockpit-grafana-user'); } });
+Object.defineProperty(exports, 'cockpitSource', { get: function () { return require('./cockpit-source'); } });
 Object.defineProperty(exports, 'cockpitToken', { get: function () { return require('./cockpit-token'); } });
 Object.defineProperty(exports, 'container', { get: function () { return require('./container'); } });
 Object.defineProperty(exports, 'containerCron', { get: function () { return require('./container-cron'); } });
@@ -92,6 +94,7 @@ Object.defineProperty(exports, 'sdbSqlDatabase', { get: function () { return req
 Object.defineProperty(exports, 'secret', { get: function () { return require('./secret'); } });
 Object.defineProperty(exports, 'secretVersion', { get: function () { return require('./secret-version'); } });
 Object.defineProperty(exports, 'temDomain', { get: function () { return require('./tem-domain'); } });
+Object.defineProperty(exports, 'temDomainValidation', { get: function () { return require('./tem-domain-validation'); } });
 Object.defineProperty(exports, 'vpc', { get: function () { return require('./vpc'); } });
 Object.defineProperty(exports, 'vpcGatewayNetwork', { get: function () { return require('./vpc-gateway-network'); } });
 Object.defineProperty(exports, 'vpcPrivateNetwork', { get: function () { return require('./vpc-private-network'); } });
@@ -115,6 +118,7 @@ Object.defineProperty(exports, 'dataScalewayBlockSnapshot', { get: function () {
 Object.defineProperty(exports, 'dataScalewayBlockVolume', { get: function () { return require('./data-scaleway-block-volume'); } });
 Object.defineProperty(exports, 'dataScalewayCockpit', { get: function () { return require('./data-scaleway-cockpit'); } });
 Object.defineProperty(exports, 'dataScalewayCockpitPlan', { get: function () { return require('./data-scaleway-cockpit-plan'); } });
+Object.defineProperty(exports, 'dataScalewayConfig', { get: function () { return require('./data-scaleway-config'); } });
 Object.defineProperty(exports, 'dataScalewayContainer', { get: function () { return require('./data-scaleway-container'); } });
 Object.defineProperty(exports, 'dataScalewayContainerNamespace', { get: function () { return require('./data-scaleway-container-namespace'); } });
 Object.defineProperty(exports, 'dataScalewayDocumentdbDatabase', { get: function () { return require('./data-scaleway-documentdb-database'); } });
@@ -126,6 +130,7 @@ Object.defineProperty(exports, 'dataScalewayFlexibleIp', { get: function () { re
 Object.defineProperty(exports, 'dataScalewayFlexibleIps', { get: function () { return require('./data-scaleway-flexible-ips'); } });
 Object.defineProperty(exports, 'dataScalewayFunction', { get: function () { return require('./data-scaleway-function'); } });
 Object.defineProperty(exports, 'dataScalewayFunctionNamespace', { get: function () { return require('./data-scaleway-function-namespace'); } });
+Object.defineProperty(exports, 'dataScalewayIamApiKey', { get: function () { return require('./data-scaleway-iam-api-key'); } });
 Object.defineProperty(exports, 'dataScalewayIamApplication', { get: function () { return require('./data-scaleway-iam-application'); } });
 Object.defineProperty(exports, 'dataScalewayIamGroup', { get: function () { return require('./data-scaleway-iam-group'); } });
 Object.defineProperty(exports, 'dataScalewayIamSshKey', { get: function () { return require('./data-scaleway-iam-ssh-key'); } });
@@ -181,6 +186,7 @@ Object.defineProperty(exports, 'dataScalewayVpcPublicGatewayDhcp', { get: functi
 Object.defineProperty(exports, 'dataScalewayVpcPublicGatewayDhcpReservation', { get: function () { return require('./data-scaleway-vpc-public-gateway-dhcp-reservation'); } });
 Object.defineProperty(exports, 'dataScalewayVpcPublicGatewayIp', { get: function () { return require('./data-scaleway-vpc-public-gateway-ip'); } });
 Object.defineProperty(exports, 'dataScalewayVpcPublicGatewayPatRule', { get: function () { return require('./data-scaleway-vpc-public-gateway-pat-rule'); } });
+Object.defineProperty(exports, 'dataScalewayVpcRoutes', { get: function () { return require('./data-scaleway-vpc-routes'); } });
 Object.defineProperty(exports, 'dataScalewayVpcs', { get: function () { return require('./data-scaleway-vpcs'); } });
 Object.defineProperty(exports, 'dataScalewayWebhosting', { get: function () { return require('./data-scaleway-webhosting'); } });
 Object.defineProperty(exports, 'dataScalewayWebhostingOffer', { get: function () { return require('./data-scaleway-webhosting-offer'); } });

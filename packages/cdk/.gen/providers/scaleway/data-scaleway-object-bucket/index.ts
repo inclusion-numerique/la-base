@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayObjectBucketConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket#id DataScalewayObjectBucket#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket#id DataScalewayObjectBucket#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayObjectBucketConfig extends cdktf.TerraformMetaArgum
   /**
   * The name of the bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket#name DataScalewayObjectBucket#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket#name DataScalewayObjectBucket#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket#project_id DataScalewayObjectBucket#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket#project_id DataScalewayObjectBucket#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket#region DataScalewayObjectBucket#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket#region DataScalewayObjectBucket#region}
   */
   readonly region?: string;
 }
@@ -43,6 +43,17 @@ export function dataScalewayObjectBucketCorsRuleToTerraform(struct?: DataScalewa
   }
   return {
   }
+}
+
+
+export function dataScalewayObjectBucketCorsRuleToHclTerraform(struct?: DataScalewayObjectBucketCorsRule): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayObjectBucketCorsRuleOutputReference extends cdktf.ComplexObject {
@@ -129,6 +140,17 @@ export function dataScalewayObjectBucketLifecycleRuleExpirationToTerraform(struc
   }
 }
 
+
+export function dataScalewayObjectBucketLifecycleRuleExpirationToHclTerraform(struct?: DataScalewayObjectBucketLifecycleRuleExpiration): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayObjectBucketLifecycleRuleExpirationOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -191,6 +213,17 @@ export function dataScalewayObjectBucketLifecycleRuleTransitionToTerraform(struc
   }
   return {
   }
+}
+
+
+export function dataScalewayObjectBucketLifecycleRuleTransitionToHclTerraform(struct?: DataScalewayObjectBucketLifecycleRuleTransition): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayObjectBucketLifecycleRuleTransitionOutputReference extends cdktf.ComplexObject {
@@ -260,6 +293,17 @@ export function dataScalewayObjectBucketLifecycleRuleToTerraform(struct?: DataSc
   }
   return {
   }
+}
+
+
+export function dataScalewayObjectBucketLifecycleRuleToHclTerraform(struct?: DataScalewayObjectBucketLifecycleRule): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayObjectBucketLifecycleRuleOutputReference extends cdktf.ComplexObject {
@@ -359,6 +403,17 @@ export function dataScalewayObjectBucketVersioningToTerraform(struct?: DataScale
   }
 }
 
+
+export function dataScalewayObjectBucketVersioningToHclTerraform(struct?: DataScalewayObjectBucketVersioning): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayObjectBucketVersioningOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -413,7 +468,7 @@ export class DataScalewayObjectBucketVersioningList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket scaleway_object_bucket}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket scaleway_object_bucket}
 */
 export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
 
@@ -429,7 +484,7 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayObjectBucket resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayObjectBucket to import
-  * @param importFromId The id of the existing DataScalewayObjectBucket that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayObjectBucket that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayObjectBucket to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -441,7 +496,7 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/object_bucket scaleway_object_bucket} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/object_bucket scaleway_object_bucket} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -452,8 +507,8 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_object_bucket',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -597,5 +652,37 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
       project_id: cdktf.stringToTerraform(this._projectId),
       region: cdktf.stringToTerraform(this._region),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

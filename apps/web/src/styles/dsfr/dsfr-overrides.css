@@ -311,18 +311,6 @@
   }
 }
 
-/* Tabs */
-
-/* Remove border */
-
-.fr-tabs {
-  box-shadow: unset;
-
-  &::before {
-    box-shadow: inset 0 1px 0 0 var(--border-default-grey);
-  }
-}
-
 /* Modals */
 
 .fr-modal {
@@ -330,20 +318,5 @@
     .fr-btn.fr-btn--close {
       font-weight: 400;
     }
-  }
-}
-
-.fr-modal--overflow-visible {
-  .fr-container {
-    overflow: visible !important;
-  }
-
-  .fr-modal__body {
-    overflow: visible !important;
-  }
-
-  .fr-modal__content {
-    padding-bottom: 40px;
-    margin-bottom: 40px;
   }
 }

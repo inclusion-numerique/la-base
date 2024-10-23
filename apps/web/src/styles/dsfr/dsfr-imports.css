@@ -1,9 +1,0 @@
-/**
- * Import dsfr with url, outside of webpack build, as a static file
- * These css are already minified and statically available in the public folder
- * Also parsing and bundling them takes a lot of time and trigger stack overflow error during dev/build.
- * For disabling bundling with webpack, these are excluded from css-loader (see next.config.js)
- */
-@import url('/dsfr/dsfr.min.css');
-@import url('/dsfr/utility/utility.min.css');
-@import url('https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css');

@@ -1,5 +1,8 @@
 import type { TargetAudience } from '@prisma/client'
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import {
+  labelsToOptions,
+  type SelectOption,
+} from '@app/ui/components/Form/utils/options'
 
 export const targetAudienceCategories = [
   'Acteurs du numérique d’intérêt général',
@@ -75,12 +78,7 @@ export const targetAudienceCategoriesMap: {
   TousPublics: 'Bénéficiaires',
   TravailleursSociaux: 'Acteurs du numérique d’intérêt général',
 }
-export const targetAudienceOptions = Object.entries(targetAudienceLabels).map(
-  ([value, name]) => ({
-    value,
-    name,
-  }),
-)
+export const targetAudienceOptions = labelsToOptions(targetAudienceLabels)
 
 export const categoryTargetAudiences = (() => {
   const index: { [category in TargetAudienceCategory]: TargetAudience[] } = {
@@ -107,7 +105,7 @@ export const categoryTargetAudiencesOptions = (() => {
     targetAudienceCategoriesMap,
   )) {
     index[category].push({
-      name: targetAudienceLabels[targetAudience as TargetAudience],
+      label: targetAudienceLabels[targetAudience as TargetAudience],
       value: targetAudience as TargetAudience,
     })
   }

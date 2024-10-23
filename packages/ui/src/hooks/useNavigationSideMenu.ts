@@ -4,7 +4,21 @@ import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import { isBrowser } from '@app/web/utils/isBrowser'
 
 const getIdFromItem = (item: SideMenuProps.Item): string | null =>
-  'linkProps' in item ? item.linkProps?.href?.toString().slice(1) ?? null : null
+  'linkProps' in item
+    ? (item.linkProps?.href?.toString().slice(1) ?? null)
+    : null
+
+const getIdsFromItem = (item: SideMenuProps.Item): string[] => {
+  const rootId = getIdFromItem(item)
+
+  if (!('items' in item)) {
+    return rootId ? [rootId] : []
+  }
+
+  return rootId
+    ? [rootId, ...item.items.flatMap(getIdsFromItem)]
+    : item.items.flatMap(getIdsFromItem)
+}
 
 /**
  * This will use all the link items with an href starting with # to compute the active item
@@ -28,7 +42,7 @@ export const useNavigationSideMenu = ({
   }, [contentId])
 
   const navigableItemIds = useMemo(
-    () => items.map(getIdFromItem).filter(isDefinedAndNotNull),
+    () => items.flatMap(getIdsFromItem).filter(isDefinedAndNotNull),
     [items],
   )
 

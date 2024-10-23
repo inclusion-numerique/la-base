@@ -130,6 +130,7 @@ export class ProjectStack extends TerraformStack {
           allowedOrigins: ['http://localhost:3000', 'http://localhost'],
         },
       ],
+      forceDestroy: true,
     })
 
     // Uploads bucket for migration of legacy v1 uploads
@@ -144,6 +145,7 @@ export class ProjectStack extends TerraformStack {
           allowedOrigins: ['*'],
         },
       ],
+      forceDestroy: false,
     })
 
     // Backups bucket for database dumps or other important backups
@@ -158,6 +160,7 @@ export class ProjectStack extends TerraformStack {
           allowedOrigins: ['http://localhost:3000', 'http://localhost'],
         },
       ],
+      forceDestroy: false,
     })
 
     // https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/resources/rdb_instance

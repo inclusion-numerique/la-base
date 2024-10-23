@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface LbConfig extends cdktf.TerraformMetaArguments {
   /**
   * Defines whether to automatically assign a flexible public IP to the load balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#assign_flexible_ip Lb#assign_flexible_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#assign_flexible_ip Lb#assign_flexible_ip}
   */
   readonly assignFlexibleIp?: boolean | cdktf.IResolvable;
   /**
   * Defines whether to automatically assign a flexible public IPv6 to the load balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#assign_flexible_ipv6 Lb#assign_flexible_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#assign_flexible_ipv6 Lb#assign_flexible_ipv6}
   */
   readonly assignFlexibleIpv6?: boolean | cdktf.IResolvable;
   /**
   * The description of the lb
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#description Lb#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#description Lb#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#id Lb#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#id Lb#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,67 +35,67 @@ export interface LbConfig extends cdktf.TerraformMetaArguments {
   /**
   * The load-balance public IP ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#ip_id Lb#ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#ip_id Lb#ip_id}
   */
   readonly ipId?: string;
   /**
   * List of IP IDs to attach to the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#ip_ids Lb#ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#ip_ids Lb#ip_ids}
   */
   readonly ipIds?: string[];
   /**
   * Name of the lb
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#name Lb#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#name Lb#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#project_id Lb#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#project_id Lb#project_id}
   */
   readonly projectId?: string;
   /**
   * Release the IPs related to this load-balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#release_ip Lb#release_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#release_ip Lb#release_ip}
   */
   readonly releaseIp?: boolean | cdktf.IResolvable;
   /**
   * Enforces minimal SSL version (in SSL/TLS offloading context)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#ssl_compatibility_level Lb#ssl_compatibility_level}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#ssl_compatibility_level Lb#ssl_compatibility_level}
   */
   readonly sslCompatibilityLevel?: string;
   /**
   * Array of tags to associate with the load-balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#tags Lb#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#tags Lb#tags}
   */
   readonly tags?: string[];
   /**
   * The type of load-balancer you want to create
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#type Lb#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#type Lb#type}
   */
   readonly type: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#zone Lb#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#zone Lb#zone}
   */
   readonly zone?: string;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#private_network Lb#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#private_network Lb#private_network}
   */
   readonly privateNetwork?: LbPrivateNetwork[] | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#timeouts Lb#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#timeouts Lb#timeouts}
   */
   readonly timeouts?: LbTimeouts;
 }
@@ -103,19 +103,25 @@ export interface LbPrivateNetwork {
   /**
   * Set to true if you want to let DHCP assign IP addresses
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#dhcp_config Lb#dhcp_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#dhcp_config Lb#dhcp_config}
   */
   readonly dhcpConfig?: boolean | cdktf.IResolvable;
   /**
+  * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#ipam_ids Lb#ipam_ids}
+  */
+  readonly ipamIds?: string[];
+  /**
   * The Private Network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#private_network_id Lb#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#private_network_id Lb#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * Define an IP address in the subnet of your private network that will be assigned to your load balancer instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#static_config Lb#static_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#static_config Lb#static_config}
   */
   readonly staticConfig?: string[];
 }
@@ -127,9 +133,47 @@ export function lbPrivateNetworkToTerraform(struct?: LbPrivateNetwork | cdktf.IR
   }
   return {
     dhcp_config: cdktf.booleanToTerraform(struct!.dhcpConfig),
+    ipam_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.ipamIds),
     private_network_id: cdktf.stringToTerraform(struct!.privateNetworkId),
     static_config: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.staticConfig),
   }
+}
+
+
+export function lbPrivateNetworkToHclTerraform(struct?: LbPrivateNetwork | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    dhcp_config: {
+      value: cdktf.booleanToHclTerraform(struct!.dhcpConfig),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    ipam_ids: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.ipamIds),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    private_network_id: {
+      value: cdktf.stringToHclTerraform(struct!.privateNetworkId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    static_config: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.staticConfig),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class LbPrivateNetworkOutputReference extends cdktf.ComplexObject {
@@ -156,6 +200,10 @@ export class LbPrivateNetworkOutputReference extends cdktf.ComplexObject {
       hasAnyValues = true;
       internalValueResult.dhcpConfig = this._dhcpConfig;
     }
+    if (this._ipamIds !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipamIds = this._ipamIds;
+    }
     if (this._privateNetworkId !== undefined) {
       hasAnyValues = true;
       internalValueResult.privateNetworkId = this._privateNetworkId;
@@ -172,6 +220,7 @@ export class LbPrivateNetworkOutputReference extends cdktf.ComplexObject {
       this.isEmptyObject = false;
       this.resolvableValue = undefined;
       this._dhcpConfig = undefined;
+      this._ipamIds = undefined;
       this._privateNetworkId = undefined;
       this._staticConfig = undefined;
     }
@@ -183,6 +232,7 @@ export class LbPrivateNetworkOutputReference extends cdktf.ComplexObject {
       this.isEmptyObject = Object.keys(value).length === 0;
       this.resolvableValue = undefined;
       this._dhcpConfig = value.dhcpConfig;
+      this._ipamIds = value.ipamIds;
       this._privateNetworkId = value.privateNetworkId;
       this._staticConfig = value.staticConfig;
     }
@@ -202,6 +252,22 @@ export class LbPrivateNetworkOutputReference extends cdktf.ComplexObject {
   // Temporarily expose input value. Use with caution.
   public get dhcpConfigInput() {
     return this._dhcpConfig;
+  }
+
+  // ipam_ids - computed: true, optional: true, required: false
+  private _ipamIds?: string[]; 
+  public get ipamIds() {
+    return this.getListAttribute('ipam_ids');
+  }
+  public set ipamIds(value: string[]) {
+    this._ipamIds = value;
+  }
+  public resetIpamIds() {
+    this._ipamIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipamIdsInput() {
+    return this._ipamIds;
   }
 
   // private_network_id - computed: false, optional: false, required: true
@@ -265,23 +331,23 @@ export class LbPrivateNetworkList extends cdktf.ComplexList {
 }
 export interface LbTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#create Lb#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#create Lb#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#default Lb#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#default Lb#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#delete Lb#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#delete Lb#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#read Lb#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#read Lb#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#update Lb#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#update Lb#update}
   */
   readonly update?: string;
 }
@@ -298,6 +364,49 @@ export function lbTimeoutsToTerraform(struct?: LbTimeouts | cdktf.IResolvable): 
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function lbTimeoutsToHclTerraform(struct?: LbTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class LbTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -448,7 +557,7 @@ export class LbTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb scaleway_lb}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb scaleway_lb}
 */
 export class Lb extends cdktf.TerraformResource {
 
@@ -464,7 +573,7 @@ export class Lb extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a Lb resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the Lb to import
-  * @param importFromId The id of the existing Lb that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing Lb that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the Lb to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -476,7 +585,7 @@ export class Lb extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb scaleway_lb} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb scaleway_lb} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -487,8 +596,8 @@ export class Lb extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -798,5 +907,103 @@ export class Lb extends cdktf.TerraformResource {
       private_network: cdktf.listMapper(lbPrivateNetworkToTerraform, true)(this._privateNetwork.internalValue),
       timeouts: lbTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      assign_flexible_ip: {
+        value: cdktf.booleanToHclTerraform(this._assignFlexibleIp),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      assign_flexible_ipv6: {
+        value: cdktf.booleanToHclTerraform(this._assignFlexibleIpv6),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      description: {
+        value: cdktf.stringToHclTerraform(this._description),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ip_id: {
+        value: cdktf.stringToHclTerraform(this._ipId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ip_ids: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._ipIds),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      release_ip: {
+        value: cdktf.booleanToHclTerraform(this._releaseIp),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      ssl_compatibility_level: {
+        value: cdktf.stringToHclTerraform(this._sslCompatibilityLevel),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      type: {
+        value: cdktf.stringToHclTerraform(this._type),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      private_network: {
+        value: cdktf.listMapperHcl(lbPrivateNetworkToHclTerraform, true)(this._privateNetwork.internalValue),
+        isBlock: true,
+        type: "set",
+        storageClassType: "LbPrivateNetworkList",
+      },
+      timeouts: {
+        value: lbTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "LbTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

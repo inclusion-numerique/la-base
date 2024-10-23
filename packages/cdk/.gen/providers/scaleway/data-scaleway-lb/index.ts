@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayLbConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#id DataScalewayLb#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#id DataScalewayLb#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface DataScalewayLbConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the load-balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#lb_id DataScalewayLb#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#lb_id DataScalewayLb#lb_id}
   */
   readonly lbId?: string;
   /**
   * Name of the lb
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#name DataScalewayLb#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#name DataScalewayLb#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#project_id DataScalewayLb#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#project_id DataScalewayLb#project_id}
   */
   readonly projectId?: string;
   /**
   * Release the IPs related to this load-balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#release_ip DataScalewayLb#release_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#release_ip DataScalewayLb#release_ip}
   */
   readonly releaseIp?: boolean | cdktf.IResolvable;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#zone DataScalewayLb#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#zone DataScalewayLb#zone}
   */
   readonly zone?: string;
 }
@@ -55,6 +55,17 @@ export function dataScalewayLbPrivateNetworkToTerraform(struct?: DataScalewayLbP
   }
   return {
   }
+}
+
+
+export function dataScalewayLbPrivateNetworkToHclTerraform(struct?: DataScalewayLbPrivateNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbPrivateNetworkOutputReference extends cdktf.ComplexObject {
@@ -88,6 +99,11 @@ export class DataScalewayLbPrivateNetworkOutputReference extends cdktf.ComplexOb
   // dhcp_config - computed: true, optional: false, required: false
   public get dhcpConfig() {
     return this.getBooleanAttribute('dhcp_config');
+  }
+
+  // ipam_ids - computed: true, optional: false, required: false
+  public get ipamIds() {
+    return this.getListAttribute('ipam_ids');
   }
 
   // private_network_id - computed: true, optional: false, required: false
@@ -131,7 +147,7 @@ export class DataScalewayLbPrivateNetworkList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb scaleway_lb}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb scaleway_lb}
 */
 export class DataScalewayLb extends cdktf.TerraformDataSource {
 
@@ -147,7 +163,7 @@ export class DataScalewayLb extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLb resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLb to import
-  * @param importFromId The id of the existing DataScalewayLb that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLb that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLb to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -159,7 +175,7 @@ export class DataScalewayLb extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb scaleway_lb} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb scaleway_lb} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -170,8 +186,8 @@ export class DataScalewayLb extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -368,5 +384,49 @@ export class DataScalewayLb extends cdktf.TerraformDataSource {
       release_ip: cdktf.booleanToTerraform(this._releaseIp),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      lb_id: {
+        value: cdktf.stringToHclTerraform(this._lbId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      release_ip: {
+        value: cdktf.booleanToHclTerraform(this._releaseIp),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

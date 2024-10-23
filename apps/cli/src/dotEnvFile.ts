@@ -1,6 +1,7 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
 import { appendFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import path from 'node:path'
+import { getDirname } from '@app/config/dirname'
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export type DotEnvVariable = { name: string; value: string }
@@ -8,11 +9,7 @@ export type DotEnvVariable = { name: string; value: string }
 // Appends text after a new line
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export const appendTextToDotEnvFile = async (text: string) => {
-  const dotenvFile = resolve(
-    // eslint-disable-next-line unicorn/prefer-module
-    __dirname,
-    '../../../.env',
-  )
+  const dotenvFile = path.resolve(getDirname(import.meta.url), '../../../.env')
   await appendFile(dotenvFile, `\n${text}\n`)
 }
 

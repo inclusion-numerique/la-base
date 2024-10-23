@@ -1,9 +1,8 @@
-import { expect } from '@storybook/jest'
 import { v4 } from 'uuid'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { profileRouter } from '@app/web/server/rpc/profile/profileRouter'
 import { createTestContext } from '@app/web/test/createTestContext'
-import {
+import type {
   UpdateProfileContactsCommand,
   UpdateProfileInformationsCommand,
   UpdateProfileVisibilityCommand,
@@ -321,15 +320,15 @@ describe('profileRouter', () => {
         }),
       ])
 
-      await expect(profile.isPublic).toBeFalse()
-      await expect(base.isPublic).toBeTrue()
-      await expect(publicCollectionInBase.isPublic).toBeTrue()
-      await expect(publicCollection.isPublic).toBeFalse()
-      await expect(privateCollection.isPublic).toBeFalse()
-      await expect(publicResourceInBase.isPublic).toBeTrue()
-      await expect(publicResource.isPublic).toBeFalse()
-      await expect(privateResource.isPublic).toBeFalse()
-      await expect(draftResource.isPublic).toBeNull()
+      expect(profile.isPublic).toBeFalse()
+      expect(base.isPublic).toBeTrue()
+      expect(publicCollectionInBase.isPublic).toBeTrue()
+      expect(publicCollection.isPublic).toBeFalse()
+      expect(privateCollection.isPublic).toBeFalse()
+      expect(publicResourceInBase.isPublic).toBeTrue()
+      expect(publicResource.isPublic).toBeFalse()
+      expect(privateResource.isPublic).toBeFalse()
+      expect(draftResource.isPublic).toBeNull()
     })
   })
 
@@ -346,11 +345,11 @@ describe('profileRouter', () => {
         where: { id: givenUserId },
       })
 
-      await expect(user.firstName).toBe('John')
-      await expect(user.lastName).toBe('Doe')
-      await expect(user.name).toBe('John Doe')
-      await expect(user.department).toBe('24')
-      await expect(user.description).toBe('This is John Doe')
+      expect(user.firstName).toBe('John')
+      expect(user.lastName).toBe('Doe')
+      expect(user.name).toBe('John Doe')
+      expect(user.department).toBe('24')
+      expect(user.description).toBe('This is John Doe')
     })
   })
 
@@ -368,11 +367,11 @@ describe('profileRouter', () => {
         where: { id: givenUserId },
       })
 
-      await expect(user.emailIsPublic).toBe(true)
-      await expect(user.website).toBe('https://www.john-doe.com')
-      await expect(user.facebook).toBe('https://www.facebook.com/john-doe')
-      await expect(user.twitter).toBe('https://twitter.com/JDoe')
-      await expect(user.linkedin).toBe('https://www.linkedin.com/in/john-doe')
+      expect(user.emailIsPublic).toBe(true)
+      expect(user.website).toBe('https://www.john-doe.com')
+      expect(user.facebook).toBe('https://www.facebook.com/john-doe')
+      expect(user.twitter).toBe('https://twitter.com/JDoe')
+      expect(user.linkedin).toBe('https://www.linkedin.com/in/john-doe')
     })
   })
 
@@ -425,32 +424,30 @@ describe('profileRouter', () => {
         },
       })
 
-      await expect(user.email).toBe(
+      expect(user.email).toBe(
         `utilisateur-supprimé+${givenUserId}@lesbases.anct.gouv.fr`,
       )
-      await expect(user.firstName).toBeNull()
-      await expect(user.lastName).toBeNull()
-      await expect(user.name).toBe('Profil supprimé')
-      await expect(user.department).toBeNull()
-      await expect(user.description).toBeNull()
-      await expect(user.emailIsPublic).toBeFalse()
-      await expect(user.website).toBeNull()
-      await expect(user.facebook).toBeNull()
-      await expect(user.twitter).toBeNull()
-      await expect(user.linkedin).toBeNull()
-      await expect(user.deleted).not.toBeNull()
+      expect(user.firstName).toBeNull()
+      expect(user.lastName).toBeNull()
+      expect(user.name).toBe('Profil supprimé')
+      expect(user.department).toBeNull()
+      expect(user.description).toBeNull()
+      expect(user.emailIsPublic).toBeFalse()
+      expect(user.website).toBeNull()
+      expect(user.facebook).toBeNull()
+      expect(user.twitter).toBeNull()
+      expect(user.linkedin).toBeNull()
+      expect(user.deleted).not.toBeNull()
 
-      await expect(bases.every((base) => base.deleted != null)).toBe(true)
-      await expect(
-        resources.every((resource) => resource.deleted != null),
-      ).toBe(true)
+      expect(bases.every((base) => base.deleted != null)).toBe(true)
+      expect(resources.every((resource) => resource.deleted != null)).toBe(true)
       // Should delete his collections
-      await expect(
+      expect(
         collections.every((collection) => collection.deleted != null),
       ).toBe(true)
 
       // Should not delete collections in bases
-      await expect(
+      expect(
         collectionsInBase.every((collection) => collection.deleted == null),
       ).toBe(true)
     })

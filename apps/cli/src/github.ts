@@ -1,20 +1,17 @@
-import { Octokit } from 'octokit'
+import { Octokit } from '@octokit/core'
+import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 
 export const owner = 'inclusion-numerique'
 export const repo = process.env.NEXT_PUBLIC_APP_SLUG || ''
 
-let octokit: Octokit
+const token = process.env.GITHUB_TOKEN
 
-// Lazily validate env and instanciate octokit
-export const getOctokit = () => {
-  if (!octokit) {
-    const token = process.env.GITHUB_TOKEN
-
-    if (!token) {
-      throw new Error('Missing GITHUB_TOKEN env variable for authentication')
-    }
-    octokit = new Octokit({ auth: token })
-  }
-
-  return octokit
+if (!token) {
+  throw new Error(
+    'Missing GITHUB_TOKEN env variable for octokit authentication',
+  )
 }
+
+const OctokitWithPlugins = Octokit.plugin(restEndpointMethods)
+
+export const octokit = new OctokitWithPlugins({ auth: token })

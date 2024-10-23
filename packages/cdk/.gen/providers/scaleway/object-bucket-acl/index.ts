@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,25 +8,25 @@ import * as cdktf from 'cdktf';
 
 export interface ObjectBucketAclConfig extends cdktf.TerraformMetaArguments {
   /**
-  * ACL of the bucket: either 'public-read' or 'private'.
+  * ACL of the bucket: either 'private', 'public-read', 'public-read-write' or 'authenticated-read'.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#acl ObjectBucketAcl#acl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#acl ObjectBucketAcl#acl}
   */
   readonly acl?: string;
   /**
   * The bucket's name or regional ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#bucket ObjectBucketAcl#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#bucket ObjectBucketAcl#bucket}
   */
   readonly bucket: string;
   /**
   * The project ID as owner.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#expected_bucket_owner ObjectBucketAcl#expected_bucket_owner}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#expected_bucket_owner ObjectBucketAcl#expected_bucket_owner}
   */
   readonly expectedBucketOwner?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,19 +35,19 @@ export interface ObjectBucketAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#project_id ObjectBucketAcl#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#project_id ObjectBucketAcl#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#region ObjectBucketAcl#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#region ObjectBucketAcl#region}
   */
   readonly region?: string;
   /**
   * access_control_policy block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#access_control_policy ObjectBucketAcl#access_control_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#access_control_policy ObjectBucketAcl#access_control_policy}
   */
   readonly accessControlPolicy?: ObjectBucketAclAccessControlPolicy;
 }
@@ -55,7 +55,7 @@ export interface ObjectBucketAclAccessControlPolicyGrantGrantee {
   /**
   * The project ID owner of the grantee.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -64,7 +64,7 @@ export interface ObjectBucketAclAccessControlPolicyGrantGrantee {
   /**
   * Type of grantee. Valid values: `CanonicalUser`
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#type ObjectBucketAcl#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#type ObjectBucketAcl#type}
   */
   readonly type: string;
 }
@@ -78,6 +78,31 @@ export function objectBucketAclAccessControlPolicyGrantGranteeToTerraform(struct
     id: cdktf.stringToTerraform(struct!.id),
     type: cdktf.stringToTerraform(struct!.type),
   }
+}
+
+
+export function objectBucketAclAccessControlPolicyGrantGranteeToHclTerraform(struct?: ObjectBucketAclAccessControlPolicyGrantGranteeOutputReference | ObjectBucketAclAccessControlPolicyGrantGrantee): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    id: {
+      value: cdktf.stringToHclTerraform(struct!.id),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    type: {
+      value: cdktf.stringToHclTerraform(struct!.type),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class ObjectBucketAclAccessControlPolicyGrantGranteeOutputReference extends cdktf.ComplexObject {
@@ -153,13 +178,13 @@ export interface ObjectBucketAclAccessControlPolicyGrant {
   /**
   * Logging permissions assigned to the grantee for the bucket.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#permission ObjectBucketAcl#permission}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#permission ObjectBucketAcl#permission}
   */
   readonly permission: string;
   /**
   * grantee block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#grantee ObjectBucketAcl#grantee}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#grantee ObjectBucketAcl#grantee}
   */
   readonly grantee?: ObjectBucketAclAccessControlPolicyGrantGrantee;
 }
@@ -173,6 +198,31 @@ export function objectBucketAclAccessControlPolicyGrantToTerraform(struct?: Obje
     permission: cdktf.stringToTerraform(struct!.permission),
     grantee: objectBucketAclAccessControlPolicyGrantGranteeToTerraform(struct!.grantee),
   }
+}
+
+
+export function objectBucketAclAccessControlPolicyGrantToHclTerraform(struct?: ObjectBucketAclAccessControlPolicyGrant | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    permission: {
+      value: cdktf.stringToHclTerraform(struct!.permission),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    grantee: {
+      value: objectBucketAclAccessControlPolicyGrantGranteeToHclTerraform(struct!.grantee),
+      isBlock: true,
+      type: "list",
+      storageClassType: "ObjectBucketAclAccessControlPolicyGrantGranteeList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class ObjectBucketAclAccessControlPolicyGrantOutputReference extends cdktf.ComplexObject {
@@ -278,13 +328,13 @@ export interface ObjectBucketAclAccessControlPolicyOwner {
   /**
   * The project ID of the grantee.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#display_name ObjectBucketAcl#display_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#display_name ObjectBucketAcl#display_name}
   */
   readonly displayName?: string;
   /**
   * The display ID of the project.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#id ObjectBucketAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -301,6 +351,31 @@ export function objectBucketAclAccessControlPolicyOwnerToTerraform(struct?: Obje
     display_name: cdktf.stringToTerraform(struct!.displayName),
     id: cdktf.stringToTerraform(struct!.id),
   }
+}
+
+
+export function objectBucketAclAccessControlPolicyOwnerToHclTerraform(struct?: ObjectBucketAclAccessControlPolicyOwnerOutputReference | ObjectBucketAclAccessControlPolicyOwner): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    display_name: {
+      value: cdktf.stringToHclTerraform(struct!.displayName),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    id: {
+      value: cdktf.stringToHclTerraform(struct!.id),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class ObjectBucketAclAccessControlPolicyOwnerOutputReference extends cdktf.ComplexObject {
@@ -374,13 +449,13 @@ export interface ObjectBucketAclAccessControlPolicy {
   /**
   * grant block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#grant ObjectBucketAcl#grant}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#grant ObjectBucketAcl#grant}
   */
   readonly grant?: ObjectBucketAclAccessControlPolicyGrant[] | cdktf.IResolvable;
   /**
   * owner block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#owner ObjectBucketAcl#owner}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#owner ObjectBucketAcl#owner}
   */
   readonly owner: ObjectBucketAclAccessControlPolicyOwner;
 }
@@ -394,6 +469,31 @@ export function objectBucketAclAccessControlPolicyToTerraform(struct?: ObjectBuc
     grant: cdktf.listMapper(objectBucketAclAccessControlPolicyGrantToTerraform, true)(struct!.grant),
     owner: objectBucketAclAccessControlPolicyOwnerToTerraform(struct!.owner),
   }
+}
+
+
+export function objectBucketAclAccessControlPolicyToHclTerraform(struct?: ObjectBucketAclAccessControlPolicyOutputReference | ObjectBucketAclAccessControlPolicy): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    grant: {
+      value: cdktf.listMapperHcl(objectBucketAclAccessControlPolicyGrantToHclTerraform, true)(struct!.grant),
+      isBlock: true,
+      type: "set",
+      storageClassType: "ObjectBucketAclAccessControlPolicyGrantList",
+    },
+    owner: {
+      value: objectBucketAclAccessControlPolicyOwnerToHclTerraform(struct!.owner),
+      isBlock: true,
+      type: "list",
+      storageClassType: "ObjectBucketAclAccessControlPolicyOwnerList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class ObjectBucketAclAccessControlPolicyOutputReference extends cdktf.ComplexObject {
@@ -465,7 +565,7 @@ export class ObjectBucketAclAccessControlPolicyOutputReference extends cdktf.Com
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl scaleway_object_bucket_acl}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl scaleway_object_bucket_acl}
 */
 export class ObjectBucketAcl extends cdktf.TerraformResource {
 
@@ -481,7 +581,7 @@ export class ObjectBucketAcl extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a ObjectBucketAcl resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the ObjectBucketAcl to import
-  * @param importFromId The id of the existing ObjectBucketAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing ObjectBucketAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the ObjectBucketAcl to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -493,7 +593,7 @@ export class ObjectBucketAcl extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/object_bucket_acl scaleway_object_bucket_acl} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/object_bucket_acl scaleway_object_bucket_acl} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -504,8 +604,8 @@ export class ObjectBucketAcl extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_object_bucket_acl',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -651,5 +751,55 @@ export class ObjectBucketAcl extends cdktf.TerraformResource {
       region: cdktf.stringToTerraform(this._region),
       access_control_policy: objectBucketAclAccessControlPolicyToTerraform(this._accessControlPolicy.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      acl: {
+        value: cdktf.stringToHclTerraform(this._acl),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      bucket: {
+        value: cdktf.stringToHclTerraform(this._bucket),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      expected_bucket_owner: {
+        value: cdktf.stringToHclTerraform(this._expectedBucketOwner),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      access_control_policy: {
+        value: objectBucketAclAccessControlPolicyToHclTerraform(this._accessControlPolicy.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "ObjectBucketAclAccessControlPolicyList",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

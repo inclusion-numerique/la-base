@@ -5,7 +5,7 @@ import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import Link from 'next/link'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import { useDebounce, useOnClickOutside } from 'usehooks-ts'
+import { useDebounceValue, useOnClickOutside } from 'usehooks-ts'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import {
@@ -69,9 +69,14 @@ const SearchBar = ({
   const quickSearchContainerRef = useRef<HTMLDivElement>(null)
 
   const [inputHasChanged, setInputHasChanged] = useState(false)
-  const [query, setQuery] = useState(searchParams?.query ?? '')
+  const [query, setInstantQuery] = useState(searchParams?.query ?? '')
   const [quickSearchOpen, setQuickSearchOpen] = useState(false)
-  const debouncedQuery = useDebounce(query, 500)
+  const [debouncedQuery, setDebouncedQuery] = useDebounceValue(query, 500)
+
+  const setQuery = (value: string) => {
+    setInstantQuery(value)
+    setDebouncedQuery(value)
+  }
 
   // Execute search query for 3 or more chars and if the user has changed the input
   const quicksearchQueryEnabled =
@@ -105,7 +110,10 @@ const SearchBar = ({
     setQuickSearchOpen(true)
   }
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const input = event.currentTarget.elements.namedItem('search')
+    const input = event.currentTarget.elements.namedItem(
+      'search',
+    ) as HTMLInputElement | null
+
     if (!input) {
       return
     }

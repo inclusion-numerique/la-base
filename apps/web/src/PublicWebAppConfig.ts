@@ -3,9 +3,20 @@
  */
 import { mainLiveUrl, projectTitle, repositoryUrl } from '@app/config/config'
 
+const isMain = process.env.BRANCH === 'main'
+// eslint-disable-next-line unicorn/prevent-abbreviations
+const isDev = process.env.BRANCH === 'dev'
+const isLocal = !process.env.BRANCH
+// eslint-disable-next-line unicorn/prevent-abbreviations
+const isE2e = !!process.env.IS_E2E
+const isPreview = !isMain && !isDev && !isLocal && !isE2e
+
 export const PublicWebAppConfig = {
   Branch: process.env.BRANCH ?? '',
-  isMain: process.env.BRANCH === 'main',
+  isMain,
+  isDev,
+  isLocal,
+  isPreview,
   Chromatic: {
     appId: process.env.CHROMATIC_APP_ID ?? '',
   },
@@ -13,9 +24,9 @@ export const PublicWebAppConfig = {
   projectTitle,
   mainLiveUrl,
   repository: repositoryUrl,
-  InclusionConnect: {
-    hostname: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_HOSTNAME ?? '',
-    clientId: process.env.NEXT_PUBLIC_INCLUSION_CONNECT_CLIENT_ID ?? '',
+  ProConnect: {
+    hostname: process.env.NEXT_PUBLIC_PROCONNECT_HOSTNAME ?? '',
+    clientId: process.env.NEXT_PUBLIC_PROCONNECT_CLIENT_ID ?? '',
   },
   Sentry: {
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN ?? '',

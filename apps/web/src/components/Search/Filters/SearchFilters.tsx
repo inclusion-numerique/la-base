@@ -3,13 +3,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { OptionBadge } from '@app/ui/components/Form/OptionBadge'
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import {
   SearchParams,
   SearchTab,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import { Category, FilterKey } from './filter'
+import type { Category, FilterKey } from './filter'
 import { FiltersModal } from './FiltersModal'
 import styles from './SearchFilters.module.css'
 import SearchFilter from './SearchFilter'

@@ -70,12 +70,14 @@ const ResourcesViewsAndMetadata = ({
     {!resource.isPublic && showPrivate && (
       <span className="fr-hidden fr-unhidden-sm">
         <span className="fr-mr-1w fr-text--semi-bold">·</span>
-        <CustomTag
-          small
-          color={TagColor.GREY}
-          icon="fr-icon-lock-line"
-          label="Privée"
-        />
+        <span>
+          <CustomTag
+            small
+            color={TagColor.GREY}
+            icon="fr-icon-lock-line"
+            label="Privée"
+          />
+        </span>
       </span>
     )}
   </span>

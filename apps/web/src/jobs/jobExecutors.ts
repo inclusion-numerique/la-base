@@ -36,7 +36,7 @@ export const executeJob = async (job: Job) => {
     const result = await executor(job)
     const { ended, duration } = stopWatch.stop()
 
-    prismaClient.jobExecution
+    await prismaClient.jobExecution
       .update({
         where: { id },
         data: {
@@ -45,7 +45,10 @@ export const executeJob = async (job: Job) => {
         },
       })
       .catch((error) => {
-        Sentry.captureException(error)
+        if (Sentry?.captureException) {
+          Sentry.captureException(error)
+        }
+        console.error(error)
       })
 
     return {
@@ -55,7 +58,10 @@ export const executeJob = async (job: Job) => {
       duration,
     }
   } catch (error) {
-    Sentry.captureException(error)
+    if (Sentry?.captureException) {
+      Sentry.captureException(error)
+    }
+    console.error(error)
     const { ended, duration } = stopWatch.stop()
 
     const typedError = error as {
@@ -63,7 +69,7 @@ export const executeJob = async (job: Job) => {
       stack?: string
     }
 
-    prismaClient.jobExecution
+    await prismaClient.jobExecution
       .update({
         where: { id },
         data: {

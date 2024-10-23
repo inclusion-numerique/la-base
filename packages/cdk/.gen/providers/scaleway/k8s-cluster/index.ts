@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,41 +10,41 @@ export interface K8SClusterConfig extends cdktf.TerraformMetaArguments {
   /**
   * The list of admission plugins to enable on the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#admission_plugins K8SCluster#admission_plugins}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#admission_plugins K8SCluster#admission_plugins}
   */
   readonly admissionPlugins?: string[];
   /**
   * Additional Subject Alternative Names for the Kubernetes API server certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#apiserver_cert_sans K8SCluster#apiserver_cert_sans}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#apiserver_cert_sans K8SCluster#apiserver_cert_sans}
   */
   readonly apiserverCertSans?: string[];
   /**
   * The CNI plugin of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#cni K8SCluster#cni}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#cni K8SCluster#cni}
   */
   readonly cni: string;
   /**
   * Delete additional resources like block volumes, load-balancers and the private network (if empty) on cluster deletion
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#delete_additional_resources K8SCluster#delete_additional_resources}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#delete_additional_resources K8SCluster#delete_additional_resources}
   */
   readonly deleteAdditionalResources: boolean | cdktf.IResolvable;
   /**
   * The description of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#description K8SCluster#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#description K8SCluster#description}
   */
   readonly description?: string;
   /**
   * The list of feature gates to enable on the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#feature_gates K8SCluster#feature_gates}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#feature_gates K8SCluster#feature_gates}
   */
   readonly featureGates?: string[];
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#id K8SCluster#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#id K8SCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -53,67 +53,67 @@ export interface K8SClusterConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#name K8SCluster#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#name K8SCluster#name}
   */
   readonly name: string;
   /**
   * The ID of the cluster's private network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#private_network_id K8SCluster#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#private_network_id K8SCluster#private_network_id}
   */
   readonly privateNetworkId?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#project_id K8SCluster#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#project_id K8SCluster#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#region K8SCluster#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#region K8SCluster#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#tags K8SCluster#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#tags K8SCluster#tags}
   */
   readonly tags?: string[];
   /**
   * The type of cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#type K8SCluster#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#type K8SCluster#type}
   */
   readonly type?: string;
   /**
   * The version of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#version K8SCluster#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#version K8SCluster#version}
   */
   readonly version: string;
   /**
   * auto_upgrade block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#auto_upgrade K8SCluster#auto_upgrade}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#auto_upgrade K8SCluster#auto_upgrade}
   */
   readonly autoUpgrade?: K8SClusterAutoUpgrade;
   /**
   * autoscaler_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#autoscaler_config K8SCluster#autoscaler_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#autoscaler_config K8SCluster#autoscaler_config}
   */
   readonly autoscalerConfig?: K8SClusterAutoscalerConfig;
   /**
   * open_id_connect_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#open_id_connect_config K8SCluster#open_id_connect_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#open_id_connect_config K8SCluster#open_id_connect_config}
   */
   readonly openIdConnectConfig?: K8SClusterOpenIdConnectConfig;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#timeouts K8SCluster#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#timeouts K8SCluster#timeouts}
   */
   readonly timeouts?: K8SClusterTimeouts;
 }
@@ -127,6 +127,17 @@ export function k8SClusterKubeconfigToTerraform(struct?: K8SClusterKubeconfig): 
   }
   return {
   }
+}
+
+
+export function k8SClusterKubeconfigToHclTerraform(struct?: K8SClusterKubeconfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class K8SClusterKubeconfigOutputReference extends cdktf.ComplexObject {
@@ -200,19 +211,19 @@ export interface K8SClusterAutoUpgrade {
   /**
   * Enables the Kubernetes patch version auto upgrade
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#enable K8SCluster#enable}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#enable K8SCluster#enable}
   */
   readonly enable: boolean | cdktf.IResolvable;
   /**
   * Day of the maintenance window
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#maintenance_window_day K8SCluster#maintenance_window_day}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#maintenance_window_day K8SCluster#maintenance_window_day}
   */
   readonly maintenanceWindowDay: string;
   /**
   * Start hour of the 2-hour maintenance window
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#maintenance_window_start_hour K8SCluster#maintenance_window_start_hour}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#maintenance_window_start_hour K8SCluster#maintenance_window_start_hour}
   */
   readonly maintenanceWindowStartHour: number;
 }
@@ -227,6 +238,37 @@ export function k8SClusterAutoUpgradeToTerraform(struct?: K8SClusterAutoUpgradeO
     maintenance_window_day: cdktf.stringToTerraform(struct!.maintenanceWindowDay),
     maintenance_window_start_hour: cdktf.numberToTerraform(struct!.maintenanceWindowStartHour),
   }
+}
+
+
+export function k8SClusterAutoUpgradeToHclTerraform(struct?: K8SClusterAutoUpgradeOutputReference | K8SClusterAutoUpgrade): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    enable: {
+      value: cdktf.booleanToHclTerraform(struct!.enable),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    maintenance_window_day: {
+      value: cdktf.stringToHclTerraform(struct!.maintenanceWindowDay),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    maintenance_window_start_hour: {
+      value: cdktf.numberToHclTerraform(struct!.maintenanceWindowStartHour),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class K8SClusterAutoUpgradeOutputReference extends cdktf.ComplexObject {
@@ -316,61 +358,61 @@ export interface K8SClusterAutoscalerConfig {
   /**
   * Detect similar node groups and balance the number of nodes between them
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#balance_similar_node_groups K8SCluster#balance_similar_node_groups}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#balance_similar_node_groups K8SCluster#balance_similar_node_groups}
   */
   readonly balanceSimilarNodeGroups?: boolean | cdktf.IResolvable;
   /**
   * Disable the scale down feature of the autoscaler
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#disable_scale_down K8SCluster#disable_scale_down}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#disable_scale_down K8SCluster#disable_scale_down}
   */
   readonly disableScaleDown?: boolean | cdktf.IResolvable;
   /**
   * Type of resource estimator to be used in scale up
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#estimator K8SCluster#estimator}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#estimator K8SCluster#estimator}
   */
   readonly estimator?: string;
   /**
   * Type of node group expander to be used in scale up
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#expander K8SCluster#expander}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#expander K8SCluster#expander}
   */
   readonly expander?: string;
   /**
   * Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they don't cause scale up. Pods with null priority (PodPriority disabled) are non expendable
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#expendable_pods_priority_cutoff K8SCluster#expendable_pods_priority_cutoff}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#expendable_pods_priority_cutoff K8SCluster#expendable_pods_priority_cutoff}
   */
   readonly expendablePodsPriorityCutoff?: number;
   /**
   * Ignore DaemonSet pods when calculating resource utilization for scaling down
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#ignore_daemonsets_utilization K8SCluster#ignore_daemonsets_utilization}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#ignore_daemonsets_utilization K8SCluster#ignore_daemonsets_utilization}
   */
   readonly ignoreDaemonsetsUtilization?: boolean | cdktf.IResolvable;
   /**
   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#max_graceful_termination_sec K8SCluster#max_graceful_termination_sec}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#max_graceful_termination_sec K8SCluster#max_graceful_termination_sec}
   */
   readonly maxGracefulTerminationSec?: number;
   /**
   * How long after scale up that scale down evaluation resumes
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#scale_down_delay_after_add K8SCluster#scale_down_delay_after_add}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#scale_down_delay_after_add K8SCluster#scale_down_delay_after_add}
   */
   readonly scaleDownDelayAfterAdd?: string;
   /**
   * How long a node should be unneeded before it is eligible for scale down
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#scale_down_unneeded_time K8SCluster#scale_down_unneeded_time}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#scale_down_unneeded_time K8SCluster#scale_down_unneeded_time}
   */
   readonly scaleDownUnneededTime?: string;
   /**
   * Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#scale_down_utilization_threshold K8SCluster#scale_down_utilization_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#scale_down_utilization_threshold K8SCluster#scale_down_utilization_threshold}
   */
   readonly scaleDownUtilizationThreshold?: number;
 }
@@ -392,6 +434,79 @@ export function k8SClusterAutoscalerConfigToTerraform(struct?: K8SClusterAutosca
     scale_down_unneeded_time: cdktf.stringToTerraform(struct!.scaleDownUnneededTime),
     scale_down_utilization_threshold: cdktf.numberToTerraform(struct!.scaleDownUtilizationThreshold),
   }
+}
+
+
+export function k8SClusterAutoscalerConfigToHclTerraform(struct?: K8SClusterAutoscalerConfigOutputReference | K8SClusterAutoscalerConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    balance_similar_node_groups: {
+      value: cdktf.booleanToHclTerraform(struct!.balanceSimilarNodeGroups),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    disable_scale_down: {
+      value: cdktf.booleanToHclTerraform(struct!.disableScaleDown),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    estimator: {
+      value: cdktf.stringToHclTerraform(struct!.estimator),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    expander: {
+      value: cdktf.stringToHclTerraform(struct!.expander),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    expendable_pods_priority_cutoff: {
+      value: cdktf.numberToHclTerraform(struct!.expendablePodsPriorityCutoff),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    ignore_daemonsets_utilization: {
+      value: cdktf.booleanToHclTerraform(struct!.ignoreDaemonsetsUtilization),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    max_graceful_termination_sec: {
+      value: cdktf.numberToHclTerraform(struct!.maxGracefulTerminationSec),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    scale_down_delay_after_add: {
+      value: cdktf.stringToHclTerraform(struct!.scaleDownDelayAfterAdd),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    scale_down_unneeded_time: {
+      value: cdktf.stringToHclTerraform(struct!.scaleDownUnneededTime),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    scale_down_utilization_threshold: {
+      value: cdktf.numberToHclTerraform(struct!.scaleDownUtilizationThreshold),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class K8SClusterAutoscalerConfigOutputReference extends cdktf.ComplexObject {
@@ -644,43 +759,43 @@ export interface K8SClusterOpenIdConnectConfig {
   /**
   * A client id that all tokens must be issued for
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#client_id K8SCluster#client_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#client_id K8SCluster#client_id}
   */
   readonly clientId: string;
   /**
   * JWT claim to use as the user's group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#groups_claim K8SCluster#groups_claim}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#groups_claim K8SCluster#groups_claim}
   */
   readonly groupsClaim?: string[];
   /**
   * Prefix prepended to group claims
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#groups_prefix K8SCluster#groups_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#groups_prefix K8SCluster#groups_prefix}
   */
   readonly groupsPrefix?: string;
   /**
   * URL of the provider which allows the API server to discover public signing keys
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#issuer_url K8SCluster#issuer_url}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#issuer_url K8SCluster#issuer_url}
   */
   readonly issuerUrl: string;
   /**
   * Multiple key=value pairs that describes a required claim in the ID Token
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#required_claim K8SCluster#required_claim}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#required_claim K8SCluster#required_claim}
   */
   readonly requiredClaim?: string[];
   /**
   * JWT claim to use as the user name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#username_claim K8SCluster#username_claim}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#username_claim K8SCluster#username_claim}
   */
   readonly usernameClaim?: string;
   /**
   * Prefix prepended to username
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#username_prefix K8SCluster#username_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#username_prefix K8SCluster#username_prefix}
   */
   readonly usernamePrefix?: string;
 }
@@ -699,6 +814,61 @@ export function k8SClusterOpenIdConnectConfigToTerraform(struct?: K8SClusterOpen
     username_claim: cdktf.stringToTerraform(struct!.usernameClaim),
     username_prefix: cdktf.stringToTerraform(struct!.usernamePrefix),
   }
+}
+
+
+export function k8SClusterOpenIdConnectConfigToHclTerraform(struct?: K8SClusterOpenIdConnectConfigOutputReference | K8SClusterOpenIdConnectConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    client_id: {
+      value: cdktf.stringToHclTerraform(struct!.clientId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    groups_claim: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.groupsClaim),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    groups_prefix: {
+      value: cdktf.stringToHclTerraform(struct!.groupsPrefix),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    issuer_url: {
+      value: cdktf.stringToHclTerraform(struct!.issuerUrl),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    required_claim: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.requiredClaim),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+    username_claim: {
+      value: cdktf.stringToHclTerraform(struct!.usernameClaim),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    username_prefix: {
+      value: cdktf.stringToHclTerraform(struct!.usernamePrefix),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class K8SClusterOpenIdConnectConfigOutputReference extends cdktf.ComplexObject {
@@ -877,23 +1047,23 @@ export class K8SClusterOpenIdConnectConfigOutputReference extends cdktf.ComplexO
 }
 export interface K8SClusterTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#create K8SCluster#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#create K8SCluster#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#default K8SCluster#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#default K8SCluster#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#delete K8SCluster#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#delete K8SCluster#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#read K8SCluster#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#read K8SCluster#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#update K8SCluster#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#update K8SCluster#update}
   */
   readonly update?: string;
 }
@@ -910,6 +1080,49 @@ export function k8SClusterTimeoutsToTerraform(struct?: K8SClusterTimeouts | cdkt
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function k8SClusterTimeoutsToHclTerraform(struct?: K8SClusterTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class K8SClusterTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -1060,7 +1273,7 @@ export class K8SClusterTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster scaleway_k8s_cluster}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster scaleway_k8s_cluster}
 */
 export class K8SCluster extends cdktf.TerraformResource {
 
@@ -1076,7 +1289,7 @@ export class K8SCluster extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a K8SCluster resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the K8SCluster to import
-  * @param importFromId The id of the existing K8SCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing K8SCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the K8SCluster to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -1088,7 +1301,7 @@ export class K8SCluster extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/k8s_cluster scaleway_k8s_cluster} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/k8s_cluster scaleway_k8s_cluster} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -1099,8 +1312,8 @@ export class K8SCluster extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_k8s_cluster',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1476,5 +1689,121 @@ export class K8SCluster extends cdktf.TerraformResource {
       open_id_connect_config: k8SClusterOpenIdConnectConfigToTerraform(this._openIdConnectConfig.internalValue),
       timeouts: k8SClusterTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      admission_plugins: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._admissionPlugins),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      apiserver_cert_sans: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._apiserverCertSans),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      cni: {
+        value: cdktf.stringToHclTerraform(this._cni),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      delete_additional_resources: {
+        value: cdktf.booleanToHclTerraform(this._deleteAdditionalResources),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      description: {
+        value: cdktf.stringToHclTerraform(this._description),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      feature_gates: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._featureGates),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      private_network_id: {
+        value: cdktf.stringToHclTerraform(this._privateNetworkId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      type: {
+        value: cdktf.stringToHclTerraform(this._type),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      version: {
+        value: cdktf.stringToHclTerraform(this._version),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      auto_upgrade: {
+        value: k8SClusterAutoUpgradeToHclTerraform(this._autoUpgrade.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "K8SClusterAutoUpgradeList",
+      },
+      autoscaler_config: {
+        value: k8SClusterAutoscalerConfigToHclTerraform(this._autoscalerConfig.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "K8SClusterAutoscalerConfigList",
+      },
+      open_id_connect_config: {
+        value: k8SClusterOpenIdConnectConfigToHclTerraform(this._openIdConnectConfig.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "K8SClusterOpenIdConnectConfigList",
+      },
+      timeouts: {
+        value: k8SClusterTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "K8SClusterTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

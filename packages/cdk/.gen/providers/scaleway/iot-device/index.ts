@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,29 +10,29 @@ export interface IotDeviceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Allow plain and server-authenticated SSL connections in addition to mutually-authenticated ones
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#allow_insecure IotDevice#allow_insecure}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#allow_insecure IotDevice#allow_insecure}
   */
   readonly allowInsecure?: boolean | cdktf.IResolvable;
   /**
   * Allow multiple connections
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#allow_multiple_connections IotDevice#allow_multiple_connections}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#allow_multiple_connections IotDevice#allow_multiple_connections}
   */
   readonly allowMultipleConnections?: boolean | cdktf.IResolvable;
   /**
   * The description of the device
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#description IotDevice#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#description IotDevice#description}
   */
   readonly description?: string;
   /**
   * The ID of the hub on which this device will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#hub_id IotDevice#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#hub_id IotDevice#hub_id}
   */
   readonly hubId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#id IotDevice#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#id IotDevice#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -41,25 +41,25 @@ export interface IotDeviceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the device
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#name IotDevice#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#name IotDevice#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#region IotDevice#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#region IotDevice#region}
   */
   readonly region?: string;
   /**
   * certificate block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#certificate IotDevice#certificate}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#certificate IotDevice#certificate}
   */
   readonly certificate?: IotDeviceCertificate;
   /**
   * message_filters block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#message_filters IotDevice#message_filters}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#message_filters IotDevice#message_filters}
   */
   readonly messageFilters?: IotDeviceMessageFilters;
 }
@@ -67,7 +67,7 @@ export interface IotDeviceCertificate {
   /**
   * X509 PEM encoded certificate of the device
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#crt IotDevice#crt}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#crt IotDevice#crt}
   */
   readonly crt?: string;
 }
@@ -80,6 +80,25 @@ export function iotDeviceCertificateToTerraform(struct?: IotDeviceCertificateOut
   return {
     crt: cdktf.stringToTerraform(struct!.crt),
   }
+}
+
+
+export function iotDeviceCertificateToHclTerraform(struct?: IotDeviceCertificateOutputReference | IotDeviceCertificate): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    crt: {
+      value: cdktf.stringToHclTerraform(struct!.crt),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotDeviceCertificateOutputReference extends cdktf.ComplexObject {
@@ -139,13 +158,13 @@ export interface IotDeviceMessageFiltersPublish {
   /**
   * Publish message filter policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#policy IotDevice#policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#policy IotDevice#policy}
   */
   readonly policy?: string;
   /**
   * List of topics in the set
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#topics IotDevice#topics}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#topics IotDevice#topics}
   */
   readonly topics?: string[];
 }
@@ -159,6 +178,31 @@ export function iotDeviceMessageFiltersPublishToTerraform(struct?: IotDeviceMess
     policy: cdktf.stringToTerraform(struct!.policy),
     topics: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.topics),
   }
+}
+
+
+export function iotDeviceMessageFiltersPublishToHclTerraform(struct?: IotDeviceMessageFiltersPublishOutputReference | IotDeviceMessageFiltersPublish): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    policy: {
+      value: cdktf.stringToHclTerraform(struct!.policy),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    topics: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.topics),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotDeviceMessageFiltersPublishOutputReference extends cdktf.ComplexObject {
@@ -235,13 +279,13 @@ export interface IotDeviceMessageFiltersSubscribe {
   /**
   * Subscribe message filter policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#policy IotDevice#policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#policy IotDevice#policy}
   */
   readonly policy?: string;
   /**
   * List of topics in the set
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#topics IotDevice#topics}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#topics IotDevice#topics}
   */
   readonly topics?: string[];
 }
@@ -255,6 +299,31 @@ export function iotDeviceMessageFiltersSubscribeToTerraform(struct?: IotDeviceMe
     policy: cdktf.stringToTerraform(struct!.policy),
     topics: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.topics),
   }
+}
+
+
+export function iotDeviceMessageFiltersSubscribeToHclTerraform(struct?: IotDeviceMessageFiltersSubscribeOutputReference | IotDeviceMessageFiltersSubscribe): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    policy: {
+      value: cdktf.stringToHclTerraform(struct!.policy),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    topics: {
+      value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(struct!.topics),
+      isBlock: false,
+      type: "list",
+      storageClassType: "stringList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotDeviceMessageFiltersSubscribeOutputReference extends cdktf.ComplexObject {
@@ -331,13 +400,13 @@ export interface IotDeviceMessageFilters {
   /**
   * publish block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#publish IotDevice#publish}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#publish IotDevice#publish}
   */
   readonly publish?: IotDeviceMessageFiltersPublish;
   /**
   * subscribe block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#subscribe IotDevice#subscribe}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#subscribe IotDevice#subscribe}
   */
   readonly subscribe?: IotDeviceMessageFiltersSubscribe;
 }
@@ -351,6 +420,31 @@ export function iotDeviceMessageFiltersToTerraform(struct?: IotDeviceMessageFilt
     publish: iotDeviceMessageFiltersPublishToTerraform(struct!.publish),
     subscribe: iotDeviceMessageFiltersSubscribeToTerraform(struct!.subscribe),
   }
+}
+
+
+export function iotDeviceMessageFiltersToHclTerraform(struct?: IotDeviceMessageFiltersOutputReference | IotDeviceMessageFilters): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    publish: {
+      value: iotDeviceMessageFiltersPublishToHclTerraform(struct!.publish),
+      isBlock: true,
+      type: "list",
+      storageClassType: "IotDeviceMessageFiltersPublishList",
+    },
+    subscribe: {
+      value: iotDeviceMessageFiltersSubscribeToHclTerraform(struct!.subscribe),
+      isBlock: true,
+      type: "list",
+      storageClassType: "IotDeviceMessageFiltersSubscribeList",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotDeviceMessageFiltersOutputReference extends cdktf.ComplexObject {
@@ -425,7 +519,7 @@ export class IotDeviceMessageFiltersOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device scaleway_iot_device}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device scaleway_iot_device}
 */
 export class IotDevice extends cdktf.TerraformResource {
 
@@ -441,7 +535,7 @@ export class IotDevice extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IotDevice resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IotDevice to import
-  * @param importFromId The id of the existing IotDevice that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IotDevice that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IotDevice to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -453,7 +547,7 @@ export class IotDevice extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_device scaleway_iot_device} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_device scaleway_iot_device} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -464,8 +558,8 @@ export class IotDevice extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iot_device',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -669,5 +763,67 @@ export class IotDevice extends cdktf.TerraformResource {
       certificate: iotDeviceCertificateToTerraform(this._certificate.internalValue),
       message_filters: iotDeviceMessageFiltersToTerraform(this._messageFilters.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      allow_insecure: {
+        value: cdktf.booleanToHclTerraform(this._allowInsecure),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      allow_multiple_connections: {
+        value: cdktf.booleanToHclTerraform(this._allowMultipleConnections),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      description: {
+        value: cdktf.stringToHclTerraform(this._description),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      hub_id: {
+        value: cdktf.stringToHclTerraform(this._hubId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      certificate: {
+        value: iotDeviceCertificateToHclTerraform(this._certificate.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IotDeviceCertificateList",
+      },
+      message_filters: {
+        value: iotDeviceMessageFiltersToHclTerraform(this._messageFilters.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IotDeviceMessageFiltersList",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

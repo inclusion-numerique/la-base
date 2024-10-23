@@ -3,16 +3,15 @@ import Link from 'next/link'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: metadataTitle('Déclaration d’accessibilité'),
 }
-export const revalidate = 0
 const AccessibilityStatementPage = () => (
   <div className="fr-container">
-    <SkipLinksPortal links={defaultSkipLinks} />
+    <SkipLinksPortal />
     <Breadcrumbs currentPage="Accessibilité" />
 
     <main

@@ -100,7 +100,7 @@ const ResourceFeedbackForm = ({
         path="rating"
         options={[
           {
-            name: (
+            label: (
               <div className="fr-flex fr-flex-gap-1v fr-text--center fr-align-self-sm-center fr-direction-row fr-direction-sm-column">
                 <div
                   className="ri-emotion-unhappy-fill ri-2x fr-text-default--error fr-width-full fr-mr-1w"
@@ -112,7 +112,7 @@ const ResourceFeedbackForm = ({
             value: '1',
           },
           {
-            name: (
+            label: (
               <div className="fr-flex fr-flex-gap-1v fr-text--center fr-align-self-sm-center fr-direction-row fr-direction-sm-column">
                 <div
                   className="ri-emotion-normal-fill ri-2x fr-text-default--warning fr-width-full fr-mr-1w"
@@ -124,7 +124,7 @@ const ResourceFeedbackForm = ({
             value: '2',
           },
           {
-            name: (
+            label: (
               <div className="fr-flex fr-flex-gap-1v fr-text--center fr-align-self-sm-center fr-direction-row fr-direction-sm-column">
                 <div
                   className="ri-emotion-happy-fill ri-2x fr-text-default--success fr-width-full fr-mr-1w"
@@ -136,7 +136,7 @@ const ResourceFeedbackForm = ({
             value: '3',
           },
           {
-            name: (
+            label: (
               <div className="fr-flex fr-flex-gap-1v fr-text--center fr-align-self-sm-center fr-direction-row fr-direction-sm-column">
                 <div
                   className="ri-emotion-fill ri-2x fr-quote--green-emeraude fr-width-full fr-mr-1w"

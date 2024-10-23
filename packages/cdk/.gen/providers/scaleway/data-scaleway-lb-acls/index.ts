@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbAclsConfig extends cdktf.TerraformMetaArguments {
   /**
   * ACLs with a frontend id like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#frontend_id DataScalewayLbAcls#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#frontend_id DataScalewayLbAcls#frontend_id}
   */
   readonly frontendId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#id DataScalewayLbAcls#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#id DataScalewayLbAcls#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayLbAclsConfig extends cdktf.TerraformMetaArguments {
   /**
   * ACLs with a name like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#name DataScalewayLbAcls#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#name DataScalewayLbAcls#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#project_id DataScalewayLbAcls#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#project_id DataScalewayLbAcls#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#zone DataScalewayLbAcls#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#zone DataScalewayLbAcls#zone}
   */
   readonly zone?: string;
 }
@@ -49,6 +49,17 @@ export function dataScalewayLbAclsAclsActionRedirectToTerraform(struct?: DataSca
   }
   return {
   }
+}
+
+
+export function dataScalewayLbAclsAclsActionRedirectToHclTerraform(struct?: DataScalewayLbAclsAclsActionRedirect): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbAclsAclsActionRedirectOutputReference extends cdktf.ComplexObject {
@@ -125,6 +136,17 @@ export function dataScalewayLbAclsAclsActionToTerraform(struct?: DataScalewayLbA
   }
 }
 
+
+export function dataScalewayLbAclsAclsActionToHclTerraform(struct?: DataScalewayLbAclsAclsAction): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayLbAclsAclsActionOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -193,6 +215,17 @@ export function dataScalewayLbAclsAclsMatchToTerraform(struct?: DataScalewayLbAc
   }
   return {
   }
+}
+
+
+export function dataScalewayLbAclsAclsMatchToHclTerraform(struct?: DataScalewayLbAclsAclsMatch): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbAclsAclsMatchOutputReference extends cdktf.ComplexObject {
@@ -277,6 +310,17 @@ export function dataScalewayLbAclsAclsToTerraform(struct?: DataScalewayLbAclsAcl
   }
   return {
   }
+}
+
+
+export function dataScalewayLbAclsAclsToHclTerraform(struct?: DataScalewayLbAclsAcls): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbAclsAclsOutputReference extends cdktf.ComplexObject {
@@ -375,7 +419,7 @@ export class DataScalewayLbAclsAclsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls scaleway_lb_acls}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls scaleway_lb_acls}
 */
 export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
 
@@ -391,7 +435,7 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLbAcls resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLbAcls to import
-  * @param importFromId The id of the existing DataScalewayLbAcls that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLbAcls that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLbAcls to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -403,7 +447,7 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_acls scaleway_lb_acls} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_acls scaleway_lb_acls} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -414,8 +458,8 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_acls',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -536,5 +580,43 @@ export class DataScalewayLbAcls extends cdktf.TerraformDataSource {
       project_id: cdktf.stringToTerraform(this._projectId),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      frontend_id: {
+        value: cdktf.stringToHclTerraform(this._frontendId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

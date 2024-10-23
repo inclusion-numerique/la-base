@@ -11,16 +11,21 @@ export type BreadcrumbParents = BreadcrumbParent[]
 const Breadcrumbs = ({
   currentPage,
   parents = [],
+  homeLinkHref,
+  className,
 }: {
   currentPage: string
   parents?: BreadcrumbParents
+  homeLinkHref?: string
+  className?: string
 }) => (
   <Breadcrumb
     currentPageLabel={currentPage}
     homeLinkProps={{
-      href: '/',
+      href: homeLinkHref ?? '/',
     }}
     segments={parents}
+    className={className}
   />
 )
 

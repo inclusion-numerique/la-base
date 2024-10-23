@@ -28,13 +28,15 @@ export const CreateResourceButton = ({
 }) => {
   const open = CreateResourceDynamicModal.useOpen()
 
+  const onClick = () => open({ baseId })
+
   return (
     <Button
       type="button"
       iconId="fr-icon-edit-box-line"
       className={className}
       data-testid={dataTestid}
-      onClick={() => open({ baseId })}
+      onClick={onClick}
     >
       Créer une ressource
     </Button>

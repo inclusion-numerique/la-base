@@ -258,7 +258,7 @@ export const getResourcesCountByCategory = async () => {
 
   // Add the counts for each category that have some resources
   for (const { category, count } of counts) {
-    categories[category as Category] = count
+    categories[category] = count
   }
 
   return categories

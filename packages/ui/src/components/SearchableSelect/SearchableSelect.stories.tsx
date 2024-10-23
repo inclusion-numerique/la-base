@@ -28,12 +28,12 @@ export const Default: Story = {
   args: {
     placeholder: 'You can search',
     options: [
-      { name: 'Yo', value: 'Yo' },
-      { name: 'Nop', value: 'Nop' },
-      { name: 'Cant touch this', value: 'cant', disabled: true },
-      { name: 'Yep', value: 'Yep' },
-      { name: 'Ohla', value: 'Ohla' },
-      { name: 'ahaa', value: 'ahaa' },
+      { label: 'Yo', value: 'Yo' },
+      { label: 'Nop', value: 'Nop' },
+      { label: 'Cant touch this', value: 'cant', disabled: true },
+      { label: 'Yep', value: 'Yep' },
+      { label: 'Ohla', value: 'Ohla' },
+      { label: 'ahaa', value: 'ahaa' },
     ],
   },
   argTypes: {
@@ -85,7 +85,7 @@ export const Complex: Story = {
         name: 'Communes',
         options: communes.map((commune) => ({
           component: <Commune commune={commune} />,
-          name: commune,
+          label: commune,
           value: commune,
         })),
       },
@@ -93,7 +93,7 @@ export const Complex: Story = {
         name: 'Structures',
         options: structures.map((structure) => ({
           component: <Structure {...structure} />,
-          name: `${structure.name} ${structure.addresse}`,
+          label: `${structure.name} ${structure.addresse}`,
           value: structure.name,
         })),
       },

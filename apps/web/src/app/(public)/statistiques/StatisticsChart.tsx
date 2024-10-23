@@ -40,7 +40,7 @@ const StatisticsTooltip = <T extends object>({
 
       return (
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `${(payload[0]?.payload as T)[tooltipLabelDataKey]}` ?? null
+        `${(payload[0]?.payload as T)[tooltipLabelDataKey]}` || null
       )
     }}
     formatter={(_value, name) =>

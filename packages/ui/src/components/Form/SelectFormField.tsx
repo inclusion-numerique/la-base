@@ -91,7 +91,7 @@ const SelectFormField = <T extends FieldValues>({
                   disabled={option.disabled}
                   hidden={option.hidden}
                 >
-                  {option.name}
+                  {option.label}
                 </option>
               ))}
             </select>

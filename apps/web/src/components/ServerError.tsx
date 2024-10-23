@@ -1,6 +1,7 @@
 'use client'
 
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const GenericError = ({
@@ -78,17 +79,28 @@ export const GenericError = ({
   </main>
 )
 
-export const ServerError = () => (
-  <GenericError
-    title="Erreur inattendue"
-    subtitle="Erreur 500"
-    lead="Désolé, le service rencontre un problème, nous travaillons pour le résoudre le plus rapidement possible."
-  >
-    Essayez de rafraichir la page ou bien ressayez plus tard.
-    <br />
-    Si vous avez besoin d&apos;une aide immédiate, merci de nous contacter.
-  </GenericError>
-)
+export const ServerError = ({
+  error,
+}: {
+  error: Error & { digest?: string }
+}) => {
+  useEffect(() => {
+    // Log the error to Sentry
+    Sentry.captureException(error)
+  }, [error])
+
+  return (
+    <GenericError
+      title="Erreur inattendue"
+      subtitle="Erreur 500"
+      lead="Désolé, le service rencontre un problème, nous travaillons pour le résoudre le plus rapidement possible."
+    >
+      Essayez de rafraichir la page ou bien ressayez plus tard.
+      <br />
+      Si vous avez besoin d&apos;une aide immédiate, merci de nous contacter.
+    </GenericError>
+  )
+}
 
 export const NotFoundError = () => (
   <GenericError

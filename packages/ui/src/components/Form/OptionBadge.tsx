@@ -13,7 +13,7 @@ export const OptionBadge = ({
   className,
   'data-testid': dataTestId,
 }: {
-  option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'name'>
+  option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'label'>
   onClick: MouseEventHandler
   disabled?: boolean
   size?: 'sm' | 'md'
@@ -30,9 +30,10 @@ export const OptionBadge = ({
     )}
     disabled={disabled || option.disabled}
     onClick={disabled ? undefined : onClick}
-    aria-label={`Retirer ${option.name}`}
+    aria-label={`Retirer ${option.label}`}
   >
-    {option.name}
+    {option.label}
     <span className="fr-icon-close-line fr-ml-1w fr-icon--sm" />
   </button>
 )
+export default OptionBadge

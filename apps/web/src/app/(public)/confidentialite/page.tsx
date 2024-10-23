@@ -5,17 +5,18 @@ import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 
-export const revalidate = 0
 export const metadata: Metadata = {
   title: metadataTitle('Politique de confidentialité'),
 }
 
 const ConfidentialityPage = () => (
-  <div className="fr-container">
-    <SkipLinksPortal links={defaultSkipLinks} />
-    <Breadcrumbs currentPage="Politique de confidentialité" />
+  <>
+    <div className="fr-container">
+      <SkipLinksPortal />
+      <Breadcrumbs currentPage="Politique de confidentialité" />
+    </div>
     <main
       id={contentId}
       className="fr-container landing-main-container fr-my-8w"
@@ -427,6 +428,6 @@ const ConfidentialityPage = () => (
         </div>
       </div>
     </main>
-  </div>
+  </>
 )
 export default ConfidentialityPage

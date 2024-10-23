@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
@@ -6,7 +6,6 @@ import { Meta, StoryObj } from '@storybook/react'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
 import CustomSelectFormField, {
   CustomSelectFormFieldProps,
-  CustomSelectOptions,
 } from '@app/ui/components/Form/CustomSelectFormField'
 
 const options = [
@@ -50,7 +49,7 @@ const options = [
     label: 'Yoga',
     value: 'yoga',
   },
-] satisfies CustomSelectOptions
+]
 
 const objectFormValidation = z
   .object({
@@ -65,10 +64,17 @@ const Template = ({
   path,
   storyAsyncSearch,
   storyAsyncSearchError,
+  label = 'Label',
+  options: optionsProperty,
   ...args
-}: Omit<CustomSelectFormFieldProps<ObjectFormData>, 'control'> & {
+}: Pick<
+  CustomSelectFormFieldProps<ObjectFormData, typeof options>,
+  'path' | 'loadOptions' | 'disabled' | 'hint' | 'valid'
+> & {
   storyAsyncSearch?: boolean
   storyAsyncSearchError?: boolean
+  options?: typeof options
+  label?: ReactNode
 }) => {
   const form = useForm<ObjectFormData>({
     resolver: zodResolver(objectFormValidation),
@@ -86,7 +92,7 @@ const Template = ({
   })
 
   const loadOptions = storyAsyncSearch
-    ? async (search: string) => {
+    ? ((async (search: string) => {
         // Fake delay to show loading state on the component
         await new Promise((resolve) =>
           // eslint-disable-next-line no-promise-executor-return
@@ -102,7 +108,7 @@ const Template = ({
         return options.filter((option) =>
           option.label.toLowerCase().includes(search.toLowerCase()),
         )
-      }
+      }) as never)
     : undefined
 
   return (
@@ -115,6 +121,11 @@ const Template = ({
         loadOptions={loadOptions}
         control={form.control}
         path={path}
+        label={label}
+        options={
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-assignment
+          optionsProperty as any
+        }
         {...args}
       />
     </form>
@@ -131,62 +142,36 @@ export default meta
 type Story = StoryObj<typeof CustomSelectFormField>
 
 export const Simple: Story = {
-  render: (args) => <Template {...args} path="choice" />,
-  args: {
-    label: 'Label',
-    options,
-  },
-}
-
-export const Fuzzy: Story = {
-  render: (args) => <Template {...args} path="choice" />,
-  args: {
-    label: 'Label',
-    options,
-  },
+  render: () => <Template label="Label" options={options} path="choice" />,
 }
 
 // TODO Re-do the story for complex stuff
 // Use type: 'commune' ou type: 'structure' to conditinaly render option component
 
 export const RechercheAsynchrone: Story = {
-  render: (args) => <Template storyAsyncSearch {...args} path="choice" />,
-  args: {
-    label: 'Label',
-  },
+  render: () => <Template storyAsyncSearch path="choice" />,
 }
 
 export const Erreur: Story = {
-  render: (args) => <Template {...args} path="choiceError" />,
-  args: {
-    label: 'Label',
-    options,
-  },
+  render: () => <Template options={options} path="choiceError" />,
 }
 
 export const Success: Story = {
-  render: (args) => <Template {...args} path="choiceSuccess" />,
-  args: {
-    label: 'Label',
-    valid: 'Choix valide',
-    options,
-  },
+  render: () => (
+    <Template options={options} path="choiceSuccess" valid="Choix valide" />
+  ),
 }
 
 export const Désactivé: Story = {
-  render: (args) => <Template {...args} path="choice" />,
-  args: {
-    label: 'Label',
-    disabled: true,
-    options,
-  },
+  render: () => <Template options={options} path="choice" disabled />,
 }
 
 export const TexteAide: Story = {
-  render: (args) => <Template {...args} path="choice" />,
-  args: {
-    label: 'Label',
-    hint: 'Texte de description additionnel',
-    options,
-  },
+  render: () => (
+    <Template
+      options={options}
+      path="choice"
+      hint="Texte de description additionnel"
+    />
+  ),
 }

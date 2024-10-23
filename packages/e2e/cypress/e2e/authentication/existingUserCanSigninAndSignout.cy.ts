@@ -6,19 +6,19 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
    * US https://www.notion.so/ETQ-Utilisateur-je-peux-me-connecter-mon-compte-me-d-connecter-8a4ed652501042fd8445df6a2d2273df?pvs=4
    * Parcours https://www.figma.com/file/4wfmwOaKRnMhgiGEF256qS/La-Base---Parcours-utilisateurs?node-id=38%3A1135&t=mLwaw4Kkwt7FG9lz-1
    */
-
   // Unique user for this test
   const emailUser = givenUser()
-  // This user exists in inclusion connect, but not in our db
-  const inclusionConnectUser = {
-    email: Cypress.env('INCLUSION_CONNECT_TEST_USER_EMAIL') as string,
-    password: Cypress.env('INCLUSION_CONNECT_TEST_USER_PASSWORD') as string,
-    firstName: 'Test Bot',
-    lastName: 'Inclusion Numerique',
+
+  // This user exists in mon compte pro, but not in our db
+  const proConnectUser = {
+    email: Cypress.env('PROCONNECT_TEST_USER_EMAIL') as string,
+    password: Cypress.env('PROCONNECT_TEST_USER_PASSWORD') as string,
+    firstName: 'Jean',
+    lastName: 'User',
   }
 
   before(() => {
-    cy.execute('deleteUser', { email: inclusionConnectUser.email })
+    cy.execute('deleteAllData', {})
   })
 
   it('Préliminaire - Les pages de connexions sont accessibles', () => {
@@ -28,7 +28,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
 
     cy.log('Check that the signup CTA is linked correctly')
     cy.contains('Créer un compte').click()
-    cy.appUrlShouldBe('/creer-un-compte')
+    cy.appUrlShouldBe('/creer-un-compte?suivant=/connexion/suivant')
 
     cy.log('Check that the signin CTA is linked correctly')
     cy.findByRole('main')
@@ -60,7 +60,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     )
   })
 
-  it('Acceptation 1 - Connexion avec Inclusion Connect', () => {
+  it('Acceptation 1 - Connexion avec ProConnect', () => {
     cy.visit('/connexion')
     // Cypress deletes some cookies on redirection between domains
     // See https://github.com/cypress-io/cypress/issues/20476
@@ -69,7 +69,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     // then intercept the request for our auth endpoint during callback to add the cookies back
     let authenticationCookies: string[]
 
-    cy.intercept(/\/api\/auth\/signin\/inclusion-connect/, (request) => {
+    cy.intercept(/\/api\/auth\/signin\/proconnect/, (request) => {
       request.continue((response) => {
         // Memorize our cookies
         const responseCookies = response.headers['set-cookie']
@@ -79,21 +79,21 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
       })
     })
 
-    cy.get('button[title="S\'identifier avec InclusionConnect"]').click()
-    cy.url().should('contain', 'connect.inclusion.beta.gouv.fr')
+    cy.get('button[title="S’identifier avec ProConnect"]').click()
+    cy.url().should('contain', 'fca.integ01.dev-agentconnect.fr')
 
     cy.intercept(/\/api\/auth\/callback/, (request) => {
       // Add our cookies back
       request.headers.cookie = authenticationCookies.join('; ')
     })
 
-    cy.get('input[name="email"]').type(inclusionConnectUser.email)
+    cy.get('#email-input').type(`${proConnectUser.email}{enter}`)
 
-    // Inclusion connect has frontend uncaught exceptions
-    Cypress.on('uncaught:exception', () => false)
-    cy.get('input[name="password"]').type(
-      `${inclusionConnectUser.password}{enter}`,
-    )
+    cy.get('#password-input').type(`${proConnectUser.password}{enter}`)
+
+    // Click on the first a link .fr-tile__link
+
+    cy.get('.fr-tile__link').first().click()
 
     // Cookies are lost in redirect (Cypress issue)
     // https://github.com/cypress-io/cypress/issues/20476#issuecomment-1298486439
@@ -106,19 +106,34 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
 
     cy.dsfrShouldBeStarted()
     cy.dsfrCollapsesShouldBeBound()
-    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+    cy.get(
+      '.fr-header__tools button[aria-controls="header_user_menu"].fr-dropdown__btn',
+    )
       .filter(':visible')
-      .contains(inclusionConnectUser.firstName)
-      .contains(inclusionConnectUser.lastName)
+      .contains(proConnectUser.firstName)
+      .contains(proConnectUser.lastName)
       .click()
-    cy.get('.fr-dropdown__pane').contains('Se déconnecter').click()
+
+    cy.get('#header_user_menu.fr-dropdown__pane')
+      .should('be.visible')
+      .contains('Se déconnecter')
+      .click()
+
     cy.appUrlShouldBe('/deconnexion')
+    cy.contains('Êtes-vous sûr·e de vouloir vous déconnecter ?')
     cy.get('main').contains('Se déconnecter').click()
+
+    // Identity provider logout flow
+    cy.url().should(
+      'contain',
+      'https://app-sandbox.moncomptepro.beta.gouv.fr/oauth/logout',
+    )
     cy.appUrlShouldBe('/')
+
     cy.get('.fr-header__tools').contains('Se connecter')
   })
 
-  it('Acceptation 2 - Connexion avec email', () => {
+  it.only('Acceptation 2 - Connexion avec email', () => {
     cy.visit('/connexion')
     cy.execute('createUser', emailUser)
     const { email, firstName, lastName } = emailUser
@@ -154,15 +169,29 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
 
     cy.dsfrShouldBeStarted()
     cy.dsfrCollapsesShouldBeBound()
-    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+    cy.get(
+      '.fr-header__tools button[aria-controls="header_user_menu"].fr-dropdown__btn',
+    )
       .filter(':visible')
       .contains(emailUser.name)
       .click()
-    cy.get('.fr-dropdown__pane').contains('Se déconnecter').click()
+
+    cy.get('#header_user_menu.fr-dropdown__pane')
+      .should('be.visible')
+      .contains('Se déconnecter')
+      .click()
+
     cy.appUrlShouldBe('/deconnexion')
-    cy.contains('Êtes-vous sur de vouloir vous déconnecter ?')
+    cy.contains('Êtes-vous sûr·e de vouloir vous déconnecter ?')
     cy.get('main').contains('Se déconnecter').click()
+
+    // Identity provider logout flow should be skipped
+    cy.url().should(
+      'not.contain',
+      'https://app-sandbox.moncomptepro.beta.gouv.fr/oauth/logout',
+    )
     cy.appUrlShouldBe('/')
+
     cy.get('.fr-header__tools').contains('Se connecter')
   })
 })

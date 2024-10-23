@@ -1,0 +1,40 @@
+.fr-table__content table tbody th {
+  --idle: transparent;
+  --hover: transparent;
+  --active: transparent;
+
+  background-color: var(--background-default-grey);
+  background-image: linear-gradient(
+    0deg,
+    var(--border-default-grey),
+    var(--border-default-grey)
+  );
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+}
+
+.fr-table__content table thead th {
+  background-color: var(--background-default-grey);
+
+  &:last-child {
+    background-color: var(--background-default-grey);
+  }
+}
+
+.fr-table__content table tbody td {
+  background-image: linear-gradient(
+      0deg,
+      var(--border-default-grey),
+      var(--border-default-grey)
+    ),
+    linear-gradient(
+      0deg,
+      var(--border-default-grey),
+      var(--border-default-grey)
+    );
+}
+
+.fr-table__wrapper::after {
+  background-image: none;
+}

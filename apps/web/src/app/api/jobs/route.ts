@@ -15,7 +15,13 @@ export const POST = async (request: NextRequest) => {
     request.headers.get(executeJobApiTokenHeader) !==
     ServerWebAppConfig.internalApiPrivateKey
   ) {
-    Sentry.captureException('Invalid API token for job execution')
+    Sentry.captureException('Invalid API token for job execution', {
+      data: {
+        [executeJobApiTokenHeader]: request.headers.get(
+          executeJobApiTokenHeader,
+        ),
+      },
+    })
     return new Response(
       JSON.stringify({
         status: 'error',

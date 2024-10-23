@@ -1,0 +1,65 @@
+/* Override input spacing */
+.fr-input-group,
+.fr-select-group {
+  margin-bottom: 16px;
+}
+
+.fr-input-group:not(:last-child),
+.fr-select-group:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+/* Hint text spacing */
+.fr-hint-text {
+  margin-top: 4px !important;
+  font-weight: 400;
+}
+
+/* Toggle */
+
+/* Fix broken status text */
+.fr-toggle {
+  .fr-toggle__label[data-fr-unchecked-label][data-fr-checked-label]::before {
+    white-space: nowrap;
+  }
+}
+
+.fr-input {
+  background-color: var(--background-alt-grey);
+  border: var(--slim-grey-border);
+  border-radius: 4px;
+  box-shadow: none !important;
+
+  &input {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-right: 16px;
+    min-height: 40px !important;
+    height: 40px !important;
+  }
+
+  &.fr-input--white {
+    background-color: var(--grey-1000-75);
+  }
+
+  &.fr-input--14v {
+    min-height: 56px !important;
+    height: 56px !important;
+  }
+}
+
+select.fr-select {
+  background-color: var(--background-alt-grey);
+  border: var(--slim-grey-border);
+  border-radius: 4px;
+  box-shadow: none !important;
+
+  &.fr-select--white {
+    background-color: var(--grey-1000-75);
+  }
+
+  &.fr-select--14v {
+    min-height: 56px !important;
+    height: 56px !important;
+  }
+}

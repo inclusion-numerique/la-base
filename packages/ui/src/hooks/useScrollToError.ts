@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 import type { FieldErrors, FieldValues } from 'react-hook-form'
 
 export const scrollToError = () => {
-  const errorElement = document.querySelector('form .fr-error-text')
+  const errorElement = document.querySelector(
+    'form .fr-error-text, form .fr-message--error',
+  )
   if (!errorElement) {
     return
   }

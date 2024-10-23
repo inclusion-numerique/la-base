@@ -23,11 +23,14 @@ const BaseHeader = ({
 }) => (
   <div className="fr-background-alt--blue-france">
     <div className="fr-container">
-      <Breadcrumbs currentPage={base.title} />
+      <Breadcrumbs
+        currentPage={base.title}
+        className="fr-m-0 fr-pt-2w fr-pb-4w"
+      />
       <BaseImages base={base} />
       <div
         id={headerId}
-        className="fr-flex-sm fr-align-items-center fr-direction-column fr-text--center fr-mt-3w fr-mb-6w"
+        className="fr-flex-sm fr-align-items-center fr-direction-column fr-text--center fr-pt-3w fr-pb-6w"
       >
         <h1 className="fr-h2 fr-page-title fr-mb-1v">{base.title}</h1>
         <BaseMetadata

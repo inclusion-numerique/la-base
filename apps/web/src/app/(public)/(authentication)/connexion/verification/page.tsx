@@ -6,7 +6,6 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const revalidate = 0
 
@@ -22,14 +21,12 @@ const VerifyPage = async () => {
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <Breadcrumbs
         currentPage="Vérification"
         parents={[{ label: 'Connexion', linkProps: { href: '/connexion' } }]}
       />
-      <main id={contentId}>
-        <Verify />
-      </main>
+      <Verify />
     </>
   )
 }

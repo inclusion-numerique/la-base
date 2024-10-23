@@ -1,0 +1,27 @@
+.fr-card.fr-card--arrow-top {
+  &.fr-enlarge-button,
+  &.fr-enlarge-link {
+    .fr-card__title {
+      a::after,
+      button::after {
+        bottom: initial;
+      }
+    }
+
+    &:not(.fr-card--no-icon) .fr-card__content {
+      padding-bottom: 2rem;
+    }
+  }
+}
+
+.fr-card.fr-card--arrow-sm {
+  &.fr-enlarge-button,
+  &.fr-enlarge-link {
+    .fr-card__title {
+      a::after,
+      button::after {
+        --icon-size: 1rem !important;
+      }
+    }
+  }
+}

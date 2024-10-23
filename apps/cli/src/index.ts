@@ -14,9 +14,11 @@ import { setupDatabaseSecret } from '@app/cli/commands/secrets/setupDatabaseSecr
 import { locallyRestoreLatestMainBackup } from '@app/cli/commands/infrastructure/locallyRestoreLatestMainBackup'
 import { addConseillersNumeriquesToBases } from '@app/cli/commands/domain/addConseillersNumeriquesToBases'
 import { removeInactiveConseillersNumeriques } from '@app/cli/commands/domain/removeInactiveConseillersNumeriques'
+import { executeJobCommand } from '@app/cli/commands/jobs/executeJobCommand'
 
 const program = new Command()
 
+program.addCommand(executeJobCommand)
 program.addCommand(listSecrets)
 program.addCommand(getSecretValue)
 program.addCommand(setupDatabaseSecret)

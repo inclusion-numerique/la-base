@@ -15,12 +15,12 @@ export const Default: Story = {
   args: {
     placeholder: 'You can search',
     options: [
-      { name: 'Yo', value: 'Yo' },
-      { name: 'Nop', value: 'Nop' },
-      { name: 'Cant touch this', value: 'cant', disabled: true },
-      { name: 'Yep', value: 'Yep' },
-      { name: 'Ohla', value: 'Ohla' },
-      { name: 'ahaa', value: 'ahaa' },
+      { label: 'Yo', value: 'Yo' },
+      { label: 'Nop', value: 'Nop' },
+      { label: 'Cant touch this', value: 'cant', disabled: true },
+      { label: 'Yep', value: 'Yep' },
+      { label: 'Ohla', value: 'Ohla' },
+      { label: 'ahaa', value: 'ahaa' },
     ],
   },
   argTypes: {

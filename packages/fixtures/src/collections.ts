@@ -1,7 +1,7 @@
 import type { Prisma } from '@prisma/client'
-import { users } from '@app/fixtures/users'
+import { fixtureUsers } from '@app/fixtures/users'
 
-const favoritesCollections = users.map(
+const favoritesCollections = fixtureUsers.map(
   (user) =>
     ({
       id: user.id,

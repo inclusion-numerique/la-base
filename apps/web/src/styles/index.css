@@ -1,4 +1,6 @@
-@import url('./dsfr');
-@import url('./helpers');
+@import url('/dsfr/dsfr.min.css');
+@import url('/dsfr/utility/utility.min.css');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css');
 @import url('./components');
+@import url('./helpers');
 @import url('./layout.css');

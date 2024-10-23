@@ -1,0 +1,109 @@
+.fr-btn--danger {
+  background-color: var(--background-flat-error);
+  color: var(--text-inverted-error);
+
+  &:not(:disabled):hover {
+    background-color: var(--artwork-minor-red-marianne) !important;
+  }
+
+  &:not(:disabled):focus {
+    background-color: var(--background-flat-error) !important;
+  }
+}
+
+.fr-btn--no-after {
+  &::after {
+    display: none !important;
+  }
+}
+
+.fr-btn.fr-btn--loading {
+  &:not(.fr-btn--icon-right, .fr-connect) {
+    &::before {
+      mask-image: url('/images/spinner.svg');
+      animation: spinner-rotate-animation 1.2s infinite linear;
+    }
+  }
+
+  &.fr-btn--icon-right {
+    &::after {
+      mask-image: url('/images/spinner.svg');
+      animation: spinner-rotate-animation 1.2s infinite linear;
+    }
+  }
+
+  /* Button without icon */
+
+  /* Complex implementation as we need to re-implement logic of the ::after like with the fr-icon classes */
+
+  &:not([class*=' fr-icon-']) {
+    position: relative;
+    color: transparent;
+
+    &::after {
+      position: absolute;
+
+      --icon-size: 1.5rem;
+
+      color: var(--text-inverted-blue-france);
+      left: calc(50% - (var(--icon-size) / 2));
+      content: '';
+      background-color: currentcolor;
+      display: inline-block;
+      flex: 0 0 auto;
+      height: var(--icon-size);
+      mask-size: 100% 100%;
+      vertical-align: calc((0.75em - var(--icon-size)) * 0.5);
+      width: var(--icon-size);
+      mask-image: url('/images/spinner.svg');
+      animation: spinner-rotate-animation 1.2s infinite linear;
+    }
+
+    &.fr-btn--sm {
+      &::after {
+        --icon-size: 1rem;
+      }
+    }
+
+    &.fr-btn--lg {
+      &::after {
+        --icon-size: 2rem;
+      }
+    }
+
+    &:disabled {
+      &::after {
+        color: var(--text-disabled-grey);
+      }
+    }
+
+    &.fr-btn--secondary,
+    &.fr-btn--tertiary,
+    &.fr-btn--tertiary-no-outline {
+      &::after {
+        color: var(--text-action-high-blue-france);
+      }
+
+      &:disabled {
+        &::after {
+          color: var(--text-disabled-grey);
+        }
+      }
+    }
+  }
+}
+
+/* Buttons loading state */
+@keyframes spinner-rotate-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

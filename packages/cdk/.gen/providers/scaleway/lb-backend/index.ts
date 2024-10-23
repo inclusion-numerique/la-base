@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -13,65 +13,65 @@ export interface LbBackendConfig extends cdktf.TerraformMetaArguments {
   * **NOTE** : Only the host part of the Scaleway S3 bucket website is expected.
   * E.g. 'failover-website.s3-website.fr-par.scw.cloud' if your bucket website URL is 'https://failover-website.s3-website.fr-par.scw.cloud/'.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#failover_host LbBackend#failover_host}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#failover_host LbBackend#failover_host}
   */
   readonly failoverHost?: string;
   /**
   * User sessions will be forwarded to this port of backend servers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#forward_port LbBackend#forward_port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#forward_port LbBackend#forward_port}
   */
   readonly forwardPort: number;
   /**
   * Load balancing algorithm
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#forward_port_algorithm LbBackend#forward_port_algorithm}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#forward_port_algorithm LbBackend#forward_port_algorithm}
   */
   readonly forwardPortAlgorithm?: string;
   /**
   * Backend protocol
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#forward_protocol LbBackend#forward_protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#forward_protocol LbBackend#forward_protocol}
   */
   readonly forwardProtocol: string;
   /**
   * Interval between two HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_delay LbBackend#health_check_delay}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_delay LbBackend#health_check_delay}
   */
   readonly healthCheckDelay?: string;
   /**
   * Number of allowed failed HC requests before the backend server is marked down
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_max_retries LbBackend#health_check_max_retries}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_max_retries LbBackend#health_check_max_retries}
   */
   readonly healthCheckMaxRetries?: number;
   /**
   * Port the HC requests will be send to. Default to `forward_port`
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_port LbBackend#health_check_port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_port LbBackend#health_check_port}
   */
   readonly healthCheckPort?: number;
   /**
   * Defines whether proxy protocol should be activated for the health check
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_send_proxy LbBackend#health_check_send_proxy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_send_proxy LbBackend#health_check_send_proxy}
   */
   readonly healthCheckSendProxy?: boolean | cdktf.IResolvable;
   /**
   * Timeout before we consider a HC request failed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_timeout LbBackend#health_check_timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_timeout LbBackend#health_check_timeout}
   */
   readonly healthCheckTimeout?: string;
   /**
   * Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_transient_delay LbBackend#health_check_transient_delay}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_transient_delay LbBackend#health_check_transient_delay}
   */
   readonly healthCheckTransientDelay?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#id LbBackend#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#id LbBackend#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -80,127 +80,127 @@ export interface LbBackendConfig extends cdktf.TerraformMetaArguments {
   /**
   * Specifies whether the Load Balancer should check the backend server’s certificate before initiating a connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#ignore_ssl_server_verify LbBackend#ignore_ssl_server_verify}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#ignore_ssl_server_verify LbBackend#ignore_ssl_server_verify}
   */
   readonly ignoreSslServerVerify?: boolean | cdktf.IResolvable;
   /**
   * The load-balancer ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#lb_id LbBackend#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#lb_id LbBackend#lb_id}
   */
   readonly lbId: string;
   /**
   * Maximum number of connections allowed per backend server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#max_connections LbBackend#max_connections}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#max_connections LbBackend#max_connections}
   */
   readonly maxConnections?: number;
   /**
   * Number of retries when a backend server connection failed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#max_retries LbBackend#max_retries}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#max_retries LbBackend#max_retries}
   */
   readonly maxRetries?: number;
   /**
   * The name of the backend
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#name LbBackend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#name LbBackend#name}
   */
   readonly name?: string;
   /**
   * Modify what occurs when a backend server is marked down
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#on_marked_down_action LbBackend#on_marked_down_action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#on_marked_down_action LbBackend#on_marked_down_action}
   */
   readonly onMarkedDownAction?: string;
   /**
   * Type of PROXY protocol to enable
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#proxy_protocol LbBackend#proxy_protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#proxy_protocol LbBackend#proxy_protocol}
   */
   readonly proxyProtocol?: string;
   /**
   * Whether to use another backend server on each attempt
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#redispatch_attempt_count LbBackend#redispatch_attempt_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#redispatch_attempt_count LbBackend#redispatch_attempt_count}
   */
   readonly redispatchAttemptCount?: number;
   /**
   * Enables PROXY protocol version 2
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#send_proxy_v2 LbBackend#send_proxy_v2}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#send_proxy_v2 LbBackend#send_proxy_v2}
   */
   readonly sendProxyV2?: boolean | cdktf.IResolvable;
   /**
   * Backend server IP addresses list (IPv4 or IPv6)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#server_ips LbBackend#server_ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#server_ips LbBackend#server_ips}
   */
   readonly serverIps?: string[];
   /**
   * Enables SSL between load balancer and backend servers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#ssl_bridging LbBackend#ssl_bridging}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#ssl_bridging LbBackend#ssl_bridging}
   */
   readonly sslBridging?: boolean | cdktf.IResolvable;
   /**
   * The type of sticky sessions
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#sticky_sessions LbBackend#sticky_sessions}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#sticky_sessions LbBackend#sticky_sessions}
   */
   readonly stickySessions?: string;
   /**
   * Cookie name for sticky sessions
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#sticky_sessions_cookie_name LbBackend#sticky_sessions_cookie_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#sticky_sessions_cookie_name LbBackend#sticky_sessions_cookie_name}
   */
   readonly stickySessionsCookieName?: string;
   /**
   * Maximum initial server connection establishment time
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#timeout_connect LbBackend#timeout_connect}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#timeout_connect LbBackend#timeout_connect}
   */
   readonly timeoutConnect?: string;
   /**
   * Maximum time (in seconds) for a request to be left pending in queue when `max_connections` is reached
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#timeout_queue LbBackend#timeout_queue}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#timeout_queue LbBackend#timeout_queue}
   */
   readonly timeoutQueue?: string;
   /**
   * Maximum server connection inactivity time
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#timeout_server LbBackend#timeout_server}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#timeout_server LbBackend#timeout_server}
   */
   readonly timeoutServer?: string;
   /**
   * Maximum tunnel inactivity time
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#timeout_tunnel LbBackend#timeout_tunnel}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#timeout_tunnel LbBackend#timeout_tunnel}
   */
   readonly timeoutTunnel?: string;
   /**
   * health_check_http block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_http LbBackend#health_check_http}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_http LbBackend#health_check_http}
   */
   readonly healthCheckHttp?: LbBackendHealthCheckHttp;
   /**
   * health_check_https block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_https LbBackend#health_check_https}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_https LbBackend#health_check_https}
   */
   readonly healthCheckHttps?: LbBackendHealthCheckHttps;
   /**
   * health_check_tcp block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#health_check_tcp LbBackend#health_check_tcp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#health_check_tcp LbBackend#health_check_tcp}
   */
   readonly healthCheckTcp?: LbBackendHealthCheckTcp;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#timeouts LbBackend#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#timeouts LbBackend#timeouts}
   */
   readonly timeouts?: LbBackendTimeouts;
 }
@@ -208,25 +208,25 @@ export interface LbBackendHealthCheckHttp {
   /**
   * The expected HTTP status code
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#code LbBackend#code}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#code LbBackend#code}
   */
   readonly code?: number;
   /**
   * The HTTP host header to use for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#host_header LbBackend#host_header}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#host_header LbBackend#host_header}
   */
   readonly hostHeader?: string;
   /**
   * The HTTP method to use for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#method LbBackend#method}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#method LbBackend#method}
   */
   readonly method?: string;
   /**
   * The HTTP endpoint URL to call for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#uri LbBackend#uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#uri LbBackend#uri}
   */
   readonly uri: string;
 }
@@ -242,6 +242,43 @@ export function lbBackendHealthCheckHttpToTerraform(struct?: LbBackendHealthChec
     method: cdktf.stringToTerraform(struct!.method),
     uri: cdktf.stringToTerraform(struct!.uri),
   }
+}
+
+
+export function lbBackendHealthCheckHttpToHclTerraform(struct?: LbBackendHealthCheckHttpOutputReference | LbBackendHealthCheckHttp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    code: {
+      value: cdktf.numberToHclTerraform(struct!.code),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    host_header: {
+      value: cdktf.stringToHclTerraform(struct!.hostHeader),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    method: {
+      value: cdktf.stringToHclTerraform(struct!.method),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    uri: {
+      value: cdktf.stringToHclTerraform(struct!.uri),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class LbBackendHealthCheckHttpOutputReference extends cdktf.ComplexObject {
@@ -359,31 +396,31 @@ export interface LbBackendHealthCheckHttps {
   /**
   * The expected HTTP status code
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#code LbBackend#code}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#code LbBackend#code}
   */
   readonly code?: number;
   /**
   * The HTTP host header to use for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#host_header LbBackend#host_header}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#host_header LbBackend#host_header}
   */
   readonly hostHeader?: string;
   /**
   * The HTTP method to use for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#method LbBackend#method}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#method LbBackend#method}
   */
   readonly method?: string;
   /**
   * The SNI to use for HC requests over SSL
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#sni LbBackend#sni}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#sni LbBackend#sni}
   */
   readonly sni?: string;
   /**
   * The HTTPS endpoint URL to call for HC requests
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#uri LbBackend#uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#uri LbBackend#uri}
   */
   readonly uri: string;
 }
@@ -400,6 +437,49 @@ export function lbBackendHealthCheckHttpsToTerraform(struct?: LbBackendHealthChe
     sni: cdktf.stringToTerraform(struct!.sni),
     uri: cdktf.stringToTerraform(struct!.uri),
   }
+}
+
+
+export function lbBackendHealthCheckHttpsToHclTerraform(struct?: LbBackendHealthCheckHttpsOutputReference | LbBackendHealthCheckHttps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    code: {
+      value: cdktf.numberToHclTerraform(struct!.code),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    host_header: {
+      value: cdktf.stringToHclTerraform(struct!.hostHeader),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    method: {
+      value: cdktf.stringToHclTerraform(struct!.method),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    sni: {
+      value: cdktf.stringToHclTerraform(struct!.sni),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    uri: {
+      value: cdktf.stringToHclTerraform(struct!.uri),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class LbBackendHealthCheckHttpsOutputReference extends cdktf.ComplexObject {
@@ -547,6 +627,17 @@ export function lbBackendHealthCheckTcpToTerraform(struct?: LbBackendHealthCheck
   }
 }
 
+
+export function lbBackendHealthCheckTcpToHclTerraform(struct?: LbBackendHealthCheckTcpOutputReference | LbBackendHealthCheckTcp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class LbBackendHealthCheckTcpOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -575,23 +666,23 @@ export class LbBackendHealthCheckTcpOutputReference extends cdktf.ComplexObject 
 }
 export interface LbBackendTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#create LbBackend#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#create LbBackend#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#default LbBackend#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#default LbBackend#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#delete LbBackend#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#delete LbBackend#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#read LbBackend#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#read LbBackend#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#update LbBackend#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#update LbBackend#update}
   */
   readonly update?: string;
 }
@@ -608,6 +699,49 @@ export function lbBackendTimeoutsToTerraform(struct?: LbBackendTimeouts | cdktf.
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function lbBackendTimeoutsToHclTerraform(struct?: LbBackendTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class LbBackendTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -758,7 +892,7 @@ export class LbBackendTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend scaleway_lb_backend}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend scaleway_lb_backend}
 */
 export class LbBackend extends cdktf.TerraformResource {
 
@@ -774,7 +908,7 @@ export class LbBackend extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a LbBackend resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the LbBackend to import
-  * @param importFromId The id of the existing LbBackend that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing LbBackend that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the LbBackend to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -786,7 +920,7 @@ export class LbBackend extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/lb_backend scaleway_lb_backend} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_backend scaleway_lb_backend} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -797,8 +931,8 @@ export class LbBackend extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_backend',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1388,5 +1522,205 @@ export class LbBackend extends cdktf.TerraformResource {
       health_check_tcp: lbBackendHealthCheckTcpToTerraform(this._healthCheckTcp.internalValue),
       timeouts: lbBackendTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      failover_host: {
+        value: cdktf.stringToHclTerraform(this._failoverHost),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      forward_port: {
+        value: cdktf.numberToHclTerraform(this._forwardPort),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      forward_port_algorithm: {
+        value: cdktf.stringToHclTerraform(this._forwardPortAlgorithm),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      forward_protocol: {
+        value: cdktf.stringToHclTerraform(this._forwardProtocol),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      health_check_delay: {
+        value: cdktf.stringToHclTerraform(this._healthCheckDelay),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      health_check_max_retries: {
+        value: cdktf.numberToHclTerraform(this._healthCheckMaxRetries),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      health_check_port: {
+        value: cdktf.numberToHclTerraform(this._healthCheckPort),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      health_check_send_proxy: {
+        value: cdktf.booleanToHclTerraform(this._healthCheckSendProxy),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      health_check_timeout: {
+        value: cdktf.stringToHclTerraform(this._healthCheckTimeout),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      health_check_transient_delay: {
+        value: cdktf.stringToHclTerraform(this._healthCheckTransientDelay),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ignore_ssl_server_verify: {
+        value: cdktf.booleanToHclTerraform(this._ignoreSslServerVerify),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      lb_id: {
+        value: cdktf.stringToHclTerraform(this._lbId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      max_connections: {
+        value: cdktf.numberToHclTerraform(this._maxConnections),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      max_retries: {
+        value: cdktf.numberToHclTerraform(this._maxRetries),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      on_marked_down_action: {
+        value: cdktf.stringToHclTerraform(this._onMarkedDownAction),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      proxy_protocol: {
+        value: cdktf.stringToHclTerraform(this._proxyProtocol),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      redispatch_attempt_count: {
+        value: cdktf.numberToHclTerraform(this._redispatchAttemptCount),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      send_proxy_v2: {
+        value: cdktf.booleanToHclTerraform(this._sendProxyV2),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      server_ips: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._serverIps),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      ssl_bridging: {
+        value: cdktf.booleanToHclTerraform(this._sslBridging),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      sticky_sessions: {
+        value: cdktf.stringToHclTerraform(this._stickySessions),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      sticky_sessions_cookie_name: {
+        value: cdktf.stringToHclTerraform(this._stickySessionsCookieName),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeout_connect: {
+        value: cdktf.stringToHclTerraform(this._timeoutConnect),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeout_queue: {
+        value: cdktf.stringToHclTerraform(this._timeoutQueue),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeout_server: {
+        value: cdktf.stringToHclTerraform(this._timeoutServer),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeout_tunnel: {
+        value: cdktf.stringToHclTerraform(this._timeoutTunnel),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      health_check_http: {
+        value: lbBackendHealthCheckHttpToHclTerraform(this._healthCheckHttp.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "LbBackendHealthCheckHttpList",
+      },
+      health_check_https: {
+        value: lbBackendHealthCheckHttpsToHclTerraform(this._healthCheckHttps.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "LbBackendHealthCheckHttpsList",
+      },
+      health_check_tcp: {
+        value: lbBackendHealthCheckTcpToHclTerraform(this._healthCheckTcp.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "LbBackendHealthCheckTcpList",
+      },
+      timeouts: {
+        value: lbBackendTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "LbBackendTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

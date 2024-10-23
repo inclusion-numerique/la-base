@@ -30,7 +30,9 @@ const SearchLayout = ({ children }: PropsWithChildren) => (
   <>
     <SkipLinksPortal links={skipLinks} />
     <SearchHeader />
-    <main id={resultsId}>{children}</main>
+    <main id={resultsId} className="fr-pb-md-2w">
+      {children}
+    </main>
   </>
 )
 

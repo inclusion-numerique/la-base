@@ -1,0 +1,51 @@
+.fr-card {
+  background-color: transparent;
+
+  &.fr-card--editable {
+    .fr-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .fr-card__title {
+        order: 0;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+
+  .fr-card__separator {
+    border-bottom: var(--slim-grey-border);
+    padding: 2rem 0;
+  }
+}
+
+.fr-card--download.fr-enlarge-button:hover .fr-card__header,
+.fr-card--download.fr-enlarge-link:hover .fr-card__header {
+  background-color: var(--hover-alpha);
+}
+
+.fr-card--download.fr-enlarge-button:active .fr-card__header,
+.fr-card--download.fr-enlarge-link:active .fr-card__header {
+  background-color: var(--active-alpha);
+}
+
+.fr-enlarge-link:hover {
+  background-color: var(--hover-alpha);
+}
+
+.fr-enlarge-link:active {
+  background-color: var(--active-alpha);
+}
+
+.fr-enlarge-button:hover {
+  background-color: var(--hover-alpha);
+}
+
+.fr-enlarge-button:active {
+  background-color: var(--active-alpha);
+}
+
+.fr-card__title button.fr-btn--sm {
+  font-size: 0.875rem;
+}

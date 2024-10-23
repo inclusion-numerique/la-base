@@ -2,13 +2,13 @@ import { v4 } from 'uuid'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { baseRouter } from '@app/web/server/rpc/base/baseRouter'
 import { createTestContext } from '@app/web/test/createTestContext'
-import { UpdateBaseVisibilityCommand } from '@app/web/server/bases/updateBase'
+import type { UpdateBaseVisibilityCommand } from '@app/web/server/bases/updateBase'
 import { prismaClient } from '@app/web/prismaClient'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 
 describe('baseRouter', () => {
   // Helper function to easily test procedures

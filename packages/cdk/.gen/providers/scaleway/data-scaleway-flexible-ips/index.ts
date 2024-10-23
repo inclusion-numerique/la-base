@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayFlexibleIpsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#id DataScalewayFlexibleIps#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#id DataScalewayFlexibleIps#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayFlexibleIpsConfig extends cdktf.TerraformMetaArgume
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#project_id DataScalewayFlexibleIps#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#project_id DataScalewayFlexibleIps#project_id}
   */
   readonly projectId?: string;
   /**
   * Flexible IPs that are attached to these server IDs are listed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#server_ids DataScalewayFlexibleIps#server_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#server_ids DataScalewayFlexibleIps#server_ids}
   */
   readonly serverIds?: string[];
   /**
   * Flexible IPs with these exact tags are listed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#tags DataScalewayFlexibleIps#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#tags DataScalewayFlexibleIps#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#zone DataScalewayFlexibleIps#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#zone DataScalewayFlexibleIps#zone}
   */
   readonly zone?: string;
 }
@@ -49,6 +49,17 @@ export function dataScalewayFlexibleIpsIpsMacAddressToTerraform(struct?: DataSca
   }
   return {
   }
+}
+
+
+export function dataScalewayFlexibleIpsIpsMacAddressToHclTerraform(struct?: DataScalewayFlexibleIpsIpsMacAddress): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayFlexibleIpsIpsMacAddressOutputReference extends cdktf.ComplexObject {
@@ -143,6 +154,17 @@ export function dataScalewayFlexibleIpsIpsToTerraform(struct?: DataScalewayFlexi
   }
   return {
   }
+}
+
+
+export function dataScalewayFlexibleIpsIpsToHclTerraform(struct?: DataScalewayFlexibleIpsIps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayFlexibleIpsIpsOutputReference extends cdktf.ComplexObject {
@@ -255,7 +277,7 @@ export class DataScalewayFlexibleIpsIpsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips scaleway_flexible_ips}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips scaleway_flexible_ips}
 */
 export class DataScalewayFlexibleIps extends cdktf.TerraformDataSource {
 
@@ -271,7 +293,7 @@ export class DataScalewayFlexibleIps extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayFlexibleIps resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayFlexibleIps to import
-  * @param importFromId The id of the existing DataScalewayFlexibleIps that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayFlexibleIps that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayFlexibleIps to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -283,7 +305,7 @@ export class DataScalewayFlexibleIps extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/flexible_ips scaleway_flexible_ips} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/flexible_ips scaleway_flexible_ips} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -294,8 +316,8 @@ export class DataScalewayFlexibleIps extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_flexible_ips',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -419,5 +441,43 @@ export class DataScalewayFlexibleIps extends cdktf.TerraformDataSource {
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      server_ids: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._serverIds),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

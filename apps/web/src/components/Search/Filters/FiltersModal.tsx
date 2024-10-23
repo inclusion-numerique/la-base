@@ -4,7 +4,7 @@ import { SelectOption } from '@app/ui/components/Form/utils/options'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Category, FilterKey } from './filter'
 import { FilterCategory } from './FilterCategory'
 
@@ -34,7 +34,7 @@ export const FiltersModal = ({
     <>
       <modal.Component title="Filtrer par">
         {categories.map((category) => (
-          <>
+          <Fragment key={category.id}>
             {selectedCategory === '' && (
               <Button
                 className="fr-width-full fr-justify-content-center fr-mb-1w"
@@ -65,7 +65,7 @@ export const FiltersModal = ({
                 />
               </div>
             )}
-          </>
+          </Fragment>
         ))}
       </modal.Component>
       <Button

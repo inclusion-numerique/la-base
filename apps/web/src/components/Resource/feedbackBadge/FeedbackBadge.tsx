@@ -21,7 +21,7 @@ export const FeedbackBadge = ({
       small
       severity={badgeStatus?.severity as AlertProps.Severity}
       className={classNames(
-        'fr-pl-1v fr-text--center fr-text--transform-uppercase fr-text--nowrap',
+        'fr-pl-1v fr-text--center fr-text--uppercase fr-text--nowrap',
         className,
       )}
     >

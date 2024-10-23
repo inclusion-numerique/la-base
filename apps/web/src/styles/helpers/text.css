@@ -6,8 +6,8 @@
   text-align: center !important;
 }
 
-.fr-text--transform-uppercase {
-  text-transform: uppercase;
+.fr-text--left {
+  text-align: left !important;
 }
 
 .fr-text--right {
@@ -34,7 +34,19 @@
   text-transform: uppercase !important;
 }
 
-/* sm flex rules */
+.fr-whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.fr-whitespace-wrap {
+  white-space: normal;
+}
+
+.fr-line-height-1 {
+  line-height: 1 !important;
+}
+
+/* sm rules */
 @media (min-width: 36em) {
   .fr-text-sm--right {
     text-align: right !important;

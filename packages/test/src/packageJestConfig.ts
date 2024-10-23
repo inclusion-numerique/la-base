@@ -1,10 +1,10 @@
-import { resolve } from 'node:path'
+import path from 'node:path'
 import * as dotenv from 'dotenv'
 import { createNodeModulesTransformIgnorePattern } from './transformIgnore'
 
 // import meta does not work in jest env
 // eslint-disable-next-line unicorn/prefer-module
-const dotenvFile = resolve(__dirname, '../../../.env')
+const dotenvFile = path.resolve(__dirname, '../../../.env')
 
 export const testDotenvConfig = () => {
   dotenv.config({ path: dotenvFile })
@@ -57,6 +57,8 @@ export const packageJestConfig = ({
       '**/*.integration.tsx',
     ],
     moduleNameMapper: {
+      '@sentry/nextjs': '<rootDir>/../../packages/test/src/mocks/sentry.ts',
+      '\\.module\\.css$': 'identity-obj-proxy', // Mock CSS modules
       '^@app/web/(.*)$': '<rootDir>/../../apps/web/src/$1',
       '^@app/cli/(.*)$': '<rootDir>/../../apps/cli/src/$1',
       '^@app/cdk/(.*)$': '<rootDir>/../../packages/cdk/src/$1',
@@ -81,6 +83,14 @@ export const packageJestConfig = ({
         'node',
         'node-addons',
       ],
+    },
+    globals: {
+      'ts-jest': {
+        tsconfig: {
+          sourceMap: true,
+          inlineSources: false,
+        },
+      },
     },
   }
 }

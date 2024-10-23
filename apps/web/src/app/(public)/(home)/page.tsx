@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import { getFeatured } from '@app/web/app/(public)/(home)/_data/getFeatured'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Newsletter from '@app/web/app/(public)/Newsletter'
@@ -20,7 +20,7 @@ const HomePage = async () => {
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <main id={contentId}>
         <Banner />
         <div className="fr-container fr-pt-8w fr-pb-0 fr-py-md-10w">

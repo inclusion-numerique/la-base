@@ -58,7 +58,7 @@ const SearchableSelect = <T extends string>({
   const filteredOptions = useMemo(
     () =>
       allOptions.filter((option) =>
-        option.name
+        option.label
           .toLocaleLowerCase()
           .includes(inputValue.toLocaleLowerCase()),
       ),
@@ -67,7 +67,7 @@ const SearchableSelect = <T extends string>({
 
   const select = useCallback(
     (option: Option<T>) => {
-      setInputValue(option.name)
+      setInputValue(option.label)
       setSelected(option.value)
     },
     [setInputValue, setSelected],
@@ -91,7 +91,7 @@ const SearchableSelect = <T extends string>({
         .filter((option) => !option.disabled)
         .find(
           (option) =>
-            option.name.toLocaleLowerCase() === inputValue.toLocaleLowerCase(),
+            option.label.toLocaleLowerCase() === inputValue.toLocaleLowerCase(),
         )
       if (!foundValue) {
         unselect()

@@ -9,7 +9,7 @@ import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import { profileAuthorization } from '@app/web/authorization/models/profileAuthorization'
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <div className="fr-container">
         <Breadcrumbs
           parents={[

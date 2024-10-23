@@ -1,6 +1,6 @@
 import { isBrowser } from '@app/web/utils/isBrowser'
 
-export const download = (url: string, filename: string) => {
+export const download = (url: string, filename?: string) => {
   if (!isBrowser) {
     return
   }
@@ -8,8 +8,9 @@ export const download = (url: string, filename: string) => {
   const link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
-  link.download = filename
-  link.target = '_blank'
+  if (filename) {
+    link.download = filename
+  }
 
   // It needs to be added to the DOM so it can be clicked
   document.body.append(link)
@@ -17,7 +18,7 @@ export const download = (url: string, filename: string) => {
 
   // To make this work on Firefox we need to wait
   // before removing it.
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     link.remove()
-  }, 0)
+  })
 }

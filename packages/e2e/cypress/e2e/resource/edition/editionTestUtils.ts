@@ -1,9 +1,5 @@
 import { v4 } from 'uuid'
-import type {
-  CreateBaseInput,
-  CreateUserInput,
-} from '@app/e2e/e2e/authentication/user.tasks'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { givenUser } from '@app/e2e/support/given/givenUser'
 import { givenBase } from '@app/e2e/support/given/givenBase'
 import {
@@ -11,6 +7,10 @@ import {
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
 import { givenCollection } from '@app/e2e/support/given/givenCollection'
+import type {
+  CreateBaseInput,
+  CreateUserInput,
+} from '@app/e2e/tasks/handlers/user.tasks'
 import { addFeedbackToResource } from '../avis/avisTestUtils'
 
 export const cleanUpAndCreateTestResource = (

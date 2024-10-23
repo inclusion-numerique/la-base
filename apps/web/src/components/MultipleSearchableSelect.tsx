@@ -45,6 +45,7 @@ const MultipleSearchableSelect = ({
   >([])
   const [inputValue, setInputValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const optionsContainerRef = useRef<HTMLDivElement>(null)
 
@@ -59,7 +60,7 @@ const MultipleSearchableSelect = ({
   const filteredOptions = useMemo(
     () =>
       allOptions.filter((option) =>
-        filter ? filter(option) : option.name.toLocaleLowerCase(),
+        filter ? filter(option) : option.label.toLocaleLowerCase(),
       ),
     [filter, inputValue, allOptions],
   )
@@ -98,26 +99,30 @@ const MultipleSearchableSelect = ({
     setShowOptions(true)
   }, [])
 
-  const selectFirstResult = useCallback(() => {
-    if (filteredOptions.length === 1 && !filteredOptions[0].disabled) {
-      select(filteredOptions[0])
-    } else if (inputValue) {
-      onInputChange('')
-      const newSelection = [
-        ...internalSelection,
-        { name: inputValue, value: inputValue, invalid: true },
-      ]
-      setInternalSelection(newSelection)
-      onSelectProperty(newSelection)
-    }
-  }, [
-    filteredOptions,
-    inputValue,
-    select,
-    onInputChange,
-    internalSelection,
-    onSelectProperty,
-  ])
+  const selectFirstResult = useCallback(
+    (index: number) => {
+      if (filteredOptions.length > 0 && !filteredOptions[index].disabled) {
+        select(filteredOptions[index])
+      } else if (inputValue) {
+        onInputChange('')
+        const newSelection = [
+          ...internalSelection,
+          { label: inputValue, value: inputValue, invalid: true },
+        ]
+        setInternalSelection(newSelection)
+        onSelectProperty(newSelection)
+      }
+    },
+    [
+      filteredOptions,
+      inputValue,
+      select,
+      onInputChange,
+      internalSelection,
+      onSelectProperty,
+      selectedIndex,
+    ],
+  )
 
   const id = 'multiple-searchable-select'
   return (
@@ -144,6 +149,8 @@ const MultipleSearchableSelect = ({
           ))}
           <input
             type="text"
+            role="combobox"
+            aria-autocomplete="list"
             disabled={disabled}
             data-testid={dataTestId}
             id={id}
@@ -161,9 +168,20 @@ const MultipleSearchableSelect = ({
               onInputChange('')
             }}
             onKeyDown={(event) => {
+              if (event.key === 'ArrowDown') {
+                event.preventDefault()
+                setSelectedIndex((selectedIndex + 1) % filteredOptions.length)
+              } else if (event.key === 'ArrowUp') {
+                event.preventDefault()
+                setSelectedIndex(
+                  selectedIndex === 0
+                    ? filteredOptions.length - 1
+                    : (selectedIndex - 1) % filteredOptions.length,
+                )
+              }
               if (inputValue && event.key === 'Enter') {
                 event.preventDefault()
-                selectFirstResult()
+                selectFirstResult(selectedIndex)
               }
             }}
           />
@@ -178,9 +196,11 @@ const MultipleSearchableSelect = ({
             data-testid={dataTestId}
             options={filteredOptions}
             select={select}
+            selectedIndex={selectedIndex}
             limit={limit || DEFAULT_LIMIT}
             hideNoResultMessage={allOptions.length === 0}
             noResultMessage={noResultMessage}
+            onHide={() => setSelectedIndex(-1)}
           />
         </div>
       </div>

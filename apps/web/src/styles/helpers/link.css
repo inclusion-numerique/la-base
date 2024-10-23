@@ -11,12 +11,12 @@
 }
 
 .fr-link--no-underline {
-    background-image: none !important;
+  background-image: none !important;
 
-    &:hover,
-    &:active {
-        --underline-hover-width: 0 !important;
-    }
+  &:hover,
+  &:active {
+    --underline-hover-width: 0 !important;
+  }
 }
 
 .fr-no-hover-bg:hover {

@@ -17,13 +17,7 @@ const SigninFormValidation = z.object({
 })
 type SigninFormData = z.infer<typeof SigninFormValidation>
 
-export const EmailSigninForm = ({
-  error,
-  callbackUrl,
-}: {
-  error?: string
-  callbackUrl: Route
-}) => {
+export const EmailSigninForm = ({ callbackUrl }: { callbackUrl: Route }) => {
   const form = useForm<SigninFormData>({
     resolver: zodResolver(SigninFormValidation),
     mode: 'onBlur',
@@ -39,26 +33,22 @@ export const EmailSigninForm = ({
     form.formState.isSubmitting || form.formState.isSubmitSuccessful
   return (
     <form id="signin-with-email" onSubmit={form.handleSubmit(onSubmit)}>
-      {error ? (
-        <div className="fr-fieldset__element">
-          <div className="fr-alert fr-alert--error fr-alert--sm">
-            <p>{error}</p>
-          </div>
-        </div>
-      ) : null}
       <InputFormField
         control={form.control}
         path="email"
         label="Email"
+        classes={{
+          input: 'fr-input--white',
+        }}
         disabled={disabled}
       />
       <ButtonsGroup
         buttons={[
           {
-            disabled,
             iconId: 'fr-icon-account-circle-line',
             children: 'Se connecter',
             type: 'submit',
+            className: disabled ? 'fr-btn--loading' : undefined,
           },
         ]}
       />

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface MnqSnsTopicConfig extends cdktf.TerraformMetaArguments {
   /**
   * SNS access key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#access_key MnqSnsTopic#access_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#access_key MnqSnsTopic#access_key}
   */
   readonly accessKey: string;
   /**
   * Specifies whether to enable content-based deduplication.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#content_based_deduplication MnqSnsTopic#content_based_deduplication}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#content_based_deduplication MnqSnsTopic#content_based_deduplication}
   */
   readonly contentBasedDeduplication?: boolean | cdktf.IResolvable;
   /**
   * Whether the topic is a FIFO topic. If true, the topic name must end with .fifo
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#fifo_topic MnqSnsTopic#fifo_topic}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#fifo_topic MnqSnsTopic#fifo_topic}
   */
   readonly fifoTopic?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#id MnqSnsTopic#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#id MnqSnsTopic#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,43 +35,43 @@ export interface MnqSnsTopicConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the SNS Topic.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#name MnqSnsTopic#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#name MnqSnsTopic#name}
   */
   readonly name?: string;
   /**
   * Creates a unique name beginning with the specified prefix.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#name_prefix MnqSnsTopic#name_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#name_prefix MnqSnsTopic#name_prefix}
   */
   readonly namePrefix?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#project_id MnqSnsTopic#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#project_id MnqSnsTopic#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#region MnqSnsTopic#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#region MnqSnsTopic#region}
   */
   readonly region?: string;
   /**
   * SNS secret key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#secret_key MnqSnsTopic#secret_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#secret_key MnqSnsTopic#secret_key}
   */
   readonly secretKey: string;
   /**
   * SNS endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#sns_endpoint MnqSnsTopic#sns_endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#sns_endpoint MnqSnsTopic#sns_endpoint}
   */
   readonly snsEndpoint?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic scaleway_mnq_sns_topic}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic scaleway_mnq_sns_topic}
 */
 export class MnqSnsTopic extends cdktf.TerraformResource {
 
@@ -87,7 +87,7 @@ export class MnqSnsTopic extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MnqSnsTopic resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MnqSnsTopic to import
-  * @param importFromId The id of the existing MnqSnsTopic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MnqSnsTopic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MnqSnsTopic to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -99,7 +99,7 @@ export class MnqSnsTopic extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/mnq_sns_topic scaleway_mnq_sns_topic} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic scaleway_mnq_sns_topic} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -110,8 +110,8 @@ export class MnqSnsTopic extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_sns_topic',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -318,5 +318,73 @@ export class MnqSnsTopic extends cdktf.TerraformResource {
       secret_key: cdktf.stringToTerraform(this._secretKey),
       sns_endpoint: cdktf.stringToTerraform(this._snsEndpoint),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      access_key: {
+        value: cdktf.stringToHclTerraform(this._accessKey),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      content_based_deduplication: {
+        value: cdktf.booleanToHclTerraform(this._contentBasedDeduplication),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      fifo_topic: {
+        value: cdktf.booleanToHclTerraform(this._fifoTopic),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name_prefix: {
+        value: cdktf.stringToHclTerraform(this._namePrefix),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      secret_key: {
+        value: cdktf.stringToHclTerraform(this._secretKey),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      sns_endpoint: {
+        value: cdktf.stringToHclTerraform(this._snsEndpoint),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

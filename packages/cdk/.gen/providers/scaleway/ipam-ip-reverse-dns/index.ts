@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface IpamIpReverseDnsConfig extends cdktf.TerraformMetaArguments {
   /**
   * The IP corresponding to the hostname
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#address IpamIpReverseDns#address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#address IpamIpReverseDns#address}
   */
   readonly address: string;
   /**
   * The reverse domain name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#hostname IpamIpReverseDns#hostname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#hostname IpamIpReverseDns#hostname}
   */
   readonly hostname: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#id IpamIpReverseDns#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#id IpamIpReverseDns#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,33 +29,33 @@ export interface IpamIpReverseDnsConfig extends cdktf.TerraformMetaArguments {
   /**
   * The IPAM IP ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#ipam_ip_id IpamIpReverseDns#ipam_ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#ipam_ip_id IpamIpReverseDns#ipam_ip_id}
   */
   readonly ipamIpId: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#region IpamIpReverseDns#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#region IpamIpReverseDns#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#timeouts IpamIpReverseDns#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#timeouts IpamIpReverseDns#timeouts}
   */
   readonly timeouts?: IpamIpReverseDnsTimeouts;
 }
 export interface IpamIpReverseDnsTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#create IpamIpReverseDns#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#create IpamIpReverseDns#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#default IpamIpReverseDns#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#default IpamIpReverseDns#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#update IpamIpReverseDns#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#update IpamIpReverseDns#update}
   */
   readonly update?: string;
 }
@@ -70,6 +70,37 @@ export function ipamIpReverseDnsTimeoutsToTerraform(struct?: IpamIpReverseDnsTim
     default: cdktf.stringToTerraform(struct!.default),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function ipamIpReverseDnsTimeoutsToHclTerraform(struct?: IpamIpReverseDnsTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IpamIpReverseDnsTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -176,7 +207,7 @@ export class IpamIpReverseDnsTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns scaleway_ipam_ip_reverse_dns}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns scaleway_ipam_ip_reverse_dns}
 */
 export class IpamIpReverseDns extends cdktf.TerraformResource {
 
@@ -192,7 +223,7 @@ export class IpamIpReverseDns extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IpamIpReverseDns resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IpamIpReverseDns to import
-  * @param importFromId The id of the existing IpamIpReverseDns that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IpamIpReverseDns that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IpamIpReverseDns to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -204,7 +235,7 @@ export class IpamIpReverseDns extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/ipam_ip_reverse_dns scaleway_ipam_ip_reverse_dns} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/ipam_ip_reverse_dns scaleway_ipam_ip_reverse_dns} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -215,8 +246,8 @@ export class IpamIpReverseDns extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_ipam_ip_reverse_dns',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -338,5 +369,49 @@ export class IpamIpReverseDns extends cdktf.TerraformResource {
       region: cdktf.stringToTerraform(this._region),
       timeouts: ipamIpReverseDnsTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      address: {
+        value: cdktf.stringToHclTerraform(this._address),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      hostname: {
+        value: cdktf.stringToHclTerraform(this._hostname),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ipam_ip_id: {
+        value: cdktf.stringToHclTerraform(this._ipamIpId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeouts: {
+        value: ipamIpReverseDnsTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "IpamIpReverseDnsTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

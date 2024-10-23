@@ -1,15 +1,12 @@
-import { Command } from '@commander-js/extra-typings'
-import { prismaClient } from '@app/web/prismaClient'
 import type { Prisma } from '@prisma/client'
-import { output } from '@app/web/utils/output'
+import { fixtureUsers } from '@app/fixtures/users'
 import { collections } from '@app/fixtures/collections'
 import { resourceContributors } from '@app/fixtures/resourceContributors'
 import { baseMembers } from '@app/fixtures/baseMembers'
 import { bases } from './bases'
 import { resources } from './resources'
-import { users } from './users'
 
-const deleteAll = async (transaction: Prisma.TransactionClient) => {
+export const deleteAll = async (transaction: Prisma.TransactionClient) => {
   const tables = await transaction.$queryRaw<
     { table_name: string }[]
   >`SELECT table_name
@@ -28,9 +25,9 @@ const deleteAll = async (transaction: Prisma.TransactionClient) => {
   return tables.map(({ table_name }) => table_name)
 }
 
-const seed = async (transaction: Prisma.TransactionClient) => {
+export const seed = async (transaction: Prisma.TransactionClient) => {
   await Promise.all(
-    users.map((user) =>
+    fixtureUsers.map((user) =>
       transaction.user.upsert({
         where: { id: user.id },
         create: user,
@@ -89,41 +86,3 @@ const seed = async (transaction: Prisma.TransactionClient) => {
     ),
   )
 }
-
-const main = async (eraseAllData: boolean) => {
-  // Transaction fails in CI, using prismaClient for now
-  // await prismaClient.$transaction(
-  //   async (transaction) => {
-  if (eraseAllData) {
-    output.log('Erasing all data...')
-    await deleteAll(prismaClient)
-  }
-
-  output.log(`Generating fixtures data`)
-  await seed(prismaClient)
-  // },
-  // { maxWait: 60_000 },
-  // )
-  output.log(`Fixtures loaded successfully`)
-}
-
-const program = new Command().option(
-  '-e, --erase-all-data',
-  'Erase all data from the database before seeding',
-  false,
-)
-
-program.parse()
-
-const { eraseAllData } = program.opts()
-
-main(eraseAllData)
-  // eslint-disable-next-line promise/always-return
-  .then(() => prismaClient.$disconnect())
-  // eslint-disable-next-line unicorn/prefer-top-level-await
-  .catch(async (error) => {
-    output.error(error)
-    await prismaClient.$disconnect()
-    // eslint-disable-next-line unicorn/no-process-exit
-    process.exit(1)
-  })

@@ -6,14 +6,6 @@
         "name": "next"
       }
     ],
-    "esModuleInterop": true,
-    "strictNullChecks": true,
-    "skipLibCheck": true,
-    "module": "esnext",
-    "types": [
-      "jest",
-      "node"
-    , "change-case"],
     "paths": {
       "@app/cli/*": [
         "../../apps/cli/src/*"
@@ -53,7 +45,8 @@
       ]
     },
     "baseUrl": ".",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",

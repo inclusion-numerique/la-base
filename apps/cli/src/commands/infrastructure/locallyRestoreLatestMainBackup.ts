@@ -1,7 +1,7 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
 import { promisify } from 'node:util'
 import { exec as callbackExec } from 'node:child_process'
-import { resolve as pathResolve } from 'node:path'
+import path from 'node:path'
 import { createWriteStream } from 'node:fs'
 import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
@@ -13,7 +13,7 @@ import { output } from '@app/cli/output'
 
 const exec = promisify(callbackExec)
 
-const mainBackupFile = pathResolve(
+const mainBackupFile = path.resolve(
   varDirectory,
   `${process.env.BACKUP_DATABASE_NAME}_backup.dump.sql`,
 )

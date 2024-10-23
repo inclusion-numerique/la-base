@@ -81,6 +81,7 @@ model User {
 
   created             DateTime               @default(now())
   updated             DateTime               @default(now())
+  lastLogin           DateTime?              @map("last_login")
   ownedBases          Base[]
   createdResources    Resource[]
   uploads             Upload[]
@@ -99,6 +100,18 @@ model User {
   resourceFeedback    ResourceFeedback[]
 
   @@map("users")
+}
+
+// For handling external systems that changed or invalidate user emails,
+// we need a way to reconcile the user email with the one in the system.
+// For this we keep a mapping of new email -> old email in the database.
+// And do not re-create the user in the system if the old email is found.
+// Instead, we update the user email in the system.
+model UserEmailReconciliation {
+  expectedNewEmail        String @id @unique @map("expected_new_email")
+  oldEmail                String @unique @map("old_email")
+
+  @@map("user_email_reconciliation")
 }
 
 model VerificationToken {
@@ -441,7 +454,7 @@ model Image {
   blurUrl String? @map("blur_url")
 
   // Original dimensions in pixel (before cropping)
-  originalHeight Int? @map("original_heigth")
+  originalHeight Int? @map("original_height")
   originalWidth  Int? @map("original_width")
 
   // Relative height crop (0-1)
@@ -750,7 +763,7 @@ model JobExecution {
 }
 
 model ResourceFeedback {
-  rating Int
+  rating  Int
   comment String?
 
   created DateTime  @default(now())
@@ -763,8 +776,8 @@ model ResourceFeedback {
   resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
   resourceId String   @map("resource_id") @db.Uuid
 
+  @@id([sentById, resourceId])
   @@index([sentById])
   @@index([resourceId])
-  @@id([sentById, resourceId])
   @@map("resource_feedback")
 }

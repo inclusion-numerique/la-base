@@ -12,11 +12,11 @@ export const createContext = async ({
   const sessionToken = getSessionTokenFromCookies(cookies)
 
   if (!sessionToken) {
-    return { req, user: null, resHeaders, info }
+    return { req, user: null, resHeaders, info, sessionToken: null }
   }
   const user = await getSessionUserFromSessionToken(sessionToken)
 
-  return { req, user, resHeaders, info }
+  return { req, user, resHeaders, info, sessionToken }
 }
 
 export type AppContext = Awaited<ReturnType<typeof createContext>>

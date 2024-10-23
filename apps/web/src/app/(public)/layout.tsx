@@ -11,7 +11,7 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      {children}
+      <div style={{ flex: 1 }}>{children}</div>
       <PublicFooter />
     </div>
   )

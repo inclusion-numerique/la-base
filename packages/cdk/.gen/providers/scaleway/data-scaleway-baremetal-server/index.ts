@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayBaremetalServerConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#id DataScalewayBaremetalServer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#id DataScalewayBaremetalServer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayBaremetalServerConfig extends cdktf.TerraformMetaAr
   /**
   * Name of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#name DataScalewayBaremetalServer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#name DataScalewayBaremetalServer#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#project_id DataScalewayBaremetalServer#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#project_id DataScalewayBaremetalServer#project_id}
   */
   readonly projectId?: string;
   /**
   * The ID of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#server_id DataScalewayBaremetalServer#server_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#server_id DataScalewayBaremetalServer#server_id}
   */
   readonly serverId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#zone DataScalewayBaremetalServer#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#zone DataScalewayBaremetalServer#zone}
   */
   readonly zone?: string;
 }
@@ -49,6 +49,17 @@ export function dataScalewayBaremetalServerIpsToTerraform(struct?: DataScalewayB
   }
   return {
   }
+}
+
+
+export function dataScalewayBaremetalServerIpsToHclTerraform(struct?: DataScalewayBaremetalServerIps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayBaremetalServerIpsOutputReference extends cdktf.ComplexObject {
@@ -130,6 +141,17 @@ export function dataScalewayBaremetalServerIpv4ToTerraform(struct?: DataScaleway
   }
 }
 
+
+export function dataScalewayBaremetalServerIpv4ToHclTerraform(struct?: DataScalewayBaremetalServerIpv4): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayBaremetalServerIpv4OutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -207,6 +229,17 @@ export function dataScalewayBaremetalServerIpv6ToTerraform(struct?: DataScaleway
   }
   return {
   }
+}
+
+
+export function dataScalewayBaremetalServerIpv6ToHclTerraform(struct?: DataScalewayBaremetalServerIpv6): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayBaremetalServerIpv6OutputReference extends cdktf.ComplexObject {
@@ -288,6 +321,17 @@ export function dataScalewayBaremetalServerOptionsToTerraform(struct?: DataScale
   }
 }
 
+
+export function dataScalewayBaremetalServerOptionsToHclTerraform(struct?: DataScalewayBaremetalServerOptions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayBaremetalServerOptionsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -360,6 +404,17 @@ export function dataScalewayBaremetalServerPrivateNetworkToTerraform(struct?: Da
   }
   return {
   }
+}
+
+
+export function dataScalewayBaremetalServerPrivateNetworkToHclTerraform(struct?: DataScalewayBaremetalServerPrivateNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayBaremetalServerPrivateNetworkOutputReference extends cdktf.ComplexObject {
@@ -436,7 +491,7 @@ export class DataScalewayBaremetalServerPrivateNetworkList extends cdktf.Complex
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server scaleway_baremetal_server}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server scaleway_baremetal_server}
 */
 export class DataScalewayBaremetalServer extends cdktf.TerraformDataSource {
 
@@ -452,7 +507,7 @@ export class DataScalewayBaremetalServer extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayBaremetalServer resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayBaremetalServer to import
-  * @param importFromId The id of the existing DataScalewayBaremetalServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayBaremetalServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayBaremetalServer to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -464,7 +519,7 @@ export class DataScalewayBaremetalServer extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/baremetal_server scaleway_baremetal_server} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/baremetal_server scaleway_baremetal_server} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -475,8 +530,8 @@ export class DataScalewayBaremetalServer extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_baremetal_server',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -704,5 +759,43 @@ export class DataScalewayBaremetalServer extends cdktf.TerraformDataSource {
       server_id: cdktf.stringToTerraform(this._serverId),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      server_id: {
+        value: cdktf.stringToHclTerraform(this._serverId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

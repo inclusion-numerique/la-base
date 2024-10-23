@@ -1,11 +1,12 @@
 import { createReadStream } from 'node:fs'
-import { resolve } from 'node:path'
+import path from 'node:path'
 import axios from 'axios'
 import {
   createSignedGetUrl,
   createSignedUploadUrl,
 } from '@app/web/server/createSignedUrl'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { getDirname } from '@app/config/dirname'
 
 describe.skip('createSignedUrl', () => {
   describe('createSignedGetUrl', () => {
@@ -33,7 +34,10 @@ describe.skip('createSignedUrl', () => {
     it('canCreateSignedUrl', async () => {
       const fileName = '2022-11-test.png'
       const mimeType = 'image/png'
-      const filePath = resolve(__dirname, '../../test/small-test-image.png')
+      const filePath = path.resolve(
+        getDirname(import.meta.url),
+        '../../test/small-test-image.png',
+      )
 
       const { url, key } = await createSignedUploadUrl({
         directory: `test/${Date.now()}`,

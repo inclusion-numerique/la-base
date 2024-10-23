@@ -1,5 +1,5 @@
 import { Argument, Command } from '@commander-js/extra-typings'
-import { getOctokit, owner, repo } from '@app/cli/github'
+import { octokit, owner, repo } from '@app/cli/github'
 import { output } from '@app/cli/output'
 
 const DeploymentStates = [
@@ -34,7 +34,7 @@ export const updateGithubDeployment = new Command()
   .option('-l --log <logUrl>', 'url of the CI deployment job')
   .option('-d --description <description>', 'a short description of the status')
   .action(async (deploymentId, state, { log, url, description }) => {
-    const result = await getOctokit().rest.repos.createDeploymentStatus({
+    const result = await octokit.rest.repos.createDeploymentStatus({
       owner,
       repo,
       deployment_id: deploymentId,

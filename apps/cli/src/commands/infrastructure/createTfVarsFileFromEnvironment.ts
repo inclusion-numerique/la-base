@@ -1,6 +1,6 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
 import { writeFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import path from 'node:path'
 import { Argument, Command } from '@commander-js/extra-typings'
 import {
   projectStackSensitiveVariables,
@@ -10,6 +10,7 @@ import {
   webAppStackSensitiveVariables,
   webAppStackVariables,
 } from '@app/cdk/WebAppStack'
+import { getDirname } from '@app/config/dirname'
 import { output } from '@app/cli/output'
 
 // See https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files
@@ -42,9 +43,8 @@ export const createTfVarsFileFromEnvironment = new Command()
       }),
     )
 
-    const tfVariablesFile = resolve(
-      // eslint-disable-next-line unicorn/prefer-module
-      __dirname,
+    const tfVariablesFile = path.resolve(
+      getDirname(import.meta.url),
       '../../../../../packages/cdk/.tfvars.json',
     )
     await writeFile(tfVariablesFile, JSON.stringify(variables, null, 2))

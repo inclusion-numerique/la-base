@@ -10,6 +10,7 @@ node_modules
 
 # testing
 /coverage
+/apps/web/coverage
 
 # production
 /build
@@ -57,6 +58,7 @@ chromatic.log
 /packages/e2e/cypress/videos
 /packages/e2e/cypress/screenshots
 /packages/e2e/.next/
+/packages/e2e/cypress/downloads
 
 # cdk
 /packages/cdk/cdktf.out/

@@ -33,6 +33,7 @@ const ProfileHeader = ({
             ? 'Mon Profil'
             : `${(profile.name && formatName(profile.name)) || 'Profil'}`
         }
+        className="fr-m-0 fr-pt-2w fr-pb-5w"
       />
       <div id={headerId} className="fr-align-items-center">
         <ProfileInformations profile={profile} resourcesCount={resourcesCount}>

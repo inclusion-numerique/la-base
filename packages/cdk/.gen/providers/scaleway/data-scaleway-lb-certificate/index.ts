@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbCertificateConfig extends cdktf.TerraformMetaArgu
   /**
   * The ID of the certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate#certificate_id DataScalewayLbCertificate#certificate_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate#certificate_id DataScalewayLbCertificate#certificate_id}
   */
   readonly certificateId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate#id DataScalewayLbCertificate#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate#id DataScalewayLbCertificate#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,13 @@ export interface DataScalewayLbCertificateConfig extends cdktf.TerraformMetaArgu
   /**
   * The load-balancer ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate#lb_id DataScalewayLbCertificate#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate#lb_id DataScalewayLbCertificate#lb_id}
   */
   readonly lbId?: string;
   /**
   * The name of the load-balancer certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate#name DataScalewayLbCertificate#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate#name DataScalewayLbCertificate#name}
   */
   readonly name?: string;
 }
@@ -43,6 +43,17 @@ export function dataScalewayLbCertificateCustomCertificateToTerraform(struct?: D
   }
   return {
   }
+}
+
+
+export function dataScalewayLbCertificateCustomCertificateToHclTerraform(struct?: DataScalewayLbCertificateCustomCertificate): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbCertificateCustomCertificateOutputReference extends cdktf.ComplexObject {
@@ -109,6 +120,17 @@ export function dataScalewayLbCertificateLetsencryptToTerraform(struct?: DataSca
   }
 }
 
+
+export function dataScalewayLbCertificateLetsencryptToHclTerraform(struct?: DataScalewayLbCertificateLetsencrypt): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
 export class DataScalewayLbCertificateLetsencryptOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
 
@@ -168,7 +190,7 @@ export class DataScalewayLbCertificateLetsencryptList extends cdktf.ComplexList 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate scaleway_lb_certificate}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate scaleway_lb_certificate}
 */
 export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
 
@@ -184,7 +206,7 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLbCertificate resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLbCertificate to import
-  * @param importFromId The id of the existing DataScalewayLbCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLbCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLbCertificate to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -196,7 +218,7 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_certificate scaleway_lb_certificate} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_certificate scaleway_lb_certificate} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -207,8 +229,8 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_certificate',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -345,5 +367,37 @@ export class DataScalewayLbCertificate extends cdktf.TerraformDataSource {
       lb_id: cdktf.stringToTerraform(this._lbId),
       name: cdktf.stringToTerraform(this._name),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      certificate_id: {
+        value: cdktf.stringToHclTerraform(this._certificateId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      lb_id: {
+        value: cdktf.stringToHclTerraform(this._lbId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

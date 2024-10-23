@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface IotRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the route's hub
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#hub_id IotRoute#hub_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#hub_id IotRoute#hub_id}
   */
   readonly hubId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#id IotRoute#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#id IotRoute#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface IotRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the route
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#name IotRoute#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#name IotRoute#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#region IotRoute#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#region IotRoute#region}
   */
   readonly region?: string;
   /**
   * The Topic the route subscribes to (wildcards allowed)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#topic IotRoute#topic}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#topic IotRoute#topic}
   */
   readonly topic: string;
   /**
   * database block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#database IotRoute#database}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#database IotRoute#database}
   */
   readonly database?: IotRouteDatabase;
   /**
   * rest block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#rest IotRoute#rest}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#rest IotRoute#rest}
   */
   readonly rest?: IotRouteRest;
   /**
   * s3 block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#s3 IotRoute#s3}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#s3 IotRoute#s3}
   */
   readonly s3?: IotRouteS3;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#timeouts IotRoute#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#timeouts IotRoute#timeouts}
   */
   readonly timeouts?: IotRouteTimeouts;
 }
@@ -67,37 +67,37 @@ export interface IotRouteDatabase {
   /**
   * The database name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#dbname IotRoute#dbname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#dbname IotRoute#dbname}
   */
   readonly dbname: string;
   /**
   * The database hostname
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#host IotRoute#host}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#host IotRoute#host}
   */
   readonly host: string;
   /**
   * The database password
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#password IotRoute#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#password IotRoute#password}
   */
   readonly password: string;
   /**
   * The database port
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#port IotRoute#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#port IotRoute#port}
   */
   readonly port: number;
   /**
   * SQL query to be executed ($TOPIC and $PAYLOAD variables are available, see documentation)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#query IotRoute#query}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#query IotRoute#query}
   */
   readonly query: string;
   /**
   * The database username
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#username IotRoute#username}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#username IotRoute#username}
   */
   readonly username: string;
 }
@@ -115,6 +115,55 @@ export function iotRouteDatabaseToTerraform(struct?: IotRouteDatabaseOutputRefer
     query: cdktf.stringToTerraform(struct!.query),
     username: cdktf.stringToTerraform(struct!.username),
   }
+}
+
+
+export function iotRouteDatabaseToHclTerraform(struct?: IotRouteDatabaseOutputReference | IotRouteDatabase): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    dbname: {
+      value: cdktf.stringToHclTerraform(struct!.dbname),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    host: {
+      value: cdktf.stringToHclTerraform(struct!.host),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    password: {
+      value: cdktf.stringToHclTerraform(struct!.password),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    port: {
+      value: cdktf.numberToHclTerraform(struct!.port),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    query: {
+      value: cdktf.stringToHclTerraform(struct!.query),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    username: {
+      value: cdktf.stringToHclTerraform(struct!.username),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotRouteDatabaseOutputReference extends cdktf.ComplexObject {
@@ -261,19 +310,19 @@ export interface IotRouteRest {
   /**
   * The HTTP call extra headers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#headers IotRoute#headers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#headers IotRoute#headers}
   */
   readonly headers: { [key: string]: string };
   /**
   * The URI of the REST endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#uri IotRoute#uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#uri IotRoute#uri}
   */
   readonly uri: string;
   /**
   * The HTTP Verb used to call REST URI
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#verb IotRoute#verb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#verb IotRoute#verb}
   */
   readonly verb: string;
 }
@@ -288,6 +337,37 @@ export function iotRouteRestToTerraform(struct?: IotRouteRestOutputReference | I
     uri: cdktf.stringToTerraform(struct!.uri),
     verb: cdktf.stringToTerraform(struct!.verb),
   }
+}
+
+
+export function iotRouteRestToHclTerraform(struct?: IotRouteRestOutputReference | IotRouteRest): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    headers: {
+      value: cdktf.hashMapperHcl(cdktf.stringToHclTerraform)(struct!.headers),
+      isBlock: false,
+      type: "map",
+      storageClassType: "stringMap",
+    },
+    uri: {
+      value: cdktf.stringToHclTerraform(struct!.uri),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    verb: {
+      value: cdktf.stringToHclTerraform(struct!.verb),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotRouteRestOutputReference extends cdktf.ComplexObject {
@@ -377,25 +457,25 @@ export interface IotRouteS3 {
   /**
   * The name of the S3 route's destination bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#bucket_name IotRoute#bucket_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#bucket_name IotRoute#bucket_name}
   */
   readonly bucketName: string;
   /**
   * The region of the S3 route's destination bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#bucket_region IotRoute#bucket_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#bucket_region IotRoute#bucket_region}
   */
   readonly bucketRegion: string;
   /**
   * The string to prefix object names with
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#object_prefix IotRoute#object_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#object_prefix IotRoute#object_prefix}
   */
   readonly objectPrefix?: string;
   /**
   * How the S3 route's objects will be created: one per topic or one per message
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#strategy IotRoute#strategy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#strategy IotRoute#strategy}
   */
   readonly strategy: string;
 }
@@ -411,6 +491,43 @@ export function iotRouteS3ToTerraform(struct?: IotRouteS3OutputReference | IotRo
     object_prefix: cdktf.stringToTerraform(struct!.objectPrefix),
     strategy: cdktf.stringToTerraform(struct!.strategy),
   }
+}
+
+
+export function iotRouteS3ToHclTerraform(struct?: IotRouteS3OutputReference | IotRouteS3): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    bucket_name: {
+      value: cdktf.stringToHclTerraform(struct!.bucketName),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    bucket_region: {
+      value: cdktf.stringToHclTerraform(struct!.bucketRegion),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    object_prefix: {
+      value: cdktf.stringToHclTerraform(struct!.objectPrefix),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    strategy: {
+      value: cdktf.stringToHclTerraform(struct!.strategy),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotRouteS3OutputReference extends cdktf.ComplexObject {
@@ -520,11 +637,11 @@ export class IotRouteS3OutputReference extends cdktf.ComplexObject {
 }
 export interface IotRouteTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#create IotRoute#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#create IotRoute#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#default IotRoute#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#default IotRoute#default}
   */
   readonly default?: string;
 }
@@ -538,6 +655,31 @@ export function iotRouteTimeoutsToTerraform(struct?: IotRouteTimeouts | cdktf.IR
     create: cdktf.stringToTerraform(struct!.create),
     default: cdktf.stringToTerraform(struct!.default),
   }
+}
+
+
+export function iotRouteTimeoutsToHclTerraform(struct?: IotRouteTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotRouteTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -622,7 +764,7 @@ export class IotRouteTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route scaleway_iot_route}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route scaleway_iot_route}
 */
 export class IotRoute extends cdktf.TerraformResource {
 
@@ -638,7 +780,7 @@ export class IotRoute extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IotRoute resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IotRoute to import
-  * @param importFromId The id of the existing IotRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IotRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IotRoute to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -650,7 +792,7 @@ export class IotRoute extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_route scaleway_iot_route} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_route scaleway_iot_route} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -661,8 +803,8 @@ export class IotRoute extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iot_route',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -843,5 +985,67 @@ export class IotRoute extends cdktf.TerraformResource {
       s3: iotRouteS3ToTerraform(this._s3.internalValue),
       timeouts: iotRouteTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      hub_id: {
+        value: cdktf.stringToHclTerraform(this._hubId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      topic: {
+        value: cdktf.stringToHclTerraform(this._topic),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      database: {
+        value: iotRouteDatabaseToHclTerraform(this._database.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IotRouteDatabaseList",
+      },
+      rest: {
+        value: iotRouteRestToHclTerraform(this._rest.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IotRouteRestList",
+      },
+      s3: {
+        value: iotRouteS3ToHclTerraform(this._s3.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "IotRouteS3List",
+      },
+      timeouts: {
+        value: iotRouteTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "IotRouteTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

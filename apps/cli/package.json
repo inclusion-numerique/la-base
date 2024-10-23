@@ -3,43 +3,46 @@
   "version": "0.1.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
+  "type": "module",
   "scripts": {
-    "cli": "dotenv -e ../../.env -- ts-node -r tsconfig-paths/register src/index.ts",
+    "cli": "dotenv -e ../../.env -- tsx src/index.ts",
     "lint": "eslint src",
     "tsc": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "build": "tsc"
   },
   "engines": {
-    "node": "^20.11"
+    "node": "^22.9"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.556.0",
-    "@commander-js/extra-typings": "^11.1.0",
-    "axios": "^1.6.8",
-    "axios-retry": "^4.1.0",
-    "commander": "^11.1.0",
-    "csv-parse": "^5.5.5",
-    "csv-stringify": "^6.4.6",
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@commander-js/extra-typings": "^12.1.0",
+    "@octokit/core": "^6.1.2",
+    "@octokit/plugin-rest-endpoint-methods": "^13.2.4",
+    "axios": "^1.7.5",
+    "axios-retry": "^4.5.0",
+    "commander": "^12.1.0",
+    "csv-parse": "^5.5.6",
+    "csv-stringify": "^6.5.1",
     "dotenv": "^16.4.5",
     "form-data": "^4.0.0",
-    "lodash": "^4.17.21",
-    "nodemailer": "^6.9.13",
+    "lodash-es": "^4.17.21",
+    "nodemailer": "^6.9.14",
     "octokit": "^3.2.0",
-    "picocolors": "^1.0.0",
-    "slug": "^8.2.3",
-    "ts-node": "^10.9.2",
+    "picocolors": "^1.0.1",
+    "slug": "^9.1.0",
     "tsconfig-paths": "^4.2.0",
-    "undici": "^5.28.4",
-    "zod": "^3.22.5"
+    "tsx": "^4.19.0",
+    "undici": "^6.19.8",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.0",
-    "@types/node": "^20.12.7",
-    "@types/slug": "^5.0.8",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.5.0",
+    "@types/slug": "^5.0.9",
     "eslint": "^8.57.0",
     "jest": "^29.7.0",
-    "joi": "^17.12.3",
-    "typescript": "^5.4.5"
+    "joi": "^17.13.3",
+    "typescript": "^5.5.4"
   }
 }

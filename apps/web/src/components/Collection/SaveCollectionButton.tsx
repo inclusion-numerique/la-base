@@ -1,6 +1,10 @@
 import React from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type {
+  FrIconClassName,
+  RiIconClassName,
+} from '@codegouvfr/react-dsfr/src/fr/generatedFromCss/classNames'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { loginUrl } from '@app/web/security/login'
 import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
 import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
@@ -15,8 +19,9 @@ const cardButtonProps = {
   ...viewButtonProps,
   priority: 'tertiary no outline',
 } as const
-const defaultIconId = 'ri-bookmark-3-line' as const
-const alreadySavedIconId = 'ri-bookmark-3-fill' as const
+const defaultIconId: FrIconClassName | RiIconClassName = 'ri-bookmark-3-line'
+const alreadySavedIconId: FrIconClassName | RiIconClassName =
+  'ri-bookmark-3-fill'
 
 const SaveCollectionButton = ({
   className,

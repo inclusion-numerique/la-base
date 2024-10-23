@@ -55,15 +55,15 @@ type Story = StoryObj<typeof RichRadioFormField>
 
 const options: RichRadioOption[] = [
   {
-    name: 'Choix 1',
+    label: 'Choix 1',
     value: 'choice-1',
   },
   {
-    name: 'Choix 2',
+    label: 'Choix 2',
     value: 'choice-2',
   },
   {
-    name: 'Choix 3',
+    label: 'Choix 3',
     value: 'choice-3',
   },
 ]
@@ -116,7 +116,7 @@ export const Hints: Story = {
     label: 'Label',
     options: options.map((option) => ({
       ...option,
-      hint: `Aide pour ${option.name}`,
+      hint: `Aide pour ${option.label}`,
     })),
   },
 }

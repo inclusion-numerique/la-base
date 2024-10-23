@@ -1,5 +1,5 @@
 import { givenUser } from '@app/e2e/support/given/givenUser'
-import { CreateUserInput } from '../../authentication/user.tasks'
+import type { CreateUserInput } from '@app/e2e/tasks/handlers/user.tasks'
 
 export const addFeedbackToResource = ({
   slug,

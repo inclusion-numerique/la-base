@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface VpcPublicGatewayConfig extends cdktf.TerraformMetaArguments {
   /**
   * Enable SSH bastion on the gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#bastion_enabled VpcPublicGateway#bastion_enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#bastion_enabled VpcPublicGateway#bastion_enabled}
   */
   readonly bastionEnabled?: boolean | cdktf.IResolvable;
   /**
   * Port of the SSH bastion
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#bastion_port VpcPublicGateway#bastion_port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#bastion_port VpcPublicGateway#bastion_port}
   */
   readonly bastionPort?: number;
   /**
   * Enable SMTP on the gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#enable_smtp VpcPublicGateway#enable_smtp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#enable_smtp VpcPublicGateway#enable_smtp}
   */
   readonly enableSmtp?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#id VpcPublicGateway#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#id VpcPublicGateway#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,71 +35,77 @@ export interface VpcPublicGatewayConfig extends cdktf.TerraformMetaArguments {
   /**
   * attach an existing IP to the gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#ip_id VpcPublicGateway#ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#ip_id VpcPublicGateway#ip_id}
   */
   readonly ipId?: string;
   /**
   * name of the gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#name VpcPublicGateway#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#name VpcPublicGateway#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#project_id VpcPublicGateway#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#project_id VpcPublicGateway#project_id}
   */
   readonly projectId?: string;
   /**
+  * Trigger a refresh of the SSH keys for a given Public Gateway by changing this field's value
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#refresh_ssh_keys VpcPublicGateway#refresh_ssh_keys}
+  */
+  readonly refreshSshKeys?: string;
+  /**
   * The tags associated with public gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#tags VpcPublicGateway#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#tags VpcPublicGateway#tags}
   */
   readonly tags?: string[];
   /**
   * gateway type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#type VpcPublicGateway#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#type VpcPublicGateway#type}
   */
   readonly type: string;
   /**
   * override the gateway's default recursive DNS servers, if DNS features are enabled
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#upstream_dns_servers VpcPublicGateway#upstream_dns_servers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#upstream_dns_servers VpcPublicGateway#upstream_dns_servers}
   */
   readonly upstreamDnsServers?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#zone VpcPublicGateway#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#zone VpcPublicGateway#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#timeouts VpcPublicGateway#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#timeouts VpcPublicGateway#timeouts}
   */
   readonly timeouts?: VpcPublicGatewayTimeouts;
 }
 export interface VpcPublicGatewayTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#create VpcPublicGateway#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#create VpcPublicGateway#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#default VpcPublicGateway#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#default VpcPublicGateway#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#delete VpcPublicGateway#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#delete VpcPublicGateway#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#read VpcPublicGateway#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#read VpcPublicGateway#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#update VpcPublicGateway#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#update VpcPublicGateway#update}
   */
   readonly update?: string;
 }
@@ -116,6 +122,49 @@ export function vpcPublicGatewayTimeoutsToTerraform(struct?: VpcPublicGatewayTim
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function vpcPublicGatewayTimeoutsToHclTerraform(struct?: VpcPublicGatewayTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class VpcPublicGatewayTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -266,7 +315,7 @@ export class VpcPublicGatewayTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway scaleway_vpc_public_gateway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway scaleway_vpc_public_gateway}
 */
 export class VpcPublicGateway extends cdktf.TerraformResource {
 
@@ -282,7 +331,7 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a VpcPublicGateway resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the VpcPublicGateway to import
-  * @param importFromId The id of the existing VpcPublicGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing VpcPublicGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the VpcPublicGateway to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -294,7 +343,7 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/vpc_public_gateway scaleway_vpc_public_gateway} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/vpc_public_gateway scaleway_vpc_public_gateway} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -305,8 +354,8 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_public_gateway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -323,6 +372,7 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
     this._ipId = config.ipId;
     this._name = config.name;
     this._projectId = config.projectId;
+    this._refreshSshKeys = config.refreshSshKeys;
     this._tags = config.tags;
     this._type = config.type;
     this._upstreamDnsServers = config.upstreamDnsServers;
@@ -456,6 +506,22 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
     return this._projectId;
   }
 
+  // refresh_ssh_keys - computed: false, optional: true, required: false
+  private _refreshSshKeys?: string; 
+  public get refreshSshKeys() {
+    return this.getStringAttribute('refresh_ssh_keys');
+  }
+  public set refreshSshKeys(value: string) {
+    this._refreshSshKeys = value;
+  }
+  public resetRefreshSshKeys() {
+    this._refreshSshKeys = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get refreshSshKeysInput() {
+    return this._refreshSshKeys;
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -556,11 +622,98 @@ export class VpcPublicGateway extends cdktf.TerraformResource {
       ip_id: cdktf.stringToTerraform(this._ipId),
       name: cdktf.stringToTerraform(this._name),
       project_id: cdktf.stringToTerraform(this._projectId),
+      refresh_ssh_keys: cdktf.stringToTerraform(this._refreshSshKeys),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       type: cdktf.stringToTerraform(this._type),
       upstream_dns_servers: cdktf.listMapper(cdktf.stringToTerraform, false)(this._upstreamDnsServers),
       zone: cdktf.stringToTerraform(this._zone),
       timeouts: vpcPublicGatewayTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      bastion_enabled: {
+        value: cdktf.booleanToHclTerraform(this._bastionEnabled),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      bastion_port: {
+        value: cdktf.numberToHclTerraform(this._bastionPort),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      enable_smtp: {
+        value: cdktf.booleanToHclTerraform(this._enableSmtp),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ip_id: {
+        value: cdktf.stringToHclTerraform(this._ipId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      refresh_ssh_keys: {
+        value: cdktf.stringToHclTerraform(this._refreshSshKeys),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      type: {
+        value: cdktf.stringToHclTerraform(this._type),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      upstream_dns_servers: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._upstreamDnsServers),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeouts: {
+        value: vpcPublicGatewayTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "VpcPublicGatewayTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

@@ -1,5 +1,26 @@
+/* Full width row for a grid layout child */
+.fr-grid-row--full {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 62em) {
+  .fr-lg-col {
+    flex: 1;
+  }
+}
+
+@media (min-width: 48em) {
+  .fr-md-col {
+    flex: 1;
+  }
+}
+
 /* sm grid rules */
 @media (min-width: 36em) {
+  .fr-sm-col {
+    flex: 1;
+  }
+
   .fr-col-sm-auto {
     flex: 0 0 auto;
     width: auto;

@@ -1,7 +1,7 @@
 import { givenUser } from '@app/e2e/support/given/givenUser'
 
-describe("Page d'accueil", () => {
-  it("La page d'accueil s'affiche correctement, avec les styles du DSFR", () => {
+describe('Page d’accueil', () => {
+  it('La page d’accueil s’affiche correctement, avec les styles du DSFR', () => {
     cy.visit('/')
     cy.dsfrStylesShouldBeLoaded()
     cy.get('.fr-header__brand a').should(

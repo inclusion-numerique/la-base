@@ -5,7 +5,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import { prismaClient } from '@app/web/prismaClient'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 import {
@@ -53,11 +53,11 @@ const CollectionCreationPage = async ({
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <div className="fr-container">
         <Breadcrumbs parents={parents} currentPage="Créer une collection" />
       </div>
-      <main id={contentId} className="fr-mt-1w">
+      <main id={contentId} className="fr-pt-1w">
         <CreateCollection user={user} base={base} />
       </main>
     </>

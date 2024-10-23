@@ -22,12 +22,12 @@ export const addNextPublicVariablesToDotEnv = new Command()
           ? { name: 'NEXT_PUBLIC_SENTRY_DSN', value: '' }
           : { name: 'NEXT_PUBLIC_SENTRY_ENVIRONMENT', value: namespace },
         {
-          name: 'NEXT_PUBLIC_INCLUSION_CONNECT_HOSTNAME',
-          value: `$INCLUSION_CONNECT_${targetEnv.toUpperCase()}_HOSTNAME`,
+          name: 'NEXT_PUBLIC_PROCONNECT_HOSTNAME',
+          value: `$PROCONNECT_${targetEnv.toUpperCase()}_HOSTNAME`,
         },
         {
-          name: 'NEXT_PUBLIC_INCLUSION_CONNECT_CLIENT_ID',
-          value: `$INCLUSION_CONNECT_${targetEnv.toUpperCase()}_CLIENT_ID`,
+          name: 'NEXT_PUBLIC_PROCONNECT_CLIENT_ID',
+          value: `$PROCONNECT_${targetEnv.toUpperCase()}_CLIENT_ID`,
         },
       ],
     })

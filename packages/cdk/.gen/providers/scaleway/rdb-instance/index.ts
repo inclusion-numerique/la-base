@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,35 +10,35 @@ export interface RdbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Boolean to store logical backups in the same region as the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#backup_same_region RdbInstance#backup_same_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#backup_same_region RdbInstance#backup_same_region}
   */
   readonly backupSameRegion?: boolean | cdktf.IResolvable;
   /**
   * Backup schedule frequency in hours
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#backup_schedule_frequency RdbInstance#backup_schedule_frequency}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#backup_schedule_frequency RdbInstance#backup_schedule_frequency}
   */
   readonly backupScheduleFrequency?: number;
   /**
   * Backup schedule retention in days
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#backup_schedule_retention RdbInstance#backup_schedule_retention}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#backup_schedule_retention RdbInstance#backup_schedule_retention}
   */
   readonly backupScheduleRetention?: number;
   /**
   * Disable automated backup for the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#disable_backup RdbInstance#disable_backup}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#disable_backup RdbInstance#disable_backup}
   */
   readonly disableBackup?: boolean | cdktf.IResolvable;
   /**
   * Database's engine version id
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#engine RdbInstance#engine}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#engine RdbInstance#engine}
   */
   readonly engine: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#id RdbInstance#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#id RdbInstance#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -47,91 +47,97 @@ export interface RdbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Map of engine settings to be set at database initialisation.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#init_settings RdbInstance#init_settings}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#init_settings RdbInstance#init_settings}
   */
   readonly initSettings?: { [key: string]: string };
   /**
   * Enable or disable high availability for the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#is_ha_cluster RdbInstance#is_ha_cluster}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#is_ha_cluster RdbInstance#is_ha_cluster}
   */
   readonly isHaCluster?: boolean | cdktf.IResolvable;
   /**
   * Name of the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#name RdbInstance#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#name RdbInstance#name}
   */
   readonly name?: string;
   /**
   * The type of database instance you want to create
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#node_type RdbInstance#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#node_type RdbInstance#node_type}
   */
   readonly nodeType: string;
   /**
   * Password for the first user of the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#password RdbInstance#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#password RdbInstance#password}
   */
   readonly password?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#project_id RdbInstance#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#project_id RdbInstance#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#region RdbInstance#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#region RdbInstance#region}
   */
   readonly region?: string;
   /**
   * Map of engine settings to be set on a running instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#settings RdbInstance#settings}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#settings RdbInstance#settings}
   */
   readonly settings?: { [key: string]: string };
   /**
   * List of tags ["tag1", "tag2", ...] attached to a database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#tags RdbInstance#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#tags RdbInstance#tags}
   */
   readonly tags?: string[];
   /**
   * Identifier for the first user of the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#user_name RdbInstance#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#user_name RdbInstance#user_name}
   */
   readonly userName?: string;
   /**
   * Volume size (in GB) when volume_type is not lssd
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#volume_size_in_gb RdbInstance#volume_size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#volume_size_in_gb RdbInstance#volume_size_in_gb}
   */
   readonly volumeSizeInGb?: number;
   /**
   * Type of volume where data are stored
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#volume_type RdbInstance#volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#volume_type RdbInstance#volume_type}
   */
   readonly volumeType?: string;
   /**
   * load_balancer block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#load_balancer RdbInstance#load_balancer}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#load_balancer RdbInstance#load_balancer}
   */
   readonly loadBalancer?: RdbInstanceLoadBalancer[] | cdktf.IResolvable;
   /**
+  * logs_policy block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#logs_policy RdbInstance#logs_policy}
+  */
+  readonly logsPolicy?: RdbInstanceLogsPolicy;
+  /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#private_network RdbInstance#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#private_network RdbInstance#private_network}
   */
   readonly privateNetwork?: RdbInstancePrivateNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#timeouts RdbInstance#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#timeouts RdbInstance#timeouts}
   */
   readonly timeouts?: RdbInstanceTimeouts;
 }
@@ -145,6 +151,17 @@ export function rdbInstanceReadReplicasToTerraform(struct?: RdbInstanceReadRepli
   }
   return {
   }
+}
+
+
+export function rdbInstanceReadReplicasToHclTerraform(struct?: RdbInstanceReadReplicas): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class RdbInstanceReadReplicasOutputReference extends cdktf.ComplexObject {
@@ -213,7 +230,7 @@ export interface RdbInstanceLoadBalancer {
   /**
   * The endpoint ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#endpoint_id RdbInstance#endpoint_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#endpoint_id RdbInstance#endpoint_id}
   */
   readonly endpointId?: string;
 }
@@ -226,6 +243,25 @@ export function rdbInstanceLoadBalancerToTerraform(struct?: RdbInstanceLoadBalan
   return {
     endpoint_id: cdktf.stringToTerraform(struct!.endpointId),
   }
+}
+
+
+export function rdbInstanceLoadBalancerToHclTerraform(struct?: RdbInstanceLoadBalancer | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    endpoint_id: {
+      value: cdktf.stringToHclTerraform(struct!.endpointId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class RdbInstanceLoadBalancerOutputReference extends cdktf.ComplexObject {
@@ -328,35 +364,156 @@ export class RdbInstanceLoadBalancerList extends cdktf.ComplexList {
     return new RdbInstanceLoadBalancerOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface RdbInstanceLogsPolicy {
+  /**
+  * The max age (in days) of remote logs to keep on the Database Instance
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#max_age_retention RdbInstance#max_age_retention}
+  */
+  readonly maxAgeRetention?: number;
+  /**
+  * The max disk size of remote logs to keep on the Database Instance.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#total_disk_retention RdbInstance#total_disk_retention}
+  */
+  readonly totalDiskRetention?: number;
+}
+
+export function rdbInstanceLogsPolicyToTerraform(struct?: RdbInstanceLogsPolicyOutputReference | RdbInstanceLogsPolicy): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    max_age_retention: cdktf.numberToTerraform(struct!.maxAgeRetention),
+    total_disk_retention: cdktf.numberToTerraform(struct!.totalDiskRetention),
+  }
+}
+
+
+export function rdbInstanceLogsPolicyToHclTerraform(struct?: RdbInstanceLogsPolicyOutputReference | RdbInstanceLogsPolicy): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    max_age_retention: {
+      value: cdktf.numberToHclTerraform(struct!.maxAgeRetention),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    total_disk_retention: {
+      value: cdktf.numberToHclTerraform(struct!.totalDiskRetention),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class RdbInstanceLogsPolicyOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): RdbInstanceLogsPolicy | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._maxAgeRetention !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.maxAgeRetention = this._maxAgeRetention;
+    }
+    if (this._totalDiskRetention !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.totalDiskRetention = this._totalDiskRetention;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: RdbInstanceLogsPolicy | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._maxAgeRetention = undefined;
+      this._totalDiskRetention = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._maxAgeRetention = value.maxAgeRetention;
+      this._totalDiskRetention = value.totalDiskRetention;
+    }
+  }
+
+  // max_age_retention - computed: true, optional: true, required: false
+  private _maxAgeRetention?: number; 
+  public get maxAgeRetention() {
+    return this.getNumberAttribute('max_age_retention');
+  }
+  public set maxAgeRetention(value: number) {
+    this._maxAgeRetention = value;
+  }
+  public resetMaxAgeRetention() {
+    this._maxAgeRetention = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get maxAgeRetentionInput() {
+    return this._maxAgeRetention;
+  }
+
+  // total_disk_retention - computed: true, optional: true, required: false
+  private _totalDiskRetention?: number; 
+  public get totalDiskRetention() {
+    return this.getNumberAttribute('total_disk_retention');
+  }
+  public set totalDiskRetention(value: number) {
+    this._totalDiskRetention = value;
+  }
+  public resetTotalDiskRetention() {
+    this._totalDiskRetention = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get totalDiskRetentionInput() {
+    return this._totalDiskRetention;
+  }
+}
 export interface RdbInstancePrivateNetwork {
   /**
   * Whether or not the private network endpoint should be configured with IPAM
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#enable_ipam RdbInstance#enable_ipam}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#enable_ipam RdbInstance#enable_ipam}
   */
   readonly enableIpam?: boolean | cdktf.IResolvable;
   /**
   * The IP with the given mask within the private subnet
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#ip_net RdbInstance#ip_net}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#ip_net RdbInstance#ip_net}
   */
   readonly ipNet?: string;
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#pn_id RdbInstance#pn_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#pn_id RdbInstance#pn_id}
   */
   readonly pnId: string;
   /**
   * The port of your private service
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#port RdbInstance#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#port RdbInstance#port}
   */
   readonly port?: number;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#zone RdbInstance#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#zone RdbInstance#zone}
   */
   readonly zone?: string;
 }
@@ -373,6 +530,49 @@ export function rdbInstancePrivateNetworkToTerraform(struct?: RdbInstancePrivate
     port: cdktf.numberToTerraform(struct!.port),
     zone: cdktf.stringToTerraform(struct!.zone),
   }
+}
+
+
+export function rdbInstancePrivateNetworkToHclTerraform(struct?: RdbInstancePrivateNetworkOutputReference | RdbInstancePrivateNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    enable_ipam: {
+      value: cdktf.booleanToHclTerraform(struct!.enableIpam),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    ip_net: {
+      value: cdktf.stringToHclTerraform(struct!.ipNet),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    pn_id: {
+      value: cdktf.stringToHclTerraform(struct!.pnId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    port: {
+      value: cdktf.numberToHclTerraform(struct!.port),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+    zone: {
+      value: cdktf.stringToHclTerraform(struct!.zone),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class RdbInstancePrivateNetworkOutputReference extends cdktf.ComplexObject {
@@ -530,23 +730,23 @@ export class RdbInstancePrivateNetworkOutputReference extends cdktf.ComplexObjec
 }
 export interface RdbInstanceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#create RdbInstance#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#create RdbInstance#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#default RdbInstance#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#default RdbInstance#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#delete RdbInstance#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#delete RdbInstance#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#read RdbInstance#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#read RdbInstance#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#update RdbInstance#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#update RdbInstance#update}
   */
   readonly update?: string;
 }
@@ -563,6 +763,49 @@ export function rdbInstanceTimeoutsToTerraform(struct?: RdbInstanceTimeouts | cd
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function rdbInstanceTimeoutsToHclTerraform(struct?: RdbInstanceTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class RdbInstanceTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -713,7 +956,7 @@ export class RdbInstanceTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance scaleway_rdb_instance}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance scaleway_rdb_instance}
 */
 export class RdbInstance extends cdktf.TerraformResource {
 
@@ -729,7 +972,7 @@ export class RdbInstance extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a RdbInstance resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the RdbInstance to import
-  * @param importFromId The id of the existing RdbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing RdbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the RdbInstance to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -741,7 +984,7 @@ export class RdbInstance extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_instance scaleway_rdb_instance} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_instance scaleway_rdb_instance} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -752,8 +995,8 @@ export class RdbInstance extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_rdb_instance',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -782,6 +1025,7 @@ export class RdbInstance extends cdktf.TerraformResource {
     this._volumeSizeInGb = config.volumeSizeInGb;
     this._volumeType = config.volumeType;
     this._loadBalancer.internalValue = config.loadBalancer;
+    this._logsPolicy.internalValue = config.logsPolicy;
     this._privateNetwork.internalValue = config.privateNetwork;
     this._timeouts.internalValue = config.timeouts;
   }
@@ -1114,6 +1358,22 @@ export class RdbInstance extends cdktf.TerraformResource {
     return this._loadBalancer.internalValue;
   }
 
+  // logs_policy - computed: false, optional: true, required: false
+  private _logsPolicy = new RdbInstanceLogsPolicyOutputReference(this, "logs_policy");
+  public get logsPolicy() {
+    return this._logsPolicy;
+  }
+  public putLogsPolicy(value: RdbInstanceLogsPolicy) {
+    this._logsPolicy.internalValue = value;
+  }
+  public resetLogsPolicy() {
+    this._logsPolicy.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get logsPolicyInput() {
+    return this._logsPolicy.internalValue;
+  }
+
   // private_network - computed: false, optional: true, required: false
   private _privateNetwork = new RdbInstancePrivateNetworkOutputReference(this, "private_network");
   public get privateNetwork() {
@@ -1171,8 +1431,149 @@ export class RdbInstance extends cdktf.TerraformResource {
       volume_size_in_gb: cdktf.numberToTerraform(this._volumeSizeInGb),
       volume_type: cdktf.stringToTerraform(this._volumeType),
       load_balancer: cdktf.listMapper(rdbInstanceLoadBalancerToTerraform, true)(this._loadBalancer.internalValue),
+      logs_policy: rdbInstanceLogsPolicyToTerraform(this._logsPolicy.internalValue),
       private_network: rdbInstancePrivateNetworkToTerraform(this._privateNetwork.internalValue),
       timeouts: rdbInstanceTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      backup_same_region: {
+        value: cdktf.booleanToHclTerraform(this._backupSameRegion),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      backup_schedule_frequency: {
+        value: cdktf.numberToHclTerraform(this._backupScheduleFrequency),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      backup_schedule_retention: {
+        value: cdktf.numberToHclTerraform(this._backupScheduleRetention),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      disable_backup: {
+        value: cdktf.booleanToHclTerraform(this._disableBackup),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      engine: {
+        value: cdktf.stringToHclTerraform(this._engine),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      init_settings: {
+        value: cdktf.hashMapperHcl(cdktf.stringToHclTerraform)(this._initSettings),
+        isBlock: false,
+        type: "map",
+        storageClassType: "stringMap",
+      },
+      is_ha_cluster: {
+        value: cdktf.booleanToHclTerraform(this._isHaCluster),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      node_type: {
+        value: cdktf.stringToHclTerraform(this._nodeType),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      password: {
+        value: cdktf.stringToHclTerraform(this._password),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      settings: {
+        value: cdktf.hashMapperHcl(cdktf.stringToHclTerraform)(this._settings),
+        isBlock: false,
+        type: "map",
+        storageClassType: "stringMap",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      user_name: {
+        value: cdktf.stringToHclTerraform(this._userName),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      volume_size_in_gb: {
+        value: cdktf.numberToHclTerraform(this._volumeSizeInGb),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      volume_type: {
+        value: cdktf.stringToHclTerraform(this._volumeType),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      load_balancer: {
+        value: cdktf.listMapperHcl(rdbInstanceLoadBalancerToHclTerraform, true)(this._loadBalancer.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RdbInstanceLoadBalancerList",
+      },
+      logs_policy: {
+        value: rdbInstanceLogsPolicyToHclTerraform(this._logsPolicy.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RdbInstanceLogsPolicyList",
+      },
+      private_network: {
+        value: rdbInstancePrivateNetworkToHclTerraform(this._privateNetwork.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RdbInstancePrivateNetworkList",
+      },
+      timeouts: {
+        value: rdbInstanceTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "RdbInstanceTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

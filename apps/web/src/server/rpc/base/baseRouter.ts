@@ -58,7 +58,7 @@ export const baseRouter = router({
         },
       })
 
-      Promise.all([
+      Promise.all(
         members.map((member) =>
           sendInviteMemberEmail({
             baseTitle: input.title,
@@ -67,7 +67,7 @@ export const baseRouter = router({
             email: member.email,
           }),
         ),
-      ]).catch((error) => Sentry.captureException(error))
+      ).catch((error) => Sentry.captureException(error))
 
       return base
     }),

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,41 +10,41 @@ export interface IotHubConfig extends cdktf.TerraformMetaArguments {
   /**
   * Wether to enable the device auto provisioning or not
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#device_auto_provisioning IotHub#device_auto_provisioning}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#device_auto_provisioning IotHub#device_auto_provisioning}
   */
   readonly deviceAutoProvisioning?: boolean | cdktf.IResolvable;
   /**
   * Whether to enable the hub events or not
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#disable_events IotHub#disable_events}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#disable_events IotHub#disable_events}
   */
   readonly disableEvents?: boolean | cdktf.IResolvable;
   /**
   * Whether to enable the hub or not
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#enabled IotHub#enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#enabled IotHub#enabled}
   */
   readonly enabled?: boolean | cdktf.IResolvable;
   /**
   * Topic prefix for the hub events
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#events_topic_prefix IotHub#events_topic_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#events_topic_prefix IotHub#events_topic_prefix}
   */
   readonly eventsTopicPrefix?: string;
   /**
   * Custom user provided certificate authority
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#hub_ca IotHub#hub_ca}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#hub_ca IotHub#hub_ca}
   */
   readonly hubCa?: string;
   /**
   * Challenge certificate for the user provided hub CA
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#hub_ca_challenge IotHub#hub_ca_challenge}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#hub_ca_challenge IotHub#hub_ca_challenge}
   */
   readonly hubCaChallenge?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#id IotHub#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#id IotHub#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -53,37 +53,37 @@ export interface IotHubConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the hub
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#name IotHub#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#name IotHub#name}
   */
   readonly name: string;
   /**
   * The product plan of the hub
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#product_plan IotHub#product_plan}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#product_plan IotHub#product_plan}
   */
   readonly productPlan: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#project_id IotHub#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#project_id IotHub#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#region IotHub#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#region IotHub#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#timeouts IotHub#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#timeouts IotHub#timeouts}
   */
   readonly timeouts?: IotHubTimeouts;
 }
 export interface IotHubTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#default IotHub#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#default IotHub#default}
   */
   readonly default?: string;
 }
@@ -96,6 +96,25 @@ export function iotHubTimeoutsToTerraform(struct?: IotHubTimeouts | cdktf.IResol
   return {
     default: cdktf.stringToTerraform(struct!.default),
   }
+}
+
+
+export function iotHubTimeoutsToHclTerraform(struct?: IotHubTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class IotHubTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -158,7 +177,7 @@ export class IotHubTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub scaleway_iot_hub}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub scaleway_iot_hub}
 */
 export class IotHub extends cdktf.TerraformResource {
 
@@ -174,7 +193,7 @@ export class IotHub extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IotHub resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IotHub to import
-  * @param importFromId The id of the existing IotHub that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IotHub that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IotHub to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -186,7 +205,7 @@ export class IotHub extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/iot_hub scaleway_iot_hub} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iot_hub scaleway_iot_hub} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -197,8 +216,8 @@ export class IotHub extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iot_hub',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -476,5 +495,85 @@ export class IotHub extends cdktf.TerraformResource {
       region: cdktf.stringToTerraform(this._region),
       timeouts: iotHubTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      device_auto_provisioning: {
+        value: cdktf.booleanToHclTerraform(this._deviceAutoProvisioning),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      disable_events: {
+        value: cdktf.booleanToHclTerraform(this._disableEvents),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      enabled: {
+        value: cdktf.booleanToHclTerraform(this._enabled),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      events_topic_prefix: {
+        value: cdktf.stringToHclTerraform(this._eventsTopicPrefix),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      hub_ca: {
+        value: cdktf.stringToHclTerraform(this._hubCa),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      hub_ca_challenge: {
+        value: cdktf.stringToHclTerraform(this._hubCaChallenge),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      product_plan: {
+        value: cdktf.stringToHclTerraform(this._productPlan),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      timeouts: {
+        value: iotHubTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "IotHubTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

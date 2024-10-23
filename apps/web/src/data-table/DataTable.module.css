@@ -1,0 +1,59 @@
+.cellLinkContainer {
+    padding: 0 !important;
+}
+
+a.cellLink {
+    padding: 16px;
+    background: none;
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.rowLinkCell {
+    width: 0 !important;
+    padding: 0 !important;
+}
+
+.rowWithLink {
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--hover) !important;
+    }
+
+    &:active {
+        background-color: var(--active) !important;
+    }
+
+    td, th {
+        background-color: transparent !important;
+    }
+}
+
+.rowWithButton {
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--hover) !important;
+    }
+
+    &:active {
+        background-color: var(--active) !important;
+    }
+
+    td, th {
+        background-color: transparent !important;
+    }
+}
+
+.rowButtonCell {
+    width: 0 !important;
+    padding: 0 !important;
+
+    button {
+        padding: 0 !important;
+        width: 0;
+    }
+}

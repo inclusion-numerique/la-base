@@ -42,10 +42,10 @@ const NAME_PARTICLES = [
   ...ENGLISH_PARTICLES,
 ]
 
-const NAME_WORD = "^|[’'\\s-]"
+const NAME_WORD = String.raw`^|[’'\s-]`
 
 const toParticleRegexp = (particle: string) =>
-  `^${particle}\\s|\\s${particle}\\s`.replaceAll("'\\s", "['’]")
+  `^${particle}\\s|\\s${particle}\\s`.replaceAll(String.raw`'\s`, "['’]")
 
 const FIRST_LETTERS = new RegExp(
   `(?:${[...NAME_PARTICLES.map(toParticleRegexp), NAME_WORD].join('|')})(.)`,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayLbIpsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips#id DataScalewayLbIps#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#id DataScalewayLbIps#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,31 @@ export interface DataScalewayLbIpsConfig extends cdktf.TerraformMetaArguments {
   /**
   * IPs within a CIDR block like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips#ip_cidr_range DataScalewayLbIps#ip_cidr_range}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#ip_cidr_range DataScalewayLbIps#ip_cidr_range}
   */
   readonly ipCidrRange?: string;
   /**
+  * IP type to filter for
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#ip_type DataScalewayLbIps#ip_type}
+  */
+  readonly ipType?: string;
+  /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips#project_id DataScalewayLbIps#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#project_id DataScalewayLbIps#project_id}
   */
   readonly projectId?: string;
   /**
+  * IPs with these exact tags are listed
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#tags DataScalewayLbIps#tags}
+  */
+  readonly tags?: string[];
+  /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips#zone DataScalewayLbIps#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#zone DataScalewayLbIps#zone}
   */
   readonly zone?: string;
 }
@@ -43,6 +55,17 @@ export function dataScalewayLbIpsIpsToTerraform(struct?: DataScalewayLbIpsIps): 
   }
   return {
   }
+}
+
+
+export function dataScalewayLbIpsIpsToHclTerraform(struct?: DataScalewayLbIpsIps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class DataScalewayLbIpsIpsOutputReference extends cdktf.ComplexObject {
@@ -103,6 +126,11 @@ export class DataScalewayLbIpsIpsOutputReference extends cdktf.ComplexObject {
     return this.getStringAttribute('reverse');
   }
 
+  // tags - computed: true, optional: false, required: false
+  public get tags() {
+    return this.getListAttribute('tags');
+  }
+
   // zone - computed: true, optional: false, required: false
   public get zone() {
     return this.getStringAttribute('zone');
@@ -129,7 +157,7 @@ export class DataScalewayLbIpsIpsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips scaleway_lb_ips}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips scaleway_lb_ips}
 */
 export class DataScalewayLbIps extends cdktf.TerraformDataSource {
 
@@ -145,7 +173,7 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLbIps resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLbIps to import
-  * @param importFromId The id of the existing DataScalewayLbIps that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLbIps that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLbIps to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -157,7 +185,7 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/lb_ips scaleway_lb_ips} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/lb_ips scaleway_lb_ips} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -168,8 +196,8 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_ips',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -181,7 +209,9 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
     });
     this._id = config.id;
     this._ipCidrRange = config.ipCidrRange;
+    this._ipType = config.ipType;
     this._projectId = config.projectId;
+    this._tags = config.tags;
     this._zone = config.zone;
   }
 
@@ -221,6 +251,22 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
     return this._ipCidrRange;
   }
 
+  // ip_type - computed: false, optional: true, required: false
+  private _ipType?: string; 
+  public get ipType() {
+    return this.getStringAttribute('ip_type');
+  }
+  public set ipType(value: string) {
+    this._ipType = value;
+  }
+  public resetIpType() {
+    this._ipType = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipTypeInput() {
+    return this._ipType;
+  }
+
   // ips - computed: true, optional: false, required: false
   private _ips = new DataScalewayLbIpsIpsList(this, "ips", false);
   public get ips() {
@@ -248,6 +294,22 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
     return this._projectId;
   }
 
+  // tags - computed: false, optional: true, required: false
+  private _tags?: string[]; 
+  public get tags() {
+    return this.getListAttribute('tags');
+  }
+  public set tags(value: string[]) {
+    this._tags = value;
+  }
+  public resetTags() {
+    this._tags = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tagsInput() {
+    return this._tags;
+  }
+
   // zone - computed: true, optional: true, required: false
   private _zone?: string; 
   public get zone() {
@@ -272,8 +334,54 @@ export class DataScalewayLbIps extends cdktf.TerraformDataSource {
     return {
       id: cdktf.stringToTerraform(this._id),
       ip_cidr_range: cdktf.stringToTerraform(this._ipCidrRange),
+      ip_type: cdktf.stringToTerraform(this._ipType),
       project_id: cdktf.stringToTerraform(this._projectId),
+      tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ip_cidr_range: {
+        value: cdktf.stringToHclTerraform(this._ipCidrRange),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      ip_type: {
+        value: cdktf.stringToHclTerraform(this._ipType),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

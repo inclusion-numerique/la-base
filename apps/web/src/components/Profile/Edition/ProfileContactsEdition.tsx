@@ -115,7 +115,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             />
           </div>
           <CheckboxFormField
-            data-testid="link-show-preview-checkbox"
+            data-testid="profile-email-public-checkbox"
             control={form.control}
             path="emailIsPublic"
             disabled={form.formState.isSubmitting}

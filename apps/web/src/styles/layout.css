@@ -21,13 +21,21 @@ textarea {
 }
 
 :root {
+  --slim-grey-border: 1px solid var(--border-default-grey);
+  --border-width: 1px;
+  --border-style: solid;
   --edition-container-internal-width: 588px;
 
   /* We need padding for the drag button absolute positioning on the left of the edition content list */
   --edition-container-x-padding: 48px;
   --edition-container-max-width: calc(
-    var(--edition-container-internal-width) + var(--edition-container-x-padding) *
-      2
+          var(--edition-container-internal-width) + var(--edition-container-x-padding) *
+          2
   );
   --big-smooth-shadow: 0px 12px 32px -8px rgb(0 0 36 / 12%);
+}
+
+body {
+  --hover-alpha: color-mix(in srgb, var(--hover), transparent 66%);
+  --active-alpha: color-mix(in srgb, var(--active), transparent 66%);
 }

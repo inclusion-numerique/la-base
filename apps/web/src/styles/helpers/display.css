@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.fr-inline-flex {
+  display: inline-flex;
+}
+
 .fr-display-block {
   display: block;
 }
@@ -10,9 +14,20 @@
   display: inline-block;
 }
 
-/* md separators */
+/* md display rules */
 @media (min-width: 48em) {
+  .fr-display-block-md {
+    display: block;
+  }
+
   .fr-display-inline-md {
     display: inline !important;
+  }
+}
+
+/* xl display rules */
+@media (min-width: 78em) {
+  .fr-display-block-xl {
+    display: block;
   }
 }

@@ -48,12 +48,12 @@ type Story = StoryObj<typeof MultipleSelectFormField>
 
 const options: SelectOption[] = [
   {
-    name: 'Selectionnez une option',
+    label: 'Selectionnez une option',
     value: '',
     disabled: true,
     hidden: true,
   },
-  ...choices.map((choice) => ({ name: choice, value: choice })),
+  ...choices.map((choice) => ({ label: choice, value: choice })),
 ]
 
 export const Default: Story = {

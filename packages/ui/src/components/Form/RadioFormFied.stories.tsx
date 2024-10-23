@@ -2,10 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
-import RadioFormField, { RadioFormFieldProps } from './RadioFormField'
-import { RadioOption } from './utils/options'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import RadioFormField, {
+  LabelComponentPropsType,
+  RadioFormFieldProps,
+} from './RadioFormField'
 
 const objectFormValidation = z
   .object({
@@ -19,7 +22,14 @@ type ObjectFormData = z.infer<typeof objectFormValidation>
 const Template = ({
   path,
   ...args
-}: Omit<RadioFormFieldProps<ObjectFormData>, 'control'>) => {
+}: Omit<
+  RadioFormFieldProps<
+    ObjectFormData,
+    SelectOption,
+    LabelComponentPropsType<SelectOption>
+  >,
+  'control'
+>) => {
   const form = useForm<ObjectFormData>({
     resolver: zodResolver(objectFormValidation),
     reValidateMode: 'onChange',
@@ -51,17 +61,17 @@ export default meta
 
 type Story = StoryObj<typeof RadioFormField>
 
-const options: RadioOption[] = [
+const options: SelectOption[] = [
   {
-    name: 'Choix 1',
+    label: 'Choix 1',
     value: 'choice-1',
   },
   {
-    name: 'Choix 2',
+    label: 'Choix 2',
     value: 'choice-2',
   },
   {
-    name: 'Choix 3',
+    label: 'Choix 3',
     value: 'choice-3',
   },
 ]
@@ -102,7 +112,7 @@ export const Hints: Story = {
     label: 'Label',
     options: options.map((option) => ({
       ...option,
-      hint: `Aide pour ${option.name}`,
+      hint: `Aide pour ${option.label}`,
     })),
   },
 }

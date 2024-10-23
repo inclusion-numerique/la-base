@@ -39,7 +39,7 @@ const ResourcesSearchLayout = ({
           category: 'themes',
           option: {
             value: theme,
-            name: themeLabels[theme],
+            label: themeLabels[theme],
           },
         }) satisfies FiltersInitialValue,
     ),
@@ -49,7 +49,7 @@ const ResourcesSearchLayout = ({
           category: 'supportTypes',
           option: {
             value: supportType,
-            name: supportTypeLabels[supportType],
+            label: supportTypeLabels[supportType],
           },
         }) satisfies FiltersInitialValue,
     ),
@@ -59,7 +59,7 @@ const ResourcesSearchLayout = ({
           category: 'targetAudiences',
           option: {
             value: targetAudience,
-            name: targetAudienceLabels[targetAudience],
+            label: targetAudienceLabels[targetAudience],
           },
         }) satisfies FiltersInitialValue,
     ),

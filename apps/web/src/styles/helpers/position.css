@@ -9,3 +9,7 @@
 .fr-overflow-visible {
   overflow: visible;
 }
+
+.fr-overflow-hidden {
+  overflow: hidden;
+}

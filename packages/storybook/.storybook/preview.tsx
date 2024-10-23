@@ -1,6 +1,5 @@
 import React from 'react'
 import '@app/web/styles/index.css'
-import { useRef } from '@storybook/addons'
 import { Preview } from '@storybook/react'
 import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
 
@@ -62,11 +61,13 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => {
-      const isSetup = useRef(false)
-      if (!isSetup.current) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+      if (!(window as any).dsfrIsSetup) {
         loadDsfrJs()
-        isSetup.current = true
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+        ;(window as any).dsfrIsSetup = true
       }
+
       return <Story />
     },
   ],

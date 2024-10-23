@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayVpcPublicGatewayConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#id DataScalewayVpcPublicGateway#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#id DataScalewayVpcPublicGateway#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface DataScalewayVpcPublicGatewayConfig extends cdktf.TerraformMetaA
   /**
   * name of the gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#name DataScalewayVpcPublicGateway#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#name DataScalewayVpcPublicGateway#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#project_id DataScalewayVpcPublicGateway#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#project_id DataScalewayVpcPublicGateway#project_id}
   */
   readonly projectId?: string;
   /**
   * The ID of the public gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#public_gateway_id DataScalewayVpcPublicGateway#public_gateway_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#public_gateway_id DataScalewayVpcPublicGateway#public_gateway_id}
   */
   readonly publicGatewayId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#zone DataScalewayVpcPublicGateway#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#zone DataScalewayVpcPublicGateway#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway scaleway_vpc_public_gateway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway scaleway_vpc_public_gateway}
 */
 export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
 
@@ -57,7 +57,7 @@ export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayVpcPublicGateway resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcPublicGateway to import
-  * @param importFromId The id of the existing DataScalewayVpcPublicGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcPublicGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcPublicGateway to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -69,7 +69,7 @@ export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/data-sources/vpc_public_gateway scaleway_vpc_public_gateway} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway scaleway_vpc_public_gateway} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -80,8 +80,8 @@ export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_vpc_public_gateway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -196,6 +196,11 @@ export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
     return this._publicGatewayId;
   }
 
+  // refresh_ssh_keys - computed: true, optional: false, required: false
+  public get refreshSshKeys() {
+    return this.getStringAttribute('refresh_ssh_keys');
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -249,5 +254,43 @@ export class DataScalewayVpcPublicGateway extends cdktf.TerraformDataSource {
       public_gateway_id: cdktf.stringToTerraform(this._publicGatewayId),
       zone: cdktf.stringToTerraform(this._zone),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      name: {
+        value: cdktf.stringToHclTerraform(this._name),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      project_id: {
+        value: cdktf.stringToHclTerraform(this._projectId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      public_gateway_id: {
+        value: cdktf.stringToHclTerraform(this._publicGatewayId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      zone: {
+        value: cdktf.stringToHclTerraform(this._zone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

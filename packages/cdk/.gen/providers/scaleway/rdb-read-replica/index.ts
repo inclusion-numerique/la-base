@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica
+// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface RdbReadReplicaConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#id RdbReadReplica#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#id RdbReadReplica#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,37 +17,37 @@ export interface RdbReadReplicaConfig extends cdktf.TerraformMetaArguments {
   /**
   * Id of the rdb instance to replicate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#instance_id RdbReadReplica#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#instance_id RdbReadReplica#instance_id}
   */
   readonly instanceId: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#region RdbReadReplica#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#region RdbReadReplica#region}
   */
   readonly region?: string;
   /**
   * Defines whether to create the replica in the same availability zone as the main instance nodes or not.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#same_zone RdbReadReplica#same_zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#same_zone RdbReadReplica#same_zone}
   */
   readonly sameZone?: boolean | cdktf.IResolvable;
   /**
   * direct_access block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#direct_access RdbReadReplica#direct_access}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#direct_access RdbReadReplica#direct_access}
   */
   readonly directAccess?: RdbReadReplicaDirectAccess;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#private_network RdbReadReplica#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#private_network RdbReadReplica#private_network}
   */
   readonly privateNetwork?: RdbReadReplicaPrivateNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#timeouts RdbReadReplica#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#timeouts RdbReadReplica#timeouts}
   */
   readonly timeouts?: RdbReadReplicaTimeouts;
 }
@@ -61,6 +61,17 @@ export function rdbReadReplicaDirectAccessToTerraform(struct?: RdbReadReplicaDir
   }
   return {
   }
+}
+
+
+export function rdbReadReplicaDirectAccessToHclTerraform(struct?: RdbReadReplicaDirectAccessOutputReference | RdbReadReplicaDirectAccess): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
 }
 
 export class RdbReadReplicaDirectAccessOutputReference extends cdktf.ComplexObject {
@@ -118,19 +129,19 @@ export interface RdbReadReplicaPrivateNetwork {
   /**
   * Whether or not the private network endpoint should be configured with IPAM
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#enable_ipam RdbReadReplica#enable_ipam}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#enable_ipam RdbReadReplica#enable_ipam}
   */
   readonly enableIpam?: boolean | cdktf.IResolvable;
   /**
   * UUID of the private network to be connected to the read replica (UUID format)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#private_network_id RdbReadReplica#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#private_network_id RdbReadReplica#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * The IP network address within the private subnet
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#service_ip RdbReadReplica#service_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#service_ip RdbReadReplica#service_ip}
   */
   readonly serviceIp?: string;
 }
@@ -145,6 +156,37 @@ export function rdbReadReplicaPrivateNetworkToTerraform(struct?: RdbReadReplicaP
     private_network_id: cdktf.stringToTerraform(struct!.privateNetworkId),
     service_ip: cdktf.stringToTerraform(struct!.serviceIp),
   }
+}
+
+
+export function rdbReadReplicaPrivateNetworkToHclTerraform(struct?: RdbReadReplicaPrivateNetworkOutputReference | RdbReadReplicaPrivateNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    enable_ipam: {
+      value: cdktf.booleanToHclTerraform(struct!.enableIpam),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
+    },
+    private_network_id: {
+      value: cdktf.stringToHclTerraform(struct!.privateNetworkId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    service_ip: {
+      value: cdktf.stringToHclTerraform(struct!.serviceIp),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class RdbReadReplicaPrivateNetworkOutputReference extends cdktf.ComplexObject {
@@ -268,23 +310,23 @@ export class RdbReadReplicaPrivateNetworkOutputReference extends cdktf.ComplexOb
 }
 export interface RdbReadReplicaTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#create RdbReadReplica#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#create RdbReadReplica#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#default RdbReadReplica#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#default RdbReadReplica#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#delete RdbReadReplica#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#delete RdbReadReplica#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#read RdbReadReplica#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#read RdbReadReplica#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#update RdbReadReplica#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#update RdbReadReplica#update}
   */
   readonly update?: string;
 }
@@ -301,6 +343,49 @@ export function rdbReadReplicaTimeoutsToTerraform(struct?: RdbReadReplicaTimeout
     read: cdktf.stringToTerraform(struct!.read),
     update: cdktf.stringToTerraform(struct!.update),
   }
+}
+
+
+export function rdbReadReplicaTimeoutsToHclTerraform(struct?: RdbReadReplicaTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    create: {
+      value: cdktf.stringToHclTerraform(struct!.create),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    default: {
+      value: cdktf.stringToHclTerraform(struct!.default),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    delete: {
+      value: cdktf.stringToHclTerraform(struct!.delete),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    read: {
+      value: cdktf.stringToHclTerraform(struct!.read),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    update: {
+      value: cdktf.stringToHclTerraform(struct!.update),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class RdbReadReplicaTimeoutsOutputReference extends cdktf.ComplexObject {
@@ -451,7 +536,7 @@ export class RdbReadReplicaTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica scaleway_rdb_read_replica}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica scaleway_rdb_read_replica}
 */
 export class RdbReadReplica extends cdktf.TerraformResource {
 
@@ -467,7 +552,7 @@ export class RdbReadReplica extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a RdbReadReplica resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the RdbReadReplica to import
-  * @param importFromId The id of the existing RdbReadReplica that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing RdbReadReplica that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the RdbReadReplica to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -479,7 +564,7 @@ export class RdbReadReplica extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.39.0/docs/resources/rdb_read_replica scaleway_rdb_read_replica} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/rdb_read_replica scaleway_rdb_read_replica} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -490,8 +575,8 @@ export class RdbReadReplica extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_rdb_read_replica',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.39.0',
-        providerVersionConstraint: '>= 2.39.0'
+        providerVersion: '2.42.1',
+        providerVersionConstraint: '>= 2.42.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -637,5 +722,55 @@ export class RdbReadReplica extends cdktf.TerraformResource {
       private_network: rdbReadReplicaPrivateNetworkToTerraform(this._privateNetwork.internalValue),
       timeouts: rdbReadReplicaTimeoutsToTerraform(this._timeouts.internalValue),
     };
+  }
+
+  protected synthesizeHclAttributes(): { [name: string]: any } {
+    const attrs = {
+      id: {
+        value: cdktf.stringToHclTerraform(this._id),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      instance_id: {
+        value: cdktf.stringToHclTerraform(this._instanceId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      region: {
+        value: cdktf.stringToHclTerraform(this._region),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      same_zone: {
+        value: cdktf.booleanToHclTerraform(this._sameZone),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
+      },
+      direct_access: {
+        value: rdbReadReplicaDirectAccessToHclTerraform(this._directAccess.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RdbReadReplicaDirectAccessList",
+      },
+      private_network: {
+        value: rdbReadReplicaPrivateNetworkToHclTerraform(this._privateNetwork.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RdbReadReplicaPrivateNetworkList",
+      },
+      timeouts: {
+        value: rdbReadReplicaTimeoutsToHclTerraform(this._timeouts.internalValue),
+        isBlock: true,
+        type: "struct",
+        storageClassType: "RdbReadReplicaTimeouts",
+      },
+    };
+
+    // remove undefined attributes
+    return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined ))
   }
 }

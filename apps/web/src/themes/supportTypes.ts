@@ -1,4 +1,5 @@
 import type { SupportType } from '@prisma/client'
+import { labelsToOptions } from '@app/ui/components/Form/utils/options'
 
 export const supportTypeLabels: {
   [supportType in SupportType]: string
@@ -19,9 +20,4 @@ export const supportTypeLabels: {
   Video: 'Vidéo',
 }
 
-export const supportTypeOptions = Object.entries(supportTypeLabels).map(
-  ([value, name]) => ({
-    value,
-    name,
-  }),
-)
+export const supportTypeOptions = labelsToOptions(supportTypeLabels)

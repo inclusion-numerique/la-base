@@ -9,7 +9,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { executeResourcesSearch } from '@app/web/server/search/executeSearch'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { ThematicHeader } from '@app/web/app/(public)/(categories)/_components/ThematicHeader'
 import { ThematicTags } from '@app/web/app/(public)/(categories)/_components/ThematicTags'
@@ -75,7 +75,7 @@ const CategoryPage = async ({
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <div className="fr-container fr-mb-30v">
         <Breadcrumbs currentPage={category} />
         <div className="fr-container fr-container--medium">

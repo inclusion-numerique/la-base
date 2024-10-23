@@ -43,7 +43,6 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:json/recommended',
     'turbo',
     'airbnb/base',
     'airbnb/hooks',
@@ -80,6 +79,7 @@ module.exports = {
           camelCase: true,
           pascalCase: true,
         },
+        ignore: ['.json$'],
       },
     ],
     'unicorn/prevent-abbreviations': [
@@ -91,6 +91,11 @@ module.exports = {
   },
   parserOptions: {
     sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: '18.3',
+    },
   },
   overrides: [
     // Typescript packages
@@ -182,6 +187,7 @@ module.exports = {
               camelCase: true,
               pascalCase: true,
             },
+            ignore: ['.json$'],
           },
         ],
         'unicorn/no-array-reduce': 'off',
@@ -218,6 +224,12 @@ module.exports = {
         'promise/always-return': 'off',
         'cypress/unsafe-to-chain-command': 'off',
       },
+    },
+    // Json files
+    {
+      files: '**/*.json',
+      plugins: ['json'],
+      extends: ['plugin:json/recommended-legacy'],
     },
   ],
 }

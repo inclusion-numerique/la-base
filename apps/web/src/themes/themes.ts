@@ -1,4 +1,7 @@
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import {
+  labelsToOptions,
+  type SelectOption,
+} from '@app/ui/components/Form/utils/options'
 import type { Theme } from '@prisma/client'
 
 /**
@@ -111,7 +114,7 @@ export const categoryThemesOptions = (() => {
 
   for (const [theme, category] of Object.entries(themeCategories)) {
     index[category].push({
-      name: themeLabels[theme as Theme],
+      label: themeLabels[theme as Theme],
       value: theme as Theme,
     })
   }
@@ -119,9 +122,4 @@ export const categoryThemesOptions = (() => {
   return index
 })()
 
-export const themeOptions = Object.entries(themeLabels).map(
-  ([value, name]) => ({
-    value,
-    name,
-  }),
-)
+export const themeOptions = labelsToOptions(themeLabels)

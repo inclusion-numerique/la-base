@@ -1,0 +1,108 @@
+/* Remove header dropshadow */
+
+.fr-header {
+  filter: none;
+
+  .fr-header__navbar {
+    margin-top: 8px;
+  }
+
+  /* Custom user menu */
+
+  .fr-header__tools-links {
+    /* We have to re-align top position as the buttons were to low, maybe caused by our "big" logo */
+    margin-top: -16px;
+
+    &::after {
+      margin-top: 0;
+    }
+
+    .fr-btn {
+      margin-bottom: 0;
+      min-height: unset !important;
+      padding: 8px 16px !important;
+      font-size: 0.875rem !important;
+    }
+
+    .icon-only {
+      padding: 8px 12px !important;
+    }
+  }
+
+  .fr-header__logo {
+    margin-right: 0;
+  }
+
+  .fr-header__operator {
+    padding-left: 4px;
+    padding-right: 0;
+
+    @media (min-width: 992px) {
+      padding-left: 0;
+      margin-right: 16px;
+    }
+  }
+
+  .fr-header__brand {
+    filter: none;
+    border-bottom: var(--slim-grey-border);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .fr-menu {
+    margin: 10px 0;
+    padding: 0;
+  }
+}
+
+.fr-nav__container {
+  > .fr-container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 62em) {
+  /* lg */
+  .fr-header {
+    box-shadow:
+      inset 0 -1px 0 0 var(--border-default-grey),
+      inset 0 1px 0 0 var(--border-default-grey);
+
+    .fr-header__body-row {
+      padding: 16px 0;
+    }
+
+    .fr-header__menu {
+      .fr-nav__link:hover {
+        box-shadow:
+          inset 0 -1px 0 0 var(--border-default-grey),
+          inset 0 1px 0 0 var(--border-default-grey);
+      }
+    }
+
+    .fr-header__tools-links {
+      margin-bottom: 0;
+    }
+
+    .fr-header__brand {
+      border-bottom: none;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .fr-menu__list {
+      box-shadow: none;
+    }
+  }
+
+  .fr-nav__container {
+    border-top: var(--slim-grey-border);
+
+    > .fr-container {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+  }
+}

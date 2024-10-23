@@ -117,7 +117,7 @@ const ProfileInformationsEdition = ({
             path="department"
             label="Département"
             options={[
-              { name: 'Selectionner une option', value: '', disabled: true },
+              { label: 'Selectionner une option', value: '', disabled: true },
               ...departmentsOptions,
             ]}
           />

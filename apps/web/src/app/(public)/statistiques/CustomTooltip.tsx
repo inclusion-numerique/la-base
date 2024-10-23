@@ -18,7 +18,7 @@ const CustomTooltip = <TValue extends ValueType, TName extends NameType>({
 }: TooltipProps<TValue, TName>) => {
   if (active && payload && payload.length > 0) {
     const title = labelFormatter
-      ? (labelFormatter(label, payload) as ReactNode)
+      ? labelFormatter(label, payload)
       : (label as ReactNode)
 
     return (

@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal !important;
+    flex-shrink: 0;
+}
+
+.small {
+    width: 32px;
+    height: 32px;
+
+    .icon {
+        line-height: 20px !important;
+        font-size: 20px !important;
+        max-height: 20px;
+        max-width: 20px;
+
+        &::before {
+            max-height: 20px;
+            max-width: 20px;
+        }
+    }
+}
+
+.medium {
+    width: 56px;
+    height: 56px;
+
+    .icon {
+        line-height: 24px !important;
+        font-size: 24px !important;
+        max-height: 24px;
+        max-width: 24px;
+
+        &::before {
+            max-height: 24px;
+            max-width: 24px;
+        }
+    }
+}
+
+.large {
+    width: 76px;
+    height: 76px;
+
+    .icon {
+        line-height: 30px !important;
+        font-size: 30px !important;
+        max-height: 30px;
+        max-width: 30px;
+
+        &::before {
+            max-height: 30px;
+            max-width: 30px;
+        }
+    }
+}
+
+

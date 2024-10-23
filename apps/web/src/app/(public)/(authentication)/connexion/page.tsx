@@ -7,7 +7,6 @@ import { getServerUrl } from '@app/web/utils/baseUrl'
 import { LoginSearchParams } from '@app/web/security/login'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 export const revalidate = 0
 
@@ -21,23 +20,18 @@ const SigninPage = async ({
   searchParams?: { error?: string } & LoginSearchParams
 }) => {
   const user = await getSessionUser()
-  if (user) {
-    redirect(getServerUrl(suivant ?? '/'))
-  }
 
-  const callbackUrl = suivant ?? '/'
+  const callbackUrl = suivant ?? '/connexion/suivant'
+
+  if (user) {
+    redirect(getServerUrl(callbackUrl))
+  }
 
   return (
     <>
-      <SkipLinksPortal links={defaultSkipLinks} />
+      <SkipLinksPortal />
       <Breadcrumbs currentPage="Connexion" />
-      <main id={contentId}>
-        <SigninPanel
-          intent={intention}
-          error={error}
-          callbackUrl={callbackUrl}
-        />
-      </main>
+      <SigninPanel intent={intention} error={error} callbackUrl={callbackUrl} />
     </>
   )
 }

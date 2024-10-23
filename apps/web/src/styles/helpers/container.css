@@ -23,6 +23,14 @@
   }
 }
 
+.fr-container--standard {
+  max-width: 996px;
+
+  @media (min-width: 62em) {
+    max-width: 996px;
+  }
+}
+
 .fr-container--800 {
   /* 800 + padding */
   max-width: 832px;

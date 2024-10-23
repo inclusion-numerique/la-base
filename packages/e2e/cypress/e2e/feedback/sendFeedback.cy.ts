@@ -13,9 +13,12 @@ describe('Utilisateur, je peux donner mon avis', () => {
 
   it('Acceptation 1 - Je peux donner mon avis', () => {
     cy.visit('/')
+    cy.dsfrShouldBeStarted()
     cy.dsfrModalsShouldBeBound()
 
-    cy.testId('help-menu-help-center').click()
+    cy.testId('help-menu-help-center').within(() => {
+      cy.findByRole('button', { name: 'Aide' }).click()
+    })
     cy.testId('header-feedback-control-button').filter(':visible').click()
 
     cy.findByRole('dialog').within(() => {
