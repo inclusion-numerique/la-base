@@ -1,7 +1,8 @@
 import { Command } from '@commander-js/extra-typings'
-import { computeBranchNamespace } from '@app/cdk/utils'
 import { octokit, owner, repo } from '@app/cli/github'
 import { output } from '@app/cli/output'
+
+const { computeBranchNamespace } = await import('@app/cdk/utils')
 
 export const createGithubDeployment = new Command()
   .command('github:deployment:create')

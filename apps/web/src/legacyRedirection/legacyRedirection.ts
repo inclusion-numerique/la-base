@@ -62,6 +62,11 @@ export const mapLegacyPath = async (url: URL) => {
     }
 
     const legacyBaseId = Number.parseInt(path.split('/')[2], 10)
+
+    if (!legacyBaseId) {
+      return '/'
+    }
+
     const migratedToLegacyProfileId =
       legacyBaseOwnerFromLegacyBaseId.get(legacyBaseId)
 

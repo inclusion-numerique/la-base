@@ -2,16 +2,17 @@
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { Argument, Command } from '@commander-js/extra-typings'
-import {
-  projectStackSensitiveVariables,
-  projectStackVariables,
-} from '@app/cdk/ProjectStack'
-import {
-  webAppStackSensitiveVariables,
-  webAppStackVariables,
-} from '@app/cdk/WebAppStack'
+
 import { getDirname } from '@app/config/dirname'
 import { output } from '@app/cli/output'
+
+const { projectStackVariables, projectStackSensitiveVariables } = await import(
+  '@app/cdk/ProjectStack'
+)
+
+const { webAppStackVariables, webAppStackSensitiveVariables } = await import(
+  '@app/cdk/WebAppStack'
+)
 
 // See https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files
 // eslint-disable-next-line unicorn/prevent-abbreviations
