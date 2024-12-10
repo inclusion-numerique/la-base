@@ -12,6 +12,7 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { sessionTokenFromRequestCookies } from '@app/web/security/authentication'
 import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
+import { escapeHeaderFilename } from '@app/web/app/download/escapeHeaderFilename'
 
 const notFoundResponse = () =>
   new Response('', {
@@ -88,7 +89,7 @@ export const GET = async (request: NextRequest) => {
 
   const dispositionHeaderValue = `${
     download ? 'attachment' : 'inline'
-  }; filename="${upload.name}"`
+  }; filename="${escapeHeaderFilename(upload.name)}"`
 
   return new Response(object.Body.transformToWebStream(), {
     status: 200,
