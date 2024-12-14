@@ -91,7 +91,7 @@
     "maplibre-gl": "^4.6.0",
     "mjml": "^4.15.3",
     "mjml-react": "^2.0.8",
-    "nanoid": "^5.0.7",
+    "nanoid": "^5.0.9",
     "next": "^14.2.13",
     "next-auth": "4.24.7",
     "node-html-parser": "^6.1.13",
