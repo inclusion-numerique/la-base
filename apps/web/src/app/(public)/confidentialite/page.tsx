@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité - Les Bases',
@@ -13,10 +12,7 @@ const ConfidentialityPage = () => (
       <SkipLinksPortal />
       <Breadcrumbs currentPage="Politique de confidentialité" />
     </div>
-    <main
-      id={contentId}
-      className="fr-container landing-main-container fr-my-8w"
-    >
+    <div className="fr-container landing-main-container fr-my-8w">
       <div className="fr-grid-row fr-grid-row--center">
         <div className="fr-col-md-8">
           <h1>Politique de confidentialité - Les Bases</h1>
@@ -250,7 +246,7 @@ const ConfidentialityPage = () => (
           </ul>
         </div>
       </div>
-    </main>
+    </div>
   </>
 )
 
