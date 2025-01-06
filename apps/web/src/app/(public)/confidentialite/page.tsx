@@ -7,11 +7,9 @@ export const metadata: Metadata = {
 }
 
 const ConfidentialityPage = () => (
-  <>
-    <div className="fr-container">
-      <SkipLinksPortal />
-      <Breadcrumbs currentPage="Politique de confidentialité" />
-    </div>
+  <div className="fr-container">
+    <SkipLinksPortal />
+    <Breadcrumbs currentPage="Politique de confidentialité" />
     <div className="fr-container landing-main-container fr-my-8w">
       <div className="fr-grid-row fr-grid-row--center">
         <div className="fr-col-md-8">
@@ -247,7 +245,7 @@ const ConfidentialityPage = () => (
         </div>
       </div>
     </div>
-  </>
+  </div>
 )
 
 export default ConfidentialityPage

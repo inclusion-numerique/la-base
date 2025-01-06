@@ -24,7 +24,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const resource = await prismaClient.resource.findUnique({
     where: { slug },
-    select: { title: true },
+    select: { title: true, description: true },
   })
   if (!resource) {
     notFound()
@@ -32,6 +32,7 @@ export const generateMetadata = async ({
 
   return {
     title: metadataTitle(resource.title),
+    description: resource.description || undefined,
   }
 }
 

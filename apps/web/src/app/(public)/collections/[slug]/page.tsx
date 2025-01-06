@@ -26,6 +26,7 @@ export const generateMetadata = async ({
     },
     select: {
       title: true,
+      description: true,
     },
   })
   if (!collection) {
@@ -34,6 +35,7 @@ export const generateMetadata = async ({
 
   return {
     title: metadataTitle(collection.title),
+    description: collection.description || undefined,
   }
 }
 

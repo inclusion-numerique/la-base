@@ -20,6 +20,7 @@ export const generateMetadata = async ({
     },
     select: {
       title: true,
+      description: true,
     },
   })
   if (!base) {
@@ -28,6 +29,7 @@ export const generateMetadata = async ({
 
   return {
     title: metadataTitle(base.title),
+    description: base.description || undefined,
   }
 }
 const BaseLayout = async ({
