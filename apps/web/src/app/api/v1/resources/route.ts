@@ -29,6 +29,7 @@ export const GET = async (_request: NextRequest) => {
       id: resource.id,
       title: resource.title,
       slug: resource.slug,
+      deleted: resource.deleted?.toISOString(),
       url: getServerUrl(`/ressources/${resource.slug}`, true),
     })),
   }

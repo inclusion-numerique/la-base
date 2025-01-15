@@ -23,11 +23,12 @@ export const GET = async (_request: NextRequest) => {
   })
 
   const response = {
-    data: bases.map((resource) => ({
-      id: resource.id,
-      title: resource.title,
-      slug: resource.slug,
-      url: getServerUrl(`/bases/${resource.slug}`, true),
+    data: bases.map((base) => ({
+      id: base.id,
+      title: base.title,
+      slug: base.slug,
+      deleted: base.deleted?.toISOString(),
+      url: getServerUrl(`/bases/${base.slug}`, true),
     })),
   }
 
