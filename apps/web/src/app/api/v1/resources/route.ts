@@ -34,5 +34,9 @@ export const GET = async (_request: NextRequest) => {
     })),
   }
 
-  return NextResponse.json(response)
+  return NextResponse.json(response, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
 }
