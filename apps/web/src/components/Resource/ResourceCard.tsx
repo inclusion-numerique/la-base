@@ -138,7 +138,9 @@ const ResourceCard = ({
             <CopyLinkButton
               size="small"
               priority="tertiary no outline"
-              url={getServerUrl(`/ressources/${resource.slug}`, true)}
+              url={getServerUrl(`/ressources/${resource.slug}`, {
+                absolutePath: true,
+              })}
             />
           </>
         )}

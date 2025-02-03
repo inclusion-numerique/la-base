@@ -53,7 +53,9 @@ export const GET = async (_request: NextRequest) => {
         published: resource.published?.toISOString() ?? null,
         url: obfuscate
           ? null
-          : getServerUrl(`/ressources/${resource.slug}`, true),
+          : getServerUrl(`/ressources/${resource.slug}`, {
+              absolutePath: true,
+            }),
       }
     }),
   } satisfies ApiV1ResourcesResponse

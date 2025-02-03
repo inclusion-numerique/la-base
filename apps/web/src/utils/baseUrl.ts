@@ -1,7 +1,11 @@
 import { isBrowser } from '@app/web/utils/isBrowser'
 
-export const getServerBaseUrl = (forceAbsolutePath?: boolean) => {
-  if (isBrowser && !forceAbsolutePath) {
+export type GetServerUrlOptions = {
+  absolutePath?: boolean // Force absolute path including protocol and hostname instead of relative path
+}
+
+export const getServerBaseUrl = (options?: GetServerUrlOptions) => {
+  if (isBrowser && !options?.absolutePath) {
     // browser can use relative path
     return ''
   }
@@ -13,5 +17,5 @@ export const getServerBaseUrl = (forceAbsolutePath?: boolean) => {
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
 
-export const getServerUrl = (path: string, forceAbsolutePath?: boolean) =>
-  `${getServerBaseUrl(forceAbsolutePath)}${path}`
+export const getServerUrl = (path: string, options?: GetServerUrlOptions) =>
+  `${getServerBaseUrl(options)}${path}`

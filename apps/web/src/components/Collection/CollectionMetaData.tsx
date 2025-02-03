@@ -74,7 +74,9 @@ const CollectionMetaData = ({
             size="small"
             className="fr-hidden fr-unhidden-md"
             priority={context === 'view' ? 'tertiary' : 'tertiary no outline'}
-            url={getServerUrl(`/collections/${collection.slug}`, true)}
+            url={getServerUrl(`/collections/${collection.slug}`, {
+              absolutePath: true,
+            })}
           />
         </div>
       )}

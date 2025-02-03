@@ -73,7 +73,9 @@ const ProfileHeader = ({
                     <CopyLinkButton
                       full
                       size="small"
-                      url={getServerUrl(`/profils/${profile.slug}`, true)}
+                      url={getServerUrl(`/profils/${profile.slug}`, {
+                        absolutePath: true,
+                      })}
                     >
                       Partager
                     </CopyLinkButton>

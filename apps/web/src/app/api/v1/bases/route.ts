@@ -47,7 +47,11 @@ export const GET = async (_request: NextRequest) => {
         deleted: base.deleted?.toISOString() ?? null,
         is_public: base.isPublic,
         title: obfuscate ? null : base.title,
-        url: obfuscate ? null : getServerUrl(`/bases/${base.slug}`, true),
+        url: obfuscate
+          ? null
+          : getServerUrl(`/bases/${base.slug}`, {
+              absolutePath: true,
+            }),
       }
     }),
   } satisfies ApiV1BasesResponse

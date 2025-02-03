@@ -73,7 +73,9 @@ const BaseHeader = ({
                 <CopyLinkButton
                   size="small"
                   className="fr-justify-content-center fr-width-full"
-                  url={getServerUrl(`/bases/${base.slug}`, true)}
+                  url={getServerUrl(`/bases/${base.slug}`, {
+                    absolutePath: true,
+                  })}
                 >
                   Partager
                 </CopyLinkButton>

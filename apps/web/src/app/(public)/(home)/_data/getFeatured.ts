@@ -9,36 +9,36 @@ import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
 // Updated on 2024-08-30
 const featuredBaseIds = [
-  // departement-du-tarn
-  '84efe987-74fe-47ac-8b2d-56f24a51db15',
-  // icom-provence
-  '403f471e-c02c-455a-bd64-5527006f945e',
-  // blog-numerique-du-pays-de-bray
-  'ef3f41ec-438c-49a6-aee0-63e170b771ed',
+  // montlucon-communaute-numerique-1
+  '3e079e7c-3fd2-442c-a0ec-238f70b3e217',
+  // tech-abeille
+  '239f6675-7bb6-412c-b137-7d6d60ff46e6',
+  // pupil
+  '4d27565a-ac35-40e9-bccd-a2172c892ce2',
 ]
 
 const featuredResourceIds = [
-  // courts-circuits
-  '984f7bdd-9b86-4342-b016-9e8a6a7b5bc6',
-  // pictionary-3d
-  'ca9539d5-a337-45ad-8b32-9f3e3f87372d',
-  // comptoir-du-libre
-  '8188b084-f8f8-40b0-8f70-30aede46f5a4',
-  // france-identite-prouver-son-identite-en-ligne-mais-pas-que
-  '72c510fd-93e6-4250-b6ad-5791cbfad393',
-  // solutions-de-mobilites-douces-pour-l-inclusion-numerique
-  '144d7a15-6391-47db-bd8c-df8fe185ed5e',
-  // comment-aider-une-personne-a-connaitre-ses-droits
-  'b3a7e0d9-925b-42c5-8e34-a033eaabf20f',
+  // formation-parents-ressource
+  '47e0a7bb-c4f7-4ce8-a6c4-fd494c7ddf42',
+  // prenezlaconfiance
+  'e7c62281-e84f-44ba-9478-ed5d94c7b5f9',
+  // mallette-cyber-proposition-d-atelier
+  '9f935f5b-8d28-4a34-a846-f9c6a45b38a7',
+  // atelier-scanner-des-document-via-son-smartphone-ou-sa-tablette
+  '856b16e5-efef-43d1-9a96-9dbb7ef28ac9',
+  // webinaire-associations-c-est-quoi-le-probleme-avec-les-services-numeriques-des-geants-du-web
+  '941bd598-f29e-47a7-aa34-a863809653fa',
+  // se-deplacer-avec-son-smartphone
+  'e685a243-d93b-4511-9f9a-5137d80e872d',
 ]
 
 const featuredProfileIds = [
-  // f-salem
-  '1d5d6ba6-0b20-4a81-9d64-ced1e58223f2',
-  // julien-daudigeos
-  '5ba65f60-f4a3-48e5-94eb-4513ca670052',
-  // jeremie-daum
-  '36d2137b-286b-4362-945d-cab21a17377f',
+  // jean-claude-bondaz
+  '8382a623-96ea-4555-87ba-f5edb8793086',
+  // gokce-perol
+  'cdfcee5a-8a45-489f-829f-3eb363c22328',
+  // jeremy-pastouret
+  'da81a805-672e-4ca4-9ead-d6bf9f0f4cc7',
 ]
 
 export const getFeatured = async ({ user }: { user: SessionUser | null }) => {

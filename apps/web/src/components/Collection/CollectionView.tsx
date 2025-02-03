@@ -61,7 +61,9 @@ const CollectionView = ({
       <CopyLinkButton
         size="small"
         priority="tertiary"
-        url={getServerUrl(`/collections/${collection.slug}`, true)}
+        url={getServerUrl(`/collections/${collection.slug}`, {
+          absolutePath: true,
+        })}
       />
     </div>
     <div className="fr-flex fr-justify-content-space-between fr-flex-gap-4v fr-direction-column fr-direction-md-row-reverse">

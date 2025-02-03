@@ -53,7 +53,9 @@ const ResourceActions = ({
               className="fr-unhidden-sm fr-hidden"
               size="small"
               priority="secondary"
-              url={getServerUrl(`/ressources/${resource.slug}`, true)}
+              url={getServerUrl(`/ressources/${resource.slug}`, {
+                absolutePath: true,
+              })}
             />
           </>
         )}

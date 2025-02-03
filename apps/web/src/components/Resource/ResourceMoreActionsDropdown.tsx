@@ -81,7 +81,9 @@ export const ResourceMoreActionsDropdown = ({
             size="small"
             priority="tertiary no outline"
             displayIcon={false}
-            url={getServerUrl(`/ressources/${resource.slug}`, true)}
+            url={getServerUrl(`/ressources/${resource.slug}`, {
+              absolutePath: true,
+            })}
           >
             <span
               className="ri-link fr-mr-1w fr-text-label--blue-france"
