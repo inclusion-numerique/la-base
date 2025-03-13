@@ -31,7 +31,7 @@ const HomePage = async () => {
             <p className="fr-text--xl fr-mb-6w fr-mb-md-10w">
               <span className="fr-display-block">
                 Inspirez-vous des outils, supports pédagogiques, articles, cas
-                d’usages, documentations diverse...
+                d’usages, documentations diverses...
               </span>
               <span className="fr-display-block">
                 partagés par des acteurs du numérique d’intérêt général.

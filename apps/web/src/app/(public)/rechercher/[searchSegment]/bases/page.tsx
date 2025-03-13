@@ -33,7 +33,6 @@ const BasesSearchResultPage = async ({
     executeBasesSearch(searchParams, paginationParams, user),
     countSearchResults(searchParams, user),
   ])
-
   return (
     <>
       <SynchronizeTabCounts tabCounts={tabCounts} />

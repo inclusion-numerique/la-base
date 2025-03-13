@@ -7,7 +7,6 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { ConfirmDeleteModal } from '../../ConfirmDeleteModal'
 import CustomCard from '../../CustomCard'
 
@@ -20,10 +19,10 @@ const {
   isOpenedByDefault: false,
 })
 
-const CollectionDeletion = ({
+const CollectionDeletionModal = ({
   collection,
 }: {
-  collection: CollectionPageData
+  collection: { id: string; createdBy: { slug: string }; title: string }
 }) => {
   const router = useRouter()
   const mutation = trpc.collection.delete.useMutation()
@@ -82,4 +81,4 @@ const CollectionDeletion = ({
   )
 }
 
-export default withTrpc(CollectionDeletion)
+export default withTrpc(CollectionDeletionModal)

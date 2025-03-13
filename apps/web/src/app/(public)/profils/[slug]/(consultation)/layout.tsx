@@ -14,6 +14,7 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import { formatName } from '@app/web/server/rpc/user/formatName'
+import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -54,7 +55,7 @@ const ProfileLayout = async ({
 
   const canView = hasPermission('ReadProfileData')
   const canWrite = hasPermission('WriteProfile')
-  const isOwner = hasRole('ProfileOwner')
+  const isOwner = hasRole(ProfileRoles.ProfileOwner)
 
   if (!canView) {
     return (
@@ -90,7 +91,7 @@ const ProfileLayout = async ({
           collectionsCount={collectionsCount.total}
           followsCount={followsCount.total}
         />
-        <div className="fr-container fr-container--medium fr-mb-18w">
+        <div className="fr-container fr-container--medium fr-mb-24w">
           {children}
         </div>
       </main>

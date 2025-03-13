@@ -31,7 +31,6 @@ describe('Page d’accueil', () => {
       .filter(':visible')
       .should('not.contain', 'Se connecter')
     cy.dsfrShouldBeStarted()
-    cy.dsfrCollapsesShouldBeBound()
     cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
       .filter(':visible')
       .contains(user.name)

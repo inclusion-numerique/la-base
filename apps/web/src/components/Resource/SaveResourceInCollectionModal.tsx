@@ -12,6 +12,8 @@ import Notice from '@codegouvfr/react-dsfr/Notice'
 import RawModal from '@app/ui/components/Modal/RawModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import * as Sentry from '@sentry/nextjs'
+import Link from 'next/link'
+import Button from '@codegouvfr/react-dsfr/Button'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import { trpc } from '@app/web/trpc'
 import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
@@ -23,6 +25,11 @@ import { collectionTitleMaxLength } from '@app/web/server/collections/collection
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import VisibilityField from '@app/web/components/VisibilityField'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import BaseImage from '@app/web/components/BaseImage'
+import EmptyBox from '@app/web/components/EmptyBox'
+import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
+import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import AddOrRemoveResourceFromCollection from './AddOrRemoveResourceFromCollection'
 import SaveInNestedCollection from './SaveInNestedCollection'
 import styles from './SaveResourceInCollectionModal.module.css'
@@ -47,7 +54,6 @@ export const SaveResourceInCollectionDynamicModal = createDynamicModal({
  */
 const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
   const { resourceId } = SaveResourceInCollectionDynamicModal.useState()
-
   const router = useRouter()
 
   const bases = getBasesFromSessionUser(user)
@@ -121,13 +127,22 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       baseId,
       title: '',
     })
+    const selectedBase = bases.find((base) => base.id === baseId)
+    if (selectedBase) {
+      createCollectionForm.reset({
+        addResourceId: resourceId,
+        isPublic: selectedBase.isPublic ? undefined : false,
+        baseId: selectedBase.id,
+        title: '',
+      })
+    }
+
     setInCollectionCreation(true)
   }
 
   const cancelCollectionCreation = () => {
     setInCollectionCreation(false)
   }
-
   /**
    * Reset modal state when the resource changes
    */
@@ -239,7 +254,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
         priority: 'success',
         message: (
           <>
-            Ajoutée à la nouvelle collection <strong>{collection.title}</strong>
+            Enregistrée dans <strong>{collection.title}</strong>
           </>
         ),
       })
@@ -279,10 +294,14 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       throw error
     }
   }
-
+  const withoutFavoriteCollections = user.collections.filter(
+    (c) => !c.isFavorites,
+  )
   const showCreateCollectionButton =
     !inCollectionCreation &&
-    (profileOnly || !!inBaseDirectory || inProfileDirectory)
+    ((profileOnly && withoutFavoriteCollections.length > 0) ||
+      (!!inBaseDirectory && inBaseDirectory.collections.length > 0) ||
+      inProfileDirectory)
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.stopPropagation()
@@ -304,29 +323,22 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
     createCollectionForm.formState.isSubmitting ||
     createCollectionForm.formState.isSubmitSuccessful
 
+  const favoriteCollection = user.collections.find((c) => c.isFavorites)
+  const isMobile = useIsMobile()
+  const avatarSize = isMobile ? 32 : 48
   return (
     <form onSubmit={onSubmit}>
       <RawModal
         className={styles.modal}
         title={
           inCollectionCreation
-            ? 'Ajouter à une nouvelle collection'
-            : 'Ajouter à une collection'
+            ? 'Créer une collection'
+            : 'Enregistrer cette ressource dans :'
         }
         id={SaveResourceInCollectionDynamicModal.id}
         buttons={
           inCollectionCreation
             ? [
-                {
-                  children: 'Précédent',
-                  priority: 'secondary',
-                  type: 'button',
-                  onClick: cancelCollectionCreation,
-                  doClosesModal: false,
-                  nativeButtonProps: {
-                    key: 'cancel-collection',
-                  },
-                },
                 {
                   children: 'Enregistrer',
                   priority: 'primary',
@@ -337,14 +349,26 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     key: 'save-collection',
                   },
                 },
+                {
+                  children: 'Précédent',
+                  priority: 'secondary',
+                  type: 'button',
+                  onClick: cancelCollectionCreation,
+                  doClosesModal: false,
+                  nativeButtonProps: {
+                    key: 'cancel-collection',
+                  },
+                },
               ]
             : showCreateCollectionButton
               ? [
                   {
-                    children: 'Créer une collection',
+                    children: `Créer une collection de ${
+                      inBaseDirectory ? 'base' : 'profil'
+                    }`,
                     type: 'button',
                     priority: 'secondary',
-                    iconId: 'fr-icon-add-line',
+                    iconId: 'ri-folder-add-line',
                     doClosesModal: false,
                     className: styles.createCollectionButton,
                     onClick: () => viewCollectionCreation(inBaseDirectory?.id),
@@ -363,11 +387,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
             className={classNames(
               styles.clickableContainer,
               styles.backToBasesButton,
+              'fr-border--bottom',
             )}
             onClick={goBackFromDirectory}
             data-testid="back-to-bases-button"
           >
-            <div>
+            <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
               <span
                 className={classNames(
                   'fr-icon-arrow-left-s-line',
@@ -376,11 +401,30 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   styles.arrow,
                 )}
               />
-              <b className="fr-text-title--grey fr-ml-1w">
-                {inBaseDirectory
-                  ? inBaseDirectory.title
-                  : `${user.name} - Mes collections`}
-              </b>
+              {inBaseDirectory ? (
+                <BaseImage base={inBaseDirectory} size={avatarSize} />
+              ) : (
+                <RoundProfileImage
+                  user={user}
+                  borderWidth={1}
+                  size={avatarSize}
+                />
+              )}
+              <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                <b className="fr-text-title--grey fr-text--start">
+                  {inBaseDirectory
+                    ? inBaseDirectory.title
+                    : `${user.name} - Mes collections`}
+                </b>
+                <div className={classNames('fr-mt-2v', styles.collections)}>
+                  <span className="fr-icon-folder-2-line fr-icon--sm" />
+                  &nbsp;
+                  {inBaseDirectory
+                    ? inBaseDirectory.collections.length
+                    : withoutFavoriteCollections.length}
+                  &nbsp;Collections
+                </div>
+              </div>
             </div>
           </button>
         )}
@@ -399,7 +443,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
         {!!resourceId &&
           (inCollectionCreation ? (
             <>
-              <p>
+              <p className="fr-text-mention--grey fr-text--xs">
                 Les champs avec une astérisque sont obligatoires. Vous pourrez
                 modifier ces informations plus tard.
               </p>
@@ -418,24 +462,29 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 <Notice
                   title={
                     inBaseDirectory ? (
-                      <>
-                        <span className="fr-text--bold">Base privée</span>
-                        <br />
-                        <span className="fr-text--regular">
+                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                        <span className="fr-text-mention--black fr-text--bold">
+                          Base privée
+                        </span>
+                        <span className="fr-text-mention--grey fr-text--regular">
                           La collection sera accessible uniquement aux membres
                           et aux administrateurs de votre base.
                         </span>
-                      </>
+                      </div>
                     ) : (
-                      <>
-                        <span className="fr-text--bold">Profil privé</span>
-                        <br />
-                        <span className="fr-text--regular">
+                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                        <span className="fr-text-mention--black fr-text--bold">
+                          Profil privé
+                        </span>
+                        <span className="fr-text-mention--grey fr-text--regular">
                           Votre collection sera visible uniquement par vous.
                         </span>
-                      </>
+                      </div>
                     )
                   }
+                  classes={{
+                    title: styles.noticeContainer,
+                  }}
                 />
               ) : (
                 <VisibilityField
@@ -454,53 +503,148 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
             </>
           ) : inProfileDirectory || profileOnly ? (
             <>
-              {user.collections.map((collection) => (
-                <AddOrRemoveResourceFromCollection
-                  user={user}
-                  loading={pendingMutationCollectionId === collection.id}
-                  key={collection.id}
-                  collection={collection}
-                  resourceId={resourceId}
-                  onAdd={onAddToCollection}
-                  onRemove={onRemoveFromCollection}
-                />
-              ))}
+              {!!favoriteCollection && profileOnly && (
+                <div
+                  className={classNames(
+                    withoutFavoriteCollections.length > 0 &&
+                      'fr-border--bottom',
+                  )}
+                >
+                  <AddOrRemoveResourceFromCollection
+                    loading={
+                      pendingMutationCollectionId === favoriteCollection.id
+                    }
+                    key={favoriteCollection.id}
+                    collection={favoriteCollection}
+                    resourceId={resourceId}
+                    onAdd={onAddToCollection}
+                    onRemove={onRemoveFromCollection}
+                    withPrivacyTag
+                  />
+                </div>
+              )}
+              {withoutFavoriteCollections.length > 0 ? (
+                <>
+                  <div className="fr-mt-4v">
+                    <span className="fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
+                      Mes collections
+                    </span>
+                  </div>
+                  {withoutFavoriteCollections.map((collection) => (
+                    <AddOrRemoveResourceFromCollection
+                      loading={pendingMutationCollectionId === collection.id}
+                      key={collection.id}
+                      collection={collection}
+                      resourceId={resourceId}
+                      onAdd={onAddToCollection}
+                      onRemove={onRemoveFromCollection}
+                      withPrivacyTag={!collection.isPublic}
+                    />
+                  ))}
+                </>
+              ) : (
+                <EmptyBox
+                  title="Vous n’avez pas de collection dans votre profil."
+                  className="fr-mt-6v fr-p-6v fr-p-md-8v fr-py-md-0"
+                  titleAs="h5"
+                >
+                  <p>
+                    Créez une collection pour enregistrer, organiser, partager
+                    facilement des ressources.&nbsp;
+                    <Link
+                      href="/centre-d-aide/les-collections"
+                      className="fr-link"
+                    >
+                      En savoir plus
+                    </Link>
+                  </p>
+                  <div data-testid="create-resource-button">
+                    <CreateCollectionButton title="Créer une collection de profil" />
+                  </div>
+                </EmptyBox>
+              )}
             </>
           ) : inBaseDirectory ? (
             inBaseDirectory.collections.length > 0 ? (
               inBaseDirectory.collections.map((collection) => (
                 <AddOrRemoveResourceFromCollection
-                  user={user}
                   loading={pendingMutationCollectionId === collection.id}
                   key={collection.id}
                   collection={collection}
                   resourceId={resourceId}
                   onAdd={onAddToCollection}
                   onRemove={onRemoveFromCollection}
+                  withPrivacyTag={!collection.isPublic}
                 />
               ))
             ) : (
-              <div
-                className={styles.emptyBase}
+              <EmptyBox
+                title="Vous n’avez pas de collection dans votre base."
+                className="fr-mt-6v fr-p-md-8v fr-py-md-0"
+                titleAs="h5"
                 data-testid="base-without-collection"
               >
-                Vous n&lsquo;avez pas de collection dans votre base
-              </div>
+                <p>
+                  Créez une collection pour enregistrer, organiser, partager
+                  facilement des ressources.&nbsp;
+                  <Link
+                    href="/centre-d-aide/les-collections"
+                    className="fr-link"
+                  >
+                    En savoir plus
+                  </Link>
+                </p>
+                <div data-testid="create-resource-button">
+                  <Button
+                    type="button"
+                    onClick={() => viewCollectionCreation(inBaseDirectory?.id)}
+                    nativeButtonProps={{
+                      key: 'view-collection-creation',
+                    }}
+                  >
+                    <span className="ri-folder-add-line fr-mr-1w" />
+                    Créer une collection de base
+                  </Button>
+                </div>
+              </EmptyBox>
             )
           ) : (
             <>
-              <SaveInNestedCollection
-                user={user}
-                onClick={viewProfileDirectory}
-                alreadyInCollections={
-                  user.collections.filter(({ resources }) =>
-                    resources.some(
-                      (collectionResource) =>
-                        collectionResource.resourceId === resourceId,
-                    ),
-                  ).length
-                }
-              />
+              {!!favoriteCollection && (
+                <div
+                  className={classNames(
+                    (withoutFavoriteCollections.length > 0 ||
+                      bases.length > 0) &&
+                      'fr-border--bottom',
+                  )}
+                >
+                  <AddOrRemoveResourceFromCollection
+                    loading={
+                      pendingMutationCollectionId === favoriteCollection.id
+                    }
+                    key={favoriteCollection.id}
+                    collection={favoriteCollection}
+                    resourceId={resourceId}
+                    onAdd={onAddToCollection}
+                    onRemove={onRemoveFromCollection}
+                    withPrivacyTag
+                  />
+                </div>
+              )}
+              {withoutFavoriteCollections.length > 0 && (
+                <SaveInNestedCollection
+                  user={user}
+                  onClick={viewProfileDirectory}
+                  alreadyInCollections={
+                    withoutFavoriteCollections.filter(({ resources }) =>
+                      resources.some(
+                        (collectionResource) =>
+                          collectionResource.resourceId === resourceId,
+                      ),
+                    ).length
+                  }
+                />
+              )}
               {bases.map((base) => (
                 <SaveInNestedCollection
                   key={base.id}

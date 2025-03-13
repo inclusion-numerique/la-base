@@ -24,7 +24,6 @@ const DynamicLinkContentEditionPreview = ({
       enabled: !!url,
     },
   )
-
   useEffect(() => {
     if (!data) {
       return

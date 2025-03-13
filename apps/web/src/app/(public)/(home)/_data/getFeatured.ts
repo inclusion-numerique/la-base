@@ -9,36 +9,36 @@ import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
 // Updated on 2024-08-30
 const featuredBaseIds = [
-  // montlucon-communaute-numerique-1
-  '3e079e7c-3fd2-442c-a0ec-238f70b3e217',
-  // tech-abeille
-  '239f6675-7bb6-412c-b137-7d6d60ff46e6',
-  // pupil
-  '4d27565a-ac35-40e9-bccd-a2172c892ce2',
+  // commentry-montmarault-neris-communaute
+  '0d6f8e44-0a67-4ba7-84a1-6a0aac180a8d',
+  // blog-numerique-du-pays-de-bray
+  'ef3f41ec-438c-49a6-aee0-63e170b771ed',
+  // agglomeration-du-pays-de-l-or-34
+  '432d9e02-cf5a-41f9-98ab-326580ead981',
 ]
 
 const featuredResourceIds = [
-  // formation-parents-ressource
-  '47e0a7bb-c4f7-4ce8-a6c4-fd494c7ddf42',
-  // prenezlaconfiance
-  'e7c62281-e84f-44ba-9478-ed5d94c7b5f9',
-  // mallette-cyber-proposition-d-atelier
-  '9f935f5b-8d28-4a34-a846-f9c6a45b38a7',
-  // atelier-scanner-des-document-via-son-smartphone-ou-sa-tablette
-  '856b16e5-efef-43d1-9a96-9dbb7ef28ac9',
-  // webinaire-associations-c-est-quoi-le-probleme-avec-les-services-numeriques-des-geants-du-web
-  '941bd598-f29e-47a7-aa34-a863809653fa',
-  // se-deplacer-avec-son-smartphone
-  'e685a243-d93b-4511-9f9a-5137d80e872d',
+  // tnt-vod-svod-streaming-decryptage-de-la-nouvelle-ere-du-divertissement-video
+  'faa069d3-893f-4707-964f-33083d8ab016',
+  // webinaire-adopter-des-outils-ethiques-dans-mon-association
+  '1491ebaa-4799-4b1d-bfcb-446e90e2b060',
+  // utilisation-de-base-canva
+  '8fa8bda0-c3f5-4ce9-8578-4388915137a8',
+  // installer-deepseek-en-local-sur-linux
+  'd1d7b2ee-2877-4a6e-ae03-3d55e602dd27',
+  // fiche-resume-copiercoller
+  'b6aa2fc0-7f68-4601-b2ba-109f2789bc03',
+  // webinaire-intelligence-artificielle-avec-josephine-corcoral-du-cnnum
+  '5abbe71d-b29a-4d34-b0a8-dca2a07cfeb5',
 ]
 
 const featuredProfileIds = [
-  // jean-claude-bondaz
-  '8382a623-96ea-4555-87ba-f5edb8793086',
-  // gokce-perol
-  'cdfcee5a-8a45-489f-829f-3eb363c22328',
-  // jeremy-pastouret
-  'da81a805-672e-4ca4-9ead-d6bf9f0f4cc7',
+  // garlann-nizon
+  '589e8b7f-52f1-4d6a-8123-cc5b235a3b64',
+  // jehane-reneault
+  'd938a973-bbaa-415b-81c7-0dfa30eda275',
+  // margaux-joyen-dufau
+  '9189cca5-347d-4e26-89eb-0cdfb95f63de',
 ]
 
 export const getFeatured = async ({ user }: { user: SessionUser | null }) => {

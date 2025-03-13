@@ -57,6 +57,7 @@ export const SignedInWithBases: Story = {
           isPublic: true,
           collections: [],
           savedCollections: [],
+          image: null,
         },
       ],
       bases: [
@@ -69,6 +70,7 @@ export const SignedInWithBases: Story = {
             isPublic: false,
             collections: [],
             savedCollections: [],
+            image: null,
           },
         },
       ],
@@ -91,6 +93,7 @@ export const SignedInWithBasesMobile: Story = {
           isPublic: true,
           collections: [],
           savedCollections: [],
+          image: null,
         },
       ],
       bases: [
@@ -103,6 +106,7 @@ export const SignedInWithBasesMobile: Story = {
             isPublic: false,
             collections: [],
             savedCollections: [],
+            image: null,
           },
         },
       ],

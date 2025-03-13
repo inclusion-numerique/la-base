@@ -27,6 +27,7 @@ describe('Authorization - Collections', () => {
     slug: 'base-publique',
     savedCollections: [],
     title: 'Base publique',
+    image: null,
   } satisfies SessionUser['bases'][number]['base']
 
   const basePrivee = {
@@ -36,6 +37,7 @@ describe('Authorization - Collections', () => {
     slug: 'base-privee',
     savedCollections: [],
     title: 'Base privée',
+    image: null,
   } satisfies SessionUser['bases'][number]['base']
 
   const user = { ...testSessionUser } satisfies Grantee

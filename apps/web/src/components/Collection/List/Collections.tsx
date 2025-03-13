@@ -1,9 +1,14 @@
 import React, { ReactNode } from 'react'
-import Tabs from '@codegouvfr/react-dsfr/Tabs'
+import Link from 'next/link'
+import classNames from 'classnames'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
+import IconInSquare from '@app/web/components/IconInSquare'
+import EmptyBox from '@app/web/components/EmptyBox'
+import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
+import { ManageCollectionButton } from '@app/web/components/Collection/ManageCollectionButton'
 import { CreateCollectionButton } from '../CreateCollectionButton'
 import styles from './Collections.module.css'
 
@@ -13,81 +18,92 @@ const Collections = ({
   withCreation,
   collectionsLabel,
   emptyBox,
-  emptySavedBox,
   baseId,
+  baseSlug,
   user,
+  isOwner = false,
 }: {
   user: SessionUser | null
   collections: CollectionListItem[]
   savedCollections: CollectionListItem[]
-  withCreation: boolean
   collectionsLabel: string
+  withCreation: boolean
   emptyBox?: ReactNode
-  emptySavedBox: ReactNode
   baseId?: string
-}) => (
-  <div data-testid="collections-list">
-    <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
-      <div className="fr-col-sm-auto fr-col-12">
-        <h2 className="fr-mb-0 fr-h3">
-          Collections · {collections.length + savedCollections.length}
-        </h2>
-      </div>
-      {withCreation && (
-        <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
-          <CreateCollectionButton
-            className="fr-btn--secondary fr-width-full fr-justify-content-center"
-            baseId={baseId}
-          />
-        </div>
-      )}
-    </div>
+  baseSlug?: string
+  isOwner?: boolean
+}) => {
+  const favoriteCollection = collections.find((c) => c.isFavorites)
+  const combinedCollections = [...collections, ...savedCollections]
 
-    <Tabs
-      tabs={[
-        {
-          label: `${collectionsLabel} · ${collections.length}`,
-          content:
-            collections.length > 0 ? (
-              <div className={styles.tabCards}>
-                {collections.map((collection) => (
-                  <CollectionCard
-                    user={user}
-                    collection={collection}
-                    key={collection.id}
-                  />
-                ))}
+  return (
+    <div data-testid="collections-list">
+      {combinedCollections.length > 0 ? (
+        <>
+          <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+            <div className="fr-col-sm-auto fr-col-12">
+              <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
+                <IconInSquare iconId="ri-folder-2-line" />
+                <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
+                  {collectionsLabel} · {combinedCollections.length}
+                </h2>
               </div>
-            ) : (
-              emptyBox
-            ),
-        },
-        {
-          label: (
-            <>
-              <span className="ri-bookmark-3-line fr-text--regular fr-mr-1w" />
-              Collections enregistrées · {savedCollections.length}
-            </>
-          ),
-          content:
-            savedCollections.length > 0 ? (
-              <div className={styles.tabCards}>
-                {savedCollections.map((collection) => (
-                  <CollectionCard
-                    user={user}
-                    collection={collection}
-                    key={collection.id}
-                  />
-                ))}
+            </div>
+            {withCreation && (
+              <div className="fr-flex fr-direction-sm-row fr-direction-column fr-align-items-center fr-flex-gap-2v fr-mb-5w fr-mb-md-0">
+                <CreateCollectionButton
+                  className={classNames(
+                    styles.actionsButtons,
+                    'fr-btn--secondary',
+                  )}
+                  baseId={baseId}
+                  title={
+                    baseId
+                      ? 'Créer une collection de base'
+                      : 'Créer une collection'
+                  }
+                />
+                <ManageCollectionButton
+                  className={classNames(
+                    styles.actionsButtons,
+                    'fr-btn--secondary',
+                    'fr-hidden fr-unhidden-sm',
+                  )}
+                  baseSlug={baseSlug}
+                />
               </div>
-            ) : (
-              emptySavedBox
-            ),
-        },
-      ]}
-    />
-    {!!user && <SaveCollectionModal user={user} />}
-  </div>
-)
+            )}
+          </div>
+          <div className={styles.tabCards}>
+            {combinedCollections.map((collection) => (
+              <CollectionCard
+                user={user}
+                collection={collection}
+                key={collection.id}
+                canWrite={isOwner || withCreation}
+              />
+            ))}
+            {combinedCollections.length === 1 && !!favoriteCollection && (
+              <EmptyBox className="fr-flex fr-justify-content-center">
+                Créez une collection pour enregistrer et organiser des
+                ressources.
+                <Link href="/centre-d-aide/les-collections" className="fr-link">
+                  En savoir plus
+                </Link>
+                <div className="fr-mt-4w">
+                  <CreateCollectionButton />
+                </div>
+              </EmptyBox>
+            )}
+          </div>
+        </>
+      ) : (
+        emptyBox
+      )}
+      {!!user && <SaveCollectionModal user={user} />}
+      <DeleteCollectionModal />
+    </div>
+  )
+}
 
 export default Collections

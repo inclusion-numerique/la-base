@@ -1,8 +1,9 @@
 import { Prisma } from '@prisma/client'
-import { prismaClient } from '@app/web/prismaClient'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import { prismaClient } from '@app/web/prismaClient'
 import {
   computeResourcesListWhereForUser,
+  ResourceListItem,
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
@@ -15,7 +16,10 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
     slug: true,
     description: true,
     isPublic: true,
+    isFavorites: true,
     deleted: true,
+    created: true,
+    updated: true,
     image: {
       select: {
         id: true,
@@ -62,9 +66,14 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
       },
     },
     resources: {
-      select: { resource: { select: resourceListSelect(user) } },
+      select: {
+        order: true,
+        id: true,
+        resource: { select: resourceListSelect(user) },
+      },
       where: { resource: computeResourcesListWhereForUser(user) },
       orderBy: [
+        { order: 'asc' },
         { resource: { lastPublished: 'desc' } },
         { resource: { updated: 'desc' } },
       ],
@@ -81,6 +90,14 @@ export const getCollection = async (
   const collection = await prismaClient.collection.findFirst({
     select: collectionSelect(user),
     where: { id, slug, deleted: null },
+    orderBy: [
+      {
+        isFavorites: 'desc',
+      },
+      {
+        created: 'asc',
+      },
+    ],
   })
 
   return collection == null
@@ -89,6 +106,8 @@ export const getCollection = async (
         ...collection,
         resources: collection.resources.map((resource) => ({
           resource: toResourceWithFeedbackAverage(resource.resource),
+          order: resource.order,
+          collectionResourceId: resource.id,
         })),
       }
 }
@@ -97,3 +116,7 @@ export type CollectionPageData = Exclude<
   Awaited<ReturnType<typeof getCollection>>,
   null
 >
+
+export type CollectionResourceListItem = ResourceListItem & {
+  collectionResourceId: string
+}

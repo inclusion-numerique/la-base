@@ -85,9 +85,18 @@ const SaveResourceInCollectionButton = ({
   children?: ReactNode
   iconPosition?: 'right' | 'left'
 }) => {
-  const alreadySaved = user?.collections.some((collection) =>
-    collection.resources.some(({ resourceId }) => resourceId === resource.id),
+  const isResourceInCollection = (collection: {
+    resources: Array<{ resourceId: string }>
+  }) =>
+    collection.resources.some(({ resourceId }) => resourceId === resource.id)
+
+  const alreadySavedInBases = user?.bases.some(({ base }) =>
+    base.collections.some(isResourceInCollection),
   )
+
+  const alreadySaved =
+    user?.collections.some(isResourceInCollection) || alreadySavedInBases
+
   const buttonProps = {
     ...getButtonProps(alreadySaved, variant),
     children,

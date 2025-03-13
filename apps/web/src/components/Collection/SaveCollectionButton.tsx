@@ -4,6 +4,7 @@ import type {
   FrIconClassName,
   RiIconClassName,
 } from '@codegouvfr/react-dsfr/src/fr/generatedFromCss/classNames'
+import classNames from 'classnames'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { loginUrl } from '@app/web/security/login'
 import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
@@ -19,9 +20,8 @@ const cardButtonProps = {
   ...viewButtonProps,
   priority: 'tertiary no outline',
 } as const
-const defaultIconId: FrIconClassName | RiIconClassName = 'ri-bookmark-3-line'
-const alreadySavedIconId: FrIconClassName | RiIconClassName =
-  'ri-bookmark-3-fill'
+const defaultIconId: FrIconClassName | RiIconClassName = 'ri-bookmark-line'
+const alreadySavedIconId: FrIconClassName | RiIconClassName = 'ri-bookmark-fill'
 
 const SaveCollectionButton = ({
   className,
@@ -30,13 +30,15 @@ const SaveCollectionButton = ({
   'data-testid': dataTestid,
   context,
   priority,
+  buttonTitle,
 }: {
   className?: string
   user: SessionUser | null
   collection: { id: string; slug: string }
   'data-testid'?: string
-  context: 'card' | 'view'
+  context: 'card' | 'view' | 'contextModal'
   priority: 'primary' | 'secondary' | 'tertiary' | 'tertiary no outline'
+  buttonTitle?: string
 }) => {
   const alreadySavedInProfile = !!user?.savedCollections.some(
     (savedCollection) => savedCollection.collectionId === collection.id,
@@ -52,21 +54,23 @@ const SaveCollectionButton = ({
 
   const alreadySaved = alreadySavedInProfile || alreadySavedInBases
 
-  const buttonProps = {
-    ...(context === 'card' ? cardButtonProps : viewButtonProps),
-    iconId: alreadySaved ? alreadySavedIconId : defaultIconId,
-  }
+  const buttonProps = context === 'card' ? cardButtonProps : viewButtonProps
+
+  const icon = alreadySaved ? alreadySavedIconId : defaultIconId
 
   if (user) {
     return (
       <OpenSaveCollectionModalButton
         {...buttonProps}
+        iconId={icon}
+        context={context}
         nativeButtonProps={{
           'data-testid': dataTestid,
         }}
         className={className}
         collectionId={collection.id}
         priority={priority}
+        buttonTitle={buttonTitle}
       />
     )
   }
@@ -82,7 +86,10 @@ const SaveCollectionButton = ({
           next: `/collections/${collection.slug}`,
         }),
       }}
-    />
+    >
+      <span className={classNames(context === 'view' && 'fr-mr-1w', icon)} />
+      {buttonTitle}
+    </Button>
   )
 }
 

@@ -131,6 +131,13 @@ const RawModal = ({
                                 ...buttonProps.nativeButtonProps,
                               }
                             }
+                            const {
+                              // eslint-disable-next-line @typescript-eslint/naming-convention
+                              iconId: _buttonIconId,
+                              // eslint-disable-next-line @typescript-eslint/naming-convention
+                              iconPosition: _buttonIconPosition,
+                              ...props
+                            } = buttonProps
 
                             return (
                               // eslint-disable-next-line react/no-array-index-key
@@ -142,12 +149,22 @@ const RawModal = ({
                                 }
                               >
                                 <Button
-                                  {...buttonProps}
+                                  {...props}
                                   priority={
                                     buttonProps.priority ??
                                     (index === 0 ? 'primary' : 'secondary')
                                   }
-                                />
+                                >
+                                  {!!_buttonIconId && (
+                                    <span
+                                      className={classNames(
+                                        _buttonIconId,
+                                        'fr-mr-1v',
+                                      )}
+                                    />
+                                  )}
+                                  {buttonProps.children}
+                                </Button>
                               </li>
                             )
                           },

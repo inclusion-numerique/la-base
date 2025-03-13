@@ -22,6 +22,7 @@ describe('Authorization - Bases', () => {
     slug: 'base-slug',
     title: 'Base title',
     collections: [],
+    image: null,
   } satisfies SessionUserBase & BaseAuthorizationTarget
 
   const user: Grantee = { ...testSessionUser }

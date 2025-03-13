@@ -7,6 +7,7 @@ export enum TagColor {
   GREEN = 'green',
   GREY = 'grey',
   ORANGE = 'orange',
+  BLUE = 'blue',
 }
 
 const CustomTag = ({

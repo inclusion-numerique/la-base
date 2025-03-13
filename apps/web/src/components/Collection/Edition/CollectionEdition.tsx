@@ -1,10 +1,10 @@
 import React from 'react'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
+import CollectionDeletionCard from './CollectionDeletionCard'
 import CollectionEditionSideMenu from './CollectionEditionSideMenu'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CollectionImageEdition from './CollectionImageEdition'
 import CollectionVisibilityEdition from './CollectionVisibilityEdition'
-import CollectionDeletion from './CollectionDeletion'
 
 const CollectionEdition = ({
   collection,
@@ -26,7 +26,7 @@ const CollectionEdition = ({
           <CollectionVisibilityEdition collection={collection} />
         </div>
         <div className="fr-col-12">
-          <CollectionDeletion collection={collection} />
+          <CollectionDeletionCard collection={collection} />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import EmptyBox from '@app/web/components/EmptyBox'
 import { getProfileSavedCollections } from '@app/web/server/collections/getSavedCollectionsList'
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
 
 const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
   const {
@@ -19,13 +20,14 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
     getProfileSavedCollections(profile.id, user),
   ])
 
-  const isOwner = hasRole('ProfileOwner')
+  const isOwner = hasRole(ProfileRoles.ProfileOwner)
   const canWrite = hasPermission('WriteProfile')
 
   return (
     <Collections
       user={user}
       collections={collections}
+      isOwner={isOwner}
       savedCollections={savedCollections.map(({ collection }) => collection)}
       withCreation={canWrite}
       collectionsLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
@@ -44,25 +46,6 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
           </EmptyBox>
         ) : (
           <EmptyBox title="Ce profil n’a pas créé de collections" titleAs="h3">
-            Revenez plus tard ou suivez ce profil afin d’être tenu informé de
-            ses prochaines publications.
-          </EmptyBox>
-        )
-      }
-      emptySavedBox={
-        isOwner ? (
-          <EmptyBox
-            title="Vous n’avez pas enregistré de collections"
-            titleAs="h3"
-          >
-            Enregistrez la collection de quelqu’un d’autre et elle apparaîtra
-            ici.
-          </EmptyBox>
-        ) : (
-          <EmptyBox
-            title="Ce profil n’a pas enregistré de collections"
-            titleAs="h3"
-          >
             Revenez plus tard ou suivez ce profil afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>

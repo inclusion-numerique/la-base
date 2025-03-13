@@ -1,5 +1,5 @@
-import { appUrl } from '@app/e2e/support/helpers'
 import { givenUser } from '@app/e2e/support/given/givenUser'
+import { appUrl } from '@app/e2e/support/helpers'
 import { goToMostRecentEmailReceived } from '../goToMostRecentEmailReceived'
 import { cleanUp } from '../resource/edition/editionTestUtils'
 
@@ -126,7 +126,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('create-button').click()
     cy.visit('/bases/ma-declaration/membres')
 
-    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card-admin').should('have.length', 1)
 
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',

@@ -1,10 +1,10 @@
 import type { Collection } from '@prisma/client'
+import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
 import type { Grantee } from '@app/web/authorization/grantee'
 import {
   type UserSecurityRole,
   UserSecurityRoles,
 } from '@app/web/authorization/userSecurityRole'
-import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
 
 export const CollectionRoles = {
   CollectionCreator: 'CollectionCreator',

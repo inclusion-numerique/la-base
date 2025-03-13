@@ -80,6 +80,9 @@ export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>
     slug: true,
     description: true,
     isPublic: true,
+    isFavorites: true,
+    created: true,
+    updated: true,
     image: {
       select: {
         id: true,
@@ -142,9 +145,17 @@ export const getProfileCollections = async (
   return prismaClient.collection.findMany({
     select: collectionSelect(user),
     where,
-    orderBy: {
-      created: 'desc',
-    },
+    orderBy: [
+      {
+        isFavorites: 'desc',
+      },
+      {
+        order: 'asc',
+      },
+      {
+        created: 'desc',
+      },
+    ],
   })
 }
 

@@ -2,8 +2,8 @@ import { Meta, StoryObj } from '@storybook/react'
 import { ComponentProps } from 'react'
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import { CollectionListWrapper } from '@app/storybook/components/CollectionListWrapper'
-import { testSessionUser } from '@app/web/test/testSessionUser'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 import {
   collectionInBase,
   collectionInProfile,
@@ -23,6 +23,11 @@ const Template = (props: ComponentProps<typeof CollectionCard>) => (
   </CollectionListWrapper>
 )
 
+const dates = {
+  created: new Date('2024-01-01'),
+  updated: new Date('2024-01-01'),
+}
+
 // visiteur qui voit une collection publique dans un profil
 const VisitorCollectionInProfileArguments: ComponentProps<
   typeof CollectionCard
@@ -30,9 +35,12 @@ const VisitorCollectionInProfileArguments: ComponentProps<
   collection: {
     ...collectionInProfile,
     isPublic: true,
+    isFavorites: false,
     slug: `${collectionInProfile.slug}-1`,
+    ...dates,
   },
   user: testSessionUser,
+  canWrite: false,
 }
 
 // contributeur qui voit une collection privée dans un profil
@@ -42,10 +50,19 @@ const ContributorPrivateCollectionInProfileArguments: ComponentProps<
   collection: {
     ...collectionInProfile,
     isPublic: false,
+    isFavorites: false,
     slug: `${collectionInBase.slug}-2`,
-    createdBy: testSessionUser,
+    ...dates,
   },
   user: creatorUser,
+  canWrite: false,
+}
+
+// contributeur qui voit une collection depuis son profil et qui est propriétaire de la collection
+const ContributorOwnerCollectionInProfileArguments: ComponentProps<
+  typeof CollectionCard
+> = {
+  ...ContributorPrivateCollectionInProfileArguments,
 }
 
 export const PublishedInProfile: Story = mediumContainerStory({
@@ -59,6 +76,7 @@ export const PublishedInProfile: Story = mediumContainerStory({
     <>
       <Template {...VisitorCollectionInProfileArguments} />
       <Template {...ContributorPrivateCollectionInProfileArguments} />
+      <Template {...ContributorOwnerCollectionInProfileArguments} />
     </>
   ),
 })
@@ -75,6 +93,7 @@ export const PublishedInProfileMobile: Story = mobileStory({
     <>
       <Template {...VisitorCollectionInProfileArguments} />
       <Template {...ContributorPrivateCollectionInProfileArguments} />
+      <Template {...ContributorOwnerCollectionInProfileArguments} />
     </>
   ),
 })

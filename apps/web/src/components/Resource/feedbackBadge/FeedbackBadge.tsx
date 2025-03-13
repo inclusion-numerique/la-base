@@ -8,13 +8,16 @@ export const FeedbackBadge = ({
   value,
   customThresholds,
   className,
+  withLabel = true,
+  withCount = false,
 }: {
   value: number
   customThresholds?: [number, number, number, number]
   className?: string
+  withLabel?: boolean
+  withCount?: boolean
 }) => {
   const badgeStatus = feedbackBadgeStatus(value, customThresholds)
-
   return (
     <Badge
       noIcon
@@ -25,8 +28,16 @@ export const FeedbackBadge = ({
         className,
       )}
     >
-      <span className={`${badgeStatus?.emoticon} ri-lg fr-mr-1v`} aria-hidden />
-      {badgeStatus?.label}
+      <span
+        className={classNames(
+          badgeStatus?.emoticon,
+          'ri-lg',
+          (!!withLabel || !!withCount) && 'fr-mr-1v',
+        )}
+        aria-hidden
+      />
+      {!!withLabel && badgeStatus?.label}
+      {!!withCount && <span className="fr-text--bold">{value}</span>}
     </Badge>
   )
 }

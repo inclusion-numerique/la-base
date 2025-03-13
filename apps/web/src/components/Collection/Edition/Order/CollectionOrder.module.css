@@ -1,0 +1,79 @@
+.container {
+  @media (min-width: 768px) {
+    height: 130px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.dragButton {
+  position: absolute;
+  pointer-events: none;
+  cursor: grab;
+  top: 51px;
+  transition: opacity 200ms ease-in-out;
+
+  /* 4px on the left to allow space for focus-visible outline */
+  left: 4px;
+  padding: 4px 6px;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &::before {
+    line-height: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
+}
+
+.content {
+  height: 130px;
+  position: relative;
+
+  /* Hide content during exit "shrink" animation */
+  overflow-y: hidden;
+
+  &:hover,
+  &:focus-within {
+    .dragButton {
+      opacity: 1 !important;
+      pointer-events: initial;
+    }
+
+    .contentHoverableAction {
+      opacity: 1;
+      pointer-events: initial;
+    }
+  }
+
+  &.selected {
+    background-color: var(--background-default-grey-active);
+
+    .dragButton {
+      opacity: 1 !important;
+      pointer-events: initial;
+    }
+  }
+}
+
+.contentList {
+  list-style: none;
+  margin: 32px 0;
+
+  &:empty {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    padding-inline-start: 0;
+  }
+}

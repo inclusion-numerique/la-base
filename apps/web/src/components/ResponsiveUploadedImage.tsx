@@ -12,6 +12,7 @@ const ResponsiveUploadedImage = ({
 }: Omit<ComponentProps<'img'>, 'src' | 'srcSet'> &
   GenerateUploadedImageSourceSetsInput) => {
   const sources = generateUploadedImageSourceSets({ id, quality, breakpoints })
+
   return (
     <picture className="fr-width-full" key={id}>
       {sources.map(({ media, srcSet }) => (

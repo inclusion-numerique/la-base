@@ -13,7 +13,9 @@ import { contentId } from '@app/web/utils/skipLinks'
 import {
   collectionAuthorization,
   CollectionPermissions,
+  CollectionRoles,
 } from '@app/web/authorization/models/collectionAuthorization'
+import BackButton from '@app/web/components/BackButton'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -46,11 +48,12 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
   if (!collection) {
     notFound()
   }
-  const { hasPermission } = collectionAuthorization(collection, user)
+  const { hasPermission, hasRole } = collectionAuthorization(collection, user)
 
   const canReadGeneralInformation = hasPermission(
     CollectionPermissions.ReadGeneralCollectionInformation,
   )
+  const canWrite = hasPermission(CollectionPermissions.WriteCollection)
   if (!canReadGeneralInformation) {
     notFound()
   }
@@ -58,22 +61,31 @@ const CollectionPage = async ({ params }: { params: { slug: string } }) => {
   const canReadContent = hasPermission(
     CollectionPermissions.ReadCollectionContent,
   )
-  const canWrite = hasPermission(CollectionPermissions.WriteCollection)
-
+  const isOwner = hasRole(CollectionRoles.CollectionCreator)
+  const isFavorite = collection.isFavorites
   return (
     <>
       <SkipLinksPortal />
-      <div className="fr-container">
-        <CollectionBreadcrumbs collection={collection} />
-      </div>
-      <main
-        id={contentId}
-        className="fr-container fr-container--medium fr-mb-20v fr-pb-20v"
+      <div
+        className={
+          isFavorite
+            ? 'fr-background-alt--pink-tuile'
+            : 'fr-background-alt--blue-france'
+        }
       >
+        <div className="fr-container fr-pt-2w fr-hidden fr-unhidden-md">
+          <CollectionBreadcrumbs collection={collection} className="fr-my-0" />
+        </div>
+        <div className="fr-hidden-md">
+          <BackButton />
+        </div>
+      </div>
+      <main id={contentId}>
         {canReadContent ? (
           <CollectionView
             collection={collection}
             user={user}
+            isOwner={isOwner}
             canWrite={canWrite}
           />
         ) : (

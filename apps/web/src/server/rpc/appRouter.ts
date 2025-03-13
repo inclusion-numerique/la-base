@@ -13,6 +13,7 @@ import { searchRouter } from '@app/web/server/rpc/search/searchRouter'
 import { reportRouter } from '@app/web/server/rpc/report/reportRouter'
 import { followRouter } from '@app/web/server/rpc/follow/followRouter'
 import { feedbackRouter } from '@app/web/server/rpc/feedback/feedbackRouter'
+import { collectionResourceRouter } from '@app/web/server/rpc/collectionResource/collectionResource'
 
 export const appRouter = router({
   user: userRouter,
@@ -22,6 +23,7 @@ export const appRouter = router({
   baseMember: baseMemberRouter,
   profile: profileRouter,
   collection: collectionRouter,
+  collectionResource: collectionResourceRouter,
   metaData: metadataRouter,
   upload: uploadRouter,
   image: imageRouter,

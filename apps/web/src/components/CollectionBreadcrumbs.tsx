@@ -3,6 +3,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 
 const CollectionBreadcrumbs = ({
   collection,
+  className,
   currentChildPage,
 }: {
   collection: {
@@ -12,6 +13,7 @@ const CollectionBreadcrumbs = ({
     createdBy: { name: string | null; slug: string }
   }
   currentChildPage?: string
+  className?: string
 }) => {
   const parents = collection.base
     ? [
@@ -48,6 +50,7 @@ const CollectionBreadcrumbs = ({
     <Breadcrumbs
       parents={parents}
       currentPage={currentChildPage || collection.title}
+      className={className}
     />
   )
 }

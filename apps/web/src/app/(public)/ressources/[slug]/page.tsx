@@ -14,6 +14,8 @@ import {
   resourceAuthorization,
   ResourcePermissions,
 } from '@app/web/authorization/models/resourceAuthorization'
+import { uploadedImageLoader } from '@app/web/utils/uploadedImageLoader'
+import { getServerUrl } from '@app/web/utils/baseUrl'
 import ResourceView from './_components/ResourceView'
 import PrivateResourceView from './_components/PrivateResourceView'
 
@@ -24,13 +26,35 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const resource = await prismaClient.resource.findUnique({
     where: { slug },
-    select: { title: true, description: true },
+    select: {
+      title: true,
+      description: true,
+      image: {
+        include: {
+          upload: true,
+        },
+      },
+    },
   })
   if (!resource) {
     notFound()
   }
+  const imageUrl = resource.image
+    ? uploadedImageLoader({ src: resource.image.id, width: 500 })
+    : null
 
   return {
+    ...(imageUrl && {
+      openGraph: {
+        title: metadataTitle(resource.title),
+        description: resource.description || undefined,
+        images: [
+          {
+            url: getServerUrl(imageUrl),
+          },
+        ],
+      },
+    }),
     title: metadataTitle(resource.title),
     description: resource.description || undefined,
   }

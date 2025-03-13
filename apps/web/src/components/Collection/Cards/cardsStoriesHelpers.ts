@@ -1,5 +1,5 @@
-import { testSessionUser } from '@app/web/test/testSessionUser'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 
 export const date = new Date('2023-01-31')
 
@@ -11,7 +11,10 @@ export const collectionInProfile = {
   id: 'bfb435ea-35e9-4fc4-a2b0-93a31d35c793',
   image: { id: 'portrait', altText: 'Texte alternatif' },
   isPublic: true,
+  isFavorites: false,
   createdBy: creatorUser,
+  created: date,
+  updated,
   base: null,
   title:
     'Titre d’une collection sur deux ligne très longues comme comme sur deux ligne très longues',
@@ -31,7 +34,10 @@ export const collectionInBase = {
   },
   image: { id: 'portrait', altText: 'Texte alternatif' },
   isPublic: true,
+  isFavorites: false,
   createdBy: creatorUser,
+  created: date,
+  updated,
   title:
     'Titre d’une collection sur deux ligne très longues comme comme sur deux ligne très longues',
   slug: 'titre-d-une-collection-sur-deux-ligne-tres-longues-comme-comme-sur-deux-ligne-tres-longues',

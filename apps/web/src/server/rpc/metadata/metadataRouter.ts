@@ -21,7 +21,6 @@ export const metadataRouter = router({
             .then(() => true)
             .catch(() => false),
         ])
-
         return getMetadataFromDocument(document.data, {
           url: urlObject,
           hasDefaultFavicon,

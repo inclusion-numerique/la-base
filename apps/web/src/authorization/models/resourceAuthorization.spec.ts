@@ -1,5 +1,5 @@
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { Grantee } from '@app/web/authorization/grantee'
-import { testSessionUser } from '@app/web/test/testSessionUser'
 import {
   getResourcePermissions,
   getResourceRoles,
@@ -8,8 +8,8 @@ import {
   resourcePermissions,
   ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 
 describe('Authorization - Ressources', () => {
   const resource = {
@@ -28,6 +28,7 @@ describe('Authorization - Ressources', () => {
     slug: 'base-publique',
     savedCollections: [],
     title: 'Base publique',
+    image: null,
   } satisfies SessionUser['bases'][number]['base']
 
   const basePrivee = {
@@ -37,6 +38,7 @@ describe('Authorization - Ressources', () => {
     slug: 'base-privee',
     savedCollections: [],
     title: 'Base privée',
+    image: null,
   } satisfies SessionUser['bases'][number]['base']
 
   const user = { ...testSessionUser } satisfies Grantee

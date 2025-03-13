@@ -44,7 +44,7 @@ const CollectionEditionPage = async ({
   const user = await getSessionUser()
   const collection = await getCollection({ slug: decodeURI(params.slug) }, user)
 
-  if (!collection) {
+  if (!collection || collection.isFavorites) {
     notFound()
   }
   const { hasPermission } = collectionAuthorization(collection, user)

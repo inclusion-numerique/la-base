@@ -2,6 +2,10 @@
   font-weight: 500 !important;
 }
 
+.fr-text--start {
+  text-align: start !important;
+}
+
 .fr-text--center {
   text-align: center !important;
 }

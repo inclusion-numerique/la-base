@@ -2,7 +2,6 @@
 .clickableContainer {
   width: 100%;
   padding: 16px 0;
-  border-bottom: 1px solid var(--border-default-grey);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,15 +22,20 @@
 
 .arrow {
   color: var(--blue-france-sun-113-625);
+  align-items: center;
+  display: flex;
 }
 
 .content {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .collections {
   font-size: 14px;
-  color: var(--text-default-grey);
+  color: var(--text-mention-grey);
   display: flex;
   gap: 8px;
 }
@@ -58,4 +62,22 @@
 
 .createCollectionButton {
   width: calc(100% - 1rem) !important;
+}
+
+.favoriteText {
+  color: var(--pink-tuile-main-556);
+}
+
+@media (max-width: 48em) {
+  .btnIcon {
+    width: 2rem;
+    min-height: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+  }
+}
+
+.noticeContainer {
+  display: flex;
+  align-items: center;
 }

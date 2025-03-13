@@ -5,3 +5,7 @@
 .fr-text-title--brown-caramel-sun-425 {
   color: var(--brown-caramel-sun-425-moon-901);
 }
+
+.fr-text-mention--black {
+  color: var(--grey-50-1000);
+}

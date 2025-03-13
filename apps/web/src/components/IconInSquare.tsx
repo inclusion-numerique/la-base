@@ -7,10 +7,12 @@ const IconInSquare = ({
   iconId,
   size = 'medium',
   background = 'fr-background-alt--blue-france',
+  iconClassName = 'fr-text-title--blue-france',
 }: {
   background?: string
   className?: string
   iconId: ButtonProps.IconOnly['iconId']
+  iconClassName?: string
   size?: 'small' | 'medium' | 'large'
 }) => (
   <div
@@ -23,7 +25,7 @@ const IconInSquare = ({
     )}
   >
     <span
-      className={classNames('fr-text-title--blue-france', styles.icon, iconId)}
+      className={classNames(styles.icon, iconId, iconClassName)}
       aria-hidden
     />
   </div>

@@ -1,5 +1,5 @@
-import z from 'zod'
 import sanitizeHtml from 'sanitize-html'
+import z from 'zod'
 import { htmlToText } from '@app/web/utils/htmlToText'
 import {
   collectionDescriptionMaxLength,
@@ -44,6 +44,15 @@ export const UpdateCollectionInformationsCommandValidation = z.object({
   description: descriptionValidation,
 })
 
+export const UpdateCollectionOrdersCommandValidation = z.object({
+  collections: z.array(
+    z.object({
+      id: collectionIdValidation,
+      order: z.number(),
+    }),
+  ),
+})
+
 export const UpdateCollectionImageCommandValidation = z.object({
   id: collectionIdValidation,
   imageId: z.string().uuid().nullish(),
@@ -56,6 +65,10 @@ export const UpdateCollectionVisibilityCommandValidation = z.object({
 
 export type UpdateCollectionInformationsCommand = z.infer<
   typeof UpdateCollectionInformationsCommandValidation
+>
+
+export type UpdateCollectionOrdersCommand = z.infer<
+  typeof UpdateCollectionOrdersCommandValidation
 >
 
 export type UpdateCollectionImageCommand = z.infer<

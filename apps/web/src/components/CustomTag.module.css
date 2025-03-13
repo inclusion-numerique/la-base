@@ -13,6 +13,11 @@
   color: var(--text-action-high-brown-caramel);
 }
 
+.blue {
+  background-color: var(--blue-france-975-sun-113);
+  color: var(--blue-france-sun-113-625);
+}
+
 .tag {
   /* fr-tag has a z-index of 1 that makes tags visible e.g. over modal footer so we need to set it back to initial */
   z-index: initial;

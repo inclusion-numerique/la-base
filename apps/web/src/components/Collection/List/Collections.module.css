@@ -9,8 +9,9 @@
   }
 }
 
-.tabCards {
-  @media (min-width: 48em) {
-    margin: 0 -32px;
+.actionsButtons {
+  @media (max-width: 48em) {
+    width: 100% !important;
+    justify-content: center;
   }
 }

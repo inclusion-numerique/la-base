@@ -6,9 +6,11 @@ import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
 export const CreateCollectionButton = ({
   className,
   baseId,
+  title = 'Créer une collection',
 }: {
   className?: string
   baseId?: string
+  title?: string
 }) => (
   <Button
     data-testid="create-collection-button"
@@ -18,6 +20,6 @@ export const CreateCollectionButton = ({
     className={classNames(className)}
   >
     <span className="ri-folder-add-line fr-mr-1w" />
-    Créer une collection
+    {title}
   </Button>
 )

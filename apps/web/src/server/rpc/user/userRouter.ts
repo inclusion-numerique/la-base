@@ -48,6 +48,7 @@ export const userRouter = router({
             data: {
               id: v4(),
               title: 'Mes favoris',
+              description: 'Retrouvez vos ressources favorites !',
               slug: collectionSlug,
               createdById: user.id,
               isFavorites: true,

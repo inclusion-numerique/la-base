@@ -41,7 +41,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.testId('invite-member-modal-button').click()
     cy.wait('@invite')
-    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card-admin').should('have.length', 1)
 
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',

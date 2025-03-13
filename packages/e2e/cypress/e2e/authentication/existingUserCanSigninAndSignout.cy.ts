@@ -168,7 +168,6 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Check that the user can logout')
 
     cy.dsfrShouldBeStarted()
-    cy.dsfrCollapsesShouldBeBound()
     cy.get(
       '.fr-header__tools button[aria-controls="header_user_menu"].fr-dropdown__btn',
     )

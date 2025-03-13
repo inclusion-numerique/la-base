@@ -1,14 +1,14 @@
-import { v4 } from 'uuid'
-import { testSessionUser } from '@app/web/test/testSessionUser'
-import { baseRouter } from '@app/web/server/rpc/base/baseRouter'
-import { createTestContext } from '@app/web/test/createTestContext'
-import type { UpdateBaseVisibilityCommand } from '@app/web/server/bases/updateBase'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import type { UpdateBaseVisibilityCommand } from '@app/web/server/bases/updateBase'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
+import { baseRouter } from '@app/web/server/rpc/base/baseRouter'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import type { SessionUser } from '@app/web/auth/sessionUser'
+import { createTestContext } from '@app/web/test/createTestContext'
+import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
+import { testSessionUser } from '@app/web/test/testSessionUser'
+import { v4 } from 'uuid'
 
 describe('baseRouter', () => {
   // Helper function to easily test procedures
@@ -249,7 +249,12 @@ describe('baseRouter', () => {
             ...givenUser,
             bases: [
               {
-                base: { ...baseData, collections: [], savedCollections: [] },
+                base: {
+                  ...baseData,
+                  collections: [],
+                  savedCollections: [],
+                  image: null,
+                },
                 isAdmin: false,
               },
             ],

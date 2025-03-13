@@ -48,9 +48,10 @@
   top: 12px;
   transition: opacity 200ms ease-in-out;
 
-  /* 4px on the left to allow space for focus-visible outline */
+   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
   padding: 4px 6px;
+
 
   &:active {
     cursor: grabbing;

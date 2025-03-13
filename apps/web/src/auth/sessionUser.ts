@@ -11,9 +11,11 @@ import type {
 
 export type SessionUserCollectionFragment = Pick<
   Collection,
-  'id' | 'isPublic' | 'title' | 'slug'
+  'id' | 'isPublic' | 'title' | 'slug' | 'isFavorites'
 > & {
   resources: Pick<CollectionResource, 'resourceId'>[]
+  created: Date
+  updated: Date
 }
 
 export type SessionUserBase = Pick<
@@ -22,6 +24,10 @@ export type SessionUserBase = Pick<
 > & {
   collections: SessionUserCollectionFragment[]
   savedCollections: SessionUserSavedCollectionFragment[]
+  image: {
+    id: string
+    altText: string | null
+  } | null
 }
 
 export type SessionUserSavedCollectionFragment = Pick<
