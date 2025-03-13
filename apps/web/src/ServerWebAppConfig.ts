@@ -15,6 +15,10 @@ export const ServerWebAppConfig = {
   NodeEnv: NodeEnvironment,
   Namespace: process.env.NAMESPACE ?? '',
   internalApiPrivateKey: process.env.INTERNAL_API_PRIVATE_KEY ?? '',
+  Brevo: {
+    apiKey: process.env.BREVO_API_KEY ?? '',
+    usersListId: Number.parseInt(process.env.BREVO_USERS_LIST_ID ?? '', 10),
+  },
   Email: {
     server: emailServer,
     from: `${process.env.EMAIL_FROM_NAME ?? ''} <${

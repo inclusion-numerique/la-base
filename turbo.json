@@ -2,16 +2,25 @@
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
     "prisma generate": {
-      "inputs": ["prisma/schema.prisma"],
+      "inputs": [
+        "prisma/schema.prisma"
+      ],
       "cache": true
     },
     "dev": {
-      "dependsOn": ["^prisma generate"],
+      "dependsOn": [
+        "^prisma generate"
+      ],
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build", "^prisma generate"],
-      "outputs": [".next/**"],
+      "dependsOn": [
+        "^build",
+        "^prisma generate"
+      ],
+      "outputs": [
+        ".next/**"
+      ],
       "cache": false
     },
     "lint": {
@@ -123,6 +132,7 @@
     "INTERNAL_API_PRIVATE_KEY",
     "DATABASE_INSTANCE_ID",
     "BACKUP_DATABASE_NAME",
-    "INTERNAL_API_PRIVATE_KEY"
+    "BREVO_API_KEY",
+    "BREVO_USERS_LIST_ID"
   ]
 }
