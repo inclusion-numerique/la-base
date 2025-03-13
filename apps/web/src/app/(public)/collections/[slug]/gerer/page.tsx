@@ -49,7 +49,13 @@ const ManageCollectionResourcesPage = async ({
   return (
     <>
       <SkipLinksPortal />
-      <div className="fr-background-alt--blue-france">
+      <div
+        className={
+          collection.isFavorites
+            ? 'fr-background-alt--pink-tuile'
+            : 'fr-background-alt--blue-france'
+        }
+      >
         <div className="fr-container fr-pt-2w fr-hidden fr-unhidden-md">
           <CollectionBreadcrumbs collection={collection} className="fr-my-0" />
         </div>
