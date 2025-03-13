@@ -1,9 +1,10 @@
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
-import type { Job, JobName, JobPayload } from '@app/web/jobs/jobs'
 import { executeBackupDatabaseJob } from '@app/web/jobs/backup-database/executeBackupDatabaseJob'
-import { createStopwatch } from '@app/web/utils/stopwatch'
+import { executeImportContactsToBrevo } from '@app/web/jobs/import-contacts-to-brevo/executeImportContactsToBrevo'
+import type { Job, JobName, JobPayload } from '@app/web/jobs/jobs'
 import { prismaClient } from '@app/web/prismaClient'
+import { createStopwatch } from '@app/web/utils/stopwatch'
 
 export type JobExecutor<Name extends JobName, Result = unknown> = (
   job: Job & { name: Name; payload: JobPayload<Name> },
@@ -14,6 +15,7 @@ export const jobExecutors: {
   [Name in JobName]: JobExecutor<Name>
 } = {
   'backup-database': executeBackupDatabaseJob,
+  'import-contacts-to-brevo': executeImportContactsToBrevo,
 }
 
 export const executeJob = async (job: Job) => {
