@@ -10,6 +10,7 @@ import styles from '@app/web/components/Collection/Edition/Resources/Order/Colle
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
+  collectionId,
   count,
   dragConstraints,
   index,
@@ -18,6 +19,7 @@ const DraggableCollectionResourceOrderRow = ({
   sendCommand,
 }: {
   resource: ResourceListItem
+  collectionId: string
   count: number
   dragConstraints: RefObject<HTMLElement>
   index: number
@@ -120,7 +122,10 @@ const DraggableCollectionResourceOrderRow = ({
             : 'Sélectionner pour réorganiser',
         }}
       />
-      <CollectionResourceOrderRow resource={resource} />
+      <CollectionResourceOrderRow
+        resource={resource}
+        collectionId={collectionId}
+      />
     </Reorder.Item>
   )
 }

@@ -36,6 +36,7 @@ const CollectionResourcesOrderEdition = ({
     </div>
     <div className="fr-container fr-container--medium">
       <CollectionResourcesListEdition
+        collectionId={collection.id}
         resources={collection.resources.map(
           ({ collectionResourceId, resource }) => ({
             ...resource,
