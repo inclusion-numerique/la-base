@@ -10,20 +10,20 @@ import styles from '@app/web/components/Collection/Edition/Resources/Order/Colle
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
+  collectionId,
   count,
   dragConstraints,
   index,
   isSelected,
   onSelect,
-  sendCommand,
 }: {
   resource: ResourceListItem
+  collectionId: string
   count: number
   dragConstraints: RefObject<HTMLElement>
   index: number
   isSelected: boolean
   onSelect: () => void
-  sendCommand: () => Promise<void>
 }) => {
   const dragButtonRef = useRef<HTMLButtonElement>(null)
   const controls = useDragControls()
@@ -40,7 +40,7 @@ const DraggableCollectionResourceOrderRow = ({
     }
   }
 
-  const onDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent) => {
+  const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent) => {
     const button = dragButtonRef.current
     if (button) {
       button.style.cursor = ''
@@ -53,8 +53,6 @@ const DraggableCollectionResourceOrderRow = ({
       // eslint-disable-next-line no-useless-return
       return
     }
-
-    await sendCommand()
   }
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -120,7 +118,10 @@ const DraggableCollectionResourceOrderRow = ({
             : 'Sélectionner pour réorganiser',
         }}
       />
-      <CollectionResourceOrderRow resource={resource} />
+      <CollectionResourceOrderRow
+        resource={resource}
+        collectionId={collectionId}
+      />
     </Reorder.Item>
   )
 }
