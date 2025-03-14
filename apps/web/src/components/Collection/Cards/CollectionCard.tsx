@@ -81,7 +81,6 @@ const CollectionCard = ({
             {!collection.isFavorites && (
               <CollectionActions
                 collection={collection}
-                resourcesCount={resourcesCount}
                 canWrite={canWrite}
                 user={user}
                 context="card"

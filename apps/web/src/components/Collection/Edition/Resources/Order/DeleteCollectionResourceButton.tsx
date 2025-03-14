@@ -24,7 +24,6 @@ const DeleteCollectionResourceButton = ({
         resourceId,
         collectionId,
       })
-      router.refresh()
       createToast({
         priority: 'success',
         message: (
@@ -34,6 +33,7 @@ const DeleteCollectionResourceButton = ({
           </>
         ),
       })
+      router.refresh()
     } catch (error) {
       createToast({
         priority: 'error',
