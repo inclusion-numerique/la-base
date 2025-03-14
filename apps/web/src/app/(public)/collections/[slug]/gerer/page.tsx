@@ -8,6 +8,10 @@ import { contentId } from '@app/web/utils/skipLinks'
 import CollectionResourcesOrderEdition from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourcesOrderEdition'
 import { getCollection } from '@app/web/server/collections/getCollection'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+import {
+  collectionAuthorization,
+  CollectionRoles,
+} from '@app/web/authorization/models/collectionAuthorization'
 
 export const generateMetadata = async ({
   params: { slug },
@@ -45,6 +49,9 @@ const ManageCollectionResourcesPage = async ({
   if (!collection) {
     notFound()
   }
+  const { hasRole } = collectionAuthorization(collection, user)
+
+  const isOwner = hasRole(CollectionRoles.CollectionCreator)
 
   return (
     <>
@@ -61,7 +68,10 @@ const ManageCollectionResourcesPage = async ({
         </div>
       </div>
       <main id={contentId}>
-        <CollectionResourcesOrderEdition collection={collection} />
+        <CollectionResourcesOrderEdition
+          collection={collection}
+          isOwner={isOwner}
+        />
       </main>
     </>
   )
