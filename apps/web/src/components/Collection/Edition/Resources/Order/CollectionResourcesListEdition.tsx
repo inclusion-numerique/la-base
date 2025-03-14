@@ -13,8 +13,10 @@ import { CollectionResourceListItem } from '@app/web/server/collections/getColle
 
 const CollectionResourcesListEdition = ({
   resources,
+  collectionId,
 }: {
   resources: CollectionResourceListItem[]
+  collectionId: string
 }) => {
   const router = useRouter()
   const updateOrdersMutation =
@@ -100,7 +102,7 @@ const CollectionResourcesListEdition = ({
       }
     }
   }
-
+  console.log('orderedCollectionsResources', orderedCollectionsResources)
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
@@ -121,6 +123,7 @@ const CollectionResourcesListEdition = ({
           {orderedCollectionsResources.map((resource, index) => (
             <DraggableResourceCollectionOrderRow
               key={resource.id}
+              collectionId={collectionId}
               count={orderedCollectionsResources.length}
               resource={resource}
               index={index}
