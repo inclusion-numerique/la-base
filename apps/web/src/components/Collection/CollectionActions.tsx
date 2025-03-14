@@ -11,7 +11,6 @@ const CollectionActions = ({
   user,
   className,
   context,
-  resourcesCount,
 }: {
   collection: {
     isPublic: boolean
@@ -26,7 +25,6 @@ const CollectionActions = ({
   user: SessionUser | null
   context: 'view' | 'card' | 'contextModal'
   className?: string
-  resourcesCount: number
 }) => (
   <div className={classNames('fr-flex fr-flex-gap-2v', className)}>
     {canWrite ? (
