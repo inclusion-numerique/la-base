@@ -34,9 +34,6 @@ const CollectionResourcesOrderEdition = ({
     useState(resourcesWithCollectionResourceId)
   useOnDiff(resourcesWithCollectionResourceId, setOrderedCollectionsResources)
 
-  const cancelOrdering = () =>
-    setOrderedCollectionsResources(resourcesWithCollectionResourceId)
-
   const router = useRouter()
 
   const updateOrdersMutation =
@@ -50,6 +47,14 @@ const CollectionResourcesOrderEdition = ({
       ),
     [orderedCollectionsResources, collection.resources],
   )
+
+  const cancelOrdering = () => {
+    if (hasOrderChanged) {
+      setOrderedCollectionsResources(resourcesWithCollectionResourceId)
+    } else {
+      router.back()
+    }
+  }
   const sendCommand = async () => {
     try {
       await updateOrdersMutation.mutateAsync({
@@ -102,9 +107,6 @@ const CollectionResourcesOrderEdition = ({
                     ref={cancelButtonRef}
                     priority="secondary"
                     onClick={cancelOrdering}
-                    nativeButtonProps={{
-                      disabled: !hasOrderChanged,
-                    }}
                   >
                     Annuler
                   </Button>
