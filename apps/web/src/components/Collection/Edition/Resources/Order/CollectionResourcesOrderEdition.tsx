@@ -48,13 +48,9 @@ const CollectionResourcesOrderEdition = ({
     [orderedCollectionsResources, collection.resources],
   )
 
-  const cancelOrdering = () => {
-    if (hasOrderChanged) {
-      setOrderedCollectionsResources(resourcesWithCollectionResourceId)
-    } else {
-      router.back()
-    }
-  }
+  const redirectToCollection = () =>
+    router.push(`/collections/${collection.slug}`)
+
   const sendCommand = async () => {
     try {
       await updateOrdersMutation.mutateAsync({
@@ -70,6 +66,7 @@ const CollectionResourcesOrderEdition = ({
         priority: 'success',
         message: 'Ressources de collection réorganisées avec succès',
       })
+      redirectToCollection()
       router.refresh()
     } catch {
       createToast({
@@ -106,7 +103,7 @@ const CollectionResourcesOrderEdition = ({
                   <Button
                     ref={cancelButtonRef}
                     priority="secondary"
-                    onClick={cancelOrdering}
+                    onClick={redirectToCollection}
                   >
                     Annuler
                   </Button>
