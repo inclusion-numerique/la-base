@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import CollectionResourceOrderRow from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrderRow'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
@@ -28,37 +29,31 @@ const DraggableCollectionResourceOrderRow = ({
   const dragButtonRef = useRef<HTMLButtonElement>(null)
   const controls = useDragControls()
 
-  const onDragButtonPointerDown: PointerEventHandler = (event) => {
-    controls.start(event)
-  }
+  const {
+    onDragButtonPointerDown,
+    onDragStart,
+    onDragEnd,
+    handleKeyDown,
+    ReorderItemCommonProps,
+    'aria-keyshortcuts': draggableAriaKeyshortcuts,
+  } = useDraggable()
 
-  // Changing cursor on button when dragging as css selector causes flickering
-  const onDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) => {
-    const button = dragButtonRef.current
-    if (button) {
-      button.style.cursor = 'grabbing'
-    }
-  }
+  const handleDragButtonPointerDown: PointerEventHandler = (event) =>
+    onDragButtonPointerDown(controls, event)
 
-  const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent) => {
-    const button = dragButtonRef.current
-    if (button) {
-      button.style.cursor = ''
-    }
+  const handleDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) =>
+    onDragStart(dragButtonRef, _event)
 
-    const { target } = event
+  const handleDragEnd = async (
+    event: MouseEvent | TouchEvent | PointerEvent,
+  ) => {
+    const { target } = onDragEnd(dragButtonRef, event)
+
     if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
       // Only here for type safety
       // It should never happen as the drag button is our only source of event
       // eslint-disable-next-line no-useless-return
       return
-    }
-  }
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === ' ' || event.key === 'Enter') {
-      event.preventDefault()
-      onSelect()
     }
   }
 
@@ -71,33 +66,11 @@ const DraggableCollectionResourceOrderRow = ({
         count === index + 1 && 'fr-border-bottom',
         isSelected && styles.selected,
       )}
-      drag
-      dragListener={false}
       dragControls={controls}
-      dragSnapToOrigin
       dragConstraints={dragConstraints}
-      dragTransition={{
-        // Applied when releasing drag
-        bounceStiffness: 450,
-        bounceDamping: 30,
-      }}
-      onDragStart={onDragStart}
-      whileDrag={{
-        // Apply cursor style to whole element to avoid cursor flickering on imprecise drag
-        cursor: 'grabbing',
-      }}
-      onDragEnd={onDragEnd}
-      layout="position"
-      animate={{ opacity: 1, height: 'auto' }}
-      initial={false}
-      exit={{
-        // Applied when exit (deletion of content)
-        opacity: 0,
-        height: 0,
-      }}
-      transition={{
-        duration: 0.2,
-      }}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      {...ReorderItemCommonProps}
     >
       <Button
         ref={dragButtonRef}
@@ -109,10 +82,10 @@ const DraggableCollectionResourceOrderRow = ({
         className={styles.dragButton}
         type="button"
         nativeButtonProps={{
-          onPointerDown: onDragButtonPointerDown,
-          onKeyDown: handleKeyDown,
+          onPointerDown: handleDragButtonPointerDown,
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
           'aria-selected': isSelected,
-          'aria-keyshortcuts': 'Space|Enter + ArrowUp|ArrowDown, Escape',
+          'aria-keyshortcuts': draggableAriaKeyshortcuts,
           'aria-label': isSelected
             ? 'Ressource sélectionnée pour réorganisation'
             : 'Sélectionner pour réorganiser',
