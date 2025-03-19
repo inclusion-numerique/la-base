@@ -34,6 +34,9 @@ const CollectionResourcesOrderEdition = ({
     useState(resourcesWithCollectionResourceId)
   useOnDiff(resourcesWithCollectionResourceId, setOrderedCollectionsResources)
 
+  const cancelOrdering = () =>
+    setOrderedCollectionsResources(resourcesWithCollectionResourceId)
+
   const router = useRouter()
 
   const updateOrdersMutation =
@@ -94,16 +97,27 @@ const CollectionResourcesOrderEdition = ({
                   count={collection.resources.length}
                   context="view"
                 />
-                {!!hasOrderChanged && (
-                  <div className="fr-flex fr-flex-gap-2v">
-                    <Button ref={cancelButtonRef} priority="secondary">
-                      Annuler
-                    </Button>
-                    <Button ref={saveButtonRef} onClick={sendCommand}>
-                      Enregistrer les modifications
-                    </Button>
-                  </div>
-                )}
+                <div className="fr-flex fr-flex-gap-2v">
+                  <Button
+                    ref={cancelButtonRef}
+                    priority="secondary"
+                    onClick={cancelOrdering}
+                    nativeButtonProps={{
+                      disabled: !hasOrderChanged,
+                    }}
+                  >
+                    Annuler
+                  </Button>
+                  <Button
+                    ref={saveButtonRef}
+                    onClick={sendCommand}
+                    nativeButtonProps={{
+                      disabled: !hasOrderChanged,
+                    }}
+                  >
+                    Enregistrer les modifications
+                  </Button>
+                </div>
               </div>
             )}
           </div>
