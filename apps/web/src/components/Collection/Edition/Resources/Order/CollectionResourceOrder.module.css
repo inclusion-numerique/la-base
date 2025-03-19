@@ -16,7 +16,6 @@
 
   /* height - (padding top/bottom * 2) /2 = 100 - (16 * 2) / 2 = 24 */
   top: 34px;
-  transition: opacity 200ms ease-in-out;
 
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
@@ -42,7 +41,6 @@
 
   /* top: drag-button / 2 - 9px */
   top: 8px;
-  transition: opacity 200ms ease-in-out;
 
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
@@ -64,7 +62,6 @@
 
   /* top: drag-button + drag-button / 2 + 9px */
   top: 60px;
-  transition: opacity 200ms ease-in-out;
 
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
@@ -90,7 +87,6 @@
   &:hover,
   &:focus-within {
     .dragButton {
-      opacity: 1 !important;
       pointer-events: initial;
     }
 

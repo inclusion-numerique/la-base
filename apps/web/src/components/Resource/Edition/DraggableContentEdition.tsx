@@ -32,6 +32,10 @@ const DraggableContentEdition = React.forwardRef(
       index,
       dragConstraints,
       editionState,
+      isSelected,
+      onSelect,
+      moveUp,
+      moveDown,
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
@@ -41,13 +45,24 @@ const DraggableContentEdition = React.forwardRef(
       index: number
       dragConstraints: RefObject<HTMLElement>
       editionState: ResourceEditionState
+      isSelected: boolean
+      onSelect: () => void
+      moveUp: () => Promise<void>
+      moveDown: () => Promise<void>
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
     const testId = `content-edition_${content.type}-${index}`
 
     const controls = useDragControls()
-    const draggable = useDraggable()
+    const {
+      onDragButtonPointerDown,
+      onDragStart,
+      onDragEnd,
+      handleDragKeyDown,
+      ReorderItemCommonProps,
+      'aria-keyshortcuts': draggableAriaKeyshortcuts,
+    } = useDraggable()
 
     const dragButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -55,19 +70,21 @@ const DraggableContentEdition = React.forwardRef(
     const dragDisabled = editionState !== ResourceEditionState.SAVED
 
     // Trigger drag on button pointer down, if allowed
-    const onDragButtonPointerDown: PointerEventHandler = (event) => {
+    const handleDragButtonPointerDown: PointerEventHandler = (event) => {
       if (dragDisabled) {
         return
       }
-      draggable.onDragButtonPointerDown(controls, event)
+      onDragButtonPointerDown(controls, event)
     }
 
-    const onDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) =>
-      draggable.onDragStart(dragButtonRef, _event)
+    const handleDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) =>
+      onDragStart(dragButtonRef, _event)
 
     // Trigger mutation on drag end
-    const onDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent) => {
-      const { target } = draggable.onDragEnd(dragButtonRef, event)
+    const handleDragEnd = async (
+      event: MouseEvent | TouchEvent | PointerEvent,
+    ) => {
+      const { target } = onDragEnd(dragButtonRef, event)
 
       if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
         // Only here for type safety
@@ -109,39 +126,62 @@ const DraggableContentEdition = React.forwardRef(
         value={content}
         data-testid={testId}
         className={styles.content}
-        drag
-        dragListener={false}
         dragControls={controls}
-        dragSnapToOrigin
         dragConstraints={dragConstraints}
-        dragTransition={{
-          // Applied when releasing drag
-          bounceStiffness: 450,
-          bounceDamping: 30,
-        }}
-        onDragStart={onDragStart}
-        whileDrag={{
-          // Apply cursor style to whole element to avoid cursor flickering on imprecise drag
-          cursor: 'grabbing',
-        }}
-        onDragEnd={onDragEnd}
-        layout="position"
-        animate={{ opacity: 1, height: 'auto' }}
-        initial={false}
-        exit={{
-          // Applied when exit (deletion of content)
-          opacity: 0,
-          height: 0,
-        }}
-        transition={{
-          // I could not find an easy/performant way to apply different transitions to exit, reordering and shift :(
-          // This transition configuration WILL apply to ALL
-          // - exit
-          // - reordering
-          // - layout shift if content switch to edition / view mode and height changes
-          duration: 0.2,
-        }}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        {...ReorderItemCommonProps}
       >
+        {editionState !== ResourceEditionState.EDITING && (
+          <>
+            <Button
+              iconId="ri-arrow-up-line"
+              title="Remonter la collection"
+              size="small"
+              id={`arrow-up-button-${index}`}
+              priority="tertiary no outline"
+              className={styles.arrowUpButton}
+              type="button"
+              nativeButtonProps={{
+                onClick: moveUp,
+              }}
+            />
+
+            <Button
+              iconId="ri-arrow-down-line"
+              title="Descendre la collection"
+              size="small"
+              id={`arrow-down-button-${index}`}
+              priority="tertiary no outline"
+              className={styles.arrowDownButton}
+              type="button"
+              nativeButtonProps={{
+                onClick: moveDown,
+              }}
+            />
+            <Button
+              ref={dragButtonRef}
+              data-testid={`${testId}_drag-button`}
+              data-index={index}
+              disabled={editionState !== ResourceEditionState.SAVED}
+              iconId="ri-draggable"
+              title="Réordonner"
+              size="small"
+              priority="tertiary no outline"
+              className={styles.dragButton}
+              type="button"
+              nativeButtonProps={{
+                onPointerDown: handleDragButtonPointerDown,
+                onKeyDown: (event) => handleDragKeyDown(event, onSelect),
+                'aria-selected': isSelected,
+                'aria-keyshortcuts': draggableAriaKeyshortcuts,
+                'aria-label': isSelected
+                  ? 'Contenu sélectionnée pour réorganisation'
+                  : 'Sélectionner le contenu pour le réorganiser',
+              }}
+            />
+          </>
+        )}
         <ContentEdition
           ref={contentFormButtonRef}
           data-testid={testId}
@@ -153,21 +193,6 @@ const DraggableContentEdition = React.forwardRef(
           editionState={editionState}
           onDelete={onDelete}
         />
-        {editionState !== ResourceEditionState.EDITING && (
-          <Button
-            ref={dragButtonRef}
-            data-testid={`${testId}_drag-button`}
-            data-index={index}
-            disabled={editionState !== ResourceEditionState.SAVED}
-            iconId="ri-draggable"
-            title="Réordonner"
-            size="small"
-            priority="tertiary no outline"
-            className={styles.dragButton}
-            type="button"
-            nativeButtonProps={{ onPointerDown: onDragButtonPointerDown }}
-          />
-        )}
       </Reorder.Item>
     )
   },

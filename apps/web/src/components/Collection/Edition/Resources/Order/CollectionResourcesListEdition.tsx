@@ -20,7 +20,7 @@ const CollectionResourcesListEdition = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dragBoundaryRef = useRef<HTMLElement>(null)
-  const { moveUp, moveDown } = useDraggable()
+  const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
   const onReorder = (items: CollectionResourceListItem[]) =>
     setOrderedCollectionsResources(items)
@@ -33,34 +33,9 @@ const CollectionResourcesListEdition = ({
     setOrderedCollectionsResources(newResources)
   }
 
-  const handleKeyDown = async (event: React.KeyboardEvent) => {
-    const targetId = (event.target as HTMLButtonElement).id
-    const matchUpButton = targetId.match(/arrow-up-button-(\d+)/)
-    const matchDownButton = targetId.match(/arrow-down-button-(\d+)/)
-    const buttonIndex = matchUpButton
-      ? Number.parseInt(matchUpButton[1], 10)
-      : matchDownButton
-        ? Number.parseInt(matchDownButton[1], 10)
-        : null
-
-    switch (event.key) {
-      case ' ': {
-        event.preventDefault()
-        if (buttonIndex !== null) {
-          if (matchUpButton && buttonIndex > 0) {
-            await moveUp(buttonIndex, moveResource)
-          }
-          if (matchDownButton && buttonIndex < resources.length - 1) {
-            await moveDown(buttonIndex, resources.length, moveResource)
-          }
-        }
-        await Promise.resolve()
-        break
-      }
-      default: {
-        break
-      }
-    }
+  const onKeyDown = async (event: React.KeyboardEvent) => {
+    const { length } = resources
+    await handleKeyDown(event, length, moveResource)
   }
 
   return (
@@ -69,7 +44,7 @@ const CollectionResourcesListEdition = ({
       className="fr-mt-md-6w fr-mt-3w"
       role="list"
       aria-label="Liste des collections"
-      onKeyDown={handleKeyDown}
+      onKeyDown={onKeyDown}
       tabIndex={-1}
     >
       <Reorder.Group

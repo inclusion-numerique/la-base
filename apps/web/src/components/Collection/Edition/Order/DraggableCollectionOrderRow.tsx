@@ -37,7 +37,7 @@ const DraggableCollectionOrderRow = ({
     onDragButtonPointerDown,
     onDragStart,
     onDragEnd,
-    handleKeyDown,
+    handleDragKeyDown,
     ReorderItemCommonProps,
     'aria-keyshortcuts': draggableAriaKeyshortcuts,
   } = useDraggable()
@@ -79,7 +79,6 @@ const DraggableCollectionOrderRow = ({
         className={styles.arrowUpButton}
         type="button"
         nativeButtonProps={{
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
           onClick: moveUp,
         }}
       />
@@ -94,7 +93,7 @@ const DraggableCollectionOrderRow = ({
         type="button"
         nativeButtonProps={{
           onPointerDown: handleDragButtonPointerDown,
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onKeyDown: (event) => handleDragKeyDown(event, onSelect),
           'aria-selected': isSelected,
           'aria-keyshortcuts': draggableAriaKeyshortcuts,
           'aria-label': isSelected
@@ -111,7 +110,6 @@ const DraggableCollectionOrderRow = ({
         className={styles.arrowDownButton}
         type="button"
         nativeButtonProps={{
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
           onClick: moveDown,
         }}
       />
