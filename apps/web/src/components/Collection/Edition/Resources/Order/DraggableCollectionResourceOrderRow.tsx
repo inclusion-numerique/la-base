@@ -106,13 +106,21 @@ const DraggableCollectionResourceOrderRow = ({
       />
       <Button
         iconId="ri-arrow-down-line"
+<<<<<<< HEAD
         title="Descendre la ressource"
+=======
+        title="Descendre la collection"
+>>>>>>> 29786117 (feat: adjust collection resource reordering)
         size="small"
         id={`arrow-down-button-${index}`}
         priority="tertiary no outline"
         className={styles.arrowDownButton}
         type="button"
         nativeButtonProps={{
+<<<<<<< HEAD
+=======
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
+>>>>>>> 29786117 (feat: adjust collection resource reordering)
           onClick: moveDown,
         }}
       />
