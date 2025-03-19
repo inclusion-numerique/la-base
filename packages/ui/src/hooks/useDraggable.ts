@@ -62,7 +62,7 @@ const ReorderItemCommonProps = {
 
 const moveUp = async (
   index: number,
-  onMove: (fromIndex: number, toIndex: number) => Promise<void>,
+  onMove: (fromIndex: number, toIndex: number) => Promise<void> | void,
 ) => {
   if (index === 0) return
   await onMove(index, index - 1)
@@ -71,7 +71,7 @@ const moveUp = async (
 const moveDown = async (
   index: number,
   length: number,
-  onMove: (fromIndex: number, toIndex: number) => Promise<void>,
+  onMove: (fromIndex: number, toIndex: number) => Promise<void> | void,
 ) => {
   if (index === length - 1) return
   await onMove(index, index + 1)

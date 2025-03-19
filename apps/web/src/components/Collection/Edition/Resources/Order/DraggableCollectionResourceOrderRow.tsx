@@ -17,6 +17,8 @@ const DraggableCollectionResourceOrderRow = ({
   index,
   isSelected,
   onSelect,
+  moveUp,
+  moveDown,
 }: {
   resource: ResourceListItem
   collectionId: string
@@ -25,6 +27,8 @@ const DraggableCollectionResourceOrderRow = ({
   index: number
   isSelected: boolean
   onSelect: () => void
+  moveUp: () => Promise<void>
+  moveDown: () => Promise<void>
 }) => {
   const dragButtonRef = useRef<HTMLButtonElement>(null)
   const controls = useDragControls()
@@ -62,7 +66,6 @@ const DraggableCollectionResourceOrderRow = ({
         styles.content,
         'fr-pl-md-6w fr-pb-0 fr-border-top',
         count === index + 1 && 'fr-border-bottom',
-        isSelected && styles.selected,
       )}
       dragControls={controls}
       dragConstraints={dragConstraints}
@@ -70,6 +73,19 @@ const DraggableCollectionResourceOrderRow = ({
       onDragEnd={handleDragEnd}
       {...ReorderItemCommonProps}
     >
+      <Button
+        iconId="ri-arrow-up-line"
+        title="Remonter la collection"
+        size="small"
+        id={`arrow-up-button-${index}`}
+        priority="tertiary no outline"
+        className={styles.arrowUpButton}
+        type="button"
+        nativeButtonProps={{
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onClick: moveUp,
+        }}
+      />
       <Button
         ref={dragButtonRef}
         data-index={index}
@@ -87,6 +103,19 @@ const DraggableCollectionResourceOrderRow = ({
           'aria-label': isSelected
             ? 'Ressource sélectionnée pour réorganisation'
             : 'Sélectionner pour réorganiser',
+        }}
+      />
+      <Button
+        iconId="ri-arrow-down-line"
+        title="Descendre la collection"
+        size="small"
+        id={`arrow-down-button-${index}`}
+        priority="tertiary no outline"
+        className={styles.arrowDownButton}
+        type="button"
+        nativeButtonProps={{
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onClick: moveDown,
         }}
       />
       <CollectionResourceOrderRow
