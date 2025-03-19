@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import { Reorder, useDragControls } from 'framer-motion'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
 import type {
   ContentProjectionWithContext,
@@ -46,6 +47,7 @@ const DraggableContentEdition = React.forwardRef(
     const testId = `content-edition_${content.type}-${index}`
 
     const controls = useDragControls()
+    const draggable = useDraggable()
 
     const dragButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -57,39 +59,36 @@ const DraggableContentEdition = React.forwardRef(
       if (dragDisabled) {
         return
       }
-      controls.start(event)
+      draggable.onDragButtonPointerDown(controls, event)
     }
 
-    // Changing cursor on button when dragging as css selector causes flickering
-    const onDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) => {
-      const button = dragButtonRef.current
-      if (button) {
-        button.style.cursor = 'grabbing'
-      }
-    }
+    const onDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) =>
+      draggable.onDragStart(dragButtonRef, _event)
 
     // Trigger mutation on drag end
-    const onDragEnd = async () => {
-      const button = dragButtonRef.current
-      const buttonIndex = button?.dataset.index as string
-      if (button) {
-        button.style.cursor = ''
+    const onDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent) => {
+      const { target } = draggable.onDragEnd(dragButtonRef, event)
 
-        const newOrder = Number.parseInt(buttonIndex, 10)
-
-        if (content.order === newOrder) {
-          // No-op if new order is the same
-        }
-
-        await sendCommand({
-          name: 'ReorderContent',
-          payload: {
-            resourceId: resource.id,
-            id: content.id,
-            order: newOrder,
-          },
-        })
+      if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
+        // Only here for type safety
+        // It should never happen as the drag button is our only source of event
+        return
       }
+
+      const newOrder = Number.parseInt(target.dataset.index, 10)
+
+      if (content.order === newOrder) {
+        // No-op if new order is the same
+      }
+
+      await sendCommand({
+        name: 'ReorderContent',
+        payload: {
+          resourceId: resource.id,
+          id: content.id,
+          order: newOrder,
+        },
+      })
     }
 
     // Deletion callback passed down to view and form components
