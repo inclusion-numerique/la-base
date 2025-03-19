@@ -36,6 +36,7 @@
 .arrowUpButton {
   position: absolute;
   cursor: pointer;
+
   /* top: drag-button / 2 - 6px */
   top: 20px;
 
