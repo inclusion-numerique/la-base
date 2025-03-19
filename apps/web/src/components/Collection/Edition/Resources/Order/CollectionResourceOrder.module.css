@@ -39,9 +39,11 @@
 .arrowUpButton {
   position: absolute;
   cursor: pointer;
+
   /* top: drag-button / 2 - 9px */
   top: 8px;
   transition: opacity 200ms ease-in-out;
+
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
   padding: 4px 6px;
@@ -59,9 +61,11 @@
 .arrowDownButton {
   position: absolute;
   cursor: pointer;
+
   /* top: drag-button + drag-button / 2 + 9px */
   top: 60px;
   transition: opacity 200ms ease-in-out;
+
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
   padding: 4px 6px;
