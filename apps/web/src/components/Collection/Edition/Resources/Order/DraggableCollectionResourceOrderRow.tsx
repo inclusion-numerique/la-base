@@ -4,10 +4,10 @@ import { Reorder, useDragControls } from 'framer-motion'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { PointerEventHandler, RefObject, useRef } from 'react'
 import classNames from 'classnames'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import CollectionResourceOrderRow from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrderRow'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
-import { useDraggable } from '@app/ui/hooks/useDraggable'
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
@@ -17,6 +17,8 @@ const DraggableCollectionResourceOrderRow = ({
   index,
   isSelected,
   onSelect,
+  moveUp,
+  moveDown,
 }: {
   resource: ResourceListItem
   collectionId: string
@@ -25,6 +27,8 @@ const DraggableCollectionResourceOrderRow = ({
   index: number
   isSelected: boolean
   onSelect: () => void
+  moveUp: () => Promise<void>
+  moveDown: () => Promise<void>
 }) => {
   const dragButtonRef = useRef<HTMLButtonElement>(null)
   const controls = useDragControls()
@@ -44,9 +48,7 @@ const DraggableCollectionResourceOrderRow = ({
   const handleDragStart = (_event: MouseEvent | TouchEvent | PointerEvent) =>
     onDragStart(dragButtonRef, _event)
 
-  const handleDragEnd = async (
-    event: MouseEvent | TouchEvent | PointerEvent,
-  ) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent) => {
     const { target } = onDragEnd(dragButtonRef, event)
 
     if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
@@ -64,7 +66,6 @@ const DraggableCollectionResourceOrderRow = ({
         styles.content,
         'fr-pl-md-6w fr-pb-0 fr-border-top',
         count === index + 1 && 'fr-border-bottom',
-        isSelected && styles.selected,
       )}
       dragControls={controls}
       dragConstraints={dragConstraints}
@@ -72,6 +73,19 @@ const DraggableCollectionResourceOrderRow = ({
       onDragEnd={handleDragEnd}
       {...ReorderItemCommonProps}
     >
+      <Button
+        iconId="ri-arrow-up-line"
+        title="Remonter la collection"
+        size="small"
+        id={`arrow-up-button-${index}`}
+        priority="tertiary no outline"
+        className={styles.arrowUpButton}
+        type="button"
+        nativeButtonProps={{
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onClick: moveUp,
+        }}
+      />
       <Button
         ref={dragButtonRef}
         data-index={index}
@@ -89,6 +103,19 @@ const DraggableCollectionResourceOrderRow = ({
           'aria-label': isSelected
             ? 'Ressource sélectionnée pour réorganisation'
             : 'Sélectionner pour réorganiser',
+        }}
+      />
+      <Button
+        iconId="ri-arrow-down-line"
+        title="Descendre la collection"
+        size="small"
+        id={`arrow-down-button-${index}`}
+        priority="tertiary no outline"
+        className={styles.arrowDownButton}
+        type="button"
+        nativeButtonProps={{
+          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onClick: moveDown,
         }}
       />
       <CollectionResourceOrderRow

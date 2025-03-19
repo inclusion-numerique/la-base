@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react'
 import { AnimatePresence, Reorder } from 'framer-motion'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
 import DraggableResourceCollectionOrderRow from '@app/web/components/Collection/Edition/Resources/Order/DraggableCollectionResourceOrderRow'
 import { CollectionResourceListItem } from '@app/web/server/collections/getCollection'
@@ -19,47 +20,41 @@ const CollectionResourcesListEdition = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dragBoundaryRef = useRef<HTMLElement>(null)
+  const { moveUp, moveDown } = useDraggable()
 
   const onReorder = (items: CollectionResourceListItem[]) =>
     setOrderedCollectionsResources(items)
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (selectedIndex === null) return
+  const moveResource = (fromIndex: number, toIndex: number) => {
+    const newResources = [...resources]
+    const [movedItem] = newResources.splice(fromIndex, 1)
+    newResources.splice(toIndex, 0, movedItem)
+
+    setOrderedCollectionsResources(newResources)
+  }
+
+  const handleKeyDown = async (event: React.KeyboardEvent) => {
+    const targetId = (event.target as HTMLButtonElement).id
+    const matchUpButton = targetId.match(/arrow-up-button-(\d+)/)
+    const matchDownButton = targetId.match(/arrow-down-button-(\d+)/)
+    const buttonIndex = matchUpButton
+      ? Number.parseInt(matchUpButton[1], 10)
+      : matchDownButton
+        ? Number.parseInt(matchDownButton[1], 10)
+        : null
 
     switch (event.key) {
-      case 'ArrowUp': {
-        event.preventDefault()
-        if (selectedIndex > 0) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex - 1]
-          newList[selectedIndex - 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex - 1)
-        }
-        break
-      }
-      case 'ArrowDown': {
-        event.preventDefault()
-        if (selectedIndex < resources.length - 1) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex + 1]
-          newList[selectedIndex + 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex + 1)
-        }
-        break
-      }
-      case 'Escape': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      case 'Enter':
       case ' ': {
         event.preventDefault()
-        setSelectedIndex(null)
+        if (buttonIndex !== null) {
+          if (matchUpButton && buttonIndex > 0) {
+            await moveUp(buttonIndex, moveResource)
+          }
+          if (matchDownButton && buttonIndex < resources.length - 1) {
+            await moveDown(buttonIndex, resources.length, moveResource)
+          }
+        }
+        await Promise.resolve()
         break
       }
       default: {
@@ -67,6 +62,7 @@ const CollectionResourcesListEdition = ({
       }
     }
   }
+
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
@@ -94,6 +90,8 @@ const CollectionResourcesListEdition = ({
               dragConstraints={dragBoundaryRef}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
+              moveUp={() => moveUp(index, moveResource)}
+              moveDown={() => moveDown(index, resources.length, moveResource)}
             />
           ))}
         </AnimatePresence>
