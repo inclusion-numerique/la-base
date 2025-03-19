@@ -37,7 +37,7 @@ const DraggableCollectionResourceOrderRow = ({
     onDragButtonPointerDown,
     onDragStart,
     onDragEnd,
-    handleKeyDown,
+    handleDragKeyDown,
     ReorderItemCommonProps,
     'aria-keyshortcuts': draggableAriaKeyshortcuts,
   } = useDraggable()
@@ -75,14 +75,13 @@ const DraggableCollectionResourceOrderRow = ({
     >
       <Button
         iconId="ri-arrow-up-line"
-        title="Remonter la collection"
+        title="Remonter la ressource"
         size="small"
         id={`arrow-up-button-${index}`}
         priority="tertiary no outline"
         className={styles.arrowUpButton}
         type="button"
         nativeButtonProps={{
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
           onClick: moveUp,
         }}
       />
@@ -97,7 +96,7 @@ const DraggableCollectionResourceOrderRow = ({
         type="button"
         nativeButtonProps={{
           onPointerDown: handleDragButtonPointerDown,
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
+          onKeyDown: (event) => handleDragKeyDown(event, onSelect),
           'aria-selected': isSelected,
           'aria-keyshortcuts': draggableAriaKeyshortcuts,
           'aria-label': isSelected
@@ -107,14 +106,13 @@ const DraggableCollectionResourceOrderRow = ({
       />
       <Button
         iconId="ri-arrow-down-line"
-        title="Descendre la collection"
+        title="Descendre la ressource"
         size="small"
         id={`arrow-down-button-${index}`}
         priority="tertiary no outline"
         className={styles.arrowDownButton}
         type="button"
         nativeButtonProps={{
-          onKeyDown: (event) => handleKeyDown(event, onSelect),
           onClick: moveDown,
         }}
       />

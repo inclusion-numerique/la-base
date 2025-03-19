@@ -30,7 +30,10 @@ const onDragEnd = (
   return event
 }
 
-const handleKeyDown = (event: React.KeyboardEvent, onSelect: () => void) => {
+const handleDragKeyDown = (
+  event: React.KeyboardEvent,
+  onSelect: () => void,
+) => {
   if (event.key === ' ' || event.key === 'Enter') {
     event.preventDefault()
     onSelect()
@@ -77,11 +80,45 @@ const moveDown = async (
   await onMove(index, index + 1)
 }
 
+const handleKeyDown = async (
+  event: React.KeyboardEvent,
+  length: number,
+  onMove: (fromIndex: number, toIndex: number) => Promise<void> | void,
+) => {
+  const targetId = (event.target as HTMLButtonElement).id
+  const matchUpButton = targetId.match(/arrow-up-button-(\d+)/)
+  const matchDownButton = targetId.match(/arrow-down-button-(\d+)/)
+  const buttonIndex = matchUpButton
+    ? Number.parseInt(matchUpButton[1], 10)
+    : matchDownButton
+      ? Number.parseInt(matchDownButton[1], 10)
+      : null
+
+  switch (event.key) {
+    case ' ': {
+      event.preventDefault()
+      if (buttonIndex !== null) {
+        if (matchUpButton && buttonIndex > 0) {
+          await moveUp(buttonIndex, onMove)
+        }
+        if (matchDownButton && buttonIndex < length - 1) {
+          await moveDown(buttonIndex, length, onMove)
+        }
+      }
+      break
+    }
+    default: {
+      break
+    }
+  }
+}
+
 export const useDraggable = () => ({
   onDragButtonPointerDown,
   onDragStart,
   onDragEnd,
   handleKeyDown,
+  handleDragKeyDown,
   moveUp,
   moveDown,
   'aria-keyshortcuts': 'Space|Enter + ArrowUp|ArrowDown, Escape',

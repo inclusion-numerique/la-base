@@ -1,5 +1,6 @@
 import { AnimatePresence, Reorder } from 'framer-motion'
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import type { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
@@ -40,23 +41,46 @@ const ContentListEdition = React.forwardRef(
   ) => {
     // The state is used to reorder the items while dragging, it is derived from the props
     const [orderedContents, setOrderedContents] = useState(contents)
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
     // Reset the ordered contents when the props change
     useOnDiff(contents, setOrderedContents)
 
     // The onReorder is called when the user is dragging an item over other items
-    const onReorder = (items: ContentProjectionWithContext[]) => {
+    const onReorder = (items: ContentProjectionWithContext[]) =>
       setOrderedContents(items)
-    }
 
     // Used to constrain the drag to the list
     const dragBoundaryRef = useRef<HTMLElement>(null)
+    const { moveUp, moveDown, handleKeyDown } = useDraggable()
+
+    const moveContent = async (fromIndex: number, toIndex: number) => {
+      const newContents = [...orderedContents]
+      const [movedItem] = newContents.splice(fromIndex, 1)
+      newContents.splice(toIndex, 0, movedItem)
+      setOrderedContents(newContents)
+
+      await sendCommand({
+        name: 'ReorderContent',
+        payload: {
+          resourceId: resource.id,
+          id: movedItem.id,
+          order: toIndex,
+        },
+      })
+    }
+
+    const onKeyDown = async (event: React.KeyboardEvent) => {
+      const { length } = orderedContents
+      await handleKeyDown(event, length, moveContent)
+    }
 
     return (
       <Reorder.Group
         className={styles.contentList}
         values={orderedContents}
         onReorder={onReorder}
+        onKeyDown={onKeyDown}
         axis="y"
         ref={dragBoundaryRef}
       >
@@ -72,7 +96,11 @@ const ContentListEdition = React.forwardRef(
               sendCommand={sendCommand}
               resource={resource}
               editionState={editionState}
+              isSelected={selectedIndex === index}
+              onSelect={() => setSelectedIndex(index)}
               dragConstraints={dragBoundaryRef}
+              moveUp={() => moveUp(index, moveContent)}
+              moveDown={() => moveDown(index, contents.length, moveContent)}
             />
           ))}
         </AnimatePresence>
