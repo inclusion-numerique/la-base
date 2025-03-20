@@ -72,7 +72,9 @@ const ContentListEdition = React.forwardRef(
 
     const onKeyDown = async (event: React.KeyboardEvent) => {
       const { length } = orderedContents
-      await handleKeyDown(event, length, moveContent)
+      if (!editing) {
+        await handleKeyDown(event, length, moveContent)
+      }
     }
 
     return (
