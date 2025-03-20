@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react'
 import { AnimatePresence, Reorder } from 'framer-motion'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
 import DraggableResourceCollectionOrderRow from '@app/web/components/Collection/Edition/Resources/Order/DraggableCollectionResourceOrderRow'
 import { CollectionResourceListItem } from '@app/web/server/collections/getCollection'
@@ -19,61 +20,31 @@ const CollectionResourcesListEdition = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dragBoundaryRef = useRef<HTMLElement>(null)
+  const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
   const onReorder = (items: CollectionResourceListItem[]) =>
     setOrderedCollectionsResources(items)
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (selectedIndex === null) return
+  const moveResource = (fromIndex: number, toIndex: number) => {
+    const newResources = [...resources]
+    const [movedItem] = newResources.splice(fromIndex, 1)
+    newResources.splice(toIndex, 0, movedItem)
 
-    switch (event.key) {
-      case 'ArrowUp': {
-        event.preventDefault()
-        if (selectedIndex > 0) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex - 1]
-          newList[selectedIndex - 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex - 1)
-        }
-        break
-      }
-      case 'ArrowDown': {
-        event.preventDefault()
-        if (selectedIndex < resources.length - 1) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex + 1]
-          newList[selectedIndex + 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex + 1)
-        }
-        break
-      }
-      case 'Escape': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      case 'Enter':
-      case ' ': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      default: {
-        break
-      }
-    }
+    setOrderedCollectionsResources(newResources)
   }
+
+  const onKeyDown = async (event: React.KeyboardEvent) => {
+    const { length } = resources
+    await handleKeyDown(event, length, moveResource)
+  }
+
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="fr-mt-md-6w fr-mt-3w"
       role="list"
       aria-label="Liste des collections"
-      onKeyDown={handleKeyDown}
+      onKeyDown={onKeyDown}
       tabIndex={-1}
     >
       <Reorder.Group
@@ -94,6 +65,8 @@ const CollectionResourcesListEdition = ({
               dragConstraints={dragBoundaryRef}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
+              moveUp={() => moveUp(index, moveResource)}
+              moveDown={() => moveDown(index, resources.length, moveResource)}
             />
           ))}
         </AnimatePresence>

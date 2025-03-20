@@ -2,8 +2,9 @@
 
 import React, { useRef, useState } from 'react'
 import { AnimatePresence, Reorder } from 'framer-motion'
-import { useRouter } from 'next/navigation'
 import { createToast } from '@app/ui/toast/createToast'
+import { useRouter } from 'next/navigation'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import DraggableCollectionOrderRow from '@app/web/components/Collection/Edition/Order/DraggableCollectionOrderRow'
 import styles from '@app/web/components/Collection/Edition/Order/CollectionOrder.module.css'
@@ -21,16 +22,17 @@ const CollectionListEdition = ({
   const [orderedCollections, setOrderedCollections] = useState(collections)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dragBoundaryRef = useRef<HTMLElement>(null)
+  const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
   const onReorder = (items: CollectionListItem[]) =>
     setOrderedCollections(items)
 
   useOnDiff(collections, setOrderedCollections)
 
-  const sendCommand = async () => {
+  const sendCommand = async (updatedCollections: CollectionListItem[]) => {
     try {
       await updateOrdersMutation.mutateAsync({
-        collections: orderedCollections.map((collection, index) => ({
+        collections: updatedCollections.map((collection, index) => ({
           id: collection.id,
           order: index,
         })),
@@ -49,50 +51,18 @@ const CollectionListEdition = ({
     }
   }
 
-  const handleKeyDown = async (event: React.KeyboardEvent) => {
-    if (selectedIndex === null) return
+  const moveCollection = async (fromIndex: number, toIndex: number) => {
+    const newCollections = [...collections]
+    const [movedItem] = newCollections.splice(fromIndex, 1)
+    newCollections.splice(toIndex, 0, movedItem)
 
-    switch (event.key) {
-      case 'ArrowUp': {
-        event.preventDefault()
-        if (selectedIndex > 0) {
-          const newCollections = [...orderedCollections]
-          const temporary = newCollections[selectedIndex]
-          newCollections[selectedIndex] = newCollections[selectedIndex - 1]
-          newCollections[selectedIndex - 1] = temporary
-          setOrderedCollections(newCollections)
-          setSelectedIndex(selectedIndex - 1)
-        }
-        break
-      }
-      case 'ArrowDown': {
-        event.preventDefault()
-        if (selectedIndex < orderedCollections.length - 1) {
-          const newCollections = [...orderedCollections]
-          const temporary = newCollections[selectedIndex]
-          newCollections[selectedIndex] = newCollections[selectedIndex + 1]
-          newCollections[selectedIndex + 1] = temporary
-          setOrderedCollections(newCollections)
-          setSelectedIndex(selectedIndex + 1)
-        }
-        break
-      }
-      case 'Escape': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      case 'Enter':
-      case ' ': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        await sendCommand()
-        break
-      }
-      default: {
-        break
-      }
-    }
+    setOrderedCollections(newCollections)
+    await sendCommand(newCollections)
+  }
+
+  const onKeyDown = async (event: React.KeyboardEvent) => {
+    const { length } = collections
+    await handleKeyDown(event, length, moveCollection)
   }
 
   return (
@@ -101,7 +71,7 @@ const CollectionListEdition = ({
       className="fr-mt-md-6w fr-mt-3w"
       role="list"
       aria-label="Liste des collections"
-      onKeyDown={handleKeyDown}
+      onKeyDown={onKeyDown}
       tabIndex={-1}
     >
       <Reorder.Group
@@ -121,7 +91,11 @@ const CollectionListEdition = ({
               dragConstraints={dragBoundaryRef}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
-              sendCommand={sendCommand}
+              sendCommand={() => sendCommand(orderedCollections)}
+              moveUp={() => moveUp(index, moveCollection)}
+              moveDown={() =>
+                moveDown(index, collections.length, moveCollection)
+              }
             />
           ))}
         </AnimatePresence>

@@ -46,6 +46,7 @@ const DeleteCollectionResourceButton = ({
   }
   return (
     <Button
+      className="fr-mr-1w"
       priority="tertiary no outline"
       nativeButtonProps={{ onClick: onRemoveFromCollection }}
     >
