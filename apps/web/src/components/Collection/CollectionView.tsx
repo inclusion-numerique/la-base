@@ -68,7 +68,6 @@ const CollectionView = ({
                     user={user}
                     resourcesCount={collection.resources.length}
                     context="view"
-                    resourcesCount={collection.resources.length}
                   />
                 )}
               </div>
@@ -85,7 +84,6 @@ const CollectionView = ({
               collection={collection}
               canWrite={isOwner || canWrite}
               user={user}
-              resourcesCount={collection.resources.length}
               context="view"
             />
           </div>
