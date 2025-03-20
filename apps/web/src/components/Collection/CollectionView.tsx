@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@codegouvfr/react-dsfr/Button'
 import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
@@ -48,11 +49,24 @@ const CollectionView = ({
                 context="view"
               />
               <div className="fr-hidden fr-unhidden-md">
-                {!collection.isFavorites && (
+                {collection.isFavorites ? (
+                  collection.resources.length > 0 && (
+                    <Button
+                      priority="secondary"
+                      linkProps={{
+                        href: `/collections/${collection.slug}/gerer`,
+                      }}
+                    >
+                      <span className="ri-folder-open-line fr-mr-1w" />
+                      Gérer les ressources
+                    </Button>
+                  )
+                ) : (
                   <CollectionActions
                     collection={collection}
                     canWrite={isOwner || canWrite}
                     user={user}
+                    resourcesCount={collection.resources.length}
                     context="view"
                   />
                 )}
@@ -69,6 +83,7 @@ const CollectionView = ({
               collection={collection}
               canWrite={isOwner || canWrite}
               user={user}
+              resourcesCount={collection.resources.length}
               context="view"
             />
           </div>
