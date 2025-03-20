@@ -58,7 +58,7 @@ const CollectionView = ({
                       }}
                     >
                       <span className="ri-folder-open-line fr-mr-1w" />
-                      Gérer mes ressources
+                      Gérer les ressources
                     </Button>
                   )
                 ) : (
