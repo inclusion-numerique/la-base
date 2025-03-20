@@ -31,6 +31,7 @@ const CollectionActions = ({
   <div className={classNames('fr-flex fr-flex-gap-2v', className)}>
     {canWrite ? (
       <CollectionMoreActionsDropdown
+        resourcesCount={resourcesCount}
         priority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         modalPriority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         collection={collection}

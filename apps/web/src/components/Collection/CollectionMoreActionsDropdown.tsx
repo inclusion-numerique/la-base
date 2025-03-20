@@ -27,6 +27,7 @@ export const CollectionMoreActionsDropdown = ({
   dropdownControlClassName?: string
   buttonTitle?: string
   size?: ButtonProps['size']
+  resourcesCount: number
 }) => (
   <Dropdown
     id={`more_actions_for_${collection.slug}`}

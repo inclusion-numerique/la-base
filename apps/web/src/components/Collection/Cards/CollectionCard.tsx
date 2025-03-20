@@ -53,20 +53,16 @@ const CollectionCard = ({
         {!collection.isFavorites && (
           <span className="fr-text--xs fr-mb-0">
             Par&nbsp;
-            {collection.isPublic ? (
-              <Link
-                href={`/profils/${collection.createdBy.slug}`}
-                className="fr-link fr-position-relative fr-link--xs"
-              >
-                {collection.createdBy.name}
-              </Link>
-            ) : (
-              collection.createdBy.name
-            )}
+            <Link
+              href={`/profils/${collection.createdBy.slug}`}
+              className="fr-link fr-position-relative fr-link--xs"
+            >
+              {collection.createdBy.name}
+            </Link>
           </span>
         )}
         {collection.slug && (
-          <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-4v">
+          <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-mt-4v">
             <CollectionMetaData
               collection={{
                 title: collection.title,
@@ -80,6 +76,7 @@ const CollectionCard = ({
               count={resourcesCount}
               context="card"
               hideRessourceLabelOnSmallDevices
+              withPrivacyTag={!collection.isPublic}
             />
             {!collection.isFavorites && (
               <CollectionActions
@@ -88,6 +85,7 @@ const CollectionCard = ({
                 canWrite={canWrite}
                 user={user}
                 context="card"
+                resourcesCount={resourcesCount}
               />
             )}
           </div>

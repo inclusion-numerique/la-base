@@ -62,7 +62,7 @@ export const getProfileCollectionsCount = async (
   })
   const savedCollections = await prismaClient.savedCollection.count({
     where: {
-      collection: where,
+      savedById: profileId,
     },
   })
 

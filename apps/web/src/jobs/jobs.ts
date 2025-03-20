@@ -1,5 +1,6 @@
 import z from 'zod'
 import { BackupDatabaseJobValidation } from '@app/web/jobs/backup-database/backupDatabaseJob'
+import { ImportContactsToBrevoValidation } from '@app/web/jobs/import-contacts-to-brevo/ImportContactsToBrevoJob'
 
 /**
  * A job represents a task that can be executed asynchronously.
@@ -19,6 +20,7 @@ import { BackupDatabaseJobValidation } from '@app/web/jobs/backup-database/backu
 
 export const JobValidation = z.discriminatedUnion('name', [
   BackupDatabaseJobValidation,
+  ImportContactsToBrevoValidation,
 ])
 
 export type Job = z.infer<typeof JobValidation>
