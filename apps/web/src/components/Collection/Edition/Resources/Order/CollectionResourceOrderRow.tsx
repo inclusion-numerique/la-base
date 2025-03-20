@@ -5,10 +5,10 @@ import DeleteCollectionResourceButton from '@app/web/components/Collection/Editi
 
 const CollectionResourceOrderRow = ({
   resource,
-  collectionId,
+  onDelete,
 }: {
   resource: ResourceListItem
-  collectionId: string
+  onDelete: () => void
 }) => (
   <div className={styles.container}>
     <div className="fr-flex fr-flex-gap-2v fr-justify-content-space-between fr-align-items-center">
@@ -18,10 +18,7 @@ const CollectionResourceOrderRow = ({
           <ResourcesViewsAndMetadata resource={resource} />
         </div>
       </div>
-      <DeleteCollectionResourceButton
-        resourceId={resource.id}
-        collectionId={collectionId}
-      />
+      <DeleteCollectionResourceButton onDelete={onDelete} />
     </div>
   </div>
 )

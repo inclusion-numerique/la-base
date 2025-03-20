@@ -11,7 +11,6 @@ import styles from '@app/web/components/Collection/Edition/Resources/Order/Colle
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
-  collectionId,
   count,
   dragConstraints,
   index,
@@ -19,9 +18,9 @@ const DraggableCollectionResourceOrderRow = ({
   onSelect,
   moveUp,
   moveDown,
+  onDelete,
 }: {
   resource: ResourceListItem
-  collectionId: string
   count: number
   dragConstraints: RefObject<HTMLElement>
   index: number
@@ -29,6 +28,7 @@ const DraggableCollectionResourceOrderRow = ({
   onSelect: () => void
   moveUp: () => Promise<void>
   moveDown: () => Promise<void>
+  onDelete: () => void
 }) => {
   const dragButtonRef = useRef<HTMLButtonElement>(null)
   const controls = useDragControls()
@@ -116,10 +116,7 @@ const DraggableCollectionResourceOrderRow = ({
           onClick: moveDown,
         }}
       />
-      <CollectionResourceOrderRow
-        resource={resource}
-        collectionId={collectionId}
-      />
+      <CollectionResourceOrderRow resource={resource} onDelete={onDelete} />
     </Reorder.Item>
   )
 }
