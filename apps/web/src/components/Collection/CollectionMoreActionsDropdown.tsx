@@ -20,7 +20,6 @@ export const CollectionMoreActionsDropdown = ({
     slug: string
     title: string
   }
-  resourcesCount: number
   priority?: ButtonProps['priority']
   modalPriority?: ButtonProps['priority']
   modalControlClassName?: string

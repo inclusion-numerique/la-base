@@ -85,7 +85,6 @@ const CollectionCard = ({
                 canWrite={canWrite}
                 user={user}
                 context="card"
-                resourcesCount={resourcesCount}
               />
             )}
           </div>

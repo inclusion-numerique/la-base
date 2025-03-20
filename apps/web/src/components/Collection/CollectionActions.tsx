@@ -35,7 +35,6 @@ const CollectionActions = ({
         priority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         modalPriority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         collection={collection}
-        resourcesCount={resourcesCount}
         buttonTitle={context === 'view' ? 'Options' : undefined}
       />
     ) : (
