@@ -207,6 +207,67 @@ export const resourceRouter = router({
         }
       },
     ),
+  removeListFromCollection: protectedProcedure
+    .input(
+      z.array(z.object({ resourceId: z.string(), collectionId: z.string() })),
+    )
+    .mutation(async ({ input, ctx: { user } }) =>
+      prismaClient.$transaction(async (tx) =>
+        Promise.all(
+          input.map(async (res) => {
+            const { resourceId, collectionId } = res
+            const collection = await tx.collection.findUnique({
+              where: { id: collectionId },
+              select: collectionAuthorizationTargetSelect,
+            })
+
+            const resource = await tx.resource.findUnique({
+              where: { id: resourceId },
+              select: resourceAuthorizationTargetSelect,
+            })
+
+            if (!collection || !resource) {
+              throw notFoundError()
+            }
+
+            authorizeOrThrow(
+              resourceAuthorization(resource, user).hasPermission(
+                ResourcePermissions.ReadResourceContent,
+              ),
+            )
+
+            authorizeOrThrow(
+              collectionAuthorization(collection, user).hasPermission(
+                CollectionPermissions.AddToCollection,
+              ),
+            )
+
+            const resultCollection = await tx.collection.update({
+              where: {
+                id: collectionId,
+              },
+              data: {
+                updated: new Date(),
+                resources: {
+                  delete: {
+                    resourceId_collectionId: { collectionId, resourceId },
+                  },
+                },
+              },
+              select: {
+                id: true,
+                title: true,
+              },
+            })
+
+            return {
+              resource,
+              collection: resultCollection,
+            }
+          }),
+        ),
+      ),
+    ),
   feedback: protectedProcedure
     .input(SendResourceFeedbackValidation)
     .mutation(async ({ input, ctx: { user } }) =>
