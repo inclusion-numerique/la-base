@@ -12,6 +12,7 @@ export const CollectionMoreActionsDropdown = ({
   dropdownControlClassName,
   buttonTitle,
   size = 'small',
+  resourcesCount,
 }: {
   collection: {
     isFavorites: boolean
@@ -25,6 +26,7 @@ export const CollectionMoreActionsDropdown = ({
   dropdownControlClassName?: string
   buttonTitle?: string
   size?: ButtonProps['size']
+  resourcesCount: number
 }) => (
   <Dropdown
     id={`more_actions_for_${collection.slug}`}
@@ -48,21 +50,25 @@ export const CollectionMoreActionsDropdown = ({
     }
   >
     <ul>
-      <li>
-        <Link
-          className="fr-btn fr-btn--sm"
-          href={`/collections/${collection.slug}/gerer`}
-        >
-          <div>
-            <span
-              className="ri-folder-open-line fr-mr-1w fr-text-label--blue-france"
-              aria-hidden
-            />
-            Gérer les ressources
-          </div>
-        </Link>
-      </li>
-      <hr className="fr-hidden fr-unhidden-sm fr-mx-3v fr-pb-1v" />
+      {resourcesCount > 0 && (
+        <>
+          <li>
+            <Link
+              className="fr-btn fr-btn--sm"
+              href={`/collections/${collection.slug}/gerer`}
+            >
+              <div>
+                <span
+                  className="ri-folder-open-line fr-mr-1w fr-text-label--blue-france"
+                  aria-hidden
+                />
+                Gérer les ressources
+              </div>
+            </Link>
+          </li>
+          <hr className="fr-hidden fr-unhidden-sm fr-mx-3v fr-pb-1v" />
+        </>
+      )}
       <li>
         <Link
           className="fr-btn fr-btn--sm"

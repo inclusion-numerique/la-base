@@ -11,6 +11,7 @@ const CollectionActions = ({
   user,
   className,
   context,
+  resourcesCount,
 }: {
   collection: {
     isPublic: boolean
@@ -25,10 +26,12 @@ const CollectionActions = ({
   user: SessionUser | null
   context: 'view' | 'card' | 'contextModal'
   className?: string
+  resourcesCount: number
 }) => (
   <div className={classNames('fr-flex fr-flex-gap-2v', className)}>
     {canWrite ? (
       <CollectionMoreActionsDropdown
+        resourcesCount={resourcesCount}
         priority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         modalPriority={context === 'view' ? 'secondary' : 'tertiary no outline'}
         collection={collection}
