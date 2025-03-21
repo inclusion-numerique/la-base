@@ -5,6 +5,7 @@ import {
 } from '@app/web/server/resources/feature/AddContent'
 import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import { sortContents } from '@app/web/server/resources/sortContents'
 
 export const handleAddContent: ResourceMutationCommandHandler<
   AddContentCommand,
@@ -20,29 +21,40 @@ export const handleAddContent: ResourceMutationCommandHandler<
 })
 
 export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
-  { timestamp, data: { __version, ...rest } },
+  { timestamp, data: contentAdded },
   resource,
-) => ({
-  ...resource,
-  contents: [
-    ...resource.contents,
-    {
-      title: null,
-      text: null,
-      legacyLinkedResourceId: null,
-      fileKey: null,
-      imageId: null,
-      imageAltText: null,
-      caption: null,
-      url: null,
-      showPreview: null,
-      linkDescription: null,
-      linkTitle: null,
-      linkImageUrl: null,
-      linkFaviconUrl: null,
-      order: resource.contents.length,
-      ...rest,
-    },
-  ],
-  updated: timestamp,
-})
+) => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { order, __version, ...rest } = contentAdded
+
+  const reorder = (orderArgument: number) =>
+    orderArgument >= contentAdded.order ? orderArgument + 1 : orderArgument
+
+  return {
+    ...resource,
+    contents: [
+      ...resource.contents.map((content) => ({
+        ...content,
+        order: reorder(content.order),
+      })),
+      {
+        title: null,
+        text: null,
+        legacyLinkedResourceId: null,
+        fileKey: null,
+        imageId: null,
+        imageAltText: null,
+        caption: null,
+        url: null,
+        showPreview: null,
+        linkDescription: null,
+        linkTitle: null,
+        linkImageUrl: null,
+        linkFaviconUrl: null,
+        order,
+        ...rest,
+      },
+    ].sort(sortContents),
+    updated: timestamp,
+  }
+}

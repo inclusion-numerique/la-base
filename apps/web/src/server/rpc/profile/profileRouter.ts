@@ -1,22 +1,22 @@
 import { z } from 'zod'
+import {
+  profileAuthorization,
+  ProfilePermissions,
+} from '@app/web/authorization/models/profileAuthorization'
+import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { searchMember } from '@app/web/server/profiles/searchMember'
 import {
   UpdateProfileContactsCommandValidation,
   UpdateProfileImageCommandValidation,
   UpdateProfileInformationsCommandValidation,
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
-import { searchMember } from '@app/web/server/profiles/searchMember'
-import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
-import { createSlug } from '@app/web/utils/createSlug'
-import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
-import {
-  profileAuthorization,
-  ProfilePermissions,
-} from '@app/web/authorization/models/profileAuthorization'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
+import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
+import { createSlug } from '@app/web/utils/createSlug'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,

@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createToast } from '@app/ui/toast/createToast'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentListEdition from '@app/web/components/Resource/Edition/ContentListEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
@@ -23,6 +22,7 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceBaseEdition from './ResourceBaseEdition'
@@ -286,7 +286,6 @@ const ResourceEdition = ({
               setEditing={setEditing}
             />
             <hr className="fr-mt-4w" />
-            <p className={styles.title}>Contenu de la ressource</p>
             <ContentListEdition
               ref={contentFormButtonRef}
               contents={updatedDraftResource.contents}
@@ -302,6 +301,7 @@ const ResourceEdition = ({
               sendCommand={sendCommand}
               editing={editing}
               setEditing={setEditing}
+              index={updatedDraftResource.contents.length - 1}
             />
           </>
         )}

@@ -103,6 +103,7 @@ const ContentListEdition = React.forwardRef(
               dragConstraints={dragBoundaryRef}
               moveUp={() => moveUp(index, moveContent)}
               moveDown={() => moveDown(index, contents.length, moveContent)}
+              count={orderedContents.length}
             />
           ))}
         </AnimatePresence>

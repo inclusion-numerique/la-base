@@ -97,15 +97,34 @@ import {
   ResourceSideEffectContext,
 } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+
 import {
-  PublicFeedbackChanged,
+  ChangeIndexationCommandValidation,
+  IndexationChanged,
+} from './ChangeIndexation'
+import {
+  applyIndexationChanged,
+  handleChangeIndexation,
+  onIndexationChanged,
+} from './ChangeIndexation.server'
+import {
   ChangePublicFeedbackCommandValidation,
+  PublicFeedbackChanged,
 } from './ChangePublicFeedback'
 import {
   applyPublicFeedbackChanged,
   handleChangePublicFeedback,
   onPublicFeedbackChanged,
 } from './ChangePublicFeedback.server'
+import {
+  ChangeVisibilityCommandValidation,
+  VisibilityChanged,
+} from './ChangeVisibility'
+import {
+  applyVisibilityChanged,
+  handleChangeVisibility,
+  onVisibilityChanged,
+} from './ChangeVisibility.server'
 import { DeleteCommandValidation, ResourceDeleted } from './DeleteResource'
 import {
   applyResourceDeleted,
@@ -121,24 +140,6 @@ import {
   handleRepublish,
   onRepublished,
 } from './RepublishResource.server'
-import {
-  applyIndexationChanged,
-  handleChangeIndexation,
-  onIndexationChanged,
-} from './ChangeIndexation.server'
-import {
-  ChangeIndexationCommandValidation,
-  IndexationChanged,
-} from './ChangeIndexation'
-import {
-  applyVisibilityChanged,
-  handleChangeVisibility,
-  onVisibilityChanged,
-} from './ChangeVisibility.server'
-import {
-  ChangeVisibilityCommandValidation,
-  VisibilityChanged,
-} from './ChangeVisibility'
 
 /**
  * This module exports all the commands that can be applied to a resource and their handlers.
@@ -231,6 +232,7 @@ export type MutationHistoryResourceEvent = Exclude<
   HistoryResourceEvent,
   CreationHistoryResourceEvent
 >
+
 export type HistoryEventsForResource = [
   CreationHistoryResourceEvent,
   ...MutationHistoryResourceEvent[],

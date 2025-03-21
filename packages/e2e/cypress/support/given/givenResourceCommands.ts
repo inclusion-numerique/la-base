@@ -43,6 +43,7 @@ export const createTestResourceCommands = ({
     {
       name: 'AddContent',
       payload: {
+        order: 1,
         resourceId,
         title: 'Mon premier titre de section',
         type: 'SectionTitle',
@@ -51,6 +52,7 @@ export const createTestResourceCommands = ({
     {
       name: 'AddContent',
       payload: {
+        order: 2,
         resourceId,
         type: 'Text',
         text: '<p>Mon premier paragraphe</p>',
@@ -60,6 +62,7 @@ export const createTestResourceCommands = ({
       name: 'AddContent',
       payload: {
         resourceId,
+        order: 3,
         type: 'Link',
         title: 'Vous avez vu mon lien',
         url: 'https://www.imdb.com/title/tt0357111/',

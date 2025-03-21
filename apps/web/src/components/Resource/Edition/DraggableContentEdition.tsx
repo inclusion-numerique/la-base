@@ -16,6 +16,7 @@ import type {
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
 
 /**
  * This is draggable using Framer Motion
@@ -36,6 +37,7 @@ const DraggableContentEdition = React.forwardRef(
       onSelect,
       moveUp,
       moveDown,
+      count,
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
@@ -49,6 +51,7 @@ const DraggableContentEdition = React.forwardRef(
       onSelect: () => void
       moveUp: () => Promise<void>
       moveDown: () => Promise<void>
+      count: number
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -84,28 +87,25 @@ const DraggableContentEdition = React.forwardRef(
     const handleDragEnd = async (
       event: MouseEvent | TouchEvent | PointerEvent,
     ) => {
-      const { target } = onDragEnd(dragButtonRef, event)
+      onDragEnd(dragButtonRef, event)
+      const button = dragButtonRef.current
+      const buttonIndex = button?.dataset.index as string
+      if (button) {
+        const newOrder = Number.parseInt(buttonIndex, 10) + 1
 
-      if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
-        // Only here for type safety
-        // It should never happen as the drag button is our only source of event
-        return
+        if (content.order === newOrder) {
+          // No-op if new order is the same
+        }
+
+        await sendCommand({
+          name: 'ReorderContent',
+          payload: {
+            resourceId: resource.id,
+            id: content.id,
+            order: newOrder,
+          },
+        })
       }
-
-      const newOrder = Number.parseInt(target.dataset.index, 10)
-
-      if (content.order === newOrder) {
-        // No-op if new order is the same
-      }
-
-      await sendCommand({
-        name: 'ReorderContent',
-        payload: {
-          resourceId: resource.id,
-          id: content.id,
-          order: newOrder,
-        },
-      })
     }
 
     // Deletion callback passed down to view and form components
@@ -121,79 +121,93 @@ const DraggableContentEdition = React.forwardRef(
     }
 
     return (
-      <Reorder.Item
-        key={content.id}
-        value={content}
-        data-testid={testId}
-        className={styles.content}
-        dragControls={controls}
-        dragConstraints={dragConstraints}
-        onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
-        {...ReorderItemCommonProps}
-      >
-        {editionState !== ResourceEditionState.EDITING && (
-          <>
-            <Button
-              iconId="ri-arrow-up-line"
-              title="Remonter la collection"
-              size="small"
-              id={`arrow-up-button-${index}`}
-              priority="tertiary no outline"
-              className={styles.arrowUpButton}
-              type="button"
-              nativeButtonProps={{
-                onClick: moveUp,
-              }}
-            />
-
-            <Button
-              iconId="ri-arrow-down-line"
-              title="Descendre la collection"
-              size="small"
-              id={`arrow-down-button-${index}`}
-              priority="tertiary no outline"
-              className={styles.arrowDownButton}
-              type="button"
-              nativeButtonProps={{
-                onClick: moveDown,
-              }}
-            />
-            <Button
-              ref={dragButtonRef}
-              data-testid={`${testId}_drag-button`}
-              data-index={index}
-              disabled={editionState !== ResourceEditionState.SAVED}
-              iconId="ri-draggable"
-              title="Réordonner"
-              size="small"
-              priority="tertiary no outline"
-              className={styles.dragButton}
-              type="button"
-              nativeButtonProps={{
-                onPointerDown: handleDragButtonPointerDown,
-                onKeyDown: (event) => handleDragKeyDown(event, onSelect),
-                'aria-selected': isSelected,
-                'aria-keyshortcuts': draggableAriaKeyshortcuts,
-                'aria-label': isSelected
-                  ? 'Contenu sélectionnée pour réorganisation'
-                  : 'Sélectionner le contenu pour le réorganiser',
-              }}
-            />
-          </>
-        )}
-        <ContentEdition
-          ref={contentFormButtonRef}
+      <>
+        <Reorder.Item
+          key={content.id}
+          value={content}
           data-testid={testId}
-          content={content}
-          resource={resource}
-          sendCommand={sendCommand}
-          editing={editing}
-          setEditing={setEditing}
-          editionState={editionState}
-          onDelete={onDelete}
-        />
-      </Reorder.Item>
+          className={styles.content}
+          dragControls={controls}
+          dragConstraints={dragConstraints}
+          onDragEnd={handleDragEnd}
+          onDragStart={handleDragStart}
+          {...ReorderItemCommonProps}
+        >
+          <ContentEdition
+            ref={contentFormButtonRef}
+            data-testid={testId}
+            content={content}
+            resource={resource}
+            index={index}
+            sendCommand={sendCommand}
+            editing={editing}
+            setEditing={setEditing}
+            editionState={editionState}
+            onDelete={onDelete}
+          />
+          {editionState !== ResourceEditionState.EDITING && (
+            <>
+              <Button
+                iconId="ri-arrow-up-line"
+                title="Remonter la collection"
+                size="small"
+                id={`arrow-up-button-${index}`}
+                priority="tertiary no outline"
+                className={styles.arrowUpButton}
+                type="button"
+                nativeButtonProps={{
+                  onClick: moveUp,
+                }}
+              />
+
+              <Button
+                iconId="ri-arrow-down-line"
+                title="Descendre la collection"
+                size="small"
+                id={`arrow-down-button-${index}`}
+                priority="tertiary no outline"
+                className={styles.arrowDownButton}
+                type="button"
+                nativeButtonProps={{
+                  onClick: moveDown,
+                }}
+              />
+              <Button
+                ref={dragButtonRef}
+                data-testid={`${testId}_drag-button`}
+                data-index={index}
+                disabled={editionState !== ResourceEditionState.SAVED}
+                iconId="ri-draggable"
+                title="Réordonner"
+                size="small"
+                priority="tertiary no outline"
+                className={styles.dragButton}
+                type="button"
+                nativeButtonProps={{
+                  onPointerDown: handleDragButtonPointerDown,
+                  onKeyDown: (event) => handleDragKeyDown(event, onSelect),
+                  'aria-selected': isSelected,
+                  'aria-keyshortcuts': draggableAriaKeyshortcuts,
+                  'aria-label': isSelected
+                    ? 'Contenu sélectionnée pour réorganisation'
+                    : 'Sélectionner le contenu pour le réorganiser',
+                }}
+              />
+            </>
+          )}
+        </Reorder.Item>
+        {index !== count - 1 && (
+          <AddContent
+            ref={contentFormButtonRef}
+            resource={resource}
+            sendCommand={sendCommand}
+            editing={editing}
+            setEditing={setEditing}
+            withBorder
+            index={index}
+          />
+        )}
+      </>
     )
   },
 )

@@ -21,6 +21,7 @@
 .contentList {
   list-style: none;
   margin: 32px 0;
+  padding-inline-start: 0;
 
   &:empty {
     margin: 0;
@@ -130,10 +131,4 @@
       pointer-events: initial;
     }
   }
-}
-
-.contentEdition {
-  border-bottom: 1px solid var(--border-default-grey);
-  border-top: 1px solid var(--border-default-grey);
-  padding: 16px 0;
 }

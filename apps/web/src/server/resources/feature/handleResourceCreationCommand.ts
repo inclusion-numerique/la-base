@@ -28,7 +28,6 @@ export const handleResourceCreationCommand = async (
   const [creationEvent, ...mutationEvents] = (
     Array.isArray(handlerResult) ? handlerResult : [handlerResult]
   ) as HistoryEventsForResource
-
   let resource = applyCreationEvent(creationEvent)
 
   await prismaClient.$transaction(async (transaction) => {
