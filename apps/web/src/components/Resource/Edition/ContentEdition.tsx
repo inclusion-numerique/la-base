@@ -37,7 +37,7 @@ const ContentEdition = React.forwardRef(
 
     if (!editionMode) {
       return (
-        <div className={styles.contentEdition}>
+        <div className="fr-ml-2w">
           <ResourceContentView content={content} />
           <div className={styles.contentHoverableAction}>
             <Button

@@ -15,6 +15,7 @@ import type {
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
 
 /**
  * This is draggable using Framer Motion
@@ -31,6 +32,7 @@ const DraggableContentEdition = React.forwardRef(
       index,
       dragConstraints,
       editionState,
+      count,
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
@@ -40,6 +42,7 @@ const DraggableContentEdition = React.forwardRef(
       index: number
       dragConstraints: RefObject<HTMLElement>
       editionState: ResourceEditionState
+      count: number
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -111,71 +114,84 @@ const DraggableContentEdition = React.forwardRef(
     }
 
     return (
-      <Reorder.Item
-        key={content.id}
-        value={content}
-        data-testid={testId}
-        className={styles.content}
-        drag
-        dragListener={false}
-        dragControls={controls}
-        dragSnapToOrigin
-        dragConstraints={dragConstraints}
-        dragTransition={{
-          // Applied when releasing drag
-          bounceStiffness: 450,
-          bounceDamping: 30,
-        }}
-        onDragStart={onDragStart}
-        whileDrag={{
-          // Apply cursor style to whole element to avoid cursor flickering on imprecise drag
-          cursor: 'grabbing',
-        }}
-        onDragEnd={onDragEnd}
-        layout="position"
-        animate={{ opacity: 1, height: 'auto' }}
-        initial={false}
-        exit={{
-          // Applied when exit (deletion of content)
-          opacity: 0,
-          height: 0,
-        }}
-        transition={{
-          // I could not find an easy/performant way to apply different transitions to exit, reordering and shift :(
-          // This transition configuration WILL apply to ALL
-          // - exit
-          // - reordering
-          // - layout shift if content switch to edition / view mode and height changes
-          duration: 0.2,
-        }}
-      >
-        <ContentEdition
-          ref={contentFormButtonRef}
+      <>
+        <Reorder.Item
+          key={content.id}
+          value={content}
           data-testid={testId}
-          content={content}
-          resource={resource}
-          sendCommand={sendCommand}
-          editing={editing}
-          setEditing={setEditing}
-          editionState={editionState}
-          onDelete={onDelete}
-        />
-        {editionState !== ResourceEditionState.EDITING && (
-          <Button
-            ref={dragButtonRef}
-            data-testid={`${testId}_drag-button`}
-            data-index={index}
-            disabled={editionState !== ResourceEditionState.SAVED}
-            iconId="ri-draggable"
-            title="Réordonner"
-            size="small"
-            priority="tertiary no outline"
-            className={styles.dragButton}
-            type="button"
-            nativeButtonProps={{ onPointerDown: onDragButtonPointerDown }}
+          className={styles.content}
+          drag
+          dragListener={false}
+          dragControls={controls}
+          dragSnapToOrigin
+          dragConstraints={dragConstraints}
+          dragTransition={{
+            // Applied when releasing drag
+            bounceStiffness: 450,
+            bounceDamping: 30,
+          }}
+          onDragStart={onDragStart}
+          whileDrag={{
+            // Apply cursor style to whole element to avoid cursor flickering on imprecise drag
+            cursor: 'grabbing',
+          }}
+          onDragEnd={onDragEnd}
+          layout="position"
+          animate={{ opacity: 1, height: 'auto' }}
+          initial={false}
+          exit={{
+            // Applied when exit (deletion of content)
+            opacity: 0,
+            height: 0,
+          }}
+          transition={{
+            // I could not find an easy/performant way to apply different transitions to exit, reordering and shift :(
+            // This transition configuration WILL apply to ALL
+            // - exit
+            // - reordering
+            // - layout shift if content switch to edition / view mode and height changes
+            duration: 0.2,
+          }}
+        >
+          <ContentEdition
+            ref={contentFormButtonRef}
+            data-testid={testId}
+            content={content}
+            resource={resource}
+            sendCommand={sendCommand}
+            editing={editing}
+            setEditing={setEditing}
+            editionState={editionState}
+            onDelete={onDelete}
+          />
+          {editionState !== ResourceEditionState.EDITING && (
+            <Button
+              ref={dragButtonRef}
+              data-testid={`${testId}_drag-button`}
+              data-index={index}
+              disabled={editionState !== ResourceEditionState.SAVED}
+              iconId="ri-draggable"
+              title="Réordonner"
+              size="small"
+              priority="tertiary no outline"
+              className={styles.dragButton}
+              type="button"
+              nativeButtonProps={{ onPointerDown: onDragButtonPointerDown }}
+            />
+          )}
+        </Reorder.Item>
+        {index !== count - 1 && (
+          <AddContent
+            ref={contentFormButtonRef}
+            resource={resource}
+            index={index}
+            sendCommand={sendCommand}
+            editing={editing}
+            setEditing={setEditing}
+            withBorder
           />
         )}
-      </Reorder.Item>
+      </>
     )
   },
 )

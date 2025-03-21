@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { ContentType } from '@prisma/client'
 import classNames from 'classnames'
 import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { AnimatePresence, motion } from 'framer-motion'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import styles from './AddContentButton.module.css'
 
@@ -50,63 +52,113 @@ const contents = [
 const AddContentButton = ({
   onAdd,
   disabled,
+  index,
+  withBorder = false,
 }: {
   onAdd: (type: ContentType) => void
   disabled?: boolean
+  index: number
+  withBorder?: boolean
 }) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [open, setOpen] = useState(false)
+  const [openedIndexedMenu, setOpenedIndexedMenu] = useState<Array<number>>([])
 
-  useOnClickOutside(ref, () => setOpen(false))
+  const handleOpenMenu = () => {
+    setOpenedIndexedMenu((previous) =>
+      previous.includes(index)
+        ? previous.filter((index_) => index_ !== index)
+        : [...previous, index],
+    )
+  }
+
+  useOnClickOutside(ref, () => {
+    setOpenedIndexedMenu((previous) =>
+      previous.filter((index_) => index_ !== index),
+    )
+  })
 
   return (
     <div ref={ref} className={styles.container}>
-      <ButtonsGroup
-        buttons={[
-          {
-            onClick: () => setOpen(!open),
-            type: 'button',
-            priority: 'secondary',
-            iconId: 'fr-icon-add-line',
-            children: 'Ajouter un contenu',
-            nativeButtonProps: { 'data-testid': 'add-content-button' },
-            className: styles.button,
-            disabled,
-          },
-        ]}
-      />
-      {!disabled && open && (
-        <div className={styles.contents}>
-          {contents.map((content) => (
-            <button
-              type="button"
-              data-testid={`add-${content.type}-content-button`}
-              onClick={() => onAdd(content.type)}
-              key={content.type}
-              className={styles.content}
-            >
-              <Image src={content.image} width={24} height={24} alt="" />
-              <span className="fr-text--sm fr-text--medium fr-mb-0">
-                {content.label}
-              </span>
-              {!!content.description && (
-                <span
-                  className={classNames(
-                    'fr-text--sm fr-text--medium fr-mb-0',
-                    styles.dotSeparator,
-                  )}
-                >
-                  {' · '}
-                </span>
-              )}
-              {!!content.description && (
-                <span className="fr-text--xs fr-mb-0">
-                  {content.description}
-                </span>
-              )}
-            </button>
-          ))}
+      {withBorder ? (
+        <div
+          className={classNames(
+            styles.borderContainer,
+            openedIndexedMenu.includes(index) && styles.open,
+          )}
+        >
+          <hr className={styles.defaultBorder} />
+          <hr className={styles.border} />
+          <Button
+            onClick={handleOpenMenu}
+            type="button"
+            priority="tertiary no outline"
+            iconId="fr-icon-add-line"
+            nativeButtonProps={{ 'data-testid': 'add-content-button' }}
+            className={styles.buttonWithBorder}
+            disabled={disabled}
+          >
+            Ajouter un contenu
+          </Button>
+          <hr className={styles.border} />
         </div>
+      ) : (
+        <ButtonsGroup
+          buttons={[
+            {
+              onClick: handleOpenMenu,
+              type: 'button',
+              priority: 'secondary',
+              iconId: 'fr-icon-add-line',
+              children: 'Ajouter un contenu',
+              nativeButtonProps: { 'data-testid': 'add-content-button' },
+              className: styles.button,
+              disabled,
+            },
+          ]}
+        />
+      )}
+      {!disabled && (
+        <AnimatePresence>
+          {openedIndexedMenu.includes(index) && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.1 }}
+              className={styles.contents}
+            >
+              {contents.map((content) => (
+                <button
+                  type="button"
+                  data-testid={`add-${content.type}-content-button`}
+                  onClick={() => onAdd(content.type)}
+                  key={content.type}
+                  className={styles.content}
+                >
+                  <Image src={content.image} width={24} height={24} alt="" />
+                  <span className="fr-text--sm fr-text--medium fr-mb-0">
+                    {content.label}
+                  </span>
+                  {!!content.description && (
+                    <span
+                      className={classNames(
+                        'fr-text--sm fr-text--medium fr-mb-0',
+                        styles.dotSeparator,
+                      )}
+                    >
+                      {' · '}
+                    </span>
+                  )}
+                  {!!content.description && (
+                    <span className="fr-text--xs fr-mb-0">
+                      {content.description}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
     </div>
   )
