@@ -32,7 +32,6 @@ const AddContent = React.forwardRef(
       !!editing && editing.startsWith('add-')
         ? (editing?.split('-')[1] as ContentType)
         : null
-
     return isAddingContentType ? (
       <ResourceContentForm
         ref={contentFormButtonRef}
