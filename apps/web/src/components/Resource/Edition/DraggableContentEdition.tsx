@@ -15,6 +15,7 @@ import type {
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
 
 /**
  * This is draggable using Framer Motion
@@ -159,6 +160,13 @@ const DraggableContentEdition = React.forwardRef(
           setEditing={setEditing}
           editionState={editionState}
           onDelete={onDelete}
+        />
+        <AddContent
+          ref={contentFormButtonRef}
+          resource={resource}
+          sendCommand={sendCommand}
+          editing={editing}
+          setEditing={setEditing}
         />
         {editionState !== ResourceEditionState.EDITING && (
           <Button

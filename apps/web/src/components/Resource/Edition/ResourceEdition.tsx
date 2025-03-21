@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createToast } from '@app/ui/toast/createToast'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentListEdition from '@app/web/components/Resource/Edition/ContentListEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
@@ -293,13 +292,6 @@ const ResourceEdition = ({
               resource={draftResource}
               sendCommand={sendCommand}
               editionState={editionState}
-              editing={editing}
-              setEditing={setEditing}
-            />
-            <AddContent
-              ref={contentFormButtonRef}
-              resource={updatedDraftResource}
-              sendCommand={sendCommand}
               editing={editing}
               setEditing={setEditing}
             />
