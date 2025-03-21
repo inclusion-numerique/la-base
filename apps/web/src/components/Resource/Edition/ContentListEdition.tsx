@@ -62,18 +62,28 @@ const ContentListEdition = React.forwardRef(
       >
         <AnimatePresence initial={false}>
           {orderedContents.map((content, index) => (
-            <DraggableContentEdition
-              ref={contentFormButtonRef}
-              key={content.id}
-              content={content}
-              index={index}
-              editing={editing}
-              setEditing={setEditing}
-              sendCommand={sendCommand}
-              resource={resource}
-              editionState={editionState}
-              dragConstraints={dragBoundaryRef}
-            />
+            <>
+              <DraggableContentEdition
+                ref={contentFormButtonRef}
+                key={content.id}
+                content={content}
+                index={index}
+                editing={editing}
+                setEditing={setEditing}
+                sendCommand={sendCommand}
+                resource={resource}
+                editionState={editionState}
+                dragConstraints={dragBoundaryRef}
+              />
+              {/* <AddContent
+                ref={contentFormButtonRef}
+                resource={resource}
+                sendCommand={sendCommand}
+                editing={editing}
+                setEditing={setEditing}
+                withBorder
+              /> */}
+            </>
           ))}
         </AnimatePresence>
       </Reorder.Group>

@@ -160,6 +160,7 @@ const DraggableContentEdition = React.forwardRef(
           editionState={editionState}
           onDelete={onDelete}
         />
+
         {editionState !== ResourceEditionState.EDITING && (
           <Button
             ref={dragButtonRef}
