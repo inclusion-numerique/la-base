@@ -69,33 +69,27 @@ const DraggableContentEdition = React.forwardRef(
     }
 
     // Trigger mutation on drag end
-    const onDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent) => {
+    const onDragEnd = async () => {
       const button = dragButtonRef.current
+      const buttonIndex = button?.dataset.index as string
       if (button) {
         button.style.cursor = ''
+
+        const newOrder = Number.parseInt(buttonIndex, 10)
+
+        if (content.order === newOrder) {
+          // No-op if new order is the same
+        }
+
+        await sendCommand({
+          name: 'ReorderContent',
+          payload: {
+            resourceId: resource.id,
+            id: content.id,
+            order: newOrder,
+          },
+        })
       }
-
-      const { target } = event
-      if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
-        // Only here for type safety
-        // It should never happen as the drag button is our only source of event
-        return
-      }
-
-      const newOrder = Number.parseInt(target.dataset.index, 10)
-
-      if (content.order === newOrder) {
-        // No-op if new order is the same
-      }
-
-      await sendCommand({
-        name: 'ReorderContent',
-        payload: {
-          resourceId: resource.id,
-          id: content.id,
-          order: newOrder,
-        },
-      })
     }
 
     // Deletion callback passed down to view and form components

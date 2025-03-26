@@ -40,18 +40,10 @@ const DraggableCollectionOrderRow = ({
     }
   }
 
-  const onDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent) => {
+  const onDragEnd = async () => {
     const button = dragButtonRef.current
     if (button) {
       button.style.cursor = ''
-    }
-
-    const { target } = event
-    if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
-      // Only here for type safety
-      // It should never happen as the drag button is our only source of event
-      // eslint-disable-next-line no-useless-return
-      return
     }
 
     await sendCommand()
