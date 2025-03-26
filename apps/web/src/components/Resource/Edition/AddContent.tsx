@@ -12,11 +12,13 @@ const AddContent = React.forwardRef(
       editing,
       setEditing,
       sendCommand,
+      withBorder = false,
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
       setEditing: Dispatch<SetStateAction<string | null>>
       sendCommand: SendCommand
+      withBorder?: boolean
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -32,7 +34,6 @@ const AddContent = React.forwardRef(
       !!editing && editing.startsWith('add-')
         ? (editing?.split('-')[1] as ContentType)
         : null
-
     return isAddingContentType ? (
       <ResourceContentForm
         ref={contentFormButtonRef}
@@ -48,6 +49,7 @@ const AddContent = React.forwardRef(
       <AddContentButton
         disabled={!!editing && !isAddingContentType}
         onAdd={onAdd}
+        withBorder={withBorder}
       />
     )
   },
