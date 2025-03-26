@@ -44,6 +44,16 @@ export const handleResourceMutationCommand = async (
   let resource = initialResource
 
   const transactionEvents = async (t: PrismaTransaction) => {
+    const highestSequence = await t.resourceEvent.findFirst({
+      where: { resourceId },
+      orderBy: { sequence: 'desc' },
+      select: { sequence: true },
+    })
+
+    if (!highestSequence) {
+      throw new Error('No sequence found for resource')
+    }
+
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
 
@@ -58,6 +68,7 @@ export const handleResourceMutationCommand = async (
           id: v4(),
           resourceId: resource.id,
           byId: user?.id,
+          sequence: highestSequence.sequence + 1,
           ...event,
         },
       })
