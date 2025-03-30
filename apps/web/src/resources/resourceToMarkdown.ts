@@ -72,7 +72,6 @@ ${image.upload.name}
  */
 export const resourceToMarkdown = ({
   title,
-  slug,
   description,
   themes,
   contents,
@@ -80,14 +79,23 @@ export const resourceToMarkdown = ({
   supportTypes,
 }: ResourceForMarkdown): string =>
   `# ${title}
-Type: Ressource
-Url: https://lesbases.anct.gouv.fr/ressources/${slug}
 
 ${description}
 
-Themes: ${themes.map((theme) => themeLabels[theme]).join(', ')}
-Type de support: ${supportTypes.map((supportType) => supportTypeLabels[supportType]).join(', ')}
-Public cible: ${targetAudiences.map((targetAudience) => targetAudienceLabels[targetAudience]).join(', ')}
+${
+  themes.length > 0 &&
+  `Thématiques : ${themes.map((theme) => themeLabels[theme]).join(', ')}`
+}
+
+${
+  supportTypes.length > 0 &&
+  `Type de support : ${supportTypes.map((supportType) => supportTypeLabels[supportType]).join(', ')}`
+}  
+
+${
+  targetAudiences.length > 0 &&
+  `Public cible : ${targetAudiences.map((targetAudience) => targetAudienceLabels[targetAudience]).join(', ')}`
+}
 
 ${contents.map((content) => contentToMarkdown(content)).join('\n\n')}
 `

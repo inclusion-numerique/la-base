@@ -68,6 +68,7 @@ const CollectionView = ({
                     user={user}
                     resourcesCount={collection.resources.length}
                     context="view"
+                    resourcesCount={collection.resources.length}
                   />
                 )}
               </div>
