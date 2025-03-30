@@ -7,7 +7,6 @@ import {
 } from '@app/web/server/resources/getResourcesList'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 
-// Updated on 2024-08-30
 const featuredBaseIds = [
   // commentry-montmarault-neris-communaute
   '0d6f8e44-0a67-4ba7-84a1-6a0aac180a8d',
