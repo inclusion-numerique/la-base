@@ -12,16 +12,20 @@ const AddContent = React.forwardRef(
       editing,
       setEditing,
       sendCommand,
+      withBorder = false,
+      index,
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
       setEditing: Dispatch<SetStateAction<string | null>>
       sendCommand: SendCommand
+      withBorder?: boolean
+      index: number
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
     const onAdd = (contentType: ContentType) => {
-      setEditing(`add-${contentType}`)
+      setEditing(`add-${contentType}-${index}`)
     }
 
     const onDelete = () => {
@@ -29,7 +33,7 @@ const AddContent = React.forwardRef(
     }
 
     const isAddingContentType =
-      !!editing && editing.startsWith('add-')
+      !!editing && editing.startsWith('add-') && editing.endsWith(`-${index}`)
         ? (editing?.split('-')[1] as ContentType)
         : null
 
@@ -39,6 +43,7 @@ const AddContent = React.forwardRef(
         type={isAddingContentType}
         data-testid="add-content_form"
         mode="add"
+        index={index}
         resource={resource}
         setEditing={setEditing}
         sendCommand={sendCommand}
@@ -48,6 +53,8 @@ const AddContent = React.forwardRef(
       <AddContentButton
         disabled={!!editing && !isAddingContentType}
         onAdd={onAdd}
+        editing={!!editing}
+        withBorder={withBorder}
       />
     )
   },

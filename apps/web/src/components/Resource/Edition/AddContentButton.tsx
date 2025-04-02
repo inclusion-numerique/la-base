@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { ContentType } from '@prisma/client'
 import classNames from 'classnames'
 import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { AnimatePresence, motion } from 'framer-motion'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import styles from './AddContentButton.module.css'
 
@@ -50,9 +52,13 @@ const contents = [
 const AddContentButton = ({
   onAdd,
   disabled,
+  editing,
+  withBorder = false,
 }: {
   onAdd: (type: ContentType) => void
   disabled?: boolean
+  editing: boolean
+  withBorder?: boolean
 }) => {
   const ref = useRef<HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
@@ -61,52 +67,85 @@ const AddContentButton = ({
 
   return (
     <div ref={ref} className={styles.container}>
-      <ButtonsGroup
-        buttons={[
-          {
-            onClick: () => setOpen(!open),
-            type: 'button',
-            priority: 'secondary',
-            iconId: 'fr-icon-add-line',
-            children: 'Ajouter un contenu',
-            nativeButtonProps: { 'data-testid': 'add-content-button' },
-            className: styles.button,
-            disabled,
-          },
-        ]}
-      />
-      {!disabled && open && (
-        <div className={styles.contents}>
-          {contents.map((content) => (
-            <button
+      {withBorder ? (
+        <div
+          className={classNames(styles.borderContainer, open && styles.open)}
+        >
+          <hr className={styles.defaultBorder} />
+          <hr className={styles.border} />
+          {!editing && (
+            <Button
+              onClick={() => setOpen(!open)}
               type="button"
-              data-testid={`add-${content.type}-content-button`}
-              onClick={() => onAdd(content.type)}
-              key={content.type}
-              className={styles.content}
+              priority="tertiary no outline"
+              iconId="fr-icon-add-line"
+              nativeButtonProps={{ 'data-testid': 'add-content-button' }}
+              className={styles.buttonWithBorder}
+              disabled={disabled}
             >
-              <Image src={content.image} width={24} height={24} alt="" />
-              <span className="fr-text--sm fr-text--medium fr-mb-0">
-                {content.label}
-              </span>
-              {!!content.description && (
-                <span
-                  className={classNames(
-                    'fr-text--sm fr-text--medium fr-mb-0',
-                    styles.dotSeparator,
-                  )}
-                >
-                  {' · '}
-                </span>
-              )}
-              {!!content.description && (
-                <span className="fr-text--xs fr-mb-0">
-                  {content.description}
-                </span>
-              )}
-            </button>
-          ))}
+              Ajouter un contenu
+            </Button>
+          )}
+          <hr className={styles.border} />
         </div>
+      ) : (
+        <ButtonsGroup
+          buttons={[
+            {
+              onClick: () => setOpen(!open),
+              type: 'button',
+              priority: 'secondary',
+              iconId: 'fr-icon-add-line',
+              children: 'Ajouter un contenu',
+              nativeButtonProps: { 'data-testid': 'add-content-button' },
+              className: styles.button,
+              disabled,
+            },
+          ]}
+        />
+      )}
+      {!disabled && (
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.1 }}
+              className={styles.contents}
+            >
+              {contents.map((content) => (
+                <button
+                  type="button"
+                  data-testid={`add-${content.type}-content-button`}
+                  onClick={() => onAdd(content.type)}
+                  key={content.type}
+                  className={styles.content}
+                >
+                  <Image src={content.image} width={24} height={24} alt="" />
+                  <span className="fr-text--sm fr-text--medium fr-mb-0">
+                    {content.label}
+                  </span>
+                  {!!content.description && (
+                    <span
+                      className={classNames(
+                        'fr-text--sm fr-text--medium fr-mb-0',
+                        styles.dotSeparator,
+                      )}
+                    >
+                      {' · '}
+                    </span>
+                  )}
+                  {!!content.description && (
+                    <span className="fr-text--xs fr-mb-0">
+                      {content.description}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
     </div>
   )

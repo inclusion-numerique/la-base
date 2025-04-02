@@ -21,6 +21,7 @@
 .contentList {
   list-style: none;
   margin: 32px 0;
+  padding-inline-start: 0;
 
   &:empty {
     margin: 0;
@@ -48,10 +49,9 @@
   top: 12px;
   transition: opacity 200ms ease-in-out;
 
-   /* 4px on the left to allow space for focus-visible outline */
+  /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
   padding: 4px 6px;
-
 
   &:active {
     cursor: grabbing;
@@ -92,10 +92,4 @@
       pointer-events: initial;
     }
   }
-}
-
-.contentEdition {
-  border-bottom: 1px solid var(--border-default-grey);
-  border-top: 1px solid var(--border-default-grey);
-  padding: 16px 0;
 }

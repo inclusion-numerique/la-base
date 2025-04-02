@@ -35,6 +35,7 @@ export const applyMutationEvent = (
   if (!mutationApplier) {
     throw new Error(`Unknown mutation event type: "${event.type}"`)
   }
+
   return mutationApplier(event, resource)
 }
 

@@ -1,20 +1,76 @@
 .container {
   position: relative;
+  padding: 1rem 0;
 }
 
 .button {
   margin-bottom: 0 !important;
 }
 
-.contents {
+.buttonWithBorder {
+  margin-bottom: 0 !important;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.defaultBorder {
   position: absolute;
+  transition: opacity 200ms ease-in-out;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  background: var(--border-default-grey);
+  opacity: 1;
+}
+
+.border {
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  opacity: 0;
+  background: var(--border-default-grey);
+  transition: opacity 200ms ease-in-out;
+}
+
+.borderContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+
+  &:hover,
+  &.open {
+    .border {
+      background-image: linear-gradient(
+        0deg,
+        var(--background-action-high-blue-france),
+        var(--background-action-high-blue-france)
+      );
+      opacity: 1;
+    }
+
+    .buttonWithBorder {
+      opacity: 1;
+    }
+
+    .defaultBorder {
+      opacity: 0;
+    }
+  }
+}
+
+.contents {
+  margin-top: 1rem;
   cursor: pointer;
-  z-index: 2;
   background-color: var(--background-default-grey);
   width: 100%;
-  border-right: 1px solid var(--border-default-grey);
-  border-left: 1px solid var(--border-default-grey);
-  border-bottom: 1px solid var(--border-default-grey);
+  border: 1px solid var(--border-default-grey);
+  overflow: hidden;
 }
 
 .content {

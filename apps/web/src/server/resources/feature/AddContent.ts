@@ -1,11 +1,11 @@
-import z from 'zod'
 import { ContentType } from '@prisma/client'
+import z from 'zod'
 import { ContentPayloadCommandValidation } from './Content'
 
 export const AddContentCommandValidation = z.object({
   name: z.literal('AddContent'),
   payload: z.intersection(
-    z.object({ resourceId: z.string().uuid() }),
+    z.object({ resourceId: z.string().uuid(), order: z.number() }),
     ContentPayloadCommandValidation,
   ),
 })
@@ -22,6 +22,7 @@ export type ContentAddedV1 = {
   imageId?: string | null
   imageAltText?: string | null
   fileKey?: string | null
+  order: number
   url?: string
   showPreview?: boolean
   linkDescription?: string | null

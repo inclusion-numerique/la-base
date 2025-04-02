@@ -1,13 +1,19 @@
+import { v4 } from 'uuid'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import { ContentAdded } from '@app/web/server/resources/feature/AddContent'
 import {
   CreateResourceCommand,
   ResourceCreated,
 } from '@app/web/server/resources/feature/CreateResource'
+import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import {
+  ApplierResourceEvent,
+  ResourceCreationEventApplier,
+} from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
-import { createSlug } from '@app/web/utils/createSlug'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const handleCreateResource: ResourceCreationCommandHandler<
   CreateResourceCommand,
@@ -95,4 +101,57 @@ export const onCreated: ResourceEventSideEffect<ResourceCreated> = async (
       isPublic: null,
     },
   })
+}
+export const handleReorderContent = (
+  { data: { id } }: ContentAdded,
+  resource: ResourceProjection,
+) => {
+  const newContent = resource.contents.find((content) => id === content.id)
+  if (!newContent) {
+    return []
+  }
+
+  const reorder = (order: number) =>
+    order > newContent.order ? order + 1 : order
+
+  return resource.contents
+    .filter((content) => content.id !== id)
+    .map(({ id: contentId, order: contentOrder }) => ({
+      type: 'ContentReordered' as ApplierResourceEvent['type'],
+      timestamp: new Date(),
+      data: {
+        id: contentId,
+        order: reorder(contentOrder),
+      },
+    }))
+}
+
+export const onContentAdded: ResourceEventSideEffect<ContentAdded> = async (
+  event,
+  resource,
+  { transaction },
+) => {
+  if (event.data.order < resource.contents.length) {
+    const reorderedContents = handleReorderContent(event, resource)
+    const highestSequence = await transaction.resourceEvent.findFirst({
+      where: { resourceId: resource.id },
+      orderBy: { sequence: 'desc' },
+      select: { sequence: true },
+    })
+
+    if (!highestSequence) {
+      throw new Error(
+        'No highest sequence found while reordering contents on content creation',
+      )
+    }
+
+    await transaction.resourceEvent.createMany({
+      data: reorderedContents.map((content, index) => ({
+        id: v4(),
+        sequence: highestSequence.sequence + index,
+        resourceId: resource.id,
+        ...content,
+      })),
+    })
+  }
 }
