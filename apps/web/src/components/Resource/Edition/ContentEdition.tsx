@@ -18,6 +18,7 @@ const ContentEdition = React.forwardRef(
       sendCommand,
       resource,
       content,
+      index,
       'data-testid': dataTestId,
       editionState,
       onDelete,
@@ -27,6 +28,7 @@ const ContentEdition = React.forwardRef(
       setEditing: Dispatch<SetStateAction<string | null>>
       sendCommand: SendCommand
       content: ContentProjectionWithContext
+      index: number
       'data-testid'?: string
       editionState: ResourceEditionState
       onDelete: () => void | Promise<void>
@@ -71,10 +73,11 @@ const ContentEdition = React.forwardRef(
     }
 
     return (
-      <div className={styles.contentEdition}>
+      <div className="fr-py-2w">
         <ResourceContentForm
           ref={contentFormButtonRef}
           type={content.type}
+          index={index}
           mode="edit"
           data-testid={dataTestId ? `${dataTestId}_form` : undefined}
           resource={resource}

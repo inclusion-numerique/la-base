@@ -51,6 +51,7 @@ const ContentListEdition = React.forwardRef(
 
     // Used to constrain the drag to the list
     const dragBoundaryRef = useRef<HTMLElement>(null)
+    console.log('orderedContents', orderedContents)
 
     return (
       <Reorder.Group

@@ -60,7 +60,6 @@ export const resourceRouter = router({
     .input(ResourceMutationCommandsValidation)
     .mutation(async ({ input: command, ctx: { user } }) => {
       // Security is handled in this mutation as it is the responsibility of this layer and not the event sourcing layer
-
       const resource = await prismaClient.resource.findUnique({
         where: { id: command.payload.resourceId },
         select: resourceAuthorizationTargetSelect,

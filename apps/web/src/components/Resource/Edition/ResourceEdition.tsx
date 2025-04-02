@@ -301,6 +301,7 @@ const ResourceEdition = ({
               sendCommand={sendCommand}
               editing={editing}
               setEditing={setEditing}
+              index={updatedDraftResource.contents.length}
             />
           </>
         )}

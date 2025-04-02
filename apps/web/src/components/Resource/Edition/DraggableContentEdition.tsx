@@ -158,6 +158,7 @@ const DraggableContentEdition = React.forwardRef(
             data-testid={testId}
             content={content}
             resource={resource}
+            index={index}
             sendCommand={sendCommand}
             editing={editing}
             setEditing={setEditing}
@@ -184,11 +185,11 @@ const DraggableContentEdition = React.forwardRef(
           <AddContent
             ref={contentFormButtonRef}
             resource={resource}
-            index={index}
             sendCommand={sendCommand}
             editing={editing}
             setEditing={setEditing}
             withBorder
+            index={index}
           />
         )}
       </>

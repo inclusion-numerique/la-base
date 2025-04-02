@@ -40,7 +40,6 @@ export const handleResourceMutationCommand = async (
   const mutationEvents = (
     Array.isArray(handlerResult) ? handlerResult : [handlerResult]
   ) as MutationHistoryResourceEvent[]
-
   let resource = initialResource
 
   const transactionEvents = async (t: PrismaTransaction) => {

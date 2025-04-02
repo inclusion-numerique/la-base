@@ -20,7 +20,7 @@ export const handleAddContent: ResourceMutationCommandHandler<
 })
 
 export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
-  { timestamp, data: { __version, ...rest } },
+  { timestamp, data: { __version, order, ...rest } },
   resource,
 ) => ({
   ...resource,
@@ -40,7 +40,7 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
       linkTitle: null,
       linkImageUrl: null,
       linkFaviconUrl: null,
-      order: resource.contents.length,
+      order,
       ...rest,
     },
   ],

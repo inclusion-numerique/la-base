@@ -52,60 +52,47 @@ const contents = [
 const AddContentButton = ({
   onAdd,
   disabled,
-  index,
+  editing,
   withBorder = false,
 }: {
   onAdd: (type: ContentType) => void
   disabled?: boolean
-  index: number
+  editing: boolean
   withBorder?: boolean
 }) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [openedIndexedMenu, setOpenedIndexedMenu] = useState<Array<number>>([])
+  const [open, setOpen] = useState(false)
 
-  const handleOpenMenu = () => {
-    setOpenedIndexedMenu((previous) =>
-      previous.includes(index)
-        ? previous.filter((index_) => index_ !== index)
-        : [...previous, index],
-    )
-  }
-
-  useOnClickOutside(ref, () => {
-    setOpenedIndexedMenu((previous) =>
-      previous.filter((index_) => index_ !== index),
-    )
-  })
+  useOnClickOutside(ref, () => setOpen(false))
 
   return (
     <div ref={ref} className={styles.container}>
       {withBorder ? (
         <div
-          className={classNames(
-            styles.borderContainer,
-            openedIndexedMenu.includes(index) && styles.open,
-          )}
+          className={classNames(styles.borderContainer, open && styles.open)}
         >
           <hr className={styles.defaultBorder} />
           <hr className={styles.border} />
-          <Button
-            onClick={handleOpenMenu}
-            type="button"
-            priority="tertiary no outline"
-            iconId="fr-icon-add-line"
-            nativeButtonProps={{ 'data-testid': 'add-content-button' }}
-            className={styles.buttonWithBorder}
-            disabled={disabled}
-          >
-            Ajouter un contenu
-          </Button>
+          {!editing && (
+            <Button
+              onClick={() => setOpen(!open)}
+              type="button"
+              priority="tertiary no outline"
+              iconId="fr-icon-add-line"
+              nativeButtonProps={{ 'data-testid': 'add-content-button' }}
+              className={styles.buttonWithBorder}
+              disabled={disabled}
+            >
+              Ajouter un contenu
+            </Button>
+          )}
           <hr className={styles.border} />
         </div>
       ) : (
         <ButtonsGroup
           buttons={[
             {
-              onClick: handleOpenMenu,
+              onClick: () => setOpen(!open),
               type: 'button',
               priority: 'secondary',
               iconId: 'fr-icon-add-line',
@@ -119,7 +106,7 @@ const AddContentButton = ({
       )}
       {!disabled && (
         <AnimatePresence>
-          {openedIndexedMenu.includes(index) && (
+          {open && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
