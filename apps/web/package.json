@@ -92,7 +92,7 @@
     "mjml": "^4.15.3",
     "mjml-react": "^2.0.8",
     "nanoid": "^5.0.7",
-    "next": "^14.2.25",
+    "next": "^14.2.26",
     "next-auth": "4.24.7",
     "node-html-parser": "^6.1.13",
     "nodemailer": "^6.9.14",
