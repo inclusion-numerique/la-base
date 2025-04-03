@@ -125,16 +125,28 @@ export const rankResources = async (
     }[]
   >`
       WITH data AS (SELECT resources.id,
-                           ts_rank_cd(
-                                   to_tsvector('french', unaccent(
-                                           resources.title || ' '
-                                               || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
-                                               || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
-                                               || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
-                                               || resources.description || ' '
-                                                         )),
-                                   to_tsquery('french', unaccent(${searchTerm}))
-                           )                              AS rank,
+                           GREATEST(
+                            ts_rank_cd(
+                                to_tsvector('simple', unaccent(
+                                    resources.title || ' '
+                                    || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
+                                    || resources.description || ' '
+                                )),
+                                to_tsquery('simple', unaccent(${searchTerm}))
+                            ),
+                            ts_rank_cd(
+                                to_tsvector('french', unaccent(
+                                    resources.title || ' '
+                                    || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
+                                    || resources.description || ' '
+                                )),
+                                to_tsquery('french', unaccent(${searchTerm}))
+                            )
+                           ) AS rank,
                            resources.created              AS created,
                            resources.updated              AS updated,
                            resources.published            AS published,
@@ -170,8 +182,15 @@ export const rankResources = async (
                                     || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
                                     || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
                                     || resources.description || ' '
-                               )) @@
-                               to_tsquery('french', unaccent(${searchTerm}))
+                               )) @@ to_tsquery('french', unaccent(${searchTerm}))
+                            OR to_tsvector('simple', unaccent(
+                                resources.title || ' '
+                                    || CASE WHEN array_length(resources.themes, 1) > 0 THEN replace(array_to_string(resources.themes, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.target_audiences, 1) > 0 THEN replace(array_to_string(resources.target_audiences, ' '), '_', ' ') ELSE '' END
+                                    || CASE WHEN array_length(resources.support_types, 1) > 0 THEN replace(array_to_string(resources.support_types, ' '), '_', ' ') ELSE '' END
+                                    || resources.description || ' '
+                                )) @@ to_tsquery('simple', unaccent(${searchTerm}))
+                            OR unaccent(resources.title) ILIKE unaccent(${searchTerm}) -- fallback to ILIKE for simple search
                         )
                       AND (
                         /* Authorization*/
