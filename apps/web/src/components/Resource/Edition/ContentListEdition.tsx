@@ -57,15 +57,13 @@ const ContentListEdition = React.forwardRef(
     const moveContent = async (fromIndex: number, toIndex: number) => {
       const newContents = [...orderedContents]
       const [movedItem] = newContents.splice(fromIndex, 1)
-      newContents.splice(toIndex, 0, movedItem)
-      setOrderedContents(newContents)
 
       await sendCommand({
         name: 'ReorderContent',
         payload: {
           resourceId: resource.id,
           id: movedItem.id,
-          order: toIndex,
+          order: toIndex + 1,
         },
       })
     }

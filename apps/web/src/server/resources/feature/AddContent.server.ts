@@ -35,7 +35,7 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
     contents: [
       ...resource.contents.map((content) => ({
         ...content,
-        order: reorder(content.order),
+        order: reorder(content.order ?? resource.contents.length),
       })),
       {
         title: null,
