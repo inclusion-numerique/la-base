@@ -56,6 +56,27 @@ export const resourceRouter = router({
 
       return handleResourceCreationCommand(command, { user })
     }),
+  delete: protectedProcedure
+    .input(z.object({ resourceId: z.string() }))
+    .mutation(async ({ input }) => {
+      const resource = await prismaClient.resource.findUnique({
+        where: { id: input.resourceId },
+      })
+
+      if (!resource) {
+        throw notFoundError()
+      }
+
+      const timestamp = new Date()
+
+      return prismaClient.resource.update({
+        where: { id: input.resourceId },
+        data: {
+          deleted: timestamp,
+          updated: timestamp,
+        },
+      })
+    }),
   mutate: protectedProcedure
     .input(ResourceMutationCommandsValidation)
     .mutation(async ({ input: command, ctx: { user } }) => {
