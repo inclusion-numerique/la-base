@@ -1,3 +1,12 @@
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { prismaClient } from '@app/web/prismaClient'
+import {
+  resourceListSelect,
+  toResourceWithFeedbackAverage,
+} from '@app/web/server/resources/getResourcesList'
+import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFeedbackThresholds'
+import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
+import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import {
   defaultPaginationParams,
   defaultSearchParams,
@@ -5,16 +14,7 @@ import {
   type SearchParams,
   type Sorting,
 } from '@app/web/server/search/searchQueryParams'
-import { prismaClient } from '@app/web/prismaClient'
-import type { SessionUser } from '@app/web/auth/sessionUser'
-import {
-  resourceListSelect,
-  toResourceWithFeedbackAverage,
-} from '@app/web/server/resources/getResourcesList'
-import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
-import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
-import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFeedbackThresholds'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
