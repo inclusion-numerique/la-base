@@ -117,9 +117,9 @@ const resource = (imageId: string | null) =>
     ] as ResourceContent[],
     isPublic: true,
     collections: [],
+    viewsCount: 45,
     _count: {
       collections: 45,
-      views: 45,
       resourceFeedback: 0,
     },
     resourceFeedback: [],
@@ -319,9 +319,9 @@ export const EditorPublishedWithFeedback: Story = {
   args: {
     resource: {
       ...resource('portrait'),
+      viewsCount: 45,
       _count: {
         collections: 45,
-        views: 45,
         resourceFeedback: 4,
       },
       feedbackAverage: 4,

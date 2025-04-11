@@ -39,6 +39,11 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // Admins can impersonate users to test flows
+  // We keep a reference here to be able to return to the initial admin session
+  impersonatorId String? @unique @map("usurper_id") @db.Uuid
+  impersonator   User?   @relation(fields: [impersonatorId], references: [id], name: "impersonator")
+
   @@map("sessions")
 }
 
@@ -78,7 +83,11 @@ model User {
   isPublic            Boolean   @default(true) @map("is_public")
   deleted             DateTime?
   hasSeenV2Onboarding DateTime? @map("has_seen_v2_onboarding")
+  timezone            String    @default("Europe/Paris")
+  // Created by a fixture system, can be reset and will only be here on preview envs
+  isFixture           Boolean   @default(false) @map("is_fixture")
 
+  impersonator        Session?               @relation(name: "impersonator")
   created             DateTime               @default(now())
   updated             DateTime               @default(now())
   lastLogin           DateTime?              @map("last_login")
@@ -108,8 +117,8 @@ model User {
 // And do not re-create the user in the system if the old email is found.
 // Instead, we update the user email in the system.
 model UserEmailReconciliation {
-  expectedNewEmail        String @id @unique @map("expected_new_email")
-  oldEmail                String @unique @map("old_email")
+  expectedNewEmail String @id @unique @map("expected_new_email")
+  oldEmail         String @unique @map("old_email")
 
   @@map("user_email_reconciliation")
 }
@@ -321,6 +330,7 @@ model Resource {
 
   published     DateTime? // The first publication date
   lastPublished DateTime? @map("last_published") // The most recent re-publication date
+  lastView      DateTime? @map("last_view") // The most recent view date to avoid joining the view table
   deleted       DateTime?
 
   base   Base?   @relation(fields: [baseId], references: [id])
@@ -333,6 +343,7 @@ model Resource {
   contributors     ResourceContributors[]
   collections      CollectionResource[]
   views            ResourceView[]
+  viewsCount       Int                    @default(0) @map("views_count") // Computed field to avoid joining the view table
   reports          ResourceReport[]
   resourceFeedback ResourceFeedback[]
 
@@ -768,7 +779,7 @@ model JobExecution {
 }
 
 model ResourceFeedback {
-  rating  Int
+  rating  Int // [1, 2, 3, 4]
   comment String?
 
   created DateTime  @default(now())

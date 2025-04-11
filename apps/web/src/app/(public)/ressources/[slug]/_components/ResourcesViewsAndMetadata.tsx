@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { numberToString } from '@app/web/utils/formatNumber'
 import styles from './ResourcesViewsAndMetadata.module.css'
 
 const ResourcesViewsAndMetadata = ({
@@ -9,7 +10,7 @@ const ResourcesViewsAndMetadata = ({
   resource,
 }: {
   className?: string
-  resource: Pick<ResourceListItem, '_count'>
+  resource: Pick<ResourceListItem, '_count' | 'viewsCount'>
 }) => (
   <div
     className={classNames(
@@ -20,17 +21,19 @@ const ResourcesViewsAndMetadata = ({
   >
     <span className="fr-icon-eye-line fr-icon--sm" />
     <div>
-      <span data-testid="resource-views-count">{resource._count.views}</span>
+      <span data-testid="resource-views-count">
+        {numberToString(resource.viewsCount)}
+      </span>
       <span className={styles.spanMdDisplay}>
         {' '}
-        Vue{sPluriel(resource._count.views)}
+        Vue{sPluriel(resource.viewsCount)}
       </span>
     </div>
     <div>·</div>
     <span className="fr-icon-bookmark-line fr-icon--sm" />
     <div className={styles.lastLeft}>
       <span data-testid="resource-collections-count">
-        {resource._count.collections}
+        {numberToString(resource._count.collections)}
       </span>
       <span className={styles.spanMdDisplay}>
         {' '}

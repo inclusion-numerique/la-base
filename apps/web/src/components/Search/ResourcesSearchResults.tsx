@@ -10,6 +10,7 @@ import {
   resourceAuthorization,
   ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
+import { numberToString } from '@app/web/utils/formatNumber'
 import styles from './SearchContents.module.css'
 
 const ResourcesSearchResults = ({
@@ -26,7 +27,7 @@ const ResourcesSearchResults = ({
   <>
     <div className={styles.header}>
       <h1 className="fr-text--lg fr-mb-0">
-        {totalCount} Ressource{sPluriel(totalCount)}
+        {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
       </h1>
       {children}
     </div>

@@ -22,7 +22,7 @@ export const getResourceFromEvents = async (
           data: true,
           byId: true,
         },
-        orderBy: [{ timestamp: 'asc' }, { sequence: 'asc' }],
+        orderBy: [{ sequence: 'asc' }, { timestamp: 'asc' }],
       },
     },
   })

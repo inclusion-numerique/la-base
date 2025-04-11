@@ -19,12 +19,12 @@ const {
   isOpenedByDefault: false,
 })
 
-const ProfileDeletion = () => {
+const ProfileDeletion = ({ userId }: { userId: string }) => {
   const mutation = trpc.profile.delete.useMutation()
 
   const handleDeleteProfile = async () => {
     try {
-      await mutation.mutateAsync()
+      await mutation.mutateAsync({ userId })
       await signOut({ redirect: true, callbackUrl: '/profil-supprime' })
     } catch (error) {
       console.error('Could not delete profile', error)

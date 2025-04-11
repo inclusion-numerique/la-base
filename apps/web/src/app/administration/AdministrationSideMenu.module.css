@@ -1,0 +1,62 @@
+.sideMenu {
+    /* md */
+    @media (min-width: 48em) {
+        :global .fr-sidemenu__inner {
+            padding: 24px !important;
+            display: flex;
+            flex-direction: column;
+
+            .fr-collapse {
+                /* we want full height to display last button at the bottom */
+
+                /* 72px for header, 48 for the 2 24px paddings */
+                min-height: calc(100vh - 72px - 48px);
+                display: flex;
+                flex-direction: column;
+
+                .fr-sidemenu__list {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}
+
+.item {
+    margin-bottom: 8px;
+
+    :global .fr-sidemenu__link {
+        font-weight: 500;
+        padding: 8px;
+        line-height: 24px;
+
+        &::before {
+            margin-left: -2px;
+            bottom: 10px !important;
+            top: 10px !important;
+        }
+    }
+
+    :global .fr-sidemenu__link:has(.fr-btn) {
+        padding: 0 !important;
+
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.lastItemAtTheBottom {
+    @media (min-width: 48em) {
+        /* put last button at the bottom */
+        &:last-of-type {
+            margin-top: auto;
+        }
+    }
+}

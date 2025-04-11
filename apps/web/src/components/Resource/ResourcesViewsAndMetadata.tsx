@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { numberToString } from '@app/web/utils/formatNumber'
 import CustomTag, { TagColor } from '../CustomTag'
 
 const ResourcesViewsAndMetadata = ({
@@ -28,7 +29,7 @@ const ResourcesViewsAndMetadata = ({
       <span className="fr-icon-eye-line fr-icon--sm" aria-hidden />
       <span className="fr-text--bold" data-testid="resource-views-count">
         <span className="fr-text--nowrap">
-          {resource._count.views}
+          {numberToString(resource.viewsCount)}
           {showLabels && (
             <span className="fr-hidden fr-unhidden-sm"> Vues</span>
           )}
@@ -39,7 +40,7 @@ const ResourcesViewsAndMetadata = ({
       <span className="fr-icon-bookmark-line fr-icon--sm" aria-hidden />
       <span className="fr-text--bold" data-testid="resource-collections-count">
         <span className="fr-text--nowrap">
-          {resource._count.collections}
+          {numberToString(resource._count.collections)}
           {showLabels && (
             <span className="fr-hidden fr-unhidden-sm">
               {' '}

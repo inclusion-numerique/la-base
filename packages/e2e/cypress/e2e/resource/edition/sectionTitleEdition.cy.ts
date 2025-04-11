@@ -27,7 +27,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.testId('add-content_form').should('not.exist')
 
-        cy.testId('add-content-button').click()
+        cy.testId('add-content-button').last().click()
         cy.testId('add-SectionTitle-content-button').click()
 
         cy.testId('add-content_form').should('exist')

@@ -2,22 +2,20 @@ import classNames from 'classnames'
 import React from 'react'
 import Badge from '@codegouvfr/react-dsfr/Badge'
 import type { AlertProps } from '@codegouvfr/react-dsfr/src/Alert'
-import { feedbackBadgeStatus } from './feedbackBadge.Status'
+import { feedbackBadgeStatus } from './resourceFeedbackBadge.Status'
 
 export const FeedbackBadge = ({
   value,
-  customThresholds,
   className,
   withLabel = true,
   withCount = false,
 }: {
   value: number
-  customThresholds?: [number, number, number, number]
   className?: string
   withLabel?: boolean
   withCount?: boolean
 }) => {
-  const badgeStatus = feedbackBadgeStatus(value, customThresholds)
+  const badgeStatus = feedbackBadgeStatus(value)
   return (
     <Badge
       noIcon

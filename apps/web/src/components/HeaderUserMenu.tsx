@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
 import { getBasesFromSessionUser } from '../bases/getBasesFromSessionUser'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
@@ -70,6 +71,14 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
           Créer une base
         </Link>
       </li>
+      {canAccessAdministration(user) && (
+        <li className="">
+          <Link className="fr-btn fr-border-top" href="/administration">
+            <span className="fr-icon-settings-5-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
+            Administration
+          </Link>
+        </li>
+      )}
       <li className="">
         <Link className="fr-btn fr-border-top" href="/deconnexion">
           <span className="fr-icon-logout-box-r-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />

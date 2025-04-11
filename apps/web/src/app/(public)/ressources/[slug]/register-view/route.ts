@@ -68,6 +68,20 @@ export const POST = async (
       id: true,
     },
   })
+  await prismaClient.resource.update({
+    where: {
+      id: resource.id,
+    },
+    data: {
+      viewsCount: {
+        increment: 1,
+      },
+      lastView: new Date(),
+    },
+    select: {
+      id: true,
+    },
+  })
 
   return new Response('ok', {
     status: 200,

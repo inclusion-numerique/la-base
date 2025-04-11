@@ -31,6 +31,7 @@ const ResourceContentForm = React.forwardRef(
       mode,
       type,
       'data-testid': dataTestId,
+      index,
       onDelete,
     }: {
       type: ContentType
@@ -38,6 +39,7 @@ const ResourceContentForm = React.forwardRef(
       setEditing: Dispatch<SetStateAction<string | null>>
       sendCommand: SendCommand
       'data-testid'?: string
+      index: number
       onDelete: () => void | Promise<void>
     } & (
       | { mode: 'add'; content?: undefined }
@@ -83,6 +85,8 @@ const ResourceContentForm = React.forwardRef(
 
       const payload: AddContentCommand['payload'] = {
         resourceId: resource.id,
+        // index is 0 based while the order in db is 1 based, and we want to increase it by 1, so we need to add 2
+        order: index + 2,
         ...payloadData,
       }
 
@@ -149,33 +153,35 @@ const ResourceContentForm = React.forwardRef(
     }
 
     return (
-      <div className={styles.contentFormContainer}>
-        <form onSubmit={handleSubmit(onSubmit)} data-testid={dataTestId}>
-          {formContent}
-          <div className={styles.contentAction}>
-            <Button
-              data-testid={dataTestId && `${dataTestId}__submit`}
-              priority="tertiary no outline"
-              iconId="fr-icon-check-line"
-              type="submit"
-              size="small"
-              disabled={isSubmitting}
-              ref={contentFormButtonRef}
-            >
-              Valider
-            </Button>
-            <Button
-              data-testid={dataTestId && `${dataTestId}__delete`}
-              type="button"
-              title="Supprimer le contenu"
-              priority="tertiary no outline"
-              iconId="fr-icon-delete-line"
-              size="small"
-              onClick={onDelete}
-            />
-          </div>
-        </form>
-      </div>
+      <form
+        className="fr-py-2w"
+        onSubmit={handleSubmit(onSubmit)}
+        data-testid={dataTestId}
+      >
+        {formContent}
+        <div className={styles.contentAction}>
+          <Button
+            data-testid={dataTestId && `${dataTestId}__submit`}
+            priority="tertiary no outline"
+            iconId="fr-icon-check-line"
+            type="submit"
+            size="small"
+            disabled={isSubmitting}
+            ref={contentFormButtonRef}
+          >
+            Valider
+          </Button>
+          <Button
+            data-testid={dataTestId && `${dataTestId}__delete`}
+            type="button"
+            title="Supprimer le contenu"
+            priority="tertiary no outline"
+            iconId="fr-icon-delete-line"
+            size="small"
+            onClick={onDelete}
+          />
+        </div>
+      </form>
     )
   },
 )

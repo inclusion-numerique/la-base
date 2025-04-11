@@ -9,6 +9,7 @@ import {
 const validSectionTitleCommand: AddContentCommand = {
   name: 'AddContent',
   payload: {
+    order: 1,
     resourceId: '8e32fcd3-b3fe-496f-8825-a6779393c94a',
     type: 'SectionTitle',
     title: 'Ma liberté',
@@ -18,6 +19,7 @@ const validSectionTitleCommand: AddContentCommand = {
 const validTextCommand: AddContentCommand = {
   name: 'AddContent',
   payload: {
+    order: 2,
     resourceId: '8e32fcd3-b3fe-496f-8825-a6779393c94a',
     type: 'Text',
     text: "Jusqu'au bout des chemins de fortune",
@@ -27,6 +29,7 @@ const validTextCommand: AddContentCommand = {
 const validLinkCommand: AddContentCommand = {
   name: 'AddContent',
   payload: {
+    order: 3,
     resourceId: '8e32fcd3-b3fe-496f-8825-a6779393c94a',
     type: 'Link',
     title: 'Obsolète',

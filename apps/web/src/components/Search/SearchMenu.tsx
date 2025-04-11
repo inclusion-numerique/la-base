@@ -9,11 +9,12 @@ import {
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 import { useSearchCounts } from '@app/web/app/(public)/rechercher/useSearchCounts'
+import { numberToString } from '@app/web/utils/formatNumber'
 import styles from './Menu.module.css'
 
 // While loading put spaces instead of the count to minimize layout shifts
 const menuCount = (count: number | null) =>
-  count === null ? '   ' : ` · ${count}`
+  count === null ? '   ' : ` · ${numberToString(count)}`
 
 const SearchMenu = ({
   activeTab,

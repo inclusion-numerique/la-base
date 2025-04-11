@@ -13,10 +13,19 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
       signinAsResourceCreator: false,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 1, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 2, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 3, user: { firstName: 'Charles', lastName: 'Orilla' } },
-        { rate: 4, user: { firstName: 'Thierry', lastName: 'Febvrel' } },
+        {
+          rate: 'non',
+          user: { firstName: 'Henri', lastName: 'Dubois' },
+        },
+        { rate: 'moyen', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        {
+          rate: 'oui',
+          user: { firstName: 'Charles', lastName: 'Orilla' },
+        },
+        {
+          rate: 'beaucoup',
+          user: { firstName: 'Thierry', lastName: 'Febvrel' },
+        },
       ],
     })
 
@@ -24,10 +33,10 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/avis',
     )
 
-    cy.testId('resource-feedback').eq(3).contains('Non recommandée')
-    cy.testId('resource-feedback').eq(2).contains('Peu recommandée')
-    cy.testId('resource-feedback').eq(1).contains('Recommandée')
     cy.testId('resource-feedback').eq(0).contains('Très recommandée')
+    cy.testId('resource-feedback').eq(1).contains('Recommandée')
+    cy.testId('resource-feedback').eq(2).contains('Peu recommandée')
+    cy.testId('resource-feedback').eq(3).contains('Non recommandée')
   })
 
   it("Acceptation 2 - Visiteur des avis d'une une ressource qui n'autorise pas les avis publics, je ne vois qu'une agrégation des avis qui ont été postés", () => {
@@ -37,10 +46,13 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
       signinAsResourceCreator: true,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 1, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 2, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 3, user: { firstName: 'Charles', lastName: 'Orilla' } },
-        { rate: 4, user: { firstName: 'Thierry', lastName: 'Febvrel' } },
+        { rate: 'non', user: { firstName: 'Henri', lastName: 'Dubois' } },
+        { rate: 'moyen', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        { rate: 'oui', user: { firstName: 'Charles', lastName: 'Orilla' } },
+        {
+          rate: 'beaucoup',
+          user: { firstName: 'Thierry', lastName: 'Febvrel' },
+        },
       ],
     })
 
@@ -72,7 +84,7 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
     cy.testId('feedback-count').eq(2).contains('1 Avis')
   })
 
-  it("Acceptation 3 - Créateur d'une une ressource qui n'autorise pas les avis publics, je vois la liste des avis qui ont été postés", () => {
+  it.only("Acceptation 3 - Créateur d'une une ressource qui n'autorise pas les avis publics, je vois la liste des avis qui ont été postés", () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
@@ -80,12 +92,15 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
       visitResourcePage: true,
       feedbacks: [
         {
-          rate: 1,
+          rate: 'non',
           user: { firstName: 'Henri', lastName: 'Dubois', isPublic: true },
         },
-        { rate: 2, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 3, user: { firstName: 'Charles', lastName: 'Orilla' } },
-        { rate: 4, user: { firstName: 'Thierry', lastName: 'Febvrel' } },
+        { rate: 'moyen', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        { rate: 'oui', user: { firstName: 'Charles', lastName: 'Orilla' } },
+        {
+          rate: 'beaucoup',
+          user: { firstName: 'Thierry', lastName: 'Febvrel' },
+        },
       ],
     })
 

@@ -115,9 +115,9 @@ export const createTestResource = (
           },
         ]
       : [],
+    viewsCount: 4,
     _count: {
       collections: 2,
-      views: 4,
       resourceFeedback: 0,
     },
     resourceFeedback: [],

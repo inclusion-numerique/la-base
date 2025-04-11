@@ -43,8 +43,10 @@ describe('profileRouter', () => {
       .createCaller(createTestContext({ user: givenUser }))
       .updateContacts(input)
 
-  const executeDeleteProfilProcedure = () =>
-    profileRouter.createCaller(createTestContext({ user: givenUser })).delete()
+  const executeDeleteProfilProcedure = ({ userId }: { userId: string }) =>
+    profileRouter
+      .createCaller(createTestContext({ user: givenUser }))
+      .delete({ userId })
 
   beforeAll(async () => {
     await prismaClient.user.create({
@@ -392,7 +394,9 @@ describe('profileRouter', () => {
         linkedin: 'https://www.linkedin.com/in/john-doe',
       })
 
-      await executeDeleteProfilProcedure()
+      await executeDeleteProfilProcedure({
+        userId: givenUserId,
+      })
 
       const user = await prismaClient.user.findUniqueOrThrow({
         where: { id: givenUserId },

@@ -7,7 +7,10 @@ import { useRouter } from 'next/navigation'
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
 import CollectionViewHeader from '@app/web/components/Collection/CollectionViewHeader'
 import CollectionResourcesListEdition from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourcesListEdition'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
+import {
+  CollectionPageData,
+  CollectionResourceListItem,
+} from '@app/web/server/collections/getCollection'
 import { trpc } from '@app/web/trpc'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
@@ -30,22 +33,37 @@ const CollectionResourcesOrderEdition = ({
       })),
     [collection.resources],
   )
-  const [orderedCollectionsResources, setOrderedCollectionsResources] =
-    useState(resourcesWithCollectionResourceId)
+  const [collectionsResources, setCollectionsResources] = useState<{
+    orderedCollectionsResources: CollectionResourceListItem[]
+    deletedResources: string[]
+  }>({
+    orderedCollectionsResources: resourcesWithCollectionResourceId,
+    deletedResources: [],
+  })
+
+  const setOrderedCollectionsResources = (
+    orderedCollectionsResources: CollectionResourceListItem[],
+  ) =>
+    setCollectionsResources((previous) => ({
+      ...previous,
+      orderedCollectionsResources,
+    }))
   useOnDiff(resourcesWithCollectionResourceId, setOrderedCollectionsResources)
 
   const router = useRouter()
 
   const updateOrdersMutation =
     trpc.collectionResource.updateOrders.useMutation()
+  const removeListFromCollectionMutation =
+    trpc.resource.removeListFromCollection.useMutation()
 
   const hasOrderChanged = useMemo(
     () =>
-      orderedCollectionsResources.some(
+      collectionsResources.orderedCollectionsResources.some(
         (collectionResource, index) =>
           collectionResource.id !== collection.resources[index]?.resource.id,
-      ),
-    [orderedCollectionsResources, collection.resources],
+      ) || collectionsResources.deletedResources.length > 0,
+    [collectionsResources, collection.resources],
   )
 
   const redirectToCollection = () =>
@@ -53,8 +71,8 @@ const CollectionResourcesOrderEdition = ({
 
   const sendCommand = async () => {
     try {
-      await updateOrdersMutation.mutateAsync({
-        resources: orderedCollectionsResources.map(
+      const updateOrdersMutationPromise = updateOrdersMutation.mutateAsync({
+        resources: collectionsResources.orderedCollectionsResources.map(
           (collectionResource, index) => ({
             order: index,
             resourceId: collectionResource.id,
@@ -62,6 +80,15 @@ const CollectionResourcesOrderEdition = ({
           }),
         ),
       })
+      const removeResourcesMutationPromise =
+        removeListFromCollectionMutation.mutateAsync({
+          resourcesIds: collectionsResources.deletedResources,
+          collectionId: collection.id,
+        })
+      await Promise.all([
+        updateOrdersMutationPromise,
+        removeResourcesMutationPromise,
+      ])
       createToast({
         priority: 'success',
         message: 'Ressources de collection réorganisées avec succès',
@@ -76,7 +103,7 @@ const CollectionResourcesOrderEdition = ({
       updateOrdersMutation.reset()
     }
   }
-
+  const { orderedCollectionsResources, deletedResources } = collectionsResources
   return (
     <>
       <CollectionViewHeader collection={collection} />
@@ -96,7 +123,7 @@ const CollectionResourcesOrderEdition = ({
                     created: collection.created,
                     updated: collection.updated,
                   }}
-                  count={collection.resources.length}
+                  count={orderedCollectionsResources.length}
                   context="view"
                 />
                 <div className="fr-flex fr-flex-gap-2v">
@@ -125,10 +152,18 @@ const CollectionResourcesOrderEdition = ({
       <div className="fr-container fr-container--medium">
         {orderedCollectionsResources.length > 0 ? (
           <CollectionResourcesListEdition
-            collectionId={collection.id}
             resources={orderedCollectionsResources}
-            setOrderedCollectionsResources={setOrderedCollectionsResources}
+            setCollectionsResources={setCollectionsResources}
           />
+        ) : deletedResources.length > 0 &&
+          orderedCollectionsResources.length === 0 ? (
+          <div className="fr-mt-md-6w fr-mt-3w">
+            <div className="fr-border fr-border-radius--8 fr-text--center fr-px-12v fr-py-8v">
+              <span className="fr-text--semi-bold fr-text-mention--grey">
+                Vous avez retiré toutes les ressources de cette collection.
+              </span>
+            </div>
+          </div>
         ) : (
           <div className="fr-pt-12v">
             <EmptyBaseCollections isOwner={isOwner} />

@@ -1,4 +1,9 @@
-type FeedbackBadgeStatus = {
+import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFeedbackThresholds'
+
+export type ResourceFeedbackStatus = 'beaucoup' | 'oui' | 'moyen' | 'non'
+
+type ResourceFeedbackBadgeStatus = {
+  status: ResourceFeedbackStatus
   threshold: number
   content: {
     severity: 'triumph' | 'success' | 'warning' | 'error'
@@ -15,9 +20,10 @@ type FeedbackBadgeStatus = {
   }
 }
 
-const BADGE_STATUS: FeedbackBadgeStatus[] = [
+const BADGE_STATUS: ResourceFeedbackBadgeStatus[] = [
   {
-    threshold: 4,
+    status: 'beaucoup',
+    threshold: resourceFeedbackThresholds.beaucoup,
     content: {
       severity: 'triumph',
       label: 'Très recommandée',
@@ -25,7 +31,8 @@ const BADGE_STATUS: FeedbackBadgeStatus[] = [
     },
   },
   {
-    threshold: 3,
+    status: 'oui',
+    threshold: resourceFeedbackThresholds.oui,
     content: {
       severity: 'success',
       label: 'Recommandée',
@@ -33,7 +40,8 @@ const BADGE_STATUS: FeedbackBadgeStatus[] = [
     },
   },
   {
-    threshold: 2,
+    status: 'moyen',
+    threshold: resourceFeedbackThresholds.moyen,
     content: {
       severity: 'warning',
       label: 'Peu recommandée',
@@ -41,7 +49,8 @@ const BADGE_STATUS: FeedbackBadgeStatus[] = [
     },
   },
   {
-    threshold: 1,
+    status: 'non',
+    threshold: resourceFeedbackThresholds.non,
     content: {
       severity: 'error',
       label: 'Non recommandée',
@@ -50,24 +59,10 @@ const BADGE_STATUS: FeedbackBadgeStatus[] = [
   },
 ]
 
-const applyCustomThresholds =
-  (customThresholds?: [number, number, number, number]) =>
-  (badgeStatus: FeedbackBadgeStatus, index: number) => ({
-    ...badgeStatus,
-    threshold: customThresholds?.[index] ?? badgeStatus.threshold,
-  })
-
-const byDesc = (a: number, b: number) => b - a
-
 const badgeStatusMatching =
   (value: number) =>
   ({ threshold }: { threshold: number }) =>
     value >= threshold
 
-export const feedbackBadgeStatus = (
-  value: number,
-  thresholds?: [number, number, number, number],
-) =>
-  BADGE_STATUS.map(applyCustomThresholds(thresholds?.sort(byDesc))).find(
-    badgeStatusMatching(value),
-  )?.content
+export const feedbackBadgeStatus = (value: number) =>
+  BADGE_STATUS.find(badgeStatusMatching(value))?.content

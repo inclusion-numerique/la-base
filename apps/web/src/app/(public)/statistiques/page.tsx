@@ -18,8 +18,6 @@ const StatisticsPage = async ({
 }) => {
   const { kpi, search, creation, usage } = await getStatistics(searchParams)
 
-  console.log('USERS', kpi.recentUsers)
-
   return (
     <>
       <section>

@@ -1,18 +1,31 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import Cookies from 'js-cookie'
+import { useEffect, useState } from 'react'
 import { isBrowser } from '@app/web/utils/isBrowser'
+import { dsfrThemeCookie } from '@app/web/app/dsfrThemeCookie'
 
-const getThemeFromHtmlTag = () => {
+const getThemeFromHtmlTag = (): 'light' | 'dark' => {
   if (!isBrowser) {
     return 'light'
   }
 
   // Get data-fr-scheme tag from html tag
   const htmlTag = document.getElementsByTagName('html')[0]
-  const theme = htmlTag?.getAttribute('data-fr-scheme')
+  const theme = htmlTag?.getAttribute('data-fr-scheme') as
+    | 'light'
+    | 'dark'
+    | undefined
+
   return theme ?? 'light'
+}
+
+const setThemeCookie = (theme: 'light' | 'dark') => {
+  Cookies.set(dsfrThemeCookie, theme, {
+    sameSite: 'strict',
+    expires: 1,
+  })
 }
 
 const setThemeToHtmlTag = (theme: 'light' | 'dark') => {
@@ -23,12 +36,13 @@ const setThemeToHtmlTag = (theme: 'light' | 'dark') => {
   htmlTag?.setAttribute('data-fr-scheme', theme)
 }
 
-const SwitchTheme = () => {
-  const [currentTheme, setCurrentTheme] = useState(getThemeFromHtmlTag())
+const SwitchTheme = ({ initialTheme }: { initialTheme: 'light' | 'dark' }) => {
+  const [currentTheme, setCurrentTheme] = useState(initialTheme)
 
   const changeThemeTo = currentTheme === 'light' ? 'dark' : 'light'
 
   const onChangeTheme = () => {
+    setThemeCookie(changeThemeTo)
     setThemeToHtmlTag(changeThemeTo)
   }
 

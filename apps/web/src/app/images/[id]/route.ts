@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+import * as Sentry from '@sentry/nextjs'
 import { prismaClient } from '@app/web/prismaClient'
 import { getImageData } from '@app/web/server/image/getImageData'
 import { getOriginalImageData } from '@app/web/server/image/getOriginalImageData'
@@ -48,16 +49,21 @@ export const GET = async (request: NextRequest) => {
     return notFoundResponse()
   }
 
-  const imageData =
-    format === 'original'
-      ? await getOriginalImageData({ image })
-      : await getImageData({ image, quality, width: targetWidth })
+  try {
+    const imageData =
+      format === 'original'
+        ? await getOriginalImageData({ image })
+        : await getImageData({ image, quality, width: targetWidth })
 
-  return new Response(imageData, {
-    status: 200,
-    headers: {
-      'Content-Type': 'image/webp',
-      'Cache-Control': 'public, max-age=31536000, immutable',
-    },
-  })
+    return new Response(imageData, {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/webp',
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    })
+  } catch (error) {
+    Sentry.captureException(error)
+    return notFoundResponse()
+  }
 }

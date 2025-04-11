@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client'
-import { fixtureUsers } from '@app/fixtures/users'
+import { fixtureUsers, teamAdministrateurs } from '@app/fixtures/users'
 import { collections } from '@app/fixtures/collections'
 import { resourceContributors } from '@app/fixtures/resourceContributors'
 import { baseMembers } from '@app/fixtures/baseMembers'
@@ -28,6 +28,16 @@ export const deleteAll = async (transaction: Prisma.TransactionClient) => {
 export const seed = async (transaction: Prisma.TransactionClient) => {
   await Promise.all(
     fixtureUsers.map((user) =>
+      transaction.user.upsert({
+        where: { id: user.id },
+        create: { ...user, isFixture: true },
+        update: { ...user, isFixture: true },
+      }),
+    ),
+  )
+
+  await Promise.all(
+    teamAdministrateurs.map((user) =>
       transaction.user.upsert({
         where: { id: user.id },
         create: user,

@@ -1,4 +1,5 @@
 import type { Prisma } from '@prisma/client'
+import { givenUser } from '@app/fixtures/givenUser'
 
 export const jmSansRien = {
   id: '99afd613-9d54-4110-9062-065c627eda8a',
@@ -22,3 +23,54 @@ export const jmAvecTout = {
 } satisfies Prisma.UserCreateManyInput
 
 export const fixtureUsers = [jmAvecTout, jmSansRien]
+
+export const teamAdministrateurs = [
+  givenUser({
+    id: 'a5f96926-2d58-47c1-8bdd-1cffc9cd5fc7',
+    slug: 'hugues-maignol',
+    firstName: 'Hugues',
+    lastName: 'Maignol',
+    email: 'hugues.maignol@beta.gouv.fr',
+    role: 'Admin',
+  }),
+  givenUser({
+    id: '0e202fb4-3810-4137-a987-7ef336462633',
+    slug: 'marc-gavanier',
+    firstName: 'Marc',
+    lastName: 'Gavanier',
+    email: 'marc.gavanier@beta.gouv.fr',
+    role: 'Admin',
+  }),
+  givenUser({
+    id: 'b4fb9d07-7ff2-4ad5-93f1-23ef4437b4e6',
+    slug: 'thibault-rouveyrol',
+    firstName: 'Thibault',
+    lastName: 'Rouveyrol',
+    email: 'thibault.rouveyrol@beta.gouv.fr',
+    role: 'Admin',
+  }),
+  givenUser({
+    id: 'acce6659-30a8-4f28-b4c6-1f82578843ae',
+    slug: 'manon-galle',
+    firstName: 'Manon',
+    lastName: 'Galle',
+    email: 'manon.galle@anct.gouv.fr',
+    role: 'Admin',
+  }),
+  givenUser({
+    id: 'b194a4ca-6762-4e33-84d9-c5122ed9ecc3',
+    slug: 'sylvain-aubry',
+    email: 'sylvain.aubry@beta.gouv.fr',
+    firstName: 'Sylvain',
+    lastName: 'Aubry',
+    role: 'Admin',
+  }),
+  givenUser({
+    id: '526a54d6-5ea1-4aa4-acf3-2f3fe462b3aa',
+    slug: 'kevin-gallet',
+    firstName: 'Kévin',
+    lastName: 'Gallet',
+    email: 'kevin.gallet@ext.anct.gouv.fr',
+    role: 'Admin',
+  }),
+] satisfies Prisma.UserCreateInput[]

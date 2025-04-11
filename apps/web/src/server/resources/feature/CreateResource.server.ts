@@ -1,3 +1,4 @@
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import {
   CreateResourceCommand,
   ResourceCreated,
@@ -5,9 +6,8 @@ import {
 import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
-import { createSlug } from '@app/web/utils/createSlug'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const handleCreateResource: ResourceCreationCommandHandler<
   CreateResourceCommand,
@@ -57,9 +57,9 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   targetAudiences: [],
   contributors: [],
   collections: [],
+  viewsCount: 0,
   _count: {
     collections: 0,
-    views: 0,
     resourceFeedback: 0,
   },
   resourceFeedback: [],

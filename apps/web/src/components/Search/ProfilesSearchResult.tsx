@@ -4,6 +4,7 @@ import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import EmptyBox from '@app/web/components/EmptyBox'
+import { numberToString } from '@app/web/utils/formatNumber'
 import styles from './SearchContents.module.css'
 
 const ProfilesSearchResult = ({
@@ -20,7 +21,7 @@ const ProfilesSearchResult = ({
   <>
     <div className={styles.header}>
       <h1 className="fr-text--lg fr-mb-0">
-        {totalCount} Profil{sPluriel(totalCount)}
+        {numberToString(totalCount)} Profil{sPluriel(totalCount)}
       </h1>
       {children}
     </div>

@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { SessionUser } from '@app/web/auth/sessionUser'
+import { numberToString } from '@app/web/utils/formatNumber'
 import BaseCard from '../Base/Card/BaseCard'
 import EmptyBox from '../EmptyBox'
 import styles from './SearchContents.module.css'
@@ -20,7 +21,7 @@ const BasesSearchResult = ({
   <>
     <div className={styles.header}>
       <h1 className="fr-text--lg fr-mb-0">
-        {totalCount} Base{sPluriel(totalCount)}
+        {numberToString(totalCount)} Base{sPluriel(totalCount)}
       </h1>
       {children}
     </div>

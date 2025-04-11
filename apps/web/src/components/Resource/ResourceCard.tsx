@@ -16,8 +16,6 @@ import styles from './ResourceCard.module.css'
 import { ResourceMoreActionsDropdown } from './ResourceMoreActionsDropdown'
 import ResourcesViewsAndMetadata from './ResourcesViewsAndMetadata'
 
-const CUSTOM_THRESHOLD: [number, number, number, number] = [3.25, 2.5, 1, 0]
-
 const ResourceCard = ({
   resource,
   user,
@@ -88,7 +86,6 @@ const ResourceCard = ({
                 <FeedbackBadge
                   className="fr-mb-sm-0 fr-mb-3v"
                   value={resource.feedbackAverage}
-                  customThresholds={CUSTOM_THRESHOLD}
                 />
                 <span className="fr-text--semi-bold fr-mb-sm-0 fr-mb-3v">
                   {resource._count.resourceFeedback}&nbsp;Avis

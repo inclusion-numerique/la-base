@@ -1,22 +1,22 @@
 import { z } from 'zod'
+import {
+  profileAuthorization,
+  ProfilePermissions,
+} from '@app/web/authorization/models/profileAuthorization'
+import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { searchMember } from '@app/web/server/profiles/searchMember'
 import {
   UpdateProfileContactsCommandValidation,
   UpdateProfileImageCommandValidation,
   UpdateProfileInformationsCommandValidation,
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
-import { searchMember } from '@app/web/server/profiles/searchMember'
-import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
-import { createSlug } from '@app/web/utils/createSlug'
-import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
-import {
-  profileAuthorization,
-  ProfilePermissions,
-} from '@app/web/authorization/models/profileAuthorization'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
+import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
+import { createSlug } from '@app/web/utils/createSlug'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,
@@ -238,46 +238,48 @@ export const profileRouter = router({
         data: { imageId: input.imageId },
       })
     }),
-  delete: protectedProcedure.mutation(async ({ ctx: { user } }) => {
-    const profile = await prismaClient.user.findUnique({
-      where: { id: user.id, deleted: null },
-      select: { slug: true, ...profileAuthorizationTargetSelect },
-    })
+  delete: protectedProcedure
+    .input(z.object({ userId: z.string().uuid() }))
+    .mutation(async ({ input: { userId }, ctx: { user: sessionUser } }) => {
+      const profile = await prismaClient.user.findUnique({
+        where: { id: userId, deleted: null },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
+      })
 
-    if (!profile) {
-      throw invalidError('User not found')
-    }
+      if (!profile) {
+        throw invalidError('User not found')
+      }
 
-    authorizeOrThrow(
-      profileAuthorization(profile, user).hasPermission(
-        ProfilePermissions.WriteProfile,
-      ),
-    )
+      authorizeOrThrow(
+        profileAuthorization(profile, sessionUser).hasPermission(
+          ProfilePermissions.WriteProfile,
+        ),
+      )
 
-    const timestamp = new Date()
+      const timestamp = new Date()
 
-    await prismaClient.resource.updateMany({
-      ...resourcesToDelete(user.id),
-      ...softDelete(timestamp),
-    })
+      await prismaClient.resource.updateMany({
+        ...resourcesToDelete(profile.id),
+        ...softDelete(timestamp),
+      })
 
-    await prismaClient.base.updateMany({
-      ...basesToDelete(user.id),
-      ...softDelete(timestamp),
-    })
+      await prismaClient.base.updateMany({
+        ...basesToDelete(profile.id),
+        ...softDelete(timestamp),
+      })
 
-    await prismaClient.collection.updateMany({
-      ...collectionsToDelete(user.id),
-      ...softDelete(timestamp),
-    })
+      await prismaClient.collection.updateMany({
+        ...collectionsToDelete(profile.id),
+        ...softDelete(timestamp),
+      })
 
-    return prismaClient.user.update({
-      where: { id: user.id },
-      data: {
-        ...deletedUser(user.id, timestamp),
-        accounts: { deleteMany: {} },
-        sessions: { deleteMany: {} },
-      },
-    })
-  }),
+      return prismaClient.user.update({
+        where: { id: profile.id },
+        data: {
+          ...deletedUser(profile.id, timestamp),
+          accounts: { deleteMany: {} },
+          sessions: { deleteMany: {} },
+        },
+      })
+    }),
 })

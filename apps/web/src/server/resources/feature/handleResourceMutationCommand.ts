@@ -40,10 +40,20 @@ export const handleResourceMutationCommand = async (
   const mutationEvents = (
     Array.isArray(handlerResult) ? handlerResult : [handlerResult]
   ) as MutationHistoryResourceEvent[]
-
   let resource = initialResource
 
   const transactionEvents = async (t: PrismaTransaction) => {
+    // We need to find the highest sequence of the resource after all the side effects have been executed
+    const highestSequence = await t.resourceEvent.findFirst({
+      where: { resourceId },
+      orderBy: { sequence: 'desc' },
+      select: { sequence: true },
+    })
+
+    if (!highestSequence) {
+      throw new Error('No sequence found for resource')
+    }
+
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
 
@@ -52,12 +62,14 @@ export const handleResourceMutationCommand = async (
         transaction: t,
         persistedResource,
       })
+
       // eslint-disable-next-line no-await-in-loop
       await t.resourceEvent.create({
         data: {
           id: v4(),
           resourceId: resource.id,
           byId: user?.id,
+          sequence: highestSequence.sequence + 1,
           ...event,
         },
       })

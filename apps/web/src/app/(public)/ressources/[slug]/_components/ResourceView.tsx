@@ -25,8 +25,6 @@ import ResourceInformations from './ResourceInformations'
 import ResourcePublicStateBadge from './ResourcePublicStateBadge'
 import styles from './ResourceView.module.css'
 
-const CUSTOM_THRESHOLD: [number, number, number, number] = [3.25, 2.5, 1, 0]
-
 const ResourceView = ({
   resource,
   user,
@@ -109,10 +107,7 @@ const ResourceView = ({
               >
                 {resource._count.resourceFeedback > 0 && (
                   <>
-                    <FeedbackBadge
-                      value={resource.feedbackAverage}
-                      customThresholds={CUSTOM_THRESHOLD}
-                    />
+                    <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
                       className="fr-text--semi-bold"
                       href={`/ressources/${resource.slug}/avis`}
@@ -148,10 +143,7 @@ const ResourceView = ({
                 <h2 className="fr-h6 fr-mb-0">
                   {resource._count.resourceFeedback} Avis sur la ressource
                 </h2>
-                <FeedbackBadge
-                  value={resource.feedbackAverage ?? 0}
-                  customThresholds={CUSTOM_THRESHOLD}
-                />
+                <FeedbackBadge value={resource.feedbackAverage ?? 0} />
               </div>
               <div>
                 <Link

@@ -1,25 +1,25 @@
-import z from 'zod'
-import { v4 } from 'uuid'
 import * as Sentry from '@sentry/nextjs'
-import { prismaClient } from '@app/web/prismaClient'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
-import {
-  UpdateBaseCommandValidation,
-  UpdateBaseImageCommandValidation,
-} from '@app/web/server/bases/updateBase'
-import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
-import { createSlug } from '@app/web/utils/createSlug'
-import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
-import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
-import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import { v4 } from 'uuid'
+import z from 'zod'
 import {
   baseAuthorization,
   BasePermissions,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
+import { prismaClient } from '@app/web/prismaClient'
+import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
+import {
+  UpdateBaseCommandValidation,
+  UpdateBaseImageCommandValidation,
+} from '@app/web/server/bases/updateBase'
+import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
+import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const baseRouter = router({
   create: protectedProcedure

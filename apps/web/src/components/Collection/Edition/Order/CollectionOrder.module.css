@@ -14,7 +14,6 @@
   pointer-events: none;
   cursor: grab;
   top: 51px;
-  transition: opacity 200ms ease-in-out;
 
   /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
@@ -23,6 +22,48 @@
   &:active {
     cursor: grabbing;
   }
+
+  &::before {
+    line-height: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
+}
+
+.arrowUpButton {
+  position: absolute;
+  cursor: pointer;
+
+  /* top: drag-button / 2 - 6px */
+  top: 20px;
+
+  /* 4px on the left to allow space for focus-visible outline */
+  left: 4px;
+  padding: 4px 6px;
+
+  &::before {
+    line-height: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
+}
+
+.arrowDownButton {
+  position: absolute;
+  cursor: pointer;
+
+  /* top: drag-button + drag-button / 2 + 6px */
+  top: 82px;
+
+  /* 4px on the left to allow space for focus-visible outline */
+  left: 4px;
+  padding: 4px 6px;
 
   &::before {
     line-height: 20px;
@@ -44,7 +85,6 @@
   &:hover,
   &:focus-within {
     .dragButton {
-      opacity: 1 !important;
       pointer-events: initial;
     }
 
@@ -55,8 +95,6 @@
   }
 
   &.selected {
-    background-color: var(--background-default-grey-active);
-
     .dragButton {
       opacity: 1 !important;
       pointer-events: initial;

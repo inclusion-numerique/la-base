@@ -1,79 +1,62 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { AnimatePresence, Reorder } from 'framer-motion'
+import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
 import DraggableResourceCollectionOrderRow from '@app/web/components/Collection/Edition/Resources/Order/DraggableCollectionResourceOrderRow'
 import { CollectionResourceListItem } from '@app/web/server/collections/getCollection'
 
 const CollectionResourcesListEdition = ({
   resources,
-  collectionId,
-  setOrderedCollectionsResources,
+  setCollectionsResources,
 }: {
   resources: CollectionResourceListItem[]
-  collectionId: string
-  setOrderedCollectionsResources: (
-    resources: CollectionResourceListItem[],
-  ) => void
+  setCollectionsResources: Dispatch<
+    SetStateAction<{
+      orderedCollectionsResources: CollectionResourceListItem[]
+      deletedResources: string[]
+    }>
+  >
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dragBoundaryRef = useRef<HTMLElement>(null)
+  const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
   const onReorder = (items: CollectionResourceListItem[]) =>
-    setOrderedCollectionsResources(items)
+    setCollectionsResources((previous) => ({
+      ...previous,
+      orderedCollectionsResources: items,
+    }))
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (selectedIndex === null) return
+  const moveResource = (fromIndex: number, toIndex: number) => {
+    const newResources = [...resources]
+    const [movedItem] = newResources.splice(fromIndex, 1)
+    newResources.splice(toIndex, 0, movedItem)
 
-    switch (event.key) {
-      case 'ArrowUp': {
-        event.preventDefault()
-        if (selectedIndex > 0) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex - 1]
-          newList[selectedIndex - 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex - 1)
-        }
-        break
-      }
-      case 'ArrowDown': {
-        event.preventDefault()
-        if (selectedIndex < resources.length - 1) {
-          const newList = [...resources]
-          const temporary = newList[selectedIndex]
-          newList[selectedIndex] = newList[selectedIndex + 1]
-          newList[selectedIndex + 1] = temporary
-          setOrderedCollectionsResources(newList)
-          setSelectedIndex(selectedIndex + 1)
-        }
-        break
-      }
-      case 'Escape': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      case 'Enter':
-      case ' ': {
-        event.preventDefault()
-        setSelectedIndex(null)
-        break
-      }
-      default: {
-        break
-      }
-    }
+    onReorder(newResources)
   }
+
+  const onKeyDown = async (event: React.KeyboardEvent) => {
+    const { length } = resources
+    await handleKeyDown(event, length, moveResource)
+  }
+  const onDelete = (resourceId: string) => {
+    setCollectionsResources((previous) => ({
+      orderedCollectionsResources: previous.orderedCollectionsResources.filter(
+        (resource) => resource.id !== resourceId,
+      ),
+      deletedResources: [...previous.deletedResources, resourceId],
+    }))
+  }
+
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="fr-mt-md-6w fr-mt-3w"
       role="list"
       aria-label="Liste des collections"
-      onKeyDown={handleKeyDown}
+      onKeyDown={onKeyDown}
       tabIndex={-1}
     >
       <Reorder.Group
@@ -87,13 +70,15 @@ const CollectionResourcesListEdition = ({
           {resources.map((resource, index) => (
             <DraggableResourceCollectionOrderRow
               key={resource.id}
-              collectionId={collectionId}
               count={resources.length}
               resource={resource}
               index={index}
               dragConstraints={dragBoundaryRef}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
+              moveUp={() => moveUp(index, moveResource)}
+              moveDown={() => moveDown(index, resources.length, moveResource)}
+              onDelete={() => onDelete(resource.id)}
             />
           ))}
         </AnimatePresence>

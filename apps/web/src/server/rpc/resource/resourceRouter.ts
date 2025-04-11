@@ -56,11 +56,31 @@ export const resourceRouter = router({
 
       return handleResourceCreationCommand(command, { user })
     }),
+  delete: protectedProcedure
+    .input(z.object({ resourceId: z.string() }))
+    .mutation(async ({ input }) => {
+      const resource = await prismaClient.resource.findUnique({
+        where: { id: input.resourceId },
+      })
+
+      if (!resource) {
+        throw notFoundError()
+      }
+
+      const timestamp = new Date()
+
+      return prismaClient.resource.update({
+        where: { id: input.resourceId },
+        data: {
+          deleted: timestamp,
+          updated: timestamp,
+        },
+      })
+    }),
   mutate: protectedProcedure
     .input(ResourceMutationCommandsValidation)
     .mutation(async ({ input: command, ctx: { user } }) => {
       // Security is handled in this mutation as it is the responsibility of this layer and not the event sourcing layer
-
       const resource = await prismaClient.resource.findUnique({
         where: { id: command.payload.resourceId },
         select: resourceAuthorizationTargetSelect,
@@ -207,6 +227,66 @@ export const resourceRouter = router({
         }
       },
     ),
+  removeListFromCollection: protectedProcedure
+    .input(
+      z.object({
+        resourcesIds: z.array(z.string()),
+        collectionId: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx: { user } }) => {
+      const { collectionId } = input
+      const whereCollectionResourcesMatchInput = {
+        OR: input.resourcesIds.map((resourceId) => ({
+          AND: { resourceId, collectionId },
+        })),
+      }
+
+      const collectionResources =
+        await prismaClient.collectionResource.findMany({
+          where: whereCollectionResourcesMatchInput,
+          select: { collection: { select: { id: true } }, resource: {} },
+        })
+
+      for (const collectionResource of collectionResources) {
+        // eslint-disable-next-line no-await-in-loop
+        const collection = await prismaClient.collection.findUnique({
+          where: { id: collectionResource.collection.id },
+          select: collectionAuthorizationTargetSelect,
+        })
+
+        // eslint-disable-next-line no-await-in-loop
+        const resource = await prismaClient.resource.findUnique({
+          where: { id: collectionResource.resource.id },
+          select: resourceAuthorizationTargetSelect,
+        })
+
+        if (!collection || !resource) {
+          throw notFoundError()
+        }
+
+        authorizeOrThrow(
+          resourceAuthorization(resource, user).hasPermission(
+            ResourcePermissions.ReadResourceContent,
+          ),
+        )
+        authorizeOrThrow(
+          collectionAuthorization(collection, user).hasPermission(
+            CollectionPermissions.AddToCollection,
+          ),
+        )
+      }
+      return prismaClient.collection.update({
+        where: { id: collectionId },
+        data: {
+          updated: new Date(),
+          resources: {
+            deleteMany: whereCollectionResourcesMatchInput,
+          },
+        },
+        select: { id: true, title: true },
+      })
+    }),
   feedback: protectedProcedure
     .input(SendResourceFeedbackValidation)
     .mutation(async ({ input, ctx: { user } }) =>

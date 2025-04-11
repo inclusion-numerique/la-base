@@ -56,7 +56,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       feedbacks: [
         {
           comment: 'Good resource',
-          rate: 3,
+          rate: 'oui',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -82,7 +82,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       feedbacks: [
         {
           comment: 'Good resource',
-          rate: 3,
+          rate: 'oui',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -123,7 +123,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       visitResourcePage: true,
       feedbacks: [
         {
-          rate: 1,
+          rate: 'moyen',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -144,7 +144,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       visitResourcePage: true,
       feedbacks: [
         {
-          rate: 2,
+          rate: 'moyen',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -165,7 +165,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       visitResourcePage: true,
       feedbacks: [
         {
-          rate: 3,
+          rate: 'oui',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -186,7 +186,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       visitResourcePage: true,
       feedbacks: [
         {
-          rate: 4,
+          rate: 'beaucoup',
           user: { firstName: 'Henri', lastName: 'Dubois' },
         },
       ],
@@ -199,16 +199,19 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
     cy.testId('resources-feedbacks').contains('Très recommandée')
   })
 
-  it("Acceptation 9 - Visiteur sur une ressource publique, je peux constater qu'une ressource est peu recommandée pour trois non", () => {
+  it("Acceptation 9 - Visiteur sur une ressource publique, je peux constater qu'une ressource est non recommandée pour trois non", () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
       signinAsResourceCreator: false,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 1, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 1, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 1, user: { firstName: 'Jean', lastName: 'Payec' } },
+        {
+          rate: 'non',
+          user: { firstName: 'Henri', lastName: 'Dubois' },
+        },
+        { rate: 'non', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        { rate: 'non', user: { firstName: 'Jean', lastName: 'Payec' } },
       ],
     })
 
@@ -216,7 +219,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/',
     )
 
-    cy.testId('resources-feedbacks').contains('Peu recommandée')
+    cy.testId('resources-feedbacks').contains('Non recommandée')
   })
 
   it("Acceptation 10 - Visiteur sur une ressource publique, je peux constater qu'une ressource est peu recommandée pour deux non et deux moyen", () => {
@@ -226,10 +229,10 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       signinAsResourceCreator: false,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 1, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 2, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 1, user: { firstName: 'Jean', lastName: 'Payec' } },
-        { rate: 2, user: { firstName: 'Charles', lastName: 'Orilla' } },
+        { rate: 'non', user: { firstName: 'Henri', lastName: 'Dubois' } },
+        { rate: 'moyen', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        { rate: 'non', user: { firstName: 'Jean', lastName: 'Payec' } },
+        { rate: 'moyen', user: { firstName: 'Charles', lastName: 'Orilla' } },
       ],
     })
 
@@ -247,9 +250,15 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       signinAsResourceCreator: false,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 3, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 3, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 2, user: { firstName: 'Charles', lastName: 'Orilla' } },
+        {
+          rate: 'oui',
+          user: { firstName: 'Henri', lastName: 'Dubois' },
+        },
+        {
+          rate: 'oui',
+          user: { firstName: 'Michel', lastName: 'Dupond' },
+        },
+        { rate: 'moyen', user: { firstName: 'Charles', lastName: 'Orilla' } },
       ],
     })
 
@@ -260,16 +269,22 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
     cy.testId('resources-feedbacks').contains('Recommandée')
   })
 
-  it("Acceptation 12 - Visiteur sur une ressource publique, je peux constater qu'une ressource est très recommandée pour deux oui et un beaucoup", () => {
+  it("Acceptation 12 - Visiteur sur une ressource publique, je peux constater qu'une ressource est très recommandée pour deux beaucoup et un oui", () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
       signinAsResourceCreator: false,
       visitResourcePage: true,
       feedbacks: [
-        { rate: 3, user: { firstName: 'Henri', lastName: 'Dubois' } },
-        { rate: 4, user: { firstName: 'Michel', lastName: 'Dupond' } },
-        { rate: 3, user: { firstName: 'Charles', lastName: 'Orilla' } },
+        {
+          rate: 'oui',
+          user: { firstName: 'Henri', lastName: 'Dubois' },
+        },
+        { rate: 'beaucoup', user: { firstName: 'Michel', lastName: 'Dupond' } },
+        {
+          rate: 'beaucoup',
+          user: { firstName: 'Charles', lastName: 'Orilla' },
+        },
       ],
     })
 

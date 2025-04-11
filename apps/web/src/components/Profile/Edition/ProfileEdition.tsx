@@ -39,7 +39,7 @@ const ProfileEdition = ({
             <ProfileVisibilityEdition profile={profile} resources={resources} />
           </div>
           <div className="fr-col-12">
-            <ProfileDeletion />
+            <ProfileDeletion userId={profile.id} />
           </div>
         </div>
       </div>

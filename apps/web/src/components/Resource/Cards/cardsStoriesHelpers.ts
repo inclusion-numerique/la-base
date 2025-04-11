@@ -42,10 +42,10 @@ export const resource = {
   feedbackAverage: 4,
   collections: [],
   contributors: [],
+  viewsCount: 45,
   _count: {
     resourceFeedback: 4,
     collections: 45,
-    views: 45,
   },
   image: { id: 'portrait', altText: 'Texte alternatif' },
 } satisfies ResourceListItem

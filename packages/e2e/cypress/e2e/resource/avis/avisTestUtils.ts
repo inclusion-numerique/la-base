@@ -1,5 +1,6 @@
 import { givenUser } from '@app/e2e/support/given/givenUser'
 import type { CreateUserInput } from '@app/e2e/tasks/handlers/user.tasks'
+import { ResourceFeedbackStatus } from '@app/web/components/Resource/feedbackBadge/resourceFeedbackBadge.Status'
 
 export const addFeedbackToResource = ({
   slug,
@@ -8,7 +9,7 @@ export const addFeedbackToResource = ({
   slug: string
   feedbacks: {
     comment?: string
-    rate: 1 | 2 | 3 | 4
+    rate: ResourceFeedbackStatus
     user: Partial<CreateUserInput>
   }[]
 }) => {
@@ -17,24 +18,24 @@ export const addFeedbackToResource = ({
     cy.createUserAndSignin(user)
     cy.visit(`/ressources/${slug}/avis`)
     switch (feedback.rate) {
-      case 1: {
+      case 'non': {
         cy.contains('Non').click()
         break
       }
-      case 2: {
+      case 'moyen': {
         cy.contains('Moyen').click()
         break
       }
-      case 3: {
+      case 'oui': {
         cy.contains('Oui').click()
         break
       }
-      case 4: {
+      case 'beaucoup': {
         cy.contains('Beaucoup').click()
         break
       }
       default: {
-        cy.contains('Oui').click()
+        throw new Error('Unknown feedback status')
       }
     }
 

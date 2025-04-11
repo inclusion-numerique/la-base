@@ -21,6 +21,7 @@
 .contentList {
   list-style: none;
   margin: 32px 0;
+  padding-inline-start: 0;
 
   &:empty {
     margin: 0;
@@ -48,10 +49,9 @@
   top: 12px;
   transition: opacity 200ms ease-in-out;
 
-   /* 4px on the left to allow space for focus-visible outline */
+  /* 4px on the left to allow space for focus-visible outline */
   left: 4px;
   padding: 4px 6px;
-
 
   &:active {
     cursor: grabbing;
@@ -63,11 +63,48 @@
   }
 }
 
+.arrowUpButton {
+  position: absolute;
+  opacity: 0 !important;
+  cursor: pointer;
+  top: 12px;
+  transition: opacity 200ms ease-in-out;
+  left: -68px;
+  padding: 4px 6px;
+
+  &::before {
+    line-height: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
+}
+
+.arrowDownButton {
+  position: absolute;
+  opacity: 0 !important;
+  cursor: pointer;
+  top: 12px;
+  transition: opacity 200ms ease-in-out;
+
+  /* 4px on the left to allow space for focus-visible outline */
+  left: -32px;
+  padding: 4px 6px;
+
+  &::before {
+    line-height: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
+}
+
 .content {
   position: relative;
-
-  /* Hide content during exit "shrink" animation */
-  overflow-y: hidden;
 
   /**
     Negative left margin + padding is for the hover drag handle (+ outline) to be inside the content div
@@ -82,7 +119,9 @@
 
   &:hover,
   &:focus-within {
-    .dragButton {
+    .dragButton,
+    .arrowDownButton,
+    .arrowUpButton {
       opacity: 1 !important;
       pointer-events: initial;
     }
@@ -92,10 +131,4 @@
       pointer-events: initial;
     }
   }
-}
-
-.contentEdition {
-  border-bottom: 1px solid var(--border-default-grey);
-  border-top: 1px solid var(--border-default-grey);
-  padding: 16px 0;
 }

@@ -162,13 +162,13 @@ export const getResourceSelect = (user: { id: string } | null) =>
       },
       orderBy: { order: 'asc' },
     },
+    viewsCount: true,
     _count: {
       select: {
         resourceFeedback: {
           where: { deleted: null },
         },
         collections: true,
-        views: true,
       },
     },
   }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']

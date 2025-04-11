@@ -11,6 +11,7 @@ import type {
   CreateBaseInput,
   CreateUserInput,
 } from '@app/e2e/tasks/handlers/user.tasks'
+import { ResourceFeedbackStatus } from '@app/web/components/Resource/feedbackBadge/resourceFeedbackBadge.Status'
 import { addFeedbackToResource } from '../avis/avisTestUtils'
 
 export const cleanUpAndCreateTestResource = (
@@ -58,7 +59,7 @@ export const cleanUpAndCreateTestPublishedResource = ({
   }) => void
   feedbacks?: {
     comment?: string
-    rate: 1 | 2 | 3 | 4
+    rate: ResourceFeedbackStatus
     user: Partial<CreateUserInput>
   }[]
 }) => {

@@ -23,6 +23,7 @@ export const resourceListSelect = (user: { id: string } | null) =>
     lastPublished: true,
     excerpt: true,
     isPublic: true,
+    viewsCount: true,
     image: {
       select: {
         id: true,
@@ -95,7 +96,6 @@ export const resourceListSelect = (user: { id: string } | null) =>
     _count: {
       select: {
         collections: true,
-        views: true,
         resourceFeedback: {
           where: { deleted: null },
         },

@@ -2,6 +2,10 @@
     padding: 0 !important;
 }
 
+.cell {
+    line-height: 32px !important;
+}
+
 a.cellLink {
     padding: 16px;
     background: none;
@@ -27,7 +31,8 @@ a.cellLink {
         background-color: var(--active) !important;
     }
 
-    td, th {
+    td,
+    th {
         background-color: transparent !important;
     }
 }
@@ -43,7 +48,8 @@ a.cellLink {
         background-color: var(--active) !important;
     }
 
-    td, th {
+    td,
+    th {
         background-color: transparent !important;
     }
 }
