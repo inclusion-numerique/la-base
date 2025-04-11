@@ -75,6 +75,8 @@
     "dotenv-cli": "^7.4.2",
     "encoding": "^0.1.13",
     "env-var": "^7.5.0",
+    "eslint-config-turbo": "^2.0.14",
+    "eslint-plugin-turbo": "^2.5.0",
     "eventemitter3": "^5.0.1",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
