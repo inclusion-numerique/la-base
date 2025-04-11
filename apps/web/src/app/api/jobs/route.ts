@@ -1,10 +1,11 @@
-import type { NextRequest } from 'next/server'
 import * as Sentry from '@sentry/nextjs'
-import { JobValidation } from '@app/web/jobs/jobs'
-import { executeJob } from '@app/web/jobs/jobExecutors'
-import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
+import type { NextRequest } from 'next/server'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
+import { executeJob } from '@app/web/jobs/jobExecutors'
+import { JobValidation } from '@app/web/jobs/jobs'
 
+export const maxDuration = 600
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -68,7 +69,7 @@ export const POST = async (request: NextRequest) => {
     )
   }
 
-  // eslint-disable-next-line no-console
+  // biome-ignore lint/suspicious/noConsole: job output
   console.info(`Executing job ${jobPayload.data.name}`)
 
   const start = Date.now()

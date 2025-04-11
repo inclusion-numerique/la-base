@@ -15,10 +15,12 @@ import { locallyRestoreLatestMainBackup } from '@app/cli/commands/infrastructure
 import { addConseillersNumeriquesToBases } from '@app/cli/commands/domain/addConseillersNumeriquesToBases'
 import { removeInactiveConseillersNumeriques } from '@app/cli/commands/domain/removeInactiveConseillersNumeriques'
 import { executeJobCommand } from '@app/cli/commands/jobs/executeJobCommand'
+import { executeJobApiCommand } from '@app/cli/commands/jobs/executeJobApiCommand'
 
 const program = new Command()
 
 program.addCommand(executeJobCommand)
+program.addCommand(executeJobApiCommand)
 program.addCommand(listSecrets)
 program.addCommand(getSecretValue)
 program.addCommand(setupDatabaseSecret)
