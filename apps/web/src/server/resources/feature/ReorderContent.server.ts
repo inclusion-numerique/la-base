@@ -21,25 +21,32 @@ export const handleReorderContent: ResourceMutationCommandHandler<
 export const applyContentReordered: ResourceMutationEventApplier<
   ContentReordered
 > = ({ timestamp, data: { id, order: newOrder } }, resource) => {
-  const toReorder = resource.contents.find((content) => id === content.id)
-  if (!toReorder || toReorder.order === newOrder) {
+  const contentsWithUniqueOrders = resource.contents.map((content, index) => ({
+    ...content,
+    order: index + 1,
+  }))
+
+  const normalizedToReorder = contentsWithUniqueOrders.find(
+    (content) => id === content.id,
+  )
+  if (!normalizedToReorder) {
     return resource
   }
 
-  const oldOrder = toReorder.order
+  const normalizedOldOrder = normalizedToReorder.order
 
   const reorder =
-    newOrder > oldOrder
+    newOrder > normalizedOldOrder
       ? // Moving up contents impacted by reorder
         (order: number) =>
-          order > oldOrder && order <= newOrder ? order - 1 : order
+          order > normalizedOldOrder && order <= newOrder ? order - 1 : order
       : // Moving down contents impacted by reorder
         (order: number) =>
-          order >= newOrder && order < oldOrder ? order + 1 : order
+          order >= newOrder && order < normalizedOldOrder ? order + 1 : order
 
   return {
     ...resource,
-    contents: resource.contents
+    contents: contentsWithUniqueOrders
       .map((content) => ({
         ...content,
         order: content.id === id ? newOrder : reorder(content.order),
