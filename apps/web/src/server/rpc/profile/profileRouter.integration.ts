@@ -400,6 +400,8 @@ describe('profileRouter', () => {
         userId: givenUserId,
       })
 
+      usersToDelete.push(givenUserId)
+
       const user = await prismaClient.user.findUniqueOrThrow({
         where: { id: givenUserId },
       })
@@ -458,7 +460,7 @@ describe('profileRouter', () => {
       ).toBe(true)
     })
 
-    it('should delete bases if the user is the last member non-deleted', async (): Promise<void> => {
+    it('should delete bases if the user is the last member non-deleted and not an admin', async (): Promise<void> => {
       const deletedUserId = v4()
       const deletedUserEmail = `test+${deletedUserId}@inclusion-numerique.anct.gouv.fr`
       const deletedUserSlug = `test+${deletedUserId}`
@@ -502,7 +504,7 @@ describe('profileRouter', () => {
           members: {
             create: {
               memberId: givenUserId,
-              isAdmin: true,
+              isAdmin: false,
               accepted: new Date(),
             },
           },
@@ -518,7 +520,7 @@ describe('profileRouter', () => {
             create: [
               {
                 memberId: givenUserId,
-                isAdmin: true,
+                isAdmin: false,
                 accepted: new Date(),
               },
               {
@@ -537,13 +539,25 @@ describe('profileRouter', () => {
 
       const singleMemberBase = await prismaClient.base.findUniqueOrThrow({
         where: { id: baseWithSingleMember.id },
+        include: {
+          members: { select: { isAdmin: true } },
+        },
       })
       const multipleMembersBase = await prismaClient.base.findUniqueOrThrow({
         where: { id: baseWithMultipleMembers.id },
+        include: {
+          members: { select: { isAdmin: true } },
+        },
       })
 
       expect(singleMemberBase.deleted).not.toBeNull()
       expect(multipleMembersBase.deleted).not.toBeNull()
+      expect(singleMemberBase.members.every((member) => member.isAdmin)).toBe(
+        false,
+      )
+      expect(
+        multipleMembersBase.members.every((member) => member.isAdmin),
+      ).toBe(false)
     })
   })
 })

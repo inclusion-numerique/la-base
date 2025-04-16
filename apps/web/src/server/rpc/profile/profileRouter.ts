@@ -63,13 +63,6 @@ const basesToDelete = (userId: string) => ({
     },
     deleted: null,
   },
-  select: {
-    id: true,
-    members: {
-      select: { memberId: true },
-      where: { member: { deleted: null } },
-    },
-  },
 })
 
 const collectionsToDelete = (userId: string) => ({
@@ -275,6 +268,31 @@ export const profileRouter = router({
 
       const timestamp = new Date()
 
+      const userBases = await prismaClient.base.findMany({
+        ...basesToDelete(profile.id),
+        select: {
+          _count: {
+            select: { members: { where: { member: { deleted: null } } } },
+          },
+          id: true,
+          members: {
+            select: { memberId: true, isAdmin: true },
+            where: { member: { deleted: null } },
+          },
+        },
+      })
+
+      const basesToSoftDelete = userBases.filter(
+        (base) => base._count.members === 1,
+      )
+
+      if (basesToSoftDelete.length > 0) {
+        await prismaClient.base.updateMany({
+          where: { id: { in: basesToSoftDelete.map((base) => base.id) } },
+          ...softDelete(timestamp),
+        })
+      }
+
       await prismaClient.resource.updateMany({
         ...resourcesToDelete(profile.id),
         ...softDelete(timestamp),
@@ -285,21 +303,6 @@ export const profileRouter = router({
         ...creatorBasesToDelete(profile.id),
         ...softDelete(timestamp),
       })
-
-      const userBases = await prismaClient.base.findMany({
-        ...basesToDelete(profile.id),
-      })
-
-      const basesToSoftDelete = userBases
-        .filter((base) => base.members.length === 1)
-        .map((base) => base.id)
-
-      if (basesToSoftDelete.length > 0) {
-        await prismaClient.base.updateMany({
-          where: { id: { in: basesToSoftDelete } },
-          ...softDelete(timestamp),
-        })
-      }
 
       await prismaClient.collection.updateMany({
         ...collectionsToDelete(profile.id),
