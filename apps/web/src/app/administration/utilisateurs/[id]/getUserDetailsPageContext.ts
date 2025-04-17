@@ -26,6 +26,8 @@ export const getUserDetailsPageContext = cache(async (userId: string) => {
         select: { members: { where: { member: { deleted: null } } } },
       },
       id: true,
+      title: true,
+      slug: true,
       members: {
         select: { memberId: true, isAdmin: true },
         where: { member: { deleted: null } },

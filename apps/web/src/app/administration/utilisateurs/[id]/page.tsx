@@ -49,7 +49,6 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
   )
 
   const profileUrl = getServerUrl(`/profils/${slug}`)
-
   return (
     <AdministrationPageContainer>
       <AdministrationBreadcrumbs
@@ -133,6 +132,24 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
             items={sortedUploads.map((upload) => ({
               label: `Fichier ${upload.name}`,
               value: `Uploadé le: ${dateAsDayAndTime(upload.created)}`,
+            }))}
+          />
+        </AdministrationInfoCard>
+      )}
+      {bases.length > 0 && (
+        <AdministrationInfoCard title="Bases associées">
+          <AdministrationInlineLabelsValues
+            items={bases.map((base) => ({
+              label: base.title,
+              value: (
+                <Link
+                  href={`/bases/${base.slug}`}
+                  className="fr-link"
+                  target="_blank"
+                >
+                  {getServerUrl(`/bases/${base.slug}`)}
+                </Link>
+              ),
             }))}
           />
         </AdministrationInfoCard>
