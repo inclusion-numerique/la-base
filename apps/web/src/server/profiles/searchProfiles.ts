@@ -28,22 +28,11 @@ export const countProfiles = async (
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
       WITH search AS (SELECT unaccent(${searchTerm}) AS term),
-      profiles AS (SELECT users.id                                                 AS id,
-                                  users.slug                                                AS slug,
-                                  users.created                                             AS created,
-                                  users.last_name                                           AS last_name,
-                                  users.name                                                AS name,
+         profiles AS (SELECT      users.name                                                AS name,
                                   users.location                                            AS location,
                                   users.title                                               AS title,
-                                  users.description                                         AS description,
-                                  COUNT(DISTINCT profile_follows.id)                        AS follows_count,
-                                  COUNT(DISTINCT resources.id)                              AS resources_count
+                                  users.description                                         AS description
                         FROM users
-                             LEFT JOIN profile_follows ON users.id = profile_follows.profile_id
-                             LEFT JOIN resources ON users.id = resources.created_by_id
-                                AND resources.deleted IS NULL
-                                AND resources.is_public = true
-                                AND resources.published IS NOT NULL
                     WHERE (
                         /* Authorization*/
                         /* User is public  */
@@ -102,11 +91,22 @@ export const rankProfiles = async (
                                   COUNT(DISTINCT profile_follows.id)                        AS follows_count,
                                   COUNT(DISTINCT resources.id)                              AS resources_count
                         FROM users
-                            LEFT JOIN profile_follows ON users.id = profile_follows.profile_id
-                            LEFT JOIN resources ON users.id = resources.created_by_id
+                        LEFT JOIN profile_follows ON users.id = profile_follows.profile_id
+                        LEFT JOIN resources ON users.id = resources.created_by_id
                                 AND resources.deleted IS NULL
                                 AND resources.is_public = true
                                 AND resources.published IS NOT NULL
+                        LEFT JOIN resource_contributors
+                                  ON resources.id = resource_contributors.resource_id AND
+                                                    resource_contributors.contributor_id = ${userId}::uuid
+                                           LEFT JOIN bases ON resources.base_id = bases.id
+                                           LEFT JOIN users as creator ON resources.created_by_id = creator.id
+                                      /* Join base member only to have only one row per resource */
+                                      /* Null will never match as member_id is not nullable */
+                                           LEFT JOIN base_members
+                                                     ON bases.id = base_members.base_id AND
+                                                        base_members.member_id = ${userId}::uuid AND
+                                                        base_members.accepted IS NOT NULL
                     WHERE (
                         /* Authorization*/
                         /* User is public  */
@@ -173,7 +173,6 @@ export const rankProfiles = async (
       },
     ]),
   )
-  console.log('profiles', debugIndexById)
 
   return {
     searchResults,
