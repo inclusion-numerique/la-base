@@ -28,6 +28,13 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
       id,
     },
     include: {
+      bases: {
+        select: {
+          id: true,
+          isAdmin: true,
+          base: { select: { title: true, slug: true } },
+        },
+      },
       accounts: true,
       sessions: true,
       uploads: true,
@@ -58,7 +65,6 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
   )
 
   const profileUrl = getServerUrl(`/profils/${slug}`)
-
   return (
     <AdministrationPageContainer>
       <AdministrationBreadcrumbs
@@ -142,6 +148,24 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
             items={sortedUploads.map((upload) => ({
               label: `Fichier ${upload.name}`,
               value: `Uploadé le: ${dateAsDayAndTime(upload.created)}`,
+            }))}
+          />
+        </AdministrationInfoCard>
+      )}
+      {user.bases.length > 0 && (
+        <AdministrationInfoCard title="Bases associées">
+          <AdministrationInlineLabelsValues
+            items={user.bases.map((userBase) => ({
+              label: userBase.base.title,
+              value: (
+                <Link
+                  href={`/bases/${userBase.base.slug}`}
+                  className="fr-link"
+                  target="_blank"
+                >
+                  {getServerUrl(`/bases/${userBase.base.slug}`)}
+                </Link>
+              ),
             }))}
           />
         </AdministrationInfoCard>
