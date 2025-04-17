@@ -30,8 +30,6 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
     include: {
       bases: {
         select: {
-          id: true,
-          isAdmin: true,
           base: { select: { title: true, slug: true } },
         },
       },

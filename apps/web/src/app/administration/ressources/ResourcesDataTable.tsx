@@ -15,7 +15,7 @@ export type ResourcesDataTableConfiguration = DataTableConfiguration<
 >
 
 export const ResourcesDataTable = {
-  csvFilename: () => `coop-${dateAsIsoDay(new Date())}-ressources`,
+  csvFilename: () => `les-bases-${dateAsIsoDay(new Date())}-ressources`,
   rowKey: ({ id }) => id,
   rowLink: ({ id }) => ({ href: `/administration/ressources/${id}` }),
   columns: [

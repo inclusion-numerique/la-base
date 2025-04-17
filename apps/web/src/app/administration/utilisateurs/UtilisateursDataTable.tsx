@@ -17,7 +17,7 @@ export type UtilisateursDataTableConfiguration = DataTableConfiguration<
 >
 
 export const UtilisateursDataTable = {
-  csvFilename: () => `coop-${dateAsIsoDay(new Date())}-utilisateurs`,
+  csvFilename: () => `les-bases-${dateAsIsoDay(new Date())}-utilisateurs`,
   rowKey: ({ id }) => id,
   rowLink: ({ id }) => ({ href: `/administration/utilisateurs/${id}` }),
   columns: [
