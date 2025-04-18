@@ -1,21 +1,20 @@
-import { v4 } from 'uuid'
-import { testSessionUser } from '@app/web/test/testSessionUser'
-import { profileRouter } from '@app/web/server/rpc/profile/profileRouter'
-import { createTestContext } from '@app/web/test/createTestContext'
+import { prismaClient } from '@app/web/prismaClient'
 import type {
   UpdateProfileContactsCommand,
   UpdateProfileInformationsCommand,
   UpdateProfileVisibilityCommand,
 } from '@app/web/server/profiles/updateProfile'
-import { prismaClient } from '@app/web/prismaClient'
 import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
+import { profileRouter } from '@app/web/server/rpc/profile/profileRouter'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { createTestContext } from '@app/web/test/createTestContext'
+import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
+import { testSessionUser } from '@app/web/test/testSessionUser'
+import { v4 } from 'uuid'
 
 describe('profileRouter', () => {
   // Helper function to easily test procedures
-
   const givenUserId = v4()
   const givenUserEmail = `test+${givenUserId}@inclusion-numerique.anct.gouv.fr`
   const givenUser = {
@@ -28,6 +27,7 @@ describe('profileRouter', () => {
   const basesToDelete: string[] = []
   const collectionsToDelete: string[] = []
   const resourcesToDelete: string[] = []
+  const usersToDelete: string[] = []
 
   const executeUpdateProfilInformationsProcedure = (
     input: UpdateProfileInformationsCommand,
@@ -87,9 +87,11 @@ describe('profileRouter', () => {
         },
       },
     })
-    await prismaClient.user.delete({
+    await prismaClient.user.deleteMany({
       where: {
-        id: givenUserId,
+        id: {
+          in: usersToDelete,
+        },
       },
     })
   })
@@ -398,6 +400,8 @@ describe('profileRouter', () => {
         userId: givenUserId,
       })
 
+      usersToDelete.push(givenUserId)
+
       const user = await prismaClient.user.findUniqueOrThrow({
         where: { id: givenUserId },
       })
@@ -454,6 +458,106 @@ describe('profileRouter', () => {
       expect(
         collectionsInBase.every((collection) => collection.deleted == null),
       ).toBe(true)
+    })
+
+    it('should delete bases if the user is the last member non-deleted and not an admin', async (): Promise<void> => {
+      const deletedUserId = v4()
+      const deletedUserEmail = `test+${deletedUserId}@inclusion-numerique.anct.gouv.fr`
+      const deletedUserSlug = `test+${deletedUserId}`
+      const deletedUser = {
+        ...testSessionUser,
+        id: deletedUserId,
+        email: deletedUserEmail,
+        slug: deletedUserSlug,
+      }
+      usersToDelete.push(givenUserId, deletedUser.id)
+
+      // we reset the deleted user to be able to delete it
+      await prismaClient.user.update({
+        where: { id: givenUserId },
+        data: {
+          deleted: null,
+        },
+      })
+
+      await prismaClient.user.create({
+        data: {
+          id: deletedUser.id,
+          email: deletedUser.email,
+          slug: deletedUser.slug,
+          deleted: new Date(),
+        },
+      })
+
+      const baseWithSingleMember = createTestIdTitleAndSlug(
+        'Base with single member',
+      )
+      const baseWithMultipleMembers = createTestIdTitleAndSlug(
+        'Base with multiple members',
+      )
+      basesToDelete.push(baseWithMultipleMembers.id, baseWithSingleMember.id)
+      await prismaClient.base.create({
+        data: {
+          ...baseWithSingleMember,
+          createdById: givenUserId,
+          email: givenUserEmail,
+          members: {
+            create: {
+              memberId: givenUserId,
+              isAdmin: false,
+              accepted: new Date(),
+            },
+          },
+        },
+      })
+
+      await prismaClient.base.create({
+        data: {
+          ...baseWithMultipleMembers,
+          createdById: givenUserId,
+          email: givenUserEmail,
+          members: {
+            create: [
+              {
+                memberId: givenUserId,
+                isAdmin: false,
+                accepted: new Date(),
+              },
+              {
+                memberId: deletedUser.id,
+                isAdmin: false,
+                accepted: new Date(),
+              },
+            ],
+          },
+        },
+      })
+
+      await executeDeleteProfilProcedure({
+        userId: givenUserId,
+      })
+
+      const singleMemberBase = await prismaClient.base.findUniqueOrThrow({
+        where: { id: baseWithSingleMember.id },
+        include: {
+          members: { select: { isAdmin: true } },
+        },
+      })
+      const multipleMembersBase = await prismaClient.base.findUniqueOrThrow({
+        where: { id: baseWithMultipleMembers.id },
+        include: {
+          members: { select: { isAdmin: true } },
+        },
+      })
+
+      expect(singleMemberBase.deleted).not.toBeNull()
+      expect(multipleMembersBase.deleted).not.toBeNull()
+      expect(singleMemberBase.members.every((member) => member.isAdmin)).toBe(
+        false,
+      )
+      expect(
+        multipleMembersBase.members.every((member) => member.isAdmin),
+      ).toBe(false)
     })
   })
 })

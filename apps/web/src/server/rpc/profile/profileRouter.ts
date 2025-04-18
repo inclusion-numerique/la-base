@@ -46,10 +46,21 @@ const resourcesToDelete = (userId: string) => ({
   },
 })
 
-const basesToDelete = (userId: string) => ({
+const creatorBasesToDelete = (userId: string) => ({
   where: {
     createdById: userId,
     members: { every: { memberId: userId } },
+    deleted: null,
+  },
+})
+
+const basesToDelete = (userId: string) => ({
+  where: {
+    members: {
+      some: {
+        memberId: userId,
+      },
+    },
     deleted: null,
   },
 })
@@ -245,7 +256,6 @@ export const profileRouter = router({
         where: { id: userId, deleted: null },
         select: { slug: true, ...profileAuthorizationTargetSelect },
       })
-
       if (!profile) {
         throw invalidError('User not found')
       }
@@ -258,13 +268,39 @@ export const profileRouter = router({
 
       const timestamp = new Date()
 
+      const userBases = await prismaClient.base.findMany({
+        ...basesToDelete(profile.id),
+        select: {
+          _count: {
+            select: { members: { where: { member: { deleted: null } } } },
+          },
+          id: true,
+          members: {
+            select: { memberId: true, isAdmin: true },
+            where: { member: { deleted: null } },
+          },
+        },
+      })
+
+      const basesToSoftDelete = userBases.filter(
+        (base) => base._count.members === 1,
+      )
+
+      if (basesToSoftDelete.length > 0) {
+        await prismaClient.base.updateMany({
+          where: { id: { in: basesToSoftDelete.map((base) => base.id) } },
+          ...softDelete(timestamp),
+        })
+      }
+
       await prismaClient.resource.updateMany({
         ...resourcesToDelete(profile.id),
         ...softDelete(timestamp),
       })
 
+      // Delete all bases created by the user we want to delete
       await prismaClient.base.updateMany({
-        ...basesToDelete(profile.id),
+        ...creatorBasesToDelete(profile.id),
         ...softDelete(timestamp),
       })
 
