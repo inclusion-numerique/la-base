@@ -29,9 +29,12 @@ export const applyResourceRepublished: ResourceMutationEventApplier<
 export const onRepublished: ResourceEventSideEffect<
   ResourceRepublished
 > = async ({ timestamp }, resource, { transaction }) => {
-  const newContents = resource.contents.sort(sortContents).map((content) => ({
-    ...content,
-  }))
+  const newContents = resource.contents
+    .map((content, index) => ({
+      ...content,
+      order: content.order ?? index,
+    }))
+    .sort(sortContents)
 
   await transaction.resource.update({
     where: { id: resource.id },
@@ -41,7 +44,6 @@ export const onRepublished: ResourceEventSideEffect<
       description: resource.description,
       excerpt: resource.excerpt,
       baseId: resource.baseId,
-      slug: resource.slug,
       // Deleting and recreating contents
       contents: {
         deleteMany: {},

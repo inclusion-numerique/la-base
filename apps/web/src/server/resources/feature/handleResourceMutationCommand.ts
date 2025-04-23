@@ -41,7 +41,6 @@ export const handleResourceMutationCommand = async (
     Array.isArray(handlerResult) ? handlerResult : [handlerResult]
   ) as MutationHistoryResourceEvent[]
   let resource = initialResource
-
   const transactionEvents = async (t: PrismaTransaction) => {
     // We need to find the highest sequence of the resource after all the side effects have been executed
     const highestSequence = await t.resourceEvent.findFirst({
@@ -56,7 +55,6 @@ export const handleResourceMutationCommand = async (
 
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
-
       // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, {
         transaction: t,

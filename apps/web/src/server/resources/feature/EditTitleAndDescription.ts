@@ -18,8 +18,6 @@ export type TitleAndDescriptionEditedDataV1 = {
   __version: 1
   title: string
   description: string
-  // Slug is defined only if it needs to change (detected by the command handler)
-  slug?: string
 }
 
 export type TitleAndDescriptionEdited = {

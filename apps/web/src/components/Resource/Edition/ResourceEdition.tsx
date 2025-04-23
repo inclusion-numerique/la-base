@@ -199,8 +199,9 @@ const ResourceEdition = ({
             resourceId: resource.id,
           },
         })
+
         router.refresh()
-        router.push(`/ressources/${result.resource.slug}`)
+        router.push(`/ressources/${resource.slug}`)
         createToast({
           priority: 'success',
           message: (
