@@ -28,6 +28,7 @@ export const handleResourceMutationCommand = async (
     getResourceFromEvents({ id: resourceId }),
     getPersistedResource(resourceId),
   ])
+
   if (!initialResource || !persistedResource) {
     throw notFoundError()
   }
@@ -41,6 +42,7 @@ export const handleResourceMutationCommand = async (
     Array.isArray(handlerResult) ? handlerResult : [handlerResult]
   ) as MutationHistoryResourceEvent[]
   let resource = initialResource
+
   const transactionEvents = async (t: PrismaTransaction) => {
     // We need to find the highest sequence of the resource after all the side effects have been executed
     const highestSequence = await t.resourceEvent.findFirst({

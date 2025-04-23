@@ -108,5 +108,51 @@ describe('resourceRouter', () => {
       expect(events[2].type).toBe('VisibilityChanged')
       expect(events[2].sequence).toBe(2)
     })
+
+    it('should not modify the slug when modifying the title', async () => {
+      const givenResource = createTestIdTitleAndSlug('Test Resource')
+      resourcesToDelete.push(givenResource.id)
+
+      await handleResourceCreationCommand(
+        {
+          name: 'CreateResource',
+          payload: {
+            resourceId: givenResource.id,
+            title: givenResource.title,
+            description: 'Initial description',
+            baseId: null,
+          },
+        },
+        { user: givenUser },
+      )
+      const updatedTitle = 'Updated Title 1'
+      const updatedDescription = 'Updated Description 1'
+
+      await executeMutateProcedure({
+        name: 'EditTitleAndDescription',
+        payload: {
+          resourceId: givenResource.id,
+          title: updatedTitle,
+          description: updatedDescription,
+        },
+      })
+
+      await executeMutateProcedure({
+        name: 'Republish',
+        payload: {
+          resourceId: givenResource.id,
+        },
+      })
+
+      const resource = await prismaClient.resource.findUniqueOrThrow({
+        where: {
+          id: givenResource.id,
+        },
+      })
+
+      expect(resource.slug).toBe(givenResource.slug)
+      expect(resource.title).toBe(updatedTitle)
+      expect(resource.description).toBe(updatedDescription)
+    })
   })
 })

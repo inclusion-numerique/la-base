@@ -60,9 +60,12 @@ export const onPublished: ResourceEventSideEffect<ResourcePublished> = async (
   resource,
   { transaction },
 ) => {
-  const newContents = resource.contents.sort(sortContents).map((content) => ({
-    ...content,
-  }))
+  const newContents = resource.contents
+    .map((content, index) => ({
+      ...content,
+      order: content.order ?? index,
+    }))
+    .sort(sortContents)
 
   await transaction.resource.update({
     where: { id: resource.id },
