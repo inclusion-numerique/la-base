@@ -28,6 +28,7 @@ export const handleResourceMutationCommand = async (
     getResourceFromEvents({ id: resourceId }),
     getPersistedResource(resourceId),
   ])
+
   if (!initialResource || !persistedResource) {
     throw notFoundError()
   }
@@ -56,7 +57,6 @@ export const handleResourceMutationCommand = async (
 
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
-
       // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, {
         transaction: t,

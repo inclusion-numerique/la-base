@@ -7,7 +7,6 @@ import AdministrationInlineLabelsValues from '@app/web/app/administration/Admini
 import AdministrationMailtoLink from '@app/web/app/administration/AdministrationMailtoLink'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import { prismaClient } from '@app/web/prismaClient'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { getUserDisplayName } from '@app/web/utils/user'
@@ -15,6 +14,7 @@ import AdministrationPageContainer from '@app/web/app/administration/Administrat
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import DeleteUserButton from '@app/web/app/administration/utilisateurs/[id]/DeleteUserButton'
+import { getUserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
 
 export const metadata = {
   title: metadataTitle('Utilisateurs - Détails'),
@@ -23,16 +23,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => {
-  const user = await prismaClient.user.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      accounts: true,
-      sessions: true,
-      uploads: true,
-    },
-  })
+  const { user, bases } = await getUserDetailsPageContext(id)
 
   if (!user) {
     notFound()
@@ -58,7 +49,6 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
   )
 
   const profileUrl = getServerUrl(`/profils/${slug}`)
-
   return (
     <AdministrationPageContainer>
       <AdministrationBreadcrumbs
@@ -72,7 +62,7 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
       />
       <AdministrationTitle
         icon="fr-icon-user-line"
-        actions={<DeleteUserButton userId={id} />}
+        actions={<DeleteUserButton userId={id} bases={bases} />}
       >
         {name}
       </AdministrationTitle>
@@ -142,6 +132,24 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
             items={sortedUploads.map((upload) => ({
               label: `Fichier ${upload.name}`,
               value: `Uploadé le: ${dateAsDayAndTime(upload.created)}`,
+            }))}
+          />
+        </AdministrationInfoCard>
+      )}
+      {bases.length > 0 && (
+        <AdministrationInfoCard title="Bases associées">
+          <AdministrationInlineLabelsValues
+            items={bases.map((base) => ({
+              label: base.title,
+              value: (
+                <Link
+                  href={`/bases/${base.slug}`}
+                  className="fr-link"
+                  target="_blank"
+                >
+                  {getServerUrl(`/bases/${base.slug}`)}
+                </Link>
+              ),
             }))}
           />
         </AdministrationInfoCard>
