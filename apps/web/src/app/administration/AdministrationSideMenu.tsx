@@ -45,6 +45,18 @@ const AdministrationSideMenu = () => {
       },
       isActive: pathname?.startsWith('/administration/bases'),
     },
+    {
+      text: (
+        <>
+          <span className="ri-star-line ri-xl fr-mr-1w fr-text--regular" />
+          En vedette
+        </>
+      ),
+      linkProps: {
+        href: '/administration/landing',
+      },
+      isActive: pathname?.startsWith('/administration/landing'),
+    },
     // Todo : it will be helpful to implement this feature based on Coop impersonation
     // {
     //   text: (

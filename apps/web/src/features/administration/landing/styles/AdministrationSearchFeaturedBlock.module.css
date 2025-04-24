@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+}
+
+.resultsContainer {
+  width: 100%;
+  position: absolute;
+  top: 48px;
+  z-index: 1;
+  box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
+  background-color: var(--background-default-grey);
+  margin: auto;
+  text-align: left;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 16px;
+  color: var(--grey-425-625) !important;
+}
+
+.featuredBlock {
+  min-height: 3rem;
+}
