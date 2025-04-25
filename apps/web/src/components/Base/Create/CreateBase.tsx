@@ -12,6 +12,7 @@ import BaseInformationsEdition from '@app/web/components/Base/BaseInformationsEd
 import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMenu'
 import Card from '@app/web/components/Card'
 import VisibilityField from '@app/web/components/VisibilityField'
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
@@ -24,7 +25,6 @@ import type {
   UpdateBaseInformationsCommand,
 } from '@app/web/server/bases/updateBase'
 import { trpc } from '@app/web/trpc'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
