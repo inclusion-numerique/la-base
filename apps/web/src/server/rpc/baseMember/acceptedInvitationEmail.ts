@@ -1,37 +1,32 @@
 import { compileMjml } from '@app/emails/mjml'
-import { inviteMember } from '@app/emails/templates/inviteMember'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import { acceptedBaseInvitation } from '@app/emails/templates/acceptedBaseInvitation'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 
-export const sendInviteMemberEmail = async ({
+export const sendAcceptedInvitationEmail = async ({
   url,
   email,
   baseTitle,
-  newMember = false,
-  from,
 }: {
   url: string
   email: string
   baseTitle: string
-  newMember?: boolean
-  from: SessionUser
+  memberName: string
 }) => {
   const result = await emailTransport.sendMail({
     to: email,
     from: ServerWebAppConfig.Email.from,
     replyTo: PublicWebAppConfig.contactEmail,
 
-    subject: `Invitation à rejoindre la base ${baseTitle}`,
-    text: inviteMember.text({ url, baseTitle }),
+    subject: `Demande de rejoindre la base ${baseTitle} acceptée !`,
+    text: acceptedBaseInvitation.text({ memberName: '', baseTitle }),
     html: compileMjml(
-      inviteMember.mjml({
+      acceptedBaseInvitation.mjml({
         url,
+        memberName: '',
         baseTitle,
-        from: from.name || '',
-        newMember,
       }),
     ),
   })

@@ -18,7 +18,7 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import InviteUsers from '@app/web/components/InviteUsers'
+import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import styles from './InviteResourceContributors.module.css'
 
 const InviteResourceContributors = ({

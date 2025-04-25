@@ -5,9 +5,13 @@ export const getBaseInvitation = (token: string, user: SessionUser) =>
   prismaClient.baseMembers.findFirst({
     select: {
       id: true,
+      acceptationToken: true,
       base: {
         select: {
           slug: true,
+          id: true,
+          title: true,
+          image: true,
         },
       },
     },
@@ -16,3 +20,7 @@ export const getBaseInvitation = (token: string, user: SessionUser) =>
       memberId: user.id,
     },
   })
+
+export type BaseInvitation = NonNullable<
+  Awaited<ReturnType<typeof getBaseInvitation>>
+>

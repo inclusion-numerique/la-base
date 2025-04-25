@@ -8,16 +8,19 @@ import classNames from 'classnames'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
+import Link from 'next/link'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { BasePageData } from '@app/web/server/bases/getBase'
+import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import {
   InviteMemberCommand,
   InviteMemberCommandValidation,
-} from '@app/web/server/baseMembers/inviteMember'
-import InviteUsers from '@app/web/components/InviteUsers'
+  InviteMemberType,
+} from '@app/web/features/base/invitation/db/inviteMember'
 import styles from './InviteBaseMemberButton.module.css'
 
 const {
@@ -40,7 +43,7 @@ const InviteBaseMemberButton = ({
 }) => {
   const form = useForm<InviteMemberCommand>({
     resolver: zodResolver(InviteMemberCommandValidation),
-    defaultValues: { baseId: base.id, isAdmin: false },
+    defaultValues: { baseId: base.id, isAdmin: false, members: [] },
   })
 
   const [emailErrors, setEmailsError] = useState(false)
@@ -56,6 +59,7 @@ const InviteBaseMemberButton = ({
       })
       return
     }
+
     try {
       await mutate.mutateAsync(data)
       close()
@@ -75,6 +79,21 @@ const InviteBaseMemberButton = ({
   }
 
   const isLoading = mutate.isSuccess || mutate.isSuccess
+  const handleSelectUserType = (type: string) =>
+    form.setValue('isAdmin', type === 'admin')
+
+  const selectedMemberType = form.watch('isAdmin') ? 'admin' : 'member'
+
+  const handleOnChange = (options: SelectOptionValid[]) => {
+    const uuids = options
+      .filter((opt) => !opt.value.includes('@'))
+      .map((opt) => ({ id: opt.value, type: opt.type as InviteMemberType }))
+    const emails = options
+      .filter((opt) => opt.value.includes('@'))
+      .map((opt) => ({ email: opt.value, type: opt.type as InviteMemberType }))
+    form.setValue('members', uuids)
+    form.setValue('newMembers', emails)
+  }
 
   return (
     <div>
@@ -93,70 +112,54 @@ const InviteBaseMemberButton = ({
         <InviteModal
           title="Inviter des membres"
           className={classNames(styles.modal, 'fr-modal--overflow-visible')}
-          buttons={[
-            {
-              iconId: 'fr-icon-user-setting-line',
-              children: 'Inviter',
-              type: 'submit',
-              nativeButtonProps: {
-                'data-testid': 'invite-member-modal-button',
-              },
-              ...buttonLoadingClassname(isLoading),
-            },
-          ]}
         >
           <>
-            <div className="fr-mb-4w">
-              Les membres peuvent voir, créer, publier et contribuer à
-              l’ensemble des ressources liées à votre base. Vous pouvez
-              également ajouter des administrateurs qui pourront inviter et
-              gérer les membres de la base.
+            <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+              <div>
+                Les contributeurs peuvent voir, créer et contribuer à l’ensemble
+                des ressources liées à la base ainsi qu’invitez d’autres
+                membres. Vous pouvez également inviter des administrateurs qui
+                pourront gérer les membres de la base (inviter et retirer des
+                membres).
+              </div>
+              <div className="fr-mb-4w">
+                <Link
+                  className="fr-link"
+                  href="/centre-d-aide/une-base#membre-base"
+                >
+                  En savoir plus sur les rôles et les permissions ici
+                </Link>
+              </div>
             </div>
+
             <div className={styles.actions}>
               <div className={styles.search}>
                 <Controller
                   control={form.control}
                   name="members"
-                  render={({ field: { onChange }, fieldState: { error } }) => (
-                    <>
+                  render={({ fieldState: { error } }) => (
+                    <div>
                       <InviteUsers
+                        disabled={isLoading}
                         label="Ajouter un membre"
                         setEmailsError={setEmailsError}
                         error={error}
-                        onChange={onChange}
+                        onChange={handleOnChange}
                         baseId={base.id}
+                        handleSelectUserType={handleSelectUserType}
+                        selectedMemberType={selectedMemberType}
+                        canAddAdmin={canAddAdmin}
                       />
-                      <div
-                        className={classNames(styles.select, {
-                          [styles.selectWithError]: error,
-                        })}
+                      <Button
+                        type="submit"
+                        nativeButtonProps={{
+                          'data-testid': 'invite-member-modal-button',
+                        }}
+                        {...buttonLoadingClassname(!!isLoading, styles.button)}
                       >
-                        <select
-                          data-testid="base-invite-member-role-select"
-                          onChange={(event) => {
-                            form.setValue(
-                              'isAdmin',
-                              event.target.value === 'admin',
-                            )
-                          }}
-                        >
-                          <option
-                            value="member"
-                            data-testid="base-invite-member-role-member"
-                          >
-                            Membre
-                          </option>
-                          {canAddAdmin && (
-                            <option
-                              value="admin"
-                              data-testid="base-invite-member-role-admin"
-                            >
-                              Administrateur
-                            </option>
-                          )}
-                        </select>
-                      </div>
-                    </>
+                        Inviter
+                      </Button>
+                    </div>
                   )}
                 />
               </div>

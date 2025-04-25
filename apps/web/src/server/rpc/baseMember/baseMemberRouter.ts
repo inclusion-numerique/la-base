@@ -1,21 +1,25 @@
-import z from 'zod'
-import { v4 } from 'uuid'
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-await-in-loop */
 import * as Sentry from '@sentry/nextjs'
-import { prismaClient } from '@app/web/prismaClient'
-import { baseSelect } from '@app/web/server/bases/getBase'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { InviteMemberCommandValidation } from '@app/web/server/baseMembers/inviteMember'
-import {
-  authorizeOrThrow,
-  invalidError,
-  notFoundError,
-} from '@app/web/server/rpc/trpcErrors'
-import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import { v4 } from 'uuid'
+import z from 'zod'
+
 import {
   baseAuthorization,
   BasePermissions,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import { InviteMemberCommandValidation } from '@app/web/features/base/invitation/db/inviteMember'
+import { prismaClient } from '@app/web/prismaClient'
+import { baseSelect } from '@app/web/server/bases/getBase'
+import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import {
+  authorizeOrThrow,
+  invalidError,
+  notFoundError,
+} from '@app/web/server/rpc/trpcErrors'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 
 export const baseMemberRouter = router({
   invite: protectedProcedure
@@ -38,33 +42,68 @@ export const baseMemberRouter = router({
         ),
       )
 
-      /**
-       * Do not re-add existing members
-       */
-      const memberUserIds = input.members.filter(
-        (id) => !base.members.some((member) => member.member.id === id),
-      )
+      if (input.members && input.members.length > 0) {
+        /**
+         * Do not re-add existing members
+         */
+        const membersIdsAndRole = input.members.filter(
+          (inputMember) =>
+            !base.members.some(
+              (baseMember) => baseMember.member.id === inputMember.id,
+            ),
+        )
+        const membersUserIds = membersIdsAndRole.map((m) => m.id)
 
-      const members = await prismaClient.user.findMany({
-        select: { id: true, email: true },
-        where: { id: { in: memberUserIds } },
-      })
+        const members = await prismaClient.user.findMany({
+          select: { id: true, email: true },
+          where: { id: { in: membersUserIds } },
+        })
 
-      for (const member of members) {
-        const memberId = memberUserIds.find((x) => x === member.id)
-        if (memberId) {
-          const acceptationToken = v4()
-          // eslint-disable-next-line no-await-in-loop
+        for (const member of members) {
+          const memberWithRole = membersIdsAndRole.find(
+            (m) => m.id === member.id,
+          )
+          if (memberWithRole) {
+            const acceptationToken = v4()
+            await prismaClient.baseMembers.create({
+              data: {
+                baseId: input.baseId,
+                isAdmin: memberWithRole.type === 'admin',
+                memberId: memberWithRole.id,
+                acceptationToken,
+              },
+            })
+
+            sendInviteMemberEmail({
+              baseTitle: base.title,
+              from: user,
+              url: `/invitations/base/${acceptationToken}`,
+              email: member.email,
+            }).catch((error) => Sentry.captureException(error))
+          }
+        }
+      }
+
+      if (input.newMembers && input.newMembers.length > 0) {
+        const acceptationToken = v4()
+        for (const member of input.newMembers) {
+          const slug = await createAvailableSlug('utilisateur', 'users')
+          const createdUser = await prismaClient.user.create({
+            data: {
+              email: member.email,
+              slug,
+            },
+          })
           await prismaClient.baseMembers.create({
             data: {
               baseId: input.baseId,
-              isAdmin: input.isAdmin,
-              memberId,
+              isAdmin: member.type === 'admin',
+              memberId: createdUser.id,
               acceptationToken,
             },
           })
-
           sendInviteMemberEmail({
+            newMember: true,
             baseTitle: base.title,
             from: user,
             url: `/invitations/base/${acceptationToken}`,
@@ -72,6 +111,42 @@ export const baseMemberRouter = router({
           }).catch((error) => Sentry.captureException(error))
         }
       }
+    }),
+  acceptInvitation: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      const invitation = await prismaClient.baseMembers.findUnique({
+        where: { id: input.id },
+      })
+
+      if (!invitation) {
+        return notFoundError()
+      }
+
+      if (invitation.accepted) {
+        return invalidError('Cette invitation a déjà été acceptée')
+      }
+
+      return prismaClient.baseMembers.update({
+        data: { acceptationToken: null, accepted: new Date() },
+        where: { id: invitation.id },
+      })
+    }),
+
+  declineInvitation: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      const invitation = await prismaClient.baseMembers.findUnique({
+        where: { id: input.id },
+      })
+
+      if (!invitation) {
+        return notFoundError()
+      }
+
+      return prismaClient.baseMembers.delete({
+        where: { id: input.id },
+      })
     }),
   changeRole: protectedProcedure
     .input(
@@ -118,6 +193,25 @@ export const baseMemberRouter = router({
         where: {
           memberId_baseId: { baseId: input.baseId, memberId: input.memberId },
         },
+      })
+    }),
+  leave: protectedProcedure
+    .input(z.object({ baseId: z.string(), memberId: z.string() }))
+    .mutation(async ({ input, ctx: { user } }) => {
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.baseId },
+        select: {
+          ...baseAuthorizationTargetSelect,
+          ...baseSelect(user),
+        },
+      })
+
+      if (!base) {
+        return notFoundError()
+      }
+
+      return prismaClient.baseMembers.delete({
+        where: { memberId_baseId: input },
       })
     }),
   remove: protectedProcedure
