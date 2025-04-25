@@ -83,6 +83,7 @@ const InviteUsers = ({
         lastName: user.lastName,
       },
       component: <InviteMemberCard user={user} />,
+      type: selectedMemberType,
     })) ?? []
 
   return (
@@ -99,6 +100,13 @@ const InviteUsers = ({
         withBadges={withBadges}
         canAddAdmin={canAddAdmin}
       />
+      <div className={styles.select}>
+        <InviteUserType
+          onChange={handleSelectUserType}
+          selectedMemberType={selectedMemberType}
+          canAddAdmin={canAddAdmin}
+        />
+      </div>
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">
           {error.message}

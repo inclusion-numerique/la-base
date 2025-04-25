@@ -15,7 +15,7 @@ import React from 'react'
 
 export const inviteMember = {
   text: ({ url, baseTitle }: { url: string; baseTitle: string }): string =>
-    `Pour accepter l'invitation à la base ${baseTitle}, merci d'utiliser le lien suivant :\n${url}\n\n`,
+    `Pour accepter l'invitation à la base ${baseTitle}, merci d'utiliser le lien suivant :\n${url}\n\n`,
   mjml: ({
     url,
     baseTitle,

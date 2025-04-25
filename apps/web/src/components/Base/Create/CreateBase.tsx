@@ -2,7 +2,6 @@
 
 import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
 import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
-import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
@@ -12,6 +11,7 @@ import BaseInformationsEdition from '@app/web/components/Base/BaseInformationsEd
 import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMenu'
 import Card from '@app/web/components/Card'
 import VisibilityField from '@app/web/components/VisibilityField'
+import type { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
@@ -24,13 +24,13 @@ import type {
   UpdateBaseInformationsCommand,
 } from '@app/web/server/bases/updateBase'
 import { trpc } from '@app/web/trpc'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, type UseFormReturn, useForm } from 'react-hook-form'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 
 const {
   Component: CancelModal,
