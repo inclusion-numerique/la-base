@@ -8,7 +8,7 @@ const InviteUserCard = ({ user }: { user: SearchProfilesResult[number] }) => (
     <RoundProfileImage user={user} />
     <div>
       <span className="fr-text--sm fr-mb-0">{user.name}</span>
-      <span className="fr-text--xs fr-mb-0 fr-hint-text">{user.slug}</span>
+      <span className="fr-text--xs fr-mb-0 fr-hint-text">{user.email}</span>
     </div>
   </div>
 )

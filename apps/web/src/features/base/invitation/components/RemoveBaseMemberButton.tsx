@@ -23,21 +23,27 @@ const RemoveBaseMemberButton = ({ member }: { member: BaseMember }) => {
         priority: 'success',
         message: <>Le membre a bien été retiré</>,
       })
-    } catch {
-      // biome-ignore lint/suspicious/noConsole: need this for troubleshooting
-      console.error('Something went wrong...')
+    } catch (error) {
+      console.error('Could not remove member from base', error)
+      createToast({
+        priority: 'error',
+        message:
+          'Une erreur est survenue lorsque vous avez retiré le membre de la base, merci de réessayer ultérieurement',
+      })
     }
   }
 
   return (
     <Button
       priority="tertiary no outline"
-      iconId="fr-icon-delete-line"
       title="Retirer le membre de la base"
       data-testid="remove-member-button"
       size="small"
       onClick={onRemove}
-    />
+    >
+      Retirer
+      <span className="ri-close-circle-line fr-ml-1w" aria-hidden="true" />
+    </Button>
   )
 }
 

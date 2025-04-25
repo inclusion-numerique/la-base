@@ -1,31 +1,31 @@
 import { compileMjml } from '@app/emails/mjml'
-import { inviteMember } from '@app/emails/templates/inviteMember'
+import { rejectedBaseInvitation } from '@app/emails/templates/rejectedBaseInvitation'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
-import type { SessionUser } from '@app/web/auth/sessionUser'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 
-export const sendInviteMemberEmail = async ({
-  url,
+export const sendDeclinedInvitationEmail = async ({
   email,
   baseTitle,
-  from,
+  memberName,
 }: {
-  url: string
   email: string
   baseTitle: string
-  from: SessionUser
+  memberName: string
 }) => {
   const result = await emailTransport.sendMail({
     to: email,
     from: ServerWebAppConfig.Email.from,
     replyTo: PublicWebAppConfig.contactEmail,
 
-    subject: `Invitation à rejoindre la base ${baseTitle}`,
-    text: inviteMember.text({ url, baseTitle }),
+    subject: `Demande de rejoindre la base ${baseTitle} refusée !`,
+    text: rejectedBaseInvitation.text({ memberName, baseTitle }),
     html: compileMjml(
-      inviteMember.mjml({ url, baseTitle, from: from.name || '' }),
+      rejectedBaseInvitation.mjml({
+        memberName,
+        baseTitle,
+      }),
     ),
   })
 

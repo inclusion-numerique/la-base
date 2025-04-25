@@ -1,0 +1,75 @@
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useState, useRef, Fragment } from 'react'
+import { useOnClickOutside } from 'usehooks-ts'
+import styles from './InviteUserType.module.css'
+
+const InviteUserType = ({
+  onChange,
+  canAddAdmin,
+  selectedMemberType,
+}: {
+  onChange?: (type: string) => void
+  canAddAdmin: boolean
+  selectedMemberType: 'admin' | 'member'
+}) => {
+  const [open, setOpen] = useState(false)
+  const optionsRef = useRef(null)
+  useOnClickOutside(optionsRef, () => setOpen(false))
+
+  const options = [
+    {
+      label: 'Contributeur',
+      value: 'member',
+
+      dataTestId: 'base-invite-member-role-select',
+    },
+    ...(canAddAdmin
+      ? [
+          {
+            label: 'Administrateur',
+            value: 'admin',
+            dataTestId: 'base-invite-member-role-admin',
+          },
+        ]
+      : []),
+  ]
+  const handleOnChange = (value: string) => {
+    onChange?.(value)
+    setOpen(false)
+  }
+  return (
+    <div className={styles.container} ref={optionsRef}>
+      {!!onChange && (
+        <Button
+          className={styles.button}
+          priority="tertiary"
+          iconId={`fr-icon-arrow-${open ? 'up' : 'down'}-s-line`}
+          iconPosition="right"
+          onClick={() => setOpen(!open)}
+          type="button"
+        >
+          {selectedMemberType === 'admin' ? 'Administrateur' : 'Contributeur'}
+        </Button>
+      )}
+      {open && (
+        <div className={styles.options}>
+          {options.map((option) => (
+            <Fragment key={option.value}>
+              <button
+                type="button"
+                className={styles.option}
+                onClick={() => handleOnChange(option.value)}
+                data-testid={option.dataTestId}
+              >
+                <div>{option.label}</div>
+              </button>
+              <hr className={styles.separator} />
+            </Fragment>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default InviteUserType

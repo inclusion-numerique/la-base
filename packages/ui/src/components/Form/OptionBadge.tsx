@@ -3,8 +3,12 @@ import React, { MouseEventHandler } from 'react'
 import styles from './OptionBadge.module.css'
 import { SelectOption } from './utils/options'
 
-export type SelectOptionValid = SelectOption<string> & { invalid?: boolean }
-const OptionBadge = ({
+export type SelectOptionValid = SelectOption<string> & {
+  invalid?: boolean
+  type?: 'admin' | 'member'
+}
+
+export const OptionBadge = ({
   option,
   onClick,
   disabled,

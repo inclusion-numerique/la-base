@@ -30,6 +30,8 @@ const MultipleSearchableSelect = ({
   asterisk,
   'data-testid': dataTestId,
   disabled,
+  selectedMemberType,
+  withSelectTypeMember,
 }: {
   placeholder?: string
   noResultMessage?: string
@@ -44,6 +46,8 @@ const MultipleSearchableSelect = ({
   options: SelectOption[]
   'data-testid'?: string
   disabled?: boolean
+  selectedMemberType: 'admin' | 'member'
+  withSelectTypeMember: boolean
 }) => {
   const [internalSelection, setInternalSelection] = useState<
     SelectOptionValid[]
@@ -53,7 +57,6 @@ const MultipleSearchableSelect = ({
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const optionsContainerRef = useRef<HTMLDivElement>(null)
-
   const allOptions = useMemo(
     () =>
       options.filter((option) =>
@@ -112,7 +115,7 @@ const MultipleSearchableSelect = ({
         onInputChange('')
         const newSelection = [
           ...internalSelection,
-          { label: inputValue, value: inputValue, invalid: true },
+          { label: inputValue, value: inputValue, type: selectedMemberType },
         ]
         setInternalSelection(newSelection)
         onSelectProperty(newSelection)
@@ -136,59 +139,58 @@ const MultipleSearchableSelect = ({
         {hint && <span className="fr-hint-text">{hint}</span>}
       </label>
       <div className={styles.input}>
-        <div
-          className={classNames(
-            'fr-input',
-            'input-container',
-            styles.inputContainer,
-          )}
-        >
-          {internalSelection.map((selected) => (
-            <OptionBadge
-              key={selected.value}
-              option={selected}
-              onClick={() => unselect(selected)}
+        <div className="fr-flex fr-align-items-center fr-justify-content-space-between">
+          <div
+            className={classNames(
+              'fr-input',
+              withSelectTypeMember && styles.inputContainerMaxWidth,
+              styles.inputContainer,
+            )}
+          >
+            <input
+              type="text"
+              role="combobox"
+              aria-autocomplete="list"
               disabled={disabled}
+              data-testid={dataTestId}
+              id={id}
+              className={classNames(
+                withSelectTypeMember
+                  ? styles.internalInputWidth
+                  : 'fr-width-full',
+                styles.internalInput,
+                {
+                  'fr-input-group--disabled': disabled,
+                },
+              )}
+              placeholder={internalSelection.length > 0 ? '' : placeholder}
+              value={inputValue}
+              onChange={(event) => {
+                onInputChange(event.target.value)
+              }}
+              onFocus={onInternalFocus}
+              onBlur={() => {
+                setShowOptions(false)
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'ArrowDown') {
+                  event.preventDefault()
+                  setSelectedIndex((selectedIndex + 1) % filteredOptions.length)
+                } else if (event.key === 'ArrowUp') {
+                  event.preventDefault()
+                  setSelectedIndex(
+                    selectedIndex === 0
+                      ? filteredOptions.length - 1
+                      : (selectedIndex - 1) % filteredOptions.length,
+                  )
+                }
+                if (inputValue && event.key === 'Enter') {
+                  event.preventDefault()
+                  selectFirstResult(selectedIndex)
+                }
+              }}
             />
-          ))}
-          <input
-            type="text"
-            role="combobox"
-            aria-autocomplete="list"
-            disabled={disabled}
-            data-testid={dataTestId}
-            id={id}
-            className={classNames('fr-input', styles.internalInput, {
-              'fr-input-group--disabled': disabled,
-            })}
-            placeholder={internalSelection.length > 0 ? '' : placeholder}
-            value={inputValue}
-            onChange={(event) => {
-              onInputChange(event.target.value)
-            }}
-            onFocus={onInternalFocus}
-            onBlur={() => {
-              setShowOptions(false)
-              onInputChange('')
-            }}
-            onKeyDown={(event) => {
-              if (event.key === 'ArrowDown') {
-                event.preventDefault()
-                setSelectedIndex((selectedIndex + 1) % filteredOptions.length)
-              } else if (event.key === 'ArrowUp') {
-                event.preventDefault()
-                setSelectedIndex(
-                  selectedIndex === 0
-                    ? filteredOptions.length - 1
-                    : (selectedIndex - 1) % filteredOptions.length,
-                )
-              }
-              if (inputValue && event.key === 'Enter') {
-                event.preventDefault()
-                selectFirstResult(selectedIndex)
-              }
-            }}
-          />
+          </div>
         </div>
         <div
           ref={optionsContainerRef}
@@ -207,6 +209,22 @@ const MultipleSearchableSelect = ({
             onHide={() => setSelectedIndex(-1)}
           />
         </div>
+      </div>
+      <div
+        className={classNames(
+          styles.selected,
+          'fr-mt-3w',
+          !showOptions && styles.selectedRelative,
+        )}
+      >
+        {internalSelection.map((selected) => (
+          <OptionBadge
+            key={selected.value}
+            option={selected}
+            onClick={() => unselect(selected)}
+            disabled={disabled}
+          />
+        ))}
       </div>
     </div>
   )

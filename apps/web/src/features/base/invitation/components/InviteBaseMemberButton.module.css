@@ -1,0 +1,16 @@
+.actions {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.button {
+  position: absolute;
+  right: 0;
+  top: 40px;
+}

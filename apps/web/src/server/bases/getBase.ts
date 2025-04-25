@@ -1,4 +1,5 @@
-import type { SessionUser } from '@app/web/auth/sessionUser'
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {
@@ -13,7 +14,21 @@ import {
 } from '../collections/getCollectionsList'
 import { profileListSelect } from '../profiles/getProfilesList'
 
-export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
+const baseMembersOrderBy: Record<
+  BaseMembersSortType,
+  | Prisma.BaseMembersOrderByWithRelationInput
+  | Prisma.BaseMembersOrderByWithRelationInput[]
+> = {
+  Alphabetique: { member: { name: 'asc' } },
+  Role: [{ isAdmin: 'desc' }, { accepted: 'asc' }],
+  Recent: { accepted: 'desc' },
+  Ancien: { accepted: 'asc' },
+}
+
+export const baseSelect = (
+  user: Pick<SessionUser, 'id'> | null,
+  membersOrderBy?: BaseMembersSortType,
+) =>
   ({
     id: true,
     slug: true,
@@ -112,12 +127,9 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
           select: profileListSelect(user),
         },
       },
-      where: {
-        accepted: {
-          not: null,
-        },
-      },
-      orderBy: { added: 'asc' },
+      orderBy: membersOrderBy
+        ? baseMembersOrderBy[membersOrderBy]
+        : baseMembersOrderBy.Alphabetique,
     },
     _count: {
       select: {
@@ -135,9 +147,10 @@ export const getBase = async (id: string, user: Pick<SessionUser, 'id'>) =>
 export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'> | null,
+  membersOrderBy?: BaseMembersSortType,
 ) => {
   const basePage = await prismaClient.base.findFirst({
-    select: baseSelect(user),
+    select: baseSelect(user, membersOrderBy),
     where: { slug, deleted: null },
   })
 

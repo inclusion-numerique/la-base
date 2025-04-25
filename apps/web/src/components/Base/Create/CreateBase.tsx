@@ -8,8 +8,8 @@ import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import CreateBaseSideMenu from '@app/web/components/Base/Create/CreateBaseSideMenu'
 import Card from '@app/web/components/Card'
-import InviteUsers from '@app/web/components/InviteUsers'
 import VisibilityField from '@app/web/components/VisibilityField'
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
 import {
@@ -21,15 +21,17 @@ import type {
   UpdateBaseInformationsCommand,
 } from '@app/web/server/bases/updateBase'
 import { trpc } from '@app/web/trpc'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { Controller, type UseFormReturn, useForm } from 'react-hook-form'
-import BaseContactsEdition from '../BaseContactsEdition'
-import BaseInformationsEdition from '../BaseInformationsEdition'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import BaseInformationsEdition from '@app/web/components/Base/BaseInformationsEdition'
+import BaseContactsEdition from '@app/web/components/Base/BaseContactsEdition'
+import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
+
 
 const {
   Component: CancelModal,
@@ -207,15 +209,24 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             <Controller
               control={control}
               name="members"
-              render={({ field: { onChange }, fieldState: { error } }) => (
-                <InviteUsers
-                  disabled={isLoading}
-                  label="Ajouter un membre"
-                  setEmailsError={setEmailsError}
-                  error={error}
-                  onChange={onChange}
-                />
-              )}
+              render={({ field: { onChange }, fieldState: { error } }) => {
+                const handleOnChange = (options: SelectOptionValid[]) => {
+                  const members = options.map((option) => option.value)
+                  form.setValue('members', members)
+                  onChange(members)
+                }
+                return (
+                  <InviteUsers
+                    disabled={isLoading}
+                    label="Ajouter un membre"
+                    setEmailsError={setEmailsError}
+                    error={error}
+                    onChange={handleOnChange}
+                    selectedMemberType="member"
+                    canAddAdmin={false}
+                  />
+                )
+              }}
             />
           </Card>
           <Card

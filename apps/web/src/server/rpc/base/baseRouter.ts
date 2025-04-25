@@ -11,7 +11,6 @@ import {
   UpdateBaseImageCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
@@ -20,6 +19,7 @@ import { createSlug } from '@app/web/utils/createSlug'
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
 import z from 'zod'
+import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 
 export const baseRouter = router({
   create: protectedProcedure

@@ -5,6 +5,7 @@ import { v4 } from 'uuid'
 import type { SessionUser } from '../auth/sessionUser'
 import type { BasePageData } from '../server/bases/getBase'
 
+
 export const createTestUser = (publicProfile?: boolean) =>
   ({
     id: v4(),
@@ -166,6 +167,7 @@ export const createTestBase = (
         baseId: id,
         memberId: admin.id,
         member: {
+          email: admin.email,
           id: admin.id,
           slug: admin.slug,
           name: admin.name,
@@ -192,6 +194,7 @@ export const createTestBase = (
           name: member.name,
           firstName: member.firstName,
           lastName: member.lastName,
+          email: member.email,
           image: null,
           followedBy: [],
           _count: {

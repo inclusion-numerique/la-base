@@ -36,15 +36,25 @@ export const userRouter = router({
         )
 
         return prismaClient.$transaction(async (transaction) => {
-          const user = await transaction.user.create({
-            data: {
+          // For the signup flow, 2 cases are possible:
+          // - The user is already registered (on base invitation purpose) : in the case we need to update the user
+          // - The user is not registered : in the case we need to create a new user
+
+          const commonBody = {
+            firstName,
+            lastName,
+            name,
+            slug,
+            signedUpAt: new Date(),
+            email,
+          }
+          const user = await transaction.user.upsert({
+            where: { email },
+            create: {
               id: v4(),
-              firstName,
-              lastName,
-              name,
-              slug,
-              email,
+              ...commonBody,
             },
+            update: commonBody,
             select: {
               id: true,
               email: true,
@@ -52,6 +62,7 @@ export const userRouter = router({
               lastName: true,
             },
           })
+
           await transaction.collection.create({
             data: {
               id: v4(),

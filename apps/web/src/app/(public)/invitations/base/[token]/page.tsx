@@ -1,7 +1,14 @@
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { acceptInvitation } from '@app/web/server/baseMembers/acceptInvitation'
-import { getBaseInvitation } from '@app/web/server/baseMembers/getBaseInvitation'
 import { notFound, redirect } from 'next/navigation'
+import { Metadata } from 'next'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import BaseMemberInvitationPage from '@app/web/features/base/invitation/BaseMemberInvitationPage'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import { getBaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
+import { getBaseMembersCount } from '@app/web/features/base/invitation/db/getBaseMembersCount'
+
+export const metadata: Metadata = {
+  title: metadataTitle('Invitation à rejoindre une base'),
+}
 
 const AcceptBaseInvitation = async ({
   params,
@@ -17,9 +24,14 @@ const AcceptBaseInvitation = async ({
   if (!invitation) {
     notFound()
   }
+  const baseMembersCount = await getBaseMembersCount(invitation.base.id)
 
-  await acceptInvitation(invitation.id)
-  redirect(`/bases/${invitation.base.slug}`)
+  return (
+    <BaseMemberInvitationPage
+      invitation={invitation}
+      baseMembersCount={baseMembersCount}
+    />
+  )
 }
 
 export default AcceptBaseInvitation

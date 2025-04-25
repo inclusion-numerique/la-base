@@ -1,7 +1,7 @@
+import type { Base } from '@prisma/client'
 import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
 import type { Grantee } from '@app/web/authorization/grantee'
-import type { UserSecurityRole } from '@app/web/authorization/userSecurityRole'
-import type { Base } from '@prisma/client'
+import { type UserSecurityRole } from '@app/web/authorization/userSecurityRole'
 
 export const BaseRoles = {
   BaseCreator: 'BaseCreator',
