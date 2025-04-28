@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 
 export const profileListSelect = (user: { id: string } | null) =>
   ({
@@ -38,16 +39,44 @@ export const profileListSelect = (user: { id: string } | null) =>
         },
       },
     },
+    // We query created resources ids to later count them
     createdResources: {
       select: {
         id: true,
       },
       where: {
-        deleted: null,
-        isPublic: true,
-        published: {
-          not: null,
-        },
+        OR: [
+          // Public published resources (visible to all users)
+          {
+            deleted: null,
+            isPublic: true,
+            published: {
+              not: null,
+            },
+          },
+          // All resources created by the querying user (any status)
+          user?.id
+            ? {
+                deleted: null,
+                createdById: user.id,
+              }
+            : null,
+          // Resources created by profile (any status) in a base for which the querying user is a member ?
+          user?.id
+            ? {
+                deleted: null,
+                base: {
+                  deleted: null,
+                  members: {
+                    some: {
+                      accepted: { not: null },
+                      memberId: user.id,
+                    },
+                  },
+                },
+              }
+            : null,
+        ].filter(isDefinedAndNotNull),
       },
     },
     resources: {

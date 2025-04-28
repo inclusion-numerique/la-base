@@ -41,11 +41,15 @@ const BudgetPage = () => (
         Développement et Déploiement.
       </p>
       <p>
-        Membres de l’équipe : - Manon Galle, Intrapreneuse - Thibault Rouveyrol,
-        Responsable de produit - Hugues Maignol, Développeur - Kevin Gallet,
-        Développeur - Sylvain Aubry, Designer - Alexandre Martinez, Chargé de
-        déploiement/support - Sarah Ouali, Chargée de déploiement/support -
-        Timothée Gillet, Chargé de déploiement/support.
+        Membres de l’équipe&nbsp;:
+        <ul>
+          <li>Manon Galle, Intrapreneuse</li>
+          <li>Thibault Rouveyrol, Responsable de produit</li>
+          <li>Hugues Maignol, Lead Développeur</li>
+          <li>Kevin Gallet, Développeur</li>
+          <li>Sylvain Aubry, Designer</li>
+          <li>Timothée Gillet, Chargé de déploiement/support</li>
+        </ul>
       </p>
       <p>
         L’ensemble des membres de l’équipe ne sont pas à temps plein sur le

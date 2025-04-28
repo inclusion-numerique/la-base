@@ -1,6 +1,7 @@
 import type { Prisma } from '@prisma/client'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 
 const getWhereBasesList = (
   user?: Pick<SessionUser, 'id'> | null,
@@ -96,9 +97,36 @@ export const baseSelect = (user: { id: string } | null) =>
       select: {
         resources: {
           where: {
-            deleted: null,
-            published: { not: null },
-            isPublic: true,
+            OR: [
+              // Public published resources (visible to all users)
+              {
+                deleted: null,
+                published: { not: null },
+                isPublic: true,
+              },
+              // All resources created by the querying user (any status)
+              user?.id
+                ? {
+                    deleted: null,
+                    createdById: user.id,
+                  }
+                : null,
+              // All resources if user is a member
+              user?.id
+                ? {
+                    deleted: null,
+                    base: {
+                      deleted: null,
+                      members: {
+                        some: {
+                          accepted: { not: null },
+                          memberId: user.id,
+                        },
+                      },
+                    },
+                  }
+                : null,
+            ].filter(isDefinedAndNotNull),
           },
         },
         followedBy: true,

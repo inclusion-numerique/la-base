@@ -9,7 +9,7 @@ import {
   type Sorting,
 } from '@app/web/server/search/searchQueryParams'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
-import { searchToTsQueryInput } from '@app/web/server/search/searchToTsQueryInput'
+import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
@@ -19,53 +19,69 @@ import { searchToTsQueryInput } from '@app/web/server/search/searchToTsQueryInpu
  * ⚠️ We cannot reuse query fragments from prismaClient with raw sql without opting out of security features. Keep conditions in sync in the 2 functions.
  */
 
-// TODO Département
+const ranking = {
+  weights: {
+    title: 5,
+    description: 3,
+  },
+  threshold: 3,
+}
+
 export const countBases = async (
   searchParams: Pick<SearchParams, 'query' | 'departements'>,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
-  const searchTerm = searchToTsQueryInput(searchParams.query)
+  const searchTerm = cleanSearchTerm(searchParams.query) ?? ''
   const userId = user?.id ?? null
 
   const result = await prismaClient.$queryRaw<{ count: number }[]>`
-      SELECT COUNT(DISTINCT bases.id)::integer as count
-      FROM bases
-               /* Join base member only to have only one row per base */
-               /* Null will never match as member_id is not nullable */
-               LEFT JOIN base_members
-                         ON bases.id = base_members.base_id AND base_members.member_id = ${userId}::uuid AND
-                            base_members.accepted IS NOT NULL
-      WHERE
-          /* base status check */
-          bases.deleted IS NULL
-          /* Search term check */
-        AND (
-          ${searchTerm ?? ''} = ''
-              OR to_tsvector('french', unaccent(bases.title || ' ' ||
-                                                coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
-                                                         ''))) @@
-                 to_tsquery('french', unaccent(${searchTerm}))
-          )
-        AND (
-          /* Authorization*/
-          /* Base is public  */
-          bases.is_public = true
-              /* Base is private and user is creator */
-              /* Null will never match as created_by_id is not nullable */
-              OR bases.created_by_id = ${userId}::uuid
-              /* User is member of base */
-              OR base_members.id IS NOT NULL
-          )
-        AND (
-          ${searchParams.departements.length === 0}
-              OR bases.department = ANY (${searchParams.departements}::text[])
-          )
+      WITH search AS (SELECT unaccent(${searchTerm}) AS term),
+           bases AS (SELECT bases.id,
+                            bases.slug,
+                            bases.title,
+                            bases.description
+                     FROM bases
+                              /* Join base member for querying user */
+                              LEFT JOIN base_members
+                                        ON bases.id = base_members.base_id AND
+                                           base_members.member_id = ${userId}::uuid AND
+                                           base_members.accepted IS NOT NULL
+                     WHERE
+                         /* Authorization*/
+                         (
+                             /* Base is public  */
+                             bases.is_public = true
+                                 OR (
+                                 /* Base is private and user is member */
+                                 base_members.id IS NOT NULL
+                                 )
+                             )
+                       AND bases.deleted IS NULL
+                       AND (${searchParams.departements.length === 0}
+                         OR bases.department = ANY (${searchParams.departements}::text[])
+                         )
+                     GROUP BY bases.id),
+           scored_bases AS (SELECT bases.*,
+                                   (
+                                       word_similarity((SELECT term FROM search),
+                                                       unaccent(coalesce(bases.title, ''))) *
+                                       ${ranking.weights.title} +
+                                       word_similarity((SELECT term FROM search),
+                                                       unaccent(coalesce(bases.description, ''))) *
+                                       ${ranking.weights.description}
+                                       ) AS score
+                            FROM bases),
+           matching_bases AS (SELECT *
+                              FROM scored_bases
+                              WHERE (SELECT term FROM search) = ''
+                                 OR score > ${ranking.threshold})
+      SELECT COUNT(*)::integer as count
+      FROM matching_bases
+
   `
 
   return result[0]?.count ?? 0
 }
-
-// TODO Département
 
 export const rankBases = async (
   searchParams: SearchParams,
@@ -75,70 +91,91 @@ export const rankBases = async (
   // To keep good dev ux, we first fetch the ids of the resources matching the search
   // Then we fetch the full resources with all the data from prisma to have good types
 
-  const searchTerm = searchToTsQueryInput(searchParams.query)
+  const searchTerm = cleanSearchTerm(searchParams.query) ?? ''
   const userId = user?.id ?? null
   const searchResults = await prismaClient.$queryRaw<
     {
       id: string
-      document_tsv: string
-      query: string
-      rank: number
-      // An alternative to rank, may have different result (uses proximity not just vector matching)
-      rank_cd: number
+      score: number
+      resources_count: number
     }[]
   >`
-      WITH data AS (SELECT bases.id                                                  AS id,
-                           bases.slug                                                AS slug,
-                           bases.title                                               AS title,
-                           bases.created                                             AS created,
-                           COUNT(DISTINCT base_follows.id)                           AS follows_count,
-                           COUNT(DISTINCT resources.id)                              AS resources_count,
-                           ts_rank_cd(to_tsvector('french', unaccent(bases.title)),
-                                      to_tsquery('french', unaccent(${searchTerm}))) AS rank_title,
-                           ts_rank_cd(to_tsvector('french',
-                                                  coalesce(regexp_replace(bases.description, '<[^>]*>?', '', 'g'), '')),
-                                      to_tsquery('french', unaccent(${searchTerm}))) AS rank_description
-                    FROM bases
-                             /* Join base member only to have only one row per base */
-                             /* Null will never match as member_id is not nullable */
-                             LEFT JOIN base_members
-                                       ON bases.id = base_members.base_id AND
-                                          base_members.member_id = ${userId}::uuid AND
-                                          base_members.accepted IS NOT NULL
-                             LEFT JOIN base_follows ON bases.id = base_follows.base_id
-                             LEFT JOIN resources ON bases.id = resources.base_id AND
-                                                    resources.deleted IS NULL AND
-                                                    resources.is_public = true AND
-                                                    resources.published IS NOT NULL
-                    WHERE
-                        /* base status check */
-                        bases.deleted IS NULL
-                        /* Search term check */
-                      AND (
-                        ${searchTerm ?? ''} = ''
-                            OR to_tsvector('french', unaccent(bases.title || ' ' ||
-                                                              coalesce(
-                                                                      regexp_replace(bases.description, '<[^>]*>?', '', 'g'),
-                                                                      ''))) @@
-                               to_tsquery('french', unaccent(${searchTerm}))
-                        )
-                      AND (
-                        /* Authorization*/
-                        /* Base is public  */
-                        bases.is_public = true
-                            /* Base is private and user is creator */
-                            /* Null will never match as created_by_id is not nullable */
-                            OR bases.created_by_id = ${userId}::uuid
-                            /* User is member of base */
-                            OR base_members.id IS NOT NULL
-                        )
-                      AND (
-                        ${searchParams.departements.length === 0}
-                            OR bases.department = ANY (${searchParams.departements}::text[])
-                        )
-                    GROUP BY bases.id)
-      SELECT *
-      FROM data
+      WITH search AS (SELECT unaccent(${searchTerm}) AS term),
+           private_resources AS (SELECT resources.id            as id,
+                                        resources.base_id       as base_id,
+                                        resources.created_by_id as created_by_id
+                                 FROM resources
+                                          /* We join with the base member correspondig to the user id */
+                                          LEFT JOIN bases ON (resources.base_id = bases.id AND bases.deleted IS NULL)
+                                          LEFT JOIN base_members
+                                                    ON bases.id = base_members.base_id AND
+                                                       base_members.member_id = ${userId}::uuid AND
+                                                       base_members.accepted IS NOT NULL
+                                 WHERE
+                                     /* Private resources (is_public false or null) with any status */
+                                     (resources.is_public != true OR resources.published IS NULL)
+                                   AND resources.deleted IS NULL
+                                   AND (
+                                     /* User is member of the non-deleted base owning the resource */
+                                     (base_members.id IS NOT NULL)
+                                         /* OR User is the creator of the private resource */
+                                         OR resources.created_by_id = ${userId}::uuid)),
+           bases AS (SELECT bases.id,
+                            bases.slug,
+                            bases.created,
+                            bases.title,
+                            bases.description,
+                            bases.department,
+                            COUNT(DISTINCT base_follows.id)                     AS follows_count,
+                            (COALESCE(COUNT(DISTINCT public_resources.id), 0) +
+                             COALESCE(COUNT(DISTINCT private_resources.id), 0)) AS resources_count
+                     FROM bases
+                              LEFT JOIN base_follows ON bases.id = base_follows.base_id
+                         /* Join with public published resources */
+                              LEFT JOIN resources as public_resources ON (
+                         bases.id = public_resources.base_id
+                             AND public_resources.deleted IS NULL
+                             AND public_resources.is_public = true
+                             AND public_resources.published IS NOT NULL
+                         )
+                         /* Join with private resources */
+                              LEFT JOIN private_resources ON bases.id = private_resources.base_id
+                         /* Join base member for querying user */
+                              LEFT JOIN base_members
+                                        ON bases.id = base_members.base_id AND
+                                           base_members.member_id = ${userId}::uuid AND
+                                           base_members.accepted IS NOT NULL
+                     WHERE
+                         /* Authorization*/
+                         (
+                             /* Base is public  */
+                             bases.is_public = true
+                                 OR (
+                                 /* Base is private and user is member */
+                                 base_members.id IS NOT NULL
+                                 )
+                             )
+                       AND bases.deleted IS NULL
+                       AND (${searchParams.departements.length === 0}
+                         OR bases.department = ANY (${searchParams.departements}::text[])
+                         )
+                     GROUP BY bases.id),
+           scored_bases AS (SELECT bases.*,
+                                   (
+                                       word_similarity((SELECT term FROM search),
+                                                       unaccent(coalesce(bases.title, ''))) *
+                                       ${ranking.weights.title} +
+                                       word_similarity((SELECT term FROM search),
+                                                       unaccent(coalesce(bases.description, ''))) *
+                                       ${ranking.weights.description}
+                                       ) AS score
+                            FROM bases),
+           matching_bases AS (SELECT *
+                              FROM scored_bases
+                              WHERE (SELECT term FROM search) = ''
+                                 OR score > ${ranking.threshold})
+      SELECT id, score, resources_count
+      FROM matching_bases
       ORDER BY CASE
                    /* This is the only ASC order */
                    WHEN ${paginationParams.sort === 'ancien'} THEN created
@@ -151,7 +188,7 @@ export const rankBases = async (
                    END DESC,
                CASE
                    /* Order by DESC the right data depending on the sort */
-                   WHEN ${paginationParams.sort === 'pertinence'} THEN ((8 * rank_title) + rank_description)
+                   WHEN ${paginationParams.sort === 'pertinence'} THEN score
                    WHEN ${paginationParams.sort === 'suivis'} THEN follows_count
                    WHEN ${paginationParams.sort === 'ressources'} THEN resources_count
                    END DESC,

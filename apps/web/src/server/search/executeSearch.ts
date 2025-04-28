@@ -1,10 +1,5 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  countResources,
-  quickSearchResources,
-  searchResources,
-} from '@app/web/server/resources/searchResources'
-import {
   countBases,
   quickSearchBases,
   searchBases,
@@ -15,11 +10,16 @@ import {
   searchProfiles,
 } from '@app/web/server/profiles/searchProfiles'
 import {
+  countResources,
+  quickSearchResources,
+  searchResources,
+} from '@app/web/server/resources/searchResources'
+import { backgroundLogSearchExecution } from '@app/web/server/search/logSearchExecution'
+import {
   defaultSearchParams,
   PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
-import { backgroundLogSearchExecution } from '@app/web/server/search/logSearchExecution'
 
 export const countSearchResults = async (
   searchParams: SearchParams,

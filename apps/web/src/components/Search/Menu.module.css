@@ -2,12 +2,23 @@
   display: flex;
   border-bottom: 1px solid var(--border-default-grey);
   margin-bottom: 32px;
+  background: var(--background-alt-blue-cumulus);
 
   @media (min-width: 768px) {
     margin-bottom: 48px;
   }
 
   :global(.fr-nav__list) {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  :global(.fr-nav__link){
+    &:hover {
+      background-color: var(--background-alt-blue-cumulus-hover) !important;
+    }
+
+    &:active {
+      background-color: var(--background-alt-blue-cumulus-active) !important;
+    }
   }
 }

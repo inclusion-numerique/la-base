@@ -6,6 +6,8 @@ import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { prismaClient } from '@app/web/prismaClient'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const signinCallback: <
   P extends Profile = Profile,
@@ -29,12 +31,37 @@ export const signinCallback: <
   email?: {
     verificationRequest?: boolean
   }
-}) => Promise<string | boolean> = async ({ account, profile, user }) => {
+}) => Promise<string | boolean> = async ({ account, profile, user, email }) => {
   const userEmail = user.email
 
   if (!userEmail) {
     // Our providers always return an email, this case is not expected
     return `/connexion?error=MissingProviderEmail`
+  }
+
+  /**
+   * Only basic users can sign in with email magic link
+   * Admins can sign in with ProConnect
+   * Support can sign in with ProConnect
+   */
+  if (
+    PublicWebAppConfig.isLocal ||
+    PublicWebAppConfig.isMain ||
+    PublicWebAppConfig.isDev
+  ) {
+    const existingUser = await prismaClient.user.findUnique({
+      where: {
+        email: userEmail,
+      },
+      select: {
+        id: true,
+        role: true,
+      },
+    })
+
+    if (!!email && existingUser && existingUser.role !== 'User') {
+      return `/connexion?error=ProConnectOnly`
+    }
   }
 
   // User that should be reconciled can sign in

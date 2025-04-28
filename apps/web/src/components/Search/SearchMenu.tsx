@@ -13,8 +13,16 @@ import { numberToString } from '@app/web/utils/formatNumber'
 import styles from './Menu.module.css'
 
 // While loading put spaces instead of the count to minimize layout shifts
-const menuCount = (count: number | null) =>
-  count === null ? '   ' : ` · ${numberToString(count)}`
+const MenuCount = ({ count }: { count: number | null }) =>
+  count === null ? (
+    // We keep a few spaces to limit layout shifts when counts are loading -> available
+    <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>
+  ) : (
+    <>
+      &nbsp;·&nbsp;
+      <span className="fr-text--bold">{numberToString(count)}</span>
+    </>
+  )
 
 const SearchMenu = ({
   activeTab,
@@ -27,7 +35,7 @@ const SearchMenu = ({
 
   return (
     <div className={styles.menu}>
-      <div className="fr-container">
+      <div className="fr-container fr-container--800">
         <nav className="fr-nav">
           <ul className="fr-nav__list">
             <li className="fr-nav__item">
@@ -45,7 +53,7 @@ const SearchMenu = ({
                 }
               >
                 Ressources
-                {menuCount(resourcesCount)}
+                <MenuCount count={resourcesCount} />
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -58,7 +66,7 @@ const SearchMenu = ({
                 }
               >
                 Bases
-                {menuCount(basesCount)}
+                <MenuCount count={basesCount} />
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -71,7 +79,7 @@ const SearchMenu = ({
                 }
               >
                 Profils
-                {menuCount(profilesCount)}
+                <MenuCount count={profilesCount} />
               </Link>
             </li>
           </ul>

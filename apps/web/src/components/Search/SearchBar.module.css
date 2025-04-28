@@ -1,7 +1,13 @@
 .container {
-  max-width: 588px;
+  max-width: 800px;
   margin: auto;
   position: relative;
+}
+
+.input {
+  border-bottom: 2px solid var(--blue-france-sun-113-625);
+  border-bottom-left-radius: 0;
+  border-right: none;
 }
 
 .quickSearch {

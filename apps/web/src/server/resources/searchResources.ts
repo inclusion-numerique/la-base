@@ -1,3 +1,12 @@
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { prismaClient } from '@app/web/prismaClient'
+import {
+  resourceListSelect,
+  toResourceWithFeedbackAverage,
+} from '@app/web/server/resources/getResourcesList'
+import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFeedbackThresholds'
+import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
+import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import {
   defaultPaginationParams,
   defaultSearchParams,
@@ -5,16 +14,7 @@ import {
   type SearchParams,
   type Sorting,
 } from '@app/web/server/search/searchQueryParams'
-import { prismaClient } from '@app/web/prismaClient'
-import type { SessionUser } from '@app/web/auth/sessionUser'
-import {
-  resourceListSelect,
-  toResourceWithFeedbackAverage,
-} from '@app/web/server/resources/getResourcesList'
-import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
-import { enumArrayToSnakeCaseStringArray } from '@app/web/server/search/enumArrayToSnakeCaseStringArray'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
-import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFeedbackThresholds'
 
 /**
  * We are using advanced postgresql features not supported by Prisma for search.
@@ -23,6 +23,15 @@ import { resourceFeedbackThresholds } from '@app/web/server/resources/resourceFe
  * ⚠️ Keep in sync with prisma where filters for user rights / visibility
  * ⚠️ We cannot reuse query fragments from prismaClient with raw sql without opting out of security features. Keep conditions in sync in the 2 functions.
  */
+
+const ranking = {
+  weights: {
+    title: 6,
+    publishedBy: 5,
+    description: 3,
+  },
+  threshold: 3,
+}
 
 export const countResources = async (
   searchParams: Pick<
@@ -104,17 +113,19 @@ export const countResources = async (
            scored_resource AS (SELECT filtered_resources.*,
                                       (
                                           word_similarity((SELECT term FROM search), filtered_resources.search_title) *
-                                          10 +
+                                          ${ranking.weights.title} +
                                           word_similarity((SELECT term FROM search),
-                                                          filtered_resources.search_description) * 1 +
+                                                          filtered_resources.search_description) *
+                                          ${ranking.weights.description} +
                                           word_similarity((SELECT term FROM search),
-                                                          filtered_resources.search_published_by) * 3
+                                                          filtered_resources.search_published_by) *
+                                          ${ranking.weights.publishedBy}
                                           ) as score
                                FROM filtered_resources),
            matching_resources AS (SELECT *
                                   FROM scored_resource
                                   WHERE (SELECT term FROM search) = ''
-                                     OR score > 0.2)
+                                     OR score > ${ranking.threshold})
       SELECT COUNT(*)::integer as count
       FROM matching_resources
   `
@@ -216,11 +227,13 @@ export const rankResources = async (
            scored_resource AS (SELECT filtered_resources.*,
                                       (
                                           word_similarity((SELECT term FROM search), filtered_resources.search_title) *
-                                          10 +
+                                          ${ranking.weights.title} +
                                           word_similarity((SELECT term FROM search),
-                                                          filtered_resources.search_description) * 1 +
+                                                          filtered_resources.search_description) *
+                                          ${ranking.weights.description} +
                                           word_similarity((SELECT term FROM search),
-                                                          filtered_resources.search_published_by) * 3
+                                                          filtered_resources.search_published_by) *
+                                          ${ranking.weights.publishedBy}
                                           )   as score,
                                       CASE
                                           WHEN filtered_resources.feedbacks_rating IS NULL THEN 3
@@ -236,7 +249,7 @@ export const rankResources = async (
            matching_resources AS (SELECT *
                                   FROM scored_resource
                                   WHERE (SELECT term FROM search) = ''
-                                     OR score > 0.2)
+                                     OR score > ${ranking.threshold})
       SELECT id, score
       FROM matching_resources
       ORDER BY CASE
