@@ -21,7 +21,7 @@
   z-index: 1;
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
   background-color: var(--background-default-grey);
-  max-width: 588px;
+  max-width: 800px;
   margin: auto;
   text-align: left;
 }
