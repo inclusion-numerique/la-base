@@ -7,14 +7,16 @@ import { BaseMember } from '@app/web/server/bases/getBase'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import RemoveBaseMemberButton from '@app/web/components/Base/Members/RemoveBaseMemberButton'
+import BaseMemberRoleCard from '@app/web/features/base/members/components/BaseMemberRoleCard'
 
-const BaseAdminMemberCard = ({
+const BaseMemberCard = ({
   member,
-  canChangeAccessLevel,
+  isSessionUser,
+  canChangeMemberRole,
 }: {
   member: BaseMember
-  canChangeAccessLevel: boolean
+  isSessionUser: boolean
+  canChangeMemberRole: boolean
 }) => {
   const [isAdmin, setIsAdmin] = useState(member.isAdmin)
   const mutate = trpc.baseMember.changeRole.useMutation()
@@ -38,35 +40,28 @@ const BaseAdminMemberCard = ({
     <div className="fr-border-top" data-testid="member-card-admin">
       <div className="fr-enlarge-link fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">
         <RoundProfileImage user={member.member} />
-        <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full">
+        <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full fr-align-items-center">
           <Link
             className="fr-p-1v fr-flex-grow-1"
             href={`/profils/${member.member.slug}`}
           >
-            <h3 className="fr-text--md fr-text--regular fr-my-auto">
-              {member.member.name}
+            <h3 className="fr-text--md fr-text--medium fr-my-auto">
+              {member.member.name ?? member.member.email}
             </h3>
+            {!!member.member.email && member.member.name && (
+              <span className="fr-text--xs fr-mb-0 fr-hint-text">
+                {member.member.email}
+              </span>
+            )}
           </Link>
           <div className="fr-position-relative" style={{ zIndex: 1 }}>
-            {!canChangeAccessLevel && isAdmin ? (
-              <div className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-text-label--blue-france">
-                Administrateur
-              </div>
-            ) : (
-              <>
-                <select
-                  data-testid="member-card-role-select"
-                  onChange={onChange}
-                  className="fr-text--left fr-text-sm--right fr-text--semi-bold fr-text-label--blue-france"
-                  style={{ appearance: 'auto' }}
-                  value={isAdmin ? 'admin' : 'member'}
-                >
-                  <option value="admin">Administrateur</option>
-                  <option value="member">Membre</option>
-                </select>
-                <RemoveBaseMemberButton member={member} />
-              </>
-            )}
+            <BaseMemberRoleCard
+              canChangeMemberRole={canChangeMemberRole}
+              member={member}
+              isAdmin={isAdmin}
+              isSessionUser={isSessionUser}
+              onChange={onChange}
+            />
           </div>
         </div>
       </div>
@@ -74,4 +69,4 @@ const BaseAdminMemberCard = ({
   )
 }
 
-export default withTrpc(BaseAdminMemberCard)
+export default withTrpc(BaseMemberCard)
