@@ -1,12 +1,12 @@
-import React from 'react'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import BaseImage from '@app/web/components/BaseImage'
 import {
   BasePrivacyTag,
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import BaseImage from '@app/web/components/BaseImage'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import React from 'react'
 import styles from './ResourcePublicationView.module.css'
 
 const ResourcePublicationView = ({

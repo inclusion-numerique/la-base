@@ -1,7 +1,7 @@
-import sharp from 'sharp'
-import type { Image } from '@prisma/client'
-import type { GetObjectCommandOutput } from '@aws-sdk/client-s3'
 import { imageCropToRegion, isImageCropped } from '@app/web/utils/imageCrop'
+import type { GetObjectCommandOutput } from '@aws-sdk/client-s3'
+import type { Image } from '@prisma/client'
+import sharp from 'sharp'
 
 export const processImage = async ({
   originalImageBuffer,

@@ -1,13 +1,13 @@
-import { v4 } from 'uuid'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { Adapter, AdapterAccount, AdapterUser } from 'next-auth/adapters'
-import { prismaClient } from '@app/web/prismaClient'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
-import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { prismaClient } from '@app/web/prismaClient'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import type { Adapter, AdapterAccount, AdapterUser } from 'next-auth/adapters'
+import { v4 } from 'uuid'
 
 /**
  * Ensuring that needed methods are defined when creating adapter

@@ -1,21 +1,21 @@
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
-import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
-import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
-import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
-import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
-import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  resourceAuthorization,
   ResourceRoles,
+  resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
-import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
 import EmptyBaseCollections from '@app/web/components/Base/EmptyBaseCollections'
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
+import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
 import CollectionViewHeader from '@app/web/components/Collection/CollectionViewHeader'
+import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
+import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
+import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
+import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
+import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
+import Button from '@codegouvfr/react-dsfr/Button'
+import React from 'react'
 
 const CollectionView = ({
   collection,

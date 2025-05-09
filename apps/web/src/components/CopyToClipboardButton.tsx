@@ -1,7 +1,7 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 
 const CopyToClipboardButton = ({
   value,

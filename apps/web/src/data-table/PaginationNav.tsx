@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import classNames from 'classnames'
 import {
+  type CreateDataTableHrefParams,
   createDataTableHref,
-  CreateDataTableHrefParams,
 } from '@app/web/data-table/createDataTableHref'
+import classNames from 'classnames'
+import Link from 'next/link'
 
 // Only display at most 6 pages numbered links
 /**

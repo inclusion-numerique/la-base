@@ -1,9 +1,9 @@
-import React from 'react'
-import classNames from 'classnames'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import { BaseListItem } from '@app/web/server/bases/getBasesList'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import classNames from 'classnames'
+import React from 'react'
 import styles from './BaseMetadata.module.css'
 
 const BaseMetadata = ({

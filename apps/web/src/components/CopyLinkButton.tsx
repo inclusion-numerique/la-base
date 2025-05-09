@@ -1,8 +1,8 @@
 'use client'
 
-import classNames from 'classnames'
-import React, { ReactNode, useState } from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import React, { type ReactNode, useState } from 'react'
 import styles from './CopyLinkButton.module.css'
 
 const CopyLinkButton = ({

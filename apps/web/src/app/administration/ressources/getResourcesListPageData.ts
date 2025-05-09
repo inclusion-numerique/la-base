@@ -1,4 +1,4 @@
-import { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
+import type { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
 import { searchResource } from '@app/web/app/administration/ressources/searchResource'
 import { prismaClient } from '@app/web/prismaClient'
 

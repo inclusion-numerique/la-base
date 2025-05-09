@@ -1,6 +1,6 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
 import {
-  EditTitleAndDescriptionCommand,
+  type EditTitleAndDescriptionCommand,
   EditTitleAndDescriptionCommandValidation,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
 

@@ -1,5 +1,5 @@
-import Button from '@codegouvfr/react-dsfr/Button'
 import IconInSquare from '@app/web/components/IconInSquare'
+import Button from '@codegouvfr/react-dsfr/Button'
 
 const CollectionOrderHeader = ({
   redirectProps: { href, title },

@@ -1,22 +1,22 @@
-import React, {
-  Dispatch,
-  PointerEventHandler,
-  RefObject,
-  SetStateAction,
-  useRef,
-} from 'react'
-import { Reorder, useDragControls } from 'framer-motion'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
+import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
+import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
+import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import type {
   ContentProjectionWithContext,
   ResourceProjectionWithContext,
 } from '@app/web/server/resources/getResourceFromEvents'
-import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
-import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
-import ContentEdition from '@app/web/components/Resource/Edition/ContentEdition'
-import AddContent from '@app/web/components/Resource/Edition/AddContent'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { Reorder, useDragControls } from 'framer-motion'
+import React, {
+  type Dispatch,
+  type PointerEventHandler,
+  type RefObject,
+  type SetStateAction,
+  useRef,
+} from 'react'
 
 /**
  * This is draggable using Framer Motion

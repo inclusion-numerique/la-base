@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import OpenSaveResourceInCollectionModalButton from '@app/web/components/Resource/OpenSaveResourceInCollectionModalButton'
+import { loginUrl } from '@app/web/security/login'
 import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import type {
   FrIconClassName,
   RiIconClassName,
 } from '@codegouvfr/react-dsfr/src/fr/generatedFromCss/classNames'
-import type { SessionUser } from '@app/web/auth/sessionUser'
-import OpenSaveResourceInCollectionModalButton from '@app/web/components/Resource/OpenSaveResourceInCollectionModalButton'
-import { loginUrl } from '@app/web/security/login'
+import React, { type ReactNode } from 'react'
 
 const defaultIconId: FrIconClassName | RiIconClassName = 'fr-icon-bookmark-line'
 const alreadySavedIconId: FrIconClassName | RiIconClassName =

@@ -1,11 +1,11 @@
 import { prismaClient } from '@app/web/prismaClient'
-import {
+import type {
   BaseChanged,
   ChangeBaseCommand,
 } from '@app/web/server/resources/feature/ChangeBase'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from './ResourceEventSideEffect'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
 export const handleChangeBase: ResourceMutationCommandHandler<
   ChangeBaseCommand,

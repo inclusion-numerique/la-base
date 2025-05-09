@@ -1,4 +1,4 @@
-import { Sorting } from '@app/web/server/search/searchQueryParams'
+import type { Sorting } from '@app/web/server/search/searchQueryParams'
 
 const toThematicsQuery = (thematics: string[] = []) =>
   thematics.map((thematic: string) => `thematiques=${thematic}`)

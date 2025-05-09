@@ -1,15 +1,15 @@
 'use client'
 
+import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
+import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
+import Button from '@codegouvfr/react-dsfr/Button'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import type { ContentType } from '@prisma/client'
+import classNames from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import { ContentType } from '@prisma/client'
-import classNames from 'classnames'
-import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { AnimatePresence, motion } from 'framer-motion'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import styles from './AddContentButton.module.css'
 
 const contents = [

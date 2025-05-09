@@ -1,7 +1,7 @@
-import React from 'react'
-import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseCard from '@app/web/components/Base/Card/BaseCard'
+import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import React from 'react'
 import { CreateBaseButton } from '../CreateBaseButton'
 
 const Bases = ({

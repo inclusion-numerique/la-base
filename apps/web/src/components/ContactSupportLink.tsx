@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
-import classNames from 'classnames'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import classNames from 'classnames'
+import type { ReactNode } from 'react'
 
 const ContactSupportLink = ({
   className,

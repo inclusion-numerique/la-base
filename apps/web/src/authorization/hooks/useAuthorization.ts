@@ -1,5 +1,5 @@
+import type { Grantee } from '@app/web/authorization/grantee'
 import { useCallback } from 'react'
-import { Grantee } from '@app/web/authorization/grantee'
 
 /**
  * This hook allows usage of authorizers in client components

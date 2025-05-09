@@ -1,11 +1,11 @@
 'use client'
 
-import { ReactNode } from 'react'
-import Link from 'next/link'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { ResourceReportModal } from './ResourceReportModal'
 
 const ResourceReportButton = ({

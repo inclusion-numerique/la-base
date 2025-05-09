@@ -1,17 +1,17 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import EditCard from '@app/web/components/EditCard'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import {
-  ChangeBaseCommand,
+  type ChangeBaseCommand,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
-import { Resource } from '@app/web/server/resources/getResource'
-import EditCard from '@app/web/components/EditCard'
+import type { Resource } from '@app/web/server/resources/getResource'
+import { trpc } from '@app/web/trpc'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import ResourceBaseRichRadio from '../../ResourceBaseRichRadio'
 import ResourcePublicationView from './ResourcePublicationView'
 

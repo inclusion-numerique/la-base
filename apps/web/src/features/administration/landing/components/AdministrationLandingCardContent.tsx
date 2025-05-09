@@ -1,6 +1,6 @@
-import Notice from '@codegouvfr/react-dsfr/Notice'
 import FeaturedBlockRow from '@app/web/features/administration/landing/components/FeaturedBlockRow'
-import { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
+import type { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
+import Notice from '@codegouvfr/react-dsfr/Notice'
 
 const AdministrationLandingCardContent = ({
   blocks,

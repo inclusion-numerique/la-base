@@ -1,11 +1,11 @@
-import { Route } from 'next'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { signinErrorMessage } from '@app/web/app/(public)/(authentication)/authenticationErrorMessage'
-import ProConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/ProConnectSigninButton'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { EmailSigninForm } from '@app/web/app/(public)/(authentication)/connexion/EmailSigninForm'
-import { getLoginTitle, LoginIntent } from '@app/web/security/login'
+import ProConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/ProConnectSigninButton'
+import { type LoginIntent, getLoginTitle } from '@app/web/security/login'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import type { Route } from 'next'
 
 const SigninPanel = ({
   error,

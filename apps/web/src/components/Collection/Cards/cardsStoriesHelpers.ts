@@ -1,4 +1,4 @@
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 
 export const date = new Date('2023-01-31')

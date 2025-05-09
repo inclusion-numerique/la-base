@@ -1,25 +1,24 @@
-import React from 'react'
-import Link from 'next/link'
-import Collections from '@app/web/components/Collection/List/Collections'
-import EmptyBox from '@app/web/components/EmptyBox'
-import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
 import { BasePermissions } from '@app/web/authorization/models/baseAuthorization'
+import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
+import Collections from '@app/web/components/Collection/List/Collections'
+import EmptyBox from '@app/web/components/EmptyBox'
+import Link from 'next/link'
+import React from 'react'
 
 const BaseCollectionsPage = async ({
   params,
-}: {
-  params: { slug: string }
-}) => {
+}: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const {
     user,
     authorization: { hasPermission },
     base,
-  } = await getBasePageContext(params.slug)
+  } = await getBasePageContext(slug)
 
   const canWrite = hasPermission(BasePermissions.WriteBase)
 
-  const { collections, savedCollections, id, slug } = base
+  const { collections, savedCollections, id } = base
   return (
     <Collections
       user={user}

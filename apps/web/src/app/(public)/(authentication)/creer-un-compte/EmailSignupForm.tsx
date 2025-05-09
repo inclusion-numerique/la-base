@@ -1,22 +1,22 @@
 'use client'
 
-import Cookies from 'js-cookie'
-import { Route } from 'next'
-import { signIn } from 'next-auth/react'
-import { useForm } from 'react-hook-form'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { zodResolver } from '@hookform/resolvers/zod'
+import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
-import Link from 'next/link'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
-  UserSignup,
+  type UserSignup,
   UserSignupValidation,
 } from '@app/web/server/rpc/user/userSignup'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Cookies from 'js-cookie'
+import type { Route } from 'next'
+import { signIn } from 'next-auth/react'
+import Link from 'next/link'
+import { useForm } from 'react-hook-form'
 
 const EmailSignupForm = ({
   error,

@@ -1,8 +1,8 @@
-import type { TargetAudience } from '@prisma/client'
 import {
-  labelsToOptions,
   type SelectOption,
+  labelsToOptions,
 } from '@app/ui/components/Form/utils/options'
+import type { TargetAudience } from '@prisma/client'
 
 export const targetAudienceCategories = [
   'Acteurs du numérique d’intérêt général',

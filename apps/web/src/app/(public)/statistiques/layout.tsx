@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from 'react'
-import { Metadata } from 'next'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import React, { type PropsWithChildren } from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Statistiques'),

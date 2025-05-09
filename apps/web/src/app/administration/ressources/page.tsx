@@ -1,19 +1,20 @@
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
-import { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
+import AdministrationSearchResource from '@app/web/app/administration/ressources/AdministrationSearchResource'
+import type { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
+import ResourcesTable from '@app/web/app/administration/ressources/ResourcesTable'
 import { getResourcesListPageData } from '@app/web/app/administration/ressources/getResourcesListPageData'
 import { numberToString } from '@app/web/utils/formatNumber'
-import ResourcesTable from '@app/web/app/administration/ressources/ResourcesTable'
-import AdministrationSearchResource from '@app/web/app/administration/ressources/AdministrationSearchResource'
 
 const AdministrationRessourcesPage = async ({
-  searchParams = {},
+  searchParams,
 }: {
-  searchParams?: ResourcesDataTableSearchParams
+  searchParams: Promise<ResourcesDataTableSearchParams>
 }) => {
+  const listParams = await searchParams
   const data = await getResourcesListPageData({
-    searchParams,
+    searchParams: listParams,
   })
   return (
     <>
@@ -26,13 +27,13 @@ const AdministrationRessourcesPage = async ({
           <p className="fr-text--medium fr-mb-2v">
             Rechercher parmi les {numberToString(data.totalCount)} ressources
           </p>
-          <AdministrationSearchResource searchParams={searchParams} />
+          <AdministrationSearchResource searchParams={listParams} />
         </div>
       </AdministrationPageContainer>
       <AdministrationPageContainer size="full">
         <ResourcesTable
           data={data.searchResult}
-          searchParams={searchParams}
+          searchParams={listParams}
           baseHref="/administration/ressources"
         />
       </AdministrationPageContainer>

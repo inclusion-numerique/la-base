@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { Metadata } from 'next'
 
 export const revalidate = 0
 export const metadata: Metadata = {

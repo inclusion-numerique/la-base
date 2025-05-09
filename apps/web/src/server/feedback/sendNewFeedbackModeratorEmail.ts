@@ -1,10 +1,10 @@
-import type { Feedback } from '@prisma/client'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { difficultyAreaLabels } from '@app/web/feedback/SendFeedback'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
-import { difficultyAreaLabels } from '@app/web/feedback/SendFeedback'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import type { Feedback } from '@prisma/client'
 
 export const sendNewFeedbackModeratorEmail = async ({
   feedback: {

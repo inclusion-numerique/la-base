@@ -1,9 +1,13 @@
-import type { Theme } from '@prisma/client'
 import {
   getResourcesCountByCategory,
   getResourcesCountByTheme,
 } from '@app/web/server/resources/getResourcesList'
-import { categories, Category, categoryThemes } from '@app/web/themes/themes'
+import {
+  type Category,
+  categories,
+  categoryThemes,
+} from '@app/web/themes/themes'
+import type { Theme } from '@prisma/client'
 
 export const getHomeCategoriesCount = async () => {
   const themesCount = await getResourcesCountByTheme()

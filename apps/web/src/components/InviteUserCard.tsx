@@ -1,6 +1,6 @@
-import React from 'react'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { SearchProfilesResult } from '@app/web/server/profiles/searchProfiles'
+import type { SearchProfilesResult } from '@app/web/server/profiles/searchProfiles'
+import React from 'react'
 import styles from './InviteUserCard.module.css'
 
 const InviteUserCard = ({ user }: { user: SearchProfilesResult[number] }) => (

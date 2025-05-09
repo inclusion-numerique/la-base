@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
 import { hasOpenedOnboardingV2Cookie } from '@app/web/app/nouveautes/onboardingV2Cookie'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
 
 const AddOpenedOnboardingCookie = () => {
   useEffect(() => {

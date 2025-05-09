@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { createTestResource, createTestUser } from '@app/web/test/helpers'
+import type { Meta, StoryObj } from '@storybook/react'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceEditionActionBar from './ResourceEditionActionBar'
@@ -72,7 +72,6 @@ export const Publique: Story = {
   },
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const PrivéeEnregistrement: Story = {
   args: {
     publishedState: ResourcePublishedState.PRIVATE,
@@ -86,7 +85,6 @@ export const PrivéeEnregistrement: Story = {
   },
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const PubliqueModifiée: Story = {
   args: {
     publishedState: ResourcePublishedState.PUBLIC,

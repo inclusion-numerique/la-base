@@ -1,11 +1,11 @@
 import FileFormField from '@app/ui/components/Form/FileFormField'
-import Button from '@codegouvfr/react-dsfr/Button'
-import React, { useEffect } from 'react'
-import { Control, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
-import classNames from 'classnames'
-import { UseFileUploadReturn } from '@app/web/hooks/useFileUpload'
+import type { UseFileUploadReturn } from '@app/web/hooks/useFileUpload'
 import ProgressBar from '@app/web/ui/ProgressBar'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import React, { useEffect } from 'react'
+import type { Control, FieldValues } from 'react-hook-form'
+import type { FieldPath } from 'react-hook-form/dist/types/path'
 import styles from './FileUploadForm.module.css'
 
 const FileUploadForm = <T extends FieldValues>({

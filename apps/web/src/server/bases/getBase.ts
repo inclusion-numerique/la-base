@@ -1,5 +1,4 @@
-import { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {
@@ -7,6 +6,7 @@ import {
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
+import type { Prisma } from '@prisma/client'
 import {
   collectionSelect,
   computeCollectionsListWhereForUser,

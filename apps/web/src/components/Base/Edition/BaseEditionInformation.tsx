@@ -1,21 +1,21 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import MaybeEmptyValue from '@app/ui/components/MaybeEmptyValue'
 import EmptyValue from '@app/ui/components/EmptyValue'
-import { useRouter } from 'next/navigation'
+import MaybeEmptyValue from '@app/ui/components/MaybeEmptyValue'
 import { createToast } from '@app/ui/toast/createToast'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import EditCard from '@app/web/components/EditCard'
-import { BasePageData } from '@app/web/server/bases/getBase'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  UpdateBaseInformationsCommand,
+  type UpdateBaseInformationsCommand,
   UpdateBaseInformationsCommandValidation,
 } from '@app/web/server/bases/updateBase'
+import { trpc } from '@app/web/trpc'
 import { getDepartmentName } from '@app/web/utils/departments'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 
 const BaseEditionInformation = ({ base }: { base: BasePageData }) => {

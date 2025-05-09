@@ -1,5 +1,5 @@
+import type { SupportType, TargetAudience, Theme } from '@prisma/client'
 import z from 'zod'
-import type { Theme, SupportType, TargetAudience } from '@prisma/client'
 import { indexationCommand } from './PublishResource'
 
 export const ChangeIndexationCommandValidation = z.object({

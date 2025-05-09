@@ -1,10 +1,10 @@
 'use client'
 
-import React, { PropsWithChildren } from 'react'
+import type { BaseTab } from '@app/web/app/(public)/bases/[slug]/(consultation)/BaseTab'
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import { BaseTab } from '@app/web/app/(public)/bases/[slug]/(consultation)/BaseTab'
+import React, { type PropsWithChildren } from 'react'
 import styles from './BaseMenu.module.css'
 
 const getCurrentTabFromPath = (path: string): BaseTab => {

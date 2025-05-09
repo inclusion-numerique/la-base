@@ -1,22 +1,22 @@
 .card {
-    width: 100%;
-    margin: 56px auto 120px;
-    background: var(--background-default-grey);
-    padding: 48px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border-default-grey);
+  width: 100%;
+  margin: 56px auto 120px;
+  background: var(--background-default-grey);
+  padding: 48px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default-grey);
 
-    @media (min-width: 36em) {
-        /*! media sm */
-        padding: 48px 32px;
-    }
+  @media (min-width: 36em) {
+    /*! media sm */
+    padding: 48px 32px;
+  }
 
-    /* lg */
-    @media (min-width: 48em) {
-        padding: 48px;
-    }
+  /* lg */
+  @media (min-width: 48em) {
+    padding: 48px;
+  }
 }
 
 .inner {
-    margin: 0 auto;
+  margin: 0 auto;
 }

@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { BaseMember } from '@app/web/server/bases/getBase'
 import { trpc } from '@app/web/trpc'
-import { BaseMember } from '@app/web/server/bases/getBase'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 const RemoveBaseMemberButton = ({ member }: { member: BaseMember }) => {
   const mutate = trpc.baseMember.remove.useMutation()

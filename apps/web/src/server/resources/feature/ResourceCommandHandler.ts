@@ -1,6 +1,6 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
-import { ApplierResourceEvent } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
+import type { ApplierResourceEvent } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import type {
   ResourceCreationCommand,

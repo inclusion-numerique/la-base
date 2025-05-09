@@ -1,8 +1,6 @@
-
 .header {
   display: flex;
   justify-content: space-between;
   color: var(--text-action-high-grey);
   margin-bottom: 16px;
 }
-

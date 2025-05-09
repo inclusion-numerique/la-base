@@ -1,5 +1,9 @@
 'use client'
 
+import CustomTooltip from '@app/web/app/(public)/statistiques/CustomTooltip'
+import type { StatisticsLegend } from '@app/web/app/(public)/statistiques/StatisticsLegend'
+import Card from '@app/web/components/Card'
+import { numberToString } from '@app/web/utils/formatNumber'
 import {
   Area,
   AreaChart,
@@ -11,10 +15,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import Card from '@app/web/components/Card'
-import { numberToString } from '@app/web/utils/formatNumber'
-import CustomTooltip from '@app/web/app/(public)/statistiques/CustomTooltip'
-import type { StatisticsLegend } from '@app/web/app/(public)/statistiques/StatisticsLegend'
 
 const chartColors = [
   { fill: 'var(--blue-france-sun-113-625)' },

@@ -1,8 +1,9 @@
-import React, { PropsWithChildren } from 'react'
-import type { Metadata } from 'next'
-import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import SearchFilters, {
+  type FiltersInitialValue,
+} from '@app/web/components/Search/Filters/SearchFilters'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
-import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
+import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
   supportTypeLabels,
   supportTypeOptions,
@@ -11,10 +12,9 @@ import {
   categoryTargetAudiencesOptions,
   targetAudienceLabels,
 } from '@app/web/themes/targetAudiences'
-import SearchFilters, {
-  FiltersInitialValue,
-} from '@app/web/components/Search/Filters/SearchFilters'
-import { metadataTitle } from '@app/web/app/metadataTitle'
+import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
+import type { Metadata } from 'next'
+import React, { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -22,18 +22,20 @@ export const revalidate = 0
 export const metadata: Metadata = {
   title: metadataTitle('Rechercher des ressources'),
 }
-const ResourcesSearchLayout = ({
-  children,
+const ResourcesSearchLayout = async ({
   params,
+  children,
 }: PropsWithChildren<{
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
+  }>
 }>) => {
-  const searchParams = searchParamsFromSegment(params.searchSegment)
+  const { searchSegment } = await params
+
+  const searchExecutionParams = searchParamsFromSegment(searchSegment)
 
   const initialFilterValues = [
-    ...searchParams.themes.map(
+    ...searchExecutionParams.themes.map(
       (theme) =>
         ({
           category: 'themes',
@@ -43,7 +45,7 @@ const ResourcesSearchLayout = ({
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchParams.supportTypes.map(
+    ...searchExecutionParams.supportTypes.map(
       (supportType) =>
         ({
           category: 'supportTypes',
@@ -53,7 +55,7 @@ const ResourcesSearchLayout = ({
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchParams.targetAudiences.map(
+    ...searchExecutionParams.targetAudiences.map(
       (targetAudience) =>
         ({
           category: 'targetAudiences',
@@ -67,12 +69,12 @@ const ResourcesSearchLayout = ({
 
   return (
     <>
-      <SearchMenu activeTab="ressources" searchParams={searchParams} />
+      <SearchMenu activeTab="ressources" searchParams={searchExecutionParams} />
       <div className="fr-container fr-container--medium fr-mb-30v">
         <SearchFilters
           label="Affiner la recherche"
           tab="ressources"
-          searchParams={searchParams}
+          searchParams={searchExecutionParams}
           initialValues={initialFilterValues}
           categories={[
             {

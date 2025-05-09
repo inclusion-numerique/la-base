@@ -1,22 +1,26 @@
-import React from 'react'
 import CategoryPage, {
-  CategoryPageUrlParams,
+  type CategoryPageUrlParams,
 } from '@app/web/app/(public)/(categories)/_components/CategoryPage'
+import React from 'react'
 
-const CommunsEtSouverainetePage = ({
-  params,
-  searchParams,
+const CommunsEtSouverainetePage = async ({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
 }: {
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
-  searchParams: CategoryPageUrlParams
-}) => (
-  <CategoryPage
-    params={params}
-    searchParams={searchParams}
-    category="Communs & souveraineté"
-  />
-)
+  }>
+  searchParams: Promise<CategoryPageUrlParams>
+}) => {
+  const params = await paramsPromise
+  const searchParams = await searchParamsPromise
+  return (
+    <CategoryPage
+      params={params}
+      searchParams={searchParams}
+      category="Communs & souveraineté"
+    />
+  )
+}
 
 export default CommunsEtSouverainetePage

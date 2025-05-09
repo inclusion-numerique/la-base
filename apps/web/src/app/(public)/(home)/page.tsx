@@ -1,15 +1,15 @@
-import Link from 'next/link'
+import { getFeatured } from '@app/web/app/(public)/(home)/_data/getFeatured'
+import Newsletter from '@app/web/app/(public)/Newsletter'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
-import { getFeatured } from '@app/web/app/(public)/(home)/_data/getFeatured'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import Newsletter from '@app/web/app/(public)/Newsletter'
+import Link from 'next/link'
+import Banner from './_components/Banner'
 import { FeaturedBase } from './_components/FeaturedBase'
 import { FeaturedProfil } from './_components/FeaturedProfil'
-import HomeCategories from './_components/HomeCategories'
-import Banner from './_components/Banner'
-import HomeInfo from './_components/HomeInfo'
 import { FeaturedResource } from './_components/FeaturedResource'
+import HomeCategories from './_components/HomeCategories'
+import HomeInfo from './_components/HomeInfo'
 
 export const revalidate = 0
 

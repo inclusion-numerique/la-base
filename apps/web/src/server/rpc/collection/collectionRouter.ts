@@ -1,29 +1,27 @@
-import { v4 } from 'uuid'
-import z from 'zod'
 import {
-  baseAuthorization,
   BasePermissions,
+  baseAuthorization,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 import {
-  collectionAuthorization,
   CollectionPermissions,
+  collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
 import { collectionAuthorizationTargetSelect } from '@app/web/authorization/models/collectionAuthorizationTargetSelect'
 import {
-  resourceAuthorization,
   ResourcePermissions,
+  resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
-import { CreateCollectionCommandValidation } from '@app/web/server/collections/createCollection'
 import { SaveCollectionValidation } from '@app/web/server/collections/SaveCollection'
+import { CreateCollectionCommandValidation } from '@app/web/server/collections/createCollection'
 import {
-  collectionIdValidation,
   UpdateCollectionImageCommandValidation,
   UpdateCollectionInformationsCommandValidation,
   UpdateCollectionOrdersCommandValidation,
   UpdateCollectionVisibilityCommandValidation,
+  collectionIdValidation,
 } from '@app/web/server/collections/updateCollection'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import {
@@ -34,6 +32,8 @@ import {
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
+import z from 'zod'
 
 export const collectionRouter = router({
   /**

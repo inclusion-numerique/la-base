@@ -1,6 +1,6 @@
+import type { ResourceContent } from '@app/web/server/resources/getResource'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { ResourceContent } from '@app/web/server/resources/getResource'
 import LinkContentPreview from './LinkContentPreview'
 import styles from './LinkContentView.module.css'
 

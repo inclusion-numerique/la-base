@@ -1,9 +1,9 @@
-import {
+import type {
   ContentEdited,
   EditContentCommand,
 } from '@app/web/server/resources/feature/EditContent'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleEditContent: ResourceMutationCommandHandler<
   EditContentCommand,

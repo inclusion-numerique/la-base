@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react'
 import {
-  PaginationParams,
-  SearchParams,
+  type PaginationParams,
+  type SearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import React from 'react'
 import ResultSortingSelect from './ResultSortingSelect'
 
 export const SearchUrlResultSortingSelect = ({

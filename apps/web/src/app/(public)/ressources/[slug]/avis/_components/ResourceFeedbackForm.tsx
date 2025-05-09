@@ -1,24 +1,24 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { createToast } from '@app/ui/toast/createToast'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RadioFormField from '@app/ui/components/Form/RadioFormField'
-import { trpc } from '@app/web/trpc'
+import { createToast } from '@app/ui/toast/createToast'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { trpc } from '@app/web/trpc'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import {
-  SendResourceFeedbackFormData,
+  type SendResourceFeedbackFormData,
   SendResourceFeedbackValidation,
 } from '@app/web/server/resources/sendResourceFeedback'
-import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 
 const toastMessage = ({
   isPublic,

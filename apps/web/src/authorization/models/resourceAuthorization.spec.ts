@@ -1,12 +1,12 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { Grantee } from '@app/web/authorization/grantee'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { Grantee } from '@app/web/authorization/grantee'
 import {
+  type ResourceAuthorizationTarget,
+  ResourcePermissions,
+  ResourceRoles,
   getResourcePermissions,
   getResourceRoles,
-  ResourceAuthorizationTarget,
-  ResourcePermissions,
   resourcePermissions,
-  ResourceRoles,
 } from '@app/web/authorization/models/resourceAuthorization'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'
 import { testSessionUser } from '@app/web/test/testSessionUser'

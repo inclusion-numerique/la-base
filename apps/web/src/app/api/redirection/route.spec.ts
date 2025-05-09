@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
 import { mapLegacyPath } from '@app/web/legacyRedirection/legacyRedirection'
+import { NextResponse } from 'next/server'
 import { GET } from './route'
 
 jest.mock('@app/web/legacyRedirection/legacyRedirection')

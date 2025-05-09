@@ -1,15 +1,15 @@
 'use client'
 
-import React, { ReactNode, useState } from 'react'
-import { UseFormReturn } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { UpdateBaseCommand } from '../server/bases/updateBase'
-import { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'
-import { ChangeVisibilityCommand } from '../server/resources/feature/ChangeVisibility'
-import { ChangeIndexationCommand } from '../server/resources/feature/ChangeIndexation'
+import { useRouter } from 'next/navigation'
+import React, { type ReactNode, useState } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
+import type { UpdateBaseCommand } from '../server/bases/updateBase'
+import type { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'
+import type { ChangeIndexationCommand } from '../server/resources/feature/ChangeIndexation'
+import type { ChangeVisibilityCommand } from '../server/resources/feature/ChangeVisibility'
 import Card from './Card'
 
 const EditCard = <

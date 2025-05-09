@@ -1,5 +1,5 @@
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { testResourceDescription } from '@app/web/test/helpers'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 

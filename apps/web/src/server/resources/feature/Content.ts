@@ -1,10 +1,10 @@
-import sanitizeHtml from 'sanitize-html'
-import z from 'zod'
 import {
   contentCaptionMaxLength,
   contentTitleMaxLength,
   resourceSectionTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
+import sanitizeHtml from 'sanitize-html'
+import z from 'zod'
 
 export const contentEditionValues = {
   title: z

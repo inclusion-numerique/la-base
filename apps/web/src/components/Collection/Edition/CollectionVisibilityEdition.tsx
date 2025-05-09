@@ -1,18 +1,18 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
-import { useForm } from 'react-hook-form'
 import EditableCardForm from '@app/web/components/EditableCardForm'
+import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
 import {
-  UpdateCollectionVisibilityCommand,
+  type UpdateCollectionVisibilityCommand,
   UpdateCollectionVisibilityCommandValidation,
 } from '@app/web/server/collections/updateCollection'
 import { trpc } from '@app/web/trpc'
-import Visibility from '@app/web/components/Visibility'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const visibilityTexts = (base: { id: string } | null) => ({
   publicTitle: 'Collection publique',

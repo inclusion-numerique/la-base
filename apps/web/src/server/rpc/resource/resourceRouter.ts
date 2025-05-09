@@ -1,23 +1,21 @@
-import { v4 } from 'uuid'
-import z from 'zod'
 import {
-  baseAuthorization,
   BasePermissions,
+  baseAuthorization,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 import {
-  collectionAuthorization,
   CollectionPermissions,
+  collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
 import { collectionAuthorizationTargetSelect } from '@app/web/authorization/models/collectionAuthorizationTargetSelect'
 import {
-  resourceAuthorization,
   ResourcePermissions,
+  resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  CreateResourceCommand,
+  type CreateResourceCommand,
   CreateResourceCommandClientValidation,
 } from '@app/web/server/resources/feature/CreateResource'
 import { ResourceMutationCommandsValidation } from '@app/web/server/resources/feature/features'
@@ -26,6 +24,8 @@ import { handleResourceMutationCommand } from '@app/web/server/resources/feature
 import { SendResourceFeedbackValidation } from '@app/web/server/resources/sendResourceFeedback'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, notFoundError } from '@app/web/server/rpc/trpcErrors'
+import { v4 } from 'uuid'
+import z from 'zod'
 
 export const resourceRouter = router({
   create: protectedProcedure

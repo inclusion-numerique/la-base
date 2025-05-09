@@ -1,20 +1,21 @@
-import React from 'react'
-import { notFound } from 'next/navigation'
+import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import FollowsList from '@app/web/components/Follows/FollowsList'
 import {
   getProfileBaseFollows,
   getProfileProfileFollows,
 } from '@app/web/server/follows/getFollowsList'
-import FollowsList from '@app/web/components/Follows/FollowsList'
-import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
-import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import { notFound } from 'next/navigation'
+import React from 'react'
 
 const ProfileSuivisPage = async ({ params }: ProfilRouteParams) => {
+  const { slug } = await params
   // Auth and profile has been checked in layout
   const {
     profile,
     user,
     authorization: { hasRole },
-  } = await getProfilePageContext(params.slug)
+  } = await getProfilePageContext(slug)
 
   const [baseFollows, profileFollows] = await Promise.all([
     getProfileBaseFollows(profile.id),

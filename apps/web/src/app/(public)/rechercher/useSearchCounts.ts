@@ -1,7 +1,7 @@
+import type { SearchResultCounts } from '@app/web/server/search/executeSearch'
 import { useCallback } from 'react'
 import { shallow } from 'zustand/shallow'
 import { createWithEqualityFn } from 'zustand/traditional'
-import { SearchResultCounts } from '@app/web/server/search/executeSearch'
 
 type Store = {
   resourcesCount: number | null

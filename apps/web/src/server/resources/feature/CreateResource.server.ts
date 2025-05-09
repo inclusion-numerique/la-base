@@ -1,11 +1,11 @@
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
-import {
+import type {
   CreateResourceCommand,
   ResourceCreated,
 } from '@app/web/server/resources/feature/CreateResource'
-import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
+import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
 

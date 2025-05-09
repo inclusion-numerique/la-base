@@ -1,4 +1,4 @@
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 import { Argument, Command } from '@commander-js/extra-typings'
 import { appendEnvVariablesToDotEnvFile } from '@app/cli/dotEnvFile'
 import { output } from '@app/cli/output'
@@ -7,7 +7,7 @@ const { getCdkOutput } = await import('@app/cdk/getCdkOutput')
 
 const stacks = ['web', 'project']
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const createDotEnvFromCdk = new Command()
   .command('dotenv:from-cdk')
   .addArgument(new Argument('<stack>', 'cdk stack').choices(stacks))

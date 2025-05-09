@@ -1,11 +1,11 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { ReactNode, useState } from 'react'
-import { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
-import { signOut } from 'next-auth/react'
 import { generateProconnectSignoutUrl } from '@app/web/app/(public)/(authentication)/deconnexion/callback/proconnectSignout'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
+import { signOut } from 'next-auth/react'
+import { type ReactNode, useState } from 'react'
 
 const SignoutButton = ({
   children = 'Se déconnecter',

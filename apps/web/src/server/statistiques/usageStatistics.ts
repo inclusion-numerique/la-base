@@ -1,7 +1,7 @@
-import { TargetAudience, Theme } from '@prisma/client'
-import { pascalCase } from 'change-case'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
+import type { TargetAudience, Theme } from '@prisma/client'
+import { pascalCase } from 'change-case'
 import { percentage } from './statistics'
 
 export type UsageStatisticsResult = {

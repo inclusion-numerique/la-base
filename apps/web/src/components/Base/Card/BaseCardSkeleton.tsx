@@ -1,5 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 import cardStyles from './BaseCard.module.css'
 
 const BaseSkeleton = ({ compact = false }: { compact?: boolean }) => (

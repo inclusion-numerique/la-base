@@ -1,10 +1,10 @@
 'use client'
 
-import React, { PropsWithChildren } from 'react'
+import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultation)/ProfileTab'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultation)/ProfileTab'
+import React, { type PropsWithChildren } from 'react'
 
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],

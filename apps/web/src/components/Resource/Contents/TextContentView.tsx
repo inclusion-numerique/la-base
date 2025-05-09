@@ -1,4 +1,4 @@
-import { ResourceContent } from '@app/web/server/resources/getResource'
+import type { ResourceContent } from '@app/web/server/resources/getResource'
 import styles from './TextContentView.module.css'
 
 const TextContentView = ({

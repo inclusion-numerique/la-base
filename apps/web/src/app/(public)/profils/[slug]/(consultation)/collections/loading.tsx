@@ -1,5 +1,5 @@
-import React from 'react'
 import CollectionCardSkeleton from '@app/web/components/Collection/Cards/CollectionCardSkeleton'
+import React from 'react'
 
 const LoadingProfileCollectionsPage = () => (
   <div data-testid="base-resources">

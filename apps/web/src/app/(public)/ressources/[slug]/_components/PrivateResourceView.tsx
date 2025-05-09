@@ -1,7 +1,7 @@
-import React from 'react'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
-import { Resource } from '@app/web/server/resources/getResource'
 import PrivateBox from '@app/web/components/PrivateBox'
+import type { Resource } from '@app/web/server/resources/getResource'
+import React from 'react'
 import styles from './ResourceView.module.css'
 
 const PrivateResourceView = ({ resource }: { resource: Resource }) => (

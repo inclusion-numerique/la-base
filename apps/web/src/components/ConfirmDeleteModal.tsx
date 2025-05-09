@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactNode, useState } from 'react'
-import Input from '@codegouvfr/react-dsfr/Input'
-import { ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import Input from '@codegouvfr/react-dsfr/Input'
+import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
+import React, { type ReactElement, type ReactNode, useState } from 'react'
 
 export const ConfirmDeleteModal = ({
   title,

@@ -1,5 +1,5 @@
-import { Prisma } from '@prisma/client'
 import { prismaClient } from '@app/web/prismaClient'
+import type { Prisma } from '@prisma/client'
 
 const whereBase: Prisma.FeaturedBlockWhereInput = {
   type: 'base',

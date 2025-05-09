@@ -1,14 +1,14 @@
 'use client'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import * as Sentry from '@sentry/nextjs'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { trpc } from '@app/web/trpc'
-import { loginUrl } from '@app/web/security/login'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { loginUrl } from '@app/web/security/login'
+import { trpc } from '@app/web/trpc'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 const followingButtonsProps: ButtonProps = {
   type: 'button',

@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { createToast } from '@app/ui/toast/createToast'
-import Input from '@codegouvfr/react-dsfr/Input'
-import { trpc } from '@app/web/trpc'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { trpc } from '@app/web/trpc'
+import Input from '@codegouvfr/react-dsfr/Input'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 export const DeleteCollectionDynamicModal = createDynamicModal({
   id: 'delete-collection-modal',

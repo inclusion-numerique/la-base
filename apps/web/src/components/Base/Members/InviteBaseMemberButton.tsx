@@ -1,23 +1,23 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import classNames from 'classnames'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import InviteUsers from '@app/web/components/InviteUsers'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  InviteMemberCommand,
+  type InviteMemberCommand,
   InviteMemberCommandValidation,
 } from '@app/web/server/baseMembers/inviteMember'
-import InviteUsers from '@app/web/components/InviteUsers'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import { trpc } from '@app/web/trpc'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteBaseMemberButton.module.css'
 
 const {

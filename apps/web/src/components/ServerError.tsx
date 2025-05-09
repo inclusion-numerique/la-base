@@ -1,8 +1,8 @@
 'use client'
 
-import { PropsWithChildren, useEffect } from 'react'
-import * as Sentry from '@sentry/nextjs'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import * as Sentry from '@sentry/nextjs'
+import { type PropsWithChildren, useEffect } from 'react'
 
 export const GenericError = ({
   title,

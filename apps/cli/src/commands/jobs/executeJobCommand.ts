@@ -1,4 +1,4 @@
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 import { Argument, Command } from '@commander-js/extra-typings'
 import { JobValidation } from '@app/web/jobs/jobs'
 import { executeJob, jobExecutors } from '@app/web/jobs/jobExecutors'
@@ -8,7 +8,7 @@ import {
   DeploymentTargetOption,
 } from '@app/cli/deploymentTarget'
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const executeJobCommand = new Command()
   .command('job:execute')
   .addArgument(

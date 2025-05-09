@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
+import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { sendCommandMock } from '@app/storybook/mocks/sendCommandMock'
 import { mobileStory } from '@app/storybook/storyHelper'
-import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import ResourceImageEdition from '@app/web/components/Resource/Edition/ResourceImageEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
 
 export default {
   title: 'Ressource/ImageEdition',

@@ -1,11 +1,11 @@
+import AdministrationSideMenu from '@app/web/app/administration/AdministrationSideMenu'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
+import Header from '@app/web/components/Header'
+import MinimalFooter from '@app/web/components/MinimalFooter'
 import classNames from 'classnames'
 import { notFound } from 'next/navigation'
-import React, { PropsWithChildren } from 'react'
-import MinimalFooter from '@app/web/components/MinimalFooter'
-import Header from '@app/web/components/Header'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import AdministrationSideMenu from '@app/web/app/administration/AdministrationSideMenu'
-import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
+import React, { type PropsWithChildren } from 'react'
 import styles from './AdministrationLayout.module.css'
 
 const AdministrationLayout = async ({ children }: PropsWithChildren) => {

@@ -1,11 +1,11 @@
+import {
+  BasesDataTable,
+  type BasesDataTableSearchParams,
+} from '@app/web/app/administration/bases/BasesDataTable'
+import type { SearchBaseResult } from '@app/web/app/administration/bases/searchBase'
 import DataTable from '@app/web/data-table/DataTable'
 import PaginationNavWithPageSizeSelect from '@app/web/data-table/PaginationNavWithPageSizeSelect'
 import { generatePageSizeSelectOptions } from '@app/web/data-table/pageSizeSelectOptions'
-import {
-  BasesDataTable,
-  BasesDataTableSearchParams,
-} from '@app/web/app/administration/bases/BasesDataTable'
-import { SearchBaseResult } from '@app/web/app/administration/bases/searchBase'
 
 const defaultPageSize = 100
 

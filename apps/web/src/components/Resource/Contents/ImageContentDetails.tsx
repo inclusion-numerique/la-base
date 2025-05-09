@@ -1,9 +1,9 @@
+import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
+import type { ContentProjectionWithContextImage } from '@app/web/server/resources/getResourceFromEvents'
+import { getDownloadUrl } from '@app/web/utils/getDownloadUrl'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
-import { ContentProjectionWithContextImage } from '@app/web/server/resources/getResourceFromEvents'
-import { getDownloadUrl } from '@app/web/utils/getDownloadUrl'
-import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import styles from './ImageContentDetails.module.css'
 
 const ImageContentDetails = ({
@@ -34,7 +34,7 @@ const ImageContentDetails = ({
   const imageRatio = width && height ? width / height : undefined
 
   return (
-    <div className={(styles.container, className)}>
+    <div className={classNames(styles.container, className)}>
       <div
         className={classNames(styles.imageContainer, imageContainerClassName)}
         style={{ aspectRatio: imageRatio }}

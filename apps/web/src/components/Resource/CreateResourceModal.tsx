@@ -2,9 +2,9 @@
 
 'use client'
 
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
+import Button from '@codegouvfr/react-dsfr/Button'
+import React from 'react'
 
 export const CreateResourceDynamicModal = createDynamicModal({
   id: 'create-resource',

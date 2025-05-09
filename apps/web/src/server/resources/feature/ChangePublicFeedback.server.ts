@@ -1,10 +1,10 @@
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import {
-  PublicFeedbackChanged,
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type {
   ChangePublicFeedbackCommand,
+  PublicFeedbackChanged,
 } from './ChangePublicFeedback'
-import { ResourceEventSideEffect } from './ResourceEventSideEffect'
+import type { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
 export const handleChangePublicFeedback: ResourceMutationCommandHandler<
   ChangePublicFeedbackCommand,

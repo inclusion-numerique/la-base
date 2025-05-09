@@ -1,13 +1,13 @@
-import type { Account, Profile, User } from 'next-auth'
-import * as Sentry from '@sentry/nextjs'
-import { registerLastLogin } from '@app/web/security/registerLastLogin'
-import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
 import { prismaClient } from '@app/web/prismaClient'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { registerLastLogin } from '@app/web/security/registerLastLogin'
+import * as Sentry from '@sentry/nextjs'
+import type { Account, Profile, User } from 'next-auth'
 
 export const signinCallback: <
   P extends Profile = Profile,

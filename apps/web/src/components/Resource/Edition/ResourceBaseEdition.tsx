@@ -1,19 +1,19 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import {
-  ChangeBaseCommand,
+  type ChangeBaseCommand,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import OwnershipInformation from '@app/web/components/OwnershipInformation'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { type ReactNode } from 'react'
+import { useForm } from 'react-hook-form'
 import EditableContent from './EditableContent'
 
 const { Component: BaseModal, open: openBaseModal } = createModal({

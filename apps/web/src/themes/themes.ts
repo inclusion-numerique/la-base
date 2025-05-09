@@ -1,6 +1,6 @@
 import {
-  labelsToOptions,
   type SelectOption,
+  labelsToOptions,
 } from '@app/ui/components/Form/utils/options'
 import type { Theme } from '@prisma/client'
 

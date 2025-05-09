@@ -1,8 +1,8 @@
-import axios, { CanceledError } from 'axios'
-import { useCallback, useRef, useState } from 'react'
-import EventEmitter from 'eventemitter3'
-import * as Sentry from '@sentry/nextjs'
 import { trpc } from '@app/web/trpc'
+import * as Sentry from '@sentry/nextjs'
+import axios, { CanceledError } from 'axios'
+import EventEmitter from 'eventemitter3'
+import { useCallback, useRef, useState } from 'react'
 
 const FORBIDDEN_CHARS_REGEXP = /[#“”]/g
 const EMPTY_STRING = ''

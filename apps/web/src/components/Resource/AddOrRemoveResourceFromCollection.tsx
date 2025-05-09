@@ -1,9 +1,9 @@
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import classNames from 'classnames'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import React from 'react'
 import CollectionMetaData from '../Collection/CollectionMetaData'
 import styles from './SaveResourceInCollectionModal.module.css'
 

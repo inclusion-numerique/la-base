@@ -1,8 +1,8 @@
-import React from 'react'
-import { ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import Link from 'next/link'
-import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
 import OpenDeleteCollectionModalButton from '@app/web/components/Collection/OpenDeleteCollectionModalButton'
+import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import Link from 'next/link'
+import React from 'react'
 
 export const CollectionMoreActionsDropdown = ({
   collection,

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { Meta, StoryObj } from '@storybook/react'
 import { FeaturedBase } from './FeaturedBase'
 
 const meta = {

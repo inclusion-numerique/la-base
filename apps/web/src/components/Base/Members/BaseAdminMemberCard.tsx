@@ -1,13 +1,13 @@
 'use client'
 
-import React, { ChangeEvent, useCallback, useState } from 'react'
+import RemoveBaseMemberButton from '@app/web/components/Base/Members/RemoveBaseMemberButton'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { BaseMember } from '@app/web/server/bases/getBase'
+import { trpc } from '@app/web/trpc'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { BaseMember } from '@app/web/server/bases/getBase'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import RemoveBaseMemberButton from '@app/web/components/Base/Members/RemoveBaseMemberButton'
+import React, { type ChangeEvent, useCallback, useState } from 'react'
 
 const BaseAdminMemberCard = ({
   member,

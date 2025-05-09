@@ -1,4 +1,4 @@
-import { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
+import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
 import { searchBase } from '@app/web/app/administration/bases/searchBase'
 import { prismaClient } from '@app/web/prismaClient'
 

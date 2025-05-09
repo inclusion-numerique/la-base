@@ -1,11 +1,11 @@
+import {
+  ResourcesDataTable,
+  type ResourcesDataTableSearchParams,
+} from '@app/web/app/administration/ressources/ResourcesDataTable'
+import type { SearchResourceResult } from '@app/web/app/administration/ressources/searchResource'
 import DataTable from '@app/web/data-table/DataTable'
 import PaginationNavWithPageSizeSelect from '@app/web/data-table/PaginationNavWithPageSizeSelect'
 import { generatePageSizeSelectOptions } from '@app/web/data-table/pageSizeSelectOptions'
-import { SearchResourceResult } from '@app/web/app/administration/ressources/searchResource'
-import {
-  ResourcesDataTable,
-  ResourcesDataTableSearchParams,
-} from '@app/web/app/administration/ressources/ResourcesDataTable'
 
 const defaultPageSize = 100
 

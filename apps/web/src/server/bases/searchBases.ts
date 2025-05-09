@@ -1,14 +1,14 @@
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
+import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import {
+  type PaginationParams,
+  type SearchParams,
+  type Sorting,
   defaultPaginationParams,
   defaultSearchParams,
-  PaginationParams,
-  SearchParams,
-  type Sorting,
 } from '@app/web/server/search/searchQueryParams'
-import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
 
 /**

@@ -1,9 +1,9 @@
 'use client'
 
+import { defaultSkipLinks } from '@app/web/utils/skipLinks'
+import SkipLinks from '@codegouvfr/react-dsfr/SkipLinks'
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import SkipLinks from '@codegouvfr/react-dsfr/SkipLinks'
-import { defaultSkipLinks } from '@app/web/utils/skipLinks'
 
 const SkipLinksPortal = ({
   links = defaultSkipLinks,

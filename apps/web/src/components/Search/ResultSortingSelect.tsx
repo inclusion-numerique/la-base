@@ -1,17 +1,17 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import React, { ChangeEventHandler, useMemo, useState } from 'react'
+import styles from '@app/web/components/Search/ResultSortingSelect.module.css'
 import {
+  type PaginationParams,
+  type SearchParams,
+  type SearchTab,
+  type Sorting,
   basesSortingOptions,
-  PaginationParams,
   profilesSortingOptions,
   resourcesSortingOptions,
-  SearchParams,
-  SearchTab,
-  Sorting,
 } from '@app/web/server/search/searchQueryParams'
-import styles from '@app/web/components/Search/ResultSortingSelect.module.css'
+import { useRouter } from 'next/navigation'
+import React, { type ChangeEventHandler, useMemo, useState } from 'react'
 
 const getOptionsForModel = (tab: SearchTab, hasSearchQuery: boolean) => {
   const options =

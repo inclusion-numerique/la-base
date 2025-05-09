@@ -1,5 +1,5 @@
-import React from 'react'
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
+import React from 'react'
 
 const FeedbackWithCount = ({
   feedbackCount,

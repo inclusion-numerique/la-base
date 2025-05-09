@@ -1,7 +1,7 @@
-import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 import { resourceSectionTitleMaxLength } from '@app/web/server/rpc/resource/utils'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import type { UseFormReturn } from 'react-hook-form'
 
 const titleInfo = (title: string | null) =>
   `${title?.length ?? 0}/${resourceSectionTitleMaxLength} caractères`

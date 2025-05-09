@@ -2,7 +2,7 @@
 
 import {
   SegmentedControl,
-  SegmentedControlProps,
+  type SegmentedControlProps,
 } from '@codegouvfr/react-dsfr/SegmentedControl'
 import { Select } from '@codegouvfr/react-dsfr/Select'
 import { useRouter, useSearchParams } from 'next/navigation'

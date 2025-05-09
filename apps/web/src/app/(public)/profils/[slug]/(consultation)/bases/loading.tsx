@@ -1,5 +1,5 @@
-import React from 'react'
 import BaseCardSkeleton from '@app/web/components/Base/Card/BaseCardSkeleton'
+import React from 'react'
 
 const LoadingProfileBasesPage = () => (
   <div data-testid="base-resources">

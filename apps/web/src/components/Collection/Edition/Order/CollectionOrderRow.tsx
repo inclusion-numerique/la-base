@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import styles from '@app/web/components/Collection/Edition/Order/CollectionOrder.module.css'
+import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import Link from 'next/link'
 
 const CollectionOrderRow = ({
   collection,

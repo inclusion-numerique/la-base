@@ -1,18 +1,18 @@
-import { GetObjectCommand } from '@aws-sdk/client-s3'
-import { NextRequest } from 'next/server'
-import { prismaClient } from '@app/web/prismaClient'
-import { legacyS3Client } from '@app/web/server/s3/legacyS3'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
-import { s3 } from '@app/web/server/s3/s3'
-import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
-import { authorizeOrThrow } from '@app/web/server/rpc/trpcErrors'
-import {
-  resourceAuthorization,
-  ResourcePermissions,
-} from '@app/web/authorization/models/resourceAuthorization'
-import { sessionTokenFromRequestCookies } from '@app/web/security/authentication'
-import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
 import { escapeHeaderFilename } from '@app/web/app/download/escapeHeaderFilename'
+import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
+import {
+  ResourcePermissions,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
+import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
+import { prismaClient } from '@app/web/prismaClient'
+import { sessionTokenFromRequestCookies } from '@app/web/security/authentication'
+import { authorizeOrThrow } from '@app/web/server/rpc/trpcErrors'
+import { legacyS3Client } from '@app/web/server/s3/legacyS3'
+import { s3 } from '@app/web/server/s3/s3'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
+import type { NextRequest } from 'next/server'
 
 const notFoundResponse = () =>
   new Response('', {

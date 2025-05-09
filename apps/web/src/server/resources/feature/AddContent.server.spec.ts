@@ -1,9 +1,9 @@
-import {
+import type {
   AddContentCommand,
   ContentAdded,
 } from '@app/web/server/resources/feature/AddContent'
 import { applyContentAdded } from '@app/web/server/resources/feature/AddContent.server'
-import {
+import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'

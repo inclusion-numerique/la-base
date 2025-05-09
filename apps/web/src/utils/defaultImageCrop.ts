@@ -1,4 +1,4 @@
-import { ImageCropInformation } from '@app/web/utils/imageCrop'
+import type { ImageCropInformation } from '@app/web/utils/imageCrop'
 
 export const defaultImageCrop = {
   cropLeft: 0,

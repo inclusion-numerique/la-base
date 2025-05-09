@@ -1,6 +1,8 @@
-import React from 'react'
-import RoundImage, { RoundImageProps } from '@app/web/components/RoundImage'
 import BaseAvatar from '@app/web/components/BaseAvatar'
+import RoundImage, {
+  type RoundImageProps,
+} from '@app/web/components/RoundImage'
+import React from 'react'
 
 const avatarSizeByPictureSize: {
   [size in Exclude<RoundImageProps['size'], undefined>]: number

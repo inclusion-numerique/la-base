@@ -1,20 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import classNames from 'classnames'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import { HelpMenu } from '@app/web/components/HelpMenu'
 import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 import { getUserDisplayName } from '@app/web/utils/user'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
-import { HelpMenu } from '@app/web/components/HelpMenu'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import Link from 'next/link'
+import React from 'react'
 import { Dropdown } from './Dropdown/Dropdown'
+import styles from './Header.module.css'
 import LesBasesSvgLogo from './LesBasesSvgLogo'
 import { CreateResourceButton } from './Resource/CreateResourceModal'
-import styles from './Header.module.css'
 
 const Header = ({ user }: { user?: SessionUser | null }) => (
   <header role="banner" className="fr-header">

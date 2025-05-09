@@ -1,9 +1,9 @@
-import * as Sentry from '@sentry/nextjs'
-import type { NextRequest } from 'next/server'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
 import { executeJob } from '@app/web/jobs/jobExecutors'
 import { JobValidation } from '@app/web/jobs/jobs'
+import * as Sentry from '@sentry/nextjs'
+import type { NextRequest } from 'next/server'
 
 export const maxDuration = 600
 export const dynamic = 'force-dynamic'

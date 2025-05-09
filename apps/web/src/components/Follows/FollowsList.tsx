@@ -1,18 +1,18 @@
-import Link from 'next/link'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import React from 'react'
-import {
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import BaseCard from '@app/web/components/Base/Card/BaseCard'
+import EmptyBox from '@app/web/components/EmptyBox'
+import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
+import type {
   BaseFollowListItem,
   ProfileFollowListItem,
 } from '@app/web/server/follows/getFollowsList'
-import EmptyBox from '@app/web/components/EmptyBox'
 import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
-import BaseCard from '@app/web/components/Base/Card/BaseCard'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import Link from 'next/link'
+import React from 'react'
 
 const FollowsList = ({
   baseFollows,

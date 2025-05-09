@@ -1,16 +1,16 @@
-import React, { ReactNode } from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import {
+  ResourceRoles,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
+import EmptyBox from '@app/web/components/EmptyBox'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
-import EmptyBox from '@app/web/components/EmptyBox'
-import {
-  resourceAuthorization,
-  ResourceRoles,
-} from '@app/web/authorization/models/resourceAuthorization'
+import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
+import React, { type ReactNode } from 'react'
 import styles from './SearchContents.module.css'
 
 const ResourcesSearchResults = ({

@@ -1,7 +1,7 @@
-import React from 'react'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import BaseImage from '@app/web/components/BaseImage'
+import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import React from 'react'
 import styles from './BaseImages.module.css'
 import ImageEdition from './Edition/BaseImageEdition'
 

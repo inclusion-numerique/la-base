@@ -1,11 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
-import { dateAsDay } from '@app/web/utils/dateAsDay'
-import { CropText } from '@app/web/components/CropText/CropText'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
+import { CropText } from '@app/web/components/CropText/CropText'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import type { SessionUser } from '@app/web/auth/sessionUser'
+import { dateAsDay } from '@app/web/utils/dateAsDay'
+import Link from 'next/link'
+import React from 'react'
 
 export type FeaturedResourceProps = {
   resource: ResourceListItem

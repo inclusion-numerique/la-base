@@ -1,6 +1,6 @@
-import z from 'zod'
 import { prismaClient } from '@app/web/prismaClient'
 import { UserSignupValidation } from '@app/web/server/rpc/user/userSignup'
+import z from 'zod'
 
 export const ServerUserSignupValidation = UserSignupValidation.extend({
   email: z

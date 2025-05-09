@@ -1,16 +1,16 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { metadataTitle } from '@app/web/app/metadataTitle'
-import { prismaClient } from '@app/web/prismaClient'
-import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
+import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
+import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
+import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import DeleteBaseButton from '@app/web/app/administration/bases/[id]/DeleteBaseButton'
-import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
-import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
+import { prismaClient } from '@app/web/prismaClient'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 export const metadata = {
   title: metadataTitle('Bases - Détails'),
@@ -20,10 +20,12 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const AdministrationBaseDetailsPage = async ({
-  params: { id },
+  params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) => {
+  const { id } = await params
+
   const base = await prismaClient.base.findUnique({
     where: {
       id,

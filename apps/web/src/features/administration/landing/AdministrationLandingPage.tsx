@@ -1,8 +1,8 @@
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
-import { getFeaturedBlocksListPageData } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
 import AdministrationLandingCard from '@app/web/features/administration/landing/components/AdministrationLandingCard'
+import { getFeaturedBlocksListPageData } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
 
 const MAX_FEATURED_BLOCKS_RESOURCES = 6
 const MAX_FEATURED_BLOCKS_BASES = 3

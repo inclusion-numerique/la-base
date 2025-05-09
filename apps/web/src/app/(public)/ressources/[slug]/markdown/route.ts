@@ -1,15 +1,15 @@
-import { NextRequest } from 'next/server'
 import { getResourceForMarkdown } from '@app/web/resources/getResourceForMarkdown'
 import { resourceToMarkdown } from '@app/web/resources/resourceToMarkdown'
+import type { NextRequest } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const GET = async (
   _request: NextRequest,
-  context: { params: { slug: string } },
+  context: { params: Promise<{ slug: string }> },
 ) => {
-  const { slug } = context.params
+  const { slug } = await context.params
   const resource = await getResourceForMarkdown({ slug })
   if (!resource) {
     return new Response('not-found', {

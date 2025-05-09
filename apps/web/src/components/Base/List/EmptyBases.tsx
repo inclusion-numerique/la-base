@@ -1,10 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
 import EmptyBox from '@app/web/components/EmptyBox'
 import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import Link from 'next/link'
+import React from 'react'
 import { CreateBaseButton } from '../CreateBaseButton'
 
 const EmptyBases = ({

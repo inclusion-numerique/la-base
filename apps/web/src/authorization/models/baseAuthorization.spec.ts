@@ -1,13 +1,13 @@
+import type { SessionUserBase } from '@app/web/auth/sessionUser'
 import type { Grantee } from '@app/web/authorization/grantee'
 import {
   type BaseAuthorizationTarget,
   BasePermissions,
-  basePermissions,
   BaseRoles,
+  basePermissions,
   getBasePermissions,
   getBaseRoles,
 } from '@app/web/authorization/models/baseAuthorization'
-import type { SessionUserBase } from '@app/web/auth/sessionUser'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 

@@ -7,7 +7,7 @@ import { output } from '@app/cli/output'
 /**
  * This command outputs available secrets names
  */
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const getSecretValue = new Command()
   .command('secrets:get')
   .addArgument(new Argument('<name>', 'Name of the secret'))

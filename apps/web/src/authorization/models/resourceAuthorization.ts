@@ -1,10 +1,10 @@
-import type { Resource } from '@prisma/client'
-import { Grantee } from '@app/web/authorization/grantee'
+import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
+import type { Grantee } from '@app/web/authorization/grantee'
 import {
-  UserSecurityRole,
+  type UserSecurityRole,
   UserSecurityRoles,
 } from '@app/web/authorization/userSecurityRole'
-import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
+import type { Resource } from '@prisma/client'
 
 export const ResourceRoles = {
   ResourceCreator: 'ResourceCreator',

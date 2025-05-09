@@ -1,8 +1,8 @@
-import { z } from 'zod'
 import { executeFeaturedBlockQuickSearch } from '@app/web/features/administration/landing/db/executeFeaturedBlockSearch'
 import { UpdateFeaturedBlockValidation } from '@app/web/features/administration/landing/validation/updateFeaturedBlock'
 import { prismaClient } from '@app/web/prismaClient'
 import { publicProcedure, router } from '@app/web/server/rpc/createRouter'
+import { z } from 'zod'
 
 export const featuredBlockRouter = router({
   quicksearch: publicProcedure

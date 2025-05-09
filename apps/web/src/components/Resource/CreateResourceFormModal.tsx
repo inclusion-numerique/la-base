@@ -1,14 +1,11 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import {
   CreateResourceDynamicModal,
   createResourceModalId,
@@ -16,17 +13,20 @@ import {
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
-  CreateResourceCommand,
+  type CreateResourceCommand,
   CreateResourceCommandClientPayloadValidation,
 } from '@app/web/server/resources/feature/CreateResource'
-import { CreateResource } from '@app/web/server/rpc/resource/createResource'
+import type { CreateResource } from '@app/web/server/rpc/resource/createResource'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter, useSearchParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`

@@ -1,10 +1,10 @@
-import { prismaClient } from '@app/web/prismaClient'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  resourceAuthorization,
-  ResourceAuthorizationTarget,
+  type ResourceAuthorizationTarget,
   ResourcePermissions,
+  resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
+import { prismaClient } from '@app/web/prismaClient'
 
 export const getResourceSelect = (user: { id: string } | null) =>
   ({

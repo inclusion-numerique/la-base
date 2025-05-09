@@ -1,9 +1,9 @@
-import {
+import type {
   EditImageCommand,
   ImageEdited,
 } from '@app/web/server/resources/feature/EditImage'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleEditImage: ResourceMutationCommandHandler<
   EditImageCommand,

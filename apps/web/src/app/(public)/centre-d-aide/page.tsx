@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Card from '@app/web/components/Card'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
-import Newsletter from '@app/web/app/(public)/Newsletter'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const revalidate = 0
 export const metadata: Metadata = {

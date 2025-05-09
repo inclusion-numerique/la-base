@@ -1,7 +1,7 @@
-import { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
+import type { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import type { HistoryResourceEvent } from '@app/web/server/resources/feature/features'
-import { PrismaTransaction } from '@app/web/utils/prismaTypes'
+import type { PrismaTransaction } from '@app/web/utils/prismaTypes'
 
 export type ResourceSideEffectContext = {
   transaction: PrismaTransaction

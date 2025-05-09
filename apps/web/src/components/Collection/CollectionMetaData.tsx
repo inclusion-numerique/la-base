@@ -1,7 +1,7 @@
-import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import classNames from 'classnames'
 import CollectionDates from '@app/web/components/Collection/CollectionDates'
+import classNames from 'classnames'
+import React from 'react'
 import { PrivacyTag } from '../PrivacyTags'
 
 const CollectionMetaData = ({

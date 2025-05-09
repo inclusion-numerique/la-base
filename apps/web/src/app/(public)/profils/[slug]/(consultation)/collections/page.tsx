@@ -1,19 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
-import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
+import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
 import Collections from '@app/web/components/Collection/List/Collections'
 import EmptyBox from '@app/web/components/EmptyBox'
+import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
 import { getProfileSavedCollections } from '@app/web/server/collections/getSavedCollectionsList'
-import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
-import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
-import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
+import Link from 'next/link'
+import React from 'react'
 
 const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
+  const { slug } = await params
   const {
     profile,
     user,
     authorization: { hasRole, hasPermission },
-  } = await getProfilePageContext(params.slug)
+  } = await getProfilePageContext(slug)
 
   const [collections, savedCollections] = await Promise.all([
     getProfileCollections(profile.id, user),

@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import type { Meta, StoryObj } from '@storybook/react'
 import { FeaturedProfil } from './FeaturedProfil'
 
 const meta = {

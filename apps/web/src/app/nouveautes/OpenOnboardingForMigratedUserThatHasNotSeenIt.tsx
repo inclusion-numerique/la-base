@@ -1,15 +1,15 @@
 'use client'
 
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   hasOpenedOnboardingV2Cookie,
   hasSeenOnboardingV2Cookie,
 } from '@app/web/app/nouveautes/onboardingV2Cookie'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const OpenOnboardingForMigratedUserThatHasNotSeenIt = ({
   user,

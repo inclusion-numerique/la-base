@@ -1,14 +1,14 @@
-import type { Metadata } from 'next'
-import { Route } from 'next'
-import { redirect } from 'next/navigation'
-import Notice from '@codegouvfr/react-dsfr/Notice'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import { getServerUrl } from '@app/web/utils/baseUrl'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getServerUrl } from '@app/web/utils/baseUrl'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import type { Metadata } from 'next'
+import type { Route } from 'next'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: metadataTitle('Créer un compte'),
@@ -16,15 +16,16 @@ export const metadata: Metadata = {
 
 export const revalidate = 0
 const SigninPage = async ({
-  searchParams: { error, email, raison, suivant } = {},
+  searchParams,
 }: {
-  searchParams?: {
+  searchParams: Promise<{
     error?: string
     raison?: 'connexion-sans-compte'
     email?: string
     suivant?: Route
-  }
+  }>
 }) => {
+  const { error, raison, email, suivant } = await searchParams
   const user = await getSessionUser()
   if (user) {
     redirect(getServerUrl('/'))

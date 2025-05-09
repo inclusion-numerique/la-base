@@ -2,18 +2,19 @@ import AdministrationBreadcrumbs from '@app/web/app/administration/Administratio
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import AdministrationSearchBase from '@app/web/app/administration/bases/AdministrationSearchBase'
-import { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
+import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
 import BasesTable from '@app/web/app/administration/bases/BasesTable'
 import { getBasesListPageData } from '@app/web/app/administration/bases/getBasesListPageData'
 import { numberToString } from '@app/web/utils/formatNumber'
 
 const AdministrationBasesPage = async ({
-  searchParams = {},
+  searchParams,
 }: {
-  searchParams?: BasesDataTableSearchParams
+  searchParams: Promise<BasesDataTableSearchParams>
 }) => {
+  const listParams = await searchParams
   const data = await getBasesListPageData({
-    searchParams,
+    searchParams: listParams,
   })
 
   return (
@@ -25,13 +26,13 @@ const AdministrationBasesPage = async ({
           <p className="fr-text--medium fr-mb-2v">
             Rechercher parmi les {numberToString(data.totalCount)} bases
           </p>
-          <AdministrationSearchBase searchParams={searchParams} />
+          <AdministrationSearchBase searchParams={listParams} />
         </div>
       </AdministrationPageContainer>
       <AdministrationPageContainer size="full">
         <BasesTable
           data={data.searchResult}
-          searchParams={searchParams}
+          searchParams={listParams}
           baseHref="/administration/bases"
         />
       </AdministrationPageContainer>

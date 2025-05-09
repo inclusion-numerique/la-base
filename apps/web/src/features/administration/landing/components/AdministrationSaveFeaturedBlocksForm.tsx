@@ -1,15 +1,15 @@
-import Button from '@codegouvfr/react-dsfr/Button'
-import { useRouter } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import type { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
 import {
-  UpdateFeaturedBlockCommand,
+  type UpdateFeaturedBlockCommand,
   UpdateFeaturedBlockValidation,
 } from '@app/web/features/administration/landing/validation/updateFeaturedBlock'
 import { trpc } from '@app/web/trpc'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 
 const AdministrationSaveFeaturedBlocksForm = ({
   featuredBlocks,

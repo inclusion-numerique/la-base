@@ -1,10 +1,10 @@
-import { v4 } from 'uuid'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import {
   createContact,
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
 import { prismaClient } from '@app/web/prismaClient'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   protectedProcedure,
   publicProcedure,
@@ -12,7 +12,7 @@ import {
 } from '@app/web/server/rpc/createRouter'
 import { ServerUserSignupValidation } from '@app/web/server/rpc/user/userSignup.server'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { v4 } from 'uuid'
 import { formatName } from './formatName'
 
 export const userRouter = router({

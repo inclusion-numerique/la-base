@@ -1,25 +1,25 @@
 /* Override dsfr styles for minimalist menu */
 
 .menuInner {
-    padding: 0 !important;
-    box-shadow: none;
+  padding: 0 !important;
+  box-shadow: none;
 }
 
 .menuLink {
-    color: var(--text-active-blue-france) !important;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    padding: 4px 0 4px 8px;
-    background-size: 0 1.5px, 100% 0.75px;
+  color: var(--text-active-blue-france) !important;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 4px 0 4px 8px;
+  background-size: 0 1.5px, 100% 0.75px;
 
-    &[aria-current] {
-        font-weight: 700;
+  &[aria-current] {
+    font-weight: 700;
 
-        &::before {
-            top: 4px;
-            bottom: 4px;
-        }
+    &::before {
+      top: 4px;
+      bottom: 4px;
     }
+  }
 }

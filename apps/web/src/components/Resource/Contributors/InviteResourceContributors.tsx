@@ -1,24 +1,24 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Button from '@codegouvfr/react-dsfr/Button'
-import classNames from 'classnames'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import InviteUsers from '@app/web/components/InviteUsers'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import {
-  InviteContributorCommand,
+  type InviteContributorCommand,
   InviteContributorCommandValidation,
 } from '@app/web/server/resourceContributors/inviteContributors'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import InviteUsers from '@app/web/components/InviteUsers'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteResourceContributors.module.css'
 
 const InviteResourceContributors = ({
@@ -46,7 +46,10 @@ const InviteResourceContributors = ({
 
   const onDelete = async (contributorId: string) => {
     try {
-      await deleteMutate.mutateAsync({ resourceId: resource.id, contributorId })
+      await deleteMutate.mutateAsync({
+        resourceId: resource.id,
+        contributorId,
+      })
       router.refresh()
       await refetch()
     } catch {

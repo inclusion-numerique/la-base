@@ -1,25 +1,29 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ContentType } from '@prisma/client'
-import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
-import SectionTitleContentEdition from '@app/web/components/Resource/Contents/SectionTitleContentEdition'
-import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
-import { AddContentCommand } from '@app/web/server/resources/feature/AddContent'
-import { EditContentCommand } from '@app/web/server/resources/feature/EditContent'
-import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'
-import {
-  ClientContentPayload,
-  ClientContentPayloadCommandValidation,
-} from '@app/web/server/resources/feature/Content.client'
-import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import TextContentEdition from '@app/web/components/Resource/Contents/TextContentEdition'
+import FileContentEdition from '@app/web/components/Resource/Contents/FileContentEdition'
 import ImageContentEdition from '@app/web/components/Resource/Contents/ImageContentEdition'
 import LinkContentEdition from '@app/web/components/Resource/Contents/LinkContentEdition'
-import FileContentEdition from '@app/web/components/Resource/Contents/FileContentEdition'
+import SectionTitleContentEdition from '@app/web/components/Resource/Contents/SectionTitleContentEdition'
+import TextContentEdition from '@app/web/components/Resource/Contents/TextContentEdition'
+import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
+import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
+import type { AddContentCommand } from '@app/web/server/resources/feature/AddContent'
+import {
+  type ClientContentPayload,
+  ClientContentPayloadCommandValidation,
+} from '@app/web/server/resources/feature/Content.client'
+import type { EditContentCommand } from '@app/web/server/resources/feature/EditContent'
+import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { ContentType } from '@prisma/client'
+import React, {
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from 'react'
+import { type UseFormReturn, useForm } from 'react-hook-form'
 
 const ResourceContentForm = React.forwardRef(
   (

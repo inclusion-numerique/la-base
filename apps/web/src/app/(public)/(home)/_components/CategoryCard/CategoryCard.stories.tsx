@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CategoryCard, CategoryCardProps } from './CategoryCard'
+import { CategoryCard, type CategoryCardProps } from './CategoryCard'
 
 const args: CategoryCardProps = {
   category: 'Communs & souveraineté',

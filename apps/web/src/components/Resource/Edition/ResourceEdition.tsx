@@ -1,36 +1,37 @@
 'use client'
 
-import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Router from 'next/router'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { createToast } from '@app/ui/toast/createToast'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentListEdition from '@app/web/components/Resource/Edition/ContentListEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
-import { Resource } from '@app/web/server/resources/getResource'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { trpc } from '@app/web/trpc'
 import {
-  PublishCommand,
+  type PublishCommand,
   PublishCommandValidation,
 } from '@app/web/server/resources/feature/PublishResource'
+import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
+import type { Resource } from '@app/web/server/resources/getResource'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import AddContent from '@app/web/components/Resource/Edition/AddContent'
+import { trpc } from '@app/web/trpc'
+import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import Router from 'next/router'
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceBaseEdition from './ResourceBaseEdition'
 import styles from './ResourceEdition.module.css'
 import ResourceEditionActionBar from './ResourceEditionActionBar'
 import ResourceImageEdition from './ResourceImageEdition'
-import ResourceTitleEdition from './ResourceTitleEdition'
 import ResourcePublication from './ResourcePublication'
+import ResourceTitleEdition from './ResourceTitleEdition'
 
 export type SendCommandResult = Awaited<
   ReturnType<ReturnType<typeof trpc.resource.mutate.useMutation>['mutateAsync']>

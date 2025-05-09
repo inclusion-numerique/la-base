@@ -1,12 +1,12 @@
-import { redirect } from 'next/navigation'
-import type { Metadata } from 'next'
 import SigninPanel from '@app/web/app/(public)/(authentication)/connexion/SigninPanel'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import { getServerUrl } from '@app/web/utils/baseUrl'
-import { LoginSearchParams } from '@app/web/security/login'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import type { LoginSearchParams } from '@app/web/security/login'
+import { getServerUrl } from '@app/web/utils/baseUrl'
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 export const revalidate = 0
 
@@ -15,10 +15,11 @@ export const metadata: Metadata = {
 }
 
 const SigninPage = async ({
-  searchParams: { error, suivant, intention } = {},
+  searchParams,
 }: {
-  searchParams?: { error?: string } & LoginSearchParams
+  searchParams: Promise<{ error?: string } & LoginSearchParams>
 }) => {
+  const { error, suivant, intention } = await searchParams
   const user = await getSessionUser()
 
   const callbackUrl = suivant ?? '/connexion/suivant'

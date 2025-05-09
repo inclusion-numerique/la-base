@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
 import SearchBar from '@app/web/components/Search/SearchBar'
+import Link from 'next/link'
+import React from 'react'
 import styles from './Banner.module.css'
 
 const Banner = () => (

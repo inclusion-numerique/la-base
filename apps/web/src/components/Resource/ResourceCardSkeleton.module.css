@@ -16,7 +16,7 @@
 .header {
   display: flex;
   justify-content: flex-start;
-    align-items: center;
+  align-items: center;
   margin-bottom: 16px;
 }
 
@@ -39,4 +39,3 @@
     margin-top: 16px;
   }
 }
-

@@ -1,17 +1,15 @@
 {
   "Version": "2012-10-17",
-  "Id":"MyBucketPolicy",
+  "Id": "MyBucketPolicy",
   "Statement": [
     {
       "Sid": "Delegate access",
-      "Effect":"Allow",
-      "Principal":{
-        "SCW":"project_id:4d26d805-83b1-4df8-8f69-7506ae86f7e8"
+      "Effect": "Allow",
+      "Principal": {
+        "SCW": "project_id:4d26d805-83b1-4df8-8f69-7506ae86f7e8"
       },
-      "Action":[
-        "s3:*"
-      ],
-      "Resource":[
+      "Action": ["s3:*"],
+      "Resource": [
         "projets-territoires-attachments",
         "projets-territoires-attachments/*"
       ]

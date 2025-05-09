@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react'
-import Link from 'next/link'
 import classNames from 'classnames'
+import Link from 'next/link'
+import type { ComponentProps } from 'react'
 
 // Only display at most 6 pages numbered links
 /**

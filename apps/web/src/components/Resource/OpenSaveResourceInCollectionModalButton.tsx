@@ -1,8 +1,8 @@
 'use client'
 
-import { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { SaveResourceInCollectionDynamicModal } from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
 
 const OpenSaveResourceInCollectionModalButton = ({
   resourceId,

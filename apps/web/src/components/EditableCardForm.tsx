@@ -1,11 +1,11 @@
 'use client'
 
-import React, { ReactNode, useState } from 'react'
-import { UseFormReturn } from 'react-hook-form'
-import { FieldValues } from 'react-hook-form/dist/types/fields'
-import { useRouter } from 'next/navigation'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { useRouter } from 'next/navigation'
+import React, { type ReactNode, useState } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form/dist/types/fields'
 import EditableCard from './EditableCard'
 
 const EditableCardForm = <T extends FieldValues>({

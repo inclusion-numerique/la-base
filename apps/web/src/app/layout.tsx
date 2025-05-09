@@ -1,19 +1,19 @@
 // setup.ts must be the first import for webpack css chunks to work properly
 // eslint-disable-next-line import/order
 import '@app/web/app/setup'
-import { Metadata, Viewport } from 'next'
-import Link from 'next/link'
-import React, { PropsWithChildren } from 'react'
-import { setLink } from '@codegouvfr/react-dsfr/link'
 import Toaster from '@app/ui/toast/Toaster'
-import dynamic from 'next/dynamic'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { Dsfr } from '@app/web/app/Dsfr'
 import { EnvInformation } from '@app/web/app/EnvInformation'
 import { Matomo } from '@app/web/app/Matomo'
 import { PreloadResources } from '@app/web/app/PreloadResources'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { setLink } from '@codegouvfr/react-dsfr/link'
+import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import React, { type PropsWithChildren } from 'react'
 
 declare module '@codegouvfr/react-dsfr/link' {
   interface RegisterLink {

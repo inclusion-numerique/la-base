@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import EmptyBox from '@app/web/components/EmptyBox'
+import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
+import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { numberToString } from '@app/web/utils/formatNumber'
+import React, { type ReactNode } from 'react'
 import styles from './SearchContents.module.css'
 
 const ProfilesSearchResult = ({

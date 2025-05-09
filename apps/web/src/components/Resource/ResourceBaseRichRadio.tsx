@@ -1,13 +1,13 @@
-import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import {
   BasePrivacyTag,
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import React from 'react'
+import { type Control, Controller, type FieldValues } from 'react-hook-form'
+import type { FieldPath } from 'react-hook-form/dist/types/path'
 import ResourceBaseRichRadioElement from './ResourceBaseRichRadioElement'
 
 const ResourceBaseRichRadio = <T extends FieldValues>({

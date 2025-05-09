@@ -1,9 +1,9 @@
-import { SendVerificationRequestParams } from 'next-auth/providers'
 import { compileMjml } from '@app/emails/mjml'
 import { emailSignin } from '@app/emails/templates/emailSignin'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
+import type { SendVerificationRequestParams } from 'next-auth/providers'
 
 const debugMagicLink = true
 
@@ -14,7 +14,7 @@ export const sendVerificationRequest = async ({
 }: SendVerificationRequestParams) => {
   // For quicker dev UX, display url in console in dev environment
   if (debugMagicLink) {
-    // eslint-disable-next-line no-console
+    // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
     console.log(`[AUTH] Magic link for ${identifier}: ${url}`)
   }
 

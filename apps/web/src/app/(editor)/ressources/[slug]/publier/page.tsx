@@ -1,18 +1,18 @@
-import { notFound, redirect } from 'next/navigation'
-import React from 'react'
-import { Metadata } from 'next'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getResource } from '@app/web/server/resources/getResource'
-import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import Edition from '@app/web/components/Resource/Edition/ResourceEdition'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import {
+  ResourcePermissions,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
+import Edition from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getResource } from '@app/web/server/resources/getResource'
+import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { contentId, contentSkipLink } from '@app/web/utils/skipLinks'
-import {
-  resourceAuthorization,
-  ResourcePermissions,
-} from '@app/web/authorization/models/resourceAuthorization'
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Publication de la ressource'),
@@ -21,16 +21,17 @@ export const metadata: Metadata = {
 const ResourcePublicationPage = async ({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) => {
+  const { slug } = await params
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/ressources/${params.slug}/publier`)
+    redirect(`/connexion?suivant=/ressources/${slug}/publier`)
   }
 
   const [resource, draftResource] = await Promise.all([
-    getResource({ slug: decodeURI(params.slug) }, user),
-    getResourceProjectionWithContext({ slug: decodeURI(params.slug) }),
+    getResource({ slug: decodeURI(slug) }, user),
+    getResourceProjectionWithContext({ slug: decodeURI(slug) }),
   ])
 
   if (!resource || !draftResource) {
@@ -40,7 +41,7 @@ const ResourcePublicationPage = async ({
     ResourcePermissions.WriteResource,
   )
   if (!canWrite) {
-    redirect(`/ressources/${params.slug}`)
+    redirect(`/ressources/${slug}`)
   }
 
   return (

@@ -1,10 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
-import classNames from 'classnames'
-import { getDepartmentName } from '@app/web/utils/departments'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import type { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import { getDepartmentName } from '@app/web/utils/departments'
+import classNames from 'classnames'
+import Link from 'next/link'
+import React from 'react'
 import styles from './FeaturedBase.module.css'
 
 export const FeaturedBase = ({

@@ -1,6 +1,6 @@
 'use client'
 
-import ReactDOM, { PreloadOptions } from 'react-dom'
+import ReactDOM, { type PreloadOptions } from 'react-dom'
 
 const fontsToPreload = ['Marianne-Regular', 'Marianne-Bold', 'Marianne-Medium']
 

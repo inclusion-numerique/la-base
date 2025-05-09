@@ -1,10 +1,10 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
 import {
-  UpdateBaseContactsCommand,
+  type UpdateBaseContactsCommand,
   UpdateBaseContactsCommandValidation,
-  UpdateBaseInformationsCommand,
+  type UpdateBaseInformationsCommand,
   UpdateBaseInformationsCommandValidation,
-  UpdateBaseVisibilityCommand,
+  type UpdateBaseVisibilityCommand,
   UpdateBaseVisibilityCommandValidation,
 } from './updateBase'
 

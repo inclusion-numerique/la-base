@@ -1,11 +1,11 @@
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  ResourceProjection,
+  type ResourceProjection,
   createResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
-import { HistoryEventsForResource } from '@app/web/server/resources/feature/features'
+import type { HistoryEventsForResource } from '@app/web/server/resources/feature/features'
 import { getResourceSelect } from '@app/web/server/resources/getResource'
-import { PrismaTransaction } from '@app/web/utils/prismaTypes'
+import type { PrismaTransaction } from '@app/web/utils/prismaTypes'
 
 export const getResourceFromEvents = async (
   where: { slug: string } | { id: string },

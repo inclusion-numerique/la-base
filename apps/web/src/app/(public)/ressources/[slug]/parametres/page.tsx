@@ -1,24 +1,26 @@
-import { notFound, redirect } from 'next/navigation'
-import React from 'react'
-import type { Metadata } from 'next'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getResource } from '@app/web/server/resources/getResource'
-import ResourceParameters from '@app/web/components/Resource/Edition/Parameters/ResourceParameters'
-import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import {
+  ResourcePermissions,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
+import ResourceParameters from '@app/web/components/Resource/Edition/Parameters/ResourceParameters'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
+import { getResource } from '@app/web/server/resources/getResource'
 import { contentId } from '@app/web/utils/skipLinks'
-import {
-  resourceAuthorization,
-  ResourcePermissions,
-} from '@app/web/authorization/models/resourceAuthorization'
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
+import React from 'react'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
+  const { slug } = await params
+
   const resource = await prismaClient.resource.findUnique({
     where: {
       slug,
@@ -38,15 +40,14 @@ export const generateMetadata = async ({
 
 const ResourceParametersPage = async ({
   params,
-}: {
-  params: { slug: string }
-}) => {
+}: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/ressources/${params.slug}/parametres`)
+    redirect(`/connexion?suivant=/ressources/${slug}/parametres`)
   }
 
-  const resource = await getResource({ slug: decodeURI(params.slug) }, user)
+  const resource = await getResource({ slug: decodeURI(slug) }, user)
   if (!resource || !resource.published) {
     notFound()
   }
@@ -56,7 +57,7 @@ const ResourceParametersPage = async ({
   )
 
   if (!canWrite) {
-    redirect(`/ressources/${params.slug}`)
+    redirect(`/ressources/${slug}`)
   }
 
   return (

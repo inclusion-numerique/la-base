@@ -1,41 +1,42 @@
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import {
+  BasePermissions,
+  baseAuthorization,
+} from '@app/web/authorization/models/baseAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import CreateCollection from '@app/web/components/Collection/Create/CreateCollection'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
+import { contentId } from '@app/web/utils/skipLinks'
 import { notFound, redirect } from 'next/navigation'
 import React from 'react'
-import CreateCollection from '@app/web/components/Collection/Create/CreateCollection'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
-import { prismaClient } from '@app/web/prismaClient'
-import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
-import {
-  baseAuthorization,
-  BasePermissions,
-} from '@app/web/authorization/models/baseAuthorization'
 
 const CollectionCreationPage = async ({
-  searchParams = {},
+  searchParams,
 }: {
-  searchParams?: { base?: string }
+  searchParams: Promise<{ base?: string }>
 }) => {
+  const { base: baseId } = await searchParams
   const user = await getSessionUser()
   if (!user) {
     redirect(
       `/connexion?suivant=${createCollectionUrl({
-        baseId: searchParams.base,
+        baseId,
       })}`,
     )
   }
 
-  const base = searchParams.base
+  const base = baseId
     ? await prismaClient.base.findUnique({
-        where: { id: searchParams.base },
+        where: { id: baseId },
         select: { title: true, slug: true, ...baseAuthorizationTargetSelect },
       })
     : undefined
 
   if (
-    searchParams.base &&
+    baseId &&
     (!base ||
       !baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase))
   ) {

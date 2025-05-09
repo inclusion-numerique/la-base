@@ -1,9 +1,9 @@
-import type { Sql } from '@prisma/client/runtime/library'
-import type { SortDirection } from '@app/web/data-table/SortLink'
 import type {
   DataTableConfiguration,
   DataTableFilter,
 } from '@app/web/data-table/DataTableConfiguration'
+import type { SortDirection } from '@app/web/data-table/SortLink'
+import type { Sql } from '@prisma/client/runtime/library'
 
 type ExtractFilters<Column> = Column extends { filters: infer F }
   ? F extends DataTableFilter[]

@@ -1,6 +1,6 @@
 import {
-  collectionAuthorization,
   CollectionPermissions,
+  collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
 import { prismaClient } from '@app/web/prismaClient'
 import { UpdateCollectionResourcesOrdersCommandValidation } from '@app/web/server/collectionsResources/updateResource'

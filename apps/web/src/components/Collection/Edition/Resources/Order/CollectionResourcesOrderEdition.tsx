@@ -1,20 +1,20 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
-import { useMemo, useRef, useState } from 'react'
 import { createToast } from '@app/ui/toast/createToast'
-import { useRouter } from 'next/navigation'
+import EmptyBaseCollections from '@app/web/components/Base/EmptyBaseCollections'
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
 import CollectionViewHeader from '@app/web/components/Collection/CollectionViewHeader'
 import CollectionResourcesListEdition from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourcesListEdition'
-import {
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { useOnDiff } from '@app/web/hooks/useOnDiff'
+import type {
   CollectionPageData,
   CollectionResourceListItem,
 } from '@app/web/server/collections/getCollection'
 import { trpc } from '@app/web/trpc'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { useOnDiff } from '@app/web/hooks/useOnDiff'
-import EmptyBaseCollections from '@app/web/components/Base/EmptyBaseCollections'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useRouter } from 'next/navigation'
+import { useMemo, useRef, useState } from 'react'
 
 const CollectionResourcesOrderEdition = ({
   collection,

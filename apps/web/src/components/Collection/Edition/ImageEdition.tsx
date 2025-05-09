@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Control, Controller, Path } from 'react-hook-form'
-import RadioButtons from '@codegouvfr/react-dsfr/RadioButtons'
 import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
-import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import type { ImageForForm } from '@app/web/server/image/imageTypes'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { ImageForForm } from '@app/web/server/image/imageTypes'
+import RadioButtons from '@codegouvfr/react-dsfr/RadioButtons'
+import React, { useState } from 'react'
+import { type Control, Controller, type Path } from 'react-hook-form'
 import Images from '../Images'
 
 const collectionImageCropModal = createModal({

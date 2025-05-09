@@ -1,11 +1,11 @@
-import React from 'react'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import BaseEditionSideMenu from '@app/web/components/Base/Edition/BaseEditionSideMenu'
-import BaseEditionInformation from '@app/web/components/Base/Edition/BaseEditionInformation'
-import BaseEditionContacts from '@app/web/components/Base/Edition/BaseEditionContacts'
-import BaseVisibilityForm from '@app/web/components/Base/Edition/BaseVisibilityForm'
 import BaseDeletion from '@app/web/components/Base/Edition/BaseDeletion'
+import BaseEditionContacts from '@app/web/components/Base/Edition/BaseEditionContacts'
+import BaseEditionInformation from '@app/web/components/Base/Edition/BaseEditionInformation'
+import BaseEditionSideMenu from '@app/web/components/Base/Edition/BaseEditionSideMenu'
+import BaseVisibilityForm from '@app/web/components/Base/Edition/BaseVisibilityForm'
 import Card from '@app/web/components/Card'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import React from 'react'
 
 const BaseEdition = ({
   base,

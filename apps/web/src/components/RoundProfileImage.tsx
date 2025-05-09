@@ -1,6 +1,8 @@
-import React from 'react'
 import ProfileInitials from '@app/web/components/ProfileInitials'
-import RoundImage, { RoundImageProps } from '@app/web/components/RoundImage'
+import RoundImage, {
+  type RoundImageProps,
+} from '@app/web/components/RoundImage'
+import React from 'react'
 
 const fontSizeByPictureSize: {
   [size in Exclude<RoundImageProps['size'], undefined>]: number

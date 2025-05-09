@@ -1,7 +1,7 @@
-import { Fragment, ReactNode } from 'react'
+import { Fragment, type ReactNode } from 'react'
 
-import classNames from 'classnames'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import classNames from 'classnames'
 import styles from './AdministrationInlineLabelsValues.module.css'
 
 export type LabelAndValue = {

@@ -1,10 +1,10 @@
 'use client'
 
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { PaginationNavProps } from '@app/web/data-table/PaginationNav'
+import { createDataTableHref } from '@app/web/data-table/createDataTableHref'
 import { useRouter } from 'next/navigation'
 import type { FormEventHandler } from 'react'
-import type { SelectOption } from '@app/ui/components/Form/utils/options'
-import { createDataTableHref } from '@app/web/data-table/createDataTableHref'
-import type { PaginationNavProps } from '@app/web/data-table/PaginationNav'
 
 const PageSizeSelect = ({
   searchParams,

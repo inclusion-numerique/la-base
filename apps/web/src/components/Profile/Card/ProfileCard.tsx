@@ -1,12 +1,12 @@
-import React from 'react'
-import Link from 'next/link'
-import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import ProfileMetadata from '@app/web/components/Profile/ProfileMetadata'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { countProfileResources } from '@app/web/server/profiles/countProfileResources'
+import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { formatName } from '@app/web/server/rpc/user/formatName'
+import Link from 'next/link'
+import React from 'react'
 
 const ProfileCard = ({
   profile,

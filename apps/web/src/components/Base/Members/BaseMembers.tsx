@@ -1,8 +1,8 @@
-import React from 'react'
-import { BasePageData } from '@app/web/server/bases/getBase'
 import BaseAdminMemberCard from '@app/web/components/Base/Members/BaseAdminMemberCard'
-import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import InviteBaseMemberButton from '@app/web/components/Base/Members/InviteBaseMemberButton'
+import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import React from 'react'
 
 const BaseMembers = ({
   base,

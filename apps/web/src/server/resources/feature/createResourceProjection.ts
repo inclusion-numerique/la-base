@@ -1,13 +1,13 @@
-import {
+import type {
   ResourceCreationEventApplier,
   ResourceMutationEventApplier,
 } from '@app/web/server/resources/feature/ResourceEventApplier'
 import {
   CreationEventAppliers,
-  CreationHistoryResourceEvent,
-  HistoryEventsForResource,
+  type CreationHistoryResourceEvent,
+  type HistoryEventsForResource,
   MutationEventAppliers,
-  MutationHistoryResourceEvent,
+  type MutationHistoryResourceEvent,
 } from '@app/web/server/resources/feature/features'
 import type {
   Resource,

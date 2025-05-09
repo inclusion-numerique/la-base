@@ -1,5 +1,4 @@
-
-.filterContainer{
+.filterContainer {
   position: relative;
 }
 
@@ -19,7 +18,7 @@
   top: -5px;
   right: -5px;
   background: var(--background-active-blue-france);
-  color:white;
+  color: white;
   height: 16px;
   min-width: 16px;
   border: 1px solid var(--border-open-blue-france);
@@ -38,7 +37,6 @@
   background-color: var(--background-default-grey);
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
 }
-
 
 .separator {
   padding: 0;

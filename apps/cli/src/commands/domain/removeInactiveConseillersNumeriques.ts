@@ -194,28 +194,24 @@ export const removeInactiveConseillersNumeriques = new Command(
     output(`Found ${remaning.length} conseillers numériques to keep`)
 
     for (const toDelete of deleted) {
-      // eslint-disable-next-line no-await-in-loop
       await prismaClient.collection.deleteMany({
         where: {
           createdById: toDelete.id,
         },
       })
 
-      // eslint-disable-next-line no-await-in-loop
       await prismaClient.baseFollow.deleteMany({
         where: {
           followerId: toDelete.id,
         },
       })
 
-      // eslint-disable-next-line no-await-in-loop
       await prismaClient.baseMembers.deleteMany({
         where: {
           memberId: toDelete.id,
         },
       })
 
-      // eslint-disable-next-line no-await-in-loop
       await prismaClient.user.delete({
         where: {
           id: toDelete.id,

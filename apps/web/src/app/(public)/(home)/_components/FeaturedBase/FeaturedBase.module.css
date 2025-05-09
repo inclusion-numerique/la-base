@@ -1,12 +1,11 @@
-
 .exerpt {
-    max-height: 120px;
+  max-height: 120px;
 
-    /* Standard ellipsis does not work on multiline */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background-image: none;
+  /* Standard ellipsis does not work on multiline */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-image: none;
 }

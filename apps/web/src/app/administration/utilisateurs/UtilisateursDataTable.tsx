@@ -1,5 +1,4 @@
-import type { Prisma } from '@prisma/client'
-import { UtilisateurForList } from '@app/web/app/administration/utilisateurs/queryUtilisateursForList'
+import type { UtilisateurForList } from '@app/web/app/administration/utilisateurs/queryUtilisateursForList'
 import CopyToClipboardButton from '@app/web/components/CopyToClipboardButton'
 import type {
   DataTableConfiguration,
@@ -9,6 +8,7 @@ import type {
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
 import { optionalNumberToString } from '@app/web/utils/formatNumber'
+import type { Prisma } from '@prisma/client'
 
 export type UtilisateursDataTableConfiguration = DataTableConfiguration<
   UtilisateurForList,

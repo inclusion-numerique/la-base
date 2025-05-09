@@ -1,6 +1,6 @@
-import { v4 } from 'uuid'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { encodeSerializableState } from '@app/web/utils/encodeSerializableState'
+import { v4 } from 'uuid'
 
 const proconnectSignoutRedirectPath = '/deconnexion/callback'
 

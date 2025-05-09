@@ -1,26 +1,27 @@
-import React, { PropsWithChildren } from 'react'
-import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
-import SearchMenu from '@app/web/components/Search/SearchMenu'
 import SearchFilters, {
   type FiltersInitialValue,
 } from '@app/web/components/Search/Filters/SearchFilters'
+import SearchMenu from '@app/web/components/Search/SearchMenu'
+import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
   departmentsOptions,
   getDepartmentName,
 } from '@app/web/utils/departments'
+import React, { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const BasesSearchLayout = ({
-  children,
+const BasesSearchLayout = async ({
   params,
+  children,
 }: PropsWithChildren<{
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
+  }>
 }>) => {
-  const searchParams = searchParamsFromSegment(params.searchSegment)
+  const { searchSegment } = await params
+  const searchParams = searchParamsFromSegment(searchSegment)
 
   const initialValues = searchParams.departements.map(
     (departementCode): FiltersInitialValue => ({

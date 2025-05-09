@@ -1,6 +1,6 @@
-import Footer, { type FooterProps } from '@codegouvfr/react-dsfr/Footer'
 import SwitchTheme from '@app/web/app/(public)/SwitchTheme'
 import { getServerDsfrTheme } from '@app/web/app/getServerDsfrTheme'
+import Footer, { type FooterProps } from '@codegouvfr/react-dsfr/Footer'
 
 export const publicFooterProps = {
   accessibility: 'non compliant',

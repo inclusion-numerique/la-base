@@ -2,11 +2,11 @@ import z from 'zod'
 import {
   departmentValidation,
   descriptionValidation,
-  isPublicValidation,
-  titleValidation,
-  emailValidation,
   emailIsPublicValidation,
+  emailValidation,
+  isPublicValidation,
   siteValidation,
+  titleValidation,
 } from './updateBase'
 
 export const CreateBaseCommandValidation = z.object({

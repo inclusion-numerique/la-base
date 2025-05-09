@@ -1,11 +1,11 @@
-import { v4 } from 'uuid'
-import {
+import type {
   AddContentCommand,
   ContentAdded,
 } from '@app/web/server/resources/feature/AddContent'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { sortContents } from '@app/web/server/resources/sortContents'
+import { v4 } from 'uuid'
 
 export const handleAddContent: ResourceMutationCommandHandler<
   AddContentCommand,

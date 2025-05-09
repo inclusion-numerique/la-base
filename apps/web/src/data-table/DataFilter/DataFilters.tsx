@@ -1,14 +1,14 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
-import { ReactNode, useEffect, useRef, useState } from 'react'
 import OptionBadge from '@app/ui/components/Form/OptionBadge'
-import { useRouter } from 'next/navigation'
-import {
+import type {
   DataTableConfiguration,
   DataTableFilterValues,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useRouter } from 'next/navigation'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 
 /**
  * TODO This is not yet implemented

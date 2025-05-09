@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { quickSearchBases } from '@app/web/server/bases/searchBases'
 import { quickSearchProfiles } from '@app/web/server/profiles/searchProfiles'
 import { quickSearchResources } from '@app/web/server/resources/searchResources'

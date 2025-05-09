@@ -1,4 +1,4 @@
-import { lookup, type LookupAddress } from 'node:dns'
+import { type LookupAddress, lookup } from 'node:dns'
 import { Agent as HttpAgent } from 'node:http'
 import { Agent as HttpsAgent } from 'node:https'
 import type { LookupFunction } from 'node:net'

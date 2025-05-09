@@ -1,10 +1,10 @@
-import { z } from 'zod'
 import {
+  type ServerFileValidationOptions,
   fileValidation,
-  ServerFileValidationOptions,
 } from '@app/ui/components/Form/utils/fileValidation.server'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
+import { z } from 'zod'
 
 export const imageMaxSize = 10_000_000
 export const imageAllowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp']

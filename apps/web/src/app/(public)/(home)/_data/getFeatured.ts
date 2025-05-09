@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'

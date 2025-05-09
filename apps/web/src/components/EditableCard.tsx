@@ -1,13 +1,13 @@
 'use client'
 
-import React, {
-  type ComponentProps,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-} from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import React, {
+  type ComponentProps,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from 'react'
 
 const EditableCard = ({
   id,

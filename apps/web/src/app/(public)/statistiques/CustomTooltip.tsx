@@ -1,11 +1,11 @@
+import { numberToString } from '@app/web/utils/formatNumber'
+import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import type { ReactNode } from 'react'
 import type { TooltipProps } from 'recharts'
-import {
+import type {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent'
-import { ReactNode } from 'react'
-import { numberToString } from '@app/web/utils/formatNumber'
-import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import styles from './CustomTooltip.module.css'
 
 const CustomTooltip = <TValue extends ValueType, TName extends NameType>({

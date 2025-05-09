@@ -1,11 +1,11 @@
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { SelectOption } from '@app/ui/components/Form/utils/options'
-import classNames from 'classnames'
-import { Category, FilterKey } from './filter'
 import { FilterCategory } from './FilterCategory'
 import styles from './SearchFilter.module.css'
+import type { Category, FilterKey } from './filter'
 
 const SearchFilter = ({
   category,

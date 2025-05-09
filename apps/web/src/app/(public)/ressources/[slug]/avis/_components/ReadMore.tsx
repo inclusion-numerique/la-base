@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { CropText } from '@app/web/components/CropText/CropText'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useState } from 'react'
 
 export const ReadMore = ({
   limit,

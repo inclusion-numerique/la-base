@@ -1,5 +1,8 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
-import { CreateBaseCommand, CreateBaseCommandValidation } from './createBase'
+import {
+  type CreateBaseCommand,
+  CreateBaseCommandValidation,
+} from './createBase'
 
 const validCommand: CreateBaseCommand = {
   title: 'mon titre',

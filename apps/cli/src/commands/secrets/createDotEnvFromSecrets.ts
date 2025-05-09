@@ -1,4 +1,4 @@
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 import { Command } from '@commander-js/extra-typings'
 import { getSecretValue } from '@app/config/secrets/getSecretValue'
 import { listSecrets } from '@app/config/secrets/listSecrets'
@@ -8,7 +8,7 @@ import { output } from '@app/cli/output'
 /**
  * This command fetches secrets from Secret Vault using scaleway keys and put them into .env
  */
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const createDotEnvFromSecrets = new Command()
   .command('dotenv:from-secrets')
   .action(async () => {

@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react'
-import {
+import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
+import type {
   PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
-import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
+import React from 'react'
 import ResultSortingSelect from './ResultSortingSelect'
 
 export const ThematicLinkSortingSelect = ({

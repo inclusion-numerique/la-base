@@ -1,9 +1,9 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { DeleteCollectionDynamicModal } from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import React, { type ReactNode } from 'react'
 
 const OpenDeleteCollectionModalButton = ({
   collectionId,

@@ -1,23 +1,25 @@
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import { prismaClient } from '@app/web/prismaClient'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
-import CollectionResourcesOrderEdition from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourcesOrderEdition'
-import { getCollection } from '@app/web/server/collections/getCollection'
-import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import {
-  collectionAuthorization,
   CollectionRoles,
+  collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
+import CollectionResourcesOrderEdition from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourcesOrderEdition'
+import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
+import { getCollection } from '@app/web/server/collections/getCollection'
+import { contentId } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
+  const { slug } = await params
+
   const collection = await prismaClient.collection.findUnique({
     where: {
       slug,
@@ -39,11 +41,10 @@ export const generateMetadata = async ({
   }
 }
 
-const ManageCollectionResourcesPage = async ({
-  params,
-}: {
-  params: { slug: string }
+const ManageCollectionResourcesPage = async (props: {
+  params: Promise<{ slug: string }>
 }) => {
+  const params = await props.params
   const user = await getSessionUser()
   const collection = await getCollection({ slug: decodeURI(params.slug) }, user)
   if (!collection) {

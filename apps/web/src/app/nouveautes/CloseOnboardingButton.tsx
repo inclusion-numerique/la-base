@@ -1,6 +1,6 @@
+import styles from '@app/web/app/nouveautes/CloseOnboardingButton.module.css'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import styles from '@app/web/app/nouveautes/CloseOnboardingButton.module.css'
 
 const CloseOnboardingButton = ({
   mdBackground,

@@ -1,13 +1,13 @@
-import React from 'react'
-import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
-import { CreateCollectionCommand } from '@app/web/server/collections/createCollection'
 import {
   collectionDescriptionMaxLength,
   collectionTitleMaxLength,
 } from '@app/web/server/collections/collectionConstraints'
+import type { CreateCollectionCommand } from '@app/web/server/collections/createCollection'
 import { htmlToText } from '@app/web/utils/htmlToText'
+import React from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 
 export const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${collectionTitleMaxLength} caractères`

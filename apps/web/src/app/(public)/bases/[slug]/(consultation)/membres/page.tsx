@@ -1,12 +1,15 @@
-import React from 'react'
-import BaseMembers from '@app/web/components/Base/Members/BaseMembers'
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
+import BaseMembers from '@app/web/components/Base/Members/BaseMembers'
+import React from 'react'
 
-const BaseMembersPage = async ({ params }: { params: { slug: string } }) => {
+const BaseMembersPage = async ({
+  params,
+}: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const {
     authorization: { hasPermission },
     base,
-  } = await getBasePageContext(params.slug)
+  } = await getBasePageContext(slug)
 
   return (
     <BaseMembers

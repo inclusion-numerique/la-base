@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
+import React, { type PropsWithChildren } from 'react'
 
 const EditorLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()

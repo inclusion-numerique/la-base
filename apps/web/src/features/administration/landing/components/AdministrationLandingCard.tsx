@@ -1,14 +1,14 @@
 'use client'
 
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import { useState } from 'react'
-import { isEqual } from 'lodash-es'
 import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
-import AdministrationSearchFeaturedBlock from '@app/web/features/administration/landing/components/AdministrationSearchFeaturedBlock'
-import { SearchType } from '@app/web/features/administration/landing/db/executeFeaturedBlockSearch'
 import AdministrationLandingCardContent from '@app/web/features/administration/landing/components/AdministrationLandingCardContent'
-import { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
 import AdministrationSaveFeaturedBlocksForm from '@app/web/features/administration/landing/components/AdministrationSaveFeaturedBlocksForm'
+import AdministrationSearchFeaturedBlock from '@app/web/features/administration/landing/components/AdministrationSearchFeaturedBlock'
+import type { SearchType } from '@app/web/features/administration/landing/db/executeFeaturedBlockSearch'
+import type { FeaturedBlock } from '@app/web/features/administration/landing/db/getFeaturedBlocksListPageData'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import { isEqual } from 'lodash-es'
+import { useState } from 'react'
 
 const AdministrationLandingCard = ({
   type,

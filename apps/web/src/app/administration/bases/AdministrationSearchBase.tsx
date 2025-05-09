@@ -2,16 +2,16 @@
 
 'use client'
 
+import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { usePathname, useRouter } from 'next/navigation'
-import { FormEventHandler, useRef } from 'react'
-import { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
+import { type FormEventHandler, useRef } from 'react'
 
 const AdministrationSearchBase = ({
   searchParams = {},
 }: {
-  searchParams?: BasesDataTableSearchParams
+  searchParams: BasesDataTableSearchParams
 }) => {
   const pathname = usePathname()
   const router = useRouter()

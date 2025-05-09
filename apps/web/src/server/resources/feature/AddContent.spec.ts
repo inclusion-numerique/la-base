@@ -1,5 +1,8 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
-import { AddContentCommand, AddContentCommandValidation } from './AddContent'
+import {
+  type AddContentCommand,
+  AddContentCommandValidation,
+} from './AddContent'
 import {
   linkFailUseCases,
   sectionTitleFailUseCases,
@@ -105,8 +108,7 @@ describe('AddContentCommandValidation', () => {
             validSectionTitleCommand,
             values,
             errors,
-          ),
-        ),
+          )),
     )
   })
 
@@ -140,8 +142,7 @@ describe('AddContentCommandValidation', () => {
           validTextCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 
@@ -187,8 +188,7 @@ describe('AddContentCommandValidation', () => {
           validLinkCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 })

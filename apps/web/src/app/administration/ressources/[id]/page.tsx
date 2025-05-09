@@ -1,17 +1,17 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import classNames from 'classnames'
+import ResourcePublicStateBadge from '@app/web/app/(public)/ressources/[slug]/_components/ResourcePublicStateBadge'
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
+import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
+import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
-import { metadataTitle } from '@app/web/app/metadataTitle'
-import { prismaClient } from '@app/web/prismaClient'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import DeleteResourceButton from '@app/web/app/administration/ressources/[id]/DeleteResourceButton'
-import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
-import ResourcePublicStateBadge from '@app/web/app/(public)/ressources/[slug]/_components/ResourcePublicStateBadge'
-import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import { prismaClient } from '@app/web/prismaClient'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import classNames from 'classnames'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 export const metadata = {
   title: metadataTitle('Ressources - Détails'),
@@ -21,10 +21,12 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const AdministrationRessourceDetailsPage = async ({
-  params: { id },
+  params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) => {
+  const { id } = await params
+
   const resource = await prismaClient.resource.findUnique({
     where: {
       id,

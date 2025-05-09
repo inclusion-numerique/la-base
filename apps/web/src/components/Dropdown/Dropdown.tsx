@@ -1,16 +1,16 @@
 'use client'
 
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 import React, {
-  KeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
+  type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
   useEffect,
   useRef,
 } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 
 const hasKey = (
   event: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,

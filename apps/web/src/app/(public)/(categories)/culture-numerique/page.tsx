@@ -1,22 +1,27 @@
-import React from 'react'
 import CategoryPage, {
-  CategoryPageUrlParams,
+  type CategoryPageUrlParams,
 } from '@app/web/app/(public)/(categories)/_components/CategoryPage'
+import React from 'react'
 
-const CultureNumeriquePage = ({
-  params,
-  searchParams,
+const CultureNumeriquePage = async ({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
 }: {
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
-  searchParams: CategoryPageUrlParams
-}) => (
-  <CategoryPage
-    params={params}
-    searchParams={searchParams}
-    category="Culture numérique"
-  />
-)
+  }>
+  searchParams: Promise<CategoryPageUrlParams>
+}) => {
+  const params = await paramsPromise
+  const searchParams = await searchParamsPromise
+
+  return (
+    <CategoryPage
+      params={params}
+      searchParams={searchParams}
+      category="Culture numérique"
+    />
+  )
+}
 
 export default CultureNumeriquePage

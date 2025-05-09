@@ -1,6 +1,6 @@
-import React, { MouseEventHandler, ReactNode } from 'react'
+import type { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
+import React, { type MouseEventHandler, type ReactNode } from 'react'
 import styles from './EditableContent.module.css'
 
 const EditableContent = ({

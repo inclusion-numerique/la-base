@@ -1,12 +1,12 @@
-import { Prisma } from '@prisma/client'
-import {
+import ResourcePublicStateBadge from '@app/web/app/(public)/ressources/[slug]/_components/ResourcePublicStateBadge'
+import type { ResourceForList } from '@app/web/app/administration/ressources/queryResourcesForList'
+import type {
   DataTableConfiguration,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'
-import { ResourceForList } from '@app/web/app/administration/ressources/queryResourcesForList'
-import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
-import ResourcePublicStateBadge from '@app/web/app/(public)/ressources/[slug]/_components/ResourcePublicStateBadge'
+import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
+import type { Prisma } from '@prisma/client'
 
 export type ResourcesDataTableConfiguration = DataTableConfiguration<
   ResourceForList,

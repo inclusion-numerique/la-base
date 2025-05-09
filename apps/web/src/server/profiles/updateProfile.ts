@@ -1,10 +1,10 @@
+import { htmlToText } from '@app/web/utils/htmlToText'
 import sanitizeHtml from 'sanitize-html'
 import z from 'zod'
-import { htmlToText } from '@app/web/utils/htmlToText'
 import {
   profileDescriptionMaxLength,
-  profileLastNameMaxLength,
   profileFirstNameMaxLength,
+  profileLastNameMaxLength,
 } from './profileConstraints'
 
 const lastNameValidation = z

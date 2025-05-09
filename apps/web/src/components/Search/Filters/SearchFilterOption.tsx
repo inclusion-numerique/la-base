@@ -1,6 +1,6 @@
-import React from 'react'
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import classNames from 'classnames'
+import React from 'react'
 import styles from './SearchFilter.module.css'
 
 const SearchFilterOption = ({

@@ -1,6 +1,6 @@
-import type { TRPCRequestInfo } from '@trpc/server/http'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import type { AppContext } from '@app/web/server/rpc/createContext'
+import type { TRPCRequestInfo } from '@trpc/server/http'
 
 export const testContextInfo = {
   accept: null,

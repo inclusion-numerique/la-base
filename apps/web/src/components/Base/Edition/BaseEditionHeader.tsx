@@ -1,5 +1,5 @@
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import React from 'react'
-import { BasePageData } from '@app/web/server/bases/getBase'
 import Breadcrumbs from '../../Breadcrumbs'
 import BaseImages from '../BaseImages'
 import styles from './BaseEditionHeader.module.css'

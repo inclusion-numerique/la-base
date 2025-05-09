@@ -1,31 +1,31 @@
 'use client'
 
-import SelectFormField from '@app/ui/components/Form/SelectFormField'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
-import { useRouter } from 'next/navigation'
+import SelectFormField from '@app/ui/components/Form/SelectFormField'
+import EditableCardForm from '@app/web/components/EditableCardForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
   profileDescriptionMaxLength,
   profileFirstNameMaxLength,
   profileLastNameMaxLength,
 } from '@app/web/server/profiles/profileConstraints'
 import {
-  UpdateProfileInformationsCommand,
+  type UpdateProfileInformationsCommand,
   UpdateProfileInformationsCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
-import EditableCardForm from '@app/web/components/EditableCardForm'
+import { trpc } from '@app/web/trpc'
 import { LabelAndValue } from '@app/web/ui/LabelAndValue'
 import {
   departmentsOptions,
   getDepartmentName,
 } from '@app/web/utils/departments'
 import { htmlToText } from '@app/web/utils/htmlToText'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const firstNameInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${profileFirstNameMaxLength} caractères`

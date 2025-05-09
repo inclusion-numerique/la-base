@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import styles from './IconInSquare.module.css'
 
 const IconInSquare = ({

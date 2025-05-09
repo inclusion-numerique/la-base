@@ -1,4 +1,4 @@
-import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 
 /**
  * Using the query result of a profile list, we can count the number of resources

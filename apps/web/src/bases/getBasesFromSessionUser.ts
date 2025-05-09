@@ -1,4 +1,4 @@
-import { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
+import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 
 // Dedupe based on base.id
 export const getBasesFromSessionUser = (user: SessionUser) =>

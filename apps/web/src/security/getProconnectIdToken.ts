@@ -1,6 +1,6 @@
 import { proConnectProviderId } from '@app/web/auth/proConnect'
-import { prismaClient } from '@app/web/prismaClient'
 import type { SessionUser } from '@app/web/auth/sessionUser'
+import { prismaClient } from '@app/web/prismaClient'
 
 export const getProconnectIdToken = ({
   id,

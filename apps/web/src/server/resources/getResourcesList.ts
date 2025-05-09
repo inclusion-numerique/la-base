@@ -1,13 +1,13 @@
-import type { Prisma } from '@prisma/client'
-import { Theme } from '@prisma/client'
-import { pascalCase, snakeCase } from 'change-case'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  Category,
+  type Category,
   categoryThemes,
   themeCategories,
 } from '@app/web/themes/themes'
+import type { Prisma } from '@prisma/client'
+import type { Theme } from '@prisma/client'
+import { pascalCase, snakeCase } from 'change-case'
 
 export const resourceListSelect = (user: { id: string } | null) =>
   ({

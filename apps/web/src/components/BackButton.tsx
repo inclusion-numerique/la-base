@@ -1,9 +1,9 @@
 'use client'
 
 import Button from '@codegouvfr/react-dsfr/Button'
-import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
+import React, { type ReactNode } from 'react'
 
 const BackButton = ({
   children = 'Retour',

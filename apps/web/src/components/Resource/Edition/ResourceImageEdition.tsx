@@ -1,22 +1,22 @@
 'use client'
 
-import Image from 'next/image'
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import * as Sentry from '@sentry/nextjs'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
+import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
-  imageUploadHint,
   imageFileValidationOptions,
+  imageUploadHint,
 } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
-import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import Image from 'next/image'
+import React, { type Dispatch, type SetStateAction, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import styles from './ResourceImageEdition.module.css'
 
 const imageFileValidation = fileValidation({

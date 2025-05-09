@@ -1,9 +1,9 @@
-import Badge from '@codegouvfr/react-dsfr/Badge'
-import classNames from 'classnames'
-import Button from '@codegouvfr/react-dsfr/Button'
-import Link from 'next/link'
-import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import CloseOnboardingButton from '@app/web/app/nouveautes/CloseOnboardingButton'
+import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
+import Badge from '@codegouvfr/react-dsfr/Badge'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import Link from 'next/link'
 import styles from './OnboardingIntroPage.module.css'
 
 const OnboardingIntroPage = () => (

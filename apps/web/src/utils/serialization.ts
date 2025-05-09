@@ -1,6 +1,6 @@
 import { Decimal } from 'decimal.js'
 import superjson from 'superjson'
-import { SuperJSONResult } from 'superjson/dist/types'
+import type { SuperJSONResult } from 'superjson/dist/types'
 
 superjson.registerCustom<Decimal, string>(
   {

@@ -1,9 +1,9 @@
 'use client'
 
-import { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
-import Button from '@codegouvfr/react-dsfr/Button'
-import classNames from 'classnames'
 import { SaveCollectionDynamicModal } from '@app/web/components/Collection/SaveCollectionModal'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
+import classNames from 'classnames'
 
 const OpenSaveCollectionModalButton = ({
   collectionId,

@@ -1,5 +1,5 @@
-import React from 'react'
 import ProfileCardSkeleton from '@app/web/components/Profile/Card/ProfileCardSkeleton'
+import React from 'react'
 
 const LoadingProfileSuivisPage = () => (
   <div data-testid="base-resources">

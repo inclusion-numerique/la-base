@@ -4,7 +4,10 @@ import {
   sectionTitleFailUseCases,
   textFailUseCases,
 } from './Content.spec.config'
-import { EditContentCommand, EditContentCommandValidation } from './EditContent'
+import {
+  type EditContentCommand,
+  EditContentCommandValidation,
+} from './EditContent'
 
 const validSectionTitleCommand: EditContentCommand = {
   name: 'EditContent',
@@ -124,8 +127,7 @@ describe('EditContentCommandValidation', () => {
             validSectionTitleCommand,
             values,
             errors,
-          ),
-        ),
+          )),
     )
   })
 
@@ -199,8 +201,7 @@ describe('EditContentCommandValidation', () => {
           validTextCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 
@@ -246,8 +247,7 @@ describe('EditContentCommandValidation', () => {
           validLinkCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 })

@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
 import classNames from 'classnames'
+import Link from 'next/link'
+import React, { type ReactNode } from 'react'
 
 const Card = ({
   id,

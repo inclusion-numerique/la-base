@@ -1,8 +1,17 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react'
-import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import ResourceBaseRichRadioElement from './Resource/ResourceBaseRichRadioElement'
+import React, {
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from 'react'
+import {
+  type Control,
+  Controller,
+  type FieldValues,
+  type Path,
+} from 'react-hook-form'
 import { PrivacyTag } from './PrivacyTags'
+import ResourceBaseRichRadioElement from './Resource/ResourceBaseRichRadioElement'
 
 const VisibilityField = <T extends FieldValues>({
   control,

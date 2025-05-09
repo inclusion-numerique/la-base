@@ -1,11 +1,11 @@
 .container {
-    height: 100%;
-    overflow-x: hidden;
-    position: relative;
-    display: flex;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
 
-    @media (min-width: 48em) {
-        background: var(--blue-france-975-75);
-        padding: 0;
-    }
+  @media (min-width: 48em) {
+    background: var(--blue-france-975-75);
+    padding: 0;
+  }
 }

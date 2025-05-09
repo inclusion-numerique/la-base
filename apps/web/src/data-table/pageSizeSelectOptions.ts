@@ -1,4 +1,4 @@
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
 
 export const generatePageSizeSelectOptions = (
   pageSizes: [number, ...number[]],

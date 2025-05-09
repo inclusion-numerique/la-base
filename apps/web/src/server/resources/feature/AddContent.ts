@@ -1,4 +1,4 @@
-import { ContentType } from '@prisma/client'
+import type { ContentType } from '@prisma/client'
 import z from 'zod'
 import { ContentPayloadCommandValidation } from './Content'
 

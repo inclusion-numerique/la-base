@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
 import SectionTitleContentView from './SectionTitleContentView'
 
 export default {

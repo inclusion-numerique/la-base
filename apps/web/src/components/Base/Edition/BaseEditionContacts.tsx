@@ -1,18 +1,18 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import classNames from 'classnames'
-import { zodResolver } from '@hookform/resolvers/zod'
 import MaybeEmptyValue from '@app/ui/components/MaybeEmptyValue'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import EditCard from '@app/web/components/EditCard'
-import { BasePageData } from '@app/web/server/bases/getBase'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  UpdateBaseContactsCommand,
+  type UpdateBaseContactsCommand,
   UpdateBaseContactsCommandValidation,
 } from '@app/web/server/bases/updateBase'
+import { trpc } from '@app/web/trpc'
+import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import BaseContactsEdition from '../BaseContactsEdition'
 import styles from './BaseEditionContacts.module.css'
 
