@@ -37,7 +37,7 @@ const BaseMemberCard = ({
   )
 
   return (
-    <div className="fr-border-top" data-testid="member-card-admin">
+    <div className="fr-border-top" data-testid="member-card">
       <div className="fr-enlarge-link fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">
         <RoundProfileImage user={member.member} />
         <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full fr-align-items-center">

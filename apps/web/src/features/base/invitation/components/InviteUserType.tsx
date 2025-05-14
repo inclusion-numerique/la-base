@@ -20,8 +20,7 @@ const InviteUserType = ({
     {
       label: 'Contributeur',
       value: 'member',
-
-      dataTestId: 'base-invite-member-role-select',
+      dataTestId: 'base-invite-member-role-member',
     },
     ...(canAddAdmin
       ? [
@@ -47,6 +46,7 @@ const InviteUserType = ({
           iconPosition="right"
           onClick={() => setOpen(!open)}
           type="button"
+          data-testid="base-invite-member-role-select"
         >
           {selectedMemberType === 'admin' ? 'Administrateur' : 'Contributeur'}
         </Button>

@@ -48,12 +48,16 @@ const BaseInvitationButtons = ({
           children: 'Accepter l’invitation',
           onClick: onAccept,
           ...buttonLoadingClassname(isLoading),
+          nativeButtonProps: { 'data-testid': 'base-invitation-accept-button' },
         },
         {
           children: 'Refuser l’invitation',
           onClick: onDecline,
           priority: 'secondary',
           ...buttonLoadingClassname(isLoading),
+          nativeButtonProps: {
+            'data-testid': 'base-invitation-decline-button',
+          },
         },
       ]}
     />

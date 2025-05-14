@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { z } from 'zod'
 import styles from './MultipleSearchableSelect.module.css'
 
 const DEFAULT_LIMIT = 5
@@ -113,9 +114,19 @@ const MultipleSearchableSelect = ({
         select(filteredOptions[index])
       } else if (inputValue) {
         onInputChange('')
+        const isEmail = inputValue.includes('@')
+        const isValidEmail =
+          isEmail && z.string().email().safeParse(inputValue).success
+        const isInvalid = !isEmail || !isValidEmail
+
         const newSelection = [
           ...internalSelection,
-          { label: inputValue, value: inputValue, type: selectedMemberType },
+          {
+            label: inputValue,
+            value: inputValue,
+            type: selectedMemberType,
+            invalid: isInvalid,
+          },
         ]
         setInternalSelection(newSelection)
         onSelectProperty(newSelection)

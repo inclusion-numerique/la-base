@@ -32,7 +32,10 @@ const BaseMemberRoleCard = ({
       <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
         {member.accepted ? (
           <>
-            <div className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text">
+            <div
+              className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text"
+              data-testid="user-session-member-card-role"
+            >
               {isAdmin ? 'Administrateur' : 'Contributeur'}
             </div>
             <LeaveBaseMemberButton member={member} />

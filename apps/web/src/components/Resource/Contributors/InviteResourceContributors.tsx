@@ -2,6 +2,7 @@
 
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
   type InviteContributorCommand,
@@ -86,6 +87,10 @@ const InviteResourceContributors = ({
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)
     }
   }
+  const handleOnChange = (options: SelectOptionValid[]) => {
+    const resourceContributors = options.map((opt) => opt.value)
+    return form.setValue('contributors', resourceContributors)
+  }
 
   return (
     <>
@@ -95,12 +100,12 @@ const InviteResourceContributors = ({
             <Controller
               control={form.control}
               name="contributors"
-              render={({ field: { onChange }, fieldState: { error } }) => (
+              render={({ fieldState: { error } }) => (
                 <InviteUsers
                   label="Ajouter un membre"
                   setEmailsError={setEmailsError}
                   error={error}
-                  onChange={onChange}
+                  onChange={handleOnChange}
                   resourceId={resource.id}
                   selectedMemberType="member"
                   canAddAdmin={false}

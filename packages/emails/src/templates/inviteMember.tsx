@@ -59,11 +59,6 @@ export const inviteMember = {
             <MjmlText fontWeight="400" fontSize="16px" color="#3A3A3A">
               En rejoignant cette base, vous pourrez :
               <br />
-<<<<<<< HEAD
-              <br />- Créer & publier des ressources
-              <br />- Contribuer à des ressources publiés sur cette base
-              <br />- Inviter d’autres membres
-=======
               <br />
               - Créer & publier des ressources
               <br />
@@ -71,7 +66,6 @@ export const inviteMember = {
               <br />
               - Voir les ressources privées
               <br />- Inviter d&apos;autres membres
->>>>>>> cd0ada98 (feat: invite base members)
             </MjmlText>
             <MjmlSpacer height="32px" />
             <MjmlDivider
