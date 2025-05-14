@@ -24,11 +24,10 @@ const BaseMetadata = ({
   smallBadge?: boolean
 }) => {
   // TODO clean count method from separated query ?
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const resourcesCount =
     'resources' in base
       ? base.resources.length
-      : // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-unsafe-member-access
+      : // eslint-disable-next-line no-underscore-dangle
         base._count.resources
 
   return (
