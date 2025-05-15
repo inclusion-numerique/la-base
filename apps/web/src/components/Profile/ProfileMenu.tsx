@@ -29,7 +29,7 @@ const MenuItem = ({
 }>) => (
   <li className="fr-nav__item">
     <Link
-      className="fr-nav__link fr-link--md"
+      className="fr-nav__link fr-display-block fr-link--md"
       href={href}
       aria-current={currentTab === tab ? 'page' : undefined}
       data-testid={`${tab}-menu-button`}
