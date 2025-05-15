@@ -44,7 +44,7 @@ const InviteBaseMemberButton = ({
     resolver: zodResolver(InviteMemberCommandValidation),
     defaultValues: { baseId: base.id, isAdmin: false, members: [] },
   })
-  
+
   const [emailErrors, setEmailsError] = useState(false)
 
   const mutate = trpc.baseMember.invite.useMutation()

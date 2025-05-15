@@ -20,7 +20,6 @@ import { createSlug } from '@app/web/utils/createSlug'
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
 import z from 'zod'
-import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 
 export const baseRouter = router({
   create: protectedProcedure
