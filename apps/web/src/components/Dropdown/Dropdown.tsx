@@ -134,7 +134,6 @@ export const Dropdown = ({
           {control}
         </Button>
         {isOpen && (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <div
             role="navigation"
             className="fr-collapse fr-dropdown__pane fr-mr-1v"

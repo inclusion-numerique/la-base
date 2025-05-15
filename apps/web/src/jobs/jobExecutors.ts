@@ -33,7 +33,6 @@ export const executeJob = async (job: Job) => {
   })
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const executor = jobExecutors[job.name] as JobExecutor<(typeof job)['name']>
     const result = await executor(job)
     const { ended, duration } = stopWatch.stop()

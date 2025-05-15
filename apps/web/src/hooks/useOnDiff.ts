@@ -19,7 +19,6 @@ export const useOnDiff = <T>(
     : value !== previousValue.current
 
   if (hasDiff) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     onDiff(value, previousValue.current)
     previousValue.current = value
   }

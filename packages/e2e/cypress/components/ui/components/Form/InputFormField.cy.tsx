@@ -2,7 +2,6 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-// eslint-disable-next-line react/function-component-definition
 const Wrapper = ({ path }: { path: string }) => {
   const form = useForm()
 

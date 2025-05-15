@@ -44,9 +44,8 @@ export const handleResourceCreationCommand = async (
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
 
-      // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, { transaction })
-      // eslint-disable-next-line no-await-in-loop
+
       await transaction.resourceEvent.create({
         data: {
           id: v4(),

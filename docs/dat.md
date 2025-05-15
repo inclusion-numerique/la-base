@@ -70,7 +70,7 @@ Voici les librairies utilisées qui définissent la stack technique du projet :
 - [mjml-react](https://github.com/Faire/mjml-react) : Écrire des templates de mails avec React
   et [mjml](https://mjml.io/)
 - [NextAuth.js](https://next-auth.js.org/) : Adaptateur pour services d'authentification.
-- [Eslint](https://eslint.org/) : Analyseur statique de code pour JavaScript et TypeScript.
+- [Biome](https://biomejs.dev/) : Formatteur et linteur pour JavaScript, CSS et TypeScript.
 - [Prettier](https://prettier.io/) : Formateur de code pour divers langages et syntaxes.
 - [Jest](https://jestjs.io/) : Environnement d'exécution des tests unitaires.
 - [Cypress](https://www.cypress.io) : Environnement d'exécution des tests de bout en bout et de tests de composants.

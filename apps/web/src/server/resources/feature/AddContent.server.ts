@@ -24,7 +24,6 @@ export const applyContentAdded: ResourceMutationEventApplier<ContentAdded> = (
   { timestamp, data: contentAdded },
   resource,
 ) => {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { order, __version, ...rest } = contentAdded
 
   const reorder = (orderArgument: number) =>

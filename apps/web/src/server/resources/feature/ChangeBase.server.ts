@@ -45,7 +45,6 @@ export const applyBaseChanged: ResourceMutationEventApplier<BaseChanged> = (
 ) => ({
   ...resource,
   isPublic:
-    // eslint-disable-next-line no-underscore-dangle
     event.data.__version === 1 ? resource.isPublic : event.data.isPublic,
   baseId: event.data.baseId,
   updated: event.timestamp,

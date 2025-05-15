@@ -15,7 +15,6 @@ import { useForm } from 'react-hook-form'
 import z from 'zod'
 
 // React-dom types are broken at the moment !
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 const { createPortal } = ReactDOM as {
   createPortal: (
     children: ReactNode,

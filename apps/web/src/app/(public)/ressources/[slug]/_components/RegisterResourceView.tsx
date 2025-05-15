@@ -16,7 +16,6 @@ const RegisterResourceView = ({ resourceSlug }: { resourceSlug: string }) => {
 
     // We don't care if the request fails, we'll get a Sentry error from api route handler
     // Use simple fetch instead of trpc for lightweight request on this particular feature
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetch(`/ressources/${resourceSlug}/register-view`, { method: 'POST' })
   }, [resourceSlug])
 

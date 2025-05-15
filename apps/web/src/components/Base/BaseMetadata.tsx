@@ -26,8 +26,7 @@ const BaseMetadata = ({
   // TODO clean count method from separated query ?
   const resourcesCount =
     'resources' in base
-      ? base.resources.length
-      : // eslint-disable-next-line no-underscore-dangle
+      ? base.resources.length :
         base._count.resources
 
   return (

@@ -99,9 +99,8 @@ describe('UpdateBaseInformationsCommand', () => {
     })
     expect(result.success).toEqual(true)
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Success is true
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
     expect(result.data.description).toEqual('<b>Broken html</b>')
   })
 })

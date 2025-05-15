@@ -87,7 +87,6 @@ export const resourceContributorRouter = router({
           (x) => x === contributor.id,
         )
         if (contributorId) {
-          // eslint-disable-next-line no-await-in-loop
           await prismaClient.resourceContributors.create({
             data: {
               resourceId: input.resourceId,

@@ -11,7 +11,6 @@ export const FeaturedBase = ({
   base: { id, slug, title, excerpt, department, image, _count },
 }: {
   base: BaseListItem
-  // eslint-disable-next-line react/no-unused-prop-types
   user: SessionUser | null
 }) => (
   <>

@@ -19,7 +19,6 @@ export const acceptedBaseInvitation = {
     memberName: string
     baseTitle: string
   }): string =>
-    // eslint-disable-next-line no-irregular-whitespace
     `${memberName} a accepté votre invitation à rejoindre la base ${baseTitle}`,
   mjml: ({
     url,

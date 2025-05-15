@@ -30,7 +30,6 @@ export const toTitleCase: {
   (input: undefined | null, options?: ToTitleCaseOptions): undefined | null
 } = (input, options?: ToTitleCaseOptions) => {
   if (input === null) return null as never
-  // eslint-disable-next-line unicorn/no-useless-undefined
   if (input === undefined) return undefined as never
   // Split the input into words and process each one
   const words = input.split(/(\s+|['()*[\]’-])/) // Include whitespace, special characters, and brackets in the split array to preserve them

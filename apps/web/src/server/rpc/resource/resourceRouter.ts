@@ -249,13 +249,11 @@ export const resourceRouter = router({
         })
 
       for (const collectionResource of collectionResources) {
-        // eslint-disable-next-line no-await-in-loop
         const collection = await prismaClient.collection.findUnique({
           where: { id: collectionResource.collection.id },
           select: collectionAuthorizationTargetSelect,
         })
 
-        // eslint-disable-next-line no-await-in-loop
         const resource = await prismaClient.resource.findUnique({
           where: { id: collectionResource.resource.id },
           select: resourceAuthorizationTargetSelect,

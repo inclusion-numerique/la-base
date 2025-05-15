@@ -15,7 +15,6 @@ import { backgroundColor, brandColor } from '@app/emails/styles'
 
 export const inviteMember = {
   text: ({ url, baseTitle }: { url: string; baseTitle: string }): string =>
-    // eslint-disable-next-line no-irregular-whitespace
     `Pour accepter l'invitation à la base ${baseTitle}, merci d'utiliser le lien suivant :\n${url}\n\n`,
   mjml: ({
     url,

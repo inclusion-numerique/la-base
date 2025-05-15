@@ -8,7 +8,6 @@ const LoadingProfileCollectionsPage = () => (
     </div>
     <div className="fr-grid-row fr-grid-row--gutters">
       {Array.from({ length: 4 }).map((_, index) => (
-        // eslint-disable-next-line react/no-array-index-key
         <div className="fr-col-md-6 fr-col-12" key={index}>
           <CollectionCardSkeleton />
         </div>

@@ -1,5 +1,3 @@
-/* eslint unicorn/filename-case: 0 */
-
 'use client'
 
 import * as Sentry from '@sentry/nextjs'

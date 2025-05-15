@@ -114,7 +114,6 @@ const ResourceEdition = ({
     const nextNavigationHandler = () => {
       if (!window.confirm(confirmationText)) {
         Router.events.emit('routeChangeError')
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw "Navigation annulée par l'utilisateur"
       }
     }

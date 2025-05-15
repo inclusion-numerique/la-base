@@ -1,5 +1,3 @@
-/* eslint react/jsx-props-no-spreading: off */
-
 'use client'
 
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'

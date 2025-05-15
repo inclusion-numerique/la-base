@@ -20,7 +20,6 @@ const ResultContentLoading = () => (
       <div className="skeleton-rectangle skeleton-rectangle--200" />
     </div>
     {Array.from({ length: skeletons }).map((_, index) => (
-      // eslint-disable-next-line react/no-array-index-key
       <BaseCardSkeleton key={index} />
     ))}
   </>

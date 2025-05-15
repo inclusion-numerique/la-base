@@ -14,7 +14,6 @@ import React from 'react'
 
 export const inviteContributor = {
   text: ({ resourceTitle }: { resourceTitle: string }): string =>
-    // eslint-disable-next-line no-irregular-whitespace
     `Vous êtes invité à contribuer à la ressource ${resourceTitle}`,
   mjml: ({
     url,

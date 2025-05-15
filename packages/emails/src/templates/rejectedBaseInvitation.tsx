@@ -11,7 +11,6 @@ export const rejectedBaseInvitation = {
     memberName: string
     baseTitle: string
   }): string =>
-    // eslint-disable-next-line no-irregular-whitespace
     `${memberName} a refusé votre invitation à rejoindre la base ${baseTitle}`,
   mjml: ({
     memberName,

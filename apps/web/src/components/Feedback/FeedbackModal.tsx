@@ -77,9 +77,8 @@ const FeedbackModal = () => {
 
   useEffect(() => {
     if (!hadDifficulty) {
-      // eslint-disable-next-line unicorn/no-useless-undefined
       setValue('difficultyArea', undefined)
-      // eslint-disable-next-line unicorn/no-useless-undefined
+
       setValue('difficultyComment', undefined)
     }
   }, [hadDifficulty, setValue])

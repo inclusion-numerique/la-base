@@ -15,7 +15,6 @@ describe('feedbackRouter', () => {
   // Helper function to easily test procedures
   const feedbacksToDelete: string[] = []
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const executeSendFeedbackProcedure = (input: SendFeedbackData) =>
     feedbackRouter.createCaller(createTestContext({ user: null })).send(input)
 

@@ -42,7 +42,6 @@ const Options = <T extends string>({
   return (
     <ul className="fr-list-group fr-mb-0" role="listbox">
       {options.slice(0, limit).map((option, index) => (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <li
           role="option"
           data-testid={dataTestId ? `${dataTestId}-option-${index}` : undefined}

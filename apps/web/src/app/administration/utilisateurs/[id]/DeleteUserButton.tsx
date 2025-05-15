@@ -98,7 +98,6 @@ const DeleteUserButton = ({
         <Input
           label={`Écrivez “${confirmText}” dans le champ ci-dessous pour supprimer ce profil.`}
           nativeInputProps={{
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore: wrong dsfr type
             'data-testid': 'modal-input',
             onChange: (event) => {
