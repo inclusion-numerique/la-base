@@ -1,3 +1,5 @@
+import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
+import { emailAssetUrl } from '@app/emails/emailAssetUrl'
 import {
   MjmlButton,
   MjmlColumn,
@@ -6,10 +8,8 @@ import {
   MjmlSpacer,
   MjmlText,
 } from '@faire/mjml-react'
-import React from 'react'
 import { renderToMjml } from '@faire/mjml-react/utils/renderToMjml'
-import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
-import { emailAssetUrl } from '@app/emails/emailAssetUrl'
+import React from 'react'
 
 export const acceptedBaseInvitation = {
   text: ({
@@ -48,12 +48,9 @@ export const acceptedBaseInvitation = {
             <MjmlText fontWeight="400" fontSize="16px" color="#3A3A3A">
               En rejoignant cette base, ce nouveau membre pourra :
               <br />
-              <br />
-              - Créer & publier des ressources
-              <br />
-              - Contribuer à des ressources publiés sur cette base
-              <br />
-              - Voir les ressources privées
+              <br />- Créer & publier des ressources
+              <br />- Contribuer à des ressources publiés sur cette base
+              <br />- Voir les ressources privées
               <br />- Inviter d’autres membres
             </MjmlText>
             <MjmlSpacer height="32px" />

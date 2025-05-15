@@ -1,3 +1,7 @@
+import Explanations from '@app/emails/components/Explanations'
+import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
+import { emailAssetUrl } from '@app/emails/emailAssetUrl'
+import { backgroundColor, brandColor } from '@app/emails/styles'
 import {
   MjmlButton,
   MjmlColumn,
@@ -8,10 +12,6 @@ import {
 } from '@faire/mjml-react'
 import { renderToMjml } from '@faire/mjml-react/utils/renderToMjml'
 import React from 'react'
-import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import Explanations from '@app/emails/components/Explanations'
-import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
-import { backgroundColor, brandColor } from '@app/emails/styles'
 
 export const inviteMember = {
   text: ({ url, baseTitle }: { url: string; baseTitle: string }): string =>
@@ -58,12 +58,9 @@ export const inviteMember = {
             <MjmlText fontWeight="400" fontSize="16px" color="#3A3A3A">
               En rejoignant cette base, vous pourrez :
               <br />
-              <br />
-              - Créer & publier des ressources
-              <br />
-              - Contribuer à des ressources publiés sur cette base
-              <br />
-              - Voir les ressources privées
+              <br />- Créer & publier des ressources
+              <br />- Contribuer à des ressources publiés sur cette base
+              <br />- Voir les ressources privées
               <br />- Inviter d&apos;autres membres
             </MjmlText>
             <MjmlSpacer height="32px" />
