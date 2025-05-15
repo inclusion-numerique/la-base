@@ -135,6 +135,7 @@ const MultipleSearchableSelect = ({
     [
       filteredOptions,
       inputValue,
+      selectedMemberType,
       select,
       onInputChange,
       internalSelection,

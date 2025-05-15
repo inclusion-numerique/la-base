@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
+import BaseMetadata from '@app/web/components/Base/BaseMetadata'
+import BaseImage from '@app/web/components/BaseImage'
+import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import BaseInvitationButtons from '@app/web/features/base/invitation/components/BaseInvitationButtons'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
-import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
-import BaseImage from '@app/web/components/BaseImage'
-import BaseMetadata from '@app/web/components/Base/BaseMetadata'
+import Link from 'next/link'
 
 export const JoinBase = ({
   invitation,

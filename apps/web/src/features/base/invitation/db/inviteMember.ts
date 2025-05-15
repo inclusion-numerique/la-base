@@ -21,9 +21,12 @@ export const InviteMemberCommandValidation = z
     members: z.array(InviteMember).optional(),
     newMembers: z.array(InviteMemberEmail).optional(),
   })
-  .refine((data) => data.members?.length || data.newMembers?.length, {
-    message: 'Veuillez sélectionner au moins un membre à inviter',
-    path: ['members'],
-  })
+  .refine(
+    (data) => data.members?.length === 0 && data.newMembers?.length === 0,
+    {
+      message: 'Veuillez sélectionner au moins un membre à inviter',
+      path: ['members'],
+    },
+  )
 
 export type InviteMemberCommand = z.infer<typeof InviteMemberCommandValidation>

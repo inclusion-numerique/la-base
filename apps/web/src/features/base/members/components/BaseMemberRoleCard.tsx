@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react'
-import Tag from '@codegouvfr/react-dsfr/Tag'
-import { BaseMember } from '@app/web/server/bases/getBase'
 import LeaveBaseMemberButton from '@app/web/features/base/invitation/components/LeaveBaseMemberButton'
 import RemoveBaseMemberButton from '@app/web/features/base/invitation/components/RemoveBaseMemberButton'
+import { BaseMember } from '@app/web/server/bases/getBase'
+import Tag from '@codegouvfr/react-dsfr/Tag'
+import { ChangeEvent } from 'react'
 
 interface MemberRoleDisplayProps {
   member: BaseMember

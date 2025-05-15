@@ -23,8 +23,7 @@ const RemoveBaseMemberButton = ({ member }: { member: BaseMember }) => {
         priority: 'success',
         message: <>Le membre a bien été retiré</>,
       })
-    } catch (error) {
-      console.error('Could not remove member from base', error)
+    } catch {
       createToast({
         priority: 'error',
         message:

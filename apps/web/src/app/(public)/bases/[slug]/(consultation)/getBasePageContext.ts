@@ -1,3 +1,4 @@
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import {
   BasePermissions,
@@ -6,7 +7,6 @@ import {
 import { basePageQuery } from '@app/web/server/bases/getBase'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
-import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
 
 // Context is cached per request https://beta.nextjs.org/docs/data-fetching/caching#per-request-caching
 export const getBasePageContext = cache(

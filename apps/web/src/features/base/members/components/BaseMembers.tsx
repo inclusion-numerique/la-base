@@ -1,13 +1,13 @@
-import React from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import Tag from '@codegouvfr/react-dsfr/Tag'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import IconInSquare from '@app/web/components/IconInSquare'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import IconInSquare from '@app/web/components/IconInSquare'
 import InviteBaseMemberButton from '@app/web/features/base/invitation/components/InviteBaseMemberButton'
-import BaseMembersSort from '@app/web/features/base/members/components/BaseMembersSort'
 import BaseMemberCard from '@app/web/features/base/members/components/BaseMemberCard'
+import BaseMembersSort from '@app/web/features/base/members/components/BaseMembersSort'
+import { BasePageData } from '@app/web/server/bases/getBase'
+import Tag from '@codegouvfr/react-dsfr/Tag'
+import React from 'react'
 
 const BaseMembers = ({
   base,

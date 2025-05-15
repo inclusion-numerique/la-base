@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import { BaseMember } from '@app/web/server/bases/getBase'
+import { trpc } from '@app/web/trpc'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 const LeaveBaseMemberButton = ({
   member,
@@ -34,8 +34,7 @@ const LeaveBaseMemberButton = ({
             <>Vous avez refusé l&apos;invitation</>
           ),
       })
-    } catch (error) {
-      console.error('User could not leave the base', error)
+    } catch {
       createToast({
         priority: 'error',
         message:

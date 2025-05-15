@@ -1,5 +1,5 @@
 import Button from '@codegouvfr/react-dsfr/Button'
-import { useState, useRef, Fragment, RefObject } from 'react'
+import { Fragment, RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './InviteUserType.module.css'
 

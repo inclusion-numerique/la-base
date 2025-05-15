@@ -126,8 +126,7 @@ describe('EditContentCommandValidation', () => {
             validSectionTitleCommand,
             values,
             errors,
-          ),
-        ),
+          )),
     )
   })
 
@@ -198,8 +197,7 @@ describe('EditContentCommandValidation', () => {
           validTextCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 
@@ -244,8 +242,7 @@ describe('EditContentCommandValidation', () => {
           validLinkCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 })

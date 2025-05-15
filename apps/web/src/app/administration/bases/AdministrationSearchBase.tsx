@@ -1,4 +1,3 @@
-
 'use client'
 
 import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'

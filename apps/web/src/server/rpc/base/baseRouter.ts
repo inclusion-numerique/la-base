@@ -4,6 +4,7 @@ import {
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
+import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
 import {
@@ -19,7 +20,6 @@ import { createSlug } from '@app/web/utils/createSlug'
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
 import z from 'zod'
-import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 
 export const baseRouter = router({
   create: protectedProcedure

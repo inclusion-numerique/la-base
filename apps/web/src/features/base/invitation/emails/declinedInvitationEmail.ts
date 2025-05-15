@@ -1,9 +1,9 @@
 import { compileMjml } from '@app/emails/mjml'
 import { rejectedBaseInvitation } from '@app/emails/templates/rejectedBaseInvitation'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 
 export const sendDeclinedInvitationEmail = async ({
   email,

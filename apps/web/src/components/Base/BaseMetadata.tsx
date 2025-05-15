@@ -25,9 +25,7 @@ const BaseMetadata = ({
 }) => {
   // TODO clean count method from separated query ?
   const resourcesCount =
-    'resources' in base
-      ? base.resources.length :
-        base._count.resources
+    'resources' in base ? base.resources.length : base._count.resources
 
   return (
     <div className={classNames(styles.container, 'fr-text--sm', className)}>

@@ -1,4 +1,3 @@
-
 'use client'
 
 import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'

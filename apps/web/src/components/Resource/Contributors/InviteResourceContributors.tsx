@@ -1,9 +1,11 @@
 'use client'
 
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import {
   type InviteContributorCommand,
   InviteContributorCommandValidation,
@@ -12,15 +14,13 @@ import type { ResourceProjectionWithContext } from '@app/web/server/resources/ge
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
-import styles from './InviteResourceContributors.module.css'
-import { useRouter } from 'next/navigation'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import styles from './InviteResourceContributors.module.css'
 
 const InviteResourceContributors = ({
   resource,

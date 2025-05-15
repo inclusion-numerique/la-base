@@ -1,4 +1,3 @@
-
 'use client'
 
 import type { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'

@@ -38,9 +38,7 @@ const StatisticsTooltip = <T extends object>({
       const labelAsString = `${label}`
       if (!tooltipLabelDataKey) return labelAsString
 
-      return (
-        `${(payload[0]?.payload as T)[tooltipLabelDataKey]}` || null
-      )
+      return `${(payload[0]?.payload as T)[tooltipLabelDataKey]}` || null
     }}
     formatter={(_value, name) =>
       legends.find((legend) => legend.key === name)?.label
