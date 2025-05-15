@@ -59,9 +59,9 @@ export const signinCallback: <
       },
     })
 
-    // if (!!email && existingUser && existingUser.role !== 'User') {
-    //   return `/connexion?error=ProConnectOnly`
-    // }
+    if (!!email && existingUser && existingUser.role !== 'User') {
+      return `/connexion?error=ProConnectOnly`
+    }
   }
 
   // User that should be reconciled can sign in

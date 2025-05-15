@@ -2,7 +2,6 @@
 
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import { trpc } from '@app/web/trpc'

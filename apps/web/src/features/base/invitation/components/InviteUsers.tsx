@@ -3,6 +3,7 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import InviteUserType from '@app/web/features/base/invitation/components/InviteUserType'
 import { trpc } from '@app/web/trpc'
 import React, {
   type Dispatch,

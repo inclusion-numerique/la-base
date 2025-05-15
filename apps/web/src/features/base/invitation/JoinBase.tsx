@@ -1,5 +1,4 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseMetadata from '@app/web/components/Base/BaseMetadata'
 import BaseImage from '@app/web/components/BaseImage'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
