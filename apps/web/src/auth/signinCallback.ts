@@ -73,7 +73,13 @@ export const signinCallback: <
   }
 
   const isUserCreatedInDatabase =
-    'created' in user && !!user.created && 'updated' in user && !!user.updated
+    'created' in user &&
+    !!user.created &&
+    'updated' in user &&
+    !!user.updated &&
+    // we need to check that the user has signed up at least once (in case of an user been invited to join a base)
+    'signedUpAt' in user &&
+    !!user.signedUpAt
 
   // Manage signin for magic link
   if (account?.type !== 'oauth') {

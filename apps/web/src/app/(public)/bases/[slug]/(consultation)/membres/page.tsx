@@ -8,16 +8,17 @@ const BaseMembersPage = async ({
   params,
   searchParams,
 }: {
-  params: { slug: string }
-  searchParams: { tri: BaseMembersSortType }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ tri: BaseMembersSortType }>
 }) => {
-  const { tri } = searchParams
+  const { tri } = await searchParams
+  const { slug } = await params
   const membersOrderBy = tri || 'Alphabetique'
   const user = await getSessionUser()
   const {
     authorization: { hasPermission },
     base,
-  } = await getBasePageContext(params.slug, membersOrderBy)
+  } = await getBasePageContext(slug, membersOrderBy)
 
   return (
     <BaseMembers

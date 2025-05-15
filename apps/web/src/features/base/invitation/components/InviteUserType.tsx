@@ -1,5 +1,5 @@
 import Button from '@codegouvfr/react-dsfr/Button'
-import { useState, useRef, Fragment } from 'react'
+import { useState, useRef, Fragment, RefObject } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './InviteUserType.module.css'
 
@@ -13,8 +13,10 @@ const InviteUserType = ({
   selectedMemberType: 'admin' | 'member'
 }) => {
   const [open, setOpen] = useState(false)
-  const optionsRef = useRef(null)
-  useOnClickOutside(optionsRef, () => setOpen(false))
+  const optionsRef = useRef<HTMLDivElement | null>(null)
+  useOnClickOutside(optionsRef as RefObject<HTMLDivElement>, () =>
+    setOpen(false),
+  )
 
   const options = [
     {

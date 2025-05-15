@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
@@ -21,8 +21,10 @@ const BaseMembersSort = ({
   const url = getServerUrl(`/bases/${slug}/membres`)
   const [selected, setSelected] = useState<BaseMembersSortType>(sortBy)
   const [open, setOpen] = useState(false)
-  const optionsRef = useRef(null)
-  useOnClickOutside(optionsRef, () => setOpen(false))
+  const optionsRef = useRef<HTMLDivElement | null>(null)
+  useOnClickOutside(optionsRef as RefObject<HTMLDivElement>, () =>
+    setOpen(false),
+  )
 
   const onSelect = (option: SelectOption<BaseMembersSortType>) => {
     setSelected(option.value)
