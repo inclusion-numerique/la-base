@@ -24,6 +24,7 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
     role: 'User',
     slug,
     emailVerified: new Date('2023-04-01'),
+    signedUpAt: new Date('2023-04-01'),
     isPublic: false,
     collections: {
       create: {

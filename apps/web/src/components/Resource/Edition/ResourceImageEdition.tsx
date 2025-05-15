@@ -16,12 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { noop } from '@trpc/server/unstable-core-do-not-import'
 import Image from 'next/image'
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useRef,
-} from 'react'
+import React, { type Dispatch, type SetStateAction, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import styles from './ResourceImageEdition.module.css'

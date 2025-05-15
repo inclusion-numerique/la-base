@@ -22,7 +22,8 @@ export const InviteMemberCommandValidation = z
     newMembers: z.array(InviteMemberEmail).optional(),
   })
   .refine(
-    (data) => data.members?.length === 0 && data.newMembers?.length === 0,
+    // biome-ignore lint/style/useExplicitLengthCheck: We need at least one member or one new member to invite
+    (data) => !!data.members?.length || !!data.newMembers?.length,
     {
       message: 'Veuillez sélectionner au moins un membre à inviter',
       path: ['members'],
