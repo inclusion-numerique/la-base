@@ -30,10 +30,6 @@ const nextConfig = {
   // This includes files from the monorepo base two directories up
   outputFileTracingRoot: path.join(dirname, '../../'),
   modularizeImports,
-  eslint: {
-    // Lints are checked in other parts of the build process
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     // Type checks are done in other parts of the build process
     ignoreBuildErrors: true,

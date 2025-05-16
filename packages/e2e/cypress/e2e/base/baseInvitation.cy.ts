@@ -20,6 +20,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
   beforeEach(() => {
     cy.intercept('/api/trpc/profile.searchProfileForMember?*').as('getUser')
     cy.intercept('/api/trpc/baseMember.invite?*').as('invite')
+    cy.intercept('/api/trpc/baseMember.accept?*').as('acceptInvitation')
   })
 
   it("Acceptation 1 - En tant qu'admin je peux inviter un admin", () => {
@@ -28,20 +29,21 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.createUser(user)
 
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
-    cy.testId('member-card-admin').should('have.length', 1)
+    cy.testId('member-card').should('have.length', 1)
     cy.dsfrModalsShouldBeBound()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('jean')
     cy.wait('@getUser')
     cy.testId('invite-member-modal-input-option-0').click()
 
+    cy.testId('base-invite-member-role-select').click()
     cy.testId('base-invite-member-role-member').should('exist')
     cy.testId('base-invite-member-role-admin').should('exist')
-    cy.testId('base-invite-member-role-select').select(1)
+    cy.testId('base-invite-member-role-admin').click()
 
     cy.testId('invite-member-modal-button').click()
     cy.wait('@invite')
-    cy.testId('member-card-admin').should('have.length', 1)
+    cy.testId('member-card').should('have.length', 1)
 
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',
@@ -52,16 +54,24 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.contains(
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
-    cy.contains('Accepter').invoke('attr', 'target', '_self').click()
-
-    cy.url().should('contain', appUrl('/connexion?suivant=/invitations/base/'))
-    cy.signin({ email: user.email })
-    cy.reload()
-    cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}`)
-    cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
-
-    cy.testId('member-card-admin').should('have.length', 2)
-    cy.testId('profile-card').should('not.exist')
+    cy.contains('Accepter')
+      .invoke('attr', 'href')
+      .then((href: string | undefined) => {
+        if (!href) throw new Error('No invitation URL found in email')
+        const emailLinkHref = href.replace(appUrl(''), '')
+        cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+        cy.url().should(
+          'contain',
+          appUrl('/connexion?suivant=/invitations/base/'),
+        )
+        cy.signin({ email: user.email })
+        cy.reload()
+        cy.appUrlShouldBe(emailLinkHref)
+        cy.testId('base-invitation-accept-button').click()
+        cy.wait('@acceptInvitation')
+        cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
+        cy.testId('member-card').should('have.length', 2)
+      })
   })
 
   it("Acceptation 2 - En tant qu'admin je peux changer le role d'un membre", () => {
@@ -75,20 +85,26 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
-    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card').should('have.length', 2)
     cy.testId('remove-member-button').should('have.length', 1)
+
     cy.testId('member-card-role-select').should('have.value', 'member')
     cy.testId('member-card-role-select').select('admin')
 
-    cy.testId('member-card-admin').should('have.length', 2)
+    cy.testId('member-card').should('have.length', 2)
     cy.testId('member-card-role-select').eq(0).should('have.value', 'admin')
-    cy.testId('member-card-role-select').eq(1).should('have.value', 'admin')
+    cy.testId('user-session-member-card-role').should(
+      'have.text',
+      'Administrateur',
+    )
 
-    cy.signin({ email: user.email })
-    cy.testId('member-card-admin').should('have.length', 2)
-    cy.testId('remove-member-button').should('have.length', 2)
+    cy.testId('member-card').should('have.length', 2)
+    cy.testId('remove-member-button').should('have.length', 1)
     cy.testId('member-card-role-select').eq(0).should('have.value', 'admin')
-    cy.testId('member-card-role-select').eq(1).should('have.value', 'admin')
+    cy.testId('user-session-member-card-role').should(
+      'have.text',
+      'Administrateur',
+    )
   })
 
   it('Acceptation 3 - En tant que membre je peux inviter un membre', () => {
@@ -98,15 +114,18 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
-    cy.testId('profile-card').should('have.length', 2)
+    cy.testId('member-card').should('have.length', 2)
     cy.dsfrModalsShouldBeBound()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('jean')
     cy.wait('@getUser')
     cy.testId('invite-member-modal-input-option-0').click()
+
+    cy.testId('base-invite-member-role-select').click()
+
     cy.testId('base-invite-member-role-member').should('exist')
     cy.testId('base-invite-member-role-admin').should('not.exist')
-    cy.testId('base-invite-member-role-select').select(0)
+    cy.testId('base-invite-member-role-member').click()
 
     cy.testId('invite-member-modal-button').click()
 
@@ -121,14 +140,23 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.contains(
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
-    cy.contains('Accepter').invoke('attr', 'target', '_self').click()
-    cy.url().should('contain', appUrl('/connexion?suivant=/invitations/base/'))
-    cy.signin({ email: user.email })
-    cy.reload()
-    cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}`)
-    cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
-
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('have.length', 3)
+    cy.contains('Accepter')
+      .invoke('attr', 'href')
+      .then((href: string | undefined) => {
+        if (!href) throw new Error('No invitation URL found in email')
+        const emailLinkHref = href.replace(appUrl(''), '')
+        cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+        cy.url().should(
+          'contain',
+          appUrl('/connexion?suivant=/invitations/base/'),
+        )
+        cy.signin({ email: user.email })
+        cy.reload()
+        cy.appUrlShouldBe(emailLinkHref)
+        cy.testId('base-invitation-accept-button').click()
+        cy.wait('@acceptInvitation')
+        cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
+        cy.testId('member-card').should('have.length', 3)
+      })
   })
 })

@@ -67,7 +67,6 @@ const CollectionListEdition = ({
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="fr-mt-md-6w fr-mt-3w"
       role="list"

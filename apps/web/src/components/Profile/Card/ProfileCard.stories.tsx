@@ -10,6 +10,7 @@ const profile = {
   image: null,
   firstName: 'Jean',
   lastName: 'Biche',
+  email: 'jean.biche@example.com',
   followedBy: [],
   slug: 'jean-biche',
   _count: { followedBy: 4 },

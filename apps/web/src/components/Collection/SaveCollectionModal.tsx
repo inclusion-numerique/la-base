@@ -51,7 +51,6 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
   >(null)
 
   // targetItem is baseId or "profile"
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   const onSave = async (targetItem: 'profile' | string) => {
     if (!collectionId) {
       return
@@ -86,7 +85,6 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   const onUnsave = async (targetItem: 'profile' | string) => {
     if (!collectionId) {
       return

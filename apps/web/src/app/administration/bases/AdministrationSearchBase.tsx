@@ -1,5 +1,3 @@
-/*  eslint jsx-a11y/no-autofocus: off */
-
 'use client'
 
 import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'

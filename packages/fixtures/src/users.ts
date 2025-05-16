@@ -66,8 +66,8 @@ export const teamAdministrateurs = [
     role: 'Admin',
   }),
   givenUser({
-    id: '526a54d6-5ea1-4aa4-acf3-2f3fe462b3aa',
-    slug: 'kevin-gallet',
+    id: '268a8a1f-cf26-40e0-899d-854ec47df169',
+    slug: 'kevin-gallet-1',
     firstName: 'Kévin',
     lastName: 'Gallet',
     email: 'kevin.gallet@ext.anct.gouv.fr',

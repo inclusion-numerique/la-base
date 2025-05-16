@@ -3,16 +3,19 @@ import {
   baseAuthorization,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import { InviteMemberCommandValidation } from '@app/web/features/base/invitation/db/inviteMember'
+import { sendAcceptedInvitationEmail } from '@app/web/features/base/invitation/emails/acceptedInvitationEmail'
+import { sendDeclinedInvitationEmail } from '@app/web/features/base/invitation/emails/declinedInvitationEmail'
+import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
-import { InviteMemberCommandValidation } from '@app/web/server/baseMembers/inviteMember'
 import { baseSelect } from '@app/web/server/bases/getBase'
-import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import {
   authorizeOrThrow,
   invalidError,
   notFoundError,
 } from '@app/web/server/rpc/trpcErrors'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
 import z from 'zod'
@@ -31,40 +34,75 @@ export const baseMemberRouter = router({
       if (!base) {
         return notFoundError()
       }
-
       authorizeOrThrow(
         baseAuthorization(base, user).hasPermission(
           input.isAdmin ? 'AddBaseAdmin' : 'AddBaseMember',
         ),
       )
 
-      /**
-       * Do not re-add existing members
-       */
-      const memberUserIds = input.members.filter(
-        (id) => !base.members.some((member) => member.member.id === id),
-      )
+      if (input.members && input.members.length > 0) {
+        /**
+         * Do not re-add existing members
+         */
+        const membersIdsAndRole = input.members.filter(
+          (inputMember) =>
+            !base.members.some(
+              (baseMember) => baseMember.member.id === inputMember.id,
+            ),
+        )
+        const membersUserIds = membersIdsAndRole.map((m) => m.id)
 
-      const members = await prismaClient.user.findMany({
-        select: { id: true, email: true },
-        where: { id: { in: memberUserIds } },
-      })
+        const members = await prismaClient.user.findMany({
+          select: { id: true, email: true },
+          where: { id: { in: membersUserIds } },
+        })
 
-      for (const member of members) {
-        const memberId = memberUserIds.find((x) => x === member.id)
-        if (memberId) {
-          const acceptationToken = v4()
-          // eslint-disable-next-line no-await-in-loop
+        for (const member of members) {
+          const memberWithRole = membersIdsAndRole.find(
+            (m) => m.id === member.id,
+          )
+          if (memberWithRole) {
+            const acceptationToken = v4()
+            await prismaClient.baseMembers.create({
+              data: {
+                baseId: input.baseId,
+                isAdmin: memberWithRole.type === 'admin',
+                invitedById: user.id,
+                memberId: memberWithRole.id,
+                acceptationToken,
+              },
+            })
+            sendInviteMemberEmail({
+              baseTitle: base.title,
+              from: user,
+              url: `/invitations/base/${acceptationToken}`,
+              email: member.email,
+            }).catch((error) => Sentry.captureException(error))
+          }
+        }
+      }
+
+      if (input.newMembers && input.newMembers.length > 0) {
+        const acceptationToken = v4()
+        for (const member of input.newMembers) {
+          const slug = await createAvailableSlug('utilisateur', 'users')
+          const createdUser = await prismaClient.user.create({
+            data: {
+              email: member.email,
+              slug,
+            },
+          })
           await prismaClient.baseMembers.create({
             data: {
               baseId: input.baseId,
-              isAdmin: input.isAdmin,
-              memberId,
+              isAdmin: member.type === 'admin',
+              invitedById: user.id,
+              memberId: createdUser.id,
               acceptationToken,
             },
           })
-
           sendInviteMemberEmail({
+            newMember: true,
             baseTitle: base.title,
             from: user,
             url: `/invitations/base/${acceptationToken}`,
@@ -72,6 +110,85 @@ export const baseMemberRouter = router({
           }).catch((error) => Sentry.captureException(error))
         }
       }
+    }),
+  acceptInvitation: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      const invitation = await prismaClient.baseMembers.findUnique({
+        include: {
+          base: { select: { title: true, slug: true } },
+          invitedBy: { select: { email: true } },
+          member: {
+            select: {
+              email: true,
+              name: true,
+              firstName: true,
+              lastName: true,
+            },
+          },
+        },
+        where: { id: input.id },
+      })
+
+      if (!invitation) {
+        return notFoundError()
+      }
+
+      if (invitation.accepted) {
+        return invalidError('Cette invitation a déjà été acceptée')
+      }
+
+      if (invitation.invitedBy) {
+        await sendAcceptedInvitationEmail({
+          url: `/base/${invitation.base.slug}`,
+          baseTitle: invitation.base.title,
+          email: invitation.invitedBy.email,
+          memberName:
+            invitation.member.name ??
+            `${invitation.member.firstName} ${invitation.member.lastName}`,
+        })
+      }
+
+      return prismaClient.baseMembers.update({
+        data: { acceptationToken: null, accepted: new Date() },
+        where: { id: invitation.id },
+      })
+    }),
+  declineInvitation: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      const invitation = await prismaClient.baseMembers.findUnique({
+        include: {
+          base: { select: { title: true } },
+          invitedBy: { select: { email: true } },
+          member: {
+            select: {
+              email: true,
+              name: true,
+              firstName: true,
+              lastName: true,
+            },
+          },
+        },
+        where: { id: input.id },
+      })
+
+      if (!invitation) {
+        return notFoundError()
+      }
+
+      if (invitation.invitedBy) {
+        await sendDeclinedInvitationEmail({
+          baseTitle: invitation.base.title,
+          email: invitation.invitedBy.email,
+          memberName:
+            invitation.member.name ??
+            `${invitation.member.firstName} ${invitation.member.lastName}`,
+        })
+      }
+      return prismaClient.baseMembers.delete({
+        where: { id: input.id },
+      })
     }),
   changeRole: protectedProcedure
     .input(
@@ -118,6 +235,25 @@ export const baseMemberRouter = router({
         where: {
           memberId_baseId: { baseId: input.baseId, memberId: input.memberId },
         },
+      })
+    }),
+  leave: protectedProcedure
+    .input(z.object({ baseId: z.string(), memberId: z.string() }))
+    .mutation(async ({ input, ctx: { user } }) => {
+      const base = await prismaClient.base.findUnique({
+        where: { id: input.baseId },
+        select: {
+          ...baseAuthorizationTargetSelect,
+          ...baseSelect(user),
+        },
+      })
+
+      if (!base) {
+        return notFoundError()
+      }
+
+      return prismaClient.baseMembers.delete({
+        where: { memberId_baseId: input },
       })
     }),
   remove: protectedProcedure

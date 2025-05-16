@@ -141,10 +141,9 @@ describe('onPublished', () => {
       transaction: mockTransaction,
     })
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockTransaction.resource.update).toHaveBeenCalledWith({
       where: { id: resource.id },
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
       data: expect.objectContaining({
         contents: {
           deleteMany: {},
@@ -238,10 +237,9 @@ describe('onPublished', () => {
       transaction: mockTransaction,
     })
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockTransaction.resource.update).toHaveBeenCalledWith({
       where: { id: resource.id },
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
       data: expect.objectContaining({
         contents: {
           deleteMany: {},

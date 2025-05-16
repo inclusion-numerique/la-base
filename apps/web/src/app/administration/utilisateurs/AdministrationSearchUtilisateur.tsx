@@ -1,5 +1,3 @@
-/*  eslint jsx-a11y/no-autofocus: off */
-
 'use client'
 
 import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
