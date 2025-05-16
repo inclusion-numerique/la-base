@@ -39,7 +39,7 @@ const BaseMembers = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-team-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              Membres · {base.members.length}
+              Membres&nbsp;·&nbsp;{base.members.length}
             </h2>
           </div>
         </div>

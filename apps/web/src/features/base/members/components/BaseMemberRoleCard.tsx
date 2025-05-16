@@ -43,9 +43,12 @@ const BaseMemberRoleCard = ({
         ) : (
           <>
             <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
-              INVITATION ENVOYÉE
+              Invitation envoyée
             </Tag>
-            <LeaveBaseMemberButton member={member} title="Refuser" />
+            <LeaveBaseMemberButton
+              member={member}
+              variant="refuse-invitation"
+            />
           </>
         )}
       </div>
@@ -56,7 +59,7 @@ const BaseMemberRoleCard = ({
     return (
       <>
         <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
-          INVITATION ENVOYÉE
+          Invitation envoyée
         </Tag>
         <RemoveBaseMemberButton member={member} />
       </>

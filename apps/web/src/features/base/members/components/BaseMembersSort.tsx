@@ -46,7 +46,7 @@ const BaseMembersSort = ({
     onSelect(option)
   }
 
-  const options: Array<{ label: string; value: BaseMembersSortType }> = [
+  const options: SelectOption<BaseMembersSortType>[] = [
     {
       label: 'Ordre alphabétique',
       value: 'Alphabetique',
