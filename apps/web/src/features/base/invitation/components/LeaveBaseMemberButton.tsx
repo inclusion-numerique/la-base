@@ -10,10 +10,10 @@ import React from 'react'
 
 const LeaveBaseMemberButton = ({
   member,
-  title = 'Quitter',
+  variant = 'leave-base',
 }: {
   member: BaseMember
-  title?: string
+  variant?: 'leave-base' | 'refuse-invitation'
 }) => {
   const mutate = trpc.baseMember.leave.useMutation()
   const router = useRouter()
@@ -28,7 +28,7 @@ const LeaveBaseMemberButton = ({
       createToast({
         priority: 'success',
         message:
-          title === 'Quitter' ? (
+          variant === 'leave-base' ? (
             <>Vous avez quitté la base</>
           ) : (
             <>Vous avez refusé l&apos;invitation</>
@@ -37,8 +37,7 @@ const LeaveBaseMemberButton = ({
     } catch {
       createToast({
         priority: 'error',
-        message:
-          'Une erreur est survenue lorsque vous avez quitté la base, merci de réessayer ultérieurement',
+        message: 'Une erreur est survenue, merci de réessayer ultérieurement',
       })
     }
   }
@@ -46,12 +45,12 @@ const LeaveBaseMemberButton = ({
   return (
     <Button
       priority="tertiary no outline"
-      title={`${title} la base`}
+      title={`${variant === 'leave-base' ? 'Quitter' : 'Refuser'} la base`}
       data-testid="leave-base-member-button"
       size="small"
       onClick={onLeave}
     >
-      {title}
+      {variant === 'leave-base' ? 'Quitter' : 'Refuser'}
       <span className="ri-logout-box-r-line fr-ml-1w" aria-hidden="true" />
     </Button>
   )
