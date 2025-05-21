@@ -3,7 +3,6 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import InviteUserType from '@app/web/features/base/invitation/components/InviteUserType'
 import { trpc } from '@app/web/trpc'
 import React, {
   type Dispatch,
@@ -84,7 +83,6 @@ const InviteUsers = ({
         lastName: user.lastName,
       },
       component: <InviteMemberCard user={user} />,
-      type: selectedMemberType,
     })) ?? []
 
   return (
@@ -101,13 +99,6 @@ const InviteUsers = ({
         withBadges={withBadges}
         canAddAdmin={canAddAdmin}
       />
-      <div className={styles.select}>
-        <InviteUserType
-          onChange={handleSelectUserType}
-          selectedMemberType={selectedMemberType}
-          canAddAdmin={canAddAdmin}
-        />
-      </div>
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">
           {error.message}

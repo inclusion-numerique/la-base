@@ -8,7 +8,6 @@ import InviteBaseMemberRow from '@app/web/features/base/members/components/Invit
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import React, {
-  ChangeEvent,
   type ReactNode,
   useCallback,
   useMemo,
