@@ -21,10 +21,6 @@
   box-shadow: unset;
 }
 
-.internalInputWidth {
-  width: 60%;
-}
-
 .icon {
   position: absolute;
   right: 8px;
