@@ -14,19 +14,11 @@
   border: none;
 }
 
-.inputContainerMaxWidth {
-  max-width: 438px;
-}
-
 .internalInput {
   outline-width: 0;
   height: 40px;
   padding: 0;
   box-shadow: unset;
-}
-
-.internalInputWidth {
-  width: 60%;
 }
 
 .icon {

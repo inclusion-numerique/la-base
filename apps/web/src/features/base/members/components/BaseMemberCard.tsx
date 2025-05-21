@@ -1,5 +1,6 @@
 'use client'
 
+import EmptyUserAvatar from '@app/web/components/EmptyUserAvatar'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import BaseMemberRoleCard from '@app/web/features/base/members/components/BaseMemberRoleCard'
@@ -39,7 +40,11 @@ const BaseMemberCard = ({
   return (
     <div className="fr-border-top" data-testid="member-card">
       <div className="fr-enlarge-link fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">
-        <RoundProfileImage user={member.member} />
+        {member.member.name ? (
+          <RoundProfileImage user={member.member} />
+        ) : (
+          <EmptyUserAvatar />
+        )}
         <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full fr-align-items-center">
           <Link
             className="fr-p-1v fr-flex-grow-1"

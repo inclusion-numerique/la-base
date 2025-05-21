@@ -3,7 +3,6 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import InviteUserType from '@app/web/features/base/invitation/components/InviteUserType'
 import { trpc } from '@app/web/trpc'
 import React, {
   type Dispatch,
@@ -15,7 +14,6 @@ import React, {
 import { FieldError } from 'react-hook-form'
 import InviteMemberCard from '../../../../components/InviteUserCard'
 import MultipleSearchableSelect from '../../../../components/MultipleSearchableSelect'
-import styles from './InviteUsers.module.css'
 
 const InviteUsers = ({
   label,
@@ -25,8 +23,8 @@ const InviteUsers = ({
   baseId,
   resourceId,
   disabled,
-  handleSelectUserType,
   selectedMemberType,
+  withBadges = true,
   canAddAdmin,
 }: {
   label: string
@@ -38,6 +36,7 @@ const InviteUsers = ({
   disabled?: boolean
   handleSelectUserType?: (type: string) => void
   selectedMemberType: 'admin' | 'member'
+  withBadges?: boolean
   canAddAdmin: boolean
 }) => {
   const [userSearchQuery, setUserSearchQuery] = useState('')
@@ -77,8 +76,13 @@ const InviteUsers = ({
     users?.map((user) => ({
       label: user.name ?? '',
       value: user.id,
+      extra: {
+        email: user.email,
+        image: user.image,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
       component: <InviteMemberCard user={user} />,
-      type: selectedMemberType,
     })) ?? []
 
   return (
@@ -92,15 +96,9 @@ const InviteUsers = ({
         onInputChange={setUserSearchQuery}
         selectedMemberType={selectedMemberType}
         options={userOptions}
-        withSelectTypeMember={!!handleSelectUserType}
+        withBadges={withBadges}
+        canAddAdmin={canAddAdmin}
       />
-      <div className={styles.select}>
-        <InviteUserType
-          onChange={handleSelectUserType}
-          selectedMemberType={selectedMemberType}
-          canAddAdmin={canAddAdmin}
-        />
-      </div>
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">
           {error.message}

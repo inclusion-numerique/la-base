@@ -62,8 +62,8 @@ const InviteBaseMemberButton = ({
 
     try {
       await mutate.mutateAsync(data)
-      close()
       router.refresh()
+      close()
       createToast({
         priority: 'success',
         message: (
@@ -78,7 +78,7 @@ const InviteBaseMemberButton = ({
     }
   }
 
-  const isLoading = mutate.isSuccess || mutate.isSuccess
+  const isLoading = mutate.isSuccess || mutate.isPending
   const handleSelectUserType = (type: string) =>
     form.setValue('isAdmin', type === 'admin')
 
@@ -138,7 +138,7 @@ const InviteBaseMemberButton = ({
                   control={form.control}
                   name="members"
                   render={({ fieldState: { error } }) => (
-                    <div>
+                    <div className="fr-flex fr-direction-column fr-flex-gap-4v">
                       <InviteUsers
                         disabled={isLoading}
                         label="Ajouter un membre"
@@ -148,6 +148,7 @@ const InviteBaseMemberButton = ({
                         baseId={base.id}
                         handleSelectUserType={handleSelectUserType}
                         selectedMemberType={selectedMemberType}
+                        withBadges={false}
                         canAddAdmin={canAddAdmin}
                       />
                       <Button
@@ -156,8 +157,9 @@ const InviteBaseMemberButton = ({
                           'data-testid': 'invite-member-modal-button',
                         }}
                         {...buttonLoadingClassname(!!isLoading, styles.button)}
+                        size="large"
                       >
-                        Inviter
+                        Inviter les membres
                       </Button>
                     </div>
                   )}

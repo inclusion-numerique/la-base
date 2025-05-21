@@ -83,8 +83,25 @@ export const baseMemberRouter = router({
       }
 
       if (input.newMembers && input.newMembers.length > 0) {
-        const acceptationToken = v4()
-        for (const member of input.newMembers) {
+        const existingUsers = await prismaClient.user.findMany({
+          where: {
+            email: {
+              in: input.newMembers.map((member) => member.email),
+            },
+          },
+        })
+        /**
+         * Do not re-create existing users
+         */
+        const users = input.newMembers.filter(
+          (inputMember) =>
+            !existingUsers.some(
+              (existingUser) => existingUser.email === inputMember.email,
+            ),
+        )
+
+        for (const member of users) {
+          const acceptationToken = v4()
           const slug = await createAvailableSlug('utilisateur', 'users')
           const createdUser = await prismaClient.user.create({
             data: {

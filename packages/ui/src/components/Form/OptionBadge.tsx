@@ -3,9 +3,11 @@ import React, { MouseEventHandler } from 'react'
 import styles from './OptionBadge.module.css'
 import { SelectOption } from './utils/options'
 
-export type SelectOptionValid = SelectOption<string> & {
+export type SelectOptionValid<
+  E extends Record<string, unknown> = Record<string, unknown>,
+> = SelectOption<string, E> & {
   invalid?: boolean
-  type?: 'admin' | 'member'
+  type: 'admin' | 'member'
 }
 
 export const OptionBadge = ({

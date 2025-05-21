@@ -1,4 +1,5 @@
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import { Fragment, RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './InviteUserType.module.css'
@@ -8,7 +9,7 @@ const InviteUserType = ({
   canAddAdmin,
   selectedMemberType,
 }: {
-  onChange?: (type: string) => void
+  onChange?: (type: 'admin' | 'member') => void
   canAddAdmin: boolean
   selectedMemberType: 'admin' | 'member'
 }) => {
@@ -35,19 +36,23 @@ const InviteUserType = ({
       : []),
   ]
   const handleOnChange = (value: string) => {
-    onChange?.(value)
+    onChange?.(value as 'admin' | 'member')
     setOpen(false)
   }
   return (
     <div className={styles.container} ref={optionsRef}>
       {!!onChange && (
         <Button
-          className={styles.button}
+          className={classNames(
+            styles.button,
+            'fr-text--semi-bold fr-text-label--blue-france',
+          )}
           priority="tertiary"
           iconId={`fr-icon-arrow-${open ? 'up' : 'down'}-s-line`}
           iconPosition="right"
           onClick={() => setOpen(!open)}
           type="button"
+          size="small"
           data-testid="base-invite-member-role-select"
         >
           {selectedMemberType === 'admin' ? 'Administrateur' : 'Contributeur'}

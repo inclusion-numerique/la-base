@@ -222,7 +222,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
                     error={error}
                     onChange={handleOnChange}
                     selectedMemberType="member"
-                    canAddAdmin={false}
+                    canAddAdmin={true}
                   />
                 )
               }}

@@ -10,7 +10,6 @@
 }
 
 .button {
-  position: absolute;
-  right: 0;
-  top: 40px;
+  width: 100%;
+  justify-content: center;
 }

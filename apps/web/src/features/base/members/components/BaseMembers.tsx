@@ -24,9 +24,10 @@ const BaseMembers = ({
   user: SessionUser | null
   sortBy: BaseMembersSortType
 }) => {
-  const adminCount = base.members.filter((member) => member.isAdmin).length
-  const contributorsCount = base.members.filter(
-    (member) => !member.isAdmin && member.accepted,
+  const acceptedMembers = base.members.filter((member) => member.accepted)
+  const adminCount = acceptedMembers.filter((member) => member.isAdmin).length
+  const contributorsCount = acceptedMembers.filter(
+    (member) => !member.isAdmin,
   ).length
   const invitationsCount = base.members.filter(
     (member) => !member.accepted,
@@ -39,7 +40,7 @@ const BaseMembers = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-team-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              Membres&nbsp;·&nbsp;{base.members.length}
+              Membres&nbsp;·&nbsp;{acceptedMembers.length}
             </h2>
           </div>
         </div>
