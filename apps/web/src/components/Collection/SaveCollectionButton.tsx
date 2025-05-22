@@ -1,5 +1,4 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
 import { loginUrl } from '@app/web/security/login'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -44,7 +43,7 @@ const SaveCollectionButton = ({
     (savedCollection) => savedCollection.collectionId === collection.id,
   )
 
-  const userBases = user ? getBasesFromSessionUser(user) : null
+  const userBases = user ? user.bases.map(({ base }) => base) : null
 
   const alreadySavedInBases = !!userBases?.some((base) =>
     base.savedCollections.some(

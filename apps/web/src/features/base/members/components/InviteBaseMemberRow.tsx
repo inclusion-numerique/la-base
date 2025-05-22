@@ -3,7 +3,6 @@ import EmptyUserAvatar from '@app/web/components/EmptyUserAvatar'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import InviteBaseMemberRoleCard from '@app/web/features/base/members/components/InviteBaseMemberRoleCard'
 import classNames from 'classnames'
-import { ChangeEvent } from 'react'
 import styles from './InviteBaseMemberRow.module.css'
 
 const InviteBaseMemberRow = ({

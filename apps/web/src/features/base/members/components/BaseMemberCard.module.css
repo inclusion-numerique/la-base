@@ -1,0 +1,11 @@
+.container {
+  gap: 10px;
+}
+
+.role {
+  margin-top: 0 !important;
+}
+
+.link {
+  background-image: none;
+}

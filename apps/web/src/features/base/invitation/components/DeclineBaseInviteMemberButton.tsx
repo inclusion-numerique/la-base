@@ -8,17 +8,11 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-const LeaveBaseMemberButton = ({
-  member,
-  variant = 'leave-base',
-}: {
-  member: BaseMember
-  variant?: 'leave-base' | 'refuse-invitation'
-}) => {
+const DeclineBaseInviteMemberButton = ({ member }: { member: BaseMember }) => {
   const mutate = trpc.baseMember.leave.useMutation()
   const router = useRouter()
 
-  const onLeave = async () => {
+  const onDecline = async () => {
     try {
       await mutate.mutateAsync({
         baseId: member.baseId,
@@ -27,12 +21,7 @@ const LeaveBaseMemberButton = ({
       router.refresh()
       createToast({
         priority: 'success',
-        message:
-          variant === 'leave-base' ? (
-            <>Vous avez quitté la base</>
-          ) : (
-            <>Vous avez refusé l&apos;invitation</>
-          ),
+        message: <>Vous avez refusé l&apos;invitation</>,
       })
     } catch {
       createToast({
@@ -45,15 +34,15 @@ const LeaveBaseMemberButton = ({
   return (
     <Button
       priority="tertiary no outline"
-      title={`${variant === 'leave-base' ? 'Quitter' : 'Refuser'} la base`}
-      data-testid="leave-base-member-button"
+      title="Refuser l'invitation à la base"
+      data-testid="decline-base-invitation-member-button"
       size="small"
-      onClick={onLeave}
+      onClick={onDecline}
     >
-      {variant === 'leave-base' ? 'Quitter' : 'Refuser'}
+      Refuser
       <span className="ri-logout-box-r-line fr-ml-1w" aria-hidden="true" />
     </Button>
   )
 }
 
-export default withTrpc(LeaveBaseMemberButton)
+export default withTrpc(DeclineBaseInviteMemberButton)
