@@ -70,18 +70,9 @@ export const inviteMember = {
               border-color="#DDD"
             />
             <MjmlButton width="100%" href={emailAssetUrl(url)}>
-              Accepter l&lsquo;invitation
+              Voir l&apos;invitation
             </MjmlButton>
 
-            <MjmlButton
-              width="100%"
-              href={emailAssetUrl(url)}
-              backgroundColor="white"
-              border="solid 1px #000091"
-              color={brandColor}
-            >
-              Refuser l&lsquo;invitation
-            </MjmlButton>
             <MjmlSpacer height="32px" />
           </MjmlColumn>
         </MjmlSection>

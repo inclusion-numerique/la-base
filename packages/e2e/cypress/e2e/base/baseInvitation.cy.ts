@@ -54,12 +54,14 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.contains(
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
-    cy.contains('Accepter')
+    cy.contains("Voir l'invitation")
       .invoke('attr', 'href')
       .then((href: string | undefined) => {
         if (!href) throw new Error('No invitation URL found in email')
         const emailLinkHref = href.replace(appUrl(''), '')
-        cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+        cy.contains("Voir l'invitation")
+          .invoke('attr', 'target', '_self')
+          .click()
         cy.url().should(
           'contain',
           appUrl('/connexion?suivant=/invitations/base/'),
@@ -140,12 +142,14 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.contains(
       `Vous êtes invité par Jean Biche à rejoindre la base ${defaultTestBaseTitle}.`,
     )
-    cy.contains('Accepter')
+    cy.contains("Voir l'invitation")
       .invoke('attr', 'href')
       .then((href: string | undefined) => {
         if (!href) throw new Error('No invitation URL found in email')
         const emailLinkHref = href.replace(appUrl(''), '')
-        cy.contains('Accepter').invoke('attr', 'target', '_self').click()
+        cy.contains("Voir l'invitation")
+          .invoke('attr', 'target', '_self')
+          .click()
         cy.url().should(
           'contain',
           appUrl('/connexion?suivant=/invitations/base/'),
