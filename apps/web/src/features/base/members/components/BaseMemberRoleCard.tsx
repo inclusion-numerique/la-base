@@ -19,13 +19,6 @@ const BaseMemberRoleCard = ({
   onChange,
   canChangeMemberRole,
 }: MemberRoleDisplayProps) => {
-  console.log(
-    'canChangeMemberRole',
-    canChangeMemberRole,
-    isAdmin,
-    isSessionUser,
-    canChangeMemberRole,
-  )
   if (!isSessionUser && !canChangeMemberRole && member.accepted) {
     return (
       <div className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text">
