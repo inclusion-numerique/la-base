@@ -72,10 +72,11 @@ const BaseMembers = ({
       </div>
       {base.members.map((member) => (
         <BaseMemberCard
+          base={base}
           canChangeMemberRole={canChangeMemberRole}
           member={member}
           key={member.member.id}
-          isSessionUser={user?.id === member.member.id}
+          user={user}
         />
       ))}
     </div>

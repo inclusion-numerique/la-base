@@ -18,7 +18,6 @@ export const getBasePageContext = cache(
     }
 
     const authorization = baseAuthorization(base, user)
-
     if (
       !authorization.hasPermission(BasePermissions.ReadGeneralBaseInformation)
     ) {
