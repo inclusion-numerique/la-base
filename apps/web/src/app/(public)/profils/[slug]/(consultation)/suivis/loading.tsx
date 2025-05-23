@@ -7,7 +7,6 @@ const LoadingProfileSuivisPage = () => (
       <h2 className="fr-mb-0 fr-h3">Mes suivi</h2>
     </div>
     {Array.from({ length: 8 }).map((_, index) => (
-      // eslint-disable-next-line react/no-array-index-key
       <ProfileCardSkeleton key={index} />
     ))}
   </div>

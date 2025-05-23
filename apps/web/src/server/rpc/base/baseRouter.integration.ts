@@ -80,7 +80,6 @@ describe('baseRouter', () => {
           data: UpdateBaseVisibilityCommand
         },
         user?: SessionUser,
-        // eslint-disable-next-line unicorn/consistent-function-scoping
       ) =>
         baseRouter
           .createCaller(createTestContext({ user: user ?? givenUser }))

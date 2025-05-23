@@ -20,7 +20,6 @@ const MinimalFooter = async () => {
     >
       <ul className="fr-footer__bottom-list">
         {...publicFooterProps.bottomItems.map((bottomItem, index) => (
-          // eslint-disable-next-line react/no-array-index-key
           <li className="fr-footer__bottom-item" key={index}>
             {'text' in bottomItem ? (
               <FooterBottomItem bottomItem={bottomItem} />

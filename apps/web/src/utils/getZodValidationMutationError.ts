@@ -9,9 +9,7 @@ export const getZodValidationMutationError = (error: unknown) => {
     !('data' in error) ||
     // If key is defined but value is undefined
     !error.data ||
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     error.data.code !== 'BAD_REQUEST' ||
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     error.data.httpStatus !== 400
   ) {
     return

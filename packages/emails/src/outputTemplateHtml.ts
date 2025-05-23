@@ -38,7 +38,6 @@ export function createHtmlTemplateOutput(
 ): (htmlContent: string) => Promise<void> {
   let index = 0
   return (htmlContent: string): Promise<void> =>
-    // eslint-disable-next-line no-plusplus
     outputHtmlTemplate(`${templateName}_${index++}`, htmlContent)
 }
 
@@ -51,6 +50,5 @@ export function createMjmlTemplateOutput(
 ): (templateName: string) => Promise<void> {
   let index = 0
   return (mjmlTemplate: string): Promise<void> =>
-    // eslint-disable-next-line no-plusplus
     outputMjmlTemplate(`${templateName}_${index++}`, mjmlTemplate)
 }

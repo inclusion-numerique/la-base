@@ -101,7 +101,6 @@ describe('AddContentCommandValidation', () => {
 
     sectionTitleFailUseCases(validSectionTitleCommand).map(
       ({ name, values, errors }) =>
-        // eslint-disable-next-line jest/valid-title
         it(name, () =>
           expectZodValidationToFail(
             AddContentCommandValidation,
@@ -128,14 +127,12 @@ describe('AddContentCommandValidation', () => {
       })
       expect(result.success).toEqual(true)
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: Success is true
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
       expect(result.data.payload.text).toEqual('<b>Broken html</b>')
     })
 
     textFailUseCases(validTextCommand).map(({ name, values, errors }) =>
-      // eslint-disable-next-line jest/valid-title
       it(name, () =>
         expectZodValidationToFail(
           AddContentCommandValidation,
@@ -181,7 +178,6 @@ describe('AddContentCommandValidation', () => {
     })
 
     linkFailUseCases(validLinkCommand).map(({ name, values, errors }) =>
-      // eslint-disable-next-line jest/valid-title
       it(name, () =>
         expectZodValidationToFail(
           AddContentCommandValidation,

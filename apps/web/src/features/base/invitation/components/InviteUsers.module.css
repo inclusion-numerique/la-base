@@ -1,0 +1,11 @@
+.select {
+  position: absolute;
+  right: 98px;
+  height: 100%;
+  top: 40px;
+
+  select {
+    appearance: auto;
+    font-weight: 500 !important;
+  }
+}

@@ -4,7 +4,6 @@ export const runPromisesSequentially = async <T>(
   const result: Awaited<T>[] = []
 
   for (const promise of promises) {
-    // eslint-disable-next-line no-await-in-loop
     result.push(await promise)
   }
 

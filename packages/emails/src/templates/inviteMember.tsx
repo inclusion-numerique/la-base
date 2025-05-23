@@ -1,10 +1,11 @@
 import Explanations from '@app/emails/components/Explanations'
 import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
 import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import { backgroundColor } from '@app/emails/styles'
+import { backgroundColor, brandColor } from '@app/emails/styles'
 import {
   MjmlButton,
   MjmlColumn,
+  MjmlDivider,
   MjmlSection,
   MjmlSpacer,
   MjmlText,
@@ -14,14 +15,15 @@ import React from 'react'
 
 export const inviteMember = {
   text: ({ url, baseTitle }: { url: string; baseTitle: string }): string =>
-    // eslint-disable-next-line no-irregular-whitespace
     `Pour accepter l'invitation à la base ${baseTitle}, merci d'utiliser le lien suivant :\n${url}\n\n`,
   mjml: ({
     url,
     baseTitle,
+    newMember,
     from,
   }: {
     url: string
+    newMember: boolean
     baseTitle: string
     from: string
   }): string =>
@@ -32,9 +34,23 @@ export const inviteMember = {
       >
         <MjmlSection paddingTop={0}>
           <MjmlColumn>
+            <MjmlText
+              fontWeight="700"
+              fontSize="28px"
+              color="#000091"
+              lineHeight="36px"
+            >
+              {newMember ? (
+                <>
+                  Invitation à rejoindre une base sur <br /> Les Bases du
+                  numérique d&apos;intérêt général
+                </>
+              ) : (
+                <>Invitation à rejoindre la base {baseTitle}</>
+              )}
+            </MjmlText>
             <MjmlText fontWeight="700" fontSize="20px" color="#3A3A3A">
               Bonjour,
-              <br />
               <br />
               Vous êtes invité par {from} à rejoindre la base {baseTitle}.
             </MjmlText>
@@ -44,12 +60,19 @@ export const inviteMember = {
               <br />
               <br />- Créer & publier des ressources
               <br />- Contribuer à des ressources publiés sur cette base
-              <br />- Inviter d’autres membres
+              <br />- Voir les ressources privées
+              <br />- Inviter d&apos;autres membres
             </MjmlText>
             <MjmlSpacer height="32px" />
+            <MjmlDivider
+              border-width="1px"
+              border-style="solid"
+              border-color="#DDD"
+            />
             <MjmlButton width="100%" href={emailAssetUrl(url)}>
-              Accepter l&lsquo;invitation
+              Voir l&apos;invitation
             </MjmlButton>
+
             <MjmlSpacer height="32px" />
           </MjmlColumn>
         </MjmlSection>

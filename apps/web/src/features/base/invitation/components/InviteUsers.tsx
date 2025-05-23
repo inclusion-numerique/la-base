@@ -1,6 +1,6 @@
 'use client'
 
-import type { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
@@ -11,9 +11,9 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import type { FieldError } from 'react-hook-form'
-import InviteMemberCard from './InviteUserCard'
-import MultipleSearchableSelect from './MultipleSearchableSelect'
+import { FieldError } from 'react-hook-form'
+import InviteMemberCard from '../../../../components/InviteUserCard'
+import MultipleSearchableSelect from '../../../../components/MultipleSearchableSelect'
 
 const InviteUsers = ({
   label,
@@ -23,14 +23,21 @@ const InviteUsers = ({
   baseId,
   resourceId,
   disabled,
+  selectedMemberType,
+  withBadges = true,
+  canAddAdmin,
 }: {
   label: string
   setEmailsError: Dispatch<SetStateAction<boolean>>
   error?: FieldError
-  onChange: (event: string[]) => void
+  onChange: (event: SelectOptionValid[]) => void
   baseId?: string
   resourceId?: string
   disabled?: boolean
+  handleSelectUserType?: (type: string) => void
+  selectedMemberType: 'admin' | 'member'
+  withBadges?: boolean
+  canAddAdmin: boolean
 }) => {
   const [userSearchQuery, setUserSearchQuery] = useState('')
 
@@ -49,7 +56,7 @@ const InviteUsers = ({
 
   const onSelect = useCallback(
     (selections: SelectOptionValid[]) => {
-      onChange(selections.map((selection) => selection.value))
+      onChange(selections)
       setEmailsError(selections.some((selection) => selection.invalid))
     },
     [setEmailsError, onChange],
@@ -69,6 +76,12 @@ const InviteUsers = ({
     users?.map((user) => ({
       label: user.name ?? '',
       value: user.id,
+      extra: {
+        email: user.email,
+        image: user.image,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
       component: <InviteMemberCard user={user} />,
     })) ?? []
 
@@ -81,7 +94,10 @@ const InviteUsers = ({
         placeholder="Adresse email, nom de profil"
         onSelect={onSelect}
         onInputChange={setUserSearchQuery}
+        selectedMemberType={selectedMemberType}
         options={userOptions}
+        withBadges={withBadges}
+        canAddAdmin={canAddAdmin}
       />
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">

@@ -26,7 +26,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
 
@@ -36,7 +36,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
 

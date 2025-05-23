@@ -14,7 +14,6 @@ export const useFileUpload = () => {
   const [uploading, setUploading] = useState<boolean>(false)
 
   const progressEmitterRef = useRef(
-    // eslint-disable-next-line unicorn/prefer-event-target
     new EventEmitter<'progress', number | null>(),
   )
 

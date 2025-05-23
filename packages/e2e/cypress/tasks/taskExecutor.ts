@@ -34,7 +34,6 @@ const taskExecutor = async () => {
   if (!executor) {
     throw new Error(`No task executor found for ${task}`)
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return executor(parsedInput as never)
 }
 
@@ -43,14 +42,11 @@ taskExecutor()
     // Output result must be the last stdout output to pass to other process
     // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
     console.log(encodeSerializableState(result))
-    // eslint-disable-next-line unicorn/no-process-exit
     process.exit(0)
   })
-  // eslint-disable-next-line unicorn/prefer-top-level-await
   .catch((error) => {
     // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
     console.error(error)
     logToFile({ error: error as unknown })
-    // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1)
   })

@@ -1,10 +1,11 @@
 'use client'
 
+import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import InviteUsers from '@app/web/components/InviteUsers'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import {
   type InviteContributorCommand,
   InviteContributorCommandValidation,
@@ -17,7 +18,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteResourceContributors.module.css'
 
@@ -86,6 +87,10 @@ const InviteResourceContributors = ({
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)
     }
   }
+  const handleOnChange = (options: SelectOptionValid[]) => {
+    const resourceContributors = options.map((opt) => opt.value)
+    return form.setValue('contributors', resourceContributors)
+  }
 
   return (
     <>
@@ -95,13 +100,15 @@ const InviteResourceContributors = ({
             <Controller
               control={form.control}
               name="contributors"
-              render={({ field: { onChange }, fieldState: { error } }) => (
+              render={({ fieldState: { error } }) => (
                 <InviteUsers
                   label="Ajouter un membre"
                   setEmailsError={setEmailsError}
                   error={error}
-                  onChange={onChange}
+                  onChange={handleOnChange}
                   resourceId={resource.id}
+                  selectedMemberType="member"
+                  canAddAdmin={false}
                 />
               )}
             />

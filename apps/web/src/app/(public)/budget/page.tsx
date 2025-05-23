@@ -2,7 +2,6 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
-/* eslint jsx-a11y/control-has-associated-label: 0  */
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

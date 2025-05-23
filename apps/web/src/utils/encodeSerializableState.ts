@@ -13,7 +13,6 @@ import superjson from 'superjson'
  * - Decode the Base64 string from the URL to prefill the form with the original data.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type EncodedState<T> = string & { __encodedStateType: T }
 
 export const encodeSerializableState = <T>(formState: T): EncodedState<T> => {

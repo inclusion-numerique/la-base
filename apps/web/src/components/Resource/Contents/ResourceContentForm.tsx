@@ -164,7 +164,6 @@ const ResourceContentForm = React.forwardRef(
         break
       }
       default: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Invalid content type ${type}`)
       }
     }
