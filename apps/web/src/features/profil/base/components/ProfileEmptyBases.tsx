@@ -5,7 +5,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import Link from 'next/link'
 import React from 'react'
-import { CreateBaseButton } from '../CreateBaseButton'
+import { CreateBaseButton } from '../../../../components/Base/CreateBaseButton'
 
 const EmptyBases = ({
   canWrite,

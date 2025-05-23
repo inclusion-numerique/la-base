@@ -40,10 +40,7 @@ const getWhereBasesProfileList = (
   user?: Pick<SessionUser, 'id'> | null,
 ) =>
   getWhereBasesList(user, {
-    OR: [
-      { createdById: profileId },
-      { members: { some: { memberId: profileId } } },
-    ],
+    OR: [{ members: { some: { memberId: profileId } } }],
   })
 
 const getWhereBasesQuery = (
@@ -140,7 +137,30 @@ export const getProfileBases = async (
 ) => {
   const where = getWhereBasesProfileList(profileId, user)
   return prismaClient.base.findMany({
-    select: baseSelect(user),
+    select: {
+      ...baseSelect(user),
+      resources: {
+        include: {
+          contributors: {
+            select: {
+              contributorId: true,
+            },
+          },
+        },
+      },
+      members: {
+        where: {
+          accepted: { not: null },
+        },
+        select: {
+          baseId: true,
+          accepted: true,
+          memberId: true,
+          member: true,
+          isAdmin: true,
+        },
+      },
+    },
     where,
   })
 }
@@ -165,6 +185,8 @@ export const getBases = async ({
   })
 }
 
+export type ProfileBasesList = Awaited<ReturnType<typeof getProfileBases>>
+
 export const getBasesCount = ({
   user,
   query,
@@ -176,7 +198,16 @@ export const getBasesCount = ({
     where: getWhereBasesList(user, getWhereBasesQuery(query)),
   })
 
-export type BaseListItem = Exclude<
+export type BaseListItemWithAllFields = Exclude<
   Awaited<ReturnType<typeof getProfileBases>>,
   null
 >[number]
+
+type OptionalFields = {
+  resources?: BaseListItemWithAllFields['resources']
+  members?: BaseListItemWithAllFields['members']
+}
+
+type RequiredFields = Omit<BaseListItemWithAllFields, 'resources' | 'members'>
+
+export type BaseListItem = RequiredFields & OptionalFields

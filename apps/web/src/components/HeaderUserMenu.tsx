@@ -5,10 +5,9 @@ import { canAccessAdministration } from '@app/web/authorization/administrationAu
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import Link from 'next/link'
 import React from 'react'
-import { getBasesFromSessionUser } from '../bases/getBasesFromSessionUser'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
-  const bases = user ? getBasesFromSessionUser(user) : []
+  const bases = user.bases.map(({ base }) => base)
 
   return (
     <ul>

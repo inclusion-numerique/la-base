@@ -5,7 +5,6 @@ import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import {
   CreateResourceDynamicModal,
   createResourceModalId,
@@ -50,7 +49,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
 
   const { baseId } = CreateResourceDynamicModal.useState()
 
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
 
   // Auto open modal when create is in search params and the modal is bound
   useEffect(() => {

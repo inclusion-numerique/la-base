@@ -1,0 +1,12 @@
+/* Accordion overrides */
+.accordion :global(.fr-accordion__btn) {
+  padding: 1.5rem 1rem !important;
+}
+
+.accordion :global(.fr-accordion__btn[aria-expanded='true']:hover) {
+  background-color: #ededed;
+}
+
+.accordion :global(.fr-accordion__btn[aria-expanded='true']) {
+  background-color: #f6f6f6;
+}
