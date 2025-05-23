@@ -5,6 +5,7 @@ import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import Options from '@app/ui/components/SearchableSelect/Options'
 import InviteBaseMemberRow from '@app/web/features/base/members/components/InviteBaseMemberRow'
+import { Button } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import React, {
   ChangeEvent,
@@ -198,7 +199,7 @@ const MultipleSearchableSelect = ({
           {hint && <span className="fr-hint-text">{hint}</span>}
         </label>
         <div className={styles.input}>
-          <div className="fr-flex fr-align-items-center fr-justify-content-space-between">
+          <div className="fr-flex fr-align-items-center fr-justify-content-space-between fr-flex-gap-4v">
             <div className={classNames('fr-input', styles.inputContainer)}>
               <input
                 type="text"
@@ -240,6 +241,16 @@ const MultipleSearchableSelect = ({
                 }}
               />
             </div>
+            <Button
+              type="button"
+              nativeButtonProps={{
+                onClick: () => {
+                  selectFirstResult(selectedIndex)
+                },
+              }}
+            >
+              Ajouter
+            </Button>
           </div>
           <div
             ref={optionsContainerRef}
