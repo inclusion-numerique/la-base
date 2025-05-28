@@ -1,6 +1,6 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { LeaveBaseButton } from '@app/web/features/base/components/LeaveBaseButton'
-import { BaseListItemWithAllFields } from '@app/web/server/bases/getBasesList'
+import { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import classNames from 'classnames'
 import styles from './ProfileBaseMemberRoleCard.module.css'
@@ -12,7 +12,7 @@ const ProfileBaseMemberRoleCard = ({
   isOwner,
 }: {
   profile: ProfilePageData
-  base: BaseListItemWithAllFields
+  base: BaseProfileListItemWithAllFields
   user: SessionUser | null
   isOwner: boolean
 }) => {

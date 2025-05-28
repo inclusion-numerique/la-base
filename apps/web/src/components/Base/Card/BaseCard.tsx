@@ -1,8 +1,9 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import BaseMetadata from '@app/web/components/Base/BaseMetadata'
 import BaseImage from '@app/web/components/BaseImage'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import BaseMetadata from '@app/web/features/base/components/BaseMetadata'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
+import type { BasesSearchResultListItem } from '@app/web/server/search/executeSearch'
 import { getDepartmentName } from '@app/web/utils/departments'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -15,7 +16,7 @@ const BaseCard = ({
   compact = false,
   titleAs: BaseTitle = 'h2',
 }: {
-  base: BaseListItem
+  base: BasesSearchResultListItem | BaseProfileListItem
   user: SessionUser | null
   compact?: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -60,6 +61,7 @@ const BaseCard = ({
         base={base}
         withBadge={!base.isPublic}
         smallBadge
+        context="card"
       />
     </div>
     <div>
