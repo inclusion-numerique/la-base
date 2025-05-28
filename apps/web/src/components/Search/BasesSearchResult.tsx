@@ -1,6 +1,6 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { numberToString } from '@app/web/utils/formatNumber'
 import React, { type ReactNode } from 'react'
 import BaseCard from '../Base/Card/BaseCard'
@@ -14,7 +14,7 @@ const BasesSearchResult = ({
   children,
 }: {
   totalCount: number
-  bases: BaseListItem[]
+  bases: BaseProfileListItem[]
   user: SessionUser | null
   children: ReactNode
 }) => (

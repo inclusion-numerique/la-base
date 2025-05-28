@@ -1,5 +1,5 @@
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import type { Meta, StoryObj } from '@storybook/react'
 import { FeaturedBase } from './FeaturedBase'
 
@@ -63,8 +63,8 @@ const base = {
   },
   coverImage: null,
   followedBy: [],
-  _count: { resources: 8, followedBy: 4 },
-} satisfies BaseListItem
+  _count: { resources: 8, followedBy: 4, resourcesViews: 10 },
+} satisfies BaseProfileListItem
 
 export const FeaturedBaseCard: Story = {
   args: { base, user: null },

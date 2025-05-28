@@ -134,6 +134,7 @@ export const baseSelect = (
     _count: {
       select: {
         followedBy: true,
+        resources: true,
       },
     },
   }) satisfies Prisma.BaseSelect
@@ -153,12 +154,25 @@ export const basePageQuery = async (
     select: baseSelect(user, membersOrderBy),
     where: { slug, deleted: null },
   })
+  const resourceViews = await prismaClient.resource.aggregate({
+    where: {
+      ...computeResourcesListWhereForUser(user),
+      baseId: basePage?.id,
+    },
+    _sum: {
+      viewsCount: true,
+    },
+  })
 
   return basePage == null
     ? null
     : {
         ...basePage,
         resources: basePage.resources.map(toResourceWithFeedbackAverage),
+        _count: {
+          ...basePage._count,
+          resourcesViews: resourceViews._sum.viewsCount ?? 0,
+        },
       }
 }
 

@@ -5,8 +5,7 @@ import {
   categoryThemes,
   themeCategories,
 } from '@app/web/themes/themes'
-import type { Prisma } from '@prisma/client'
-import type { Theme } from '@prisma/client'
+import type { Prisma, Theme } from '@prisma/client'
 import { pascalCase, snakeCase } from 'change-case'
 
 export const resourceListSelect = (user: { id: string } | null) =>

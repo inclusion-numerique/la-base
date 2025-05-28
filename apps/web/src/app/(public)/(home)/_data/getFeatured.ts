@@ -1,5 +1,6 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { getBaseResourcesViewsCount } from '@app/web/server/bases/baseResources'
 import { baseSelect } from '@app/web/server/bases/getBasesList'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 import {
@@ -49,10 +50,22 @@ export const getFeatured = async ({ user }: { user: SessionUser | null }) => {
         select: profileListSelect(user),
       }),
     ])
+  const resourcesViews = await getBaseResourcesViewsCount(
+    featuredBases.map((base) => base.id),
+  )
+  const featuredBasesWithResourcesViews = featuredBases.map((base) => ({
+    ...base,
+    _count: {
+      ...base._count,
+      resourcesViews:
+        resourcesViews.find(({ baseId }) => baseId === base.id)?._sum
+          .viewsCount ?? 0,
+    },
+  }))
 
   return {
     // Order them by the order of the ID arrays
-    featuredBases: featuredBases.sort(
+    featuredBases: featuredBasesWithResourcesViews.sort(
       (a, b) => featuredBaseIds.indexOf(a.id) - featuredBaseIds.indexOf(b.id),
     ),
     featuredResources: featuredResources.sort(

@@ -1,6 +1,7 @@
 import BaseImage from '@app/web/components/BaseImage'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { BasePageData } from '@app/web/server/bases/getBase'
+import classNames from 'classnames'
 import React from 'react'
 import styles from './BaseImages.module.css'
 import ImageEdition from './Edition/BaseImageEdition'
@@ -20,7 +21,12 @@ const BaseImages = (
 
   return (
     <>
-      <div className={styles.banner}>
+      <div
+        className={classNames(
+          styles.banner,
+          base.coverImage && styles.imageAspectRatio,
+        )}
+      >
         {base.coverImage ? (
           <ResponsiveUploadedImage
             id={base.coverImage.id}
