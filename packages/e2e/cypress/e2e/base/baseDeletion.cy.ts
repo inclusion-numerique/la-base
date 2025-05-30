@@ -47,7 +47,7 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
 
@@ -57,7 +57,7 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
 
@@ -67,7 +67,7 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
     cy.get('#header_user_menu')

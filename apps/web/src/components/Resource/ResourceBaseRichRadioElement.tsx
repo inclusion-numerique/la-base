@@ -37,7 +37,6 @@ const ResourceBaseRichRadioElement = <T extends FieldValues>({
         disabled={disabled}
         data-testid={dataTestId}
       />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-element-interactions */}
       <label
         className="fr-label"
         htmlFor={id}

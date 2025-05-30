@@ -12,17 +12,20 @@ const BaseMetadata = ({
   withBadge,
   smallBadge,
 }: {
-  base: BasePageData | BaseListItem
+  base:
+    | BasePageData
+    | BaseListItem
+    | {
+        _count: { followedBy: number; resources: number }
+        isPublic: boolean
+      }
   className?: string
   withBadge?: boolean
   smallBadge?: boolean
 }) => {
   // TODO clean count method from separated query ?
   const resourcesCount =
-    'resources' in base
-      ? base.resources.length
-      : // eslint-disable-next-line no-underscore-dangle
-        base._count.resources
+    'resources' in base ? base.resources.length : base._count.resources
 
   return (
     <div className={classNames(styles.container, 'fr-text--sm', className)}>

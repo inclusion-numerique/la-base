@@ -17,7 +17,6 @@ const CollectionCard = ({
   user: SessionUser | null
   canWrite: boolean
 }) => {
-  // eslint-disable-next-line no-underscore-dangle
   const resourcesCount = collection._count.resources
 
   const href = `/collections/${collection.slug}`

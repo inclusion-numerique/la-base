@@ -1,7 +1,5 @@
 import { defineConfig } from 'cypress'
-// eslint-disable-next-line import/no-relative-packages
 import { cypressProjectId } from '../config/src/config'
-// eslint-disable-next-line import/no-relative-packages
 import { taskManager } from './cypress/support/taskManager'
 
 export default defineConfig({
@@ -22,14 +20,13 @@ export default defineConfig({
       on('task', taskManager)
       on('before:browser:launch', (browser, launchOptions) => {
         if (browser.family === 'firefox') {
-          // eslint-disable-next-line no-param-reassign
           launchOptions.preferences['ui.prefersReducedMotion'] = 1
         }
         if (browser.family === 'chromium') {
           launchOptions.args.push('--force-prefers-reduced-motion')
         }
         // Electron does not supports that kind of options.
-        // eslint-disable-next-line no-param-reassign
+
         launchOptions.env.ELECTRON_EXTRA_LAUNCH_ARGS =
           '--force-prefers-reduced-motion'
 

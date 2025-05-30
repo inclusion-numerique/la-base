@@ -83,7 +83,6 @@ const ResourceIndexationView = ({
       </div>
       <div className={classNames(styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
-          // eslint-disable-next-line react/jsx-no-useless-fragment
           <>
             {withLink
               ? tags.map((tag) => {

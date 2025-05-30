@@ -54,7 +54,6 @@ const DraggableCollectionResourceOrderRow = ({
     if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
       // Only here for type safety
       // It should never happen as the drag button is our only source of event
-      // eslint-disable-next-line no-useless-return
       return
     }
   }

@@ -43,7 +43,6 @@ const CopyLinkButton = ({
           Lien copié dans le presse-papier
         </span>
       )}
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <Button
         className={classNames(
           full ? 'fr-width-full fr-justify-content-center' : '',

@@ -90,7 +90,6 @@ const DeleteCollectionModal = ({ redirectTo }: { redirectTo?: string }) => {
       <Input
         label={`Écrivez “${collectionTitle}” dans le champ ci-dessous`}
         nativeInputProps={{
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore: wrong dsfr type
           'data-testid': 'modal-input',
           onChange: (event) => {

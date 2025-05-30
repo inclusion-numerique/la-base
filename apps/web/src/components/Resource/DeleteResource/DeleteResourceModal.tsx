@@ -83,7 +83,7 @@ const DeleteResourceModal = ({ redirectTo }: { redirectTo?: string }) => {
         ressource seront supprimés avec elle.
       </p>
       {mutation.error && (
-        <p className="fr-error-text" data-testid="invite-members-error">
+        <p className="fr-error-text" data-testid="delete-resource-error">
           {mutation.error.message}
         </p>
       )}

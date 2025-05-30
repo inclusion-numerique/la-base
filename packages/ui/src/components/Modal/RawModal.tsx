@@ -108,7 +108,6 @@ const RawModal = ({
                               'linkProps' in buttonProps &&
                               buttonProps.linkProps
                             ) {
-                              // eslint-disable-next-line no-param-reassign
                               buttonProps.linkProps = {
                                 tabIndex: 0,
                                 ...(doClosesModal
@@ -119,7 +118,6 @@ const RawModal = ({
                                 ...buttonProps.linkProps,
                               }
                             } else {
-                              // eslint-disable-next-line no-param-reassign
                               buttonProps.nativeButtonProps = {
                                 tabIndex: 0,
                                 ...(doClosesModal
@@ -131,15 +129,12 @@ const RawModal = ({
                               }
                             }
                             const {
-                              // eslint-disable-next-line @typescript-eslint/naming-convention
                               iconId: _buttonIconId,
-                              // eslint-disable-next-line @typescript-eslint/naming-convention
                               iconPosition: _buttonIconPosition,
                               ...props
                             } = buttonProps
 
                             return (
-                              // eslint-disable-next-line react/no-array-index-key
                               <li
                                 key={
                                   buttonProps.nativeButtonProps?.key ??

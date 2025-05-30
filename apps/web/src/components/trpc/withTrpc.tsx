@@ -4,7 +4,6 @@ import TrpcProvider from '@app/web/components/trpc/TrpcProvider'
 export const withTrpc =
   <P, C>(component: (properties: P) => C): ((properties: P) => C) =>
   (properties) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
     const Component = component as any
 
     return (

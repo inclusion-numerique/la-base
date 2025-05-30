@@ -8,7 +8,6 @@ const getRandomShape = (baseId: string) => {
   const index = Math.floor(generateBaseAvatarSeed(baseId) * keys.length)
   const key = keys[index]
 
-  // eslint-disable-next-line import/namespace
   return Shapes[key as keyof typeof Shapes]
 }
 

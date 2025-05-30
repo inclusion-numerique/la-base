@@ -28,6 +28,7 @@ const profile = {
   firstName: 'Jean',
   lastName: 'Biche',
   followedBy: [],
+  email: 'jean.biche@example.com',
   slug: 'jean-biche',
   _count: { followedBy: 4 },
   resourceEvent: [

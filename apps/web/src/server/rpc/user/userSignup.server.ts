@@ -10,9 +10,10 @@ export const ServerUserSignupValidation = UserSignupValidation.extend({
     .email('Merci de renseigner un email valide')
     .refine(async (email) => {
       const existing = await prismaClient.user.findUnique({
-        where: { email },
+        where: { email, signedUpAt: { not: null } },
         select: { id: true },
       })
+
       return !existing
     }, 'Un compte existe déjà avec cet email'),
 })

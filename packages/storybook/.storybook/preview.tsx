@@ -61,10 +61,8 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
       if (!(window as any).dsfrIsSetup) {
         loadDsfrJs()
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
         ;(window as any).dsfrIsSetup = true
       }
 

@@ -50,7 +50,6 @@ export const ConfirmDeleteModal = ({
       <Input
         label={`Écrivez “${confirmText}” dans le champ ci-dessous`}
         nativeInputProps={{
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore: wrong dsfr type
           'data-testid': 'modal-input',
           onChange: (event) => {

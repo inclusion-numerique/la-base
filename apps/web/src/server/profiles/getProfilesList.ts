@@ -10,6 +10,7 @@ export const profileListSelect = (user: { id: string } | null) =>
     firstName: true,
     lastName: true,
     slug: true,
+    email: true,
     image: {
       select: {
         id: true,

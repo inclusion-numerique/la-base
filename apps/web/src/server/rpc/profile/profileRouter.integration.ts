@@ -97,7 +97,6 @@ describe('profileRouter', () => {
   })
 
   describe('updateVisibility', () => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const executeMutateProcedure = (input: UpdateProfileVisibilityCommand) =>
       profileRouter
         .createCaller(createTestContext({ user: givenUser }))
