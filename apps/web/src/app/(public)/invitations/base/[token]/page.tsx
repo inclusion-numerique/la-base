@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 
 const AcceptBaseInvitation = async ({
   params,
-}: { params: Promise<{ token: string }> }) => {
+}: {
+  params: Promise<{ token: string }>
+}) => {
   const { token } = await params
   const user = await getSessionUser()
-  if (!user) {
-    redirect(`/connexion?suivant=/invitations/base/${token}`)
-  }
+  // if (!user) {
+  //   redirect(`/connexion?suivant=/invitations/base/${token}`)
+  // }
 
   const invitation = await getBaseInvitation(decodeURI(token), user)
 
@@ -30,6 +32,7 @@ const AcceptBaseInvitation = async ({
     <BaseMemberInvitationPage
       invitation={invitation}
       baseMembersCount={baseMembersCount}
+      user={user}
     />
   )
 }

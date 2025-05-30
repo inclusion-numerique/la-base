@@ -1,9 +1,11 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseMetadata from '@app/web/components/Base/BaseMetadata'
 import BaseImage from '@app/web/components/BaseImage'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import BaseInvitationButtons from '@app/web/features/base/invitation/components/BaseInvitationButtons'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
+import Notice from '@codegouvfr/react-dsfr/Notice'
 import Link from 'next/link'
 
 export const JoinBase = ({
@@ -39,6 +41,21 @@ export const JoinBase = ({
               <li>Inviter d&apos;autres membres</li>
             </ul>
           </div>
+          {!invitation.member.signedUpAt && (
+            <Notice
+              title={
+                <span className="fr-text--regular fr-text-default--grey">
+                  Vous avez été invité à l&apos;adresse{' '}
+                  <span className="fr-text--bold">
+                    {invitation.member.email}
+                  </span>
+                  <br />
+                  Vous devrez créer votre compte sur Les Bases du numérique
+                  d’intérêt général afin de rejoindre cette base.
+                </span>
+              }
+            />
+          )}
           <div className="fr-text--center">
             <BaseInvitationButtons invitation={invitation} />
             <Link

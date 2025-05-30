@@ -9,7 +9,11 @@ import { sendDeclinedInvitationEmail } from '@app/web/features/base/invitation/e
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { baseSelect } from '@app/web/server/bases/getBase'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import {
+  protectedProcedure,
+  publicProcedure,
+  router,
+} from '@app/web/server/rpc/createRouter'
 import {
   authorizeOrThrow,
   invalidError,
@@ -128,7 +132,7 @@ export const baseMemberRouter = router({
         }
       }
     }),
-  acceptInvitation: protectedProcedure
+  acceptInvitation: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {
       const invitation = await prismaClient.baseMembers.findUnique({

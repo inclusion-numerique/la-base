@@ -2,6 +2,7 @@
 
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import { trpc } from '@app/web/trpc'
@@ -23,6 +24,10 @@ const BaseInvitationButtons = ({
     router.push('/')
     return
   }
+
+  const acceptCtaTitle = invitation.member.signedUpAt
+    ? "Accepter l'invitation"
+    : "Accepter l'invitation et créer mon compte"
   const isLoading = acceptMutation.isPending || declineMutation.isPending
 
   const onAccept = async () => {
@@ -32,8 +37,10 @@ const BaseInvitationButtons = ({
       priority: 'success',
       message: 'Vous avez accepté l’invitation',
     })
-
-    router.push(`/bases/${invitation.base.slug}`)
+    const redirectUrl = invitation.member.signedUpAt
+      ? `/bases/${invitation.base.slug}`
+      : `/creer-un-compte?suivant=/bases/${invitation.base.slug}`
+    router.push(redirectUrl)
   }
 
   const onDecline = async () => {
@@ -45,7 +52,7 @@ const BaseInvitationButtons = ({
     <ButtonsGroup
       buttons={[
         {
-          children: 'Accepter l’invitation',
+          children: acceptCtaTitle,
           onClick: onAccept,
           ...buttonLoadingClassname(isLoading),
           nativeButtonProps: { 'data-testid': 'base-invitation-accept-button' },
