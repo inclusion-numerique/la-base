@@ -24,6 +24,19 @@ import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
 import z from 'zod'
 
+export const formatMemberName = (member: {
+  name: string | null
+  firstName: string | null
+  lastName: string | null
+  email: string
+}) => {
+  if (member.name) return member.name
+  if (member.firstName && member.lastName) {
+    return `${member.firstName} ${member.lastName}`.trim()
+  }
+  return member.email
+}
+
 export const baseMemberRouter = router({
   invite: protectedProcedure
     .input(InviteMemberCommandValidation)
@@ -160,10 +173,7 @@ export const baseMemberRouter = router({
       }
 
       if (invitation.invitedBy) {
-        const memberName =
-          invitation.member.name ??
-          `${invitation.member.firstName} ${invitation.member.lastName}` ??
-          invitation.member.email
+        const memberName = formatMemberName(invitation.member)
         await sendAcceptedInvitationEmail({
           url: `/base/${invitation.base.slug}`,
           baseTitle: invitation.base.title,
@@ -201,10 +211,7 @@ export const baseMemberRouter = router({
       }
 
       if (invitation.invitedBy) {
-        const memberName =
-          invitation.member.name ??
-          `${invitation.member.firstName} ${invitation.member.lastName}` ??
-          invitation.member.email
+        const memberName = formatMemberName(invitation.member)
         await sendDeclinedInvitationEmail({
           baseTitle: invitation.base.title,
           email: invitation.invitedBy.email,

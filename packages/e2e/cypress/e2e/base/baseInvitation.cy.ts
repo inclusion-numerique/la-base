@@ -62,10 +62,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
         cy.contains("Voir l'invitation")
           .invoke('attr', 'target', '_self')
           .click()
-        cy.url().should(
-          'contain',
-          appUrl('/connexion?suivant=/invitations/base/'),
-        )
+        cy.url().should('contain', appUrl('/invitations/base/'))
         cy.signin({ email: user.email })
         cy.reload()
         cy.appUrlShouldBe(emailLinkHref)
@@ -150,10 +147,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
         cy.contains("Voir l'invitation")
           .invoke('attr', 'target', '_self')
           .click()
-        cy.url().should(
-          'contain',
-          appUrl('/connexion?suivant=/invitations/base/'),
-        )
+        cy.url().should('contain', appUrl('/invitations/base/'))
         cy.signin({ email: user.email })
         cy.reload()
         cy.appUrlShouldBe(emailLinkHref)

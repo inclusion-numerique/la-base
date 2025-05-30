@@ -147,10 +147,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
         cy.contains("Voir l'invitation")
           .invoke('attr', 'target', '_self')
           .click()
-        cy.url().should(
-          'contain',
-          appUrl('/connexion?suivant=/invitations/base/'),
-        )
+        cy.url().should('contain', appUrl('/invitations/base/'))
         cy.signin({ email: user.email })
         cy.reload()
         cy.appUrlShouldBe(emailLinkHref)
