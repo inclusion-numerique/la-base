@@ -5,8 +5,7 @@ import {
   categoryThemes,
   themeCategories,
 } from '@app/web/themes/themes'
-import type { Prisma } from '@prisma/client'
-import type { Theme } from '@prisma/client'
+import type { Prisma, Theme } from '@prisma/client'
 import { pascalCase, snakeCase } from 'change-case'
 
 export const resourceListSelect = (user: { id: string } | null) =>
@@ -115,8 +114,27 @@ export const computeResourcesListWhereForUser = (
     ? {
         OR: [
           whereResourceIsPublic,
-          // Public or created by user
-          { createdById: user.id },
+          // Public or created by user AND (no base OR still member of base)
+          {
+            AND: [
+              { createdById: user.id },
+              {
+                OR: [
+                  { baseId: null },
+                  {
+                    base: {
+                      members: {
+                        some: {
+                          accepted: { not: null },
+                          memberId: user.id,
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
           // User is a contributor
           {
             contributors: {

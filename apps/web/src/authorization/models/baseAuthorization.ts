@@ -62,7 +62,6 @@ export const getBaseRoles = (
       roles.push(BaseRoles.BaseAdmin)
     }
   }
-
   return roles
 }
 
@@ -73,7 +72,6 @@ export const getBasePermissions = (
   if (base.deleted) {
     return []
   }
-
   // Admins have all permissions on base
   if (
     roles.includes('Admin') ||

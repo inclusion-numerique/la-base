@@ -1,7 +1,10 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import type { BasePageData } from '@app/web/server/bases/getBase'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type {
+  BaseListItem,
+  BaseListItemWithAllFields,
+} from '@app/web/server/bases/getBasesList'
 import classNames from 'classnames'
 import React from 'react'
 import styles from './BaseMetadata.module.css'
@@ -14,7 +17,7 @@ const BaseMetadata = ({
 }: {
   base:
     | BasePageData
-    | BaseListItem
+    | BaseListItemWithAllFields
     | {
         _count: { followedBy: number; resources: number }
         isPublic: boolean
@@ -26,7 +29,6 @@ const BaseMetadata = ({
   // TODO clean count method from separated query ?
   const resourcesCount =
     'resources' in base ? base.resources.length : base._count.resources
-
   return (
     <div className={classNames(styles.container, 'fr-text--sm', className)}>
       <span className="fr-icon-file-text-line fr-icon--sm" />

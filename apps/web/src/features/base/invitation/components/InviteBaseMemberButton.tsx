@@ -16,7 +16,6 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -111,7 +110,7 @@ const InviteBaseMemberButton = ({
       <form onSubmit={form.handleSubmit(onInvit)}>
         <InviteModal
           title="Inviter des membres"
-          className={classNames(styles.modal, 'fr-modal--overflow-visible')}
+          className="fr-modal--overflow-visible"
         >
           <>
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">

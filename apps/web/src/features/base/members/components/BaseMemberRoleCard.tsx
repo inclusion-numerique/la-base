@@ -1,27 +1,39 @@
-import LeaveBaseMemberButton from '@app/web/features/base/invitation/components/LeaveBaseMemberButton'
+import { SessionUser } from '@app/web/auth/sessionUser'
+import { LeaveBaseButton } from '@app/web/features/base/components/LeaveBaseButton'
+import DeclineBaseInviteMemberButton from '@app/web/features/base/invitation/components/DeclineBaseInviteMemberButton'
 import RemoveBaseMemberButton from '@app/web/features/base/invitation/components/RemoveBaseMemberButton'
-import { BaseMember } from '@app/web/server/bases/getBase'
+import { BaseMember, BasePageData } from '@app/web/server/bases/getBase'
 import Tag from '@codegouvfr/react-dsfr/Tag'
-import { ChangeEvent } from 'react'
+import classNames from 'classnames'
+import React, { ChangeEvent } from 'react'
+import styles from './BaseMemberRoleCard.module.css'
 
 interface MemberRoleDisplayProps {
+  base: BasePageData
   member: BaseMember
   isAdmin: boolean
-  isSessionUser: boolean
+  user: SessionUser | null
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => Promise<void>
   canChangeMemberRole: boolean
 }
 
 const BaseMemberRoleCard = ({
+  base,
   member,
   isAdmin,
-  isSessionUser,
+  user,
   onChange,
   canChangeMemberRole,
 }: MemberRoleDisplayProps) => {
+  const isSessionUser = member.memberId === user?.id
   if (!isSessionUser && !canChangeMemberRole && member.accepted) {
     return (
-      <div className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text">
+      <div
+        className={classNames(
+          styles.role,
+          'fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text',
+        )}
+      >
         {isAdmin ? 'Administrateur' : 'Contributeur'}
       </div>
     )
@@ -33,22 +45,22 @@ const BaseMemberRoleCard = ({
         {member.accepted ? (
           <>
             <div
-              className="fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text"
+              className={classNames(
+                styles.role,
+                'fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text',
+              )}
               data-testid="user-session-member-card-role"
             >
               {isAdmin ? 'Administrateur' : 'Contributeur'}
             </div>
-            <LeaveBaseMemberButton member={member} />
+            <LeaveBaseButton base={base} user={user} />
           </>
         ) : (
           <>
             <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
               Invitation envoyée
             </Tag>
-            <LeaveBaseMemberButton
-              member={member}
-              variant="refuse-invitation"
-            />
+            <DeclineBaseInviteMemberButton member={member} />
           </>
         )}
       </div>

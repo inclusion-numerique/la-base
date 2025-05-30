@@ -6,7 +6,6 @@ import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
 import EmptyBox from '@app/web/components/EmptyBox'
@@ -56,7 +55,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
   const { resourceId } = SaveResourceInCollectionDynamicModal.useState()
   const router = useRouter()
 
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
 
   // User can create a collection in a base or in his profile from this modal
   const createCollectionMutation = trpc.collection.create.useMutation()
