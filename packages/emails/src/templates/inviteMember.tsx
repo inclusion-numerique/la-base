@@ -58,12 +58,53 @@ export const inviteMember = {
             <MjmlText fontWeight="400" fontSize="16px" color="#3A3A3A">
               En rejoignant cette base, vous pourrez :
               <br />
-              <br />- Créer & publier des ressources
-              <br />- Contribuer à des ressources publiés sur cette base
-              <br />- Voir les ressources privées
-              <br />- Inviter d&apos;autres membres
+              <ul>
+                <li>Créer & publier des ressources</li>
+                <li>Contribuer à des ressources publiés sur cette base</li>
+                <li>Voir les ressources privées</li>
+                <li>Inviter d&apos;autres membres</li>
+              </ul>
             </MjmlText>
-            <MjmlSpacer height="32px" />
+            {newMember && (
+              <MjmlText backgroundColor="#EEF2FF">
+                <table
+                  width="100%"
+                  cellPadding="0"
+                  cellSpacing="0"
+                  role="presentation"
+                  style={{
+                    borderRadius: '8px',
+                    background: '#EEF2FF',
+                    padding: '16px 24px',
+                  }}
+                >
+                  <tr>
+                    <td style={{ padding: '16px 24px' }}>
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          fontSize: '18px',
+                          color: '#111827',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        Créez votre compte sur la plateforme
+                      </div>
+                      <div
+                        style={{
+                          fontWeight: 400,
+                          fontSize: '16px',
+                          color: '#3A3A3A',
+                        }}
+                      >
+                        En acceptant cette invitation, vous serez invité à créer
+                        votre compte.
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </MjmlText>
+            )}
             <MjmlDivider
               border-width="1px"
               border-style="solid"
