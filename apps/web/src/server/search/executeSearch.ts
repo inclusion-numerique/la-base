@@ -102,6 +102,9 @@ export const executeBasesSearch = async (
   }
 }
 
+export type BasesSearchResult = Awaited<ReturnType<typeof executeBasesSearch>>
+export type BasesSearchResultListItem = BasesSearchResult['bases'][number]
+
 export const executeProfilesSearch = async (
   searchParams: SearchParams,
   paginationParams: PaginationParams,

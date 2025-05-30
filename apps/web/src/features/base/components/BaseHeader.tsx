@@ -2,11 +2,13 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import Button from '@codegouvfr/react-dsfr/Button'
+import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import Link from 'next/link'
 import React from 'react'
-import Breadcrumbs from '../Breadcrumbs'
-import CopyLinkButton from '../CopyLinkButton'
-import BaseImages from './BaseImages'
+import BaseImages from '../../../components/Base/BaseImages'
+import Breadcrumbs from '../../../components/Breadcrumbs'
+import CopyLinkButton from '../../../components/CopyLinkButton'
 import BaseMetadata from './BaseMetadata'
 
 const headerId = 'header'
@@ -36,7 +38,8 @@ const BaseHeader = ({
         <BaseMetadata
           className="fr-justify-content-center"
           base={base}
-          withBadge
+          withBadge={!base.isPublic}
+          context="base"
         />
         {canWrite ? (
           <div>
@@ -62,24 +65,29 @@ const BaseHeader = ({
               </div>
               {!!base.email && base.emailIsPublic && (
                 <div>
-                  <Link
-                    className="fr-btn--sm fr-btn fr-btn--tertiary fr-icon-mail-line fr-btn--icon-left fr-justify-content-center fr-width-full"
-                    href={`mailto:${base.email}`}
-                  >
-                    Contacter
-                  </Link>
+                  <Tooltip title="Contacter">
+                    <Button
+                      size="small"
+                      title="Contacter"
+                      iconId="fr-icon-mail-line"
+                      priority="secondary"
+                      linkProps={{
+                        href: `mailto:${base.email}`,
+                      }}
+                    />
+                  </Tooltip>
                 </div>
               )}
               <div>
                 <CopyLinkButton
+                  priority="secondary"
+                  title="Partager"
                   size="small"
-                  className="fr-justify-content-center fr-width-full"
+                  className="fr-m-0"
                   url={getServerUrl(`/bases/${base.slug}`, {
                     absolutePath: true,
                   })}
-                >
-                  Partager
-                </CopyLinkButton>
+                />
               </div>
             </div>
           )

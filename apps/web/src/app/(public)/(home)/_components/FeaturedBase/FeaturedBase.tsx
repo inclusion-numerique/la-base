@@ -1,6 +1,6 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { getDepartmentName } from '@app/web/utils/departments'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import styles from './FeaturedBase.module.css'
 export const FeaturedBase = ({
   base: { id, slug, title, excerpt, department, image, _count },
 }: {
-  base: BaseListItem
+  base: BaseProfileListItem
   user: SessionUser | null
 }) => (
   <>

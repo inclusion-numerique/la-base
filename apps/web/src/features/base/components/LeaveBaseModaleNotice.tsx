@@ -3,10 +3,7 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import {
-  BaseListItem,
-  BaseListItemWithAllFields,
-} from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import { trpc } from '@app/web/trpc'
 import { Accordion } from '@codegouvfr/react-dsfr/Accordion'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -21,7 +18,7 @@ const LeaveBaseModaleNotice = ({
   user,
   closeModal,
 }: {
-  base: BaseListItemWithAllFields | BasePageData
+  base: BaseProfileListItemWithAllFields | BasePageData
   user: SessionUser
   closeModal: () => void
 }) => {

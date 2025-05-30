@@ -3,7 +3,7 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import LeaveBaseModaleNotice from '@app/web/features/base/components/LeaveBaseModaleNotice'
 import { BasePageData } from '@app/web/server/bases/getBase'
-import type { BaseListItemWithAllFields } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 
@@ -11,7 +11,7 @@ export const LeaveBaseButton = ({
   base,
   user,
 }: {
-  base: BaseListItemWithAllFields | BasePageData
+  base: BaseProfileListItemWithAllFields | BasePageData
   user: SessionUser | null
 }) => {
   const {

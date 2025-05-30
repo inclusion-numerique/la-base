@@ -8,7 +8,7 @@ import {
 } from '@app/web/components/Follows/followButtonProps'
 import { loginUrl } from '@app/web/security/login'
 import type { BasePageData } from '@app/web/server/bases/getBase'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -19,7 +19,7 @@ export type FollowButtonProps = {
   iconOnly?: boolean
   followPriority?: ButtonProps['priority']
 } & (
-  | { base: BaseListItem | BasePageData; profile?: undefined }
+  | { base: BaseProfileListItem | BasePageData; profile?: undefined }
   | {
       profile: Pick<ProfileListItem, 'id' | 'followedBy' | 'name'>
       base?: undefined

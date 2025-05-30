@@ -1,6 +1,6 @@
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
-import type { BaseListItem } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import type { Meta, StoryObj } from '@storybook/react'
 import BaseCard from './BaseCard'
@@ -46,8 +46,8 @@ const base = {
   },
   coverImage: null,
   followedBy: [],
-  _count: { resources: 8, followedBy: 4 },
-} satisfies BaseListItem
+  _count: { resources: 8, followedBy: 4, resourcesViews: 0 },
+} satisfies BaseProfileListItem
 
 export default {
   title: 'Base/Card',

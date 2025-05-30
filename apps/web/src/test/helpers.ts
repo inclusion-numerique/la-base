@@ -209,6 +209,8 @@ export const createTestBase = (
     ],
     _count: {
       followedBy: 0,
+      resources: 2,
+      resourcesViews: 2,
     },
   } satisfies BasePageData
   return {

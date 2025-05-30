@@ -1,1 +1,1 @@
-export type BaseTab = 'ressources' | 'collections' | 'membres' | 'a-propos'
+export type BaseTab = 'ressources' | 'collections' | 'membres' | 'accueil'

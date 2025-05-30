@@ -14,8 +14,8 @@ const getCurrentTabFromPath = (path: string): BaseTab => {
     ? 'collections'
     : lastSegment === 'membres'
       ? 'membres'
-      : lastSegment === 'a-propos'
-        ? 'a-propos'
+      : lastSegment === 'accueil'
+        ? 'accueil'
         : 'ressources'
 }
 
@@ -47,6 +47,13 @@ const BaseMenu = ({ base }: { base: BasePageData }) => {
         <nav className="fr-nav">
           <ul className="fr-nav__list">
             <MenuItem
+              tab="accueil"
+              currentTab={currentTab}
+              href={`/bases/${base.slug}/accueil`}
+            >
+              Page d'accueil
+            </MenuItem>
+            <MenuItem
               tab="ressources"
               currentTab={currentTab}
               href={`/bases/${base.slug}`}
@@ -67,13 +74,6 @@ const BaseMenu = ({ base }: { base: BasePageData }) => {
               href={`/bases/${base.slug}/membres`}
             >
               Membres · <b>{acceptedMembers.length}</b>
-            </MenuItem>
-            <MenuItem
-              tab="a-propos"
-              currentTab={currentTab}
-              href={`/bases/${base.slug}/a-propos`}
-            >
-              À propos
             </MenuItem>
           </ul>
         </nav>
