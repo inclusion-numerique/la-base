@@ -160,13 +160,15 @@ export const baseMemberRouter = router({
       }
 
       if (invitation.invitedBy) {
+        const memberName =
+          invitation.member.name ??
+          `${invitation.member.firstName} ${invitation.member.lastName}` ??
+          invitation.member.email
         await sendAcceptedInvitationEmail({
           url: `/base/${invitation.base.slug}`,
           baseTitle: invitation.base.title,
           email: invitation.invitedBy.email,
-          memberName:
-            invitation.member.name ??
-            `${invitation.member.firstName} ${invitation.member.lastName}`,
+          memberName,
         })
       }
 
@@ -199,12 +201,14 @@ export const baseMemberRouter = router({
       }
 
       if (invitation.invitedBy) {
+        const memberName =
+          invitation.member.name ??
+          `${invitation.member.firstName} ${invitation.member.lastName}` ??
+          invitation.member.email
         await sendDeclinedInvitationEmail({
           baseTitle: invitation.base.title,
           email: invitation.invitedBy.email,
-          memberName:
-            invitation.member.name ??
-            `${invitation.member.firstName} ${invitation.member.lastName}`,
+          memberName,
         })
       }
       return prismaClient.baseMembers.delete({
