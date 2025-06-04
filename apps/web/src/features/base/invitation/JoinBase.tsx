@@ -20,7 +20,7 @@ export const JoinBase = ({
   <div className="fr-grid-row fr-height-full">
     <div className="fr-col-md-6 fr-col-12">
       <div className="fr-flex fr-align-items-center fr-mx-auto fr-height-full ">
-        <div className="fr-mx-auto fr-flex fr-container--slim fr-direction-column fr-flex-gap-10v fr-justify-content-space-between fr-px-12v">
+        <div className="fr-mx-auto fr-flex fr-container--slim fr-direction-column fr-flex-gap-10v fr-justify-content-space-between fr-p-12v">
           <div className="fr-flex fr-align-items-center fr-flex-gap-3v">
             <LesBasesSvgLogo />
             <span className="fr-text--xl fr-text--semi-bold fr-mb-0">

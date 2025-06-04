@@ -107,18 +107,64 @@ export const baseMemberRouter = router({
             },
           },
         })
+
         /**
-         * Do not re-create existing users
+         * Do not re-add existing members in the base
          */
-        const users = input.newMembers.filter(
+        const membersToProcess = input.newMembers.filter(
+          (inputMember) =>
+            !base.members.some(
+              (baseMember) => baseMember.member.email === inputMember.email,
+            ),
+        )
+
+        const createBaseMember = async (
+          member: { email: string; type: string },
+          memberId: string,
+        ) => {
+          const acceptationToken = v4()
+          await prismaClient.baseMembers.create({
+            data: {
+              baseId: input.baseId,
+              isAdmin: member.type === 'admin',
+              invitedById: user.id,
+              memberId,
+              acceptationToken,
+            },
+          })
+          sendInviteMemberEmail({
+            baseTitle: base.title,
+            newMember: true,
+            from: user,
+            url: `/invitations/base/${acceptationToken}`,
+            email: member.email,
+          }).catch((error) => Sentry.captureException(error))
+        }
+
+        // We process existing users accounts first to avoid creating new users if they already exist
+        const existingUsersToAdd = membersToProcess.filter((inputMember) =>
+          existingUsers.some(
+            (existingUser) => existingUser.email === inputMember.email,
+          ),
+        )
+
+        for (const member of existingUsersToAdd) {
+          const existingUser = existingUsers.find(
+            (u) => u.email === member.email,
+          )
+          if (existingUser) {
+            await createBaseMember(member, existingUser.id)
+          }
+        }
+
+        const newUsersToAdd = membersToProcess.filter(
           (inputMember) =>
             !existingUsers.some(
               (existingUser) => existingUser.email === inputMember.email,
             ),
         )
 
-        for (const member of users) {
-          const acceptationToken = v4()
+        for (const member of newUsersToAdd) {
           const slug = await createAvailableSlug('utilisateur', 'users')
           const createdUser = await prismaClient.user.create({
             data: {
@@ -126,22 +172,7 @@ export const baseMemberRouter = router({
               slug,
             },
           })
-          await prismaClient.baseMembers.create({
-            data: {
-              baseId: input.baseId,
-              isAdmin: member.type === 'admin',
-              invitedById: user.id,
-              memberId: createdUser.id,
-              acceptationToken,
-            },
-          })
-          sendInviteMemberEmail({
-            newMember: true,
-            baseTitle: base.title,
-            from: user,
-            url: `/invitations/base/${acceptationToken}`,
-            email: member.email,
-          }).catch((error) => Sentry.captureException(error))
+          await createBaseMember(member, createdUser.id)
         }
       }
     }),
@@ -187,7 +218,7 @@ export const baseMemberRouter = router({
         where: { id: invitation.id },
       })
     }),
-  declineInvitation: protectedProcedure
+  declineInvitation: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {
       const invitation = await prismaClient.baseMembers.findUnique({
