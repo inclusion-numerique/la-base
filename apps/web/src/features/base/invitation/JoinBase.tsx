@@ -12,10 +12,12 @@ export const JoinBase = ({
   invitation,
   baseMembersCount,
   baseTitle,
+  user,
 }: {
   invitation: BaseInvitation
   baseMembersCount: number
   baseTitle: string
+  user: SessionUser | null
 }) => (
   <div className="fr-grid-row fr-height-full">
     <div className="fr-col-md-6 fr-col-12">
@@ -57,7 +59,7 @@ export const JoinBase = ({
             />
           )}
           <div className="fr-text--center">
-            <BaseInvitationButtons invitation={invitation} />
+            <BaseInvitationButtons invitation={invitation} user={user} />
             <Link
               className="fr-link"
               target="_blank"

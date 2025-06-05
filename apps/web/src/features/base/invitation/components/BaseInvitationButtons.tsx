@@ -12,8 +12,10 @@ import { ReactNode } from 'react'
 
 const BaseInvitationButtons = ({
   invitation,
+  user,
 }: {
   invitation: BaseInvitation
+  user: SessionUser | null
 }): ReactNode => {
   const router = useRouter()
 
@@ -29,7 +31,6 @@ const BaseInvitationButtons = ({
     ? "Accepter l'invitation"
     : "Accepter l'invitation et créer mon compte"
   const isLoading = acceptMutation.isPending || declineMutation.isPending
-
   const onAccept = async () => {
     await acceptMutation.mutateAsync(invitation)
 
@@ -37,9 +38,14 @@ const BaseInvitationButtons = ({
       priority: 'success',
       message: 'Vous avez accepté l’invitation',
     })
+    const signedUpUserRedirectUrl = !user
+      ? `/connexion?suivant=/bases/${invitation.base.slug}&email=${invitation.member.email}`
+      : `/bases/${invitation.base.slug}`
+
     const redirectUrl = invitation.member.signedUpAt
-      ? `/bases/${invitation.base.slug}`
-      : `/creer-un-compte?suivant=/bases/${invitation.base.slug}`
+      ? signedUpUserRedirectUrl
+      : `/creer-un-compte?suivant=/bases/${invitation.base.slug}&email=${invitation.member.email}`
+
     router.push(redirectUrl)
   }
 

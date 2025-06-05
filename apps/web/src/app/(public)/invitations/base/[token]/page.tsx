@@ -29,6 +29,7 @@ const AcceptBaseInvitation = async ({
     <BaseMemberInvitationPage
       invitation={invitation}
       baseMembersCount={baseMembersCount}
+      user={user}
     />
   )
 }

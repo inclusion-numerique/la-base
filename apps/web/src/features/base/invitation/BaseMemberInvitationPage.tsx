@@ -7,9 +7,11 @@ import React from 'react'
 const BaseMemberInvitationPage = ({
   invitation,
   baseMembersCount,
+  user,
 }: {
   invitation: BaseInvitation
   baseMembersCount: number
+  user: SessionUser | null
 }) =>
   invitation == null ? (
     <InvitationAlreadyProcessed />
@@ -19,6 +21,7 @@ const BaseMemberInvitationPage = ({
         invitation={invitation}
         baseMembersCount={baseMembersCount}
         baseTitle={invitation.base.title}
+        user={user}
       />
     </div>
   )
