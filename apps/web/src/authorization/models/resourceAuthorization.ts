@@ -44,8 +44,14 @@ export const getResourceRoles = (
   }
 
   const roles: ResourceRole[] = []
-
-  if (resource.createdById === user.id) {
+  if (
+    resource.createdById === user.id &&
+    (!resource.baseId ||
+      (resource.baseId &&
+        user.bases.some(
+          ({ base: { id: baseId } }) => baseId === resource.baseId,
+        )))
+  ) {
     roles.push(ResourceRoles.ResourceCreator)
   }
 

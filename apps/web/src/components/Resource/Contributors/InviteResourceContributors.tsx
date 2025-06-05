@@ -109,6 +109,7 @@ const InviteResourceContributors = ({
                   resourceId={resource.id}
                   selectedMemberType="member"
                   canAddAdmin={false}
+                  withAddButton={false}
                 />
               )}
             />

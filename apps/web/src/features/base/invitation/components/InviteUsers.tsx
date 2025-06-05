@@ -26,6 +26,7 @@ const InviteUsers = ({
   selectedMemberType,
   withBadges = true,
   canAddAdmin,
+  withAddButton = true,
 }: {
   label: string
   setEmailsError: Dispatch<SetStateAction<boolean>>
@@ -38,6 +39,7 @@ const InviteUsers = ({
   selectedMemberType: 'admin' | 'member'
   withBadges?: boolean
   canAddAdmin: boolean
+  withAddButton?: boolean
 }) => {
   const [userSearchQuery, setUserSearchQuery] = useState('')
 
@@ -98,6 +100,7 @@ const InviteUsers = ({
         options={userOptions}
         withBadges={withBadges}
         canAddAdmin={canAddAdmin}
+        withAddButton={withAddButton}
       />
       {error?.message && (
         <p className="fr-error-text" data-testid="invite-members-error">

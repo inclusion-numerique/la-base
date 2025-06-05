@@ -36,6 +36,7 @@ const MultipleSearchableSelect = ({
   selectedMemberType,
   withBadges,
   canAddAdmin,
+  withAddButton,
 }: {
   placeholder?: string
   noResultMessage?: string
@@ -53,6 +54,7 @@ const MultipleSearchableSelect = ({
   selectedMemberType: 'admin' | 'member'
   withBadges: boolean
   canAddAdmin: boolean
+  withAddButton: boolean
 }) => {
   const [internalSelection, setInternalSelection] = useState<
     SelectOptionValid<{
@@ -240,16 +242,18 @@ const MultipleSearchableSelect = ({
                 }}
               />
             </div>
-            <Button
-              type="button"
-              nativeButtonProps={{
-                onClick: () => {
-                  selectFirstResult(selectedIndex)
-                },
-              }}
-            >
-              Ajouter
-            </Button>
+            {withAddButton && (
+              <Button
+                type="button"
+                nativeButtonProps={{
+                  onClick: () => {
+                    selectFirstResult(selectedIndex)
+                  },
+                }}
+              >
+                Ajouter
+              </Button>
+            )}
           </div>
           <div
             ref={optionsContainerRef}
