@@ -24,16 +24,16 @@ const contents = [
 ]
 
 const HomeInfo = () => (
-  <div className="fr-background-alt--blue-france fr-py-15w fr-mt-5w">
+  <div className="fr-background-alt--blue-france fr-py-8w fr-py-md-15w fr-mt-md-5w">
     <div className="fr-container">
       <div className="fr-text--center">
-        <h2 className="fr-mb-0 fr-h3">
+        <h2 className="fr-mb-2w fr-h2">
           Comment utiliser cette plateforme&nbsp;?
         </h2>
-        <p className="fr-text--xl fr-mb-4w">
+        <p className="fr-text--xl fr-mb-6w">
           Pour en savoir plus, vous pouvez visiter notre{' '}
           <Link href="/centre-d-aide" className="fr-link fr-text--xl">
-            centre d&apos;aide
+            centre d&apos;aide.
           </Link>
         </p>
       </div>

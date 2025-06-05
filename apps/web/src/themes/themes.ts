@@ -9,10 +9,10 @@ import type { Theme } from '@prisma/client'
  */
 
 export const categories = [
-  'Inclusion & compétences numériques',
-  'Numérique & environnement',
+  'Inclusion numérique',
   'Culture numérique',
   'Communs & souveraineté',
+  'Numérique & environnement',
 ] as const
 
 export type Category = (typeof categories)[number]
@@ -55,28 +55,28 @@ export const themeLabels: { [theme in Theme]: string } = {
 }
 
 export const themeCategories: { [theme in Theme]: Category } = {
-  Accessibilite: 'Inclusion & compétences numériques',
+  Accessibilite: 'Inclusion numérique',
   ActeursDuNumerique: 'Culture numérique',
   ArtsEtCulture: 'Culture numérique',
   CitoyenneteEtEngagement: 'Culture numérique',
   CodeEtProgrammation: 'Culture numérique',
   CommunicationEnLigneEtReseauxSociaux: 'Culture numérique',
   CommunsNumeriques: 'Communs & souveraineté',
-  DemarchesEtServicesEnLigne: 'Inclusion & compétences numériques',
-  DiagnosticDeCompetencesNumeriques: 'Inclusion & compétences numériques',
+  DemarchesEtServicesEnLigne: 'Inclusion numérique',
+  DiagnosticDeCompetencesNumeriques: 'Inclusion numérique',
   Donnees: 'Culture numérique',
   EcoconceptionDeServicesNumeriques: 'Numérique & environnement',
   EconomieNumerique: 'Communs & souveraineté',
   EducationEtFormation: 'Culture numérique',
   EmploiEtEntrepreunariat: 'Culture numérique',
   GouvernancesPartagees: 'Communs & souveraineté',
-  InclusionNumerique: 'Inclusion & compétences numériques',
+  InclusionNumerique: 'Inclusion numérique',
   IntelligenceArtificielle: 'Communs & souveraineté',
   JeuxVideos: 'Culture numérique',
-  MaitriseDesOutilsNumeriques: 'Inclusion & compétences numériques',
+  MaitriseDesOutilsNumeriques: 'Inclusion numérique',
   MaterielReconditionne: 'Numérique & environnement',
   Mobilites: 'Numérique & environnement',
-  NavigationSurInternet: 'Inclusion & compétences numériques',
+  NavigationSurInternet: 'Inclusion numérique',
   NumeriqueAuServiceDeLEnvironnement: 'Numérique & environnement',
   NumeriqueEnSante: 'Culture numérique',
   OpenSourceEtLicencesLibres: 'Communs & souveraineté',
@@ -85,13 +85,13 @@ export const themeCategories: { [theme in Theme]: Category } = {
   SobrieteNumerique: 'Numérique & environnement',
   SouveraineteNumeriqueEtHebergementDesDonnees: 'Communs & souveraineté',
   TerritoiresConnectesEtDurables: 'Numérique & environnement',
-  UsageDuMaterielInformatique: 'Inclusion & compétences numériques',
+  UsageDuMaterielInformatique: 'Inclusion numérique',
   UsagesResponsablesDuNumerique: 'Numérique & environnement',
 }
 
 export const categoryThemes = (() => {
   const index: { [category in Category]: Theme[] } = {
-    'Inclusion & compétences numériques': [],
+    'Inclusion numérique': [],
     'Numérique & environnement': [],
     'Culture numérique': [],
     'Communs & souveraineté': [],
@@ -106,7 +106,7 @@ export const categoryThemes = (() => {
 
 export const categoryThemesOptions = (() => {
   const index: { [category in Category]: SelectOption[] } = {
-    'Inclusion & compétences numériques': [],
+    'Inclusion numérique': [],
     'Numérique & environnement': [],
     'Culture numérique': [],
     'Communs & souveraineté': [],

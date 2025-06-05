@@ -78,3 +78,5 @@ export const getFeatured = async ({ user }: { user: SessionUser | null }) => {
     ),
   }
 }
+
+export type Featured = Awaited<ReturnType<typeof getFeatured>>

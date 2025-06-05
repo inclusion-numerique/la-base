@@ -4,15 +4,13 @@ import { getHomeCategoriesCount } from './getHomeCategoriesCount'
 const HomeCategories = async () => {
   const categoriesCount = await getHomeCategoriesCount()
   return (
-    <div className="fr-grid-row fr-grid-row--gutters">
+    <div className="fr-flex fr-direction-column fr-direction-md-row fr-flex-gap-6v">
       {Object.values(categoriesCount).map((categoryCounts) => (
-        <div className="fr-col-md-6 fr-col-12" key={categoryCounts.category}>
-          <CategoryCard
-            category={categoryCounts.category}
-            resourcesCount={categoryCounts.resources}
-            thematicCount={categoryCounts.themes.length}
-          />
-        </div>
+        <CategoryCard
+          key={categoryCounts.category}
+          category={categoryCounts.category}
+          resourcesCount={categoryCounts.resources}
+        />
       ))}
     </div>
   )
