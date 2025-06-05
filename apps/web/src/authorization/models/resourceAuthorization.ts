@@ -44,19 +44,25 @@ export const getResourceRoles = (
   }
 
   const roles: ResourceRole[] = []
+
+  const resourceIsNotInABase = resource.baseId === null
+
+  const resourceIsInABaseAndUserIsAMember =
+    resource.baseId &&
+    user.bases.some(({ base: { id: baseId } }) => baseId === resource.baseId)
+
   if (
     resource.createdById === user.id &&
-    (!resource.baseId ||
-      (resource.baseId &&
-        user.bases.some(
-          ({ base: { id: baseId } }) => baseId === resource.baseId,
-        )))
+    (resourceIsNotInABase || resourceIsInABaseAndUserIsAMember)
   ) {
     roles.push(ResourceRoles.ResourceCreator)
   }
 
   // Resource contributor
-  if (user.resources.some(({ resourceId }) => resourceId === resource.id)) {
+  if (
+    user.resources.some(({ resourceId }) => resourceId === resource.id) &&
+    (resourceIsNotInABase || resourceIsInABaseAndUserIsAMember)
+  ) {
     roles.push(ResourceRoles.ResourceContributor)
   } else if (
     // Contributor rules for base members
