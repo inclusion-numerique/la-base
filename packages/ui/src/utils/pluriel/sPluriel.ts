@@ -1,1 +1,1 @@
-export const sPluriel = (count: number) => (count > 1 ? 's' : '')
+export const sPluriel = (count: number) => (count === 1 ? '' : 's')
