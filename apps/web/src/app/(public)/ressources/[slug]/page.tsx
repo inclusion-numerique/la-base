@@ -96,7 +96,10 @@ const RessourcePage = async ({
   const canWrite = hasPermission(ResourcePermissions.WriteResource)
   const canReadContent = hasPermission(ResourcePermissions.ReadResourceContent)
   const canDelete = hasPermission(ResourcePermissions.DeleteResource)
-
+  console.log('user', user)
+  console.log('canWrite', canWrite)
+  console.log('canReadContent', canReadContent)
+  console.log('canDelete', canDelete)
   return (
     <>
       <SkipLinksPortal />
