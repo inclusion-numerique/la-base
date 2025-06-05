@@ -22,7 +22,11 @@ export const EnvInformation = () => {
   const storybookLink = `https://${branch.replaceAll('/', '-')}--${chromatic.appId}.chromatic.com`
 
   return (
-    <div id="environment-information" className="fr-notice fr-notice--info">
+    <div
+      id="environment-information"
+      className="fr-notice fr-notice--info"
+      data-debugversion="2025-06-05-01"
+    >
       <div className="fr-container">
         <div className="fr-notice__body">
           <p className="fr-notice__title">
