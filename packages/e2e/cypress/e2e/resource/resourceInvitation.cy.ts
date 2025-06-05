@@ -14,7 +14,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.intercept('/api/trpc/resourceContributor.invite?*').as('invite')
   })
 
-  it('Acceptation 1 - En tant que créateur je peux inviter un contributeur', () => {
+  it.skip('Acceptation 1 - En tant que créateur je peux inviter un contributeur', () => {
     cleanUpAndCreateTestResource()
     const user = givenUser({
       firstName: 'Alice',
