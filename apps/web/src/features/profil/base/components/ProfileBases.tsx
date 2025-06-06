@@ -1,7 +1,7 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import ProfileBaseCard from '@app/web/features/profil/base/components/ProfileBaseCard'
-import type { BaseListItemWithAllFields } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import React from 'react'
 import { CreateBaseButton } from '../../../../components/Base/CreateBaseButton'
@@ -15,7 +15,7 @@ const ProfileBases = ({
 }: {
   profile: ProfilePageData
   user: SessionUser | null
-  bases: BaseListItemWithAllFields[]
+  bases: BaseProfileListItemWithAllFields[]
   canWrite: boolean
   isOwner: boolean
 }) => (

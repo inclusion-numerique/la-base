@@ -1,15 +1,19 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { computeResourcesListWhereForUser } from '@app/web/server/resources/getResourcesList'
 import { Prisma } from '@prisma/client'
 
-export const getBaseInvitation = (token: string, user: SessionUser | null) => {
+export const getBaseInvitation = async (
+  token: string,
+  user: SessionUser | null,
+) => {
   const where: Prisma.BaseMembersWhereInput = {
     acceptationToken: token,
   }
   if (user) {
     where.memberId = user.id
   }
-  return prismaClient.baseMembers.findFirst({
+  const baseMemberInvitation = await prismaClient.baseMembers.findFirst({
     select: {
       id: true,
       member: {
@@ -33,6 +37,7 @@ export const getBaseInvitation = (token: string, user: SessionUser | null) => {
           description: true,
           id: true,
           title: true,
+          department: true,
           isPublic: true,
           image: true,
         },
@@ -40,6 +45,30 @@ export const getBaseInvitation = (token: string, user: SessionUser | null) => {
     },
     where,
   })
+  if (!baseMemberInvitation) {
+    return null
+  }
+
+  const resourceViews = await prismaClient.resource.aggregate({
+    where: {
+      ...computeResourcesListWhereForUser(user),
+      baseId: baseMemberInvitation.base.id,
+    },
+    _sum: {
+      viewsCount: true,
+    },
+  })
+
+  return {
+    ...baseMemberInvitation,
+    base: {
+      ...baseMemberInvitation.base,
+      _count: {
+        ...baseMemberInvitation.base._count,
+        resourcesViews: resourceViews._sum.viewsCount ?? 0,
+      },
+    },
+  }
 }
 
 export type BaseInvitation = NonNullable<

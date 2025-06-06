@@ -1,8 +1,8 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
-import BaseMetadata from '@app/web/components/Base/BaseMetadata'
 import BaseImage from '@app/web/components/BaseImage'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
+import BaseMetadata from '@app/web/features/base/components/BaseMetadata'
 import BaseInvitationButtons from '@app/web/features/base/invitation/components/BaseInvitationButtons'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import Notice from '@codegouvfr/react-dsfr/Notice'
@@ -94,7 +94,7 @@ export const JoinBase = ({
                 }}
               />
             )}
-            <BaseMetadata base={invitation.base} />
+            <BaseMetadata base={invitation.base} context="card" />
           </div>
           <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
             <span className="fr-icon-account-circle-line fr-mr-2v" />

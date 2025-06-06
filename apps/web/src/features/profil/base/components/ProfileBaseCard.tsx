@@ -1,8 +1,8 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import BaseMetadata from '@app/web/components/Base/BaseMetadata'
 import BaseImage from '@app/web/components/BaseImage'
+import BaseMetadata from '@app/web/features/base/components/BaseMetadata'
 import ProfileBaseMemberRoleCard from '@app/web/features/profil/base/components/ProfileBaseMemberRoleCard'
-import type { BaseListItemWithAllFields } from '@app/web/server/bases/getBasesList'
+import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -17,7 +17,7 @@ const ProfileBaseCard = ({
   isOwner,
 }: {
   profile?: ProfilePageData
-  base: BaseListItemWithAllFields
+  base: BaseProfileListItemWithAllFields
   user: SessionUser | null
   compact?: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -41,8 +41,8 @@ const ProfileBaseCard = ({
         <BaseMetadata
           className="fr-text-mention--grey"
           base={base}
-          withBadge={!base.isPublic}
           smallBadge
+          context="profile"
         />
       </div>
     </div>

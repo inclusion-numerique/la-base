@@ -1,10 +1,12 @@
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
 import type { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import BaseHeader, { headerSkipLink } from '@app/web/components/Base/BaseHeader'
-import BaseMenu from '@app/web/components/Base/BaseMenu'
 import PrivateBox from '@app/web/components/PrivateBox'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import BaseHeader, {
+  headerSkipLink,
+} from '@app/web/features/base/components/BaseHeader'
+import BaseMenu from '@app/web/features/base/components/BaseMenu'
 import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
