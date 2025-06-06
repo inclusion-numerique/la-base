@@ -40,7 +40,9 @@ const getWhereBasesProfileList = (
   user?: Pick<SessionUser, 'id'> | null,
 ) =>
   getWhereBasesList(user, {
-    OR: [{ members: { some: { memberId: profileId } } }],
+    OR: [
+      { members: { some: { memberId: profileId, accepted: { not: null } } } },
+    ],
   })
 
 const getWhereBasesQuery = (
@@ -136,6 +138,7 @@ export const getProfileBases = async (
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereBasesProfileList(profileId, user)
+  console.log('where', where)
   return prismaClient.base.findMany({
     select: {
       ...baseSelect(user),
