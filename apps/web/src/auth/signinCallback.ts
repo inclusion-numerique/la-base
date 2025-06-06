@@ -60,7 +60,7 @@ export const signinCallback: <
     })
 
     if (!!email && existingUser && existingUser.role !== 'User') {
-      return `/connexion?error=ProConnectOnly`
+      // return `/connexion?error=ProConnectOnly`
     }
   }
 

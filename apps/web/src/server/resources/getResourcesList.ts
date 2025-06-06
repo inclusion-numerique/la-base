@@ -186,7 +186,26 @@ const computeResourcesListWhereForUserAndProfile = (
   computeResourcesListWhereForUser(user, {
     OR: [
       {
-        createdById: profileId,
+        AND: [
+          {
+            createdById: profileId,
+          },
+          {
+            OR: [
+              { baseId: null },
+              {
+                base: {
+                  members: {
+                    some: {
+                      accepted: { not: null },
+                      memberId: profileId,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         AND: [

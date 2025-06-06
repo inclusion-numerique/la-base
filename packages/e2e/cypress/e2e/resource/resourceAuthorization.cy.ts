@@ -238,7 +238,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la ressource',
     cy.testId('resource-publication').should('exist')
   })
 
-  it.skip('Acceptation 8 - Contributeur', () => {
+  it('Acceptation 8 - Contributeur', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: false,
