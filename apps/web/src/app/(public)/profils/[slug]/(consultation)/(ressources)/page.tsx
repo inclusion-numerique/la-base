@@ -18,7 +18,6 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
   const { profile, user, authorization } = await getProfilePageContext(slug)
 
   const resources = await getProfileResources(profile.id, user)
-  console.log('resources', resources)
 
   const canWrite = authorization.hasPermission(ProfilePermissions.WriteProfile)
   const isOwner = authorization.hasRole(ProfileRoles.ProfileOwner)

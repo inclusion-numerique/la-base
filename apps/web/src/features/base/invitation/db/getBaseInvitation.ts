@@ -3,7 +3,10 @@ import { prismaClient } from '@app/web/prismaClient'
 import { computeResourcesListWhereForUser } from '@app/web/server/resources/getResourcesList'
 import { Prisma } from '@prisma/client'
 
-export const getBaseInvitation = async (token: string, user: SessionUser | null) => {
+export const getBaseInvitation = async (
+  token: string,
+  user: SessionUser | null,
+) => {
   const where: Prisma.BaseMembersWhereInput = {
     acceptationToken: token,
   }
