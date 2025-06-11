@@ -17,23 +17,77 @@ export const categories = [
 
 export type Category = (typeof categories)[number]
 
+export type CategoryStyle = {
+  icon: string
+  color: string
+  background: string
+  href: string
+}
+
+export type CategoryTagStyle = {
+  selected: string
+  unselected: string
+}
+
+export const CATEGORY_VARIANTS_TAG: Record<Category, CategoryTagStyle> = {
+  'Inclusion numérique': {
+    selected: 'fr-background-artwork-minor--green-archipel',
+    unselected: 'fr-background-alt--green-archipel',
+  },
+  'Culture numérique': {
+    selected: 'fr-background-artwork-minor--pink-tuile',
+    unselected: 'fr-background-contrast--pink-tuile',
+  },
+  'Communs & souveraineté': {
+    selected: 'fr-background-artwork-minor--yellow-tournesol',
+    unselected: 'fr-background-alt--yellow-tournesol',
+  },
+  'Numérique & environnement': {
+    selected: 'fr-background-artwork-minor--green-bourgeon',
+    unselected: 'fr-background-alt--green-bourgeon',
+  },
+}
+
+export const CATEGORY_VARIANTS: Record<Category, CategoryStyle> = {
+  'Inclusion numérique': {
+    icon: 'ri-service-fill',
+    color: 'fr-text-label--green-archipel',
+    background: 'fr-background-alt--green-archipel',
+    href: '/inclusion-numerique',
+  },
+  'Culture numérique': {
+    icon: 'ri-stack-fill',
+    color: 'fr-text-label--pink-tuile',
+    background: 'fr-background-alt--pink-tuile',
+    href: '/culture-numerique',
+  },
+  'Communs & souveraineté': {
+    icon: 'ri-government-fill',
+    color: 'fr-text-label--yellow-tournesol',
+    background: 'fr-background-alt--yellow-tournesol',
+    href: '/communs-et-souverainete',
+  },
+  'Numérique & environnement': {
+    icon: 'ri-leaf-fill',
+    color: 'fr-text-label--green-bourgeon',
+    background: 'fr-background-alt--green-bourgeon',
+    href: '/numerique-et-environnement',
+  },
+}
+
 export const themeLabels: { [theme in Theme]: string } = {
+  AidesAuxDemarchesAdministratives: 'Aide aux démarches administratives',
   Accessibilite: 'Accessibilité',
-  ActeursDuNumerique: 'Acteurs du numérique',
-  ArtsEtCulture: 'Arts et culture',
+  LoisirsEtCreationsNumeriques: 'Loisirs et créations numériques',
   CitoyenneteEtEngagement: 'Citoyenneté & engagement',
   CodeEtProgrammation: 'Code & programmation',
-  CommunicationEnLigneEtReseauxSociaux:
-    'Communication en ligne & réseaux sociaux',
+  ReseauxSociauxEtCommunication: 'Réseaux sociaux & communication',
   CommunsNumeriques: 'Communs numériques',
-  DemarchesEtServicesEnLigne: 'Démarches et services en ligne',
   DiagnosticDeCompetencesNumeriques: 'Diagnostic de compétences numériques',
   Donnees: 'Données',
   EconomieNumerique: 'Économie numérique',
-  EducationEtFormation: 'Education & formation',
   EmploiEtEntrepreunariat: 'Emploi & entrepreunariat',
   GouvernancesPartagees: 'Gouvernances partagées',
-  InclusionNumerique: 'Inclusion numérique',
   IntelligenceArtificielle: 'Intelligence artificielle',
   JeuxVideos: 'Jeux vidéos',
   MaitriseDesOutilsNumeriques: 'Maîtrise des outils numériques',
@@ -47,46 +101,43 @@ export const themeLabels: { [theme in Theme]: string } = {
   NumeriqueEnSante: 'Numérique en santé',
   OpenSourceEtLicencesLibres: 'Open source et licences libres',
   Parentalite: 'Parentalité',
-  RisquesCyberEtProtection: 'Risques cyber et protection',
+  RisquesCyberEtProtection: 'Inclusion numérique',
   SobrieteNumerique: 'Sobriété numérique',
   SouveraineteNumeriqueEtHebergementDesDonnees:
     'Souveraineté numérique & hébergement des données',
-  UsageDuMaterielInformatique: 'Usage du matériel informatique',
+  EducationAuxMedias: 'Éducation aux médias',
 }
 
 export const themeCategories: { [theme in Theme]: Category } = {
   Accessibilite: 'Inclusion numérique',
-  ActeursDuNumerique: 'Culture numérique',
-  ArtsEtCulture: 'Culture numérique',
+  LoisirsEtCreationsNumeriques: 'Culture numérique',
   CitoyenneteEtEngagement: 'Culture numérique',
   CodeEtProgrammation: 'Culture numérique',
-  CommunicationEnLigneEtReseauxSociaux: 'Culture numérique',
+  ReseauxSociauxEtCommunication: 'Inclusion numérique',
   CommunsNumeriques: 'Communs & souveraineté',
-  DemarchesEtServicesEnLigne: 'Inclusion numérique',
+  AidesAuxDemarchesAdministratives: 'Inclusion numérique',
   DiagnosticDeCompetencesNumeriques: 'Inclusion numérique',
   Donnees: 'Culture numérique',
   EcoconceptionDeServicesNumeriques: 'Numérique & environnement',
   EconomieNumerique: 'Communs & souveraineté',
-  EducationEtFormation: 'Culture numérique',
   EmploiEtEntrepreunariat: 'Culture numérique',
   GouvernancesPartagees: 'Communs & souveraineté',
-  InclusionNumerique: 'Inclusion numérique',
-  IntelligenceArtificielle: 'Communs & souveraineté',
+  IntelligenceArtificielle: 'Culture numérique',
   JeuxVideos: 'Culture numérique',
   MaitriseDesOutilsNumeriques: 'Inclusion numérique',
   MaterielReconditionne: 'Numérique & environnement',
   Mobilites: 'Numérique & environnement',
   NavigationSurInternet: 'Inclusion numérique',
   NumeriqueAuServiceDeLEnvironnement: 'Numérique & environnement',
-  NumeriqueEnSante: 'Culture numérique',
+  NumeriqueEnSante: 'Inclusion numérique',
   OpenSourceEtLicencesLibres: 'Communs & souveraineté',
-  Parentalite: 'Culture numérique',
-  RisquesCyberEtProtection: 'Culture numérique',
+  Parentalite: 'Inclusion numérique',
+  RisquesCyberEtProtection: 'Inclusion numérique',
   SobrieteNumerique: 'Numérique & environnement',
   SouveraineteNumeriqueEtHebergementDesDonnees: 'Communs & souveraineté',
   TerritoiresConnectesEtDurables: 'Numérique & environnement',
-  UsageDuMaterielInformatique: 'Inclusion numérique',
   UsagesResponsablesDuNumerique: 'Numérique & environnement',
+  EducationAuxMedias: 'Culture numérique',
 }
 
 export const categoryThemes = (() => {
@@ -110,7 +161,7 @@ export const categoryThemesOptions = (() => {
     'Numérique & environnement': [],
     'Culture numérique': [],
     'Communs & souveraineté': [],
-  }
+  } as { [category in Category]: SelectOption[] }
 
   for (const [theme, category] of Object.entries(themeCategories)) {
     index[category].push({

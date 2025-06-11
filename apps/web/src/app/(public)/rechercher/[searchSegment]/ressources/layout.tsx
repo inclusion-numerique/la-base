@@ -12,7 +12,12 @@ import {
   categoryTargetAudiencesOptions,
   targetAudienceLabels,
 } from '@app/web/themes/targetAudiences'
-import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
+import {
+  categoryThemesOptions,
+  themeCategories,
+  themeLabels,
+} from '@app/web/themes/themes'
+import Button from '@codegouvfr/react-dsfr/Button'
 import type { Metadata } from 'next'
 import React, { type PropsWithChildren } from 'react'
 
@@ -42,8 +47,11 @@ const ResourcesSearchLayout = async ({
           option: {
             value: theme,
             label: themeLabels[theme],
+            extra: {
+              category: themeCategories[theme],
+            },
           },
-        }) satisfies FiltersInitialValue,
+        } satisfies FiltersInitialValue),
     ),
     ...searchExecutionParams.supportTypes.map(
       (supportType) =>
@@ -53,7 +61,7 @@ const ResourcesSearchLayout = async ({
             value: supportType,
             label: supportTypeLabels[supportType],
           },
-        }) satisfies FiltersInitialValue,
+        } satisfies FiltersInitialValue),
     ),
     ...searchExecutionParams.targetAudiences.map(
       (targetAudience) =>
@@ -63,7 +71,7 @@ const ResourcesSearchLayout = async ({
             value: targetAudience,
             label: targetAudienceLabels[targetAudience],
           },
-        }) satisfies FiltersInitialValue,
+        } satisfies FiltersInitialValue),
     ),
   ]
 

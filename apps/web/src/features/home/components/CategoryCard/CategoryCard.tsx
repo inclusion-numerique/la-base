@@ -2,51 +2,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 import styles from './CategoryCard.module.css'
-
-type CategoryStyle = {
-  icon: string
-  color: string
-  background: string
-  hover: string
-  href: string
-}
-
-type Category =
-  | 'Inclusion numérique'
-  | 'Culture numérique'
-  | 'Communs & souveraineté'
-  | 'Numérique & environnement'
-
-const CATEGORY_VARIANTS: Record<Category, CategoryStyle> = {
-  'Inclusion numérique': {
-    icon: 'ri-service-fill',
-    color: 'fr-text-label--green-archipel',
-    background: 'fr-background-alt--green-archipel',
-    hover: styles.inclusionCard,
-    href: '/inclusion-numerique',
-  },
-  'Culture numérique': {
-    icon: 'ri-stack-fill',
-    color: 'fr-text-label--pink-tuile',
-    background: 'fr-background-alt--pink-tuile',
-    hover: styles.cultureNumCard,
-    href: '/culture-numerique',
-  },
-  'Communs & souveraineté': {
-    icon: 'ri-government-fill',
-    color: 'fr-text-label--yellow-tournesol',
-    background: 'fr-background-alt--yellow-tournesol',
-    hover: styles.communsCard,
-    href: '/communs-et-souverainete',
-  },
-  'Numérique & environnement': {
-    icon: 'ri-leaf-fill',
-    color: 'fr-text-label--green-bourgeon',
-    background: 'fr-background-alt--green-bourgeon',
-    hover: styles.numeriqueCard,
-    href: '/numerique-et-environnement',
-  },
-}
+import { Category, CATEGORY_VARIANTS } from '@app/web/themes/themes'
 
 export type CategoryCardProps = {
   category: Category
