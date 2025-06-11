@@ -1,0 +1,6 @@
+.categoryIcon {
+  &[class*=' fr-icon-']::before {
+    background-color: unset !important;
+    vertical-align: inherit;
+  }
+}

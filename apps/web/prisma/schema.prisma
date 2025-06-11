@@ -110,9 +110,9 @@ model User {
   searches            SearchExecution[]
   feedbacks           Feedback[]
   resourceFeedback    ResourceFeedback[]
-  
-  featuredBlock       FeaturedBlock?         @relation("profile")
-  featuredBlockId     String?                @unique @db.Uuid
+
+  featuredBlock   FeaturedBlock? @relation("profile")
+  featuredBlockId String?        @unique @db.Uuid
 
   @@map("users")
 }
@@ -176,8 +176,8 @@ model Base {
   savedCollections SavedCollection[]
   followedBy       BaseFollow[]
 
-  featuredBlock    FeaturedBlock?    @relation("base")
-  featuredBlockId  String?           @unique @db.Uuid
+  featuredBlock   FeaturedBlock? @relation("base")
+  featuredBlockId String?        @unique @db.Uuid
 
   @@index([createdById])
   @@map("bases")
@@ -231,24 +231,20 @@ model ResourceContributors {
 
 enum Theme {
   DiagnosticDeCompetencesNumeriques            @map("diagnostic_de_competences_numeriques")
-  DemarchesEtServicesEnLigne                   @map("demarches_et_services_en_ligne")
+  AidesAuxDemarchesAdministratives             @map("aides_aux_demarches_administratives")
   MaitriseDesOutilsNumeriques                  @map("maitrise_des_outils_numeriques")
   NavigationSurInternet                        @map("navigation_sur_internet")
-  UsageDuMaterielInformatique                  @map("usage_du_materiel_informatique")
   SobrieteNumerique                            @map("sobriete_numerique")
   MaterielReconditionne                        @map("materiel_reconditionne")
   Mobilites                                    @map("mobilites")
   Accessibilite                                @map("accessibilite")
-  ActeursDuNumerique                           @map("acteurs_du_numerique")
-  ArtsEtCulture                                @map("arts_et_culture")
+  LoisirsEtCreationsNumeriques                 @map("loisirs_et_creations_numeriques")
   CitoyenneteEtEngagement                      @map("citoyennete_et_engagement")
   CodeEtProgrammation                          @map("code_et_programmation")
-  CommunicationEnLigneEtReseauxSociaux         @map("communication_en_ligne_et_reseaux_sociaux")
+  ReseauxSociauxEtCommunication                @map("reseaux_sociaux_et_communication")
   Donnees                                      @map("donnees")
-  EducationEtFormation                         @map("education_et_formation")
   EmploiEtEntrepreunariat                      @map("emploi_et_entrepreunariat")
   JeuxVideos                                   @map("jeux_videos")
-  InclusionNumerique                           @map("inclusion_numerique")
   NumeriqueEnSante                             @map("numerique_en_sante")
   Parentalite                                  @map("parentalite")
   RisquesCyberEtProtection                     @map("risques_cyber_et_protection")
@@ -262,6 +258,7 @@ enum Theme {
   UsagesResponsablesDuNumerique                @map("usages_responsables_du_numerique")
   NumeriqueAuServiceDeLEnvironnement           @map("numerique_au_service_de_l_environnement")
   TerritoiresConnectesEtDurables               @map("territoires_connectes_et_durables")
+  EducationAuxMedias                           @map("education_aux_medias")
 
   @@map("theme")
 }
@@ -814,25 +811,25 @@ model ResourceFeedback {
 }
 
 enum FeaturedBlockType {
-  base     
-  resource 
-  profile  
+  base
+  resource
+  profile
 
   @@map("featured_block_type")
 }
 
 model FeaturedBlock {
-  id   String  @id @default(uuid()) @db.Uuid
+  id   String            @id @default(uuid()) @db.Uuid
   type FeaturedBlockType
 
-  base     Base?    @relation("base", fields: [baseId], references: [id])
-  baseId   String?  @unique @db.Uuid
+  base   Base?   @relation("base", fields: [baseId], references: [id])
+  baseId String? @unique @db.Uuid
 
-  resource     Resource? @relation("resource", fields: [resourceId], references: [id])
-  resourceId   String?   @unique @db.Uuid
+  resource   Resource? @relation("resource", fields: [resourceId], references: [id])
+  resourceId String?   @unique @db.Uuid
 
-  profile      User?     @relation("profile", fields: [profileId], references: [id])
-  profileId    String?   @unique @db.Uuid
+  profile   User?   @relation("profile", fields: [profileId], references: [id])
+  profileId String? @unique @db.Uuid
 
   @@map("featured_blocks")
 }

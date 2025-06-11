@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styles from './SearchFilter.module.css'
 import SearchFilterOption from './SearchFilterOption'
 import type { Category, FilterKey } from './filter'
+import type { SearchFilterSelectOption } from '@app/web/components/Search/Filters/SearchFilters'
 
 export const FilterCategory = ({
   category,
