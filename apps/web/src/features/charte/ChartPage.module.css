@@ -22,22 +22,19 @@
   flex-direction: column;
   gap: 24px;
 }
-
 .chartCardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-  @media (max-width: 1024px) {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
 }
-
 .chartCardsContainer > *:nth-last-child(1):nth-child(odd) {
-  grid-column: 1 / -1;
+  @media (min-width: 768px) {
+    grid-column: 1 / -1;
+  }
 }
 
 .linkDecoration {
@@ -45,19 +42,15 @@
 }
 
 .necTitle {
-  @media (min-width: 33rem) {
-    text-align: unset;
+  @media (min-width: 768px) {
+    text-align: unset !important;
   }
-  @media (max-width: 33rem) {
-    text-align: center;
-  }
+  text-align: center;
 }
 
 .necDescription {
-  @media (min-width: 33rem) {
-    text-align: unset;
+  @media (min-width: 768px) {
+    text-align: unset !important;
   }
-  @media (max-width: 33rem) {
-    text-align: center;
-  }
+  text-align: center;
 }
