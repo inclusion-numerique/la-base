@@ -1,5 +1,5 @@
 import { categoryStyles } from '@app/web/app/(public)/(categories)/_helpers/categoryStyles'
-import type { HomeCategoryCounts } from '@app/web/app/(public)/(home)/_components/getHomeCategoriesCount'
+import { HomeCategoryCounts } from '@app/web/features/home/components/getHomeCategoriesCount'
 import classNames from 'classnames'
 import React from 'react'
 

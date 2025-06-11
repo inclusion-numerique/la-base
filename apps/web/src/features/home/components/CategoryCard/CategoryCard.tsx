@@ -20,7 +20,7 @@ const CATEGORY_VARIANTS: Record<Category, CategoryStyle> = {
     icon: 'ri-service-fill',
     color: 'fr-text-label--green-archipel',
     background: 'fr-background-alt--green-archipel',
-    href: '/inclusion-et-competences-numeriques',
+    href: '/inclusion-numerique',
   },
   'Culture numérique': {
     icon: 'ri-stack-fill',

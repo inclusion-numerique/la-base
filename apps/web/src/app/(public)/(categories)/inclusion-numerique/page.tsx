@@ -19,7 +19,7 @@ const InclusionEtCompetencesNumeriquesPage = async ({
     <CategoryPage
       params={params}
       searchParams={searchParams}
-      category="Inclusion & compétences numériques"
+      category="Inclusion numérique"
     />
   )
 }

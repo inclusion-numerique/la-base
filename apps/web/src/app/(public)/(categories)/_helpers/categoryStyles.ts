@@ -9,7 +9,7 @@ export type CategoryStyle = {
 }
 
 export const categoryStyles: { [key in Category]: CategoryStyle } = {
-  'Inclusion & compétences numériques': {
+  'Inclusion numérique': {
     description:
       'Processus visant à rendre le numérique accessible à chaque individu pour une plus grande autonomie dans un monde de plus en plus digital. Les compétences numériques transmises peuvent ainsi devenir un levier d’inclusion sociale et économique.',
     icon: 'ri-service-fill',

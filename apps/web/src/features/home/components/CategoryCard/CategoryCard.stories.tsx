@@ -4,7 +4,6 @@ import { CategoryCard, type CategoryCardProps } from './CategoryCard'
 const args: CategoryCardProps = {
   category: 'Communs & souveraineté',
   resourcesCount: 453,
-  thematicCount: 12,
 }
 
 const meta = {
