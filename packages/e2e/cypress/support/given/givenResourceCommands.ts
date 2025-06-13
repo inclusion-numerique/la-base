@@ -13,7 +13,7 @@ export const createTestPublishResourceCommand = (
       ? {
           resourceId,
           isPublic: true,
-          themes: ['DemarchesEtServicesEnLigne'],
+          themes: ['AidesAuxDemarchesAdministratives'],
           supportTypes: ['Article'],
           targetAudiences: ['Particuliers', 'AidantsNumeriques'],
         }
