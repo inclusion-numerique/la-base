@@ -101,7 +101,7 @@ export const themeLabels: { [theme in Theme]: string } = {
   NumeriqueEnSante: 'Numérique en santé',
   OpenSourceEtLicencesLibres: 'Open source et licences libres',
   Parentalite: 'Parentalité',
-  RisquesCyberEtProtection: 'Inclusion numérique',
+  RisquesCyberEtProtection: 'Risques cyber et protection',
   SobrieteNumerique: 'Sobriété numérique',
   SouveraineteNumeriqueEtHebergementDesDonnees:
     'Souveraineté numérique & hébergement des données',
@@ -158,15 +158,22 @@ export const categoryThemes = (() => {
 export const categoryThemesOptions = (() => {
   const index: { [category in Category]: SelectOption[] } = {
     'Inclusion numérique': [],
-    'Numérique & environnement': [],
     'Culture numérique': [],
     'Communs & souveraineté': [],
+    'Numérique & environnement': [],
   } as { [category in Category]: SelectOption[] }
 
-  for (const [theme, category] of Object.entries(themeCategories)) {
+  const sortedThemeCategories = Object.entries(themeCategories).sort((a, b) =>
+    a[0].localeCompare(b[0]),
+  )
+
+  for (const [theme, category] of sortedThemeCategories) {
     index[category].push({
       label: themeLabels[theme as Theme],
       value: theme as Theme,
+      extra: {
+        category: category,
+      },
     })
   }
 

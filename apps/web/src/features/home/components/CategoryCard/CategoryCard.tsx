@@ -1,8 +1,8 @@
+import { CATEGORY_VARIANTS, Category } from '@app/web/themes/themes'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 import styles from './CategoryCard.module.css'
-import { Category, CATEGORY_VARIANTS } from '@app/web/themes/themes'
 
 export type CategoryCardProps = {
   category: Category

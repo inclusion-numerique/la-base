@@ -2,29 +2,31 @@
 
 import OptionBadge from '@app/ui/components/Form/OptionBadge'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import DeleteSearchFiltersButton from '@app/web/components/Search/Filters/DeleteSearchFiltersButton'
+import SearchThematicsFilters from '@app/web/components/Search/Filters/SearchThematicsFilters'
+import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import {
   type SearchParams,
   type SearchTab,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import {
+  CATEGORY_VARIANTS,
+  CATEGORY_VARIANTS_TAG,
+  type Category as ThemeCategory,
+  categories as themeCategories,
+} from '@app/web/themes/themes'
+import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
 import SearchFilter from './SearchFilter'
 import styles from './SearchFilters.module.css'
-import type { Category, FilterKey } from './filter'
-import SearchThematicsFilters from '@app/web/components/Search/Filters/SearchThematicsFilters'
-import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
-import {
-  CATEGORY_VARIANTS,
-  CATEGORY_VARIANTS_TAG,
-} from '@app/web/themes/themes'
-import type { Category as CategoryTheme } from '@app/web/themes/themes'
-import classNames from 'classnames'
+import { type Category, type FilterKey, isCategoryComplete } from './filter'
 
 export type SearchFilterSelectOption = SelectOption<
   string,
-  { category: CategoryTheme }
+  { category: ThemeCategory }
 >
 
 export type FiltersInitialValue = {
@@ -87,6 +89,44 @@ const SearchFilters = ({
     )
   }
 
+  const onSelectThematics = (options: SelectOption[], category: FilterKey) => {
+    const updatedSearchParams = {
+      ...searchParams,
+      [category]: options.map((option) => option.value),
+      ...Object.fromEntries(
+        Object.entries(searchParams)
+          .filter(([key]) => key !== 'themes')
+          .map(([key]) => [
+            key,
+            selected
+              .filter((s) => s.category === key)
+              .map((s) => s.option.value),
+          ]),
+      ),
+    }
+
+    router.push(searchUrl(tab, updatedSearchParams))
+  }
+
+  const onUnselectThematics = (category: FilterKey) => {
+    const updatedSearchParams = {
+      ...searchParams,
+      [category]: [],
+      ...Object.fromEntries(
+        Object.entries(searchParams)
+          .filter(([key]) => key !== category)
+          .map(([key]) => [
+            key,
+            selected
+              .filter((s) => s.category === key)
+              .map((s) => s.option.value),
+          ]),
+      ),
+    }
+
+    router.push(searchUrl(tab, updatedSearchParams))
+  }
+
   const selectedThematics = selected.filter(
     (selectedItem) => selectedItem.category === 'themes',
   )
@@ -100,11 +140,7 @@ const SearchFilters = ({
         <FiltersModal
           categories={categories}
           selected={
-            new Set(
-              selected
-                // .filter((selectedItem) => selectedItem.category === category.id)
-                .map((selectedItem) => selectedItem.option.value),
-            )
+            new Set(selected.map((selectedItem) => selectedItem.option.value))
           }
           onUnselect={onUnselect}
           onSelect={onSelect}
@@ -114,39 +150,84 @@ const SearchFilters = ({
         <p className="fr-mb-1w">{label}</p>
         <div className={styles.buttons}>
           <SearchThematicsFilters
-            onUnselect={onUnselect}
-            onSelect={onSelect}
-            selected={
-              new Set(
-                selected
-                  .filter((selectedItem) => selectedItem.category === 'themes')
-                  .map((selectedItem) => selectedItem.option.value),
-              )
-            }
+            selected={selected}
+            onSelectThematics={onSelectThematics}
           />
-          {categories.map((category) => (
-            <div key={category.id}>
-              <SearchFilter
-                selected={
-                  new Set(
-                    selected
-                      .filter(
-                        (selectedItem) => selectedItem.category === category.id,
-                      )
-                      .map((selectedItem) => selectedItem.option.value),
-                  )
-                }
-                onUnselect={onUnselect}
-                onSelect={onSelect}
-                category={category}
-              />
-            </div>
-          ))}
+          {/* We need to filter for the desktop view (since it's handled in the SearchThematicsFilters component above), but keep the 'themes' category in the props for mobile purpose */}
+          {categories
+            .filter((category) => category.id !== 'themes')
+            .map((category) => (
+              <div key={category.id}>
+                <SearchFilter
+                  selected={
+                    new Set(
+                      selected
+                        .filter(
+                          (selectedItem) =>
+                            selectedItem.category === category.id,
+                        )
+                        .map((selectedItem) => selectedItem.option.value),
+                    )
+                  }
+                  onUnselect={onUnselect}
+                  onSelect={onSelect}
+                  category={category}
+                />
+              </div>
+            ))}
         </div>
       </div>
-      {otherSelected.length > 0 ||
-        (selectedThematics.length > 0 && (
+      {(otherSelected.length > 0 || selectedThematics.length > 0) && (
+        <div
+          className={classNames(
+            styles.selectedContainer,
+            'fr-flex fr-direction-column fr-align-items-center fr-justify-content-space-between fr-direction-md-row fr-flex-gap-6v',
+          )}
+        >
           <div className={styles.selected}>
+            {themeCategories.map((category) => {
+              const className =
+                CATEGORY_VARIANTS_TAG[category as ThemeCategory].unselected
+              const categoryIconClassName = classNames(
+                CATEGORY_VARIANTS[category as ThemeCategory].icon,
+                CATEGORY_VARIANTS[category as ThemeCategory].color,
+              )
+              if (isCategoryComplete(category, selectedThematics)) {
+                return (
+                  <ThematicOptionBadge
+                    categoryIconClassName={categoryIconClassName}
+                    iconId="fr-icon-close-line"
+                    iconClassName="fr-text-title--blue-france"
+                    textClassName="fr-text-label--grey"
+                    className={className}
+                    ariaLabelPrefix={`Retirer toutes les catégories de la thématique ${category}`}
+                    option={{ label: category, disabled: false }}
+                    onClick={() => onUnselectThematics(category as FilterKey)}
+                  />
+                )
+              } else {
+                return selectedThematics
+                  .filter((item) => {
+                    const option = item.option as SearchFilterSelectOption
+                    return option.extra!.category === category
+                  })
+                  .map((selectedItem) => (
+                    <ThematicOptionBadge
+                      categoryIconClassName={categoryIconClassName}
+                      iconId="fr-icon-close-line"
+                      iconClassName="fr-text-title--blue-france"
+                      textClassName="fr-text-label--grey"
+                      className={className}
+                      ariaLabelPrefix="Retirer"
+                      key={`${selectedItem.option.value}-${selectedItem.category}`}
+                      option={selectedItem.option}
+                      onClick={() =>
+                        onUnselect(selectedItem.option, selectedItem.category)
+                      }
+                    />
+                  ))
+              }
+            })}
             {otherSelected.map((selectedItem) => (
               <OptionBadge
                 key={`${selectedItem.option.value}-${selectedItem.category}`}
@@ -156,32 +237,12 @@ const SearchFilters = ({
                 }
               />
             ))}
-            {selectedThematics.map((selectedItem) => {
-              const option = selectedItem.option as SearchFilterSelectOption
-              const category = option.extra!.category
-              const className = CATEGORY_VARIANTS_TAG[category].unselected
-              const categoryIconClassName = classNames(
-                CATEGORY_VARIANTS[category].icon,
-                CATEGORY_VARIANTS[category].color,
-              )
-              return (
-                <ThematicOptionBadge
-                  categoryIconClassName={categoryIconClassName}
-                  iconId="fr-icon-close-line"
-                  iconClassName="fr-text-title--blue-france"
-                  textClassName="fr-text-label--grey"
-                  className={className}
-                  ariaLabelPrefix="Retirer"
-                  key={`${selectedItem.option.value}-${selectedItem.category}`}
-                  option={selectedItem.option}
-                  onClick={() =>
-                    onUnselect(selectedItem.option, selectedItem.category)
-                  }
-                />
-              )
-            })}
           </div>
-        ))}
+          <div>
+            <DeleteSearchFiltersButton />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
