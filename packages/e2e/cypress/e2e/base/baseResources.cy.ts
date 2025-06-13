@@ -42,12 +42,14 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('base-resources').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')
+    cy.contains('button', 'Brouillons').click()
     cy.testId('resources-draft-tab').as('draft')
     cy.get('@draft')
       .find('[data-testid="resource-card"]')
       .should('have.length', 1)
 
     cy.log('Check public resources empty state')
+    cy.contains('button', 'Publiques').click()
     cy.testId('resources-public-tab').as('public')
     cy.get('@public')
       .find('[data-testid="resource-card"]')
@@ -58,6 +60,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     )
 
     cy.log('Check private resources empty state')
+    cy.contains('button', 'Privées').click()
     cy.testId('resources-private-tab').as('private')
     cy.get('@private')
       .find('[data-testid="resource-card"]')
@@ -68,6 +71,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     )
 
     cy.log('Publish resource in private')
+    cy.contains('button', 'Brouillons').click()
     cy.testId('resource-card-edit-link').click()
     cy.testId('add-content-button').click()
     cy.testId('add-SectionTitle-content-button').click()
@@ -89,6 +93,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('base-resources').should('contain', 'Privées · 1')
 
     cy.log('Check draft resources')
+    cy.contains('button', 'Brouillons').click()
     cy.testId('resources-draft-tab').as('draft')
     cy.get('@draft')
       .find('[data-testid="resource-card"]')
@@ -96,6 +101,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.get('@draft').should('contain', "Vous n'avez pas de brouillons.")
 
     cy.log('Check public resources empty state')
+    cy.contains('button', 'Publiques').click()
     cy.testId('resources-public-tab').as('public')
     cy.get('@public')
       .find('[data-testid="resource-card"]')
@@ -105,13 +111,14 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
       "Vous n'avez pas de ressources publiques.",
     )
 
-    cy.log('Check private resources empty state')
+    cy.log('Check private resources')
+    cy.contains('button', 'Privées').click()
     cy.testId('resources-private-tab').as('private')
     cy.get('@private')
       .find('[data-testid="resource-card"]')
       .should('have.length', 1)
 
-    cy.log('Change resource visibility to private')
+    cy.log('Change resource visibility to public')
     cy.visit(`/ressources/un-titre/publier`)
 
     cy.dsfrModalsShouldBeBound()
@@ -132,19 +139,22 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('base-resources').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')
+    cy.contains('button', 'Brouillons').click()
     cy.testId('resources-draft-tab').as('draft')
     cy.get('@draft')
       .find('[data-testid="resource-card"]')
       .should('have.length', 0)
     cy.get('@draft').should('contain', "Vous n'avez pas de brouillons.")
 
-    cy.log('Check public resources empty state')
+    cy.log('Check public resources')
+    cy.contains('button', 'Publiques').click()
     cy.testId('resources-public-tab').as('public')
     cy.get('@public')
       .find('[data-testid="resource-card"]')
       .should('have.length', 1)
 
     cy.log('Check private resources empty state')
+    cy.contains('button', 'Privées').click()
     cy.testId('resources-private-tab').as('private')
     cy.get('@private')
       .find('[data-testid="resource-card"]')
