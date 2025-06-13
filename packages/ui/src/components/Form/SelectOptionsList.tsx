@@ -22,7 +22,6 @@ const SelectOptionsList = ({ options }: { options: SelectInputOption[] }) => (
         </option>
       ),
     )}
-    )
   </>
 )
 
