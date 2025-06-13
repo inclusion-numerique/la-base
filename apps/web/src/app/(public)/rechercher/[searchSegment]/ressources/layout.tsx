@@ -51,7 +51,7 @@ const ResourcesSearchLayout = async ({
               category: themeCategories[theme],
             },
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
     ...searchExecutionParams.supportTypes.map(
       (supportType) =>
@@ -61,7 +61,7 @@ const ResourcesSearchLayout = async ({
             value: supportType,
             label: supportTypeLabels[supportType],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
     ...searchExecutionParams.targetAudiences.map(
       (targetAudience) =>
@@ -71,7 +71,7 @@ const ResourcesSearchLayout = async ({
             value: targetAudience,
             label: targetAudienceLabels[targetAudience],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
   ]
 

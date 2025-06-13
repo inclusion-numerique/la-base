@@ -167,9 +167,9 @@ export const sanitizeUrlSearchQueryParams = (
 
   const query = trimmedRecherche || null
 
-  const themes = thematiquesAsArray
-    .filter((theme) => theme in themeLabels)
-    .sort((a, b) => themeLabels[a].localeCompare(themeLabels[b])) as Theme[]
+  const themes = thematiquesAsArray.filter(
+    (theme) => theme in themeLabels,
+  ) as Theme[]
 
   const supportTypes = typesAsArray.filter(
     (type) => type in supportTypeLabels,

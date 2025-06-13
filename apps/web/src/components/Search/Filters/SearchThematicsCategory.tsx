@@ -1,22 +1,34 @@
-import { Checkbox } from '@codegouvfr/react-dsfr/Checkbox'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
+import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import {
-  Category,
+  FilterKey,
+  ThematicSelection,
+  isCategoryComplete,
+} from '@app/web/components/Search/Filters/filter'
+import {
   CATEGORY_VARIANTS,
   CATEGORY_VARIANTS_TAG,
+  Category,
 } from '@app/web/themes/themes'
+import { Checkbox } from '@codegouvfr/react-dsfr/Checkbox'
 import classNames from 'classnames'
-import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
+import React from 'react'
 
 const SearchThematicsCategory = ({
   category,
   options,
   selected,
+  onSelect,
+  onSelectAllInCategory,
 }: {
   category: Category
   options: SelectOption[]
-  selected: Set<string>
+  selected: ThematicSelection[]
+  onSelect: (option: SelectOption, category: FilterKey) => void
+  onSelectAllInCategory: (category: FilterKey, selected: boolean) => void
 }) => {
+  const handleOnClick = (opt: SelectOption) => onSelect(opt, 'themes')
+
   return (
     <div className="fr-flex fr-direction-column fr-flex-gap-6v">
       <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
@@ -44,7 +56,10 @@ const SearchThematicsCategory = ({
               label: 'Sélectionner toute la catégorie',
               nativeInputProps: {
                 name: category,
-                value: 'all',
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                  onSelectAllInCategory(category as FilterKey, e.target.checked)
+                },
+                checked: isCategoryComplete(category, selected),
               },
             },
           ]}
@@ -52,7 +67,7 @@ const SearchThematicsCategory = ({
       </div>
       <div className="fr-flex fr-flex-wrap fr-flex-gap-2v">
         {options.map((opt) => {
-          const isSelected = selected.has(opt.value)
+          const isSelected = selected.some((s) => s.option.value === opt.value)
           const iconId = isSelected ? 'fr-icon-check-line' : 'fr-icon-add-line'
           const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
           const className = isSelected
@@ -71,7 +86,7 @@ const SearchThematicsCategory = ({
               iconId={iconId}
               option={opt}
               ariaLabelPrefix={ariaLabelPrefix}
-              onClick={() => console.log(opt)}
+              onClick={() => handleOnClick(opt)}
               size="md"
               className={className}
               iconClassName={iconClassName}
