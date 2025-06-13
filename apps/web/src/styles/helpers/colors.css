@@ -1,3 +1,19 @@
+.fr-background-artwork-minor--green-archipel {
+  background-color: var(--artwork-minor-green-archipel) !important;
+}
+
+.fr-background-artwork-minor--pink-tuile {
+  background-color: var(--artwork-minor-pink-tuile) !important;
+}
+
+.fr-background-artwork-minor--yellow-tournesol {
+  background-color: var(--artwork-minor-yellow-tournesol) !important;
+}
+
+.fr-background-artwork-minor--green-bourgeon {
+  background-color: var(--artwork-minor-green-bourgeon) !important;
+}
+
 .fr-background-alt--brown-caramel-950 {
   background: var(--brown-caramel-950-100);
 }
@@ -8,4 +24,8 @@
 
 .fr-text-mention--black {
   color: var(--grey-50-1000);
+}
+
+.fr-text-label--white {
+  color: white;
 }
