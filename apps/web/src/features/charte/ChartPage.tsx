@@ -49,7 +49,7 @@ const ChartPage = () => {
                     <span className="fr-text--bold fr-text--xl fr-mb-0">
                       Des ressources libres et gratuites
                     </span>
-                    <p>
+                    <p className="fr-text--lg fr-text-mention--grey">
                       Toutes les ressources publiées sur la plateforme sont
                       mises à disposition gratuitement et, par défaut, sous
                       licence&nbsp;
@@ -58,9 +58,9 @@ const ChartPage = () => {
                         className="fr-link"
                         target="_blank"
                       >
-                        Etalab
+                        Etalab 2.0
                       </Link>
-                      (d'autres choix de licences sont possibles,&nbsp;
+                      &nbsp;(d'autres choix de licences sont possibles,&nbsp;
                       <Link
                         href="/centre-d-aide/les-ressources#licences"
                         className="fr-link"
@@ -77,7 +77,7 @@ const ChartPage = () => {
                     <span className="fr-text--bold fr-text--xl fr-mb-0">
                       Non-démarchage commercial
                     </span>
-                    <p>
+                    <p className="fr-text--lg fr-text-mention--grey">
                       La plateforme est dédiée au partage de ressources et de
                       savoirs au service de l’intérêt général. Il est
                       formellement interdit d'utiliser la plateforme afin de

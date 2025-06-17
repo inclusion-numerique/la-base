@@ -7,9 +7,9 @@ const WhoAreWe = () => (
       <AnctLogo />
       <h2 className="fr-h2 fr-mt-3w">Qui sommes nous ?</h2>
       <span className="fr-text--lg">
-        Nous sommes l’équipe du{' '}
+        Nous sommes l’équipe du&nbsp;
         <Link
-          href="https://societenumerique.gouv.fr/fr/"
+          href="https://societenumerique.gouv.fr/"
           className="fr-link fr-text--lg"
           target="_blank"
         >
@@ -17,7 +17,7 @@ const WhoAreWe = () => (
         </Link>
         &nbsp;qui porte la politique nationale d’inclusion numérique, formalisée
         par une feuille de route co-écrite avec l’ensemble des acteurs du
-        secteur :
+        secteur :&nbsp;
         <Link
           href="https://www.societenumerique.gouv.fr/nos-missions/france-numerique-ensemble"
           className="fr-link fr-text--lg"
