@@ -124,7 +124,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.dsfrModalsShouldBeBound()
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-themes-select').select('IntelligenceArtificielle')
-    cy.testId('indexation-support-types-select').select('Article')
+    cy.testId('indexation-resource-types-select').select('Article')
     cy.testId('indexation-targetAudiences-select').select('Particuliers')
     cy.testId('publish-resource-button').click()
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
