@@ -44,7 +44,12 @@ const ChartPage = () => {
                   Les conditions à respecter pour publier une ressource
                 </span>
                 <div className="fr-flex fr-flex-gap-6v fr-direction-column fr-direction-md-row fr-justify-content-center">
-                  <div className={styles.tileContainer}>
+                  <div
+                    className={classNames(
+                      styles.tileContainer,
+                      'fr-p-md-6w fr-px-3w fr-py-4w',
+                    )}
+                  >
                     <LogoEuro />
                     <span className="fr-text--bold fr-text--xl fr-mb-0">
                       Des ressources libres et gratuites
@@ -72,7 +77,12 @@ const ChartPage = () => {
                       diffusion des contenus partagés.
                     </p>
                   </div>
-                  <div className={styles.tileContainer}>
+                  <div
+                    className={classNames(
+                      styles.tileContainer,
+                      'fr-p-md-6w fr-px-3w fr-py-4w',
+                    )}
+                  >
                     <LogoSpeakerPhone />
                     <span className="fr-text--bold fr-text--xl fr-mb-0">
                       Non-démarchage commercial

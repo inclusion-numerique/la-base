@@ -14,7 +14,6 @@
 
 .tileContainer {
   background: var(--light-background-default-grey, #fff);
-  padding: 48px;
   border-radius: 16px;
   text-align: left;
   width: 100%;

@@ -47,7 +47,7 @@ const HomePage = async ({
                 </Link>
               </span>
             </p>
-            <div className="fr-mb-6w fr-mb-md-10w fr-flex-md fr-direction-column fr-align-items-center">
+            <div className="fr-mb-6w fr-mb-md-10w">
               <h2 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
                 Explorez les ressources grâce aux 4 grandes catégories
               </h2>
