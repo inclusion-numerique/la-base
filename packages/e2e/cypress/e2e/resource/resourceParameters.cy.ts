@@ -194,7 +194,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
     cy.testId('indexation-themes-select-DemarchesEtServicesEnLigne').click()
-    cy.testId('indexation-support-types-select-Article').click()
+    cy.testId('indexation-resource-types-select-Article').click()
     cy.testId('indexation-targetAudiences-select-Particuliers').click()
     cy.testId('indexation-targetAudiences-select-AidantsNumeriques').click()
 
@@ -204,7 +204,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-empty-indexation').should('exist')
     cy.testId('edit-card-button').eq(2).click()
     cy.testId('indexation-themes-select').select('ActeursDuNumerique')
-    cy.testId('indexation-support-types-select').select('Tutoriel')
+    cy.testId('indexation-resource-types-select').select('Annuaire')
     cy.testId('indexation-targetAudiences-select').select('Adultes')
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
@@ -215,7 +215,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     )
 
     cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
-    cy.testId('resource-indexation-resourceTypes-Tutoriel').should('exist')
+    cy.testId('resource-indexation-resourceTypes-Annuaire').should('exist')
     cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
   })
 
