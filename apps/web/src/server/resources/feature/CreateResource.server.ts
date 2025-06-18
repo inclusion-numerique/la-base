@@ -53,7 +53,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   isPublic: null,
   contents: [],
   themes: [],
-  supportTypes: [],
+  resourceTypes: [],
   targetAudiences: [],
   contributors: [],
   collections: [],

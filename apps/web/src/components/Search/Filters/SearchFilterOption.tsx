@@ -21,7 +21,12 @@ const SearchFilterOption = ({
         onSelect(option)
       }}
     >
-      <div>{option.label}</div>
+      <div className="fr-flex fr-direction-column fr-align-items-start">
+        {option.label}
+        {!!option.hint && (
+          <span className="fr-text--xs fr-mb-0">{option.hint}</span>
+        )}
+      </div>
       <span
         className={classNames(
           'fr-icon--sm fr-icon-check-line fr-text-title--blue-france',

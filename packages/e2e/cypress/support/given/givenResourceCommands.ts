@@ -14,11 +14,11 @@ export const createTestPublishResourceCommand = (
           resourceId,
           isPublic: true,
           themes: ['AidesAuxDemarchesAdministratives'],
-          supportTypes: ['Article'],
+          resourceTypes: ['Article'],
           targetAudiences: ['Particuliers', 'AidantsNumeriques'],
         }
       : { resourceId, isPublic: false },
-  }) satisfies PublishCommand
+  } satisfies PublishCommand)
 
 export const createTestResourceCommands = ({
   baseId,

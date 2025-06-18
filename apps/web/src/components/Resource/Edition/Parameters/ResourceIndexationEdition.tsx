@@ -1,10 +1,10 @@
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
 import {
-  supportTypesLimit,
+  resourceTypesLimit,
   targetAudiencesLimit,
   themesLimit,
 } from '@app/web/server/resources/feature/PublishResource'
-import { supportTypeOptions } from '@app/web/themes/supportTypes'
+import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
 import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
 import { themeOptions } from '@app/web/themes/themes'
 import React from 'react'
@@ -13,13 +13,13 @@ import type { Control, FieldValues, Path } from 'react-hook-form'
 const ResourceIndexationEdition = <T extends FieldValues>({
   control,
   themesPath,
-  supportTypesPath,
+  resourceTypesPath,
   targetAudiencesPath,
   required,
 }: {
   control: Control<T>
   themesPath: Path<T>
-  supportTypesPath: Path<T>
+  resourceTypesPath: Path<T>
   targetAudiencesPath: Path<T>
   required?: boolean
 }) => (
@@ -43,22 +43,22 @@ const ResourceIndexationEdition = <T extends FieldValues>({
       options={themeOptions}
     />
     <MultipleSelectFormField
-      data-testid="indexation-support-types-select"
+      data-testid="indexation-resource-types-select"
       asterisk={required}
-      label="Type de support"
+      label="Type de ressource"
       hint={
         <>
-          Type de support (article, fiche, guide...).
+          Type de ressource (article, fiche, guide...).
           <br />
-          Sélectionnez jusqu’à {supportTypesLimit} types.
+          Sélectionnez jusqu’à {resourceTypesLimit} types.
         </>
       }
       control={control}
-      limit={supportTypesLimit}
-      path={supportTypesPath}
+      limit={resourceTypesLimit}
+      path={resourceTypesPath}
       defaultOption
-      defaultOptionLabel="Sélectionnez une type de support"
-      options={supportTypeOptions}
+      defaultOptionLabel="Sélectionnez un type de ressource"
+      options={resourceTypesOptions}
     />
     <MultipleSelectFormField
       data-testid="indexation-targetAudiences-select"

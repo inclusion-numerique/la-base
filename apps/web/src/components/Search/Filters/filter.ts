@@ -7,7 +7,7 @@ import { type SearchFilterSelectOption } from './SearchFilters'
 
 export type FilterKey =
   | 'themes'
-  | 'supportTypes'
+  | 'resourceTypes'
   | 'targetAudiences'
   | 'departements'
 

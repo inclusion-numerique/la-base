@@ -263,23 +263,18 @@ enum Theme {
   @@map("theme")
 }
 
-enum SupportType {
-  SupportPedagogique @map("support_pedagogique")
-  Tutoriel           @map("tutoriel")
-  Jeu                @map("jeu")
-  Methodologie       @map("methodologie")
-  SiteWeb            @map("site_web")
-  BoiteOutils        @map("boite_outils")
-  Logiciel           @map("logiciel")
-  Questionnaire      @map("questionnaire")
-  Cartographie       @map("cartographie")
-  Annuaire           @map("annuaire")
-  ModeleNotice       @map("modele_notice")
-  Article            @map("article")
-  Infographie        @map("infographie")
-  Video              @map("video")
+enum ResourceType {
+  ResourcePedagogique @map("resource_pedagogique")
+  OutilsNumeriques    @map("outils_numeriques")
+  Annuaire            @map("annuaire")
+  Article             @map("article")
+  BoiteOutils         @map("boite_outils")
+  Infographie         @map("infographie")
+  Methodologie        @map("methodologie")
+  Questionnaire       @map("questionnaire")
+  VideoWebinaire      @map("video_webinaire")
 
-  @@map("support_type")
+  @@map("resource_type")
 }
 
 enum TargetAudience {
@@ -325,7 +320,7 @@ model Resource {
   isPublic                  Boolean? @map("is_public")
 
   themes          Theme[]
-  supportTypes    SupportType[]    @map("support_types")
+  resourceTypes   ResourceType[]   @map("resource_types")
   targetAudiences TargetAudience[] @map("target_audiences")
   publicFeedback  Boolean          @default(true)
 
@@ -362,7 +357,7 @@ model Resource {
   @@index([baseId])
   @@index([createdById])
   @@index(themes, name: "resources_themes_idx", type: Gin)
-  @@index(supportTypes, name: "resources_support_type_idx", type: Gin)
+  @@index(resourceTypes, name: "resources_resource_types_idx", type: Gin)
   @@index(targetAudiences, name: "resources_target_audiences_idx", type: Gin)
   @@map("resources")
 }
@@ -725,7 +720,7 @@ model SearchExecution {
   results Int
 
   themes          Theme[]          @default([])
-  supportTypes    SupportType[]    @default([]) @map("support_types")
+  resourceTypes   ResourceType[]   @default([]) @map("resource_types")
   targetAudiences TargetAudience[] @default([]) @map("target_audiences")
   departments     String[]         @default([])
 

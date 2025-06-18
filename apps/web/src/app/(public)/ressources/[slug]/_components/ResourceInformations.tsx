@@ -13,7 +13,7 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
     <ResourceIndexationView
       resource={resource}
       withLink
-      supportTypes
+      resourceTypes
       targetAudiences
       themes
       titleClassName="fr-text--sm fr-text--medium"

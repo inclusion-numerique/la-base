@@ -59,7 +59,7 @@ const resource = (imageId: string | null) =>
       'TerritoiresConnectesEtDurables',
     ],
     targetAudiences: ['AutresProfessionnels'],
-    supportTypes: [],
+    resourceTypes: [],
     contributors: [],
     contents: [
       {

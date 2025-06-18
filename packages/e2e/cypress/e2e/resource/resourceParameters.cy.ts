@@ -216,8 +216,8 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
 
-    cy.testId('resource-indexation-themes-Accessibilite').should('exist')
-    cy.testId('resource-indexation-supportTypes-Tutoriel').should('exist')
+    cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
+    cy.testId('resource-indexation-resourceTypes-Tutoriel').should('exist')
     cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
   })
 

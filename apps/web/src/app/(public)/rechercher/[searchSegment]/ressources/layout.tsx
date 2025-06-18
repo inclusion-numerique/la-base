@@ -5,9 +5,9 @@ import SearchFilters, {
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
-  supportTypeLabels,
-  supportTypeOptions,
-} from '@app/web/themes/supportTypes'
+  resourceTypesLabels,
+  resourceTypesOptions,
+} from '@app/web/themes/resourceTypes'
 import {
   categoryTargetAudiencesOptions,
   targetAudienceLabels,
@@ -53,13 +53,13 @@ const ResourcesSearchLayout = async ({
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchExecutionParams.supportTypes.map(
-      (supportType) =>
+    ...searchExecutionParams.resourceTypes.map(
+      (resourceType) =>
         ({
-          category: 'supportTypes',
+          category: 'resourceTypes',
           option: {
-            value: supportType,
-            label: supportTypeLabels[supportType],
+            value: resourceType,
+            label: resourceTypesLabels[resourceType],
           },
         }) satisfies FiltersInitialValue,
     ),
@@ -93,9 +93,9 @@ const ResourcesSearchLayout = async ({
             },
             {
               multiple: false,
-              id: 'supportTypes',
-              label: 'Type de support',
-              options: supportTypeOptions,
+              id: 'resourceTypes',
+              label: 'Type de ressources',
+              options: resourceTypesOptions,
             },
             {
               multiple: true,

@@ -114,7 +114,7 @@ describe('applyContentAdded', () => {
     isPublic: false,
     contents,
     themes: [],
-    supportTypes: [],
+    resourceTypes: [],
     targetAudiences: [],
     contributors: [],
     collections: [],

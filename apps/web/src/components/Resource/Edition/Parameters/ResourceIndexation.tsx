@@ -25,7 +25,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
       payload: {
         resourceId: resource.id,
         themes: resource.themes,
-        supportTypes: resource.supportTypes,
+        resourceTypes: resource.resourceTypes,
         targetAudiences: resource.targetAudiences,
       },
     },
@@ -46,7 +46,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
         <ResourceIndexationEdition
           control={form.control}
           themesPath="payload.themes"
-          supportTypesPath="payload.supportTypes"
+          resourceTypesPath="payload.resourceTypes"
           targetAudiencesPath="payload.targetAudiences"
         />
       }
@@ -55,7 +55,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
           <ResourceIndexationView
             resource={resource}
             withDescription
-            supportTypes
+            resourceTypes
             targetAudiences
             themes
           />
