@@ -41,7 +41,7 @@ describe('onPublished', () => {
     imageId: null,
     isPublic: false,
     themes: [],
-    supportTypes: [],
+    resourceTypes: [],
     targetAudiences: [],
     contributors: [],
     contents: [],

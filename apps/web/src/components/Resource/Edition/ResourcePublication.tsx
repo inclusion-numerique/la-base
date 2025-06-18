@@ -118,7 +118,7 @@ const ResourcePublication = ({
         >
           <ResourceIndexationEdition
             themesPath="payload.themes"
-            supportTypesPath="payload.supportTypes"
+            resourceTypesPath="payload.resourceTypes"
             targetAudiencesPath="payload.targetAudiences"
             required
             control={control}

@@ -1,5 +1,5 @@
 import SearchFilters from '@app/web/components/Search/Filters/SearchFilters'
-import { supportTypeOptions } from '@app/web/themes/supportTypes'
+import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
 import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
 import { categoryThemesOptions } from '@app/web/themes/themes'
 import type { Meta, StoryObj } from '@storybook/react'
@@ -24,9 +24,9 @@ export const Default: Story = {
       },
       {
         multiple: false,
-        id: 'supportTypes',
-        label: 'Type de support',
-        options: supportTypeOptions,
+        id: 'resourceTypes',
+        label: 'Type de ressource',
+        options: resourceTypesOptions,
       },
       {
         multiple: false,

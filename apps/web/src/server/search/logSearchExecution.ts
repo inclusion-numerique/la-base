@@ -36,7 +36,7 @@ export const logSearchExecution = ({
       query: searchParams.query ?? '',
       page: paginationParams.page,
       perPage: paginationParams.perPage,
-      supportTypes: searchParams.supportTypes,
+      resourceTypes: searchParams.resourceTypes,
       targetAudiences: searchParams.targetAudiences,
       sorting: paginationParams.sort,
       departments: searchParams.departements,

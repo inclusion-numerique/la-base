@@ -1,9 +1,9 @@
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
 import { searchParamsFromQueryString } from '@app/web/utils/searchParamsFromQueryString'
 // import * as queryString from 'node:querystring'
-import type { SupportType, TargetAudience, Theme } from '@prisma/client'
+import type { ResourceType, TargetAudience, Theme } from '@prisma/client'
 
 export const searchTabs = ['ressources', 'bases', 'profils'] as const
 export type SearchTab = (typeof searchTabs)[number]
@@ -116,7 +116,7 @@ export type UrlPaginationParams = {
 export type SearchParams = {
   query: string | null
   themes: Theme[]
-  supportTypes: SupportType[]
+  resourceTypes: ResourceType[]
   targetAudiences: TargetAudience[]
   departements: string[]
 }
@@ -130,7 +130,7 @@ export type PaginationParams = {
 export const defaultSearchParams: Readonly<SearchParams> = {
   query: null,
   themes: [],
-  supportTypes: [],
+  resourceTypes: [],
   targetAudiences: [],
   departements: [],
 }
@@ -171,9 +171,9 @@ export const sanitizeUrlSearchQueryParams = (
     (theme) => theme in themeLabels,
   ) as Theme[]
 
-  const supportTypes = typesAsArray.filter(
-    (type) => type in supportTypeLabels,
-  ) as SupportType[]
+  const resourceTypes = typesAsArray.filter(
+    (type) => type in resourceTypesLabels,
+  ) as ResourceType[]
 
   const targetAudiences = publicsAsArray.filter(
     (target) => target in targetAudienceLabels,
@@ -182,7 +182,7 @@ export const sanitizeUrlSearchQueryParams = (
   return {
     query,
     themes,
-    supportTypes,
+    resourceTypes,
     targetAudiences,
     departements: departementsAsArray,
   }
@@ -226,7 +226,7 @@ const searchParamsToUrlQueryParams = (
   thematiques: params.themes.length > 0 ? params.themes : undefined,
   departements:
     params.departements.length > 0 ? params.departements : undefined,
-  types: params.supportTypes.length > 0 ? params.supportTypes : undefined,
+  types: params.resourceTypes.length > 0 ? params.resourceTypes : undefined,
   publics:
     params.targetAudiences.length > 0 ? params.targetAudiences : undefined,
 })

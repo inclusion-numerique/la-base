@@ -1,5 +1,5 @@
 import type { ResourceForMarkdown } from '@app/web/resources/getResourceForMarkdown'
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
 import TurndownService from 'turndown'
@@ -76,7 +76,7 @@ export const resourceToMarkdown = ({
   themes,
   contents,
   targetAudiences,
-  supportTypes,
+  resourceTypes,
 }: ResourceForMarkdown): string =>
   `# ${title}
 
@@ -88,13 +88,17 @@ ${
 }
 
 ${
-  supportTypes.length > 0 &&
-  `Type de support : ${supportTypes.map((supportType) => supportTypeLabels[supportType]).join(', ')}`
+  resourceTypes.length > 0 &&
+  `Type de support : ${resourceTypes
+    .map((resourceType) => resourceTypesLabels[resourceType])
+    .join(', ')}`
 }  
 
 ${
   targetAudiences.length > 0 &&
-  `Public cible : ${targetAudiences.map((targetAudience) => targetAudienceLabels[targetAudience]).join(', ')}`
+  `Public cible : ${targetAudiences
+    .map((targetAudience) => targetAudienceLabels[targetAudience])
+    .join(', ')}`
 }
 
 ${contents.map((content) => contentToMarkdown(content)).join('\n\n')}

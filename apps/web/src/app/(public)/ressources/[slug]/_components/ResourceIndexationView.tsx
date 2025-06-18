@@ -4,7 +4,7 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
 import Tag from '@codegouvfr/react-dsfr/Tag'
@@ -23,14 +23,14 @@ const getThemes = (resource: Resource) => ({
   slug: 'themes' as const,
 })
 
-const getSupportTypes = (resource: Resource) => ({
-  title: 'Type de support',
-  description: 'Type de support (article, fiche, guide...).',
-  tags: resource.supportTypes.map((supportType) => ({
-    slug: supportType,
-    label: supportTypeLabels[supportType],
+const getResourceTypes = (resource: Resource) => ({
+  title: 'Type de ressource',
+  description: 'Type de ressource (article, fiche, guide...).',
+  tags: resource.resourceTypes.map((resourceType) => ({
+    slug: resourceType,
+    label: resourceTypesLabels[resourceType],
   })),
-  slug: 'supportTypes' as const,
+  slug: 'resourceTypes' as const,
 })
 
 const getTargetAudiences = (resource: Resource) => ({
@@ -49,7 +49,7 @@ const ResourceIndexationView = ({
   withLink,
   themes,
   targetAudiences,
-  supportTypes,
+  resourceTypes,
   titleClassName,
   tagsClassName,
 }: {
@@ -57,7 +57,7 @@ const ResourceIndexationView = ({
   withDescription?: boolean
   withLink?: boolean
   themes?: boolean
-  supportTypes?: boolean
+  resourceTypes?: boolean
   targetAudiences?: boolean
   titleClassName?: string
   tagsClassName?: string
@@ -65,10 +65,10 @@ const ResourceIndexationView = ({
   const resourceInfo = useMemo(
     () => [
       ...(themes ? [getThemes(resource)] : []),
-      ...(supportTypes ? [getSupportTypes(resource)] : []),
+      ...(resourceTypes ? [getResourceTypes(resource)] : []),
       ...(targetAudiences ? [getTargetAudiences(resource)] : []),
     ],
-    [resource, supportTypes, targetAudiences, themes],
+    [resource, resourceTypes, targetAudiences, themes],
   )
 
   return resourceInfo.map(({ title, description, tags, slug }, index) => (

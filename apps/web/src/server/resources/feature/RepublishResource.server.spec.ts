@@ -40,7 +40,7 @@ describe('onRepublished', () => {
     imageId: null,
     isPublic: false,
     themes: [],
-    supportTypes: [],
+    resourceTypes: [],
     targetAudiences: [],
     contributors: [],
     contents: [],

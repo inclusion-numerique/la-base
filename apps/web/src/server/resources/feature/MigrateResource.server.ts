@@ -63,7 +63,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
     published,
     themes,
     targetAudiences,
-    supportTypes,
+    resourceTypes,
     contents,
     description,
     ...rest
@@ -87,7 +87,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
     }),
   ),
   themes: themes ?? [],
-  supportTypes: supportTypes ?? [],
+  resourceTypes: resourceTypes ?? [],
   targetAudiences: targetAudiences ?? [],
   contributors: [],
   collections: [],

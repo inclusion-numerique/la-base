@@ -36,7 +36,7 @@ const ranking = {
 export const countResources = async (
   searchParams: Pick<
     SearchParams,
-    'query' | 'themes' | 'supportTypes' | 'targetAudiences'
+    'query' | 'themes' | 'resourceTypes' | 'targetAudiences'
   >,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
@@ -98,13 +98,18 @@ export const countResources = async (
                                       )}::theme[]
                                       )
                                     AND (
-                                      ${searchParams.supportTypes.length === 0} OR
-                                      resources.support_types && ${enumArrayToSnakeCaseStringArray(
-                                        searchParams.supportTypes,
-                                      )}::support_type[]
+                                      ${
+                                        searchParams.resourceTypes.length === 0
+                                      } OR
+                                      resources.resource_types && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.resourceTypes,
+                                      )}::resource_type[]
                                       )
                                     AND (
-                                      ${searchParams.targetAudiences.length === 0} OR
+                                      ${
+                                        searchParams.targetAudiences.length ===
+                                        0
+                                      } OR
                                       resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
                                         searchParams.targetAudiences,
                                       )}::target_audience[]
@@ -212,13 +217,18 @@ export const rankResources = async (
                                       )}::theme[]
                                       )
                                     AND (
-                                      ${searchParams.supportTypes.length === 0} OR
-                                      resources.support_types && ${enumArrayToSnakeCaseStringArray(
-                                        searchParams.supportTypes,
-                                      )}::support_type[]
+                                      ${
+                                        searchParams.resourceTypes.length === 0
+                                      } OR
+                                      resources.resource_types && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.resourceTypes,
+                                      )}::resource_type[]
                                       )
                                     AND (
-                                      ${searchParams.targetAudiences.length === 0} OR
+                                      ${
+                                        searchParams.targetAudiences.length ===
+                                        0
+                                      } OR
                                       resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
                                         searchParams.targetAudiences,
                                       )}::target_audience[]
@@ -237,11 +247,17 @@ export const rankResources = async (
                                           )   as score,
                                       CASE
                                           WHEN filtered_resources.feedbacks_rating IS NULL THEN 3
-                                          WHEN filtered_resources.feedbacks_rating >= ${resourceFeedbackThresholds.beaucoup}
+                                          WHEN filtered_resources.feedbacks_rating >= ${
+                                            resourceFeedbackThresholds.beaucoup
+                                          }
                                               THEN 5
-                                          WHEN filtered_resources.feedbacks_rating >= ${resourceFeedbackThresholds.oui}
+                                          WHEN filtered_resources.feedbacks_rating >= ${
+                                            resourceFeedbackThresholds.oui
+                                          }
                                               THEN 4
-                                          WHEN filtered_resources.feedbacks_rating >= ${resourceFeedbackThresholds.moyen}
+                                          WHEN filtered_resources.feedbacks_rating >= ${
+                                            resourceFeedbackThresholds.moyen
+                                          }
                                               THEN 2
                                           ELSE 1
                                           END AS recommendation_score
@@ -270,11 +286,21 @@ export const rankResources = async (
                    END DESC,
                CASE
                    /* in case of same recommendation score, we sort by feedbacks count */
-                   WHEN ${paginationParams.sort} = 'recommandations' THEN feedbacks_count
+                   WHEN ${
+                     paginationParams.sort
+                   } = 'recommandations' THEN feedbacks_count
                    END DESC,
                CASE
                    /* All these sort options use the most recent resources in case of equality */
-                   WHEN ${(['recent', 'pertinence', 'vues', 'enregistrements', 'recommandations'] satisfies Sorting[] as Sorting[]).includes(paginationParams.sort)}
+                   WHEN ${(
+                     [
+                       'recent',
+                       'pertinence',
+                       'vues',
+                       'enregistrements',
+                       'recommandations',
+                     ] satisfies Sorting[] as Sorting[]
+                   ).includes(paginationParams.sort)}
                        THEN date
                    END DESC
       LIMIT ${paginationParams.perPage} OFFSET ${

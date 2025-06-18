@@ -215,7 +215,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     )
 
     cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
-    cy.testId('resource-indexation-supportTypes-Tutoriel').should('exist')
+    cy.testId('resource-indexation-resourceTypes-Tutoriel').should('exist')
     cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
   })
 

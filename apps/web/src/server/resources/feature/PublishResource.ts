@@ -1,8 +1,8 @@
-import { SupportType, TargetAudience, Theme } from '@prisma/client'
+import { ResourceType, TargetAudience, Theme } from '@prisma/client'
 import z from 'zod'
 
 export const themesLimit = 5
-export const supportTypesLimit = 4
+export const resourceTypesLimit = 4
 export const targetAudiencesLimit = 5
 
 export const indexationCommand = {
@@ -14,13 +14,13 @@ export const indexationCommand = {
       themesLimit,
       `Vous ne pouvez pas ajouter plus de ${themesLimit} thématiques`,
     ),
-  supportTypes: z
-    .array(z.nativeEnum(SupportType), {
-      required_error: 'Merci d’ajouter au moins un type de support',
+  resourceTypes: z
+    .array(z.nativeEnum(ResourceType), {
+      required_error: 'Merci d’ajouter au moins un type de ressource',
     })
     .max(
-      supportTypesLimit,
-      `Vous ne pouvez pas ajouter plus de ${supportTypesLimit} types de support`,
+      resourceTypesLimit,
+      `Vous ne pouvez pas ajouter plus de ${resourceTypesLimit} types de ressource`,
     ),
   targetAudiences: z
     .array(z.nativeEnum(TargetAudience), {
@@ -44,9 +44,9 @@ export const PublishCommandValidation = z.object({
           1,
           'Merci d’ajouter au moins une thématique',
         ),
-        supportTypes: indexationCommand.supportTypes.min(
+        resourceTypes: indexationCommand.resourceTypes.min(
           1,
-          'Merci d’ajouter au moins un type de support',
+          'Merci d’ajouter au moins un type de ressource',
         ),
         targetAudiences: indexationCommand.targetAudiences.min(
           1,
@@ -84,7 +84,7 @@ export type ResourcePublishedV2 = {
   | {
       isPublic: true
       themes: Theme[]
-      supportTypes: SupportType[]
+      resourceTypes: ResourceType[]
       targetAudiences: TargetAudience[]
     }
   | {
