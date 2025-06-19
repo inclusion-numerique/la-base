@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from 'react'
-import type { Metadata } from 'next'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchHeader, {
   rechercherId,
 } from '@app/web/components/Search/SearchHeader'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { footerSkipLink } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import React, { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

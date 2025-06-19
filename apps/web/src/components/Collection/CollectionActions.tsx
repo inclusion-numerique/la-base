@@ -1,9 +1,9 @@
-import classNames from 'classnames'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { CollectionMoreActionsDropdown } from '@app/web/components/Collection/CollectionMoreActionsDropdown'
 import SaveCollectionButton from '@app/web/components/Collection/SaveCollectionButton'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import classNames from 'classnames'
 
 const CollectionActions = ({
   collection,

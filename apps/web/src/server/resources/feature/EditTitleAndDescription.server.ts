@@ -1,10 +1,10 @@
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
-import {
+import type {
   EditTitleAndDescriptionCommand,
   TitleAndDescriptionEdited,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export const handleEditTitleAndDescription: ResourceMutationCommandHandler<
   EditTitleAndDescriptionCommand,

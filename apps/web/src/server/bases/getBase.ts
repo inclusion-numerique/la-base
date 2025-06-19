@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
@@ -7,13 +7,28 @@ import {
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
+import type { Prisma } from '@prisma/client'
 import {
   collectionSelect,
   computeCollectionsListWhereForUser,
 } from '../collections/getCollectionsList'
 import { profileListSelect } from '../profiles/getProfilesList'
 
-export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
+const baseMembersOrderBy: Record<
+  BaseMembersSortType,
+  | Prisma.BaseMembersOrderByWithRelationInput
+  | Prisma.BaseMembersOrderByWithRelationInput[]
+> = {
+  Alphabetique: { member: { name: 'asc' } },
+  Role: [{ isAdmin: 'desc' }, { accepted: 'asc' }],
+  Recent: { accepted: 'desc' },
+  Ancien: { accepted: 'asc' },
+}
+
+export const baseSelect = (
+  user: Pick<SessionUser, 'id'> | null,
+  membersOrderBy?: BaseMembersSortType,
+) =>
   ({
     id: true,
     slug: true,
@@ -112,16 +127,14 @@ export const baseSelect = (user: Pick<SessionUser, 'id'> | null) =>
           select: profileListSelect(user),
         },
       },
-      where: {
-        accepted: {
-          not: null,
-        },
-      },
-      orderBy: { added: 'asc' },
+      orderBy: membersOrderBy
+        ? baseMembersOrderBy[membersOrderBy]
+        : baseMembersOrderBy.Alphabetique,
     },
     _count: {
       select: {
         followedBy: true,
+        resources: true,
       },
     },
   }) satisfies Prisma.BaseSelect
@@ -135,10 +148,20 @@ export const getBase = async (id: string, user: Pick<SessionUser, 'id'>) =>
 export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'> | null,
+  membersOrderBy?: BaseMembersSortType,
 ) => {
   const basePage = await prismaClient.base.findFirst({
-    select: baseSelect(user),
+    select: baseSelect(user, membersOrderBy),
     where: { slug, deleted: null },
+  })
+  const resourceViews = await prismaClient.resource.aggregate({
+    where: {
+      ...computeResourcesListWhereForUser(user),
+      baseId: basePage?.id,
+    },
+    _sum: {
+      viewsCount: true,
+    },
   })
 
   return basePage == null
@@ -146,6 +169,10 @@ export const basePageQuery = async (
     : {
         ...basePage,
         resources: basePage.resources.map(toResourceWithFeedbackAverage),
+        _count: {
+          ...basePage._count,
+          resourcesViews: resourceViews._sum.viewsCount ?? 0,
+        },
       }
 }
 

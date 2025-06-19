@@ -1,13 +1,13 @@
 'use client'
 
-import { UseFormReturn } from 'react-hook-form'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import { TextPayload } from '@app/web/server/resources/feature/Content'
+import type { UseFormReturn } from 'react-hook-form'
 
 const TextContentEdition = ({
   form,
 }: {
-  form: UseFormReturn<ClientContentPayload>
+  form: UseFormReturn<TextPayload>
 }) => <RichInputFormField data-testid="text-input" form={form} path="text" />
 
 export default TextContentEdition

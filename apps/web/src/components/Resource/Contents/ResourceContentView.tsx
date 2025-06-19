@@ -1,7 +1,7 @@
-import * as Sentry from '@sentry/nextjs'
-import ImageContentView from '@app/web/components/Resource/Contents/ImageContentView'
 import FileContentView from '@app/web/components/Resource/Contents/FileContentView'
-import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import ImageContentView from '@app/web/components/Resource/Contents/ImageContentView'
+import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import * as Sentry from '@sentry/nextjs'
 import LinkContentView from './LinkContentView'
 import SectionTitleContentView from './SectionTitleContentView'
 import TextContentView from './TextContentView'
@@ -45,7 +45,6 @@ const ResourceContentView = ({
       return <FileContentView content={{ ...content, file }} />
     }
     default: {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       throw new Error(`Unknown content type: ${type}`)
     }
   }

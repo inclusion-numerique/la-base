@@ -1,12 +1,12 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
-import { useState } from 'react'
-import { TargetAudience } from '@prisma/client'
-import Link from 'next/link'
 import Card from '@app/web/components/Card'
-import ProgressBar from '@app/web/ui/ProgressBar'
 import { searchResultTargetAudienceHref } from '@app/web/themes/searchResultHrefHelpers'
+import ProgressBar from '@app/web/ui/ProgressBar'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { TargetAudience } from '@prisma/client'
+import Link from 'next/link'
+import { useState } from 'react'
 
 const TargetAudiences = ({
   targetAudiences,

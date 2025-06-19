@@ -1,4 +1,4 @@
-import { ResourceContent } from '@app/web/server/resources/getResource'
+import type { ResourceContent } from '@app/web/server/resources/getResource'
 
 const SectionTitleContentView = ({
   content: { title },

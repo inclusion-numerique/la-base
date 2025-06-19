@@ -1,20 +1,20 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
-import { useRouter } from 'next/navigation'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import EditImageButton from '@app/web/components/EditImageButton'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
-  UpdateProfileImageCommand,
+  type UpdateProfileImageCommand,
   UpdateProfileImageCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import EditImageButton from '@app/web/components/EditImageButton'
+import { trpc } from '@app/web/trpc'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import styles from './ProfileImageEdition.module.css'
 
 const ProfileImageEditionModal = createModal({

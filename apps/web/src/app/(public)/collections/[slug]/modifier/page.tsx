@@ -1,24 +1,26 @@
-import { notFound, redirect } from 'next/navigation'
-import React from 'react'
-import type { Metadata } from 'next'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import CollectionEdition from '@app/web/components/Collection/Edition/CollectionEdition'
-import { getCollection } from '@app/web/server/collections/getCollection'
-import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import {
+  CollectionPermissions,
+  collectionAuthorization,
+} from '@app/web/authorization/models/collectionAuthorization'
+import CollectionEdition from '@app/web/components/Collection/Edition/CollectionEdition'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
+import { getCollection } from '@app/web/server/collections/getCollection'
 import { contentId } from '@app/web/utils/skipLinks'
-import {
-  collectionAuthorization,
-  CollectionPermissions,
-} from '@app/web/authorization/models/collectionAuthorization'
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
+import React from 'react'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
+  const { slug } = await params
+
   const collection = await prismaClient.collection.findUnique({
     where: {
       slug,
@@ -39,10 +41,11 @@ export const generateMetadata = async ({
 const CollectionEditionPage = async ({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) => {
+  const { slug } = await params
   const user = await getSessionUser()
-  const collection = await getCollection({ slug: decodeURI(params.slug) }, user)
+  const collection = await getCollection({ slug: decodeURI(slug) }, user)
 
   if (!collection || collection.isFavorites) {
     notFound()

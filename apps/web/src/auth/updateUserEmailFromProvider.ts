@@ -1,6 +1,6 @@
+import { prismaClient } from '@app/web/prismaClient'
 import type { Profile, User } from 'next-auth'
 import type { AdapterUser } from 'next-auth/adapters'
-import { prismaClient } from '@app/web/prismaClient'
 
 /**
  * If user has changed email address in the provider, we need to update the user

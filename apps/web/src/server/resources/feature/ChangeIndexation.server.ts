@@ -1,10 +1,10 @@
-import {
-  IndexationChanged,
+import type {
   ChangeIndexationCommand,
+  IndexationChanged,
 } from '@app/web/server/resources/feature/ChangeIndexation'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from './ResourceEventSideEffect'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
 export const handleChangeIndexation: ResourceMutationCommandHandler<
   ChangeIndexationCommand,

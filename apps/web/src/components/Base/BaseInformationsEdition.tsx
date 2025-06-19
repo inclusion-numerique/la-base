@@ -1,14 +1,14 @@
-import React from 'react'
-import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
 import SelectFormField from '@app/ui/components/Form/SelectFormField'
-import { departmentsOptions } from '@app/web/utils/departments'
-import { CreateBaseCommand } from '@app/web/server/bases/createBase'
+import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
 import {
+  type UpdateBaseInformationsCommand,
   baseTitleInfoText,
-  UpdateBaseInformationsCommand,
 } from '@app/web/server/bases/updateBase'
+import { departmentsOptions } from '@app/web/utils/departments'
+import React from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 
 const BaseInformationsEdition = ({
   form,

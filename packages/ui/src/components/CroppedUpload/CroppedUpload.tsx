@@ -1,6 +1,11 @@
 'use client'
 
-import React, {
+import { cropperToImageCrop } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
+import type { CreateModalReturn } from '@app/ui/utils/modalTypes'
+import { ImageForForm } from '@app/web/server/image/imageTypes'
+import type Cropper from 'cropperjs'
+import 'cropperjs/dist/cropper.css'
+import {
   FormEventHandler,
   KeyboardEventHandler,
   useEffect,
@@ -9,12 +14,9 @@ import React, {
 } from 'react'
 import { ReactCropperElement } from 'react-cropper'
 import { createPortal } from 'react-dom'
-import { ImageForForm } from '@app/web/server/image/imageTypes'
-import type { CreateModalReturn } from '@app/ui/utils/modalTypes'
-import { cropperToImageCrop } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
-import { CroppedImageType, ImageWithName } from './utils'
-import Cropping from './Cropping'
 import CroppedImage from './CroppedImage'
+import Cropping from './Cropping'
+import { CroppedImageType, ImageWithName } from './utils'
 
 const CroppedUpload = ({
   modal,
@@ -50,6 +52,7 @@ const CroppedUpload = ({
     image ? `/images/${image.id}.original` : '',
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we need the effect to trigger on imageBox and croppedBox changes
   useEffect(() => {
     if (imageToUpload) {
       onChange({
@@ -62,7 +65,6 @@ const CroppedUpload = ({
         ...cropperToImageCrop(cropperRef.current?.cropper),
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageToUpload, imageBox, croppedBox])
 
   const onCropSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -97,13 +99,12 @@ const CroppedUpload = ({
   const [clientRendered, setClientRendered] = useState(false)
   useEffect(() => {
     setClientRendered(true)
-  }, [setClientRendered])
+  }, [])
 
   return (
     <>
       {clientRendered &&
         createPortal(
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <form ref={formRef} onSubmit={onCropSubmit} onKeyUp={onFormKeyUp}>
             <modal.Component
               title="Recadrer l’image"

@@ -1,6 +1,6 @@
-import { givenUser } from '@app/e2e/support/given/givenUser'
 import { givenBase } from '@app/e2e/support/given/givenBase'
 import { createTestResourceCommands } from '@app/e2e/support/given/givenResourceCommands'
+import { givenUser } from '@app/e2e/support/given/givenUser'
 
 describe('ETQ Utilisateur non connecté, lorsque je veux éditer une ressource, on me redirige vers la page de connexion', () => {
   beforeEach(() => {

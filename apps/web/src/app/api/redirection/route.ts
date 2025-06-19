@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
 import { mapLegacyPath } from '@app/web/legacyRedirection/legacyRedirection'
+import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -22,13 +22,9 @@ const handler = async (request: Request) => {
     )
   }
 
-  console.log('HTTPS BASE', httpsBase)
-
   const migratedPath = await mapLegacyPath(originUrl)
 
   const redirectTo = `${httpsBase}${migratedPath}`
-
-  console.log('REDIRECTTO', redirectTo)
 
   // 301 permanent and post => get
   return NextResponse.redirect(redirectTo, { status: 301 })

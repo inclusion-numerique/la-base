@@ -1,8 +1,8 @@
-import { NextRequest } from 'next/server'
-import * as Sentry from '@sentry/nextjs'
 import { prismaClient } from '@app/web/prismaClient'
 import { getImageData } from '@app/web/server/image/getImageData'
 import { getOriginalImageData } from '@app/web/server/image/getOriginalImageData'
+import * as Sentry from '@sentry/nextjs'
+import type { NextRequest } from 'next/server'
 
 const notFoundResponse = () =>
   new Response('', {

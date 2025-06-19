@@ -1,14 +1,14 @@
-import React from 'react'
-import Link from 'next/link'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { getServerUrl } from '@app/web/utils/baseUrl'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
-import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import { ResourceMoreActionsDropdown } from '@app/web/components/Resource/ResourceMoreActionsDropdown'
-import { Resource } from '@app/web/server/resources/getResource'
-import ResourceReportButton from './ResourceReportButton'
+import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
+import type { Resource } from '@app/web/server/resources/getResource'
+import { getServerUrl } from '@app/web/utils/baseUrl'
+import Button from '@codegouvfr/react-dsfr/Button'
+import Link from 'next/link'
+import React from 'react'
 import styles from './ResourceActions.module.css'
+import ResourceReportButton from './ResourceReportButton'
 
 const ResourceActions = ({
   resource,
@@ -31,6 +31,7 @@ const ResourceActions = ({
             iconId="fr-icon-edit-line"
             linkProps={{
               href: `/ressources/${resource.slug}/editer`,
+              prefetch: false,
             }}
           >
             Modifier

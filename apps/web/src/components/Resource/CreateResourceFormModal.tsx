@@ -1,14 +1,10 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   CreateResourceDynamicModal,
   createResourceModalId,
@@ -16,17 +12,20 @@ import {
 import ResourceBaseRichRadio from '@app/web/components/Resource/ResourceBaseRichRadio'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
-  CreateResourceCommand,
+  type CreateResourceCommandClientPayload,
   CreateResourceCommandClientPayloadValidation,
 } from '@app/web/server/resources/feature/CreateResource'
-import { CreateResource } from '@app/web/server/rpc/resource/createResource'
+import type { CreateResource } from '@app/web/server/rpc/resource/createResource'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter, useSearchParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
@@ -50,7 +49,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
 
   const { baseId } = CreateResourceDynamicModal.useState()
 
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
 
   // Auto open modal when create is in search params and the modal is bound
   useEffect(() => {
@@ -67,7 +66,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
     formState: { isSubmitting },
     setError,
     setValue,
-  } = useForm<CreateResourceCommand['payload']>({
+  } = useForm<CreateResourceCommandClientPayload>({
     resolver: zodResolver(CreateResourceCommandClientPayloadValidation),
     defaultValues,
   })
@@ -100,7 +99,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
       ? 'Créer une nouvelle ressource'
       : 'Où souhaitez-vous ajouter cette ressource ?'
 
-  const onSubmit = async (data: CreateResource) => {
+  const onSubmit = async (data: CreateResourceCommandClientPayload) => {
     if (isSubmitting) {
       return
     }

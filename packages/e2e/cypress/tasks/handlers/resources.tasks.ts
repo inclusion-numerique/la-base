@@ -1,10 +1,10 @@
-import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
-import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceCreationCommand,
   ResourceMutationCommand,
 } from '@app/web/server/resources/feature/features'
+import { handleResourceCreationCommand } from '@app/web/server/resources/feature/handleResourceCreationCommand'
+import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 
 export type SendResourceCommandsInput = {
   user: Pick<SessionUser, 'id'>
@@ -28,7 +28,6 @@ export const sendResourceCommands = async (
 
   let mutatedResource = resource
   for (const command of mutateCommands) {
-    // eslint-disable-next-line no-await-in-loop
     const result = await handleResourceMutationCommand(command, { user })
     mutatedResource = result.resource
   }

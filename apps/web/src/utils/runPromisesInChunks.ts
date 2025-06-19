@@ -1,5 +1,5 @@
-import { chunk } from 'lodash-es'
 import { runPromisesSequentially } from '@app/web/utils/runPromisesSequentially'
+import { chunk } from 'lodash-es'
 
 export const runPromisesInChunks = async <T>(
   promises: ArrayLike<T | PromiseLike<T>>,

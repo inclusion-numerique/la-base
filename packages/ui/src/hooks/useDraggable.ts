@@ -1,15 +1,14 @@
 import { DragControls } from 'framer-motion'
-
+import React from 'react'
 const onDragButtonPointerDown = (
   controls: DragControls,
   event: React.PointerEvent<Element>,
 ) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   controls.start(event)
 }
 
 const onDragStart = (
-  buttonRef: React.RefObject<HTMLButtonElement>,
+  buttonRef: React.RefObject<HTMLButtonElement | null>,
   _event: MouseEvent | TouchEvent | PointerEvent,
 ) => {
   const button = buttonRef.current
@@ -19,7 +18,7 @@ const onDragStart = (
 }
 
 const onDragEnd = (
-  buttonRef: React.RefObject<HTMLButtonElement>,
+  buttonRef: React.RefObject<HTMLButtonElement | null>,
   event: MouseEvent | TouchEvent | PointerEvent,
 ) => {
   const button = buttonRef.current

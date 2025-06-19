@@ -1,8 +1,8 @@
-import { SelectOption } from '@app/ui/components/Form/utils/options'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import React, { useState } from 'react'
-import { Category, FilterKey } from './filter'
 import styles from './SearchFilter.module.css'
 import SearchFilterOption from './SearchFilterOption'
+import type { Category, FilterKey } from './filter'
 
 export const FilterCategory = ({
   category,

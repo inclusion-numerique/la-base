@@ -1,4 +1,4 @@
-import { ModalProps } from '@codegouvfr/react-dsfr/Modal'
+import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
 
 export const deleteResourceModalProps = (onDelete: () => void): ModalProps => ({
   title: 'Supprimer la ressource',

@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
 import { ExploreResourceButton } from '@app/web/components/Resource/ExploreResourceButton'
+import Link from 'next/link'
+import React from 'react'
 import EmptyBox from '../EmptyBox'
 
 const EmptyBaseCollections = ({ isOwner }: { isOwner: boolean }) => (

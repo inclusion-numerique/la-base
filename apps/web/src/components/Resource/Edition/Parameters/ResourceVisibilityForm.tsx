@@ -1,20 +1,20 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import { Resource } from '@app/web/server/resources/getResource'
-import {
-  ChangeVisibilityCommand,
-  ChangeVisibilityCommandValidation,
-} from '@app/web/server/resources/feature/ChangeVisibility'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import EditCard from '@app/web/components/EditCard'
 import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import {
+  type ChangeVisibilityCommand,
+  ChangeVisibilityCommandValidation,
+} from '@app/web/server/resources/feature/ChangeVisibility'
+import type { Resource } from '@app/web/server/resources/getResource'
+import { trpc } from '@app/web/trpc'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 const visibilityTexts = (base: { id: string } | null) => ({
   publicTitle: 'Ressource publique',
@@ -50,7 +50,7 @@ const ResourceVisibilityForm = ({
         form.setValue('payload.isPublic', false)
       }
     }
-  }, [resource, user])
+  }, [resource, user, form.setValue, form.getValues])
 
   const mutate = trpc.resource.mutate.useMutation()
 

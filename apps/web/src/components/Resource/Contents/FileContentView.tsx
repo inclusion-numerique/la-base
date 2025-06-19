@@ -1,5 +1,5 @@
-import { ResourceContent } from '@app/web/server/resources/getResource'
 import FileContentDetails from '@app/web/components/Resource/Contents/FileContentDetails'
+import type { ResourceContent } from '@app/web/server/resources/getResource'
 import styles from './FileContentView.module.css'
 
 const FileContentView = ({

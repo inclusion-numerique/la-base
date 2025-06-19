@@ -1,11 +1,14 @@
-import z from 'zod'
 import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
+import z from 'zod'
 
 export const CreateResourceCommandClientPayloadValidation = z.object({
   title: resourceEditionValues.title,
   description: resourceEditionValues.description,
   baseId: resourceEditionValues.baseId,
 })
+export type CreateResourceCommandClientPayload = z.infer<
+  typeof CreateResourceCommandClientPayloadValidation
+>
 export const CreateResourceCommandPayloadValidation =
   CreateResourceCommandClientPayloadValidation.extend({
     resourceId: z.string().uuid(),

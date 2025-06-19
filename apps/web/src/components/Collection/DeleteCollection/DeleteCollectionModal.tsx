@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { createToast } from '@app/ui/toast/createToast'
-import Input from '@codegouvfr/react-dsfr/Input'
-import { trpc } from '@app/web/trpc'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { trpc } from '@app/web/trpc'
+import Input from '@codegouvfr/react-dsfr/Input'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 export const DeleteCollectionDynamicModal = createDynamicModal({
   id: 'delete-collection-modal',
@@ -36,8 +36,10 @@ const DeleteCollectionModal = ({ redirectTo }: { redirectTo?: string }) => {
       })
       if (redirectTo) {
         router.push(redirectTo)
+      } else {
+        router.refresh()
       }
-      router.refresh()
+
       createToast({
         priority: 'success',
         message: <>La collection a bien été supprimée</>,
@@ -48,8 +50,11 @@ const DeleteCollectionModal = ({ redirectTo }: { redirectTo?: string }) => {
         message:
           'Une erreur est survenue lors de la suppression de la collection',
       })
+      router.refresh()
       mutation.reset()
     }
+
+    setValidationInput('')
   }
 
   return (
@@ -90,9 +95,9 @@ const DeleteCollectionModal = ({ redirectTo }: { redirectTo?: string }) => {
       <Input
         label={`Écrivez “${collectionTitle}” dans le champ ci-dessous`}
         nativeInputProps={{
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore: wrong dsfr type
           'data-testid': 'modal-input',
+          value: validationInput,
           onChange: (event) => {
             setValidationInput(event.target.value)
           },

@@ -1,7 +1,7 @@
-import { prismaClient } from '@app/web/prismaClient'
-import { Command } from '@commander-js/extra-typings'
 import { output } from '@app/fixtures/output'
 import { deleteAll, seed } from '@app/fixtures/seeds'
+import { prismaClient } from '@app/web/prismaClient'
+import { Command } from '@commander-js/extra-typings'
 
 const main = async (eraseAllData: boolean) => {
   if (eraseAllData) {
@@ -25,12 +25,9 @@ program.parse()
 const { eraseAllData } = program.opts()
 
 main(eraseAllData)
-  // eslint-disable-next-line promise/always-return
   .then(() => prismaClient.$disconnect())
-  // eslint-disable-next-line unicorn/prefer-top-level-await
   .catch(async (error) => {
     output.error(error)
     await prismaClient.$disconnect()
-    // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1)
   })

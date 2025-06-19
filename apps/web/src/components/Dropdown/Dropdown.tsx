@@ -1,16 +1,17 @@
 'use client'
 
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 import React, {
-  KeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
+  type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+  type RefObject,
   useEffect,
   useRef,
 } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 
 const hasKey = (
   event: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
@@ -69,7 +70,7 @@ export const Dropdown = ({
     }
   }
 
-  useOnClickOutside(collapseRef, (event) => {
+  useOnClickOutside(collapseRef as RefObject<HTMLElement>, (event) => {
     if (
       event.target instanceof HTMLElement &&
       buttonRef.current?.contains(event.target)
@@ -133,7 +134,6 @@ export const Dropdown = ({
           {control}
         </Button>
         {isOpen && (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
           <div
             role="navigation"
             className="fr-collapse fr-dropdown__pane fr-mr-1v"

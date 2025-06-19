@@ -1,10 +1,9 @@
-// eslint-disable-next-line unicorn/prevent-abbreviations
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { Argument, Command } from '@commander-js/extra-typings'
 
-import { getDirname } from '@app/config/dirname'
 import { output } from '@app/cli/output'
+import { getDirname } from '@app/config/dirname'
 
 const { projectStackVariables, projectStackSensitiveVariables } = await import(
   '@app/cdk/ProjectStack'
@@ -15,7 +14,7 @@ const { webAppStackVariables, webAppStackSensitiveVariables } = await import(
 )
 
 // See https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const createTfVarsFileFromEnvironment = new Command()
   .command('terraform:vars-from-env')
   .addArgument(new Argument('<stack>', 'CDK Stack').choices(['web', 'project']))

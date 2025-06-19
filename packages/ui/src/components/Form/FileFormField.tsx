@@ -1,5 +1,6 @@
 'use client'
 
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import classNames from 'classnames'
 import React, { HTMLProps, ReactNode } from 'react'
 import {
@@ -10,7 +11,6 @@ import {
   PathValue,
 } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 
 export type FileFormFieldProps<T extends FieldValues> = {
   control: Control<T>

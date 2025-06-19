@@ -1,7 +1,7 @@
-import axios, { AxiosError } from 'axios'
-import z from 'zod'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { getMetadataFromDocument } from '@app/web/server/rpc/metadata/getMetadataFromDocument'
+import axios, { AxiosError } from 'axios'
+import z from 'zod'
 
 const GetMetaDataValidation = z.object({
   url: z.string().url(),

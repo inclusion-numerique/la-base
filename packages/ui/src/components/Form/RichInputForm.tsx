@@ -1,5 +1,10 @@
 'use client'
 
+import RichInputFormLinkTooltip from '@app/ui/components/Form/RichInputFormLinkTooltip'
+import { Link } from '@tiptap/extension-link'
+import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import classNames from 'classnames'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import {
   FieldPath,
@@ -8,11 +13,6 @@ import {
   PathValue,
   UseFormReturn,
 } from 'react-hook-form'
-import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { Link } from '@tiptap/extension-link'
-import classNames from 'classnames'
-import RichInputFormLinkTooltip from '@app/ui/components/Form/RichInputFormLinkTooltip'
 import styles from './RichInputForm.module.css'
 import RichInputFormMenuBar from './RichInputFormMenuBar'
 
@@ -48,7 +48,7 @@ const RichInputForm = <T extends FieldValues>({
   ariaDescribedBy?: string
   placeholder?: string
   disabled?: boolean
-  ['data-testid']?: string
+  'data-testid'?: string
   onChange?: (text: PathValue<T, Path<T>>) => void
   onBlur?: () => void
   size?: 'medium' | 'small'

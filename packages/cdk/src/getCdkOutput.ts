@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { getDirname } from '@app/config/dirname'
 import { outputPrefix } from '@app/cdk/output'
+import { getDirname } from '@app/config/dirname'
 
 export type WebCdkOutput = {
   webBaseUrl: string

@@ -1,21 +1,21 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import EditCard from '@app/web/components/EditCard'
+import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  UpdateBaseVisibilityCommand,
+  type UpdateBaseVisibilityCommand,
   UpdateBaseVisibilityCommandValidation,
 } from '@app/web/server/bases/updateBase'
-import { BasePageData } from '@app/web/server/bases/getBase'
-import Visibility from '@app/web/components/Visibility'
+import { trpc } from '@app/web/trpc'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const {
   Component: PrivateModal,

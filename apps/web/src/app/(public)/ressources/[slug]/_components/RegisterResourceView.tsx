@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react'
  */
 const RegisterResourceView = ({ resourceSlug }: { resourceSlug: string }) => {
   // Useful for dev mode where useEffect is called twice
-  const registered = useRef<string>()
+  const registered = useRef<string>(null)
   useEffect(() => {
     if (registered.current === resourceSlug) {
       return
@@ -16,7 +16,6 @@ const RegisterResourceView = ({ resourceSlug }: { resourceSlug: string }) => {
 
     // We don't care if the request fails, we'll get a Sentry error from api route handler
     // Use simple fetch instead of trpc for lightweight request on this particular feature
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetch(`/ressources/${resourceSlug}/register-view`, { method: 'POST' })
   }, [resourceSlug])
 

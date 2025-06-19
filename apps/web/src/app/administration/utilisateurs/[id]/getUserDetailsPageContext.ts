@@ -1,5 +1,5 @@
-import { cache } from 'react'
 import { prismaClient } from '@app/web/prismaClient'
+import { cache } from 'react'
 
 export const getUserDetailsPageContext = cache(async (userId: string) => {
   const user = await prismaClient.user.findUnique({

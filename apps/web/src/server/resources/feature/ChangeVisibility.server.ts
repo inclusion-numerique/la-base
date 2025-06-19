@@ -1,10 +1,10 @@
-import {
-  VisibilityChanged,
+import type {
   ChangeVisibilityCommand,
+  VisibilityChanged,
 } from '@app/web/server/resources/feature/ChangeVisibility'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from './ResourceEventSideEffect'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
 export const handleChangeVisibility: ResourceMutationCommandHandler<
   ChangeVisibilityCommand,

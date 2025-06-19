@@ -1,8 +1,8 @@
-import classNames from 'classnames'
 import Images, { HeartIconSvg } from '@app/web/components/Collection/Images'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
-import { WithMinimalImageData } from '@app/web/server/image/imageTypes'
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
+import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
+import classNames from 'classnames'
 import styles from './CollectionViewHeader.module.css'
 
 const CollectionViewHeader = ({

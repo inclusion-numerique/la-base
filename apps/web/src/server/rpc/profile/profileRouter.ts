@@ -1,7 +1,6 @@
-import { z } from 'zod'
 import {
-  profileAuthorization,
   ProfilePermissions,
+  profileAuthorization,
 } from '@app/web/authorization/models/profileAuthorization'
 import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
@@ -17,6 +16,7 @@ import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
+import { z } from 'zod'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,

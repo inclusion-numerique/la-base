@@ -1,7 +1,7 @@
-import axios from 'axios'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import type { BackupDatabaseJob } from '@app/web/jobs/backup-database/backupDatabaseJob'
 import { formatDate } from '@app/web/utils/formatDate'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import axios from 'axios'
 
 const expirationsInDays: {
   [type in BackupDatabaseJob['payload']['type']]: number

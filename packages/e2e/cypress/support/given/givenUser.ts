@@ -1,6 +1,6 @@
-import { v4 } from 'uuid'
-import { createSlug } from '@app/web/utils/createSlug'
 import type { CreateUserInput } from '@app/e2e/tasks/handlers/user.tasks'
+import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
 
 // Unique per cypress run
 const slugHash = v4().split('-')[0]
@@ -22,9 +22,9 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
     lastName,
     name,
     role: 'User',
-    // eslint-disable-next-line no-plusplus
     slug,
     emailVerified: new Date('2023-04-01'),
+    signedUpAt: new Date('2023-04-01'),
     isPublic: false,
     collections: {
       create: {

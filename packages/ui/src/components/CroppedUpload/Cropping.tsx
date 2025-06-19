@@ -1,17 +1,16 @@
-import React, { RefObject } from 'react'
-import classNames from 'classnames'
-import Cropper, { ReactCropperElement } from 'react-cropper'
-import 'cropperjs/dist/cropper.css'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { ImageForForm } from '@app/web/server/image/imageTypes' // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
 import {
   ImageCropData,
   imageCropToCropperInitialData,
 } from '@app/ui/components/CroppedUpload/cropperToImageCrop'
-import { getEventDsfrOpenedModalParent } from '@app/ui/utils/getEventDsfrOpenedModalParent'
 import ImageInfo from '@app/ui/components/ImageInfo'
-import { ImageWithName } from './utils'
+import { getEventDsfrOpenedModalParent } from '@app/ui/utils/getEventDsfrOpenedModalParent'
+import { ImageForForm } from '@app/web/server/image/imageTypes' // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import React, { RefObject } from 'react'
+import Cropper, { ReactCropperElement } from 'react-cropper'
 import styles from './CroppedUpload.module.css'
+import { ImageWithName } from './utils'
 import CropStartEvent = Cropper.CropStartEvent
 import CropEndEvent = Cropper.CropEndEvent
 
@@ -68,7 +67,7 @@ const Cropping = ({
   imageSource: string
   image?: ImageForForm | null
   imageToUpload: ImageWithName | null
-  cropperRef: RefObject<ReactCropperElement>
+  cropperRef: RefObject<ReactCropperElement | null>
   initialImageCropData?: ImageCropData
 }) => {
   const zoomTo = (value: number) => () => {

@@ -1,21 +1,21 @@
 'use client'
 
-import React, { Dispatch, SetStateAction } from 'react'
-import { useForm } from 'react-hook-form'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import {
-  EditTitleAndDescriptionCommand,
+  type EditTitleAndDescriptionCommand,
   EditTitleAndDescriptionCommandValidation,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { type Dispatch, type SetStateAction } from 'react'
+import { useForm } from 'react-hook-form'
 import EditableContent from './EditableContent'
 import styles from './ResourceEdition.module.css'
 

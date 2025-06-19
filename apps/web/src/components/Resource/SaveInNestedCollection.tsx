@@ -1,11 +1,11 @@
-import React from 'react'
-import classNames from 'classnames'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import Tag from '@codegouvfr/react-dsfr/Tag'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
+import Tag from '@codegouvfr/react-dsfr/Tag'
+import classNames from 'classnames'
+import React from 'react'
 import styles from './SaveResourceInCollectionModal.module.css'
 
 const SaveInNestedCollection = ({

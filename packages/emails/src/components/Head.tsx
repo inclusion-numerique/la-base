@@ -1,3 +1,5 @@
+import { emailAssetUrl } from '@app/emails/emailAssetUrl'
+import { brandColor } from '@app/emails/styles'
 import {
   MjmlAll,
   MjmlAttributes,
@@ -10,8 +12,6 @@ import {
   MjmlTitle,
 } from '@faire/mjml-react'
 import React, { ReactNode } from 'react'
-import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import { brandColor } from '@app/emails/styles'
 
 const Head = ({ preview, title }: { title: ReactNode; preview: ReactNode }) => (
   <MjmlHead>

@@ -1,18 +1,13 @@
-import React, { ReactNode, useCallback } from 'react'
-import {
-  Control,
-  Controller,
-  FieldPath,
-  FieldValues,
-  PathValue,
-} from 'react-hook-form'
-import classNames from 'classnames'
-import type { GroupBase, Options, OptionsOrGroups } from 'react-select'
-import type { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import CustomSelect, {
   CustomSelectProps,
 } from '@app/ui/components/CustomSelect/CustomSelect'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
+import classNames from 'classnames'
+import React, { ReactNode, useCallback, useState } from 'react'
+import { Control, Controller, FieldValues, PathValue } from 'react-hook-form'
+import { FieldPath } from 'react-hook-form/dist/types/path'
+import type { GroupBase, OnChangeValue, Options } from 'react-select'
 
 export type CustomSelectFormFieldProps<
   FormData extends FieldValues,
@@ -29,6 +24,7 @@ export type CustomSelectFormFieldProps<
   valid?: string
   asterisk?: boolean
   info?: ReactNode
+  clearInputOnChange?: boolean
   // The value that will be set in the form controller for given PathProperty
   optionToFormValue?: (option: Option) => PathValue<FormData, PathProperty>
   // The unique key will be used internally to compare the value of the form controller with the options
@@ -42,6 +38,7 @@ export type CustomSelectFormFieldProps<
     b: Option,
   ) => boolean
   defaultOptions?: Option[]
+  onChange?: (options: OnChangeValue<Option, IsMulti>) => void
 } & Omit<
   CustomSelectProps<Option, IsMulti, Group>,
   'onChange' | 'name' | 'onBlur' | 'defaultOptions'
@@ -54,22 +51,6 @@ const defaultGetOptionKey = (option: unknown): string => {
     )
   }
   return (option as { value: string }).value
-}
-
-const defaultGetValueKey = (value: unknown): string | null | undefined => {
-  if (value === null || value === undefined) {
-    return value
-  }
-  if (typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    return value.map((v) => defaultGetValueKey(v)).join(',')
-  }
-  throw new Error(
-    'CustomSelect value is not a string. If you are using a custom Option type, pass the correct getValueKey() function',
-  )
 }
 
 const defaultGetOptionValue = (option: unknown) => {
@@ -114,10 +95,12 @@ const CustomSelectFormField = <
   info,
   className,
   isMulti,
+  clearInputOnChange,
   getOptionLabel: getOptionLabelProperty,
   getValueKey: getValueKeyProperty,
   getOptionKey: getOptionKeyProperty,
   optionToFormValue: optionToFormValueProperty,
+  onChange: onChangeCustom,
   ...customSelectProps
 }: UiComponentProps &
   CustomSelectFormFieldProps<
@@ -129,24 +112,18 @@ const CustomSelectFormField = <
   >) => {
   const id = `custom-select-form-field__${path}`
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getOptionLabel = useCallback(
     getOptionLabelProperty ?? defaultGetOptionLabel,
     [],
   )
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const optionToFormValue = useCallback(
     optionToFormValueProperty ?? defaultOptionToFormValue,
     [],
   )
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getOptionKey = useCallback(
     getOptionKeyProperty ?? defaultGetOptionKey,
     [],
   )
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getValueKey = useCallback(getValueKeyProperty ?? defaultGetValueKey, [])
 
   const isOptionSelected: (
     option: Option,
@@ -157,75 +134,7 @@ const CustomSelectFormField = <
     return selectValue.some((v) => getOptionKey(v) === optionKey)
   }
 
-  const optionFromFormValue = useCallback(
-    (
-      optionsToMatch: OptionsOrGroups<Option, Group>,
-      value:
-        | PathValue<FormData, PathProperty>
-        | PathValue<FormData, PathProperty>[],
-    ): Option | Option[] | undefined => {
-      if (isMulti) {
-        // Value is an array of values
-        const multiValues = value as PathValue<FormData, PathProperty>[]
-
-        const result: Option[] = []
-
-        // eslint-disable-next-line no-unreachable-loop
-        for (const oneOfMultiValue of multiValues) {
-          const oneOfMultiValueKey = getValueKey(oneOfMultiValue)
-          for (const optionOrGroup of optionsToMatch) {
-            if (
-              typeof optionOrGroup === 'object' &&
-              !!optionOrGroup &&
-              'options' in optionOrGroup
-            ) {
-              const found = optionOrGroup.options.find(
-                (o) => getOptionKey(o) === oneOfMultiValueKey,
-              )
-              if (found) {
-                result.push(found as Option)
-              }
-
-              continue
-            }
-
-            if (getOptionKey(optionOrGroup) === oneOfMultiValueKey) {
-              result.push(optionOrGroup)
-            }
-          }
-
-          return result
-        }
-      }
-
-      const singleValueKey = getValueKey(
-        value as PathValue<FormData, PathProperty>,
-      )
-
-      for (const optionOrGroup of optionsToMatch) {
-        if (
-          typeof optionOrGroup === 'object' &&
-          !!optionOrGroup &&
-          'options' in optionOrGroup
-        ) {
-          const found = optionOrGroup.options.find(
-            (o) => getOptionKey(o) === singleValueKey,
-          )
-          if (found) {
-            return found as Option
-          }
-          continue
-        }
-
-        if (getOptionKey(optionOrGroup) === singleValueKey) {
-          return optionOrGroup
-        }
-      }
-
-      return undefined
-    },
-    [isMulti, getValueKey, getOptionKey],
-  )
+  const [selected, setSelected] = useState(defaultValue)
 
   return (
     <Controller
@@ -246,16 +155,21 @@ const CustomSelectFormField = <
           IsMulti,
           Group
         >['onChange'] = (option) => {
+          if (option == null) {
+            onChange(null)
+            setSelected([])
+            return
+          }
+
           const newValue = Array.isArray(option)
             ? option.map(optionToFormValue)
             : optionToFormValue(option as Option)
 
-          onChange(newValue)
-        }
+          setSelected(option)
 
-        const valueOption = options
-          ? optionFromFormValue([...options, ...(defaultOptions ?? [])], value)
-          : undefined
+          onChange(newValue)
+          onChangeCustom?.(option)
+        }
 
         return (
           <div
@@ -277,7 +191,7 @@ const CustomSelectFormField = <
               {...customSelectProps}
               {...fieldProps}
               onChange={onChangeProperty}
-              value={valueOption}
+              value={clearInputOnChange ? [] : (selected ?? defaultValue)}
               defaultValue={defaultValue}
               getOptionValue={optionToFormValue}
               getOptionLabel={getOptionLabel}

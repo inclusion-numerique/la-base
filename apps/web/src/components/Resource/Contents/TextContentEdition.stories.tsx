@@ -1,10 +1,12 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Meta, StoryObj } from '@storybook/react'
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
+import { TextPayloadCommandValidation } from '@app/web/server/resources/feature/Content'
+import { TextPayload } from '@app/web/server/resources/feature/Content'
+import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 import { EditContentCommandValidation } from '@app/web/server/resources/feature/EditContent'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useForm } from 'react-hook-form'
 import TextContentEdition from './TextContentEdition'
 
 export default {
@@ -15,8 +17,8 @@ export default {
 type Story = StoryObj<typeof TextContentEdition>
 
 const Template = () => {
-  const form = useForm<ClientContentPayload>({
-    resolver: zodResolver(EditContentCommandValidation),
+  const form = useForm<TextPayload>({
+    resolver: zodResolver(TextPayloadCommandValidation),
     reValidateMode: 'onChange',
     mode: 'all',
     defaultValues: {

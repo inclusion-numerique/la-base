@@ -56,3 +56,7 @@
     text-align: right !important;
   }
 }
+
+.fr-text--underline {
+  text-decoration: underline;
+}

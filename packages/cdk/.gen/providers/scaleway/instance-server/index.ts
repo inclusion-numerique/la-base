@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,41 +10,41 @@ export interface InstanceServerConfig extends cdktf.TerraformMetaArguments {
   /**
   * The additional volumes attached to the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#additional_volume_ids InstanceServer#additional_volume_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#additional_volume_ids InstanceServer#additional_volume_ids}
   */
   readonly additionalVolumeIds?: string[];
   /**
   * The boot type of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#boot_type InstanceServer#boot_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#boot_type InstanceServer#boot_type}
   */
   readonly bootType?: string;
   /**
   * ID of the target bootscript (set boot_type to bootscript)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#bootscript_id InstanceServer#bootscript_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#bootscript_id InstanceServer#bootscript_id}
   */
   readonly bootscriptId?: string;
   /**
   * The cloud init script associated with this server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#cloud_init InstanceServer#cloud_init}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#cloud_init InstanceServer#cloud_init}
   */
   readonly cloudInit?: string;
   /**
   * Enable dynamic IP on the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#enable_dynamic_ip InstanceServer#enable_dynamic_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#enable_dynamic_ip InstanceServer#enable_dynamic_ip}
   */
   readonly enableDynamicIp?: boolean | cdktf.IResolvable;
   /**
   * Determines if IPv6 is enabled for the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#enable_ipv6 InstanceServer#enable_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#enable_ipv6 InstanceServer#enable_ipv6}
   */
   readonly enableIpv6?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#id InstanceServer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#id InstanceServer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -53,107 +53,107 @@ export interface InstanceServerConfig extends cdktf.TerraformMetaArguments {
   /**
   * The UUID or the label of the base image used by the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#image InstanceServer#image}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#image InstanceServer#image}
   */
   readonly image?: string;
   /**
   * The ID of the reserved IP for the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#ip_id InstanceServer#ip_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#ip_id InstanceServer#ip_id}
   */
   readonly ipId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#ip_ids InstanceServer#ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#ip_ids InstanceServer#ip_ids}
   */
   readonly ipIds?: string[];
   /**
   * The name of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#name InstanceServer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#name InstanceServer#name}
   */
   readonly name?: string;
   /**
   * The placement group the server is attached to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#placement_group_id InstanceServer#placement_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#placement_group_id InstanceServer#placement_group_id}
   */
   readonly placementGroupId?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#project_id InstanceServer#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#project_id InstanceServer#project_id}
   */
   readonly projectId?: string;
   /**
+  * If true, the instance is protected against accidental deletion via the Scaleway API.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#protected InstanceServer#protected}
+  */
+  readonly protected?: boolean | cdktf.IResolvable;
+  /**
   * Delete and re-create server if type change
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#replace_on_type_change InstanceServer#replace_on_type_change}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#replace_on_type_change InstanceServer#replace_on_type_change}
   */
   readonly replaceOnTypeChange?: boolean | cdktf.IResolvable;
   /**
-  * If server supports routed IPs, default to true if public_ips is used
-  *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#routed_ip_enabled InstanceServer#routed_ip_enabled}
-  */
-  readonly routedIpEnabled?: boolean | cdktf.IResolvable;
-  /**
   * The security group the server is attached to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#security_group_id InstanceServer#security_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#security_group_id InstanceServer#security_group_id}
   */
   readonly securityGroupId?: string;
   /**
   * The state of the server should be: started, stopped, standby
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#state InstanceServer#state}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#state InstanceServer#state}
   */
   readonly state?: string;
   /**
   * The tags associated with the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#tags InstanceServer#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#tags InstanceServer#tags}
   */
   readonly tags?: string[];
   /**
   * The instanceSDK type of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#type InstanceServer#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#type InstanceServer#type}
   */
   readonly type: string;
   /**
   * The user data associated with the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#user_data InstanceServer#user_data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#user_data InstanceServer#user_data}
   */
   readonly userData?: { [key: string]: string };
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#zone InstanceServer#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#zone InstanceServer#zone}
   */
   readonly zone?: string;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#private_network InstanceServer#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#private_network InstanceServer#private_network}
   */
   readonly privateNetwork?: InstanceServerPrivateNetwork[] | cdktf.IResolvable;
   /**
   * public_ips block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#public_ips InstanceServer#public_ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#public_ips InstanceServer#public_ips}
   */
   readonly publicIps?: InstanceServerPublicIps[] | cdktf.IResolvable;
   /**
   * root_volume block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#root_volume InstanceServer#root_volume}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#root_volume InstanceServer#root_volume}
   */
   readonly rootVolume?: InstanceServerRootVolume;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#timeouts InstanceServer#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#timeouts InstanceServer#timeouts}
   */
   readonly timeouts?: InstanceServerTimeouts;
 }
@@ -161,13 +161,13 @@ export interface InstanceServerPrivateNetwork {
   /**
   * The Private Network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#pn_id InstanceServer#pn_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#pn_id InstanceServer#pn_id}
   */
   readonly pnId: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#zone InstanceServer#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#zone InstanceServer#zone}
   */
   readonly zone?: string;
 }
@@ -417,31 +417,37 @@ export interface InstanceServerRootVolume {
   /**
   * Set the volume where the boot the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#boot InstanceServer#boot}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#boot InstanceServer#boot}
   */
   readonly boot?: boolean | cdktf.IResolvable;
   /**
   * Force deletion of the root volume on instanceSDK termination
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#delete_on_termination InstanceServer#delete_on_termination}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#delete_on_termination InstanceServer#delete_on_termination}
   */
   readonly deleteOnTermination?: boolean | cdktf.IResolvable;
   /**
+  * SBS Volume IOPS, only with volume_type as sbs_volume
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#sbs_iops InstanceServer#sbs_iops}
+  */
+  readonly sbsIops?: number;
+  /**
   * Size of the root volume in gigabytes
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#size_in_gb InstanceServer#size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#size_in_gb InstanceServer#size_in_gb}
   */
   readonly sizeInGb?: number;
   /**
   * Volume ID of the root volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#volume_id InstanceServer#volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#volume_id InstanceServer#volume_id}
   */
   readonly volumeId?: string;
   /**
   * Volume type of the root volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#volume_type InstanceServer#volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#volume_type InstanceServer#volume_type}
   */
   readonly volumeType?: string;
 }
@@ -454,6 +460,7 @@ export function instanceServerRootVolumeToTerraform(struct?: InstanceServerRootV
   return {
     boot: cdktf.booleanToTerraform(struct!.boot),
     delete_on_termination: cdktf.booleanToTerraform(struct!.deleteOnTermination),
+    sbs_iops: cdktf.numberToTerraform(struct!.sbsIops),
     size_in_gb: cdktf.numberToTerraform(struct!.sizeInGb),
     volume_id: cdktf.stringToTerraform(struct!.volumeId),
     volume_type: cdktf.stringToTerraform(struct!.volumeType),
@@ -478,6 +485,12 @@ export function instanceServerRootVolumeToHclTerraform(struct?: InstanceServerRo
       isBlock: false,
       type: "simple",
       storageClassType: "boolean",
+    },
+    sbs_iops: {
+      value: cdktf.numberToHclTerraform(struct!.sbsIops),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
     },
     size_in_gb: {
       value: cdktf.numberToHclTerraform(struct!.sizeInGb),
@@ -525,6 +538,10 @@ export class InstanceServerRootVolumeOutputReference extends cdktf.ComplexObject
       hasAnyValues = true;
       internalValueResult.deleteOnTermination = this._deleteOnTermination;
     }
+    if (this._sbsIops !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sbsIops = this._sbsIops;
+    }
     if (this._sizeInGb !== undefined) {
       hasAnyValues = true;
       internalValueResult.sizeInGb = this._sizeInGb;
@@ -545,6 +562,7 @@ export class InstanceServerRootVolumeOutputReference extends cdktf.ComplexObject
       this.isEmptyObject = false;
       this._boot = undefined;
       this._deleteOnTermination = undefined;
+      this._sbsIops = undefined;
       this._sizeInGb = undefined;
       this._volumeId = undefined;
       this._volumeType = undefined;
@@ -553,6 +571,7 @@ export class InstanceServerRootVolumeOutputReference extends cdktf.ComplexObject
       this.isEmptyObject = Object.keys(value).length === 0;
       this._boot = value.boot;
       this._deleteOnTermination = value.deleteOnTermination;
+      this._sbsIops = value.sbsIops;
       this._sizeInGb = value.sizeInGb;
       this._volumeId = value.volumeId;
       this._volumeType = value.volumeType;
@@ -594,6 +613,22 @@ export class InstanceServerRootVolumeOutputReference extends cdktf.ComplexObject
   // name - computed: true, optional: false, required: false
   public get name() {
     return this.getStringAttribute('name');
+  }
+
+  // sbs_iops - computed: true, optional: true, required: false
+  private _sbsIops?: number; 
+  public get sbsIops() {
+    return this.getNumberAttribute('sbs_iops');
+  }
+  public set sbsIops(value: number) {
+    this._sbsIops = value;
+  }
+  public resetSbsIops() {
+    this._sbsIops = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sbsIopsInput() {
+    return this._sbsIops;
   }
 
   // size_in_gb - computed: true, optional: true, required: false
@@ -646,23 +681,23 @@ export class InstanceServerRootVolumeOutputReference extends cdktf.ComplexObject
 }
 export interface InstanceServerTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#create InstanceServer#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#create InstanceServer#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#default InstanceServer#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#default InstanceServer#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#delete InstanceServer#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#delete InstanceServer#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#read InstanceServer#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#read InstanceServer#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#update InstanceServer#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#update InstanceServer#update}
   */
   readonly update?: string;
 }
@@ -872,7 +907,7 @@ export class InstanceServerTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server scaleway_instance_server}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server scaleway_instance_server}
 */
 export class InstanceServer extends cdktf.TerraformResource {
 
@@ -888,7 +923,7 @@ export class InstanceServer extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InstanceServer resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InstanceServer to import
-  * @param importFromId The id of the existing InstanceServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InstanceServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InstanceServer to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -900,7 +935,7 @@ export class InstanceServer extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/instance_server scaleway_instance_server} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_server scaleway_instance_server} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -911,8 +946,8 @@ export class InstanceServer extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_server',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -935,8 +970,8 @@ export class InstanceServer extends cdktf.TerraformResource {
     this._name = config.name;
     this._placementGroupId = config.placementGroupId;
     this._projectId = config.projectId;
+    this._protected = config.protected;
     this._replaceOnTypeChange = config.replaceOnTypeChange;
-    this._routedIpEnabled = config.routedIpEnabled;
     this._securityGroupId = config.securityGroupId;
     this._state = config.state;
     this._tags = config.tags;
@@ -1191,6 +1226,22 @@ export class InstanceServer extends cdktf.TerraformResource {
     return this._projectId;
   }
 
+  // protected - computed: false, optional: true, required: false
+  private _protected?: boolean | cdktf.IResolvable; 
+  public get protected() {
+    return this.getBooleanAttribute('protected');
+  }
+  public set protected(value: boolean | cdktf.IResolvable) {
+    this._protected = value;
+  }
+  public resetProtected() {
+    this._protected = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get protectedInput() {
+    return this._protected;
+  }
+
   // public_ip - computed: true, optional: false, required: false
   public get publicIp() {
     return this.getStringAttribute('public_ip');
@@ -1210,22 +1261,6 @@ export class InstanceServer extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get replaceOnTypeChangeInput() {
     return this._replaceOnTypeChange;
-  }
-
-  // routed_ip_enabled - computed: true, optional: true, required: false
-  private _routedIpEnabled?: boolean | cdktf.IResolvable; 
-  public get routedIpEnabled() {
-    return this.getBooleanAttribute('routed_ip_enabled');
-  }
-  public set routedIpEnabled(value: boolean | cdktf.IResolvable) {
-    this._routedIpEnabled = value;
-  }
-  public resetRoutedIpEnabled() {
-    this._routedIpEnabled = undefined;
-  }
-  // Temporarily expose input value. Use with caution.
-  public get routedIpEnabledInput() {
-    return this._routedIpEnabled;
   }
 
   // security_group_id - computed: true, optional: true, required: false
@@ -1404,8 +1439,8 @@ export class InstanceServer extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       placement_group_id: cdktf.stringToTerraform(this._placementGroupId),
       project_id: cdktf.stringToTerraform(this._projectId),
+      protected: cdktf.booleanToTerraform(this._protected),
       replace_on_type_change: cdktf.booleanToTerraform(this._replaceOnTypeChange),
-      routed_ip_enabled: cdktf.booleanToTerraform(this._routedIpEnabled),
       security_group_id: cdktf.stringToTerraform(this._securityGroupId),
       state: cdktf.stringToTerraform(this._state),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
@@ -1499,14 +1534,14 @@ export class InstanceServer extends cdktf.TerraformResource {
         type: "simple",
         storageClassType: "string",
       },
-      replace_on_type_change: {
-        value: cdktf.booleanToHclTerraform(this._replaceOnTypeChange),
+      protected: {
+        value: cdktf.booleanToHclTerraform(this._protected),
         isBlock: false,
         type: "simple",
         storageClassType: "boolean",
       },
-      routed_ip_enabled: {
-        value: cdktf.booleanToHclTerraform(this._routedIpEnabled),
+      replace_on_type_change: {
+        value: cdktf.booleanToHclTerraform(this._replaceOnTypeChange),
         isBlock: false,
         type: "simple",
         storageClassType: "boolean",

@@ -1,8 +1,8 @@
-import { z } from 'zod'
-import * as Sentry from '@sentry/nextjs'
+import { resourceAuthorization } from '@app/web/authorization/models/resourceAuthorization'
 import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import { resourceAuthorization } from '@app/web/authorization/models/resourceAuthorization'
+import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 import { InviteContributorCommandValidation } from '../../resourceContributors/inviteContributors'
 import { getResource } from '../../resources/getResource'
 import { authorizeOrThrow, invalidError, notFoundError } from '../trpcErrors'
@@ -87,7 +87,6 @@ export const resourceContributorRouter = router({
           (x) => x === contributor.id,
         )
         if (contributorId) {
-          // eslint-disable-next-line no-await-in-loop
           await prismaClient.resourceContributors.create({
             data: {
               resourceId: input.resourceId,

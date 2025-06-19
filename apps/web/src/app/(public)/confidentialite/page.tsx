@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité - Les Bases',
@@ -103,9 +103,7 @@ const ConfidentialityPage = () => (
           </ul>
           <p>
             Pour exercer vos droits, vous pouvez nous contacter à :{' '}
-            <a href="mailto:support@lesbases.anct.gouv.fr">
-              support@lesbases.anct.gouv.fr
-            </a>
+            <a href="mailto:lesbases@anct.gouv.fr">lesbases@anct.gouv.fr</a>
             <br />
             Ou contacter la déléguée à la protection des données à :{' '}
             <a href="mailto:dpo@anct.gouv.fr">dpo@anct.gouv.fr</a>

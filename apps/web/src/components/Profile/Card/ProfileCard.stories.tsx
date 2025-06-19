@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
-import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { testSessionUser } from '@app/web/test/testSessionUser'
+import type { Meta, StoryObj } from '@storybook/react'
 import ProfileCard from './ProfileCard'
 
 const profile = {
@@ -10,6 +10,7 @@ const profile = {
   image: null,
   firstName: 'Jean',
   lastName: 'Biche',
+  email: 'jean.biche@example.com',
   followedBy: [],
   slug: 'jean-biche',
   _count: { followedBy: 4 },

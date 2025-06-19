@@ -1,11 +1,11 @@
 'use client'
 
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import React, { ReactNode } from 'react'
 import { Controller, FieldValues, UseFormReturn } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import RichTextForm from './RichTextForm'
 
 export type RichTextFormFieldProps<T extends FieldValues> = {

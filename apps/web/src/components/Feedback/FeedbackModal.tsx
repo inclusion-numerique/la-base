@@ -1,30 +1,30 @@
 'use client'
 
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import InputFormField from '@app/ui/components/Form/InputFormField'
+import RadioFormField from '@app/ui/components/Form/RadioFormField'
+import RatingButtonsFormField from '@app/ui/components/Form/RatingButtonsFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
-import * as Sentry from '@sentry/nextjs'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import InputFormField from '@app/ui/components/Form/InputFormField'
-import React, { useEffect } from 'react'
-import RatingButtonsFormField from '@app/ui/components/Form/RatingButtonsFormField'
-import RadioFormField from '@app/ui/components/Form/RadioFormField'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { trpc } from '@app/web/trpc'
-import {
-  difficultyAreasOptions,
-  SendFeedbackData,
-  SendFeedbackValidation,
-} from '@app/web/feedback/SendFeedback'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { feedbackModalId } from '@app/web/components/Feedback/feedbackModalProps'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import {
+  type SendFeedbackData,
+  SendFeedbackValidation,
+  difficultyAreasOptions,
+} from '@app/web/feedback/SendFeedback'
+import { trpc } from '@app/web/trpc'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import {
   yesNoBooleanOptions,
   yesNoToBoolean,
 } from '@app/web/utils/yesNoBooleanOptions'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 export const feedbackModal = createModal({
   isOpenedByDefault: false,
@@ -77,9 +77,8 @@ const FeedbackModal = () => {
 
   useEffect(() => {
     if (!hadDifficulty) {
-      // eslint-disable-next-line unicorn/no-useless-undefined
       setValue('difficultyArea', undefined)
-      // eslint-disable-next-line unicorn/no-useless-undefined
+
       setValue('difficultyComment', undefined)
     }
   }, [hadDifficulty, setValue])

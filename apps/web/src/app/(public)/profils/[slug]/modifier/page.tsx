@@ -1,30 +1,28 @@
-import React from 'react'
-import { notFound, redirect } from 'next/navigation'
-import type { Metadata } from 'next'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
-import { getProfileResources } from '@app/web/server/resources/getResourcesList'
+import { profileAuthorization } from '@app/web/authorization/models/profileAuthorization'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
-import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
+import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import { contentId } from '@app/web/utils/skipLinks'
-import { profileAuthorization } from '@app/web/authorization/models/profileAuthorization'
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Modifier mon profil'),
 }
 const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
+  const { slug } = await params
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/profils/${params.slug}/modifier`)
+    redirect(`/connexion?suivant=/profils/${slug}/modifier`)
   }
 
-  const profile = await getProfilePageQuery(
-    { slug: decodeURI(params.slug) },
-    user,
-  )
+  const profile = await getProfilePageQuery({ slug: decodeURI(slug) }, user)
   if (!profile) {
     notFound()
   }
@@ -34,7 +32,7 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
   const canWrite = hasPermission('WriteProfile')
 
   if (!canWrite) {
-    redirect(`/profils/${params.slug}`)
+    redirect(`/profils/${slug}`)
   }
 
   const resources = await getProfileResources(profile.id, user)
@@ -47,7 +45,7 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
           parents={[
             {
               label: isOwner ? 'Mon Profil' : `${profile.name || 'Profil'}`,
-              linkProps: { href: `/profils/${params.slug}` },
+              linkProps: { href: `/profils/${slug}` },
             },
           ]}
           currentPage="Modifier"

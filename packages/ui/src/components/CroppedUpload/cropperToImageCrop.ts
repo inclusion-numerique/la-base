@@ -1,5 +1,5 @@
-import type { Cropper } from 'react-cropper'
 import { defaultCropValues } from '@app/web/server/image/defaultCropValues'
+import type { Cropper } from 'react-cropper'
 
 const normalize = (value: number, by: number) =>
   Math.min(Math.max(value / by, 0), 1)

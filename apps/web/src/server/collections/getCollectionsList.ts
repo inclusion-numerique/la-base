@@ -1,7 +1,7 @@
-import type { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { computeResourcesListWhereForUser } from '@app/web/server/resources/getResourcesList'
+import type { Prisma } from '@prisma/client'
 
 export const computeCollectionsListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,

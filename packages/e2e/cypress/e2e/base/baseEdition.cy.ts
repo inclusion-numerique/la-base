@@ -1,9 +1,9 @@
-import { v4 } from 'uuid'
+import { defaultTestBaseSlug } from '@app/e2e/support/given/givenBase'
 import {
   createTestPublishResourceCommand,
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
-import { defaultTestBaseSlug } from '@app/e2e/support/given/givenBase'
+import { v4 } from 'uuid'
 import {
   cleanUpAndCreateTestBase,
   cleanUpAndCreateTestPublishedResource,

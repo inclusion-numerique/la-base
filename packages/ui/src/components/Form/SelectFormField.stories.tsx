@@ -1,9 +1,9 @@
+import { useOnDiff } from '@app/web/hooks/useOnDiff'
+import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
+import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/react'
-import { useOnDiff } from '@app/web/hooks/useOnDiff'
 import SelectFormField, { SelectFormFieldProps } from './SelectFormField'
 import { SelectOption } from './utils/options'
 
@@ -81,6 +81,7 @@ export const Default: Story = {
   },
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: this is the story name
 export const Error: Story = {
   name: "État d'erreur",
   render: (args) => <Template {...args} path="choiceError" />,

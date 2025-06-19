@@ -1,18 +1,18 @@
-import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import React, { useEffect, useState } from 'react'
 import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
-import * as Sentry from '@sentry/nextjs'
+import FileContentDetails from '@app/web/components/Resource/Contents/FileContentDetails'
 import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
+import { useFileUpload } from '@app/web/hooks/useFileUpload'
+import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
   contentCaptionMaxLength,
   contentTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
-import { useFileUpload } from '@app/web/hooks/useFileUpload'
-import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { trpc } from '@app/web/trpc'
-import FileContentDetails from '@app/web/components/Resource/Contents/FileContentDetails'
+import * as Sentry from '@sentry/nextjs'
+import React, { useEffect, useState } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 import styles from './FileContentEdition.module.css'
 
 const titleInfo = (title?: string | null) =>
@@ -46,6 +46,7 @@ const FileContentEdition = ({
   // Upload model creation mutation
   const createUpload = trpc.upload.create.useMutation()
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only run the effect on file value change
   useEffect(() => {
     if (!uploadFileValue) {
       return

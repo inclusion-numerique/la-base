@@ -1,5 +1,13 @@
-import { Fn, TerraformStack } from 'cdktf'
-import { Construct } from 'constructs'
+import { createJobExecutionCron } from '@app/cdk/createJobExecutionCron'
+import { environmentVariablesFromList } from '@app/cdk/environmentVariable'
+import { WebCdkOutput } from '@app/cdk/getCdkOutput'
+import { createOutput } from '@app/cdk/output'
+import { terraformBackend } from '@app/cdk/terraformBackend'
+import {
+  computeBranchNamespace,
+  createPreviewSubdomain,
+  namespacer,
+} from '@app/cdk/utils'
 import {
   containerNamespaceName,
   databaseInstanceName,
@@ -13,15 +21,6 @@ import {
   projectTitle,
   region,
 } from '@app/config/config'
-import { environmentVariablesFromList } from '@app/cdk/environmentVariable'
-import { WebCdkOutput } from '@app/cdk/getCdkOutput'
-import { createOutput } from '@app/cdk/output'
-import { terraformBackend } from '@app/cdk/terraformBackend'
-import {
-  computeBranchNamespace,
-  createPreviewSubdomain,
-  namespacer,
-} from '@app/cdk/utils'
 import { Container } from '@app/scaleway/container'
 import { ContainerDomain } from '@app/scaleway/container-domain'
 import { DataScalewayContainerNamespace } from '@app/scaleway/data-scaleway-container-namespace'
@@ -33,7 +32,8 @@ import { ScalewayProvider } from '@app/scaleway/provider'
 import { RdbDatabase } from '@app/scaleway/rdb-database'
 import { RdbPrivilege } from '@app/scaleway/rdb-privilege'
 import { RdbUser } from '@app/scaleway/rdb-user'
-import { createJobExecutionCron } from '@app/cdk/createJobExecutionCron'
+import { Fn, TerraformStack } from 'cdktf'
+import { Construct } from 'constructs'
 
 export const webAppStackVariables = [
   'BREVO_USERS_LIST_ID',

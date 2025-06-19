@@ -1,5 +1,5 @@
-import z from 'zod'
 import { resourceEditionValues } from '@app/web/server/rpc/resource/utils'
+import z from 'zod'
 
 export const EditTitleAndDescriptionCommandValidation = z.object({
   name: z.literal('EditTitleAndDescription'),

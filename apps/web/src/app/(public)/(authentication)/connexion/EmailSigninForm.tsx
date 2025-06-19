@@ -1,13 +1,14 @@
 'use client'
 
-import Cookies from 'js-cookie'
-import { Route } from 'next'
-import { signIn } from 'next-auth/react'
-import { useForm } from 'react-hook-form'
-import z from 'zod'
+import InputFormField from '@app/ui/components/Form/InputFormField'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
-import InputFormField from '@app/ui/components/Form/InputFormField'
+import Cookies from 'js-cookie'
+import type { Route } from 'next'
+import { signIn } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
 
 const SigninFormValidation = z.object({
   email: z
@@ -18,7 +19,11 @@ const SigninFormValidation = z.object({
 type SigninFormData = z.infer<typeof SigninFormValidation>
 
 export const EmailSigninForm = ({ callbackUrl }: { callbackUrl: Route }) => {
+  const searchParams = useSearchParams()
   const form = useForm<SigninFormData>({
+    defaultValues: {
+      email: searchParams?.get('email') ?? undefined,
+    },
     resolver: zodResolver(SigninFormValidation),
     mode: 'onBlur',
     reValidateMode: 'onChange',

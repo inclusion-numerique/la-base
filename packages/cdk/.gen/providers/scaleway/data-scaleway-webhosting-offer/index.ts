@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,13 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayWebhostingOfferConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer#id DataScalewayWebhostingOffer#id}
+  * Name of the control panel.(Cpanel or Plesk)
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#control_panel DataScalewayWebhostingOffer#control_panel}
+  */
+  readonly controlPanel?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#id DataScalewayWebhostingOffer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,21 +23,247 @@ export interface DataScalewayWebhostingOfferConfig extends cdktf.TerraformMetaAr
   /**
   * Exact name of the desired offer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer#name DataScalewayWebhostingOffer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#name DataScalewayWebhostingOffer#name}
   */
   readonly name?: string;
   /**
   * ID of the desired offer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer#offer_id DataScalewayWebhostingOffer#offer_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#offer_id DataScalewayWebhostingOffer#offer_id}
   */
   readonly offerId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer#region DataScalewayWebhostingOffer#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#region DataScalewayWebhostingOffer#region}
   */
   readonly region?: string;
+}
+export interface DataScalewayWebhostingOfferOfferOptions {
+}
+
+export function dataScalewayWebhostingOfferOfferOptionsToTerraform(struct?: DataScalewayWebhostingOfferOfferOptions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayWebhostingOfferOfferOptionsToHclTerraform(struct?: DataScalewayWebhostingOfferOfferOptions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayWebhostingOfferOfferOptionsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayWebhostingOfferOfferOptions | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayWebhostingOfferOfferOptions | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // billing_operation_path - computed: true, optional: false, required: false
+  public get billingOperationPath() {
+    return this.getStringAttribute('billing_operation_path');
+  }
+
+  // current_value - computed: true, optional: false, required: false
+  public get currentValue() {
+    return this.getNumberAttribute('current_value');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // max_value - computed: true, optional: false, required: false
+  public get maxValue() {
+    return this.getNumberAttribute('max_value');
+  }
+
+  // min_value - computed: true, optional: false, required: false
+  public get minValue() {
+    return this.getNumberAttribute('min_value');
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // price - computed: true, optional: false, required: false
+  public get price() {
+    return this.getStringAttribute('price');
+  }
+
+  // quota_warning - computed: true, optional: false, required: false
+  public get quotaWarning() {
+    return this.getStringAttribute('quota_warning');
+  }
+}
+
+export class DataScalewayWebhostingOfferOfferOptionsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayWebhostingOfferOfferOptionsOutputReference {
+    return new DataScalewayWebhostingOfferOfferOptionsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayWebhostingOfferOffer {
+}
+
+export function dataScalewayWebhostingOfferOfferToTerraform(struct?: DataScalewayWebhostingOfferOffer): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayWebhostingOfferOfferToHclTerraform(struct?: DataScalewayWebhostingOfferOffer): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayWebhostingOfferOfferOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayWebhostingOfferOffer | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayWebhostingOfferOffer | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // available - computed: true, optional: false, required: false
+  public get available() {
+    return this.getBooleanAttribute('available');
+  }
+
+  // billing_operation_path - computed: true, optional: false, required: false
+  public get billingOperationPath() {
+    return this.getStringAttribute('billing_operation_path');
+  }
+
+  // control_panel_name - computed: true, optional: false, required: false
+  public get controlPanelName() {
+    return this.getStringAttribute('control_panel_name');
+  }
+
+  // end_of_life - computed: true, optional: false, required: false
+  public get endOfLife() {
+    return this.getBooleanAttribute('end_of_life');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // options - computed: true, optional: false, required: false
+  private _options = new DataScalewayWebhostingOfferOfferOptionsList(this, "options", false);
+  public get options() {
+    return this._options;
+  }
+
+  // price - computed: true, optional: false, required: false
+  public get price() {
+    return this.getStringAttribute('price');
+  }
+
+  // quota_warning - computed: true, optional: false, required: false
+  public get quotaWarning() {
+    return this.getStringAttribute('quota_warning');
+  }
+}
+
+export class DataScalewayWebhostingOfferOfferList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayWebhostingOfferOfferOutputReference {
+    return new DataScalewayWebhostingOfferOfferOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface DataScalewayWebhostingOfferProduct {
 }
@@ -150,7 +382,7 @@ export class DataScalewayWebhostingOfferProductList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer scaleway_webhosting_offer}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer scaleway_webhosting_offer}
 */
 export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
 
@@ -166,7 +398,7 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayWebhostingOffer resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayWebhostingOffer to import
-  * @param importFromId The id of the existing DataScalewayWebhostingOffer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayWebhostingOffer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayWebhostingOffer to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -178,7 +410,7 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting_offer scaleway_webhosting_offer} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting_offer scaleway_webhosting_offer} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -189,8 +421,8 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_webhosting_offer',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -200,6 +432,7 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
       connection: config.connection,
       forEach: config.forEach
     });
+    this._controlPanel = config.controlPanel;
     this._id = config.id;
     this._name = config.name;
     this._offerId = config.offerId;
@@ -213,6 +446,22 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
   // billing_operation_path - computed: true, optional: false, required: false
   public get billingOperationPath() {
     return this.getStringAttribute('billing_operation_path');
+  }
+
+  // control_panel - computed: false, optional: true, required: false
+  private _controlPanel?: string; 
+  public get controlPanel() {
+    return this.getStringAttribute('control_panel');
+  }
+  public set controlPanel(value: string) {
+    this._controlPanel = value;
+  }
+  public resetControlPanel() {
+    this._controlPanel = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get controlPanelInput() {
+    return this._controlPanel;
   }
 
   // id - computed: true, optional: true, required: false
@@ -245,6 +494,12 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get nameInput() {
     return this._name;
+  }
+
+  // offer - computed: true, optional: false, required: false
+  private _offer = new DataScalewayWebhostingOfferOfferList(this, "offer", false);
+  public get offer() {
+    return this._offer;
   }
 
   // offer_id - computed: false, optional: true, required: false
@@ -296,6 +551,7 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      control_panel: cdktf.stringToTerraform(this._controlPanel),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       offer_id: cdktf.stringToTerraform(this._offerId),
@@ -305,6 +561,12 @@ export class DataScalewayWebhostingOffer extends cdktf.TerraformDataSource {
 
   protected synthesizeHclAttributes(): { [name: string]: any } {
     const attrs = {
+      control_panel: {
+        value: cdktf.stringToHclTerraform(this._controlPanel),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
       id: {
         value: cdktf.stringToHclTerraform(this._id),
         isBlock: false,

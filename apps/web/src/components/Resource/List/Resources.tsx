@@ -1,18 +1,18 @@
-import React, { useMemo } from 'react'
-import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { BaseResource } from '@app/web/server/bases/getBase'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import {
+  ResourceRoles,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
 import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
-import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
-import {
-  resourceAuthorization,
-  ResourceRoles,
-} from '@app/web/authorization/models/resourceAuthorization'
-import InviteContributorModal from '../Contributors/InviteContributorModal'
+import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
+import React, { useMemo } from 'react'
 import SaveCollectionModal from '../../Collection/SaveCollectionModal'
+import InviteContributorModal from '../Contributors/InviteContributorModal'
 
 const Resources = ({
   resources,

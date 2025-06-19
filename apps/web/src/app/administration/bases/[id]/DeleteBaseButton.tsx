@@ -1,12 +1,12 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
-import { useRouter } from 'next/navigation'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
-import { trpc } from '@app/web/trpc'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { useRouter } from 'next/navigation'
 
 export const DeleteBaseConfirm = createModal({
   id: 'delete-base',

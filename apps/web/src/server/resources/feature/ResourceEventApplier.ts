@@ -1,5 +1,5 @@
-import { ResourceEventType } from '@prisma/client'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import type { ResourceEventType } from '@prisma/client'
 
 export type ApplierResourceEvent<
   Type extends ResourceEventType = ResourceEventType,

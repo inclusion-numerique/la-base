@@ -1,12 +1,12 @@
-import React from 'react'
-import ExternalLink from '@app/ui/components/ExternalLink'
 import BlockWithLabel from '@app/ui/components/BlockWithLabel'
-import Link from 'next/link'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import { getDepartmentName } from '@app/web/utils/departments'
-import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import EmptyProfileInformations from '@app/web/components/Profile/EmptyProfileInformations'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import { getDepartmentName } from '@app/web/utils/departments'
+import Link from 'next/link'
+import React from 'react'
 
 const hasInformations = (profile: ProfilePageData): boolean =>
   profile.description != null || profile.department != null
@@ -20,10 +20,11 @@ const hasContact = (profile: ProfilePageData): boolean =>
   (profile.emailIsPublic && profile.email != null) || profile.website != null
 
 const AProposPage = async ({ params }: ProfilRouteParams) => {
+  const { slug } = await params
   const {
     profile,
     authorization: { hasPermission, hasRole },
-  } = await getProfilePageContext(params.slug)
+  } = await getProfilePageContext(slug)
 
   return hasInformations(profile) ||
     hasInformations(profile) ||

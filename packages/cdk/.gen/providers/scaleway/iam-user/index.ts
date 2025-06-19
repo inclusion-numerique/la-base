@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface IamUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * The description of the iam user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user#email IamUser#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user#email IamUser#email}
   */
   readonly email: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user#id IamUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user#id IamUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,19 @@ export interface IamUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of organization the resource is associated to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user#organization_id IamUser#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user#organization_id IamUser#organization_id}
   */
   readonly organizationId?: string;
+  /**
+  * The tags associated with the user
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user#tags IamUser#tags}
+  */
+  readonly tags?: string[];
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user scaleway_iam_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user scaleway_iam_user}
 */
 export class IamUser extends cdktf.TerraformResource {
 
@@ -45,7 +51,7 @@ export class IamUser extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IamUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IamUser to import
-  * @param importFromId The id of the existing IamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IamUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -57,7 +63,7 @@ export class IamUser extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/iam_user scaleway_iam_user} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/iam_user scaleway_iam_user} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -68,8 +74,8 @@ export class IamUser extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iam_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -82,6 +88,7 @@ export class IamUser extends cdktf.TerraformResource {
     this._email = config.email;
     this._id = config.id;
     this._organizationId = config.organizationId;
+    this._tags = config.tags;
   }
 
   // ==========
@@ -163,6 +170,22 @@ export class IamUser extends cdktf.TerraformResource {
     return this.getStringAttribute('status');
   }
 
+  // tags - computed: false, optional: true, required: false
+  private _tags?: string[]; 
+  public get tags() {
+    return this.getListAttribute('tags');
+  }
+  public set tags(value: string[]) {
+    this._tags = value;
+  }
+  public resetTags() {
+    this._tags = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tagsInput() {
+    return this._tags;
+  }
+
   // type - computed: true, optional: false, required: false
   public get type() {
     return this.getStringAttribute('type');
@@ -182,6 +205,7 @@ export class IamUser extends cdktf.TerraformResource {
       email: cdktf.stringToTerraform(this._email),
       id: cdktf.stringToTerraform(this._id),
       organization_id: cdktf.stringToTerraform(this._organizationId),
+      tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
     };
   }
 
@@ -204,6 +228,12 @@ export class IamUser extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
       },
     };
 

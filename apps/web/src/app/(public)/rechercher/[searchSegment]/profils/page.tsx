@@ -1,37 +1,38 @@
-import React from 'react'
+import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import {
-  sanitizeUrlPaginationParams,
-  searchParamsFromSegment,
-  searchUrl,
-  UrlPaginationParams,
-} from '@app/web/server/search/searchQueryParams'
+import ProfilesSearchResult from '@app/web/components/Search/ProfilesSearchResult'
 import SearchResults from '@app/web/components/Search/SearchResults'
+import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
 import {
   countSearchResults,
   executeProfilesSearch,
 } from '@app/web/server/search/executeSearch'
-import ProfilesSearchResult from '@app/web/components/Search/ProfilesSearchResult'
-import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
-import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
+import {
+  type UrlPaginationParams,
+  sanitizeUrlPaginationParams,
+  searchParamsFromSegment,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
+import React from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const ProfilesSearchResultPage = async ({
   params,
-  searchParams: urlPaginationParams,
+  searchParams,
 }: {
-  params: { searchSegment: string }
-  searchParams: UrlPaginationParams
+  params: Promise<{ searchSegment: string }>
+  searchParams: Promise<UrlPaginationParams>
 }) => {
+  const { searchSegment } = await params
   const user = await getSessionUser()
-  const searchParams = searchParamsFromSegment(params?.searchSegment)
-  const paginationParams = sanitizeUrlPaginationParams(urlPaginationParams)
+  const searchExecutionParams = searchParamsFromSegment(searchSegment)
+  const paginationParams = sanitizeUrlPaginationParams(await searchParams)
 
   const [{ profiles, profilesCount }, tabCounts] = await Promise.all([
-    executeProfilesSearch(searchParams, paginationParams, user),
-    countSearchResults(searchParams, user),
+    executeProfilesSearch(searchExecutionParams, paginationParams, user),
+    countSearchResults(searchExecutionParams, user),
   ])
 
   return (
@@ -41,7 +42,10 @@ const ProfilesSearchResultPage = async ({
         paginationParams={paginationParams}
         count={profilesCount}
         createPageLink={(page: number) =>
-          searchUrl('profils', searchParams, { ...paginationParams, page })
+          searchUrl('profils', searchExecutionParams, {
+            ...paginationParams,
+            page,
+          })
         }
       >
         <ProfilesSearchResult
@@ -51,7 +55,7 @@ const ProfilesSearchResultPage = async ({
         >
           <SearchUrlResultSortingSelect
             paginationParams={paginationParams}
-            searchParams={searchParams}
+            searchParams={searchExecutionParams}
             tab="profils"
           />
         </ProfilesSearchResult>

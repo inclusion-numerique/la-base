@@ -1,12 +1,12 @@
 import { prismaClient } from '@app/web/prismaClient'
 import {
+  type CreationStatisticsResult,
   computeCreationProportions,
-  CreationStatisticsResult,
 } from './creationStatistics'
 import {
+  type UsageStatisticsResult,
   targetAudiencesUsages,
   themesUsages,
-  UsageStatisticsResult,
 } from './usageStatistics'
 
 type RechercheTimeframe = 'semaine' | 'mois' | 'total'

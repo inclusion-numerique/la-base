@@ -1,14 +1,14 @@
-import React from 'react'
-import { Control, FieldValues, Path } from 'react-hook-form'
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
 import {
   supportTypesLimit,
   targetAudiencesLimit,
   themesLimit,
 } from '@app/web/server/resources/feature/PublishResource'
-import { themeOptions } from '@app/web/themes/themes'
-import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
 import { supportTypeOptions } from '@app/web/themes/supportTypes'
+import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
+import { themeOptions } from '@app/web/themes/themes'
+import React from 'react'
+import type { Control, FieldValues, Path } from 'react-hook-form'
 
 const ResourceIndexationEdition = <T extends FieldValues>({
   control,

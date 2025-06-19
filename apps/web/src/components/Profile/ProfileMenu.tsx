@@ -1,10 +1,10 @@
 'use client'
 
-import React, { PropsWithChildren } from 'react'
+import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultation)/ProfileTab'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultation)/ProfileTab'
+import React, { type PropsWithChildren } from 'react'
 
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],
@@ -29,7 +29,7 @@ const MenuItem = ({
 }>) => (
   <li className="fr-nav__item">
     <Link
-      className="fr-nav__link fr-link--md"
+      className="fr-nav__link fr-display-block fr-link--md"
       href={href}
       aria-current={currentTab === tab ? 'page' : undefined}
       data-testid={`${tab}-menu-button`}

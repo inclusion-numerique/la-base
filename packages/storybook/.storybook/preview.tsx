@@ -1,7 +1,7 @@
 import React from 'react'
 import '@app/web/styles/index.css'
-import { Preview } from '@storybook/react'
 import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { Preview } from '@storybook/react'
 
 const loadDsfrJs = () => {
   const existing = document.querySelector('#dsfr-js')
@@ -61,10 +61,8 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
       if (!(window as any).dsfrIsSetup) {
         loadDsfrJs()
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
         ;(window as any).dsfrIsSetup = true
       }
 

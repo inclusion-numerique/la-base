@@ -1,8 +1,8 @@
-import axios, { CanceledError } from 'axios'
-import { useCallback, useRef, useState } from 'react'
-import EventEmitter from 'eventemitter3'
-import * as Sentry from '@sentry/nextjs'
 import { trpc } from '@app/web/trpc'
+import * as Sentry from '@sentry/nextjs'
+import axios, { CanceledError } from 'axios'
+import EventEmitter from 'eventemitter3'
+import { useCallback, useRef, useState } from 'react'
 
 const FORBIDDEN_CHARS_REGEXP = /[#“”]/g
 const EMPTY_STRING = ''
@@ -14,13 +14,12 @@ export const useFileUpload = () => {
   const [uploading, setUploading] = useState<boolean>(false)
 
   const progressEmitterRef = useRef(
-    // eslint-disable-next-line unicorn/prefer-event-target
     new EventEmitter<'progress', number | null>(),
   )
 
   const [filename, setFilename] = useState<string | null>(null)
 
-  const abortControllerRef = useRef<AbortController>()
+  const abortControllerRef = useRef<AbortController>(null)
 
   const generateUploadUrl = trpc.upload.generateUploadUrl.useMutation()
 
@@ -29,14 +28,14 @@ export const useFileUpload = () => {
       // This will throw an error in the axios request in the upload() method
       abortControllerRef.current.abort()
     }
-  }, [abortControllerRef])
+  }, [])
 
   const reset = useCallback(() => {
     abort()
     setUploading(false)
     progressEmitterRef.current.emit('progress', null)
     setFilename(null)
-  }, [setUploading, progressEmitterRef, abort])
+  }, [abort])
 
   const upload = useCallback(
     async (
@@ -121,7 +120,7 @@ export const useFileUpload = () => {
         progressEmitterRef.current.emit('progress', null)
       }
     },
-    [abort, generateUploadUrl, progressEmitterRef, setUploading],
+    [abort, generateUploadUrl],
   )
 
   return {

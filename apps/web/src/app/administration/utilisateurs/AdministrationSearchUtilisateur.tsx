@@ -1,17 +1,15 @@
-/*  eslint jsx-a11y/no-autofocus: off */
-
 'use client'
 
+import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { usePathname, useRouter } from 'next/navigation'
-import { FormEventHandler, useRef } from 'react'
-import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
+import { type FormEventHandler, useRef } from 'react'
 
 const AdministrationSearchUtilisateur = ({
   searchParams = {},
 }: {
-  searchParams?: UtilisateursDataTableSearchParams
+  searchParams: UtilisateursDataTableSearchParams
 }) => {
   const pathname = usePathname()
   const router = useRouter()

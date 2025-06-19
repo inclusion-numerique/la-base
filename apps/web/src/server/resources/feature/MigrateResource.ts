@@ -1,6 +1,6 @@
-import z from 'zod'
-import { ContentType, SupportType, TargetAudience, Theme } from '@prisma/client'
 import { CreateResourceCommandPayloadValidation } from '@app/web/server/resources/feature/CreateResource'
+import { ContentType, SupportType, TargetAudience, Theme } from '@prisma/client'
+import z from 'zod'
 
 export const MigrateResourceCommandValidation = z.object({
   name: z.literal('MigrateResource'),

@@ -1,4 +1,3 @@
-import z from 'zod'
 import { optionalFileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
 import {
   FilePayloadCommandValidation,
@@ -8,6 +7,7 @@ import {
   TextPayloadCommandValidation,
 } from '@app/web/server/resources/feature/Content'
 import { imageFileValidationOptions } from '@app/web/server/rpc/image/imageValidation'
+import z from 'zod'
 
 export const ClientImagePayloadCommandValidation =
   ImagePayloadCommandValidation.extend({

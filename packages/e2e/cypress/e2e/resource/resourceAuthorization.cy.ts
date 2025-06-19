@@ -1,12 +1,12 @@
-import { EditTitleAndDescriptionCommand } from '@app/web/server/resources/feature/EditTitleAndDescription'
-import { createSlug } from '@app/web/utils/createSlug'
-import { v4 } from 'uuid'
-import { givenUser } from '@app/e2e/support/given/givenUser'
 import { givenBase } from '@app/e2e/support/given/givenBase'
 import {
   createTestPublishResourceCommand,
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
+import { givenUser } from '@app/e2e/support/given/givenUser'
+import { EditTitleAndDescriptionCommand } from '@app/web/server/resources/feature/EditTitleAndDescription'
+import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
 import {
   cleanUp,
   cleanUpAndCreateTestPublishedResource,

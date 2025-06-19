@@ -3,7 +3,6 @@ const mega = 1_000_000
 const giga = 1_000_000_000
 
 const withUnit = (value: number, unit: string) =>
-  // eslint-disable-next-line no-irregular-whitespace
   `${value
     .toFixed(2)
     // Remove trailing zeros
@@ -15,7 +14,6 @@ export const formatByteSize = (sizeInBytes: number | null): string => {
     return '-'
   }
   if (sizeInBytes < kilo) {
-    // eslint-disable-next-line no-irregular-whitespace
     return `${sizeInBytes} o`
   }
 

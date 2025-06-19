@@ -1,20 +1,20 @@
-import Tag from '@codegouvfr/react-dsfr/Tag'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
 import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
 import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
 import AdministrationMailtoLink from '@app/web/app/administration/AdministrationMailtoLink'
+import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
+import DeleteUserButton from '@app/web/app/administration/utilisateurs/[id]/DeleteUserButton'
+import { getUserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
+import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { getUserDisplayName } from '@app/web/utils/user'
-import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
-import { getServerUrl } from '@app/web/utils/baseUrl'
-import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
-import DeleteUserButton from '@app/web/app/administration/utilisateurs/[id]/DeleteUserButton'
-import { getUserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
+import Tag from '@codegouvfr/react-dsfr/Tag'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 export const metadata = {
   title: metadataTitle('Utilisateurs - Détails'),
@@ -22,7 +22,9 @@ export const metadata = {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const Page = async ({ params: { id } }: { params: { id: string } }) => {
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params
+
   const { user, bases } = await getUserDetailsPageContext(id)
 
   if (!user) {

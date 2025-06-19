@@ -1,0 +1,4 @@
+.invalid {
+  color: var(--background-flat-error) !important;
+  background-color: var(--background-contrast-error-active) !important;
+}

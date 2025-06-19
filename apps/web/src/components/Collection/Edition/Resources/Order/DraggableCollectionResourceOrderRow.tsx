@@ -1,13 +1,13 @@
 'use client'
 
-import { Reorder, useDragControls } from 'framer-motion'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { PointerEventHandler, RefObject, useRef } from 'react'
-import classNames from 'classnames'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import CollectionResourceOrderRow from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrderRow'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
+import CollectionResourceOrderRow from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrderRow'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import { Reorder, useDragControls } from 'framer-motion'
+import { type PointerEventHandler, type RefObject, useRef } from 'react'
 
 const DraggableCollectionResourceOrderRow = ({
   resource,
@@ -22,7 +22,7 @@ const DraggableCollectionResourceOrderRow = ({
 }: {
   resource: ResourceListItem
   count: number
-  dragConstraints: RefObject<HTMLElement>
+  dragConstraints: RefObject<HTMLElement | null>
   index: number
   isSelected: boolean
   onSelect: () => void
@@ -54,7 +54,6 @@ const DraggableCollectionResourceOrderRow = ({
     if (!(target instanceof HTMLButtonElement) || !target.dataset.index) {
       // Only here for type safety
       // It should never happen as the drag button is our only source of event
-      // eslint-disable-next-line no-useless-return
       return
     }
   }

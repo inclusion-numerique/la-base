@@ -1,7 +1,7 @@
-import type { DifficultyArea } from '@prisma/client'
-import z from 'zod'
 import { labelsToOptions } from '@app/ui/components/Form/utils/options'
 import { yesOrNo } from '@app/web/utils/yesNoBooleanOptions'
+import type { DifficultyArea } from '@prisma/client'
+import z from 'zod'
 
 export const difficultyAreaLabels: {
   [key in DifficultyArea]: string

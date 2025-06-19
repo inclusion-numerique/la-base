@@ -1,7 +1,7 @@
-import React from 'react'
-import classNames from 'classnames'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { managerCollectionUrl } from '@app/web/collections/manageCollectionUrl'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import React from 'react'
 
 export const ManageCollectionButton = ({
   className,

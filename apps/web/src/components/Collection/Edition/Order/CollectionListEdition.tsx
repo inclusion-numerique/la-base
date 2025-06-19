@@ -1,16 +1,17 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
-import { AnimatePresence, Reorder } from 'framer-motion'
-import { createToast } from '@app/ui/toast/createToast'
-import { useRouter } from 'next/navigation'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
-import DraggableCollectionOrderRow from '@app/web/components/Collection/Edition/Order/DraggableCollectionOrderRow'
+import { createToast } from '@app/ui/toast/createToast'
 import styles from '@app/web/components/Collection/Edition/Order/CollectionOrder.module.css'
-import { trpc } from '@app/web/trpc'
+import DraggableCollectionOrderRow from '@app/web/components/Collection/Edition/Order/DraggableCollectionOrderRow'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
+import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import { trpc } from '@app/web/trpc'
+import { AnimatePresence, Reorder } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import type React from 'react'
+import { useRef, useState } from 'react'
 
 const CollectionListEdition = ({
   collections,
@@ -66,7 +67,6 @@ const CollectionListEdition = ({
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="fr-mt-md-6w fr-mt-3w"
       role="list"

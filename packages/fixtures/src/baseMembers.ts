@@ -1,6 +1,6 @@
-import type { Prisma } from '@prisma/client'
-import { jmAvecTout } from '@app/fixtures/users'
 import { baseFixtureAvecTout, baseFixtureVide } from '@app/fixtures/bases'
+import { jmAvecTout } from '@app/fixtures/users'
+import type { Prisma } from '@prisma/client'
 
 export const baseMembers = [
   {

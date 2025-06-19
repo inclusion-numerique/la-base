@@ -1,5 +1,5 @@
-import { ImageLoader } from 'next/image'
 import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'
+import type { ImageLoader } from 'next/image'
 
 export const externalImageLoader: ImageLoader = ({
   src,

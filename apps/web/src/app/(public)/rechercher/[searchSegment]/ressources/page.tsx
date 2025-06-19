@@ -1,39 +1,40 @@
-import React from 'react'
+import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import {
-  sanitizeUrlPaginationParams,
-  searchParamsFromSegment,
-  searchUrl,
-  UrlPaginationParams,
-} from '@app/web/server/search/searchQueryParams'
+import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
+import SearchResults from '@app/web/components/Search/SearchResults'
+import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
 import {
   countSearchResults,
   executeResourcesSearch,
 } from '@app/web/server/search/executeSearch'
-import SearchResults from '@app/web/components/Search/SearchResults'
-import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
-import { SearchUrlResultSortingSelect } from '@app/web/components/Search/SearchUrlResultSortingSelect'
-import SynchronizeTabCounts from '@app/web/app/(public)/rechercher/[searchSegment]/SynchronizeTabCounts'
+import {
+  type UrlPaginationParams,
+  sanitizeUrlPaginationParams,
+  searchParamsFromSegment,
+  searchUrl,
+} from '@app/web/server/search/searchQueryParams'
+import React from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const ResourcesSearchResultPage = async ({
   params,
-  searchParams: urlPaginationParams,
+  searchParams,
 }: {
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
-  searchParams: UrlPaginationParams
+  }>
+  searchParams: Promise<UrlPaginationParams>
 }) => {
+  const { searchSegment } = await params
   const user = await getSessionUser()
-  const searchParams = searchParamsFromSegment(params?.searchSegment)
-  const paginationParams = sanitizeUrlPaginationParams(urlPaginationParams)
+  const searchExecutionParams = searchParamsFromSegment(searchSegment)
+  const paginationParams = sanitizeUrlPaginationParams(await searchParams)
 
   const [{ resources, resourcesCount }, tabCounts] = await Promise.all([
-    executeResourcesSearch(searchParams, paginationParams, user),
-    countSearchResults(searchParams, user),
+    executeResourcesSearch(searchExecutionParams, paginationParams, user),
+    countSearchResults(searchExecutionParams, user),
   ])
 
   return (
@@ -43,7 +44,10 @@ const ResourcesSearchResultPage = async ({
         paginationParams={paginationParams}
         count={resourcesCount}
         createPageLink={(page: number) =>
-          searchUrl('ressources', searchParams, { ...paginationParams, page })
+          searchUrl('ressources', searchExecutionParams, {
+            ...paginationParams,
+            page,
+          })
         }
       >
         <ResourcesSearchResults
@@ -53,7 +57,7 @@ const ResourcesSearchResultPage = async ({
         >
           <SearchUrlResultSortingSelect
             paginationParams={paginationParams}
-            searchParams={searchParams}
+            searchParams={searchExecutionParams}
             tab="ressources"
           />
         </ResourcesSearchResults>

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,72 +8,78 @@ import * as cdktf from 'cdktf';
 
 export interface JobDefinitionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#command JobDefinition#command}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#command JobDefinition#command}
   */
   readonly command?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
   */
   readonly cpuLimit: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#description JobDefinition#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#description JobDefinition#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#env JobDefinition#env}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#env JobDefinition#env}
   */
   readonly env?: { [key: string]: string };
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#id JobDefinition#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#id JobDefinition#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#image_uri JobDefinition#image_uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#image_uri JobDefinition#image_uri}
   */
   readonly imageUri?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
   */
   readonly memoryLimit: number;
   /**
   * The job name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#name JobDefinition#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#name JobDefinition#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#project_id JobDefinition#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#project_id JobDefinition#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#region JobDefinition#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#region JobDefinition#region}
   */
   readonly region?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#timeout JobDefinition#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#timeout JobDefinition#timeout}
   */
   readonly timeout?: string;
   /**
   * cron block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#cron JobDefinition#cron}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#cron JobDefinition#cron}
   */
   readonly cron?: JobDefinitionCron;
+  /**
+  * secret_reference block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#secret_reference JobDefinition#secret_reference}
+  */
+  readonly secretReference?: JobDefinitionSecretReference[] | cdktf.IResolvable;
 }
 export interface JobDefinitionCron {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#schedule JobDefinition#schedule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#schedule JobDefinition#schedule}
   */
   readonly schedule: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#timezone JobDefinition#timezone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#timezone JobDefinition#timezone}
   */
   readonly timezone: string;
 }
@@ -178,9 +184,234 @@ export class JobDefinitionCronOutputReference extends cdktf.ComplexObject {
     return this._timezone;
   }
 }
+export interface JobDefinitionSecretReference {
+  /**
+  * An environment variable containing the secret value.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#environment JobDefinition#environment}
+  */
+  readonly environment?: string;
+  /**
+  * The absolute file path where the secret will be mounted.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#file JobDefinition#file}
+  */
+  readonly file?: string;
+  /**
+  * The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#secret_id JobDefinition#secret_id}
+  */
+  readonly secretId: string;
+  /**
+  * The secret version.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#secret_version JobDefinition#secret_version}
+  */
+  readonly secretVersion?: string;
+}
+
+export function jobDefinitionSecretReferenceToTerraform(struct?: JobDefinitionSecretReference | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    environment: cdktf.stringToTerraform(struct!.environment),
+    file: cdktf.stringToTerraform(struct!.file),
+    secret_id: cdktf.stringToTerraform(struct!.secretId),
+    secret_version: cdktf.stringToTerraform(struct!.secretVersion),
+  }
+}
+
+
+export function jobDefinitionSecretReferenceToHclTerraform(struct?: JobDefinitionSecretReference | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    environment: {
+      value: cdktf.stringToHclTerraform(struct!.environment),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    file: {
+      value: cdktf.stringToHclTerraform(struct!.file),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    secret_id: {
+      value: cdktf.stringToHclTerraform(struct!.secretId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    secret_version: {
+      value: cdktf.stringToHclTerraform(struct!.secretVersion),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class JobDefinitionSecretReferenceOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): JobDefinitionSecretReference | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._environment !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.environment = this._environment;
+    }
+    if (this._file !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.file = this._file;
+    }
+    if (this._secretId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.secretId = this._secretId;
+    }
+    if (this._secretVersion !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.secretVersion = this._secretVersion;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: JobDefinitionSecretReference | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._environment = undefined;
+      this._file = undefined;
+      this._secretId = undefined;
+      this._secretVersion = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._environment = value.environment;
+      this._file = value.file;
+      this._secretId = value.secretId;
+      this._secretVersion = value.secretVersion;
+    }
+  }
+
+  // environment - computed: false, optional: true, required: false
+  private _environment?: string; 
+  public get environment() {
+    return this.getStringAttribute('environment');
+  }
+  public set environment(value: string) {
+    this._environment = value;
+  }
+  public resetEnvironment() {
+    this._environment = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get environmentInput() {
+    return this._environment;
+  }
+
+  // file - computed: false, optional: true, required: false
+  private _file?: string; 
+  public get file() {
+    return this.getStringAttribute('file');
+  }
+  public set file(value: string) {
+    this._file = value;
+  }
+  public resetFile() {
+    this._file = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fileInput() {
+    return this._file;
+  }
+
+  // secret_id - computed: false, optional: false, required: true
+  private _secretId?: string; 
+  public get secretId() {
+    return this.getStringAttribute('secret_id');
+  }
+  public set secretId(value: string) {
+    this._secretId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get secretIdInput() {
+    return this._secretId;
+  }
+
+  // secret_reference_id - computed: true, optional: false, required: false
+  public get secretReferenceId() {
+    return this.getStringAttribute('secret_reference_id');
+  }
+
+  // secret_version - computed: false, optional: true, required: false
+  private _secretVersion?: string; 
+  public get secretVersion() {
+    return this.getStringAttribute('secret_version');
+  }
+  public set secretVersion(value: string) {
+    this._secretVersion = value;
+  }
+  public resetSecretVersion() {
+    this._secretVersion = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get secretVersionInput() {
+    return this._secretVersion;
+  }
+}
+
+export class JobDefinitionSecretReferenceList extends cdktf.ComplexList {
+  public internalValue? : JobDefinitionSecretReference[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): JobDefinitionSecretReferenceOutputReference {
+    return new JobDefinitionSecretReferenceOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition scaleway_job_definition}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition scaleway_job_definition}
 */
 export class JobDefinition extends cdktf.TerraformResource {
 
@@ -196,7 +427,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a JobDefinition resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the JobDefinition to import
-  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the JobDefinition to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -208,7 +439,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/job_definition scaleway_job_definition} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/job_definition scaleway_job_definition} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -219,8 +450,8 @@ export class JobDefinition extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_job_definition',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -242,6 +473,7 @@ export class JobDefinition extends cdktf.TerraformResource {
     this._region = config.region;
     this._timeout = config.timeout;
     this._cron.internalValue = config.cron;
+    this._secretReference.internalValue = config.secretReference;
   }
 
   // ==========
@@ -434,6 +666,22 @@ export class JobDefinition extends cdktf.TerraformResource {
     return this._cron.internalValue;
   }
 
+  // secret_reference - computed: false, optional: true, required: false
+  private _secretReference = new JobDefinitionSecretReferenceList(this, "secret_reference", true);
+  public get secretReference() {
+    return this._secretReference;
+  }
+  public putSecretReference(value: JobDefinitionSecretReference[] | cdktf.IResolvable) {
+    this._secretReference.internalValue = value;
+  }
+  public resetSecretReference() {
+    this._secretReference.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get secretReferenceInput() {
+    return this._secretReference.internalValue;
+  }
+
   // =========
   // SYNTHESIS
   // =========
@@ -452,6 +700,7 @@ export class JobDefinition extends cdktf.TerraformResource {
       region: cdktf.stringToTerraform(this._region),
       timeout: cdktf.stringToTerraform(this._timeout),
       cron: jobDefinitionCronToTerraform(this._cron.internalValue),
+      secret_reference: cdktf.listMapper(jobDefinitionSecretReferenceToTerraform, true)(this._secretReference.internalValue),
     };
   }
 
@@ -528,6 +777,12 @@ export class JobDefinition extends cdktf.TerraformResource {
         isBlock: true,
         type: "list",
         storageClassType: "JobDefinitionCronList",
+      },
+      secret_reference: {
+        value: cdktf.listMapperHcl(jobDefinitionSecretReferenceToHclTerraform, true)(this._secretReference.internalValue),
+        isBlock: true,
+        type: "set",
+        storageClassType: "JobDefinitionSecretReferenceList",
       },
     };
 

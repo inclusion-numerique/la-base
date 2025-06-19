@@ -1,13 +1,11 @@
-/* eslint import/no-relative-packages: off */
-
-import path from 'node:path'
 import childProcess from 'node:child_process'
-import { logToFile } from './logToFile'
+import path from 'node:path'
 import {
-  decodeSerializableState,
   EncodedState,
+  decodeSerializableState,
   encodeSerializableState,
 } from '../../../../apps/web/src/utils/encodeSerializableState'
+import { logToFile } from './logToFile'
 
 const packageBaseDirectory = path.resolve(import.meta.dirname, '../..')
 

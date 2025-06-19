@@ -1,10 +1,10 @@
-import * as Sentry from '@sentry/nextjs'
-import { v4 } from 'uuid'
 import { executeBackupDatabaseJob } from '@app/web/jobs/backup-database/executeBackupDatabaseJob'
 import { executeImportContactsToBrevo } from '@app/web/jobs/import-contacts-to-brevo/executeImportContactsToBrevo'
 import type { Job, JobName, JobPayload } from '@app/web/jobs/jobs'
 import { prismaClient } from '@app/web/prismaClient'
 import { createStopwatch } from '@app/web/utils/stopwatch'
+import * as Sentry from '@sentry/nextjs'
+import { v4 } from 'uuid'
 
 export type JobExecutor<Name extends JobName, Result = unknown> = (
   job: Job & { name: Name; payload: JobPayload<Name> },
@@ -33,7 +33,6 @@ export const executeJob = async (job: Job) => {
   })
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const executor = jobExecutors[job.name] as JobExecutor<(typeof job)['name']>
     const result = await executor(job)
     const { ended, duration } = stopWatch.stop()
@@ -50,6 +49,7 @@ export const executeJob = async (job: Job) => {
         if (Sentry?.captureException) {
           Sentry.captureException(error)
         }
+        // biome-ignore lint/suspicious/noConsole: need this for troubleshooting
         console.error(error)
       })
 
@@ -63,6 +63,7 @@ export const executeJob = async (job: Job) => {
     if (Sentry?.captureException) {
       Sentry.captureException(error)
     }
+    // biome-ignore lint/suspicious/noConsole: need this for troubleshooting
     console.error(error)
     const { ended, duration } = stopWatch.stop()
 

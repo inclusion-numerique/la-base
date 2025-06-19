@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react'
-import type { Metadata } from 'next'
-import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
-import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import SearchMenu from '@app/web/components/Search/SearchMenu'
+import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
+import type { Metadata } from 'next'
+import React, { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -11,19 +11,21 @@ export const metadata: Metadata = {
   title: metadataTitle('Rechercher des profils'),
 }
 
-const ProfilesSearchLayout = ({
-  children,
+const ProfilesSearchLayout = async ({
   params,
+  children,
 }: PropsWithChildren<{
-  params: {
+  params: Promise<{
     searchSegment: string
-  }
+  }>
 }>) => {
-  const searchParams = searchParamsFromSegment(params.searchSegment)
+  const { searchSegment } = await params
+
+  const searchExecutionParams = searchParamsFromSegment(searchSegment)
 
   return (
     <>
-      <SearchMenu activeTab="profils" searchParams={searchParams} />
+      <SearchMenu activeTab="profils" searchParams={searchExecutionParams} />
       <div className="fr-container fr-container--medium fr-mb-30v">
         {children}
       </div>

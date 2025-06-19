@@ -1,7 +1,7 @@
-import { toast } from 'react-hot-toast'
-import classNames from 'classnames'
 import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import { JSX } from 'react'
+import { toast } from 'react-hot-toast'
 import styles from './Toaster.module.css'
 
 export type ToastPriority = 'info' | 'warning' | 'error' | 'success'
@@ -26,7 +26,7 @@ export const createToast = ({
 }) => {
   toast(
     action ? (
-      <>
+      <div className="fr-no-print">
         <span>{message}</span>
         <Button
           className={classNames('fr-ml-1w', styles.action)}
@@ -34,9 +34,9 @@ export const createToast = ({
           size="small"
           {...action}
         />
-      </>
+      </div>
     ) : (
-      <span>{message}</span>
+      <span className="fr-no-print">{message}</span>
     ),
     {
       duration,

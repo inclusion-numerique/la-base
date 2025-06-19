@@ -1,13 +1,13 @@
-import Button from '@codegouvfr/react-dsfr/Button'
-import {
+import DataFilters from '@app/web/data-table/DataFilter/DataFilters'
+import DataSearchBar from '@app/web/data-table/DataSearchBar'
+import type {
   DataTableConfiguration,
   DataTableFilterValues,
   DataTableRow,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'
-import DataSearchBar from '@app/web/data-table/DataSearchBar'
-import DataFilters from '@app/web/data-table/DataFilter/DataFilters'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import Button from '@codegouvfr/react-dsfr/Button'
 
 /**
  * Server component orchestrating the render of search bar and filter client components
@@ -25,7 +25,6 @@ const DataSearchAndFilters = async <
   searchParams: DataTableSearchParams<Configuration>
   baseHref: string
   // TODO used ?
-  // eslint-disable-next-line react/no-unused-prop-types
   data: Data[]
   filterValues: DataTableFilterValues<Configuration>
 }) => {
@@ -36,8 +35,7 @@ const DataSearchAndFilters = async <
 
   const filterComponents = await Promise.all(
     filterConfigurations.map(async (filterConfiguration) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const options =
+      const _options =
         'options' in filterConfiguration
           ? Array.isArray(filterConfiguration.options)
             ? filterConfiguration.options

@@ -1,9 +1,9 @@
-import { v4 } from 'uuid'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
-import { Resource } from '@app/web/server/resources/getResource'
-import { SessionUser } from '../auth/sessionUser'
-import { BasePageData } from '../server/bases/getBase'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import type { Resource } from '@app/web/server/resources/getResource'
+import { v4 } from 'uuid'
+import type { SessionUser } from '../auth/sessionUser'
+import type { BasePageData } from '../server/bases/getBase'
 
 export const createTestUser = (publicProfile?: boolean) =>
   ({
@@ -166,6 +166,7 @@ export const createTestBase = (
         baseId: id,
         memberId: admin.id,
         member: {
+          email: admin.email,
           id: admin.id,
           slug: admin.slug,
           name: admin.name,
@@ -192,6 +193,7 @@ export const createTestBase = (
           name: member.name,
           firstName: member.firstName,
           lastName: member.lastName,
+          email: member.email,
           image: null,
           followedBy: [],
           _count: {
@@ -207,6 +209,8 @@ export const createTestBase = (
     ],
     _count: {
       followedBy: 0,
+      resources: 2,
+      resourcesViews: 2,
     },
   } satisfies BasePageData
   return {

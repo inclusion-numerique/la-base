@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic'
 import { Spinner } from '@app/web/ui/Spinner'
+import dynamic from 'next/dynamic'
 
 export default dynamic(() => import('@app/ui/chart/ChartJsContent'), {
   ssr: false,

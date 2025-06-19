@@ -1,5 +1,5 @@
-import { Grantee } from '@app/web/authorization/grantee'
-import { UserSecurityRole } from '@app/web/authorization/userSecurityRole'
+import type { Grantee } from '@app/web/authorization/grantee'
+import type { UserSecurityRole } from '@app/web/authorization/userSecurityRole'
 
 /**
  * Higher order function that creates an authorizer function

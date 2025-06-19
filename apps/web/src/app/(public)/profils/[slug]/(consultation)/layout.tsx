@@ -1,30 +1,33 @@
-import React, { PropsWithChildren } from 'react'
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
+import { getProfilePageCounts } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageCounts'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
+import PrivateBox from '@app/web/components/PrivateBox'
 import ProfileHeader, {
   headerSkipLink,
 } from '@app/web/components/Profile/ProfileHeader'
-import PrivateBox from '@app/web/components/PrivateBox'
-import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
-import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
-import { getProfilePageCounts } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageCounts'
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
-import { prismaClient } from '@app/web/prismaClient'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'
-import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import React, { type PropsWithChildren } from 'react'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: ProfilRouteParams): Promise<Metadata> => {
+  const { slug } = await params
+
   const profile = await prismaClient.user.findUnique({
     where: {
       slug,
     },
     select: {
       name: true,
+      isPublic: true,
     },
   })
   if (!profile) {
@@ -35,6 +38,7 @@ export const generateMetadata = async ({
     title: metadataTitle(
       (profile.name && formatName(profile.name)) || 'Profil',
     ),
+    robots: profile.isPublic ? undefined : 'noindex, nofollow',
   }
 }
 
@@ -42,11 +46,12 @@ const ProfileLayout = async ({
   params,
   children,
 }: PropsWithChildren<ProfilRouteParams>) => {
+  const { slug } = await params
   const {
     profile,
     user,
     authorization: { hasPermission, hasRole },
-  } = await getProfilePageContext(params.slug)
+  } = await getProfilePageContext(slug)
 
   if (!profile.slug) return
 

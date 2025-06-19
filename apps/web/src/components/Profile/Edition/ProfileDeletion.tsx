@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
-import { signOut } from 'next-auth/react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { signOut } from 'next-auth/react'
+import React from 'react'
 import { ConfirmDeleteModal } from '../../ConfirmDeleteModal'
 import CustomCard from '../../CustomCard'
 
@@ -27,6 +27,7 @@ const ProfileDeletion = ({ userId }: { userId: string }) => {
       await mutation.mutateAsync({ userId })
       await signOut({ redirect: true, callbackUrl: '/profil-supprime' })
     } catch (error) {
+      // biome-ignore lint/suspicious/noConsole: need this for troubleshooting
       console.error('Could not delete profile', error)
       createToast({
         priority: 'error',

@@ -1,10 +1,10 @@
 'use client'
 
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import { createToast } from '@app/ui/toast/createToast'
-import * as Sentry from '@sentry/nextjs'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useFileDownload } from '@app/web/hooks/useFileDownload'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import * as Sentry from '@sentry/nextjs'
 
 const DownloadFileContentButton = ({
   fileKey,

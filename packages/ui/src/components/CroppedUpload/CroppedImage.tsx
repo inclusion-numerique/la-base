@@ -1,13 +1,14 @@
-import React, { ReactNode } from 'react'
-import classNames from 'classnames'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { Upload } from '@codegouvfr/react-dsfr/Upload'
+import ImageInfo from '@app/ui/components/ImageInfo'
+import { ImageForForm } from '@app/web/server/image/imageTypes'
 import {
   imageAllowedMimeTypes,
   imageUploadHint,
 } from '@app/web/server/rpc/image/imageValidation'
-import { ImageForForm } from '@app/web/server/image/imageTypes'
-import ImageInfo from '@app/ui/components/ImageInfo'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { Upload } from '@codegouvfr/react-dsfr/Upload'
+import classNames from 'classnames'
+import type Cropper from 'cropperjs'
+import React, { ReactNode } from 'react'
 import styles from './CroppedUpload.module.css'
 import { ImageWithName } from './utils'
 

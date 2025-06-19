@@ -1,15 +1,15 @@
-import { Grantee } from '@app/web/authorization/grantee'
-import { testSessionUser } from '@app/web/test/testSessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { Grantee } from '@app/web/authorization/grantee'
 import {
+  type CollectionAuthorizationTarget,
+  CollectionPermissions,
+  CollectionRoles,
+  collectionPermissions,
   getCollectionPermissions,
   getCollectionRoles,
-  CollectionAuthorizationTarget,
-  CollectionPermissions,
-  collectionPermissions,
-  CollectionRoles,
 } from '@app/web/authorization/models/collectionAuthorization'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 
 describe('Authorization - Collections', () => {
   const collection = {

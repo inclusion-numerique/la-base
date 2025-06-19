@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { numberToString } from '@app/web/utils/formatNumber'
+import React, { type ReactNode } from 'react'
 import BaseCard from '../Base/Card/BaseCard'
 import EmptyBox from '../EmptyBox'
 import styles from './SearchContents.module.css'
@@ -14,7 +14,7 @@ const BasesSearchResult = ({
   children,
 }: {
   totalCount: number
-  bases: BaseListItem[]
+  bases: BaseProfileListItem[]
   user: SessionUser | null
   children: ReactNode
 }) => (

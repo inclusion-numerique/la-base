@@ -16,7 +16,6 @@
   }
 
   .fr-modal__content {
-    padding-bottom: 40px;
-    margin-bottom: 180px;
+    padding-bottom: 2rem;
   }
 }

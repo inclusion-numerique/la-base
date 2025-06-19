@@ -1,7 +1,7 @@
 'use client'
 
-import { Toaster as BaseToaster } from 'react-hot-toast'
 import React from 'react'
+import { Toaster as BaseToaster } from 'react-hot-toast'
 
 const Toaster = () => (
   <BaseToaster
@@ -9,7 +9,7 @@ const Toaster = () => (
     reverseOrder={false}
     gutter={8}
     toastOptions={{
-      duration: 6000,
+      duration: 10_000,
     }}
   />
 )

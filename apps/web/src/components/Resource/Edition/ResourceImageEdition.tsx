@@ -1,22 +1,24 @@
 'use client'
 
-import Image from 'next/image'
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import * as Sentry from '@sentry/nextjs'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { fileValidation } from '@app/ui/components/Form/utils/fileValidation.client'
+import { useWatchSubscription } from '@app/ui/hooks/useWatchSubscription'
+import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { useFileUpload } from '@app/web/hooks/useFileUpload'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {
-  imageUploadHint,
   imageFileValidationOptions,
+  imageUploadHint,
 } from '@app/web/server/rpc/image/imageValidation'
 import { trpc } from '@app/web/trpc'
-import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import { noop } from '@trpc/server/unstable-core-do-not-import'
+import Image from 'next/image'
+import React, { type Dispatch, type SetStateAction, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import styles from './ResourceImageEdition.module.css'
 
 const imageFileValidation = fileValidation({
@@ -127,19 +129,36 @@ const ResourceImageEdition = ({
   const disabled = isSubmitting || isEditingAnotherContent
 
   // Form is automatically submited without user validation on image file change
-  useEffect(() => {
-    const subscription = watch((value) => {
-      if (value.file && !isEditingImage) {
-        handleSubmit(onSubmit)().catch((error) => {
-          Sentry.captureException(error)
-        })
-      }
-    })
-    return () => subscription.unsubscribe()
-  }, [watch, isEditingImage, setEditing, handleSubmit, onSubmit])
+  const submittedFileRef = useRef<File | null>(null)
+
+  useWatchSubscription(watch, (data) => {
+    if (submittedFileRef.current === data.file) {
+      // No op if the same file triggered watch
+      return
+    }
+
+    if (!data.file) {
+      // No file in the File input, reset the ref
+      submittedFileRef.current = null
+      return
+    }
+
+    if (data.file && !isEditingImage) {
+      // If a file is selected and we are not editing another content, we submit the form
+      submittedFileRef.current = data.file // Update the ref to avoid infinite loop
+      handleSubmit(onSubmit)().catch((error) => {
+        Sentry.captureException(error)
+      })
+    }
+  })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={
+        // Form is auto submited on file change, we don't want anything to happen on submit
+        noop
+      }
+    >
       <div className={image ? styles.container : styles.emptyContainer}>
         <div
           className={

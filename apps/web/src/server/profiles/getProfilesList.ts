@@ -1,7 +1,7 @@
-import { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import type { Prisma } from '@prisma/client'
 
 export const profileListSelect = (user: { id: string } | null) =>
   ({
@@ -10,6 +10,7 @@ export const profileListSelect = (user: { id: string } | null) =>
     firstName: true,
     lastName: true,
     slug: true,
+    email: true,
     image: {
       select: {
         id: true,

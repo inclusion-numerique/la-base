@@ -1,9 +1,15 @@
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import React, { ReactNode } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath, Path, PathValue } from 'react-hook-form/dist/types/path'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  PathValue,
+} from 'react-hook-form'
+import { FieldPath } from 'react-hook-form/dist/types/path'
 import { RichRadioOption } from './utils/options'
 
 export type RichRadioFormFieldProps<T extends FieldValues> = {

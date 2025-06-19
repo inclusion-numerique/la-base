@@ -1,11 +1,11 @@
 import { prismaClient } from '@app/web/prismaClient'
-import {
+import type {
   BaseChanged,
   ChangeBaseCommand,
 } from '@app/web/server/resources/feature/ChangeBase'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from './ResourceEventSideEffect'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from './ResourceEventSideEffect'
 
 export const handleChangeBase: ResourceMutationCommandHandler<
   ChangeBaseCommand,
@@ -45,7 +45,6 @@ export const applyBaseChanged: ResourceMutationEventApplier<BaseChanged> = (
 ) => ({
   ...resource,
   isPublic:
-    // eslint-disable-next-line no-underscore-dangle
     event.data.__version === 1 ? resource.isPublic : event.data.isPublic,
   baseId: event.data.baseId,
   updated: event.timestamp,

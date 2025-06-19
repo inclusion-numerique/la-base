@@ -1,12 +1,14 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Meta, StoryObj } from '@storybook/react'
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
-import { ComponentProps } from 'react'
-import { EditContentCommandValidation } from '@app/web/server/resources/feature/EditContent'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { ImagePayload } from '@app/web/server/resources/feature/Content'
+import { ImagePayloadCommandValidation } from '@app/web/server/resources/feature/Content'
+import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import { EditContentCommandValidation } from '@app/web/server/resources/feature/EditContent'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
+import { useForm } from 'react-hook-form'
 import ImageContentEdition from './ImageContentEdition'
 
 export default {
@@ -20,8 +22,8 @@ const Template = withTrpc(
   ({
     content,
   }: Pick<ComponentProps<typeof ImageContentEdition>, 'content'>) => {
-    const form = useForm<ClientContentPayload & { type: 'Image' }>({
-      resolver: zodResolver(EditContentCommandValidation),
+    const form = useForm<ImagePayload>({
+      resolver: zodResolver(ImagePayloadCommandValidation),
       reValidateMode: 'onChange',
       mode: 'all',
       defaultValues: {},

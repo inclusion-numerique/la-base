@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import classNames from 'classnames'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
+import classNames from 'classnames'
+import React, { useState } from 'react'
 import styles from './RichInputFormLinkTooltip.module.css'
 
 const tooltipTopOffset = 40

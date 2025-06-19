@@ -1,5 +1,5 @@
-import { z } from 'zod'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
+import { z } from 'zod'
 
 export const maximumFileSizeInBytes = 100_000_000
 

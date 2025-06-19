@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface MnqNatsCredentialsConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of the nats account
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials#account_id MnqNatsCredentials#account_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials#account_id MnqNatsCredentials#account_id}
   */
   readonly accountId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials#id MnqNatsCredentials#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials#id MnqNatsCredentials#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface MnqNatsCredentialsConfig extends cdktf.TerraformMetaArguments {
   /**
   * The nats credentials name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials#name MnqNatsCredentials#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials#name MnqNatsCredentials#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials#region MnqNatsCredentials#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials#region MnqNatsCredentials#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials scaleway_mnq_nats_credentials}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials scaleway_mnq_nats_credentials}
 */
 export class MnqNatsCredentials extends cdktf.TerraformResource {
 
@@ -51,7 +51,7 @@ export class MnqNatsCredentials extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MnqNatsCredentials resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MnqNatsCredentials to import
-  * @param importFromId The id of the existing MnqNatsCredentials that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MnqNatsCredentials that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MnqNatsCredentials to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -63,7 +63,7 @@ export class MnqNatsCredentials extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_nats_credentials scaleway_mnq_nats_credentials} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_nats_credentials scaleway_mnq_nats_credentials} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -74,8 +74,8 @@ export class MnqNatsCredentials extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_nats_credentials',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

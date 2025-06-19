@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
 import LinkContentView from './LinkContentView'
 
 export default {

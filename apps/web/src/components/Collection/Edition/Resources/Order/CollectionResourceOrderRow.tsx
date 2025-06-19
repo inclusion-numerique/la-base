@@ -1,7 +1,7 @@
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
-import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesViewsAndMetadata'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import DeleteCollectionResourceButton from '@app/web/components/Collection/Edition/Resources/Order/DeleteCollectionResourceButton'
+import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesViewsAndMetadata'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 
 const CollectionResourceOrderRow = ({
   resource,

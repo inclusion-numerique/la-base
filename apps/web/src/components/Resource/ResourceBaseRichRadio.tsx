@@ -1,13 +1,12 @@
-import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   BasePrivacyTag,
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import React from 'react'
+import { type Control, Controller, type FieldValues } from 'react-hook-form'
+import type { FieldPath } from 'react-hook-form/dist/types/path'
 import ResourceBaseRichRadioElement from './ResourceBaseRichRadioElement'
 
 const ResourceBaseRichRadio = <T extends FieldValues>({
@@ -21,7 +20,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
   path: FieldPath<T>
   disabled?: boolean
 }) => {
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
   const profileRadioId = `base-profile-radio`
   const id = 'resource-base-rich-radio'
 

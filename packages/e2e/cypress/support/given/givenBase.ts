@@ -1,6 +1,6 @@
-import { v4 } from 'uuid'
-import { createSlug } from '@app/web/utils/createSlug'
 import type { CreateBaseInput } from '@app/e2e/tasks/handlers/user.tasks'
+import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
 
 export const defaultTestBaseTitle = 'Pôle inclusion numérique - Tests e2e'
 export const defaultTestBaseDescription = `

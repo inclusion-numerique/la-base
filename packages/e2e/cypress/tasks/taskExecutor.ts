@@ -9,8 +9,8 @@
 import { logToFile } from '@app/e2e/support/logToFile'
 import { TaskName, tasks } from '@app/e2e/tasks/tasks'
 import {
-  decodeSerializableState,
   EncodedState,
+  decodeSerializableState,
   encodeSerializableState,
 } from '@app/web/utils/encodeSerializableState'
 
@@ -34,23 +34,19 @@ const taskExecutor = async () => {
   if (!executor) {
     throw new Error(`No task executor found for ${task}`)
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return executor(parsedInput as never)
 }
 
 taskExecutor()
   .then((result) => {
     // Output result must be the last stdout output to pass to other process
-    // eslint-disable-next-line no-console
+    // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
     console.log(encodeSerializableState(result))
-    // eslint-disable-next-line unicorn/no-process-exit
     process.exit(0)
   })
-  // eslint-disable-next-line unicorn/prefer-top-level-await
   .catch((error) => {
-    // eslint-disable-next-line no-console
+    // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
     console.error(error)
     logToFile({ error: error as unknown })
-    // eslint-disable-next-line unicorn/no-process-exit
     process.exit(1)
   })

@@ -1,4 +1,4 @@
-import { existsSync, promises as fs } from 'node:fs'
+import { promises as fs, existsSync } from 'node:fs'
 import path from 'node:path'
 import { getDirname } from '@app/config/dirname'
 import { compileMjml } from './mjml'
@@ -38,7 +38,6 @@ export function createHtmlTemplateOutput(
 ): (htmlContent: string) => Promise<void> {
   let index = 0
   return (htmlContent: string): Promise<void> =>
-    // eslint-disable-next-line no-plusplus
     outputHtmlTemplate(`${templateName}_${index++}`, htmlContent)
 }
 
@@ -51,6 +50,5 @@ export function createMjmlTemplateOutput(
 ): (templateName: string) => Promise<void> {
   let index = 0
   return (mjmlTemplate: string): Promise<void> =>
-    // eslint-disable-next-line no-plusplus
     outputMjmlTemplate(`${templateName}_${index++}`, mjmlTemplate)
 }

@@ -1,5 +1,9 @@
 'use client'
 
+import RichTextFormLinkTooltip from '@app/ui/components/Form/RichText/RichTextFormLinkTooltip'
+import { Link } from '@tiptap/extension-link'
+import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 import React, { ReactNode, useState } from 'react'
 import {
   FieldPath,
@@ -8,10 +12,6 @@ import {
   PathValue,
   UseFormReturn,
 } from 'react-hook-form'
-import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { Link } from '@tiptap/extension-link'
-import RichTextFormLinkTooltip from '@app/ui/components/Form/RichText/RichTextFormLinkTooltip'
 import styles from './RichTextForm.module.css'
 import RichTextFormMenuBar from './RichTextFormMenuBar'
 
@@ -44,7 +44,7 @@ const RichTextForm = <T extends FieldValues>({
   ariaDescribedBy?: string
   placeholder?: string
   disabled?: boolean
-  ['data-testid']?: string
+  'data-testid'?: string
   onChange?: (text: PathValue<T, Path<T>>) => void
 }) => {
   const editor = useEditor({

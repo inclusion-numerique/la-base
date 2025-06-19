@@ -1,7 +1,7 @@
 import {
+  type UsageStatisticsResult,
   targetAudiencesUsages,
   themesUsages,
-  UsageStatisticsResult,
 } from './usageStatistics'
 
 describe('Usage statistics', () => {

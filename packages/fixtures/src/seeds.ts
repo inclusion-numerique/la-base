@@ -1,8 +1,8 @@
-import type { Prisma } from '@prisma/client'
-import { fixtureUsers, teamAdministrateurs } from '@app/fixtures/users'
+import { baseMembers } from '@app/fixtures/baseMembers'
 import { collections } from '@app/fixtures/collections'
 import { resourceContributors } from '@app/fixtures/resourceContributors'
-import { baseMembers } from '@app/fixtures/baseMembers'
+import { fixtureUsers, teamAdministrateurs } from '@app/fixtures/users'
+import type { Prisma } from '@prisma/client'
 import { bases } from './bases'
 import { resources } from './resources'
 

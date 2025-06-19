@@ -1,5 +1,8 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
-import { CreateBaseCommand, CreateBaseCommandValidation } from './createBase'
+import {
+  type CreateBaseCommand,
+  CreateBaseCommandValidation,
+} from './createBase'
 
 const validCommand: CreateBaseCommand = {
   title: 'mon titre',
@@ -100,9 +103,8 @@ describe('CreateBaseCommand', () => {
     })
     expect(result.success).toEqual(true)
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Success is true
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
     expect(result.data.description).toEqual('<b>Broken html</b>')
   })
 

@@ -18,8 +18,6 @@ const modularizeImports = {
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const serverComponentsExternalPackages = ['html-minifier']
-
 // Mjml cannot be bundled as it uses dynamic requires
 // Only put library required on the server in externals as they would not be available in client
 const externals = ['mjml', 'mjml-core']
@@ -28,18 +26,10 @@ const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   transpilePackages: ['@app/emails'],
-  experimental: {
-    // See https://nextjs.org/docs/app/api-reference/next-config-js/serverComponentsExternalPackages
-    serverComponentsExternalPackages,
-    // This includes files from the monorepo base two directories up
-    outputFileTracingRoot: path.join(dirname, '../../'),
-    instrumentationHook: true,
-  },
+  serverExternalPackages: ['html-minifier'],
+  // This includes files from the monorepo base two directories up
+  outputFileTracingRoot: path.join(dirname, '../../'),
   modularizeImports,
-  eslint: {
-    // Lints are checked in other parts of the build process
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     // Type checks are done in other parts of the build process
     ignoreBuildErrors: true,
@@ -52,7 +42,6 @@ const nextConfig = {
       use: [], // An empty set of loaders, effectively bypassing these files
     })
     // (this is not an array, this is a rule object)
-    // eslint-disable-next-line unicorn/no-array-push-push
     config.module.rules.push({
       test: /\.remixicon.css$/,
       use: [], // An empty set of loaders, effectively bypassing these files
@@ -64,7 +53,6 @@ const nextConfig = {
     }
 
     // Server bundling
-
     config.externals.push(...externals)
 
     return config

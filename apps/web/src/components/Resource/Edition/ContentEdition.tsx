@@ -1,14 +1,14 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
 import ResourceContentForm from '@app/web/components/Resource/Contents/ResourceContentForm'
 import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
+import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
 import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
-import {
+import type {
   ContentProjectionWithContext,
   ResourceProjectionWithContext,
 } from '@app/web/server/resources/getResourceFromEvents'
+import Button from '@codegouvfr/react-dsfr/Button'
+import React, { type Dispatch, type SetStateAction } from 'react'
 
 const ContentEdition = React.forwardRef(
   (

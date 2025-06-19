@@ -43,61 +43,58 @@ describe('Utilisateur connecté, je peux ajouter une ressource à une collection
     cy.findByRole('dialog').should('not.exist')
   })
 
-  it(
-    'Acceptation 2 : ouverture de la modale d’enregistrement depuis une page collection et enregistrement dans le profil sans base' +
-      '/ Acceptation 6 : retirer une collection enregistrée dans mon profil',
-    () => {
-      const creator = givenUser({
-        firstName: 'Michel',
-        lastName: 'Dupont',
-      })
-      const visitor = givenUser()
-      const collection = givenCollection({
-        createdById: creator.id,
-        isPublic: true,
-        title: 'Collection sur mon profil avec un titre long',
-      })
-      cy.createUser(creator)
-      cy.createUserAndSignin(visitor)
-      cy.createCollection(collection)
+  it('Acceptation 2 : ouverture de la modale d’enregistrement depuis une page collection et enregistrement dans le profil sans base' +
+    '/ Acceptation 6 : retirer une collection enregistrée dans mon profil', () => {
+    const creator = givenUser({
+      firstName: 'Michel',
+      lastName: 'Dupont',
+    })
+    const visitor = givenUser()
+    const collection = givenCollection({
+      createdById: creator.id,
+      isPublic: true,
+      title: 'Collection sur mon profil avec un titre long',
+    })
+    cy.createUser(creator)
+    cy.createUserAndSignin(visitor)
+    cy.createCollection(collection)
 
-      cy.log('Visitor should be able to save a collection')
-      cy.visit(`/collections/${collection.slug}`)
-      cy.dsfrModalsShouldBeBound()
+    cy.log('Visitor should be able to save a collection')
+    cy.visit(`/collections/${collection.slug}`)
+    cy.dsfrModalsShouldBeBound()
 
-      cy.findAllByTitle(/enregistrer la collection/i)
-        .filter(':visible')
-        .first()
-        .click()
-      cy.findByRole('dialog').within(() => {
-        cy.contains('Jean Biche - Mes collections')
-        cy.findByRole('button', { name: /enregistrer/i }).click()
-        cy.wait('@saveCollection')
-      })
-      cy.findByRole('dialog').should('not.exist')
-      cy.getToast(/enregistrée dans votre profil/i)
+    cy.findAllByTitle(/enregistrer la collection/i)
+      .filter(':visible')
+      .first()
+      .click()
+    cy.findByRole('dialog').within(() => {
+      cy.contains('Jean Biche - Mes collections')
+      cy.findByRole('button', { name: /enregistrer/i }).click()
+      cy.wait('@saveCollection')
+    })
+    cy.findByRole('dialog').should('not.exist')
+    cy.getToast(/enregistrée dans votre profil/i)
 
-      cy.log('Visitor should see that it has one saved collection')
-      cy.visit(`/profils/${visitor.slug}/collections`)
-      cy.contains('Collection sur mon profil avec un titre long')
+    cy.log('Visitor should see that it has one saved collection')
+    cy.visit(`/profils/${visitor.slug}/collections`)
+    cy.contains('Collection sur mon profil avec un titre long')
 
-      cy.log('Visitor should be able to unsave a collection')
-      cy.visit(`/collections/${collection.slug}`)
-      cy.dsfrModalsShouldBeBound()
-      cy.findAllByTitle(/enregistrer la collection/i)
-        .filter(':visible')
-        .first()
-        .click()
-      cy.findByRole('dialog').within(() => {
-        cy.findByRole('button', { name: /déjà enregistrée/i }).click()
-        cy.wait('@unsaveCollection')
-      })
-      cy.findByRole('dialog').should('not.exist')
-      cy.getToast(
-        /la collection a bien été retirée des collections enregistrées/i,
-      )
-    },
-  )
+    cy.log('Visitor should be able to unsave a collection')
+    cy.visit(`/collections/${collection.slug}`)
+    cy.dsfrModalsShouldBeBound()
+    cy.findAllByTitle(/enregistrer la collection/i)
+      .filter(':visible')
+      .first()
+      .click()
+    cy.findByRole('dialog').within(() => {
+      cy.findByRole('button', { name: /déjà enregistrée/i }).click()
+      cy.wait('@unsaveCollection')
+    })
+    cy.findByRole('dialog').should('not.exist')
+    cy.getToast(
+      /la collection a bien été retirée des collections enregistrées/i,
+    )
+  })
 
   it.skip('Acceptation 3 : enregistrement d’une collection dans une base par un profil qui a créé la collection', () => {
     const creator = givenUser({

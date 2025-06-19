@@ -1,1 +1,1 @@
-export type ProfilRouteParams = { params: { slug: string } }
+export type ProfilRouteParams = { params: Promise<{ slug: string }> }

@@ -1,18 +1,25 @@
-import { v4 } from 'uuid'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { Adapter, AdapterAccount, AdapterUser } from 'next-auth/adapters'
-import { prismaClient } from '@app/web/prismaClient'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
-import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { prismaClient } from '@app/web/prismaClient'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import type { Awaitable } from 'next-auth'
+import type { Adapter, AdapterAccount, AdapterUser } from 'next-auth/adapters'
+import { v4 } from 'uuid'
 
 /**
  * Ensuring that needed methods are defined when creating adapter
  */
-const createAdapter = () => {
+const createAdapter = (): Adapter & {
+  createUser: Exclude<Adapter['createUser'], undefined>
+  deleteSession: Exclude<Adapter['deleteSession'], undefined>
+  linkAccount: (
+    account: AdapterAccount,
+  ) => Promise<void> | Awaitable<AdapterAccount | null | undefined>
+} => {
   const prismaAdapter = PrismaAdapter(prismaClient)
 
   const { createUser, deleteSession, linkAccount } = prismaAdapter
@@ -26,7 +33,9 @@ const createAdapter = () => {
     ...prismaAdapter,
     createUser,
     deleteSession,
-    linkAccount,
+    linkAccount: linkAccount as (
+      account: AdapterAccount,
+    ) => Promise<void> | Awaitable<AdapterAccount | null | undefined>,
   }
 }
 
@@ -41,10 +50,10 @@ const removeNonStandardFields = <T extends AdapterAccount>(data: T): T => ({
 
 export const nextAuthAdapter = {
   ...prismaAdapter,
-  createUser: async (user) => {
+  createUser: async (user: Omit<AdapterUser, 'id'>) => {
     const { provider, ...rest } = user as Omit<AdapterUser, 'id'> & {
-      // We pass the provider along to be able to detect if the user comes from ProConnect
-      provider?: typeof proConnectProviderId
+      // We pass the provider along
+      provider: typeof proConnectProviderId
     }
 
     const emailReconciliationResult = await getUserEmailReconciliation(
@@ -87,6 +96,6 @@ export const nextAuthAdapter = {
     }
   },
   // Custom link account
-  linkAccount: (account) =>
+  linkAccount: (account: AdapterAccount) =>
     prismaAdapter.linkAccount(removeNonStandardFields(account)),
 } satisfies Adapter

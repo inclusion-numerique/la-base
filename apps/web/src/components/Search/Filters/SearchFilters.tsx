@@ -1,18 +1,18 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { OptionBadge } from '@app/ui/components/Form/OptionBadge'
+import OptionBadge from '@app/ui/components/Form/OptionBadge'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import {
-  SearchParams,
-  SearchTab,
+  type SearchParams,
+  type SearchTab,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import type { Category, FilterKey } from './filter'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
-import styles from './SearchFilters.module.css'
 import SearchFilter from './SearchFilter'
+import styles from './SearchFilters.module.css'
+import type { Category, FilterKey } from './filter'
 
 export type FiltersInitialValue = {
   category: FilterKey

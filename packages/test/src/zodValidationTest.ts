@@ -22,11 +22,13 @@ export const expectZodValidationToFail = <
   const result = validation.safeParse({ ...validObject, ...fields })
 
   if (result.success) {
+    // biome-ignore lint/suspicious/noConsole: useful for jest output
     console.error(
       `Fields should not be valid. Expected errors: ${errors
         .map((error) => error.message)
         .join(', ')}`,
     )
+    // biome-ignore lint/correctness/noUndeclaredVariables: jest is global
     expect(result.success).toBeFalse()
     return
   }
@@ -36,5 +38,6 @@ export const expectZodValidationToFail = <
     result.error.issues,
   )
 
+  // biome-ignore lint/correctness/noUndeclaredVariables: jest is global
   expect(actualErrorMessages).toEqual(expectedErrorMessages)
 }

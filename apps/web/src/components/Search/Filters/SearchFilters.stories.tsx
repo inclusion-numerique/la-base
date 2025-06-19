@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react'
 import SearchFilters from '@app/web/components/Search/Filters/SearchFilters'
-import { categoryThemesOptions } from '@app/web/themes/themes'
 import { supportTypeOptions } from '@app/web/themes/supportTypes'
 import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
+import { categoryThemesOptions } from '@app/web/themes/themes'
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'component/Filters',

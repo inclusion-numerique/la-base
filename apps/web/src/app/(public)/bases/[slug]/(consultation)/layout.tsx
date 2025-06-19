@@ -1,19 +1,23 @@
-import React, { PropsWithChildren } from 'react'
-import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
-import PrivateBox from '@app/web/components/PrivateBox'
-import { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
-import BaseHeader, { headerSkipLink } from '@app/web/components/Base/BaseHeader'
-import BaseMenu from '@app/web/components/Base/BaseMenu'
-import { prismaClient } from '@app/web/prismaClient'
+import type { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import PrivateBox from '@app/web/components/PrivateBox'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import BaseHeader, {
+  headerSkipLink,
+} from '@app/web/features/base/components/BaseHeader'
+import BaseMenu from '@app/web/features/base/components/BaseMenu'
+import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import React, { type PropsWithChildren } from 'react'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: BaseRouteParams): Promise<Metadata> => {
+  const { slug } = await params
+
   const base = await prismaClient.base.findUnique({
     where: {
       slug,
@@ -21,6 +25,7 @@ export const generateMetadata = async ({
     select: {
       title: true,
       description: true,
+      isPublic: true,
     },
   })
   if (!base) {
@@ -30,17 +35,20 @@ export const generateMetadata = async ({
   return {
     title: metadataTitle(base.title),
     description: base.description || undefined,
+    robots: base.isPublic ? undefined : 'noindex, nofollow',
   }
 }
 const BaseLayout = async ({
   params,
   children,
 }: PropsWithChildren<BaseRouteParams>) => {
+  const { slug } = await params
+
   const {
     user,
     authorization: { hasPermission },
     base,
-  } = await getBasePageContext(params.slug)
+  } = await getBasePageContext(slug)
 
   const canWrite = hasPermission('WriteBase')
   const canView = hasPermission('ReadBaseData')

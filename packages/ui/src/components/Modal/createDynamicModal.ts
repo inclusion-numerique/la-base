@@ -30,7 +30,6 @@ export const createDynamicModal = <T>({
   const useOpen = () => {
     const setState = useModalStore((state) => state.setState)
     return (openState: T) => {
-      // console.log('OPENING', { openState })
       setState(openState)
       // Sometimes dsfr has not bound the modal yet, and open() fails.
       // We want to retry 5 times before failing, with a 200ms delay

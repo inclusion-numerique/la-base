@@ -1,8 +1,8 @@
-import React from 'react'
-import type { Metadata } from 'next'
-import { defaultPaginationParams } from '@app/web/server/search/searchQueryParams'
-import BaseCardSkeleton from '@app/web/components/Base/Card/BaseCardSkeleton'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import BaseCardSkeleton from '@app/web/components/Base/Card/BaseCardSkeleton'
+import { defaultPaginationParams } from '@app/web/server/search/searchQueryParams'
+import type { Metadata } from 'next'
+import React from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -20,7 +20,6 @@ const ResultContentLoading = () => (
       <div className="skeleton-rectangle skeleton-rectangle--200" />
     </div>
     {Array.from({ length: skeletons }).map((_, index) => (
-      // eslint-disable-next-line react/no-array-index-key
       <BaseCardSkeleton key={index} />
     ))}
   </>

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { PropsWithChildren, ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
 const AdministrationInlineLabelValue = ({
   children,

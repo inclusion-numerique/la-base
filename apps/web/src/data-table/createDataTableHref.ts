@@ -1,4 +1,4 @@
-import {
+import type {
   DataTableConfiguration,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'

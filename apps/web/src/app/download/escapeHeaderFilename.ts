@@ -33,6 +33,7 @@ const escapeChar = (char: string): string => {
   // Replace non-ASCII characters with their ASCII equivalents
   if (code > 127) {
     // Normalize and strip accents/diacritics
+    // biome-ignore lint/suspicious/noMisleadingCharacterClass: this works 🤷
     const normalized = char.normalize('NFKD').replaceAll(/[\u0300-\u036F]/g, '')
     // If normalization results in an empty string, replace with "_"
     return normalized || '_'

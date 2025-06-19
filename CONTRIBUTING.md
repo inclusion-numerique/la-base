@@ -200,7 +200,7 @@ Lorsqu'une branche est fusionnée avec `main`, cela déclenche automatiquement l
 
 ### Outils
 
-- [Eslint](https://eslint.org/) : Analyseur statique de code pour JavaScript et TypeScript.
+- [Biome](https://biomejs.dev/) : Formatteur et linteur pour JavaScript, CSS et TypeScript.
 - [Prettier](https://prettier.io/) : Formateur de code pour divers langages et syntaxes.
 - [Jest](https://jestjs.io/) : Environnement d'exécution des tests unitaires.
 - [Cypress](https://www.cypress.io) : Environnement d'exécution des tests de bout en bout et de tests de composants.

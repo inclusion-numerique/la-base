@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface CockpitGrafanaUserConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#id CockpitGrafanaUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#id CockpitGrafanaUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,43 +17,43 @@ export interface CockpitGrafanaUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * The login of the Grafana user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#login CockpitGrafanaUser#login}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#login CockpitGrafanaUser#login}
   */
   readonly login: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#project_id CockpitGrafanaUser#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#project_id CockpitGrafanaUser#project_id}
   */
   readonly projectId?: string;
   /**
   * The role of the Grafana user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#role CockpitGrafanaUser#role}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#role CockpitGrafanaUser#role}
   */
   readonly role: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#timeouts CockpitGrafanaUser#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#timeouts CockpitGrafanaUser#timeouts}
   */
   readonly timeouts?: CockpitGrafanaUserTimeouts;
 }
 export interface CockpitGrafanaUserTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#create CockpitGrafanaUser#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#create CockpitGrafanaUser#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#default CockpitGrafanaUser#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#default CockpitGrafanaUser#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#delete CockpitGrafanaUser#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#delete CockpitGrafanaUser#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#read CockpitGrafanaUser#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#read CockpitGrafanaUser#read}
   */
   readonly read?: string;
 }
@@ -234,7 +234,7 @@ export class CockpitGrafanaUserTimeoutsOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user scaleway_cockpit_grafana_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user scaleway_cockpit_grafana_user}
 */
 export class CockpitGrafanaUser extends cdktf.TerraformResource {
 
@@ -250,7 +250,7 @@ export class CockpitGrafanaUser extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a CockpitGrafanaUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the CockpitGrafanaUser to import
-  * @param importFromId The id of the existing CockpitGrafanaUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing CockpitGrafanaUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the CockpitGrafanaUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -262,7 +262,7 @@ export class CockpitGrafanaUser extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_grafana_user scaleway_cockpit_grafana_user} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_grafana_user scaleway_cockpit_grafana_user} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -273,8 +273,8 @@ export class CockpitGrafanaUser extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_cockpit_grafana_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -294,6 +294,11 @@ export class CockpitGrafanaUser extends cdktf.TerraformResource {
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // grafana_url - computed: true, optional: false, required: false
+  public get grafanaUrl() {
+    return this.getStringAttribute('grafana_url');
+  }
 
   // id - computed: true, optional: true, required: false
   private _id?: string; 

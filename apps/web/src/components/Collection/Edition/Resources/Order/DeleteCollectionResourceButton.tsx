@@ -1,7 +1,7 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import Button from '@codegouvfr/react-dsfr/Button'
 
 const DeleteCollectionResourceButton = ({
   onDelete,

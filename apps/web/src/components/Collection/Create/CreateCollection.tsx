@@ -1,27 +1,27 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
-import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { createToast } from '@app/ui/toast/createToast'
+import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { trpc } from '@app/web/trpc'
+import { createToast } from '@app/ui/toast/createToast'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import Card from '@app/web/components/Card'
+import VisibilityField from '@app/web/components/VisibilityField'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { useImageUpload } from '@app/web/hooks/useImageUpload'
 import {
-  CreateCollectionCommand,
+  type CreateCollectionCommand,
   CreateCollectionCommandValidation,
 } from '@app/web/server/collections/createCollection'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import Card from '@app/web/components/Card'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import VisibilityField from '@app/web/components/VisibilityField'
-import { useImageUpload } from '@app/web/hooks/useImageUpload'
+import { trpc } from '@app/web/trpc'
+import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CreateCollectionSideMenu from './CreateCollectionSideMenu'
@@ -75,10 +75,7 @@ const CreateCollection = ({
         ...data,
         imageId: imageUploaded?.id || null,
       })
-      router.refresh()
       router.push(`/collections/${collection.slug}`)
-      // TODO: Wierd refreshes not working create e2e for this (collection appearing in base / collection page) and remove second refresh
-      router.refresh()
       createToast({
         priority: 'success',
         message: (

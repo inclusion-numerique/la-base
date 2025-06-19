@@ -1,5 +1,5 @@
-import { AddContentCommand } from './AddContent'
-import { EditContentCommand } from './EditContent'
+import type { AddContentCommand } from './AddContent'
+import type { EditContentCommand } from './EditContent'
 
 export const sectionTitleFailUseCases = (
   base: AddContentCommand | EditContentCommand,

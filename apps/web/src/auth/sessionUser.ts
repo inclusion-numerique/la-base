@@ -43,7 +43,6 @@ export type SessionUser = Pick<
   | 'firstName'
   | 'lastName'
   | 'name'
-  | 'email'
   | 'isPublic'
   | 'legacyId'
   | 'role'
@@ -52,6 +51,7 @@ export type SessionUser = Pick<
     id: string
     altText: string | null
   } | null
+  email: string
   emailVerified: string | null
   created: string | null
   updated: string | null

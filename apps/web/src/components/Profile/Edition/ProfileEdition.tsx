@@ -1,12 +1,12 @@
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import React from 'react'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import ProfileInformations from '../ProfileInformations'
-import ProfileSideMenu from './ProfileEditionSideMenu'
 import ProfileContactsEdition from './ProfileContactsEdition'
+import ProfileDeletion from './ProfileDeletion'
+import ProfileSideMenu from './ProfileEditionSideMenu'
 import ProfileInformationsEdition from './ProfileInformationsEdition'
 import ProfileVisibilityEdition from './ProfileVisibilityForm'
-import ProfileDeletion from './ProfileDeletion'
 
 const ProfileEdition = ({
   profile,

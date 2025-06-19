@@ -1,6 +1,6 @@
+import type { ProjectCdkOutput, WebCdkOutput } from '@app/cdk/getCdkOutput'
 import { TerraformOutput } from 'cdktf'
 import type { Construct } from 'constructs'
-import type { ProjectCdkOutput, WebCdkOutput } from '@app/cdk/getCdkOutput'
 
 export const outputPrefix = `output_`
 

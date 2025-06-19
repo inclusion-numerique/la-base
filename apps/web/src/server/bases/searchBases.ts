@@ -1,14 +1,18 @@
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { baseSelect } from '@app/web/server/bases/getBasesList'
+import { getBaseResourcesViewsCount } from '@app/web/server/bases/baseResources'
 import {
+  baseSelect,
+  computeBasesListResourcesWhereForUser,
+} from '@app/web/server/bases/getBasesList'
+import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
+import {
+  type PaginationParams,
+  type SearchParams,
+  type Sorting,
   defaultPaginationParams,
   defaultSearchParams,
-  PaginationParams,
-  SearchParams,
-  type Sorting,
 } from '@app/web/server/search/searchQueryParams'
-import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
 
 /**
@@ -222,17 +226,33 @@ export const searchBases = async (
     paginationParams,
     user,
   )
+  const baseIds = searchResults.map(({ id }) => id)
 
   const bases = await prismaClient.base.findMany({
     where: {
       id: {
-        in: searchResults.map(({ id }) => id),
+        in: baseIds,
       },
     },
     select: baseSelect(user),
   })
 
-  return orderItemsByIndexMap(bases, resultIndexById)
+  const baseResourcesViewsCounts = await getBaseResourcesViewsCount(
+    baseIds,
+    computeBasesListResourcesWhereForUser(user),
+  )
+
+  const basesWithResourcesViews = bases.map((base) => ({
+    ...base,
+    _count: {
+      ...base._count,
+      resourcesViews:
+        baseResourcesViewsCounts.find(({ baseId }) => baseId === base.id)?._sum
+          .viewsCount ?? 0,
+    },
+  }))
+
+  return orderItemsByIndexMap(basesWithResourcesViews, resultIndexById)
 }
 
 export type SearchBasesResult = Awaited<ReturnType<typeof searchBases>>

@@ -1,13 +1,13 @@
-import type { Account, Profile, User } from 'next-auth'
-import * as Sentry from '@sentry/nextjs'
-import { registerLastLogin } from '@app/web/security/registerLastLogin'
-import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
 import { prismaClient } from '@app/web/prismaClient'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { registerLastLogin } from '@app/web/security/registerLastLogin'
+import * as Sentry from '@sentry/nextjs'
+import type { Account, Profile, User } from 'next-auth'
 
 export const signinCallback: <
   P extends Profile = Profile,
@@ -73,7 +73,13 @@ export const signinCallback: <
   }
 
   const isUserCreatedInDatabase =
-    'created' in user && !!user.created && 'updated' in user && !!user.updated
+    'created' in user &&
+    !!user.created &&
+    'updated' in user &&
+    !!user.updated &&
+    // we need to check that the user has signed up at least once (in case of an user been invited to join a base)
+    'signedUpAt' in user &&
+    !!user.signedUpAt
 
   // Manage signin for magic link
   if (account?.type !== 'oauth') {

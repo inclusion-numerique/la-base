@@ -1,5 +1,5 @@
-import type { Collection } from '@prisma/client'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import type { Collection } from '@prisma/client'
 
 const CollectionDates = ({
   collection,

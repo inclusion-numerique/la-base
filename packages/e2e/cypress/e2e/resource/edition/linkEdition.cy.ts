@@ -106,7 +106,9 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.testId('link-title-input').type('Le Git')
         cy.testId('link-url-input').type('https://github.com')
-        cy.testId('link-show-preview-checkbox').check({ force: true })
+        cy.testId('link-show-preview-checkbox')
+          .find('input[type="checkbox"]')
+          .check({ force: true })
         cy.testId('add-content_form').within(() => {
           cy.testId('link-preview').should('exist')
         })

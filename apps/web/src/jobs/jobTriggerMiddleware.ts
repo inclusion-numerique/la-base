@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
+import { type NextRequest, NextResponse } from 'next/server'
 
 // svc.cluster.local is the default domain for services in a Kubernetes cluster
 const triggerHostName = 'svc.cluster.local'

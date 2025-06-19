@@ -1,18 +1,18 @@
-import { v4 } from 'uuid'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import {
   applyCreationEvent,
   applyMutationEvent,
 } from '@app/web/server/resources/feature/createResourceProjection'
 import {
-  HistoryEventsForResource,
-  ResourceCreationCommand,
+  type HistoryEventsForResource,
+  type ResourceCreationCommand,
   ResourceCreationCommandHandlers,
   executeSideEffect,
 } from '@app/web/server/resources/feature/features'
 import { getResourceProjectionContext } from '@app/web/server/resources/getResourceFromEvents'
+import { v4 } from 'uuid'
 
 export const handleResourceCreationCommand = async (
   command: ResourceCreationCommand,
@@ -44,9 +44,8 @@ export const handleResourceCreationCommand = async (
     for (const event of mutationEvents) {
       resource = applyMutationEvent(event, resource)
 
-      // eslint-disable-next-line no-await-in-loop
       await executeSideEffect(event, resource, { transaction })
-      // eslint-disable-next-line no-await-in-loop
+
       await transaction.resourceEvent.create({
         data: {
           id: v4(),

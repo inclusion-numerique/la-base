@@ -1,6 +1,6 @@
-import z from 'zod'
-import sanitizeHtml from 'sanitize-html'
 import { resourceTitleMaxLength } from '@app/web/server/rpc/resource/utils'
+import sanitizeHtml from 'sanitize-html'
+import z from 'zod'
 
 export const baseTitleMaxLength = 100
 

@@ -1,9 +1,9 @@
 'use client'
 
+import { addActiveStateToItems } from '@app/ui/components/navigationSideMenuUtils'
+import { useNavigationSideMenu } from '@app/ui/hooks/useNavigationSideMenu'
 import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu'
 import SideMenu from '@codegouvfr/react-dsfr/SideMenu'
-import { useNavigationSideMenu } from '@app/ui/hooks/useNavigationSideMenu'
-import { addActiveStateToItems } from '@app/ui/components/navigationSideMenuUtils'
 
 /**
  * This component is a wrapper around the SideMenu component from DSFR.

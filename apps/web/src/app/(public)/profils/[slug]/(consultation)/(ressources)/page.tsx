@@ -1,22 +1,21 @@
-import React from 'react'
-import { getProfileResources } from '@app/web/server/resources/getResourcesList'
-import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import EmptyProfileResources from '@app/web/components/Profile/EmptyProfileResources'
-import Resources from '@app/web/components/Resource/List/Resources'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
-import { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import {
   ProfilePermissions,
   ProfileRoles,
 } from '@app/web/authorization/models/profileAuthorization'
-import { applyDraft } from '@app/web/utils/resourceDraft'
+import EmptyProfileResources from '@app/web/components/Profile/EmptyProfileResources'
+import Resources from '@app/web/components/Resource/List/Resources'
+import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import { applyDraft } from '@app/web/utils/resourceDraft'
+import React from 'react'
 
 const ProfilePage = async ({ params }: ProfilRouteParams) => {
+  const { slug } = await params
   // Auth and profile has been checked in layout
-  const { profile, user, authorization } = await getProfilePageContext(
-    params.slug,
-  )
+  const { profile, user, authorization } = await getProfilePageContext(slug)
 
   const resources = await getProfileResources(profile.id, user)
 

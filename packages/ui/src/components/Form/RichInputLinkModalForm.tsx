@@ -1,21 +1,20 @@
 'use client'
 
+import InputFormField from '@app/ui/components/Form/InputFormField'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
 import React, {
   FormEventHandler,
   ReactNode,
   ReactPortal,
   useEffect,
 } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import z from 'zod'
 import ReactDOM from 'react-dom'
-import InputFormField from '@app/ui/components/Form/InputFormField'
-import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
 
 // React-dom types are broken at the moment !
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 const { createPortal } = ReactDOM as {
   createPortal: (
     children: ReactNode,

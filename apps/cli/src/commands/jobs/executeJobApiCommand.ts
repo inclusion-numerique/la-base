@@ -1,11 +1,11 @@
+import { DeploymentTargetOption } from '@app/cli/deploymentTarget'
+import { output } from '@app/cli/output'
 import { mainRootDomain, previewRootDomain } from '@app/config/config'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
 import { jobExecutors } from '@app/web/jobs/jobExecutors'
 import { Argument, Command } from '@commander-js/extra-typings'
 import axios from 'axios'
-import { output } from '@app/cli/output'
-import { DeploymentTargetOption } from '@app/cli/deploymentTarget'
 
 export const executeJobApiCommand = new Command()
   .command('job:api:execute')

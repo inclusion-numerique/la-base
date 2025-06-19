@@ -1,9 +1,9 @@
-// import * as queryString from 'node:querystring'
-import { SupportType, TargetAudience, Theme } from '@prisma/client'
-import { themeLabels } from '@app/web/themes/themes'
 import { supportTypeLabels } from '@app/web/themes/supportTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { themeLabels } from '@app/web/themes/themes'
 import { searchParamsFromQueryString } from '@app/web/utils/searchParamsFromQueryString'
+// import * as queryString from 'node:querystring'
+import type { SupportType, TargetAudience, Theme } from '@prisma/client'
 
 export const searchTabs = ['ressources', 'bases', 'profils'] as const
 export type SearchTab = (typeof searchTabs)[number]

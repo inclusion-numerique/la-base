@@ -1,11 +1,11 @@
-import { redirect } from 'next/navigation'
-import type { Metadata } from 'next'
 import { Verify } from '@app/web/app/(public)/(authentication)/connexion/verification/Verify'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import { getServerUrl } from '@app/web/utils/baseUrl'
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getServerUrl } from '@app/web/utils/baseUrl'
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 export const revalidate = 0
 

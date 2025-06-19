@@ -1,15 +1,15 @@
 'use client'
 
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   hasOpenedOnboardingV2Cookie,
   hasSeenOnboardingV2Cookie,
 } from '@app/web/app/nouveautes/onboardingV2Cookie'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const OpenOnboardingForMigratedUserThatHasNotSeenIt = ({
   user,
@@ -40,14 +40,14 @@ const OpenOnboardingForMigratedUserThatHasNotSeenIt = ({
 
     // User has not seen the onboarding, we redirect him to the onboarding if he has not closed it yet
     router.push('/nouveautes')
-  }, [user.hasSeenV2Onboarding, mutate, user.legacyId])
+  }, [user.hasSeenV2Onboarding, mutate, user.legacyId, router.push])
 
   useEffect(() => {
     // User has been marked as having seen the onboarding, refresh to have the new state
     if (isSuccess) {
       router.refresh()
     }
-  }, [router, isSuccess])
+  }, [router.refresh, isSuccess])
 
   return null
 }

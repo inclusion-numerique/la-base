@@ -1,6 +1,6 @@
-import { z } from 'zod'
 import { publicProcedure, router } from '@app/web/server/rpc/createRouter'
 import { executeQuickSearch } from '@app/web/server/search/executeSearch'
+import { z } from 'zod'
 
 export const searchRouter = router({
   quicksearch: publicProcedure

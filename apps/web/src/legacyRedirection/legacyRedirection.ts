@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import { prismaClient } from '@app/web/prismaClient'
 import { legacyBaseOwnerFromLegacyBaseId } from '@app/web/legacyRedirection/legacyBaseOwnerFromLegacyBaseId'
+import { prismaClient } from '@app/web/prismaClient'
+import { NextResponse } from 'next/server'
 
 const legacyHostname = process.env.LEGACY_HOSTNAME
 

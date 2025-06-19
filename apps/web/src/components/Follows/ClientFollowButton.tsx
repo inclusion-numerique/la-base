@@ -1,14 +1,8 @@
 'use client'
 
-import Button, { ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { createToast } from '@app/ui/toast/createToast'
-import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import type { FollowButtonProps } from '@app/web/components/Follows/FollowButton'
-import { trpc } from '@app/web/trpc'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { isFollowedBy } from '@app/web/follows/isFollowedBy'
 import {
   followBaseButtonProps,
   followBaseIconOnlyButtonProps,
@@ -19,6 +13,12 @@ import {
   unfollowProfileButtonProps,
   unfollowProfileIconOnlyButtonProps,
 } from '@app/web/components/Follows/followButtonProps'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { isFollowedBy } from '@app/web/follows/isFollowedBy'
+import { trpc } from '@app/web/trpc'
+import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
 
 /**
  * Only load client follow button for logged in user (see FollowButton)

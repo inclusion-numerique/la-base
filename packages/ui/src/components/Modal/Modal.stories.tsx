@@ -1,7 +1,7 @@
-import React from 'react'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/test'
+import React from 'react'
 
 const { Component: BaseModal, open: openBaseModal } = createModal({
   id: 'base',

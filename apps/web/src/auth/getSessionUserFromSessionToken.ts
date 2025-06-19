@@ -1,6 +1,6 @@
-import type { Prisma } from '@prisma/client'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import type { Prisma } from '@prisma/client'
 
 const userCollectionFragment = {
   select: {

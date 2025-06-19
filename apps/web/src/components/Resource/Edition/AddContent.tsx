@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import { ContentType } from '@prisma/client'
 import ResourceContentForm from '@app/web/components/Resource/Contents/ResourceContentForm'
 import AddContentButton from '@app/web/components/Resource/Edition/AddContentButton'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
-import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ContentType } from '@prisma/client'
+import React, { type Dispatch, type SetStateAction } from 'react'
 
 const AddContent = React.forwardRef(
   (

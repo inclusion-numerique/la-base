@@ -1,4 +1,5 @@
 import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
+import type { JSX } from 'react'
 
 export type CreateModalReturn = {
   buttonProps: {

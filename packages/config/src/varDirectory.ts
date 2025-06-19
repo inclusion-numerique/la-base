@@ -1,5 +1,3 @@
-/* eslint unicorn/prevent-abbreviations: 0 */
-
 import path from 'node:path'
 import { getDirname } from '@app/config/dirname'
 

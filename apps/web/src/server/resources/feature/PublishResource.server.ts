@@ -6,8 +6,8 @@ import type { ResourceMutationCommandHandler } from '@app/web/server/resources/f
 import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { sortContents } from '@app/web/server/resources/sortContents'
-import { createSlug } from '@app/web/utils/createSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
+import { createSlug } from '@app/web/utils/createSlug'
 
 export const handlePublish: ResourceMutationCommandHandler<
   PublishCommand,

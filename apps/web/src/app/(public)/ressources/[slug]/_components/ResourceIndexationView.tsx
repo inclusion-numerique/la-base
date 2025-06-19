@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react'
-import classNames from 'classnames'
-import Tag from '@codegouvfr/react-dsfr/Tag'
-import { Resource } from '@app/web/server/resources/getResource'
-import { themeLabels } from '@app/web/themes/themes'
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
-import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import type { Resource } from '@app/web/server/resources/getResource'
 import {
+  type SearchParams,
   defaultSearchParams,
-  SearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { supportTypeLabels } from '@app/web/themes/supportTypes'
+import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { themeLabels } from '@app/web/themes/themes'
+import Tag from '@codegouvfr/react-dsfr/Tag'
+import classNames from 'classnames'
+import React, { useMemo } from 'react'
 import styles from './ResourceIndexationView.module.css'
 
 const getThemes = (resource: Resource) => ({
@@ -83,7 +83,6 @@ const ResourceIndexationView = ({
       </div>
       <div className={classNames(styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
-          // eslint-disable-next-line react/jsx-no-useless-fragment
           <>
             {withLink
               ? tags.map((tag) => {

@@ -1,23 +1,23 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { createToast } from '@app/ui/toast/createToast'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
-import * as Sentry from '@sentry/nextjs'
+import { createToast } from '@app/ui/toast/createToast'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
-  ResourceReportData,
-  resourceReportReasonOptions,
+  type ResourceReportData,
   ResourceReportValidation,
+  resourceReportReasonOptions,
 } from '@app/web/resources/resourceReport'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import { ResourceReportModal } from './ResourceReportModal'
 
 const ResourceReport = ({ resourceId }: { resourceId: string }) => {

@@ -1,13 +1,13 @@
-import { Prisma } from '@prisma/client'
-import {
+import type { BaseForList } from '@app/web/app/administration/bases/queryBasesForList'
+import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
+import type {
   DataTableConfiguration,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'
-import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
-import { BaseForList } from '@app/web/app/administration/bases/queryBasesForList'
-import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
+import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
 import { optionalNumberToString } from '@app/web/utils/formatNumber'
+import type { Prisma } from '@prisma/client'
 
 export type BasesDataTableConfiguration = DataTableConfiguration<
   BaseForList,

@@ -1,4 +1,4 @@
-import SMTPTransport from 'nodemailer/lib/smtp-transport'
+import type SMTPTransport from 'nodemailer/lib/smtp-transport'
 
 export const throwOnSendMailFailure = (info: SMTPTransport.SentMessageInfo) => {
   const failed = [...info.rejected].filter(Boolean)

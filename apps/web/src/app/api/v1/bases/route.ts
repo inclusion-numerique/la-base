@@ -1,6 +1,6 @@
-import { type NextRequest, NextResponse } from 'next/server'
 import { prismaClient } from '@app/web/prismaClient'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

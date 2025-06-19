@@ -1,7 +1,7 @@
-import classNames from 'classnames'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
-import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { getDownloadUrl } from '@app/web/utils/getDownloadUrl'
+import classNames from 'classnames'
 import styles from './FileContentDetails.module.css'
 
 const FileContentDetails = ({
@@ -59,6 +59,7 @@ const FileContentDetails = ({
         href={getDownloadUrl(key)}
         title="Voir le fichier dans un nouvel onglet"
         target="_blank"
+        rel="noreferrer"
       >
         Aperçu
       </a>
@@ -70,6 +71,7 @@ const FileContentDetails = ({
         href={getDownloadUrl(key)}
         title="Voir le fichier dans un nouvel onglet"
         target="_blank"
+        rel="noreferrer"
       >
         Aperçu
       </a>

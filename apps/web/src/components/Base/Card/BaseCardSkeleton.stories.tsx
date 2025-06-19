@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { mobileStory } from '@app/storybook/storyHelper'
+import type { Meta, StoryObj } from '@storybook/react'
 import BaseCardSkeleton from './BaseCardSkeleton'
 
 export default {

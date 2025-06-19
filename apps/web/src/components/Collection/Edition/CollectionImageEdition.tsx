@@ -1,19 +1,19 @@
 'use client'
 
-import { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
+import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { createToast } from '@app/ui/toast/createToast'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
-import {
-  UpdateCollectionImageCommand,
-  UpdateCollectionImageCommandValidation,
-} from '@app/web/server/collections/updateCollection'
-import { trpc } from '@app/web/trpc'
 import EditableCardForm from '@app/web/components/EditableCardForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
+import {
+  type UpdateCollectionImageCommand,
+  UpdateCollectionImageCommandValidation,
+} from '@app/web/server/collections/updateCollection'
+import { trpc } from '@app/web/trpc'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Images from '../Images'
 import ImageEdition from './ImageEdition'
 

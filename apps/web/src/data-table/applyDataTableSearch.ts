@@ -1,4 +1,4 @@
-import {
+import type {
   DataTableConfiguration,
   DataTableRow,
 } from '@app/web/data-table/DataTableConfiguration'
@@ -6,6 +6,7 @@ import {
 const normalizeSearchString = (searchQuery: string) =>
   searchQuery
     .normalize('NFD')
+    // biome-ignore lint/suspicious/noMisleadingCharacterClass: this works 🤷
     .replaceAll(/[\u0300-\u036F]/g, '')
     .toLowerCase()
     .trim()
@@ -30,7 +31,7 @@ export const applyDataTableSearch = <Data extends DataTableRow>(
   }
 
   const searchTokens = getSearchTokens(search)
-  if (!searchTokens?.length) {
+  if (!searchTokens || searchTokens.length === 0) {
     return data
   }
 

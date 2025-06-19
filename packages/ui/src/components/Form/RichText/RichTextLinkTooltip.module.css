@@ -1,29 +1,30 @@
-.tooltip{
-    position: absolute;
-    background: white;
-    border: var(--slim-grey-border);
-    filter: drop-shadow(var(--lifted-shadow));
-    max-width: calc(min(100%, 360px));
-    display: flex;
-    align-items: center;
+.tooltip {
+  position: absolute;
+  background: white;
+  border: var(--slim-grey-border);
+  filter: drop-shadow(var(--lifted-shadow));
+  max-width: calc(min(100%, 360px));
+  display: flex;
+  align-items: center;
 }
 
-.linkIcon, .url {
-    color: var(--text-mention-grey);
+.linkIcon,
+.url {
+  color: var(--text-mention-grey);
 }
 
-.linkIcon{
-    flex-shrink: 0;
-    padding: 4px 8px;
+.linkIcon {
+  flex-shrink: 0;
+  padding: 4px 8px;
 }
 
 .button {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .url {
-    overflow-x:hidden;
-    white-space:nowrap;
-    text-overflow: ellipsis;
-    margin: 4px 12px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 4px 12px;
 }

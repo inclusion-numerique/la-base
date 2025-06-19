@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayMnqSqsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs#id DataScalewayMnqSqs#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs#id DataScalewayMnqSqs#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayMnqSqsConfig extends cdktf.TerraformMetaArguments {
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs#project_id DataScalewayMnqSqs#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs#project_id DataScalewayMnqSqs#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs#region DataScalewayMnqSqs#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs#region DataScalewayMnqSqs#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs scaleway_mnq_sqs}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs scaleway_mnq_sqs}
 */
 export class DataScalewayMnqSqs extends cdktf.TerraformDataSource {
 
@@ -45,7 +45,7 @@ export class DataScalewayMnqSqs extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayMnqSqs resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayMnqSqs to import
-  * @param importFromId The id of the existing DataScalewayMnqSqs that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayMnqSqs that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayMnqSqs to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -57,7 +57,7 @@ export class DataScalewayMnqSqs extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/mnq_sqs scaleway_mnq_sqs} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mnq_sqs scaleway_mnq_sqs} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -68,8 +68,8 @@ export class DataScalewayMnqSqs extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_mnq_sqs',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

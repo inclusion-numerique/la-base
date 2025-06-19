@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayIamUserConfig extends cdktf.TerraformMetaArguments 
   /**
   * The email address of the IAM user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user#email DataScalewayIamUser#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#email DataScalewayIamUser#email}
   */
   readonly email?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user#id DataScalewayIamUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#id DataScalewayIamUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,25 @@ export interface DataScalewayIamUserConfig extends cdktf.TerraformMetaArguments 
   /**
   * The organization_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user#organization_id DataScalewayIamUser#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#organization_id DataScalewayIamUser#organization_id}
   */
   readonly organizationId?: string;
   /**
+  * The tags associated with the user
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#tags DataScalewayIamUser#tags}
+  */
+  readonly tags?: string[];
+  /**
   * The ID of the IAM user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user#user_id DataScalewayIamUser#user_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#user_id DataScalewayIamUser#user_id}
   */
   readonly userId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user scaleway_iam_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user scaleway_iam_user}
 */
 export class DataScalewayIamUser extends cdktf.TerraformDataSource {
 
@@ -51,7 +57,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayIamUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayIamUser to import
-  * @param importFromId The id of the existing DataScalewayIamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayIamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayIamUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -63,7 +69,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/iam_user scaleway_iam_user} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/iam_user scaleway_iam_user} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -74,8 +80,8 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iam_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -88,6 +94,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
     this._email = config.email;
     this._id = config.id;
     this._organizationId = config.organizationId;
+    this._tags = config.tags;
     this._userId = config.userId;
   }
 
@@ -143,6 +150,22 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
     return this._organizationId;
   }
 
+  // tags - computed: false, optional: true, required: false
+  private _tags?: string[]; 
+  public get tags() {
+    return this.getListAttribute('tags');
+  }
+  public set tags(value: string[]) {
+    this._tags = value;
+  }
+  public resetTags() {
+    this._tags = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tagsInput() {
+    return this._tags;
+  }
+
   // user_id - computed: false, optional: true, required: false
   private _userId?: string; 
   public get userId() {
@@ -168,6 +191,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
       email: cdktf.stringToTerraform(this._email),
       id: cdktf.stringToTerraform(this._id),
       organization_id: cdktf.stringToTerraform(this._organizationId),
+      tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       user_id: cdktf.stringToTerraform(this._userId),
     };
   }
@@ -191,6 +215,12 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      tags: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
       },
       user_id: {
         value: cdktf.stringToHclTerraform(this._userId),

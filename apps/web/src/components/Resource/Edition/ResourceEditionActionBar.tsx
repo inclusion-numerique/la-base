@@ -1,15 +1,15 @@
-import React, { useRef } from 'react'
-import Link from 'next/link'
-import classNames from 'classnames'
+import { deleteResourceModalProps } from '@app/web/components/Resource/Edition/DeleteResourceModalContent'
+import ResourceEditionStateBadge from '@app/web/components/Resource/Edition/ResourceEditionStateBadge'
+import ResourcePublishedStateBadge from '@app/web/components/Resource/Edition/ResourcePublishedStateBadge'
+import type { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
+import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
+import type { Resource } from '@app/web/server/resources/getResource'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import classNames from 'classnames'
+import Link from 'next/link'
+import React, { RefObject, useRef } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
-import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
-import { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
-import ResourcePublishedStateBadge from '@app/web/components/Resource/Edition/ResourcePublishedStateBadge'
-import ResourceEditionStateBadge from '@app/web/components/Resource/Edition/ResourceEditionStateBadge'
-import { deleteResourceModalProps } from '@app/web/components/Resource/Edition/DeleteResourceModalContent'
-import { Resource } from '@app/web/server/resources/getResource'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
 import OpenInviteContributorModalButton from '../Contributors/OpenInviteContributorModalButton'
 
@@ -45,7 +45,7 @@ const ResourceEditionActionBar = ({
   const buttonRef = useRef<HTMLButtonElement>(null)
   const collapseRef = useRef<HTMLDivElement>(null)
 
-  useOnClickOutside(collapseRef, (event) => {
+  useOnClickOutside(collapseRef as RefObject<HTMLElement>, (event) => {
     // Let the event propagate if clicked on the control button
     if (event.target === buttonRef?.current) {
       return

@@ -1,7 +1,7 @@
 import { mediumContainerStory } from '@app/storybook/storyHelper'
-import { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
 import CollectionDates from '@app/web/components/Collection/CollectionDates'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
 
 export default {
   title: 'Collection/Dates de collection',

@@ -1,11 +1,11 @@
-import {
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import type {
   MigrateResourceCommand,
   ResourceMigrated,
 } from '@app/web/server/resources/feature/MigrateResource'
-import { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
-import { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
-import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 
 export const handleMigrateResource: ResourceCreationCommandHandler<
   MigrateResourceCommand,
@@ -110,7 +110,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
 
 export const onMigrated: ResourceEventSideEffect<ResourceMigrated> = async (
   { data: { __version, id, byId, legacyId, contents, description, ...rest } },
-  resource,
+  _resource,
   { transaction },
 ) => {
   const existing = await transaction.resource.findUnique({

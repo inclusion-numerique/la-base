@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
+import React from 'react'
 import styles from '../Edition/ResourceEditionActionBar.module.css'
 import { InviteContributorDynamicModal } from './InviteContributorModal'
 

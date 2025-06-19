@@ -1,6 +1,6 @@
-import { Command } from '@commander-js/extra-typings'
 import { octokit, owner, repo } from '@app/cli/github'
 import { output } from '@app/cli/output'
+import { Command } from '@commander-js/extra-typings'
 
 const { computeBranchNamespace } = await import('@app/cdk/utils')
 

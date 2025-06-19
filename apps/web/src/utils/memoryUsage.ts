@@ -21,6 +21,6 @@ export const getMemoryUsage = () => {
 }
 
 export const outputMemoryUsage = () => {
-  // eslint-disable-next-line no-console
+  // biome-ignore lint/suspicious/noConsole: needed for troubleshooting
   console.log(getMemoryUsage())
 }

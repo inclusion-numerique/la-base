@@ -1,4 +1,3 @@
-import { v4 } from 'uuid'
 import type {
   DeleteCommand,
   ResourceDeleted,
@@ -6,6 +5,7 @@ import type {
 import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
+import { v4 } from 'uuid'
 
 export const handleDelete: ResourceMutationCommandHandler<
   DeleteCommand,

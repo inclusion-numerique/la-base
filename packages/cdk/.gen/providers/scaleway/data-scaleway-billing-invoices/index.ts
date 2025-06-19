@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayBillingInvoicesConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices#id DataScalewayBillingInvoices#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices#id DataScalewayBillingInvoices#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayBillingInvoicesConfig extends cdktf.TerraformMetaAr
   /**
   * The invoice type. It can either be `periodic` or `purchase`
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices#invoice_type DataScalewayBillingInvoices#invoice_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices#invoice_type DataScalewayBillingInvoices#invoice_type}
   */
   readonly invoiceType?: string;
   /**
   * Invoice's start date is greater or equal to `started_after`
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices#started_after DataScalewayBillingInvoices#started_after}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices#started_after DataScalewayBillingInvoices#started_after}
   */
   readonly startedAfter?: string;
   /**
   * Invoice's start date precedes `started_before`
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices#started_before DataScalewayBillingInvoices#started_before}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices#started_before DataScalewayBillingInvoices#started_before}
   */
   readonly startedBefore?: string;
 }
@@ -185,7 +185,7 @@ export class DataScalewayBillingInvoicesInvoicesList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices scaleway_billing_invoices}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices scaleway_billing_invoices}
 */
 export class DataScalewayBillingInvoices extends cdktf.TerraformDataSource {
 
@@ -201,7 +201,7 @@ export class DataScalewayBillingInvoices extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayBillingInvoices resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayBillingInvoices to import
-  * @param importFromId The id of the existing DataScalewayBillingInvoices that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayBillingInvoices that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayBillingInvoices to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -213,7 +213,7 @@ export class DataScalewayBillingInvoices extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/billing_invoices scaleway_billing_invoices} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/billing_invoices scaleway_billing_invoices} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -224,8 +224,8 @@ export class DataScalewayBillingInvoices extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_billing_invoices',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

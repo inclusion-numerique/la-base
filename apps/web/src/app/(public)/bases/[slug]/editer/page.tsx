@@ -1,24 +1,27 @@
-import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { basePageQuery } from '@app/web/server/bases/getBase'
+import {
+  BasePermissions,
+  baseAuthorization,
+} from '@app/web/authorization/models/baseAuthorization'
+import BaseEdition from '@app/web/components/Base/Edition/BaseEdition'
 import BaseEditionHeader, {
   headerSkipLink,
 } from '@app/web/components/Base/Edition/BaseEditionHeader'
-import BaseEdition from '@app/web/components/Base/Edition/BaseEdition'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { basePageQuery } from '@app/web/server/bases/getBase'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
-import {
-  baseAuthorization,
-  BasePermissions,
-} from '@app/web/authorization/models/baseAuthorization'
+import { notFound, redirect } from 'next/navigation'
+import React from 'react'
 
-const BaseEditionPage = async ({ params }: { params: { slug: string } }) => {
+const BaseEditionPage = async ({
+  params,
+}: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const user = await getSessionUser()
   if (!user) {
-    redirect(`/connexion?suivant=/bases/${params.slug}/editer`)
+    redirect(`/connexion?suivant=/bases/${slug}/editer`)
   }
-  const base = await basePageQuery(decodeURI(params.slug), user)
+  const base = await basePageQuery(decodeURI(slug), user)
 
   if (!base) {
     notFound()
@@ -27,7 +30,7 @@ const BaseEditionPage = async ({ params }: { params: { slug: string } }) => {
   const { hasPermission } = baseAuthorization(base, user)
 
   if (!hasPermission(BasePermissions.WriteBase)) {
-    redirect(`/bases/${params.slug}`)
+    redirect(`/bases/${slug}`)
   }
 
   return (

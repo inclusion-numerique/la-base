@@ -1,15 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import RawModal from '@app/ui/components/Modal/RawModal'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { createToast } from '@app/ui/toast/createToast'
-import RawModal from '@app/ui/components/Modal/RawModal'
 import type { SessionUser } from '@app/web/auth/sessionUser'
+import SaveCollection from '@app/web/components/Collection/SaveCollection'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
-import SaveCollection from '@app/web/components/Collection/SaveCollection'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import styles from './SaveCollectionModal.module.css'
 
 export const SaveCollectionDynamicModal = createDynamicModal({
@@ -32,7 +31,7 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
 
   const router = useRouter()
 
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
 
   // User can create a collection in a base or in his profile from this modal
   const saveCollectionMutation = trpc.collection.save.useMutation()
@@ -51,7 +50,6 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
   >(null)
 
   // targetItem is baseId or "profile"
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   const onSave = async (targetItem: 'profile' | string) => {
     if (!collectionId) {
       return
@@ -86,7 +84,6 @@ const SaveCollectionModal = ({ user }: { user: SessionUser }) => {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   const onUnsave = async (targetItem: 'profile' | string) => {
     if (!collectionId) {
       return

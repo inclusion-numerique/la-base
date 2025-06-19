@@ -1,12 +1,12 @@
 'use client'
 
-import { Route } from 'next'
-import React, { useState } from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import classNames from 'classnames'
-import { signIn } from 'next-auth/react'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import type { Route } from 'next'
+import { signIn } from 'next-auth/react'
+import React, { useState } from 'react'
 
 const ProConnectSigninButton = ({
   className,

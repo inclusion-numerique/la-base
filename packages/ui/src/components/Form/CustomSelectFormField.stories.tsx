@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
-import z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/react'
-import { useOnDiff } from '@app/web/hooks/useOnDiff'
 import CustomSelectFormField, {
   CustomSelectFormFieldProps,
 } from '@app/ui/components/Form/CustomSelectFormField'
+import { useOnDiff } from '@app/web/hooks/useOnDiff'
+import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
+import { Meta, StoryObj } from '@storybook/react'
+import React, { ReactNode } from 'react'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
 
 const options = [
   {
@@ -95,7 +95,6 @@ const Template = ({
     ? ((async (search: string) => {
         // Fake delay to show loading state on the component
         await new Promise((resolve) =>
-          // eslint-disable-next-line no-promise-executor-return
           setTimeout(() => {
             resolve(null)
           }, 2000),
@@ -114,6 +113,7 @@ const Template = ({
   return (
     <form
       onSubmit={form.handleSubmit((data) => {
+        // biome-ignore lint/suspicious/noConsole: we log this to debug in storybook console
         console.info('Form submited', data)
       })}
     >
@@ -122,10 +122,7 @@ const Template = ({
         control={form.control}
         path={path}
         label={label}
-        options={
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-assignment
-          optionsProperty as any
-        }
+        options={optionsProperty as any}
         {...args}
       />
     </form>

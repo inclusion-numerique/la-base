@@ -262,7 +262,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(404)
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
       expect(resp.redirectedToUrl).to.be.undefined
     })
   })

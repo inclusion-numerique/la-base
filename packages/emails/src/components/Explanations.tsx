@@ -1,3 +1,5 @@
+import { emailAssetUrl } from '@app/emails/emailAssetUrl'
+import { brandColor } from '@app/emails/styles'
 import {
   MjmlButton,
   MjmlColumn,
@@ -5,8 +7,6 @@ import {
   MjmlText,
 } from '@faire/mjml-react'
 import React from 'react'
-import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import { brandColor } from '@app/emails/styles'
 
 const Explanations = () => (
   <>
@@ -17,8 +17,9 @@ const Explanations = () => (
           fontSize="28px"
           paddingTop="40px"
           color={brandColor}
+          lineHeight="36px"
         >
-          Les Bases, c&lsquo;est quoi ?
+          Les Bases du numérique d’intérêt général, c&lsquo;est quoi ?
         </MjmlText>
         <MjmlText
           fontSize="18px"
@@ -40,7 +41,7 @@ const Explanations = () => (
           border="solid 1px #000091"
           color={brandColor}
         >
-          Découvrir Les Bases
+          Découvrir Les Bases du numérique d’intérêt général
         </MjmlButton>
       </MjmlColumn>
     </MjmlSection>

@@ -1,8 +1,8 @@
-import TurndownService from 'turndown'
-import { ResourceForMarkdown } from '@app/web/resources/getResourceForMarkdown'
-import { themeLabels } from '@app/web/themes/themes'
+import type { ResourceForMarkdown } from '@app/web/resources/getResourceForMarkdown'
 import { supportTypeLabels } from '@app/web/themes/supportTypes'
 import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { themeLabels } from '@app/web/themes/themes'
+import TurndownService from 'turndown'
 
 const turndownService = new TurndownService()
 

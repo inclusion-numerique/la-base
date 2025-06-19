@@ -1,9 +1,9 @@
-import React from 'react'
-import { UseFormReturn } from 'react-hook-form'
-import InputFormField from '@app/ui/components/Form/InputFormField'
 import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
-import { CreateBaseCommand } from '@app/web/server/bases/createBase'
-import { UpdateBaseContactsCommand } from '@app/web/server/bases/updateBase'
+import InputFormField from '@app/ui/components/Form/InputFormField'
+import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
+import type { UpdateBaseContactsCommand } from '@app/web/server/bases/updateBase'
+import React from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 
 const BaseContactsEdition = ({
   form,

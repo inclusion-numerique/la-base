@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "nativeDistinct", "relationJoins"]
+  previewFeatures = ["fullTextSearchPostgres", "nativeDistinct", "relationJoins"]
   binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
@@ -86,6 +86,8 @@ model User {
   timezone            String    @default("Europe/Paris")
   // Created by a fixture system, can be reset and will only be here on preview envs
   isFixture           Boolean   @default(false) @map("is_fixture")
+  // Date of signup, can be used when an user invite another to join a base, we need to know when the user will sign up to accept or decline the invitation
+  signedUpAt          DateTime? @map("signed_up_at")
 
   impersonator        Session?               @relation(name: "impersonator")
   created             DateTime               @default(now())
@@ -95,7 +97,8 @@ model User {
   createdResources    Resource[]
   uploads             Upload[]
   resourceEvent       ResourceEvent[]
-  bases               BaseMembers[]
+  bases               BaseMembers[]          @relation(name: "member")
+  invitedMembers      BaseMembers[]          @relation(name: "invitedBy")
   resources           ResourceContributors[]
   collections         Collection[]
   resourceViews       ResourceView[]
@@ -107,6 +110,9 @@ model User {
   searches            SearchExecution[]
   feedbacks           Feedback[]
   resourceFeedback    ResourceFeedback[]
+  
+  featuredBlock       FeaturedBlock?         @relation("profile")
+  featuredBlockId     String?                @unique @db.Uuid
 
   @@map("users")
 }
@@ -170,6 +176,9 @@ model Base {
   savedCollections SavedCollection[]
   followedBy       BaseFollow[]
 
+  featuredBlock    FeaturedBlock?    @relation("base")
+  featuredBlockId  String?           @unique @db.Uuid
+
   @@index([createdById])
   @@map("bases")
 }
@@ -179,8 +188,11 @@ model BaseMembers {
   // Legacy id is not unique because members come from 2 different v1 tables
   legacyId Int?   @map("legacy_id")
 
-  member   User   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member   User   @relation(name: "member", fields: [memberId], references: [id], onDelete: Cascade)
   memberId String @map("member_id") @db.Uuid
+
+  invitedBy   User?   @relation(name: "invitedBy", fields: [invitedById], references: [id], onDelete: SetNull)
+  invitedById String? @map("invited_by_id") @db.Uuid
 
   base   Base   @relation(fields: [baseId], references: [id], onDelete: Cascade)
   baseId String @map("base_id") @db.Uuid
@@ -194,6 +206,7 @@ model BaseMembers {
   @@unique([memberId, baseId])
   @@index([baseId])
   @@index([memberId])
+  @@index([invitedById])
   @@map("base_members")
 }
 
@@ -346,6 +359,8 @@ model Resource {
   viewsCount       Int                    @default(0) @map("views_count") // Computed field to avoid joining the view table
   reports          ResourceReport[]
   resourceFeedback ResourceFeedback[]
+  featuredBlock    FeaturedBlock?         @relation("resource")
+  featuredBlockId  String?                @unique @db.Uuid
 
   @@index([baseId])
   @@index([createdById])
@@ -624,7 +639,7 @@ enum ResourceReportReason {
   Outdated      @map("outdated")
   // Il y a des erreurs
   Errors        @map("errors")
-  // C’est le doublon d’une autre ressource
+  // C'est le doublon d'une autre ressource
   Duplicate     @map("duplicate")
 
   @@map("resource_report_reason")
@@ -753,7 +768,7 @@ model Feedback {
 
   comment String?
 
-  // Email de contact si l’utilisateur souhaite être recontacté
+  // Email de contact si l'utilisateur souhaite être recontacté
   wantsToBeContacted String? @map("wants_to_be_contacted")
 
   created DateTime @default(now())
@@ -796,4 +811,28 @@ model ResourceFeedback {
   @@index([sentById])
   @@index([resourceId])
   @@map("resource_feedback")
+}
+
+enum FeaturedBlockType {
+  base     
+  resource 
+  profile  
+
+  @@map("featured_block_type")
+}
+
+model FeaturedBlock {
+  id   String  @id @default(uuid()) @db.Uuid
+  type FeaturedBlockType
+
+  base     Base?    @relation("base", fields: [baseId], references: [id])
+  baseId   String?  @unique @db.Uuid
+
+  resource     Resource? @relation("resource", fields: [resourceId], references: [id])
+  resourceId   String?   @unique @db.Uuid
+
+  profile      User?     @relation("profile", fields: [profileId], references: [id])
+  profileId    String?   @unique @db.Uuid
+
+  @@map("featured_blocks")
 }

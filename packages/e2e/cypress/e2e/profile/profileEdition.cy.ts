@@ -1,8 +1,8 @@
-import { v4 } from 'uuid'
 import {
   createTestPublishResourceCommand,
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
+import { v4 } from 'uuid'
 import { cleanUpAndCreateTestPublishedResourceInProfile } from '../resource/edition/editionTestUtils'
 
 describe('Utilisateur connecté, je peux modifier mon profile', () => {

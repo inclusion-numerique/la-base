@@ -1,9 +1,4 @@
-import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { BaseListItem } from '@app/web/server/bases/getBasesList'
-import { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { loginUrl } from '@app/web/security/login'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import ClientFollowButton from '@app/web/components/Follows/ClientFollowButton'
 import {
   followBaseButtonProps,
@@ -11,7 +6,12 @@ import {
   followProfileButtonProps,
   followProfileIconOnlyButtonProps,
 } from '@app/web/components/Follows/followButtonProps'
-import { BasePageData } from '@app/web/server/bases/getBase'
+import { loginUrl } from '@app/web/security/login'
+import type { BasePageData } from '@app/web/server/bases/getBase'
+import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
+import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
+import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
+import Button from '@codegouvfr/react-dsfr/Button'
 
 export type FollowButtonProps = {
   user: SessionUser | null
@@ -19,7 +19,7 @@ export type FollowButtonProps = {
   iconOnly?: boolean
   followPriority?: ButtonProps['priority']
 } & (
-  | { base: BaseListItem | BasePageData; profile?: undefined }
+  | { base: BaseProfileListItem | BasePageData; profile?: undefined }
   | {
       profile: Pick<ProfileListItem, 'id' | 'followedBy' | 'name'>
       base?: undefined

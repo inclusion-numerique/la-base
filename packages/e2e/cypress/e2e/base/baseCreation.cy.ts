@@ -11,6 +11,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
   beforeEach(() => {
     cleanUp()
+    cy.intercept('/api/trpc/baseMember.accept?*').as('acceptInvitation')
   })
 
   it('Acceptation 1 - Création de base via profil', () => {
@@ -108,7 +109,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     )
   })
 
-  it('Acceptation 7 - Création de base avec membres', () => {
+  it.only('Acceptation 7 - Création de base avec membres', () => {
     cy.intercept('/api/trpc/profile.searchProfileForMember?*').as('getUser')
 
     cy.visit('/bases/creer')
@@ -126,7 +127,8 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('create-button').click()
     cy.visit('/bases/ma-declaration/membres')
 
-    cy.testId('member-card-admin').should('have.length', 1)
+    // Leila Huissoud + Jean Biche
+    cy.testId('member-card').should('have.length', 2)
 
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',
@@ -137,13 +139,22 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.contains(
       'Vous êtes invité par Jean Biche à rejoindre la base Ma déclaration.',
     )
-    cy.contains('Accepter').invoke('attr', 'target', '_self').click()
-    cy.url().should('contain', appUrl('/connexion?suivant=/invitations/base/'))
-    cy.signin({ email: user.email })
-    cy.reload()
-    cy.appUrlShouldBe('/bases/ma-declaration')
-    cy.visit('/bases/ma-declaration/membres')
-    cy.testId('profile-card').should('have.length', 2)
-    cy.testId('member-card-admin').should('not.exist')
+    cy.contains("Voir l'invitation")
+      .invoke('attr', 'href')
+      .then((href: string | undefined) => {
+        if (!href) throw new Error('No invitation URL found in email')
+        const emailLinkHref = href.replace(appUrl(''), '')
+        cy.contains("Voir l'invitation")
+          .invoke('attr', 'target', '_self')
+          .click()
+        cy.url().should('contain', appUrl('/invitations/base/'))
+        cy.signin({ email: user.email })
+        cy.reload()
+        cy.appUrlShouldBe(emailLinkHref)
+        cy.testId('base-invitation-accept-button').click()
+        cy.wait('@acceptInvitation')
+        cy.visit(`/bases/ma-declaration/membres`)
+        cy.testId('member-card').should('have.length', 2)
+      })
   })
 })

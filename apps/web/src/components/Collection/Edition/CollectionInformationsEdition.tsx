@@ -1,25 +1,25 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
-import { useRouter } from 'next/navigation'
+import EditableCardForm from '@app/web/components/EditableCardForm'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
   collectionDescriptionMaxLength,
   collectionTitleMaxLength,
 } from '@app/web/server/collections/collectionConstraints'
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
 import {
-  UpdateCollectionInformationsCommand,
+  type UpdateCollectionInformationsCommand,
   UpdateCollectionInformationsCommandValidation,
 } from '@app/web/server/collections/updateCollection'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import { trpc } from '@app/web/trpc'
-import { htmlToText } from '@app/web/utils/htmlToText'
 import { LabelAndValue } from '@app/web/ui/LabelAndValue'
-import EditableCardForm from '@app/web/components/EditableCardForm'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { htmlToText } from '@app/web/utils/htmlToText'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${collectionTitleMaxLength} caractères`

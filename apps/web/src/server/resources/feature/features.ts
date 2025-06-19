@@ -1,14 +1,13 @@
-import z from 'zod'
 import {
   AddContentCommandValidation,
-  ContentAdded,
+  type ContentAdded,
 } from '@app/web/server/resources/feature/AddContent'
 import {
   applyContentAdded,
   handleAddContent,
 } from '@app/web/server/resources/feature/AddContent.server'
 import {
-  BaseChanged,
+  type BaseChanged,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
 import {
@@ -18,7 +17,7 @@ import {
 } from '@app/web/server/resources/feature/ChangeBase.server'
 import {
   CreateResourceCommandValidation,
-  ResourceCreated,
+  type ResourceCreated,
 } from '@app/web/server/resources/feature/CreateResource'
 import {
   applyResourceCreated,
@@ -26,7 +25,7 @@ import {
   onCreated,
 } from '@app/web/server/resources/feature/CreateResource.server'
 import {
-  ContentEdited,
+  type ContentEdited,
   EditContentCommandValidation,
 } from '@app/web/server/resources/feature/EditContent'
 import {
@@ -35,7 +34,7 @@ import {
 } from '@app/web/server/resources/feature/EditContent.server'
 import {
   EditImageCommandValidation,
-  ImageEdited,
+  type ImageEdited,
 } from '@app/web/server/resources/feature/EditImage'
 import {
   applyImageEdited,
@@ -43,7 +42,7 @@ import {
 } from '@app/web/server/resources/feature/EditImage.server'
 import {
   EditTitleAndDescriptionCommandValidation,
-  TitleAndDescriptionEdited,
+  type TitleAndDescriptionEdited,
 } from '@app/web/server/resources/feature/EditTitleAndDescription'
 import {
   applyTitleAndDescriptionEdited,
@@ -51,7 +50,7 @@ import {
 } from '@app/web/server/resources/feature/EditTitleAndDescription.server'
 import {
   MigrateResourceCommandValidation,
-  ResourceMigrated,
+  type ResourceMigrated,
 } from '@app/web/server/resources/feature/MigrateResource'
 import {
   applyResourceMigrated,
@@ -60,7 +59,7 @@ import {
 } from '@app/web/server/resources/feature/MigrateResource.server'
 import {
   PublishCommandValidation,
-  ResourcePublished,
+  type ResourcePublished,
 } from '@app/web/server/resources/feature/PublishResource'
 import {
   applyResourcePublished,
@@ -68,7 +67,7 @@ import {
   onPublished,
 } from '@app/web/server/resources/feature/PublishResource.server'
 import {
-  ContentRemoved,
+  type ContentRemoved,
   RemoveContentCommandValidation,
 } from '@app/web/server/resources/feature/RemoveContent'
 import {
@@ -76,31 +75,32 @@ import {
   handleRemoveContent,
 } from '@app/web/server/resources/feature/RemoveContent.server'
 import {
-  ContentReordered,
+  type ContentReordered,
   ReorderContentCommandValidation,
 } from '@app/web/server/resources/feature/ReorderContent'
 import {
   applyContentReordered,
   handleReorderContent,
 } from '@app/web/server/resources/feature/ReorderContent.server'
-import {
+import type {
   ResourceCreationCommandHandler,
   ResourceMutationCommandHandler,
 } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import {
+import type {
   ApplierResourceEvent,
   ResourceCreationEventApplier,
   ResourceMutationEventApplier,
 } from '@app/web/server/resources/feature/ResourceEventApplier'
-import {
+import type {
   ResourceEventSideEffect,
   ResourceSideEffectContext,
 } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import z from 'zod'
 
 import {
   ChangeIndexationCommandValidation,
-  IndexationChanged,
+  type IndexationChanged,
 } from './ChangeIndexation'
 import {
   applyIndexationChanged,
@@ -109,7 +109,7 @@ import {
 } from './ChangeIndexation.server'
 import {
   ChangePublicFeedbackCommandValidation,
-  PublicFeedbackChanged,
+  type PublicFeedbackChanged,
 } from './ChangePublicFeedback'
 import {
   applyPublicFeedbackChanged,
@@ -118,14 +118,14 @@ import {
 } from './ChangePublicFeedback.server'
 import {
   ChangeVisibilityCommandValidation,
-  VisibilityChanged,
+  type VisibilityChanged,
 } from './ChangeVisibility'
 import {
   applyVisibilityChanged,
   handleChangeVisibility,
   onVisibilityChanged,
 } from './ChangeVisibility.server'
-import { DeleteCommandValidation, ResourceDeleted } from './DeleteResource'
+import { DeleteCommandValidation, type ResourceDeleted } from './DeleteResource'
 import {
   applyResourceDeleted,
   handleDelete,
@@ -133,7 +133,7 @@ import {
 } from './DeleteResource.server'
 import {
   RepublishCommandValidation,
-  ResourceRepublished,
+  type ResourceRepublished,
 } from './RepublishResource'
 import {
   applyResourceRepublished,

@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
-import { ComponentProps } from 'react'
 import { uploadedImageLoader } from '@app/web/utils/uploadedImageLoader'
+import Image from 'next/image'
+import type { ComponentProps } from 'react'
 
 const UploadedImage = ({
   alt,

@@ -1,11 +1,11 @@
 import { compileMjml } from '@app/emails/mjml'
 import { inviteContributor } from '@app/emails/templates/inviteContributor'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
-import { Resource } from '@app/web/server/resources/getResource'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import type { Resource } from '@app/web/server/resources/getResource'
 
 export const sendNewContributorEmail = async ({
   url,

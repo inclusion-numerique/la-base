@@ -1,9 +1,9 @@
+import type { CollectionPageData } from '@app/web/server/collections/getCollection'
 import React from 'react'
-import { CollectionPageData } from '@app/web/server/collections/getCollection'
 import CollectionDeletionCard from './CollectionDeletionCard'
 import CollectionEditionSideMenu from './CollectionEditionSideMenu'
-import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CollectionImageEdition from './CollectionImageEdition'
+import CollectionInformationsEdition from './CollectionInformationsEdition'
 import CollectionVisibilityEdition from './CollectionVisibilityEdition'
 
 const CollectionEdition = ({

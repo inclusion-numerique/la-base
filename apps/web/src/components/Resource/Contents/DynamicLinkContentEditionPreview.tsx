@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
-import type { Metadata } from '@app/web/server/rpc/metadata/getMetadataFromDocument'
 import LinkContentPreview from '@app/web/components/Resource/Contents/LinkContentPreview'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { Metadata } from '@app/web/server/rpc/metadata/getMetadataFromDocument'
+import { trpc } from '@app/web/trpc'
+import { useEffect, useState } from 'react'
 
 const DynamicLinkContentEditionPreview = ({
   url,
@@ -24,6 +24,7 @@ const DynamicLinkContentEditionPreview = ({
       enabled: !!url,
     },
   )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only needed to run when data changes
   useEffect(() => {
     if (!data) {
       return

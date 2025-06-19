@@ -1,6 +1,6 @@
-import { Route } from 'next'
-import { LinkProps } from 'next/link'
 import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
+import type { Route } from 'next'
+import type { LinkProps } from 'next/link'
 
 export type BreadcrumbParent = {
   label: string

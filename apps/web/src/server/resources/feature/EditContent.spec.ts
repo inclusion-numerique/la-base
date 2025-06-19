@@ -4,7 +4,10 @@ import {
   sectionTitleFailUseCases,
   textFailUseCases,
 } from './Content.spec.config'
-import { EditContentCommand, EditContentCommandValidation } from './EditContent'
+import {
+  type EditContentCommand,
+  EditContentCommandValidation,
+} from './EditContent'
 
 const validSectionTitleCommand: EditContentCommand = {
   name: 'EditContent',
@@ -117,15 +120,13 @@ describe('EditContentCommandValidation', () => {
 
     sectionTitleFailUseCases(validSectionTitleCommand).map(
       ({ name, values, errors }) =>
-        // eslint-disable-next-line jest/valid-title
         it(name, () =>
           expectZodValidationToFail(
             EditContentCommandValidation,
             validSectionTitleCommand,
             values,
             errors,
-          ),
-        ),
+          )),
     )
   })
 
@@ -145,9 +146,8 @@ describe('EditContentCommandValidation', () => {
       })
       expect(result.success).toEqual(true)
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: Success is true
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
       expect(result.data.payload.text).toEqual('<b>Broken html</b>')
     })
 
@@ -174,9 +174,8 @@ describe('EditContentCommandValidation', () => {
       })
       expect(result.success).toEqual(true)
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: Success is true
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
       expect(result.data.payload.text).toEqual(`
             
               
@@ -192,15 +191,13 @@ describe('EditContentCommandValidation', () => {
     })
 
     textFailUseCases(validTextCommand).map(({ name, values, errors }) =>
-      // eslint-disable-next-line jest/valid-title
       it(name, () =>
         expectZodValidationToFail(
           EditContentCommandValidation,
           validTextCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 
@@ -239,15 +236,13 @@ describe('EditContentCommandValidation', () => {
     })
 
     linkFailUseCases(validLinkCommand).map(({ name, values, errors }) =>
-      // eslint-disable-next-line jest/valid-title
       it(name, () =>
         expectZodValidationToFail(
           EditContentCommandValidation,
           validLinkCommand,
           values,
           errors,
-        ),
-      ),
+        )),
     )
   })
 })

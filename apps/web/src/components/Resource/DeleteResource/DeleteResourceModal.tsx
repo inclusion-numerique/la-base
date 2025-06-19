@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { createToast } from '@app/ui/toast/createToast'
-import { trpc } from '@app/web/trpc'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { trpc } from '@app/web/trpc'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
 export const DeleteResourceDynamicModal = createDynamicModal({
   id: 'delete-resource-modal',
@@ -83,7 +83,7 @@ const DeleteResourceModal = ({ redirectTo }: { redirectTo?: string }) => {
         ressource seront supprimés avec elle.
       </p>
       {mutation.error && (
-        <p className="fr-error-text" data-testid="invite-members-error">
+        <p className="fr-error-text" data-testid="delete-resource-error">
           {mutation.error.message}
         </p>
       )}

@@ -1,14 +1,13 @@
 'use client'
 
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import Link from 'next/link'
 import React from 'react'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
-import { getBasesFromSessionUser } from '../bases/getBasesFromSessionUser'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
-  const bases = user ? getBasesFromSessionUser(user) : []
+  const bases = user.bases.map(({ base }) => base)
 
   return (
     <ul>

@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import Notice from '@codegouvfr/react-dsfr/Notice'
-import { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import React, { useState } from 'react'
 import ResourceFeedback from './ResourceFeedback'
 import { ResourceFeedbackCountByRating } from './ResourceFeedbackCountByRating'
 import ResourceFeedbackForm from './ResourceFeedbackForm'

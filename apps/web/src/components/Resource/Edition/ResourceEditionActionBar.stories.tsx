@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { createTestResource, createTestUser } from '@app/web/test/helpers'
+import { noop } from '@app/web/utils/noop'
+import type { Meta, StoryObj } from '@storybook/react'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceEditionActionBar from './ResourceEditionActionBar'
@@ -27,8 +28,8 @@ export const Brouillon: Story = {
     unPublishedEdits: false,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }
@@ -40,8 +41,8 @@ export const BrouillonEnregistrement: Story = {
     unPublishedEdits: false,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }
@@ -53,8 +54,8 @@ export const BrouillonModifié: Story = {
     unPublishedEdits: true,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }
@@ -66,13 +67,12 @@ export const Publique: Story = {
     unPublishedEdits: false,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const PrivéeEnregistrement: Story = {
   args: {
     publishedState: ResourcePublishedState.PRIVATE,
@@ -80,13 +80,12 @@ export const PrivéeEnregistrement: Story = {
     unPublishedEdits: false,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const PubliqueModifiée: Story = {
   args: {
     publishedState: ResourcePublishedState.PUBLIC,
@@ -94,8 +93,8 @@ export const PubliqueModifiée: Story = {
     unPublishedEdits: true,
     resource,
     isSubmitting: false,
-    onDelete: () => {},
-    onPublish: () => {},
+    onDelete: noop,
+    onPublish: noop,
     publishMode: false,
   },
 }

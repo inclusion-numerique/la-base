@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react'
-import classNames from 'classnames'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
+import classNames from 'classnames'
+import React, { type ReactNode } from 'react'
 import CustomTag, { TagColor } from '../CustomTag'
 
 const ResourcesViewsAndMetadata = ({

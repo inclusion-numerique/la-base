@@ -1,14 +1,14 @@
-import { Grantee } from '@app/web/authorization/grantee'
-import { testSessionUser } from '@app/web/test/testSessionUser'
+import type { Grantee } from '@app/web/authorization/grantee'
 import {
+  type ProfileAuthorizationTarget,
+  ProfilePermissions,
+  ProfileRoles,
   getProfilePermissions,
   getProfileRoles,
-  ProfileAuthorizationTarget,
-  ProfilePermissions,
   profilePermissions,
-  ProfileRoles,
 } from '@app/web/authorization/models/profileAuthorization'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 
 describe('Authorization - Profils', () => {
   const profile = {

@@ -1,13 +1,13 @@
 'use client'
 
-import { Reorder, useDragControls } from 'framer-motion'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { PointerEventHandler, RefObject, useRef } from 'react'
-import classNames from 'classnames'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
-import CollectionOrderRow from '@app/web/components/Collection/Edition/Order/CollectionOrderRow'
 import styles from '@app/web/components/Collection/Edition/Order/CollectionOrder.module.css'
+import CollectionOrderRow from '@app/web/components/Collection/Edition/Order/CollectionOrderRow'
+import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import { Reorder, useDragControls } from 'framer-motion'
+import { type PointerEventHandler, type RefObject, useRef } from 'react'
 
 const DraggableCollectionOrderRow = ({
   collection,
@@ -22,7 +22,7 @@ const DraggableCollectionOrderRow = ({
 }: {
   collection: CollectionListItem
   count: number
-  dragConstraints: RefObject<HTMLElement>
+  dragConstraints: RefObject<HTMLElement | null>
   index: number
   isSelected: boolean
   onSelect: () => void

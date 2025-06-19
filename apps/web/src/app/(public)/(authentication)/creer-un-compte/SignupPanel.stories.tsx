@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof SignupPanel> = {
   title: 'SignupPanel',

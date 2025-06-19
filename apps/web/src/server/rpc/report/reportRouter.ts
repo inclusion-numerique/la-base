@@ -1,8 +1,8 @@
-import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { ResourceReportValidation } from '@app/web/resources/resourceReport'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { v4 } from 'uuid'
 
 export const reportRouter = router({
   resource: protectedProcedure

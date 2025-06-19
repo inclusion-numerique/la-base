@@ -7,6 +7,7 @@ describe('Template: inviteMember', () => {
   it('Compiles hello world react mjml template', async () => {
     const mjml = inviteMember.mjml({
       baseTitle: 'Ma base',
+      newMember: false,
       from: 'Abd Al Malik',
       url: 'https://test.local?token=oui',
     })

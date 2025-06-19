@@ -1,6 +1,6 @@
-import { redirect } from 'next/navigation'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getLoginRedirectUrl } from '@app/web/security/getHomepage'
+import { redirect } from 'next/navigation'
 
 /**
  * Cette page permet de rediriger l'utilisateur après une connexion réussie

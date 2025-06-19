@@ -1,3 +1,5 @@
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import React, { ReactNode } from 'react'
 import {
@@ -8,8 +10,6 @@ import {
   PathValue,
 } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 
 export type CheckboxFormFieldProps<T extends FieldValues> = {
   control: Control<T>
@@ -56,7 +56,10 @@ const CheckboxFormField = <T extends FieldValues>({
         }
 
         return (
-          <div className={classNames('fr-form-group', className)}>
+          <div
+            className={classNames('fr-form-group', className)}
+            data-testid={dataTestId}
+          >
             <fieldset
               className={classNames('fr-fieldset fr-mb-0', {
                 'fr-fieldset--error': error,
@@ -85,9 +88,8 @@ const CheckboxFormField = <T extends FieldValues>({
                     disabled={disabled}
                     onBlur={onBlur}
                     onChange={(event) => {
-                      onChange(event.target.checked as PathValue<T, Path<T>>)
+                      onChange(event.target.checked)
                     }}
-                    data-testid={dataTestId}
                     name={name}
                     ref={ref}
                   />

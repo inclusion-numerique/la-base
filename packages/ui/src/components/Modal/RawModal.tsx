@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react'
-import classNames from 'classnames'
-import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import Button from '@codegouvfr/react-dsfr/Button'
+import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
+import classNames from 'classnames'
+import React, { ReactNode } from 'react'
 
 /**
  * This component is used for handling a Modal out of react-dsfr
@@ -43,7 +43,6 @@ const RawModal = ({
         tabIndex={-1}
         aria-hidden
       />
-      {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <dialog
         role="dialog"
         aria-labelledby={titleId}
@@ -109,7 +108,6 @@ const RawModal = ({
                               'linkProps' in buttonProps &&
                               buttonProps.linkProps
                             ) {
-                              // eslint-disable-next-line no-param-reassign
                               buttonProps.linkProps = {
                                 tabIndex: 0,
                                 ...(doClosesModal
@@ -120,7 +118,6 @@ const RawModal = ({
                                 ...buttonProps.linkProps,
                               }
                             } else {
-                              // eslint-disable-next-line no-param-reassign
                               buttonProps.nativeButtonProps = {
                                 tabIndex: 0,
                                 ...(doClosesModal
@@ -132,15 +129,12 @@ const RawModal = ({
                               }
                             }
                             const {
-                              // eslint-disable-next-line @typescript-eslint/naming-convention
                               iconId: _buttonIconId,
-                              // eslint-disable-next-line @typescript-eslint/naming-convention
                               iconPosition: _buttonIconPosition,
                               ...props
                             } = buttonProps
 
                             return (
-                              // eslint-disable-next-line react/no-array-index-key
                               <li
                                 key={
                                   buttonProps.nativeButtonProps?.key ??

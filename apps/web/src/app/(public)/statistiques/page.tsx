@@ -1,22 +1,23 @@
-import React from 'react'
-import {
-  getStatistics,
-  StatisticsParams,
-} from '@app/web/server/statistiques/getStatistics'
 import Card from '@app/web/components/Card'
+import {
+  type StatisticsParams,
+  getStatistics,
+} from '@app/web/server/statistiques/getStatistics'
 import { numberToString } from '@app/web/utils/formatNumber'
-import StatisticsChart from './StatisticsChart'
+import React from 'react'
 import KeyFigureTitle from './KeyFigureTitle'
 import SelectPeriod from './SelectPeriod'
+import StatisticsChart from './StatisticsChart'
 import TargetAudiences from './TargetAudiences'
 import Thematiques from './Thematiques'
 
 const StatisticsPage = async ({
   searchParams,
 }: {
-  searchParams: StatisticsParams
+  searchParams: Promise<StatisticsParams>
 }) => {
-  const { kpi, search, creation, usage } = await getStatistics(searchParams)
+  const statisticsParams = await searchParams
+  const { kpi, search, creation, usage } = await getStatistics(statisticsParams)
 
   return (
     <>

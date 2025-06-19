@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
 import { mobileStory } from '@app/storybook/storyHelper'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import type {
   Resource,
   ResourceContent,
 } from '@app/web/server/resources/getResource'
-import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ComponentProps } from 'react'
 import ResourceView from './ResourceView'
 
 const description =

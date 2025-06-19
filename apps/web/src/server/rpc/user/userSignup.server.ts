@@ -1,6 +1,6 @@
-import z from 'zod'
 import { prismaClient } from '@app/web/prismaClient'
 import { UserSignupValidation } from '@app/web/server/rpc/user/userSignup'
+import z from 'zod'
 
 export const ServerUserSignupValidation = UserSignupValidation.extend({
   email: z
@@ -10,9 +10,10 @@ export const ServerUserSignupValidation = UserSignupValidation.extend({
     .email('Merci de renseigner un email valide')
     .refine(async (email) => {
       const existing = await prismaClient.user.findUnique({
-        where: { email },
+        where: { email, signedUpAt: { not: null } },
         select: { id: true },
       })
+
       return !existing
     }, 'Un compte existe déjà avec cet email'),
 })

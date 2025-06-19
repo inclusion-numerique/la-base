@@ -1,9 +1,9 @@
-import {
+import type {
   ContentReordered,
   ReorderContentCommand,
 } from '@app/web/server/resources/feature/ReorderContent'
-import { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
-import { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
+import type { ResourceMutationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import { sortContents } from '@app/web/server/resources/sortContents'
 
 export const handleReorderContent: ResourceMutationCommandHandler<

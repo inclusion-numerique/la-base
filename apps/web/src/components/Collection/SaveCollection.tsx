@@ -1,7 +1,7 @@
-import React from 'react'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
+import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
+import Button from '@codegouvfr/react-dsfr/Button'
+import React from 'react'
 import styles from './SaveCollectionModal.module.css'
 
 const SaveCollection = ({

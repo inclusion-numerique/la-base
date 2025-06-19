@@ -2,8 +2,8 @@ import {
   cleanUpAndCreateTestBase,
   cleanUpAndCreateTestBaseAsMember,
 } from '@app/e2e/e2e/resource/edition/editionTestUtils'
-import { givenUser } from '@app/e2e/support/given/givenUser'
 import { defaultTestBaseSlug } from '@app/e2e/support/given/givenBase'
+import { givenUser } from '@app/e2e/support/given/givenUser'
 
 describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () => {
   it('Acceptation 1 - Visiteur sur un base publique', () => {
@@ -20,8 +20,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('not.exist')
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('exist')
+    cy.testId('member-card').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
     cy.appUrlShouldBe(`/connexion?suivant=/bases/${defaultTestBaseSlug}/editer`)
@@ -41,8 +40,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('not.exist')
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('not.exist')
+    cy.testId('member-card').should('not.exist')
     cy.testId('private-base-box').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
@@ -62,8 +60,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('not.exist')
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('exist')
+    cy.testId('member-card').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
     cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}`)
@@ -84,8 +81,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('not.exist')
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('not.exist')
+    cy.testId('member-card').should('not.exist')
     cy.testId('private-base-box').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
@@ -103,8 +99,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('exist')
-    cy.testId('member-card-admin').should('exist')
-    cy.testId('profile-card').should('not.exist')
+    cy.testId('member-card').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
     cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}/editer`)
@@ -122,8 +117,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('base-invite-member-button').should('exist')
-    cy.testId('member-card-admin').should('not.exist')
-    cy.testId('profile-card').should('exist')
+    cy.testId('member-card').should('exist')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
     cy.appUrlShouldBe(`/bases/${defaultTestBaseSlug}/editer`)

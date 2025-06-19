@@ -1,12 +1,12 @@
-import * as Sentry from '@sentry/nextjs'
-import type { SearchType } from '@prisma/client'
-import { v4 } from 'uuid'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import {
+import type {
   PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SearchType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { v4 } from 'uuid'
 
 type LogSearchExecutionInput = {
   type: SearchType

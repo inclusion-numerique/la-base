@@ -1,5 +1,7 @@
-import { TerraformStack } from 'cdktf'
-import { Construct } from 'constructs'
+import { environmentVariablesFromList } from '@app/cdk/environmentVariable'
+import { ProjectCdkOutput } from '@app/cdk/getCdkOutput'
+import { createOutput } from '@app/cdk/output'
+import { terraformBackend } from '@app/cdk/terraformBackend'
 import {
   chromaticAppId,
   cockpitGrafanaEditors,
@@ -19,10 +21,6 @@ import {
   sentryUrl,
   smtpPort,
 } from '@app/config/config'
-import { environmentVariablesFromList } from '@app/cdk/environmentVariable'
-import { ProjectCdkOutput } from '@app/cdk/getCdkOutput'
-import { createOutput } from '@app/cdk/output'
-import { terraformBackend } from '@app/cdk/terraformBackend'
 import { Cockpit } from '@app/scaleway/cockpit'
 import { CockpitGrafanaUser } from '@app/scaleway/cockpit-grafana-user'
 import { CockpitToken } from '@app/scaleway/cockpit-token'
@@ -33,9 +31,11 @@ import { ObjectBucket } from '@app/scaleway/object-bucket'
 import { ScalewayProvider } from '@app/scaleway/provider'
 import { RdbInstance } from '@app/scaleway/rdb-instance'
 import { RegistryNamespace } from '@app/scaleway/registry-namespace'
-import { TemDomain } from '@app/scaleway/tem-domain'
 import { Secret } from '@app/scaleway/secret'
 import { SecretVersion } from '@app/scaleway/secret-version'
+import { TemDomain } from '@app/scaleway/tem-domain'
+import { TerraformStack } from 'cdktf'
+import { Construct } from 'constructs'
 
 export const projectStackVariables = [
   'SCW_DEFAULT_ORGANIZATION_ID',

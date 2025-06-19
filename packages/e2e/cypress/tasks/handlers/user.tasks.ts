@@ -1,5 +1,5 @@
-import { v4 } from 'uuid'
 import { prismaClient } from '@app/web/prismaClient'
+import { v4 } from 'uuid'
 
 export type CreateUserInput = Parameters<
   typeof prismaClient.user.create

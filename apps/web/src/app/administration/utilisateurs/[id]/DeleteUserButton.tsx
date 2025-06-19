@@ -1,16 +1,16 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
-import { useRouter } from 'next/navigation'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import classNames from 'classnames'
-import { Notice } from '@codegouvfr/react-dsfr/Notice'
-import Input from '@codegouvfr/react-dsfr/Input'
-import { useState } from 'react'
-import { trpc } from '@app/web/trpc'
+import type { UserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { UserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
+import { trpc } from '@app/web/trpc'
+import Button from '@codegouvfr/react-dsfr/Button'
+import Input from '@codegouvfr/react-dsfr/Input'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { Notice } from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export const DeleteUserConfirm = createModal({
   id: 'delete-user',
@@ -98,7 +98,6 @@ const DeleteUserButton = ({
         <Input
           label={`Écrivez “${confirmText}” dans le champ ci-dessous pour supprimer ce profil.`}
           nativeInputProps={{
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore: wrong dsfr type
             'data-testid': 'modal-input',
             onChange: (event) => {

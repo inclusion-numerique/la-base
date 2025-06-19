@@ -1,8 +1,8 @@
-import React from 'react'
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 import classNames from 'classnames'
-import { ResourceNavigationData } from './getResourceNavigationData'
+import React from 'react'
 import styles from './ResourceMobileNavigation.module.css'
+import type { ResourceNavigationData } from './getResourceNavigationData'
 
 /**
  * Dropdown navigation menu only visible in mobile layout

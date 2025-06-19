@@ -1,9 +1,9 @@
-import {
+import type { ContentReordered } from '@app/web/server/resources/feature/ReorderContent'
+import { applyContentReordered } from '@app/web/server/resources/feature/ReorderContent.server'
+import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
-import { ContentReordered } from '@app/web/server/resources/feature/ReorderContent'
-import { applyContentReordered } from '@app/web/server/resources/feature/ReorderContent.server'
 
 describe('applyContentReordered', () => {
   const contentToReorder: ContentProjection = {

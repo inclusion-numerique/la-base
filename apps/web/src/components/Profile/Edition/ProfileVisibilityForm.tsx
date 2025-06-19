@@ -1,21 +1,21 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import EditableCardForm from '@app/web/components/EditableCardForm'
+import Visibility from '@app/web/components/Visibility'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
+import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
-  UpdateProfileVisibilityCommand,
+  type UpdateProfileVisibilityCommand,
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
-import { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import EditableCardForm from '@app/web/components/EditableCardForm'
-import VisibilityField from '@app/web/components/VisibilityField'
-import Visibility from '@app/web/components/Visibility'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { trpc } from '@app/web/trpc'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const {
   Component: PrivateModal,

@@ -1,5 +1,5 @@
-import TurndownService from 'turndown'
 import type { BaseForMarkdown } from '@app/web/bases/getBaseForMarkdown'
+import TurndownService from 'turndown'
 
 const turndownService = new TurndownService()
 

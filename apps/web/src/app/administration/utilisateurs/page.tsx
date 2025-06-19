@@ -1,11 +1,11 @@
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
+import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import AdministrationSearchUtilisateur from '@app/web/app/administration/utilisateurs/AdministrationSearchUtilisateur'
 import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
 import UtilisateursTable from '@app/web/app/administration/utilisateurs/UtilisateursTable'
 import { getUsersListPageData } from '@app/web/app/administration/utilisateurs/getUsersListPageData'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import { numberToString } from '@app/web/utils/formatNumber'
 
 export const metadata = {
@@ -15,12 +15,13 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const Page = async ({
-  searchParams = {},
+  searchParams,
 }: {
-  searchParams?: UtilisateursDataTableSearchParams
+  searchParams: Promise<UtilisateursDataTableSearchParams>
 }) => {
+  const listParams = await searchParams
   const data = await getUsersListPageData({
-    searchParams,
+    searchParams: listParams,
   })
 
   return (
@@ -35,13 +36,13 @@ const Page = async ({
           <p className="fr-text--medium fr-mb-2v">
             Rechercher parmi les {numberToString(data.totalCount)} utilisateurs
           </p>
-          <AdministrationSearchUtilisateur searchParams={searchParams} />
+          <AdministrationSearchUtilisateur searchParams={listParams} />
         </div>
       </AdministrationPageContainer>
       <AdministrationPageContainer size="full">
         <UtilisateursTable
           data={data.searchResult}
-          searchParams={searchParams}
+          searchParams={listParams}
           baseHref="/administration/utilisateurs"
         />
       </AdministrationPageContainer>

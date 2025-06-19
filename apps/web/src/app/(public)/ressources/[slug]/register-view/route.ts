@@ -1,17 +1,17 @@
-import { NextRequest } from 'next/server'
-import { v4 } from 'uuid'
-import cookie from 'cookie'
+import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCookies'
+import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { getOrSetVisitHashCookie } from '@app/web/server/visitHash/getOrSetVisitHashCookie'
-import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
-import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCookies'
+import * as cookie from 'cookie'
+import type { NextRequest } from 'next/server'
+import { v4 } from 'uuid'
 
 export const POST = async (
   request: NextRequest,
-  context: { params: { slug: string } },
+  context: { params: Promise<{ slug: string }> },
 ) => {
-  const { slug } = context.params
-  const visitHash = getOrSetVisitHashCookie()
+  const { slug } = await context.params
+  const visitHash = await getOrSetVisitHashCookie()
 
   const resource = await prismaClient.resource.findFirst({
     where: {

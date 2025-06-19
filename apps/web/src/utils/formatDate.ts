@@ -1,6 +1,6 @@
 import {
-  format as dateFnsFormat,
   type FormatOptions,
+  format as dateFnsFormat,
   setDefaultOptions,
 } from 'date-fns'
 import { fr } from 'date-fns/locale'

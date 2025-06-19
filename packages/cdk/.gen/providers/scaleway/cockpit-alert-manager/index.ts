@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface CockpitAlertManagerConfig extends cdktf.TerraformMetaArguments 
   /**
   * Enable or disable the alert manager
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#enable_managed_alerts CockpitAlertManager#enable_managed_alerts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#enable_managed_alerts CockpitAlertManager#enable_managed_alerts}
   */
   readonly enableManagedAlerts?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#id CockpitAlertManager#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#id CockpitAlertManager#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface CockpitAlertManagerConfig extends cdktf.TerraformMetaArguments 
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#project_id CockpitAlertManager#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#project_id CockpitAlertManager#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#region CockpitAlertManager#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#region CockpitAlertManager#region}
   */
   readonly region?: string;
   /**
   * contact_points block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#contact_points CockpitAlertManager#contact_points}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#contact_points CockpitAlertManager#contact_points}
   */
   readonly contactPoints?: CockpitAlertManagerContactPoints[] | cdktf.IResolvable;
 }
@@ -43,7 +43,7 @@ export interface CockpitAlertManagerContactPoints {
   /**
   * Email addresses for the alert receivers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#email CockpitAlertManager#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#email CockpitAlertManager#email}
   */
   readonly email?: string;
 }
@@ -159,7 +159,7 @@ export class CockpitAlertManagerContactPointsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager}
 */
 export class CockpitAlertManager extends cdktf.TerraformResource {
 
@@ -175,7 +175,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a CockpitAlertManager resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the CockpitAlertManager to import
-  * @param importFromId The id of the existing CockpitAlertManager that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing CockpitAlertManager that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the CockpitAlertManager to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -187,7 +187,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -198,8 +198,8 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_cockpit_alert_manager',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

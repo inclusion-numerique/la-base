@@ -1,22 +1,23 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
-import Link from 'next/link'
-import Button from '@codegouvfr/react-dsfr/Button'
-import classNames from 'classnames'
-import { useDebounceValue, useOnClickOutside } from 'usehooks-ts'
+import BaseImage from '@app/web/components/BaseImage'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import {
   defaultSearchParams,
   searchParamsFromSegment,
   searchTabFromString,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { trpc } from '@app/web/trpc'
 import { Spinner } from '@app/web/ui/Spinner'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import BaseImage from '@app/web/components/BaseImage'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import Link from 'next/link'
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
+import type React from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
+import { useDebounceValue, useOnClickOutside } from 'usehooks-ts'
 import styles from './SearchBar.module.css'
 
 const goToNextElement = (
@@ -63,7 +64,7 @@ const SearchBar = ({
   useEffect(() => {
     // Prefetch default search route to avoid delay when user clicks on search button
     router.prefetch('/rechercher/ressources/tout')
-  }, [])
+  }, [router.prefetch])
 
   const inputRef = useRef<HTMLInputElement>(null)
   const quickSearchContainerRef = useRef<HTMLDivElement>(null)
@@ -126,7 +127,7 @@ const SearchBar = ({
 
   // Close quick search on click outside of it
   // TODO Cancel if click on search bar ?
-  useOnClickOutside(quickSearchContainerRef, () => {
+  useOnClickOutside(quickSearchContainerRef as RefObject<HTMLElement>, () => {
     setQuickSearchOpen(false)
   })
 

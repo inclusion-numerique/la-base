@@ -1,21 +1,23 @@
 .nav {
-    padding-right: 24px;
+  padding-right: 24px;
 
-    :global .fr-sidemenu__list {
-        margin-bottom: 0;
-        margin-right: 0;
-    }
+  :global .fr-sidemenu__list {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
 
-    :global .fr-sidemenu__inner {
-        box-shadow: none;
-        padding-right: 0;
-        padding-left: 0;
-    }
+  :global .fr-sidemenu__inner {
+    box-shadow: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
 
-    :global .fr-sidemenu__btn, :global .fr-sidemenu__link, :global .fr-sidemenu__list .fr-sidemenu__list .fr-sidemenu__btn, :global .fr-sidemenu__list .fr-sidemenu__list .fr-sidemenu__link {
-        font-size: 14px;
-        padding-right: 8px;
-        padding-left: 8px;
-    }
-
+  :global .fr-sidemenu__btn,
+  :global .fr-sidemenu__link,
+  :global .fr-sidemenu__list .fr-sidemenu__list .fr-sidemenu__btn,
+  :global .fr-sidemenu__list .fr-sidemenu__list .fr-sidemenu__link {
+    font-size: 14px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
 }

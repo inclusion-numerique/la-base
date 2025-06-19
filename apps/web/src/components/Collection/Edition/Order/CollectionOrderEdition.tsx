@@ -1,6 +1,6 @@
 import CollectionListEdition from '@app/web/components/Collection/Edition/Order/CollectionListEdition'
 import CollectionOrderHeader from '@app/web/components/Collection/Edition/Order/CollectionOrderHeader'
-import { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 
 const CollectionOrderEdition = ({
   redirectProps,

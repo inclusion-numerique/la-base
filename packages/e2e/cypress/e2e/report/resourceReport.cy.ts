@@ -1,11 +1,11 @@
-import { givenUser } from '@app/e2e/support/given/givenUser'
+import { goToMostRecentEmailReceived } from '@app/e2e/e2e/goToMostRecentEmailReceived'
 import { givenBase } from '@app/e2e/support/given/givenBase'
-import { v4 } from 'uuid'
 import {
   createTestPublishResourceCommand,
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
-import { goToMostRecentEmailReceived } from '@app/e2e/e2e/goToMostRecentEmailReceived'
+import { givenUser } from '@app/e2e/support/given/givenUser'
+import { v4 } from 'uuid'
 
 describe('Utilisateur connecté, je peux signaler une ressource', () => {
   /**

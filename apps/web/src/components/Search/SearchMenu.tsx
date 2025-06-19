@@ -1,15 +1,15 @@
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
+import { useSearchCounts } from '@app/web/app/(public)/rechercher/useSearchCounts'
 import {
+  type SearchParams,
+  type SearchTab,
   defaultSearchParams,
-  SearchParams,
-  SearchTab,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import { useSearchCounts } from '@app/web/app/(public)/rechercher/useSearchCounts'
 import { numberToString } from '@app/web/utils/formatNumber'
+import Link from 'next/link'
+import React from 'react'
 import styles from './Menu.module.css'
 
 // While loading put spaces instead of the count to minimize layout shifts

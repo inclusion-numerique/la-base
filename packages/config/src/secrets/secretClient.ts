@@ -1,5 +1,5 @@
-import axios from 'axios'
 import { region } from '@app/config/config'
+import axios from 'axios'
 
 export const projectId = process.env.SCW_PROJECT_ID ?? ''
 

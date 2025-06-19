@@ -1,29 +1,31 @@
-import { notFound } from 'next/navigation'
-import React from 'react'
-import type { Metadata } from 'next'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import {
+  ResourcePermissions,
+  resourceAuthorization,
+} from '@app/web/authorization/models/resourceAuthorization'
+import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { prismaClient } from '@app/web/prismaClient'
-import { metadataTitle } from '@app/web/app/metadataTitle'
-import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
-import { applyDraft } from '@app/web/utils/resourceDraft'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
-import {
-  resourceAuthorization,
-  ResourcePermissions,
-} from '@app/web/authorization/models/resourceAuthorization'
-import { uploadedImageLoader } from '@app/web/utils/uploadedImageLoader'
 import { getServerUrl } from '@app/web/utils/baseUrl'
-import ResourceView from './_components/ResourceView'
+import { applyDraft } from '@app/web/utils/resourceDraft'
+import { contentId } from '@app/web/utils/skipLinks'
+import { uploadedImageLoader } from '@app/web/utils/uploadedImageLoader'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import React from 'react'
 import PrivateResourceView from './_components/PrivateResourceView'
+import ResourceView from './_components/ResourceView'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
+  const { slug } = await params
+
   const resource = await prismaClient.resource.findUnique({
     where: { slug },
     select: {
@@ -60,18 +62,20 @@ export const generateMetadata = async ({
   }
 }
 
-const RessourcePage = async ({ params }: { params: { slug: string } }) => {
+const RessourcePage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) => {
+  const { slug } = await params
   const user = await getSessionUser()
 
-  const savedResource = await getResource(
-    { slug: decodeURI(params.slug) },
-    user,
-  )
+  const savedResource = await getResource({ slug: decodeURI(slug) }, user)
 
   const draftResource = savedResource?.published
     ? null
     : await getResourceProjectionWithContext({
-        slug: decodeURI(params.slug),
+        slug: decodeURI(slug),
       })
 
   const resource = applyDraft(savedResource, draftResource)

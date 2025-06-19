@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   countBases,
   quickSearchBases,
@@ -16,9 +16,9 @@ import {
 } from '@app/web/server/resources/searchResources'
 import { backgroundLogSearchExecution } from '@app/web/server/search/logSearchExecution'
 import {
+  type PaginationParams,
+  type SearchParams,
   defaultSearchParams,
-  PaginationParams,
-  SearchParams,
 } from '@app/web/server/search/searchQueryParams'
 
 export const countSearchResults = async (
@@ -101,6 +101,9 @@ export const executeBasesSearch = async (
     duration: end - start,
   }
 }
+
+export type BasesSearchResult = Awaited<ReturnType<typeof executeBasesSearch>>
+export type BasesSearchResultListItem = BasesSearchResult['bases'][number]
 
 export const executeProfilesSearch = async (
   searchParams: SearchParams,

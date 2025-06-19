@@ -70,7 +70,7 @@ Voici les librairies utilisées qui définissent la stack technique du projet :
 - [mjml-react](https://github.com/Faire/mjml-react) : Écrire des templates de mails avec React
   et [mjml](https://mjml.io/)
 - [NextAuth.js](https://next-auth.js.org/) : Adaptateur pour services d'authentification.
-- [Eslint](https://eslint.org/) : Analyseur statique de code pour JavaScript et TypeScript.
+- [Biome](https://biomejs.dev/) : Formatteur et linteur pour JavaScript, CSS et TypeScript.
 - [Prettier](https://prettier.io/) : Formateur de code pour divers langages et syntaxes.
 - [Jest](https://jestjs.io/) : Environnement d'exécution des tests unitaires.
 - [Cypress](https://www.cypress.io) : Environnement d'exécution des tests de bout en bout et de tests de composants.
@@ -141,6 +141,22 @@ La liste des dépendences nodejs est disponible dans :
 - [/packages/ui/package.json](/packages/ui/package.json) pour la liste des dépendences du package ui
 - [pnpm-lock.yaml](/pnpm-lock.yaml) pour la liste complète des librairies utilisées directement et indirectement et
   leurs versions précises
+
+### Politique de mise à jour de l’application et des dépendances
+
+#### Mises à jour de sécurité
+
+Nous suivons les rapports de vulnérabilités sur les composants listés ci-dessus. Dependabot est utilisé pour surveiller
+les vulnérabilités et les mises à jour de versions disponibles.
+
+#### Mises à jour des librairies
+
+Nous suivons les mises à jour des versions des librairies et les intégrons au fil de l’eau et adaptons le code applicatif pour utiliser les versions les plus stables et récentes disponibles et faciliter la maintenance.
+
+#### Mises à jour fonctionnelles
+
+Les mises à jour fonctionnelles sont effectuées en fonction de la roadmap et sont déployées en production régulièrement (environ une fois par semaine), après des tests unitaires, d'integration, et end-to-end pour s'assurer au maximum des non-régressions.
+
 
 ### Schéma de l’architecture
 

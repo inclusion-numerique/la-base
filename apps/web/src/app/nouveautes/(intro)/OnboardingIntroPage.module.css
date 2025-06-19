@@ -1,32 +1,32 @@
 .card {
-    max-width: 582px;
-    margin: 0 auto;
+  max-width: 582px;
+  margin: 0 auto;
 }
 
 .title {
-    font-size: 20px;
+  font-size: 20px;
 
-    @media (min-width: 48em) {
-        font-size: 32px;
-    }
+  @media (min-width: 48em) {
+    font-size: 32px;
+  }
 }
 
 .logo {
-    width: 54px;
-    height: 54px;
+  width: 54px;
+  height: 54px;
 
-    @media (min-width: 48em) {
-        width: 64px;
-        height: 64px;
-    }
+  @media (min-width: 48em) {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 .description {
-    font-size: 18px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 
-    @media (min-width: 48em) {
-        font-size: 20px;
-        font-weight: 700;
-    }
+  @media (min-width: 48em) {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

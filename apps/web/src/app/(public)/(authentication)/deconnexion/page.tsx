@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import type { Metadata } from 'next'
-import { redirect } from 'next/navigation'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SignoutButton from '@app/web/app/(public)/(authentication)/deconnexion/SignoutButton'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getProconnectIdToken } from '@app/web/security/getProconnectIdToken'
+import { contentId } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export const revalidate = 0
 

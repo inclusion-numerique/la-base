@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { Meta, StoryObj } from '@storybook/react'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { createToast } from '@app/ui/toast/createToast'
 import Toaster from '@app/ui/toast/Toaster'
+import { createToast } from '@app/ui/toast/createToast'
+import Button from '@codegouvfr/react-dsfr/Button'
+import { Meta, StoryObj } from '@storybook/react'
+import React, { useEffect } from 'react'
 
 const meta: Meta<typeof Toaster> = {
   title: 'Toasts',
@@ -30,17 +30,14 @@ const Template = ({ action }: { action?: boolean }) => {
     })
   }
 
-  useEffect(
-    () => {
-      createToast({
-        priority: 'success',
-        message: 'Un nouveau toast de succès total',
-        action: actionParams,
-      })
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we don't want to trigger the effect  when actionParams change
+  useEffect(() => {
+    createToast({
+      priority: 'success',
+      message: 'Un nouveau toast de succès total',
+      action: actionParams,
+    })
+  }, [])
 
   return (
     <>

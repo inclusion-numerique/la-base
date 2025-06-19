@@ -1,6 +1,6 @@
-import { v4 } from 'uuid'
-import { createSlug } from '@app/web/utils/createSlug'
 import type { CreateCollectionInput } from '@app/e2e/tasks/handlers/user.tasks'
+import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
 
 export const defaultTestCollectionTitle =
   '10 ressources qui vont changer votre vie'

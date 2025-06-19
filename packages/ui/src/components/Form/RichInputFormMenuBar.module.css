@@ -18,7 +18,7 @@
   height: var(--menu-size);
   outline-offset: 0 !important;
 
-  &:hover&:not(.active) {
+  &:hover:not(.active) {
     background-color: var(--grey-975-75-hover) !important;
   }
 

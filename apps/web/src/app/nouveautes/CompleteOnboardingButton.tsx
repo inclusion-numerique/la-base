@@ -1,14 +1,14 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import * as Sentry from '@sentry/nextjs'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import { hasSeenOnboardingV2Cookie } from '@app/web/app/nouveautes/onboardingV2Cookie'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import { hasSeenOnboardingV2Cookie } from '@app/web/app/nouveautes/onboardingV2Cookie'
+import Button from '@codegouvfr/react-dsfr/Button'
+import * as Sentry from '@sentry/nextjs'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 const CompleteOnboardingButton = ({ user }: { user?: SessionUser | null }) => {
   const router = useRouter()

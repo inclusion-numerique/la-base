@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 export const isFirewallUserAgent = (request: NextRequest): boolean => {
   const userAgent = request.headers.get('user-agent') || ''

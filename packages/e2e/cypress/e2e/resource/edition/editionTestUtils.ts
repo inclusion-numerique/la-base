@@ -1,17 +1,17 @@
-import { v4 } from 'uuid'
-import type { SessionUser } from '@app/web/auth/sessionUser'
-import { givenUser } from '@app/e2e/support/given/givenUser'
 import { givenBase } from '@app/e2e/support/given/givenBase'
+import { givenCollection } from '@app/e2e/support/given/givenCollection'
 import {
   createTestPublishResourceCommand,
   createTestResourceCommands,
 } from '@app/e2e/support/given/givenResourceCommands'
-import { givenCollection } from '@app/e2e/support/given/givenCollection'
+import { givenUser } from '@app/e2e/support/given/givenUser'
 import type {
   CreateBaseInput,
   CreateUserInput,
 } from '@app/e2e/tasks/handlers/user.tasks'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { ResourceFeedbackStatus } from '@app/web/components/Resource/feedbackBadge/resourceFeedbackBadge.Status'
+import { v4 } from 'uuid'
 import { addFeedbackToResource } from '../avis/avisTestUtils'
 
 export const cleanUpAndCreateTestResource = (

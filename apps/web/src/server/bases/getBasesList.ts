@@ -1,7 +1,8 @@
-import type { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { getBaseResourcesViewsCount } from '@app/web/server/bases/baseResources'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import type { Prisma } from '@prisma/client'
 
 const getWhereBasesList = (
   user?: Pick<SessionUser, 'id'> | null,
@@ -41,8 +42,7 @@ const getWhereBasesProfileList = (
 ) =>
   getWhereBasesList(user, {
     OR: [
-      { createdById: profileId },
-      { members: { some: { memberId: profileId } } },
+      { members: { some: { memberId: profileId, accepted: { not: null } } } },
     ],
   })
 
@@ -66,6 +66,41 @@ export const getProfileBasesCount = async (
     where,
   })
 }
+
+export const computeBasesListResourcesWhereForUser = (
+  user?: Pick<SessionUser, 'id'> | null,
+) => ({
+  OR: [
+    // Public published resources (visible to all users)
+    {
+      deleted: null,
+      published: { not: null },
+      isPublic: true,
+    },
+    // All resources created by the querying user (any status)
+    user?.id
+      ? {
+          deleted: null,
+          createdById: user.id,
+        }
+      : null,
+    // All resources if user is a member
+    user?.id
+      ? {
+          deleted: null,
+          base: {
+            deleted: null,
+            members: {
+              some: {
+                accepted: { not: null },
+                memberId: user.id,
+              },
+            },
+          },
+        }
+      : null,
+  ].filter(isDefinedAndNotNull),
+})
 
 export const baseSelect = (user: { id: string } | null) =>
   ({
@@ -96,38 +131,7 @@ export const baseSelect = (user: { id: string } | null) =>
     _count: {
       select: {
         resources: {
-          where: {
-            OR: [
-              // Public published resources (visible to all users)
-              {
-                deleted: null,
-                published: { not: null },
-                isPublic: true,
-              },
-              // All resources created by the querying user (any status)
-              user?.id
-                ? {
-                    deleted: null,
-                    createdById: user.id,
-                  }
-                : null,
-              // All resources if user is a member
-              user?.id
-                ? {
-                    deleted: null,
-                    base: {
-                      deleted: null,
-                      members: {
-                        some: {
-                          accepted: { not: null },
-                          memberId: user.id,
-                        },
-                      },
-                    },
-                  }
-                : null,
-            ].filter(isDefinedAndNotNull),
-          },
+          where: computeBasesListResourcesWhereForUser(user),
         },
         followedBy: true,
       },
@@ -139,10 +143,50 @@ export const getProfileBases = async (
   user: Pick<SessionUser, 'id'> | null,
 ) => {
   const where = getWhereBasesProfileList(profileId, user)
-  return prismaClient.base.findMany({
-    select: baseSelect(user),
+  const bases = await prismaClient.base.findMany({
+    select: {
+      ...baseSelect(user),
+      resources: {
+        where: computeBasesListResourcesWhereForUser(user),
+        include: {
+          contributors: {
+            select: {
+              contributorId: true,
+            },
+          },
+        },
+      },
+      members: {
+        where: {
+          accepted: { not: null },
+        },
+        select: {
+          baseId: true,
+          accepted: true,
+          memberId: true,
+          member: true,
+          isAdmin: true,
+        },
+      },
+    },
     where,
   })
+  const baseIds = bases.map(({ id }) => id)
+
+  const baseResourcesViewsCounts = await getBaseResourcesViewsCount(
+    baseIds,
+    computeBasesListResourcesWhereForUser(user),
+  )
+
+  return bases.map((base) => ({
+    ...base,
+    _count: {
+      ...base._count,
+      resourcesViews:
+        baseResourcesViewsCounts.find(({ baseId }) => baseId === base.id)?._sum
+          .viewsCount ?? 0,
+    },
+  }))
 }
 
 export const getBases = async ({
@@ -165,6 +209,8 @@ export const getBases = async ({
   })
 }
 
+export type ProfileBasesList = Awaited<ReturnType<typeof getProfileBases>>
+
 export const getBasesCount = ({
   user,
   query,
@@ -176,7 +222,19 @@ export const getBasesCount = ({
     where: getWhereBasesList(user, getWhereBasesQuery(query)),
   })
 
-export type BaseListItem = Exclude<
+export type BaseProfileListItemWithAllFields = Exclude<
   Awaited<ReturnType<typeof getProfileBases>>,
   null
 >[number]
+
+type OptionalFields = {
+  resources?: BaseProfileListItemWithAllFields['resources']
+  members?: BaseProfileListItemWithAllFields['members']
+}
+
+type RequiredFields = Omit<
+  BaseProfileListItemWithAllFields,
+  'resources' | 'members'
+>
+
+export type BaseProfileListItem = RequiredFields & OptionalFields

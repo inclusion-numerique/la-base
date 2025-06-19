@@ -1,6 +1,6 @@
-import type { TRPCRequestInfo } from '@trpc/server/http'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import type { AppContext } from '@app/web/server/rpc/createContext'
+import type { TRPCRequestInfo } from '@trpc/server/http'
 
 export const testContextInfo = {
   accept: null,
@@ -9,6 +9,7 @@ export const testContextInfo = {
   calls: [],
   connectionParams: null,
   signal: new AbortController().signal,
+  url: null,
 } satisfies TRPCRequestInfo
 
 export const createTestContext = ({

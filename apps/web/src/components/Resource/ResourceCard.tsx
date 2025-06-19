@@ -1,15 +1,15 @@
-import React from 'react'
-import classNames from 'classnames'
-import Link from 'next/link'
-import Button from '@codegouvfr/react-dsfr/Button'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
-import { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
-import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import ResourceDates from '@app/web/components/Resource/ResourceDates'
+import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
+import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
+import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
+import Link from 'next/link'
+import React from 'react'
 import { getServerUrl } from '../../utils/baseUrl'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'
@@ -105,6 +105,7 @@ const ResourceCard = ({
               priority="tertiary no outline"
               linkProps={{
                 href: `/ressources/${resource.slug}/editer`,
+                prefetch: false,
               }}
             >
               <span className="fr-unhidden-sm fr-hidden fr-mr-1w">

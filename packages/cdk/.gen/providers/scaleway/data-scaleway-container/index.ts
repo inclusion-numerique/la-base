@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayContainerConfig extends cdktf.TerraformMetaArgument
   /**
   * The ID of the Container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#container_id DataScalewayContainer#container_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#container_id DataScalewayContainer#container_id}
   */
   readonly containerId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#id DataScalewayContainer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#id DataScalewayContainer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,277 @@ export interface DataScalewayContainerConfig extends cdktf.TerraformMetaArgument
   /**
   * The container name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#name DataScalewayContainer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#name DataScalewayContainer#name}
   */
   readonly name?: string;
   /**
   * The ID of the Container namespace
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#namespace_id DataScalewayContainer#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#namespace_id DataScalewayContainer#namespace_id}
   */
   readonly namespaceId: string;
   /**
   * The ID of the project to filter the Container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#project_id DataScalewayContainer#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#project_id DataScalewayContainer#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#region DataScalewayContainer#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#region DataScalewayContainer#region}
   */
   readonly region?: string;
 }
+export interface DataScalewayContainerHealthCheckHttp {
+}
+
+export function dataScalewayContainerHealthCheckHttpToTerraform(struct?: DataScalewayContainerHealthCheckHttp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayContainerHealthCheckHttpToHclTerraform(struct?: DataScalewayContainerHealthCheckHttp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayContainerHealthCheckHttpOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayContainerHealthCheckHttp | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayContainerHealthCheckHttp | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // path - computed: true, optional: false, required: false
+  public get path() {
+    return this.getStringAttribute('path');
+  }
+}
+
+export class DataScalewayContainerHealthCheckHttpList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayContainerHealthCheckHttpOutputReference {
+    return new DataScalewayContainerHealthCheckHttpOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayContainerHealthCheck {
+}
+
+export function dataScalewayContainerHealthCheckToTerraform(struct?: DataScalewayContainerHealthCheck): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayContainerHealthCheckToHclTerraform(struct?: DataScalewayContainerHealthCheck): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayContainerHealthCheckOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayContainerHealthCheck | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayContainerHealthCheck | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // failure_threshold - computed: true, optional: false, required: false
+  public get failureThreshold() {
+    return this.getNumberAttribute('failure_threshold');
+  }
+
+  // http - computed: true, optional: false, required: false
+  private _http = new DataScalewayContainerHealthCheckHttpList(this, "http", true);
+  public get http() {
+    return this._http;
+  }
+
+  // interval - computed: true, optional: false, required: false
+  public get interval() {
+    return this.getStringAttribute('interval');
+  }
+}
+
+export class DataScalewayContainerHealthCheckList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayContainerHealthCheckOutputReference {
+    return new DataScalewayContainerHealthCheckOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayContainerScalingOption {
+}
+
+export function dataScalewayContainerScalingOptionToTerraform(struct?: DataScalewayContainerScalingOption): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayContainerScalingOptionToHclTerraform(struct?: DataScalewayContainerScalingOption): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayContainerScalingOptionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayContainerScalingOption | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayContainerScalingOption | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // concurrent_requests_threshold - computed: true, optional: false, required: false
+  public get concurrentRequestsThreshold() {
+    return this.getNumberAttribute('concurrent_requests_threshold');
+  }
+
+  // cpu_usage_threshold - computed: true, optional: false, required: false
+  public get cpuUsageThreshold() {
+    return this.getNumberAttribute('cpu_usage_threshold');
+  }
+
+  // memory_usage_threshold - computed: true, optional: false, required: false
+  public get memoryUsageThreshold() {
+    return this.getNumberAttribute('memory_usage_threshold');
+  }
+}
+
+export class DataScalewayContainerScalingOptionList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayContainerScalingOptionOutputReference {
+    return new DataScalewayContainerScalingOptionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container scaleway_container}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container scaleway_container}
 */
 export class DataScalewayContainer extends cdktf.TerraformDataSource {
 
@@ -63,7 +309,7 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayContainer resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayContainer to import
-  * @param importFromId The id of the existing DataScalewayContainer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayContainer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayContainer to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -75,7 +321,7 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/container scaleway_container} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/container scaleway_container} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -86,8 +332,8 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_container',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -161,6 +407,12 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
     return this.getStringAttribute('error_message');
   }
 
+  // health_check - computed: true, optional: false, required: false
+  private _healthCheck = new DataScalewayContainerHealthCheckList(this, "health_check", true);
+  public get healthCheck() {
+    return this._healthCheck;
+  }
+
   // http_option - computed: true, optional: false, required: false
   public get httpOption() {
     return this.getStringAttribute('http_option');
@@ -180,6 +432,11 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get idInput() {
     return this._id;
+  }
+
+  // local_storage_limit - computed: true, optional: false, required: false
+  public get localStorageLimit() {
+    return this.getNumberAttribute('local_storage_limit');
   }
 
   // max_concurrency - computed: true, optional: false, required: false
@@ -291,6 +548,12 @@ export class DataScalewayContainer extends cdktf.TerraformDataSource {
   // sandbox - computed: true, optional: false, required: false
   public get sandbox() {
     return this.getStringAttribute('sandbox');
+  }
+
+  // scaling_option - computed: true, optional: false, required: false
+  private _scalingOption = new DataScalewayContainerScalingOptionList(this, "scaling_option", true);
+  public get scalingOption() {
+    return this._scalingOption;
   }
 
   // secret_environment_variables - computed: true, optional: false, required: false

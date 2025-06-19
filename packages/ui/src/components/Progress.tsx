@@ -25,10 +25,7 @@ const Progress = ({
       <div className={styles.bar}>
         {segmentsList.map((_, index) => (
           <div
-            key={
-              // eslint-disable-next-line react/no-array-index-key
-              index
-            }
+            key={index}
             className={classNames(
               styles.segment,
               progression > index && styles.filled,

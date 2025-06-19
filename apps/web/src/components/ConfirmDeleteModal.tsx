@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactNode, useState } from 'react'
-import Input from '@codegouvfr/react-dsfr/Input'
-import { ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import Input from '@codegouvfr/react-dsfr/Input'
+import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
+import React, { type ReactElement, type ReactNode, useState } from 'react'
 
 export const ConfirmDeleteModal = ({
   title,
@@ -50,7 +50,6 @@ export const ConfirmDeleteModal = ({
       <Input
         label={`Écrivez “${confirmText}” dans le champ ci-dessous`}
         nativeInputProps={{
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore: wrong dsfr type
           'data-testid': 'modal-input',
           onChange: (event) => {

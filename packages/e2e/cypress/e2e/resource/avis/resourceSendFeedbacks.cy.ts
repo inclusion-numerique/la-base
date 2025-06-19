@@ -1,5 +1,5 @@
-import { appUrl } from '@app/e2e/support/helpers'
 import { givenUser } from '@app/e2e/support/given/givenUser'
+import { appUrl } from '@app/e2e/support/helpers'
 import { cleanUpAndCreateTestPublishedResource } from '../edition/editionTestUtils'
 
 describe("Ajout d'un avis sur une ressource", () => {

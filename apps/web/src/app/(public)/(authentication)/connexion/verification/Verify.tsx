@@ -1,9 +1,10 @@
-import { cookies } from 'next/headers'
-import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
+import { cookies } from 'next/headers'
 
-export const Verify = () => {
-  const email = cookies().get('email-signin')?.value
+export const Verify = async () => {
+  const cookieStore = await cookies()
+  const email = cookieStore.get('email-signin')?.value
   return (
     <AuthCard>
       <div className="fr-grid-row fr-grid-row--center">

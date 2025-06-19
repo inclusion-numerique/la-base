@@ -2,8 +2,8 @@
  * Allows to specify a deployed application / database target for the CLI.
  */
 import * as process from 'node:process'
-import { Option } from '@commander-js/extra-typings'
 import { output } from '@app/cli/output'
+import { Option } from '@commander-js/extra-typings'
 
 export const DeploymentTargetOption = new Option(
   '--deployment <branch>',

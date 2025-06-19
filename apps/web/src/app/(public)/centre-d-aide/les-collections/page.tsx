@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-import Notice from '@codegouvfr/react-dsfr/Notice'
-import Link from 'next/link'
+import Newsletter from '@app/web/app/(public)/Newsletter'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
-import Newsletter from '@app/web/app/(public)/Newsletter'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import CollectionsSideMenu from './CollectionsSideMenu'
 
 export const revalidate = 0

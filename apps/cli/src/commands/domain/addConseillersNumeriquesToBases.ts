@@ -1,10 +1,10 @@
-import { Command } from '@commander-js/extra-typings'
-import { prismaClient } from '@app/web/prismaClient'
-import { output } from '@app/cli/output'
 import {
-  configureDeploymentTarget,
   DeploymentTargetOption,
+  configureDeploymentTarget,
 } from '@app/cli/deploymentTarget'
+import { output } from '@app/cli/output'
+import { prismaClient } from '@app/web/prismaClient'
+import { Command } from '@commander-js/extra-typings'
 
 export const addConseillersNumeriquesToBases = new Command(
   'domain:add-conseillers-numeriques-to-bases',

@@ -1,5 +1,5 @@
-import { givenUser } from '@app/e2e/support/given/givenUser'
 import { goToMostRecentEmailReceived } from '@app/e2e/e2e/goToMostRecentEmailReceived'
+import { givenUser } from '@app/e2e/support/given/givenUser'
 import { cleanUpAndCreateTestResource } from './edition/editionTestUtils'
 
 describe('Utilisateur connecté, je peux inviter un autre membre à contribuer sur ma ressource', () => {

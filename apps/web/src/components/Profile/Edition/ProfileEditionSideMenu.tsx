@@ -1,5 +1,5 @@
-import React from 'react'
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
+import React from 'react'
 
 const profileSections = [
   { id: 'informations', title: 'Informations' },

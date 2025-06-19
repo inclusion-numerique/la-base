@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayVpcPublicGatewayDhcpReservationConfig extends cdktf
   /**
   * The ID of the owning GatewayNetwork (UUID format).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#gateway_network_id DataScalewayVpcPublicGatewayDhcpReservation#gateway_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#gateway_network_id DataScalewayVpcPublicGatewayDhcpReservation#gateway_network_id}
   */
   readonly gatewayNetworkId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#id DataScalewayVpcPublicGatewayDhcpReservation#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#id DataScalewayVpcPublicGatewayDhcpReservation#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,31 @@ export interface DataScalewayVpcPublicGatewayDhcpReservationConfig extends cdktf
   /**
   * The MAC address to give a static entry to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#mac_address DataScalewayVpcPublicGatewayDhcpReservation#mac_address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#mac_address DataScalewayVpcPublicGatewayDhcpReservation#mac_address}
   */
   readonly macAddress?: string;
   /**
   * The ID of dhcp entry reservation
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#reservation_id DataScalewayVpcPublicGatewayDhcpReservation#reservation_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#reservation_id DataScalewayVpcPublicGatewayDhcpReservation#reservation_id}
   */
   readonly reservationId?: string;
   /**
   * Wait the MAC address in dhcp entries
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#wait_for_dhcp DataScalewayVpcPublicGatewayDhcpReservation#wait_for_dhcp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#wait_for_dhcp DataScalewayVpcPublicGatewayDhcpReservation#wait_for_dhcp}
   */
   readonly waitForDhcp?: boolean | cdktf.IResolvable;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#zone DataScalewayVpcPublicGatewayDhcpReservation#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#zone DataScalewayVpcPublicGatewayDhcpReservation#zone}
   */
   readonly zone?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation}
 */
 export class DataScalewayVpcPublicGatewayDhcpReservation extends cdktf.TerraformDataSource {
 
@@ -63,7 +63,7 @@ export class DataScalewayVpcPublicGatewayDhcpReservation extends cdktf.Terraform
   * Generates CDKTF code for importing a DataScalewayVpcPublicGatewayDhcpReservation resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcPublicGatewayDhcpReservation to import
-  * @param importFromId The id of the existing DataScalewayVpcPublicGatewayDhcpReservation that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcPublicGatewayDhcpReservation that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcPublicGatewayDhcpReservation to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -75,7 +75,7 @@ export class DataScalewayVpcPublicGatewayDhcpReservation extends cdktf.Terraform
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_public_gateway_dhcp_reservation scaleway_vpc_public_gateway_dhcp_reservation} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -86,8 +86,8 @@ export class DataScalewayVpcPublicGatewayDhcpReservation extends cdktf.Terraform
       terraformResourceType: 'scaleway_vpc_public_gateway_dhcp_reservation',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

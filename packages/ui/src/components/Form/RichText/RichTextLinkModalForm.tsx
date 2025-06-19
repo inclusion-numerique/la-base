@@ -1,13 +1,13 @@
 'use client'
 
-import React, { FormEventHandler, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import z from 'zod'
-import { createPortal } from 'react-dom'
-import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
+import { createModal } from '@codegouvfr/react-dsfr/Modal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { FormEventHandler, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
 
 export const RichTextLinkModal = createModal({
   id: 'rich-input-form-link-config',

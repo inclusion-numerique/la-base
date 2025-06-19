@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from 'react'
-import { redirect } from 'next/navigation'
-import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import PaginationNav from '@app/web/components/PaginationNav'
+import type { PaginationParams } from '@app/web/server/search/searchQueryParams'
+import { redirect } from 'next/navigation'
+import React, { type PropsWithChildren } from 'react'
 
 const SearchResults = ({
   paginationParams,

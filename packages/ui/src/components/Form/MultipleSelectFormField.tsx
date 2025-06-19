@@ -1,9 +1,9 @@
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import SelectOptionsList from '@app/ui/components/Form/SelectOptionsList'
+import classNames from 'classnames'
 import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import type { FieldPath } from 'react-hook-form/dist/types/path'
-import classNames from 'classnames'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import SelectOptionsList from '@app/ui/components/Form/SelectOptionsList'
 import type { SelectInputOption, SelectOption } from './utils/options'
 
 const OptionBadge = ({
@@ -84,8 +84,6 @@ const MultipleSelectFormField = <T extends FieldValues>({
           event,
         ) => {
           onChange(
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: force type as string[]
             value ? [...value, event.target.value] : [event.target.value],
           )
         }
@@ -97,8 +95,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
         // Remove value on badge click
         const onTagClick = (option: SelectOption) => {
           onChange(
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
-            value.filter(
+            (value as string[]).filter(
               (selectedValue: string) => selectedValue !== option.value,
             ),
           )

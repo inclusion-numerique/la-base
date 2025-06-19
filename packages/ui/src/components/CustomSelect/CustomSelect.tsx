@@ -1,5 +1,5 @@
-/* eslint react/destructuring-assignment: 0 */
-
+import { Spinner } from '@app/web/ui/Spinner'
+import dynamic from 'next/dynamic'
 import React, { ReactNode } from 'react'
 import type {
   GroupBase,
@@ -10,8 +10,6 @@ import type {
 import Select from 'react-select'
 import type { AsyncProps } from 'react-select/async'
 import AsyncSelect from 'react-select/async'
-import { Spinner } from '@app/web/ui/Spinner'
-import dynamic from 'next/dynamic'
 import styles from './CustomSelect.module.css'
 
 export type CustomSelectProps<
@@ -75,7 +73,6 @@ const noOptionsMessage = (): ReactNode => (
 
 // Fix failing hydration from server component to client side
 // See https://github.com/JedWatson/react-select/issues/5459
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const DynamicValueContainer = dynamic(
   () =>
     import('react-select').then((module_) => module_.components.ValueContainer),
@@ -85,9 +82,7 @@ const DynamicValueContainer = dynamic(
       <span className="fr-border-radius--8" style={{ width: 16, height: 42 }} />
     ),
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ) as any
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ValueContainer = (props: any) => (
   <DynamicValueContainer {...props} aria-activedescendant={undefined} />
 )
@@ -111,6 +106,7 @@ const CustomSelect = <
     container: () => styles.container,
     control: () => styles.control,
     valueContainer: () => styles.valueContainer,
+    ...props.classNames,
   }
 
   const componentsWithValueContainer: SelectComponentsConfig<
@@ -122,7 +118,6 @@ const CustomSelect = <
     ...components,
   }
 
-  // eslint-disable-next-line react/destructuring-assignment
   if (props.loadOptions) {
     return (
       <AsyncSelect

@@ -1,6 +1,6 @@
+import { ContainerCron } from '@app/scaleway/container-cron'
 import type { Job } from '@app/web/jobs/jobs'
 import type { Construct } from 'constructs'
-import { ContainerCron } from '@app/scaleway/container-cron'
 
 /**
  * See https://www.scaleway.com/en/docs/serverless/containers/concepts/#trigger

@@ -1,20 +1,20 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Notice from '@codegouvfr/react-dsfr/Notice'
+import ResourceIndexationView from '@app/web/app/(public)/ressources/[slug]/_components/ResourceIndexationView'
+import EditCard from '@app/web/components/EditCard'
+import ResourceIndexationEdition from '@app/web/components/Resource/Edition/Parameters/ResourceIndexationEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { trpc } from '@app/web/trpc'
 import {
-  ChangeIndexationCommand,
+  type ChangeIndexationCommand,
   ChangeIndexationCommandValidation,
 } from '@app/web/server/resources/feature/ChangeIndexation'
-import { Resource } from '@app/web/server/resources/getResource'
-import EditCard from '@app/web/components/EditCard'
+import type { Resource } from '@app/web/server/resources/getResource'
+import { trpc } from '@app/web/trpc'
 import { hasIndexation } from '@app/web/utils/indexation'
-import ResourceIndexationEdition from '@app/web/components/Resource/Edition/Parameters/ResourceIndexationEdition'
-import ResourceIndexationView from '@app/web/app/(public)/ressources/[slug]/_components/ResourceIndexationView'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React from 'react'
+import { useForm } from 'react-hook-form'
 import styles from './ResourceIndexation.module.css'
 
 const ResourceIndexation = ({ resource }: { resource: Resource }) => {

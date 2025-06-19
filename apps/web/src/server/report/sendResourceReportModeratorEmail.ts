@@ -1,11 +1,11 @@
-import { Resource, ResourceReport, User } from '@prisma/client'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { resourceReportReasonLabels } from '@app/web/resources/resourceReport'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
-import { resourceReportReasonLabels } from '@app/web/resources/resourceReport'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import type { Resource, ResourceReport, User } from '@prisma/client'
 
 export const sendResourceReportModeratorEmail = async ({
   report,

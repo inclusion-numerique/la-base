@@ -1,11 +1,11 @@
-import React from 'react'
-import { SessionUser } from '@app/web/auth/sessionUser'
-import { BaseResource } from '@app/web/server/bases/getBase'
-import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
-  resourceAuthorization,
   ResourcePermissions,
+  resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
+import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import React from 'react'
 import styles from './ResourceTab.module.css'
 
 const ResourceTab = ({
@@ -18,7 +18,7 @@ const ResourceTab = ({
   resources: BaseResource[]
   user: SessionUser | null
   emptyText: string
-  ['data-testid']: string
+  'data-testid': string
   isDraft?: boolean
 }) => (
   <div data-testid={dataTestId}>

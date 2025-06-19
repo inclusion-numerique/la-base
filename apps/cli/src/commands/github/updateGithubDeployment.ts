@@ -1,6 +1,6 @@
-import { Argument, Command } from '@commander-js/extra-typings'
 import { octokit, owner, repo } from '@app/cli/github'
 import { output } from '@app/cli/output'
+import { Argument, Command } from '@commander-js/extra-typings'
 
 const DeploymentStates = [
   'error',

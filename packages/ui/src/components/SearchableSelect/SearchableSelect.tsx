@@ -1,14 +1,14 @@
+import Input from '@codegouvfr/react-dsfr/Input'
+import classNames from 'classnames'
 import React, {
+  type ReactNode,
   Dispatch,
-  ReactNode,
   SetStateAction,
   useCallback,
   useMemo,
   useRef,
   useState,
 } from 'react'
-import classNames from 'classnames'
-import Input from '@codegouvfr/react-dsfr/Input'
 import Options, { Option } from './Options'
 import styles from './SearchableSelect.module.css'
 
@@ -70,13 +70,13 @@ const SearchableSelect = <T extends string>({
       setInputValue(option.label)
       setSelected(option.value)
     },
-    [setInputValue, setSelected],
+    [setSelected],
   )
 
   const unselect = useCallback(() => {
     setInputValue('')
     setSelected('')
-  }, [setInputValue, setSelected])
+  }, [setSelected])
 
   const onInternalFocus = useCallback(() => {
     unselect()
@@ -103,7 +103,6 @@ const SearchableSelect = <T extends string>({
   return (
     <div className={styles.input}>
       {!withoutButton && (
-        // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button
           type="button"
           title="Effacer la recherche"

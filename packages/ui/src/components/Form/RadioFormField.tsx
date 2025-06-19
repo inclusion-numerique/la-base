@@ -1,16 +1,10 @@
-import classNames from 'classnames'
-import React, { type ComponentType, type CSSProperties, ReactNode } from 'react'
-import {
-  Control,
-  Controller,
-  FieldValues,
-  Path,
-  PathValue,
-} from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
+import classNames from 'classnames'
+import React, { type ComponentType, type CSSProperties, ReactNode } from 'react'
+import { Control, Controller, FieldValues } from 'react-hook-form'
+import { FieldPath } from 'react-hook-form/dist/types/path'
 
 export type LabelComponentPropsType<O extends SelectOption> = {
   option: O
@@ -45,6 +39,7 @@ export type RadioFormFieldProps<
     fieldsetElement?: string
     radioGroup?: string
   }
+  startIndex?: number
 }
 
 const RadioFormField = <
@@ -63,6 +58,7 @@ const RadioFormField = <
   small,
   className,
   asterisk,
+  startIndex = 0,
   style,
   classes,
   components,
@@ -120,7 +116,7 @@ const RadioFormField = <
                     ? undefined
                     : ({
                         option,
-                        htmlFor: `${id}__${index}`,
+                        htmlFor: `${id}__${index + startIndex}`,
                         className: classes?.label,
                         ...components?.labelProps,
                       } as LabelComponentProps)
@@ -152,12 +148,12 @@ const RadioFormField = <
                         }`}
                         defaultChecked={value === option.value}
                         type="radio"
-                        id={`${id}__${index}`}
+                        id={`${id}__${index + startIndex}`}
                         disabled={disabled}
                         onBlur={onBlur}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onChange(option.value as PathValue<T, Path<T>>)
+                            onChange(option.value)
                           }
                         }}
                         className={classes?.input}
@@ -166,7 +162,10 @@ const RadioFormField = <
                         ref={ref}
                       />
                       {LabelComponent === 'label' ? (
-                        <label className="fr-label" htmlFor={`${id}__${index}`}>
+                        <label
+                          className="fr-label"
+                          htmlFor={`${id}__${index + startIndex}`}
+                        >
                           {option.label}
                           {option.hint && (
                             <span className="fr-hint-text">{option.hint}</span>

@@ -1,12 +1,12 @@
+import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
+import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/react'
-import { SelectOption } from './utils/options'
 import MultipleSelectFormField, {
   MultipleSelectFormFieldProps,
 } from './MultipleSelectFormField'
+import { SelectOption } from './utils/options'
 
 const choices = Array.from({ length: 20 }, (_, index) => `choice-${index}`) as [
   string,

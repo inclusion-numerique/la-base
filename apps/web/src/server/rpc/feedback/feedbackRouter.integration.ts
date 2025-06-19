@@ -1,8 +1,8 @@
+import type { SendFeedbackData } from '@app/web/feedback/SendFeedback'
+import { prismaClient } from '@app/web/prismaClient'
+import { sendNewFeedbackModeratorEmail } from '@app/web/server/feedback/sendNewFeedbackModeratorEmail'
 import { feedbackRouter } from '@app/web/server/rpc/feedback/feedbackRouter'
 import { createTestContext } from '@app/web/test/createTestContext'
-import { prismaClient } from '@app/web/prismaClient'
-import { SendFeedbackData } from '@app/web/feedback/SendFeedback'
-import { sendNewFeedbackModeratorEmail } from '@app/web/server/feedback/sendNewFeedbackModeratorEmail'
 
 jest.mock('@app/web/server/feedback/sendNewFeedbackModeratorEmail')
 
@@ -15,7 +15,6 @@ describe('feedbackRouter', () => {
   // Helper function to easily test procedures
   const feedbacksToDelete: string[] = []
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const executeSendFeedbackProcedure = (input: SendFeedbackData) =>
     feedbackRouter.createCaller(createTestContext({ user: null })).send(input)
 

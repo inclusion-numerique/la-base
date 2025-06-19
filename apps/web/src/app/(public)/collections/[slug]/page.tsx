@@ -1,27 +1,29 @@
-import { notFound } from 'next/navigation'
-import React from 'react'
-import type { Metadata } from 'next'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import PrivateBox from '@app/web/components/PrivateBox'
-import { getCollection } from '@app/web/server/collections/getCollection'
-import CollectionView from '@app/web/components/Collection/CollectionView'
-import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
-import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
 import {
-  collectionAuthorization,
   CollectionPermissions,
   CollectionRoles,
+  collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
 import BackButton from '@app/web/components/BackButton'
+import CollectionView from '@app/web/components/Collection/CollectionView'
+import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
+import PrivateBox from '@app/web/components/PrivateBox'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
+import { getCollection } from '@app/web/server/collections/getCollection'
+import { contentId } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import React from 'react'
 
 export const generateMetadata = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> => {
+  const { slug } = await params
+
   const collection = await prismaClient.collection.findUnique({
     where: {
       slug,
@@ -29,6 +31,7 @@ export const generateMetadata = async ({
     select: {
       title: true,
       description: true,
+      isPublic: true,
     },
   })
   if (!collection) {
@@ -38,12 +41,16 @@ export const generateMetadata = async ({
   return {
     title: metadataTitle(collection.title),
     description: collection.description || undefined,
+    robots: collection.isPublic ? undefined : 'noindex, nofollow',
   }
 }
 
-const CollectionPage = async ({ params }: { params: { slug: string } }) => {
+const CollectionPage = async ({
+  params,
+}: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const user = await getSessionUser()
-  const collection = await getCollection({ slug: decodeURI(params.slug) }, user)
+  const collection = await getCollection({ slug: decodeURI(slug) }, user)
 
   if (!collection) {
     notFound()

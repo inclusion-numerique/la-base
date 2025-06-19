@@ -1,3 +1,5 @@
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import type {
   ChangeEventHandler,
@@ -7,8 +9,6 @@ import type {
 } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 
 type CommonProps<T extends FieldValues> = {
   control: Control<T>
@@ -19,10 +19,10 @@ type CommonProps<T extends FieldValues> = {
   placeholder?: string
   valid?: string
   icon?: string
-  error?: string
   info?: ReactNode | ((value?: string | null) => ReactNode)
   asterisk?: boolean
   classes?: {
+    container?: string
     label?: string
     input?: string
     inputWrap?: string
@@ -63,7 +63,6 @@ const InputFormField = <T extends FieldValues = FieldValues>({
   icon,
   info,
   asterisk,
-  error: errorProperty,
   classes,
   inputPost,
   inputPre,
@@ -171,12 +170,14 @@ const InputFormField = <T extends FieldValues = FieldValues>({
                 {typeof info === 'function' ? info(value) : info}
               </p>
             )}
-            {(error || errorProperty) && (
+            {error && (
               <p
                 id={`${id}__error`}
-                className={classNames('fr-error-text', { 'fr-mt-1v': !!info })}
+                className={classNames('fr-error-text fr-width-full', {
+                  'fr-mt-1v': !!info,
+                })}
               >
-                {error?.message || errorProperty || null}
+                {error.message}
               </p>
             )}
             {valid && isTouched && !invalid && (

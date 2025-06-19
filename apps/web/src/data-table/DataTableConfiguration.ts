@@ -1,9 +1,8 @@
-import type { ReactNode } from 'react'
 import type { SelectInputOption } from '@app/ui/components/Form/utils/options'
-import type { Sql } from '@prisma/client/runtime/library'
 import type { SortDirection } from '@app/web/data-table/SortLink'
+import type { Sql } from '@prisma/client/runtime/library'
+import type { ReactNode } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DataTableRow = any
 
 export type DataTableFilter<

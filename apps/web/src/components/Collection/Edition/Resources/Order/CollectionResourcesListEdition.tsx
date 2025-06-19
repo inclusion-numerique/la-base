@@ -1,11 +1,12 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
-import { AnimatePresence, Reorder } from 'framer-motion'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
 import DraggableResourceCollectionOrderRow from '@app/web/components/Collection/Edition/Resources/Order/DraggableCollectionResourceOrderRow'
-import { CollectionResourceListItem } from '@app/web/server/collections/getCollection'
+import type { CollectionResourceListItem } from '@app/web/server/collections/getCollection'
+import { AnimatePresence, Reorder } from 'framer-motion'
+import type React from 'react'
+import { type Dispatch, type SetStateAction, useRef, useState } from 'react'
 
 const CollectionResourcesListEdition = ({
   resources,
@@ -51,7 +52,6 @@ const CollectionResourcesListEdition = ({
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="fr-mt-md-6w fr-mt-3w"
       role="list"

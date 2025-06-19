@@ -1,5 +1,5 @@
-import React from 'react'
 import CustomTag, { TagColor } from '@app/web/components/CustomTag'
+import React from 'react'
 
 const informations = {
   public: {

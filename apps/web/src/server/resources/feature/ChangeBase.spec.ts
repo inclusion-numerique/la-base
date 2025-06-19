@@ -1,6 +1,6 @@
 import { expectZodValidationToFail } from '@app/test/zodValidationTest'
 import {
-  ChangeBaseCommand,
+  type ChangeBaseCommand,
   ChangeBaseCommandValidation,
 } from '@app/web/server/resources/feature/ChangeBase'
 

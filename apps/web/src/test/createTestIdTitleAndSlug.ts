@@ -1,5 +1,5 @@
-import { v4 } from 'uuid'
 import { createSlug } from '@app/web/utils/createSlug'
+import { v4 } from 'uuid'
 
 export const createTestIdTitleAndSlug = (title: string) => {
   const id = v4()

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayWebhostingConfig extends cdktf.TerraformMetaArgumen
   /**
   * The domain name of the hosting
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#domain DataScalewayWebhosting#domain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#domain DataScalewayWebhosting#domain}
   */
   readonly domain?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#id DataScalewayWebhosting#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#id DataScalewayWebhosting#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayWebhostingConfig extends cdktf.TerraformMetaArgumen
   /**
   * ID of organization the resource is associated to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#organization_id DataScalewayWebhosting#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#organization_id DataScalewayWebhosting#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The project ID the resource is associated to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#project_id DataScalewayWebhosting#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#project_id DataScalewayWebhosting#project_id}
   */
   readonly projectId?: string;
   /**
   * The ID of the Webhosting
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#webhosting_id DataScalewayWebhosting#webhosting_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#webhosting_id DataScalewayWebhosting#webhosting_id}
   */
   readonly webhostingId?: string;
 }
@@ -119,6 +119,91 @@ export class DataScalewayWebhostingCpanelUrlsList extends cdktf.ComplexList {
     return new DataScalewayWebhostingCpanelUrlsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataScalewayWebhostingNameServers {
+}
+
+export function dataScalewayWebhostingNameServersToTerraform(struct?: DataScalewayWebhostingNameServers): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayWebhostingNameServersToHclTerraform(struct?: DataScalewayWebhostingNameServers): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayWebhostingNameServersOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayWebhostingNameServers | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayWebhostingNameServers | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // hostname - computed: true, optional: false, required: false
+  public get hostname() {
+    return this.getStringAttribute('hostname');
+  }
+
+  // is_default - computed: true, optional: false, required: false
+  public get isDefault() {
+    return this.getBooleanAttribute('is_default');
+  }
+
+  // status - computed: true, optional: false, required: false
+  public get status() {
+    return this.getStringAttribute('status');
+  }
+}
+
+export class DataScalewayWebhostingNameServersList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayWebhostingNameServersOutputReference {
+    return new DataScalewayWebhostingNameServersOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataScalewayWebhostingOptions {
 }
 
@@ -199,9 +284,109 @@ export class DataScalewayWebhostingOptionsList extends cdktf.ComplexList {
     return new DataScalewayWebhostingOptionsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataScalewayWebhostingRecords {
+}
+
+export function dataScalewayWebhostingRecordsToTerraform(struct?: DataScalewayWebhostingRecords): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayWebhostingRecordsToHclTerraform(struct?: DataScalewayWebhostingRecords): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayWebhostingRecordsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayWebhostingRecords | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayWebhostingRecords | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // priority - computed: true, optional: false, required: false
+  public get priority() {
+    return this.getNumberAttribute('priority');
+  }
+
+  // status - computed: true, optional: false, required: false
+  public get status() {
+    return this.getStringAttribute('status');
+  }
+
+  // ttl - computed: true, optional: false, required: false
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+
+  // type - computed: true, optional: false, required: false
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+
+  // value - computed: true, optional: false, required: false
+  public get value() {
+    return this.getStringAttribute('value');
+  }
+}
+
+export class DataScalewayWebhostingRecordsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayWebhostingRecordsOutputReference {
+    return new DataScalewayWebhostingRecordsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting scaleway_webhosting}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting scaleway_webhosting}
 */
 export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
 
@@ -217,7 +402,7 @@ export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayWebhosting resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayWebhosting to import
-  * @param importFromId The id of the existing DataScalewayWebhosting that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayWebhosting that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayWebhosting to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -229,7 +414,7 @@ export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/webhosting scaleway_webhosting} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/webhosting scaleway_webhosting} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -240,8 +425,8 @@ export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_webhosting',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -315,6 +500,12 @@ export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
     return this._id;
   }
 
+  // name_servers - computed: true, optional: false, required: false
+  private _nameServers = new DataScalewayWebhostingNameServersList(this, "name_servers", false);
+  public get nameServers() {
+    return this._nameServers;
+  }
+
   // offer_id - computed: true, optional: false, required: false
   public get offerId() {
     return this.getStringAttribute('offer_id');
@@ -376,6 +567,12 @@ export class DataScalewayWebhosting extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get projectIdInput() {
     return this._projectId;
+  }
+
+  // records - computed: true, optional: false, required: false
+  private _records = new DataScalewayWebhostingRecordsList(this, "records", false);
+  public get records() {
+    return this._records;
   }
 
   // region - computed: true, optional: false, required: false

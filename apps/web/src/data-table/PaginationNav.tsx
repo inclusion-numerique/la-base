@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import classNames from 'classnames'
 import {
+  type CreateDataTableHrefParams,
   createDataTableHref,
-  CreateDataTableHrefParams,
 } from '@app/web/data-table/createDataTableHref'
+import classNames from 'classnames'
+import Link from 'next/link'
 
 // Only display at most 6 pages numbered links
 /**
@@ -74,7 +74,6 @@ const PaginationNav = ({
       <ul className="fr-pagination__list">
         <li>
           {isFirstPage ? (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--first"
               aria-disabled="true"
@@ -94,7 +93,6 @@ const PaginationNav = ({
         </li>
         <li>
           {isFirstPage ? (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
               aria-disabled="true"
@@ -116,7 +114,6 @@ const PaginationNav = ({
         {linkablePages.map((linkNumber) =>
           typeof linkNumber === 'string' ? (
             <li key={linkNumber}>
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a className="fr-pagination__link">...</a>
             </li>
           ) : (
@@ -135,7 +132,6 @@ const PaginationNav = ({
         )}
         <li>
           {isLastPage ? (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
               aria-disabled="true"
@@ -155,7 +151,6 @@ const PaginationNav = ({
         </li>
         <li>
           {isLastPage ? (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a
               className="fr-pagination__link fr-pagination__link--last"
               aria-disabled="true"

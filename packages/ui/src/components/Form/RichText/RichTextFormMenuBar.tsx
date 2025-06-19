@@ -1,12 +1,13 @@
-import classNames from 'classnames'
-import React, { MouseEventHandler, useState } from 'react'
-import { Editor } from '@tiptap/react'
 import RichTextLinkModalForm from '@app/ui/components/Form/RichText/RichTextLinkModalForm'
 import {
   EditLinkOptions,
   isSelectionOkForLink,
   linkCommandHandler,
 } from '@app/ui/components/Form/RichText/richTextLinkFeature'
+import { noop } from '@app/web/utils/noop'
+import { Editor } from '@tiptap/react'
+import classNames from 'classnames'
+import React, { MouseEventHandler, useState } from 'react'
 import styles from './RichTextFormMenuBar.module.css'
 
 const MenuButton = ({
@@ -46,7 +47,7 @@ const MenuButton = ({
 
 const RichTextFormMenuBar = ({ editor }: { editor: Editor }) => {
   const [editLink, setEditLink] = useState<EditLinkOptions>({
-    onSubmit: () => {},
+    onSubmit: noop,
   })
 
   const onLinkClick = linkCommandHandler(editor, setEditLink)

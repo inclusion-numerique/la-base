@@ -1,35 +1,34 @@
 'use client'
 
-import React, { FormEvent, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import classNames from 'classnames'
-import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createToast } from '@app/ui/toast/createToast'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import Notice from '@codegouvfr/react-dsfr/Notice'
 import RawModal from '@app/ui/components/Modal/RawModal'
+import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
-import * as Sentry from '@sentry/nextjs'
-import Link from 'next/link'
-import Button from '@codegouvfr/react-dsfr/Button'
+import { createToast } from '@app/ui/toast/createToast'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
-import { trpc } from '@app/web/trpc'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import BaseImage from '@app/web/components/BaseImage'
+import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
+import EmptyBox from '@app/web/components/EmptyBox'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import VisibilityField from '@app/web/components/VisibilityField'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { useIsMobile } from '@app/web/hooks/useIsMobile'
+import { collectionTitleMaxLength } from '@app/web/server/collections/collectionConstraints'
 import {
-  CreateCollectionCommand,
+  type CreateCollectionCommand,
   CreateCollectionCommandValidation,
 } from '@app/web/server/collections/createCollection'
-import { collectionTitleMaxLength } from '@app/web/server/collections/collectionConstraints'
+import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import VisibilityField from '@app/web/components/VisibilityField'
-import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import BaseImage from '@app/web/components/BaseImage'
-import EmptyBox from '@app/web/components/EmptyBox'
-import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
-import { useIsMobile } from '@app/web/hooks/useIsMobile'
+import Button from '@codegouvfr/react-dsfr/Button'
+import Notice from '@codegouvfr/react-dsfr/Notice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import classNames from 'classnames'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import React, { type FormEvent, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import AddOrRemoveResourceFromCollection from './AddOrRemoveResourceFromCollection'
 import SaveInNestedCollection from './SaveInNestedCollection'
 import styles from './SaveResourceInCollectionModal.module.css'
@@ -56,7 +55,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
   const { resourceId } = SaveResourceInCollectionDynamicModal.useState()
   const router = useRouter()
 
-  const bases = getBasesFromSessionUser(user)
+  const bases = user.bases.map(({ base }) => base)
 
   // User can create a collection in a base or in his profile from this modal
   const createCollectionMutation = trpc.collection.create.useMutation()

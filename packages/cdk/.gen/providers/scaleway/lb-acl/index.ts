@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface LbAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * Description of the ACL
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#description LbAcl#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#description LbAcl#description}
   */
   readonly description?: string;
   /**
   * The frontend ID on which the ACL is applied
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#frontend_id LbAcl#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#frontend_id LbAcl#frontend_id}
   */
   readonly frontendId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#id LbAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#id LbAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,31 +29,31 @@ export interface LbAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * The priority of the ACL. (ACLs are applied in ascending order, 0 is the first ACL executed)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#index LbAcl#index}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#index LbAcl#index}
   */
   readonly index: number;
   /**
   * The ACL name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#name LbAcl#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#name LbAcl#name}
   */
   readonly name?: string;
   /**
   * action block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#action LbAcl#action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#action LbAcl#action}
   */
   readonly action: LbAclAction;
   /**
   * match block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#match LbAcl#match}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#match LbAcl#match}
   */
   readonly match?: LbAclMatch;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#timeouts LbAcl#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#timeouts LbAcl#timeouts}
   */
   readonly timeouts?: LbAclTimeouts;
 }
@@ -61,19 +61,19 @@ export interface LbAclActionRedirect {
   /**
   * The HTTP redirect code to use
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#code LbAcl#code}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#code LbAcl#code}
   */
   readonly code?: number;
   /**
   * An URL can be used in case of a location redirect 
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#target LbAcl#target}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#target LbAcl#target}
   */
   readonly target?: string;
   /**
   * The redirect type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#type LbAcl#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#type LbAcl#type}
   */
   readonly type?: string;
 }
@@ -249,13 +249,13 @@ export interface LbAclAction {
   /**
   * The action type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#type LbAcl#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#type LbAcl#type}
   */
   readonly type: string;
   /**
   * redirect block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#redirect LbAcl#redirect}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#redirect LbAcl#redirect}
   */
   readonly redirect?: LbAclActionRedirect[] | cdktf.IResolvable;
 }
@@ -367,31 +367,31 @@ export interface LbAclMatch {
   /**
   * The HTTP filter to match
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#http_filter LbAcl#http_filter}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#http_filter LbAcl#http_filter}
   */
   readonly httpFilter?: string;
   /**
   * You can use this field with http_header_match acl type to set the header name to filter
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#http_filter_option LbAcl#http_filter_option}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#http_filter_option LbAcl#http_filter_option}
   */
   readonly httpFilterOption?: string;
   /**
   * A list of possible values to match for the given HTTP filter
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#http_filter_value LbAcl#http_filter_value}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#http_filter_value LbAcl#http_filter_value}
   */
   readonly httpFilterValue?: string[];
   /**
   * If set to true, the condition will be of type "unless"
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#invert LbAcl#invert}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#invert LbAcl#invert}
   */
   readonly invert?: boolean | cdktf.IResolvable;
   /**
   * A list of IPs or CIDR v4/v6 addresses of the client of the session to match
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#ip_subnet LbAcl#ip_subnet}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#ip_subnet LbAcl#ip_subnet}
   */
   readonly ipSubnet?: string[];
 }
@@ -591,7 +591,7 @@ export class LbAclMatchOutputReference extends cdktf.ComplexObject {
 }
 export interface LbAclTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#default LbAcl#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#default LbAcl#default}
   */
   readonly default?: string;
 }
@@ -685,7 +685,7 @@ export class LbAclTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl scaleway_lb_acl}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl scaleway_lb_acl}
 */
 export class LbAcl extends cdktf.TerraformResource {
 
@@ -701,7 +701,7 @@ export class LbAcl extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a LbAcl resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the LbAcl to import
-  * @param importFromId The id of the existing LbAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing LbAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the LbAcl to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -713,7 +713,7 @@ export class LbAcl extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/lb_acl scaleway_lb_acl} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_acl scaleway_lb_acl} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -724,8 +724,8 @@ export class LbAcl extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_acl',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

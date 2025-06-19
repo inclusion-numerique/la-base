@@ -1,15 +1,21 @@
-import { AnimatePresence, Reorder } from 'framer-motion'
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useDraggable } from '@app/ui/hooks/useDraggable'
-import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
+import DraggableContentEdition from '@app/web/components/Resource/Edition/DraggableContentEdition'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
+import styles from '@app/web/components/Resource/Edition/ResourceEdition.module.css'
 import type { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
 import type {
   ContentProjectionWithContext,
   ResourceProjectionWithContext,
 } from '@app/web/server/resources/getResourceFromEvents'
-import DraggableContentEdition from '@app/web/components/Resource/Edition/DraggableContentEdition'
+import { AnimatePresence, Reorder } from 'framer-motion'
+import React, {
+  type Dispatch,
+  RefObject,
+  type SetStateAction,
+  useRef,
+  useState,
+} from 'react'
 
 /**
  * We use Framer Motion to handle animations :
@@ -98,7 +104,7 @@ const ContentListEdition = React.forwardRef(
               editionState={editionState}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
-              dragConstraints={dragBoundaryRef}
+              dragConstraints={dragBoundaryRef as RefObject<HTMLElement>}
               moveUp={() => moveUp(index, moveContent)}
               moveDown={() => moveDown(index, contents.length, moveContent)}
               count={orderedContents.length}

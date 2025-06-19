@@ -1,5 +1,5 @@
+import type { DataTableConfiguration } from '@app/web/data-table/DataTableConfiguration'
 import { stringify } from 'csv-stringify/sync'
-import { DataTableConfiguration } from '@app/web/data-table/DataTableConfiguration'
 
 export const generateDataTableCsv = <Data>({
   configuration,

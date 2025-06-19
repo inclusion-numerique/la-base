@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface FunctionTriggerConfig extends cdktf.TerraformMetaArguments {
   /**
   * The trigger description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#description FunctionTrigger#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#description FunctionTrigger#description}
   */
   readonly description?: string;
   /**
   * The ID of the function to create a trigger for
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#function_id FunctionTrigger#function_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#function_id FunctionTrigger#function_id}
   */
   readonly functionId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#id FunctionTrigger#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#id FunctionTrigger#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,31 +29,31 @@ export interface FunctionTriggerConfig extends cdktf.TerraformMetaArguments {
   /**
   * The trigger name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#name FunctionTrigger#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#name FunctionTrigger#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#region FunctionTrigger#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#region FunctionTrigger#region}
   */
   readonly region?: string;
   /**
   * nats block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#nats FunctionTrigger#nats}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#nats FunctionTrigger#nats}
   */
   readonly nats?: FunctionTriggerNats;
   /**
   * sqs block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#sqs FunctionTrigger#sqs}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#sqs FunctionTrigger#sqs}
   */
   readonly sqs?: FunctionTriggerSqs;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#timeouts FunctionTrigger#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#timeouts FunctionTrigger#timeouts}
   */
   readonly timeouts?: FunctionTriggerTimeouts;
 }
@@ -61,25 +61,25 @@ export interface FunctionTriggerNats {
   /**
   * ID of the mnq nats account
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#account_id FunctionTrigger#account_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#account_id FunctionTrigger#account_id}
   */
   readonly accountId?: string;
   /**
   * Project ID of the project where the mnq sqs exists, defaults to provider project_id
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#project_id FunctionTrigger#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#project_id FunctionTrigger#project_id}
   */
   readonly projectId?: string;
   /**
   * Region where the mnq sqs exists, defaults to function's region
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#region FunctionTrigger#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#region FunctionTrigger#region}
   */
   readonly region?: string;
   /**
   * Subject to listen to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#subject FunctionTrigger#subject}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#subject FunctionTrigger#subject}
   */
   readonly subject: string;
 }
@@ -249,25 +249,25 @@ export interface FunctionTriggerSqs {
   /**
   * ID of the mnq namespace
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#namespace_id FunctionTrigger#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#namespace_id FunctionTrigger#namespace_id}
   */
   readonly namespaceId?: string;
   /**
   * Project ID of the project where the mnq sqs exists, defaults to provider project_id
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#project_id FunctionTrigger#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#project_id FunctionTrigger#project_id}
   */
   readonly projectId?: string;
   /**
   * Name of the queue
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#queue FunctionTrigger#queue}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#queue FunctionTrigger#queue}
   */
   readonly queue: string;
   /**
   * Region where the mnq sqs exists, defaults to function's region
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#region FunctionTrigger#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#region FunctionTrigger#region}
   */
   readonly region?: string;
 }
@@ -435,23 +435,23 @@ export class FunctionTriggerSqsOutputReference extends cdktf.ComplexObject {
 }
 export interface FunctionTriggerTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#create FunctionTrigger#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#create FunctionTrigger#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#default FunctionTrigger#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#default FunctionTrigger#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#delete FunctionTrigger#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#delete FunctionTrigger#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#read FunctionTrigger#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#read FunctionTrigger#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#update FunctionTrigger#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#update FunctionTrigger#update}
   */
   readonly update?: string;
 }
@@ -661,7 +661,7 @@ export class FunctionTriggerTimeoutsOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger scaleway_function_trigger}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger scaleway_function_trigger}
 */
 export class FunctionTrigger extends cdktf.TerraformResource {
 
@@ -677,7 +677,7 @@ export class FunctionTrigger extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a FunctionTrigger resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the FunctionTrigger to import
-  * @param importFromId The id of the existing FunctionTrigger that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing FunctionTrigger that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the FunctionTrigger to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -689,7 +689,7 @@ export class FunctionTrigger extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/function_trigger scaleway_function_trigger} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/function_trigger scaleway_function_trigger} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -700,8 +700,8 @@ export class FunctionTrigger extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_function_trigger',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,7 +1,7 @@
 import {
-  computeCreationProportions,
-  CreationStatistics,
+  type CreationStatistics,
   EMPTY_PROPORTIONS,
+  computeCreationProportions,
 } from './creationStatistics'
 
 const EMPTY_STATISTICS_RESULTS = {

@@ -1,9 +1,9 @@
-import { cache } from 'react'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
 import { getProfileBasesCount } from '@app/web/server/bases/getBasesList'
 import { getProfileCollectionsCount } from '@app/web/server/collections/getCollectionsList'
 import { getProfileFollowsCount } from '@app/web/server/follows/getFollowsList'
 import { getProfileResourcesCount } from '@app/web/server/resources/getResourcesList'
+import { cache } from 'react'
 
 // Counts are cached per request https://beta.nextjs.org/docs/data-fetching/caching#per-request-caching
 export const getProfilePageCounts = cache(async (profileSlug: string) => {

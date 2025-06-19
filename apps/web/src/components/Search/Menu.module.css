@@ -12,7 +12,7 @@
     justify-content: flex-start;
   }
 
-  :global(.fr-nav__link){
+  :global(.fr-nav__link) {
     &:hover {
       background-color: var(--background-alt-blue-cumulus-hover) !important;
     }

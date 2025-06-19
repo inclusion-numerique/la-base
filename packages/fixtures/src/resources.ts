@@ -1,8 +1,8 @@
+import { baseFixtureAvecTout } from '@app/fixtures/bases'
+import { jmAvecTout } from '@app/fixtures/users'
+import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import { ResourceCreatedDataV1 } from '@app/web/server/resources/feature/CreateResource'
 import type { Prisma } from '@prisma/client'
-import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
-import { jmAvecTout } from '@app/fixtures/users'
-import { baseFixtureAvecTout } from '@app/fixtures/bases'
 
 const resourcePubliqueDansBaseConstant = {
   id: 'd4c3a9c8-01e4-4e46-a3f4-8dab0a3723b2',

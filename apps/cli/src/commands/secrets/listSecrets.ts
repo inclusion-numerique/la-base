@@ -1,11 +1,11 @@
-import { Command } from '@commander-js/extra-typings'
-import { listSecrets as configListSecrets } from '@app/config/secrets/listSecrets'
 import { output } from '@app/cli/output'
+import { listSecrets as configListSecrets } from '@app/config/secrets/listSecrets'
+import { Command } from '@commander-js/extra-typings'
 
 /**
  * This command outputs available secrets names
  */
-// eslint-disable-next-line unicorn/prevent-abbreviations
+
 export const listSecrets = new Command()
   .command('secrets:list')
   .action(async () => {

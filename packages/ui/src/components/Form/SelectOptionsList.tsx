@@ -1,5 +1,5 @@
-import React from 'react'
 import type { SelectInputOption } from '@app/ui/components/Form/utils/options'
+import React from 'react'
 
 const SelectOptionsList = ({ options }: { options: SelectInputOption[] }) => (
   <>

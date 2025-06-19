@@ -26,7 +26,6 @@
   --hover: var(--background-contrast-info-hover);
   --active: var(--background-contrast-info-active);
 
-  border: 1px solid var(--background-flat-info) !important;
   color: var(--text-default-info) !important;
 
   .icon {
@@ -40,7 +39,6 @@
   --hover: var(--background-contrast-warning-hover);
   --active: var(--background-contrast-warning-active);
 
-  border: 1px solid var(--background-flat-warning) !important;
   color: var(--text-default-warning) !important;
 
   .icon {
@@ -53,8 +51,6 @@
 
   --hover: var(--background-contrast-error-hover);
   --active: var(--background-contrast-error-active);
-
-  border: 1px solid var(--background-flat-error) !important;
 
   color: var(--text-default-error) !important;
 
@@ -70,8 +66,6 @@
   --active: var(--background-contrast-success-active);
 
   color: var(--text-default-success) !important;
-
-  border: 1px solid var(--background-flat-success) !important;
 
   .icon {
     color: var(--text-default-success) !important;

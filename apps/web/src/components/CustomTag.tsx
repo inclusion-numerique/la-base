@@ -1,6 +1,6 @@
+import type { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import React from 'react'
-import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import styles from './CustomTag.module.css'
 
 export enum TagColor {

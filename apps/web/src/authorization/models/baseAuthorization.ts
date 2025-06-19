@@ -1,7 +1,7 @@
-import type { Base } from '@prisma/client'
+import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
 import type { Grantee } from '@app/web/authorization/grantee'
 import { type UserSecurityRole } from '@app/web/authorization/userSecurityRole'
-import { createAuthorizer } from '@app/web/authorization/createAuthorizer'
+import type { Base } from '@prisma/client'
 
 export const BaseRoles = {
   BaseCreator: 'BaseCreator',
@@ -62,7 +62,6 @@ export const getBaseRoles = (
       roles.push(BaseRoles.BaseAdmin)
     }
   }
-
   return roles
 }
 
@@ -73,7 +72,6 @@ export const getBasePermissions = (
   if (base.deleted) {
     return []
   }
-
   // Admins have all permissions on base
   if (
     roles.includes('Admin') ||

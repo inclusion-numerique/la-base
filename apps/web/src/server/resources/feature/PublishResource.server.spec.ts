@@ -1,9 +1,9 @@
+import type { ResourcePublished } from '@app/web/server/resources/feature/PublishResource'
+import { onPublished } from '@app/web/server/resources/feature/PublishResource.server'
 import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
-import { ResourcePublished } from '@app/web/server/resources/feature/PublishResource'
-import { onPublished } from '@app/web/server/resources/feature/PublishResource.server'
 import type { PrismaClient } from '@prisma/client'
 
 describe('onPublished', () => {
@@ -141,10 +141,9 @@ describe('onPublished', () => {
       transaction: mockTransaction,
     })
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockTransaction.resource.update).toHaveBeenCalledWith({
       where: { id: resource.id },
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
       data: expect.objectContaining({
         contents: {
           deleteMany: {},
@@ -238,10 +237,9 @@ describe('onPublished', () => {
       transaction: mockTransaction,
     })
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(mockTransaction.resource.update).toHaveBeenCalledWith({
       where: { id: resource.id },
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
       data: expect.objectContaining({
         contents: {
           deleteMany: {},

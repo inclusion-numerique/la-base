@@ -1,12 +1,11 @@
-
 .select {
-    font-size: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-france-sun-113-625);
+
+  select {
+    appearance: auto;
     font-weight: 500;
     color: var(--blue-france-sun-113-625);
-
-    select {
-        appearance: auto;
-        font-weight: 500;
-        color: var(--blue-france-sun-113-625);
-    }
+  }
 }

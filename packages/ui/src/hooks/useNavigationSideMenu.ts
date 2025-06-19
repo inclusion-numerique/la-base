@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
-import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu'
-import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import { isBrowser } from '@app/web/utils/isBrowser'
+import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
+import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu'
+import { useEffect, useMemo, useState } from 'react'
 
 const getIdFromItem = (item: SideMenuProps.Item): string | null =>
   'linkProps' in item
@@ -46,7 +46,7 @@ export const useNavigationSideMenu = ({
     [items],
   )
 
-  // Used to not rettriger the observer with same id list
+  // Used to not retrigger the observer with same id list
   const navigableItemsMemoKey = useMemo(
     () => navigableItemIds.join('-'),
     [navigableItemIds],
@@ -56,55 +56,48 @@ export const useNavigationSideMenu = ({
     navigableItemIds[0] ?? null,
   )
 
-  useEffect(
-    () => {
-      const hasIOSupport = !!window.IntersectionObserver
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we want the effect to run when contentEllement or navigaleItemsMemoKey change
+  useEffect(() => {
+    const hasIOSupport = !!window.IntersectionObserver
 
-      if (!hasIOSupport) {
-        return
-      }
+    if (!hasIOSupport) {
+      return
+    }
 
-      const elements = navigableItemIds
-        // No id means the empty '#' anchor, which is the top of the page, so we use the body
-        // eslint-disable-next-line unicorn/prefer-query-selector
-        .map((id) => (id === '' ? document.body : document.getElementById(id)))
-        .filter(isDefinedAndNotNull)
+    const elements = navigableItemIds
+      // No id means the empty '#' anchor, which is the top of the page, so we use the body
+      .map((id) => (id === '' ? document.body : document.getElementById(id)))
+      .filter(isDefinedAndNotNull)
 
-      if (elements.length === 0) {
-        return
-      }
+    if (elements.length === 0) {
+      return
+    }
 
-      const visibleElements = new Map(navigableItemIds.map((id) => [id, false]))
+    const visibleElements = new Map(navigableItemIds.map((id) => [id, false]))
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entryChange of entries) {
-            visibleElements.set(
-              entryChange.target.id,
-              entryChange.isIntersecting,
-            )
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entryChange of entries) {
+          visibleElements.set(entryChange.target.id, entryChange.isIntersecting)
+        }
+
+        // Set first visible element as active
+        for (const [id, isVisible] of visibleElements.entries()) {
+          if (isVisible) {
+            setActiveId(id)
+            break
           }
-
-          // Set first visible element as active
-          for (const [id, isVisible] of visibleElements.entries()) {
-            if (isVisible) {
-              setActiveId(id)
-              break
-            }
-          }
-        },
-        {
-          threshold: intersectionThreshold,
-        },
-      )
-      for (const element of elements) {
-        observer.observe(element)
-      }
-      return () => observer.disconnect()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [contentElement, navigableItemsMemoKey, intersectionThreshold],
-  )
+        }
+      },
+      {
+        threshold: intersectionThreshold,
+      },
+    )
+    for (const element of elements) {
+      observer.observe(element)
+    }
+    return () => observer.disconnect()
+  }, [contentElement, navigableItemsMemoKey, intersectionThreshold])
 
   return { activeId, activeHref: `#${activeId}` }
 }

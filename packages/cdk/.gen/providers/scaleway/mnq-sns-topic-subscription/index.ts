@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface MnqSnsTopicSubscriptionConfig extends cdktf.TerraformMetaArgume
   /**
   * SNS access key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#access_key MnqSnsTopicSubscription#access_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#access_key MnqSnsTopicSubscription#access_key}
   */
   readonly accessKey: string;
   /**
   * Endpoint of the subscription
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#endpoint MnqSnsTopicSubscription#endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#endpoint MnqSnsTopicSubscription#endpoint}
   */
   readonly endpoint?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#id MnqSnsTopicSubscription#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#id MnqSnsTopicSubscription#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,51 +29,51 @@ export interface MnqSnsTopicSubscriptionConfig extends cdktf.TerraformMetaArgume
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#project_id MnqSnsTopicSubscription#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#project_id MnqSnsTopicSubscription#project_id}
   */
   readonly projectId?: string;
   /**
   * Protocol of the SNS Topic Subscription.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#protocol MnqSnsTopicSubscription#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#protocol MnqSnsTopicSubscription#protocol}
   */
   readonly protocol: string;
   /**
   * JSON Redrive policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#redrive_policy MnqSnsTopicSubscription#redrive_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#redrive_policy MnqSnsTopicSubscription#redrive_policy}
   */
   readonly redrivePolicy?: boolean | cdktf.IResolvable;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#region MnqSnsTopicSubscription#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#region MnqSnsTopicSubscription#region}
   */
   readonly region?: string;
   /**
   * SNS secret key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#secret_key MnqSnsTopicSubscription#secret_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#secret_key MnqSnsTopicSubscription#secret_key}
   */
   readonly secretKey: string;
   /**
   * SNS endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#sns_endpoint MnqSnsTopicSubscription#sns_endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#sns_endpoint MnqSnsTopicSubscription#sns_endpoint}
   */
   readonly snsEndpoint?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#topic_arn MnqSnsTopicSubscription#topic_arn}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#topic_arn MnqSnsTopicSubscription#topic_arn}
   */
   readonly topicArn?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#topic_id MnqSnsTopicSubscription#topic_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#topic_id MnqSnsTopicSubscription#topic_id}
   */
   readonly topicId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription scaleway_mnq_sns_topic_subscription}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription scaleway_mnq_sns_topic_subscription}
 */
 export class MnqSnsTopicSubscription extends cdktf.TerraformResource {
 
@@ -89,7 +89,7 @@ export class MnqSnsTopicSubscription extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MnqSnsTopicSubscription resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MnqSnsTopicSubscription to import
-  * @param importFromId The id of the existing MnqSnsTopicSubscription that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MnqSnsTopicSubscription that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MnqSnsTopicSubscription to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -101,7 +101,7 @@ export class MnqSnsTopicSubscription extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/mnq_sns_topic_subscription scaleway_mnq_sns_topic_subscription} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sns_topic_subscription scaleway_mnq_sns_topic_subscription} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -112,8 +112,8 @@ export class MnqSnsTopicSubscription extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_sns_topic_subscription',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

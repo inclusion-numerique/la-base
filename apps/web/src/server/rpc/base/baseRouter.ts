@@ -1,12 +1,10 @@
-import * as Sentry from '@sentry/nextjs'
-import { v4 } from 'uuid'
-import z from 'zod'
 import {
-  baseAuthorization,
   BasePermissions,
+  baseAuthorization,
 } from '@app/web/authorization/models/baseAuthorization'
 import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
+import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
 import {
@@ -14,12 +12,14 @@ import {
   UpdateBaseImageCommandValidation,
 } from '@app/web/server/bases/updateBase'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { sendInviteMemberEmail } from '@app/web/server/rpc/baseMember/invitationEmail'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
+import * as Sentry from '@sentry/nextjs'
+import { v4 } from 'uuid'
+import z from 'zod'
 
 export const baseRouter = router({
   create: protectedProcedure

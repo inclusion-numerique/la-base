@@ -1,20 +1,20 @@
-import { prismaClient } from '@app/web/prismaClient'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import {
+  BasePermissions,
+  baseAuthorization,
+} from '@app/web/authorization/models/baseAuthorization'
+import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
+import {
+  ProfilePermissions,
+  profileAuthorization,
+} from '@app/web/authorization/models/profileAuthorization'
+import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 import {
   BaseFollowValidation,
   ProfileFollowValidation,
 } from '@app/web/follows/follows'
+import { prismaClient } from '@app/web/prismaClient'
+import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
-import {
-  baseAuthorization,
-  BasePermissions,
-} from '@app/web/authorization/models/baseAuthorization'
-import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/baseAuthorizationTargetSelect'
-import {
-  profileAuthorization,
-  ProfilePermissions,
-} from '@app/web/authorization/models/profileAuthorization'
-import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 
 export const followRouter = router({
   followBase: protectedProcedure

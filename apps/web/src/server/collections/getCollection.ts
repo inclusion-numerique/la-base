@@ -1,12 +1,12 @@
-import { Prisma } from '@prisma/client'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
+  type ResourceListItem,
   computeResourcesListWhereForUser,
-  ResourceListItem,
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
+import type { Prisma } from '@prisma/client'
 import { imageCropSelect } from '../image/imageCropSelect'
 
 export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>

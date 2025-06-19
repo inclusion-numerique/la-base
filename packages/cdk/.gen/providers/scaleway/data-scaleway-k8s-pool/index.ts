@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayK8SPoolConfig extends cdktf.TerraformMetaArguments 
   /**
   * The ID of the cluster on which this pool will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#cluster_id DataScalewayK8SPool#cluster_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#cluster_id DataScalewayK8SPool#cluster_id}
   */
   readonly clusterId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#id DataScalewayK8SPool#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#id DataScalewayK8SPool#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface DataScalewayK8SPoolConfig extends cdktf.TerraformMetaArguments 
   /**
   * The name of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#name DataScalewayK8SPool#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#name DataScalewayK8SPool#name}
   */
   readonly name?: string;
   /**
   * The ID of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#pool_id DataScalewayK8SPool#pool_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#pool_id DataScalewayK8SPool#pool_id}
   */
   readonly poolId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#region DataScalewayK8SPool#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#region DataScalewayK8SPool#region}
   */
   readonly region?: string;
   /**
   * Size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#size DataScalewayK8SPool#size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#size DataScalewayK8SPool#size}
   */
   readonly size?: number;
 }
@@ -217,7 +217,7 @@ export class DataScalewayK8SPoolUpgradePolicyList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool scaleway_k8s_pool}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool scaleway_k8s_pool}
 */
 export class DataScalewayK8SPool extends cdktf.TerraformDataSource {
 
@@ -233,7 +233,7 @@ export class DataScalewayK8SPool extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayK8SPool resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayK8SPool to import
-  * @param importFromId The id of the existing DataScalewayK8SPool that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayK8SPool that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayK8SPool to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -245,7 +245,7 @@ export class DataScalewayK8SPool extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/data-sources/k8s_pool scaleway_k8s_pool} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/k8s_pool scaleway_k8s_pool} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -256,8 +256,8 @@ export class DataScalewayK8SPool extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_k8s_pool',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

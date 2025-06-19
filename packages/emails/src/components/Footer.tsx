@@ -1,3 +1,4 @@
+import { emailAssetUrl } from '@app/emails/emailAssetUrl'
 import {
   MjmlColumn,
   MjmlDivider,
@@ -5,7 +6,6 @@ import {
   MjmlSection,
 } from '@faire/mjml-react'
 import React from 'react'
-import { emailAssetUrl } from '@app/emails/emailAssetUrl'
 
 const Footer = ({ padding = '0 0' }: { padding?: string | number }) => (
   <>

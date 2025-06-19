@@ -1,6 +1,6 @@
 import React from 'react'
-import { CreateResourceButton } from '../Resource/CreateResourceModal'
 import EmptyBox from '../EmptyBox'
+import { CreateResourceButton } from '../Resource/CreateResourceModal'
 
 const EmptyProfileResources = ({
   canWrite,

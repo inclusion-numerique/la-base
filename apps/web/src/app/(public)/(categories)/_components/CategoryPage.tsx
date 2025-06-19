@@ -1,25 +1,25 @@
-import type { Theme } from '@prisma/client'
-import React from 'react'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getHomeCategoriesCount } from '@app/web/app/(public)/(home)/_components/getHomeCategoriesCount'
-import {
-  sanitizeUrlPaginationParams,
-  searchParamsFromSegment,
-  Sorting,
-} from '@app/web/server/search/searchQueryParams'
-import { executeResourcesSearch } from '@app/web/server/search/executeSearch'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { ThematicHeader } from '@app/web/app/(public)/(categories)/_components/ThematicHeader'
 import { ThematicTags } from '@app/web/app/(public)/(categories)/_components/ThematicTags'
-import SearchResults from '@app/web/components/Search/SearchResults'
-import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
-import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
-import { ThematicLinkSortingSelect } from '@app/web/components/Search/ThematicLinkResultSortingSelect'
-import { type Category, categoryThemesOptions } from '@app/web/themes/themes'
 import { categoryStyles } from '@app/web/app/(public)/(categories)/_helpers/categoryStyles'
+import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
 import Newsletter from '@app/web/app/(public)/Newsletter'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import ResourcesSearchResults from '@app/web/components/Search/ResourcesSearchResults'
+import SearchResults from '@app/web/components/Search/SearchResults'
+import { ThematicLinkSortingSelect } from '@app/web/components/Search/ThematicLinkResultSortingSelect'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getHomeCategoriesCount } from '@app/web/features/home/components/getHomeCategoriesCount'
+import { executeResourcesSearch } from '@app/web/server/search/executeSearch'
+import {
+  type Sorting,
+  sanitizeUrlPaginationParams,
+  searchParamsFromSegment,
+} from '@app/web/server/search/searchQueryParams'
+import { type Category, categoryThemesOptions } from '@app/web/themes/themes'
+import { contentId } from '@app/web/utils/skipLinks'
+import type { Theme } from '@prisma/client'
+import React from 'react'
 
 export type CategoryPageUrlParams = {
   page?: string | string[] | null
@@ -36,7 +36,7 @@ const searchParamToThemes = (themesParam?: string | string[] | null) => {
 const categoryPagePaths: { [category in Category]: string } = {
   'Culture numérique': '/culture-numerique',
   'Communs & souveraineté': '/communs-et-souverainete',
-  'Inclusion & compétences numériques': '/inclusion-et-competences-numeriques',
+  'Inclusion numérique': '/inclusion-numerique',
   'Numérique & environnement': '/numerique-et-environnement',
 }
 

@@ -1,14 +1,13 @@
-import React from 'react'
+import type { SessionUser } from '@app/web/auth/sessionUser'
+import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
+import { loginUrl } from '@app/web/security/login'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type {
   FrIconClassName,
   RiIconClassName,
 } from '@codegouvfr/react-dsfr/src/fr/generatedFromCss/classNames'
 import classNames from 'classnames'
-import type { SessionUser } from '@app/web/auth/sessionUser'
-import { loginUrl } from '@app/web/security/login'
-import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
-import { getBasesFromSessionUser } from '@app/web/bases/getBasesFromSessionUser'
+import React from 'react'
 
 const viewButtonProps = {
   title: 'Enregistrer la collection',
@@ -44,7 +43,7 @@ const SaveCollectionButton = ({
     (savedCollection) => savedCollection.collectionId === collection.id,
   )
 
-  const userBases = user ? getBasesFromSessionUser(user) : null
+  const userBases = user ? user.bases.map(({ base }) => base) : null
 
   const alreadySavedInBases = !!userBases?.some((base) =>
     base.savedCollections.some(

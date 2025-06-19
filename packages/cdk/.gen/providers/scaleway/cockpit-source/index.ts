@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source
+// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface CockpitSourceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#id CockpitSource#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#id CockpitSource#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,49 +17,55 @@ export interface CockpitSourceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the datasource
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#name CockpitSource#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#name CockpitSource#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#project_id CockpitSource#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#project_id CockpitSource#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#region CockpitSource#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#region CockpitSource#region}
   */
   readonly region?: string;
   /**
+  * The number of days to retain data, must be between 1 and 365.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#retention_days CockpitSource#retention_days}
+  */
+  readonly retentionDays: number;
+  /**
   * The type of the datasource
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#type CockpitSource#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#type CockpitSource#type}
   */
   readonly type?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#timeouts CockpitSource#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#timeouts CockpitSource#timeouts}
   */
   readonly timeouts?: CockpitSourceTimeouts;
 }
 export interface CockpitSourceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#create CockpitSource#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#create CockpitSource#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#default CockpitSource#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#default CockpitSource#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#delete CockpitSource#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#delete CockpitSource#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#read CockpitSource#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#read CockpitSource#read}
   */
   readonly read?: string;
 }
@@ -240,7 +246,7 @@ export class CockpitSourceTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source scaleway_cockpit_source}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source scaleway_cockpit_source}
 */
 export class CockpitSource extends cdktf.TerraformResource {
 
@@ -256,7 +262,7 @@ export class CockpitSource extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a CockpitSource resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the CockpitSource to import
-  * @param importFromId The id of the existing CockpitSource that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing CockpitSource that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the CockpitSource to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -268,19 +274,19 @@ export class CockpitSource extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.42.1/docs/resources/cockpit_source scaleway_cockpit_source} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/cockpit_source scaleway_cockpit_source} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
-  * @param options CockpitSourceConfig = {}
+  * @param options CockpitSourceConfig
   */
-  public constructor(scope: Construct, id: string, config: CockpitSourceConfig = {}) {
+  public constructor(scope: Construct, id: string, config: CockpitSourceConfig) {
     super(scope, id, {
       terraformResourceType: 'scaleway_cockpit_source',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.42.1',
-        providerVersionConstraint: '>= 2.42.1'
+        providerVersion: '2.53.0',
+        providerVersionConstraint: '>= 2.53.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -294,6 +300,7 @@ export class CockpitSource extends cdktf.TerraformResource {
     this._name = config.name;
     this._projectId = config.projectId;
     this._region = config.region;
+    this._retentionDays = config.retentionDays;
     this._type = config.type;
     this._timeouts.internalValue = config.timeouts;
   }
@@ -360,6 +367,11 @@ export class CockpitSource extends cdktf.TerraformResource {
     return this._projectId;
   }
 
+  // push_url - computed: true, optional: false, required: false
+  public get pushUrl() {
+    return this.getStringAttribute('push_url');
+  }
+
   // region - computed: true, optional: true, required: false
   private _region?: string; 
   public get region() {
@@ -374,6 +386,19 @@ export class CockpitSource extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // retention_days - computed: false, optional: false, required: true
+  private _retentionDays?: number; 
+  public get retentionDays() {
+    return this.getNumberAttribute('retention_days');
+  }
+  public set retentionDays(value: number) {
+    this._retentionDays = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get retentionDaysInput() {
+    return this._retentionDays;
   }
 
   // synchronized_with_grafana - computed: true, optional: false, required: false
@@ -433,6 +458,7 @@ export class CockpitSource extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       project_id: cdktf.stringToTerraform(this._projectId),
       region: cdktf.stringToTerraform(this._region),
+      retention_days: cdktf.numberToTerraform(this._retentionDays),
       type: cdktf.stringToTerraform(this._type),
       timeouts: cockpitSourceTimeoutsToTerraform(this._timeouts.internalValue),
     };
@@ -463,6 +489,12 @@ export class CockpitSource extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      retention_days: {
+        value: cdktf.numberToHclTerraform(this._retentionDays),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
       },
       type: {
         value: cdktf.stringToHclTerraform(this._type),

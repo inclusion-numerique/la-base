@@ -1,21 +1,23 @@
-import { notFound, redirect } from 'next/navigation'
-import { Metadata } from 'next'
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { contentId } from '@app/web/utils/skipLinks'
-import { managerCollectionUrl } from '@app/web/collections/manageCollectionUrl'
-import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { prismaClient } from '@app/web/prismaClient'
 import { metadataTitle } from '@app/web/app/metadataTitle'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
+import { managerCollectionUrl } from '@app/web/collections/manageCollectionUrl'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import CollectionOrderEdition from '@app/web/components/Collection/Edition/Order/CollectionOrderEdition'
-import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
+import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { prismaClient } from '@app/web/prismaClient'
 import { basePageQuery } from '@app/web/server/bases/getBase'
+import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
+import { contentId } from '@app/web/utils/skipLinks'
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
 
 export const generateMetadata = async ({
-  searchParams: { base: baseSlug },
+  searchParams,
 }: {
-  searchParams: { base: string }
+  searchParams: Promise<{ base: string }>
 }): Promise<Metadata> => {
+  const { base: baseSlug } = await searchParams
+
   if (baseSlug) {
     const base = await prismaClient.base.findUnique({
       where: { slug: baseSlug },
@@ -39,10 +41,10 @@ export const generateMetadata = async ({
 const ManageCollectionsPage = async ({
   searchParams,
 }: {
-  searchParams: { base: string }
+  searchParams: Promise<{ base: string }>
 }) => {
+  const { base: baseSlug } = await searchParams
   const user = await getSessionUser()
-  const { base: baseSlug } = searchParams
   if (!user) {
     redirect(
       `/connexion?suivant=${managerCollectionUrl({

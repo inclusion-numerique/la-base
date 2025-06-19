@@ -1,12 +1,12 @@
 'use client'
 
-import Button from '@codegouvfr/react-dsfr/Button'
-import { useState } from 'react'
-import Link from 'next/link'
-import type { Theme } from '@prisma/client'
 import Card from '@app/web/components/Card'
-import ProgressBar from '@app/web/ui/ProgressBar'
 import { searchResultThemeHref } from '@app/web/themes/searchResultHrefHelpers'
+import ProgressBar from '@app/web/ui/ProgressBar'
+import Button from '@codegouvfr/react-dsfr/Button'
+import type { Theme } from '@prisma/client'
+import Link from 'next/link'
+import { useState } from 'react'
 
 const Thematiques = ({
   thematiques,

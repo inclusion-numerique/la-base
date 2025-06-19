@@ -1,26 +1,23 @@
-
 .closeButton {
-    position: absolute;
-    top: 24px;
-    right: 16px;
-    background: var(--background-default-grey);
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  background: var(--background-default-grey);
 
-    @media (min-width: 48em) {
-        top: 32px;
-        right: 32px;
-    }
+  @media (min-width: 48em) {
+    top: 32px;
+    right: 32px;
+  }
 }
 
 .mdBackgroundBlueFrance925125 {
-    @media (min-width: 48em) {
-        background: var(--blue-france-925-125);
-    }
+  @media (min-width: 48em) {
+    background: var(--blue-france-925-125);
+  }
 }
 
-.mdBackgroundBlueFrance97575{
-    @media (min-width: 48em) {
-        background: var(--blue-france-975-75);
-    }
+.mdBackgroundBlueFrance97575 {
+  @media (min-width: 48em) {
+    background: var(--blue-france-975-75);
+  }
 }
-
-

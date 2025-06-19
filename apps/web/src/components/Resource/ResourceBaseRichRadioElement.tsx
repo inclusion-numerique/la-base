@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import React, { PropsWithChildren } from 'react'
-import { FieldValues, Path, PathValue } from 'react-hook-form'
+import React, { type PropsWithChildren } from 'react'
+import type { FieldValues, Path, PathValue } from 'react-hook-form'
 import styles from './ResourceBaseRichRadioElement.module.css'
 
 const ResourceBaseRichRadioElement = <T extends FieldValues>({
@@ -37,7 +37,6 @@ const ResourceBaseRichRadioElement = <T extends FieldValues>({
         disabled={disabled}
         data-testid={dataTestId}
       />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-element-interactions */}
       <label
         className="fr-label"
         htmlFor={id}

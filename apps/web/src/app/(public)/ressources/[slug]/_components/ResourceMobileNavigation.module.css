@@ -1,16 +1,15 @@
 .sideMenu {
-    position: sticky;
-    top: 0;
-    background: var(--background-default-grey);
+  position: sticky;
+  top: 0;
+  background: var(--background-default-grey);
 
-    /* 1 below modal */
-    z-index: 1749;
+  /* 1 below modal */
+  z-index: 1749;
 }
 
 .menuInner {
-    box-shadow: unset;
-    padding-right: 0;
-    overflow: auto;
-    max-height: 100vh;
-
+  box-shadow: unset;
+  padding-right: 0;
+  overflow: auto;
+  max-height: 100vh;
 }

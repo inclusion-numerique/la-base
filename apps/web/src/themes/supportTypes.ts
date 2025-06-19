@@ -1,5 +1,5 @@
-import type { SupportType } from '@prisma/client'
 import { labelsToOptions } from '@app/ui/components/Form/utils/options'
+import type { SupportType } from '@prisma/client'
 
 export const supportTypeLabels: {
   [supportType in SupportType]: string

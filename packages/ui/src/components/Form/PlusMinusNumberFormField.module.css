@@ -1,61 +1,60 @@
 .container {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .inputContainer {
-    position: relative;
+  position: relative;
 }
 
 input.input {
-    text-align: right;
-    margin-top: 0 !important;
-    background: var(--grey-1000-75);
-    border: var(--slim-grey-border);
-    border-radius: 4px;
-    box-shadow: none !important;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-right: 56px;
-    min-height: 56px !important;
-    height: 56px !important;
+  text-align: right;
+  margin-top: 0 !important;
+  background: var(--grey-1000-75);
+  border: var(--slim-grey-border);
+  border-radius: 4px;
+  box-shadow: none !important;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 56px;
+  min-height: 56px !important;
+  height: 56px !important;
 
-    /* Overriding plus and minus features */
-    appearance: textfield;
+  /* Overriding plus and minus features */
+  appearance: textfield;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-        appearance: none;
-    }
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    appearance: none;
+  }
 }
 
 .label {
-    position: absolute;
-    left: 24px;
-    top: 17px;
-    font-weight: 500;
-    margin: 0;
-    max-width: 67%;
+  position: absolute;
+  left: 24px;
+  top: 17px;
+  font-weight: 500;
+  margin: 0;
+  max-width: 67%;
 }
 
 .button {
-    position: absolute;
-    right: 1px;
-    width: 40px;
-    border-left: var(--slim-grey-border);
+  position: absolute;
+  right: 1px;
+  width: 40px;
+  border-left: var(--slim-grey-border);
 }
 
 .plus {
-    top: 1px;
-    border-top-right-radius: 4px;
-    height: 28px;
-    border-bottom: var(--slim-grey-border);
-
+  top: 1px;
+  border-top-right-radius: 4px;
+  height: 28px;
+  border-bottom: var(--slim-grey-border);
 }
 
 .minus {
-    top: 28px;
-    border-bottom-right-radius: 4px;
-    height: 27px;
-    border-top: var(--slim-grey-border);
+  top: 28px;
+  border-bottom-right-radius: 4px;
+  height: 27px;
+  border-top: var(--slim-grey-border);
 }

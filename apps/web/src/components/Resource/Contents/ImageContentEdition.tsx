@@ -1,18 +1,18 @@
-import { UseFormReturn } from 'react-hook-form'
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import React, { useEffect, useState } from 'react'
-import * as Sentry from '@sentry/nextjs'
 import ImageContentDetails from '@app/web/components/Resource/Contents/ImageContentDetails'
+import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
+import { useFileUpload } from '@app/web/hooks/useFileUpload'
+import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
+import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import {
   contentCaptionMaxLength,
   contentTitleMaxLength,
 } from '@app/web/server/rpc/resource/utils'
-import { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
-import { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { trpc } from '@app/web/trpc'
-import FileUploadForm from '@app/web/components/Resource/Edition/FileUploadForm'
-import { useFileUpload } from '@app/web/hooks/useFileUpload'
-import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
+import * as Sentry from '@sentry/nextjs'
+import React, { useEffect, useState } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 import styles from './ImageContentEdition.module.css'
 
 const titleInfo = (title?: string | null) =>
@@ -47,6 +47,7 @@ const ImageContentEdition = ({
 
   const imageIdError = errors.imageId?.message
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: no need to run the effect on each changes
   useEffect(() => {
     if (!imageUploadValue) {
       return

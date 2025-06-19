@@ -1,6 +1,6 @@
-import { Argument, Command, Option } from '@commander-js/extra-typings'
 import { appendEnvVariablesToDotEnvFile } from '@app/cli/dotEnvFile'
 import { output } from '@app/cli/output'
+import { Argument, Command, Option } from '@commander-js/extra-typings'
 
 export const addNextPublicVariablesToDotEnv = new Command()
   .command('dotenv:add-next-public')
