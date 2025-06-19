@@ -1,13 +1,28 @@
 import {
   type UsageStatisticsResult,
-  targetAudiencesUsages,
+  beneficiariesUsages,
+  professionalSectorsUsages,
   themesUsages,
 } from './usageStatistics'
 
 describe('Usage statistics', () => {
-  it('should not get any themes when type is target_audiences', () => {
+  it('should not get any themes when type is beneficiaries', () => {
     const usageStatisticsResult: UsageStatisticsResult = [
-      { type: 'target_audiences', key: 'personne_allophone', value: 2 },
+      { type: 'beneficiaries', key: 'seniors_personnes_agees', value: 2 },
+    ]
+
+    const usages = themesUsages(usageStatisticsResult)
+
+    expect(usages).toStrictEqual([])
+  })
+
+  it('should not get any themes when type is professional_sectors', () => {
+    const usageStatisticsResult: UsageStatisticsResult = [
+      {
+        type: 'professional_sectors',
+        key: 'acteurs_publics',
+        value: 2,
+      },
     ]
 
     const usages = themesUsages(usageStatisticsResult)
@@ -36,7 +51,11 @@ describe('Usage statistics', () => {
     const usageStatisticsResult: UsageStatisticsResult = [
       { type: 'themes', key: 'intelligence_artificielle', value: 8 },
       { type: 'themes', key: 'emploi_et_entrepreunariat', value: 5 },
-      { type: 'target_audiences', key: 'personne_allophone', value: 2 },
+      {
+        type: 'beneficiaries',
+        key: 'personne_allophone_ou_refugies_demandeurs_asile',
+        value: 2,
+      },
     ]
 
     const usages = themesUsages(usageStatisticsResult)
@@ -57,56 +76,74 @@ describe('Usage statistics', () => {
     ])
   })
 
-  it('should not get any target_audiences when type is themes', () => {
+  it('should not get any beneficiaries when type is themes', () => {
     const usageStatisticsResult: UsageStatisticsResult = [
       { type: 'themes', key: 'emploi_et_entrepreunariat', value: 1 },
     ]
 
-    const usages = targetAudiencesUsages(usageStatisticsResult)
+    const usages = beneficiariesUsages(usageStatisticsResult)
 
     expect(usages).toStrictEqual([])
   })
 
-  it('should get personne_allophone target_audiences', () => {
+  it('should not get any professional_sectors when type is themes', () => {
     const usageStatisticsResult: UsageStatisticsResult = [
-      { type: 'target_audiences', key: 'personne_allophone', value: 2 },
+      { type: 'themes', key: 'emploi_et_entrepreunariat', value: 1 },
     ]
 
-    const usages = targetAudiencesUsages(usageStatisticsResult)
+    const usages = professionalSectorsUsages(usageStatisticsResult)
+
+    expect(usages).toStrictEqual([])
+  })
+
+  it('should get personne_allophone_ou_refugies_demandeurs_asile beneficiaries', () => {
+    const usageStatisticsResult: UsageStatisticsResult = [
+      {
+        type: 'beneficiaries',
+        key: 'personne_allophone_ou_refugies_demandeurs_asile',
+        value: 2,
+      },
+    ]
+
+    const usages = beneficiariesUsages(usageStatisticsResult)
 
     expect(usages).toStrictEqual([
       {
-        label: 'Personne allophone',
-        targetAudience: 'PersonneAllophone',
+        label: 'Personne allophone / Réfugiés / demandeurs d’asile',
+        targetAudience: 'PersonneAllophoneOuRefugiesDemandeursAsile',
         value: 2,
         progress: 100,
       },
     ])
   })
 
-  it('should get multiple target_audiences', () => {
+  it('should get multiple beneficiaries', () => {
     const usageStatisticsResult: UsageStatisticsResult = [
       { type: 'themes', key: 'intelligence_artificielle', value: 8 },
-      { type: 'target_audiences', key: 'personne_allophone', value: 2 },
       {
-        type: 'target_audiences',
-        key: 'personne_situation_handicap',
+        type: 'beneficiaries',
+        key: 'personne_allophone_ou_refugies_demandeurs_asile',
+        value: 2,
+      },
+      {
+        type: 'beneficiaries',
+        key: 'personnes_en_insertion_sociale_ou_professionnelle',
         value: 1,
       },
     ]
 
-    const usages = targetAudiencesUsages(usageStatisticsResult)
+    const usages = beneficiariesUsages(usageStatisticsResult)
 
     expect(usages).toStrictEqual([
       {
-        label: 'Personne allophone',
-        targetAudience: 'PersonneAllophone',
+        label: 'Personne allophone / Réfugiés / demandeurs d’asile',
+        targetAudience: 'PersonneAllophoneOuRefugiesDemandeursAsile',
         value: 2,
         progress: 100,
       },
       {
-        label: 'Personne en situation de handicap',
-        targetAudience: 'PersonneSituationHandicap',
+        label: 'Personnes en insertion sociale et/ou professionnelle',
+        targetAudience: 'PersonnesEnInsertionSocialeOuProfessionnelle',
         value: 1,
         progress: 50,
       },

@@ -14,7 +14,7 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
       resource={resource}
       withLink
       resourceTypes
-      targetAudiences
+      // targetAudiences
       themes
       titleClassName="fr-text--sm fr-text--medium"
       tagsClassName="fr-mt-1v"

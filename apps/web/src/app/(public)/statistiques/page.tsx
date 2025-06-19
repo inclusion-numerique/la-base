@@ -1,3 +1,5 @@
+import Beneficiaries from '@app/web/app/(public)/statistiques/Beneficiaries'
+import ProfessionalSectors from '@app/web/app/(public)/statistiques/ProfessionalSectors'
 import Card from '@app/web/components/Card'
 import {
   type StatisticsParams,
@@ -8,7 +10,6 @@ import React from 'react'
 import KeyFigureTitle from './KeyFigureTitle'
 import SelectPeriod from './SelectPeriod'
 import StatisticsChart from './StatisticsChart'
-import TargetAudiences from './TargetAudiences'
 import Thematiques from './Thematiques'
 
 const StatisticsPage = async ({
@@ -267,7 +268,12 @@ const StatisticsPage = async ({
             <Thematiques thematiques={usage.thematiques} />
           </div>
           <div className="fr-col-12 fr-col-lg-6">
-            <TargetAudiences targetAudiences={usage.publics} />
+            <Beneficiaries beneficiaries={usage.beneficiaries} />
+          </div>
+          <div className="fr-col-12 fr-col-lg-6">
+            <ProfessionalSectors
+              professionalSectors={usage.professionalSectors}
+            />
           </div>
         </div>
       </section>

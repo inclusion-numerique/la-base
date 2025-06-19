@@ -1,6 +1,7 @@
 import type { ResourceForMarkdown } from '@app/web/resources/getResourceForMarkdown'
+import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
+import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
 import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
-import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
 import TurndownService from 'turndown'
 
@@ -75,7 +76,8 @@ export const resourceToMarkdown = ({
   description,
   themes,
   contents,
-  targetAudiences,
+  beneficiaries,
+  professionalSectors,
   resourceTypes,
 }: ResourceForMarkdown): string =>
   `# ${title}
@@ -95,11 +97,20 @@ ${
 }  
 
 ${
-  targetAudiences.length > 0 &&
-  `Public cible : ${targetAudiences
-    .map((targetAudience) => targetAudienceLabels[targetAudience])
+  beneficiaries.length > 0 &&
+  `Bénéficiaires : ${beneficiaries
+    .map((beneficiary) => beneficiariesLabels[beneficiary])
     .join(', ')}`
 }
+
+${
+  professionalSectors.length > 0 &&
+  `Secteurs professionnels : ${professionalSectors
+    .map((professionalSector) => professionalSectorsLabels[professionalSector])
+    .join(', ')}`
+}
+
+
 
 ${contents.map((content) => contentToMarkdown(content)).join('\n\n')}
 `

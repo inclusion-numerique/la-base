@@ -36,7 +36,11 @@ const ranking = {
 export const countResources = async (
   searchParams: Pick<
     SearchParams,
-    'query' | 'themes' | 'resourceTypes' | 'targetAudiences'
+    | 'query'
+    | 'themes'
+    | 'resourceTypes'
+    | 'beneficiaries'
+    | 'professionalSectors'
   >,
   user: Pick<SessionUser, 'id'> | null,
 ) => {
@@ -107,12 +111,20 @@ export const countResources = async (
                                       )
                                     AND (
                                       ${
-                                        searchParams.targetAudiences.length ===
-                                        0
+                                        searchParams.beneficiaries.length === 0
                                       } OR
-                                      resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
-                                        searchParams.targetAudiences,
-                                      )}::target_audience[]
+                                      resources.beneficiaries && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.beneficiaries,
+                                      )}::beneficiary[]
+                                      )
+                                    AND (
+                                      ${
+                                        searchParams.professionalSectors
+                                          .length === 0
+                                      } OR
+                                      resources.professional_sectors && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.professionalSectors,
+                                      )}::professional_sector[]
                                       )
                                   GROUP BY resources.id),
            scored_resource AS (SELECT filtered_resources.*,
@@ -226,12 +238,20 @@ export const rankResources = async (
                                       )
                                     AND (
                                       ${
-                                        searchParams.targetAudiences.length ===
-                                        0
+                                        searchParams.beneficiaries.length === 0
                                       } OR
-                                      resources.target_audiences && ${enumArrayToSnakeCaseStringArray(
-                                        searchParams.targetAudiences,
-                                      )}::target_audience[]
+                                      resources.beneficiaries && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.beneficiaries,
+                                      )}::beneficiary[]
+                                      )
+                                    AND (
+                                      ${
+                                        searchParams.professionalSectors
+                                          .length === 0
+                                      } OR
+                                      resources.professional_sectors && ${enumArrayToSnakeCaseStringArray(
+                                        searchParams.professionalSectors,
+                                      )}::professional_sector[]
                                       )
                                   GROUP BY resources.id),
            scored_resource AS (SELECT filtered_resources.*,

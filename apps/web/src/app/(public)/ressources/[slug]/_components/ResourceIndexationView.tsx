@@ -4,8 +4,9 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
+import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
 import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
-import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
 import { themeLabels } from '@app/web/themes/themes'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import classNames from 'classnames'
@@ -33,14 +34,24 @@ const getResourceTypes = (resource: Resource) => ({
   slug: 'resourceTypes' as const,
 })
 
-const getTargetAudiences = (resource: Resource) => ({
-  title: 'Publics cibles',
-  description: 'Quel est le public visé par la ressource ?',
-  tags: resource.targetAudiences.map((targetAudience) => ({
-    slug: targetAudience,
-    label: targetAudienceLabels[targetAudience],
+const getBeneficiaries = (resource: Resource) => ({
+  title: 'Bénéficiaires',
+  description: 'Quel sont les bénéficiares visés par la ressource ?',
+  tags: resource.beneficiaries.map((beneficiary) => ({
+    slug: beneficiary,
+    label: beneficiariesLabels[beneficiary],
   })),
-  slug: 'targetAudiences' as const,
+  slug: 'beneficiaries' as const,
+})
+
+const getProfessionalSectors = (resource: Resource) => ({
+  title: 'Secteurs professionnels',
+  description: 'Quel sont les secteurs professionnels visés par la ressource ?',
+  tags: resource.professionalSectors.map((professionalSector) => ({
+    slug: professionalSector,
+    label: professionalSectorsLabels[professionalSector],
+  })),
+  slug: 'professionalSectors' as const,
 })
 
 const ResourceIndexationView = ({
@@ -48,7 +59,8 @@ const ResourceIndexationView = ({
   withDescription,
   withLink,
   themes,
-  targetAudiences,
+  beneficiaries,
+  professionalSectors,
   resourceTypes,
   titleClassName,
   tagsClassName,
@@ -58,7 +70,8 @@ const ResourceIndexationView = ({
   withLink?: boolean
   themes?: boolean
   resourceTypes?: boolean
-  targetAudiences?: boolean
+  beneficiaries?: boolean
+  professionalSectors?: boolean
   titleClassName?: string
   tagsClassName?: string
 }) => {
@@ -66,9 +79,10 @@ const ResourceIndexationView = ({
     () => [
       ...(themes ? [getThemes(resource)] : []),
       ...(resourceTypes ? [getResourceTypes(resource)] : []),
-      ...(targetAudiences ? [getTargetAudiences(resource)] : []),
+      ...(beneficiaries ? [getBeneficiaries(resource)] : []),
+      ...(professionalSectors ? [getProfessionalSectors(resource)] : []),
     ],
-    [resource, resourceTypes, targetAudiences, themes],
+    [resource, resourceTypes, beneficiaries, professionalSectors, themes],
   )
 
   return resourceInfo.map(({ title, description, tags, slug }, index) => (
