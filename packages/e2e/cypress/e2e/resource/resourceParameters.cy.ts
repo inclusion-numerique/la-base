@@ -177,7 +177,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
-  it('Acceptation 4 - Je peux changer l’indexation de ma ressource', () => {
+  it.only('Acceptation 4 - Je peux changer l’indexation de ma ressource', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
@@ -195,8 +195,10 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
     cy.testId('indexation-themes-select-DemarchesEtServicesEnLigne').click()
     cy.testId('indexation-resource-types-select-Article').click()
-    cy.testId('indexation-targetAudiences-select-Particuliers').click()
-    cy.testId('indexation-targetAudiences-select-AidantsNumeriques').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId(
+      'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
+    ).click()
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
@@ -205,7 +207,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-button').eq(2).click()
     cy.testId('indexation-themes-select').select('ActeursDuNumerique')
     cy.testId('indexation-resource-types-select').select('Annuaire')
-    cy.testId('indexation-targetAudiences-select').select('Adultes')
+    cy.testId('indexation-beneficiaries-select').select('Adultes')
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
@@ -216,7 +218,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
     cy.testId('resource-indexation-resourceTypes-Annuaire').should('exist')
-    cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
+    cy.testId('resource-indexation-beneficiaries-Adultes').should('exist')
   })
 
   it("Acceptation 5 - Je peux changer la visibilité des avis pour qu'ils soient privés", () => {

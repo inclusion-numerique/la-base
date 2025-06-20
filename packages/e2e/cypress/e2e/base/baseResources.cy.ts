@@ -118,7 +118,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-themes-select').select('IntelligenceArtificielle')
     cy.testId('indexation-resource-types-select').select('Article')
-    cy.testId('indexation-targetAudiences-select').select('Particuliers')
+    cy.testId('indexation-beneficiaries-select').select('Adultes')
+    cy.testId('indexation-professional-sectors-select').select(
+      'AidantsEtMediateursNumeriques',
+    )
     cy.testId('publish-resource-button').click()
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
 
