@@ -1,6 +1,7 @@
 import SearchFilters from '@app/web/components/Search/Filters/SearchFilters'
+import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
+import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
 import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
-import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
 import { categoryThemesOptions } from '@app/web/themes/themes'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -30,9 +31,15 @@ export const Default: Story = {
       },
       {
         multiple: false,
-        id: 'targetAudiences',
-        label: 'Public cible',
-        options: targetAudienceOptions,
+        id: 'beneficiaries',
+        label: 'Bénéficiaires',
+        options: beneficiariesOptions,
+      },
+      {
+        multiple: false,
+        id: 'professionalSectors',
+        label: 'Secteurs professionnels',
+        options: professionalSectorsOptions,
       },
     ],
   },

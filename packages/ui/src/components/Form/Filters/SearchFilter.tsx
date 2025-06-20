@@ -1,7 +1,7 @@
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React, { useRef, useState, type RefObject } from 'react'
+import { type RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FilterCategory } from './FilterCategory'
 import styles from './SearchFilter.module.css'

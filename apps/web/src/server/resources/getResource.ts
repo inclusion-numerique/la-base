@@ -119,7 +119,8 @@ export const getResourceSelect = (user: { id: string } | null) =>
     },
     themes: true,
     resourceTypes: true,
-    targetAudiences: true,
+    beneficiaries: true,
+    professionalSectors: true,
     contents: {
       select: {
         id: true,
