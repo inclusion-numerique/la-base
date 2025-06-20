@@ -1,12 +1,15 @@
 'use client'
 
 import { FilterCategory } from '@app/ui/components/Form/Filters/FilterCategory'
+import type {
+  Category,
+  FilterKey,
+} from '@app/ui/components/Form/Filters/filter'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import React, { Fragment, useState } from 'react'
-import type { Category, FilterKey } from './filter'
 
 const modal = createModal({
   id: 'filters-modal',

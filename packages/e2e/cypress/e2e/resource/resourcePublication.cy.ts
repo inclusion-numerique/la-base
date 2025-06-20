@@ -25,12 +25,16 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('indexation-box').should('exist')
     cy.testId('contributors-box').should('not.exist')
 
-    cy.testId('indexation-themes-select').select('IntelligenceArtificielle')
-    cy.testId('indexation-resource-types-select').select('Article')
-    cy.testId('indexation-beneficiaries-select').select('Adultes')
-    cy.testId('indexation-professional-sectors-select').select(
-      'AidantsEtMediateursNumeriques',
-    )
+    cy.testId('indexation-themes-select').click()
+    cy.testId('indexation-themes-select-IntelligenceArtificielle').click()
+    cy.testId('indexation-resource-types-select').click()
+    cy.testId('indexation-resource-types-select-Article').click()
+    cy.testId('indexation-beneficiaries-select').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId('indexation-professional-sectors-select').click()
+    cy.testId(
+      'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
+    ).click()
 
     cy.testId('publish-resource-button').click()
 

@@ -154,6 +154,7 @@ const MultipleSelectFormField = <T extends FieldValues>({
             {open && (
               <div className={styles.options} ref={optionsRef}>
                 <SelectOptionsList
+                  data-testid={dataTestId}
                   options={optionsWithDisabledSelectedValues}
                   onClick={onSelectChange}
                   selectedOptions={selectedOptions}

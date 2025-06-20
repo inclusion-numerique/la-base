@@ -177,7 +177,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
-  it.only('Acceptation 4 - Je peux changer l’indexation de ma ressource', () => {
+  it('Acceptation 4 - Je peux changer l’indexation de ma ressource', () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,
@@ -205,9 +205,12 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('resource-empty-indexation').should('exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select').select('ActeursDuNumerique')
-    cy.testId('indexation-resource-types-select').select('Annuaire')
-    cy.testId('indexation-beneficiaries-select').select('Adultes')
+    cy.testId('indexation-themes-select').click()
+    cy.testId('indexation-themes-select-ActeursDuNumerique').click()
+    cy.testId('indexation-resource-types-select').click()
+    cy.testId('indexation-resource-types-select-Annuaire').click()
+    cy.testId('indexation-beneficiaries-select').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click()
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 

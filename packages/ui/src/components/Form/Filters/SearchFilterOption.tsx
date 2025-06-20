@@ -3,16 +3,19 @@ import classNames from 'classnames'
 import styles from './SearchFilter.module.css'
 
 const SearchFilterOption = ({
+  'data-testid': dataTestId,
   option,
   onSelect,
   selected,
 }: {
+  'data-testid'?: string
   option: SelectOption
   selected?: boolean
   onSelect: (option: SelectOption) => void
 }) => (
   <>
     <button
+      data-testid={dataTestId}
       key={option.value}
       type="button"
       className={styles.option}
