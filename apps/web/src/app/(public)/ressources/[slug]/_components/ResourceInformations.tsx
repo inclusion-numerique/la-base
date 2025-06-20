@@ -14,8 +14,9 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
       resource={resource}
       withLink
       resourceTypes
-      targetAudiences
       themes
+      beneficiaries
+      professionalSectors
       titleClassName="fr-text--sm fr-text--medium"
       tagsClassName="fr-mt-1v"
     />

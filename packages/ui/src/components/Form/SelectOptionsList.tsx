@@ -1,27 +1,30 @@
-import type { SelectInputOption } from '@app/ui/components/Form/utils/options'
-import React from 'react'
+import SearchFilterOption from '@app/ui/components/Form/Filters/SearchFilterOption'
+import { FilterKey } from '@app/ui/components/Form/Filters/filter'
+import type { SelectOption } from '@app/ui/components/Form/utils/options'
 
-const SelectOptionsList = ({ options }: { options: SelectInputOption[] }) => (
+const SelectOptionsList = ({
+  'data-testid': dataTestId,
+  options,
+  selectedOptions,
+  onClick,
+}: {
+  'data-testid': string | undefined
+  options: SelectOption[]
+  selectedOptions: SelectOption[]
+  onClick: (option: SelectOption) => void
+}) => (
   <>
-    {options.map((option) =>
-      option.hidden ? null : 'options' in option ? (
-        <optgroup
-          key={option.label}
-          label={option.label}
-          disabled={option.disabled}
-        >
-          <SelectOptionsList options={option.options} />
-        </optgroup>
-      ) : (
-        <option
-          key={option.value}
-          value={option.value}
-          disabled={option.disabled}
-        >
-          {option.label}
-        </option>
-      ),
-    )}
+    {options.map((option) => (
+      <SearchFilterOption
+        data-testid={`${dataTestId}-${option.value}`}
+        key={option.value}
+        option={option}
+        selected={selectedOptions.some(
+          (selectedOption) => selectedOption.value === option.value,
+        )}
+        onSelect={(o) => onClick(o)}
+      />
+    ))}
   </>
 )
 

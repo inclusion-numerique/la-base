@@ -17,7 +17,8 @@ export const getResourceForMarkdown = async (
       updated: true,
       isPublic: true,
       published: true,
-      targetAudiences: true,
+      beneficiaries: true,
+      professionalSectors: true,
       resourceTypes: true,
       themes: true,
       contents: {

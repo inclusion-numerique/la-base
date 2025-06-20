@@ -1,9 +1,15 @@
-import { ResourceType, TargetAudience, Theme } from '@prisma/client'
+import {
+  Beneficiary,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 import z from 'zod'
 
 export const themesLimit = 5
 export const resourceTypesLimit = 4
-export const targetAudiencesLimit = 5
+export const beneficiariesLimit = 5
+export const professionalSectorsLimit = 5
 
 export const indexationCommand = {
   themes: z
@@ -22,13 +28,21 @@ export const indexationCommand = {
       resourceTypesLimit,
       `Vous ne pouvez pas ajouter plus de ${resourceTypesLimit} types de ressource`,
     ),
-  targetAudiences: z
-    .array(z.nativeEnum(TargetAudience), {
-      required_error: 'Merci d’ajouter au moins un public visé',
+  beneficiaries: z
+    .array(z.nativeEnum(Beneficiary), {
+      required_error: 'Merci d’ajouter au moins un bénéficiaire',
     })
     .max(
-      targetAudiencesLimit,
-      `Vous ne pouvez pas ajouter plus de ${targetAudiencesLimit} publics visés`,
+      beneficiariesLimit,
+      `Vous ne pouvez pas ajouter plus de ${beneficiariesLimit} bénéficiaires`,
+    ),
+  professionalSectors: z
+    .array(z.nativeEnum(ProfessionalSector), {
+      required_error: 'Merci d’ajouter au moins un secteur professionnel',
+    })
+    .max(
+      professionalSectorsLimit,
+      `Vous ne pouvez pas ajouter plus de ${professionalSectorsLimit} secteurs professionnels`,
     ),
 }
 
@@ -48,9 +62,10 @@ export const PublishCommandValidation = z.object({
           1,
           'Merci d’ajouter au moins un type de ressource',
         ),
-        targetAudiences: indexationCommand.targetAudiences.min(
+        beneficiaries: indexationCommand.beneficiaries,
+        professionalSectors: indexationCommand.professionalSectors.min(
           1,
-          'Merci d’ajouter au moins un public visé',
+          'Merci d’ajouter au moins un secteur professionnel',
         ),
       }),
       z.object({
@@ -85,7 +100,8 @@ export type ResourcePublishedV2 = {
       isPublic: true
       themes: Theme[]
       resourceTypes: ResourceType[]
-      targetAudiences: TargetAudience[]
+      beneficiaries: Beneficiary[]
+      professionalSectors: ProfessionalSector[]
     }
   | {
       isPublic: false

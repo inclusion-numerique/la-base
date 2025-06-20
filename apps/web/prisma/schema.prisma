@@ -277,36 +277,28 @@ enum ResourceType {
   @@map("resource_type")
 }
 
-enum TargetAudience {
-  TousPublics                          @map("tous_publics")
-  MediateursNumeriques                 @map("mediateurs_numeriques")
-  TravailleursSociaux                  @map("travailleurs_sociaux")
-  AssociationsActeursEss               @map("associations_acteurs_ess")
-  Entreprises                          @map("entreprises")
-  CollectivitesTerritoriales           @map("collectivites_territoriales")
-  AdministrationsEtablissementsPublics @map("administrations_etablissements_publics")
-  Elus                                 @map("elus")
-  AidantsNumeriques                    @map("aidants_numeriques")
-  AutresProfessionnels                 @map("autres_professionnels")
-  EnseignantsProfessionnelsFormation   @map("enseignants_professionnels_formation")
-  Particuliers                         @map("particuliers")
-  JeunesEnfants_6                      @map("jeunes_enfants_6")
-  Enfants_6_12                         @map("enfants_6_12")
-  Adolescents_12_18                    @map("adolescents_12_18")
-  JeunesAdultes_18_25                  @map("jeunes_adultes_18_25")
-  Adultes                              @map("adultes")
-  Parents                              @map("parents")
-  SeniorsPersonnesAgees                @map("seniors_personnes_agees")
-  PersonnesTresEloigneesNumerique      @map("personnes_tres_eloignees_numerique")
-  PersonnesInsertionProfessionnelle    @map("personnes_insertion_professionnelle")
-  PersonnesEnInsertionSociale          @map("personnes_en_insertion_sociale")
-  PersonnesPerteAutonomie              @map("personnes_perte_autonomie")
-  RefugiesDemandeursAsile              @map("refugies_demandeurs_asile")
-  PersonneSituationIlletrisme          @map("personne_situation_illetrisme")
-  PersonneAllophone                    @map("personne_allophone")
-  PersonneSituationHandicap            @map("personne_situation_handicap")
+enum Beneficiary {
+  TousPublics                                  @map("tous_publics")
+  EnfantsMineurs                               @map("enfants_mineurs")
+  Adultes                                      @map("adultes")
+  SeniorsPersonnesAgees                        @map("seniors_personnes_agees")
+  Parents                                      @map("parents")
+  PersonnesTresEloigneesNumerique              @map("personnes_tres_eloignees_numerique")
+  PersonneSituationHandicapOuPerteAutonomie    @map("personne_situation_handicap_ou_perte_autonomie")
+  PersonneSituationIlletrisme                  @map("personne_situation_illetrisme")
+  PersonneAllophoneOuRefugiesDemandeursAsile   @map("personne_allophone_ou_refugies_demandeurs_asile")
+  PersonnesEnInsertionSocialeOuProfessionnelle @map("personnes_en_insertion_sociale_ou_professionnelle")
 
-  @@map("target_audience")
+  @@map("beneficiary")
+}
+
+enum ProfessionalSector {
+  ActeursPublics                @map("acteurs_publics")
+  ActeursPrivesEtAssociatifs    @map("acteurs_prives_et_associatifs")
+  AidantsEtMediateursNumeriques @map("aidants_et_mediateurs_numeriques")
+  AutresProfessionnels          @map("autres_professionnels")
+
+  @@map("professional_sector")
 }
 
 model Resource {
@@ -319,10 +311,11 @@ model Resource {
   // isPublic is null when the user created the resource but did not publish it
   isPublic                  Boolean? @map("is_public")
 
-  themes          Theme[]
-  resourceTypes   ResourceType[]   @map("resource_types")
-  targetAudiences TargetAudience[] @map("target_audiences")
-  publicFeedback  Boolean          @default(true)
+  themes              Theme[]
+  resourceTypes       ResourceType[]        @map("resource_types")
+  beneficiaries       Beneficiary[]       @map("beneficiaries")
+  professionalSectors ProfessionalSector[] @map("professional_sectors")
+  publicFeedback      Boolean               @default(true)
 
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
@@ -358,7 +351,8 @@ model Resource {
   @@index([createdById])
   @@index(themes, name: "resources_themes_idx", type: Gin)
   @@index(resourceTypes, name: "resources_resource_types_idx", type: Gin)
-  @@index(targetAudiences, name: "resources_target_audiences_idx", type: Gin)
+  @@index(beneficiaries, name: "resources_beneficiaries_idx", type: Gin)
+  @@index(professionalSectors, name: "resources_professional_sectors_idx", type: Gin)
   @@map("resources")
 }
 
@@ -719,10 +713,11 @@ model SearchExecution {
 
   results Int
 
-  themes          Theme[]          @default([])
-  resourceTypes   ResourceType[]   @default([]) @map("resource_types")
-  targetAudiences TargetAudience[] @default([]) @map("target_audiences")
-  departments     String[]         @default([])
+  themes              Theme[]               @default([])
+  resourceTypes       ResourceType[]        @default([]) @map("resource_types")
+  beneficiaries       Beneficiary[]       @default([]) @map("beneficiaries")
+  professionalSectors ProfessionalSector[] @default([]) @map("professional_sectors")
+  departments         String[]              @default([])
 
   page    Int
   perPage Int @map("per_page")

@@ -70,3 +70,7 @@
     background-color: var(--background-default-grey-hover);
   }
 }
+
+.hint {
+  color: var(--grey-425-625);
+}

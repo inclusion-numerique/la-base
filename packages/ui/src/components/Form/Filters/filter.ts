@@ -8,7 +8,8 @@ import { type SearchFilterSelectOption } from './SearchFilters'
 export type FilterKey =
   | 'themes'
   | 'resourceTypes'
-  | 'targetAudiences'
+  | 'beneficiaries'
+  | 'professionalSectors'
   | 'departements'
 
 export type Category =

@@ -5,19 +5,19 @@ import SearchFilters, {
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
+  beneficiariesLabels,
+  beneficiariesOptions,
+} from '@app/web/themes/beneficiairies'
+import {
+  professionalSectorsLabels,
+  professionalSectorsOptions,
+} from '@app/web/themes/professionalSectors'
+import {
   resourceTypesLabels,
   resourceTypesOptions,
 } from '@app/web/themes/resourceTypes'
-import {
-  categoryTargetAudiencesOptions,
-  targetAudienceLabels,
-} from '@app/web/themes/targetAudiences'
-import {
-  categoryThemesOptions,
-  themeCategories,
-  themeLabels,
-} from '@app/web/themes/themes'
-import Button from '@codegouvfr/react-dsfr/Button'
+
+import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
 import type { Metadata } from 'next'
 import React, { type PropsWithChildren } from 'react'
 
@@ -63,13 +63,23 @@ const ResourcesSearchLayout = async ({
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchExecutionParams.targetAudiences.map(
-      (targetAudience) =>
+    ...searchExecutionParams.beneficiaries.map(
+      (beneficiary) =>
         ({
-          category: 'targetAudiences',
+          category: 'beneficiaries',
           option: {
-            value: targetAudience,
-            label: targetAudienceLabels[targetAudience],
+            value: beneficiary,
+            label: beneficiariesLabels[beneficiary],
+          },
+        }) satisfies FiltersInitialValue,
+    ),
+    ...searchExecutionParams.professionalSectors.map(
+      (professionalSector) =>
+        ({
+          category: 'professionalSectors',
+          option: {
+            value: professionalSector,
+            label: professionalSectorsLabels[professionalSector],
           },
         }) satisfies FiltersInitialValue,
     ),
@@ -94,14 +104,20 @@ const ResourcesSearchLayout = async ({
             {
               multiple: false,
               id: 'resourceTypes',
-              label: 'Type de ressources',
+              label: 'Type de ressource',
               options: resourceTypesOptions,
             },
             {
-              multiple: true,
-              id: 'targetAudiences',
-              label: 'Public cible',
-              options: categoryTargetAudiencesOptions,
+              multiple: false,
+              id: 'beneficiaries',
+              label: 'Bénéficiaires',
+              options: beneficiariesOptions,
+            },
+            {
+              multiple: false,
+              id: 'professionalSectors',
+              label: 'Secteur professionnel',
+              options: professionalSectorsOptions,
             },
           ]}
         />
