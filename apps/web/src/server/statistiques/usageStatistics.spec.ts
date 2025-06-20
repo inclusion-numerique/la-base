@@ -110,7 +110,7 @@ describe('Usage statistics', () => {
     expect(usages).toStrictEqual([
       {
         label: 'Personne allophone / Réfugiés / demandeurs d’asile',
-        targetAudience: 'PersonneAllophoneOuRefugiesDemandeursAsile',
+        beneficiary: 'PersonneAllophoneOuRefugiesDemandeursAsile',
         value: 2,
         progress: 100,
       },
@@ -137,13 +137,13 @@ describe('Usage statistics', () => {
     expect(usages).toStrictEqual([
       {
         label: 'Personne allophone / Réfugiés / demandeurs d’asile',
-        targetAudience: 'PersonneAllophoneOuRefugiesDemandeursAsile',
+        beneficiary: 'PersonneAllophoneOuRefugiesDemandeursAsile',
         value: 2,
         progress: 100,
       },
       {
         label: 'Personnes en insertion sociale et/ou professionnelle',
-        targetAudience: 'PersonnesEnInsertionSocialeOuProfessionnelle',
+        beneficiary: 'PersonnesEnInsertionSocialeOuProfessionnelle',
         value: 1,
         progress: 50,
       },

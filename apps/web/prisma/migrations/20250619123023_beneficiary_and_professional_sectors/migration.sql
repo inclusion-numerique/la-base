@@ -29,7 +29,8 @@ CREATE TYPE "beneficiary_tmp" AS ENUM (
   'enfants_mineurs',
   'personne_situation_handicap_ou_perte_autonomie',
   'personne_allophone_ou_refugies_demandeurs_asile',
-  'personnes_en_insertion_sociale_ou_professionnelle'
+  'personnes_en_insertion_sociale_ou_professionnelle',
+  'particuliers'
 );
 
 CREATE TYPE "professional_sector_tmp" AS ENUM (
@@ -119,7 +120,8 @@ INSERT INTO target_to_beneficiary (target, beneficiary) VALUES
   ('personne_allophone', 'personne_allophone_ou_refugies_demandeurs_asile'),
   ('refugies_demandeurs_asile', 'personne_allophone_ou_refugies_demandeurs_asile'),
   ('personnes_insertion_professionnelle', 'personnes_en_insertion_sociale_ou_professionnelle'),
-  ('personnes_en_insertion_sociale', 'personnes_en_insertion_sociale_ou_professionnelle');
+  ('personnes_en_insertion_sociale', 'personnes_en_insertion_sociale_ou_professionnelle'),
+  ('particuliers', 'tous_publics');
 
 INSERT INTO target_to_professional_sector (target, professional_sector) VALUES
   ('mediateurs_numeriques', 'aidants_et_mediateurs_numeriques'),
