@@ -2,21 +2,21 @@
 
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import SelectOptionsList from '@app/ui/components/Form/SelectOptionsList'
+import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import {
-  RefObject,
-  useRef,
-  useState,
   type ChangeEventHandler,
   type MouseEventHandler,
   type ReactNode,
+  RefObject,
+  useRef,
+  useState,
 } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import type { FieldPath } from 'react-hook-form/dist/types/path'
-import type { SelectOption } from './utils/options'
-import Button from '@codegouvfr/react-dsfr/Button'
-import styles from './MultipleSelectFormField.module.css'
 import { useOnClickOutside } from 'usehooks-ts'
+import styles from './MultipleSelectFormField.module.css'
+import type { SelectOption } from './utils/options'
 
 const OptionBadge = ({
   option,

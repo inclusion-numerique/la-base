@@ -15,7 +15,9 @@ const SelectOptionsList = ({
       <SearchFilterOption
         key={option.value}
         option={option}
-        selected={selectedOptions.some((selectedOption) => selectedOption.value === option.value)}
+        selected={selectedOptions.some(
+          (selectedOption) => selectedOption.value === option.value,
+        )}
         onSelect={(o) => onClick(o)}
       />
     ))}

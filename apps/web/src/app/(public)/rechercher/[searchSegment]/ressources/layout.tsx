@@ -48,7 +48,7 @@ const ResourcesSearchLayout = async ({
             value: theme,
             label: themeLabels[theme],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
     ...searchExecutionParams.resourceTypes.map(
       (resourceType) =>
@@ -58,7 +58,7 @@ const ResourcesSearchLayout = async ({
             value: resourceType,
             label: resourceTypesLabels[resourceType],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
     ...searchExecutionParams.beneficiaries.map(
       (beneficiary) =>
@@ -68,7 +68,7 @@ const ResourcesSearchLayout = async ({
             value: beneficiary,
             label: beneficiariesLabels[beneficiary],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
     ...searchExecutionParams.professionalSectors.map(
       (professionalSector) =>
@@ -78,7 +78,7 @@ const ResourcesSearchLayout = async ({
             value: professionalSector,
             label: professionalSectorsLabels[professionalSector],
           },
-        } satisfies FiltersInitialValue),
+        }) satisfies FiltersInitialValue,
     ),
   ]
 
