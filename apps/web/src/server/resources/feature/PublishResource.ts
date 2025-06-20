@@ -1,9 +1,15 @@
-import { SupportType, TargetAudience, Theme } from '@prisma/client'
+import {
+  Beneficiary,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 import z from 'zod'
 
 export const themesLimit = 5
-export const supportTypesLimit = 4
-export const targetAudiencesLimit = 5
+export const resourceTypesLimit = 4
+export const beneficiariesLimit = 5
+export const professionalSectorsLimit = 5
 
 export const indexationCommand = {
   themes: z
@@ -14,21 +20,29 @@ export const indexationCommand = {
       themesLimit,
       `Vous ne pouvez pas ajouter plus de ${themesLimit} thématiques`,
     ),
-  supportTypes: z
-    .array(z.nativeEnum(SupportType), {
-      required_error: 'Merci d’ajouter au moins un type de support',
+  resourceTypes: z
+    .array(z.nativeEnum(ResourceType), {
+      required_error: 'Merci d’ajouter au moins un type de ressource',
     })
     .max(
-      supportTypesLimit,
-      `Vous ne pouvez pas ajouter plus de ${supportTypesLimit} types de support`,
+      resourceTypesLimit,
+      `Vous ne pouvez pas ajouter plus de ${resourceTypesLimit} types de ressource`,
     ),
-  targetAudiences: z
-    .array(z.nativeEnum(TargetAudience), {
-      required_error: 'Merci d’ajouter au moins un public visé',
+  beneficiaries: z
+    .array(z.nativeEnum(Beneficiary), {
+      required_error: 'Merci d’ajouter au moins un bénéficiaire',
     })
     .max(
-      targetAudiencesLimit,
-      `Vous ne pouvez pas ajouter plus de ${targetAudiencesLimit} publics visés`,
+      beneficiariesLimit,
+      `Vous ne pouvez pas ajouter plus de ${beneficiariesLimit} bénéficiaires`,
+    ),
+  professionalSectors: z
+    .array(z.nativeEnum(ProfessionalSector), {
+      required_error: 'Merci d’ajouter au moins un secteur professionnel',
+    })
+    .max(
+      professionalSectorsLimit,
+      `Vous ne pouvez pas ajouter plus de ${professionalSectorsLimit} secteurs professionnels`,
     ),
 }
 
@@ -44,13 +58,14 @@ export const PublishCommandValidation = z.object({
           1,
           'Merci d’ajouter au moins une thématique',
         ),
-        supportTypes: indexationCommand.supportTypes.min(
+        resourceTypes: indexationCommand.resourceTypes.min(
           1,
-          'Merci d’ajouter au moins un type de support',
+          'Merci d’ajouter au moins un type de ressource',
         ),
-        targetAudiences: indexationCommand.targetAudiences.min(
+        beneficiaries: indexationCommand.beneficiaries,
+        professionalSectors: indexationCommand.professionalSectors.min(
           1,
-          'Merci d’ajouter au moins un public visé',
+          'Merci d’ajouter au moins un secteur professionnel',
         ),
       }),
       z.object({
@@ -84,8 +99,9 @@ export type ResourcePublishedV2 = {
   | {
       isPublic: true
       themes: Theme[]
-      supportTypes: SupportType[]
-      targetAudiences: TargetAudience[]
+      resourceTypes: ResourceType[]
+      beneficiaries: Beneficiary[]
+      professionalSectors: ProfessionalSector[]
     }
   | {
       isPublic: false

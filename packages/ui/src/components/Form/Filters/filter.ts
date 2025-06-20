@@ -2,8 +2,9 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 
 export type FilterKey =
   | 'themes'
-  | 'supportTypes'
-  | 'targetAudiences'
+  | 'resourceTypes'
+  | 'beneficiaries'
+  | 'professionalSectors'
   | 'departements'
 
 export type Category =

@@ -105,8 +105,9 @@ export const createTestResource = (
         }
       : null,
     themes: ['ArtsEtCulture'],
-    supportTypes: ['Article'],
-    targetAudiences: ['Particuliers'],
+    resourceTypes: ['Article'],
+    beneficiaries: [],
+    professionalSectors: ['ActeursPublics'],
     contents: [],
     contributors: contributor
       ? [

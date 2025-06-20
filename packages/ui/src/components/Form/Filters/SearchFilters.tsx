@@ -1,11 +1,5 @@
 'use client'
 
-import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
-import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
-import type {
-  Category,
-  FilterKey,
-} from '@app/ui/components/Form/Filters/filter'
 import OptionBadge from '@app/ui/components/Form/OptionBadge'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import {
@@ -16,6 +10,9 @@ import {
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
+import SearchFilter from './SearchFilter'
+import styles from './SearchFilters.module.css'
+import type { Category, FilterKey } from './filter'
 
 export type FiltersInitialValue = {
   category: FilterKey
