@@ -1,6 +1,5 @@
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './SearchFilter.module.css'
 
 const SearchFilterOption = ({
@@ -31,7 +30,7 @@ const SearchFilterOption = ({
       </div>
       <span
         className={classNames(
-          'fr-icon--sm fr-icon-check-line fr-text-title--blue-france',
+          'fr-flex fr-align-items-center fr-icon--sm fr-icon-check-line fr-text-title--blue-france',
           !selected && 'fr-hidden',
         )}
       />

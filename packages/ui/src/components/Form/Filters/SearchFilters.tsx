@@ -10,9 +10,9 @@ import {
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
-import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
+import SearchFilter from './SearchFilter'
+import styles from './SearchFilters.module.css'
 import type { Category, FilterKey } from './filter'
-import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
 
 export type FiltersInitialValue = {
   category: FilterKey

@@ -62,10 +62,7 @@ export const PublishCommandValidation = z.object({
           1,
           'Merci d’ajouter au moins un type de ressource',
         ),
-        beneficiaries: indexationCommand.beneficiaries.min(
-          1,
-          'Merci d’ajouter au moins un bénéficiaire',
-        ),
+        beneficiaries: indexationCommand.beneficiaries,
         professionalSectors: indexationCommand.professionalSectors.min(
           1,
           'Merci d’ajouter au moins un secteur professionnel',

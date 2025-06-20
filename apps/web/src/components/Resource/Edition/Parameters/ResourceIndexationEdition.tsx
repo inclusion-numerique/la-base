@@ -36,14 +36,13 @@ const ResourceIndexationEdition = <T extends FieldValues>({
         <>
           Quelles sont les principales thématiques abordées par la ressource ?
           <br />
-          Sélectionnez jusqu'à {themesLimit} thématiques.
+          Sélectionner jusqu'à {themesLimit} thématiques.
         </>
       }
       control={control}
       limit={themesLimit}
       path={themesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez une thématique"
+      defaultOptionLabel="Sélectionner une thématique"
       options={themeOptions}
     />
     <MultipleSelectFormField
@@ -54,32 +53,14 @@ const ResourceIndexationEdition = <T extends FieldValues>({
         <>
           Type de ressource (article, fiche, guide...).
           <br />
-          Sélectionnez jusqu'à {resourceTypesLimit} types.
+          Sélectionner jusqu'à {resourceTypesLimit} types maximum.
         </>
       }
       control={control}
       limit={resourceTypesLimit}
       path={resourceTypesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez un type de ressource"
+      defaultOptionLabel="Sélectionner un type de ressource"
       options={resourceTypesOptions}
-    />
-    <MultipleSelectFormField
-      data-testid="indexation-beneficiaries-select"
-      asterisk={required}
-      label="Bénéficiaires"
-      hint={
-        <>
-          Quel est le public visé par la ressource ?<br />
-          Sélectionnez jusqu'à {beneficiariesLimit} bénéficiaires.
-        </>
-      }
-      control={control}
-      limit={beneficiariesLimit}
-      path={beneficiariesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez un bénéficiaire"
-      options={beneficiariesOptions}
     />
     <MultipleSelectFormField
       data-testid="indexation-professional-sectors-select"
@@ -88,15 +69,30 @@ const ResourceIndexationEdition = <T extends FieldValues>({
       hint={
         <>
           Quels sont les secteurs professionnels concernés ?<br />
-          Sélectionnez jusqu'à {professionalSectorsLimit} secteurs.
         </>
       }
       control={control}
       limit={professionalSectorsLimit}
       path={professionalSectorsPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez un secteur professionnel"
+      defaultOptionLabel="Sélectionner un secteur professionnel"
       options={professionalSectorsOptions}
+    />
+    <MultipleSelectFormField
+      data-testid="indexation-beneficiaries-select"
+      asterisk={false}
+      label="Bénéficiaires"
+      hint={
+        <>
+          À quel(s) type(s) de bénéficiaire(s) est destinée votre ressource ?
+          <br />
+          Sélectionner jusqu'à {beneficiariesLimit} bénéficiaires maximum.
+        </>
+      }
+      control={control}
+      limit={beneficiariesLimit}
+      path={beneficiariesPath}
+      defaultOptionLabel="Sélectionner un bénéficiaire"
+      options={beneficiariesOptions}
     />
   </>
 )

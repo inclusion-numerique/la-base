@@ -1,8 +1,8 @@
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import React, { useState } from 'react'
 import styles from './SearchFilter.module.css'
-import SearchFilterOption from './SearchFilterOption'
 import type { Category, FilterKey } from './filter'
+import SearchFilterOption from '@app/ui/components/Form/Filters/SearchFilterOption'
 
 export const FilterCategory = ({
   category,
