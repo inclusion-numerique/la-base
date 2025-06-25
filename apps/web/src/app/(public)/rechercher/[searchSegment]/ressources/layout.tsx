@@ -1,7 +1,7 @@
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchFilters, {
-  type FiltersInitialValue,
-} from '@app/web/components/Search/Filters/SearchFilters'
+  FiltersInitialValue,
+} from '@app/ui/components/Form/Filters/SearchFilters'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
@@ -17,7 +17,11 @@ import {
   resourceTypesOptions,
 } from '@app/web/themes/resourceTypes'
 
-import { categoryThemesOptions, themeLabels } from '@app/web/themes/themes'
+import {
+  categoryThemesOptions,
+  themeCategories,
+  themeLabels,
+} from '@app/web/themes/themes'
 import type { Metadata } from 'next'
 import React, { type PropsWithChildren } from 'react'
 

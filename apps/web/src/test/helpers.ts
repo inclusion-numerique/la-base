@@ -104,7 +104,7 @@ export const createTestResource = (
           image: null,
         }
       : null,
-    themes: ['ArtsEtCulture'],
+    themes: ['Accessibilite'],
     resourceTypes: ['Article'],
     beneficiaries: [],
     professionalSectors: ['ActeursPublics'],

@@ -1,4 +1,6 @@
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import ResourceIndexationThemesSelect from '@app/web/components/Resource/Edition/Parameters/ResourceIndexationThemesSelect'
 import {
   beneficiariesLimit,
   professionalSectorsLimit,
@@ -28,23 +30,21 @@ const ResourceIndexationEdition = <T extends FieldValues>({
   required?: boolean
 }) => (
   <>
-    <MultipleSelectFormField
-      data-testid="indexation-themes-select"
-      asterisk={required}
-      label="Thématiques"
-      hint={
-        <>
+    <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-8v">
+      <label className="fr-label" htmlFor={themesPath}>
+        Thématiques {required && <RedAsterisk />}
+        <span className="fr-hint-text">
           Quelles sont les principales thématiques abordées par la ressource ?
           <br />
           Sélectionner jusqu'à {themesLimit} thématiques.
-        </>
-      }
-      control={control}
-      limit={themesLimit}
-      path={themesPath}
-      defaultOptionLabel="Sélectionner une thématique"
-      options={themeOptions}
-    />
+        </span>
+      </label>
+      <ResourceIndexationThemesSelect
+        control={control}
+        themesPath={themesPath}
+        data-testid="indexation-themes-select"
+      />
+    </div>
     <MultipleSelectFormField
       data-testid="indexation-resource-types-select"
       asterisk={required}

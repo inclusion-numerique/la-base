@@ -51,12 +51,15 @@
 .optionCategory {
   color: var(--blue-france-sun-113-625);
   font-weight: 500;
-  white-space: nowrap;
 }
 
 .optionCategory,
 .option {
-  white-space: nowrap;
+  @media (max-width: 544px) {
+    white-space: nowrap;
+  }
+
+  white-space: normal;
   cursor: pointer;
   padding: 12px 16px;
   width: 100%;

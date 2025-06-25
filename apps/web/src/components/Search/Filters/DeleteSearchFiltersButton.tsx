@@ -10,8 +10,9 @@ const DeleteSearchFiltersButton = () => {
       searchUrl('ressources', {
         query: null,
         themes: [],
-        supportTypes: [],
-        targetAudiences: [],
+        resourceTypes: [],
+        beneficiaries: [],
+        professionalSectors: [],
         departements: [],
       }),
     )

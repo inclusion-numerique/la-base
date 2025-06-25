@@ -1,4 +1,4 @@
-import SearchFilters from '@app/web/components/Search/Filters/SearchFilters'
+import SearchFilters from '@app/ui/components/Form/Filters/SearchFilters'
 import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
 import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
 import { resourceTypesOptions } from '@app/web/themes/resourceTypes'

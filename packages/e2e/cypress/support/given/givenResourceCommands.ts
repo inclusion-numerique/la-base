@@ -19,7 +19,7 @@ export const createTestPublishResourceCommand = (
           professionalSectors: ['AidantsEtMediateursNumeriques'],
         }
       : { resourceId, isPublic: false },
-  } satisfies PublishCommand)
+  }) satisfies PublishCommand
 
 export const createTestResourceCommands = ({
   baseId,

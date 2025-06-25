@@ -1,10 +1,10 @@
-import { SelectOption } from '@app/ui/components/Form/utils/options'
-import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import {
   FilterKey,
   ThematicSelection,
   isCategoryComplete,
-} from '@app/web/components/Search/Filters/filter'
+} from '@app/ui/components/Form/Filters/filter'
+import { SelectOption } from '@app/ui/components/Form/utils/options'
+import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import {
   CATEGORY_VARIANTS,
   CATEGORY_VARIANTS_TAG,
@@ -20,50 +20,67 @@ const SearchThematicsCategory = ({
   selected,
   onSelect,
   onSelectAllInCategory,
+  disabled = false,
+  withHint = false,
 }: {
   category: Category
   options: SelectOption[]
   selected: ThematicSelection[]
   onSelect: (option: SelectOption, category: FilterKey) => void
-  onSelectAllInCategory: (category: FilterKey, selected: boolean) => void
+  onSelectAllInCategory?: (category: FilterKey, selected: boolean) => void
+  disabled?: boolean
+  withHint?: boolean
 }) => {
   const handleOnClick = (opt: SelectOption) => onSelect(opt, 'themes')
 
   return (
     <div className="fr-flex fr-direction-column fr-flex-gap-6v">
       <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
-        <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          <span
-            className={classNames(
-              CATEGORY_VARIANTS[category].color,
-              CATEGORY_VARIANTS[category].icon,
-              'ri-xl',
-            )}
-            aria-hidden
-          />
-          <span
-            className={classNames(
-              CATEGORY_VARIANTS[category].color,
-              'fr-text--xl fr-text--bold fr-text--start fr-mb-0',
-            )}
-          >
-            {category}
-          </span>
+        <div className="fr-flex fr-direction-column">
+          <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
+            <span
+              className={classNames(
+                CATEGORY_VARIANTS[category].color,
+                CATEGORY_VARIANTS[category].icon,
+                'ri-xl',
+              )}
+              aria-hidden
+            />
+            <span
+              className={classNames(
+                CATEGORY_VARIANTS[category].color,
+                'fr-text--xl fr-text--bold fr-text--start fr-mb-0',
+              )}
+            >
+              {category}
+            </span>
+          </div>
+          {!!withHint && (
+            <span className="fr-hint-text fr-text--sm fr-mb-0">
+              Vous ne trouvez pas la thématique correspondante à votre ressource
+              ? Ajouter là à la catégorie.
+            </span>
+          )}
         </div>
-        <Checkbox
-          options={[
-            {
-              label: 'Sélectionner toute la catégorie',
-              nativeInputProps: {
-                name: category,
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  onSelectAllInCategory(category as FilterKey, e.target.checked)
+        {!!onSelectAllInCategory && (
+          <Checkbox
+            options={[
+              {
+                label: 'Sélectionner toute la catégorie',
+                nativeInputProps: {
+                  name: category,
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    onSelectAllInCategory(
+                      category as FilterKey,
+                      e.target.checked,
+                    )
+                  },
+                  checked: isCategoryComplete(category, selected),
                 },
-                checked: isCategoryComplete(category, selected),
               },
-            },
-          ]}
-        />
+            ]}
+          />
+        )}
       </div>
       <div className="fr-flex fr-flex-wrap fr-flex-gap-2v">
         {options.map((opt) => {
@@ -83,6 +100,7 @@ const SearchThematicsCategory = ({
           return (
             <ThematicOptionBadge
               key={opt.value}
+              disabled={disabled}
               iconId={iconId}
               option={opt}
               ariaLabelPrefix={ariaLabelPrefix}
