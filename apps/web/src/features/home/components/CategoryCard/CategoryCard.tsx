@@ -1,4 +1,8 @@
-import { CATEGORY_VARIANTS, Category } from '@app/web/themes/themes'
+import {
+  CATEGORY_VARIANTS,
+  Category,
+  CategoryStyle,
+} from '@app/web/themes/themes'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
@@ -9,14 +13,36 @@ export type CategoryCardProps = {
   resourcesCount: number
 }
 
+const CATEGORY_VARIANTS_STYLES: Record<
+  Category,
+  CategoryStyle & { hover: string }
+> = {
+  'Inclusion numérique': {
+    ...CATEGORY_VARIANTS['Inclusion numérique'],
+    hover: styles.inclusionCard,
+  },
+  'Culture numérique': {
+    ...CATEGORY_VARIANTS['Culture numérique'],
+    hover: styles.cultureNumCard,
+  },
+  'Communs & souveraineté': {
+    ...CATEGORY_VARIANTS['Communs & souveraineté'],
+    hover: styles.communsCard,
+  },
+  'Numérique & environnement': {
+    ...CATEGORY_VARIANTS['Numérique & environnement'],
+    hover: styles.numeriqueCard,
+  },
+}
+
 export const CategoryCard = ({
   category,
   resourcesCount,
 }: CategoryCardProps) => (
   <div
     className={classNames(
-      CATEGORY_VARIANTS[category].background,
-      CATEGORY_VARIANTS[category].hover,
+      CATEGORY_VARIANTS_STYLES[category].background,
+      CATEGORY_VARIANTS_STYLES[category].hover,
       'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link',
     )}
   >
