@@ -1,5 +1,4 @@
 import SearchFilterOption from '@app/ui/components/Form/Filters/SearchFilterOption'
-import { FilterKey } from '@app/ui/components/Form/Filters/filter'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 
 const SelectOptionsList = ({

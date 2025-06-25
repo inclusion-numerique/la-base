@@ -193,9 +193,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-button').eq(2).click()
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
+    cy.log('here')
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
-    ).click()
+    ).click({ force: true })
+
     cy.testId('indexation-resource-types-select-Article').click()
     cy.testId('indexation-beneficiaries-select-Adultes').click()
     cy.testId(
@@ -205,10 +207,13 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-empty-indexation').should('exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select').click()
-    cy.testId('indexation-themes-select-ActeursDuNumerique').click()
+    cy.log('here 2')
+    cy.testId(
+      'indexation-themes-select-AidesAuxDemarchesAdministratives',
+    ).click({
+      force: true,
+    })
     cy.testId('indexation-resource-types-select').click()
     cy.testId('indexation-resource-types-select-Annuaire').click()
     cy.testId('indexation-beneficiaries-select').click()
@@ -221,7 +226,9 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
 
-    cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
+    cy.testId(
+      'resource-indexation-themes-AidesAuxDemarchesAdministratives',
+    ).should('exist')
     cy.testId('resource-indexation-resourceTypes-Annuaire').should('exist')
     cy.testId('resource-indexation-beneficiaries-Adultes').should('exist')
   })

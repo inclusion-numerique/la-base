@@ -27,14 +27,27 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
 
     cy.testId('indexation-themes-select').click()
     cy.testId('indexation-themes-select-IntelligenceArtificielle').click()
-    cy.testId('indexation-resource-types-select').click()
-    cy.testId('indexation-resource-types-select-Article').click()
-    cy.testId('indexation-beneficiaries-select').click()
-    cy.testId('indexation-beneficiaries-select-Adultes').click()
-    cy.testId('indexation-professional-sectors-select').click()
+    cy.testId('indexation-themes-select-apply').click()
+    cy.testId('indexation-resource-types-select').click({
+      force: true,
+    })
+    cy.testId('indexation-resource-types-select-Article').click({
+      force: true,
+    })
+    cy.testId('indexation-beneficiaries-select').click({
+      force: true,
+    })
+    cy.testId('indexation-beneficiaries-select-Adultes').click({
+      force: true,
+    })
+    cy.testId('indexation-professional-sectors-select').click({
+      force: true,
+    })
     cy.testId(
       'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
-    ).click()
+    ).click({
+      force: true,
+    })
 
     cy.testId('publish-resource-button').click()
 

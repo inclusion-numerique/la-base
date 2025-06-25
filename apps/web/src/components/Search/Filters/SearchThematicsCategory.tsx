@@ -15,6 +15,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 const SearchThematicsCategory = ({
+  'data-testid': dataTestId,
   category,
   options,
   selected,
@@ -23,6 +24,7 @@ const SearchThematicsCategory = ({
   disabled = false,
   withHint = false,
 }: {
+  'data-testid'?: string
   category: Category
   options: SelectOption[]
   selected: ThematicSelection[]
@@ -100,6 +102,7 @@ const SearchThematicsCategory = ({
           return (
             <ThematicOptionBadge
               key={opt.value}
+              data-testid={`${dataTestId}-${opt.value}`}
               disabled={disabled}
               iconId={iconId}
               option={opt}

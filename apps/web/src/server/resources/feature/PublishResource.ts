@@ -29,13 +29,12 @@ export const indexationCommand = {
       `Vous ne pouvez pas ajouter plus de ${resourceTypesLimit} types de ressource`,
     ),
   beneficiaries: z
-    .array(z.nativeEnum(Beneficiary), {
-      required_error: 'Merci d’ajouter au moins un bénéficiaire',
-    })
+    .array(z.nativeEnum(Beneficiary))
     .max(
       beneficiariesLimit,
       `Vous ne pouvez pas ajouter plus de ${beneficiariesLimit} bénéficiaires`,
-    ),
+    )
+    .optional(),
   professionalSectors: z
     .array(z.nativeEnum(ProfessionalSector), {
       required_error: 'Merci d’ajouter au moins un secteur professionnel',

@@ -40,7 +40,9 @@ export const generateMetadata = async ({
 
 const ResourceParametersPage = async ({
   params,
-}: { params: Promise<{ slug: string }> }) => {
+}: {
+  params: Promise<{ slug: string }>
+}) => {
   const { slug } = await params
   const user = await getSessionUser()
   if (!user) {

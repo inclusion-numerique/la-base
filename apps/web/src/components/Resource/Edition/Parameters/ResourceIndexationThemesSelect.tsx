@@ -11,13 +11,14 @@ import {
   CATEGORY_VARIANTS_TAG,
   Category,
   categoryThemesOptions,
+  themeCategories,
+  themeOptions,
 } from '@app/web/themes/themes'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 import { useState } from 'react'
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
-import { Filter } from 'turndown'
 import styles from './ResourceIndexationThemesSelect.module.css'
 
 const modal = createModal({
@@ -35,7 +36,30 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
   'data-testid'?: string
 }) => {
   const [internalSelected, setInternalSelected] = useState<ThematicSelection[]>(
-    [],
+    () => {
+      const themes = control._formValues.payload.themes || []
+      return themes
+        .map((theme: string) => {
+          const option = themeOptions.find((opt) => opt.value === theme)
+          const category =
+            themeCategories[theme as keyof typeof themeCategories]
+
+          if (!option || !category) {
+            return null
+          }
+
+          return {
+            category: 'themes' as FilterKey,
+            option: {
+              ...option,
+              extra: {
+                category,
+              },
+            },
+          }
+        })
+        .filter(Boolean) as ThematicSelection[]
+    },
   )
 
   const handleOnSelect = (option: SelectOption, category: FilterKey) => {
@@ -81,11 +105,14 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
           )
           return (
             <ThematicOptionBadge
+              iconId="fr-icon-close-line"
+              iconClassName="fr-text-title--blue-france"
               key={selected.option.value}
               categoryIconClassName={categoryIconClassName}
               className={className}
               textClassName="fr-text-label--grey"
               option={{ label: selected.option.label, disabled: false }}
+              onClick={() => handleOnSelect(selected.option, 'themes')}
             />
           )
         })}
@@ -115,6 +142,7 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                         ([key, value]) => (
                           <SearchThematicsCategory
                             key={key}
+                            data-testid={dataTestId}
                             disabled={internalSelected.length === themesLimit}
                             onSelect={handleOnSelect}
                             selected={internalSelected}
@@ -135,7 +163,11 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                       >
                         Annuler
                       </Button>
-                      <Button priority="primary" onClick={applyThematics}>
+                      <Button
+                        priority="primary"
+                        data-testid="indexation-themes-select-apply"
+                        onClick={applyThematics}
+                      >
                         Valider ma sélection
                       </Button>
                     </div>

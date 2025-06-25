@@ -31,6 +31,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
       },
     },
   })
+
   const mutate = trpc.resource.mutate.useMutation()
   return (
     <EditCard
