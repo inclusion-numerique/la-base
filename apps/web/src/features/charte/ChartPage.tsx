@@ -125,8 +125,8 @@ const ChartPage = () => {
                   Numérique en Commun[s]
                 </Link>
                 &nbsp;opèrent comme le fil directeur de notre définition du
-                numérique d’intérêt général. Les ressources publiés sur les
-                bases ont pour but de contribuer à ces principes.
+                numérique d’intérêt général. Les ressources publiées sur les
+                Bases ont pour but de contribuer à ces principes.
               </p>
             </div>
             <div className={styles.chartCardsContainer}>

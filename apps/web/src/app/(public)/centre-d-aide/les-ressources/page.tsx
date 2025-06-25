@@ -317,7 +317,7 @@ const ContentPolicyPage = () => (
                   remplir cette indexation (car votre ressource ne sera pas
                   référencée dans le moteur de recherche de la plateforme). Afin
                   de pouvoir partager cette ressource à d’autres personnes, vous
-                  aurez la possibilité d’invitez des contributeurs, qui pourront
+                  aurez la possibilité d’inviter des contributeurs, qui pourront
                   voir et éditer votre ressource.
                 </p>
                 <p>
