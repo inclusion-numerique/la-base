@@ -13,6 +13,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux la ret
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-themes-select').click()
     cy.testId('indexation-themes-select-IntelligenceArtificielle').click()
+    cy.testId('indexation-themes-select-apply').click()
     cy.testId('indexation-resource-types-select').click()
     cy.testId('indexation-resource-types-select-Article').click()
     cy.testId('indexation-beneficiaries-select').click()

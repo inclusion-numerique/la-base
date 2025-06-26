@@ -193,7 +193,6 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-button').eq(2).click()
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
-    cy.log('here')
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
     ).click({ force: true })
@@ -208,7 +207,6 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.wait('@mutation')
 
     cy.testId('edit-card-button').eq(2).click()
-    cy.log('here 2')
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
     ).click({
