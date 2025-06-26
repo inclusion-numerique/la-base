@@ -1,9 +1,14 @@
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
-import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
+import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { themeLabels } from '@app/web/themes/themes'
 import { searchParamsFromQueryString } from '@app/web/utils/searchParamsFromQueryString'
-// import * as queryString from 'node:querystring'
-import type { SupportType, TargetAudience, Theme } from '@prisma/client'
+import type {
+  Beneficiary,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 
 export const searchTabs = ['ressources', 'bases', 'profils'] as const
 export type SearchTab = (typeof searchTabs)[number]
@@ -102,7 +107,8 @@ export type UrlSearchQueryParams = {
   r?: string | string[] | null
   thematiques?: string | string[] | null
   types?: string | string[] | null
-  publics?: string | string[] | null
+  beneficiaires?: string | string[] | null
+  secteurs?: string | string[] | null
   departements?: string | string[] | null
   onglet?: string | string[] | null
 }
@@ -116,8 +122,9 @@ export type UrlPaginationParams = {
 export type SearchParams = {
   query: string | null
   themes: Theme[]
-  supportTypes: SupportType[]
-  targetAudiences: TargetAudience[]
+  resourceTypes: ResourceType[]
+  beneficiaries: Beneficiary[]
+  professionalSectors: ProfessionalSector[]
   departements: string[]
 }
 
@@ -130,8 +137,9 @@ export type PaginationParams = {
 export const defaultSearchParams: Readonly<SearchParams> = {
   query: null,
   themes: [],
-  supportTypes: [],
-  targetAudiences: [],
+  resourceTypes: [],
+  beneficiaries: [],
+  professionalSectors: [],
   departements: [],
 }
 
@@ -159,7 +167,8 @@ export const sanitizeUrlSearchQueryParams = (
 
   const typesAsArray = queryParamToArray(params?.types)
 
-  const publicsAsArray = queryParamToArray(params?.publics)
+  const beneficiariesAsArray = queryParamToArray(params?.beneficiaires)
+  const professionalSectorsAsArray = queryParamToArray(params?.secteurs)
 
   const departementsAsArray = queryParamToArray(params?.departements)
 
@@ -171,19 +180,24 @@ export const sanitizeUrlSearchQueryParams = (
     (theme) => theme in themeLabels,
   ) as Theme[]
 
-  const supportTypes = typesAsArray.filter(
-    (type) => type in supportTypeLabels,
-  ) as SupportType[]
+  const resourceTypes = typesAsArray.filter(
+    (type) => type in resourceTypesLabels,
+  ) as ResourceType[]
 
-  const targetAudiences = publicsAsArray.filter(
-    (target) => target in targetAudienceLabels,
-  ) as TargetAudience[]
+  const beneficiaries = beneficiariesAsArray.filter(
+    (beneficiary) => beneficiary in beneficiariesLabels,
+  ) as Beneficiary[]
+
+  const professionalSectors = professionalSectorsAsArray.filter(
+    (professionalSector) => professionalSector in professionalSectorsLabels,
+  ) as ProfessionalSector[]
 
   return {
     query,
     themes,
-    supportTypes,
-    targetAudiences,
+    resourceTypes,
+    beneficiaries,
+    professionalSectors,
     departements: departementsAsArray,
   }
 }
@@ -226,9 +240,13 @@ const searchParamsToUrlQueryParams = (
   thematiques: params.themes.length > 0 ? params.themes : undefined,
   departements:
     params.departements.length > 0 ? params.departements : undefined,
-  types: params.supportTypes.length > 0 ? params.supportTypes : undefined,
-  publics:
-    params.targetAudiences.length > 0 ? params.targetAudiences : undefined,
+  types: params.resourceTypes.length > 0 ? params.resourceTypes : undefined,
+  beneficiaires:
+    params.beneficiaries.length > 0 ? params.beneficiaries : undefined,
+  secteurs:
+    params.professionalSectors.length > 0
+      ? params.professionalSectors
+      : undefined,
 })
 
 export const paginationParamsToUrlQueryParams = (

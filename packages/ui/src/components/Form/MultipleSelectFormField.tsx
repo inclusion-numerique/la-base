@@ -1,10 +1,22 @@
+'use client'
+
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import SelectOptionsList from '@app/ui/components/Form/SelectOptionsList'
+import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from 'react'
+import {
+  type ChangeEventHandler,
+  type MouseEventHandler,
+  type ReactNode,
+  RefObject,
+  useRef,
+  useState,
+} from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import type { FieldPath } from 'react-hook-form/dist/types/path'
-import type { SelectInputOption, SelectOption } from './utils/options'
+import { useOnClickOutside } from 'usehooks-ts'
+import styles from './MultipleSelectFormField.module.css'
+import type { SelectOption } from './utils/options'
 
 const OptionBadge = ({
   option,
@@ -38,11 +50,10 @@ export type MultipleSelectFormFieldProps<T extends FieldValues> = {
   path: FieldPath<T>
   disabled?: boolean
   asterisk?: boolean
-  defaultOption?: boolean
   defaultOptionLabel?: string
   hint?: ReactNode
   badgeSize?: 'sm' | 'md'
-  options: SelectInputOption[]
+  options: SelectOption[]
   limit?: number
   className?: string
   'data-testid'?: string
@@ -53,42 +64,42 @@ const MultipleSelectFormField = <T extends FieldValues>({
   label,
   path,
   hint,
-  defaultOption,
   disabled,
   asterisk,
-  defaultOptionLabel = 'Sélectionnez une option',
+  defaultOptionLabel = 'Sélectionner une option',
   badgeSize,
   options,
   limit,
   className,
   'data-testid': dataTestId,
 }: MultipleSelectFormFieldProps<T>) => {
-  const id = `select-tags-form-field__${path}`
-
-  const flattenedOptions = options.flatMap((option) =>
-    'options' in option ? option.options : [option],
+  const [open, setOpen] = useState(false)
+  const optionsRef = useRef<HTMLDivElement>(null)
+  useOnClickOutside(optionsRef as RefObject<HTMLDivElement>, () =>
+    setOpen(false),
   )
+
+  const id = `select-tags-form-field__${path}`
 
   return (
     <Controller
       control={control}
       name={path}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { error },
-      }) => {
+      render={({ field: { onChange, value, ref }, fieldState: { error } }) => {
         // We will remove already selected options from the select options
         const valuesSet = new Set<string>(value ?? [])
 
-        const onSelectChange: ChangeEventHandler<HTMLSelectElement> = (
-          event,
-        ) => {
-          onChange(
-            value ? [...value, event.target.value] : [event.target.value],
-          )
+        const onSelectChange = (option: SelectOption) => {
+          // Don't add if already selected
+          if (valuesSet.has(option.value)) {
+            setOpen(false)
+            return
+          }
+          onChange(value ? [...value, option.value] : [option.value])
+          setOpen(false)
         }
 
-        const selectedOptions = flattenedOptions.filter((option) =>
+        const selectedOptions = options.filter((option) =>
           valuesSet.has(option.value),
         )
 
@@ -101,22 +112,10 @@ const MultipleSelectFormField = <T extends FieldValues>({
           )
         }
 
-        const optionsWithDisabledSelectedValues = options.map((option) => {
-          if ('options' in option) {
-            return {
-              ...option,
-              options: option.options.map((subOption) => ({
-                ...subOption,
-                disabled: valuesSet.has(subOption.value),
-              })),
-            }
-          }
-
-          return {
-            ...option,
-            disabled: valuesSet.has(option.value),
-          }
-        })
+        const optionsWithDisabledSelectedValues = options.map((option) => ({
+          ...option,
+          disabled: valuesSet.has(option.value),
+        }))
 
         return (
           <div
@@ -133,23 +132,35 @@ const MultipleSelectFormField = <T extends FieldValues>({
               {label} {asterisk && <RedAsterisk />}
               {hint ? <span className="fr-hint-text">{hint}</span> : null}
             </label>
-            <select
+            <Button
               data-testid={dataTestId}
-              className="fr-select fr-select--error"
               aria-describedby="text-select-error-desc-error"
               id={id}
+              nativeButtonProps={{
+                type: 'button',
+              }}
               disabled={disabled || !!(limit && value && value.length >= limit)}
-              onBlur={onBlur}
-              onChange={onSelectChange}
-              value=""
               ref={ref}
-              name={name}
+              className={classNames(
+                'fr-select',
+                'fr-select--error',
+                styles.selectButton,
+                open && styles.selectButtonOpen,
+              )}
+              onClick={() => setOpen(!open)}
             >
-              {defaultOption ? (
-                <option value="">{defaultOptionLabel}</option>
-              ) : null}
-              <SelectOptionsList options={optionsWithDisabledSelectedValues} />
-            </select>
+              {defaultOptionLabel}
+            </Button>
+            {open && (
+              <div className={styles.options} ref={optionsRef}>
+                <SelectOptionsList
+                  data-testid={dataTestId}
+                  options={optionsWithDisabledSelectedValues}
+                  onClick={onSelectChange}
+                  selectedOptions={selectedOptions}
+                />
+              </div>
+            )}
             <div className="fr-mt-4v">
               {selectedOptions.map((option) => (
                 <OptionBadge

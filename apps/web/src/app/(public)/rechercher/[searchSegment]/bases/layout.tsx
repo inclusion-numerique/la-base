@@ -1,6 +1,6 @@
 import SearchFilters, {
-  type FiltersInitialValue,
-} from '@app/web/components/Search/Filters/SearchFilters'
+  FiltersInitialValue,
+} from '@app/ui/components/Form/Filters/SearchFilters'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {

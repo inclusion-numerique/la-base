@@ -1,0 +1,23 @@
+.selectButton {
+  background-color: var(--background-contrast-grey);
+  border-bottom: 2px solid var(--grey-200-850);
+  border-radius: 4px 4px 0px 0px;
+  color: var(--grey-200-850);
+  font-weight: 400;
+  box-shadow: none !important;
+  width: 100%;
+  text-align: start;
+}
+
+.selectButtonOpen {
+  background-color: var(--active-tint) !important;
+}
+
+.options {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  min-width: 100%;
+  background-color: var(--background-default-grey);
+  box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
+}

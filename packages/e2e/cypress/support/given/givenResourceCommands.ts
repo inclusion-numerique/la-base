@@ -14,8 +14,9 @@ export const createTestPublishResourceCommand = (
           resourceId,
           isPublic: true,
           themes: ['AidesAuxDemarchesAdministratives'],
-          supportTypes: ['Article'],
-          targetAudiences: ['Particuliers', 'AidantsNumeriques'],
+          resourceTypes: ['Article'],
+          beneficiaries: ['Adultes'],
+          professionalSectors: ['AidantsEtMediateursNumeriques'],
         }
       : { resourceId, isPublic: false },
   }) satisfies PublishCommand

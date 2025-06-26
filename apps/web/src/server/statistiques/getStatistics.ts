@@ -5,7 +5,8 @@ import {
 } from './creationStatistics'
 import {
   type UsageStatisticsResult,
-  targetAudiencesUsages,
+  beneficiariesUsages,
+  professionalSectorsUsages,
   themesUsages,
 } from './usageStatistics'
 
@@ -153,7 +154,9 @@ export const getStatistics = async (_params: StatisticsParams) => {
 
   const searchStatisticsResult =
     await prismaClient.$queryRawUnsafe<SearchStatisticsResult>(`
-        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval * searchStatisticsSeriesCount} days',
+        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
+          searchStatisticsDaysInterval * searchStatisticsSeriesCount
+        } days',
                                                CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval} days',
                                                '${searchStatisticsDaysInterval} days'::interval) AS start_date),
              range AS (SELECT start_date, (start_date + INTERVAL '${searchStatisticsDaysInterval} days') AS end_date
@@ -163,8 +166,8 @@ export const getStatistics = async (_params: StatisticsParams) => {
                 WHERE added BETWEEN start_date AND end_date)                                                  AS collection_resources,
                (SELECT COUNT(*)::integer
                 FROM search_executions
-                WHERE (query != '' OR array_length(themes, 1) > 0 OR array_length(support_types, 1) > 0 OR
-                       array_length(target_audiences, 1) > 0 OR array_length(departments, 1) > 0)
+                WHERE (query != '' OR array_length(themes, 1) > 0 OR array_length(resource_types, 1) > 0 OR
+                       array_length(beneficiaries, 1) > 0 OR array_length(professional_sectors, 1) > 0 OR array_length(departments, 1) > 0)
                   AND timestamp BETWEEN start_date AND end_date)                                              AS search_executions,
                (SELECT COUNT(*)::integer
                 FROM resource_views
@@ -183,7 +186,9 @@ export const getStatistics = async (_params: StatisticsParams) => {
 
   const creationStatisticsResult =
     await prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
-        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval * creationStatisticsSeriesCount} days',
+        WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
+          creationStatisticsDaysInterval * creationStatisticsSeriesCount
+        } days',
                                                CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval} days',
                                                '${creationStatisticsDaysInterval} days'::interval) AS start_date),
              range AS (SELECT start_date, (start_date + INTERVAL '${creationStatisticsDaysInterval} days') AS end_date
@@ -223,15 +228,23 @@ export const getStatistics = async (_params: StatisticsParams) => {
         SELECT type,
                key,
                COUNT(*)::integer AS value
-        FROM (SELECT 'target_audiences' AS type,
-                     unnest(target_audiences)::text AS key
+        FROM (SELECT 'beneficiaries' AS type,
+                     unnest(beneficiaries)::text AS key
               FROM resources
               WHERE published IS NOT NULL
                 AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
                 AND deleted IS NULL
                 AND is_public IS true
               UNION ALL
-              SELECT 'themes' AS column_name,
+              SELECT 'professional_sectors' AS type,
+                     unnest(professional_sectors)::text AS key
+              FROM resources
+              WHERE published IS NOT NULL
+                AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                AND deleted IS NULL
+                AND is_public IS true
+              UNION ALL
+              SELECT 'themes' AS type,
                      unnest(themes)::text AS key
               FROM resources
               WHERE published IS NOT NULL
@@ -250,7 +263,8 @@ export const getStatistics = async (_params: StatisticsParams) => {
     },
     usage: {
       thematiques: themesUsages(usageStatisticsResult),
-      publics: targetAudiencesUsages(usageStatisticsResult),
+      beneficiaries: beneficiariesUsages(usageStatisticsResult),
+      professionalSectors: professionalSectorsUsages(usageStatisticsResult),
     },
   }
 }

@@ -17,15 +17,15 @@ export const ThematicOptionBadge = ({
   'data-testid': dataTestId,
 }: {
   option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'label'>
-  iconId: string
-  iconClassName: string
+  iconId?: string
+  iconClassName?: string
   textClassName: string
   categoryIconClassName?: string
-  onClick: MouseEventHandler
+  onClick?: MouseEventHandler
   disabled?: boolean
   size?: 'sm' | 'md'
   className?: string
-  ariaLabelPrefix: string
+  ariaLabelPrefix?: string
   'data-testid'?: string
 }) => (
   <button
@@ -49,9 +49,11 @@ export const ThematicOptionBadge = ({
       />
     )}
     <span className={textClassName}>{option.label}</span>
-    <span
-      className={classNames(iconId, iconClassName, 'fr-ml-1w fr-icon--sm')}
-    />
+    {!!iconId && (
+      <span
+        className={classNames(iconId, iconClassName, 'fr-ml-1w fr-icon--sm')}
+      />
+    )}
   </button>
 )
 export default ThematicOptionBadge

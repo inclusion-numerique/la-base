@@ -3,12 +3,12 @@ import {
   type Category as ThemeCategory,
   categoryThemesOptions,
 } from '@app/web/themes/themes'
-import { type SearchFilterSelectOption } from './SearchFilters'
 
 export type FilterKey =
   | 'themes'
-  | 'supportTypes'
-  | 'targetAudiences'
+  | 'resourceTypes'
+  | 'beneficiaries'
+  | 'professionalSectors'
   | 'departements'
 
 export type Category =
@@ -22,7 +22,7 @@ export type Category =
 
 export interface ThematicSelection {
   category: FilterKey
-  option: SelectOption | SearchFilterSelectOption
+  option: SelectOption
 }
 
 export function isCategoryComplete(
@@ -31,7 +31,7 @@ export function isCategoryComplete(
 ): boolean {
   const categoryOptions = categoryThemesOptions[category]
   const selectedCategoryOptions = selectedThematics.filter((item) => {
-    const option = item.option as SearchFilterSelectOption
+    const option = item.option
     return option.extra?.category === category
   })
   return categoryOptions.length === selectedCategoryOptions.length

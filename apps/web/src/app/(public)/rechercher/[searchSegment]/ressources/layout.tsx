@@ -1,23 +1,27 @@
-import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchFilters, {
-  type FiltersInitialValue,
-} from '@app/web/components/Search/Filters/SearchFilters'
+  FiltersInitialValue,
+} from '@app/ui/components/Form/Filters/SearchFilters'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
-  supportTypeLabels,
-  supportTypeOptions,
-} from '@app/web/themes/supportTypes'
+  beneficiariesLabels,
+  beneficiariesOptions,
+} from '@app/web/themes/beneficiairies'
 import {
-  categoryTargetAudiencesOptions,
-  targetAudienceLabels,
-} from '@app/web/themes/targetAudiences'
+  professionalSectorsLabels,
+  professionalSectorsOptions,
+} from '@app/web/themes/professionalSectors'
+import {
+  resourceTypesLabels,
+  resourceTypesOptions,
+} from '@app/web/themes/resourceTypes'
+
 import {
   categoryThemesOptions,
   themeCategories,
   themeLabels,
 } from '@app/web/themes/themes'
-import Button from '@codegouvfr/react-dsfr/Button'
 import type { Metadata } from 'next'
 import React, { type PropsWithChildren } from 'react'
 
@@ -53,23 +57,33 @@ const ResourcesSearchLayout = async ({
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchExecutionParams.supportTypes.map(
-      (supportType) =>
+    ...searchExecutionParams.resourceTypes.map(
+      (resourceType) =>
         ({
-          category: 'supportTypes',
+          category: 'resourceTypes',
           option: {
-            value: supportType,
-            label: supportTypeLabels[supportType],
+            value: resourceType,
+            label: resourceTypesLabels[resourceType],
           },
         }) satisfies FiltersInitialValue,
     ),
-    ...searchExecutionParams.targetAudiences.map(
-      (targetAudience) =>
+    ...searchExecutionParams.beneficiaries.map(
+      (beneficiary) =>
         ({
-          category: 'targetAudiences',
+          category: 'beneficiaries',
           option: {
-            value: targetAudience,
-            label: targetAudienceLabels[targetAudience],
+            value: beneficiary,
+            label: beneficiariesLabels[beneficiary],
+          },
+        }) satisfies FiltersInitialValue,
+    ),
+    ...searchExecutionParams.professionalSectors.map(
+      (professionalSector) =>
+        ({
+          category: 'professionalSectors',
+          option: {
+            value: professionalSector,
+            label: professionalSectorsLabels[professionalSector],
           },
         }) satisfies FiltersInitialValue,
     ),
@@ -93,15 +107,21 @@ const ResourcesSearchLayout = async ({
             },
             {
               multiple: false,
-              id: 'supportTypes',
-              label: 'Type de support',
-              options: supportTypeOptions,
+              id: 'resourceTypes',
+              label: 'Type de ressource',
+              options: resourceTypesOptions,
             },
             {
-              multiple: true,
-              id: 'targetAudiences',
-              label: 'Public cible',
-              options: categoryTargetAudiencesOptions,
+              multiple: false,
+              id: 'beneficiaries',
+              label: 'Bénéficiaires',
+              options: beneficiariesOptions,
+            },
+            {
+              multiple: false,
+              id: 'professionalSectors',
+              label: 'Secteur professionnel',
+              options: professionalSectorsOptions,
             },
           ]}
         />

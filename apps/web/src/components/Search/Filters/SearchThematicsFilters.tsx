@@ -1,3 +1,8 @@
+import styles from '@app/ui/components/Form/Filters/SearchFilter.module.css'
+import {
+  FilterKey,
+  ThematicSelection,
+} from '@app/ui/components/Form/Filters/filter'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
 import SearchThematicsCategory from '@app/web/components/Search/Filters/SearchThematicsCategory'
 import { Category, categoryThemesOptions } from '@app/web/themes/themes'
@@ -5,9 +10,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 import { useState } from 'react'
-import styles from './SearchFilter.module.css'
 import thematicsFiltersStyles from './SearchThematicsFilters.module.css'
-import type { FilterKey, ThematicSelection } from './filter'
 
 const modal = createModal({
   id: 'search-thematics-filters-modal',

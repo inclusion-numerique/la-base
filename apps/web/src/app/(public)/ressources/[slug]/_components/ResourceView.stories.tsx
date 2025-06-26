@@ -58,8 +58,9 @@ const resource = (imageId: string | null) =>
       'ReseauxSociauxEtCommunication',
       'TerritoiresConnectesEtDurables',
     ],
-    targetAudiences: ['AutresProfessionnels'],
-    supportTypes: [],
+    beneficiaries: [],
+    professionalSectors: ['AutresProfessionnels'],
+    resourceTypes: [],
     contributors: [],
     contents: [
       {
