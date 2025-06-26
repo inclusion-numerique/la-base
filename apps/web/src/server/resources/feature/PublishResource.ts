@@ -99,7 +99,7 @@ export type ResourcePublishedV2 = {
       isPublic: true
       themes: Theme[]
       resourceTypes: ResourceType[]
-      beneficiaries: Beneficiary[]
+      beneficiaries?: Beneficiary[]
       professionalSectors: ProfessionalSector[]
     }
   | {

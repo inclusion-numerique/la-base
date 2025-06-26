@@ -23,7 +23,7 @@ type IndexationChangedDataV1 = {
   __version: 1
   themes: Theme[]
   resourceTypes: ResourceType[]
-  beneficiaries: Beneficiary[]
+  beneficiaries?: Beneficiary[]
   professionalSectors: ProfessionalSector[]
 }
 
