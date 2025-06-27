@@ -20,6 +20,18 @@ const CollectionCard = ({
   const resourcesCount = collection._count.resources
 
   const href = `/collections/${collection.slug}`
+  const createdByLink = (
+    <Link
+      href={
+        collection.base
+          ? `/bases/${collection.base.slug}`
+          : `/profils/${collection.createdBy.slug}`
+      }
+      className="fr-link fr-position-relative fr-link--xs"
+    >
+      {collection.base ? collection.base.title : collection.createdBy.name}
+    </Link>
+  )
 
   return (
     <article
@@ -50,19 +62,12 @@ const CollectionCard = ({
           </Link>
         </div>
         {!collection.isFavorites && (
-          <span className="fr-text--xs fr-mb-0">
-            Par&nbsp;
-            <Link
-              href={`/profils/${collection.createdBy.slug}`}
-              className="fr-link fr-position-relative fr-link--xs"
-            >
-              {collection.createdBy.name}
-            </Link>
-          </span>
+          <span className="fr-text--xs fr-mb-0">Par&nbsp; {createdByLink}</span>
         )}
         {collection.slug && (
           <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-mt-4v">
             <CollectionMetaData
+              className="fr-my-2v"
               collection={{
                 title: collection.title,
                 id: collection.id,

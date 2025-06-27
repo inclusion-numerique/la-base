@@ -70,6 +70,13 @@ const OwnershipInformation = ({
           >
             {base.title}
           </Link>
+          &nbsp;par{' '}
+          <Link
+            href={`/profils/${user.slug}`}
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+          >
+            {user.name && formatName(user.name)}
+          </Link>
         </>
       )}
       {(!base ||

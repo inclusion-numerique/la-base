@@ -48,6 +48,7 @@ const CollectionActions = ({
     )}
     <CopyLinkButton
       size="small"
+      title="Copier le lien"
       priority={context === 'view' ? 'secondary' : 'tertiary no outline'}
       url={getServerUrl(`/collections/${collection.slug}`, {
         absolutePath: true,

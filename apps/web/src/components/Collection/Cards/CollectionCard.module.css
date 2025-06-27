@@ -10,10 +10,14 @@
 
 .content {
   flex-grow: 1;
-  padding: 2.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (min-width: 36em) {
+    padding: 2.5rem;
+  }
 }
 
 .title {
