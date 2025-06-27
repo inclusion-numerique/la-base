@@ -147,31 +147,32 @@ const CreateCollection = ({
                       </span>
                     </>
                   ) : (
-                    <>
+                    <div className="fr-flex fr-direction-column fr-flex-gap-1v">
                       <span className="fr-text--bold">Profil privé</span>
-                      <br />
                       <span className="fr-text--regular">
                         Votre collection sera visible uniquement par vous.
                       </span>
-                    </>
+                    </div>
                   )
                 }
               />
             )}
-            <VisibilityField
-              model="collection"
-              path="isPublic"
-              control={control}
-              disabled={isLoading || (base != null && !base.isPublic)}
-              publicTitle="Collection publique"
-              privateTitle="Collection privée"
-              publicHint="Visible par tous les visiteurs."
-              privateHint={
-                base
-                  ? 'Visible uniquement par les membres de votre base.'
-                  : 'Visible uniquement par vous.'
-              }
-            />
+            {!collectionCannotBePublic && (
+              <VisibilityField
+                model="collection"
+                path="isPublic"
+                control={control}
+                disabled={isLoading || (base != null && !base.isPublic)}
+                publicTitle="Collection publique"
+                privateTitle="Collection privée"
+                publicHint="Visible par tous les visiteurs."
+                privateHint={
+                  base
+                    ? 'Visible uniquement par les membres de votre base.'
+                    : 'Visible uniquement par vous.'
+                }
+              />
+            )}
           </Card>
           <ButtonsGroup
             className="fr-mt-3w"
