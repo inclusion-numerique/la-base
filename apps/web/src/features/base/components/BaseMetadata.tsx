@@ -60,8 +60,7 @@ const BaseMetadata = ({
           <span className="fr-icon-eye-line fr-icon--sm" />
           <div>
             <span className={styles.spanMdDisplay}>
-              {' '}
-              {getDepartmentName(base.department)}
+              &nbsp;{getDepartmentName(base.department)}
             </span>
           </div>
         </>

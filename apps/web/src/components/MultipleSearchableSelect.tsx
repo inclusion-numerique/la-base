@@ -291,27 +291,27 @@ const MultipleSearchableSelect = ({
             ))}
           </div>
         )}
+        {!withBadges && internalSelection.length > 0 && (
+          <>
+            <div className="fr-mt-4w">
+              <label className="fr-label fr-mb-2w" htmlFor={id}>
+                Liste des membres à inviter
+              </label>
+              {internalSelection.map((selected) => (
+                <InviteBaseMemberRow
+                  key={selected.value}
+                  member={selected}
+                  canAddAdmin={canAddAdmin}
+                  onDelete={() => unselect(selected)}
+                  onSelectRole={(type) =>
+                    handleOnSelectRole(selected.value, type)
+                  }
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
-      {!withBadges && internalSelection.length > 0 && (
-        <>
-          <div>
-            <label className="fr-label fr-mb-2w" htmlFor={id}>
-              Liste des membres à inviter
-            </label>
-            {internalSelection.map((selected) => (
-              <InviteBaseMemberRow
-                key={selected.value}
-                member={selected}
-                canAddAdmin={canAddAdmin}
-                onDelete={() => unselect(selected)}
-                onSelectRole={(type) =>
-                  handleOnSelectRole(selected.value, type)
-                }
-              />
-            ))}
-          </div>
-        </>
-      )}
     </>
   )
 }
