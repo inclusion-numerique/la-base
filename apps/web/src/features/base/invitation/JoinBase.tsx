@@ -2,11 +2,14 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
+import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import BaseMetadata from '@app/web/features/base/components/BaseMetadata'
 import BaseInvitationButtons from '@app/web/features/base/invitation/components/BaseInvitationButtons'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
 import Link from 'next/link'
+import styles from './JoinBase.module.css'
 
 export const JoinBase = ({
   invitation,
@@ -22,10 +25,10 @@ export const JoinBase = ({
   <div className="fr-grid-row fr-height-full">
     <div className="fr-col-md-6 fr-col-12">
       <div className="fr-flex fr-align-items-center fr-mx-auto fr-height-full ">
-        <div className="fr-mx-auto fr-flex fr-container--slim fr-direction-column fr-flex-gap-10v fr-justify-content-space-between fr-p-12v">
+        <div className="fr-mx-auto fr-flex fr-container--slim fr-direction-column fr-flex-gap-10v fr-justify-content-space-between fr-p-4v fr-p-md-12v">
           <div className="fr-flex fr-align-items-center fr-flex-gap-3v">
             <LesBasesSvgLogo />
-            <span className="fr-text--xl fr-text--semi-bold fr-mb-0">
+            <span className="fr-text-md--xl fr-text--semi-bold fr-mb-0">
               Les Bases du numérique d&apos;intérêt général
             </span>
           </div>
@@ -47,25 +50,20 @@ export const JoinBase = ({
             <Notice
               title={
                 <span className="fr-text--regular fr-text-default--grey">
-                  Vous avez été invité à l&apos;adresse{' '}
+                  Vous avez été invité à l&apos;adresse&nbsp;
                   <span className="fr-text--bold">
                     {invitation.member.email}
                   </span>
                   <br />
                   Vous devrez créer votre compte sur Les Bases du numérique
-                  d’intérêt général afin de rejoindre cette base.
+                  d'intérêt général afin de rejoindre cette base.
                 </span>
               }
             />
           )}
           <div className="fr-text--center">
             <BaseInvitationButtons invitation={invitation} user={user} />
-            <Link
-              className="fr-link"
-              target="_blank"
-              rel="noreferrer"
-              href="/centre-d-aide"
-            >
+            <Link className="fr-link" target="_blank" rel="noreferrer" href="/">
               En savoir plus sur Les Bases du numérique d&apos;intérêt général
             </Link>
           </div>
@@ -88,13 +86,17 @@ export const JoinBase = ({
             </span>
             {invitation.base.description && (
               <div
-                className="fr-text-default--grey"
+                className={classNames(
+                  'fr-text-default--grey',
+                  styles.description,
+                )}
                 dangerouslySetInnerHTML={{
                   __html: invitation.base.description,
                 }}
               />
             )}
             <BaseMetadata base={invitation.base} context="card" />
+            <BasePrivacyTag small isPublic={invitation.base.isPublic} />
           </div>
           <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
             <span className="fr-icon-account-circle-line fr-mr-2v" />
