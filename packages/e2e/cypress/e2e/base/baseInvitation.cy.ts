@@ -120,11 +120,9 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.wait('@getUser')
     cy.testId('invite-member-modal-input-option-0').click()
 
-    cy.testId('base-invite-member-role-select').click()
-
-    cy.testId('base-invite-member-role-member').should('exist')
+    cy.testId('base-invite-member-role-member').should('not.exist')
     cy.testId('base-invite-member-role-admin').should('not.exist')
-    cy.testId('base-invite-member-role-member').click()
+    cy.testId('base-invite-member-role-member').should('not.exist')
 
     cy.testId('invite-member-modal-button').click()
 
