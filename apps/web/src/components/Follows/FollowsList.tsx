@@ -2,6 +2,7 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseCard from '@app/web/components/Base/Card/BaseCard'
 import EmptyBox from '@app/web/components/EmptyBox'
+import IconInSquare from '@app/web/components/IconInSquare'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import type {
   BaseFollowListItem,
@@ -45,10 +46,13 @@ const FollowsList = ({
     </EmptyBox>
   ) : (
     <>
-      <h2 className="fr-h3">
-        Mes suivi{sPluriel(baseFollows.length + profileFollows.length)} ·{' '}
-        {baseFollows.length + profileFollows.length}
-      </h2>
+      <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
+        <IconInSquare iconId="ri-user-heart-line" />
+        <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
+          Mes suivi{sPluriel(baseFollows.length + profileFollows.length)} ·{' '}
+          {baseFollows.length + profileFollows.length}
+        </h2>
+      </div>
       <h3 className="fr-mb-4v fr-mt-12v fr-h6">
         {baseFollows.length} base{sPluriel(baseFollows.length)}
       </h3>
