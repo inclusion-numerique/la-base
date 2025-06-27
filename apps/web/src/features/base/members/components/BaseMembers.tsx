@@ -11,6 +11,7 @@ import React from 'react'
 
 const BaseMembers = ({
   base,
+  isBaseAdmin,
   canAddAdmin,
   canAddMember,
   canChangeMemberRole,
@@ -18,6 +19,7 @@ const BaseMembers = ({
   sortBy,
 }: {
   base: BasePageData
+  isBaseAdmin: boolean
   canAddMember: boolean
   canChangeMemberRole: boolean
   canAddAdmin: boolean
@@ -50,6 +52,7 @@ const BaseMembers = ({
               className="fr-width-full fr-justify-content-center"
               base={base}
               canAddAdmin={canAddAdmin}
+              isBaseAdmin={isBaseAdmin}
             />
           </div>
         )}

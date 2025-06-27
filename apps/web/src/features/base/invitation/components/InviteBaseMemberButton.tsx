@@ -33,10 +33,12 @@ const {
 
 const InviteBaseMemberButton = ({
   base,
+  isBaseAdmin,
   canAddAdmin,
   className,
 }: {
   base: BasePageData
+  isBaseAdmin: boolean
   canAddAdmin: boolean
   className?: string
 }) => {
@@ -93,6 +95,10 @@ const InviteBaseMemberButton = ({
     form.setValue('members', membersWithUuids)
     form.setValue('newMembers', membersWithEmails)
   }
+  const modalDescription = `Les contributeurs peuvent voir, créer et contribuer à l’ensemble des ressources liées à la base ainsi qu’inviter d’autres membres. ${
+    isBaseAdmin &&
+    'Vous pouvez également inviter des administrateurs qui pourront gérer les membres de la base (inviter et retirer des membres).'
+  }`
 
   return (
     <div>
@@ -108,19 +114,10 @@ const InviteBaseMemberButton = ({
         Inviter un membre
       </Button>
       <form onSubmit={form.handleSubmit(onInvit)}>
-        <InviteModal
-          title="Inviter des membres"
-          className="fr-modal--overflow-visible"
-        >
+        <InviteModal title="Inviter des membres">
           <>
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">
-              <div>
-                Les contributeurs peuvent voir, créer et contribuer à l’ensemble
-                des ressources liées à la base ainsi qu’inviter d’autres
-                membres. Vous pouvez également inviter des administrateurs qui
-                pourront gérer les membres de la base (inviter et retirer des
-                membres).
-              </div>
+              <span>{modalDescription}</span>
               <div className="fr-mb-4w">
                 <Link
                   className="fr-link"
@@ -137,7 +134,7 @@ const InviteBaseMemberButton = ({
                   control={form.control}
                   name="members"
                   render={({ fieldState: { error } }) => (
-                    <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+                    <div className="fr-flex fr-direction-column fr-flex-gap-8v">
                       <InviteUsers
                         disabled={isLoading}
                         label="Ajouter un membre"

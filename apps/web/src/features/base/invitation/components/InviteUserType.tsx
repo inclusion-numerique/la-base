@@ -35,6 +35,10 @@ const InviteUserType = ({
         ]
       : []),
   ]
+  if (options.length === 1) {
+    return null
+  }
+
   const handleOnChange = (value: string) => {
     onChange?.(value as 'admin' | 'member')
     setOpen(false)
