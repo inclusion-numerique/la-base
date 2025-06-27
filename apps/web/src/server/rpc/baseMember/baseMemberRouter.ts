@@ -7,6 +7,7 @@ import { InviteMemberCommandValidation } from '@app/web/features/base/invitation
 import { sendAcceptedInvitationEmail } from '@app/web/features/base/invitation/emails/acceptedInvitationEmail'
 import { sendDeclinedInvitationEmail } from '@app/web/features/base/invitation/emails/declinedInvitationEmail'
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
+import { sendRemoveBaseMemberEmail } from '@app/web/features/base/members/removal /emails/removeBaseMemberEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { baseSelect } from '@app/web/server/bases/getBase'
 import {
@@ -353,8 +354,19 @@ export const baseMemberRouter = router({
         )
       }
 
-      return prismaClient.baseMembers.delete({
+      await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
       })
+      const userToNotify = await prismaClient.user.findUnique({
+        where: { id: input.memberId },
+        select: { email: true },
+      })
+      if (userToNotify) {
+        await sendRemoveBaseMemberEmail({
+          baseTitle: base.title,
+          email: userToNotify.email,
+          userRemovingName: formatMemberName(user),
+        })
+      }
     }),
 })
