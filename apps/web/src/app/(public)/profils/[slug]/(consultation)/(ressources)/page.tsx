@@ -48,6 +48,7 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
     <EmptyProfileResources canWrite={canWrite} isOwner={isOwner} />
   ) : (
     <Resources
+      title="Mes ressources"
       resources={ressourcesWithAppliedDraft}
       canWrite={canWrite}
       user={user}
