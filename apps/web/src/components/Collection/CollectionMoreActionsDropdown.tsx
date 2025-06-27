@@ -85,7 +85,6 @@ export const CollectionMoreActionsDropdown = ({
       <li>
         <OpenDeleteCollectionModalButton
           collectionId={collection.id}
-          collectionTitle={collection.title}
           size="small"
         >
           <span

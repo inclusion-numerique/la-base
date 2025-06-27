@@ -47,7 +47,9 @@ export const generateMetadata = async ({
 
 const CollectionPage = async ({
   params,
-}: { params: Promise<{ slug: string }> }) => {
+}: {
+  params: Promise<{ slug: string }>
+}) => {
   const { slug } = await params
   const user = await getSessionUser()
   const collection = await getCollection({ slug: decodeURI(slug) }, user)
@@ -82,9 +84,6 @@ const CollectionPage = async ({
       >
         <div className="fr-container fr-pt-2w fr-hidden fr-unhidden-md">
           <CollectionBreadcrumbs collection={collection} className="fr-my-0" />
-        </div>
-        <div className="fr-hidden-md">
-          <BackButton />
         </div>
       </div>
       <main id={contentId}>

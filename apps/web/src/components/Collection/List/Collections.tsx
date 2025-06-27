@@ -57,11 +57,7 @@ const Collections = ({
                     'fr-btn--secondary',
                   )}
                   baseId={baseId}
-                  title={
-                    baseId
-                      ? 'Créer une collection de base'
-                      : 'Créer une collection'
-                  }
+                  title="Créer une collection"
                 />
                 <ManageCollectionButton
                   className={classNames(
