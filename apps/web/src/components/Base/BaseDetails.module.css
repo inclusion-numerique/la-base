@@ -1,12 +1,3 @@
-.header {
-  margin-bottom: 48px;
-}
-
-.subtitle {
-  color: var(--text-mention-grey);
-  margin-bottom: 0;
-}
-
 .websites {
   display: flex;
   flex-wrap: wrap;
