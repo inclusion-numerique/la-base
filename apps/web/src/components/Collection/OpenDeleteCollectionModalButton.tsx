@@ -7,14 +7,12 @@ import React, { type ReactNode } from 'react'
 
 const OpenDeleteCollectionModalButton = ({
   collectionId,
-  collectionTitle,
   className,
   children,
   size = 'small',
   priority = 'tertiary no outline',
 }: {
   collectionId: string
-  collectionTitle: string
   className?: string
   children?: ReactNode
   size?: ButtonProps['size']
@@ -28,14 +26,14 @@ const OpenDeleteCollectionModalButton = ({
       size={size}
       iconId="fr-icon-delete-line"
       priority={priority}
-      onClick={() => open({ collectionId, collectionTitle })}
+      onClick={() => open({ collectionId })}
       className={className}
     />
   ) : (
     <Button
       size={size}
       priority={priority}
-      onClick={() => open({ collectionId, collectionTitle })}
+      onClick={() => open({ collectionId })}
       className={className}
     >
       {children}

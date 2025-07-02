@@ -2,6 +2,7 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import OpenSaveCollectionModalButton from '@app/web/components/Collection/OpenSaveCollectionModalButton'
 import { loginUrl } from '@app/web/security/login'
 import Button from '@codegouvfr/react-dsfr/Button'
+import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import type {
   FrIconClassName,
   RiIconClassName,
@@ -59,36 +60,40 @@ const SaveCollectionButton = ({
 
   if (user) {
     return (
-      <OpenSaveCollectionModalButton
-        {...buttonProps}
-        iconId={icon}
-        context={context}
-        nativeButtonProps={{
-          'data-testid': dataTestid,
-        }}
-        className={className}
-        collectionId={collection.id}
-        priority={priority}
-        buttonTitle={buttonTitle}
-      />
+      <Tooltip title="Enregistrer la collection">
+        <OpenSaveCollectionModalButton
+          {...buttonProps}
+          iconId={icon}
+          context={context}
+          nativeButtonProps={{
+            'data-testid': dataTestid,
+          }}
+          className={className}
+          collectionId={collection.id}
+          priority={priority}
+          buttonTitle={buttonTitle}
+        />
+      </Tooltip>
     )
   }
   return (
-    <Button
-      {...buttonProps}
-      className={className}
-      data-testid={dataTestid}
-      priority={priority}
-      linkProps={{
-        href: loginUrl({
-          intent: 'enregistrer-collection',
-          next: `/collections/${collection.slug}`,
-        }),
-      }}
-    >
-      <span className={classNames(context === 'view' && 'fr-mr-1w', icon)} />
-      {buttonTitle}
-    </Button>
+    <Tooltip title="Enregistrer la collection">
+      <Button
+        {...buttonProps}
+        className={className}
+        data-testid={dataTestid}
+        priority={priority}
+        linkProps={{
+          href: loginUrl({
+            intent: 'enregistrer-collection',
+            next: `/collections/${collection.slug}`,
+          }),
+        }}
+      >
+        <span className={classNames(context === 'view' && 'fr-mr-1w', icon)} />
+        {buttonTitle}
+      </Button>
+    </Tooltip>
   )
 }
 
