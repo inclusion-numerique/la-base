@@ -2,6 +2,7 @@ import BlockWithLabel from '@app/ui/components/BlockWithLabel'
 import ExternalLink from '@app/ui/components/ExternalLink'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
+import IconInSquare from '@app/web/components/IconInSquare'
 import EmptyProfileInformations from '@app/web/components/Profile/EmptyProfileInformations'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { getDepartmentName } from '@app/web/utils/departments'
@@ -30,7 +31,10 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
     hasInformations(profile) ||
     hasContact(profile) ? (
     <>
-      <h2 className="fr-mb-6w fr-h3">À propos</h2>
+      <div className="fr-flex fr-align-items-center fr-flex-gap-5v fr-mb-6w">
+        <IconInSquare iconId="ri-information-line" />
+        <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">À propos</h2>
+      </div>
       <hr />
       <div className="fr-grid-row">
         {hasInformations(profile) && (
