@@ -120,36 +120,34 @@ const LeaveBaseModaleNotice = ({
   const isContributor =
     createdResources.length > 0 || contributedResources.length > 0
   const knowMoreLink = (
-    <Link className="fr-link" href="/centre-d-aide/une-base#membre-base">
+    <Link
+      className="fr-link fr-link--no-underline fr-text--underline"
+      href="/centre-d-aide/une-base#membre-base"
+    >
       En savoir plus
     </Link>
   )
 
   const noticeProps = {
     title: !isContributor ? (
-      <>
+      <div className="fr-flex fr-direction-column">
         <span className="fr-text--regular fr-text-default--grey">
           Vous ne ferez plus partie des membres et ne pourrez donc plus
           contribuer aux ressources publiées via cette base.
         </span>
-        &nbsp;
-        <br />
         {knowMoreLink}
-      </>
+      </div>
     ) : (
-      <>
+      <div className="fr-flex fr-direction-column">
         <span className="fr-text--regular fr-text-default--grey">
           Vous ne pourrez plus éditer les ressources auxquelles vous avec
           contribué ou que vous avez publié sur cette base.
         </span>
-        &nbsp;
-        <br />
         {knowMoreLink}
-      </>
+      </div>
     ),
     classNames: isContributor ? 'fr-notice--warning' : '',
   }
-
   return (
     <>
       <Notice

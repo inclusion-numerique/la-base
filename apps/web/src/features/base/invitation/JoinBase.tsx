@@ -28,13 +28,13 @@ export const JoinBase = ({
         <div className="fr-mx-auto fr-flex fr-container--slim fr-direction-column fr-flex-gap-10v fr-justify-content-space-between fr-p-4v fr-p-md-12v">
           <div className="fr-flex fr-align-items-center fr-flex-gap-3v">
             <LesBasesSvgLogo />
-            <span className="fr-text-md--xl fr-text--semi-bold fr-mb-0">
+            <span className="fr-text-md--xl fr-text--medium fr-mb-0">
               Les Bases du numérique d&apos;intérêt général
             </span>
           </div>
           <div>
             <h1 className="fr-text-title--blue-france">Rejoindre une base</h1>
-            <p className="fr-text--lg fr-text--semi-bold">
+            <p className="fr-text--lg fr-text--medium">
               Vous êtes invité par {invitation.invitedBy?.name} à rejoindre la
               base {baseTitle}.
             </p>

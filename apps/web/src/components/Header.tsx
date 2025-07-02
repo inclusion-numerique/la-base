@@ -1,7 +1,6 @@
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
-import { HelpMenu } from '@app/web/components/HelpMenu'
 import {
   defaultSearchParams,
   searchUrl,
@@ -48,7 +47,10 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
               <div className="fr-header__navbar fr-unhidden fr-hidden-lg">
                 <button
                   type="button"
-                  className="fr-btn--menu fr-btn"
+                  className={classNames(
+                    'fr-btn--menu fr-btn',
+                    styles.mobileMenuButton,
+                  )}
                   data-fr-opened="false"
                   aria-controls="header-modal"
                   aria-haspopup="menu"
@@ -68,9 +70,16 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     linkProps={{
                       href: searchUrl('ressources', defaultSearchParams),
                     }}
-                    iconId="fr-icon-search-line"
                   >
+                    <span
+                      className="fr-hidden-lg ri-search-line fr-mr-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
                     Rechercher
+                    <span
+                      className="fr-hidden fr-unhidden-lg ri-search-line fr-ml-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
                   </Button>
                 </li>
                 <li>
@@ -79,37 +88,36 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                   ) : (
                     <Link
                       href="/connexion?suivant=/?creer-une-ressource"
-                      className="fr-btn fr-icon-edit-box-line"
+                      className="fr-btn"
                     >
+                      <span
+                        className="fr-hidden-lg ri-edit-box-line fr-mr-1w fr-text-label--blue-france"
+                        aria-hidden
+                      />
                       Créer une ressource
+                      <span
+                        className="fr-hidden fr-unhidden-lg ri-edit-box-line fr-ml-1w fr-text-label--blue-france"
+                        aria-hidden
+                      />
                     </Link>
                   )}
                 </li>
                 <li>
-                  <div
-                    data-testid="help-menu-help-center"
-                    className="fr-hidden fr-unhidden-lg"
+                  <Link
+                    data-testid="help-center-link"
+                    className="fr-btn"
+                    href="/centre-d-aide"
                   >
-                    <Dropdown
-                      id="header-help-menu"
-                      alignRight
-                      control={
-                        <>
-                          <span
-                            role="img"
-                            className="ri-question-line ri-lg fr-py-1v"
-                            aria-hidden
-                          />
-                          <span className="fr-sr-only">Aide</span>
-                        </>
-                      }
-                    >
-                      <HelpMenu />
-                    </Dropdown>
-                  </div>
-                  <div className="fr-hidden-lg">
-                    <HelpMenu />
-                  </div>
+                    <span
+                      className="fr-hidden-lg ri-question-line fr-mr-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
+                    Aide
+                    <span
+                      className="fr-hidden fr-unhidden-lg ri-question-line fr-ml-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
+                  </Link>
                 </li>
                 <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
                   <span

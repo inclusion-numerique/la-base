@@ -161,7 +161,7 @@ const CollectionResourcesOrderEdition = ({
           orderedCollectionsResources.length === 0 ? (
           <div className="fr-mt-md-6w fr-mt-3w">
             <div className="fr-border fr-border-radius--8 fr-text--center fr-px-12v fr-py-8v">
-              <span className="fr-text--semi-bold fr-text-mention--grey">
+              <span className="fr-text--medium fr-text-mention--grey">
                 Vous avez retiré toutes les ressources de cette collection.
               </span>
             </div>

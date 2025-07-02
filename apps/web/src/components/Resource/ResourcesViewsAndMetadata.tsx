@@ -36,7 +36,7 @@ const ResourcesViewsAndMetadata = ({
           <span className="fr-hidden-sm fr-unhidden fr-sr-only">Vues</span>
         </span>
       </span>
-      <span className="fr-text--semi-bold">·</span>
+      <span className="fr-text--medium">·</span>
       <span className="fr-icon-bookmark-line fr-icon--sm" aria-hidden />
       <span className="fr-text--bold" data-testid="resource-collections-count">
         <span className="fr-text--nowrap">
@@ -54,7 +54,7 @@ const ResourcesViewsAndMetadata = ({
       </span>
       {!resource.isPublic && showPrivate && (
         <span className="fr-unhidden fr-hidden-sm">
-          <span className="fr-mr-1w fr-text--semi-bold">·</span>
+          <span className="fr-mr-1w fr-text--medium">·</span>
           <span className="fr-tag fr-tag--sm">
             <span className="ri-lock-line" aria-hidden="true" />
             <span className="fr-sr-only">Privée</span>
@@ -64,13 +64,13 @@ const ResourcesViewsAndMetadata = ({
     </span>
     {children && (
       <>
-        <span className="fr-hidden fr-unhidden-sm fr-text--semi-bold">·</span>
+        <span className="fr-hidden fr-unhidden-sm fr-text--medium">·</span>
         <span className="fr-flex fr-flex-gap-2v">{children}</span>
       </>
     )}
     {!resource.isPublic && showPrivate && (
       <span className="fr-hidden fr-unhidden-sm">
-        <span className="fr-mr-1w fr-text--semi-bold">·</span>
+        <span className="fr-mr-1w fr-text--medium">·</span>
         <span>
           <CustomTag
             small
