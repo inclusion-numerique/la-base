@@ -38,9 +38,6 @@ const SigninPage = async ({
       <SkipLinksPortal />
       <Breadcrumbs currentPage="Créer un compte" />
       <div className="fr-container fr-container--narrow">
-        <h1 className="fr-h2">
-          Création de compte sur {PublicWebAppConfig.projectTitle}
-        </h1>
         {raison === 'connexion-sans-compte' ? (
           <Notice
             className="fr-mt-6v fr-notice--warning"
