@@ -25,7 +25,7 @@ import {
 } from '@app/web/themes/themes'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
 
 export type FiltersInitialValue = {
@@ -108,12 +108,19 @@ const SearchFilters = ({
   }
 
   const onUnselectThematics = (category: FilterKey) => {
+    setSelected(selected.filter((s) => s.option.extra?.category !== category))
+
     const updatedSearchParams = {
       ...searchParams,
-      [category]: [],
+      themes: selected
+        .filter(
+          (s) =>
+            s.category === 'themes' && s.option.extra?.category !== category,
+        )
+        .map((s) => s.option.value),
       ...Object.fromEntries(
         Object.entries(searchParams)
-          .filter(([key]) => key !== category)
+          .filter(([key]) => key !== 'themes')
           .map(([key]) => [
             key,
             selected
@@ -123,7 +130,7 @@ const SearchFilters = ({
       ),
     }
 
-    router.push(searchUrl(tab, updatedSearchParams))
+    router.push(searchUrl(tab, updatedSearchParams as SearchParams))
   }
 
   const selectedThematics = selected.filter(

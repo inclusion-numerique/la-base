@@ -32,7 +32,7 @@ export const ThematicOptionBadge = ({
     data-testid={dataTestId}
     type="button"
     className={classNames(
-      `fr-tag fr-mr-1w ${size === 'sm' ? 'fr-tag--sm' : ''}`,
+      `fr-tag${size === 'sm' ? 'fr-tag--sm' : ''}`,
       className,
     )}
     disabled={disabled || option.disabled}
