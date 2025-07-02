@@ -41,11 +41,12 @@ const AddOrRemoveResourceFromCollection = ({
       <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
         <IconInSquare {...iconInSquareProps} />
         <div className={styles.content}>
-          <b>{collection.title}</b>
+          <b className={styles.title}>{collection.title}</b>
           <div className={styles.collections}>
             {collection.slug && (
               <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
                 <CollectionMetaData
+                  hideRessourceLabelOnSmallDevices
                   withPrivacyTag={withPrivacyTag}
                   collection={{
                     title: collection.title,

@@ -39,7 +39,7 @@ const SaveInNestedCollection = ({
           )}
           {!!base && <BaseImage base={base} size={avatarSize} />}
           <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-            <b className="fr-text-title--grey">
+            <b className={classNames('fr-text-title--grey', styles.title)}>
               {base ? base.title : `${user.name} - Mes collections`}
             </b>
             <div className="fr-flex fr-direction-md-row fr-direction-column fr-flex-gap-2v">
