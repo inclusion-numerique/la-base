@@ -49,7 +49,7 @@ const Resources = ({
   )
 
   return (
-    <div data-testid="base-resources">
+    <div data-testid="resources">
       <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
         <div className="fr-col-sm-auto fr-col-12">
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
@@ -76,6 +76,7 @@ const Resources = ({
       </div>
       {canWrite ? (
         <Tabs
+          className="fr-overflow-hidden"
           tabs={[
             {
               label: `Publiques · ${publics.length}`,

@@ -3,7 +3,7 @@ import ResourceCardSkeleton from '@app/web/components/Resource/ResourceCardSkele
 import React from 'react'
 
 const LoadingProfilePage = () => (
-  <div data-testid="base-resources">
+  <div data-testid="profile-page">
     <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
       <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
         <IconInSquare iconId="ri-file-text-line" />

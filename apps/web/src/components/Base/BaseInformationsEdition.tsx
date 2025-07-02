@@ -33,6 +33,7 @@ const BaseInformationsEdition = ({
       label="Département"
       options={[
         { label: 'Selectionner une option', value: '', disabled: true },
+        { label: 'Aucun', value: '' },
         ...departmentsOptions,
       ]}
     />

@@ -3,7 +3,7 @@ import ProfileCardSkeleton from '@app/web/components/Profile/Card/ProfileCardSke
 import React from 'react'
 
 const LoadingProfileSuivisPage = () => (
-  <div data-testid="base-resources">
+  <div data-testid="profils-suivis">
     <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
       <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
         <IconInSquare iconId="ri-user-heart-line" />
