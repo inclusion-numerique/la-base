@@ -10,6 +10,7 @@ import {
 } from '@app/web/server/rpc/user/userSignup'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Cookies from 'js-cookie'
@@ -105,16 +106,19 @@ const EmailSignupForm = ({
         disabled={isLoading}
       />
 
-      <ButtonsGroup
-        className="fr-mt-12v"
-        buttons={[
-          {
-            ...buttonLoadingClassname(isLoading),
-            children: 'Valider',
-            type: 'submit',
-          },
-        ]}
-      />
+      <div className="fr-width-full">
+        <Button
+          iconId="fr-icon-account-circle-line"
+          type="submit"
+          size="large"
+          {...buttonLoadingClassname(
+            isLoading,
+            'fr-width-full fr-flex fr-justify-content-center fr-mt-10v',
+          )}
+        >
+          Créer mon compte
+        </Button>
+      </div>
     </form>
   )
 }

@@ -3,6 +3,8 @@ import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { signinErrorMessage } from '@app/web/app/(public)/(authentication)/authenticationErrorMessage'
 import ProConnectSigninButton from '@app/web/app/(public)/(authentication)/connexion/ProConnectSigninButton'
 import EmailSignupForm from '@app/web/app/(public)/(authentication)/creer-un-compte/EmailSignupForm'
+import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
+import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import type { Route } from 'next'
 
@@ -16,6 +18,16 @@ const SignupPanel = ({
   callbackUrl: Route
 }) => (
   <AuthCard>
+    <div className="fr-flex fr-justify-content-center fr-align-items-center fr-mb-10v">
+      <LesBasesSvgLogo width={88} height={88} />
+    </div>
+
+    <h1 className="fr-h4 fr-text-label--blue-france fr-text--center fr-mb-1v">
+      Se créer un compte
+    </h1>
+    <span className="fr-text--xl fr-text--normal fr-flex fr-justify-content-center fr-text--center">
+      Créez votre compte avec ProConnect ou avec votre adresse email
+    </span>
     {error ? (
       <div className="fr-alert fr-alert--error fr-alert--sm fr-mb-6v">
         <p>{signinErrorMessage(error)}</p>
@@ -41,17 +53,16 @@ const SignupPanel = ({
     <p className="fr-hr-or fr-mt-6v">ou</p>
     <h2 className="fr-h5">Se créer un compte avec son email</h2>
     <EmailSignupForm callbackUrl={callbackUrl} email={email} />
-    <hr className="fr-mt-6v" />
-    <h2 className="fr-mt-4v fr-h5">Vous avez déjà un compte&nbsp;?</h2>
-    <ButtonsGroup
-      buttons={[
-        {
-          children: 'Se connecter',
-          linkProps: { href: '/connexion' },
-          priority: 'secondary',
-        },
-      ]}
-    />
+    <hr style={{ height: '1px' }} className="fr-my-10v fr-py-0" />
+    <h2 className="fr-h5">Vous avez déjà un compte&nbsp;?</h2>
+    <Button
+      size="large"
+      className="fr-width-full fr-flex fr-justify-content-center"
+      linkProps={{ href: '/connexion' }}
+      priority="secondary"
+    >
+      Se connecter
+    </Button>
   </AuthCard>
 )
 

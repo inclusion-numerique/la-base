@@ -1,8 +1,11 @@
 'use client'
 
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import Button from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
 import Cookies from 'js-cookie'
 import type { Route } from 'next'
 import { signIn } from 'next-auth/react'
@@ -42,21 +45,21 @@ export const EmailSigninForm = ({ callbackUrl }: { callbackUrl: Route }) => {
         control={form.control}
         path="email"
         label="Email"
-        classes={{
-          input: 'fr-input--white',
-        }}
         disabled={disabled}
       />
-      <ButtonsGroup
-        buttons={[
-          {
-            iconId: 'fr-icon-account-circle-line',
-            children: 'Se connecter',
-            type: 'submit',
-            className: disabled ? 'fr-btn--loading' : undefined,
-          },
-        ]}
-      />
+      <div className="fr-width-full">
+        <Button
+          iconId="fr-icon-account-circle-line"
+          type="submit"
+          size="large"
+          {...buttonLoadingClassname(
+            disabled,
+            'fr-width-full fr-flex fr-justify-content-center fr-mt-6v',
+          )}
+        >
+          Se connecter
+        </Button>
+      </div>
     </form>
   )
 }
