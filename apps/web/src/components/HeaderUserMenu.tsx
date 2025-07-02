@@ -39,14 +39,14 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       {bases.length > 0 ? (
         <>
           <li>
-            <p className="fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
+            <p className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
               Mes bases
             </p>
           </li>
           {bases.map(({ slug, title }) => (
             <li key={slug}>
               <Link
-                className="fr-btn fr-border-bottom-0"
+                className="fr-btn fr-text--sm fr-border-bottom-0"
                 href={`/bases/${slug}`}
                 style={{
                   boxShadow: 'none',
@@ -54,7 +54,9 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
                 }}
               >
                 <span className="fr-icon-home-4-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-                {title}
+                <span className="fr-text-mention--black fr-text--normal">
+                  {title}
+                </span>
               </Link>
             </li>
           ))}
@@ -62,26 +64,33 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       ) : null}
       <li>
         <Link
-          className="fr-btn fr-border-bottom-0"
+          className="fr-btn fr-text--sm fr-border-bottom-0"
           href="/bases/creer"
           style={{ boxShadow: 'none' }}
         >
           <span className="fr-icon-add-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-          Créer une base
+          <span className="fr-text-mention--black fr-text--normal">
+            Créer une base
+          </span>
         </Link>
       </li>
       {canAccessAdministration(user) && (
-        <li className="">
-          <Link className="fr-btn fr-border-top" href="/administration">
+        <li>
+          <Link
+            className="fr-btn fr-text--sm fr-border-top"
+            href="/administration"
+          >
             <span className="fr-icon-settings-5-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
             Administration
           </Link>
         </li>
       )}
-      <li className="">
-        <Link className="fr-btn fr-border-top" href="/deconnexion">
+      <li>
+        <Link className="fr-btn fr-text--sm fr-border-top" href="/deconnexion">
           <span className="fr-icon-logout-box-r-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-          Se déconnecter
+          <span className="fr-text-mention--black fr-text--normal">
+            Se déconnecter
+          </span>
         </Link>
       </li>
     </ul>

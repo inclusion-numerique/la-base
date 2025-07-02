@@ -1,6 +1,7 @@
 'use client'
 
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
+import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
 import React from 'react'
 
@@ -31,12 +32,19 @@ export const CreateResourceButton = ({
   return (
     <Button
       type="button"
-      iconId="fr-icon-edit-box-line"
       className={className}
       data-testid={dataTestid}
       onClick={onClick}
     >
+      <span
+        className="fr-hidden-lg ri-edit-box-line fr-mr-1w fr-text-label--blue-france"
+        aria-hidden
+      />
       Créer une ressource
+      <span
+        className="fr-hidden fr-unhidden-lg ri-edit-box-line fr-ml-1w fr-text-label--blue-france"
+        aria-hidden
+      />
     </Button>
   )
 }
