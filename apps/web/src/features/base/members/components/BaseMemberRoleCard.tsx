@@ -41,7 +41,7 @@ const BaseMemberRoleCard = ({
 
   if (isSessionUser) {
     return (
-      <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
+      <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-justify-content-md-end fr-justify-content-space-between fr-width-full">
         {member.accepted ? (
           <>
             <div

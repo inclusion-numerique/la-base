@@ -46,40 +46,50 @@ const BaseMemberCard = ({
       <div
         className={classNames(
           styles.container,
-          'fr-flex fr-align-items-center fr-width-full fr-py-3w',
+          'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-center fr-width-full fr-py-3w',
         )}
       >
-        {member.member.name ? (
-          <RoundProfileImage user={member.member} />
-        ) : (
-          <EmptyUserAvatar />
-        )}
-        <div className="fr-flex fr-justify-content-space-between fr-direction-sm-row fr-direction-column fr-width-full fr-align-items-center">
-          <Link className={styles.link} href={`/profils/${member.member.slug}`}>
-            <h3 className="fr-text--md fr-text--medium fr-my-auto">
-              {member.member.name ?? member.member.email}
-            </h3>
-            {!!member.member.email && member.member.name && (
-              <span
-                className={classNames(
-                  styles.role,
-                  'fr-text--xs fr-mb-0 fr-hint-text',
-                )}
-              >
-                {member.member.email}
-              </span>
-            )}
-          </Link>
-          <div>
-            <BaseMemberRoleCard
-              base={base}
-              canChangeMemberRole={canChangeMemberRole}
-              member={member}
-              isAdmin={isAdmin}
-              user={user}
-              onChange={onChange}
-            />
+        <div
+          className={classNames(
+            styles.container,
+            'fr-flex fr-align-items-center fr-width-full',
+          )}
+        >
+          {member.member.name ? (
+            <RoundProfileImage user={member.member} />
+          ) : (
+            <EmptyUserAvatar />
+          )}
+          <div className="fr-flex fr-justify-content-space-between fr-direction-sm-row fr-direction-column fr-width-full fr-align-items-md-center">
+            <Link
+              className={styles.link}
+              href={`/profils/${member.member.slug}`}
+            >
+              <h3 className="fr-text--md fr-text--medium fr-my-auto">
+                {member.member.name ?? member.member.email}
+              </h3>
+              {!!member.member.email && member.member.name && (
+                <span
+                  className={classNames(
+                    styles.role,
+                    'fr-text--xs fr-mb-0 fr-hint-text',
+                  )}
+                >
+                  {member.member.email}
+                </span>
+              )}
+            </Link>
           </div>
+        </div>
+        <div className="fr-width-full fr-pl-5w fr-pl-md-0 fr-flex fr-justify-content-space-between fr-justify-content-md-end">
+          <BaseMemberRoleCard
+            base={base}
+            canChangeMemberRole={canChangeMemberRole}
+            member={member}
+            isAdmin={isAdmin}
+            user={user}
+            onChange={onChange}
+          />
         </div>
       </div>
     </div>

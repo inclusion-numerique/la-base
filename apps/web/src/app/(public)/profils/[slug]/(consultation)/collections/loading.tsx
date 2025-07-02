@@ -3,7 +3,7 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import React from 'react'
 
 const LoadingProfileCollectionsPage = () => (
-  <div data-testid="base-resources">
+  <div data-testid="collections-resources">
     <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
       <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
         <IconInSquare iconId="ri-folder-2-line" />

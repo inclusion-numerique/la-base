@@ -58,11 +58,13 @@ const BaseMembers = ({
         )}
       </div>
       <div className="fr-mb-2w fr-flex fr-align-items-center fr-justify-content-space-between fr-flex-gap-3v">
-        <div className="fr-flex fr-align-items-center fr-flex-gap-3v">
+        <div className="fr-hidden fr-unhidden-sm fr-flex fr-align-items-center fr-flex-gap-3v">
           <span className="fr-text--medium">
             {adminCount} administrateur{sPluriel(adminCount)}
             {contributorsCount > 0 &&
-              ` · ${contributorsCount} contributeur${sPluriel(contributorsCount)}`}
+              ` · ${contributorsCount} contributeur${sPluriel(
+                contributorsCount,
+              )}`}
           </span>
           {invitationsCount > 0 && (
             <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">

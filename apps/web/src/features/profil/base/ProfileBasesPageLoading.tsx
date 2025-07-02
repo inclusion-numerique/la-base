@@ -4,7 +4,7 @@ import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import React from 'react'
 
 const ProfileBasesPageLoading = () => (
-  <div data-testid="base-resources">
+  <div data-testid="base-profiles">
     <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
       <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
         <LesBasesSvgLogo />
