@@ -38,7 +38,10 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
               <div className="fr-header__operator fr-pl-0">
                 <Link
                   href="/"
-                  className={classNames(`fr-text--medium`, styles.steps)}
+                  className={classNames(
+                    `fr-text--md fr-text--medium`,
+                    styles.steps,
+                  )}
                 >
                   {PublicWebAppConfig.projectTitle}
                   <span className="fr-sr-only"> - Retour à l’accueil</span>
@@ -65,7 +68,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
               <ul className="fr-btns-group fr-align-items-center">
-                <li>
+                <li className="fr-px-md-0 fr-px-2w">
                   <Button
                     linkProps={{
                       href: searchUrl('ressources', defaultSearchParams),
@@ -82,9 +85,9 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     />
                   </Button>
                 </li>
-                <li>
+                <li className="fr-px-md-0 fr-px-2w">
                   {user ? (
-                    <CreateResourceButton baseId={null} />
+                    <CreateResourceButton baseId={null} iconPosition="right" />
                   ) : (
                     <Link
                       href="/connexion?suivant=/?creer-une-ressource"
@@ -102,7 +105,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     </Link>
                   )}
                 </li>
-                <li>
+                <li className="fr-px-md-0 fr-px-2w">
                   <Link
                     data-testid="help-center-link"
                     className="fr-btn"
@@ -165,17 +168,15 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
       id="header-modal"
       aria-labelledby="header-modal-button"
     >
-      <div className="fr-container">
-        <button
-          type="button"
-          className="fr-btn--close fr-btn"
-          aria-controls="header-modal"
-          title="Fermer"
-        >
-          Fermer
-        </button>
-        <div className="fr-header__menu-links" />
-      </div>
+      <button
+        type="button"
+        className="fr-btn--close fr-btn fr-hidden-sm"
+        aria-controls="header-modal"
+        title="Fermer"
+      >
+        Fermer
+      </button>
+      <div className="fr-header__menu-links" />
     </div>
   </header>
 )

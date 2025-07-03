@@ -94,14 +94,16 @@ const CreateCollection = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="fr-container fr-flex">
+      <div className="fr-container fr-flex-md">
         <CreateCollectionSideMenu />
         <div className="fr-container--slim">
           <h1 className="fr-page-title">Créer une collection</h1>
           <Card
-            title="Informations"
+            title="Informations sur la collection"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            noBorder
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="informations"
             description={
               <span className="fr-text--sm fr-hint-text fr-mb-0">
@@ -113,9 +115,11 @@ const CreateCollection = ({
             <CollectionInformationsEdition form={form} />
           </Card>
           <Card
+            noBorder
             title="Aperçu de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            titleClassName="fr-text-label--blue-france"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="apercu"
             contentSeparator
           >
@@ -126,9 +130,10 @@ const CreateCollection = ({
             />
           </Card>
           <Card
+            noBorder
             title="Visibilité de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="visibilite"
             description="Choisissez la visibilité de votre collection."
             contentSeparator

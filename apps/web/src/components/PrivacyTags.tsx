@@ -37,16 +37,28 @@ export const BasePrivacyTag = ({
   )
 
 export const PrivacyTag = ({
+  className,
   isPublic,
   small,
   label,
 }: {
+  className?: string
   isPublic?: boolean
   small?: boolean
   label?: string
 }) =>
   isPublic ? (
-    <CustomTag {...publicValues} small={small} label={label} />
+    <CustomTag
+      {...publicValues}
+      small={small}
+      label={label}
+      className={className}
+    />
   ) : (
-    <CustomTag {...privateValues} small={small} label={label} />
+    <CustomTag
+      {...privateValues}
+      small={small}
+      label={label}
+      className={className}
+    />
   )

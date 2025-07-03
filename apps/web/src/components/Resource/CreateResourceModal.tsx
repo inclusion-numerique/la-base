@@ -3,6 +3,7 @@
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import React from 'react'
 
 export const CreateResourceDynamicModal = createDynamicModal({
@@ -18,12 +19,16 @@ export const createResourceModalId =
 
 export const CreateResourceButton = ({
   className,
+  titleClassName,
   baseId,
   'data-testid': dataTestid,
+  iconPosition = 'left',
 }: {
   className?: string
+  titleClassName?: string
   baseId: string | null
   'data-testid'?: string
+  iconPosition?: 'left' | 'right'
 }) => {
   const open = CreateResourceDynamicModal.useOpen()
 
@@ -36,15 +41,19 @@ export const CreateResourceButton = ({
       data-testid={dataTestid}
       onClick={onClick}
     >
-      <span
-        className="fr-hidden-lg ri-edit-box-line fr-mr-1w fr-text-label--blue-france"
-        aria-hidden
-      />
+      {iconPosition === 'left' && (
+        <span
+          className={classNames('ri-edit-box-line fr-mr-1w', titleClassName)}
+          aria-hidden
+        />
+      )}
       Créer une ressource
-      <span
-        className="fr-hidden fr-unhidden-lg ri-edit-box-line fr-ml-1w fr-text-label--blue-france"
-        aria-hidden
-      />
+      {iconPosition === 'right' && (
+        <span
+          className={classNames('ri-edit-box-line fr-ml-1w', titleClassName)}
+          aria-hidden
+        />
+      )}
     </Button>
   )
 }

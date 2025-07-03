@@ -33,23 +33,25 @@ const ErrorPage = async ({
         currentPage="Erreur"
         parents={[{ label: 'Connexion', linkProps: { href: '/connexion' } }]}
       />
-      <AuthCard>
-        <h1 style={{ textAlign: 'center' }} className="fr-mb-12v fr-h2">
-          Connexion à {PublicWebAppConfig.projectTitle}
-        </h1>
-        <div className="fr-alert fr-alert--error fr-alert--sm fr-mb-6v">
-          <h2 className="h6">Connexion impossible</h2>
-          <p>{errorMessage(error)}</p>
-        </div>
+      <div className="fr-container fr-container--narrow">
+        <AuthCard>
+          <h1 style={{ textAlign: 'center' }} className="fr-mb-12v fr-h2">
+            Connexion à {PublicWebAppConfig.projectTitle}
+          </h1>
+          <div className="fr-alert fr-alert--error fr-alert--sm fr-mb-6v">
+            <h2 className="h6">Connexion impossible</h2>
+            <p>{errorMessage(error)}</p>
+          </div>
 
-        <ul className="fr-btns-group fr-mt-12v">
-          <li>
-            <Link href="/connexion" target="_self" className="fr-btn">
-              Retour à la page de connexion
-            </Link>
-          </li>
-        </ul>
-      </AuthCard>
+          <ul className="fr-btns-group fr-mt-12v">
+            <li>
+              <Link href="/connexion" target="_self" className="fr-btn">
+                Retour à la page de connexion
+              </Link>
+            </li>
+          </ul>
+        </AuthCard>
+      </div>
     </>
   )
 }

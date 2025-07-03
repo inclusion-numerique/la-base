@@ -65,6 +65,7 @@ const Resources = ({
             className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w"
           >
             <CreateResourceButton
+              titleClassName="fr-text-label--blue-france"
               data-testid={
                 baseId ? 'create-resource-in-base-button' : undefined
               }

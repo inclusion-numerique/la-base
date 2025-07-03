@@ -1,6 +1,7 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
+import Card from '@app/web/components/Card'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -8,7 +9,6 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { signOut } from 'next-auth/react'
 import React from 'react'
 import { ConfirmDeleteModal } from '../../ConfirmDeleteModal'
-import CustomCard from '../../CustomCard'
 
 const {
   Component: DeleteModal,
@@ -40,29 +40,41 @@ const ProfileDeletion = ({ userId }: { userId: string }) => {
   }
 
   return (
-    <CustomCard id="supprimer" title="Supprimer le profil">
-      <p>
-        Cette action est irréversible et entraîne la suppression définitive de
-        votre profil. Utilisez cette fonction avec précaution.
-      </p>
-      <Button
-        className="fr-btn--danger"
-        data-testid="delete-profile-button"
-        {...deleteModalNativeButtonProps}
-      >
-        Supprimer le profil
-      </Button>
-      <ConfirmDeleteModal
-        title="Supprimer le profil"
-        message="Êtes-vous sûr de vouloir supprimer votre profil ?"
-        description="Toutes les ressources dont vous êtes le seul contributeur et les bases dont vous êtes le seul membre seront également supprimées."
-        confirmText="oui"
-        isLoading={mutation.isPending}
-        Component={DeleteModal}
-        onClose={closeDeleteModal}
-        onDelete={handleDeleteProfile}
-      />
-    </CustomCard>
+    <Card
+      noBorder
+      id="supprimer"
+      className="fr-border-radius--8 fr-border"
+      title={
+        <span className="fr-text-label--blue-france">
+          Supprimer votre profil
+        </span>
+      }
+      description={
+        <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-flex-gap-4v">
+          Cette action est irréversible et entraîne la suppression définitive de
+          votre profil et de toutes vos ressources.
+          <div>
+            <Button
+              className="fr-btn--danger fr-width-full fr-flex fr-justify-content-center"
+              data-testid="delete-profile-button"
+              {...deleteModalNativeButtonProps}
+            >
+              Supprimer
+            </Button>
+            <ConfirmDeleteModal
+              title="Supprimer votre profil"
+              message="Êtes-vous sûr de vouloir supprimer votre profil ?"
+              description="Toutes les ressources dont vous êtes le seul contributeur et les bases dont vous êtes le seul membre seront également supprimées."
+              confirmText="oui"
+              isLoading={mutation.isPending}
+              Component={DeleteModal}
+              onClose={closeDeleteModal}
+              onDelete={handleDeleteProfile}
+            />
+          </div>
+        </div>
+      }
+    />
   )
 }
 

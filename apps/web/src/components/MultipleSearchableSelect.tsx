@@ -227,7 +227,7 @@ const MultipleSearchableSelect = forwardRef<
             {hint && <span className="fr-hint-text">{hint}</span>}
           </label>
           <div className={styles.input}>
-            <div className="fr-flex fr-align-items-center fr-justify-content-space-between fr-flex-gap-4v">
+            <div className="fr-flex fr-align-items-center fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-flex-gap-4v">
               <div className={classNames('fr-input', styles.inputContainer)}>
                 <input
                   type="text"
@@ -272,6 +272,7 @@ const MultipleSearchableSelect = forwardRef<
               {withAddButton && (
                 <Button
                   type="button"
+                  className={styles.addButton}
                   nativeButtonProps={{
                     onClick: () => {
                       selectFirstResult(selectedIndex)
