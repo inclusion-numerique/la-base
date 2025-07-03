@@ -73,7 +73,7 @@ const VisibilityField = <T extends FieldValues>({
             {publicTitle}
             <p className="fr-text--xs fr-hint-text fr-mb-0">{publicHint}</p>
           </div>
-          <div className="fr-ml-3w">
+          <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
             <PrivacyTag isPublic />
           </div>
         </ResourceBaseRichRadioElement>
@@ -95,7 +95,7 @@ const VisibilityField = <T extends FieldValues>({
             {privateTitle}
             <p className="fr-text--xs fr-hint-text fr-mb-0">{privateHint}</p>
           </div>
-          <div className="fr-ml-3w">
+          <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
             <PrivacyTag />
           </div>
         </ResourceBaseRichRadioElement>

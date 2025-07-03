@@ -36,7 +36,7 @@ const SigninPage = async ({
   return (
     <>
       <SkipLinksPortal />
-      <Breadcrumbs currentPage="Créer un compte" />
+      <Breadcrumbs className="fr-mb-0" currentPage="Créer un compte" />
       <div className="fr-container fr-container--narrow">
         {raison === 'connexion-sans-compte' ? (
           <Notice
@@ -44,8 +44,8 @@ const SigninPage = async ({
             title="Nous n’avons pas de compte associé à cette adresse email. Veuillez créer un compte pour vous connecter."
           />
         ) : null}
+        <SignupPanel error={error} email={email} callbackUrl={callbackUrl} />
       </div>
-      <SignupPanel error={error} email={email} callbackUrl={callbackUrl} />
     </>
   )
 }

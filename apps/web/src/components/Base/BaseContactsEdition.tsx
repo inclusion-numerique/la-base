@@ -1,5 +1,6 @@
 import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import { MandatoryFields } from '@app/web/components/MandatoryFields'
 import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
 import type { UpdateBaseContactsCommand } from '@app/web/server/bases/updateBase'
 import React from 'react'
@@ -11,6 +12,7 @@ const BaseContactsEdition = ({
   form: UseFormReturn<CreateBaseCommand | UpdateBaseContactsCommand>
 }) => (
   <>
+    <MandatoryFields />
     <InputFormField
       className="fr-mb-3v"
       data-testid="base-email-input"
@@ -54,6 +56,7 @@ const BaseContactsEdition = ({
       data-testid="base-linkedin-input"
       path="linkedin"
       label="LinkedIn"
+      className="fr-mb-4w"
       disabled={form.formState.isSubmitting}
     />
   </>

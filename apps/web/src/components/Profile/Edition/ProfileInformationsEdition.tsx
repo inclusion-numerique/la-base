@@ -4,10 +4,10 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
 import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import EditableCardForm from '@app/web/components/EditableCardForm'
+import { MandatoryFields } from '@app/web/components/MandatoryFields'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
-  profileDescriptionMaxLength,
   profileFirstNameMaxLength,
   profileLastNameMaxLength,
 } from '@app/web/server/profiles/profileConstraints'
@@ -32,11 +32,6 @@ const firstNameInfo = (title?: string | null) =>
 
 const lastNameInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${profileLastNameMaxLength} caractères`
-
-const descriptionInfo = (description?: string | null) =>
-  `${
-    description ? htmlToText(description).length : 0
-  }/${profileDescriptionMaxLength} caractères`
 
 const ProfileInformationsEdition = ({
   profile,
@@ -64,7 +59,7 @@ const ProfileInformationsEdition = ({
   return (
     <EditableCardForm
       id="informations"
-      title="Informations"
+      title="Informations sur votre profil"
       form={form}
       onSave={handleSave}
       preview={
@@ -92,6 +87,7 @@ const ProfileInformationsEdition = ({
       }
       editing={
         <>
+          <MandatoryFields />
           <InputFormField
             data-testid="profile-firstName-input"
             control={form.control}
@@ -125,11 +121,8 @@ const ProfileInformationsEdition = ({
             data-testid="profile-description-input"
             disabled={form.formState.isSubmitting}
             label="Description"
-            hint="Text de description additionnel"
             form={form}
             path="description"
-            info={descriptionInfo}
-            size="small"
           />
         </>
       }

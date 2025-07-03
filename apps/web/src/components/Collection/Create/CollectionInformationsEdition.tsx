@@ -32,6 +32,7 @@ const CollectionInformationsEdition = ({
       info={titleInfo}
     />
     <RichInputFormField
+      menuBar={false}
       data-testid="collection-description-input"
       disabled={form.formState.isSubmitting}
       label="Description"

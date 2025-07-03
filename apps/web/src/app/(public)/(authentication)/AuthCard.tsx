@@ -1,3 +1,4 @@
+import Button from '@codegouvfr/react-dsfr/Button'
 import type { PropsWithChildren } from 'react'
 import styles from './AuthCard.module.css'
 

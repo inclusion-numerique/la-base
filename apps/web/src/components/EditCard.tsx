@@ -2,7 +2,7 @@
 
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
+import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
 import React, { type ReactNode, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
@@ -11,6 +11,7 @@ import type { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'
 import type { ChangeIndexationCommand } from '../server/resources/feature/ChangeIndexation'
 import type { ChangeVisibilityCommand } from '../server/resources/feature/ChangeVisibility'
 import Card from './Card'
+import styles from './EditCard.module.css'
 
 const EditCard = <
   T extends
@@ -22,6 +23,7 @@ const EditCard = <
 >({
   id,
   className,
+  noBorder,
   title,
   titleAs: CardTitle = 'h3',
   description,
@@ -33,9 +35,10 @@ const EditCard = <
 }: {
   id?: string
   className?: string
+  noBorder?: boolean
   title: string
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  description?: string
+  description?: ReactNode
   edition: ReactNode
   view: ReactNode
   form: UseFormReturn<T>
@@ -60,48 +63,77 @@ const EditCard = <
   return (
     <Card
       id={id}
-      className={className}
+      className={classNames(className, 'fr-border-radius--8 fr-border')}
+      noBorder={noBorder}
       title={
-        <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
-          <CardTitle className="fr-mb-0 fr-h5">{title}</CardTitle>
-          {!editMode && setEditMode && (
-            <Button
-              data-testid="edit-card-button"
-              priority="secondary"
-              iconId="fr-icon-edit-line"
-              title="Modifier"
-              onClick={() => setEditMode(true)}
-            />
-          )}
+        <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-align-items-sm-center fr-flex-gap-3v">
+          <CardTitle className="fr-mb-0 fr-h5 fr-text-label--blue-france">
+            {title}
+          </CardTitle>
+          <div className="fr-hidden fr-unhidden-sm">
+            {!editMode && setEditMode && (
+              <Button
+                data-testid="edit-card-button"
+                className="fr-text--sm fr-text--medium fr-p-1v"
+                size="small"
+                priority="tertiary no outline"
+                onClick={() => setEditMode(true)}
+              >
+                Modifier
+                <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+              </Button>
+            )}
+          </div>
         </div>
       }
-      description={description}
+      description={
+        <>
+          {description}
+          <div className="fr-hidden-sm fr-unhidden">
+            <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
+              {!editMode && setEditMode && (
+                <Button
+                  data-testid="edit-card-button"
+                  className="fr-text--sm fr-text--medium"
+                  size="small"
+                  priority="tertiary no outline"
+                  onClick={() => setEditMode(true)}
+                >
+                  Modifier
+                  <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+                </Button>
+              )}
+            </div>
+          </div>
+        </>
+      }
       titleAs="div"
       contentSeparator
     >
       {editMode ? (
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {edition}
-          <ButtonsGroup
-            inlineLayoutWhen="always"
-            alignment="right"
-            buttons={[
-              {
-                children: 'Annuler',
-                priority: 'secondary',
-                onClick: () => setEditMode(false),
-                disabled: form.formState.isSubmitting,
-              },
-              {
-                children: 'Enregistrer',
-                type: 'submit',
-                disabled: form.formState.isSubmitting,
-                nativeButtonProps: {
-                  'data-testid': 'edit-card-save-button',
-                },
-              },
-            ]}
-          />
+          <div className="fr-flex fr-direction-column-reverse fr-direction-sm-row fr-justify-content-end fr-flex-gap-4v">
+            <Button
+              priority="secondary"
+              className={styles.button}
+              disabled={form.formState.isSubmitting}
+              onClick={() => setEditMode(false)}
+            >
+              Annuler
+            </Button>
+            <Button
+              priority="primary"
+              className={styles.button}
+              type="submit"
+              disabled={form.formState.isSubmitting}
+              nativeButtonProps={{
+                'data-testid': 'edit-card-save-button',
+              }}
+            >
+              Enregistrer
+            </Button>
+          </div>
         </form>
       ) : (
         view

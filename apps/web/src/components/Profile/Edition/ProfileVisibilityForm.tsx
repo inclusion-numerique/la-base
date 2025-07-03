@@ -13,6 +13,7 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import { trpc } from '@app/web/trpc'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -109,8 +110,20 @@ const ProfileVisibilityForm = ({
       )}
       <EditableCardForm
         id="visibilite"
-        title="Visibilité du profil"
-        subtitle="Choisissez la visibilité du profil."
+        title="Visibilité de votre profil"
+        subtitle={
+          <span className="fr-text--sm">
+            Choisissez ce que les visiteurs peuvent voir sur votre page
+            profil.&nbsp;
+            <br className="fr-hidden-sm fr-unhidden" />
+            <Link
+              href="/centre-d-aide/le-profil#visibilite-profil"
+              className="fr-link fr-text--sm"
+            >
+              En savoir plus
+            </Link>
+          </span>
+        }
         form={form}
         onSave={handleSave}
         preview={

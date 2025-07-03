@@ -48,11 +48,11 @@ const BaseEdition = ({ base }: { base: BasePageData }) => {
   return (
     <>
       <Button
-        className="fr-btn--danger"
+        className="fr-btn--danger fr-width-full fr-flex fr-justify-content-center"
         data-testid="delete-base-button"
         {...deleteModalNativeButtonProps}
       >
-        Supprimer la base
+        Supprimer
       </Button>
       <ConfirmDeleteModal
         title="Supprimer la base"

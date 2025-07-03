@@ -16,7 +16,6 @@
 
 .banner {
   /* Go over container width on mobile layout */
-  margin-bottom: -16px;
   border-radius: 16px;
 
   overflow: hidden;

@@ -1,6 +1,7 @@
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import RichInputFormField from '@app/ui/components/Form/RichInputFormField'
 import SelectFormField from '@app/ui/components/Form/SelectFormField'
+import { MandatoryFields } from '@app/web/components/MandatoryFields'
 import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
 import {
   type UpdateBaseInformationsCommand,
@@ -16,6 +17,7 @@ const BaseInformationsEdition = ({
   form: UseFormReturn<CreateBaseCommand | UpdateBaseInformationsCommand>
 }) => (
   <>
+    <MandatoryFields />
     <InputFormField
       data-testid="base-title-input"
       control={form.control}
@@ -41,7 +43,6 @@ const BaseInformationsEdition = ({
       data-testid="base-description-input"
       disabled={form.formState.isSubmitting}
       label="Description"
-      hint="Texte de description additionnel"
       form={form}
       path="description"
       allowHeadings={false}
