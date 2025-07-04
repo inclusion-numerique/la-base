@@ -28,7 +28,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName)
     cy.get('#input-form-field__policyAccepted').check({ force: true })
-    cy.findByText('Valider').click()
+    cy.findByText('Créer mon compte').click()
     cy.appUrlShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
@@ -62,7 +62,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName)
     cy.get('#input-form-field__policyAccepted').check({ force: true })
-    cy.findByText('Valider').click()
+    cy.findByText('Créer mon compte').click()
 
     cy.appUrlShouldBe('/creer-un-compte')
     cy.contains('Un compte existe déjà avec cet email')

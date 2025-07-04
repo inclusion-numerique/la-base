@@ -1,6 +1,10 @@
 .emptyIndexation {
-  p {
+  span {
     color: var(--text-default-grey);
     font-weight: 400 !important;
+  }
+
+  span::before {
+    color: var(--text-default-info);
   }
 }

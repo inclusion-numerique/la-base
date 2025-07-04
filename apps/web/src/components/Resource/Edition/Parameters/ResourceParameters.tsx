@@ -27,8 +27,9 @@ const ResourceParameters = ({
       <ResourceVisibilityForm resource={resource} user={user} />
       <ResourceIndexation resource={resource} />
       <Card
+        noBorder
+        className="fr-border-radius--8 fr-border fr-my-3w"
         id="contributeurs"
-        className="fr-mt-3w"
         title="Contributeurs"
         titleAs="h2"
         description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
@@ -37,7 +38,8 @@ const ResourceParameters = ({
         <InviteResourceContributors resource={resource} />
       </Card>
       <Card
-        className="fr-my-3w"
+        noBorder
+        className="fr-my-3w fr-border-radius--8 fr-border"
         id="avis"
         title="Avis sur la ressource"
         titleAs="h2"
@@ -47,7 +49,8 @@ const ResourceParameters = ({
         <ResourceFeedback resource={resource} />
       </Card>
       <Card
-        className="fr-my-3w"
+        noBorder
+        className="fr-border-radius--8 fr-border"
         id="supprimer"
         title="Supprimer la ressource"
         titleAs="h2"

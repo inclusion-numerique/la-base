@@ -87,7 +87,7 @@ describe('ETQ Utilisateur, je peux me connecter avec un nouvel email qui a été
       })
     })
 
-    cy.get('button[title="S’identifier avec ProConnect"]').click()
+    cy.get('button[title="S’identifier avec Pro Connect"]').click()
     cy.url().should('contain', 'fca.integ01.dev-agentconnect.fr')
 
     cy.intercept(/\/api\/auth\/callback/, (request) => {

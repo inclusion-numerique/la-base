@@ -244,7 +244,6 @@ const ResourceEdition = ({
       throw error
     }
   }
-
   return (
     <>
       <div
