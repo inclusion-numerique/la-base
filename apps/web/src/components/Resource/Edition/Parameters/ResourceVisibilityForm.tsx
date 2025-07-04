@@ -56,6 +56,7 @@ const ResourceVisibilityForm = ({
 
   return (
     <EditCard
+      noBorder
       className="fr-mt-3w"
       id="visibilite"
       title="Visibilité de la ressource"
