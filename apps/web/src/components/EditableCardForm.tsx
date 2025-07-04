@@ -1,6 +1,5 @@
 'use client'
 
-import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { useRouter } from 'next/navigation'
 import React, { type ReactNode, useState } from 'react'
@@ -16,7 +15,6 @@ const EditableCardForm = <T extends FieldValues>({
   editing,
   form,
   onSave,
-  buttons = [],
 }: {
   id: string
   title: ReactNode
@@ -54,23 +52,12 @@ const EditableCardForm = <T extends FieldValues>({
       subtitle={subtitle}
       editModeState={[isEditMode, setEditMode]}
       preview={preview}
+      disabled={isLoading}
       editing={
         <form id={`${id}-form`} onSubmit={form.handleSubmit(onSubmit)}>
           {editing}
         </form>
       }
-      buttons={[
-        {
-          children: 'Enregistrer',
-          type: 'submit',
-          form: `${id}-form`,
-          nativeButtonProps: {
-            'data-testid': 'editable-card-form-save-button',
-          },
-          ...buttonLoadingClassname(isLoading),
-        },
-        ...buttons,
-      ]}
     />
   )
 }

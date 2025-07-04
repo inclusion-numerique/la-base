@@ -37,7 +37,6 @@ const OwnershipInformation = ({
   base,
   className,
   attributionWording,
-  displayUser = true,
 }: {
   user: Pick<
     User,
@@ -70,10 +69,16 @@ const OwnershipInformation = ({
           >
             {base.title}
           </Link>
+          {attributionWordings[attributionWording].by}
+          <Link
+            href={`/profils/${user.slug}`}
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+          >
+            {user.name && formatName(user.name)}
+          </Link>
         </>
       )}
-      {(!base ||
-        (user.isPublic && displayUser && attributionWording !== 'none')) && (
+      {!base && user.isPublic && attributionWording !== 'none' && (
         <>
           {attributionWordings[attributionWording].by}
           <Link

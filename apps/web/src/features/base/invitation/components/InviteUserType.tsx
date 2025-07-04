@@ -35,6 +35,10 @@ const InviteUserType = ({
         ]
       : []),
   ]
+  if (options.length === 1) {
+    return null
+  }
+
   const handleOnChange = (value: string) => {
     onChange?.(value as 'admin' | 'member')
     setOpen(false)
@@ -45,7 +49,7 @@ const InviteUserType = ({
         <Button
           className={classNames(
             styles.button,
-            'fr-text--semi-bold fr-text-label--blue-france',
+            'fr-text--medium fr-text-label--blue-france',
           )}
           priority="tertiary"
           iconId={`fr-icon-arrow-${open ? 'up' : 'down'}-s-line`}

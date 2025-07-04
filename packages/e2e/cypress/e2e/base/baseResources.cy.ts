@@ -36,10 +36,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.visit(`/bases/${defaultTestBaseSlug}`)
 
     cy.dsfrModalsShouldBeBound()
-    cy.testId('base-resources').should('contain', 'Ressources · 1')
-    cy.testId('base-resources').should('contain', 'Brouillons · 1')
-    cy.testId('base-resources').should('contain', 'Publiques · 0')
-    cy.testId('base-resources').should('contain', 'Privées · 0')
+    cy.testId('resources-list').should('contain', 'Ressources · 1')
+    cy.testId('resources-list').should('contain', 'Brouillons · 1')
+    cy.testId('resources-list').should('contain', 'Publiques · 0')
+    cy.testId('resources-list').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')
     cy.contains('button', 'Brouillons').click()
@@ -87,10 +87,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.visit(`/bases/${defaultTestBaseSlug}`)
 
     cy.dsfrModalsShouldBeBound()
-    cy.testId('base-resources').should('contain', 'Ressources · 1')
-    cy.testId('base-resources').should('contain', 'Brouillons · 0')
-    cy.testId('base-resources').should('contain', 'Publiques · 0')
-    cy.testId('base-resources').should('contain', 'Privées · 1')
+    cy.testId('resources-list').should('contain', 'Ressources · 1')
+    cy.testId('resources-list').should('contain', 'Brouillons · 0')
+    cy.testId('resources-list').should('contain', 'Publiques · 0')
+    cy.testId('resources-list').should('contain', 'Privées · 1')
 
     cy.log('Check draft resources')
     cy.contains('button', 'Brouillons').click()
@@ -142,10 +142,10 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.visit(`/bases/${defaultTestBaseSlug}`)
 
     cy.dsfrModalsShouldBeBound()
-    cy.testId('base-resources').should('contain', 'Ressources · 1')
-    cy.testId('base-resources').should('contain', 'Brouillons · 0')
-    cy.testId('base-resources').should('contain', 'Publiques · 1')
-    cy.testId('base-resources').should('contain', 'Privées · 0')
+    cy.testId('resources-list').should('contain', 'Ressources · 1')
+    cy.testId('resources-list').should('contain', 'Brouillons · 0')
+    cy.testId('resources-list').should('contain', 'Publiques · 1')
+    cy.testId('resources-list').should('contain', 'Privées · 0')
 
     cy.log('Check draft resources')
     cy.contains('button', 'Brouillons').click()

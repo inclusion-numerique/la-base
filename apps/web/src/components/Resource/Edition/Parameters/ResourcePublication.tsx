@@ -37,6 +37,7 @@ const ResourcePublication = ({
   return (
     <EditCard
       id="publication"
+      noBorder
       title="Ressource publiée dans"
       titleAs="h2"
       form={form}

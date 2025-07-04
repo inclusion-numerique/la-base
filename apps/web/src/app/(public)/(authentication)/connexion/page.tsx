@@ -31,8 +31,14 @@ const SigninPage = async ({
   return (
     <>
       <SkipLinksPortal />
-      <Breadcrumbs currentPage="Connexion" />
-      <SigninPanel intent={intention} error={error} callbackUrl={callbackUrl} />
+      <Breadcrumbs className="fr-mb-0" currentPage="Connexion" />
+      <div className="fr-container fr-container--narrow">
+        <SigninPanel
+          intent={intention}
+          error={error}
+          callbackUrl={callbackUrl}
+        />
+      </div>
     </>
   )
 }

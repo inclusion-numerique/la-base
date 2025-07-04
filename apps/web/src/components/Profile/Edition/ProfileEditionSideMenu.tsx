@@ -2,10 +2,10 @@ import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 import React from 'react'
 
 const profileSections = [
-  { id: 'informations', title: 'Informations' },
-  { id: 'contacts', title: 'Contacts' },
-  { id: 'visibilite', title: 'Visibilité du profil' },
-  { id: 'supprimer', title: 'Supprimer le profil' },
+  { id: 'informations', title: 'Informations sur votre profil' },
+  { id: 'contacts', title: 'Vos contacts' },
+  { id: 'visibilite', title: 'Visibilité de votre profil' },
+  { id: 'supprimer', title: 'Supprimer votre profil' },
 ]
 
 const ProfileEditionSideMenu = () => (

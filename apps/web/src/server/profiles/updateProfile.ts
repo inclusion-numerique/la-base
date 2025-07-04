@@ -1,8 +1,6 @@
-import { htmlToText } from '@app/web/utils/htmlToText'
 import sanitizeHtml from 'sanitize-html'
 import z from 'zod'
 import {
-  profileDescriptionMaxLength,
   profileFirstNameMaxLength,
   profileLastNameMaxLength,
 } from './profileConstraints'
@@ -30,12 +28,6 @@ const departmentValidation = z.string().trim().optional()
 const descriptionValidation = z
   .string()
   .trim()
-  .refine(
-    (text) => !text || htmlToText(text).length <= profileDescriptionMaxLength,
-    {
-      message: `La description ne doit pas dépasser ${profileDescriptionMaxLength} caractères`,
-    },
-  )
   .optional()
   .transform((text) => (text ? sanitizeHtml(text) : text))
 

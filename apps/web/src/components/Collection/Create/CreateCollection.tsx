@@ -94,14 +94,16 @@ const CreateCollection = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="fr-container fr-flex">
+      <div className="fr-container fr-flex-md">
         <CreateCollectionSideMenu />
         <div className="fr-container--slim">
           <h1 className="fr-page-title">Créer une collection</h1>
           <Card
-            title="Informations"
+            title="Informations sur la collection"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            noBorder
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="informations"
             description={
               <span className="fr-text--sm fr-hint-text fr-mb-0">
@@ -113,9 +115,11 @@ const CreateCollection = ({
             <CollectionInformationsEdition form={form} />
           </Card>
           <Card
+            noBorder
             title="Aperçu de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            titleClassName="fr-text-label--blue-france"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="apercu"
             contentSeparator
           >
@@ -126,9 +130,10 @@ const CreateCollection = ({
             />
           </Card>
           <Card
+            noBorder
             title="Visibilité de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="visibilite"
             description="Choisissez la visibilité de votre collection."
             contentSeparator
@@ -147,31 +152,32 @@ const CreateCollection = ({
                       </span>
                     </>
                   ) : (
-                    <>
+                    <div className="fr-flex fr-direction-column fr-flex-gap-1v">
                       <span className="fr-text--bold">Profil privé</span>
-                      <br />
                       <span className="fr-text--regular">
                         Votre collection sera visible uniquement par vous.
                       </span>
-                    </>
+                    </div>
                   )
                 }
               />
             )}
-            <VisibilityField
-              model="collection"
-              path="isPublic"
-              control={control}
-              disabled={isLoading || (base != null && !base.isPublic)}
-              publicTitle="Collection publique"
-              privateTitle="Collection privée"
-              publicHint="Visible par tous les visiteurs."
-              privateHint={
-                base
-                  ? 'Visible uniquement par les membres de votre base.'
-                  : 'Visible uniquement par vous.'
-              }
-            />
+            {!collectionCannotBePublic && (
+              <VisibilityField
+                model="collection"
+                path="isPublic"
+                control={control}
+                disabled={isLoading || (base != null && !base.isPublic)}
+                publicTitle="Collection publique"
+                privateTitle="Collection privée"
+                publicHint="Visible par tous les visiteurs."
+                privateHint={
+                  base
+                    ? 'Visible uniquement par les membres de votre base.'
+                    : 'Visible uniquement par vous.'
+                }
+              />
+            )}
           </Card>
           <ButtonsGroup
             className="fr-mt-3w"

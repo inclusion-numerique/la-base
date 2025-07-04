@@ -113,6 +113,7 @@ const CollectionResourcesOrderEdition = ({
             {collection.slug && (
               <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-2v">
                 <CollectionMetaData
+                  className="fr-my-2v"
                   withCollectionDates={false}
                   collection={{
                     title: collection.title,
@@ -125,6 +126,7 @@ const CollectionResourcesOrderEdition = ({
                   }}
                   count={orderedCollectionsResources.length}
                   context="view"
+                  withPrivacyTag={!collection.isPublic}
                 />
                 <div className="fr-flex fr-flex-gap-2v">
                   <Button
@@ -159,7 +161,7 @@ const CollectionResourcesOrderEdition = ({
           orderedCollectionsResources.length === 0 ? (
           <div className="fr-mt-md-6w fr-mt-3w">
             <div className="fr-border fr-border-radius--8 fr-text--center fr-px-12v fr-py-8v">
-              <span className="fr-text--semi-bold fr-text-mention--grey">
+              <span className="fr-text--medium fr-text-mention--grey">
                 Vous avez retiré toutes les ressources de cette collection.
               </span>
             </div>

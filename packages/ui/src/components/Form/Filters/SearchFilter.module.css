@@ -30,6 +30,7 @@
 }
 
 .options {
+  width: 325px;
   position: absolute;
   z-index: 1;
   left: 0;

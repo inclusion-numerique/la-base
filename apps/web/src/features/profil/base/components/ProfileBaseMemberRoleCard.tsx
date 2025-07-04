@@ -27,7 +27,7 @@ const ProfileBaseMemberRoleCard = ({
       <span
         className={classNames(
           styles.role,
-          'fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text',
+          'fr-text--medium fr-text--sm fr-mb-0 fr-hint-text',
         )}
       >
         {isAdmin ? 'Administrateur' : 'Contributeur'}
