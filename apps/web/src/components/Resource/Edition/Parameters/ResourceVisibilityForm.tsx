@@ -53,9 +53,9 @@ const ResourceVisibilityForm = ({
   }, [resource, user, form.setValue, form.getValues])
 
   const mutate = trpc.resource.mutate.useMutation()
-
   return (
     <EditCard
+      noBorder
       className="fr-mt-3w"
       id="visibilite"
       title="Visibilité de la ressource"

@@ -283,10 +283,12 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           </Card>
 
           <ButtonsGroup
-            className="fr-mt-3w fr-border-radius--8 fr-border"
+            className="fr-mt-3w"
             buttons={[
               {
-                nativeButtonProps: { 'data-testid': 'create-button' },
+                nativeButtonProps: {
+                  'data-testid': 'create-button',
+                },
                 type: 'submit',
                 children: 'Créer la base',
                 ...buttonLoadingClassname(isLoading),

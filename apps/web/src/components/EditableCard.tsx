@@ -51,7 +51,7 @@ const EditableCard = ({
           <div className="fr-hidden fr-unhidden-sm">
             {!isEditMode && (
               <Button
-                data-testid="edit-card-button"
+                data-testid={`${id}-edit-card-button`}
                 className="fr-text--sm fr-text--medium fr-p-1v"
                 size="small"
                 priority="tertiary no outline"
@@ -71,7 +71,7 @@ const EditableCard = ({
             <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
               {!isEditMode && (
                 <Button
-                  data-testid="edit-card-button"
+                  data-testid={`${id}-edit-card-button`}
                   className="fr-text--sm fr-text--medium"
                   size="small"
                   priority="tertiary no outline"

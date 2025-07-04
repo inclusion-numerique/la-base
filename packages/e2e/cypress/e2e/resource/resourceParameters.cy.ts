@@ -31,7 +31,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
 
-    cy.testId('edit-card-button').eq(1).click()
+    cy.testId('edit-card-button').eq(3).click({ force: true })
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
@@ -49,7 +49,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
   it('Acceptation 2 - Si je passe la ressource dans un profil privé, elle devient privée', () => {
     cleanUpAndCreateTestPublishedResource({
-      publicBase: true,
+      publicBase: false,
       publicResource: true,
       signinAsResourceCreator: true,
       visitResourcePage: true,
@@ -65,8 +65,8 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'Visible par tous les visiteurs.',
     )
 
-    cy.testId('edit-card-button').eq(0).click()
-    cy.testId('resource-base-profil').click({
+    cy.testId('edit-card-button').eq(3).click({ force: true })
+    cy.testId('visibility-radio-resource-private').click({
       force: true,
     })
 
@@ -75,11 +75,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
 
     cy.testId('visibility').should(
       'have.text',
-      'Visible uniquement par vous et les contributeurs que vous avez invités.',
+      'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
 
-    cy.testId('edit-card-button').eq(1).click()
-    cy.testId('notice-private-profile').should('exist')
+    cy.testId('edit-card-button').eq(3).click({ force: true })
+    cy.testId('notice-private-base').should('exist')
     cy.testId('visibility-radio-resource-public').should('be.disabled')
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('be.checked')
@@ -109,17 +109,17 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'Visible par tous les visiteurs.',
     )
 
-    cy.testId('edit-card-button').eq(0).click()
-    cy.testId('resource-base-0').click({ force: true })
+    cy.testId('edit-card-button').eq(3).click({ force: true })
+    cy.testId('visibility-radio-resource-private').click({ force: true })
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
     cy.testId('visibility').should(
       'have.text',
-      'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
+      'Visible uniquement par vous et les contributeurs que vous avez invités.',
     )
-    cy.testId('edit-card-button').eq(1).click()
+    cy.testId('edit-card-button').eq(3).click({ force: true })
     cy.testId('visibility-radio-resource-public').should('not.be.checked')
     cy.testId('visibility-radio-resource-private').should('be.checked')
 
@@ -132,9 +132,9 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('resource-public-state-badge').should('have.text', 'Privée')
   })
 
-  it('Acceptation 3 - Si je passe la ressource dans une base privé, elle devient privée', () => {
+  it('Acceptation 3 - Si je passe la ressource dans une base privée, elle devient privée', () => {
     cleanUpAndCreateTestPublishedResource({
-      publicBase: true,
+      publicBase: false,
       publicResource: true,
       signinAsResourceCreator: true,
       visitResourcePage: true,
@@ -154,10 +154,8 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'Visible par tous les visiteurs.',
     )
 
-    cy.testId('edit-card-button').eq(0).click()
-    cy.testId('resource-base-1').click({
-      force: true,
-    })
+    cy.testId('edit-card-button').eq(3).click({ force: true })
+    cy.testId('visibility-radio-resource-private').click({ force: true })
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
@@ -167,7 +165,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       'Visible uniquement par les membres de votre base et les contributeurs que vous avez invités.',
     )
 
-    cy.testId('edit-card-button').eq(1).click()
+    cy.testId('edit-card-button').eq(3).click({ force: true })
     cy.testId('notice-private-base').should('exist')
     cy.testId('visibility-radio-resource-public').should('be.disabled')
 
@@ -190,12 +188,14 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-parameters-modal').click()
 
     cy.testId('resource-empty-indexation').should('not.exist')
-    cy.testId('edit-card-button').eq(2).click()
+    cy.testId('edit-card-button').eq(4).click({ force: true })
+    cy.testId('indexation-themes-select').click()
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
     ).click({ force: true })
+    cy.testId('indexation-themes-select-apply').click()
 
     cy.testId('indexation-resource-types-select-Article').click()
     cy.testId('indexation-beneficiaries-select-Adultes').click()
@@ -206,12 +206,13 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('edit-card-button').eq(2).click()
+    cy.testId('edit-card-button').eq(4).click({ force: true })
+    cy.testId('indexation-themes-select').click()
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
-    ).click({
-      force: true,
-    })
+    ).click()
+    cy.testId('indexation-themes-select-apply').click()
+
     cy.testId('indexation-resource-types-select').click()
     cy.testId('indexation-resource-types-select-Annuaire').click()
     cy.testId('indexation-beneficiaries-select').click()
