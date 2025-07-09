@@ -80,7 +80,9 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('publish-resource-button').click()
     cy.appUrlShouldBe(`/ressources/un-titre/publier`)
     cy.testId('visibility-radio-resource-private').click({ force: true })
+    cy.intercept('/api/trpc/resource.mutate?*').as('mutation')
     cy.testId('publish-resource-button').click()
+    cy.wait('@mutation')
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
 
     cy.log('Check new state')
