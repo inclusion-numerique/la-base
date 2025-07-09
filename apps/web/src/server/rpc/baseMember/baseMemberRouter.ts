@@ -206,7 +206,7 @@ export const baseMemberRouter = router({
       if (invitation.invitedBy) {
         const memberName = formatMemberName(invitation.member)
         await sendAcceptedInvitationEmail({
-          url: `/base/${invitation.base.slug}`,
+          url: `/bases/${invitation.base.slug}`,
           baseTitle: invitation.base.title,
           email: invitation.invitedBy.email,
           memberName,
