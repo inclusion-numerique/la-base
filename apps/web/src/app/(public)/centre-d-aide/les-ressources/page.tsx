@@ -411,6 +411,252 @@ const ContentPolicyPage = () => (
                   <strong>‘Annuler’</strong> vos modifications en bas à droite
                   de chaque bloc.
                 </p>
+                <hr />
+                <h2
+                  id="licence-ressource"
+                  className="fr-page-title fr-mt-3w fr-mb-6w"
+                >
+                  Licence des ressources
+                </h2>
+                <h3>Des ressources libres et gratuites</h3>
+                <p className="fr-mb-6w">
+                  Toutes les ressources publiées sur la plateforme sont mises à
+                  disposition gratuitement et, par défaut, sous licence&nbsp;
+                  <Link
+                    href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    Etalab 2.0
+                  </Link>
+                  &nbsp;(Il est possible de choisir une autre licence pour vos
+                  ressources). Les utilisateurs ne doivent en aucun cas demander
+                  des compensations financières pour l’utilisation ou la
+                  diffusion des contenus partagés.
+                </p>
+                <h3>Licence par défaut pour vos ressources : Etalab 2.0</h3>
+                <p>
+                  Par défaut, toutes les ressources publiées sur la plateforme
+                  sont sous licence{' '}
+                  <Link
+                    href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    Etalab 2.0
+                  </Link>
+                  . Cette licence permet la réutilisation libre, gratuite, non
+                  exclusive et mondiale de l’information, à des fins
+                  commerciales ou non, pour une durée illimitée.
+                </p>
+                <Notice
+                  className="fr-mb-2w"
+                  title={
+                    <span className="fr-text--regular fr-text-default--grey">
+                      Si votre structure employeuse et/ou si vous représenter
+                      une administration publique, vous êtes dans l’obligation
+                      d'utiliser la licence ouverte{' '}
+                      <Link
+                        href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
+                        className="fr-link"
+                        target="_blank"
+                      >
+                        Etalab 2.0
+                      </Link>
+                    </span>
+                  }
+                />
+                <p>Les utilisateurs des ressources sont autorisés à :</p>
+                <ul>
+                  <li>
+                    <strong>Partager</strong> — copier, distribuer et
+                    communiquer le contenu par tous moyens et sous tous formats,
+                  </li>
+                  <li>
+                    <strong>Adapter</strong> — remixer, transformer et créer à
+                    partir du matériel pour toute utilisation, y compris
+                    commerciale.
+                  </li>
+                </ul>
+                <p>À condition de :</p>
+                <ul>
+                  <li>
+                    <strong>Citer la source de l’information</strong> — Vous
+                    devez créditer la source de l’information (au moins le nom
+                    du concédant) et indiquer la date de dernière mise à jour. —
+                    mentionner la ressource originale et son auteur,
+                  </li>
+                </ul>
+                <Notice
+                  className="fr-mb-6w"
+                  title={
+                    <span className="fr-text--regular fr-text-default--grey">
+                      <strong>Exemple de mention :</strong>
+                      <br />
+                      Ministère de xxx - Données originales téléchargées
+                      sur http://www.data.gouv.fr/fr/datasets/xxx/, mise à jour
+                      du 14 février 2017.
+                    </span>
+                  }
+                />
+                <h3>Autre choix de licence possible : Creative Commons</h3>
+                <p className="fr-mb-6w">
+                  Par défaut, toutes les ressources publiées sur la plateforme
+                  sont sous licence&nbsp;
+                  <Link
+                    href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    Etalab
+                  </Link>
+                  . Mais vous pouvez publier vos ressources sous une autre
+                  licence. Nous vous proposons notamment deux licences Creative
+                  Commons :&nbsp;
+                  <Link
+                    className="fr-link"
+                    href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+                    target="_blank"
+                  >
+                    CC BY-SA 4.0
+                  </Link>
+                  ou&nbsp;
+                  <Link
+                    className="fr-link"
+                    target="_blank"
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"
+                  >
+                    CC BY-NC-SA 4.0.
+                  </Link>
+                </p>
+                <h4>1. Licence CC BY-SA 4.0</h4>
+                <p>
+                  <strong>
+                    Si vous souhaitez que vos ressources publiées sur la
+                    plateforme soient réutilisés et partagés dans les mêmes
+                    conditions
+                  </strong>
+                  , c’est à dire sous la même licence, nous vous conseillons :
+                  <Link
+                    className="fr-link"
+                    href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+                    target="_blank"
+                  >
+                    CC BY-SA 4.0
+                  </Link>
+                </p>
+                <p>Les utilisateurs des ressources sont autorisés à :</p>
+                <ul>
+                  <li>
+                    <strong>Partager</strong> — copier, distribuer et
+                    communiquer le contenu par tous moyens et sous tous formats,
+                  </li>
+                  <li>
+                    <strong>Adapter</strong> — remixer, transformer et créer à
+                    partir du matériel pour toute utilisation, y compris
+                    commerciale.
+                  </li>
+                </ul>
+                <p>À condition de :</p>
+                <ul>
+                  <li>
+                    <strong>Citer l'auteur</strong> — Vous devez créditer
+                    l’auteur, fournir un lien vers la licence et indiquer si des
+                    modifications ont été effectuées.
+                  </li>
+                  <li>
+                    <strong>Partager dans les mêmes conditions</strong> — Si
+                    vous modifiez ou transformez ce contenu, vous devez diffuser
+                    votre contribution sous la même licence.
+                  </li>
+                </ul>
+                <Notice
+                  className="fr-mb-6w"
+                  title={
+                    <span className="fr-text--regular fr-text-default--grey">
+                      <strong>
+                        Comment publier ma ressources sous licence CC BY-SA 4.0
+                        ?
+                      </strong>
+                      <br />
+                      Vous devez simplement mentionner dans le contenu de votre
+                      ressource : “Cette ressource est sous licence{' '}
+                      <Link
+                        className="fr-link"
+                        href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+                        target="_blank"
+                      >
+                        CC BY-SA 4.0
+                      </Link>
+                      ”
+                    </span>
+                  }
+                />
+                <h4>2. Licence CC BY-NC-SA 4.0</h4>
+                <p>
+                  <strong>
+                    Si vous ne souhaitez pas que vos ressources publiées sur la
+                    plateforme soient réutilisés à des fins commerciales
+                  </strong>
+                  , publiez vos ressources sous licence{' '}
+                  <Link
+                    className="fr-link"
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"
+                    target="_blank"
+                  >
+                    CC BY-NC-SA 4.0
+                  </Link>
+                </p>
+                <p>Les utilisateurs des ressources sont autorisés à :</p>
+                <ul>
+                  <li>
+                    <strong>Partager</strong> — copier, distribuer et
+                    communiquer le contenu par tous moyens et sous tous formats
+                  </li>
+                  <li>
+                    <strong>Adapter</strong> — remixer, transformer et créer à
+                    partir du contenu,
+                  </li>
+                </ul>
+                <p>À condition de :</p>
+                <ul>
+                  <li>
+                    <strong>Citer l'auteur</strong> — Vous devez créditer
+                    l’auteur, fournir un lien vers la licence et indiquer si des
+                    modifications ont été effectuées.
+                  </li>
+                  <li>
+                    <strong>Pas d'usage commercial</strong> — Vous ne pouvez pas
+                    utiliser ce contenu à des fins commerciales.
+                  </li>
+                  <li>
+                    <strong>Partager dans les mêmes conditions</strong> — Si
+                    vous modifiez ou transformez ce contenu, vous devez diffuser
+                    votre contribution sous la même licence.
+                  </li>
+                </ul>
+                <Notice
+                  className="fr-mb-2w"
+                  title={
+                    <span className="fr-text--regular fr-text-default--grey">
+                      <strong>
+                        Comment publier ma ressources sous licence CC BY-NC-SA
+                        4.0 ?
+                      </strong>
+                      <br />
+                      Vous devez simplement mentionner dans le contenu de votre
+                      ressource : “Cette ressource est sous licence{' '}
+                      <Link
+                        className="fr-link"
+                        href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"
+                        target="_blank"
+                      >
+                        CC BY-NC-SA 4.0
+                      </Link>
+                      ”
+                    </span>
+                  }
+                />
               </div>
             </div>
           </div>
