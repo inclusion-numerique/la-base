@@ -181,10 +181,9 @@ const ContentPolicyPage = () => (
                     une position précise de votre ressource.
                   </li>
                   <li>
-                    <strong>Texte&nbsp;:</strong> Ajouter des contenus
-                    textuelles que vous pouvez éditer grâce à un un éditeur
-                    WYSIWYG qui va vous donner différentes possibilités de mises
-                    en forme de vos textes.
+                    <strong>Texte&nbsp;:</strong> Ajouter des contenus textuels
+                    que vous pouvez éditer avec différentes possibilités de
+                    mises en forme de vos textes.
                   </li>
                   <li>
                     <strong>Fichier&nbsp;:</strong> Vous pouvez ajouter tout

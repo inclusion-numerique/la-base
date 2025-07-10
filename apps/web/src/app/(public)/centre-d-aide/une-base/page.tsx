@@ -250,12 +250,12 @@ const ContentPolicyPage = () => (
                 </h3>
                 <p>
                   Sur une base, deux rôles sont disponibles&nbsp;:{' '}
-                  <strong>Administrateur & membre</strong>
+                  <strong>Administrateur & contributeur</strong>
                 </p>
                 <p>
                   Le créateur d’une base est par défaut l’administrateur de
                   celle-ci. Les administrateurs peuvent nommer d’autres
-                  administrateurs et ajouter et supprimer des membres.
+                  administrateurs et ajouter et supprimer des contributeur.
                 </p>
                 <p>
                   Retrouvez dans le tableau ci-dessous les différentes
@@ -269,7 +269,7 @@ const ContentPolicyPage = () => (
                           <span className="fr-sr-only">Propriétés</span>
                         </th>
                         <th scope="col">Administrateur</th>
-                        <th scope="col">Membre</th>
+                        <th scope="col">Contributeur</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -541,7 +541,7 @@ const ContentPolicyPage = () => (
                   cliquez sur le bouton <strong>‘Inviter un membre’.</strong>
                 </p>
                 <p>
-                  Une modale va ensuite vous permettre d’inviter un ou plusieurs
+                  Un menu va ensuite vous permettre d’inviter un ou plusieurs
                   nouveaux membres en renseignant&nbsp;:
                 </p>
                 <ul>
@@ -562,8 +562,7 @@ const ContentPolicyPage = () => (
                 <p>
                   Pour supprimer un membre dans une de vos bases, allez dans
                   l’onglet <strong>‘Membres’</strong> de votre base, puis
-                  cliquez sur le bouton <strong>‘Supprimer le membre’</strong>{' '}
-                  symbolisé par l’icône corbeille
+                  cliquez sur le bouton <strong>’Retirer’</strong>
                 </p>
                 <Notice
                   className="fr-mb-6w"
