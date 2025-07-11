@@ -42,10 +42,15 @@ export const CollectionMoreActionsDropdown = ({
     control={
       <>
         <span
-          className={buttonTitle ? 'ri-more-fill fr-mr-1w' : 'ri-more-fill'}
+          className={
+            buttonTitle
+              ? 'ri-more-fill fr-mr-1w fr-hidden fr-unhidden-sm'
+              : 'ri-more-fill'
+          }
           aria-hidden
         />
-        {buttonTitle}
+        <span className="ri-more-fill fr-hidden-sm"></span>
+        <span className="fr-hidden fr-unhidden-sm">{buttonTitle}</span>
       </>
     }
   >

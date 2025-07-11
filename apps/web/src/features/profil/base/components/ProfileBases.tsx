@@ -1,4 +1,5 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
+import IconInSquare from '@app/web/components/IconInSquare'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import ProfileBaseCard from '@app/web/features/profil/base/components/ProfileBaseCard'
 import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
@@ -20,17 +21,17 @@ const ProfileBases = ({
   isOwner: boolean
 }) => (
   <div data-testid="base-profiles">
-    <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+    <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-5w">
       <div className="fr-col-sm-auto fr-col-12">
         <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
-          <LesBasesSvgLogo />
+          <IconInSquare iconId="ri-team-line" />
           <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-            Mes bases · {bases.length}
+            {isOwner ? 'Mes bases' : 'Bases'} · {bases.length}
           </h2>
         </div>
       </div>
       {isOwner && canWrite && (
-        <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+        <div className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0">
           <CreateBaseButton className="fr-btn--secondary fr-width-full fr-justify-content-center" />
         </div>
       )}

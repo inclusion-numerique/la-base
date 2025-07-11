@@ -1,5 +1,9 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }

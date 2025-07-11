@@ -15,3 +15,11 @@
     justify-content: center;
   }
 }
+
+.actionsButtonsContainer {
+  width: 100%;
+
+  @media (min-width: 48em) {
+    width: auto;
+  }
+}

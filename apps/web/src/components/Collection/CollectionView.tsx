@@ -31,7 +31,7 @@ const CollectionView = ({
 }) => (
   <>
     <CollectionViewHeader collection={collection} />
-    <div>
+    <div className="fr-mb-50v">
       <div className="fr-border-bottom fr-border--grey">
         <div className="fr-container fr-container--medium fr-my-5v">
           {collection.slug && (
@@ -74,24 +74,21 @@ const CollectionView = ({
                   />
                 )}
               </div>
+              {!collection.isFavorites && (
+                <div className="fr-hidden-sm">
+                  <CollectionActions
+                    resourcesCount={collection.resources.length}
+                    collection={collection}
+                    canWrite={isOwner || canWrite}
+                    user={user}
+                    context="view"
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
-      {!collection.isFavorites && (
-        <div className="fr-hidden-sm fr-border-bottom fr-border--grey">
-          <div className="fr-container fr-container--medium fr-my-5v">
-            <CollectionActions
-              resourcesCount={collection.resources.length}
-              className="fr-justify-content-space-between"
-              collection={collection}
-              canWrite={isOwner || canWrite}
-              user={user}
-              context="view"
-            />
-          </div>
-        </div>
-      )}
       <div className="fr-container fr-container--medium fr-pt-12v">
         {collection.resources.length > 0 ? (
           collection.resources.map(({ resource }, index) => (

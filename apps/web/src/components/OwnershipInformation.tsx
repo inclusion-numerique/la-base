@@ -7,6 +7,7 @@ import type { User } from '@prisma/client'
 import classNames from 'classnames'
 import React from 'react'
 import { formatName } from '../server/rpc/user/formatName'
+import styles from './OwnershipInformation.module.css'
 
 const attributionWordings = {
   resource: {
@@ -62,7 +63,7 @@ const OwnershipInformation = ({
     )}
   >
     {base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />}
-    <span className="fr-text--xs fr-mb-0">
+    <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
       {attributionWordings[attributionWording].what}
       {base != null && (
         <>

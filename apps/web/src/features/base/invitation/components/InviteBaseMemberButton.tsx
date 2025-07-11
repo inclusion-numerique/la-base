@@ -112,8 +112,9 @@ const InviteBaseMemberButton = ({
     form.setValue('newMembers', membersWithEmails)
   }
   const modalDescription = `Les contributeurs peuvent voir, créer et contribuer à l’ensemble des ressources liées à la base ainsi qu’inviter d’autres membres. ${
-    isBaseAdmin &&
-    'Vous pouvez également inviter des administrateurs qui pourront gérer les membres de la base (inviter et retirer des membres).'
+    isBaseAdmin
+      ? 'Vous pouvez également inviter des administrateurs qui pourront gérer les membres de la base (inviter et retirer des membres).'
+      : ''
   }`
 
   return (
@@ -130,7 +131,10 @@ const InviteBaseMemberButton = ({
         Inviter un membre
       </Button>
       <form onSubmit={form.handleSubmit(onInvit)}>
-        <InviteModal title="Inviter des membres">
+        <InviteModal
+          title="Inviter des membres"
+          className="fr-modal--overflow-visible"
+        >
           <>
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">
               <span>{modalDescription}</span>

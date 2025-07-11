@@ -30,7 +30,7 @@ const InviteBaseMemberRow = ({
   return (
     <div
       className={classNames(
-        'fr-enlarge-link fr-flex fr-flex-gap-3v fr-align-items-center fr-width-full fr-py-3w',
+        'fr-enlarge-link fr-flex fr-flex-gap-3v fr-align-items-center fr-width-full',
         member.invalid && styles.invalid,
       )}
     >

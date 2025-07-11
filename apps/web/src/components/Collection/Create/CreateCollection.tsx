@@ -24,6 +24,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
+import styles from './CreateCollection.module.css'
 import CreateCollectionSideMenu from './CreateCollectionSideMenu'
 
 const {
@@ -80,8 +81,9 @@ const CreateCollection = ({
         priority: 'success',
         message: (
           <>
-            Votre collection <strong>{collection.title}</strong> a bien été
-            créée
+            Votre collection&nbsp;
+            <strong className={styles.title}>{collection.title}</strong> a bien
+            été créée
           </>
         ),
       })
@@ -144,20 +146,25 @@ const CreateCollection = ({
                 title={
                   base ? (
                     <>
-                      <span className="fr-text--bold">Base privée</span>
-                      <br />
-                      <span className="fr-text--regular">
-                        La collection sera accessible uniquement aux membres et
-                        aux administrateurs de votre base.
+                      <span className="fr-text--bold">
+                        Base privée
+                        <br />
+                        <span className="fr-text--regular">
+                          La collection sera accessible uniquement aux membres
+                          et aux administrateurs de votre base.
+                        </span>
                       </span>
                     </>
                   ) : (
-                    <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-                      <span className="fr-text--bold">Profil privé</span>
-                      <span className="fr-text--regular">
-                        Votre collection sera visible uniquement par vous.
+                    <>
+                      <span className="fr-text--bold">
+                        Profil privé
+                        <br />
+                        <span className="fr-text--regular">
+                          Votre collection sera visible uniquement par vous.
+                        </span>
                       </span>
-                    </div>
+                    </>
                   )
                 }
               />
@@ -180,7 +187,7 @@ const CreateCollection = ({
             )}
           </Card>
           <ButtonsGroup
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-mb-50v"
             buttons={[
               {
                 nativeButtonProps: { 'data-testid': 'create-button' },

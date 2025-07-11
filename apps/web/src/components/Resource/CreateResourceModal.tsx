@@ -22,13 +22,11 @@ export const CreateResourceButton = ({
   titleClassName,
   baseId,
   'data-testid': dataTestid,
-  iconPosition = 'left',
 }: {
   className?: string
   titleClassName?: string
   baseId: string | null
   'data-testid'?: string
-  iconPosition?: 'left' | 'right'
 }) => {
   const open = CreateResourceDynamicModal.useOpen()
 
@@ -41,19 +39,23 @@ export const CreateResourceButton = ({
       data-testid={dataTestid}
       onClick={onClick}
     >
-      {iconPosition === 'left' && (
-        <span
-          className={classNames('ri-edit-box-line fr-mr-1w', titleClassName)}
-          aria-hidden
-        />
-      )}
+      <span
+        className={classNames(
+          'ri-edit-box-line fr-mr-1w',
+          'fr-hidden-lg',
+          titleClassName,
+        )}
+        aria-hidden
+      />
       Créer une ressource
-      {iconPosition === 'right' && (
-        <span
-          className={classNames('ri-edit-box-line fr-ml-1w', titleClassName)}
-          aria-hidden
-        />
-      )}
+      <span
+        className={classNames(
+          'ri-edit-box-line fr-ml-1w',
+          'fr-hidden fr-unhidden-lg',
+          titleClassName,
+        )}
+        aria-hidden
+      />
     </Button>
   )
 }

@@ -40,7 +40,7 @@ const Collections = ({
     <div data-testid="collections-list">
       {combinedCollections.length > 0 ? (
         <>
-          <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+          <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-6w">
             <div className="fr-col-sm-auto fr-col-12">
               <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
                 <IconInSquare iconId="ri-folder-2-line" />
@@ -50,15 +50,25 @@ const Collections = ({
               </div>
             </div>
             {withCreation && (
-              <div className="fr-flex fr-direction-sm-row fr-direction-column fr-align-items-center fr-flex-gap-2v fr-mb-5w fr-mb-md-0">
-                <CreateCollectionButton
-                  className={classNames(
-                    styles.actionsButtons,
-                    'fr-btn--secondary',
-                  )}
-                  baseId={baseId}
-                  title="Créer une collection"
-                />
+              <div
+                className={classNames(
+                  'fr-flex fr-direction-sm-row fr-direction-column fr-align-items-center fr-flex-gap-2v',
+                  styles.actionsButtonsContainer,
+                )}
+              >
+                <div
+                  data-testid="create-collection-button"
+                  className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0"
+                >
+                  <CreateCollectionButton
+                    className={classNames(
+                      styles.actionsButtons,
+                      'fr-btn--secondary',
+                    )}
+                    baseId={baseId}
+                    title="Créer une collection"
+                  />
+                </div>
                 <ManageCollectionButton
                   className={classNames(
                     styles.actionsButtons,

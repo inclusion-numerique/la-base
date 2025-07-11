@@ -25,7 +25,17 @@
   flex-shrink: 0;
 }
 
+:global(.fr-tag--sm).iconOnly::before {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 .iconOnly {
-  padding: 16px;
-  border-radius: 8px;
+  padding: 6px;
+  border-radius: 12px;
+
+  @media (min-width: 48rem) {
+    padding: 16px;
+    border-radius: 8px;
+  }
 }

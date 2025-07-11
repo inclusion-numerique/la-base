@@ -32,7 +32,7 @@ const CollectionMetaData = ({
     className={classNames(
       'fr-flex fr-text--sm fr-mb-0 fr-text-mention--grey',
       context === 'view' &&
-        'fr-justify-content-start fr-direction-column fr-justify-content-md-space-between fr-direction-md-row',
+        'fr-justify-content-start fr-flex-gap-2v fr-flex-gap-md-0 fr-direction-row fr-direction-sm-column fr-justify-content-md-space-between fr-direction-md-row',
       ['card', 'contextModal'].includes(context) && 'fr-flex-gap-2v',
       className,
     )}
@@ -57,11 +57,16 @@ const CollectionMetaData = ({
       {!!withPrivacyTag && (
         <div className="fr-flex fr-flex-gap-2v fr-ml-md-2v">
           <span>•</span>
-          <PrivacyTag
-            isPublic={collection.isPublic}
-            small
-            label={collection.isPublic ? 'Publique' : 'Privée'}
-          />
+          <div className="fr-hidden fr-unhidden-sm">
+            <PrivacyTag
+              isPublic={collection.isPublic}
+              small
+              label={collection.isPublic ? 'Publique' : 'Privée'}
+            />
+          </div>
+          <div className="fr-hidden-sm">
+            <PrivacyTag isPublic={collection.isPublic} small />
+          </div>
         </div>
       )}
     </div>

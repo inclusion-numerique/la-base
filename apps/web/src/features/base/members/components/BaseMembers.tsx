@@ -37,7 +37,7 @@ const BaseMembers = ({
 
   return (
     <div data-testid="base-members">
-      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-4w">
         <div className="fr-col-sm-auto fr-col-12">
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-team-line" />
@@ -47,7 +47,7 @@ const BaseMembers = ({
           </div>
         </div>
         {canAddMember && (
-          <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+          <div className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0">
             <InviteBaseMemberButton
               className="fr-width-full fr-justify-content-center"
               base={base}

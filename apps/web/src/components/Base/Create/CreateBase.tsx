@@ -137,7 +137,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
       <div className="fr-container fr-flex-md">
         <CreateBaseSideMenu />
         <div className="fr-container--slim">
-          <h1 className="fr-page-title">Créer une base</h1>
+          <h1 className="fr-page-title">Création d'une base</h1>
           <Card
             noBorder
             title="Informations de la base"
@@ -283,7 +283,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           </Card>
 
           <ButtonsGroup
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-mb-50v"
             buttons={[
               {
                 nativeButtonProps: {

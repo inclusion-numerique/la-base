@@ -52,7 +52,9 @@ const CollectionViewHeader = ({
                 </div>
               )}
               <div className="fr-flex fr-direction-column fr-justify-content-center">
-                <h1 className="fr-mb-4v fr-h3">{collection.title}</h1>
+                <h1 className={classNames('fr-mb-4v fr-h3', styles.title)}>
+                  {collection.title}
+                </h1>
                 {collection.description && (
                   <div
                     className="fr-text--lg fr-mb-0"

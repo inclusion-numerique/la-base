@@ -197,7 +197,8 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
         priority: 'success',
         message: (
           <>
-            Ajoutée à la collection <strong>{result.collection.title}</strong>
+            Ajoutée à la collection&nbsp;
+            <strong className={styles.title}>{result.collection.title}</strong>
           </>
         ),
       })

@@ -48,7 +48,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
               <div className="fr-text-mention--grey">Adresse mail</div>
               <div
-                className="fr-text-mention--grey fr-text--medium"
+                className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-email"
               >
                 <MaybeEmptyValue value={base.email} />
@@ -57,7 +57,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
               <div className="fr-text-mention--grey">Site internet</div>
               <div
-                className="fr-text-mention--grey fr-text--medium"
+                className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-website"
               >
                 <MaybeEmptyValue value={base.website} />
@@ -68,7 +68,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
               <div className="fr-text-mention--grey">LinkedIn</div>
               <div
-                className="fr-text-mention--grey fr-text--medium"
+                className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-linkedin"
               >
                 <MaybeEmptyValue value={base.linkedin} />
@@ -77,7 +77,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
               <div className="fr-text-mention--grey">Twitter</div>
               <div
-                className="fr-text-mention--grey fr-text--medium"
+                className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-twitter"
               >
                 <MaybeEmptyValue value={base.twitter} />
@@ -88,7 +88,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
             <div className={styles.contactColumn}>
               <div className="fr-text-mention--grey">Facebook</div>
               <div
-                className="fr-text-mention--grey fr-text--medium"
+                className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-facebook"
               >
                 <MaybeEmptyValue value={base.facebook} />

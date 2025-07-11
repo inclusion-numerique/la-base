@@ -50,7 +50,7 @@ const Resources = ({
 
   return (
     <div data-testid="resources-list">
-      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-5w">
         <div className="fr-col-sm-auto fr-col-12">
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
@@ -62,7 +62,7 @@ const Resources = ({
         {canWrite && (
           <div
             data-testid="create-resource-button"
-            className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w"
+            className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0"
           >
             <CreateResourceButton
               titleClassName="fr-text-label--blue-france"

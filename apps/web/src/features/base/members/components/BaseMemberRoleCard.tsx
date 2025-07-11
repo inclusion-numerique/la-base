@@ -73,7 +73,9 @@ const BaseMemberRoleCard = ({
         <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
           Invitation envoyée
         </Tag>
-        {canChangeMemberRole && <RemoveBaseMemberButton member={member} />}
+        {canChangeMemberRole && (
+          <RemoveBaseMemberButton member={member} base={base} />
+        )}
       </>
     )
   }
@@ -90,7 +92,7 @@ const BaseMemberRoleCard = ({
         <option value="admin">Administrateur</option>
         <option value="member">Contributeur</option>
       </select>
-      <RemoveBaseMemberButton member={member} />
+      <RemoveBaseMemberButton member={member} base={base} />
     </>
   )
 }

@@ -31,7 +31,7 @@ const BaseMetadata = ({
   return (
     <div
       className={classNames(
-        'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-center fr-flex-gap-2v',
+        'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-md-center fr-flex-gap-4v fr-flex-gap-md-2v',
         className,
       )}
     >
@@ -71,7 +71,7 @@ const BaseMetadata = ({
       )}
       {withBadge && (
         <>
-          <div>·</div>
+          <div className="fr-hidden fr-unhidden-sm">·</div>
           <BasePrivacyTag small={smallBadge} isPublic={base.isPublic} />
         </>
       )}

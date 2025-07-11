@@ -87,7 +87,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                 </li>
                 <li className="fr-px-md-0 fr-px-2w">
                   {user ? (
-                    <CreateResourceButton baseId={null} iconPosition="right" />
+                    <CreateResourceButton baseId={null} />
                   ) : (
                     <Link
                       href="/connexion?suivant=/?creer-une-ressource"

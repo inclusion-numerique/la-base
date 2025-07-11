@@ -3,7 +3,9 @@
 }
 
 .fr-mb-50v {
-  margin-bottom: 200px;
+  @media (min-width: 36em) {
+    margin-bottom: 200px;
+  }
 }
 
 .fr-mb-18w {

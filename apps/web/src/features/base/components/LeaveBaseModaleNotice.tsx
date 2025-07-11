@@ -134,18 +134,18 @@ const LeaveBaseModaleNotice = ({
         <span className="fr-text--regular fr-text-default--grey">
           Vous ne ferez plus partie des membres et ne pourrez donc plus
           contribuer aux ressources publiées via cette base.
+          <br />
+          {knowMoreLink}
         </span>
-        <br />
-        {knowMoreLink}
       </>
     ) : (
       <>
         <span className="fr-text--regular fr-text-default--grey">
           Vous ne pourrez plus éditer les ressources auxquelles vous avec
           contribué ou que vous avez publié sur cette base.
+          <br />
+          {knowMoreLink}
         </span>
-        <br />
-        {knowMoreLink}
       </>
     ),
     classNames: isContributor ? 'fr-notice--warning' : '',

@@ -25,9 +25,9 @@ const CustomTag = ({
 }) => (
   <span
     className={classNames(
+      'fr-tag--icon-left',
       {
         'fr-tag': label,
-        'fr-tag--icon-left': label,
         'fr-text--medium': !small,
         'fr-tag--sm': small,
         [styles.iconOnly]: !label,

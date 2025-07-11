@@ -31,7 +31,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
       isOwner={isOwner}
       savedCollections={savedCollections.map(({ collection }) => collection)}
       withCreation={canWrite}
-      collectionsLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
+      collectionsLabel={isOwner ? 'Mes collections' : 'Collections'}
       emptyBox={
         canWrite ? (
           <EmptyBox title="Vous n’avez pas crée de collections" titleAs="h3">

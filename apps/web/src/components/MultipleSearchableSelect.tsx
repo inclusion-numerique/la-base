@@ -325,17 +325,19 @@ const MultipleSearchableSelect = forwardRef<
                 <label className="fr-label fr-mb-2w" htmlFor={id}>
                   Liste des membres à inviter
                 </label>
-                {internalSelection.map((selected) => (
-                  <InviteBaseMemberRow
-                    key={selected.value}
-                    member={selected}
-                    canAddAdmin={canAddAdmin}
-                    onDelete={() => unselect(selected)}
-                    onSelectRole={(type) =>
-                      handleOnSelectRole(selected.value, type)
-                    }
-                  />
-                ))}
+                <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+                  {internalSelection.map((selected) => (
+                    <InviteBaseMemberRow
+                      key={selected.value}
+                      member={selected}
+                      canAddAdmin={canAddAdmin}
+                      onDelete={() => unselect(selected)}
+                      onSelectRole={(type) =>
+                        handleOnSelectRole(selected.value, type)
+                      }
+                    />
+                  ))}
+                </div>
               </div>
             </>
           )}
