@@ -255,7 +255,7 @@ const ContentPolicyPage = () => (
                 <p>
                   Le créateur d’une base est par défaut l’administrateur de
                   celle-ci. Les administrateurs peuvent nommer d’autres
-                  administrateurs et ajouter et supprimer des contributeur.
+                  administrateurs et ajouter et supprimer des contributeurs.
                 </p>
                 <p>
                   Retrouvez dans le tableau ci-dessous les différentes
