@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,29 +10,29 @@ export interface DataScalewayVpcGatewayNetworkConfig extends cdktf.TerraformMeta
   /**
   * The ID of the public gateway DHCP config
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#dhcp_id DataScalewayVpcGatewayNetwork#dhcp_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#dhcp_id DataScalewayVpcGatewayNetwork#dhcp_id}
   */
   readonly dhcpId?: string;
   /**
   * Enable masquerade on this network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#enable_masquerade DataScalewayVpcGatewayNetwork#enable_masquerade}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#enable_masquerade DataScalewayVpcGatewayNetwork#enable_masquerade}
   */
   readonly enableMasquerade?: boolean | cdktf.IResolvable;
   /**
   * The ID of the public gateway where connect to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#gateway_id DataScalewayVpcGatewayNetwork#gateway_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#gateway_id DataScalewayVpcGatewayNetwork#gateway_id}
   */
   readonly gatewayId?: string;
   /**
   * The ID of the gateway network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#gateway_network_id DataScalewayVpcGatewayNetwork#gateway_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#gateway_network_id DataScalewayVpcGatewayNetwork#gateway_network_id}
   */
   readonly gatewayNetworkId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#id DataScalewayVpcGatewayNetwork#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#id DataScalewayVpcGatewayNetwork#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -41,7 +41,7 @@ export interface DataScalewayVpcGatewayNetworkConfig extends cdktf.TerraformMeta
   /**
   * The ID of the private network where connect to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#private_network_id DataScalewayVpcGatewayNetwork#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#private_network_id DataScalewayVpcGatewayNetwork#private_network_id}
   */
   readonly privateNetworkId?: string;
 }
@@ -125,9 +125,89 @@ export class DataScalewayVpcGatewayNetworkIpamConfigList extends cdktf.ComplexLi
     return new DataScalewayVpcGatewayNetworkIpamConfigOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataScalewayVpcGatewayNetworkPrivateIp {
+}
+
+export function dataScalewayVpcGatewayNetworkPrivateIpToTerraform(struct?: DataScalewayVpcGatewayNetworkPrivateIp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayVpcGatewayNetworkPrivateIpToHclTerraform(struct?: DataScalewayVpcGatewayNetworkPrivateIp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayVpcGatewayNetworkPrivateIpOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayVpcGatewayNetworkPrivateIp | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayVpcGatewayNetworkPrivateIp | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class DataScalewayVpcGatewayNetworkPrivateIpList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayVpcGatewayNetworkPrivateIpOutputReference {
+    return new DataScalewayVpcGatewayNetworkPrivateIpOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network scaleway_vpc_gateway_network}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network scaleway_vpc_gateway_network}
 */
 export class DataScalewayVpcGatewayNetwork extends cdktf.TerraformDataSource {
 
@@ -143,7 +223,7 @@ export class DataScalewayVpcGatewayNetwork extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayVpcGatewayNetwork resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcGatewayNetwork to import
-  * @param importFromId The id of the existing DataScalewayVpcGatewayNetwork that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcGatewayNetwork that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcGatewayNetwork to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -155,7 +235,7 @@ export class DataScalewayVpcGatewayNetwork extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_gateway_network scaleway_vpc_gateway_network} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_gateway_network scaleway_vpc_gateway_network} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -166,8 +246,8 @@ export class DataScalewayVpcGatewayNetwork extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_vpc_gateway_network',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -293,6 +373,12 @@ export class DataScalewayVpcGatewayNetwork extends cdktf.TerraformDataSource {
   // mac_address - computed: true, optional: false, required: false
   public get macAddress() {
     return this.getStringAttribute('mac_address');
+  }
+
+  // private_ip - computed: true, optional: false, required: false
+  private _privateIp = new DataScalewayVpcGatewayNetworkPrivateIpList(this, "private_ip", false);
+  public get privateIp() {
+    return this._privateIp;
   }
 
   // private_network_id - computed: false, optional: true, required: false

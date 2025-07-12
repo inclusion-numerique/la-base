@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface EdgeServicesRouteStageConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#id EdgeServicesRouteStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#id EdgeServicesRouteStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface EdgeServicesRouteStageConfig extends cdktf.TerraformMetaArgumen
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#pipeline_id EdgeServicesRouteStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#pipeline_id EdgeServicesRouteStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#project_id EdgeServicesRouteStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#project_id EdgeServicesRouteStage#project_id}
   */
   readonly projectId?: string;
   /**
   * The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#waf_stage_id EdgeServicesRouteStage#waf_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#waf_stage_id EdgeServicesRouteStage#waf_stage_id}
   */
   readonly wafStageId?: string;
   /**
   * rule block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#rule EdgeServicesRouteStage#rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#rule EdgeServicesRouteStage#rule}
   */
   readonly rule?: EdgeServicesRouteStageRule[] | cdktf.IResolvable;
 }
@@ -43,13 +43,13 @@ export interface EdgeServicesRouteStageRuleRuleHttpMatchPathFilter {
   /**
   * The type of filter to match for the HTTP URL path. For now, all path filters must be written in regex and use the `regex` type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#path_filter_type EdgeServicesRouteStage#path_filter_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#path_filter_type EdgeServicesRouteStage#path_filter_type}
   */
   readonly pathFilterType: string;
   /**
   * The value to be matched for the HTTP URL path
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#value EdgeServicesRouteStage#value}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#value EdgeServicesRouteStage#value}
   */
   readonly value: string;
 }
@@ -158,13 +158,13 @@ export interface EdgeServicesRouteStageRuleRuleHttpMatch {
   /**
   * HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are `get`, `post`, `put`, `patch`, `delete`, `head`, `options`. All methods will match if none is provided
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#method_filters EdgeServicesRouteStage#method_filters}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#method_filters EdgeServicesRouteStage#method_filters}
   */
   readonly methodFilters?: string[];
   /**
   * path_filter block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#path_filter EdgeServicesRouteStage#path_filter}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#path_filter EdgeServicesRouteStage#path_filter}
   */
   readonly pathFilter?: EdgeServicesRouteStageRuleRuleHttpMatchPathFilter;
 }
@@ -279,13 +279,13 @@ export interface EdgeServicesRouteStageRule {
   /**
   * ID of the backend stage that requests matching the rule should be forwarded to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#backend_stage_id EdgeServicesRouteStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#backend_stage_id EdgeServicesRouteStage#backend_stage_id}
   */
   readonly backendStageId: string;
   /**
   * rule_http_match block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#rule_http_match EdgeServicesRouteStage#rule_http_match}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#rule_http_match EdgeServicesRouteStage#rule_http_match}
   */
   readonly ruleHttpMatch?: EdgeServicesRouteStageRuleRuleHttpMatch;
 }
@@ -427,7 +427,7 @@ export class EdgeServicesRouteStageRuleList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage}
 */
 export class EdgeServicesRouteStage extends cdktf.TerraformResource {
 
@@ -443,7 +443,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesRouteStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesRouteStage to import
-  * @param importFromId The id of the existing EdgeServicesRouteStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesRouteStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesRouteStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -455,7 +455,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -466,8 +466,8 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_route_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

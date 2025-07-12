@@ -1,7 +1,8 @@
+import { getStorageFileInfo } from '@app/web/features/uploads/storage/getStorageFileInfo'
+import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
 import { prismaClient } from '@app/web/prismaClient'
-import { getImageData } from '@app/web/server/image/getImageData'
-import { getOriginalImageData } from '@app/web/server/image/getOriginalImageData'
-import * as Sentry from '@sentry/nextjs'
+import { getProcessedImageKey } from '@app/web/server/image/getProcessedImageKey'
+import { processAndStoreImage } from '@app/web/server/image/processAndStoreImage'
 import type { NextRequest } from 'next/server'
 
 const notFoundResponse = () =>
@@ -22,11 +23,6 @@ export const GET = async (request: NextRequest) => {
   if (format !== 'webp' && format !== 'original') {
     return notFoundResponse()
   }
-
-  const quality = Number(request.nextUrl.searchParams.get('quality')) || 100
-  const targetWidth =
-    Number(request.nextUrl.searchParams.get('width')) || undefined
-
   const image = await prismaClient.image.findUnique({
     where: { id },
     select: {
@@ -38,7 +34,6 @@ export const GET = async (request: NextRequest) => {
       cropHeight: true,
       upload: {
         select: {
-          legacyKey: true,
           mimeType: true,
         },
       },
@@ -49,21 +44,41 @@ export const GET = async (request: NextRequest) => {
     return notFoundResponse()
   }
 
-  try {
-    const imageData =
-      format === 'original'
-        ? await getOriginalImageData({ image })
-        : await getImageData({ image, quality, width: targetWidth })
-
-    return new Response(imageData, {
-      status: 200,
-      headers: {
-        'Content-Type': 'image/webp',
-        'Cache-Control': 'public, max-age=31536000, immutable',
-      },
-    })
-  } catch (error) {
-    Sentry.captureException(error)
-    return notFoundResponse()
+  if (format === 'original') {
+    // We redirect to the storage url of the original upload file
+    return Response.redirect(getStorageUrl({ key: image.uploadKey }), 301)
   }
+
+  // We want a processed image
+  const quality = Number(request.nextUrl.searchParams.get('quality')) || 100
+  const targetWidth =
+    Number(request.nextUrl.searchParams.get('width')) || undefined
+
+  // First we check that it has already been processed
+  const processedImageKey = getProcessedImageKey({
+    image,
+    quality,
+    width: targetWidth,
+  })
+
+  const imageInfo = await getStorageFileInfo({
+    key: processedImageKey,
+  })
+
+  const processedImageUrl = getStorageUrl({ key: processedImageKey })
+
+  if (imageInfo) {
+    // We redirect to stored processed image
+    return Response.redirect(processedImageUrl, 301)
+  }
+
+  // If image has not been processed, we process it, store it, and redirect to it
+  await processAndStoreImage({
+    image,
+    quality,
+    width: targetWidth,
+    processedImageKey,
+  })
+
+  return Response.redirect(processedImageUrl, 301)
 }

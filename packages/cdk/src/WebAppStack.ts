@@ -44,6 +44,7 @@ export const webAppStackVariables = [
   'REPORT_MODERATOR_EMAIL_MAIN',
   'REPORT_MODERATOR_NAME_PREVIEW',
   'REPORT_MODERATOR_NAME_MAIN',
+  'UPLOADS_BUCKET',
 ] as const
 export const webAppStackSensitiveVariables = [
   'BREVO_API_KEY',
@@ -136,7 +137,8 @@ export class WebAppStack extends TerraformStack {
       dependsOn: [database, rdbDatabaseUser],
     })
 
-    const uploadsBucket = new ObjectBucket(this, 'uploads', {
+    // TODO: Uploads bucket to delete, we keep it temporary to avoid deleting buckets and files we could need
+    new ObjectBucket(this, 'uploads', {
       name: namespaced(`${projectSlug}-uploads`),
       corsRule: [
         {
@@ -149,9 +151,6 @@ export class WebAppStack extends TerraformStack {
       ],
       forceDestroy: !isMain,
     })
-
-    output('uploadsBucketName', uploadsBucket.name)
-    output('uploadsBucketEndpoint', uploadsBucket.endpoint)
 
     const containerNamespace = new DataScalewayContainerNamespace(
       this,
@@ -191,7 +190,7 @@ export class WebAppStack extends TerraformStack {
         EMAIL_FROM_ADDRESS: emailFromAddress,
         EMAIL_FROM_NAME: emailFromName,
         STACK_WEB_IMAGE: environmentVariables.WEB_CONTAINER_IMAGE.value,
-        UPLOADS_BUCKET: uploadsBucket.name,
+        UPLOADS_BUCKET: environmentVariables.UPLOADS_BUCKET.value,
         BASE_URL: hostname,
         NEXTAUTH_URL: hostname,
         BRANCH: branch,

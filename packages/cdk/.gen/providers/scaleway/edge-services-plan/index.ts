@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface EdgeServicesPlanConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan#id EdgeServicesPlan#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan#id EdgeServicesPlan#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface EdgeServicesPlanConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the plan
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan#name EdgeServicesPlan#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan#name EdgeServicesPlan#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan#project_id EdgeServicesPlan#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan#project_id EdgeServicesPlan#project_id}
   */
   readonly projectId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan scaleway_edge_services_plan}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan scaleway_edge_services_plan}
 */
 export class EdgeServicesPlan extends cdktf.TerraformResource {
 
@@ -45,7 +45,7 @@ export class EdgeServicesPlan extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesPlan resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesPlan to import
-  * @param importFromId The id of the existing EdgeServicesPlan that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesPlan that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesPlan to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -57,7 +57,7 @@ export class EdgeServicesPlan extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_plan scaleway_edge_services_plan} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_plan scaleway_edge_services_plan} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -68,8 +68,8 @@ export class EdgeServicesPlan extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_plan',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

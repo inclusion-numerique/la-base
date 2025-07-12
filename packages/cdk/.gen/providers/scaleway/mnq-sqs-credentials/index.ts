@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MnqSqsCredentialsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#id MnqSqsCredentials#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#id MnqSqsCredentials#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface MnqSqsCredentialsConfig extends cdktf.TerraformMetaArguments {
   /**
   * The credentials name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#name MnqSqsCredentials#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#name MnqSqsCredentials#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#project_id MnqSqsCredentials#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#project_id MnqSqsCredentials#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#region MnqSqsCredentials#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#region MnqSqsCredentials#region}
   */
   readonly region?: string;
   /**
   * permissions block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#permissions MnqSqsCredentials#permissions}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#permissions MnqSqsCredentials#permissions}
   */
   readonly permissions?: MnqSqsCredentialsPermissions;
 }
@@ -43,19 +43,19 @@ export interface MnqSqsCredentialsPermissions {
   /**
   * Allow manage the associated resource
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#can_manage MnqSqsCredentials#can_manage}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#can_manage MnqSqsCredentials#can_manage}
   */
   readonly canManage?: boolean | cdktf.IResolvable;
   /**
   * Allow publish messages to the service
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#can_publish MnqSqsCredentials#can_publish}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#can_publish MnqSqsCredentials#can_publish}
   */
   readonly canPublish?: boolean | cdktf.IResolvable;
   /**
   * Allow receive messages from the service
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#can_receive MnqSqsCredentials#can_receive}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#can_receive MnqSqsCredentials#can_receive}
   */
   readonly canReceive?: boolean | cdktf.IResolvable;
 }
@@ -197,7 +197,7 @@ export class MnqSqsCredentialsPermissionsOutputReference extends cdktf.ComplexOb
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials scaleway_mnq_sqs_credentials}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials scaleway_mnq_sqs_credentials}
 */
 export class MnqSqsCredentials extends cdktf.TerraformResource {
 
@@ -213,7 +213,7 @@ export class MnqSqsCredentials extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MnqSqsCredentials resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MnqSqsCredentials to import
-  * @param importFromId The id of the existing MnqSqsCredentials that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MnqSqsCredentials that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MnqSqsCredentials to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -225,7 +225,7 @@ export class MnqSqsCredentials extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mnq_sqs_credentials scaleway_mnq_sqs_credentials} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mnq_sqs_credentials scaleway_mnq_sqs_credentials} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -236,8 +236,8 @@ export class MnqSqsCredentials extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_sqs_credentials',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

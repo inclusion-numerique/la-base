@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface TemDomainValidationConfig extends cdktf.TerraformMetaArguments 
   /**
   * The id of domain name used when sending emails.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#domain_id TemDomainValidation#domain_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#domain_id TemDomainValidation#domain_id}
   */
   readonly domainId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#id TemDomainValidation#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#id TemDomainValidation#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,33 +23,33 @@ export interface TemDomainValidationConfig extends cdktf.TerraformMetaArguments 
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#region TemDomainValidation#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#region TemDomainValidation#region}
   */
   readonly region?: string;
   /**
   * Maximum wait time in second before returning an error.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#timeout TemDomainValidation#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#timeout TemDomainValidation#timeout}
   */
   readonly timeout?: number;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#timeouts TemDomainValidation#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#timeouts TemDomainValidation#timeouts}
   */
   readonly timeouts?: TemDomainValidationTimeouts;
 }
 export interface TemDomainValidationTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#create TemDomainValidation#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#create TemDomainValidation#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#default TemDomainValidation#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#default TemDomainValidation#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#delete TemDomainValidation#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#delete TemDomainValidation#delete}
   */
   readonly delete?: string;
 }
@@ -201,7 +201,7 @@ export class TemDomainValidationTimeoutsOutputReference extends cdktf.ComplexObj
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation scaleway_tem_domain_validation}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation scaleway_tem_domain_validation}
 */
 export class TemDomainValidation extends cdktf.TerraformResource {
 
@@ -217,7 +217,7 @@ export class TemDomainValidation extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a TemDomainValidation resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the TemDomainValidation to import
-  * @param importFromId The id of the existing TemDomainValidation that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing TemDomainValidation that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the TemDomainValidation to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -229,7 +229,7 @@ export class TemDomainValidation extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/tem_domain_validation scaleway_tem_domain_validation} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/tem_domain_validation scaleway_tem_domain_validation} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -240,8 +240,8 @@ export class TemDomainValidation extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_tem_domain_validation',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

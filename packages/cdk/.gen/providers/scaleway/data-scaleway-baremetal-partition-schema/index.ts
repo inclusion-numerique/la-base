@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -6,21 +6,21 @@ import * as cdktf from 'cdktf';
 
 // Configuration
 
-export interface DataScalewayBaremetalEasyPartitioningConfig extends cdktf.TerraformMetaArguments {
+export interface DataScalewayBaremetalPartitionSchemaConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Mount point must be an absolute path with alphanumeric characters and underscores
+  * Mount point must be an absolute path
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#ext_4_mountpoint DataScalewayBaremetalEasyPartitioning#ext_4_mountpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#ext_4_mountpoint DataScalewayBaremetalPartitionSchema#ext_4_mountpoint}
   */
   readonly ext4Mountpoint?: string;
   /**
   * set extra ext_4 partition
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#extra_partition DataScalewayBaremetalEasyPartitioning#extra_partition}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#extra_partition DataScalewayBaremetalPartitionSchema#extra_partition}
   */
   readonly extraPartition?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#id DataScalewayBaremetalEasyPartitioning#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#id DataScalewayBaremetalPartitionSchema#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,45 +29,45 @@ export interface DataScalewayBaremetalEasyPartitioningConfig extends cdktf.Terra
   /**
   * ID of the server offer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#offer_id DataScalewayBaremetalEasyPartitioning#offer_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#offer_id DataScalewayBaremetalPartitionSchema#offer_id}
   */
   readonly offerId: string;
   /**
   * The base image of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#os_id DataScalewayBaremetalEasyPartitioning#os_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#os_id DataScalewayBaremetalPartitionSchema#os_id}
   */
   readonly osId: string;
   /**
   * set swap partition
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#swap DataScalewayBaremetalEasyPartitioning#swap}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#swap DataScalewayBaremetalPartitionSchema#swap}
   */
   readonly swap?: boolean | cdktf.IResolvable;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning scaleway_baremetal_easy_partitioning}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema}
 */
-export class DataScalewayBaremetalEasyPartitioning extends cdktf.TerraformDataSource {
+export class DataScalewayBaremetalPartitionSchema extends cdktf.TerraformDataSource {
 
   // =================
   // STATIC PROPERTIES
   // =================
-  public static readonly tfResourceType = "scaleway_baremetal_easy_partitioning";
+  public static readonly tfResourceType = "scaleway_baremetal_partition_schema";
 
   // ==============
   // STATIC Methods
   // ==============
   /**
-  * Generates CDKTF code for importing a DataScalewayBaremetalEasyPartitioning resource upon running "cdktf plan <stack-name>"
+  * Generates CDKTF code for importing a DataScalewayBaremetalPartitionSchema resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
-  * @param importToId The construct id used in the generated config for the DataScalewayBaremetalEasyPartitioning to import
-  * @param importFromId The id of the existing DataScalewayBaremetalEasyPartitioning that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning#import import section} in the documentation of this resource for the id to use
-  * @param provider? Optional instance of the provider where the DataScalewayBaremetalEasyPartitioning to import is found
+  * @param importToId The construct id used in the generated config for the DataScalewayBaremetalPartitionSchema to import
+  * @param importFromId The id of the existing DataScalewayBaremetalPartitionSchema that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#import import section} in the documentation of this resource for the id to use
+  * @param provider? Optional instance of the provider where the DataScalewayBaremetalPartitionSchema to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
-        return new cdktf.ImportableResource(scope, importToId, { terraformResourceType: "scaleway_baremetal_easy_partitioning", importId: importFromId, provider });
+        return new cdktf.ImportableResource(scope, importToId, { terraformResourceType: "scaleway_baremetal_partition_schema", importId: importFromId, provider });
       }
 
   // ===========
@@ -75,19 +75,19 @@ export class DataScalewayBaremetalEasyPartitioning extends cdktf.TerraformDataSo
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/baremetal_easy_partitioning scaleway_baremetal_easy_partitioning} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
-  * @param options DataScalewayBaremetalEasyPartitioningConfig
+  * @param options DataScalewayBaremetalPartitionSchemaConfig
   */
-  public constructor(scope: Construct, id: string, config: DataScalewayBaremetalEasyPartitioningConfig) {
+  public constructor(scope: Construct, id: string, config: DataScalewayBaremetalPartitionSchemaConfig) {
     super(scope, id, {
-      terraformResourceType: 'scaleway_baremetal_easy_partitioning',
+      terraformResourceType: 'scaleway_baremetal_partition_schema',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface RedisClusterConfig extends cdktf.TerraformMetaArguments {
   /**
   * Number of nodes for the cluster.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#cluster_size RedisCluster#cluster_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#cluster_size RedisCluster#cluster_size}
   */
   readonly clusterSize?: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#id RedisCluster#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#id RedisCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,85 +23,91 @@ export interface RedisClusterConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the redis cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#name RedisCluster#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#name RedisCluster#name}
   */
   readonly name?: string;
   /**
   * Type of node to use for the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#node_type RedisCluster#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#node_type RedisCluster#node_type}
   */
   readonly nodeType: string;
   /**
   * Password of the user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#password RedisCluster#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#password RedisCluster#password}
   */
   readonly password: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#project_id RedisCluster#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#project_id RedisCluster#project_id}
   */
   readonly projectId?: string;
   /**
   * Map of settings to define for the cluster.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#settings RedisCluster#settings}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#settings RedisCluster#settings}
   */
   readonly settings?: { [key: string]: string };
   /**
   * List of tags ["tag1", "tag2", ...] attached to a redis cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#tags RedisCluster#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#tags RedisCluster#tags}
   */
   readonly tags?: string[];
   /**
   * Whether or not TLS is enabled.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#tls_enabled RedisCluster#tls_enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#tls_enabled RedisCluster#tls_enabled}
   */
   readonly tlsEnabled?: boolean | cdktf.IResolvable;
   /**
   * Name of the user created when the cluster is created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#user_name RedisCluster#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#user_name RedisCluster#user_name}
   */
   readonly userName: string;
   /**
   * Redis version of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#version RedisCluster#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#version RedisCluster#version}
   */
   readonly version: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#zone RedisCluster#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#zone RedisCluster#zone}
   */
   readonly zone?: string;
   /**
   * acl block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#acl RedisCluster#acl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#acl RedisCluster#acl}
   */
   readonly acl?: RedisClusterAcl[] | cdktf.IResolvable;
   /**
+  * private_ips block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#private_ips RedisCluster#private_ips}
+  */
+  readonly privateIps?: RedisClusterPrivateIps[] | cdktf.IResolvable;
+  /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#private_network RedisCluster#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#private_network RedisCluster#private_network}
   */
   readonly privateNetwork?: RedisClusterPrivateNetwork[] | cdktf.IResolvable;
   /**
   * public_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#public_network RedisCluster#public_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#public_network RedisCluster#public_network}
   */
   readonly publicNetwork?: RedisClusterPublicNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#timeouts RedisCluster#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#timeouts RedisCluster#timeouts}
   */
   readonly timeouts?: RedisClusterTimeouts;
 }
@@ -109,13 +115,13 @@ export interface RedisClusterAcl {
   /**
   * Description of the rule.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#description RedisCluster#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#description RedisCluster#description}
   */
   readonly description?: string;
   /**
   * IPv4 network address of the rule (IP network in a CIDR format).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#ip RedisCluster#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#ip RedisCluster#ip}
   */
   readonly ip: string;
 }
@@ -260,11 +266,102 @@ export class RedisClusterAclList extends cdktf.ComplexList {
     return new RedisClusterAclOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface RedisClusterPrivateIps {
+}
+
+export function redisClusterPrivateIpsToTerraform(struct?: RedisClusterPrivateIps | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function redisClusterPrivateIpsToHclTerraform(struct?: RedisClusterPrivateIps | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class RedisClusterPrivateIpsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): RedisClusterPrivateIps | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: RedisClusterPrivateIps | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class RedisClusterPrivateIpsList extends cdktf.ComplexList {
+  public internalValue? : RedisClusterPrivateIps[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): RedisClusterPrivateIpsOutputReference {
+    return new RedisClusterPrivateIpsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface RedisClusterPrivateNetwork {
   /**
   * UUID of the private network to be connected to the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#id RedisCluster#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#id RedisCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -273,7 +370,7 @@ export interface RedisClusterPrivateNetwork {
   /**
   * List of IPv4 addresses of the private network with a CIDR notation
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#service_ips RedisCluster#service_ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#service_ips RedisCluster#service_ips}
   */
   readonly serviceIps?: string[];
 }
@@ -489,19 +586,19 @@ export class RedisClusterPublicNetworkOutputReference extends cdktf.ComplexObjec
 }
 export interface RedisClusterTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#create RedisCluster#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#create RedisCluster#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#default RedisCluster#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#default RedisCluster#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#delete RedisCluster#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#delete RedisCluster#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#update RedisCluster#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#update RedisCluster#update}
   */
   readonly update?: string;
 }
@@ -682,7 +779,7 @@ export class RedisClusterTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster scaleway_redis_cluster}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster scaleway_redis_cluster}
 */
 export class RedisCluster extends cdktf.TerraformResource {
 
@@ -698,7 +795,7 @@ export class RedisCluster extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a RedisCluster resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the RedisCluster to import
-  * @param importFromId The id of the existing RedisCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing RedisCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the RedisCluster to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -710,7 +807,7 @@ export class RedisCluster extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/redis_cluster scaleway_redis_cluster} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/redis_cluster scaleway_redis_cluster} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -721,8 +818,8 @@ export class RedisCluster extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_redis_cluster',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -745,6 +842,7 @@ export class RedisCluster extends cdktf.TerraformResource {
     this._version = config.version;
     this._zone = config.zone;
     this._acl.internalValue = config.acl;
+    this._privateIps.internalValue = config.privateIps;
     this._privateNetwork.internalValue = config.privateNetwork;
     this._publicNetwork.internalValue = config.publicNetwork;
     this._timeouts.internalValue = config.timeouts;
@@ -965,6 +1063,22 @@ export class RedisCluster extends cdktf.TerraformResource {
     return this._acl.internalValue;
   }
 
+  // private_ips - computed: false, optional: true, required: false
+  private _privateIps = new RedisClusterPrivateIpsList(this, "private_ips", false);
+  public get privateIps() {
+    return this._privateIps;
+  }
+  public putPrivateIps(value: RedisClusterPrivateIps[] | cdktf.IResolvable) {
+    this._privateIps.internalValue = value;
+  }
+  public resetPrivateIps() {
+    this._privateIps.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get privateIpsInput() {
+    return this._privateIps.internalValue;
+  }
+
   // private_network - computed: false, optional: true, required: false
   private _privateNetwork = new RedisClusterPrivateNetworkList(this, "private_network", true);
   public get privateNetwork() {
@@ -1032,6 +1146,7 @@ export class RedisCluster extends cdktf.TerraformResource {
       version: cdktf.stringToTerraform(this._version),
       zone: cdktf.stringToTerraform(this._zone),
       acl: cdktf.listMapper(redisClusterAclToTerraform, true)(this._acl.internalValue),
+      private_ips: cdktf.listMapper(redisClusterPrivateIpsToTerraform, true)(this._privateIps.internalValue),
       private_network: cdktf.listMapper(redisClusterPrivateNetworkToTerraform, true)(this._privateNetwork.internalValue),
       public_network: redisClusterPublicNetworkToTerraform(this._publicNetwork.internalValue),
       timeouts: redisClusterTimeoutsToTerraform(this._timeouts.internalValue),
@@ -1117,6 +1232,12 @@ export class RedisCluster extends cdktf.TerraformResource {
         isBlock: true,
         type: "set",
         storageClassType: "RedisClusterAclList",
+      },
+      private_ips: {
+        value: cdktf.listMapperHcl(redisClusterPrivateIpsToHclTerraform, true)(this._privateIps.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "RedisClusterPrivateIpsList",
       },
       private_network: {
         value: cdktf.listMapperHcl(redisClusterPrivateNetworkToHclTerraform, true)(this._privateNetwork.internalValue),

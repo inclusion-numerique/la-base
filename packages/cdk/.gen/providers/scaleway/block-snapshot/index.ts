@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface BlockSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#id BlockSnapshot#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#id BlockSnapshot#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,55 +17,176 @@ export interface BlockSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * The snapshot name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#name BlockSnapshot#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#name BlockSnapshot#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#project_id BlockSnapshot#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#project_id BlockSnapshot#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with the snapshot
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#tags BlockSnapshot#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#tags BlockSnapshot#tags}
   */
   readonly tags?: string[];
   /**
   * ID of the volume from which creates a snapshot
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#volume_id BlockSnapshot#volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#volume_id BlockSnapshot#volume_id}
   */
-  readonly volumeId: string;
+  readonly volumeId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#zone BlockSnapshot#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#zone BlockSnapshot#zone}
   */
   readonly zone?: string;
   /**
+  * import block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#import BlockSnapshot#import}
+  */
+  readonly import?: BlockSnapshotImport;
+  /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#timeouts BlockSnapshot#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#timeouts BlockSnapshot#timeouts}
   */
   readonly timeouts?: BlockSnapshotTimeouts;
 }
+export interface BlockSnapshotImport {
+  /**
+  * Bucket containing qcow
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#bucket BlockSnapshot#bucket}
+  */
+  readonly bucket: string;
+  /**
+  * Key of the qcow file in the specified bucket
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#key BlockSnapshot#key}
+  */
+  readonly key: string;
+}
+
+export function blockSnapshotImportToTerraform(struct?: BlockSnapshotImportOutputReference | BlockSnapshotImport): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    bucket: cdktf.stringToTerraform(struct!.bucket),
+    key: cdktf.stringToTerraform(struct!.key),
+  }
+}
+
+
+export function blockSnapshotImportToHclTerraform(struct?: BlockSnapshotImportOutputReference | BlockSnapshotImport): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    bucket: {
+      value: cdktf.stringToHclTerraform(struct!.bucket),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    key: {
+      value: cdktf.stringToHclTerraform(struct!.key),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class BlockSnapshotImportOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): BlockSnapshotImport | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._bucket !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.bucket = this._bucket;
+    }
+    if (this._key !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.key = this._key;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: BlockSnapshotImport | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._bucket = undefined;
+      this._key = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._bucket = value.bucket;
+      this._key = value.key;
+    }
+  }
+
+  // bucket - computed: false, optional: false, required: true
+  private _bucket?: string; 
+  public get bucket() {
+    return this.getStringAttribute('bucket');
+  }
+  public set bucket(value: string) {
+    this._bucket = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get bucketInput() {
+    return this._bucket;
+  }
+
+  // key - computed: false, optional: false, required: true
+  private _key?: string; 
+  public get key() {
+    return this.getStringAttribute('key');
+  }
+  public set key(value: string) {
+    this._key = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get keyInput() {
+    return this._key;
+  }
+}
 export interface BlockSnapshotTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#create BlockSnapshot#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#create BlockSnapshot#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#default BlockSnapshot#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#default BlockSnapshot#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#delete BlockSnapshot#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#delete BlockSnapshot#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#read BlockSnapshot#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#read BlockSnapshot#read}
   */
   readonly read?: string;
 }
@@ -246,7 +367,7 @@ export class BlockSnapshotTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot scaleway_block_snapshot}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot scaleway_block_snapshot}
 */
 export class BlockSnapshot extends cdktf.TerraformResource {
 
@@ -262,7 +383,7 @@ export class BlockSnapshot extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a BlockSnapshot resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the BlockSnapshot to import
-  * @param importFromId The id of the existing BlockSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing BlockSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the BlockSnapshot to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -274,19 +395,19 @@ export class BlockSnapshot extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/block_snapshot scaleway_block_snapshot} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/block_snapshot scaleway_block_snapshot} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
-  * @param options BlockSnapshotConfig
+  * @param options BlockSnapshotConfig = {}
   */
-  public constructor(scope: Construct, id: string, config: BlockSnapshotConfig) {
+  public constructor(scope: Construct, id: string, config: BlockSnapshotConfig = {}) {
     super(scope, id, {
       terraformResourceType: 'scaleway_block_snapshot',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -302,6 +423,7 @@ export class BlockSnapshot extends cdktf.TerraformResource {
     this._tags = config.tags;
     this._volumeId = config.volumeId;
     this._zone = config.zone;
+    this._import.internalValue = config.import;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -373,13 +495,16 @@ export class BlockSnapshot extends cdktf.TerraformResource {
     return this._tags;
   }
 
-  // volume_id - computed: false, optional: false, required: true
+  // volume_id - computed: false, optional: true, required: false
   private _volumeId?: string; 
   public get volumeId() {
     return this.getStringAttribute('volume_id');
   }
   public set volumeId(value: string) {
     this._volumeId = value;
+  }
+  public resetVolumeId() {
+    this._volumeId = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get volumeIdInput() {
@@ -400,6 +525,22 @@ export class BlockSnapshot extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get zoneInput() {
     return this._zone;
+  }
+
+  // import - computed: false, optional: true, required: false
+  private _import = new BlockSnapshotImportOutputReference(this, "import");
+  public get import() {
+    return this._import;
+  }
+  public putImport(value: BlockSnapshotImport) {
+    this._import.internalValue = value;
+  }
+  public resetImport() {
+    this._import.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get importInput() {
+    return this._import.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -430,6 +571,7 @@ export class BlockSnapshot extends cdktf.TerraformResource {
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       volume_id: cdktf.stringToTerraform(this._volumeId),
       zone: cdktf.stringToTerraform(this._zone),
+      import: blockSnapshotImportToTerraform(this._import.internalValue),
       timeouts: blockSnapshotTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }
@@ -471,6 +613,12 @@ export class BlockSnapshot extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      import: {
+        value: blockSnapshotImportToHclTerraform(this._import.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "BlockSnapshotImportList",
       },
       timeouts: {
         value: blockSnapshotTimeoutsToHclTerraform(this._timeouts.internalValue),

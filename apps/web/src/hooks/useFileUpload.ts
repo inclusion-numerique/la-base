@@ -81,6 +81,7 @@ export const useFileUpload = () => {
           headers: {
             'Content-Type': file.type,
             'Access-Control-Allow-Origin': '*',
+            'x-amz-acl': 'public-read',
           },
           onUploadProgress: (progressEvent) => {
             if (!progressEvent.total || progressEvent.total === 0) {

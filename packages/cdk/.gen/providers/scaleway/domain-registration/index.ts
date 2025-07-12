@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,27 +10,27 @@ export interface DomainRegistrationConfig extends cdktf.TerraformMetaArguments {
   /**
   * Enable or disable auto-renewal of the domain.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#auto_renew DomainRegistration#auto_renew}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#auto_renew DomainRegistration#auto_renew}
   */
   readonly autoRenew?: boolean | cdktf.IResolvable;
   /**
   * Enable or disable dnssec for the domain.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#dnssec DomainRegistration#dnssec}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#dnssec DomainRegistration#dnssec}
   */
   readonly dnssec?: boolean | cdktf.IResolvable;
   /**
   * List of domain names to be managed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#domain_names DomainRegistration#domain_names}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#domain_names DomainRegistration#domain_names}
   */
   readonly domainNames: string[];
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#duration_in_years DomainRegistration#duration_in_years}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#duration_in_years DomainRegistration#duration_in_years}
   */
   readonly durationInYears?: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#id DomainRegistration#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#id DomainRegistration#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -39,25 +39,25 @@ export interface DomainRegistrationConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of the owner contact. Either `owner_contact_id` or `owner_contact` must be provided.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#owner_contact_id DomainRegistration#owner_contact_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#owner_contact_id DomainRegistration#owner_contact_id}
   */
   readonly ownerContactId?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#project_id DomainRegistration#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#project_id DomainRegistration#project_id}
   */
   readonly projectId?: string;
   /**
   * owner_contact block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#owner_contact DomainRegistration#owner_contact}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#owner_contact DomainRegistration#owner_contact}
   */
   readonly ownerContact?: DomainRegistrationOwnerContact;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#timeouts DomainRegistration#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#timeouts DomainRegistration#timeouts}
   */
   readonly timeouts?: DomainRegistrationTimeouts;
 }
@@ -1887,7 +1887,7 @@ export interface DomainRegistrationOwnerContactExtensionEu {
   /**
   * Indicates the European citizenship of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#european_citizenship DomainRegistration#european_citizenship}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#european_citizenship DomainRegistration#european_citizenship}
   */
   readonly europeanCitizenship?: string;
 }
@@ -1973,13 +1973,13 @@ export interface DomainRegistrationOwnerContactExtensionFrAssociationInfo {
   /**
   * Publication date in the Official Journal (RFC3339 format) for association information.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#publication_jo DomainRegistration#publication_jo}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#publication_jo DomainRegistration#publication_jo}
   */
   readonly publicationJo?: string;
   /**
   * Page number of the publication in the Official Journal for association information.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#publication_jo_page DomainRegistration#publication_jo_page}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#publication_jo_page DomainRegistration#publication_jo_page}
   */
   readonly publicationJoPage?: number;
 }
@@ -2094,7 +2094,7 @@ export interface DomainRegistrationOwnerContactExtensionFrCodeAuthAfnicInfo {
   /**
   * AFNIC authorization code for the contact (specific to French domains).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#code_auth_afnic DomainRegistration#code_auth_afnic}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#code_auth_afnic DomainRegistration#code_auth_afnic}
   */
   readonly codeAuthAfnic?: string;
 }
@@ -2180,13 +2180,13 @@ export interface DomainRegistrationOwnerContactExtensionFrDunsInfo {
   /**
   * DUNS ID associated with the domain owner (for French domains).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#duns_id DomainRegistration#duns_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#duns_id DomainRegistration#duns_id}
   */
   readonly dunsId?: string;
   /**
   * Local identifier of the domain owner (for French domains).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#local_id DomainRegistration#local_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#local_id DomainRegistration#local_id}
   */
   readonly localId?: string;
 }
@@ -2301,7 +2301,7 @@ export interface DomainRegistrationOwnerContactExtensionFrIndividualInfo {
   /**
   * Whether the individual contact has opted into WHOIS publishing.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#whois_opt_in DomainRegistration#whois_opt_in}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#whois_opt_in DomainRegistration#whois_opt_in}
   */
   readonly whoisOptIn?: boolean | cdktf.IResolvable;
 }
@@ -2387,7 +2387,7 @@ export interface DomainRegistrationOwnerContactExtensionFrTrademarkInfo {
   /**
   * Trademark information from INPI (French extension).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#trademark_inpi DomainRegistration#trademark_inpi}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#trademark_inpi DomainRegistration#trademark_inpi}
   */
   readonly trademarkInpi?: string;
 }
@@ -2473,37 +2473,37 @@ export interface DomainRegistrationOwnerContactExtensionFr {
   /**
   * Mode of the French extension (e.g., 'individual', 'duns', 'association', etc.).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#mode DomainRegistration#mode}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#mode DomainRegistration#mode}
   */
   readonly mode?: string;
   /**
   * association_info block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#association_info DomainRegistration#association_info}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#association_info DomainRegistration#association_info}
   */
   readonly associationInfo?: DomainRegistrationOwnerContactExtensionFrAssociationInfo;
   /**
   * code_auth_afnic_info block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#code_auth_afnic_info DomainRegistration#code_auth_afnic_info}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#code_auth_afnic_info DomainRegistration#code_auth_afnic_info}
   */
   readonly codeAuthAfnicInfo?: DomainRegistrationOwnerContactExtensionFrCodeAuthAfnicInfo;
   /**
   * duns_info block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#duns_info DomainRegistration#duns_info}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#duns_info DomainRegistration#duns_info}
   */
   readonly dunsInfo?: DomainRegistrationOwnerContactExtensionFrDunsInfo;
   /**
   * individual_info block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#individual_info DomainRegistration#individual_info}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#individual_info DomainRegistration#individual_info}
   */
   readonly individualInfo?: DomainRegistrationOwnerContactExtensionFrIndividualInfo;
   /**
   * trademark_info block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#trademark_info DomainRegistration#trademark_info}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#trademark_info DomainRegistration#trademark_info}
   */
   readonly trademarkInfo?: DomainRegistrationOwnerContactExtensionFrTrademarkInfo;
 }
@@ -2734,133 +2734,133 @@ export interface DomainRegistrationOwnerContact {
   /**
   * Primary address line for the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#address_line_1 DomainRegistration#address_line_1}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#address_line_1 DomainRegistration#address_line_1}
   */
   readonly addressLine1: string;
   /**
   * Secondary address line for the contact (optional).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#address_line_2 DomainRegistration#address_line_2}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#address_line_2 DomainRegistration#address_line_2}
   */
   readonly addressLine2?: string;
   /**
   * City of the contact's address.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#city DomainRegistration#city}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#city DomainRegistration#city}
   */
   readonly city: string;
   /**
   * Company identification code (e.g., SIREN/SIRET in France) for the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#company_identification_code DomainRegistration#company_identification_code}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#company_identification_code DomainRegistration#company_identification_code}
   */
   readonly companyIdentificationCode: string;
   /**
   * Name of the company associated with the contact (if applicable).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#company_name DomainRegistration#company_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#company_name DomainRegistration#company_name}
   */
   readonly companyName?: string;
   /**
   * Country code of the contact's address (ISO format).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#country DomainRegistration#country}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#country DomainRegistration#country}
   */
   readonly country: string;
   /**
   * Primary email address of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#email DomainRegistration#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#email DomainRegistration#email}
   */
   readonly email: string;
   /**
   * Alternative email address for the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#email_alt DomainRegistration#email_alt}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#email_alt DomainRegistration#email_alt}
   */
   readonly emailAlt?: string;
   /**
   * Extension details specific to Dutch domain registrations.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#extension_nl DomainRegistration#extension_nl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#extension_nl DomainRegistration#extension_nl}
   */
   readonly extensionNl?: string[];
   /**
   * Fax number for the contact (if available).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#fax_number DomainRegistration#fax_number}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#fax_number DomainRegistration#fax_number}
   */
   readonly faxNumber?: string;
   /**
   * First name of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#firstname DomainRegistration#firstname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#firstname DomainRegistration#firstname}
   */
   readonly firstname: string;
   /**
   * Preferred language of the contact (e.g., 'en_US', 'fr_FR').
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#lang DomainRegistration#lang}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#lang DomainRegistration#lang}
   */
   readonly lang?: string;
   /**
   * Last name of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#lastname DomainRegistration#lastname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#lastname DomainRegistration#lastname}
   */
   readonly lastname: string;
   /**
   * Legal form of the contact (e.g., 'individual' or 'organization').
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#legal_form DomainRegistration#legal_form}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#legal_form DomainRegistration#legal_form}
   */
   readonly legalForm: string;
   /**
   * Primary phone number of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#phone_number DomainRegistration#phone_number}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#phone_number DomainRegistration#phone_number}
   */
   readonly phoneNumber: string;
   /**
   * Indicates if the contact is used for resale purposes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#resale DomainRegistration#resale}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#resale DomainRegistration#resale}
   */
   readonly resale?: boolean | cdktf.IResolvable;
   /**
   * State or region of the contact.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#state DomainRegistration#state}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#state DomainRegistration#state}
   */
   readonly state?: string;
   /**
   * VAT identification code of the contact, if applicable.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#vat_identification_code DomainRegistration#vat_identification_code}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#vat_identification_code DomainRegistration#vat_identification_code}
   */
   readonly vatIdentificationCode: string;
   /**
   * Indicates whether the contact has opted into WHOIS publishing.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#whois_opt_in DomainRegistration#whois_opt_in}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#whois_opt_in DomainRegistration#whois_opt_in}
   */
   readonly whoisOptIn?: boolean | cdktf.IResolvable;
   /**
   * Postal code of the contact's address.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#zip DomainRegistration#zip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#zip DomainRegistration#zip}
   */
   readonly zip: string;
   /**
   * extension_eu block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#extension_eu DomainRegistration#extension_eu}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#extension_eu DomainRegistration#extension_eu}
   */
   readonly extensionEu?: DomainRegistrationOwnerContactExtensionEu;
   /**
   * extension_fr block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#extension_fr DomainRegistration#extension_fr}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#extension_fr DomainRegistration#extension_fr}
   */
   readonly extensionFr?: DomainRegistrationOwnerContactExtensionFr;
 }
@@ -3520,23 +3520,23 @@ export class DomainRegistrationOwnerContactOutputReference extends cdktf.Complex
 }
 export interface DomainRegistrationTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#create DomainRegistration#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#create DomainRegistration#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#default DomainRegistration#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#default DomainRegistration#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#delete DomainRegistration#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#delete DomainRegistration#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#read DomainRegistration#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#read DomainRegistration#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#update DomainRegistration#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#update DomainRegistration#update}
   */
   readonly update?: string;
 }
@@ -3746,7 +3746,7 @@ export class DomainRegistrationTimeoutsOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration scaleway_domain_registration}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration scaleway_domain_registration}
 */
 export class DomainRegistration extends cdktf.TerraformResource {
 
@@ -3762,7 +3762,7 @@ export class DomainRegistration extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a DomainRegistration resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DomainRegistration to import
-  * @param importFromId The id of the existing DomainRegistration that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DomainRegistration that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DomainRegistration to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -3774,7 +3774,7 @@ export class DomainRegistration extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/domain_registration scaleway_domain_registration} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/domain_registration scaleway_domain_registration} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -3785,8 +3785,8 @@ export class DomainRegistration extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_domain_registration',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface EdgeServicesTlsStageConfig extends cdktf.TerraformMetaArguments
   /**
   * The backend stage ID the TLS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#backend_stage_id EdgeServicesTlsStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#backend_stage_id EdgeServicesTlsStage#backend_stage_id}
   */
   readonly backendStageId?: string;
   /**
   * The cache stage ID the TLS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#cache_stage_id EdgeServicesTlsStage#cache_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#cache_stage_id EdgeServicesTlsStage#cache_stage_id}
   */
   readonly cacheStageId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#id EdgeServicesTlsStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#id EdgeServicesTlsStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,37 +29,37 @@ export interface EdgeServicesTlsStageConfig extends cdktf.TerraformMetaArguments
   /**
   * Set to true when Scaleway generates and manages a Let's Encrypt certificate for the TLS stage/custom endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#managed_certificate EdgeServicesTlsStage#managed_certificate}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#managed_certificate EdgeServicesTlsStage#managed_certificate}
   */
   readonly managedCertificate?: boolean | cdktf.IResolvable;
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#pipeline_id EdgeServicesTlsStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#pipeline_id EdgeServicesTlsStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#project_id EdgeServicesTlsStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#project_id EdgeServicesTlsStage#project_id}
   */
   readonly projectId?: string;
   /**
   * The route stage ID the TLS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#route_stage_id EdgeServicesTlsStage#route_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#route_stage_id EdgeServicesTlsStage#route_stage_id}
   */
   readonly routeStageId?: string;
   /**
   * The WAF stage ID the TLS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#waf_stage_id EdgeServicesTlsStage#waf_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#waf_stage_id EdgeServicesTlsStage#waf_stage_id}
   */
   readonly wafStageId?: string;
   /**
   * secrets block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#secrets EdgeServicesTlsStage#secrets}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#secrets EdgeServicesTlsStage#secrets}
   */
   readonly secrets?: EdgeServicesTlsStageSecrets[] | cdktf.IResolvable;
 }
@@ -67,13 +67,13 @@ export interface EdgeServicesTlsStageSecrets {
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#region EdgeServicesTlsStage#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#region EdgeServicesTlsStage#region}
   */
   readonly region?: string;
   /**
   * The ID of the Secret
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#secret_id EdgeServicesTlsStage#secret_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#secret_id EdgeServicesTlsStage#secret_id}
   */
   readonly secretId?: string;
 }
@@ -218,7 +218,7 @@ export class EdgeServicesTlsStageSecretsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage scaleway_edge_services_tls_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage scaleway_edge_services_tls_stage}
 */
 export class EdgeServicesTlsStage extends cdktf.TerraformResource {
 
@@ -234,7 +234,7 @@ export class EdgeServicesTlsStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesTlsStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesTlsStage to import
-  * @param importFromId The id of the existing EdgeServicesTlsStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesTlsStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesTlsStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -246,7 +246,7 @@ export class EdgeServicesTlsStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_tls_stage scaleway_edge_services_tls_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_tls_stage scaleway_edge_services_tls_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -257,8 +257,8 @@ export class EdgeServicesTlsStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_tls_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface SdbSqlDatabaseConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#id SdbSqlDatabase#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#id SdbSqlDatabase#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,59 +17,59 @@ export interface SdbSqlDatabaseConfig extends cdktf.TerraformMetaArguments {
   /**
   * The maximum number of CPU units for your Serverless SQL Database
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#max_cpu SdbSqlDatabase#max_cpu}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#max_cpu SdbSqlDatabase#max_cpu}
   */
   readonly maxCpu?: number;
   /**
   * The minimum number of CPU units for your Serverless SQL Database
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#min_cpu SdbSqlDatabase#min_cpu}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#min_cpu SdbSqlDatabase#min_cpu}
   */
   readonly minCpu?: number;
   /**
   * The database name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#name SdbSqlDatabase#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#name SdbSqlDatabase#name}
   */
   readonly name: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#project_id SdbSqlDatabase#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#project_id SdbSqlDatabase#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#region SdbSqlDatabase#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#region SdbSqlDatabase#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#timeouts SdbSqlDatabase#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#timeouts SdbSqlDatabase#timeouts}
   */
   readonly timeouts?: SdbSqlDatabaseTimeouts;
 }
 export interface SdbSqlDatabaseTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#create SdbSqlDatabase#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#create SdbSqlDatabase#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#default SdbSqlDatabase#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#default SdbSqlDatabase#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#delete SdbSqlDatabase#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#delete SdbSqlDatabase#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#read SdbSqlDatabase#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#read SdbSqlDatabase#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#update SdbSqlDatabase#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#update SdbSqlDatabase#update}
   */
   readonly update?: string;
 }
@@ -279,7 +279,7 @@ export class SdbSqlDatabaseTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database scaleway_sdb_sql_database}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database scaleway_sdb_sql_database}
 */
 export class SdbSqlDatabase extends cdktf.TerraformResource {
 
@@ -295,7 +295,7 @@ export class SdbSqlDatabase extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a SdbSqlDatabase resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the SdbSqlDatabase to import
-  * @param importFromId The id of the existing SdbSqlDatabase that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing SdbSqlDatabase that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the SdbSqlDatabase to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -307,7 +307,7 @@ export class SdbSqlDatabase extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/sdb_sql_database scaleway_sdb_sql_database} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/sdb_sql_database scaleway_sdb_sql_database} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -318,8 +318,8 @@ export class SdbSqlDatabase extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_sdb_sql_database',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface IpamIpConfig extends cdktf.TerraformMetaArguments {
   /**
   * Request a specific IP in the requested source pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#address IpamIp#address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#address IpamIp#address}
   */
   readonly address?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#id IpamIp#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#id IpamIp#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,37 +23,37 @@ export interface IpamIpConfig extends cdktf.TerraformMetaArguments {
   /**
   * Request an IPv6 instead of an IPv4
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#is_ipv6 IpamIp#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#is_ipv6 IpamIp#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#project_id IpamIp#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#project_id IpamIp#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#region IpamIp#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#region IpamIp#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#tags IpamIp#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#tags IpamIp#tags}
   */
   readonly tags?: string[];
   /**
   * custom_resource block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#custom_resource IpamIp#custom_resource}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#custom_resource IpamIp#custom_resource}
   */
   readonly customResource?: IpamIpCustomResource[] | cdktf.IResolvable;
   /**
   * source block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#source IpamIp#source}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#source IpamIp#source}
   */
   readonly source: IpamIpSource[] | cdktf.IResolvable;
 }
@@ -231,13 +231,13 @@ export interface IpamIpCustomResource {
   /**
   * MAC address of the custom resource
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#mac_address IpamIp#mac_address}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#mac_address IpamIp#mac_address}
   */
   readonly macAddress: string;
   /**
   * When the resource is in a Private Network, a DNS record is available to resolve the resource name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#name IpamIp#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#name IpamIp#name}
   */
   readonly name?: string;
 }
@@ -381,19 +381,19 @@ export interface IpamIpSource {
   /**
   * Private Network the IP lives in if the IP is a private IP
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#private_network_id IpamIp#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#private_network_id IpamIp#private_network_id}
   */
   readonly privateNetworkId?: string;
   /**
   * Private Network subnet the IP lives in if the IP is a private IP in a Private Network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#subnet_id IpamIp#subnet_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#subnet_id IpamIp#subnet_id}
   */
   readonly subnetId?: string;
   /**
   * Zone the IP lives in if the IP is a public zoned one
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#zonal IpamIp#zonal}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#zonal IpamIp#zonal}
   */
   readonly zonal?: string;
 }
@@ -567,7 +567,7 @@ export class IpamIpSourceList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip scaleway_ipam_ip}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip scaleway_ipam_ip}
 */
 export class IpamIp extends cdktf.TerraformResource {
 
@@ -583,7 +583,7 @@ export class IpamIp extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IpamIp resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IpamIp to import
-  * @param importFromId The id of the existing IpamIp that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IpamIp that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IpamIp to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -595,7 +595,7 @@ export class IpamIp extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/ipam_ip scaleway_ipam_ip} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/ipam_ip scaleway_ipam_ip} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -606,8 +606,8 @@ export class IpamIp extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_ipam_ip',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

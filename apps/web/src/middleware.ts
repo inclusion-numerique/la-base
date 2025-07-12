@@ -20,7 +20,7 @@ const contentSecurityPolicy = `
   script-src 'self' https://matomo.incubateur.anct.gouv.fr 'unsafe-inline' 'unsafe-eval';
   script-src-attr 'none';
   style-src 'self' https: 'unsafe-inline';
-  img-src 'self' data: blob:;
+  img-src 'self' https://storage.lesbases.anct.gouv.fr data: blob:;
   frame-src https://www.youtube-nocookie.com/;
   object-src 'none';
   connect-src 'self' blob: https://${ServerWebAppConfig.S3.uploadsBucket}.${

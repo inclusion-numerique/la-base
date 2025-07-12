@@ -1,16 +1,17 @@
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
+import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
+import { mimeTypesDisplayableInBrowser } from '@app/web/features/uploads/storage/mimeTypesDisplayableInBrowser'
 import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { getDownloadUrl } from '@app/web/utils/getDownloadUrl'
 import classNames from 'classnames'
 import styles from './FileContentDetails.module.css'
 
 const FileContentDetails = ({
-  file: { name, size, key },
+  file: { name, size, key, mimeType },
   className,
 }: {
   file: Pick<
     Exclude<ContentProjectionWithContext['file'], null>,
-    'name' | 'size' | 'key'
+    'name' | 'size' | 'key' | 'mimeType'
   >
   className?: string
 }) => (
@@ -37,8 +38,9 @@ const FileContentDetails = ({
         className={classNames(
           'fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
         )}
-        href={getDownloadUrl(key, { download: true })}
+        href={getStorageUrl({ key })}
         title="Télécharger le fichier"
+        download={name}
       >
         Télécharger
       </a>
@@ -46,35 +48,40 @@ const FileContentDetails = ({
         className={classNames(
           'fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
         )}
-        href={getDownloadUrl(key, { download: true })}
+        href={getStorageUrl({ key })}
         title="Télécharger le fichier"
+        download={name}
       >
         Télécharger
       </a>
-      <a
-        className={classNames(
-          'fr-ml-1w fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
-          styles.externalLinkWithIcon,
-        )}
-        href={getDownloadUrl(key)}
-        title="Voir le fichier dans un nouvel onglet"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Aperçu
-      </a>
-      <a
-        className={classNames(
-          'fr-ml-1w fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
-          styles.externalLinkWithIcon,
-        )}
-        href={getDownloadUrl(key)}
-        title="Voir le fichier dans un nouvel onglet"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Aperçu
-      </a>
+      {mimeTypesDisplayableInBrowser.has(mimeType) && (
+        <>
+          <a
+            className={classNames(
+              'fr-ml-1w fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
+              styles.externalLinkWithIcon,
+            )}
+            href={getStorageUrl({ key })}
+            title="Voir le fichier dans un nouvel onglet"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Aperçu
+          </a>
+          <a
+            className={classNames(
+              'fr-ml-1w fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
+              styles.externalLinkWithIcon,
+            )}
+            href={getStorageUrl({ key })}
+            title="Voir le fichier dans un nouvel onglet"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Aperçu
+          </a>
+        </>
+      )}
     </div>
   </div>
 )

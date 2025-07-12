@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayLbFrontendsConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#id DataScalewayLbFrontends#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#id DataScalewayLbFrontends#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayLbFrontendsConfig extends cdktf.TerraformMetaArgume
   /**
   * frontends with a lb id like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#lb_id DataScalewayLbFrontends#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#lb_id DataScalewayLbFrontends#lb_id}
   */
   readonly lbId: string;
   /**
   * frontends with a name like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#name DataScalewayLbFrontends#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#name DataScalewayLbFrontends#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#project_id DataScalewayLbFrontends#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#project_id DataScalewayLbFrontends#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#zone DataScalewayLbFrontends#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#zone DataScalewayLbFrontends#zone}
   */
   readonly zone?: string;
 }
@@ -161,7 +161,7 @@ export class DataScalewayLbFrontendsFrontendsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends scaleway_lb_frontends}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends scaleway_lb_frontends}
 */
 export class DataScalewayLbFrontends extends cdktf.TerraformDataSource {
 
@@ -177,7 +177,7 @@ export class DataScalewayLbFrontends extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLbFrontends resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLbFrontends to import
-  * @param importFromId The id of the existing DataScalewayLbFrontends that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLbFrontends that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLbFrontends to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -189,7 +189,7 @@ export class DataScalewayLbFrontends extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/lb_frontends scaleway_lb_frontends} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontends scaleway_lb_frontends} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -200,8 +200,8 @@ export class DataScalewayLbFrontends extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_frontends',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayMongodbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#id DataScalewayMongodbInstance#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#id DataScalewayMongodbInstance#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,27 +17,107 @@ export interface DataScalewayMongodbInstanceConfig extends cdktf.TerraformMetaAr
   /**
   * instance id
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#instance_id DataScalewayMongodbInstance#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#instance_id DataScalewayMongodbInstance#instance_id}
   */
   readonly instanceId?: string;
   /**
   * Name of the MongoDB cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#name DataScalewayMongodbInstance#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#name DataScalewayMongodbInstance#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#project_id DataScalewayMongodbInstance#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#project_id DataScalewayMongodbInstance#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#region DataScalewayMongodbInstance#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#region DataScalewayMongodbInstance#region}
   */
   readonly region?: string;
+}
+export interface DataScalewayMongodbInstancePrivateIp {
+}
+
+export function dataScalewayMongodbInstancePrivateIpToTerraform(struct?: DataScalewayMongodbInstancePrivateIp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayMongodbInstancePrivateIpToHclTerraform(struct?: DataScalewayMongodbInstancePrivateIp): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayMongodbInstancePrivateIpOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayMongodbInstancePrivateIp | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayMongodbInstancePrivateIp | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class DataScalewayMongodbInstancePrivateIpList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayMongodbInstancePrivateIpOutputReference {
+    return new DataScalewayMongodbInstancePrivateIpOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface DataScalewayMongodbInstancePrivateNetwork {
 }
@@ -221,7 +301,7 @@ export class DataScalewayMongodbInstancePublicNetworkList extends cdktf.ComplexL
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance scaleway_mongodb_instance}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance scaleway_mongodb_instance}
 */
 export class DataScalewayMongodbInstance extends cdktf.TerraformDataSource {
 
@@ -237,7 +317,7 @@ export class DataScalewayMongodbInstance extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayMongodbInstance resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayMongodbInstance to import
-  * @param importFromId The id of the existing DataScalewayMongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayMongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayMongodbInstance to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -249,7 +329,7 @@ export class DataScalewayMongodbInstance extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/mongodb_instance scaleway_mongodb_instance} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/mongodb_instance scaleway_mongodb_instance} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -260,8 +340,8 @@ export class DataScalewayMongodbInstance extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_mongodb_instance',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -348,6 +428,12 @@ export class DataScalewayMongodbInstance extends cdktf.TerraformDataSource {
   // password - computed: true, optional: false, required: false
   public get password() {
     return this.getStringAttribute('password');
+  }
+
+  // private_ip - computed: true, optional: false, required: false
+  private _privateIp = new DataScalewayMongodbInstancePrivateIpList(this, "private_ip", false);
+  public get privateIp() {
+    return this._privateIp;
   }
 
   // private_network - computed: true, optional: false, required: false

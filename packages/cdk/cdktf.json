@@ -1,6 +1,6 @@
 {
   "language": "typescript",
   "app": "tsx src/main.ts",
-  "terraformProviders": ["scaleway/scaleway@>= 2.53.0"],
+  "terraformProviders": ["scaleway/scaleway@>= 2.57.0"],
   "projectId": "f672f07b-f112-42d9-a275-c1511adf05af"
 }
