@@ -1,6 +1,7 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
+import Card from '@app/web/components/Card'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -8,7 +9,6 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { ConfirmDeleteModal } from '../../ConfirmDeleteModal'
-import CustomCard from '../../CustomCard'
 
 const {
   Component: DeleteModal,
@@ -55,30 +55,42 @@ const CollectionDeletionModal = ({
   }
 
   return (
-    <CustomCard id="supprimer" title="Supprimer la collection">
-      <p>
-        Cette action est irréversible et entraîne la suppression définitive de
-        la collection. Utilisez cette fonction avec précaution.
-      </p>
-      <Button
-        className="fr-btn--danger"
-        data-testid="delete-collection-button"
-        {...deleteModalNativeButtonProps}
-      >
-        Supprimer la collection
-      </Button>
-      <ConfirmDeleteModal
-        title="Supprimer la collection"
-        message="Êtes-vous sûr de vouloir supprimer votre collection ?"
-        description="Cette action est irréversible et entraîne la suppression définitive de
+    <Card
+      id="supprimer"
+      title={
+        <span className="fr-text-label--blue-france">
+          Supprimer la collection
+        </span>
+      }
+      noBorder
+      className="fr-border-radius--8 fr-border"
+      description={
+        <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-flex-gap-4v">
+          Cette action est irréversible et entraîne la suppression définitive de
+          la collection.
+          <div>
+            <Button
+              className="fr-btn--danger fr-width-full fr-flex fr-justify-content-center"
+              data-testid="delete-collection-button"
+              {...deleteModalNativeButtonProps}
+            >
+              Supprimer
+            </Button>
+            <ConfirmDeleteModal
+              title="Supprimer la collection"
+              message="Êtes-vous sûr de vouloir supprimer votre collection ?"
+              description="Cette action est irréversible et entraîne la suppression définitive de
           toutes les ressources de la Collection."
-        confirmText={collection.title}
-        isLoading={mutation.isPending}
-        Component={DeleteModal}
-        onClose={closeDeleteModal}
-        onDelete={handleDeleteCollection}
-      />
-    </CustomCard>
+              confirmText={collection.title}
+              isLoading={mutation.isPending}
+              Component={DeleteModal}
+              onClose={closeDeleteModal}
+              onDelete={handleDeleteCollection}
+            />
+          </div>
+        </div>
+      }
+    />
   )
 }
 

@@ -13,7 +13,7 @@ const IconInSquare = ({
   className?: string
   iconId: ButtonProps.IconOnly['iconId']
   iconClassName?: string
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'xlarge'
 }) => (
   <div
     className={classNames(

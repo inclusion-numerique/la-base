@@ -25,6 +25,7 @@ const BaseImages = (
         className={classNames(
           styles.banner,
           base.coverImage && styles.imageAspectRatio,
+          !base.coverImage && 'fr-mt-16v',
         )}
       >
         {base.coverImage ? (

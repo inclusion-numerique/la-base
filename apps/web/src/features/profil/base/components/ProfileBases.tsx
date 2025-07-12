@@ -19,13 +19,13 @@ const ProfileBases = ({
   canWrite: boolean
   isOwner: boolean
 }) => (
-  <div data-testid="base-resources">
+  <div data-testid="base-profiles">
     <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
       <div className="fr-col-sm-auto fr-col-12">
         <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
           <LesBasesSvgLogo />
           <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-            Bases · {bases.length}
+            Mes bases · {bases.length}
           </h2>
         </div>
       </div>

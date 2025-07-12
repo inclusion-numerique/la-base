@@ -37,7 +37,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
         "Ce qui compte c'est pas l'arrivée c'est la quete",
       )
 
-      cy.testId('edit-card-save-button').click()
+      cy.testId('edit-card-save-button').click({ force: true })
       cy.wait('@mutation')
 
       cy.testId('base-information-title').should('have.text', 'La quete')
@@ -56,7 +56,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
 
       cy.testId('base-title-input').clear()
 
-      cy.testId('edit-card-save-button').click()
+      cy.testId('edit-card-save-button').click({ force: true })
       cy.get('[id=input-form-field__title__error]').should(
         'have.text',
         'Veuillez renseigner le nom de la base',
@@ -64,7 +64,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
     })
 
     it('Acceptation 3 - Modification des contacts', () => {
-      cy.testId('edit-card-button').eq(1).click()
+      cy.testId('edit-card-button').eq(3).click({ force: true })
 
       cy.testId('base-email-input').clear()
       cy.testId('base-email-input').type('orel@s.an')
@@ -73,7 +73,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
       cy.testId('base-twitter-input').type('https://twitter.fr')
       cy.testId('base-facebook-input').type('https://facebook.fr')
 
-      cy.testId('edit-card-save-button').click()
+      cy.testId('edit-card-save-button').click({ force: true })
       cy.wait('@mutation')
 
       cy.testId('base-contacts-email').should('have.text', 'orel@s.an')
@@ -96,11 +96,11 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
     })
 
     it('Acceptation 4 - Modification des contacts avec erreurs', () => {
-      cy.testId('edit-card-button').eq(1).click()
+      cy.testId('edit-card-button').eq(3).click({ force: true })
 
       cy.testId('base-email-input').clear()
 
-      cy.testId('edit-card-save-button').click()
+      cy.testId('edit-card-save-button').click({ force: true })
       cy.get('[id=input-form-field__email__error]').should(
         'have.text',
         'Veuillez entrer une adresse e-mail valide',
@@ -132,8 +132,8 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
         'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
-      cy.testId('edit-card-button').eq(2).click()
-
+      cy.testId('edit-card-button').eq(4).click()
+      cy.testId('visibility-radio-base-private').should('exist')
       cy.testId('visibility-radio-base-private').click({ force: true })
       cy.testId('edit-card-save-button').click()
       cy.wait('@mutation')
@@ -171,10 +171,10 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
         'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
-      cy.testId('edit-card-button').eq(2).click()
+      cy.testId('edit-card-button').eq(4).click()
 
       cy.testId('visibility-radio-base-private').click({ force: true })
-      cy.testId('edit-card-save-button').click()
+      cy.testId('edit-card-save-button').click({ force: true })
 
       cy.testId('visibility-modal-continue-button').click()
       cy.wait('@mutation')

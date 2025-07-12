@@ -11,7 +11,7 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
 
   return (
     <ul>
-      <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w">
+      <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w fr-px-md-0 fr-px-2w">
         <Link
           className="fr-btn fr-flex fr-align-items-center fr-border-bottom-0"
           href={`/profils/${user.slug}`}
@@ -38,50 +38,48 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       </li>
       {bases.length > 0 ? (
         <>
-          <li>
-            <p className="fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
+          <li className="fr-px-md-0 fr-px-2w">
+            <p className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
               Mes bases
             </p>
           </li>
           {bases.map(({ slug, title }) => (
-            <li key={slug}>
-              <Link
-                className="fr-btn fr-border-bottom-0"
-                href={`/bases/${slug}`}
-                style={{
-                  boxShadow: 'none',
-                  borderBottom: undefined,
-                }}
-              >
+            <li key={slug} className="fr-px-md-0 fr-px-2w">
+              <Link className="fr-btn fr-text--sm" href={`/bases/${slug}`}>
                 <span className="fr-icon-home-4-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-                {title}
+                <span className="fr-text-mention--black fr-text--normal">
+                  {title}
+                </span>
               </Link>
             </li>
           ))}
         </>
       ) : null}
-      <li>
-        <Link
-          className="fr-btn fr-border-bottom-0"
-          href="/bases/creer"
-          style={{ boxShadow: 'none' }}
-        >
+      <li className="fr-px-md-0 fr-px-2w">
+        <Link className="fr-btn fr-text--sm" href="/bases/creer">
           <span className="fr-icon-add-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-          Créer une base
+          <span className="fr-text-mention--black fr-text--normal">
+            Créer une base
+          </span>
         </Link>
       </li>
       {canAccessAdministration(user) && (
-        <li className="">
-          <Link className="fr-btn fr-border-top" href="/administration">
+        <li className="fr-px-md-0 fr-px-2w">
+          <Link
+            className="fr-btn fr-text--sm fr-border-top"
+            href="/administration"
+          >
             <span className="fr-icon-settings-5-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
             Administration
           </Link>
         </li>
       )}
-      <li className="">
-        <Link className="fr-btn fr-border-top" href="/deconnexion">
+      <li className="fr-px-md-0 fr-px-2w fr-border-top">
+        <Link className="fr-btn fr-text--sm" href="/deconnexion">
           <span className="fr-icon-logout-box-r-line fr-icon--sm fr-mr-1w fr-text-label--blue-france" />
-          Se déconnecter
+          <span className="fr-text-mention--black fr-text--normal">
+            Se déconnecter
+          </span>
         </Link>
       </li>
     </ul>

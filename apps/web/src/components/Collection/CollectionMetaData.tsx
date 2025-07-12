@@ -1,5 +1,4 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import CollectionDates from '@app/web/components/Collection/CollectionDates'
 import classNames from 'classnames'
 import React from 'react'
 import { PrivacyTag } from '../PrivacyTags'
@@ -31,7 +30,7 @@ const CollectionMetaData = ({
 }) => (
   <div
     className={classNames(
-      'fr-flex fr-my-2v fr-text--sm fr-mb-0 fr-text-mention--grey',
+      'fr-flex fr-text--sm fr-mb-0 fr-text-mention--grey',
       context === 'view' &&
         'fr-justify-content-start fr-direction-column fr-justify-content-md-space-between fr-direction-md-row',
       ['card', 'contextModal'].includes(context) && 'fr-flex-gap-2v',
@@ -55,14 +54,8 @@ const CollectionMetaData = ({
       </span>
     </div>
     <div className="fr-flex fr-flex-gap-2v">
-      {withCollectionDates && context === 'view' && (
-        <div className="fr-flex fr-flex-gap-2v fr-ml-md-2v">
-          <span className="fr-hidden fr-unhidden-md">•</span>
-          <CollectionDates collection={collection} />
-        </div>
-      )}
       {!!withPrivacyTag && (
-        <div className="fr-flex fr-flex-gap-2v">
+        <div className="fr-flex fr-flex-gap-2v fr-ml-md-2v">
           <span>•</span>
           <PrivacyTag
             isPublic={collection.isPublic}

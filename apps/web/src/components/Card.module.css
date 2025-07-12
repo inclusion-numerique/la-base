@@ -1,0 +1,9 @@
+.contentSeparator {
+  margin-left: -24px;
+  margin-right: -24px;
+
+  @media (min-width: 768px) {
+    margin-left: -32px;
+    margin-right: -32px;
+  }
+}

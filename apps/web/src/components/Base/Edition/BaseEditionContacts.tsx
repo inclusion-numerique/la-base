@@ -32,13 +32,14 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
 
   return (
     <EditCard
+      noBorder
       id="contacts"
       mutation={async (data) => {
         await mutate.mutateAsync({ id: base.id, data })
       }}
       form={form}
       className="fr-mt-3w"
-      title="Contacts"
+      title="Contacts de la base"
       titleAs="h2"
       edition={<BaseContactsEdition form={form} />}
       view={

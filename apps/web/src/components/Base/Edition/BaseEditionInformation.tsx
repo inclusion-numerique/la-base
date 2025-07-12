@@ -32,6 +32,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
 
   return (
     <EditCard
+      noBorder
       id="informations"
       mutation={async (data) => {
         const result = await mutate.mutateAsync({ id: base.id, data })

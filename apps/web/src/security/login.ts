@@ -1,5 +1,3 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-
 export const loginIntents = [
   'enregistrer-ressource-dans-collection',
   'enregistrer-collection',
@@ -29,7 +27,7 @@ export const loginUrl = ({
   return `/connexion${queryString}`
 }
 
-export const defaultLoginTitle = `Connexion à ${PublicWebAppConfig.projectTitle}`
+export const defaultLoginTitle = `Se connecter`
 export const loginTitles: { [intent in LoginIntent]: string } = {
   'enregistrer-ressource-dans-collection':
     'Connectez vous pour enregistrer une ressource dans une collection',

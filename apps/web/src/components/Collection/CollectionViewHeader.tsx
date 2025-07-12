@@ -1,3 +1,4 @@
+import BackButton from '@app/web/components/BackButton'
 import Images, { HeartIconSvg } from '@app/web/components/Collection/Images'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import type { CollectionPageData } from '@app/web/server/collections/getCollection'
@@ -18,6 +19,7 @@ const CollectionViewHeader = ({
     }
   >
     <div className="fr-container fr-container--medium fr-py-4v fr-pb-md-12v fr-pt-md-10v">
+      <BackButton />
       <div className="fr-width-full">
         <div className="fr-flex fr-direction-column fr-flex-gap-6v">
           {!collection.isFavorites && (

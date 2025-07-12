@@ -1,3 +1,7 @@
+.fr-text--normal {
+  font-weight: 400 !important;
+}
+
 .fr-text--medium {
   font-weight: 500 !important;
 }
@@ -24,10 +28,6 @@
 
 .fr-text--break-all {
   word-break: break-all;
-}
-
-.fr-text--semi-bold {
-  font-weight: 500 !important;
 }
 
 .fr-text--nowrap {
