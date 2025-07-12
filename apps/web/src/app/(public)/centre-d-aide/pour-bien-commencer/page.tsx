@@ -123,7 +123,7 @@ const ContentPolicyPage = () => (
                   l’utilisation des outils, la reproduction et l’adaptation des
                   initiatives...). Ces pages peuvent ensuite être rendues
                   publiques, c’est-à-dire consultables par tous, qu’ils soient
-                  membres ou non de la plateforme.
+                  utilisateurs ou non de la plateforme.
                 </p>
                 <h4 className="fr-text--lead">Contribuer à une communauté</h4>
                 <p>
@@ -161,23 +161,23 @@ const ContentPolicyPage = () => (
                   Créer son compte & se connecter
                 </h2>
                 <h3>Création de compte</h3>
-                <h4 className="fr-text--lead fr-mb-0">Inclusion Connect</h4>
+                <h4 className="fr-text--lead fr-mb-0">ProConnect</h4>
                 <p>
-                  Inclusion Connect{' '}
+                  ProConnect{' '}
                   <Link
-                    href="https://connect.inclusion.beta.gouv.fr/accounts/register/"
+                    href="https://www.proconnect.gouv.fr/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    (https://connect.inclusion.beta.gouv.fr/accounts/register/)
+                    (https://www.proconnect.gouv.fr/)
                   </Link>{' '}
                   est une solution de connexion unique à plusieurs services
-                  publics pour les professionnels de l’inclusion.
+                  publics et privés pour les professionnels.
                 </p>
                 <p>
                   Vous pouvez créer votre compte sur Les Bases, et vous y
-                  connecter par le biais d’Inclusion Connect, qui fournira votre
-                  nom, prénom et email à la plateforme Les Bases.
+                  connecter par le biais de ProConnect, qui fournira votre nom,
+                  prénom et email à la plateforme Les Bases.
                 </p>
                 <h4 className="fr-text--lead fr-mb-0">Email</h4>
                 <p>
@@ -185,23 +185,23 @@ const ContentPolicyPage = () => (
                   prêt à être utilisé&nbsp;!
                 </p>
                 <h3 className="fr-mt-5w">Se connecter</h3>
-                <h4 className="fr-text--lead fr-mb-0">Inclusion Connect</h4>
+                <h4 className="fr-text--lead fr-mb-0">ProConnect</h4>
                 <p>
-                  Inclusion Connect{' '}
+                  ProConnect{' '}
                   <Link
-                    href="https://connect.inclusion.beta.gouv.fr/accounts/register/"
+                    href="https://www.proconnect.gouv.fr/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    (https://connect.inclusion.beta.gouv.fr/accounts/register/)
+                    (https://www.proconnect.gouv.fr/)
                   </Link>{' '}
                   est une solution de connexion unique à plusieurs services
-                  publics pour les professionnels de l’inclusion.
+                  publics et privés pour les professionnels.
                 </p>
                 <p>
                   Vous pouvez créer votre compte sur Les Bases, et vous y
-                  connecter par le biais d’Inclusion Connect, qui fournira votre
-                  nom, prénom et email à la plateforme Les Bases.
+                  connecter par le biais de ProConnect, qui fournira votre nom,
+                  prénom et email à la plateforme Les Bases.
                 </p>
                 <h4 className="fr-text--lead fr-mb-0">Connexion par email</h4>
                 <p>

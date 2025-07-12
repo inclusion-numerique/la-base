@@ -4,6 +4,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import Card from '@app/web/components/Card'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
+import Button from '@codegouvfr/react-dsfr/Button'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -133,6 +134,28 @@ const ContentPolicyPage = () => (
             >
               <CardLink href="centre-d-aide/les-collections" />
             </Card>
+          </div>
+        </div>
+        <div className="fr-text--center fr-border-radius--16 fr-background-alt--blue-france fr-pt-3w fr-pb-4w fr-px-3w fr-p-md-6w fr-mb-6w fr-mb-md-0 fr-mt-3w">
+          <div className="fr-flex fr-direction-column fr-justify-content-center fr-flex-gap-3w">
+            <h2 className="fr-h5 fr-mb-4w fr-mb-md-1w">
+              Les principes à suivre pour publier une ressource et contribuer à
+              la plateforme
+            </h2>
+            <span className="fr-mb-4w fr-mb-md-3w">
+              Consultez notre charte indiquant les principes qui guident la
+              construction d’un numérique d’intérêt général, ainsi que certaines
+              conditions que les créateurs de ressources s’engagent à respecter.
+            </span>
+            <div>
+              <Button
+                linkProps={{ href: '/charte' }}
+                size="large"
+                priority="secondary"
+              >
+                Découvrir la charte des Bases
+              </Button>
+            </div>
           </div>
         </div>
       </div>
