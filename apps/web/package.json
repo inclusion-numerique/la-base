@@ -139,6 +139,7 @@
     "zustand": "^5.0.4"
   },
   "devDependencies": {
+    "@aws-sdk/lib-storage": "^3.844.0",
     "@keycloak/keycloak-admin-client": "^26.2.4",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/react": "^8.6.12",

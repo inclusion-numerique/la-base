@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface EdgeServicesBackendStageConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface EdgeServicesBackendStageConfig extends cdktf.TerraformMetaArgum
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#pipeline_id EdgeServicesBackendStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#pipeline_id EdgeServicesBackendStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#project_id EdgeServicesBackendStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#project_id EdgeServicesBackendStage#project_id}
   */
   readonly projectId?: string;
   /**
   * lb_backend_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#lb_backend_config EdgeServicesBackendStage#lb_backend_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#lb_backend_config EdgeServicesBackendStage#lb_backend_config}
   */
   readonly lbBackendConfig?: EdgeServicesBackendStageLbBackendConfig[] | cdktf.IResolvable;
   /**
   * s3_backend_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#s3_backend_config EdgeServicesBackendStage#s3_backend_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#s3_backend_config EdgeServicesBackendStage#s3_backend_config}
   */
   readonly s3BackendConfig?: EdgeServicesBackendStageS3BackendConfig;
 }
@@ -43,19 +43,19 @@ export interface EdgeServicesBackendStageLbBackendConfigLbConfig {
   /**
   * Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#domain_name EdgeServicesBackendStage#domain_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#domain_name EdgeServicesBackendStage#domain_name}
   */
   readonly domainName?: string;
   /**
   * ID of the frontend linked to the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#frontend_id EdgeServicesBackendStage#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#frontend_id EdgeServicesBackendStage#frontend_id}
   */
   readonly frontendId?: string;
   /**
   * ID of the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -64,13 +64,13 @@ export interface EdgeServicesBackendStageLbBackendConfigLbConfig {
   /**
   * Defines whether the Load Balancer's frontend handles SSL connections
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#is_ssl EdgeServicesBackendStage#is_ssl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#is_ssl EdgeServicesBackendStage#is_ssl}
   */
   readonly isSsl?: boolean | cdktf.IResolvable;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#zone EdgeServicesBackendStage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#zone EdgeServicesBackendStage#zone}
   */
   readonly zone?: string;
 }
@@ -272,7 +272,7 @@ export interface EdgeServicesBackendStageLbBackendConfig {
   /**
   * lb_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#lb_config EdgeServicesBackendStage#lb_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#lb_config EdgeServicesBackendStage#lb_config}
   */
   readonly lbConfig?: EdgeServicesBackendStageLbBackendConfigLbConfig;
 }
@@ -390,19 +390,19 @@ export interface EdgeServicesBackendStageS3BackendConfig {
   /**
   * The name of the Bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#bucket_name EdgeServicesBackendStage#bucket_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#bucket_name EdgeServicesBackendStage#bucket_name}
   */
   readonly bucketName?: string;
   /**
   * The region of the Bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#bucket_region EdgeServicesBackendStage#bucket_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#bucket_region EdgeServicesBackendStage#bucket_region}
   */
   readonly bucketRegion?: string;
   /**
   * Defines whether the bucket website feature is enabled.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#is_website EdgeServicesBackendStage#is_website}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#is_website EdgeServicesBackendStage#is_website}
   */
   readonly isWebsite?: boolean | cdktf.IResolvable;
 }
@@ -544,7 +544,7 @@ export class EdgeServicesBackendStageS3BackendConfigOutputReference extends cdkt
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage}
 */
 export class EdgeServicesBackendStage extends cdktf.TerraformResource {
 
@@ -560,7 +560,7 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesBackendStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesBackendStage to import
-  * @param importFromId The id of the existing EdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesBackendStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -572,7 +572,7 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -583,8 +583,8 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_backend_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

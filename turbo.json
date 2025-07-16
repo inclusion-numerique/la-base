@@ -2,25 +2,16 @@
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
     "prisma generate": {
-      "inputs": [
-        "prisma/schema.prisma"
-      ],
+      "inputs": ["prisma/schema.prisma"],
       "cache": true
     },
     "dev": {
-      "dependsOn": [
-        "^prisma generate"
-      ],
+      "dependsOn": ["^prisma generate"],
       "cache": false
     },
     "build": {
-      "dependsOn": [
-        "^build",
-        "^prisma generate"
-      ],
-      "outputs": [
-        ".next/**"
-      ],
+      "dependsOn": ["^build", "^prisma generate"],
+      "outputs": [".next/**"],
       "cache": false
     },
     "lint": {
@@ -50,6 +41,7 @@
     "MIGRATION_DATABASE_URL",
     "LEGACY_HOSTNAME",
     "LEGACY_UPLOADS_S3_BUCKET",
+    "UPLOADS_S3_BUCKET",
     "BRANCH",
     "CDK_FORCE_BRANCH",
     "COCKPIT_GRAPHANA_EDITORS",

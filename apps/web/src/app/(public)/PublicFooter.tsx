@@ -33,7 +33,10 @@ export const publicFooterProps = {
     },
     {
       text: `Budget`,
-      linkProps: { href: '/budget' },
+      linkProps: {
+        href: 'https://docs.numerique.gouv.fr/docs/2445dd98-d303-4c7b-b4ba-7690b59ea3d4/',
+        target: '_blank',
+      },
     },
   ],
 } satisfies Pick<

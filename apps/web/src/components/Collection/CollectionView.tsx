@@ -111,7 +111,7 @@ const CollectionView = ({
     {!!user && <SaveCollectionModal user={user} />}
     <DeleteResourceModal />
     {!!user && (
-      <DeleteCollectionModal redirectTo={`/profile/${user.slug}/collections`} />
+      <DeleteCollectionModal redirectTo={`/profils/${user.slug}/collections`} />
     )}
   </>
 )

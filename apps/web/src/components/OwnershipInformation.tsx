@@ -32,6 +32,11 @@ const attributionWordings = {
   },
 }
 
+// There is issue with the Link component from nextjs@15, with the scroll restoration not jumping on top while redirecting.
+// For now I fallback to a simple <a> tag.
+// ref. https://github.com/vercel/next.js/issues/64441
+// ref. https://github.com/vercel/next.js/issues/79571
+// ref. https://github.com/vercel/next.js/issues/80615
 const OwnershipInformation = ({
   user,
   base,
@@ -64,24 +69,31 @@ const OwnershipInformation = ({
       {base != null && (
         <>
           {attributionWordings[attributionWording].where}
-          <Link
+          <a
             href={`/bases/${base.slug}`}
             className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
           >
             {base.title}
-          </Link>
+          </a>
+          {attributionWordings[attributionWording].by}
+          <a
+            href={`/profils/${user.slug}`}
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+          >
+            {user.name && formatName(user.name)}
+          </a>
         </>
       )}
       {(!base ||
         (user.isPublic && displayUser && attributionWording !== 'none')) && (
         <>
           {attributionWordings[attributionWording].by}
-          <Link
+          <a
             href={`/profils/${user.slug}`}
             className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
           >
             {user.name && formatName(user.name)}
-          </Link>
+          </a>
         </>
       )}
     </span>

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MongodbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#id MongodbInstance#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#id MongodbInstance#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,105 +17,202 @@ export interface MongodbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the MongoDB cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#name MongodbInstance#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#name MongodbInstance#name}
   */
   readonly name?: string;
   /**
   * Number of nodes in the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#node_number MongodbInstance#node_number}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#node_number MongodbInstance#node_number}
   */
   readonly nodeNumber: number;
   /**
   * Type of node to use for the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#node_type MongodbInstance#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#node_type MongodbInstance#node_type}
   */
   readonly nodeType: string;
   /**
   * Password of the user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#password MongodbInstance#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#password MongodbInstance#password}
   */
   readonly password?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#project_id MongodbInstance#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#project_id MongodbInstance#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#region MongodbInstance#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#region MongodbInstance#region}
   */
   readonly region?: string;
   /**
   * Map of settings to define for the instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#settings MongodbInstance#settings}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#settings MongodbInstance#settings}
   */
   readonly settings?: { [key: string]: string };
   /**
   * Snapshot ID to restore the MongoDB instance from
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#snapshot_id MongodbInstance#snapshot_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#snapshot_id MongodbInstance#snapshot_id}
   */
   readonly snapshotId?: string;
   /**
   * List of tags ["tag1", "tag2", ...] attached to a MongoDB instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#tags MongodbInstance#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#tags MongodbInstance#tags}
   */
   readonly tags?: string[];
   /**
   * Name of the user created when the cluster is created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#user_name MongodbInstance#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#user_name MongodbInstance#user_name}
   */
   readonly userName?: string;
   /**
   * MongoDB version of the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#version MongodbInstance#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#version MongodbInstance#version}
   */
   readonly version?: string;
   /**
   * Volume size (in GB)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#volume_size_in_gb MongodbInstance#volume_size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#volume_size_in_gb MongodbInstance#volume_size_in_gb}
   */
   readonly volumeSizeInGb?: number;
   /**
   * Volume type of the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#volume_type MongodbInstance#volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#volume_type MongodbInstance#volume_type}
   */
   readonly volumeType?: string;
   /**
+  * private_ip block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#private_ip MongodbInstance#private_ip}
+  */
+  readonly privateIp?: MongodbInstancePrivateIp[] | cdktf.IResolvable;
+  /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#private_network MongodbInstance#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#private_network MongodbInstance#private_network}
   */
   readonly privateNetwork?: MongodbInstancePrivateNetwork;
   /**
   * public_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#public_network MongodbInstance#public_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#public_network MongodbInstance#public_network}
   */
   readonly publicNetwork?: MongodbInstancePublicNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#timeouts MongodbInstance#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#timeouts MongodbInstance#timeouts}
   */
   readonly timeouts?: MongodbInstanceTimeouts;
+}
+export interface MongodbInstancePrivateIp {
+}
+
+export function mongodbInstancePrivateIpToTerraform(struct?: MongodbInstancePrivateIp | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function mongodbInstancePrivateIpToHclTerraform(struct?: MongodbInstancePrivateIp | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class MongodbInstancePrivateIpOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MongodbInstancePrivateIp | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MongodbInstancePrivateIp | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class MongodbInstancePrivateIpList extends cdktf.ComplexList {
+  public internalValue? : MongodbInstancePrivateIp[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MongodbInstancePrivateIpOutputReference {
+    return new MongodbInstancePrivateIpOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface MongodbInstancePrivateNetwork {
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#pn_id MongodbInstance#pn_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#pn_id MongodbInstance#pn_id}
   */
   readonly pnId: string;
 }
@@ -280,19 +377,19 @@ export class MongodbInstancePublicNetworkOutputReference extends cdktf.ComplexOb
 }
 export interface MongodbInstanceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#create MongodbInstance#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#create MongodbInstance#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#default MongodbInstance#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#default MongodbInstance#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#delete MongodbInstance#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#delete MongodbInstance#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#update MongodbInstance#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#update MongodbInstance#update}
   */
   readonly update?: string;
 }
@@ -473,7 +570,7 @@ export class MongodbInstanceTimeoutsOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance scaleway_mongodb_instance}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance scaleway_mongodb_instance}
 */
 export class MongodbInstance extends cdktf.TerraformResource {
 
@@ -489,7 +586,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MongodbInstance resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MongodbInstance to import
-  * @param importFromId The id of the existing MongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MongodbInstance to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -501,7 +598,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_instance scaleway_mongodb_instance} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance scaleway_mongodb_instance} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -512,8 +609,8 @@ export class MongodbInstance extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mongodb_instance',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -537,6 +634,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
     this._version = config.version;
     this._volumeSizeInGb = config.volumeSizeInGb;
     this._volumeType = config.volumeType;
+    this._privateIp.internalValue = config.privateIp;
     this._privateNetwork.internalValue = config.privateNetwork;
     this._publicNetwork.internalValue = config.publicNetwork;
     this._timeouts.internalValue = config.timeouts;
@@ -774,6 +872,22 @@ export class MongodbInstance extends cdktf.TerraformResource {
     return this._volumeType;
   }
 
+  // private_ip - computed: false, optional: true, required: false
+  private _privateIp = new MongodbInstancePrivateIpList(this, "private_ip", false);
+  public get privateIp() {
+    return this._privateIp;
+  }
+  public putPrivateIp(value: MongodbInstancePrivateIp[] | cdktf.IResolvable) {
+    this._privateIp.internalValue = value;
+  }
+  public resetPrivateIp() {
+    this._privateIp.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get privateIpInput() {
+    return this._privateIp.internalValue;
+  }
+
   // private_network - computed: false, optional: true, required: false
   private _privateNetwork = new MongodbInstancePrivateNetworkOutputReference(this, "private_network");
   public get privateNetwork() {
@@ -842,6 +956,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
       version: cdktf.stringToTerraform(this._version),
       volume_size_in_gb: cdktf.numberToTerraform(this._volumeSizeInGb),
       volume_type: cdktf.stringToTerraform(this._volumeType),
+      private_ip: cdktf.listMapper(mongodbInstancePrivateIpToTerraform, true)(this._privateIp.internalValue),
       private_network: mongodbInstancePrivateNetworkToTerraform(this._privateNetwork.internalValue),
       public_network: mongodbInstancePublicNetworkToTerraform(this._publicNetwork.internalValue),
       timeouts: mongodbInstanceTimeoutsToTerraform(this._timeouts.internalValue),
@@ -933,6 +1048,12 @@ export class MongodbInstance extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      private_ip: {
+        value: cdktf.listMapperHcl(mongodbInstancePrivateIpToHclTerraform, true)(this._privateIp.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "MongodbInstancePrivateIpList",
       },
       private_network: {
         value: mongodbInstancePrivateNetworkToHclTerraform(this._privateNetwork.internalValue),

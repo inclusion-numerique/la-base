@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface VpcAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * The action to take for packets which do not match any rules
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#default_policy VpcAcl#default_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#default_policy VpcAcl#default_policy}
   */
   readonly defaultPolicy: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#id VpcAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#id VpcAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface VpcAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#is_ipv6 VpcAcl#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#is_ipv6 VpcAcl#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#region VpcAcl#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#region VpcAcl#region}
   */
   readonly region?: string;
   /**
   * The VPC in which to create the ACL rule
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#vpc_id VpcAcl#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#vpc_id VpcAcl#vpc_id}
   */
   readonly vpcId: string;
   /**
   * rules block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#rules VpcAcl#rules}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#rules VpcAcl#rules}
   */
   readonly rules: VpcAclRules[] | cdktf.IResolvable;
 }
@@ -49,55 +49,55 @@ export interface VpcAclRules {
   /**
   * The policy to apply to the packet
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#action VpcAcl#action}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#action VpcAcl#action}
   */
   readonly action?: string;
   /**
   * The rule description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#description VpcAcl#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#description VpcAcl#description}
   */
   readonly description?: string;
   /**
   * Destination IP range to which this rule applies (CIDR notation with subnet mask)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#destination VpcAcl#destination}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#destination VpcAcl#destination}
   */
   readonly destination?: string;
   /**
   * Ending port of the destination port range to which this rule applies (inclusive)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#dst_port_high VpcAcl#dst_port_high}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#dst_port_high VpcAcl#dst_port_high}
   */
   readonly dstPortHigh?: number;
   /**
   * Starting port of the destination port range to which this rule applies (inclusive)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#dst_port_low VpcAcl#dst_port_low}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#dst_port_low VpcAcl#dst_port_low}
   */
   readonly dstPortLow?: number;
   /**
   * The protocol to which this rule applies. Default value: ANY
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#protocol VpcAcl#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#protocol VpcAcl#protocol}
   */
   readonly protocol?: string;
   /**
   * Source IP range to which this rule applies (CIDR notation with subnet mask)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#source VpcAcl#source}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#source VpcAcl#source}
   */
   readonly source?: string;
   /**
   * Ending port of the source port range to which this rule applies (inclusive)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#src_port_high VpcAcl#src_port_high}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#src_port_high VpcAcl#src_port_high}
   */
   readonly srcPortHigh?: number;
   /**
   * Starting port of the source port range to which this rule applies (inclusive)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#src_port_low VpcAcl#src_port_low}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#src_port_low VpcAcl#src_port_low}
   */
   readonly srcPortLow?: number;
 }
@@ -445,7 +445,7 @@ export class VpcAclRulesList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl scaleway_vpc_acl}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl scaleway_vpc_acl}
 */
 export class VpcAcl extends cdktf.TerraformResource {
 
@@ -461,7 +461,7 @@ export class VpcAcl extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a VpcAcl resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the VpcAcl to import
-  * @param importFromId The id of the existing VpcAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing VpcAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the VpcAcl to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -473,7 +473,7 @@ export class VpcAcl extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/vpc_acl scaleway_vpc_acl} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_acl scaleway_vpc_acl} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -484,8 +484,8 @@ export class VpcAcl extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_acl',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

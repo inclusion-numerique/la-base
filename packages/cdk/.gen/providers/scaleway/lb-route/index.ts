@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface LbRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The backend ID destination of redirection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#backend_id LbRoute#backend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#backend_id LbRoute#backend_id}
   */
   readonly backendId: string;
   /**
   * The frontend ID origin of redirection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#frontend_id LbRoute#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#frontend_id LbRoute#frontend_id}
   */
   readonly frontendId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#id LbRoute#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#id LbRoute#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,31 +29,37 @@ export interface LbRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * Specifies the host of the server to which the request is being sent
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#match_host_header LbRoute#match_host_header}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#match_host_header LbRoute#match_host_header}
   */
   readonly matchHostHeader?: string;
   /**
+  * Value to match in the URL beginning path from an incoming request
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#match_path_begin LbRoute#match_path_begin}
+  */
+  readonly matchPathBegin?: string;
+  /**
   * Server Name Indication TLS extension field from an incoming connection made via an SSL/TLS transport layer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#match_sni LbRoute#match_sni}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#match_sni LbRoute#match_sni}
   */
   readonly matchSni?: string;
   /**
   * If true, all subdomains will match
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#match_subdomains LbRoute#match_subdomains}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#match_subdomains LbRoute#match_subdomains}
   */
   readonly matchSubdomains?: boolean | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#timeouts LbRoute#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#timeouts LbRoute#timeouts}
   */
   readonly timeouts?: LbRouteTimeouts;
 }
 export interface LbRouteTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#default LbRoute#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#default LbRoute#default}
   */
   readonly default?: string;
 }
@@ -147,7 +153,7 @@ export class LbRouteTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route scaleway_lb_route}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route scaleway_lb_route}
 */
 export class LbRoute extends cdktf.TerraformResource {
 
@@ -163,7 +169,7 @@ export class LbRoute extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a LbRoute resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the LbRoute to import
-  * @param importFromId The id of the existing LbRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing LbRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the LbRoute to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -175,7 +181,7 @@ export class LbRoute extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/lb_route scaleway_lb_route} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/lb_route scaleway_lb_route} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -186,8 +192,8 @@ export class LbRoute extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_route',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -201,6 +207,7 @@ export class LbRoute extends cdktf.TerraformResource {
     this._frontendId = config.frontendId;
     this._id = config.id;
     this._matchHostHeader = config.matchHostHeader;
+    this._matchPathBegin = config.matchPathBegin;
     this._matchSni = config.matchSni;
     this._matchSubdomains = config.matchSubdomains;
     this._timeouts.internalValue = config.timeouts;
@@ -273,6 +280,22 @@ export class LbRoute extends cdktf.TerraformResource {
     return this._matchHostHeader;
   }
 
+  // match_path_begin - computed: false, optional: true, required: false
+  private _matchPathBegin?: string; 
+  public get matchPathBegin() {
+    return this.getStringAttribute('match_path_begin');
+  }
+  public set matchPathBegin(value: string) {
+    this._matchPathBegin = value;
+  }
+  public resetMatchPathBegin() {
+    this._matchPathBegin = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get matchPathBeginInput() {
+    return this._matchPathBegin;
+  }
+
   // match_sni - computed: false, optional: true, required: false
   private _matchSni?: string; 
   public get matchSni() {
@@ -336,6 +359,7 @@ export class LbRoute extends cdktf.TerraformResource {
       frontend_id: cdktf.stringToTerraform(this._frontendId),
       id: cdktf.stringToTerraform(this._id),
       match_host_header: cdktf.stringToTerraform(this._matchHostHeader),
+      match_path_begin: cdktf.stringToTerraform(this._matchPathBegin),
       match_sni: cdktf.stringToTerraform(this._matchSni),
       match_subdomains: cdktf.booleanToTerraform(this._matchSubdomains),
       timeouts: lbRouteTimeoutsToTerraform(this._timeouts.internalValue),
@@ -364,6 +388,12 @@ export class LbRoute extends cdktf.TerraformResource {
       },
       match_host_header: {
         value: cdktf.stringToHclTerraform(this._matchHostHeader),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      match_path_begin: {
+        value: cdktf.stringToHclTerraform(this._matchPathBegin),
         isBlock: false,
         type: "simple",
         storageClassType: "string",

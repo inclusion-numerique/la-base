@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface MongodbSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * Expiration date (Format ISO 8601). Cannot be removed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#expires_at MongodbSnapshot#expires_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#expires_at MongodbSnapshot#expires_at}
   */
   readonly expiresAt: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#id MongodbSnapshot#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#id MongodbSnapshot#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface MongodbSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the instance from which the snapshot was created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#instance_id MongodbSnapshot#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#instance_id MongodbSnapshot#instance_id}
   */
   readonly instanceId: string;
   /**
   * Name of the snapshot
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#name MongodbSnapshot#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#name MongodbSnapshot#name}
   */
   readonly name?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#region MongodbSnapshot#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#region MongodbSnapshot#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#timeouts MongodbSnapshot#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#timeouts MongodbSnapshot#timeouts}
   */
   readonly timeouts?: MongodbSnapshotTimeouts;
 }
 export interface MongodbSnapshotTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#create MongodbSnapshot#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#create MongodbSnapshot#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#default MongodbSnapshot#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#default MongodbSnapshot#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#delete MongodbSnapshot#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#delete MongodbSnapshot#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#update MongodbSnapshot#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#update MongodbSnapshot#update}
   */
   readonly update?: string;
 }
@@ -240,7 +240,7 @@ export class MongodbSnapshotTimeoutsOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot scaleway_mongodb_snapshot}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot scaleway_mongodb_snapshot}
 */
 export class MongodbSnapshot extends cdktf.TerraformResource {
 
@@ -256,7 +256,7 @@ export class MongodbSnapshot extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MongodbSnapshot resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MongodbSnapshot to import
-  * @param importFromId The id of the existing MongodbSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MongodbSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MongodbSnapshot to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -268,7 +268,7 @@ export class MongodbSnapshot extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/mongodb_snapshot scaleway_mongodb_snapshot} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_snapshot scaleway_mongodb_snapshot} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -279,8 +279,8 @@ export class MongodbSnapshot extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mongodb_snapshot',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

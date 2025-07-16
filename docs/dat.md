@@ -575,7 +575,7 @@ territoires, dans le projet "la base".
 L'équipe transverse de l’Incubateur des Territoires administre les droits d’accès via le système "IAM" utilisé par
 Scaleway.
 
-Les accès Scalingo sont octroyés uniquement à l'équipe technique (Développeurs et Product manager) pour :
+Les accès Scaleway sont octroyés uniquement à l'équipe technique (Développeurs et Product manager) pour :
 
 - surveiller la santé de l'app de production (logs et metrics)
 - ajouter ou mettre à jour des secrets

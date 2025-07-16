@@ -54,12 +54,13 @@ const resource = (imageId: string | null) =>
       : null,
     themes: [
       'Accessibilite',
-      'ArtsEtCulture',
-      'CommunicationEnLigneEtReseauxSociaux',
+      'AidesAuxDemarchesAdministratives',
+      'ReseauxSociauxEtCommunication',
       'TerritoiresConnectesEtDurables',
     ],
-    targetAudiences: ['AutresProfessionnels'],
-    supportTypes: [],
+    beneficiaries: [],
+    professionalSectors: ['AutresProfessionnels'],
+    resourceTypes: [],
     contributors: [],
     contents: [
       {

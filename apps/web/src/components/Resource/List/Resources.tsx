@@ -70,19 +70,6 @@ const Resources = ({
         <Tabs
           tabs={[
             {
-              label: `Brouillons · ${drafts.length}`,
-              iconId: 'fr-icon-draft-line',
-              content: (
-                <ResourceTab
-                  resources={drafts}
-                  user={user}
-                  emptyText="Vous n'avez pas de brouillons."
-                  data-testid="resources-draft-tab"
-                  isDraft
-                />
-              ),
-            },
-            {
               label: `Publiques · ${publics.length}`,
               iconId: 'fr-icon-earth-line',
               content: (
@@ -103,6 +90,19 @@ const Resources = ({
                   user={user}
                   emptyText="Vous n'avez pas de ressources privées."
                   data-testid="resources-private-tab"
+                />
+              ),
+            },
+            {
+              label: `Brouillons · ${drafts.length}`,
+              iconId: 'fr-icon-draft-line',
+              content: (
+                <ResourceTab
+                  resources={drafts}
+                  user={user}
+                  emptyText="Vous n'avez pas de brouillons."
+                  data-testid="resources-draft-tab"
+                  isDraft
                 />
               ),
             },

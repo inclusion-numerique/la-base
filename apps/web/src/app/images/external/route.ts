@@ -1,24 +1,35 @@
+import crypto from 'node:crypto'
 import { type LookupAddress, lookup } from 'node:dns'
 import { Agent as HttpAgent } from 'node:http'
 import { Agent as HttpsAgent } from 'node:https'
 import type { LookupFunction } from 'node:net'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { getStorageFileInfo } from '@app/web/features/uploads/storage/getStorageFileInfo'
+import { getStorageKey } from '@app/web/features/uploads/storage/getStorageKey'
+import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
+import { s3 } from '@app/web/server/s3/s3'
+import { Upload } from '@aws-sdk/lib-storage'
 import * as Sentry from '@sentry/nextjs'
 import axios from 'axios'
 import { LRUCache } from 'lru-cache'
 import type { NextRequest } from 'next/server'
 import pThrottle from 'p-throttle'
 
-const notFoundResponse = () =>
+const notFoundResponse = ({
+  statusText = 'Not Found',
+}: {
+  statusText?: string
+} = {}) =>
   new Response('', {
     status: 404,
+    statusText,
   })
 
 /**
- * We proxy external media to protect our users of external domains tracking etc...
+ * We re-store external media to protect our users of external domains tracking etc...
  *
- * These external media proxy request are making too many DNS queries for
+ * These external media proxy request may make too many DNS queries for
  * scaleway policy (max 20/sec)
- *
  * We implement caching and throttling to avoid too many requests
  */
 
@@ -29,7 +40,7 @@ const throttle = pThrottle({
 
 const dnsCache = new LRUCache<string, string | LookupAddress[]>({
   max: 10_000, // Maximum items in the cache
-  ttl: 1000 * 60 * 60 * 24 * 3, // Time-to-live: 3 days
+  ttl: 1000 * 60 * 60 * 24 * 2, // Time-to-live: 2 days
 })
 
 const throttledLookup = throttle(lookup)
@@ -73,6 +84,16 @@ const dnsOptimisedAxios = axios.create({
   httpAgent,
 })
 
+// We store the external image urls as their hashed url value
+
+const hashSource = (source: string) => {
+  return crypto.createHash('sha256').update(source).digest('hex')
+}
+
+const getExternalImageStorageKey = (source: string) => {
+  return getStorageKey(`external-image/${hashSource(source)}`)
+}
+
 export const GET = async (request: NextRequest) => {
   const source = request.nextUrl.searchParams.get('src')
 
@@ -80,7 +101,22 @@ export const GET = async (request: NextRequest) => {
     return notFoundResponse()
   }
 
+  const storageKey = getExternalImageStorageKey(source)
+
+  // We check if the image is already stored
+  const imageInfo = await getStorageFileInfo({
+    key: storageKey,
+  })
+  const processedImageUrl = getStorageUrl({ key: storageKey })
+
+  if (imageInfo) {
+    // We redirect to stored processed image
+    return Response.redirect(processedImageUrl, 301)
+  }
+
+  // We upload the image to the storage and redirect to it
   try {
+    // First we download the image
     const { headers, data, status, statusText } =
       await dnsOptimisedAxios.get<ReadableStream>(source, {
         responseType: 'stream',
@@ -95,22 +131,50 @@ export const GET = async (request: NextRequest) => {
 
     const contentType = headers['content-type'] as string
     const cacheControl = headers['cache-control'] as string
+    const contentLength = headers['content-length']
+      ? Number.parseInt(headers['content-length'] as string, 10)
+      : undefined
 
-    return new Response(data, {
-      status: 200,
-      headers: {
-        'Content-Type': contentType,
-        'Cache-Control': cacheControl || 'public, max-age=31536000, immutable',
-      },
-    })
+    if (contentLength && contentLength > 10_000_000) {
+      return notFoundResponse({
+        statusText: 'Image too large',
+      })
+    }
+
+    try {
+      // We store the external image in our storage
+      await new Upload({
+        client: s3,
+        params: {
+          Bucket: ServerWebAppConfig.S3.uploadsBucket,
+          Key: storageKey,
+          Body: data,
+          ACL: 'public-read',
+          ContentType: contentType,
+          Metadata: {
+            'original-url': source,
+            'original-content-type': contentType,
+            'original-cache-control': cacheControl,
+          },
+        },
+      }).done()
+
+      // We redirect to the stored image
+      return Response.redirect(processedImageUrl, 301)
+    } catch (error) {
+      // Upload failed
+      Sentry.captureException(error)
+
+      return notFoundResponse({
+        statusText: 'Could not cache external image',
+      })
+    }
   } catch (error) {
+    // Get failed
     Sentry.captureException(error)
-    return new Response(null, {
-      status: 307,
-      headers: {
-        Location: '/images/image-error-placeholder.svg',
-        'Cache-Control': 'public, max-age=31536000, immutable',
-      },
+
+    return notFoundResponse({
+      statusText: 'Could not get external image',
     })
   }
 }

@@ -3,8 +3,8 @@ import {
   maximumFileSizeInBytes,
 } from '@app/ui/components/Form/utils/fileValidation.server'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
+import { getStoragePrefix } from '@app/web/features/uploads/storage/getStoragePrefix'
 import { prismaClient } from '@app/web/prismaClient'
-import { createLegacySignedUrl } from '@app/web/server/createLegacySignedUrl'
 import {
   createSignedGetUrl,
   createSignedUploadUrl,
@@ -50,14 +50,6 @@ export const uploadRouter = router({
         throw notFoundError()
       }
 
-      if (key.startsWith('legacy/')) {
-        const { url } = await createLegacySignedUrl({
-          key: key.replace(/^legacy\//, ''),
-          bucket: ServerWebAppConfig.LegacyS3.uploadsBucket,
-        })
-
-        return { url }
-      }
       const { url } = await createSignedGetUrl({
         key,
         bucket: ServerWebAppConfig.S3.uploadsBucket,
@@ -70,9 +62,10 @@ export const uploadRouter = router({
     .mutation(async ({ input: { filename, mimeType }, ctx: { user } }) => {
       const { url, key } = await createSignedUploadUrl({
         name: filename,
-        directory: `user/${user.id}`,
+        directory: `${getStoragePrefix()}/user/${user.id}`,
         bucket: ServerWebAppConfig.S3.uploadsBucket,
         mimeType,
+        visibility: 'public',
       })
 
       return { url, key }

@@ -27,6 +27,11 @@ import { CockpitToken } from '@app/scaleway/cockpit-token'
 import { ContainerNamespace } from '@app/scaleway/container-namespace'
 import { DataScalewayDomainZone } from '@app/scaleway/data-scaleway-domain-zone'
 import { DomainRecord } from '@app/scaleway/domain-record'
+import { EdgeServicesBackendStage } from '@app/scaleway/edge-services-backend-stage'
+import { EdgeServicesCacheStage } from '@app/scaleway/edge-services-cache-stage'
+import { EdgeServicesDnsStage } from '@app/scaleway/edge-services-dns-stage'
+import { EdgeServicesPipeline } from '@app/scaleway/edge-services-pipeline'
+import { EdgeServicesTlsStage } from '@app/scaleway/edge-services-tls-stage'
 import { ObjectBucket } from '@app/scaleway/object-bucket'
 import { ScalewayProvider } from '@app/scaleway/provider'
 import { RdbInstance } from '@app/scaleway/rdb-instance'
@@ -118,8 +123,8 @@ export class ProjectStack extends TerraformStack {
       },
     )
 
-    // Uploads bucket for usage in integration testing and dev environments
-    new ObjectBucket(this, 'devUploads', {
+    // File hosting bucket for uploads of all environments files
+    new ObjectBucket(this, 'uploads', {
       name: environmentVariables.UPLOADS_BUCKET.value,
       corsRule: [
         {
@@ -127,10 +132,25 @@ export class ProjectStack extends TerraformStack {
           allowedMethods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
           maxAgeSeconds: 3000,
           exposeHeaders: ['Etag'],
-          allowedOrigins: ['http://localhost:3000', 'http://localhost'],
+          allowedOrigins: ['*'],
         },
       ],
-      forceDestroy: true,
+      forceDestroy: false,
+    })
+
+    // As of July 2025, we cannot setup edge pipelines from terraform as we have errors from scaleway after creating the pipeline
+    // So edge pipeline is created and configured manually in scaleway console from the object storage interface
+    const uploadsSubdomain = 'storage'
+    const uploadsHostName = `${uploadsSubdomain}.${mainRootDomain}`
+    const uploadsEdgePipelineId = '127e474a-5ed3-46d2-9be2-864a5b60bd38'
+
+    // Uploads CNAME record
+    new DomainRecord(this, 'cname_uploads', {
+      dnsZone: mainDomainZone.id,
+      type: 'CNAME',
+      name: uploadsSubdomain,
+      data: `${uploadsEdgePipelineId}.svc.edge.scw.cloud.`,
+      ttl: 300,
     })
 
     // Uploads bucket for migration of legacy v1 uploads
@@ -401,5 +421,6 @@ export class ProjectStack extends TerraformStack {
     output('databaseInstanceId', database.id)
     output('databaseEndpointIp', database.endpointIp)
     output('databaseEndpointPort', database.endpointPort)
+    output('uploadsHostName', uploadsHostName)
   }
 }

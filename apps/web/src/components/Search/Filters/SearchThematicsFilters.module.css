@@ -1,0 +1,18 @@
+.frSearchThematicsModal :global(.fr-col-lg-6) {
+  flex: 0 0 100%;
+  max-width: 80%;
+}
+
+.frSearchThematicsModal :global(.fr-modal__content) {
+  margin-bottom: 2.5rem;
+}
+
+.frSearchThematicsModal :global(.fr-modal__footer) {
+  border-top: 1px solid #ddd;
+  margin-top: 2.5rem;
+}
+
+.frSearchThematicsModal :global(.fr-modal__footer ul.fr-btns-group) {
+  display: flex;
+  justify-content: space-between;
+}

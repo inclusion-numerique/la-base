@@ -44,6 +44,7 @@ describe.skip('createSignedUrl', () => {
         bucket: ServerWebAppConfig.S3.uploadsBucket,
         name: fileName,
         mimeType,
+        visibility: 'public',
       })
 
       expect(key).toBeString()
@@ -53,8 +54,11 @@ describe.skip('createSignedUrl', () => {
       expect(url).toInclude(ServerWebAppConfig.S3.uploadsBucket)
       expect(url).toInclude(fileName)
 
-      const { status } = await axios.put(url, {
-        data: createReadStream(filePath),
+      const { status } = await axios.put(url, createReadStream(filePath), {
+        headers: {
+          'Content-Type': mimeType,
+          'x-amz-acl': 'public-read',
+        },
       })
       expect(status).toEqual(200)
     }, 30_000)

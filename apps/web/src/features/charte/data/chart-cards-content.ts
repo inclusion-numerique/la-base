@@ -25,7 +25,7 @@ export const CHART_CARDS_CONTENT: ChartCardProps[] = [
     items: [
       'Rend accessibles des données et des ressources',
       'Documente les développements d’un dispositif ou d’une initiative mis en place',
-      'Promeut une culture de transparence de la donnée, des outils et des connaissances et de gouvernance partagée',
+      'Promeut une culture de transparence de la donnée ou de gouvernances partagées',
     ],
   },
   {
@@ -105,7 +105,7 @@ export const CHART_CARDS_CONTENT_PARTICIPATION = [
   {
     title: 'Système d’évaluation',
     description:
-      'La communauté est invité à recommander les ressources publiées, aussi bien sur leur forme (clarté, documents accessibles...), que sur le fond (proximité ou non avec les principes du numérique d’intérêt général).',
+      'La communauté est invitée à recommander les ressources publiées, aussi bien sur leur forme (clarté, documents accessibles...), que sur le fond (proximité ou non avec les principes du numérique d’intérêt général).',
     imageUrl: '/images/charte/logo-systeme-evaluation.svg',
     imageAlt: 'Logo illustratif du système d’évaluation',
   },

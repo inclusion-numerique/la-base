@@ -4,8 +4,9 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import { supportTypeLabels } from '@app/web/themes/supportTypes'
-import { targetAudienceLabels } from '@app/web/themes/targetAudiences'
+import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
+import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { themeLabels } from '@app/web/themes/themes'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import classNames from 'classnames'
@@ -23,24 +24,34 @@ const getThemes = (resource: Resource) => ({
   slug: 'themes' as const,
 })
 
-const getSupportTypes = (resource: Resource) => ({
-  title: 'Type de support',
-  description: 'Type de support (article, fiche, guide...).',
-  tags: resource.supportTypes.map((supportType) => ({
-    slug: supportType,
-    label: supportTypeLabels[supportType],
+const getResourceTypes = (resource: Resource) => ({
+  title: 'Type de ressource',
+  description: 'Type de ressource (article, fiche, guide...).',
+  tags: resource.resourceTypes.map((resourceType) => ({
+    slug: resourceType,
+    label: resourceTypesLabels[resourceType],
   })),
-  slug: 'supportTypes' as const,
+  slug: 'resourceTypes' as const,
 })
 
-const getTargetAudiences = (resource: Resource) => ({
-  title: 'Publics cibles',
-  description: 'Quel est le public visé par la ressource ?',
-  tags: resource.targetAudiences.map((targetAudience) => ({
-    slug: targetAudience,
-    label: targetAudienceLabels[targetAudience],
+const getBeneficiaries = (resource: Resource) => ({
+  title: 'Bénéficiaires',
+  description: 'Quel sont les bénéficiares visés par la ressource ?',
+  tags: resource.beneficiaries.map((beneficiary) => ({
+    slug: beneficiary,
+    label: beneficiariesLabels[beneficiary],
   })),
-  slug: 'targetAudiences' as const,
+  slug: 'beneficiaries' as const,
+})
+
+const getProfessionalSectors = (resource: Resource) => ({
+  title: 'Secteurs professionnels',
+  description: 'Quel sont les secteurs professionnels visés par la ressource ?',
+  tags: resource.professionalSectors.map((professionalSector) => ({
+    slug: professionalSector,
+    label: professionalSectorsLabels[professionalSector],
+  })),
+  slug: 'professionalSectors' as const,
 })
 
 const ResourceIndexationView = ({
@@ -48,8 +59,9 @@ const ResourceIndexationView = ({
   withDescription,
   withLink,
   themes,
-  targetAudiences,
-  supportTypes,
+  beneficiaries,
+  professionalSectors,
+  resourceTypes,
   titleClassName,
   tagsClassName,
 }: {
@@ -57,18 +69,20 @@ const ResourceIndexationView = ({
   withDescription?: boolean
   withLink?: boolean
   themes?: boolean
-  supportTypes?: boolean
-  targetAudiences?: boolean
+  resourceTypes?: boolean
+  beneficiaries?: boolean
+  professionalSectors?: boolean
   titleClassName?: string
   tagsClassName?: string
 }) => {
   const resourceInfo = useMemo(
     () => [
       ...(themes ? [getThemes(resource)] : []),
-      ...(supportTypes ? [getSupportTypes(resource)] : []),
-      ...(targetAudiences ? [getTargetAudiences(resource)] : []),
+      ...(resourceTypes ? [getResourceTypes(resource)] : []),
+      ...(beneficiaries ? [getBeneficiaries(resource)] : []),
+      ...(professionalSectors ? [getProfessionalSectors(resource)] : []),
     ],
-    [resource, supportTypes, targetAudiences, themes],
+    [resource, resourceTypes, beneficiaries, professionalSectors, themes],
   )
 
   return resourceInfo.map(({ title, description, tags, slug }, index) => (

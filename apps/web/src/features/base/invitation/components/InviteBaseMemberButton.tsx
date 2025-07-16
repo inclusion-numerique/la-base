@@ -116,7 +116,7 @@ const InviteBaseMemberButton = ({
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">
               <div>
                 Les contributeurs peuvent voir, créer et contribuer à l’ensemble
-                des ressources liées à la base ainsi qu’invitez d’autres
+                des ressources liées à la base ainsi qu’inviter d’autres
                 membres. Vous pouvez également inviter des administrateurs qui
                 pourront gérer les membres de la base (inviter et retirer des
                 membres).

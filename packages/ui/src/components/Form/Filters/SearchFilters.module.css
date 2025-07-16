@@ -1,0 +1,32 @@
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.select {
+  appearance: auto;
+  padding-right: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-france-sun-113-625);
+}
+
+.selected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selectedContainer {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid var(--border-default-grey);
+  border-top: 1px solid var(--border-default-grey);
+}

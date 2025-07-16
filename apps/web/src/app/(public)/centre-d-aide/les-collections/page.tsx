@@ -203,7 +203,7 @@ const ContentPolicyPage = () => (
                   alt=""
                 />
                 <p>
-                  Une modale va ensuite vous permettre de choisir dans quel
+                  Un menu va ensuite vous permettre de choisir dans quelle
                   collection vous souhaitez enregistrer la ressource. Plusieurs
                   choix s’offrent à vous&nbsp;:
                 </p>
@@ -251,8 +251,8 @@ const ContentPolicyPage = () => (
                   d’une collection.
                 </p>
                 <p>
-                  Une modale va ensuite vous permettre de choisir où vous
-                  souhaitez enregistrer la collection.
+                  Un menu va ensuite vous permettre de choisir où vous souhaitez
+                  enregistrer la collection.
                 </p>
                 <p className="fr-text--bold">
                   Plusieurs choix s’offrent à vous&nbsp;:

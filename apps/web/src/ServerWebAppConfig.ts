@@ -11,8 +11,15 @@ const emailServer = `smtp://${process.env.SMTP_USERNAME ?? ''}:${
   process.env.SMTP_PASSWORD ?? ''
 }@${process.env.SMTP_SERVER ?? ''}:${process.env.SMTP_PORT ?? ''}`
 
+const isCi = !!process.env.CI
+const isLocal = !process.env.BRANCH
+const isE2e = !!process.env.IS_E2E
+
 export const ServerWebAppConfig = {
   NodeEnv: NodeEnvironment,
+  isCi,
+  isLocal,
+  isE2e,
   Namespace: process.env.NAMESPACE ?? '',
   internalApiPrivateKey: process.env.INTERNAL_API_PRIVATE_KEY ?? '',
   Brevo: {
@@ -33,13 +40,6 @@ export const ServerWebAppConfig = {
     secretKey: process.env.SCW_SECRET_KEY ?? '',
   },
   Scaleway: {
-    region: process.env.SCW_DEFAULT_REGION ?? '',
-    accessKey: process.env.SCW_ACCESS_KEY ?? '',
-    secretKey: process.env.SCW_SECRET_KEY ?? '',
-  },
-  LegacyS3: {
-    uploadsBucket: process.env.LEGACY_UPLOADS_S3_BUCKET ?? '',
-    host: process.env.S3_HOST ?? '',
     region: process.env.SCW_DEFAULT_REGION ?? '',
     accessKey: process.env.SCW_ACCESS_KEY ?? '',
     secretKey: process.env.SCW_SECRET_KEY ?? '',

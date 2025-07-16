@@ -29,11 +29,13 @@ export const createSignedUploadUrl = async ({
   name,
   mimeType,
   bucket,
+  visibility = 'private',
 }: {
   name: string
   mimeType: string
   directory: string
   bucket: string
+  visibility: 'public' | 'private'
 }): Promise<{ url: string; key: string }> => {
   const key = `${directory}/${nanoid()}_${name}`
 
@@ -44,6 +46,7 @@ export const createSignedUploadUrl = async ({
       Key: key,
       Bucket: bucket,
       ContentType: mimeType,
+      ACL: visibility === 'public' ? 'public-read' : undefined,
     }),
     { expiresIn: 3600 },
   )

@@ -193,19 +193,29 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-button').eq(2).click()
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
-    cy.testId('indexation-themes-select-DemarchesEtServicesEnLigne').click()
-    cy.testId('indexation-support-types-select-Article').click()
-    cy.testId('indexation-targetAudiences-select-Particuliers').click()
-    cy.testId('indexation-targetAudiences-select-AidantsNumeriques').click()
+    cy.testId(
+      'indexation-themes-select-AidesAuxDemarchesAdministratives',
+    ).click({ force: true })
+
+    cy.testId('indexation-resource-types-select-Article').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId(
+      'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
+    ).click()
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('resource-empty-indexation').should('exist')
     cy.testId('edit-card-button').eq(2).click()
-    cy.testId('indexation-themes-select').select('ActeursDuNumerique')
-    cy.testId('indexation-support-types-select').select('Tutoriel')
-    cy.testId('indexation-targetAudiences-select').select('Adultes')
+    cy.testId(
+      'indexation-themes-select-AidesAuxDemarchesAdministratives',
+    ).click({
+      force: true,
+    })
+    cy.testId('indexation-resource-types-select').click()
+    cy.testId('indexation-resource-types-select-Annuaire').click()
+    cy.testId('indexation-beneficiaries-select').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click()
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
@@ -214,9 +224,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes',
     )
 
-    cy.testId('resource-indexation-themes-ActeursDuNumerique').should('exist')
-    cy.testId('resource-indexation-supportTypes-Tutoriel').should('exist')
-    cy.testId('resource-indexation-targetAudiences-Adultes').should('exist')
+    cy.testId(
+      'resource-indexation-themes-AidesAuxDemarchesAdministratives',
+    ).should('exist')
+    cy.testId('resource-indexation-resourceTypes-Annuaire').should('exist')
+    cy.testId('resource-indexation-beneficiaries-Adultes').should('exist')
   })
 
   it("Acceptation 5 - Je peux changer la visibilité des avis pour qu'ils soient privés", () => {

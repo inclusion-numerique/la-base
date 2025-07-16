@@ -1,56 +1,38 @@
+import {
+  CATEGORY_VARIANTS,
+  Category,
+  CategoryStyle,
+} from '@app/web/themes/themes'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 import styles from './CategoryCard.module.css'
 
-type CategoryStyle = {
-  icon: string
-  color: string
-  background: string
-  hover: string
-  href: string
-}
-
-type Category =
-  | 'Inclusion numérique'
-  | 'Culture numérique'
-  | 'Communs & souveraineté'
-  | 'Numérique & environnement'
-
-const CATEGORY_VARIANTS: Record<Category, CategoryStyle> = {
-  'Inclusion numérique': {
-    icon: 'ri-service-fill',
-    color: 'fr-text-label--green-archipel',
-    background: 'fr-background-alt--green-archipel',
-    hover: styles.inclusionCard,
-    href: '/inclusion-numerique',
-  },
-  'Culture numérique': {
-    icon: 'ri-stack-fill',
-    color: 'fr-text-label--pink-tuile',
-    background: 'fr-background-alt--pink-tuile',
-    hover: styles.cultureNumCard,
-    href: '/culture-numerique',
-  },
-  'Communs & souveraineté': {
-    icon: 'ri-government-fill',
-    color: 'fr-text-label--yellow-tournesol',
-    background: 'fr-background-alt--yellow-tournesol',
-    hover: styles.communsCard,
-    href: '/communs-et-souverainete',
-  },
-  'Numérique & environnement': {
-    icon: 'ri-leaf-fill',
-    color: 'fr-text-label--green-bourgeon',
-    background: 'fr-background-alt--green-bourgeon',
-    hover: styles.numeriqueCard,
-    href: '/numerique-et-environnement',
-  },
-}
-
 export type CategoryCardProps = {
   category: Category
   resourcesCount: number
+}
+
+const CATEGORY_VARIANTS_STYLES: Record<
+  Category,
+  CategoryStyle & { hover: string }
+> = {
+  'Inclusion numérique': {
+    ...CATEGORY_VARIANTS['Inclusion numérique'],
+    hover: styles.inclusionCard,
+  },
+  'Culture numérique': {
+    ...CATEGORY_VARIANTS['Culture numérique'],
+    hover: styles.cultureNumCard,
+  },
+  'Communs & souveraineté': {
+    ...CATEGORY_VARIANTS['Communs & souveraineté'],
+    hover: styles.communsCard,
+  },
+  'Numérique & environnement': {
+    ...CATEGORY_VARIANTS['Numérique & environnement'],
+    hover: styles.numeriqueCard,
+  },
 }
 
 export const CategoryCard = ({
@@ -59,8 +41,8 @@ export const CategoryCard = ({
 }: CategoryCardProps) => (
   <div
     className={classNames(
-      CATEGORY_VARIANTS[category].background,
-      CATEGORY_VARIANTS[category].hover,
+      CATEGORY_VARIANTS_STYLES[category].background,
+      CATEGORY_VARIANTS_STYLES[category].hover,
       'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link',
     )}
   >

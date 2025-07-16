@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,35 +10,41 @@ export interface ObjectResourceConfig extends cdktf.TerraformMetaArguments {
   /**
   * The bucket's name or regional ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#bucket ObjectResource#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#bucket ObjectResource#bucket}
   */
   readonly bucket: string;
   /**
   * Content of the file to upload
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#content ObjectResource#content}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#content ObjectResource#content}
   */
   readonly content?: string;
   /**
   * Content of the file to upload, should be base64 encoded
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#content_base64 ObjectResource#content_base64}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#content_base64 ObjectResource#content_base64}
   */
   readonly contentBase64?: string;
   /**
+  * The standard MIME type of the object's content (e.g., 'application/json', 'text/plain'). This specifies how the object should be interpreted by clients. See RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#content_type ObjectResource#content_type}
+  */
+  readonly contentType?: string;
+  /**
   * Path of the file to upload, defaults to an empty file
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#file ObjectResource#file}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#file ObjectResource#file}
   */
   readonly file?: string;
   /**
   * File hash to trigger upload
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#hash ObjectResource#hash}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#hash ObjectResource#hash}
   */
   readonly hash?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#id ObjectResource#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#id ObjectResource#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -47,77 +53,77 @@ export interface ObjectResourceConfig extends cdktf.TerraformMetaArguments {
   /**
   * Key of the object
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#key ObjectResource#key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#key ObjectResource#key}
   */
   readonly key: string;
   /**
   * Map of object's metadata, only lower case keys are allowed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#metadata ObjectResource#metadata}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#metadata ObjectResource#metadata}
   */
   readonly metadata?: { [key: string]: string };
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#project_id ObjectResource#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#project_id ObjectResource#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#region ObjectResource#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#region ObjectResource#region}
   */
   readonly region?: string;
   /**
   * Customer's encryption keys to encrypt data (SSE-C)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#sse_customer_key ObjectResource#sse_customer_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#sse_customer_key ObjectResource#sse_customer_key}
   */
   readonly sseCustomerKey?: string;
   /**
   * Specifies the Scaleway Object Storage class to which you want the object to transition
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#storage_class ObjectResource#storage_class}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#storage_class ObjectResource#storage_class}
   */
   readonly storageClass?: string;
   /**
   * Map of object's tags
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#tags ObjectResource#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#tags ObjectResource#tags}
   */
   readonly tags?: { [key: string]: string };
   /**
   * Visibility of the object, public-read or private
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#visibility ObjectResource#visibility}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#visibility ObjectResource#visibility}
   */
   readonly visibility?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#timeouts ObjectResource#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#timeouts ObjectResource#timeouts}
   */
   readonly timeouts?: ObjectResourceTimeouts;
 }
 export interface ObjectResourceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#create ObjectResource#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#create ObjectResource#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#default ObjectResource#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#default ObjectResource#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#delete ObjectResource#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#delete ObjectResource#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#read ObjectResource#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#read ObjectResource#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#update ObjectResource#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#update ObjectResource#update}
   */
   readonly update?: string;
 }
@@ -327,7 +333,7 @@ export class ObjectResourceTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object scaleway_object}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object scaleway_object}
 */
 export class ObjectResource extends cdktf.TerraformResource {
 
@@ -343,7 +349,7 @@ export class ObjectResource extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a ObjectResource resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the ObjectResource to import
-  * @param importFromId The id of the existing ObjectResource that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing ObjectResource that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the ObjectResource to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -355,7 +361,7 @@ export class ObjectResource extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/object scaleway_object} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/object scaleway_object} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -366,8 +372,8 @@ export class ObjectResource extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_object',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -380,6 +386,7 @@ export class ObjectResource extends cdktf.TerraformResource {
     this._bucket = config.bucket;
     this._content = config.content;
     this._contentBase64 = config.contentBase64;
+    this._contentType = config.contentType;
     this._file = config.file;
     this._hash = config.hash;
     this._id = config.id;
@@ -441,6 +448,22 @@ export class ObjectResource extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get contentBase64Input() {
     return this._contentBase64;
+  }
+
+  // content_type - computed: true, optional: true, required: false
+  private _contentType?: string; 
+  public get contentType() {
+    return this.getStringAttribute('content_type');
+  }
+  public set contentType(value: string) {
+    this._contentType = value;
+  }
+  public resetContentType() {
+    this._contentType = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get contentTypeInput() {
+    return this._contentType;
   }
 
   // file - computed: false, optional: true, required: false
@@ -641,6 +664,7 @@ export class ObjectResource extends cdktf.TerraformResource {
       bucket: cdktf.stringToTerraform(this._bucket),
       content: cdktf.stringToTerraform(this._content),
       content_base64: cdktf.stringToTerraform(this._contentBase64),
+      content_type: cdktf.stringToTerraform(this._contentType),
       file: cdktf.stringToTerraform(this._file),
       hash: cdktf.stringToTerraform(this._hash),
       id: cdktf.stringToTerraform(this._id),
@@ -672,6 +696,12 @@ export class ObjectResource extends cdktf.TerraformResource {
       },
       content_base64: {
         value: cdktf.stringToHclTerraform(this._contentBase64),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      content_type: {
+        value: cdktf.stringToHclTerraform(this._contentType),
         isBlock: false,
         type: "simple",
         storageClassType: "string",

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface RdbSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * Expiration date of the snapshot in ISO 8601 format (RFC 3339).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#expires_at RdbSnapshot#expires_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#expires_at RdbSnapshot#expires_at}
   */
   readonly expiresAt?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#id RdbSnapshot#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#id RdbSnapshot#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,39 +23,39 @@ export interface RdbSnapshotConfig extends cdktf.TerraformMetaArguments {
   /**
   * UUID of the Database Instance on which the snapshot is applied.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#instance_id RdbSnapshot#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#instance_id RdbSnapshot#instance_id}
   */
   readonly instanceId: string;
   /**
   * Name of the snapshot.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#name RdbSnapshot#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#name RdbSnapshot#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#region RdbSnapshot#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#region RdbSnapshot#region}
   */
   readonly region?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#timeouts RdbSnapshot#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#timeouts RdbSnapshot#timeouts}
   */
   readonly timeouts?: RdbSnapshotTimeouts;
 }
 export interface RdbSnapshotTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#create RdbSnapshot#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#create RdbSnapshot#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#delete RdbSnapshot#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#delete RdbSnapshot#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#read RdbSnapshot#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#read RdbSnapshot#read}
   */
   readonly read?: string;
 }
@@ -207,7 +207,7 @@ export class RdbSnapshotTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot scaleway_rdb_snapshot}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot scaleway_rdb_snapshot}
 */
 export class RdbSnapshot extends cdktf.TerraformResource {
 
@@ -223,7 +223,7 @@ export class RdbSnapshot extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a RdbSnapshot resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the RdbSnapshot to import
-  * @param importFromId The id of the existing RdbSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing RdbSnapshot that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the RdbSnapshot to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -235,7 +235,7 @@ export class RdbSnapshot extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/rdb_snapshot scaleway_rdb_snapshot} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/rdb_snapshot scaleway_rdb_snapshot} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -246,8 +246,8 @@ export class RdbSnapshot extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_rdb_snapshot',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

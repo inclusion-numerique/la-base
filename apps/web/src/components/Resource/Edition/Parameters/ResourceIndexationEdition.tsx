@@ -1,81 +1,97 @@
 import MultipleSelectFormField from '@app/ui/components/Form/MultipleSelectFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
+import ResourceIndexationThemesSelect from '@app/web/components/Resource/Edition/Parameters/ResourceIndexationThemesSelect'
 import {
-  supportTypesLimit,
-  targetAudiencesLimit,
+  beneficiariesLimit,
+  professionalSectorsLimit,
+  resourceTypesLimit,
   themesLimit,
 } from '@app/web/server/resources/feature/PublishResource'
-import { supportTypeOptions } from '@app/web/themes/supportTypes'
-import { targetAudienceOptions } from '@app/web/themes/targetAudiences'
-import { themeOptions } from '@app/web/themes/themes'
+import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
+import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
+import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
 import React from 'react'
 import type { Control, FieldValues, Path } from 'react-hook-form'
 
 const ResourceIndexationEdition = <T extends FieldValues>({
   control,
   themesPath,
-  supportTypesPath,
-  targetAudiencesPath,
+  resourceTypesPath,
+  beneficiariesPath,
+  professionalSectorsPath,
   required,
 }: {
   control: Control<T>
   themesPath: Path<T>
-  supportTypesPath: Path<T>
-  targetAudiencesPath: Path<T>
+  resourceTypesPath: Path<T>
+  beneficiariesPath: Path<T>
+  professionalSectorsPath: Path<T>
   required?: boolean
 }) => (
   <>
-    <MultipleSelectFormField
-      data-testid="indexation-themes-select"
-      asterisk={required}
-      label="Thématiques"
-      hint={
-        <>
+    <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-8v">
+      <label className="fr-label" htmlFor={themesPath}>
+        Thématiques {required && <RedAsterisk />}
+        <span className="fr-hint-text">
           Quelles sont les principales thématiques abordées par la ressource ?
           <br />
-          Sélectionnez jusqu’à {themesLimit} thématiques.
-        </>
-      }
-      control={control}
-      limit={themesLimit}
-      path={themesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez une thématique"
-      options={themeOptions}
-    />
+          Sélectionner jusqu'à {themesLimit} thématiques.
+        </span>
+      </label>
+      <ResourceIndexationThemesSelect
+        control={control}
+        themesPath={themesPath}
+        data-testid="indexation-themes-select"
+      />
+    </div>
     <MultipleSelectFormField
-      data-testid="indexation-support-types-select"
+      data-testid="indexation-resource-types-select"
       asterisk={required}
-      label="Type de support"
+      label="Type de ressource"
       hint={
         <>
-          Type de support (article, fiche, guide...).
+          Type de ressource (article, fiche, guide...).
           <br />
-          Sélectionnez jusqu’à {supportTypesLimit} types.
+          Sélectionner jusqu'à {resourceTypesLimit} types maximum.
         </>
       }
       control={control}
-      limit={supportTypesLimit}
-      path={supportTypesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez une type de support"
-      options={supportTypeOptions}
+      limit={resourceTypesLimit}
+      path={resourceTypesPath}
+      defaultOptionLabel="Sélectionner un type de ressource"
+      options={resourceTypesOptions}
     />
     <MultipleSelectFormField
-      data-testid="indexation-targetAudiences-select"
+      data-testid="indexation-professional-sectors-select"
       asterisk={required}
-      label="Publics cibles"
+      label="Secteurs professionnels"
       hint={
         <>
-          Quel est le public visé par la ressource ?<br />
-          Sélectionnez jusqu’à {targetAudiencesLimit} publics.
+          Quels sont les secteurs professionnels concernés ?<br />
         </>
       }
       control={control}
-      limit={targetAudiencesLimit}
-      path={targetAudiencesPath}
-      defaultOption
-      defaultOptionLabel="Sélectionnez un public"
-      options={targetAudienceOptions}
+      limit={professionalSectorsLimit}
+      path={professionalSectorsPath}
+      defaultOptionLabel="Sélectionner un secteur professionnel"
+      options={professionalSectorsOptions}
+    />
+    <MultipleSelectFormField
+      data-testid="indexation-beneficiaries-select"
+      asterisk={false}
+      label="Bénéficiaires"
+      hint={
+        <>
+          À quel(s) type(s) de bénéficiaire(s) est destinée votre ressource ?
+          <br />
+          Sélectionner jusqu'à {beneficiariesLimit} bénéficiaires maximum.
+        </>
+      }
+      control={control}
+      limit={beneficiariesLimit}
+      path={beneficiariesPath}
+      defaultOptionLabel="Sélectionner un bénéficiaire"
+      options={beneficiariesOptions}
     />
   </>
 )

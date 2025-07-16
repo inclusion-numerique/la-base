@@ -1,5 +1,11 @@
 import { CreateResourceCommandPayloadValidation } from '@app/web/server/resources/feature/CreateResource'
-import { ContentType, SupportType, TargetAudience, Theme } from '@prisma/client'
+import {
+  Beneficiary,
+  ContentType,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 import z from 'zod'
 
 export const MigrateResourceCommandValidation = z.object({
@@ -10,8 +16,9 @@ export const MigrateResourceCommandValidation = z.object({
     slug: z.string(),
     titleDuplicationCheckSlug: z.string(),
     themes: z.array(z.nativeEnum(Theme)),
-    supportTypes: z.array(z.nativeEnum(SupportType)),
-    targetAudiences: z.array(z.nativeEnum(TargetAudience)),
+    resourceTypes: z.array(z.nativeEnum(ResourceType)),
+    beneficiaries: z.array(z.nativeEnum(Beneficiary)),
+    professionalSectors: z.array(z.nativeEnum(ProfessionalSector)),
     imageId: z.string().uuid().nullable(),
     created: z.date(),
     updated: z.date(),
@@ -55,8 +62,9 @@ export type ResourceMigratedDataV1 = {
   slug: string
   titleDuplicationCheckSlug: string
   themes: Theme[]
-  supportTypes: SupportType[]
-  targetAudiences: TargetAudience[]
+  resourceTypes: ResourceType[]
+  beneficiaries: Beneficiary[]
+  professionalSectors: ProfessionalSector[]
   title: string
   description: string
   baseId: string | null

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewaySecretVersionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#id DataScalewaySecretVersion#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#id DataScalewaySecretVersion#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,43 +17,43 @@ export interface DataScalewaySecretVersionConfig extends cdktf.TerraformMetaArgu
   /**
   * ID of organization the resource is associated to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#organization_id DataScalewaySecretVersion#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#organization_id DataScalewaySecretVersion#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The ID of the project to filter the secret version
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#project_id DataScalewaySecretVersion#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#project_id DataScalewaySecretVersion#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#region DataScalewaySecretVersion#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#region DataScalewaySecretVersion#region}
   */
   readonly region?: string;
   /**
   * The revision of secret version
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#revision DataScalewaySecretVersion#revision}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#revision DataScalewaySecretVersion#revision}
   */
   readonly revision?: string;
   /**
   * The ID of the secret
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#secret_id DataScalewaySecretVersion#secret_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#secret_id DataScalewaySecretVersion#secret_id}
   */
   readonly secretId?: string;
   /**
   * The Name of the secret
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#secret_name DataScalewaySecretVersion#secret_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#secret_name DataScalewaySecretVersion#secret_name}
   */
   readonly secretName?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version scaleway_secret_version}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version scaleway_secret_version}
 */
 export class DataScalewaySecretVersion extends cdktf.TerraformDataSource {
 
@@ -69,7 +69,7 @@ export class DataScalewaySecretVersion extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewaySecretVersion resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewaySecretVersion to import
-  * @param importFromId The id of the existing DataScalewaySecretVersion that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewaySecretVersion that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewaySecretVersion to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -81,7 +81,7 @@ export class DataScalewaySecretVersion extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/secret_version scaleway_secret_version} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/secret_version scaleway_secret_version} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -92,8 +92,8 @@ export class DataScalewaySecretVersion extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_secret_version',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

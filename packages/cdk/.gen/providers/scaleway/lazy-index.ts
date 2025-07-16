@@ -2,6 +2,9 @@
 Object.defineProperty(exports, 'accountProject', { get: function () { return require('./account-project'); } });
 Object.defineProperty(exports, 'accountSshKey', { get: function () { return require('./account-ssh-key'); } });
 Object.defineProperty(exports, 'appleSiliconServer', { get: function () { return require('./apple-silicon-server'); } });
+Object.defineProperty(exports, 'autoscalingInstanceGroup', { get: function () { return require('./autoscaling-instance-group'); } });
+Object.defineProperty(exports, 'autoscalingInstancePolicy', { get: function () { return require('./autoscaling-instance-policy'); } });
+Object.defineProperty(exports, 'autoscalingInstanceTemplate', { get: function () { return require('./autoscaling-instance-template'); } });
 Object.defineProperty(exports, 'baremetalServer', { get: function () { return require('./baremetal-server'); } });
 Object.defineProperty(exports, 'blockSnapshot', { get: function () { return require('./block-snapshot'); } });
 Object.defineProperty(exports, 'blockVolume', { get: function () { return require('./block-volume'); } });
@@ -28,6 +31,7 @@ Object.defineProperty(exports, 'edgeServicesPlan', { get: function () { return r
 Object.defineProperty(exports, 'edgeServicesRouteStage', { get: function () { return require('./edge-services-route-stage'); } });
 Object.defineProperty(exports, 'edgeServicesTlsStage', { get: function () { return require('./edge-services-tls-stage'); } });
 Object.defineProperty(exports, 'edgeServicesWafStage', { get: function () { return require('./edge-services-waf-stage'); } });
+Object.defineProperty(exports, 'fileFilesystem', { get: function () { return require('./file-filesystem'); } });
 Object.defineProperty(exports, 'flexibleIp', { get: function () { return require('./flexible-ip'); } });
 Object.defineProperty(exports, 'flexibleIpMacAddress', { get: function () { return require('./flexible-ip-mac-address'); } });
 Object.defineProperty(exports, 'functionResource', { get: function () { return require('./function-resource'); } });
@@ -44,6 +48,7 @@ Object.defineProperty(exports, 'iamPolicy', { get: function () { return require(
 Object.defineProperty(exports, 'iamSshKey', { get: function () { return require('./iam-ssh-key'); } });
 Object.defineProperty(exports, 'iamUser', { get: function () { return require('./iam-user'); } });
 Object.defineProperty(exports, 'inferenceDeployment', { get: function () { return require('./inference-deployment'); } });
+Object.defineProperty(exports, 'inferenceModel', { get: function () { return require('./inference-model'); } });
 Object.defineProperty(exports, 'instanceImage', { get: function () { return require('./instance-image'); } });
 Object.defineProperty(exports, 'instanceIp', { get: function () { return require('./instance-ip'); } });
 Object.defineProperty(exports, 'instanceIpReverseDns', { get: function () { return require('./instance-ip-reverse-dns'); } });
@@ -62,6 +67,7 @@ Object.defineProperty(exports, 'iotRoute', { get: function () { return require('
 Object.defineProperty(exports, 'ipamIp', { get: function () { return require('./ipam-ip'); } });
 Object.defineProperty(exports, 'ipamIpReverseDns', { get: function () { return require('./ipam-ip-reverse-dns'); } });
 Object.defineProperty(exports, 'jobDefinition', { get: function () { return require('./job-definition'); } });
+Object.defineProperty(exports, 'k8SAcl', { get: function () { return require('./k8s-acl'); } });
 Object.defineProperty(exports, 'k8SCluster', { get: function () { return require('./k8s-cluster'); } });
 Object.defineProperty(exports, 'k8SPool', { get: function () { return require('./k8s-pool'); } });
 Object.defineProperty(exports, 'lb', { get: function () { return require('./lb'); } });
@@ -118,19 +124,19 @@ Object.defineProperty(exports, 'vpcPublicGatewayPatRule', { get: function () { r
 Object.defineProperty(exports, 'vpcRoute', { get: function () { return require('./vpc-route'); } });
 Object.defineProperty(exports, 'webhosting', { get: function () { return require('./webhosting'); } });
 Object.defineProperty(exports, 'dataScalewayAccountProject', { get: function () { return require('./data-scaleway-account-project'); } });
+Object.defineProperty(exports, 'dataScalewayAccountProjects', { get: function () { return require('./data-scaleway-account-projects'); } });
 Object.defineProperty(exports, 'dataScalewayAccountSshKey', { get: function () { return require('./data-scaleway-account-ssh-key'); } });
 Object.defineProperty(exports, 'dataScalewayAvailabilityZones', { get: function () { return require('./data-scaleway-availability-zones'); } });
-Object.defineProperty(exports, 'dataScalewayBaremetalEasyPartitioning', { get: function () { return require('./data-scaleway-baremetal-easy-partitioning'); } });
 Object.defineProperty(exports, 'dataScalewayBaremetalOffer', { get: function () { return require('./data-scaleway-baremetal-offer'); } });
 Object.defineProperty(exports, 'dataScalewayBaremetalOption', { get: function () { return require('./data-scaleway-baremetal-option'); } });
 Object.defineProperty(exports, 'dataScalewayBaremetalOs', { get: function () { return require('./data-scaleway-baremetal-os'); } });
+Object.defineProperty(exports, 'dataScalewayBaremetalPartitionSchema', { get: function () { return require('./data-scaleway-baremetal-partition-schema'); } });
 Object.defineProperty(exports, 'dataScalewayBaremetalServer', { get: function () { return require('./data-scaleway-baremetal-server'); } });
 Object.defineProperty(exports, 'dataScalewayBillingConsumptions', { get: function () { return require('./data-scaleway-billing-consumptions'); } });
 Object.defineProperty(exports, 'dataScalewayBillingInvoices', { get: function () { return require('./data-scaleway-billing-invoices'); } });
 Object.defineProperty(exports, 'dataScalewayBlockSnapshot', { get: function () { return require('./data-scaleway-block-snapshot'); } });
 Object.defineProperty(exports, 'dataScalewayBlockVolume', { get: function () { return require('./data-scaleway-block-volume'); } });
 Object.defineProperty(exports, 'dataScalewayCockpit', { get: function () { return require('./data-scaleway-cockpit'); } });
-Object.defineProperty(exports, 'dataScalewayCockpitPlan', { get: function () { return require('./data-scaleway-cockpit-plan'); } });
 Object.defineProperty(exports, 'dataScalewayCockpitSource', { get: function () { return require('./data-scaleway-cockpit-source'); } });
 Object.defineProperty(exports, 'dataScalewayConfig', { get: function () { return require('./data-scaleway-config'); } });
 Object.defineProperty(exports, 'dataScalewayContainer', { get: function () { return require('./data-scaleway-container'); } });
@@ -146,6 +152,7 @@ Object.defineProperty(exports, 'dataScalewayIamApplication', { get: function () 
 Object.defineProperty(exports, 'dataScalewayIamGroup', { get: function () { return require('./data-scaleway-iam-group'); } });
 Object.defineProperty(exports, 'dataScalewayIamSshKey', { get: function () { return require('./data-scaleway-iam-ssh-key'); } });
 Object.defineProperty(exports, 'dataScalewayIamUser', { get: function () { return require('./data-scaleway-iam-user'); } });
+Object.defineProperty(exports, 'dataScalewayInferenceModel', { get: function () { return require('./data-scaleway-inference-model'); } });
 Object.defineProperty(exports, 'dataScalewayInstanceImage', { get: function () { return require('./data-scaleway-instance-image'); } });
 Object.defineProperty(exports, 'dataScalewayInstanceIp', { get: function () { return require('./data-scaleway-instance-ip'); } });
 Object.defineProperty(exports, 'dataScalewayInstancePlacementGroup', { get: function () { return require('./data-scaleway-instance-placement-group'); } });

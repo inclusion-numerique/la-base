@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayVpcRoutesConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#id DataScalewayVpcRoutes#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#id DataScalewayVpcRoutes#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,43 +17,43 @@ export interface DataScalewayVpcRoutesConfig extends cdktf.TerraformMetaArgument
   /**
   * Only routes with an IPv6 destination will be returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#is_ipv6 DataScalewayVpcRoutes#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#is_ipv6 DataScalewayVpcRoutes#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * Only routes with a matching next hop private network ID will be returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#nexthop_private_network_id DataScalewayVpcRoutes#nexthop_private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#nexthop_private_network_id DataScalewayVpcRoutes#nexthop_private_network_id}
   */
   readonly nexthopPrivateNetworkId?: string;
   /**
   * Only routes with a matching next hop resource ID will be returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#nexthop_resource_id DataScalewayVpcRoutes#nexthop_resource_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#nexthop_resource_id DataScalewayVpcRoutes#nexthop_resource_id}
   */
   readonly nexthopResourceId?: string;
   /**
   * Only Routes with a matching next hop resource type will be returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#nexthop_resource_type DataScalewayVpcRoutes#nexthop_resource_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#nexthop_resource_type DataScalewayVpcRoutes#nexthop_resource_type}
   */
   readonly nexthopResourceType?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#region DataScalewayVpcRoutes#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#region DataScalewayVpcRoutes#region}
   */
   readonly region?: string;
   /**
   * Routes with these exact tags are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#tags DataScalewayVpcRoutes#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#tags DataScalewayVpcRoutes#tags}
   */
   readonly tags?: string[];
   /**
   * Only routes within this VPC will be returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#vpc_id DataScalewayVpcRoutes#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#vpc_id DataScalewayVpcRoutes#vpc_id}
   */
   readonly vpcId?: string;
 }
@@ -189,7 +189,7 @@ export class DataScalewayVpcRoutesRoutesList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes scaleway_vpc_routes}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes scaleway_vpc_routes}
 */
 export class DataScalewayVpcRoutes extends cdktf.TerraformDataSource {
 
@@ -205,7 +205,7 @@ export class DataScalewayVpcRoutes extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayVpcRoutes resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcRoutes to import
-  * @param importFromId The id of the existing DataScalewayVpcRoutes that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcRoutes that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcRoutes to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -217,7 +217,7 @@ export class DataScalewayVpcRoutes extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/data-sources/vpc_routes scaleway_vpc_routes} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/vpc_routes scaleway_vpc_routes} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -228,8 +228,8 @@ export class DataScalewayVpcRoutes extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_vpc_routes',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

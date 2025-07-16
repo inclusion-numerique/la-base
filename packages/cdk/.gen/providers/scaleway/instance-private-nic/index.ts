@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic
+// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InstancePrivateNicConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#id InstancePrivateNic#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#id InstancePrivateNic#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,65 +17,162 @@ export interface InstancePrivateNicConfig extends cdktf.TerraformMetaArguments {
   /**
   * IPAM ip list, should be for internal use only
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#ip_ids InstancePrivateNic#ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#ip_ids InstancePrivateNic#ip_ids}
   */
   readonly ipIds?: string[];
   /**
   * IPAM IDs of a pre-reserved IP addresses to assign to the Instance in the requested private network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#ipam_ip_ids InstancePrivateNic#ipam_ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#ipam_ip_ids InstancePrivateNic#ipam_ip_ids}
   */
   readonly ipamIpIds?: string[];
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#private_network_id InstancePrivateNic#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#private_network_id InstancePrivateNic#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * The server ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#server_id InstancePrivateNic#server_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#server_id InstancePrivateNic#server_id}
   */
   readonly serverId: string;
   /**
   * The tags associated with the private-nic
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#tags InstancePrivateNic#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#tags InstancePrivateNic#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#zone InstancePrivateNic#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#zone InstancePrivateNic#zone}
   */
   readonly zone?: string;
   /**
+  * private_ips block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#private_ips InstancePrivateNic#private_ips}
+  */
+  readonly privateIps?: InstancePrivateNicPrivateIps[] | cdktf.IResolvable;
+  /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#timeouts InstancePrivateNic#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#timeouts InstancePrivateNic#timeouts}
   */
   readonly timeouts?: InstancePrivateNicTimeouts;
 }
+export interface InstancePrivateNicPrivateIps {
+}
+
+export function instancePrivateNicPrivateIpsToTerraform(struct?: InstancePrivateNicPrivateIps | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function instancePrivateNicPrivateIpsToHclTerraform(struct?: InstancePrivateNicPrivateIps | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class InstancePrivateNicPrivateIpsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): InstancePrivateNicPrivateIps | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: InstancePrivateNicPrivateIps | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class InstancePrivateNicPrivateIpsList extends cdktf.ComplexList {
+  public internalValue? : InstancePrivateNicPrivateIps[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): InstancePrivateNicPrivateIpsOutputReference {
+    return new InstancePrivateNicPrivateIpsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface InstancePrivateNicTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#create InstancePrivateNic#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#create InstancePrivateNic#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#default InstancePrivateNic#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#default InstancePrivateNic#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#delete InstancePrivateNic#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#delete InstancePrivateNic#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#read InstancePrivateNic#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#read InstancePrivateNic#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#update InstancePrivateNic#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#update InstancePrivateNic#update}
   */
   readonly update?: string;
 }
@@ -285,7 +382,7 @@ export class InstancePrivateNicTimeoutsOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic scaleway_instance_private_nic}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic scaleway_instance_private_nic}
 */
 export class InstancePrivateNic extends cdktf.TerraformResource {
 
@@ -301,7 +398,7 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InstancePrivateNic resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InstancePrivateNic to import
-  * @param importFromId The id of the existing InstancePrivateNic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InstancePrivateNic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InstancePrivateNic to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -313,7 +410,7 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.53.0/docs/resources/instance_private_nic scaleway_instance_private_nic} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_private_nic scaleway_instance_private_nic} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -324,8 +421,8 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_private_nic',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.53.0',
-        providerVersionConstraint: '>= 2.53.0'
+        providerVersion: '2.57.0',
+        providerVersionConstraint: '>= 2.57.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -342,6 +439,7 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
     this._serverId = config.serverId;
     this._tags = config.tags;
     this._zone = config.zone;
+    this._privateIps.internalValue = config.privateIps;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -460,6 +558,22 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
     return this._zone;
   }
 
+  // private_ips - computed: false, optional: true, required: false
+  private _privateIps = new InstancePrivateNicPrivateIpsList(this, "private_ips", false);
+  public get privateIps() {
+    return this._privateIps;
+  }
+  public putPrivateIps(value: InstancePrivateNicPrivateIps[] | cdktf.IResolvable) {
+    this._privateIps.internalValue = value;
+  }
+  public resetPrivateIps() {
+    this._privateIps.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get privateIpsInput() {
+    return this._privateIps.internalValue;
+  }
+
   // timeouts - computed: false, optional: true, required: false
   private _timeouts = new InstancePrivateNicTimeoutsOutputReference(this, "timeouts");
   public get timeouts() {
@@ -489,6 +603,7 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
       server_id: cdktf.stringToTerraform(this._serverId),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       zone: cdktf.stringToTerraform(this._zone),
+      private_ips: cdktf.listMapper(instancePrivateNicPrivateIpsToTerraform, true)(this._privateIps.internalValue),
       timeouts: instancePrivateNicTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }
@@ -536,6 +651,12 @@ export class InstancePrivateNic extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      private_ips: {
+        value: cdktf.listMapperHcl(instancePrivateNicPrivateIpsToHclTerraform, true)(this._privateIps.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "InstancePrivateNicPrivateIpsList",
       },
       timeouts: {
         value: instancePrivateNicTimeoutsToHclTerraform(this._timeouts.internalValue),

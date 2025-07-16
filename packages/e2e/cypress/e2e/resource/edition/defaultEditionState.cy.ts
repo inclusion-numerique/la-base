@@ -36,7 +36,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
     it('Acceptation 1 - Seulement la premiere edition redirige vers la publication', () => {
       cy.testId('add-content-button').click()
-      cy.testId('add-Text-content-button').click()
+      cy.testId('add-Text-content-button').click({ force: true })
       cy.testId('Titre 1-button').click()
       cy.testId('text-input').type('Un titre assez stylé')
       cy.testId('add-content_form__submit').click()
@@ -69,7 +69,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         'Publier les modifications',
       )
       cy.testId('add-content-button').click()
-      cy.testId('add-Text-content-button').click()
+      cy.testId('add-Text-content-button').click({ force: true })
       cy.testId('Titre 1-button').click()
       cy.testId('text-input').type('Un deuxième titre moins stylé')
       cy.intercept('/api/trpc/resource.mutate?*').as('mutation2')
