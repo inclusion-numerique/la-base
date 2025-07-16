@@ -9,7 +9,7 @@ const InviteMember = z.object({
   type: InviteTypeMember,
 })
 
-const InviteMemberEmail = z.object({
+export const InviteMemberEmail = z.object({
   type: InviteTypeMember,
   email: z.string(),
 })

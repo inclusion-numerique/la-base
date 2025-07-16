@@ -35,7 +35,7 @@ const ProConnectSigninButton = ({
           'fr-mb-4v fr-width-full fr-justify-content-center',
         )}
         onClick={onClick}
-        title="S’identifier avec Pro Connect"
+        title="S’identifier avec ProConnect"
       >
         <img src="/images/services/pro-connect-logo.svg" alt="" />
         <span className="fr-ml-1v fr-text--left">
@@ -50,7 +50,7 @@ const ProConnectSigninButton = ({
         target="_blank"
         rel="noreferrer"
       >
-        En savoir plus sur Pro Connect
+        En savoir plus sur ProConnect
       </a>
     </div>
   )

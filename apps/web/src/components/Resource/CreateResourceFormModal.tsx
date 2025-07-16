@@ -15,7 +15,6 @@ import {
   type CreateResourceCommandClientPayload,
   CreateResourceCommandClientPayloadValidation,
 } from '@app/web/server/resources/feature/CreateResource'
-import type { CreateResource } from '@app/web/server/rpc/resource/createResource'
 import {
   resourceDescriptionMaxLength,
   resourceTitleMaxLength,
@@ -24,8 +23,9 @@ import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useOnClickOutside } from 'usehooks-ts'
 
 const titleInfo = (title?: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
@@ -41,6 +41,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   // Step 1: Base selection ONLY if user has bases
   const [step, setStep] = useState(0)
   const router = useRouter()
+  const ref = useRef<HTMLFormElement | null>(null)
 
   const createResourceIsInSearchParams =
     typeof useSearchParams()?.get('creer-une-ressource') === 'string'
@@ -57,6 +58,11 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
       CreateResourceDynamicModal.open()
     }
   }, [createResourceIsInSearchParams, modalIsBound])
+  const onModalClose = () => {
+    reset(defaultValues)
+    setStep(0)
+  }
+  useOnClickOutside(ref as RefObject<HTMLFormElement>, onModalClose)
 
   const create = trpc.resource.create.useMutation()
   const {
@@ -77,17 +83,14 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   }, [baseId, setValue])
 
   useModalVisibility(createResourceModalId, {
-    onClosed: () => {
-      reset(defaultValues)
-      setStep(0)
-    },
+    onClosed: onModalClose,
   })
 
   const { confirmLabel, canCreate } =
     step === 0
       ? {
-          confirmLabel: 'Continuer',
-          canCreate: false,
+          confirmLabel: baseId ? 'Commencer l’édition' : 'Continuer',
+          canCreate: !!baseId,
         }
       : {
           confirmLabel:
@@ -134,14 +137,19 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
   const disabled = isSubmitting
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} ref={ref}>
       <CreateResourceDynamicModal.Component
         title={modalTitle}
         buttons={[
           {
             title: 'Annuler',
             priority: 'secondary',
-            doClosesModal: true,
+            onClick: () => {
+              CreateResourceDynamicModal.close()
+              // Fallback cleanup due to known bug where onClosed doesn't trigger consistently
+              reset(defaultValues)
+              setStep(0)
+            },
             children: 'Annuler',
             type: 'button',
             disabled,

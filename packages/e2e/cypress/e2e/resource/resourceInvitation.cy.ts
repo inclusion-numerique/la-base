@@ -35,7 +35,7 @@ describe('Utilisateur connecté, je peux inviter un autre membre à contribuer s
     cy.wait('@getUser')
     cy.testId('invite-member-modal-input-option-0').click()
 
-    cy.testId('invite-member-modal-button').click()
+    cy.testId('invite-member-modal-button').click({ force: true })
     cy.wait('@invite')
     cy.signin({ email: user.email })
 

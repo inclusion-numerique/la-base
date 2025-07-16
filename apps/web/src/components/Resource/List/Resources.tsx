@@ -77,7 +77,6 @@ const Resources = ({
       </div>
       {canWrite ? (
         <Tabs
-          className="fr-overflow-hidden"
           tabs={[
             {
               label: `Publiques · ${publics.length}`,

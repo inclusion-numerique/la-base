@@ -32,6 +32,7 @@ export const resource = {
   isPublic: true,
   createdBy: {
     id: '1',
+    email: 'jean.biche@example.com',
     slug: 'jean-biche',
     name: 'Jean Biche',
     firstName: 'Jean',

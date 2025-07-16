@@ -47,10 +47,9 @@ export const viewport: Viewport = {
 }
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
+  const user = await getSessionUser()
   // Do we want to disable SSG for CSFR on this website ?
   // const nonce = headers().get('x-sde-script-nonce') ?? undefined
-  const user = await getSessionUser()
-
   const nonce = undefined
   return (
     <html lang="fr" data-fr-theme="light" data-fr-scheme="light">
@@ -69,6 +68,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
         <EnvInformation />
         {children}
         {user ? <CreateResourceFormModal user={user} /> : null}
+
         <Toaster />
         <LazyFeedbackModal />
       </body>

@@ -18,14 +18,13 @@ const BaseImages = (
       },
 ) => {
   const { base, editMode } = props
-
   return (
     <>
       <div
         className={classNames(
           styles.banner,
-          base.coverImage && styles.imageAspectRatio,
-          !base.coverImage && 'fr-mt-16v',
+          (base.coverImage || editMode) && styles.imageAspectRatio,
+          !base.coverImage && !editMode && 'fr-mt-16v',
         )}
       >
         {base.coverImage ? (
@@ -38,8 +37,14 @@ const BaseImages = (
               { media: '(max-width: 576px)', width: 1200 },
             ]}
           />
+        ) : editMode ? (
+          <div className={styles.placeholderImage} />
         ) : null}
-        {editMode && <ImageEdition base={base} type="coverImage" />}
+        {editMode && (
+          <>
+            <ImageEdition base={base} type="coverImage" />
+          </>
+        )}
       </div>
       <div className={styles.logoContainer}>
         <BaseImage

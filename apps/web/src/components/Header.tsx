@@ -148,6 +148,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     </>
                   ) : (
                     <Button
+                      className="fr-px-md-0 fr-px-2w"
                       linkProps={{
                         href: '/connexion',
                       }}

@@ -39,7 +39,7 @@ const ProfileBaseCard = ({
           <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
         </Link>
         <BaseMetadata
-          className="fr-text-mention--grey"
+          className="fr-text-mention--grey fr-align-items-start"
           base={base}
           smallBadge
           context="profile"

@@ -41,7 +41,12 @@ const SigninPage = async ({
         {raison === 'connexion-sans-compte' ? (
           <Notice
             className="fr-mt-6v fr-notice--warning"
-            title="Nous n’avons pas de compte associé à cette adresse email. Veuillez créer un compte pour vous connecter."
+            title={
+              <span className="fr-text--regular fr-text-label--grey">
+                Nous n’avons pas de compte associé à cette adresse email.
+                Veuillez créer un compte pour vous connecter.
+              </span>
+            }
           />
         ) : null}
         <SignupPanel error={error} email={email} callbackUrl={callbackUrl} />

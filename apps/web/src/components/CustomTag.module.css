@@ -25,14 +25,18 @@
   flex-shrink: 0;
 }
 
-:global(.fr-tag--sm).iconOnly::before {
+.iconOnly::before {
   margin-left: 0 !important;
   margin-right: 0 !important;
+
+  @media (max-width: 48rem) {
+    --icon-size: 16px !important;
+  }
 }
 
 .iconOnly {
-  padding: 6px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 8px;
 
   @media (min-width: 48rem) {
     padding: 16px;

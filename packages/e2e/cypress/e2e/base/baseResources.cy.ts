@@ -26,9 +26,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.get('@modal')
       .findByLabelText(/^Description/)
       .type('Une description')
-    cy.get('@modal').find('button').contains('Continuer').click()
-    cy.get('@modal').find('label').eq(1).click()
-    cy.get('@modal').find('button').contains('Commencer').click()
+    cy.get('@modal').find('button').contains('Commencer l’édition').click()
     cy.appUrlShouldBe(`/ressources/un-titre/editer`)
     cy.get('@modal').should('not.exist')
 

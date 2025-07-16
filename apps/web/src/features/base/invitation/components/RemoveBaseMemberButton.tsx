@@ -101,10 +101,8 @@ const RemoveBaseMemberButton = ({
           <Notice
             className="fr-notice--warning"
             title={
-              <span>
-                <span className="fr-text--bold fr-text-label--grey">
-                  {memberName}
-                </span>
+              <span className="fr-text--regular fr-text-label--grey">
+                <span className="fr-text--bold">{memberName}</span>
                 &nbsp;ne pourra plus contribuer à la base&nbsp;
                 <span className="fr-text--bold fr-text-label--grey">
                   {base.title}

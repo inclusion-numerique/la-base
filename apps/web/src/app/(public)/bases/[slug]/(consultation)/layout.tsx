@@ -2,6 +2,7 @@ import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consulta
 import type { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import PrivateBox from '@app/web/components/PrivateBox'
+import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import BaseHeader, {
   headerSkipLink,
@@ -68,9 +69,9 @@ const BaseLayout = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseHeader base={base} canWrite={canWrite} user={user} />
-      <main id={contentId}>
+      <main id={contentId} className="fr-overflow-hidden">
         <BaseMenu base={base} />
-        <div className="fr-container fr-container--medium fr-mb-16w">
+        <div className="fr-container fr-container--medium fr-mb-24w">
           {children}
         </div>
       </main>
