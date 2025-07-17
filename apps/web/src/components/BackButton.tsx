@@ -17,12 +17,12 @@ const BackButton = ({
     <Button
       priority="tertiary no outline"
       size="small"
-      className={classNames('fr-mt-4v fr-mb-4v', className)}
+      className={classNames('fr-mt-4v fr-mb-4v fr-pl-0', className)}
       onClick={() => router.back()}
     >
-      <div className="fr-border-bottom fr-border--blue-france-high">
+      <div>
         <span className="fr-icon-arrow-left-line fr-icon--sm fr-mr-2v" />
-        {children}
+        <span className="fr-text--md">{children}</span>
       </div>
     </Button>
   )

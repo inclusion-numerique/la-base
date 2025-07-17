@@ -11,6 +11,7 @@ import React from 'react'
 
 const BaseMembers = ({
   base,
+  isBaseAdmin,
   canAddAdmin,
   canAddMember,
   canChangeMemberRole,
@@ -18,6 +19,7 @@ const BaseMembers = ({
   sortBy,
 }: {
   base: BasePageData
+  isBaseAdmin: boolean
   canAddMember: boolean
   canChangeMemberRole: boolean
   canAddAdmin: boolean
@@ -35,7 +37,7 @@ const BaseMembers = ({
 
   return (
     <div data-testid="base-members">
-      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-reverse fr-mb-4w">
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-4w">
         <div className="fr-col-sm-auto fr-col-12">
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-team-line" />
@@ -45,21 +47,24 @@ const BaseMembers = ({
           </div>
         </div>
         {canAddMember && (
-          <div className="fr-col-sm-auto fr-col-12 fr-mb-5w fr-mb-md-2w">
+          <div className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0">
             <InviteBaseMemberButton
               className="fr-width-full fr-justify-content-center"
               base={base}
               canAddAdmin={canAddAdmin}
+              isBaseAdmin={isBaseAdmin}
             />
           </div>
         )}
       </div>
       <div className="fr-mb-2w fr-flex fr-align-items-center fr-justify-content-space-between fr-flex-gap-3v">
-        <div className="fr-flex fr-align-items-center fr-flex-gap-3v">
+        <div className="fr-hidden fr-unhidden-sm fr-flex fr-align-items-center fr-flex-gap-3v">
           <span className="fr-text--medium">
             {adminCount} administrateur{sPluriel(adminCount)}
             {contributorsCount > 0 &&
-              ` · ${contributorsCount} contributeur${sPluriel(contributorsCount)}`}
+              ` · ${contributorsCount} contributeur${sPluriel(
+                contributorsCount,
+              )}`}
           </span>
           {invitationsCount > 0 && (
             <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">

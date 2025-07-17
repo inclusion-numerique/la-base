@@ -1,6 +1,7 @@
 import { resourceAuthorization } from '@app/web/authorization/models/resourceAuthorization'
 import { prismaClient } from '@app/web/prismaClient'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 import { InviteContributorCommandValidation } from '../../resourceContributors/inviteContributors'
@@ -71,37 +72,137 @@ export const resourceContributorRouter = router({
       )
 
       if (
-        resource.contributors.some(({ contributorId }) =>
-          input.contributors.includes(contributorId),
-        )
+        (!input.contributors || input.contributors.length === 0) &&
+        (!input.newMembers || input.newMembers.length === 0)
       ) {
-        return invalidError()
+        return invalidError(
+          'Veuillez sélectionner au moins un contributeur à inviter',
+        )
       }
 
-      const contributors = await prismaClient.user.findMany({
-        select: { id: true, email: true },
-        where: { id: { in: input.contributors } },
-      })
-      for (const contributor of contributors) {
-        const contributorId = input.contributors.find(
-          (x) => x === contributor.id,
+      if (input.contributors && input.contributors.length > 0) {
+        /**
+         * Do not re-add existing contributors
+         */
+        const contributorsToAdd = input.contributors.filter(
+          (inputContributor) =>
+            !resource.contributors.some(
+              (resourceContributor) =>
+                resourceContributor.contributorId === inputContributor.id,
+            ),
         )
-        if (contributorId) {
+        const contributorsUserIds = contributorsToAdd.map((c) => c.id)
+
+        const contributors = await prismaClient.user.findMany({
+          select: { id: true, email: true },
+          where: { id: { in: contributorsUserIds } },
+        })
+
+        for (const contributor of contributors) {
+          const contributorToAdd = contributorsToAdd.find(
+            (c) => c.id === contributor.id,
+          )
+          if (contributorToAdd) {
+            await prismaClient.resourceContributors.create({
+              data: {
+                resourceId: input.resourceId,
+                contributorId: contributorToAdd.id,
+              },
+            })
+
+            sendNewContributorEmail({
+              from: user,
+              url: `/ressources/${resource.slug}`,
+              email: contributor.email,
+              resource,
+            }).catch((error) => {
+              Sentry.captureException(error)
+            })
+          }
+        }
+      }
+
+      if (input.newMembers && input.newMembers.length > 0) {
+        const existingUsers = await prismaClient.user.findMany({
+          where: {
+            email: {
+              in: input.newMembers.map((member) => member.email),
+            },
+          },
+        })
+
+        /**
+         * Do not re-add existing contributors in the resource
+         */
+        const existingContributorIds = resource.contributors.map(
+          (c) => c.contributorId,
+        )
+        const existingContributors = await prismaClient.user.findMany({
+          select: { id: true, email: true },
+          where: { id: { in: existingContributorIds } },
+        })
+
+        const membersToProcess = input.newMembers.filter(
+          (inputMember) =>
+            !existingContributors.some(
+              (existingContributor) =>
+                existingContributor.email === inputMember.email,
+            ),
+        )
+
+        const createResourceContributor = async (
+          member: { email: string },
+          contributorId: string,
+          sendEmail: boolean = true,
+        ) => {
           await prismaClient.resourceContributors.create({
             data: {
               resourceId: input.resourceId,
               contributorId,
             },
           })
+          if (sendEmail) {
+            sendNewContributorEmail({
+              from: user,
+              url: `/ressources/${resource.slug}`,
+              email: member.email,
+              resource,
+            }).catch((error) => Sentry.captureException(error))
+          }
+        }
 
-          sendNewContributorEmail({
-            from: user,
-            url: `/ressources/${resource.slug}`,
-            email: contributor.email,
-            resource,
-          }).catch((error) => {
-            Sentry.captureException(error)
+        // We process existing users accounts first to avoid creating new users if they already exist
+        const existingUsersToAdd = membersToProcess.filter((inputMember) =>
+          existingUsers.some(
+            (existingUser) => existingUser.email === inputMember.email,
+          ),
+        )
+
+        for (const member of existingUsersToAdd) {
+          const existingUser = existingUsers.find(
+            (u) => u.email === member.email,
+          )
+          if (existingUser) {
+            await createResourceContributor(member, existingUser.id)
+          }
+        }
+
+        const newUsersToAdd = membersToProcess.filter(
+          (inputMember) =>
+            !existingUsers.some(
+              (existingUser) => existingUser.email === inputMember.email,
+            ),
+        )
+
+        for (const member of newUsersToAdd) {
+          const slug = await createAvailableSlug('utilisateur', 'users')
+          const createdUser = await prismaClient.user.create({
+            data: {
+              email: member.email,
+              slug,
+            },
           })
+          await createResourceContributor(member, createdUser.id, false)
         }
       }
     }),

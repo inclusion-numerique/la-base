@@ -3,6 +3,7 @@ import {
   ResourceRoles,
   resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
+import BackButton from '@app/web/components/BackButton'
 import EmptyBaseCollections from '@app/web/components/Base/EmptyBaseCollections'
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
@@ -30,12 +31,13 @@ const CollectionView = ({
 }) => (
   <>
     <CollectionViewHeader collection={collection} />
-    <div>
+    <div className="fr-mb-50v">
       <div className="fr-border-bottom fr-border--grey">
         <div className="fr-container fr-container--medium fr-my-5v">
           {collection.slug && (
             <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-2v">
               <CollectionMetaData
+                className="fr-my-2v"
                 collection={{
                   title: collection.title,
                   id: collection.id,
@@ -47,6 +49,7 @@ const CollectionView = ({
                 }}
                 count={collection.resources.length}
                 context="view"
+                withPrivacyTag={!collection.isPublic}
               />
               <div className="fr-hidden fr-unhidden-md">
                 {collection.isFavorites ? (
@@ -71,24 +74,21 @@ const CollectionView = ({
                   />
                 )}
               </div>
+              {!collection.isFavorites && (
+                <div className="fr-hidden-sm">
+                  <CollectionActions
+                    resourcesCount={collection.resources.length}
+                    collection={collection}
+                    canWrite={isOwner || canWrite}
+                    user={user}
+                    context="view"
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
-      {!collection.isFavorites && (
-        <div className="fr-hidden-sm fr-border-bottom fr-border--grey">
-          <div className="fr-container fr-container--medium fr-my-5v">
-            <CollectionActions
-              resourcesCount={collection.resources.length}
-              className="fr-justify-content-space-between"
-              collection={collection}
-              canWrite={isOwner || canWrite}
-              user={user}
-              context="view"
-            />
-          </div>
-        </div>
-      )}
       <div className="fr-container fr-container--medium fr-pt-12v">
         {collection.resources.length > 0 ? (
           collection.resources.map(({ resource }, index) => (

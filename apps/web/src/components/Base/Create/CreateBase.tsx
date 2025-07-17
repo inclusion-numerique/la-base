@@ -134,14 +134,16 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="fr-container fr-flex">
+      <div className="fr-container fr-flex-md">
         <CreateBaseSideMenu />
         <div className="fr-container--slim">
-          <h1 className="fr-page-title">Créer une base</h1>
+          <h1 className="fr-page-title">Création d'une base</h1>
           <Card
-            title="Informations"
+            noBorder
+            title="Informations de la base"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="informations"
             description={
               <span className="fr-text--sm fr-hint-text fr-mb-0">
@@ -159,9 +161,11 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             />
           </Card>
           <Card
-            title="Contacts"
+            noBorder
+            title="Contacts de la base"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="contacts"
             description={
               <span className="fr-text--sm fr-hint-text fr-mb-0">
@@ -179,9 +183,11 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             />
           </Card>
           <Card
+            noBorder
             title="Visibilité de la base"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="visibilite"
             description="Choisissez la visibilité de votre base. Vous pourrez modifier sa visibilité à tout moment."
             contentSeparator
@@ -198,9 +204,11 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             />
           </Card>
           <Card
+            noBorder
             id="inviter"
-            className="fr-mt-3w"
+            className="fr-border-radius--8 fr-border fr-mt-3w"
             title="Inviter des membres"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
             description="Les membres peuvent voir, créer, publier et contribuer à l’ensemble des ressources liées à votre base. Vous pouvez également ajouter des administrateurs qui pourront inviter et gérer les membres de la base."
             contentSeparator
@@ -229,9 +237,11 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             />
           </Card>
           <Card
-            className="fr-mt-3w"
+            noBorder
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="photos"
             title="Image & couverture"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
             description="Ajouter une image et une image de couverture pour rendre votre base identifiable et attirer les visiteurs."
             contentSeparator
@@ -273,10 +283,12 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
           </Card>
 
           <ButtonsGroup
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-mb-50v"
             buttons={[
               {
-                nativeButtonProps: { 'data-testid': 'create-button' },
+                nativeButtonProps: {
+                  'data-testid': 'create-button',
+                },
                 type: 'submit',
                 children: 'Créer la base',
                 ...buttonLoadingClassname(isLoading),

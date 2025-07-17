@@ -13,6 +13,7 @@ import {
 import { trpc } from '@app/web/trpc'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -99,6 +100,7 @@ const BaseVisibilityForm = ({
         </PrivateModal>
       )}
       <EditCard
+        noBorder
         id="visibilite"
         noRefresh
         mutation={async (data) => {
@@ -122,7 +124,18 @@ const BaseVisibilityForm = ({
         className={className}
         title="Visibilité de la base"
         titleAs="h2"
-        description="Choisissez la visibilité de votre base."
+        description={
+          <span className="fr-text--sm">
+            Choisissez ce que les visiteurs peuvent voir sur votre base.&nbsp;
+            <br className="fr-hidden-sm fr-unhidden" />
+            <Link
+              href="/centre-d-aide/une-base#visibilite-base"
+              className="fr-link fr-text--sm"
+            >
+              En savoir plus
+            </Link>
+          </span>
+        }
         form={form}
         edition={
           <VisibilityField

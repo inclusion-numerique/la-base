@@ -40,7 +40,6 @@ const ResourceCard = ({
         user={resource.createdBy}
         base={resource.base}
         attributionWording={isDraft ? 'draft-resource' : 'resource'}
-        displayUser={false}
       />
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
         <ResourceDates canEdit={isContributor} resource={resource} />
@@ -87,7 +86,7 @@ const ResourceCard = ({
                   className="fr-mb-sm-0 fr-mb-3v"
                   value={resource.feedbackAverage}
                 />
-                <span className="fr-text--semi-bold fr-mb-sm-0 fr-mb-3v">
+                <span className="fr-text--medium fr-mb-sm-0 fr-mb-3v">
                   {resource._count.resourceFeedback}&nbsp;Avis
                 </span>
               </>

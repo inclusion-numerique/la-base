@@ -1,6 +1,6 @@
 .card {
   width: 100%;
-  margin: 56px auto 120px;
+  margin: 0 auto 120px;
   background: var(--background-default-grey);
   padding: 48px 16px;
   border-radius: 8px;

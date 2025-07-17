@@ -147,14 +147,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.get('@modal')
       .findByLabelText(/^Description/)
       .type('Une description')
-    cy.get('@modal').find('button').contains('Continuer').click()
-    cy.get('@modal').contains('ajouter cette ressource')
-    cy.get('@modal').find('label').first().contains('mon profil')
-    cy.get('@modal').find('label').first().contains('Profil privé')
-
-    cy.get('@modal').find('label').eq(1).contains(base.title)
-
-    cy.get('@modal').find('button').contains('Commencer').click()
+    cy.get('@modal').find('button').contains('Commencer l’édition').click()
 
     cy.appUrlShouldBe(`/ressources/${createSlug(title)}/editer`)
 

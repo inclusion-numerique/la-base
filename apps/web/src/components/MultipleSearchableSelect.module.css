@@ -67,3 +67,12 @@
   position: relative;
   z-index: 1;
 }
+
+.addButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  @media (min-width: 768px) {
+    width: unset;
+  }
+}

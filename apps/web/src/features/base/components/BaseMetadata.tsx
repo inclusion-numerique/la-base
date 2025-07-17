@@ -28,47 +28,50 @@ const BaseMetadata = ({
     context === 'base'
       ? `Vue${sPluriel(resourcesViews)} sur les ressources`
       : `Vue${sPluriel(resourcesViews)}`
-
   return (
-    <div className={classNames(styles.container, 'fr-text--sm', className)}>
-      <span className="fr-icon-file-text-line fr-icon--sm" />
-      <div>
-        <b>{numberToString(resourcesCount)}</b>
-        <span className={styles.spanMdDisplay}>
-          {' '}
-          Ressource{sPluriel(resourcesCount)}
-        </span>
-      </div>
-      <div>·</div>
-      <span className="fr-icon-user-heart-line fr-icon--sm" />
-      <div>
-        <b>{numberToString(followedBy)}</b>
-        <span className={styles.spanMdDisplay}>
-          {' '}
-          Suivi{sPluriel(followedBy)}
-        </span>
-      </div>
-      <div>·</div>
-      <span className="fr-icon-eye-line fr-icon--sm" />
-      <div>
-        <b>{numberToString(resourcesViews)}</b>
-        <span className={styles.spanMdDisplay}> {viewsLabel}</span>
+    <div
+      className={classNames(
+        'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-center fr-flex-gap-4v fr-flex-gap-md-2v',
+        className,
+      )}
+    >
+      <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm">
+        <span className="fr-icon-file-text-line fr-icon--sm" />
+        <div>
+          <b>{numberToString(resourcesCount)}</b>
+          <span className={styles.spanMdDisplay}>
+            {' '}
+            Ressource{sPluriel(resourcesCount)}
+          </span>
+        </div>
+        <div>·</div>
+        <span className="fr-icon-user-heart-line fr-icon--sm" />
+        <div>
+          <b>{numberToString(followedBy)}</b>
+          <span className={styles.spanMdDisplay}>
+            {' '}
+            Suivi{sPluriel(followedBy)}
+          </span>
+        </div>
+        <div>·</div>
+        <span className="fr-icon-eye-line fr-icon--sm" />
+        <div>
+          <b>{numberToString(resourcesViews)}</b>
+          <span className={styles.spanMdDisplay}> {viewsLabel}</span>
+        </div>
       </div>
       {!!base.department && context === 'base' && (
         <>
-          <div>·</div>
-          <span className="fr-icon-eye-line fr-icon--sm" />
-          <div>
-            <span className={styles.spanMdDisplay}>
-              {' '}
-              {getDepartmentName(base.department)}
-            </span>
-          </div>
+          <div className="fr-hidden fr-unhidden-sm">·</div>
+          <span className="fr-text--sm fr-mb-0">
+            <span className="fr-icon-map-pin-2-line fr-mr-2v fr-icon--sm" />
+            {getDepartmentName(base.department)}
+          </span>
         </>
       )}
       {withBadge && (
         <>
-          <div>·</div>
+          <div className="fr-hidden fr-unhidden-sm">·</div>
           <BasePrivacyTag small={smallBadge} isPublic={base.isPublic} />
         </>
       )}

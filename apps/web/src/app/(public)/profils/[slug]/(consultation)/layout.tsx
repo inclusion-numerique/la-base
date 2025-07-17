@@ -8,6 +8,7 @@ import ProfileHeader, {
   headerSkipLink,
 } from '@app/web/components/Profile/ProfileHeader'
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
+import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'

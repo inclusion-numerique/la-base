@@ -25,7 +25,21 @@
   flex-shrink: 0;
 }
 
+.iconOnly::before {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  @media (max-width: 48rem) {
+    --icon-size: 16px !important;
+  }
+}
+
 .iconOnly {
-  padding: 16px;
+  padding: 8px;
   border-radius: 8px;
+
+  @media (min-width: 48rem) {
+    padding: 16px;
+    border-radius: 8px;
+  }
 }

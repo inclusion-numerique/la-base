@@ -7,7 +7,6 @@ import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
-import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
 import EmptyBox from '@app/web/components/EmptyBox'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import VisibilityField from '@app/web/components/VisibilityField'
@@ -198,7 +197,8 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
         priority: 'success',
         message: (
           <>
-            Ajoutée à la collection <strong>{result.collection.title}</strong>
+            Ajoutée à la collection&nbsp;
+            <strong className={styles.title}>{result.collection.title}</strong>
           </>
         ),
       })
@@ -339,7 +339,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
           inCollectionCreation
             ? [
                 {
-                  children: 'Enregistrer',
+                  children: 'Créer la collection',
                   priority: 'primary',
                   type: 'submit',
                   doClosesModal: false,
@@ -362,9 +362,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
             : showCreateCollectionButton
               ? [
                   {
-                    children: `Créer une collection de ${
-                      inBaseDirectory ? 'base' : 'profil'
-                    }`,
+                    children: 'Créer une collection',
                     type: 'button',
                     priority: 'secondary',
                     iconId: 'ri-folder-add-line',
@@ -410,7 +408,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 />
               )}
               <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-                <b className="fr-text-title--grey fr-text--start">
+                <b
+                  className={classNames(
+                    'fr-text-title--grey fr-text--start',
+                    styles.title,
+                  )}
+                >
                   {inBaseDirectory
                     ? inBaseDirectory.title
                     : `${user.name} - Mes collections`}
@@ -558,7 +561,18 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     </Link>
                   </p>
                   <div data-testid="create-resource-button">
-                    <CreateCollectionButton title="Créer une collection de profil" />
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        viewCollectionCreation(inBaseDirectory?.id)
+                      }
+                      nativeButtonProps={{
+                        key: 'view-collection-creation',
+                      }}
+                    >
+                      <span className="ri-folder-add-line fr-mr-1w" />
+                      Créer une collection
+                    </Button>
                   </div>
                 </EmptyBox>
               )}
@@ -602,7 +616,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     }}
                   >
                     <span className="ri-folder-add-line fr-mr-1w" />
-                    Créer une collection de base
+                    Créer une collection
                   </Button>
                 </div>
               </EmptyBox>

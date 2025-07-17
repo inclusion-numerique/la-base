@@ -24,6 +24,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ImageEdition from '../Edition/ImageEdition'
 import CollectionInformationsEdition from './CollectionInformationsEdition'
+import styles from './CreateCollection.module.css'
 import CreateCollectionSideMenu from './CreateCollectionSideMenu'
 
 const {
@@ -80,8 +81,9 @@ const CreateCollection = ({
         priority: 'success',
         message: (
           <>
-            Votre collection <strong>{collection.title}</strong> a bien été
-            créée
+            Votre collection&nbsp;
+            <strong className={styles.title}>{collection.title}</strong> a bien
+            été créée
           </>
         ),
       })
@@ -94,14 +96,16 @@ const CreateCollection = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="fr-container fr-flex">
+      <div className="fr-container fr-flex-md">
         <CreateCollectionSideMenu />
         <div className="fr-container--slim">
           <h1 className="fr-page-title">Créer une collection</h1>
           <Card
-            title="Informations"
+            title="Informations sur la collection"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
-            className="fr-mt-3w"
+            noBorder
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="informations"
             description={
               <span className="fr-text--sm fr-hint-text fr-mb-0">
@@ -113,9 +117,11 @@ const CreateCollection = ({
             <CollectionInformationsEdition form={form} />
           </Card>
           <Card
+            noBorder
             title="Aperçu de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            titleClassName="fr-text-label--blue-france"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="apercu"
             contentSeparator
           >
@@ -126,9 +132,10 @@ const CreateCollection = ({
             />
           </Card>
           <Card
+            noBorder
             title="Visibilité de la collection"
             titleAs="h2"
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-border-radius--8 fr-border"
             id="visibilite"
             description="Choisissez la visibilité de votre collection."
             contentSeparator
@@ -139,42 +146,48 @@ const CreateCollection = ({
                 title={
                   base ? (
                     <>
-                      <span className="fr-text--bold">Base privée</span>
-                      <br />
-                      <span className="fr-text--regular">
-                        La collection sera accessible uniquement aux membres et
-                        aux administrateurs de votre base.
+                      <span className="fr-text--bold">
+                        Base privée
+                        <br />
+                        <span className="fr-text--regular">
+                          La collection sera accessible uniquement aux membres
+                          et aux administrateurs de votre base.
+                        </span>
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className="fr-text--bold">Profil privé</span>
-                      <br />
-                      <span className="fr-text--regular">
-                        Votre collection sera visible uniquement par vous.
+                      <span className="fr-text--bold">
+                        Profil privé
+                        <br />
+                        <span className="fr-text--regular">
+                          Votre collection sera visible uniquement par vous.
+                        </span>
                       </span>
                     </>
                   )
                 }
               />
             )}
-            <VisibilityField
-              model="collection"
-              path="isPublic"
-              control={control}
-              disabled={isLoading || (base != null && !base.isPublic)}
-              publicTitle="Collection publique"
-              privateTitle="Collection privée"
-              publicHint="Visible par tous les visiteurs."
-              privateHint={
-                base
-                  ? 'Visible uniquement par les membres de votre base.'
-                  : 'Visible uniquement par vous.'
-              }
-            />
+            {!collectionCannotBePublic && (
+              <VisibilityField
+                model="collection"
+                path="isPublic"
+                control={control}
+                disabled={isLoading || (base != null && !base.isPublic)}
+                publicTitle="Collection publique"
+                privateTitle="Collection privée"
+                publicHint="Visible par tous les visiteurs."
+                privateHint={
+                  base
+                    ? 'Visible uniquement par les membres de votre base.'
+                    : 'Visible uniquement par vous.'
+                }
+              />
+            )}
           </Card>
           <ButtonsGroup
-            className="fr-mt-3w"
+            className="fr-mt-3w fr-mb-50v"
             buttons={[
               {
                 nativeButtonProps: { 'data-testid': 'create-button' },

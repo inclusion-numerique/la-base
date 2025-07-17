@@ -32,12 +32,17 @@ const InviteResourceContributors = ({
   const router = useRouter()
   const form = useForm<InviteContributorCommand>({
     resolver: zodResolver(InviteContributorCommandValidation),
-    defaultValues: { resourceId: resource.id },
+    defaultValues: {
+      resourceId: resource.id,
+      contributors: [],
+      newMembers: [],
+    },
   })
 
   const [emailErrors, setEmailsError] = useState(false)
 
   const deleteMutate = trpc.resourceContributor.delete.useMutation()
+
   const invitationMutate = trpc.resourceContributor.invite.useMutation()
 
   const { data: contributors, refetch } =
@@ -67,6 +72,17 @@ const InviteResourceContributors = ({
       })
       return
     }
+
+    if (
+      (!data.contributors || data.contributors.length === 0) &&
+      (!data.newMembers || data.newMembers.length === 0)
+    ) {
+      form.setError('contributors', {
+        message: 'Veuillez sélectionner au moins un contributeur à inviter',
+      })
+      return
+    }
+
     try {
       await invitationMutate.mutateAsync(data)
       await refetch()
@@ -88,47 +104,19 @@ const InviteResourceContributors = ({
     }
   }
   const handleOnChange = (options: SelectOptionValid[]) => {
-    const resourceContributors = options.map((opt) => opt.value)
-    return form.setValue('contributors', resourceContributors)
+    const contributorsWithIds = options
+      .filter((opt) => !opt.value.includes('@'))
+      .map((opt) => ({ id: opt.value }))
+    const contributorsWithEmails = options
+      .filter((opt) => opt.value.includes('@'))
+      .map((opt) => ({ email: opt.value, type: 'member' as const }))
+    form.setValue('contributors', contributorsWithIds)
+    form.setValue('newMembers', contributorsWithEmails)
   }
 
   return (
     <>
-      <form onSubmit={form.handleSubmit(onInvit)}>
-        <div className={styles.inviteInput}>
-          <div className={styles.input}>
-            <Controller
-              control={form.control}
-              name="contributors"
-              render={({ fieldState: { error } }) => (
-                <InviteUsers
-                  label="Ajouter un membre"
-                  setEmailsError={setEmailsError}
-                  error={error}
-                  onChange={handleOnChange}
-                  resourceId={resource.id}
-                  selectedMemberType="member"
-                  canAddAdmin={false}
-                  withAddButton={false}
-                />
-              )}
-            />
-          </div>
-          <Button
-            type="submit"
-            nativeButtonProps={{
-              'data-testid': 'invite-member-modal-button',
-            }}
-            {...buttonLoadingClassname(
-              form.formState.isSubmitting,
-              styles.inviteButton,
-            )}
-          >
-            Inviter
-          </Button>
-        </div>
-      </form>
-      <p className="fr-mt-4w fr-mb-1w">
+      <p className="fr-mt-4w fr-mb-2w">
         Liste des contributeurs de la ressource
       </p>
       {resource.base?.title && (
@@ -138,13 +126,26 @@ const InviteResourceContributors = ({
         </div>
       )}
       {resource.createdBy && (
-        <div className={classNames('fr-mt-2w', styles.contributor)}>
-          <div className={styles.user} data-testid="contributors-creator">
-            <RoundProfileImage className="fr-mr-1w" user={resource.createdBy} />
-            {resource.createdBy.name}
+        <>
+          <div className={classNames('fr-mt-2w', styles.contributor)}>
+            <div className={styles.user} data-testid="contributors-creator">
+              <RoundProfileImage
+                className="fr-mr-1w"
+                user={resource.createdBy}
+              />
+              <div className="fr-flex fr-direction-column fr-width-full">
+                <h3 className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                  {resource.createdBy.name}
+                </h3>
+                <span className="fr-text--xs fr-mb-0 fr-hint-text">
+                  {resource.createdBy.email}
+                </span>
+              </div>
+            </div>
+            <div className={styles.creator}>Propriétaire</div>
           </div>
-          <div className={styles.creator}>Propriétaire</div>
-        </div>
+          <hr className="fr-mt-4w fr-pb-4w" />
+        </>
       )}
       {contributors &&
         contributors.map((contributor) => (
@@ -169,6 +170,43 @@ const InviteResourceContributors = ({
             />
           </div>
         ))}
+      <form onSubmit={form.handleSubmit(onInvit)}>
+        <div className={styles.inviteInput}>
+          <div className={styles.input}>
+            <Controller
+              control={form.control}
+              name="contributors"
+              render={({ fieldState: { error } }) => (
+                <InviteUsers
+                  withBadges={false}
+                  label="Ajouter un contributeur"
+                  setEmailsError={setEmailsError}
+                  error={error}
+                  onChange={handleOnChange}
+                  resourceId={resource.id}
+                  selectedMemberType="member"
+                  canAddAdmin={false}
+                />
+              )}
+            />
+          </div>
+          <div className="fr-width-full">
+            <Button
+              type="submit"
+              size="large"
+              nativeButtonProps={{
+                'data-testid': 'invite-member-modal-button',
+              }}
+              {...buttonLoadingClassname(
+                form.formState.isSubmitting,
+                styles.inviteButton,
+              )}
+            >
+              Inviter les contributeurs
+            </Button>
+          </div>
+        </div>
+      </form>
     </>
   )
 }

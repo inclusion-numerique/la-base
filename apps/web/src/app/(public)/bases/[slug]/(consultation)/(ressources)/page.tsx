@@ -5,7 +5,9 @@ import React from 'react'
 
 const BaseResourcesPage = async ({
   params,
-}: { params: Promise<{ slug: string }> }) => {
+}: {
+  params: Promise<{ slug: string }>
+}) => {
   const { slug } = await params
   const {
     user,
@@ -22,6 +24,7 @@ const BaseResourcesPage = async ({
     />
   ) : (
     <Resources
+      title="Ressources"
       resources={resources}
       user={user}
       canWrite={hasPermission('WriteBase')}

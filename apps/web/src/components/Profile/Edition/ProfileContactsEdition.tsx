@@ -39,7 +39,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
   return (
     <EditableCardForm
       id="contacts"
-      title="Contacts"
+      title="Vos contacts"
       form={form}
       onSave={handleSave}
       preview={
@@ -114,13 +114,15 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
               disabled
             />
           </div>
-          <CheckboxFormField
-            data-testid="profile-email-public-checkbox"
-            control={form.control}
-            path="emailIsPublic"
-            disabled={form.formState.isSubmitting}
-            label="Je veux pouvoir être contacté par les visiteurs de la plateforme"
-          />
+          <div className="fr-input-group">
+            <CheckboxFormField
+              data-testid="profile-email-public-checkbox"
+              control={form.control}
+              path="emailIsPublic"
+              disabled={form.formState.isSubmitting}
+              label="Je veux pouvoir être contacté par les visiteurs de la plateforme"
+            />
+          </div>
           <InputFormField
             data-testid="profile-website-input"
             control={form.control}
@@ -147,6 +149,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
             control={form.control}
             path="linkedin"
             label="LinkedIn"
+            className="fr-mb-4w"
             disabled={form.formState.isSubmitting}
           />
         </>

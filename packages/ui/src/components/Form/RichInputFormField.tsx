@@ -19,6 +19,7 @@ export type RichInputFormFieldProps<T extends FieldValues> = {
   info?: string | ((value: string) => string)
   size?: 'medium' | 'small'
   allowHeadings?: boolean // Default true
+  menuBar?: boolean
 }
 
 const RichInputFormField = <T extends FieldValues>({
@@ -35,6 +36,7 @@ const RichInputFormField = <T extends FieldValues>({
   info,
   size,
   allowHeadings,
+  menuBar = true,
 }: UiComponentProps & RichInputFormFieldProps<T>) => {
   const id = `rich-input-form-field__${path}`
 
@@ -57,6 +59,7 @@ const RichInputFormField = <T extends FieldValues>({
           <RichInputForm
             form={form}
             path={path}
+            menuBar={menuBar}
             id={id}
             ariaDescribedBy={ariaDescribedBy}
             disabled={disabled}
@@ -78,6 +81,7 @@ const RichInputFormField = <T extends FieldValues>({
                 'fr-input-group--disabled': disabled,
                 'fr-input-group--valid': isTouched && !invalid,
               },
+              'fr-mb-4w',
               className,
             )}
           >

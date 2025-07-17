@@ -134,7 +134,7 @@ export const baseSelect = (
     _count: {
       select: {
         followedBy: true,
-        resources: true,
+        resources: { where: computeResourcesListWhereForUser(user) },
       },
     },
   }) satisfies Prisma.BaseSelect

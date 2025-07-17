@@ -3,6 +3,7 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { type MultipleSearchableSelectRef } from '@app/web/components/MultipleSearchableSelect'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
 import {
@@ -18,7 +19,7 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteBaseMemberButton.module.css'
 
@@ -33,10 +34,12 @@ const {
 
 const InviteBaseMemberButton = ({
   base,
+  isBaseAdmin,
   canAddAdmin,
   className,
 }: {
   base: BasePageData
+  isBaseAdmin: boolean
   canAddAdmin: boolean
   className?: string
 }) => {
@@ -46,11 +49,16 @@ const InviteBaseMemberButton = ({
   })
 
   const [emailErrors, setEmailsError] = useState(false)
+  const selectFirstResultRef = useRef<MultipleSearchableSelectRef>(null)
 
   const mutate = trpc.baseMember.invite.useMutation()
   const router = useRouter()
 
-  const onInvit = async (data: InviteMemberCommand) => {
+  const onInvit = async () => {
+    selectFirstResultRef.current?.selectFirstResult()
+
+    const updatedData: InviteMemberCommand = form.getValues()
+
     if (emailErrors) {
       form.setError('members', {
         message:
@@ -59,8 +67,18 @@ const InviteBaseMemberButton = ({
       return
     }
 
+    if (
+      (!updatedData.members || updatedData.members.length === 0) &&
+      (!updatedData.newMembers || updatedData.newMembers.length === 0)
+    ) {
+      form.setError('members', {
+        message: 'Veuillez sélectionner au moins un membre à inviter',
+      })
+      return
+    }
+
     try {
-      await mutate.mutateAsync(data)
+      await mutate.mutateAsync(updatedData)
       router.refresh()
       close()
       createToast({
@@ -93,6 +111,11 @@ const InviteBaseMemberButton = ({
     form.setValue('members', membersWithUuids)
     form.setValue('newMembers', membersWithEmails)
   }
+  const modalDescription = `Les contributeurs peuvent voir, créer et contribuer à l’ensemble des ressources liées à la base ainsi qu’inviter d’autres membres. ${
+    isBaseAdmin
+      ? 'Vous pouvez également inviter des administrateurs qui pourront gérer les membres de la base (inviter et retirer des membres).'
+      : ''
+  }`
 
   return (
     <div>
@@ -114,13 +137,7 @@ const InviteBaseMemberButton = ({
         >
           <>
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">
-              <div>
-                Les contributeurs peuvent voir, créer et contribuer à l’ensemble
-                des ressources liées à la base ainsi qu’inviter d’autres
-                membres. Vous pouvez également inviter des administrateurs qui
-                pourront gérer les membres de la base (inviter et retirer des
-                membres).
-              </div>
+              <span>{modalDescription}</span>
               <div className="fr-mb-4w">
                 <Link
                   className="fr-link"
@@ -137,8 +154,9 @@ const InviteBaseMemberButton = ({
                   control={form.control}
                   name="members"
                   render={({ fieldState: { error } }) => (
-                    <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+                    <div className="fr-flex fr-direction-column fr-flex-gap-8v">
                       <InviteUsers
+                        ref={selectFirstResultRef}
                         disabled={isLoading}
                         label="Ajouter un membre"
                         setEmailsError={setEmailsError}

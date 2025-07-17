@@ -6,15 +6,10 @@ import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => (
   <div className="fr-width-full">
-    <div className={styles.header}>
-      <h2 className="fr-mb-0 fr-h3">À propos</h2>
-    </div>
-    <hr />
     <div className="fr-grid-row fr-grid-row--gutters fr-mb-4w">
       <div className="fr-col-12 fr-col-lg-8 fr-mt-3w">
-        <h3 className="fr-h6">Informations</h3>
+        <h3 className="fr-h6">Description</h3>
         <div>
-          <p className={styles.subtitle}>Description</p>
           {base.description ? (
             <div
               dangerouslySetInnerHTML={{
@@ -27,24 +22,18 @@ const BaseDetails = ({ base }: { base: BasePageData }) => (
             </div>
           )}
         </div>
-        {base.department && (
-          <div className="fr-mt-3w">
-            <p className={styles.subtitle}>Département</p>
-            {getDepartmentName(base.department)}
-          </div>
-        )}
       </div>
       <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
         <h3 className="fr-mb-2w fr-h6">Contact</h3>
         <div>
-          <p className={styles.subtitle}>Adresse mail de contact</p>
+          <p className="fr-mb-0">Adresse mail de contact</p>
           <Link href={`mailto:${base.email}`} className="fr-link">
             {base.email}
           </Link>
         </div>
         {base.website && (
           <div className="fr-mt-2w">
-            <p className={styles.subtitle}>Site internet</p>
+            <p className="fr-mb-0">Site internet</p>
             <Link href={base.website} className="fr-link" target="_blank">
               {base.website}
             </Link>

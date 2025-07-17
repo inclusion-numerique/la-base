@@ -1,6 +1,7 @@
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
 import styles from '@app/web/components/Collection/Edition/Order/CollectionOrder.module.css'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
+import classNames from 'classnames'
 import Link from 'next/link'
 
 const CollectionOrderRow = ({
@@ -9,12 +10,15 @@ const CollectionOrderRow = ({
   collection: CollectionListItem
 }) => (
   <div className={styles.container}>
-    <span className="fr-text--bold">{collection.title}</span>
+    <span className={classNames('fr-text--bold', styles.title)}>
+      {collection.title}
+    </span>
     <CollectionMetaData
       collection={collection}
       count={collection._count.resources}
       context="view"
-      className="fr-justify-content-unset"
+      className="fr-justify-content-unset fr-my-2v"
+      withPrivacyTag={!collection.isPublic}
     />
     <span className="fr-text--xs fr-mb-0">
       Par&nbsp;

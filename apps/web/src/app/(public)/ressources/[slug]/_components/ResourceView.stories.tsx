@@ -40,6 +40,7 @@ const resource = (imageId: string | null) =>
     },
     createdById: '1',
     createdBy: {
+      email: 'jean.biche@example.com',
       id: '1',
       name: 'Nom_utilisateur long long vraiment long tellement long',
       slug: 'nom_utilisateur_long_long_vraiment_long_tellement_long',

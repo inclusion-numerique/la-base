@@ -7,6 +7,7 @@ import { InviteMemberCommandValidation } from '@app/web/features/base/invitation
 import { sendAcceptedInvitationEmail } from '@app/web/features/base/invitation/emails/acceptedInvitationEmail'
 import { sendDeclinedInvitationEmail } from '@app/web/features/base/invitation/emails/declinedInvitationEmail'
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
+import { sendRemoveBaseMemberEmail } from '@app/web/features/base/members/removal /emails/removeBaseMemberEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { baseSelect } from '@app/web/server/bases/getBase'
 import {
@@ -352,9 +353,31 @@ export const baseMemberRouter = router({
           'Vous ne pouvez pas supprimer le dernier administrateur de cette base',
         )
       }
+      const acceptedBaseMember = await prismaClient.baseMembers.findFirst({
+        select: {
+          member: {
+            select: {
+              email: true,
+            },
+          },
+        },
+        where: {
+          memberId: input.memberId,
+          baseId: input.baseId,
+          accepted: { not: null },
+        },
+      })
 
-      return prismaClient.baseMembers.delete({
+      await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
       })
+
+      if (acceptedBaseMember) {
+        await sendRemoveBaseMemberEmail({
+          baseTitle: base.title,
+          email: acceptedBaseMember.member.email,
+          userRemovingName: formatMemberName(user),
+        })
+      }
     }),
 })

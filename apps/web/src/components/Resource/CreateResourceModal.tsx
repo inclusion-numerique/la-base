@@ -1,7 +1,9 @@
 'use client'
 
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
+import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import React from 'react'
 
 export const CreateResourceDynamicModal = createDynamicModal({
@@ -17,10 +19,12 @@ export const createResourceModalId =
 
 export const CreateResourceButton = ({
   className,
+  titleClassName,
   baseId,
   'data-testid': dataTestid,
 }: {
   className?: string
+  titleClassName?: string
   baseId: string | null
   'data-testid'?: string
 }) => {
@@ -31,12 +35,27 @@ export const CreateResourceButton = ({
   return (
     <Button
       type="button"
-      iconId="fr-icon-edit-box-line"
       className={className}
       data-testid={dataTestid}
       onClick={onClick}
     >
+      <span
+        className={classNames(
+          'ri-edit-box-line fr-mr-1w',
+          'fr-hidden-lg',
+          titleClassName,
+        )}
+        aria-hidden
+      />
       Créer une ressource
+      <span
+        className={classNames(
+          'ri-edit-box-line fr-ml-1w',
+          'fr-hidden fr-unhidden-lg',
+          titleClassName,
+        )}
+        aria-hidden
+      />
     </Button>
   )
 }

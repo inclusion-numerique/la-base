@@ -24,7 +24,7 @@ const ProfileBaseCard = ({
   isOwner: boolean
 }) => (
   <article className={styles.container} data-testid="base-card">
-    <div className="fr-flex fr-flex-gap-7v">
+    <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-3v">
       <Link
         href={`/bases/${base.slug}`}
         className={classNames(
@@ -34,12 +34,12 @@ const ProfileBaseCard = ({
       >
         <BaseImage base={base} size={48} />
       </Link>
-      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+      <div className="fr-flex fr-direction-column fr-flex-gap-3v fr-flex-gap-md-1v">
         <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
           <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
         </Link>
         <BaseMetadata
-          className="fr-text-mention--grey"
+          className="fr-text-mention--grey fr-align-items-start"
           base={base}
           smallBadge
           context="profile"

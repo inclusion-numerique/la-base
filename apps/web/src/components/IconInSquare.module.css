@@ -56,3 +56,20 @@
     }
   }
 }
+
+.xlarge {
+  width: 88px;
+  height: 88px;
+
+  .icon {
+    line-height: 40px !important;
+    font-size: 40px !important;
+    max-height: 40px;
+    max-width: 40px;
+
+    &::before {
+      max-height: 40px;
+      max-width: 40px;
+    }
+  }
+}

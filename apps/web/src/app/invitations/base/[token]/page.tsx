@@ -4,7 +4,7 @@ import BaseMemberInvitationPage from '@app/web/features/base/invitation/BaseMemb
 import { getBaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import { getBaseMembersCount } from '@app/web/features/base/invitation/db/getBaseMembersCount'
 import { Metadata } from 'next'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: metadataTitle('Invitation à rejoindre une base'),

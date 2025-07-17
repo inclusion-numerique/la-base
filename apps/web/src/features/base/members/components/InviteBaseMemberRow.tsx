@@ -30,7 +30,7 @@ const InviteBaseMemberRow = ({
   return (
     <div
       className={classNames(
-        'fr-enlarge-link fr-flex fr-flex-gap-3v fr-align-items-center fr-width-full fr-py-3w',
+        'fr-enlarge-link fr-flex fr-flex-gap-3v fr-align-items-center fr-width-full',
         member.invalid && styles.invalid,
       )}
     >
@@ -42,7 +42,7 @@ const InviteBaseMemberRow = ({
       )}
       <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full fr-justify-content-space-between fr-align-items-center">
         <div>
-          <h3 className="fr-text--md fr-text--medium fr-my-auto">
+          <h3 className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
             {member.label}
           </h3>
           {!!member.extra?.email && (

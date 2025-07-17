@@ -1,8 +1,11 @@
 .menu {
   display: flex;
   border-bottom: 1px solid var(--border-default-grey);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 
+  @media (min-width: 48em) {
+    margin-bottom: 48px;
+  }
   :global(.fr-nav__list) {
     justify-content: center;
   }

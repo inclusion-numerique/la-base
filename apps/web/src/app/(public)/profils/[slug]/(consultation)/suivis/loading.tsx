@@ -1,10 +1,14 @@
+import IconInSquare from '@app/web/components/IconInSquare'
 import ProfileCardSkeleton from '@app/web/components/Profile/Card/ProfileCardSkeleton'
 import React from 'react'
 
 const LoadingProfileSuivisPage = () => (
-  <div data-testid="base-resources">
+  <div data-testid="profils-suivis">
     <div className="fr-mb-6w fr-flex fr-justify-content-space-between">
-      <h2 className="fr-mb-0 fr-h3">Mes suivi</h2>
+      <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
+        <IconInSquare iconId="ri-user-heart-line" />
+        <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">Mes suivis</h2>
+      </div>
     </div>
     {Array.from({ length: 8 }).map((_, index) => (
       <ProfileCardSkeleton key={index} />

@@ -31,7 +31,7 @@ const BaseMemberRoleCard = ({
       <div
         className={classNames(
           styles.role,
-          'fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text',
+          'fr-text--medium fr-text--sm fr-mb-0 fr-hint-text',
         )}
       >
         {isAdmin ? 'Administrateur' : 'Contributeur'}
@@ -41,13 +41,13 @@ const BaseMemberRoleCard = ({
 
   if (isSessionUser) {
     return (
-      <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
+      <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-justify-content-md-end fr-justify-content-space-between fr-width-full">
         {member.accepted ? (
           <>
             <div
               className={classNames(
                 styles.role,
-                'fr-text--semi-bold fr-text--sm fr-mb-0 fr-hint-text',
+                'fr-text--medium fr-text--sm fr-mb-0 fr-hint-text',
               )}
               data-testid="user-session-member-card-role"
             >
@@ -73,7 +73,9 @@ const BaseMemberRoleCard = ({
         <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
           Invitation envoyée
         </Tag>
-        {canChangeMemberRole && <RemoveBaseMemberButton member={member} />}
+        {canChangeMemberRole && (
+          <RemoveBaseMemberButton member={member} base={base} />
+        )}
       </>
     )
   }
@@ -83,14 +85,14 @@ const BaseMemberRoleCard = ({
       <select
         data-testid="member-card-role-select"
         onChange={onChange}
-        className="fr-text--left fr-text-sm--right fr-text--semi-bold fr-text-label--blue-france fr-mr-1w"
+        className="fr-text--left fr-text-sm--right fr-text--medium fr-text-label--blue-france fr-mr-1w"
         style={{ appearance: 'auto' }}
         value={isAdmin ? 'admin' : 'member'}
       >
         <option value="admin">Administrateur</option>
         <option value="member">Contributeur</option>
       </select>
-      <RemoveBaseMemberButton member={member} />
+      <RemoveBaseMemberButton member={member} base={base} />
     </>
   )
 }

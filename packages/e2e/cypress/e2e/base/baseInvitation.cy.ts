@@ -30,6 +30,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
     cy.testId('member-card').should('have.length', 1)
+    cy.wait(1000)
     cy.dsfrModalsShouldBeBound()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('jean')
@@ -114,17 +115,16 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.visit(`/bases/${defaultTestBaseSlug}/membres`)
 
     cy.testId('member-card').should('have.length', 2)
+    cy.wait(1000)
     cy.dsfrModalsShouldBeBound()
     cy.testId('base-invite-member-button').click()
     cy.testId('invite-member-modal-input').type('jean')
     cy.wait('@getUser')
     cy.testId('invite-member-modal-input-option-0').click()
 
-    cy.testId('base-invite-member-role-select').click()
-
-    cy.testId('base-invite-member-role-member').should('exist')
+    cy.testId('base-invite-member-role-member').should('not.exist')
     cy.testId('base-invite-member-role-admin').should('not.exist')
-    cy.testId('base-invite-member-role-member').click()
+    cy.testId('base-invite-member-role-member').should('not.exist')
 
     cy.testId('invite-member-modal-button').click()
 

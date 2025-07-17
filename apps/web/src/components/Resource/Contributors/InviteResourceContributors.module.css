@@ -1,6 +1,6 @@
 .inviteInput {
   display: flex;
-  gap: 16px;
+  gap: 32px;
   align-items: flex-start;
   flex-direction: column;
   justify-content: stretch;
@@ -8,7 +8,6 @@
 
   @media (min-width: 768px) {
     width: auto;
-    flex-direction: row;
   }
 }
 
@@ -21,9 +20,9 @@
 }
 
 .inviteButton {
-  @media (min-width: 768px) {
-    margin-top: 40px;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .contributors {

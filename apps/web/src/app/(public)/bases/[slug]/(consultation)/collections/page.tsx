@@ -8,7 +8,9 @@ import React from 'react'
 
 const BaseCollectionsPage = async ({
   params,
-}: { params: Promise<{ slug: string }> }) => {
+}: {
+  params: Promise<{ slug: string }>
+}) => {
   const { slug } = await params
   const {
     user,
@@ -44,7 +46,7 @@ const BaseCollectionsPage = async ({
             <div data-testid="create-resource-button">
               <CreateCollectionButton
                 baseId={id}
-                title="Créer une collection de base"
+                title="Créer une collection"
               />
             </div>
           </EmptyBox>

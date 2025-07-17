@@ -30,20 +30,22 @@ const ProConnectSigninButton = ({
     >
       <Button
         type="button"
-        {...buttonLoadingClassname(isLoading, 'fr-mb-4v')}
+        {...buttonLoadingClassname(
+          isLoading,
+          'fr-mb-4v fr-width-full fr-justify-content-center',
+        )}
         onClick={onClick}
         title="S’identifier avec ProConnect"
       >
         <img src="/images/services/pro-connect-logo.svg" alt="" />
         <span className="fr-ml-1v fr-text--left">
-          S’identifier avec
-          <br />
+          S’identifier avec&nbsp;
           <strong>ProConnect</strong>
         </span>
       </Button>
 
       <a
-        className="fr-link fr-link--sm"
+        className="fr-link fr-link--no-underline fr-text--underline"
         href="https://www.proconnect.gouv.fr/"
         target="_blank"
         rel="noreferrer"

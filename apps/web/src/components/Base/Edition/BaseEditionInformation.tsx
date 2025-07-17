@@ -32,6 +32,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
 
   return (
     <EditCard
+      noBorder
       id="informations"
       mutation={async (data) => {
         const result = await mutate.mutateAsync({ id: base.id, data })
@@ -51,7 +52,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
         <>
           <div className="fr-text-mention--grey">Nom de la base</div>
           <div
-            className="fr-text-mention--grey fr-text--medium fr-mb-2w"
+            className="fr-text-label--grey fr-text--medium fr-mb-2w"
             data-testid="base-information-title"
           >
             {base.title}
@@ -59,7 +60,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
           <>
             <div className="fr-text-mention--grey">Département</div>
             <div
-              className="fr-text-mention--grey fr-text--medium fr-mb-2w"
+              className="fr-text-label--grey fr-text--medium fr-mb-2w"
               data-testid="base-information-department"
             >
               <MaybeEmptyValue
@@ -70,7 +71,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
           <div className="fr-text-mention--grey">Description</div>
           {base.description ? (
             <div
-              className="fr-text-mention--grey fr-text--medium"
+              className="fr-text-label--grey fr-text--medium"
               data-testid="base-information-description"
               dangerouslySetInnerHTML={{
                 __html: base.description,
@@ -78,7 +79,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
             />
           ) : (
             <div
-              className="fr-text-mention--grey"
+              className="fr-text-label--grey"
               data-testid="base-information-description"
             >
               <EmptyValue />
