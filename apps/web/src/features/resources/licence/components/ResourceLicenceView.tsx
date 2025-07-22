@@ -1,0 +1,33 @@
+import ResourceLicenceLogo from '@app/web/features/resources/licence/components/ResourceLicenceLogo'
+import { licenceWordings } from '@app/web/features/resources/licence/licence-wordings'
+import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
+import { ResourceLicence } from '@prisma/client'
+
+/* TODO - revalider avec l'equipe pour les ressources créés avant la mise en place de la feature */
+const ResourceLicenceView = ({
+  resource,
+}: {
+  resource: ResourceProjectionWithContext
+}) => {
+  return (
+    <div className="fr-flex fr-align-items-center fr-justify-content-space-between">
+      <div className="fr-flex fr-direction-column">
+        <span>
+          {
+            licenceWordings[resource.licence ?? ResourceLicence.NO_LICENCE]
+              .title
+          }
+        </span>
+        <span className="fr-mb-0 fr-text--xs fr-hint-text">
+          {licenceWordings[resource.licence ?? ResourceLicence.NO_LICENCE].hint}
+        </span>
+      </div>
+
+      <ResourceLicenceLogo
+        licence={resource.licence ?? ResourceLicence.NO_LICENCE}
+      />
+    </div>
+  )
+}
+
+export default ResourceLicenceView

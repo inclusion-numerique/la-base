@@ -6,6 +6,7 @@ import ResourceIndexation from '@app/web/components/Resource/Edition/Parameters/
 import ResourceParametersSideMenu from '@app/web/components/Resource/Edition/Parameters/ResourceParametersSideMenu'
 import ResourcePublication from '@app/web/components/Resource/Edition/Parameters/ResourcePublication'
 import ResourceVisibilityForm from '@app/web/components/Resource/Edition/Parameters/ResourceVisibilityForm'
+import ResourceLicenceForm from '@app/web/features/resources/licence/components/ResourceLicenceForm'
 import type { Resource } from '@app/web/server/resources/getResource'
 import classNames from 'classnames'
 import React from 'react'
@@ -25,12 +26,14 @@ const ResourceParameters = ({
       <h1 className="fr-mb-6w">Paramètres de la ressource</h1>
       <ResourcePublication resource={resource} user={user} />
       <ResourceVisibilityForm resource={resource} user={user} />
+      <ResourceLicenceForm resource={resource} />
       <ResourceIndexation resource={resource} />
       <Card
         noBorder
         className="fr-border-radius--8 fr-border fr-my-3w"
         id="contributeurs"
         title="Contributeurs"
+        titleClassName="fr-text-label--blue-france"
         titleAs="h2"
         description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
         contentSeparator
@@ -41,6 +44,7 @@ const ResourceParameters = ({
         noBorder
         className="fr-my-3w fr-border-radius--8 fr-border"
         id="avis"
+        titleClassName="fr-text-label--blue-france"
         title="Avis sur la ressource"
         titleAs="h2"
         description="Les visiteurs peuvent laisser des avis sur vos ressources afin de contribuer à leur amélioration, partager des retours d’expériences, des suggestions d’améliorations..."
@@ -53,6 +57,7 @@ const ResourceParameters = ({
         className="fr-border-radius--8 fr-border"
         id="supprimer"
         title="Supprimer la ressource"
+        titleClassName="fr-text-label--blue-france"
         titleAs="h2"
         description="Cette action est irréversible et entraîne la suppression définitive de de la ressource. Utilisez cette fonction avec précaution."
         contentSeparator

@@ -1,5 +1,6 @@
 'use client'
 
+import { ChangeLicenceCommand } from '@app/web/server/resources/feature/ResourceChangeLicence'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
@@ -18,6 +19,7 @@ const EditCard = <
     | UpdateBaseCommand
     | ChangeBaseCommand
     | ChangeVisibilityCommand
+    | ChangeLicenceCommand
     | ChangeIndexationCommand,
   V = unknown,
 >({

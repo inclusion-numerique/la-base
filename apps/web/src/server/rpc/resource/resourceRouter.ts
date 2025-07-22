@@ -116,7 +116,6 @@ export const resourceRouter = router({
             : ResourcePermissions.WriteResource,
         ),
       )
-
       return handleResourceMutationCommand(command, { user })
     }),
   addToCollection: protectedProcedure

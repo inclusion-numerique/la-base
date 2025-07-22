@@ -3,9 +3,11 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import Card from '@app/web/components/Card'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import VisibilityField from '@app/web/components/VisibilityField'
+import ResourceLicenceForm from '@app/web/features/resources/licence/components/ResourceLicenceForm'
 import type { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import InviteContributors from '../Contributors/InviteResourceContributors'
@@ -48,7 +50,6 @@ const ResourcePublication = ({
       }
     }
   }, [resource, user, isPublic, setValue])
-
   return (
     <>
       <h1 className={styles.title}>Qui peut consulter votre ressource ?</h1>
@@ -56,22 +57,26 @@ const ResourcePublication = ({
         Choisissez qui peut voir et/ou éditer votre ressource. Vous pourrez
         modifier vos choix à tout moment dans les paramètres de votre ressource.
       </p>
-      <div className={styles.card}>
+      <div className="fr-p-4w fr-mt-3w fr-border-radius--8 fr-border">
         <ResourceBaseEdition
           resource={resource}
           user={user}
           sendCommand={sendCommand}
         >
-          <h2 className="fr-mb-0 fr-h5">Ressource publiée dans</h2>
+          <h2 className="fr-mb-0 fr-h5 fr-text-label--blue-france">
+            Ressource publiée dans
+          </h2>
         </ResourceBaseEdition>
-        <hr className="fr-mt-4w fr-pb-4w" />
+        <hr className={classNames(styles.separator, 'fr-mt-4w fr-pb-4w')} />
         <ResourcePublicationView resource={resource} user={user} />
       </div>
       <Card
+        noBorder
+        className="fr-mt-3w fr-border-radius--8 fr-border"
         title="Visibilité de la ressource"
         titleAs="h2"
+        titleClassName="fr-text-label--blue-france"
         description="Choisissez qui peut voir votre ressource."
-        className="fr-mt-3w"
         contentSeparator
       >
         {resource.base
@@ -98,11 +103,14 @@ const ResourcePublication = ({
           {...visibilityTexts(resource.base)}
         />
       </Card>
+      <ResourceLicenceForm resource={resource} sendCommand={sendCommand} />
       {isPublic && (
         <Card
           data-testid="indexation-box"
-          className="fr-mt-3w"
           title="Indexation"
+          titleClassName="fr-text-label--blue-france"
+          className="fr-mt-3w fr-border-radius--8 fr-border"
+          noBorder
           titleAs="h2"
           description={
             <>
@@ -128,9 +136,11 @@ const ResourcePublication = ({
       )}
       {isPublic === false && (
         <Card
+          className="fr-mt-3w fr-border-radius--8 fr-border"
           data-testid="contributors-box"
-          className="fr-mt-3w"
+          noBorder
           title="Contributeurs"
+          titleClassName="fr-text-label--blue-france"
           titleAs="h2"
           description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
           contentSeparator
