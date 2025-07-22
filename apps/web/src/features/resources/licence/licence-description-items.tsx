@@ -1,7 +1,6 @@
-import ResourceLicenceBYSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLIcenceBYSymbol'
-import ResourceLicenceNCSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLIcenceNCSymbol'
-import ResourceLicenceSASymbol from '@app/web/features/resources/licence/components/symbols/ResourceLIcenceSASymbol'
-import ResourceLicenceCCSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLicenceCCSymbol'
+import ResourceLicenceBYSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLicenceBYSymbol'
+import ResourceLicenceNCSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLicenceNCSymbol'
+import ResourceLicenceSASymbol from '@app/web/features/resources/licence/components/symbols/ResourceLicenceSASymbol'
 import { ResourceLicence } from '@prisma/client'
 
 const BY = {

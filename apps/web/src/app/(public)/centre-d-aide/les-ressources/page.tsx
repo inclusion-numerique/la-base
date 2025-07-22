@@ -303,7 +303,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <span className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--sm fr-text--regular fr-text-default--grey">
                       <strong>Bon à savoir&nbsp;:</strong> ces 3 champs
                       d’indexations permettent ensuite aux visiteurs de
                       retrouver vos ressources grâce aux 3 filtres mise à
@@ -328,7 +328,7 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-6w"
                   title={
-                    <span className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--sm fr-text--regular fr-text-default--grey">
                       Vous pouvez retrouvez cette ressource à tout moment depuis
                       votre profil et modifier l’ensemble des éléments (espace
                       de publication, contenus, visibilité, contributeurs et les
@@ -340,6 +340,43 @@ const ContentPolicyPage = () => (
                     </span>
                   }
                 />
+                <h4 className="fr-text--lead fr-mb-0">Choix de la licence</h4>
+                <p>
+                  Choisissez sous quel licence vous souhaitez publier votre
+                  ressource.
+                </p>
+                <p>
+                  Par défaut, toutes les ressources publiées sur la plateforme
+                  sont sous licence{' '}
+                  <Link
+                    href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    Etalab 2.0
+                  </Link>
+                  . Mais vous pouvez publier vos ressources sous une autre
+                  licence (ou sans licence). Nous vous proposons notamment deux
+                  licences Creative Commons :{' '}
+                  <Link
+                    href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    CC BY-SA 4.0
+                  </Link>
+                  ou{' '}
+                  <Link
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"
+                    className="fr-link"
+                    target="_blank"
+                  >
+                    CC BY-NC-SA 4.0
+                  </Link>
+                  . Pour en savoir plus sur les différentes licences, consultez
+                  la dernière partie de cette article{' '}
+                  <Link href="#licence-ressource">Licence des ressources</Link>.
+                </p>
                 <hr />
                 <h2
                   id="parametre-ressource"
@@ -500,13 +537,13 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <span className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--sm fr-text--regular fr-text-default--grey">
                       Si votre structure employeuse et/ou si vous représenter
                       une administration publique, vous êtes dans l’obligation
                       d'utiliser la licence ouverte{' '}
                       <Link
                         href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
-                        className="fr-link"
+                        className="fr-link fr-text--sm"
                         target="_blank"
                       >
                         Etalab 2.0
@@ -538,12 +575,18 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-6w"
                   title={
-                    <span className="fr-text--regular fr-text-default--grey">
+                    <span className="fr-text--sm fr-text--regular fr-text-default--grey">
                       <strong>Exemple de mention :</strong>
                       <br />
                       Ministère de xxx - Données originales téléchargées
-                      sur http://www.data.gouv.fr/fr/datasets/xxx/, mise à jour
-                      du 14 février 2017.
+                      sur&nbsp;
+                      <Link
+                        className="fr-text--sm"
+                        href="http://www.data.gouv.fr/fr/datasets/xxx/"
+                      >
+                        http://www.data.gouv.fr/fr/datasets/xxx/
+                      </Link>
+                      , mise à jour du 14 février 2017.
                     </span>
                   }
                 />
@@ -554,7 +597,8 @@ const ContentPolicyPage = () => (
                     plateforme soient réutilisés et partagés dans les mêmes
                     conditions
                   </strong>
-                  , c’est à dire sous la même licence, nous vous conseillons :
+                  , c’est à dire sous la même licence, nous vous conseillons
+                  :&nbsp;
                   <Link
                     className="fr-link"
                     href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
@@ -596,7 +640,7 @@ const ContentPolicyPage = () => (
                     Si vous ne souhaitez pas que vos ressources publiées sur la
                     plateforme soient réutilisés à des fins commerciales
                   </strong>
-                  , publiez vos ressources sous licence{' '}
+                  , publiez vos ressources sous licence Creative Commons :{' '}
                   <Link
                     className="fr-link"
                     href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"

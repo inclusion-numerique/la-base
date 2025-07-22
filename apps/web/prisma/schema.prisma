@@ -320,7 +320,7 @@ model Resource {
   // isPublic is null when the user created the resource but did not publish it
   isPublic                  Boolean? @map("is_public")
 
-  licence             ResourceLicence?     @default(ETALAB_2_0) @map("resource_licence")
+  licence             ResourceLicence     @default(ETALAB_2_0) @map("licence")
   themes              Theme[]
   resourceTypes       ResourceType[]       @map("resource_types")
   beneficiaries       Beneficiary[]        @map("beneficiaries")

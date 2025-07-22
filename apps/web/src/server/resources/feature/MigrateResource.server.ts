@@ -6,6 +6,7 @@ import type {
 import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import type { ResourceCreationEventApplier } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
+import { ResourceLicence } from '@prisma/client'
 
 export const handleMigrateResource: ResourceCreationCommandHandler<
   MigrateResourceCommand,
@@ -78,6 +79,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   lastPublished: published ? new Date(published) : null,
   createdById: byId,
   description,
+  licence: ResourceLicence.ETALAB_2_0,
   excerpt: generateResourceExcerpt(description),
   ...rest,
   contents: contents.map(

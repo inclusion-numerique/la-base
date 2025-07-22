@@ -4,6 +4,7 @@ import type {
   Resource,
   ResourceContent,
 } from '@app/web/server/resources/getResource'
+import { ResourceLicence } from '@prisma/client'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 import ResourceView from './ResourceView'
@@ -22,6 +23,7 @@ const resource = (imageId: string | null) =>
       'Titre d’une ressource sur deux ligne très longues comme comme sur deux ligne très longues',
     slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-ligne-très-longues',
     description,
+    licence: ResourceLicence.ETALAB_2_0,
     excerpt: generateResourceExcerpt(description),
     created: past,
     updated: present,

@@ -30,8 +30,7 @@ const ResourceLicenceForm = ({
       name: 'ChangeLicence',
       payload: {
         resourceId: resource.id,
-        // TODO - revalider avec l'equipe pour les ressources créés avant la mise en place de la feature
-        licence: resource.licence ?? ResourceLicence.NO_LICENCE,
+        licence: resource.licence,
       },
     },
   })
@@ -56,8 +55,10 @@ const ResourceLicenceForm = ({
         <span>
           Choisissez sous quel licence vous souhaitez publier votre ressource.
           <br />
-          {/* TODO - ajouter le contenu du centre d'aide - licences */}
-          <Link href="/licences" className="fr-text--sm fr-link">
+          <Link
+            href="/centre-d-aide/les-ressources#licence-ressource"
+            className="fr-text--sm fr-link"
+          >
             En savoir plus
           </Link>
         </span>
