@@ -78,7 +78,7 @@
     "eventemitter3": "^5.0.1",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
-    "form-data": "^4.0.2",
+    "form-data": "^4.0.4",
     "framer-motion": "^12.10.4",
     "fuse.js": "^7.1.0",
     "html-minifier": "^4.0.0",
