@@ -12,7 +12,6 @@ import {
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { trpc } from '@app/web/trpc'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ResourceLicence } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'

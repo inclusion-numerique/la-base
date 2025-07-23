@@ -1,7 +1,6 @@
 import ResourceLicenceLogo from '@app/web/features/resources/licence/components/ResourceLicenceLogo'
 import { licenceWordings } from '@app/web/features/resources/licence/licence-wordings'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import { ResourceLicence } from '@prisma/client'
 
 const ResourceLicenceView = ({
   resource,
