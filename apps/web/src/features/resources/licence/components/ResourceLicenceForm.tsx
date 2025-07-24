@@ -52,7 +52,7 @@ const ResourceLicenceForm = ({
       titleAs="h2"
       description={
         <span>
-          Choisissez sous quel licence vous souhaitez publier votre ressource.
+          Choisissez sous quelle licence vous souhaitez publier votre ressource.
           <br />
           <Link
             href="/centre-d-aide/les-ressources#licence-ressource"
