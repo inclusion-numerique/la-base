@@ -1,5 +1,4 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
 import InviteContributorModal from '@app/web/components/Resource/Contributors/InviteContributorModal'
@@ -13,7 +12,6 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import { hasIndexation } from '@app/web/utils/indexation'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import RegisterResourceView from './RegisterResourceView'
 import ResourceActions from './ResourceActions'
 import ResourceDesktopNavigation from './ResourceDesktopNavigation'
@@ -162,7 +160,6 @@ const ResourceView = ({
           )}
         </div>
         {!!user && <SaveResourceInCollectionModal user={user} />}
-        {!!user && <SaveCollectionModal user={user} />}
         <InviteContributorModal />
         {canDelete && (
           <DeleteResource

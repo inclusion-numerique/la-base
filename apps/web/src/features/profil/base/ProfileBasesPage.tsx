@@ -3,7 +3,6 @@ import ProfileBases from '@app/web/features/profil/base/components/ProfileBases'
 import EmptyBases from '@app/web/features/profil/base/components/ProfileEmptyBases'
 import { ProfileBasesList } from '@app/web/server/bases/getBasesList'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
-import React from 'react'
 
 interface ProfileBasesPageProps {
   profile: ProfilePageData

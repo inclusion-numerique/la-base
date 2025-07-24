@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CollectionCardSkeleton = () => (
   <div className="fr-border fr-flex fr-direction-column fr-mb-1v">
     <div className="skeleton-rectangle skeleton-image--230" />

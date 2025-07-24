@@ -5,7 +5,6 @@ import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import Link from 'next/link'
-import React from 'react'
 
 export type FeaturedResourceProps = {
   resource: ResourceListItem

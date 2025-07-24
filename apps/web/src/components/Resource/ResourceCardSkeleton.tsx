@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import React from 'react'
 import cardStyles from './ResourceCard.module.css'
 import styles from './ResourceCardSkeleton.module.css'
 

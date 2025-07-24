@@ -9,7 +9,6 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { numberToString } from '@app/web/utils/formatNumber'
 import Link from 'next/link'
-import React from 'react'
 import styles from './Menu.module.css'
 
 // While loading put spaces instead of the count to minimize layout shifts

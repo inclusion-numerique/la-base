@@ -6,7 +6,7 @@ import type {
   FrIconClassName,
   RiIconClassName,
 } from '@codegouvfr/react-dsfr/src/fr/generatedFromCss/classNames'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 const defaultIconId: FrIconClassName | RiIconClassName = 'fr-icon-bookmark-line'
 const alreadySavedIconId: FrIconClassName | RiIconClassName =

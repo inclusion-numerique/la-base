@@ -102,7 +102,6 @@ model User {
   resources           ResourceContributors[]
   collections         Collection[]
   resourceViews       ResourceView[]
-  savedCollections    SavedCollection[]
   sentResourceReports ResourceReport[]
   baseFollows         BaseFollow[]
   profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
@@ -173,7 +172,6 @@ model Base {
   resources        Resource[]
   members          BaseMembers[]
   collections      Collection[]
-  savedCollections SavedCollection[]
   followedBy       BaseFollow[]
 
   featuredBlock   FeaturedBlock? @relation("base")
@@ -588,34 +586,10 @@ model Collection {
   imageId String? @unique @map("image_id") @db.Uuid
 
   resources       CollectionResource[]
-  savedCollection SavedCollection[]
 
   @@index([baseId])
   @@index([createdById])
   @@map("collections")
-}
-
-model SavedCollection {
-  id       String @id @default(uuid()) @db.Uuid
-  legacyId Int?   @unique @map("legacy_id")
-
-  savedBy   User   @relation(fields: [savedById], references: [id])
-  savedById String @map("saved_by_id") @db.Uuid
-
-  collection   Collection @relation(fields: [collectionId], references: [id])
-  collectionId String     @map("collection_id") @db.Uuid
-
-  // If saved in a base, we keep the user in savedBy but the info for
-  // where to consider it is in baseId
-  base   Base?   @relation(fields: [baseId], references: [id])
-  baseId String? @map("base_id") @db.Uuid
-
-  saved DateTime @default(now())
-
-  @@index([savedById])
-  @@index([collectionId])
-  @@index([baseId])
-  @@map("saved_collection")
 }
 
 enum ResourceReportReason {

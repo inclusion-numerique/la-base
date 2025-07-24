@@ -8,14 +8,13 @@ import ProfileHeader, {
   headerSkipLink,
 } from '@app/web/components/Profile/ProfileHeader'
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
-import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 export const generateMetadata = async ({
   params,
@@ -94,7 +93,7 @@ const ProfileLayout = async ({
           resourcesCount={resourcesCount}
           isOwner={isOwner}
           basesCount={basesCount}
-          collectionsCount={collectionsCount.total}
+          collectionsCount={collectionsCount}
           followsCount={followsCount.total}
         />
         <div className="fr-container fr-container--medium fr-mb-24w">

@@ -4,7 +4,6 @@ import { CreateCollectionButton } from '@app/web/components/Collection/CreateCol
 import Collections from '@app/web/components/Collection/List/Collections'
 import EmptyBox from '@app/web/components/EmptyBox'
 import Link from 'next/link'
-import React from 'react'
 
 const BaseCollectionsPage = async ({
   params,
@@ -13,19 +12,16 @@ const BaseCollectionsPage = async ({
 }) => {
   const { slug } = await params
   const {
-    user,
     authorization: { hasPermission },
     base,
   } = await getBasePageContext(slug)
 
   const canWrite = hasPermission(BasePermissions.WriteBase)
 
-  const { collections, savedCollections, id } = base
+  const { collections, id } = base
   return (
     <Collections
-      user={user}
       collections={collections}
-      savedCollections={savedCollections.map(({ collection }) => collection)}
       withCreation={canWrite}
       baseId={id}
       baseSlug={slug}

@@ -9,7 +9,6 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import { getServerUrl } from '../../utils/baseUrl'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'

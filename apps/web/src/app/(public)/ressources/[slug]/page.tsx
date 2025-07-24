@@ -15,7 +15,6 @@ import { contentId } from '@app/web/utils/skipLinks'
 import { uploadedImageLoader } from '@app/web/utils/uploadedImageLoader'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import React from 'react'
 import PrivateResourceView from './_components/PrivateResourceView'
 import ResourceView from './_components/ResourceView'
 

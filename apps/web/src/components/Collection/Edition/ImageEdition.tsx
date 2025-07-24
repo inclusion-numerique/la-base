@@ -5,7 +5,7 @@ import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import type { ImageForForm } from '@app/web/server/image/imageTypes'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import RadioButtons from '@codegouvfr/react-dsfr/RadioButtons'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { type Control, Controller, type Path } from 'react-hook-form'
 import Images from '../Images'
 

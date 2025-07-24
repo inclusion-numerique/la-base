@@ -12,7 +12,7 @@ import type { ResourceProjectionWithContext } from '@app/web/server/resources/ge
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 import EditableContent from './EditableContent'
 

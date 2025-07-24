@@ -1,6 +1,5 @@
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
 import BaseDetails from '@app/web/components/Base/BaseDetails'
-import React from 'react'
 
 const BaseAProposPage = async ({
   params,

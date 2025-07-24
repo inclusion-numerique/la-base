@@ -5,7 +5,7 @@ import RemoveBaseMemberButton from '@app/web/features/base/invitation/components
 import { BaseMember, BasePageData } from '@app/web/server/bases/getBase'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import classNames from 'classnames'
-import React, { ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
 import styles from './BaseMemberRoleCard.module.css'
 
 interface MemberRoleDisplayProps {

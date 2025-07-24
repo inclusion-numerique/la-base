@@ -4,7 +4,7 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import ResourceReportButton from '../../app/(public)/ressources/[slug]/_components/ResourceReportButton'
 import type { SessionUser } from '../../auth/sessionUser'
 import OpenInviteContributorModalButton from './Contributors/OpenInviteContributorModalButton'

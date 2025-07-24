@@ -7,9 +7,9 @@ import Options from '@app/ui/components/SearchableSelect/Options'
 import InviteBaseMemberRow from '@app/web/features/base/members/components/InviteBaseMemberRow'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React, {
-  forwardRef,
+import {
   type ReactNode,
+  forwardRef,
   useCallback,
   useImperativeHandle,
   useMemo,

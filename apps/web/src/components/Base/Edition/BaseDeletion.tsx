@@ -7,7 +7,6 @@ import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { ConfirmDeleteModal } from '../../ConfirmDeleteModal'
 
 const {

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 /**
  * From https://github.com/nusu/avvvatars/blob/main/src/shape/shapes.tsx
  */

@@ -3,7 +3,6 @@ import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
 import type { ContentProjectionWithContextImage } from '@app/web/server/resources/getResourceFromEvents'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './ImageContentDetails.module.css'
 
 const ImageContentDetails = ({

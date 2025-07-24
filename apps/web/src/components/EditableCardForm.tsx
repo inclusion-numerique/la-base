@@ -2,7 +2,7 @@
 
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { useRouter } from 'next/navigation'
-import React, { type ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import type { FieldValues } from 'react-hook-form/dist/types/fields'
 import EditableCard from './EditableCard'

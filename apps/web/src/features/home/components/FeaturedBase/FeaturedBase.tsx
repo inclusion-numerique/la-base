@@ -4,7 +4,6 @@ import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { getDepartmentName } from '@app/web/utils/departments'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './FeaturedBase.module.css'
 
 export const FeaturedBase = ({

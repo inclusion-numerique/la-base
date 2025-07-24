@@ -106,17 +106,6 @@ export const baseSelect = (
         },
       ],
     },
-    savedCollections: {
-      select: {
-        collection: { select: collectionSelect(user) },
-      },
-      where: {
-        collection: computeCollectionsListWhereForUser(user),
-      },
-      orderBy: {
-        saved: 'desc',
-      },
-    },
     members: {
       select: {
         isAdmin: true,

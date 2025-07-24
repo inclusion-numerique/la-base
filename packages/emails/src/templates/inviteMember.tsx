@@ -1,7 +1,7 @@
 import Explanations from '@app/emails/components/Explanations'
 import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
 import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import { backgroundColor, brandColor } from '@app/emails/styles'
+import { backgroundColor } from '@app/emails/styles'
 import {
   MjmlButton,
   MjmlColumn,

@@ -4,10 +4,10 @@ import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
-import React, {
+import {
   type Dispatch,
-  forwardRef,
   type SetStateAction,
+  forwardRef,
   useCallback,
   useEffect,
   useState,

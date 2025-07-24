@@ -3,7 +3,6 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import { MandatoryFields } from '@app/web/components/MandatoryFields'
 import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
 import type { UpdateBaseContactsCommand } from '@app/web/server/bases/updateBase'
-import React from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 
 const BaseContactsEdition = ({

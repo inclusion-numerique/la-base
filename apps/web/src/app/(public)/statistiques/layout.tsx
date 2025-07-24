@@ -3,7 +3,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Statistiques'),

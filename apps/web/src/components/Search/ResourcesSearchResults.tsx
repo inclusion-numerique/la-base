@@ -10,7 +10,7 @@ import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './SearchContents.module.css'
 
 const ResourcesSearchResults = ({

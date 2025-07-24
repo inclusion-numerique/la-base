@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, type ReactNode } from 'react'
+import { type PropsWithChildren, type ReactNode } from 'react'
 import sanitizeHtml from 'sanitize-html'
 
 export const LabelAndValue = ({

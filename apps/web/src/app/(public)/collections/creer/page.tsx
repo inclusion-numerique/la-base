@@ -11,7 +11,6 @@ import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { prismaClient } from '@app/web/prismaClient'
 import { contentId } from '@app/web/utils/skipLinks'
 import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 
 const CollectionCreationPage = async ({
   searchParams,

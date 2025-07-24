@@ -7,7 +7,6 @@ import BaseMemberCard from '@app/web/features/base/members/components/BaseMember
 import BaseMembersSort from '@app/web/features/base/members/components/BaseMembersSort'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import Tag from '@codegouvfr/react-dsfr/Tag'
-import React from 'react'
 
 const BaseMembers = ({
   base,

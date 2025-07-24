@@ -8,7 +8,6 @@ import {
   baseTitleInfoText,
 } from '@app/web/server/bases/updateBase'
 import { departmentsOptions } from '@app/web/utils/departments'
-import React from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 
 const BaseInformationsEdition = ({

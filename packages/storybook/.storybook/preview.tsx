@@ -1,4 +1,3 @@
-import React from 'react'
 import '@app/web/styles/index.css'
 import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
 import { Preview } from '@storybook/react'

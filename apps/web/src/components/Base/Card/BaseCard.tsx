@@ -7,7 +7,6 @@ import type { BasesSearchResultListItem } from '@app/web/server/search/executeSe
 import { getDepartmentName } from '@app/web/utils/departments'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './BaseCard.module.css'
 
 const BaseCard = ({

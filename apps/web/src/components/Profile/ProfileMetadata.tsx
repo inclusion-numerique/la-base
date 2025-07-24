@@ -1,6 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import classNames from 'classnames'
-import React from 'react'
 
 const ProfileMetadata = ({
   resourcesCount,

@@ -11,8 +11,7 @@ import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import React, { useMemo } from 'react'
-import SaveCollectionModal from '../../Collection/SaveCollectionModal'
+import { useMemo } from 'react'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
 
 const Resources = ({
@@ -130,7 +129,6 @@ const Resources = ({
         ))
       )}
       {!!user && <SaveResourceInCollectionModal user={user} />}
-      {!!user && <SaveCollectionModal user={user} />}
       <DeleteResourceModal />
       <InviteContributorModal />
     </div>

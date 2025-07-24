@@ -3,7 +3,6 @@ import { dateAsDay } from '@app/web/utils/dateAsDay'
 import Badge from '@codegouvfr/react-dsfr/Badge'
 import type { Resource } from '@prisma/client'
 import classNames from 'classnames'
-import React from 'react'
 
 const ResourceDates = ({
   resource,

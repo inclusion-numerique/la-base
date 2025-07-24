@@ -1,6 +1,6 @@
 import { Spinner } from '@app/web/ui/Spinner'
 import dynamic from 'next/dynamic'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import type {
   GroupBase,
   SelectComponentsConfig,

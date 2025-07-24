@@ -6,7 +6,6 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
-import React from 'react'
 import styles from './ResourceActions.module.css'
 import ResourceReportButton from './ResourceReportButton'
 

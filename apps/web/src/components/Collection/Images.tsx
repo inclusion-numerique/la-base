@@ -1,6 +1,5 @@
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './Images.module.css'
 
 const collectionImageBreakpoints = [

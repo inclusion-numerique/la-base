@@ -8,7 +8,6 @@ import {
 import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
 import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
 import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
-import React from 'react'
 import type { Control, FieldValues, Path } from 'react-hook-form'
 
 const ResourceIndexationEdition = <T extends FieldValues>({

@@ -10,7 +10,6 @@ import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Modifier mon profil'),

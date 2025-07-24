@@ -1,10 +1,8 @@
 'use client'
 
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
-import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React from 'react'
 
 export const CreateResourceDynamicModal = createDynamicModal({
   id: 'create-resource',

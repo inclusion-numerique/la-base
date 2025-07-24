@@ -8,12 +8,6 @@ import type {
   BaseFollowListItem,
   ProfileFollowListItem,
 } from '@app/web/server/follows/getFollowsList'
-import {
-  defaultSearchParams,
-  searchUrl,
-} from '@app/web/server/search/searchQueryParams'
-import Link from 'next/link'
-import React from 'react'
 
 const FollowsList = ({
   baseFollows,

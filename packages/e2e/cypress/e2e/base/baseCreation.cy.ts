@@ -109,7 +109,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     )
   })
 
-  it.only('Acceptation 7 - Création de base avec membres', () => {
+  it('Acceptation 7 - Création de base avec membres', () => {
     cy.intercept('/api/trpc/profile.searchProfileForMember?*').as('getUser')
 
     cy.visit('/bases/creer')

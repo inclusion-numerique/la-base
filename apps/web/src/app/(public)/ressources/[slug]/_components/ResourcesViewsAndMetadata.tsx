@@ -2,7 +2,6 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './ResourcesViewsAndMetadata.module.css'
 
 const ResourcesViewsAndMetadata = ({

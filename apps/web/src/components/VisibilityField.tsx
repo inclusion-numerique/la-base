@@ -1,9 +1,5 @@
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
-import React, {
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-} from 'react'
+import { type Dispatch, type ReactNode, type SetStateAction } from 'react'
 import {
   type Control,
   Controller,

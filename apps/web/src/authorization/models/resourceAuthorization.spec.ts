@@ -26,7 +26,6 @@ describe('Authorization - Ressources', () => {
     isPublic: true,
     collections: [],
     slug: 'base-publique',
-    savedCollections: [],
     title: 'Base publique',
     image: null,
   } satisfies SessionUser['bases'][number]['base']
@@ -36,7 +35,6 @@ describe('Authorization - Ressources', () => {
     isPublic: false,
     collections: [],
     slug: 'base-privee',
-    savedCollections: [],
     title: 'Base privée',
     image: null,
   } satisfies SessionUser['bases'][number]['base']

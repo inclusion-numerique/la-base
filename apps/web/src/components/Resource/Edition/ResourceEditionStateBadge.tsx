@@ -1,7 +1,7 @@
 import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
 import { Spinner } from '@app/web/ui/Spinner'
 import classNames from 'classnames'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import styles from './ResourceEditionStateBadge.module.css'
 

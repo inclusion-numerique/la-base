@@ -6,7 +6,6 @@ import ProConnectSigninButton from '@app/web/app/(public)/(authentication)/conne
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import { type LoginIntent, getLoginTitle } from '@app/web/security/login'
 import Button from '@codegouvfr/react-dsfr/Button'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import type { Route } from 'next'
 
 const SigninPanel = ({

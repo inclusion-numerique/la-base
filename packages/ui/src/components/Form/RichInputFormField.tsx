@@ -2,7 +2,6 @@
 
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
-import React from 'react'
 import { Controller, FieldValues, UseFormReturn } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
 import RichInputForm from './RichInputForm'

@@ -9,7 +9,6 @@ import { dateAsDay } from '@app/web/utils/dateAsDay'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { ReadMore } from './ReadMore'
 import { ResourceFeedbackActions } from './ResourceFeedbackActions'
 

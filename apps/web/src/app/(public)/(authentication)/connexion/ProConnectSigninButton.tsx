@@ -6,7 +6,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import type { Route } from 'next'
 import { signIn } from 'next-auth/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const ProConnectSigninButton = ({
   className,

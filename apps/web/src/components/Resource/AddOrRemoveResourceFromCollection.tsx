@@ -3,7 +3,6 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React from 'react'
 import CollectionMetaData from '../Collection/CollectionMetaData'
 import styles from './SaveResourceInCollectionModal.module.css'
 

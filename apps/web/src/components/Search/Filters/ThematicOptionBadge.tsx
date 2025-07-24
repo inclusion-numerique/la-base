@@ -1,6 +1,6 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import classNames from 'classnames'
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import styles from './ThematicOptionBadge.module.css'
 
 export const ThematicOptionBadge = ({

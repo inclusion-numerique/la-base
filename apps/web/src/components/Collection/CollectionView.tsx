@@ -3,20 +3,17 @@ import {
   ResourceRoles,
   resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
-import BackButton from '@app/web/components/BackButton'
 import EmptyBaseCollections from '@app/web/components/Base/EmptyBaseCollections'
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
 import CollectionMetaData from '@app/web/components/Collection/CollectionMetaData'
 import CollectionViewHeader from '@app/web/components/Collection/CollectionViewHeader'
 import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
-import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { CollectionPageData } from '@app/web/server/collections/getCollection'
 import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import Button from '@codegouvfr/react-dsfr/Button'
-import React from 'react'
 
 const CollectionView = ({
   collection,
@@ -68,7 +65,6 @@ const CollectionView = ({
                   <CollectionActions
                     collection={collection}
                     canWrite={isOwner || canWrite}
-                    user={user}
                     context="view"
                     resourcesCount={collection.resources.length}
                   />
@@ -80,7 +76,6 @@ const CollectionView = ({
                     resourcesCount={collection.resources.length}
                     collection={collection}
                     canWrite={isOwner || canWrite}
-                    user={user}
                     context="view"
                   />
                 </div>
@@ -108,7 +103,6 @@ const CollectionView = ({
       </div>
     </div>
     {!!user && <SaveResourceInCollectionModal user={user} />}
-    {!!user && <SaveCollectionModal user={user} />}
     <DeleteResourceModal />
     {!!user && (
       <DeleteCollectionModal redirectTo={`/profils/${user.slug}/collections`} />

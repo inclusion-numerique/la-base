@@ -1,7 +1,6 @@
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import classNames from 'classnames'
-import React from 'react'
 import ProfileInformations from '../ProfileInformations'
 import ProfileContactsEdition from './ProfileContactsEdition'
 import ProfileDeletion from './ProfileDeletion'

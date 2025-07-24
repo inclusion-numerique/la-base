@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ProfileCardSkeleton = () => (
   <article className="fr-border-top" data-testid="profile-skeleton">
     <div className="fr-flex fr-flex-gap-2v fr-align-items-center fr-width-full fr-py-3w">

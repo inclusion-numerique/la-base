@@ -5,7 +5,6 @@ import SelectOptionsList from '@app/ui/components/Form/SelectOptionsList'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import {
-  type ChangeEventHandler,
   type MouseEventHandler,
   type ReactNode,
   RefObject,

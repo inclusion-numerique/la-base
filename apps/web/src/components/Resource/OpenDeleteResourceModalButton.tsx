@@ -2,7 +2,7 @@
 
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { DeleteResourceDynamicModal } from './DeleteResource/DeleteResourceModal'
 
 const OpenDeleteResourceModalButton = ({

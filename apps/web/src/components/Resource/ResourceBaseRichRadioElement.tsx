@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import type { FieldValues, Path, PathValue } from 'react-hook-form'
 import styles from './ResourceBaseRichRadioElement.module.css'
 

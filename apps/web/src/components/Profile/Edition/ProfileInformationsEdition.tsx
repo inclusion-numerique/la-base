@@ -21,10 +21,8 @@ import {
   departmentsOptions,
   getDepartmentName,
 } from '@app/web/utils/departments'
-import { htmlToText } from '@app/web/utils/htmlToText'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 
 const firstNameInfo = (title?: string | null) =>

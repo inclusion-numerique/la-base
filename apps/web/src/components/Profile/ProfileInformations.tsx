@@ -2,7 +2,7 @@ import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { formatName } from '@app/web/server/rpc/user/formatName'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import ImageEdition from './Edition/ProfileImageEdition'
 import ProfileMetadata from './ProfileMetadata'
 

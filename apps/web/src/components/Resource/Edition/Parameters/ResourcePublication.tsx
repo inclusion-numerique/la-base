@@ -10,7 +10,6 @@ import {
 import type { Resource } from '@app/web/server/resources/getResource'
 import { trpc } from '@app/web/trpc'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import ResourceBaseRichRadio from '../../ResourceBaseRichRadio'
 import ResourcePublicationView from './ResourcePublicationView'

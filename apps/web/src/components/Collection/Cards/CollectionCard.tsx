@@ -1,37 +1,21 @@
-import type { SessionUser } from '@app/web/auth/sessionUser'
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import CollectionMetaData from '../CollectionMetaData'
 import Images from '../Images'
 import styles from './CollectionCard.module.css'
 
 const CollectionCard = ({
   collection,
-  user,
   canWrite,
 }: {
   collection: CollectionListItem
-  user: SessionUser | null
   canWrite: boolean
 }) => {
   const resourcesCount = collection._count.resources
 
   const href = `/collections/${collection.slug}`
-  const createdByLink = (
-    <Link
-      href={
-        collection.base
-          ? `/bases/${collection.base.slug}`
-          : `/profils/${collection.createdBy.slug}`
-      }
-      className="fr-link fr-position-relative fr-link--xs"
-    >
-      {collection.base ? collection.base.title : collection.createdBy.name}
-    </Link>
-  )
 
   return (
     <article
@@ -61,9 +45,6 @@ const CollectionCard = ({
             )}
           </Link>
         </div>
-        {!collection.isFavorites && (
-          <span className="fr-text--xs fr-mb-0">Par&nbsp; {createdByLink}</span>
-        )}
         {collection.slug && (
           <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-mt-4v">
             <CollectionMetaData
@@ -86,7 +67,6 @@ const CollectionCard = ({
               <CollectionActions
                 collection={collection}
                 canWrite={canWrite}
-                user={user}
                 context="card"
                 resourcesCount={resourcesCount}
               />

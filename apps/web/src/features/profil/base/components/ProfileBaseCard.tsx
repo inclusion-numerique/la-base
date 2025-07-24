@@ -6,7 +6,6 @@ import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/get
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './ProfileBaseCard.module.css'
 
 const ProfileBaseCard = ({

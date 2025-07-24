@@ -1,6 +1,5 @@
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './ImageInfo.module.css'
 
 const ImageInfo = ({

@@ -8,7 +8,6 @@ import ResourcePublication from '@app/web/components/Resource/Edition/Parameters
 import ResourceVisibilityForm from '@app/web/components/Resource/Edition/Parameters/ResourceVisibilityForm'
 import type { Resource } from '@app/web/server/resources/getResource'
 import classNames from 'classnames'
-import React from 'react'
 import ResourceFeedback from './ResourceFeedback'
 import styles from './ResourceParameters.module.css'
 

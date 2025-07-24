@@ -5,7 +5,6 @@ import type { BasePageData } from '@app/web/server/bases/getBase'
 import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import type { User } from '@prisma/client'
 import classNames from 'classnames'
-import React from 'react'
 import { formatName } from '../server/rpc/user/formatName'
 import styles from './OwnershipInformation.module.css'
 

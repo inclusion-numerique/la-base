@@ -2,7 +2,7 @@
 
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import classNames from 'classnames'
-import React, { HTMLProps, ReactNode } from 'react'
+import { HTMLProps, ReactNode } from 'react'
 import {
   Control,
   Controller,

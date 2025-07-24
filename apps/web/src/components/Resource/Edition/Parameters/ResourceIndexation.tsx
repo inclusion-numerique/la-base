@@ -13,7 +13,6 @@ import { trpc } from '@app/web/trpc'
 import { hasIndexation } from '@app/web/utils/indexation'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './ResourceIndexation.module.css'
 

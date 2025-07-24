@@ -1,5 +1,4 @@
 import type { Resource } from '@app/web/server/resources/getResource'
-import React from 'react'
 import ResourceIndexationView from './ResourceIndexationView'
 
 const ResourceInformations = ({ resource }: { resource: Resource }) => (

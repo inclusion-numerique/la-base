@@ -11,7 +11,6 @@ import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { basePageQuery } from '@app/web/server/bases/getBase'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 
 const BaseEditionPage = async ({
   params,

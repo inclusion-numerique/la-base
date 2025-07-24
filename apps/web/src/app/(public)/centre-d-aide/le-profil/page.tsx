@@ -6,7 +6,6 @@ import { contentId } from '@app/web/utils/skipLinks'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import React from 'react'
 import ProfilSideMenu from './ProfilSideMenu'
 
 export const revalidate = 0

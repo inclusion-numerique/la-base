@@ -1,7 +1,6 @@
 import { externalImageLoader } from '@app/web/utils/externalImageLoader'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './LinkContentPreview.module.css'
 
 const LinkContentPreview = ({

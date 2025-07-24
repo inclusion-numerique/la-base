@@ -7,7 +7,7 @@ import {
   departmentsOptions,
   getDepartmentName,
 } from '@app/web/utils/departments'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

@@ -1,6 +1,5 @@
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './ResourceMobileNavigation.module.css'
 import type { ResourceNavigationData } from './getResourceNavigationData'
 

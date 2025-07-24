@@ -13,7 +13,6 @@ import { trpc } from '@app/web/trpc'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './ProfileImageEdition.module.css'
 

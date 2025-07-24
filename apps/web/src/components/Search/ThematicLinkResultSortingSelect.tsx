@@ -5,7 +5,6 @@ import type {
   PaginationParams,
   SearchParams,
 } from '@app/web/server/search/searchQueryParams'
-import React from 'react'
 import ResultSortingSelect from './ResultSortingSelect'
 
 export const ThematicLinkSortingSelect = ({

@@ -2,7 +2,6 @@ import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(con
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import ProfileBasesPage from '@app/web/features/profil/base/ProfileBasesPage'
 import { getProfileBases } from '@app/web/server/bases/getBasesList'
-import React from 'react'
 
 const Page = async ({ params }: ProfilRouteParams) => {
   const { slug } = await params

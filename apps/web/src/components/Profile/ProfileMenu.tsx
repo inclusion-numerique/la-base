@@ -4,7 +4,7 @@ import type { ProfileTab } from '@app/web/app/(public)/profils/[slug]/(consultat
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],

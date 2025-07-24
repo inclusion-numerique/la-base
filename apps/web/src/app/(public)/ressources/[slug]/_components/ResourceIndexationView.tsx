@@ -10,7 +10,7 @@ import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { themeLabels } from '@app/web/themes/themes'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import classNames from 'classnames'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import styles from './ResourceIndexationView.module.css'
 
 const getThemes = (resource: Resource) => ({

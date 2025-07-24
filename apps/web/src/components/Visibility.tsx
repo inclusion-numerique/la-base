@@ -1,4 +1,3 @@
-import React from 'react'
 import { PrivacyTag } from './PrivacyTags'
 
 const Visibility = ({

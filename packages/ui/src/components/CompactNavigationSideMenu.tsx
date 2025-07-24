@@ -5,7 +5,7 @@ import { useNavigationSideMenu } from '@app/ui/hooks/useNavigationSideMenu'
 import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React, { Fragment, memo } from 'react'
+import { Fragment, memo } from 'react'
 import styles from './CompactNavigationSideMenu.module.css'
 
 /**

@@ -14,7 +14,6 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
-import { SaveCollectionValidation } from '@app/web/server/collections/SaveCollection'
 import { CreateCollectionCommandValidation } from '@app/web/server/collections/createCollection'
 import {
   UpdateCollectionImageCommandValidation,
@@ -24,11 +23,7 @@ import {
   collectionIdValidation,
 } from '@app/web/server/collections/updateCollection'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
-import {
-  authorizeOrThrow,
-  forbiddenError,
-  invalidError,
-} from '@app/web/server/rpc/trpcErrors'
+import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
@@ -36,117 +31,6 @@ import { v4 } from 'uuid'
 import z from 'zod'
 
 export const collectionRouter = router({
-  /**
-   * A Collection can be saved to a profile or a base.
-   * It does not mean the collection itself is being edited, but that it is being saved in a profile or a base.
-   */
-  save: protectedProcedure
-    .input(SaveCollectionValidation)
-    .mutation(
-      async ({ input: { collectionId, savedById, baseId }, ctx: { user } }) => {
-        if (savedById !== user.id) {
-          throw forbiddenError()
-        }
-
-        if (baseId) {
-          const base = await prismaClient.base.findUnique({
-            where: { id: baseId },
-            select: baseAuthorizationTargetSelect,
-          })
-
-          if (!base) {
-            throw invalidError('Base not found')
-          }
-
-          authorizeOrThrow(
-            baseAuthorization(base, user).hasPermission(
-              BasePermissions.WriteBase,
-            ),
-          )
-        }
-
-        const collection = await prismaClient.collection.findUnique({
-          where: { id: collectionId },
-          select: collectionAuthorizationTargetSelect,
-        })
-
-        if (!collection) {
-          throw invalidError('Collection not found')
-        }
-
-        authorizeOrThrow(
-          collectionAuthorization(collection, user).hasPermission(
-            CollectionPermissions.SaveCollection,
-          ),
-        )
-
-        return prismaClient.savedCollection.create({
-          data: { collectionId, savedById, baseId },
-          select: {
-            id: true,
-            base: {
-              select: {
-                id: true,
-                title: true,
-              },
-            },
-          },
-        })
-      },
-    ),
-  /**
-   * A Collection can be saved/unsaved to a profile or a base.
-   * It does not mean the collection itself is being edited, but that it is being saved in a profile or a base.
-   */
-  unsave: protectedProcedure
-    .input(SaveCollectionValidation)
-    .mutation(
-      async ({ input: { collectionId, savedById, baseId }, ctx: { user } }) => {
-        if (savedById !== user.id) {
-          throw forbiddenError()
-        }
-        if (baseId) {
-          const base = await prismaClient.base.findUnique({
-            where: { id: baseId },
-            select: baseAuthorizationTargetSelect,
-          })
-
-          if (!base) {
-            throw invalidError('Base not found')
-          }
-
-          authorizeOrThrow(
-            baseAuthorization(base, user).hasPermission(
-              BasePermissions.WriteBase,
-            ),
-          )
-        }
-
-        const collection = await prismaClient.collection.findUnique({
-          where: { id: collectionId },
-          select: collectionAuthorizationTargetSelect,
-        })
-
-        if (!collection) {
-          throw invalidError('Collection not found')
-        }
-
-        authorizeOrThrow(
-          collectionAuthorization(collection, user).hasPermission(
-            CollectionPermissions.UnsaveCollection,
-          ),
-        )
-
-        // Collection is saved in profile
-        return prismaClient.savedCollection.deleteMany({
-          where: baseId
-            ? // Remove from base if baseId is provided
-              { collectionId, baseId }
-            : // Remove from profile if baseId is not provided
-              { collectionId, savedById },
-        })
-      },
-    ),
   create: protectedProcedure
     .input(CreateCollectionCommandValidation)
     .mutation(

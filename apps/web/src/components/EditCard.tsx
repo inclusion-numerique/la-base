@@ -4,7 +4,7 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React, { type ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import type { UpdateBaseCommand } from '../server/bases/updateBase'
 import type { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'

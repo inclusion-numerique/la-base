@@ -6,7 +6,6 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 export const DeleteResourceDynamicModal = createDynamicModal({
   id: 'delete-resource-modal',

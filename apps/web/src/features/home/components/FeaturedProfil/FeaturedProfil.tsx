@@ -3,7 +3,6 @@ import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { countProfileResources } from '@app/web/server/profiles/countProfileResources'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import Link from 'next/link'
-import React from 'react'
 
 export const FeaturedProfil = ({
   profile,

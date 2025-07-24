@@ -14,7 +14,6 @@ import { applyDraft } from '@app/web/utils/resourceDraft'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import React from 'react'
 import { ResourceFeedbackList } from './_components/ResourceFeedbackList'
 
 export const generateMetadata = async ({

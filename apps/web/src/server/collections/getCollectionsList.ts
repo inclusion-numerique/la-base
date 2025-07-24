@@ -57,20 +57,9 @@ export const getProfileCollectionsCount = async (
 ) => {
   const where = getWhereCollectionsProfileList(profileId, user)
 
-  const collections = await prismaClient.collection.count({
+  return await prismaClient.collection.count({
     where,
   })
-  const savedCollections = await prismaClient.savedCollection.count({
-    where: {
-      savedById: profileId,
-    },
-  })
-
-  return {
-    collections,
-    savedCollections,
-    total: collections + savedCollections,
-  }
 }
 
 export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>

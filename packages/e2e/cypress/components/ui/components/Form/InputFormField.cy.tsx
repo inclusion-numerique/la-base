@@ -1,5 +1,4 @@
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 
 const Wrapper = ({ path }: { path: string }) => {

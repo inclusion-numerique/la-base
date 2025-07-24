@@ -4,7 +4,7 @@ import type { BaseTab } from '@app/web/app/(public)/bases/[slug]/(consultation)/
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './BaseMenu.module.css'
 
 const getCurrentTabFromPath = (path: string): BaseTab => {
@@ -65,8 +65,7 @@ const BaseMenu = ({ base }: { base: BasePageData }) => {
               currentTab={currentTab}
               href={`/bases/${base.slug}/collections`}
             >
-              Collections ·{' '}
-              <b>{base.collections.length + base.savedCollections.length}</b>
+              Collections · <b>{base.collections.length}</b>
             </MenuItem>
             <MenuItem
               tab="membres"

@@ -5,7 +5,6 @@ import type {
   CollectionResource,
   Resource,
   ResourceContributors,
-  SavedCollection,
   User,
 } from '@prisma/client'
 
@@ -23,17 +22,11 @@ export type SessionUserBase = Pick<
   'slug' | 'title' | 'id' | 'isPublic'
 > & {
   collections: SessionUserCollectionFragment[]
-  savedCollections: SessionUserSavedCollectionFragment[]
   image: {
     id: string
     altText: string | null
   } | null
 }
-
-export type SessionUserSavedCollectionFragment = Pick<
-  SavedCollection,
-  'id' | 'baseId' | 'collectionId'
->
 
 // Serializable user interface
 export type SessionUser = Pick<
@@ -61,7 +54,6 @@ export type SessionUser = Pick<
     base: SessionUserBase
   })[]
   collections: SessionUserCollectionFragment[]
-  savedCollections: SessionUserSavedCollectionFragment[]
   resources: Pick<ResourceContributors, 'resourceId'>[]
   createdResources: Pick<Resource, 'id' | 'slug'>[]
 }

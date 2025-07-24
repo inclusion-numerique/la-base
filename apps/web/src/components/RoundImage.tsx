@@ -1,6 +1,6 @@
 import UploadedImage from '@app/web/components/UploadedImage'
 import classNames from 'classnames'
-import React, { type ComponentProps, type ReactNode } from 'react'
+import { type ComponentProps, type ReactNode } from 'react'
 import styles from './RoundImage.module.css'
 
 const RoundImage = ({

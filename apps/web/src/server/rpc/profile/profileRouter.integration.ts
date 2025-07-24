@@ -419,14 +419,12 @@ describe('profileRouter', () => {
       const collections = await prismaClient.collection.findMany({
         where: {
           createdById: givenUserId,
-          savedCollection: { none: {} },
           baseId: null,
         },
       })
       const collectionsInBase = await prismaClient.collection.findMany({
         where: {
           createdById: givenUserId,
-          savedCollection: { none: {} },
           baseId: { not: null },
         },
       })

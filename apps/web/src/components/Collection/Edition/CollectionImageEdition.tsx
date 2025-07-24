@@ -12,7 +12,7 @@ import {
 } from '@app/web/server/collections/updateCollection'
 import { trpc } from '@app/web/trpc'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Images from '../Images'
 import ImageEdition from './ImageEdition'

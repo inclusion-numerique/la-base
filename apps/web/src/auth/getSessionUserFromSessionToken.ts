@@ -59,28 +59,6 @@ const baseCollectionFragment = {
     | Prisma.CollectionOrderByWithRelationInput[]
 }
 
-const userSavedCollectionFragment = {
-  select: {
-    id: true,
-    collectionId: true,
-    baseId: true,
-  },
-  where: { baseId: null },
-} satisfies {
-  select: Prisma.SavedCollectionSelect
-  where: Prisma.SavedCollectionWhereInput
-}
-
-const baseSavedCollectionFragment = {
-  select: {
-    id: true,
-    collectionId: true,
-    baseId: true,
-  },
-} satisfies {
-  select: Prisma.SavedCollectionSelect
-}
-
 export const getSessionUserFromSessionToken = async (
   sessionToken: string | null,
 ): Promise<SessionUser | null> => {
@@ -124,7 +102,6 @@ export const getSessionUserFromSessionToken = async (
               isPublic: true,
               image: true,
               collections: baseCollectionFragment,
-              savedCollections: baseSavedCollectionFragment,
             },
             where: {
               deleted: null,
@@ -141,7 +118,6 @@ export const getSessionUserFromSessionToken = async (
                   isPublic: true,
                   image: true,
                   collections: baseCollectionFragment,
-                  savedCollections: baseSavedCollectionFragment,
                 },
               },
             },
@@ -155,7 +131,6 @@ export const getSessionUserFromSessionToken = async (
             },
           },
           collections: userCollectionFragment,
-          savedCollections: userSavedCollectionFragment,
           resources: {
             select: {
               resourceId: true,

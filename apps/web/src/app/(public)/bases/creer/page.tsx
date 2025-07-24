@@ -6,7 +6,6 @@ import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import React from 'react'
 
 export const metadata: Metadata = {
   title: metadataTitle('Créer une base'),

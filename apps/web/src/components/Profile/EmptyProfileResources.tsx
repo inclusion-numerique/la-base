@@ -1,4 +1,3 @@
-import React from 'react'
 import EmptyBox from '../EmptyBox'
 import { CreateResourceButton } from '../Resource/CreateResourceModal'
 

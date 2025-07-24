@@ -14,7 +14,7 @@ import {
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { type Dispatch, type SetStateAction } from 'react'
+import { type Dispatch, type SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import EditableContent from './EditableContent'
 import styles from './ResourceEdition.module.css'

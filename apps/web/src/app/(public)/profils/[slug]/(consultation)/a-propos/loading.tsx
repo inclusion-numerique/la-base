@@ -1,5 +1,4 @@
 import IconInSquare from '@app/web/components/IconInSquare'
-import React from 'react'
 
 const LoadingAProposPage = () => (
   <>

@@ -1,7 +1,6 @@
 import Badge from '@codegouvfr/react-dsfr/Badge'
 import type { AlertProps } from '@codegouvfr/react-dsfr/src/Alert'
 import classNames from 'classnames'
-import React from 'react'
 import { feedbackBadgeStatus } from './resourceFeedbackBadge.Status'
 
 export const FeedbackBadge = ({

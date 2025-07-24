@@ -19,7 +19,6 @@ import {
 import { type Category, categoryThemesOptions } from '@app/web/themes/themes'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Theme } from '@prisma/client'
-import React from 'react'
 
 export type CategoryPageUrlParams = {
   page?: string | string[] | null

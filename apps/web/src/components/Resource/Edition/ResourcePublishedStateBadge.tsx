@@ -1,4 +1,3 @@
-import React from 'react'
 import CustomTag, { TagColor } from '../../CustomTag'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 

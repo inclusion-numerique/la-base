@@ -16,7 +16,6 @@ import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import { ResourceReportModal } from './ResourceReportModal'
 

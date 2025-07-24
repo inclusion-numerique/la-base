@@ -4,7 +4,6 @@ import { BaseMetadataData } from '@app/web/features/base/types/BaseMetadataType'
 import { getDepartmentName } from '@app/web/utils/departments'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './BaseMetadata.module.css'
 
 const BaseMetadata = ({

@@ -5,7 +5,6 @@ import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Link from 'next/link'
-import React from 'react'
 import CopyLinkButton from '../CopyLinkButton'
 import ProfileInformations from './ProfileInformations'
 

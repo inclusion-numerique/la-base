@@ -5,7 +5,6 @@ import {
 } from '@app/web/themes/themes'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './CategoryCard.module.css'
 
 export type CategoryCardProps = {

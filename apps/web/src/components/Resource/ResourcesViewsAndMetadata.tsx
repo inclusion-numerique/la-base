@@ -2,7 +2,7 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import CustomTag, { TagColor } from '../CustomTag'
 
 const ResourcesViewsAndMetadata = ({

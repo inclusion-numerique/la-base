@@ -5,7 +5,6 @@ import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './SaveResourceInCollectionModal.module.css'
 
 const SaveInNestedCollection = ({

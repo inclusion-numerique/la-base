@@ -8,7 +8,6 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 const RemoveBaseMemberButton = ({
   member,

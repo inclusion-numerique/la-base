@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import styles from './OptionBadge.module.css'
 import { SelectOption } from './utils/options'
 

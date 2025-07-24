@@ -1,4 +1,3 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import SignupPanel from '@app/web/app/(public)/(authentication)/creer-un-compte/SignupPanel'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'

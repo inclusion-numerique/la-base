@@ -251,7 +251,6 @@ describe('baseRouter', () => {
                 base: {
                   ...baseData,
                   collections: [],
-                  savedCollections: [],
                   image: null,
                 },
                 isAdmin: false,

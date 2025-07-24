@@ -8,7 +8,6 @@ import { trpc } from '@app/web/trpc'
 import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 const followingButtonsProps: ButtonProps = {
   type: 'button',

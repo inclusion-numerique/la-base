@@ -5,7 +5,6 @@ import {
   CollectionRoles,
   collectionAuthorization,
 } from '@app/web/authorization/models/collectionAuthorization'
-import BackButton from '@app/web/components/BackButton'
 import CollectionView from '@app/web/components/Collection/CollectionView'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import PrivateBox from '@app/web/components/PrivateBox'
@@ -15,7 +14,6 @@ import { getCollection } from '@app/web/server/collections/getCollection'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import React from 'react'
 
 export const generateMetadata = async ({
   params,

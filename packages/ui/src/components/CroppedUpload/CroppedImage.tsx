@@ -8,7 +8,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { Upload } from '@codegouvfr/react-dsfr/Upload'
 import classNames from 'classnames'
 import type Cropper from 'cropperjs'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import styles from './CroppedUpload.module.css'
 import { ImageWithName } from './utils'
 

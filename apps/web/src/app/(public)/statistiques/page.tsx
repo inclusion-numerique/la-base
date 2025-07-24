@@ -6,7 +6,6 @@ import {
   getStatistics,
 } from '@app/web/server/statistiques/getStatistics'
 import { numberToString } from '@app/web/utils/formatNumber'
-import React from 'react'
 import KeyFigureTitle from './KeyFigureTitle'
 import SelectPeriod from './SelectPeriod'
 import StatisticsChart from './StatisticsChart'
