@@ -188,7 +188,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-parameters-modal').click()
 
     cy.testId('resource-empty-indexation').should('not.exist')
-    cy.testId('edit-card-button').eq(4).click({ force: true })
+    cy.testId('edit-card-button').eq(6).click({ force: true })
     cy.testId('indexation-themes-select').click()
 
     // Remove existing indexation values created with cleanUpAndCreateTestPublishedResource()
@@ -206,7 +206,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 
-    cy.testId('edit-card-button').eq(4).click({ force: true })
+    cy.testId('edit-card-button').eq(6).click({ force: true })
     cy.testId('indexation-themes-select').click()
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',

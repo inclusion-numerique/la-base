@@ -8,6 +8,7 @@ import type { ResourceCreationEventApplier } from '@app/web/server/resources/fea
 import type { ResourceEventSideEffect } from '@app/web/server/resources/feature/ResourceEventSideEffect'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
+import { ResourceLicence } from '@prisma/client'
 
 export const handleCreateResource: ResourceCreationCommandHandler<
   CreateResourceCommand,
@@ -48,6 +49,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   published: null,
   deleted: null,
   lastPublished: null,
+  licence: ResourceLicence.ETALAB_2_0,
   createdById: byId,
   imageId: null,
   isPublic: null,

@@ -1,0 +1,8 @@
+.logo rect {
+  transition: fill 0.2s ease;
+}
+
+.logo:hover rect,
+label:hover .logo rect {
+  fill: white !important;
+}
