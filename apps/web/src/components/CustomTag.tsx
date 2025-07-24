@@ -22,25 +22,27 @@ const CustomTag = ({
   small?: boolean
   icon: string
   color: TagColor
-}) => (
-  <span
-    className={classNames(
-      {
-        'fr-tag': label,
-        'fr-tag--icon-left': label,
-        'fr-text--medium': !small,
-        'fr-tag--sm': small,
-        [styles.iconOnly]: !label,
-      },
-      styles.tag,
-      icon,
-      styles[color],
-      className,
-    )}
-    data-testid={dataTestId}
-  >
-    {label}
-  </span>
-)
+}) => {
+  return (
+    <span
+      className={classNames(
+        {
+          'fr-tag': label,
+          'fr-tag--icon-left': label,
+          'fr-text--medium': !small,
+          'fr-tag--sm': small,
+          [styles.iconOnly]: !label,
+        },
+        styles.tag,
+        icon,
+        styles[color],
+        className,
+      )}
+      data-testid={dataTestId}
+    >
+      {label}
+    </span>
+  )
+}
 
 export default CustomTag
