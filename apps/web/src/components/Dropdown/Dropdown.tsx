@@ -65,8 +65,25 @@ export const Dropdown = ({
   ) => {
     if (hasKey(event) && (event.key === 'Tab' || event.key === 'Shift')) return
 
-    if (event.target instanceof HTMLAnchorElement) {
-      buttonRef.current?.click()
+    if (hasKey(event) && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault()
+
+      const target = event.target as HTMLElement
+      if (
+        target instanceof HTMLAnchorElement ||
+        target instanceof HTMLButtonElement ||
+        target.getAttribute('role') === 'button' ||
+        target.closest('a, button, [role="button"]')
+      ) {
+        const clickableElement =
+          target.closest('a, button, [role="button"]') || target
+        ;(clickableElement as HTMLElement).click()
+        setIsOpen(false)
+      }
+    }
+
+    if (!hasKey(event) && event.target instanceof HTMLAnchorElement) {
+      setIsOpen(false)
     }
   }
 
