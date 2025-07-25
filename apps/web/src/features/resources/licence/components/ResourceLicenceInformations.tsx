@@ -9,7 +9,7 @@ const ResourceLicenceInformations = ({
 }) => {
   const information = licenceInformations[resource.licence]
   return (
-    <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+    <div className="fr-flex fr-direction-column fr-flex-gap-2v fr-mt-3w">
       {information.symbols}
       <div className="fr-flex fr-flex-gap-2v fr-text--xs">
         {information.url ? (

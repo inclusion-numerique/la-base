@@ -42,6 +42,7 @@ const OwnershipInformation = ({
   base,
   className,
   attributionWording,
+  withImage = true,
 }: {
   user: Pick<
     User,
@@ -54,7 +55,7 @@ const OwnershipInformation = ({
     | null
   className?: string
   attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
-  displayUser?: boolean
+  withImage?: boolean
 }) => (
   <div
     className={classNames(
@@ -62,7 +63,8 @@ const OwnershipInformation = ({
       className,
     )}
   >
-    {base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />}
+    {withImage &&
+      (base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />)}
     <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
       {attributionWordings[attributionWording].what}
       {base != null && (

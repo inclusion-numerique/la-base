@@ -36,6 +36,21 @@ export const BasePrivacyTag = ({
     <CustomTag {...privateValues} small={small} label="Base privée" />
   )
 
+export const CollectionPrivacyTag = ({
+  isPublic,
+  small,
+  className,
+}: {
+  isPublic?: boolean
+  small?: boolean
+  className?: string
+}) =>
+  isPublic ? (
+    <CustomTag {...publicValues} small={small} className={className} />
+  ) : (
+    <CustomTag {...privateValues} small={small} className={className} />
+  )
+
 export const PrivacyTag = ({
   className,
   isPublic,

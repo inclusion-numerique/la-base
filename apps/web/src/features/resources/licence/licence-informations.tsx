@@ -9,7 +9,7 @@ import { ResourceLicence } from '@prisma/client'
 export const licenceInformations = {
   [ResourceLicence.ETALAB_2_0]: {
     symbols: <ResourceLicenceEtalabSymbol />,
-    url: 'https://www.etalab.gouv.fr/licence-ouverte-2-0',
+    url: 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/',
     title: 'Licence Etalab 2.0',
     hint: "Attribution de la source d'information",
   },
