@@ -1,5 +1,4 @@
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
-import React from 'react'
 
 const resourceSections = [
   { id: 'publication', title: 'Ressource publié dans' },

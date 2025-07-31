@@ -8,10 +8,7 @@ import { cache } from 'react'
 export const getProfilePageContext = cache(async (profileSlug: string) => {
   const user = await getSessionUser()
 
-  const profile = await getProfilePageQuery(
-    { slug: decodeURI(profileSlug) },
-    user,
-  )
+  const profile = await getProfilePageQuery({ slug: decodeURI(profileSlug) })
   if (!profile) {
     notFound()
   }

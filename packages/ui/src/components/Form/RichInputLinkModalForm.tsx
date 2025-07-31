@@ -4,12 +4,7 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, {
-  FormEventHandler,
-  ReactNode,
-  ReactPortal,
-  useEffect,
-} from 'react'
+import { FormEventHandler, ReactNode, ReactPortal, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useForm } from 'react-hook-form'
 import z from 'zod'

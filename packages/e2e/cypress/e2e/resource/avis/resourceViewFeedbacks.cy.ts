@@ -70,7 +70,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
     cy.testId('resources-views-and-metadata').contains('1 avis')
 
     cy.testId('resources-feedbacks').contains('Recommandée')
-    cy.testId('resources-feedbacks').contains('1 Avis sur la ressource')
+    cy.testId('resources-feedbacks').contains('1 avis sur la ressource')
   })
 
   it('Acceptation 4 - Visiteur sur une ressource publique, je peux accéder aux avis via les liens 1 avis et voir les avis sur une ressource avec avis', () => {
@@ -105,6 +105,7 @@ describe("Utilisateur sans droit, je peux consulter les avis d'une ressource", (
       '/ressources/titre-d-une-ressource-sur-deux-ligne-tres-longues-comme-comme-sur-deux-lignes/',
     )
 
+    cy.testId('resource-informations-accordion').click()
     cy.testId('resources-feedbacks').contains('Voir les avis').click()
 
     cy.url().should(

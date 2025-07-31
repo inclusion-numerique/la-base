@@ -1,7 +1,6 @@
 import { createCollectionUrl } from '@app/web/collections/createCollectionUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React from 'react'
 
 export const CreateCollectionButton = ({
   className,

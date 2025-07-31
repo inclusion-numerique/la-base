@@ -6,7 +6,6 @@ import {
 } from '@app/web/server/collections/collectionConstraints'
 import type { CreateCollectionCommand } from '@app/web/server/collections/createCollection'
 import { htmlToText } from '@app/web/utils/htmlToText'
-import React from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 
 export const titleInfo = (title?: string | null) =>

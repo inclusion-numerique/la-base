@@ -6,7 +6,6 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import { trpc } from '@app/web/trpc'
 import ToggleSwitch from '@codegouvfr/react-dsfr/ToggleSwitch'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 const ResourceFeedback = ({ resource }: { resource: Resource }) => {
   const router = useRouter()

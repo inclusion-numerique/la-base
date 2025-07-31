@@ -11,7 +11,8 @@ import {
   MjmlSection,
   MjmlText,
 } from '@faire/mjml-react'
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 
 /**
  * With headerLogoOnly the logo will be centered and you can include title in children

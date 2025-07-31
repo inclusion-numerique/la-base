@@ -1,10 +1,9 @@
 import { CollectionListWrapper } from '@app/storybook/components/CollectionListWrapper'
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
-import { testSessionUser } from '@app/web/test/testSessionUser'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
-import { collectionInBase, creatorUser } from './cardsStoriesHelpers'
+import { collectionInBase } from './cardsStoriesHelpers'
 
 export default {
   title: 'Collection/Collections publiée dans une base',
@@ -32,7 +31,6 @@ const VisitorCollectionInBaseArguments: ComponentProps<typeof CollectionCard> =
       slug: `${collectionInBase.slug}-1`,
       ...dates,
     },
-    user: testSessionUser,
     canWrite: false,
   }
 
@@ -47,7 +45,6 @@ const ContributorPrivateCollectionInBaseArguments: ComponentProps<
     slug: `${collectionInBase.slug}-2`,
     ...dates,
   },
-  user: creatorUser,
   canWrite: true,
 }
 

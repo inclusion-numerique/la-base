@@ -14,7 +14,6 @@ import { trpc } from '@app/web/trpc'
 import { getDepartmentName } from '@app/web/utils/departments'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import BaseInformationsEdition from '../BaseInformationsEdition'
 

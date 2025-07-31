@@ -2,7 +2,7 @@ import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { formatName } from '@app/web/server/rpc/user/formatName'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import ImageEdition from './Edition/ProfileImageEdition'
 import ProfileMetadata from './ProfileMetadata'
 
@@ -11,10 +11,12 @@ const ProfileInformations = ({
   resourcesCount,
   children,
   editMode,
+  context,
 }: {
   profile: ProfilePageData
   resourcesCount: number
   editMode?: boolean
+  context: 'base' | 'profile' | 'card'
 } & PropsWithChildren) => (
   <div className="fr-flex-md fr-direction-row fr-justify-content-center fr-flex-gap-6v fr-align-items-center fr-text--center">
     <div className="fr-my-2w fr-position-relative">
@@ -36,6 +38,8 @@ const ProfileInformations = ({
             <ProfileMetadata
               resourcesCount={resourcesCount}
               followedByCount={profile._count.followedBy}
+              followedBy={profile.followedBy}
+              context={context}
             />
           </div>
         </div>

@@ -4,7 +4,6 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import Link from 'next/link'
-import React from 'react'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
   const bases = user.bases.map(({ base }) => base)

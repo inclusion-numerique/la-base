@@ -4,9 +4,7 @@ import { ProfileRoles } from '@app/web/authorization/models/profileAuthorization
 import Collections from '@app/web/components/Collection/List/Collections'
 import EmptyBox from '@app/web/components/EmptyBox'
 import { getProfileCollections } from '@app/web/server/collections/getCollectionsList'
-import { getProfileSavedCollections } from '@app/web/server/collections/getSavedCollectionsList'
 import Link from 'next/link'
-import React from 'react'
 
 const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
   const { slug } = await params
@@ -16,20 +14,15 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
     authorization: { hasRole, hasPermission },
   } = await getProfilePageContext(slug)
 
-  const [collections, savedCollections] = await Promise.all([
-    getProfileCollections(profile.id, user),
-    getProfileSavedCollections(profile.id, user),
-  ])
+  const collections = await getProfileCollections(profile.id, user)
 
   const isOwner = hasRole(ProfileRoles.ProfileOwner)
   const canWrite = hasPermission('WriteProfile')
 
   return (
     <Collections
-      user={user}
       collections={collections}
       isOwner={isOwner}
-      savedCollections={savedCollections.map(({ collection }) => collection)}
       withCreation={canWrite}
       collectionsLabel={isOwner ? 'Mes collections' : 'Collections'}
       emptyBox={

@@ -8,7 +8,6 @@ import { trpc } from '@app/web/trpc'
 import Button, { type ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 const followingButtonsProps: ButtonProps = {
   type: 'button',
@@ -25,8 +24,8 @@ const NOT_FOLLOWING_CHILDREN = (
 
 const match =
   (userId?: string) =>
-  ({ id }: { id: string }) =>
-    id === userId
+  ({ followerId }: { followerId: string }) =>
+    followerId === userId
 
 const followingButtonProps = (onFollow: () => Promise<void>) => () => ({
   ...followingButtonsProps,
@@ -80,7 +79,7 @@ const FollowBaseButton = ({
 }: {
   id: string
   title: string
-  followedBy: { id: string }[]
+  followedBy: { id: string; followerId: string; follower: boolean }[]
   userId?: string
   className?: string
 }) => {

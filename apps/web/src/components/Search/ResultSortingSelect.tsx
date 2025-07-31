@@ -11,7 +11,7 @@ import {
   resourcesSortingOptions,
 } from '@app/web/server/search/searchQueryParams'
 import { useRouter } from 'next/navigation'
-import React, { type ChangeEventHandler, useMemo, useState } from 'react'
+import { type ChangeEventHandler, useMemo, useState } from 'react'
 
 const getOptionsForModel = (tab: SearchTab, hasSearchQuery: boolean) => {
   const options =

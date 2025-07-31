@@ -12,7 +12,6 @@ import { getCollection } from '@app/web/server/collections/getCollection'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 
 export const generateMetadata = async ({
   params,

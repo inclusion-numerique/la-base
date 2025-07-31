@@ -1,7 +1,6 @@
 import CategoryPage, {
   type CategoryPageUrlParams,
 } from '@app/web/app/(public)/(categories)/_components/CategoryPage'
-import React from 'react'
 
 const NumeriqueEtEnvironnementPage = async ({
   params: paramsPromise,

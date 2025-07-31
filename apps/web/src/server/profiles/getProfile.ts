@@ -1,13 +1,10 @@
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 
-export const getProfilePageQuery = async (
-  {
-    id,
-    slug,
-  }: { id: string; slug?: undefined } | { id?: undefined; slug: string },
-  user: { id: string } | null,
-) =>
+export const getProfilePageQuery = async ({
+  id,
+  slug,
+}: { id: string; slug?: undefined } | { id?: undefined; slug: string }) =>
   prismaClient.user.findUnique({
     select: {
       id: true,
@@ -33,11 +30,23 @@ export const getProfilePageQuery = async (
         },
       },
       followedBy: {
-        where: {
-          followerId: user?.id,
-        },
         select: {
           id: true,
+          followerId: true,
+          follower: {
+            select: {
+              image: true,
+              id: true,
+              firstName: true,
+              lastName: true,
+              name: true,
+              isPublic: true,
+              followedBy: true,
+              _count: {
+                select: { resources: true, followedBy: true },
+              },
+            },
+          },
         },
       },
       isPublic: true,
@@ -60,3 +69,5 @@ export type ProfilePageData = Exclude<
   Awaited<ReturnType<typeof getProfilePageQuery>>,
   null
 >
+
+export type ProfileFollowedBy = ProfilePageData['followedBy']

@@ -6,7 +6,6 @@ import { BaseMember } from '@app/web/server/bases/getBase'
 import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
 const DeclineBaseInviteMemberButton = ({ member }: { member: BaseMember }) => {
   const mutate = trpc.baseMember.leave.useMutation()

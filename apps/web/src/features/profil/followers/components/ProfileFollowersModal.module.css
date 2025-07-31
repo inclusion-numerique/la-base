@@ -1,0 +1,11 @@
+.privacyTag {
+  padding: 6px !important;
+}
+
+.profileFollowersModal :global(.fr-modal__title) {
+  text-align: start !important;
+}
+
+.btn {
+  min-height: 0;
+}

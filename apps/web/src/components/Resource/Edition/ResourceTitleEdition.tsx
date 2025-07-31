@@ -14,7 +14,7 @@ import {
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { type Dispatch, type SetStateAction } from 'react'
+import { type Dispatch, type SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import EditableContent from './EditableContent'
 import styles from './ResourceEdition.module.css'
@@ -92,6 +92,7 @@ const ResourceTitleEdition = ({
             control={control}
             path="payload.description"
             type="textarea"
+            rows={5}
             label="Description courte de la ressource"
             hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
             info={descriptionInfo(description)}

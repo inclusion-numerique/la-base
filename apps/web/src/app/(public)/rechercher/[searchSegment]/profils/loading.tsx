@@ -1,6 +1,5 @@
 import ProfileCardSkeleton from '@app/web/components/Profile/Card/ProfileCardSkeleton'
 import { defaultPaginationParams } from '@app/web/server/search/searchQueryParams'
-import React from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

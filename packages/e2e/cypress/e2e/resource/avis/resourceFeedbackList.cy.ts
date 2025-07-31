@@ -84,7 +84,7 @@ describe('Lorsque je consulte une ressource, je peux voir la page des avis de la
     cy.testId('feedback-count').eq(2).contains('1 Avis')
   })
 
-  it.only("Acceptation 3 - Créateur d'une une ressource qui n'autorise pas les avis publics, je vois la liste des avis qui ont été postés", () => {
+  it("Acceptation 3 - Créateur d'une une ressource qui n'autorise pas les avis publics, je vois la liste des avis qui ont été postés", () => {
     cleanUpAndCreateTestPublishedResource({
       publicBase: true,
       publicResource: true,

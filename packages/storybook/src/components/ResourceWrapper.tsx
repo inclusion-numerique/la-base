@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 /**
  * Resources and resource editor are always in a context of a max-width container.

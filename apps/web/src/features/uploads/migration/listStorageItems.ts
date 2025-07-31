@@ -1,4 +1,3 @@
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { s3 } from '@app/web/server/s3/s3'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import {

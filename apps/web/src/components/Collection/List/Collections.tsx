@@ -1,31 +1,25 @@
-import type { SessionUser } from '@app/web/auth/sessionUser'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
 import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
 import { ManageCollectionButton } from '@app/web/components/Collection/ManageCollectionButton'
-import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import EmptyBox from '@app/web/components/EmptyBox'
 import IconInSquare from '@app/web/components/IconInSquare'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { CreateCollectionButton } from '../CreateCollectionButton'
 import styles from './Collections.module.css'
 
 const Collections = ({
   collections,
-  savedCollections,
   withCreation,
   collectionsLabel,
   emptyBox,
   baseId,
   baseSlug,
-  user,
   isOwner = false,
 }: {
-  user: SessionUser | null
   collections: CollectionListItem[]
-  savedCollections: CollectionListItem[]
   collectionsLabel: string
   withCreation: boolean
   emptyBox?: ReactNode
@@ -34,18 +28,17 @@ const Collections = ({
   isOwner?: boolean
 }) => {
   const favoriteCollection = collections.find((c) => c.isFavorites)
-  const combinedCollections = [...collections, ...savedCollections]
 
   return (
     <div data-testid="collections-list">
-      {combinedCollections.length > 0 ? (
+      {collections.length > 0 ? (
         <>
           <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-6w">
             <div className="fr-col-sm-auto fr-col-12">
               <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
                 <IconInSquare iconId="ri-folder-2-line" />
                 <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-                  {collectionsLabel} · {combinedCollections.length}
+                  {collectionsLabel} · {collections.length}
                 </h2>
               </div>
             </div>
@@ -81,15 +74,14 @@ const Collections = ({
             )}
           </div>
           <div className={styles.tabCards}>
-            {combinedCollections.map((collection) => (
+            {collections.map((collection) => (
               <CollectionCard
-                user={user}
                 collection={collection}
                 key={collection.id}
                 canWrite={isOwner || withCreation}
               />
             ))}
-            {combinedCollections.length === 1 && !!favoriteCollection && (
+            {collections.length === 1 && !!favoriteCollection && (
               <EmptyBox className="fr-flex fr-justify-content-center">
                 Créez une collection pour enregistrer et organiser des
                 ressources.
@@ -106,7 +98,6 @@ const Collections = ({
       ) : (
         emptyBox
       )}
-      {!!user && <SaveCollectionModal user={user} />}
       <DeleteCollectionModal />
     </div>
   )

@@ -74,7 +74,7 @@ const SansImageStory: Story = {
       ...base,
       image: null,
       department: null,
-      followedBy: [{ id: testSessionUser.id }],
+      followedBy: [{ id: testSessionUser.id, followerId: '1' }],
     },
     user: testSessionUser,
   },

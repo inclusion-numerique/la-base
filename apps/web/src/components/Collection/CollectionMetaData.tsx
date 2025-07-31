@@ -1,6 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import classNames from 'classnames'
-import React from 'react'
 import { PrivacyTag } from '../PrivacyTags'
 
 const CollectionMetaData = ({
@@ -10,7 +9,6 @@ const CollectionMetaData = ({
   className,
   hideRessourceLabelOnSmallDevices = false,
   withPrivacyTag = true,
-  withCollectionDates = true,
 }: {
   collection: {
     isPublic: boolean
@@ -26,7 +24,6 @@ const CollectionMetaData = ({
   hideRessourceLabelOnSmallDevices?: boolean
   className?: string
   withPrivacyTag?: boolean
-  withCollectionDates?: boolean
 }) => (
   <div
     className={classNames(
@@ -37,12 +34,7 @@ const CollectionMetaData = ({
       className,
     )}
   >
-    <div
-      className={classNames(
-        'fr-flex fr-flex-gap-2v',
-        !withCollectionDates && 'fr-mr-2v',
-      )}
-    >
+    <div className={classNames('fr-flex fr-flex-gap-2v')}>
       <span className="fr-icon-file-text-line fr-icon--sm" />
       <span>{count}</span>
       <span
@@ -55,7 +47,7 @@ const CollectionMetaData = ({
     </div>
     <div className="fr-flex fr-flex-gap-2v">
       {!!withPrivacyTag && (
-        <div className="fr-flex fr-flex-gap-2v fr-ml-md-2v">
+        <div className="fr-flex fr-flex-gap-2v">
           <span>•</span>
           <div className="fr-hidden fr-unhidden-sm">
             <PrivacyTag

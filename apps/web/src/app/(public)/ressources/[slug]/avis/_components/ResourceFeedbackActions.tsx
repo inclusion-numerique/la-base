@@ -1,6 +1,5 @@
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
-import React from 'react'
 
 export const ResourceFeedbackActions = ({
   isOwner,

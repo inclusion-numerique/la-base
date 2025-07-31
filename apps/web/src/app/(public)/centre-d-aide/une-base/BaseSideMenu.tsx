@@ -1,7 +1,6 @@
 'use client'
 
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
-import React from 'react'
 
 const BASES_SECTIONS = [
   {

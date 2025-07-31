@@ -5,7 +5,6 @@ import type { BasePageData } from '@app/web/server/bases/getBase'
 import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import type { User } from '@prisma/client'
 import classNames from 'classnames'
-import React from 'react'
 import { formatName } from '../server/rpc/user/formatName'
 import styles from './OwnershipInformation.module.css'
 
@@ -42,6 +41,7 @@ const OwnershipInformation = ({
   base,
   className,
   attributionWording,
+  withImage = true,
 }: {
   user: Pick<
     User,
@@ -54,7 +54,7 @@ const OwnershipInformation = ({
     | null
   className?: string
   attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
-  displayUser?: boolean
+  withImage?: boolean
 }) => (
   <div
     className={classNames(
@@ -62,7 +62,8 @@ const OwnershipInformation = ({
       className,
     )}
   >
-    {base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />}
+    {withImage &&
+      (base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />)}
     <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
       {attributionWordings[attributionWording].what}
       {base != null && (

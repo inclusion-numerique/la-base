@@ -11,7 +11,7 @@ import {
 } from '@app/web/server/rpc/resource/utils'
 import { trpc } from '@app/web/trpc'
 import * as Sentry from '@sentry/nextjs'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { UseFormReturn } from 'react-hook-form'
 import styles from './ImageContentEdition.module.css'
 

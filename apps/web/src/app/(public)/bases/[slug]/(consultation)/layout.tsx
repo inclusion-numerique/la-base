@@ -2,7 +2,6 @@ import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consulta
 import type { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import PrivateBox from '@app/web/components/PrivateBox'
-import CreateResourceFormModal from '@app/web/components/Resource/CreateResourceFormModal'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import BaseHeader, {
   headerSkipLink,
@@ -12,7 +11,7 @@ import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 export const generateMetadata = async ({
   params,

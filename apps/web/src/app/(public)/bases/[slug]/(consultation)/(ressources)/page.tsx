@@ -1,7 +1,6 @@
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
 import EmptyBaseResources from '@app/web/components/Base/EmptyBaseResources'
 import Resources from '@app/web/components/Resource/List/Resources'
-import React from 'react'
 
 const BaseResourcesPage = async ({
   params,

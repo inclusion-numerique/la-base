@@ -1,6 +1,5 @@
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SearchBar from '@app/web/components/Search/SearchBar'
-import React from 'react'
 
 export const rechercherId = 'rechercher'
 

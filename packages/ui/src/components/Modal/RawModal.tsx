@@ -1,7 +1,7 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 /**
  * This component is used for handling a Modal out of react-dsfr

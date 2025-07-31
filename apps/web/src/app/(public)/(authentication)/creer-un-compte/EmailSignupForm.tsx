@@ -11,7 +11,6 @@ import {
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import Button from '@codegouvfr/react-dsfr/Button'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Cookies from 'js-cookie'
 import type { Route } from 'next'

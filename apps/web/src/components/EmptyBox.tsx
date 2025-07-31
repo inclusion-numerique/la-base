@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { type PropsWithChildren, type ReactNode } from 'react'
+import { type PropsWithChildren, type ReactNode } from 'react'
 import styles from './EmptyBox.module.css'
 
 const EmptyBox = ({

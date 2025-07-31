@@ -3,7 +3,7 @@
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Controller, FieldValues, UseFormReturn } from 'react-hook-form'
 import { FieldPath } from 'react-hook-form/dist/types/path'
 import RichTextForm from './RichTextForm'

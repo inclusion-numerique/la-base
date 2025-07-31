@@ -2,7 +2,6 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import styles from './ChartCard.module.css'
 
 export interface ChartCardProps {

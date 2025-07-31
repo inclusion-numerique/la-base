@@ -5,7 +5,6 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import DynamicLinkContentEditionPreview from '@app/web/components/Resource/Contents/DynamicLinkContentEditionPreview'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { LinkPayload } from '@app/web/server/resources/feature/Content'
-import type { ClientContentPayload } from '@app/web/server/resources/feature/Content.client'
 import type { Metadata } from '@app/web/server/rpc/metadata/getMetadataFromDocument'
 import {
   contentCaptionMaxLength,

@@ -21,6 +21,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
     isPublic: true,
     createdById: true,
     legacyId: true,
+    licence: true,
     publicFeedback: true,
     resourceFeedback: {
       where: {
@@ -75,10 +76,45 @@ export const getResourceSelect = (user: { id: string } | null) =>
     collections: {
       select: {
         collectionId: true,
+        collection: {
+          select: {
+            id: true,
+            isFavorites: true,
+            created: true,
+            updated: true,
+            title: true,
+            slug: true,
+            isPublic: true,
+            resources: {
+              select: {
+                resourceId: true,
+              },
+            },
+            base: {
+              select: {
+                id: true,
+                title: true,
+                image: true,
+                slug: true,
+              },
+            },
+            createdBy: {
+              select: {
+                name: true,
+                id: true,
+                slug: true,
+                image: true,
+                firstName: true,
+                lastName: true,
+                isPublic: true,
+              },
+            },
+          },
+        },
       },
       where: {
         collection: {
-          createdById: user?.id,
+          ...(!user ? { isPublic: true } : { createdById: user.id }),
         },
       },
     },
@@ -170,7 +206,13 @@ export const getResourceSelect = (user: { id: string } | null) =>
         resourceFeedback: {
           where: { deleted: null },
         },
-        collections: true,
+        collections: {
+          where: {
+            collection: {
+              ...(!user ? { isPublic: true } : { createdById: user.id }),
+            },
+          },
+        },
       },
     },
   }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']

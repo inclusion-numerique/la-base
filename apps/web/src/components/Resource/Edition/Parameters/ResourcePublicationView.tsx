@@ -6,7 +6,6 @@ import {
 } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import React from 'react'
 import styles from './ResourcePublicationView.module.css'
 
 const ResourcePublicationView = ({

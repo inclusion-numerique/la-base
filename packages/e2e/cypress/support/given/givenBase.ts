@@ -36,7 +36,6 @@ export const givenBase = (
     isPublic: data.isPublic,
     email: defaultTestBaseEmail,
     emailIsPublic: true,
-    savedCollections: data.savedCollections,
     collections: data.collections,
     department: data.department,
     deleted: data.deleted,

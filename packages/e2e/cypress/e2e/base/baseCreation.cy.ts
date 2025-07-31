@@ -49,7 +49,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
 
     cy.scrollTo('bottom')
     cy.positionToViewport('base-title-input', 'above')
-    cy.testId('create-button').click()
+    cy.testId('create-button').click({ force: true })
 
     cy.positionToViewport('base-title-input', 'inside')
     cy.get('[id=input-form-field__title__error]').should(
@@ -109,7 +109,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     )
   })
 
-  it.only('Acceptation 7 - Création de base avec membres', () => {
+  it('Acceptation 7 - Création de base avec membres', () => {
     cy.intercept('/api/trpc/profile.searchProfileForMember?*').as('getUser')
 
     cy.visit('/bases/creer')

@@ -1,6 +1,5 @@
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
-import Input from '@codegouvfr/react-dsfr/Input'
 import classNames from 'classnames'
 import type {
   ChangeEventHandler,

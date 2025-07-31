@@ -1,7 +1,5 @@
 import type { BasePageData } from '@app/web/server/bases/getBase'
-import { getDepartmentName } from '@app/web/utils/departments'
 import Link from 'next/link'
-import React from 'react'
 import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => (

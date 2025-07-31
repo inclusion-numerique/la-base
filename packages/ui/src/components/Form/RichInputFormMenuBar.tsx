@@ -7,7 +7,7 @@ import {
 import { noop } from '@app/web/utils/noop'
 import { Editor } from '@tiptap/react'
 import classNames from 'classnames'
-import React, { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 import styles from './RichInputFormMenuBar.module.css'
 
 const MenuButton = ({

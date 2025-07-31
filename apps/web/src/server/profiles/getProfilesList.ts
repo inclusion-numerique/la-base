@@ -22,6 +22,7 @@ export const profileListSelect = (user: { id: string } | null) =>
         followerId: user?.id,
       },
       select: {
+        followerId: true,
         id: true,
       },
     },

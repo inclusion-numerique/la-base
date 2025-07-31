@@ -3,7 +3,7 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import classNames from 'classnames'
-import React, { type ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import styles from './CopyLinkButton.module.css'
 
 const CopyLinkButton = ({

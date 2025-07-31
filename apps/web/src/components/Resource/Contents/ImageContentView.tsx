@@ -1,6 +1,5 @@
 import ImageContentDetails from '@app/web/components/Resource/Contents/ImageContentDetails'
 import type { ResourceContent } from '@app/web/server/resources/getResource'
-import React from 'react'
 
 const ImageContentView = ({
   content: { title, image, caption, imageAltText },

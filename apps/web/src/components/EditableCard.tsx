@@ -4,11 +4,7 @@ import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import Card from '@app/web/components/Card'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React, {
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-} from 'react'
+import { type Dispatch, type ReactNode, type SetStateAction } from 'react'
 import styles from './EditCard.module.css'
 
 const EditableCard = ({

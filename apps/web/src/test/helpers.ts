@@ -1,6 +1,7 @@
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import type { Resource } from '@app/web/server/resources/getResource'
+import { ResourceLicence } from '@prisma/client'
 import { v4 } from 'uuid'
 import type { SessionUser } from '../auth/sessionUser'
 import type { BasePageData } from '../server/bases/getBase'
@@ -26,7 +27,6 @@ export const createTestUser = (publicProfile?: boolean) =>
     createdResources: [],
     resources: [],
     collections: [],
-    savedCollections: [],
   }) satisfies SessionUser
 
 export const createTestProfile = (publicProfile?: boolean) =>
@@ -72,6 +72,7 @@ export const createTestResource = (
     title:
       'Titre d’une ressource sur deux ligne très longues comme comme sur deux lignes',
     slug: 'titre-d-une-ressource-sur-deux-ligne-très-longues-comme-comme-sur-deux-lignes',
+    licence: ResourceLicence.ETALAB_2_0,
     created: new Date('2023-09-14'),
     updated: new Date('2023-09-14'),
     published: new Date('2023-09-14'),
@@ -161,7 +162,6 @@ export const createTestBase = (
     image: null,
     coverImage: null,
     collections: [],
-    savedCollections: [],
     followedBy: [],
     members: [
       ...admins.map((admin) => ({

@@ -3,7 +3,6 @@
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import React from 'react'
 import InviteResourceContributors from './InviteResourceContributors'
 
 export const InviteContributorDynamicModal = createDynamicModal({

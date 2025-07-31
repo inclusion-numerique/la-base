@@ -8,7 +8,7 @@ import type { ContentType } from '@prisma/client'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
-import React, { RefObject, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './AddContentButton.module.css'
 

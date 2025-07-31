@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import styles from './Options.module.css'
 
 export type Option<T extends string> = {

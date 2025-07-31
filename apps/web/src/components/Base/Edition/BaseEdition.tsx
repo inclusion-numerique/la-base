@@ -6,7 +6,6 @@ import BaseVisibilityForm from '@app/web/components/Base/Edition/BaseVisibilityF
 import Card from '@app/web/components/Card'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './BaseEdition.module.css'
 
 const BaseEdition = ({

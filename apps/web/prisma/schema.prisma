@@ -102,7 +102,6 @@ model User {
   resources           ResourceContributors[]
   collections         Collection[]
   resourceViews       ResourceView[]
-  savedCollections    SavedCollection[]
   sentResourceReports ResourceReport[]
   baseFollows         BaseFollow[]
   profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
@@ -173,7 +172,6 @@ model Base {
   resources        Resource[]
   members          BaseMembers[]
   collections      Collection[]
-  savedCollections SavedCollection[]
   followedBy       BaseFollow[]
 
   featuredBlock   FeaturedBlock? @relation("base")
@@ -263,6 +261,15 @@ enum Theme {
   @@map("theme")
 }
 
+enum ResourceLicence {
+  ETALAB_2_0      @map("etalab_2_0")
+  CC_BY_SA_4_0    @map("cc_by_sa_4_0")
+  CC_BY_NC_SA_4_0 @map("cc_by_nc_sa_4_0")
+  NO_LICENCE      @map("no_licence")
+
+  @@map("resource_licence")
+}
+
 enum ResourceType {
   ResourcePedagogique @map("resource_pedagogique")
   OutilsNumeriques    @map("outils_numeriques")
@@ -311,11 +318,12 @@ model Resource {
   // isPublic is null when the user created the resource but did not publish it
   isPublic                  Boolean? @map("is_public")
 
+  licence             ResourceLicence     @default(ETALAB_2_0) @map("licence")
   themes              Theme[]
-  resourceTypes       ResourceType[]        @map("resource_types")
-  beneficiaries       Beneficiary[]       @map("beneficiaries")
+  resourceTypes       ResourceType[]       @map("resource_types")
+  beneficiaries       Beneficiary[]        @map("beneficiaries")
   professionalSectors ProfessionalSector[] @map("professional_sectors")
-  publicFeedback      Boolean               @default(true)
+  publicFeedback      Boolean              @default(true)
 
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
@@ -372,6 +380,7 @@ enum ResourceEventType {
   ContentEdited             @map("content_edited")
   ContentRemoved            @map("content_removed")
   ContentReordered          @map("content_reordered")
+  LicenceChanged            @map("licence_changed")
 
   @@map("resource_event_type")
 }
@@ -588,34 +597,10 @@ model Collection {
   imageId String? @unique @map("image_id") @db.Uuid
 
   resources       CollectionResource[]
-  savedCollection SavedCollection[]
 
   @@index([baseId])
   @@index([createdById])
   @@map("collections")
-}
-
-model SavedCollection {
-  id       String @id @default(uuid()) @db.Uuid
-  legacyId Int?   @unique @map("legacy_id")
-
-  savedBy   User   @relation(fields: [savedById], references: [id])
-  savedById String @map("saved_by_id") @db.Uuid
-
-  collection   Collection @relation(fields: [collectionId], references: [id])
-  collectionId String     @map("collection_id") @db.Uuid
-
-  // If saved in a base, we keep the user in savedBy but the info for
-  // where to consider it is in baseId
-  base   Base?   @relation(fields: [baseId], references: [id])
-  baseId String? @map("base_id") @db.Uuid
-
-  saved DateTime @default(now())
-
-  @@index([savedById])
-  @@index([collectionId])
-  @@index([baseId])
-  @@map("saved_collection")
 }
 
 enum ResourceReportReason {
@@ -713,11 +698,11 @@ model SearchExecution {
 
   results Int
 
-  themes              Theme[]               @default([])
-  resourceTypes       ResourceType[]        @default([]) @map("resource_types")
-  beneficiaries       Beneficiary[]       @default([]) @map("beneficiaries")
+  themes              Theme[]              @default([])
+  resourceTypes       ResourceType[]       @default([]) @map("resource_types")
+  beneficiaries       Beneficiary[]        @default([]) @map("beneficiaries")
   professionalSectors ProfessionalSector[] @default([]) @map("professional_sectors")
-  departments         String[]              @default([])
+  departments         String[]             @default([])
 
   page    Int
   perPage Int @map("per_page")

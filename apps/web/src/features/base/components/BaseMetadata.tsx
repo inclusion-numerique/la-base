@@ -1,10 +1,11 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
+import BaseFollowersModal from '@app/web/features/base/followers/components/BaseFollowersModal'
 import { BaseMetadataData } from '@app/web/features/base/types/BaseMetadataType'
 import { getDepartmentName } from '@app/web/utils/departments'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
-import React from 'react'
 import styles from './BaseMetadata.module.css'
 
 const BaseMetadata = ({
@@ -13,12 +14,14 @@ const BaseMetadata = ({
   withBadge,
   smallBadge,
   context,
+  user,
 }: {
   base: BaseMetadataData
   className?: string
   withBadge?: boolean
   smallBadge?: boolean
   context: 'base' | 'profile' | 'card'
+  user?: SessionUser | null
 }) => {
   const resourcesCount = base._count.resources
   const resourcesViews = base._count.resourcesViews
@@ -44,15 +47,25 @@ const BaseMetadata = ({
             Ressource{sPluriel(resourcesCount)}
           </span>
         </div>
-        <div>·</div>
-        <span className="fr-icon-user-heart-line fr-icon--sm" />
-        <div>
-          <b>{numberToString(followedBy)}</b>
-          <span className={styles.spanMdDisplay}>
-            {' '}
-            Suivi{sPluriel(followedBy)}
-          </span>
-        </div>
+        {context === 'base' && !!base.followedBy && followedBy > 0 ? (
+          <BaseFollowersModal
+            followedBy={base.followedBy}
+            count={followedBy}
+            user={user}
+          />
+        ) : (
+          <>
+            <div>·</div>
+            <span className="fr-icon-user-heart-line fr-icon--sm" />
+            <div>
+              <b>{numberToString(followedBy)}</b>
+              <span className={styles.spanMdDisplay}>
+                {' '}
+                Suivi{sPluriel(followedBy)}
+              </span>
+            </div>
+          </>
+        )}
         <div>·</div>
         <span className="fr-icon-eye-line fr-icon--sm" />
         <div>

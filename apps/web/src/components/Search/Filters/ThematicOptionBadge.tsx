@@ -1,6 +1,6 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import classNames from 'classnames'
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 import styles from './ThematicOptionBadge.module.css'
 
 export const ThematicOptionBadge = ({
@@ -32,7 +32,7 @@ export const ThematicOptionBadge = ({
     data-testid={dataTestId}
     type="button"
     className={classNames(
-      `fr-tag${size === 'sm' ? 'fr-tag--sm' : ''}`,
+      `fr-tag ${size === 'sm' ? 'fr-tag--sm' : ''}`,
       className,
     )}
     disabled={disabled || option.disabled}
@@ -48,7 +48,9 @@ export const ThematicOptionBadge = ({
         )}
       />
     )}
-    <span className={textClassName}>{option.label}</span>
+    <span className={classNames(textClassName, 'fr-text--start')}>
+      {option.label}
+    </span>
     {!!iconId && (
       <span
         className={classNames(iconId, iconClassName, 'fr-ml-1w fr-icon--sm')}

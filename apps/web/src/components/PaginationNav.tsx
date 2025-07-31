@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
 // Only display at most 6 pages numbered links
@@ -35,6 +34,11 @@ export const createPagesNumbersToDisplay = (
 
 export type PaginationNavProps = ComponentProps<typeof PaginationNav>
 
+// There is issue with the Link component from nextjs@15, with the scroll restoration not jumping on top while redirecting.
+// For now I fallback to a simple <a> tag.
+// ref. https://github.com/vercel/next.js/issues/64441
+// ref. https://github.com/vercel/next.js/issues/79571
+// ref. https://github.com/vercel/next.js/issues/80615
 const PaginationNav = ({
   className,
   createPageLink,
@@ -70,14 +74,13 @@ const PaginationNav = ({
               Première page
             </a>
           ) : (
-            <Link
+            <a
               className="fr-pagination__link fr-pagination__link--first"
               role="link"
               href={createPageLink(1)}
-              prefetch={false}
             >
               Première page
-            </Link>
+            </a>
           )}
         </li>
         <li>
@@ -89,14 +92,13 @@ const PaginationNav = ({
               Page précédente
             </a>
           ) : (
-            <Link
+            <a
               className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
               role="link"
               href={createPageLink(pageNumber - 1)}
-              prefetch={false}
             >
               Page précédente
-            </Link>
+            </a>
           )}
         </li>
         {/* TODO display lg etc... from doc https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/pagination/ */}
@@ -107,15 +109,14 @@ const PaginationNav = ({
             </li>
           ) : (
             <li key={linkNumber}>
-              <Link
+              <a
                 className="fr-pagination__link"
                 aria-current={pageNumber === linkNumber ? 'page' : undefined}
                 title={`Page ${linkNumber}`}
                 href={createPageLink(linkNumber)}
-                prefetch={false}
               >
                 {linkNumber}
-              </Link>
+              </a>
             </li>
           ),
         )}
@@ -128,14 +129,13 @@ const PaginationNav = ({
               Page suivante
             </a>
           ) : (
-            <Link
+            <a
               className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
               role="link"
               href={createPageLink(pageNumber + 1)}
-              prefetch={false}
             >
               Page suivante
-            </Link>
+            </a>
           )}
         </li>
         <li>
@@ -147,14 +147,13 @@ const PaginationNav = ({
               Dernière page
             </a>
           ) : (
-            <Link
+            <a
               className="fr-pagination__link fr-pagination__link--last"
               role="link"
               href={createPageLink(totalPages)}
-              prefetch={false}
             >
               Dernière page
-            </Link>
+            </a>
           )}
         </li>
       </ul>

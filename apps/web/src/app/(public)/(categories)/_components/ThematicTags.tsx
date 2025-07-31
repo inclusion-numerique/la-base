@@ -4,7 +4,7 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import type { Sorting } from '@app/web/server/search/searchQueryParams'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { createThematicLink } from '../_helpers/createThematicLink'
 
 // helper for filter() method

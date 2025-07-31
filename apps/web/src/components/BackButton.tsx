@@ -3,7 +3,7 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 const BackButton = ({
   children = 'Retour',

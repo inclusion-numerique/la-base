@@ -114,7 +114,6 @@ const CollectionResourcesOrderEdition = ({
               <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-my-2v">
                 <CollectionMetaData
                   className="fr-my-2v"
-                  withCollectionDates={false}
                   collection={{
                     title: collection.title,
                     id: collection.id,

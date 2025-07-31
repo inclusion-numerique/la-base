@@ -1,5 +1,4 @@
 import Header from '@app/web/components/Header'
-import React from 'react'
 
 describe('<Header />', () => {
   it('Should display desktop header without dropshadow', () => {

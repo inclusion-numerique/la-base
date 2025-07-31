@@ -7,7 +7,6 @@ import EmptyProfileInformations from '@app/web/components/Profile/EmptyProfileIn
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { getDepartmentName } from '@app/web/utils/departments'
 import Link from 'next/link'
-import React from 'react'
 
 const hasInformations = (profile: ProfilePageData): boolean =>
   profile.description != null || profile.department != null

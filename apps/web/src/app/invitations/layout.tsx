@@ -1,5 +1,5 @@
 import MinimalFooter from '@app/web/components/MinimalFooter'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 const PublicLayout = async ({ children }: PropsWithChildren) => {
   return (

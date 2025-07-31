@@ -225,11 +225,11 @@ const ContentPolicyPage = () => (
                     <>
                       <span className="fr-text-default--grey">
                         À savoir pour les utilisateurs de la 1ère version de la
-                        plateforme
-                      </span>{' '}
-                      <Link className="fr-link" href="le-profil#un-profil">
-                        En savoir plus ici
-                      </Link>
+                        plateforme.&nbsp;
+                        <Link className="fr-link" href="le-profil#un-profil">
+                          En savoir plus ici
+                        </Link>
+                      </span>
                     </>
                   }
                 />
@@ -255,7 +255,10 @@ const ContentPolicyPage = () => (
                 <Notice
                   className="fr-mb-2w"
                   title={
-                    <Link className="fr-link" href="le-profil">
+                    <Link
+                      className="fr-link fr-link--no-underline fr-text--underline"
+                      href="le-profil"
+                    >
                       Retrouvez ici plus d’informations sur comment utiliser
                       votre profil
                     </Link>

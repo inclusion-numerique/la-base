@@ -1,10 +1,8 @@
 'use client'
 
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
-import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React from 'react'
 
 export const CreateResourceDynamicModal = createDynamicModal({
   id: 'create-resource',
@@ -31,31 +29,64 @@ export const CreateResourceButton = ({
   const open = CreateResourceDynamicModal.useOpen()
 
   const onClick = () => open({ baseId })
+  const href = baseId
+    ? `/bases/${baseId}?creer-une-ressource`
+    : '/?creer-une-ressource'
 
   return (
-    <Button
-      type="button"
-      className={className}
-      data-testid={dataTestid}
-      onClick={onClick}
-    >
-      <span
-        className={classNames(
-          'ri-edit-box-line fr-mr-1w',
-          'fr-hidden-lg',
-          titleClassName,
-        )}
-        aria-hidden
-      />
-      Créer une ressource
-      <span
-        className={classNames(
-          'ri-edit-box-line fr-ml-1w',
-          'fr-hidden fr-unhidden-lg',
-          titleClassName,
-        )}
-        aria-hidden
-      />
-    </Button>
+    <>
+      <div className="fr-hidden fr-unhidden-lg">
+        <Button
+          type="button"
+          className={className}
+          data-testid={dataTestid}
+          onClick={onClick}
+        >
+          <span
+            className={classNames(
+              'ri-edit-box-line fr-mr-1w',
+              'fr-hidden-lg',
+              titleClassName,
+            )}
+            aria-hidden
+          />
+          Créer une ressource
+          <span
+            className={classNames(
+              'ri-edit-box-line fr-ml-1w',
+              'fr-hidden fr-unhidden-lg',
+              titleClassName,
+            )}
+            aria-hidden
+          />
+        </Button>
+      </div>
+      {/* Header mobile only works with links */}
+      <Button
+        className={classNames('fr-hidden-lg', className)}
+        data-testid={dataTestid}
+        linkProps={{
+          href,
+        }}
+      >
+        <span
+          className={classNames(
+            'ri-edit-box-line fr-mr-1w',
+            'fr-hidden-lg',
+            titleClassName,
+          )}
+          aria-hidden
+        />
+        Créer une ressource
+        <span
+          className={classNames(
+            'ri-edit-box-line fr-ml-1w',
+            'fr-hidden fr-unhidden-lg',
+            titleClassName,
+          )}
+          aria-hidden
+        />{' '}
+      </Button>
+    </>
   )
 }

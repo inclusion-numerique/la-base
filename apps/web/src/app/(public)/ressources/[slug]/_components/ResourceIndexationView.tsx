@@ -1,3 +1,4 @@
+import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import type { Resource } from '@app/web/server/resources/getResource'
 import {
   type SearchParams,
@@ -7,10 +8,17 @@ import {
 import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
 import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
 import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
-import { themeLabels } from '@app/web/themes/themes'
+import {
+  CATEGORY_VARIANTS,
+  CATEGORY_VARIANTS_TAG,
+  type Category,
+  themeCategories,
+  themeLabels,
+} from '@app/web/themes/themes'
 import Tag from '@codegouvfr/react-dsfr/Tag'
+import { Theme } from '@prisma/client'
 import classNames from 'classnames'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import styles from './ResourceIndexationView.module.css'
 
 const getThemes = (resource: Resource) => ({
@@ -87,7 +95,7 @@ const ResourceIndexationView = ({
 
   return resourceInfo.map(({ title, description, tags, slug }, index) => (
     <div key={title}>
-      <div className={index === 0 ? '' : 'fr-mt-3w'}>
+      <div className={index === 0 ? 'fr-mt-1w' : 'fr-mt-3w'}>
         <span className={titleClassName}>{title}</span>
         {withDescription && (
           <div className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
@@ -98,35 +106,81 @@ const ResourceIndexationView = ({
       <div className={classNames(styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
           <>
-            {withLink
-              ? tags.map((tag) => {
-                  const searchParams: SearchParams = { ...defaultSearchParams }
-                  searchParams[slug as 'themes'] = [
+            {tags.map((tag) => {
+              if (slug === 'themes') {
+                const category = themeCategories[tag.slug as Theme] as Category
+                const className = CATEGORY_VARIANTS_TAG[category].unselected
+                const categoryIconClassName = classNames(
+                  CATEGORY_VARIANTS[category].icon,
+                  CATEGORY_VARIANTS[category].color,
+                )
+
+                if (withLink) {
+                  const searchParams: SearchParams = {
+                    ...defaultSearchParams,
+                  }
+                  searchParams.themes = [
                     tag.slug,
                   ] as (typeof searchParams)['themes']
 
                   return (
-                    <Tag
+                    <a
                       key={tag.slug}
+                      href={searchUrl('ressources', searchParams)}
+                      className="fr-link--no-underline"
                       data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                      linkProps={{
-                        href: searchUrl('ressources', searchParams),
-                      }}
-                      small
-                      className={styles.tag}
                     >
-                      {tag.label}
-                    </Tag>
+                      <ThematicOptionBadge
+                        categoryIconClassName={categoryIconClassName}
+                        textClassName="fr-text-label--grey"
+                        className={className}
+                        size="sm"
+                        option={{ label: tag.label, disabled: false }}
+                      />
+                    </a>
                   )
-                })
-              : tags.map((tag) => (
+                } else {
+                  return (
+                    <ThematicOptionBadge
+                      key={tag.slug}
+                      categoryIconClassName={categoryIconClassName}
+                      textClassName="fr-text-label--grey"
+                      className={className}
+                      size="sm"
+                      option={{ label: tag.label, disabled: false }}
+                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                    />
+                  )
+                }
+              }
+
+              if (withLink) {
+                const searchParams: SearchParams = { ...defaultSearchParams }
+
+                return (
+                  <Tag
+                    key={tag.slug}
+                    data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                    linkProps={{
+                      href: searchUrl('ressources', searchParams),
+                    }}
+                    small
+                    className={styles.tag}
+                  >
+                    {tag.label}
+                  </Tag>
+                )
+              } else {
+                return (
                   <span
                     key={tag.slug}
                     className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}
                   >
                     {tag.label}
                   </span>
-                ))}
+                )
+              }
+            })}
           </>
         ) : (
           <div className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}>

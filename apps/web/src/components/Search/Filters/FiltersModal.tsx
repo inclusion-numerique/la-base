@@ -9,7 +9,7 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 
 const modal = createModal({
   id: 'filters-modal',

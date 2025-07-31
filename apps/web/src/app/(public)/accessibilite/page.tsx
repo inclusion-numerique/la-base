@@ -20,7 +20,8 @@ const AccessibilityStatementPage = () => (
     >
       <h1>Déclaration d’accessibilité</h1>
       <p>
-        Établie le <span>04 mars 2024</span>.
+        Établie le <span>04 mars 2024</span>. Mis à jour le{' '}
+        <span>31 juillet 2025</span>.
       </p>
       <p>
         <span>Agence National de la Cohésion des Territoires</span> s’engage à
@@ -47,13 +48,13 @@ const AccessibilityStatementPage = () => (
         La plateforme ayant été mise en ligne en 2024, il n&apos;y a pas de
         bilan 2023 des actions menées.
       </p>
-      <p>Le plan d&apos;action 2024 :</p>
+      <p>Le plan d&apos;action 2025 :</p>
       <ul>
+        <li>Finalisation des fonctionnalités</li>
         <li>Plateforme intégralement navigable au clavier</li>
-        <li>Hierarchie des titres</li>
-        <li>Plateforme navigable en zoom 200%</li>
+        <li>Hiérarchie des titres</li>
+        <li>Accessible en zoom 200%</li>
         <li>Lien d&apos;évitements</li>
-        <li>Rendre accessible la création de ressources</li>
         <li>Passage de l&apos;audit RGAA</li>
       </ul>
       <br />

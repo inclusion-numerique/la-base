@@ -16,7 +16,6 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 
 const toastMessage = ({

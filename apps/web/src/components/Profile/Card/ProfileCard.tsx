@@ -6,7 +6,6 @@ import { countProfileResources } from '@app/web/server/profiles/countProfileReso
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import Link from 'next/link'
-import React from 'react'
 
 const ProfileCard = ({
   profile,
@@ -47,6 +46,7 @@ const ProfileCard = ({
                 className="fr-text-mention--grey"
                 resourcesCount={countProfileResources(profile)}
                 followedByCount={profile._count.followedBy}
+                context="card"
               />
             )}
             {isAdmin != null && (

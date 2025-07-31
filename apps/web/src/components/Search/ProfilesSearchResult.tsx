@@ -4,7 +4,7 @@ import EmptyBox from '@app/web/components/EmptyBox'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { numberToString } from '@app/web/utils/formatNumber'
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './SearchContents.module.css'
 
 const ProfilesSearchResult = ({

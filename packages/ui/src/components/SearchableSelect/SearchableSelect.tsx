@@ -1,8 +1,8 @@
 import Input from '@codegouvfr/react-dsfr/Input'
 import classNames from 'classnames'
-import React, {
-  type ReactNode,
+import {
   Dispatch,
+  type ReactNode,
   SetStateAction,
   useCallback,
   useMemo,

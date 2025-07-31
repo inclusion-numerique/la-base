@@ -76,15 +76,6 @@ export const removeInactiveConseillersNumeriques = new Command(
             resources: true,
           },
         },
-        savedCollections: {
-          include: {
-            collection: {
-              include: {
-                resources: true,
-              },
-            },
-          },
-        },
         profileFollows: true,
         baseFollows: {
           where: {

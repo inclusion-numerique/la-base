@@ -1,7 +1,6 @@
 import { categoryStyles } from '@app/web/app/(public)/(categories)/_helpers/categoryStyles'
 import { HomeCategoryCounts } from '@app/web/features/home/components/getHomeCategoriesCount'
 import classNames from 'classnames'
-import React from 'react'
 
 export const ThematicHeader = ({
   categoryCounts: { category, resources, themes },

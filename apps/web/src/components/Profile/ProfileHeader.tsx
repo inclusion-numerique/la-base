@@ -5,7 +5,6 @@ import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Link from 'next/link'
-import React from 'react'
 import CopyLinkButton from '../CopyLinkButton'
 import ProfileInformations from './ProfileInformations'
 
@@ -36,7 +35,11 @@ const ProfileHeader = ({
         className="fr-m-0 fr-pt-2w fr-pb-5w"
       />
       <div id={headerId} className="fr-align-items-center">
-        <ProfileInformations profile={profile} resourcesCount={resourcesCount}>
+        <ProfileInformations
+          profile={profile}
+          resourcesCount={resourcesCount}
+          context="profile"
+        >
           <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-sm-row fr-mt-2w fr-width-full fr-justify-content-center fr-justify-content-md-start">
             {canWrite ? (
               <div>

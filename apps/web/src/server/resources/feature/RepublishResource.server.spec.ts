@@ -2,7 +2,7 @@ import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
-import type { PrismaClient } from '@prisma/client'
+import { type PrismaClient, ResourceLicence } from '@prisma/client'
 import type { ResourceRepublished } from './RepublishResource'
 import { onRepublished } from './RepublishResource.server'
 
@@ -25,6 +25,7 @@ describe('onRepublished', () => {
     id: '6cc07e48-0842-4c57-97e2-a452d0eb60d0',
     slug: 'ressourcerie-veille-et-curation',
     title: 'Ressourcerie Veille & Curation',
+    licence: ResourceLicence.ETALAB_2_0,
     description:
       "Retrouvez les outils, sites utiles, mines d'or, fiches pratiques et autres ressources qui nous semblent utiles pour mieux faire sa veille, ses NL, mettre en place des chats... en un mot COM-MU-NI-QUER !!",
     excerpt:

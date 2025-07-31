@@ -23,7 +23,7 @@ import {
   themeLabels,
 } from '@app/web/themes/themes'
 import type { Metadata } from 'next'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

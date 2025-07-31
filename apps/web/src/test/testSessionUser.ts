@@ -20,5 +20,4 @@ export const testSessionUser = {
   createdResources: [],
   resources: [],
   collections: [],
-  savedCollections: [],
 } as const satisfies SessionUser

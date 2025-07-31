@@ -6,7 +6,6 @@ import {
   getProfileProfileFollows,
 } from '@app/web/server/follows/getFollowsList'
 import { notFound } from 'next/navigation'
-import React from 'react'
 
 const ProfileSuivisPage = async ({ params }: ProfilRouteParams) => {
   const { slug } = await params

@@ -12,7 +12,6 @@ import { getResourceProjectionWithContext } from '@app/web/server/resources/getR
 import { contentId, contentSkipLink } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import React from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

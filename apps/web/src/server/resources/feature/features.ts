@@ -99,6 +99,15 @@ import type { ResourceProjection } from '@app/web/server/resources/feature/creat
 import z from 'zod'
 
 import {
+  ChangeLicenceCommandValidation,
+  LicenceChanged,
+} from '@app/web/server/resources/feature/ResourceChangeLicence'
+import {
+  applyLicenceChanged,
+  handleChangeLicence,
+  onLicenceChanged,
+} from '@app/web/server/resources/feature/ResourceChangeLicence.server'
+import {
   ChangeIndexationCommandValidation,
   type IndexationChanged,
 } from './ChangeIndexation'
@@ -157,6 +166,7 @@ export const ResourceMutationCommandsValidation = z.discriminatedUnion('name', [
   ChangeBaseCommandValidation,
   ChangeIndexationCommandValidation,
   ChangeVisibilityCommandValidation,
+  ChangeLicenceCommandValidation,
   ChangePublicFeedbackCommandValidation,
   AddContentCommandValidation,
   EditContentCommandValidation,
@@ -196,6 +206,7 @@ export const ResourceMutationCommandHandlers: {
   ChangeIndexation: handleChangeIndexation,
   ChangeVisibility: handleChangeVisibility,
   ChangePublicFeedback: handleChangePublicFeedback,
+  ChangeLicence: handleChangeLicence,
   AddContent: handleAddContent,
   EditContent: handleEditContent,
   ReorderContent: handleReorderContent,
@@ -226,6 +237,7 @@ export type HistoryResourceEvent =
   | ResourcePublished
   | ResourceRepublished
   | ResourceDeleted
+  | LicenceChanged
 
 export type CreationHistoryResourceEvent = ResourceCreated | ResourceMigrated
 export type MutationHistoryResourceEvent = Exclude<
@@ -261,6 +273,7 @@ export const MutationEventAppliers: {
   BaseChanged: applyBaseChanged,
   IndexationChanged: applyIndexationChanged,
   VisibilityChanged: applyVisibilityChanged,
+  LicenceChanged: applyLicenceChanged,
   PublicFeedbackChanged: applyPublicFeedbackChanged,
   Published: applyResourcePublished,
   Republished: applyResourceRepublished,
@@ -278,6 +291,7 @@ export const EventSideEffects: {
   BaseChanged: onBaseChanged,
   IndexationChanged: onIndexationChanged,
   VisibilityChanged: onVisibilityChanged,
+  LicenceChanged: onLicenceChanged,
   PublicFeedbackChanged: onPublicFeedbackChanged,
   Republished: onRepublished,
   Deleted: onDeleted,

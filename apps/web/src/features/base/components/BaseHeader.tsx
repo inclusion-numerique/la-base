@@ -5,7 +5,6 @@ import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import Link from 'next/link'
-import React from 'react'
 import BaseImages from '../../../components/Base/BaseImages'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import CopyLinkButton from '../../../components/CopyLinkButton'
@@ -39,6 +38,7 @@ const BaseHeader = ({
         >
           <h1 className="fr-h2 fr-page-title fr-mb-2v">{base.title}</h1>
           <BaseMetadata
+            user={user}
             className="fr-justify-content-center"
             base={base}
             withBadge={!base.isPublic}

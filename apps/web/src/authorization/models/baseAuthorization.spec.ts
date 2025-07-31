@@ -18,7 +18,6 @@ describe('Authorization - Bases', () => {
     isPublic: false,
     emailIsPublic: false,
     deleted: null,
-    savedCollections: [],
     slug: 'base-slug',
     title: 'Base title',
     collections: [],

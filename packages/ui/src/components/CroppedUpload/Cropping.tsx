@@ -7,8 +7,9 @@ import { getEventDsfrOpenedModalParent } from '@app/ui/utils/getEventDsfrOpenedM
 import { ImageForForm } from '@app/web/server/image/imageTypes' // If Cropper is inside a modal, we need to prevent the modal from closing when mouse up outside of the cropper
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import React, { RefObject } from 'react'
+import { RefObject } from 'react'
 import Cropper, { ReactCropperElement } from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
 import styles from './CroppedUpload.module.css'
 import { ImageWithName } from './utils'
 import CropStartEvent = Cropper.CropStartEvent

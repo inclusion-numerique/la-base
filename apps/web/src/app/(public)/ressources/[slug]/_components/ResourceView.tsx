@@ -1,5 +1,4 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import SaveCollectionModal from '@app/web/components/Collection/SaveCollectionModal'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
 import InviteContributorModal from '@app/web/components/Resource/Contributors/InviteContributorModal'
@@ -13,7 +12,6 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import { hasIndexation } from '@app/web/utils/indexation'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import RegisterResourceView from './RegisterResourceView'
 import ResourceActions from './ResourceActions'
 import ResourceDesktopNavigation from './ResourceDesktopNavigation'
@@ -134,27 +132,6 @@ const ResourceView = ({
               <ResourceContentView content={content} />
             </div>
           ))}
-          {resource._count.resourceFeedback > 0 && (
-            <div
-              data-testid="resources-feedbacks"
-              className="fr-border-top fr-border-bottom fr-py-4w fr-flex"
-            >
-              <div className="fr-flex fr-direction-lg-row fr-direction-column fr-flex-gap-4v fr-align-items-lg-center fr-flex-grow-1">
-                <h2 className="fr-h6 fr-mb-0">
-                  {resource._count.resourceFeedback} Avis sur la ressource
-                </h2>
-                <FeedbackBadge value={resource.feedbackAverage ?? 0} />
-              </div>
-              <div>
-                <Link
-                  className="fr-link"
-                  href={`/ressources/${resource.slug}/avis`}
-                >
-                  Voir les avis
-                </Link>
-              </div>
-            </div>
-          )}
 
           <RegisterResourceView resourceSlug={resource.slug} />
           {(resource.isPublic || hasIndexation(resource)) && (
@@ -162,7 +139,6 @@ const ResourceView = ({
           )}
         </div>
         {!!user && <SaveResourceInCollectionModal user={user} />}
-        {!!user && <SaveCollectionModal user={user} />}
         <InviteContributorModal />
         {canDelete && (
           <DeleteResource

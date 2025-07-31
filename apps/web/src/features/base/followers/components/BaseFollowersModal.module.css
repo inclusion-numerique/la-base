@@ -1,0 +1,7 @@
+.privacyTag {
+  padding: 6px !important;
+}
+
+.baseFollowersModal :global(.fr-modal__title) {
+  text-align: start !important;
+}

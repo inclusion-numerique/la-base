@@ -69,7 +69,6 @@ const collectionsToDelete = (userId: string) => ({
   where: {
     createdById: userId,
     baseId: null,
-    savedCollection: { none: {} },
     deleted: null,
   },
 })

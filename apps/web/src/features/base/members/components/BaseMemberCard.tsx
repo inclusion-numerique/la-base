@@ -10,7 +10,7 @@ import { trpc } from '@app/web/trpc'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { type ChangeEvent, useCallback, useState } from 'react'
+import { type ChangeEvent, useCallback, useState } from 'react'
 import styles from './BaseMemberCard.module.css'
 
 const BaseMemberCard = ({

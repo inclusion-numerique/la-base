@@ -1,7 +1,6 @@
 'use client'
 
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
-import React from 'react'
 
 const RESSOURCES_SECTIONS = [
   {
@@ -10,6 +9,7 @@ const RESSOURCES_SECTIONS = [
   },
   { id: 'creation-ressource', title: 'Création d’une ressource' },
   { id: 'parametre-ressource', title: 'Paramètres d’une ressource' },
+  { id: 'licence-ressource', title: 'Licences des ressources' },
 ]
 
 const RessourcesSideMenu = () => (

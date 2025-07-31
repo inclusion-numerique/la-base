@@ -123,6 +123,7 @@ export const baseSelect = (user: { id: string } | null) =>
     followedBy: {
       select: {
         id: true,
+        followerId: true,
       },
       where: {
         followerId: user?.id,

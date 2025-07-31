@@ -10,7 +10,6 @@ import { getResourceProjectionWithContext } from '@app/web/server/resources/getR
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import { applyDraft } from '@app/web/utils/resourceDraft'
-import React from 'react'
 
 const ProfilePage = async ({ params }: ProfilRouteParams) => {
   const { slug } = await params

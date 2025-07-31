@@ -4,7 +4,7 @@ import FollowBaseButton from './FollowBaseButton'
 const BASE = {
   id: 'f41d4215-aee5-4b39-95c9-60484df15de9',
   title: 'Nom de la base',
-  followedBy: [{ id: '0' }],
+  followedBy: [{ id: '0', followerId: '0', follower: true }],
 }
 
 const meta = {
@@ -27,7 +27,17 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const FollowBaseNotFollowing: Story = {
-  args: { userId: '0', ...BASE, followedBy: [{ id: '1' }] },
+  args: {
+    userId: '0',
+    ...BASE,
+    followedBy: [
+      {
+        id: '1',
+        followerId: '1',
+        follower: true,
+      },
+    ],
+  },
 }
 FollowBaseNotFollowing.storyName =
   "Page d'accueil - Suivre une base - base non suivie"

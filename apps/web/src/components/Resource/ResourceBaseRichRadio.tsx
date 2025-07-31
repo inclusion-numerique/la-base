@@ -4,7 +4,6 @@ import {
   ProfilePrivacyTag,
 } from '@app/web/components/PrivacyTags'
 import Notice from '@codegouvfr/react-dsfr/Notice'
-import React from 'react'
 import { type Control, Controller, type FieldValues } from 'react-hook-form'
 import type { FieldPath } from 'react-hook-form/dist/types/path'
 import ResourceBaseRichRadioElement from './ResourceBaseRichRadioElement'

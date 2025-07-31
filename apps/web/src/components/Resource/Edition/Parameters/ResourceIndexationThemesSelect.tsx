@@ -18,7 +18,7 @@ import {
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 import styles from './ResourceIndexationThemesSelect.module.css'
 

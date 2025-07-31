@@ -1,5 +1,4 @@
 import type { CollectionPageData } from '@app/web/server/collections/getCollection'
-import React from 'react'
 import CollectionDeletionCard from './CollectionDeletionCard'
 import CollectionEditionSideMenu from './CollectionEditionSideMenu'
 import CollectionImageEdition from './CollectionImageEdition'

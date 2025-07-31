@@ -10,9 +10,16 @@
     "lineWidth": 80,
     "attributePosition": "auto",
     "bracketSpacing": true,
-    "ignore": ["var", "apps/web/.next", "apps/web/public", "packages/cdk/.gen"]
+    "ignore": [
+      "var",
+      "apps/web/.next",
+      "apps/web/public",
+      "packages/cdk/.gen"
+    ]
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -69,9 +76,12 @@
         "useHookAtTopLevel": "error",
         "useIsNan": "error",
         "useValidForDirection": "error",
+        "noUnusedImports": "error",
         "useYield": "error"
       },
-      "security": { "noGlobalEval": "error" },
+      "security": {
+        "noGlobalEval": "error"
+      },
       "style": {
         "noArguments": "error",
         "noCommaOperator": "error",
@@ -249,7 +259,8 @@
       "quoteStyle": "single",
       "attributePosition": "auto",
       "bracketSpacing": true
-    }
+    },
+    "jsxRuntime": "reactClassic"
   },
   "css": {
     "parser": {
@@ -261,7 +272,11 @@
   },
   "overrides": [
     {
-      "include": ["*.spec.ts", "*.integration.ts", "*.jest.ts"],
+      "include": [
+        "*.spec.ts",
+        "*.integration.ts",
+        "*.jest.ts"
+      ],
       "javascript": {
         "globals": [
           "afterEach",
@@ -277,7 +292,10 @@
       }
     },
     {
-      "include": ["packages/e2e/**/*.ts", "packages/e2e/**/*.tsx"],
+      "include": [
+        "packages/e2e/**/*.ts",
+        "packages/e2e/**/*.tsx"
+      ],
       "javascript": {
         "formatter": {
           "quoteStyle": "single"
@@ -293,6 +311,18 @@
           "it",
           "JQuery"
         ]
+      }
+    },
+    {
+      "include": [
+        "packages/emails/**/*.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedImports": "off"
+          }
+        }
       }
     }
   ]

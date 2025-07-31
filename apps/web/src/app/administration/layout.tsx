@@ -5,7 +5,7 @@ import Header from '@app/web/components/Header'
 import MinimalFooter from '@app/web/components/MinimalFooter'
 import classNames from 'classnames'
 import { notFound } from 'next/navigation'
-import React, { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './AdministrationLayout.module.css'
 
 const AdministrationLayout = async ({ children }: PropsWithChildren) => {
