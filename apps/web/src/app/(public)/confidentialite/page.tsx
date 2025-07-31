@@ -146,7 +146,10 @@ const ConfidentialityPage = () => (
             agissent pour le compte de l’ANCT, selon ses instructions.
           </p>
 
-          <div className="fr-table" data-fr-js-table="true">
+          <div
+            className="fr-table fr-hidden fr-unhidden-md"
+            data-fr-js-table="true"
+          >
             <table className="data-table" data-fr-js-table-element="true">
               <thead>
                 <tr>
@@ -187,6 +190,39 @@ const ConfidentialityPage = () => (
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div className="fr-hidden-sm fr-my-4w">
+            <div className="fr-card fr-card--horizontal fr-card--border">
+              <div className="fr-card__body">
+                <div className="fr-card__content">
+                  <div>
+                    <strong className="fr-text--sm">Sous-traitant</strong>
+                    <p className="fr-text--sm">Scaleway</p>
+                  </div>
+                  <div>
+                    <strong className="fr-text--sm">Traitement réalisé</strong>
+                    <p className="fr-text--sm">Hébergement</p>
+                  </div>
+                  <div>
+                    <strong className="fr-text--sm">Pays destinataire</strong>
+                    <p className="fr-text--sm">France</p>
+                  </div>
+                  <div>
+                    <strong className="fr-text--sm">Garanties</strong>
+                    <p className="fr-text--sm">
+                      <a
+                        href="https://www-uploads.scaleway.com/DPA_FR_v17072024_439cb4fdae.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="fr-link fr-text--sm"
+                      >
+                        Politique de confidentialité
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <h2>Cookies et traceurs</h2>
