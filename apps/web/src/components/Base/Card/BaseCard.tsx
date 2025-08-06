@@ -59,7 +59,7 @@ const BaseCard = ({
         )}
         base={{
           ...base,
-          followedBy: null,
+          followedByData: null,
           _count: {
             ...base._count,
           },

@@ -35,12 +35,19 @@ const ProfileInformations = ({
             </div>
           </div>
           <div className="fr-mt-1v">
-            <ProfileMetadata
-              resourcesCount={resourcesCount}
-              followedByCount={profile._count.followedBy}
-              followedBy={profile.followedBy}
-              context={context}
-            />
+            {context === 'profile' ? (
+              <ProfileMetadata
+                resourcesCount={resourcesCount}
+                followedByData={profile.followedByData}
+                context="profile"
+              />
+            ) : (
+              <ProfileMetadata
+                resourcesCount={resourcesCount}
+                followedByCount={profile._count.followedBy}
+                context={context}
+              />
+            )}
           </div>
         </div>
         <div className="fr-unhidden fr-hidden-md fr-mt-2w">

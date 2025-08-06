@@ -12,7 +12,9 @@ import {
 } from '@app/web/server/rpc/createRouter'
 import { ServerUserSignupValidation } from '@app/web/server/rpc/user/userSignup.server'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
+import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
+import { invalidError } from '../trpcErrors'
 import { formatName } from './formatName'
 
 export const userRouter = router({
@@ -20,8 +22,49 @@ export const userRouter = router({
     .input(ServerUserSignupValidation)
     .mutation(
       async ({
-        input: { firstName: firstNameInput, lastName: lastNameInput, email },
+        input: {
+          firstName: firstNameInput,
+          lastName: lastNameInput,
+          email,
+          profileName: honeypotProfileNameInput,
+          timer,
+        },
       }) => {
+        // We check for probable spam bot behavior
+        // We disable the check in CI as we don't want to block the e2e tests
+        const shouldCheckForBot = !ServerWebAppConfig.isCi
+
+        if (shouldCheckForBot) {
+          if (honeypotProfileNameInput) {
+            // This is a invisible honeypot field, this means a bot submited the form
+            Sentry.captureMessage('Bot detected - signup - honeypot', {
+              level: 'info',
+              extra: {
+                honeypotProfileNameInput,
+                firstName: firstNameInput,
+                lastName: lastNameInput,
+                email,
+                timer,
+              },
+            })
+            throw invalidError('Cannot process signup request')
+          }
+
+          if (timer < 4000) {
+            // This is too fast for a human, this means a bot
+            Sentry.captureMessage('Bot detected - signup -timer', {
+              level: 'info',
+              extra: {
+                firstName: firstNameInput,
+                lastName: lastNameInput,
+                email,
+                timer,
+              },
+            })
+            throw invalidError('Cannot process signup request')
+          }
+        }
+
         const firstName =
           firstNameInput == null ? null : formatName(firstNameInput)
         const lastName =

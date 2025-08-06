@@ -6,7 +6,7 @@ import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import ProfileMetadata from '@app/web/components/Profile/ProfileMetadata'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { BaseFollowedBy } from '@app/web/server/bases/getBase'
+import type { BaseFollowedByData } from '@app/web/server/bases/getBase'
 import { numberToString } from '@app/web/utils/formatNumber'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
@@ -20,20 +20,13 @@ const { Component: FollowersModal, open } = createModal({
 
 const BaseFollowersModal = ({
   user,
-  followedBy,
-  count,
+  followedByData,
 }: {
   user?: SessionUser | null
-  followedBy: BaseFollowedBy
-  count: number
+  followedByData: BaseFollowedByData
 }) => {
-  const title = `Base suivie par ${count} profil${sPluriel(count)}`
-  const publicFollowers = followedBy.filter(
-    (follower) => follower.follower.isPublic,
-  )
-  const privateFollowers = followedBy.filter(
-    (follower) => !follower.follower.isPublic,
-  )
+  const { counts, visible } = followedByData
+  const title = `Base suivie par ${counts.total} profil${sPluriel(counts.total)}`
   return (
     <>
       <div>·</div>
@@ -44,15 +37,15 @@ const BaseFollowersModal = ({
       >
         <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
         <div>
-          <b>{numberToString(count)}</b>
-          <span>&nbsp;Suivi{sPluriel(count)}</span>
+          <b>{numberToString(counts.total)}</b>
+          <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
         </div>
       </Button>
 
       <FollowersModal title={title} className={styles.baseFollowersModal}>
         <>
           <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-md-center fr-mb-4w">
-            {publicFollowers.length > 0 && (
+            {counts.public > 0 && (
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic
@@ -61,18 +54,18 @@ const BaseFollowersModal = ({
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
                 <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
-                  {publicFollowers.length} profil
-                  {sPluriel(publicFollowers.length)}
-                  &nbsp;public{sPluriel(publicFollowers.length)}
+                  {counts.public} profil
+                  {sPluriel(counts.public)}
+                  &nbsp;public{sPluriel(counts.public)}
                 </span>
               </div>
             )}
-            {publicFollowers.length > 0 && privateFollowers.length > 0 && (
+            {counts.public > 0 && counts.private > 0 && (
               <span className="fr-hidden fr-unhidden-sm fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                 ·
               </span>
             )}
-            {privateFollowers.length > 0 && (
+            {counts.private > 0 && (
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic={false}
@@ -81,17 +74,25 @@ const BaseFollowersModal = ({
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
                 <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
-                  {privateFollowers.length} profil
-                  {sPluriel(privateFollowers.length)}
-                  &nbsp;privé{sPluriel(privateFollowers.length)}
+                  {counts.private} profil
+                  {sPluriel(counts.private)}
+                  &nbsp;privé{sPluriel(counts.private)}
                 </span>
               </div>
             )}
           </div>
-          {followedBy.map(({ follower, followerId }) => (
+          {counts.visible === 0 && (
+            <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0 fr-text--left">
+              Aucun profil public
+            </p>
+          )}
+          {visible.map((follower, index) => (
             <div
-              key={followerId}
-              className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-border-top fr-border-bottom"
+              key={follower.id}
+              className={classNames(
+                'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                index === 0 && 'fr-border-top',
+              )}
             >
               <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                 <RoundProfileImage user={follower} />

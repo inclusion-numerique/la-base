@@ -121,6 +121,15 @@ describe('applyContentAdded', () => {
     professionalSectors: [],
     contributors: [],
     collections: [],
+    collectionsData: {
+      counts: {
+        total: 0,
+        public: 0,
+        private: 0,
+        visible: 0,
+      },
+      visible: [],
+    },
     viewsCount: 0,
     _count: { collections: 0, resourceFeedback: 0 },
     resourceFeedback: [],

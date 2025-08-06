@@ -138,6 +138,7 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     const { base } = cleanUpAndCreateTestBaseAsMember(false)
     cy.dsfrModalsShouldBeBound()
 
+    cy.visit(`/bases/${base.slug}/ressources`)
     cy.testId('create-resource-in-base-button').eq(0).click()
     cy.findByRole('dialog').as('modal')
     cy.get('@modal').contains('Créer une nouvelle ressource')

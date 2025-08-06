@@ -22,6 +22,8 @@ export const UserSignupValidation = z.object({
       message: `Veuillez accepter les conditions générales d'utilisation`,
       path: ['policyAccepted'],
     }),
+  profileName: z.string().optional(), // honeypot field
+  timer: z.number(), // anti-bot measure field
 })
 
 export type UserSignup = z.infer<typeof UserSignupValidation>

@@ -121,6 +121,15 @@ const resource = (imageId: string | null) =>
     ] as ResourceContent[],
     isPublic: true,
     collections: [],
+    collectionsData: {
+      counts: {
+        total: 0,
+        public: 0,
+        private: 0,
+        visible: 0,
+      },
+      visible: [],
+    },
     viewsCount: 45,
     _count: {
       collections: 45,

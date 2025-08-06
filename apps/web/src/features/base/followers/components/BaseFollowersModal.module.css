@@ -1,5 +1,5 @@
 .privacyTag {
-  padding: 6px !important;
+  padding: 6px 8px !important;
 }
 
 .baseFollowersModal :global(.fr-modal__title) {

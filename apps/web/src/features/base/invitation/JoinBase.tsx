@@ -95,7 +95,13 @@ export const JoinBase = ({
                 }}
               />
             )}
-            <BaseMetadata base={invitation.base} context="card" />
+            <BaseMetadata
+              base={{
+                ...invitation.base,
+                followedByData: null,
+              }}
+              context="card"
+            />
             <BasePrivacyTag small isPublic={invitation.base.isPublic} />
           </div>
           <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">

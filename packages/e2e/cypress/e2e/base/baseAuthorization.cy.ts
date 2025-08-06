@@ -12,6 +12,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
 
     cy.visit(`/bases/${defaultTestBaseSlug}`)
     cy.dsfrShouldBeStarted()
+    cy.testId('ressources-menu-button').click()
     cy.testId('empty-box').should('exist')
     cy.testId('base-edition-button').should('not.exist')
     cy.testId('private-base-box').should('not.exist')
@@ -53,6 +54,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
 
     cy.visit(`/bases/${defaultTestBaseSlug}`)
     cy.dsfrShouldBeStarted()
+    cy.testId('ressources-menu-button').click()
     cy.testId('empty-box').should('exist')
     cy.testId('base-edition-button').should('not.exist')
     cy.testId('private-base-box').should('not.exist')
@@ -91,6 +93,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
   it('Acceptation 5 - Admin de la base', () => {
     cleanUpAndCreateTestBase(false)
 
+    cy.testId('ressources-menu-button').click()
     cy.testId('empty-box').should('exist')
     cy.testId('base-edition-button').should('exist')
     cy.testId('private-base-box').should('not.exist')
@@ -109,6 +112,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
   it('Acceptation 6 - Membre de la base', () => {
     cleanUpAndCreateTestBaseAsMember(false)
 
+    cy.testId('ressources-menu-button').click()
     cy.testId('empty-box').should('exist')
     cy.testId('base-edition-button').should('exist')
     cy.testId('private-base-box').should('not.exist')

@@ -2,7 +2,7 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import BaseFollowersModal from '@app/web/features/base/followers/components/BaseFollowersModal'
-import { BaseMetadataData } from '@app/web/features/base/types/BaseMetadataType'
+import type { BaseMetadataData } from '@app/web/features/base/types/BaseMetadataType'
 import { getDepartmentName } from '@app/web/utils/departments'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
@@ -47,10 +47,9 @@ const BaseMetadata = ({
             Ressource{sPluriel(resourcesCount)}
           </span>
         </div>
-        {context === 'base' && !!base.followedBy && followedBy > 0 ? (
+        {context === 'base' && !!base.followedByData && followedBy > 0 ? (
           <BaseFollowersModal
-            followedBy={base.followedBy}
-            count={followedBy}
+            followedByData={base.followedByData}
             user={user}
           />
         ) : (

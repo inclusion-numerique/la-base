@@ -12,7 +12,7 @@ export const getResourceNavigationData = ({
   contentsWithAnchor: WithAnchorIdAndHref<Resource['contents'][number]>[]
   hasInformationSection: boolean
 }) => {
-  const items = contentsWithAnchor
+  const sectionTitles = contentsWithAnchor
     .filter((content) => content.type === 'SectionTitle')
     .map((content) => ({
       text: content.title ?? '',
@@ -21,17 +21,15 @@ export const getResourceNavigationData = ({
       },
     }))
 
-  if (items.length === 0) {
-    // No navigation for short resources without any section titles
-    return null
-  }
-
-  items.unshift({
-    text: title,
-    linkProps: {
-      href: `#${slug}`,
+  const items = [
+    {
+      text: title,
+      linkProps: {
+        href: `#${slug}`,
+      },
     },
-  })
+    ...sectionTitles,
+  ]
 
   if (hasInformationSection) {
     items.push({

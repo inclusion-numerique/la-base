@@ -41,7 +41,7 @@ const ProfileBaseCard = ({
           className="fr-text-mention--grey fr-align-items-start"
           base={{
             ...base,
-            followedBy: null,
+            followedByData: null,
             _count: {
               ...base._count,
             },

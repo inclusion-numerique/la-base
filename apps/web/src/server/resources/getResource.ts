@@ -6,7 +6,7 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { prismaClient } from '@app/web/prismaClient'
 
-export const getResourceSelect = (user: { id: string } | null) =>
+export const getResourceSelect = (_user: { id: string } | null) =>
   ({
     id: true,
     title: true,
@@ -79,6 +79,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
         collection: {
           select: {
             id: true,
+            createdById: true,
             isFavorites: true,
             created: true,
             updated: true,
@@ -110,11 +111,6 @@ export const getResourceSelect = (user: { id: string } | null) =>
               },
             },
           },
-        },
-      },
-      where: {
-        collection: {
-          ...(!user ? { isPublic: true } : { createdById: user.id }),
         },
       },
     },
@@ -206,13 +202,7 @@ export const getResourceSelect = (user: { id: string } | null) =>
         resourceFeedback: {
           where: { deleted: null },
         },
-        collections: {
-          where: {
-            collection: {
-              ...(!user ? { isPublic: true } : { createdById: user.id }),
-            },
-          },
-        },
+        collections: true,
       },
     },
   }) satisfies Parameters<typeof prismaClient.resource.findUnique>[0]['select']
@@ -308,6 +298,22 @@ export const getResource = async (
     _count: { rating: true },
   })
 
+  const publicCollections = resource.collections
+    .map(({ collection }) => collection)
+    .filter(({ isPublic }) => isPublic)
+
+  const privateCollections = resource.collections
+    .map(({ collection }) => collection)
+    .filter(({ isPublic }) => !isPublic)
+
+  const publicCollectionsCount = publicCollections.length
+  const privateCollectionsCount = privateCollections.length
+
+  const visibleCollections = [
+    ...publicCollections,
+    ...privateCollections.filter(({ createdById }) => createdById === user?.id),
+  ]
+
   return {
     ...resource,
     resourceFeedback: canSeeAllFeedbacksFor(resource)(user)
@@ -317,8 +323,19 @@ export const getResource = async (
       ...(await feedbackCountByRecommendation(resource)),
     },
     feedbackAverage: allFeedbacks._avg.rating ?? 0,
+    // Information about collections (for the resource viewer)
+    collectionsData: {
+      counts: {
+        total: resource.collections.length,
+        public: publicCollectionsCount,
+        private: privateCollectionsCount,
+        visible: visibleCollections.length,
+      },
+      visible: visibleCollections,
+    },
   }
 }
 
 export type Resource = Exclude<Awaited<ReturnType<typeof getResource>>, null>
+export type ResourceCollectionsData = Resource['collectionsData']
 export type ResourceContent = Resource['contents'][number]

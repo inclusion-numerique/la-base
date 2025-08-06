@@ -2,6 +2,7 @@
 
 import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
@@ -10,13 +11,16 @@ import {
 } from '@app/web/server/rpc/user/userSignup'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { createStopwatch } from '@app/web/utils/stopwatch'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Cookies from 'js-cookie'
 import type { Route } from 'next'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import styles from './EmailSignupForm.module.css'
 
 const EmailSignupForm = ({
   error,
@@ -31,17 +35,30 @@ const EmailSignupForm = ({
     resolver: zodResolver(UserSignupValidation),
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    defaultValues: { email },
+    defaultValues: { email, profileName: undefined, timer: 0 },
   })
 
   const signup = trpc.user.signup.useMutation()
 
+  const timer = useRef(createStopwatch())
+
   const onSubmit = async (data: UserSignup) => {
     try {
-      await signup.mutateAsync(data)
+      await signup.mutateAsync({
+        ...data,
+        timer: timer.current.stop().duration,
+      })
     } catch (mutationError) {
-      applyZodValidationMutationErrorsToForm(mutationError, form.setError)
-      return
+      if (
+        applyZodValidationMutationErrorsToForm(mutationError, form.setError)
+      ) {
+        return
+      }
+      createToast({
+        priority: 'error',
+        message: 'Erreur lors de la création du compte',
+      })
+      throw mutationError
     }
 
     // Set the email in a cookie for usage in Verify page as redirections resets state
@@ -76,6 +93,14 @@ const EmailSignupForm = ({
         control={form.control}
         path="lastName"
         label="Nom"
+        disabled={isLoading}
+      />
+      <InputFormField
+        classes={{ container: styles.profileNameField }}
+        control={form.control}
+        path="profileName"
+        label="Nom du profil"
+        hint="Ce sera votre nom d'utilisateur."
         disabled={isLoading}
       />
       <CheckboxFormField

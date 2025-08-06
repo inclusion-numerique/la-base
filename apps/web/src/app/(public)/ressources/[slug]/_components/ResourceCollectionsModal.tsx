@@ -17,15 +17,12 @@ const { Component: CollectionsResourceModal, open } = createModal({
 })
 
 const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
+  const { collectionsData } = resource
+
   const title = `Ressource enregistrée dans ${
-    resource._count.collections
-  } collection${sPluriel(resource._count.collections)}`
-  const publicCollections = resource.collections.filter(
-    (collection) => collection.collection.isPublic,
-  ).length
-  const privateCollections = resource.collections.filter(
-    (collection) => !collection.collection.isPublic,
-  ).length
+    collectionsData.counts.total
+  } collection${sPluriel(collectionsData.counts.total)}`
+
   return (
     <>
       <Button
@@ -48,7 +45,7 @@ const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
       <CollectionsResourceModal title={title}>
         <>
           <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-md-center fr-mb-4w">
-            {publicCollections > 0 && (
+            {collectionsData.counts.public > 0 && (
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <CollectionPrivacyTag
                   isPublic
@@ -56,17 +53,19 @@ const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
                 <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
-                  {publicCollections} collection{sPluriel(publicCollections)}
-                  &nbsp;publique{sPluriel(publicCollections)}
+                  {collectionsData.counts.public} collection
+                  {sPluriel(collectionsData.counts.public)}
+                  &nbsp;publique{sPluriel(collectionsData.counts.public)}
                 </span>
               </div>
             )}
-            {publicCollections > 0 && privateCollections > 0 && (
-              <span className="fr-hidden fr-unhidden-sm fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
-                ·
-              </span>
-            )}
-            {privateCollections > 0 && (
+            {collectionsData.counts.public > 0 &&
+              collectionsData.counts.private > 0 && (
+                <span className="fr-hidden fr-unhidden-sm fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+                  ·
+                </span>
+              )}
+            {collectionsData.counts.private > 0 && (
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <CollectionPrivacyTag
                   isPublic={false}
@@ -74,15 +73,23 @@ const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
                 <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
-                  {privateCollections} collection
-                  {sPluriel(privateCollections)}
-                  &nbsp;privée{sPluriel(privateCollections)}
+                  {collectionsData.counts.private} collection
+                  {sPluriel(collectionsData.counts.private)}
+                  &nbsp;privée{sPluriel(collectionsData.counts.private)}
                 </span>
               </div>
             )}
           </div>
-          {resource.collections.map(({ collection }) => (
-            <div className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center">
+          {collectionsData.counts.visible === 0 && (
+            <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+              Aucune collection publique
+            </span>
+          )}
+          {collectionsData.visible.map((collection) => (
+            <div
+              key={collection.id}
+              className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center"
+            >
               <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                 <IconInSquare iconId="ri-folder-2-line" size="medium" />
                 <div className="fr-flex fr-direction-column fr-flex-gap-1v">

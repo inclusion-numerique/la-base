@@ -1,4 +1,4 @@
-import { BaseFollowedBy } from '@app/web/server/bases/getBase'
+import type { BaseFollowedByData } from '@app/web/server/bases/getBase'
 
 export type BaseMetadataData = {
   _count: {
@@ -6,7 +6,7 @@ export type BaseMetadataData = {
     resources: number
     resourcesViews: number
   }
-  followedBy?: BaseFollowedBy | null
+  followedByData: BaseFollowedByData | null
   isPublic: boolean
   department: string | null
 }

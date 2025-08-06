@@ -47,6 +47,15 @@ export const createTestProfile = (publicProfile?: boolean) =>
     image: null,
     isPublic: publicProfile || false,
     followedBy: [],
+    followedByData: {
+      counts: {
+        total: 0,
+        public: 0,
+        private: 0,
+        visible: 0,
+      },
+      visible: [],
+    },
     _count: {
       followedBy: 0,
     },
@@ -96,6 +105,15 @@ export const createTestResource = (
     createdById: createdBy.id,
     baseId: base ? base.id : null,
     collections: [],
+    collectionsData: {
+      counts: {
+        total: 0,
+        public: 0,
+        private: 0,
+        visible: 0,
+      },
+      visible: [],
+    },
     base: base
       ? {
           id: base.id,
@@ -163,6 +181,15 @@ export const createTestBase = (
     coverImage: null,
     collections: [],
     followedBy: [],
+    followedByData: {
+      counts: {
+        total: 0,
+        public: 0,
+        private: 0,
+        visible: 0,
+      },
+      visible: [],
+    },
     members: [
       ...admins.map((admin) => ({
         baseId: id,

@@ -140,21 +140,57 @@ export const baseSelect = (
     },
   }) satisfies Prisma.BaseSelect
 
-export const getBase = async (id: string, user: Pick<SessionUser, 'id'>) =>
-  prismaClient.base.findFirst({
-    select: baseSelect(user),
-    where: { id, deleted: null },
+export const getBase = async ({
+  id,
+  slug,
+  user,
+  membersOrderBy,
+}: {
+  user: Pick<SessionUser, 'id'> | null
+  membersOrderBy?: BaseMembersSortType
+} & ({ id: string; slug?: undefined } | { id?: undefined; slug: string })) => {
+  const base = await prismaClient.base.findFirst({
+    select: baseSelect(user, membersOrderBy),
+    where: { id, slug, deleted: null },
   })
+
+  if (!base) return null
+
+  const publicFollowedBy = base.followedBy
+    .map(({ follower }) => follower)
+    .filter(({ isPublic }) => isPublic)
+
+  const privateFollowedBy = base.followedBy
+    .map(({ follower }) => follower)
+    .filter(({ isPublic }) => !isPublic)
+
+  const visibleFollowedBy = [
+    ...publicFollowedBy,
+    ...privateFollowedBy.filter(({ id }) => id === user?.id),
+  ]
+
+  const followedByData = {
+    counts: {
+      total: base.followedBy.length,
+      public: publicFollowedBy.length,
+      private: privateFollowedBy.length,
+      visible: visibleFollowedBy.length,
+    },
+    visible: visibleFollowedBy,
+  }
+
+  return {
+    ...base,
+    followedByData,
+  }
+}
 
 export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'> | null,
   membersOrderBy?: BaseMembersSortType,
 ) => {
-  const basePage = await prismaClient.base.findFirst({
-    select: baseSelect(user, membersOrderBy),
-    where: { slug, deleted: null },
-  })
+  const basePage = await getBase({ slug, user, membersOrderBy })
   const resourceViews = await prismaClient.resource.aggregate({
     where: {
       ...computeResourcesListWhereForUser(user),
@@ -183,4 +219,4 @@ export type BasePageData = Exclude<
 >
 export type BaseResource = BasePageData['resources'][number]
 export type BaseMember = BasePageData['members'][number]
-export type BaseFollowedBy = BasePageData['followedBy']
+export type BaseFollowedByData = BasePageData['followedByData']

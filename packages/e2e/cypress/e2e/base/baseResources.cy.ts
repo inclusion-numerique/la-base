@@ -13,6 +13,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 0 - Empty state', () => {
+    cy.testId('ressources-menu-button').click()
     cy.testId('empty-box').should('exist')
 
     cy.dsfrModalsShouldBeBound()
@@ -31,7 +32,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.get('@modal').should('not.exist')
 
     cy.log('Check new state')
-    cy.visit(`/bases/${defaultTestBaseSlug}`)
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
 
     cy.dsfrModalsShouldBeBound()
     cy.testId('resources-list').should('contain', 'Ressources · 1')
@@ -84,7 +85,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
 
     cy.log('Check new state')
-    cy.visit(`/bases/${defaultTestBaseSlug}`)
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
 
     cy.dsfrModalsShouldBeBound()
     cy.testId('resources-list').should('contain', 'Ressources · 1')
@@ -139,7 +140,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
 
     cy.log('Check new state')
-    cy.visit(`/bases/${defaultTestBaseSlug}`)
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
 
     cy.dsfrModalsShouldBeBound()
     cy.testId('resources-list').should('contain', 'Ressources · 1')

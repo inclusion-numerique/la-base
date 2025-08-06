@@ -17,65 +17,8 @@ import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
 import { z } from 'zod'
-
-const deletedUser = (id: string, timestamp: Date) => ({
-  firstName: null,
-  lastName: null,
-  name: 'Profil supprimé',
-  email: `utilisateur-supprimé+${id}@lesbases.anct.gouv.fr`,
-  emailIsPublic: false,
-  website: null,
-  facebook: null,
-  twitter: null,
-  linkedin: null,
-  imageId: null,
-  location: null,
-  title: null,
-  description: null,
-  department: null,
-  isPublic: false,
-  deleted: timestamp,
-  updated: timestamp,
-})
-
-const resourcesToDelete = (userId: string) => ({
-  where: {
-    createdById: userId,
-    contributors: { none: {} },
-    deleted: null,
-  },
-})
-
-const creatorBasesToDelete = (userId: string) => ({
-  where: {
-    createdById: userId,
-    members: { every: { memberId: userId } },
-    deleted: null,
-  },
-})
-
-const basesToDelete = (userId: string) => ({
-  where: {
-    members: {
-      some: {
-        memberId: userId,
-      },
-    },
-    deleted: null,
-  },
-})
-
-const collectionsToDelete = (userId: string) => ({
-  where: {
-    createdById: userId,
-    baseId: null,
-    deleted: null,
-  },
-})
-
-const softDelete = (timestamp: Date) => ({
-  data: { deleted: timestamp, updated: timestamp },
-})
+import { enforceIsAdmin } from '../enforceIsAdmin'
+import { deleteProfile } from './deleteProfile'
 
 export const profileRouter = router({
   searchProfileForMember: protectedProcedure
@@ -248,6 +191,25 @@ export const profileRouter = router({
         data: { imageId: input.imageId },
       })
     }),
+  deleteMultiple: protectedProcedure
+    .input(z.object({ userIds: z.array(z.string().uuid()) }))
+    .mutation(async ({ input: { userIds }, ctx: { user: sessionUser } }) => {
+      // This is only available for admins
+      enforceIsAdmin(sessionUser)
+
+      const profiles = await prismaClient.user.findMany({
+        where: { id: { in: userIds }, deleted: null },
+        select: { slug: true, ...profileAuthorizationTargetSelect },
+      })
+
+      if (profiles.length !== userIds.length) {
+        throw invalidError('Some profiles not found')
+      }
+
+      await Promise.all(userIds.map((userId) => deleteProfile({ id: userId })))
+
+      return { success: true }
+    }),
   delete: protectedProcedure
     .input(z.object({ userId: z.string().uuid() }))
     .mutation(async ({ input: { userId }, ctx: { user: sessionUser } }) => {
@@ -256,7 +218,7 @@ export const profileRouter = router({
         select: { slug: true, ...profileAuthorizationTargetSelect },
       })
       if (!profile) {
-        throw invalidError('User not found')
+        throw invalidError('Profile not found')
       }
 
       authorizeOrThrow(
@@ -265,56 +227,8 @@ export const profileRouter = router({
         ),
       )
 
-      const timestamp = new Date()
+      await deleteProfile({ id: userId })
 
-      const userBases = await prismaClient.base.findMany({
-        ...basesToDelete(profile.id),
-        select: {
-          _count: {
-            select: { members: { where: { member: { deleted: null } } } },
-          },
-          id: true,
-          members: {
-            select: { memberId: true, isAdmin: true },
-            where: { member: { deleted: null } },
-          },
-        },
-      })
-
-      const basesToSoftDelete = userBases.filter(
-        (base) => base._count.members === 1,
-      )
-
-      if (basesToSoftDelete.length > 0) {
-        await prismaClient.base.updateMany({
-          where: { id: { in: basesToSoftDelete.map((base) => base.id) } },
-          ...softDelete(timestamp),
-        })
-      }
-
-      await prismaClient.resource.updateMany({
-        ...resourcesToDelete(profile.id),
-        ...softDelete(timestamp),
-      })
-
-      // Delete all bases created by the user we want to delete
-      await prismaClient.base.updateMany({
-        ...creatorBasesToDelete(profile.id),
-        ...softDelete(timestamp),
-      })
-
-      await prismaClient.collection.updateMany({
-        ...collectionsToDelete(profile.id),
-        ...softDelete(timestamp),
-      })
-
-      return prismaClient.user.update({
-        where: { id: profile.id },
-        data: {
-          ...deletedUser(profile.id, timestamp),
-          accounts: { deleteMany: {} },
-          sessions: { deleteMany: {} },
-        },
-      })
+      return { success: true }
     }),
 })

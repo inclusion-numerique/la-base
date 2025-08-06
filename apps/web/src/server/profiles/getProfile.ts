@@ -4,8 +4,8 @@ import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 export const getProfilePageQuery = async ({
   id,
   slug,
-}: { id: string; slug?: undefined } | { id?: undefined; slug: string }) =>
-  prismaClient.user.findUnique({
+}: { id: string; slug?: undefined } | { id?: undefined; slug: string }) => {
+  const profile = await prismaClient.user.findUnique({
     select: {
       id: true,
       slug: true,
@@ -65,9 +65,38 @@ export const getProfilePageQuery = async ({
     where: { id, slug, deleted: null },
   })
 
+  if (!profile) {
+    return null
+  }
+
+  const publicFollowedBy = profile.followedBy
+    .map(({ follower }) => follower)
+    .filter(({ isPublic }) => isPublic)
+  const privateFollowedBy = profile.followedBy
+    .map(({ follower }) => follower)
+    .filter(({ isPublic }) => !isPublic)
+  const visibleFollowedBy = [
+    ...publicFollowedBy,
+    ...privateFollowedBy.filter(({ id }) => id === profile.id),
+  ]
+
+  return {
+    ...profile,
+    followedByData: {
+      counts: {
+        total: profile.followedBy.length,
+        public: publicFollowedBy.length,
+        private: privateFollowedBy.length,
+        visible: visibleFollowedBy.length,
+      },
+      visible: visibleFollowedBy,
+    },
+  }
+}
+
 export type ProfilePageData = Exclude<
   Awaited<ReturnType<typeof getProfilePageQuery>>,
   null
 >
 
-export type ProfileFollowedBy = ProfilePageData['followedBy']
+export type ProfileFollowedByData = ProfilePageData['followedByData']

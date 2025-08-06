@@ -40,7 +40,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
       expect(resp.redirectedToUrl).to.be.undefined
     })
 
-    cy.visit(`/bases/${defaultTestBaseSlug}`)
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
     cy.testId('empty-box').should('exist')
 
     cy.get('#header_user_menu')

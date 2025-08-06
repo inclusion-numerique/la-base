@@ -141,6 +141,7 @@ const InputFormField = <T extends FieldValues = FieldValues>({
                 'fr-input-group--disabled': disabled,
                 'fr-input-group--valid': valid && isTouched && !invalid,
               },
+              classes?.container,
               className,
             )}
           >

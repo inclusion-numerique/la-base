@@ -1,0 +1,11 @@
+.profileNameField {
+  /* Honeypot field */
+  opacity: 0;
+  /* not selectable / visible with accessibility tools, tabs */
+  user-select: none;
+  pointer-events: none;
+  /* 0 size in the layout */
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
