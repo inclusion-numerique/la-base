@@ -2,7 +2,7 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
-import { type ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 import CustomTag, { TagColor } from '../CustomTag'
 
 const ResourcesViewsAndMetadata = ({
@@ -27,7 +27,7 @@ const ResourcesViewsAndMetadata = ({
   >
     <span className="fr-flex fr-flex-gap-2v">
       <span className="fr-icon-eye-line fr-icon--sm" aria-hidden />
-      <span className="fr-text--bold" data-testid="resource-views-count">
+      <span className="fr-text--medium" data-testid="resource-views-count">
         <span className="fr-text--nowrap">
           {numberToString(resource.viewsCount)}
           {showLabels && (
@@ -38,7 +38,10 @@ const ResourcesViewsAndMetadata = ({
       </span>
       <span className="fr-text--medium">·</span>
       <span className="fr-icon-bookmark-line fr-icon--sm" aria-hidden />
-      <span className="fr-text--bold" data-testid="resource-collections-count">
+      <span
+        className="fr-text--medium"
+        data-testid="resource-collections-count"
+      >
         <span className="fr-text--nowrap">
           {numberToString(resource._count.collections)}
           {showLabels && (
