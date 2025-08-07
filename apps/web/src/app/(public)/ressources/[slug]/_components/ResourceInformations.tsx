@@ -14,7 +14,7 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
       label="Informations sur la ressource"
       data-testid="resource-informations-accordion"
     >
-      <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-center">
+      <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-2w">
         <span className="fr-text--sm fr-mb-0">
           <span className="ri-bookmark-line fr-mr-1w" />
           Ressource enregistrée dans{' '}
@@ -45,7 +45,7 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
             <FeedbackBadge value={resource.feedbackAverage} />
             <span className="fr-hidden fr-unhidden-sm">·</span>
             <Link
-              className="fr-link fr-text--sm fr-mb-0"
+              className="fr-link--underline-on-hover fr-text--sm fr-mb-0 fr-link"
               href={`/ressources/${resource.slug}/avis`}
             >
               Voir les avis
