@@ -20,7 +20,6 @@ export const ServerWebAppConfig = {
   isCi,
   isLocal,
   isE2e,
-  enableRequestLogging: process.env.ENABLE_REQUEST_LOGGING === 'true',
   Namespace: process.env.NAMESPACE ?? '',
   internalApiPrivateKey: process.env.INTERNAL_API_PRIVATE_KEY ?? '',
   Brevo: {

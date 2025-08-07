@@ -197,7 +197,6 @@ export class WebAppStack extends TerraformStack {
         NAMESPACE: namespace,
         // This env variable is reserved at the level of container namespace. We inject it here even if its shared.
         SCW_DEFAULT_REGION: region,
-        ENABLE_REQUEST_LOGGING: 'false',
         REPORT_MODERATOR_EMAIL: isMain
           ? environmentVariables.REPORT_MODERATOR_EMAIL_MAIN.value
           : environmentVariables.REPORT_MODERATOR_EMAIL_PREVIEW.value,
