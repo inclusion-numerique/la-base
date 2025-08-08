@@ -69,81 +69,95 @@ const EmailSignupForm = ({
     form.formState.isSubmitting || form.formState.isSubmitSuccessful
 
   return (
-    <form id="signup-with-email" onSubmit={form.handleSubmit(onSubmit)}>
-      {error ? (
-        <div className="fr-fieldset__element">
-          <div className="fr-alert fr-alert--error fr-alert--sm">
-            <p>{error}</p>
+    <>
+      <script
+        type="module"
+        src="/lib/@friendlycaptcha/sdk@0.1.30/site.min.js"
+        async
+        defer
+      ></script>
+      <script
+        noModule
+        src="/lib/@friendlycaptcha/sdk@0.1.30/site.compat.min.js"
+        async
+        defer
+      ></script>
+      <form id="signup-with-email" onSubmit={form.handleSubmit(onSubmit)}>
+        {error ? (
+          <div className="fr-fieldset__element">
+            <div className="fr-alert fr-alert--error fr-alert--sm">
+              <p>{error}</p>
+            </div>
           </div>
-        </div>
-      ) : null}
-      <InputFormField
-        control={form.control}
-        path="email"
-        label="Email"
-        disabled={isLoading}
-      />
-      <InputFormField
-        control={form.control}
-        path="firstName"
-        label="Prénom"
-        disabled={isLoading}
-      />
-      <InputFormField
-        control={form.control}
-        path="lastName"
-        label="Nom"
-        disabled={isLoading}
-      />
-      <InputFormField
-        classes={{ container: styles.profileNameField }}
-        control={form.control}
-        path="profileName"
-        label="Nom du profil"
-        hint="Ce sera votre nom d'utilisateur."
-        disabled={isLoading}
-      />
-      <CheckboxFormField
-        control={form.control}
-        path="policyAccepted"
-        data-testid="cgu"
-        label={
-          <span>
-            J&lsquo;ai lu et j&lsquo;accepte les 
-            <Link
-              href="/cgu"
-              target="_blank"
-              className="fr-btn--no-after fr-link"
-            >
-              conditions générales d’utilisation du service
-            </Link>
-             ainsi que la{' '}
-            <Link
-              href="/confidentialite"
-              target="_blank"
-              className="fr-btn--no-after fr-link"
-            >
-              politique de confidentialité.
-            </Link>
-          </span>
-        }
-        disabled={isLoading}
-      />
+        ) : null}
+        <InputFormField
+          control={form.control}
+          path="email"
+          label="Email"
+          disabled={isLoading}
+        />
+        <InputFormField
+          control={form.control}
+          path="firstName"
+          label="Prénom"
+          disabled={isLoading}
+        />
+        <InputFormField
+          control={form.control}
+          path="lastName"
+          label="Nom"
+          disabled={isLoading}
+        />
+        <InputFormField
+          classes={{ container: styles.profileNameField }}
+          control={form.control}
+          path="profileName"
+          label="Nom du profil"
+          hint="Ce sera votre nom d'utilisateur."
+          disabled={isLoading}
+        />
+        <CheckboxFormField
+          control={form.control}
+          path="policyAccepted"
+          data-testid="cgu"
+          label={
+            <span>
+              J&lsquo;ai lu et j&lsquo;accepte les 
+              <Link
+                href="/cgu"
+                target="_blank"
+                className="fr-btn--no-after fr-link"
+              >
+                conditions générales d’utilisation du service
+              </Link>
+               ainsi que la{' '}
+              <Link
+                href="/confidentialite"
+                target="_blank"
+                className="fr-btn--no-after fr-link"
+              >
+                politique de confidentialité.
+              </Link>
+            </span>
+          }
+          disabled={isLoading}
+        />
 
-      <div className="fr-width-full">
-        <Button
-          iconId="fr-icon-account-circle-line"
-          type="submit"
-          size="large"
-          {...buttonLoadingClassname(
-            isLoading,
-            'fr-width-full fr-flex fr-justify-content-center fr-mt-10v',
-          )}
-        >
-          Créer mon compte
-        </Button>
-      </div>
-    </form>
+        <div className="fr-width-full">
+          <Button
+            iconId="fr-icon-account-circle-line"
+            type="submit"
+            size="large"
+            {...buttonLoadingClassname(
+              isLoading,
+              'fr-width-full fr-flex fr-justify-content-center fr-mt-10v',
+            )}
+          >
+            Créer mon compte
+          </Button>
+        </div>
+      </form>
+    </>
   )
 }
 
