@@ -11,5 +11,5 @@ dotenv.config({
   path: path.resolve(getDirname(import.meta.url), '../.env'),
 })
 
-global.TextEncoder = TextEncoder
+global.TextEncoder = TextEncoder as never
 global.TextDecoder = TextDecoder as never

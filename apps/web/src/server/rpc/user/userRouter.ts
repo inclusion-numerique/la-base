@@ -5,6 +5,7 @@ import {
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
 import { prismaClient } from '@app/web/prismaClient'
+import { extractBotDetectionHeaders } from '@app/web/server/rpc/botDetection'
 import {
   protectedProcedure,
   publicProcedure,
@@ -29,10 +30,14 @@ export const userRouter = router({
           profileName: honeypotProfileNameInput,
           timer,
         },
+        ctx: { req },
       }) => {
         // We check for probable spam bot behavior
         // We disable the check in CI as we don't want to block the e2e tests
         const shouldCheckForBot = !ServerWebAppConfig.isCi
+
+        // Extract all relevant headers with proper typing
+        const headers = extractBotDetectionHeaders(req)
 
         if (shouldCheckForBot) {
           if (honeypotProfileNameInput) {
@@ -45,6 +50,7 @@ export const userRouter = router({
                 lastName: lastNameInput,
                 email,
                 timer,
+                headers, // Include all headers for debugging
               },
             })
             throw invalidError('Cannot process signup request')
@@ -59,11 +65,25 @@ export const userRouter = router({
                 lastName: lastNameInput,
                 email,
                 timer,
+                headers, // Include all headers for debugging
               },
             })
             throw invalidError('Cannot process signup request')
           }
         }
+
+        Sentry.captureMessage('New signnup', {
+          level: 'info',
+          extra: {
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            email,
+            timer,
+            shouldCheckForBot,
+            honeypotProfileNameInput,
+            headers, // Include all headers for debugging
+          },
+        })
 
         const firstName =
           firstNameInput == null ? null : formatName(firstNameInput)

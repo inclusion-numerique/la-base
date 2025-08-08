@@ -220,6 +220,7 @@ export class WebAppStack extends TerraformStack {
       cpuLimit: isMain ? 2240 : 1120, // mVPCU
       memoryLimit: isMain ? 3072 : 2048, // mB
       deploy: true,
+      httpOption: 'redirected',
     })
 
     const domainZone = new DataScalewayDomainZone(this, 'dnsZone', {

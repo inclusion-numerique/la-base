@@ -7,7 +7,7 @@
   "engines": {
     "node": "^22.15"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "build": "turbo build",
     "cli": "dotenv -- ./apps/cli/node_modules/.bin/tsx apps/cli/src/index.ts",
@@ -35,18 +35,18 @@
     "overrides": {}
   },
   "optionalDependencies": {
-    "turbo-linux-64": "^2.5.3",
-    "turbo-linux-arm64": "^2.5.3"
+    "turbo-linux-64": "^2.5.5",
+    "turbo-linux-arm64": "^2.5.5"
   },
   "volta": {
     "node": "22.15.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@manypkg/cli": "^0.24.0",
-    "dotenv": "^16.5.0",
-    "dotenv-cli": "^8.0.0",
+    "@manypkg/cli": "^0.25.0",
+    "dotenv": "^17.2.1",
+    "dotenv-cli": "^10.0.0",
     "ts-node": "^10.9.2",
-    "turbo": "^2.5.3"
+    "turbo": "^2.5.5"
   }
 }

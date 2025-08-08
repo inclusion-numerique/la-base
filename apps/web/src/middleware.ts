@@ -12,7 +12,6 @@ import { output } from '@app/web/utils/output'
 import { type NextRequest, NextResponse } from 'next/server'
 
 const nodeEnvironment = process.env.NODE_ENV
-const isCI = !!process.env.CI
 const isProduction = nodeEnvironment === 'production'
 
 const contentSecurityPolicy = `
@@ -35,33 +34,6 @@ const contentSecurityPolicy = `
 `
   .replaceAll(/\s{2,}/g, ' ')
   .trim()
-
-const shouldRedirectToHttps = ({
-  forwardedProto,
-}: {
-  forwardedProto: string | null
-}) =>
-  isProduction &&
-  !isCI &&
-  // We redirect if protocol is not secure https
-  forwardedProto === 'http'
-
-const redirectToHttps = ({
-  httpsBase,
-  requestUrl,
-}: {
-  httpsBase: string
-  requestUrl: URL
-}) => {
-  const path = `${requestUrl.pathname}${requestUrl.search}`
-  const redirectTo = `${httpsBase}${path}`
-
-  output.info(
-    `HTTP protocol - redirecting to ${httpsBase}${requestUrl.pathname}${requestUrl.search}`,
-  )
-
-  return NextResponse.redirect(redirectTo, { status: 308 })
-}
 
 const shouldRedirectToBaseDomain = ({
   baseUrl,
@@ -91,7 +63,6 @@ const redirectToBaseDomain = ({
 }
 
 const middleware = (request: NextRequest) => {
-  const forwardedProto = request.headers.get('X-Forwarded-Proto')
   const requestHost = request.headers.get('host')
   const baseUrl = process.env.BASE_URL ?? ''
 
@@ -101,24 +72,6 @@ const middleware = (request: NextRequest) => {
   })
   if (jobTriggerInfo) {
     return rewriteTriggerToJobEndpoint({ baseUrl, request })
-  }
-
-  /**
-   * https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-   * The MDN documentation states "Note: This is more secure than simply
-   * configuring a HTTP to HTTPS (301) redirect on your server, where the
-   * initial HTTP connection is still vulnerable to a man-in-the-middle attack."
-   * But they keep applying this redirect in recommended SSL configs: https://ssl-config.mozilla.org/
-   */
-  if (shouldRedirectToHttps({ forwardedProto })) {
-    // Always redirect to same domain as we may have custom rules for each domain
-    const httpsBase = `https://${requestHost ?? ''}`
-    const requestUrl = new URL(request.url)
-
-    return redirectToHttps({
-      httpsBase,
-      requestUrl,
-    })
   }
 
   /**

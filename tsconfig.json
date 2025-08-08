@@ -2,11 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,59 +17,26 @@
     "jsx": "react-jsx",
     "incremental": true,
     "baseUrl": ".",
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     "paths": {
-      "@app/cli/*": [
-        "apps/cli/src/*"
-      ],
-      "@app/web/*": [
-        "apps/web/src/*"
-      ],
-      "@app/cdk/*": [
-        "packages/cdk/src/*"
-      ],
-      "@app/config/*": [
-        "packages/config/src/*"
-      ],
-      "@app/e2e/*": [
-        "packages/e2e/cypress/*"
-      ],
-      "@app/emails/*": [
-        "packages/emails/src/*"
-      ],
-      "@app/lint/*": [
-        "packages/lint/src/*"
-      ],
-      "@app/fixtures/*": [
-        "packages/fixtures/src/*"
-      ],
-      "@app/scaleway/*": [
-        "packages/cdk/.gen/providers/scaleway/*"
-      ],
-      "@app/storybook/*": [
-        "packages/storybook/src/*"
-      ],
-      "@app/ui/*": [
-        "packages/ui/src/*"
-      ],
-      "@app/test/*": [
-        "packages/test/src/*"
-      ],
+      "@app/cli/*": ["apps/cli/src/*"],
+      "@app/web/*": ["apps/web/src/*"],
+      "@app/cdk/*": ["packages/cdk/src/*"],
+      "@app/config/*": ["packages/config/src/*"],
+      "@app/e2e/*": ["packages/e2e/cypress/*"],
+      "@app/emails/*": ["packages/emails/src/*"],
+      "@app/lint/*": ["packages/lint/src/*"],
+      "@app/fixtures/*": ["packages/fixtures/src/*"],
+      "@app/scaleway/*": ["packages/cdk/.gen/providers/scaleway/*"],
+      "@app/storybook/*": ["packages/storybook/src/*"],
+      "@app/ui/*": ["packages/ui/src/*"],
+      "@app/test/*": ["packages/test/src/*"],
       "@prisma/client": [
-        "node_modules/.pnpm/@prisma+client@5.20.0_prisma@5.20.0/node_modules/@prisma/client"
+        "node_modules/.pnpm/@prisma+client@6.13.0_prisma@6.13.0/node_modules/@prisma/client"
       ]
     }
   },
-  "include": [
-    "./packages/test/src/jest.setup.ts"
-  ],
-  "files": [
-    "./packages/test/node_modules/jest-extended/types/index.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./packages/test/src/jest.setup.ts"],
+  "files": ["./packages/test/node_modules/jest-extended/types/index.d.ts"],
+  "exclude": ["node_modules"]
 }
