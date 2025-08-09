@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@cdktf/node-pty-prebuilt-multiarch': npm:node-pty@^1.0.0
-
 importers:
 
   .:
@@ -448,13 +445,13 @@ importers:
         version: 26.3.2
       '@storybook/addon-interactions':
         specifier: ^8.6.14
-        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))
+        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))
       '@storybook/react':
         specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8)))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))(typescript@5.9.2)
+        version: 8.6.14(@storybook/test@8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8)))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))(typescript@5.9.2)
       '@storybook/test':
         specifier: ^8.6.14
-        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))
+        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))
       '@testing-library/jest-dom':
         specifier: ^6.6.4
         version: 6.6.4
@@ -697,13 +694,13 @@ importers:
     dependencies:
       '@faire/mjml-react':
         specifier: ^3.5.0
-        version: 3.5.0(mjml@4.15.3(encoding@0.1.13))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 3.5.0(mjml@4.15.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       html-minifier:
         specifier: ^4.0.0
         version: 4.0.0
       mjml:
         specifier: ^4.15.3
-        version: 4.15.3(encoding@0.1.13)
+        version: 4.15.3
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -1005,13 +1002,13 @@ importers:
     devDependencies:
       '@storybook/addon-interactions':
         specifier: ^8.6.14
-        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))
+        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))
       '@storybook/react':
         specifier: ^8.6.14
-        version: 8.6.14(@storybook/test@8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8)))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))(typescript@5.9.2)
+        version: 8.6.14(@storybook/test@8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8)))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))(typescript@5.9.2)
       '@storybook/test':
         specifier: ^8.6.14
-        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.0)(prettier@2.8.8))
+        version: 8.6.14(storybook@9.1.1(@testing-library/dom@10.4.1)(prettier@2.8.8))
       '@testing-library/jest-dom':
         specifier: ^6.6.4
         version: 6.6.4
@@ -1964,6 +1961,9 @@ packages:
 
   '@cdktf/hcl2json@0.21.0':
     resolution: {integrity: sha512-cwX3i/mSJI/cRrtqwEPRfawB7pXgNioriSlkvou8LWiCrrcDe9ZtTbAbu8W1tEJQpe1pnX9VEgpzf/BbM7xF8Q==}
+
+  '@cdktf/node-pty-prebuilt-multiarch@0.10.2':
+    resolution: {integrity: sha512-Bpb0v9bzejJUAGmn8HfDFH6pYxFVHokiWV4mHvTao2XoYcEvETFVrniYIXlIg0e4yLlKB/U/z5WsC5PBsi3xEQ==}
 
   '@cdktf/provider-generator@0.21.0':
     resolution: {integrity: sha512-N/IehJ6lZlVaNxP/0sxg0AeLJIhgcW3+Bk6m71UzoDAZFPBzW00k6nmSAlQiE0c5L92hHgLksfEL8VNbiPKmSw==}
@@ -5718,6 +5718,9 @@ packages:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
+  chownr@1.1.4:
+    resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
+
   chromatic@12.2.0:
     resolution: {integrity: sha512-GswmBW9ZptAoTns1BMyjbm55Z7EsIJnUvYKdQqXIBZIKbGErmpA+p4c0BYA+nzw5B0M+rb3Iqp1IaH8TFwIQew==}
     hasBin: true
@@ -6286,6 +6289,10 @@ packages:
   decimal.js@10.6.0:
     resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
 
+  decompress-response@6.0.0:
+    resolution: {integrity: sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==}
+    engines: {node: '>=10'}
+
   dedent@0.7.0:
     resolution: {integrity: sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==}
 
@@ -6734,6 +6741,10 @@ packages:
     resolution: {integrity: sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==}
     engines: {node: '>= 0.8.0'}
 
+  expand-template@2.0.3:
+    resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
+    engines: {node: '>=6'}
+
   expand-tilde@1.2.2:
     resolution: {integrity: sha512-rtmc+cjLZqnu9dSYosX9EWmSJhTwpACgJQTfj4hgg2JjOD/6SIQalZrt4a3aQeh++oNxkazcaxrhPUj6+g5G/Q==}
     engines: {node: '>=0.10.0'}
@@ -7089,6 +7100,9 @@ packages:
 
   git-rev-sync@3.0.2:
     resolution: {integrity: sha512-Nd5RiYpyncjLv0j6IONy0lGzAqdRXUaBctuGBbrEA2m6Bn4iDrN/9MeQTXuiquw8AEKL9D2BW0nw5m/lQvxqnQ==}
+
+  github-from-package@0.0.0:
+    resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
 
   gl-matrix@3.4.4:
     resolution: {integrity: sha512-latSnyDNt/8zYUB6VIJ6PCh2jBjJX6gnDsoCZ7LyW7GkqrD51EWwa9qCoGixj8YqBtETQK/xY7OmpTF8xz1DdQ==}
@@ -8460,6 +8474,10 @@ packages:
     resolution: {integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==}
     engines: {node: '>=18'}
 
+  mimic-response@3.1.0:
+    resolution: {integrity: sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==}
+    engines: {node: '>=10'}
+
   min-indent@1.0.1:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
@@ -8610,6 +8628,9 @@ packages:
     resolution: {integrity: sha512-bW2WpJxm6HS+S3Yu6tq1DUPFoTxU9sPviUSmnL7Ua+oVO3WA5ILFWqvujUlz+oeuM+HCwEyMiP5xvKNPENVjYA==}
     hasBin: true
 
+  mkdirp-classic@0.5.3:
+    resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
+
   mkdirp@0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
@@ -8671,6 +8692,9 @@ packages:
     engines: {node: ^18 || >=20}
     hasBin: true
 
+  napi-build-utils@2.0.0:
+    resolution: {integrity: sha512-GEbrYkbfF7MoNaoh2iGG84Mnf/WZfB0GdGEsM8wz7Expx/LlWf5U8t9nvJKXSp3qr5IsEbK04cBGhol/KwOsWA==}
+
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -8723,6 +8747,10 @@ packages:
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
 
+  node-abi@3.75.0:
+    resolution: {integrity: sha512-OhYaY5sDsIka7H7AtijtI9jwGYLyl29eQn/W623DiN/MIv5sUqc4g7BIDThX+gb7di9f6xK02nkp8sdfFWZLTg==}
+    engines: {node: '>=10'}
+
   node-abort-controller@3.1.1:
     resolution: {integrity: sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==}
 
@@ -8762,9 +8790,6 @@ packages:
   node-preload@0.2.1:
     resolution: {integrity: sha512-RM5oyBy45cLEoHqCeh+MNuFAxO0vTFBLskvQbOKnEE7YTTSN4tbN8QWDIPQ6L+WvKsB/qLEGpYe2ZZ9d4W9OIQ==}
     engines: {node: '>=8'}
-
-  node-pty@1.0.0:
-    resolution: {integrity: sha512-wtBMWWS7dFZm/VgqElrTvtfMq4GzJ6+edFI0Y0zyzygUSZMgZdraDUMUhCIvkjhJjme15qWmbyJbtAx4ot4uZA==}
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
@@ -9464,6 +9489,11 @@ packages:
 
   preact@10.27.0:
     resolution: {integrity: sha512-/DTYoB6mwwgPytiqQTh/7SFRL98ZdiD8Sk8zIUVOxtwq4oWcwrcd1uno9fE/zZmUaUrFNYzbH14CPebOz9tZQw==}
+
+  prebuild-install@7.1.3:
+    resolution: {integrity: sha512-8Mf2cbV7x1cXPUILADGI3wuhfqWvtiLA1iclTDbFRZkgRQS0NqsPZphna9V+HyTEadheuPmjaJMsbzKQFOzLug==}
+    engines: {node: '>=10'}
+    hasBin: true
 
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
@@ -10198,6 +10228,12 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  simple-concat@1.0.1:
+    resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
+
+  simple-get@4.0.1:
+    resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
+
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
 
@@ -10537,6 +10573,9 @@ packages:
   tapable@2.2.2:
     resolution: {integrity: sha512-Re10+NauLTMCudc7T5WLFLAwDhQ0JWdrMK+9B2M8zR5hRExKmsRDCBA7/aV/pNJFltmBFO5BAMlQFi/vq3nKOg==}
     engines: {node: '>=6'}
+
+  tar-fs@2.1.3:
+    resolution: {integrity: sha512-090nwYJDmlhwFwEW3QQl+vaNnxsO2yVsd45eTKRBzSzu+hlb1w2K9inVq5b0ngXuLVqQ4ApvsUHHnu/zQNkWAg==}
 
   tar-stream@2.2.0:
     resolution: {integrity: sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==}
@@ -12798,7 +12837,7 @@ snapshots:
       '@cdktf/hcl-tools': 0.21.0
       '@cdktf/hcl2cdk': 0.21.0(constructs@10.4.2)
       '@cdktf/hcl2json': 0.21.0
-      '@cdktf/node-pty-prebuilt-multiarch': node-pty@1.0.0
+      '@cdktf/node-pty-prebuilt-multiarch': 0.10.2
       '@cdktf/provider-schema': 0.21.0(constructs@10.4.2)
       '@sentry/node': 7.120.3
       archiver: 7.0.1
@@ -12902,6 +12941,11 @@ snapshots:
   '@cdktf/hcl2json@0.21.0':
     dependencies:
       fs-extra: 11.3.0
+
+  '@cdktf/node-pty-prebuilt-multiarch@0.10.2':
+    dependencies:
+      nan: 2.23.0
+      prebuild-install: 7.1.3
 
   '@cdktf/provider-generator@0.21.0(constructs@10.4.2)':
     dependencies:
@@ -13424,6 +13468,13 @@ snapshots:
     dependencies:
       lodash.kebabcase: 4.1.1
       mjml: 4.15.3(encoding@0.1.13)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@faire/mjml-react@3.5.0(mjml@4.15.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      lodash.kebabcase: 4.1.1
+      mjml: 4.15.3
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
@@ -17468,6 +17519,8 @@ snapshots:
     dependencies:
       readdirp: 4.1.2
 
+  chownr@1.1.4: {}
+
   chromatic@12.2.0: {}
 
   chromatic@13.1.3: {}
@@ -18076,6 +18129,10 @@ snapshots:
 
   decimal.js@10.6.0: {}
 
+  decompress-response@6.0.0:
+    dependencies:
+      mimic-response: 3.1.0
+
   dedent@0.7.0: {}
 
   dedent@1.6.0: {}
@@ -18573,6 +18630,8 @@ snapshots:
 
   exit@0.1.2: {}
 
+  expand-template@2.0.3: {}
+
   expand-tilde@1.2.2:
     dependencies:
       os-homedir: 1.0.2
@@ -18972,6 +19031,8 @@ snapshots:
       escape-string-regexp: 1.0.5
       graceful-fs: 4.1.15
       shelljs: 0.8.5
+
+  github-from-package@0.0.0: {}
 
   gl-matrix@3.4.4: {}
 
@@ -20388,6 +20449,16 @@ snapshots:
       readable-stream: 2.3.8
       setimmediate: 1.0.5
 
+  juice@10.0.1:
+    dependencies:
+      cheerio: 1.0.0-rc.12
+      commander: 6.2.1
+      mensch: 0.3.4
+      slick: 1.12.2
+      web-resource-inliner: 6.0.1
+    transitivePeerDependencies:
+      - encoding
+
   juice@10.0.1(encoding@0.1.13):
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -20783,6 +20854,8 @@ snapshots:
 
   mimic-function@5.0.1: {}
 
+  mimic-response@3.1.0: {}
+
   min-indent@1.0.1: {}
 
   minimalistic-assert@1.0.1: {}
@@ -20819,11 +20892,27 @@ snapshots:
 
   minipass@7.1.2: {}
 
+  mjml-accordion@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-accordion@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-body@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20835,6 +20924,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-button@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-button@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
@@ -20843,11 +20940,36 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-carousel@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-carousel@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-cli@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      chokidar: 3.6.0
+      glob: 10.4.5
+      html-minifier: 4.0.0
+      js-beautify: 1.15.4
+      lodash: 4.17.21
+      minimatch: 9.0.5
+      mjml-core: 4.15.3
+      mjml-migrate: 4.15.3
+      mjml-parser-xml: 4.15.3
+      mjml-validator: 4.15.3
+      yargs: 17.7.2
     transitivePeerDependencies:
       - encoding
 
@@ -20868,11 +20990,34 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-column@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-column@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-core@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      cheerio: 1.0.0-rc.12
+      detect-node: 2.1.0
+      html-minifier: 4.0.0
+      js-beautify: 1.15.4
+      juice: 10.0.1
+      lodash: 4.17.21
+      mjml-migrate: 4.15.3
+      mjml-parser-xml: 4.15.3
+      mjml-validator: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20891,11 +21036,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-divider@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-divider@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-group@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20907,11 +21068,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-head-attributes@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-head-attributes@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-head-breakpoint@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20923,11 +21100,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-head-font@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-head-font@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-head-html-attributes@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20939,11 +21132,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-head-preview@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-head-preview@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-head-style@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20955,11 +21164,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-head-title@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-head-title@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-head@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20971,11 +21196,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-hero@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-hero@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-image@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -20987,6 +21228,17 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-migrate@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      js-beautify: 1.15.4
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+      mjml-parser-xml: 4.15.3
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - encoding
+
   mjml-migrate@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
@@ -20995,6 +21247,14 @@ snapshots:
       mjml-core: 4.15.3(encoding@0.1.13)
       mjml-parser-xml: 4.15.3
       yargs: 17.7.2
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-navbar@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -21012,6 +21272,37 @@ snapshots:
       detect-node: 2.1.0
       htmlparser2: 9.1.0
       lodash: 4.17.21
+
+  mjml-preset-core@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      mjml-accordion: 4.15.3
+      mjml-body: 4.15.3
+      mjml-button: 4.15.3
+      mjml-carousel: 4.15.3
+      mjml-column: 4.15.3
+      mjml-divider: 4.15.3
+      mjml-group: 4.15.3
+      mjml-head: 4.15.3
+      mjml-head-attributes: 4.15.3
+      mjml-head-breakpoint: 4.15.3
+      mjml-head-font: 4.15.3
+      mjml-head-html-attributes: 4.15.3
+      mjml-head-preview: 4.15.3
+      mjml-head-style: 4.15.3
+      mjml-head-title: 4.15.3
+      mjml-hero: 4.15.3
+      mjml-image: 4.15.3
+      mjml-navbar: 4.15.3
+      mjml-raw: 4.15.3
+      mjml-section: 4.15.3
+      mjml-social: 4.15.3
+      mjml-spacer: 4.15.3
+      mjml-table: 4.15.3
+      mjml-text: 4.15.3
+      mjml-wrapper: 4.15.3
+    transitivePeerDependencies:
+      - encoding
 
   mjml-preset-core@4.15.3(encoding@0.1.13):
     dependencies:
@@ -21044,6 +21335,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-raw@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-raw@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
@@ -21062,11 +21361,27 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       react-reconciler: 0.26.2(react@19.1.1)
 
+  mjml-section@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-section@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-social@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -21078,6 +21393,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-spacer@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-spacer@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
@@ -21086,11 +21409,27 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  mjml-table@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-table@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml-text@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -21106,12 +21445,32 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.2
 
+  mjml-wrapper@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      lodash: 4.17.21
+      mjml-core: 4.15.3
+      mjml-section: 4.15.3
+    transitivePeerDependencies:
+      - encoding
+
   mjml-wrapper@4.15.3(encoding@0.1.13):
     dependencies:
       '@babel/runtime': 7.28.2
       lodash: 4.17.21
       mjml-core: 4.15.3(encoding@0.1.13)
       mjml-section: 4.15.3(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+
+  mjml@4.15.3:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      mjml-cli: 4.15.3
+      mjml-core: 4.15.3
+      mjml-migrate: 4.15.3
+      mjml-preset-core: 4.15.3
+      mjml-validator: 4.15.3
     transitivePeerDependencies:
       - encoding
 
@@ -21125,6 +21484,8 @@ snapshots:
       mjml-validator: 4.15.3
     transitivePeerDependencies:
       - encoding
+
+  mkdirp-classic@0.5.3: {}
 
   mkdirp@0.5.6:
     dependencies:
@@ -21201,6 +21562,8 @@ snapshots:
   nanoid@3.3.11: {}
 
   nanoid@5.1.5: {}
+
+  napi-build-utils@2.0.0: {}
 
   natural-compare@1.4.0: {}
 
@@ -21314,12 +21677,20 @@ snapshots:
       lower-case: 2.0.2
       tslib: 2.8.1
 
+  node-abi@3.75.0:
+    dependencies:
+      semver: 7.7.2
+
   node-abort-controller@3.1.1: {}
 
   node-addon-api@7.1.1:
     optional: true
 
   node-fetch-native@1.6.7: {}
+
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
 
   node-fetch@2.7.0(encoding@0.1.13):
     dependencies:
@@ -21372,10 +21743,6 @@ snapshots:
   node-preload@0.2.1:
     dependencies:
       process-on-spawn: 1.1.0
-
-  node-pty@1.0.0:
-    dependencies:
-      nan: 2.23.0
 
   node-releases@2.0.19: {}
 
@@ -22189,6 +22556,21 @@ snapshots:
   preact@10.24.3: {}
 
   preact@10.27.0: {}
+
+  prebuild-install@7.1.3:
+    dependencies:
+      detect-libc: 2.0.4
+      expand-template: 2.0.3
+      github-from-package: 0.0.0
+      minimist: 1.2.8
+      mkdirp-classic: 0.5.3
+      napi-build-utils: 2.0.0
+      node-abi: 3.75.0
+      pump: 3.0.3
+      rc: 1.2.8
+      simple-get: 4.0.1
+      tar-fs: 2.1.3
+      tunnel-agent: 0.6.0
 
   prettier@2.8.8: {}
 
@@ -23107,6 +23489,14 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
+  simple-concat@1.0.1: {}
+
+  simple-get@4.0.1:
+    dependencies:
+      decompress-response: 6.0.0
+      once: 1.4.0
+      simple-concat: 1.0.1
+
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
@@ -23505,6 +23895,13 @@ snapshots:
   symbol-tree@3.2.4: {}
 
   tapable@2.2.2: {}
+
+  tar-fs@2.1.3:
+    dependencies:
+      chownr: 1.1.4
+      mkdirp-classic: 0.5.3
+      pump: 3.0.3
+      tar-stream: 2.2.0
 
   tar-stream@2.2.0:
     dependencies:
@@ -24057,6 +24454,17 @@ snapshots:
   wcwidth@1.0.1:
     dependencies:
       defaults: 1.0.4
+
+  web-resource-inliner@6.0.1:
+    dependencies:
+      ansi-colors: 4.1.3
+      escape-goat: 3.0.0
+      htmlparser2: 5.0.1
+      mime: 2.6.0
+      node-fetch: 2.7.0
+      valid-data-url: 3.0.1
+    transitivePeerDependencies:
+      - encoding
 
   web-resource-inliner@6.0.1(encoding@0.1.13):
     dependencies:
