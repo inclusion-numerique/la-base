@@ -3,6 +3,9 @@ export const createStopwatch = () => {
 
   return {
     started,
+    current: () => {
+      return Date.now() - started.getTime()
+    },
     stop: () => {
       const ended = new Date()
       const duration = ended.getTime() - started.getTime()
