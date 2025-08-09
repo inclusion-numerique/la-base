@@ -32,7 +32,9 @@
     "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init"
   },
   "pnpm": {
-    "overrides": {}
+    "overrides": {
+      "@cdktf/node-pty-prebuilt-multiarch": "npm:node-pty@^1.0.0"
+    }
   },
   "optionalDependencies": {
     "turbo-linux-64": "^2.5.5",
