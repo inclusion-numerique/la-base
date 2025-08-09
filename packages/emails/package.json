@@ -10,7 +10,7 @@
     "tsc": "tsc --noEmit"
   },
   "engines": {
-    "node": "^22.15"
+    "node": "^24.5"
   },
   "overrides": {
     "@faire/mjml-react": {

@@ -12,7 +12,7 @@
     "build": "tsc"
   },
   "engines": {
-    "node": "^22.15"
+    "node": "^24.5"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.862.0",
