@@ -13,7 +13,7 @@
     "setup:dsfr": "bash ../../setup-dsfr.sh"
   },
   "engines": {
-    "node": "^22.15"
+    "node": "^24.5"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.26.0",

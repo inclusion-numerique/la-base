@@ -11,7 +11,7 @@
     "test": "jest --passWithNoTests"
   },
   "engines": {
-    "node": "^22.15"
+    "node": "^24.5"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",

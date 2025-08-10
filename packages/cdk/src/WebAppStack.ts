@@ -186,6 +186,9 @@ export class WebAppStack extends TerraformStack {
       namespaceId: containerNamespace.namespaceId,
       registryImage: environmentVariables.WEB_CONTAINER_IMAGE.value,
       environmentVariables: {
+        NODE_OPTIONS: isMain
+          ? '--max-old-space-size=1536'
+          : '--max-old-space-size=1024',
         BREVO_USERS_LIST_ID: environmentVariables.BREVO_USERS_LIST_ID.value,
         EMAIL_FROM_ADDRESS: emailFromAddress,
         EMAIL_FROM_NAME: emailFromName,

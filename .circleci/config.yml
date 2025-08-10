@@ -6,13 +6,18 @@ orbs:
 executors:
   node:
     docker:
+      - image: cimg/node:24.5.0
+        environment:
+          TZ: 'UTC'
+  node22:
+    docker:
       - image: cimg/node:22.15.0
         environment:
           TZ: 'UTC'
 
   node-postgres:
     docker:
-      - image: cimg/node:22.15.0
+      - image: cimg/node:24.5.0
         environment:
           TZ: 'UTC'
           CI_PG_ADMIN_URL: postgresql://postgres@localhost
@@ -22,12 +27,12 @@ executors:
           POSTGRES_USER: postgres
   node-browsers:
     docker:
-      - image: cimg/node:22.15.0-browsers
+      - image: cimg/node:24.5.0-browsers
         environment:
           TZ: 'UTC'
   node-e2e:
     docker:
-      - image: cimg/node:22.15.0-browsers
+      - image: cimg/node:24.5.0-browsers
         environment:
           TZ: 'UTC'
           CI_DATABASE_URL: postgresql://postgres@localhost/test
@@ -474,7 +479,7 @@ jobs:
             pnpm --silent -F @app/web test:integration
 
   deploy_web:
-    executor: node-postgres
+    executor: node22
     resource_class: large
     steps:
       - checkout
