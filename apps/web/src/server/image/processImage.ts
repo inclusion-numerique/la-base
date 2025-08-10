@@ -5,11 +5,6 @@ import type { Image } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import sharp from 'sharp'
 
-// we will only process one image at a time to avoid malloc() errors race conditions
-sharp.cache(false)
-sharp.concurrency(1)
-sharp.simd(false)
-
 export const processImage = async ({
   originalImageBuffer,
   image,
