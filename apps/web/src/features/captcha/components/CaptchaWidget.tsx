@@ -1,67 +1,115 @@
 'use client'
 
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
-  FRCWidgetCompleteEvent,
-  FriendlyCaptchaSDK,
   CreateWidgetOptions,
-  WidgetErrorData,
+  FRCWidgetCompleteEvent,
   FRCWidgetErrorEventData,
+  FriendlyCaptchaSDK,
+  WidgetErrorData,
 } from '@friendlycaptcha/sdk'
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 
-const sdk = new FriendlyCaptchaSDK({
-  apiEndpoint: 'eu',
-  disableEvalPatching: process.env.NODE_ENV === 'development', // Next.js uses eval in dev mode.
-})
+let sdkSingleton: FriendlyCaptchaSDK | null = null
+function getSdk(): FriendlyCaptchaSDK {
+  if (!sdkSingleton) {
+    sdkSingleton = new FriendlyCaptchaSDK({
+      apiEndpoint: 'global',
+      disableEvalPatching: process.env.NODE_ENV === 'development',
+    })
+  }
+  return sdkSingleton
+}
 
-type Props = Omit<CreateWidgetOptions, 'element'> & {
+export type CaptchaWidgetProps = Omit<CreateWidgetOptions, 'element'> & {
   onComplete?: (response: string) => void
   onError?: (error: WidgetErrorData) => void
   onExpire?: () => void
 }
 
-const FriendlyCaptcha = forwardRef<Props>((props, ref) => {
-  const captchaRef = useRef<HTMLDivElement>(null)
+export type CaptchaWidgetHandle = { reset: () => void }
+
+const CaptchaWidget = forwardRef<
+  CaptchaWidgetHandle,
+  CaptchaWidgetProps & { className?: string }
+>(({ className, ...props }, ref) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const widgetRef = useRef<ReturnType<
+    FriendlyCaptchaSDK['createWidget']
+  > | null>(null)
+
+  // Keep latest handlers without re-creating the widget
+  const onCompleteRef = useRef(props.onComplete)
+  const onErrorRef = useRef(props.onError)
+  const onExpireRef = useRef(props.onExpire)
 
   useEffect(() => {
-    if (captchaRef.current) {
-      const captcha = sdk.createWidget({
-        element: captchaRef.current,
-        ...props,
-      })
+    onCompleteRef.current = props.onComplete
+    onErrorRef.current = props.onError
+    onExpireRef.current = props.onExpire
+  }, [props.onComplete, props.onError, props.onExpire])
 
-      if (props.onComplete) {
-        captchaRef.current.addEventListener('frc:widget.complete', (e) => {
-          props.onComplete!((e as FRCWidgetCompleteEvent).detail.response)
-        })
-      }
+  // Mount widget once to avoid blinking
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we intentionally mount once and keep handlers via refs
+  useEffect(() => {
+    if (!containerRef.current) return
 
-      if (props.onError) {
-        captchaRef.current.addEventListener('frc:widget.error', (e) => {
-          props.onError!(
-            (e as CustomEvent<FRCWidgetErrorEventData>).detail.error,
-          )
-        })
-      }
+    const captcha = getSdk().createWidget({
+      element: containerRef.current,
+      ...props,
+      sitekey: PublicWebAppConfig.FriendlyCaptcha.siteKey,
+      apiEndpoint: 'global',
+      language: 'fr',
+      formFieldName: 'captcha',
+    })
+    widgetRef.current = captcha
 
-      if (props.onExpire) {
-        captchaRef.current.addEventListener('frc:widget.expire', () => {
-          props.onExpire!()
-        })
-      }
-
-      return () => captcha?.destroy()
+    const handleComplete = (e: Event) => {
+      const detail = (e as unknown as FRCWidgetCompleteEvent).detail
+      onCompleteRef.current?.(detail.response)
     }
-  }, Object.values(props))
+    const handleError = (e: Event) => {
+      const detail = (e as unknown as CustomEvent<FRCWidgetErrorEventData>)
+        .detail
+      onErrorRef.current?.(detail.error)
+    }
+    const handleExpire = () => {
+      onExpireRef.current?.()
+    }
 
-  // Expose the reset method to the parent component
+    containerRef.current.addEventListener('frc:widget.complete', handleComplete)
+    containerRef.current.addEventListener('frc:widget.error', handleError)
+    containerRef.current.addEventListener('frc:widget.expire', handleExpire)
+
+    return () => {
+      containerRef.current?.removeEventListener(
+        'frc:widget.complete',
+        handleComplete,
+      )
+      containerRef.current?.removeEventListener('frc:widget.error', handleError)
+      containerRef.current?.removeEventListener(
+        'frc:widget.expire',
+        handleExpire,
+      )
+      widgetRef.current?.destroy()
+      widgetRef.current = null
+    }
+  }, [])
+
   useImperativeHandle(ref, () => ({
-    reset: () => {
-      captchaRef.current?.reset()
-    },
+    reset: () => widgetRef.current?.reset(),
   }))
 
-  return <div ref={ref} />
+  return (
+    <div
+      className={className}
+      ref={containerRef}
+      style={{
+        // minHeight to avoid layout shift while widget is loading
+        minHeight: 68,
+      }}
+    />
+  )
 })
 
-export default FriendlyCaptcha
+export default CaptchaWidget

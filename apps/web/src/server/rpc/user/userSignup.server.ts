@@ -1,3 +1,4 @@
+import { verifyCaptchaResponse } from '@app/web/features/captcha/verifyCaptchaResponse'
 import { prismaClient } from '@app/web/prismaClient'
 import { UserSignupValidation } from '@app/web/server/rpc/user/userSignup'
 import z from 'zod'
@@ -16,4 +17,12 @@ export const ServerUserSignupValidation = UserSignupValidation.extend({
 
       return !existing
     }, 'Un compte existe déjà avec cet email'),
+  captcha: z
+    .string({
+      required_error: 'Veuillez vérifier que vous n’êtes pas un robot',
+    })
+    .refine(async (captcha) => {
+      const response = await verifyCaptchaResponse(captcha)
+      return response.success
+    }, 'Veuillez vérifier que vous n’êtes pas un robot'),
 })

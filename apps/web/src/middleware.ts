@@ -20,7 +20,7 @@ const contentSecurityPolicy = `
   script-src-attr 'none';
   style-src 'self' https: 'unsafe-inline';
   img-src 'self' https://storage.lesbases.anct.gouv.fr data: blob:;
-  frame-src https://www.youtube-nocookie.com/;
+  frame-src https://www.youtube-nocookie.com/ https://global.frcapi.com/;
   object-src 'none';
   connect-src 'self' blob: https://${ServerWebAppConfig.S3.uploadsBucket}.${
     ServerWebAppConfig.S3.host

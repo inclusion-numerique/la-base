@@ -5,22 +5,25 @@ import InputFormField from '@app/ui/components/Form/InputFormField'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import CaptchaWidget, {
+  type CaptchaWidgetHandle,
+} from '@app/web/features/captcha/components/CaptchaWidget'
 import {
   type UserSignup,
   UserSignupValidation,
 } from '@app/web/server/rpc/user/userSignup'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
-import { createStopwatch } from '@app/web/utils/stopwatch'
 import Button from '@codegouvfr/react-dsfr/Button'
+import type { WidgetErrorData } from '@friendlycaptcha/sdk'
 import { zodResolver } from '@hookform/resolvers/zod'
+import classNames from 'classnames'
 import Cookies from 'js-cookie'
 import type { Route } from 'next'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import styles from './EmailSignupForm.module.css'
 
 const EmailSignupForm = ({
   error,
@@ -35,20 +38,29 @@ const EmailSignupForm = ({
     resolver: zodResolver(UserSignupValidation),
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    defaultValues: { email, profileName: undefined, timer: 0 },
+    defaultValues: { email },
   })
 
   const signup = trpc.user.signup.useMutation()
 
-  const timer = useRef(createStopwatch())
+  const captchaRef = useRef<CaptchaWidgetHandle>(null)
+
+  const onCaptchaComplete = (response: string) => {
+    form.setValue('captcha', response)
+  }
+  const onCaptchaError = (_error: WidgetErrorData) => {
+    form.setValue('captcha', '')
+  }
+  const onCaptchaExpire = () => {
+    form.setValue('captcha', '')
+  }
 
   const onSubmit = async (data: UserSignup) => {
     try {
-      await signup.mutateAsync({
-        ...data,
-        timer: timer.current.stop().duration,
-      })
+      await signup.mutateAsync(data)
     } catch (mutationError) {
+      // TODO Reset the captcha component
+      captchaRef.current?.reset()
       if (
         applyZodValidationMutationErrorsToForm(mutationError, form.setError)
       ) {
@@ -108,14 +120,24 @@ const EmailSignupForm = ({
           label="Nom"
           disabled={isLoading}
         />
-        <InputFormField
-          classes={{ container: styles.profileNameField }}
-          control={form.control}
-          path="profileName"
-          label="Nom du profil"
-          hint="Ce sera votre nom d'utilisateur."
-          disabled={isLoading}
-        />
+        <div className="fr-my-6v">
+          <CaptchaWidget
+            ref={captchaRef}
+            onComplete={onCaptchaComplete}
+            onError={onCaptchaError}
+            onExpire={onCaptchaExpire}
+          />
+          {form.formState.errors.captcha && (
+            <p
+              id={`captcha__error`}
+              className={classNames('fr-error-text fr-width-full', {
+                'fr-mt-1v': !!form.formState.errors.captcha,
+              })}
+            >
+              {form.formState.errors.captcha.message}
+            </p>
+          )}
+        </div>
         <CheckboxFormField
           control={form.control}
           path="policyAccepted"

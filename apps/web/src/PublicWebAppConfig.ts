@@ -36,4 +36,7 @@ export const PublicWebAppConfig = {
     host: process.env.NEXT_PUBLIC_MATOMO_HOST ?? '',
     siteId: process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? '',
   },
+  FriendlyCaptcha: {
+    siteKey: process.env.NEXT_PUBLIC_FRIENDLY_CAPTCHA_SITE_KEY ?? '',
+  },
 }

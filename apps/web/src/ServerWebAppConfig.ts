@@ -63,4 +63,7 @@ export const ServerWebAppConfig = {
   Database: {
     instanceId: process.env.DATABASE_INSTANCE_ID ?? '', // like fr-par/uuid
   },
+  FriendlyCaptcha: {
+    apiKey: process.env.FRIENDLY_CAPTCHA_API_KEY ?? '',
+  },
 }
