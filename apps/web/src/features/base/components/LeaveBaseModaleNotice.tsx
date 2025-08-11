@@ -122,7 +122,9 @@ const LeaveBaseModaleNotice = ({
   const knowMoreLink = (
     <Link
       className="fr-link fr-link--no-underline fr-text--underline"
-      href="/centre-d-aide/une-base#membre-base"
+      href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
+      target="_blank"
+      rel="noopener noreferrer"
     >
       En savoir plus
     </Link>

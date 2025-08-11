@@ -35,7 +35,12 @@ const BaseCollectionsPage = async ({
             <p>
               Créez une collection pour organiser et partager facilement des
               ressources.&nbsp;
-              <Link href="/centre-d-aide/les-collections" className="fr-link">
+              <Link
+                href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
+                className="fr-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 En savoir plus
               </Link>
             </p>

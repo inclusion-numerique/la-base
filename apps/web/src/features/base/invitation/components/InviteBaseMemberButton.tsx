@@ -141,7 +141,9 @@ const InviteBaseMemberButton = ({
               <div className="fr-mb-4w">
                 <Link
                   className="fr-link"
-                  href="/centre-d-aide/une-base#membre-base"
+                  href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   En savoir plus sur les rôles et les permissions ici
                 </Link>

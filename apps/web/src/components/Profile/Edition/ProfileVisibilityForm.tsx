@@ -117,8 +117,10 @@ const ProfileVisibilityForm = ({
             profil.&nbsp;
             <br className="fr-hidden-sm fr-unhidden" />
             <Link
-              href="/centre-d-aide/le-profil#visibilite-profil"
+              href="https://docs.numerique.gouv.fr/docs/720a2a25-78ca-4182-9ea5-7db49bd39bd5/"
               className="fr-link fr-text--sm"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               En savoir plus
             </Link>

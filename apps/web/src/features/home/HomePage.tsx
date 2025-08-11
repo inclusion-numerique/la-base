@@ -41,7 +41,9 @@ const HomePage = async ({
                 partagés par des acteurs du numérique d’intérêt général.&nbsp;
                 <Link
                   className="fr-link fr-text--xl"
-                  href="/centre-d-aide/les-ressources"
+                  href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   En savoir plus
                 </Link>
@@ -133,7 +135,12 @@ const HomePage = async ({
                 Une base représente une structure, un collectif qui souhaite
                 publier, partager et sélectionner des ressources relatives à son
                 activité, ses pratiques...{' '}
-                <Link className="fr-link" href="/centre-d-aide/une-base">
+                <Link
+                  className="fr-link"
+                  href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   En savoir plus
                 </Link>
                 .
