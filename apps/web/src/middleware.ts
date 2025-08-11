@@ -15,7 +15,7 @@ const nodeEnvironment = process.env.NODE_ENV
 const isProduction = nodeEnvironment === 'production'
 
 const contentSecurityPolicy = `
-  default-src 'self' https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.net;
+  default-src 'self' https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.anct.gouv.fr;
   script-src 'self' https://matomo.incubateur.anct.gouv.fr 'unsafe-inline' 'unsafe-eval';
   script-src-attr 'none';
   style-src 'self' https: 'unsafe-inline';
@@ -30,7 +30,7 @@ const contentSecurityPolicy = `
   frame-ancestors 'self' https://matomo.incubateur.anct.gouv.fr;
   form-action 'self';
   base-uri 'self';
-  ${isProduction ? 'upgrade-insecure-requests true;' : ''}
+  ${isProduction ? 'upgrade-insecure-requests;' : ''}
 `
   .replaceAll(/\s{2,}/g, ' ')
   .trim()
