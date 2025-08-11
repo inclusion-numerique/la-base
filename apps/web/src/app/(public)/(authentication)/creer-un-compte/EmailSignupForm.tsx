@@ -4,6 +4,7 @@ import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import CaptchaWidget, {
   type CaptchaWidgetHandle,
@@ -38,7 +39,7 @@ const EmailSignupForm = ({
     resolver: zodResolver(UserSignupValidation),
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    defaultValues: { email },
+    defaultValues: { email, captcha: 'test' },
   })
 
   const signup = trpc.user.signup.useMutation()
@@ -56,6 +57,9 @@ const EmailSignupForm = ({
   }
 
   const onSubmit = async (data: UserSignup) => {
+    if (PublicWebAppConfig.isE2e) {
+      data.captcha = 'test'
+    }
     try {
       await signup.mutateAsync(data)
     } catch (mutationError) {

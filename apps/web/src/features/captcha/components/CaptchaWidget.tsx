@@ -102,6 +102,7 @@ const CaptchaWidget = forwardRef<
 
   return (
     <div
+      id="captcha"
       className={className}
       ref={containerRef}
       style={{
