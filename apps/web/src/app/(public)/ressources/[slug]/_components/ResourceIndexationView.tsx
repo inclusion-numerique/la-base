@@ -93,9 +93,9 @@ const ResourceIndexationView = ({
     [resource, resourceTypes, beneficiaries, professionalSectors, themes],
   )
 
-  return resourceInfo.map(({ title, description, tags, slug }, index) => (
+  return resourceInfo.map(({ title, description, tags, slug }) => (
     <div key={title}>
-      <div className={index === 0 ? 'fr-mt-1w' : 'fr-mt-3w'}>
+      <div className={'fr-mt-3w'}>
         <span className={titleClassName}>{title}</span>
         {withDescription && (
           <div className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
