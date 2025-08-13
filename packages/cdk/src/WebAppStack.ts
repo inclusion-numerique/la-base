@@ -54,6 +54,7 @@ export const webAppStackSensitiveVariables = [
   'PROCONNECT_PREVIEW_CLIENT_SECRET',
   'PROCONNECT_MAIN_CLIENT_SECRET',
   'INTERNAL_API_PRIVATE_KEY',
+  'FRIENDLY_CAPTCHA_API_KEY',
 ] as const
 
 /**
@@ -216,6 +217,8 @@ export class WebAppStack extends TerraformStack {
           ? sensitiveEnvironmentVariables.PROCONNECT_MAIN_CLIENT_SECRET.value
           : sensitiveEnvironmentVariables.PROCONNECT_PREVIEW_CLIENT_SECRET
               .value,
+        FRIENDLY_CAPTCHA_API_KEY:
+          sensitiveEnvironmentVariables.FRIENDLY_CAPTCHA_API_KEY.value,
       },
       name: containerName,
       minScale: isMain ? 2 : namespace === 'dev' ? 1 : 0,

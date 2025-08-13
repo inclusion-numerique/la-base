@@ -17,6 +17,7 @@ export const PublicWebAppConfig = {
   isDev,
   isLocal,
   isPreview,
+  isE2e,
   Chromatic: {
     appId: process.env.CHROMATIC_APP_ID ?? '',
   },
@@ -35,5 +36,8 @@ export const PublicWebAppConfig = {
   Matomo: {
     host: process.env.NEXT_PUBLIC_MATOMO_HOST ?? '',
     siteId: process.env.NEXT_PUBLIC_MATOMO_SITE_ID ?? '',
+  },
+  FriendlyCaptcha: {
+    siteKey: process.env.NEXT_PUBLIC_FRIENDLY_CAPTCHA_SITE_KEY ?? '',
   },
 }

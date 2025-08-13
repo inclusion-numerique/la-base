@@ -15,22 +15,22 @@ const nodeEnvironment = process.env.NODE_ENV
 const isProduction = nodeEnvironment === 'production'
 
 const contentSecurityPolicy = `
-  default-src 'self' https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.net;
+  default-src 'self' https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.anct.gouv.fr;
   script-src 'self' https://matomo.incubateur.anct.gouv.fr 'unsafe-inline' 'unsafe-eval';
   script-src-attr 'none';
   style-src 'self' https: 'unsafe-inline';
   img-src 'self' https://storage.lesbases.anct.gouv.fr data: blob:;
-  frame-src https://www.youtube-nocookie.com/;
+  frame-src https://www.youtube-nocookie.com/ https://global.frcapi.com/;
   object-src 'none';
   connect-src 'self' blob: https://${ServerWebAppConfig.S3.uploadsBucket}.${
     ServerWebAppConfig.S3.host
-  } https://${PublicWebAppConfig.ProConnect.hostname} https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.net https://openmaptiles.geo.data.gouv.fr https://openmaptiles.github.io https://aides-territoires.beta.gouv.fr https://recherche-entreprises.api.gouv.fr https://api-adresse.data.gouv.fr;
+  } https://${PublicWebAppConfig.ProConnect.hostname} https://sentry.incubateur.anct.gouv.fr/ https://openmaptiles.geo.data.gouv.fr https://openmaptiles.github.io https://aides-territoires.beta.gouv.fr https://recherche-entreprises.api.gouv.fr https://api-adresse.data.gouv.fr;
   worker-src 'self' blob:;
   font-src 'self' https: data:;
   frame-ancestors 'self' https://matomo.incubateur.anct.gouv.fr;
   form-action 'self';
   base-uri 'self';
-  ${isProduction ? 'upgrade-insecure-requests true;' : ''}
+  ${isProduction ? 'upgrade-insecure-requests;' : ''}
 `
   .replaceAll(/\s{2,}/g, ' ')
   .trim()
