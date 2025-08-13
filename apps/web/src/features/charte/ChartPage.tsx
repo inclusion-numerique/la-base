@@ -62,13 +62,16 @@ const ChartPage = () => {
                         href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
                         className="fr-link"
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
                         Etalab 2.0
                       </Link>
                       &nbsp;(d'autres choix de licences sont possibles,&nbsp;
                       <Link
-                        href="/centre-d-aide/les-ressources#licences"
+                        href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
                         className="fr-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         en savoir plus ici
                       </Link>
@@ -99,7 +102,12 @@ const ChartPage = () => {
                 <span>
                   Pour en savoir plus sur les licences des ressources, vous
                   pouvez également consulter le&nbsp;
-                  <Link href="/centre-d-aide" className="fr-link">
+                  <Link
+                    href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
+                    className="fr-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     centre d&apos;aide
                   </Link>
                   .

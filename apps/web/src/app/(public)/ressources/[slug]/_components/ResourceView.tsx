@@ -107,7 +107,7 @@ const ResourceView = ({
                   <>
                     <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
-                      className="fr-text--medium"
+                      className="fr-text--medium fr-link--underline-on-hover"
                       href={`/ressources/${resource.slug}/avis`}
                     >
                       {resource._count.resourceFeedback}&nbsp;avis

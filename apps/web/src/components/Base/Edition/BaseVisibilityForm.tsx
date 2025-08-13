@@ -129,7 +129,9 @@ const BaseVisibilityForm = ({
             Choisissez ce que les visiteurs peuvent voir sur votre base.&nbsp;
             <br className="fr-hidden-sm fr-unhidden" />
             <Link
-              href="/centre-d-aide/une-base#visibilite-base"
+              href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="fr-link fr-text--sm"
             >
               En savoir plus

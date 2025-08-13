@@ -15,62 +15,19 @@ import { ServerUserSignupValidation } from '@app/web/server/rpc/user/userSignup.
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import * as Sentry from '@sentry/nextjs'
 import { v4 } from 'uuid'
-import { invalidError } from '../trpcErrors'
 import { formatName } from './formatName'
 
 export const userRouter = router({
   signup: publicProcedure
+    // Captcha data is verified in the userSignup.server.ts ServerUserSignupValidation schema
     .input(ServerUserSignupValidation)
     .mutation(
       async ({
-        input: {
-          firstName: firstNameInput,
-          lastName: lastNameInput,
-          email,
-          profileName: honeypotProfileNameInput,
-          timer,
-        },
+        input: { firstName: firstNameInput, lastName: lastNameInput, email },
         ctx: { req },
       }) => {
-        // We check for probable spam bot behavior
-        // We disable the check in CI as we don't want to block the e2e tests
-        const shouldCheckForBot = !ServerWebAppConfig.isCi
-
         // Extract all relevant headers with proper typing
         const headers = extractBotDetectionHeaders(req)
-
-        if (shouldCheckForBot) {
-          if (honeypotProfileNameInput) {
-            // This is a invisible honeypot field, this means a bot submited the form
-            Sentry.captureMessage('Bot detected - signup - honeypot', {
-              level: 'info',
-              extra: {
-                honeypotProfileNameInput,
-                firstName: firstNameInput,
-                lastName: lastNameInput,
-                email,
-                timer,
-                headers, // Include all headers for debugging
-              },
-            })
-            throw invalidError('Cannot process signup request')
-          }
-
-          if (timer < 4000) {
-            // This is too fast for a human, this means a bot
-            Sentry.captureMessage('Bot detected - signup -timer', {
-              level: 'info',
-              extra: {
-                firstName: firstNameInput,
-                lastName: lastNameInput,
-                email,
-                timer,
-                headers, // Include all headers for debugging
-              },
-            })
-            throw invalidError('Cannot process signup request')
-          }
-        }
 
         Sentry.captureMessage('New signnup', {
           level: 'info',
@@ -78,9 +35,6 @@ export const userRouter = router({
             firstName: firstNameInput,
             lastName: lastNameInput,
             email,
-            timer,
-            shouldCheckForBot,
-            honeypotProfileNameInput,
             headers, // Include all headers for debugging
           },
         })

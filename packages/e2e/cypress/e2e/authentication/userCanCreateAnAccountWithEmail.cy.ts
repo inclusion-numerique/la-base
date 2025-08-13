@@ -17,6 +17,10 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.findByLabelText('Email').type(email)
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName).type('{enter}')
+
+    // captcha is disabled in e2e
+    cy.should('not.contain', 'Veuillez vérifier que vous n’êtes pas un robot')
+
     cy.contains(`Veuillez accepter les conditions générales d'utilisation`)
   })
 
