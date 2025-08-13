@@ -32,7 +32,12 @@ const HomeInfo = () => (
         </h2>
         <p className="fr-text--xl fr-mb-6w">
           Pour en savoir plus, vous pouvez visiter notre{' '}
-          <Link href="/centre-d-aide" className="fr-link fr-text--xl">
+          <Link
+            href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fr-link fr-text--xl"
+          >
             centre d&apos;aide.
           </Link>
         </p>

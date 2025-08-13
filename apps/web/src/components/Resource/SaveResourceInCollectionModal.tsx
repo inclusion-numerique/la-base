@@ -554,7 +554,9 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     Créez une collection pour enregistrer, organiser, partager
                     facilement des ressources.&nbsp;
                     <Link
-                      href="/centre-d-aide/les-collections"
+                      href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="fr-link"
                     >
                       En savoir plus
@@ -601,7 +603,9 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   Créez une collection pour enregistrer, organiser, partager
                   facilement des ressources.&nbsp;
                   <Link
-                    href="/centre-d-aide/les-collections"
+                    href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="fr-link"
                   >
                     En savoir plus

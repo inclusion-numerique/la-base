@@ -55,7 +55,9 @@ const ResourceLicenceForm = ({
           Choisissez sous quelle licence vous souhaitez publier votre ressource.
           <br />
           <Link
-            href="/centre-d-aide/les-ressources#licence-ressource"
+            href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="fr-text--sm fr-link"
           >
             En savoir plus

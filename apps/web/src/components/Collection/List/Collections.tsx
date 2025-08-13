@@ -85,7 +85,12 @@ const Collections = ({
               <EmptyBox className="fr-flex fr-justify-content-center">
                 Créez une collection pour enregistrer et organiser des
                 ressources.
-                <Link href="/centre-d-aide/les-collections" className="fr-link">
+                <Link
+                  href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
+                  className="fr-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   En savoir plus
                 </Link>
                 <div className="fr-mt-4w">
