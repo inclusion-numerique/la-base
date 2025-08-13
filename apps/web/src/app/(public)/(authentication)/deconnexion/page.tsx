@@ -40,10 +40,13 @@ const SignoutPage = async () => {
           <p className="fr-text--lg fr-text--center fr-mb-10v">
             Êtes-vous sûr·e de vouloir vous déconnecter&nbsp;?
           </p>
-          <SignoutButton
-            proConnectIdTokenHint={proConnectIdTokenHint}
-            className="fr-mb-6v"
-          />
+          <div className="fr-width-full">
+            <SignoutButton
+              proConnectIdTokenHint={proConnectIdTokenHint}
+              className="fr-width-full fr-flex fr-justify-content-center fr-mb-6v"
+              size="large"
+            />
+          </div>
           <div className="fr-grid-row fr-grid-row--center">
             <Link className="fr-link" href="/">
               Retour
