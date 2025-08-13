@@ -4,6 +4,7 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import { ResourceLicence } from '@prisma/client'
 import { v4 } from 'uuid'
 import type { SessionUser } from '../auth/sessionUser'
+import { currentCguVersion } from '../features/cgu/components/CurrentCgu'
 import type { BasePageData } from '../server/bases/getBase'
 
 export const createTestUser = (publicProfile?: boolean) =>
@@ -27,6 +28,8 @@ export const createTestUser = (publicProfile?: boolean) =>
     createdResources: [],
     resources: [],
     collections: [],
+    lastCguAcceptedAt: new Date('2023-01-01').toISOString(),
+    cguVersion: currentCguVersion,
   }) satisfies SessionUser
 
 export const createTestProfile = (publicProfile?: boolean) =>

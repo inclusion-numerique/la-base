@@ -1,4 +1,5 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
+import { currentCguVersion } from '../features/cgu/components/CurrentCgu'
 
 export const testSessionUser = {
   id: 'test',
@@ -13,6 +14,8 @@ export const testSessionUser = {
   updated: new Date('2023-05-05').toISOString(),
   created: new Date('2023-01-01').toISOString(),
   emailVerified: new Date('2023-01-01').toISOString(),
+  lastCguAcceptedAt: new Date('2023-01-01').toISOString(),
+  cguVersion: currentCguVersion,
   hasSeenV2Onboarding: null,
   isPublic: false,
   ownedBases: [],
