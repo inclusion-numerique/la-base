@@ -65,6 +65,8 @@ export const userRouter = router({
             slug,
             signedUpAt: new Date(),
             email,
+            cguVersion: currentCguVersion,
+            lastCguAcceptedAt: new Date(),
           }
           const user = await transaction.user.upsert({
             where: { email },
