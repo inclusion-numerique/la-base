@@ -1,6 +1,6 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { redirect } from 'next/navigation'
-import { currentCguVersion } from './components/CurrentCgu'
+import { currentCguVersion } from './currentCguVersion'
 
 export const redirectToUpdatedCguPageIfNeeded = (user: SessionUser | null) => {
   if (!user) {

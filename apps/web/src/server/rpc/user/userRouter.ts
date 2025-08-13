@@ -4,7 +4,7 @@ import {
   createContact,
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
-import { currentCguVersion } from '@app/web/features/cgu/components/CurrentCgu'
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 import { prismaClient } from '@app/web/prismaClient'
 import { extractBotDetectionHeaders } from '@app/web/server/rpc/botDetection'
 import {

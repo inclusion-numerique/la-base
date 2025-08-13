@@ -1,5 +1,5 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import { currentCguVersion } from '../features/cgu/components/CurrentCgu'
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 
 export const testSessionUser = {
   id: 'test',

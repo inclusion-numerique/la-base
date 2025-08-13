@@ -1,10 +1,10 @@
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { ResourceLicence } from '@prisma/client'
 import { v4 } from 'uuid'
 import type { SessionUser } from '../auth/sessionUser'
-import { currentCguVersion } from '../features/cgu/components/CurrentCgu'
 import type { BasePageData } from '../server/bases/getBase'
 
 export const createTestUser = (publicProfile?: boolean) =>

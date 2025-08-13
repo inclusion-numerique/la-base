@@ -1,12 +1,8 @@
 import Link from 'next/link'
+import { currentCguVersion } from '../currentCguVersion'
 
 /**
- * Updating CGU version will cause all users to need to accept the new version
- */
-export const currentCguVersion = '20250523'
-
-/**
- * Change the currentCguVersion if the contents changes
+ * Change the currentCguVersion in currentCguVersion.ts if the contents changes
  */
 export const CurrentCguContent = () => (
   <>
