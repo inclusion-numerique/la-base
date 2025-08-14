@@ -21,12 +21,14 @@ export const getDataTableOrderBy = <
   if (!searchParams.tri) {
     const defaultOrderByColumn = configuration.columns.find(
       (column) => column.defaultSortable && column.orderBy,
-    )?.orderBy
-    if (!defaultOrderByColumn) {
+    )
+    if (!defaultOrderByColumn || !defaultOrderByColumn.orderBy) {
       return []
     }
 
-    return defaultOrderByColumn(direction)
+    return defaultOrderByColumn.orderBy(
+      defaultOrderByColumn.defaultSortableDirection ?? direction,
+    )
   }
   const column = configuration.columns.find(
     (item) => item.name === searchParams.tri,
