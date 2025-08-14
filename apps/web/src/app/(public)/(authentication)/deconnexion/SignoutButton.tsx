@@ -1,10 +1,8 @@
 'use client'
 
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { generateProconnectSignoutUrl } from '@app/web/app/(public)/(authentication)/deconnexion/callback/proconnectSignout'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/src/Button'
-import { signOut } from 'next-auth/react'
 import { type ReactNode, useState } from 'react'
 
 const SignoutButton = ({
@@ -24,17 +22,9 @@ const SignoutButton = ({
   const onLogout = async () => {
     setIsLoading(true)
 
-    // If user is logged in with ProConnect, we redirect to proconnect signout flow
-    if (proConnectIdTokenHint) {
-      window.location.href = generateProconnectSignoutUrl({
-        origin: window.location.origin,
-        callbackUrl,
-        idTokenHint: proConnectIdTokenHint,
-      })
-      return
-    }
-
-    await signOut({ redirect: true, callbackUrl })
+    // Use server route to orchestrate provider logout and fallback
+    const params = new URLSearchParams({ callbackUrl })
+    window.location.href = `/deconnexion/start?${params.toString()}`
   }
 
   return (
