@@ -5,7 +5,6 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import IconInSquare from '@app/web/components/IconInSquare'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { getProconnectIdToken } from '@app/web/security/getProconnectIdToken'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -22,8 +21,6 @@ const SignoutPage = async () => {
   if (!user) {
     redirect('/')
   }
-
-  const proConnectIdTokenHint = await getProconnectIdToken(user)
 
   return (
     <>
@@ -42,7 +39,6 @@ const SignoutPage = async () => {
           </p>
           <div className="fr-width-full">
             <SignoutButton
-              proConnectIdTokenHint={proConnectIdTokenHint}
               className="fr-width-full fr-flex fr-justify-content-center fr-mb-6v"
               size="large"
             />
