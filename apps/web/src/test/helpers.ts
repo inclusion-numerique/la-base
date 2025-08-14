@@ -1,3 +1,4 @@
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 import { generateResourceExcerpt } from '@app/web/resources/resourceExcerpt'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import type { Resource } from '@app/web/server/resources/getResource'
@@ -27,6 +28,8 @@ export const createTestUser = (publicProfile?: boolean) =>
     createdResources: [],
     resources: [],
     collections: [],
+    lastCguAcceptedAt: new Date('2023-01-01').toISOString(),
+    cguVersion: currentCguVersion,
   }) satisfies SessionUser
 
 export const createTestProfile = (publicProfile?: boolean) =>

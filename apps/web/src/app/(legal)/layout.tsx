@@ -1,12 +1,14 @@
+import PublicFooter from '@app/web/app/(public)/PublicFooter'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
-import { redirectToUpdatedCguPageIfNeeded } from '@app/web/features/cgu/redirectToUpdatedCguPageIfNeeded'
 import { type PropsWithChildren } from 'react'
 
-const EditorLayout = async ({ children }: PropsWithChildren) => {
+/**
+ * The (legal) pages are always accessible, even if the
+ * user is logged in without having accepted the CGU
+ */
+const LegalLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()
-
-  redirectToUpdatedCguPageIfNeeded(user)
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}
@@ -14,7 +16,9 @@ const EditorLayout = async ({ children }: PropsWithChildren) => {
       <div id="skip-links" />
       <Header user={user} />
       <div style={{ flex: 1 }}>{children}</div>
+      <PublicFooter />
     </div>
   )
 }
-export default EditorLayout
+
+export default LegalLayout

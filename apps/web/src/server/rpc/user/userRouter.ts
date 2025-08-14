@@ -4,6 +4,7 @@ import {
   createContact,
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 import { prismaClient } from '@app/web/prismaClient'
 import { extractBotDetectionHeaders } from '@app/web/server/rpc/botDetection'
 import {
@@ -64,6 +65,8 @@ export const userRouter = router({
             slug,
             signedUpAt: new Date(),
             email,
+            cguVersion: currentCguVersion,
+            lastCguAcceptedAt: new Date(),
           }
           const user = await transaction.user.upsert({
             where: { email },
@@ -115,4 +118,16 @@ export const userRouter = router({
       },
     }),
   ),
+  acceptCurrentCgu: protectedProcedure.mutation(async ({ ctx: { user } }) => {
+    const result = await prismaClient.user.update({
+      where: { id: user.id },
+      data: { lastCguAcceptedAt: new Date(), cguVersion: currentCguVersion },
+      select: {
+        id: true,
+        lastCguAcceptedAt: true,
+        cguVersion: true,
+      },
+    })
+    return result
+  }),
 })

@@ -1,4 +1,5 @@
 import type { CreateUserInput } from '@app/e2e/tasks/handlers/user.tasks'
+import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
 import { createSlug } from '@app/web/utils/createSlug'
 import { v4 } from 'uuid'
 
@@ -26,6 +27,8 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
     emailVerified: new Date('2023-04-01'),
     signedUpAt: new Date('2023-04-01'),
     isPublic: false,
+    lastCguAcceptedAt: new Date('2023-04-01'),
+    cguVersion: currentCguVersion,
     collections: {
       create: {
         id: v4(),

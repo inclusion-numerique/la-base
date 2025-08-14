@@ -39,6 +39,7 @@ export type SessionUser = Pick<
   | 'isPublic'
   | 'legacyId'
   | 'role'
+  | 'cguVersion'
 > & {
   image: {
     id: string
@@ -49,6 +50,7 @@ export type SessionUser = Pick<
   created: string | null
   updated: string | null
   hasSeenV2Onboarding: string | null
+  lastCguAcceptedAt: string | null
   ownedBases: SessionUserBase[]
   bases: (Pick<BaseMembers, 'isAdmin'> & {
     base: SessionUserBase

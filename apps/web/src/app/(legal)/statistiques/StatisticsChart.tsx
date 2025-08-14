@@ -1,7 +1,7 @@
 'use client'
 
-import CustomTooltip from '@app/web/app/(public)/statistiques/CustomTooltip'
-import type { StatisticsLegend } from '@app/web/app/(public)/statistiques/StatisticsLegend'
+import CustomTooltip from '@app/web/app/(legal)/statistiques/CustomTooltip'
+import type { StatisticsLegend } from '@app/web/app/(legal)/statistiques/StatisticsLegend'
 import Card from '@app/web/components/Card'
 import { numberToString } from '@app/web/utils/formatNumber'
 import {
