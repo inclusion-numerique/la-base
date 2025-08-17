@@ -1,8 +1,10 @@
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { proConnectProviderId } from '@app/web/auth/proConnect'
 import {
   applyUserEmailReconciliation,
   getUserEmailReconciliation,
 } from '@app/web/auth/reconcileUserEmail'
+import { updateAccountTokens } from '@app/web/auth/updateAccountTokens'
 import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
 import { prismaClient } from '@app/web/prismaClient'
 import { registerLastLogin } from '@app/web/security/registerLastLogin'
@@ -62,6 +64,23 @@ export const signinCallback: <
     if (!!email && existingUser && existingUser.role !== 'User') {
       return `/connexion?error=ProConnectOnly`
     }
+  }
+
+  // Update account tokens if this is a ProConnect signin
+  if (account?.provider === proConnectProviderId && account.access_token) {
+    updateAccountTokens({
+      userId: user.id,
+      provider: proConnectProviderId,
+      tokens: {
+        access_token: account.access_token,
+        refresh_token: account.refresh_token,
+        expires_in: account.expires_at,
+        id_token: account.id_token,
+        scope: account.scope,
+      },
+    }).catch((error) => {
+      Sentry.captureException(error)
+    })
   }
 
   // User that should be reconciled can sign in
