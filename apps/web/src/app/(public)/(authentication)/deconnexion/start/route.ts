@@ -5,6 +5,7 @@ import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFrom
 import { proConnectProviderId } from '@app/web/auth/proConnect'
 import { prismaClient } from '@app/web/prismaClient'
 import { refreshProconnectIdToken } from '@app/web/security/getProconnectIdToken'
+import { getServerUrl } from '@app/web/utils/baseUrl'
 import {
   type EncodedState,
   encodeSerializableState,
@@ -30,7 +31,7 @@ const isJwtUnexpired = (token: string, clockSkewSeconds = 3): boolean => {
 }
 
 export const GET = async (request: NextRequest) => {
-  const { searchParams, origin } = request.nextUrl
+  const { searchParams } = request.nextUrl
   const callbackUrl = searchParams.get('callbackUrl') || '/'
 
   const sessionToken = getSessionTokenFromNextRequestCookies(request.cookies)
@@ -77,9 +78,12 @@ export const GET = async (request: NextRequest) => {
     nonce: v4(),
   }) as EncodedState<ProconnectSignoutState>
 
-  const postLogoutRedirectUri = `${origin}/deconnexion/callback?state=${encodeURIComponent(
-    state,
-  )}`
+  const postLogoutRedirectUri = getServerUrl(
+    `/deconnexion/callback?state=${encodeURIComponent(state)}`,
+    {
+      absolutePath: true,
+    },
+  )
 
   return new Response('OK', {
     status: 303,
