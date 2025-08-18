@@ -32,7 +32,11 @@ const isJwtUnexpired = (token: string, clockSkewSeconds = 3): boolean => {
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = request.nextUrl
-  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const callbackUrlRaw = searchParams.get('callbackUrl') || '/'
+
+  const callbackUrl = callbackUrlRaw.startsWith('http')
+    ? callbackUrlRaw
+    : getServerUrl(callbackUrlRaw, { absolutePath: true })
 
   const sessionToken = getSessionTokenFromNextRequestCookies(request.cookies)
   const user = sessionToken
