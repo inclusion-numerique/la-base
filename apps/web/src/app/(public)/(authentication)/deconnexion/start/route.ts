@@ -62,7 +62,6 @@ export const GET = async (request: NextRequest) => {
 
   if (idTokenHint) {
     const proconnectLogoutUrl = generateProconnectSignoutUrl({
-      origin,
       callbackUrl,
       idTokenHint,
     })
