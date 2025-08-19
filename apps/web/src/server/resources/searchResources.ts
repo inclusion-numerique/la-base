@@ -53,11 +53,7 @@ export const countResources = async (
                                          lower(unaccent(resources.title))                                   as search_title,
                                          lower(unaccent(resources.description))                             as search_description,
                                          lower(unaccent(coalesce(min(bases.title), min(creator.name), ''))) as search_published_by,
-                                         resources.created                                                  AS created,
-                                         resources.updated                                                  AS updated,
-                                         resources.published                                                AS published,
-                                         resources.last_published                                           AS last_published,
-                                         COALESCE(resources.published, resources.created)                   AS date
+                                         COALESCE(resources.last_published, resources.updated)              AS date
                                   FROM resources
                                            /* Join user contributor only to have only one row per resource */
                                            /* Null will never match as contributor_id is not nullable */
@@ -172,15 +168,11 @@ export const rankResources = async (
                                          lower(unaccent(resources.title))                                   as search_title,
                                          lower(unaccent(resources.description))                             as search_description,
                                          lower(unaccent(coalesce(min(bases.title), min(creator.name), ''))) as search_published_by,
-                                         resources.created                                                  AS created,
-                                         resources.updated                                                  AS updated,
-                                         resources.published                                                AS published,
-                                         resources.last_published                                           AS last_published,
-                                         resources.views_count                                              AS views_count,
                                          COUNT(DISTINCT resource_feedback.sent_by_id)                       AS feedbacks_count,
+                                         resources.views_count                                              AS views_count,
                                          AVG(resource_feedback.rating)                                      AS feedbacks_rating,
                                          COUNT(DISTINCT collection_resources.id)                            AS collections_count,
-                                         COALESCE(resources.published, resources.created)                   AS date
+                                         COALESCE(resources.last_published, resources.updated)              AS date
                                   FROM resources
                                            /* Join user contributor only to have only one row per resource */
                                            /* Null will never match as contributor_id is not nullable */
