@@ -19,8 +19,6 @@ const DEFAULT_PAGE_SIZE = 100
 export const searchUser = async (options: SearchUtilisateurOptions) => {
   const searchParams = options.searchParams ?? {}
 
-  // const parsedQueryParams = z.object({}).safeParse(searchParams)
-
   const orderBy = getDataTableOrderBy(searchParams, UtilisateursDataTable)
 
   const { take, skip } = takeAndSkipFromPage({

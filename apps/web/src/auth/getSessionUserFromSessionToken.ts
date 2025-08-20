@@ -94,6 +94,8 @@ export const getSessionUserFromSessionToken = async (
           updated: true,
           isPublic: true,
           hasSeenV2Onboarding: true,
+          lastCguAcceptedAt: true,
+          cguVersion: true,
           ownedBases: {
             select: {
               id: true,
@@ -165,5 +167,6 @@ export const getSessionUserFromSessionToken = async (
     created: res.user.created.toISOString(),
     updated: res.user.updated.toISOString(),
     emailVerified: res.user.emailVerified?.toISOString() ?? null,
+    lastCguAcceptedAt: res.user.lastCguAcceptedAt?.toISOString() ?? null,
   }
 }

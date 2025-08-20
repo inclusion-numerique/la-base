@@ -10,6 +10,7 @@ export const getUserDetailsPageContext = cache(async (userId: string) => {
       accounts: true,
       sessions: true,
       uploads: true,
+      image: true,
     },
   })
   const bases = await prismaClient.base.findMany({
