@@ -24,7 +24,7 @@ const contentSecurityPolicy = `
   object-src 'none';
   connect-src 'self' blob: https://${ServerWebAppConfig.S3.uploadsBucket}.${
     ServerWebAppConfig.S3.host
-  } https://${PublicWebAppConfig.ProConnect.hostname} https://sentry.incubateur.anct.gouv.fr/ https://openmaptiles.geo.data.gouv.fr https://openmaptiles.github.io https://aides-territoires.beta.gouv.fr https://recherche-entreprises.api.gouv.fr https://api-adresse.data.gouv.fr;
+  } https://${PublicWebAppConfig.ProConnect.hostname} https://matomo.incubateur.anct.gouv.fr https://sentry.incubateur.anct.gouv.fr/ https://openmaptiles.geo.data.gouv.fr https://openmaptiles.github.io https://aides-territoires.beta.gouv.fr https://recherche-entreprises.api.gouv.fr https://api-adresse.data.gouv.fr;
   worker-src 'self' blob:;
   font-src 'self' https: data:;
   frame-ancestors 'self' https://matomo.incubateur.anct.gouv.fr;
