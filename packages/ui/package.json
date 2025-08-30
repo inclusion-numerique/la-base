@@ -28,7 +28,7 @@
     "cropperjs": "^1.6.2",
     "dotenv": "^17.2.1",
     "framer-motion": "^12.23.12",
-    "next": "^15.4.6",
+    "next": "^15.4.7",
     "react": "^19.1.1",
     "react-cropper": "^2.3.3",
     "react-dom": "^19.1.1",
