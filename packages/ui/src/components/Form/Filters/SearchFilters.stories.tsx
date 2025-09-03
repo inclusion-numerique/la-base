@@ -15,7 +15,6 @@ type Story = StoryObj<typeof SearchFilters>
 export const Default: Story = {
   name: 'Multiple fitre',
   args: {
-    label: 'Affiner la recherche',
     categories: [
       {
         multiple: true,

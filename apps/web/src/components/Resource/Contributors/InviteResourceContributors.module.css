@@ -39,11 +39,18 @@
 
 .contributor {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 
   &:not(:last-child) {
     margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    gap: 0px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 

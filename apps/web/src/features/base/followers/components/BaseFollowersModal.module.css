@@ -5,3 +5,7 @@
 .baseFollowersModal :global(.fr-modal__title) {
   text-align: start !important;
 }
+
+.link {
+  background-image: none;
+}

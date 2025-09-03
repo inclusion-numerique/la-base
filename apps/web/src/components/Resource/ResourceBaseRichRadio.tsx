@@ -57,7 +57,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
                 <ProfilePrivacyTag isPublic={user.isPublic} />
               </ResourceBaseRichRadioElement>
               <p
-                className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-4v"
+                className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-2v fr-mb-4v fr-py-0"
                 id="radio-rich-legend"
               >
                 Ajouter également cette ressource à l’une de vos bases&nbsp;:

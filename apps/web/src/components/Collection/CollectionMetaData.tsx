@@ -57,7 +57,14 @@ const CollectionMetaData = ({
             />
           </div>
           <div className="fr-hidden-sm">
-            <PrivacyTag isPublic={collection.isPublic} small />
+            {collection.isPublic ? (
+              <PrivacyTag isPublic={collection.isPublic} small />
+            ) : (
+              <span className="fr-tag fr-tag--sm">
+                <span className="ri-lock-line" aria-hidden="true" />
+                <span className="fr-sr-only">Privée</span>
+              </span>
+            )}
           </div>
         </div>
       )}

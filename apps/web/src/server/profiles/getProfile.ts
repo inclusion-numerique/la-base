@@ -42,6 +42,7 @@ export const getProfilePageQuery = async ({
               name: true,
               isPublic: true,
               followedBy: true,
+              slug: true,
               _count: {
                 select: { resources: true, followedBy: true },
               },

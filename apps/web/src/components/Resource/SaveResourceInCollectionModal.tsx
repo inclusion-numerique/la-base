@@ -330,9 +330,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       <RawModal
         className={styles.modal}
         title={
-          inCollectionCreation
-            ? 'Créer une collection'
-            : 'Enregistrer cette ressource dans :'
+          inCollectionCreation ? 'Créer une collection' : 'Enregistrer dans :'
         }
         id={SaveResourceInCollectionDynamicModal.id}
         buttons={

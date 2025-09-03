@@ -9,3 +9,7 @@
 .btn {
   min-height: 0;
 }
+
+.link {
+  background-image: none;
+}

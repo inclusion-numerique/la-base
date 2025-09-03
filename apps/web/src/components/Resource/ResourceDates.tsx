@@ -49,7 +49,7 @@ const ResourceDates = ({
       return (
         <div className="fr-flex fr-direction-column fr-direction-md-row fr-flex-gap-2v fr-flex-gap-md-0">
           {unpublishedModifications}
-          {dateContent}
+          Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
         </div>
       )
     }

@@ -25,7 +25,8 @@ const EditableContent = ({
         iconId="fr-icon-edit-line"
         iconPosition="right"
         onClick={onEditClick}
-        priority="secondary"
+        priority="tertiary no outline"
+        size="small"
       >
         {iconText}
       </Button>

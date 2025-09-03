@@ -11,6 +11,7 @@ import { numberToString } from '@app/web/utils/formatNumber'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
+import Link from 'next/link'
 import styles from './ProfileFollowersModal.module.css'
 
 const { Component: FollowersModal, open } = createModal({
@@ -101,7 +102,12 @@ const ProfileFollowersModal = ({
               <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                 <RoundProfileImage user={follower} />
                 <div className="fr-flex fr-direction-column fr-flex-gap-1v fr-align-items-baseline">
-                  <span className="fr-text--bold">{follower.name}</span>
+                  <Link
+                    className={styles.link}
+                    href={`/profils/${follower.slug}`}
+                  >
+                    <span className="fr-text--bold">{follower.name}</span>
+                  </Link>
                   <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                     <ProfileMetadata
                       className="fr-text-mention--grey"
