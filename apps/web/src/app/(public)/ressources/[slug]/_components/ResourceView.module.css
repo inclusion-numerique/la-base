@@ -96,3 +96,7 @@
   object-fit: contain;
   display: block;
 }
+
+.feedbackLink:hover {
+  color: var(--text-action-high-blue-france);
+}

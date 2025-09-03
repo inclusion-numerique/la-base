@@ -1,13 +1,14 @@
 import styles from '@app/web/components/Collection/Edition/Resources/Order/CollectionResourceOrder.module.css'
 import DeleteCollectionResourceButton from '@app/web/components/Collection/Edition/Resources/Order/DeleteCollectionResourceButton'
 import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesViewsAndMetadata'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { BaseResource } from '@app/web/server/bases/getBase'
+import { Resource } from '@app/web/server/resources/getResource'
 
 const CollectionResourceOrderRow = ({
   resource,
   onDelete,
 }: {
-  resource: ResourceListItem
+  resource: Resource | BaseResource
   onDelete: () => void
 }) => (
   <div className={styles.container}>
@@ -15,7 +16,7 @@ const CollectionResourceOrderRow = ({
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
         <span className="fr-text--bold">{resource.title}</span>
         <div className="fr-flex fr-flex-gap-2v">
-          <ResourcesViewsAndMetadata resource={resource} />
+          <ResourcesViewsAndMetadata resource={resource} context="collection" />
         </div>
       </div>
       <DeleteCollectionResourceButton onDelete={onDelete} />

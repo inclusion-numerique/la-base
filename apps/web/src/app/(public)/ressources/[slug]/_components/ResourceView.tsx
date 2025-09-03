@@ -98,6 +98,7 @@ const ResourceView = ({
             </p>
             {resource.published && (
               <ResourcesViewsAndMetadata
+                context="view"
                 resource={resource}
                 showLabels
                 showPrivate={false}
@@ -107,7 +108,10 @@ const ResourceView = ({
                   <>
                     <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
-                      className="fr-text--medium fr-link--underline-on-hover"
+                      className={classNames(
+                        'fr-text--medium fr-link--underline-on-hover',
+                        styles.feedbackLink,
+                      )}
                       href={`/ressources/${resource.slug}/avis`}
                     >
                       {resource._count.resourceFeedback}&nbsp;avis

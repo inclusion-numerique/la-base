@@ -5,7 +5,8 @@ import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveRes
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
 import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import type { Resource } from '@app/web/server/resources/getResource'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -23,7 +24,7 @@ const ResourceCard = ({
   titleAs: ResourceTitle = 'h2',
   isDraft = false,
 }: {
-  resource: ResourceListItem
+  resource: Resource | BaseResource
   user: SessionUser | null
   className?: string
   isContributor: boolean
@@ -78,7 +79,7 @@ const ResourceCard = ({
     <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
       {resource.published && (
         <div className="fr-text--sm fr-mb-0">
-          <ResourcesViewsAndMetadata resource={resource}>
+          <ResourcesViewsAndMetadata resource={resource} context="card">
             {resource._count.resourceFeedback > 0 && (
               <>
                 <FeedbackBadge
