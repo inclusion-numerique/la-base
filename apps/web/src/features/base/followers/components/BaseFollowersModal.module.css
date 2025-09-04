@@ -6,6 +6,10 @@
   text-align: start !important;
 }
 
-.link {
-  background-image: none;
+.feedbackLink:hover {
+  color: var(--text-action-high-blue-france);
+}
+
+.feedbackLink:active {
+  background-color: #ededed !important;
 }

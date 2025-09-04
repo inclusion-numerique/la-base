@@ -8,7 +8,6 @@ import ProfileMetadata from '@app/web/components/Profile/ProfileMetadata'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { BaseFollowedByData } from '@app/web/server/bases/getBase'
 import { numberToString } from '@app/web/utils/formatNumber'
-import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -33,17 +32,21 @@ const BaseFollowersModal = ({
   return (
     <>
       <div>·</div>
-      <Button
-        className="fr-link fr-text--underline fr-text--sm fr-flex"
-        priority="tertiary no outline"
+      <span className="fr-icon-user-heart-line fr-icon--sm" />
+      <Link
+        href="#"
+        className={classNames(
+          'fr-link--underline-on-hover fr-text--sm fr-mb-0',
+          styles.feedbackLink,
+        )}
         onClick={open}
+        role="button"
       >
-        <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
         <div>
           <b>{numberToString(counts.total)}</b>
           <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
         </div>
-      </Button>
+      </Link>
 
       <FollowersModal title={title} className={styles.baseFollowersModal}>
         <>

@@ -55,9 +55,8 @@ export const createTestProfile = (publicProfile?: boolean) =>
         total: 0,
         public: 0,
         private: 0,
-        visible: 0,
       },
-      visible: [],
+      followedBy: [],
     },
     _count: {
       followedBy: 0,

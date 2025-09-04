@@ -76,10 +76,6 @@ export const getProfilePageQuery = async ({
   const privateFollowedBy = profile.followedBy
     .map(({ follower }) => follower)
     .filter(({ isPublic }) => !isPublic)
-  const visibleFollowedBy = [
-    ...publicFollowedBy,
-    ...privateFollowedBy.filter(({ id }) => id === profile.id),
-  ]
 
   return {
     ...profile,
@@ -88,9 +84,8 @@ export const getProfilePageQuery = async ({
         total: profile.followedBy.length,
         public: publicFollowedBy.length,
         private: privateFollowedBy.length,
-        visible: visibleFollowedBy.length,
       },
-      visible: visibleFollowedBy,
+      followedBy: profile.followedBy.map(({ follower }) => follower),
     },
   }
 }
