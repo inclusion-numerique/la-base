@@ -4,11 +4,11 @@ import CheckboxFormField from '@app/ui/components/Form/CheckboxFormField'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import CaptchaWidget, {
   type CaptchaWidgetHandle,
 } from '@app/web/features/captcha/components/CaptchaWidget'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   type UserSignup,
   UserSignupValidation,
@@ -21,8 +21,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import Cookies from 'js-cookie'
 import type { Route } from 'next'
-import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 

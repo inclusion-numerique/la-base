@@ -1,4 +1,3 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
 import {
   applyUserEmailReconciliation,
@@ -6,6 +5,7 @@ import {
 } from '@app/web/auth/reconcileUserEmail'
 import { updateAccountTokens } from '@app/web/auth/updateAccountTokens'
 import { updateUserEmailFromProvider } from '@app/web/auth/updateUserEmailFromProvider'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { prismaClient } from '@app/web/prismaClient'
 import { registerLastLogin } from '@app/web/security/registerLastLogin'
 import * as Sentry from '@sentry/nextjs'

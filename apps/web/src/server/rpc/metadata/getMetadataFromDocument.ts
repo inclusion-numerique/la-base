@@ -1,5 +1,5 @@
-import { load } from 'cheerio'
 import type { Cheerio } from 'cheerio'
+import { load } from 'cheerio'
 import type { Element } from 'domhandler'
 
 const cleanMetadataString = (string_: string | undefined | null) => {

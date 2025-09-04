@@ -8,10 +8,10 @@ import {
   executeBasesSearch,
 } from '@app/web/server/search/executeSearch'
 import {
-  type UrlPaginationParams,
   sanitizeUrlPaginationParams,
   searchParamsFromSegment,
   searchUrl,
+  type UrlPaginationParams,
 } from '@app/web/server/search/searchQueryParams'
 
 export const dynamic = 'force-dynamic'

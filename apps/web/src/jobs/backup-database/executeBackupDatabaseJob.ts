@@ -1,5 +1,5 @@
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import type { BackupDatabaseJob } from '@app/web/jobs/backup-database/backupDatabaseJob'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { formatDate } from '@app/web/utils/formatDate'
 import axios from 'axios'
 

@@ -66,8 +66,9 @@
 @media (min-width: 62em) {
   /* lg */
   .fr-header {
-    box-shadow: inset 0 -1px 0 0 var(--border-default-grey), inset 0 1px 0 0
-      var(--border-default-grey);
+    box-shadow:
+      inset 0 -1px 0 0 var(--border-default-grey),
+      inset 0 1px 0 0 var(--border-default-grey);
 
     .fr-header__body-row {
       padding: 16px 0;
@@ -75,8 +76,9 @@
 
     .fr-header__menu {
       .fr-nav__link:hover {
-        box-shadow: inset 0 -1px 0 0 var(--border-default-grey), inset 0 1px 0 0
-          var(--border-default-grey);
+        box-shadow:
+          inset 0 -1px 0 0 var(--border-default-grey),
+          inset 0 1px 0 0 var(--border-default-grey);
       }
     }
 

@@ -1,9 +1,9 @@
-import styles from '@app/ui/components/Form/Filters/SearchFilter.module.css'
 import {
   FilterKey,
-  ThematicSelection,
   isCategoryComplete,
+  ThematicSelection,
 } from '@app/ui/components/Form/Filters/filter'
+import styles from '@app/ui/components/Form/Filters/SearchFilter.module.css'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
 import SearchThematicsCategory from '@app/web/components/Search/Filters/SearchThematicsCategory'
 import { Category, categoryThemesOptions } from '@app/web/themes/themes'

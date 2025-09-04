@@ -5,11 +5,11 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import AddContent from '@app/web/components/Resource/Edition/AddContent'
 import ContentListEdition from '@app/web/components/Resource/Edition/ContentListEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import {
   type PublishCommand,
   PublishCommandValidation,
 } from '@app/web/server/resources/feature/PublishResource'
-import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
 import type { Resource } from '@app/web/server/resources/getResource'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import {

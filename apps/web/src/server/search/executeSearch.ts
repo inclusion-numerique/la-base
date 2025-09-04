@@ -16,9 +16,9 @@ import {
 } from '@app/web/server/resources/searchResources'
 import { backgroundLogSearchExecution } from '@app/web/server/search/logSearchExecution'
 import {
+  defaultSearchParams,
   type PaginationParams,
   type SearchParams,
-  defaultSearchParams,
 } from '@app/web/server/search/searchQueryParams'
 
 export const countSearchResults = async (

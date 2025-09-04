@@ -1,9 +1,9 @@
 'use client'
 
 import EditableCardForm from '@app/web/components/EditableCardForm'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
 import {
   type UpdateProfileVisibilityCommand,

@@ -1,6 +1,6 @@
+import { proConnectProviderId } from '@app/web/auth/proConnect'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
-import { proConnectProviderId } from '@app/web/auth/proConnect'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import axios from 'axios'
 import jwt from 'jsonwebtoken'

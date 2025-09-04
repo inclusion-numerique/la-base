@@ -1,6 +1,6 @@
 import type { AppContext } from '@app/web/server/rpc/createContext'
 import { transformer } from '@app/web/utils/serialization'
-import { TRPCError, initTRPC } from '@trpc/server'
+import { initTRPC, TRPCError } from '@trpc/server'
 
 const t = initTRPC.context<AppContext>().create({
   transformer,

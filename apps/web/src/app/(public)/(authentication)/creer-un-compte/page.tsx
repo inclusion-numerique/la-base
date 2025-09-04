@@ -5,8 +5,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Notice from '@codegouvfr/react-dsfr/Notice'
-import type { Metadata } from 'next'
-import type { Route } from 'next'
+import type { Metadata, Route } from 'next'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {

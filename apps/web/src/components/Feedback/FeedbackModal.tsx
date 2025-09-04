@@ -10,9 +10,9 @@ import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { feedbackModalId } from '@app/web/components/Feedback/feedbackModalProps'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
+  difficultyAreasOptions,
   type SendFeedbackData,
   SendFeedbackValidation,
-  difficultyAreasOptions,
 } from '@app/web/feedback/SendFeedback'
 import { trpc } from '@app/web/trpc'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'

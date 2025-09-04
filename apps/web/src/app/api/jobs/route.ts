@@ -1,7 +1,7 @@
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { executeJobApiTokenHeader } from '@app/web/app/api/jobs/executeJobApiTokenHeader'
 import { executeJob } from '@app/web/jobs/jobExecutors'
 import { JobValidation } from '@app/web/jobs/jobs'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import * as Sentry from '@sentry/nextjs'
 import type { NextRequest } from 'next/server'
 

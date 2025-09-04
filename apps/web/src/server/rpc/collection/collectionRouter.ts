@@ -16,11 +16,11 @@ import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models
 import { prismaClient } from '@app/web/prismaClient'
 import { CreateCollectionCommandValidation } from '@app/web/server/collections/createCollection'
 import {
+  collectionIdValidation,
   UpdateCollectionImageCommandValidation,
   UpdateCollectionInformationsCommandValidation,
   UpdateCollectionOrdersCommandValidation,
   UpdateCollectionVisibilityCommandValidation,
-  collectionIdValidation,
 } from '@app/web/server/collections/updateCollection'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'

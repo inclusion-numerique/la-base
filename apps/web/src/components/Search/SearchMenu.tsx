@@ -2,9 +2,9 @@
 
 import { useSearchCounts } from '@app/web/app/(public)/rechercher/useSearchCounts'
 import {
+  defaultSearchParams,
   type SearchParams,
   type SearchTab,
-  defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 import { numberToString } from '@app/web/utils/formatNumber'

@@ -2,9 +2,9 @@
 
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import EditCard from '@app/web/components/EditCard'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import {
   type ChangeVisibilityCommand,
   ChangeVisibilityCommandValidation,

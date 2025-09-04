@@ -1,5 +1,5 @@
-import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
 import { searchUser } from '@app/web/app/administration/utilisateurs/searchUser'
+import type { UtilisateursDataTableSearchParams } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
 import { prismaClient } from '@app/web/prismaClient'
 
 export const getUsersListPageData = async ({

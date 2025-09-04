@@ -1,10 +1,10 @@
 import type { Grantee } from '@app/web/authorization/grantee'
 import {
+  getProfilePermissions,
+  getProfileRoles,
   type ProfileAuthorizationTarget,
   ProfilePermissions,
   ProfileRoles,
-  getProfilePermissions,
-  getProfileRoles,
   profilePermissions,
 } from '@app/web/authorization/models/profileAuthorization'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'

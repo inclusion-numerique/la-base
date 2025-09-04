@@ -7,11 +7,11 @@ import {
 } from '@app/web/server/bases/getBasesList'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import {
+  defaultPaginationParams,
+  defaultSearchParams,
   type PaginationParams,
   type SearchParams,
   type Sorting,
-  defaultPaginationParams,
-  defaultSearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
 

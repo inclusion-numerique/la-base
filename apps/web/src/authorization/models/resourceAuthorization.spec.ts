@@ -1,11 +1,11 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import type { Grantee } from '@app/web/authorization/grantee'
 import {
+  getResourcePermissions,
+  getResourceRoles,
   type ResourceAuthorizationTarget,
   ResourcePermissions,
   ResourceRoles,
-  getResourcePermissions,
-  getResourceRoles,
   resourcePermissions,
 } from '@app/web/authorization/models/resourceAuthorization'
 import { UserSecurityRoles } from '@app/web/authorization/userSecurityRole'

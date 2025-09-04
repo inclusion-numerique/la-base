@@ -2,9 +2,9 @@
 
 import { createToast } from '@app/ui/toast/createToast'
 import EditCard from '@app/web/components/EditCard'
+import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import Visibility from '@app/web/components/Visibility'
 import VisibilityField from '@app/web/components/VisibilityField'
-import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import {
   type UpdateBaseVisibilityCommand,
