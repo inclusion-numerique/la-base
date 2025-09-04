@@ -1,5 +1,3 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import {
   jobTriggerInfoFromRequest,
   rewriteTriggerToJobEndpoint,
@@ -8,6 +6,8 @@ import {
   isLegacyRequest,
   redirectLegacyPathToCurrentUrl,
 } from '@app/web/legacyRedirection/legacyRedirection'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { output } from '@app/web/utils/output'
 import { type NextRequest, NextResponse } from 'next/server'
 

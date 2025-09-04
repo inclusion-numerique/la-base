@@ -1,6 +1,6 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   defaultSearchParams,
   searchUrl,

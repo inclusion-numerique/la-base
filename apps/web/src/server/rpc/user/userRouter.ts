@@ -1,11 +1,11 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import {
   createContact,
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
 import { currentCguVersion } from '@app/web/features/cgu/currentCguVersion'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { prismaClient } from '@app/web/prismaClient'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { extractBotDetectionHeaders } from '@app/web/server/rpc/botDetection'
 import {
   protectedProcedure,

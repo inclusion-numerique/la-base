@@ -1,8 +1,8 @@
+import type { SearchUtilisateurResult } from '@app/web/app/administration/utilisateurs/searchUser'
 import {
   UtilisateursDataTable,
   type UtilisateursDataTableSearchParams,
 } from '@app/web/app/administration/utilisateurs/UtilisateursDataTable'
-import type { SearchUtilisateurResult } from '@app/web/app/administration/utilisateurs/searchUser'
 import DataTable from '@app/web/data-table/DataTable'
 import PaginationNavWithPageSizeSelect from '@app/web/data-table/PaginationNavWithPageSizeSelect'
 import { generatePageSizeSelectOptions } from '@app/web/data-table/pageSizeSelectOptions'

@@ -6,8 +6,8 @@ import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import Card from '@app/web/components/Card'
-import VisibilityField from '@app/web/components/VisibilityField'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { useImageUpload } from '@app/web/hooks/useImageUpload'
 import {
   type CreateCollectionCommand,

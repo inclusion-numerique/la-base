@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import { type RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FilterCategory } from './FilterCategory'
-import styles from './SearchFilter.module.css'
 import type { Category, FilterKey } from './filter'
+import styles from './SearchFilter.module.css'
 
 const SearchFilter = ({
   category,

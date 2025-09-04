@@ -2,13 +2,13 @@
 
 import styles from '@app/web/components/Search/ResultSortingSelect.module.css'
 import {
+  basesSortingOptions,
   type PaginationParams,
+  profilesSortingOptions,
+  resourcesSortingOptions,
   type SearchParams,
   type SearchTab,
   type Sorting,
-  basesSortingOptions,
-  profilesSortingOptions,
-  resourcesSortingOptions,
 } from '@app/web/server/search/searchQueryParams'
 import { useRouter } from 'next/navigation'
 import { type ChangeEventHandler, useMemo, useState } from 'react'

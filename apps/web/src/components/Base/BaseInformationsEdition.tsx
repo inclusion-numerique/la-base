@@ -4,8 +4,8 @@ import SelectFormField from '@app/ui/components/Form/SelectFormField'
 import { MandatoryFields } from '@app/web/components/MandatoryFields'
 import type { CreateBaseCommand } from '@app/web/server/bases/createBase'
 import {
-  type UpdateBaseInformationsCommand,
   baseTitleInfoText,
+  type UpdateBaseInformationsCommand,
 } from '@app/web/server/bases/updateBase'
 import { departmentsOptions } from '@app/web/utils/departments'
 import type { UseFormReturn } from 'react-hook-form'

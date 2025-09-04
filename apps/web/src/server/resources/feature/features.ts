@@ -24,6 +24,7 @@ import {
   handleCreateResource,
   onCreated,
 } from '@app/web/server/resources/feature/CreateResource.server'
+import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import {
   type ContentEdited,
   EditContentCommandValidation,
@@ -82,6 +83,15 @@ import {
   applyContentReordered,
   handleReorderContent,
 } from '@app/web/server/resources/feature/ReorderContent.server'
+import {
+  ChangeLicenceCommandValidation,
+  LicenceChanged,
+} from '@app/web/server/resources/feature/ResourceChangeLicence'
+import {
+  applyLicenceChanged,
+  handleChangeLicence,
+  onLicenceChanged,
+} from '@app/web/server/resources/feature/ResourceChangeLicence.server'
 import type {
   ResourceCreationCommandHandler,
   ResourceMutationCommandHandler,
@@ -95,18 +105,7 @@ import type {
   ResourceEventSideEffect,
   ResourceSideEffectContext,
 } from '@app/web/server/resources/feature/ResourceEventSideEffect'
-import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import z from 'zod'
-
-import {
-  ChangeLicenceCommandValidation,
-  LicenceChanged,
-} from '@app/web/server/resources/feature/ResourceChangeLicence'
-import {
-  applyLicenceChanged,
-  handleChangeLicence,
-  onLicenceChanged,
-} from '@app/web/server/resources/feature/ResourceChangeLicence.server'
 import {
   ChangeIndexationCommandValidation,
   type IndexationChanged,

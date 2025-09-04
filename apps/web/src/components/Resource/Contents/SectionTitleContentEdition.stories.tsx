@@ -1,7 +1,9 @@
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
-import { SectionTitlePayloadCommandValidation } from '@app/web/server/resources/feature/Content'
-import { SectionTitlePayload } from '@app/web/server/resources/feature/Content'
+import {
+  SectionTitlePayload,
+  SectionTitlePayloadCommandValidation,
+} from '@app/web/server/resources/feature/Content'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useForm } from 'react-hook-form'

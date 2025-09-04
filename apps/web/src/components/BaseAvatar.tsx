@@ -1,5 +1,5 @@
-import * as Shapes from '@app/web/components/Shapes'
 import { generateBaseAvatarSeed } from '@app/web/components/baseAvatarRandomSeed'
+import * as Shapes from '@app/web/components/Shapes'
 import styles from './BaseAvatar.module.css'
 
 const getRandomShape = (baseId: string) => {

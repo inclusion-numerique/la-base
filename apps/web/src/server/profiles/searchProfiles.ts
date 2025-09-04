@@ -3,11 +3,11 @@ import { prismaClient } from '@app/web/prismaClient'
 import { profileListSelect } from '@app/web/server/profiles/getProfilesList'
 import { orderItemsByIndexMap } from '@app/web/server/search/orderItemsByIndexMap'
 import {
+  defaultPaginationParams,
+  defaultSearchParams,
   type PaginationParams,
   type SearchParams,
   type Sorting,
-  defaultPaginationParams,
-  defaultSearchParams,
 } from '@app/web/server/search/searchQueryParams'
 import { cleanSearchTerm } from '@app/web/server/search/searchToTsQueryInput'
 

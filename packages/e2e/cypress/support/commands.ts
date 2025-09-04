@@ -9,6 +9,7 @@ import type {
   CreateCollectionInput,
   CreateUserInput,
 } from '@app/e2e/tasks/handlers/user.tasks'
+
 import Timeoutable = Cypress.Timeoutable
 import Loggable = Cypress.Loggable
 

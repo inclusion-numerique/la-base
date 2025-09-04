@@ -1,11 +1,11 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
-import type { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
-import type { ApplierResourceEvent } from '@app/web/server/resources/feature/ResourceEventApplier'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import type {
   ResourceCreationCommand,
   ResourceMutationCommand,
 } from '@app/web/server/resources/feature/features'
+import type { PersistedResource } from '@app/web/server/resources/feature/PersistedResource'
+import type { ApplierResourceEvent } from '@app/web/server/resources/feature/ResourceEventApplier'
 
 export type HandlerResourceCommand<
   Name extends string = string,

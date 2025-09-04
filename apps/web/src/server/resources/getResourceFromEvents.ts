@@ -1,7 +1,7 @@
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  type ResourceProjection,
   createResourceProjection,
+  type ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
 import type { HistoryEventsForResource } from '@app/web/server/resources/feature/features'
 import { getResourceSelect } from '@app/web/server/resources/getResource'

@@ -1,10 +1,10 @@
+import { createSortLinkProps } from '@app/web/data-table/createSortLinkProps'
 import type {
   DataTableConfiguration,
   DataTableRow,
   DataTableSearchParams,
 } from '@app/web/data-table/DataTableConfiguration'
 import SortLink from '@app/web/data-table/SortLink'
-import { createSortLinkProps } from '@app/web/data-table/createSortLinkProps'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { type ComponentType } from 'react'

@@ -1,6 +1,6 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
 import type { SessionUser } from '@app/web/auth/sessionUser'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { prismaClient } from '@app/web/prismaClient'
 import axios from 'axios'
 

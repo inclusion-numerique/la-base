@@ -6,8 +6,6 @@ import Link from 'next/link'
 
 export const FeaturedProfil = ({
   profile,
-  // TODO use the user prop for action buttons
-  // biome-ignore lint/correctness/noUnusedVariables: todo
   user,
 }: {
   profile: ProfileListItem

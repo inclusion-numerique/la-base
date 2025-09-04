@@ -2,8 +2,8 @@ import Beneficiaries from '@app/web/app/(legal)/statistiques/Beneficiaries'
 import ProfessionalSectors from '@app/web/app/(legal)/statistiques/ProfessionalSectors'
 import Card from '@app/web/components/Card'
 import {
-  type StatisticsParams,
   getStatistics,
+  type StatisticsParams,
 } from '@app/web/server/statistiques/getStatistics'
 import { numberToString } from '@app/web/utils/formatNumber'
 import KeyFigureTitle from './KeyFigureTitle'

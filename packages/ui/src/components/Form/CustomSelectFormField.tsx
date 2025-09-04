@@ -45,7 +45,7 @@ export type CustomSelectFormFieldProps<
 >
 
 const defaultGetOptionKey = (option: unknown): string => {
-  if (!option || !Object.prototype.hasOwnProperty.call(option, 'value')) {
+  if (!option || !Object.hasOwn(option, 'value')) {
     throw new Error(
       'CustomSelect option has no "value" property. If you are using a custom Option type, pass the correct getOptionKey() function',
     )
@@ -54,7 +54,7 @@ const defaultGetOptionKey = (option: unknown): string => {
 }
 
 const defaultGetOptionValue = (option: unknown) => {
-  if (!option || !Object.prototype.hasOwnProperty.call(option, 'value')) {
+  if (!option || !Object.hasOwn(option, 'value')) {
     throw new Error(
       'CustomSelect option has no "value" property. If you are using a custom Option type, pass the correct "getOptionValue" prop to CustomSelect.',
     )
@@ -64,7 +64,7 @@ const defaultGetOptionValue = (option: unknown) => {
 }
 
 const defaultGetOptionLabel = (option: unknown) => {
-  if (!option || !Object.prototype.hasOwnProperty.call(option, 'label')) {
+  if (!option || !Object.hasOwn(option, 'label')) {
     throw new Error(
       'CustomSelect option has no "label" property. If you are using a custom Option type, pass the correct "getOptionLabel" prop to CustomSelect.',
     )

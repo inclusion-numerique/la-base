@@ -1,9 +1,9 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
-import { ProConnectProvider } from '@app/web/auth/ProConnectProvider'
 import { nextAuthAdapter } from '@app/web/auth/nextAuthAdapter'
+import { ProConnectProvider } from '@app/web/auth/ProConnectProvider'
 import { sendVerificationRequest } from '@app/web/auth/sendVerificationRequest'
 import { signinCallback } from '@app/web/auth/signinCallback'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import type { AuthOptions } from 'next-auth'
 import Email from 'next-auth/providers/email'
 

@@ -1,8 +1,8 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import {
-  type ResourceListItem,
   computeResourcesListWhereForUser,
+  type ResourceListItem,
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'

@@ -4,10 +4,10 @@ import {
   computeCreationProportions,
 } from './creationStatistics'
 import {
-  type UsageStatisticsResult,
   beneficiariesUsages,
   professionalSectorsUsages,
   themesUsages,
+  type UsageStatisticsResult,
 } from './usageStatistics'
 
 type RechercheTimeframe = 'semaine' | 'mois' | 'total'

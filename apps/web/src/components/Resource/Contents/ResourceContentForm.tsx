@@ -9,14 +9,14 @@ import type { AddContentCommand } from '@app/web/server/resources/feature/AddCon
 import {
   LinkPayload,
   SectionTitlePayload,
+  TextPayload,
 } from '@app/web/server/resources/feature/Content'
-import { TextPayload } from '@app/web/server/resources/feature/Content'
 import {
   type ClientContentPayload,
   ClientContentPayloadCommandValidation,
 } from '@app/web/server/resources/feature/Content.client'
-import type { EditContentCommand } from '@app/web/server/resources/feature/EditContent'
 import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
+import type { EditContentCommand } from '@app/web/server/resources/feature/EditContent'
 import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { removeNullAndUndefinedValues } from '@app/web/utils/removeNullAndUndefinedValues'

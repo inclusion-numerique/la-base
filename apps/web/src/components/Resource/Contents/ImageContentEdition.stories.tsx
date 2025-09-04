@@ -1,8 +1,10 @@
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
-import { ImagePayload } from '@app/web/server/resources/feature/Content'
-import { ImagePayloadCommandValidation } from '@app/web/server/resources/feature/Content'
+import {
+  ImagePayload,
+  ImagePayloadCommandValidation,
+} from '@app/web/server/resources/feature/Content'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'

@@ -1,10 +1,9 @@
-import type { PropsWithChildren } from 'react'
-
 import CloseOnboardingButton from '@app/web/app/nouveautes/CloseOnboardingButton'
 import CompleteOnboardingButton from '@app/web/app/nouveautes/CompleteOnboardingButton'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
+import type { PropsWithChildren } from 'react'
 import styles from './TwoPartOnboardingLayout.module.css'
 
 const totalSteps = 5

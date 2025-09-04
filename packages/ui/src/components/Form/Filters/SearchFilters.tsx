@@ -1,12 +1,12 @@
 'use client'
 
-import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
-import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
 import {
   type Category,
   type FilterKey,
   isCategoryComplete,
 } from '@app/ui/components/Form/Filters/filter'
+import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
+import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
 import OptionBadge from '@app/ui/components/Form/OptionBadge'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import DeleteSearchFiltersButton from '@app/web/components/Search/Filters/DeleteSearchFiltersButton'

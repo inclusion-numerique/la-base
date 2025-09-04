@@ -1,6 +1,6 @@
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { resourceReportReasonLabels } from '@app/web/resources/resourceReport'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
 import { getServerUrl } from '@app/web/utils/baseUrl'

@@ -1,7 +1,7 @@
 import {
   FilterKey,
-  ThematicSelection,
   isCategoryComplete,
+  ThematicSelection,
 } from '@app/ui/components/Form/Filters/filter'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
 import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
