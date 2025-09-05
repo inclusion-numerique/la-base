@@ -141,6 +141,14 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+
+enum HighlightResourcesType {
+  LatestPublished @map("latest_published")
+  MostViewed @map("most_viewed")
+  MostRecommended @map("most_recommended")
+
+  @@map("highlight_resources_type")
+}
 model Base {
   id       String @id @default(uuid()) @db.Uuid
   legacyId Int?   @unique @map("legacy_id")
@@ -180,6 +188,9 @@ model Base {
 
   featuredBlock   FeaturedBlock? @relation("base")
   featuredBlockId String?        @unique @db.Uuid
+
+  highlightResources HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
+  highlightCollections Boolean @default(true) @map("highlight_collections")
 
   @@index([createdById])
   @@map("bases")
@@ -812,3 +823,4 @@ model FeaturedBlock {
 
   @@map("featured_blocks")
 }
+

@@ -44,6 +44,8 @@ export const baseSelect = (
     twitter: true,
     website: true,
     isPublic: true,
+    highlightCollections: true,
+    highlightResources: true,
     createdBy: {
       select: {
         id: true,
