@@ -8,7 +8,8 @@ import EmptyBox from '@app/web/components/EmptyBox'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { BaseResource } from '@app/web/server/bases/getBase'
+import { Resource } from '@app/web/server/resources/getResource'
 import { numberToString } from '@app/web/utils/formatNumber'
 import { type ReactNode } from 'react'
 import styles from './SearchContents.module.css'
@@ -20,7 +21,7 @@ const ResourcesSearchResults = ({
   children,
 }: {
   totalCount: number
-  resources: ResourceListItem[]
+  resources: Resource[] | BaseResource[]
   user: SessionUser | null
   children: ReactNode
 }) => (

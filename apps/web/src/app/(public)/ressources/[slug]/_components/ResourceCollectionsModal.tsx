@@ -9,15 +9,21 @@ import type { Resource } from '@app/web/server/resources/getResource'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import classNames from 'classnames'
-import Link from 'next/link'
+import { ReactNode } from 'react'
 import styles from './ResourceCollectionsModal.module.css'
 
-const { Component: CollectionsResourceModal, open } = createModal({
+export const CollectionsResourceModal = createModal({
   id: `resource-collections-modal`,
   isOpenedByDefault: false,
 })
 
-const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
+const ResourceCollectionsModal = ({
+  resource,
+  children,
+}: {
+  resource: Resource
+  children: ReactNode
+}) => {
   const { collectionsData } = resource
 
   const title = `Ressource enregistrée dans ${
@@ -26,20 +32,8 @@ const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
 
   return (
     <>
-      <Link
-        href="#"
-        title="Voir les collections"
-        className="fr-link--underline-on-hover fr-link fr-text--sm fr-mb-0"
-        onClick={(e) => {
-          e.preventDefault()
-          open()
-        }}
-        role="button"
-      >
-        Voir les collections
-      </Link>
-
-      <CollectionsResourceModal title={title}>
+      {children}
+      <CollectionsResourceModal.Component title={title}>
         <>
           <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-md-center fr-mb-4w">
             {collectionsData.counts.public > 0 && (
@@ -118,7 +112,7 @@ const ResourceCollectionsModal = ({ resource }: { resource: Resource }) => {
             </div>
           ))}
         </>
-      </CollectionsResourceModal>
+      </CollectionsResourceModal.Component>
     </>
   )
 }
