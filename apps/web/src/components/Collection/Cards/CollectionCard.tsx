@@ -7,9 +7,11 @@ import Images from '../Images'
 import styles from './CollectionCard.module.css'
 
 const CollectionCard = ({
+  orientation,
   collection,
   canWrite,
 }: {
+  orientation?: 'row' | 'column'
   collection: CollectionListItem
   canWrite: boolean
 }) => {
@@ -19,11 +21,24 @@ const CollectionCard = ({
 
   return (
     <article
-      className={classNames(styles.card, 'fr-border', 'fr-border-radius--8')}
+      className={classNames(
+        'fr-flex fr-direction-column fr-width-full fr-border fr-border-radius--8',
+        orientation === 'row' && styles.row,
+      )}
       data-testid="collection-card"
     >
-      <Link href={href}>
+      <Link
+        href={href}
+        className={classNames(
+          orientation === 'row' && styles.link,
+          'fr-link--no-underline',
+        )}
+      >
         <Images
+          className={classNames(
+            orientation === 'row' && styles.imagesRowContainerRadius,
+            orientation === 'row' && 'fr-height-full',
+          )}
           image={collection.image}
           isFavoriteCollection={collection.isFavorites}
           resources={collection.resources.map(({ resource }) => resource)}

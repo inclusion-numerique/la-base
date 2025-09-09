@@ -23,6 +23,8 @@ const ResourceCard = ({
   isContributor,
   titleAs: ResourceTitle = 'h2',
   isDraft = false,
+  context = 'list',
+  withImage = true,
 }: {
   resource: Resource | BaseResource
   user: SessionUser | null
@@ -30,17 +32,21 @@ const ResourceCard = ({
   isContributor: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   isDraft?: boolean
+  context?: 'highlight' | 'list'
+  withImage?: boolean
 }) => (
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
   >
     <div className={styles.header}>
-      <OwnershipInformation
-        user={resource.createdBy}
-        base={resource.base}
-        attributionWording={isDraft ? 'draft-resource' : 'resource'}
-      />
+      {context !== 'highlight' && (
+        <OwnershipInformation
+          user={resource.createdBy}
+          base={resource.base}
+          attributionWording={isDraft ? 'draft-resource' : 'resource'}
+        />
+      )}
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
         <ResourceDates canEdit={isContributor} resource={resource} />
       </div>
@@ -91,7 +97,15 @@ const ResourceCard = ({
                 </span>
               </>
             )}
-          </ResourcesViewsAndMetadata>
+          >
+            <ResourceDates canEdit={isContributor} resource={resource} />
+          </div>
+          <ResourceTitle className="fr-mb-md-3v fr-mb-1w fr-h6">
+            {resource.title}
+          </ResourceTitle>
+          <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
+            {resource.excerpt}
+          </p>
         </div>
       )}
       <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
@@ -119,28 +133,75 @@ const ResourceCard = ({
               copyLink={true}
               canWrite
             />
-          </>
+          </div>
         )}
-        {!isContributor && (
-          <>
-            <SaveResourceInCollectionButton
-              className="fr-pl-md-3v fr-pl-0"
-              size="small"
-              priority="tertiary no outline"
-              user={user}
-              resource={resource}
-            >
-              <span className="fr-unhidden-sm fr-hidden">Enregistrer</span>
-            </SaveResourceInCollectionButton>
-            <CopyLinkButton
-              size="small"
-              priority="tertiary no outline"
-              url={getServerUrl(`/ressources/${resource.slug}`, {
-                absolutePath: true,
-              })}
-            />
-          </>
+      </Link>
+      <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
+        {resource.published && (
+          <div className="fr-text--sm fr-mb-0">
+            <ResourcesViewsAndMetadata resource={resource}>
+              {resource._count.resourceFeedback > 0 && (
+                <>
+                  <FeedbackBadge
+                    className="fr-mb-sm-0 fr-mb-3v"
+                    value={resource.feedbackAverage}
+                  />
+                  <span className="fr-text--medium fr-mb-sm-0 fr-mb-3v">
+                    {resource._count.resourceFeedback}&nbsp;Avis
+                  </span>
+                </>
+              )}
+            </ResourcesViewsAndMetadata>
+          </div>
         )}
+        <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
+          {isContributor && (
+            <>
+              <Button
+                data-testid="resource-card-edit-link"
+                title="Modifier"
+                size="small"
+                priority="tertiary no outline"
+                linkProps={{
+                  href: `/ressources/${resource.slug}/editer`,
+                  prefetch: false,
+                }}
+              >
+                <span className="fr-unhidden-sm fr-hidden fr-mr-1w">
+                  Modifier
+                </span>
+                <span className="ri-edit-line" aria-hidden />
+              </Button>
+              <ResourceMoreActionsDropdown
+                modalControlClassName="ri-lg"
+                dropdownControlClassName="fr-text--bold"
+                resource={resource}
+                copyLink={false}
+                canWrite
+              />
+            </>
+          )}
+          {!isContributor && (
+            <>
+              <SaveResourceInCollectionButton
+                className="fr-pl-md-3v fr-pl-0"
+                size="small"
+                priority="tertiary no outline"
+                user={user}
+                resource={resource}
+              >
+                <span className="fr-unhidden-sm fr-hidden">Enregistrer</span>
+              </SaveResourceInCollectionButton>
+              <CopyLinkButton
+                size="small"
+                priority="tertiary no outline"
+                url={getServerUrl(`/ressources/${resource.slug}`, {
+                  absolutePath: true,
+                })}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   </article>

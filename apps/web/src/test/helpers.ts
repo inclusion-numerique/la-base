@@ -184,6 +184,8 @@ export const createTestBase = (
     collections: [],
     followedBy: [],
     highlightResources: 'LatestPublished',
+    highlightedResources: [],
+    highlightedCollections: [],
     highlightCollections: true,
     followedByData: {
       counts: {

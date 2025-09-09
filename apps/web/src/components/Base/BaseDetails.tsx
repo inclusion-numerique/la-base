@@ -4,7 +4,7 @@ import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => (
   <div className="fr-width-full">
-    <div className="fr-grid-row fr-grid-row--gutters fr-mb-4w">
+    <div className="fr-grid-row fr-grid-row--gutters fr-mb-6w">
       <div className="fr-col-12 fr-col-lg-8 fr-mt-3w">
         <h3 className="fr-h6">Description</h3>
         <div>

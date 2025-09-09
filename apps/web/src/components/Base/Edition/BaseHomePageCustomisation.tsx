@@ -35,7 +35,7 @@ const BaseHomePageCustomisation = ({ base }: { base: BasePageData }) => {
   return (
     <EditCard
       noBorder
-      id="contacts"
+      id="personnalisation"
       mutation={async (data) => {
         await mutate.mutateAsync({ id: base.id, data })
       }}

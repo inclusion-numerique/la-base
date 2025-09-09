@@ -1,10 +1,10 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
   a {
     background: none;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 315px;
   }
 }
 
@@ -29,4 +29,23 @@
   margin-bottom: 12px;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.row {
+  @media (min-width: 48em) {
+    flex-direction: row;
+    min-height: 305px;
+  }
+}
+
+.link {
+  @media (min-width: 48em) {
+    width: 50%;
+  }
+}
+
+.imagesRowContainerRadius {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 0px;
 }

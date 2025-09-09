@@ -24,6 +24,11 @@ const BaseHomePageCustomisationEdition = ({
 
     if (!newValue) {
       form.setValue('highlightResources', null)
+    } else {
+      form.setValue(
+        'highlightResources',
+        HighlightResourcesType.LatestPublished,
+      )
     }
   }
 
