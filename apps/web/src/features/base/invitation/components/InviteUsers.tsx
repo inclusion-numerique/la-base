@@ -65,7 +65,6 @@ const InviteUsers = forwardRef<
           enabled: !!userSearchQuery,
         },
       )
-
     const onSelect = useCallback(
       (selections: SelectOptionValid[]) => {
         onChange(selections)
