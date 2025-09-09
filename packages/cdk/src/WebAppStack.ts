@@ -167,7 +167,7 @@ export class WebAppStack extends TerraformStack {
       ? projectTitle
       : `[${namespace}] ${projectTitle}`
 
-    const databaseUrl = Fn.format('postgres://%s:%s@%s:%s/%s', [
+    const databaseUrl = Fn.format('postgres://%s:%s@%s:%s/%s?sslmode=require', [
       databaseUser,
       databasePasswordVariable.value,
       databaseInstance.endpointIp,
