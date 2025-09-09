@@ -34,7 +34,6 @@ const RemoveBaseMemberButton = ({
         memberId: member.member.id,
       })
       router.refresh()
-      close()
       createToast({
         priority: 'success',
         message: <>Le membre a bien été retiré</>,
