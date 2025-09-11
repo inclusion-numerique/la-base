@@ -13,3 +13,12 @@
 .feedbackLink:active {
   background-color: #ededed !important;
 }
+
+.link {
+  background-image: none;
+}
+
+.container:hover {
+  background-color: var(--blue-france-975-75);
+  cursor: pointer;
+}

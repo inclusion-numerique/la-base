@@ -34,12 +34,7 @@ const CopyLinkButton = ({
     navigator.clipboard.writeText(url).catch()
   }
   return (
-    <span
-      className={classNames(
-        full ? 'fr-width-full fr-position-relative' : 'fr-position-relative',
-        className,
-      )}
-    >
+    <span className={classNames(full && 'fr-width-full', className)}>
       {copied && (
         <span className={styles.copiedHover}>
           Lien copié dans le presse-papier

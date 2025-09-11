@@ -4,6 +4,7 @@ import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import EmptyUserAvatar from '@app/web/components/EmptyUserAvatar'
+import type { MultipleSearchableSelectRef } from '@app/web/components/MultipleSearchableSelect'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
@@ -19,7 +20,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteResourceContributors.module.css'
 
@@ -31,6 +32,7 @@ const InviteResourceContributors = ({
   onSuccess?: () => void
 }) => {
   const router = useRouter()
+  const inviteUsersRef = useRef<MultipleSearchableSelectRef>(null)
   const form = useForm<InviteContributorCommand>({
     resolver: zodResolver(InviteContributorCommandValidation),
     defaultValues: {
@@ -87,6 +89,12 @@ const InviteResourceContributors = ({
     try {
       await invitationMutate.mutateAsync(data)
       await refetch()
+      form.reset({
+        resourceId: resource.id,
+        contributors: [],
+        newMembers: [],
+      })
+      inviteUsersRef.current?.reset()
       if (onSuccess) {
         onSuccess()
       }
@@ -204,6 +212,7 @@ const InviteResourceContributors = ({
               name="contributors"
               render={({ fieldState: { error } }) => (
                 <InviteUsers
+                  ref={inviteUsersRef}
                   withBadges={false}
                   label="Ajouter un contributeur"
                   setEmailsError={setEmailsError}

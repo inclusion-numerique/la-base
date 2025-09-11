@@ -34,7 +34,7 @@ const BaseMetadata = ({
   return (
     <div
       className={classNames(
-        'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-sm-center fr-flex-gap-4v fr-flex-gap-md-2v',
+        'fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-4v fr-flex-gap-md-2v',
         className,
       )}
     >
