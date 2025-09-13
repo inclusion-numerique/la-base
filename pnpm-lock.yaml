@@ -49,11 +49,11 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0(@octokit/core@7.0.3)
       axios:
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^1.12.0
+        version: 1.12.1
       axios-retry:
         specifier: ^4.5.0
-        version: 4.5.0(axios@1.11.0)
+        version: 4.5.0(axios@1.12.1)
       commander:
         specifier: ^14.0.0
         version: 14.0.0
@@ -200,8 +200,8 @@ importers:
         specifier: ^1.27.3
         version: 1.27.3
       axios:
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^1.12.0
+        version: 1.12.1
       change-case:
         specifier: ^5.4.4
         version: 5.4.4
@@ -601,8 +601,8 @@ importers:
   packages/config:
     dependencies:
       axios:
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^1.12.0
+        version: 1.12.1
       dotenv:
         specifier: ^17.2.1
         version: 17.2.1
@@ -882,8 +882,8 @@ importers:
   packages/test:
     dependencies:
       axios:
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^1.12.0
+        version: 1.12.1
       dotenv:
         specifier: ^17.2.1
         version: 17.2.1
@@ -5360,8 +5360,8 @@ packages:
     peerDependencies:
       axios: 0.x || 1.x
 
-  axios@1.11.0:
-    resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
+  axios@1.12.1:
+    resolution: {integrity: sha512-Kn4kbSXpkFHCGE6rBFNwIv0GQs4AvDT80jlveJDKFxjbTYMUeB4QtsdPCv6H8Cm19Je7IU6VFtRl2zWZI0rudQ==}
 
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
@@ -17012,7 +17012,7 @@ snapshots:
     dependencies:
       '@aws-sdk/util-utf8-browser': 3.259.0
       '@httptoolkit/websocket-stream': 6.0.1
-      axios: 1.11.0
+      axios: 1.12.1
       buffer: 6.0.3
       crypto-js: 4.2.0
       mqtt: 4.3.8
@@ -17029,12 +17029,12 @@ snapshots:
 
   axe-core@4.10.3: {}
 
-  axios-retry@4.5.0(axios@1.11.0):
+  axios-retry@4.5.0(axios@1.12.1):
     dependencies:
-      axios: 1.11.0
+      axios: 1.12.1
       is-retry-allowed: 2.2.0
 
-  axios@1.11.0:
+  axios@1.12.1:
     dependencies:
       follow-redirects: 1.15.11
       form-data: 4.0.4
@@ -24422,7 +24422,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.11.0
+      axios: 1.12.1
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8

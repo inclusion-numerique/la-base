@@ -59,7 +59,7 @@
     "@trpc/server": "11.3.1",
     "avvvatars-react": "^0.4.2",
     "aws-crt": "^1.27.3",
-    "axios": "^1.11.0",
+    "axios": "^1.12.0",
     "change-case": "^5.4.4",
     "cheerio": "1.1.2",
     "classnames": "^2.5.1",
