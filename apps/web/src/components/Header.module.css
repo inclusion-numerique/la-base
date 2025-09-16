@@ -9,3 +9,21 @@
 .mobileMenuButton {
   box-shadow: none !important;
 }
+
+.newsFeedButton {
+  background: var(--background-contrast-yellow-tournesol) !important;
+  height: 2rem !important;
+  width: 2.5rem !important;
+}
+
+:global(.fr-header .fr-header__tools-links .fr-btn).newsFeedButton {
+  padding: 8px 12px !important;
+}
+
+.newsFeedIcon {
+  color: var(--text-label-yellow-tournesol);
+}
+
+.newsFeedIcon::before {
+  font-size: 16px;
+}

@@ -40,6 +40,23 @@
   }
 }
 
+.semi-large {
+  width: 64px;
+  height: 64px;
+
+  .icon {
+    line-height: 32px !important;
+    font-size: 32px !important;
+    max-height: 32px;
+    max-width: 32px;
+
+    &::before {
+      max-height: 32px;
+      max-width: 32px;
+    }
+  }
+}
+
 .large {
   width: 76px;
   height: 76px;

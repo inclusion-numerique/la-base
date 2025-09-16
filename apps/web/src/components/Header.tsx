@@ -123,6 +123,23 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     />
                   </Link>
                 </li>
+                <li className="fr-hidden fr-unhidden-sm">
+                  <Button
+                    className={classNames(
+                      'fr-border-radius--8 fr-p-0',
+                      styles.newsFeedButton,
+                    )}
+                    linkProps={{ href: '/fil-d-actualite' }}
+                    size="small"
+                  >
+                    <span
+                      className={classNames(
+                        'ri-flashlight-fill fr-text--sm',
+                        styles.newsFeedIcon,
+                      )}
+                    />
+                  </Button>
+                </li>
                 <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
                   <span
                     style={{

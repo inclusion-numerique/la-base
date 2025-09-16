@@ -1,0 +1,11 @@
+.itemDescription {
+  color: var(--text-mention-grey);
+}
+
+.flashLightIconBackground {
+  background: var(--background-contrast-yellow-tournesol);
+}
+
+.flashLightIconColor {
+  color: var(--text-label-yellow-tournesol);
+}
