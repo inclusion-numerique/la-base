@@ -32,6 +32,7 @@ const ResourcePublication = ({
     },
   })
   const mutate = trpc.resource.mutate.useMutation()
+  const isCreator = resource.createdBy.id === user.id
 
   return (
     <EditCard
@@ -43,6 +44,7 @@ const ResourcePublication = ({
       mutation={async (data) => {
         await mutate.mutateAsync(data)
       }}
+      withEditButton={isCreator}
       edition={
         <ResourceBaseRichRadio
           control={form.control}
@@ -51,7 +53,13 @@ const ResourcePublication = ({
           disabled={form.formState.isSubmitting}
         />
       }
-      view={<ResourcePublicationView resource={resource} user={user} />}
+      view={
+        <ResourcePublicationView
+          isCreator={isCreator}
+          resource={resource}
+          user={user}
+        />
+      }
     />
   )
 }

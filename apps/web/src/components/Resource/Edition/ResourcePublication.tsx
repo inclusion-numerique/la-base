@@ -68,7 +68,11 @@ const ResourcePublication = ({
           </h2>
         </ResourceBaseEdition>
         <hr className={classNames(styles.separator, 'fr-mt-4w fr-pb-4w')} />
-        <ResourcePublicationView resource={resource} user={user} />
+        <ResourcePublicationView
+          isCreator={true}
+          resource={resource}
+          user={user}
+        />
       </div>
       <Card
         noBorder
