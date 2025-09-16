@@ -18,4 +18,15 @@
   .fr-modal__content {
     padding-bottom: 2rem;
   }
+
+  @media (max-height: 768px) {
+    .fr-modal__body {
+      overflow-y: scroll !important;
+    }
+
+    .fr-modal__content {
+      padding-bottom: 0;
+      margin-bottom: 2rem;
+    }
+  }
 }
