@@ -22,7 +22,7 @@ const ProfileFollowersModal = ({
   user,
   followedByData,
 }: {
-  user?: SessionUser | null
+  user: SessionUser | null
   followedByData: ProfileFollowedByData
 }) => {
   const { counts, followedBy } = followedByData
@@ -92,21 +92,27 @@ const ProfileFollowersModal = ({
           )}
           {followedBy.map((follower, index) => {
             const content = (
-              <div
-                key={follower.id}
-                className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center"
-              >
+              <div className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center">
                 <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                   <RoundProfileImage user={follower} />
-                  <div className="fr-flex fr-direction-column fr-flex-gap-1v fr-align-items-baseline">
+                  <div
+                    className={classNames(
+                      'fr-flex fr-flex-gap-1v fr-align-items-baseline',
+                      follower.isPublic && 'fr-direction-column',
+                      !follower.isPublic && 'fr-direction-row',
+                    )}
+                  >
                     <span className="fr-text--bold">{follower.name}</span>
                     <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
-                      <ProfileMetadata
-                        className="fr-text-mention--grey"
-                        resourcesCount={follower._count.resources}
-                        followedByCount={follower._count.followedBy}
-                        context="card"
-                      />
+                      {follower.isPublic && (
+                        <ProfileMetadata
+                          user={user}
+                          className="fr-text-mention--grey"
+                          resourcesCount={follower._count.resources}
+                          followedByCount={follower._count.followedBy}
+                          context="card"
+                        />
+                      )}
                       {!follower.isPublic && (
                         <>
                           <div>·</div>
@@ -128,6 +134,7 @@ const ProfileFollowersModal = ({
 
             return follower.isPublic ? (
               <div
+                key={follower.id}
                 className={classNames(
                   'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
                   index === 0 && 'fr-border-top',
@@ -141,7 +148,7 @@ const ProfileFollowersModal = ({
                 >
                   {content}
                 </Link>
-                {!!user && follower.isPublic && (
+                {follower.isPublic && (
                   <div>
                     <FollowButton
                       user={user}
@@ -153,8 +160,14 @@ const ProfileFollowersModal = ({
                 )}
               </div>
             ) : (
-              <>
-                content
+              <div
+                key={follower.id}
+                className={classNames(
+                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                  styles.privateContainer,
+                )}
+              >
+                {content}
                 {!!user && follower.isPublic && (
                   <div>
                     <FollowButton
@@ -165,7 +178,7 @@ const ProfileFollowersModal = ({
                     />
                   </div>
                 )}
-              </>
+              </div>
             )
           })}
         </>

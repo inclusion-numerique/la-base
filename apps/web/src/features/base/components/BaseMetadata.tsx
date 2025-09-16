@@ -21,7 +21,7 @@ const BaseMetadata = ({
   withBadge?: boolean
   smallBadge?: boolean
   context: 'base' | 'profile' | 'card'
-  user?: SessionUser | null
+  user: SessionUser | null
 }) => {
   const resourcesCount = base._count.resources
   const resourcesViews = base._count.resourcesViews

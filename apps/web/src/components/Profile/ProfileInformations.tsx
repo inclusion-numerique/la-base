@@ -19,7 +19,7 @@ const ProfileInformations = ({
   resourcesCount: number
   editMode?: boolean
   context: 'base' | 'profile' | 'card'
-  user?: SessionUser | null
+  user: SessionUser | null
 } & PropsWithChildren) => (
   <div className="fr-flex-md fr-direction-row fr-justify-content-center fr-flex-gap-6v fr-align-items-center fr-text--center">
     <div className="fr-my-2w fr-position-relative">
@@ -50,6 +50,7 @@ const ProfileInformations = ({
                 resourcesCount={resourcesCount}
                 followedByCount={profile._count.followedBy}
                 context={context}
+                user={user}
               />
             )}
           </div>

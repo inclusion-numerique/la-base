@@ -19,7 +19,7 @@ const ProfileMetadata = ({
       followedByCount: number
       followedByData?: undefined
       className?: string
-      user?: SessionUser | null
+      user: SessionUser | null
     }
   | {
       resourcesCount: number
@@ -28,7 +28,7 @@ const ProfileMetadata = ({
       followedByCount?: undefined
       followedByData: ProfileFollowedByData
       className?: string
-      user?: SessionUser | null
+      user: SessionUser | null
     }) => (
   <div className={classNames('fr-flex-md fr-text--sm fr-mb-0', className)}>
     <span className="fr-icon-file-text-line fr-icon--sm fr-pr-1w" />

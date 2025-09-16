@@ -23,3 +23,7 @@
   background-color: var(--blue-france-975-75);
   cursor: pointer;
 }
+
+.privateContainer {
+  height: 5rem;
+}
