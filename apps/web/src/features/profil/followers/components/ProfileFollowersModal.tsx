@@ -94,11 +94,7 @@ const ProfileFollowersModal = ({
             const content = (
               <div
                 key={follower.id}
-                className={classNames(
-                  'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-border-bottom',
-                  index === 0 && 'fr-border-top',
-                  follower.isPublic && styles.container,
-                )}
+                className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center"
               >
                 <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                   <RoundProfileImage user={follower} />
@@ -127,6 +123,24 @@ const ProfileFollowersModal = ({
                     </div>
                   </div>
                 </div>
+              </div>
+            )
+
+            return follower.isPublic ? (
+              <div
+                className={classNames(
+                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                  index === 0 && 'fr-border-top',
+                  follower.isPublic && styles.container,
+                )}
+              >
+                <Link
+                  key={follower.id}
+                  className={styles.link}
+                  href={`/profils/${follower.slug}`}
+                >
+                  {content}
+                </Link>
                 {!!user && follower.isPublic && (
                   <div>
                     <FollowButton
@@ -138,18 +152,20 @@ const ProfileFollowersModal = ({
                   </div>
                 )}
               </div>
-            )
-
-            return follower.isPublic ? (
-              <Link
-                key={follower.id}
-                className={styles.link}
-                href={`/profils/${follower.slug}`}
-              >
-                {content}
-              </Link>
             ) : (
-              content
+              <>
+                content
+                {!!user && follower.isPublic && (
+                  <div>
+                    <FollowButton
+                      user={user}
+                      profile={follower}
+                      followPriority="secondary"
+                      className="fr-width-full fr-justify-content-center"
+                    />
+                  </div>
+                )}
+              </>
             )
           })}
         </>

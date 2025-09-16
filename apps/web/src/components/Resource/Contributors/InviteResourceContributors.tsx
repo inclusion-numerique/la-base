@@ -123,6 +123,10 @@ const InviteResourceContributors = ({
     form.setValue('newMembers', contributorsWithEmails)
   }
 
+  const disabledButton =
+    form.watch('contributors')?.length === 0 &&
+    form.watch('newMembers')?.length === 0
+
   return (
     <>
       <p className="fr-mb-2w">Liste des contributeurs de la ressource</p>
@@ -232,6 +236,7 @@ const InviteResourceContributors = ({
               nativeButtonProps={{
                 'data-testid': 'invite-member-modal-button',
               }}
+              disabled={disabledButton}
               {...buttonLoadingClassname(
                 form.formState.isSubmitting,
                 styles.inviteButton,

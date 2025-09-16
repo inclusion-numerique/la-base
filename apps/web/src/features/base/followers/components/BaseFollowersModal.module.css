@@ -16,6 +16,7 @@
 
 .link {
   background-image: none;
+  width: 100%;
 }
 
 .container:hover {

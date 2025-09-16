@@ -93,54 +93,61 @@ const BaseFollowersModal = ({
             </p>
           )}
           {visible.map((follower, index) => (
-            <Link className={styles.link} href={`/profils/${follower.slug}`}>
-              <div
-                key={follower.id}
-                className={classNames(
-                  'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-border-bottom',
-                  index === 0 && 'fr-border-top',
-                  styles.container,
-                )}
-              >
-                <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
-                  <RoundProfileImage user={follower} />
-                  <div className="fr-flex fr-direction-column fr-flex-gap-1v fr-align-items-baseline">
-                    <span className="fr-text--bold">{follower.name}</span>
-                    <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
-                      <ProfileMetadata
-                        className="fr-text-mention--grey"
-                        resourcesCount={follower._count.resources}
-                        followedByCount={follower._count.followedBy}
-                        context="base"
-                      />
-                      {!follower.isPublic && (
-                        <>
-                          <div>·</div>
-                          <ProfilePrivacyTag
-                            isPublic={false}
-                            small
-                            className={classNames(
-                              'fr-tag--icon-left',
-                              styles.privacyTag,
-                            )}
-                          />
-                        </>
-                      )}
+            <div
+              className={classNames(
+                'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                index === 0 && 'fr-border-top',
+                follower.isPublic && styles.container,
+              )}
+            >
+              <Link className={styles.link} href={`/profils/${follower.slug}`}>
+                <div
+                  key={follower.id}
+                  className={classNames(
+                    'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center',
+                    styles.container,
+                  )}
+                >
+                  <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
+                    <RoundProfileImage user={follower} />
+                    <div className="fr-flex fr-direction-column fr-flex-gap-1v fr-align-items-baseline">
+                      <span className="fr-text--bold">{follower.name}</span>
+                      <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
+                        <ProfileMetadata
+                          className="fr-text-mention--grey"
+                          resourcesCount={follower._count.resources}
+                          followedByCount={follower._count.followedBy}
+                          context="base"
+                        />
+                        {!follower.isPublic && (
+                          <>
+                            <div>·</div>
+                            <ProfilePrivacyTag
+                              isPublic={false}
+                              small
+                              className={classNames(
+                                'fr-tag--icon-left',
+                                styles.privacyTag,
+                              )}
+                            />
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-                {!!user && follower.isPublic && (
-                  <div>
-                    <FollowButton
-                      user={user}
-                      profile={follower}
-                      followPriority="secondary"
-                      className="fr-width-full fr-justify-content-center"
-                    />
-                  </div>
-                )}
-              </div>
-            </Link>
+              </Link>
+              {!!user && follower.isPublic && (
+                <div>
+                  <FollowButton
+                    user={user}
+                    profile={follower}
+                    followPriority="secondary"
+                    className="fr-width-full fr-justify-content-center"
+                  />
+                </div>
+              )}
+            </div>
           ))}
         </>
       </FollowersModal>

@@ -49,6 +49,11 @@ export const getProfilePageQuery = async ({
             },
           },
         },
+        orderBy: {
+          follower: {
+            isPublic: 'desc',
+          },
+        },
       },
       isPublic: true,
       email: true,
