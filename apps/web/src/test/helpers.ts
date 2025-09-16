@@ -30,6 +30,7 @@ export const createTestUser = (publicProfile?: boolean) =>
     collections: [],
     lastCguAcceptedAt: new Date('2023-01-01').toISOString(),
     cguVersion: currentCguVersion,
+    newsFeed: null,
   }) satisfies SessionUser
 
 export const createTestProfile = (publicProfile?: boolean) =>

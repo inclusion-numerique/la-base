@@ -1,0 +1,17 @@
+.iconContainer {
+  background: var(--background-contrast-success);
+}
+
+.icon {
+  color: var(--text-default-success) !important;
+}
+
+.modalContainer {
+  :global(.fr-modal__body) {
+    border-radius: 8px;
+  }
+
+  :global(.fr-modal__header button:first-child) {
+    display: none;
+  }
+}

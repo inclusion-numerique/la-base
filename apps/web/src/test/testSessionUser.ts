@@ -23,4 +23,5 @@ export const testSessionUser = {
   createdResources: [],
   resources: [],
   collections: [],
+  newsFeed: null,
 } as const satisfies SessionUser
