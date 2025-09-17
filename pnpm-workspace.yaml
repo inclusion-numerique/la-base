@@ -10,3 +10,5 @@ packages:
   - packages/storybook
   - packages/test
   - packages/fixtures
+
+minimumReleaseAge: 1440
