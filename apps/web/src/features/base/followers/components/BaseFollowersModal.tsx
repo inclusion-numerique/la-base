@@ -56,7 +56,6 @@ const BaseFollowersModal = ({
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic
-                  withLabel={false}
                   small
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
@@ -76,7 +75,6 @@ const BaseFollowersModal = ({
               <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic={false}
-                  withLabel={false}
                   small
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
@@ -131,6 +129,7 @@ const BaseFollowersModal = ({
                               'fr-tag--icon-left',
                               styles.privacyTag,
                             )}
+                            label="Privé"
                           />
                         </>
                       )}
