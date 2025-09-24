@@ -15,7 +15,7 @@
     "@cypress/react18": "^2.0.1",
     "cypress": "^14.5.3",
     "cypress-real-events": "^1.14.0",
-    "next": "^15.4.6",
+    "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
