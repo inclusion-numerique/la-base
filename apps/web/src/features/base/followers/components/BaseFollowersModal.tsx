@@ -97,17 +97,18 @@ const BaseFollowersModal = ({
             const content = (
               <div
                 className={classNames(
-                  'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center',
+                  'fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-width-full',
                   follower.isPublic && styles.container,
                 )}
               >
-                <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
+                <div className="fr-flex fr-flex-gap-6v fr-align-items-center fr-width-full">
                   <RoundProfileImage user={follower} />
                   <div
                     className={classNames(
                       'fr-flex fr-flex-gap-1v fr-align-items-baseline',
                       follower.isPublic && 'fr-direction-column',
-                      !follower.isPublic && 'fr-direction-row',
+                      !follower.isPublic &&
+                        'fr-direction-row fr-justify-content-space-between fr-width-full',
                     )}
                   >
                     <span className="fr-text--bold">{follower.name}</span>
@@ -123,7 +124,6 @@ const BaseFollowersModal = ({
                       )}
                       {!follower.isPublic && (
                         <>
-                          <div>·</div>
                           <ProfilePrivacyTag
                             isPublic={false}
                             small
@@ -160,7 +160,10 @@ const BaseFollowersModal = ({
                       user={user}
                       profile={follower}
                       followPriority="secondary"
-                      className="fr-width-full fr-justify-content-center"
+                      className={classNames(
+                        styles.followButton,
+                        'fr-justify-content-center',
+                      )}
                     />
                   </div>
                 )}
@@ -169,21 +172,11 @@ const BaseFollowersModal = ({
               <div
                 key={follower.id}
                 className={classNames(
-                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom fr-width-full',
                   styles.privateContainer,
                 )}
               >
                 {content}
-                {!!user && follower.isPublic && (
-                  <div>
-                    <FollowButton
-                      user={user}
-                      profile={follower}
-                      followPriority="secondary"
-                      className="fr-width-full fr-justify-content-center"
-                    />
-                  </div>
-                )}
               </div>
             )
           })}
