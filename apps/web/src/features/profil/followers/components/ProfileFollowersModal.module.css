@@ -27,3 +27,7 @@
 .privateContainer {
   height: 5rem;
 }
+
+.followButton {
+  width: 120px;
+}
