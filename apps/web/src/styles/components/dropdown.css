@@ -15,7 +15,7 @@
   width: var(--icon-size);
   height: var(--icon-size);
   mask-size: 100% 100%;
-  mask-image: url('~@gouvfr/dsfr/dist/icons/system/arrow-down-s-line.svg');
+  mask-image: url('/public/dsfr/icons/system/arrow-down-s-line.svg');
 
   --icon-size: 1rem;
 
