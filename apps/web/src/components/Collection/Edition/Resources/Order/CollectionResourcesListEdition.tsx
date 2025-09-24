@@ -21,7 +21,7 @@ const CollectionResourcesListEdition = ({
   >
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const dragBoundaryRef = useRef<HTMLElement>(null)
+  const dragBoundaryRef = useRef<HTMLUListElement>(null)
   const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
   const onReorder = (items: CollectionResourceListItem[]) =>

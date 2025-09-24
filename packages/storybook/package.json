@@ -23,15 +23,15 @@
     }
   },
   "dependencies": {
-    "@storybook/addon-docs": "^8.6.12",
-    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-docs": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
-    "@storybook/addon-jest": "^8.6.12",
-    "@storybook/addon-links": "^8.6.12",
-    "@storybook/addon-viewport": "^8.6.12",
-    "@storybook/blocks": "^8.6.12",
-    "@storybook/instrumenter": "^8.6.12",
-    "@storybook/nextjs": "^8.6.12",
+    "@storybook/addon-jest": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/addon-viewport": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/instrumenter": "^8.6.14",
+    "@storybook/nextjs": "^8.6.14",
     "@storybook/react": "^8.6.14",
     "@storybook/test": "^8.6.14",
     "chromatic": "^11.28.2",
@@ -40,10 +40,10 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "remixicon": "^4.6.0",
-    "storybook": "^8.6.12"
+    "storybook": "^8.6.14"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^8.6.12",
+    "@storybook/addon-a11y": "^8.6.14",
     "@storybook/test-runner": "^0.22.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^24.2.0",

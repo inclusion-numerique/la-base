@@ -33,7 +33,7 @@ const Template = withTrpc(
   ),
 )
 
-export const Ajout = {
+export const Ajout: Story = {
   render: () => (
     <Template
       resource={{

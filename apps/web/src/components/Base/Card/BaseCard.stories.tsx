@@ -100,11 +100,11 @@ export const SansInfos = mediumContainerStory(SansInfosStory)
 
 export const SansInfosMobile = mobileStory(SansInfosStory)
 
-const CompactStory = {
+const CompactStory: Story = {
   args: {
     base: {
       ...base,
-      followedBy: [{ id: testSessionUser.id }],
+      followedBy: [{ id: testSessionUser.id, followerId: '1' }],
     },
     user: testSessionUser,
     compact: true,
