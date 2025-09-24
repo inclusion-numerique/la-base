@@ -5,7 +5,7 @@ import type {
   ResourceContent,
 } from '@app/web/server/resources/getResource'
 import { ResourceLicence } from '@prisma/client'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import type { ComponentProps } from 'react'
 import ResourceView from './ResourceView'
 

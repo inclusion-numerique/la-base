@@ -1,5 +1,5 @@
 import Button from '@codegouvfr/react-dsfr/Button'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta: Meta<typeof Button> = {
   title: 'DSFR Component/Button/Loading',

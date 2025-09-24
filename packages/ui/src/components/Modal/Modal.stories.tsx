@@ -1,6 +1,6 @@
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/test'
+import { Meta, StoryObj } from '@storybook/nextjs'
+import { within } from 'storybook/test'
 
 const { Component: BaseModal, open: openBaseModal } = createModal({
   id: 'base',

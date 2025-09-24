@@ -1,6 +1,6 @@
 import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import SigninPanel from '@app/web/app/(public)/(authentication)/connexion/SigninPanel'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta: Meta<typeof SigninPanel> = {
   title: 'SigninPanel',

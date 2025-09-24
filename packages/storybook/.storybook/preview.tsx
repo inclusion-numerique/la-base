@@ -1,6 +1,6 @@
 import '@app/web/styles/index.css'
-import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { Preview } from '@storybook/react'
+import { Preview } from '@storybook/nextjs'
+import { DEFAULT_VIEWPORT, MINIMAL_VIEWPORTS } from 'storybook/viewport'
 
 const loadDsfrJs = () => {
   const existing = document.querySelector('#dsfr-js')

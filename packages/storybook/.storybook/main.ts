@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { StorybookConfig } from '@storybook/nextjs'
 import { parse } from 'dotenv'
 
 const filename = fileURLToPath(import.meta.url)
@@ -16,7 +17,7 @@ const dotenvVariables = () => {
 }
 
 // See https://github.com/storybookjs/storybook/blob/111edc3929eb8afff1b58285b0b9c49dd493ae85/code/frameworks/nextjs/README.md
-export default {
+const config: StorybookConfig = {
   stories: [
     '../../../apps/web/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx)',
@@ -24,11 +25,9 @@ export default {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-a11y',
-    '@storybook/addon-viewport',
     '@storybook/addon-designs',
+    '@storybook/addon-docs',
   ],
 
   framework: {
@@ -40,9 +39,7 @@ export default {
 
   staticDirs: ['../../../apps/web/public', '../public'],
 
-  features: {
-    interactionsDebugger: true,
-  },
+  features: {},
 
   docs: {},
 
@@ -55,3 +52,5 @@ export default {
     reactDocgen: 'react-docgen-typescript',
   },
 }
+
+export default config

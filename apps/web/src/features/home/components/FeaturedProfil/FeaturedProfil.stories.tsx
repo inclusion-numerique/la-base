@@ -1,5 +1,5 @@
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import { FeaturedProfil } from './FeaturedProfil'
 
 const meta = {
