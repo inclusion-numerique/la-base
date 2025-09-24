@@ -28,7 +28,6 @@ export default {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
     '@storybook/addon-viewport',
-    'storybook-addon-module-mock',
     '@storybook/addon-designs',
   ],
 
