@@ -10,14 +10,21 @@
 
 .content {
   flex-grow: 1;
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.contentPadding {
+  padding: 1.5rem;
 
   @media (min-width: 36em) {
     padding: 2.5rem;
   }
+}
+
+.highlightContentPadding {
+  padding: 1.5rem;
 }
 
 .title {

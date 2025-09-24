@@ -10,10 +10,14 @@ const CollectionCard = ({
   orientation,
   collection,
   canWrite,
+  context = undefined,
+  highlightCount = undefined,
 }: {
   orientation?: 'row' | 'column'
   collection: CollectionListItem
   canWrite: boolean
+  context?: string
+  highlightCount?: number
 }) => {
   const resourcesCount = collection._count.resources
 
@@ -44,7 +48,17 @@ const CollectionCard = ({
           resources={collection.resources.map(({ resource }) => resource)}
         />
       </Link>
-      <div className={styles.content}>
+      <div
+        className={classNames(
+          styles.content,
+          context === 'highlight' &&
+            highlightCount === 3 &&
+            styles.highlightContentPadding,
+
+          (context !== 'highlight' || highlightCount !== 3) &&
+            styles.contentPadding,
+        )}
+      >
         <div>
           <Link href={href} data-testid="collection-card-link">
             <h3 className={classNames(styles.title, 'fr-text--lg')}>

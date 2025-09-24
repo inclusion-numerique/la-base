@@ -253,12 +253,7 @@ export const basePageQuery = async (
               .map(toResourceWithFeedbackAverage)
           : [],
         highlightedCollections: basePage.highlightCollections
-          ? [...basePage.collections]
-              .sort(
-                (a, b) =>
-                  new Date(a.created).getTime() - new Date(b.created).getTime(),
-              )
-              .slice(0, 3)
+          ? [...basePage.collections].slice(0, 3)
           : [],
         resources: basePage.resources.map(toResourceWithFeedbackAverage),
         _count: {

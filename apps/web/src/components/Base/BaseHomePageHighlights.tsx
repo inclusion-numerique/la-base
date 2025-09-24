@@ -31,9 +31,9 @@ const BaseHomePageHighlights = ({
   return (
     <div className="fr-flex fr-direction-column">
       {highlightedResources.length > 0 && (
-        <div className="fr-py-md-15v">
+        <div className="fr-pt-15v">
           <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-justify-content-space-between fr-mb-6w fr-flex-gap-5v">
-            <div className="fr-flex fr-align-items-md-center fr-flex-gap-5v">
+            <div className="fr-flex fr-align-items-md-center fr-direction-column fr-direction-md-row fr-flex-gap-5v">
               <IconInSquare iconId="ri-file-text-line" />
               <h2 className="fr-mb-0 fr-text-label--blue-france">
                 {resourcesTitle}
@@ -73,22 +73,24 @@ const BaseHomePageHighlights = ({
               />
             ))}
           </div>
-          <div className="fr-hidden-sm fr-width-full">
-            <Button
-              priority="secondary"
-              className="fr-width-full fr-flex fr-justify-content-center"
-              linkProps={{ href: `/bases/${base.slug}/ressources` }}
-            >
-              Voir toutes nos ressources
-            </Button>
-          </div>
+          {base.resources.length > 3 && (
+            <div className="fr-hidden-sm fr-width-full fr-mt-4w">
+              <Button
+                priority="secondary"
+                className="fr-width-full fr-flex fr-justify-content-center"
+                linkProps={{ href: `/bases/${base.slug}/ressources` }}
+              >
+                Voir toutes nos ressources
+              </Button>
+            </div>
+          )}
         </div>
       )}
       {highlightedCollections.length > 0 && (
-        <div className="fr-py-md-15v">
+        <div className="fr-pt-15v">
           <div className="fr-flex fr-direction-column fr-flex-gap-12v">
             <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-justify-content-space-between">
-              <div className="fr-flex fr-align-items-md-center fr-flex-gap-5v">
+              <div className="fr-flex fr-align-items-md-center fr-direction-column fr-direction-md-row fr-flex-gap-5v">
                 <IconInSquare iconId="ri-folder-2-line" />
                 <h2 className="fr-mb-0 fr-text-label--blue-france">
                   {collectionsTitle}
@@ -124,18 +126,22 @@ const BaseHomePageHighlights = ({
                   collection={collection}
                   canWrite={false}
                   key={collection.id}
+                  highlightCount={highlightedCollections.length}
+                  context="highlight"
                 />
               ))}
             </div>
-            <div className="fr-hidden-sm fr-width-full">
-              <Button
-                priority="secondary"
-                className="fr-width-full fr-flex fr-justify-content-center"
-                linkProps={{ href: `/bases/${base.slug}/collections` }}
-              >
-                Voir toutes nos collections
-              </Button>
-            </div>
+            {base.collections.length > 3 && (
+              <div className="fr-hidden-sm fr-width-full">
+                <Button
+                  priority="secondary"
+                  className="fr-width-full fr-flex fr-justify-content-center"
+                  linkProps={{ href: `/bases/${base.slug}/collections` }}
+                >
+                  Voir toutes nos collections
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -77,15 +77,24 @@ const ResourceCard = ({
           </div>
           <ResourceTitle
             className={classNames(
-              context === 'highlight' && 'fr-text--lg',
-              context === 'highlight' && styles.clampTitle,
-              context !== 'highlight' && 'fr-h6',
+              {
+                'fr-text--lg': context === 'highlight' && highlightCount === 3,
+                'fr-h3': context === 'highlight' && highlightCount !== 3,
+                'fr-h6': context !== 'highlight',
+                [styles.clampTitle]: context === 'highlight',
+              },
               'fr-mb-md-3v fr-mb-1w',
             )}
           >
             {resource.title}
           </ResourceTitle>
-          <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
+          <p
+            className={classNames(
+              context === 'highlight' && highlightCount !== 3 && 'fr-text--lg',
+              'fr-text--sm fr-mb-0',
+              styles.description,
+            )}
+          >
             {resource.excerpt}
           </p>
         </div>
