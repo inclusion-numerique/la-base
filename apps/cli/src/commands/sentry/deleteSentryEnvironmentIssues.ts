@@ -50,11 +50,16 @@ export const deleteSentryEnvironmentIssues = new Command()
       config.org,
       config.project,
     )
-    const allEnvs = await listProjectEnvironments(
+    const allEnvsRaw = await listProjectEnvironments(
       http,
       config.org,
       config.project,
     )
+
+    const allEnvs = [
+      ...new Set([...allEnvsRaw, ...envsWithIssues.map((e) => e.environment)]),
+    ]
+
     const envWithCount = new Map(
       envsWithIssues.map((e) => [e.environment, e.count]),
     )
