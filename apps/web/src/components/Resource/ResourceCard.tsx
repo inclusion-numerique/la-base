@@ -9,6 +9,7 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 import { getServerUrl } from '../../utils/baseUrl'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'
@@ -16,6 +17,7 @@ import { ResourceMoreActionsDropdown } from './ResourceMoreActionsDropdown'
 import ResourcesViewsAndMetadata from './ResourcesViewsAndMetadata'
 
 const ResourceCard = ({
+  children,
   resource,
   user,
   className,
@@ -26,13 +28,14 @@ const ResourceCard = ({
   highlightCount,
   onlyUpdatedDate = false,
 }: {
+  children?: React.ReactNode
   resource: ResourceListItem
   user: SessionUser | null
   className?: string
   isContributor: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   isDraft?: boolean
-  context?: 'highlight' | 'list'
+  context?: 'highlight' | 'list' | 'newsFeed'
   highlightCount?: number
   onlyUpdatedDate?: boolean
 }) => (
@@ -41,13 +44,14 @@ const ResourceCard = ({
     data-testid="resource-card"
   >
     <div className={styles.header}>
-      {context !== 'highlight' && (
+      {!children && context !== 'highlight' && context !== 'newsFeed' && (
         <OwnershipInformation
           user={resource.createdBy}
           base={resource.base}
           attributionWording={isDraft ? 'draft-resource' : 'resource'}
         />
       )}
+      {children}
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
         <ResourceDates
           canEdit={isContributor}

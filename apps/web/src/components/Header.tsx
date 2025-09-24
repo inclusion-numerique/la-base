@@ -129,7 +129,13 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                       'fr-border-radius--8 fr-p-0',
                       styles.newsFeedButton,
                     )}
-                    linkProps={{ href: '/fil-d-actualite' }}
+                    linkProps={{
+                      href: user
+                        ? !user.newsFeed || !user.newsFeed.hasCompleteOnboarding
+                          ? '/fil-d-actualite/onboarding'
+                          : '/fil-d-actualite'
+                        : '/connexion?suivant=/fil-d-actualite',
+                    }}
                     size="small"
                   >
                     <span
