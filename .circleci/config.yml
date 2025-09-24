@@ -687,6 +687,9 @@ jobs:
       - run:
           name: Deactivate Github deployments
           command: pnpm --silent cli github:deployment:deactivate << pipeline.parameters.preview_deletion_branch >>
+      - run:
+          name: 'Delete Sentry environment issues'
+          command: pnpm --silent cli sentry:delete-environment-issues << pipeline.parameters.preview_deletion_branch >>
 
 commands:
   install_pnpm:
