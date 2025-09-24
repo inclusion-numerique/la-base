@@ -58,7 +58,7 @@ export const deleteSentryEnvironmentIssues = new Command()
 
     const allEnvs = [
       ...new Set([...allEnvsRaw, ...envsWithIssues.map((e) => e.environment)]),
-    ]
+    ].sort()
 
     const envWithCount = new Map(
       envsWithIssues.map((e) => [e.environment, e.count]),
