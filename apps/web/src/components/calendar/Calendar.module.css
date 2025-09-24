@@ -11,15 +11,11 @@
     color: var(--grey-1000-75) !important;
 
     &:active {
-      background-color: var(
-        --background-action-high-blue-france-active
-      ) !important;
+      background-color: var(--background-action-high-blue-france-active) !important;
     }
 
     &:hover {
-      background-color: var(
-        --background-action-high-blue-france-hover
-      ) !important;
+      background-color: var(--background-action-high-blue-france-hover) !important;
     }
   }
 
@@ -42,9 +38,7 @@
   background-color: var(--background-action-low-blue-france) !important;
 
   &:active {
-    background-color: var(
-      --background-action-low-blue-france-active
-    ) !important;
+    background-color: var(--background-action-low-blue-france-active) !important;
   }
 
   &:hover {

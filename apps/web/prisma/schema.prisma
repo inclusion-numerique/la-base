@@ -844,6 +844,8 @@ model NewsFeed {
   created DateTime @default(now())
   updated DateTime @default(now())
 
+  lastOpenedAt DateTime?
+
   hasCompleteOnboarding Boolean @default(false) @map("has_complete_onboarding")
 
   @@map("news_feed")

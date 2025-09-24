@@ -4,6 +4,7 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import { useEffect } from 'react'
 import styles from './NewsFeedOnboardingDoneModal.module.css'
 
 const NewsFeedOnboardingDoneModal = createModal({
@@ -16,10 +17,17 @@ export const NewsFeedOnboardingDone = ({
 }: {
   fromOnboarding?: boolean
 }) => {
+  // Todo -> check with Hugues, window.dsfr is not mounted on first render so it won't open the modal -> bit hacky there
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      NewsFeedOnboardingDoneModal.open()
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
+
   if (!fromOnboarding) {
     return null
   }
-
   return (
     <NewsFeedOnboardingDoneModal.Component
       title=""

@@ -92,9 +92,11 @@ export const newsFeedRouter = router({
         create: {
           userId: user.id,
           monthlyNewsletter: input.monthlyResume,
+          hasCompleteOnboarding: true,
         },
         update: {
           monthlyNewsletter: input.monthlyResume,
+          hasCompleteOnboarding: true,
         },
       })
     }),
