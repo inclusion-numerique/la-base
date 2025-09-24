@@ -47,7 +47,7 @@ const CollectionCard = ({
       <div className={styles.content}>
         <div>
           <Link href={href} data-testid="collection-card-link">
-            <h3 className={classNames(styles.title, 'fr-h6')}>
+            <h3 className={classNames(styles.title, 'fr-text--lg')}>
               {collection.title}
             </h3>
             {collection.description && (

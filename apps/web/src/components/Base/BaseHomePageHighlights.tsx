@@ -29,18 +29,34 @@ const BaseHomePageHighlights = ({
       : 'Nos collections à la une'
 
   return (
-    <div className="fr-flex fr-direction-column fr-flex-gap-12v">
+    <div className="fr-flex fr-direction-column">
       {highlightedResources.length > 0 && (
-        <>
-          <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-flex-gap-5v">
-            <IconInSquare iconId="ri-file-text-line" />
-            <h2 className="fr-mb-0 fr-text-label--blue-france">
-              {resourcesTitle}
-            </h2>
+        <div className="fr-py-md-15v">
+          <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-justify-content-space-between fr-mb-6w fr-flex-gap-5v">
+            <div className="fr-flex fr-align-items-md-center fr-flex-gap-5v">
+              <IconInSquare iconId="ri-file-text-line" />
+              <h2 className="fr-mb-0 fr-text-label--blue-france">
+                {resourcesTitle}
+              </h2>
+            </div>
+            {base.resources.length > 3 && (
+              <div className="fr-hidden fr-unhidden-sm">
+                <Button
+                  size="large"
+                  priority="secondary"
+                  className="fr-width-full fr-flex fr-justify-content-center"
+                  linkProps={{ href: `/bases/${base.slug}/ressources` }}
+                >
+                  Voir toutes nos ressources
+                </Button>
+              </div>
+            )}
           </div>
           <div
             className={classNames(
-              highlightedResources.length === 3 && styles.resourcesGrid,
+              highlightedResources.length === 3
+                ? styles.resourcesGrid
+                : 'fr-flex fr-direction-column fr-flex-gap-12v',
             )}
           >
             {highlightedResources.map((resource) => (
@@ -53,7 +69,7 @@ const BaseHomePageHighlights = ({
                   ResourceRoles.ResourceContributor,
                 )}
                 context="highlight"
-                withImage={highlightedResources.length < 3}
+                highlightCount={highlightedResources.length}
               />
             ))}
           </div>
@@ -66,46 +82,62 @@ const BaseHomePageHighlights = ({
               Voir toutes nos ressources
             </Button>
           </div>
-        </>
+        </div>
       )}
       {highlightedCollections.length > 0 && (
-        <>
-          <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-flex-gap-5v">
-            <IconInSquare iconId="ri-folder-2-line" />
-            <h2 className="fr-mb-0 fr-text-label--blue-france">
-              {collectionsTitle}
-            </h2>
-          </div>
+        <div className="fr-py-md-15v">
+          <div className="fr-flex fr-direction-column fr-flex-gap-12v">
+            <div className="fr-flex fr-direction-column fr-direction-md-row fr-align-items-md-center fr-justify-content-space-between">
+              <div className="fr-flex fr-align-items-md-center fr-flex-gap-5v">
+                <IconInSquare iconId="ri-folder-2-line" />
+                <h2 className="fr-mb-0 fr-text-label--blue-france">
+                  {collectionsTitle}
+                </h2>
+              </div>
+              <div className="fr-hidden fr-unhidden-sm">
+                {base.collections.length > 3 && (
+                  <Button
+                    size="large"
+                    priority="secondary"
+                    className="fr-width-full fr-flex fr-justify-content-center"
+                    linkProps={{ href: `/bases/${base.slug}/collections` }}
+                  >
+                    Voir toutes nos collections
+                  </Button>
+                )}
+              </div>
+            </div>
 
-          <div
-            className={classNames(styles.collectionsGrid, {
-              [styles.collectionsGridTwoColumns]:
-                highlightedCollections.length === 2,
-              [styles.collectionsGridThreeColumns]:
-                highlightedCollections.length === 3,
-            })}
-          >
-            {highlightedCollections.map((collection) => (
-              <CollectionCard
-                orientation={
-                  highlightedCollections.length === 1 ? 'row' : 'column'
-                }
-                collection={collection}
-                canWrite={false}
-                key={collection.id}
-              />
-            ))}
-          </div>
-          <div className="fr-hidden-sm fr-width-full">
-            <Button
-              priority="secondary"
-              className="fr-width-full fr-flex fr-justify-content-center"
-              linkProps={{ href: `/bases/${base.slug}/collections` }}
+            <div
+              className={classNames(styles.collectionsGrid, {
+                [styles.collectionsGridTwoColumns]:
+                  highlightedCollections.length === 2,
+                [styles.collectionsGridThreeColumns]:
+                  highlightedCollections.length === 3,
+              })}
             >
-              Voir toutes nos collections
-            </Button>
+              {highlightedCollections.map((collection) => (
+                <CollectionCard
+                  orientation={
+                    highlightedCollections.length === 1 ? 'row' : 'column'
+                  }
+                  collection={collection}
+                  canWrite={false}
+                  key={collection.id}
+                />
+              ))}
+            </div>
+            <div className="fr-hidden-sm fr-width-full">
+              <Button
+                priority="secondary"
+                className="fr-width-full fr-flex fr-justify-content-center"
+                linkProps={{ href: `/bases/${base.slug}/collections` }}
+              >
+                Voir toutes nos collections
+              </Button>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   )

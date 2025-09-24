@@ -5,8 +5,7 @@ import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
-import type { BaseResource } from '@app/web/server/bases/getBase'
-import type { Resource } from '@app/web/server/resources/getResource'
+import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -24,16 +23,18 @@ const ResourceCard = ({
   titleAs: ResourceTitle = 'h2',
   isDraft = false,
   context = 'list',
-  withImage = true,
+  highlightCount,
+  onlyUpdatedDate = false,
 }: {
-  resource: Resource | BaseResource
+  resource: ResourceListItem
   user: SessionUser | null
   className?: string
   isContributor: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   isDraft?: boolean
   context?: 'highlight' | 'list'
-  withImage?: boolean
+  highlightCount?: number
+  onlyUpdatedDate?: boolean
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -48,90 +49,60 @@ const ResourceCard = ({
         />
       )}
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
-        <ResourceDates canEdit={isContributor} resource={resource} />
+        <ResourceDates
+          canEdit={isContributor}
+          resource={resource}
+          onlyUpdatedDate={onlyUpdatedDate}
+        />
       </div>
     </div>
-    <Link
-      href={`/ressources/${resource.slug}`}
-      className={styles.content}
-      data-testid="resource-card-link"
-    >
-      <div className={styles.textAndDescription}>
-        <div
-          className={classNames(
-            styles.dates,
-            'fr-hidden-md fr-text--xs fr-mb-1w',
-          )}
-        >
-          <ResourceDates canEdit={isContributor} resource={resource} />
-        </div>
-        <ResourceTitle className="fr-mb-md-3v fr-mb-1w fr-h6">
-          {resource.title}
-        </ResourceTitle>
-        <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
-          {resource.excerpt}
-        </p>
-      </div>
-      {!!resource.image && (
-        <div className={styles.imageContainer}>
-          <ResponsiveUploadedImage
-            id={resource.image.id}
-            alt={resource.image.altText ?? ''}
-            breakpoints={resourceCardImageBreakpoints}
-          />
-        </div>
-      )}
-    </Link>
-    <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
-      {resource.published && (
-        <div className="fr-text--sm fr-mb-0">
-          <ResourcesViewsAndMetadata resource={resource} context="card">
-            {resource._count.resourceFeedback > 0 && (
-              <>
-                <FeedbackBadge
-                  className="fr-mb-sm-0 fr-mb-3v"
-                  value={resource.feedbackAverage}
-                />
-                <span className="fr-text--medium fr-mb-sm-0 fr-mb-3v">
-                  {resource._count.resourceFeedback}&nbsp;Avis
-                </span>
-              </>
+    <div className="fr-flex fr-direction-column fr-justify-content-space-between">
+      <Link
+        href={`/ressources/${resource.slug}`}
+        className={styles.content}
+        data-testid="resource-card-link"
+      >
+        <div className={styles.textAndDescription}>
+          <div
+            className={classNames(
+              styles.dates,
+              'fr-hidden-md fr-text--xs fr-mb-1w',
             )}
           >
-            <ResourceDates canEdit={isContributor} resource={resource} />
+            <ResourceDates
+              canEdit={isContributor}
+              resource={resource}
+              onlyUpdatedDate={onlyUpdatedDate}
+            />
           </div>
-          <ResourceTitle className="fr-mb-md-3v fr-mb-1w fr-h6">
+          <ResourceTitle
+            className={classNames(
+              context === 'highlight' && 'fr-text--lg',
+              context === 'highlight' && styles.clampTitle,
+              context !== 'highlight' && 'fr-h6',
+              'fr-mb-md-3v fr-mb-1w',
+            )}
+          >
             {resource.title}
           </ResourceTitle>
           <p className={classNames('fr-text--sm fr-mb-0', styles.description)}>
             {resource.excerpt}
           </p>
         </div>
-      )}
-      <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
-        {isContributor && (
-          <>
-            <Button
-              data-testid="resource-card-edit-link"
-              title="Modifier"
-              size="small"
-              priority="tertiary no outline"
-              linkProps={{
-                href: `/ressources/${resource.slug}/editer`,
-                prefetch: false,
-              }}
-            >
-              <span className="fr-unhidden-sm fr-hidden fr-mr-1w">
-                Modifier
-              </span>
-              <span className="ri-edit-line" aria-hidden />
-            </Button>
-            <ResourceMoreActionsDropdown
-              modalControlClassName="ri-lg"
-              dropdownControlClassName="fr-text--bold"
-              resource={resource}
-              copyLink={true}
-              canWrite
+        {!!resource.image && (
+          <div
+            className={classNames(
+              styles.imageContainer,
+              context === 'highlight' &&
+                !!highlightCount &&
+                highlightCount >= 3 &&
+                styles.withImage,
+            )}
+          >
+            <ResponsiveUploadedImage
+              id={resource.image.id}
+              alt={resource.image.altText ?? ''}
+              breakpoints={resourceCardImageBreakpoints}
             />
           </div>
         )}
@@ -139,9 +110,23 @@ const ResourceCard = ({
       <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
         {resource.published && (
           <div className="fr-text--sm fr-mb-0">
-            <ResourcesViewsAndMetadata resource={resource}>
+            <ResourcesViewsAndMetadata
+              className={classNames(
+                context === 'highlight' &&
+                  highlightCount &&
+                  highlightCount === 3 &&
+                  styles.metadataContainer,
+              )}
+              context="card"
+              resource={resource}
+            >
               {resource._count.resourceFeedback > 0 && (
                 <>
+                  {!(context === 'highlight' && highlightCount === 3) && (
+                    <span className="fr-hidden fr-unhidden-sm fr-text--medium">
+                      ·
+                    </span>
+                  )}
                   <FeedbackBadge
                     className="fr-mb-sm-0 fr-mb-3v"
                     value={resource.feedbackAverage}
@@ -176,12 +161,12 @@ const ResourceCard = ({
                 modalControlClassName="ri-lg"
                 dropdownControlClassName="fr-text--bold"
                 resource={resource}
-                copyLink={false}
+                copyLink={true}
                 canWrite
               />
             </>
           )}
-          {!isContributor && (
+          {!isContributor && context !== 'highlight' && (
             <>
               <SaveResourceInCollectionButton
                 className="fr-pl-md-3v fr-pl-0"
