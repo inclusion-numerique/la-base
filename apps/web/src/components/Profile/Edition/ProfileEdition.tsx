@@ -20,6 +20,7 @@ const ProfileEdition = ({
     <div className="fr-grid-row">
       <div className="fr-col-offset-lg-3 fr-mb-5w fr-mx-auto">
         <ProfileInformations
+          user={null}
           profile={profile}
           resourcesCount={resources.length}
           editMode

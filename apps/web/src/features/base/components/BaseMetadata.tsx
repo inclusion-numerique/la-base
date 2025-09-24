@@ -21,7 +21,7 @@ const BaseMetadata = ({
   withBadge?: boolean
   smallBadge?: boolean
   context: 'base' | 'profile' | 'card'
-  user?: SessionUser | null
+  user: SessionUser | null
 }) => {
   const resourcesCount = base._count.resources
   const resourcesViews = base._count.resourcesViews
@@ -34,7 +34,7 @@ const BaseMetadata = ({
   return (
     <div
       className={classNames(
-        'fr-flex fr-direction-column fr-direction-sm-row fr-align-items-center fr-flex-gap-4v fr-flex-gap-md-2v',
+        'fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-4v fr-flex-gap-md-2v',
         className,
       )}
     >

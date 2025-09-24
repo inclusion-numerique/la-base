@@ -44,7 +44,7 @@ export const CollectionMoreActionsDropdown = ({
           className={
             buttonTitle
               ? 'ri-more-fill fr-mr-1w fr-hidden fr-unhidden-sm'
-              : 'ri-more-fill'
+              : 'ri-more-fill fr-hidden fr-unhidden-sm'
           }
           aria-hidden
         />

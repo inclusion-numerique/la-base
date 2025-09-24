@@ -6,6 +6,28 @@
   text-align: start !important;
 }
 
-.btn {
-  min-height: 0;
+.feedbackLink:hover {
+  color: var(--text-action-high-blue-france);
+}
+
+.feedbackLink:active {
+  background-color: #ededed !important;
+}
+
+.link {
+  background-image: none;
+  width: 100%;
+}
+
+.container:hover {
+  background-color: var(--blue-france-975-75);
+  cursor: pointer;
+}
+
+.privateContainer {
+  height: 5rem;
+}
+
+.followButton {
+  width: 120px;
 }

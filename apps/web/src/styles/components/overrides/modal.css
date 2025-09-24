@@ -12,11 +12,17 @@
   }
 
   .fr-modal__body {
-    overflow: visible !important;
+    overflow-y: auto !important;
+
+    @media (min-width: 768px) {
+      overflow-y: visible !important;
+    }
   }
 
   .fr-modal__content {
-    padding-bottom: 2rem;
+    @media (min-width: 768px) {
+      padding-bottom: 2rem;
+    }
   }
 
   @media (max-height: 768px) {

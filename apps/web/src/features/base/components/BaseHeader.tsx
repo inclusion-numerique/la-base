@@ -39,7 +39,7 @@ const BaseHeader = ({
           <h1 className="fr-h2 fr-page-title fr-mb-2v">{base.title}</h1>
           <BaseMetadata
             user={user}
-            className="fr-justify-content-center"
+            className="fr-justify-content-center fr-align-items-center"
             base={base}
             withBadge={!base.isPublic}
             context="base"

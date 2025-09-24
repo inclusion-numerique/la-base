@@ -91,6 +91,7 @@ export const baseSelect = (
             name: true,
             isPublic: true,
             followedBy: true,
+            slug: true,
             _count: {
               select: { resources: true, followedBy: true },
             },
@@ -164,10 +165,7 @@ export const getBase = async ({
     .map(({ follower }) => follower)
     .filter(({ isPublic }) => !isPublic)
 
-  const visibleFollowedBy = [
-    ...publicFollowedBy,
-    ...privateFollowedBy.filter(({ id }) => id === user?.id),
-  ]
+  const visibleFollowedBy = [...publicFollowedBy, ...privateFollowedBy]
 
   const followedByData = {
     counts: {

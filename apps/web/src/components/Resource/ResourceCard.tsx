@@ -116,7 +116,7 @@ const ResourceCard = ({
               modalControlClassName="ri-lg"
               dropdownControlClassName="fr-text--bold"
               resource={resource}
-              copyLink={false}
+              copyLink={true}
               canWrite
             />
           </>

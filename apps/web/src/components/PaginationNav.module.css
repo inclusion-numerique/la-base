@@ -1,0 +1,6 @@
+.paginationListContainer {
+  flex-wrap: wrap;
+  @media (min-width: 48rem) {
+    flex-wrap: nowrap;
+  }
+}

@@ -94,7 +94,6 @@ const ResourcesSearchLayout = async ({
       <SearchMenu activeTab="ressources" searchParams={searchExecutionParams} />
       <div className="fr-container fr-container--medium fr-mb-30v">
         <SearchFilters
-          label="Affiner la recherche"
           tab="ressources"
           searchParams={searchExecutionParams}
           initialValues={initialFilterValues}

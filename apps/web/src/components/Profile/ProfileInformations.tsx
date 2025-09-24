@@ -1,3 +1,4 @@
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ProfilePageData } from '@app/web/server/profiles/getProfile'
@@ -12,11 +13,13 @@ const ProfileInformations = ({
   children,
   editMode,
   context,
+  user,
 }: {
   profile: ProfilePageData
   resourcesCount: number
   editMode?: boolean
   context: 'base' | 'profile' | 'card'
+  user: SessionUser | null
 } & PropsWithChildren) => (
   <div className="fr-flex-md fr-direction-row fr-justify-content-center fr-flex-gap-6v fr-align-items-center fr-text--center">
     <div className="fr-my-2w fr-position-relative">
@@ -40,12 +43,14 @@ const ProfileInformations = ({
                 resourcesCount={resourcesCount}
                 followedByData={profile.followedByData}
                 context="profile"
+                user={user}
               />
             ) : (
               <ProfileMetadata
                 resourcesCount={resourcesCount}
                 followedByCount={profile._count.followedBy}
                 context={context}
+                user={user}
               />
             )}
           </div>
