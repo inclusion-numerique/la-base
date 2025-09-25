@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react'
+import type { StoryObj } from '@storybook/nextjs'
 
 export const mobileStoryParameters = {
   chromatic: { viewports: [320, 568] },

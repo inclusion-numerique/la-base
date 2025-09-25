@@ -1,6 +1,6 @@
 import { useOnDiff } from '@app/web/hooks/useOnDiff'
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/nextjs'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import InputFormField, { InputFormFieldProps } from './InputFormField'
