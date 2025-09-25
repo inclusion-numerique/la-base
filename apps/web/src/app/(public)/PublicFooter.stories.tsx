@@ -1,6 +1,6 @@
 import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import PublicFooter from '@app/web/app/(public)/PublicFooter'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'PublicFooter',

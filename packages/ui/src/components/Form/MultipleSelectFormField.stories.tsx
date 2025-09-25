@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
-import { Meta, StoryObj } from '@storybook/nextjs'
+import { Meta, StoryObj } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 import MultipleSelectFormField, {

@@ -1,5 +1,5 @@
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import { Meta, StoryObj } from '@storybook/nextjs'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Tabs> = {
   title: 'DSFR Component/Tabs',

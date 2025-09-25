@@ -4,7 +4,7 @@ import { mobileStory } from '@app/storybook/storyHelper'
 import ResourceImageEdition from '@app/web/components/Resource/Edition/ResourceImageEdition'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { noop } from '@app/web/utils/noop'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 
 export default {

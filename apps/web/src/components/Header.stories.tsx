@@ -1,7 +1,7 @@
 import { mobileStoryParameters } from '@app/storybook/storyHelper'
 import Header from '@app/web/components/Header'
 import { testSessionUser } from '@app/web/test/testSessionUser'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'Header',

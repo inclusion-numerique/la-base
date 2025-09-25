@@ -1,6 +1,6 @@
 import { createTestResource, createTestUser } from '@app/web/test/helpers'
 import { noop } from '@app/web/utils/noop'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import { ResourceEditionState } from '../enums/ResourceEditionState'
 import { ResourcePublishedState } from '../enums/ResourcePublishedState'
 import ResourceEditionActionBar from './ResourceEditionActionBar'

@@ -5,7 +5,7 @@ import {
   SectionTitlePayloadCommandValidation,
 } from '@app/web/server/resources/feature/Content'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 import SectionTitleContentEdition from './SectionTitleContentEdition'
 

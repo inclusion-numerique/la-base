@@ -1,6 +1,6 @@
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 import TextContentView from './TextContentView'
 

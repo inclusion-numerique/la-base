@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import CustomTag, { TagColor } from './CustomTag'
 
 const meta: Meta<typeof CustomTag> = {

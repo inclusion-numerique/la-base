@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import { CategoryCard, type CategoryCardProps } from './CategoryCard'
 
 const args: CategoryCardProps = {

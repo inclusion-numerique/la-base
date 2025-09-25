@@ -1,7 +1,7 @@
 import { ResourcesListWrapper } from '@app/storybook/components/ResourcesListWrapper'
 import { mobileStory } from '@app/storybook/storyHelper'
 import ResourceCardSkeleton from '@app/web/components/Resource/ResourceCardSkeleton'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 
 export default {

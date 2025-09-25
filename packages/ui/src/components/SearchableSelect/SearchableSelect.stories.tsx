@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/nextjs'
+import { Meta, StoryObj } from '@storybook/react'
 import SearchableSelect from './SearchableSelect'
 
 const Commune = ({ commune }: { commune: string }) => (

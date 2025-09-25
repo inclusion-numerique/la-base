@@ -2,7 +2,7 @@ import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
 import { testSessionUser } from '@app/web/test/testSessionUser'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import BaseCard from './BaseCard'
 
 const description =

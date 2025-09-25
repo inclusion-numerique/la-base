@@ -2,7 +2,7 @@ import { ResourcesListWrapper } from '@app/storybook/components/ResourcesListWra
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import { testSessionUser } from '@app/web/test/testSessionUser'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 import { creatorUser, date, resource, updated } from './cardsStoriesHelpers'
 

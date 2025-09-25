@@ -3,7 +3,7 @@ import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
 import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
 import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
 import { categoryThemesOptions } from '@app/web/themes/themes'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'component/Filters',

@@ -1,5 +1,5 @@
 import { resource } from '@app/web/components/Resource/Cards/cardsStoriesHelpers'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   FeaturedResource,
   type FeaturedResourceProps,
