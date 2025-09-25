@@ -183,6 +183,10 @@ export const createTestBase = (
     coverImage: null,
     collections: [],
     followedBy: [],
+    highlightResources: 'LatestPublished',
+    highlightedResources: [],
+    highlightedCollections: [],
+    highlightCollections: true,
     followedByData: {
       counts: {
         total: 0,

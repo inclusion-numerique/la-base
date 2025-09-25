@@ -4,6 +4,7 @@ const baseSections = (canDelete: boolean) => [
   { id: 'informations', title: 'Informations de la base' },
   { id: 'contacts', title: 'Contacts de la base' },
   { id: 'visibilite', title: 'Visibilité de la base' },
+  { id: 'personnalisation', title: "Personnalisation page d'accueil" },
   ...(canDelete ? [{ id: 'supprimer', title: 'Supprimer la base' }] : []),
 ]
 

@@ -86,7 +86,6 @@ const ResourcesViewsAndMetadata = ({
     </span>
     {children && (
       <>
-        <span className="fr-hidden fr-unhidden-sm fr-text--medium">·</span>
         <span className="fr-flex fr-flex-gap-2v">{children}</span>
       </>
     )}

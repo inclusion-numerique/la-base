@@ -1,5 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import IconInSquare from '@app/web/components/IconInSquare'
 import InviteBaseMemberButton from '@app/web/features/base/invitation/components/InviteBaseMemberButton'

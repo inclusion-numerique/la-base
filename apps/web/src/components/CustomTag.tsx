@@ -19,7 +19,7 @@ const CustomTag = ({
 }: UiComponentProps & {
   label?: string
   small?: boolean
-  icon: string
+  icon?: string
   color: TagColor
 }) => {
   return (

@@ -1,4 +1,5 @@
 import { resourceTitleMaxLength } from '@app/web/server/rpc/resource/utils'
+import { HighlightResourcesType } from '@prisma/client'
 import sanitizeHtml from 'sanitize-html'
 import z from 'zod'
 
@@ -61,12 +62,18 @@ export const UpdateBaseContactsCommandValidation = z.object({
   linkedin: siteValidation,
 })
 
+export const UpdateBaseHomePageCustomisationCommandValidation = z.object({
+  highlightResources: z.nativeEnum(HighlightResourcesType).nullable(),
+  highlightCollections: z.boolean(),
+})
+
 export const UpdateBaseCommandValidation = z.object({
   id: z.string({ required_error: "Veuillez renseigner l'id de la base" }),
   data: z.union([
     UpdateBaseInformationsCommandValidation,
     UpdateBaseVisibilityCommandValidation,
     UpdateBaseContactsCommandValidation,
+    UpdateBaseHomePageCustomisationCommandValidation,
   ]),
 })
 
@@ -82,10 +89,15 @@ export type UpdateBaseContactsCommand = z.infer<
   typeof UpdateBaseContactsCommandValidation
 >
 
+export type UpdateBaseHomePageCustomisationCommand = z.infer<
+  typeof UpdateBaseHomePageCustomisationCommandValidation
+>
+
 export type UpdateBaseCommand =
   | UpdateBaseInformationsCommand
   | UpdateBaseVisibilityCommand
   | UpdateBaseContactsCommand
+  | UpdateBaseHomePageCustomisationCommand
 
 export const UpdateBaseImageCommandValidation = z.object({
   id: z.string({ required_error: "Veuillez renseigner l'id de la base" }),
