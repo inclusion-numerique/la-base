@@ -1,0 +1,14 @@
+.label {
+  font-weight: 400;
+  max-width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

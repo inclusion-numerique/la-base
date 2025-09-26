@@ -52,7 +52,8 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
 
     // With a valid magic link we should be automatically redirected to homepage, logged in
     cy.log('User should now be signed in')
-    cy.appUrlShouldBe('/')
+    // User will be redirected to the onboarding page of his news feed by default
+    cy.appUrlShouldBe('/fil-d-actualite/onboarding')
     cy.get('.fr-header__tools').contains(firstName).contains(lastName)
 
     cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
