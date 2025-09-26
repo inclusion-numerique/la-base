@@ -8,9 +8,11 @@ import {
   UpdateNewsFeedSectorsProfessionnalsCommand,
   UpdateNewsFeedSectorsProfessionnalsValidation,
 } from '@app/web/features/fil-d-actualite/onboarding/professionals-sectors/newsFeedProfessionnalsSectors'
-import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
+import {
+  professionalSectorsIcon,
+  professionalSectorsOptions,
+} from '@app/web/themes/professionalSectors'
 import { trpc } from '@app/web/trpc'
-import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProfessionalSector } from '@prisma/client'
@@ -33,13 +35,6 @@ const NewsFeedProfessionnalsSectors = ({
       professionalSectors,
     },
   })
-
-  const professionalSectorsIcon: Record<ProfessionalSector, RiIconClassName> = {
-    ActeursPublics: 'ri-government-line',
-    ActeursPrivesEtAssociatifs: 'ri-building-line',
-    AidantsEtMediateursNumeriques: 'ri-user-heart-line',
-    AutresProfessionnels: 'ri-group-line',
-  }
 
   const onSubmit = async (data: UpdateNewsFeedSectorsProfessionnalsCommand) => {
     try {

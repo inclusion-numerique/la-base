@@ -97,7 +97,6 @@ export const getNewsFeedResources = async (
       id: string
       published: Date
       source: 'base' | 'profile' | 'theme' | 'professional_sector'
-      themes?: Theme[]
     }[]
   >(
     Prisma.sql`
@@ -191,7 +190,6 @@ export const getNewsFeedResources = async (
   return sortedResources.map((resource) => {
     const extraData = resourceMap.get(resource.id) || {
       source: 'base',
-      themes: null,
     }
     return {
       ...toResourceWithFeedbackAverage(resource),

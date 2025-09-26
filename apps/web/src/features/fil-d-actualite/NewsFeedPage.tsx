@@ -25,7 +25,7 @@ const NewsFeedPage = async ({
     <>
       <NewsFeedHeader />
       <div className="fr-flex fr-justify-content-space-between fr-col-12 fr-mt-6w">
-        <NewsFeedSearchFilters />
+        <NewsFeedSearchFilters userNewsFeed={userNewsFeed} />
         <div className="fr-flex fr-direction-column fr-col-8 fr-justify-content-space-between">
           <NewsFeedResults
             paginationParams={paginationParams}
