@@ -15,6 +15,9 @@
   height: 2rem !important;
   width: 2.5rem !important;
 }
+.newsFeedButton:hover {
+  background: var(--background-action-low-yellow-tournesol) !important;
+}
 
 :global(.fr-header .fr-header__tools-links .fr-btn).newsFeedButton {
   padding: 8px 12px !important;

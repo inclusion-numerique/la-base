@@ -7,6 +7,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
+import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { Dropdown } from './Dropdown/Dropdown'
@@ -124,35 +125,30 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                   </Link>
                 </li>
                 <li className="fr-hidden fr-unhidden-sm">
-                  <Button
-                    className={classNames(
-                      'fr-border-radius--8 fr-p-0',
-                      styles.newsFeedButton,
-                    )}
-                    linkProps={{
-                      href: user
-                        ? !user.newsFeed || !user.newsFeed.hasCompleteOnboarding
-                          ? '/fil-d-actualite/onboarding'
-                          : '/fil-d-actualite'
-                        : '/connexion?suivant=/fil-d-actualite',
-                    }}
-                    size="small"
-                  >
-                    <span
+                  <Tooltip title="Flux">
+                    <Button
                       className={classNames(
-                        'ri-flashlight-fill fr-text--sm',
-                        styles.newsFeedIcon,
+                        'fr-border-radius--8 fr-p-0',
+                        styles.newsFeedButton,
                       )}
-                    />
-                  </Button>
-                </li>
-                <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
-                  <span
-                    style={{
-                      height: '24px',
-                      borderLeft: '1px solid var(--border-default-grey)',
-                    }}
-                  />
+                      linkProps={{
+                        href: user
+                          ? !user.newsFeed ||
+                            !user.newsFeed.hasCompleteOnboarding
+                            ? '/fil-d-actualite/onboarding'
+                            : '/fil-d-actualite'
+                          : '/connexion?suivant=/fil-d-actualite',
+                      }}
+                      size="small"
+                    >
+                      <span
+                        className={classNames(
+                          'ri-flashlight-fill fr-text--sm',
+                          styles.newsFeedIcon,
+                        )}
+                      />
+                    </Button>
+                  </Tooltip>
                 </li>
                 <li className="fr-position-relative">
                   {user ? (

@@ -23,8 +23,31 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+const getInitialThemesSelection = (themes?: Theme[]): ThematicSelection[] => {
+  if (!themes || themes.length === 0) return []
+
+  const initialSelection: ThematicSelection[] = []
+
+  for (const theme of themes) {
+    for (const [_, options] of Object.entries(categoryThemesOptions)) {
+      const option = options.find((opt) => opt.value === theme)
+      if (option) {
+        initialSelection.push({
+          category: 'themes' as FilterKey,
+          option,
+        })
+        break
+      }
+    }
+  }
+
+  return initialSelection
+}
+
 const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
-  const [themesSelected, setThemesSelected] = useState<ThematicSelection[]>([])
+  const [themesSelected, setThemesSelected] = useState<ThematicSelection[]>(
+    getInitialThemesSelection(themes),
+  )
   const mutate = trpc.newsFeed.updateThemes.useMutation()
   const router = useRouter()
 
@@ -41,7 +64,17 @@ const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
   }, [themesSelected, form])
 
   const handleOnSelect = (option: SelectOption, category: FilterKey) => {
-    setThemesSelected([...themesSelected, { category, option }])
+    const isAlreadySelected = themesSelected.some(
+      (item) => item.option.value === option.value,
+    )
+
+    if (isAlreadySelected) {
+      setThemesSelected(
+        themesSelected.filter((item) => item.option.value !== option.value),
+      )
+    } else {
+      setThemesSelected([...themesSelected, { category, option }])
+    }
   }
 
   const onSelectAllInCategory = (category: FilterKey, selected: boolean) => {
@@ -77,15 +110,6 @@ const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
     <>
       <div className="fr-flex fr-direction-column fr-flex-gap-12v">
         {Object.entries(categoryThemesOptions).map(([key, value]) => {
-          const optionsWithDisabled = value.map((option) => {
-            const isAlreadySelected = themesSelected.some(
-              (item) => item.option.value === option.value,
-            )
-            return {
-              ...option,
-              disabled: isAlreadySelected,
-            }
-          })
           return (
             <SearchThematicsCategory
               key={key}
@@ -93,7 +117,7 @@ const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
               onSelect={handleOnSelect}
               selected={themesSelected}
               category={key as Category}
-              options={optionsWithDisabled}
+              options={value}
               withHint={false}
               onSelectAllInCategory={onSelectAllInCategory}
             />

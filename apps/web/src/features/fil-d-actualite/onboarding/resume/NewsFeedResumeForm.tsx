@@ -45,7 +45,7 @@ const NewsFeedResumeForm = ({
   return (
     <>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="fr-p-4w fr-border fr-border-radius--8 fr-mt-12v">
+        <div className="fr-p-4w fr-border fr-border-radius--8">
           <ToggleFormField
             control={form.control}
             path="monthlyResume"
