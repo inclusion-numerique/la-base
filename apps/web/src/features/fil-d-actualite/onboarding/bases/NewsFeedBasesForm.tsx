@@ -13,7 +13,7 @@ export default function NewsFeedBasesForm({
 }) {
   return (
     <>
-      <div className="fr-flex fr-direction-column fr-flex-gap-12v">
+      <div className="fr-flex fr-direction-column">
         {bases.map((base) => (
           <BaseCard key={base.id} base={base} user={user} compact={false} />
         ))}

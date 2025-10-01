@@ -4,6 +4,7 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
 import { useEffect } from 'react'
 import styles from './NewsFeedOnboardingDoneModal.module.css'
 
@@ -41,10 +42,15 @@ export const NewsFeedOnboardingDone = ({
             iconClassName={styles.icon}
             background={styles.iconContainer}
           />
-          <span className="fr-h3 fr-text-title--blue-france fr-mb-0">
+          <span className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
             Votre fil d'actualité est prêt !
           </span>
-          <span className="fr-text--xl fr-text--center fr-text-mention--grey fr-mb-0">
+          <span
+            className={classNames(
+              styles.description,
+              'fr-text--center fr-text-mention--grey fr-mb-0',
+            )}
+          >
             Découvrez les ressources liées à vos préférences et restez informé
             des nouvelles publications.
           </span>

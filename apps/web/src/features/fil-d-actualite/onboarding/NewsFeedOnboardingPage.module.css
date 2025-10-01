@@ -1,5 +1,6 @@
 .itemDescription {
   color: var(--text-mention-grey);
+  font-size: 14px;
 }
 
 .flashLightIconBackground {
@@ -8,4 +9,19 @@
 
 .flashLightIconColor {
   color: var(--text-label-yellow-tournesol);
+}
+
+.borderContainer {
+  @media (min-width: 48em) {
+    border-radius: 8px;
+    border: 1px solid var(--border-default-grey);
+  }
+}
+
+.featureItem {
+  text-align: center;
+
+  @media (min-width: 48em) {
+    text-align: left;
+  }
 }

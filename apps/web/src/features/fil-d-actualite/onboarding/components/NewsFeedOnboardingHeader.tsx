@@ -1,5 +1,7 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
+import styles from './NewsFeedOnboardingHeader.module.css'
 
 const NewsFeedOnboardingHeader = ({
   step,
@@ -17,7 +19,7 @@ const NewsFeedOnboardingHeader = ({
   previousHref?: string
 }) => {
   return (
-    <>
+    <div className="fr-mt-md-6w fr-mt-3w">
       {!!previousHref && (
         <Button
           iconId="fr-icon-arrow-left-line"
@@ -28,12 +30,14 @@ const NewsFeedOnboardingHeader = ({
           Précédent
         </Button>
       )}
-      <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+      <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-12v fr-mt-4v">
         <div>
           <span className="fr-text-mention--grey fr-text--sm fr-mb-1v">
             Étape {step} sur 4
           </span>
-          <h1 className="fr-h3 fr-mb-0">{title}</h1>
+          <h1 className={classNames(styles.title, 'fr-mb-0 fr-text--bold')}>
+            {title}
+          </h1>
           {!!nextStepTitle && (
             <div className="fr-mt-3v">
               <span className="fr-text-mention--grey fr-text--xs">
@@ -43,12 +47,17 @@ const NewsFeedOnboardingHeader = ({
             </div>
           )}
         </div>
-        <span className="fr-mb-0 fr-text--xl fr-text-mention--grey">
+        <span
+          className={classNames(
+            styles.description,
+            'fr-mb-0 fr-text-mention--grey',
+          )}
+        >
           {description}
         </span>
-        {!!noticeTitle && <Notice className="fr-mb-12v" title={noticeTitle} />}
+        {!!noticeTitle && <Notice title={noticeTitle} />}
       </div>
-    </>
+    </div>
   )
 }
 

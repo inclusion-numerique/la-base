@@ -22,9 +22,11 @@ export default async function NewsFeedOnboardingLayout({
       <SkipLinksPortal />
       <main id={contentId} className="fr-height-full">
         <div className="fr-height-full">
-          <div className="fr-container">
+          <div className="fr-container fr-pb-50v">
             <NewsFeedOnboardingBreadcrumb />
-            {children}
+            <div className="fr-container-md fr-container--medium">
+              {children}
+            </div>
           </div>
         </div>
       </main>

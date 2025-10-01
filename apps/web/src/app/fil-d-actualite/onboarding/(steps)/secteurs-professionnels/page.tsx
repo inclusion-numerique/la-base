@@ -2,7 +2,7 @@ import NewsFeedProfessionnalsSectorsPage from '@app/web/features/fil-d-actualite
 
 export default function NewsFeedProfessionnalsSectors() {
   return (
-    <div className="fr-container fr-container--medium fr-mt-6w">
+    <div className="fr-mt-6w">
       <NewsFeedProfessionnalsSectorsPage />
     </div>
   )

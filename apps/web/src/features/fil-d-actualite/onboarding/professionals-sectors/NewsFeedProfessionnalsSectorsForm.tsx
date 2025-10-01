@@ -65,6 +65,7 @@ const NewsFeedProfessionnalsSectors = ({
                   <span className="fr-hint-text">{option.hint}</span>
                 </div>
                 <IconInSquare
+                  className="fr-hidden fr-unhidden-md"
                   iconId={
                     professionalSectorsIcon[option.value as ProfessionalSector]
                   }
