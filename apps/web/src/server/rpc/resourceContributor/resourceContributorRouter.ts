@@ -19,6 +19,7 @@ export const resourceContributorRouter = router({
           name: true,
           firstName: true,
           lastName: true,
+          email: true,
           image: {
             select: {
               id: true,

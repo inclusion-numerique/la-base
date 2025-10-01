@@ -1,9 +1,13 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import ResourceCollectionsModal from '@app/web/app/(public)/ressources/[slug]/_components/ResourceCollectionsModal'
+import ResourceInformationsModalButton from '@app/web/app/(public)/ressources/[slug]/_components/ResourceInformationsModalButton'
+import { BaseResource } from '@app/web/server/bases/getBase'
+import { Resource } from '@app/web/server/resources/getResource'
 import { numberToString } from '@app/web/utils/formatNumber'
 import classNames from 'classnames'
 import React, { type ReactNode } from 'react'
 import CustomTag, { TagColor } from '../CustomTag'
+import styles from './ResourcesViewsAndMetadata.module.css'
 
 const ResourcesViewsAndMetadata = ({
   className,
@@ -11,12 +15,14 @@ const ResourcesViewsAndMetadata = ({
   children,
   showLabels = false,
   showPrivate = true,
+  context,
 }: {
   className?: string
-  resource: ResourceListItem
+  resource: Resource | BaseResource
   children?: ReactNode
   showLabels?: boolean
   showPrivate?: boolean
+  context: 'view' | 'card' | 'collection'
 }) => (
   <span
     data-testid="resources-views-and-metadata"
@@ -38,23 +44,36 @@ const ResourcesViewsAndMetadata = ({
       </span>
       <span className="fr-text--medium">·</span>
       <span className="fr-icon-bookmark-line fr-icon--sm" aria-hidden />
-      <span
-        className="fr-text--medium"
-        data-testid="resource-collections-count"
-      >
-        <span className="fr-text--nowrap">
-          {numberToString(resource._count.collections)}
-          {showLabels && (
-            <span className="fr-hidden fr-unhidden-sm">
+      {['card', 'collection'].includes(context) && (
+        <span
+          className="fr-text--medium"
+          data-testid="resource-collections-count"
+        >
+          <span className="fr-text--nowrap">
+            {numberToString(resource._count.collections)}
+            <span
+              className={classNames(
+                showLabels
+                  ? 'fr-hidden fr-unhidden-sm'
+                  : 'fr-hidden-sm fr-unhidden fr-sr-only',
+              )}
+            >
               {' '}
               Enregistrement{sPluriel(resource._count.collections)}
             </span>
-          )}
-          <span className="fr-hidden-sm fr-unhidden fr-sr-only">
-            Enregistrement{sPluriel(resource._count.collections)}
           </span>
         </span>
-      </span>
+      )}
+      {context === 'view' && (
+        <ResourceCollectionsModal resource={resource as Resource}>
+          <ResourceInformationsModalButton
+            title={`${numberToString(
+              resource._count.collections,
+            )} Enregistrement${sPluriel(resource._count.collections)}`}
+            className={classNames('fr-text--medium', styles.feedbackLink)}
+          />
+        </ResourceCollectionsModal>
+      )}
       {!resource.isPublic && showPrivate && (
         <span className="fr-unhidden fr-hidden-sm">
           <span className="fr-mr-1w fr-text--medium">·</span>
@@ -67,7 +86,6 @@ const ResourcesViewsAndMetadata = ({
     </span>
     {children && (
       <>
-        <span className="fr-hidden fr-unhidden-sm fr-text--medium">·</span>
         <span className="fr-flex fr-flex-gap-2v">{children}</span>
       </>
     )}

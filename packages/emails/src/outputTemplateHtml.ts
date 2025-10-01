@@ -1,4 +1,4 @@
-import { promises as fs, existsSync } from 'node:fs'
+import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import { getDirname } from '@app/config/dirname'
 import { compileMjml } from './mjml'

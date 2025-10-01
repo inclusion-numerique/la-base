@@ -15,8 +15,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 
 const hasKey = (
   event: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
-): event is React.KeyboardEvent<HTMLDivElement> =>
-  Object.prototype.hasOwnProperty.call(event, 'key')
+): event is React.KeyboardEvent<HTMLDivElement> => Object.hasOwn(event, 'key')
 
 export const Dropdown = ({
   id,

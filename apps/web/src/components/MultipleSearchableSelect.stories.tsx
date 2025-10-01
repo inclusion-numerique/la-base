@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import MultipleSearchableSelect from './MultipleSearchableSelect'
 
 const meta: Meta<typeof MultipleSearchableSelect> = {

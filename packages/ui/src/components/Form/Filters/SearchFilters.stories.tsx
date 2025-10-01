@@ -3,7 +3,7 @@ import { beneficiariesOptions } from '@app/web/themes/beneficiairies'
 import { professionalSectorsOptions } from '@app/web/themes/professionalSectors'
 import { resourceTypesOptions } from '@app/web/themes/resourceTypes'
 import { categoryThemesOptions } from '@app/web/themes/themes'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 export default {
   title: 'component/Filters',
@@ -15,7 +15,6 @@ type Story = StoryObj<typeof SearchFilters>
 export const Default: Story = {
   name: 'Multiple fitre',
   args: {
-    label: 'Affiner la recherche',
     categories: [
       {
         multiple: true,

@@ -2,9 +2,9 @@ import {
   fileValidation,
   maximumFileSizeInBytes,
 } from '@app/ui/components/Form/utils/fileValidation.server'
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { getStoragePrefix } from '@app/web/features/uploads/storage/getStoragePrefix'
 import { prismaClient } from '@app/web/prismaClient'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import {
   createSignedGetUrl,
   createSignedUploadUrl,

@@ -1,12 +1,12 @@
 'use client'
 
-import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
-import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
 import {
   type Category,
   type FilterKey,
   isCategoryComplete,
 } from '@app/ui/components/Form/Filters/filter'
+import SearchFilter from '@app/ui/components/Form/Filters/SearchFilter'
+import styles from '@app/ui/components/Form/Filters/SearchFilters.module.css'
 import OptionBadge from '@app/ui/components/Form/OptionBadge'
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import DeleteSearchFiltersButton from '@app/web/components/Search/Filters/DeleteSearchFiltersButton'
@@ -35,14 +35,12 @@ export type FiltersInitialValue = {
 
 const SearchFilters = ({
   searchParams,
-  label,
   categories,
   initialValues,
   tab,
 }: {
   searchParams: SearchParams
   tab: SearchTab
-  label: string
   categories: Category[]
   initialValues?: FiltersInitialValue[]
 }) => {
@@ -153,12 +151,13 @@ const SearchFilters = ({
         />
       </div>
       <div className="fr-unhidden-md fr-hidden">
-        <p className="fr-mb-1w">{label}</p>
         <div className={styles.buttons}>
-          <SearchThematicsFilters
-            selected={selected}
-            onSelectThematics={onSelectThematics}
-          />
+          {tab === 'ressources' && (
+            <SearchThematicsFilters
+              selected={selected}
+              onSelectThematics={onSelectThematics}
+            />
+          )}
           {/* We need to filter for the desktop view (since it's handled in the SearchThematicsFilters component above), but keep the 'themes' category in the props for mobile purpose */}
           {categories
             .filter((category) => category.id !== 'themes')

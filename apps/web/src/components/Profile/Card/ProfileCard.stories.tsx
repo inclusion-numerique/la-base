@@ -1,7 +1,7 @@
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { testSessionUser } from '@app/web/test/testSessionUser'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import ProfileCard from './ProfileCard'
 
 const profile = {

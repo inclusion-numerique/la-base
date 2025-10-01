@@ -132,7 +132,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
         'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
-      cy.testId('edit-card-button').eq(4).click()
+      cy.testId('edit-card-button').eq(6).click()
       cy.testId('visibility-radio-base-private').should('exist')
       cy.testId('visibility-radio-base-private').click({ force: true })
       cy.testId('edit-card-save-button').click()
@@ -171,7 +171,7 @@ describe('Utilisateur connecté, je peux modifier ma base', () => {
         'Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics.',
       )
 
-      cy.testId('edit-card-button').eq(4).click()
+      cy.testId('edit-card-button').eq(6).click()
 
       cy.testId('visibility-radio-base-private').click({ force: true })
       cy.testId('edit-card-save-button').click({ force: true })

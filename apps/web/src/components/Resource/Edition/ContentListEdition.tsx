@@ -57,7 +57,7 @@ const ContentListEdition = React.forwardRef(
       setOrderedContents(items)
 
     // Used to constrain the drag to the list
-    const dragBoundaryRef = useRef<HTMLElement>(null)
+    const dragBoundaryRef = useRef<HTMLUListElement>(null)
     const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
     const moveContent = async (fromIndex: number, toIndex: number) => {
@@ -104,7 +104,7 @@ const ContentListEdition = React.forwardRef(
               editionState={editionState}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
-              dragConstraints={dragBoundaryRef as RefObject<HTMLElement>}
+              dragConstraints={dragBoundaryRef as RefObject<HTMLUListElement>}
               moveUp={() => moveUp(index, moveContent)}
               moveDown={() => moveDown(index, contents.length, moveContent)}
               count={orderedContents.length}

@@ -16,7 +16,9 @@ export const metadata: Metadata = {
 
 const MagicLinkBufferPage = async ({
   searchParams,
-}: { searchParams: Promise<{ url: string }> }) => {
+}: {
+  searchParams: Promise<{ url: string }>
+}) => {
   const user = await getSessionUser()
   if (user) {
     redirect(getServerUrl('/'))

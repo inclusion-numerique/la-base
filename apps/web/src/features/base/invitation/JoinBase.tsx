@@ -96,6 +96,7 @@ export const JoinBase = ({
               />
             )}
             <BaseMetadata
+              user={null}
               base={{
                 ...invitation.base,
                 followedByData: null,

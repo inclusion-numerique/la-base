@@ -1,9 +1,8 @@
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { Argument, Command } from '@commander-js/extra-typings'
-
 import { output } from '@app/cli/output'
 import { getDirname } from '@app/config/dirname'
+import { Argument, Command } from '@commander-js/extra-typings'
 
 const { projectStackVariables, projectStackSensitiveVariables } = await import(
   '@app/cdk/ProjectStack'

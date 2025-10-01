@@ -1,7 +1,7 @@
 import { CollectionListWrapper } from '@app/storybook/components/CollectionListWrapper'
 import { mediumContainerStory, mobileStory } from '@app/storybook/storyHelper'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import type { ComponentProps } from 'react'
 import { collectionInBase } from './cardsStoriesHelpers'
 

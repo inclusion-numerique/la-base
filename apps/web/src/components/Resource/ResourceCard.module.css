@@ -1,13 +1,10 @@
 .container {
   padding-top: 16px;
   padding-bottom: 32px;
-  border-bottom: 1px solid var(--border-default-grey);
 
-  &:first-of-type {
-    border-top: 1px solid var(--border-default-grey);
-  }
+  border-top: 1px solid var(--border-default-grey);
 
-  @media (min-width: 576px) {
+  @media (min-width: 36em) {
     padding-bottom: 48px;
   }
 }
@@ -117,12 +114,31 @@
 }
 
 .description {
-  max-height: 72px;
-
-  /* Standard ellipsis does not work on multiline */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.withImage {
+  display: block;
+
+  @media (min-width: 48rem) {
+    display: none;
+  }
+}
+
+.metadataContainer {
+  flex-direction: column-reverse !important;
+}
+
+.clampTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;

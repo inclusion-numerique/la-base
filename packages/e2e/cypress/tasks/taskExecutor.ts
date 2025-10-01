@@ -9,8 +9,8 @@
 import { logToFile } from '@app/e2e/support/logToFile'
 import { TaskName, tasks } from '@app/e2e/tasks/tasks'
 import {
-  EncodedState,
   decodeSerializableState,
+  EncodedState,
   encodeSerializableState,
 } from '@app/web/utils/encodeSerializableState'
 

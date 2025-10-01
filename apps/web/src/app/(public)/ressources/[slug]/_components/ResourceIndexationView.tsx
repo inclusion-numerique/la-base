@@ -1,8 +1,8 @@
 import ThematicOptionBadge from '@app/web/components/Search/Filters/ThematicOptionBadge'
 import type { Resource } from '@app/web/server/resources/getResource'
 import {
-  type SearchParams,
   defaultSearchParams,
+  type SearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
 import { beneficiariesLabels } from '@app/web/themes/beneficiairies'

@@ -1,5 +1,5 @@
 import { ResourceWrapper } from '@app/storybook/components/ResourceWrapper'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import type { ComponentProps } from 'react'
 import SectionTitleContentView from './SectionTitleContentView'
 

@@ -1,16 +1,16 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import {
   applyCreationEvent,
   applyMutationEvent,
 } from '@app/web/server/resources/feature/createResourceProjection'
 import {
+  executeSideEffect,
   type HistoryEventsForResource,
   type ResourceCreationCommand,
   ResourceCreationCommandHandlers,
-  executeSideEffect,
 } from '@app/web/server/resources/feature/features'
+import type { ResourceCreationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { getResourceProjectionContext } from '@app/web/server/resources/getResourceFromEvents'
 import { v4 } from 'uuid'
 

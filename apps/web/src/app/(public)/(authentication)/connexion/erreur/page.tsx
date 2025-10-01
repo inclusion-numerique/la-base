@@ -1,8 +1,8 @@
-import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 

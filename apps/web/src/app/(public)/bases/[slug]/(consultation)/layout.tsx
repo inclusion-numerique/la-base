@@ -70,9 +70,7 @@ const BaseLayout = async ({
       <BaseHeader base={base} canWrite={canWrite} user={user} />
       <main id={contentId} className="fr-overflow-hidden">
         <BaseMenu base={base} />
-        <div className="fr-container fr-container--medium fr-mb-24w">
-          {children}
-        </div>
+        {children}
       </main>
     </>
   )

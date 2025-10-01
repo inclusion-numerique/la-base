@@ -1,6 +1,6 @@
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import type { BaseProfileListItem } from '@app/web/server/bases/getBasesList'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import { FeaturedBase } from './FeaturedBase'
 
 const meta = {

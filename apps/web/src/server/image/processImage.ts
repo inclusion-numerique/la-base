@@ -82,12 +82,11 @@ export const processImage = async ({
       },
     })
 
-    // biome-ignore lint/suspicious/noConsole: needed for debugging
     // biome-ignore lint/suspicious/noConsole: needed for debugging sharp race conditions
     console.log(
       `process image - error - ${image.id} - t:${stopwatch.current()}ms`,
     )
-    // biome-ignore lint/suspicious/noConsole: needed for debugging
+    // biome-ignore lint/suspicious/noConsole: needed for debugging sharp race conditions
     console.error('image processing error:', error)
 
     throw error
@@ -96,7 +95,7 @@ export const processImage = async ({
     if (sharpImage) {
       try {
         sharpImage.destroy()
-        // biome-ignore lint/suspicious/noConsole: needed for debugging
+        // biome-ignore lint/suspicious/noConsole: needed for debugging sharp race conditions
         console.log(
           `process image - sharp destroyed - ${image.id} - t:${stopwatch.current()}ms`,
         )

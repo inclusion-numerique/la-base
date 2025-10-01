@@ -1,7 +1,7 @@
 import NavigationSideMenu from '@app/ui/components/NavigationSideMenu'
 import classNames from 'classnames'
-import styles from './ResourceMobileNavigation.module.css'
 import type { ResourceNavigationData } from './getResourceNavigationData'
+import styles from './ResourceMobileNavigation.module.css'
 
 /**
  * Dropdown navigation menu only visible in mobile layout

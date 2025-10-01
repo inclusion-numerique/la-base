@@ -39,7 +39,6 @@ const BasesSearchLayout = async ({
       <div className="fr-container fr-container--medium fr-mb-30v">
         <SearchFilters
           initialValues={initialValues}
-          label="Affiner la recherche"
           searchParams={searchParams}
           tab="bases"
           categories={[

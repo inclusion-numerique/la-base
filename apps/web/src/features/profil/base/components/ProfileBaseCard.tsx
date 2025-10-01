@@ -38,6 +38,7 @@ const ProfileBaseCard = ({
           <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
         </Link>
         <BaseMetadata
+          user={null}
           className="fr-text-mention--grey fr-align-items-start"
           base={{
             ...base,

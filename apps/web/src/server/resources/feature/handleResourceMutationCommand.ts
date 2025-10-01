@@ -1,14 +1,14 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
-import { getPersistedResource } from '@app/web/server/resources/feature/PersistedResource'
-import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import { applyMutationEvent } from '@app/web/server/resources/feature/createResourceProjection'
 import {
+  executeSideEffect,
   type MutationHistoryResourceEvent,
   type ResourceMutationCommand,
   ResourceMutationCommandHandlers,
-  executeSideEffect,
 } from '@app/web/server/resources/feature/features'
+import { getPersistedResource } from '@app/web/server/resources/feature/PersistedResource'
+import type { ResourceMutationCommandHandler } from '@app/web/server/resources/feature/ResourceCommandHandler'
 import {
   getResourceFromEvents,
   getResourceProjectionContext,

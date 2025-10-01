@@ -96,6 +96,93 @@ describe('profileRouter', () => {
     })
   })
 
+  describe('searchProfileForMember', () => {
+    const executeSearchProfileForMemberProcedure = (input: {
+      query: string
+      notInBaseId?: string
+      notInResourceId?: string
+    }) =>
+      profileRouter
+        .createCaller(createTestContext({ user: givenUser }))
+        .searchProfileForMember(input)
+
+    it('should not return deleted profiles in search results', async () => {
+      const deletedUserId = v4()
+      const deletedUserEmail = `deleted+${deletedUserId}@inclusion-numerique.anct.gouv.fr`
+      const deletedUserSlug = `deleted+${deletedUserId}`
+
+      usersToDelete.push(deletedUserId)
+
+      await prismaClient.user.create({
+        data: {
+          id: deletedUserId,
+          email: deletedUserEmail,
+          slug: deletedUserSlug,
+          firstName: 'Deleted',
+          lastName: 'User',
+          name: 'Deleted User',
+          emailVerified: new Date(),
+          deleted: new Date(),
+        },
+      })
+
+      const searchResults = await executeSearchProfileForMemberProcedure({
+        query: 'Deleted',
+      })
+
+      expect(searchResults).toHaveLength(0)
+    })
+
+    it('should return non-deleted profiles in search results only', async () => {
+      const activeUserId = v4()
+      const activeUserEmail = `active+${activeUserId}@inclusion-numerique.anct.gouv.fr`
+      const activeUserSlug = `active+${activeUserId}`
+      const deletedUserId = v4()
+      const deletedUserEmail = `deleted+${deletedUserId}@inclusion-numerique.anct.gouv.fr`
+      const deletedUserSlug = `deleted+${deletedUserId}`
+
+      usersToDelete.push(activeUserId)
+      usersToDelete.push(deletedUserId)
+
+      await prismaClient.$transaction(async (tx) => {
+        await tx.user.create({
+          data: {
+            id: deletedUserId,
+            email: deletedUserEmail,
+            slug: deletedUserSlug,
+            firstName: 'Deleted',
+            lastName: 'User',
+            name: 'Deleted User',
+            emailVerified: new Date(),
+            deleted: new Date(),
+          },
+        })
+        await tx.user.create({
+          data: {
+            id: activeUserId,
+            email: activeUserEmail,
+            slug: activeUserSlug,
+            firstName: 'Active',
+            lastName: 'User',
+            name: 'Active User',
+            emailVerified: new Date(),
+            deleted: null,
+          },
+        })
+      })
+
+      const searchResults = await executeSearchProfileForMemberProcedure({
+        query: 'Active',
+      })
+
+      expect(searchResults.length).toBe(1)
+      expect(searchResults[0].id).toBe(activeUserId)
+      expect(searchResults.some((result) => result.id === deletedUserId)).toBe(
+        false,
+      )
+    })
+  })
+
   describe('updateVisibility', () => {
     const executeMutateProcedure = (input: UpdateProfileVisibilityCommand) =>
       profileRouter

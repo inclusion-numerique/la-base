@@ -43,6 +43,7 @@ const ProfileCard = ({
           <div className="fr-flex fr-flex-gap-2v fr-align-items-baseline">
             {displayProfileMetadata && (
               <ProfileMetadata
+                user={null}
                 className="fr-text-mention--grey"
                 resourcesCount={countProfileResources(profile)}
                 followedByCount={profile._count.followedBy}

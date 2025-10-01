@@ -66,4 +66,10 @@ export const ServerWebAppConfig = {
   FriendlyCaptcha: {
     apiKey: process.env.FRIENDLY_CAPTCHA_API_KEY ?? '',
   },
+  Sentry: {
+    authToken: process.env.SENTRY_AUTH_TOKEN ?? '',
+    url: process.env.SENTRY_URL ?? '',
+    org: process.env.SENTRY_ORG ?? '',
+    project: process.env.SENTRY_PROJECT ?? '',
+  },
 }

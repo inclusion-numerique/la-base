@@ -1,7 +1,7 @@
 'use client'
 
 import { SelectOption } from '@app/ui/components/Form/utils/options'
-import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'

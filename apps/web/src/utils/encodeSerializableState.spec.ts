@@ -1,6 +1,6 @@
 import {
-  type EncodedState,
   decodeSerializableState,
+  type EncodedState,
   encodeSerializableState,
 } from './encodeSerializableState'
 

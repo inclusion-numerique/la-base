@@ -1,5 +1,6 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import ResourceCollectionsModal from '@app/web/app/(public)/ressources/[slug]/_components/ResourceCollectionsModal'
+import ResourceInformationsModalButton from '@app/web/app/(public)/ressources/[slug]/_components/ResourceInformationsModalButton'
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
 import ResourceLicenceInformations from '@app/web/features/resources/licence/components/ResourceLicenceInformations'
 import type { Resource } from '@app/web/server/resources/getResource'
@@ -24,7 +25,9 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
         {resource._count.collections > 0 && (
           <>
             <span className="fr-hidden fr-unhidden-sm">·</span>
-            <ResourceCollectionsModal resource={resource} />
+            <ResourceCollectionsModal resource={resource}>
+              <ResourceInformationsModalButton className="fr-link" />
+            </ResourceCollectionsModal>
           </>
         )}
       </div>

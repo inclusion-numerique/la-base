@@ -2,9 +2,9 @@ import AdministrationBreadcrumbs from '@app/web/app/administration/Administratio
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import AdministrationSearchResource from '@app/web/app/administration/ressources/AdministrationSearchResource'
+import { getResourcesListPageData } from '@app/web/app/administration/ressources/getResourcesListPageData'
 import type { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
 import ResourcesTable from '@app/web/app/administration/ressources/ResourcesTable'
-import { getResourcesListPageData } from '@app/web/app/administration/ressources/getResourcesListPageData'
 import { numberToString } from '@app/web/utils/formatNumber'
 
 const AdministrationRessourcesPage = async ({

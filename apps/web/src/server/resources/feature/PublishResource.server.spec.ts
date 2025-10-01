@@ -1,9 +1,9 @@
-import type { ResourcePublished } from '@app/web/server/resources/feature/PublishResource'
-import { onPublished } from '@app/web/server/resources/feature/PublishResource.server'
 import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
+import type { ResourcePublished } from '@app/web/server/resources/feature/PublishResource'
+import { onPublished } from '@app/web/server/resources/feature/PublishResource.server'
 import { type PrismaClient, ResourceLicence } from '@prisma/client'
 
 describe('onPublished', () => {

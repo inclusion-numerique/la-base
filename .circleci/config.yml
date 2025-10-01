@@ -47,7 +47,7 @@ executors:
 parameters:
   cache_version:
     type: string
-    default: '2025-06-05-01'
+    default: '2025-09-25-01'
   virtual_store_dir:
     type: string
     default: './.pnpm'
@@ -567,7 +567,7 @@ jobs:
           when: on_fail
 
   compute_project_infrastructure_diff:
-    executor: node
+    executor: node22
     resource_class: large
     steps:
       - checkout
@@ -588,7 +588,7 @@ jobs:
             pnpm --silent -F @app/cdk cdktf diff project --var-file .tfvars.json
 
   project_infrastructure_deployment:
-    executor: node
+    executor: node22
     resource_class: large
     steps:
       - checkout
@@ -653,7 +653,7 @@ jobs:
                 "https://api.scaleway.com/rdb/v1/regions/fr-par/backups"
 
   web_app_preview_deletion:
-    executor: node
+    executor: node22
     resource_class: large
     steps:
       - checkout
@@ -687,6 +687,9 @@ jobs:
       - run:
           name: Deactivate Github deployments
           command: pnpm --silent cli github:deployment:deactivate << pipeline.parameters.preview_deletion_branch >>
+      - run:
+          name: 'Delete Sentry environment issues'
+          command: pnpm --silent cli sentry:delete-environment-issues << pipeline.parameters.preview_deletion_branch >>
 
 commands:
   install_pnpm:

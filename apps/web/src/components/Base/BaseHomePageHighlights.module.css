@@ -1,0 +1,34 @@
+.collectionsGrid {
+  display: grid;
+  gap: 24px;
+}
+
+.collectionsGridTwoColumns {
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.collectionsGridThreeColumns {
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.resourcesGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 48em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.resourceCard {
+  max-width: 316px;
+}

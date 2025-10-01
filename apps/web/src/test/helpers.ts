@@ -55,9 +55,8 @@ export const createTestProfile = (publicProfile?: boolean) =>
         total: 0,
         public: 0,
         private: 0,
-        visible: 0,
       },
-      visible: [],
+      followedBy: [],
     },
     _count: {
       followedBy: 0,
@@ -184,6 +183,10 @@ export const createTestBase = (
     coverImage: null,
     collections: [],
     followedBy: [],
+    highlightResources: 'LatestPublished',
+    highlightedResources: [],
+    highlightedCollections: [],
+    highlightCollections: true,
     followedByData: {
       counts: {
         total: 0,

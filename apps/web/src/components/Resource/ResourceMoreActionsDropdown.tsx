@@ -84,6 +84,7 @@ export const ResourceMoreActionsDropdown = ({
             url={getServerUrl(`/ressources/${resource.slug}`, {
               absolutePath: true,
             })}
+            withTooltip={false}
           >
             <span
               className="ri-link fr-mr-1w fr-text-label--blue-france"

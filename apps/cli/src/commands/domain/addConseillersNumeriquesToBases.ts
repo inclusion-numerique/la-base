@@ -1,6 +1,6 @@
 import {
-  DeploymentTargetOption,
   configureDeploymentTarget,
+  DeploymentTargetOption,
 } from '@app/cli/deploymentTarget'
 import { output } from '@app/cli/output'
 import { prismaClient } from '@app/web/prismaClient'

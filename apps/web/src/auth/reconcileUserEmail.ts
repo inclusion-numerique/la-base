@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/nextjs'
-
 /**
  * For handling external systems that changed or invalidate user emails,
  * we need a way to reconcile the user email with the one in the system.
@@ -8,6 +6,7 @@ import * as Sentry from '@sentry/nextjs'
  * Instead, we update the user email in the system.
  */
 import { prismaClient } from '@app/web/prismaClient'
+import * as Sentry from '@sentry/nextjs'
 
 export const getUserEmailReconciliation = async (expectedNewEmail: string) => {
   const emailReconcilation =

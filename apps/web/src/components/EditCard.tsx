@@ -34,6 +34,7 @@ const EditCard = <
   form,
   mutation,
   noRefresh,
+  withEditButton = true,
 }: {
   id?: string
   className?: string
@@ -46,6 +47,7 @@ const EditCard = <
   form: UseFormReturn<T>
   mutation: (data: T) => Promise<V>
   noRefresh?: boolean
+  withEditButton?: boolean
 }) => {
   const router = useRouter()
   const [editMode, setEditMode] = useState(false)
@@ -73,7 +75,7 @@ const EditCard = <
             {title}
           </CardTitle>
           <div className="fr-hidden fr-unhidden-sm">
-            {!editMode && setEditMode && (
+            {!!withEditButton && !editMode && setEditMode && (
               <Button
                 data-testid="edit-card-button"
                 className="fr-text--sm fr-text--medium fr-p-1v"

@@ -1,7 +1,7 @@
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import {
-  type Category as ThemeCategory,
   categoryThemesOptions,
+  type Category as ThemeCategory,
 } from '@app/web/themes/themes'
 
 export type FilterKey =

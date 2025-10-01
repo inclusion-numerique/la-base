@@ -8,8 +8,8 @@ import InviteBaseMemberRow from '@app/web/features/base/members/components/Invit
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import {
-  type ReactNode,
   forwardRef,
+  type ReactNode,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -23,6 +23,7 @@ const DEFAULT_LIMIT = 5
 
 export type MultipleSearchableSelectRef = {
   selectFirstResult: () => void
+  reset: () => void
 }
 
 const MultipleSearchableSelect = forwardRef<
@@ -189,12 +190,19 @@ const MultipleSearchableSelect = forwardRef<
       ],
     )
 
+    const reset = useCallback(() => {
+      setInternalSelection([])
+      setInputValue('')
+      onSelectProperty([])
+    }, [onSelectProperty])
+
     useImperativeHandle(
       ref,
       () => ({
         selectFirstResult: () => selectFirstResult(0),
+        reset,
       }),
-      [selectFirstResult],
+      [selectFirstResult, reset],
     )
 
     const handleOnHide = () => setSelectedIndex(-1)

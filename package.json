@@ -7,7 +7,7 @@
   "engines": {
     "node": "^24.5"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.16.1",
   "scripts": {
     "build": "turbo build",
     "cli": "dotenv -- ./apps/cli/node_modules/.bin/tsx apps/cli/src/index.ts",
@@ -42,7 +42,7 @@
     "node": "24.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.2.2",
     "@manypkg/cli": "^0.25.0",
     "dotenv": "^17.2.1",
     "dotenv-cli": "^10.0.0",

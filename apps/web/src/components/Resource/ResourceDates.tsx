@@ -7,12 +7,14 @@ import classNames from 'classnames'
 const ResourceDates = ({
   resource,
   canEdit,
+  onlyUpdatedDate = false,
 }: {
   canEdit: boolean
   resource: Pick<
     Resource,
     'published' | 'lastPublished' | 'created' | 'updated'
   >
+  onlyUpdatedDate?: boolean
 }) => {
   const lastPublishedDay = resource.lastPublished
     ? dateAsDay(resource.lastPublished)
@@ -35,11 +37,17 @@ const ResourceDates = ({
 
     const dateContent = (
       <span>
-        Publiée&nbsp;le&nbsp;{publishedDay}
-        {lastPublishedDay !== publishedDay && (
+        {onlyUpdatedDate && lastPublishedDay !== publishedDay ? (
+          <>Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}</>
+        ) : (
           <>
-            <span className="fr-mx-1v fr-text--bold">&nbsp;︱&nbsp;</span>
-            Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
+            Publiée&nbsp;le&nbsp;{publishedDay}
+            {lastPublishedDay !== publishedDay && (
+              <>
+                <span className="fr-mx-1v fr-text--bold">&nbsp;︱&nbsp;</span>
+                Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
+              </>
+            )}
           </>
         )}
       </span>
@@ -49,7 +57,7 @@ const ResourceDates = ({
       return (
         <div className="fr-flex fr-direction-column fr-direction-md-row fr-flex-gap-2v fr-flex-gap-md-0">
           {unpublishedModifications}
-          {dateContent}
+          Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
         </div>
       )
     }

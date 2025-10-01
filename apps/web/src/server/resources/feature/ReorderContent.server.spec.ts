@@ -1,9 +1,9 @@
-import type { ContentReordered } from '@app/web/server/resources/feature/ReorderContent'
-import { applyContentReordered } from '@app/web/server/resources/feature/ReorderContent.server'
 import type {
   ContentProjection,
   ResourceProjection,
 } from '@app/web/server/resources/feature/createResourceProjection'
+import type { ContentReordered } from '@app/web/server/resources/feature/ReorderContent'
+import { applyContentReordered } from '@app/web/server/resources/feature/ReorderContent.server'
 import { ResourceLicence } from '@prisma/client'
 
 describe('applyContentReordered', () => {

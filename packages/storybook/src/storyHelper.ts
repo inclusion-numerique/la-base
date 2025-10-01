@@ -1,4 +1,4 @@
-import { StoryObj } from '@storybook/react'
+import type { StoryObj } from '@storybook/nextjs'
 
 export const mobileStoryParameters = {
   chromatic: { viewports: [320, 568] },
@@ -6,9 +6,11 @@ export const mobileStoryParameters = {
   viewport: {
     defaultViewport: 'mobile1',
   },
-} as const
+} satisfies StoryObj['parameters']
 
-export const mobileStory = <T>(story: StoryObj<T>): StoryObj<T> => {
+export const mobileStory = <T extends { parameters?: StoryObj['parameters'] }>(
+  story: T,
+): T => {
   const mobileStoryParams = {
     ...story.parameters,
     ...mobileStoryParameters,
@@ -26,9 +28,13 @@ export const mediumContainerStoryParameters = {
   viewport: {
     defaultViewport: 'mediumContainer',
   },
-} as const
+} satisfies StoryObj['parameters']
 
-export const mediumContainerStory = <T>(story: StoryObj<T>): StoryObj<T> => {
+export const mediumContainerStory = <
+  T extends { parameters?: StoryObj['parameters'] },
+>(
+  story: T,
+): T => {
   const mediumContainerStoryParams = {
     ...story.parameters,
     ...mediumContainerStoryParameters,

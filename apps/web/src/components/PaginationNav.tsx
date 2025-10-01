@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import type { ComponentProps } from 'react'
+import styles from './PaginationNav.module.css'
 
 // Only display at most 6 pages numbered links
 /**
@@ -64,7 +65,12 @@ const PaginationNav = ({
         className,
       )}
     >
-      <ul className="fr-pagination__list">
+      <ul
+        className={classNames(
+          styles.paginationListContainer,
+          'fr-pagination__list',
+        )}
+      >
         <li>
           {isFirstPage ? (
             <a

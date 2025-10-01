@@ -1,4 +1,4 @@
-import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/membres/searchParams'
+import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
@@ -8,6 +8,7 @@ import {
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
 import type { Prisma } from '@prisma/client'
+import { HighlightResourcesType } from '@prisma/client'
 import {
   collectionSelect,
   computeCollectionsListWhereForUser,
@@ -44,6 +45,8 @@ export const baseSelect = (
     twitter: true,
     website: true,
     isPublic: true,
+    highlightCollections: true,
+    highlightResources: true,
     createdBy: {
       select: {
         id: true,
@@ -91,6 +94,7 @@ export const baseSelect = (
             name: true,
             isPublic: true,
             followedBy: true,
+            slug: true,
             _count: {
               select: { resources: true, followedBy: true },
             },
@@ -164,10 +168,7 @@ export const getBase = async ({
     .map(({ follower }) => follower)
     .filter(({ isPublic }) => !isPublic)
 
-  const visibleFollowedBy = [
-    ...publicFollowedBy,
-    ...privateFollowedBy.filter(({ id }) => id === user?.id),
-  ]
+  const visibleFollowedBy = [...publicFollowedBy, ...privateFollowedBy]
 
   const followedByData = {
     counts: {
@@ -182,6 +183,48 @@ export const getBase = async ({
   return {
     ...base,
     followedByData,
+  }
+}
+
+type RawResourceForSorting = {
+  viewsCount: number
+  resourceFeedback: { rating: number }[]
+  lastPublished: Date | null
+}
+
+const sortResourcesByMostViewed = <T extends RawResourceForSorting>(
+  resources: T[],
+): T[] => resources.sort((a, b) => b.viewsCount - a.viewsCount)
+
+const sortResourcesByMostRecommended = <T extends RawResourceForSorting>(
+  resources: T[],
+): T[] =>
+  resources.sort(
+    (a, b) => b.resourceFeedback.length - a.resourceFeedback.length,
+  )
+
+const sortResourcesByLatestPublished = <T extends RawResourceForSorting>(
+  resources: T[],
+): T[] =>
+  resources.sort((a, b) => {
+    const aDate = a.lastPublished ? new Date(a.lastPublished).getTime() : 0
+    const bDate = b.lastPublished ? new Date(b.lastPublished).getTime() : 0
+    return bDate - aDate
+  })
+
+const sortResources = <T extends RawResourceForSorting>(
+  resources: T[],
+  type: HighlightResourcesType,
+): T[] => {
+  switch (type) {
+    case HighlightResourcesType.MostViewed:
+      return sortResourcesByMostViewed(resources)
+    case HighlightResourcesType.MostRecommended:
+      return sortResourcesByMostRecommended(resources)
+    case HighlightResourcesType.LatestPublished:
+      return sortResourcesByLatestPublished(resources)
+    default:
+      return resources
   }
 }
 
@@ -200,11 +243,18 @@ export const basePageQuery = async (
       viewsCount: true,
     },
   })
-
   return basePage == null
     ? null
     : {
         ...basePage,
+        highlightedResources: basePage.highlightResources
+          ? sortResources(basePage.resources, basePage.highlightResources)
+              .slice(0, 3)
+              .map(toResourceWithFeedbackAverage)
+          : [],
+        highlightedCollections: basePage.highlightCollections
+          ? [...basePage.collections].slice(0, 3)
+          : [],
         resources: basePage.resources.map(toResourceWithFeedbackAverage),
         _count: {
           ...basePage._count,

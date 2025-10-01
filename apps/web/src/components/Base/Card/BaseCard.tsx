@@ -53,6 +53,7 @@ const BaseCard = ({
         )}
       </div>
       <BaseMetadata
+        user={null}
         className={classNames(
           compact ? 'fr-mt-2v' : 'fr-mt-3v fr-mt-md-4v',
           'fr-text-mention--grey',

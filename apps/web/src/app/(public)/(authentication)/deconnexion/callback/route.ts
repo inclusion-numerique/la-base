@@ -7,8 +7,8 @@ import {
   sessionCookie,
 } from '@app/web/security/authentication'
 import {
-  type EncodedState,
   decodeSerializableState,
+  type EncodedState,
 } from '@app/web/utils/encodeSerializableState'
 import type { NextRequest } from 'next/server'
 

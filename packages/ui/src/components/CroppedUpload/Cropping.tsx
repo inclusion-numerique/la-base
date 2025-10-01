@@ -12,6 +12,7 @@ import Cropper, { ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import styles from './CroppedUpload.module.css'
 import { ImageWithName } from './utils'
+
 import CropStartEvent = Cropper.CropStartEvent
 import CropEndEvent = Cropper.CropEndEvent
 

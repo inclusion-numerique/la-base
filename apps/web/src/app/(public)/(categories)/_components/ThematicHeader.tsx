@@ -21,7 +21,7 @@ export const ThematicHeader = ({
       />
       <h1 className="fr-h3 fr-m-2w">{category}</h1>
       <p className="fr-mb-2w">{description}</p>
-      <span className="fr-flex fr-flex-gap-2v fr-direction-md-row fr-justify-content-center">
+      <span className="fr-flex fr-flex-gap-2v fr-direction-column fr-direction-md-row fr-justify-content-center">
         <span className="fr-flex fr-flex-gap-2v fr-align-items-baseline">
           <span className="ri-file-text-line fr-text--lg fr-mb-0" aria-hidden />
           <span className="fr-text--bold">{resources}</span> Ressources

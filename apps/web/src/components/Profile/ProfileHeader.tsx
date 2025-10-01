@@ -37,6 +37,7 @@ const ProfileHeader = ({
       <div id={headerId} className="fr-align-items-center">
         <ProfileInformations
           profile={profile}
+          user={user}
           resourcesCount={resourcesCount}
           context="profile"
         >

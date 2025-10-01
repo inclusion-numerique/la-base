@@ -1,6 +1,6 @@
-import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { verifyCaptchaResponse } from '@app/web/features/captcha/verifyCaptchaResponse'
 import { prismaClient } from '@app/web/prismaClient'
+import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { UserSignupValidation } from '@app/web/server/rpc/user/userSignup'
 import z from 'zod'
 

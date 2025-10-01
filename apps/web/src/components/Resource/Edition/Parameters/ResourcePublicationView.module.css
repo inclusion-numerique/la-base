@@ -1,8 +1,13 @@
 .baseInfo {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   :global .fr-tag {
     flex-shrink: 0;
@@ -11,5 +16,12 @@
 
 .baseName {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+  }
 }

@@ -3,6 +3,8 @@
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import EmptyUserAvatar from '@app/web/components/EmptyUserAvatar'
+import type { MultipleSearchableSelectRef } from '@app/web/components/MultipleSearchableSelect'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import InviteUsers from '@app/web/features/base/invitation/components/InviteUsers'
@@ -18,7 +20,7 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import styles from './InviteResourceContributors.module.css'
 
@@ -30,6 +32,7 @@ const InviteResourceContributors = ({
   onSuccess?: () => void
 }) => {
   const router = useRouter()
+  const inviteUsersRef = useRef<MultipleSearchableSelectRef>(null)
   const form = useForm<InviteContributorCommand>({
     resolver: zodResolver(InviteContributorCommandValidation),
     defaultValues: {
@@ -86,6 +89,12 @@ const InviteResourceContributors = ({
     try {
       await invitationMutate.mutateAsync(data)
       await refetch()
+      form.reset({
+        resourceId: resource.id,
+        contributors: [],
+        newMembers: [],
+      })
+      inviteUsersRef.current?.reset()
       if (onSuccess) {
         onSuccess()
       }
@@ -114,11 +123,13 @@ const InviteResourceContributors = ({
     form.setValue('newMembers', contributorsWithEmails)
   }
 
+  const disabledButton =
+    form.watch('contributors')?.length === 0 &&
+    form.watch('newMembers')?.length === 0
+
   return (
     <>
-      <p className="fr-mt-4w fr-mb-2w">
-        Liste des contributeurs de la ressource
-      </p>
+      <p className="fr-mb-2w">Liste des contributeurs de la ressource</p>
       {resource.base?.title && (
         <div className={styles.contributors}>
           <span className="fr-icon-team-line" />
@@ -144,32 +155,59 @@ const InviteResourceContributors = ({
             </div>
             <div className={styles.creator}>Propriétaire</div>
           </div>
+          {contributors &&
+            contributors.map((contributor) => (
+              <div
+                key={contributor.id}
+                className={styles.contributor}
+                data-testid="contributors-contributor"
+              >
+                <div className={styles.user}>
+                  {contributor.name ? (
+                    <RoundProfileImage user={contributor} />
+                  ) : (
+                    <EmptyUserAvatar />
+                  )}
+                  <div className="fr-flex fr-direction-column fr-width-full">
+                    {!!contributor.name && (
+                      <>
+                        <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                          {contributor.name}
+                        </span>
+                        <span className="fr-ml-1w fr-text--xs fr-mb-0 fr-hint-text">
+                          {contributor.email}
+                        </span>
+                      </>
+                    )}
+                    {!!contributor.email && !contributor.name && (
+                      <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                        {contributor.email}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <Button
+                  title="Supprimer des contributeurs"
+                  priority="tertiary no outline"
+                  size="small"
+                  nativeButtonProps={{
+                    'data-testid': 'remove-contributor-button',
+                  }}
+                  type="button"
+                  onClick={() => onDelete(contributor.id)}
+                >
+                  Retirer
+                  <span
+                    className="ri-close-circle-line fr-ml-1w"
+                    aria-hidden="true"
+                  />
+                </Button>
+              </div>
+            ))}
           <hr className="fr-mt-4w fr-pb-4w" />
         </>
       )}
-      {contributors &&
-        contributors.map((contributor) => (
-          <div
-            key={contributor.id}
-            className={styles.contributor}
-            data-testid="contributors-contributor"
-          >
-            <div className={styles.user}>
-              <RoundProfileImage className="fr-mr-1w" user={contributor} />
-              {contributor.name}
-            </div>
-            <Button
-              title="Supprimer des contributeurs"
-              iconId="fr-icon-close-line"
-              priority="tertiary no outline"
-              size="small"
-              nativeButtonProps={{
-                'data-testid': 'remove-contributor-button',
-              }}
-              onClick={() => onDelete(contributor.id)}
-            />
-          </div>
-        ))}
+
       <form onSubmit={form.handleSubmit(onInvit)}>
         <div className={styles.inviteInput}>
           <div className={styles.input}>
@@ -178,6 +216,7 @@ const InviteResourceContributors = ({
               name="contributors"
               render={({ fieldState: { error } }) => (
                 <InviteUsers
+                  ref={inviteUsersRef}
                   withBadges={false}
                   label="Ajouter un contributeur"
                   setEmailsError={setEmailsError}
@@ -197,6 +236,7 @@ const InviteResourceContributors = ({
               nativeButtonProps={{
                 'data-testid': 'invite-member-modal-button',
               }}
+              disabled={disabledButton}
               {...buttonLoadingClassname(
                 form.formState.isSubmitting,
                 styles.inviteButton,

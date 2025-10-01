@@ -3,15 +3,17 @@ import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import ResourceContentView from '@app/web/components/Resource/Contents/ResourceContentView'
 import InviteContributorModal from '@app/web/components/Resource/Contributors/InviteContributorModal'
 import DeleteResource from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
+import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
 import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesViewsAndMetadata'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
-import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { hasIndexation } from '@app/web/utils/indexation'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { addAnchorIdsToResourceContents } from './addAnchorIdsToResourceContents'
+import { getResourceNavigationData } from './getResourceNavigationData'
 import RegisterResourceView from './RegisterResourceView'
 import ResourceActions from './ResourceActions'
 import ResourceDesktopNavigation from './ResourceDesktopNavigation'
@@ -20,8 +22,6 @@ import ResourceMobileNavigation from './ResourceMobileNavigation'
 import ResourcePublicStateBadge from './ResourcePublicStateBadge'
 import ResourceReport from './ResourceReport'
 import styles from './ResourceView.module.css'
-import { addAnchorIdsToResourceContents } from './addAnchorIdsToResourceContents'
-import { getResourceNavigationData } from './getResourceNavigationData'
 
 const ResourceView = ({
   resource,
@@ -98,16 +98,23 @@ const ResourceView = ({
             </p>
             {resource.published && (
               <ResourcesViewsAndMetadata
+                context="view"
                 resource={resource}
                 showLabels
                 showPrivate={false}
                 className="fr-my-4v fr-my-md-6v"
               >
+                <span className="fr-hidden fr-unhidden-sm fr-text--medium">
+                  ·
+                </span>
                 {resource._count.resourceFeedback > 0 && (
                   <>
                     <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
-                      className="fr-text--medium fr-link--underline-on-hover"
+                      className={classNames(
+                        'fr-text--medium fr-link--underline-on-hover',
+                        styles.feedbackLink,
+                      )}
                       href={`/ressources/${resource.slug}/avis`}
                     >
                       {resource._count.resourceFeedback}&nbsp;avis

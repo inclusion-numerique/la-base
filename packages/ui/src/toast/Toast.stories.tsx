@@ -1,7 +1,7 @@
-import Toaster from '@app/ui/toast/Toaster'
 import { createToast } from '@app/ui/toast/createToast'
+import Toaster from '@app/ui/toast/Toaster'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/nextjs'
 import { useEffect } from 'react'
 
 const meta: Meta<typeof Toaster> = {

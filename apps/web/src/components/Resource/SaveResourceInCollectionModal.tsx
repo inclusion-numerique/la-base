@@ -1,16 +1,16 @@
 'use client'
 
 import InputFormField from '@app/ui/components/Form/InputFormField'
-import RawModal from '@app/ui/components/Modal/RawModal'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
+import RawModal from '@app/ui/components/Modal/RawModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import EmptyBox from '@app/web/components/EmptyBox'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import VisibilityField from '@app/web/components/VisibilityField'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import VisibilityField from '@app/web/components/VisibilityField'
 import { useIsMobile } from '@app/web/hooks/useIsMobile'
 import { collectionTitleMaxLength } from '@app/web/server/collections/collectionConstraints'
 import {
@@ -330,9 +330,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       <RawModal
         className={styles.modal}
         title={
-          inCollectionCreation
-            ? 'Créer une collection'
-            : 'Enregistrer cette ressource dans :'
+          inCollectionCreation ? 'Créer une collection' : 'Enregistrer dans :'
         }
         id={SaveResourceInCollectionDynamicModal.id}
         buttons={

@@ -24,17 +24,31 @@ const ResourceActions = ({
     <div className={styles.container}>
       <div>
         {canWrite && (
-          <Button
-            size="small"
-            data-testid="resource-edition-button"
-            iconId="fr-icon-edit-line"
-            linkProps={{
-              href: `/ressources/${resource.slug}/editer`,
-              prefetch: false,
-            }}
-          >
-            Modifier
-          </Button>
+          <>
+            <Button
+              size="small"
+              data-testid="resource-edition-button"
+              iconId="fr-icon-edit-line"
+              className="fr-unhidden-sm fr-hidden"
+              linkProps={{
+                href: `/ressources/${resource.slug}/editer`,
+                prefetch: false,
+              }}
+            >
+              Modifier
+            </Button>
+            <Button
+              data-testid="resource-edition-button"
+              iconId="fr-icon-edit-line"
+              className="fr-hidden-sm"
+              linkProps={{
+                href: `/ressources/${resource.slug}/editer`,
+                prefetch: false,
+              }}
+            >
+              Modifier
+            </Button>
+          </>
         )}
         {isPublished && (
           <>

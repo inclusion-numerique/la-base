@@ -1,6 +1,6 @@
 import type { CreateResourceCommand } from '@app/web/server/resources/feature/CreateResource'
-import type { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import type { ResourceMutationCommand } from '@app/web/server/resources/feature/features'
+import type { PublishCommand } from '@app/web/server/resources/feature/PublishResource'
 import { v4 } from 'uuid'
 
 export const createTestPublishResourceCommand = (
