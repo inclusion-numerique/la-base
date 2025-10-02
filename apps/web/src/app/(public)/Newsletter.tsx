@@ -45,8 +45,8 @@ const Newsletter = () => (
           </p>
           <div className="fr-text--lg fr-text-label--blue-france">
             <span className="ri-mail-fill fr-mr-1w" aria-hidden="true" />
-            <Link href="mailto:lesbases@anct.gouv.fr">
-              lesbases@anct.gouv.fr
+            <Link href="mailto:contact@lesbases.anct.gouv.fr">
+              contact@lesbases.anct.gouv.fr
             </Link>
           </div>
         </div>

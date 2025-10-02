@@ -15,7 +15,7 @@ const ProfessionalSectors = ({
   }[]
 }) => {
   return (
-    <Card title="Les 10 secteurs professionnels les plus utilisés">
+    <Card title="Les secteurs professionnels les plus utilisés">
       {professionalSectors.map(
         ({ label, progress, value, professionalSector }, index) => (
           <ProgressBar
