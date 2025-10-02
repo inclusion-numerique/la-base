@@ -1,5 +1,6 @@
 'use client'
 
+import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import IconInSquare from '@app/web/components/IconInSquare'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
@@ -8,8 +9,9 @@ import classNames from 'classnames'
 import { useEffect } from 'react'
 import styles from './NewsFeedOnboardingDoneModal.module.css'
 
+const newsFeedOnboardingDoneModalId = 'news-feed-onboarding-done-modal'
 const NewsFeedOnboardingDoneModal = createModal({
-  id: `news-feed-onboarding-done-modal`,
+  id: newsFeedOnboardingDoneModalId,
   isOpenedByDefault: true,
 })
 
@@ -18,13 +20,13 @@ export const NewsFeedOnboardingDone = ({
 }: {
   fromOnboarding?: boolean
 }) => {
-  // Todo -> check with Hugues, window.dsfr is not mounted on first render so it won't open the modal -> bit hacky there
+  const modalIsBound = useDsfrModalIsBound(newsFeedOnboardingDoneModalId)
+
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (modalIsBound) {
       NewsFeedOnboardingDoneModal.open()
-    }, 100)
-    return () => clearTimeout(timer)
-  }, [])
+    }
+  }, [modalIsBound])
 
   if (!fromOnboarding) {
     return null

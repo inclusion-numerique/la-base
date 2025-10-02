@@ -1,3 +1,4 @@
+import { getNewsFeedResources } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { UpdateNewsFeedSectorsProfessionnalsValidation } from '@app/web/features/fil-d-actualite/onboarding/professionals-sectors/newsFeedProfessionnalsSectors'
 import { UpdateNewsFeedResumeValidation } from '@app/web/features/fil-d-actualite/onboarding/resume/newsFeedResume'
 import { UpdateNewsFeedThemesValidation } from '@app/web/features/fil-d-actualite/onboarding/themes/newsFeedThemes'
@@ -12,7 +13,24 @@ const UpdateNewsFeedValidation = z.object({
   themes: z.array(z.nativeEnum(Theme)).optional(),
 })
 
+const GetNewsFeedResourcesValidation = z.object({
+  page: z.number().min(1).default(1),
+  themes: z.array(z.string()).default([]),
+  professionalSectors: z.array(z.string()).default([]),
+  profileSlug: z.string().optional(),
+  baseSlug: z.string().optional(),
+})
+
 export const newsFeedRouter = router({
+  getResources: protectedProcedure
+    .input(GetNewsFeedResourcesValidation)
+    .query(async ({ input, ctx: { user } }) => {
+      const { page, themes, professionalSectors, profileSlug, baseSlug } = input
+      const filters = { themes, professionalSectors, profileSlug, baseSlug }
+      const paginationParams = { page, perPage: 20, sort: 'recent' as const }
+
+      return getNewsFeedResources(user.id, filters, paginationParams)
+    }),
   skip: protectedProcedure
     .input(z.object({ hasCompleteOnboarding: z.boolean() }))
     .mutation(async ({ input, ctx: { user } }) => {

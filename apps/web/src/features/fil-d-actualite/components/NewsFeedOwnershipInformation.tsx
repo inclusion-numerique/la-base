@@ -1,3 +1,4 @@
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import styles from '@app/web/components/OwnershipInformation.module.css'
@@ -5,14 +6,37 @@ import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import {
+  professionalSectorsIcon,
+  professionalSectorsLabels,
+} from '@app/web/themes/professionalSectors'
+import {
   CATEGORY_VARIANTS,
   themeCategories,
   themeLabels,
 } from '@app/web/themes/themes'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
-import type { NewsFeed, Theme } from '@prisma/client'
+import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
+
+const formatTimeAgo = (createdAt: Date): string => {
+  const now = new Date()
+  const diffInMs = now.getTime() - createdAt.getTime()
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
+  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60))
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24))
+  const diffInMonths = Math.floor(diffInDays / 30)
+
+  if (diffInMinutes < 60) {
+    return `il y a ${diffInMinutes} minute${sPluriel(diffInMinutes)}`
+  } else if (diffInHours < 24) {
+    return `il y a ${diffInHours} heure${sPluriel(diffInHours)}`
+  } else if (diffInDays <= 30) {
+    return `il y a ${diffInDays} jour${sPluriel(diffInDays)}`
+  } else {
+    return `il y a ${diffInMonths} mois`
+  }
+}
 
 const newsFeedAttributionConfig = {
   base: {
@@ -39,9 +63,17 @@ const newsFeedAttributionConfig = {
         userPreferredThemes.includes(theme),
       )
 
-      return `Ressource publiée dans la thématique ${
-        themeLabels[matchingTheme as Theme]
-      }`
+      return (
+        <>
+          Ressource publiée dans la thématique&nbsp;
+          <Link
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+            href={`/fil-d-actualite?thematique=${matchingTheme}`}
+          >
+            {themeLabels[matchingTheme as Theme]}
+          </Link>
+        </>
+      )
     },
     getImage: (resource: NewsFeedResource, userNewsFeed?: NewsFeed) => {
       const resourceThemes = resource.themes || []
@@ -84,10 +116,49 @@ const newsFeedAttributionConfig = {
     ),
   },
   professional_sector: {
-    getText: () => <> …Ressource à destination des publiée</>,
-    getImage: (resource: NewsFeedResource) => (
-      <RoundProfileImage user={resource.createdBy} />
-    ),
+    getText: (resource: NewsFeedResource, userNewsFeed?: NewsFeed) => {
+      const resourceProfessionalSectors = resource.professionalSectors || []
+      const userPreferredProfessionalSectors =
+        userNewsFeed?.professionalSectors || []
+      const matchingProfessionalSector = resourceProfessionalSectors.find(
+        (sector) => userPreferredProfessionalSectors.includes(sector),
+      )
+
+      return (
+        <>
+          Ressource à destination des&nbsp;
+          <Link
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+            href={`/fil-d-actualite?secteur-professionnel=${matchingProfessionalSector}`}
+          >
+            {
+              professionalSectorsLabels[
+                matchingProfessionalSector as ProfessionalSector
+              ]
+            }
+          </Link>
+          &nbsp;publiée
+        </>
+      )
+    },
+    getImage: (resource: NewsFeedResource, userNewsFeed?: NewsFeed) => {
+      const resourceProfessionalSectors = resource.professionalSectors || []
+      const userPreferredProfessionalSectors =
+        userNewsFeed?.professionalSectors || []
+
+      // Find intersection - professional sectors that exist in both arrays
+      const matchingProfessionalSector = resourceProfessionalSectors.find(
+        (sector) => userPreferredProfessionalSectors.includes(sector),
+      )
+
+      if (
+        matchingProfessionalSector &&
+        professionalSectorsIcon[matchingProfessionalSector]
+      ) {
+        const icon = professionalSectorsIcon[matchingProfessionalSector]
+        return <IconInSquare iconId={icon as RiIconClassName} size="small" />
+      }
+    },
   },
 } as const
 
@@ -102,12 +173,13 @@ export const NewsFeedOwnershipInformation = ({
     newsFeedAttributionConfig[resource.source] || newsFeedAttributionConfig.base
   const attributionText = config.getText(resource, userNewsFeed)
   const image = config.getImage(resource, userNewsFeed)
+  const timeAgo = formatTimeAgo(resource.created)
 
   return (
     <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
       {image}
       <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
-        {attributionText}
+        {attributionText} {timeAgo}
       </span>
     </div>
   )

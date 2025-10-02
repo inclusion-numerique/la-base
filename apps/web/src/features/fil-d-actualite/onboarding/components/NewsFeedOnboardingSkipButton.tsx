@@ -24,6 +24,7 @@ const NewsFeedOnboardingSkipButton = () => {
   const onSkip = async () => {
     try {
       await mutate.mutateAsync({ hasCompleteOnboarding: false })
+      router.refresh()
       router.push('/')
     } catch (error) {
       Sentry.captureException(error)

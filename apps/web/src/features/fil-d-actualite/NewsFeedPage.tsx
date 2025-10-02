@@ -1,52 +1,42 @@
-import { getNewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
-import { NewsFeedList } from '@app/web/features/fil-d-actualite/NewsFeedList'
-import NewsFeedResults from '@app/web/features/fil-d-actualite/NewsFeedResults'
-import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
-import {
-  paginationParamsToUrlQueryParams,
-  sanitizeUrlPaginationParams,
-  UrlPaginationParams,
-} from '@app/web/server/search/searchQueryParams'
+import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 
 const NewsFeedPage = async ({
   searchParams,
+  newsFeedPageContext,
 }: {
-  searchParams: UrlPaginationParams
+  searchParams: NewsFeedSearchParams
+  newsFeedPageContext: NewsFeedPageContext
+  paginationParams: PaginationParams
 }) => {
-  const paginationParams = {
-    ...sanitizeUrlPaginationParams(searchParams),
-    perPage: 20,
+  const { userNewsFeed, resources, user } = newsFeedPageContext
+
+  const filters = {
+    themes: searchParams.thematique ? [searchParams.thematique] : [],
+    professionalSectors: searchParams.secteur ? [searchParams.secteur] : [],
+    profileSlug: searchParams.profil,
+    baseSlug: searchParams.base,
   }
-  const { resources, totalCount, user, userNewsFeed } =
-    await getNewsFeedPageContext({}, paginationParams)
 
   return (
     <>
-      <NewsFeedHeader />
+      <Breadcrumbs
+        currentPage="Mon fil d'actualité"
+        className="fr-m-0 fr-py-4v"
+      />
+      <NewsFeedHeader searchParams={searchParams} />
       <div className="fr-flex fr-justify-content-space-between fr-col-12 fr-mt-6w">
-        <NewsFeedSearchFilters userNewsFeed={userNewsFeed} />
         <div className="fr-flex fr-direction-column fr-col-8 fr-justify-content-space-between">
-          <NewsFeedResults
-            paginationParams={paginationParams}
-            count={totalCount}
-            createPageLink={(page: number) => {
-              const next = paginationParamsToUrlQueryParams({
-                ...paginationParams,
-                page,
-              })
-              const params = new URLSearchParams()
-              if (next.page) params.set('page', next.page as string)
-              const qs = params.toString()
-              return qs ? `/fil-d-actualite?${qs}` : `/fil-d-actualite`
-            }}
-          >
-            <NewsFeedList
-              resources={resources}
-              user={user}
-              userNewsFeed={userNewsFeed}
-            />
-          </NewsFeedResults>
+          <NewsFeedList
+            resources={resources}
+            user={user}
+            userNewsFeed={userNewsFeed}
+            filters={filters}
+          />
         </div>
       </div>
     </>
