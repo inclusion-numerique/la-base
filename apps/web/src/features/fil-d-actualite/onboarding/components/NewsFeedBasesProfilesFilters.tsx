@@ -1,22 +1,149 @@
 'use client'
 
+import BaseImage from '@app/web/components/BaseImage'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import {
+  NewsFeedBases,
+  NewsFeedProfiles,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import Button from '@codegouvfr/react-dsfr/Button'
+import classNames from 'classnames'
 import { useState } from 'react'
+import styles from '../../NewsFeedSearchFilters.module.css'
+import commonStyles from './NewsFeedFilters.module.css'
 
-export const NewsFeedBasesProfilesFilters = () => {
+export const NewsFeedBasesProfilesFilters = ({
+  bases,
+  profiles,
+  baseCounts,
+  profileCounts,
+  searchParams,
+}: {
+  bases: NewsFeedBases
+  profiles: NewsFeedProfiles
+  baseCounts: Record<string, { count: number }>
+  profileCounts: Record<string, { count: number }>
+  searchParams?: string
+}) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  if (bases.length === 0 && profiles.length === 0) {
+    return null
+  }
+
   return (
-    <Button
-      priority="tertiary no outline"
-      className="fr-width-full fr-text-mention--black fr-text--start"
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <span
-        className={`ri-arrow-${isOpen ? 'down' : 'right'}-s-line fr-mr-1w`}
-      />
-      <span className="fr-text--uppercase fr-text--xs">
-        Mes bases et profils suivis
-      </span>
-    </Button>
+    <>
+      <div className="fr-position-relative">
+        <Button
+          type="button"
+          priority="tertiary no outline"
+          className={classNames(
+            searchParams === 'tous' && commonStyles.activeButton,
+            commonStyles.absoluteButton,
+            'fr-text-mention--black fr-px-1v',
+          )}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className={`ri-arrow-${isOpen ? 'down' : 'right'}-s-line`} />
+        </Button>
+        <Button
+          priority="tertiary no outline"
+          className={classNames(
+            searchParams === 'tous' && commonStyles.activeButton,
+            'fr-text-mention--black fr-text--start fr-width-full',
+            commonStyles.linkButton,
+          )}
+          linkProps={{ href: '/fil-d-actualite?base=tous&profil=tous' }}
+        >
+          <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
+            Mes bases et profils suivis
+          </span>
+        </Button>
+      </div>
+      {isOpen && (
+        <div className="fr-flex fr-direction-column">
+          {bases.map((base) => (
+            <Button
+              key={base.id}
+              priority="tertiary no outline"
+              className={classNames(
+                searchParams === base.slug && commonStyles.activeButton,
+                'fr-width-full fr-text-mention--grey',
+                styles.button,
+              )}
+              linkProps={{ href: `/fil-d-actualite?base=${base.slug}` }}
+            >
+              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                <div
+                  className={classNames(
+                    'fr-flex fr-align-items-center fr-flex-gap-2v',
+                    styles.flexWidth,
+                  )}
+                >
+                  <BaseImage base={base} />
+                  <span
+                    className={classNames(
+                      'fr-mb-0 fr-text--xs fr-text--start',
+                      styles.flexWidth,
+                      commonStyles.label,
+                      searchParams === base.slug && 'fr-text--bold',
+                    )}
+                  >
+                    {base.title}
+                  </span>
+                </div>
+                <span
+                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                >
+                  {baseCounts[base.slug].count}
+                </span>
+              </div>
+            </Button>
+          ))}
+          {profiles.map((profile) => (
+            <Button
+              key={profile.id}
+              priority="tertiary no outline"
+              className={classNames(
+                searchParams === profile.slug && commonStyles.activeButton,
+                'fr-width-full fr-text-mention--grey',
+                styles.button,
+              )}
+              linkProps={{ href: `/fil-d-actualite?profil=${profile.slug}` }}
+            >
+              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                <div
+                  className={classNames(
+                    'fr-flex fr-align-items-center fr-flex-gap-2v',
+                    styles.flexWidth,
+                  )}
+                >
+                  <RoundProfileImage
+                    className="fr-mr-1w"
+                    user={profile}
+                    size={24}
+                  />
+                  <span
+                    className={classNames(
+                      'fr-mb-0 fr-text--xs fr-text--start',
+                      styles.flexWidth,
+                      commonStyles.label,
+                      searchParams === profile.slug && 'fr-text--bold',
+                    )}
+                  >
+                    {profile.name}
+                  </span>
+                </div>
+                <span
+                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                >
+                  {profileCounts[profile.slug].count}
+                </span>
+              </div>
+            </Button>
+          ))}
+        </div>
+      )}
+    </>
   )
 }
