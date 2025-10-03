@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/suspicious/noConsole: debug */
 import { SessionUser } from '@app/web/auth/sessionUser'
-import { redirect } from 'next/navigation'
+import { RedirectType, redirect } from 'next/navigation'
 
 export const redirectToNewsFeedOnboarding = (user: SessionUser | null) => {
   // Only redirect if user is logged in but has no newsFeed record at all
@@ -14,6 +14,6 @@ export const redirectToNewsFeedOnboarding = (user: SessionUser | null) => {
     console.log(
       'redirectToNewsFeedOnboarding: user has no newsFeed, we redirect',
     )
-    return redirect('/fil-d-actualite/onboarding')
+    return redirect('/fil-d-actualite/onboarding', RedirectType.push)
   }
 }
