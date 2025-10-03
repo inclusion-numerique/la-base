@@ -98,7 +98,13 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     // Cookies are lost in redirect (Cypress issue)
     // https://github.com/cypress-io/cypress/issues/20476#issuecomment-1298486439
 
-    cy.appUrlShouldBe('/')
+    cy.appUrlShouldBe('/cgu/mise-a-jour')
+    cy.testId('accept-cgu-button').click()
+
+    // Accept onboarding
+    cy.visit('/')
+    cy.appUrlShouldBe('/fil-d-actualite/onboarding')
+    cy.contains('Revenir plus tard').click()
 
     cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
 
@@ -126,14 +132,14 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     // Identity provider logout flow
     cy.url().should(
       'contain',
-      'https://app-sandbox.moncomptepro.beta.gouv.fr/oauth/logout',
+      'https://identite-sandbox.proconnect.gouv.fr/oauth/logout',
     )
     cy.appUrlShouldBe('/')
 
     cy.get('.fr-header__tools').contains('Se connecter')
   })
 
-  it.only('Acceptation 2 - Connexion avec email', () => {
+  it('Acceptation 2 - Connexion avec email', () => {
     cy.visit('/connexion')
     cy.execute('createUser', emailUser)
     const { email, firstName, lastName } = emailUser
