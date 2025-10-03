@@ -127,6 +127,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                 <li className="fr-hidden fr-unhidden-sm">
                   <Tooltip title="Flux">
                     <Button
+                      data-testid="news-feed-button"
                       className={classNames(
                         'fr-border-radius--8 fr-p-0',
                         styles.newsFeedButton,
