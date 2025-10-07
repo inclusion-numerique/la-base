@@ -97,7 +97,7 @@
     "next": "^15.5.4",
     "next-auth": "4.24.11",
     "node-html-parser": "^7.0.1",
-    "nodemailer": "^7.0.5",
+    "nodemailer": "^7.0.7",
     "p-throttle": "^7.0.0",
     "postcss": "^8.5.6",
     "postcss-flexbugs-fixes": "^5.0.2",
