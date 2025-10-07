@@ -27,7 +27,7 @@
     "dotenv": "^17.2.1",
     "form-data": "^4.0.4",
     "lodash-es": "^4.17.21",
-    "nodemailer": "^7.0.5",
+    "nodemailer": "^7.0.7",
     "octokit": "^5.0.3",
     "picocolors": "^1.1.1",
     "slug": "^11.0.0",
