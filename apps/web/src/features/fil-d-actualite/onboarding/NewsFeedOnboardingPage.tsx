@@ -1,4 +1,5 @@
 import IconInSquare from '@app/web/components/IconInSquare'
+import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -30,9 +31,13 @@ const features: Array<{
   },
 ]
 
-export default function NewsFeedOnboardingPage() {
+export default function NewsFeedOnboardingPage({
+  userNewsFeed,
+}: {
+  userNewsFeed: UserNewsFeed | null
+}) {
   return (
-    <div className="fr-flex fr-pt-6w fr-justify-content-center fr-align-items-center fr-mb-50v">
+    <div className="fr-flex fr-pt-6w fr-pb-15w fr-justify-content-center fr-align-items-center">
       <div
         className={classNames(
           styles.borderContainer,
@@ -76,7 +81,7 @@ export default function NewsFeedOnboardingPage() {
             Choisir mes préférences
           </Button>
           <div className="fr-flex fr-justify-content-center fr-mt-6v">
-            <NewsFeedOnboardingSkipButton />
+            <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
           </div>
         </div>
       </div>

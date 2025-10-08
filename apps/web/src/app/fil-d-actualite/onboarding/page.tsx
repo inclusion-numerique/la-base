@@ -24,7 +24,7 @@ export default async function NewsFeedParametragePage() {
               currentPage="Paramétrer mon fil d'actualité"
               className="fr-m-0 fr-pt-4v"
             />
-            <NewsFeedOnboardingPage />
+            <NewsFeedOnboardingPage userNewsFeed={userNewsFeed} />
           </div>
         </div>
       </main>

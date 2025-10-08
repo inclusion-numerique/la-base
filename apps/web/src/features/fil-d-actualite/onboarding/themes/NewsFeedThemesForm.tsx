@@ -7,6 +7,7 @@ import {
 import { SelectOption } from '@app/ui/components/Form/utils/options'
 import SearchThematicsCategory from '@app/web/components/Search/Filters/SearchThematicsCategory'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
 import {
   UpdateNewsFeedThemesCommand,
@@ -44,9 +45,13 @@ const getInitialThemesSelection = (themes?: Theme[]): ThematicSelection[] => {
   return initialSelection
 }
 
-const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
+const NewsFeedThemesForm = ({
+  userNewsFeed,
+}: {
+  userNewsFeed: UserNewsFeed | null
+}) => {
   const [themesSelected, setThemesSelected] = useState<ThematicSelection[]>(
-    getInitialThemesSelection(themes),
+    getInitialThemesSelection(userNewsFeed?.themes),
   )
   const mutate = trpc.newsFeed.updateThemes.useMutation()
   const router = useRouter()
@@ -54,7 +59,7 @@ const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
   const form = useForm<UpdateNewsFeedThemesCommand>({
     resolver: zodResolver(UpdateNewsFeedThemesValidation),
     defaultValues: {
-      themes,
+      themes: userNewsFeed?.themes,
     },
   })
 
@@ -136,7 +141,7 @@ const NewsFeedThemesForm = ({ themes }: { themes?: Theme[] }) => {
         </div>
       </form>
       <div className="fr-flex fr-justify-content-center fr-mt-6v">
-        <NewsFeedOnboardingSkipButton />
+        <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
       </div>
     </>
   )

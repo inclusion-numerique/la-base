@@ -24,7 +24,7 @@ export const NewsFeedSearchFilters = ({
 
   const { followedBases, followedProfiles } = newsFeedPageContext
   const hasActiveFilters = Object.entries(searchParams)
-    .filter(([key]) => !['page', 'onboarding'].includes(key))
+    .filter(([key]) => key !== 'onboarding')
     .some(([_, value]) => !!value)
 
   return (

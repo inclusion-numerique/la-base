@@ -3,6 +3,7 @@
 import ToggleFormField from '@app/ui/components/Form/ToggleFormField'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
 import {
   UpdateNewsFeedResumeCommand,
@@ -18,10 +19,10 @@ import { useForm } from 'react-hook-form'
 
 const NewsFeedResumeForm = ({
   user,
-  newsletter,
+  userNewsFeed,
 }: {
   user: SessionUser | null
-  newsletter?: boolean
+  userNewsFeed: UserNewsFeed | null
 }) => {
   const mutate = trpc.newsFeed.updateMonthlyNewsletter.useMutation()
   const router = useRouter()
@@ -29,7 +30,7 @@ const NewsFeedResumeForm = ({
   const form = useForm<UpdateNewsFeedResumeCommand>({
     resolver: zodResolver(UpdateNewsFeedResumeValidation),
     defaultValues: {
-      monthlyResume: !!newsletter,
+      monthlyResume: !!userNewsFeed?.monthlyNewsletter,
     },
   })
 
@@ -79,7 +80,7 @@ const NewsFeedResumeForm = ({
         </div>
       </form>
       <div className="fr-flex fr-justify-content-center fr-mt-6v">
-        <NewsFeedOnboardingSkipButton />
+        <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
       </div>
     </>
   )

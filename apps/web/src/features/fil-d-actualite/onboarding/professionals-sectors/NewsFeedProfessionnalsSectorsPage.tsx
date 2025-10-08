@@ -16,9 +16,7 @@ export default async function NewsFeedProfessionnalsSectors() {
         description="Découvrez et restez informé des ressources liées à votre secteur professionnel"
         noticeTitle="Sélectionnez un ou plusieurs secteurs professionnels"
       />
-      <NewsFeedProfessionnalsSectorsForm
-        professionalSectors={userNewsFeed?.professionalSectors}
-      />
+      <NewsFeedProfessionnalsSectorsForm userNewsFeed={userNewsFeed} />
     </div>
   )
 }

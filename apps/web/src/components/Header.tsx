@@ -125,7 +125,7 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                   </Link>
                 </li>
                 <li className="fr-hidden fr-unhidden-sm">
-                  <Tooltip title="Flux">
+                  <Tooltip title="Fil d'actualité">
                     <Button
                       data-testid="news-feed-button"
                       className={classNames(

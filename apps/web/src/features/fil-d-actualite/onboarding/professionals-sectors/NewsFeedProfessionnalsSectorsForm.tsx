@@ -3,6 +3,7 @@
 import CheckboxGroupFormField from '@app/ui/components/Form/CheckboxGroupFormField'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
 import {
   UpdateNewsFeedSectorsProfessionnalsCommand,
@@ -22,9 +23,9 @@ import { useForm } from 'react-hook-form'
 import styles from './NewsFeedProfessionnalsSectors.module.css'
 
 const NewsFeedProfessionnalsSectors = ({
-  professionalSectors,
+  userNewsFeed,
 }: {
-  professionalSectors?: ProfessionalSector[]
+  userNewsFeed: UserNewsFeed | null
 }) => {
   const mutate = trpc.newsFeed.updateProfessionalSectors.useMutation()
   const router = useRouter()
@@ -32,7 +33,7 @@ const NewsFeedProfessionnalsSectors = ({
   const form = useForm<UpdateNewsFeedSectorsProfessionnalsCommand>({
     resolver: zodResolver(UpdateNewsFeedSectorsProfessionnalsValidation),
     defaultValues: {
-      professionalSectors,
+      professionalSectors: userNewsFeed?.professionalSectors,
     },
   })
 
@@ -85,7 +86,7 @@ const NewsFeedProfessionnalsSectors = ({
         </div>
       </form>
       <div className="fr-flex fr-justify-content-center fr-mt-6v">
-        <NewsFeedOnboardingSkipButton />
+        <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
       </div>
     </>
   )

@@ -1,5 +1,6 @@
 import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseCard from '@app/web/components/Base/Card/BaseCard'
+import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import { NewsFeedRecommendedBases } from '@app/web/features/fil-d-actualite/db/getRecommendedBasesToFollow'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -7,9 +8,11 @@ import Button from '@codegouvfr/react-dsfr/Button'
 export default function NewsFeedBasesForm({
   bases,
   user,
+  userNewsFeed,
 }: {
   bases: NewsFeedRecommendedBases
   user: SessionUser | null
+  userNewsFeed: UserNewsFeed | null
 }) {
   return (
     <>
@@ -28,7 +31,7 @@ export default function NewsFeedBasesForm({
           Suivant
         </Button>
         <div className="fr-flex fr-justify-content-center fr-mt-6v">
-          <NewsFeedOnboardingSkipButton />
+          <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
         </div>
       </div>
     </>

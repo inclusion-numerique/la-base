@@ -10,3 +10,5 @@ export const getNewsFeed = async (user: SessionUser | null) => {
     where: { userId: user.id },
   })
 }
+
+export type UserNewsFeed = Awaited<ReturnType<typeof getNewsFeed>>

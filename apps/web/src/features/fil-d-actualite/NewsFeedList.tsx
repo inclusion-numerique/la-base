@@ -1,5 +1,6 @@
 'use client'
 
+import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
@@ -18,23 +19,28 @@ const NewsFeedList = ({
   resources,
   user,
   userNewsFeed,
-  filters = { themes: [], professionalSectors: [] },
+  searchParams,
 }: {
   resources: NewsFeedResource[]
   user: SessionUser
   userNewsFeed: NewsFeed
-  filters?: {
-    themes: string[]
-    professionalSectors: string[]
-    profileSlug?: string
-    baseSlug?: string
-  }
+  searchParams: NewsFeedSearchParams
 }) => {
+  const filters = {
+    themes: searchParams.thematique ? [searchParams.thematique] : [],
+    professionalSectors: searchParams.secteur ? [searchParams.secteur] : [],
+    profileSlug: searchParams.profil,
+    baseSlug: searchParams.base,
+  }
   const {
     resources: paginatedResources,
     loadMore,
     isFetching,
   } = useNewsFeedPagination(resources, filters)
+
+  const hasActiveFilters = Object.entries(searchParams)
+    .filter(([key]) => !['page', 'onboarding'].includes(key))
+    .some(([_, value]) => !!value)
 
   return (
     <>
@@ -53,10 +59,12 @@ const NewsFeedList = ({
           resource={resource}
           user={user}
         >
-          <NewsFeedOwnershipInformation
-            resource={resource}
-            userNewsFeed={userNewsFeed}
-          />
+          {!hasActiveFilters && (
+            <NewsFeedOwnershipInformation
+              resource={resource}
+              userNewsFeed={userNewsFeed}
+            />
+          )}
         </ResourceCard>
       ))}
       <div className="fr-text--center">
