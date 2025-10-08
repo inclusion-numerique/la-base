@@ -50,9 +50,9 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.contains('Connexion à Les Bases')
     cy.contains('Se connecter').invoke('attr', 'target', '_self').click()
 
-    // With a valid magic link we should be automatically redirected to homepage, logged in
+    // With a valid magic link we should be automatically redirected to news feed onboarding, logged in
     cy.log('User should now be signed in')
-    // User will be redirected to the onboarding page of his news feed by default
+    // User has no newsFeed record so should be redirected to onboarding
     cy.appUrlShouldBe('/fil-d-actualite/onboarding')
     cy.get('.fr-header__tools').contains(firstName).contains(lastName)
 

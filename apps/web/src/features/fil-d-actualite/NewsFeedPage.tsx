@@ -15,13 +15,6 @@ const NewsFeedPage = async ({
 }) => {
   const { userNewsFeed, resources, user } = newsFeedPageContext
 
-  const filters = {
-    themes: searchParams.thematique ? [searchParams.thematique] : [],
-    professionalSectors: searchParams.secteur ? [searchParams.secteur] : [],
-    profileSlug: searchParams.profil,
-    baseSlug: searchParams.base,
-  }
-
   return (
     <>
       <Breadcrumbs
@@ -35,7 +28,7 @@ const NewsFeedPage = async ({
             resources={resources}
             user={user}
             userNewsFeed={userNewsFeed}
-            filters={filters}
+            searchParams={searchParams}
           />
         </div>
       </div>

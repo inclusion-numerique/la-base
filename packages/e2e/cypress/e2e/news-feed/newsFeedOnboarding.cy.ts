@@ -36,18 +36,61 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.contains('Revenir plus tard')
   })
 
-  it('Acceptation 2 - Utilisateur skip l\'onboarding via le bouton "Revenir plus tard"', () => {
+  it('Acceptation 2 - Utilisateur skip l\'onboarding via le bouton "Revenir plus tard" - redirection direct', () => {
     cy.createUserAndSignin(userWithoutNewsFeed)
+    cy.intercept('/api/trpc/newsFeed*').as('mutation')
+
     cy.visit('/')
     cy.appUrlShouldBe('/fil-d-actualite/onboarding')
 
     cy.contains("Découvrez un fil d'actualité adapté à vos préférences")
     cy.contains('Revenir plus tard').click()
+    cy.wait('@mutation')
 
     cy.appUrlShouldBe('/')
   })
 
-  it("Acceptation 3 - Utilisateur suit tout le processus d'onboarding", () => {
+  it('Acceptation 3 - Utilisateur skip l\'onboarding via le bouton "Revenir plus tard" - modale', () => {
+    const user = givenUser({
+      newsFeed: {
+        create: {
+          themes: ['Accessibilite'],
+          professionalSectors: [],
+        },
+      },
+    })
+    cy.createUserAndSignin(user)
+
+    cy.visit('/')
+    cy.testId('news-feed-button').click()
+    cy.appUrlShouldBe('/fil-d-actualite/onboarding')
+
+    cy.contains("Découvrez un fil d'actualité adapté à vos préférences")
+
+    // Ensure DSFR is fully loaded before interacting with modal
+    cy.dsfrShouldBeStarted()
+
+    // Wait for DSFR modals to be bound (important for modal functionality)
+    cy.wait(200) // Additional wait for DSFR binding
+
+    // Verify no modal exists initially (following baseDeletion.cy.ts pattern)
+    cy.findByRole('dialog').should('not.exist')
+
+    cy.contains('Revenir plus tard').click()
+
+    // Modal should appear after click (following baseDeletion.cy.ts pattern)
+    cy.findByRole('dialog').should('exist')
+    cy.findByRole('dialog').as('modal')
+    cy.get('@modal').should('be.visible')
+    cy.get('@modal').contains(
+      'Êtes-vous sûr de vouloir quitter le choix de vos préférences ?',
+    )
+    cy.get('@modal').find('button').contains('Quitter').click()
+
+    cy.appUrlShouldBe('/')
+  })
+
+  it("Acceptation 4 - Utilisateur suit tout le processus d'onboarding", () => {
     cy.intercept('/api/trpc/newsFeed*').as('mutation')
 
     cy.createUserAndSignin(userWithoutNewsFeed)
@@ -85,7 +128,7 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.appUrlShouldBe('/fil-d-actualite?onboarding=true')
   })
 
-  it("Acceptation 4 - Utilisateur qui a skip peut accéder à l'onboarding via le bouton header", () => {
+  it("Acceptation 5 - Utilisateur qui a skip peut accéder à l'onboarding via le bouton header", () => {
     cy.createUserAndSignin(userWithNewsFeedIncomplete)
     cy.visit('/')
 
@@ -95,7 +138,7 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.contains("Découvrez un fil d'actualité adapté à vos préférences")
   })
 
-  it("Acceptation 5 - Utilisateur qui a complété l'onboarding accède au fil d'actualité via le header", () => {
+  it("Acceptation 6 - Utilisateur qui a complété l'onboarding accède au fil d'actualité via le header", () => {
     cy.createUserAndSignin(userWithNewsFeedComplete)
     cy.visit('/')
     cy.testId('news-feed-button').click()
@@ -103,7 +146,7 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.appUrlShouldBe('/fil-d-actualite')
   })
 
-  it("Acceptation 6 - Utilisateur connecté avec newsFeed complet ne peut pas accéder à l'onboarding", () => {
+  it("Acceptation 7 - Utilisateur connecté avec newsFeed complet ne peut pas accéder à l'onboarding", () => {
     cy.createUserAndSignin(userWithNewsFeedComplete)
     cy.visit('/fil-d-actualite/onboarding')
     cy.appUrlShouldBe('/fil-d-actualite')

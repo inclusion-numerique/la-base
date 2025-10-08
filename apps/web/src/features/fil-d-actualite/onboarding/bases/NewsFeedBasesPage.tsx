@@ -1,10 +1,12 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import { getRecommendedBasesToFollow } from '@app/web/features/fil-d-actualite/db/getRecommendedBasesToFollow'
 import NewsFeedBasesForm from '@app/web/features/fil-d-actualite/onboarding/bases/NewsFeedBasesForm'
 import NewsFeedOnboardingHeader from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingHeader'
 
 export default async function NewsFeedBasesPage() {
   const user = await getSessionUser()
+  const userNewsFeed = await getNewsFeed(user)
   const bases = await getRecommendedBasesToFollow(user)
   return (
     <div className="fr-flex fr-direction-column">
@@ -16,7 +18,11 @@ export default async function NewsFeedBasesPage() {
         noticeTitle="Nous vous recommandons ici des bases qui publient des ressources liés à votre secteur professionnel et/ou les thématiques sélectionnées aux étapes précédentes."
         previousHref="/fil-d-actualite/onboarding/themes"
       />
-      <NewsFeedBasesForm bases={bases} user={user} />
+      <NewsFeedBasesForm
+        bases={bases}
+        userNewsFeed={userNewsFeed}
+        user={user}
+      />
     </div>
   )
 }

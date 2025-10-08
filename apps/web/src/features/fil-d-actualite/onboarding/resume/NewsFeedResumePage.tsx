@@ -15,10 +15,7 @@ export default async function NewsFeedResumePage() {
         description="Soyez informé par mail en complément de votre fil d’actualité."
         previousHref="/fil-d-actualite/onboarding/bases"
       />
-      <NewsFeedResumeForm
-        user={user}
-        newsletter={userNewsFeed?.monthlyNewsletter}
-      />
+      <NewsFeedResumeForm user={user} userNewsFeed={userNewsFeed} />
     </div>
   )
 }
