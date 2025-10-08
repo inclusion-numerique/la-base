@@ -1,5 +1,6 @@
 import { prismaClient } from '@app/web/prismaClient'
 import { createTestContext } from '@app/web/test/createTestContext'
+import { testSessionUser } from '@app/web/test/testSessionUser'
 import { profileRouter } from './profileRouter'
 
 // Mock de la fonction deleteProfile
@@ -13,16 +14,9 @@ jest.mock('@app/web/server/profiles/suspiciousProfileDetection', () => ({
 }))
 
 describe('profileRouter - Suspicious Profile Detection', () => {
-  const mockUserId = 'test-user-id'
-  const mockUser = {
-    id: mockUserId,
-    slug: 'test-user',
-    role: 'User' as const,
-    emailVerified: new Date(),
-  }
-
+  const mockUserId = testSessionUser.id
   const caller = profileRouter.createCaller(
-    createTestContext({ user: mockUser }),
+    createTestContext({ user: testSessionUser }),
   )
 
   beforeEach(() => {
@@ -37,14 +31,14 @@ describe('profileRouter - Suspicious Profile Detection', () => {
       // Mock de la recherche du profil
       jest.spyOn(prismaClient.user, 'findUnique').mockResolvedValue({
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         role: 'User',
       } as any)
 
       // Mock de la mise à jour du profil
       jest.spyOn(prismaClient.user, 'update').mockResolvedValue({
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         firstName: 'John',
         lastName: 'Doe',
         name: 'John Doe',
@@ -72,14 +66,14 @@ describe('profileRouter - Suspicious Profile Detection', () => {
       // Mock de la recherche du profil
       jest.spyOn(prismaClient.user, 'findUnique').mockResolvedValue({
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         role: 'User',
       } as any)
 
       // Mock de la mise à jour du profil
       const updatedUser = {
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         firstName: 'Jean',
         lastName: 'Dupont',
         name: 'Jean Dupont',
@@ -111,7 +105,7 @@ describe('profileRouter - Suspicious Profile Detection', () => {
       // Mock de la recherche du profil
       jest.spyOn(prismaClient.user, 'findUnique').mockResolvedValue({
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         role: 'User',
       } as any)
 
@@ -153,7 +147,7 @@ describe('profileRouter - Suspicious Profile Detection', () => {
       // Mock de la mise à jour du profil
       const updatedUser = {
         id: mockUserId,
-        slug: 'test-user',
+        slug: testSessionUser.slug,
         emailIsPublic: false,
         website: null,
         facebook: null,
