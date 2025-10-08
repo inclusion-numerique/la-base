@@ -18,7 +18,6 @@ const SigninPanel = ({
   callbackUrl: Route
 }) => (
   <>
-    {' '}
     <Button
       className="fr-my-4v"
       linkProps={{ href: '/' }}
