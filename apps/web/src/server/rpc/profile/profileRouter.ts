@@ -5,6 +5,7 @@ import {
 import { profileAuthorizationTargetSelect } from '@app/web/authorization/models/profileAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
 import { searchMember } from '@app/web/server/profiles/searchMember'
+import { deleteSuspiciousProfile } from '@app/web/server/profiles/suspiciousProfileDetection'
 import {
   UpdateProfileContactsCommandValidation,
   UpdateProfileImageCommandValidation,
@@ -130,7 +131,7 @@ export const profileRouter = router({
           ? undefined
           : await findFirstAvailableSlug(afterSlug, 'users')
 
-      return prismaClient.user.update({
+      const updatedUser = await prismaClient.user.update({
         where: { id: user.id },
         data: {
           ...informations,
@@ -140,6 +141,16 @@ export const profileRouter = router({
           slug,
         },
       })
+
+      // Vérifier si le profil est suspect après la mise à jour
+      const wasDeleted = await deleteSuspiciousProfile(user.id)
+
+      if (wasDeleted) {
+        // Retourner une erreur spéciale pour déclencher la redirection
+        throw new Error('SUSPICIOUS_PROFILE_DELETED')
+      }
+
+      return updatedUser
     }),
   updateContacts: protectedProcedure
     .input(UpdateProfileContactsCommandValidation)
@@ -158,7 +169,7 @@ export const profileRouter = router({
           ProfilePermissions.WriteProfile,
         ),
       )
-      return prismaClient.user.update({
+      const updatedUser = await prismaClient.user.update({
         where: { id: user.id },
         data: {
           emailIsPublic: contacts.emailIsPublic,
@@ -168,6 +179,16 @@ export const profileRouter = router({
           linkedin: contacts.linkedin === '' ? null : contacts.linkedin,
         },
       })
+
+      // Vérifier si le profil est suspect après la mise à jour
+      const wasDeleted = await deleteSuspiciousProfile(user.id)
+
+      if (wasDeleted) {
+        // Retourner une erreur spéciale pour déclencher la redirection
+        throw new Error('SUSPICIOUS_PROFILE_DELETED')
+      }
+
+      return updatedUser
     }),
   updateImage: protectedProcedure
     .input(UpdateProfileImageCommandValidation)

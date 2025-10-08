@@ -12,6 +12,7 @@ import {
 import { trpc } from '@app/web/trpc'
 import { LabelAndValue } from '@app/web/ui/LabelAndValue'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 const lastPartFromUrl = (url: string | null): string | undefined =>
@@ -29,10 +30,25 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
     },
   })
 
+  const router = useRouter()
   const mutate = trpc.profile.updateContacts.useMutation()
 
   const handleSave = async (data: UpdateProfileContactsCommand) => {
-    await mutate.mutateAsync(data)
+    try {
+      await mutate.mutateAsync(data)
+    } catch (error) {
+      // Vérifier si c'est une erreur de profil suspect supprimé
+      if (
+        error instanceof Error &&
+        error.message === 'SUSPICIOUS_PROFILE_DELETED'
+      ) {
+        // Rediriger vers la page principale
+        router.push('/')
+        return
+      }
+      // Re-lancer l'erreur pour la gestion normale
+      throw error
+    }
   }
 
   return (
