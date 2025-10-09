@@ -190,6 +190,7 @@ export const getFollowedResourceIds = async (
       id: string
       published: Date
       source: 'base' | 'profile' | 'theme' | 'professional_sector'
+      seen: boolean
     }[]
   >(
     Prisma.sql`
@@ -202,6 +203,7 @@ export const getFollowedResourceIds = async (
       SELECT 
         r.id,
         r.published,
+        COUNT(rv.id)::integer = 1 as seen,
         CASE
           WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
           WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
@@ -209,6 +211,7 @@ export const getFollowedResourceIds = async (
         END as source
       FROM resources r
       LEFT JOIN bases b ON r.base_id = b.id
+      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
       WHERE r.deleted IS NULL
         AND r.published IS NOT NULL
         AND r.is_public = true
@@ -223,6 +226,57 @@ export const getFollowedResourceIds = async (
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
     `,
   )
+}
+
+export const getUnseenResourcesCount = async (
+  userId: string,
+  lastOpenedAt: Date,
+) => {
+  const result = await prismaClient.$queryRaw<
+    {
+      count: number
+    }[]
+  >(
+    Prisma.sql`
+      WITH followedBases AS (
+        SELECT base_id FROM base_follows WHERE follower_id = ${userId}::uuid
+      ),
+      followedProfiles AS (
+        SELECT profile_id FROM profile_follows WHERE follower_id = ${userId}::uuid
+      ),
+      userPreferences AS (
+        SELECT themes, professional_sectors
+        FROM news_feed
+        WHERE user_id = ${userId}::uuid
+      )
+      SELECT 
+        COUNT(*)::integer as count
+      FROM resources r
+      LEFT JOIN bases b ON r.base_id = b.id
+      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
+      WHERE r.deleted IS NULL
+        AND rv.id IS NULL
+        AND r.published IS NOT NULL
+        AND r.published > ${lastOpenedAt}::timestamp
+        AND r.is_public = true
+        AND (b.id IS NULL OR b.deleted IS NULL)
+        AND (
+          r.base_id IN (SELECT base_id FROM followedBases)
+          OR
+          r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          OR
+          (
+            EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
+          )
+          OR
+          (
+            EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+          )
+        )
+    `,
+  )
+
+  return result[0]?.count ?? 0
 }
 
 export const getResourceIds = async (
@@ -242,6 +296,7 @@ export const getResourceIds = async (
       id: string
       published: Date
       source: 'base' | 'profile' | 'theme' | 'professional_sector'
+      seen: boolean
     }[]
   >(
     Prisma.sql`
@@ -259,6 +314,7 @@ export const getResourceIds = async (
       SELECT DISTINCT 
         r.id, 
         r.published,
+        COUNT(rv.id)::integer = 1 as seen,
         CASE
           WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
           WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
@@ -268,6 +324,7 @@ export const getResourceIds = async (
         END as source
       FROM resources r
       LEFT JOIN bases b ON r.base_id = b.id
+      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
       WHERE r.deleted IS NULL
         AND r.published IS NOT NULL
         AND r.is_public = true
@@ -321,12 +378,26 @@ export const getResourceIds = async (
             }::text
           )
         )
+      GROUP BY r.id
       ORDER BY r.published DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
     `,
   )
 }
+
+export const updateLastOpenedAt = async (userId: string) =>
+  prismaClient.newsFeed.update({
+    data: {
+      lastOpenedAt: new Date(),
+    },
+    where: {
+      userId,
+    },
+    select: {
+      lastOpenedAt: true,
+    },
+  })
 
 export const getNewsFeedResources = async (
   userId: string,
@@ -335,7 +406,7 @@ export const getNewsFeedResources = async (
 ) => {
   const { profileSlug, baseSlug } = filters
 
-  const resourceIds =
+  const newsFeedResources =
     baseSlug === 'tous' && profileSlug === 'tous'
       ? await getFollowedResourceIds(userId, paginationParams)
       : await getResourceIds(userId, filters, paginationParams)
@@ -378,9 +449,9 @@ export const getNewsFeedResources = async (
     `,
   )
 
-  const ids = resourceIds.map(({ id }) => id)
+  const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
-    resourceIds.map(({ id, source }) => [id, { source }]),
+    newsFeedResources.map(({ id, seen, source }) => [id, { source, seen }]),
   )
 
   const [followedBases, followedProfiles] = await Promise.all([
@@ -412,7 +483,7 @@ export const getNewsFeedResources = async (
     }),
   ])
 
-  if (ids.length === 0) {
+  if (resourceIds.length === 0) {
     return {
       resources: [],
       followedBases,
@@ -421,7 +492,7 @@ export const getNewsFeedResources = async (
   }
 
   const resources = await prismaClient.resource.findMany({
-    where: { id: { in: ids } },
+    where: { id: { in: resourceIds } },
     select: {
       ...resourceListSelect({ id: userId }),
       themes: true,
@@ -430,7 +501,7 @@ export const getNewsFeedResources = async (
   })
 
   // keep the same indexing
-  const orderMap = new Map(ids.map((id, index) => [id, index]))
+  const orderMap = new Map(resourceIds.map((id, index) => [id, index]))
   const sortedResources = resources.sort(
     (a, b) => (orderMap.get(a.id) ?? 0) - (orderMap.get(b.id) ?? 0),
   )
@@ -439,10 +510,12 @@ export const getNewsFeedResources = async (
     resources: sortedResources.map((resource) => {
       const extraData = resourceMap.get(resource.id) || {
         source: 'base',
+        seen: false,
       }
       return {
         ...toResourceWithFeedbackAverage(resource),
         source: extraData.source,
+        seen: extraData.seen,
       }
     }),
     followedBases,

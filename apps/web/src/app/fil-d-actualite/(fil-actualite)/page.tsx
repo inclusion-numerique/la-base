@@ -1,5 +1,8 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
-import { getNewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  getNewsFeedPageContext,
+  updateLastOpenedAt,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import NewsFeedPage from '@app/web/features/fil-d-actualite/NewsFeedPage'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
 import { NewsFeedOnboardingDone } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingDoneModal'
@@ -51,6 +54,7 @@ export default async function NewsFeed({
     },
     paginationParams,
   )
+  await updateLastOpenedAt(user.id)
 
   return (
     <>
