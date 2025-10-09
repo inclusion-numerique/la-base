@@ -111,10 +111,12 @@ export const newsFeedRouter = router({
           userId: user.id,
           monthlyNewsletter: input.monthlyResume,
           hasCompleteOnboarding: true,
+          lastOpenedAt: new Date(),
         },
         update: {
           monthlyNewsletter: input.monthlyResume,
           hasCompleteOnboarding: true,
+          lastOpenedAt: new Date(),
         },
       })
     }),
