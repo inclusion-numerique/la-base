@@ -1,5 +1,7 @@
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import IconInSquare from '@app/web/components/IconInSquare'
+import { NewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -16,10 +18,20 @@ import classNames from 'classnames'
 
 export const NewsFeedHeader = ({
   searchParams,
+  notificationsCount,
 }: {
   searchParams: NewsFeedSearchParams
+  notificationsCount: NewsFeedNotifications
 }) => {
   const { thematique, secteur } = searchParams
+  const notificationsContainer = !!notificationsCount &&
+    notificationsCount.count > 0 && (
+      <Badge severity="new" small>
+        {notificationsCount.count} nouvelle{sPluriel(notificationsCount.count)}{' '}
+        ressource{sPluriel(notificationsCount.count)} depuis votre dernière
+        visite
+      </Badge>
+    )
 
   const renderLabel = () => {
     if (thematique) {
@@ -107,12 +119,14 @@ export const NewsFeedHeader = ({
         <span className="fr-text--xl fr-mb-0">
           Découvrez les dernières publications liés à vos préférences
         </span>
-        <Badge severity="new" small>
-          4 nouvelles ressources depuis votre dernière visite
-        </Badge>
       </div>
     )
   }
 
-  return <div className="fr-flex fr-direction-column">{renderLabel()}</div>
+  return (
+    <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+      {renderLabel()}
+      {notificationsContainer}
+    </div>
+  )
 }

@@ -42,6 +42,7 @@ const OwnershipInformation = ({
   className,
   attributionWording,
   withImage = true,
+  children,
 }: {
   user: Pick<
     User,
@@ -55,6 +56,7 @@ const OwnershipInformation = ({
   className?: string
   attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
   withImage?: boolean
+  children?: React.ReactNode
 }) => (
   <div
     className={classNames(
@@ -96,6 +98,7 @@ const OwnershipInformation = ({
         </>
       )}
     </span>
+    {children}
   </div>
 )
 

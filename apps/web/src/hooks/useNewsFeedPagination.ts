@@ -37,12 +37,6 @@ export const useNewsFeedPagination = (
     if (data && data.resources.length > 0) {
       setAllResources((prev) => [...prev, ...data.resources])
       setCurrentPage((prev) => prev + 1)
-
-      // if (searchParams) {
-      //   const newSearchParams = new URLSearchParams(searchParams.toString())
-      //   newSearchParams.set('page', (currentPage + 1).toString())
-      //   router.push(`?${newSearchParams.toString()}`, { scroll: false })
-      // }
     }
   }, [data])
 
