@@ -129,11 +129,11 @@ const Header = async ({ user }: { user?: SessionUser | null }) => {
                   </li>
                   <li className="fr-position-relative fr-hidden fr-unhidden-sm">
                     <Tooltip title="Fil d'actualité">
-                      {!!notificationsCount && (
+                      {!!notificationsCount && notificationsCount.total > 0 && (
                         <>
                           <div className={styles.notificationsContainer} />
                           <div className={styles.notificationsCount}>
-                            {notificationsCount}
+                            {notificationsCount.total}
                           </div>
                         </>
                       )}

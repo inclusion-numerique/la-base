@@ -45,6 +45,7 @@ export default async function NewsFeed({
     ...sanitizeUrlPaginationParams(searchPaginationParams),
     perPage: 20,
   }
+
   const newsFeedPageContext = await getNewsFeedPageContext(
     {
       professionalSectors: secteur ? [secteur as ProfessionalSector] : [],
@@ -54,7 +55,8 @@ export default async function NewsFeed({
     },
     paginationParams,
   )
-  await updateLastOpenedAt(user.id)
+  // no wait - we don't want to block the thread
+  updateLastOpenedAt(user.id)
 
   return (
     <>
@@ -74,7 +76,6 @@ export default async function NewsFeed({
         <NewsFeedPage
           searchParams={{ onboarding, secteur, thematique, base, profil }}
           newsFeedPageContext={newsFeedPageContext}
-          paginationParams={paginationParams}
         />
       </div>
     </>

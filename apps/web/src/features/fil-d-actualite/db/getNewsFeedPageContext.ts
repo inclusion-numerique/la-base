@@ -1,5 +1,6 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
+import { getNewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import { prismaClient } from '@app/web/prismaClient'
 import {
   resourceListSelect,
@@ -184,6 +185,7 @@ export const countNewsFeedResources = async (userId: string) => {
 export const getFollowedResourceIds = async (
   userId: string,
   paginationParams: PaginationParams = defaultNewsFeedPaginationParams,
+  lastOpenedAt?: Date,
 ) => {
   return await prismaClient.$queryRaw<
     {
@@ -203,7 +205,15 @@ export const getFollowedResourceIds = async (
       SELECT 
         r.id,
         r.published,
-        COUNT(rv.id)::integer = 1 as seen,
+        CASE 
+          WHEN rv.id IS NOT NULL THEN true
+          WHEN ${
+            lastOpenedAt
+              ? Prisma.sql`r.published <= ${lastOpenedAt}::timestamp`
+              : Prisma.sql`false`
+          } THEN true
+          ELSE false
+        END as seen,
         CASE
           WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
           WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
@@ -221,6 +231,7 @@ export const getFollowedResourceIds = async (
           OR
           r.created_by_id IN (SELECT profile_id FROM followedProfiles)
         )
+      GROUP BY r.id, rv.id
       ORDER BY r.published DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
@@ -231,9 +242,22 @@ export const getFollowedResourceIds = async (
 export const getUnseenResourcesCount = async (
   userId: string,
   lastOpenedAt: Date,
+  filters: NewsFeedFilters = { themes: [], professionalSectors: [] },
 ) => {
+  const {
+    themes = [],
+    professionalSectors = [],
+    profileSlug,
+    baseSlug,
+  } = filters
+
+  // When base=tous and profile=tous, only count resources from followed bases and profiles
+  // This matches the logic in getNewsFeedResources
+  const isFollowedOnlyMode = baseSlug === 'tous' && profileSlug === 'tous'
+
   const result = await prismaClient.$queryRaw<
     {
+      total: number
       count: number
     }[]
   >(
@@ -250,7 +274,58 @@ export const getUnseenResourcesCount = async (
         WHERE user_id = ${userId}::uuid
       )
       SELECT 
-        COUNT(*)::integer as count
+        COUNT(*)::integer as total,
+        COUNT(
+          CASE 
+            WHEN (
+              ${
+                isFollowedOnlyMode
+                  ? Prisma.sql`
+                    -- For followed-only mode (base=tous&profil=), only count resources from followed bases and profiles
+                    (
+                      r.base_id IN (SELECT base_id FROM followedBases)
+                      OR
+                      r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+                    )`
+                  : Prisma.sql`
+                    -- Apply all filters for regular mode
+                    (
+                      ${themes.length === 0} OR ${
+                        themes.includes('tous')
+                          ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)`
+                          : Prisma.sql`r.themes && ${enumArrayToSnakeCaseStringArray(
+                              themes,
+                            )}::theme[]`
+                      }
+                    )
+                    AND (
+                      ${professionalSectors.length === 0} OR ${
+                        professionalSectors.includes('tous')
+                          ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)`
+                          : Prisma.sql`r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
+                              professionalSectors,
+                            )}::professional_sector[]`
+                      }
+                    )
+                    AND (
+                      ${profileSlug ?? null}::text IS NULL OR EXISTS (
+                        SELECT 1 FROM users u WHERE u.id = r.created_by_id AND u.slug = ${
+                          profileSlug ?? null
+                        }::text
+                      )
+                    )
+                    AND (
+                      ${baseSlug ?? null}::text IS NULL OR EXISTS (
+                        SELECT 1 FROM bases b WHERE b.id = r.base_id AND b.slug = ${
+                          baseSlug ?? null
+                        }::text
+                      )
+                    )`
+              }
+            ) THEN 1 
+            ELSE NULL 
+          END
+        )::integer as count
       FROM resources r
       LEFT JOIN bases b ON r.base_id = b.id
       LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
@@ -276,13 +351,17 @@ export const getUnseenResourcesCount = async (
     `,
   )
 
-  return result[0]?.count ?? 0
+  return {
+    total: result[0]?.total ?? 0,
+    count: result[0]?.count ?? 0,
+  }
 }
 
 export const getResourceIds = async (
   userId: string,
   filters: NewsFeedFilters = { themes: [], professionalSectors: [] },
   paginationParams: PaginationParams = defaultNewsFeedPaginationParams,
+  lastOpenedAt?: Date,
 ) => {
   const {
     themes = [],
@@ -314,7 +393,15 @@ export const getResourceIds = async (
       SELECT DISTINCT 
         r.id, 
         r.published,
-        COUNT(rv.id)::integer = 1 as seen,
+        CASE 
+          WHEN rv.id IS NOT NULL THEN true
+          WHEN ${
+            lastOpenedAt
+              ? Prisma.sql`r.published <= ${lastOpenedAt}::timestamp`
+              : Prisma.sql`false`
+          } THEN true
+          ELSE false
+        END as seen,
         CASE
           WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
           WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
@@ -378,7 +465,7 @@ export const getResourceIds = async (
             }::text
           )
         )
-      GROUP BY r.id
+      GROUP BY r.id, rv.id
       ORDER BY r.published DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
@@ -403,13 +490,14 @@ export const getNewsFeedResources = async (
   userId: string,
   filters: NewsFeedFilters = { themes: [], professionalSectors: [] },
   paginationParams: PaginationParams = defaultNewsFeedPaginationParams,
+  lastOpenedAt?: Date,
 ) => {
   const { profileSlug, baseSlug } = filters
 
   const newsFeedResources =
     baseSlug === 'tous' && profileSlug === 'tous'
-      ? await getFollowedResourceIds(userId, paginationParams)
-      : await getResourceIds(userId, filters, paginationParams)
+      ? await getFollowedResourceIds(userId, paginationParams, lastOpenedAt)
+      : await getResourceIds(userId, filters, paginationParams, lastOpenedAt)
 
   // Followed bases that have at least 1 resource
   const followedBasesWithResources = await prismaClient.$queryRaw<
@@ -539,11 +627,20 @@ export const getNewsFeedPageContext = cache(
       return redirect('/fil-d-actualite/onboarding')
     }
 
-    const [{ resources, followedBases, followedProfiles }, resourceCounts] =
-      await Promise.all([
-        getNewsFeedResources(user.id, filters, paginationParams),
-        countNewsFeedResources(user.id),
-      ])
+    const [
+      { resources, followedBases, followedProfiles },
+      resourceCounts,
+      notificationsCount,
+    ] = await Promise.all([
+      getNewsFeedResources(
+        user.id,
+        filters,
+        paginationParams,
+        userNewsFeed.lastOpenedAt ?? undefined,
+      ),
+      countNewsFeedResources(user.id),
+      getNewsFeedNotifications(user, filters),
+    ])
 
     return {
       user,
@@ -552,6 +649,7 @@ export const getNewsFeedPageContext = cache(
       followedBases,
       followedProfiles,
       resourceCounts,
+      notificationsCount,
     }
   },
 )

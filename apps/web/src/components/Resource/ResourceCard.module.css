@@ -144,3 +144,14 @@
   word-break: break-word;
   overflow-wrap: break-word;
 }
+
+.badge:before {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.badge {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 4px;
+}

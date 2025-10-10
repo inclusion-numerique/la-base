@@ -44,12 +44,21 @@ const ResourceCard = ({
     data-testid="resource-card"
   >
     <div className={styles.header}>
-      {!children && context !== 'highlight' && context !== 'newsFeed' && (
+      {!children && context !== 'highlight' && (
         <OwnershipInformation
           user={resource.createdBy}
           base={resource.base}
           attributionWording={isDraft ? 'draft-resource' : 'resource'}
-        />
+        >
+          {context === 'newsFeed' && 'seen' in resource && !resource.seen && (
+            <p
+              className={classNames(
+                styles.badge,
+                'fr-badge fr-badge--new fr-badge--sm',
+              )}
+            />
+          )}
+        </OwnershipInformation>
       )}
       {children}
       <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">

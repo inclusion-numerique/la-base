@@ -18,6 +18,7 @@ import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
+import newsFeedStyles from './NewsFeedOwnershipInformation.module.css'
 
 const formatTimeAgo = (createdAt: Date): string => {
   const now = new Date()
@@ -174,6 +175,7 @@ export const NewsFeedOwnershipInformation = ({
   const attributionText = config.getText(resource, userNewsFeed)
   const image = config.getImage(resource, userNewsFeed)
   const timeAgo = formatTimeAgo(resource.created)
+  const { seen } = resource
 
   return (
     <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
@@ -181,6 +183,14 @@ export const NewsFeedOwnershipInformation = ({
       <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
         {attributionText} {timeAgo}
       </span>
+      {!seen && (
+        <p
+          className={classNames(
+            newsFeedStyles.badge,
+            'fr-badge fr-badge--new fr-badge--sm',
+          )}
+        />
+      )}
     </div>
   )
 }
