@@ -22,9 +22,10 @@ const NewsFeedPage = async ({
       <NewsFeedHeader
         searchParams={searchParams}
         notificationsCount={notificationsCount}
+        newsFeedPageContext={newsFeedPageContext}
       />
-      <div className="fr-flex fr-justify-content-space-between fr-col-12 fr-mt-6w">
-        <div className="fr-flex fr-direction-column fr-col-8 fr-justify-content-space-between">
+      <div className="fr-flex fr-justify-content-space-between fr-col-md-12 fr-mt-md-6w">
+        <div className="fr-flex fr-direction-column fr-col-md-8 fr-justify-content-space-between">
           <NewsFeedList
             resources={resources}
             user={user}

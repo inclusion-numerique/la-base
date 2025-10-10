@@ -2,6 +2,8 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { NewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
+import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -13,23 +15,28 @@ import {
 } from '@app/web/themes/themes'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import Badge from '@codegouvfr/react-dsfr/Badge'
+import Button from '@codegouvfr/react-dsfr/Button'
 import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 
 export const NewsFeedHeader = ({
   searchParams,
   notificationsCount,
+  newsFeedPageContext,
 }: {
   searchParams: NewsFeedSearchParams
   notificationsCount: NewsFeedNotifications
+  newsFeedPageContext: NewsFeedPageContext
 }) => {
   const { thematique, secteur } = searchParams
   const notificationsContainer = !!notificationsCount &&
     notificationsCount.count > 0 && (
       <Badge severity="new" small>
         {notificationsCount.count} nouvelle{sPluriel(notificationsCount.count)}{' '}
-        ressource{sPluriel(notificationsCount.count)} depuis votre dernière
-        visite
+        ressource{sPluriel(notificationsCount.count)}
+        <span className="fr-hidden fr-unhidden-md">
+          &nbsp;depuis votre dernière visite
+        </span>
       </Badge>
     )
 
@@ -116,7 +123,11 @@ export const NewsFeedHeader = ({
 
     return (
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
-        <span className="fr-text--xl fr-mb-0">
+        <span className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
+          Découvrez les dernières publications liés à vos préférences
+        </span>
+
+        <span className="fr-text--md fr-mb-0">
           Découvrez les dernières publications liés à vos préférences
         </span>
       </div>
@@ -124,9 +135,47 @@ export const NewsFeedHeader = ({
   }
 
   return (
-    <div className="fr-flex fr-direction-column fr-flex-gap-2v">
-      {renderLabel()}
-      {notificationsContainer}
-    </div>
+    <>
+      <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+        {renderLabel()}
+        {notificationsContainer}
+        <div className="fr-hidden-sm fr-flex fr-my-3w">
+          <Button
+            priority="secondary"
+            className="fr-width-full fr-justify-content-center"
+            data-fr-opened="false"
+            aria-controls="news-feed-menu-button"
+            aria-haspopup="menu"
+          >
+            <span className="fr-mr-1w ri-filter-3-line" />
+            Mes préférences
+          </Button>
+        </div>
+      </div>
+      <div className="fr-header">
+        <div
+          className="fr-header__menu fr-modal"
+          id="news-feed-menu-button"
+          aria-labelledby="news-feed-menu-button"
+        >
+          <div className="fr-container">
+            <button
+              type="button"
+              className="fr-btn--close fr-btn"
+              aria-controls="news-feed-menu-button"
+              title="Fermer"
+            >
+              Fermer
+            </button>
+            <div className="fr-header__menu-links">
+              <NewsFeedSearchFilters
+                searchParams={searchParams}
+                newsFeedPageContext={newsFeedPageContext}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

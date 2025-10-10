@@ -27,3 +27,10 @@
 .activeButton:hover {
   background-color: var(--background-contrast-info) !important;
 }
+
+.preferencesButton {
+  @media (max-width: 48em) {
+    border: var(--slim-grey-border);
+    border-color: var(--blue-france-high-525);
+  }
+}

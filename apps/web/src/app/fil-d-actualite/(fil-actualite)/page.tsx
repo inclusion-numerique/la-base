@@ -11,6 +11,7 @@ import {
   UrlPaginationParams,
 } from '@app/web/server/search/searchQueryParams'
 import { ProfessionalSector, Theme } from '@prisma/client'
+import classNames from 'classnames'
 import { redirect } from 'next/navigation'
 import styles from './NewsFeedLayout.module.css'
 
@@ -55,23 +56,28 @@ export default async function NewsFeed({
     },
     paginationParams,
   )
-  // no wait - we don't want to block the thread
+  // no await - we don't want to block the thread
   updateLastOpenedAt(user.id)
 
   return (
     <>
       <NewsFeedOnboardingDone fromOnboarding={!!onboarding} />
-      <div className={styles.sideNavContainer}>
-        <nav
-          className="fr-sidemenu fr-sidemenu--sticky-full-height fr-pr-0"
-          style={{ width: '314px' }}
+      <nav
+        className="fr-sidemenu fr-sidemenu--sticky-full-height fr-pr-0"
+        style={{ width: '314px' }}
+      >
+        <div
+          className={classNames(
+            styles.sideNavContainer,
+            'fr-hidden fr-unhidden-md fr-sidemenu__inner',
+          )}
         >
           <NewsFeedSearchFilters
             searchParams={awaitedSearchParams}
             newsFeedPageContext={newsFeedPageContext}
           />
-        </nav>
-      </div>
+        </div>
+      </nav>
       <div className={styles.pageContainer}>
         <NewsFeedPage
           searchParams={{ onboarding, secteur, thematique, base, profil }}
