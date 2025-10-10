@@ -46,7 +46,12 @@ const Header = async ({ user }: { user?: SessionUser | null }) => {
                       styles.steps,
                     )}
                   >
-                    {PublicWebAppConfig.projectTitle}
+                    <span className="fr-hidden fr-unhidden-md">
+                      {PublicWebAppConfig.projectTitle}
+                    </span>
+                    <span className="fr-text--sm fr-hidden-sm">
+                      {PublicWebAppConfig.projectTitle}
+                    </span>
                     <span className="fr-sr-only"> - Retour à l’accueil</span>
                   </Link>
                 </div>
@@ -71,6 +76,40 @@ const Header = async ({ user }: { user?: SessionUser | null }) => {
             <div className="fr-header__tools">
               <div className="fr-header__tools-links">
                 <ul className="fr-btns-group fr-align-items-center">
+                  <li className="fr-px-md-0 fr-px-2w fr-hidden-sm">
+                    <Button
+                      linkProps={{
+                        href: user
+                          ? !user.newsFeed ||
+                            !user.newsFeed.hasCompleteOnboarding
+                            ? '/fil-d-actualite/onboarding'
+                            : '/fil-d-actualite'
+                          : '/connexion?suivant=/fil-d-actualite',
+                      }}
+                    >
+                      <span
+                        className="fr-hidden-lg ri-flashlight-line fr-mr-1w fr-text-label--blue-france"
+                        aria-hidden
+                      />
+                      Fil d'actualité
+                      <span
+                        className="fr-hidden fr-unhidden-lg ri-flashlight-line fr-ml-1w fr-text-label--blue-france"
+                        aria-hidden
+                      />
+                      {!!notificationsCount && notificationsCount.total > 0 && (
+                        <div
+                          className={classNames(
+                            'fr-ml-2v fr-flex fr-justify-content-center fr-align-items-center fr-text--sm fr-border-radius--8 fr-p-0',
+                            styles.newsFeedButton,
+                          )}
+                        >
+                          <span className={styles.newsFeedIcon}>
+                            {notificationsCount.total}
+                          </span>
+                        </div>
+                      )}
+                    </Button>
+                  </li>
                   <li className="fr-px-md-0 fr-px-2w">
                     <Button
                       linkProps={{

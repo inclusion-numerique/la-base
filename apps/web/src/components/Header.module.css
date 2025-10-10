@@ -12,8 +12,13 @@
 
 .newsFeedButton {
   background: var(--background-contrast-yellow-tournesol) !important;
-  height: 2rem !important;
-  width: 2.5rem !important;
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+
+  @media (min-width: 48em) {
+    height: 2rem !important;
+    width: 2.5rem !important;
+  }
 }
 .newsFeedButton:hover {
   background: var(--background-action-low-yellow-tournesol) !important;

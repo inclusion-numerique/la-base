@@ -28,60 +28,61 @@ export const NewsFeedSearchFilters = ({
     .some(([_, value]) => !!value)
 
   return (
-    <div className={classNames(styles.sideNavContainer, 'fr-sidemenu__inner')}>
-      <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-md-8w">
-        <Button
-          priority="tertiary no outline"
-          className={classNames(
-            !hasActiveFilters && styles.activeButton,
-            'fr-width-full fr-text-mention--black fr-text--start',
-          )}
-          linkProps={{ href: '/fil-d-actualite' }}
-        >
-          <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
-            <div
-              className={classNames(
-                'fr-flex fr-align-items-center fr-flex-gap-2v',
-                styles.flexWidth,
-              )}
-            >
-              <span className="ri-list-unordered fr-mr-1w" />
-              <span className="fr-text--uppercase fr-text--xs">
-                Voir tout mon fil
-              </span>
-            </div>
-          </div>
-        </Button>
-        <div className="fr-flex fr-direction-column">
-          <NewsFeedProfessionnalSectorsFilters
-            sectors={professionalSectors}
-            counts={professionalSectorsCounts}
-            searchParams={searchParams.secteur}
-          />
-          <NewsFeedThematicsFilters
-            themes={themes}
-            counts={themesCounts}
-            searchParams={searchParams.thematique}
-          />
-          <NewsFeedBasesProfilesFilters
-            baseCounts={baseCounts}
-            profileCounts={profileCounts}
-            bases={followedBases}
-            profiles={followedProfiles}
-            searchParams={searchParams.base ?? searchParams.profil}
-          />
-        </div>
-        <div className="fr-mt-2w">
-          <Button
-            linkProps={{ href: '/fil-d-actualite/preferences' }}
-            priority="secondary"
-            size="medium"
-            className="fr-flex fr-justify-content-center fr-width-full"
+    <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-md-8w">
+      <Button
+        priority="tertiary no outline"
+        className={classNames(
+          !hasActiveFilters && styles.activeButton,
+          'fr-width-full fr-text-mention--black fr-text--start',
+        )}
+        linkProps={{ href: '/fil-d-actualite' }}
+      >
+        <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+          <div
+            className={classNames(
+              'fr-flex fr-align-items-center fr-flex-gap-2v',
+              styles.flexWidth,
+            )}
           >
-            <span className="ri-settings-3-line fr-mr-1w fr-text-label--blue-france fr-text--md" />
-            Gérer mes préférences
-          </Button>
+            <span className="ri-list-unordered fr-mr-1w" />
+            <span className="fr-text--uppercase fr-text--xs">
+              Voir tout mon fil
+            </span>
+          </div>
         </div>
+      </Button>
+      <div className="fr-flex fr-direction-column">
+        <NewsFeedProfessionnalSectorsFilters
+          sectors={professionalSectors}
+          counts={professionalSectorsCounts}
+          searchParams={searchParams.secteur}
+        />
+        <NewsFeedThematicsFilters
+          themes={themes}
+          counts={themesCounts}
+          searchParams={searchParams.thematique}
+        />
+        <NewsFeedBasesProfilesFilters
+          baseCounts={baseCounts}
+          profileCounts={profileCounts}
+          bases={followedBases}
+          profiles={followedProfiles}
+          searchParams={searchParams.base ?? searchParams.profil}
+        />
+      </div>
+      <div className="fr-mt-2w">
+        <Button
+          linkProps={{ href: '/fil-d-actualite/preferences' }}
+          priority="secondary"
+          size="medium"
+          className={classNames(
+            styles.preferencesButton,
+            'fr-flex fr-justify-content-center fr-width-full',
+          )}
+        >
+          <span className="ri-settings-3-line fr-mr-1w fr-text-label--blue-france fr-text--md" />
+          Gérer mes préférences
+        </Button>
       </div>
     </div>
   )

@@ -67,8 +67,30 @@ const NewsFeedList = ({
           )}
         </ResourceCard>
       ))}
-      <div className="fr-text--center">
-        <Button priority="secondary" onClick={loadMore} disabled={isFetching}>
+      <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
+        <Button
+          priority="secondary"
+          // className="fr-flex fr-width-full fr-justify-content-center"
+          onClick={loadMore}
+          disabled={isFetching}
+        >
+          {isFetching ? (
+            <>
+              <Spinner size="small" className="fr-mr-2v" />
+              Chargement...
+            </>
+          ) : (
+            'Voir plus de ressources'
+          )}
+        </Button>
+      </div>
+      <div className="fr-text--center fr-hidden-sm">
+        <Button
+          priority="secondary"
+          className="fr-flex fr-width-full fr-justify-content-center"
+          onClick={loadMore}
+          disabled={isFetching}
+        >
           {isFetching ? (
             <>
               <Spinner size="small" className="fr-mr-2v" />

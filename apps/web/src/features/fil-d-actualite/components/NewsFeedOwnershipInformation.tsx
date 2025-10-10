@@ -1,7 +1,6 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
-import styles from '@app/web/components/OwnershipInformation.module.css'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { formatName } from '@app/web/server/rpc/user/formatName'
@@ -18,7 +17,7 @@ import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
-import newsFeedStyles from './NewsFeedOwnershipInformation.module.css'
+import styles from './NewsFeedOwnershipInformation.module.css'
 
 const formatTimeAgo = (createdAt: Date): string => {
   const now = new Date()
@@ -186,7 +185,7 @@ export const NewsFeedOwnershipInformation = ({
       {!seen && (
         <p
           className={classNames(
-            newsFeedStyles.badge,
+            styles.badge,
             'fr-badge fr-badge--new fr-badge--sm',
           )}
         />
