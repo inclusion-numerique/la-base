@@ -59,9 +59,10 @@ const softDelete = (timestamp: Date) => ({
   data: { deleted: timestamp, updated: timestamp },
 })
 
-export const deleteProfile = async (
-  profile: { id: string; reason?: string | null },
-) => {
+export const deleteProfile = async (profile: {
+  id: string
+  reason?: string | null
+}) => {
   const timestamp = new Date()
 
   const userBases = await prismaClient.base.findMany({

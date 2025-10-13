@@ -575,9 +575,7 @@ export const isSuspiciousProfile = async (userId: string): Promise<boolean> => {
     : false
 
   // Le profil est suspect si au moins un des critères est rempli
-  return (
-    hasEnglishInDescription || isDescriptionJustALink
-  )
+  return hasEnglishInDescription || isDescriptionJustALink
 }
 
 /**

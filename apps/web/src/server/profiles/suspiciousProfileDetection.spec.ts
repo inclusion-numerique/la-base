@@ -361,7 +361,10 @@ describe('suspiciousProfileDetection', () => {
       const result = await deleteSuspiciousProfile(mockUserId)
 
       expect(result).toBe(true)
-      expect(mockDeleteProfile).toHaveBeenCalledWith({ id: mockUserId, reason: 'suspicious_auto' })
+      expect(mockDeleteProfile).toHaveBeenCalledWith({
+        id: mockUserId,
+        reason: 'suspicious_auto',
+      })
     })
 
     it('should not delete profile if it is not suspicious', async () => {
