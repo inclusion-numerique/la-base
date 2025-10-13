@@ -180,14 +180,6 @@ export const profileRouter = router({
         },
       })
 
-      // Vérifier si le profil est suspect après la mise à jour
-      const wasDeleted = await deleteSuspiciousProfile(user.id)
-
-      if (wasDeleted) {
-        // Retourner une erreur spéciale pour déclencher la redirection
-        throw new Error('SUSPICIOUS_PROFILE_DELETED')
-      }
-
       return updatedUser
     }),
   updateImage: protectedProcedure

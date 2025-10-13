@@ -564,20 +564,19 @@ export const isSuspiciousProfile = async (userId: string): Promise<boolean> => {
 
   // Vérifier si la description contient simplement un lien
   const isDescriptionJustALink = user.description
-    ? /^https?:\/\/[^\s]+$/.test(user.description.trim())
+    ? (() => {
+        const desc = user.description.trim()
+        // Cas 1: la description est strictement une URL http(s)
+        const urlOnlyRegex = /^(https?:\/\/[^\s]+)$/i
+        // Cas 2: la description contient une balise <a>
+        const anchorHttpRegex = /<a\b[^>]*>/i
+        return urlOnlyRegex.test(desc) || anchorHttpRegex.test(desc)
+      })()
     : false
-
-  // Vérifier si le profil contient un site internet ou un réseau social
-  const hasSocialMediaOrWebsite = !!(
-    user.website ||
-    user.facebook ||
-    user.twitter ||
-    user.linkedin
-  )
 
   // Le profil est suspect si au moins un des critères est rempli
   return (
-    hasEnglishInDescription || isDescriptionJustALink || hasSocialMediaOrWebsite
+    hasEnglishInDescription || isDescriptionJustALink
   )
 }
 
@@ -598,7 +597,8 @@ export const deleteSuspiciousProfile = async (
     '@app/web/server/rpc/profile/deleteProfile'
   )
 
-  await deleteProfile({ id: userId })
+  // Conserver la raison de suppression (enum mappé côté Prisma -> string DB)
+  await deleteProfile({ id: userId, reason: 'suspicious_auto' })
 
   return true
 }

@@ -484,11 +484,11 @@ describe('profileRouter', () => {
         }),
       ).rejects.toThrow('SUSPICIOUS_PROFILE_DELETED')
 
-      const deletedUser = await prismaClient.user.findUniqueOrThrow({
+      const deletedUser = (await prismaClient.user.findUniqueOrThrow({
         where: { id: suspiciousUserId },
-        select: { deleted: true },
-      })
+      })) as any
       expect(deletedUser.deleted).not.toBeNull()
+      expect(deletedUser.deletedReason).toBe('suspicious_auto')
     })
   })
 

@@ -124,7 +124,7 @@ describe('suspiciousProfileDetection', () => {
       expect(result).toBe(true)
     })
 
-    it('should return true for a recently created user with social media links (within 1 hour)', async () => {
+    it('should return false for a recently created user with social media links only (within 1 hour)', async () => {
       const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000)
 
       jest.spyOn(prismaClient.user, 'findUnique').mockResolvedValue({
@@ -139,7 +139,7 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(true)
+      expect(result).toBe(false)
     })
 
     it('should return false for a recently created user with French description and no social links (within 1 hour)', async () => {
@@ -224,7 +224,7 @@ describe('suspiciousProfileDetection', () => {
       expect(result).toBe(false)
     })
 
-    it('should return true for a recently created user with LinkedIn profile (within 1 hour)', async () => {
+    it('should return false for a recently created user with LinkedIn profile only (within 1 hour)', async () => {
       const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000)
 
       jest.spyOn(prismaClient.user, 'findUnique').mockResolvedValue({
@@ -239,7 +239,7 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(true)
+      expect(result).toBe(false)
     })
 
     it('Bond Gallery sample: recent account, english HTML link description → suspicious', async () => {
@@ -267,7 +267,7 @@ describe('suspiciousProfileDetection', () => {
       nowSpy.mockRestore()
     })
 
-    it('Outright Systems sample: recent account, website present → suspicious', async () => {
+    it('Outright Systems sample: recent account, website present → not suspicious anymore', async () => {
       const created = new Date('2025-10-03T05:53:29.917Z')
       const signedUpAt = new Date('2025-10-03T05:53:29.916Z')
       const updated = new Date('2025-10-03T05:53:29.917Z')
@@ -287,11 +287,11 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(true)
+      expect(result).toBe(false)
       nowSpy.mockRestore()
     })
 
-    it('Miracle Healthcare Center sample: recent account, english promo + website → suspicious', async () => {
+    it('Miracle Healthcare Center sample: recent account, english promo + website → suspicious (english text)', async () => {
       const created = new Date('2025-10-06T15:01:39.989Z')
       const signedUpAt = new Date('2025-10-06T15:01:39.988Z')
       const updated = new Date('2025-10-06T15:01:39.989Z')
@@ -316,7 +316,7 @@ describe('suspiciousProfileDetection', () => {
       nowSpy.mockRestore()
     })
 
-    it('United College sample: recent account, website present → suspicious', async () => {
+    it('United College sample: recent account, website present → not suspicious anymore', async () => {
       const created = new Date('2025-10-06T12:46:48.663Z')
       const signedUpAt = new Date('2025-10-06T12:46:48.662Z')
       const updated = new Date('2025-10-06T12:46:48.663Z')
@@ -337,13 +337,13 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(true)
+      expect(result).toBe(false)
       nowSpy.mockRestore()
     })
   })
 
   describe('deleteSuspiciousProfile', () => {
-    it('should delete profile if it is suspicious', async () => {
+    it('should delete profile if it is suspicious and set deletedReason to suspicious_auto', async () => {
       const mockDeleteProfile =
         require('@app/web/server/rpc/profile/deleteProfile').deleteProfile
 
@@ -361,7 +361,7 @@ describe('suspiciousProfileDetection', () => {
       const result = await deleteSuspiciousProfile(mockUserId)
 
       expect(result).toBe(true)
-      expect(mockDeleteProfile).toHaveBeenCalledWith({ id: mockUserId })
+      expect(mockDeleteProfile).toHaveBeenCalledWith({ id: mockUserId, reason: 'suspicious_auto' })
     })
 
     it('should not delete profile if it is not suspicious', async () => {
