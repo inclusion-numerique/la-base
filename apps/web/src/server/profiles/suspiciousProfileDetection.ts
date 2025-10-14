@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { DeletedReason } from '@prisma/client'
 
 // Détection simple d'anglais par score heuristique
 // - Vérifie la proportion de mots fréquents anglais
@@ -596,7 +597,7 @@ export const deleteSuspiciousProfile = async (
   )
 
   // Conserver la raison de suppression (enum mappé côté Prisma -> string DB)
-  await deleteProfile({ id: userId, reason: 'suspicious_auto' })
+  await deleteProfile({ id: userId, reason: DeletedReason.SuspiciousAuto })
 
   return true
 }

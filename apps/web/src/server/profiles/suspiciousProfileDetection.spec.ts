@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+ import { DeletedReason } from '@prisma/client'
 import {
   deleteSuspiciousProfile,
   isSuspiciousProfile,
@@ -363,7 +364,7 @@ describe('suspiciousProfileDetection', () => {
       expect(result).toBe(true)
       expect(mockDeleteProfile).toHaveBeenCalledWith({
         id: mockUserId,
-        reason: 'suspicious_auto',
+        reason: DeletedReason.SuspiciousAuto,
       })
     })
 

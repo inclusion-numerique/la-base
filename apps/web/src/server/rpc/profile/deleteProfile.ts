@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { DeletedReason } from '@prisma/client'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,
@@ -61,7 +62,7 @@ const softDelete = (timestamp: Date) => ({
 
 export const deleteProfile = async (profile: {
   id: string
-  reason?: string | null
+  reason?: DeletedReason | null
 }) => {
   const timestamp = new Date()
 
