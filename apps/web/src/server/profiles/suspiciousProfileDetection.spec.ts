@@ -1,5 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
- import { DeletedReason } from '@prisma/client'
+import { DeletedReason } from '@prisma/client'
 import {
   deleteSuspiciousProfile,
   isSuspiciousProfile,

@@ -11,6 +11,7 @@ import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { createTestContext } from '@app/web/test/createTestContext'
 import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
 import { testSessionUser } from '@app/web/test/testSessionUser'
+import { DeletedReason } from '@prisma/client'
 import { v4 } from 'uuid'
 
 describe('profileRouter', () => {
@@ -488,7 +489,7 @@ describe('profileRouter', () => {
         where: { id: suspiciousUserId },
       })) as any
       expect(deletedUser.deleted).not.toBeNull()
-      expect(deletedUser.deletedReason).toBe('suspicious_auto')
+      expect(deletedUser.deletedReason).toBe(DeletedReason.SuspiciousAuto)
     })
   })
 
