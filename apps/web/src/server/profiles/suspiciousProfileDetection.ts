@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { deleteProfile } from '@app/web/server/rpc/profile/deleteProfile'
 import { DeletedReason } from '@prisma/client'
 
 // Détection simple d'anglais par score heuristique
@@ -590,11 +591,6 @@ export const deleteSuspiciousProfile = async (
   if (!isSuspicious) {
     return false
   }
-
-  // Importer la fonction de suppression existante
-  const { deleteProfile } = await import(
-    '@app/web/server/rpc/profile/deleteProfile'
-  )
 
   // Conserver la raison de suppression (enum mappé côté Prisma -> string DB)
   await deleteProfile({ id: userId, reason: DeletedReason.SuspiciousAuto })
