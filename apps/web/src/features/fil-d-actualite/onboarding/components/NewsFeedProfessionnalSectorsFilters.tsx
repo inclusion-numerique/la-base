@@ -1,6 +1,7 @@
 'use client'
 
 import IconInSquare from '@app/web/components/IconInSquare'
+import { createSectorUrl } from '@app/web/server/newsFeed/newsFeedUrls'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -15,13 +16,13 @@ import commonStyles from './NewsFeedFilters.module.css'
 export const NewsFeedProfessionnalSectorsFilters = ({
   sectors,
   counts,
-  searchParams,
+  params,
 }: {
   sectors: ProfessionalSector[]
   counts: Record<ProfessionalSector, { count: number }>
-  searchParams?: string
+  params?: string
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!params)
 
   return (
     <>
@@ -30,7 +31,7 @@ export const NewsFeedProfessionnalSectorsFilters = ({
           type="button"
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             'fr-text-mention--black fr-px-1v',
             commonStyles.absoluteButton,
           )}
@@ -41,11 +42,11 @@ export const NewsFeedProfessionnalSectorsFilters = ({
         <Button
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: '/fil-d-actualite?secteur=tous' }}
+          linkProps={{ href: createSectorUrl('tout') }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mon secteur professionnel
@@ -59,11 +60,11 @@ export const NewsFeedProfessionnalSectorsFilters = ({
               key={ps}
               priority="tertiary no outline"
               className={classNames(
-                searchParams === ps && commonStyles.activeButton,
+                params === ps && commonStyles.activeButton,
                 'fr-width-full fr-text-mention--grey',
                 styles.button,
               )}
-              linkProps={{ href: `/fil-d-actualite?secteur=${ps}` }}
+              linkProps={{ href: createSectorUrl(ps) }}
             >
               <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                 <div
@@ -81,7 +82,7 @@ export const NewsFeedProfessionnalSectorsFilters = ({
                       'fr-mb-0 fr-text--xs fr-text--start',
                       styles.flexWidth,
                       commonStyles.label,
-                      searchParams === ps && 'fr-text--bold',
+                      params === ps && 'fr-text--bold',
                     )}
                   >
                     {professionalSectorsLabels[ps]}

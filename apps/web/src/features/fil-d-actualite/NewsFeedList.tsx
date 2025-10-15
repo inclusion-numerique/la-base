@@ -1,6 +1,5 @@
 'use client'
 
-import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
@@ -11,6 +10,7 @@ import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/components/NewsFeedOwnershipInformation'
 import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { useNewsFeedPagination } from '@app/web/hooks/useNewsFeedPagination'
+import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 import { Spinner } from '@app/web/ui/Spinner'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { NewsFeed } from '@prisma/client'
@@ -19,18 +19,18 @@ const NewsFeedList = ({
   resources,
   user,
   userNewsFeed,
-  searchParams,
+  params,
 }: {
   resources: NewsFeedResource[]
   user: SessionUser
   userNewsFeed: NewsFeed
-  searchParams: NewsFeedSearchParams
+  params: NewsFeedParams
 }) => {
   const filters = {
-    themes: searchParams.thematique ? [searchParams.thematique] : [],
-    professionalSectors: searchParams.secteur ? [searchParams.secteur] : [],
-    profileSlug: searchParams.profil,
-    baseSlug: searchParams.base,
+    themes: params.thematique ? [params.thematique] : [],
+    professionalSectors: params.secteur ? [params.secteur] : [],
+    profileSlug: params.profil,
+    baseSlug: params.base,
   }
   const {
     resources: paginatedResources,
@@ -38,9 +38,7 @@ const NewsFeedList = ({
     isFetching,
   } = useNewsFeedPagination(resources, filters)
 
-  const hasActiveFilters = Object.entries(searchParams)
-    .filter(([key]) => !['page', 'onboarding'].includes(key))
-    .some(([_, value]) => !!value)
+  const hasActiveFilters = Object.entries(params).some(([_, value]) => !!value)
 
   return (
     <>

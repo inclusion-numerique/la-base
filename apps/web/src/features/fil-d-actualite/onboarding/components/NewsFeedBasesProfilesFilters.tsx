@@ -6,6 +6,11 @@ import {
   NewsFeedBases,
   NewsFeedProfiles,
 } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  createBaseUrl,
+  createFollowsUrl,
+  createProfileUrl,
+} from '@app/web/server/newsFeed/newsFeedUrls'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { useState } from 'react'
@@ -17,15 +22,15 @@ export const NewsFeedBasesProfilesFilters = ({
   profiles,
   baseCounts,
   profileCounts,
-  searchParams,
+  params,
 }: {
   bases: NewsFeedBases
   profiles: NewsFeedProfiles
   baseCounts: Record<string, { count: number }>
   profileCounts: Record<string, { count: number }>
-  searchParams?: string
+  params?: string
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!params)
 
   if (bases.length === 0 && profiles.length === 0) {
     return null
@@ -38,7 +43,7 @@ export const NewsFeedBasesProfilesFilters = ({
           type="button"
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             commonStyles.absoluteButton,
             'fr-text-mention--black fr-px-1v',
           )}
@@ -49,11 +54,11 @@ export const NewsFeedBasesProfilesFilters = ({
         <Button
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: '/fil-d-actualite?base=tous&profil=tous' }}
+          linkProps={{ href: createFollowsUrl() }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mes bases et profils suivis
@@ -67,11 +72,11 @@ export const NewsFeedBasesProfilesFilters = ({
               key={base.id}
               priority="tertiary no outline"
               className={classNames(
-                searchParams === base.slug && commonStyles.activeButton,
+                params === base.slug && commonStyles.activeButton,
                 'fr-width-full fr-text-mention--grey',
                 styles.button,
               )}
-              linkProps={{ href: `/fil-d-actualite?base=${base.slug}` }}
+              linkProps={{ href: createBaseUrl(base.slug) }}
             >
               <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                 <div
@@ -86,7 +91,7 @@ export const NewsFeedBasesProfilesFilters = ({
                       'fr-mb-0 fr-text--xs fr-text--start',
                       styles.flexWidth,
                       commonStyles.label,
-                      searchParams === base.slug && 'fr-text--bold',
+                      params === base.slug && 'fr-text--bold',
                     )}
                   >
                     {base.title}
@@ -105,11 +110,11 @@ export const NewsFeedBasesProfilesFilters = ({
               key={profile.id}
               priority="tertiary no outline"
               className={classNames(
-                searchParams === profile.slug && commonStyles.activeButton,
+                params === profile.slug && commonStyles.activeButton,
                 'fr-width-full fr-text-mention--grey',
                 styles.button,
               )}
-              linkProps={{ href: `/fil-d-actualite?profil=${profile.slug}` }}
+              linkProps={{ href: createProfileUrl(profile.slug) }}
             >
               <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                 <div
@@ -128,7 +133,7 @@ export const NewsFeedBasesProfilesFilters = ({
                       'fr-mb-0 fr-text--xs fr-text--start',
                       styles.flexWidth,
                       commonStyles.label,
-                      searchParams === profile.slug && 'fr-text--bold',
+                      params === profile.slug && 'fr-text--bold',
                     )}
                   >
                     {profile.name}

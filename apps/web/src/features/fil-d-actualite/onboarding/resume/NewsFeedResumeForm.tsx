@@ -37,7 +37,7 @@ const NewsFeedResumeForm = ({
   const onSubmit = async (data: UpdateNewsFeedResumeCommand) => {
     try {
       await mutate.mutateAsync(data)
-      router.push('/fil-d-actualite?onboarding=true')
+      router.push('/fil-d-actualite/tout?onboarding=true')
     } catch (error) {
       Sentry.captureException(error)
     }

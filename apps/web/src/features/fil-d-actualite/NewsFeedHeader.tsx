@@ -1,9 +1,11 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
+import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
+import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { NewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
+import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -18,17 +20,18 @@ import Badge from '@codegouvfr/react-dsfr/Badge'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
+import Link from 'next/link'
 
 export const NewsFeedHeader = ({
-  searchParams,
+  params,
   notificationsCount,
   newsFeedPageContext,
 }: {
-  searchParams: NewsFeedSearchParams
+  params: NewsFeedParams
   notificationsCount: NewsFeedNotifications
   newsFeedPageContext: NewsFeedPageContext
 }) => {
-  const { thematique, secteur } = searchParams
+  const { thematique, secteur, base, profil } = params
   const notificationsContainer = !!notificationsCount &&
     notificationsCount.count > 0 && (
       <Badge severity="new" small>
@@ -45,7 +48,7 @@ export const NewsFeedHeader = ({
       const theme = thematique as Theme
       return (
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          {thematique !== 'tous' && (
+          {thematique !== 'tout' && (
             <IconInSquare
               iconId={
                 CATEGORY_VARIANTS[themeCategories[theme]]
@@ -56,7 +59,7 @@ export const NewsFeedHeader = ({
               iconClassName={CATEGORY_VARIANTS[themeCategories[theme]].color}
             />
           )}
-          {thematique !== 'tous' ? (
+          {thematique !== 'tout' ? (
             <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
               <span
                 className={classNames(
@@ -91,13 +94,13 @@ export const NewsFeedHeader = ({
       const sector = secteur as ProfessionalSector
       return (
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          {secteur !== 'tous' && (
+          {secteur !== 'tout' && (
             <IconInSquare
               iconId={professionalSectorsIcon[sector]}
               size="medium"
             />
           )}
-          {secteur !== 'tous' ? (
+          {secteur !== 'tout' ? (
             <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
                 Découvrez les dernières publications liés au secteur
@@ -120,6 +123,118 @@ export const NewsFeedHeader = ({
         </div>
       )
     }
+    if (base === 'tout' && profil === 'tout') {
+      return (
+        <div className="fr-flex fr-text--lg fr-mb-0">
+          <span className="fr-mb-0">
+            Découvrez les dernières publications liés à&nbsp;
+            <span className="fr-text--bold">vos bases et profils suivis</span>
+          </span>
+        </div>
+      )
+    }
+
+    if (base) {
+      const followedBase = newsFeedPageContext.followedBases.find(
+        (fBase) => fBase.slug === base,
+      )
+
+      if (!followedBase) {
+        return (
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés à la base
+            </span>
+          </div>
+        )
+      }
+
+      return (
+        <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
+          <BaseImage base={followedBase} />
+
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés de la base&nbsp;
+              <Link
+                href={`/bases/${followedBase.slug}`}
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+              >
+                {followedBase.title}
+              </Link>
+            </span>
+          </div>
+        </div>
+      )
+    }
+
+    if (profil) {
+      const followedProfile = newsFeedPageContext.followedProfiles.find(
+        (fProfile) => fProfile.slug === profil,
+      )
+
+      if (!followedProfile) {
+        return (
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés à votre profil
+            </span>
+          </div>
+        )
+      }
+
+      return (
+        <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
+          <RoundProfileImage user={followedProfile} />
+
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés à votre profil&nbsp;
+              <Link
+                href={`/profils/${followedProfile.slug}`}
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+              >
+                {followedProfile.name}
+              </Link>
+            </span>
+          </div>
+        </div>
+      )
+    }
+
+    if (base) {
+      const followedBase = newsFeedPageContext.followedBases.find(
+        (fBase) => fBase.slug === base,
+      )
+
+      if (!followedBase) {
+        return (
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés à la base
+            </span>
+          </div>
+        )
+      }
+
+      return (
+        <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
+          <BaseImage base={followedBase} />
+
+          <div className="fr-flex fr-text--lg fr-mb-0">
+            <span className="fr-mb-0">
+              Découvrez les dernières publications liés de la base&nbsp;
+              <Link
+                href={`/bases/${followedBase.slug}`}
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+              >
+                {followedBase.title}
+              </Link>
+            </span>
+          </div>
+        </div>
+      )
+    }
 
     return (
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
@@ -127,7 +242,7 @@ export const NewsFeedHeader = ({
           Découvrez les dernières publications liés à vos préférences
         </span>
 
-        <span className="fr-text--md fr-mb-0">
+        <span className="fr-text--md fr-hidden-sm fr-mb-0">
           Découvrez les dernières publications liés à vos préférences
         </span>
       </div>
@@ -169,7 +284,7 @@ export const NewsFeedHeader = ({
             </button>
             <div className="fr-header__menu-links">
               <NewsFeedSearchFilters
-                searchParams={searchParams}
+                params={params}
                 newsFeedPageContext={newsFeedPageContext}
               />
             </div>

@@ -1,18 +1,21 @@
-import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedBasesProfilesFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedBasesProfilesFilters'
 import { NewsFeedProfessionnalSectorsFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedProfessionnalSectorsFilters'
 import { NewsFeedThematicsFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedThematicsFilters'
+import {
+  createDefaultUrl,
+  NewsFeedParams,
+} from '@app/web/server/newsFeed/newsFeedUrls'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import styles from './NewsFeedSearchFilters.module.css'
 
 export const NewsFeedSearchFilters = ({
   newsFeedPageContext,
-  searchParams,
+  params,
 }: {
   newsFeedPageContext: NewsFeedPageContext
-  searchParams: NewsFeedSearchParams
+  params: NewsFeedParams
 }) => {
   const { professionalSectors, themes } = newsFeedPageContext.userNewsFeed
   const {
@@ -23,9 +26,7 @@ export const NewsFeedSearchFilters = ({
   } = newsFeedPageContext.resourceCounts
 
   const { followedBases, followedProfiles } = newsFeedPageContext
-  const hasActiveFilters = Object.entries(searchParams)
-    .filter(([key]) => key !== 'onboarding')
-    .some(([_, value]) => !!value)
+  const hasActiveFilters = Object.entries(params).some(([_, value]) => !!value)
 
   return (
     <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-md-8w">
@@ -35,7 +36,7 @@ export const NewsFeedSearchFilters = ({
           !hasActiveFilters && styles.activeButton,
           'fr-width-full fr-text-mention--black fr-text--start',
         )}
-        linkProps={{ href: '/fil-d-actualite' }}
+        linkProps={{ href: createDefaultUrl() }}
       >
         <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
           <div
@@ -55,19 +56,19 @@ export const NewsFeedSearchFilters = ({
         <NewsFeedProfessionnalSectorsFilters
           sectors={professionalSectors}
           counts={professionalSectorsCounts}
-          searchParams={searchParams.secteur}
+          params={params.secteur}
         />
         <NewsFeedThematicsFilters
           themes={themes}
           counts={themesCounts}
-          searchParams={searchParams.thematique}
+          params={params.thematique}
         />
         <NewsFeedBasesProfilesFilters
           baseCounts={baseCounts}
           profileCounts={profileCounts}
           bases={followedBases}
           profiles={followedProfiles}
-          searchParams={searchParams.base ?? searchParams.profil}
+          params={params.base ?? params.profil}
         />
       </div>
       <div className="fr-mt-2w">

@@ -3,6 +3,10 @@ import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  createSectorUrl,
+  createThemeUrl,
+} from '@app/web/server/newsFeed/newsFeedUrls'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import {
   professionalSectorsIcon,
@@ -68,7 +72,7 @@ const newsFeedAttributionConfig = {
           Ressource publiée dans la thématique&nbsp;
           <Link
             className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
-            href={`/fil-d-actualite?thematique=${matchingTheme}`}
+            href={createThemeUrl(matchingTheme as Theme)}
           >
             {themeLabels[matchingTheme as Theme]}
           </Link>
@@ -129,7 +133,9 @@ const newsFeedAttributionConfig = {
           Ressource à destination des&nbsp;
           <Link
             className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
-            href={`/fil-d-actualite?secteur-professionnel=${matchingProfessionalSector}`}
+            href={createSectorUrl(
+              matchingProfessionalSector as ProfessionalSector,
+            )}
           >
             {
               professionalSectorsLabels[
