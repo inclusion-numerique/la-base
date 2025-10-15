@@ -38,9 +38,6 @@ export const getRecommendedBasesToFollow = async (user: SessionUser | null) => {
       }>
     >(
       Prisma.sql`
-        WITH followedBases AS (
-          SELECT base_id FROM base_follows WHERE follower_id = ${user.id}::uuid
-        )
         SELECT DISTINCT
           b.id,
           COUNT(r.id) as resource_count
@@ -56,7 +53,6 @@ export const getRecommendedBasesToFollow = async (user: SessionUser | null) => {
               newsFeedPreferences.professionalSectors,
             )}::professional_sector[]
           )
-          AND b.id NOT IN (SELECT base_id FROM followedBases)
         GROUP BY b.id
         ORDER BY resource_count DESC
         LIMIT ${RECOMMENDED_BASES_LIMIT}

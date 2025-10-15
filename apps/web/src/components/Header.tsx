@@ -83,8 +83,8 @@ const Header = async ({ user }: { user?: SessionUser | null }) => {
                           ? !user.newsFeed ||
                             !user.newsFeed.hasCompleteOnboarding
                             ? '/fil-d-actualite/onboarding'
-                            : '/fil-d-actualite'
-                          : '/connexion?suivant=/fil-d-actualite',
+                            : '/fil-d-actualite/tout'
+                          : '/connexion?suivant=/fil-d-actualite/tout',
                       }}
                     >
                       <span
@@ -187,8 +187,8 @@ const Header = async ({ user }: { user?: SessionUser | null }) => {
                             ? !user.newsFeed ||
                               !user.newsFeed.hasCompleteOnboarding
                               ? '/fil-d-actualite/onboarding'
-                              : '/fil-d-actualite'
-                            : '/connexion?suivant=/fil-d-actualite',
+                              : '/fil-d-actualite/tout'
+                            : '/connexion?suivant=/fil-d-actualite/tout',
                         }}
                         size="small"
                       >

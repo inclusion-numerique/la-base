@@ -1,6 +1,7 @@
 'use client'
 
 import IconInSquare from '@app/web/components/IconInSquare'
+import { createThemeUrl } from '@app/web/server/newsFeed/newsFeedUrls'
 import {
   CATEGORY_VARIANTS,
   themeCategories,
@@ -17,14 +18,16 @@ import commonStyles from './NewsFeedFilters.module.css'
 export const NewsFeedThematicsFilters = ({
   themes,
   counts,
-  searchParams,
+  params,
 }: {
   themes: Theme[]
   counts: Record<Theme, { count: number }>
-  searchParams?: string
+  params?: string
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [showAll, setShowAll] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!params)
+  const [showAll, setShowAll] = useState(
+    !!params && themes.findIndex((t) => t === params) > 4,
+  )
 
   const displayedThemes = showAll ? themes : themes.slice(0, 4)
 
@@ -34,7 +37,7 @@ export const NewsFeedThematicsFilters = ({
         <Button
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             'fr-text-mention--black fr-px-1v',
             commonStyles.absoluteButton,
           )}
@@ -46,11 +49,11 @@ export const NewsFeedThematicsFilters = ({
         <Button
           priority="tertiary no outline"
           className={classNames(
-            searchParams === 'tous' && commonStyles.activeButton,
+            params === 'tout' && commonStyles.activeButton,
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: '/fil-d-actualite?thematique=tous' }}
+          linkProps={{ href: createThemeUrl('tout') }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mes thématiques suivies
@@ -64,10 +67,11 @@ export const NewsFeedThematicsFilters = ({
               key={theme}
               priority="tertiary no outline"
               className={classNames(
+                params === theme && commonStyles.activeButton,
                 'fr-width-full fr-text-mention--grey',
                 styles.button,
               )}
-              linkProps={{ href: `/fil-d-actualite?thematique=${theme}` }}
+              linkProps={{ href: createThemeUrl(theme) }}
             >
               <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                 <div

@@ -1,14 +1,14 @@
-import { NewsFeedSearchParams } from '@app/web/app/fil-d-actualite/(fil-actualite)/page'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
 import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
+import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 
 const NewsFeedPage = async ({
-  searchParams,
+  params,
   newsFeedPageContext,
 }: {
-  searchParams: NewsFeedSearchParams
+  params: NewsFeedParams
   newsFeedPageContext: NewsFeedPageContext
 }) => {
   const { userNewsFeed, resources, user, notificationsCount } =
@@ -20,7 +20,7 @@ const NewsFeedPage = async ({
         className="fr-m-0 fr-py-4v"
       />
       <NewsFeedHeader
-        searchParams={searchParams}
+        params={params}
         notificationsCount={notificationsCount}
         newsFeedPageContext={newsFeedPageContext}
       />
@@ -30,7 +30,7 @@ const NewsFeedPage = async ({
             resources={resources}
             user={user}
             userNewsFeed={userNewsFeed}
-            searchParams={searchParams}
+            params={params}
           />
         </div>
       </div>

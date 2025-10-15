@@ -251,9 +251,9 @@ export const getUnseenResourcesCount = async (
     baseSlug,
   } = filters
 
-  // When base=tous and profile=tous, only count resources from followed bases and profiles
+  // When base=tout and profile=tout, only count resources from followed bases and profiles
   // This matches the logic in getNewsFeedResources
-  const isFollowedOnlyMode = baseSlug === 'tous' && profileSlug === 'tous'
+  const isFollowedOnlyMode = baseSlug === 'tout' && profileSlug === 'tout'
 
   const result = await prismaClient.$queryRaw<
     {
@@ -281,7 +281,7 @@ export const getUnseenResourcesCount = async (
               ${
                 isFollowedOnlyMode
                   ? Prisma.sql`
-                    -- For followed-only mode (base=tous&profil=), only count resources from followed bases and profiles
+                    -- For followed-only mode (base=tout&profil=tout), only count resources from followed bases and profiles
                     (
                       r.base_id IN (SELECT base_id FROM followedBases)
                       OR
@@ -291,7 +291,7 @@ export const getUnseenResourcesCount = async (
                     -- Apply all filters for regular mode
                     (
                       ${themes.length === 0} OR ${
-                        themes.includes('tous')
+                        themes.includes('tout')
                           ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)`
                           : Prisma.sql`r.themes && ${enumArrayToSnakeCaseStringArray(
                               themes,
@@ -300,7 +300,7 @@ export const getUnseenResourcesCount = async (
                     )
                     AND (
                       ${professionalSectors.length === 0} OR ${
-                        professionalSectors.includes('tous')
+                        professionalSectors.includes('tout')
                           ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)`
                           : Prisma.sql`r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
                               professionalSectors,
@@ -435,7 +435,7 @@ export const getResourceIds = async (
         -- Apply filters if provided
         AND (
           ${themes.length === 0} OR ${
-            themes.includes('tous')
+            themes.includes('tout')
               ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)`
               : Prisma.sql`r.themes && ${enumArrayToSnakeCaseStringArray(
                   themes,
@@ -444,7 +444,7 @@ export const getResourceIds = async (
         )
         AND (
           ${professionalSectors.length === 0} OR ${
-            professionalSectors.includes('tous')
+            professionalSectors.includes('tout')
               ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)`
               : Prisma.sql`r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
                   professionalSectors,
@@ -495,7 +495,7 @@ export const getNewsFeedResources = async (
   const { profileSlug, baseSlug } = filters
 
   const newsFeedResources =
-    baseSlug === 'tous' && profileSlug === 'tous'
+    baseSlug === 'tout' && profileSlug === 'tout'
       ? await getFollowedResourceIds(userId, paginationParams, lastOpenedAt)
       : await getResourceIds(userId, filters, paginationParams, lastOpenedAt)
 
@@ -619,14 +619,13 @@ export const getNewsFeedPageContext = cache(
     const user = await getSessionUser()
     const userNewsFeed = await getNewsFeed(user)
     if (!user) {
-      return redirect('/connexion?suivant=/fil-d-actualite')
+      return redirect('/connexion?suivant=/fil-d-actualite/tout')
     }
     // Redirect to onboarding only if no newsFeed record exists
     // If user has skipped onboarding (hasCompleteOnboarding: false), they can still access the feed
     if (!userNewsFeed) {
       return redirect('/fil-d-actualite/onboarding')
     }
-
     const [
       { resources, followedBases, followedProfiles },
       resourceCounts,
