@@ -50,8 +50,22 @@ const ProfileInformationsEdition = ({
   const mutation = trpc.profile.updateInformations.useMutation()
 
   const handleSave = async (data: UpdateProfileInformationsCommand) => {
-    const updatedUser = await mutation.mutateAsync(data)
-    router.push(`/profils/${updatedUser.slug}/modifier`)
+    try {
+      const updatedUser = await mutation.mutateAsync(data)
+      router.push(`/profils/${updatedUser.slug}/modifier`)
+    } catch (error) {
+      // Vérifier si c'est une erreur de profil suspect supprimé
+      if (
+        error instanceof Error &&
+        error.message === 'SUSPICIOUS_PROFILE_DELETED'
+      ) {
+        // Rediriger vers la page principale
+        router.push('/')
+        return
+      }
+      // Re-lancer l'erreur pour la gestion normale
+      throw error
+    }
   }
 
   return (

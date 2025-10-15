@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { DeletedReason } from '@prisma/client'
 
 const deletedUser = (id: string, timestamp: Date) => ({
   firstName: null,
@@ -59,7 +60,10 @@ const softDelete = (timestamp: Date) => ({
   data: { deleted: timestamp, updated: timestamp },
 })
 
-export const deleteProfile = async (profile: { id: string }) => {
+export const deleteProfile = async (profile: {
+  id: string
+  reason?: DeletedReason | null
+}) => {
   const timestamp = new Date()
 
   const userBases = await prismaClient.base.findMany({
@@ -103,12 +107,18 @@ export const deleteProfile = async (profile: { id: string }) => {
     ...softDelete(timestamp),
   })
 
+  // Use an untyped payload to avoid compile errors before Prisma client is regenerated
+  const userUpdateData: any = {
+    ...deletedUser(profile.id, timestamp),
+    accounts: { deleteMany: {} },
+    sessions: { deleteMany: {} },
+  }
+  if (profile.reason !== undefined) {
+    userUpdateData.deletedReason = profile.reason
+  }
+
   return prismaClient.user.update({
     where: { id: profile.id },
-    data: {
-      ...deletedUser(profile.id, timestamp),
-      accounts: { deleteMany: {} },
-      sessions: { deleteMany: {} },
-    },
+    data: userUpdateData,
   })
 }

@@ -15,7 +15,7 @@ const Beneficiaries = ({
   }[]
 }) => {
   return (
-    <Card title="Les 10 bénéficiaires les plus utilisés">
+    <Card title="Les bénéficiaires les plus utilisés">
       {beneficiaries.map(({ label, progress, value, beneficiary }, index) => (
         <ProgressBar
           key={label}

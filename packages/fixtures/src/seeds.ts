@@ -32,6 +32,7 @@ export const seed = async (transaction: Prisma.TransactionClient) => {
         where: { id: user.id },
         create: { ...user, isFixture: true },
         update: { ...user, isFixture: true },
+        select: { id: true },
       }),
     ),
   )
@@ -42,6 +43,7 @@ export const seed = async (transaction: Prisma.TransactionClient) => {
         where: { id: user.id },
         create: user,
         update: user,
+        select: { id: true },
       }),
     ),
   )
