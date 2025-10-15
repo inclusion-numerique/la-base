@@ -82,6 +82,7 @@ model User {
   sessions            Session[]
   isPublic            Boolean   @default(true) @map("is_public")
   deleted             DateTime?
+  deletedReason       DeletedReason?        @map("deleted_reason")
   hasSeenV2Onboarding DateTime? @map("has_seen_v2_onboarding")
   timezone            String    @default("Europe/Paris")
   // Created by a fixture system, can be reset and will only be here on preview envs
@@ -118,6 +119,13 @@ model User {
   featuredBlockId String?        @unique @db.Uuid
 
   @@map("users")
+}
+
+// Raison de suppression d'un profil
+enum DeletedReason {
+  SuspiciousAuto @map("suspicious_auto")
+
+  @@map("deleted_reason")
 }
 
 // For handling external systems that changed or invalidate user emails,

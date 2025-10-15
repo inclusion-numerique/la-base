@@ -26,7 +26,7 @@ const StatisticsPage = async ({
           Chiffres clés pour suivre l’usage du service
         </h2>
         <div className="fr-grid-row fr-grid-row--gutters">
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
               title={
                 <KeyFigureTitle type="publications">
@@ -42,7 +42,7 @@ const StatisticsPage = async ({
               </div>
             </Card>
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
               title={
                 <KeyFigureTitle type="views">
@@ -58,22 +58,7 @@ const StatisticsPage = async ({
               </div>
             </Card>
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
-            <Card
-              title={
-                <KeyFigureTitle type="rates">
-                  {numberToString(kpi.rates.average)}/10
-                </KeyFigureTitle>
-              }
-              titleAs="div"
-            >
-              Indice de satisfaction globale
-              <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
-                sur {numberToString(kpi.rates.count)} avis
-              </div>
-            </Card>
-          </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
               title={
                 <KeyFigureTitle type="users">

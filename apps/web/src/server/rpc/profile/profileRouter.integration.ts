@@ -11,6 +11,7 @@ import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { createTestContext } from '@app/web/test/createTestContext'
 import { createTestIdTitleAndSlug } from '@app/web/test/createTestIdTitleAndSlug'
 import { testSessionUser } from '@app/web/test/testSessionUser'
+import { DeletedReason } from '@prisma/client'
 import { v4 } from 'uuid'
 
 describe('profileRouter', () => {
@@ -54,6 +55,9 @@ describe('profileRouter', () => {
         id: givenUserId,
         email: givenUserEmail,
         slug: givenUserSlug,
+        // Marque ce profil comme ancien pour ne pas être considéré "recent"
+        created: new Date(Date.now() - 2 * 60 * 60 * 1000),
+        signedUpAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
       },
     })
   })
@@ -428,7 +432,7 @@ describe('profileRouter', () => {
         firstName: 'John',
         lastName: 'Doe',
         department: '24',
-        description: 'This is John Doe',
+        description: 'Ceci est John Doe',
       })
 
       const user = await prismaClient.user.findUniqueOrThrow({
@@ -439,7 +443,53 @@ describe('profileRouter', () => {
       expect(user.lastName).toBe('Doe')
       expect(user.name).toBe('John Doe')
       expect(user.department).toBe('24')
-      expect(user.description).toBe('This is John Doe')
+      expect(user.description).toBe('Ceci est John Doe')
+    })
+  })
+
+  describe('suspicious deletion', () => {
+    it('should delete profile when description is English (suspicious)', async () => {
+      const suspiciousUserId = v4()
+      const suspiciousUserEmail = `suspicious+${suspiciousUserId}@inclusion-numerique.anct.gouv.fr`
+      const suspiciousUserSlug = `suspicious+${suspiciousUserId}`
+      usersToDelete.push(suspiciousUserId)
+
+      await prismaClient.user.create({
+        data: {
+          id: suspiciousUserId,
+          email: suspiciousUserEmail,
+          slug: suspiciousUserSlug,
+          // Marque ce profil comme récent pour déclencher la détection
+          created: new Date(),
+          signedUpAt: new Date(),
+        },
+      })
+
+      const suspiciousSessionUser = {
+        ...testSessionUser,
+        id: suspiciousUserId,
+        email: suspiciousUserEmail,
+        slug: suspiciousUserSlug,
+      }
+
+      const caller = profileRouter.createCaller(
+        createTestContext({ user: suspiciousSessionUser }),
+      )
+
+      await expect(
+        caller.updateInformations({
+          firstName: 'John',
+          lastName: 'Doe',
+          department: '24',
+          description: 'This is John Doe',
+        }),
+      ).rejects.toThrow('SUSPICIOUS_PROFILE_DELETED')
+
+      const deletedUser = (await prismaClient.user.findUniqueOrThrow({
+        where: { id: suspiciousUserId },
+      })) as any
+      expect(deletedUser.deleted).not.toBeNull()
+      expect(deletedUser.deletedReason).toBe(DeletedReason.SuspiciousAuto)
     })
   })
 
@@ -447,10 +497,10 @@ describe('profileRouter', () => {
     it('should change profil contact informations', async (): Promise<void> => {
       await executeUpdateProfilContactsProcedure({
         emailIsPublic: true,
-        website: 'https://www.john-doe.com',
-        facebook: 'https://www.facebook.com/john-doe',
-        twitter: 'https://twitter.com/JDoe',
-        linkedin: 'https://www.linkedin.com/in/john-doe',
+        website: '',
+        facebook: '',
+        twitter: '',
+        linkedin: '',
       })
 
       const user = await prismaClient.user.findUniqueOrThrow({
@@ -458,10 +508,10 @@ describe('profileRouter', () => {
       })
 
       expect(user.emailIsPublic).toBe(true)
-      expect(user.website).toBe('https://www.john-doe.com')
-      expect(user.facebook).toBe('https://www.facebook.com/john-doe')
-      expect(user.twitter).toBe('https://twitter.com/JDoe')
-      expect(user.linkedin).toBe('https://www.linkedin.com/in/john-doe')
+      expect(user.website).toBeNull()
+      expect(user.facebook).toBeNull()
+      expect(user.twitter).toBeNull()
+      expect(user.linkedin).toBeNull()
     })
   })
 
@@ -471,7 +521,7 @@ describe('profileRouter', () => {
         firstName: 'John',
         lastName: 'Doe',
         department: '24',
-        description: 'This is John Doe',
+        description: 'Ceci est John Doe',
       })
 
       await executeUpdateProfilContactsProcedure({

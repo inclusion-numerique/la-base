@@ -41,6 +41,19 @@ export const signinCallback: <
     return `/connexion?error=MissingProviderEmail`
   }
 
+  const existingUser = await prismaClient.user.findUnique({
+    where: {
+      email: userEmail,
+    },
+    select: {
+      id: true,
+      role: true,
+      firstName: true,
+      emailVerified: true,
+      lastName: true,
+    },
+  })
+
   /**
    * Only basic users can sign in with email magic link
    * Admins can sign in with ProConnect
@@ -51,16 +64,6 @@ export const signinCallback: <
     PublicWebAppConfig.isMain ||
     PublicWebAppConfig.isDev
   ) {
-    const existingUser = await prismaClient.user.findUnique({
-      where: {
-        email: userEmail,
-      },
-      select: {
-        id: true,
-        role: true,
-      },
-    })
-
     if (!!email && existingUser && existingUser.role !== 'User') {
       return `/connexion?error=ProConnectOnly`
     }
@@ -68,6 +71,37 @@ export const signinCallback: <
 
   // Update account tokens if this is a ProConnect signin
   if (account?.provider === proConnectProviderId && account.access_token) {
+    if (existingUser && profile) {
+      const profileFirstName =
+        'given_name' in profile ? (profile.given_name as string) : undefined
+      const profileLastName =
+        'usual_name' in profile ? (profile.usual_name as string) : undefined
+      const profileName =
+        'given_name' in profile && 'usual_name' in profile
+          ? `${profile.given_name} ${profile.usual_name}`.trim()
+          : undefined
+
+      const shouldUpdateUserInfo =
+        (profileFirstName && profileFirstName !== existingUser.firstName) ||
+        (profileLastName && profileLastName !== existingUser.lastName) ||
+        !existingUser.emailVerified
+
+      if (shouldUpdateUserInfo) {
+        await prismaClient.user.update({
+          where: { id: existingUser.id },
+          data: {
+            firstName: profileFirstName || existingUser.firstName,
+            lastName: profileLastName || existingUser.lastName,
+            name:
+              profileName ||
+              `${profileFirstName || ''} ${profileLastName || ''}`.trim() ||
+              undefined,
+            emailVerified: new Date(),
+            updated: new Date(),
+          },
+        })
+      }
+    }
     updateAccountTokens({
       userId: user.id,
       provider: proConnectProviderId,

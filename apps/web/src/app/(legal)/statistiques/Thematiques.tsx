@@ -21,7 +21,7 @@ const Thematiques = ({
   const [showAllThematiques, setShowAllThematiques] = useState(false)
 
   return (
-    <Card title="Les 10 thématiques les plus utilisées">
+    <Card title="Les thématiques les plus utilisées">
       {thematiques
         .slice(0, showAllThematiques ? -1 : 10)
         .map((thematique, index) => (
