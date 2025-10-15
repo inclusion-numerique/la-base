@@ -12,7 +12,7 @@ export default async function NewsFeedParametragePage() {
   const userNewsFeed = await getNewsFeed(user)
 
   if (userNewsFeed?.hasCompleteOnboarding) {
-    return redirect('/fil-d-actualite')
+    return redirect('/fil-d-actualite/tout')
   }
   return (
     <>

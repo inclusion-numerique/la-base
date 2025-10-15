@@ -125,7 +125,7 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
 
     cy.contains("Votre fil d'actualité est prêt !")
 
-    cy.appUrlShouldBe('/fil-d-actualite?onboarding=true')
+    cy.appUrlShouldBe('/fil-d-actualite/tout?onboarding=true')
   })
 
   it("Acceptation 5 - Utilisateur qui a skip peut accéder à l'onboarding via le bouton header", () => {
@@ -143,12 +143,12 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.visit('/')
     cy.testId('news-feed-button').click()
 
-    cy.appUrlShouldBe('/fil-d-actualite')
+    cy.appUrlShouldBe('/fil-d-actualite/tout')
   })
 
   it("Acceptation 7 - Utilisateur connecté avec newsFeed complet ne peut pas accéder à l'onboarding", () => {
     cy.createUserAndSignin(userWithNewsFeedComplete)
     cy.visit('/fil-d-actualite/onboarding')
-    cy.appUrlShouldBe('/fil-d-actualite')
+    cy.appUrlShouldBe('/fil-d-actualite/tout')
   })
 })
