@@ -9,6 +9,7 @@ export type NewsFeedFilters = {
   professionalSectors: string[]
   profileSlug?: string
   baseSlug?: string
+  lastOpenedAt: Date | null
 }
 
 export const useNewsFeedPagination = (
@@ -27,6 +28,7 @@ export const useNewsFeedPagination = (
         professionalSectors: filters.professionalSectors,
         profileSlug: filters.profileSlug,
         baseSlug: filters.baseSlug,
+        lastOpenedAt: filters.lastOpenedAt,
       },
       {
         enabled: false,
