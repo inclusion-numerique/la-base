@@ -19,17 +19,30 @@ const GetNewsFeedResourcesValidation = z.object({
   professionalSectors: z.array(z.string()).default([]),
   profileSlug: z.string().optional(),
   baseSlug: z.string().optional(),
+  lastOpenedAt: z.date().nullable(),
 })
 
 export const newsFeedRouter = router({
   getResources: protectedProcedure
     .input(GetNewsFeedResourcesValidation)
     .query(async ({ input, ctx: { user } }) => {
-      const { page, themes, professionalSectors, profileSlug, baseSlug } = input
+      const {
+        page,
+        themes,
+        professionalSectors,
+        profileSlug,
+        baseSlug,
+        lastOpenedAt,
+      } = input
       const filters = { themes, professionalSectors, profileSlug, baseSlug }
       const paginationParams = { page, perPage: 20, sort: 'recent' as const }
 
-      return getNewsFeedResources(user.id, filters, paginationParams)
+      return getNewsFeedResources(
+        user.id,
+        filters,
+        paginationParams,
+        lastOpenedAt ?? undefined,
+      )
     }),
   skip: protectedProcedure
     .input(z.object({ hasCompleteOnboarding: z.boolean() }))

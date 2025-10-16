@@ -31,6 +31,7 @@ const NewsFeedList = ({
     professionalSectors: params.secteur ? [params.secteur] : [],
     profileSlug: params.profil,
     baseSlug: params.base,
+    lastOpenedAt: userNewsFeed.lastOpenedAt,
   }
   const {
     resources: paginatedResources,
