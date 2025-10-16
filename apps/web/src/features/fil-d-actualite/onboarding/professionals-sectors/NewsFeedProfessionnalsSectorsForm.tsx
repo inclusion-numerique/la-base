@@ -1,6 +1,7 @@
 'use client'
 
 import CheckboxGroupFormField from '@app/ui/components/Form/CheckboxGroupFormField'
+import { createToast } from '@app/ui/toast/createToast'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
@@ -9,6 +10,7 @@ import {
   UpdateNewsFeedSectorsProfessionnalsCommand,
   UpdateNewsFeedSectorsProfessionnalsValidation,
 } from '@app/web/features/fil-d-actualite/onboarding/professionals-sectors/newsFeedProfessionnalsSectors'
+import { NewsFeedProfessionalsSectorsPreferenceModal } from '@app/web/features/fil-d-actualite/preferences/NewsFeedProfessionalsSectorsPreferenceForm'
 import {
   professionalSectorsIcon,
   professionalSectorsOptions,
@@ -24,8 +26,10 @@ import styles from './NewsFeedProfessionnalsSectors.module.css'
 
 const NewsFeedProfessionnalsSectors = ({
   userNewsFeed,
+  context,
 }: {
   userNewsFeed: UserNewsFeed | null
+  context: 'preferences' | 'onboarding'
 }) => {
   const mutate = trpc.newsFeed.updateProfessionalSectors.useMutation()
   const router = useRouter()
@@ -39,8 +43,21 @@ const NewsFeedProfessionnalsSectors = ({
 
   const onSubmit = async (data: UpdateNewsFeedSectorsProfessionnalsCommand) => {
     try {
-      await mutate.mutateAsync(data)
-      router.push('/fil-d-actualite/onboarding/themes')
+      await mutate.mutateAsync(data, {
+        onSuccess: () => {
+          if (context === 'onboarding') {
+            router.push('/fil-d-actualite/onboarding/themes')
+          }
+          if (context === 'preferences') {
+            NewsFeedProfessionalsSectorsPreferenceModal.close()
+            router.refresh()
+            createToast({
+              priority: 'success',
+              message: 'Vos préférences ont été mises à jour.',
+            })
+          }
+        },
+      })
     } catch (error) {
       Sentry.captureException(error)
     }
@@ -48,7 +65,10 @@ const NewsFeedProfessionnalsSectors = ({
 
   return (
     <>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        id="news-feed-professionals-sectors-form"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <CheckboxGroupFormField
           control={form.control}
           path="professionalSectors"
@@ -75,19 +95,23 @@ const NewsFeedProfessionnalsSectors = ({
             ),
           }}
         />
-        <div className="fr-width-full fr-mt-12v">
-          <Button
-            className="fr-width-full fr-flex fr-justify-content-center"
-            type="submit"
-            disabled={mutate.isPending}
-          >
-            Suivant
-          </Button>
-        </div>
+        {context === 'onboarding' && (
+          <div className="fr-width-full fr-mt-12v">
+            <Button
+              className="fr-width-full fr-flex fr-justify-content-center"
+              type="submit"
+              disabled={mutate.isPending}
+            >
+              Suivant
+            </Button>
+          </div>
+        )}
       </form>
-      <div className="fr-flex fr-justify-content-center fr-mt-6v">
-        <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
-      </div>
+      {context === 'onboarding' && (
+        <div className="fr-flex fr-justify-content-center fr-mt-6v">
+          <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
+        </div>
+      )}
     </>
   )
 }

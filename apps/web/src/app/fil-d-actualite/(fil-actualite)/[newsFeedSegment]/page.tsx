@@ -1,4 +1,5 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
+import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import {
   getNewsFeedPageContext,
   updateLastOpenedAt,
@@ -80,7 +81,11 @@ export default async function NewsFeedSegmentPage({
           />
         </div>
       </nav>
-      <div className={styles.pageContainer}>
+      <div className={classNames('fr-container', styles.pageContainer)}>
+        <Breadcrumbs
+          currentPage="Mon fil d'actualité"
+          className="fr-m-0 fr-py-4v"
+        />
         <NewsFeedPage
           params={newsFeedParams}
           newsFeedPageContext={newsFeedPageContext}

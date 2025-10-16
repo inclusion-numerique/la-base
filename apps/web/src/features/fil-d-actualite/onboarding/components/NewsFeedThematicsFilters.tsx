@@ -99,7 +99,6 @@ export const NewsFeedThematicsFilters = ({
                       styles.flexWidth,
                       commonStyles.label,
                     )}
-                    title={themeLabels[theme]}
                   >
                     {themeLabels[theme]}
                   </span>

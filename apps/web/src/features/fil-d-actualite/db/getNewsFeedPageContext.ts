@@ -2,6 +2,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import { getNewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import { prismaClient } from '@app/web/prismaClient'
+import { getBaseResourcesViewsCount } from '@app/web/server/bases/baseResources'
 import {
   resourceListSelect,
   toResourceWithFeedbackAverage,
@@ -542,34 +543,165 @@ export const getNewsFeedResources = async (
     newsFeedResources.map(({ id, seen, source }) => [id, { source, seen }]),
   )
 
-  const [followedBases, followedProfiles] = await Promise.all([
-    prismaClient.base.findMany({
+  // Get followed bases and profiles with enhanced data structure similar to getFollowsList
+  const [followedBasesData, followedProfilesData] = await Promise.all([
+    prismaClient.baseFollow.findMany({
       where: {
-        id: { in: followedBasesWithResources.map(({ id }) => id) },
-        deleted: null,
+        followerId: userId,
+        baseId: { in: followedBasesWithResources.map(({ id }) => id) },
+        base: { deleted: null },
       },
       select: {
         id: true,
-        title: true,
-        slug: true,
-        image: true,
+        followed: true,
+        base: {
+          select: {
+            id: true,
+            title: true,
+            excerpt: true,
+            isPublic: true,
+            slug: true,
+            department: true,
+            image: {
+              select: {
+                id: true,
+              },
+            },
+            coverImage: {
+              select: {
+                id: true,
+              },
+            },
+            followedBy: {
+              select: {
+                id: true,
+                followerId: true,
+              },
+              where: {
+                followerId: userId,
+              },
+            },
+            _count: {
+              select: {
+                resources: {
+                  where: {
+                    deleted: null,
+                    published: { not: null },
+                    isPublic: true,
+                  },
+                },
+                followedBy: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        followed: 'desc',
       },
     }),
-    prismaClient.user.findMany({
+    prismaClient.profileFollow.findMany({
       where: {
-        id: { in: followedProfilesWithResources.map(({ id }) => id) },
-        deleted: null,
+        followerId: userId,
+        profileId: { in: followedProfilesWithResources.map(({ id }) => id) },
+        profile: { deleted: null },
       },
       select: {
         id: true,
-        name: true,
-        slug: true,
-        firstName: true,
-        lastName: true,
-        image: true,
+        followed: true,
+        profile: {
+          select: {
+            id: true,
+            name: true,
+            firstName: true,
+            lastName: true,
+            slug: true,
+            email: true,
+            image: {
+              select: {
+                id: true,
+                altText: true,
+              },
+            },
+            followedBy: {
+              where: {
+                followerId: userId,
+              },
+              select: {
+                followerId: true,
+                id: true,
+              },
+            },
+            resourceEvent: {
+              distinct: ['resourceId'],
+              select: {
+                resourceId: true,
+              },
+              where: {
+                resource: {
+                  deleted: null,
+                },
+              },
+            },
+            createdResources: {
+              select: {
+                id: true,
+              },
+              where: {
+                deleted: null,
+                isPublic: true,
+                published: {
+                  not: null,
+                },
+              },
+            },
+            resources: {
+              select: {
+                resourceId: true,
+              },
+              where: {
+                resource: {
+                  deleted: null,
+                  isPublic: true,
+                  published: {
+                    not: null,
+                  },
+                },
+              },
+            },
+            _count: {
+              select: {
+                followedBy: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        followed: 'desc',
       },
     }),
   ])
+
+  // Extract bases and profiles from follow data and add resource views count
+  const baseResourcesViews = await getBaseResourcesViewsCount(
+    followedBasesData.map(({ base }) => base.id),
+  )
+
+  const followedBases = followedBasesData.map((baseFollow) => ({
+    ...baseFollow,
+    base: {
+      ...baseFollow.base,
+      _count: {
+        ...baseFollow.base._count,
+        resourcesViews:
+          baseResourcesViews.find(({ baseId }) => baseId === baseFollow.base.id)
+            ?._sum.viewsCount ?? 0,
+      },
+    },
+  }))
+
+  const followedProfiles = followedProfilesData
 
   if (resourceIds.length === 0) {
     return {

@@ -5,6 +5,7 @@ import {
   ThematicSelection,
 } from '@app/ui/components/Form/Filters/filter'
 import { SelectOption } from '@app/ui/components/Form/utils/options'
+import { createToast } from '@app/ui/toast/createToast'
 import SearchThematicsCategory from '@app/web/components/Search/Filters/SearchThematicsCategory'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
@@ -13,6 +14,7 @@ import {
   UpdateNewsFeedThemesCommand,
   UpdateNewsFeedThemesValidation,
 } from '@app/web/features/fil-d-actualite/onboarding/themes/newsFeedThemes'
+import { NewsFeedThemesPreferenceModal } from '@app/web/features/fil-d-actualite/preferences/NewsFeedThemesPreferenceForm'
 
 import { Category, categoryThemesOptions } from '@app/web/themes/themes'
 import { trpc } from '@app/web/trpc'
@@ -47,8 +49,10 @@ const getInitialThemesSelection = (themes?: Theme[]): ThematicSelection[] => {
 
 const NewsFeedThemesForm = ({
   userNewsFeed,
+  context,
 }: {
   userNewsFeed: UserNewsFeed | null
+  context: 'preferences' | 'onboarding'
 }) => {
   const [themesSelected, setThemesSelected] = useState<ThematicSelection[]>(
     getInitialThemesSelection(userNewsFeed?.themes),
@@ -104,8 +108,21 @@ const NewsFeedThemesForm = ({
 
   const onSubmit = async (data: UpdateNewsFeedThemesCommand) => {
     try {
-      await mutate.mutateAsync(data)
-      router.push('/fil-d-actualite/onboarding/bases')
+      await mutate.mutateAsync(data, {
+        onSuccess: () => {
+          if (context === 'onboarding') {
+            router.push('/fil-d-actualite/onboarding/bases')
+          }
+          if (context === 'preferences') {
+            NewsFeedThemesPreferenceModal.close()
+            router.refresh()
+            createToast({
+              priority: 'success',
+              message: 'Vos préférences ont été mises à jour.',
+            })
+          }
+        },
+      })
     } catch (error) {
       Sentry.captureException(error)
     }
@@ -129,20 +146,24 @@ const NewsFeedThemesForm = ({
           )
         })}
       </div>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="fr-width-full fr-mt-12v">
-          <Button
-            className="fr-width-full fr-flex fr-justify-content-center"
-            type="submit"
-            disabled={mutate.isPending}
-          >
-            Suivant
-          </Button>
-        </div>
+      <form id="news-feed-themes-form" onSubmit={form.handleSubmit(onSubmit)}>
+        {context === 'onboarding' && (
+          <div className="fr-width-full fr-mt-12v">
+            <Button
+              className="fr-width-full fr-flex fr-justify-content-center"
+              type="submit"
+              disabled={mutate.isPending}
+            >
+              Suivant
+            </Button>
+          </div>
+        )}
       </form>
-      <div className="fr-flex fr-justify-content-center fr-mt-6v">
-        <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
-      </div>
+      {context === 'onboarding' && (
+        <div className="fr-flex fr-justify-content-center fr-mt-6v">
+          <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
+        </div>
+      )}
     </>
   )
 }

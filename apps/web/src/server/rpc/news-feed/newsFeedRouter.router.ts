@@ -77,7 +77,6 @@ export const newsFeedRouter = router({
         },
       })
     }),
-
   updateThemes: protectedProcedure
     .input(UpdateNewsFeedThemesValidation)
     .mutation(async ({ input, ctx: { user } }) => {
@@ -92,7 +91,6 @@ export const newsFeedRouter = router({
         },
       })
     }),
-
   update: protectedProcedure
     .input(UpdateNewsFeedValidation)
     .mutation(async ({ input, ctx: { user } }) => {

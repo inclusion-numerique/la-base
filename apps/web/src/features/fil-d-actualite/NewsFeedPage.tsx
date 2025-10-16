@@ -1,4 +1,3 @@
-import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
 import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
@@ -15,10 +14,6 @@ const NewsFeedPage = async ({
     newsFeedPageContext
   return (
     <>
-      <Breadcrumbs
-        currentPage="Mon fil d'actualité"
-        className="fr-m-0 fr-py-4v"
-      />
       <NewsFeedHeader
         params={params}
         notificationsCount={notificationsCount}

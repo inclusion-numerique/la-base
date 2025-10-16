@@ -17,7 +17,7 @@ export default async function NewsFeedThemes() {
         noticeTitle="Nous vous conseillons de sélectionner au minimum 3 thématiques."
         previousHref="/fil-d-actualite/onboarding/secteurs-professionnels"
       />
-      <NewsFeedThemesForm userNewsFeed={userNewsFeed} />
+      <NewsFeedThemesForm userNewsFeed={userNewsFeed} context="onboarding" />
     </div>
   )
 }

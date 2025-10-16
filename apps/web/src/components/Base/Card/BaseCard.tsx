@@ -12,15 +12,20 @@ import styles from './BaseCard.module.css'
 const BaseCard = ({
   base,
   user,
+  className,
   compact = false,
   titleAs: BaseTitle = 'h2',
 }: {
   base: BasesSearchResultListItem | BaseProfileListItem
   user: SessionUser | null
+  className?: string
   compact?: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }) => (
-  <article className={styles.container} data-testid="base-card">
+  <article
+    className={classNames(styles.container, className)}
+    data-testid="base-card"
+  >
     <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
       <BaseImage base={base} size={compact ? 48 : 96} />
     </Link>
