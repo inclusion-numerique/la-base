@@ -136,7 +136,7 @@ export const NewsFeedHeader = ({
 
     if (base) {
       const followedBase = newsFeedPageContext.followedBases.find(
-        (fBase) => fBase.slug === base,
+        ({ base: followedBaseItem }) => followedBaseItem.slug === base,
       )
 
       if (!followedBase) {
@@ -151,16 +151,16 @@ export const NewsFeedHeader = ({
 
       return (
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          <BaseImage base={followedBase} />
+          <BaseImage base={followedBase.base} />
 
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
               Découvrez les dernières publications liés de la base&nbsp;
               <Link
-                href={`/bases/${followedBase.slug}`}
+                href={`/bases/${followedBase.base.slug}`}
                 className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
               >
-                {followedBase.title}
+                {followedBase.base.title}
               </Link>
             </span>
           </div>
@@ -170,7 +170,7 @@ export const NewsFeedHeader = ({
 
     if (profil) {
       const followedProfile = newsFeedPageContext.followedProfiles.find(
-        (fProfile) => fProfile.slug === profil,
+        ({ profile }) => profile.slug === profil,
       )
 
       if (!followedProfile) {
@@ -185,50 +185,16 @@ export const NewsFeedHeader = ({
 
       return (
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          <RoundProfileImage user={followedProfile} />
+          <RoundProfileImage user={followedProfile.profile} />
 
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
               Découvrez les dernières publications liés à votre profil&nbsp;
               <Link
-                href={`/profils/${followedProfile.slug}`}
+                href={`/profils/${followedProfile.profile.slug}`}
                 className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
               >
-                {followedProfile.name}
-              </Link>
-            </span>
-          </div>
-        </div>
-      )
-    }
-
-    if (base) {
-      const followedBase = newsFeedPageContext.followedBases.find(
-        (fBase) => fBase.slug === base,
-      )
-
-      if (!followedBase) {
-        return (
-          <div className="fr-flex fr-text--lg fr-mb-0">
-            <span className="fr-mb-0">
-              Découvrez les dernières publications liés à la base
-            </span>
-          </div>
-        )
-      }
-
-      return (
-        <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
-          <BaseImage base={followedBase} />
-
-          <div className="fr-flex fr-text--lg fr-mb-0">
-            <span className="fr-mb-0">
-              Découvrez les dernières publications liés de la base&nbsp;
-              <Link
-                href={`/bases/${followedBase.slug}`}
-                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
-              >
-                {followedBase.title}
+                {followedProfile.profile.name}
               </Link>
             </span>
           </div>

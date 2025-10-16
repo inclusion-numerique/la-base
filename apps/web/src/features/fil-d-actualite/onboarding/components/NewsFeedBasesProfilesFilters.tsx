@@ -67,7 +67,7 @@ export const NewsFeedBasesProfilesFilters = ({
       </div>
       {isOpen && (
         <div className="fr-flex fr-direction-column">
-          {bases.map((base) => (
+          {bases.map(({ base }) => (
             <Button
               key={base.id}
               priority="tertiary no outline"
@@ -105,7 +105,7 @@ export const NewsFeedBasesProfilesFilters = ({
               </div>
             </Button>
           ))}
-          {profiles.map((profile) => (
+          {profiles.map(({ profile }) => (
             <Button
               key={profile.id}
               priority="tertiary no outline"

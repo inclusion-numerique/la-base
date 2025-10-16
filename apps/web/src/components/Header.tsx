@@ -16,12 +16,18 @@ import styles from './Header.module.css'
 import LesBasesSvgLogo from './LesBasesSvgLogo'
 import { CreateResourceButton } from './Resource/CreateResourceModal'
 
-const Header = async ({ user }: { user?: SessionUser | null }) => {
+const Header = async ({
+  user,
+  className = 'fr-container',
+}: {
+  user?: SessionUser | null
+  className?: string
+}) => {
   const notificationsCount = await getNewsFeedNotifications(user)
   return (
     <header role="banner" className="fr-header">
       <div className="fr-header__body">
-        <div className="fr-container">
+        <div className={className}>
           <div className="fr-header__body-row">
             <div className="fr-header__brand fr-enlarge-link">
               <div className="fr-header__brand-top">
