@@ -1,9 +1,9 @@
 import { output } from '@app/cli/output'
+import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/emails/sendNewsFeedNewsletterEmail'
 import {
   defaultNewsFeedPaginationParams,
   getNewsFeedResources,
-} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
-import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/emails/sendNewsFeedNewsletterEmail'
+} from '@app/web/server/newsFeed/getNewsFeedResources'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
