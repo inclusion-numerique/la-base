@@ -206,11 +206,12 @@ export const getFollowedResourceIds = async (
       SELECT 
         r.id,
         r.published,
+        GREATEST(r.published, r.updated) as most_recent_date,
         CASE 
           WHEN rv.id IS NOT NULL THEN true
           WHEN ${
             lastOpenedAt
-              ? Prisma.sql`r.published <= ${lastOpenedAt}::timestamp`
+              ? Prisma.sql`GREATEST(r.published, r.updated) <= ${lastOpenedAt}::timestamp`
               : Prisma.sql`false`
           } THEN true
           ELSE false
@@ -233,7 +234,7 @@ export const getFollowedResourceIds = async (
           r.created_by_id IN (SELECT profile_id FROM followedProfiles)
         )
       GROUP BY r.id, rv.id
-      ORDER BY r.published DESC
+      ORDER BY most_recent_date DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
     `,
@@ -333,7 +334,7 @@ export const getUnseenResourcesCount = async (
       WHERE r.deleted IS NULL
         AND rv.id IS NULL
         AND r.published IS NOT NULL
-        AND r.published > ${lastOpenedAt}::timestamp
+        AND GREATEST(r.published, r.updated) > ${lastOpenedAt}::timestamp
         AND r.is_public = true
         AND (b.id IS NULL OR b.deleted IS NULL)
         AND (
@@ -394,11 +395,12 @@ export const getResourceIds = async (
       SELECT DISTINCT 
         r.id, 
         r.published,
+        GREATEST(r.published, r.updated) as most_recent_date,
         CASE 
           WHEN rv.id IS NOT NULL THEN true
           WHEN ${
             lastOpenedAt
-              ? Prisma.sql`r.published <= ${lastOpenedAt}::timestamp`
+              ? Prisma.sql`GREATEST(r.published, r.updated) <= ${lastOpenedAt}::timestamp`
               : Prisma.sql`false`
           } THEN true
           ELSE false
@@ -467,7 +469,7 @@ export const getResourceIds = async (
           )
         )
       GROUP BY r.id, rv.id
-      ORDER BY r.published DESC
+      ORDER BY most_recent_date DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
     `,
