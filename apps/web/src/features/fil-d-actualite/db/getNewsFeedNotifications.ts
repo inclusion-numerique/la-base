@@ -3,7 +3,7 @@ import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import {
   getUnseenResourcesCount,
   NewsFeedFilters,
-} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+} from '@app/web/server/newsFeed/getNewsFeedResources'
 import { cache } from 'react'
 
 export const getNewsFeedNotifications = cache(
