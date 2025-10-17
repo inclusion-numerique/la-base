@@ -14,7 +14,7 @@ import { pascalCase } from 'change-case'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 
-const defaultNewsFeedPaginationParams: Readonly<PaginationParams> = {
+export const defaultNewsFeedPaginationParams: Readonly<PaginationParams> = {
   page: 1,
   perPage: 20,
   sort: 'recent',

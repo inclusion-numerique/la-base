@@ -307,6 +307,16 @@ export class WebAppStack extends TerraformStack {
       })
     }
 
+    createJobExecutionCron(this, {
+      name: `monthly-newsletter-news-feed`,
+      job: {
+        name: 'monthly-newsletter-news-feed',
+        payload: undefined,
+      },
+      schedule: '0 0 1 * *',
+      containerId: container.id,
+    })
+
     output('webBaseUrl', hostname)
     output('containerDomainName', container.domainName)
     output('databaseUrl', databaseUrl, 'sensitive')
