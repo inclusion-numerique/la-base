@@ -37,7 +37,7 @@ const SearchThematicsCategory = ({
 
   return (
     <div className="fr-flex fr-direction-column fr-flex-gap-6v">
-      <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
+      <div className="fr-flex fr-direction-column fr-direction-md-row fr-justify-content-space-between fr-flex-gap-4v fr-flex-gap-md-0">
         <div className="fr-flex fr-direction-column">
           <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
             <span

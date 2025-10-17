@@ -1,0 +1,106 @@
+import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+
+const createdBy = {
+  name: 'Toto',
+  id: '74ace0b1-0c5d-491c-9468-a887f43b7178',
+  slug: 'toto',
+  firstName: 'toto',
+  isPublic: true,
+  lastName: 'toto',
+  email: 'toto@toto.fr',
+  image: {
+    id: 'db180c89-9b5a-4667-854d-307a604ba00e',
+    altText: null,
+  },
+}
+
+export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResource[] = [
+  {
+    id: '9b477ac4-e08c-4fe2-ae4b-3b4a9c3e5d5e',
+    title: "Cartes Maillage du Département de l'Ain",
+    slug: 'cartes-maillage-du-departement-de-l-ain',
+    created: new Date('2024-07-17T13:45:21.299Z'),
+    updated: new Date('2025-10-14T15:00:44.714Z'),
+    published: new Date('2024-07-17T13:45:21.299Z'),
+    deleted: null,
+    createdById: '74ace0b1-0c5d-491c-9468-a887f43b7178',
+    baseId: '6c5bd2f5-b327-47ba-804c-cd3d18dfdf40',
+    lastPublished: new Date('2025-10-14T15:00:44.714Z'),
+    excerpt: "Carte Maillage Départemental des CoNums de l'Ain",
+    isPublic: true,
+    viewsCount: 144,
+    image: null,
+    createdBy,
+    contributors: [],
+    base: {
+      id: '6c5bd2f5-b327-47ba-804c-cd3d18dfdf40',
+      title: "Conseillers Numériques de l'Ain",
+      slug: 'conseillers-numeriques-de-l-ain',
+      isPublic: true,
+      image: {
+        id: 'f7741700-1059-49da-bb6d-1307706a4fe5',
+        altText: null,
+      },
+      members: [],
+    },
+    collections: [],
+    _count: {
+      collections: 0,
+      resourceFeedback: 1,
+    },
+    themes: ['Accessibilite', 'Mobilites', 'AidesAuxDemarchesAdministratives'],
+    professionalSectors: [
+      'ActeursPrivesEtAssociatifs',
+      'AidantsEtMediateursNumeriques',
+      'AutresProfessionnels',
+      'ActeursPublics',
+    ],
+    feedbackAverage: 4,
+    source: 'base',
+    seen: true,
+  },
+  {
+    id: '867911cc-3066-4c2e-be3e-61b527a25492',
+    title:
+      'Parcours de formation France services - Learning Management System (LMS)',
+    slug: 'parcours-de-formation-france-services-learning-management-system-lms',
+    created: new Date('2025-10-14T12:08:01.750Z'),
+    updated: new Date('2025-10-14T12:08:22.218Z'),
+    published: new Date('2025-10-14T12:08:01.750Z'),
+    deleted: null,
+    createdById: '671d1335-8b84-4ceb-a744-bffafc74f550',
+    baseId: 'eda912b9-4c00-42ff-9519-1bf66d0c2122',
+    lastPublished: new Date('2025-10-14T12:08:22.218Z'),
+    excerpt:
+      'Ce parcours vous donne des clés concrètes pour améliorer l’accueil des usagers, notamment en situation de handicap, dans votre France services.',
+    isPublic: true,
+    viewsCount: 11,
+    image: {
+      id: '9b46e24d-434d-4a53-a79f-f2583655ea78',
+      altText: null,
+    },
+    createdBy,
+    contributors: [],
+    base: {
+      id: 'eda912b9-4c00-42ff-9519-1bf66d0c2122',
+      title: 'Lieux innovants, Lieux accueillants',
+      slug: 'lieux-innovants-lieux-accueillants',
+      isPublic: true,
+      image: {
+        id: '52d7b54c-1a51-4317-8219-ed8c2d6a4be7',
+        altText: null,
+      },
+      members: [],
+    },
+    collections: [],
+    _count: {
+      collections: 2,
+      resourceFeedback: 0,
+    },
+    themes: ['Accessibilite', 'AidesAuxDemarchesAdministratives'],
+    professionalSectors: ['ActeursPublics', 'ActeursPrivesEtAssociatifs'],
+    feedbackAverage: 4,
+    source: 'theme',
+    seen: true,
+  },
+]

@@ -9,7 +9,6 @@ describe('Page d’accueil', () => {
       'Les Bases du numérique d’intérêt général',
     )
     cy.get('.fr-header__tools .fr-btn')
-      .first()
       .should('contain', 'Rechercher')
       .should('have.css', 'color', 'rgb(0, 0, 145)')
     cy.get('.fr-header__tools').contains('Se connecter')

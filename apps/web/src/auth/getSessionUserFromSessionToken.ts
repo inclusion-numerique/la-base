@@ -96,6 +96,7 @@ export const getSessionUserFromSessionToken = async (
           hasSeenV2Onboarding: true,
           lastCguAcceptedAt: true,
           cguVersion: true,
+          newsFeed: true,
           ownedBases: {
             select: {
               id: true,
@@ -168,5 +169,12 @@ export const getSessionUserFromSessionToken = async (
     updated: res.user.updated.toISOString(),
     emailVerified: res.user.emailVerified?.toISOString() ?? null,
     lastCguAcceptedAt: res.user.lastCguAcceptedAt?.toISOString() ?? null,
+    newsFeed: res.user.newsFeed
+      ? {
+          ...res.user.newsFeed,
+          created: res.user.newsFeed.created.toISOString(),
+          updated: res.user.newsFeed.updated.toISOString(),
+        }
+      : null,
   }
 }

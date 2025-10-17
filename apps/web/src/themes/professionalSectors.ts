@@ -1,4 +1,5 @@
 import { labelsToOptions } from '@app/ui/components/Form/utils/options'
+import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import { ProfessionalSector } from '@prisma/client'
 
 export const professionalSectorsLabels: {
@@ -25,3 +26,13 @@ export const professionalSectorsOptions = labelsToOptions(
     },
   },
 )
+
+export const professionalSectorsIcon: Record<
+  ProfessionalSector,
+  RiIconClassName
+> = {
+  ActeursPublics: 'ri-government-line',
+  ActeursPrivesEtAssociatifs: 'ri-building-line',
+  AidantsEtMediateursNumeriques: 'ri-user-heart-line',
+  AutresProfessionnels: 'ri-group-line',
+}
