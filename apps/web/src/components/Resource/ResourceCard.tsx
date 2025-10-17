@@ -54,7 +54,7 @@ const ResourceCard = ({
             <p
               className={classNames(
                 styles.badge,
-                'fr-badge fr-badge--new fr-badge--sm',
+                'fr-badge fr-badge--new fr-badge--sm fr-mr-2w',
               )}
             />
           )}

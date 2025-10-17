@@ -183,7 +183,7 @@ export const NewsFeedOwnershipInformation = ({
   const { seen } = resource
 
   return (
-    <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
+    <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mr-2w">
       {image}
       <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
         {attributionText} {timeAgo}
