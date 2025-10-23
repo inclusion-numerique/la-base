@@ -4,7 +4,6 @@ import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/components/NewsFeedOwnershipInformation'
 import type {
   NewsFeedPageContext,
-  NewsFeedResource,
 } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { ProfessionalSector, Theme } from '@prisma/client'
@@ -59,7 +58,9 @@ const mockCreatedBy = {
   },
 }
 
-const baseResource: NewsFeedResource = {
+const baseResource = {
+  collectionId: undefined,
+  addedToCollectionAt: undefined,
   id: 'resource-1',
   title: "Guide pratique de l'accessibilité numérique",
   slug: 'guide-pratique-accessibilite-numerique',

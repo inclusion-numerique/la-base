@@ -57,7 +57,46 @@ const mockCreatedBy = {
   },
 }
 
+const mockCollection = {
+  id: 'collection-1',
+  slug: 'Collections-accessibilite',
+  title: 'Collections Accessibilité',
+  baseId: 'base-1',
+  createdById: 'user-1',
+  base: {
+    image: null,
+    id: 'base-1',
+    title: 'Base Innovation Numérique',
+    slug: 'base-innovation-numerique',
+  },
+  createdBy: {
+    image: {
+      id: 'portrait-marie',
+      legacyId: null,
+      altText: 'Portrait de Marie',
+      blurUrl: null,
+      originalHeight: null,
+      originalWidth: null,
+      cropHeight: 0,
+      cropWidth: 0,
+      cropTop: 0,
+      cropLeft: 0,
+      height: null,
+      width: null,
+      dataUrl: null,
+      uploadKey: 'upload-key-marie',
+    },
+    id: 'user-1',
+    name: 'Marie Dupont',
+    firstName: 'Marie',
+    lastName: 'Dupont',
+    slug: 'marie-dupont',
+  },
+}
+
 const baseResource: NewsFeedResource = {
+  collectionId: undefined,
+  addedToCollectionAt: undefined,
   id: 'resource-1',
   title: "Guide pratique de l'accessibilité numérique",
   slug: 'guide-pratique-accessibilite-numerique',
@@ -74,7 +113,13 @@ const baseResource: NewsFeedResource = {
   isPublic: true,
   createdBy: mockCreatedBy,
   feedbackAverage: 4.5,
-  collections: [],
+  collections: [
+    {
+      id: 'collection-resource-1',
+      added: new Date('2025-10-22T15:00:00Z'),
+      collection: mockCollection,
+    },
+  ],
   contributors: [],
   viewsCount: 123,
   _count: {
@@ -347,6 +392,49 @@ export const UnseenResource: Story = {
 
 UnseenResource.storyName = 'Ressource non vue'
 
+export const SavedCollectionFromBase: Story = {
+  render: () => (
+    <Template
+      resource={{
+        ...baseResource,
+        collectionId: 'collection-1',
+        addedToCollectionAt: new Date('2025-10-22T15:00:00Z'),
+        source: 'savedCollectionFromBase' as const,
+      }}
+      newsFeedPageContext={mockNewsFeedPageContext}
+    />
+  ),
+}
+SavedCollectionFromBase.storyName =
+  'Ressource sauvegardé dans collection - Base'
+
+export const SavedCollectionFromProfile: Story = {
+  render: () => (
+    <Template
+      resource={{
+        ...baseResource,
+        collectionId: 'collection-1',
+        addedToCollectionAt: new Date('2025-10-22T15:00:00Z'),
+        source: 'savedCollectionFromProfile' as const,
+        collections: [
+          {
+            id: 'collection-resource-1',
+            added: new Date('2025-10-22T15:00:00Z'),
+            collection: {
+              ...mockCollection,
+              baseId: null,
+              base: null,
+            },
+          },
+        ],
+      }}
+      newsFeedPageContext={mockNewsFeedPageContext}
+    />
+  ),
+}
+SavedCollectionFromProfile.storyName =
+  'Ressource sauvegardé dans collection - Profil'
+
 export const AllVariants: Story = {
   render: () => (
     <div
@@ -469,6 +557,39 @@ export const AllVariants: Story = {
             followedProfiles: [],
             userNewsFeed: { ...mockUserNewsFeed, themes: [] },
           }}
+        />
+      </div>
+
+      <div>
+        <h3>Ressource sauvegardé dans collections</h3>
+        <Template
+          resource={{
+            ...baseResource,
+            collectionId: 'collection-1',
+            addedToCollectionAt: new Date('2025-10-22T15:00:00Z'),
+            source: 'savedCollectionFromBase' as const,
+          }}
+          newsFeedPageContext={mockNewsFeedPageContext}
+        />
+        <Template
+          resource={{
+            ...baseResource,
+            collectionId: 'collection-1',
+            addedToCollectionAt: new Date('2025-10-22T15:00:00Z'),
+            source: 'savedCollectionFromProfile' as const,
+            collections: [
+              {
+                id: 'collection-resource-1',
+                added: new Date('2025-10-22T15:00:00Z'),
+                collection: {
+                  ...mockCollection,
+                  baseId: null,
+                  base: null,
+                },
+              },
+            ],
+          }}
+          newsFeedPageContext={mockNewsFeedPageContext}
         />
       </div>
 

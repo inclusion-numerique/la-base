@@ -85,9 +85,18 @@ export const getNewsFeedResources = async (
 
   const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
-    newsFeedResources.map(({ id, seen, source }) => [id, { source, seen }]),
+    newsFeedResources.map(
+      ({ id, seen, source, added_to_collection_at, collection_id }) => [
+        id,
+        {
+          source,
+          seen,
+          addedToCollectionAt: added_to_collection_at,
+          collectionId: collection_id,
+        },
+      ],
+    ),
   )
-
   const [followedBasesData, followedProfilesData] = await Promise.all([
     prismaClient.baseFollow.findMany({
       where: {
@@ -260,6 +269,39 @@ export const getNewsFeedResources = async (
       ...resourceListSelect({ id: userId }),
       themes: true,
       professionalSectors: true,
+      collections: {
+        select: {
+          id: true,
+          added: true,
+          collection: {
+            select: {
+              id: true,
+              slug: true,
+              title: true,
+              baseId: true,
+              createdById: true,
+              base: {
+                select: {
+                  image: true,
+                  id: true,
+                  title: true,
+                  slug: true,
+                },
+              },
+              createdBy: {
+                select: {
+                  image: true,
+                  id: true,
+                  name: true,
+                  firstName: true,
+                  lastName: true,
+                  slug: true,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   })
 
@@ -268,17 +310,20 @@ export const getNewsFeedResources = async (
   const sortedResources = resources.sort(
     (a, b) => (orderMap.get(a.id) ?? 0) - (orderMap.get(b.id) ?? 0),
   )
-
   return {
     resources: sortedResources.map((resource) => {
       const extraData = resourceMap.get(resource.id) || {
-        source: 'base',
+        source: 'base' as const,
         seen: false,
+        collectionId: undefined,
+        addedToCollectionAt: undefined,
       }
       return {
         ...toResourceWithFeedbackAverage(resource),
         source: extraData.source,
         seen: extraData.seen,
+        collectionId: extraData.collectionId,
+        addedToCollectionAt: extraData.addedToCollectionAt,
       }
     }),
     followedBases,

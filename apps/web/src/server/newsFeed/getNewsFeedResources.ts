@@ -60,6 +60,8 @@ export const countNewsFeedResources = async (userId: string) => {
         FROM userThemes ut
         CROSS JOIN resources r
         LEFT JOIN bases b ON r.base_id = b.id
+        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
         WHERE r.deleted IS NULL
           AND r.published IS NOT NULL
           AND r.is_public = true
@@ -77,6 +79,13 @@ export const countNewsFeedResources = async (userId: string) => {
             (
               EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
             )
+            OR
+            (
+              cr.id IS NOT NULL AND (
+                c.base_id IN (SELECT base_id FROM followedBases)
+                OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+              )
+            )
           )
         GROUP BY ut.theme
         
@@ -90,6 +99,8 @@ export const countNewsFeedResources = async (userId: string) => {
         FROM userProfessionalSectors ups
         CROSS JOIN resources r
         LEFT JOIN bases b ON r.base_id = b.id
+        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
         WHERE r.deleted IS NULL
           AND r.published IS NOT NULL
           AND r.is_public = true
@@ -106,6 +117,13 @@ export const countNewsFeedResources = async (userId: string) => {
             OR
             (
               EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+            )
+            OR
+            (
+              cr.id IS NOT NULL AND (
+                c.base_id IN (SELECT base_id FROM followedBases)
+                OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+              )
             )
           )
         GROUP BY ups.professional_sector
@@ -186,8 +204,16 @@ export const getFollowedResourceIds = async (
     {
       id: string
       published: Date
-      source: 'base' | 'profile' | 'theme' | 'professional_sector'
+      source:
+        | 'base'
+        | 'profile'
+        | 'theme'
+        | 'professional_sector'
+        | 'savedCollectionFromBase'
+        | 'savedCollectionFromProfile'
       seen: boolean
+      collection_id?: string
+      added_to_collection_at?: Date
     }[]
   >(
     Prisma.sql`
@@ -197,37 +223,62 @@ export const getFollowedResourceIds = async (
       followedProfiles AS (
         SELECT profile_id FROM profile_follows WHERE follower_id = ${userId}::uuid
       )
-      SELECT 
+      SELECT DISTINCT
         r.id,
         r.published,
-        GREATEST(r.published, r.last_published) as most_recent_date,
+        CASE 
+          WHEN cr.id IS NOT NULL AND (c.base_id IN (SELECT base_id FROM followedBases) OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)) THEN GREATEST(r.published, r.last_published, cr.added)
+          ELSE GREATEST(r.published, r.last_published)
+        END as most_recent_date,
         CASE 
           WHEN rv.id IS NOT NULL THEN true
           WHEN ${
             lastOpenedAt
-              ? Prisma.sql`GREATEST(r.published, r.last_published) <= ${lastOpenedAt}::timestamp`
+              ? Prisma.sql`CASE 
+                  WHEN cr.id IS NOT NULL THEN GREATEST(r.published, r.last_published, cr.added) <= ${lastOpenedAt}::timestamp
+                  ELSE GREATEST(r.published, r.last_published) <= ${lastOpenedAt}::timestamp
+                END`
               : Prisma.sql`false`
           } THEN true
           ELSE false
         END as seen,
         CASE
+          WHEN cr.id IS NOT NULL AND c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
+          WHEN cr.id IS NOT NULL AND c.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'savedCollectionFromProfile'::text
           WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
           WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
           ELSE 'base'::text
-        END as source
+        END as source,
+        CASE
+          WHEN cr.id IS NOT NULL AND (c.base_id IN (SELECT base_id FROM followedBases) OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)) THEN c.id
+          ELSE NULL
+        END as collection_id,
+        CASE
+          WHEN cr.id IS NOT NULL AND (c.base_id IN (SELECT base_id FROM followedBases) OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)) THEN cr.added
+          ELSE NULL
+        END as added_to_collection_at
       FROM resources r
       LEFT JOIN bases b ON r.base_id = b.id
-      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
+      LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+      LEFT JOIN collections c
+        ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
+      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id = ${userId}::uuid
       WHERE r.deleted IS NULL
         AND r.published IS NOT NULL
         AND r.is_public = true
         AND (b.id IS NULL OR b.deleted IS NULL)
         AND (
+          -- follows directs
           r.base_id IN (SELECT base_id FROM followedBases)
-          OR
-          r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          OR -- saves de collections par entités suivies
+          (
+            cr.id IS NOT NULL AND (
+              c.base_id IN (SELECT base_id FROM followedBases)
+              OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+            )
+          )
         )
-      GROUP BY r.id, rv.id
       ORDER BY most_recent_date DESC
       LIMIT ${paginationParams.perPage}
       OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
@@ -252,103 +303,151 @@ export const getResourceIds = async (
     {
       id: string
       published: Date
-      source: 'base' | 'profile' | 'theme' | 'professional_sector'
+      source:
+        | 'base'
+        | 'profile'
+        | 'theme'
+        | 'professional_sector'
+        | 'savedCollectionFromBase'
+        | 'savedCollectionFromProfile'
       seen: boolean
+      collection_id?: string
+      added_to_collection_at?: Date
     }[]
   >(
     Prisma.sql`
-      WITH followedBases AS (
-        SELECT base_id FROM base_follows WHERE follower_id = ${userId}::uuid
-      ),
-      followedProfiles AS (
-        SELECT profile_id FROM profile_follows WHERE follower_id = ${userId}::uuid
-      ),
-      userPreferences AS (
-        SELECT themes, professional_sectors
-        FROM news_feed
-        WHERE user_id = ${userId}::uuid
+  WITH followedBases AS (
+    SELECT base_id FROM base_follows WHERE follower_id = ${userId}::uuid
+  ),
+  followedProfiles AS (
+    SELECT profile_id FROM profile_follows WHERE follower_id = ${userId}::uuid
+  ),
+  userPreferences AS (
+    SELECT themes, professional_sectors
+    FROM news_feed
+    WHERE user_id = ${userId}::uuid
+  ),
+  candidates AS (
+    SELECT
+      r.id, 
+      r.published,
+      CASE 
+        WHEN cr.id IS NOT NULL
+             AND (c.base_id IN (SELECT base_id FROM followedBases)
+               OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+        THEN GREATEST(r.published, r.last_published, cr.added)
+        ELSE GREATEST(r.published, r.last_published)
+      END AS most_recent_date,
+      CASE
+        WHEN rv.id IS NOT NULL THEN true
+        WHEN ${
+          lastOpenedAt
+            ? Prisma.sql`CASE 
+                WHEN cr.id IS NOT NULL THEN GREATEST(r.published, r.last_published, cr.added) <= ${lastOpenedAt}::timestamp
+                ELSE GREATEST(r.published, r.last_published) <= ${lastOpenedAt}::timestamp
+              END`
+            : Prisma.sql`false`
+        } THEN true
+        ELSE false
+      END AS seen,
+      CASE
+        WHEN cr.id IS NOT NULL AND c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
+        WHEN cr.id IS NOT NULL AND c.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'savedCollectionFromProfile'::text
+        WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
+        WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
+        WHEN EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes) THEN 'theme'::text
+        WHEN EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors) THEN 'professional_sector'::text
+        ELSE 'base'::text
+      END AS source,
+      CASE
+        WHEN cr.id IS NOT NULL
+             AND (c.base_id IN (SELECT base_id FROM followedBases)
+               OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+        THEN c.id
+        ELSE NULL
+      END AS collection_id,
+      CASE
+        WHEN cr.id IS NOT NULL
+             AND (c.base_id IN (SELECT base_id FROM followedBases)
+               OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+        THEN cr.added
+        ELSE NULL
+      END AS added_to_collection_at
+    FROM resources r
+    LEFT JOIN bases b ON r.base_id = b.id
+    LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+    LEFT JOIN collections c
+      ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
+    LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id = ${userId}::uuid
+    WHERE r.deleted IS NULL
+      AND r.published IS NOT NULL
+      AND r.is_public = true
+      AND (b.id IS NULL OR b.deleted IS NULL)
+      AND (
+        -- follows directs
+        r.base_id IN (SELECT base_id FROM followedBases)
+        OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+        OR -- préférences thème
+        EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
+        OR -- préférences secteur pro
+        EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+        OR -- saves de collections par entités suivies
+        (
+          cr.id IS NOT NULL AND (
+            c.base_id IN (SELECT base_id FROM followedBases)
+            OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          )
+        )
       )
-      SELECT DISTINCT 
-        r.id, 
-        r.published,
-        GREATEST(r.published, r.last_published) as most_recent_date,
-        CASE 
-          WHEN rv.id IS NOT NULL THEN true
-          WHEN ${
-            lastOpenedAt
-              ? Prisma.sql`GREATEST(r.published, r.last_published) <= ${lastOpenedAt}::timestamp`
-              : Prisma.sql`false`
-          } THEN true
-          ELSE false
-        END as seen,
-        CASE
-          WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
-          WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
-          WHEN EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes) THEN 'theme'::text
-          WHEN EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors) THEN 'professional_sector'::text
-          ELSE 'base'::text
-        END as source
-      FROM resources r
-      LEFT JOIN bases b ON r.base_id = b.id
-      LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
-      WHERE r.deleted IS NULL
-        AND r.published IS NOT NULL
-        AND r.is_public = true
-        AND (b.id IS NULL OR b.deleted IS NULL)
-        AND (
-          r.base_id IN (SELECT base_id FROM followedBases)
-          OR
-          -- Resources created by followed profiles
-          r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-          OR
-          -- Resources matching user's theme preferences
-          (
-            EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-          )
-          OR
-          -- Resources matching user's professional sector preferences
-          (
-            EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
-          )
+      -- filtres
+      AND (
+        ${themes.length === 0} OR ${
+          themes.includes('tout')
+            ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)`
+            : Prisma.sql`r.themes && ${enumArrayToSnakeCaseStringArray(
+                themes,
+              )}::theme[]`
+        }
+      )
+      AND (
+        ${professionalSectors.length === 0} OR ${
+          professionalSectors.includes('tout')
+            ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)`
+            : Prisma.sql`r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
+                professionalSectors,
+              )}::professional_sector[]`
+        }
+      )
+      AND (
+        ${profileSlug ?? null}::text IS NULL OR EXISTS (
+          SELECT 1 FROM users u WHERE u.id = r.created_by_id AND u.slug = ${
+            profileSlug ?? null
+          }::text
         )
-        -- Apply filters if provided
-        AND (
-          ${themes.length === 0} OR ${
-            themes.includes('tout')
-              ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)`
-              : Prisma.sql`r.themes && ${enumArrayToSnakeCaseStringArray(
-                  themes,
-                )}::theme[]`
-          }
+      )
+      AND (
+        ${baseSlug ?? null}::text IS NULL OR EXISTS (
+          SELECT 1 FROM bases b WHERE b.id = r.base_id AND b.slug = ${
+            baseSlug ?? null
+          }::text
         )
-        AND (
-          ${professionalSectors.length === 0} OR ${
-            professionalSectors.includes('tout')
-              ? Prisma.sql`EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)`
-              : Prisma.sql`r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
-                  professionalSectors,
-                )}::professional_sector[]`
-          }
-        )
-        AND (
-          ${profileSlug ?? null}::text IS NULL OR EXISTS (
-            SELECT 1 FROM users u WHERE u.id = r.created_by_id AND u.slug = ${
-              profileSlug ?? null
-            }::text
-          )
-        )
-        AND (
-          ${baseSlug ?? null}::text IS NULL OR EXISTS (
-            SELECT 1 FROM bases b WHERE b.id = r.base_id AND b.slug = ${
-              baseSlug ?? null
-            }::text
-          )
-        )
-      GROUP BY r.id, rv.id
-      ORDER BY most_recent_date DESC
-      LIMIT ${paginationParams.perPage}
-      OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
-    `,
+      )
+  )
+  -- ici: on choisit, de façon déterministe, 1 ligne par r.id
+  , picked AS (
+    SELECT DISTINCT ON (id) *
+    FROM candidates
+    ORDER BY id,                -- requis par DISTINCT ON
+      most_recent_date DESC,
+      added_to_collection_at DESC NULLS LAST  -- tie-break utile si même date
+  )
+
+  SELECT *
+  FROM picked
+  ORDER BY most_recent_date DESC                     -- tri global pour l'affichage/pagination
+  LIMIT ${paginationParams.perPage}
+  OFFSET ${(paginationParams.page - 1) * paginationParams.perPage}
+`,
   )
 }
 
@@ -367,7 +466,17 @@ export const getNewsFeedResources = async (
 
   const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
-    newsFeedResources.map(({ id, seen, source }) => [id, { source, seen }]),
+    newsFeedResources.map(
+      ({ id, seen, source, added_to_collection_at, collection_id }) => [
+        id,
+        {
+          source,
+          seen,
+          collectionId: collection_id,
+          addedToCollectionAt: added_to_collection_at,
+        },
+      ],
+    ),
   )
 
   const resources = await prismaClient.resource.findMany({
@@ -388,9 +497,10 @@ export const getNewsFeedResources = async (
   return {
     resources: sortedResources.map((resource) => {
       const extraData = resourceMap.get(resource.id) || {
-        source: 'base',
+        source: 'base' as const,
         seen: false,
       }
+
       return {
         ...toResourceWithFeedbackAverage(resource),
         source: extraData.source,
@@ -489,24 +599,43 @@ export const getUnseenResourcesCount = async (
         )::integer as count
       FROM resources r
       LEFT JOIN bases b ON r.base_id = b.id
+      LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+      LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
       LEFT JOIN resource_views rv ON rv.resource_id = r.id AND rv.user_id =  ${userId}::uuid
       WHERE r.deleted IS NULL
         AND rv.id IS NULL
         AND r.published IS NOT NULL
-        AND GREATEST(r.published, r.last_published) > ${lastOpenedAt}::timestamp
+        AND (
+          CASE 
+            WHEN cr.id IS NOT NULL
+                 AND (c.base_id IN (SELECT base_id FROM followedBases)
+                   OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+            THEN GREATEST(r.published, r.last_published, cr.added)
+            ELSE GREATEST(r.published, r.last_published)
+          END > ${lastOpenedAt}::timestamp
+        )
         AND r.is_public = true
         AND (b.id IS NULL OR b.deleted IS NULL)
         AND (
+          -- follows directs
           r.base_id IN (SELECT base_id FROM followedBases)
-          OR
-          r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-          OR
-          (
-            EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-          )
-          OR
-          (
-            EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+          OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          OR -- préférences thème
+          EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
+          OR -- préférences secteur pro
+          EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+          OR -- saves de collections par entités suivies
+          EXISTS (
+            SELECT 1 FROM collection_resources cr
+            INNER JOIN collections c ON c.id = cr.collection_id
+            WHERE cr.resource_id = r.id
+              AND c.deleted IS NULL
+              AND c.is_public = true
+              AND (
+                c.base_id IN (SELECT base_id FROM followedBases)
+                OR
+                c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+              )
           )
         )
     `,
