@@ -2,7 +2,6 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { NewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
@@ -24,13 +23,12 @@ import Link from 'next/link'
 
 export const NewsFeedHeader = ({
   params,
-  notificationsCount,
   newsFeedPageContext,
 }: {
   params: NewsFeedParams
-  notificationsCount: NewsFeedNotifications
   newsFeedPageContext: NewsFeedPageContext
 }) => {
+  const { notificationsCount } = newsFeedPageContext
   const { thematique, secteur, base, profil } = params
   const notificationsContainer = !!notificationsCount &&
     notificationsCount.count > 0 && (

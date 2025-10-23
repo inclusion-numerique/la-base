@@ -27,6 +27,7 @@ const ResourceCard = ({
   context = 'list',
   highlightCount,
   onlyUpdatedDate = false,
+  withDate = true,
 }: {
   children?: React.ReactNode
   resource: ResourceListItem
@@ -38,36 +39,30 @@ const ResourceCard = ({
   context?: 'highlight' | 'list' | 'newsFeed'
   highlightCount?: number
   onlyUpdatedDate?: boolean
+  withDate?: boolean
 }) => (
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
   >
     <div className={styles.header}>
-      {!children && context !== 'highlight' && (
+      {!children && context === 'list' && (
         <OwnershipInformation
           user={resource.createdBy}
           base={resource.base}
           attributionWording={isDraft ? 'draft-resource' : 'resource'}
-        >
-          {context === 'newsFeed' && 'seen' in resource && !resource.seen && (
-            <p
-              className={classNames(
-                styles.badge,
-                'fr-badge fr-badge--new fr-badge--sm fr-mr-2w',
-              )}
-            />
-          )}
-        </OwnershipInformation>
+        />
       )}
       {children}
-      <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
-        <ResourceDates
-          canEdit={isContributor}
-          resource={resource}
-          onlyUpdatedDate={onlyUpdatedDate}
-        />
-      </div>
+      {withDate && (
+        <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
+          <ResourceDates
+            canEdit={isContributor}
+            resource={resource}
+            onlyUpdatedDate={onlyUpdatedDate}
+          />
+        </div>
+      )}
     </div>
     <div className="fr-flex fr-direction-column fr-justify-content-space-between">
       <Link
@@ -76,18 +71,20 @@ const ResourceCard = ({
         data-testid="resource-card-link"
       >
         <div className={styles.textAndDescription}>
-          <div
-            className={classNames(
-              styles.dates,
-              'fr-hidden-md fr-text--xs fr-mb-1w',
-            )}
-          >
-            <ResourceDates
-              canEdit={isContributor}
-              resource={resource}
-              onlyUpdatedDate={onlyUpdatedDate}
-            />
-          </div>
+          {withDate && (
+            <div
+              className={classNames(
+                styles.dates,
+                'fr-hidden-md fr-text--xs fr-mb-1w',
+              )}
+            >
+              <ResourceDates
+                canEdit={isContributor}
+                resource={resource}
+                onlyUpdatedDate={onlyUpdatedDate}
+              />
+            </div>
+          )}
           <ResourceTitle
             className={classNames(
               {
