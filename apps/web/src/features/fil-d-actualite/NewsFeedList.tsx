@@ -1,6 +1,5 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
   resourceAuthorization,
@@ -8,24 +7,20 @@ import {
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/components/NewsFeedOwnershipInformation'
-import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { useNewsFeedPagination } from '@app/web/hooks/useNewsFeedPagination'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 import { Spinner } from '@app/web/ui/Spinner'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { NewsFeed } from '@prisma/client'
 
 const NewsFeedList = ({
-  resources,
-  user,
-  userNewsFeed,
+  newsFeedPageContext,
   params,
 }: {
-  resources: NewsFeedResource[]
-  user: SessionUser
-  userNewsFeed: NewsFeed
+  newsFeedPageContext: NewsFeedPageContext
   params: NewsFeedParams
 }) => {
+  const { userNewsFeed, resources, user } = newsFeedPageContext
   const filters = {
     themes: params.thematique ? [params.thematique] : [],
     professionalSectors: params.secteur ? [params.secteur] : [],
@@ -38,8 +33,6 @@ const NewsFeedList = ({
     loadMore,
     isFetching,
   } = useNewsFeedPagination(resources, filters)
-
-  const hasActiveFilters = Object.entries(params).some(([_, value]) => !!value)
 
   return (
     <>
@@ -57,22 +50,16 @@ const NewsFeedList = ({
           }
           resource={resource}
           user={user}
+          withDate={false}
         >
-          {!hasActiveFilters && (
-            <NewsFeedOwnershipInformation
-              resource={resource}
-              userNewsFeed={userNewsFeed}
-            />
-          )}
+          <NewsFeedOwnershipInformation
+            resource={resource}
+            newsFeedPageContext={newsFeedPageContext}
+          />
         </ResourceCard>
       ))}
       <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
-        <Button
-          priority="secondary"
-          // className="fr-flex fr-width-full fr-justify-content-center"
-          onClick={loadMore}
-          disabled={isFetching}
-        >
+        <Button priority="secondary" onClick={loadMore} disabled={isFetching}>
           {isFetching ? (
             <>
               <Spinner size="small" className="fr-mr-2v" />

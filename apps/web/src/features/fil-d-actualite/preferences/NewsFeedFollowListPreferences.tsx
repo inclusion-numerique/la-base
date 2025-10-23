@@ -96,7 +96,7 @@ export const NewsFeedFollowListPreferences = ({
         {followedProfiles.length === 0 && (
           <div className="fr-border fr-border-radius--8 fr-py-4w fr-px-6w fr-text--center fr-mt-4v">
             <span className="fr-text--md fr-text--bold fr-text-mention--grey fr-mb-0">
-              Vous ne suivez pas de bases.
+              Vous ne suivez pas de profils.
             </span>
           </div>
         )}

@@ -88,7 +88,6 @@ export const getNewsFeedResources = async (
     newsFeedResources.map(({ id, seen, source }) => [id, { source, seen }]),
   )
 
-  // Get followed bases and profiles with enhanced data structure similar to getFollowsList
   const [followedBasesData, followedProfilesData] = await Promise.all([
     prismaClient.baseFollow.findMany({
       where: {
@@ -228,7 +227,6 @@ export const getNewsFeedResources = async (
     }),
   ])
 
-  // Extract bases and profiles from follow data and add resource views count
   const baseResourcesViews = await getBaseResourcesViewsCount(
     followedBasesData.map(({ base }) => base.id),
   )
