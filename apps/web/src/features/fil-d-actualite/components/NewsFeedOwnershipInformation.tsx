@@ -212,15 +212,98 @@ const newsFeedAttributionConfig = {
       }
     },
   },
+  savedCollection: {
+    getText: (
+      resource: NewsFeedResource,
+      timeAgo: string,
+      isUpdated: boolean,
+    ) => {
+      const collectionResource = resource.collections?.find(
+        (c) => c.collection.id === resource.collectionId,
+      )
+      if (!collectionResource) {
+        return null
+      }
+
+      const collection = collectionResource.collection
+      const isBaseCollection = resource.source === 'savedCollectionFromBase'
+      const collectionOwner = isBaseCollection
+        ? collection.base
+        : collection.createdBy
+
+      if (!collectionOwner) {
+        return null
+      }
+
+      return (
+        <>
+          <Link
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+            href={
+              isBaseCollection
+                ? `/bases/${collection.base?.slug}`
+                : `/profils/${collection.createdBy?.slug}`
+            }
+          >
+            {isBaseCollection
+              ? collection.base?.title
+              : formatName(collection.createdBy?.name || '')}
+          </Link>
+          &nbsp;a ajouté cette ressource dans la collection&nbsp;
+          <Link
+            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+            href={`/collections/${collection.slug}`}
+          >
+            {collection.title}
+          </Link>
+          &nbsp;{timeAgo}
+        </>
+      )
+    },
+    getImage: (resource: NewsFeedResource) => {
+      const collectionResource = resource.collections?.find(
+        (c) => c.collection.id === resource.collectionId,
+      )
+      if (!collectionResource) {
+        return null
+      }
+
+      const collection = collectionResource.collection
+      const isBaseCollection = resource.source === 'savedCollectionFromBase'
+
+      if (isBaseCollection && collection.base) {
+        return <BaseImage base={collection.base} />
+      }
+      
+      if (collection.createdBy) {
+        return <RoundProfileImage user={collection.createdBy} />
+      }
+      
+      return null
+    },
+  },
 } as const
 
+// We check the priority of the resource in the following order:
+// 0. Check if this is a saved collection resource first
+// 1. Base priority - check if user follows any base containing this resource
+// 2. Profile priority - check if user follows the resource creator
+// 3. Theme priority - check if user follows any theme of this resource
+// 4. Professional sector priority - check if user follows any sector of this resource
+// 5. Fallback to base if available, otherwise profile
 const determineAttribution = (
   resource: NewsFeedResource,
   userNewsFeed: NewsFeed,
   followedBases: NewsFeedBases,
   followedProfiles: NewsFeedProfiles,
 ) => {
-  // 1. Base priority - check if user follows any base containing this resource
+  if (
+    resource.source === 'savedCollectionFromBase' ||
+    resource.source === 'savedCollectionFromProfile'
+  ) {
+    return 'savedCollection'
+  }
+
   if (resource.base) {
     const resourceBase = resource.base
     if (followedBases.find(({ base }) => base.id === resourceBase.id)) {
@@ -228,14 +311,12 @@ const determineAttribution = (
     }
   }
 
-  // 2. Profile priority - check if user follows the resource creator
   if (
     followedProfiles.find(({ profile }) => profile.id === resource.createdBy.id)
   ) {
     return 'profile'
   }
 
-  // 3. Theme priority - check if user follows any theme of this resource
   const resourceThemes = resource.themes || []
   const userPreferredThemes = userNewsFeed.themes || []
   const hasMatchingTheme = resourceThemes.some((theme) =>
@@ -245,7 +326,6 @@ const determineAttribution = (
     return 'theme'
   }
 
-  // 4. Professional sector priority - check if user follows any sector of this resource
   const resourceProfessionalSectors = resource.professionalSectors || []
   const userPreferredProfessionalSectors =
     userNewsFeed.professionalSectors || []
@@ -256,8 +336,11 @@ const determineAttribution = (
     return 'professional_sector'
   }
 
-  // 5. Fallback to base if available, otherwise profile
-  return resource.base !== null ? 'base' : 'profile'
+  if (resource.base !== null) {
+    return 'base'
+  }
+  
+  return 'profile'
 }
 
 export const NewsFeedOwnershipInformation = ({
@@ -278,11 +361,15 @@ export const NewsFeedOwnershipInformation = ({
   // We can cast, since we have a "published is not null" condition in the query
   const published = resource.published as Date
   const mostRecentDate =
-    resource.lastPublished && resource.lastPublished > published
+    attributionType === 'savedCollection' && resource.addedToCollectionAt
+      ? resource.addedToCollectionAt
+      : resource.lastPublished && resource.lastPublished > published
       ? resource.lastPublished
       : published
   const isUpdated =
-    resource.lastPublished !== null && resource.lastPublished > published
+    attributionType !== 'savedCollection' &&
+    resource.lastPublished !== null &&
+    resource.lastPublished > published
   const timeAgo = formatTimeAgo(mostRecentDate)
   const attributionText = config.getText(
     resource,
