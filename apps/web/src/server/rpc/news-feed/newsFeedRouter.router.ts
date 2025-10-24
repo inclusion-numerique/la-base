@@ -1,3 +1,4 @@
+import { getNewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
 import { getNewsFeedResources } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { UpdateNewsFeedSectorsProfessionnalsValidation } from '@app/web/features/fil-d-actualite/onboarding/professionals-sectors/newsFeedProfessionnalsSectors'
 import { UpdateNewsFeedResumeValidation } from '@app/web/features/fil-d-actualite/onboarding/resume/newsFeedResume'
@@ -112,7 +113,6 @@ export const newsFeedRouter = router({
         update: updateData,
       })
     }),
-
   updateMonthlyNewsletter: protectedProcedure
     .input(UpdateNewsFeedResumeValidation)
     .mutation(async ({ input, ctx: { user } }) => {
@@ -130,5 +130,10 @@ export const newsFeedRouter = router({
           lastOpenedAt: new Date(),
         },
       })
+    }),
+  newsBadgeCount: protectedProcedure
+    .input(z.object({}))
+    .query(async ({ ctx: { user } }) => {
+      return getNewsFeedNotifications(user)
     }),
 })
