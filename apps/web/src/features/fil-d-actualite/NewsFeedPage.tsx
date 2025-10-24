@@ -1,4 +1,4 @@
-import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedPageContext, updateLastOpenedAt } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
 import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
@@ -10,6 +10,10 @@ const NewsFeedPage = async ({
   params: NewsFeedParams
   newsFeedPageContext: NewsFeedPageContext
 }) => {
+  const { user } = newsFeedPageContext
+  // no await - we don't want to block the thread
+  updateLastOpenedAt(user.id)
+
   return (
     <>
       <NewsFeedHeader

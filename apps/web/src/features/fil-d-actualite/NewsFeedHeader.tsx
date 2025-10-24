@@ -29,6 +29,7 @@ export const NewsFeedHeader = ({
   newsFeedPageContext: NewsFeedPageContext
 }) => {
   const { notificationsCount } = newsFeedPageContext
+  console.log(notificationsCount)
   const { thematique, secteur, base, profil } = params
   const notificationsContainer = !!notificationsCount &&
     notificationsCount.count > 0 && (
