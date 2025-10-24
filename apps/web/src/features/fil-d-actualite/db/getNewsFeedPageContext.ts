@@ -131,7 +131,7 @@ export const getNewsFeedResources = async (
       ],
     ),
   )
-  const [followedBasesData, followedProfilesData] = await Promise.all([
+  const [followedBasesData, followedProfiles] = await Promise.all([
     prismaClient.baseFollow.findMany({
       where: {
         followerId: userId,
@@ -286,8 +286,6 @@ export const getNewsFeedResources = async (
       },
     },
   }))
-
-  const followedProfiles = followedProfilesData
 
   if (resourceIds.length === 0) {
     return {
