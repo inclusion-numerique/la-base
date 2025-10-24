@@ -1,9 +1,6 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
-import {
-  getNewsFeedPageContext,
-  updateLastOpenedAt,
-} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { getNewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import NewsFeedPage from '@app/web/features/fil-d-actualite/NewsFeedPage'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
 import { NewsFeedOnboardingDone } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingDoneModal'
@@ -19,6 +16,7 @@ import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import { redirect } from 'next/navigation'
 import styles from '../NewsFeedLayout.module.css'
+import NewsFeedBadgeInvalidation from '@app/web/features/fil-d-actualite/components/NewsFeedBadgeInvalidation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -59,12 +57,10 @@ export default async function NewsFeedSegmentPage({
     paginationParams,
   )
 
-  // no await - we don't want to block the thread
-  updateLastOpenedAt(user.id)
-
   return (
     <>
       <NewsFeedOnboardingDone fromOnboarding={!!onboarding} />
+      <NewsFeedBadgeInvalidation />
       <nav
         className="fr-sidemenu fr-sidemenu--sticky-full-height fr-pr-0"
         style={{ width: '314px' }}

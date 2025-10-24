@@ -10,10 +10,8 @@ import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { useNewsFeedPagination } from '@app/web/hooks/useNewsFeedPagination'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
-import { trpc } from '@app/web/trpc'
 import { Spinner } from '@app/web/ui/Spinner'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { useEffect } from 'react'
 
 const NewsFeedList = ({
   newsFeedPageContext,
@@ -23,7 +21,6 @@ const NewsFeedList = ({
   params: NewsFeedParams
 }) => {
   const { userNewsFeed, resources, user } = newsFeedPageContext
-  const utils = trpc.useUtils()
 
   const filters = {
     themes: params.thematique ? [params.thematique] : [],
@@ -38,9 +35,7 @@ const NewsFeedList = ({
     isFetching,
   } = useNewsFeedPagination(resources, filters)
 
-  useEffect(() => {
-    utils.newsFeed.newsBadgeCount.invalidate()
-  }, [utils.newsFeed.newsBadgeCount])
+
 
   return (
     <>

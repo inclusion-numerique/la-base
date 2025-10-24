@@ -545,9 +545,9 @@ export const getUnseenResourcesCount = async (
         WHERE user_id = ${userId}::uuid
       )
       SELECT 
-        COUNT(*)::integer as total,
+        COUNT(DISTINCT r.id)::integer as total,
         COUNT(
-          CASE 
+          DISTINCT CASE 
             WHEN (
               ${
                 isFollowedOnlyMode
@@ -593,7 +593,7 @@ export const getUnseenResourcesCount = async (
                       )
                     )`
               }
-            ) THEN 1 
+            ) THEN r.id 
             ELSE NULL 
           END
         )::integer as count
@@ -625,17 +625,11 @@ export const getUnseenResourcesCount = async (
           OR -- préférences secteur pro
           EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
           OR -- saves de collections par entités suivies
-          EXISTS (
-            SELECT 1 FROM collection_resources cr
-            INNER JOIN collections c ON c.id = cr.collection_id
-            WHERE cr.resource_id = r.id
-              AND c.deleted IS NULL
-              AND c.is_public = true
-              AND (
-                c.base_id IN (SELECT base_id FROM followedBases)
-                OR
-                c.created_by_id IN (SELECT profile_id FROM followedProfiles)
-              )
+          (
+            cr.id IS NOT NULL AND (
+              c.base_id IN (SELECT base_id FROM followedBases)
+              OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+            )
           )
         )
     `,
