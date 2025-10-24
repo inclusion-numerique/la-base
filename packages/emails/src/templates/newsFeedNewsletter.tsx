@@ -1,6 +1,6 @@
 import LayoutWithFooter from '@app/emails/components/LayoutWithFooter'
 import { emailAssetUrl } from '@app/emails/emailAssetUrl'
-import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedResourceServer } from '@app/web/server/newsFeed/getNewsFeedResources'
 import {
   MjmlButton,
   MjmlColumn,
@@ -18,7 +18,7 @@ export const newsFeedNewsletter = {
     resources,
   }: {
     count: number
-    resources: NewsFeedResource[]
+    resources: NewsFeedResourceServer[]
   }): string =>
     renderToMjml(
       <LayoutWithFooter

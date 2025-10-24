@@ -1,4 +1,4 @@
-import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedResourceServer } from '@app/web/server/newsFeed/getNewsFeedResources'
 
 const createdBy = {
   name: 'Toto',
@@ -14,7 +14,7 @@ const createdBy = {
   },
 }
 
-export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResource[] = [
+export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
   {
     id: '9b477ac4-e08c-4fe2-ae4b-3b4a9c3e5d5e',
     title: "Cartes Maillage du Département de l'Ain",

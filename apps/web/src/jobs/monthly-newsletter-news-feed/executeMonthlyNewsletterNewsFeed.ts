@@ -2,7 +2,7 @@ import { output } from '@app/cli/output'
 import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/emails/sendNewsFeedNewsletterEmail'
 import {
   defaultNewsFeedPaginationParams,
-  getNewsFeedResources,
+  getNewsFeedResourcesServer,
 } from '@app/web/server/newsFeed/getNewsFeedResources'
 import { PrismaClient } from '@prisma/client'
 
@@ -32,7 +32,7 @@ export const executeMonthlyNewsletterNewsFeed = async () => {
     newsFeedUsers.map(async (user) => ({
       user,
       resources: (
-        await getNewsFeedResources(
+        await getNewsFeedResourcesServer(
           user.id,
           { themes: [], professionalSectors: [] },
           defaultNewsFeedPaginationParams,

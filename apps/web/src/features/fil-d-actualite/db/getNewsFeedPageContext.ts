@@ -273,6 +273,7 @@ export const getNewsFeedResources = async (
         select: {
           id: true,
           added: true,
+          collectionId: true,
           collection: {
             select: {
               id: true,

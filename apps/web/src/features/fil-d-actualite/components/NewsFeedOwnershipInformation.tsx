@@ -274,11 +274,11 @@ const newsFeedAttributionConfig = {
       if (isBaseCollection && collection.base) {
         return <BaseImage base={collection.base} />
       }
-      
+
       if (collection.createdBy) {
         return <RoundProfileImage user={collection.createdBy} />
       }
-      
+
       return null
     },
   },
@@ -339,7 +339,7 @@ const determineAttribution = (
   if (resource.base !== null) {
     return 'base'
   }
-  
+
   return 'profile'
 }
 
@@ -364,8 +364,8 @@ export const NewsFeedOwnershipInformation = ({
     attributionType === 'savedCollection' && resource.addedToCollectionAt
       ? resource.addedToCollectionAt
       : resource.lastPublished && resource.lastPublished > published
-      ? resource.lastPublished
-      : published
+        ? resource.lastPublished
+        : published
   const isUpdated =
     attributionType !== 'savedCollection' &&
     resource.lastPublished !== null &&
