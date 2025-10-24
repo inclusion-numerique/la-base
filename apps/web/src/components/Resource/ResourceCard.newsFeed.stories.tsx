@@ -2,9 +2,7 @@ import { ResourcesListWrapper } from '@app/storybook/components/ResourcesListWra
 import { mobileStory } from '@app/storybook/storyHelper'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/components/NewsFeedOwnershipInformation'
-import type {
-  NewsFeedPageContext,
-} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import type { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { testSessionUser } from '@app/web/test/testSessionUser'
 import { ProfessionalSector, Theme } from '@prisma/client'
 import type { Meta, StoryObj } from '@storybook/nextjs'

@@ -1,14 +1,14 @@
 import { compileMjml } from '@app/emails/mjml'
 import { newsFeedNewsletter } from '@app/emails/templates/newsFeedNewsletter'
-import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
+import { NewsFeedResourceServer } from '@app/web/server/newsFeed/getNewsFeedResources'
 
 export const sendNewsFeedNewsletterEmail = async (
   email: string,
-  resources: NewsFeedResource[],
+  resources: NewsFeedResourceServer[],
 ) => {
   const result = await emailTransport.sendMail({
     to: email,

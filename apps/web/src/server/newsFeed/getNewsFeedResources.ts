@@ -451,7 +451,7 @@ export const getResourceIds = async (
   )
 }
 
-export const getNewsFeedResources = async (
+export const getNewsFeedResourcesServer = async (
   userId: string,
   filters: NewsFeedFilters = { themes: [], professionalSectors: [] },
   paginationParams: PaginationParams = defaultNewsFeedPaginationParams,
@@ -466,17 +466,13 @@ export const getNewsFeedResources = async (
 
   const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
-    newsFeedResources.map(
-      ({ id, seen, source, added_to_collection_at, collection_id }) => [
-        id,
-        {
-          source,
-          seen,
-          collectionId: collection_id,
-          addedToCollectionAt: added_to_collection_at,
-        },
-      ],
-    ),
+    newsFeedResources.map(({ id, seen, source }) => [
+      id,
+      {
+        source,
+        seen,
+      },
+    ]),
   )
 
   const resources = await prismaClient.resource.findMany({
@@ -509,6 +505,10 @@ export const getNewsFeedResources = async (
     }),
   }
 }
+
+export type NewsFeedResourceServer = Awaited<
+  ReturnType<typeof getNewsFeedResourcesServer>
+>['resources'][0]
 
 export const getUnseenResourcesCount = async (
   userId: string,

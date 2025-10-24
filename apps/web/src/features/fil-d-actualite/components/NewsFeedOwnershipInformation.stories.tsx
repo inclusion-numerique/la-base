@@ -117,6 +117,7 @@ const baseResource: NewsFeedResource = {
     {
       id: 'collection-resource-1',
       added: new Date('2025-10-22T15:00:00Z'),
+      collectionId: 'collection-1',
       collection: mockCollection,
     },
   ],
@@ -419,6 +420,7 @@ export const SavedCollectionFromProfile: Story = {
         collections: [
           {
             id: 'collection-resource-1',
+            collectionId: 'collection-1',
             added: new Date('2025-10-22T15:00:00Z'),
             collection: {
               ...mockCollection,
@@ -580,6 +582,7 @@ export const AllVariants: Story = {
             collections: [
               {
                 id: 'collection-resource-1',
+                collectionId: 'collection-1',
                 added: new Date('2025-10-22T15:00:00Z'),
                 collection: {
                   ...mockCollection,
