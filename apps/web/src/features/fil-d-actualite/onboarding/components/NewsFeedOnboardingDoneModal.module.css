@@ -1,0 +1,27 @@
+.iconContainer {
+  background: var(--background-contrast-success);
+}
+
+.icon {
+  color: var(--text-default-success) !important;
+}
+
+.modalContainer {
+  :global(.fr-modal__body) {
+    border-radius: 8px;
+  }
+
+  :global(.fr-modal__header button:first-child) {
+    display: none;
+  }
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+
+  @media (min-width: 48em) {
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+}

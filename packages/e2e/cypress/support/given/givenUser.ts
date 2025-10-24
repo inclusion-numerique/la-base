@@ -15,7 +15,6 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
   const name = `${firstName} ${lastName}`
   slugSuffix += 1
   const slug = `${createSlug(name)}-${slugHash}-${slugSuffix}`
-
   return {
     id: v4(),
     email: `${slug}@lesbases.anct.gouv.fr`,
@@ -29,6 +28,16 @@ export const givenUser = (data?: Partial<CreateUserInput>) => {
     isPublic: false,
     lastCguAcceptedAt: new Date('2023-04-01'),
     cguVersion: currentCguVersion,
+    newsFeed: {
+      create: {
+        themes: [],
+        professionalSectors: [],
+        hasCompleteOnboarding: false,
+        created: new Date('2023-01-01').toISOString(),
+        updated: new Date('2023-01-01').toISOString(),
+        monthlyNewsletter: false,
+      },
+    },
     collections: {
       create: {
         id: v4(),

@@ -1,5 +1,6 @@
 import { BackupDatabaseJobValidation } from '@app/web/jobs/backup-database/backupDatabaseJob'
 import { ImportContactsToBrevoValidation } from '@app/web/jobs/import-contacts-to-brevo/ImportContactsToBrevoJob'
+import { MonthlyNewsletterNewsFeedJobValidation } from '@app/web/jobs/monthly-newsletter-news-feed/MonthlyNewsletterNewsFeedJob'
 import z from 'zod'
 
 /**
@@ -21,6 +22,7 @@ import z from 'zod'
 export const JobValidation = z.discriminatedUnion('name', [
   BackupDatabaseJobValidation,
   ImportContactsToBrevoValidation,
+  MonthlyNewsletterNewsFeedJobValidation,
 ])
 
 export type Job = z.infer<typeof JobValidation>

@@ -1,5 +1,6 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
+import NewsFeedBadge from '@app/web/features/fil-d-actualite/components/NewsFeedBadge'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   defaultSearchParams,
@@ -7,6 +8,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
+import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { Dropdown } from './Dropdown/Dropdown'
@@ -14,10 +16,16 @@ import styles from './Header.module.css'
 import LesBasesSvgLogo from './LesBasesSvgLogo'
 import { CreateResourceButton } from './Resource/CreateResourceModal'
 
-const Header = ({ user }: { user?: SessionUser | null }) => (
+const Header = ({
+  user,
+  className = 'fr-container',
+}: {
+  user?: SessionUser | null
+  className?: string
+}) => (
   <header role="banner" className="fr-header">
     <div className="fr-header__body">
-      <div className="fr-container">
+      <div className={className}>
         <div className="fr-header__body-row">
           <div className="fr-header__brand fr-enlarge-link">
             <div className="fr-header__brand-top">
@@ -42,7 +50,12 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     styles.steps,
                   )}
                 >
-                  {PublicWebAppConfig.projectTitle}
+                  <span className="fr-hidden fr-unhidden-md">
+                    {PublicWebAppConfig.projectTitle}
+                  </span>
+                  <span className="fr-text--sm fr-hidden-sm">
+                    {PublicWebAppConfig.projectTitle}
+                  </span>
                   <span className="fr-sr-only"> - Retour à l’accueil</span>
                 </Link>
               </div>
@@ -67,6 +80,37 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
               <ul className="fr-btns-group fr-align-items-center">
+                <li className="fr-px-md-0 fr-px-2w fr-hidden-sm">
+                  <Button
+                    linkProps={{
+                      href: user
+                        ? !user.newsFeed || !user.newsFeed.hasCompleteOnboarding
+                          ? '/fil-d-actualite/onboarding'
+                          : '/fil-d-actualite/tout'
+                        : '/connexion?suivant=/fil-d-actualite/tout',
+                    }}
+                  >
+                    <span
+                      className="fr-hidden-lg ri-flashlight-line fr-mr-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
+                    Fil d'actualité
+                    <span
+                      className="fr-hidden fr-unhidden-lg ri-flashlight-line fr-ml-1w fr-text-label--blue-france"
+                      aria-hidden
+                    />
+                    {user && (
+                      <div
+                        className={classNames(
+                          'fr-ml-2v fr-flex fr-justify-content-center fr-align-items-center fr-text--sm fr-border-radius--8 fr-p-0',
+                          styles.newsFeedButton,
+                        )}
+                      >
+                        <NewsFeedBadge />
+                      </div>
+                    )}
+                  </Button>
+                </li>
                 <li className="fr-px-md-0 fr-px-2w">
                   <Button
                     linkProps={{
@@ -123,13 +167,33 @@ const Header = ({ user }: { user?: SessionUser | null }) => (
                     />
                   </Link>
                 </li>
-                <li className="fr-hidden fr-unhidden-lg fr-px-1w fr-py-1w">
-                  <span
-                    style={{
-                      height: '24px',
-                      borderLeft: '1px solid var(--border-default-grey)',
-                    }}
-                  />
+                <li className="fr-position-relative fr-hidden fr-unhidden-sm">
+                  <Tooltip title="Fil d'actualité">
+                    {user && <NewsFeedBadge />}
+                    <Button
+                      data-testid="news-feed-button"
+                      className={classNames(
+                        'fr-border-radius--8 fr-p-0',
+                        styles.newsFeedButton,
+                      )}
+                      linkProps={{
+                        href: user
+                          ? !user.newsFeed ||
+                            !user.newsFeed.hasCompleteOnboarding
+                            ? '/fil-d-actualite/onboarding'
+                            : '/fil-d-actualite/tout'
+                          : '/connexion?suivant=/fil-d-actualite/tout',
+                      }}
+                      size="small"
+                    >
+                      <span
+                        className={classNames(
+                          'ri-flashlight-fill fr-text--sm',
+                          styles.newsFeedIcon,
+                        )}
+                      />
+                    </Button>
+                  </Tooltip>
                 </li>
                 <li className="fr-position-relative">
                   {user ? (

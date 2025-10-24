@@ -1,0 +1,36 @@
+.sideNavContainer {
+  padding-top: 3rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.button {
+  min-height: 40px;
+}
+
+.flexWidth {
+  flex: 1;
+  min-width: 0;
+}
+
+.count {
+  flex-shrink: 0;
+}
+
+.activeButton {
+  font-weight: 700;
+  border-radius: 8px;
+  color: var(--artwork-minor-blue-france);
+  background-color: var(--background-alt-blue-france);
+}
+
+.activeButton:hover {
+  background-color: var(--background-contrast-info) !important;
+}
+
+.preferencesButton {
+  @media (max-width: 48em) {
+    border: var(--slim-grey-border);
+    border-color: var(--blue-france-high-525);
+  }
+}

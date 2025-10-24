@@ -7,6 +7,7 @@ const EditorLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()
 
   redirectToUpdatedCguPageIfNeeded(user)
+
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}

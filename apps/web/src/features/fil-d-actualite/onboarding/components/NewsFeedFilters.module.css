@@ -1,0 +1,35 @@
+.label {
+  font-weight: 400;
+  max-width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.absoluteButton {
+  position: absolute;
+  top: 0;
+}
+
+.linkButton {
+  width: 230px;
+  white-space: nowrap;
+}
+
+.activeButton {
+  font-weight: 700;
+  border-radius: 8px;
+  color: var(--artwork-minor-blue-france) !important;
+  background-color: var(--background-alt-blue-france) !important;
+}
+
+.activeButton:hover {
+  background-color: var(--background-contrast-info) !important;
+}

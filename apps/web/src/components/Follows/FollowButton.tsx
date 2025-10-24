@@ -43,7 +43,6 @@ export const FollowButton = (props: FollowButtonProps) => {
   })
 
   // Server component version
-
   if (base) {
     const initialButtonProps = iconOnly
       ? followBaseIconOnlyButtonProps
