@@ -35,8 +35,6 @@ const NewsFeedList = ({
     isFetching,
   } = useNewsFeedPagination(resources, filters)
 
-
-
   return (
     <>
       {paginatedResources.map((resource) => (

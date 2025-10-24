@@ -1,5 +1,6 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
+import NewsFeedBadgeInvalidation from '@app/web/features/fil-d-actualite/components/NewsFeedBadgeInvalidation'
 import { getNewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import NewsFeedPage from '@app/web/features/fil-d-actualite/NewsFeedPage'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
@@ -16,7 +17,6 @@ import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import { redirect } from 'next/navigation'
 import styles from '../NewsFeedLayout.module.css'
-import NewsFeedBadgeInvalidation from '@app/web/features/fil-d-actualite/components/NewsFeedBadgeInvalidation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
