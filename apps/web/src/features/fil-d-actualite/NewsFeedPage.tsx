@@ -1,4 +1,7 @@
-import { NewsFeedPageContext, updateLastOpenedAt } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  NewsFeedPageContext,
+  updateLastOpenedAt,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
 import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'

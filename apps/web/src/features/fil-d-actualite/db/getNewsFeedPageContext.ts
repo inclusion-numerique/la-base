@@ -45,7 +45,7 @@ export const getNewsFeedResources = async (
       ? await getFollowedResourceIds(userId, paginationParams, lastOpenedAt)
       : await getResourceIds(userId, filters, paginationParams, lastOpenedAt)
 
-  // Followed bases that have at least 1 resource
+  // Followed bases that have at least 1 resource (direct publications or collections)
   const followedBasesWithResources = await prismaClient.$queryRaw<
     { id: string }[]
   >(
@@ -53,18 +53,36 @@ export const getNewsFeedResources = async (
       WITH followedBases AS (
         SELECT base_id FROM base_follows WHERE follower_id = ${userId}::uuid
       )
-      SELECT DISTINCT b.id
-      FROM bases b
-      INNER JOIN followedBases fb ON b.id = fb.base_id
-      INNER JOIN resources r ON r.base_id = b.id
-      WHERE b.deleted IS NULL
-        AND r.deleted IS NULL
-        AND r.published IS NOT NULL
-        AND r.is_public = true
+      SELECT DISTINCT base_id as id
+      FROM (
+        -- Bases with direct publications
+        SELECT r.base_id
+        FROM resources r
+        LEFT JOIN bases b ON r.base_id = b.id
+        WHERE r.base_id IN (SELECT base_id FROM followedBases)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
+          AND (b.id IS NULL OR b.deleted IS NULL)
+        
+        UNION
+        
+        -- Bases with collections containing saved resources
+        SELECT c.base_id
+        FROM resources r
+        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
+        WHERE c.base_id IN (SELECT base_id FROM followedBases)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
+          AND cr.id IS NOT NULL
+      ) base_sources
+      WHERE base_id IS NOT NULL
     `,
   )
 
-  // Followed profiles that have at least 1 resource
+  // Followed profiles that have at least 1 resource (direct creations or collections)
   const followedProfilesWithResources = await prismaClient.$queryRaw<
     { id: string }[]
   >(
@@ -72,14 +90,30 @@ export const getNewsFeedResources = async (
       WITH followedProfiles AS (
         SELECT profile_id FROM profile_follows WHERE follower_id = ${userId}::uuid
       )
-      SELECT DISTINCT p.id
-      FROM users p
-      INNER JOIN followedProfiles fp ON p.id = fp.profile_id
-      INNER JOIN resources r ON r.created_by_id = p.id
-      WHERE p.deleted IS NULL
-        AND r.deleted IS NULL
-        AND r.published IS NOT NULL
-        AND r.is_public = true
+      SELECT DISTINCT profile_id as id
+      FROM (
+        -- Profiles with direct resource creations
+        SELECT r.created_by_id as profile_id
+        FROM resources r
+        WHERE r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
+        
+        UNION
+        
+        -- Profiles with collections containing saved resources
+        SELECT c.created_by_id as profile_id
+        FROM resources r
+        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
+        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
+        WHERE c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
+          AND cr.id IS NOT NULL
+      ) profile_sources
+      WHERE profile_id IS NOT NULL
     `,
   )
 
