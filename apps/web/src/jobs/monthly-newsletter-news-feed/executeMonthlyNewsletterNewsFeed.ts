@@ -1,5 +1,5 @@
 import { output } from '@app/cli/output'
-import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/emails/sendNewsFeedNewsletterEmail'
+import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/components/emails/sendNewsFeedNewsletterEmail'
 import {
   defaultNewsFeedPaginationParams,
   getNewsFeedResourcesServer,
