@@ -34,7 +34,7 @@ const NewsFeedList = ({
     loadMore,
     isFetching,
   } = useNewsFeedPagination(resources, filters)
-
+  const hasFilter = !!params.thematique || !!params.secteur
   return (
     <>
       {paginatedResources.map((resource) => (
@@ -56,6 +56,7 @@ const NewsFeedList = ({
           <NewsFeedOwnershipInformation
             resource={resource}
             newsFeedPageContext={newsFeedPageContext}
+            hasFilter={hasFilter}
           />
         </ResourceCard>
       ))}

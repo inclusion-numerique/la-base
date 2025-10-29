@@ -296,13 +296,14 @@ const determineAttribution = (
   userNewsFeed: NewsFeed,
   followedBases: NewsFeedBases,
   followedProfiles: NewsFeedProfiles,
+  hasFilter: boolean,
 ) => {
-  if (
-    resource.source === 'savedCollectionFromBase' ||
-    resource.source === 'savedCollectionFromProfile'
-  ) {
-    return 'savedCollection'
-  }
+  // if (
+  //   resource.source === 'savedCollectionFromBase' ||
+  //   resource.source === 'savedCollectionFromProfile'
+  // ) {
+  //   return 'savedCollection'
+  // }
 
   if (resource.base) {
     const resourceBase = resource.base
@@ -322,7 +323,7 @@ const determineAttribution = (
   const hasMatchingTheme = resourceThemes.some((theme) =>
     userPreferredThemes.includes(theme),
   )
-  if (hasMatchingTheme) {
+  if (hasMatchingTheme && !hasFilter) {
     return 'theme'
   }
 
@@ -332,7 +333,7 @@ const determineAttribution = (
   const hasMatchingSector = resourceProfessionalSectors.some((sector) =>
     userPreferredProfessionalSectors.includes(sector),
   )
-  if (hasMatchingSector) {
+  if (hasMatchingSector && !hasFilter) {
     return 'professional_sector'
   }
 
@@ -346,9 +347,11 @@ const determineAttribution = (
 export const NewsFeedOwnershipInformation = ({
   resource,
   newsFeedPageContext,
+  hasFilter,
 }: {
   resource: NewsFeedResource
   newsFeedPageContext: NewsFeedPageContext
+  hasFilter: boolean
 }) => {
   const { userNewsFeed, followedBases, followedProfiles } = newsFeedPageContext
   const attributionType = determineAttribution(
@@ -356,20 +359,20 @@ export const NewsFeedOwnershipInformation = ({
     userNewsFeed,
     followedBases,
     followedProfiles,
+    hasFilter,
   )
   const config = newsFeedAttributionConfig[attributionType]
   // We can cast, since we have a "published is not null" condition in the query
   const published = resource.published as Date
   const mostRecentDate =
-    attributionType === 'savedCollection' && resource.addedToCollectionAt
-      ? resource.addedToCollectionAt
-      : resource.lastPublished && resource.lastPublished > published
-        ? resource.lastPublished
-        : published
+    // attributionType === 'savedCollection' && resource.addedToCollectionAt
+    // ? resource.addedToCollectionAt
+    resource.lastPublished && resource.lastPublished > published
+      ? resource.lastPublished
+      : published
   const isUpdated =
-    attributionType !== 'savedCollection' &&
-    resource.lastPublished !== null &&
-    resource.lastPublished > published
+    // attributionType !== 'savedCollection' &&
+    resource.lastPublished !== null && resource.lastPublished > published
   const timeAgo = formatTimeAgo(mostRecentDate)
   const attributionText = config.getText(
     resource,

@@ -303,8 +303,13 @@ export const getFollowedResourceIds = async (
             ELSE false
           END AS seen,
           CASE
-            WHEN cr.id IS NOT NULL AND c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
-            WHEN cr.id IS NOT NULL AND c.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'savedCollectionFromProfile'::text
+            WHEN cr.id IS NOT NULL 
+             AND (c.base_id IN (SELECT base_id FROM followedBases) OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+             AND cr.added >= GREATEST(r.published, r.last_published) THEN
+          CASE
+            WHEN c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
+            ELSE 'savedCollectionFromProfile'::text
+          END
             WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
             WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
             ELSE 'base'::text
@@ -493,8 +498,13 @@ export const getResourceIds = async (
         ELSE false
       END AS seen,
       CASE
-        WHEN cr.id IS NOT NULL AND c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
-        WHEN cr.id IS NOT NULL AND c.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'savedCollectionFromProfile'::text
+        WHEN cr.id IS NOT NULL 
+             AND (c.base_id IN (SELECT base_id FROM followedBases) OR c.created_by_id IN (SELECT profile_id FROM followedProfiles))
+             AND cr.added >= GREATEST(r.published, r.last_published) THEN
+          CASE
+            WHEN c.base_id IN (SELECT base_id FROM followedBases) THEN 'savedCollectionFromBase'::text
+            ELSE 'savedCollectionFromProfile'::text
+          END
         WHEN r.base_id IN (SELECT base_id FROM followedBases) THEN 'base'::text
         WHEN r.created_by_id IN (SELECT profile_id FROM followedProfiles) THEN 'profile'::text
         WHEN EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes) THEN 'theme'::text

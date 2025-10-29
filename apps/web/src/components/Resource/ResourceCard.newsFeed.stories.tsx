@@ -191,6 +191,7 @@ export const NewsFeedBasePublished: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={baseResource}
         newsFeedPageContext={mockNewsFeedPageContext}
       />
@@ -213,6 +214,7 @@ export const NewsFeedBaseUpdated: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           updated: updatedDate,
@@ -241,6 +243,7 @@ export const NewsFeedProfilePublished: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           base: null,
@@ -275,6 +278,7 @@ export const NewsFeedProfileUpdated: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           base: null,
@@ -309,6 +313,7 @@ export const NewsFeedThemePublished: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           base: null,
@@ -342,6 +347,7 @@ export const NewsFeedProfessionalSectorPublished: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           base: null,
@@ -378,6 +384,7 @@ export const NewsFeedUnseenResource: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           seen: false,
@@ -410,6 +417,7 @@ export const NewsFeedContributorResource: Story = {
       withDate={false}
     >
       <NewsFeedOwnershipInformation
+        hasFilter={false}
         resource={{
           ...baseResource,
           createdById: testSessionUser.id,
@@ -441,6 +449,7 @@ export const AllNewsFeedVariants: Story = {
         withDate={false}
       >
         <NewsFeedOwnershipInformation
+          hasFilter={false}
           resource={baseResource}
           newsFeedPageContext={mockNewsFeedPageContext}
         />
@@ -459,6 +468,7 @@ export const AllNewsFeedVariants: Story = {
         withDate={false}
       >
         <NewsFeedOwnershipInformation
+          hasFilter={false}
           resource={{
             ...baseResource,
             updated: updatedDate,
@@ -483,6 +493,7 @@ export const AllNewsFeedVariants: Story = {
         withDate={false}
       >
         <NewsFeedOwnershipInformation
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -509,6 +520,7 @@ export const AllNewsFeedVariants: Story = {
         withDate={false}
       >
         <NewsFeedOwnershipInformation
+          hasFilter={false}
           resource={{
             ...baseResource,
             seen: false,
