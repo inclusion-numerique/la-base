@@ -5,6 +5,7 @@ import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { countProfileResources } from '@app/web/server/profiles/countProfileResources'
 import type { ProfileListItem } from '@app/web/server/profiles/getProfilesList'
 import { formatName } from '@app/web/server/rpc/user/formatName'
+import classNames from 'classnames'
 import Link from 'next/link'
 
 const ProfileCard = ({
@@ -12,6 +13,7 @@ const ProfileCard = ({
   user,
   canFollow = true,
   titleAs: ProfileTitle = 'h2',
+  className,
   isAdmin,
   displayProfileMetadata = true,
 }: {
@@ -19,10 +21,14 @@ const ProfileCard = ({
   user: SessionUser | null
   canFollow?: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  className?: string
   isAdmin?: boolean
   displayProfileMetadata?: boolean
 }) => (
-  <article className="fr-border-top" data-testid="profile-card">
+  <article
+    className={classNames(className, 'fr-border-top')}
+    data-testid="profile-card"
+  >
     <div className="fr-py-2w fr-flex fr-flex-gap-4v fr-align-items-sm-center fr-direction-sm-row fr-direction-column">
       <div className="fr-flex fr-flex-gap-4v fr-align-items-center fr-flex-grow-1 ">
         <Link

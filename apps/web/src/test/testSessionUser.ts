@@ -23,4 +23,13 @@ export const testSessionUser = {
   createdResources: [],
   resources: [],
   collections: [],
+  newsFeed: {
+    themes: [],
+    professionalSectors: [],
+    hasCompleteOnboarding: false,
+    userId: 'test',
+    created: new Date('2023-01-01').toISOString(),
+    updated: new Date('2023-01-01').toISOString(),
+    monthlyNewsletter: false,
+  },
 } as const satisfies SessionUser

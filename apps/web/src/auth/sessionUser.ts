@@ -3,8 +3,10 @@ import type {
   BaseMembers,
   Collection,
   CollectionResource,
+  ProfessionalSector,
   Resource,
   ResourceContributors,
+  Theme,
   User,
 } from '@prisma/client'
 
@@ -51,6 +53,15 @@ export type SessionUser = Pick<
   updated: string | null
   hasSeenV2Onboarding: string | null
   lastCguAcceptedAt: string | null
+  newsFeed: {
+    userId: string
+    professionalSectors: ProfessionalSector[]
+    themes: Theme[]
+    created: string
+    updated: string
+    hasCompleteOnboarding: boolean
+    monthlyNewsletter: boolean
+  } | null
   ownedBases: SessionUserBase[]
   bases: (Pick<BaseMembers, 'isAdmin'> & {
     base: SessionUserBase
