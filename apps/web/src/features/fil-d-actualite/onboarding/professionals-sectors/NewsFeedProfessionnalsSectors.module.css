@@ -1,0 +1,11 @@
+.checkboxFormLabel {
+  padding-left: 16px;
+}
+
+input[type='checkbox'] + .labelContainer::before {
+  top: unset !important;
+}
+
+.labelContainer {
+  justify-content: space-between !important;
+}

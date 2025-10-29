@@ -114,6 +114,7 @@ model User {
   searches            SearchExecution[]
   feedbacks           Feedback[]
   resourceFeedback    ResourceFeedback[]
+  newsFeed            NewsFeed?
 
   featuredBlock   FeaturedBlock? @relation("profile")
   featuredBlockId String?        @unique @db.Uuid
@@ -149,14 +150,14 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-
 enum HighlightResourcesType {
   LatestPublished @map("latest_published")
-  MostViewed @map("most_viewed")
+  MostViewed      @map("most_viewed")
   MostRecommended @map("most_recommended")
 
   @@map("highlight_resources_type")
 }
+
 model Base {
   id       String @id @default(uuid()) @db.Uuid
   legacyId Int?   @unique @map("legacy_id")
@@ -186,19 +187,19 @@ model Base {
   twitter       String?
   linkedin      String?
 
-  created          DateTime          @default(now())
-  updated          DateTime          @default(now())
-  deleted          DateTime?
-  resources        Resource[]
-  members          BaseMembers[]
-  collections      Collection[]
-  followedBy       BaseFollow[]
+  created     DateTime      @default(now())
+  updated     DateTime      @default(now())
+  deleted     DateTime?
+  resources   Resource[]
+  members     BaseMembers[]
+  collections Collection[]
+  followedBy  BaseFollow[]
 
   featuredBlock   FeaturedBlock? @relation("base")
   featuredBlockId String?        @unique @db.Uuid
 
-  highlightResources HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
-  highlightCollections Boolean @default(true) @map("highlight_collections")
+  highlightResources   HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
+  highlightCollections Boolean                 @default(true) @map("highlight_collections")
 
   @@index([createdById])
   @@map("bases")
@@ -341,7 +342,7 @@ model Resource {
   // isPublic is null when the user created the resource but did not publish it
   isPublic                  Boolean? @map("is_public")
 
-  licence             ResourceLicence     @default(ETALAB_2_0) @map("licence")
+  licence             ResourceLicence      @default(ETALAB_2_0) @map("licence")
   themes              Theme[]
   resourceTypes       ResourceType[]       @map("resource_types")
   beneficiaries       Beneficiary[]        @map("beneficiaries")
@@ -619,7 +620,7 @@ model Collection {
   image   Image?  @relation(fields: [imageId], references: [id])
   imageId String? @unique @map("image_id") @db.Uuid
 
-  resources       CollectionResource[]
+  resources CollectionResource[]
 
   @@index([baseId])
   @@index([createdById])
@@ -832,3 +833,20 @@ model FeaturedBlock {
   @@map("featured_blocks")
 }
 
+model NewsFeed {
+  userId String @id @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  professionalSectors ProfessionalSector[] @map("professional_sectors")
+  themes              Theme[]
+  monthlyNewsletter   Boolean              @default(false) @map("monthly_newsletter")
+
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  lastOpenedAt DateTime?
+
+  hasCompleteOnboarding Boolean @default(false) @map("has_complete_onboarding")
+
+  @@map("news_feed")
+}

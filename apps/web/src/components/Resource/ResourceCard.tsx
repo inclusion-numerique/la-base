@@ -9,6 +9,7 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 import { getServerUrl } from '../../utils/baseUrl'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'
@@ -16,6 +17,7 @@ import { ResourceMoreActionsDropdown } from './ResourceMoreActionsDropdown'
 import ResourcesViewsAndMetadata from './ResourcesViewsAndMetadata'
 
 const ResourceCard = ({
+  children,
   resource,
   user,
   className,
@@ -25,36 +27,42 @@ const ResourceCard = ({
   context = 'list',
   highlightCount,
   onlyUpdatedDate = false,
+  withDate = true,
 }: {
+  children?: React.ReactNode
   resource: ResourceListItem
   user: SessionUser | null
   className?: string
   isContributor: boolean
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   isDraft?: boolean
-  context?: 'highlight' | 'list'
+  context?: 'highlight' | 'list' | 'newsFeed'
   highlightCount?: number
   onlyUpdatedDate?: boolean
+  withDate?: boolean
 }) => (
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
   >
     <div className={styles.header}>
-      {context !== 'highlight' && (
+      {!children && context === 'list' && (
         <OwnershipInformation
           user={resource.createdBy}
           base={resource.base}
           attributionWording={isDraft ? 'draft-resource' : 'resource'}
         />
       )}
-      <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
-        <ResourceDates
-          canEdit={isContributor}
-          resource={resource}
-          onlyUpdatedDate={onlyUpdatedDate}
-        />
-      </div>
+      {children}
+      {withDate && (
+        <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
+          <ResourceDates
+            canEdit={isContributor}
+            resource={resource}
+            onlyUpdatedDate={onlyUpdatedDate}
+          />
+        </div>
+      )}
     </div>
     <div className="fr-flex fr-direction-column fr-justify-content-space-between">
       <Link
@@ -63,18 +71,20 @@ const ResourceCard = ({
         data-testid="resource-card-link"
       >
         <div className={styles.textAndDescription}>
-          <div
-            className={classNames(
-              styles.dates,
-              'fr-hidden-md fr-text--xs fr-mb-1w',
-            )}
-          >
-            <ResourceDates
-              canEdit={isContributor}
-              resource={resource}
-              onlyUpdatedDate={onlyUpdatedDate}
-            />
-          </div>
+          {withDate && (
+            <div
+              className={classNames(
+                styles.dates,
+                'fr-hidden-md fr-text--xs fr-mb-1w',
+              )}
+            >
+              <ResourceDates
+                canEdit={isContributor}
+                resource={resource}
+                onlyUpdatedDate={onlyUpdatedDate}
+              />
+            </div>
+          )}
           <ResourceTitle
             className={classNames(
               {

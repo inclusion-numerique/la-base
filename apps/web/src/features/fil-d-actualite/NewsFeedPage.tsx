@@ -1,0 +1,38 @@
+import {
+  NewsFeedPageContext,
+  updateLastOpenedAt,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import { NewsFeedHeader } from '@app/web/features/fil-d-actualite/NewsFeedHeader'
+import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
+import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
+
+const NewsFeedPage = async ({
+  params,
+  newsFeedPageContext,
+}: {
+  params: NewsFeedParams
+  newsFeedPageContext: NewsFeedPageContext
+}) => {
+  const { user } = newsFeedPageContext
+  // no await - we don't want to block the thread
+  updateLastOpenedAt(user.id)
+
+  return (
+    <>
+      <NewsFeedHeader
+        params={params}
+        newsFeedPageContext={newsFeedPageContext}
+      />
+      <div className="fr-flex fr-justify-content-space-between fr-col-md-12 fr-mt-md-6w">
+        <div className="fr-flex fr-direction-column fr-col-md-8 fr-justify-content-space-between">
+          <NewsFeedList
+            newsFeedPageContext={newsFeedPageContext}
+            params={params}
+          />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default NewsFeedPage

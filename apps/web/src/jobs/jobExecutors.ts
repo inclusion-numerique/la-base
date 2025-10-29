@@ -1,6 +1,7 @@
 import { executeBackupDatabaseJob } from '@app/web/jobs/backup-database/executeBackupDatabaseJob'
 import { executeImportContactsToBrevo } from '@app/web/jobs/import-contacts-to-brevo/executeImportContactsToBrevo'
 import type { Job, JobName, JobPayload } from '@app/web/jobs/jobs'
+import { executeMonthlyNewsletterNewsFeed } from '@app/web/jobs/monthly-newsletter-news-feed/executeMonthlyNewsletterNewsFeed'
 import { prismaClient } from '@app/web/prismaClient'
 import { createStopwatch } from '@app/web/utils/stopwatch'
 import * as Sentry from '@sentry/nextjs'
@@ -16,6 +17,7 @@ export const jobExecutors: {
 } = {
   'backup-database': executeBackupDatabaseJob,
   'import-contacts-to-brevo': executeImportContactsToBrevo,
+  'monthly-newsletter-news-feed': executeMonthlyNewsletterNewsFeed,
 }
 
 export const executeJob = async (job: Job) => {

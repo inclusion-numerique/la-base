@@ -40,6 +40,7 @@ const UpdateCguButtons = ({
         priority="primary"
         type="button"
         onClick={onAccept}
+        data-testid="accept-cgu-button"
         {...buttonLoadingClassname(isLoading, '')}
       >
         J’accepte

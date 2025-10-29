@@ -8,6 +8,7 @@ import { feedbackRouter } from '@app/web/server/rpc/feedback/feedbackRouter'
 import { followRouter } from '@app/web/server/rpc/follow/followRouter'
 import { imageRouter } from '@app/web/server/rpc/image/imageRouter'
 import { metadataRouter } from '@app/web/server/rpc/metadata/metadataRouter'
+import { newsFeedRouter } from '@app/web/server/rpc/news-feed/newsFeedRouter.router'
 import { profileRouter } from '@app/web/server/rpc/profile/profileRouter'
 import { reportRouter } from '@app/web/server/rpc/report/reportRouter'
 import { resourceRouter } from '@app/web/server/rpc/resource/resourceRouter'
@@ -26,6 +27,7 @@ export const appRouter = router({
   collection: collectionRouter,
   collectionResource: collectionResourceRouter,
   metaData: metadataRouter,
+  newsFeed: newsFeedRouter,
   upload: uploadRouter,
   image: imageRouter,
   search: searchRouter,
