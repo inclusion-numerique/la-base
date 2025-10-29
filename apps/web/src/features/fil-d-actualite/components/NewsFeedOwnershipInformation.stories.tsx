@@ -230,6 +230,7 @@ const Template = (
 export const BasePublished: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={baseResource}
       newsFeedPageContext={mockNewsFeedPageContext}
     />
@@ -240,6 +241,7 @@ BasePublished.storyName = 'Base - Publié'
 export const BaseUpdated: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         updated: updatedDate,
@@ -254,6 +256,7 @@ BaseUpdated.storyName = 'Base - Mis à jour'
 export const ProfilePublished: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -272,6 +275,7 @@ ProfilePublished.storyName = 'Profil - Publié'
 export const ProfileUpdated: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -292,6 +296,7 @@ ProfileUpdated.storyName = 'Profil - Mis à jour'
 export const ThemePublished: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -311,6 +316,7 @@ ThemePublished.storyName = 'Thématique - Publié'
 export const ThemeUpdated: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -332,6 +338,7 @@ ThemeUpdated.storyName = 'Thématique - Mis à jour'
 export const ProfessionalSectorPublished: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -356,6 +363,7 @@ ProfessionalSectorPublished.storyName = 'Secteur pro. - Publié'
 export const ProfessionalSectorUpdated: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         base: null,
@@ -382,6 +390,7 @@ ProfessionalSectorUpdated.storyName = 'Secteur pro. - Mis à jour'
 export const UnseenResource: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         seen: false,
@@ -396,6 +405,7 @@ UnseenResource.storyName = 'Ressource non vue'
 export const SavedCollectionFromBase: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         collectionId: 'collection-1',
@@ -412,6 +422,7 @@ SavedCollectionFromBase.storyName =
 export const SavedCollectionFromProfile: Story = {
   render: () => (
     <Template
+      hasFilter={false}
       resource={{
         ...baseResource,
         collectionId: 'collection-1',
@@ -451,10 +462,12 @@ export const AllVariants: Story = {
       <div>
         <h3>Priorité base</h3>
         <Template
+          hasFilter={false}
           resource={baseResource}
           newsFeedPageContext={mockNewsFeedPageContext}
         />
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             updated: updatedDate,
@@ -467,6 +480,7 @@ export const AllVariants: Story = {
       <div>
         <h3>Priorité profil</h3>
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -479,6 +493,7 @@ export const AllVariants: Story = {
           }}
         />
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -497,6 +512,7 @@ export const AllVariants: Story = {
       <div>
         <h3>Priorité thématique</h3>
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -510,6 +526,7 @@ export const AllVariants: Story = {
           }}
         />
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -529,6 +546,7 @@ export const AllVariants: Story = {
       <div>
         <h3>Priorité secteur pro</h3>
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -544,6 +562,7 @@ export const AllVariants: Story = {
           }}
         />
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             base: null,
@@ -565,6 +584,7 @@ export const AllVariants: Story = {
       <div>
         <h3>Ressource sauvegardé dans collections</h3>
         <Template
+          hasFilter={false}
           resource={{
             ...baseResource,
             collectionId: 'collection-1',
@@ -593,6 +613,7 @@ export const AllVariants: Story = {
             ],
           }}
           newsFeedPageContext={mockNewsFeedPageContext}
+          hasFilter={false}
         />
       </div>
 
@@ -601,6 +622,7 @@ export const AllVariants: Story = {
         <Template
           resource={{ ...baseResource, seen: false }}
           newsFeedPageContext={mockNewsFeedPageContext}
+          hasFilter={false}
         />
       </div>
     </div>
