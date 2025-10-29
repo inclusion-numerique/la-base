@@ -95,7 +95,7 @@
     "mjml-react": "^2.0.8",
     "nanoid": "^5.1.5",
     "next": "^15.5.4",
-    "next-auth": "4.24.11",
+    "next-auth": "4.24.12",
     "node-html-parser": "^7.0.1",
     "nodemailer": "^7.0.5",
     "p-throttle": "^7.0.0",
