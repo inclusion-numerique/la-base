@@ -13,9 +13,9 @@ const features: Array<{
 }> = [
   {
     iconId: 'ri-heart-line',
-    title: 'Inspirez-vous de ressources liés à vos préférences',
+    title: 'Inspirez-vous de ressources liées à vos préférences',
     description:
-      "Soyez notifié des nouvelles ressources publiés liés à vos préférences et retrouvez-les via votre fil d'actualité.",
+      'Soyez notifié des nouvelles ressources publiées liées à vos préférences et retrouvez-les via votre fil d’actualité.',
   },
   {
     iconId: 'ri-list-settings-line',
@@ -27,7 +27,7 @@ const features: Array<{
     iconId: 'ri-eye-line',
     title: 'Des recommandations transparentes',
     description:
-      "Nous ne proposons pas d'algorithmes de recommandations sur votre fil d'actualité.",
+      "Nous ne proposons pas d’algorithmes de recommandations sur votre fil d'actualité.",
   },
 ]
 
