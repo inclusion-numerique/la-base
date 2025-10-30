@@ -1,5 +1,8 @@
 import { getNewsFeedNotifications } from '@app/web/features/fil-d-actualite/db/getNewsFeedNotifications'
-import { getNewsFeedResources } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  getNewsFeedResources,
+  updateLastOpenedAt,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { UpdateNewsFeedSectorsProfessionnalsValidation } from '@app/web/features/fil-d-actualite/onboarding/professionals-sectors/newsFeedProfessionnalsSectors'
 import { UpdateNewsFeedResumeValidation } from '@app/web/features/fil-d-actualite/onboarding/resume/newsFeedResume'
 import { UpdateNewsFeedThemesValidation } from '@app/web/features/fil-d-actualite/onboarding/themes/newsFeedThemes'
@@ -135,5 +138,10 @@ export const newsFeedRouter = router({
     .input(z.object({}))
     .query(async ({ ctx: { user } }) => {
       return getNewsFeedNotifications(user)
+    }),
+  updateLastOpenedAt: protectedProcedure
+    .input(z.object({}))
+    .mutation(async ({ ctx: { user } }) => {
+      return updateLastOpenedAt(user.id)
     }),
 })
