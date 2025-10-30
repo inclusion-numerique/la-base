@@ -5,6 +5,7 @@ import {
   resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { NewsFeedOwnershipInformation } from '@app/web/features/fil-d-actualite/components/NewsFeedOwnershipInformation'
 import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
@@ -91,6 +92,7 @@ const NewsFeedList = ({
           )}
         </Button>
       </div>
+      <SaveResourceInCollectionModal user={user} />
     </>
   )
 }
