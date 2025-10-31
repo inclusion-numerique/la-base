@@ -76,7 +76,7 @@ export const ProConnectProvider = () =>
     userinfo: {
       request: async ({ tokens }) => {
         const r = await axios<string>({
-          method: 'POST',
+          method: 'GET',
           url: `${issuer}/api/v2/userinfo`,
           headers: {
             Authorization: tokens.access_token
