@@ -120,7 +120,14 @@ export const getNewsFeedResources = async (
   const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
     newsFeedResources.map(
-      ({ id, seen, source, event_type, added_to_collection_at, collection_id }) => [
+      ({
+        id,
+        seen,
+        source,
+        event_type,
+        added_to_collection_at,
+        collection_id,
+      }) => [
         id,
         {
           source,

@@ -16,6 +16,9 @@ const createdBy = {
 
 export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
   {
+    eventType: 'published',
+    collectionId: undefined,
+    addedToCollectionAt: undefined,
     id: '9b477ac4-e08c-4fe2-ae4b-3b4a9c3e5d5e',
     title: "Cartes Maillage du Département de l'Ain",
     slug: 'cartes-maillage-du-departement-de-l-ain',
@@ -60,6 +63,9 @@ export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
     seen: true,
   },
   {
+    eventType: 'published',
+    collectionId: undefined,
+    addedToCollectionAt: undefined,
     id: '867911cc-3066-4c2e-be3e-61b527a25492',
     title:
       'Parcours de formation France services - Learning Management System (LMS)',

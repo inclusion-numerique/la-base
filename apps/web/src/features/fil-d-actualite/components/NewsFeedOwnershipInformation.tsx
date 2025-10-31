@@ -3,7 +3,9 @@ import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import {
+  NewsFeedBases,
   NewsFeedPageContext,
+  NewsFeedProfiles,
   NewsFeedResource,
 } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import {
@@ -288,10 +290,10 @@ const determineAttribution = (
   resource: NewsFeedResource,
   hasFilter: boolean,
   userNewsFeed: NewsFeed,
-  followedBases: NewsFeedPageContext['followedBases'],
-  followedProfiles: NewsFeedPageContext['followedProfiles'],
+  followedBases: NewsFeedBases,
+  followedProfiles: NewsFeedProfiles,
 ) => {
-  // Handle saved collections first
+  // Saved collections case
   if (
     resource.source === 'savedCollectionFromBase' ||
     resource.source === 'savedCollectionFromProfile'
