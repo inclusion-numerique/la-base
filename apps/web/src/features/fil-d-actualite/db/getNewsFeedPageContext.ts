@@ -120,11 +120,12 @@ export const getNewsFeedResources = async (
   const resourceIds = newsFeedResources.map(({ id }) => id)
   const resourceMap = new Map(
     newsFeedResources.map(
-      ({ id, seen, source, added_to_collection_at, collection_id }) => [
+      ({ id, seen, source, event_type, added_to_collection_at, collection_id }) => [
         id,
         {
           source,
           seen,
+          eventType: event_type,
           addedToCollectionAt: added_to_collection_at,
           collectionId: collection_id,
         },
@@ -348,6 +349,7 @@ export const getNewsFeedResources = async (
       const extraData = resourceMap.get(resource.id) || {
         source: 'base' as const,
         seen: false,
+        eventType: 'published' as const,
         collectionId: undefined,
         addedToCollectionAt: undefined,
       }
@@ -355,6 +357,7 @@ export const getNewsFeedResources = async (
         ...toResourceWithFeedbackAverage(resource),
         source: extraData.source,
         seen: extraData.seen,
+        eventType: extraData.eventType,
         collectionId: extraData.collectionId,
         addedToCollectionAt: extraData.addedToCollectionAt,
       }
