@@ -59,6 +59,7 @@ const mockCreatedBy = {
 const baseResource = {
   collectionId: undefined,
   addedToCollectionAt: undefined,
+  eventType: 'published' as const,
   id: 'resource-1',
   title: "Guide pratique de l'accessibilité numérique",
   slug: 'guide-pratique-accessibilite-numerique',

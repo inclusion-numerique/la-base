@@ -97,6 +97,7 @@ const mockCollection = {
 const baseResource: NewsFeedResource = {
   collectionId: undefined,
   addedToCollectionAt: undefined,
+  eventType: 'published',
   id: 'resource-1',
   title: "Guide pratique de l'accessibilité numérique",
   slug: 'guide-pratique-accessibilite-numerique',

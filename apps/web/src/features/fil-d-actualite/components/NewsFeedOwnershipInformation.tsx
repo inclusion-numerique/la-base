@@ -284,27 +284,24 @@ const newsFeedAttributionConfig = {
   },
 } as const
 
-// We check the priority of the resource in the following order:
-// 0. Check if this is a saved collection resource first
-// 1. Base priority - check if user follows any base containing this resource
-// 2. Profile priority - check if user follows the resource creator
-// 3. Theme priority - check if user follows any theme of this resource
-// 4. Professional sector priority - check if user follows any sector of this resource
-// 5. Fallback to base if available, otherwise profile
+// Determine attribution type based on the source provided by the backend
+// The backend now handles the complex logic of determining the source
 const determineAttribution = (
   resource: NewsFeedResource,
+  hasFilter: boolean,
   userNewsFeed: NewsFeed,
   followedBases: NewsFeedBases,
   followedProfiles: NewsFeedProfiles,
-  hasFilter: boolean,
 ) => {
-  // if (
-  //   resource.source === 'savedCollectionFromBase' ||
-  //   resource.source === 'savedCollectionFromProfile'
-  // ) {
-  //   return 'savedCollection'
-  // }
+  // Saved collections case
+  if (
+    resource.source === 'savedCollectionFromBase' ||
+    resource.source === 'savedCollectionFromProfile'
+  ) {
+    return 'savedCollection'
+  }
 
+  // Check if resource is from a followed base
   if (resource.base) {
     const resourceBase = resource.base
     if (followedBases.find(({ base }) => base.id === resourceBase.id)) {
@@ -312,12 +309,14 @@ const determineAttribution = (
     }
   }
 
+  // Check if resource is from a followed profile
   if (
     followedProfiles.find(({ profile }) => profile.id === resource.createdBy.id)
   ) {
     return 'profile'
   }
 
+  // Check for theme match (only when no filter is active)
   const resourceThemes = resource.themes || []
   const userPreferredThemes = userNewsFeed.themes || []
   const hasMatchingTheme = resourceThemes.some((theme) =>
@@ -327,6 +326,7 @@ const determineAttribution = (
     return 'theme'
   }
 
+  // Check for professional sector match (only when no filter is active)
   const resourceProfessionalSectors = resource.professionalSectors || []
   const userPreferredProfessionalSectors =
     userNewsFeed.professionalSectors || []
@@ -337,11 +337,8 @@ const determineAttribution = (
     return 'professional_sector'
   }
 
-  if (resource.base !== null) {
-    return 'base'
-  }
-
-  return 'profile'
+  // Fallback: prefer base if available, otherwise profile
+  return resource.base ? 'base' : 'profile'
 }
 
 export const NewsFeedOwnershipInformation = ({
@@ -356,23 +353,28 @@ export const NewsFeedOwnershipInformation = ({
   const { userNewsFeed, followedBases, followedProfiles } = newsFeedPageContext
   const attributionType = determineAttribution(
     resource,
+    hasFilter,
     userNewsFeed,
     followedBases,
     followedProfiles,
-    hasFilter,
   )
   const config = newsFeedAttributionConfig[attributionType]
-  // We can cast, since we have a "published is not null" condition in the query
-  const published = resource.published as Date
-  const mostRecentDate =
-    // attributionType === 'savedCollection' && resource.addedToCollectionAt
-    // ? resource.addedToCollectionAt
-    resource.lastPublished && resource.lastPublished > published
-      ? resource.lastPublished
-      : published
-  const isUpdated =
-    // attributionType !== 'savedCollection' &&
-    resource.lastPublished !== null && resource.lastPublished > published
+
+  // Determine the most recent date and whether it's an update based on eventType
+  const mostRecentDate = (() => {
+    switch (resource.eventType) {
+      case 'published':
+        return resource.published as Date
+      case 'updated':
+        return resource.lastPublished as Date
+      case 'saved_in_collection':
+        return resource.addedToCollectionAt as Date
+      default:
+        return resource.published as Date
+    }
+  })()
+
+  const isUpdated = resource.eventType === 'updated'
   const timeAgo = formatTimeAgo(mostRecentDate)
   const attributionText = config.getText(
     resource,
