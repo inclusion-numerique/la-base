@@ -145,7 +145,9 @@ const buildThemeFilter = (themes: Theme[] | string[]) => {
 
   return Prisma.sql`EXISTS (
     SELECT 1 FROM resources r 
-    WHERE r.id = ae.id AND r.themes && ${enumArrayToSnakeCaseStringArray(themes)}::theme[]
+    WHERE r.id = ae.id AND r.themes && ${enumArrayToSnakeCaseStringArray(
+      themes,
+    )}::theme[]
   )`
 }
 
@@ -166,7 +168,9 @@ const buildProfessionalSectorFilter = (
 
   return Prisma.sql`EXISTS (
     SELECT 1 FROM resources r 
-    WHERE r.id = ae.id AND r.professional_sectors && ${enumArrayToSnakeCaseStringArray(professionalSectors)}::professional_sector[]
+    WHERE r.id = ae.id AND r.professional_sectors && ${enumArrayToSnakeCaseStringArray(
+      professionalSectors,
+    )}::professional_sector[]
   )`
 }
 
@@ -188,11 +192,11 @@ const buildProfileSlugFilter = (profileSlug?: string) => {
       WHERE r.id = ae.id AND u.slug = ${profileSlug}::text
     )
     OR
-    EXISTS (
+    (ae.collection_id IS NOT NULL AND EXISTS (
       SELECT 1 FROM collections c
       INNER JOIN users u ON u.id = c.created_by_id
       WHERE c.id = ae.collection_id AND u.slug = ${profileSlug}::text
-    )
+    ))
   )`
 }
 
@@ -214,15 +218,18 @@ const buildBaseSlugFilter = (baseSlug?: string) => {
       WHERE r.id = ae.id AND b.slug = ${baseSlug}::text
     )
     OR
-    EXISTS (
+    (ae.collection_id IS NOT NULL AND EXISTS (
       SELECT 1 FROM collections c
       INNER JOIN bases b ON b.id = c.base_id
       WHERE c.id = ae.collection_id AND b.slug = ${baseSlug}::text
-    )
+    ))
   )`
 }
 
-const buildSpecialToutFilter = (baseSlug?: string, profileSlug?: string) => {
+const buildSpecialProfileOrBaseFilter = (
+  baseSlug?: string,
+  profileSlug?: string,
+) => {
   // Special case: when both base and profile are 'tout', no additional filtering needed
   if (baseSlug === 'tout' && profileSlug === 'tout') {
     return Prisma.sql`TRUE`
@@ -843,12 +850,38 @@ export const getUnseenResourcesCount = async (
       ${getPublishedResourcesCTE()},
       ${getUpdatedResourcesCTE()},
       ${getFollowedSavedInCollectionResourcesCTE()},
+      publishedResourcesWithFields AS (
+        SELECT
+          pr.id,
+          pr.most_recent_date,
+          'published'::text AS event_type,
+          NULL::uuid AS collection_id
+        FROM publishedResources pr
+      ),
+      updatedResourcesWithFields AS (
+        SELECT
+          ur.id,
+          ur.most_recent_date,
+          'updated'::text AS event_type,
+          NULL::uuid AS collection_id
+        FROM updatedResources ur
+      ),
+      savedInCollectionResourcesWithFields AS (
+        SELECT
+          sr.id,
+          sr.most_recent_date,
+          'saved_in_collection'::text AS event_type,
+          c.id AS collection_id
+        FROM savedInCollectionResources sr
+        JOIN collection_resources cr ON cr.resource_id = sr.id
+        JOIN collections c ON c.id = cr.collection_id
+      ),
       allEvents AS (
-        SELECT * FROM publishedResources
+        SELECT * FROM publishedResourcesWithFields
         UNION ALL
-        SELECT * FROM updatedResources
+        SELECT * FROM updatedResourcesWithFields
         UNION ALL
-        SELECT * FROM savedInCollectionResources
+        SELECT * FROM savedInCollectionResourcesWithFields
       ),
       candidates AS (
         SELECT ae.*
@@ -857,7 +890,7 @@ export const getUnseenResourcesCount = async (
         WHERE rv.id IS NULL
           AND ${buildThemeFilter(themes)}
           AND ${buildProfessionalSectorFilter(professionalSectors)}
-          AND ${buildSpecialToutFilter(baseSlug, profileSlug)}
+          AND ${buildSpecialProfileOrBaseFilter(baseSlug, profileSlug)}
       ),
       picked AS (
         SELECT DISTINCT ON (id) *
@@ -873,7 +906,7 @@ export const getUnseenResourcesCount = async (
   )
 
   return {
-    total: result[0]?.total ?? 0,
-    count: result[0]?.count ?? 0,
+    total: Number(result[0]?.total) ?? 0,
+    count: Number(result[0]?.count) ?? 0,
   }
 }
