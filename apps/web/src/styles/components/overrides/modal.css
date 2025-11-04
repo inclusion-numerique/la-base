@@ -36,3 +36,10 @@
     }
   }
 }
+
+/* dsfr bug fix on firefox where modal is still interactive when closed */
+.fr-modal:not(.fr-modal--opened) {
+  * {
+    pointer-events: none !important;
+  }
+}
