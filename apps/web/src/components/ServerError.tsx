@@ -122,7 +122,30 @@ export const UnauthorizedError = () => (
     subtitle="Erreur 403"
     lead="Vous n'avez pas accès à cette page."
   >
-    Si vous avez tapé l&apos;adresse web dans le navigateur, vérifiez
-    qu&apos;elle est correcte.
+    Si vous avez tapé l'adresse web dans le navigateur, vérifiez qu'elle est
+    correcte.
+  </GenericError>
+)
+
+export const SuspiciousContentError = () => (
+  <GenericError
+    title="Contenu suspect détecté"
+    subtitle="On dirait que vous n'auriez pas dû faire ça..."
+    lead="Désolé, ce contenu ne respecte pas la charte de notre plateforme."
+  >
+    Votre profil ou base a été supprimé car il contenait du contenu qui ne
+    respecte pas nos règles.
+    <br />
+    Pour en savoir plus sur nos règles de modération, consultez notre charte.
+    <br />
+    <br />
+    <a
+      href="/cgu"
+      className="fr-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Consulter la charte de modération →
+    </a>
   </GenericError>
 )

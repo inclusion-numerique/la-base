@@ -34,13 +34,28 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
       noBorder
       id="informations"
       mutation={async (data) => {
-        const result = await mutate.mutateAsync({ id: base.id, data })
-        router.push(`/bases/${result.slug}/editer`)
-        router.refresh()
-        createToast({
-          priority: 'success',
-          message: <>Les informations ont bien été enregistrées</>,
-        })
+        try {
+          const result = await mutate.mutateAsync({ id: base.id, data })
+          router.push(`/bases/${result.slug}/editer`)
+          router.refresh()
+          createToast({
+            priority: 'success',
+            message: <>Les informations ont bien été enregistrées</>,
+          })
+        } catch (error) {
+          // Vérifier si c'est une erreur de contenu suspect
+          if (
+            error instanceof Error &&
+            error.message ===
+              'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme'
+          ) {
+            // Rediriger vers la page d'erreur de contenu suspect
+            router.push('/contenu-suspect')
+            return
+          }
+          // Re-lancer l'erreur pour la gestion normale
+          throw error
+        }
       }}
       noRefresh
       form={form}
