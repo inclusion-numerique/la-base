@@ -62,8 +62,10 @@ export const baseRouter = router({
       // Vérifier si la base est suspecte et la supprimer si nécessaire
       const wasDeleted = await deleteSuspiciousBase(base.id)
       if (wasDeleted) {
-        // Retourner une erreur ou un résultat spécial pour indiquer que la base a été supprimée
-        throw invalidError('Base suspecte détectée et supprimée')
+        // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+        throw invalidError(
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+        )
       }
 
       Promise.all(

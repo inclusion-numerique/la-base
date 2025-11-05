@@ -120,7 +120,7 @@ describe('baseRouter - create', () => {
       createTestContext({ user: mockUser }),
     )
 
-    // La fonction devrait lancer une erreur
+    // La fonction devrait lancer une erreur pour déclencher la redirection vers la page d'erreur
     await expect(
       caller.create({
         title: 'Test Base',
@@ -135,7 +135,9 @@ describe('baseRouter - create', () => {
         department: '',
         isPublic: false,
       }),
-    ).rejects.toThrow('Base suspecte détectée et supprimée')
+    ).rejects.toThrow(
+      'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+    )
 
     // Vérifier que deleteSuspiciousBase a été appelée
     expect(deleteSuspiciousBase).toHaveBeenCalledWith('test-base-id')

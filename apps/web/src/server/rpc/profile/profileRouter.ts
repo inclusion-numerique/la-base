@@ -146,8 +146,10 @@ export const profileRouter = router({
       const wasDeleted = await deleteSuspiciousProfile(user.id)
 
       if (wasDeleted) {
-        // Retourner une erreur spéciale pour déclencher la redirection
-        throw new Error('SUSPICIOUS_PROFILE_DELETED')
+        // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+        throw invalidError(
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+        )
       }
 
       return updatedUser
@@ -184,8 +186,10 @@ export const profileRouter = router({
       const wasDeleted = await deleteSuspiciousProfile(user.id)
 
       if (wasDeleted) {
-        // Retourner une erreur spéciale pour déclencher la redirection
-        throw new Error('SUSPICIOUS_PROFILE_DELETED')
+        // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+        throw invalidError(
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+        )
       }
 
       return updatedUser

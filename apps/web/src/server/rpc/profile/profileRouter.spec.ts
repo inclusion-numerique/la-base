@@ -114,7 +114,7 @@ describe('profileRouter - updateContacts', () => {
       createTestContext({ user: mockUser }),
     )
 
-    // La fonction devrait lancer une erreur
+    // La fonction devrait lancer une erreur pour déclencher la redirection vers la page d'erreur
     await expect(
       caller.updateContacts({
         emailIsPublic: false,
@@ -123,7 +123,9 @@ describe('profileRouter - updateContacts', () => {
         twitter: '',
         linkedin: '',
       }),
-    ).rejects.toThrow('SUSPICIOUS_PROFILE_DELETED')
+    ).rejects.toThrow(
+      'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+    )
 
     // Vérifier que deleteSuspiciousProfile a été appelée
     expect(deleteSuspiciousProfile).toHaveBeenCalledWith(mockUserId)
