@@ -7,6 +7,7 @@ import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
+import { deleteSuspiciousBase } from '@app/web/server/bases/suspiciousBaseDetection'
 import {
   UpdateBaseCommandValidation,
   UpdateBaseImageCommandValidation,
@@ -57,6 +58,13 @@ export const baseRouter = router({
           },
         },
       })
+
+      // Vérifier si la base est suspecte et la supprimer si nécessaire
+      const wasDeleted = await deleteSuspiciousBase(base.id)
+      if (wasDeleted) {
+        // Retourner une erreur ou un résultat spécial pour indiquer que la base a été supprimée
+        throw invalidError('Base suspecte détectée et supprimée')
+      }
 
       Promise.all(
         members.map((member) =>
