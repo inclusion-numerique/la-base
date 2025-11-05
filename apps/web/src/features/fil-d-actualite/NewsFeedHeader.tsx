@@ -2,9 +2,14 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  getNewsFeedPageContext,
+  NewsFeedPageContext,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
+import { NewsFeedFilters } from '@app/web/server/newsFeed/getNewsFeedResources'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -21,13 +26,19 @@ import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-export const NewsFeedHeader = ({
+export const NewsFeedHeader = async ({
   params,
-  newsFeedPageContext,
+  filters,
+  pagination,
 }: {
   params: NewsFeedParams
-  newsFeedPageContext: NewsFeedPageContext
+  filters: NewsFeedFilters
+  pagination?: PaginationParams
 }) => {
+  const newsFeedPageContext: NewsFeedPageContext = await getNewsFeedPageContext(
+    filters,
+    pagination,
+  )
   const { notificationsCount } = newsFeedPageContext
   const { thematique, secteur, base, profil } = params
   const notificationsContainer = !!notificationsCount &&
@@ -249,7 +260,8 @@ export const NewsFeedHeader = ({
             <div className="fr-header__menu-links">
               <NewsFeedSearchFilters
                 params={params}
-                newsFeedPageContext={newsFeedPageContext}
+                filters={filters}
+                pagination={pagination}
               />
             </div>
           </div>

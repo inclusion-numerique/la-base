@@ -1,7 +1,6 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import NewsFeedBadgeInvalidation from '@app/web/features/fil-d-actualite/components/NewsFeedBadgeInvalidation'
-import { getNewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import NewsFeedPage from '@app/web/features/fil-d-actualite/NewsFeedPage'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
 import { NewsFeedOnboardingDone } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingDoneModal'
@@ -47,15 +46,12 @@ export default async function NewsFeedSegmentPage({
   const newsFeedParams = parseNewsFeedSegment(newsFeedSegment)
   const { secteur, thematique, base, profil } = newsFeedParams
 
-  const newsFeedPageContext = await getNewsFeedPageContext(
-    {
-      professionalSectors: secteur ? [secteur as ProfessionalSector] : [],
-      themes: thematique ? [thematique as Theme] : [],
-      profileSlug: profil,
-      baseSlug: base,
-    },
-    paginationParams,
-  )
+  const filters = {
+    professionalSectors: secteur ? [secteur as ProfessionalSector] : [],
+    themes: thematique ? [thematique as Theme] : [],
+    profileSlug: profil,
+    baseSlug: base,
+  }
 
   return (
     <>
@@ -73,7 +69,8 @@ export default async function NewsFeedSegmentPage({
         >
           <NewsFeedSearchFilters
             params={newsFeedParams}
-            newsFeedPageContext={newsFeedPageContext}
+            filters={filters}
+            pagination={paginationParams}
           />
         </div>
       </nav>
@@ -84,7 +81,8 @@ export default async function NewsFeedSegmentPage({
         />
         <NewsFeedPage
           params={newsFeedParams}
-          newsFeedPageContext={newsFeedPageContext}
+          filters={filters}
+          pagination={paginationParams}
         />
       </div>
     </>
