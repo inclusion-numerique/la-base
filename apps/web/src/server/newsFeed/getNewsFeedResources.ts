@@ -262,14 +262,10 @@ export const countNewsFeedResources = async (userId: string) => {
       userProfessionalSectors AS (
         SELECT UNNEST(professional_sectors) as professional_sector FROM userPreferences
       ),
-      resourceCounts AS (
-        -- Themes
-        SELECT 
-          'theme'::text as item_type,
-          ut.theme::text as item_value,
-          COUNT(DISTINCT r.id)::integer as count
-        FROM userThemes ut
-        CROSS JOIN resources r
+      -- Pre-filter eligible resources once to avoid repeated complex conditions
+      eligibleResources AS (
+        SELECT DISTINCT r.id, r.themes, r.professional_sectors, r.base_id, r.created_by_id
+        FROM resources r
         LEFT JOIN bases b ON r.base_id = b.id
         LEFT JOIN collection_resources cr ON cr.resource_id = r.id
         LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
@@ -277,27 +273,27 @@ export const countNewsFeedResources = async (userId: string) => {
           AND r.published IS NOT NULL
           AND r.is_public = true
           AND (b.id IS NULL OR b.deleted IS NULL)
-          AND r.themes @> ARRAY[ut.theme]
           AND (
             r.base_id IN (SELECT base_id FROM followedBases)
-            OR
-            r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-            )
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
-            )
-            OR
-            (
+            OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
+            OR EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
+            OR EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+            OR (
               cr.id IS NOT NULL AND (
                 c.base_id IN (SELECT base_id FROM followedBases)
                 OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
               )
             )
           )
+      ),
+      resourceCounts AS (
+        -- Themes
+        SELECT 
+          'theme'::text as item_type,
+          ut.theme::text as item_value,
+          COUNT(DISTINCT er.id)::integer as count
+        FROM userThemes ut
+        INNER JOIN eligibleResources er ON er.themes @> ARRAY[ut.theme]
         GROUP BY ut.theme
         
         UNION ALL
@@ -306,37 +302,9 @@ export const countNewsFeedResources = async (userId: string) => {
         SELECT 
           'professional_sector'::text as item_type,
           ups.professional_sector::text as item_value,
-          COUNT(DISTINCT r.id)::integer as count
+          COUNT(DISTINCT er.id)::integer as count
         FROM userProfessionalSectors ups
-        CROSS JOIN resources r
-        LEFT JOIN bases b ON r.base_id = b.id
-        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
-        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
-        WHERE r.deleted IS NULL
-          AND r.published IS NOT NULL
-          AND r.is_public = true
-          AND (b.id IS NULL OR b.deleted IS NULL)
-          AND r.professional_sectors @> ARRAY[ups.professional_sector]
-          AND (
-            r.base_id IN (SELECT base_id FROM followedBases)
-            OR
-            r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-            )
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
-            )
-            OR
-            (
-              cr.id IS NOT NULL AND (
-                c.base_id IN (SELECT base_id FROM followedBases)
-                OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
-              )
-            )
-          )
+        INNER JOIN eligibleResources er ON er.professional_sectors @> ARRAY[ups.professional_sector]
         GROUP BY ups.professional_sector
         
         UNION ALL
@@ -355,32 +323,11 @@ export const countNewsFeedResources = async (userId: string) => {
             WHERE cr.resource_id = r.id AND c.base_id = b.id AND c.deleted IS NULL AND c.is_public = true
           )
         )
-        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
-        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
         WHERE b.deleted IS NULL
           AND r.deleted IS NULL
           AND r.published IS NOT NULL
           AND r.is_public = true
-          AND (
-            r.base_id IN (SELECT base_id FROM followedBases)
-            OR
-            r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-            )
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
-            )
-            OR
-            (
-              cr.id IS NOT NULL AND (
-                c.base_id IN (SELECT base_id FROM followedBases)
-                OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
-              )
-            )
-          )
+          AND r.id IN (SELECT id FROM eligibleResources)
         GROUP BY b.id, b.slug
         
         UNION ALL
@@ -399,32 +346,11 @@ export const countNewsFeedResources = async (userId: string) => {
             WHERE cr.resource_id = r.id AND c.created_by_id = p.id AND c.deleted IS NULL AND c.is_public = true
           )
         )
-        LEFT JOIN collection_resources cr ON cr.resource_id = r.id
-        LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
         WHERE p.deleted IS NULL
           AND r.deleted IS NULL
           AND r.published IS NOT NULL
           AND r.is_public = true
-          AND (
-            r.base_id IN (SELECT base_id FROM followedBases)
-            OR
-            r.created_by_id IN (SELECT profile_id FROM followedProfiles)
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
-            )
-            OR
-            (
-              EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
-            )
-            OR
-            (
-              cr.id IS NOT NULL AND (
-                c.base_id IN (SELECT base_id FROM followedBases)
-                OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
-              )
-            )
-          )
+          AND r.id IN (SELECT id FROM eligibleResources)
         GROUP BY p.id, p.slug
       )
       SELECT item_type, item_value, count FROM resourceCounts

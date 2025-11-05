@@ -52,7 +52,10 @@ export const newsFeedNewsletter = {
                       Publiée dans la base{' '}
                       <a
                         href={emailAssetUrl(`/bases/${resource.base.slug}`)}
-                        style={{ color: '#000091', textDecoration: 'underline' }}
+                        style={{
+                          color: '#000091',
+                          textDecoration: 'underline',
+                        }}
                       >
                         {resource.base.title}
                       </a>{' '}
@@ -61,7 +64,10 @@ export const newsFeedNewsletter = {
                         href={emailAssetUrl(
                           `/profils/${resource.createdBy.slug}`,
                         )}
-                        style={{ color: '#000091', textDecoration: 'underline' }}
+                        style={{
+                          color: '#000091',
+                          textDecoration: 'underline',
+                        }}
                       >
                         {resource.createdBy.firstName}{' '}
                         {resource.createdBy.lastName}
@@ -74,7 +80,10 @@ export const newsFeedNewsletter = {
                         href={emailAssetUrl(
                           `/profils/${resource.createdBy.slug}`,
                         )}
-                        style={{ color: '#000091', textDecoration: 'underline' }}
+                        style={{
+                          color: '#000091',
+                          textDecoration: 'underline',
+                        }}
                       >
                         {resource.createdBy.firstName}{' '}
                         {resource.createdBy.lastName}
