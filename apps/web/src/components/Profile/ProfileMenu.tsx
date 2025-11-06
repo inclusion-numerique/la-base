@@ -9,7 +9,6 @@ import { type PropsWithChildren } from 'react'
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],
   ['collections', 'collections'],
-  ['suivis', 'suivis'],
   ['a-propos', 'a-propos'],
   ['ressources', 'ressources'],
 ])
