@@ -476,7 +476,7 @@ export const getFollowedResourceIds = async (
         SELECT
           ae.*,
           CASE
-            WHEN rv.id IS NOT NULL THEN true
+            WHEN rv.id IS NOT NULL AND rv.timestamp >= ae.most_recent_date THEN true
             WHEN ${
               lastOpenedAt
                 ? Prisma.sql`ae.most_recent_date <= ${lastOpenedAt}::timestamp`
@@ -528,6 +528,7 @@ export const getFollowedUnseenResourcesCount = async (
         FROM allEvents ae
         LEFT JOIN resource_views rv ON rv.resource_id = ae.id AND rv.user_id = ${userId}::uuid
         WHERE rv.id IS NULL
+          OR (ae.most_recent_date > rv.timestamp)
       ),
       picked AS (
         SELECT DISTINCT ON (id) *
@@ -647,7 +648,7 @@ export const getResourceIds = async (
     SELECT
       ae.*,
       CASE
-        WHEN rv.id IS NOT NULL THEN true
+        WHEN rv.id IS NOT NULL AND rv.timestamp >= ae.most_recent_date THEN true
         WHEN ${
           lastOpenedAt
             ? Prisma.sql`ae.most_recent_date <= ${lastOpenedAt}::timestamp`
@@ -814,7 +815,7 @@ export const getUnseenResourcesCount = async (
         SELECT ae.*
         FROM allEvents ae
         LEFT JOIN resource_views rv ON rv.resource_id = ae.id AND rv.user_id = ${userId}::uuid
-        WHERE rv.id IS NULL
+        WHERE (rv.id IS NULL OR (ae.most_recent_date > rv.timestamp))
           AND ${buildThemeFilter(themes)}
           AND ${buildProfessionalSectorFilter(professionalSectors)}
           AND ${buildSpecialProfileOrBaseFilter(baseSlug, profileSlug)}
