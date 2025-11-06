@@ -8,9 +8,10 @@ import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import { Prisma, ProfessionalSector, Theme } from '@prisma/client'
 import { pascalCase } from 'change-case'
 
+export const NEWS_FEED_DEFAULT_PER_PAGE = 20
 export const defaultNewsFeedPaginationParams: Readonly<PaginationParams> = {
   page: 1,
-  perPage: 20,
+  perPage: NEWS_FEED_DEFAULT_PER_PAGE,
   sort: 'recent',
 }
 

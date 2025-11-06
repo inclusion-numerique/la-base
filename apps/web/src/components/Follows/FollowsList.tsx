@@ -36,19 +36,14 @@ const FollowsList = ({
         {baseFollows.length} base{sPluriel(baseFollows.length)}
       </h3>
       {baseFollows.map(({ base }) => (
-        <BaseCard user={user} base={base} key={base.id} compact titleAs="h4" />
+        <BaseCard user={user} base={base} key={base.id} compact />
       ))}
 
       <h3 className="fr-mb-4v fr-mt-12v fr-h6">
         {profileFollows.length} profil{sPluriel(profileFollows.length)}
       </h3>
       {profileFollows.map(({ profile }) => (
-        <ProfileCard
-          key={profile.id}
-          profile={profile}
-          user={user}
-          titleAs="h4"
-        />
+        <ProfileCard key={profile.id} profile={profile} user={user} />
       ))}
     </>
   )

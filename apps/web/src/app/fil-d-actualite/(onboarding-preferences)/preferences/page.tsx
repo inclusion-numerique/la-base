@@ -5,19 +5,22 @@ import NewsFeedResumeForm from '@app/web/features/fil-d-actualite/onboarding/res
 import { NewsFeedFollowListPreferences } from '@app/web/features/fil-d-actualite/preferences/NewsFeedFollowListPreferences'
 import { NewsFeedProfessionalsSectorsPreferenceForm } from '@app/web/features/fil-d-actualite/preferences/NewsFeedProfessionalsSectorsPreferenceForm'
 import { NewsFeedThemesPreferenceForm } from '@app/web/features/fil-d-actualite/preferences/NewsFeedThemesPreferenceForm'
+import {
+  getProfileBaseFollows,
+  getProfileProfileFollows,
+} from '@app/web/server/follows/getFollowsList'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 export default async function NewsFeedPreferencesPage() {
   const newsFeedPageContext = await getNewsFeedPageContext()
-  const {
-    userNewsFeed,
-    user,
-    followedBases,
-    followedProfiles,
-    resourceCounts,
-  } = newsFeedPageContext
+  const { userNewsFeed, user, resourceCounts } = newsFeedPageContext
+
+  const [followedBases, followedProfiles] = await Promise.all([
+    getProfileBaseFollows(user.id),
+    getProfileProfileFollows(user.id),
+  ])
 
   if (!userNewsFeed || !userNewsFeed.hasCompleteOnboarding) {
     redirect('/fil-d-actualite/onboarding')

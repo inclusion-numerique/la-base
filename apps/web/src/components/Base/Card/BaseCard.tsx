@@ -14,13 +14,11 @@ const BaseCard = ({
   user,
   className,
   compact = false,
-  titleAs: BaseTitle = 'h2',
 }: {
   base: BasesSearchResultListItem | BaseProfileListItem
   user: SessionUser | null
   className?: string
   compact?: boolean
-  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -30,8 +28,11 @@ const BaseCard = ({
       <BaseImage base={base} size={compact ? 48 : 96} />
     </Link>
     <div className={styles.content}>
-      <Link href={`/bases/${base.slug}`}>
-        <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
+      <Link
+        href={`/bases/${base.slug}`}
+        className="fr-flex-grow-1 fr-link--no-underline"
+      >
+        <span className="fr-text--bold fr-text--md fr-mb-0">{base.title}</span>
       </Link>
       <div className={styles.midContent}>
         {!compact && !!base.excerpt && (
@@ -59,10 +60,7 @@ const BaseCard = ({
       </div>
       <BaseMetadata
         user={null}
-        className={classNames(
-          compact ? 'fr-mt-2v' : 'fr-mt-3v fr-mt-md-4v',
-          'fr-text-mention--grey',
-        )}
+        className={classNames(compact && 'fr-mt-2v', 'fr-text-mention--grey')}
         base={{
           ...base,
           followedByData: null,

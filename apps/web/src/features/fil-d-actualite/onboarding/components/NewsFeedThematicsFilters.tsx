@@ -111,12 +111,14 @@ export const NewsFeedThematicsFilters = ({
               </div>
             </Button>
           ))}
-          <Button
-            priority="tertiary no outline"
-            onClick={() => setShowAll((prev) => !prev)}
-          >
-            {showAll ? 'Voir moins' : 'Tout voir'}
-          </Button>
+          <div className="fr-pb-4v">
+            <Button
+              priority="tertiary no outline"
+              onClick={() => setShowAll((prev) => !prev)}
+            >
+              {showAll ? 'Voir moins' : 'Tout voir'}
+            </Button>
+          </div>
         </div>
       )}
     </>

@@ -72,6 +72,14 @@ const NewsFeedThemesForm = ({
     form.setValue('themes', themes)
   }, [themesSelected, form])
 
+  useEffect(() => {
+    const newThemesSelection = getInitialThemesSelection(userNewsFeed?.themes)
+    setThemesSelected(newThemesSelection)
+    form.reset({
+      themes: userNewsFeed?.themes,
+    })
+  }, [userNewsFeed?.themes, form])
+
   const handleOnSelect = (option: SelectOption, category: FilterKey) => {
     const isAlreadySelected = themesSelected.some(
       (item) => item.option.value === option.value,

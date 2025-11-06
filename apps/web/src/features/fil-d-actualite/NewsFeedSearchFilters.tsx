@@ -82,7 +82,7 @@ export const NewsFeedSearchFilters = async ({
           params={params.base ?? params.profil}
         />
       </div>
-      <div className="fr-mt-2w">
+      <div>
         <Button
           linkProps={{ href: '/fil-d-actualite/preferences' }}
           priority="secondary"

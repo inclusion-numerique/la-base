@@ -76,7 +76,7 @@ export const NewsFeedHeader = async ({
                   CATEGORY_VARIANTS[themeCategories[theme]].color,
                 )}
               >
-                Découvrez les dernières publications liés à la thématique
+                Découvrez les dernières publications liées à la thématique
               </span>
               <span
                 className={classNames(
@@ -90,7 +90,7 @@ export const NewsFeedHeader = async ({
           ) : (
             <div className="fr-flex fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés à&nbsp;
+                Découvrez les dernières publications liées à&nbsp;
                 <span className="fr-text--bold">vos thématiques suivies</span>
               </span>
             </div>
@@ -112,7 +112,7 @@ export const NewsFeedHeader = async ({
           {secteur !== 'tout' ? (
             <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés au secteur
+                Découvrez les dernières publications liées au secteur
                 professionnel
               </span>
               <span className="fr-text--bold">
@@ -122,7 +122,7 @@ export const NewsFeedHeader = async ({
           ) : (
             <div className="fr-flex fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés à&nbsp;
+                Découvrez les dernières publications liées à&nbsp;
                 <span className="fr-text--bold">
                   vos secteurs professionnels suivis
                 </span>
@@ -136,7 +136,7 @@ export const NewsFeedHeader = async ({
       return (
         <div className="fr-flex fr-text--lg fr-mb-0">
           <span className="fr-mb-0">
-            Découvrez les dernières publications liés à&nbsp;
+            Découvrez les dernières publications liées à&nbsp;
             <span className="fr-text--bold">vos bases et profils suivis</span>
           </span>
         </div>
@@ -152,7 +152,7 @@ export const NewsFeedHeader = async ({
         return (
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à la base
+              Découvrez les dernières publications liées à la base
             </span>
           </div>
         )
@@ -162,12 +162,15 @@ export const NewsFeedHeader = async ({
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <BaseImage base={followedBase.base} />
 
-          <div className="fr-flex fr-text--lg fr-mb-0">
+          <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés de la base&nbsp;
+              Découvrez les dernières publications
+            </span>
+            <span className="fr-mb-0">
+              de la base&nbsp;
               <Link
                 href={`/bases/${followedBase.base.slug}`}
-                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover fr-text--lg"
               >
                 {followedBase.base.title}
               </Link>
@@ -186,7 +189,7 @@ export const NewsFeedHeader = async ({
         return (
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à votre profil
+              Découvrez les dernières publications liées à votre profil
             </span>
           </div>
         )
@@ -196,12 +199,15 @@ export const NewsFeedHeader = async ({
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <RoundProfileImage user={followedProfile.profile} />
 
-          <div className="fr-flex fr-text--lg fr-mb-0">
+          <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à votre profil&nbsp;
+              Découvrez les dernières publications
+            </span>
+            <span className="fr-mb-0">
+              de&nbsp;
               <Link
                 href={`/profils/${followedProfile.profile.slug}`}
-                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover fr-text--lg"
               >
                 {followedProfile.profile.name}
               </Link>
@@ -214,11 +220,11 @@ export const NewsFeedHeader = async ({
     return (
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
         <span className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
-          Découvrez les dernières publications liés à vos préférences
+          Découvrez les dernières publications liées à vos préférences
         </span>
 
         <span className="fr-text--md fr-hidden-sm fr-mb-0">
-          Découvrez les dernières publications liés à vos préférences
+          Découvrez les dernières publications liées à vos préférences
         </span>
       </div>
     )

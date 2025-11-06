@@ -12,7 +12,6 @@ const ProfileCard = ({
   profile,
   user,
   canFollow = true,
-  titleAs: ProfileTitle = 'h2',
   className,
   isAdmin,
   displayProfileMetadata = true,
@@ -20,8 +19,8 @@ const ProfileCard = ({
   profile: ProfileListItem
   user: SessionUser | null
   canFollow?: boolean
-  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   className?: string
+  titleClassName?: string
   isAdmin?: boolean
   displayProfileMetadata?: boolean
 }) => (
@@ -37,14 +36,14 @@ const ProfileCard = ({
         >
           <RoundProfileImage size={48} user={profile} />
         </Link>
-        <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+        <div className="fr-flex fr-direction-column fr-flex-gap-1v">
           <Link
             className="fr-flex-grow-1 fr-link--no-underline"
             href={`/profils/${profile.slug}`}
           >
-            <ProfileTitle className="fr-text--md fr-text--medium fr-mb-0">
+            <span className="fr-text--bold fr-text--md fr-mb-0">
               {profile.name && formatName(profile.name)}
-            </ProfileTitle>
+            </span>
           </Link>
           <div className="fr-flex fr-flex-gap-2v fr-align-items-baseline">
             {displayProfileMetadata && (
