@@ -11,6 +11,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 import { getServerUrl } from '../../utils/baseUrl'
+import { getResourceAttributionWording } from '../../utils/getResourceAttributionWording'
 import CopyLinkButton from '../CopyLinkButton'
 import styles from './ResourceCard.module.css'
 import { ResourceMoreActionsDropdown } from './ResourceMoreActionsDropdown'
@@ -26,7 +27,6 @@ const ResourceCard = ({
   isDraft = false,
   context = 'list',
   highlightCount,
-  onlyUpdatedDate = false,
   withDate = true,
 }: {
   children?: React.ReactNode
@@ -38,7 +38,6 @@ const ResourceCard = ({
   isDraft?: boolean
   context?: 'highlight' | 'list' | 'newsFeed'
   highlightCount?: number
-  onlyUpdatedDate?: boolean
   withDate?: boolean
 }) => (
   <article
@@ -50,17 +49,15 @@ const ResourceCard = ({
         <OwnershipInformation
           user={resource.createdBy}
           base={resource.base}
-          attributionWording={isDraft ? 'draft-resource' : 'resource'}
+          attributionWording={
+            isDraft ? 'draft-resource' : getResourceAttributionWording(resource)
+          }
         />
       )}
       {children}
       {withDate && (
         <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
-          <ResourceDates
-            canEdit={isContributor}
-            resource={resource}
-            onlyUpdatedDate={onlyUpdatedDate}
-          />
+          <ResourceDates canEdit={isContributor} resource={resource} />
         </div>
       )}
     </div>
@@ -78,11 +75,7 @@ const ResourceCard = ({
                 'fr-hidden-md fr-text--xs fr-mb-1w',
               )}
             >
-              <ResourceDates
-                canEdit={isContributor}
-                resource={resource}
-                onlyUpdatedDate={onlyUpdatedDate}
-              />
+              <ResourceDates canEdit={isContributor} resource={resource} />
             </div>
           )}
           <ResourceTitle

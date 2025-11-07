@@ -9,6 +9,7 @@ import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesVie
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { Resource } from '@app/web/server/resources/getResource'
+import { getResourceAttributionWording } from '@app/web/utils/getResourceAttributionWording'
 import { hasIndexation } from '@app/web/utils/indexation'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -60,14 +61,16 @@ const ResourceView = ({
             <OwnershipInformation
               user={resource.createdBy}
               base={resource.base}
-              attributionWording={
-                resource.published ? 'resource' : 'draft-resource'
-              }
+              attributionWording={getResourceAttributionWording(resource)}
             />
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-flex-gap-3v fr-justify-content-space-between fr-flex-wrap fr-my-md-6v fr-my-2w">
               <div className="fr-text--xs fr-mb-0 fr-flex">
-                <ResourceDates canEdit={canWrite} resource={resource} />
+                <ResourceDates
+                  canEdit={canWrite}
+                  resource={resource}
+                  onlyUpdatedDate={false}
+                />
               </div>
               {(canWrite || !resource.isPublic) && (
                 <span>
