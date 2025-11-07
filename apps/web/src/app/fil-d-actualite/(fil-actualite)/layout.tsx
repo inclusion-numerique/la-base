@@ -24,9 +24,10 @@ const NewsFeedLayout = async ({ children }: PropsWithChildren) => {
 
   return (
     <>
+      <SkipLinksPortal links={skipLinks} />
       <div className="fr-layout">
         <div className="fr-layout__inner">
-          <SkipLinksPortal links={skipLinks} />
+          <div id="skip-links" />
           <Header user={user} className="fr-px-2w" />
           <div
             id={newsFeedId}
