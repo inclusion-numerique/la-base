@@ -93,7 +93,7 @@ const ResourceView = ({
                 />
               </div>
             ) : null}
-            <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h3">
+            <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h2">
               {resource.title}
             </h1>
             <p className="fr-text--lg fr-mt-2v fr-mt-md-3v">

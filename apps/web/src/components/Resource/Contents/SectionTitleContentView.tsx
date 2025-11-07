@@ -6,7 +6,10 @@ const SectionTitleContentView = ({
   content: Pick<ResourceContent, 'title'>
 }) =>
   title ? (
-    <h2 data-testid="content-section-title" className="fr-mt-4v fr-h4 ">
+    <h2
+      data-testid="content-section-title"
+      className="fr-mt-10v fr-mb-4v fr-h3"
+    >
       {title}
     </h2>
   ) : null
