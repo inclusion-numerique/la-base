@@ -7,7 +7,7 @@ import classNames from 'classnames'
 const ResourceDates = ({
   resource,
   canEdit,
-  onlyUpdatedDate = false,
+  onlyUpdatedDate = true,
 }: {
   canEdit: boolean
   resource: Pick<

@@ -1,6 +1,7 @@
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import PrivateBox from '@app/web/components/PrivateBox'
 import type { Resource } from '@app/web/server/resources/getResource'
+import { getResourceAttributionWording } from '@app/web/utils/getResourceAttributionWording'
 import styles from './ResourceView.module.css'
 
 const PrivateResourceView = ({ resource }: { resource: Resource }) => (
@@ -15,9 +16,7 @@ const PrivateResourceView = ({ resource }: { resource: Resource }) => (
           <OwnershipInformation
             user={resource.createdBy}
             base={resource.base}
-            attributionWording={
-              resource.published ? 'resource' : 'draft-resource'
-            }
+            attributionWording={getResourceAttributionWording(resource)}
           />
           <hr className="fr-separator-4v fr-separator-md-6v" />
           <PrivateBox type="Ressource" />
