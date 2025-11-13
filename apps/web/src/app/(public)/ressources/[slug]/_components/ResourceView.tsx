@@ -107,11 +107,11 @@ const ResourceView = ({
                 showPrivate={false}
                 className="fr-my-4v fr-my-md-6v"
               >
-                <span className="fr-hidden fr-unhidden-sm fr-text--medium">
-                  ·
-                </span>
                 {resource._count.resourceFeedback > 0 && (
                   <>
+                    <span className="fr-hidden fr-unhidden-sm fr-text--medium">
+                      ·
+                    </span>
                     <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
                       className={classNames(
