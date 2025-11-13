@@ -169,10 +169,8 @@ export const GET = async (request: NextRequest) => {
         statusText: 'Could not cache external image',
       })
     }
-  } catch (error) {
-    // Get failed
-    Sentry.captureException(error)
-
+  } catch {
+    // Get failed - silently fail, external image errors are not our problem
     return notFoundResponse({
       statusText: 'Could not get external image',
     })
