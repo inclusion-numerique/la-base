@@ -234,15 +234,17 @@ const Header = ({
       id="header-modal"
       aria-labelledby="header-modal-button"
     >
-      <button
-        type="button"
-        className="fr-btn--close fr-btn fr-hidden-sm"
-        aria-controls="header-modal"
-        title="Fermer"
-      >
-        Fermer
-      </button>
-      <div className="fr-header__menu-links" />
+      <div className="fr-container">
+        <button
+          type="button"
+          className="fr-btn--close fr-btn fr-hidden-sm"
+          aria-controls="header-modal"
+          title="Fermer"
+        >
+          Fermer
+        </button>
+        <div className="fr-header__menu-links" />
+      </div>
     </div>
   </header>
 )

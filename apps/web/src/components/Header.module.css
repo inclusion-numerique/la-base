@@ -14,6 +14,8 @@
   background: var(--background-contrast-yellow-tournesol) !important;
   height: 1.5rem !important;
   width: 1.5rem !important;
+  display: flex;
+  justify-content: center !important;
 
   @media (min-width: 48em) {
     height: 2rem !important;
