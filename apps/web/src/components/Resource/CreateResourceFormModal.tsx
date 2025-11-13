@@ -1,6 +1,7 @@
 'use client'
 
 import InputFormField from '@app/ui/components/Form/InputFormField'
+import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
@@ -169,7 +170,11 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
             <InputFormField
               control={control}
               path="title"
-              label="Titre de la ressource"
+              label={
+                <>
+                  Titre de la ressource <RedAsterisk />
+                </>
+              }
               disabled={disabled}
               info={titleInfo}
             />
@@ -178,7 +183,11 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
               path="description"
               type="textarea"
               rows={5}
-              label="Description courte de la ressource"
+              label={
+                <>
+                  Description courte de la ressource <RedAsterisk />
+                </>
+              }
               hint="Décrivez en quelques mots votre ressource (nature, objectifs...). Cette description apparaîtra aussi dans les résultats du moteur de recherche."
               disabled={disabled}
               info={descriptionInfo}

@@ -77,6 +77,14 @@ const SearchThematicsCategory = ({
                       e.target.checked,
                     )
                   },
+                  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+                    if (e.key === 'Enter') {
+                      onSelectAllInCategory(
+                        category as FilterKey,
+                        !isCategoryComplete(category, selected),
+                      )
+                    }
+                  },
                   checked: isCategoryComplete(category, selected),
                 },
               },
