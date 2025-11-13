@@ -1,4 +1,5 @@
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
+import { shouldDropSentryEvent } from '@app/web/utils/sentryFilter'
 import * as Sentry from '@sentry/nextjs'
 
 export const initializeSentry = ({ replay }: { replay?: boolean } = {}) => {
@@ -13,5 +14,11 @@ export const initializeSentry = ({ replay }: { replay?: boolean } = {}) => {
     integrations: replay ? [Sentry.replayIntegration()] : [],
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1,
+    beforeSend(event, hint) {
+      if (shouldDropSentryEvent({ event, hint })) {
+        return null // Drop the event
+      }
+      return event // Process other events normally
+    },
   })
 }
