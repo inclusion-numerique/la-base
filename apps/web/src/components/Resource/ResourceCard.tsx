@@ -119,7 +119,7 @@ const ResourceCard = ({
           </div>
         )}
       </Link>
-      <div className="fr-flex fr-align-items-md-center fr-justify-content-space-between fr-direction-row fr-my-2w">
+      <div className="fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w">
         {resource.published && (
           <div className="fr-text--sm fr-mb-0">
             <ResourcesViewsAndMetadata

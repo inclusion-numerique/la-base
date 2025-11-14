@@ -1,22 +1,33 @@
-import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  getNewsFeedPageContext,
+  NewsFeedPageContext,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedBasesProfilesFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedBasesProfilesFilters'
 import { NewsFeedProfessionnalSectorsFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedProfessionnalSectorsFilters'
 import { NewsFeedThematicsFilters } from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedThematicsFilters'
+import { NewsFeedFilters } from '@app/web/server/newsFeed/getNewsFeedResources'
 import {
   createDefaultUrl,
   NewsFeedParams,
 } from '@app/web/server/newsFeed/newsFeedUrls'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import styles from './NewsFeedSearchFilters.module.css'
 
-export const NewsFeedSearchFilters = ({
-  newsFeedPageContext,
+export const NewsFeedSearchFilters = async ({
   params,
+  filters,
+  pagination,
 }: {
-  newsFeedPageContext: NewsFeedPageContext
   params: NewsFeedParams
+  filters: NewsFeedFilters
+  pagination?: PaginationParams
 }) => {
+  const newsFeedPageContext: NewsFeedPageContext = await getNewsFeedPageContext(
+    filters,
+    pagination,
+  )
   const { professionalSectors, themes } = newsFeedPageContext.userNewsFeed
   const {
     professionalsSectors: professionalSectorsCounts,
@@ -71,7 +82,7 @@ export const NewsFeedSearchFilters = ({
           params={params.base ?? params.profil}
         />
       </div>
-      <div className="fr-mt-2w">
+      <div>
         <Button
           linkProps={{ href: '/fil-d-actualite/preferences' }}
           priority="secondary"

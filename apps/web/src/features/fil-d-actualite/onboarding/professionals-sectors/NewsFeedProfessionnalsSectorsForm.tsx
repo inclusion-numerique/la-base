@@ -21,6 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ProfessionalSector } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './NewsFeedProfessionnalsSectors.module.css'
 
@@ -40,6 +41,12 @@ const NewsFeedProfessionnalsSectors = ({
       professionalSectors: userNewsFeed?.professionalSectors,
     },
   })
+
+  useEffect(() => {
+    form.reset({
+      professionalSectors: userNewsFeed?.professionalSectors,
+    })
+  }, [userNewsFeed?.professionalSectors, form])
 
   const onSubmit = async (data: UpdateNewsFeedSectorsProfessionnalsCommand) => {
     try {

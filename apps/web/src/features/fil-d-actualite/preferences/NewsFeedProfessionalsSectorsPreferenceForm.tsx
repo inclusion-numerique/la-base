@@ -59,7 +59,7 @@ export const NewsFeedProfessionalsSectorsPreferenceForm = ({
           >
             <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-md-row">
               <IconInSquare iconId={professionalSectorsIcon[ps]} />
-              <div className="fr-flex fr-direction-column">
+              <div className="fr-flex fr-direction-column fr-flex-gap-1v">
                 <span className="fr-mb-0 fr-text--md fr-text--bold">
                   {professionalSectorsLabels[ps]}
                 </span>

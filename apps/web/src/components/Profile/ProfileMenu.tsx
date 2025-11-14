@@ -9,7 +9,6 @@ import { type PropsWithChildren } from 'react'
 const tabsMap: Map<string, ProfileTab> = new Map<string, ProfileTab>([
   ['bases', 'bases'],
   ['collections', 'collections'],
-  ['suivis', 'suivis'],
   ['a-propos', 'a-propos'],
   ['ressources', 'ressources'],
 ])
@@ -85,15 +84,6 @@ const ProfileMenu = ({
             >
               {isOwner ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
             </MenuItem>
-            {isOwner && (
-              <MenuItem
-                tab="suivis"
-                currentTab={currentTab}
-                href={`/profils/${profile.slug}/suivis`}
-              >
-                Mes suivis · <b>{followsCount}</b>
-              </MenuItem>
-            )}
             <MenuItem
               tab="a-propos"
               currentTab={currentTab}

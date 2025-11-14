@@ -106,6 +106,12 @@ const Header = ({
                           styles.newsFeedButton,
                         )}
                       >
+                        <span
+                          className={classNames(
+                            'ri-flashlight-fill fr-text--sm',
+                            styles.newsFeedIcon,
+                          )}
+                        />
                         <NewsFeedBadge />
                       </div>
                     )}

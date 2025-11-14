@@ -31,6 +31,22 @@ export const NewsFeedBasesProfilesFilters = ({
   params?: string
 }) => {
   const [isOpen, setIsOpen] = useState(!!params)
+  const [showAll, setShowAll] = useState(
+    !!params &&
+      [
+        ...bases.map(({ base }) => base.slug),
+        ...profiles.map(({ profile }) => profile.slug),
+      ].findIndex((slug) => slug === params) > 4,
+  )
+
+  const allItems = [...bases, ...profiles]
+  const displayedItems = showAll ? allItems : allItems.slice(0, 4)
+  const displayedBases = displayedItems.filter(
+    (item) => 'base' in item,
+  ) as typeof bases
+  const displayedProfiles = displayedItems.filter(
+    (item) => 'profile' in item,
+  ) as typeof profiles
 
   if (bases.length === 0 && profiles.length === 0) {
     return null
@@ -67,7 +83,7 @@ export const NewsFeedBasesProfilesFilters = ({
       </div>
       {isOpen && (
         <div className="fr-flex fr-direction-column">
-          {bases.map(({ base }) => (
+          {displayedBases.map(({ base }) => (
             <Button
               key={base.id}
               priority="tertiary no outline"
@@ -105,7 +121,7 @@ export const NewsFeedBasesProfilesFilters = ({
               </div>
             </Button>
           ))}
-          {profiles.map(({ profile }) => (
+          {displayedProfiles.map(({ profile }) => (
             <Button
               key={profile.id}
               priority="tertiary no outline"
@@ -147,6 +163,14 @@ export const NewsFeedBasesProfilesFilters = ({
               </div>
             </Button>
           ))}
+          {allItems.length > 4 && (
+            <Button
+              priority="tertiary no outline"
+              onClick={() => setShowAll((prev) => !prev)}
+            >
+              {showAll ? 'Voir moins' : 'Tout voir'}
+            </Button>
+          )}
         </div>
       )}
     </>

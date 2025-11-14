@@ -80,11 +80,7 @@ const DataFilters = <Configuration extends DataTableConfiguration>({
             priority="secondary"
             type="button"
             iconPosition="right"
-            iconId={
-              showFilters
-                ? 'fr-icon-arrow-up-s-line'
-                : 'fr-icon-arrow-down-s-line'
-            }
+            iconId={showFilters ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}
             onClick={() => setShowFilters(!showFilters)}
           >
             Voir les filtres
