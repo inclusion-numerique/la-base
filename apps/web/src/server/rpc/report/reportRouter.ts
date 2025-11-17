@@ -1,8 +1,16 @@
 import { prismaClient } from '@app/web/prismaClient'
-import { ResourceReportValidation } from '@app/web/resources/resourceReport'
+import {
+  ResourceReportValidation,
+  UpdateResourceReportValidation,
+} from '@app/web/resources/resourceReport'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import {
+  adminProcedure,
+  protectedProcedure,
+  router,
+} from '@app/web/server/rpc/createRouter'
 import { v4 } from 'uuid'
+import { z } from 'zod'
 
 export const reportRouter = router({
   resource: protectedProcedure
@@ -48,4 +56,27 @@ export const reportRouter = router({
         return report
       },
     ),
+
+  updatePrivateComment: adminProcedure
+    .input(UpdateResourceReportValidation)
+    .mutation(async ({ input: { reportId, privateComment } }) => {
+      return prismaClient.resourceReport.update({
+        where: { id: reportId },
+        data: {
+          privateComment,
+          updated: new Date(),
+        },
+      })
+    }),
+
+  resolveReport: adminProcedure
+    .input(z.object({ reportId: z.string() }))
+    .mutation(async ({ input: { reportId } }) => {
+      return prismaClient.resourceReport.update({
+        where: { id: reportId },
+        data: {
+          processed: new Date(),
+        },
+      })
+    }),
 })
