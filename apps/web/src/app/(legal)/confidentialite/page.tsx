@@ -26,7 +26,7 @@ const ConfidentialityPage = () => (
           </p>
           <p>
             Le responsable de traitement est l’ANCT, représentée par Monsieur
-            Stanislas Bourron, Directeur général.
+            Henri Prévost, Directeur général de l’ANCT.
           </p>
 
           <h2>Pourquoi traitons-nous des données à caractère personnel ?</h2>
@@ -84,7 +84,7 @@ const ConfidentialityPage = () => (
               <tbody>
                 <tr>
                   <td>Données relatives aux utilisateurs</td>
-                  <td>1 an à partir du dernier contact</td>
+                  <td>2 ans à partir du dernier contact</td>
                 </tr>
                 <tr>
                   <td>Données relatives à la lettre d’information</td>
