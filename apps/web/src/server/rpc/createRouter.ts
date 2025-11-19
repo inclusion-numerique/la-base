@@ -64,6 +64,20 @@ const isActive = middleware(({ ctx, next }) => {
 const isAdministrator = middleware(({ ctx, next }) => {
   const { user } = ctx
 
+  if (!user || (user.role !== 'Admin' && user.role !== 'Support')) {
+    throw new TRPCError({
+      code: 'FORBIDDEN',
+      message: 'Access denied: Administrator role required',
+    })
+  }
+  return next({
+    ctx,
+  })
+})
+
+const isModerator = middleware(({ ctx, next }) => {
+  const { user } = ctx
+
   if (
     !user ||
     (user.role !== 'Admin' &&
@@ -79,7 +93,6 @@ const isAdministrator = middleware(({ ctx, next }) => {
     ctx,
   })
 })
-
 /**
  * Protected procedure
  * */
@@ -89,3 +102,8 @@ export const protectedProcedure = procedure.use(isAuthenticated).use(isActive)
  * Administration procedure
  * */
 export const adminProcedure = protectedProcedure.use(isAdministrator)
+
+/**
+ * Moderator procedure
+ * */
+export const moderatorProcedure = protectedProcedure.use(isModerator)

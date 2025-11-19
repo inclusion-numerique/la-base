@@ -62,8 +62,10 @@ export const deleteReportedResourceModalProps = (
 
 const ReportedResourceDeletion = ({
   resource,
+  reportId,
   user,
 }: {
+  reportId: string
   resource: Pick<Resource, 'id' | 'title'>
   user: SessionUser | null
 }) => {
@@ -80,6 +82,7 @@ const ReportedResourceDeletion = ({
             (user as SessionUser).lastName
           }`,
         moderatorEmail: (user as SessionUser).email,
+        reportId,
       })
       closeDeleteModal()
       router.refresh()

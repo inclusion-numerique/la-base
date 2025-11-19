@@ -104,6 +104,7 @@ const AdministrationSignalementsPage = async () => {
                 </div>
                 <div className="fr-flex fr-flex-gap-4v">
                   <ReportedResourceDeletion
+                    reportId={report.id}
                     resource={report.resource}
                     user={user}
                   />

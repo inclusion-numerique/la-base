@@ -6,7 +6,7 @@ import {
 import { sendResourceModerationEmail } from '@app/web/server/report/sendResourceModerationEmail'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
 import {
-  adminProcedure,
+  moderatorProcedure,
   protectedProcedure,
   router,
 } from '@app/web/server/rpc/createRouter'
@@ -58,16 +58,19 @@ export const reportRouter = router({
         return report
       },
     ),
-  deleteResource: adminProcedure
+  deleteResource: moderatorProcedure
     .input(
       z.object({
+        reportId: z.string(),
         resourceId: z.string(),
         moderatorName: z.string(),
         moderatorEmail: z.string(),
       }),
     )
     .mutation(
-      async ({ input: { resourceId, moderatorName, moderatorEmail } }) => {
+      async ({
+        input: { resourceId, moderatorName, moderatorEmail, reportId },
+      }) => {
         const resource = await prismaClient.resource.findUnique({
           where: { id: resourceId },
           include: {
@@ -87,7 +90,7 @@ export const reportRouter = router({
         const timestamp = new Date()
 
         // Delete the resource (same logic as resourceRouter.delete)
-        const deletedResource = await prismaClient.resource.update({
+        await prismaClient.resource.update({
           where: { id: resourceId },
           data: {
             deleted: timestamp,
@@ -103,10 +106,15 @@ export const reportRouter = router({
           moderatorEmail,
         })
 
-        return deletedResource
+        await prismaClient.resourceReport.update({
+          where: { id: reportId },
+          data: {
+            processed: new Date(),
+          },
+        })
       },
     ),
-  updatePrivateComment: adminProcedure
+  updatePrivateComment: moderatorProcedure
     .input(UpdateResourceReportValidation)
     .mutation(async ({ input: { reportId, privateComment } }) => {
       return prismaClient.resourceReport.update({
@@ -117,8 +125,7 @@ export const reportRouter = router({
         },
       })
     }),
-
-  resolveReport: protectedProcedure
+  resolveReport: moderatorProcedure
     .input(z.object({ reportId: z.string() }))
     .mutation(async ({ input: { reportId } }) => {
       return prismaClient.resourceReport.update({
