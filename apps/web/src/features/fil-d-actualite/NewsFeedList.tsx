@@ -17,9 +17,11 @@ import Button from '@codegouvfr/react-dsfr/Button'
 const NewsFeedList = ({
   newsFeedPageContext,
   params,
+  baseUrl,
 }: {
   newsFeedPageContext: NewsFeedPageContext
   params: NewsFeedParams
+  baseUrl: string
 }) => {
   const { userNewsFeed, resources, user } = newsFeedPageContext
 
@@ -56,6 +58,7 @@ const NewsFeedList = ({
           resource={resource}
           user={user}
           withDate={false}
+          copyLinkUrl={`${baseUrl}/ressources/${resource.slug}`}
         >
           <NewsFeedOwnershipInformation
             resource={resource}

@@ -28,6 +28,9 @@ const ResourceCard = ({
   context = 'list',
   highlightCount,
   withDate = true,
+  copyLinkUrl = `${getServerUrl(`/ressources/${resource.slug}`, {
+    absolutePath: true,
+  })}`,
 }: {
   children?: React.ReactNode
   resource: ResourceListItem
@@ -39,6 +42,7 @@ const ResourceCard = ({
   context?: 'highlight' | 'list' | 'newsFeed'
   highlightCount?: number
   withDate?: boolean
+  copyLinkUrl?: string
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -192,9 +196,7 @@ const ResourceCard = ({
               <CopyLinkButton
                 size="small"
                 priority="tertiary no outline"
-                url={getServerUrl(`/ressources/${resource.slug}`, {
-                  absolutePath: true,
-                })}
+                url={copyLinkUrl}
               />
             </>
           )}

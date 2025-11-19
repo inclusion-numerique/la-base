@@ -8,6 +8,7 @@ import { getStorageKey } from '@app/web/features/uploads/storage/getStorageKey'
 import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { s3 } from '@app/web/server/s3/s3'
+import { getServerUrl } from '@app/web/utils/baseUrl'
 import { Upload } from '@aws-sdk/lib-storage'
 import * as Sentry from '@sentry/nextjs'
 import axios from 'axios'
@@ -171,6 +172,11 @@ export const GET = async (request: NextRequest) => {
     }
   } catch {
     // Get failed (invalid url or any other error not on our hands) - we fallback to a placeholder image
-    return Response.redirect('/images/image-error-placeholder.svg', 302)
+    return Response.redirect(
+      getServerUrl('/images/image-error-placeholder.svg', {
+        absolutePath: true,
+      }),
+      302,
+    )
   }
 }

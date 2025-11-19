@@ -6,6 +6,7 @@ import NewsFeedList from '@app/web/features/fil-d-actualite/NewsFeedList'
 import { NewsFeedFilters } from '@app/web/server/newsFeed/getNewsFeedResources'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
+import { getServerBaseUrl } from '@app/web/utils/baseUrl'
 
 const NewsFeedListLoader = async ({
   params,
@@ -20,9 +21,14 @@ const NewsFeedListLoader = async ({
     filters,
     pagination,
   )
+  const baseUrl = getServerBaseUrl({ absolutePath: true })
 
   return (
-    <NewsFeedList newsFeedPageContext={newsFeedPageContext} params={params} />
+    <NewsFeedList
+      newsFeedPageContext={newsFeedPageContext}
+      params={params}
+      baseUrl={baseUrl}
+    />
   )
 }
 
