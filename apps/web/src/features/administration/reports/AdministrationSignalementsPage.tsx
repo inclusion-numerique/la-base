@@ -103,7 +103,10 @@ const AdministrationSignalementsPage = async () => {
                   </Link>
                 </div>
                 <div className="fr-flex fr-flex-gap-4v">
-                  <ReportedResourceDeletion resource={report.resource} />
+                  <ReportedResourceDeletion
+                    resource={report.resource}
+                    user={user}
+                  />
                   <ResolveReportedResourceModal reportId={report.id} />
                 </div>
               </div>

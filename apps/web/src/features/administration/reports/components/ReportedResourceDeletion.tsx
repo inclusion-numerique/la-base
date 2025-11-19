@@ -1,6 +1,7 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { trpc } from '@app/web/trpc'
@@ -61,19 +62,24 @@ export const deleteReportedResourceModalProps = (
 
 const ReportedResourceDeletion = ({
   resource,
+  user,
 }: {
   resource: Pick<Resource, 'id' | 'title'>
+  user: SessionUser | null
 }) => {
   const router = useRouter()
-  const mutate = trpc.resource.mutate.useMutation()
+  const mutate = trpc.report.deleteResource.useMutation()
 
   const onDelete = async () => {
     try {
       await mutate.mutateAsync({
-        name: 'Delete',
-        payload: {
-          resourceId: resource.id,
-        },
+        resourceId: resource.id,
+        moderatorName:
+          (user as SessionUser).name ??
+          `${(user as SessionUser).firstName} ${
+            (user as SessionUser).lastName
+          }`,
+        moderatorEmail: (user as SessionUser).email,
       })
       closeDeleteModal()
       router.refresh()
