@@ -22,13 +22,11 @@ const NewsFeedBadge = () => {
   )
 
   if (!data || data.total <= 0) return null
+
   return (
-    <>
-      <div className={styles.notificationsContainer} />
-      <div className={styles.notificationsCount}>
-        <span aria-label={`${data.total} nouveautés`}>{data.total}</span>
-      </div>
-    </>
+    <div className={styles.notificationsCount}>
+      <span aria-label={`${data.total} nouveautés`}>{data.total}</span>
+    </div>
   )
 }
 

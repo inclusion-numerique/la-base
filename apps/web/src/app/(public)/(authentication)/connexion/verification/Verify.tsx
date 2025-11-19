@@ -11,7 +11,6 @@ export const Verify = async () => {
         <picture>
           <img
             src="/dsfr/artwork/pictograms/digital/mail-send.svg"
-            alt="Boite email"
             style={{ textAlign: 'center', width: 96 }}
           />
         </picture>
