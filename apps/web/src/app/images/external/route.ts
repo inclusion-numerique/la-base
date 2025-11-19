@@ -170,9 +170,10 @@ export const GET = async (request: NextRequest) => {
       })
     }
   } catch {
-    // Get failed - silently fail, external image errors are not our problem
-    return notFoundResponse({
-      statusText: 'Could not get external image',
-    })
+    // Get failed (invalid url or any other error not on our hands) - we fallback to a placeholder image
+    return Response.redirect(
+      new URL('/images/image-error-placeholder.svg', request.url),
+      302,
+    )
   }
 }
