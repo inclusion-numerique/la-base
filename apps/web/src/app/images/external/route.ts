@@ -171,9 +171,6 @@ export const GET = async (request: NextRequest) => {
     }
   } catch {
     // Get failed (invalid url or any other error not on our hands) - we fallback to a placeholder image
-    return Response.redirect(
-      new URL('/images/image-error-placeholder.svg', request.url),
-      302,
-    )
+    return Response.redirect('/images/image-error-placeholder.svg', 302)
   }
 }
