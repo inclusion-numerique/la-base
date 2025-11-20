@@ -13,6 +13,7 @@ import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { getUserDisplayName } from '@app/web/utils/user'
+import Button from '@codegouvfr/react-dsfr/Button'
 import Tag from '@codegouvfr/react-dsfr/Tag'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -69,7 +70,18 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         ]}
       />
       <AdministrationTitle
-        actions={<DeleteUserButton userId={id} bases={bases} />}
+        actions={
+          <div className="fr-flex fr-flex-gap-4v">
+            <Button
+              priority="secondary"
+              linkProps={{ href: getServerUrl(`/profils/${slug}/modifier`) }}
+              size="small"
+            >
+              Modifier le profil
+            </Button>
+            <DeleteUserButton userId={id} bases={bases} />
+          </div>
+        }
       >
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <RoundProfileImage user={user} size={96} borderWidth={1} />
