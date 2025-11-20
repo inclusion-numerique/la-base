@@ -54,13 +54,14 @@ const ProfileInformationsEdition = ({
       const updatedUser = await mutation.mutateAsync(data)
       router.push(`/profils/${updatedUser.slug}/modifier`)
     } catch (error) {
-      // Vérifier si c'est une erreur de profil suspect supprimé
+      // Vérifier si c'est une erreur de contenu suspect
       if (
         error instanceof Error &&
-        error.message === 'SUSPICIOUS_PROFILE_DELETED'
+        error.message ===
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme'
       ) {
-        // Rediriger vers la page principale
-        router.push('/')
+        // Rediriger vers la page d'erreur de contenu suspect
+        router.push('/contenu-suspect')
         return
       }
       // Re-lancer l'erreur pour la gestion normale

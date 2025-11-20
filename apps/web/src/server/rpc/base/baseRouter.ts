@@ -7,6 +7,7 @@ import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
+import { deleteSuspiciousBase } from '@app/web/server/bases/suspiciousBaseDetection'
 import {
   UpdateBaseCommandValidation,
   UpdateBaseImageCommandValidation,
@@ -57,6 +58,15 @@ export const baseRouter = router({
           },
         },
       })
+
+      // Vérifier si la base est suspecte et la supprimer si nécessaire
+      const wasDeleted = await deleteSuspiciousBase(base.id)
+      if (wasDeleted) {
+        // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+        throw invalidError(
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+        )
+      }
 
       Promise.all(
         members.map((member) =>
@@ -120,39 +130,63 @@ export const baseRouter = router({
           where: { baseId: input.id, isPublic: true },
         })
 
-        return prismaClient.$transaction(async (transaction) => {
-          await Promise.all(
-            resources.map((resource) =>
-              handleResourceMutationCommand(
-                {
-                  name: 'ChangeVisibility',
-                  payload: { resourceId: resource.id, isPublic: false },
-                },
-                { user },
-                transaction,
+        const updatedBase = await prismaClient.$transaction(
+          async (transaction) => {
+            await Promise.all(
+              resources.map((resource) =>
+                handleResourceMutationCommand(
+                  {
+                    name: 'ChangeVisibility',
+                    payload: { resourceId: resource.id, isPublic: false },
+                  },
+                  { user },
+                  transaction,
+                ),
               ),
-            ),
-          )
+            )
 
-          await Promise.all(
-            collections.map((collection) =>
-              transaction.collection.update({
-                where: { id: collection.id },
-                data: { isPublic: false },
-              }),
-            ),
-          )
+            await Promise.all(
+              collections.map((collection) =>
+                transaction.collection.update({
+                  where: { id: collection.id },
+                  data: { isPublic: false },
+                }),
+              ),
+            )
 
-          return transaction.base.update({
-            where: { id: input.id },
-            data: dataWithSlug,
-          })
-        })
+            return transaction.base.update({
+              where: { id: input.id },
+              data: dataWithSlug,
+            })
+          },
+        )
+
+        // Vérifier si la base est devenue suspecte après la mise à jour
+        const wasDeleted = await deleteSuspiciousBase(updatedBase.id)
+        if (wasDeleted) {
+          // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+          throw invalidError(
+            'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+          )
+        }
+
+        return updatedBase
       }
-      return prismaClient.base.update({
+      const updatedBase = await prismaClient.base.update({
         where: { id: input.id },
         data: dataWithSlug,
       })
+
+      // Vérifier si la base est devenue suspecte après la mise à jour
+      const wasDeleted = await deleteSuspiciousBase(updatedBase.id)
+      if (wasDeleted) {
+        // Lancer une erreur pour déclencher la redirection vers la page d'erreur
+        throw invalidError(
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+        )
+      }
+
+      return updatedBase
     }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))

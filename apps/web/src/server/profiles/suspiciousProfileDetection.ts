@@ -529,7 +529,7 @@ export function isProbablyEnglish(text: string): LangGuess {
  * - Compte créé dans les 60 dernières minutes
  * - Description contient de l'anglais
  * - Description contient simplement un lien
- * - Profil contient un site internet ou un réseau social
+ * - Profil contient un site internet ou un réseau social (uniquement si pas de description)
  */
 export const isSuspiciousProfile = async (userId: string): Promise<boolean> => {
   const user = await prismaClient.user.findUnique({
@@ -576,8 +576,23 @@ export const isSuspiciousProfile = async (userId: string): Promise<boolean> => {
       })()
     : false
 
+  // Vérifier si le profil contient un site internet ou des réseaux sociaux (uniquement si pas de description)
+  const hasNoDescription = !user.description || user.description.trim() === ''
+  const suspiciousWebsite =
+    hasNoDescription && user.website !== null && user.website !== ''
+  const suspiciousSocialMedia =
+    hasNoDescription &&
+    ((user.facebook !== null && user.facebook !== '') ||
+      (user.twitter !== null && user.twitter !== '') ||
+      (user.linkedin !== null && user.linkedin !== ''))
+
   // Le profil est suspect si au moins un des critères est rempli
-  return hasEnglishInDescription || isDescriptionJustALink
+  return (
+    hasEnglishInDescription ||
+    isDescriptionJustALink ||
+    suspiciousWebsite ||
+    suspiciousSocialMedia
+  )
 }
 
 /**
