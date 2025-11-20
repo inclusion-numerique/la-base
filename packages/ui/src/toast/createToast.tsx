@@ -18,11 +18,13 @@ export const createToast = ({
   message,
   action,
   duration,
+  id,
 }: {
   priority: ToastPriority
   message: JSX.Element | string | null
   action?: ButtonProps
   duration?: number
+  id?: string
 }) => {
   toast(
     action ? (
@@ -40,6 +42,7 @@ export const createToast = ({
     ),
     {
       duration,
+      id,
       className: classNames(styles.toast, styles[priority]),
       icon: <span className={classNames(styles.icon, icons[priority])} />,
     },

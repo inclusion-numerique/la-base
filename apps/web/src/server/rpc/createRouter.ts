@@ -86,7 +86,7 @@ const isModerator = middleware(({ ctx, next }) => {
   ) {
     throw new TRPCError({
       code: 'FORBIDDEN',
-      message: 'Access denied: Administrator role required',
+      message: 'Access denied: Administrator or moderator role required',
     })
   }
   return next({

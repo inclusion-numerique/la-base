@@ -9,17 +9,11 @@ import {
   UpdateResourceReportValidation,
 } from '@app/web/resources/resourceReport'
 import { trpc } from '@app/web/trpc'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDebounceValue } from 'usehooks-ts'
-
-const modal = createModal({
-  id: 'resource-report-update-modal',
-  isOpenedByDefault: false,
-})
 
 const ResourceReportUpdateForm = ({
   reportedResource,
@@ -44,9 +38,8 @@ const ResourceReportUpdateForm = ({
       createToast({
         priority: 'success',
         message: 'La note interne du signalement a bien été mise à jour',
+        id: 'resource-report-update-success',
       })
-
-      modal.close()
     } catch (error) {
       Sentry.captureException(error)
     }
