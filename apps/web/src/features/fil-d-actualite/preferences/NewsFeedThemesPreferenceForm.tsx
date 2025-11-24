@@ -17,7 +17,7 @@ import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { Theme } from '@prisma/client'
 import classNames from 'classnames'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export const NewsFeedThemesPreferenceModal = createModal({
   id: `news-feed-themes-preference-modal`,
@@ -39,7 +39,7 @@ export const NewsFeedThemesPreferenceForm = ({
   const count = userNewsFeed?.themes.length ?? 0
   return (
     <>
-      <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
         <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
           <span className="fr-h6 fr-text-default--grey fr-mb-0">
             {count} thématique
@@ -60,41 +60,50 @@ export const NewsFeedThemesPreferenceForm = ({
           </Button>
         </div>
         {(displayedThemes || []).map((theme) => (
-          <div className="fr-flex fr-py-4v fr-direction-column fr-direction-md-row fr-flex-gap-md-4v fr-flex-gap-2v fr-align-items-md-center fr-justify-content-space-between">
-            <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-md-row">
-              <IconInSquare
-                iconId={
-                  CATEGORY_VARIANTS[themeCategories[theme]]
-                    .icon as RiIconClassName
-                }
-                className={CATEGORY_VARIANTS[themeCategories[theme]].background}
-                iconClassName={CATEGORY_VARIANTS[themeCategories[theme]].color}
-              />
-              <div className="fr-flex fr-direction-column">
-                <span
-                  className="fr-mb-0 fr-text--start fr-text--md fr-text--bold"
-                  style={{
-                    color: CATEGORY_VARIANTS[themeCategories[theme]].color,
-                  }}
-                >
-                  {themeLabels[theme]}
-                </span>
-                <div className="fr-flex fr-direction-column">
-                  <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm fr-text-mention--grey">
-                    <span className="fr-icon-file-text-line fr-icon--sm" />
-                    <div>
-                      <b>{numberToString(resourcesCount[theme].count)}</b>
-                      <span className="fr-mb-0">
-                        {' '}
-                        Ressource{sPluriel(resourcesCount[theme].count)}
-                      </span>
+          <React.Fragment key={theme}>
+            <div className="fr-flex fr-py-4v fr-direction-column fr-direction-md-row fr-flex-gap-md-4v fr-flex-gap-2v fr-align-items-md-center fr-justify-content-space-between">
+              <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-md-row">
+                <IconInSquare
+                  iconId={
+                    CATEGORY_VARIANTS[themeCategories[theme]]
+                      .icon as RiIconClassName
+                  }
+                  className={
+                    CATEGORY_VARIANTS[themeCategories[theme]].background
+                  }
+                  iconClassName={
+                    CATEGORY_VARIANTS[themeCategories[theme]].color
+                  }
+                />
+                <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                  <span
+                    className="fr-mb-0 fr-text--start fr-text--md fr-text--bold"
+                    style={{
+                      color: CATEGORY_VARIANTS[themeCategories[theme]].color,
+                    }}
+                  >
+                    {themeLabels[theme]}
+                  </span>
+                  <div className="fr-flex fr-direction-column">
+                    <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm fr-text-mention--grey">
+                      <span className="fr-icon-file-text-line fr-icon--sm" />
+                      <div>
+                        <b>{numberToString(resourcesCount[theme].count)}</b>
+                        <span className="fr-mb-0">
+                          {' '}
+                          Ressource{sPluriel(resourcesCount[theme].count)}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <NewsFeedUnfollowTheme
+                theme={theme}
+                userNewsFeed={userNewsFeed}
+              />
             </div>
-            <NewsFeedUnfollowTheme theme={theme} userNewsFeed={userNewsFeed} />
-          </div>
+          </React.Fragment>
         ))}
         {displayedThemes?.length === 0 && (
           <div className="fr-border fr-border-radius--8 fr-py-4w fr-px-6w fr-text--center fr-mt-4v">
@@ -103,7 +112,7 @@ export const NewsFeedThemesPreferenceForm = ({
             </span>
           </div>
         )}
-        {count > 0 && (
+        {count > 3 && (
           <Button
             priority="tertiary no outline"
             onClick={() => setShowAll((prev) => !prev)}

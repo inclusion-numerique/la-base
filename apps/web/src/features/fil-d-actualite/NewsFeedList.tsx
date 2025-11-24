@@ -17,9 +17,11 @@ import Button from '@codegouvfr/react-dsfr/Button'
 const NewsFeedList = ({
   newsFeedPageContext,
   params,
+  baseUrl,
 }: {
   newsFeedPageContext: NewsFeedPageContext
   params: NewsFeedParams
+  baseUrl: string
 }) => {
   const { userNewsFeed, resources, user } = newsFeedPageContext
 
@@ -34,6 +36,7 @@ const NewsFeedList = ({
     resources: paginatedResources,
     loadMore,
     isFetching,
+    hasMore,
   } = useNewsFeedPagination(resources, filters)
   const hasFilter =
     (!!params.thematique && params.thematique !== 'tout') ||
@@ -55,6 +58,7 @@ const NewsFeedList = ({
           resource={resource}
           user={user}
           withDate={false}
+          copyLinkUrl={`${baseUrl}/ressources/${resource.slug}`}
         >
           <NewsFeedOwnershipInformation
             resource={resource}
@@ -63,35 +67,39 @@ const NewsFeedList = ({
           />
         </ResourceCard>
       ))}
-      <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
-        <Button priority="secondary" onClick={loadMore} disabled={isFetching}>
-          {isFetching ? (
-            <>
-              <Spinner size="small" className="fr-mr-2v" />
-              Chargement...
-            </>
-          ) : (
-            'Voir plus de ressources'
-          )}
-        </Button>
-      </div>
-      <div className="fr-text--center fr-hidden-sm">
-        <Button
-          priority="secondary"
-          className="fr-flex fr-width-full fr-justify-content-center"
-          onClick={loadMore}
-          disabled={isFetching}
-        >
-          {isFetching ? (
-            <>
-              <Spinner size="small" className="fr-mr-2v" />
-              Chargement...
-            </>
-          ) : (
-            'Voir plus de ressources'
-          )}
-        </Button>
-      </div>
+      {hasMore && (
+        <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
+          <Button priority="secondary" onClick={loadMore} disabled={isFetching}>
+            {isFetching ? (
+              <>
+                <Spinner size="small" className="fr-mr-2v" />
+                Chargement...
+              </>
+            ) : (
+              'Voir plus de ressources'
+            )}
+          </Button>
+        </div>
+      )}
+      {hasMore && (
+        <div className="fr-text--center fr-hidden-sm">
+          <Button
+            priority="secondary"
+            className="fr-flex fr-width-full fr-justify-content-center"
+            onClick={loadMore}
+            disabled={isFetching}
+          >
+            {isFetching ? (
+              <>
+                <Spinner size="small" className="fr-mr-2v" />
+                Chargement...
+              </>
+            ) : (
+              'Voir plus de ressources'
+            )}
+          </Button>
+        </div>
+      )}
       <SaveResourceInCollectionModal user={user} />
     </>
   )

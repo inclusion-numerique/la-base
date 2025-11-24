@@ -34,7 +34,7 @@ const LegalPage = () => (
             Téléphone : 01 85 58 60 00
           </p>
           <h2>Directeur de la publication</h2>
-          <p>Monsieur Stanislas Bourron, Directeur général.</p>
+          <p>Monsieur Henri Prevost, Directeur général de l’ANCT.</p>
 
           <h2>Hébergement du site</h2>
           <p>Ce site est hébergé par :</p>

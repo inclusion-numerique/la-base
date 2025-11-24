@@ -52,7 +52,7 @@ const DataSearchAndFilters = async <
           priority="tertiary"
           type="button"
           iconPosition="right"
-          iconId="fr-icon-arrow-down-s-line"
+          iconId="ri-arrow-down-s-line"
         >
           {filterConfiguration.title}
         </Button>

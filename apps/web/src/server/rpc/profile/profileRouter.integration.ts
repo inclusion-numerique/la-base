@@ -483,7 +483,9 @@ describe('profileRouter', () => {
           department: '24',
           description: 'This is John Doe',
         }),
-      ).rejects.toThrow('SUSPICIOUS_PROFILE_DELETED')
+      ).rejects.toThrow(
+        'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme',
+      )
 
       const deletedUser = (await prismaClient.user.findUniqueOrThrow({
         where: { id: suspiciousUserId },

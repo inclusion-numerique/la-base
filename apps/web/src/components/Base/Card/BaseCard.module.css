@@ -23,6 +23,7 @@
 
 .content {
   flex: 1;
+  gap: 4px;
 }
 
 .midContent {

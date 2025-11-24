@@ -9,6 +9,7 @@ import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesVie
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { Resource } from '@app/web/server/resources/getResource'
+import { getResourceAttributionWording } from '@app/web/utils/getResourceAttributionWording'
 import { hasIndexation } from '@app/web/utils/indexation'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -60,14 +61,16 @@ const ResourceView = ({
             <OwnershipInformation
               user={resource.createdBy}
               base={resource.base}
-              attributionWording={
-                resource.published ? 'resource' : 'draft-resource'
-              }
+              attributionWording={getResourceAttributionWording(resource)}
             />
             <hr className="fr-separator-4v fr-separator-md-6v" />
             <div className="fr-flex fr-flex-gap-3v fr-justify-content-space-between fr-flex-wrap fr-my-md-6v fr-my-2w">
               <div className="fr-text--xs fr-mb-0 fr-flex">
-                <ResourceDates canEdit={canWrite} resource={resource} />
+                <ResourceDates
+                  canEdit={canWrite}
+                  resource={resource}
+                  onlyUpdatedDate={false}
+                />
               </div>
               {(canWrite || !resource.isPublic) && (
                 <span>
@@ -90,7 +93,7 @@ const ResourceView = ({
                 />
               </div>
             ) : null}
-            <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h3">
+            <h1 className="fr-mt-4v fr-mb-0 fr-mt-md-8v fr-h2">
               {resource.title}
             </h1>
             <p className="fr-text--lg fr-mt-2v fr-mt-md-3v">
@@ -104,11 +107,11 @@ const ResourceView = ({
                 showPrivate={false}
                 className="fr-my-4v fr-my-md-6v"
               >
-                <span className="fr-hidden fr-unhidden-sm fr-text--medium">
-                  ·
-                </span>
                 {resource._count.resourceFeedback > 0 && (
                   <>
+                    <span className="fr-hidden fr-unhidden-sm fr-text--medium">
+                      ·
+                    </span>
                     <FeedbackBadge value={resource.feedbackAverage} />
                     <Link
                       className={classNames(

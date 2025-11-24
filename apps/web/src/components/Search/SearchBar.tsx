@@ -187,7 +187,11 @@ const SearchBar = ({
         <div
           className={classNames('fr-search-bar fr-search-bar--lg')}
           role="search"
+          id="search"
         >
+          <label className="fr-label" htmlFor="search">
+            Rechercher
+          </label>
           <input
             ref={inputRef}
             value={query}

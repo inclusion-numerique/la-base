@@ -14,6 +14,11 @@ const attributionWordings = {
     where: ' dans la base ',
     by: ' par ',
   },
+  'updated-resource': {
+    what: 'Mise à jour',
+    where: ' dans la base ',
+    by: ' par ',
+  },
   'draft-resource': {
     what: 'Créée',
     where: ' dans la base ',
@@ -53,7 +58,12 @@ const OwnershipInformation = ({
     | (Pick<BasePageData, 'slug' | 'title' | 'id'> & WithMinimalImageData)
     | null
   className?: string
-  attributionWording: 'resource' | 'draft-resource' | 'collection' | 'none'
+  attributionWording:
+    | 'resource'
+    | 'updated-resource'
+    | 'draft-resource'
+    | 'collection'
+    | 'none'
   withImage?: boolean
 }) => (
   <div

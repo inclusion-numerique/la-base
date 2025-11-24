@@ -11,6 +11,7 @@ import {
 import { trpc } from '@app/web/trpc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import BaseContactsEdition from '../BaseContactsEdition'
 import styles from './BaseEditionContacts.module.css'
@@ -27,6 +28,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
       website: base.website || undefined,
     },
   })
+  const router = useRouter()
   const mutate = trpc.base.mutate.useMutation()
 
   return (
@@ -34,7 +36,22 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
       noBorder
       id="contacts"
       mutation={async (data) => {
-        await mutate.mutateAsync({ id: base.id, data })
+        try {
+          await mutate.mutateAsync({ id: base.id, data })
+        } catch (error) {
+          // Vérifier si c'est une erreur de contenu suspect
+          if (
+            error instanceof Error &&
+            error.message ===
+              'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme'
+          ) {
+            // Rediriger vers la page d'erreur de contenu suspect
+            router.push('/contenu-suspect')
+            return
+          }
+          // Re-lancer l'erreur pour la gestion normale
+          throw error
+        }
       }}
       form={form}
       className="fr-mt-3w"

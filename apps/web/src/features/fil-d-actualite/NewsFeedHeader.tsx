@@ -2,9 +2,14 @@ import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
-import { NewsFeedPageContext } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
+import {
+  getNewsFeedPageContext,
+  NewsFeedPageContext,
+} from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
 import { NewsFeedSearchFilters } from '@app/web/features/fil-d-actualite/NewsFeedSearchFilters'
+import { NewsFeedFilters } from '@app/web/server/newsFeed/getNewsFeedResources'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import {
   professionalSectorsIcon,
   professionalSectorsLabels,
@@ -21,13 +26,19 @@ import { ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-export const NewsFeedHeader = ({
+export const NewsFeedHeader = async ({
   params,
-  newsFeedPageContext,
+  filters,
+  pagination,
 }: {
   params: NewsFeedParams
-  newsFeedPageContext: NewsFeedPageContext
+  filters: NewsFeedFilters
+  pagination?: PaginationParams
 }) => {
+  const newsFeedPageContext: NewsFeedPageContext = await getNewsFeedPageContext(
+    filters,
+    pagination,
+  )
   const { notificationsCount } = newsFeedPageContext
   const { thematique, secteur, base, profil } = params
   const notificationsContainer = !!notificationsCount &&
@@ -65,7 +76,7 @@ export const NewsFeedHeader = ({
                   CATEGORY_VARIANTS[themeCategories[theme]].color,
                 )}
               >
-                Découvrez les dernières publications liés à la thématique
+                Découvrez les dernières publications liées à la thématique
               </span>
               <span
                 className={classNames(
@@ -79,7 +90,7 @@ export const NewsFeedHeader = ({
           ) : (
             <div className="fr-flex fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés à&nbsp;
+                Découvrez les dernières publications liées à&nbsp;
                 <span className="fr-text--bold">vos thématiques suivies</span>
               </span>
             </div>
@@ -101,7 +112,7 @@ export const NewsFeedHeader = ({
           {secteur !== 'tout' ? (
             <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés au secteur
+                Découvrez les dernières publications liées au secteur
                 professionnel
               </span>
               <span className="fr-text--bold">
@@ -111,7 +122,7 @@ export const NewsFeedHeader = ({
           ) : (
             <div className="fr-flex fr-text--lg fr-mb-0">
               <span className="fr-mb-0">
-                Découvrez les dernières publications liés à&nbsp;
+                Découvrez les dernières publications liées à&nbsp;
                 <span className="fr-text--bold">
                   vos secteurs professionnels suivis
                 </span>
@@ -125,7 +136,7 @@ export const NewsFeedHeader = ({
       return (
         <div className="fr-flex fr-text--lg fr-mb-0">
           <span className="fr-mb-0">
-            Découvrez les dernières publications liés à&nbsp;
+            Découvrez les dernières publications liées à&nbsp;
             <span className="fr-text--bold">vos bases et profils suivis</span>
           </span>
         </div>
@@ -141,7 +152,7 @@ export const NewsFeedHeader = ({
         return (
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à la base
+              Découvrez les dernières publications liées à la base
             </span>
           </div>
         )
@@ -151,12 +162,15 @@ export const NewsFeedHeader = ({
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <BaseImage base={followedBase.base} />
 
-          <div className="fr-flex fr-text--lg fr-mb-0">
+          <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés de la base&nbsp;
+              Découvrez les dernières publications
+            </span>
+            <span className="fr-mb-0">
+              de la base&nbsp;
               <Link
                 href={`/bases/${followedBase.base.slug}`}
-                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover fr-text--lg"
               >
                 {followedBase.base.title}
               </Link>
@@ -175,7 +189,7 @@ export const NewsFeedHeader = ({
         return (
           <div className="fr-flex fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à votre profil
+              Découvrez les dernières publications liées à votre profil
             </span>
           </div>
         )
@@ -185,12 +199,15 @@ export const NewsFeedHeader = ({
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <RoundProfileImage user={followedProfile.profile} />
 
-          <div className="fr-flex fr-text--lg fr-mb-0">
+          <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
             <span className="fr-mb-0">
-              Découvrez les dernières publications liés à votre profil&nbsp;
+              Découvrez les dernières publications
+            </span>
+            <span className="fr-mb-0">
+              de&nbsp;
               <Link
                 href={`/profils/${followedProfile.profile.slug}`}
-                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover"
+                className="fr-link fr-text--bold fr-text-decoration--none fr-link--underline-on-hover fr-text--lg"
               >
                 {followedProfile.profile.name}
               </Link>
@@ -203,11 +220,11 @@ export const NewsFeedHeader = ({
     return (
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
         <span className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
-          Découvrez les dernières publications liés à vos préférences
+          Découvrez les dernières publications liées à vos préférences
         </span>
 
         <span className="fr-text--md fr-hidden-sm fr-mb-0">
-          Découvrez les dernières publications liés à vos préférences
+          Découvrez les dernières publications liées à vos préférences
         </span>
       </div>
     )
@@ -249,7 +266,8 @@ export const NewsFeedHeader = ({
             <div className="fr-header__menu-links">
               <NewsFeedSearchFilters
                 params={params}
-                newsFeedPageContext={newsFeedPageContext}
+                filters={filters}
+                pagination={pagination}
               />
             </div>
           </div>

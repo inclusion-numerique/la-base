@@ -12,14 +12,12 @@ const ProfileBaseCard = ({
   profile,
   base,
   user,
-  titleAs: BaseTitle = 'h2',
   isOwner,
 }: {
   profile?: ProfilePageData
   base: BaseProfileListItemWithAllFields
   user: SessionUser | null
   compact?: boolean
-  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   isOwner: boolean
 }) => (
   <article className={styles.container} data-testid="base-card">
@@ -35,7 +33,9 @@ const ProfileBaseCard = ({
       </Link>
       <div className="fr-flex fr-direction-column fr-flex-gap-3v fr-flex-gap-md-1v">
         <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
-          <BaseTitle className="fr-mb-0 fr-h6">{base.title}</BaseTitle>
+          <span className="fr-text--bold fr-text--md fr-mb-0">
+            {base.title}
+          </span>
         </Link>
         <BaseMetadata
           user={null}

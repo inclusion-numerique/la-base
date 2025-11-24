@@ -10,6 +10,7 @@ import {
 } from '@app/web/server/resources/feature/ChangeBase'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
+import { getResourceAttributionWording } from '@app/web/utils/getResourceAttributionWording'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type ReactNode } from 'react'
@@ -74,9 +75,7 @@ const ResourceBaseEdition = ({
           <OwnershipInformation
             user={resource.createdBy}
             base={resource.base}
-            attributionWording={
-              resource.published ? 'resource' : 'draft-resource'
-            }
+            attributionWording={getResourceAttributionWording(resource)}
           />
         ))}
       <form onSubmit={handleSubmit(onSubmit)}>

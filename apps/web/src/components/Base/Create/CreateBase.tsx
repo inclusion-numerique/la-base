@@ -118,6 +118,17 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
         ),
       })
     } catch (error) {
+      // Vérifier si c'est une erreur de contenu suspect
+      if (
+        error instanceof Error &&
+        error.message ===
+          'Contenu suspect détecté - Ce contenu ne respecte pas la charte de notre plateforme'
+      ) {
+        // Rediriger vers la page d'erreur de contenu suspect
+        router.push('/contenu-suspect')
+        return
+      }
+
       if (applyZodValidationMutationErrorsToForm(error, setError)) {
         return
       }

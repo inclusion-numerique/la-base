@@ -40,7 +40,6 @@ const ProfileBases = ({
         user={user}
         base={base}
         key={base.slug}
-        titleAs="h3"
         isOwner={isOwner}
       />
     ))}

@@ -268,7 +268,7 @@ describe('suspiciousProfileDetection', () => {
       nowSpy.mockRestore()
     })
 
-    it('Outright Systems sample: recent account, website present → not suspicious anymore', async () => {
+    it('Outright Systems sample: recent account, website present, no description → suspicious', async () => {
       const created = new Date('2025-10-03T05:53:29.917Z')
       const signedUpAt = new Date('2025-10-03T05:53:29.916Z')
       const updated = new Date('2025-10-03T05:53:29.917Z')
@@ -288,7 +288,7 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(false)
+      expect(result).toBe(true)
       nowSpy.mockRestore()
     })
 
@@ -317,7 +317,7 @@ describe('suspiciousProfileDetection', () => {
       nowSpy.mockRestore()
     })
 
-    it('United College sample: recent account, website present → not suspicious anymore', async () => {
+    it('United College sample: recent account, website present, no description → suspicious', async () => {
       const created = new Date('2025-10-06T12:46:48.663Z')
       const signedUpAt = new Date('2025-10-06T12:46:48.662Z')
       const updated = new Date('2025-10-06T12:46:48.663Z')
@@ -338,7 +338,7 @@ describe('suspiciousProfileDetection', () => {
       } as any)
 
       const result = await isSuspiciousProfile(mockUserId)
-      expect(result).toBe(false)
+      expect(result).toBe(true)
       nowSpy.mockRestore()
     })
   })
