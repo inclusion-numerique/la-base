@@ -54,6 +54,11 @@
       color: var(--blue-france-sun-113-625);
       margin-right: 10px;
     }
+
+    &:focus-visible {
+      outline: 2px solid #0a76f6;
+      outline-offset: -2px;
+    }
   }
 
   .separator {

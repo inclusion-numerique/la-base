@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const newsFeedId = 'news-feed'
 const skipLinks = [
-  { label: "Fil d'actualité", anchor: `#${newsFeedId}` },
+  { label: 'Contenu', anchor: `#${newsFeedId}` },
   footerSkipLink,
 ]
 

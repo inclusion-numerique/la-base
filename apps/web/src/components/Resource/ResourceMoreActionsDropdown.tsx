@@ -64,6 +64,7 @@ export const ResourceMoreActionsDropdown = ({
         >
           <OpenSaveResourceInCollectionModalButton
             size="small"
+            className="fr-border-bottom"
             title={`Enregistrer "${resource.title}" dans une collection`}
             resourceId={resource.id}
           >
@@ -76,7 +77,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {copyLink && (
-        <li>
+        <li className="fr-border-bottom">
           <CopyLinkButton
             size="small"
             priority="tertiary no outline"
@@ -95,7 +96,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && resource.published && (
-        <li>
+        <li className="fr-border-bottom">
           <Link
             className="fr-btn fr-btn--sm"
             href={`/ressources/${resource.slug}/parametres`}
@@ -109,7 +110,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && (
-        <li>
+        <li className="fr-border-bottom">
           <OpenInviteContributorModalButton size="small" resource={resource}>
             <span
               className="ri-user-add-line fr-mr-1w fr-text-label--blue-france"
@@ -120,7 +121,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {resource.published && (
-        <li>
+        <li className="fr-border-bottom">
           <Link
             className="fr-btn fr-btn--sm"
             href={`/ressources/${resource.slug}/avis`}
@@ -134,7 +135,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && (
-        <li>
+        <li className="fr-border-bottom">
           <OpenDeleteResourceModalButton resourceId={resource.id} size="small">
             <span
               className="ri-delete-bin-6-line fr-mr-1w fr-text-label--blue-france"
@@ -145,7 +146,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {!canWrite && (
-        <li>
+        <li className="fr-border-bottom">
           <ResourceReportButton
             user={user}
             resource={resource}

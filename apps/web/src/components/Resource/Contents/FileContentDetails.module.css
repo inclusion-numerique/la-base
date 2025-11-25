@@ -26,7 +26,6 @@
 
 .actions {
   flex-shrink: 0;
-  overflow: hidden;
   display: flex;
   align-items: center;
 }

@@ -47,6 +47,7 @@ const ResourceCard = ({
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
+    tabIndex={0}
   >
     <div className={styles.header}>
       {!children && context === 'list' && (
@@ -60,7 +61,10 @@ const ResourceCard = ({
       )}
       {children}
       {withDate && (
-        <div className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0">
+        <div
+          className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0"
+          aria-hidden="true"
+        >
           <ResourceDates canEdit={isContributor} resource={resource} />
         </div>
       )}
