@@ -78,6 +78,7 @@ export const reportRouter = router({
               select: {
                 name: true,
                 email: true,
+                deleted: true,
               },
             },
           },

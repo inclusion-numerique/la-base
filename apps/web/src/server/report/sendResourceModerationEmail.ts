@@ -12,15 +12,19 @@ export const sendResourceModerationEmail = async ({
   moderatorEmail,
 }: {
   resourceName: string
-  resourceCreator: Pick<User, 'name' | 'email'>
+  resourceCreator: Pick<User, 'name' | 'email' | 'deleted'>
   moderatorName: string
   moderatorEmail: string
 }) => {
+  // Do not send email to deleted users
+  if (resourceCreator.deleted) {
+    return
+  }
   const creatorName = resourceCreator.name || 'Utilisateur'
 
   const result = await emailTransport.sendMail({
     to: resourceCreator.email,
-    from: ServerWebAppConfig.ReportModerator.email,
+    from: ServerWebAppConfig.Email.from,
     replyTo: moderatorEmail,
     subject: 'Notification de signalement et suppression de ressource',
     text: reportedResourceModeration.text({
