@@ -1,5 +1,7 @@
 # Les Bases
 
+[![Coverage Status](https://coveralls.io/repos/github/inclusion-numerique/coop-mediation-numerique/badge.svg?branch=main)](https://coveralls.io/github/inclusion-numerique/coop-mediation-numerique?branch=main)
+
 <h2 id="à-propos">🪧 À propos</h2>
 
 Bienvenue sur les bases ! La plateforme collaborative de partage de ressources & communs numériques à l’échelle nationale. \
