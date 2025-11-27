@@ -528,13 +528,12 @@ jobs:
       - run:
           name: 'Merge coverage reports'
           command: |
+            rm -rf coverage/.nyc_output
             mkdir -p coverage/.nyc_output
-            npx nyc merge ./coverage-reports ./coverage/.nyc_output/out.json
-            npx nyc report --temp-dir ./coverage/.nyc_output --reporter=lcov --report-dir=./coverage
-      - run:
-          name: 'Upload to Coveralls'
-          command: |
-            cat ./coverage/lcov.info | npx coveralls
+            find coverage-reports -name '*.json' -exec cp {} coverage/.nyc_output/ \;
+            npx nyc report --temp-dir ./coverage/.nyc_output --reporter=lcov --reporter=text-summary --report-dir=./coverage
+      - coveralls/upload:
+          coverage_file: ./coverage/lcov.info
 
   deploy_web:
     executor: node22
