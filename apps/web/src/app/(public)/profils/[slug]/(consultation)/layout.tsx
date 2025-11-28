@@ -59,7 +59,7 @@ const ProfileLayout = async ({
     await getProfilePageCounts(profile.slug)
 
   const canView = hasPermission('ReadProfileData')
-  const canWrite = hasPermission('WriteProfile')
+  const canWrite = hasPermission('WriteProfile') && user?.role !== 'Admin'
   const isOwner = hasRole(ProfileRoles.ProfileOwner)
 
   if (!canView) {

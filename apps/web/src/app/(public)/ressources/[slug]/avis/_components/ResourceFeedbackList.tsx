@@ -23,7 +23,6 @@ export const ResourceFeedbackList = ({
   canGiveFeedback: boolean
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-
   return (
     <>
       {!resource.publicFeedback && (

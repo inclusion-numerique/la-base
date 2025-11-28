@@ -9,6 +9,7 @@ import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import { prismaClient } from '@app/web/prismaClient'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -102,7 +103,18 @@ const AdministrationBaseDetailsPage = async ({
         />
         <AdministrationTitle
           icon="ri-stack-line"
-          actions={<DeleteBaseButton baseId={id} />}
+          actions={
+            <div className="fr-flex fr-flex-gap-4v">
+              <Button
+                priority="secondary"
+                linkProps={{ href: getServerUrl(`/bases/${base.slug}/editer`) }}
+                size="small"
+              >
+                Modifier la base
+              </Button>
+              <DeleteBaseButton baseId={id} />
+            </div>
+          }
         >
           {base.title}
         </AdministrationTitle>
