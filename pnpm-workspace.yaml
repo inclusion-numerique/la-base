@@ -11,4 +11,4 @@ packages:
   - packages/test
   - packages/fixtures
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 21600
