@@ -7,15 +7,6 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal, ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import { useRouter } from 'next/navigation'
 
-const {
-  Component: ResolveModal,
-  close: closeResolveModal,
-  buttonProps: resolveModalNativeButtonProps,
-} = createModal({
-  id: 'resolve-reported-resource',
-  isOpenedByDefault: false,
-})
-
 export const resolveReportedResourceModalProps = (
   onResolve: () => void,
 ): ModalProps => ({
@@ -45,6 +36,14 @@ export const resolveReportedResourceModalProps = (
 })
 
 const ResolveReportedResourceModal = ({ reportId }: { reportId: string }) => {
+  const {
+    Component: ResolveModal,
+    close: closeResolveModal,
+    buttonProps: resolveModalNativeButtonProps,
+  } = createModal({
+    id: `resolve-reported-resource-${reportId}`,
+    isOpenedByDefault: false,
+  })
   const router = useRouter()
   const mutate = trpc.report.resolveReport.useMutation()
 

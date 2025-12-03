@@ -10,15 +10,6 @@ import { createModal, ModalProps } from '@codegouvfr/react-dsfr/Modal'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { useRouter } from 'next/navigation'
 
-const {
-  Component: DeleteModal,
-  close: closeDeleteModal,
-  buttonProps: deleteModalNativeButtonProps,
-} = createModal({
-  id: 'delete-reported-resource',
-  isOpenedByDefault: false,
-})
-
 export const deleteReportedResourceModalProps = (
   onDelete: () => void,
 ): ModalProps => ({
@@ -44,7 +35,7 @@ export const deleteReportedResourceModalProps = (
   ],
   children: (
     <>
-      Confirmez-vous la suppression de la ressource ? Tous les contenus de la
+      Confirmez-vous la suppression de la ressource ? Tous les contenus de la
       ressource seront supprimés.
       <Notice
         className="fr-mt-2w"
@@ -69,6 +60,15 @@ const ReportedResourceDeletion = ({
   resource: Pick<Resource, 'id' | 'title'>
   user: SessionUser | null
 }) => {
+  const {
+    Component: DeleteModal,
+    close: closeDeleteModal,
+    buttonProps: deleteModalNativeButtonProps,
+  } = createModal({
+    id: `delete-reported-resource-${reportId}`,
+    isOpenedByDefault: false,
+  })
+
   const router = useRouter()
   const mutate = trpc.report.deleteResource.useMutation()
 

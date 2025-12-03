@@ -1,5 +1,6 @@
 import { compileMjml } from '@app/emails/mjml'
 import { reportedResourceModeration } from '@app/emails/templates/reportedResourceModeration'
+import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
@@ -21,12 +22,15 @@ export const sendResourceModerationEmail = async ({
     return
   }
   const creatorName = resourceCreator.name || 'Utilisateur'
+  const subject = PublicWebAppConfig.isMain
+    ? 'Notification de signalement et suppression de ressource'
+    : '[TEST] Notification de signalement et suppression de ressource'
 
   const result = await emailTransport.sendMail({
     to: resourceCreator.email,
     from: ServerWebAppConfig.Email.from,
     replyTo: moderatorEmail,
-    subject: 'Notification de signalement et suppression de ressource',
+    subject,
     text: reportedResourceModeration.text({
       resourceName,
       creatorName,
