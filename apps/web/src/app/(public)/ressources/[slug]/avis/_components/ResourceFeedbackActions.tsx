@@ -21,9 +21,9 @@ export const ResourceFeedbackActions = ({
             type: 'button',
             size: 'small',
             priority: 'tertiary no outline',
-            className: 'fr-pr-0 fr-pl-1w fr-my-0 fr-py-0',
+            className: 'fr-px-1w fr-my-0 fr-py-0',
             iconId: 'fr-icon-edit-line',
-            title: "Modifier l'avis",
+            children: 'Modifier',
             onClick: onEdit,
             nativeButtonProps: {
               'data-testid': 'update-feedback',
@@ -33,13 +33,13 @@ export const ResourceFeedbackActions = ({
             type: 'button',
             size: 'small',
             priority: 'tertiary no outline',
-            className: 'fr-pr-0 fr-pl-1w fr-my-0 fr-py-0',
+            className: 'fr-px-1w fr-my-0 fr-py-0',
             nativeButtonProps: {
               ...nativeButtonProps,
               'data-testid': 'delete-feedback',
             },
             iconId: 'fr-icon-delete-bin-line',
-            title: "Supprimer l'avis",
+            children: 'Supprimer',
           },
         ]}
       />
