@@ -1,8 +1,11 @@
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
+import { ResourceFeedbackActionsThread } from '@app/web/app/(public)/ressources/[slug]/avis/_components/ResourceFeedbackThread'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import type { ResourceProjection } from '@app/web/server/resources/feature/createResourceProjection'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { trpc } from '@app/web/trpc'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
@@ -11,8 +14,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ReadMore } from './ReadMore'
 import { ResourceFeedbackActions } from './ResourceFeedbackActions'
+import { ResourceFeedbackComment } from './ResourceFeedbackComment'
 
-const {
+export const {
   Component: DeleteModal,
   close: closeDeleteModal,
   buttonProps: deleteModalNativeButtonProps,
@@ -25,12 +29,15 @@ const ResourceFeedback = ({
   feedback,
   isOwner,
   canSendMail,
+  resource,
   onEdit,
+  user,
 }: {
   feedback: {
     resourceId: string
     created: Date
     updated: Date
+    sentById: string
     sentBy: {
       image: { id: string; altText: string | null } | null
       firstName: string | null
@@ -42,10 +49,50 @@ const ResourceFeedback = ({
     }
     comment: string | null
     rating: number
+    comments?: Array<{
+      id: string
+      content: string
+      created: Date
+      updated: Date
+      parentCommentId: string | null
+      author: {
+        id: string
+        name: string | null
+        slug: string | null
+        firstName: string | null
+        lastName: string | null
+        image: {
+          id: string
+          altText: string | null
+        } | null
+        isPublic: boolean | null
+      }
+      replies?: Array<{
+        id: string
+        content: string
+        created: Date
+        updated: Date
+        parentCommentId: string | null
+        author: {
+          id: string
+          name: string | null
+          slug: string | null
+          firstName: string | null
+          lastName: string | null
+          image: {
+            id: string
+            altText: string | null
+          } | null
+          isPublic: boolean | null
+        }
+      }>
+    }>
   }
   isOwner: boolean
   canSendMail: boolean
   onEdit: () => void
+  user: SessionUser | null
+  resource: ResourceProjection
 }) => {
   const router = useRouter()
   const mutate = trpc.resource.deleteFeedback.useMutation()
@@ -109,12 +156,6 @@ const ResourceFeedback = ({
               Contacter
             </Link>
           )}
-          <ResourceFeedbackActions
-            className="fr-unhidden-sm fr-hidden"
-            nativeButtonProps={deleteModalNativeButtonProps}
-            isOwner={isOwner}
-            onEdit={onEdit}
-          />
         </div>
         <div className="fr-mt-2w">
           <FeedbackBadge value={feedback.rating} />
@@ -124,12 +165,36 @@ const ResourceFeedback = ({
             <ReadMore limit={660}>{feedback.comment}</ReadMore>
           </p>
         )}
+
         <ResourceFeedbackActions
-          className="fr-hidden-sm fr-mt-2w fr-flex fr-direction-row-reverse"
+          className="fr-mt-2w"
           nativeButtonProps={deleteModalNativeButtonProps}
           isOwner={isOwner}
           onEdit={onEdit}
         />
+
+        <ResourceFeedbackActionsThread
+          isFeedbackOwner={isOwner}
+          user={user}
+          feedback={feedback}
+          resource={resource}
+        />
+
+        {feedback.comments && feedback.comments.length > 0 && (
+          <div className="fr-mt-3w">
+            <hr className="fr-mt-4w fr-pb-4w" />
+            {feedback.comments.map((comment) => (
+              <ResourceFeedbackComment
+                key={comment.id}
+                comment={comment}
+                user={user}
+                resource={resource}
+                feedback={feedback}
+                owner={isOwner}
+              />
+            ))}
+          </div>
+        )}
       </div>
       <DeleteModal
         title="Supprimer votre avis"
