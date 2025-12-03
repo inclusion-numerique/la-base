@@ -28,3 +28,12 @@ export const ResourceReportValidation = z.object({
 })
 
 export type ResourceReportData = z.infer<typeof ResourceReportValidation>
+
+export const UpdateResourceReportValidation = z.object({
+  reportId: z.string().uuid(),
+  privateComment: z.string().optional(),
+})
+
+export type UpdateResourceReportData = z.infer<
+  typeof UpdateResourceReportValidation
+>

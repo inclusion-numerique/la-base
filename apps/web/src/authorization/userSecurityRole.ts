@@ -4,6 +4,7 @@ export const UserSecurityRoles = {
   User: 'User',
   Support: 'Support',
   Admin: 'Admin',
+  Moderator: 'Moderator',
 } as const
 
 export type UserSecurityRole =

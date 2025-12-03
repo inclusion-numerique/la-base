@@ -11,7 +11,7 @@ import styles from './AdministrationLayout.module.css'
 const AdministrationLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()
 
-  if (!canAccessAdministration(user)) {
+  if (!user || !canAccessAdministration(user)) {
     notFound()
   }
   return (
@@ -26,7 +26,7 @@ const AdministrationLayout = async ({ children }: PropsWithChildren) => {
           )}
         >
           <div className={styles.sideNavContainer}>
-            <AdministrationSideMenu />
+            <AdministrationSideMenu user={user} />
           </div>
           <div className={styles.pageContainer}>{children}</div>
         </div>
