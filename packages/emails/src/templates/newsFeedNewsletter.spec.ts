@@ -13,7 +13,7 @@ describe('Template: newsFeedNewsletter', () => {
     })
 
     expect(mjml).toContain(
-      'Résumé mensuel des dernières publications liés à vos préférences',
+      'Résumé mensuel des dernières publications lié à vos préférences',
     )
     expect(mjml).toContain(
       `Ce mois-ci, découvrez ${count} nouvelles ressources liés à vos préférences publiées sur Les Bases.`,

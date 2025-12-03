@@ -13,7 +13,7 @@ import React from 'react'
 
 export const newsFeedNewsletter = {
   text: (): string =>
-    `Résumé mensuel des dernières publications liés à vos préférences`,
+    `Résumé mensuel des dernières publications lié à vos préférences`,
   mjml: ({
     count,
     resources,
@@ -23,13 +23,13 @@ export const newsFeedNewsletter = {
   }): string =>
     renderToMjml(
       <LayoutWithFooter
-        title="Résumé mensuel des dernières publications liés à vos préférences"
-        preview="Résumé mensuel des dernières publications liés à vos préférences"
+        title="Résumé mensuel des dernières publications lié à vos préférences"
+        preview="Résumé mensuel des dernières publications lié à vos préférences"
       >
         <MjmlSection paddingTop={0}>
           <MjmlColumn>
             <MjmlText fontSize="22px" fontWeight="700" color="#000091">
-              Résumé mensuel des dernières publications liés à vos préférences
+              Résumé mensuel des dernières publications lié à vos préférences
             </MjmlText>
             <MjmlText fontSize="18px" paddingBottom="0">
               Ce mois-ci, découvrez {count} nouvelles ressources liés à vos
