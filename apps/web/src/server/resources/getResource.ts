@@ -53,6 +53,37 @@ export const getResourceSelect = (_user: { id: string } | null) =>
             },
           },
         },
+        comments: {
+          where: {
+            deleted: null,
+          },
+          orderBy: {
+            created: 'asc',
+          },
+          select: {
+            id: true,
+            content: true,
+            created: true,
+            updated: true,
+            parentCommentId: true,
+            author: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+                firstName: true,
+                lastName: true,
+                image: {
+                  select: {
+                    id: true,
+                    altText: true,
+                  },
+                },
+                isPublic: true,
+              },
+            },
+          },
+        },
       },
     },
     createdBy: {

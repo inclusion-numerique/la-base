@@ -87,6 +87,8 @@ export const ResourceFeedbackList = ({
               isOwner={isOwner}
               canSendMail={!canGiveFeedback}
               onEdit={() => setIsEditing(true)}
+              user={user}
+              resource={resource}
             />
           )
         })}

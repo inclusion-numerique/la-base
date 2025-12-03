@@ -14,6 +14,8 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
+import { SendResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/sendResourceFeedbackComment'
+import { UpdateResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/updateResourceFeedbackComment'
 import {
   type CreateResourceCommand,
   CreateResourceCommandClientValidation,
@@ -318,6 +320,88 @@ export const resourceRouter = router({
             sentById: user.id,
             resourceId: input.resourceId,
           },
+        },
+      })
+    }),
+  addFeedbackComment: protectedProcedure
+    .input(SendResourceFeedbackCommentValidation)
+    .mutation(async ({ input, ctx: { user } }) => {
+      const feedback = await prismaClient.resourceFeedback.findUnique({
+        where: {
+          sentById_resourceId: {
+            sentById: input.feedbackSentById,
+            resourceId: input.feedbackResourceId,
+          },
+        },
+        select: {
+          resource: {
+            select: resourceAuthorizationTargetSelect,
+          },
+        },
+      })
+
+      if (!feedback) {
+        throw notFoundError()
+      }
+
+      return prismaClient.resourceFeedbackComment.create({
+        data: {
+          content: input.content,
+          feedbackSentById: input.feedbackSentById,
+          feedbackResourceId: input.feedbackResourceId,
+          parentCommentId: input.parentCommentId,
+          authorId: user.id,
+        },
+      })
+    }),
+  deleteFeedbackComment: protectedProcedure
+    .input(z.object({ commentId: z.string().uuid() }))
+    .mutation(async ({ input, ctx: { user } }) => {
+      const comment = await prismaClient.resourceFeedbackComment.findUnique({
+        where: { id: input.commentId },
+        select: {
+          id: true,
+          authorId: true,
+        },
+      })
+
+      if (!comment || comment.authorId !== user.id) {
+        throw notFoundError()
+      }
+
+      const timestamp = new Date()
+
+      return prismaClient.resourceFeedbackComment.update({
+        where: { id: input.commentId },
+        data: {
+          deleted: timestamp,
+          updated: timestamp,
+        },
+      })
+    }),
+
+  updateFeedbackComment: protectedProcedure
+    .input(UpdateResourceFeedbackCommentValidation)
+    .mutation(async ({ input, ctx: { user } }) => {
+      const comment = await prismaClient.resourceFeedbackComment.findUnique({
+        where: { id: input.commentId },
+        select: {
+          id: true,
+          authorId: true,
+        },
+      })
+
+      if (!comment || comment.authorId !== user.id) {
+        throw notFoundError()
+      }
+
+      const timestamp = new Date()
+
+      return prismaClient.resourceFeedbackComment.update({
+        where: { id: input.commentId },
+        data: {
+          content: input.content,
+          updated: timestamp,
         },
       })
     }),
