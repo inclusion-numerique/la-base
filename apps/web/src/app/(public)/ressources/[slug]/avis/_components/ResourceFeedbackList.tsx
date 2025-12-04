@@ -23,6 +23,7 @@ export const ResourceFeedbackList = ({
   canGiveFeedback: boolean
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+  const isAdmin = user?.role === 'Admin'
   return (
     <>
       {!resource.publicFeedback && (
@@ -34,7 +35,7 @@ export const ResourceFeedbackList = ({
                 Commentaires publics désactivés sur cette ressource
               </span>
               <span className="fr-text--regular">
-                {canGiveFeedback
+                {canGiveFeedback || isAdmin
                   ? 'Votre avis sera uniquement visible par le créateur et les contributeurs de la ressource afin de contribuer à l’amélioration de leur ressource.'
                   : 'Les commentaires sont uniquement visibles par vous et les contributeurs de votre ressource.'}
               </span>
@@ -43,14 +44,15 @@ export const ResourceFeedbackList = ({
         />
       )}
       <h1 className="fr-sr-only">Avis - {resource.title}</h1>
-      {canGiveFeedback && !resource.resourceFeedback.some(isGivenBy(user)) && (
-        <div className="fr-border fr-border-radius--8 fr-pt-3w fr-px-3w fr-mb-3w">
-          <h2 className="fr-sr-only">
-            Quel est votre avis à propos de cette ressource ?
-          </h2>
-          <ResourceFeedbackForm resource={resource} user={user} />
-        </div>
-      )}
+      {(canGiveFeedback || isAdmin) &&
+        !resource.resourceFeedback.some(isGivenBy(user)) && (
+          <div className="fr-border fr-border-radius--8 fr-pt-3w fr-px-3w fr-mb-3w">
+            <h2 className="fr-sr-only">
+              Quel est votre avis à propos de cette ressource ?
+            </h2>
+            <ResourceFeedbackForm resource={resource} user={user} />
+          </div>
+        )}
       <div className="fr-mb-15w">
         <h2 className="fr-h4">
           {resource._count.resourceFeedback} Avis sur la ressource
