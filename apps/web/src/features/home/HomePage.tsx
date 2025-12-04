@@ -2,7 +2,7 @@ import Newsletter from '@app/web/app/(public)/Newsletter'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import WhoAreWe from '@app/web/features/home/components/WhoAreWe'
-import { contentId } from '@app/web/utils/skipLinks'
+import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
 import Banner from './components/Banner'
@@ -24,7 +24,12 @@ const HomePage = async ({
 
   return (
     <>
-      <SkipLinksPortal />
+      <SkipLinksPortal
+        links={[
+          { label: 'Recherche', anchor: `#search-bar` },
+          ...defaultSkipLinks,
+        ]}
+      />
       <main id={contentId}>
         <Banner />
         <div className="fr-container fr-pt-8w fr-pb-0 fr-py-md-10w">

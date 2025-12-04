@@ -14,9 +14,7 @@ export const sendNewsFeedNewsletterEmail = async (
     to: email,
     from: ServerWebAppConfig.Email.from,
     replyTo: PublicWebAppConfig.contactEmail,
-
-    subject:
-      'Résumé mensuel des dernières publications liés à vos préférences.',
+    subject: 'Résumé mensuel des dernières publications lié à vos préférences.',
     text: newsFeedNewsletter.text(),
     html: compileMjml(
       newsFeedNewsletter.mjml({

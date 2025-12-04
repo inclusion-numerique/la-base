@@ -9,6 +9,7 @@ import { metadataTitle } from '@app/web/app/metadataTitle'
 import { prismaClient } from '@app/web/prismaClient'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
+import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -72,7 +73,20 @@ const AdministrationRessourceDetailsPage = async ({
       />
       <AdministrationTitle
         icon="ri-article-line"
-        actions={<DeleteResourceButton resourceId={id} />}
+        actions={
+          <div className="fr-flex fr-flex-gap-4v">
+            <Button
+              priority="secondary"
+              linkProps={{
+                href: getServerUrl(`/ressources/${resource.slug}/editer`),
+              }}
+              size="small"
+            >
+              Modifier la ressource
+            </Button>
+            <DeleteResourceButton resourceId={id} />
+          </div>
+        }
       >
         {resource.title}
       </AdministrationTitle>

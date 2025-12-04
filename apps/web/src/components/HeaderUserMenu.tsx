@@ -12,7 +12,7 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
     <ul>
       <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w fr-px-md-0 fr-px-2w">
         <Link
-          className="fr-btn fr-flex fr-align-items-center fr-border-bottom-0"
+          className="fr-btn fr-flex fr-align-items-center"
           href={`/profils/${user.slug}`}
         >
           <RoundProfileImage className="fr-mr-3v" user={user} />

@@ -173,14 +173,14 @@ const Header = ({
                     />
                   </Link>
                 </li>
-                <li className="fr-position-relative fr-hidden fr-unhidden-sm">
+                <li className="fr-position-relative fr-hidden fr-unhidden-sm fr-px-md-0 fr-px-2w">
                   <Tooltip title="Fil d'actualité">
                     {user && <NewsFeedBadge />}
                     <Button
                       data-testid="news-feed-button"
                       className={classNames(
-                        'fr-border-radius--8 fr-p-0',
-                        styles.newsFeedButton,
+                        styles.headerNewsFeedButton,
+                        'fr-p-0 fr-border-radius--8',
                       )}
                       linkProps={{
                         href: user
@@ -194,10 +194,16 @@ const Header = ({
                     >
                       <span
                         className={classNames(
-                          'ri-flashlight-fill fr-text--sm',
+                          'ri-flashlight-fill fr-text--sm fr-border-radius--8 fr-p-0',
                           styles.newsFeedIcon,
+                          styles.newsFeedButton,
                         )}
                       />
+                      <span
+                        className={classNames(styles.newsFeedLabel, 'fr-ml-1v')}
+                      >
+                        Fil d'actualité
+                      </span>
                     </Button>
                   </Tooltip>
                 </li>
@@ -243,7 +249,7 @@ const Header = ({
       <div className="fr-container">
         <button
           type="button"
-          className="fr-btn--close fr-btn fr-hidden-sm"
+          className="fr-btn--close fr-btn"
           aria-controls="header-modal"
           title="Fermer"
         >

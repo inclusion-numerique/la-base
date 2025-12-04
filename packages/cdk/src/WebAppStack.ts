@@ -312,7 +312,7 @@ export class WebAppStack extends TerraformStack {
           name: 'monthly-newsletter-news-feed',
           payload: undefined,
         },
-        schedule: '0 0 1 * *',
+        schedule: '0 8 1 * *',
         containerId: container.id,
       })
     }

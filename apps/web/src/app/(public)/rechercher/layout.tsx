@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const resultsId = 'resultats'
 const skipLinks = [
   { label: 'Faire une recherche', anchor: `#${rechercherId}` },
-  { label: 'Résultats', anchor: `#${resultsId}` },
+  { label: 'Contenu', anchor: `#${resultsId}` },
   footerSkipLink,
 ]
 

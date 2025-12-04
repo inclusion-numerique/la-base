@@ -48,9 +48,10 @@ model Session {
 }
 
 enum UserRole {
-  User    @map("user")
-  Support @map("support")
-  Admin   @map("admin")
+  User      @map("user")
+  Support   @map("support")
+  Admin     @map("admin")
+  Moderator @map("moderator")
 
   @@map("user_role")
 }
@@ -72,27 +73,27 @@ model User {
   twitter       String?
   linkedin      String?
 
-  image               Image?    @relation(fields: [imageId], references: [id])
-  imageId             String?   @unique @map("image_id") @db.Uuid
+  image               Image?         @relation(fields: [imageId], references: [id])
+  imageId             String?        @unique @map("image_id") @db.Uuid
   location            String?
   title               String?
   description         String?
   department          String?
   accounts            Account[]
   sessions            Session[]
-  isPublic            Boolean   @default(true) @map("is_public")
+  isPublic            Boolean        @default(true) @map("is_public")
   deleted             DateTime?
-  deletedReason       DeletedReason?        @map("deleted_reason")
-  hasSeenV2Onboarding DateTime? @map("has_seen_v2_onboarding")
-  timezone            String    @default("Europe/Paris")
+  deletedReason       DeletedReason? @map("deleted_reason")
+  hasSeenV2Onboarding DateTime?      @map("has_seen_v2_onboarding")
+  timezone            String         @default("Europe/Paris")
   // Created by a fixture system, can be reset and will only be here on preview envs
-  isFixture           Boolean   @default(false) @map("is_fixture")
+  isFixture           Boolean        @default(false) @map("is_fixture")
   // Date of signup, can be used when an user invite another to join a base, we need to know when the user will sign up to accept or decline the invitation
-  signedUpAt          DateTime? @map("signed_up_at")
+  signedUpAt          DateTime?      @map("signed_up_at")
   // Date of last CGU acceptance
-  lastCguAcceptedAt   DateTime? @map("last_cgu_accepted_at")
+  lastCguAcceptedAt   DateTime?      @map("last_cgu_accepted_at")
   // Version of the CGU accepted
-  cguVersion          String?   @map("cgu_version")
+  cguVersion          String?        @map("cgu_version")
 
   impersonator        Session?               @relation(name: "impersonator")
   created             DateTime               @default(now())
@@ -653,8 +654,11 @@ model ResourceReport {
   reason ResourceReportReason
 
   comment String
+  privateComment String?
 
-  created DateTime @default(now())
+  created   DateTime  @default(now())
+  updated   DateTime  @default(now())
+  processed DateTime?
 
   @@index([resourceId])
   @@index([sentById])
