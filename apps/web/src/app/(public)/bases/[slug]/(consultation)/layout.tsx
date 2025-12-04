@@ -50,7 +50,7 @@ const BaseLayout = async ({
     base,
   } = await getBasePageContext(slug)
 
-  const canWrite = hasPermission('WriteBase') && user?.role !== 'Admin'
+  const canWrite = hasPermission('WriteBase')
   const canView = hasPermission('ReadBaseData')
 
   if (!canView) {

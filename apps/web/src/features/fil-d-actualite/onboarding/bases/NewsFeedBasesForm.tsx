@@ -2,8 +2,8 @@ import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseCard from '@app/web/components/Base/Card/BaseCard'
 import { UserNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import { NewsFeedRecommendedBases } from '@app/web/features/fil-d-actualite/db/getRecommendedBasesToFollow'
+import { NewsFeedBasesNextStep } from '@app/web/features/fil-d-actualite/onboarding/bases/NewsFeedBasesNextStep'
 import NewsFeedOnboardingSkipButton from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingSkipButton'
-import Button from '@codegouvfr/react-dsfr/Button'
 
 export default function NewsFeedBasesForm({
   bases,
@@ -22,14 +22,7 @@ export default function NewsFeedBasesForm({
         ))}
       </div>
       <div className="fr-width-full fr-mt-12v">
-        <Button
-          className="fr-width-full fr-flex fr-justify-content-center"
-          linkProps={{
-            href: '/fil-d-actualite/onboarding/resume-mensuel',
-          }}
-        >
-          Suivant
-        </Button>
+        <NewsFeedBasesNextStep />
         <div className="fr-flex fr-justify-content-center fr-mt-6v">
           <NewsFeedOnboardingSkipButton userNewsFeed={userNewsFeed} />
         </div>
