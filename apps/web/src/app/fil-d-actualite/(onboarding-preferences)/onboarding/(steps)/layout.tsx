@@ -1,9 +1,15 @@
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingBreadcrumb from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingBreadcrumb'
 import { contentId } from '@app/web/utils/skipLinks'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+
+export const metadata: Metadata = {
+  title: metadataTitle("Fil d'actualité - Onboarding"),
+}
 
 export default async function NewsFeedOnboardingLayout({
   children,
