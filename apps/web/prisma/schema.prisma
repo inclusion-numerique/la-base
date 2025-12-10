@@ -95,28 +95,30 @@ model User {
   // Version of the CGU accepted
   cguVersion          String?        @map("cgu_version")
 
-  impersonator        Session?               @relation(name: "impersonator")
-  created             DateTime               @default(now())
-  updated             DateTime               @default(now())
-  lastLogin           DateTime?              @map("last_login")
-  ownedBases          Base[]
-  createdResources    Resource[]
-  uploads             Upload[]
-  resourceEvent       ResourceEvent[]
-  bases               BaseMembers[]          @relation(name: "member")
-  invitedMembers      BaseMembers[]          @relation(name: "invitedBy")
-  resources           ResourceContributors[]
-  collections         Collection[]
-  resourceViews       ResourceView[]
-  sentResourceReports ResourceReport[]
-  baseFollows         BaseFollow[]
-  profileFollows      ProfileFollow[]        @relation(name: "profile_follow_follower")
-  followedBy          ProfileFollow[]        @relation(name: "profile_follow_followed")
-  searches            SearchExecution[]
-  feedbacks           Feedback[]
-  resourceFeedback    ResourceFeedback[]
+  impersonator           Session?               @relation(name: "impersonator")
+  created                DateTime               @default(now())
+  updated                DateTime               @default(now())
+  lastLogin              DateTime?              @map("last_login")
+  ownedBases             Base[]
+  createdResources       Resource[]
+  uploads                Upload[]
+  resourceEvent          ResourceEvent[]
+  bases                  BaseMembers[]          @relation(name: "member")
+  invitedMembers         BaseMembers[]          @relation(name: "invitedBy")
+  resources              ResourceContributors[]
+  collections            Collection[]
+  resourceViews          ResourceView[]
+  sentResourceReports    ResourceReport[]
+  baseFollows            BaseFollow[]
+  profileFollows         ProfileFollow[]        @relation(name: "profile_follow_follower")
+  followedBy             ProfileFollow[]        @relation(name: "profile_follow_followed")
+  searches               SearchExecution[]
+  feedbacks              Feedback[]
+  resourceFeedback       ResourceFeedback[]
   resourceFeedbackComments ResourceFeedbackComment[]
-  newsFeed            NewsFeed?
+  newsFeed               NewsFeed?
+  notifications          Notifications[]        @relation(name: "notifications")
+  initiatedNotifications Notifications[]        @relation(name: "initiator")
 
   featuredBlock   FeaturedBlock? @relation("profile")
   featuredBlockId String?        @unique @db.Uuid
@@ -202,6 +204,7 @@ model Base {
 
   highlightResources   HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
   highlightCollections Boolean                 @default(true) @map("highlight_collections")
+  notifications        Notifications[]
 
   @@index([createdById])
   @@map("bases")
@@ -380,6 +383,7 @@ model Resource {
   resourceFeedback ResourceFeedback[]
   featuredBlock    FeaturedBlock?         @relation("resource")
   featuredBlockId  String?                @unique @db.Uuid
+  notifications    Notifications[]
 
   @@index([baseId])
   @@index([createdById])
@@ -654,7 +658,7 @@ model ResourceReport {
 
   reason ResourceReportReason
 
-  comment String
+  comment        String
   privateComment String?
 
   created   DateTime  @default(now())
@@ -881,4 +885,47 @@ model NewsFeed {
   hasCompleteOnboarding Boolean @default(false) @map("has_complete_onboarding")
 
   @@map("news_feed")
+}
+
+enum NotificationType {
+  ReportedResource       @map("reported_resource")
+  ResourceFeedback       @map("resource_feedback")
+  ResourceModification   @map("resource_modification")
+  ResourceDeletion       @map("resource_deletion")
+  ResourceComment        @map("resource_comment")
+  AcceptedBaseInvitation @map("accepted_base_invitation")
+  DeclinedBaseInvitation @map("declined_base_invitation")
+  BaseRoleChange         @map("base_role_change")
+  BaseDeletion           @map("base_deletion")
+  BaseMemberDeletion     @map("base_member_deletion")
+  AskJoinBase            @map("ask_join_base")
+  AcceptedAskJoinBase    @map("accepted_ask_join_base")
+  DeclinedAskJoinBase    @map("declined_ask_join_base")
+
+  @@map("notification_type")
+}
+
+model Notifications {
+  id String @id @default(uuid()) @db.Uuid
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, name: "notifications")
+  userId String @map("user_id") @db.Uuid
+
+  type NotificationType
+
+  resource   Resource? @relation(fields: [resourceId], references: [id])
+  resourceId String?   @map("resource_id") @db.Uuid
+
+  base   Base?   @relation(fields: [baseId], references: [id])
+  baseId String? @map("base_id") @db.Uuid
+
+  initiator   User?   @relation(fields: [initiatorId], references: [id], name: "initiator", onDelete: Cascade)
+  initiatorId String? @map("initiator_id") @db.Uuid
+
+  isBaseNewRoleAdmin Boolean? @map("is_base_new_role_admin") 
+
+  created    DateTime  @default(now())
+  lastSeenAt DateTime? @map("last_seen_at")
+
+  @@map("notifications")
 }

@@ -19,11 +19,17 @@ const ResourceActions = ({
   canWrite: boolean
 }) => {
   const isPublished = !!resource.published
+  const resourceCreator = user?.id === resource.createdById
+  const isAdmin = user?.role === 'Admin'
+  // Admins who are NOT resource creators should see normal user actions
+  const adminAsNormalUser = isAdmin && !resourceCreator
+  const showEditActions = canWrite && !adminAsNormalUser
+  const showUserActions = !canWrite || adminAsNormalUser
 
   return (
     <div className={styles.container}>
       <div>
-        {canWrite && (
+        {showEditActions && (
           <>
             <Button
               size="small"
@@ -53,7 +59,7 @@ const ResourceActions = ({
         {isPublished && (
           <>
             <SaveResourceInCollectionButton
-              className={canWrite ? 'fr-unhidden-sm fr-hidden' : ''}
+              className={showEditActions ? 'fr-unhidden-sm fr-hidden' : ''}
               size="small"
               priority="secondary"
               resource={resource}
@@ -61,7 +67,7 @@ const ResourceActions = ({
               data-testid="save-resource-in-collection-button"
               iconPosition="left"
             >
-              {canWrite ? undefined : 'Enregistrer'}
+              {showEditActions ? undefined : 'Enregistrer'}
             </SaveResourceInCollectionButton>
             <CopyLinkButton
               className="fr-unhidden-sm fr-hidden"
@@ -75,9 +81,9 @@ const ResourceActions = ({
         )}
       </div>
       <div>
-        {!isPublished && canWrite && (
+        {!isPublished && showEditActions && (
           <ResourceMoreActionsDropdown
-            canWrite
+            canWrite={showEditActions}
             saveResourceInCollection={false}
             copyLink={false}
             resource={resource}
@@ -95,7 +101,7 @@ const ResourceActions = ({
         )}
         {isPublished && (
           <>
-            {!canWrite && (
+            {showUserActions && (
               <>
                 <Link
                   className="fr-btn fr-btn--secondary fr-btn--sm fr-unhidden-sm fr-hidden"
@@ -122,9 +128,9 @@ const ResourceActions = ({
                 </span>
               </>
             )}
-            {canWrite && (
+            {showEditActions && (
               <ResourceMoreActionsDropdown
-                canWrite
+                canWrite={showEditActions}
                 saveResourceInCollection="sm"
                 copyLink={false}
                 resource={resource}

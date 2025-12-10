@@ -1,0 +1,28 @@
+.container {
+  @media (min-width: 48rem) {
+    min-width: 498px !important;
+  }
+}
+
+.notificationItem {
+  cursor: pointer;
+}
+
+.notificationItem:hover {
+  background-color: #f6f6f6;
+}
+
+.notificationContainer {
+  @media (min-width: 48rem) {
+    max-height: 560px;
+    overflow-y: auto;
+  }
+}
+
+.headerSeparator {
+  border-bottom: none;
+
+  @media (min-width: 48rem) {
+    border-bottom: var(--slim-grey-border);
+  }
+}

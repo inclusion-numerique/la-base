@@ -30,6 +30,7 @@ export const Dropdown = ({
   size,
   displayDropdownArrow = true,
   'data-testid': dataTestId,
+  onClickOutside,
 }: {
   id: string
   control: ReactNode
@@ -43,6 +44,7 @@ export const Dropdown = ({
   size?: ButtonProps['size']
   displayDropdownArrow?: boolean
   'data-testid'?: string
+  onClickOutside?: () => void
 }) => {
   const formattedId = id.replace('-', '_')
   const [isOpen, setIsOpen] = React.useState(false)
@@ -95,6 +97,9 @@ export const Dropdown = ({
     }
 
     setIsOpen(false)
+    if (onClickOutside) {
+      onClickOutside()
+    }
   })
 
   useEffect(() => {
