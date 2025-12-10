@@ -118,7 +118,25 @@ export const resourceRouter = router({
             : ResourcePermissions.WriteResource,
         ),
       )
-      return handleResourceMutationCommand(command, { user })
+
+      const result = await handleResourceMutationCommand(command, { user })
+
+      if (resource.createdById !== user.id) {
+        await prismaClient.notifications.create({
+          data: {
+            userId: resource.createdById,
+            type:
+              command.name === 'Delete'
+                ? 'ResourceDeletion'
+                : 'ResourceModification',
+            resourceId: resource.id,
+            initiatorId: user.id,
+            baseId: resource.baseId,
+          },
+        })
+      }
+
+      return result
     }),
   addToCollection: protectedProcedure
     .input(z.object({ resourceId: z.string(), collectionId: z.string() }))
@@ -288,8 +306,17 @@ export const resourceRouter = router({
     }),
   feedback: protectedProcedure
     .input(SendResourceFeedbackValidation)
-    .mutation(async ({ input, ctx: { user } }) =>
-      prismaClient.resourceFeedback.upsert({
+    .mutation(async ({ input, ctx: { user } }) => {
+      const resource = await prismaClient.resource.findUnique({
+        where: { id: input.resourceId },
+        select: { createdById: true },
+      })
+
+      if (!resource) {
+        throw notFoundError()
+      }
+
+      const feedback = await prismaClient.resourceFeedback.upsert({
         where: {
           sentById_resourceId: {
             sentById: user.id,
@@ -303,8 +330,21 @@ export const resourceRouter = router({
           updated: new Date(),
           deleted: null,
         },
-      }),
-    ),
+      })
+
+      if (resource.createdById !== user.id) {
+        await prismaClient.notifications.create({
+          data: {
+            userId: resource.createdById,
+            type: 'ResourceFeedback',
+            resourceId: input.resourceId,
+            initiatorId: user.id,
+          },
+        })
+      }
+
+      return feedback
+    }),
   deleteFeedback: protectedProcedure
     .input(z.object({ resourceId: z.string() }))
     .mutation(async ({ input, ctx: { user } }) => {

@@ -1,4 +1,3 @@
-import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import BaseImage from '@app/web/components/BaseImage'
 import IconInSquare from '@app/web/components/IconInSquare'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
@@ -22,34 +21,12 @@ import {
   themeCategories,
   themeLabels,
 } from '@app/web/themes/themes'
+import { formatTimeAgo } from '@app/web/utils/formatTimeAgo'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
 import styles from './NewsFeedOwnershipInformation.module.css'
-
-const formatTimeAgo = (mostRecentDate: Date): string => {
-  const now = new Date()
-  const diffInMs = now.getTime() - mostRecentDate.getTime()
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60))
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24))
-  const diffInMonths = Math.floor(diffInDays / 30)
-
-  if (diffInMinutes < 60) {
-    if (diffInMinutes > 0) {
-      return `il y a ${diffInMinutes} minute${sPluriel(diffInMinutes)}`
-    } else {
-      return `à l'instant`
-    }
-  } else if (diffInHours < 24) {
-    return `il y a ${diffInHours} heure${sPluriel(diffInHours)}`
-  } else if (diffInDays <= 30) {
-    return `il y a ${diffInDays} jour${sPluriel(diffInDays)}`
-  } else {
-    return `il y a ${diffInMonths} mois`
-  }
-}
 
 const ACTION_TEXTS = {
   profile: {

@@ -193,7 +193,15 @@ export const baseRouter = router({
     .mutation(async ({ input, ctx: { user } }) => {
       const base = await prismaClient.base.findUnique({
         where: { id: input.id },
-        select: baseAuthorizationTargetSelect,
+        select: {
+          ...baseAuthorizationTargetSelect,
+          members: {
+            select: {
+              memberId: true,
+              accepted: true,
+            },
+          },
+        },
       })
 
       if (!base) {
@@ -205,13 +213,35 @@ export const baseRouter = router({
       )
 
       const timestamp = new Date()
-      return prismaClient.base.update({
+
+      const acceptedMembers = base.members.filter(
+        (member) => member.accepted && member.memberId !== user.id,
+      )
+
+      const result = await prismaClient.base.update({
         data: {
           deleted: timestamp,
           updated: timestamp,
         },
         where: { id: input.id },
       })
+
+      if (acceptedMembers.length > 0) {
+        await Promise.all(
+          acceptedMembers.map((member) =>
+            prismaClient.notifications.create({
+              data: {
+                userId: member.memberId,
+                type: 'BaseDeletion',
+                baseId: input.id,
+                initiatorId: user.id,
+              },
+            }),
+          ),
+        )
+      }
+
+      return result
     }),
   updateImage: protectedProcedure
     .input(UpdateBaseImageCommandValidation)
