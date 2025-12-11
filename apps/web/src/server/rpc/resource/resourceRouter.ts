@@ -384,7 +384,7 @@ export const resourceRouter = router({
         throw notFoundError()
       }
 
-      return prismaClient.resourceFeedbackComment.create({
+      await prismaClient.resourceFeedbackComment.create({
         data: {
           content: input.content,
           feedbackSentById: input.feedbackSentById,
@@ -393,6 +393,33 @@ export const resourceRouter = router({
           authorId: user.id,
         },
       })
+
+      // notification receiver
+      let notificationUserId: string | null = null
+
+      if (input.parentCommentId) {
+        const parentComment =
+          await prismaClient.resourceFeedbackComment.findUnique({
+            where: { id: input.parentCommentId },
+            select: { authorId: true },
+          })
+        if (parentComment && parentComment.authorId !== user.id) {
+          notificationUserId = parentComment.authorId
+        }
+      } else if (input.feedbackSentById !== user.id) {
+        notificationUserId = input.feedbackSentById
+      }
+
+      if (notificationUserId) {
+        await prismaClient.notifications.create({
+          data: {
+            userId: notificationUserId,
+            type: 'ResourceComment',
+            resourceId: feedback.resource.id,
+            initiatorId: user.id,
+          },
+        })
+      }
     }),
   deleteFeedbackComment: protectedProcedure
     .input(z.object({ commentId: z.string().uuid() }))
