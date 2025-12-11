@@ -96,6 +96,7 @@ const mockCollection = {
 
 const baseResource: NewsFeedResource = {
   collectionId: undefined,
+  resourceFeedback: [],
   addedToCollectionAt: undefined,
   eventType: 'published',
   id: 'resource-1',

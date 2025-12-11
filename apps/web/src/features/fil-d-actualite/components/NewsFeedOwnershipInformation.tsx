@@ -259,6 +259,64 @@ const newsFeedAttributionConfig = {
       return null
     },
   },
+  feedbackRecommendation: {
+    getText: (
+      resource: NewsFeedResource,
+      timeAgo: string,
+      isUpdated: boolean,
+      userNewsFeed?: NewsFeed,
+      followedProfiles?: NewsFeedProfiles,
+    ) => {
+      if (followedProfiles) {
+        // For feedbackfromFollowed, find the feedback from a followed profile
+        const feedbackFromFollowedProfile = resource.resourceFeedback!.find(
+          (feedback) =>
+            followedProfiles.some(
+              (followedProfile) =>
+                followedProfile.profile.id === feedback.sentById,
+            ),
+        )
+
+        if (feedbackFromFollowedProfile?.sentBy?.name) {
+          return (
+            <>
+              <Link
+                className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+                href={`/profils/${feedbackFromFollowedProfile.sentBy.slug}`}
+              >
+                {formatName(feedbackFromFollowedProfile.sentBy.name)}
+              </Link>
+              &nbsp;a recommandé cette ressource {timeAgo}
+            </>
+          )
+        }
+      }
+
+      return null
+    },
+    getImage: (
+      resource: NewsFeedResource,
+      userNewsFeed?: NewsFeed,
+      followedProfiles?: NewsFeedProfiles,
+    ) => {
+      if (followedProfiles) {
+        // find the feedback from a followed profile
+        const feedbackFromFollowedProfile = resource.resourceFeedback?.find(
+          (feedback) =>
+            followedProfiles.some(
+              (followedProfile) =>
+                followedProfile.profile.id === feedback.sentById,
+            ),
+        )
+
+        if (feedbackFromFollowedProfile?.sentBy) {
+          return <RoundProfileImage user={feedbackFromFollowedProfile.sentBy} />
+        }
+      }
+
+      return null
+    },
+  },
 } as const
 
 // Determine attribution type based on the source provided by the backend
@@ -270,6 +328,11 @@ const determineAttribution = (
   followedBases: NewsFeedBases,
   followedProfiles: NewsFeedProfiles,
 ) => {
+  // Feedback recommendations case
+  if (resource.source === 'feedbackFromFollowed') {
+    return 'feedbackRecommendation'
+  }
+
   // Saved collections case
   if (
     resource.source === 'savedCollectionFromBase' ||
@@ -346,6 +409,13 @@ export const NewsFeedOwnershipInformation = ({
         return resource.lastPublished as Date
       case 'saved_in_collection':
         return resource.addedToCollectionAt as Date
+      case 'received_feedback': {
+        // For feedback events, find the feedback that triggered this event
+        const relevantFeedback = resource.resourceFeedback?.find((feedback) =>
+          followedProfiles.some((fp) => fp.profile.id === feedback.sentById),
+        )
+        return relevantFeedback!.created
+      }
       default:
         return resource.published as Date
     }
@@ -358,8 +428,9 @@ export const NewsFeedOwnershipInformation = ({
     timeAgo,
     isUpdated,
     userNewsFeed,
+    followedProfiles,
   )
-  const image = config.getImage(resource, userNewsFeed)
+  const image = config.getImage(resource, userNewsFeed, followedProfiles)
   const { seen } = resource
 
   return (

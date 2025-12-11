@@ -90,6 +90,19 @@ const getFollowedSavedInCollectionResourcesCTE = () => Prisma.sql`
       )
   )`
 
+const getFollowedFeedbackResourcesCTE = () => Prisma.sql`
+  feedbackFromFollowed AS (
+    SELECT
+      rf.resource_id as id,
+      rf.created AS most_recent_date
+    FROM resource_feedback rf
+    INNER JOIN resources r ON r.id = rf.resource_id
+    WHERE r.deleted IS NULL
+      AND r.published IS NOT NULL
+      AND r.is_public = true
+      AND rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
+  )`
+
 const getPublishedResourcesCTE = () => Prisma.sql`
   publishedResources AS (
     SELECT
@@ -106,6 +119,10 @@ const getPublishedResourcesCTE = () => Prisma.sql`
         OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
         OR EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
         OR EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+        OR EXISTS (
+          SELECT 1 FROM resource_feedback rf
+          WHERE rf.resource_id = r.id AND rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
+        )
       )
   )`
 
@@ -127,6 +144,10 @@ const getUpdatedResourcesCTE = () => Prisma.sql`
         OR r.created_by_id IN (SELECT profile_id FROM followedProfiles)
         OR EXISTS (SELECT 1 FROM userPreferences WHERE r.themes && themes)
         OR EXISTS (SELECT 1 FROM userPreferences WHERE r.professional_sectors && professional_sectors)
+        OR EXISTS (
+          SELECT 1 FROM resource_feedback rf
+          WHERE rf.resource_id = r.id AND rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
+        )
       )
   )`
 
@@ -198,6 +219,12 @@ const buildProfileSlugFilter = (profileSlug?: string) => {
       INNER JOIN users u ON u.id = c.created_by_id
       WHERE c.id = ae.collection_id AND u.slug = ${profileSlug}::text
     ))
+    OR
+    EXISTS (
+      SELECT 1 FROM resource_feedback rf
+      INNER JOIN users u ON u.id = rf.sent_by_id
+      WHERE rf.resource_id = ae.id AND u.slug = ${profileSlug}::text
+    )
   )`
 }
 
@@ -270,6 +297,7 @@ export const countNewsFeedResources = async (userId: string) => {
         LEFT JOIN bases b ON r.base_id = b.id
         LEFT JOIN collection_resources cr ON cr.resource_id = r.id
         LEFT JOIN collections c ON c.id = cr.collection_id AND c.deleted IS NULL AND c.is_public = true
+        LEFT JOIN resource_feedback rf ON rf.resource_id = r.id
         WHERE r.deleted IS NULL
           AND r.published IS NOT NULL
           AND r.is_public = true
@@ -283,6 +311,12 @@ export const countNewsFeedResources = async (userId: string) => {
               cr.id IS NOT NULL AND (
                 c.base_id IN (SELECT base_id FROM followedBases)
                 OR c.created_by_id IN (SELECT profile_id FROM followedProfiles)
+              )
+            )
+            OR (
+              rf.resource_id IS NOT NULL AND (
+                r.base_id IN (SELECT base_id FROM followedBases)
+                OR rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
               )
             )
           )
@@ -345,6 +379,9 @@ export const countNewsFeedResources = async (userId: string) => {
             SELECT 1 FROM collection_resources cr
             INNER JOIN collections c ON c.id = cr.collection_id
             WHERE cr.resource_id = r.id AND c.created_by_id = p.id AND c.deleted IS NULL AND c.is_public = true
+          ) OR EXISTS (
+            SELECT 1 FROM resource_feedback rf
+            WHERE rf.resource_id = r.id AND rf.sent_by_id = p.id
           )
         )
         WHERE p.deleted IS NULL
@@ -398,7 +435,11 @@ export const getFollowedResourceIds = async (
     {
       id: string
       published: Date
-      event_type: 'published' | 'updated' | 'saved_in_collection'
+      event_type:
+        | 'published'
+        | 'updated'
+        | 'saved_in_collection'
+        | 'received_feedback'
       source:
         | 'base'
         | 'profile'
@@ -406,6 +447,7 @@ export const getFollowedResourceIds = async (
         | 'professional_sector'
         | 'savedCollectionFromBase'
         | 'savedCollectionFromProfile'
+        | 'feedbackFromFollowed'
       seen: boolean
       collection_id?: string
       added_to_collection_at?: Date
@@ -416,6 +458,7 @@ export const getFollowedResourceIds = async (
       ${getFollowedPublishedResourcesCTE()},
       ${getFollowedUpdatedResourcesCTE()},
       ${getFollowedSavedInCollectionResourcesCTE()},
+      ${getFollowedFeedbackResourcesCTE()},
       publishedResourcesWithFields AS (
         SELECT
           pr.id,
@@ -465,12 +508,26 @@ export const getFollowedResourceIds = async (
         JOIN collection_resources cr ON cr.resource_id = sr.id
         JOIN collections c ON c.id = cr.collection_id
       ),
+      feedbackFromFollowedResourcesWithFields AS (
+        SELECT
+          fp.id,
+          r.published,
+          fp.most_recent_date,
+          'received_feedback'::text AS event_type,
+          'feedbackFromFollowed'::text AS source,
+          NULL::uuid AS collection_id,
+          NULL::timestamp AS added_to_collection_at
+        FROM feedbackFromFollowed fp
+        JOIN resources r ON r.id = fp.id
+      ),
       allEvents AS (
         SELECT * FROM publishedResourcesWithFields
         UNION ALL
         SELECT * FROM updatedResourcesWithFields
         UNION ALL
         SELECT * FROM savedInCollectionResourcesWithFields
+        UNION ALL
+        SELECT * FROM feedbackFromFollowedResourcesWithFields
       ),
       candidates AS (
         SELECT
@@ -516,12 +573,15 @@ export const getFollowedUnseenResourcesCount = async (
       ${getFollowedPublishedResourcesCTE()},
       ${getFollowedUpdatedResourcesCTE()},
       ${getFollowedSavedInCollectionResourcesCTE()},
+      ${getFollowedFeedbackResourcesCTE()},
       allEvents AS (
         SELECT * FROM publishedResources
         UNION ALL
         SELECT * FROM updatedResources
         UNION ALL
         SELECT * FROM savedInCollectionResources
+        UNION ALL
+        SELECT * FROM feedbackFromFollowed
       ),
       candidates AS (
         SELECT ae.*
@@ -566,7 +626,11 @@ export const getResourceIds = async (
     {
       id: string
       published: Date
-      event_type: 'published' | 'updated' | 'saved_in_collection'
+      event_type:
+        | 'published'
+        | 'updated'
+        | 'saved_in_collection'
+        | 'received_feedback'
       source:
         | 'base'
         | 'profile'
@@ -574,6 +638,7 @@ export const getResourceIds = async (
         | 'professional_sector'
         | 'savedCollectionFromBase'
         | 'savedCollectionFromProfile'
+        | 'feedbackFromFollowed'
       seen: boolean
       collection_id?: string
       added_to_collection_at?: Date
@@ -584,6 +649,7 @@ export const getResourceIds = async (
   ${getPublishedResourcesCTE()},
   ${getUpdatedResourcesCTE()},
   ${getFollowedSavedInCollectionResourcesCTE()},
+  ${getFollowedFeedbackResourcesCTE()},
   publishedResourcesWithFields AS (
     SELECT
       pr.id,
@@ -637,12 +703,26 @@ export const getResourceIds = async (
     JOIN collection_resources cr ON cr.resource_id = sr.id
     JOIN collections c ON c.id = cr.collection_id
   ),
+  feedbackFromFollowedWithFields AS (
+    SELECT
+      fp.id,
+      r.published,
+      fp.most_recent_date,
+      'received_feedback'::text AS event_type,
+      'feedbackFromFollowed'::text AS source,
+      NULL::uuid AS collection_id,
+      NULL::timestamp AS added_to_collection_at
+    FROM feedbackFromFollowed fp
+    JOIN resources r ON r.id = fp.id
+  ),
   allEvents AS (
     SELECT * FROM publishedResourcesWithFields
     UNION ALL
     SELECT * FROM updatedResourcesWithFields
     UNION ALL
     SELECT * FROM savedInCollectionResourcesWithFields
+    UNION ALL
+    SELECT * FROM feedbackFromFollowedWithFields
   ),
   candidates AS (
     SELECT
@@ -778,6 +858,7 @@ export const getUnseenResourcesCount = async (
       ${getPublishedResourcesCTE()},
       ${getUpdatedResourcesCTE()},
       ${getFollowedSavedInCollectionResourcesCTE()},
+      ${getFollowedFeedbackResourcesCTE()},
       publishedResourcesWithFields AS (
         SELECT
           pr.id,
@@ -804,12 +885,22 @@ export const getUnseenResourcesCount = async (
         JOIN collection_resources cr ON cr.resource_id = sr.id
         JOIN collections c ON c.id = cr.collection_id
       ),
+      feedbackFromFollowedResourcesWithFields AS (
+        SELECT
+          fp.id,
+          fp.most_recent_date,
+          'received_feedback'::text AS event_type,
+          NULL::uuid AS collection_id
+        FROM feedbackFromFollowed fp
+      ),
       allEvents AS (
         SELECT * FROM publishedResourcesWithFields
         UNION ALL
         SELECT * FROM updatedResourcesWithFields
         UNION ALL
         SELECT * FROM savedInCollectionResourcesWithFields
+        UNION ALL
+        SELECT * FROM feedbackFromFollowedResourcesWithFields
       ),
       candidates AS (
         SELECT ae.*
