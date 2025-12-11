@@ -156,6 +156,9 @@ describe("Ajout d'un avis sur une ressource", () => {
     })
 
     const user = givenUser({ firstName: 'Pierre', lastName: 'Laubet' })
+    cy.intercept('/api/trpc/resource.feedback?*').as('feedback')
+    cy.intercept('/api/trpc/resource.deleteFeedback?*').as('deleteFeedback')
+
     cy.createUserAndSignin(user)
 
     cy.visit(
@@ -165,9 +168,14 @@ describe("Ajout d'un avis sur une ressource", () => {
     cy.contains('Oui').click()
     cy.get('textarea').first().type('hello')
     cy.contains('Partager mon avis').click()
+    cy.wait('@feedback')
 
-    cy.testId('delete-feedback').filter(':visible').first().click()
-    cy.get('dialog').get('button').contains('Supprimer').click()
+    cy.testId('delete-feedback')
+      .filter(':visible')
+      .first()
+      .click({ force: true })
+    cy.get('dialog button').contains('Supprimer').click({ force: true })
+    cy.wait('@deleteFeedback')
 
     cy.getToast('Avis supprimé')
   })
