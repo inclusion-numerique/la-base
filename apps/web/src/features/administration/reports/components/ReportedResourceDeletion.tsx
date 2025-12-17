@@ -1,7 +1,7 @@
 'use client'
 
 import { createToast } from '@app/ui/toast/createToast'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { trpc } from '@app/web/trpc'

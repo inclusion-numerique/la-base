@@ -16,6 +16,9 @@ CREATE TABLE "public"."notifications" (
     CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateIndex
+CREATE INDEX "notifications_user_id_idx" ON "public"."notifications"("user_id");
+
 -- AddForeignKey
 ALTER TABLE "public"."notifications" ADD CONSTRAINT "notifications_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 

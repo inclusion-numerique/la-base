@@ -1,5 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import ProfileFollowersModal from '@app/web/features/profil/followers/components/ProfileFollowersModal'
 import type { ProfileFollowedByData } from '@app/web/server/profiles/getProfile'
 import classNames from 'classnames'

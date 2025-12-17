@@ -23,7 +23,7 @@ const HeaderUserMobileNotificationsModal = ({
         Fermer
       </button>
       <div className="fr-header__menu-links">
-        <HeaderUserNotificationsMenu user={user} />
+        <HeaderUserNotificationsMenu />
       </div>
     </div>
   </div>

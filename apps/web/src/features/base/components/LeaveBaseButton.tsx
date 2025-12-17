@@ -1,6 +1,6 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import LeaveBaseModaleNotice from '@app/web/features/base/components/LeaveBaseModaleNotice'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'

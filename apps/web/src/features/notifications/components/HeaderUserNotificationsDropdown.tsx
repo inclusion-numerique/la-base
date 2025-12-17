@@ -1,6 +1,6 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import HeaderUserNotificationsBadge from '@app/web/features/notifications/components/HeaderUserNotificationsBadge'
@@ -30,7 +30,7 @@ const HeaderUserNotificationsDropdown = ({ user }: { user: SessionUser }) => {
           }
           onClickOutside={handleOnOpenModal}
         >
-          <HeaderUserNotificationsMenu user={user} />
+          <HeaderUserNotificationsMenu />
         </Dropdown>
       </div>
     </>

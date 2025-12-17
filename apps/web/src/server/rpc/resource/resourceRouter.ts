@@ -122,7 +122,7 @@ export const resourceRouter = router({
       const result = await handleResourceMutationCommand(command, { user })
 
       if (resource.createdById !== user.id) {
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: resource.createdById,
             type:
@@ -333,7 +333,7 @@ export const resourceRouter = router({
       })
 
       if (resource.createdById !== user.id) {
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: resource.createdById,
             type: 'ResourceFeedback',
@@ -411,7 +411,7 @@ export const resourceRouter = router({
       }
 
       if (notificationUserId) {
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: notificationUserId,
             type: 'ResourceComment',

@@ -217,7 +217,7 @@ export const baseMemberRouter = router({
         })
 
         if (invitation.invitedBy.id !== invitation.member.id) {
-          await prismaClient.notifications.create({
+          await prismaClient.notification.create({
             data: {
               userId: invitation.invitedBy.id,
               type: 'AcceptedBaseInvitation',
@@ -266,7 +266,7 @@ export const baseMemberRouter = router({
         })
 
         if (invitation.invitedBy.id !== invitation.member.id) {
-          await prismaClient.notifications.create({
+          await prismaClient.notification.create({
             data: {
               userId: invitation.invitedBy.id,
               type: 'DeclinedBaseInvitation',
@@ -328,7 +328,7 @@ export const baseMemberRouter = router({
       })
 
       if (input.memberId !== user.id) {
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: input.memberId,
             type: 'BaseRoleChange',
@@ -421,7 +421,7 @@ export const baseMemberRouter = router({
       }
 
       if (input.memberId !== user.id) {
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: input.memberId,
             type: 'BaseMemberDeletion',

@@ -1,6 +1,6 @@
 import { createToast } from '@app/ui/toast/createToast'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { BasePageData } from '@app/web/server/bases/getBase'
 import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'

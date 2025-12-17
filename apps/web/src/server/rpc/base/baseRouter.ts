@@ -229,7 +229,7 @@ export const baseRouter = router({
       if (acceptedMembers.length > 0) {
         await Promise.all(
           acceptedMembers.map((member) =>
-            prismaClient.notifications.create({
+            prismaClient.notification.create({
               data: {
                 userId: member.memberId,
                 type: 'BaseDeletion',
