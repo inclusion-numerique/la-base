@@ -21,12 +21,22 @@ import {
   themeCategories,
   themeLabels,
 } from '@app/web/themes/themes'
-import { formatTimeAgo } from '@app/web/utils/formatTimeAgo'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
 import styles from './NewsFeedOwnershipInformation.module.css'
+import { formatTimeAgo } from '@app/web/utils/formatTimeAgo'
+
+const findFeedbackFromFollowedProfile = (
+  resource: NewsFeedResource,
+  followedProfiles?: NewsFeedProfiles,
+) =>
+  followedProfiles
+    ? resource.resourceFeedback?.find((feedback) =>
+        followedProfiles.some((fp) => fp.profile.id === feedback.sentById),
+      )
+    : undefined
 
 const ACTION_TEXTS = {
   profile: {
@@ -269,12 +279,9 @@ const newsFeedAttributionConfig = {
     ) => {
       if (followedProfiles) {
         // For feedbackfromFollowed, find the feedback from a followed profile
-        const feedbackFromFollowedProfile = resource.resourceFeedback!.find(
-          (feedback) =>
-            followedProfiles.some(
-              (followedProfile) =>
-                followedProfile.profile.id === feedback.sentById,
-            ),
+        const feedbackFromFollowedProfile = findFeedbackFromFollowedProfile(
+          resource,
+          followedProfiles,
         )
 
         if (feedbackFromFollowedProfile?.sentBy?.name) {
@@ -301,12 +308,9 @@ const newsFeedAttributionConfig = {
     ) => {
       if (followedProfiles) {
         // find the feedback from a followed profile
-        const feedbackFromFollowedProfile = resource.resourceFeedback?.find(
-          (feedback) =>
-            followedProfiles.some(
-              (followedProfile) =>
-                followedProfile.profile.id === feedback.sentById,
-            ),
+        const feedbackFromFollowedProfile = findFeedbackFromFollowedProfile(
+          resource,
+          followedProfiles,
         )
 
         if (feedbackFromFollowedProfile?.sentBy) {
@@ -410,9 +414,9 @@ export const NewsFeedOwnershipInformation = ({
       case 'saved_in_collection':
         return resource.addedToCollectionAt as Date
       case 'received_feedback': {
-        // For feedback events, find the feedback that triggered this event
-        const relevantFeedback = resource.resourceFeedback?.find((feedback) =>
-          followedProfiles.some((fp) => fp.profile.id === feedback.sentById),
+        const relevantFeedback = findFeedbackFromFollowedProfile(
+          resource,
+          followedProfiles,
         )
         return relevantFeedback!.created
       }
