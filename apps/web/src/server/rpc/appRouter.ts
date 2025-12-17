@@ -1,4 +1,5 @@
 import { baseRouter } from '@app/web/server/rpc/base/baseRouter'
+import { baseJoinRequestRouter } from '@app/web/server/rpc/baseJoinRequest/baseJoinRequest'
 import { baseMemberRouter } from '@app/web/server/rpc/baseMember/baseMemberRouter'
 import { collectionRouter } from '@app/web/server/rpc/collection/collectionRouter'
 import { collectionResourceRouter } from '@app/web/server/rpc/collectionResource/collectionResource'
@@ -24,6 +25,7 @@ export const appRouter = router({
   resourceContributor: resourceContributorRouter,
   base: baseRouter,
   baseMember: baseMemberRouter,
+  baseJoinRequest: baseJoinRequestRouter,
   profile: profileRouter,
   collection: collectionRouter,
   collectionResource: collectionResourceRouter,

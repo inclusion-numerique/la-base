@@ -97,6 +97,6 @@
 
 @media (max-width: 48em) {
   .fr-border-md-none {
-    border: none;
+    border: none !important;
   }
 }

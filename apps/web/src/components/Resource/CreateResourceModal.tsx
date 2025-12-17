@@ -85,7 +85,7 @@ export const CreateResourceButton = ({
             titleClassName,
           )}
           aria-hidden
-        />{' '}
+        />
       </Button>
     </>
   )
