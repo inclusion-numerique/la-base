@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { redirect } from 'next/navigation'
 import { currentCguVersion } from './currentCguVersion'
 

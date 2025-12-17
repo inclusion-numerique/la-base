@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import ProfileBases from '@app/web/features/profil/base/components/ProfileBases'
 import EmptyBases from '@app/web/features/profil/base/components/ProfileEmptyBases'
 import { ProfileBasesList } from '@app/web/server/bases/getBasesList'

@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { LeaveBaseButton } from '@app/web/features/base/components/LeaveBaseButton'
 import DeclineBaseInviteMemberButton from '@app/web/features/base/invitation/components/DeclineBaseInviteMemberButton'
 import RemoveBaseMemberButton from '@app/web/features/base/invitation/components/RemoveBaseMemberButton'

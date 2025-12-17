@@ -1,5 +1,4 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import type { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { HeaderUserNotificationsRow } from '@app/web/features/notifications/components/HeaderUserNotificationsRow'
 import { trpc } from '@app/web/trpc'
@@ -7,7 +6,7 @@ import Badge from '@codegouvfr/react-dsfr/Badge'
 import classNames from 'classnames'
 import styles from './HeaderUserNotificationsMenu.module.css'
 
-const HeaderUserNotificationsMenu = ({ user }: { user: SessionUser }) => {
+const HeaderUserNotificationsMenu = () => {
   const { data: count } = trpc.notifications.count.useQuery()
   const { data: notifications } = trpc.notifications.getNotifications.useQuery()
   return (
@@ -46,7 +45,7 @@ const HeaderUserNotificationsMenu = ({ user }: { user: SessionUser }) => {
               )}
               key={notif.id}
             >
-              <HeaderUserNotificationsRow notification={notif} user={user} />
+              <HeaderUserNotificationsRow notification={notif} />
             </li>
           ))
         ) : (

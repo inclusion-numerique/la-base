@@ -1,5 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import LesBasesSvgLogo from '@app/web/components/LesBasesSvgLogo'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'

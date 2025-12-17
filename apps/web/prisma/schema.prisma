@@ -117,9 +117,8 @@ model User {
   resourceFeedback       ResourceFeedback[]
   resourceFeedbackComments ResourceFeedbackComment[]
   newsFeed               NewsFeed?
-  notifications          Notifications[]        @relation(name: "notifications")
-  initiatedNotifications Notifications[]        @relation(name: "initiator")
-
+  notifications          Notification[]        @relation(name: "notifications")
+  initiatedNotification Notification[]        @relation(name: "initiator")
   featuredBlock   FeaturedBlock? @relation("profile")
   featuredBlockId String?        @unique @db.Uuid
 
@@ -204,7 +203,7 @@ model Base {
 
   highlightResources   HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
   highlightCollections Boolean                 @default(true) @map("highlight_collections")
-  notifications        Notifications[]
+  notifications        Notification[]
 
   @@index([createdById])
   @@map("bases")
@@ -383,7 +382,7 @@ model Resource {
   resourceFeedback ResourceFeedback[]
   featuredBlock    FeaturedBlock?         @relation("resource")
   featuredBlockId  String?                @unique @db.Uuid
-  notifications    Notifications[]
+  notifications    Notification[]
 
   @@index([baseId])
   @@index([createdById])
@@ -905,7 +904,7 @@ enum NotificationType {
   @@map("notification_type")
 }
 
-model Notifications {
+model Notification {
   id String @id @default(uuid()) @db.Uuid
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, name: "notifications")
@@ -927,5 +926,6 @@ model Notifications {
   created    DateTime  @default(now())
   lastSeenAt DateTime? @map("last_seen_at")
 
+  @@index([userId])
   @@map("notifications")
 }

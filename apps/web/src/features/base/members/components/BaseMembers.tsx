@@ -1,6 +1,6 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import IconInSquare from '@app/web/components/IconInSquare'
 import InviteBaseMemberButton from '@app/web/features/base/invitation/components/InviteBaseMemberButton'
 import BaseMemberCard from '@app/web/features/base/members/components/BaseMemberCard'

@@ -1,6 +1,5 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
 import IconInCircle from '@app/web/components/IconInCircle'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { getNotificationBadgeIcon } from '@app/web/features/notifications/utils/getNotificationBadgeIcon'
@@ -16,10 +15,8 @@ import {
 import styles from './HeaderUserNotificationsRow.module.css'
 
 export const HeaderUserNotificationsRow = ({
-  user,
   notification,
 }: {
-  user: SessionUser
   notification: NotificationWithRelations
 }) => {
   const router = useRouter()
@@ -40,9 +37,13 @@ export const HeaderUserNotificationsRow = ({
     <div
       className="fr-flex fr-align-items-center fr-flex-gap-6v fr-position-relative"
       onClick={handleRowClick}
+      role="button"
+      tabIndex={0}
     >
       <div className="fr-position-relative fr-flex fr-align-items-center">
-        <RoundProfileImage user={user} />
+        {notification.initiator && (
+          <RoundProfileImage user={notification.initiator} />
+        )}
         <div className={styles.smallBadge}>
           <IconInCircle
             size="xsmall"

@@ -3,11 +3,20 @@ import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 
 export const notificationsRouter = router({
   getNotifications: protectedProcedure.query(async ({ ctx: { user } }) => {
-    return prismaClient.notifications.findMany({
+    return prismaClient.notification.findMany({
       include: {
-        resource: true,
-        base: true,
-        initiator: true,
+        resource: { select: { id: true, title: true, slug: true } },
+        base: { select: { id: true, title: true, slug: true } },
+        initiator: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            image: true,
+            firstName: true,
+            lastName: true,
+          },
+        },
       },
       where: {
         userId: user.id,
@@ -19,7 +28,7 @@ export const notificationsRouter = router({
   }),
 
   count: protectedProcedure.query(async ({ ctx: { user } }) => {
-    return prismaClient.notifications.count({
+    return prismaClient.notification.count({
       where: {
         userId: user.id,
         lastSeenAt: null,
@@ -28,7 +37,7 @@ export const notificationsRouter = router({
   }),
   updateUnseenNotifications: protectedProcedure.mutation(
     async ({ ctx: { user } }) => {
-      return prismaClient.notifications.updateMany({
+      return prismaClient.notification.updateMany({
         data: { lastSeenAt: new Date() },
         where: { userId: user.id, lastSeenAt: null },
       })

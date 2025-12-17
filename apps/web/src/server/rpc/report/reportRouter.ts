@@ -109,7 +109,7 @@ export const reportRouter = router({
           },
         })
 
-        await prismaClient.notifications.create({
+        await prismaClient.notification.create({
           data: {
             userId: resource.createdById,
             type: 'ReportedResource',
