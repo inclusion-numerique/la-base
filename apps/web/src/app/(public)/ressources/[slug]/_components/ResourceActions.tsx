@@ -21,8 +21,12 @@ const ResourceActions = ({
   const isPublished = !!resource.published
   const resourceCreator = user?.id === resource.createdById
   const isAdmin = user?.role === 'Admin'
-  // Admins who are NOT resource creators should see normal user actions
-  const adminAsNormalUser = isAdmin && !resourceCreator
+  const isBaseMember = resource.base?.members.some(
+    (member) => member.memberId === user?.id && member.accepted,
+  )
+  // Admins who are NOT resource creators and NOT base members should see normal user actions
+  const adminAsNormalUser =
+    isAdmin && !resourceCreator && !(resource.baseId && isBaseMember)
   const showEditActions = canWrite && !adminAsNormalUser
   const showUserActions = !canWrite || adminAsNormalUser
 
