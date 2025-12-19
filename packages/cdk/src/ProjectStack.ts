@@ -1,5 +1,6 @@
 import { environmentVariablesFromList } from '@app/cdk/environmentVariable'
 import { ProjectCdkOutput } from '@app/cdk/getCdkOutput'
+import { MaildevInstance } from '@app/cdk/MaildevInstance'
 import { createOutput } from '@app/cdk/output'
 import { terraformBackend } from '@app/cdk/terraformBackend'
 import {
@@ -54,9 +55,8 @@ export const projectStackSensitiveVariables = [
   'SCW_ACCESS_KEY',
   'SCW_SECRET_KEY',
   'SENTRY_AUTH_TOKEN',
-  'SMTP_PASSWORD',
-  'SMTP_SERVER',
-  'SMTP_USERNAME',
+  'SMTP_MAILDEV_USERNAME',
+  'SMTP_MAILDEV_PASSWORD',
 ] as const
 
 /**
@@ -260,8 +260,13 @@ export class ProjectStack extends TerraformStack {
       secretId: databaseInstanceIdSecret.id,
       data: database.id,
     })
+    const maildev = new MaildevInstance(this, 'maildev', {
+      username: sensitiveEnvironmentVariables.SMTP_MAILDEV_USERNAME.value,
+      password: sensitiveEnvironmentVariables.SMTP_MAILDEV_PASSWORD.value,
+    })
+    const maildevSmtp = maildev.getMaildevSmtp()
+    const publicIpAddress = maildev.getPublicIpAddress()
 
-    // Containers namespace for web containers
     const webContainers = new ContainerNamespace(this, 'webContainers', {
       name: containerNamespaceName,
       description: 'Web application containers',
@@ -296,9 +301,6 @@ export class ProjectStack extends TerraformStack {
           sensitiveEnvironmentVariables.SCW_SECRET_KEY.value,
         SENTRY_AUTH_TOKEN:
           sensitiveEnvironmentVariables.SENTRY_AUTH_TOKEN.value,
-        SMTP_PASSWORD: sensitiveEnvironmentVariables.SMTP_PASSWORD.value,
-        SMTP_SERVER: sensitiveEnvironmentVariables.SMTP_SERVER.value,
-        SMTP_USERNAME: sensitiveEnvironmentVariables.SMTP_USERNAME.value,
       },
     })
 
@@ -432,6 +434,13 @@ export class ProjectStack extends TerraformStack {
       data: 'v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com',
       ttl: 3600,
     })
+    new DomainRecord(this, 'maildevDns', {
+      dnsZone: mainDomainZone.id,
+      type: 'A',
+      name: 'maildev',
+      data: publicIpAddress,
+      ttl: 3600,
+    })
 
     output('cockpitId', cockpit.id)
     output('mainDomainZoneId', mainDomainZone.id)
@@ -441,5 +450,6 @@ export class ProjectStack extends TerraformStack {
     output('databaseEndpointIp', database.endpointIp)
     output('databaseEndpointPort', database.endpointPort)
     output('uploadsHostName', uploadsHostName)
+    output('maildevSmtp', maildevSmtp)
   }
 }

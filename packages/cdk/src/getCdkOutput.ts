@@ -30,6 +30,8 @@ export type ProjectCdkOutput = {
   uploadsCdnPipelineId: string
   uploadsS3BackendStageId: string
   uploadsHostName: string
+  maildevWebUrl: string
+  maildevSmtp: string
 }
 
 export type CdkOutput = {

@@ -20,6 +20,7 @@ import {
   projectSlug,
   projectTitle,
   region,
+  smtpPort,
 } from '@app/config/config'
 import { Container } from '@app/scaleway/container'
 import { ContainerDomain } from '@app/scaleway/container-domain'
@@ -55,6 +56,11 @@ export const webAppStackSensitiveVariables = [
   'PROCONNECT_MAIN_CLIENT_SECRET',
   'INTERNAL_API_PRIVATE_KEY',
   'FRIENDLY_CAPTCHA_API_KEY',
+  'SMTP_PASSWORD',
+  'SMTP_SERVER',
+  'SMTP_USERNAME',
+  'SMTP_MAILDEV_USERNAME',
+  'SMTP_MAILDEV_PASSWORD',
 ] as const
 
 /**
@@ -207,6 +213,7 @@ export class WebAppStack extends TerraformStack {
         REPORT_MODERATOR_NAME: isMain
           ? environmentVariables.REPORT_MODERATOR_NAME_MAIN.value
           : environmentVariables.REPORT_MODERATOR_NAME_PREVIEW.value,
+        SMTP_PORT: isMain ? smtpPort : '1025',
       },
       secretEnvironmentVariables: {
         BREVO_API_KEY: isMain
@@ -219,6 +226,15 @@ export class WebAppStack extends TerraformStack {
               .value,
         FRIENDLY_CAPTCHA_API_KEY:
           sensitiveEnvironmentVariables.FRIENDLY_CAPTCHA_API_KEY.value,
+        SMTP_USERNAME: isMain
+          ? sensitiveEnvironmentVariables.SMTP_USERNAME.value
+          : sensitiveEnvironmentVariables.SMTP_MAILDEV_USERNAME.value,
+        SMTP_PASSWORD: isMain
+          ? sensitiveEnvironmentVariables.SMTP_PASSWORD.value
+          : sensitiveEnvironmentVariables.SMTP_MAILDEV_PASSWORD.value,
+        SMTP_SERVER: isMain
+          ? sensitiveEnvironmentVariables.SMTP_SERVER.value
+          : 'maildev.lesbases.anct.gouv.fr',
       },
       name: containerName,
       minScale: isMain ? 2 : namespace === 'dev' ? 1 : 0,
