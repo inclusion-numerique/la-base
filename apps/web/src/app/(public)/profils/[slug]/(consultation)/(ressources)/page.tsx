@@ -17,9 +17,12 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
   const { profile, user, authorization } = await getProfilePageContext(slug)
 
   const resources = await getProfileResources(profile.id, user)
+  const isAdmin = user?.role === 'Admin'
 
-  const canWrite = authorization.hasPermission(ProfilePermissions.WriteProfile)
   const isOwner = authorization.hasRole(ProfileRoles.ProfileOwner)
+  const canWrite = isAdmin
+    ? isOwner
+    : authorization.hasPermission(ProfilePermissions.WriteProfile)
 
   // Array of resources with their draft if they are in draft state
   const ressourcesAndDrafts = await Promise.all(
@@ -47,6 +50,7 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
     <EmptyProfileResources canWrite={canWrite} isOwner={isOwner} />
   ) : (
     <Resources
+      isOwner={isOwner}
       title={isOwner ? 'Mes ressources' : 'Ressources'}
       resources={ressourcesWithAppliedDraft}
       canWrite={canWrite}

@@ -1,3 +1,5 @@
+'use client'
+
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
@@ -10,41 +12,64 @@ import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
+import Button from '@codegouvfr/react-dsfr/Button'
+import Input from '@codegouvfr/react-dsfr/Input'
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import { useMemo } from 'react'
+import classNames from 'classnames'
+import { useMemo, useState } from 'react'
+import { useDebounceValue } from 'usehooks-ts'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
+import styles from './Resources.module.css'
 
 const Resources = ({
+  isOwner = false,
   title,
   resources,
   user,
   canWrite,
   baseId,
 }: {
+  isOwner?: boolean
   title: string
   baseId: string | null
   resources: BaseResource[]
   user: SessionUser | null
   canWrite: boolean
 }) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [debouncedSearchTerm] = useDebounceValue(searchTerm, 500)
+
+  const filteredResources = useMemo(() => {
+    if (!debouncedSearchTerm.trim()) {
+      return resources
+    }
+    const lowercaseSearch = debouncedSearchTerm.toLowerCase()
+    return resources.filter((resource) => {
+      const titleMatch = resource.title.toLowerCase().includes(lowercaseSearch)
+      const descriptionMatch =
+        resource.excerpt?.toLowerCase().includes(lowercaseSearch) ?? false
+      return titleMatch || descriptionMatch
+    })
+  }, [resources, debouncedSearchTerm])
+
   const drafts = useMemo(
-    () => resources.filter((resource) => resource.published === null),
-    [resources],
+    () => filteredResources.filter((resource) => resource.published === null),
+    [filteredResources],
   )
   const publics = useMemo(
     () =>
-      resources.filter(
+      filteredResources.filter(
         (resource) => resource.isPublic === true && resource.published !== null,
       ),
-    [resources],
+    [filteredResources],
   )
   const privates = useMemo(
     () =>
-      resources.filter(
+      filteredResources.filter(
         (resource) =>
           resource.isPublic === false && resource.published !== null,
       ),
-    [resources],
+    [filteredResources],
   )
 
   return (
@@ -54,25 +79,49 @@ const Resources = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              {title} · {resources.length}
+              {title} · {filteredResources.length}
             </h2>
           </div>
         </div>
-        {canWrite && (
-          <div
-            data-testid="create-resource-button"
-            className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0"
-          >
-            <CreateResourceButton
-              titleClassName="fr-text-label--blue-france"
-              data-testid={
-                baseId ? 'create-resource-in-base-button' : undefined
-              }
-              className="fr-btn--secondary fr-width-full fr-justify-content-center"
-              baseId={baseId}
-            />
-          </div>
-        )}
+        <div className="fr-flex fr-direction-column fr-flex-gap-2v">
+          {canWrite && (
+            <div
+              data-testid="create-resource-button"
+              className="fr-col-sm-auto fr-col-12 fr-mt-4w fr-mt-md-0"
+            >
+              <CreateResourceButton
+                titleClassName="fr-text-label--blue-france"
+                data-testid={
+                  baseId ? 'create-resource-in-base-button' : undefined
+                }
+                className="fr-btn--secondary fr-width-full fr-justify-content-center"
+                baseId={baseId}
+              />
+            </div>
+          )}
+          {!isOwner && (
+            <div className="fr-col-sm-auto fr-col-12">
+              <Input
+                nativeInputProps={{
+                  placeholder: 'Rechercher une ressource',
+                  value: searchTerm,
+                  onChange: (e) => setSearchTerm(e.target.value),
+                }}
+                classes={{ wrap: classNames(styles.searchBar, 'fr-mt-0') }}
+                addon={
+                  <Button
+                    iconId="ri-search-line"
+                    className="ri-xl"
+                    priority="primary"
+                    title="Rechercher une ressource"
+                  />
+                }
+                label="Rechercher une ressource"
+                hideLabel
+              />
+            </div>
+          )}
+        </div>
       </div>
       {canWrite ? (
         <Tabs
@@ -117,7 +166,7 @@ const Resources = ({
           ]}
         />
       ) : (
-        resources.map((resource) => (
+        filteredResources.map((resource) => (
           <ResourceCard
             isContributor={resourceAuthorization(resource, user).hasRole(
               ResourceRoles.ResourceContributor,
