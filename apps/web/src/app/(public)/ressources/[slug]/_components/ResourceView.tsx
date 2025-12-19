@@ -137,7 +137,10 @@ const ResourceView = ({
             <div
               key={content.id}
               id={content.anchorId}
-              className={classNames('fr-py-4v', index === 0 && 'fr-pt-6v')}
+              className={classNames(
+                'fr-pb-6v fr-pt-2v',
+                index === 0 && 'fr-pt-6v',
+              )}
             >
               <ResourceContentView content={content} />
             </div>
