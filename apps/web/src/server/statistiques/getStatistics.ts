@@ -2,10 +2,12 @@ import { prismaClient } from '@app/web/prismaClient'
 import {
   type CreationStatisticsResult,
   computeCreationProportions,
+  computeCreationTotals,
 } from './creationStatistics'
 import {
   beneficiariesUsages,
   professionalSectorsUsages,
+  resourceTypesUsages,
   themesUsages,
   type UsageStatisticsResult,
 } from './usageStatistics'
@@ -250,21 +252,44 @@ export const getStatistics = async (_params: StatisticsParams) => {
               WHERE published IS NOT NULL
                 AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
                 AND deleted IS NULL
+                AND is_public IS true
+              UNION ALL
+              SELECT 'resource_types' AS type,
+                     unnest(resource_types)::text AS key
+              FROM resources
+              WHERE published IS NOT NULL
+                AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                AND deleted IS NULL
                 AND is_public IS true) AS combined_data
         GROUP BY type, key
         ORDER BY value DESC`
 
+  const searchTotals = searchStatisticsResult.reduce(
+    (acc, result) => ({
+      resource_views: acc.resource_views + result.resource_views,
+      search_executions: acc.search_executions + result.search_executions,
+      collection_resources:
+        acc.collection_resources + result.collection_resources,
+    }),
+    { resource_views: 0, search_executions: 0, collection_resources: 0 },
+  )
+
   return {
     kpi,
-    search: searchStatisticsResult,
+    search: {
+      data: searchStatisticsResult,
+      totals: searchTotals,
+    },
     creation: {
       data: creationStatisticsResult,
       proportions: computeCreationProportions(creationStatisticsResult),
+      totals: computeCreationTotals(creationStatisticsResult),
     },
     usage: {
       thematiques: themesUsages(usageStatisticsResult),
       beneficiaries: beneficiariesUsages(usageStatisticsResult),
       professionalSectors: professionalSectorsUsages(usageStatisticsResult),
+      resourceTypes: resourceTypesUsages(usageStatisticsResult),
     },
   }
 }

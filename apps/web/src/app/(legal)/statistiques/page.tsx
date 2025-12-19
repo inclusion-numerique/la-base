@@ -1,14 +1,18 @@
 import Beneficiaries from '@app/web/app/(legal)/statistiques/Beneficiaries'
 import ProfessionalSectors from '@app/web/app/(legal)/statistiques/ProfessionalSectors'
+import ResourcesTypes from '@app/web/app/(legal)/statistiques/ResourcesTypes'
 import Card from '@app/web/components/Card'
 import {
   getStatistics,
   type StatisticsParams,
 } from '@app/web/server/statistiques/getStatistics'
 import { numberToString } from '@app/web/utils/formatNumber'
+import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
+import classNames from 'classnames'
 import KeyFigureTitle from './KeyFigureTitle'
 import SelectPeriod from './SelectPeriod'
 import StatisticsChart from './StatisticsChart'
+import styles from './StatisticsPage.module.css'
 import Thematiques from './Thematiques'
 
 const StatisticsPage = async ({
@@ -23,11 +27,13 @@ const StatisticsPage = async ({
     <>
       <section>
         <h2 className="fr-h3 fr-mb-4w">
-          Chiffres clés pour suivre l’usage du service
+          Chiffres clés pour suivre l’usage de la plateforme
         </h2>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
+              className="fr-border fr-border-radius--8"
+              noBorder
               title={
                 <KeyFigureTitle type="publications">
                   {numberToString(kpi.publications.count)}
@@ -35,7 +41,14 @@ const StatisticsPage = async ({
               }
               titleAs="div"
             >
-              Nombre total de ressources publiées
+              <span
+                className={classNames(
+                  styles.noWrap,
+                  'fr-text--lg fr-mb-0 fr-text--medium',
+                )}
+              >
+                Nombre total de ressources publiées
+              </span>
               <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
                 dont {numberToString(kpi.publications.public)} publiques et{' '}
                 {numberToString(kpi.publications.private)} privées
@@ -44,6 +57,8 @@ const StatisticsPage = async ({
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
+              className="fr-border fr-border-radius--8"
+              noBorder
               title={
                 <KeyFigureTitle type="views">
                   {numberToString(kpi.views.count)}
@@ -51,7 +66,9 @@ const StatisticsPage = async ({
               }
               titleAs="div"
             >
-              Nombre total de vues de ressources
+              <span className="fr-text--lg fr-mb-0 fr-text--medium">
+                Nombre total de vues de ressources
+              </span>
               <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
                 dont {numberToString(kpi.views.lastMonth)} sur les 30 derniers
                 jours
@@ -60,6 +77,8 @@ const StatisticsPage = async ({
           </div>
           <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
             <Card
+              className="fr-border fr-border-radius--8"
+              noBorder
               title={
                 <KeyFigureTitle type="users">
                   {numberToString(kpi.recentUsers)}
@@ -67,7 +86,12 @@ const StatisticsPage = async ({
               }
               titleAs="div"
             >
-              Nombre de membres avec une activité
+              <span className="fr-text--lg fr-mb-0 fr-text--medium">
+                Nombre d'utilisateurs actifs
+                <Tooltip title="Un utilisateur est considéré actif lorsqu’il s’est connecté au moins 1 fois sur les 30 derniers jours.">
+                  <span className="ri-question-line fr-ml-1v fr-text-label--blue-france" />
+                </Tooltip>
+              </span>
               <div className="fr-text-title--blue-france fr-text--sm fr-mb-0">
                 sur les 30 derniers jours
               </div>
@@ -80,7 +104,7 @@ const StatisticsPage = async ({
         <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
           <div>
             <h2 className="fr-h3 fr-mb-0">
-              Données pour comprendre l’usage de la recherche
+              Données pour suivre l'évolution de l’usage de la recherche
             </h2>
           </div>
           <SelectPeriod
@@ -93,47 +117,62 @@ const StatisticsPage = async ({
           />
         </div>
         <div className="fr-grid-row fr-grid-row--gutters">
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-            <StatisticsChart
-              title="Nombre de recherches effectuées"
-              data={search}
-              xAxisDataKey="start_date"
-              tooltipLabelDataKey="period"
-              dataKeys={['search_executions']}
-              legends={[
-                {
-                  label: 'Recherches effectuées',
-                  key: 'search_executions',
-                },
-              ]}
-            />
-          </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12">
             <StatisticsChart
               title="Nombre de vues de ressources"
-              data={search}
+              data={search.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
               dataKeys={['resource_views']}
+              legend="above"
               legends={[
                 {
                   label: 'Vues de ressources',
                   key: 'resource_views',
                 },
+                {
+                  label: 'Au total : ',
+                  total: numberToString(search.totals.resource_views),
+                },
               ]}
             />
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6">
+            <StatisticsChart
+              title="Nombre de recherches effectuées"
+              data={search.data}
+              xAxisDataKey="start_date"
+              tooltipLabelDataKey="period"
+              dataKeys={['search_executions']}
+              legend="belowTitle"
+              legends={[
+                {
+                  label: 'Recherches effectuées',
+                  key: 'search_executions',
+                },
+                {
+                  label: 'Au total : ',
+                  total: numberToString(search.totals.search_executions),
+                },
+              ]}
+            />
+          </div>
+          <div className="fr-col-12 fr-col-md-6">
             <StatisticsChart
               title="Nombre de ressources enregistrées"
-              data={search}
+              data={search.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
               dataKeys={['collection_resources']}
+              legend="belowTitle"
               legends={[
                 {
                   label: 'Ressources enregistrées',
                   key: 'collection_resources',
+                },
+                {
+                  label: 'Au total : ',
+                  total: numberToString(search.totals.collection_resources),
                 },
               ]}
             />
@@ -145,9 +184,7 @@ const StatisticsPage = async ({
         <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
           <div>
             <h2 className="fr-h3 fr-mb-0">
-              Données pour comprendre
-              <br />
-              la création de ressources, bases & profils
+              Données pour suivre l'évolution de la communauté
             </h2>
           </div>
           <SelectPeriod
@@ -160,30 +197,40 @@ const StatisticsPage = async ({
           />
         </div>
         <div className="fr-grid-row fr-grid-row--gutters">
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12">
             <StatisticsChart
               title="Nombre de ressources publiées"
-              titleClassName="fr-h6"
               data={creation.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
               dataKeys={['private_resources', 'public_resources']}
               legends={[
                 {
-                  label: 'Ressources privées',
+                  label: 'Ressources privées : ',
                   value: `${creation.proportions.privateResources}%`,
+                  total: numberToString(creation.totals.privateResources),
                   key: 'private_resources',
                 },
                 {
-                  label: 'Ressources publiques',
+                  label: 'Ressources publiques : ',
                   value: `${creation.proportions.publicResources}%`,
+                  total: numberToString(creation.totals.publicResources),
                   key: 'public_resources',
                 },
+                {
+                  label: 'Au total : ',
+                  total: numberToString(
+                    Number(
+                      creation.totals.publicResources +
+                        creation.totals.privateResources,
+                    ),
+                  ),
+                },
               ]}
-              showLegendBelowChart
+              legend="above"
             />
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6">
             <StatisticsChart
               title="Nombre de profils créés"
               data={creation.data}
@@ -194,18 +241,20 @@ const StatisticsPage = async ({
                 {
                   label: 'Profils privés',
                   value: `${creation.proportions.privateUsers}%`,
+                  total: numberToString(creation.totals.privateUsers),
                   key: 'private_users',
                 },
                 {
                   label: 'Profils publics',
                   value: `${creation.proportions.publicUsers}%`,
+                  total: numberToString(creation.totals.publicUsers),
                   key: 'public_users',
                 },
               ]}
-              showLegendBelowChart
+              legend="below"
             />
           </div>
-          <div className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div className="fr-col-12 fr-col-md-6">
             <StatisticsChart
               title="Nombre de bases créées"
               data={creation.data}
@@ -216,15 +265,17 @@ const StatisticsPage = async ({
                 {
                   label: 'Bases privées',
                   value: `${creation.proportions.privateBases}%`,
+                  total: numberToString(creation.totals.privateBases),
                   key: 'private_bases',
                 },
                 {
                   label: 'Bases publiques',
                   value: `${creation.proportions.publicBases}%`,
+                  total: numberToString(creation.totals.publicBases),
                   key: 'public_bases',
                 },
               ]}
-              showLegendBelowChart
+              legend="below"
             />
           </div>
         </div>
@@ -234,8 +285,7 @@ const StatisticsPage = async ({
         <div className="fr-flex-md fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v fr-mb-4w">
           <div>
             <h2 className="fr-h3 fr-mb-0">
-              Données pour comprendre le contenu des ressources ainsi que les
-              publics visés
+              Données pour comprendre le contenu des ressources
             </h2>
           </div>
           <SelectPeriod
@@ -249,15 +299,18 @@ const StatisticsPage = async ({
         </div>
         <div className="fr-grid-row fr-grid-row--gutters">
           <div className="fr-col-12 fr-col-lg-6">
-            <Thematiques thematiques={usage.thematiques} />
-          </div>
-          <div className="fr-col-12 fr-col-lg-6">
-            <Beneficiaries beneficiaries={usage.beneficiaries} />
+            <ResourcesTypes resourceTypes={usage.resourceTypes} />
           </div>
           <div className="fr-col-12 fr-col-lg-6">
             <ProfessionalSectors
               professionalSectors={usage.professionalSectors}
             />
+          </div>
+          <div className="fr-col-12 fr-col-lg-6">
+            <Thematiques thematiques={usage.thematiques} />
+          </div>
+          <div className="fr-col-12 fr-col-lg-6">
+            <Beneficiaries beneficiaries={usage.beneficiaries} />
           </div>
         </div>
       </section>

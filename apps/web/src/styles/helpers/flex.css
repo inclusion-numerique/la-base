@@ -318,6 +318,14 @@
   .fr-flex-gap-md-10v {
     gap: 40px;
   }
+
+  .fr-flex-gap-md-11v {
+    gap: 44px;
+  }
+
+  .fr-flex-gap-md-12v {
+    gap: 48px;
+  }
 }
 
 /* lg flex rules */

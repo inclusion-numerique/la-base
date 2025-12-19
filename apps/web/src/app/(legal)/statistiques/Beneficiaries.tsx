@@ -15,7 +15,12 @@ const Beneficiaries = ({
   }[]
 }) => {
   return (
-    <Card title="Les bénéficiaires les plus utilisés">
+    <Card
+      className="fr-border fr-border-radius--8"
+      noBorder
+      titleClassName="fr-h6"
+      title="Types de bénéficiaires concernés par les ressources"
+    >
       {beneficiaries.map(({ label, progress, value, beneficiary }, index) => (
         <ProgressBar
           key={label}

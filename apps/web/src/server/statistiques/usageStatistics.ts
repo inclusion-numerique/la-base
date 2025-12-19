@@ -1,12 +1,18 @@
 import { beneficiariesLabels } from '@app/web/themes/beneficiairies'
 import { professionalSectorsLabels } from '@app/web/themes/professionalSectors'
+import { resourceTypesLabels } from '@app/web/themes/resourceTypes'
 import { themeLabels } from '@app/web/themes/themes'
-import type { Beneficiary, ProfessionalSector, Theme } from '@prisma/client'
+import type {
+  Beneficiary,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 import { pascalCase } from 'change-case'
 import { percentage } from './statistics'
 
 export type UsageStatisticsResult = {
-  type: 'beneficiaries' | 'themes' | 'professional_sectors'
+  type: 'beneficiaries' | 'themes' | 'professional_sectors' | 'resource_types'
   key: string
   value: number
 }[]
@@ -14,20 +20,26 @@ export type UsageStatisticsResult = {
 const onlyThemes = ({
   type,
 }: {
-  type: 'beneficiaries' | 'themes' | 'professional_sectors'
+  type: 'beneficiaries' | 'themes' | 'professional_sectors' | 'resource_types'
 }) => type === 'themes'
 
 const onlyBeneficiaries = ({
   type,
 }: {
-  type: 'beneficiaries' | 'themes' | 'professional_sectors'
+  type: 'beneficiaries' | 'themes' | 'professional_sectors' | 'resource_types'
 }) => type === 'beneficiaries'
 
 const onlyProfessionalSectors = ({
   type,
 }: {
-  type: 'beneficiaries' | 'themes' | 'professional_sectors'
+  type: 'beneficiaries' | 'themes' | 'professional_sectors' | 'resource_types'
 }) => type === 'professional_sectors'
+
+const onlyResourceTypes = ({
+  type,
+}: {
+  type: 'beneficiaries' | 'themes' | 'professional_sectors' | 'resource_types'
+}) => type === 'resource_types'
 
 export const themesUsages = (usageStatisticsResult: UsageStatisticsResult) => {
   const usageStatistics = usageStatisticsResult.filter(onlyThemes)
@@ -75,14 +87,38 @@ export const professionalSectorsUsages = (
 
   if (professionalSectors.length === 0) return []
 
+  const total = professionalSectors.reduce(
+    (acc, result) => acc + result.value,
+    0,
+  )
+
   return professionalSectors.map((result) => {
     const professionalSector = pascalCase(result.key) as ProfessionalSector
     return {
       professionalSector,
       label: professionalSectorsLabels[professionalSector],
       value: result.value,
-      // We assume first value is the max value
-      progress: percentage(result.value, professionalSectors[0].value),
+      progress: percentage(result.value, total),
+    }
+  })
+}
+
+export const resourceTypesUsages = (
+  usageStatisticsResult: UsageStatisticsResult,
+) => {
+  const resourceTypes = usageStatisticsResult.filter(onlyResourceTypes)
+
+  if (resourceTypes.length === 0) return []
+
+  const total = resourceTypes.reduce((acc, result) => acc + result.value, 0)
+
+  return resourceTypes.map((result) => {
+    const resourceType = pascalCase(result.key) as ResourceType
+    return {
+      resourceType,
+      label: resourceTypesLabels[resourceType],
+      value: result.value,
+      progress: percentage(result.value, total),
     }
   })
 }

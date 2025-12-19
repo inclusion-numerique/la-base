@@ -5,6 +5,7 @@ import { searchResultThemeHref } from '@app/web/themes/searchResultHrefHelpers'
 import ProgressBar from '@app/web/ui/ProgressBar'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { Theme } from '@prisma/client'
+import classNames from 'classnames'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -21,7 +22,12 @@ const Thematiques = ({
   const [showAllThematiques, setShowAllThematiques] = useState(false)
 
   return (
-    <Card title="Les thématiques les plus utilisées">
+    <Card
+      className="fr-border fr-border-radius--8"
+      noBorder
+      titleClassName="fr-h6"
+      title="Les thématiques les plus utilisées"
+    >
       {thematiques
         .slice(0, showAllThematiques ? -1 : 10)
         .map((thematique, index) => (
@@ -41,11 +47,17 @@ const Thematiques = ({
         ))}
       <Button
         type="button"
-        priority="tertiary"
+        priority="tertiary no outline"
         size="small"
         onClick={() => setShowAllThematiques(!showAllThematiques)}
       >
         Voir {showAllThematiques ? 'moins de' : 'toutes les'} thématiques
+        <span
+          className={classNames('fr-ml-1v fr-text-label--blue-france', {
+            'ri-arrow-up-s-line': showAllThematiques,
+            'ri-arrow-down-s-line': !showAllThematiques,
+          })}
+        />
       </Button>
     </Card>
   )

@@ -1,0 +1,6 @@
+.noWrap {
+  white-space: normal;
+  @media (min-width: 48rem) {
+    white-space: nowrap;
+  }
+}
