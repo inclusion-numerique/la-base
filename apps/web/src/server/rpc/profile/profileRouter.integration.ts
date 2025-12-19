@@ -571,6 +571,7 @@ describe('profileRouter', () => {
       expect(user.email).toBe(
         `utilisateur-supprimé+${givenUserId}@lesbases.anct.gouv.fr`,
       )
+      expect(user.slug).toBe(`utilisateur-supprimé+${givenUserId}`)
       expect(user.firstName).toBeNull()
       expect(user.lastName).toBeNull()
       expect(user.name).toBe('Profil supprimé')
