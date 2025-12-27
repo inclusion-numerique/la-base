@@ -124,14 +124,13 @@ describe('Authorization - Collections', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une collection privée`,
-        ({ roles }) => {
-          expect(getCollectionPermissions(privateCollection, roles)).toEqual(
-            collectionPermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une collection privée`, ({
+        roles,
+      }) => {
+        expect(getCollectionPermissions(privateCollection, roles)).toEqual(
+          collectionPermissions,
+        )
+      })
 
       it.each([
         {
@@ -142,12 +141,11 @@ describe('Authorization - Collections', () => {
           title: 'Utilisateur connecté',
           roles: [UserSecurityRoles.User],
         },
-      ])(
-        '$title, je n’ai pas de permissions sur une collection privée',
-        ({ roles }) => {
-          expect(getCollectionPermissions(privateCollection, roles)).toEqual([])
-        },
-      )
+      ])('$title, je n’ai pas de permissions sur une collection privée', ({
+        roles,
+      }) => {
+        expect(getCollectionPermissions(privateCollection, roles)).toEqual([])
+      })
     })
 
     describe('Collection publique', () => {
@@ -176,14 +174,13 @@ describe('Authorization - Collections', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une collection publique`,
-        ({ roles }) => {
-          expect(getCollectionPermissions(publicCollection, roles)).toEqual(
-            collectionPermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une collection publique`, ({
+        roles,
+      }) => {
+        expect(getCollectionPermissions(publicCollection, roles)).toEqual(
+          collectionPermissions,
+        )
+      })
 
       it('Utilisateur connecté, je peux voir et enregistrer une collection publique', () => {
         expect(

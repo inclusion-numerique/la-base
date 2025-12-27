@@ -1,4 +1,4 @@
-import { AuthCard } from '@app/web/app/(public)/(authentication)/AuthCard'
+import { AuthCard } from '@app/web/app/public/(authentication)/AuthCard'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { getProconnectIdToken } from '@app/web/security/getProconnectIdToken'
 import Link from 'next/link'

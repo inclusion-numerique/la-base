@@ -6,6 +6,8 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { isShareToken } from '@app/web/features/base/share/utils/isShareToken'
+import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -25,11 +27,35 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const { slug } = await params
 
+  // we dont want to index the shareable link token
+  if (isShareToken(slug)) {
+    const tokenResult = await resolveShareableLinkToken(slug, 'resource')
+    if (!tokenResult) {
+      notFound()
+    }
+
+    const resource = await prismaClient.resource.findUnique({
+      where: { slug: tokenResult.resource?.slug },
+      select: { title: true, description: true },
+    })
+
+    if (!resource) {
+      notFound()
+    }
+
+    return {
+      title: metadataTitle(resource.title),
+      description: resource.description || undefined,
+      robots: 'noindex, nofollow',
+    }
+  }
+
   const resource = await prismaClient.resource.findUnique({
     where: { slug },
     select: {
       title: true,
       description: true,
+      isPublic: true,
       image: {
         include: {
           upload: true,
@@ -58,6 +84,7 @@ export const generateMetadata = async ({
     }),
     title: metadataTitle(resource.title),
     description: resource.description || undefined,
+    robots: resource.isPublic ? undefined : 'noindex, nofollow',
   }
 }
 
@@ -69,12 +96,24 @@ const RessourcePage = async ({
   const { slug } = await params
   const user = await getSessionUser()
 
-  const savedResource = await getResource({ slug: decodeURI(slug) }, user)
+  let actualSlug = decodeURI(slug)
+  let isUsingShareToken = false
+
+  if (isShareToken(slug)) {
+    const tokenResult = await resolveShareableLinkToken(slug, 'resource')
+    if (!tokenResult || !tokenResult.resource) {
+      notFound()
+    }
+    actualSlug = tokenResult.resource.slug
+    isUsingShareToken = true
+  }
+
+  const savedResource = await getResource({ slug: actualSlug }, user)
 
   const draftResource = savedResource?.published
     ? null
     : await getResourceProjectionWithContext({
-        slug: decodeURI(slug),
+        slug: actualSlug,
       })
 
   const resource = applyDraft(savedResource, draftResource)
@@ -83,7 +122,11 @@ const RessourcePage = async ({
     notFound()
   }
 
-  const { hasPermission } = resourceAuthorization(resource, user)
+  const { hasPermission } = resourceAuthorization(
+    resource,
+    user,
+    isUsingShareToken,
+  )
 
   const canReadGeneralInformation = hasPermission(
     ResourcePermissions.ReadGeneralResourceInformation,
