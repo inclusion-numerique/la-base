@@ -6,6 +6,7 @@ import { baseAuthorizationTargetSelect } from '@app/web/authorization/models/bas
 import { generateBaseExcerpt } from '@app/web/bases/baseExcerpt'
 import { sendInviteMemberEmail } from '@app/web/features/base/invitation/emails/invitationEmail'
 import { prismaClient } from '@app/web/prismaClient'
+import { UpdateBaseShareableLinkCommandValidation } from '@app/web/server/bases/baseShareableLink'
 import { CreateBaseCommandValidation } from '@app/web/server/bases/createBase'
 import { deleteSuspiciousBase } from '@app/web/server/bases/suspiciousBaseDetection'
 import {
@@ -262,6 +263,46 @@ export const baseRouter = router({
       return prismaClient.base.update({
         where: { id },
         data: images,
+      })
+    }),
+  shareLink: protectedProcedure
+    .input(UpdateBaseShareableLinkCommandValidation)
+    .mutation(async ({ input: { baseId, enabled }, ctx: { user } }) => {
+      const base = await prismaClient.base.findUnique({
+        where: { id: baseId },
+        select: baseAuthorizationTargetSelect,
+      })
+
+      if (!base) {
+        throw invalidError('Base not found')
+      }
+
+      authorizeOrThrow(
+        baseAuthorization(base, user).hasPermission(BasePermissions.WriteBase),
+      )
+
+      const shareableLink = await prismaClient.shareableLink.findFirst({
+        where: { baseId },
+      })
+
+      if (!shareableLink) {
+        return prismaClient.shareableLink.create({
+          data: {
+            baseId,
+            createdById: user.id,
+            enabled: true,
+          },
+          select: { id: true },
+        })
+      }
+      return prismaClient.shareableLink.update({
+        where: {
+          id: shareableLink.id,
+        },
+        data: {
+          enabled,
+        },
+        select: { id: true },
       })
     }),
 })

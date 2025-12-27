@@ -135,6 +135,12 @@ export const baseSelect = (
         ? baseMembersOrderBy[membersOrderBy]
         : baseMembersOrderBy.Alphabetique,
     },
+    shareableLink: {
+      select: {
+        id: true,
+        enabled: true,
+      },
+    },
     _count: {
       select: {
         followedBy: true,

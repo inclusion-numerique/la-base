@@ -1,7 +1,7 @@
 'use client'
 
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
-import SignoutButton from '@app/web/app/(public)/(authentication)/deconnexion/SignoutButton'
+import SignoutButton from '@app/web/app/public/(authentication)/deconnexion/SignoutButton'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { trpc } from '@app/web/trpc'
 import Button from '@codegouvfr/react-dsfr/Button'

@@ -132,6 +132,7 @@ model User {
   featuredBlock   FeaturedBlock? @relation("profile")
   featuredBlockId String?        @unique @db.Uuid
   baseJoinRequests BaseJoinRequest[]
+  shareableLink   ShareableLink[]
 
   @@map("users")
 }
@@ -215,8 +216,8 @@ model Base {
   highlightResources   HighlightResourcesType? @default(LatestPublished) @map("highlight_resources")
   highlightCollections Boolean                 @default(true) @map("highlight_collections")
   notifications        Notification[]
-
   joinRequests BaseJoinRequest[]
+  shareableLink        ShareableLink?
 
   @@index([createdById])
   @@map("bases")
@@ -413,6 +414,7 @@ model Resource {
   featuredBlock    FeaturedBlock?         @relation("resource")
   featuredBlockId  String?                @unique @db.Uuid
   notifications    Notification[]
+  ShareableLink    ShareableLink[]
 
   @@index([baseId])
   @@index([createdById])
@@ -965,4 +967,26 @@ model Notification {
 
   @@index([userId])
   @@map("notifications")
+}
+model ShareableLink {
+  id String @id @unique @default(uuid()) @db.Uuid
+
+  base   Base?   @relation(fields: [baseId], references: [id])
+  baseId String? @unique @map("base_id") @db.Uuid
+
+  resource   Resource? @relation(fields: [resourceId], references: [id])
+  resourceId String?   @unique @map("resource_id") @db.Uuid
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String @map("created_by_id") @db.Uuid
+
+  accessCount Int @default(0)
+
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  enabled Boolean  @default(false)
+
+  @@index([baseId, enabled])
+  @@index([resourceId, enabled])
+  @@map("shareable_link")
 }

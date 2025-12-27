@@ -37,10 +37,11 @@ const MenuItem = ({
   </li>
 )
 
-const BaseMenu = ({ base }: { base: BasePageData }) => {
+const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
   const path = usePathname()
   const currentTab = getCurrentTabFromPath(path ?? '')
   const acceptedMembers = base.members.filter((member) => member.accepted)
+
   return (
     <div className={styles.menu}>
       <div className="fr-container">
@@ -49,28 +50,28 @@ const BaseMenu = ({ base }: { base: BasePageData }) => {
             <MenuItem
               tab="accueil"
               currentTab={currentTab}
-              href={`/bases/${base.slug}`}
+              href={`/bases/${slug}`}
             >
               Page d&apos;accueil
             </MenuItem>
             <MenuItem
               tab="ressources"
               currentTab={currentTab}
-              href={`/bases/${base.slug}/ressources`}
+              href={`/bases/${slug}/ressources`}
             >
               Ressources · <b>{base.resources.length}</b>
             </MenuItem>
             <MenuItem
               tab="collections"
               currentTab={currentTab}
-              href={`/bases/${base.slug}/collections`}
+              href={`/bases/${slug}/collections`}
             >
               Collections · <b>{base.collections.length}</b>
             </MenuItem>
             <MenuItem
               tab="membres"
               currentTab={currentTab}
-              href={`/bases/${base.slug}/membres`}
+              href={`/bases/${slug}/membres`}
             >
               Membres · <b>{acceptedMembers.length}</b>
             </MenuItem>
