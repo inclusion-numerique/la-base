@@ -76,6 +76,7 @@ const BaseResourcesPage = async ({
         canWrite={canWrite}
         baseId={id}
         totalCount={totalCount}
+        token={slug}
       />
     </ResourcesPagination>
   )

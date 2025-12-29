@@ -72,6 +72,7 @@ export const applyResourceMigrated: ResourceCreationEventApplier<
   },
 }) => ({
   id,
+  shareableLink: null,
   created: new Date(created),
   updated: new Date(updated),
   deleted: null,

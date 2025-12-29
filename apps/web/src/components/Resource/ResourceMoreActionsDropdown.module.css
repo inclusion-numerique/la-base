@@ -1,0 +1,7 @@
+.border {
+  border-bottom: none;
+
+  @media (min-width: 48em) {
+    border-bottom: var(--slim-grey-border);
+  }
+}

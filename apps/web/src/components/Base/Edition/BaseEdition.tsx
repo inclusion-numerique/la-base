@@ -1,6 +1,7 @@
 import BaseDeletion from '@app/web/components/Base/Edition/BaseDeletion'
 import BaseEditionContacts from '@app/web/components/Base/Edition/BaseEditionContacts'
 import BaseEditionInformation from '@app/web/components/Base/Edition/BaseEditionInformation'
+import BaseEditionShareableLink from '@app/web/components/Base/Edition/BaseEditionShareableLink'
 import BaseEditionSideMenu from '@app/web/components/Base/Edition/BaseEditionSideMenu'
 import BaseHomePageCustomisation from '@app/web/components/Base/Edition/BaseHomePageCustomisation'
 import BaseVisibilityForm from '@app/web/components/Base/Edition/BaseVisibilityForm'
@@ -17,7 +18,7 @@ const BaseEdition = ({
   canDelete: boolean
 }) => (
   <div className="fr-container fr-flex-md">
-    <BaseEditionSideMenu canDelete={canDelete} />
+    <BaseEditionSideMenu canDelete={canDelete} isPublic={base.isPublic} />
     <div
       className={classNames(
         'fr-flex-grow-1 fr-container--slim',
@@ -26,6 +27,7 @@ const BaseEdition = ({
     >
       <BaseEditionInformation base={base} />
       <BaseEditionContacts base={base} />
+      <BaseEditionShareableLink base={base} />
       <BaseHomePageCustomisation base={base} />
       <BaseVisibilityForm
         base={base}

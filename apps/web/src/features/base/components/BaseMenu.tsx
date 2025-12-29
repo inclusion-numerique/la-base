@@ -1,6 +1,7 @@
 'use client'
 
 import type { BaseTab } from '@app/web/app/(public)/bases/[slug]/(consultation)/BaseTab'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -24,11 +25,17 @@ const MenuItem = ({
   href,
   currentTab,
   children,
-}: PropsWithChildren<{ tab: BaseTab; href: string; currentTab: BaseTab }>) => (
+  shareToken,
+}: PropsWithChildren<{
+  tab: BaseTab
+  href: string
+  currentTab: BaseTab
+  shareToken?: string
+}>) => (
   <li className="fr-nav__item">
     <Link
       className="fr-nav__link fr-display-block fr-link--md"
-      href={href}
+      href={appendShareToken(href, shareToken)}
       aria-current={currentTab === tab ? 'page' : undefined}
       data-testid={`${tab}-menu-button`}
     >
@@ -37,7 +44,15 @@ const MenuItem = ({
   </li>
 )
 
-const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
+const BaseMenu = ({
+  base,
+  slug,
+  shareToken,
+}: {
+  base: BasePageData
+  slug: string
+  shareToken?: string
+}) => {
   const path = usePathname()
   const currentTab = getCurrentTabFromPath(path ?? '')
   const acceptedMembers = base.members.filter((member) => member.accepted)
@@ -51,6 +66,7 @@ const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
               tab="accueil"
               currentTab={currentTab}
               href={`/bases/${slug}`}
+              shareToken={shareToken}
             >
               Page d&apos;accueil
             </MenuItem>
@@ -58,6 +74,7 @@ const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
               tab="ressources"
               currentTab={currentTab}
               href={`/bases/${slug}/ressources`}
+              shareToken={shareToken}
             >
               Ressources · <b>{base.resources.length}</b>
             </MenuItem>
@@ -65,6 +82,7 @@ const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
               tab="collections"
               currentTab={currentTab}
               href={`/bases/${slug}/collections`}
+              shareToken={shareToken}
             >
               Collections · <b>{base.collections.length}</b>
             </MenuItem>
@@ -72,6 +90,7 @@ const BaseMenu = ({ base, slug }: { base: BasePageData; slug: string }) => {
               tab="membres"
               currentTab={currentTab}
               href={`/bases/${slug}/membres`}
+              shareToken={shareToken}
             >
               Membres · <b>{acceptedMembers.length}</b>
             </MenuItem>

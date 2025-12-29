@@ -11,6 +11,7 @@ import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollecti
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import type { CollectionPageData } from '@app/web/server/collections/getCollection'
 import type { WithMinimalImageData } from '@app/web/server/image/imageTypes'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -20,11 +21,13 @@ const CollectionView = ({
   user,
   isOwner = false,
   canWrite = false,
+  shareToken,
 }: {
   collection: Omit<CollectionPageData, 'image'> & WithMinimalImageData
   user: SessionUser | null
   isOwner?: boolean
   canWrite?: boolean
+  shareToken?: string
 }) => (
   <>
     <CollectionViewHeader collection={collection} />
@@ -95,6 +98,7 @@ const CollectionView = ({
                 ResourceRoles.ResourceContributor,
               )}
               className={index === 0 ? 'fr-pt-12v' : undefined}
+              shareToken={shareToken}
             />
           ))
         ) : (
@@ -104,6 +108,7 @@ const CollectionView = ({
     </div>
     {!!user && <SaveResourceInCollectionModal user={user} />}
     <DeleteResourceModal />
+    <ShareLinkModal />
     {!!user && (
       <DeleteCollectionModal redirectTo={`/profils/${user.slug}/collections`} />
     )}

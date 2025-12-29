@@ -4,8 +4,9 @@ import {
   BasePermissions,
   baseAuthorization,
 } from '@app/web/authorization/models/baseAuthorization'
-import { isShareToken } from '@app/web/features/base/share/utils/isShareToken'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
+import { updateShareableLinkAccessCount } from '@app/web/features/shareableLink/db/updateShareableLinkAccessCount'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { basePageQuery } from '@app/web/server/bases/getBase'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import { notFound } from 'next/navigation'
@@ -22,13 +23,20 @@ export const getBasePageContext = cache(
     let base = await basePageQuery(decodeURI(baseSlug), user, membersSortBy, paginationParams)
     let isUsingShareToken = false
 
-    if (isShareToken(baseSlug)) {
+    if (isShareableLinkToken(baseSlug)) {
       const tokenResult = await resolveShareableLinkToken(baseSlug, 'base')
       if (!tokenResult || !tokenResult.base || !tokenResult) {
         notFound()
       }
-      base = await basePageQuery(tokenResult.base.slug, user, membersSortBy, paginationParams)
+      base = await basePageQuery(
+        tokenResult.base.slug,
+        user,
+        membersSortBy,
+        paginationParams,
+        true,
+      )
       isUsingShareToken = true
+      await updateShareableLinkAccessCount(tokenResult.id)
     }
 
     if (!base) {

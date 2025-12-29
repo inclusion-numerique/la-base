@@ -1,4 +1,5 @@
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -12,16 +13,18 @@ const CollectionCard = ({
   canWrite,
   context = undefined,
   highlightCount = undefined,
+  token,
 }: {
   orientation?: 'row' | 'column'
   collection: CollectionListItem
   canWrite: boolean
   context?: string
   highlightCount?: number
+  token?: string
 }) => {
   const resourcesCount = collection._count.resources
 
-  const href = `/collections/${collection.slug}`
+  const href = appendShareToken(`/collections/${collection.slug}`, token)
 
   return (
     <article

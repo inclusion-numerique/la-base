@@ -1,7 +1,7 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import { BaseJoinRequest } from '@app/web/features/base/join-requests/components/BaseJoinRequest'
-import BaseShareLink from '@app/web/features/base/share/components/BaseShareModal'
+import BaseHeaderShareLinkButton from '@app/web/features/base/components/BaseHeaderShareLinkButton'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Badge from '@codegouvfr/react-dsfr/Badge'
@@ -53,7 +53,7 @@ const BaseHeader = ({
               context="base"
             />
             {canWrite && (isBaseMember || isBaseCreator) ? (
-              <div className="fr-flex fr-flex-gap-2v fr-mt-2w ">
+              <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-mt-2w ">
                 <Link
                   data-testid="base-edition-button"
                   className="fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left fr-width-full fr-justify-content-center"
@@ -62,7 +62,12 @@ const BaseHeader = ({
                 >
                   Modifier la base
                 </Link>
-                {!base.isPublic && <BaseShareLink base={base} />}
+                {!base.isPublic && (
+                  <BaseHeaderShareLinkButton
+                    base={base}
+                    enabled={!!base.shareableLink?.enabled}
+                  />
+                )}
               </div>
             ) : (
               base.isPublic && (

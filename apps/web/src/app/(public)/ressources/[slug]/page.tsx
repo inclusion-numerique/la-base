@@ -6,8 +6,9 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
-import { isShareToken } from '@app/web/features/base/share/utils/isShareToken'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
+import { updateShareableLinkAccessCount } from '@app/web/features/shareableLink/db/updateShareableLinkAccessCount'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -28,7 +29,7 @@ export const generateMetadata = async ({
   const { slug } = await params
 
   // we dont want to index the shareable link token
-  if (isShareToken(slug)) {
+  if (isShareableLinkToken(slug)) {
     const tokenResult = await resolveShareableLinkToken(slug, 'resource')
     if (!tokenResult) {
       notFound()
@@ -90,22 +91,33 @@ export const generateMetadata = async ({
 
 const RessourcePage = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ token?: string }>
 }) => {
   const { slug } = await params
+  const { token } = await searchParams
   const user = await getSessionUser()
 
   let actualSlug = decodeURI(slug)
   let isUsingShareToken = false
 
-  if (isShareToken(slug)) {
+  if (isShareableLinkToken(slug)) {
     const tokenResult = await resolveShareableLinkToken(slug, 'resource')
     if (!tokenResult || !tokenResult.resource) {
       notFound()
     }
     actualSlug = tokenResult.resource.slug
     isUsingShareToken = true
+    await updateShareableLinkAccessCount(tokenResult.id)
+  } else if (token && isShareableLinkToken(token)) {
+    const tokenResult = await resolveShareableLinkToken(token, 'base')
+    if (!tokenResult) {
+      notFound()
+    }
+    isUsingShareToken = true
+    await updateShareableLinkAccessCount(tokenResult.id)
   }
 
   const savedResource = await getResource({ slug: actualSlug }, user)
