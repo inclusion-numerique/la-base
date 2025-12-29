@@ -228,6 +228,7 @@ export const getResourceSelect = (_user: { id: string } | null) =>
       orderBy: { order: 'asc' },
     },
     viewsCount: true,
+    shareableLink: { select: { id: true, enabled: true } },
     _count: {
       select: {
         resourceFeedback: {

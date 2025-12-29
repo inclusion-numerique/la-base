@@ -403,8 +403,7 @@ model Resource {
   resourceFeedback ResourceFeedback[]
   featuredBlock    FeaturedBlock?         @relation("resource")
   featuredBlockId  String?                @unique @db.Uuid
-  notifications    Notification[]
-  ShareableLink    ShareableLink[]
+  shareableLink    ShareableLink?
 
   @@index([baseId])
   @@index([createdById])

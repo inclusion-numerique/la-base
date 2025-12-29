@@ -71,13 +71,14 @@ describe('Authorization - Profils', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(`$title, j’ai toutes les permissions sur un profil privé`, ({
-        roles,
-      }) => {
-        expect(getProfilePermissions(privateProfile, roles)).toEqual(
-          profilePermissions,
-        )
-      })
+      ])(
+        `$title, j’ai toutes les permissions sur un profil privé`,
+        ({ roles }) => {
+          expect(getProfilePermissions(privateProfile, roles)).toEqual(
+            profilePermissions,
+          )
+        },
+      )
 
       it.each([
         {
@@ -115,13 +116,14 @@ describe('Authorization - Profils', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(`$title, j’ai toutes les permissions sur un profil public`, ({
-        roles,
-      }) => {
-        expect(getProfilePermissions(publicProfile, roles)).toEqual(
-          profilePermissions,
-        )
-      })
+      ])(
+        `$title, j’ai toutes les permissions sur un profil public`,
+        ({ roles }) => {
+          expect(getProfilePermissions(publicProfile, roles)).toEqual(
+            profilePermissions,
+          )
+        },
+      )
 
       it('Visiteur, je peux voir les infos générales et données d’un profil public', () => {
         expect(getProfilePermissions(publicProfile, [])).toEqual([
@@ -162,13 +164,14 @@ describe('Authorization - Profils', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(`$title, j’ai toutes les permissions sur un profil public avec email public`, ({
-        roles,
-      }) => {
-        expect(
-          getProfilePermissions(publicProfileWithPublicEmail, roles),
-        ).toEqual(profilePermissions)
-      })
+      ])(
+        `$title, j’ai toutes les permissions sur un profil public avec email public`,
+        ({ roles }) => {
+          expect(
+            getProfilePermissions(publicProfileWithPublicEmail, roles),
+          ).toEqual(profilePermissions)
+        },
+      )
 
       it('Visiteur, je peux voir les infos générales, données et email d’un profil public avec email public', () => {
         expect(getProfilePermissions(publicProfileWithPublicEmail, [])).toEqual(

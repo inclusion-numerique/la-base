@@ -11,11 +11,11 @@ describe('formatNumber', () => {
       { value: 353.423, expected: '353,4 %' },
     ]
 
-    test.each(cases)('should format $value to $expected', ({
-      value,
-      expected,
-    }) => {
-      expect(numberToPercentage(value)).toEqual(expected)
-    })
+    test.each(cases)(
+      'should format $value to $expected',
+      ({ value, expected }) => {
+        expect(numberToPercentage(value)).toEqual(expected)
+      },
+    )
   })
 })

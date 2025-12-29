@@ -2,46 +2,43 @@
 
 import ToggleFormField from '@app/ui/components/Form/ToggleFormField'
 import { createToast } from '@app/ui/toast/createToast'
+import Card from '@app/web/components/Card'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
+import { OpenResetLinkConfirmationModal } from '@app/web/features/shareableLink/components/OpenResetLinkConfirmationModal'
+import ResetLinkConfirmationModal from '@app/web/features/shareableLink/components/ResetLinkConfirmationModal'
+import type { BasePageData } from '@app/web/server/bases/getBase'
 import {
-  UpdateBaseShareableLinkCommand,
-  UpdateBaseShareableLinkCommandValidation,
-} from '@app/web/server/bases/baseShareableLink'
-import { BasePageData } from '@app/web/server/bases/getBase'
+  UpdateShareableLinkCommand,
+  UpdateShareableLinkCommandValidation,
+} from '@app/web/server/shareableLink/shareableLink'
 import { trpc } from '@app/web/trpc'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import styles from './BaseShareModal.module.css'
 
-export const BaseShareModal = createModal({
-  isOpenedByDefault: false,
-  id: 'base-share-modal',
-})
-
-const BaseShareLink = ({ base }: { base: BasePageData }) => {
+const BaseEditionShareableLink = ({ base }: { base: BasePageData }) => {
   const [shareLink, setShareLink] = useState(base.shareableLink)
-  const form = useForm<UpdateBaseShareableLinkCommand>({
+
+  const form = useForm<UpdateShareableLinkCommand>({
     defaultValues: {
       enabled: !!base.shareableLink?.enabled,
       baseId: base.id,
     },
-    resolver: zodResolver(UpdateBaseShareableLinkCommandValidation),
+    resolver: zodResolver(UpdateShareableLinkCommandValidation),
   })
-  const { control, handleSubmit, watch } = form
+  const { control, watch } = form
 
-  const shareableLinkMutation = trpc.base.shareLink.useMutation()
+  const shareableLinkMutation = trpc.shareableLink.shareLink.useMutation()
 
   const shareUrl = shareLink?.enabled
     ? getServerUrl(`/bases/${shareLink.id}`, { absolutePath: true })
     : null
 
-  const onSubmit = async (data: UpdateBaseShareableLinkCommand) => {
+  const onSubmit = async (data: UpdateShareableLinkCommand) => {
     try {
       const result = await shareableLinkMutation.mutateAsync(data)
       setShareLink({ ...result, enabled: data.enabled })
@@ -77,61 +74,37 @@ const BaseShareLink = ({ base }: { base: BasePageData }) => {
     }
   }
 
-  const resetLink = async () => {
-    try {
-      // Disable and re-enable to generate a new link
-      await shareableLinkMutation.mutateAsync({
-        baseId: base.id,
-        enabled: false,
-      })
-      const result = await shareableLinkMutation.mutateAsync({
-        baseId: base.id,
-        enabled: true,
-      })
-      setShareLink({ ...result, enabled: true })
-
-      createToast({
-        priority: 'success',
-        message: 'Nouveau lien de partage généré',
-      })
-    } catch {
-      createToast({
-        priority: 'error',
-        message: 'Erreur lors de la réinitialisation du lien',
-      })
-    }
-  }
-
   const enabledValue = watch('enabled')
   const isSubmitting = shareableLinkMutation.isPending
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dont need the onsubmit in the deps array
+  // biome-ignore lint/correctness/useExhaustiveDependencies: onSubmit not wanted in deps array
   useEffect(() => {
     if (enabledValue !== !!shareLink?.enabled) {
-      form.handleSubmit(onSubmit)()
+      onSubmit({
+        enabled: enabledValue,
+        baseId: base?.id,
+      })
     }
-  }, [enabledValue, form, shareLink])
+  }, [enabledValue, shareLink, base])
 
   return (
     <>
-      <Button
-        disabled={isSubmitting}
-        type="button"
-        priority="secondary"
-        onClick={BaseShareModal.open}
+      <ResetLinkConfirmationModal />
+      <Card
+        noBorder
+        className="fr-mt-3w fr-border-radius--8 fr-border"
+        id="partage"
+        title={
+          <h2 className="fr-mb-3v fr-h5 fr-text-label--blue-france">
+            Partage de la base via un lien
+          </h2>
+        }
+        titleAs="div"
+        contentSeparator
       >
-        <span className="ri-link fr-mr-1w" aria-hidden />
-        Partager
-      </Button>
-      <BaseShareModal.Component
-        size="medium"
-        title="Partager votre base privée via un lien"
-        className={styles.modalContainer}
-      >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="fr-flex fr-direction-column">
           <div
             className={classNames(
-              styles.shareToggle,
               'fr-mb-4w fr-px-3w fr-py-2w fr-border fr-border-radius--8 fr-flex fr-justify-content-space-between fr-align-items-center fr-flex-gap-4v',
             )}
           >
@@ -165,21 +138,16 @@ const BaseShareLink = ({ base }: { base: BasePageData }) => {
               </Button>
             </div>
             <div className="fr-width-full fr-flex fr-justify-content-center">
-              <Button
-                className="fr-link fr-text--underline fr-flex"
-                priority="tertiary no outline"
-                onClick={resetLink}
-                disabled={isSubmitting}
-                type="button"
-              >
-                Réinitialiser le lien
-              </Button>
+              <OpenResetLinkConfirmationModal
+                shareableLinkId={shareLink?.id}
+                entityType="base"
+              />
             </div>
           </div>
-        </form>
-      </BaseShareModal.Component>
+        </div>
+      </Card>
     </>
   )
 }
 
-export default withTrpc(BaseShareLink)
+export default withTrpc(BaseEditionShareableLink)

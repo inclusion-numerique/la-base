@@ -12,18 +12,22 @@ export const resolveShareableLinkToken = async (
       },
       select: {
         id: true,
-        base: {
-          select: {
-            id: true,
-            slug: true,
+        ...(type === 'base' && {
+          base: {
+            select: {
+              id: true,
+              slug: true,
+            },
           },
-        },
-        resource: {
-          select: {
-            id: true,
-            slug: true,
+        }),
+        ...(type === 'resource' && {
+          resource: {
+            select: {
+              id: true,
+              slug: true,
+            },
           },
-        },
+        }),
       },
     })
 

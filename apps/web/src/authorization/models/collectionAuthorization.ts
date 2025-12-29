@@ -61,6 +61,7 @@ export const getCollectionRoles = (
 export const getCollectionPermissions = (
   collection: CollectionAuthorizationTarget,
   roles: (UserSecurityRole | CollectionRole)[],
+  isShareToken = false,
 ): CollectionPermission[] => {
   if (collection.deleted) {
     return []
@@ -77,6 +78,14 @@ export const getCollectionPermissions = (
   }
 
   const permissions: CollectionPermission[] = []
+
+  // Share token grants read permissions regardless of collection visibility
+  if (isShareToken) {
+    permissions.push(
+      CollectionPermissions.ReadGeneralCollectionInformation,
+      CollectionPermissions.ReadCollectionContent,
+    )
+  }
 
   // Other users can only see published public collections
   if (collection.isPublic) {

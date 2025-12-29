@@ -33,6 +33,7 @@ export const baseSelect = (
   user: Pick<SessionUser, 'id'> | null,
   membersOrderBy?: BaseMembersSortType,
   paginationParams?: PaginationParams,
+  isShareToken = false,
 ) =>
   ({
     id: true,
@@ -108,12 +109,12 @@ export const baseSelect = (
     },
     resources: {
       select: resourceListSelect(user),
-      where: computeResourcesListWhereForUser(user),
+      where: computeResourcesListWhereForUser(user, {}, isShareToken),
       orderBy: getResourcesOrderBy(paginationParams?.sort),
     },
     collections: {
-      select: collectionSelect(user),
-      where: computeCollectionsListWhereForUser(user),
+      select: collectionSelect(user, isShareToken),
+      where: computeCollectionsListWhereForUser(user, {}, isShareToken),
       orderBy: [
         { order: 'asc' },
         {
@@ -144,10 +145,12 @@ export const baseSelect = (
     _count: {
       select: {
         followedBy: true,
-        resources: { where: computeResourcesListWhereForUser(user) },
+        resources: {
+          where: computeResourcesListWhereForUser(user, {}, isShareToken),
+        },
       },
     },
-  }) satisfies Prisma.BaseSelect
+  } satisfies Prisma.BaseSelect)
 
 export const getBase = async ({
   id,
@@ -159,9 +162,10 @@ export const getBase = async ({
   user: Pick<SessionUser, 'id'> | null
   membersOrderBy?: BaseMembersSortType
   paginationParams?: PaginationParams
+  isShareToken?: boolean
 } & ({ id: string; slug?: undefined } | { id?: undefined; slug: string })) => {
   const base = await prismaClient.base.findFirst({
-    select: baseSelect(user, membersOrderBy, paginationParams),
+    select: baseSelect(user, membersOrderBy, paginationParams, isShareToken),
     where: { id, slug, deleted: null },
   })
 
@@ -240,16 +244,18 @@ export const basePageQuery = async (
   user: Pick<SessionUser, 'id'> | null,
   membersOrderBy?: BaseMembersSortType,
   paginationParams?: PaginationParams,
+  isShareToken = false,
 ) => {
   const basePage = await getBase({
     slug,
     user,
     membersOrderBy,
     paginationParams,
+    isShareToken,
   })
   const resourceViews = await prismaClient.resource.aggregate({
     where: {
-      ...computeResourcesListWhereForUser(user),
+      ...computeResourcesListWhereForUser(user, {}, isShareToken),
       baseId: basePage?.id,
     },
     _sum: {

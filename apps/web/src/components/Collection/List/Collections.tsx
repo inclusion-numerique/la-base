@@ -3,6 +3,7 @@ import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollecti
 import { ManageCollectionButton } from '@app/web/components/Collection/ManageCollectionButton'
 import EmptyBox from '@app/web/components/EmptyBox'
 import IconInSquare from '@app/web/components/IconInSquare'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -28,6 +29,7 @@ const Collections = ({
   isOwner?: boolean
 }) => {
   const favoriteCollection = collections.find((c) => c.isFavorites)
+  const isShareLink = !!baseSlug && isShareableLinkToken(baseSlug)
 
   return (
     <div data-testid="collections-list">
@@ -79,6 +81,7 @@ const Collections = ({
                 collection={collection}
                 key={collection.id}
                 canWrite={isOwner || withCreation}
+                token={isShareLink ? baseSlug : undefined}
               />
             ))}
             {collections.length === 1 && !!favoriteCollection && (

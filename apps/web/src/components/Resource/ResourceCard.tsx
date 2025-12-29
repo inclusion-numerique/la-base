@@ -5,7 +5,9 @@ import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import { resourceCardImageBreakpoints } from '@app/web/components/Resource/resourceCardImageBreakpoints'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import type { Resource } from '@app/web/server/resources/getResource'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -31,9 +33,10 @@ const ResourceCard = ({
   copyLinkUrl = `${getServerUrl(`/ressources/${resource.slug}`, {
     absolutePath: true,
   })}`,
+  shareToken,
 }: {
   children?: React.ReactNode
-  resource: ResourceListItem
+  resource: BaseResource | Resource
   user: SessionUser | null
   className?: string
   isContributor: boolean
@@ -43,6 +46,7 @@ const ResourceCard = ({
   highlightCount?: number
   withDate?: boolean
   copyLinkUrl?: string
+  shareToken?: string
 }) => (
   <article
     className={classNames(styles.container, className)}
@@ -71,7 +75,7 @@ const ResourceCard = ({
     </div>
     <div className="fr-flex fr-direction-column fr-justify-content-space-between">
       <Link
-        href={`/ressources/${resource.slug}`}
+        href={appendShareToken(`/ressources/${resource.slug}`, shareToken)}
         className={styles.content}
         data-testid="resource-card-link"
       >
@@ -168,7 +172,10 @@ const ResourceCard = ({
                 size="small"
                 priority="tertiary no outline"
                 linkProps={{
-                  href: `/ressources/${resource.slug}/editer`,
+                  href: appendShareToken(
+                    `/ressources/${resource.slug}/editer`,
+                    shareToken,
+                  ),
                   prefetch: false,
                 }}
               >

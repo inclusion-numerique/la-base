@@ -42,7 +42,7 @@ const CollectionMetaData = ({
           hideRessourceLabelOnSmallDevices ? 'fr-hidden fr-unhidden-sm' : ''
         }
       >
-        Ressource{sPluriel(count)}
+        Ressource{sPluriel(count)}&nbsp;
       </span>
     </div>
     <div className="fr-flex fr-flex-gap-2v">

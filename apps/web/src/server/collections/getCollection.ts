@@ -9,7 +9,10 @@ import {
 import type { Prisma } from '@prisma/client'
 import { imageCropSelect } from '../image/imageCropSelect'
 
-export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
+export const collectionSelect = (
+  user: Pick<SessionUser, 'id'> | null,
+  isShareToken = false,
+) =>
   ({
     id: true,
     title: true,
@@ -71,7 +74,9 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
         id: true,
         resource: { select: resourceListSelect(user) },
       },
-      where: { resource: computeResourcesListWhereForUser(user) },
+      where: {
+        resource: computeResourcesListWhereForUser(user, {}, isShareToken),
+      },
       orderBy: [
         { order: 'asc' },
         { resource: { lastPublished: 'desc' } },
@@ -86,9 +91,10 @@ export const getCollection = async (
     id,
   }: { slug: string; id?: undefined } | { slug?: undefined; id: string },
   user: Pick<SessionUser, 'id'> | null,
+  isShareToken = false,
 ) => {
   const collection = await prismaClient.collection.findFirst({
-    select: collectionSelect(user),
+    select: collectionSelect(user, isShareToken),
     where: { id, slug, deleted: null },
     orderBy: [
       {

@@ -8,9 +8,9 @@ import BaseHeader, {
 } from '@app/web/features/base/components/BaseHeader'
 import BaseMenu from '@app/web/features/base/components/BaseMenu'
 import BaseJoinRequestFormModal from '@app/web/features/base/join-requests/components/BaseJoinRequestFormModal'
-
-import { isShareToken } from '@app/web/features/base/share/utils/isShareToken'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
@@ -23,7 +23,7 @@ export const generateMetadata = async ({
   const { slug } = await params
 
   // we dont want to index the shareable link token
-  if (isShareToken(slug)) {
+  if (isShareableLinkToken(slug)) {
     const tokenResult = await resolveShareableLinkToken(slug, 'base')
     if (!tokenResult) {
       notFound()
@@ -84,11 +84,12 @@ const BaseLayout = async ({
     return (
       <>
         <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
-        <BaseHeader base={base} canWrite={false} user={user} />x
+        <BaseHeader base={base} canWrite={false} user={user} />
         <main id={contentId}>
           <PrivateBox type="Base" />
         </main>
         <BaseJoinRequestFormModal user={user} base={base} />
+        <ShareLinkModal />
       </>
     )
   }
@@ -102,6 +103,7 @@ const BaseLayout = async ({
         {children}
       </main>
       <BaseJoinRequestFormModal user={user} base={base} />
+      <ShareLinkModal />
     </>
   )
 }

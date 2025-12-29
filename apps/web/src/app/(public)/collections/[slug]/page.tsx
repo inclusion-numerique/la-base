@@ -9,6 +9,8 @@ import CollectionView from '@app/web/components/Collection/CollectionView'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import PrivateBox from '@app/web/components/PrivateBox'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { getCollection } from '@app/web/server/collections/getCollection'
 import { contentId } from '@app/web/utils/skipLinks'
@@ -17,10 +19,36 @@ import { notFound } from 'next/navigation'
 
 export const generateMetadata = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ token?: string }>
 }): Promise<Metadata> => {
   const { slug } = await params
+  const { token } = await searchParams
+
+  if (isShareableLinkToken(slug) || (token && isShareableLinkToken(token))) {
+    const shareToken = isShareableLinkToken(slug) ? slug : token!
+    const tokenResult = await resolveShareableLinkToken(shareToken, 'base')
+    if (!tokenResult) {
+      notFound()
+    }
+
+    const collection = await prismaClient.collection.findUnique({
+      where: { slug: isShareableLinkToken(slug) ? undefined : slug },
+      select: { title: true, description: true },
+    })
+
+    if (!collection) {
+      notFound()
+    }
+
+    return {
+      title: metadataTitle(collection.title),
+      description: collection.description || undefined,
+      robots: 'noindex, nofollow',
+    }
+  }
 
   const collection = await prismaClient.collection.findUnique({
     where: {
@@ -45,17 +73,43 @@ export const generateMetadata = async ({
 
 const CollectionPage = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ token?: string }>
 }) => {
   const { slug } = await params
+  const { token } = await searchParams
   const user = await getSessionUser()
-  const collection = await getCollection({ slug: decodeURI(slug) }, user)
+
+  let actualSlug = decodeURI(slug)
+  let isUsingShareToken = false
+  let shareToken: string | undefined
+
+  if (isShareableLinkToken(slug) || (token && isShareableLinkToken(token))) {
+    shareToken = isShareableLinkToken(slug) ? slug : token!
+    const tokenResult = await resolveShareableLinkToken(shareToken, 'base')
+    if (!tokenResult) {
+      notFound()
+    }
+    actualSlug = decodeURI(slug)
+    isUsingShareToken = true
+  }
+
+  const collection = await getCollection(
+    { slug: actualSlug },
+    user,
+    isUsingShareToken,
+  )
 
   if (!collection) {
     notFound()
   }
-  const { hasPermission, hasRole } = collectionAuthorization(collection, user)
+  const { hasPermission, hasRole } = collectionAuthorization(
+    collection,
+    user,
+    isUsingShareToken,
+  )
 
   const canReadGeneralInformation = hasPermission(
     CollectionPermissions.ReadGeneralCollectionInformation,
@@ -91,6 +145,7 @@ const CollectionPage = async ({
             user={user}
             isOwner={isOwner}
             canWrite={canWrite}
+            shareToken={shareToken}
           />
         ) : (
           <div className="fr-container fr-container--medium fr-my-4w">
