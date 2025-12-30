@@ -1,5 +1,4 @@
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
-import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import {
   ProfilePermissions,
   ProfileRoles,
@@ -8,15 +7,30 @@ import EmptyProfileResources from '@app/web/components/Profile/EmptyProfileResou
 import Resources from '@app/web/components/Resource/List/Resources'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
+import {
+  sanitizeUrlPaginationParams,
+  UrlPaginationParams,
+} from '@app/web/server/search/searchQueryParams'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import { applyDraft } from '@app/web/utils/resourceDraft'
 
-const ProfilePage = async ({ params }: ProfilRouteParams) => {
+const ProfilePage = async ({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<UrlPaginationParams>
+}) => {
+  const paginationParams = sanitizeUrlPaginationParams(await searchParams)
   const { slug } = await params
   // Auth and profile has been checked in layout
   const { profile, user, authorization } = await getProfilePageContext(slug)
 
-  const resources = await getProfileResources(profile.id, user)
+  const resources = await getProfileResources(
+    profile.id,
+    user,
+    paginationParams,
+  )
   const isAdmin = user?.role === 'Admin'
 
   const isOwner = authorization.hasRole(ProfileRoles.ProfileOwner)
@@ -50,11 +64,13 @@ const ProfilePage = async ({ params }: ProfilRouteParams) => {
     <EmptyProfileResources canWrite={canWrite} isOwner={isOwner} />
   ) : (
     <Resources
+      paginationParams={paginationParams}
       isOwner={isOwner}
       title={isOwner ? 'Mes ressources' : 'Ressources'}
       resources={ressourcesWithAppliedDraft}
       canWrite={canWrite}
       user={user}
+      slug={slug}
       baseId={null}
     />
   )
