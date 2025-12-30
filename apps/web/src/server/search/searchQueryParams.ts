@@ -282,7 +282,7 @@ const searchParamsToUrl = (params: SearchParams): string => {
   return objectToQueryString(urlParams)
 }
 
-const paginationParamsToUrl = (params: PaginationParams): string => {
+export const paginationParamsToUrl = (params: PaginationParams): string => {
   const urlParams = paginationParamsToUrlQueryParams(params)
   return objectToQueryString(urlParams)
 }
