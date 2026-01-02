@@ -276,13 +276,11 @@ export const cleanUpAndCreateTestCollectionAndResource = (
       { acceptedMemberIds: [user.id] },
     )
 
-    baseWithCollection.slug = v4()
     ids.baseWithCollection = baseWithCollection.slug
     const otherBaseWithCollection = givenBase({
       createdById: otherUser.id,
       isPublic: false,
     })
-    otherBaseWithCollection.slug = v4()
     ids.otherBaseWithCollection = otherBaseWithCollection.slug
 
     cy.createBase(baseWithoutCollection)
