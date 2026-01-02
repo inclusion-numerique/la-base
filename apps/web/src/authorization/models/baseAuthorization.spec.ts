@@ -126,14 +126,11 @@ describe('Authorization - Bases', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une base privée`,
-        ({ roles }) => {
-          expect(getBasePermissions(privateBase, roles)).toEqual(
-            basePermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une base privée`, ({
+        roles,
+      }) => {
+        expect(getBasePermissions(privateBase, roles)).toEqual(basePermissions)
+      })
 
       it('Membre, je peux éditer une base privée', () => {
         expect(getBasePermissions(privateBase, [BaseRoles.BaseMember])).toEqual(
@@ -162,14 +159,13 @@ describe('Authorization - Bases', () => {
           title: 'Créateur non membre',
           roles: [BaseRoles.BaseCreator],
         },
-      ])(
-        '$title, je n’ai pas de permissions sur une base privée',
-        ({ roles }) => {
-          expect(getBasePermissions(privateBase, roles)).toEqual([
-            BasePermissions.ReadGeneralBaseInformation,
-          ])
-        },
-      )
+      ])('$title, je n’ai pas de permissions sur une base privée', ({
+        roles,
+      }) => {
+        expect(getBasePermissions(privateBase, roles)).toEqual([
+          BasePermissions.ReadGeneralBaseInformation,
+        ])
+      })
     })
 
     describe('Base publique', () => {
@@ -188,12 +184,11 @@ describe('Authorization - Bases', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une base publique`,
-        ({ roles }) => {
-          expect(getBasePermissions(publicBase, roles)).toEqual(basePermissions)
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une base publique`, ({
+        roles,
+      }) => {
+        expect(getBasePermissions(publicBase, roles)).toEqual(basePermissions)
+      })
 
       it('Membre, je peux éditer une base publique', () => {
         expect(getBasePermissions(publicBase, [BaseRoles.BaseMember])).toEqual([
@@ -257,14 +252,13 @@ describe('Authorization - Bases', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une base publique avec email public`,
-        ({ roles }) => {
-          expect(getBasePermissions(publicBaseWithPublicEmail, roles)).toEqual(
-            basePermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une base publique avec email public`, ({
+        roles,
+      }) => {
+        expect(getBasePermissions(publicBaseWithPublicEmail, roles)).toEqual(
+          basePermissions,
+        )
+      })
 
       it('Membre, je peux éditer une base publique avec email public', () => {
         expect(
