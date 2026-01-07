@@ -120,19 +120,16 @@ const StatisticsPage = async ({
           <div className="fr-col-12">
             <StatisticsChart
               title="Nombre de vues de ressources"
-              data={search.data}
+              data={search.resourceViews.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              dataKeys={['resource_views']}
+              dataKeys={['value']}
               legend="above"
               legends={[
-                {
-                  label: 'Vues de ressources',
-                  key: 'resource_views',
-                },
+                { label: 'Vues de ressources', key: 'value' },
                 {
                   label: 'Au total : ',
-                  total: numberToString(search.totals.resource_views),
+                  total: numberToString(search.resourceViews.total),
                 },
               ]}
             />
@@ -140,19 +137,16 @@ const StatisticsPage = async ({
           <div className="fr-col-12 fr-col-md-6">
             <StatisticsChart
               title="Nombre de recherches effectuées"
-              data={search.data}
+              data={search.searchExecutions.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              dataKeys={['search_executions']}
+              dataKeys={['value']}
               legend="belowTitle"
               legends={[
-                {
-                  label: 'Recherches effectuées',
-                  key: 'search_executions',
-                },
+                { label: 'Recherches effectuées', key: 'value' },
                 {
                   label: 'Au total : ',
-                  total: numberToString(search.totals.search_executions),
+                  total: numberToString(search.searchExecutions.total),
                 },
               ]}
             />
@@ -160,19 +154,16 @@ const StatisticsPage = async ({
           <div className="fr-col-12 fr-col-md-6">
             <StatisticsChart
               title="Nombre de ressources enregistrées"
-              data={search.data}
+              data={search.collectionResources.data}
               xAxisDataKey="start_date"
               tooltipLabelDataKey="period"
-              dataKeys={['collection_resources']}
+              dataKeys={['value']}
               legend="belowTitle"
               legends={[
-                {
-                  label: 'Ressources enregistrées',
-                  key: 'collection_resources',
-                },
+                { label: 'Ressources enregistrées', key: 'value' },
                 {
                   label: 'Au total : ',
-                  total: numberToString(search.totals.collection_resources),
+                  total: numberToString(search.collectionResources.total),
                 },
               ]}
             />

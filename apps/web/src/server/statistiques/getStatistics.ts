@@ -5,6 +5,7 @@ import {
   computeCreationProportions,
   computeCreationTotals,
 } from './creationStatistics'
+import { computeCumulative } from './statistics'
 import {
   beneficiariesUsages,
   professionalSectorsUsages,
@@ -33,13 +34,11 @@ type KpiStatisticsResult = [
   { category: 'feedback_average'; count: number },
 ]
 
-type SearchStatisticsResult = {
+type SingleSearchStatisticsResult = {
   period: string
   start_date: string
   end_date: string
-  collection_resources: number
-  search_executions: number
-  resource_views: number
+  value: number
 }[]
 
 const MILLISECONDS_IN_MONTH = 1000 * 60 * 60 * 24 * 30
@@ -52,9 +51,19 @@ const TWELVE_LAST_MONTHS = 12
 export const getStatistics = async (_params: StatisticsParams) => {
   const searchStatisticsDaysInterval =
     _params.recherche === 'mois' || _params.recherche === 'total' ? 30 : 7
-  const searchStatisticsSeriesCount =
+
+  // Différentes dates de début selon la catégorie (uniquement en mode total)
+  const resourceViewsSeriesCount =
     _params.recherche === 'total'
       ? elapsedMonthsSince(new Date('2022-07-01'))
+      : TWELVE_LAST_MONTHS
+  const searchExecutionsSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2024-01-01'))
+      : TWELVE_LAST_MONTHS
+  const collectionResourcesSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2023-12-01'))
       : TWELVE_LAST_MONTHS
 
   const creationStatisticsDaysInterval =
@@ -69,11 +78,16 @@ export const getStatistics = async (_params: StatisticsParams) => {
   const startDate = new Date()
   startDate.setDate(new Date().getDate() - usageStatisticsDaysInterval)
 
+  const seriesEndDate = (isTotal: boolean, interval: number) =>
+    isTotal ? 'CURRENT_DATE' : `CURRENT_DATE - INTERVAL '${interval} days'`
+
   const [
     kpiStatisticsResult,
     recentUsersCountResult,
     userCount,
-    searchStatisticsResult,
+    resourceViewsResult,
+    searchExecutionsResult,
+    collectionResourcesResult,
     creationStatisticsResult,
     usageStatisticsResult,
   ] = await Promise.all([
@@ -150,63 +164,109 @@ export const getStatistics = async (_params: StatisticsParams) => {
     ),
     debugPromiseTiming(prismaClient.user.count(), { name: 'User Count' }),
     debugPromiseTiming(
-      prismaClient.$queryRawUnsafe<SearchStatisticsResult>(`
+      prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
-            searchStatisticsDaysInterval * searchStatisticsSeriesCount
+            searchStatisticsDaysInterval * resourceViewsSeriesCount
           } days',
-                                                 CURRENT_DATE - INTERVAL '${searchStatisticsDaysInterval} days',
+                                                 ${seriesEndDate(
+                                                   _params.recherche ===
+                                                     'total',
+                                                   searchStatisticsDaysInterval,
+                                                 )},
+                                                 '${searchStatisticsDaysInterval} days'::interval) AS start_date),
+               range AS (SELECT start_date, (start_date + INTERVAL '${searchStatisticsDaysInterval} days') AS end_date
+                         FROM series)
+          SELECT (SELECT COUNT(*)::integer
+                  FROM resource_views
+                  WHERE timestamp >= r.start_date AND timestamp < r.end_date) AS value,
+                 'Du ' || TO_CHAR(r.start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(r.end_date, 'DD/MM/YY') AS period,
+                 TO_CHAR(r.start_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
+                 TO_CHAR(r.end_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS end_date
+          FROM range r`),
+      { name: 'Resource Views Statistics' },
+    ),
+    debugPromiseTiming(
+      prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
+          WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
+            searchStatisticsDaysInterval * searchExecutionsSeriesCount
+          } days',
+                                                 ${seriesEndDate(
+                                                   _params.recherche ===
+                                                     'total',
+                                                   searchStatisticsDaysInterval,
+                                                 )},
+                                                 '${searchStatisticsDaysInterval} days'::interval) AS start_date),
+               range AS (SELECT start_date, (start_date + INTERVAL '${searchStatisticsDaysInterval} days') AS end_date
+                         FROM series)
+          SELECT (SELECT COUNT(*)::integer
+                  FROM search_executions
+                  WHERE (query != '' OR array_length(themes, 1) > 0 OR array_length(resource_types, 1) > 0 OR
+                         array_length(beneficiaries, 1) > 0 OR array_length(professional_sectors, 1) > 0 OR array_length(departments, 1) > 0)
+                    AND timestamp >= r.start_date AND timestamp < r.end_date) AS value,
+                 'Du ' || TO_CHAR(r.start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(r.end_date, 'DD/MM/YY') AS period,
+                 TO_CHAR(r.start_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
+                 TO_CHAR(r.end_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS end_date
+          FROM range r`),
+      { name: 'Search Executions Statistics' },
+    ),
+    debugPromiseTiming(
+      prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
+          WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
+            searchStatisticsDaysInterval * collectionResourcesSeriesCount
+          } days',
+                                                 ${seriesEndDate(
+                                                   _params.recherche ===
+                                                     'total',
+                                                   searchStatisticsDaysInterval,
+                                                 )},
                                                  '${searchStatisticsDaysInterval} days'::interval) AS start_date),
                range AS (SELECT start_date, (start_date + INTERVAL '${searchStatisticsDaysInterval} days') AS end_date
                          FROM series)
           SELECT (SELECT COUNT(*)::integer
                   FROM collection_resources
-                  WHERE added BETWEEN start_date AND end_date)                                                  AS collection_resources,
-                 (SELECT COUNT(*)::integer
-                  FROM search_executions
-                  WHERE (query != '' OR array_length(themes, 1) > 0 OR array_length(resource_types, 1) > 0 OR
-                         array_length(beneficiaries, 1) > 0 OR array_length(professional_sectors, 1) > 0 OR array_length(departments, 1) > 0)
-                    AND timestamp BETWEEN start_date AND end_date)                                              AS search_executions,
-                 (SELECT COUNT(*)::integer
-                  FROM resource_views
-                  WHERE timestamp BETWEEN start_date AND end_date)                                              AS resource_views,
-                 'Du ' || TO_CHAR(start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(end_date, 'DD/MM/YY')                  AS period,
-                 TO_CHAR(start_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)                                                                   AS start_date,
-                 TO_CHAR(end_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)                                                                     AS end_date
-          FROM range`),
-      { name: 'Search Statistics' },
+                  WHERE added >= r.start_date AND added < r.end_date) AS value,
+                 'Du ' || TO_CHAR(r.start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(r.end_date, 'DD/MM/YY') AS period,
+                 TO_CHAR(r.start_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
+                 TO_CHAR(r.end_date, CASE WHEN ${searchStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS end_date
+          FROM range r`),
+      { name: 'Collection Resources Statistics' },
     ),
     debugPromiseTiming(
       prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
             creationStatisticsDaysInterval * creationStatisticsSeriesCount
           } days',
-                                                 CURRENT_DATE - INTERVAL '${creationStatisticsDaysInterval} days',
+                                                 CURRENT_DATE${
+                                                   _params.creation !== 'total'
+                                                     ? ` - INTERVAL '${creationStatisticsDaysInterval} days'`
+                                                     : ''
+                                                 },
                                                  '${creationStatisticsDaysInterval} days'::interval) AS start_date),
                range AS (SELECT start_date, (start_date + INTERVAL '${creationStatisticsDaysInterval} days') AS end_date
                          FROM series)
           SELECT (SELECT COUNT(*)::integer
                   FROM resources pu_r
-                  WHERE pu_r.published BETWEEN start_date AND end_date
-                    AND pu_r.is_public IS true)                                                     AS public_resources,
+                  WHERE pu_r.published >= start_date AND pu_r.published < end_date
+                    AND pu_r.is_public IS true)                                                                    AS public_resources,
                  (SELECT COUNT(*)::integer
                   FROM resources pr_r
-                  WHERE pr_r.published BETWEEN start_date AND end_date
-                    AND pr_r.is_public IS false)                                                    AS private_resources,
+                  WHERE pr_r.published >= start_date AND pr_r.published < end_date
+                    AND pr_r.is_public IS false)                                                                   AS private_resources,
                  (SELECT COUNT(*)::integer
                   FROM users pu_u
-                  WHERE pu_u.created BETWEEN start_date AND end_date AND pu_u.is_public IS true)    AS public_users,
+                  WHERE pu_u.created >= start_date AND pu_u.created < end_date AND pu_u.is_public IS true)         AS public_users,
                  (SELECT COUNT(*)::integer
                   FROM users pr_u
-                  WHERE pr_u.created BETWEEN start_date AND end_date AND pr_u.is_public IS false)   AS private_users,
+                  WHERE pr_u.created >= start_date AND pr_u.created < end_date AND pr_u.is_public IS false)        AS private_users,
                  (SELECT COUNT(*)::integer
                   FROM bases pu_b
-                  WHERE pu_b.created BETWEEN start_date AND end_date AND pu_b.is_public IS true)    AS public_bases,
+                  WHERE pu_b.created >= start_date AND pu_b.created < end_date AND pu_b.is_public IS true)         AS public_bases,
                  (SELECT COUNT(*)::integer
                   FROM bases pr_b
-                  WHERE pr_b.created BETWEEN start_date AND end_date AND pr_b.is_public IS false)   AS private_bases,
-                 'Du ' || TO_CHAR(start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(end_date, 'DD/MM/YY')      AS period,
-                 TO_CHAR(start_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)                                                       AS start_date,
-                 TO_CHAR(end_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)                                                         AS end_date
+                  WHERE pr_b.created >= start_date AND pr_b.created < end_date AND pr_b.is_public IS false)        AS private_bases,
+                 'Du ' || TO_CHAR(start_date, 'DD/MM/YY') || ' au ' || TO_CHAR(end_date, 'DD/MM/YY')                     AS period,
+                 TO_CHAR(start_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
+                 TO_CHAR(end_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)   AS end_date
           FROM range`),
       { name: 'Creation Statistics' },
     ),
@@ -281,24 +341,64 @@ export const getStatistics = async (_params: StatisticsParams) => {
     users: userCount,
   }
 
-  const searchTotals = searchStatisticsResult.reduce(
-    (acc, result) => ({
-      resource_views: acc.resource_views + result.resource_views,
-      search_executions: acc.search_executions + result.search_executions,
-      collection_resources:
-        acc.collection_resources + result.collection_resources,
-    }),
-    { resource_views: 0, search_executions: 0, collection_resources: 0 },
+  const resourceViewsTotal = resourceViewsResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
   )
+  const searchExecutionsTotal = searchExecutionsResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
+  )
+  const collectionResourcesTotal = collectionResourcesResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
+  )
+
+  const resourceViewsData =
+    _params.recherche === 'total'
+      ? computeCumulative(resourceViewsResult, ['value'])
+      : resourceViewsResult
+
+  const searchExecutionsData =
+    _params.recherche === 'total'
+      ? computeCumulative(searchExecutionsResult, ['value'])
+      : searchExecutionsResult
+
+  const collectionResourcesData =
+    _params.recherche === 'total'
+      ? computeCumulative(collectionResourcesResult, ['value'])
+      : collectionResourcesResult
+
+  const creationData =
+    _params.creation === 'total'
+      ? computeCumulative(creationStatisticsResult, [
+          'public_resources',
+          'private_resources',
+          'public_users',
+          'private_users',
+          'public_bases',
+          'private_bases',
+        ])
+      : creationStatisticsResult
 
   return {
     kpi,
     search: {
-      data: searchStatisticsResult,
-      totals: searchTotals,
+      resourceViews: {
+        data: resourceViewsData,
+        total: resourceViewsTotal,
+      },
+      searchExecutions: {
+        data: searchExecutionsData,
+        total: searchExecutionsTotal,
+      },
+      collectionResources: {
+        data: collectionResourcesData,
+        total: collectionResourcesTotal,
+      },
     },
     creation: {
-      data: creationStatisticsResult,
+      data: creationData,
       proportions: computeCreationProportions(creationStatisticsResult),
       totals: computeCreationTotals(creationStatisticsResult),
     },
