@@ -115,6 +115,7 @@ model User {
   searches            SearchExecution[]
   feedbacks           Feedback[]
   resourceFeedback    ResourceFeedback[]
+  resourceFeedbackComments ResourceFeedbackComment[]
   newsFeed            NewsFeed?
 
   featuredBlock   FeaturedBlock? @relation("profile")
@@ -807,10 +808,37 @@ model ResourceFeedback {
   resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
   resourceId String   @map("resource_id") @db.Uuid
 
+  comments ResourceFeedbackComment[]
+
   @@id([sentById, resourceId])
   @@index([sentById])
   @@index([resourceId])
   @@map("resource_feedback")
+}
+
+model ResourceFeedbackComment {
+  id String @id @default(uuid()) @db.Uuid
+  content String
+
+  resourceFeedback     ResourceFeedback @relation(fields: [feedbackSentById, feedbackResourceId], references: [sentById, resourceId])
+  feedbackSentById     String @map("feedback_sent_by_id") @db.Uuid
+  feedbackResourceId   String @map("feedback_resource_id") @db.Uuid
+
+  parentComment   ResourceFeedbackComment? @relation("CommentReplies", fields: [parentCommentId], references: [id])
+  parentCommentId String? @map("parent_comment_id") @db.Uuid
+  replies         ResourceFeedbackComment[] @relation("CommentReplies")
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String @map("author_id") @db.Uuid
+  
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  deleted DateTime?
+
+  @@index([feedbackSentById, feedbackResourceId])
+  @@index([authorId])
+  @@index([parentCommentId])
+  @@map("resource_feedback_comments")
 }
 
 enum FeaturedBlockType {
