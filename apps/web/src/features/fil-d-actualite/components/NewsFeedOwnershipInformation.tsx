@@ -21,12 +21,12 @@ import {
   themeCategories,
   themeLabels,
 } from '@app/web/themes/themes'
+import { formatTimeAgo } from '@app/web/utils/formatTimeAgo'
 import { RiIconClassName } from '@codegouvfr/react-dsfr'
 import type { NewsFeed, ProfessionalSector, Theme } from '@prisma/client'
 import classNames from 'classnames'
 import Link from 'next/link'
 import styles from './NewsFeedOwnershipInformation.module.css'
-import { formatTimeAgo } from '@app/web/utils/formatTimeAgo'
 
 const findFeedbackFromFollowedProfile = (
   resource: NewsFeedResource,

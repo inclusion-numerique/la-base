@@ -101,6 +101,7 @@ const getFollowedFeedbackResourcesCTE = () => Prisma.sql`
       AND r.published IS NOT NULL
       AND r.is_public = true
       AND rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
+      AND rf.rating IN (3, 4)
   )`
 
 const getPublishedResourcesCTE = () => Prisma.sql`
