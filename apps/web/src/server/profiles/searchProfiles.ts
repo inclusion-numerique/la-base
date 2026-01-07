@@ -53,6 +53,7 @@ export const countProfiles = async (
                           AND (
                             users.deleted IS NULL
                             )
+                          AND users.email_verified IS NOT NULL
                         GROUP BY users.id),
            scored_profiles AS (SELECT profiles.*,
                                       (
@@ -146,6 +147,7 @@ export const rankProfiles = async (
                                 OR users.id = ${userId}::uuid
                             )
                           AND users.deleted IS NULL
+                          AND users.email_verified IS NOT NULL
 
                         GROUP BY users.id),
            scored_profiles AS (SELECT profiles.*,
@@ -184,11 +186,20 @@ export const rankProfiles = async (
                    /* Order by DESC the right data depending on the sort */
                    WHEN ${paginationParams.sort === 'pertinence'} THEN score
                    WHEN ${paginationParams.sort === 'suivis'} THEN follows_count
-                   WHEN ${paginationParams.sort === 'ressources'} THEN resources_count
+                   WHEN ${
+                     paginationParams.sort === 'ressources'
+                   } THEN resources_count
                    END DESC,
                CASE
                    /* All these sort options use the most recent in case of equality */
-                   WHEN ${(['recent', 'pertinence', 'suivis', 'ressources'] satisfies Sorting[] as Sorting[]).includes(paginationParams.sort)}
+                   WHEN ${(
+                     [
+                       'recent',
+                       'pertinence',
+                       'suivis',
+                       'ressources',
+                     ] satisfies Sorting[] as Sorting[]
+                   ).includes(paginationParams.sort)}
                        THEN created
                    END DESC
       LIMIT ${paginationParams.perPage} OFFSET ${
