@@ -48,7 +48,7 @@ const StatisticsTooltip = <T extends object>({
   />
 )
 
-const MAX_BARS = 4
+const MAX_BARS = 12
 
 const Legend = <T extends object>({
   legends,
