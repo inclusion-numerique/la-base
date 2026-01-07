@@ -83,7 +83,7 @@ const Header = ({
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
               <ul className="fr-btns-group fr-align-items-center">
-                <li className="fr-px-md-0 fr-px-2w fr-hidden-sm">
+                <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
                   <Button
                     linkProps={{
                       href: user
@@ -103,19 +103,21 @@ const Header = ({
                       aria-hidden
                     />
                     {user && (
-                      <div
+                      <span
                         className={classNames(
-                          'fr-flex fr-justify-content-center fr-align-items-center fr-text--sm fr-border-radius--8 fr-p-1w fr-ml-1w',
+                          'fr-text--sm fr-border-radius--8 fr-p-1w fr-flex fr-align-items-center fr-flex-gap-1v fr-ml-1w',
+                          styles.newsFeedIcon,
                           styles.newsFeedButton,
                         )}
                       >
+                        <span className="ri-flashlight-fill" />
                         <NewsFeedBadge
                           className={classNames(
                             styles.newsFeedIcon,
                             'fr-text--sm fr-text--bold',
                           )}
                         />
-                      </div>
+                      </span>
                     )}
                   </Button>
                 </li>
@@ -176,7 +178,7 @@ const Header = ({
                     />
                   </Link>
                 </li>
-                <li className="fr-position-relative fr-hidden fr-unhidden-sm fr-px-md-0 fr-px-2w">
+                <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
                   <Tooltip title="Fil d'actualité">
                     <Button
                       data-testid="news-feed-button"

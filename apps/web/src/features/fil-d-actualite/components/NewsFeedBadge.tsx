@@ -19,9 +19,7 @@ const NewsFeedBadge = ({ className }: { className?: string }) => {
       refetchIntervalInBackground: true,
     },
   )
-
   if (!data || data.total <= 0) return null
-
   return (
     <span className={className} aria-label={`${data.total} nouveautés`}>
       {data.total}

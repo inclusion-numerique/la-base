@@ -17,6 +17,8 @@ export const getNotificationRedirectionUrl = (
     case 'AskJoinBase':
     case 'AcceptedAskJoinBase':
       return `/bases/${notification.base?.slug}`
+    case 'ResourcePublication':
+      return `/ressources/${notification.resource?.slug}`
     default:
       return `/profils/${notification.initiator?.slug}`
   }

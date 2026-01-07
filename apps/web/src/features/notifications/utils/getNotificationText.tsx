@@ -57,6 +57,34 @@ const NOTIFICATION_TEXTS = {
       <span className="fr-text--bold">{notification.resource?.title}</span>
     </>
   ),
+  ResourcePublication: (notification: NotificationWithRelations) => (
+    <>
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/profils/${notification.initiator?.slug}`}
+      >
+        {formatName(notification.initiator?.name || '')}
+      </Link>
+      &nbsp;a publié la ressource&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/ressources/${notification.resource?.slug}`}
+      >
+        {notification.resource?.title}
+      </Link>
+      {notification.base && (
+        <>
+          &nbsp;dans la base&nbsp;
+          <Link
+            className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+            href={`/bases/${notification.base?.slug}`}
+          >
+            {notification.base?.title}
+          </Link>
+        </>
+      )}
+    </>
+  ),
   ResourceComment: (notification: NotificationWithRelations) => (
     <>
       <Link

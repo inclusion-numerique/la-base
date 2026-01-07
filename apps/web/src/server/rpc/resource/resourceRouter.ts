@@ -14,6 +14,7 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
+import { getResourceNotificationRecipients } from '@app/web/server/notifications/getResourceNotificationRecipients'
 import { SendResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/sendResourceFeedbackComment'
 import { UpdateResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/updateResourceFeedbackComment'
 import {
@@ -26,6 +27,7 @@ import { handleResourceMutationCommand } from '@app/web/server/resources/feature
 import { SendResourceFeedbackValidation } from '@app/web/server/resources/sendResourceFeedback'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, notFoundError } from '@app/web/server/rpc/trpcErrors'
+import { NotificationType } from '@prisma/client'
 import { v4 } from 'uuid'
 import z from 'zod'
 
@@ -115,25 +117,43 @@ export const resourceRouter = router({
         resourceAuthorization(resource, user).hasPermission(
           command.name === 'Delete'
             ? ResourcePermissions.DeleteResource
-            : ResourcePermissions.WriteResource,
+            : command.name === 'Publish'
+              ? ResourcePermissions.WriteResource
+              : ResourcePermissions.WriteResource,
         ),
       )
 
       const result = await handleResourceMutationCommand(command, { user })
 
-      if (resource.createdById !== user.id) {
-        await prismaClient.notification.create({
-          data: {
-            userId: resource.createdById,
-            type:
-              command.name === 'Delete'
-                ? 'ResourceDeletion'
-                : 'ResourceModification',
-            resourceId: resource.id,
-            initiatorId: user.id,
-            baseId: resource.baseId,
-          },
-        })
+      const recipientUserIds = await getResourceNotificationRecipients(
+        resource.id,
+        user.id,
+      )
+
+      if (recipientUserIds.length > 0) {
+        let notificationType: NotificationType
+
+        if (command.name === 'Delete') {
+          notificationType = 'ResourceDeletion'
+        } else if (command.name === 'Publish') {
+          notificationType = 'ResourcePublication'
+        } else {
+          notificationType = 'ResourceModification'
+        }
+
+        await Promise.all(
+          recipientUserIds.map((userId) =>
+            prismaClient.notification.create({
+              data: {
+                userId,
+                type: notificationType,
+                resourceId: resource.id,
+                initiatorId: user.id,
+                baseId: resource.baseId,
+              },
+            }),
+          ),
+        )
       }
 
       return result

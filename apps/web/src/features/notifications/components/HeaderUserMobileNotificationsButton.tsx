@@ -3,7 +3,7 @@
 import HeaderUserNotificationsBadge from './HeaderUserNotificationsBadge'
 
 const HeaderUserMobileNotificationsButton = () => (
-  <li className="fr-px-md-0 fr-px-2w fr-hidden-sm">
+  <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
     <div className="fr-position-relative">
       <button
         type="button"

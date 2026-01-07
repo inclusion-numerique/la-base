@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "public"."notification_type" AS ENUM ('reported_resource', 'resource_feedback', 'resource_modification', 'resource_deletion', 'resource_comment', 'accepted_base_invitation', 'declined_base_invitation', 'base_role_change', 'base_deletion', 'base_member_deletion', 'ask_join_base', 'accepted_ask_join_base', 'declined_ask_join_base');
+CREATE TYPE "public"."notification_type" AS ENUM ('reported_resource', 'resource_feedback', 'resource_modification', 'resource_deletion', 'resource_publication', 'resource_comment', 'accepted_base_invitation', 'declined_base_invitation', 'base_role_change', 'base_deletion', 'base_member_deletion', 'ask_join_base', 'accepted_ask_join_base', 'declined_ask_join_base');
 
 -- CreateTable
 CREATE TABLE "public"."notifications" (

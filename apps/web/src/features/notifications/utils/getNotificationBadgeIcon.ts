@@ -14,6 +14,7 @@ const NOTIFICATION_BADGE_ICONS = {
   AskJoinBase: 'ri-user-add-fill',
   AcceptedAskJoinBase: 'ri-user-add-fill',
   DeclinedAskJoinBase: 'ri-close-circle-fill',
+  ResourcePublication: 'ri-article-fill',
 } as const
 
 export const getNotificationBadgeIcon = (

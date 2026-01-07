@@ -70,6 +70,7 @@ export const reportRouter = router({
     .mutation(
       async ({
         input: { resourceId, moderatorName, moderatorEmail, reportId },
+        ctx: { user },
       }) => {
         const report = await prismaClient.resourceReport.findUnique({
           where: { id: reportId },
@@ -112,6 +113,7 @@ export const reportRouter = router({
         await prismaClient.notification.create({
           data: {
             userId: resource.createdById,
+            initiatorId: user.id,
             type: 'ReportedResource',
             resourceId: resource.id,
           },

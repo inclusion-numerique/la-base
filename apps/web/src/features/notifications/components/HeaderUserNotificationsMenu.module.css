@@ -13,9 +13,12 @@
 }
 
 .notificationContainer {
+  border-top: var(--slim-grey-border);
+
   @media (min-width: 48rem) {
     max-height: 560px;
     overflow-y: auto;
+    border-top: none;
   }
 }
 

@@ -90,7 +90,11 @@ const isModerator = middleware(({ ctx, next }) => {
     })
   }
   return next({
-    ctx,
+    ctx: {
+      ...ctx,
+      // Infer the user as non-nullable
+      user,
+    },
   })
 })
 /**

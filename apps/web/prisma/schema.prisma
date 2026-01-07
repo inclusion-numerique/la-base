@@ -891,6 +891,7 @@ enum NotificationType {
   ResourceFeedback       @map("resource_feedback")
   ResourceModification   @map("resource_modification")
   ResourceDeletion       @map("resource_deletion")
+  ResourcePublication    @map("resource_publication")
   ResourceComment        @map("resource_comment")
   AcceptedBaseInvitation @map("accepted_base_invitation")
   DeclinedBaseInvitation @map("declined_base_invitation")

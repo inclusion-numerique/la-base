@@ -40,7 +40,7 @@ const HeaderUserNotificationsMenu = () => {
           notifications?.map((notif) => (
             <li
               className={classNames(
-                'fr-py-md-2w fr-px-md-4w',
+                'fr-py-2w fr-px-md-4w',
                 styles.notificationItem,
               )}
               key={notif.id}
