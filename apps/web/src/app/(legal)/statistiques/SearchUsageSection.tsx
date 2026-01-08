@@ -26,7 +26,7 @@ const SearchUsageSection = async ({
             { label: 'Vues de ressources', key: 'value' },
             {
               label: 'Au total : ',
-              total: numberToString(search.resourceViews.total),
+              total: numberToString(search.resourceViews.totalCount),
             },
           ]}
         />
@@ -43,7 +43,7 @@ const SearchUsageSection = async ({
             { label: 'Recherches effectuées', key: 'value' },
             {
               label: 'Au total : ',
-              total: numberToString(search.searchExecutions.total),
+              total: numberToString(search.searchExecutions.totalCount),
             },
           ]}
         />
@@ -60,7 +60,7 @@ const SearchUsageSection = async ({
             { label: 'Ressources enregistrées', key: 'value' },
             {
               label: 'Au total : ',
-              total: numberToString(search.collectionResources.total),
+              total: numberToString(search.collectionResources.totalCount),
             },
           ]}
         />

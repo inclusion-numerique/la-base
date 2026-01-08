@@ -1,10 +1,6 @@
 import { prismaClient } from '@app/web/prismaClient'
 import { debugPromiseTiming } from '@app/web/utils/debugPromiseTiming'
-import {
-  type CreationStatisticsResult,
-  computeCreationProportions,
-  computeCreationTotals,
-} from './creationStatistics'
+import { type CreationStatisticsResult } from './creationStatistics'
 import { computeCumulative } from './statistics'
 import {
   beneficiariesUsages,
@@ -233,8 +229,11 @@ export const getSearchStatistics = async (_params: StatisticsParams) => {
 
   const [
     resourceViewsResult,
+    resourceViewsTotalCount,
     searchExecutionsResult,
+    searchExecutionsTotalCount,
     collectionResourcesResult,
+    collectionResourcesTotalCount,
   ] = await Promise.all([
     debugPromiseTiming(
       prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
@@ -258,6 +257,9 @@ export const getSearchStatistics = async (_params: StatisticsParams) => {
           FROM range r`),
       { name: 'Resource Views Statistics' },
     ),
+    debugPromiseTiming(prismaClient.resourceView.count(), {
+      name: 'Resource Views Total Count',
+    }),
     debugPromiseTiming(
       prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
@@ -283,6 +285,21 @@ export const getSearchStatistics = async (_params: StatisticsParams) => {
       { name: 'Search Executions Statistics' },
     ),
     debugPromiseTiming(
+      prismaClient.searchExecution.count({
+        where: {
+          OR: [
+            { query: { not: '' } },
+            { themes: { isEmpty: false } },
+            { resourceTypes: { isEmpty: false } },
+            { beneficiaries: { isEmpty: false } },
+            { professionalSectors: { isEmpty: false } },
+            { departments: { isEmpty: false } },
+          ],
+        },
+      }),
+      { name: 'Search Executions Total Count' },
+    ),
+    debugPromiseTiming(
       prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
             searchStatisticsDaysInterval * collectionResourcesSeriesCount
@@ -304,6 +321,9 @@ export const getSearchStatistics = async (_params: StatisticsParams) => {
           FROM range r`),
       { name: 'Collection Resources Statistics' },
     ),
+    debugPromiseTiming(prismaClient.collectionResource.count(), {
+      name: 'Collection Resources Total Count',
+    }),
   ])
 
   const resourceViewsTotal = resourceViewsResult.reduce(
@@ -338,14 +358,17 @@ export const getSearchStatistics = async (_params: StatisticsParams) => {
     resourceViews: {
       data: resourceViewsData,
       total: resourceViewsTotal,
+      totalCount: resourceViewsTotalCount,
     },
     searchExecutions: {
       data: searchExecutionsData,
       total: searchExecutionsTotal,
+      totalCount: searchExecutionsTotalCount,
     },
     collectionResources: {
       data: collectionResourcesData,
       total: collectionResourcesTotal,
+      totalCount: collectionResourcesTotalCount,
     },
   }
 }
@@ -358,8 +381,18 @@ export const getCreationsStatistics = async (_params: StatisticsParams) => {
       ? elapsedMonthsSince(new Date('2022-04-01'))
       : TWELVE_LAST_MONTHS
 
-  const creationStatisticsResult = await debugPromiseTiming(
-    prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
+  const [
+    creationStatisticsResult,
+    totalCount,
+    publicResourcesCount,
+    privateResourcesCount,
+    publicUsersCount,
+    privateUsersCount,
+    publicBasesCount,
+    privateBasesCount,
+  ] = await Promise.all([
+    debugPromiseTiming(
+      prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
             creationStatisticsDaysInterval * creationStatisticsSeriesCount
           } days',
@@ -395,8 +428,51 @@ export const getCreationsStatistics = async (_params: StatisticsParams) => {
                  TO_CHAR(start_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
                  TO_CHAR(end_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)   AS end_date
           FROM range`),
-    { name: 'Creation Statistics' },
-  )
+      { name: 'Creation Statistics' },
+    ),
+    debugPromiseTiming(
+      prismaClient.resource.count({
+        where: { published: { not: null } },
+      }),
+      { name: 'Total Resources Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.resource.count({
+        where: { published: { not: null }, isPublic: true },
+      }),
+      { name: 'Public Resources Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.resource.count({
+        where: { published: { not: null }, isPublic: false },
+      }),
+      { name: 'Private Resources Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.user.count({
+        where: { isPublic: true },
+      }),
+      { name: 'Public Users Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.user.count({
+        where: { isPublic: false },
+      }),
+      { name: 'Private Users Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.base.count({
+        where: { isPublic: true },
+      }),
+      { name: 'Public Bases Count' },
+    ),
+    debugPromiseTiming(
+      prismaClient.base.count({
+        where: { isPublic: false },
+      }),
+      { name: 'Private Bases Count' },
+    ),
+  ])
 
   const creationData =
     _params.creation === 'total'
@@ -410,11 +486,42 @@ export const getCreationsStatistics = async (_params: StatisticsParams) => {
         ])
       : creationStatisticsResult
 
+  const allTimeTotals = {
+    publicResources: publicResourcesCount,
+    privateResources: privateResourcesCount,
+    publicUsers: publicUsersCount,
+    privateUsers: privateUsersCount,
+    publicBases: publicBasesCount,
+    privateBases: privateBasesCount,
+  }
+
+  const allTimeProportions = {
+    publicResources: Math.round(
+      (publicResourcesCount * 100) /
+        (publicResourcesCount + privateResourcesCount),
+    ),
+    privateResources: Math.round(
+      (privateResourcesCount * 100) /
+        (publicResourcesCount + privateResourcesCount),
+    ),
+    publicUsers: Math.round(
+      (publicUsersCount * 100) / (publicUsersCount + privateUsersCount),
+    ),
+    privateUsers: Math.round(
+      (privateUsersCount * 100) / (publicUsersCount + privateUsersCount),
+    ),
+    publicBases: Math.round(
+      (publicBasesCount * 100) / (publicBasesCount + privateBasesCount),
+    ),
+    privateBases: Math.round(
+      (privateBasesCount * 100) / (publicBasesCount + privateBasesCount),
+    ),
+  }
+
   return {
-    creation: {
-      data: creationData,
-      proportions: computeCreationProportions(creationStatisticsResult),
-      totals: computeCreationTotals(creationStatisticsResult),
-    },
+    data: creationData,
+    proportions: allTimeProportions,
+    totals: allTimeTotals,
+    totalCount: totalCount,
   }
 }
