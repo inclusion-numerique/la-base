@@ -12,16 +12,18 @@ import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/Del
 import ResourcesSortingSelect from '@app/web/components/Resource/List/ResourcesSorting'
 import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import ResourcesSearch from '@app/web/components/Resource/ResourcesSearch'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import { numberToString } from '@app/web/utils/formatNumber'
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
-import { useDebounceValue } from 'usehooks-ts'
+import styles from './Resources.module.css'
 
 const Resources = ({
+  isOwner = false,
   title,
   resources,
   user,
@@ -29,7 +31,9 @@ const Resources = ({
   baseId,
   paginationParams,
   slug,
+  totalCount,
 }: {
+  isOwner?: boolean
   title: string
   baseId: string | null
   resources: BaseResource[]
@@ -37,22 +41,8 @@ const Resources = ({
   canWrite: boolean
   paginationParams: PaginationParams
   slug: string
+  totalCount: number
 }) => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [debouncedSearchTerm] = useDebounceValue(searchTerm, 500)
-  const filteredResources = useMemo(() => {
-    if (!debouncedSearchTerm.trim()) {
-      return resources
-    }
-    const lowercaseSearch = debouncedSearchTerm.toLowerCase()
-    return resources.filter((resource) => {
-      const titleMatch = resource.title.toLowerCase().includes(lowercaseSearch)
-      const descriptionMatch =
-        resource.excerpt?.toLowerCase().includes(lowercaseSearch) ?? false
-      return titleMatch || descriptionMatch
-    })
-  }, [resources, debouncedSearchTerm])
-
   const drafts = useMemo(
     () => resources.filter((resource) => resource.published === null),
     [resources],
@@ -80,7 +70,7 @@ const Resources = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              {title} {canWrite && <>· {filteredResources.length}</>}
+              {title} · {resources.length}
             </h2>
           </div>
         </div>
@@ -99,12 +89,17 @@ const Resources = ({
             />
           </div>
         )}
+        {!isOwner && (
+          <div className="fr-col-sm-auto fr-col-12">
+            <ResourcesSearch initialSearch={paginationParams.search} />
+          </div>
+        )}
       </div>
       {!isOwner && (
         <div className={styles.header}>
           <h1 className="fr-text--lg fr-mb-0">
-            {numberToString(filteredResources.length)} Ressource
-            {sPluriel(filteredResources.length)}
+            {numberToString(totalCount)} Ressource
+            {sPluriel(totalCount)}
           </h1>
           <ResourcesSortingSelect
             paginationParams={paginationParams}

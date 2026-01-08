@@ -1,5 +1,7 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
+import { getResourcesOrderBy } from '@app/web/server/resources/getResourcesOrderBy'
+import { getResourcesSearchBy } from '@app/web/server/resources/getResourcesSearchBy'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import {
   type Category,
@@ -318,48 +320,45 @@ export const toResourceWithFeedbackAverage = <T>(
   }
 }
 
-const getResourcesOrderByForProfile = (
-  sortType?: PaginationParams['sort'],
-): Prisma.ResourceOrderByWithRelationInput[] => {
-  switch (sortType) {
-    case 'recent':
-      return [{ lastPublished: 'desc' }, { updated: 'desc' }]
-    case 'ancien':
-      return [{ lastPublished: 'asc' }, { updated: 'asc' }]
-    case 'vues':
-      return [
-        { viewsCount: 'desc' },
-        { lastPublished: 'desc' },
-        { updated: 'desc' },
-      ]
-    case 'enregistrements':
-      return [
-        { collections: { _count: 'desc' } },
-        { lastPublished: 'desc' },
-        { updated: 'desc' },
-      ]
-    case 'recommandations':
-      return [
-        { resourceFeedback: { _count: 'desc' } },
-        { lastPublished: 'desc' },
-        { updated: 'desc' },
-      ]
-    default:
-      return [{ lastPublished: 'desc' }, { updated: 'desc' }]
-  }
-}
-
 export const getProfileResources = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
   paginationParams?: PaginationParams,
 ) => {
-  const where = computeResourcesListWhereForUserAndProfile(profileId, user)
+  const baseWhere = computeResourcesListWhereForUserAndProfile(profileId, user)
+
+  const searchWhere = paginationParams?.search
+    ? {
+        OR: [
+          {
+            title: {
+              contains: paginationParams.search,
+              mode: 'insensitive' as const,
+            },
+          },
+          {
+            excerpt: {
+              contains: paginationParams.search,
+              mode: 'insensitive' as const,
+            },
+          },
+        ],
+      }
+    : {}
+
+  const where = { ...baseWhere, ...searchWhere }
+
+  const skip = paginationParams
+    ? (paginationParams.page - 1) * paginationParams.perPage
+    : undefined
+  const take = paginationParams ? paginationParams.perPage : undefined
 
   const profileResources = await prismaClient.resource.findMany({
     where,
     select: resourceListSelect(user),
-    orderBy: getResourcesOrderByForProfile(paginationParams?.sort),
+    orderBy: getResourcesOrderBy(paginationParams?.sort),
+    skip,
+    take,
   })
 
   return profileResources.map(toResourceWithFeedbackAverage)
@@ -368,8 +367,12 @@ export const getProfileResources = async (
 export const getProfileResourcesCount = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
+  searchTerm?: string,
 ) => {
-  const where = computeResourcesListWhereForUserAndProfile(profileId, user)
+  const baseWhere = computeResourcesListWhereForUserAndProfile(profileId, user)
+
+  const searchWhere = getResourcesSearchBy(searchTerm)
+  const where = { ...baseWhere, ...searchWhere }
 
   return prismaClient.resource.count({
     where,

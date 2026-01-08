@@ -116,6 +116,7 @@ export type UrlSearchQueryParams = {
 export type UrlPaginationParams = {
   page?: string | string[] | null
   tri?: string | string[] | null
+  search?: string | string[] | null
 }
 
 // Cleaned params for use in domain logic
@@ -132,6 +133,7 @@ export type PaginationParams = {
   page: number
   perPage: number
   sort: Sorting
+  search?: string
 }
 
 export const defaultSearchParams: Readonly<SearchParams> = {
@@ -225,10 +227,16 @@ export const sanitizeUrlPaginationParams = (
     ? (sortOptionString as Sorting)
     : 'pertinence'
 
+  const search =
+    typeof params?.search === 'string'
+      ? params.search.trim() || undefined
+      : undefined
+
   return {
     page: page > 0 ? page : 1,
     perPage: defaultPaginationParams.perPage,
     sort,
+    search,
   }
 }
 
@@ -254,6 +262,7 @@ export const paginationParamsToUrlQueryParams = (
 ): UrlPaginationParams => ({
   page: params.page > 1 ? params.page.toString(10) : undefined,
   tri: params.sort === 'pertinence' ? undefined : params.sort,
+  search: params.search || undefined,
 })
 
 const objectToQueryString = (params: Record<string, unknown>): string => {

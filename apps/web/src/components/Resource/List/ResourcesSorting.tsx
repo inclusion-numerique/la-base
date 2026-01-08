@@ -25,7 +25,7 @@ const ResourcesSortingSelect = ({
     const value = event.target.value as Sorting
     setSelected(value)
     const paginationPart = paginationParams
-      ? paginationParamsToUrl({ ...paginationParams, sort: value })
+      ? paginationParamsToUrl({ ...paginationParams, sort: value, page: 1 })
       : ''
     const paginationQuery = paginationPart ? `?${paginationPart}` : ''
     const url = baseId
