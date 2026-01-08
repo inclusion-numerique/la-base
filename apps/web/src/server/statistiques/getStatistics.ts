@@ -48,51 +48,11 @@ const elapsedMonthsSince = (date: Date) =>
 
 const TWELVE_LAST_MONTHS = 12
 
-export const getStatistics = async (_params: StatisticsParams) => {
-  const searchStatisticsDaysInterval =
-    _params.recherche === 'mois' || _params.recherche === 'total' ? 30 : 7
-
-  // Différentes dates de début selon la catégorie (uniquement en mode total)
-  const resourceViewsSeriesCount =
-    _params.recherche === 'total'
-      ? elapsedMonthsSince(new Date('2022-07-01'))
-      : TWELVE_LAST_MONTHS
-  const searchExecutionsSeriesCount =
-    _params.recherche === 'total'
-      ? elapsedMonthsSince(new Date('2024-01-01'))
-      : TWELVE_LAST_MONTHS
-  const collectionResourcesSeriesCount =
-    _params.recherche === 'total'
-      ? elapsedMonthsSince(new Date('2023-12-01'))
-      : TWELVE_LAST_MONTHS
-
-  const creationStatisticsDaysInterval =
-    _params.creation || _params.creation === 'total' ? 30 : 7
-  const creationStatisticsSeriesCount =
-    _params.creation === 'total'
-      ? elapsedMonthsSince(new Date('2022-04-01'))
-      : TWELVE_LAST_MONTHS
-
-  const isTotal = _params.usage === 'total'
-  const usageStatisticsDaysInterval = _params.usage === 'six-mois' ? 6 * 30 : 30
-  const startDate = new Date()
-  startDate.setDate(new Date().getDate() - usageStatisticsDaysInterval)
-
-  const seriesEndDate = (isTotal: boolean, interval: number) =>
-    isTotal ? 'CURRENT_DATE' : `CURRENT_DATE - INTERVAL '${interval} days'`
-
-  const [
-    kpiStatisticsResult,
-    recentUsersCountResult,
-    userCount,
-    resourceViewsResult,
-    searchExecutionsResult,
-    collectionResourcesResult,
-    creationStatisticsResult,
-    usageStatisticsResult,
-  ] = await Promise.all([
-    debugPromiseTiming(
-      prismaClient.$queryRaw<KpiStatisticsResult>`
+export const getKpisStatistics = async () => {
+  const [kpiStatisticsResult, recentUsersCountResult, userCount] =
+    await Promise.all([
+      debugPromiseTiming(
+        prismaClient.$queryRaw<KpiStatisticsResult>`
         SELECT 'public_ressource' AS category, COUNT(*)::integer AS count
         FROM resources
         WHERE is_public = true
@@ -120,10 +80,10 @@ export const getStatistics = async (_params: StatisticsParams) => {
         FROM feedback
         ORDER BY category
       `,
-      { name: 'KPI Statistics' },
-    ),
-    debugPromiseTiming(
-      prismaClient.$queryRaw<{ count: number }[]>`
+        { name: 'KPI Statistics' },
+      ),
+      debugPromiseTiming(
+        prismaClient.$queryRaw<{ count: number }[]>`
         SELECT COUNT(DISTINCT u.id)::integer AS count
         FROM users u
                  LEFT JOIN (
@@ -160,9 +120,122 @@ export const getStatistics = async (_params: StatisticsParams) => {
                       u.created
               ) >= CURRENT_DATE - INTERVAL '30 days'
       `,
-      { name: 'Recent Users Count' },
-    ),
-    debugPromiseTiming(prismaClient.user.count(), { name: 'User Count' }),
+        { name: 'Recent Users Count' },
+      ),
+      debugPromiseTiming(prismaClient.user.count(), { name: 'User Count' }),
+    ])
+  const [
+    feedback,
+    feedbackAverage,
+    privateResource,
+    publicResource,
+    ressourceViews,
+    ressourceViewsLastMonth,
+  ] = kpiStatisticsResult
+
+  const recentUsersCount = recentUsersCountResult[0]?.count ?? 0
+
+  return {
+    publications: {
+      count: publicResource.count + privateResource.count,
+      public: publicResource.count,
+      private: privateResource.count,
+    },
+    views: {
+      count: ressourceViews.count,
+      lastMonth: ressourceViewsLastMonth.count,
+    },
+    rates: {
+      count: feedback.count,
+      average: feedbackAverage.count,
+    },
+    recentUsers: recentUsersCount,
+    users: userCount,
+  }
+}
+
+export const getUsageStatistics = async (_params: StatisticsParams) => {
+  const usageStatisticsDaysInterval = _params.usage === 'six-mois' ? 6 * 30 : 30
+  const startDate = new Date()
+  startDate.setDate(new Date().getDate() - usageStatisticsDaysInterval)
+
+  const isTotal = _params.usage === 'total'
+
+  const usageStatisticsResult = await debugPromiseTiming(
+    prismaClient.$queryRaw<UsageStatisticsResult>`
+          SELECT type,
+                 key,
+                 COUNT(*)::integer AS value
+          FROM (SELECT 'beneficiaries' AS type,
+                       unnest(beneficiaries)::text AS key
+                FROM resources
+                WHERE published IS NOT NULL
+                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                  AND deleted IS NULL
+                  AND is_public IS true
+                UNION ALL
+                SELECT 'professional_sectors' AS type,
+                       unnest(professional_sectors)::text AS key
+                FROM resources
+                WHERE published IS NOT NULL
+                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                  AND deleted IS NULL
+                  AND is_public IS true
+                UNION ALL
+                SELECT 'themes' AS type,
+                       unnest(themes)::text AS key
+                FROM resources
+                WHERE published IS NOT NULL
+                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                  AND deleted IS NULL
+                  AND is_public IS true
+                UNION ALL
+                SELECT 'resource_types' AS type,
+                       unnest(resource_types)::text AS key
+                FROM resources
+                WHERE published IS NOT NULL
+                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
+                  AND deleted IS NULL
+                  AND is_public IS true) AS combined_data
+          GROUP BY type, key
+          ORDER BY value DESC`,
+    { name: 'Usage Statistics' },
+  )
+  return {
+    usage: {
+      thematiques: themesUsages(usageStatisticsResult),
+      beneficiaries: beneficiariesUsages(usageStatisticsResult),
+      professionalSectors: professionalSectorsUsages(usageStatisticsResult),
+      resourceTypes: resourceTypesUsages(usageStatisticsResult),
+    },
+  }
+}
+
+export const getSearchStatistics = async (_params: StatisticsParams) => {
+  const searchStatisticsDaysInterval =
+    _params.recherche === 'mois' || _params.recherche === 'total' ? 30 : 7
+
+  const resourceViewsSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2022-07-01'))
+      : TWELVE_LAST_MONTHS
+  const searchExecutionsSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2024-01-01'))
+      : TWELVE_LAST_MONTHS
+  const collectionResourcesSeriesCount =
+    _params.recherche === 'total'
+      ? elapsedMonthsSince(new Date('2023-12-01'))
+      : TWELVE_LAST_MONTHS
+
+  const seriesEndDate = (isTotal: boolean, interval: number) =>
+    isTotal ? 'CURRENT_DATE' : `CURRENT_DATE - INTERVAL '${interval} days'`
+
+  const [
+    resourceViewsResult,
+    searchExecutionsResult,
+    collectionResourcesResult,
+  ] = await Promise.all([
     debugPromiseTiming(
       prismaClient.$queryRawUnsafe<SingleSearchStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
@@ -231,8 +304,62 @@ export const getStatistics = async (_params: StatisticsParams) => {
           FROM range r`),
       { name: 'Collection Resources Statistics' },
     ),
-    debugPromiseTiming(
-      prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
+  ])
+
+  const resourceViewsTotal = resourceViewsResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
+  )
+  const searchExecutionsTotal = searchExecutionsResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
+  )
+  const collectionResourcesTotal = collectionResourcesResult.reduce(
+    (acc, r) => acc + r.value,
+    0,
+  )
+
+  const resourceViewsData =
+    _params.recherche === 'total'
+      ? computeCumulative(resourceViewsResult, ['value'])
+      : resourceViewsResult
+
+  const searchExecutionsData =
+    _params.recherche === 'total'
+      ? computeCumulative(searchExecutionsResult, ['value'])
+      : searchExecutionsResult
+
+  const collectionResourcesData =
+    _params.recherche === 'total'
+      ? computeCumulative(collectionResourcesResult, ['value'])
+      : collectionResourcesResult
+
+  return {
+    resourceViews: {
+      data: resourceViewsData,
+      total: resourceViewsTotal,
+    },
+    searchExecutions: {
+      data: searchExecutionsData,
+      total: searchExecutionsTotal,
+    },
+    collectionResources: {
+      data: collectionResourcesData,
+      total: collectionResourcesTotal,
+    },
+  }
+}
+
+export const getCreationsStatistics = async (_params: StatisticsParams) => {
+  const creationStatisticsDaysInterval =
+    _params.creation || _params.creation === 'total' ? 30 : 7
+  const creationStatisticsSeriesCount =
+    _params.creation === 'total'
+      ? elapsedMonthsSince(new Date('2022-04-01'))
+      : TWELVE_LAST_MONTHS
+
+  const creationStatisticsResult = await debugPromiseTiming(
+    prismaClient.$queryRawUnsafe<CreationStatisticsResult>(`
           WITH series AS (SELECT generate_series(CURRENT_DATE - INTERVAL '${
             creationStatisticsDaysInterval * creationStatisticsSeriesCount
           } days',
@@ -268,106 +395,8 @@ export const getStatistics = async (_params: StatisticsParams) => {
                  TO_CHAR(start_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END) AS start_date,
                  TO_CHAR(end_date, CASE WHEN ${creationStatisticsDaysInterval} = 30 THEN 'Mon' ELSE 'DD/MM' END)   AS end_date
           FROM range`),
-      { name: 'Creation Statistics' },
-    ),
-    debugPromiseTiming(
-      prismaClient.$queryRaw<UsageStatisticsResult>`
-          SELECT type,
-                 key,
-                 COUNT(*)::integer AS value
-          FROM (SELECT 'beneficiaries' AS type,
-                       unnest(beneficiaries)::text AS key
-                FROM resources
-                WHERE published IS NOT NULL
-                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
-                  AND deleted IS NULL
-                  AND is_public IS true
-                UNION ALL
-                SELECT 'professional_sectors' AS type,
-                       unnest(professional_sectors)::text AS key
-                FROM resources
-                WHERE published IS NOT NULL
-                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
-                  AND deleted IS NULL
-                  AND is_public IS true
-                UNION ALL
-                SELECT 'themes' AS type,
-                       unnest(themes)::text AS key
-                FROM resources
-                WHERE published IS NOT NULL
-                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
-                  AND deleted IS NULL
-                  AND is_public IS true
-                UNION ALL
-                SELECT 'resource_types' AS type,
-                       unnest(resource_types)::text AS key
-                FROM resources
-                WHERE published IS NOT NULL
-                  AND (published >= ${startDate.toISOString()}::date OR ${isTotal})
-                  AND deleted IS NULL
-                  AND is_public IS true) AS combined_data
-          GROUP BY type, key
-          ORDER BY value DESC`,
-      { name: 'Usage Statistics' },
-    ),
-  ])
-
-  const [
-    feedback,
-    feedbackAverage,
-    privateResource,
-    publicResource,
-    ressourceViews,
-    ressourceViewsLastMonth,
-  ] = kpiStatisticsResult
-
-  const recentUsersCount = recentUsersCountResult[0]?.count ?? 0
-
-  const kpi = {
-    publications: {
-      count: publicResource.count + privateResource.count,
-      public: publicResource.count,
-      private: privateResource.count,
-    },
-    views: {
-      count: ressourceViews.count,
-      lastMonth: ressourceViewsLastMonth.count,
-    },
-    rates: {
-      count: feedback.count,
-      average: feedbackAverage.count,
-    },
-    recentUsers: recentUsersCount,
-    users: userCount,
-  }
-
-  const resourceViewsTotal = resourceViewsResult.reduce(
-    (acc, r) => acc + r.value,
-    0,
+    { name: 'Creation Statistics' },
   )
-  const searchExecutionsTotal = searchExecutionsResult.reduce(
-    (acc, r) => acc + r.value,
-    0,
-  )
-  const collectionResourcesTotal = collectionResourcesResult.reduce(
-    (acc, r) => acc + r.value,
-    0,
-  )
-
-  const resourceViewsData =
-    _params.recherche === 'total'
-      ? computeCumulative(resourceViewsResult, ['value'])
-      : resourceViewsResult
-
-  const searchExecutionsData =
-    _params.recherche === 'total'
-      ? computeCumulative(searchExecutionsResult, ['value'])
-      : searchExecutionsResult
-
-  const collectionResourcesData =
-    _params.recherche === 'total'
-      ? computeCumulative(collectionResourcesResult, ['value'])
-      : collectionResourcesResult
 
   const creationData =
     _params.creation === 'total'
@@ -382,33 +411,10 @@ export const getStatistics = async (_params: StatisticsParams) => {
       : creationStatisticsResult
 
   return {
-    kpi,
-    search: {
-      resourceViews: {
-        data: resourceViewsData,
-        total: resourceViewsTotal,
-      },
-      searchExecutions: {
-        data: searchExecutionsData,
-        total: searchExecutionsTotal,
-      },
-      collectionResources: {
-        data: collectionResourcesData,
-        total: collectionResourcesTotal,
-      },
-    },
     creation: {
       data: creationData,
       proportions: computeCreationProportions(creationStatisticsResult),
       totals: computeCreationTotals(creationStatisticsResult),
     },
-    usage: {
-      thematiques: themesUsages(usageStatisticsResult),
-      beneficiaries: beneficiariesUsages(usageStatisticsResult),
-      professionalSectors: professionalSectorsUsages(usageStatisticsResult),
-      resourceTypes: resourceTypesUsages(usageStatisticsResult),
-    },
   }
 }
-
-export type Statistics = Awaited<ReturnType<typeof getStatistics>>

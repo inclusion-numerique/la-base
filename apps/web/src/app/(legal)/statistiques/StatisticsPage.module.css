@@ -4,3 +4,19 @@
     white-space: nowrap;
   }
 }
+
+.kpiSkeleton {
+  min-height: 188px;
+}
+
+.searchCreationSkeleton {
+  min-height: 380px;
+}
+
+.resourceContentSkeleton {
+  min-height: 280px;
+}
+
+.resourceContentListSkeleton {
+  min-height: 740px;
+}
