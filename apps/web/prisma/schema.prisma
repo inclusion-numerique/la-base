@@ -571,6 +571,8 @@ model CollectionResource {
   @@unique([resourceId, collectionId])
   @@index([resourceId])
   @@index([collectionId])
+  // perf for stats
+  @@index([added])
   @@map("collection_resources")
 }
 
@@ -591,6 +593,8 @@ model ResourceView {
   @@index([hash])
   @@index([userId])
   @@index([resourceId])
+  // perfs for stats
+  @@index([timestamp])
   @@map("resource_views")
 }
 
@@ -739,6 +743,8 @@ model SearchExecution {
   sorting String
 
   @@index([userId])
+  // perf for stats
+  @@index([timestamp])
   @@map("search_executions")
 }
 
