@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
   resourceAuthorization,

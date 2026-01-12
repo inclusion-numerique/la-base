@@ -43,7 +43,6 @@ const ResourceView = ({
     contentsWithAnchor,
     hasInformationSection,
   })
-
   return (
     <div className="fr-grid-row fr-pb-20v" data-testid="resource-view">
       <div className="fr-col-12 fr-col-md-4 fr-col-lg-3 fr-hidden fr-unhidden-md">

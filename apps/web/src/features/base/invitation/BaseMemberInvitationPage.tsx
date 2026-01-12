@@ -1,4 +1,4 @@
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { InvitationAlreadyProcessed } from '@app/web/features/base/invitation/components/InvitationAlreadyProcessed'
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import { JoinBase } from '@app/web/features/base/invitation/JoinBase'

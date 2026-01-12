@@ -1,6 +1,6 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu'
 import SideMenu from '@codegouvfr/react-dsfr/SideMenu'
 import { usePathname } from 'next/navigation'

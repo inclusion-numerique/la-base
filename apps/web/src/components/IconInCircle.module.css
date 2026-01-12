@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal !important;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.iconColor {
+  color: var(--artwork-minor-blue-france);
+  display: flex;
+}
+
+.xsmall {
+  width: 20px;
+  height: 20px;
+
+  .icon {
+    line-height: 12px !important;
+    font-size: 12px !important;
+    max-height: 12px;
+    max-width: 12px;
+
+    &::before {
+      max-height: 12px;
+      max-width: 12px;
+    }
+  }
+}
+
+.small {
+  width: 32px;
+  height: 32px;
+
+  .icon {
+    line-height: 16px !important;
+    font-size: 16px !important;
+    max-height: 16px;
+    max-width: 16px;
+
+    &::before {
+      max-height: 16px;
+      max-width: 16px;
+    }
+  }
+}
+
+.medium {
+  width: 48px;
+  height: 48px;
+
+  .icon {
+    line-height: 24px !important;
+    font-size: 24px !important;
+    max-height: 24px;
+    max-width: 24px;
+
+    &::before {
+      max-height: 24px;
+      max-width: 24px;
+    }
+  }
+}
+
+.semi-large {
+  width: 64px;
+  height: 64px;
+
+  .icon {
+    line-height: 32px !important;
+    font-size: 32px !important;
+    max-height: 32px;
+    max-width: 32px;
+
+    &::before {
+      max-height: 32px;
+      max-width: 32px;
+    }
+  }
+}
+
+.large {
+  width: 76px;
+  height: 76px;
+
+  .icon {
+    line-height: 30px !important;
+    font-size: 30px !important;
+    max-height: 30px;
+    max-width: 30px;
+
+    &::before {
+      max-height: 30px;
+      max-width: 30px;
+    }
+  }
+}
+
+.xlarge {
+  width: 88px;
+  height: 88px;
+
+  .icon {
+    line-height: 40px !important;
+    font-size: 40px !important;
+    max-height: 40px;
+    max-width: 40px;
+
+    &::before {
+      max-height: 40px;
+      max-width: 40px;
+    }
+  }
+}

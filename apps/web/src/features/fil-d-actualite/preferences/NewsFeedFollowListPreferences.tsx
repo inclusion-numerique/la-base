@@ -1,7 +1,7 @@
 'use client'
 
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseCard from '@app/web/components/Base/Card/BaseCard'
 import ProfileCard from '@app/web/components/Profile/Card/ProfileCard'
 import {

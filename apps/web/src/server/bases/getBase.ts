@@ -1,5 +1,5 @@
 import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {

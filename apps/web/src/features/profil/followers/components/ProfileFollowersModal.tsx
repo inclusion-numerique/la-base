@@ -1,7 +1,7 @@
 'use client'
 
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import ProfileMetadata from '@app/web/components/Profile/ProfileMetadata'

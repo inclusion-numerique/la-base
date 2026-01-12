@@ -1,5 +1,5 @@
 import Newsletter from '@app/web/app/(public)/Newsletter'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import WhoAreWe from '@app/web/features/home/components/WhoAreWe'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'

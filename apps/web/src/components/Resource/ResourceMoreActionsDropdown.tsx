@@ -10,6 +10,7 @@ import type { SessionUser } from '../../auth/sessionUser'
 import OpenInviteContributorModalButton from './Contributors/OpenInviteContributorModalButton'
 import OpenDeleteResourceModalButton from './OpenDeleteResourceModalButton'
 import OpenSaveResourceInCollectionModalButton from './OpenSaveResourceInCollectionModalButton'
+import styles from './ResourceMoreActionsDropDown.module.css'
 
 export const ResourceMoreActionsDropdown = ({
   resource,
@@ -64,7 +65,7 @@ export const ResourceMoreActionsDropdown = ({
         >
           <OpenSaveResourceInCollectionModalButton
             size="small"
-            className="fr-border-bottom"
+            className={styles.border}
             title={`Enregistrer "${resource.title}" dans une collection`}
             resourceId={resource.id}
           >
@@ -77,7 +78,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {copyLink && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <CopyLinkButton
             size="small"
             priority="tertiary no outline"
@@ -96,7 +97,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && resource.published && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <Link
             className="fr-btn fr-btn--sm"
             href={`/ressources/${resource.slug}/parametres`}
@@ -110,7 +111,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <OpenInviteContributorModalButton size="small" resource={resource}>
             <span
               className="ri-user-add-line fr-mr-1w fr-text-label--blue-france"
@@ -121,7 +122,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {resource.published && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <Link
             className="fr-btn fr-btn--sm"
             href={`/ressources/${resource.slug}/avis`}
@@ -135,7 +136,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {canWrite && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <OpenDeleteResourceModalButton resourceId={resource.id} size="small">
             <span
               className="ri-delete-bin-6-line fr-mr-1w fr-text-label--blue-france"
@@ -146,7 +147,7 @@ export const ResourceMoreActionsDropdown = ({
         </li>
       )}
       {!canWrite && (
-        <li className="fr-border-bottom">
+        <li className={styles.border}>
           <ResourceReportButton
             user={user}
             resource={resource}
