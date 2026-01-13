@@ -1,0 +1,19 @@
+.searchBar {
+  @media (min-width: 768px) {
+    width: 340px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  color: var(--text-action-high-grey);
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    margin-bottom: 1rem;
+  }
+}
