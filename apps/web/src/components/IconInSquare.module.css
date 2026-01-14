@@ -40,6 +40,40 @@
   }
 }
 
+.medium {
+  width: 48px;
+  height: 48px;
+
+  .icon {
+    line-height: 24px !important;
+    font-size: 24px !important;
+    max-height: 24px;
+    max-width: 24px;
+
+    &::before {
+      max-height: 24px;
+      max-width: 24px;
+    }
+  }
+}
+
+.medium-large {
+  width: 56px;
+  height: 56px;
+
+  .icon {
+    line-height: 28px !important;
+    font-size: 28px !important;
+    max-height: 28px;
+    max-width: 28px;
+
+    &::before {
+      max-height: 28px;
+      max-width: 28px;
+    }
+  }
+}
+
 .semi-large {
   width: 64px;
   height: 64px;

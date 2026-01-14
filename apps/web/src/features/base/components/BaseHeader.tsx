@@ -1,5 +1,6 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
+import BaseHeaderShareLinkButton from '@app/web/features/base/components/BaseHeaderShareLinkButton'
 import { BaseJoinRequest } from '@app/web/features/base/join-requests/components/BaseJoinRequest'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
@@ -52,15 +53,21 @@ const BaseHeader = ({
               context="base"
             />
             {canWrite && (isBaseMember || isBaseCreator) ? (
-              <div>
+              <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-mt-2w ">
                 <Link
                   data-testid="base-edition-button"
-                  className="fr-mt-2w fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left fr-width-full fr-justify-content-center"
+                  className="fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-left fr-width-full fr-justify-content-center"
                   href={`/bases/${base.slug}/editer`}
                   prefetch={false}
                 >
                   Modifier la base
                 </Link>
+                {!base.isPublic && (
+                  <BaseHeaderShareLinkButton
+                    base={base}
+                    enabled={!!base.shareableLink?.enabled}
+                  />
+                )}
               </div>
             ) : (
               base.isPublic && (

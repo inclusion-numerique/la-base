@@ -95,6 +95,7 @@ const mockCollection = {
 }
 
 const baseResource: NewsFeedResource = {
+  shareableLink: null,
   collectionId: undefined,
   addedToCollectionAt: undefined,
   eventType: 'published',

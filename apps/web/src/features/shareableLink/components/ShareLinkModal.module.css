@@ -1,0 +1,33 @@
+.shareToggle :global(.fr-hint-text) {
+  text-align: start !important;
+}
+
+.modalContainer :global(.fr-modal__content) {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 2rem;
+}
+
+.modalContainer :global(.fr-modal__title) {
+  margin: 0;
+}
+
+.dropdownButton {
+  color: var(--text-action-high-grey);
+  font-weight: 400;
+  font-size: 14px;
+  width: 100%;
+  padding: 12px 16px;
+  white-space: nowrap;
+
+  &::before {
+    color: var(--blue-france-sun-113-625);
+    margin-right: 10px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0a76f6;
+    outline-offset: -2px;
+  }
+}

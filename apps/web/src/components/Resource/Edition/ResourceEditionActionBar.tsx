@@ -3,6 +3,7 @@ import ResourceEditionStateBadge from '@app/web/components/Resource/Edition/Reso
 import ResourcePublishedStateBadge from '@app/web/components/Resource/Edition/ResourcePublishedStateBadge'
 import type { ResourceEditionState } from '@app/web/components/Resource/enums/ResourceEditionState'
 import { ResourcePublishedState } from '@app/web/components/Resource/enums/ResourcePublishedState'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import type { Resource } from '@app/web/server/resources/getResource'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
@@ -160,6 +161,7 @@ const ResourceEditionActionBar = ({
       </div>
       <DeleteResourceModal {...deleteResourceModalProps(onDelete)} />
       <InviteContributorModal />
+      <ShareLinkModal />
     </>
   )
 }

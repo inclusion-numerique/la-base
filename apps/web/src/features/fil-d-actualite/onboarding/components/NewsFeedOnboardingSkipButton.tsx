@@ -74,7 +74,7 @@ const NewsFeedOnboardingSkipButton = ({
   return (
     <>
       <Button
-        className={classNames('fr-link fr-text--underline fr-flex')}
+        className="fr-link fr-text--underline fr-flex"
         priority="tertiary no outline"
         type="button"
         onClick={handleModal}

@@ -9,7 +9,10 @@ import {
 import type { Prisma } from '@prisma/client'
 import { imageCropSelect } from '../image/imageCropSelect'
 
-export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
+export const collectionSelect = (
+  user: Pick<SessionUser, 'id'> | null,
+  isShareToken = false,
+) =>
   ({
     id: true,
     title: true,
@@ -70,8 +73,27 @@ export const collectionSelect = (user: Pick<SessionUser, 'id'> | null) =>
         order: true,
         id: true,
         resource: { select: resourceListSelect(user) },
+        shareableLink: {
+          select: {
+            id: true,
+            enabled: true,
+          },
+        },
       },
-      where: { resource: computeResourcesListWhereForUser(user) },
+      where: {
+        OR: [
+          // Normal resource access
+          {
+            resource: computeResourcesListWhereForUser(user, {}, isShareToken),
+          },
+          // Resource added via enabled shareable link
+          {
+            shareableLink: {
+              enabled: true,
+            },
+          },
+        ],
+      },
       orderBy: [
         { order: 'asc' },
         { resource: { lastPublished: 'desc' } },
@@ -86,9 +108,10 @@ export const getCollection = async (
     id,
   }: { slug: string; id?: undefined } | { slug?: undefined; id: string },
   user: Pick<SessionUser, 'id'> | null,
+  isShareToken = false,
 ) => {
   const collection = await prismaClient.collection.findFirst({
-    select: collectionSelect(user),
+    select: collectionSelect(user, isShareToken),
     where: { id, slug, deleted: null },
     orderBy: [
       {
@@ -104,10 +127,15 @@ export const getCollection = async (
     ? null
     : {
         ...collection,
-        resources: collection.resources.map((resource) => ({
-          resource: toResourceWithFeedbackAverage(resource.resource),
-          order: resource.order,
-          collectionResourceId: resource.id,
+        resources: collection.resources.map((collectionResource) => ({
+          resource: toResourceWithFeedbackAverage(collectionResource.resource),
+          order: collectionResource.order,
+          collectionResourceId: collectionResource.id,
+          // Only include the share token if the link is still enabled
+          shareToken:
+            collectionResource.shareableLink?.enabled === true
+              ? collectionResource.shareableLink.id
+              : null,
         })),
       }
 }
@@ -119,4 +147,5 @@ export type CollectionPageData = Exclude<
 
 export type CollectionResourceListItem = ResourceListItem & {
   collectionResourceId: string
+  shareToken: string | null
 }

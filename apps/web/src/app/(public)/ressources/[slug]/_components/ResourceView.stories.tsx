@@ -17,6 +17,7 @@ const present = new Date('2022-07-12')
 
 const resource = (imageId: string | null) =>
   ({
+    shareableLink: null,
     id: '1',
     legacyId: null,
     title:

@@ -6,10 +6,24 @@ import type { Prisma } from '@prisma/client'
 export const computeCollectionsListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.CollectionWhereInput = {},
+  isFromShareableLink = false,
 ): Prisma.CollectionWhereInput => {
   const whereCollectionIsPublic = {
     isPublic: true,
   }
+
+  // Sharelink token grants access to collections that contain published resources regardless of visibility / if user connected or not / user base member or not
+  const whereCollectionIsAccessibleViaShareToken = isFromShareableLink
+    ? {
+        resources: {
+          every: {
+            resource: {
+              published: { not: null },
+            },
+          },
+        },
+      }
+    : {}
 
   return {
     deleted: null,
@@ -19,6 +33,10 @@ export const computeCollectionsListWhereForUser = (
             OR: [
               // Public
               whereCollectionIsPublic,
+              // Share token access to published resources
+              ...(isFromShareableLink
+                ? [whereCollectionIsAccessibleViaShareToken]
+                : []),
               // Created by user
               { createdById: user.id },
               // In base where user is active member
@@ -36,7 +54,9 @@ export const computeCollectionsListWhereForUser = (
               },
             ],
           }
-        : whereCollectionIsPublic,
+        : isFromShareableLink
+          ? whereCollectionIsAccessibleViaShareToken
+          : whereCollectionIsPublic,
       where,
     ],
   }
@@ -62,7 +82,10 @@ export const getProfileCollectionsCount = async (
   })
 }
 
-export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>
+export const collectionSelect = (
+  user?: Pick<SessionUser, 'id'> | null,
+  isFromShareableLink = false,
+) =>
   ({
     id: true,
     title: true,
@@ -120,7 +143,24 @@ export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>
     _count: {
       select: {
         resources: {
-          where: { resource: computeResourcesListWhereForUser(user) },
+          where: {
+            OR: [
+              // Normal resource access
+              {
+                resource: computeResourcesListWhereForUser(
+                  user,
+                  {},
+                  isFromShareableLink,
+                ),
+              },
+              // Resource added via enabled shareable link
+              {
+                shareableLink: {
+                  enabled: true,
+                },
+              },
+            ],
+          },
         },
       },
     },
@@ -129,10 +169,11 @@ export const collectionSelect = (user?: Pick<SessionUser, 'id'> | null) =>
 export const getProfileCollections = async (
   profileId: string,
   user: Pick<SessionUser, 'id'> | null,
+  isFromShareableLink = false,
 ) => {
   const where = getWhereCollectionsProfileList(profileId, user)
   return prismaClient.collection.findMany({
-    select: collectionSelect(user),
+    select: collectionSelect(user, isFromShareableLink),
     where,
     orderBy: [
       {

@@ -1,6 +1,8 @@
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
@@ -25,7 +27,7 @@ export const ResourceMoreActionsDropdown = ({
   copyLink = true,
   canWrite = false,
 }: {
-  resource: ResourceListItem
+  resource: BaseResource | Resource
   user?: SessionUser | null
   priority?: ButtonProps['priority']
   modalPriority?: ButtonProps['priority']
@@ -77,7 +79,7 @@ export const ResourceMoreActionsDropdown = ({
           </OpenSaveResourceInCollectionModalButton>
         </li>
       )}
-      {copyLink && (
+      {copyLink && resource.isPublic && (
         <li className={styles.border}>
           <CopyLinkButton
             size="small"
@@ -108,6 +110,17 @@ export const ResourceMoreActionsDropdown = ({
             />
             Modifier les paramètres
           </Link>
+        </li>
+      )}
+      {canWrite && resource.published && !resource.isPublic && (
+        <li className={styles.border}>
+          <OpenShareLinkModalButton type="resource" resource={resource}>
+            <span
+              className="ri-link fr-mr-1w fr-text-label--blue-france"
+              aria-hidden
+            />
+            Partager via un lien
+          </OpenShareLinkModalButton>
         </li>
       )}
       {canWrite && (

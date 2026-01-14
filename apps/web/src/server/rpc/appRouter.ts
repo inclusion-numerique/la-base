@@ -16,6 +16,7 @@ import { reportRouter } from '@app/web/server/rpc/report/reportRouter'
 import { resourceRouter } from '@app/web/server/rpc/resource/resourceRouter'
 import { resourceContributorRouter } from '@app/web/server/rpc/resourceContributor/resourceContributorRouter'
 import { searchRouter } from '@app/web/server/rpc/search/searchRouter'
+import { shareLinkRouter } from '@app/web/server/rpc/shareableLink/shareLinkRouter'
 import { uploadRouter } from '@app/web/server/rpc/upload/uploadRouter'
 import { userRouter } from '@app/web/server/rpc/user/userRouter'
 
@@ -39,6 +40,7 @@ export const appRouter = router({
   follow: followRouter,
   feedback: feedbackRouter,
   featuredBlock: featuredBlockRouter,
+  shareableLink: shareLinkRouter,
 })
 
 // export type definition of API

@@ -40,6 +40,7 @@ export const SaveResourceInCollectionDynamicModal = createDynamicModal({
   isOpenedByDefault: false,
   initialState: {
     resourceId: null as string | null,
+    shareableLinkId: null as string | null,
   },
 })
 
@@ -51,7 +52,8 @@ export const SaveResourceInCollectionDynamicModal = createDynamicModal({
  * and could be broken down in multiple hooks and components for the different "steps" of the modal.
  */
 const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
-  const { resourceId } = SaveResourceInCollectionDynamicModal.useState()
+  const { resourceId, shareableLinkId } =
+    SaveResourceInCollectionDynamicModal.useState()
   const router = useRouter()
 
   const bases = user.bases.map(({ base }) => base)
@@ -190,6 +192,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
       const result = await addToCollectionMutation.mutateAsync({
         resourceId,
         collectionId,
+        shareableLinkId: shareableLinkId ?? undefined,
       })
       setPendingMutationCollectionId(null)
       router.refresh()
@@ -247,7 +250,10 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
 
   const onCreateCollection = async (data: CreateCollectionCommand) => {
     try {
-      const collection = await createCollectionMutation.mutateAsync(data)
+      const collection = await createCollectionMutation.mutateAsync({
+        ...data,
+        addResourceShareableLinkId: shareableLinkId ?? undefined,
+      })
 
       createToast({
         priority: 'success',

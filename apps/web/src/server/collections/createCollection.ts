@@ -13,6 +13,8 @@ export const CreateCollectionCommandValidation = z.object({
   isPublic: isPublicValidation,
   // Resource to add to the collection upon creation
   addResourceId: z.string().uuid().nullish(),
+  // Shareable link ID to associate with the resource
+  addResourceShareableLinkId: z.string().uuid().nullish(),
 })
 
 export type CreateCollectionCommand = z.infer<

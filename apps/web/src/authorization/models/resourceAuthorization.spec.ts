@@ -128,14 +128,13 @@ describe('Authorization - Ressources', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une ressource en brouillon`,
-        ({ roles }) => {
-          expect(getResourcePermissions(draftResource, roles)).toEqual(
-            resourcePermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une ressource en brouillon`, ({
+        roles,
+      }) => {
+        expect(getResourcePermissions(draftResource, roles)).toEqual(
+          resourcePermissions,
+        )
+      })
 
       it.each([
         {
@@ -146,12 +145,11 @@ describe('Authorization - Ressources', () => {
           title: 'Utilisateur connecté',
           roles: [UserSecurityRoles.User],
         },
-      ])(
-        '$title, je n’ai pas de permissions sur une ressource en brouillon',
-        ({ roles }) => {
-          expect(getResourcePermissions(draftResource, roles)).toEqual([])
-        },
-      )
+      ])('$title, je n’ai pas de permissions sur une ressource en brouillon', ({
+        roles,
+      }) => {
+        expect(getResourcePermissions(draftResource, roles)).toEqual([])
+      })
     })
 
     describe('Ressource privée', () => {
@@ -178,14 +176,13 @@ describe('Authorization - Ressources', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une ressource privée`,
-        ({ roles }) => {
-          expect(getResourcePermissions(privateResource, roles)).toEqual(
-            resourcePermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une ressource privée`, ({
+        roles,
+      }) => {
+        expect(getResourcePermissions(privateResource, roles)).toEqual(
+          resourcePermissions,
+        )
+      })
 
       it.each([
         {
@@ -196,14 +193,13 @@ describe('Authorization - Ressources', () => {
           title: 'Utilisateur connecté',
           roles: [UserSecurityRoles.User],
         },
-      ])(
-        '$title, je n’ai pas de permissions sur une ressource privée',
-        ({ roles }) => {
-          expect(getResourcePermissions(privateResource, roles)).toEqual([
-            ResourcePermissions.ReadGeneralResourceInformation,
-          ])
-        },
-      )
+      ])('$title, je n’ai pas de permissions sur une ressource privée', ({
+        roles,
+      }) => {
+        expect(getResourcePermissions(privateResource, roles)).toEqual([
+          ResourcePermissions.ReadGeneralResourceInformation,
+        ])
+      })
     })
 
     describe('Ressource publique', () => {
@@ -230,14 +226,13 @@ describe('Authorization - Ressources', () => {
           title: 'Admin',
           roles: [UserSecurityRoles.Admin],
         },
-      ])(
-        `$title, j’ai toutes les permissions sur une ressource publique`,
-        ({ roles }) => {
-          expect(getResourcePermissions(publicResource, roles)).toEqual(
-            resourcePermissions,
-          )
-        },
-      )
+      ])(`$title, j’ai toutes les permissions sur une ressource publique`, ({
+        roles,
+      }) => {
+        expect(getResourcePermissions(publicResource, roles)).toEqual(
+          resourcePermissions,
+        )
+      })
 
       it('Utilisateur connecté, je peux voir, signaler et enregistrer une ressource publique', () => {
         expect(

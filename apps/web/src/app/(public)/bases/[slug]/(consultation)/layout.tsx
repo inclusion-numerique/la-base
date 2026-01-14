@@ -1,5 +1,5 @@
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
-import type { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
+import { BaseRouteParams } from '@app/web/app/(public)/bases/[slug]/baseRouteParams'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import PrivateBox from '@app/web/components/PrivateBox'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
@@ -8,6 +8,9 @@ import BaseHeader, {
 } from '@app/web/features/base/components/BaseHeader'
 import BaseMenu from '@app/web/features/base/components/BaseMenu'
 import BaseJoinRequestFormModal from '@app/web/features/base/join-requests/components/BaseJoinRequestFormModal'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
+import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
+import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
@@ -19,9 +22,32 @@ export const generateMetadata = async ({
 }: BaseRouteParams): Promise<Metadata> => {
   const { slug } = await params
 
+  // we dont want to index the shareable link token
+  if (isShareableLinkToken(slug)) {
+    const tokenResult = await resolveShareableLinkToken(slug, 'base')
+    if (!tokenResult) {
+      notFound()
+    }
+
+    const base = await prismaClient.base.findUnique({
+      where: { slug: tokenResult.base?.slug },
+      select: { title: true, description: true },
+    })
+
+    if (!base) {
+      notFound()
+    }
+
+    return {
+      title: metadataTitle(base.title),
+      description: base.description || undefined,
+      robots: 'noindex, nofollow',
+    }
+  }
+
   const base = await prismaClient.base.findUnique({
     where: {
-      slug,
+      slug: slug,
     },
     select: {
       title: true,
@@ -63,18 +89,21 @@ const BaseLayout = async ({
           <PrivateBox type="Base" />
         </main>
         <BaseJoinRequestFormModal user={user} base={base} />
+        <ShareLinkModal />
       </>
     )
   }
+
   return (
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseHeader base={base} canWrite={canWrite} user={user} />
       <main id={contentId} className="fr-overflow-hidden">
-        <BaseMenu base={base} />
+        <BaseMenu base={base} slug={slug} />
         {children}
       </main>
       <BaseJoinRequestFormModal user={user} base={base} />
+      <ShareLinkModal />
     </>
   )
 }

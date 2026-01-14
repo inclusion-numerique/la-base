@@ -68,6 +68,7 @@ const SaveResourceInCollectionButton = ({
   user,
   resource,
   variant,
+  shareableLinkId,
   'data-testid': dataTestid,
   priority,
   size,
@@ -78,6 +79,7 @@ const SaveResourceInCollectionButton = ({
   user: SessionUser | null
   resource: { id: string; slug: string; title: string }
   iconOnly?: boolean
+  shareableLinkId?: string
   'data-testid'?: string
   variant?: 'card' | 'icon-only'
   priority?: ButtonProps['priority']
@@ -116,6 +118,7 @@ const SaveResourceInCollectionButton = ({
         }}
         className={className}
         resourceId={resource.id}
+        shareableLinkId={shareableLinkId}
       />
     )
   }
