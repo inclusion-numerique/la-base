@@ -66,6 +66,15 @@ export const Dropdown = ({
   ) => {
     if (hasKey(event) && (event.key === 'Tab' || event.key === 'Shift')) return
 
+    // ESC pour fermer le dropdown (RGAA)
+    if (hasKey(event) && event.key === 'Escape') {
+      event.preventDefault()
+      setIsOpen(false)
+      // Retour du focus au bouton
+      buttonRef.current?.focus()
+      return
+    }
+
     if (hasKey(event) && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault()
 

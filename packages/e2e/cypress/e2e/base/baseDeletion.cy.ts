@@ -23,10 +23,10 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
     cy.dsfrShouldBeStarted()
 
-    cy.findByRole('dialog').should('not.exist')
+    cy.get('#delete-base').should('not.be.visible')
 
     cy.testId('delete-base-button').click()
-    cy.findByRole('dialog').should('exist')
+    cy.get('#delete-base').should('be.visible')
 
     const truncatedTitle = defaultTestBaseTitle.slice(0, -1)
     const lastChar = defaultTestBaseTitle.slice(-1)

@@ -36,6 +36,11 @@ export const NewsFeedProfessionnalSectorsFilters = ({
             commonStyles.absoluteButton,
           )}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={
+            isOpen
+              ? 'Masquer les secteurs professionnels'
+              : 'Afficher les secteurs professionnels'
+          }
         >
           <span className={`ri-arrow-${isOpen ? 'down' : 'right'}-s-line`} />
         </Button>

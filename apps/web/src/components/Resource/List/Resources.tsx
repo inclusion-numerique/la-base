@@ -1,5 +1,6 @@
 'use client'
 
+import CardList from '@app/ui/components/CardList'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
@@ -151,16 +152,18 @@ const Resources = ({
           ]}
         />
       ) : (
-        resources.map((resource) => (
-          <ResourceCard
-            isContributor={resourceAuthorization(resource, user).hasRole(
-              ResourceRoles.ResourceContributor,
-            )}
-            key={resource.id}
-            resource={resource}
-            user={user}
-          />
-        ))
+        <CardList ariaLabel="Liste des ressources">
+          {resources.map((resource) => (
+            <ResourceCard
+              isContributor={resourceAuthorization(resource, user).hasRole(
+                ResourceRoles.ResourceContributor,
+              )}
+              key={resource.id}
+              resource={resource}
+              user={user}
+            />
+          ))}
+        </CardList>
       )}
       {!!user && <SaveResourceInCollectionModal user={user} />}
       <DeleteResourceModal />

@@ -210,6 +210,69 @@ Cypress.Commands.add('allowNextRedirectException', () => {
   })
 })
 
+/**
+ * Commande pour vérifier l'accessibilité d'une page avec axe-core
+ * Injecte axe et exécute les vérifications d'accessibilité RGAA/WCAG
+ *
+ * @param context - Sélecteur CSS optionnel pour limiter la vérification
+ * @param options - Options de configuration axe
+ *
+ * @example
+ * cy.checkAccessibility() // Vérifie toute la page
+ * cy.checkAccessibility('.main-content') // Vérifie un élément spécifique
+ * cy.checkAccessibility(null, { rules: { 'color-contrast': { enabled: false } } })
+ */
+Cypress.Commands.add(
+  'checkAccessibility',
+  (
+    context?: string | null,
+    options?: {
+      rules?: Record<string, { enabled: boolean }>
+      runOnly?: {
+        type: 'tag' | 'rule'
+        values: string[]
+      }
+    },
+  ) => {
+    cy.injectAxe()
+    cy.checkA11y(
+      context ?? undefined,
+      {
+        ...options,
+        // Configuration par défaut pour RGAA/WCAG 2.1 AA
+        runOnly: options?.runOnly ?? {
+          type: 'tag',
+          values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
+        },
+      },
+      (violations) => {
+        // Log des violations pour debug
+        if (violations.length > 0) {
+          cy.task(
+            'log',
+            `\n⚠️  ${violations.length} problème(s) d'accessibilité détecté(s):`,
+          )
+          for (const violation of violations) {
+            cy.task(
+              'log',
+              `\n[${violation.impact?.toUpperCase()}] ${violation.id}\n  ${violation.description}\n  Plus d'info: ${violation.helpUrl}`,
+            )
+            for (const node of violation.nodes) {
+              cy.task('log', `  → Élément: ${node.target.join(', ')}`)
+              if (node.failureSummary) {
+                cy.task(
+                  'log',
+                  `    ${node.failureSummary.split('\n').join('\n    ')}`,
+                )
+              }
+            }
+          }
+        }
+      },
+    )
+  },
+)
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -272,6 +335,22 @@ declare global {
       ): Chainable<void>
 
       allowNextRedirectException(): Chainable<void>
+
+      /**
+       * Vérifie l'accessibilité de la page avec axe-core (WCAG 2.1 AA)
+       * @param context - Sélecteur CSS optionnel pour limiter la vérification
+       * @param options - Options de configuration axe
+       */
+      checkAccessibility(
+        context?: string | null,
+        options?: {
+          rules?: Record<string, { enabled: boolean }>
+          runOnly?: {
+            type: 'tag' | 'rule'
+            values: string[]
+          }
+        },
+      ): Chainable<void>
 
       //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

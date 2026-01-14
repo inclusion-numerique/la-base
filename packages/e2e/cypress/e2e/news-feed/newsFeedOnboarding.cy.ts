@@ -71,21 +71,18 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
     cy.dsfrShouldBeStarted()
 
     // Wait for DSFR modals to be bound (important for modal functionality)
-    cy.wait(200) // Additional wait for DSFR binding
-
-    // Verify no modal exists initially (following baseDeletion.cy.ts pattern)
-    cy.findByRole('dialog').should('not.exist')
+    cy.wait(500) // Additional wait for DSFR binding
 
     cy.contains('Revenir plus tard').click()
 
-    // Modal should appear after click (following baseDeletion.cy.ts pattern)
-    cy.findByRole('dialog').should('exist')
-    cy.findByRole('dialog').as('modal')
-    cy.get('@modal').should('be.visible')
-    cy.get('@modal').contains(
+    cy.get('#news-feed-onboarding-modal').should('be.visible')
+    cy.get('#news-feed-onboarding-modal').contains(
       'Êtes-vous sûr de vouloir quitter le choix de vos préférences ?',
     )
-    cy.get('@modal').find('button').contains('Quitter').click()
+    cy.get('#news-feed-onboarding-modal')
+      .find('button')
+      .contains('Quitter')
+      .click()
 
     cy.appUrlShouldBe('/')
   })

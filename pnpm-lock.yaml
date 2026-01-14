@@ -634,9 +634,15 @@ importers:
       '@cypress/react18':
         specifier: ^2.0.1
         version: 2.0.1(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(cypress@14.5.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      axe-core:
+        specifier: ^4.10.0
+        version: 4.10.3
       cypress:
         specifier: ^14.5.3
         version: 14.5.4
+      cypress-axe:
+        specifier: ^1.5.0
+        version: 1.7.0(axe-core@4.10.3)(cypress@14.5.4)
       cypress-real-events:
         specifier: ^1.14.0
         version: 1.15.0(cypress@14.5.4)
@@ -6048,6 +6054,13 @@ packages:
   cwd@0.10.0:
     resolution: {integrity: sha512-YGZxdTTL9lmLkCUTpg4j0zQ7IhRB5ZmqNBbGCl3Tg6MP/d5/6sY7L5mmTjzbc6JKgVZYiqTQTNhPFsbXNGlRaA==}
     engines: {node: '>=0.8'}
+
+  cypress-axe@1.7.0:
+    resolution: {integrity: sha512-zzJpvAAjauEB3GZl0KYXb8i3w6MztWAt2WM3czYTFyNVC30alDmqCm9E7GwZ4bgkldZJlmHakaVEyu73R5St4w==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      axe-core: ^3 || ^4
+      cypress: ^10 || ^11 || ^12 || ^13 || ^14 || ^15
 
   cypress-file-upload@5.0.8:
     resolution: {integrity: sha512-+8VzNabRk3zG6x8f8BWArF/xA/W0VK4IZNx3MV0jFWrJS/qKn8eHfa5nU73P9fOQAgwHFJx7zjg4lwOnljMO8g==}
@@ -17738,6 +17751,11 @@ snapshots:
     dependencies:
       find-pkg: 0.1.2
       fs-exists-sync: 0.1.0
+
+  cypress-axe@1.7.0(axe-core@4.10.3)(cypress@14.5.4):
+    dependencies:
+      axe-core: 4.10.3
+      cypress: 14.5.4
 
   cypress-file-upload@5.0.8(cypress@14.5.4):
     dependencies:

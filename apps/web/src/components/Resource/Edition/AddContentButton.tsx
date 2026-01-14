@@ -54,19 +54,28 @@ const AddContentButton = ({
   disabled,
   editing,
   withBorder = false,
+  as = 'div',
 }: {
   onAdd: (type: ContentType) => void
   disabled?: boolean
   editing: boolean
   withBorder?: boolean
+  as?: 'li' | 'div'
 }) => {
-  const ref = useRef<HTMLDivElement | null>(null)
+  const ref = useRef<HTMLDivElement | HTMLLIElement | null>(null)
   const [open, setOpen] = useState(false)
 
   useOnClickOutside(ref as RefObject<HTMLElement>, () => setOpen(false))
 
+  const Component = as
+
   return (
-    <div ref={ref} className={styles.container}>
+    <Component
+      ref={
+        ref as React.RefObject<HTMLLIElement> & React.RefObject<HTMLDivElement>
+      }
+      className={styles.container}
+    >
       {withBorder ? (
         <div
           className={classNames(styles.borderContainer, open && styles.open)}
@@ -147,7 +156,7 @@ const AddContentButton = ({
           )}
         </AnimatePresence>
       )}
-    </div>
+    </Component>
   )
 }
 

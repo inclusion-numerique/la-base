@@ -49,7 +49,13 @@ const executeTask = (task: string, input: unknown) => {
 export const taskManager = new Proxy(
   {},
   {
-    get: (_, property) => (input: unknown) =>
-      executeTask(property as string, input),
+    get: (_, property) => (input: unknown) => {
+      if (property === 'log') {
+        // biome-ignore lint/suspicious/noConsole: intentional logging task
+        console.log(input)
+        return null
+      }
+      return executeTask(property as string, input)
+    },
   },
 )

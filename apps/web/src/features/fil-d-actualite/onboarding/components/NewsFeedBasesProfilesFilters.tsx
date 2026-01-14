@@ -64,6 +64,11 @@ export const NewsFeedBasesProfilesFilters = ({
             'fr-text-mention--black fr-px-1v',
           )}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={
+            isOpen
+              ? 'Masquer les bases et profils suivis'
+              : 'Afficher les bases et profils suivis'
+          }
         >
           <span className={`ri-arrow-${isOpen ? 'down' : 'right'}-s-line`} />
         </Button>
