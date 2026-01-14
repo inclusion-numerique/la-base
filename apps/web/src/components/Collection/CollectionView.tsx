@@ -89,18 +89,20 @@ const CollectionView = ({
       </div>
       <div className="fr-container fr-container--medium fr-pt-12v">
         {collection.resources.length > 0 ? (
-          collection.resources.map(({ resource }, index) => (
-            <ResourceCard
-              key={resource.id}
-              resource={resource}
-              user={user}
-              isContributor={resourceAuthorization(resource, user).hasRole(
-                ResourceRoles.ResourceContributor,
-              )}
-              className={index === 0 ? 'fr-pt-12v' : undefined}
-              shareToken={shareToken}
-            />
-          ))
+          collection.resources.map(
+            ({ resource, shareToken: resourceShareToken }, index) => (
+              <ResourceCard
+                key={resource.id}
+                resource={resource}
+                user={user}
+                isContributor={resourceAuthorization(resource, user).hasRole(
+                  ResourceRoles.ResourceContributor,
+                )}
+                className={index === 0 ? 'fr-pt-12v' : undefined}
+                shareToken={resourceShareToken ?? shareToken}
+              />
+            ),
+          )
         ) : (
           <EmptyBaseCollections isOwner={isOwner} />
         )}

@@ -13,10 +13,12 @@ const ResourceActions = ({
   resource,
   user,
   canWrite,
+  shareableLinkId,
 }: {
   resource: Resource
   user: SessionUser | null
   canWrite: boolean
+  shareableLinkId?: string
 }) => {
   const isPublished = !!resource.published
   const resourceCreator = user?.id === resource.createdById
@@ -68,6 +70,7 @@ const ResourceActions = ({
               priority="secondary"
               resource={resource}
               user={user}
+              shareableLinkId={shareableLinkId}
               data-testid="save-resource-in-collection-button"
               iconPosition="left"
             >

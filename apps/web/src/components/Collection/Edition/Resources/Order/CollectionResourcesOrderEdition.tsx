@@ -27,10 +27,13 @@ const CollectionResourcesOrderEdition = ({
   const saveButtonRef = useRef<HTMLButtonElement>(null)
   const resourcesWithCollectionResourceId = useMemo(
     () =>
-      collection.resources.map(({ collectionResourceId, resource }) => ({
-        ...resource,
-        collectionResourceId,
-      })),
+      collection.resources.map(
+        ({ collectionResourceId, resource, shareToken }) => ({
+          ...resource,
+          collectionResourceId,
+          shareToken,
+        }),
+      ),
     [collection.resources],
   )
   const [collectionsResources, setCollectionsResources] = useState<{
