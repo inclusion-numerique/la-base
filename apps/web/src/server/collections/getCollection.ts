@@ -73,9 +73,26 @@ export const collectionSelect = (
         order: true,
         id: true,
         resource: { select: resourceListSelect(user) },
+        shareableLink: {
+          select: {
+            id: true,
+            enabled: true,
+          },
+        },
       },
       where: {
-        resource: computeResourcesListWhereForUser(user, {}, isShareToken),
+        OR: [
+          // Normal resource access
+          {
+            resource: computeResourcesListWhereForUser(user, {}, isShareToken),
+          },
+          // Resource added via enabled shareable link
+          {
+            shareableLink: {
+              enabled: true,
+            },
+          },
+        ],
       },
       orderBy: [
         { order: 'asc' },
@@ -110,10 +127,15 @@ export const getCollection = async (
     ? null
     : {
         ...collection,
-        resources: collection.resources.map((resource) => ({
-          resource: toResourceWithFeedbackAverage(resource.resource),
-          order: resource.order,
-          collectionResourceId: resource.id,
+        resources: collection.resources.map((collectionResource) => ({
+          resource: toResourceWithFeedbackAverage(collectionResource.resource),
+          order: collectionResource.order,
+          collectionResourceId: collectionResource.id,
+          // Only include the share token if the link is still enabled
+          shareToken:
+            collectionResource.shareableLink?.enabled === true
+              ? collectionResource.shareableLink.id
+              : null,
         })),
       }
 }
@@ -125,4 +147,5 @@ export type CollectionPageData = Exclude<
 
 export type CollectionResourceListItem = ResourceListItem & {
   collectionResourceId: string
+  shareToken: string | null
 }

@@ -1,7 +1,7 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
-import { BaseJoinRequest } from '@app/web/features/base/join-requests/components/BaseJoinRequest'
 import BaseHeaderShareLinkButton from '@app/web/features/base/components/BaseHeaderShareLinkButton'
+import { BaseJoinRequest } from '@app/web/features/base/join-requests/components/BaseJoinRequest'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Badge from '@codegouvfr/react-dsfr/Badge'

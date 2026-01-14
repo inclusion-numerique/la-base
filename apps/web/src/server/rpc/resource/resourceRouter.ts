@@ -159,9 +159,18 @@ export const resourceRouter = router({
       return result
     }),
   addToCollection: protectedProcedure
-    .input(z.object({ resourceId: z.string(), collectionId: z.string() }))
+    .input(
+      z.object({
+        resourceId: z.string(),
+        collectionId: z.string(),
+        shareableLinkId: z.string().uuid().optional(),
+      }),
+    )
     .mutation(
-      async ({ input: { resourceId, collectionId }, ctx: { user } }) => {
+      async ({
+        input: { resourceId, collectionId, shareableLinkId },
+        ctx: { user },
+      }) => {
         const collection = await prismaClient.collection.findUnique({
           where: { id: collectionId },
           select: collectionAuthorizationTargetSelect,
@@ -174,6 +183,18 @@ export const resourceRouter = router({
 
         if (!collection || !resource) {
           throw notFoundError()
+        }
+
+        // Validate shareable link if provided
+        if (shareableLinkId) {
+          const shareableLink = await prismaClient.shareableLink.findUnique({
+            where: { id: shareableLinkId },
+            select: { enabled: true },
+          })
+
+          if (!shareableLink || !shareableLink.enabled) {
+            throw notFoundError('Shareable link not found or disabled')
+          }
         }
 
         // Can only add a accessible resource to collection
@@ -196,6 +217,7 @@ export const resourceRouter = router({
             resources: {
               create: {
                 resourceId,
+                shareableLinkId,
               },
             },
           },

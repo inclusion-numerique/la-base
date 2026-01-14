@@ -20,7 +20,12 @@ export const getBasePageContext = cache(
     paginationParams?: PaginationParams,
   ) => {
     const user = await getSessionUser()
-    let base = await basePageQuery(decodeURI(baseSlug), user, membersSortBy, paginationParams)
+    let base = await basePageQuery(
+      decodeURI(baseSlug),
+      user,
+      membersSortBy,
+      paginationParams,
+    )
     let isUsingShareToken = false
 
     if (isShareableLinkToken(baseSlug)) {

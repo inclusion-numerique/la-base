@@ -30,11 +30,13 @@ const ResourceView = ({
   user,
   canDelete,
   canWrite,
+  shareableLinkId,
 }: {
   resource: Resource
   user: SessionUser | null
   canWrite: boolean
   canDelete: boolean
+  shareableLinkId?: string
 }) => {
   const hasInformationSection = resource.isPublic || hasIndexation(resource)
   const contentsWithAnchor = addAnchorIdsToResourceContents(resource.contents)
@@ -130,6 +132,7 @@ const ResourceView = ({
               resource={resource}
               user={user}
               canWrite={canWrite}
+              shareableLinkId={shareableLinkId}
             />
             <ResourceMobileNavigation navigationData={navigationData} />
           </div>

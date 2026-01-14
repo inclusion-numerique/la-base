@@ -102,6 +102,7 @@ const RessourcePage = async ({
 
   let actualSlug = decodeURI(slug)
   let isUsingShareToken = false
+  let shareableLinkId: string | undefined
 
   if (isShareableLinkToken(slug)) {
     const tokenResult = await resolveShareableLinkToken(slug, 'resource')
@@ -110,6 +111,7 @@ const RessourcePage = async ({
     }
     actualSlug = tokenResult.resource.slug
     isUsingShareToken = true
+    shareableLinkId = tokenResult.id
     await updateShareableLinkAccessCount(tokenResult.id)
   } else if (token && isShareableLinkToken(token)) {
     const tokenResult = await resolveShareableLinkToken(token, 'base')
@@ -117,6 +119,7 @@ const RessourcePage = async ({
       notFound()
     }
     isUsingShareToken = true
+    shareableLinkId = tokenResult.id
     await updateShareableLinkAccessCount(tokenResult.id)
   }
 
@@ -163,6 +166,7 @@ const RessourcePage = async ({
               resource={resource}
               canWrite={canWrite}
               canDelete={canDelete}
+              shareableLinkId={shareableLinkId}
             />
           ) : (
             <PrivateResourceView resource={resource} />

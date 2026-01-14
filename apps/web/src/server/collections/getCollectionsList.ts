@@ -144,11 +144,22 @@ export const collectionSelect = (
       select: {
         resources: {
           where: {
-            resource: computeResourcesListWhereForUser(
-              user,
-              {},
-              isFromShareableLink,
-            ),
+            OR: [
+              // Normal resource access
+              {
+                resource: computeResourcesListWhereForUser(
+                  user,
+                  {},
+                  isFromShareableLink,
+                ),
+              },
+              // Resource added via enabled shareable link
+              {
+                shareableLink: {
+                  enabled: true,
+                },
+              },
+            ],
           },
         },
       },

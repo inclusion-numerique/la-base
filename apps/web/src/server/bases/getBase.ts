@@ -150,7 +150,7 @@ export const baseSelect = (
         },
       },
     },
-  } satisfies Prisma.BaseSelect)
+  }) satisfies Prisma.BaseSelect
 
 export const getBase = async ({
   id,
@@ -158,6 +158,7 @@ export const getBase = async ({
   user,
   membersOrderBy,
   paginationParams,
+  isShareToken = false,
 }: {
   user: Pick<SessionUser, 'id'> | null
   membersOrderBy?: BaseMembersSortType
