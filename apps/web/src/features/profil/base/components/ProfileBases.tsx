@@ -1,5 +1,6 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import IconInSquare from '@app/web/components/IconInSquare'
+import { UserBasesPendingJoinRequests } from '@app/web/features/base/join-requests/components/UserBasesPendingJoinRequests'
 import ProfileBaseCard from '@app/web/features/profil/base/components/ProfileBaseCard'
 import type { BaseProfileListItemWithAllFields } from '@app/web/server/bases/getBasesList'
 import { ProfilePageData } from '@app/web/server/profiles/getProfile'
@@ -34,6 +35,7 @@ const ProfileBases = ({
         </div>
       )}
     </div>
+    <UserBasesPendingJoinRequests user={user} />
     {bases.map((base) => (
       <ProfileBaseCard
         profile={profile}

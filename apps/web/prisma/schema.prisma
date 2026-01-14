@@ -121,6 +121,7 @@ model User {
   initiatedNotification Notification[]        @relation(name: "initiator")
   featuredBlock   FeaturedBlock? @relation("profile")
   featuredBlockId String?        @unique @db.Uuid
+  baseJoinRequests BaseJoinRequest[]
 
   @@map("users")
 }
@@ -205,8 +206,27 @@ model Base {
   highlightCollections Boolean                 @default(true) @map("highlight_collections")
   notifications        Notification[]
 
+  joinRequests BaseJoinRequest[]
+
   @@index([createdById])
   @@map("bases")
+}
+
+model BaseJoinRequest {
+  id String @id @default(uuid()) @db.Uuid
+
+  applicant   User   @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+  applicantId String @map("applicant_id") @db.Uuid
+
+  base   Base   @relation(fields: [baseId], references: [id], onDelete: Cascade)
+  baseId String @map("base_id") @db.Uuid
+
+  created   DateTime @default(now())
+  accepted  DateTime?
+  declined  DateTime?
+
+  @@unique([applicantId, baseId])
+  @@map("base_join_requests")
 }
 
 model BaseMembers {
@@ -826,22 +846,22 @@ model ResourceFeedback {
 }
 
 model ResourceFeedbackComment {
-  id String @id @default(uuid()) @db.Uuid
+  id      String @id @default(uuid()) @db.Uuid
   content String
 
-  resourceFeedback     ResourceFeedback @relation(fields: [feedbackSentById, feedbackResourceId], references: [sentById, resourceId])
-  feedbackSentById     String @map("feedback_sent_by_id") @db.Uuid
-  feedbackResourceId   String @map("feedback_resource_id") @db.Uuid
+  resourceFeedback   ResourceFeedback @relation(fields: [feedbackSentById, feedbackResourceId], references: [sentById, resourceId])
+  feedbackSentById   String           @map("feedback_sent_by_id") @db.Uuid
+  feedbackResourceId String           @map("feedback_resource_id") @db.Uuid
 
-  parentComment   ResourceFeedbackComment? @relation("CommentReplies", fields: [parentCommentId], references: [id])
-  parentCommentId String? @map("parent_comment_id") @db.Uuid
+  parentComment   ResourceFeedbackComment?  @relation("CommentReplies", fields: [parentCommentId], references: [id])
+  parentCommentId String?                   @map("parent_comment_id") @db.Uuid
   replies         ResourceFeedbackComment[] @relation("CommentReplies")
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String @map("author_id") @db.Uuid
-  
-  created DateTime @default(now())
-  updated DateTime @default(now())
+
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
   deleted DateTime?
 
   @@index([feedbackSentById, feedbackResourceId])

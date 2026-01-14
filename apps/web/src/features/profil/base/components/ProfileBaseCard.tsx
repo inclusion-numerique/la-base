@@ -13,14 +13,19 @@ const ProfileBaseCard = ({
   base,
   user,
   isOwner,
+  className,
 }: {
   profile?: ProfilePageData
   base: BaseProfileListItemWithAllFields
   user: SessionUser | null
   compact?: boolean
   isOwner: boolean
+  className?: string
 }) => (
-  <article className={styles.container} data-testid="base-card">
+  <article
+    className={classNames(styles.container, className)}
+    data-testid="base-card"
+  >
     <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-3v">
       <Link
         href={`/bases/${base.slug}`}

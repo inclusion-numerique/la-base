@@ -356,8 +356,16 @@ export const baseMemberRouter = router({
         return notFoundError()
       }
 
-      return prismaClient.baseMembers.delete({
+      await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
+      })
+      await prismaClient.baseJoinRequest.delete({
+        where: {
+          applicantId_baseId: {
+            applicantId: input.memberId,
+            baseId: input.baseId,
+          },
+        },
       })
     }),
   remove: protectedProcedure
@@ -411,7 +419,14 @@ export const baseMemberRouter = router({
       await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
       })
-
+      await prismaClient.baseJoinRequest.delete({
+        where: {
+          applicantId_baseId: {
+            applicantId: input.memberId,
+            baseId: input.baseId,
+          },
+        },
+      })
       if (acceptedBaseMember) {
         await sendRemoveBaseMemberEmail({
           baseTitle: base.title,

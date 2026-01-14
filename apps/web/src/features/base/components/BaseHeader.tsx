@@ -1,7 +1,9 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { FollowButton } from '@app/web/components/Follows/FollowButton'
+import { BaseJoinRequest } from '@app/web/features/base/join-requests/components/BaseJoinRequest'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import Badge from '@codegouvfr/react-dsfr/Badge'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import Link from 'next/link'
@@ -62,40 +64,63 @@ const BaseHeader = ({
               </div>
             ) : (
               base.isPublic && (
-                <div className="fr-flex fr-flex-gap-2v fr-direction-row fr-mt-2w fr-width-full fr-justify-content-center">
-                  <div>
-                    <FollowButton
-                      className="fr-width-full fr-justify-content-center"
-                      followPriority="primary"
-                      user={user}
-                      base={base}
-                    />
-                  </div>
-                  {!!base.email && base.emailIsPublic && (
+                <div className="fr-flex fr-flex-gap-4v fr-direction-column fr-direction-sm-row fr-mt-2w fr-width-full fr-justify-content-center fr-align-items-center">
+                  <div className="fr-flex fr-flex-gap-2v fr-direction-row fr-justify-content-center">
                     <div>
-                      <Tooltip title="Contacter">
-                        <Button
-                          size="small"
-                          title="Contacter"
-                          iconId="fr-icon-mail-line"
-                          priority="secondary"
-                          linkProps={{
-                            href: `mailto:${base.email}`,
-                          }}
-                        />
-                      </Tooltip>
+                      <FollowButton
+                        className="fr-width-full fr-justify-content-center"
+                        followPriority="primary"
+                        user={user}
+                        base={base}
+                      />
                     </div>
-                  )}
-                  <div>
-                    <CopyLinkButton
-                      priority="secondary"
-                      title="Partager"
-                      size="small"
-                      className="fr-m-0"
-                      url={getServerUrl(`/bases/${base.slug}`, {
-                        absolutePath: true,
-                      })}
-                    />
+                    {!!base.email && base.emailIsPublic && (
+                      <div>
+                        <Tooltip title="Contacter">
+                          <Button
+                            size="small"
+                            title="Contacter"
+                            iconId="fr-icon-mail-line"
+                            priority="secondary"
+                            linkProps={{
+                              href: `mailto:${base.email}`,
+                            }}
+                          />
+                        </Tooltip>
+                      </div>
+                    )}
+                    <div>
+                      <CopyLinkButton
+                        priority="secondary"
+                        title="Partager"
+                        size="small"
+                        className="fr-m-0"
+                        url={getServerUrl(`/bases/${base.slug}`, {
+                          absolutePath: true,
+                        })}
+                      />
+                    </div>
+                  </div>
+                  <div className="fr-border-left fr-hidden fr-unhidden-sm fr-ml-2v">
+                    <div className="fr-ml-2w">
+                      <BaseJoinRequest user={user} base={base} size="small">
+                        <Badge severity="info" noIcon>
+                          <span
+                            className="ri-loader-line fr-mr-1w"
+                            aria-hidden
+                          />
+                          Demande à rejoindre la base en attente
+                        </Badge>
+                      </BaseJoinRequest>
+                    </div>
+                  </div>
+                  <div className="fr-hidden-sm">
+                    <BaseJoinRequest user={user} base={base} size="small">
+                      <Badge severity="info" noIcon>
+                        <span className="ri-loader-line fr-mr-1w" aria-hidden />
+                        Demande à rejoindre la base en attente
+                      </Badge>
+                    </BaseJoinRequest>
                   </div>
                 </div>
               )
