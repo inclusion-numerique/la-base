@@ -20,7 +20,10 @@ const getLastActiveAt = (user: {
 export const executeAccountInactivityJob = async () => {
   const now = new Date()
   const loginUrl = getServerUrl('/connexion', { absolutePath: true })
-  const signupUrl = getServerUrl('/creer-un-compte', { absolutePath: true })
+  const loginUrl305 = `${loginUrl}?mtm_campaign=compte_inactif_j305`
+  const loginUrl335 = `${loginUrl}?mtm_campaign=compte_inactif_j335`
+  const loginUrl350 = `${loginUrl}?mtm_campaign=compte_inactif_j350`
+  const loginUrl365 = `${loginUrl}?mtm_campaign=reinscription`
 
   output('Starting account inactivity job...')
 
@@ -56,7 +59,7 @@ export const executeAccountInactivityJob = async () => {
 
     try {
       if (inactiveDays === 365) {
-        await sendAccountDeletedEmail({ email: user.email, url: signupUrl })
+        await sendAccountDeletedEmail({ email: user.email, url: loginUrl365 })
         await deleteProfile({ id: user.id })
         sent365 += 1
         continue
@@ -66,7 +69,7 @@ export const executeAccountInactivityJob = async () => {
         await sendAccountDeletionSoonEmail({
           email: user.email,
           firstname,
-          url: loginUrl,
+          url: loginUrl350,
           title: 'Votre compte va être supprimé',
         })
         sent350 += 1
@@ -77,7 +80,7 @@ export const executeAccountInactivityJob = async () => {
         await sendAccountDeletionSoonEmail({
           email: user.email,
           firstname,
-          url: loginUrl,
+          url: loginUrl335,
           title: 'Votre compte va bientôt être supprimé',
         })
         sent335 += 1
@@ -88,16 +91,16 @@ export const executeAccountInactivityJob = async () => {
         await sendAccountInactiveEmail({
           email: user.email,
           firstname,
-          url: loginUrl,
+          url: loginUrl305,
         })
         sent305 += 1
       }
     } catch (error) {
       failures += 1
       output(
-        `Failed to send inactivity email to ${user.email} (${user.id}): ${String(
-          error,
-        )}`,
+        `Failed to send inactivity email to ${user.email} (${
+          user.id
+        }): ${String(error)}`,
       )
     }
   }
