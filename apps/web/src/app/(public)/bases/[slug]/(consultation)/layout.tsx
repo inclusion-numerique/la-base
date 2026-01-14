@@ -7,6 +7,7 @@ import BaseHeader, {
   headerSkipLink,
 } from '@app/web/features/base/components/BaseHeader'
 import BaseMenu from '@app/web/features/base/components/BaseMenu'
+import BaseJoinRequestFormModal from '@app/web/features/base/join-requests/components/BaseJoinRequestFormModal'
 import { prismaClient } from '@app/web/prismaClient'
 import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
@@ -61,6 +62,7 @@ const BaseLayout = async ({
         <main id={contentId}>
           <PrivateBox type="Base" />
         </main>
+        <BaseJoinRequestFormModal user={user} base={base} />
       </>
     )
   }
@@ -72,6 +74,7 @@ const BaseLayout = async ({
         <BaseMenu base={base} />
         {children}
       </main>
+      <BaseJoinRequestFormModal user={user} base={base} />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { BaseMembersSortType } from '@app/web/app/(public)/bases/[slug]/(consultation)/(autres)/membres/searchParams'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 import {
@@ -7,6 +7,9 @@ import {
   resourceListSelect,
   toResourceWithFeedbackAverage,
 } from '@app/web/server/resources/getResourcesList'
+import { getResourcesOrderBy } from '@app/web/server/resources/getResourcesOrderBy'
+import { getResourcesSearchBy } from '@app/web/server/resources/getResourcesSearchBy'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import type { Prisma } from '@prisma/client'
 import { HighlightResourcesType } from '@prisma/client'
 import {
@@ -29,6 +32,7 @@ const baseMembersOrderBy: Record<
 export const baseSelect = (
   user: Pick<SessionUser, 'id'> | null,
   membersOrderBy?: BaseMembersSortType,
+  paginationParams?: PaginationParams,
 ) =>
   ({
     id: true,
@@ -105,12 +109,7 @@ export const baseSelect = (
     resources: {
       select: resourceListSelect(user),
       where: computeResourcesListWhereForUser(user),
-      orderBy: [
-        {
-          lastPublished: 'desc',
-        },
-        { updated: 'desc' },
-      ],
+      orderBy: getResourcesOrderBy(paginationParams?.sort),
     },
     collections: {
       select: collectionSelect(user),
@@ -149,12 +148,14 @@ export const getBase = async ({
   slug,
   user,
   membersOrderBy,
+  paginationParams,
 }: {
   user: Pick<SessionUser, 'id'> | null
   membersOrderBy?: BaseMembersSortType
+  paginationParams?: PaginationParams
 } & ({ id: string; slug?: undefined } | { id?: undefined; slug: string })) => {
   const base = await prismaClient.base.findFirst({
-    select: baseSelect(user, membersOrderBy),
+    select: baseSelect(user, membersOrderBy, paginationParams),
     where: { id, slug, deleted: null },
   })
 
@@ -232,8 +233,14 @@ export const basePageQuery = async (
   slug: string,
   user: Pick<SessionUser, 'id'> | null,
   membersOrderBy?: BaseMembersSortType,
+  paginationParams?: PaginationParams,
 ) => {
-  const basePage = await getBase({ slug, user, membersOrderBy })
+  const basePage = await getBase({
+    slug,
+    user,
+    membersOrderBy,
+    paginationParams,
+  })
   const resourceViews = await prismaClient.resource.aggregate({
     where: {
       ...computeResourcesListWhereForUser(user),
@@ -248,7 +255,7 @@ export const basePageQuery = async (
     : {
         ...basePage,
         highlightedResources: basePage.highlightResources
-          ? sortResources(basePage.resources, basePage.highlightResources)
+          ? sortResources([...basePage.resources], basePage.highlightResources)
               .slice(0, 3)
               .map(toResourceWithFeedbackAverage)
           : [],
@@ -270,3 +277,67 @@ export type BasePageData = Exclude<
 export type BaseResource = BasePageData['resources'][number]
 export type BaseMember = BasePageData['members'][number]
 export type BaseFollowedByData = BasePageData['followedByData']
+
+export const getBaseResourcesPaginated = async (
+  baseId: string,
+  user: Pick<SessionUser, 'id'> | null,
+  paginationParams: PaginationParams,
+) => {
+  const baseWhere = {
+    ...computeResourcesListWhereForUser(user),
+    baseId,
+  }
+
+  const searchWhere = paginationParams.search
+    ? {
+        OR: [
+          {
+            title: {
+              contains: paginationParams.search,
+              mode: 'insensitive' as const,
+            },
+          },
+          {
+            excerpt: {
+              contains: paginationParams.search,
+              mode: 'insensitive' as const,
+            },
+          },
+        ],
+      }
+    : {}
+
+  const where = { ...baseWhere, ...searchWhere }
+
+  const skip = (paginationParams.page - 1) * paginationParams.perPage
+  const take = paginationParams.perPage
+
+  const baseResources = await prismaClient.resource.findMany({
+    where,
+    select: resourceListSelect(user),
+    orderBy: getResourcesOrderBy(paginationParams.sort),
+    skip,
+    take,
+  })
+
+  return baseResources.map(toResourceWithFeedbackAverage)
+}
+
+export const getBaseResourcesCount = async (
+  baseId: string,
+  user: Pick<SessionUser, 'id'> | null,
+  searchTerm?: string,
+) => {
+  const baseWhere = {
+    ...computeResourcesListWhereForUser(user),
+    baseId,
+  }
+
+  const searchWhere = getResourcesSearchBy(searchTerm)
+
+  const where = { ...baseWhere, ...searchWhere }
+
+  return prismaClient.resource.count({
+    where,
+  })
+}

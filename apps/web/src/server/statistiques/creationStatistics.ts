@@ -63,10 +63,10 @@ const basesProportions = (total: CreationStatistics) => {
   }
 }
 
-export const computeCreationProportions = (
+export const computeCreationTotals = (
   creationStatisticsResult: CreationStatisticsResult,
 ): CreationStatistics => {
-  const total: CreationStatistics = creationStatisticsResult.reduce(
+  return creationStatisticsResult.reduce(
     (mergedResults: CreationStatistics, result) => ({
       publicResources: mergedResults.publicResources + result.public_resources,
       privateResources:
@@ -78,6 +78,12 @@ export const computeCreationProportions = (
     }),
     EMPTY_PROPORTIONS,
   )
+}
+
+export const computeCreationProportions = (
+  creationStatisticsResult: CreationStatisticsResult,
+): CreationStatistics => {
+  const total = computeCreationTotals(creationStatisticsResult)
 
   return {
     ...resourcesProportions(total),

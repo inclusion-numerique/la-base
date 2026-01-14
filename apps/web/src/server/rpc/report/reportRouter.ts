@@ -33,6 +33,7 @@ export const reportRouter = router({
                 id: true,
                 slug: true,
                 title: true,
+                createdById: true,
               },
             },
             sentBy: {
@@ -48,7 +49,6 @@ export const reportRouter = router({
 
         // There will be an email sent to the sentBy user
         // There will be an email sent to the resource creator ?
-
         await sendResourceReportModeratorEmail({
           report,
           resource: report.resource,
@@ -70,7 +70,18 @@ export const reportRouter = router({
     .mutation(
       async ({
         input: { resourceId, moderatorName, moderatorEmail, reportId },
+        ctx: { user },
       }) => {
+        const report = await prismaClient.resourceReport.findUnique({
+          where: { id: reportId },
+          select: {
+            sentBy: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        })
         const resource = await prismaClient.resource.findUnique({
           where: { id: resourceId },
           include: {
@@ -84,7 +95,7 @@ export const reportRouter = router({
           },
         })
 
-        if (!resource) {
+        if (!resource || !report) {
           throw notFoundError()
         }
 
@@ -96,6 +107,15 @@ export const reportRouter = router({
           data: {
             deleted: timestamp,
             updated: timestamp,
+          },
+        })
+
+        await prismaClient.notification.create({
+          data: {
+            userId: resource.createdById,
+            initiatorId: user.id,
+            type: 'ReportedResource',
+            resourceId: resource.id,
           },
         })
 

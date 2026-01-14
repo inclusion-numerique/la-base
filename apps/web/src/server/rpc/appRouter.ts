@@ -1,4 +1,5 @@
 import { baseRouter } from '@app/web/server/rpc/base/baseRouter'
+import { baseJoinRequestRouter } from '@app/web/server/rpc/baseJoinRequest/baseJoinRequest'
 import { baseMemberRouter } from '@app/web/server/rpc/baseMember/baseMemberRouter'
 import { collectionRouter } from '@app/web/server/rpc/collection/collectionRouter'
 import { collectionResourceRouter } from '@app/web/server/rpc/collectionResource/collectionResource'
@@ -9,6 +10,7 @@ import { followRouter } from '@app/web/server/rpc/follow/followRouter'
 import { imageRouter } from '@app/web/server/rpc/image/imageRouter'
 import { metadataRouter } from '@app/web/server/rpc/metadata/metadataRouter'
 import { newsFeedRouter } from '@app/web/server/rpc/news-feed/newsFeedRouter.router'
+import { notificationsRouter } from '@app/web/server/rpc/notifications/notificationsRouter'
 import { profileRouter } from '@app/web/server/rpc/profile/profileRouter'
 import { reportRouter } from '@app/web/server/rpc/report/reportRouter'
 import { resourceRouter } from '@app/web/server/rpc/resource/resourceRouter'
@@ -23,11 +25,13 @@ export const appRouter = router({
   resourceContributor: resourceContributorRouter,
   base: baseRouter,
   baseMember: baseMemberRouter,
+  baseJoinRequest: baseJoinRequestRouter,
   profile: profileRouter,
   collection: collectionRouter,
   collectionResource: collectionResourceRouter,
   metaData: metadataRouter,
   newsFeed: newsFeedRouter,
+  notifications: notificationsRouter,
   upload: uploadRouter,
   image: imageRouter,
   search: searchRouter,

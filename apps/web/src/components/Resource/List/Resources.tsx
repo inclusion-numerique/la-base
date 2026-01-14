@@ -1,3 +1,6 @@
+'use client'
+
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import {
   ResourceRoles,
@@ -6,26 +9,39 @@ import {
 import IconInSquare from '@app/web/components/IconInSquare'
 import { CreateResourceButton } from '@app/web/components/Resource/CreateResourceModal'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
+import ResourcesSortingSelect from '@app/web/components/Resource/List/ResourcesSorting'
 import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import ResourcesSearch from '@app/web/components/Resource/ResourcesSearch'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
+import { PaginationParams } from '@app/web/server/search/searchQueryParams'
+import { numberToString } from '@app/web/utils/formatNumber'
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
 import { useMemo } from 'react'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
+import styles from './Resources.module.css'
 
 const Resources = ({
+  isOwner = false,
   title,
   resources,
   user,
   canWrite,
   baseId,
+  paginationParams,
+  slug,
+  totalCount,
 }: {
+  isOwner?: boolean
   title: string
   baseId: string | null
   resources: BaseResource[]
   user: SessionUser | null
   canWrite: boolean
+  paginationParams: PaginationParams
+  slug: string
+  totalCount: number
 }) => {
   const drafts = useMemo(
     () => resources.filter((resource) => resource.published === null),
@@ -49,7 +65,7 @@ const Resources = ({
 
   return (
     <div data-testid="resources-list">
-      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-5w">
+      <div className="fr-grid-row fr-justify-content-space-between fr-direction-sm-row fr-direction-column-md-reverse fr-mb-md-5w fr-mb-3w fr-flex-gap-4v">
         <div className="fr-col-sm-auto fr-col-12">
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
@@ -73,7 +89,25 @@ const Resources = ({
             />
           </div>
         )}
+        {!isOwner && (
+          <div className="fr-col-sm-auto fr-col-12">
+            <ResourcesSearch initialSearch={paginationParams.search} />
+          </div>
+        )}
       </div>
+      {!isOwner && (
+        <div className={styles.header}>
+          <h1 className="fr-text--lg fr-mb-0">
+            {numberToString(totalCount)} Ressource
+            {sPluriel(totalCount)}
+          </h1>
+          <ResourcesSortingSelect
+            paginationParams={paginationParams}
+            slug={slug}
+            baseId={baseId}
+          />
+        </div>
+      )}
       {canWrite ? (
         <Tabs
           tabs={[

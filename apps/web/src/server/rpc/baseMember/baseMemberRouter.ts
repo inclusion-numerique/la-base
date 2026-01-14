@@ -182,10 +182,13 @@ export const baseMemberRouter = router({
     .mutation(async ({ input }) => {
       const invitation = await prismaClient.baseMembers.findUnique({
         include: {
-          base: { select: { title: true, slug: true } },
-          invitedBy: { select: { email: true } },
+          base: {
+            select: { title: true, slug: true, id: true, createdById: true },
+          },
+          invitedBy: { select: { email: true, id: true } },
           member: {
             select: {
+              id: true,
               email: true,
               name: true,
               firstName: true,
@@ -212,6 +215,17 @@ export const baseMemberRouter = router({
           email: invitation.invitedBy.email,
           memberName,
         })
+
+        if (invitation.invitedBy.id !== invitation.member.id) {
+          await prismaClient.notification.create({
+            data: {
+              userId: invitation.invitedBy.id,
+              type: 'AcceptedBaseInvitation',
+              baseId: invitation.base.id,
+              initiatorId: invitation.member.id,
+            },
+          })
+        }
       }
 
       return prismaClient.baseMembers.update({
@@ -224,10 +238,11 @@ export const baseMemberRouter = router({
     .mutation(async ({ input }) => {
       const invitation = await prismaClient.baseMembers.findUnique({
         include: {
-          base: { select: { title: true } },
-          invitedBy: { select: { email: true } },
+          base: { select: { title: true, id: true } },
+          invitedBy: { select: { email: true, id: true } },
           member: {
             select: {
+              id: true,
               email: true,
               name: true,
               firstName: true,
@@ -249,6 +264,17 @@ export const baseMemberRouter = router({
           email: invitation.invitedBy.email,
           memberName,
         })
+
+        if (invitation.invitedBy.id !== invitation.member.id) {
+          await prismaClient.notification.create({
+            data: {
+              userId: invitation.invitedBy.id,
+              type: 'DeclinedBaseInvitation',
+              baseId: invitation.base.id,
+              initiatorId: invitation.member.id,
+            },
+          })
+        }
       }
       return prismaClient.baseMembers.delete({
         where: { id: input.id },
@@ -294,12 +320,26 @@ export const baseMemberRouter = router({
         )
       }
 
-      return prismaClient.baseMembers.update({
+      const result = await prismaClient.baseMembers.update({
         data: { isAdmin: input.isAdmin },
         where: {
           memberId_baseId: { baseId: input.baseId, memberId: input.memberId },
         },
       })
+
+      if (input.memberId !== user.id) {
+        await prismaClient.notification.create({
+          data: {
+            userId: input.memberId,
+            type: 'BaseRoleChange',
+            baseId: input.baseId,
+            initiatorId: user.id,
+            isBaseNewRoleAdmin: input.isAdmin,
+          },
+        })
+      }
+
+      return result
     }),
   leave: protectedProcedure
     .input(z.object({ baseId: z.string(), memberId: z.string() }))
@@ -316,8 +356,16 @@ export const baseMemberRouter = router({
         return notFoundError()
       }
 
-      return prismaClient.baseMembers.delete({
+      await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
+      })
+      await prismaClient.baseJoinRequest.delete({
+        where: {
+          applicantId_baseId: {
+            applicantId: input.memberId,
+            baseId: input.baseId,
+          },
+        },
       })
     }),
   remove: protectedProcedure
@@ -371,12 +419,30 @@ export const baseMemberRouter = router({
       await prismaClient.baseMembers.delete({
         where: { memberId_baseId: input },
       })
-
+      await prismaClient.baseJoinRequest.delete({
+        where: {
+          applicantId_baseId: {
+            applicantId: input.memberId,
+            baseId: input.baseId,
+          },
+        },
+      })
       if (acceptedBaseMember) {
         await sendRemoveBaseMemberEmail({
           baseTitle: base.title,
           email: acceptedBaseMember.member.email,
           userRemovingName: formatMemberName(user),
+        })
+      }
+
+      if (input.memberId !== user.id) {
+        await prismaClient.notification.create({
+          data: {
+            userId: input.memberId,
+            type: 'BaseMemberDeletion',
+            baseId: input.baseId,
+            initiatorId: user.id,
+          },
         })
       }
     }),

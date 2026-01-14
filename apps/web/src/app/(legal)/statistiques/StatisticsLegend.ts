@@ -1,5 +1,6 @@
 export type StatisticsLegend<T extends object = object> = {
   label: string
   value?: string
-  key: keyof T
+  total?: number | string
+  key?: keyof T
 }

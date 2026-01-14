@@ -1,6 +1,6 @@
 'use client'
 
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import EmptyUserAvatar from '@app/web/components/EmptyUserAvatar'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'

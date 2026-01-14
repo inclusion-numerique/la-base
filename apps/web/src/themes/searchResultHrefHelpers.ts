@@ -2,7 +2,12 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
-import type { Beneficiary, ProfessionalSector, Theme } from '@prisma/client'
+import type {
+  Beneficiary,
+  ProfessionalSector,
+  ResourceType,
+  Theme,
+} from '@prisma/client'
 
 export const searchResultThemeHref = (...themes: Theme[]) =>
   searchUrl('ressources', {
@@ -22,4 +27,10 @@ export const searchResultProfessionalSectorHref = (
   searchUrl('ressources', {
     ...defaultSearchParams,
     professionalSectors: [professionalSector],
+  })
+
+export const searchResultResourceTypeHref = (resourceType: ResourceType) =>
+  searchUrl('ressources', {
+    ...defaultSearchParams,
+    resourceTypes: [resourceType],
   })

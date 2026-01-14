@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noConsole: debug */
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { redirect } from 'next/navigation'
 
 export const redirectToNewsFeedOnboarding = (user: SessionUser | null) => {

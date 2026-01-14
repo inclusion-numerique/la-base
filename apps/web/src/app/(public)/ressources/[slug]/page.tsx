@@ -92,8 +92,7 @@ const RessourcePage = async ({
     notFound()
   }
 
-  const canWrite =
-    hasPermission(ResourcePermissions.WriteResource) && user?.role !== 'Admin'
+  const canWrite = hasPermission(ResourcePermissions.WriteResource)
   const canReadContent = hasPermission(ResourcePermissions.ReadResourceContent)
   const canDelete = hasPermission(ResourcePermissions.DeleteResource)
 

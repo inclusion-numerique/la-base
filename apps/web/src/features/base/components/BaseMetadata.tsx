@@ -1,5 +1,5 @@
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { BasePrivacyTag } from '@app/web/components/PrivacyTags'
 import BaseFollowersModal from '@app/web/features/base/followers/components/BaseFollowersModal'
 import type { BaseMetadataData } from '@app/web/features/base/types/BaseMetadataType'

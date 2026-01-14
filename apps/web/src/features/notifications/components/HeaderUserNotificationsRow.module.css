@@ -1,0 +1,11 @@
+.smallBadge {
+  position: absolute;
+  right: -8px;
+  bottom: -6px;
+}
+
+.unseenBadge {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 20px;
+}

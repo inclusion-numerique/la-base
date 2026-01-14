@@ -6,6 +6,7 @@ const deletedUser = (id: string, timestamp: Date) => ({
   lastName: null,
   name: 'Profil supprimé',
   email: `utilisateur-supprimé+${id}@lesbases.anct.gouv.fr`,
+  slug: `utilisateur-supprimé+${id}`,
   emailIsPublic: false,
   website: null,
   facebook: null,

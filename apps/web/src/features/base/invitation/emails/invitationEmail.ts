@@ -1,6 +1,6 @@
 import { compileMjml } from '@app/emails/mjml'
 import { inviteMember } from '@app/emails/templates/inviteMember'
-import { SessionUser } from '@app/web/auth/sessionUser'
+import type { SessionUser } from '@app/web/auth/sessionUser'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { ServerWebAppConfig } from '@app/web/ServerWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'

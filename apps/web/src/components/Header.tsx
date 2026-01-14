@@ -1,6 +1,9 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import NewsFeedBadge from '@app/web/features/fil-d-actualite/components/NewsFeedBadge'
+import HeaderUserMobileNotificationsButton from '@app/web/features/notifications/components/HeaderUserMobileNotificationsButton'
+import HeaderUserMobileNotificationsModal from '@app/web/features/notifications/components/HeaderUserMobileNotificationsModal'
+import HeaderUserNotificationsDropdown from '@app/web/features/notifications/components/HeaderUserNotificationsDropdown'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import {
   defaultSearchParams,
@@ -80,7 +83,7 @@ const Header = ({
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
               <ul className="fr-btns-group fr-align-items-center">
-                <li className="fr-px-md-0 fr-px-2w fr-hidden-sm">
+                <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
                   <Button
                     linkProps={{
                       href: user
@@ -100,20 +103,21 @@ const Header = ({
                       aria-hidden
                     />
                     {user && (
-                      <div
+                      <span
                         className={classNames(
-                          'fr-ml-2v fr-flex fr-justify-content-center fr-align-items-center fr-text--sm fr-border-radius--8 fr-p-0',
+                          'fr-text--sm fr-border-radius--8 fr-p-1w fr-flex fr-align-items-center fr-flex-gap-1v fr-ml-1w',
+                          styles.newsFeedIcon,
                           styles.newsFeedButton,
                         )}
                       >
-                        <span
+                        <span className="ri-flashlight-fill" />
+                        <NewsFeedBadge
                           className={classNames(
-                            'ri-flashlight-fill fr-text--sm',
                             styles.newsFeedIcon,
+                            'fr-text--sm fr-text--bold',
                           )}
                         />
-                        <NewsFeedBadge />
-                      </div>
+                      </span>
                     )}
                   </Button>
                 </li>
@@ -154,6 +158,7 @@ const Header = ({
                     </Link>
                   )}
                 </li>
+                {user && <HeaderUserMobileNotificationsButton />}
                 <li className="fr-px-md-0 fr-px-2w">
                   <Link
                     data-testid="help-center-link"
@@ -173,9 +178,8 @@ const Header = ({
                     />
                   </Link>
                 </li>
-                <li className="fr-position-relative fr-hidden fr-unhidden-sm fr-px-md-0 fr-px-2w">
+                <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
                   <Tooltip title="Fil d'actualité">
-                    {user && <NewsFeedBadge />}
                     <Button
                       data-testid="news-feed-button"
                       className={classNames(
@@ -194,11 +198,16 @@ const Header = ({
                     >
                       <span
                         className={classNames(
-                          'ri-flashlight-fill fr-text--sm fr-border-radius--8 fr-p-0',
+                          'fr-text--sm fr-border-radius--8 fr-p-1w fr-flex fr-align-items-center fr-flex-gap-1v',
                           styles.newsFeedIcon,
                           styles.newsFeedButton,
                         )}
-                      />
+                      >
+                        <span className="ri-flashlight-fill" />
+                        {user && (
+                          <NewsFeedBadge className="fr-text--sm fr-text--bold" />
+                        )}
+                      </span>
                       <span
                         className={classNames(styles.newsFeedLabel, 'fr-ml-1v')}
                       >
@@ -207,6 +216,11 @@ const Header = ({
                     </Button>
                   </Tooltip>
                 </li>
+                {user && (
+                  <li className="fr-position-relative">
+                    <HeaderUserNotificationsDropdown user={user} />
+                  </li>
+                )}
                 <li className="fr-position-relative">
                   {user ? (
                     <>
@@ -258,6 +272,7 @@ const Header = ({
         <div className="fr-header__menu-links" />
       </div>
     </div>
+    {user && <HeaderUserMobileNotificationsModal user={user} />}
   </header>
 )
 
