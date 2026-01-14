@@ -33,14 +33,16 @@ Besoin d’aide ? Contactez notre équipe en répondant à cet email ou consulte
     firstname,
     email,
     url,
+    title = 'Votre compte va bientôt être supprimé',
   }: {
     firstname: string
     email: string
     url: string
+    title?: string
   }): string =>
     renderToMjml(
       <LayoutWithFooter
-        title="Votre compte va bientot être supprimé"
+        title={title}
         preview="Votre compte Les Bases est sans activité depuis plus de 11 mois."
       >
         <MjmlSection paddingTop={0}>
@@ -51,7 +53,7 @@ Besoin d’aide ? Contactez notre équipe en répondant à cet email ou consulte
               color={brandColor}
               lineHeight="36px"
             >
-              Votre compte va bientot être supprimé
+              {title}
             </MjmlText>
             <MjmlText fontWeight="400" fontSize="16px" color="#3A3A3A">
               Bonjour {firstname}

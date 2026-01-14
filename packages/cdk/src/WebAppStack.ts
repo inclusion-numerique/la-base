@@ -331,6 +331,16 @@ export class WebAppStack extends TerraformStack {
         schedule: '0 8 1 * *',
         containerId: container.id,
       })
+
+      createJobExecutionCron(this, {
+        name: `account-inactivity-${namespace}`,
+        job: {
+          name: 'account-inactivity',
+          payload: undefined,
+        },
+        schedule: '0 9 * * *',
+        containerId: container.id,
+      })
     }
 
     output('webBaseUrl', hostname)

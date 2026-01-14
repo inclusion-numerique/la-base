@@ -11,7 +11,7 @@ describe('Template: accountDeletionSoon', () => {
       url: 'https://test.local/login',
     })
 
-    expect(mjml).toContain('Votre compte va bientot être supprimé')
+    expect(mjml).toContain('Votre compte va bientot etre supprime')
     expect(mjml).toContain('sam@example.com')
     expect(mjml).toContain('https://test.local/login')
 
