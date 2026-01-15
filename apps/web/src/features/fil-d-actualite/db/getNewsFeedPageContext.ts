@@ -44,7 +44,6 @@ export const getNewsFeedResources = async (
     baseSlug === 'tout' && profileSlug === 'tout'
       ? await getFollowedResourceIds(userId, paginationParams, lastOpenedAt)
       : await getResourceIds(userId, filters, paginationParams, lastOpenedAt)
-
   // Followed bases that have at least 1 resource (direct publications or collections)
   const followedBasesWithResources = await prismaClient.$queryRaw<
     { id: string }[]
@@ -77,12 +76,25 @@ export const getNewsFeedResources = async (
           AND r.published IS NOT NULL
           AND r.is_public = true
           AND cr.id IS NOT NULL
+          
+        UNION
+        
+        -- Bases where resources received feedback from followed bases
+        SELECT r.base_id
+        FROM resources r
+        INNER JOIN resource_feedback rf ON rf.resource_id = r.id
+        LEFT JOIN bases b ON r.base_id = b.id
+        WHERE r.base_id IN (SELECT base_id FROM followedBases)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
+          AND (b.id IS NULL OR b.deleted IS NULL)
       ) base_sources
       WHERE base_id IS NOT NULL
     `,
   )
 
-  // Followed profiles that have at least 1 resource (direct creations or collections)
+  // Followed profiles that have at least 1 resource (direct creations or collections or feedback)
   const followedProfilesWithResources = await prismaClient.$queryRaw<
     { id: string }[]
   >(
@@ -112,6 +124,17 @@ export const getNewsFeedResources = async (
           AND r.published IS NOT NULL
           AND r.is_public = true
           AND cr.id IS NOT NULL
+          
+        UNION
+        
+        -- Profiles that gave feedback on resources
+        SELECT rf.sent_by_id as profile_id
+        FROM resource_feedback rf
+        INNER JOIN resources r ON r.id = rf.resource_id
+        WHERE rf.sent_by_id IN (SELECT profile_id FROM followedProfiles)
+          AND r.deleted IS NULL
+          AND r.published IS NOT NULL
+          AND r.is_public = true
       ) profile_sources
       WHERE profile_id IS NOT NULL
     `,
@@ -309,6 +332,28 @@ export const getNewsFeedResources = async (
       ...resourceListSelect({ id: userId }),
       themes: true,
       professionalSectors: true,
+      resourceFeedback: {
+        select: {
+          rating: true,
+          sentById: true,
+          created: true,
+          sentBy: {
+            select: {
+              id: true,
+              name: true,
+              firstName: true,
+              lastName: true,
+              slug: true,
+              image: {
+                select: {
+                  id: true,
+                  altText: true,
+                },
+              },
+            },
+          },
+        },
+      },
       collections: {
         select: {
           id: true,
@@ -345,7 +390,6 @@ export const getNewsFeedResources = async (
       },
     },
   })
-
   // keep the same indexing
   const orderMap = new Map(resourceIds.map((id, index) => [id, index]))
   const sortedResources = resources.sort(
@@ -362,6 +406,7 @@ export const getNewsFeedResources = async (
       }
       return {
         ...toResourceWithFeedbackAverage(resource),
+        resourceFeedback: resource.resourceFeedback,
         source: extraData.source,
         seen: extraData.seen,
         eventType: extraData.eventType,
