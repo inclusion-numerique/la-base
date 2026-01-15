@@ -9,6 +9,8 @@ import {
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { AccountInactivity } from '@prisma/client'
 
+const BATCH_SIZE = 50
+
 const daysSince = (from: Date, to: Date) =>
   Math.floor((to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24))
 
@@ -18,13 +20,111 @@ const getLastActiveAt = (user: {
   created: Date
 }) => user.lastLogin ?? user.signedUpAt ?? user.created
 
+type UserToProcess = {
+  id: string
+  email: string
+  firstName: string | null
+  name: string | null
+  lastLogin: Date | null
+  signedUpAt: Date | null
+  created: Date
+  accountInactivity: AccountInactivity | null
+}
+
+type ProcessResult = {
+  type: '305' | '335' | '350' | '365' | 'skipped'
+  error?: string
+}
+
+const processUser = async (
+  user: UserToProcess,
+  now: Date,
+  urls: {
+    loginUrl305: string
+    loginUrl335: string
+    loginUrl350: string
+    loginUrl365: string
+  },
+): Promise<ProcessResult> => {
+  const lastActiveAt = getLastActiveAt(user)
+  const inactiveDays = daysSince(lastActiveAt, now)
+  const firstname = user.firstName || user.name || ''
+
+  if (inactiveDays >= 365) {
+    if (user.accountInactivity === AccountInactivity.AccountDeleted) {
+      return { type: 'skipped' }
+    }
+    await sendAccountDeletedEmail({ email: user.email, url: urls.loginUrl365 })
+    await prismaClient.user.update({
+      where: { id: user.id },
+      data: { accountInactivity: AccountInactivity.AccountDeleted },
+    })
+    await deleteProfile({ id: user.id })
+    return { type: '365' }
+  }
+
+  if (inactiveDays >= 350 && inactiveDays < 365) {
+    if (user.accountInactivity === AccountInactivity.AccountDeletionSoon350d) {
+      return { type: 'skipped' }
+    }
+    await sendAccountDeletionSoonEmail({
+      email: user.email,
+      firstname,
+      url: urls.loginUrl350,
+      title: 'Votre compte va être supprimé',
+    })
+    await prismaClient.user.update({
+      where: { id: user.id },
+      data: { accountInactivity: AccountInactivity.AccountDeletionSoon350d },
+    })
+    return { type: '350' }
+  }
+
+  if (inactiveDays >= 335 && inactiveDays < 350) {
+    if (user.accountInactivity === AccountInactivity.AccountDeletionSoon335d) {
+      return { type: 'skipped' }
+    }
+    await sendAccountDeletionSoonEmail({
+      email: user.email,
+      firstname,
+      url: urls.loginUrl335,
+      title: 'Votre compte va bientôt être supprimé',
+    })
+    await prismaClient.user.update({
+      where: { id: user.id },
+      data: { accountInactivity: AccountInactivity.AccountDeletionSoon335d },
+    })
+    return { type: '335' }
+  }
+
+  if (inactiveDays >= 305 && inactiveDays < 335) {
+    if (user.accountInactivity === AccountInactivity.AccountInactive) {
+      return { type: 'skipped' }
+    }
+    await sendAccountInactiveEmail({
+      email: user.email,
+      firstname,
+      url: urls.loginUrl305,
+    })
+    await prismaClient.user.update({
+      where: { id: user.id },
+      data: { accountInactivity: AccountInactivity.AccountInactive },
+    })
+    return { type: '305' }
+  }
+
+  return { type: 'skipped' }
+}
+
 export const executeAccountInactivityJob = async () => {
   const now = new Date()
   const loginUrl = getServerUrl('/connexion', { absolutePath: true })
-  const loginUrl305 = `${loginUrl}?mtm_campaign=compte_inactif_j305`
-  const loginUrl335 = `${loginUrl}?mtm_campaign=compte_inactif_j335`
-  const loginUrl350 = `${loginUrl}?mtm_campaign=compte_inactif_j350`
-  const loginUrl365 = `${loginUrl}?mtm_campaign=reinscription`
+  const urls = {
+    loginUrl305: `${loginUrl}?mtm_campaign=compte_inactif_j305`,
+    loginUrl335: `${loginUrl}?mtm_campaign=compte_inactif_j335`,
+    loginUrl350: `${loginUrl}?mtm_campaign=compte_inactif_j350`,
+    loginUrl365: `${loginUrl}?mtm_campaign=reinscription`,
+  }
 
   output('Starting account inactivity job...')
 
@@ -53,92 +153,46 @@ export const executeAccountInactivityJob = async () => {
   let sent365 = 0
   let failures = 0
 
-  for (const user of users) {
-    const lastActiveAt = getLastActiveAt(user)
-    const inactiveDays = daysSince(lastActiveAt, now)
+  for (let i = 0; i < users.length; i += BATCH_SIZE) {
+    const batch = users.slice(i, i + BATCH_SIZE)
+    const results = await Promise.allSettled(
+      batch.map((user) => processUser(user, now, urls)),
+    )
 
-    const firstname = user.firstName || user.name || ''
-
-    try {
-      if (inactiveDays === 365) {
-        if (user.accountInactivity === AccountInactivity.AccountDeleted) {
-          continue
+    for (const [index, result] of results.entries()) {
+      if (result.status === 'rejected') {
+        failures += 1
+        const user = batch[index]
+        output(
+          `Failed to process ${user.email} (${user.id}): ${String(
+            result.reason,
+          )}`,
+        )
+      } else {
+        switch (result.value.type) {
+          case '305':
+            sent305 += 1
+            break
+          case '335':
+            sent335 += 1
+            break
+          case '350':
+            sent350 += 1
+            break
+          case '365':
+            sent365 += 1
+            break
+          default:
+            break
         }
-        await sendAccountDeletedEmail({ email: user.email, url: loginUrl365 })
-        await prismaClient.user.update({
-          where: { id: user.id },
-          data: { accountInactivity: AccountInactivity.AccountDeleted },
-        })
-        await deleteProfile({ id: user.id })
-        sent365 += 1
-        continue
       }
+    }
 
-      if (inactiveDays === 350) {
-        if (
-          user.accountInactivity === AccountInactivity.AccountDeletionSoon350d
-        ) {
-          continue
-        }
-        await sendAccountDeletionSoonEmail({
-          email: user.email,
-          firstname,
-          url: loginUrl350,
-          title: 'Votre compte va être supprimé',
-        })
-        await prismaClient.user.update({
-          where: { id: user.id },
-          data: {
-            accountInactivity: AccountInactivity.AccountDeletionSoon350d,
-          },
-        })
-        sent350 += 1
-        continue
-      }
-
-      if (inactiveDays === 335) {
-        if (
-          user.accountInactivity === AccountInactivity.AccountDeletionSoon335d
-        ) {
-          continue
-        }
-        await sendAccountDeletionSoonEmail({
-          email: user.email,
-          firstname,
-          url: loginUrl335,
-          title: 'Votre compte va bientôt être supprimé',
-        })
-        await prismaClient.user.update({
-          where: { id: user.id },
-          data: {
-            accountInactivity: AccountInactivity.AccountDeletionSoon335d,
-          },
-        })
-        sent335 += 1
-        continue
-      }
-
-      if (inactiveDays === 305) {
-        if (user.accountInactivity === AccountInactivity.AccountInactive) {
-          continue
-        }
-        await sendAccountInactiveEmail({
-          email: user.email,
-          firstname,
-          url: loginUrl305,
-        })
-        await prismaClient.user.update({
-          where: { id: user.id },
-          data: { accountInactivity: AccountInactivity.AccountInactive },
-        })
-        sent305 += 1
-      }
-    } catch (error) {
-      failures += 1
+    if (i + BATCH_SIZE < users.length) {
       output(
-        `Failed to send inactivity email to ${user.email} (${
-          user.id
-        }): ${String(error)}`,
+        `Processed ${Math.min(i + BATCH_SIZE, users.length)}/${
+          users.length
+        } users...`,
       )
     }
   }
