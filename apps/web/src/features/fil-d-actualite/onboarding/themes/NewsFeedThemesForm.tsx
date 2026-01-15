@@ -148,7 +148,6 @@ const NewsFeedThemesForm = ({
               selected={themesSelected}
               category={key as Category}
               options={value}
-              withHint={false}
               onSelectAllInCategory={onSelectAllInCategory}
             />
           )

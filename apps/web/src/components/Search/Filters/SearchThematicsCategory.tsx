@@ -22,7 +22,6 @@ const SearchThematicsCategory = ({
   onSelect,
   onSelectAllInCategory,
   disabled = false,
-  withHint = false,
 }: {
   'data-testid'?: string
   category: Category
@@ -31,7 +30,6 @@ const SearchThematicsCategory = ({
   onSelect: (option: SelectOption, category: FilterKey) => void
   onSelectAllInCategory?: (category: FilterKey, selected: boolean) => void
   disabled?: boolean
-  withHint?: boolean
 }) => {
   const handleOnClick = (opt: SelectOption) => onSelect(opt, 'themes')
 
@@ -57,12 +55,6 @@ const SearchThematicsCategory = ({
               {category}
             </span>
           </div>
-          {!!withHint && (
-            <span className="fr-hint-text fr-text--sm fr-mb-0">
-              Vous ne trouvez pas la thématique correspondante à votre ressource
-              ? Ajouter là à la catégorie.
-            </span>
-          )}
         </div>
         {!!onSelectAllInCategory && (
           <Checkbox
