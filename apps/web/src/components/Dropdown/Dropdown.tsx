@@ -157,7 +157,7 @@ export const Dropdown = ({
         {isOpen && (
           <div
             role="navigation"
-            className="fr-collapse fr-dropdown__pane fr-mr-1v"
+            className="fr-collapse fr-dropdown__pane"
             style={{ [alignRight ? 'right' : 'left']: 0 }}
             id={formattedId}
             ref={collapseRef}
