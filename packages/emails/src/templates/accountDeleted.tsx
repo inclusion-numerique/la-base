@@ -24,7 +24,7 @@ Besoin d’aide ? Contactez notre équipe en répondant à cet email ou consulte
   mjml: ({ url }: { url: string }): string =>
     renderToMjml(
       <LayoutWithFooter
-        title="Votre compte a ete supprime"
+        title="Votre compte a été supprimé"
         preview="Votre compte Les Bases a été supprimé après 12 mois d'inactivité."
       >
         <MjmlSection paddingTop={0}>

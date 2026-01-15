@@ -64,7 +64,7 @@ export const sendAccountDeletedEmail = async ({
     to: email,
     from: ServerWebAppConfig.Email.from,
     replyTo: PublicWebAppConfig.contactEmail,
-    subject: 'Votre compte a ete supprime',
+    subject: 'Votre compte a été supprimé',
     text: accountDeleted.text({ url }),
     html: compileMjml(accountDeleted.mjml({ url })),
   })
