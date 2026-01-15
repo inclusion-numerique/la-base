@@ -7,6 +7,7 @@ import {
   sendAccountInactiveEmail,
 } from '@app/web/server/users/emails/sendAccountInactivityEmail'
 import { getServerUrl } from '@app/web/utils/baseUrl'
+import { AccountInactivity } from '@prisma/client'
 
 const daysSince = (from: Date, to: Date) =>
   Math.floor((to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24))
@@ -40,6 +41,7 @@ export const executeAccountInactivityJob = async () => {
       lastLogin: true,
       signedUpAt: true,
       created: true,
+      accountInactivity: true,
     },
   })
 
@@ -59,39 +61,75 @@ export const executeAccountInactivityJob = async () => {
 
     try {
       if (inactiveDays === 365) {
+        if (user.accountInactivity === AccountInactivity.AccountDeleted) {
+          continue
+        }
         await sendAccountDeletedEmail({ email: user.email, url: loginUrl365 })
+        await prismaClient.user.update({
+          where: { id: user.id },
+          data: { accountInactivity: AccountInactivity.AccountDeleted },
+        })
         await deleteProfile({ id: user.id })
         sent365 += 1
         continue
       }
 
       if (inactiveDays === 350) {
+        if (
+          user.accountInactivity === AccountInactivity.AccountDeletionSoon350d
+        ) {
+          continue
+        }
         await sendAccountDeletionSoonEmail({
           email: user.email,
           firstname,
           url: loginUrl350,
           title: 'Votre compte va être supprimé',
         })
+        await prismaClient.user.update({
+          where: { id: user.id },
+          data: {
+            accountInactivity: AccountInactivity.AccountDeletionSoon350d,
+          },
+        })
         sent350 += 1
         continue
       }
 
       if (inactiveDays === 335) {
+        if (
+          user.accountInactivity === AccountInactivity.AccountDeletionSoon335d
+        ) {
+          continue
+        }
         await sendAccountDeletionSoonEmail({
           email: user.email,
           firstname,
           url: loginUrl335,
           title: 'Votre compte va bientôt être supprimé',
         })
+        await prismaClient.user.update({
+          where: { id: user.id },
+          data: {
+            accountInactivity: AccountInactivity.AccountDeletionSoon335d,
+          },
+        })
         sent335 += 1
         continue
       }
 
       if (inactiveDays === 305) {
+        if (user.accountInactivity === AccountInactivity.AccountInactive) {
+          continue
+        }
         await sendAccountInactiveEmail({
           email: user.email,
           firstname,
           url: loginUrl305,
+        })
+        await prismaClient.user.update({
+          where: { id: user.id },
+          data: { accountInactivity: AccountInactivity.AccountInactive },
         })
         sent305 += 1
       }

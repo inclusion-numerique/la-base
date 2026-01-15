@@ -56,6 +56,15 @@ enum UserRole {
   @@map("user_role")
 }
 
+enum AccountInactivity {
+  AccountDeletionSoon350d @map("account-deletion-soon-350d")
+  AccountDeletionSoon335d @map("account-deletion-soon-335d")
+  AccountDeleted          @map("account-deleted")
+  AccountInactive         @map("account-inactive")
+
+  @@map("account_inactivity")
+}
+
 model User {
   id        String   @id @default(uuid()) @db.Uuid
   slug      String   @unique
@@ -84,6 +93,7 @@ model User {
   isPublic            Boolean        @default(true) @map("is_public")
   deleted             DateTime?
   deletedReason       DeletedReason? @map("deleted_reason")
+  accountInactivity   AccountInactivity? @map("account_inactivity")
   hasSeenV2Onboarding DateTime?      @map("has_seen_v2_onboarding")
   timezone            String         @default("Europe/Paris")
   // Created by a fixture system, can be reset and will only be here on preview envs
