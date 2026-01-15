@@ -78,3 +78,7 @@
     display: inherit !important;
   }
 }
+
+.headerDropdown :global(.fr-dropdown__pane) {
+  top: calc(100% + 1rem);
+}
