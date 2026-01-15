@@ -88,6 +88,7 @@ export const baseJoinRequestRouter = router({
                 include: {
                   member: {
                     select: {
+                      id: true,
                       email: true,
                     },
                   },
@@ -118,7 +119,17 @@ export const baseJoinRequestRouter = router({
         }),
       )
 
-      await Promise.all(emailPromises)
+      const notificationPromises = joinRequest.base.members.map((admin) =>
+        prismaClient.notification.create({
+          data: {
+            userId: admin.member.id,
+            type: 'AskJoinBase',
+            baseId: input.baseId,
+            initiatorId: user.id,
+          },
+        }),
+      )
+      await Promise.all([...emailPromises, ...notificationPromises])
 
       return joinRequest
     }),
@@ -194,6 +205,15 @@ export const baseJoinRequestRouter = router({
         adminName: user.name || user.email,
       }).catch((error) => Sentry.captureException(error))
 
+      await prismaClient.notification.create({
+        data: {
+          userId: joinRequest.applicantId,
+          type: 'AcceptedAskJoinBase',
+          baseId: joinRequest.baseId,
+          initiatorId: user.id,
+        },
+      })
+
       return newMember
     }),
   decline: protectedProcedure
@@ -241,6 +261,16 @@ export const baseJoinRequestRouter = router({
         baseTitle: joinRequest.base.title,
         adminName: user.name || user.email,
       }).catch((error) => Sentry.captureException(error))
+
+      // Notify the applicant
+      await prismaClient.notification.create({
+        data: {
+          userId: joinRequest.applicantId,
+          type: 'DeclinedAskJoinBase',
+          baseId: joinRequest.baseId,
+          initiatorId: user.id,
+        },
+      })
     }),
   remove: protectedProcedure
     .input(z.object({ baseId: z.string().uuid() }))
