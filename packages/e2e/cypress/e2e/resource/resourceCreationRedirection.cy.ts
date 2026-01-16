@@ -29,8 +29,7 @@ describe('ETQ Utilisateur non connecté, lorsque je veux créer une ressource, o
     cy.visit('/connexion?suivant=/?creer-une-ressource')
 
     cy.appUrlShouldBe('/?creer-une-ressource')
-    cy.findByRole('dialog')
-      .should('be.visible')
-      .contains('Créer une nouvelle ressource')
+    cy.get('#create-resource').should('have.attr', 'open')
+    cy.get('#create-resource').contains('Créer une nouvelle ressource')
   })
 })

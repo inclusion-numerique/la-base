@@ -75,7 +75,7 @@ describe("ETQ Utilisateur, je peux gérer mon fil d'actualité et son onboarding
 
     cy.contains('Revenir plus tard').click()
 
-    cy.get('#news-feed-onboarding-modal').should('be.visible')
+    cy.get('#news-feed-onboarding-modal').should('have.attr', 'open')
     cy.get('#news-feed-onboarding-modal').contains(
       'Êtes-vous sûr de vouloir quitter le choix de vos préférences ?',
     )
