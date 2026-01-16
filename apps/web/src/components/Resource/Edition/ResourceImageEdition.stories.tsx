@@ -55,6 +55,17 @@ export const Remplacement: Story = {
         image: {
           altText: 'Text alternatif',
           id: 'paysage',
+          upload: {
+            name: 'paysage.jpg',
+            size: 1024,
+            mimeType: 'image/jpeg',
+          },
+          cropTop: 300,
+          cropLeft: 300,
+          cropWidth: 300,
+          cropHeight: 300,
+          originalHeight: 300,
+          originalWidth: 300,
         },
       }}
       editing=""
