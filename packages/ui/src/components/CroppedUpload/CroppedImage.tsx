@@ -29,6 +29,8 @@ const CroppedImage = ({
   emptyChildren,
   image,
   size,
+  inputTestId,
+  deleteTestId,
 }: {
   label?: string
   height: number
@@ -46,6 +48,8 @@ const CroppedImage = ({
   emptyChildren?: ReactNode
   image?: ImageForForm | null
   size?: { w: number; h: number }
+  inputTestId?: string
+  deleteTestId?: string
 }) => (
   <>
     {imageSource ? (
@@ -114,6 +118,7 @@ const CroppedImage = ({
               iconId="fr-icon-delete-line"
               iconPosition="right"
               onClick={onRemove}
+              data-testid={deleteTestId}
             >
               Supprimer
             </Button>
@@ -143,6 +148,9 @@ const CroppedImage = ({
       nativeInputProps={{
         value: imageToUpload ? imageToUpload.filename : '',
         accept: imageAllowedMimeTypes.join(','),
+        ...({
+          'data-testid': inputTestId,
+        } as React.InputHTMLAttributes<HTMLInputElement>),
         onChange: (event) => {
           // We want to emit a File from this onchange instead of the field value (that is the default implementation)
           const { files, value } = event.target

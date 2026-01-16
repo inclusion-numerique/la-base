@@ -76,44 +76,59 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
       })
 
       it("Acceptation 3 - Edition de l'image", () => {
+        // Intercept image creation mutation (called before modal closes and resource.mutate)
+        cy.intercept('/api/trpc/image.create?*').as('imageCreate')
+
         cy.log("Je vois un call to action pour editer l'image")
         cy.testId('resource-image').should('not.exist')
-        cy.testId('resource-image-delete').should('not.exist')
-
         cy.testId('resource-image-placeholder').should('exist')
+        cy.testId('resource-image-edit-button').should('exist')
 
-        cy.log('Je selectionne un fichier')
+        cy.log("J'ouvre la modal d'édition d'image")
+        cy.dsfrModalsShouldBeBound()
+        cy.testId('resource-image-edit-button').click()
+        cy.findByRole('dialog').should('exist')
+
+        cy.log('Je selectionne un fichier dans la modal')
         cy.testId('resource-image-file-field').selectFile(
           'cypress/fixtures/test_1px_image.png',
         )
 
-        cy.log('Le fichier est uploadé et changé automatiquement')
+        cy.log("J'enregistre l'image")
+        cy.findByRole('dialog').contains('Enregistrer').click()
+
+        cy.log('Le fichier est uploadé')
+        cy.wait('@imageCreate')
         cy.wait('@mutation')
 
         cy.log("Je vois l'image")
         cy.testId('resource-image-placeholder').should('not.exist')
         cy.testId('resource-image').should('exist')
-        cy.testId('resource-image-file-field').should('have.value', '')
-        cy.testId('resource-image-delete').should('exist')
 
         cy.log("Je change l'image")
+        cy.testId('resource-image-edit-button').click()
+        cy.findByRole('dialog').should('exist')
+        cy.testId('resource-image-delete').click()
         cy.testId('resource-image-file-field').selectFile(
           'cypress/fixtures/test_1px_image.png',
         )
+        cy.findByRole('dialog').contains('Enregistrer').click()
 
-        cy.log('Le fichier est changé automatiquement')
+        cy.log('Le fichier est changé')
+        cy.wait('@imageCreate')
         cy.wait('@mutation')
 
         cy.log("Je peux supprimer l'image")
+        cy.testId('resource-image-edit-button').click()
+        cy.findByRole('dialog').should('exist')
         cy.testId('resource-image-delete').click()
+        cy.findByRole('dialog').contains('Enregistrer').click()
 
         cy.log("L'image est supprimée")
+        // No image.create when deleting, just resource.mutate
         cy.wait('@mutation')
         cy.testId('resource-image').should('not.exist')
-        cy.testId('resource-image-delete').should('not.exist')
-
-        cy.log("Le champ est disponible pour modifier l'image")
-        cy.testId('resource-image-file-field').should('have.value', '')
+        cy.testId('resource-image-placeholder').should('exist')
       })
     })
   })

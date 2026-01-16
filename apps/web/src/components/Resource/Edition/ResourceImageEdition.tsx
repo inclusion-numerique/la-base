@@ -1,6 +1,7 @@
 'use client'
 
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
+import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -49,6 +50,8 @@ const ResourceImageEdition = ({
     },
   })
 
+  const modal = useDsfrModalIsBound(ResourceImageEditionModal.id)
+
   const onChange = async (imageId: string | null) => {
     if (imageId !== image?.id) {
       setEditing('image')
@@ -61,7 +64,9 @@ const ResourceImageEdition = ({
       })
       setEditing(null)
     }
-    ResourceImageEditionModal.close()
+    if (modal) {
+      ResourceImageEditionModal.close()
+    }
   }
   const label = image
     ? "Remplacer l'image de présentation"
@@ -87,6 +92,8 @@ const ResourceImageEdition = ({
         round={false}
         onChange={onChange}
         image={image}
+        inputTestId="resource-image-file-field"
+        deleteTestId="resource-image-delete"
       />
 
       <div
@@ -128,6 +135,7 @@ const ResourceImageEdition = ({
           size="small"
           onClick={ResourceImageEditionModal.open}
           disabled={isEditingAnotherContent}
+          data-testid="resource-image-edit-button"
         >
           {title}
         </Button>

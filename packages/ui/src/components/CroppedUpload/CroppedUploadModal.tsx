@@ -31,6 +31,8 @@ const CroppedUploadModal = <T extends FieldValues>({
   emptyChildren,
   image,
   size,
+  inputTestId,
+  deleteTestId,
 }: {
   title: string
   modal: CreateModalReturn
@@ -44,6 +46,8 @@ const CroppedUploadModal = <T extends FieldValues>({
   emptyChildren?: ReactNode
   image?: ImageForForm | null
   size?: { w: number; h: number }
+  inputTestId?: string
+  deleteTestId?: string
 }) => {
   const [croppingMode, setCroppingMode] = useState(false)
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -82,6 +86,7 @@ const CroppedUploadModal = <T extends FieldValues>({
         const uploaded = await imageUpload.upload(imageToUpload)
         if ('error' in uploaded) {
           form.setError(path, { message: uploaded.error })
+          setIsSubmitting(false)
           return
         }
 
@@ -90,6 +95,7 @@ const CroppedUploadModal = <T extends FieldValues>({
           file: uploaded,
         })
         onChange(result.id)
+        modal.close()
         return
       }
       if (imageSource && image) {
@@ -98,11 +104,14 @@ const CroppedUploadModal = <T extends FieldValues>({
           ...cropValues,
         })
         onChange(newImage.id)
+        modal.close()
         return
       }
       onChange(null)
+      modal.close()
     } catch (mutationError) {
       applyZodValidationMutationErrorsToForm(mutationError, form.setError)
+      setIsSubmitting(false)
     }
   }
 
@@ -191,6 +200,8 @@ const CroppedUploadModal = <T extends FieldValues>({
               imageBox={imageBox}
               imageSource={imageSource}
               imageToUpload={imageToUpload}
+              inputTestId={inputTestId}
+              deleteTestId={deleteTestId}
               onCrop={() => {
                 setCroppingMode(true)
                 if (cropperRef.current && croppedBoxData && canvasData) {
