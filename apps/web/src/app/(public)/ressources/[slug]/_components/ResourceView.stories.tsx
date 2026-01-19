@@ -53,7 +53,21 @@ const resource = (imageId: string | null) =>
     },
     imageId,
     image: imageId
-      ? { id: imageId, altText: "C'est beau la Nouvelle Zélande" }
+      ? {
+          id: imageId,
+          altText: "C'est beau la Nouvelle Zélande",
+          cropTop: 300,
+          cropLeft: 300,
+          cropWidth: 300,
+          cropHeight: 300,
+          originalHeight: 300,
+          originalWidth: 300,
+          upload: {
+            name: 'random-image.jpg',
+            size: 1024,
+            mimeType: 'image/jpeg',
+          },
+        }
       : null,
     themes: [
       'Accessibilite',

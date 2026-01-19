@@ -5,6 +5,7 @@ import {
   resourceAuthorization,
 } from '@app/web/authorization/models/resourceAuthorization'
 import { prismaClient } from '@app/web/prismaClient'
+import { imageCropSelect } from '@app/web/server/image/imageCropSelect'
 
 export const getResourceSelect = (_user: { id: string } | null) =>
   ({
@@ -179,6 +180,14 @@ export const getResourceSelect = (_user: { id: string } | null) =>
       select: {
         id: true,
         altText: true,
+        ...imageCropSelect,
+        upload: {
+          select: {
+            name: true,
+            size: true,
+            mimeType: true,
+          },
+        },
       },
     },
     themes: true,
