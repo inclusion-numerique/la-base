@@ -1,3 +1,4 @@
+import { executeAccountInactivityJob } from '@app/web/jobs/account-inactivity/executeAccountInactivityJob'
 import { executeBackupDatabaseJob } from '@app/web/jobs/backup-database/executeBackupDatabaseJob'
 import { executeImportContactsToBrevo } from '@app/web/jobs/import-contacts-to-brevo/executeImportContactsToBrevo'
 import type { Job, JobName, JobPayload } from '@app/web/jobs/jobs'
@@ -15,6 +16,7 @@ export type JobExecutor<Name extends JobName, Result = unknown> = (
 export const jobExecutors: {
   [Name in JobName]: JobExecutor<Name>
 } = {
+  'account-inactivity': executeAccountInactivityJob,
   'backup-database': executeBackupDatabaseJob,
   'import-contacts-to-brevo': executeImportContactsToBrevo,
   'monthly-newsletter-news-feed': executeMonthlyNewsletterNewsFeed,

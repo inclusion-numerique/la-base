@@ -1,3 +1,4 @@
+import { AccountInactivityJobValidation } from '@app/web/jobs/account-inactivity/AccountInactivityJob'
 import { BackupDatabaseJobValidation } from '@app/web/jobs/backup-database/backupDatabaseJob'
 import { ImportContactsToBrevoValidation } from '@app/web/jobs/import-contacts-to-brevo/ImportContactsToBrevoJob'
 import { MonthlyNewsletterNewsFeedJobValidation } from '@app/web/jobs/monthly-newsletter-news-feed/MonthlyNewsletterNewsFeedJob'
@@ -20,6 +21,7 @@ import z from 'zod'
  */
 
 export const JobValidation = z.discriminatedUnion('name', [
+  AccountInactivityJobValidation,
   BackupDatabaseJobValidation,
   ImportContactsToBrevoValidation,
   MonthlyNewsletterNewsFeedJobValidation,
