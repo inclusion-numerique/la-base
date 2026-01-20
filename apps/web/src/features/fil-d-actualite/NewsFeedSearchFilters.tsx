@@ -37,6 +37,7 @@ export const NewsFeedSearchFilters = async ({
   } = newsFeedPageContext.resourceCounts
 
   const { followedBases, followedProfiles } = newsFeedPageContext
+
   const hasActiveFilters = Object.entries(params).some(([_, value]) => !!value)
 
   return (

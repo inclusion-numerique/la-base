@@ -210,7 +210,6 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                             selected={modalSelected}
                             category={key as Category}
                             options={optionsWithDisabled}
-                            withHint
                           />
                         )
                       },

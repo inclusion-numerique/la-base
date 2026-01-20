@@ -224,7 +224,12 @@ const Header = ({
                 <li className="fr-position-relative">
                   {user ? (
                     <>
-                      <div className="fr-hidden fr-unhidden-lg">
+                      <div
+                        className={classNames(
+                          'fr-hidden fr-unhidden-lg',
+                          styles.headerDropdown,
+                        )}
+                      >
                         <Dropdown
                           id="header_user_menu"
                           alignRight
