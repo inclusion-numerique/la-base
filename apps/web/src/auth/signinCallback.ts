@@ -153,6 +153,8 @@ export const signinCallback: <
   }
 
   await updateUserEmailFromProvider({ user, profile })
-
+  registerLastLogin({ userId: user.id }).catch((error) => {
+    Sentry.captureException(error)
+  })
   return true
 }
