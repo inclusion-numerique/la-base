@@ -9,7 +9,7 @@
     "cy": "dotenv -e ../../.env -e ./cypress.env -- cypress"
   },
   "engines": {
-    "node": "^24.5"
+    "node": "^25.4"
   },
   "dependencies": {
     "@cypress/react18": "^2.0.1",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^6.0.4",
     "@testing-library/cypress": "^10.0.3",
-    "@types/node": "^24.2.0",
+    "@types/node": "^25.0.9",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "^10.0.0",
