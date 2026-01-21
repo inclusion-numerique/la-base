@@ -13,7 +13,7 @@
     "setup:dsfr": "bash ../../setup-dsfr.sh"
   },
   "engines": {
-    "node": "^24.5"
+    "node": "^25.4"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.27.0",
@@ -43,7 +43,7 @@
     "@storybook/nextjs": "^9.1.8",
     "@testing-library/jest-dom": "^6.6.4",
     "@types/jest": "^29.5.14",
-    "@types/node": "^24.2.0",
+    "@types/node": "^25.0.9",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/testing-library__jest-dom": "^6.0.0",

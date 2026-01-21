@@ -1,4 +1,4 @@
-FROM node:24.5-slim
+FROM node:25.4-slim
 
 WORKDIR /app
 

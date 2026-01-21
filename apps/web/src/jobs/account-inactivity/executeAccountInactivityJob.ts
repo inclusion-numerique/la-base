@@ -14,12 +14,6 @@ const BATCH_SIZE = 50
 const daysSince = (from: Date, to: Date) =>
   Math.floor((to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24))
 
-const getLastActiveAt = (user: {
-  lastLogin: Date | null
-  signedUpAt: Date | null
-  created: Date
-}) => user.lastLogin ?? user.signedUpAt ?? user.created
-
 type UserToProcess = {
   id: string
   email: string
@@ -46,7 +40,9 @@ const processUser = async (
     loginUrl365: string
   },
 ): Promise<ProcessResult> => {
-  const lastActiveAt = getLastActiveAt(user)
+  const lastActiveAt = user.lastLogin
+
+  if (!lastActiveAt) return { type: 'skipped' }
   const inactiveDays = daysSince(lastActiveAt, now)
   const firstname = user.firstName || user.name || ''
 

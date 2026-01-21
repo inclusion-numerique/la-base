@@ -16,6 +16,7 @@ minimumReleaseAgeExclude:
   - typescript
   - react
   - react-dom
+  - "@types/node"
   - "@types/react"
   - "@types/react-dom"
   - next

@@ -11,7 +11,7 @@
     "test": "jest --passWithNoTests"
   },
   "engines": {
-    "node": "^24.5"
+    "node": "^25.4"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^24.2.0",
+    "@types/node": "^25.0.9",
     "@types/uuid": "^10.0.0",
     "commander": "^14.0.0",
     "jest": "^29.7.0"

@@ -25,7 +25,7 @@
     "standalone:start": "HOSTNAME=\"0.0.0.0\" ../../node_modules/.bin/dotenv -e ../../.env -- node ./.next/standalone/apps/web/server.js"
   },
   "engines": {
-    "node": "^24.5"
+    "node": "^25.4"
   },
   "overrides": {
     "@faire/mjml-react": {
@@ -154,7 +154,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash-es": "^4.17.12",
     "@types/mime-types": "^3.0.1",
-    "@types/node": "^24.2.0",
+    "@types/node": "^25.0.9",
     "@types/nodemailer": "^6.4.17",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^19.2.7",
