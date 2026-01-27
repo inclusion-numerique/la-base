@@ -139,6 +139,7 @@ model User {
 // Raison de suppression d'un profil
 enum DeletedReason {
   SuspiciousAuto @map("suspicious_auto")
+  Inactivity     @map("inactivity")
 
   @@map("deleted_reason")
 }
