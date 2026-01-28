@@ -26,6 +26,8 @@ export const AvecImageEtFavicon: Story = {
   render,
   args: {
     content: {
+      linkClickCount: 10,
+      id: 'link-id',
       title: 'Titre du lien',
       showPreview: true,
       url: 'https://www.gouvernement.fr/actualite/les-resultats-de-lindex-de-legalite-professionnelle-2023',
@@ -48,6 +50,8 @@ export const SansImageNiFavicon: Story = {
   render,
   args: {
     content: {
+      linkClickCount: 10,
+      id: 'link-id',
       title: 'Titre du lien',
       showPreview: true,
       url: 'https://www.gouvernement.fr/actualite/les-resultats-de-lindex-de-legalite-professionnelle-2023',

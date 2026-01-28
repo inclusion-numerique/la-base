@@ -18,7 +18,10 @@ import type {
  * Resource reconstructed from event does not include relations, but only their ids
  */
 
-export type ContentProjection = Omit<ResourceContent, 'image' | 'file'>
+export type ContentProjection = Omit<
+  ResourceContent,
+  'image' | 'file' | 'linkClickCount' | 'fileDownloadCount' | 'filePreviewCount'
+>
 
 export type ResourceProjection = Omit<
   Resource,
