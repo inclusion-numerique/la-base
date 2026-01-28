@@ -3,6 +3,7 @@ import { baseJoinRequestRouter } from '@app/web/server/rpc/baseJoinRequest/baseJ
 import { baseMemberRouter } from '@app/web/server/rpc/baseMember/baseMemberRouter'
 import { collectionRouter } from '@app/web/server/rpc/collection/collectionRouter'
 import { collectionResourceRouter } from '@app/web/server/rpc/collectionResource/collectionResource'
+import { contentRouter } from '@app/web/server/rpc/content/contentRouter'
 import { router } from '@app/web/server/rpc/createRouter'
 import { featuredBlockRouter } from '@app/web/server/rpc/featuredBlock/featuredBlockRouter'
 import { feedbackRouter } from '@app/web/server/rpc/feedback/feedbackRouter'
@@ -29,6 +30,7 @@ export const appRouter = router({
   profile: profileRouter,
   collection: collectionRouter,
   collectionResource: collectionResourceRouter,
+  content: contentRouter,
   metaData: metadataRouter,
   newsFeed: newsFeedRouter,
   notifications: notificationsRouter,

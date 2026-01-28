@@ -518,6 +518,11 @@ model Content {
   // Text
   text String?
 
+  // Tracking counters (optional - only for Link and File content types)
+  linkClickCount    Int? @map("link_click_count")
+  fileDownloadCount Int? @map("file_download_count")
+  filePreviewCount  Int? @map("file_preview_count")
+
   created DateTime @default(now())
   updated DateTime @default(now())
 
