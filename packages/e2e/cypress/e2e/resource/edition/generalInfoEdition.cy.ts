@@ -89,7 +89,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.log("J'ouvre la modal d'édition d'image")
         cy.dsfrModalsShouldBeBound()
         cy.testId('resource-image-edit-button').click()
-        cy.findByRole('dialog').should('exist')
+        cy.get('#resource-image-edition').should('have.attr', 'open')
 
         cy.log('Je selectionne un fichier dans la modal')
         cy.testId('resource-image-file-field').selectFile(
@@ -97,7 +97,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         )
 
         cy.log("J'enregistre l'image")
-        cy.findByRole('dialog').contains('Enregistrer').click()
+        cy.get('#resource-image-edition').contains('Enregistrer').click()
 
         cy.log('Le fichier est uploadé')
         cy.wait('@imageCreate')
@@ -109,12 +109,12 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.log("Je change l'image")
         cy.testId('resource-image-edit-button').click()
-        cy.findByRole('dialog').should('exist')
+        cy.get('#resource-image-edition').should('have.attr', 'open')
         cy.testId('resource-image-delete').click()
         cy.testId('resource-image-file-field').selectFile(
           'cypress/fixtures/test_1px_image.png',
         )
-        cy.findByRole('dialog').contains('Enregistrer').click()
+        cy.get('#resource-image-edition').contains('Enregistrer').click()
 
         cy.log('Le fichier est changé')
         cy.wait('@imageCreate')
@@ -122,9 +122,9 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.log("Je peux supprimer l'image")
         cy.testId('resource-image-edit-button').click()
-        cy.findByRole('dialog').should('exist')
+        cy.get('#resource-image-edition').should('have.attr', 'open')
         cy.testId('resource-image-delete').click()
-        cy.findByRole('dialog').contains('Enregistrer').click()
+        cy.get('#resource-image-edition').contains('Enregistrer').click()
 
         cy.log("L'image est supprimée")
         // No image.create when deleting, just resource.mutate
