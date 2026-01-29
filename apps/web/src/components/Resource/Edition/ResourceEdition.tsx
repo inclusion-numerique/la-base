@@ -296,6 +296,7 @@ const ResourceEdition = ({
               editing={editing}
               setEditing={setEditing}
               index={updatedDraftResource.contents.length - 1}
+              as="div"
             />
           </>
         )}

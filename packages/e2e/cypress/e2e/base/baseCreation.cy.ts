@@ -79,13 +79,13 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.visit('/bases/creer')
 
     cy.dsfrCollapsesShouldBeBound()
-    cy.findByRole('dialog').should('not.exist')
+    cy.get('#cancel-base-creation').should('not.have.attr', 'open')
     cy.testId('cancel-button').click()
 
-    cy.findByRole('dialog').as('modal')
-    cy.get('@modal').contains('Annuler la création de la base')
+    cy.get('#cancel-base-creation').should('have.attr', 'open')
+    cy.get('#cancel-base-creation').contains('Annuler la création de la base')
     cy.testId('back-modal-button').click()
-    cy.findByRole('dialog').should('not.exist')
+    cy.get('#cancel-base-creation').should('not.have.attr', 'open')
     cy.url().should('contain', appUrl(`/bases/creer`))
 
     cy.testId('cancel-button').click()

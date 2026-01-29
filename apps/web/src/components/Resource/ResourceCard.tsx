@@ -1,3 +1,4 @@
+import { getImageAccessibilityProps } from '@app/ui/utils/imageAccessibility'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
 import { FeedbackBadge } from '@app/web/components/Resource/feedbackBadge/FeedbackBadge'
@@ -74,6 +75,7 @@ const ResourceCard = ({
         href={`/ressources/${resource.slug}`}
         className={styles.content}
         data-testid="resource-card-link"
+        aria-label={`Consulter la ressource ${resource.title}`}
       >
         <div className={styles.textAndDescription}>
           {withDate && (
@@ -121,7 +123,7 @@ const ResourceCard = ({
           >
             <ResponsiveUploadedImage
               id={resource.image.id}
-              alt={resource.image.altText ?? ''}
+              {...getImageAccessibilityProps(resource.image.altText)}
               breakpoints={resourceCardImageBreakpoints}
             />
           </div>

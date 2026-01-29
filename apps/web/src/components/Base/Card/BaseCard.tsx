@@ -24,13 +24,18 @@ const BaseCard = ({
     className={classNames(styles.container, className)}
     data-testid="base-card"
   >
-    <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
+    <Link
+      href={`/bases/${base.slug}`}
+      className={styles.imageLink}
+      aria-label={`Voir l'image de la base ${base.title}`}
+    >
       <BaseImage base={base} size={compact ? 48 : 96} />
     </Link>
     <div className={styles.content}>
       <Link
         href={`/bases/${base.slug}`}
         className="fr-flex-grow-1 fr-link--no-underline"
+        aria-label={`Consulter la base ${base.title}`}
       >
         <span className="fr-text--bold fr-text--md fr-mb-0">{base.title}</span>
       </Link>
@@ -42,6 +47,7 @@ const BaseCard = ({
               'fr-mb-0 fr-mt-3v fr-text--sm',
               styles.exerpt,
             )}
+            aria-label={`Lire l'extrait de la base ${base.title}`}
           >
             {base.excerpt}
           </Link>

@@ -3,6 +3,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
 import { redirectToUpdatedCguPageIfNeeded } from '@app/web/features/cgu/redirectToUpdatedCguPageIfNeeded'
 import { redirectToNewsFeedOnboarding } from '@app/web/features/fil-d-actualite/redirectToNewsFeedOnboarding'
+import { contentId } from '@app/web/utils/skipLinks'
 import { type PropsWithChildren } from 'react'
 
 const PublicLayout = async ({ children }: PropsWithChildren) => {
@@ -16,7 +17,9 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      <div style={{ flex: 1 }}>{children}</div>
+      <main id={contentId} style={{ flex: 1 }}>
+        {children}
+      </main>
       <PublicFooter />
     </div>
   )

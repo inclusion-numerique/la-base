@@ -52,6 +52,7 @@ const SearchableSelect = <T extends string>({
 
   const [inputValue, setInputValue] = useState('')
   const [showOptions, setShowOptions] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const optionsContainerRef = useRef<HTMLDivElement>(null)
 
@@ -81,6 +82,7 @@ const SearchableSelect = <T extends string>({
   const onInternalFocus = useCallback(() => {
     unselect()
     setShowOptions(true)
+    setSelectedIndex(-1)
   }, [unselect])
 
   const onInternalBlur = useCallback(() => {
@@ -98,7 +100,39 @@ const SearchableSelect = <T extends string>({
       }
     }
     setShowOptions(false)
+    setSelectedIndex(-1)
   }, [filteredOptions, inputValue, allOptions, select, unselect])
+
+  // Support clavier pour navigation dans les options (RGAA)
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!showOptions || filteredOptions.length === 0) return
+
+      const enabledOptions = filteredOptions.filter((opt) => !opt.disabled)
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        setSelectedIndex((prev) =>
+          prev < enabledOptions.length - 1 ? prev + 1 : prev,
+        )
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1))
+      } else if (event.key === 'Enter' && selectedIndex >= 0) {
+        event.preventDefault()
+        const selectedOption = enabledOptions[selectedIndex]
+        if (selectedOption) {
+          select(selectedOption)
+          setShowOptions(false)
+        }
+      } else if (event.key === 'Escape') {
+        event.preventDefault()
+        setShowOptions(false)
+        setSelectedIndex(-1)
+      }
+    },
+    [showOptions, filteredOptions, selectedIndex, select],
+  )
 
   return (
     <div className={styles.input}>
@@ -127,6 +161,13 @@ const SearchableSelect = <T extends string>({
           onChange: (event) => setInputValue(event.target.value),
           onFocus: onInternalFocus,
           onBlur: onInternalBlur,
+          onKeyDown,
+          role: 'combobox',
+          'aria-expanded': showOptions,
+          'aria-autocomplete': 'list',
+          'aria-controls': showOptions
+            ? 'searchable-select-listbox'
+            : undefined,
         }}
       />
       <div
@@ -153,6 +194,7 @@ const SearchableSelect = <T extends string>({
                   filteredOptions.some((o) => o.value === option.value),
                 )}
                 select={select}
+                selectedIndex={selectedIndex}
                 limit={category.limit || DEFAULT_LIMIT}
                 noResultMessage={noResultMessage}
               />
@@ -162,6 +204,7 @@ const SearchableSelect = <T extends string>({
           <Options
             options={filteredOptions}
             select={select}
+            selectedIndex={selectedIndex}
             limit={limit || DEFAULT_LIMIT}
             noResultMessage={noResultMessage}
           />

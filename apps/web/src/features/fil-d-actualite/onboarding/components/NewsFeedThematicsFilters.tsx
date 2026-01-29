@@ -43,6 +43,9 @@ export const NewsFeedThematicsFilters = ({
           )}
           onClick={() => setIsOpen(!isOpen)}
           type="button"
+          aria-label={
+            isOpen ? 'Masquer les thématiques' : 'Afficher les thématiques'
+          }
         >
           <span className={`ri-arrow-${isOpen ? 'down' : 'right'}-s-line`} />
         </Button>

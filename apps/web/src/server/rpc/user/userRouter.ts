@@ -64,6 +64,7 @@ export const userRouter = router({
             name,
             slug,
             signedUpAt: new Date(),
+            lastLogin: new Date(),
             email,
             cguVersion: currentCguVersion,
             lastCguAcceptedAt: new Date(),

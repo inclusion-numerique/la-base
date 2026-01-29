@@ -116,6 +116,7 @@ const RichInputForm = <T extends FieldValues>({
             className={classNames(styles.input, {
               [styles.small]: size === 'small',
             })}
+            aria-label={typeof label === 'string' ? label : undefined}
             aria-describedby={ariaDescribedBy}
             disabled={disabled}
             id={id}

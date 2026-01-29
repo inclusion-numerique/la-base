@@ -9,6 +9,7 @@ import {
   defaultSearchParams,
   searchUrl,
 } from '@app/web/server/search/searchQueryParams'
+import { navigationId, searchId } from '@app/web/utils/skipLinks'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
@@ -81,7 +82,11 @@ const Header = ({
             </div>
           </div>
           <div className="fr-header__tools">
-            <div className="fr-header__tools-links">
+            <nav
+              id={navigationId}
+              className="fr-header__tools-links"
+              aria-label="Navigation principale"
+            >
               <ul className="fr-btns-group fr-align-items-center">
                 <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
                   <Button
@@ -121,7 +126,7 @@ const Header = ({
                     )}
                   </Button>
                 </li>
-                <li className="fr-px-md-0 fr-px-2w">
+                <li className="fr-px-md-0 fr-px-2w" id={searchId}>
                   <Button
                     linkProps={{
                       href: searchUrl('ressources', defaultSearchParams),
@@ -166,6 +171,8 @@ const Header = ({
                     href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Aide - nouvelle fenêtre"
+                    title="Aide - nouvelle fenêtre"
                   >
                     <span
                       className="fr-hidden-lg ri-question-line fr-mr-1w fr-text-label--blue-france"
@@ -176,6 +183,7 @@ const Header = ({
                       className="fr-hidden fr-unhidden-lg ri-question-line fr-ml-1w fr-text-label--blue-france"
                       aria-hidden
                     />
+                    <span className="fr-sr-only"> - nouvelle fenêtre</span>
                   </Link>
                 </li>
                 <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
@@ -193,6 +201,7 @@ const Header = ({
                             ? '/fil-d-actualite/onboarding'
                             : '/fil-d-actualite/tout'
                           : '/connexion?suivant=/fil-d-actualite/tout',
+                        'aria-label': "Fil d'actualité",
                       }}
                       size="small"
                     >
@@ -255,7 +264,7 @@ const Header = ({
                   )}
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
@@ -263,7 +272,8 @@ const Header = ({
     <div
       className="fr-header__menu fr-modal"
       id="header-modal"
-      aria-labelledby="header-modal-button"
+      aria-label="Menu mobile"
+      role="menu"
     >
       <div className="fr-container">
         <button

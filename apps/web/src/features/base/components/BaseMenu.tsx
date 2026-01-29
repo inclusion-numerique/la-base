@@ -44,7 +44,7 @@ const BaseMenu = ({ base }: { base: BasePageData }) => {
   return (
     <div className={styles.menu}>
       <div className="fr-container">
-        <nav className="fr-nav">
+        <nav className="fr-nav" aria-label={`Menu de la base ${base.title}`}>
           <ul className="fr-nav__list">
             <MenuItem
               tab="accueil"

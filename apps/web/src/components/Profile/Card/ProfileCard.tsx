@@ -33,6 +33,7 @@ const ProfileCard = ({
         <Link
           href={`/profils/${profile.slug}`}
           className="fr-link--no-underline"
+          aria-label={`Voir la photo de profil de ${profile.name ? formatName(profile.name) : "l'utilisateur"}`}
         >
           <RoundProfileImage size={48} user={profile} />
         </Link>
@@ -40,6 +41,7 @@ const ProfileCard = ({
           <Link
             className="fr-flex-grow-1 fr-link--no-underline"
             href={`/profils/${profile.slug}`}
+            aria-label={`Consulter le profil de ${profile.name ? formatName(profile.name) : "l'utilisateur"}`}
           >
             <span className="fr-text--bold fr-text--md fr-mb-0">
               {profile.name && formatName(profile.name)}

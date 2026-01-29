@@ -264,7 +264,7 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('edition-action-bar-more-actions').click()
     cy.testId('edition-action-bar-parameters-modal').click()
 
-    cy.testId('delete-base-button').click()
+    cy.testId('delete-resource-button').click()
     cy.testId('edition-action-bar-delete').click()
     cy.wait('@mutation')
 

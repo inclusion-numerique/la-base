@@ -71,7 +71,8 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
       .filter(':visible')
       .click()
 
-    cy.findByRole('dialog').within(() => {
+    cy.get('#report-resource').should('have.attr', 'open')
+    cy.get('#report-resource').within(() => {
       // Should not submit with empty form
       cy.findByRole('button', { name: /signaler/i }).click()
 
@@ -84,7 +85,7 @@ describe('Utilisateur connecté, je peux signaler une ressource', () => {
 
     cy.wait('@reportResource')
 
-    cy.findByRole('dialog').should('not.exist')
+    cy.get('#report-resource').should('not.have.attr', 'open')
     cy.findByRole('status').contains(/signalement envoyé/i)
 
     cy.log('Check that the report was created')

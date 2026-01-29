@@ -253,6 +253,7 @@ export const NewsFeedHeader = async ({
           className="fr-header__menu fr-modal"
           id="news-feed-menu-button"
           aria-labelledby="news-feed-menu-button"
+          role="menu"
         >
           <div className="fr-container">
             <button

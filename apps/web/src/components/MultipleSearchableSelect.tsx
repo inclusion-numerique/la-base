@@ -227,6 +227,7 @@ const MultipleSearchableSelect = forwardRef<
     }
 
     const id = 'multiple-searchable-select'
+    const listboxId = `${id}-listbox`
     return (
       <>
         <div className={className}>
@@ -241,6 +242,8 @@ const MultipleSearchableSelect = forwardRef<
                   type="text"
                   role="combobox"
                   aria-autocomplete="list"
+                  aria-controls={listboxId}
+                  aria-expanded={showOptions}
                   disabled={disabled}
                   data-testid={dataTestId}
                   id={id}
@@ -293,6 +296,8 @@ const MultipleSearchableSelect = forwardRef<
             </div>
             <div
               ref={optionsContainerRef}
+              id={listboxId}
+              role="listbox"
               className={classNames(styles.options, {
                 [styles.visible]: showOptions,
               })}

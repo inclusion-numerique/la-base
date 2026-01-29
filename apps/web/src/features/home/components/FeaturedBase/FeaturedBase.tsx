@@ -14,7 +14,7 @@ export const FeaturedBase = ({
 }) => (
   <>
     <div className="fr-mb-2w fr-enlarge-link fr-no-hover-bg">
-      <Link href={`/bases/${slug}`}>
+      <Link href={`/bases/${slug}`} aria-label={title}>
         <BaseImage base={{ id, image }} size={96} />
       </Link>
       <h3 className="fr-text--lg fr-my-3v">{title}</h3>
