@@ -57,7 +57,7 @@
     "@tiptap/react": "^2.26.1",
     "@trpc/client": "11.3.1",
     "@trpc/react-query": "11.3.1",
-    "@trpc/server": "11.3.1",
+    "@trpc/server": "11.8.0",
     "avvvatars-react": "^0.4.2",
     "aws-crt": "^1.27.3",
     "axios": "^1.11.0",
