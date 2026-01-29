@@ -60,6 +60,7 @@ const RichInputFormField = <T extends FieldValues>({
             path={path}
             menuBar={menuBar}
             id={id}
+            label={label}
             ariaDescribedBy={ariaDescribedBy}
             disabled={disabled}
             placeholder={placeholder}

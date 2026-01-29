@@ -2,6 +2,7 @@
 
 import CroppedUploadModal from '@app/ui/components/CroppedUpload/CroppedUploadModal'
 import { useDsfrModalIsBound } from '@app/ui/hooks/useDsfrModalIsBound'
+import { getImageAccessibilityProps } from '@app/ui/utils/imageAccessibility'
 import type { SendCommand } from '@app/web/components/Resource/Edition/ResourceEdition'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -104,7 +105,7 @@ const ResourceImageEdition = ({
         {image ? (
           <ResponsiveUploadedImage
             id={image.id}
-            alt={image.altText ?? ''}
+            {...getImageAccessibilityProps(image.altText)}
             data-testid="resource-image"
             breakpoints={[
               { media: '(min-width: 768px)', width: 300 },

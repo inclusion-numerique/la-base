@@ -24,10 +24,12 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
       it('Acceptation 1 - Edition de la base', () => {
         cy.dsfrModalsShouldBeBound()
-        cy.findByRole('dialog').should('not.exist')
+        cy.get('#chose-resource-base').should('not.have.attr', 'open')
         cy.testId('edit-base-button').click()
-        cy.findByRole('dialog').as('modal')
-        cy.get('@modal').contains('Où souhaitez-vous ajouter cette ressource ?')
+        cy.get('#chose-resource-base').should('have.attr', 'open')
+        cy.get('#chose-resource-base').contains(
+          'Où souhaitez-vous ajouter cette ressource ?',
+        )
       })
 
       it('Acceptation 2 - Edition du titre', () => {

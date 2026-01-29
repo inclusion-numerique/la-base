@@ -59,7 +59,7 @@ const ResourceDeletion = ({ resource }: { resource: Resource }) => {
     <>
       <Button
         className="fr-btn--danger"
-        data-testid="delete-base-button"
+        data-testid="delete-resource-button"
         {...deleteModalNativeButtonProps}
       >
         Supprimer la ressource

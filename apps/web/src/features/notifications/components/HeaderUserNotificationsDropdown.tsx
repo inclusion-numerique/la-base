@@ -18,15 +18,16 @@ const HeaderUserNotificationsDropdown = ({ user }: { user: SessionUser }) => {
       <div className="fr-hidden fr-unhidden-lg">
         <Dropdown
           id="user_notifications_menu"
+          aria-label="Menu de notifications"
           alignRight
           displayDropdownArrow={false}
           control={
-            <>
+            <div aria-label="Menu des notifications">
               <HeaderUserNotificationsBadge className="fr-position-absolute" />
               <span
                 className={classNames(styles.icon, 'ri-notification-3-line')}
               />
-            </>
+            </div>
           }
           onClickOutside={handleOnOpenModal}
         >

@@ -73,6 +73,7 @@ export const CategoryCard = ({
           <Link
             href={CATEGORY_VARIANTS[category].href}
             className="fr-link fr-text--lg"
+            aria-label={`Découvrir ${category}`}
           >
             <span className="ri-arrow-right-line ri-lg" aria-hidden />
           </Link>

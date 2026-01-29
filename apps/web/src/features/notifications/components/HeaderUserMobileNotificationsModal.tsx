@@ -11,6 +11,7 @@ const HeaderUserMobileNotificationsModal = ({
   <div
     className="fr-header__menu fr-modal"
     id="notifications-modal"
+    role="dialog"
     aria-labelledby="notifications-modal-button"
   >
     <div className="fr-container">

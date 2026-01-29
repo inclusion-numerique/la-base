@@ -76,6 +76,7 @@ const RichTextForm = <T extends FieldValues>({
           <EditorContent
             editor={editor}
             className={styles.input}
+            aria-label={typeof label === 'string' ? label : undefined}
             aria-describedby={ariaDescribedBy}
             disabled={disabled}
             id={id}

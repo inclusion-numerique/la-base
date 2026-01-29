@@ -1,3 +1,4 @@
+import { getImageAccessibilityProps } from '@app/ui/utils/imageAccessibility'
 import UploadedImage from '@app/web/components/UploadedImage'
 import classNames from 'classnames'
 import { type ComponentProps, type ReactNode } from 'react'
@@ -17,35 +18,46 @@ const RoundImage = ({
   borderWidth?: 1 | 2
   className?: string
   fallback?: ReactNode
-}) => (
-  <div
-    className={classNames(
-      styles.container,
-      size === 24 && styles.size24,
-      size === 32 && styles.size32,
-      size === 48 && styles.size48,
-      size === 96 && styles.size96,
-      size === 116 && styles.size116,
-      size === 128 && styles.size128,
-      borderWidth === 1 && styles.borderWidth1,
-      borderWidth === 2 && styles.borderWidth2,
-      radius === 'full' && styles.radiusFull,
-      radius === 'half' && styles.radiusHalf,
-      radius === 'quarter' && styles.radiusQuarter,
-      className,
-    )}
-  >
-    {!!image && (
-      <UploadedImage
-        src={image.id}
-        alt={image.altText ?? ''}
-        width={size - (borderWidth ?? 0)}
-        height={size - (borderWidth ?? 0)}
-      />
-    )}
-    {!image && !!fallback && fallback}
-  </div>
-)
+}) => {
+  const accessibilityProps = image
+    ? getImageAccessibilityProps(image.altText)
+    : {
+        alt: '' as const,
+        decorative: true as const,
+        'aria-hidden': true as const,
+        role: 'presentation' as const,
+      }
+
+  return (
+    <div
+      className={classNames(
+        styles.container,
+        size === 24 && styles.size24,
+        size === 32 && styles.size32,
+        size === 48 && styles.size48,
+        size === 96 && styles.size96,
+        size === 116 && styles.size116,
+        size === 128 && styles.size128,
+        borderWidth === 1 && styles.borderWidth1,
+        borderWidth === 2 && styles.borderWidth2,
+        radius === 'full' && styles.radiusFull,
+        radius === 'half' && styles.radiusHalf,
+        radius === 'quarter' && styles.radiusQuarter,
+        className,
+      )}
+    >
+      {!!image && (
+        <UploadedImage
+          src={image.id}
+          {...accessibilityProps}
+          width={size - (borderWidth ?? 0)}
+          height={size - (borderWidth ?? 0)}
+        />
+      )}
+      {!image && !!fallback && fallback}
+    </div>
+  )
+}
 
 export type RoundImageProps = ComponentProps<typeof RoundImage>
 

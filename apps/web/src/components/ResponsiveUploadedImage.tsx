@@ -1,3 +1,4 @@
+import type { AccessibleImageProps } from '@app/ui/utils/imageAccessibility'
 import {
   type GenerateUploadedImageSourceSetsInput,
   generateUploadedImageSourceSets,
@@ -9,8 +10,9 @@ const ResponsiveUploadedImage = ({
   quality,
   breakpoints,
   ...imgProps
-}: Omit<ComponentProps<'img'>, 'src' | 'srcSet'> &
-  GenerateUploadedImageSourceSetsInput) => {
+}: Omit<ComponentProps<'img'>, 'src' | 'srcSet' | 'alt'> &
+  GenerateUploadedImageSourceSetsInput &
+  AccessibleImageProps) => {
   const sources = generateUploadedImageSourceSets({ id, quality, breakpoints })
 
   return (

@@ -14,6 +14,7 @@ const AddContent = React.forwardRef(
       sendCommand,
       withBorder = false,
       index,
+      as = 'li',
     }: {
       resource: ResourceProjectionWithContext
       editing: string | null
@@ -21,6 +22,7 @@ const AddContent = React.forwardRef(
       sendCommand: SendCommand
       withBorder?: boolean
       index: number
+      as?: 'li' | 'div'
     },
     contentFormButtonRef: React.ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -51,6 +53,7 @@ const AddContent = React.forwardRef(
       />
     ) : (
       <AddContentButton
+        as={as}
         disabled={!!editing && !isAddingContentType}
         onAdd={onAdd}
         editing={!!editing}

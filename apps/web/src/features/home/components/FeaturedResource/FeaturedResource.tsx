@@ -67,7 +67,7 @@ export const FeaturedResource = ({
       )}
     </div>
     <h3 className="fr-text--md fr-mb-1v">
-      <Link href={`/ressources/${slug}`}>
+      <Link href={`/ressources/${slug}`} aria-label={title}>
         <CropText limit={79}>{title}</CropText>
       </Link>
     </h3>

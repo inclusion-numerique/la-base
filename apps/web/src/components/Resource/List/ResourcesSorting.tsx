@@ -37,7 +37,11 @@ const ResourcesSortingSelect = ({
   return (
     <div className={styles.select}>
       Trier par&nbsp;:
-      <select onChange={onSelect} value={selected}>
+      <select
+        onChange={onSelect}
+        value={selected}
+        aria-label="Trier les résultats"
+      >
         {resourcesSortingOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.name}

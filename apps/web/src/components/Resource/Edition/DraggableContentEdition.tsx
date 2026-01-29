@@ -186,7 +186,6 @@ const DraggableContentEdition = React.forwardRef(
                 nativeButtonProps={{
                   onPointerDown: handleDragButtonPointerDown,
                   onKeyDown: (event) => handleDragKeyDown(event, onSelect),
-                  'aria-selected': isSelected,
                   'aria-keyshortcuts': draggableAriaKeyshortcuts,
                   'aria-label': isSelected
                     ? 'Contenu sélectionnée pour réorganisation'
@@ -198,6 +197,7 @@ const DraggableContentEdition = React.forwardRef(
         </Reorder.Item>
         {index !== count - 1 && (
           <AddContent
+            as="li"
             ref={contentFormButtonRef}
             resource={resource}
             sendCommand={sendCommand}

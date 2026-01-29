@@ -37,6 +37,7 @@ const CollectionCard = ({
           orientation === 'row' && styles.link,
           'fr-link--no-underline',
         )}
+        aria-label={`Voir les images de la collection ${collection.title}`}
       >
         <Images
           className={classNames(
@@ -60,7 +61,11 @@ const CollectionCard = ({
         )}
       >
         <div>
-          <Link href={href} data-testid="collection-card-link">
+          <Link
+            href={href}
+            data-testid="collection-card-link"
+            aria-label={`Consulter la collection ${collection.title}`}
+          >
             <h3 className={classNames(styles.title, 'fr-text--lg')}>
               {collection.title}
             </h3>
