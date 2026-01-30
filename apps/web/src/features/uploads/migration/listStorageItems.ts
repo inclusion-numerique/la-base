@@ -23,14 +23,17 @@ export type StoredItem = {
 
 const listItems = async ({
   bucket,
+  prefix,
   continuationToken,
 }: {
   bucket: string
+  prefix?: string
   continuationToken?: string
 }): Promise<{ items: StoredItem[]; nextContinuationToken?: string }> => {
   const response = await s3.send(
     new ListObjectsV2Command({
       Bucket: bucket,
+      Prefix: prefix,
       ContinuationToken: continuationToken,
     }),
   )
@@ -48,13 +51,16 @@ const listItems = async ({
   }
 }
 
-const recursiveListItems = async ({
+export const recursiveListItems = async ({
   bucket,
+  prefix,
 }: {
   bucket: string
+  prefix?: string
 }): Promise<{ items: StoredItem[] }> => {
   const initialKeys = await listItems({
     bucket,
+    prefix,
   })
 
   let items = initialKeys.items

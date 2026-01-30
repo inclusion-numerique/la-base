@@ -35,11 +35,43 @@ services:
     networks:
       - la-base-network
 
+  minio:
+    image: minio/minio:latest
+    container_name: la-base_minio
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - la-base-minio:/data
+    networks:
+      - la-base-network
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: la-base_minio-init
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 3;
+      mc alias set local http://minio:9000 minioadmin minioadmin;
+      mc mb --ignore-existing local/la-base-uploads;
+      mc anonymous set download local/la-base-uploads;
+      "
+    networks:
+      - la-base-network
+
 volumes:
   la-base-pgdata:
     name: la-base_pgdata
   la-base-legacydata:
     name: la-base_legacydata
+  la-base-minio:
+    name: la-base_minio
 
 networks:
   la-base-network:
