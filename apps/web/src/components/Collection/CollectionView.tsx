@@ -70,6 +70,7 @@ const CollectionView = ({
                     canWrite={isOwner || canWrite}
                     context="view"
                     resourcesCount={collection.resources.length}
+                    token={shareToken}
                   />
                 )}
               </div>
