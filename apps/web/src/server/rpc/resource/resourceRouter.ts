@@ -14,6 +14,10 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import { resourceAuthorizationTargetSelect } from '@app/web/authorization/models/resourceAuthorizationTargetSelect'
 import { prismaClient } from '@app/web/prismaClient'
+import {
+  createNotification,
+  createNotifications,
+} from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { getResourceNotificationRecipients } from '@app/web/server/notifications/getResourceNotificationRecipients'
 import { SendResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/sendResourceFeedbackComment'
 import { UpdateResourceFeedbackCommentValidation } from '@app/web/server/resourceFeedbackComment/updateResourceFeedbackComment'
@@ -138,29 +142,28 @@ export const resourceRouter = router({
       )
 
       if (recipientUserIds.length > 0) {
-        let notificationType: NotificationType
+        let notificationType: NotificationType | null = null
 
         if (command.name === 'Delete') {
           notificationType = 'ResourceDeletion'
         } else if (command.name === 'Publish') {
           notificationType = 'ResourcePublication'
-        } else {
+        } else if (command.name === 'Republish') {
           notificationType = 'ResourceModification'
         }
+        // Autres mutations (Edit, AddContent, etc.) → pas de notification
 
-        await Promise.all(
-          recipientUserIds.map((userId) =>
-            prismaClient.notification.create({
-              data: {
-                userId,
-                type: notificationType,
-                resourceId: resource.id,
-                initiatorId: user.id,
-                baseId: resource.baseId,
-              },
-            }),
-          ),
-        )
+        if (notificationType) {
+          await createNotifications(
+            recipientUserIds.map((userId) => ({
+              userId,
+              type: notificationType,
+              resourceId: resource.id,
+              initiatorId: user.id,
+              baseId: resource.baseId,
+            })),
+          )
+        }
       }
 
       return result
@@ -360,13 +363,11 @@ export const resourceRouter = router({
       })
 
       if (resource.createdById !== user.id) {
-        await prismaClient.notification.create({
-          data: {
-            userId: resource.createdById,
-            type: 'ResourceFeedback',
-            resourceId: input.resourceId,
-            initiatorId: user.id,
-          },
+        await createNotification({
+          userId: resource.createdById,
+          type: 'ResourceFeedback',
+          resourceId: input.resourceId,
+          initiatorId: user.id,
         })
       }
 
@@ -438,13 +439,11 @@ export const resourceRouter = router({
       }
 
       if (notificationUserId) {
-        await prismaClient.notification.create({
-          data: {
-            userId: notificationUserId,
-            type: 'ResourceComment',
-            resourceId: feedback.resource.id,
-            initiatorId: user.id,
-          },
+        await createNotification({
+          userId: notificationUserId,
+          type: 'ResourceComment',
+          resourceId: feedback.resource.id,
+          initiatorId: user.id,
         })
       }
     }),

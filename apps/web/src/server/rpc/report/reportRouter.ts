@@ -3,6 +3,7 @@ import {
   ResourceReportValidation,
   UpdateResourceReportValidation,
 } from '@app/web/resources/resourceReport'
+import { createNotification } from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { sendResourceModerationEmail } from '@app/web/server/report/sendResourceModerationEmail'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
 import {
@@ -110,13 +111,11 @@ export const reportRouter = router({
           },
         })
 
-        await prismaClient.notification.create({
-          data: {
-            userId: resource.createdById,
-            initiatorId: user.id,
-            type: 'ReportedResource',
-            resourceId: resource.id,
-          },
+        await createNotification({
+          userId: resource.createdById,
+          initiatorId: user.id,
+          type: 'ReportedResource',
+          resourceId: resource.id,
         })
 
         // Send notification email to resource creator
