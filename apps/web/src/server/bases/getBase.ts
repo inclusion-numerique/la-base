@@ -295,9 +295,10 @@ export const getBaseResourcesPaginated = async (
   baseId: string,
   user: Pick<SessionUser, 'id'> | null,
   paginationParams: PaginationParams,
+  isFromShareableLink = false,
 ) => {
   const baseWhere = {
-    ...computeResourcesListWhereForUser(user),
+    ...computeResourcesListWhereForUser(user, {}, isFromShareableLink),
     baseId,
   }
 
@@ -340,9 +341,10 @@ export const getBaseResourcesCount = async (
   baseId: string,
   user: Pick<SessionUser, 'id'> | null,
   searchTerm?: string,
+  isFromShareableLink = false,
 ) => {
   const baseWhere = {
-    ...computeResourcesListWhereForUser(user),
+    ...computeResourcesListWhereForUser(user, {}, isFromShareableLink),
     baseId,
   }
 

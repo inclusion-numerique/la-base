@@ -984,7 +984,7 @@ model ShareableLink {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String @map("created_by_id") @db.Uuid
 
-  accessCount Int @default(0)
+  accessCount Int @default(0) @map("access_count")
 
   created DateTime @default(now())
   updated DateTime @default(now())

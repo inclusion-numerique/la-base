@@ -60,6 +60,7 @@ export const getBasePageContext = cache(
       base,
       authorization,
       user,
+      isUsingShareToken,
     }
   },
 )

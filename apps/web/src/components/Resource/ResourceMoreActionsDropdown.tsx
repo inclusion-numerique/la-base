@@ -12,7 +12,7 @@ import type { SessionUser } from '../../auth/sessionUser'
 import OpenInviteContributorModalButton from './Contributors/OpenInviteContributorModalButton'
 import OpenDeleteResourceModalButton from './OpenDeleteResourceModalButton'
 import OpenSaveResourceInCollectionModalButton from './OpenSaveResourceInCollectionModalButton'
-import styles from './ResourceMoreActionsDropDown.module.css'
+import styles from './ResourceMoreActionsDropdown.module.css'
 
 export const ResourceMoreActionsDropdown = ({
   resource,
