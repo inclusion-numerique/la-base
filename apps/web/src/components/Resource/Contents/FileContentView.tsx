@@ -1,12 +1,15 @@
+import ContentMetrics from '@app/web/components/Resource/Contents/ContentMetrics'
 import FileContentDetails from '@app/web/components/Resource/Contents/FileContentDetails'
 import type { ResourceContent } from '@app/web/server/resources/getResource'
 import styles from './FileContentView.module.css'
 
 const FileContentView = ({
-  content: { title, file, caption },
+  content: { id, title, file, caption, fileDownloadCount, filePreviewCount },
 }: {
-  content: Pick<ResourceContent, 'title' | 'caption'> & {
+  content: Pick<ResourceContent, 'id' | 'title' | 'caption'> & {
     file: Exclude<ResourceContent['file'], null>
+    fileDownloadCount?: number | null
+    filePreviewCount?: number | null
   }
 }) => (
   <div data-testid="content-file">
@@ -14,8 +17,13 @@ const FileContentView = ({
       {title}
     </h2>
     <div className={styles.fileContainer}>
-      <FileContentDetails file={file} />
+      <FileContentDetails file={file} contentId={id} />
     </div>
+    <ContentMetrics
+      type="file"
+      downloadCount={fileDownloadCount ?? null}
+      previewCount={filePreviewCount ?? null}
+    />
     {!!caption && <p className="fr-mb-0 fr-mt-4v fr-text--sm">{caption}</p>}
   </div>
 )

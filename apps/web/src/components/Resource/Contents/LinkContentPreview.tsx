@@ -9,14 +9,21 @@ const LinkContentPreview = ({
   url,
   imageUrl,
   faviconUrl,
+  onLinkClick,
 }: {
   title?: string | null
   description?: string | null
   url: string
   imageUrl?: string | null
   faviconUrl?: string | null
+  onLinkClick?: () => void
 }) => (
-  <Link href={url} target="_blank" className={styles.linkPreview}>
+  <Link
+    href={url}
+    target="_blank"
+    className={styles.linkPreview}
+    onClick={onLinkClick}
+  >
     <div className={styles.contents} data-testid="link-preview">
       {(!!title || !!description) && (
         <div className={styles.titleAndDescription}>

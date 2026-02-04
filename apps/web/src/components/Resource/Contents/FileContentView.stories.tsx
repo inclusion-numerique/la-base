@@ -32,6 +32,9 @@ export const Desktop: Story = {
         key: 'file-key',
         mimeType: 'application/pdf',
       },
+      id: 'file-id',
+      fileDownloadCount: 10,
+      filePreviewCount: 5,
       caption:
         'Cras gravida dolor volutpat orci eleifend, sit amet lacinia mi egestas. Vivamus non lorem vitae justo rhoncus tincidunt. Nulla pulvinar nisi vitae odio elementum, nec sollicitudin dui dapibus.',
     },

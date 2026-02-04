@@ -1,16 +1,16 @@
 import FileContentView from '@app/web/components/Resource/Contents/FileContentView'
 import ImageContentView from '@app/web/components/Resource/Contents/ImageContentView'
+import type { ResourceContent } from '@app/web/server/resources/getResource'
 import type { ContentProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import * as Sentry from '@sentry/nextjs'
 import LinkContentView from './LinkContentView'
 import SectionTitleContentView from './SectionTitleContentView'
 import TextContentView from './TextContentView'
 
-const ResourceContentView = ({
-  content,
-}: {
-  content: ContentProjectionWithContext
-}) => {
+// Accept both ContentProjectionWithContext (from events) and ResourceContent (from database)
+type ContentViewProps = ContentProjectionWithContext | ResourceContent
+
+const ResourceContentView = ({ content }: { content: ContentViewProps }) => {
   const { type, image, file, id } = content
   switch (type) {
     case 'Text': {
