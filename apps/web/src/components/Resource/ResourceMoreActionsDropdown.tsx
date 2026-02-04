@@ -1,5 +1,7 @@
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
+import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import type { BaseResource } from '@app/web/server/bases/getBase'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
@@ -25,6 +27,8 @@ export const ResourceMoreActionsDropdown = ({
   size = 'small',
   copyLink = true,
   canWrite = false,
+  context = 'view',
+  shareToken,
 }: {
   resource: BaseResource | Resource
   user?: SessionUser | null
@@ -37,6 +41,8 @@ export const ResourceMoreActionsDropdown = ({
   size?: ButtonProps['size']
   copyLink?: boolean
   canWrite?: boolean
+  context?: 'view' | 'card'
+  shareToken?: string
 }) => (
   <Dropdown
     id={`more_actions_for_${resource.slug}`}
@@ -97,6 +103,21 @@ export const ResourceMoreActionsDropdown = ({
           </CopyLinkButton>
         </li>
       )}
+      {context === 'card' &&
+        canWrite &&
+        resource.published &&
+        !resource.isPublic &&
+        user && (
+          <li className={styles.border}>
+            <OpenShareLinkModalButton type="resource" resource={resource}>
+              <span
+                className="ri-link fr-mr-1w fr-text-label--blue-france"
+                aria-hidden
+              />
+              Partager un lien
+            </OpenShareLinkModalButton>
+          </li>
+        )}
       {canWrite && resource.published && (
         <li className={styles.border}>
           <Link
@@ -126,7 +147,10 @@ export const ResourceMoreActionsDropdown = ({
         <li className={styles.border}>
           <Link
             className="fr-btn fr-btn--sm"
-            href={`/ressources/${resource.slug}/avis`}
+            href={appendShareToken(
+              `/ressources/${resource.slug}/avis`,
+              shareToken,
+            )}
           >
             <span
               className="ri-emotion-line fr-mr-1w fr-text-label--blue-france"

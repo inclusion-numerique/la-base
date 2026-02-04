@@ -187,6 +187,8 @@ const ResourceCard = ({
                 <span className="ri-edit-line" aria-hidden />
               </Button>
               <ResourceMoreActionsDropdown
+                context="card"
+                user={user}
                 modalControlClassName="ri-lg"
                 dropdownControlClassName="fr-text--bold"
                 resource={resource}
@@ -209,7 +211,7 @@ const ResourceCard = ({
               <CopyLinkButton
                 size="small"
                 priority="tertiary no outline"
-                url={copyLinkUrl}
+                url={appendShareToken(copyLinkUrl, shareToken)}
               />
             </>
           )}

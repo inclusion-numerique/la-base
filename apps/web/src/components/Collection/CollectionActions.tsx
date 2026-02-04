@@ -1,5 +1,6 @@
 import { CollectionMoreActionsDropdown } from '@app/web/components/Collection/CollectionMoreActionsDropdown'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import classNames from 'classnames'
 
@@ -9,6 +10,7 @@ const CollectionActions = ({
   className,
   context,
   resourcesCount,
+  token,
 }: {
   collection: {
     isPublic: boolean
@@ -23,6 +25,7 @@ const CollectionActions = ({
   context: 'view' | 'card' | 'contextModal'
   className?: string
   resourcesCount: number
+  token?: string
 }) => (
   <div className={classNames('fr-flex fr-flex-gap-2v', className)}>
     {canWrite && (
@@ -38,9 +41,12 @@ const CollectionActions = ({
       size="small"
       title="Copier le lien"
       priority={context === 'view' ? 'secondary' : 'tertiary no outline'}
-      url={getServerUrl(`/collections/${collection.slug}`, {
-        absolutePath: true,
-      })}
+      url={appendShareToken(
+        getServerUrl(`/collections/${collection.slug}`, {
+          absolutePath: true,
+        }),
+        token,
+      )}
     />
   </div>
 )

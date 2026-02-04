@@ -106,6 +106,7 @@ const CollectionCard = ({
                 canWrite={canWrite}
                 context="card"
                 resourcesCount={resourcesCount}
+                token={token}
               />
             )}
           </div>

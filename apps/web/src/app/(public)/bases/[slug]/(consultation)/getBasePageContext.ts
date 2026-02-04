@@ -27,6 +27,7 @@ export const getBasePageContext = cache(
       paginationParams,
     )
     let isUsingShareToken = false
+    let shareToken: string | undefined
 
     if (isShareableLinkToken(baseSlug)) {
       const tokenResult = await resolveShareableLinkToken(baseSlug, 'base')
@@ -41,6 +42,7 @@ export const getBasePageContext = cache(
         true,
       )
       isUsingShareToken = true
+      shareToken = baseSlug
       await updateShareableLinkAccessCount(tokenResult.id)
     }
 
@@ -61,6 +63,7 @@ export const getBasePageContext = cache(
       authorization,
       user,
       isUsingShareToken,
+      shareToken,
     }
   },
 )

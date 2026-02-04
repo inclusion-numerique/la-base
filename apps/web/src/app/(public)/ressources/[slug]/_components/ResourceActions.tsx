@@ -87,7 +87,14 @@ const ResourceActions = ({
                 })}
               />
             ) : (
-              <OpenShareLinkModalButton type="resource" resource={resource} />
+              canWrite &&
+              user && (
+                <OpenShareLinkModalButton
+                  type="resource"
+                  resource={resource}
+                  className="fr-unhidden-sm fr-hidden"
+                />
+              )
             )}
           </>
         )}
