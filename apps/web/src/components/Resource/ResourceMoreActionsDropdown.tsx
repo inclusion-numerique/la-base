@@ -1,6 +1,5 @@
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
-import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
 import type { BaseResource } from '@app/web/server/bases/getBase'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
@@ -110,17 +109,6 @@ export const ResourceMoreActionsDropdown = ({
             />
             Modifier les paramètres
           </Link>
-        </li>
-      )}
-      {canWrite && resource.published && !resource.isPublic && (
-        <li className={styles.border}>
-          <OpenShareLinkModalButton type="resource" resource={resource}>
-            <span
-              className="ri-link fr-mr-1w fr-text-label--blue-france"
-              aria-hidden
-            />
-            Partager via un lien
-          </OpenShareLinkModalButton>
         </li>
       )}
       {canWrite && (

@@ -2,6 +2,7 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { ResourceMoreActionsDropdown } from '@app/web/components/Resource/ResourceMoreActionsDropdown'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
+import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -76,14 +77,18 @@ const ResourceActions = ({
             >
               {showEditActions ? undefined : 'Enregistrer'}
             </SaveResourceInCollectionButton>
-            <CopyLinkButton
-              className="fr-unhidden-sm fr-hidden"
-              size="small"
-              priority="secondary"
-              url={getServerUrl(`/ressources/${resource.slug}`, {
-                absolutePath: true,
-              })}
-            />
+            {resource.isPublic ? (
+              <CopyLinkButton
+                className="fr-unhidden-sm fr-hidden"
+                size="small"
+                priority="secondary"
+                url={getServerUrl(`/ressources/${resource.slug}`, {
+                  absolutePath: true,
+                })}
+              />
+            ) : (
+              <OpenShareLinkModalButton type="resource" resource={resource} />
+            )}
           </>
         )}
       </div>
