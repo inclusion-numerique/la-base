@@ -109,7 +109,7 @@ const ResourceIndexationView = ({
             {tags.map((tag) => {
               if (slug === 'themes') {
                 const category = themeCategories[tag.slug as Theme] as Category
-                const className = CATEGORY_VARIANTS_TAG[category].unselected
+                const className = CATEGORY_VARIANTS_TAG[category].default
                 const categoryIconClassName = classNames(
                   CATEGORY_VARIANTS[category].icon,
                   CATEGORY_VARIANTS[category].color,

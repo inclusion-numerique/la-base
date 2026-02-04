@@ -192,7 +192,7 @@ const SearchFilters = ({
           <div className={styles.selected}>
             {themeCategories.map((category) => {
               const className =
-                CATEGORY_VARIANTS_TAG[category as ThemeCategory].unselected
+                CATEGORY_VARIANTS_TAG[category as ThemeCategory].default
               const categoryIconClassName = classNames(
                 CATEGORY_VARIANTS[category as ThemeCategory].icon,
                 CATEGORY_VARIANTS[category as ThemeCategory].color,

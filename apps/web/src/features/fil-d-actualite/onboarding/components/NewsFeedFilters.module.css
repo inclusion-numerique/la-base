@@ -23,13 +23,22 @@
   white-space: nowrap;
 }
 
+/* Ajouter hover pour les boutons de titre et l'icône dropdown */
+.linkButton:hover,
+.absoluteButton:hover {
+  background-color: var(--background-alt-blue-france);
+  border-radius: 8px;
+}
+
+/* État sélectionné */
 .activeButton {
   font-weight: 700;
   border-radius: 8px;
-  color: var(--artwork-minor-blue-france) !important;
+  color: var(--text-title-blue-france) !important;
   background-color: var(--background-alt-blue-france) !important;
 }
 
+/* État sélectionné + hover */
 .activeButton:hover {
   background-color: var(--background-contrast-info) !important;
 }

@@ -47,6 +47,7 @@ export const NewsFeedSearchFilters = async ({
         className={classNames(
           !hasActiveFilters && styles.activeButton,
           'fr-width-full fr-text-mention--black fr-text--start',
+          styles.button,
         )}
         linkProps={{ href: createDefaultUrl() }}
       >

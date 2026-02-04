@@ -130,7 +130,10 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                 <div className="fr-flex fr-flex-wrap fr-flex-gap-2v fr-mt-4v">
                   {displaySelected.map((selected) => {
                     const category = selected.option.extra?.category as Category
-                    const className = CATEGORY_VARIANTS_TAG[category].unselected
+                    const className = classNames(
+                      CATEGORY_VARIANTS_TAG[category].default,
+                      CATEGORY_VARIANTS_TAG[category].hover,
+                    )
                     const categoryIconClassName = classNames(
                       CATEGORY_VARIANTS[category].icon,
                       CATEGORY_VARIANTS[category].color,
