@@ -8,6 +8,7 @@ export const date = new Date('2023-01-31')
 export const updated = new Date('2023-02-03')
 
 export const resource = {
+  shareableLink: null,
   id: '7a7a8e12-3fdb-4485-8f9d-112bce55d302',
   title:
     'Titre d’une ressource sur deux ligne très longues comme comme sur deux ligne très longues',

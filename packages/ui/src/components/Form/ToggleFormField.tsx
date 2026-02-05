@@ -16,6 +16,7 @@ export type ToggleFormFieldProps<T extends FieldValues> = {
   checkedLabel?: string | null
   uncheckedLabel?: string | null
   labelPosition?: 'right' | 'left'
+  showCheckedHint?: boolean
   classes?: {
     fieldsetElement?: string
   }
@@ -33,6 +34,7 @@ const ToggleFormField = <T extends FieldValues>({
   checkedLabel = 'Activé',
   uncheckedLabel = 'Désactivé',
   labelPosition,
+  showCheckedHint = true,
   'data-testid': dataTestId,
   classes,
 }: UiComponentProps & ToggleFormFieldProps<T>) => {
@@ -103,8 +105,10 @@ const ToggleFormField = <T extends FieldValues>({
                   <label
                     className="fr-toggle__label"
                     htmlFor={id}
-                    data-fr-checked-label={checkedLabel}
-                    data-fr-unchecked-label={uncheckedLabel}
+                    {...(showCheckedHint && {
+                      'data-fr-checked-label': checkedLabel,
+                      'data-fr-unchecked-label': uncheckedLabel,
+                    })}
                   >
                     {label} {asterisk && <RedAsterisk />}
                   </label>

@@ -1,6 +1,9 @@
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { Dropdown } from '@app/web/components/Dropdown/Dropdown'
-import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
+import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
+import type { BaseResource } from '@app/web/server/bases/getBase'
+import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
@@ -10,7 +13,7 @@ import type { SessionUser } from '../../auth/sessionUser'
 import OpenInviteContributorModalButton from './Contributors/OpenInviteContributorModalButton'
 import OpenDeleteResourceModalButton from './OpenDeleteResourceModalButton'
 import OpenSaveResourceInCollectionModalButton from './OpenSaveResourceInCollectionModalButton'
-import styles from './ResourceMoreActionsDropDown.module.css'
+import styles from './ResourceMoreActionsDropdown.module.css'
 
 export const ResourceMoreActionsDropdown = ({
   resource,
@@ -24,8 +27,10 @@ export const ResourceMoreActionsDropdown = ({
   size = 'small',
   copyLink = true,
   canWrite = false,
+  context = 'view',
+  shareToken,
 }: {
-  resource: ResourceListItem
+  resource: BaseResource | Resource
   user?: SessionUser | null
   priority?: ButtonProps['priority']
   modalPriority?: ButtonProps['priority']
@@ -36,6 +41,8 @@ export const ResourceMoreActionsDropdown = ({
   size?: ButtonProps['size']
   copyLink?: boolean
   canWrite?: boolean
+  context?: 'view' | 'card'
+  shareToken?: string
 }) => (
   <Dropdown
     id={`more_actions_for_${resource.slug}`}
@@ -77,7 +84,7 @@ export const ResourceMoreActionsDropdown = ({
           </OpenSaveResourceInCollectionModalButton>
         </li>
       )}
-      {copyLink && (
+      {copyLink && resource.isPublic && (
         <li className={styles.border}>
           <CopyLinkButton
             size="small"
@@ -96,6 +103,21 @@ export const ResourceMoreActionsDropdown = ({
           </CopyLinkButton>
         </li>
       )}
+      {context === 'card' &&
+        canWrite &&
+        resource.published &&
+        !resource.isPublic &&
+        user && (
+          <li className={styles.border}>
+            <OpenShareLinkModalButton type="resource" resource={resource}>
+              <span
+                className="ri-link fr-mr-1w fr-text-label--blue-france"
+                aria-hidden
+              />
+              Partager un lien
+            </OpenShareLinkModalButton>
+          </li>
+        )}
       {canWrite && resource.published && (
         <li className={styles.border}>
           <Link
@@ -125,7 +147,10 @@ export const ResourceMoreActionsDropdown = ({
         <li className={styles.border}>
           <Link
             className="fr-btn fr-btn--sm"
-            href={`/ressources/${resource.slug}/avis`}
+            href={appendShareToken(
+              `/ressources/${resource.slug}/avis`,
+              shareToken,
+            )}
           >
             <span
               className="ri-emotion-line fr-mr-1w fr-text-label--blue-france"

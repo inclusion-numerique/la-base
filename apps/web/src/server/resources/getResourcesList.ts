@@ -65,6 +65,12 @@ export const resourceListSelect = (user: { id: string } | null) =>
         contributorId: user?.id,
       },
     },
+    shareableLink: {
+      select: {
+        id: true,
+        enabled: true,
+      },
+    },
     base: {
       select: {
         id: true,
@@ -109,15 +115,27 @@ export const resourceListSelect = (user: { id: string } | null) =>
 export const computeResourcesListWhereForUser = (
   user?: Pick<SessionUser, 'id'> | null,
   where: Prisma.ResourceWhereInput = {},
+  isFromShareableLink = false,
 ): Prisma.ResourceWhereInput => {
   const whereResourceIsPublic = {
     isPublic: true,
   }
 
+  // Sharelink token grants access to published resources regardless of visibility / if user connected or not / user base member or not
+  const whereResourceIsAccessibleViaShareToken = isFromShareableLink
+    ? {
+        published: { not: null },
+      }
+    : {}
+
   const authorizationWhere: Prisma.ResourceWhereInput = user
     ? {
         OR: [
           whereResourceIsPublic,
+          // Share token access to published resources
+          ...(isFromShareableLink
+            ? [whereResourceIsAccessibleViaShareToken]
+            : []),
           // Public or created by user AND (no base OR still member of base)
           {
             AND: [
@@ -160,7 +178,9 @@ export const computeResourcesListWhereForUser = (
           },
         ],
       }
-    : whereResourceIsPublic
+    : isFromShareableLink
+      ? whereResourceIsAccessibleViaShareToken
+      : whereResourceIsPublic
 
   const baseNotDeleted: Prisma.ResourceWhereInput = {
     OR: [

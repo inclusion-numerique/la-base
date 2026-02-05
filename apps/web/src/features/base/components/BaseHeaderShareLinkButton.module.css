@@ -1,0 +1,11 @@
+.enabledBadge {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: -8px;
+  right: -8px;
+}
+
+.enabledBadgeIcon::before {
+  color: white;
+}

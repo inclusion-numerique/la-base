@@ -9,11 +9,18 @@ export const getServerBaseUrl = (options?: GetServerUrlOptions) => {
     // browser can use relative path
     return ''
   }
+
+  // Client-side with absolutePath: use window.location.origin
+  if (isBrowser && options?.absolutePath) {
+    return window.location.origin
+  }
+
+  // Server-side: use BASE_URL env var
   if (process.env.BASE_URL) {
     return `https://${process.env.BASE_URL}`
   }
 
-  // assume localhost
+  // assume localhost (dev)
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
 

@@ -11,12 +11,12 @@ const BaseAProposPage = async ({
   const user = await getSessionUser()
 
   const { slug } = await params
-  const { base } = await getBasePageContext(slug)
+  const { base, shareToken } = await getBasePageContext(slug)
 
   return (
     <>
       <BaseDetails base={base} />
-      <BaseHomePageHighlights base={base} user={user} />
+      <BaseHomePageHighlights base={base} user={user} shareToken={shareToken} />
     </>
   )
 }

@@ -8,6 +8,7 @@ import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import ResourcesViewsAndMetadata from '@app/web/components/Resource/ResourcesViewsAndMetadata'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { getResourceAttributionWording } from '@app/web/utils/getResourceAttributionWording'
 import { hasIndexation } from '@app/web/utils/indexation'
@@ -29,11 +30,13 @@ const ResourceView = ({
   user,
   canDelete,
   canWrite,
+  shareableLinkId,
 }: {
   resource: Resource
   user: SessionUser | null
   canWrite: boolean
   canDelete: boolean
+  shareableLinkId?: string
 }) => {
   const hasInformationSection = resource.isPublic || hasIndexation(resource)
   const contentsWithAnchor = addAnchorIdsToResourceContents(resource.contents)
@@ -129,6 +132,7 @@ const ResourceView = ({
               resource={resource}
               user={user}
               canWrite={canWrite}
+              shareableLinkId={shareableLinkId}
             />
             <ResourceMobileNavigation navigationData={navigationData} />
           </div>
@@ -152,6 +156,7 @@ const ResourceView = ({
         </div>
         {!!user && <SaveResourceInCollectionModal user={user} />}
         <InviteContributorModal />
+        <ShareLinkModal />
         {canDelete && (
           <DeleteResource
             redirectTo={
