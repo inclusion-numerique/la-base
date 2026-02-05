@@ -4,6 +4,7 @@ import { sendBaseJoinRequestEmail } from '@app/web/features/base/join-requests/e
 import { sendJoinRequestAcceptedEmail } from '@app/web/features/base/join-requests/emails/sendJoinRequestAcceptedEmail'
 import { sendJoinRequestRejectedEmail } from '@app/web/features/base/join-requests/emails/sendJoinRequestRejectedEmail'
 import { prismaClient } from '@app/web/prismaClient'
+import { createNotification } from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import {
   authorizeOrThrow,
@@ -120,13 +121,11 @@ export const baseJoinRequestRouter = router({
       )
 
       const notificationPromises = joinRequest.base.members.map((admin) =>
-        prismaClient.notification.create({
-          data: {
-            userId: admin.member.id,
-            type: 'AskJoinBase',
-            baseId: input.baseId,
-            initiatorId: user.id,
-          },
+        createNotification({
+          userId: admin.member.id,
+          type: 'AskJoinBase',
+          baseId: input.baseId,
+          initiatorId: user.id,
         }),
       )
       await Promise.all([...emailPromises, ...notificationPromises])
@@ -205,13 +204,11 @@ export const baseJoinRequestRouter = router({
         adminName: user.name || user.email,
       }).catch((error) => Sentry.captureException(error))
 
-      await prismaClient.notification.create({
-        data: {
-          userId: joinRequest.applicantId,
-          type: 'AcceptedAskJoinBase',
-          baseId: joinRequest.baseId,
-          initiatorId: user.id,
-        },
+      await createNotification({
+        userId: joinRequest.applicantId,
+        type: 'AcceptedAskJoinBase',
+        baseId: joinRequest.baseId,
+        initiatorId: user.id,
       })
 
       return newMember
@@ -263,13 +260,11 @@ export const baseJoinRequestRouter = router({
       }).catch((error) => Sentry.captureException(error))
 
       // Notify the applicant
-      await prismaClient.notification.create({
-        data: {
-          userId: joinRequest.applicantId,
-          type: 'DeclinedAskJoinBase',
-          baseId: joinRequest.baseId,
-          initiatorId: user.id,
-        },
+      await createNotification({
+        userId: joinRequest.applicantId,
+        type: 'DeclinedAskJoinBase',
+        baseId: joinRequest.baseId,
+        initiatorId: user.id,
       })
     }),
   remove: protectedProcedure

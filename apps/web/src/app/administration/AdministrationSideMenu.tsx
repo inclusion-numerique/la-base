@@ -36,6 +36,10 @@ const AdministrationSideMenu = ({ user }: { user: SessionUser }) => {
             },
             isActive: pathname?.startsWith('/administration/utilisateurs'),
           },
+        ]
+      : []),
+    ...(user.role === 'Admin' || user.role === 'Moderator'
+      ? [
           {
             text: (
               <>

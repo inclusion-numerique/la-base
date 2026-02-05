@@ -238,6 +238,35 @@ const NOTIFICATION_TEXTS = {
       </Link>
     </>
   ),
+  ResourceReporting: (notification: NotificationWithRelations) => (
+    <>
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/profils/${notification.initiator?.slug}`}
+      >
+        {formatName(notification.initiator?.name || '')}
+      </Link>
+      &nbsp;a signalé la ressource&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/ressources/${notification.resource?.slug}`}
+      >
+        {notification.resource?.title}
+      </Link>
+    </>
+  ),
+  ReportResolved: (notification: NotificationWithRelations) => (
+    <>
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/profils/${notification.initiator?.slug}`}
+      >
+        {formatName(notification.initiator?.name || '')}
+      </Link>
+      &nbsp;a traité le signalement de la ressource&nbsp;
+      <span className="fr-text--bold">{notification.resource?.title}</span>
+    </>
+  ),
 } as const
 
 export const getNotificationText = (

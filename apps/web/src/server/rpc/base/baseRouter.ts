@@ -12,6 +12,7 @@ import {
   UpdateBaseCommandValidation,
   UpdateBaseImageCommandValidation,
 } from '@app/web/server/bases/updateBase'
+import { createNotifications } from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
@@ -227,17 +228,13 @@ export const baseRouter = router({
       })
 
       if (acceptedMembers.length > 0) {
-        await Promise.all(
-          acceptedMembers.map((member) =>
-            prismaClient.notification.create({
-              data: {
-                userId: member.memberId,
-                type: 'BaseDeletion',
-                baseId: input.id,
-                initiatorId: user.id,
-              },
-            }),
-          ),
+        await createNotifications(
+          acceptedMembers.map((member) => ({
+            userId: member.memberId,
+            type: 'BaseDeletion' as const,
+            baseId: input.id,
+            initiatorId: user.id,
+          })),
         )
       }
 

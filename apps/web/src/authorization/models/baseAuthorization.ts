@@ -77,6 +77,7 @@ export const getBasePermissions = (
   if (
     roles.includes('Admin') ||
     roles.includes('Support') ||
+    roles.includes('Moderator') ||
     roles.includes('BaseAdmin')
   ) {
     return basePermissions

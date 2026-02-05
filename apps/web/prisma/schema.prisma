@@ -948,6 +948,8 @@ enum NotificationType {
   AskJoinBase            @map("ask_join_base")
   AcceptedAskJoinBase    @map("accepted_ask_join_base")
   DeclinedAskJoinBase    @map("declined_ask_join_base")
+  ResourceReporting      @map("resource_reporting")
+  ReportResolved         @map("report_resolved")
 
   @@map("notification_type")
 }

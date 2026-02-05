@@ -3,6 +3,7 @@ import {
   type BasesDataTableSearchParams,
 } from '@app/web/app/administration/bases/BasesDataTable'
 import { queryBasesForList } from '@app/web/app/administration/bases/queryBasesForList'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { getDataTableOrderBy } from '@app/web/data-table/getDataTableOrderBy'
 import { takeAndSkipFromPage } from '@app/web/data-table/takeAndSkipFromPage'
 import { DEFAULT_PAGE, toNumberOr } from '@app/web/data-table/toNumberOr'
@@ -12,11 +13,13 @@ import type { Prisma } from '@prisma/client'
 
 type SearchBaseOptions = {
   searchParams: BasesDataTableSearchParams
+  user: SessionUser
 }
 
 const DEFAULT_PAGE_SIZE = 100
 
 export const searchBase = async (options: SearchBaseOptions) => {
+  const { user } = options
   const searchParams = options.searchParams ?? {}
 
   const orderBy = getDataTableOrderBy(searchParams, BasesDataTable)
@@ -34,6 +37,7 @@ export const searchBase = async (options: SearchBaseOptions) => {
           OR: [{ title: { contains: part, mode: 'insensitive' } }],
         })),
       },
+      ...(user.role === 'Moderator' ? [{ isPublic: true }] : []),
     ],
   } satisfies Prisma.ResourceWhereInput
 

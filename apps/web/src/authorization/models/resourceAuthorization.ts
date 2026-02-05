@@ -85,6 +85,7 @@ export const getResourcePermissions = (
   if (
     roles.includes(UserSecurityRoles.Admin) ||
     roles.includes(UserSecurityRoles.Support) ||
+    roles.includes(UserSecurityRoles.Moderator) ||
     roles.includes(ResourceRoles.ResourceCreator) ||
     roles.includes(ResourceRoles.ResourceContributor)
   ) {
