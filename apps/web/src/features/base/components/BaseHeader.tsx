@@ -93,6 +93,9 @@ const BaseHeader = ({
                               href: `mailto:${base.email}`,
                             }}
                           />
+                          <span className="fr-sr-only">
+                            Contacter par email
+                          </span>
                         </Tooltip>
                       </div>
                     )}

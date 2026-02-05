@@ -1,24 +1,30 @@
-import { ReactNode } from 'react'
+import { type AnchorHTMLAttributes, type ReactNode } from 'react'
 
 const ExternalLink = ({
   href,
   icon,
   children,
   ariaLabel,
+  className = 'fr-link',
+  ...rest
 }: {
   href: string | null
   icon?: string
   children: ReactNode
   ariaLabel?: string
-}) =>
+  className?: string
+} & Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  'href' | 'target' | 'rel' | 'className' | 'children'
+>) =>
   href ? (
     <a
       href={href}
-      className="fr-link"
-      rel="noreferrer"
+      className={className}
+      rel="noopener noreferrer"
       target="_blank"
       aria-label={ariaLabel}
-      title={ariaLabel || `${children} - nouvelle fenêtre`}
+      {...rest}
     >
       {icon && (
         <>
@@ -27,7 +33,9 @@ const ExternalLink = ({
         </>
       )}
       {children}
-      <span className="fr-sr-only"> - nouvelle fenêtre</span>
+      {!ariaLabel && (
+        <span className="fr-sr-only">Ouverture dans un nouvel onglet</span>
+      )}
     </a>
   ) : null
 

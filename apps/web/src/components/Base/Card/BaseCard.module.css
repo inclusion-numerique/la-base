@@ -19,6 +19,7 @@
 
 .imageLink {
   background: transparent !important;
+  flex-shrink: 0;
 }
 
 .content {
@@ -44,7 +45,6 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   word-break: break-word;
   overflow-wrap: break-word;
 }

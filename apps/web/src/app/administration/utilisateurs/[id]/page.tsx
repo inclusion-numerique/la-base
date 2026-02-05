@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
 import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
 import AdministrationInlineLabelsValues from '@app/web/app/administration/AdministrationInlineLabelsValues'
@@ -15,7 +16,6 @@ import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tag from '@codegouvfr/react-dsfr/Tag'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export const metadata = {
@@ -121,13 +121,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {
               label: 'Lien vers le profil',
               value: (
-                <Link
-                  href={`/profils/${slug}`}
-                  className="fr-link"
-                  target="_blank"
-                >
+                <ExternalLink href={`/profils/${slug}`} className="fr-link">
                   {profileUrl}
-                </Link>
+                </ExternalLink>
               ),
             },
 
@@ -158,9 +154,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {
               label: 'LinkedIn',
               value: linkedin ? (
-                <Link href={linkedin} target="_blank">
+                <ExternalLink href={linkedin} className="fr-link">
                   {linkedin}
-                </Link>
+                </ExternalLink>
               ) : (
                 '-'
               ),
@@ -168,9 +164,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {
               label: 'Site web',
               value: website ? (
-                <Link href={website} target="_blank">
+                <ExternalLink href={website} className="fr-link">
                   {website}
-                </Link>
+                </ExternalLink>
               ) : (
                 '-'
               ),
@@ -178,9 +174,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {
               label: 'Facebook',
               value: facebook ? (
-                <Link href={facebook} target="_blank">
+                <ExternalLink href={facebook} className="fr-link">
                   {facebook}
-                </Link>
+                </ExternalLink>
               ) : (
                 '-'
               ),
@@ -188,9 +184,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {
               label: 'Twitter',
               value: twitter ? (
-                <Link href={twitter} target="_blank">
+                <ExternalLink href={twitter} className="fr-link">
                   {twitter}
-                </Link>
+                </ExternalLink>
               ) : (
                 '-'
               ),
@@ -219,13 +215,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             items={bases.map((base) => ({
               label: base.title,
               value: (
-                <Link
-                  href={`/bases/${base.slug}`}
-                  className="fr-link"
-                  target="_blank"
-                >
+                <ExternalLink href={`/bases/${base.slug}`} className="fr-link">
                   {getServerUrl(`/bases/${base.slug}`)}
-                </Link>
+                </ExternalLink>
               ),
             }))}
           />

@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
@@ -17,7 +18,6 @@ import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodV
 import Button from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -139,14 +139,12 @@ const InviteBaseMemberButton = ({
             <div className="fr-flex fr-direction-column fr-flex-gap-4v">
               <span>{modalDescription}</span>
               <div className="fr-mb-4w">
-                <Link
+                <ExternalLink
                   className="fr-link"
                   href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   En savoir plus sur les rôles et les permissions ici
-                </Link>
+                </ExternalLink>
               </div>
             </div>
 

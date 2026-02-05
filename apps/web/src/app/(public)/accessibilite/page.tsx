@@ -1,13 +1,13 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: metadataTitle('Déclaration d’accessibilité'),
+  title: metadataTitle('Déclaration d\u2019accessibilité'),
 }
 const AccessibilityStatementPage = () => (
   <div className="fr-container">
@@ -18,30 +18,27 @@ const AccessibilityStatementPage = () => (
       id={contentId}
       className="fr-container landing-main-container fr-my-8w"
     >
-      <h1>Déclaration d’accessibilité</h1>
+      <h1>Déclaration d'accessibilité</h1>
       <p>
         Établie le <span>04 mars 2024</span>. Mis à jour le{' '}
         <span>31 juillet 2025</span>.
       </p>
       <p>
-        <span>Agence National de la Cohésion des Territoires</span> s’engage à
-        rendre son service accessible, conformément à l’article 47 de la loi n°
+        <span>Agence National de la Cohésion des Territoires</span> s'engage à
+        rendre son service accessible, conformément à l'article 47 de la loi n°
         2005-102 du 11 février 2005.
       </p>
       <p>
-        Cette déclaration d’accessibilité s’applique à{' '}
+        Cette déclaration d'accessibilité s'applique à{' '}
         <strong>{PublicWebAppConfig.projectTitle}</strong>.
       </p>
 
       <h2>Stratégie et plan d&apos;action</h2>
       <p>
         La stratégie d&apos;accessibilité suit{' '}
-        <Link
-          href="https://beta.gouv.fr/accessibilite/schema-pluriannuel"
-          target="_blank"
-        >
+        <ExternalLink href="https://beta.gouv.fr/accessibilite/schema-pluriannuel">
           le schéma pluriannuel 2024-2027 publié par Beta gouv.
-        </Link>
+        </ExternalLink>
       </p>
 
       <p>
@@ -65,10 +62,10 @@ const AccessibilityStatementPage = () => (
           <span data-printfilter="lowercase">non conforme</span>{' '}
         </strong>
         avec le{' '}
-        <abbr title="Référentiel général d’amélioration de l’accessibilité">
+        <abbr title="Référentiel général d'amélioration de l'accessibilité">
           RGAA
         </abbr>
-        . <span>Le site n’a encore pas été audité.</span>
+        . <span>Le site n'a encore pas été audité.</span>
       </p>
       <h2>Améliorations</h2>
       <p>
@@ -84,7 +81,7 @@ const AccessibilityStatementPage = () => (
       </ul>
       <h2>Contact</h2>
       <p>
-        Si vous n’arrivez pas à accéder à un contenu ou à un service, vous
+        Si vous n'arrivez pas à accéder à un contenu ou à un service, vous
         pouvez contacter le responsable de{' '}
         <span>{process.env.NEXT_PUBLIC_APP_NAME}</span> pour être orienté vers
         une alternative accessible ou obtenir le contenu sous une autre forme.
@@ -105,9 +102,9 @@ const AccessibilityStatementPage = () => (
       <h2>Voie de recours</h2>
       <p>
         Cette procédure est à utiliser dans le cas suivant&nbsp;: vous avez
-        signalé au responsable du site internet un défaut d’accessibilité qui
-        vous empêche d’accéder à un contenu ou à un des services du portail et
-        vous n’avez pas obtenu de réponse satisfaisante.
+        signalé au responsable du site internet un défaut d'accessibilité qui
+        vous empêche d'accéder à un contenu ou à un des services du portail et
+        vous n'avez pas obtenu de réponse satisfaisante.
       </p>
       <p>Vous pouvez&nbsp;:</p>
       <ul>
@@ -134,10 +131,10 @@ const AccessibilityStatementPage = () => (
       </ul>
       <hr />
       <p>
-        Cette déclaration d’accessibilité a été créée le{' '}
+        Cette déclaration d'accessibilité a été créée le{' '}
         <span>07 novembre 2022</span> grâce au{' '}
         <a href="https://betagouv.github.io/a11y-generateur-declaration/#create">
-          Générateur de Déclaration d’Accessibilité de BetaGouv
+          Générateur de Déclaration d'Accessibilité de BetaGouv
         </a>
         .
       </p>

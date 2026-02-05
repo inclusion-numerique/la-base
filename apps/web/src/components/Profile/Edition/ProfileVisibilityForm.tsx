@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import EditableCardForm from '@app/web/components/EditableCardForm'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import Visibility from '@app/web/components/Visibility'
@@ -13,7 +14,6 @@ import type { ResourceListItem } from '@app/web/server/resources/getResourcesLis
 import { trpc } from '@app/web/trpc'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -116,14 +116,12 @@ const ProfileVisibilityForm = ({
             Choisissez ce que les visiteurs peuvent voir sur votre page
             profil.&nbsp;
             <br className="fr-hidden-sm fr-unhidden" />
-            <Link
+            <ExternalLink
               href="https://docs.numerique.gouv.fr/docs/720a2a25-78ca-4182-9ea5-7db49bd39bd5/"
               className="fr-link fr-text--sm"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               En savoir plus
-            </Link>
+            </ExternalLink>
           </span>
         }
         form={form}

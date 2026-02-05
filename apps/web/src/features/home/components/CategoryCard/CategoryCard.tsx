@@ -38,11 +38,13 @@ export const CategoryCard = ({
   category,
   resourcesCount,
 }: CategoryCardProps) => (
-  <div
+  <Link
+    href={CATEGORY_VARIANTS[category].href}
+    aria-label={`Découvrir ${category}`}
     className={classNames(
       CATEGORY_VARIANTS_STYLES[category].background,
       CATEGORY_VARIANTS_STYLES[category].hover,
-      'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link',
+      'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link fr-link--no-underline',
     )}
   >
     <div className="fr-flex fr-direction-column fr-flex-gap-8v">
@@ -70,15 +72,12 @@ export const CategoryCard = ({
           <span className="fr-text--bold">{resourcesCount}</span> Ressources
         </div>
         <span>
-          <Link
-            href={CATEGORY_VARIANTS[category].href}
-            className="fr-link fr-text--lg"
-            aria-label={`Découvrir ${category}`}
-          >
-            <span className="ri-arrow-right-line ri-lg" aria-hidden />
-          </Link>
+          <span
+            className="fr-text-title--blue-france ri-arrow-right-line ri-lg"
+            aria-hidden
+          />
         </span>
       </div>
     </div>
-  </div>
+  </Link>
 )

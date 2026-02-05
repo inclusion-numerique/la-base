@@ -1,6 +1,6 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { licenceInformations } from '@app/web/features/resources/licence/licence-informations'
 import { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
-import Link from 'next/link'
 
 const ResourceLicenceInformations = ({
   resource,
@@ -13,13 +13,9 @@ const ResourceLicenceInformations = ({
       {information.symbols}
       <div className="fr-flex fr-flex-gap-2v fr-text--xs fr-mb-0">
         {information.url ? (
-          <Link
-            href={information.url}
-            target="_blank"
-            className="fr-link fr-text--xs"
-          >
+          <ExternalLink href={information.url} className="fr-link fr-text--xs">
             {information.title}
-          </Link>
+          </ExternalLink>
         ) : (
           <span>{information.title}</span>
         )}

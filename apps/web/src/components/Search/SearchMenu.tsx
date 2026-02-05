@@ -53,6 +53,7 @@ const SearchMenu = ({
               >
                 Ressources
                 <MenuCount count={resourcesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -66,6 +67,7 @@ const SearchMenu = ({
               >
                 Bases
                 <MenuCount count={basesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -79,6 +81,7 @@ const SearchMenu = ({
               >
                 Profils
                 <MenuCount count={profilesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
           </ul>

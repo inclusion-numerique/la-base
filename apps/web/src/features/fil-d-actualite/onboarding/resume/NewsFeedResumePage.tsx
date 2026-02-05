@@ -11,6 +11,7 @@ export default async function NewsFeedResumePage() {
     <div className="fr-flex fr-direction-column">
       <NewsFeedOnboardingHeader
         step={4}
+        previousAriaLabel="Précédent, retour à l'étape 3"
         title="Résumé mensuel des dernières publications"
         description="Soyez informé par mail en complément de votre fil d’actualité."
         previousHref="/fil-d-actualite/onboarding/bases"

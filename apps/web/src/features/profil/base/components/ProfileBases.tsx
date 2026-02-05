@@ -26,6 +26,7 @@ const ProfileBases = ({
           <IconInSquare iconId="ri-team-line" />
           <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
             {isOwner ? 'Mes bases' : 'Bases'} · {bases.length}
+            <span className="fr-sr-only"> bases</span>
           </h2>
         </div>
       </div>

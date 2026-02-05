@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import ResourcePublicStateBadge from '@app/web/app/(public)/ressources/[slug]/_components/ResourcePublicStateBadge'
 import AdministrationBreadcrumbs from '@app/web/app/administration/AdministrationBreadcrumbs'
 import AdministrationInfoCard from '@app/web/app/administration/AdministrationInfoCard'
@@ -11,7 +12,6 @@ import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export const metadata = {
@@ -115,13 +115,12 @@ const AdministrationRessourceDetailsPage = async ({
             {
               label: 'Lien vers la ressource',
               value: (
-                <Link
+                <ExternalLink
                   href={`/ressource/${resource.slug}`}
                   className="fr-link"
-                  target="_blank"
                 >
                   {resourceUrl}
-                </Link>
+                </ExternalLink>
               ),
             },
             {
@@ -156,13 +155,12 @@ const AdministrationRessourceDetailsPage = async ({
               {
                 label: 'Lien vers le profil',
                 value: (
-                  <Link
+                  <ExternalLink
                     href={`/profils/${resource.createdBy.slug}`}
                     className="fr-link"
-                    target="_blank"
                   >
                     {profileUrl}
-                  </Link>
+                  </ExternalLink>
                 ),
               },
             ]}
@@ -179,13 +177,12 @@ const AdministrationRessourceDetailsPage = async ({
                 {
                   label: 'Lien vers la base',
                   value: (
-                    <Link
+                    <ExternalLink
                       href={`/bases/${resource.base.slug}`}
                       className="fr-link"
-                      target="_blank"
                     >
                       {getServerUrl(`/bases/${resource.base.slug}`)}
-                    </Link>
+                    </ExternalLink>
                   ),
                 },
               ]}
@@ -206,13 +203,12 @@ const AdministrationRessourceDetailsPage = async ({
               items={resource.collections.map((collection) => ({
                 label: dateAsDay(collection.added),
                 value: (
-                  <Link
+                  <ExternalLink
                     href={`/collections/${collection.collection.slug}`}
                     className="fr-link"
-                    target="_blank"
                   >
                     {collection.collection.title}
-                  </Link>
+                  </ExternalLink>
                 ),
               }))}
             />
@@ -224,13 +220,12 @@ const AdministrationRessourceDetailsPage = async ({
               items={resource.contributors.map((contributor) => ({
                 label: dateAsDay(contributor.added),
                 value: (
-                  <Link
+                  <ExternalLink
                     href={`/profils/${contributor.contributor.slug}`}
                     className="fr-link"
-                    target="_blank"
                   >
                     {contributor.contributor.name}
-                  </Link>
+                  </ExternalLink>
                 ),
               }))}
             />

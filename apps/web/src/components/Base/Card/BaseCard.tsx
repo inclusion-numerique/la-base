@@ -21,36 +21,29 @@ const BaseCard = ({
   compact?: boolean
 }) => (
   <article
-    className={classNames(styles.container, className)}
+    className={classNames(styles.container, 'fr-enlarge-link', className)}
     data-testid="base-card"
   >
-    <Link
-      href={`/bases/${base.slug}`}
-      className={styles.imageLink}
-      aria-label={`Voir l'image de la base ${base.title}`}
-    >
+    <div className={styles.imageLink}>
       <BaseImage base={base} size={compact ? 48 : 96} />
-    </Link>
+    </div>
     <div className={styles.content}>
       <Link
         href={`/bases/${base.slug}`}
         className="fr-flex-grow-1 fr-link--no-underline"
-        aria-label={`Consulter la base ${base.title}`}
       >
         <span className="fr-text--bold fr-text--md fr-mb-0">{base.title}</span>
       </Link>
       <div className={styles.midContent}>
         {!compact && !!base.excerpt && (
-          <Link
-            href={`/bases/${base.slug}`}
+          <p
             className={classNames(
               'fr-mb-0 fr-mt-3v fr-text--sm',
               styles.exerpt,
             )}
-            aria-label={`Lire l'extrait de la base ${base.title}`}
           >
             {base.excerpt}
-          </Link>
+          </p>
         )}
         {!compact && base.department && (
           <p className="fr-text--sm fr-text-mention--grey fr-mb-0 fr-mt-3v">

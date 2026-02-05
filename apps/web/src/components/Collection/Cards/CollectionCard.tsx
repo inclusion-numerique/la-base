@@ -30,18 +30,12 @@ const CollectionCard = ({
     <article
       className={classNames(
         'fr-flex fr-direction-column fr-width-full fr-border fr-border-radius--8',
+        styles.card,
         orientation === 'row' && styles.row,
       )}
       data-testid="collection-card"
     >
-      <Link
-        href={href}
-        className={classNames(
-          orientation === 'row' && styles.link,
-          'fr-link--no-underline',
-        )}
-        aria-label={`Voir les images de la collection ${collection.title}`}
-      >
+      <div className={classNames(orientation === 'row' && styles.link)}>
         <Images
           className={classNames(
             orientation === 'row' && styles.imagesRowContainerRadius,
@@ -51,7 +45,7 @@ const CollectionCard = ({
           isFavoriteCollection={collection.isFavorites}
           resources={collection.resources.map(({ resource }) => resource)}
         />
-      </Link>
+      </div>
       <div
         className={classNames(
           styles.content,
@@ -66,8 +60,8 @@ const CollectionCard = ({
         <div>
           <Link
             href={href}
+            className={styles.titleLink}
             data-testid="collection-card-link"
-            aria-label={`Consulter la collection ${collection.title}`}
           >
             <h3 className={classNames(styles.title, 'fr-text--lg')}>
               {collection.title}
@@ -83,7 +77,12 @@ const CollectionCard = ({
           </Link>
         </div>
         {collection.slug && (
-          <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-mt-4v">
+          <div
+            className={classNames(
+              'fr-flex fr-justify-content-space-between fr-align-items-center fr-mt-4v',
+              styles.footer,
+            )}
+          >
             <CollectionMetaData
               className="fr-my-2v"
               collection={{

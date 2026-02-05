@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import NewsFeedBadge from '@app/web/features/fil-d-actualite/components/NewsFeedBadge'
@@ -34,16 +35,16 @@ const Header = ({
           <div className="fr-header__brand fr-enlarge-link">
             <div className="fr-header__brand-top">
               <div className="fr-header__logo">
-                <Link
-                  href="/"
-                  title={PublicWebAppConfig.projectTitle}
-                  className="fr-text--medium"
-                >
+                <Link href="/" className="fr-text--medium">
                   <LesBasesSvgLogo
                     style={{
                       verticalAlign: 'top',
                     }}
                   />
+                  <span className="fr-sr-only">
+                    {PublicWebAppConfig.projectTitle} - Retour à la page
+                    d&apos;accueil
+                  </span>
                 </Link>
               </div>
               <div className="fr-header__operator fr-pl-0">
@@ -115,7 +116,7 @@ const Header = ({
                           styles.newsFeedButton,
                         )}
                       >
-                        <span className="ri-flashlight-fill" />
+                        <span className="ri-flashlight-fill" aria-hidden />
                         <NewsFeedBadge
                           className={classNames(
                             styles.newsFeedIcon,
@@ -165,14 +166,11 @@ const Header = ({
                 </li>
                 {user && <HeaderUserMobileNotificationsButton />}
                 <li className="fr-px-md-0 fr-px-2w">
-                  <Link
+                  <ExternalLink
                     data-testid="help-center-link"
                     className="fr-btn fr-btn--no-after"
                     href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     aria-label="Aide - nouvelle fenêtre"
-                    title="Aide - nouvelle fenêtre"
                   >
                     <span
                       className="fr-hidden-lg ri-question-line fr-mr-1w fr-text-label--blue-france"
@@ -183,8 +181,7 @@ const Header = ({
                       className="fr-hidden fr-unhidden-lg ri-question-line fr-ml-1w fr-text-label--blue-france"
                       aria-hidden
                     />
-                    <span className="fr-sr-only"> - nouvelle fenêtre</span>
-                  </Link>
+                  </ExternalLink>
                 </li>
                 <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
                   <Tooltip title="Fil d'actualité">
@@ -201,7 +198,6 @@ const Header = ({
                             ? '/fil-d-actualite/onboarding'
                             : '/fil-d-actualite/tout'
                           : '/connexion?suivant=/fil-d-actualite/tout',
-                        'aria-label': "Fil d'actualité",
                       }}
                       size="small"
                     >
@@ -212,7 +208,7 @@ const Header = ({
                           styles.newsFeedButton,
                         )}
                       >
-                        <span className="ri-flashlight-fill" />
+                        <span className="ri-flashlight-fill" aria-hidden />
                         {user && (
                           <NewsFeedBadge className="fr-text--sm fr-text--bold" />
                         )}

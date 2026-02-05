@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
 import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
 import { ManageCollectionButton } from '@app/web/components/Collection/ManageCollectionButton'
@@ -6,7 +7,6 @@ import IconInSquare from '@app/web/components/IconInSquare'
 import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
 import classNames from 'classnames'
-import Link from 'next/link'
 import { type ReactNode } from 'react'
 import { CreateCollectionButton } from '../CreateCollectionButton'
 import styles from './Collections.module.css'
@@ -41,6 +41,7 @@ const Collections = ({
                 <IconInSquare iconId="ri-folder-2-line" />
                 <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
                   {collectionsLabel} · {collections.length}
+                  <span className="fr-sr-only"> collections</span>
                 </h2>
               </div>
             </div>
@@ -88,14 +89,12 @@ const Collections = ({
               <EmptyBox className="fr-flex fr-justify-content-center">
                 Créez une collection pour enregistrer et organiser des
                 ressources.
-                <Link
+                <ExternalLink
                   href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
                   className="fr-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   En savoir plus
-                </Link>
+                </ExternalLink>
                 <div className="fr-mt-4w">
                   <CreateCollectionButton />
                 </div>

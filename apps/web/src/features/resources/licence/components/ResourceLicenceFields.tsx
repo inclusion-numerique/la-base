@@ -1,10 +1,10 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
 import ResourceLicenceDescription from '@app/web/features/resources/licence/components/ResourceLicenceDescription'
 import { licenceWordings } from '@app/web/features/resources/licence/licence-wordings'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { ResourceLicence } from '@prisma/client'
-import Link from 'next/link'
 import React, { type ReactNode } from 'react'
 import {
   type Control,
@@ -37,15 +37,14 @@ const ResourceLicenceFields = <T extends FieldValues>({
           title={
             <span className="fr-text-default--grey fr-text--regular">
               Si votre structure employeuse et/ou si vous représentez une
-              administration publique, vous êtes dans l’obligation d'utiliser la
+              administration publique, vous êtes dans l'obligation d'utiliser la
               licence ouverte&nbsp;
-              <Link
+              <ExternalLink
                 href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
                 className="fr-link"
-                target="_blank"
               >
                 Etalab 2.0
-              </Link>
+              </ExternalLink>
             </span>
           }
         />

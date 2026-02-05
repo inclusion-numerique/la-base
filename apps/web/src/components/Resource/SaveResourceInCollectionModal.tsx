@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import RawModal from '@app/ui/components/Modal/RawModal'
@@ -24,7 +25,6 @@ import Notice from '@codegouvfr/react-dsfr/Notice'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import classNames from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type FormEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -557,14 +557,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   <p>
                     Créez une collection pour enregistrer, organiser, partager
                     facilement des ressources.&nbsp;
-                    <Link
+                    <ExternalLink
                       href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="fr-link"
                     >
                       En savoir plus
-                    </Link>
+                    </ExternalLink>
                   </p>
                   <div data-testid="create-resource-button">
                     <Button
@@ -606,14 +604,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 <p>
                   Créez une collection pour enregistrer, organiser, partager
                   facilement des ressources.&nbsp;
-                  <Link
+                  <ExternalLink
                     href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="fr-link"
                   >
                     En savoir plus
-                  </Link>
+                  </ExternalLink>
                 </p>
                 <div data-testid="create-resource-button">
                   <Button
