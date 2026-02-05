@@ -5,16 +5,23 @@ import AdministrationSearchBase from '@app/web/app/administration/bases/Administ
 import type { BasesDataTableSearchParams } from '@app/web/app/administration/bases/BasesDataTable'
 import BasesTable from '@app/web/app/administration/bases/BasesTable'
 import { getBasesListPageData } from '@app/web/app/administration/bases/getBasesListPageData'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { numberToString } from '@app/web/utils/formatNumber'
+import { redirect } from 'next/navigation'
 
 const AdministrationBasesPage = async ({
   searchParams,
 }: {
   searchParams: Promise<BasesDataTableSearchParams>
 }) => {
+  const user = await getSessionUser()
+  if (!user) {
+    redirect(`/connexion?suivant=/administration/bases`)
+  }
   const listParams = await searchParams
   const data = await getBasesListPageData({
     searchParams: listParams,
+    user,
   })
 
   return (

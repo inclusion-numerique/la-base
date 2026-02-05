@@ -62,14 +62,21 @@ export const resourceRouter = router({
     }),
   delete: protectedProcedure
     .input(z.object({ resourceId: z.string() }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx: { user } }) => {
       const resource = await prismaClient.resource.findUnique({
         where: { id: input.resourceId },
+        select: resourceAuthorizationTargetSelect,
       })
 
       if (!resource) {
         throw notFoundError()
       }
+
+      authorizeOrThrow(
+        resourceAuthorization(resource, user).hasPermission(
+          ResourcePermissions.DeleteResource,
+        ),
+      )
 
       const timestamp = new Date()
 

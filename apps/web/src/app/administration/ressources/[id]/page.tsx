@@ -116,7 +116,7 @@ const AdministrationRessourceDetailsPage = async ({
               label: 'Lien vers la ressource',
               value: (
                 <Link
-                  href={`/ressource/${resource.slug}`}
+                  href={`/ressources/${resource.slug}`}
                   className="fr-link"
                   target="_blank"
                 >
