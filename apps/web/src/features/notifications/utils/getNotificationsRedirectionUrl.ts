@@ -9,6 +9,9 @@ export const getNotificationRedirectionUrl = (
       return `/ressources/${notification.resource?.slug}/avis`
     case 'ReportedResource':
       return '/charte'
+    case 'ResourceReporting':
+    case 'ReportResolved':
+      return '/administration/signalements'
     case 'ResourceModification':
       return `/ressources/${notification.resource?.slug}`
     case 'AcceptedBaseInvitation':

@@ -3,7 +3,11 @@ import {
   ResourceReportValidation,
   UpdateResourceReportValidation,
 } from '@app/web/resources/resourceReport'
-import { createNotification } from '@app/web/server/notifications/createNotificationWithDeduplication'
+import {
+  createNotification,
+  createNotifications,
+} from '@app/web/server/notifications/createNotificationWithDeduplication'
+import { getAdminAndModeratorUserIds } from '@app/web/server/notifications/getAdminAndModeratorUserIds'
 import { sendResourceModerationEmail } from '@app/web/server/report/sendResourceModerationEmail'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
 import {
@@ -55,6 +59,16 @@ export const reportRouter = router({
           resource: report.resource,
           sentBy: report.sentBy,
         })
+
+        const adminAndModeratorIds = await getAdminAndModeratorUserIds(user.id)
+        await createNotifications(
+          adminAndModeratorIds.map((userId) => ({
+            userId,
+            type: 'ResourceReporting' as const,
+            initiatorId: user.id,
+            resourceId,
+          })),
+        )
 
         return report
       },
@@ -147,12 +161,33 @@ export const reportRouter = router({
     }),
   resolveReport: moderatorProcedure
     .input(z.object({ reportId: z.string() }))
-    .mutation(async ({ input: { reportId } }) => {
-      return prismaClient.resourceReport.update({
+    .mutation(async ({ input: { reportId }, ctx: { user } }) => {
+      const report = await prismaClient.resourceReport.findUnique({
+        where: { id: reportId },
+        include: { resource: { select: { id: true } } },
+      })
+
+      if (!report) {
+        throw notFoundError()
+      }
+
+      await prismaClient.resourceReport.update({
         where: { id: reportId },
         data: {
           processed: new Date(),
         },
       })
+
+      const adminAndModeratorIds = await getAdminAndModeratorUserIds(user.id)
+      await createNotifications(
+        adminAndModeratorIds.map((userId) => ({
+          userId,
+          type: 'ReportResolved' as const,
+          initiatorId: user.id,
+          resourceId: report.resource.id,
+        })),
+      )
+
+      return report
     }),
 })
