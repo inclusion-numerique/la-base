@@ -109,7 +109,16 @@ const BaseFollowersModal = ({
                         'fr-direction-row fr-justify-content-space-between fr-width-full',
                     )}
                   >
-                    <span className="fr-text--bold">{follower.name}</span>
+                    {follower.isPublic ? (
+                      <Link
+                        className={classNames('fr-text--bold', styles.link)}
+                        href={`/profils/${follower.slug}`}
+                      >
+                        {follower.name}
+                      </Link>
+                    ) : (
+                      <span className="fr-text--bold">{follower.name}</span>
+                    )}
                     <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
                       {follower.isPublic && (
                         <ProfileMetadata
@@ -147,12 +156,7 @@ const BaseFollowersModal = ({
                   follower.isPublic && styles.container,
                 )}
               >
-                <Link
-                  className={styles.link}
-                  href={`/profils/${follower.slug}`}
-                >
-                  {content}
-                </Link>
+                {content}
                 {follower.isPublic && (
                   <div>
                     <FollowButton

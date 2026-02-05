@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import Newsletter from '@app/web/app/(public)/Newsletter'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
@@ -40,18 +41,16 @@ const HomePage = async ({
             <p className="fr-text--xl fr-mb-6w">
               <span className="fr-display-block">
                 Inspirez-vous des outils, supports pédagogiques, articles, cas
-                d’usages, documentations diverses...
+                d'usages, documentations diverses...
               </span>
               <span className="fr-display-block">
-                partagés par des acteurs du numérique d’intérêt général.&nbsp;
-                <Link
+                partagés par des acteurs du numérique d'intérêt général.&nbsp;
+                <ExternalLink
                   className="fr-link fr-text--xl"
                   href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   En savoir plus
-                </Link>
+                </ExternalLink>
               </span>
             </p>
             <div className="fr-mb-6w fr-mb-md-10w">
@@ -98,8 +97,8 @@ const HomePage = async ({
               </h2>
               <span className="fr-mb-4w fr-mb-md-3w">
                 Consultez notre charte indiquant les principes qui guident la
-                construction d’un numérique d’intérêt général, ainsi que
-                certaines conditions que les créateurs de ressources s’engagent
+                construction d'un numérique d'intérêt général, ainsi que
+                certaines conditions que les créateurs de ressources s'engagent
                 à respecter.
               </span>
               <div>
@@ -119,15 +118,15 @@ const HomePage = async ({
           <h2 className="fr-h2 fr-text-title--blue-france fr-mb-2w">
             Une communauté engagée
             <br />
-            au service du numérique d’intérêt général
+            au service du numérique d'intérêt général
           </h2>
           <p className="fr-text--xl">
             <span className="fr-display-block">
-              Découvrez les acteurs du numérique d’intérêt général qui partagent
+              Découvrez les acteurs du numérique d'intérêt général qui partagent
               et publient leurs ressources pour
             </span>
             <span className="fr-display-block">
-              participer à l’évolution du secteur. Rejoignez la
+              participer à l'évolution du secteur. Rejoignez la
               communauté&nbsp;!
             </span>
           </p>
@@ -140,14 +139,9 @@ const HomePage = async ({
                 Une base représente une structure, un collectif qui souhaite
                 publier, partager et sélectionner des ressources relatives à son
                 activité, ses pratiques...{' '}
-                <Link
-                  className="fr-link"
-                  href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <ExternalLink href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/">
                   En savoir plus
-                </Link>
+                </ExternalLink>
                 .
               </p>
             </div>
@@ -258,7 +252,7 @@ const HomePage = async ({
                 />
                 <span>
                   <span className="fr-text--bold">Collaborez</span> avec
-                  d’autres créateurs grâce aux bases
+                  d'autres créateurs grâce aux bases
                 </span>
               </p>
               <p className="fr-flex fr-align-items-center">

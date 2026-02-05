@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { formatByteSize } from '@app/ui/utils/formatByteSize'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
@@ -55,60 +56,52 @@ const FileContentDetails = ({
         <span className="fr-hint-text">·&nbsp;{formatByteSize(size)}</span>
       </div>
       <div className={styles.actions}>
-        <a
+        <ExternalLink
           className={classNames(
             'fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
           )}
           href={getStorageUrl({ key })}
-          title="Télécharger le fichier"
+          ariaLabel="Télécharger le fichier"
           download={name}
-          target="_blank"
-          rel="noreferrer"
           onClick={handleDownloadClick}
         >
           Télécharger
-        </a>
-        <a
+        </ExternalLink>
+        <ExternalLink
           className={classNames(
             'fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
           )}
           href={getStorageUrl({ key })}
-          title="Télécharger le fichier"
+          ariaLabel="Télécharger le fichier"
           download={name}
-          target="_blank"
-          rel="noreferrer"
           onClick={handleDownloadClick}
         >
           Télécharger
-        </a>
+        </ExternalLink>
         {mimeTypesDisplayableInBrowser.has(mimeType) && (
           <>
-            <a
+            <ExternalLink
               className={classNames(
                 'fr-ml-1w fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
                 styles.externalLinkWithIcon,
               )}
               href={getStorageUrl({ key })}
-              title="Voir le fichier dans un nouvel onglet"
-              target="_blank"
-              rel="noreferrer"
+              ariaLabel="Voir le fichier dans un nouvel onglet"
               onClick={handlePreviewClick}
             >
               Aperçu
-            </a>
-            <a
+            </ExternalLink>
+            <ExternalLink
               className={classNames(
                 'fr-ml-1w fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-eye-line',
                 styles.externalLinkWithIcon,
               )}
               href={getStorageUrl({ key })}
-              title="Voir le fichier dans un nouvel onglet"
-              target="_blank"
-              rel="noreferrer"
+              ariaLabel="Voir le fichier dans un nouvel onglet"
               onClick={handlePreviewClick}
             >
               Aperçu
-            </a>
+            </ExternalLink>
           </>
         )}
       </div>

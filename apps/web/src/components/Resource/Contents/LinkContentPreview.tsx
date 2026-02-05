@@ -1,6 +1,6 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { externalImageLoader } from '@app/web/utils/externalImageLoader'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './LinkContentPreview.module.css'
 
 const LinkContentPreview = ({
@@ -18,17 +18,23 @@ const LinkContentPreview = ({
   faviconUrl?: string | null
   onLinkClick?: () => void
 }) => (
-  <Link
-    href={url}
-    target="_blank"
-    className={styles.linkPreview}
-    onClick={onLinkClick}
-  >
-    <div className={styles.contents} data-testid="link-preview">
+  <div className={styles.linkPreview}>
+    <div
+      className={classNames(styles.contents, 'fr-enlarge-link')}
+      data-testid="link-preview"
+    >
       {(!!title || !!description) && (
         <div className={styles.titleAndDescription}>
           {!!title && (
-            <p className={classNames('fr-text--bold', styles.title)}>{title}</p>
+            <p className={classNames('fr-text--bold', styles.title)}>
+              <ExternalLink
+                href={url}
+                className={styles.titleLink}
+                onClick={onLinkClick}
+              >
+                {title}
+              </ExternalLink>
+            </p>
           )}
           {!!description && (
             <p
@@ -59,6 +65,7 @@ const LinkContentPreview = ({
             )}
           />
         )}
+
         <p className={classNames('fr-mb-0', styles.url)}>{url}</p>
       </div>
     </div>
@@ -68,12 +75,11 @@ const LinkContentPreview = ({
           <img
             src={externalImageLoader({ src: imageUrl, width: 200 })}
             className={styles.image}
-            alt={title ?? ''}
           />
         </picture>
       </div>
     )}
-  </Link>
+  </div>
 )
 
 export default LinkContentPreview

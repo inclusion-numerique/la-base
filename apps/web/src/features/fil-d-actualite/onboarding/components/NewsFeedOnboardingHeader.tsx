@@ -6,6 +6,7 @@ import styles from './NewsFeedOnboardingHeader.module.css'
 const NewsFeedOnboardingHeader = ({
   step,
   title,
+  previousAriaLabel,
   nextStepTitle,
   description,
   noticeTitle,
@@ -13,6 +14,7 @@ const NewsFeedOnboardingHeader = ({
 }: {
   step: number
   title: string
+  previousAriaLabel?: string
   nextStepTitle?: string
   description: string
   noticeTitle?: string
@@ -25,7 +27,10 @@ const NewsFeedOnboardingHeader = ({
           iconId="fr-icon-arrow-left-line"
           title="Précédent"
           priority="tertiary no outline"
-          linkProps={{ href: previousHref }}
+          linkProps={{
+            href: previousHref,
+            ...(previousAriaLabel && { 'aria-label': previousAriaLabel }),
+          }}
         >
           Précédent
         </Button>

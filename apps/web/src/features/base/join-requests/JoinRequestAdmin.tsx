@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
@@ -7,7 +8,6 @@ import BaseJoinRequestButtons from '@app/web/features/base/join-requests/compone
 import { BaseJoinRequestByToken } from '@app/web/features/base/join-requests/db/getBaseJoinRequestByToken'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './JoinRequestAdmin.module.css'
 
 const formatApplicantName = (applicant: {
@@ -76,14 +76,9 @@ export const JoinRequestAdmin = ({
             )}
             <div className="fr-text--center">
               <BaseJoinRequestButtons joinRequest={joinRequest} user={user} />
-              <Link
-                className="fr-link"
-                target="_blank"
-                rel="noreferrer"
-                href="/"
-              >
+              <ExternalLink className="fr-link" href="/">
                 En savoir plus sur Les Bases du numérique d&apos;intérêt général
-              </Link>
+              </ExternalLink>
             </div>
           </div>
         </div>

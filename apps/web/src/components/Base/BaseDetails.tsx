@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { BaseDetailsDescription } from '@app/web/components/Base/BaseDetailsDescription'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import Link from 'next/link'
@@ -29,9 +30,9 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           {base.website && (
             <div className="fr-mt-2w">
               <p className="fr-mb-0">Site internet</p>
-              <Link href={base.website} className="fr-link" target="_blank">
+              <ExternalLink href={base.website} className="fr-link">
                 {displayedUrl}
-              </Link>
+              </ExternalLink>
             </div>
           )}
           {(base.facebook || base.twitter || base.linkedin) && (
@@ -39,30 +40,22 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
               <h3 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h3>
               <div className={styles.websites}>
                 {base.twitter && (
-                  <Link href={base.twitter} className="fr-link" target="_blank">
+                  <ExternalLink href={base.twitter} className="fr-link">
                     <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
                     Twitter
-                  </Link>
+                  </ExternalLink>
                 )}
                 {base.linkedin && (
-                  <Link
-                    href={base.linkedin}
-                    className="fr-link"
-                    target="_blank"
-                  >
+                  <ExternalLink href={base.linkedin} className="fr-link">
                     <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
                     LinkedIn
-                  </Link>
+                  </ExternalLink>
                 )}
                 {base.facebook && (
-                  <Link
-                    href={base.facebook}
-                    className="fr-link"
-                    target="_blank"
-                  >
+                  <ExternalLink href={base.facebook} className="fr-link">
                     <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
                     Facebook
-                  </Link>
+                  </ExternalLink>
                 )}
               </div>
             </>

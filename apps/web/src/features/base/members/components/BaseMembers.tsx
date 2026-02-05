@@ -45,6 +45,7 @@ const BaseMembers = ({
             <IconInSquare iconId="ri-team-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
               Membres&nbsp;·&nbsp;{acceptedMembers.length}
+              <span className="fr-sr-only"> membres</span>
             </h2>
           </div>
         </div>

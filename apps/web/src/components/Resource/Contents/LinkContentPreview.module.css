@@ -1,4 +1,5 @@
 .linkPreview {
+  position: relative;
   background-image: none;
   line-height: 0;
   display: flex;
@@ -6,6 +7,7 @@
   flex-direction: column-reverse;
   justify-content: stretch;
   overflow: hidden;
+  cursor: pointer;
 
   @media (min-width: 576px) {
     flex-direction: row;
@@ -13,15 +15,11 @@
     max-height: 112px;
   }
 
-  &::after {
-    content: none;
-  }
-
   border: 1px solid var(--border-default-grey);
   margin-bottom: 0;
 
   &:hover {
-    background-color: rgb(0 0 0 / 5%) !important;
+    background-color: rgb(0 0 0 / 5%);
   }
 }
 
@@ -60,6 +58,24 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  background-image: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+  }
+
+  &::after {
+    content: none;
+  }
 }
 
 .description {

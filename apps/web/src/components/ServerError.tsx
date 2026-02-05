@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import * as Sentry from '@sentry/nextjs'
 import { type PropsWithChildren, useEffect } from 'react'
@@ -139,13 +140,8 @@ export const SuspiciousContentError = () => (
     Pour en savoir plus sur nos règles de modération, consultez notre charte.
     <br />
     <br />
-    <a
-      href="/cgu"
-      className="fr-link"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <ExternalLink href="/cgu" className="fr-link">
       Consulter la charte de modération →
-    </a>
+    </ExternalLink>
   </GenericError>
 )

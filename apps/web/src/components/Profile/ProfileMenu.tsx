@@ -21,10 +21,12 @@ const MenuItem = ({
   href,
   currentTab,
   children,
+  ariaLabel,
 }: PropsWithChildren<{
   tab: ProfileTab
   href: string
   currentTab: ProfileTab
+  ariaLabel?: string
 }>) => (
   <li className="fr-nav__item">
     <Link
@@ -32,6 +34,7 @@ const MenuItem = ({
       href={href}
       aria-current={currentTab === tab ? 'page' : undefined}
       data-testid={`${tab}-menu-button`}
+      aria-label={ariaLabel}
     >
       {children}
     </Link>
@@ -43,14 +46,12 @@ const ProfileMenu = ({
   resourcesCount,
   basesCount,
   collectionsCount,
-  followsCount,
   isOwner,
 }: {
   profile: ProfilePageData
   resourcesCount: number
   basesCount: number
   collectionsCount: number
-  followsCount: number
   isOwner: boolean
 }) => {
   const path = usePathname()
@@ -65,29 +66,36 @@ const ProfileMenu = ({
               tab="ressources"
               currentTab={currentTab}
               href={`/profils/${profile.slug}`}
+              ariaLabel={isOwner ? 'Mes ressources' : 'Ressources du profil'}
             >
               {isOwner ? 'Mes ressources' : 'Ressources'} ·{' '}
               <b>{resourcesCount}</b>
+              <span className="fr-sr-only"> ressources</span>
             </MenuItem>
             <MenuItem
               tab="collections"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/collections`}
+              ariaLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
             >
               {isOwner ? 'Mes collections' : 'Collections'} ·{' '}
               <b>{collectionsCount}</b>
+              <span className="fr-sr-only"> collections</span>
             </MenuItem>
             <MenuItem
               tab="bases"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/bases`}
+              ariaLabel={isOwner ? 'Mes bases' : 'Bases du profil'}
             >
               {isOwner ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
+              <span className="fr-sr-only"> ressources</span>
             </MenuItem>
             <MenuItem
               tab="a-propos"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/a-propos`}
+              ariaLabel="À propos, informations du profil"
             >
               À propos
             </MenuItem>

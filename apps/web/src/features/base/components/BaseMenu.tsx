@@ -77,6 +77,7 @@ const BaseMenu = ({
               shareToken={shareToken}
             >
               Ressources · <b>{base.resources.length}</b>
+              <span className="fr-sr-only"> ressources</span>
             </MenuItem>
             <MenuItem
               tab="collections"
@@ -85,6 +86,7 @@ const BaseMenu = ({
               shareToken={shareToken}
             >
               Collections · <b>{base.collections.length}</b>
+              <span className="fr-sr-only"> collections</span>
             </MenuItem>
             <MenuItem
               tab="membres"
@@ -93,6 +95,7 @@ const BaseMenu = ({
               shareToken={shareToken}
             >
               Membres · <b>{acceptedMembers.length}</b>
+              <span className="fr-sr-only"> membres</span>
             </MenuItem>
           </ul>
         </nav>

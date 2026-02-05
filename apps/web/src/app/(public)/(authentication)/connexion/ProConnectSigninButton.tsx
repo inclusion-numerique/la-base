@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { proConnectProviderId } from '@app/web/auth/proConnect'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -44,14 +45,12 @@ const ProConnectSigninButton = ({
         </span>
       </Button>
 
-      <a
+      <ExternalLink
         className="fr-link fr-link--no-underline fr-text--underline"
         href="https://www.proconnect.gouv.fr/"
-        target="_blank"
-        rel="noreferrer"
       >
         En savoir plus sur ProConnect
-      </a>
+      </ExternalLink>
     </div>
   )
 }

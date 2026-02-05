@@ -129,6 +129,7 @@ const ResourceIndexationView = ({
                       href={searchUrl('ressources', searchParams)}
                       className="fr-link--no-underline"
                       data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                      aria-label={`Voir toutes les ressources ${tag.slug}`}
                     >
                       <ThematicOptionBadge
                         categoryIconClassName={categoryIconClassName}

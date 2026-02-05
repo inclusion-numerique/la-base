@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { ChartCard } from '@app/web/features/charte/components/ChartCard'
@@ -29,8 +30,8 @@ const ChartPage = () => {
                 Charte des Bases du numérique d&apos;intérêt général
               </h1>
               <p className="fr-text--lg fr-mb-16v">
-                Sur Les Bases, tout le monde peut contribuer à l’évolution du
-                secteur du numérique d’intérêt général en publiant des
+                Sur Les Bases, tout le monde peut contribuer à l'évolution du
+                secteur du numérique d'intérêt général en publiant des
                 ressources. Le contenu des ressources produites est libre et
                 peut prendre des formes très diverses. Cependant, il est
                 important de&nbsp;
@@ -58,25 +59,21 @@ const ChartPage = () => {
                       Toutes les ressources publiées sur la plateforme sont
                       mises à disposition gratuitement et, par défaut, sous
                       licence&nbsp;
-                      <Link
+                      <ExternalLink
                         href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
                         className="fr-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
                       >
                         Etalab 2.0
-                      </Link>
+                      </ExternalLink>
                       &nbsp;(d'autres choix de licences sont possibles,&nbsp;
-                      <Link
+                      <ExternalLink
                         href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
                         className="fr-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
                       >
                         en savoir plus ici
-                      </Link>
+                      </ExternalLink>
                       ). Les utilisateurs ne doivent en aucun cas demander des
-                      compensations financières pour l’utilisation ou la
+                      compensations financières pour l'utilisation ou la
                       diffusion des contenus partagés.
                     </p>
                   </div>
@@ -92,7 +89,7 @@ const ChartPage = () => {
                     </span>
                     <p className="fr-text--lg fr-text-mention--grey">
                       La plateforme est dédiée au partage de ressources et de
-                      savoirs au service de l’intérêt général. Il est
+                      savoirs au service de l'intérêt général. Il est
                       formellement interdit d'utiliser la plateforme afin de
                       promouvoir des produits ou services à des fins
                       commerciales.
@@ -102,14 +99,12 @@ const ChartPage = () => {
                 <span>
                   Pour en savoir plus sur les licences des ressources, vous
                   pouvez également consulter le&nbsp;
-                  <Link
+                  <ExternalLink
                     href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
                     className="fr-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     centre d&apos;aide
-                  </Link>
+                  </ExternalLink>
                   .
                 </span>
               </div>
@@ -125,15 +120,14 @@ const ChartPage = () => {
               </h2>
               <p className="fr-mb-0 fr-text--lg">
                 Les 7 principes de la démarche&nbsp;
-                <Link
+                <ExternalLink
                   className="fr-link"
                   href="https://numerique-en-communs.fr/la-demarche/#quoi"
-                  target="_blank"
                 >
                   Numérique en Commun[s]
-                </Link>
+                </ExternalLink>
                 &nbsp;opèrent comme le fil directeur de notre définition du
-                numérique d’intérêt général. Les ressources publiées sur les
+                numérique d'intérêt général. Les ressources publiées sur les
                 Bases ont pour but de contribuer à ces principes.
               </p>
             </div>
@@ -152,9 +146,9 @@ const ChartPage = () => {
                     Numérique en Commun[s]
                   </span>
                   <p className={styles.necDescription}>
-                    Impulsée par l’ANCT, la démarche NEC fédère une communauté
-                    d’acteurs et actrices du numérique d’intérêt général autour
-                    d’un événement national, de ses déclinaisons locales et de
+                    Impulsée par l'ANCT, la démarche NEC fédère une communauté
+                    d'acteurs et actrices du numérique d'intérêt général autour
+                    d'un événement national, de ses déclinaisons locales et de
                     temps en ligne. Toutes les ressources et contenus produits
                     dans le cadre de NEC sont partagés sur Les Bases.
                   </p>
@@ -165,13 +159,12 @@ const ChartPage = () => {
                     >
                       Voir la base Numérique en Commun[s]
                     </Link>
-                    <Link
+                    <ExternalLink
                       href="https://numerique-en-communs.fr"
                       className="fr-link fr-link--no-underline fr-text--underline"
-                      target="_blank"
                     >
                       Visitez le site
-                    </Link>
+                    </ExternalLink>
                   </div>
                 </div>
               </div>
@@ -182,11 +175,11 @@ const ChartPage = () => {
           <div className="fr-container fr-pt-md-10w fr-pb-16w fr-pt-8w">
             <div className="fr-text--center">
               <h2 className="fr-mb-4v">
-                Participez à l’évolution de la qualité des ressources publiées
+                Participez à l'évolution de la qualité des ressources publiées
               </h2>
               <p className="fr-mb-12v fr-text--xl">
                 Ces conditions et principes communs vont permettre à la
-                communauté d’être active dans la modération et l’évaluation des
+                communauté d'être active dans la modération et l'évaluation des
                 ressources publiées sur la plateforme.
               </p>
             </div>

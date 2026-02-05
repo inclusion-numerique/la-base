@@ -16,7 +16,24 @@
 
 .link {
   background-image: none;
-  width: 100%;
+  color: inherit;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &::after {
+    content: none;
+  }
+}
+
+.container {
+  position: relative;
 }
 
 .container:hover {
@@ -30,4 +47,6 @@
 
 .followButton {
   width: 120px;
+  position: relative;
+  z-index: 2;
 }

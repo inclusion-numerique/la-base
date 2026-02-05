@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { createToast } from '@app/ui/toast/createToast'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
@@ -120,14 +121,12 @@ const LeaveBaseModaleNotice = ({
   const isContributor =
     createdResources.length > 0 || contributedResources.length > 0
   const knowMoreLink = (
-    <Link
+    <ExternalLink
       className="fr-link fr-link--no-underline fr-text--underline"
       href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-      target="_blank"
-      rel="noopener noreferrer"
     >
       En savoir plus
-    </Link>
+    </ExternalLink>
   )
 
   const noticeProps = {

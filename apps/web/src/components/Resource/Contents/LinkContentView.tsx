@@ -1,11 +1,11 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import ContentMetrics from '@app/web/components/Resource/Contents/ContentMetrics'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
 import type { ResourceContent } from '@app/web/server/resources/getResource'
 import { trpc } from '@app/web/trpc'
 import classNames from 'classnames'
-import Link from 'next/link'
 import LinkContentPreview from './LinkContentPreview'
 import styles from './LinkContentView.module.css'
 
@@ -40,9 +40,8 @@ const LinkContentView = ({
 }) => {
   const trackEvent = trpc.content.trackEvent.useMutation()
 
-  const handleLinkClick = () => {
+  const handleLinkClick = () =>
     trackEvent.mutate({ contentId: id, type: 'linkClick' })
-  }
 
   return (
     <div data-testid="content-link">
@@ -66,14 +65,9 @@ const LinkContentView = ({
                 'fr-icon--sm',
               )}
             />
-            <Link
-              target="_blank"
-              href={url}
-              className="fr-link"
-              onClick={handleLinkClick}
-            >
+            <ExternalLink href={url} onClick={handleLinkClick}>
               {url}
-            </Link>
+            </ExternalLink>
           </div>
         )
       )}
