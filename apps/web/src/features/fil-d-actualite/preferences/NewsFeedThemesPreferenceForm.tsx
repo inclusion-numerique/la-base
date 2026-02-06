@@ -41,11 +41,11 @@ export const NewsFeedThemesPreferenceForm = ({
     <>
       <div className="fr-flex fr-direction-column fr-flex-gap-1v">
         <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
-          <span className="fr-h6 fr-text-default--grey fr-mb-0">
+          <h3 className="fr-h6 fr-text-default--grey fr-mb-0">
             {count} thématique
             {sPluriel(count)} suivie
             {sPluriel(count)}
-          </span>
+          </h3>
           <Button
             data-testid="edit-professionnal-sectors-button"
             className="fr-text--sm fr-text--medium"
@@ -87,13 +87,13 @@ export const NewsFeedThemesPreferenceForm = ({
                   <div className="fr-flex fr-direction-column">
                     <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm fr-text-mention--grey">
                       <span className="fr-icon-file-text-line fr-icon--sm" />
-                      <div>
+                      <p className="fr-mb-0">
                         <b>{numberToString(resourcesCount[theme].count)}</b>
                         <span className="fr-mb-0">
                           {' '}
                           Ressource{sPluriel(resourcesCount[theme].count)}
                         </span>
-                      </div>
+                      </p>
                     </div>
                   </div>
                 </div>

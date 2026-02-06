@@ -54,9 +54,9 @@ export const FiltersModal = ({
                   Retour au choix des filtres
                 </Button>
                 <hr className="fr-pb-1v fr-mt-1w" />
-                <div className="fr-text--bold fr-mx-2w fr-my-1w">
+                <h2 className="fr-text--md fr-text--bold fr-mx-2w fr-my-1w fr-mb-0">
                   {category.label}
-                </div>
+                </h2>
                 <FilterCategory
                   category={category}
                   onSelect={onSelect}

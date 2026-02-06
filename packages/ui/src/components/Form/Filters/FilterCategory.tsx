@@ -37,7 +37,7 @@ export const FilterCategory = ({
               type="button"
               onClick={() => setOpenedCategory(currentCategory ? '' : key)}
             >
-              <div>{key}</div>
+              <span>{key}</span>
               <span
                 className={`fr-icon--sm fr-icon-arrow-${
                   currentCategory ? 'up' : 'down'

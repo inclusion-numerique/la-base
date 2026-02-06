@@ -67,17 +67,17 @@ const LeaveBaseModaleNotice = ({
   if (isLastMember || isLastAdmin) {
     const noticeProps = {
       title: isLastMember ? (
-        <span className="fr-text--regular fr-text-default--grey">
+        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul membre de cette base. Vous pouvez supprimer votre
           base depuis la page paramètre accessible en cliquant sur le bouton
           "modifier la base".
-        </span>
+        </p>
       ) : (
-        <span className="fr-text--regular fr-text-default--grey">
+        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul administrateur de cette base. Vous devez nommer au
           moins un des autres membres administrateur de la base avant de pouvoir
           la quitter.'
-        </span>
+        </p>
       ),
       linkProps: isLastMember
         ? { href: `/bases/${base.slug}/editer#supprimer` }
@@ -132,21 +132,21 @@ const LeaveBaseModaleNotice = ({
   const noticeProps = {
     title: !isContributor ? (
       <>
-        <span className="fr-text--regular fr-text-default--grey">
+        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous ne ferez plus partie des membres et ne pourrez donc plus
           contribuer aux ressources publiées via cette base.
           <br />
           {knowMoreLink}
-        </span>
+        </p>
       </>
     ) : (
       <>
-        <span className="fr-text--regular fr-text-default--grey">
+        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous ne pourrez plus éditer les ressources auxquelles vous avec
           contribué ou que vous avez publié sur cette base.
           <br />
           {knowMoreLink}
-        </span>
+        </p>
       </>
     ),
     classNames: isContributor ? 'fr-notice--warning' : '',

@@ -34,7 +34,7 @@ const CollectionMetaData = ({
       className,
     )}
   >
-    <div className={classNames('fr-flex fr-flex-gap-2v')}>
+    <p className={classNames('fr-flex fr-flex-gap-2v fr-mb-0')}>
       <span className="fr-icon-file-text-line fr-icon--sm" />
       <span>{count}</span>
       <span
@@ -44,7 +44,7 @@ const CollectionMetaData = ({
       >
         Ressource{sPluriel(count)}&nbsp;
       </span>
-    </div>
+    </p>
     <div className="fr-flex fr-flex-gap-2v">
       {!!withPrivacyTag && (
         <div className="fr-flex fr-flex-gap-2v">

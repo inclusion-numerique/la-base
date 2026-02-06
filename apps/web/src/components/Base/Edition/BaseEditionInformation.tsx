@@ -64,7 +64,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
       edition={<BaseInformationsEdition form={form} />}
       view={
         <>
-          <div className="fr-text-mention--grey">Nom de la base</div>
+          <p className="fr-text-mention--grey fr-mb-0">Nom de la base</p>
           <div
             className="fr-text-label--grey fr-text--medium fr-mb-2w"
             data-testid="base-information-title"
@@ -72,7 +72,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
             {base.title}
           </div>
           <>
-            <div className="fr-text-mention--grey">Département</div>
+            <p className="fr-text-mention--grey fr-mb-0">Département</p>
             <div
               className="fr-text-label--grey fr-text--medium fr-mb-2w"
               data-testid="base-information-department"
@@ -82,7 +82,7 @@ const BaseEditionInformation = ({ base }: { base: BasePageData }) => {
               />
             </div>
           </>
-          <div className="fr-text-mention--grey">Description</div>
+          <p className="fr-text-mention--grey fr-mb-0">Description</p>
           {base.description ? (
             <div
               className="fr-text-label--grey fr-text--medium"

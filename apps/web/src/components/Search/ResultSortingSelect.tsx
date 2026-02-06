@@ -59,20 +59,16 @@ const ResultSortingSelect = ({
   }
 
   return (
-    <div className={styles.select}>
-      Trier par&nbsp;:
-      <select
-        onChange={onSelect}
-        value={selected}
-        aria-label="Trier les résultats"
-      >
+    <p className={styles.select}>
+      <label htmlFor="result-sorting-select">Trier par&nbsp;:</label>
+      <select id="result-sorting-select" onChange={onSelect} value={selected}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.name}
           </option>
         ))}
       </select>
-    </div>
+    </p>
   )
 }
 

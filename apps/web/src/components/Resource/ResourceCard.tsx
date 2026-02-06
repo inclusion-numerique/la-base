@@ -138,35 +138,33 @@ const ResourceCard = ({
       </Link>
       <div className="fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w">
         {resource.published && (
-          <div className="fr-text--sm fr-mb-0">
-            <ResourcesViewsAndMetadata
-              className={classNames(
-                context === 'highlight' &&
-                  highlightCount &&
-                  highlightCount === 3 &&
-                  styles.metadataContainer,
-              )}
-              context="card"
-              resource={resource}
-            >
-              {resource._count.resourceFeedback > 0 && (
-                <>
-                  {!(context === 'highlight' && highlightCount === 3) && (
-                    <span className="fr-hidden fr-unhidden-sm fr-text--medium">
-                      ·
-                    </span>
-                  )}
-                  <FeedbackBadge
-                    className="fr-mb-sm-0 fr-mb-3v"
-                    value={resource.feedbackAverage}
-                  />
-                  <span className="fr-text--medium fr-mb-sm-0 fr-mb-3v">
-                    {resource._count.resourceFeedback}&nbsp;Avis
+          <ResourcesViewsAndMetadata
+            className={classNames(
+              context === 'highlight' &&
+                highlightCount &&
+                highlightCount === 3 &&
+                styles.metadataContainer,
+            )}
+            context="card"
+            resource={resource}
+          >
+            {resource._count.resourceFeedback > 0 && (
+              <>
+                {!(context === 'highlight' && highlightCount === 3) && (
+                  <span className="fr-hidden fr-unhidden-sm fr-text--medium">
+                    ·
                   </span>
-                </>
-              )}
-            </ResourcesViewsAndMetadata>
-          </div>
+                )}
+                <FeedbackBadge
+                  className="fr-mb-sm-0 fr-mb-3v"
+                  value={resource.feedbackAverage}
+                />
+                <span className="fr-text--medium fr-mb-sm-0 fr-mb-3v">
+                  {resource._count.resourceFeedback}&nbsp;Avis
+                </span>
+              </>
+            )}
+          </ResourcesViewsAndMetadata>
         )}
         <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
           {isContributor && (

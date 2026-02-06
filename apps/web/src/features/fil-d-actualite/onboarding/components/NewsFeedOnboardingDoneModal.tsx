@@ -44,9 +44,9 @@ export const NewsFeedOnboardingDone = ({
             iconClassName={styles.icon}
             background={styles.iconContainer}
           />
-          <span className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
+          <h2 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
             Votre fil d'actualité est prêt !
-          </span>
+          </h2>
           <span
             className={classNames(
               styles.description,
@@ -66,11 +66,11 @@ export const NewsFeedOnboardingDone = ({
         </div>
         <Notice
           title={
-            <span>
+            <p className="fr-mb-0">
               Vous pourrez modifier vos préférences à tout moment via la
               page&nbsp;
               <span className="fr-text--bold">Gérer mes préférences</span>.
-            </span>
+            </p>
           }
         />
         <div className="fr-width-full">

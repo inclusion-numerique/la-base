@@ -40,11 +40,11 @@ export const NewsFeedFollowListPreferences = ({
     <>
       <hr className="fr-pt-4w fr-pb-0 fr-mt-4w" />
       <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-        <span className="fr-h6 fr-text-default--grey fr-mb-0">
+        <h3 className="fr-h6 fr-text-default--grey fr-mb-0">
           {followedBases.length} base
           {sPluriel(followedBases.length)} suivie
           {sPluriel(followedBases.length)}
-        </span>
+        </h3>
         {displayedBases.map((fBase) => (
           <BaseCard
             className={classNames(styles.noBorder, 'fr-py-4v')}
@@ -78,11 +78,11 @@ export const NewsFeedFollowListPreferences = ({
       </div>
       <hr className="fr-pt-4w fr-pb-0 fr-mt-4w" />
       <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-        <span className="fr-h6 fr-text-default--grey fr-mb-0">
+        <h3 className="fr-h6 fr-text-default--grey fr-mb-0">
           {followedProfiles.length} profil
           {sPluriel(followedProfiles.length)} suivi
           {sPluriel(followedProfiles.length)}
-        </span>
+        </h3>
         {displayedProfiles.map((fProfile) => (
           <ProfileCard
             className={styles.noBorder}
