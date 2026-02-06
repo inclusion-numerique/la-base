@@ -5,6 +5,7 @@ const LogoEuro = () => (
     viewBox="0 0 62 88"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden
   >
     <g clipPath="url(#clip0_16766_63044)">
       <path

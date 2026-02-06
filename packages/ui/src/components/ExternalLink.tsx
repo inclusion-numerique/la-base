@@ -34,7 +34,7 @@ const ExternalLink = ({
       )}
       {children}
       {!ariaLabel && (
-        <span className="fr-sr-only">Ouverture dans un nouvel onglet</span>
+        <span className="fr-sr-only"> Ouverture dans un nouvel onglet</span>
       )}
     </a>
   ) : null
