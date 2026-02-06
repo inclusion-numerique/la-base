@@ -89,7 +89,7 @@ const ProfileMenu = ({
               ariaLabel={isOwner ? 'Mes bases' : 'Bases du profil'}
             >
               {isOwner ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
-              <span className="fr-sr-only"> ressources</span>
+              <span className="fr-sr-only"> bases</span>
             </MenuItem>
             <MenuItem
               tab="a-propos"

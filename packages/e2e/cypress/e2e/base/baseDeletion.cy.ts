@@ -76,8 +76,8 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
 
     cy.testId('ressources-menu-button').should(
       'have.text',
-      'Mes ressources · 0',
+      'Mes ressources · 0 ressources',
     )
-    cy.testId('bases-menu-button').should('have.text', 'Mes bases · 0')
+    cy.testId('bases-menu-button').should('have.text', 'Mes bases · 0 bases')
   })
 })
