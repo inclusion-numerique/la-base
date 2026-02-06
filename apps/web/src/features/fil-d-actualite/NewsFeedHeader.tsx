@@ -70,22 +70,22 @@ export const NewsFeedHeader = async ({
           )}
           {thematique !== 'tout' ? (
             <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
-              <span
+              <p
                 className={classNames(
                   'fr-mb-0',
                   CATEGORY_VARIANTS[themeCategories[theme]].color,
                 )}
               >
                 Découvrez les dernières publications liées à la thématique
-              </span>
-              <span
+              </p>
+              <p
                 className={classNames(
-                  'fr-text--bold',
+                  'fr-text--bold fr-mb-0',
                   CATEGORY_VARIANTS[themeCategories[theme]].color,
                 )}
               >
                 {themeLabels[theme]}
-              </span>
+              </p>
             </div>
           ) : (
             <div className="fr-flex fr-text--lg fr-mb-0">

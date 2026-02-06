@@ -42,14 +42,14 @@ const SaveInNestedCollection = ({
               {base ? base.title : `${user.name} - Mes collections`}
             </b>
             <div className="fr-flex fr-direction-md-row fr-direction-column fr-flex-gap-2v">
-              <div className={styles.collections}>
+              <p className={classNames('fr-mb-0', styles.collections)}>
                 <span className="fr-icon-folder-2-line fr-icon--sm" />
                 &nbsp;
                 {base
                   ? base.collections.length
                   : withoutFavoriteCollections.length}
-                &nbsp; Collections&nbsp;
-              </div>
+                &nbsp;Collections&nbsp;
+              </p>
               {alreadyInCollections > 0 ? (
                 <Tag small>
                   Déjà ajoutée dans {alreadyInCollections} collection

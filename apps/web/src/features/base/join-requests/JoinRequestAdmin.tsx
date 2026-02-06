@@ -121,13 +121,13 @@ export const JoinRequestAdmin = ({
               /> */}
               <BasePrivacyTag small isPublic={joinRequest.base.isPublic} />
             </div>
-            <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
+            <p className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
               <span className="fr-icon-account-circle-line fr-mr-2v" />
               <span className="fr-text--bold">
                 {baseMembersCount} membre{sPluriel(baseMembersCount)} dans la
                 base
               </span>
-            </div>
+            </p>
 
             <div className="fr-mt-6v fr-pt-6v fr-border--top">
               <div className="fr-text--lg fr-mb-2v fr-text--bold fr-text-label--blue-france">

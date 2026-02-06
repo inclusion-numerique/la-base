@@ -422,14 +422,16 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     ? inBaseDirectory.title
                     : `${user.name} - Mes collections`}
                 </b>
-                <div className={classNames('fr-mt-2v', styles.collections)}>
+                <p
+                  className={classNames('fr-mt-2v fr-mb-0', styles.collections)}
+                >
                   <span className="fr-icon-folder-2-line fr-icon--sm" />
                   &nbsp;
                   {inBaseDirectory
                     ? inBaseDirectory.collections.length
                     : withoutFavoriteCollections.length}
                   &nbsp;Collections
-                </div>
+                </p>
               </div>
             </div>
           </button>
@@ -468,7 +470,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 <Notice
                   title={
                     inBaseDirectory ? (
-                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                      <span className="fr-flex fr-direction-column fr-flex-gap-1v">
                         <span className="fr-text-mention--black fr-text--bold">
                           Base privée
                         </span>
@@ -476,16 +478,16 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                           La collection sera accessible uniquement aux membres
                           et aux administrateurs de votre base.
                         </span>
-                      </div>
+                      </span>
                     ) : (
-                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                      <span className="fr-flex fr-direction-column fr-flex-gap-1v">
                         <span className="fr-text-mention--black fr-text--bold">
                           Profil privé
                         </span>
                         <span className="fr-text-mention--grey fr-text--regular">
                           Votre collection sera visible uniquement par vous.
                         </span>
-                      </div>
+                      </span>
                     )
                   }
                   classes={{
@@ -531,11 +533,9 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
               )}
               {withoutFavoriteCollections.length > 0 ? (
                 <>
-                  <div className="fr-mt-4v">
-                    <span className="fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
-                      Mes collections
-                    </span>
-                  </div>
+                  <h2 className="fr-mt-4v fr-mb-0 fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
+                    Mes collections
+                  </h2>
                   {withoutFavoriteCollections.map((collection) => (
                     <AddOrRemoveResourceFromCollection
                       loading={pendingMutationCollectionId === collection.id}

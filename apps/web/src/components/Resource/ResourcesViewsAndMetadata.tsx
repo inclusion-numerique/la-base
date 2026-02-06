@@ -24,7 +24,7 @@ const ResourcesViewsAndMetadata = ({
   showPrivate?: boolean
   context: 'view' | 'card' | 'collection'
 }) => (
-  <span
+  <p
     data-testid="resources-views-and-metadata"
     className={classNames(
       'fr-text--sm fr-mb-0 fr-text-mention--grey fr-flex fr-direction-column-reverse fr-direction-sm-row fr-flex-gap-2v',
@@ -104,6 +104,6 @@ const ResourcesViewsAndMetadata = ({
         </span>
       </span>
     )}
-  </span>
+  </p>
 )
 export default ResourcesViewsAndMetadata

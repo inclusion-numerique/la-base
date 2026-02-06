@@ -68,9 +68,9 @@ export const CategoryCard = ({
         </span>
       </div>
       <div className="fr-flex fr-flex-gap-2v fr-justify-content-space-between">
-        <div>
+        <p className="fr-mb-0">
           <span className="fr-text--bold">{resourcesCount}</span> Ressources
-        </div>
+        </p>
         <span>
           <span
             className="fr-text-title--blue-france ri-arrow-right-line ri-lg"

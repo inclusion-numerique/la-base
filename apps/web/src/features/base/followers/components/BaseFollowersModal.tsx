@@ -43,10 +43,10 @@ const BaseFollowersModal = ({
         onClick={open}
         role="button"
       >
-        <div>
+        <p className="fr-mb-0">
           <b>{numberToString(counts.total)}</b>
           <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
-        </div>
+        </p>
       </Link>
 
       <FollowersModal title={title} className={styles.baseFollowersModal}>
