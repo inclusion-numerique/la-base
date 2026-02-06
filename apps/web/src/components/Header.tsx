@@ -97,6 +97,7 @@ const Header = ({
                           ? '/fil-d-actualite/onboarding'
                           : '/fil-d-actualite/tout'
                         : '/connexion?suivant=/fil-d-actualite/tout',
+                      'aria-label': "Accès au fil d'actualité",
                     }}
                   >
                     <span
@@ -131,6 +132,7 @@ const Header = ({
                   <Button
                     linkProps={{
                       href: searchUrl('ressources', defaultSearchParams),
+                      'aria-label': 'Accès à la recherche de ressources',
                     }}
                   >
                     <span
@@ -151,6 +153,7 @@ const Header = ({
                     <Link
                       href="/connexion?suivant=/?creer-une-ressource"
                       className="fr-btn"
+                      aria-label="Créer une ressource"
                     >
                       <span
                         className="fr-hidden-lg ri-edit-box-line fr-mr-1w fr-text-label--blue-france"
@@ -198,6 +201,7 @@ const Header = ({
                             ? '/fil-d-actualite/onboarding'
                             : '/fil-d-actualite/tout'
                           : '/connexion?suivant=/fil-d-actualite/tout',
+                        'aria-label': "Accès au fil d'actualité",
                       }}
                       size="small"
                     >
