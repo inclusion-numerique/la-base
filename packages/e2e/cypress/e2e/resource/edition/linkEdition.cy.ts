@@ -53,7 +53,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
           cy.get('h2').should('have.text', "I'm beggin you for mercy")
           cy.get('a').should(
             'have.text',
-            'https://www.youtube.com/watch?v=y7ZEVA5dy-Y',
+            'https://www.youtube.com/watch?v=y7ZEVA5dy-Y Ouverture dans un nouvel onglet',
           )
         })
       })
@@ -86,7 +86,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
           cy.testId('link-caption').should('have.text', 'Il est beau hein !4')
           cy.get('a').should(
             'have.text',
-            'https://www.imdb.com/title/tt0357111/3',
+            'https://www.imdb.com/title/tt0357111/3 Ouverture dans un nouvel onglet',
           )
         })
       })

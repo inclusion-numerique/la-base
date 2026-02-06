@@ -12,7 +12,7 @@ const LesBasesSvgLogo = ({
   height?: number
 }) => (
   <svg
-    aria-hidden="true"
+    aria-hidden
     width={width}
     height={height}
     viewBox="0 0 40 40"

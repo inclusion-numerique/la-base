@@ -46,7 +46,7 @@ export const GenericError = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="fr-responsive-img fr-artwork"
-            aria-hidden="true"
+            aria-hidden
             width="160"
             height="200"
             viewBox="0 0 160 200"

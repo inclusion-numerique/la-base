@@ -77,7 +77,10 @@ const ResourceCard = ({
     <div className="fr-flex fr-direction-column fr-justify-content-space-between">
       <Link
         href={appendShareToken(`/ressources/${resource.slug}`, shareToken)}
-        className={styles.content}
+        className={classNames(
+          styles.content,
+          context === 'newsFeed' && styles.contentNewsFeed,
+        )}
         data-testid="resource-card-link"
         aria-label={`Consulter la ressource ${resource.title}`}
       >

@@ -9,6 +9,7 @@ const ResourceLicenceNoLicenceLogo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={styles.logo}
+      aria-hidden
     >
       <rect width="56" height="56" rx="8" fill="#F6F6F6" />
       <path

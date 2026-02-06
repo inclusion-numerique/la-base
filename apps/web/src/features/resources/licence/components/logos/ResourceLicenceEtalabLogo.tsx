@@ -9,6 +9,7 @@ const ResourceLicenceEtalabLogo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={styles.logo}
+      aria-hidden
     >
       <rect width="56" height="56" rx="8" fill="#F6F6F6" />
       <g clipPath="url(#clip0_18323_1199)">
