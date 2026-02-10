@@ -46,6 +46,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
     cy.wait('@invite')
     cy.testId('member-card').should('have.length', 1)
 
+    cy.wait(1000)
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',
     })
@@ -130,6 +131,7 @@ describe("Utilisateur connecté, je peux gerer les membres d'une base", () => {
 
     cy.wait('@invite')
 
+    cy.wait(1000)
     goToMostRecentEmailReceived({
       subjectInclude: 'Invitation à rejoindre la base',
     })
