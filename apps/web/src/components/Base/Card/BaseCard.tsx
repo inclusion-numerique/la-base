@@ -21,7 +21,7 @@ const BaseCard = ({
   compact?: boolean
 }) => (
   <article
-    className={classNames(styles.container, 'fr-enlarge-link', className)}
+    className={classNames(styles.container, className)}
     data-testid="base-card"
   >
     <div className={styles.imageLink}>
@@ -30,7 +30,7 @@ const BaseCard = ({
     <div className={styles.content}>
       <Link
         href={`/bases/${base.slug}`}
-        className="fr-flex-grow-1 fr-link--no-underline"
+        className={classNames('fr-flex-grow-1', styles.titleLink)}
       >
         <span className="fr-text--bold fr-text--md fr-mb-0">{base.title}</span>
       </Link>
@@ -75,7 +75,7 @@ const BaseCard = ({
         context="card"
       />
     </div>
-    <div>
+    <div className={styles.followButton}>
       <FollowButton base={base} user={user} />
     </div>
   </article>
