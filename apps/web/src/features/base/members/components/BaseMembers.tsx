@@ -81,15 +81,18 @@ const BaseMembers = ({
         </div>
         <BaseMembersSort slug={base.slug} sortBy={sortBy} />
       </div>
-      {base.members.map((member) => (
-        <BaseMemberCard
-          base={base}
-          canChangeMemberRole={canChangeMemberRole}
-          member={member}
-          key={member.member.id}
-          user={user}
-        />
-      ))}
+      <ul className="fr-raw-list">
+        {base.members.map((member) => (
+          <li key={member.member.id}>
+            <BaseMemberCard
+              base={base}
+              canChangeMemberRole={canChangeMemberRole}
+              member={member}
+              user={user}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

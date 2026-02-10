@@ -3,7 +3,6 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getNewsFeed } from '@app/web/features/fil-d-actualite/db/getNewsFeed'
 import NewsFeedOnboardingBreadcrumb from '@app/web/features/fil-d-actualite/onboarding/components/NewsFeedOnboardingBreadcrumb'
-import { contentId } from '@app/web/utils/skipLinks'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
@@ -26,7 +25,7 @@ export default async function NewsFeedOnboardingLayout({
   return (
     <>
       <SkipLinksPortal />
-      <main id={contentId} className="fr-height-full">
+      <div className="fr-height-full">
         <div className="fr-height-full">
           <div className="fr-container fr-pb-50v">
             <NewsFeedOnboardingBreadcrumb />
@@ -35,7 +34,7 @@ export default async function NewsFeedOnboardingLayout({
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </>
   )
 }

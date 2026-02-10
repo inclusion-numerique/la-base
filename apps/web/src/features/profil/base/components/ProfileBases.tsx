@@ -37,15 +37,18 @@ const ProfileBases = ({
       )}
     </div>
     <UserBasesPendingJoinRequests user={user} />
-    {bases.map((base) => (
-      <ProfileBaseCard
-        profile={profile}
-        user={user}
-        base={base}
-        key={base.slug}
-        isOwner={isOwner}
-      />
-    ))}
+    <ul className="fr-raw-list">
+      {bases.map((base) => (
+        <li key={base.slug}>
+          <ProfileBaseCard
+            profile={profile}
+            user={user}
+            base={base}
+            isOwner={isOwner}
+          />
+        </li>
+      ))}
+    </ul>
   </div>
 )
 

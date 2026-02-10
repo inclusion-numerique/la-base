@@ -3,6 +3,7 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
 import Header from '@app/web/components/Header'
 import MinimalFooter from '@app/web/components/MinimalFooter'
+import { contentId } from '@app/web/utils/skipLinks'
 import classNames from 'classnames'
 import { notFound } from 'next/navigation'
 import { type PropsWithChildren } from 'react'
@@ -28,7 +29,9 @@ const AdministrationLayout = async ({ children }: PropsWithChildren) => {
           <div className={styles.sideNavContainer}>
             <AdministrationSideMenu user={user} />
           </div>
-          <div className={styles.pageContainer}>{children}</div>
+          <main id={contentId} className={styles.pageContainer}>
+            {children}
+          </main>
         </div>
         <MinimalFooter />
       </div>

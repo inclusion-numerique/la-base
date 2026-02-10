@@ -76,31 +76,34 @@ const Collections = ({
               </div>
             )}
           </div>
-          <div className={styles.tabCards}>
+          <ul className={`fr-raw-list ${styles.tabCards}`}>
             {collections.map((collection) => (
-              <CollectionCard
-                collection={collection}
-                key={collection.id}
-                canWrite={isOwner || withCreation}
-                token={isShareLink ? baseSlug : undefined}
-              />
+              <li key={collection.id}>
+                <CollectionCard
+                  collection={collection}
+                  canWrite={isOwner || withCreation}
+                  token={isShareLink ? baseSlug : undefined}
+                />
+              </li>
             ))}
             {collections.length === 1 && !!favoriteCollection && (
-              <EmptyBox className="fr-flex fr-justify-content-center">
-                Créez une collection pour enregistrer et organiser des
-                ressources.
-                <ExternalLink
-                  href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
-                  className="fr-link"
-                >
-                  En savoir plus
-                </ExternalLink>
-                <div className="fr-mt-4w">
-                  <CreateCollectionButton />
-                </div>
-              </EmptyBox>
+              <li>
+                <EmptyBox className="fr-flex fr-justify-content-center">
+                  Créez une collection pour enregistrer et organiser des
+                  ressources.
+                  <ExternalLink
+                    href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
+                    className="fr-link"
+                  >
+                    En savoir plus
+                  </ExternalLink>
+                  <div className="fr-mt-4w">
+                    <CreateCollectionButton />
+                  </div>
+                </EmptyBox>
+              </li>
             )}
-          </div>
+          </ul>
         </>
       ) : (
         emptyBox

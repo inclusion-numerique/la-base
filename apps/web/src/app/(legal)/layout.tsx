@@ -1,6 +1,7 @@
 import PublicFooter from '@app/web/app/(public)/PublicFooter'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
+import { contentId } from '@app/web/utils/skipLinks'
 import { type PropsWithChildren } from 'react'
 
 /**
@@ -15,7 +16,9 @@ const LegalLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      <div style={{ flex: 1 }}>{children}</div>
+      <main id={contentId} style={{ flex: 1 }}>
+        {children}
+      </main>
       <PublicFooter />
     </div>
   )
