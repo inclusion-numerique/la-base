@@ -67,17 +67,17 @@ const LeaveBaseModaleNotice = ({
   if (isLastMember || isLastAdmin) {
     const noticeProps = {
       title: isLastMember ? (
-        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul membre de cette base. Vous pouvez supprimer votre
           base depuis la page paramètre accessible en cliquant sur le bouton
           "modifier la base".
-        </p>
+        </span>
       ) : (
-        <p className="fr-text--regular fr-text-default--grey fr-mb-0">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul administrateur de cette base. Vous devez nommer au
           moins un des autres membres administrateur de la base avant de pouvoir
           la quitter.'
-        </p>
+        </span>
       ),
       linkProps: isLastMember
         ? { href: `/bases/${base.slug}/editer#supprimer` }
