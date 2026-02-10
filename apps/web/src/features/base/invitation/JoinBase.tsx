@@ -49,7 +49,7 @@ export const JoinBase = ({
           {!invitation.member.signedUpAt && (
             <Notice
               title={
-                <p className="fr-text--regular fr-text-default--grey fr-mb-0">
+                <span className="fr-text--regular fr-text-default--grey">
                   Vous avez été invité à l&apos;adresse&nbsp;
                   <span className="fr-text--bold">
                     {invitation.member.email}
@@ -57,7 +57,7 @@ export const JoinBase = ({
                   <br />
                   Vous devrez créer votre compte sur Les Bases du numérique
                   d'intérêt général afin de rejoindre cette base.
-                </p>
+                </span>
               }
             />
           )}
