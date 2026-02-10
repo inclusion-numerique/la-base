@@ -14,13 +14,13 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
     <div className="fr-width-full">
       <div className="fr-grid-row fr-grid-row--gutters fr-mb-7v">
         <div className="fr-col-12 fr-col-lg-8 fr-mt-3w">
-          <h3 className="fr-h6">Description</h3>
+          <h2 className="fr-h6">Description</h2>
           <div>
             <BaseDetailsDescription description={base.description} />
           </div>
         </div>
         <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
-          <h3 className="fr-mb-2w fr-h6">Contact</h3>
+          <h2 className="fr-mb-2w fr-h6">Contact</h2>
           <div>
             <p className="fr-mb-0">Adresse mail de contact</p>
             <Link href={`mailto:${base.email}`} className="fr-link">
@@ -37,27 +37,33 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           )}
           {(base.facebook || base.twitter || base.linkedin) && (
             <>
-              <h3 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h3>
-              <div className={styles.websites}>
+              <h2 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h2>
+              <ul className={`fr-raw-list ${styles.websites}`}>
                 {base.twitter && (
-                  <ExternalLink href={base.twitter} className="fr-link">
-                    <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
-                    Twitter
-                  </ExternalLink>
+                  <li>
+                    <ExternalLink href={base.twitter} className="fr-link">
+                      <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
+                      Twitter
+                    </ExternalLink>
+                  </li>
                 )}
                 {base.linkedin && (
-                  <ExternalLink href={base.linkedin} className="fr-link">
-                    <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
-                    LinkedIn
-                  </ExternalLink>
+                  <li>
+                    <ExternalLink href={base.linkedin} className="fr-link">
+                      <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
+                      LinkedIn
+                    </ExternalLink>
+                  </li>
                 )}
                 {base.facebook && (
-                  <ExternalLink href={base.facebook} className="fr-link">
-                    <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
-                    Facebook
-                  </ExternalLink>
+                  <li>
+                    <ExternalLink href={base.facebook} className="fr-link">
+                      <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
+                      Facebook
+                    </ExternalLink>
+                  </li>
                 )}
-              </div>
+              </ul>
             </>
           )}
         </div>

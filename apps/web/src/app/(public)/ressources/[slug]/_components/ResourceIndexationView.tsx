@@ -103,7 +103,7 @@ const ResourceIndexationView = ({
           </span>
         )}
       </p>
-      <div className={classNames(styles.tags, tagsClassName)}>
+      <ul className={classNames('fr-raw-list', styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
           <>
             {tags.map((tag) => {
@@ -124,33 +124,35 @@ const ResourceIndexationView = ({
                   ] as (typeof searchParams)['themes']
 
                   return (
-                    <a
-                      key={tag.slug}
-                      href={searchUrl('ressources', searchParams)}
-                      className="fr-link--no-underline"
-                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                      aria-label={`Voir toutes les ressources ${tag.slug}`}
-                    >
+                    <li key={tag.slug}>
+                      <a
+                        href={searchUrl('ressources', searchParams)}
+                        className="fr-link--no-underline"
+                        data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                        aria-label={`Voir toutes les ressources ${tag.slug}`}
+                      >
+                        <ThematicOptionBadge
+                          categoryIconClassName={categoryIconClassName}
+                          textClassName="fr-text-label--grey"
+                          className={className}
+                          size="sm"
+                          option={{ label: tag.label, disabled: false }}
+                        />
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return (
+                    <li key={tag.slug}>
                       <ThematicOptionBadge
                         categoryIconClassName={categoryIconClassName}
                         textClassName="fr-text-label--grey"
                         className={className}
                         size="sm"
                         option={{ label: tag.label, disabled: false }}
+                        data-testid={`resource-indexation-${slug}-${tag.slug}`}
                       />
-                    </a>
-                  )
-                } else {
-                  return (
-                    <ThematicOptionBadge
-                      key={tag.slug}
-                      categoryIconClassName={categoryIconClassName}
-                      textClassName="fr-text-label--grey"
-                      className={className}
-                      size="sm"
-                      option={{ label: tag.label, disabled: false }}
-                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                    />
+                    </li>
                   )
                 }
               }
@@ -159,36 +161,38 @@ const ResourceIndexationView = ({
                 const searchParams: SearchParams = { ...defaultSearchParams }
 
                 return (
-                  <Tag
-                    key={tag.slug}
-                    data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                    linkProps={{
-                      href: searchUrl('ressources', searchParams),
-                    }}
-                    small
-                    className={styles.tag}
-                  >
-                    {tag.label}
-                  </Tag>
+                  <li key={tag.slug}>
+                    <Tag
+                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                      linkProps={{
+                        href: searchUrl('ressources', searchParams),
+                      }}
+                      small
+                      className={styles.tag}
+                    >
+                      {tag.label}
+                    </Tag>
+                  </li>
                 )
               } else {
                 return (
-                  <span
-                    key={tag.slug}
-                    className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}
-                  >
-                    {tag.label}
-                  </span>
+                  <li key={tag.slug}>
+                    <span
+                      className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}
+                    >
+                      {tag.label}
+                    </span>
+                  </li>
                 )
               }
             })}
           </>
         ) : (
-          <div className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}>
+          <li className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}>
             Non renseigné
-          </div>
+          </li>
         )}
-      </div>
+      </ul>
     </div>
   ))
 }

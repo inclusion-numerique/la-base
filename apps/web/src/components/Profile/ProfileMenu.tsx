@@ -60,7 +60,7 @@ const ProfileMenu = ({
   return (
     <div className="fr-border-bottom fr-mb-md-6w fr-mb-4w">
       <div className="fr-container fr-flex-lg">
-        <nav className="fr-nav fr-mx-auto">
+        <nav className="fr-nav fr-mx-auto" aria-label="Navigation du profil">
           <ul className="fr-nav__list fr-justify-content-center">
             <MenuItem
               tab="ressources"
