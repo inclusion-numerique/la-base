@@ -84,9 +84,7 @@ const ResourceDates = ({
   }
 
   return (
-    <p className="fr-mb-0 fr-text--xs">
-      Créée&nbsp;le&nbsp;{dateAsDay(resource.created)}
-    </p>
+    <p className="fr-mb-0">Créée&nbsp;le&nbsp;{dateAsDay(resource.created)}</p>
   )
 }
 export default ResourceDates

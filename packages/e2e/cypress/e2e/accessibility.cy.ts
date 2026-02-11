@@ -377,13 +377,13 @@ describe('Accessibilité - Pages critiques', () => {
       cy.signin(user)
     })
 
-    // describe('Création de base', () => {
-    //   it.only('Page de création d\'une base', () => {
-    //     cy.visit('/bases/creer')
-    //     cy.dsfrStylesShouldBeLoaded()
-    //     cy.checkAccessibility()
-    //   })
-    // })
+    describe('Création de base', () => {
+      it("Page de création d'une base", () => {
+        cy.visit('/bases/creer')
+        cy.dsfrStylesShouldBeLoaded()
+        cy.checkAccessibility()
+      })
+    })
 
     describe('Édition de ressource', () => {
       it("Page d'édition d'une ressource", () => {

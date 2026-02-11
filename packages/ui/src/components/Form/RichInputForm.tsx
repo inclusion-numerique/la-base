@@ -64,6 +64,13 @@ const RichInputForm = <T extends FieldValues>({
   const editor = useEditor({
     extensions: [StarterKit, CustomLink],
     content: form.getValues(path) ?? '',
+    editorProps: {
+      attributes: {
+        role: 'textbox',
+        'aria-multiline': 'true',
+        'aria-label': 'Edition du contenu',
+      },
+    },
     onUpdate: (event) => {
       if (onChange) {
         const html = event.editor.getHTML()
@@ -96,11 +103,13 @@ const RichInputForm = <T extends FieldValues>({
 
   return (
     <>
-      {label && (
+      {label && typeof label === 'string' ? (
         <label className="fr-label fr-mb-1w" htmlFor={id}>
           {label}
           {hint && <span className="fr-mt-1v fr-hint-text">{hint}</span>}
         </label>
+      ) : (
+        <>{label}</>
       )}
       {editor ? (
         <div className={styles.container}>
@@ -116,7 +125,6 @@ const RichInputForm = <T extends FieldValues>({
             className={classNames(styles.input, {
               [styles.small]: size === 'small',
             })}
-            aria-label={typeof label === 'string' ? label : undefined}
             aria-describedby={ariaDescribedBy}
             disabled={disabled}
             id={id}
