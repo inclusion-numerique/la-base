@@ -23,7 +23,6 @@ const CollectionCard = ({
   token?: string
 }) => {
   const resourcesCount = collection._count.resources
-
   const href = appendShareToken(`/collections/${collection.slug}`, token)
 
   return (
@@ -68,7 +67,7 @@ const CollectionCard = ({
             </h3>
             {collection.description && (
               <div
-                className="fr-text--sm fr-mb-3v fr-text-mention--grey"
+                className="fr-text--sm fr-mb-3v fr-text-mention--grey fr-mb-0"
                 dangerouslySetInnerHTML={{
                   __html: collection.description,
                 }}

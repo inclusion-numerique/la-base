@@ -69,31 +69,20 @@ export const NewsFeedHeader = async ({
             />
           )}
           {thematique !== 'tout' ? (
-            <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
-              <p
-                className={classNames(
-                  'fr-mb-0',
-                  CATEGORY_VARIANTS[themeCategories[theme]].color,
-                )}
-              >
-                Découvrez les dernières publications liées à la thématique
-              </p>
-              <p
-                className={classNames(
-                  'fr-text--bold fr-mb-0',
-                  CATEGORY_VARIANTS[themeCategories[theme]].color,
-                )}
-              >
-                {themeLabels[theme]}
-              </p>
-            </div>
+            <p
+              className={classNames(
+                'fr-flex fr-direction-column fr-text--lg fr-mb-0',
+                CATEGORY_VARIANTS[themeCategories[theme]].color,
+              )}
+            >
+              Découvrez les dernières publications liées à la thématique
+              <span className="fr-text--bold">{themeLabels[theme]}</span>
+            </p>
           ) : (
-            <div className="fr-flex fr-text--lg fr-mb-0">
-              <span className="fr-mb-0">
-                Découvrez les dernières publications liées à&nbsp;
-                <span className="fr-text--bold">vos thématiques suivies</span>
-              </span>
-            </div>
+            <p className="fr-flex fr-text--lg fr-mb-0">
+              Découvrez les dernières publications liées à&nbsp;
+              <span className="fr-text--bold">vos thématiques suivies</span>
+            </p>
           )}
         </div>
       )
@@ -110,36 +99,32 @@ export const NewsFeedHeader = async ({
             />
           )}
           {secteur !== 'tout' ? (
-            <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
-              <span className="fr-mb-0">
+            <div className="fr-flex fr-direction-column">
+              <p className="fr-mb-0 fr-text--lg">
                 Découvrez les dernières publications liées au secteur
                 professionnel
-              </span>
-              <span className="fr-text--bold">
+              </p>
+              <p className="fr-text--bold fr-mb-0 fr-text--lg">
                 {professionalSectorsLabels[sector]}
-              </span>
+              </p>
             </div>
           ) : (
-            <div className="fr-flex fr-text--lg fr-mb-0">
-              <span className="fr-mb-0">
-                Découvrez les dernières publications liées à&nbsp;
-                <span className="fr-text--bold">
-                  vos secteurs professionnels suivis
-                </span>
+            <p className="fr-mb-0 fr-text--lg">
+              Découvrez les dernières publications liées à&nbsp;
+              <span className="fr-text--bold">
+                vos secteurs professionnels suivis
               </span>
-            </div>
+            </p>
           )}
         </div>
       )
     }
     if (base === 'tout' && profil === 'tout') {
       return (
-        <div className="fr-flex fr-text--lg fr-mb-0">
-          <span className="fr-mb-0">
-            Découvrez les dernières publications liées à&nbsp;
-            <span className="fr-text--bold">vos bases et profils suivis</span>
-          </span>
-        </div>
+        <p className="fr-mb-0 fr-text--lg">
+          Découvrez les dernières publications liées à&nbsp;
+          <span className="fr-text--bold">vos bases et profils suivis</span>
+        </p>
       )
     }
 
@@ -150,11 +135,9 @@ export const NewsFeedHeader = async ({
 
       if (!followedBase) {
         return (
-          <div className="fr-flex fr-text--lg fr-mb-0">
-            <span className="fr-mb-0">
-              Découvrez les dernières publications liées à la base
-            </span>
-          </div>
+          <p className="fr-flex fr-text--lg fr-mb-0">
+            Découvrez les dernières publications liées à la base
+          </p>
         )
       }
 
@@ -199,10 +182,8 @@ export const NewsFeedHeader = async ({
         <div className="fr-flex fr-flex-gap-4v fr-align-items-center">
           <RoundProfileImage user={followedProfile.profile} />
 
-          <div className="fr-flex fr-direction-column fr-text--lg fr-mb-0">
-            <span className="fr-mb-0">
-              Découvrez les dernières publications
-            </span>
+          <p className="fr-text--lg fr-mb-0">
+            Découvrez les dernières publications
             <span className="fr-mb-0">
               de&nbsp;
               <Link
@@ -212,21 +193,21 @@ export const NewsFeedHeader = async ({
                 {followedProfile.profile.name}
               </Link>
             </span>
-          </div>
+          </p>
         </div>
       )
     }
 
     return (
-      <div className="fr-flex fr-direction-column fr-flex-gap-2v">
-        <span className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
+      <>
+        <p className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
           Découvrez les dernières publications liées à vos préférences
-        </span>
+        </p>
 
-        <span className="fr-text--md fr-hidden-sm fr-mb-0">
+        <p className="fr-text--md fr-hidden-sm fr-mb-0">
           Découvrez les dernières publications liées à vos préférences
-        </span>
-      </div>
+        </p>
+      </>
     )
   }
 

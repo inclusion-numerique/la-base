@@ -47,7 +47,7 @@ export const NewsFeedOnboardingDone = ({
           <h2 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
             Votre fil d'actualité est prêt !
           </h2>
-          <span
+          <p
             className={classNames(
               styles.description,
               'fr-text--center fr-text-mention--grey fr-mb-0',
@@ -55,15 +55,13 @@ export const NewsFeedOnboardingDone = ({
           >
             Découvrez les ressources liées à vos préférences et restez informé
             des nouvelles publications.
-          </span>
+          </p>
         </div>
-        <div className="fr-flex fr-direction-column fr-align-items-center fr-justify-content-center fr-text-mention--grey fr-text--center">
+        <p className="fr-flex fr-direction-column fr-align-items-center fr-justify-content-center fr-text-mention--grey fr-text--center fr-mb-0">
           <span className="fr-text--bold">Bon à savoir :</span>
-          <span>
-            Utilisez le menu présentant vos préférences sur la gauche de l’écran
-            pour filtrer les ressources de votre fil d’actualité.
-          </span>
-        </div>
+          Utilisez le menu présentant vos préférences sur la gauche de l’écran
+          pour filtrer les ressources de votre fil d’actualité.
+        </p>
         <Notice
           title={
             <p className="fr-mb-0">

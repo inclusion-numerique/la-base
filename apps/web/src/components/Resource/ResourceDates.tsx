@@ -57,7 +57,7 @@ const ResourceDates = ({
       return (
         <div className="fr-flex fr-direction-column fr-direction-md-row fr-flex-gap-2v fr-flex-gap-md-0">
           {unpublishedModifications}
-          <p className="fr-mb-0">
+          <p className="fr-mb-0 fr-text--xs">
             Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}
           </p>
         </div>
@@ -72,11 +72,11 @@ const ResourceDates = ({
   if (updatedDay !== createdDay) {
     return (
       <>
-        <p className="fr-mb-0">
+        <p className="fr-mb-0 fr-text--xs">
           Créée&nbsp;le&nbsp;{dateAsDay(resource.created)}
         </p>
         <div className={styles.separator} />
-        <p className="fr-mb-0">
+        <p className="fr-mb-0 fr-text--xs">
           Modifiée&nbsp;le&nbsp;{dateAsDay(resource.updated)}
         </p>
       </>
@@ -84,7 +84,9 @@ const ResourceDates = ({
   }
 
   return (
-    <p className="fr-mb-0">Créée&nbsp;le&nbsp;{dateAsDay(resource.created)}</p>
+    <p className="fr-mb-0 fr-text--xs">
+      Créée&nbsp;le&nbsp;{dateAsDay(resource.created)}
+    </p>
   )
 }
 export default ResourceDates

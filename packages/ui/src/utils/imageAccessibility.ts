@@ -13,7 +13,6 @@
  */
 export type InformativeImageProps = {
   alt: string
-  decorative?: false
   'aria-hidden'?: never
   role?: never
 }
@@ -24,7 +23,6 @@ export type InformativeImageProps = {
  */
 export type DecorativeImageProps = {
   alt: '' // Alt vide obligatoire si decorative est true
-  decorative: true
   'aria-hidden': true
   role: 'presentation'
 }
@@ -37,9 +35,9 @@ export type AccessibleImageProps = InformativeImageProps | DecorativeImageProps
 /**
  * Helper pour créer des props d'image accessibles
  */
-export const createAccessibleImageProps = (
-  options: { alt: string } | { decorative: true },
-): AccessibleImageProps => {
+export const createAccessibleImageProps = (options: {
+  alt: string
+}): AccessibleImageProps => {
   if ('alt' in options) {
     return {
       alt: options.alt,
@@ -47,7 +45,6 @@ export const createAccessibleImageProps = (
   }
   return {
     alt: '',
-    decorative: true,
     'aria-hidden': true,
     role: 'presentation',
   }
@@ -73,7 +70,6 @@ export const getImageAccessibilityProps = (
   }
   return {
     alt: '',
-    decorative: true,
     'aria-hidden': true,
     role: 'presentation',
   }

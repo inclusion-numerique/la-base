@@ -46,9 +46,9 @@ const InviteBaseMemberRow = ({
             {member.label}
           </h3>
           {!!member.extra?.email && (
-            <span className="fr-text--xs fr-mb-0 fr-hint-text">
+            <p className="fr-text--xs fr-mb-0 fr-hint-text">
               {member.extra.email}
-            </span>
+            </p>
           )}
         </div>
 

@@ -63,10 +63,10 @@ export default function NewsFeedOnboardingPage({
           >
             <IconInSquare iconId={feature.iconId} />
             <div className="fr-flex fr-direction-column">
-              <span className="fr-text--bold">{feature.title}</span>
-              <span className={styles.itemDescription}>
+              <p className="fr-text--bold fr-mb-0">{feature.title}</p>
+              <p className={classNames('fr-mb-0', styles.description)}>
                 {feature.description}
-              </span>
+              </p>
             </div>
           </div>
         ))}

@@ -27,14 +27,14 @@ const CollectionMetaData = ({
 }) => (
   <div
     className={classNames(
-      'fr-flex fr-text--sm fr-mb-0 fr-text-mention--grey',
+      'fr-flex fr-mb-0 fr-text-mention--grey',
       context === 'view' &&
         'fr-justify-content-start fr-flex-gap-2v fr-flex-gap-md-0 fr-direction-row fr-direction-sm-column fr-justify-content-md-space-between fr-direction-md-row',
       ['card', 'contextModal'].includes(context) && 'fr-flex-gap-2v',
       className,
     )}
   >
-    <p className={classNames('fr-flex fr-flex-gap-2v fr-mb-0')}>
+    <p className="fr-flex fr-flex-gap-2v fr-mb-0 fr-text--sm">
       <span className="fr-icon-file-text-line fr-icon--sm" />
       <span>{count}</span>
       <span

@@ -15,9 +15,9 @@ const Visibility = ({
 }) => (
   <div className="fr-flex fr-align-items-center">
     <div className="fr-flex-grow-1 fr-mr-1w">
-      <span className="fr-text-label--grey">
+      <p className="fr-text-label--grey fr-mb-0">
         {isPublic ? publicTitle : privateTitle}
-      </span>
+      </p>
       <p className="fr-text--xs fr-hint-text fr-mb-0" data-testid="visibility">
         {isPublic ? publicHint : privateHint}
       </p>

@@ -1,16 +1,22 @@
 import SearchFilters, {
   FiltersInitialValue,
 } from '@app/ui/components/Form/Filters/SearchFilters'
+import { metadataTitle } from '@app/web/app/metadataTitle'
 import SearchMenu from '@app/web/components/Search/SearchMenu'
 import { searchParamsFromSegment } from '@app/web/server/search/searchQueryParams'
 import {
   departmentsOptions,
   getDepartmentName,
 } from '@app/web/utils/departments'
+import { Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: metadataTitle('Rechercher des bases'),
+}
 
 const BasesSearchLayout = async ({
   params,

@@ -17,17 +17,20 @@ const EmptyProfileResources = ({
   >
     {canWrite ? (
       <>
-        <div>
+        <p className="fr-mb-0">
           Présentez, valorisez & publiez vos ressources afin qu’elles soient
           diffusées <br />
           auprès d’un large public.
-        </div>
+        </p>
         <div data-testid="create-resource-button">
           <CreateResourceButton baseId={null} className="fr-mt-4w" />
         </div>
       </>
     ) : (
-      'Revenez plus tard ou suivez ce profil afin d’être tenu informé de ses prochaines publications.'
+      <p className="fr-mb-0">
+        Revenez plus tard ou suivez ce profil afin d’être tenu informé de ses
+        prochaines publications.
+      </p>
     )}
   </EmptyBox>
 )

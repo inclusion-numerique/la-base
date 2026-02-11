@@ -50,7 +50,7 @@ const Card = ({
         <CardTitle className={classNames('fr-card__title', titleClassName)}>
           {href ? <Link href={href}>{title}</Link> : title}
         </CardTitle>
-        {description && <div className="fr-card__desc">{description}</div>}
+        {description && <p className="fr-card__desc">{description}</p>}
         {children && (
           <div
             className={classNames(
