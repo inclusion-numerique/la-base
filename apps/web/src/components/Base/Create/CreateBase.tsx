@@ -3,7 +3,6 @@
 import CroppedUpload from '@app/ui/components/CroppedUpload/CroppedUpload'
 import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import type { SelectOptionValid } from '@app/ui/components/Form/OptionBadge'
-import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import type { SessionUser } from '@app/web/auth/sessionUser'
@@ -156,11 +155,6 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             titleAs="h2"
             className="fr-mt-3w fr-border-radius--8 fr-border"
             id="informations"
-            description={
-              <span className="fr-text--sm fr-hint-text fr-mb-0">
-                Les champs avec <RedAsterisk /> sont obligatoires.
-              </span>
-            }
             contentSeparator
           >
             <BaseInformationsEdition
@@ -178,11 +172,6 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
             titleAs="h2"
             className="fr-mt-3w fr-border-radius--8 fr-border"
             id="contacts"
-            description={
-              <span className="fr-text--sm fr-hint-text fr-mb-0">
-                Les champs avec <RedAsterisk /> sont obligatoires.
-              </span>
-            }
             contentSeparator
           >
             <BaseContactsEdition

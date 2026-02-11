@@ -51,7 +51,7 @@ const ResourceLicenceForm = ({
       title="Licence de la ressource"
       titleAs="h2"
       description={
-        <span>
+        <>
           Choisissez sous quelle licence vous souhaitez publier votre ressource.
           <br />
           <ExternalLink
@@ -60,7 +60,7 @@ const ResourceLicenceForm = ({
           >
             En savoir plus
           </ExternalLink>
-        </span>
+        </>
       }
       form={form}
       mutation={handleMutation}

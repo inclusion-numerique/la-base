@@ -148,12 +148,14 @@ const InviteResourceContributors = ({
                 <h3 className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
                   {resource.createdBy.name}
                 </h3>
-                <span className="fr-text--xs fr-mb-0 fr-hint-text">
+                <p className="fr-text--xs fr-mb-0 fr-hint-text">
                   {resource.createdBy.email}
-                </span>
+                </p>
               </div>
             </div>
-            <div className={styles.creator}>Propriétaire</div>
+            <p className={classNames(styles.creator, 'fr-mb-0')}>
+              Propriétaire
+            </p>
           </div>
           {contributors &&
             contributors.map((contributor) => (
@@ -171,18 +173,18 @@ const InviteResourceContributors = ({
                   <div className="fr-flex fr-direction-column fr-width-full">
                     {!!contributor.name && (
                       <>
-                        <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                        <p className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
                           {contributor.name}
-                        </span>
-                        <span className="fr-ml-1w fr-text--xs fr-mb-0 fr-hint-text">
+                        </p>
+                        <p className="fr-ml-1w fr-text--xs fr-mb-0 fr-hint-text">
                           {contributor.email}
-                        </span>
+                        </p>
                       </>
                     )}
                     {!!contributor.email && !contributor.name && (
-                      <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                      <p className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
                         {contributor.email}
-                      </span>
+                      </p>
                     )}
                   </div>
                 </div>

@@ -63,7 +63,7 @@ const EditableCard = ({
       description={
         <>
           {subtitle}
-          <div className="fr-hidden-sm fr-unhidden">
+          {/* <div className="fr-hidden-sm fr-unhidden">
             <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
               {!isEditMode && (
                 <Button
@@ -78,7 +78,7 @@ const EditableCard = ({
                 </Button>
               )}
             </div>
-          </div>
+          </div> */}
         </>
       }
       titleAs="div"

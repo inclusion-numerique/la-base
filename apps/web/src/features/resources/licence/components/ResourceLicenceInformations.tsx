@@ -11,7 +11,7 @@ const ResourceLicenceInformations = ({
   return (
     <div className="fr-flex fr-direction-column fr-flex-gap-2v fr-mt-3w">
       {information.symbols}
-      <div className="fr-flex fr-flex-gap-2v fr-text--xs fr-mb-0">
+      <p className="fr-flex fr-flex-gap-2v fr-text--xs fr-mb-0">
         {information.url ? (
           <ExternalLink href={information.url} className="fr-link fr-text--xs">
             {information.title}
@@ -20,7 +20,7 @@ const ResourceLicenceInformations = ({
           <span>{information.title}</span>
         )}
         <span className="fr-mb-0">· {information.hint}</span>
-      </div>
+      </p>
     </div>
   )
 }

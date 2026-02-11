@@ -95,14 +95,14 @@ const ResourceIndexationView = ({
 
   return resourceInfo.map(({ title, description, tags, slug }) => (
     <div key={title}>
-      <div className={'fr-mt-3w'}>
-        <span className={titleClassName}>{title}</span>
+      <p className={classNames(titleClassName, 'fr-mt-3w fr-mb-0')}>
+        {title}
         {withDescription && (
-          <div className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
+          <span className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
             {description}
-          </div>
+          </span>
         )}
-      </div>
+      </p>
       <div className={classNames(styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
           <>

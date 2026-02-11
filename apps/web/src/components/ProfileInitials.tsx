@@ -23,6 +23,7 @@ const ProfileInitials = ({
   <span
     className="fr-flex fr-align-items-center fr-justify-content-center fr-text-label--blue-ecume fr-width-full fr-height-full fr-text--medium"
     style={{ fontSize: size, backgroundColor: 'var(--blue-ecume-850-200)' }}
+    aria-hidden
   >
     {computeInitials(firstName, lastName)}
   </span>

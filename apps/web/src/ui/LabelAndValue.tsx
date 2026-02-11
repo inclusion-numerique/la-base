@@ -20,14 +20,22 @@ export const LabelAndValue = ({
   if (value === null || value === undefined || value === '') {
     return defaultValue ? (
       <Component className={className}>
-        {inline ? <>{children}&nbsp;:&nbsp;</> : <div>{children}</div>}
+        {inline ? (
+          <>{children}&nbsp;:&nbsp;</>
+        ) : (
+          <p className="fr-mb-0">{children}</p>
+        )}
         <strong>{defaultValue}</strong>
       </Component>
     ) : null
   }
   return (
     <Component className={className}>
-      {inline ? <>{children}&nbsp;:&nbsp;</> : <div>{children}</div>}
+      {inline ? (
+        <>{children}&nbsp;:&nbsp;</>
+      ) : (
+        <p className="fr-mb-0">{children}</p>
+      )}
       {isHtml ? (
         <strong>{value}</strong>
       ) : (

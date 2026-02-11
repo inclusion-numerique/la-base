@@ -50,8 +50,8 @@ const ResourceEditionStateBadge = ({
 
   return (
     <ResourceEditionStateWrapper>
-      <span className="fr-icon--sm fr-mb-0 fr-icon-check-line" />
-      <span className="fr-ml-1w">{label}</span>
+      <span className="fr-icon--sm fr-mb-0 fr-icon-check-line" aria-hidden />
+      <span className="fr-ml-1w fr-mb-0">{label}</span>
     </ResourceEditionStateWrapper>
   )
 }

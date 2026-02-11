@@ -1,6 +1,14 @@
 import CategoryPage, {
   type CategoryPageUrlParams,
 } from '@app/web/app/(public)/(categories)/_components/CategoryPage'
+import { metadataTitle } from '@app/web/app/metadataTitle'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: metadataTitle(
+    'Rechercher des ressources sur le thème de la culture numérique',
+  ),
+}
 
 const CultureNumeriquePage = async ({
   params: paramsPromise,
