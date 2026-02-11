@@ -90,30 +90,26 @@ const EditCard = <
           </div>
         </div>
       }
-      description={
-        <>
-          {description}
-          <div className="fr-hidden-sm fr-unhidden">
-            <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
-              {!editMode && setEditMode && (
-                <Button
-                  data-testid="edit-card-button"
-                  className="fr-text--sm fr-text--medium"
-                  size="small"
-                  priority="tertiary no outline"
-                  onClick={() => setEditMode(true)}
-                >
-                  Modifier
-                  <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
-                </Button>
-              )}
-            </div>
-          </div>
-        </>
-      }
+      description={description}
       titleAs="div"
       contentSeparator
     >
+      <div className="fr-hidden-sm fr-unhidden">
+        <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
+          {!editMode && setEditMode && (
+            <Button
+              data-testid="edit-card-button"
+              className="fr-text--sm fr-text--medium"
+              size="small"
+              priority="tertiary no outline"
+              onClick={() => setEditMode(true)}
+            >
+              Modifier
+              <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+            </Button>
+          )}
+        </div>
+      </div>
       {editMode ? (
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {edition}

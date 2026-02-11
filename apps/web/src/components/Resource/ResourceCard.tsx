@@ -66,12 +66,9 @@ const ResourceCard = ({
       )}
       {children}
       {withDate && (
-        <p
-          className="fr-hidden fr-unhidden-md fr-text--xs fr-mb-0"
-          aria-hidden="true"
-        >
+        <div className="fr-hidden fr-unhidden-md" aria-hidden="true">
           <ResourceDates canEdit={isContributor} resource={resource} />
-        </p>
+        </div>
       )}
     </div>
     <div className="fr-flex fr-direction-column fr-justify-content-space-between">
