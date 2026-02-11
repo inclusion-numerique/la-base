@@ -40,7 +40,7 @@ const BaseMetadata = ({
     >
       <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm">
         <span className="fr-icon-file-text-line fr-icon--sm" />
-        <p className="fr-mb-0">
+        <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesCount)}</b>
           <span className={styles.spanMdDisplay}>
             {' '}
@@ -56,7 +56,7 @@ const BaseMetadata = ({
           <>
             <div>·</div>
             <span className="fr-icon-user-heart-line fr-icon--sm" />
-            <p className="fr-mb-0">
+            <p className="fr-mb-0 fr-text--sm">
               <b>{numberToString(followedBy)}</b>
               <span className={styles.spanMdDisplay}>
                 {' '}
@@ -67,7 +67,7 @@ const BaseMetadata = ({
         )}
         <div>·</div>
         <span className="fr-icon-eye-line fr-icon--sm" />
-        <p className="fr-mb-0">
+        <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesViews)}</b>
           <span className={styles.spanMdDisplay}> {viewsLabel}</span>
         </p>
