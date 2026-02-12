@@ -5,11 +5,11 @@ import { createGithubDeployment } from '@app/cli/commands/github/createGithubDep
 import { deactivateGithubDeployment } from '@app/cli/commands/github/deactivateGithubDeployment'
 import { updateGithubDeployment } from '@app/cli/commands/github/updateGithubDeployment'
 import { addNextPublicVariablesToDotEnv } from '@app/cli/commands/infrastructure/addNextPublicVariablesToDotEnv'
-import { cleanupPreviewEnvironments } from '@app/cli/commands/infrastructure/cleanupPreviewEnvironments'
-import { createInfrastructureResources } from '@app/cli/commands/infrastructure/createInfrastructureResources'
 import { createDotEnvFromCdk } from '@app/cli/commands/infrastructure/createDotEnvFromCdk'
+import { createInfrastructureResources } from '@app/cli/commands/infrastructure/createInfrastructureResources'
 import { createTfVarsFileFromEnvironment } from '@app/cli/commands/infrastructure/createTfVarsFileFromEnvironment'
 import { deletePreviewEnvironments } from '@app/cli/commands/infrastructure/deletePreviewEnvironments'
+import { infrastructureInventory } from '@app/cli/commands/infrastructure/inventory'
 import { locallyRestoreLatestMainBackup } from '@app/cli/commands/infrastructure/locallyRestoreLatestMainBackup'
 import { executeJobApiCommand } from '@app/cli/commands/jobs/executeJobApiCommand'
 import { executeJobCommand } from '@app/cli/commands/jobs/executeJobCommand'
@@ -33,7 +33,7 @@ program.addCommand(getDatabasePasswordSecret)
 program.addCommand(createDotEnvFromCdk)
 program.addCommand(createDotEnvFromSecrets)
 program.addCommand(addNextPublicVariablesToDotEnv)
-program.addCommand(cleanupPreviewEnvironments)
+program.addCommand(infrastructureInventory)
 program.addCommand(createInfrastructureResources)
 program.addCommand(deletePreviewEnvironments)
 program.addCommand(createGithubDeployment)

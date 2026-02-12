@@ -1,3 +1,4 @@
+import { randomBytes } from 'node:crypto'
 import { output, outputError } from '@app/cli/output'
 import {
   containerNamespaceName,
@@ -7,7 +8,6 @@ import {
 } from '@app/config/config'
 import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
-import { randomBytes } from 'node:crypto'
 
 const { computeBranchNamespace } = await import('@app/cdk/utils')
 
@@ -115,9 +115,12 @@ const buildContainerClient = (scwRegion: string, token: string) =>
 
 const fetchRdbInstance = async (scwRegion: string, token: string) => {
   const client = buildRdbClient(scwRegion, token)
-  const { data } = await client.get<{ instances: RdbInstance[] }>('/instances', {
-    params: { name: databaseInstanceName, page_size: 100 },
-  })
+  const { data } = await client.get<{ instances: RdbInstance[] }>(
+    '/instances',
+    {
+      params: { name: databaseInstanceName, page_size: 100 },
+    },
+  )
   const instance = data.instances.find(
     (candidate) => candidate.name === databaseInstanceName,
   )
@@ -162,7 +165,9 @@ const ensureDatabaseUserAndPrivilege = async ({
   const client = buildRdbClient(scwRegion, token)
 
   const [dbs, users, privileges] = await Promise.all([
-    client.get<{ databases: RdbDatabase[] }>(`/instances/${instanceId}/databases`),
+    client.get<{ databases: RdbDatabase[] }>(
+      `/instances/${instanceId}/databases`,
+    ),
     client.get<{ users: RdbUser[] }>(`/instances/${instanceId}/users`),
     client.get<{ privileges: RdbPrivilege[] }>(
       `/instances/${instanceId}/privileges`,
@@ -176,7 +181,9 @@ const ensureDatabaseUserAndPrivilege = async ({
     if (dryRun) {
       output(`  [dry-run] Would create database "${databaseName}"`)
     } else {
-      await client.post(`/instances/${instanceId}/databases`, { name: databaseName })
+      await client.post(`/instances/${instanceId}/databases`, {
+        name: databaseName,
+      })
       output(`  Created database "${databaseName}"`)
     }
   } else {
@@ -189,7 +196,8 @@ const ensureDatabaseUserAndPrivilege = async ({
       output(`  [dry-run] Would create database user "${userName}"`)
     } else {
       const password =
-        process.env.DATABASE_PASSWORD ?? `Temp1!${randomBytes(16).toString('hex')}`
+        process.env.DATABASE_PASSWORD ??
+        `Temp1!${randomBytes(16).toString('hex')}`
       await client.post(`/instances/${instanceId}/users`, {
         name: userName,
         password,
@@ -298,13 +306,18 @@ export const createInfrastructureResources = new Command()
     'Create missing Scaleway resources for a stack (database+user+privilege or container)',
   )
   .argument('<resource>', 'database|container')
-  .argument('<names>', 'Comma-separated names (branch/namespace/resource names)')
+  .argument(
+    '<names>',
+    'Comma-separated names (branch/namespace/resource names)',
+  )
   .option('--dry-run', 'Show what would be created without creating anything')
   .action(async (resource, namesArgument, { dryRun }) => {
     const isDryRun = Boolean(dryRun)
     const kind = resource as ResourceKind
     if (!['database', 'container'].includes(kind)) {
-      outputError(`Invalid resource "${resource}". Expected: database or container`)
+      outputError(
+        `Invalid resource "${resource}". Expected: database or container`,
+      )
       process.exit(1)
       return
     }
