@@ -111,6 +111,7 @@ const ProfileVisibilityForm = ({
       <EditableCardForm
         id="visibilite"
         title="Visibilité de votre profil"
+        titleAs="h2"
         subtitle={
           <span className="fr-text--sm">
             Choisissez ce que les visiteurs peuvent voir sur votre page

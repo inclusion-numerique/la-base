@@ -72,6 +72,7 @@ const ResourceIndexationView = ({
   resourceTypes,
   titleClassName,
   tagsClassName,
+  titleAs: TitleAs = 'h3',
 }: {
   resource: Resource
   withDescription?: boolean
@@ -82,6 +83,7 @@ const ResourceIndexationView = ({
   professionalSectors?: boolean
   titleClassName?: string
   tagsClassName?: string
+  titleAs?: 'h2' | 'h3'
 }) => {
   const resourceInfo = useMemo(
     () => [
@@ -95,14 +97,19 @@ const ResourceIndexationView = ({
 
   return resourceInfo.map(({ title, description, tags, slug }) => (
     <div key={title}>
-      <p className={classNames(titleClassName, 'fr-mt-3w fr-mb-0')}>
+      <TitleAs
+        className={classNames(
+          titleClassName,
+          'fr-mt-3w fr-mb-0 fr-text--normal',
+        )}
+      >
         {title}
         {withDescription && (
           <span className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
             {description}
           </span>
         )}
-      </p>
+      </TitleAs>
       <ul className={classNames('fr-raw-list', styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
           <>

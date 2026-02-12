@@ -40,7 +40,14 @@ const AddOrRemoveResourceFromCollection = ({
       <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
         <IconInSquare {...iconInSquareProps} />
         <div className={styles.content}>
-          <b className={styles.title}>{collection.title}</b>
+          <h3
+            className={classNames(
+              'fr-text--bold fr-text--sm fr-mb-0',
+              styles.title,
+            )}
+          >
+            {collection.title}
+          </h3>
           <div className={styles.collections}>
             {collection.slug && (
               <div className="fr-flex fr-justify-content-space-between fr-align-items-center">

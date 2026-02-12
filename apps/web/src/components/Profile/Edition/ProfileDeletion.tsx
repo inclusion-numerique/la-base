@@ -43,6 +43,7 @@ const ProfileDeletion = ({ userId }: { userId: string }) => {
       noBorder
       id="supprimer"
       className="fr-border-radius--8 fr-border"
+      titleAs="h2"
       title={
         <span className="fr-text-label--blue-france">
           Supprimer votre profil

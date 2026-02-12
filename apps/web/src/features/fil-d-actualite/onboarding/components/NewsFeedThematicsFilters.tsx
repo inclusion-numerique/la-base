@@ -64,65 +64,66 @@ export const NewsFeedThematicsFilters = ({
         </Button>
       </div>
       {isOpen && (
-        <div className="fr-flex fr-direction-column">
+        <ul className="fr-raw-list fr-flex fr-direction-column">
           {displayedThemes.map((theme) => (
-            <Button
-              key={theme}
-              priority="tertiary no outline"
-              className={classNames(
-                params === theme && commonStyles.activeButton,
-                'fr-width-full fr-text-mention--grey',
-                styles.button,
-              )}
-              linkProps={{ href: createThemeUrl(theme) }}
-            >
-              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
-                <div
-                  className={classNames(
-                    'fr-flex fr-align-items-center fr-flex-gap-2v',
-                    styles.flexWidth,
-                  )}
-                >
-                  <IconInSquare
-                    iconId={
-                      CATEGORY_VARIANTS[themeCategories[theme]]
-                        .icon as RiIconClassName
-                    }
-                    size="small"
-                    className={
-                      CATEGORY_VARIANTS[themeCategories[theme]].background
-                    }
-                    iconClassName={
-                      CATEGORY_VARIANTS[themeCategories[theme]].color
-                    }
-                  />
-                  <span
+            <li key={theme}>
+              <Button
+                priority="tertiary no outline"
+                className={classNames(
+                  params === theme && commonStyles.activeButton,
+                  'fr-width-full fr-text-mention--grey',
+                  styles.button,
+                )}
+                linkProps={{ href: createThemeUrl(theme) }}
+              >
+                <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                  <div
                     className={classNames(
-                      'fr-mb-0 fr-text--xs fr-text--start',
+                      'fr-flex fr-align-items-center fr-flex-gap-2v',
                       styles.flexWidth,
-                      commonStyles.label,
                     )}
                   >
-                    {themeLabels[theme]}
+                    <IconInSquare
+                      iconId={
+                        CATEGORY_VARIANTS[themeCategories[theme]]
+                          .icon as RiIconClassName
+                      }
+                      size="small"
+                      className={
+                        CATEGORY_VARIANTS[themeCategories[theme]].background
+                      }
+                      iconClassName={
+                        CATEGORY_VARIANTS[themeCategories[theme]].color
+                      }
+                    />
+                    <span
+                      className={classNames(
+                        'fr-mb-0 fr-text--xs fr-text--start',
+                        styles.flexWidth,
+                        commonStyles.label,
+                      )}
+                    >
+                      {themeLabels[theme]}
+                    </span>
+                  </div>
+                  <span
+                    className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                  >
+                    {counts[theme].count}
                   </span>
                 </div>
-                <span
-                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
-                >
-                  {counts[theme].count}
-                </span>
-              </div>
-            </Button>
+              </Button>
+            </li>
           ))}
-          <div className="fr-pb-4v">
+          <li className="fr-pb-4v">
             <Button
               priority="tertiary no outline"
               onClick={() => setShowAll((prev) => !prev)}
             >
               {showAll ? 'Voir moins' : 'Tout voir'}
             </Button>
-          </div>
-        </div>
+          </li>
+        </ul>
       )}
     </>
   )

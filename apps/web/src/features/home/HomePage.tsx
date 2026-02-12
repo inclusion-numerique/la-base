@@ -3,7 +3,7 @@ import Newsletter from '@app/web/app/(public)/Newsletter'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import WhoAreWe from '@app/web/features/home/components/WhoAreWe'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
 import Banner from './components/Banner'
@@ -25,12 +25,7 @@ const HomePage = async ({
 
   return (
     <>
-      <SkipLinksPortal
-        links={[
-          { label: 'Recherche', anchor: `#search-bar` },
-          ...defaultSkipLinks,
-        ]}
-      />
+      <SkipLinksPortal />
       <div id={contentId}>
         <Banner />
         <div className="fr-container fr-pt-8w fr-pb-0 fr-py-md-10w">
@@ -54,14 +49,14 @@ const HomePage = async ({
               </span>
             </p>
             <div className="fr-mb-6w fr-mb-md-10w">
-              <h2 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
+              <h3 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
                 Explorez les ressources grâce aux 4 grandes catégories
-              </h2>
+              </h3>
               <HomeCategories />
             </div>
-            <p className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
-              ressources à la une
-            </p>
+            <h3 className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
+              Ressources à la une
+            </h3>
           </div>
           <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters fr-mb-12v">
             {featuredResources.map((resource) => (
@@ -220,7 +215,7 @@ const HomePage = async ({
           <div className="fr-mt-6w fr-mt-md-10w fr-background-alt--yellow-tournesol fr-p-3w fr-p-md-6w fr-grid-row fr-border-radius--16">
             <div className="fr-flex fr-direction-column fr-justify-content-space-between">
               <h2>
-                Vous aussi rejoignez
+                Vous aussi rejoignez&nbsp;
                 <br />
                 la communauté&nbsp;!
               </h2>

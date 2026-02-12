@@ -18,6 +18,7 @@ const ResourceDesktopNavigation = ({
       themes
       tagsClassName="fr-mt-1v"
       titleClassName="fr-text--xs fr-mb-0"
+      titleAs="h2"
     />
     {!!navigationData && (
       <>
@@ -33,6 +34,7 @@ const ResourceDesktopNavigation = ({
           items={navigationData.items}
           sticky
           contentId={navigationData.contentId}
+          aria-label="Zones de contenu de la page"
         />
       </>
     )}

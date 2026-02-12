@@ -1,4 +1,4 @@
-import Breadcrumb from '@codegouvfr/react-dsfr/Breadcrumb'
+import CustomBreadcrumbs from '@app/web/components/CustomBreadcrumbs'
 import type { Route } from 'next'
 import type { LinkProps } from 'next/link'
 
@@ -19,7 +19,7 @@ const Breadcrumbs = ({
   homeLinkHref?: string
   className?: string
 }) => (
-  <Breadcrumb
+  <CustomBreadcrumbs
     currentPageLabel={currentPage}
     homeLinkProps={{
       href: homeLinkHref ?? '/',

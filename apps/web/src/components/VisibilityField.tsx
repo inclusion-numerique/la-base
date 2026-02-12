@@ -66,7 +66,7 @@ const VisibilityField = <T extends FieldValues>({
           }}
         >
           <div className="fr-flex-grow-1 fr-mr-1w">
-            {publicTitle}
+            <p className="fr-text--md fr-text--normal fr-mb-0">{publicTitle}</p>
             <p className="fr-text--xs fr-hint-text fr-mb-0">{publicHint}</p>
           </div>
           <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
@@ -88,7 +88,9 @@ const VisibilityField = <T extends FieldValues>({
           }}
         >
           <div className="fr-flex-grow-1 fr-mr-1w">
-            {privateTitle}
+            <p className="fr-text--md fr-text--normal fr-mb-0">
+              {privateTitle}
+            </p>
             <p className="fr-text--xs fr-hint-text fr-mb-0">{privateHint}</p>
           </div>
           <div className="fr-hidden fr-unhidden-sm fr-ml-3w">

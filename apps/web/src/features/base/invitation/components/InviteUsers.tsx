@@ -33,6 +33,8 @@ const InviteUsers = forwardRef<
     withBadges?: boolean
     canAddAdmin: boolean
     withAddButton?: boolean
+    listTitleAs?: 'h2' | 'h3' | 'h4'
+    itemAs?: 'h3' | 'h4'
   }
 >(
   (
@@ -48,6 +50,8 @@ const InviteUsers = forwardRef<
       withBadges = true,
       canAddAdmin,
       withAddButton = true,
+      listTitleAs,
+      itemAs,
     },
     ref,
   ) => {
@@ -111,6 +115,8 @@ const InviteUsers = forwardRef<
           withBadges={withBadges}
           canAddAdmin={canAddAdmin}
           withAddButton={withAddButton}
+          listTitleAs={listTitleAs}
+          itemAs={itemAs}
         />
         {error?.message && (
           <p className="fr-error-text" data-testid="invite-members-error">

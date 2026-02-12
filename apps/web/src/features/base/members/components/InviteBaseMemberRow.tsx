@@ -10,6 +10,7 @@ const InviteBaseMemberRow = ({
   onSelectRole,
   onDelete,
   canAddAdmin,
+  itemAs: ItemAs = 'h3',
 }: {
   member: SelectOptionValid<{
     email?: string
@@ -20,6 +21,7 @@ const InviteBaseMemberRow = ({
   onSelectRole: (type: 'admin' | 'member') => void
   onDelete: () => void
   canAddAdmin: boolean
+  itemAs?: 'h3' | 'h4'
 }) => {
   const memberProfile = {
     firstName: member.extra?.firstName ?? null,
@@ -42,9 +44,9 @@ const InviteBaseMemberRow = ({
       )}
       <div className="fr-flex fr-direction-sm-row fr-direction-column fr-width-full fr-justify-content-space-between fr-align-items-center">
         <div>
-          <h3 className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+          <ItemAs className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
             {member.label}
-          </h3>
+          </ItemAs>
           {!!member.extra?.email && (
             <p className="fr-text--xs fr-mb-0 fr-hint-text">
               {member.extra.email}

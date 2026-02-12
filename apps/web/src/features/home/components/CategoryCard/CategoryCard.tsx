@@ -38,46 +38,49 @@ export const CategoryCard = ({
   category,
   resourcesCount,
 }: CategoryCardProps) => (
-  <Link
-    href={CATEGORY_VARIANTS[category].href}
-    aria-label={`Découvrir ${category}`}
+  <li
     className={classNames(
       CATEGORY_VARIANTS_STYLES[category].background,
       CATEGORY_VARIANTS_STYLES[category].hover,
       'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link fr-link--no-underline',
     )}
   >
-    <div className="fr-flex fr-direction-column fr-flex-gap-8v">
-      <div className="fr-flex fr-direction-column fr-flex-gap-2v fr-align-items-start">
-        <span
-          className={classNames(
-            CATEGORY_VARIANTS[category].color,
-            CATEGORY_VARIANTS[category].icon,
-            'ri-xl',
-          )}
-          aria-hidden
-        />
-        <span
-          className={classNames(
-            CATEGORY_VARIANTS[category].color,
-            'fr-text--lg fr-text--bold fr-text--start fr-mb-0',
-            styles.title,
-          )}
-        >
-          {category}
-        </span>
-      </div>
-      <div className="fr-flex fr-flex-gap-2v fr-justify-content-space-between">
-        <p className="fr-mb-0">
-          <span className="fr-text--bold">{resourcesCount}</span> Ressources
-        </p>
-        <span>
+    <Link
+      href={CATEGORY_VARIANTS[category].href}
+      aria-label={`Découvrir ${category}`}
+    >
+      <div className="fr-flex fr-direction-column fr-flex-gap-8v">
+        <div className="fr-flex fr-direction-column fr-flex-gap-2v fr-align-items-start">
           <span
-            className="fr-text-title--blue-france ri-arrow-right-line ri-lg"
+            className={classNames(
+              CATEGORY_VARIANTS[category].color,
+              CATEGORY_VARIANTS[category].icon,
+              'ri-xl',
+            )}
             aria-hidden
           />
-        </span>
+          <h4
+            className={classNames(
+              CATEGORY_VARIANTS[category].color,
+              'fr-text--lg fr-text--bold fr-text--start fr-mb-0',
+              styles.title,
+            )}
+          >
+            {category}
+          </h4>
+        </div>
+        <div className="fr-flex fr-flex-gap-2v fr-justify-content-space-between">
+          <p className="fr-mb-0">
+            <span className="fr-text--bold">{resourcesCount}</span> Ressources
+          </p>
+          <span>
+            <span
+              className="fr-text-title--blue-france ri-arrow-right-line ri-lg"
+              aria-hidden
+            />
+          </span>
+        </div>
       </div>
-    </div>
-  </Link>
+    </Link>
+  </li>
 )

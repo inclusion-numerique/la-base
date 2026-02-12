@@ -11,6 +11,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { trpc } from '@app/web/trpc'
 import { Spinner } from '@app/web/ui/Spinner'
+import { searchId } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -187,9 +188,8 @@ const SearchBar = ({
         <div
           className={classNames('fr-search-bar fr-search-bar--lg')}
           role="search"
-          id="search"
         >
-          <label className="fr-label" htmlFor="search">
+          <label className="fr-label" htmlFor={searchId}>
             Rechercher
           </label>
           <input
@@ -197,7 +197,7 @@ const SearchBar = ({
             value={query}
             onChange={onChange}
             className={classNames('fr-input fr-input--white', styles.input)}
-            id="search-bar"
+            id={searchId}
             type="search"
             name="search"
             placeholder="Rechercher une ressource, une base, un profil..."

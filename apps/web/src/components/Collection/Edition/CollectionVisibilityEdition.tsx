@@ -47,6 +47,7 @@ const CollectionVisibilityEdition = ({
     <EditableCardForm
       id="visibilite"
       title="Visibilité de la collection"
+      titleAs="h2"
       subtitle="Choisissez la visibilité de votre collection."
       form={form}
       onSave={handleSave}

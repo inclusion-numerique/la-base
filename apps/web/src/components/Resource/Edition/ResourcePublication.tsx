@@ -64,7 +64,7 @@ const ResourcePublication = ({
           sendCommand={sendCommand}
         >
           <h2 className="fr-mb-0 fr-h5 fr-text-label--blue-france">
-            Ressource publiée dans
+            Lieu de publication de la ressource
           </h2>
         </ResourceBaseEdition>
         <hr className={classNames(styles.separator, 'fr-mt-4w fr-pb-4w')} />
@@ -149,7 +149,7 @@ const ResourcePublication = ({
           description="Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs et supprimer la ressource."
           contentSeparator
         >
-          <InviteContributors resource={resource} />
+          <InviteContributors resource={resource} titleAs="h3" itemAs="h4" />
         </Card>
       )}
     </>
