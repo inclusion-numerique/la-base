@@ -200,13 +200,13 @@ export const NewsFeedHeader = async ({
 
     return (
       <>
-        <p className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
+        <h1 className="fr-text--xl fr-hidden fr-unhidden-md fr-mb-0">
           Découvrez les dernières publications liées à vos préférences
-        </p>
+        </h1>
 
-        <p className="fr-text--md fr-hidden-sm fr-mb-0">
+        <h1 className="fr-text--md fr-hidden-sm fr-mb-0">
           Découvrez les dernières publications liées à vos préférences
-        </p>
+        </h1>
       </>
     )
   }

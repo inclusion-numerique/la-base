@@ -74,8 +74,10 @@ const Resources = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              {title} · {totalCount}
-              <span className="fr-sr-only"> ressources</span>
+              {title} · {totalCount}&nbsp;
+              <span className="fr-sr-only">
+                ressource{sPluriel(totalCount)}
+              </span>
             </h2>
           </div>
         </div>

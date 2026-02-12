@@ -21,20 +21,22 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
         </div>
         <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
           <h2 className="fr-mb-2w fr-h6">Contact</h2>
-          <div>
-            <p className="fr-mb-0">Adresse mail de contact</p>
-            <Link href={`mailto:${base.email}`} className="fr-link">
-              {base.email}
-            </Link>
-          </div>
-          {base.website && (
-            <div className="fr-mt-2w">
-              <p className="fr-mb-0">Site internet</p>
-              <ExternalLink href={base.website} className="fr-link">
-                {displayedUrl}
-              </ExternalLink>
-            </div>
-          )}
+          <ul className="fr-raw-list">
+            <li>
+              <p className="fr-mb-0">Adresse mail de contact</p>
+              <Link href={`mailto:${base.email}`} className="fr-link">
+                {base.email}
+              </Link>
+            </li>
+            {base.website && (
+              <li className="fr-mt-2w">
+                <p className="fr-mb-0">Site internet</p>
+                <ExternalLink href={base.website} className="fr-link">
+                  {displayedUrl}
+                </ExternalLink>
+              </li>
+            )}
+          </ul>
           {(base.facebook || base.twitter || base.linkedin) && (
             <>
               <h2 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h2>

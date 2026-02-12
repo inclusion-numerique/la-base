@@ -35,7 +35,7 @@ const SearchMenu = ({
   return (
     <div className={styles.menu}>
       <div className="fr-container fr-container--800">
-        <nav className="fr-nav">
+        <nav className="fr-nav" arua-label="Type de contenus">
           <ul className="fr-nav__list">
             <li className="fr-nav__item">
               <Link

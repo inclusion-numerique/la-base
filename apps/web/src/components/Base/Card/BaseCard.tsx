@@ -32,7 +32,7 @@ const BaseCard = ({
         href={`/bases/${base.slug}`}
         className={classNames('fr-flex-grow-1', styles.titleLink)}
       >
-        <span className="fr-text--bold fr-text--md fr-mb-0">{base.title}</span>
+        <h2 className="fr-text--bold fr-text--md fr-mb-0">{base.title}</h2>
       </Link>
       <div className={styles.midContent}>
         {!compact && !!base.excerpt && (

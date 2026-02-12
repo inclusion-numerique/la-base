@@ -12,6 +12,7 @@ import ResourceIndexationView from './ResourceIndexationView'
 const ResourceInformations = ({ resource }: { resource: Resource }) => (
   <div className="fr-my-2w fr-pt-2w" id="informations">
     <Accordion
+      titleAs="h2"
       label="Informations sur la ressource"
       data-testid="resource-informations-accordion"
     >

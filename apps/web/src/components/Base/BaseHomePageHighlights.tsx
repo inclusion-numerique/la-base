@@ -69,6 +69,7 @@ const BaseHomePageHighlights = ({
               <li key={resource.id}>
                 <ResourceCard
                   className="fr-pb-0"
+                  titleAs="h3"
                   resource={resource}
                   user={user}
                   isContributor={resourceAuthorization(resource, user).hasRole(

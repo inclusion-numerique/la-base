@@ -6,12 +6,11 @@ const HomeCategories = async () => {
   return (
     <ul className="fr-raw-list fr-flex fr-direction-column fr-direction-lg-row fr-flex-gap-6v">
       {Object.values(categoriesCount).map((categoryCounts) => (
-        <li key={categoryCounts.category}>
-          <CategoryCard
-            category={categoryCounts.category}
-            resourcesCount={categoryCounts.resources}
-          />
-        </li>
+        <CategoryCard
+          key={categoryCounts.category}
+          category={categoryCounts.category}
+          resourcesCount={categoryCounts.resources}
+        />
       ))}
     </ul>
   )

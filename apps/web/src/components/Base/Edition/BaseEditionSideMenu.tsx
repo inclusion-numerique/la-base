@@ -28,6 +28,7 @@ const BaseEditionSideMenu = ({
         burgerMenuButtonText="Contenus"
         contentId="base-edition-content"
         sticky
+        aria-label="Zones de contenu de la page"
       />
     </div>
   </div>

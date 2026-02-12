@@ -46,6 +46,8 @@ const MultipleSearchableSelect = forwardRef<
     withBadges: boolean
     canAddAdmin: boolean
     withAddButton: boolean
+    listTitleAs?: 'h2' | 'h3' | 'h4'
+    itemAs?: 'h3' | 'h4'
   }
 >(
   (
@@ -67,6 +69,8 @@ const MultipleSearchableSelect = forwardRef<
       withBadges,
       canAddAdmin,
       withAddButton,
+      listTitleAs: ListTitleAs = 'h2',
+      itemAs,
     },
     ref,
   ) => {
@@ -315,42 +319,46 @@ const MultipleSearchableSelect = forwardRef<
             </div>
           </div>
           {withBadges && (
-            <div
+            <ul
               className={classNames(
                 styles.selected,
-                'fr-mt-3w',
+                'fr-raw-list fr-mt-3w',
                 !showOptions && styles.selectedRelative,
               )}
             >
               {internalSelection.map((selected) => (
-                <OptionBadge
-                  key={selected.value}
-                  option={selected}
-                  onClick={() => unselect(selected)}
-                  disabled={disabled}
-                />
+                <li key={selected.value}>
+                  <OptionBadge
+                    key={selected.value}
+                    option={selected}
+                    onClick={() => unselect(selected)}
+                    disabled={disabled}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
           )}
           {!withBadges && internalSelection.length > 0 && (
             <>
               <div className="fr-mt-4w">
-                <label className="fr-label fr-mb-2w" htmlFor={id}>
+                <ListTitleAs className="fr-label fr-mb-2w">
                   Liste des membres à inviter
-                </label>
-                <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+                </ListTitleAs>
+                <ul className="fr-raw-list fr-flex fr-direction-column fr-flex-gap-4v">
                   {internalSelection.map((selected) => (
-                    <InviteBaseMemberRow
-                      key={selected.value}
-                      member={selected}
-                      canAddAdmin={canAddAdmin}
-                      onDelete={() => unselect(selected)}
-                      onSelectRole={(type) =>
-                        handleOnSelectRole(selected.value, type)
-                      }
-                    />
+                    <li key={selected.value}>
+                      <InviteBaseMemberRow
+                        member={selected}
+                        canAddAdmin={canAddAdmin}
+                        onDelete={() => unselect(selected)}
+                        onSelectRole={(type) =>
+                          handleOnSelectRole(selected.value, type)
+                        }
+                        itemAs={itemAs}
+                      />
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </>
           )}

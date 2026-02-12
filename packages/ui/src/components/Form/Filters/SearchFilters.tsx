@@ -189,26 +189,32 @@ const SearchFilters = ({
             'fr-flex fr-direction-column fr-align-items-center fr-justify-content-space-between fr-direction-md-row fr-flex-gap-6v',
           )}
         >
-          <div className={styles.selected}>
+          <ul className={classNames('fr-raw-list', styles.selected)}>
             {themeCategories.map((category) => {
-              const className =
-                CATEGORY_VARIANTS_TAG[category as ThemeCategory].default
+              const className = classNames(
+                'thematic-badge-base',
+                CATEGORY_VARIANTS_TAG[category as ThemeCategory].default,
+                CATEGORY_VARIANTS_TAG[category].hover,
+                CATEGORY_VARIANTS_TAG[category].border,
+              )
               const categoryIconClassName = classNames(
                 CATEGORY_VARIANTS[category as ThemeCategory].icon,
                 CATEGORY_VARIANTS[category as ThemeCategory].color,
               )
               if (isCategoryComplete(category, selectedThematics)) {
                 return (
-                  <ThematicOptionBadge
-                    categoryIconClassName={categoryIconClassName}
-                    iconId="fr-icon-close-line"
-                    iconClassName="fr-text-title--blue-france"
-                    textClassName="fr-text-label--grey"
-                    className={className}
-                    ariaLabelPrefix={`Retirer toutes les catégories de la thématique ${category}`}
-                    option={{ label: category, disabled: false }}
-                    onClick={() => onUnselectThematics(category as FilterKey)}
-                  />
+                  <li key={category}>
+                    <ThematicOptionBadge
+                      categoryIconClassName={categoryIconClassName}
+                      iconId="fr-icon-close-line"
+                      iconClassName="fr-text-title--blue-france"
+                      textClassName="fr-text-label--grey"
+                      className={className}
+                      ariaLabelPrefix={`Retirer toutes les catégories de la thématique ${category}`}
+                      option={{ label: category, disabled: false }}
+                      onClick={() => onUnselectThematics(category as FilterKey)}
+                    />
+                  </li>
                 )
               } else {
                 return selectedThematics
@@ -217,32 +223,36 @@ const SearchFilters = ({
                     return option.extra!.category === category
                   })
                   .map((selectedItem) => (
-                    <ThematicOptionBadge
-                      categoryIconClassName={categoryIconClassName}
-                      iconId="fr-icon-close-line"
-                      iconClassName="fr-text-title--blue-france"
-                      textClassName="fr-text-label--grey"
-                      className={className}
-                      ariaLabelPrefix="Retirer"
+                    <li
                       key={`${selectedItem.option.value}-${selectedItem.category}`}
-                      option={selectedItem.option}
-                      onClick={() =>
-                        onUnselect(selectedItem.option, selectedItem.category)
-                      }
-                    />
+                    >
+                      <ThematicOptionBadge
+                        categoryIconClassName={categoryIconClassName}
+                        iconId="fr-icon-close-line"
+                        iconClassName="fr-text-title--blue-france"
+                        textClassName="fr-text-label--grey"
+                        className={className}
+                        ariaLabelPrefix="Retirer"
+                        option={selectedItem.option}
+                        onClick={() =>
+                          onUnselect(selectedItem.option, selectedItem.category)
+                        }
+                      />
+                    </li>
                   ))
               }
             })}
             {otherSelected.map((selectedItem) => (
-              <OptionBadge
-                key={`${selectedItem.option.value}-${selectedItem.category}`}
-                option={selectedItem.option}
-                onClick={() =>
-                  onUnselect(selectedItem.option, selectedItem.category)
-                }
-              />
+              <li key={`${selectedItem.option.value}-${selectedItem.category}`}>
+                <OptionBadge
+                  option={selectedItem.option}
+                  onClick={() =>
+                    onUnselect(selectedItem.option, selectedItem.category)
+                  }
+                />
+              </li>
             ))}
-          </div>
+          </ul>
           <div>
             <DeleteSearchFiltersButton />
           </div>

@@ -38,9 +38,14 @@ const SaveInNestedCollection = ({
           )}
           {!!base && <BaseImage base={base} size={avatarSize} />}
           <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-            <b className={classNames('fr-text-title--grey', styles.title)}>
+            <h2
+              className={classNames(
+                'fr-text--md fr-text--bold fr-mb-0 fr-text-title--grey fr-text--start',
+                styles.title,
+              )}
+            >
               {base ? base.title : `${user.name} - Mes collections`}
-            </b>
+            </h2>
             <div className="fr-flex fr-direction-md-row fr-direction-column fr-flex-gap-2v">
               <p className={classNames('fr-mb-0', styles.collections)}>
                 <span className="fr-icon-folder-2-line fr-icon--sm" />
@@ -48,7 +53,10 @@ const SaveInNestedCollection = ({
                 {base
                   ? base.collections.length
                   : withoutFavoriteCollections.length}
-                &nbsp;Collections&nbsp;
+                &nbsp;Collection
+                {sPluriel(
+                  base?.collections.length ?? withoutFavoriteCollections.length,
+                )}
               </p>
               {alreadyInCollections > 0 ? (
                 <Tag small>

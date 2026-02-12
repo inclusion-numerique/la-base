@@ -1,4 +1,5 @@
 import ExternalLink from '@app/ui/components/ExternalLink'
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
 import DeleteCollectionModal from '@app/web/components/Collection/DeleteCollection/DeleteCollectionModal'
 import { ManageCollectionButton } from '@app/web/components/Collection/ManageCollectionButton'
@@ -40,8 +41,10 @@ const Collections = ({
               <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
                 <IconInSquare iconId="ri-folder-2-line" />
                 <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-                  {collectionsLabel} · {collections.length}
-                  <span className="fr-sr-only"> collections</span>
+                  {collectionsLabel} · {collections.length}&nbsp;
+                  <span className="fr-sr-only">
+                    collection{sPluriel(collections.length)}
+                  </span>
                 </h2>
               </div>
             </div>
@@ -76,9 +79,9 @@ const Collections = ({
               </div>
             )}
           </div>
-          <ul className={`fr-raw-list ${styles.tabCards}`}>
+          <ul className={classNames('fr-raw-list', styles.tabCards)}>
             {collections.map((collection) => (
-              <li key={collection.id}>
+              <li key={collection.id} className="fr-height-full fr-flex">
                 <CollectionCard
                   collection={collection}
                   canWrite={isOwner || withCreation}

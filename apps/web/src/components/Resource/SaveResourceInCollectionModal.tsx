@@ -6,6 +6,7 @@ import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import RawModal from '@app/ui/components/Modal/RawModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import EmptyBox from '@app/web/components/EmptyBox'
@@ -412,25 +413,27 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 />
               )}
               <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-                <b
+                <h2
                   className={classNames(
-                    'fr-text-title--grey fr-text--start',
+                    'fr-text--md fr-text--bold fr-mb-0 fr-text-title--grey fr-text--start',
                     styles.title,
                   )}
                 >
                   {inBaseDirectory
                     ? inBaseDirectory.title
                     : `${user.name} - Mes collections`}
-                </b>
-                <p
-                  className={classNames('fr-mt-2v fr-mb-0', styles.collections)}
-                >
+                </h2>
+                <p className={classNames('fr-mb-0', styles.collections)}>
                   <span className="fr-icon-folder-2-line fr-icon--sm" />
                   &nbsp;
                   {inBaseDirectory
                     ? inBaseDirectory.collections.length
                     : withoutFavoriteCollections.length}
-                  &nbsp;Collections
+                  &nbsp;Collection
+                  {sPluriel(
+                    inBaseDirectory?.collections.length ??
+                      withoutFavoriteCollections.length,
+                  )}
                 </p>
               </div>
             </div>
@@ -536,17 +539,22 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   <h2 className="fr-mt-4v fr-mb-0 fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
                     Mes collections
                   </h2>
-                  {withoutFavoriteCollections.map((collection) => (
-                    <AddOrRemoveResourceFromCollection
-                      loading={pendingMutationCollectionId === collection.id}
-                      key={collection.id}
-                      collection={collection}
-                      resourceId={resourceId}
-                      onAdd={onAddToCollection}
-                      onRemove={onRemoveFromCollection}
-                      withPrivacyTag={!collection.isPublic}
-                    />
-                  ))}
+                  <ul className="fr-raw-list">
+                    {withoutFavoriteCollections.map((collection) => (
+                      <li key={collection.id}>
+                        <AddOrRemoveResourceFromCollection
+                          loading={
+                            pendingMutationCollectionId === collection.id
+                          }
+                          collection={collection}
+                          resourceId={resourceId}
+                          onAdd={onAddToCollection}
+                          onRemove={onRemoveFromCollection}
+                          withPrivacyTag={!collection.isPublic}
+                        />
+                      </li>
+                    ))}
+                  </ul>
                 </>
               ) : (
                 <EmptyBox
@@ -583,17 +591,20 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
             </>
           ) : inBaseDirectory ? (
             inBaseDirectory.collections.length > 0 ? (
-              inBaseDirectory.collections.map((collection) => (
-                <AddOrRemoveResourceFromCollection
-                  loading={pendingMutationCollectionId === collection.id}
-                  key={collection.id}
-                  collection={collection}
-                  resourceId={resourceId}
-                  onAdd={onAddToCollection}
-                  onRemove={onRemoveFromCollection}
-                  withPrivacyTag={!collection.isPublic}
-                />
-              ))
+              <ul className="fr-raw-list">
+                {inBaseDirectory.collections.map((collection) => (
+                  <li key={collection.id}>
+                    <AddOrRemoveResourceFromCollection
+                      loading={pendingMutationCollectionId === collection.id}
+                      collection={collection}
+                      resourceId={resourceId}
+                      onAdd={onAddToCollection}
+                      onRemove={onRemoveFromCollection}
+                      withPrivacyTag={!collection.isPublic}
+                    />
+                  </li>
+                ))}
+              </ul>
             ) : (
               <EmptyBox
                 title="Vous n’avez pas de collection dans votre base."
@@ -626,9 +637,9 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
               </EmptyBox>
             )
           ) : (
-            <>
+            <ul className="fr-raw-list">
               {!!favoriteCollection && (
-                <div
+                <li
                   className={classNames(
                     (withoutFavoriteCollections.length > 0 ||
                       bases.length > 0) &&
@@ -639,48 +650,50 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     loading={
                       pendingMutationCollectionId === favoriteCollection.id
                     }
-                    key={favoriteCollection.id}
                     collection={favoriteCollection}
                     resourceId={resourceId}
                     onAdd={onAddToCollection}
                     onRemove={onRemoveFromCollection}
                     withPrivacyTag
                   />
-                </div>
+                </li>
               )}
               {withoutFavoriteCollections.length > 0 && (
-                <SaveInNestedCollection
-                  user={user}
-                  onClick={viewProfileDirectory}
-                  alreadyInCollections={
-                    withoutFavoriteCollections.filter(({ resources }) =>
-                      resources.some(
-                        (collectionResource) =>
-                          collectionResource.resourceId === resourceId,
-                      ),
-                    ).length
-                  }
-                />
+                <li>
+                  <SaveInNestedCollection
+                    user={user}
+                    onClick={viewProfileDirectory}
+                    alreadyInCollections={
+                      withoutFavoriteCollections.filter(({ resources }) =>
+                        resources.some(
+                          (collectionResource) =>
+                            collectionResource.resourceId === resourceId,
+                        ),
+                      ).length
+                    }
+                  />
+                </li>
               )}
               {bases.map((base) => (
-                <SaveInNestedCollection
-                  key={base.id}
-                  user={user}
-                  base={base}
-                  onClick={() => {
-                    viewBaseDirectory(base.id)
-                  }}
-                  alreadyInCollections={
-                    base.collections.filter(({ resources }) =>
-                      resources.some(
-                        (collectionResource) =>
-                          collectionResource.resourceId === resourceId,
-                      ),
-                    ).length
-                  }
-                />
+                <li key={base.id}>
+                  <SaveInNestedCollection
+                    user={user}
+                    base={base}
+                    onClick={() => {
+                      viewBaseDirectory(base.id)
+                    }}
+                    alreadyInCollections={
+                      base.collections.filter(({ resources }) =>
+                        resources.some(
+                          (collectionResource) =>
+                            collectionResource.resourceId === resourceId,
+                        ),
+                      ).length
+                    }
+                  />
+                </li>
               ))}
-            </>
+            </ul>
           ))}
       </RawModal>
     </form>

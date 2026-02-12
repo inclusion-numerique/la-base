@@ -31,22 +31,22 @@ const ProfileMetadata = ({
       user: SessionUser | null
     }) => (
   <div className={classNames('fr-flex-md fr-text--sm fr-mb-0', className)}>
-    <span className="fr-icon-file-text-line fr-icon--sm fr-pr-1w" />
-    <p className="fr-mb-0">
+    <p className="fr-text--sm fr-mb-0">
+      <span className="fr-icon-file-text-line fr-icon--sm fr-pr-1w" />
       <b>{resourcesCount}</b>
-      <span className="fr-hidden fr-display-inline-md">
+      <span className="fr-display-inline-md">
         {' '}
         Ressource{sPluriel(resourcesCount)}
       </span>
     </p>
-    <span className="fr-px-1w">·</span>
+    <span className="fr-hidden fr-unhidden-md fr-px-1w">·</span>
     {context === 'profile' && followedByData.counts.total > 0 ? (
       <ProfileFollowersModal user={user} followedByData={followedByData} />
     ) : (
-      <p className="fr-mb-0">
+      <p className="fr-text--sm fr-mb-0">
         <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
         <b>{followedByCount ?? followedByData.counts.total}</b>
-        <span className="fr-hidden fr-display-inline-md">
+        <span className="fr-display-inline-md">
           {' '}
           Suivi{sPluriel(followedByCount ?? followedByData.counts.total)}
         </span>
