@@ -13,7 +13,6 @@ import {
 import { searchId } from '@app/web/utils/skipLinks'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
-import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { Dropdown } from './Dropdown/Dropdown'
@@ -133,6 +132,7 @@ const Header = ({
                       linkProps={{
                         href: searchUrl('ressources', defaultSearchParams),
                         'aria-label': 'Accès à la recherche de ressources',
+                        'aria-current': 'page',
                       }}
                     >
                       <span
@@ -187,46 +187,42 @@ const Header = ({
                     </ExternalLink>
                   </li>
                   <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
-                    <Tooltip title="Fil d'actualité">
-                      <Button
-                        data-testid="news-feed-button"
+                    <Button
+                      data-testid="news-feed-button"
+                      className={classNames(
+                        styles.headerNewsFeedButton,
+                        'fr-p-0 fr-border-radius--8',
+                      )}
+                      linkProps={{
+                        href: user
+                          ? !user.newsFeed ||
+                            !user.newsFeed.hasCompleteOnboarding
+                            ? '/fil-d-actualite/onboarding'
+                            : '/fil-d-actualite/tout'
+                          : '/connexion?suivant=/fil-d-actualite/tout',
+                        'aria-label': "Accès au fil d'actualité",
+                        title: "Fil d'actualité",
+                      }}
+                      size="small"
+                    >
+                      <span
                         className={classNames(
-                          styles.headerNewsFeedButton,
-                          'fr-p-0 fr-border-radius--8',
+                          'fr-text--sm fr-border-radius--8 fr-p-1w fr-flex fr-align-items-center fr-flex-gap-1v',
+                          styles.newsFeedIcon,
+                          styles.newsFeedButton,
                         )}
-                        linkProps={{
-                          href: user
-                            ? !user.newsFeed ||
-                              !user.newsFeed.hasCompleteOnboarding
-                              ? '/fil-d-actualite/onboarding'
-                              : '/fil-d-actualite/tout'
-                            : '/connexion?suivant=/fil-d-actualite/tout',
-                          'aria-label': "Accès au fil d'actualité",
-                        }}
-                        size="small"
                       >
-                        <span
-                          className={classNames(
-                            'fr-text--sm fr-border-radius--8 fr-p-1w fr-flex fr-align-items-center fr-flex-gap-1v',
-                            styles.newsFeedIcon,
-                            styles.newsFeedButton,
-                          )}
-                        >
-                          <span className="ri-flashlight-fill" aria-hidden />
-                          {user && (
-                            <NewsFeedBadge className="fr-text--sm fr-text--bold" />
-                          )}
-                        </span>
-                        <span
-                          className={classNames(
-                            styles.newsFeedLabel,
-                            'fr-ml-1v',
-                          )}
-                        >
-                          Fil d'actualité
-                        </span>
-                      </Button>
-                    </Tooltip>
+                        <span className="ri-flashlight-fill" aria-hidden />
+                        {user && (
+                          <NewsFeedBadge className="fr-text--sm fr-text--bold" />
+                        )}
+                      </span>
+                      <span
+                        className={classNames(styles.newsFeedLabel, 'fr-ml-1v')}
+                      >
+                        Fil d'actualité
+                      </span>
+                    </Button>
                   </li>
                   {user && (
                     <li className="fr-position-relative">
@@ -249,7 +245,15 @@ const Header = ({
                           <Dropdown
                             id="header_user_menu"
                             alignRight
-                            control={getUserDisplayName(user)}
+                            control={
+                              <>
+                                {getUserDisplayName(user)}
+                                <span className="fr-sr-only">
+                                  {' '}
+                                  - Mon profil
+                                </span>
+                              </>
+                            }
                           >
                             <HeaderUserMenu user={user} />
                           </Dropdown>

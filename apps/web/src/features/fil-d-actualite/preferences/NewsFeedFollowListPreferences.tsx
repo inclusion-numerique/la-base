@@ -65,8 +65,10 @@ export const NewsFeedFollowListPreferences = ({
           <Button
             priority="tertiary no outline"
             onClick={() => setShowAllBases((prev) => !prev)}
+            nativeButtonProps={{ tabIndex: -1 }}
           >
-            {showAllBases ? 'Voir moins' : 'Voir toutes'}
+            {showAllBases ? 'Voir moins' : 'Voir plus'}
+            <span className="fr-sr-only"> de bases</span>
             <span
               className={classNames(
                 'fr-ml-1w',
@@ -103,8 +105,10 @@ export const NewsFeedFollowListPreferences = ({
           <Button
             priority="tertiary no outline"
             onClick={() => setShowAllProfiles((prev) => !prev)}
+            nativeButtonProps={{ tabIndex: -1 }}
           >
             {showAllProfiles ? 'Voir moins' : 'Voir tous'}
+            <span className="fr-sr-only"> de profils</span>
             <span
               className={classNames(
                 'fr-ml-1w',

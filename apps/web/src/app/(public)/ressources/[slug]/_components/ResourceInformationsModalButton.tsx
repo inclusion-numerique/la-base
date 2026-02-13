@@ -22,6 +22,12 @@ const ResourceInformationsModalButton = ({
       e.preventDefault()
       CollectionsResourceModal.open()
     }}
+    onKeyDown={(e) => {
+      if (e.key === ' ') {
+        e.preventDefault()
+        CollectionsResourceModal.open()
+      }
+    }}
     role="button"
   >
     {title}

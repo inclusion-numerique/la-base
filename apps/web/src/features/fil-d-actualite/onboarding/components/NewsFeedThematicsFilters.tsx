@@ -120,7 +120,10 @@ export const NewsFeedThematicsFilters = ({
               priority="tertiary no outline"
               onClick={() => setShowAll((prev) => !prev)}
             >
-              {showAll ? 'Voir moins' : 'Tout voir'}
+              {showAll ? 'Voir moins' : 'Voir toutes'}
+              <span className="fr-sr-only">
+                {showAll ? ' de thématiques' : ' les thématiques'}
+              </span>
             </Button>
           </li>
         </ul>

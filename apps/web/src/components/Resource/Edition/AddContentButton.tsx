@@ -87,6 +87,7 @@ const AddContentButton = ({
               type="button"
               priority="tertiary no outline"
               iconId="fr-icon-add-line"
+              aria-expanded={open}
               nativeButtonProps={{ 'data-testid': 'add-content-button' }}
               className={styles.buttonWithBorder}
               disabled={disabled}
@@ -107,6 +108,7 @@ const AddContentButton = ({
             'fr-flex fr-width-full fr-justify-content-center',
             styles.button,
           )}
+          aria-expanded={open}
           disabled={disabled}
         >
           Ajouter un contenu
@@ -123,12 +125,15 @@ const AddContentButton = ({
               className={classNames('fr-raw-list', styles.contents)}
             >
               {contents.map((content) => (
-                <li key={content.type}>
+                <li
+                  className={styles.content}
+                  key={content.type}
+                  onClick={() => onAdd(content.type)}
+                >
                   <button
                     type="button"
                     data-testid={`add-${content.type}-content-button`}
-                    onClick={() => onAdd(content.type)}
-                    className={styles.content}
+                    className="fr-flex fr-align-items-center"
                   >
                     <Image src={content.image} width={24} height={24} alt="" />
                     <span className="fr-text--sm fr-text--medium fr-mb-0">
@@ -137,7 +142,7 @@ const AddContentButton = ({
                     {!!content.description && (
                       <span
                         className={classNames(
-                          'fr-text--sm fr-text--medium fr-mb-0',
+                          'fr-text--sm fr-text--medium fr-mb-0 fr-px-1v',
                           styles.dotSeparator,
                         )}
                       >

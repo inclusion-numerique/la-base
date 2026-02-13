@@ -41,7 +41,10 @@ const ResourceCollectionsModal = ({
                 <CollectionPrivacyTag
                   isPublic
                   small
-                  className={classNames('fr-tag--icon-left', styles.privacyTag)}
+                  className={classNames(
+                    'fr-tag--icon-left fr-mb-0',
+                    styles.privacyTag,
+                  )}
                 />
                 <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {collectionsData.counts.public} collection
@@ -61,7 +64,10 @@ const ResourceCollectionsModal = ({
                 <CollectionPrivacyTag
                   isPublic={false}
                   small
-                  className={classNames('fr-tag--icon-left', styles.privacyTag)}
+                  className={classNames(
+                    'fr-mb-0 fr-tag--icon-left',
+                    styles.privacyTag,
+                  )}
                 />
                 <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {collectionsData.counts.private} collection

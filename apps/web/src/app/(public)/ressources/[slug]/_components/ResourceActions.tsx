@@ -85,6 +85,7 @@ const ResourceActions = ({
             </SaveResourceInCollectionButton>
             {resource.isPublic ? (
               <CopyLinkButton
+                context="resource"
                 className="fr-unhidden-sm fr-hidden"
                 size="small"
                 priority="secondary"

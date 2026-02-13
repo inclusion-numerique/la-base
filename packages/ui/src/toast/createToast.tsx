@@ -27,18 +27,26 @@ export const createToast = ({
   id?: string
 }) => {
   toast(
-    action ? (
-      <div className="fr-no-print">
+    (t) => (
+      <div className={classNames('fr-no-print', styles.toastContent)}>
         <span>{message}</span>
-        <Button
-          className={classNames('fr-ml-1w', styles.action)}
-          priority="tertiary no outline"
-          size="small"
-          {...action}
-        />
+        {action && (
+          <Button
+            className={classNames('fr-ml-1w', styles.action)}
+            priority="tertiary no outline"
+            size="small"
+            {...action}
+          />
+        )}
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={() => toast.dismiss(t.id)}
+          aria-label="Fermer la notification"
+        >
+          <span className="fr-icon-close-line fr-icon--sm" aria-hidden="true" />
+        </button>
       </div>
-    ) : (
-      <span className="fr-no-print">{message}</span>
     ),
     {
       duration,

@@ -101,6 +101,7 @@ const BaseHeader = ({
                     )}
                     <div>
                       <CopyLinkButton
+                        context="base"
                         priority="secondary"
                         title="Partager"
                         size="small"

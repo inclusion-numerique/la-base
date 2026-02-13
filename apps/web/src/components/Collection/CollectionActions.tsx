@@ -38,6 +38,7 @@ const CollectionActions = ({
       />
     )}
     <CopyLinkButton
+      context="collection"
       size="small"
       title="Copier le lien"
       priority={context === 'view' ? 'secondary' : 'tertiary no outline'}

@@ -17,6 +17,7 @@ const Options = <T extends string>({
   noResultMessage,
   hideNoResultMessage,
   onHide,
+  idPrefix,
   'data-testid': dataTestId,
 }: {
   options: Option<T>[]
@@ -26,6 +27,7 @@ const Options = <T extends string>({
   noResultMessage?: string
   hideNoResultMessage?: boolean
   onHide?: () => void
+  idPrefix?: string
   'data-testid'?: string
 }) => {
   if (options.length === 0) {
@@ -40,10 +42,11 @@ const Options = <T extends string>({
     )
   }
   return (
-    <ul className="fr-list-group fr-mb-0" role="listbox">
+    <ul className="fr-list-group fr-mb-0">
       {options.slice(0, limit).map((option, index) => (
         <li
           role="option"
+          id={idPrefix ? `${idPrefix}-option-${index}` : undefined}
           data-testid={dataTestId ? `${dataTestId}-option-${index}` : undefined}
           aria-selected={index === selectedIndex}
           key={option.value}

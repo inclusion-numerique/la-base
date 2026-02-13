@@ -109,21 +109,25 @@ const Cropping = ({
           <Button
             type="button"
             priority="secondary"
-            title="Zoomer"
-            aria-label="Zoomer"
+            title="Zoomer dans l'image"
+            aria-label="Zoomer dans l'image"
             iconId="fr-icon-add-line"
             size="small"
             onClick={zoomTo(0.2)}
-          />
+          >
+            <span className="fr-sr-only">Zoomer dans l'image</span>
+          </Button>
           <Button
             type="button"
             priority="secondary"
-            title="Dézoomer"
-            aria-label="Dézoomer"
+            title="Dézoomer dans l'image"
+            aria-label="Dézoomer dans l'image"
             iconId="fr-icon-subtract-line"
             size="small"
             onClick={zoomTo(-0.2)}
-          />
+          >
+            <span className="fr-sr-only">Dézoomer dans l'image</span>
+          </Button>
         </div>
       </div>
       {imageToUpload || image ? (

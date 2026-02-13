@@ -35,7 +35,7 @@ const OptionBadge = ({
     className={`fr-tag fr-mr-1w fr-mb-2v ${size === 'sm' ? 'fr-tag--sm' : ''}`}
     disabled={disabled || option.disabled}
     onClick={disabled ? undefined : onClick}
-    aria-label={`Retirer ${option.label}`}
+    aria-label={`Retirer ${option.label} de la sélection`}
     data-testid={dataTestId}
   >
     {option.label}

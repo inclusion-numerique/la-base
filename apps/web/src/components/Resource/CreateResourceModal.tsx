@@ -27,20 +27,17 @@ export const CreateResourceButton = ({
   'data-testid'?: string
 }) => {
   const open = CreateResourceDynamicModal.useOpen()
-
-  const onClick = () => open({ baseId })
-  const href = baseId
-    ? `/bases/${baseId}?creer-une-ressource`
-    : '/?creer-une-ressource'
+  const setState = CreateResourceDynamicModal.useSetState()
 
   return (
     <>
+      {/* Desktop (lg+) — onClick ouvre la modale directement */}
       <div className="fr-hidden fr-unhidden-lg">
         <Button
           type="button"
           className={className}
           data-testid={dataTestid}
-          onClick={onClick}
+          onClick={() => open({ baseId })}
         >
           <span
             className={classNames(
@@ -61,13 +58,14 @@ export const CreateResourceButton = ({
           />
         </Button>
       </div>
-      {/* Header mobile only works with links */}
-      <Button
-        className={classNames('fr-hidden-lg', className)}
+      {/* Mobile (< lg) — aria-controls laisse DSFR gérer la transition modale */}
+      <button
+        type="button"
+        className={classNames('fr-btn fr-hidden-lg', className)}
         data-testid={dataTestid}
-        linkProps={{
-          href,
-        }}
+        data-fr-opened="false"
+        aria-controls={createResourceModalId}
+        onClick={() => setState({ baseId })}
       >
         <span
           className={classNames(
@@ -86,7 +84,7 @@ export const CreateResourceButton = ({
           )}
           aria-hidden
         />
-      </Button>
+      </button>
     </>
   )
 }

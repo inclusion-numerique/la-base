@@ -20,7 +20,7 @@ const ProfilesSearchResult = ({
 }) => (
   <>
     <div className={styles.header}>
-      <h1 className="fr-text--lg fr-mb-0">
+      <h1 className="fr-text--lg fr-mb-0" role="status" aria-atomic="true">
         {numberToString(totalCount)} Profil{sPluriel(totalCount)}
       </h1>
       {children}

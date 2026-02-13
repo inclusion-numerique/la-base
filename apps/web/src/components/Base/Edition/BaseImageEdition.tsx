@@ -92,6 +92,7 @@ const BaseImageEdition = ({
   return (
     <>
       <CroppedUploadModal
+        context="base"
         key={image?.id ?? 'empty'}
         title={title}
         modal={modal}

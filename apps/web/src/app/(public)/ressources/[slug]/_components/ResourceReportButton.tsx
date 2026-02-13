@@ -71,6 +71,7 @@ const ResourceReportButton = ({
         <>
           <span className="ri-alert-line fr-mr-1w" aria-hidden />
           Signaler
+          <span className="fr-sr-only">Signaler la ressource</span>
         </>
       )}
     </Button>

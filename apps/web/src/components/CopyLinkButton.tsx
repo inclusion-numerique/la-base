@@ -1,12 +1,12 @@
 'use client'
 
 import Button from '@codegouvfr/react-dsfr/Button'
-import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import classNames from 'classnames'
 import { type ReactNode, useState } from 'react'
 import styles from './CopyLinkButton.module.css'
 
 const CopyLinkButton = ({
+  context,
   className,
   url,
   title,
@@ -15,8 +15,8 @@ const CopyLinkButton = ({
   full = false,
   priority = 'tertiary',
   displayIcon = true,
-  withTooltip = true,
 }: {
+  context: 'base' | 'collection' | 'resource' | 'profile'
   className?: string
   url: string
   title?: string
@@ -25,8 +25,14 @@ const CopyLinkButton = ({
   full?: boolean
   priority?: 'primary' | 'secondary' | 'tertiary' | 'tertiary no outline'
   displayIcon?: boolean
-  withTooltip?: boolean
 }) => {
+  const contextLabels: Record<string, string> = {
+    base: 'de la base',
+    collection: 'de la collection',
+    resource: 'de la ressource',
+    profile: 'du profil',
+  }
+
   const [copied, setCopied] = useState(false)
   const onCopy = () => {
     setCopied(true)
@@ -40,39 +46,25 @@ const CopyLinkButton = ({
           Lien copié dans le presse-papier
         </span>
       )}
-      {withTooltip ? (
-        <Tooltip title={title || `Copier le lien ${url} dans le presse-papier`}>
-          <Button
-            className={classNames(
-              full ? 'fr-width-full fr-justify-content-center' : '',
-              className,
-            )}
-            iconId={displayIcon ? 'fr-icon-link' : undefined}
-            size={size}
-            priority={priority}
-            type="button"
-            title={title || `Copier le lien ${url} dans le presse-papier`}
-            onClick={onCopy}
-          >
-            {children}
-          </Button>
-        </Tooltip>
-      ) : (
-        <Button
-          className={classNames(
-            full ? 'fr-width-full fr-justify-content-center' : '',
-            className,
-          )}
-          iconId={displayIcon ? 'fr-icon-link' : undefined}
-          size={size}
-          priority={priority}
-          type="button"
-          title={title || `Copier le lien ${url} dans le presse-papier`}
-          onClick={onCopy}
-        >
-          {children}
-        </Button>
-      )}
+      <Button
+        className={classNames(
+          full ? 'fr-width-full fr-justify-content-center' : '',
+          className,
+        )}
+        iconId={displayIcon ? 'fr-icon-link' : undefined}
+        size={size}
+        priority={priority}
+        type="button"
+        title={title || `Copier le lien ${contextLabels[context]}`}
+        onClick={onCopy}
+      >
+        {children}
+        {!children && (
+          <span className="fr-sr-only">
+            Copier le lien {contextLabels[context]}
+          </span>
+        )}
+      </Button>
     </span>
   )
 }

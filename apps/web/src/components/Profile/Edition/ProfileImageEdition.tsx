@@ -36,6 +36,7 @@ const ProfileImageEdition = ({ profile }: { profile: ProfilePageData }) => {
   return (
     <>
       <CroppedUploadModal
+        context="profile"
         key={profile.image?.id ?? 'empty'}
         form={form}
         path="imageId"
