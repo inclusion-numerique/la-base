@@ -121,8 +121,10 @@ const Resources = ({
             {
               label: (
                 <>
-                  Publiques · ${publics.length}{' '}
-                  <span className="fr-sr-only">ressources</span>
+                  Publiques · {publics.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(publics.length)}
+                  </span>
                 </>
               ),
               iconId: 'fr-icon-earth-line',
@@ -138,8 +140,10 @@ const Resources = ({
             {
               label: (
                 <>
-                  Privées · ${privates.length}{' '}
-                  <span className="fr-sr-only">ressources</span>
+                  Privées · {privates.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(privates.length)}
+                  </span>
                 </>
               ),
               iconId: 'fr-icon-lock-line',
@@ -155,8 +159,10 @@ const Resources = ({
             {
               label: (
                 <>
-                  Brouillons · ${drafts.length}{' '}
-                  <span className="fr-sr-only">ressources</span>
+                  Brouillons · {drafts.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(drafts.length)}
+                  </span>
                 </>
               ),
               iconId: 'fr-icon-draft-line',
