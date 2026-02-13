@@ -5,6 +5,7 @@ import Card from '@app/web/components/Card'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import { type Dispatch, type ReactNode, type SetStateAction } from 'react'
+import cardStyles from './Card.module.css'
 import styles from './EditCard.module.css'
 
 const EditableCard = ({
@@ -55,35 +56,30 @@ const EditableCard = ({
               >
                 Modifier
                 <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+                <span className="fr-sr-only">Modifier</span>
               </Button>
             )}
           </div>
         </div>
       }
-      description={
-        <>
-          {subtitle}
-          {/* <div className="fr-hidden-sm fr-unhidden">
-            <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
-              {!isEditMode && (
-                <Button
-                  data-testid={`${id}-edit-card-button`}
-                  className="fr-text--sm fr-text--medium"
-                  size="small"
-                  priority="tertiary no outline"
-                  onClick={toggleEditMode}
-                >
-                  Modifier
-                  <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
-                </Button>
-              )}
-            </div>
-          </div> */}
-        </>
-      }
+      description={subtitle}
       titleAs="div"
-      contentSeparator
     >
+      <div className="fr-hidden-sm fr-flex fr-justify-content-end">
+        {!isEditMode && (
+          <Button
+            data-testid={`${id}-edit-card-button`}
+            className="fr-text--sm fr-text--medium fr-p-1v"
+            size="small"
+            priority="tertiary no outline"
+            onClick={toggleEditMode}
+          >
+            Modifier
+            <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+          </Button>
+        )}
+      </div>
+      <hr className={classNames('fr-pb-4w', cardStyles.contentSeparator)} />
       {isEditMode && editing && <>{editing}</>}
       {!isEditMode && preview && <>{preview}</>}
       {isEditMode && (

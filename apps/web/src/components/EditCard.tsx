@@ -12,6 +12,7 @@ import type { ChangeBaseCommand } from '../server/resources/feature/ChangeBase'
 import type { ChangeIndexationCommand } from '../server/resources/feature/ChangeIndexation'
 import type { ChangeVisibilityCommand } from '../server/resources/feature/ChangeVisibility'
 import Card from './Card'
+import cardStyles from './Card.module.css'
 import styles from './EditCard.module.css'
 
 const EditCard = <
@@ -68,6 +69,7 @@ const EditCard = <
     <Card
       id={id}
       className={classNames(className, 'fr-border-radius--8 fr-border')}
+      classes={{ content: 'fr-mt-0 fr-mt-md-1w' }}
       noBorder={noBorder}
       title={
         <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-align-items-sm-center fr-flex-gap-3v">
@@ -75,7 +77,7 @@ const EditCard = <
             {title}
           </CardTitle>
           <div className="fr-hidden fr-unhidden-sm">
-            {!!withEditButton && !editMode && setEditMode && (
+            {!!withEditButton && !editMode && (
               <Button
                 data-testid="edit-card-button"
                 className="fr-text--sm fr-text--medium fr-p-1v"
@@ -85,6 +87,7 @@ const EditCard = <
               >
                 Modifier
                 <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+                <span className="fr-sr-only">Modifier</span>
               </Button>
             )}
           </div>
@@ -92,24 +95,24 @@ const EditCard = <
       }
       description={description}
       titleAs="div"
-      contentSeparator
     >
-      <div className="fr-hidden-sm fr-unhidden">
-        <div className="fr-flex fr-justify-content-sm-center fr-justify-content-end">
-          {!editMode && setEditMode && (
-            <Button
-              data-testid="edit-card-button"
-              className="fr-text--sm fr-text--medium"
-              size="small"
-              priority="tertiary no outline"
-              onClick={() => setEditMode(true)}
-            >
-              Modifier
-              <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
-            </Button>
-          )}
-        </div>
+      <div className="fr-hidden-sm fr-flex fr-justify-content-end">
+        {!!withEditButton && !editMode && (
+          <Button
+            data-testid="edit-card-button"
+            className="fr-text--sm fr-text--medium fr-p-1v"
+            size="small"
+            priority="tertiary no outline"
+            onClick={() => setEditMode(true)}
+          >
+            Modifier
+            <span className="fr-icon-edit-line fr-ml-1w fr-icon--sm" />
+          </Button>
+        )}
       </div>
+      <hr
+        className={classNames('fr-pb-4w fr-mt-2w', cardStyles.contentSeparator)}
+      />
       {editMode ? (
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {edition}

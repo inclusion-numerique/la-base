@@ -37,6 +37,7 @@ const MenuButton = ({
       'fr-icon--sm',
     )}
     type="button"
+    aria-pressed={active}
     disabled={disabled}
     onClick={(event) => {
       event.preventDefault()
@@ -65,7 +66,7 @@ const RichInputFormMenuBar = ({
 
   return (
     <>
-      <div className={styles.menuBar}>
+      <div className={styles.menuBar} role="toolbar">
         {allowHeadings && (
           <>
             <MenuButton

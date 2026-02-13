@@ -30,6 +30,7 @@ const SaveInNestedCollection = ({
       onClick={onClick}
       type="button"
       data-testid="add-in-collection-bases"
+      aria-expanded={false}
     >
       <div className={styles.content}>
         <div className="fr-flex fr-justify fr-align-items-center fr-flex-gap-6v">

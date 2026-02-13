@@ -38,6 +38,7 @@ const ProfileFollowersModal = ({
           styles.feedbackLink,
         )}
         onClick={open}
+        role="button"
       >
         <p className="fr-text--sm fr-mb-0">
           <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />

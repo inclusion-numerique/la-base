@@ -81,6 +81,7 @@ const ResourceImageEdition = ({
   return (
     <div className={image ? styles.container : styles.emptyContainer}>
       <CroppedUploadModal
+        context="resource"
         key={image?.id ?? 'empty'}
         form={form}
         path="imageId"

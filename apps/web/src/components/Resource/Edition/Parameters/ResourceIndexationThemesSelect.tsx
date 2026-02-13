@@ -141,6 +141,7 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                     return (
                       <li key={selected.option.value}>
                         <ThematicOptionBadge
+                          as="span"
                           categoryIconClassName={categoryIconClassName}
                           className={className}
                           textClassName="fr-text-label--grey"

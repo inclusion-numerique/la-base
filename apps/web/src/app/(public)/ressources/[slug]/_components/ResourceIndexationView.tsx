@@ -139,6 +139,7 @@ const ResourceIndexationView = ({
                         aria-label={`Voir toutes les ressources ${tag.slug}`}
                       >
                         <ThematicOptionBadge
+                          as="span"
                           categoryIconClassName={categoryIconClassName}
                           textClassName="fr-text-label--grey"
                           className={className}

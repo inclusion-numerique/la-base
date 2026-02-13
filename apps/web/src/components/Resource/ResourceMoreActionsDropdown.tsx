@@ -57,6 +57,7 @@ export const ResourceMoreActionsDropdown = ({
     control={
       <>
         <span className="ri-more-fill" aria-hidden />
+        <span className="fr-sr-only">Options sur la ressource</span>
         {children}
       </>
     }
@@ -87,13 +88,13 @@ export const ResourceMoreActionsDropdown = ({
       {copyLink && resource.isPublic && (
         <li className={styles.border}>
           <CopyLinkButton
+            context="resource"
             size="small"
             priority="tertiary no outline"
             displayIcon={false}
             url={getServerUrl(`/ressources/${resource.slug}`, {
               absolutePath: true,
             })}
-            withTooltip={false}
           >
             <span
               className="ri-link fr-mr-1w fr-text-label--blue-france"
@@ -177,12 +178,14 @@ export const ResourceMoreActionsDropdown = ({
             user={user}
             resource={resource}
             priority="tertiary no outline"
+            className="fr-btn--sm"
           >
             <span
               className="ri-alert-line fr-mr-1w fr-text-label--blue-france"
               aria-hidden
             />
             Signaler
+            <span className="fr-sr-only">Signaler la ressource</span>
           </ResourceReportButton>
         </li>
       )}
