@@ -30,7 +30,7 @@ const CroppedUpload = ({
   image,
   size,
 }: {
-  context: 'base' | 'collection' | 'profile'
+  context: 'base' | 'collection' | 'resource' | 'profile'
   modal: CreateModalReturn
   label?: string
   height: number
