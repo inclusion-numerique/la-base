@@ -41,7 +41,9 @@ export const FiltersModal = ({
                   className="fr-width-full fr-justify-content-center fr-mb-1w"
                   priority="secondary"
                   onClick={() => setSelectedCategory(category.id)}
-                  aria-expanded={selectedCategory === category.id}
+                  aria-expanded={
+                    !!selectedCategory && selectedCategory === category.id
+                  }
                 >
                   <h2 className="fr-text--md fr-mb-0 fr-text-title--blue-france fr-text--medium">
                     {category.label}
