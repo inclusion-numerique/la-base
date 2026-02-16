@@ -22,11 +22,15 @@ const deletedUser = (id: string, timestamp: Date) => ({
   updated: timestamp,
 })
 
-const resourcesToDelete = (userId: string) => ({
+const resourcesToDelete = (
+  userId: string,
+  additionalWhere?: { isPublic?: boolean },
+) => ({
   where: {
     createdById: userId,
     contributors: { none: {} },
     deleted: null,
+    ...additionalWhere,
   },
 })
 
@@ -117,6 +121,59 @@ export const deleteProfile = async (profile: {
   if (profile.reason !== undefined) {
     userUpdateData.deletedReason = profile.reason
   }
+
+  return prismaClient.user.update({
+    where: { id: profile.id },
+    data: userUpdateData,
+  })
+}
+
+export const deleteInactiveProfile = async (profile: { id: string }) => {
+  const timestamp = new Date()
+
+  const userBases = await prismaClient.base.findMany({
+    ...basesToDelete(profile.id),
+    select: {
+      id: true,
+      _count: {
+        select: { members: { where: { member: { deleted: null } } } },
+      },
+      resources: {
+        where: { isPublic: true, deleted: null },
+        select: { id: true },
+      },
+    },
+  })
+
+  // Soft delete bases where user is the only member AND no public resources
+  const basesToSoftDelete = userBases.filter(
+    (base) => base._count.members === 1 && base.resources.length === 0,
+  )
+
+  if (basesToSoftDelete.length > 0) {
+    await prismaClient.base.updateMany({
+      where: { id: { in: basesToSoftDelete.map((base) => base.id) } },
+      ...softDelete(timestamp),
+    })
+  }
+
+  // Soft delete only private resources with no contributors
+  await prismaClient.resource.updateMany({
+    ...resourcesToDelete(profile.id, { isPublic: false }),
+    ...softDelete(timestamp),
+  })
+
+  await prismaClient.collection.updateMany({
+    ...collectionsToDelete(profile.id),
+    ...softDelete(timestamp),
+  })
+
+  const userUpdateData: any = {
+    ...deletedUser(profile.id, timestamp),
+    accounts: { deleteMany: {} },
+    sessions: { deleteMany: {} },
+  }
+  userUpdateData.deletedReason = DeletedReason.Inactivity
 
   return prismaClient.user.update({
     where: { id: profile.id },

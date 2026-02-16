@@ -26,7 +26,6 @@ export const notificationsRouter = router({
       },
     })
   }),
-
   count: protectedProcedure.query(async ({ ctx: { user } }) => {
     return prismaClient.notification.count({
       where: {

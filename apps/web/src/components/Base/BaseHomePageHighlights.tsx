@@ -6,6 +6,7 @@ import {
 import CollectionCard from '@app/web/components/Collection/Cards/CollectionCard'
 import IconInSquare from '@app/web/components/IconInSquare'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
+import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
@@ -14,9 +15,11 @@ import styles from './BaseHomePageHighlights.module.css'
 const BaseHomePageHighlights = ({
   base,
   user,
+  shareToken,
 }: {
   base: BasePageData
   user: SessionUser | null
+  shareToken?: string
 }) => {
   const { highlightedResources, highlightedCollections } = base
   const resourcesTitle =
@@ -45,7 +48,9 @@ const BaseHomePageHighlights = ({
                   size="large"
                   priority="secondary"
                   className="fr-width-full fr-flex fr-justify-content-center"
-                  linkProps={{ href: `/bases/${base.slug}/ressources` }}
+                  linkProps={{
+                    href: `/bases/${shareToken ?? base.slug}/ressources`,
+                  }}
                 >
                   Voir toutes nos ressources
                 </Button>
@@ -70,6 +75,7 @@ const BaseHomePageHighlights = ({
                 )}
                 context="highlight"
                 highlightCount={highlightedResources.length}
+                shareToken={shareToken}
               />
             ))}
           </div>
@@ -78,7 +84,12 @@ const BaseHomePageHighlights = ({
               <Button
                 priority="secondary"
                 className="fr-width-full fr-flex fr-justify-content-center"
-                linkProps={{ href: `/bases/${base.slug}/ressources` }}
+                linkProps={{
+                  href: appendShareToken(
+                    `/bases/${base.slug}/ressources`,
+                    shareToken,
+                  ),
+                }}
               >
                 Voir toutes nos ressources
               </Button>
@@ -102,7 +113,12 @@ const BaseHomePageHighlights = ({
                     size="large"
                     priority="secondary"
                     className="fr-width-full fr-flex fr-justify-content-center"
-                    linkProps={{ href: `/bases/${base.slug}/collections` }}
+                    linkProps={{
+                      href: appendShareToken(
+                        `/bases/${base.slug}/collections`,
+                        shareToken,
+                      ),
+                    }}
                   >
                     Voir toutes nos collections
                   </Button>
@@ -128,6 +144,7 @@ const BaseHomePageHighlights = ({
                   key={collection.id}
                   highlightCount={highlightedCollections.length}
                   context="highlight"
+                  token={shareToken}
                 />
               ))}
             </div>
@@ -136,7 +153,12 @@ const BaseHomePageHighlights = ({
                 <Button
                   priority="secondary"
                   className="fr-width-full fr-flex fr-justify-content-center"
-                  linkProps={{ href: `/bases/${base.slug}/collections` }}
+                  linkProps={{
+                    href: appendShareToken(
+                      `/bases/${base.slug}/collections`,
+                      shareToken,
+                    ),
+                  }}
                 >
                   Voir toutes nos collections
                 </Button>

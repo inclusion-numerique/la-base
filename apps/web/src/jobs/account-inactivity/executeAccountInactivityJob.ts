@@ -1,6 +1,6 @@
 import { output } from '@app/cli/output'
 import { prismaClient } from '@app/web/prismaClient'
-import { deleteProfile } from '@app/web/server/rpc/profile/deleteProfile'
+import { deleteInactiveProfile } from '@app/web/server/rpc/profile/deleteProfile'
 import {
   sendAccountDeletedEmail,
   sendAccountDeletionSoonEmail,
@@ -55,7 +55,7 @@ const processUser = async (
       where: { id: user.id },
       data: { accountInactivity: AccountInactivity.AccountDeleted },
     })
-    await deleteProfile({ id: user.id })
+    await deleteInactiveProfile({ id: user.id })
     return { type: '365' }
   }
 

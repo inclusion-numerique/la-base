@@ -35,7 +35,7 @@ export const collectionRouter = router({
     .input(CreateCollectionCommandValidation)
     .mutation(
       async ({
-        input: { addResourceId, ...collectionData },
+        input: { addResourceId, addResourceShareableLinkId, ...collectionData },
         ctx: { user },
       }) => {
         if (collectionData.baseId) {
@@ -72,6 +72,18 @@ export const collectionRouter = router({
           )
         }
 
+        // Validate shareable link if provided
+        if (addResourceShareableLinkId) {
+          const shareableLink = await prismaClient.shareableLink.findUnique({
+            where: { id: addResourceShareableLinkId },
+            select: { enabled: true },
+          })
+
+          if (!shareableLink || !shareableLink.enabled) {
+            throw invalidError('Shareable link not found or disabled')
+          }
+        }
+
         const slug = await createAvailableSlug(
           collectionData.title,
           'collections',
@@ -87,6 +99,7 @@ export const collectionRouter = router({
                   create: {
                     id: v4(),
                     resourceId: addResourceId,
+                    shareableLinkId: addResourceShareableLinkId ?? undefined,
                     added: new Date(),
                   },
                 }

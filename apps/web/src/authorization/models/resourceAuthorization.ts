@@ -75,6 +75,7 @@ export const getResourceRoles = (
 export const getResourcePermissions = (
   resource: ResourceAuthorizationTarget,
   roles: (UserSecurityRole | ResourceRole)[],
+  isShareToken = false,
 ): ResourcePermission[] => {
   if (resource.deleted) {
     return []
@@ -84,6 +85,7 @@ export const getResourcePermissions = (
   if (
     roles.includes(UserSecurityRoles.Admin) ||
     roles.includes(UserSecurityRoles.Support) ||
+    roles.includes(UserSecurityRoles.Moderator) ||
     roles.includes(ResourceRoles.ResourceCreator) ||
     roles.includes(ResourceRoles.ResourceContributor)
   ) {
@@ -95,6 +97,11 @@ export const getResourcePermissions = (
   // Can see metadata for published private resource
   if (resource.published) {
     permissions.push(ResourcePermissions.ReadGeneralResourceInformation)
+  }
+
+  // Share token grants ReadResourceContent permission regardless of resource visibility
+  if (isShareToken && resource.published) {
+    permissions.push(ResourcePermissions.ReadResourceContent)
   }
 
   // Other users can only see published public resources

@@ -16,6 +16,7 @@ const createdBy = {
 
 export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
   {
+    shareableLink: null,
     eventType: 'published',
     collectionId: undefined,
     addedToCollectionAt: undefined,
@@ -63,6 +64,7 @@ export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
     seen: true,
   },
   {
+    shareableLink: null,
     eventType: 'published',
     collectionId: undefined,
     addedToCollectionAt: undefined,

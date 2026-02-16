@@ -25,26 +25,31 @@ export type CategoryStyle = {
 }
 
 export type CategoryTagStyle = {
-  selected: string
-  unselected: string
+  default: string
+  hover: string
+  border: string
 }
 
 export const CATEGORY_VARIANTS_TAG: Record<Category, CategoryTagStyle> = {
   'Inclusion numérique': {
-    selected: 'fr-background-artwork-minor--green-archipel',
-    unselected: 'fr-background-alt--green-archipel',
+    default: 'fr-background-alt--green-archipel',
+    hover: 'thematic-hover--green-archipel',
+    border: 'thematic-border--green-archipel',
   },
   'Culture numérique': {
-    selected: 'fr-background-artwork-minor--pink-tuile',
-    unselected: 'fr-background-contrast--pink-tuile',
+    default: 'fr-background-alt--pink-tuile',
+    hover: 'thematic-hover--pink-tuile',
+    border: 'thematic-border--pink-tuile',
   },
   'Communs & souveraineté': {
-    selected: 'fr-background-artwork-minor--yellow-tournesol',
-    unselected: 'fr-background-alt--yellow-tournesol',
+    default: 'fr-background-alt--yellow-tournesol',
+    hover: 'thematic-hover--yellow-tournesol',
+    border: 'thematic-border--yellow-tournesol',
   },
   'Numérique & environnement': {
-    selected: 'fr-background-artwork-minor--green-bourgeon',
-    unselected: 'fr-background-alt--green-bourgeon',
+    default: 'fr-background-alt--green-bourgeon',
+    hover: 'thematic-hover--green-bourgeon',
+    border: 'thematic-border--green-bourgeon',
   },
 }
 

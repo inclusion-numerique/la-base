@@ -27,11 +27,22 @@ const BaseResourcesPage = async ({
     user,
     authorization: { hasPermission },
     base,
+    isUsingShareToken,
   } = await getBasePageContext(slug)
 
   const [resources, totalCount] = await Promise.all([
-    getBaseResourcesPaginated(base.id, user, paginationParams),
-    getBaseResourcesCount(base.id, user, paginationParams.search),
+    getBaseResourcesPaginated(
+      base.id,
+      user,
+      paginationParams,
+      isUsingShareToken,
+    ),
+    getBaseResourcesCount(
+      base.id,
+      user,
+      paginationParams.search,
+      isUsingShareToken,
+    ),
   ])
 
   const { id, members, createdById } = base
@@ -76,6 +87,7 @@ const BaseResourcesPage = async ({
         canWrite={canWrite}
         baseId={id}
         totalCount={totalCount}
+        token={slug}
       />
     </ResourcesPagination>
   )

@@ -89,15 +89,14 @@ const SearchThematicsCategory = ({
           const isSelected = selected.some((s) => s.option.value === opt.value)
           const iconId = isSelected ? 'fr-icon-check-line' : 'fr-icon-add-line'
           const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
-          const className = isSelected
-            ? CATEGORY_VARIANTS_TAG[category].selected
-            : CATEGORY_VARIANTS_TAG[category].unselected
-          const textClassName = isSelected
-            ? 'fr-text-label--white'
-            : 'fr-text-label--grey'
-          const iconClassName = isSelected
-            ? 'fr-text-label--white'
-            : 'fr-text-title--blue-france'
+          const className = classNames(
+            'thematic-badge-base',
+            CATEGORY_VARIANTS_TAG[category].default,
+            CATEGORY_VARIANTS_TAG[category].hover,
+            isSelected && CATEGORY_VARIANTS_TAG[category].border,
+          )
+          const textClassName = 'fr-text-label--grey'
+          const iconClassName = 'fr-text-title--blue-france'
 
           return (
             <ThematicOptionBadge

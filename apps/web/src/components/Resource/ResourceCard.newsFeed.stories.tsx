@@ -58,6 +58,7 @@ const mockCreatedBy = {
 
 const baseResource = {
   resourceFeedback: [],
+  shareableLink: null,
   collectionId: undefined,
   addedToCollectionAt: undefined,
   eventType: 'published' as const,

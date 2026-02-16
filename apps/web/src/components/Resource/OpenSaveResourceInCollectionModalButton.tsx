@@ -8,10 +8,12 @@ import classNames from 'classnames'
 
 const OpenSaveResourceInCollectionModalButton = ({
   resourceId,
+  shareableLinkId,
   ...buttonProps
 }: ButtonProps &
   ButtonProps.AsButton & {
     resourceId: string
+    shareableLinkId?: string
   }) => {
   const open = SaveResourceInCollectionDynamicModal.useOpen()
   const isMobile = useIsMobile()
@@ -19,7 +21,9 @@ const OpenSaveResourceInCollectionModalButton = ({
     <Button
       {...buttonProps}
       className={classNames(buttonProps.className, isMobile && 'fr-text--sm')}
-      onClick={() => open({ resourceId })}
+      onClick={() =>
+        open({ resourceId, shareableLinkId: shareableLinkId ?? null })
+      }
       size={isMobile ? 'medium' : 'small'}
     />
   )

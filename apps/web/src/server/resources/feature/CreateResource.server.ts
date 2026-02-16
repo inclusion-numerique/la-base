@@ -53,6 +53,7 @@ export const applyResourceCreated: ResourceCreationEventApplier<
   createdById: byId,
   imageId: null,
   isPublic: null,
+  shareableLink: null,
   contents: [],
   themes: [],
   resourceTypes: [],

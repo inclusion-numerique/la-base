@@ -8,6 +8,7 @@ import EmptyBox from '@app/web/components/EmptyBox'
 import DeleteResourceModal from '@app/web/components/Resource/DeleteResource/DeleteResourceModal'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import { BaseResource } from '@app/web/server/bases/getBase'
 import { Resource } from '@app/web/server/resources/getResource'
 import { numberToString } from '@app/web/utils/formatNumber'
@@ -58,6 +59,7 @@ const ResourcesSearchResults = ({
     )}
     {!!user && <SaveResourceInCollectionModal user={user} />}
     <DeleteResourceModal />
+    <ShareLinkModal />
   </>
 )
 

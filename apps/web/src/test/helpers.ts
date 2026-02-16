@@ -79,6 +79,7 @@ export const createTestResource = (
   contributor?: SessionUser,
 ) =>
   ({
+    shareableLink: null,
     id: v4(),
     legacyId: 123,
     title:
@@ -164,6 +165,7 @@ export const createTestBase = (
   const id = v4()
   const base = {
     id,
+    shareableLink: null,
     title: 'Conseiller numérique France Services - contributions',
     slug: 'conseiller-numérique-france-services-contributions',
     description:
@@ -188,6 +190,7 @@ export const createTestBase = (
     highlightedResources: [],
     highlightedCollections: [],
     highlightCollections: true,
+
     followedByData: {
       counts: {
         total: 0,

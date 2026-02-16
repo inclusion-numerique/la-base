@@ -23,6 +23,7 @@ describe('onPublished', () => {
   }
 
   const mockResource: ResourceProjection = {
+    shareableLink: null,
     id: '6cc07e48-0842-4c57-97e2-a452d0eb60d0',
     slug: 'ressourcerie-veille-et-curation',
     title: 'Ressourcerie Veille & Curation',

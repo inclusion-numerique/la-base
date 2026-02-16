@@ -59,6 +59,7 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
       CreateResourceDynamicModal.open()
     }
   }, [createResourceIsInSearchParams, modalIsBound])
+
   const onModalClose = () => {
     reset(defaultValues)
     setStep(0)

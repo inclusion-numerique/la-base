@@ -8,6 +8,12 @@
   min-height: 40px;
 }
 
+/* Hover pour les boutons cellules et "Voir tout mon fil" */
+.button:hover {
+  background-color: var(--background-alt-blue-france);
+  border-radius: 8px;
+}
+
 .flexWidth {
   flex: 1;
   min-width: 0;
@@ -20,7 +26,7 @@
 .activeButton {
   font-weight: 700;
   border-radius: 8px;
-  color: var(--artwork-minor-blue-france);
+  color: var(--text-title-blue-france);
   background-color: var(--background-alt-blue-france);
 }
 

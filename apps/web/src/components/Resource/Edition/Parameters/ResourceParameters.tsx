@@ -5,6 +5,7 @@ import ResourceDeletion from '@app/web/components/Resource/Edition/Parameters/Re
 import ResourceIndexation from '@app/web/components/Resource/Edition/Parameters/ResourceIndexation'
 import ResourceParametersSideMenu from '@app/web/components/Resource/Edition/Parameters/ResourceParametersSideMenu'
 import ResourcePublication from '@app/web/components/Resource/Edition/Parameters/ResourcePublication'
+import ResourceShareableLink from '@app/web/components/Resource/Edition/Parameters/ResourceShareableLink'
 import ResourceVisibilityForm from '@app/web/components/Resource/Edition/Parameters/ResourceVisibilityForm'
 import ResourceLicenceForm from '@app/web/features/resources/licence/components/ResourceLicenceForm'
 import type { Resource } from '@app/web/server/resources/getResource'
@@ -20,10 +21,11 @@ const ResourceParameters = ({
   user: SessionUser
 }) => (
   <div className={classNames('fr-container', styles.container)}>
-    <ResourceParametersSideMenu />
+    <ResourceParametersSideMenu isPublic={resource.isPublic} />
     <div className="fr-container--slim">
       <h1 className="fr-mb-6w">Paramètres de la ressource</h1>
       <ResourcePublication resource={resource} user={user} />
+      <ResourceShareableLink resource={resource} />
       <ResourceVisibilityForm resource={resource} user={user} />
       <ResourceLicenceForm resource={resource} />
       <ResourceIndexation resource={resource} />

@@ -2,6 +2,7 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import CopyLinkButton from '@app/web/components/CopyLinkButton'
 import { ResourceMoreActionsDropdown } from '@app/web/components/Resource/ResourceMoreActionsDropdown'
 import SaveResourceInCollectionButton from '@app/web/components/Resource/SaveResourceInCollectionButton'
+import OpenShareLinkModalButton from '@app/web/features/shareableLink/components/OpenShareLinkModalButton'
 import type { Resource } from '@app/web/server/resources/getResource'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Button from '@codegouvfr/react-dsfr/Button'
@@ -13,10 +14,12 @@ const ResourceActions = ({
   resource,
   user,
   canWrite,
+  shareableLinkId,
 }: {
   resource: Resource
   user: SessionUser | null
   canWrite: boolean
+  shareableLinkId?: string
 }) => {
   const isPublished = !!resource.published
   const resourceCreator = user?.id === resource.createdById
@@ -24,9 +27,15 @@ const ResourceActions = ({
   const isBaseMember = resource.base?.members.some(
     (member) => member.memberId === user?.id && member.accepted,
   )
-  // Admins who are NOT resource creators and NOT base members should see normal user actions
+  const isContributor = resource.contributors.some(
+    (contributor) => contributor.contributorId === user?.id,
+  )
+  // Admins who are NOT resource creators, NOT base members, and NOT contributors should see normal user actions
   const adminAsNormalUser =
-    isAdmin && !resourceCreator && !(resource.baseId && isBaseMember)
+    isAdmin &&
+    !resourceCreator &&
+    !(resource.baseId && isBaseMember) &&
+    !isContributor
   const showEditActions = canWrite && !adminAsNormalUser
   const showUserActions = !canWrite || adminAsNormalUser
 
@@ -68,19 +77,31 @@ const ResourceActions = ({
               priority="secondary"
               resource={resource}
               user={user}
+              shareableLinkId={shareableLinkId}
               data-testid="save-resource-in-collection-button"
               iconPosition="left"
             >
               {showEditActions ? undefined : 'Enregistrer'}
             </SaveResourceInCollectionButton>
-            <CopyLinkButton
-              className="fr-unhidden-sm fr-hidden"
-              size="small"
-              priority="secondary"
-              url={getServerUrl(`/ressources/${resource.slug}`, {
-                absolutePath: true,
-              })}
-            />
+            {resource.isPublic ? (
+              <CopyLinkButton
+                className="fr-unhidden-sm fr-hidden"
+                size="small"
+                priority="secondary"
+                url={getServerUrl(`/ressources/${resource.slug}`, {
+                  absolutePath: true,
+                })}
+              />
+            ) : (
+              canWrite &&
+              user && (
+                <OpenShareLinkModalButton
+                  type="resource"
+                  resource={resource}
+                  className="fr-unhidden-sm fr-hidden"
+                />
+              )
+            )}
           </>
         )}
       </div>

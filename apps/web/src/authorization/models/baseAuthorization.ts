@@ -68,6 +68,7 @@ export const getBaseRoles = (
 export const getBasePermissions = (
   base: BaseAuthorizationTarget,
   roles: (UserSecurityRole | BaseRole)[],
+  isShareToken = false,
 ): BasePermission[] => {
   if (base.deleted) {
     return []
@@ -76,6 +77,7 @@ export const getBasePermissions = (
   if (
     roles.includes('Admin') ||
     roles.includes('Support') ||
+    roles.includes('Moderator') ||
     roles.includes('BaseAdmin')
   ) {
     return basePermissions
@@ -97,6 +99,11 @@ export const getBasePermissions = (
   const permissions: BasePermission[] = [
     BasePermissions.ReadGeneralBaseInformation,
   ]
+
+  // Share token grants ReadBaseData permission regardless of base visibility
+  if (isShareToken) {
+    permissions.push(BasePermissions.ReadBaseData)
+  }
 
   // Other users can only see public bases
   if (base.isPublic) {

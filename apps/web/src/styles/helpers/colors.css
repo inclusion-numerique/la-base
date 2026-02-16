@@ -29,3 +29,36 @@
 .fr-text-label--white {
   color: white;
 }
+
+/* Thematic badge hover styles */
+.thematic-hover--green-archipel:hover:not(:disabled) {
+  background-color: var(--green-archipel-950-100) !important;
+}
+.thematic-hover--pink-tuile:hover:not(:disabled) {
+  background-color: var(--pink-tuile-950-100) !important;
+}
+.thematic-hover--yellow-tournesol:hover:not(:disabled) {
+  background-color: var(--yellow-tournesol-950-100) !important;
+}
+.thematic-hover--green-bourgeon:hover:not(:disabled) {
+  background-color: var(--green-bourgeon-950-100) !important;
+}
+
+/* Thematic badge base style - transparent border to prevent layout shift */
+.thematic-badge-base {
+  border: 2px solid transparent;
+}
+
+/* Thematic badge border styles (for selected state) - only changes border color */
+.thematic-border--green-archipel {
+  border-color: var(--green-archipel-sun-391-moon-716);
+}
+.thematic-border--pink-tuile {
+  border-color: var(--pink-tuile-sun-425-moon-750);
+}
+.thematic-border--yellow-tournesol {
+  border-color: var(--yellow-tournesol-sun-407-moon-922);
+}
+.thematic-border--green-bourgeon {
+  border-color: var(--green-bourgeon-sun-425-moon-759);
+}

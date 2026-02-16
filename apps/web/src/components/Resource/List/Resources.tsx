@@ -15,6 +15,7 @@ import ResourceTab from '@app/web/components/Resource/List/ResourceTab'
 import ResourceCard from '@app/web/components/Resource/ResourceCard'
 import ResourcesSearch from '@app/web/components/Resource/ResourcesSearch'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
+import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import { numberToString } from '@app/web/utils/formatNumber'
@@ -33,6 +34,7 @@ const Resources = ({
   paginationParams,
   slug,
   totalCount,
+  token,
 }: {
   isOwner?: boolean
   title: string
@@ -43,6 +45,7 @@ const Resources = ({
   paginationParams: PaginationParams
   slug: string
   totalCount: number
+  token?: string
 }) => {
   const drafts = useMemo(
     () => resources.filter((resource) => resource.published === null),
@@ -161,6 +164,7 @@ const Resources = ({
               key={resource.id}
               resource={resource}
               user={user}
+              shareToken={token}
             />
           ))}
         </CardList>
@@ -168,6 +172,7 @@ const Resources = ({
       {!!user && <SaveResourceInCollectionModal user={user} />}
       <DeleteResourceModal />
       <InviteContributorModal />
+      <ShareLinkModal />
     </div>
   )
 }

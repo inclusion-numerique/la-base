@@ -5,16 +5,23 @@ import AdministrationSearchResource from '@app/web/app/administration/ressources
 import { getResourcesListPageData } from '@app/web/app/administration/ressources/getResourcesListPageData'
 import type { ResourcesDataTableSearchParams } from '@app/web/app/administration/ressources/ResourcesDataTable'
 import ResourcesTable from '@app/web/app/administration/ressources/ResourcesTable'
+import { getSessionUser } from '@app/web/auth/getSessionUser'
 import { numberToString } from '@app/web/utils/formatNumber'
+import { redirect } from 'next/navigation'
 
 const AdministrationRessourcesPage = async ({
   searchParams,
 }: {
   searchParams: Promise<ResourcesDataTableSearchParams>
 }) => {
+  const user = await getSessionUser()
+  if (!user) {
+    redirect(`/connexion?suivant=/administration/ressources`)
+  }
   const listParams = await searchParams
   const data = await getResourcesListPageData({
     searchParams: listParams,
+    user,
   })
   return (
     <>

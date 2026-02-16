@@ -233,10 +233,14 @@ export const getResourceSelect = (_user: { id: string } | null) =>
         linkImageUrl: true,
         linkFaviconUrl: true,
         text: true,
+        linkClickCount: true,
+        fileDownloadCount: true,
+        filePreviewCount: true,
       },
       orderBy: { order: 'asc' },
     },
     viewsCount: true,
+    shareableLink: { select: { id: true, enabled: true } },
     _count: {
       select: {
         resourceFeedback: {

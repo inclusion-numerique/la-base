@@ -3,6 +3,7 @@ import {
   ResourcesDataTable,
   type ResourcesDataTableSearchParams,
 } from '@app/web/app/administration/ressources/ResourcesDataTable'
+import { SessionUser } from '@app/web/auth/sessionUser'
 import { getDataTableOrderBy } from '@app/web/data-table/getDataTableOrderBy'
 import { takeAndSkipFromPage } from '@app/web/data-table/takeAndSkipFromPage'
 import { DEFAULT_PAGE, toNumberOr } from '@app/web/data-table/toNumberOr'
@@ -12,11 +13,13 @@ import type { Prisma } from '@prisma/client'
 
 type SearchResourceOptions = {
   searchParams: ResourcesDataTableSearchParams
+  user: SessionUser
 }
 
 const DEFAULT_PAGE_SIZE = 100
 
 export const searchResource = async (options: SearchResourceOptions) => {
+  const { user } = options
   const searchParams = options.searchParams ?? {}
 
   const orderBy = getDataTableOrderBy(searchParams, ResourcesDataTable)
@@ -34,6 +37,7 @@ export const searchResource = async (options: SearchResourceOptions) => {
           OR: [{ title: { contains: part, mode: 'insensitive' } }],
         })),
       },
+      ...(user.role === 'Moderator' ? [{ isPublic: true }] : []),
     ],
   } satisfies Prisma.ResourceWhereInput
 
