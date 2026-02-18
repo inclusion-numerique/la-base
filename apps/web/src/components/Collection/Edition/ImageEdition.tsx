@@ -39,6 +39,7 @@ const ImageEdition = <T extends { imageId?: string | null }>({
         render={({ fieldState: { error } }) =>
           imageType === 'image' ? (
             <CroppedUpload
+              context="collection"
               image={image}
               modal={collectionImageCropModal}
               disabled={disabled}

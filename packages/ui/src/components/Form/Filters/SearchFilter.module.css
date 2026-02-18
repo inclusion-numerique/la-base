@@ -43,10 +43,6 @@
   padding: 0;
   height: 1px;
   margin: 0 16px;
-
-  &:last-child {
-    display: none;
-  }
 }
 
 .optionCategory {

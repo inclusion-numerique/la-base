@@ -182,6 +182,7 @@ const ResourceCard = ({
                 <span className="fr-unhidden-sm fr-hidden fr-mr-1w">
                   Modifier
                 </span>
+                <span className="fr-sr-only">Modifier</span>
                 <span className="ri-edit-line" aria-hidden />
               </Button>
               <ResourceMoreActionsDropdown
@@ -207,6 +208,7 @@ const ResourceCard = ({
                 <span className="fr-unhidden-sm fr-hidden">Enregistrer</span>
               </SaveResourceInCollectionButton>
               <CopyLinkButton
+                context="resource"
                 size="small"
                 priority="tertiary no outline"
                 url={appendShareToken(copyLinkUrl, shareToken)}

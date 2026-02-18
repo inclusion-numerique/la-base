@@ -51,8 +51,12 @@ const ResourceLicenceFields = <T extends FieldValues>({
         <fieldset
           className="fr-fieldset"
           id="radio-licence"
-          aria-labelledby="radio-licence-legend radio-licence-messages"
+          aria-labelledby="radio-licence-legend radio-licence-hint radio-licence-messages"
         >
+          <p id="radio-licence-hint" className="fr-sr-only">
+            Les détails de la licence sélectionnée sont disponibles sous le
+            regroupement d'options.
+          </p>
           {!!label && (
             <legend
               id="radio-licence-legend"

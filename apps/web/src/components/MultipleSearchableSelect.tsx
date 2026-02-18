@@ -248,6 +248,11 @@ const MultipleSearchableSelect = forwardRef<
                   aria-autocomplete="list"
                   aria-controls={listboxId}
                   aria-expanded={showOptions}
+                  aria-activedescendant={
+                    selectedIndex >= 0
+                      ? `${listboxId}-option-${selectedIndex}`
+                      : undefined
+                  }
                   disabled={disabled}
                   data-testid={dataTestId}
                   id={id}
@@ -308,6 +313,7 @@ const MultipleSearchableSelect = forwardRef<
             >
               <Options
                 data-testid={dataTestId}
+                idPrefix={listboxId}
                 options={filteredOptions}
                 select={select}
                 selectedIndex={selectedIndex}

@@ -119,7 +119,14 @@ const Resources = ({
         <Tabs
           tabs={[
             {
-              label: `Publiques · ${publics.length}`,
+              label: (
+                <>
+                  Publiques · {publics.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(publics.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-earth-line',
               content: (
                 <ResourceTab
@@ -131,7 +138,14 @@ const Resources = ({
               ),
             },
             {
-              label: `Privées · ${privates.length}`,
+              label: (
+                <>
+                  Privées · {privates.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(privates.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-lock-line',
               content: (
                 <ResourceTab
@@ -143,7 +157,14 @@ const Resources = ({
               ),
             },
             {
-              label: `Brouillons · ${drafts.length}`,
+              label: (
+                <>
+                  Brouillons · {drafts.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(drafts.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-draft-line',
               content: (
                 <ResourceTab

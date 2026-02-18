@@ -192,6 +192,10 @@ const SearchBar = ({
           <label className="fr-label" htmlFor={searchId}>
             Rechercher
           </label>
+          <span className="fr-sr-only" id="search-description">
+            Des résultats de recherche apparaissent automatiquement lors de la
+            saisie dans le champ
+          </span>
           <input
             ref={inputRef}
             value={query}
@@ -201,6 +205,7 @@ const SearchBar = ({
             type="search"
             name="search"
             placeholder="Rechercher une ressource, une base, un profil..."
+            aria-describedby="search-description"
           />
 
           <Button type="submit">Rechercher</Button>
@@ -209,7 +214,6 @@ const SearchBar = ({
           <div
             className={styles.resultsContainer}
             ref={quickSearchContainerRef}
-            role="listbox"
           >
             {displayQuickSearchLoader && (
               <div className={styles.loaderContainer}>
@@ -219,59 +223,71 @@ const SearchBar = ({
             {displayQuickSearchResults ? (
               <>
                 <div className={styles.optionsContainer}>
+                  <div role="heading" aria-level={2} className="fr-sr-only">
+                    Résultats de recherche
+                  </div>
+
                   {quickSearchResult.resourcesCount > 0 && (
                     <div className={styles.results}>
-                      <b>Ressources</b>
-                      {quickSearchResult.resources.map((resource) => (
-                        <Link
-                          role="option"
-                          key={resource.id}
-                          href={`/ressources/${resource.slug}`}
-                          className={styles.resource}
-                        >
-                          {resource.title}
-                        </Link>
-                      ))}
+                      <h3 className="fr-mb-0 fr-text--md">Ressources</h3>
+                      <ul className="fr-raw-list">
+                        {quickSearchResult.resources.map((resource) => (
+                          <li key={resource.id}>
+                            <Link
+                              href={`/ressources/${resource.slug}`}
+                              className={styles.resource}
+                            >
+                              {resource.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                   {quickSearchResult.basesCount > 0 && (
                     <div className={styles.results}>
-                      <b>Bases</b>
-                      {quickSearchResult.bases.map((base) => (
-                        <Link
-                          role="option"
-                          key={base.id}
-                          href={`/bases/${base.slug}`}
-                          className={styles.base}
-                        >
-                          <BaseImage
-                            className="fr-mr-1w"
-                            base={base}
-                            size={24}
-                          />
-                          <span>{base.title}</span>
-                        </Link>
-                      ))}
+                      <h3 className="fr-mb-0 fr-text--md">Bases</h3>
+                      <ul className="fr-raw-list">
+                        {quickSearchResult.bases.map((base) => (
+                          <li key={base.id}>
+                            <Link
+                              role="option"
+                              href={`/bases/${base.slug}`}
+                              className={styles.base}
+                            >
+                              <BaseImage
+                                className="fr-mr-1w"
+                                base={base}
+                                size={24}
+                              />
+                              <span>{base.title}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                   {quickSearchResult.profilesCount > 0 && (
                     <div className={styles.results}>
-                      <b>Profils</b>
-                      {quickSearchResult.profiles.map((profile) => (
-                        <Link
-                          role="option"
-                          key={profile.id}
-                          href={`/profils/${profile.slug}`}
-                          className={styles.profile}
-                        >
-                          <RoundProfileImage
-                            className="fr-mr-1w"
-                            user={profile}
-                            size={24}
-                          />
-                          {profile.name}
-                        </Link>
-                      ))}
+                      <h3 className="fr-mb-0 fr-text--md">Profils</h3>
+                      <ul className="fr-raw-list">
+                        {quickSearchResult.profiles.map((profile) => (
+                          <li key={profile.id}>
+                            <Link
+                              role="option"
+                              href={`/profils/${profile.slug}`}
+                              className={styles.profile}
+                            >
+                              <RoundProfileImage
+                                className="fr-mr-1w"
+                                user={profile}
+                                size={24}
+                              />
+                              {profile.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>

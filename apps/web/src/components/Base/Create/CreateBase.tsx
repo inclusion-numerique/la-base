@@ -251,6 +251,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               name="imageId"
               render={({ fieldState: { error } }) => (
                 <CroppedUpload
+                  context="base"
                   ratio={1}
                   round="quarter"
                   label="Image de la base"
@@ -269,6 +270,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               name="coverImageId"
               render={({ fieldState: { error } }) => (
                 <CroppedUpload
+                  context="base"
                   ratio={4.8}
                   label="Image de couverture"
                   height={522 / 4.8}
