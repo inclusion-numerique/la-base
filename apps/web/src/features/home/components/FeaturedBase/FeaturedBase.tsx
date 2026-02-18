@@ -31,16 +31,10 @@ export const FeaturedBase = ({
       )}
       <div className="fr-text--sm fr-mb-0 fr-text-mention--grey fr-flex fr-flex-gap-2v">
         <span className="ri-file-text-line" />
-        <b>{_count.resources}</b>·
+        <b>{_count.resources}</b>· Ressources
         <span className="ri-user-heart-line" />
-        <b>{_count.followedBy}</b>
+        <b>{_count.followedBy}</b> Suivis
       </div>
     </div>
-    {/* <FollowBaseButton */}
-    {/*  userId={user?.id} */}
-    {/*  id={id} */}
-    {/*  followedBy={follows} */}
-    {/*  title={title} */}
-    {/* /> */}
   </>
 )

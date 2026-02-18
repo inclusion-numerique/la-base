@@ -204,7 +204,7 @@ export const NewsFeedHeader = async ({
           Découvrez les dernières publications liées à vos préférences
         </h1>
 
-        <h1 className="fr-text--md fr-hidden-sm fr-mb-0">
+        <h1 className="fr-text--md fr-hidden-md fr-mb-0">
           Découvrez les dernières publications liées à vos préférences
         </h1>
       </>
@@ -216,7 +216,7 @@ export const NewsFeedHeader = async ({
       <div className="fr-flex fr-direction-column fr-flex-gap-2v">
         {renderLabel()}
         {notificationsContainer}
-        <div className="fr-hidden-sm fr-flex fr-my-3w">
+        <div className="fr-hidden-md fr-flex fr-my-3w">
           <Button
             priority="secondary"
             className="fr-width-full fr-justify-content-center"

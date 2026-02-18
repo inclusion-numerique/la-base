@@ -38,6 +38,7 @@ type InputProps = {
   min?: number | string
   max?: number | string
   step?: number | string
+  autoComplete?: string
 }
 
 type TextareaProps = {
@@ -138,6 +139,7 @@ const InputFormField = <T extends FieldValues = FieldValues>({
               min={rest.min}
               max={rest.max}
               step={rest.step}
+              autoComplete={rest.autoComplete}
             />
           )
 

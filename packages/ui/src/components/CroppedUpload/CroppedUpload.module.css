@@ -2,6 +2,7 @@
   display: block;
   overflow: hidden;
   margin: 0 auto 16px;
+  max-width: 100%;
 }
 
 .round {
@@ -54,6 +55,7 @@
 .cropper {
   min-height: 350px;
   min-width: 250px;
+  max-width: 100%;
 }
 
 .croppingRound {

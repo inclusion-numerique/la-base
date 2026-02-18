@@ -26,7 +26,9 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux rensei
     cy.testId('contributors-box').should('not.exist')
 
     cy.testId('indexation-themes-select').click()
-    cy.testId('indexation-themes-select-IntelligenceArtificielle').click()
+    cy.testId('indexation-themes-select-IntelligenceArtificielle').click({
+      force: true,
+    })
     cy.testId('indexation-themes-select-apply').click()
     cy.testId('indexation-resource-types-select').click({
       force: true,

@@ -59,20 +59,23 @@ export const FeaturedResource = ({
   resource: { title, slug, published, base, createdBy },
   user,
 }: FeaturedResourceProps) => (
-  <div className="fr-border-top fr-enlarge-link fr-no-hover-bg">
-    <div className="fr-my-2w fr-flex fr-align-items-center fr-flex-gap-2v">
+  <div className="fr-border-top fr-enlarge-link fr-no-hover-bg fr-flex fr-direction-column">
+    <h4 className="fr-text--md fr-mb-1v" style={{ order: 2 }}>
+      <Link href={`/ressources/${slug}`} aria-label={title}>
+        <CropText limit={79}>{title}</CropText>
+      </Link>
+    </h4>
+    <div
+      className="fr-my-2w fr-flex fr-align-items-center fr-flex-gap-2v"
+      style={{ order: 1 }}
+    >
       {base != null && <BaseMetadata base={base} />}
       {base == null && createdBy != null && (
         <ProfileMetadata profile={createdBy} />
       )}
     </div>
-    <h4 className="fr-text--md fr-mb-1v">
-      <Link href={`/ressources/${slug}`} aria-label={title}>
-        <CropText limit={79}>{title}</CropText>
-      </Link>
-    </h4>
     {!!published && (
-      <span className="fr-text--xs fr-mb-0">
+      <span className="fr-text--xs fr-mb-0" style={{ order: 3 }}>
         Publiée&nbsp;le&nbsp;{dateAsDay(new Date(published))}
       </span>
     )}
