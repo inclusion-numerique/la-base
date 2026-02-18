@@ -1,8 +1,8 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import ResponsiveUploadedImage from '@app/web/components/ResponsiveUploadedImage'
 import { getStorageUrl } from '@app/web/features/uploads/storage/getStorageUrl'
 import type { ContentProjectionWithContextImage } from '@app/web/server/resources/getResourceFromEvents'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './ImageContentDetails.module.css'
 
 const ImageContentDetails = ({
@@ -77,9 +77,8 @@ const ImageContentDetails = ({
           >
             Télécharger
           </a>
-          <Link
-            title="Voir l'image en plein écran"
-            target="_blank"
+          <ExternalLink
+            ariaLabel="Voir l'image en plein écran"
             href={getStorageUrl({ key })}
             className={classNames(
               'fr-btn--tertiary-no-outline',
@@ -92,7 +91,7 @@ const ImageContentDetails = ({
             <picture>
               <img src="/images/open-in-full.svg" alt="" />
             </picture>
-          </Link>
+          </ExternalLink>
         </div>
       </div>
     </div>

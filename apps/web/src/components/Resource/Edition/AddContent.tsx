@@ -39,10 +39,10 @@ const AddContent = React.forwardRef(
         ? (editing?.split('-')[1] as ContentType)
         : null
 
-    return isAddingContentType ? (
+    const form = (
       <ResourceContentForm
         ref={contentFormButtonRef}
-        type={isAddingContentType}
+        type={isAddingContentType!}
         data-testid="add-content_form"
         mode="add"
         index={index}
@@ -51,6 +51,14 @@ const AddContent = React.forwardRef(
         sendCommand={sendCommand}
         onDelete={onDelete}
       />
+    )
+
+    return isAddingContentType ? (
+      as === 'li' ? (
+        <li>{form}</li>
+      ) : (
+        form
+      )
     ) : (
       <AddContentButton
         as={as}

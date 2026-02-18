@@ -11,6 +11,7 @@ export default async function NewsFeedThemes() {
     <div className="fr-flex fr-direction-column">
       <NewsFeedOnboardingHeader
         step={2}
+        previousAriaLabel="Précédent, retour à l’étape 1"
         title="Quelles thématiques vous intéressent ?"
         nextStepTitle="Suivez des bases"
         description="Découvrez et restez informé des ressources liées à vos centres d’intérêts."

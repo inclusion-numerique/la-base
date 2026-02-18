@@ -30,6 +30,7 @@ const SaveInNestedCollection = ({
       onClick={onClick}
       type="button"
       data-testid="add-in-collection-bases"
+      aria-expanded={false}
     >
       <div className={styles.content}>
         <div className="fr-flex fr-justify fr-align-items-center fr-flex-gap-6v">
@@ -38,18 +39,26 @@ const SaveInNestedCollection = ({
           )}
           {!!base && <BaseImage base={base} size={avatarSize} />}
           <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-            <b className={classNames('fr-text-title--grey', styles.title)}>
+            <h2
+              className={classNames(
+                'fr-text--md fr-text--bold fr-mb-0 fr-text-title--grey fr-text--start',
+                styles.title,
+              )}
+            >
               {base ? base.title : `${user.name} - Mes collections`}
-            </b>
+            </h2>
             <div className="fr-flex fr-direction-md-row fr-direction-column fr-flex-gap-2v">
-              <div className={styles.collections}>
+              <p className={classNames('fr-mb-0', styles.collections)}>
                 <span className="fr-icon-folder-2-line fr-icon--sm" />
                 &nbsp;
                 {base
                   ? base.collections.length
                   : withoutFavoriteCollections.length}
-                &nbsp; Collections&nbsp;
-              </div>
+                &nbsp;Collection
+                {sPluriel(
+                  base?.collections.length ?? withoutFavoriteCollections.length,
+                )}
+              </p>
               {alreadyInCollections > 0 ? (
                 <Tag small>
                   Déjà ajoutée dans {alreadyInCollections} collection

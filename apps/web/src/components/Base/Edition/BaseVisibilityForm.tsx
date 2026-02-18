@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { createToast } from '@app/ui/toast/createToast'
 import EditCard from '@app/web/components/EditCard'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -13,7 +14,6 @@ import {
 import { trpc } from '@app/web/trpc'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -128,14 +128,12 @@ const BaseVisibilityForm = ({
           <span className="fr-text--sm">
             Choisissez ce que les visiteurs peuvent voir sur votre base.&nbsp;
             <br className="fr-hidden-sm fr-unhidden" />
-            <Link
+            <ExternalLink
               href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-              target="_blank"
-              rel="noopener noreferrer"
               className="fr-link fr-text--sm"
             >
               En savoir plus
-            </Link>
+            </ExternalLink>
           </span>
         }
         form={form}

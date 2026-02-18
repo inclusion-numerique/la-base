@@ -1,9 +1,9 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { getBasePageContext } from '@app/web/app/(public)/bases/[slug]/(consultation)/getBasePageContext'
 import { BasePermissions } from '@app/web/authorization/models/baseAuthorization'
 import { CreateCollectionButton } from '@app/web/components/Collection/CreateCollectionButton'
 import Collections from '@app/web/components/Collection/List/Collections'
 import EmptyBox from '@app/web/components/EmptyBox'
-import Link from 'next/link'
 
 const BaseCollectionsPage = async ({
   params,
@@ -35,14 +35,12 @@ const BaseCollectionsPage = async ({
             <p>
               Créez une collection pour organiser et partager facilement des
               ressources.&nbsp;
-              <Link
+              <ExternalLink
                 href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
                 className="fr-link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 En savoir plus
-              </Link>
+              </ExternalLink>
             </p>
             <div data-testid="create-resource-button">
               <CreateCollectionButton

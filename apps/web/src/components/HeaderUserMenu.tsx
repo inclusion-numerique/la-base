@@ -3,23 +3,26 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { canAccessAdministration } from '@app/web/authorization/administrationAuthorizations'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
+import classNames from 'classnames'
 import Link from 'next/link'
+import styles from './HeaderUserMenu.module.css'
 
 export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
   const bases = user.bases.map(({ base }) => base)
 
   return (
     <ul>
-      <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w fr-px-md-0 fr-px-2w">
-        <Link
-          className="fr-btn fr-flex fr-align-items-center"
-          href={`/profils/${user.slug}`}
-        >
+      <li className="fr-border-top fr-border-bottom fr-my-md-0 fr-my-1w fr-py-md-0 fr-py-1w fr-px-md-0 fr-px-2w fr-position-relative">
+        <div className="fr-btn fr-flex fr-align-items-center">
           <RoundProfileImage className="fr-mr-3v" user={user} />
           <span>
             {user.name ? (
               <>
-                <p className="fr-text--bold fr-text--md fr-mb-0 fr-text-default--grey">
+                <p
+                  role="heading"
+                  aria-level={1}
+                  className="fr-text--bold fr-text--md fr-mb-0 fr-text-default--grey"
+                >
                   {user.name}
                 </p>
                 <p className="fr-text--sm fr-text-mention--grey fr-mb-0">
@@ -29,16 +32,26 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
             ) : (
               <p className="fr-text--bold fr-text--md fr-mb-0">{user.email}</p>
             )}
-            <span className="fr-text-title--blue-france fr-text--sm fr-mb-0">
+            <Link
+              href={`/profils/${user.slug}`}
+              className={classNames(
+                styles.profileLink,
+                'fr-text-title--blue-france fr-text--sm',
+              )}
+            >
               Voir mon profil
-            </span>
+            </Link>
           </span>
-        </Link>
+        </div>
       </li>
       {bases.length > 0 ? (
         <>
           <li className="fr-px-md-0 fr-px-2w">
-            <p className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
+            <p
+              role="heading"
+              saria-level={2}
+              className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w"
+            >
               Mes bases
             </p>
           </li>

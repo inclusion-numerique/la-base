@@ -8,6 +8,7 @@ import type {
   ContentProjectionWithContext,
   ResourceProjectionWithContext,
 } from '@app/web/server/resources/getResourceFromEvents'
+import classNames from 'classnames'
 import { AnimatePresence, Reorder } from 'framer-motion'
 import React, {
   type Dispatch,
@@ -57,7 +58,7 @@ const ContentListEdition = React.forwardRef(
       setOrderedContents(items)
 
     // Used to constrain the drag to the list
-    const dragBoundaryRef = useRef<HTMLUListElement>(null)
+    const dragBoundaryRef = useRef<HTMLOListElement>(null)
     const { moveUp, moveDown, handleKeyDown } = useDraggable()
 
     const moveContent = async (fromIndex: number, toIndex: number) => {
@@ -83,7 +84,8 @@ const ContentListEdition = React.forwardRef(
 
     return (
       <Reorder.Group
-        className={styles.contentList}
+        as="ol"
+        className={classNames('fr-raw-list', styles.contentList)}
         values={orderedContents}
         onReorder={onReorder}
         onKeyDown={onKeyDown}
@@ -104,7 +106,7 @@ const ContentListEdition = React.forwardRef(
               editionState={editionState}
               isSelected={selectedIndex === index}
               onSelect={() => setSelectedIndex(index)}
-              dragConstraints={dragBoundaryRef as RefObject<HTMLUListElement>}
+              dragConstraints={dragBoundaryRef as RefObject<HTMLOListElement>}
               moveUp={() => moveUp(index, moveContent)}
               moveDown={() => moveDown(index, contents.length, moveContent)}
               count={orderedContents.length}

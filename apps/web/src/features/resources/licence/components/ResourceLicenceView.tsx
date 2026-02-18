@@ -8,12 +8,12 @@ const ResourceLicenceView = ({
   resource: ResourceProjectionWithContext
 }) => (
   <div className="fr-flex fr-align-items-center fr-justify-content-space-between">
-    <div className="fr-flex fr-direction-column">
-      <span>{licenceWordings[resource.licence].title}</span>
+    <p className="fr-flex fr-direction-column fr-mb-0">
+      {licenceWordings[resource.licence].title}
       <span className="fr-mb-0 fr-text--xs fr-hint-text">
         {licenceWordings[resource.licence].hint}
       </span>
-    </div>
+    </p>
 
     <ResourceLicenceLogo licence={resource.licence} />
   </div>

@@ -1,10 +1,12 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import InputFormField from '@app/ui/components/Form/InputFormField'
 import { createDynamicModal } from '@app/ui/components/Modal/createDynamicModal'
 import RawModal from '@app/ui/components/Modal/RawModal'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { createToast } from '@app/ui/toast/createToast'
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser, SessionUserBase } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import EmptyBox from '@app/web/components/EmptyBox'
@@ -24,7 +26,6 @@ import Notice from '@codegouvfr/react-dsfr/Notice'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import classNames from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type FormEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -412,24 +413,28 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 />
               )}
               <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-                <b
+                <h2
                   className={classNames(
-                    'fr-text-title--grey fr-text--start',
+                    'fr-text--md fr-text--bold fr-mb-0 fr-text-title--grey fr-text--start',
                     styles.title,
                   )}
                 >
                   {inBaseDirectory
                     ? inBaseDirectory.title
                     : `${user.name} - Mes collections`}
-                </b>
-                <div className={classNames('fr-mt-2v', styles.collections)}>
+                </h2>
+                <p className={classNames('fr-mb-0', styles.collections)}>
                   <span className="fr-icon-folder-2-line fr-icon--sm" />
                   &nbsp;
                   {inBaseDirectory
                     ? inBaseDirectory.collections.length
                     : withoutFavoriteCollections.length}
-                  &nbsp;Collections
-                </div>
+                  &nbsp;Collection
+                  {sPluriel(
+                    inBaseDirectory?.collections.length ??
+                      withoutFavoriteCollections.length,
+                  )}
+                </p>
               </div>
             </div>
           </button>
@@ -468,7 +473,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 <Notice
                   title={
                     inBaseDirectory ? (
-                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                      <span className="fr-flex fr-direction-column fr-flex-gap-1v">
                         <span className="fr-text-mention--black fr-text--bold">
                           Base privée
                         </span>
@@ -476,16 +481,16 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                           La collection sera accessible uniquement aux membres
                           et aux administrateurs de votre base.
                         </span>
-                      </div>
+                      </span>
                     ) : (
-                      <div className="fr-flex fr-direction-column fr-flex-gap-1v">
+                      <span className="fr-flex fr-direction-column fr-flex-gap-1v">
                         <span className="fr-text-mention--black fr-text--bold">
                           Profil privé
                         </span>
                         <span className="fr-text-mention--grey fr-text--regular">
                           Votre collection sera visible uniquement par vous.
                         </span>
-                      </div>
+                      </span>
                     )
                   }
                   classes={{
@@ -531,22 +536,25 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
               )}
               {withoutFavoriteCollections.length > 0 ? (
                 <>
-                  <div className="fr-mt-4v">
-                    <span className="fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
-                      Mes collections
-                    </span>
-                  </div>
-                  {withoutFavoriteCollections.map((collection) => (
-                    <AddOrRemoveResourceFromCollection
-                      loading={pendingMutationCollectionId === collection.id}
-                      key={collection.id}
-                      collection={collection}
-                      resourceId={resourceId}
-                      onAdd={onAddToCollection}
-                      onRemove={onRemoveFromCollection}
-                      withPrivacyTag={!collection.isPublic}
-                    />
-                  ))}
+                  <h2 className="fr-mt-4v fr-mb-0 fr-text--xs fr-text--bold fr-text-mention--grey fr-text--uppercase">
+                    Mes collections
+                  </h2>
+                  <ul className="fr-raw-list">
+                    {withoutFavoriteCollections.map((collection) => (
+                      <li key={collection.id}>
+                        <AddOrRemoveResourceFromCollection
+                          loading={
+                            pendingMutationCollectionId === collection.id
+                          }
+                          collection={collection}
+                          resourceId={resourceId}
+                          onAdd={onAddToCollection}
+                          onRemove={onRemoveFromCollection}
+                          withPrivacyTag={!collection.isPublic}
+                        />
+                      </li>
+                    ))}
+                  </ul>
                 </>
               ) : (
                 <EmptyBox
@@ -557,14 +565,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                   <p>
                     Créez une collection pour enregistrer, organiser, partager
                     facilement des ressources.&nbsp;
-                    <Link
+                    <ExternalLink
                       href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="fr-link"
                     >
                       En savoir plus
-                    </Link>
+                    </ExternalLink>
                   </p>
                   <div data-testid="create-resource-button">
                     <Button
@@ -585,17 +591,20 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
             </>
           ) : inBaseDirectory ? (
             inBaseDirectory.collections.length > 0 ? (
-              inBaseDirectory.collections.map((collection) => (
-                <AddOrRemoveResourceFromCollection
-                  loading={pendingMutationCollectionId === collection.id}
-                  key={collection.id}
-                  collection={collection}
-                  resourceId={resourceId}
-                  onAdd={onAddToCollection}
-                  onRemove={onRemoveFromCollection}
-                  withPrivacyTag={!collection.isPublic}
-                />
-              ))
+              <ul className="fr-raw-list">
+                {inBaseDirectory.collections.map((collection) => (
+                  <li key={collection.id}>
+                    <AddOrRemoveResourceFromCollection
+                      loading={pendingMutationCollectionId === collection.id}
+                      collection={collection}
+                      resourceId={resourceId}
+                      onAdd={onAddToCollection}
+                      onRemove={onRemoveFromCollection}
+                      withPrivacyTag={!collection.isPublic}
+                    />
+                  </li>
+                ))}
+              </ul>
             ) : (
               <EmptyBox
                 title="Vous n’avez pas de collection dans votre base."
@@ -606,14 +615,12 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 <p>
                   Créez une collection pour enregistrer, organiser, partager
                   facilement des ressources.&nbsp;
-                  <Link
+                  <ExternalLink
                     href="https://docs.numerique.gouv.fr/docs/5f8d928b-2fd7-4f4a-b8fd-ca9c841dc841/"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="fr-link"
                   >
                     En savoir plus
-                  </Link>
+                  </ExternalLink>
                 </p>
                 <div data-testid="create-resource-button">
                   <Button
@@ -630,9 +637,9 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
               </EmptyBox>
             )
           ) : (
-            <>
+            <ul className="fr-raw-list">
               {!!favoriteCollection && (
-                <div
+                <li
                   className={classNames(
                     (withoutFavoriteCollections.length > 0 ||
                       bases.length > 0) &&
@@ -643,48 +650,50 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                     loading={
                       pendingMutationCollectionId === favoriteCollection.id
                     }
-                    key={favoriteCollection.id}
                     collection={favoriteCollection}
                     resourceId={resourceId}
                     onAdd={onAddToCollection}
                     onRemove={onRemoveFromCollection}
                     withPrivacyTag
                   />
-                </div>
+                </li>
               )}
               {withoutFavoriteCollections.length > 0 && (
-                <SaveInNestedCollection
-                  user={user}
-                  onClick={viewProfileDirectory}
-                  alreadyInCollections={
-                    withoutFavoriteCollections.filter(({ resources }) =>
-                      resources.some(
-                        (collectionResource) =>
-                          collectionResource.resourceId === resourceId,
-                      ),
-                    ).length
-                  }
-                />
+                <li>
+                  <SaveInNestedCollection
+                    user={user}
+                    onClick={viewProfileDirectory}
+                    alreadyInCollections={
+                      withoutFavoriteCollections.filter(({ resources }) =>
+                        resources.some(
+                          (collectionResource) =>
+                            collectionResource.resourceId === resourceId,
+                        ),
+                      ).length
+                    }
+                  />
+                </li>
               )}
               {bases.map((base) => (
-                <SaveInNestedCollection
-                  key={base.id}
-                  user={user}
-                  base={base}
-                  onClick={() => {
-                    viewBaseDirectory(base.id)
-                  }}
-                  alreadyInCollections={
-                    base.collections.filter(({ resources }) =>
-                      resources.some(
-                        (collectionResource) =>
-                          collectionResource.resourceId === resourceId,
-                      ),
-                    ).length
-                  }
-                />
+                <li key={base.id}>
+                  <SaveInNestedCollection
+                    user={user}
+                    base={base}
+                    onClick={() => {
+                      viewBaseDirectory(base.id)
+                    }}
+                    alreadyInCollections={
+                      base.collections.filter(({ resources }) =>
+                        resources.some(
+                          (collectionResource) =>
+                            collectionResource.resourceId === resourceId,
+                        ),
+                      ).length
+                    }
+                  />
+                </li>
               ))}
-            </>
+            </ul>
           ))}
       </RawModal>
     </form>

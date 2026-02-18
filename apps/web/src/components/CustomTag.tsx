@@ -23,7 +23,7 @@ const CustomTag = ({
   color: TagColor
 }) => {
   return (
-    <span
+    <p
       className={classNames(
         {
           'fr-tag': label,
@@ -37,10 +37,11 @@ const CustomTag = ({
         styles[color],
         className,
       )}
+      aria-hidden={!label || undefined}
       data-testid={dataTestId}
     >
       {label}
-    </span>
+    </p>
   )
 }
 

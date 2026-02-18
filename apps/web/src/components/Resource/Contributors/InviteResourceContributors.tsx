@@ -26,9 +26,13 @@ import styles from './InviteResourceContributors.module.css'
 
 const InviteResourceContributors = ({
   resource,
+  titleAs: TitleAs = 'h2',
+  itemAs: ItemAs = 'h3',
   onSuccess,
 }: {
   resource: ResourceListItem | ResourceProjectionWithContext
+  titleAs?: 'h2' | 'h3'
+  itemAs?: 'h3' | 'h4'
   onSuccess?: () => void
 }) => {
   const router = useRouter()
@@ -129,7 +133,9 @@ const InviteResourceContributors = ({
 
   return (
     <>
-      <p className="fr-mb-2w">Liste des contributeurs de la ressource</p>
+      <TitleAs className="fr-text--md fr-text--normal fr-mb-2w">
+        Liste des contributeurs de la ressource
+      </TitleAs>
       {resource.base?.title && (
         <div className={styles.contributors}>
           <span className="fr-icon-team-line" />
@@ -138,72 +144,76 @@ const InviteResourceContributors = ({
       )}
       {resource.createdBy && (
         <>
-          <div className={classNames('fr-mt-2w', styles.contributor)}>
-            <div className={styles.user} data-testid="contributors-creator">
-              <RoundProfileImage
-                className="fr-mr-1w"
-                user={resource.createdBy}
-              />
-              <div className="fr-flex fr-direction-column fr-width-full">
-                <h3 className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
-                  {resource.createdBy.name}
-                </h3>
-                <span className="fr-text--xs fr-mb-0 fr-hint-text">
-                  {resource.createdBy.email}
-                </span>
-              </div>
-            </div>
-            <div className={styles.creator}>Propriétaire</div>
-          </div>
-          {contributors &&
-            contributors.map((contributor) => (
-              <div
-                key={contributor.id}
-                className={styles.contributor}
-                data-testid="contributors-contributor"
-              >
-                <div className={styles.user}>
-                  {contributor.name ? (
-                    <RoundProfileImage user={contributor} />
-                  ) : (
-                    <EmptyUserAvatar />
-                  )}
-                  <div className="fr-flex fr-direction-column fr-width-full">
-                    {!!contributor.name && (
-                      <>
-                        <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
-                          {contributor.name}
-                        </span>
-                        <span className="fr-ml-1w fr-text--xs fr-mb-0 fr-hint-text">
-                          {contributor.email}
-                        </span>
-                      </>
-                    )}
-                    {!!contributor.email && !contributor.name && (
-                      <span className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
-                        {contributor.email}
-                      </span>
-                    )}
-                  </div>
+          <ul className="fr-raw-list fr-mt-2w">
+            <li className={styles.contributor}>
+              <div className={styles.user} data-testid="contributors-creator">
+                <RoundProfileImage
+                  className="fr-mr-1w"
+                  user={resource.createdBy}
+                />
+                <div className="fr-flex fr-direction-column fr-width-full">
+                  <ItemAs className="fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                    {resource.createdBy.name}
+                  </ItemAs>
+                  <p className="fr-text--xs fr-mb-0 fr-hint-text">
+                    {resource.createdBy.email}
+                  </p>
                 </div>
-                <Button
-                  title="Supprimer des contributeurs"
-                  priority="tertiary no outline"
-                  size="small"
-                  nativeButtonProps={{
-                    'data-testid': 'remove-contributor-button',
-                  }}
-                  type="button"
-                  onClick={() => onDelete(contributor.id)}
-                >
-                  Retirer
-                  <span
-                    className="ri-close-circle-line fr-ml-1w"
-                    aria-hidden="true"
-                  />
-                </Button>
               </div>
-            ))}
+              <p className={classNames(styles.creator, 'fr-mb-0')}>
+                Propriétaire
+              </p>
+            </li>
+            {contributors &&
+              contributors.map((contributor) => (
+                <li
+                  key={contributor.id}
+                  className={styles.contributor}
+                  data-testid="contributors-contributor"
+                >
+                  <div className={styles.user}>
+                    {contributor.name ? (
+                      <RoundProfileImage user={contributor} />
+                    ) : (
+                      <EmptyUserAvatar />
+                    )}
+                    <div className="fr-flex fr-direction-column fr-width-full">
+                      {!!contributor.name && (
+                        <>
+                          <p className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                            {contributor.name}
+                          </p>
+                          <p className="fr-ml-1w fr-text--xs fr-mb-0 fr-hint-text">
+                            {contributor.email}
+                          </p>
+                        </>
+                      )}
+                      {!!contributor.email && !contributor.name && (
+                        <p className="fr-ml-1w fr-text--sm fr-text--medium fr-text-mention--grey fr-my-auto">
+                          {contributor.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <Button
+                    title="Supprimer des contributeurs"
+                    priority="tertiary no outline"
+                    size="small"
+                    nativeButtonProps={{
+                      'data-testid': 'remove-contributor-button',
+                    }}
+                    type="button"
+                    onClick={() => onDelete(contributor.id)}
+                  >
+                    Retirer
+                    <span
+                      className="ri-close-circle-line fr-ml-1w"
+                      aria-hidden="true"
+                    />
+                  </Button>
+                </li>
+              ))}
+          </ul>
           <hr className="fr-mt-4w fr-pb-4w" />
         </>
       )}
@@ -225,6 +235,8 @@ const InviteResourceContributors = ({
                   resourceId={resource.id}
                   selectedMemberType="member"
                   canAddAdmin={false}
+                  listTitleAs={TitleAs}
+                  itemAs={ItemAs}
                 />
               )}
             />

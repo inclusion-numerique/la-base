@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
@@ -8,7 +9,6 @@ import BaseInvitationButtons from '@app/web/features/base/invitation/components/
 import { BaseInvitation } from '@app/web/features/base/invitation/db/getBaseInvitation'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './JoinBase.module.css'
 
 export const JoinBase = ({
@@ -63,9 +63,9 @@ export const JoinBase = ({
           )}
           <div className="fr-text--center">
             <BaseInvitationButtons invitation={invitation} user={user} />
-            <Link className="fr-link" target="_blank" rel="noreferrer" href="/">
+            <ExternalLink className="fr-link" href="/">
               En savoir plus sur Les Bases du numérique d&apos;intérêt général
-            </Link>
+            </ExternalLink>
           </div>
         </div>
       </div>
@@ -105,12 +105,12 @@ export const JoinBase = ({
             />
             <BasePrivacyTag small isPublic={invitation.base.isPublic} />
           </div>
-          <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
+          <p className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
             <span className="fr-icon-account-circle-line fr-mr-2v" />
             <span className="fr-text--bold">
               {baseMembersCount} membre{sPluriel(baseMembersCount)} dans la base
             </span>
-          </div>
+          </p>
         </div>
       </div>
     </div>

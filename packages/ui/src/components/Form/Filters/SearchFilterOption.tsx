@@ -24,7 +24,7 @@ const SearchFilterOption = ({
       }}
     >
       <div className="fr-flex fr-direction-column fr-align-items-start fr-text--start">
-        {option.label}
+        <h4 className="fr-text--sm fr-text--normal fr-mb-0">{option.label}</h4>
         {!!option.hint && (
           <span className={classNames(styles.hint, 'fr-text--xs fr-mb-0')}>
             {option.hint}

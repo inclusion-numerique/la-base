@@ -38,9 +38,7 @@ const ProfileBaseCard = ({
       </Link>
       <div className="fr-flex fr-direction-column fr-flex-gap-3v fr-flex-gap-md-1v">
         <Link href={`/bases/${base.slug}`} className={styles.imageLink}>
-          <span className="fr-text--bold fr-text--md fr-mb-0">
-            {base.title}
-          </span>
+          <h3 className="fr-text--bold fr-text--md fr-mb-0">{base.title}</h3>
         </Link>
         <BaseMetadata
           user={null}

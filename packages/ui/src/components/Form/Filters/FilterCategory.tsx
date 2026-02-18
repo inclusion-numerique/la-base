@@ -25,44 +25,56 @@ export const FilterCategory = ({
     onSelect(option, category.id)
   }
 
-  return category.multiple
-    ? Object.keys(category.options).map((key) => {
+  return category.multiple ? (
+    <ul className="fr-raw-list">
+      {Object.keys(category.options).map((key) => {
         const options = category.options[key]
         const currentCategory = openedCategory === key
         return (
-          <>
+          <li key={key}>
             <button
-              key={key}
               className={styles.optionCategory}
               type="button"
               onClick={() => setOpenedCategory(currentCategory ? '' : key)}
             >
-              <div>{key}</div>
+              <h3 className="fr-text--sm fr-text--medium fr-text-title--blue-france fr-mb-0">
+                {key}
+              </h3>
               <span
                 className={`fr-icon--sm fr-icon-arrow-${
                   currentCategory ? 'up' : 'down'
                 }-s-line`}
               />
             </button>
-            <hr key={`${key}_separator`} className={styles.separator} />
-            {currentCategory &&
-              options.map((option) => (
-                <SearchFilterOption
-                  key={option.value}
-                  option={option}
-                  selected={selected.has(option.value)}
-                  onSelect={(o) => onClick(o)}
-                />
-              ))}
-          </>
+            <hr className={styles.separator} />
+            {currentCategory && (
+              <ul className="fr-raw-list">
+                {options.map((option) => (
+                  <li key={option.value}>
+                    <SearchFilterOption
+                      option={option}
+                      selected={selected.has(option.value)}
+                      onSelect={(o) => onClick(o)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
         )
-      })
-    : category.options.map((option) => (
-        <SearchFilterOption
-          key={option.value}
-          option={option}
-          selected={selected.has(option.value)}
-          onSelect={(o) => onClick(o)}
-        />
-      ))
+      })}
+    </ul>
+  ) : (
+    <ul className="fr-raw-list">
+      {category.options.map((option) => (
+        <li key={option.value}>
+          <SearchFilterOption
+            option={option}
+            selected={selected.has(option.value)}
+            onSelect={(o) => onClick(o)}
+          />
+        </li>
+      ))}
+    </ul>
+  )
 }

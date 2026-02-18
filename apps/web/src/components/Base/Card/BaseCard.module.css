@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   padding: 24px 0 32px;
   display: flex;
   gap: 12px;
@@ -17,8 +18,32 @@
   }
 }
 
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  background-image: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &::after {
+    content: none;
+  }
+}
+
+.followButton {
+  position: relative;
+  z-index: 2;
+}
+
 .imageLink {
   background: transparent !important;
+  flex-shrink: 0;
 }
 
 .content {
@@ -44,7 +69,6 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   word-break: break-word;
   overflow-wrap: break-word;
 }

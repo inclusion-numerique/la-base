@@ -13,6 +13,7 @@ const Card = ({
   href,
   enlargeLink = href != null,
   description,
+  descriptionAs: CardDescription = 'p',
   children,
   header,
   contentSeparator = false,
@@ -28,6 +29,7 @@ const Card = ({
   href?: string
   enlargeLink?: boolean
   description?: ReactNode
+  descriptionAs?: 'p' | 'div'
   children?: ReactNode
   header?: ReactNode
   contentSeparator?: boolean
@@ -50,7 +52,11 @@ const Card = ({
         <CardTitle className={classNames('fr-card__title', titleClassName)}>
           {href ? <Link href={href}>{title}</Link> : title}
         </CardTitle>
-        {description && <div className="fr-card__desc">{description}</div>}
+        {description && (
+          <CardDescription className="fr-card__desc">
+            {description}
+          </CardDescription>
+        )}
         {children && (
           <div
             className={classNames(

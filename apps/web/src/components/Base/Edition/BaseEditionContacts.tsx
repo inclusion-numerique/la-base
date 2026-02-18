@@ -62,7 +62,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
         <>
           <div className={styles.contacts}>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
-              <div className="fr-text-mention--grey">Adresse mail</div>
+              <p className="fr-text-mention--grey fr-mb-0">Adresse mail</p>
               <div
                 className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-email"
@@ -71,7 +71,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
               </div>
             </div>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
-              <div className="fr-text-mention--grey">Site internet</div>
+              <p className="fr-text-mention--grey fr-mb-0">Site internet</p>
               <div
                 className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-website"
@@ -82,7 +82,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
           </div>
           <div className={styles.contacts}>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
-              <div className="fr-text-mention--grey">LinkedIn</div>
+              <p className="fr-text-mention--grey fr-mb-0">LinkedIn</p>
               <div
                 className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-linkedin"
@@ -91,7 +91,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
               </div>
             </div>
             <div className={classNames(styles.contactColumn, 'fr-mb-2w')}>
-              <div className="fr-text-mention--grey">Twitter</div>
+              <p className="fr-text-mention--grey fr-mb-0">Twitter</p>
               <div
                 className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-twitter"
@@ -102,7 +102,7 @@ const BaseEditionContacts = ({ base }: { base: BasePageData }) => {
           </div>
           <div className={styles.contacts}>
             <div className={styles.contactColumn}>
-              <div className="fr-text-mention--grey">Facebook</div>
+              <p className="fr-text-mention--grey fr-mb-0">Facebook</p>
               <div
                 className="fr-text-label--grey fr-text--medium"
                 data-testid="base-contacts-facebook"

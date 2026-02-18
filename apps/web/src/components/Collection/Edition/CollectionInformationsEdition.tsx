@@ -54,6 +54,7 @@ const CollectionInformationsEdition = ({
     <EditableCardForm
       id="informations"
       title="Informations de la collection"
+      titleAs="h2"
       form={form}
       onSave={handleSave}
       preview={

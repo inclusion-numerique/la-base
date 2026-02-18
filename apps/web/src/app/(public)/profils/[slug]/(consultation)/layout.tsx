@@ -55,7 +55,7 @@ const ProfileLayout = async ({
 
   if (!profile.slug) return
 
-  const { resourcesCount, followsCount, collectionsCount, basesCount } =
+  const { resourcesCount, collectionsCount, basesCount } =
     await getProfilePageCounts(profile.slug)
 
   const canView = hasPermission('ReadProfileData')
@@ -94,7 +94,6 @@ const ProfileLayout = async ({
           isOwner={isOwner}
           basesCount={basesCount}
           collectionsCount={collectionsCount}
-          followsCount={followsCount.total}
         />
         <div className="fr-container fr-container--medium fr-mb-24w">
           {children}

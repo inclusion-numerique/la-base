@@ -38,7 +38,7 @@ const ResourcePublication = ({
     <EditCard
       id="publication"
       noBorder
-      title="Ressource publiée dans"
+      title="Lieu de publication de la ressource"
       titleAs="h2"
       form={form}
       mutation={async (data) => {

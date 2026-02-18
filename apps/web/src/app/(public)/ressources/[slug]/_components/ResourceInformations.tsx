@@ -12,16 +12,17 @@ import ResourceIndexationView from './ResourceIndexationView'
 const ResourceInformations = ({ resource }: { resource: Resource }) => (
   <div className="fr-my-2w fr-pt-2w" id="informations">
     <Accordion
+      titleAs="h2"
       label="Informations sur la ressource"
       data-testid="resource-informations-accordion"
     >
       <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-2w">
-        <span className="fr-text--sm fr-mb-0">
+        <p className="fr-text--sm fr-mb-0">
           <span className="ri-bookmark-line fr-mr-1w" />
           Ressource enregistrée dans{' '}
           <strong>{resource._count.collections}</strong> collection
           {sPluriel(resource._count.collections)}
-        </span>
+        </p>
         {resource._count.collections > 0 && (
           <>
             <span className="fr-hidden fr-unhidden-sm">·</span>
@@ -41,10 +42,10 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
               className="ri-emotion-line fr-text-label--blue-france"
               aria-hidden
             />
-            <span className="fr-text--sm fr-mb-0">
+            <p className="fr-text--sm fr-mb-0">
               <strong>{resource._count.resourceFeedback}</strong> avis sur la
               ressource
-            </span>
+            </p>
             <FeedbackBadge value={resource.feedbackAverage} />
             <span className="fr-hidden fr-unhidden-sm">·</span>
             <Link

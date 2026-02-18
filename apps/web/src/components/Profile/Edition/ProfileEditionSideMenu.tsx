@@ -18,6 +18,7 @@ const ProfileEditionSideMenu = () => (
         burgerMenuButtonText="Contenus"
         contentId="profile-edition-content"
         sticky
+        aria-label="Zones de contenu de la page"
       />
     </div>
   </div>

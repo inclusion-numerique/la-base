@@ -118,7 +118,7 @@ const PaginationNav = ({
               <a
                 className="fr-pagination__link"
                 aria-current={pageNumber === linkNumber ? 'page' : undefined}
-                title={`Page ${linkNumber}`}
+                aria-label={`Page ${linkNumber}`}
                 href={createPageLink(linkNumber)}
               >
                 {linkNumber}

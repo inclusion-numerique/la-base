@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import Link from 'next/link'
 
 const Newsletter = () => (
@@ -6,33 +7,29 @@ const Newsletter = () => (
       <div className="fr-flex-md fr-flex-gap-4v">
         <div>
           <h2 className="fr-mb-1w fr-h5">
-            Abonnez-vous à notre lettre d’information&nbsp;!
+            Abonnez-vous à notre lettre d'information&nbsp;!
           </h2>
           <p>
             Chaque mois, découvrez les nouvelles fonctionnalités des Bases ainsi
             qu&apos;une sélection de ressources et de créateurs. Le tout,
-            directement dans votre boîte mail !
+            directement dans votre boîte mail !
           </p>
           <div className="fr-hidden fr-unhidden-md">
-            <Link
+            <ExternalLink
               href="https://dc259ca5.sibforms.com/serve/MUIFANPiNe5NUHtDZqZYZ6iyYIKNDL-3EAzRq8JWjLYAWnMcQh9P3uAjtmLh31veRMNPcxBXxYCkAlJitPr2eUWPdUaJm1l96XxzDPx_DxSd2ZxhfXtUQY-P_Qaq7GOZeuww7DCboCBztN7lTtVVXhJFueIzPWFrvGN-0AIYrHUBfhmgtBP9WtP8Z7Hr5tbmTJQpoLmijiI8yb8H"
-              target="_blank"
-              rel="noreferrer"
-              title="Accéder à l'inscription à la lettre d'information - nouvelle fenêtre"
+              ariaLabel="Accéder à l'inscription à la lettre d'information"
               className="fr-btn"
             >
-              S’abonner
-            </Link>
+              S'abonner
+            </ExternalLink>
           </div>
           <div className="fr-unhidden fr-hidden-md">
-            <Link
+            <ExternalLink
               href="https://dc259ca5.sibforms.com/serve/MUIFANPiNe5NUHtDZqZYZ6iyYIKNDL-3EAzRq8JWjLYAWnMcQh9P3uAjtmLh31veRMNPcxBXxYCkAlJitPr2eUWPdUaJm1l96XxzDPx_DxSd2ZxhfXtUQY-P_Qaq7GOZeuww7DCboCBztN7lTtVVXhJFueIzPWFrvGN-0AIYrHUBfhmgtBP9WtP8Z7Hr5tbmTJQpoLmijiI8yb8H"
-              target="_blank"
-              rel="noreferrer"
               className="fr-my-auto fr-ml-auto fr-width-full fr-text--center fr-mx-auto fr-btn fr-btn--lg fr-flex fr-justify-content-center"
             >
-              S’abonner
-            </Link>
+              S'abonner
+            </ExternalLink>
           </div>
         </div>
         <div className="fr-border-right fr-border--blue-france fr-mx-md-10w" />

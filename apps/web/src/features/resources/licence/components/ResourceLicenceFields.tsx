@@ -1,10 +1,10 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import ResourceBaseRichRadioElement from '@app/web/components/Resource/ResourceBaseRichRadioElement'
 import ResourceLicenceDescription from '@app/web/features/resources/licence/components/ResourceLicenceDescription'
 import { licenceWordings } from '@app/web/features/resources/licence/licence-wordings'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import { ResourceLicence } from '@prisma/client'
-import Link from 'next/link'
 import React, { type ReactNode } from 'react'
 import {
   type Control,
@@ -37,23 +37,26 @@ const ResourceLicenceFields = <T extends FieldValues>({
           title={
             <span className="fr-text-default--grey fr-text--regular">
               Si votre structure employeuse et/ou si vous représentez une
-              administration publique, vous êtes dans l’obligation d'utiliser la
+              administration publique, vous êtes dans l'obligation d'utiliser la
               licence ouverte&nbsp;
-              <Link
+              <ExternalLink
                 href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/"
                 className="fr-link"
-                target="_blank"
               >
                 Etalab 2.0
-              </Link>
+              </ExternalLink>
             </span>
           }
         />
         <fieldset
           className="fr-fieldset"
           id="radio-licence"
-          aria-labelledby="radio-licence-legend radio-licence-messages"
+          aria-labelledby="radio-licence-legend radio-licence-hint radio-licence-messages"
         >
+          <p id="radio-licence-hint" className="fr-sr-only">
+            Les détails de la licence sélectionnée sont disponibles sous le
+            regroupement d'options.
+          </p>
           {!!label && (
             <legend
               id="radio-licence-legend"
@@ -79,7 +82,9 @@ const ResourceLicenceFields = <T extends FieldValues>({
                 onChange={() => onChange(licenceValue as ResourceLicence)}
               >
                 <div className="fr-flex-grow-1 fr-mr-1w">
-                  {title}
+                  <h3 className="fr-text--md fr-text--normal fr-mb-0">
+                    {title}
+                  </h3>
                   <p className="fr-text--xs fr-hint-text fr-mb-0">{hint}</p>
                 </div>
                 <div className="fr-hidden fr-unhidden-sm fr-ml-3w">

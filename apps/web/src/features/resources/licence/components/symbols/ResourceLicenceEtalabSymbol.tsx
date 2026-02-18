@@ -6,6 +6,7 @@ const ResourceLicenceEtalabSymbol = () => {
       viewBox="0 0 24 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
     >
       <g clipPath="url(#clip0_18337_11406)">
         <path

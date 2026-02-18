@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import * as Sentry from '@sentry/nextjs'
 import { type PropsWithChildren, useEffect } from 'react'
@@ -45,7 +46,7 @@ export const GenericError = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="fr-responsive-img fr-artwork"
-            aria-hidden="true"
+            aria-hidden
             width="160"
             height="200"
             viewBox="0 0 160 200"
@@ -139,13 +140,8 @@ export const SuspiciousContentError = () => (
     Pour en savoir plus sur nos règles de modération, consultez notre charte.
     <br />
     <br />
-    <a
-      href="/cgu"
-      className="fr-link"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <ExternalLink href="/cgu" className="fr-link">
       Consulter la charte de modération →
-    </a>
+    </ExternalLink>
   </GenericError>
 )

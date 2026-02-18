@@ -77,10 +77,12 @@ const ResourceEditionActionBar = ({
               <Button
                 ref={buttonRef}
                 type="button"
-                title="Voir plus d’options"
+                title="Voir plus d'options"
                 priority="tertiary no outline"
                 iconId="fr-icon-more-line"
+                className="fr-ml-0"
                 nativeButtonProps={{
+                  'aria-label': "Voir plus d'options de ressource",
                   'aria-expanded': 'false',
                   'aria-controls': 'edition-action-bar-more',
                   'data-testid': 'edition-action-bar-more-actions',

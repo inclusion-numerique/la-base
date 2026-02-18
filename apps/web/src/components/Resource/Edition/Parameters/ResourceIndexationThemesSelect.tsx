@@ -127,7 +127,7 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                   Ajouter des thématiques
                   <span className="ri-add-line fr-ml-2v" />
                 </Button>
-                <div className="fr-flex fr-flex-wrap fr-flex-gap-2v fr-mt-4v">
+                <ul className="fr-raw-list fr-flex fr-flex-wrap fr-flex-gap-2v fr-mt-4v">
                   {displaySelected.map((selected) => {
                     const category = selected.option.extra?.category as Category
                     const className = classNames(
@@ -139,22 +139,24 @@ const ResourceIndexationThemesSelect = <T extends FieldValues>({
                       CATEGORY_VARIANTS[category].color,
                     )
                     return (
-                      <ThematicOptionBadge
-                        key={selected.option.value}
-                        categoryIconClassName={categoryIconClassName}
-                        className={className}
-                        textClassName="fr-text-label--grey"
-                        option={{
-                          label: selected.option.label,
-                          disabled: false,
-                        }}
-                        onClick={() =>
-                          handleOnSelect(selected.option, 'themes')
-                        }
-                      />
+                      <li key={selected.option.value}>
+                        <ThematicOptionBadge
+                          as="span"
+                          categoryIconClassName={categoryIconClassName}
+                          className={className}
+                          textClassName="fr-text-label--grey"
+                          option={{
+                            label: selected.option.label,
+                            disabled: false,
+                          }}
+                          onClick={() =>
+                            handleOnSelect(selected.option, 'themes')
+                          }
+                        />
+                      </li>
                     )
                   })}
-                </div>
+                </ul>
                 {error && (
                   <p id={`${themesPath}__error`} className="fr-error-text">
                     {error.message}

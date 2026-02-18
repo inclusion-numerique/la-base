@@ -40,13 +40,13 @@ const BaseMetadata = ({
     >
       <div className="fr-flex fr-align-items-center fr-flex-gap-2v fr-mb-0 fr-text--sm">
         <span className="fr-icon-file-text-line fr-icon--sm" />
-        <div>
+        <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesCount)}</b>
           <span className={styles.spanMdDisplay}>
             {' '}
             Ressource{sPluriel(resourcesCount)}
           </span>
-        </div>
+        </p>
         {context === 'base' && !!base.followedByData && followedBy > 0 ? (
           <BaseFollowersModal
             followedByData={base.followedByData}
@@ -56,21 +56,21 @@ const BaseMetadata = ({
           <>
             <div>·</div>
             <span className="fr-icon-user-heart-line fr-icon--sm" />
-            <div>
+            <p className="fr-mb-0 fr-text--sm">
               <b>{numberToString(followedBy)}</b>
               <span className={styles.spanMdDisplay}>
                 {' '}
                 Suivi{sPluriel(followedBy)}
               </span>
-            </div>
+            </p>
           </>
         )}
         <div>·</div>
         <span className="fr-icon-eye-line fr-icon--sm" />
-        <div>
+        <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesViews)}</b>
           <span className={styles.spanMdDisplay}> {viewsLabel}</span>
-        </div>
+        </p>
       </div>
       {!!base.department && context === 'base' && (
         <>

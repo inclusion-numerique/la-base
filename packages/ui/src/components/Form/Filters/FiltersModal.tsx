@@ -4,7 +4,7 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import { useModalVisibility } from '@app/ui/hooks/useModalVisibility'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { createModal } from '@codegouvfr/react-dsfr/Modal'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { FilterCategory } from './FilterCategory'
 import type { Category, FilterKey } from './filter'
 
@@ -33,40 +33,47 @@ export const FiltersModal = ({
   return (
     <>
       <modal.Component title="Filtrer par">
-        {categories.map((category) => (
-          <Fragment key={category.id}>
-            {selectedCategory === '' && (
-              <Button
-                className="fr-width-full fr-justify-content-center fr-mb-1w"
-                priority="secondary"
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                {category.label}
-              </Button>
-            )}
-            {selectedCategory === category.id && (
-              <div>
+        <ul className="fr-raw-list">
+          {categories.map((category) => (
+            <li key={category.id}>
+              {selectedCategory === '' && (
                 <Button
-                  priority="tertiary no outline"
-                  onClick={() => setSelectedCategory('')}
+                  className="fr-width-full fr-justify-content-center fr-mb-1w"
+                  priority="secondary"
+                  onClick={() => setSelectedCategory(category.id)}
+                  aria-expanded={
+                    !!selectedCategory && selectedCategory === category.id
+                  }
                 >
-                  <span className="ri-arrow-left-line fr-mr-1w" aria-hidden />
-                  Retour au choix des filtres
+                  <h2 className="fr-text--md fr-mb-0 fr-text-title--blue-france fr-text--medium">
+                    {category.label}
+                  </h2>
                 </Button>
-                <hr className="fr-pb-1v fr-mt-1w" />
-                <div className="fr-text--bold fr-mx-2w fr-my-1w">
-                  {category.label}
+              )}
+              {selectedCategory === category.id && (
+                <div>
+                  <Button
+                    priority="tertiary no outline"
+                    onClick={() => setSelectedCategory('')}
+                  >
+                    <span className="ri-arrow-left-line fr-mr-1w" aria-hidden />
+                    Retour au choix des filtres
+                  </Button>
+                  <hr className="fr-pb-1v fr-mt-1w" />
+                  <h2 className="fr-text--md fr-text--bold fr-mx-2w fr-my-1w fr-mb-0">
+                    {category.label}
+                  </h2>
+                  <FilterCategory
+                    category={category}
+                    onSelect={onSelect}
+                    onUnselect={onUnselect}
+                    selected={selected}
+                  />
                 </div>
-                <FilterCategory
-                  category={category}
-                  onSelect={onSelect}
-                  onUnselect={onUnselect}
-                  selected={selected}
-                />
-              </div>
-            )}
-          </Fragment>
-        ))}
+              )}
+            </li>
+          ))}
+        </ul>
       </modal.Component>
       <Button
         className="fr-width-full fr-justify-content-center"

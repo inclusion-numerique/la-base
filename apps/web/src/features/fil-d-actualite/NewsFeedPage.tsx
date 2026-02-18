@@ -19,7 +19,7 @@ const NewsFeedPage = async ({
   <>
     <NewsFeedHeader params={params} filters={filters} pagination={pagination} />
     <div className="fr-flex fr-justify-content-space-between fr-col-md-12 fr-mt-md-6w">
-      <div className="fr-flex fr-direction-column fr-col-md-8 fr-justify-content-space-between">
+      <div className="fr-flex fr-direction-column fr-col-md-10 fr-justify-content-space-between">
         <Suspense fallback={<NewsFeedListSkeleton />}>
           <NewsFeedListLoader
             params={params}

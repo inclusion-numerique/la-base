@@ -19,6 +19,7 @@ const CreateBaseSideMenu = () => (
         burgerMenuButtonText="Contenus"
         contentId="create-base-content"
         sticky
+        aria-label="Zones de contenu de la page"
       />
     </div>
   </div>

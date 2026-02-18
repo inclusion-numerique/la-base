@@ -1,5 +1,6 @@
 'use client'
 
+import ExternalLink from '@app/ui/components/ExternalLink'
 import BaseHomePageCustomisationEdition from '@app/web/components/Base/Edition/BaseHomePageCustomisationEdition'
 import { BaseHomePageCustomisationView } from '@app/web/components/Base/Edition/BaseHomePageCustomisationView'
 import EditCard from '@app/web/components/EditCard'
@@ -12,7 +13,6 @@ import {
 import { trpc } from '@app/web/trpc'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { HighlightResourcesType } from '@prisma/client'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 
 const BaseHomePageCustomisation = ({ base }: { base: BasePageData }) => {
@@ -48,14 +48,12 @@ const BaseHomePageCustomisation = ({ base }: { base: BasePageData }) => {
           Mettez en avant des contenus (ressources, collections...) directement
           sur la page d’accueil de votre base.&nbsp;
           <br className="fr-hidden-sm fr-unhidden" />
-          <Link
+          <ExternalLink
             href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-            target="_blank"
-            rel="noopener noreferrer"
             className="fr-link fr-text--sm"
           >
             En savoir plus
-          </Link>
+          </ExternalLink>
         </span>
       }
       edition={<BaseHomePageCustomisationEdition form={form} />}

@@ -103,7 +103,10 @@ const SearchThematicsFilters = ({
           Thématique
           <span className="ri-price-tag-3-line fr-ml-4v" />
           {selectedCount > 0 && (
-            <span className={styles.buttonCount}>{selectedCount}</span>
+            <span className={styles.buttonCount}>
+              {selectedCount}
+              <span className="fr-sr-only"> filtres sélectionnés</span>
+            </span>
           )}
         </Button>
       </div>
@@ -118,6 +121,7 @@ const SearchThematicsFilters = ({
             doClosesModal: false,
             nativeButtonProps: {
               type: 'button',
+              'aria-label': 'Effacer tout : filtres par thématiques',
             },
           },
           {

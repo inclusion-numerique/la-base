@@ -1,8 +1,9 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import Newsletter from '@app/web/app/(public)/Newsletter'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import WhoAreWe from '@app/web/features/home/components/WhoAreWe'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
 import Banner from './components/Banner'
@@ -24,13 +25,8 @@ const HomePage = async ({
 
   return (
     <>
-      <SkipLinksPortal
-        links={[
-          { label: 'Recherche', anchor: `#search-bar` },
-          ...defaultSkipLinks,
-        ]}
-      />
-      <main id={contentId}>
+      <SkipLinksPortal />
+      <div id={contentId}>
         <Banner />
         <div className="fr-container fr-pt-8w fr-pb-0 fr-py-md-10w">
           <div className="fr-text--center">
@@ -40,40 +36,38 @@ const HomePage = async ({
             <p className="fr-text--xl fr-mb-6w">
               <span className="fr-display-block">
                 Inspirez-vous des outils, supports pédagogiques, articles, cas
-                d’usages, documentations diverses...
+                d'usages, documentations diverses...
               </span>
               <span className="fr-display-block">
-                partagés par des acteurs du numérique d’intérêt général.&nbsp;
-                <Link
+                partagés par des acteurs du numérique d'intérêt général.&nbsp;
+                <ExternalLink
                   className="fr-link fr-text--xl"
                   href="https://docs.numerique.gouv.fr/docs/db7ae3db-2d42-4791-a5f6-c665bab99da4/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   En savoir plus
-                </Link>
+                </ExternalLink>
               </span>
             </p>
             <div className="fr-mb-6w fr-mb-md-10w">
-              <h2 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
+              <h3 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
                 Explorez les ressources grâce aux 4 grandes catégories
-              </h2>
+              </h3>
               <HomeCategories />
             </div>
-            <p className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
-              ressources à la une
-            </p>
+            <h3 className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
+              Ressources à la une
+            </h3>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters fr-mb-12v">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters fr-mb-12v">
             {featuredResources.map((resource) => (
-              <div
+              <li
                 key={resource.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-3w fr-pb-0"
               >
                 <FeaturedResource resource={resource} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="fr-text--center fr-mt-12v fr-mb-6w fr-mb-md-10w fr-unhidden-md fr-hidden">
             <Link
               href="/rechercher/tout/ressources"
@@ -98,8 +92,8 @@ const HomePage = async ({
               </h2>
               <span className="fr-mb-4w fr-mb-md-3w">
                 Consultez notre charte indiquant les principes qui guident la
-                construction d’un numérique d’intérêt général, ainsi que
-                certaines conditions que les créateurs de ressources s’engagent
+                construction d'un numérique d'intérêt général, ainsi que
+                certaines conditions que les créateurs de ressources s'engagent
                 à respecter.
               </span>
               <div>
@@ -119,15 +113,15 @@ const HomePage = async ({
           <h2 className="fr-h2 fr-text-title--blue-france fr-mb-2w">
             Une communauté engagée
             <br />
-            au service du numérique d’intérêt général
+            au service du numérique d'intérêt général
           </h2>
           <p className="fr-text--xl">
             <span className="fr-display-block">
-              Découvrez les acteurs du numérique d’intérêt général qui partagent
+              Découvrez les acteurs du numérique d'intérêt général qui partagent
               et publient leurs ressources pour
             </span>
             <span className="fr-display-block">
-              participer à l’évolution du secteur. Rejoignez la
+              participer à l'évolution du secteur. Rejoignez la
               communauté&nbsp;!
             </span>
           </p>
@@ -140,14 +134,9 @@ const HomePage = async ({
                 Une base représente une structure, un collectif qui souhaite
                 publier, partager et sélectionner des ressources relatives à son
                 activité, ses pratiques...{' '}
-                <Link
-                  className="fr-link"
-                  href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <ExternalLink href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/">
                   En savoir plus
-                </Link>
+                </ExternalLink>
                 .
               </p>
             </div>
@@ -161,16 +150,16 @@ const HomePage = async ({
               </Button>
             </div>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters">
             {featuredBases.map((base) => (
-              <div
+              <li
                 key={base.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-4w fr-pb-0"
               >
                 <FeaturedBase base={base} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <div className="fr-container">
           <hr />
@@ -205,16 +194,16 @@ const HomePage = async ({
               </Button>
             </div>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters">
             {featuredProfiles.map((profile) => (
-              <div
+              <li
                 key={profile.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-4w"
               >
                 <FeaturedProfil profile={profile} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="fr-unhidden fr-hidden-md fr-text--center fr-mt-4w fr-mb-8w">
             <Link
               href="/rechercher/tout/profils"
@@ -226,7 +215,7 @@ const HomePage = async ({
           <div className="fr-mt-6w fr-mt-md-10w fr-background-alt--yellow-tournesol fr-p-3w fr-p-md-6w fr-grid-row fr-border-radius--16">
             <div className="fr-flex fr-direction-column fr-justify-content-space-between">
               <h2>
-                Vous aussi rejoignez
+                Vous aussi rejoignez&nbsp;
                 <br />
                 la communauté&nbsp;!
               </h2>
@@ -240,8 +229,8 @@ const HomePage = async ({
               </Button>
             </div>
             <div className="fr-col-auto fr-border-right fr-border--blue-france fr-mx-md-5w fr-unhidden-md fr-hidden" />
-            <div className="fr-col-md fr-flex fr-direction-column">
-              <p className="fr-flex fr-align-items-center">
+            <ul className="fr-raw-list fr-col-md fr-flex fr-direction-column">
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-earth-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -250,18 +239,18 @@ const HomePage = async ({
                   <span className="fr-text--bold">Publiez</span> vos ressources
                   pour les partager avec la communauté
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center">
+              </li>
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-team-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
                 />
                 <span>
                   <span className="fr-text--bold">Collaborez</span> avec
-                  d’autres créateurs grâce aux bases
+                  d'autres créateurs grâce aux bases
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center">
+              </li>
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-bookmark-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -270,8 +259,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Enregistrez</span> les
                   ressources qui vous intéressent grâce aux collections
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center fr-mb-0">
+              </li>
+              <li className="fr-flex fr-align-items-center fr-mb-0">
                 <span
                   className="ri-user-add-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -280,8 +269,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Suivez</span> les bases & les
                   profils qui vous intéressent
                 </span>
-              </p>
-            </div>
+              </li>
+            </ul>
             <div className="fr-width-full">
               <Link
                 href="/creer-un-compte"
@@ -296,7 +285,7 @@ const HomePage = async ({
         <HomeInfo />
         <WhoAreWe />
         <Newsletter />
-      </main>
+      </div>
     </>
   )
 }

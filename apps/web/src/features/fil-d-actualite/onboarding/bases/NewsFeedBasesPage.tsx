@@ -12,6 +12,7 @@ export default async function NewsFeedBasesPage() {
     <div className="fr-flex fr-direction-column">
       <NewsFeedOnboardingHeader
         step={3}
+        previousAriaLabel="Précédent, retour à l'étape 2"
         title="Suivez des bases"
         nextStepTitle="Résumé mensuel des dernières publications"
         description="Découvrez et restez informé des ressources publiées par vos créateurs favoris."

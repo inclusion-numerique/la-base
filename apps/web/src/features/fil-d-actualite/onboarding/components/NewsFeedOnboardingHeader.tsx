@@ -6,6 +6,7 @@ import styles from './NewsFeedOnboardingHeader.module.css'
 const NewsFeedOnboardingHeader = ({
   step,
   title,
+  previousAriaLabel,
   nextStepTitle,
   description,
   noticeTitle,
@@ -13,6 +14,7 @@ const NewsFeedOnboardingHeader = ({
 }: {
   step: number
   title: string
+  previousAriaLabel?: string
   nextStepTitle?: string
   description: string
   noticeTitle?: string
@@ -25,7 +27,10 @@ const NewsFeedOnboardingHeader = ({
           iconId="fr-icon-arrow-left-line"
           title="Précédent"
           priority="tertiary no outline"
-          linkProps={{ href: previousHref }}
+          linkProps={{
+            href: previousHref,
+            ...(previousAriaLabel && { 'aria-label': previousAriaLabel }),
+          }}
         >
           Précédent
         </Button>
@@ -39,22 +44,20 @@ const NewsFeedOnboardingHeader = ({
             {title}
           </h1>
           {!!nextStepTitle && (
-            <div className="fr-mt-3v">
-              <span className="fr-text-mention--grey fr-text--xs">
-                <span className="fr-text--bold">Étape suivante : </span>
-                {nextStepTitle}
-              </span>
-            </div>
+            <p className="fr-mt-3v fr-text-mention--grey fr-text--xs fr-mb-0">
+              <span className="fr-text--bold">Étape suivante : </span>
+              {nextStepTitle}
+            </p>
           )}
         </div>
-        <span
+        <p
           className={classNames(
             styles.description,
             'fr-mb-0 fr-text-mention--grey',
           )}
         >
           {description}
-        </span>
+        </p>
         {!!noticeTitle && <Notice title={noticeTitle} />}
       </div>
     </div>

@@ -74,7 +74,7 @@ const OwnershipInformation = ({
   >
     {withImage &&
       (base ? <BaseImage base={base} /> : <RoundProfileImage user={user} />)}
-    <span className={classNames('fr-text--xs fr-mb-0', styles.title)}>
+    <p className={classNames('fr-text--xs fr-mb-0', styles.title)}>
       {attributionWordings[attributionWording].what}
       {base != null && (
         <>
@@ -105,7 +105,7 @@ const OwnershipInformation = ({
           </a>
         </>
       )}
-    </span>
+    </p>
   </div>
 )
 

@@ -13,6 +13,7 @@ import styles from './CroppedUpload.module.css'
 import { ImageWithName } from './utils'
 
 const CroppedImage = ({
+  context,
   label,
   height,
   ratio,
@@ -32,6 +33,7 @@ const CroppedImage = ({
   inputTestId,
   deleteTestId,
 }: {
+  context: 'base' | 'collection' | 'resource' | 'profile'
   label?: string
   height: number
   ratio: number
@@ -110,6 +112,10 @@ const CroppedImage = ({
               onClick={onCrop}
             >
               Recadrer
+              <span className="fr-sr-only">
+                {' '}
+                l’image {context === 'base' ? 'de couverture' : 'de profil'}
+              </span>
             </Button>
             <Button
               disabled={disabled}
@@ -121,6 +127,10 @@ const CroppedImage = ({
               data-testid={deleteTestId}
             >
               Supprimer
+              <span className="fr-sr-only">
+                {' '}
+                l’image {context === 'base' ? 'de couverture' : 'de profil'}
+              </span>
             </Button>
           </div>
         </div>
