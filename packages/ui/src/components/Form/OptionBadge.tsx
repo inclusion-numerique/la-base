@@ -35,7 +35,7 @@ export const OptionBadge = ({
     )}
     disabled={disabled || option.disabled}
     onClick={disabled ? undefined : onClick}
-    aria-label={`Retirer ${option.label}`}
+    aria-label={`Retirer ${option.label} de la sélection`}
   >
     {option.label}
     <span className="fr-icon-close-line fr-ml-1w fr-icon--sm" />

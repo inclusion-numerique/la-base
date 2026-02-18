@@ -1,11 +1,32 @@
 .card {
+  position: relative;
+
   a {
     background: none;
   }
+}
 
-  @media (min-width: 768px) {
-    min-width: 315px;
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  background-image: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
+
+  &::after {
+    content: none;
+  }
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
 }
 
 .content {

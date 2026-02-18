@@ -35,7 +35,7 @@ const OptionBadge = ({
     className={`fr-tag fr-mr-1w fr-mb-2v ${size === 'sm' ? 'fr-tag--sm' : ''}`}
     disabled={disabled || option.disabled}
     onClick={disabled ? undefined : onClick}
-    aria-label={`Retirer ${option.label}`}
+    aria-label={`Retirer ${option.label} de la sélection`}
     data-testid={dataTestId}
   >
     {option.label}
@@ -160,18 +160,19 @@ const MultipleSelectFormField = <T extends FieldValues>({
                 />
               </div>
             )}
-            <div className="fr-mt-4v">
+            <ul className="fr-raw-list fr-mt-4v fr-flex fr-flex-wrap">
               {selectedOptions.map((option) => (
-                <OptionBadge
-                  key={option.value}
-                  option={option}
-                  disabled={disabled}
-                  size={badgeSize}
-                  onClick={() => onTagClick(option)}
-                  data-testid={`${dataTestId}-${option.value}`}
-                />
+                <li key={option.value}>
+                  <OptionBadge
+                    option={option}
+                    disabled={disabled}
+                    size={badgeSize}
+                    onClick={() => onTagClick(option)}
+                    data-testid={`${dataTestId}-${option.value}`}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
             {error ? (
               <p id={`${id}__error`} className="fr-error-text">
                 {error.message}

@@ -68,6 +68,7 @@ const ProfileHeader = ({
                       <Link
                         className="fr-btn--sm fr-btn fr-btn--tertiary fr-icon-mail-line fr-btn--icon-left fr-width-full fr-justify-content-center"
                         href={`mailto:${profile.email}`}
+                        aria-label="Contacter par email"
                       >
                         Contacter
                       </Link>
@@ -75,6 +76,7 @@ const ProfileHeader = ({
                   )}
                   <div>
                     <CopyLinkButton
+                      context="profile"
                       full
                       size="small"
                       url={getServerUrl(`/profils/${profile.slug}`, {

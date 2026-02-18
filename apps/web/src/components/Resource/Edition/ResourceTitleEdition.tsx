@@ -77,7 +77,7 @@ const ResourceTitleEdition = ({
         }}
         data-testid="edit-title-button"
       >
-        <div className={styles.title}>Titre & description de la ressource</div>
+        <p className={styles.title}>Titre & description de la ressource</p>
       </EditableContent>
       {editionMode ? (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -111,7 +111,7 @@ const ResourceTitleEdition = ({
       ) : (
         <>
           <h1 className="fr-mb-4v fr-h3">{resource.title}</h1>
-          <div className="fr-text--xl">{resource.description}</div>
+          <p className="fr-text--xl">{resource.description}</p>
         </>
       )}
     </>

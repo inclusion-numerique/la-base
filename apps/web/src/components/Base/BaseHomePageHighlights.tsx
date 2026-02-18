@@ -57,28 +57,31 @@ const BaseHomePageHighlights = ({
               </div>
             )}
           </div>
-          <div
+          <ul
             className={classNames(
+              'fr-raw-list',
               highlightedResources.length === 3
                 ? styles.resourcesGrid
                 : 'fr-flex fr-direction-column fr-flex-gap-12v',
             )}
           >
             {highlightedResources.map((resource) => (
-              <ResourceCard
-                className="fr-pb-0"
-                resource={resource}
-                key={resource.id}
-                user={user}
-                isContributor={resourceAuthorization(resource, user).hasRole(
-                  ResourceRoles.ResourceContributor,
-                )}
-                context="highlight"
-                highlightCount={highlightedResources.length}
-                shareToken={shareToken}
-              />
+              <li key={resource.id}>
+                <ResourceCard
+                  className="fr-pb-0"
+                  titleAs="h3"
+                  resource={resource}
+                  user={user}
+                  isContributor={resourceAuthorization(resource, user).hasRole(
+                    ResourceRoles.ResourceContributor,
+                  )}
+                  context="highlight"
+                  highlightCount={highlightedResources.length}
+                  shareToken={shareToken}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
           {base.resources.length > 3 && (
             <div className="fr-hidden-sm fr-width-full fr-mt-4w">
               <Button
@@ -126,8 +129,8 @@ const BaseHomePageHighlights = ({
               </div>
             </div>
 
-            <div
-              className={classNames(styles.collectionsGrid, {
+            <ul
+              className={classNames('fr-raw-list', styles.collectionsGrid, {
                 [styles.collectionsGridTwoColumns]:
                   highlightedCollections.length === 2,
                 [styles.collectionsGridThreeColumns]:
@@ -135,19 +138,20 @@ const BaseHomePageHighlights = ({
               })}
             >
               {highlightedCollections.map((collection) => (
-                <CollectionCard
-                  orientation={
-                    highlightedCollections.length === 1 ? 'row' : 'column'
-                  }
-                  collection={collection}
-                  canWrite={false}
-                  key={collection.id}
-                  highlightCount={highlightedCollections.length}
-                  context="highlight"
-                  token={shareToken}
-                />
+                <li key={collection.id}>
+                  <CollectionCard
+                    orientation={
+                      highlightedCollections.length === 1 ? 'row' : 'column'
+                    }
+                    collection={collection}
+                    canWrite={false}
+                    highlightCount={highlightedCollections.length}
+                    context="highlight"
+                    token={shareToken}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
             {base.collections.length > 3 && (
               <div className="fr-hidden-sm fr-width-full">
                 <Button

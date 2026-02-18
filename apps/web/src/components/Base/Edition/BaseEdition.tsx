@@ -39,15 +39,14 @@ const BaseEdition = ({
           className="fr-mt-3w fr-border-radius--8 fr-border"
           id="supprimer"
           title="Supprimer la base"
+          descriptionAs="div"
           titleClassName="fr-text-label--blue-france"
           titleAs="h2"
           description={
             <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-flex-gap-4v">
               Cette action est irréversible et entraîne la suppression
               définitive de toutes les ressources de la Base.
-              <div>
-                <BaseDeletion base={base} />
-              </div>
+              <BaseDeletion base={base} />
             </div>
           }
         ></Card>

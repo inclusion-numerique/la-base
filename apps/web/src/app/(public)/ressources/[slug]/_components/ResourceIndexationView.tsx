@@ -72,6 +72,7 @@ const ResourceIndexationView = ({
   resourceTypes,
   titleClassName,
   tagsClassName,
+  titleAs: TitleAs = 'h3',
 }: {
   resource: Resource
   withDescription?: boolean
@@ -82,6 +83,7 @@ const ResourceIndexationView = ({
   professionalSectors?: boolean
   titleClassName?: string
   tagsClassName?: string
+  titleAs?: 'h2' | 'h3'
 }) => {
   const resourceInfo = useMemo(
     () => [
@@ -95,15 +97,20 @@ const ResourceIndexationView = ({
 
   return resourceInfo.map(({ title, description, tags, slug }) => (
     <div key={title}>
-      <div className={'fr-mt-3w'}>
-        <span className={titleClassName}>{title}</span>
-        {withDescription && (
-          <div className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
-            {description}
-          </div>
+      <TitleAs
+        className={classNames(
+          titleClassName,
+          'fr-mt-3w fr-mb-0 fr-text--normal',
         )}
-      </div>
-      <div className={classNames(styles.tags, tagsClassName)}>
+      >
+        {title}
+        {withDescription && (
+          <span className="fr-text--xs fr-hint-text fr-mt-1v fr-mb-0">
+            {description}
+          </span>
+        )}
+      </TitleAs>
+      <ul className={classNames('fr-raw-list', styles.tags, tagsClassName)}>
         {tags.length > 0 ? (
           <>
             {tags.map((tag) => {
@@ -124,32 +131,36 @@ const ResourceIndexationView = ({
                   ] as (typeof searchParams)['themes']
 
                   return (
-                    <a
-                      key={tag.slug}
-                      href={searchUrl('ressources', searchParams)}
-                      className="fr-link--no-underline"
-                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                    >
+                    <li key={tag.slug}>
+                      <a
+                        href={searchUrl('ressources', searchParams)}
+                        className="fr-link--no-underline"
+                        data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                        aria-label={`Voir toutes les ressources ${tag.slug}`}
+                      >
+                        <ThematicOptionBadge
+                          as="span"
+                          categoryIconClassName={categoryIconClassName}
+                          textClassName="fr-text-label--grey"
+                          className={className}
+                          size="sm"
+                          option={{ label: tag.label, disabled: false }}
+                        />
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return (
+                    <li key={tag.slug}>
                       <ThematicOptionBadge
                         categoryIconClassName={categoryIconClassName}
                         textClassName="fr-text-label--grey"
                         className={className}
                         size="sm"
                         option={{ label: tag.label, disabled: false }}
+                        data-testid={`resource-indexation-${slug}-${tag.slug}`}
                       />
-                    </a>
-                  )
-                } else {
-                  return (
-                    <ThematicOptionBadge
-                      key={tag.slug}
-                      categoryIconClassName={categoryIconClassName}
-                      textClassName="fr-text-label--grey"
-                      className={className}
-                      size="sm"
-                      option={{ label: tag.label, disabled: false }}
-                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                    />
+                    </li>
                   )
                 }
               }
@@ -158,36 +169,38 @@ const ResourceIndexationView = ({
                 const searchParams: SearchParams = { ...defaultSearchParams }
 
                 return (
-                  <Tag
-                    key={tag.slug}
-                    data-testid={`resource-indexation-${slug}-${tag.slug}`}
-                    linkProps={{
-                      href: searchUrl('ressources', searchParams),
-                    }}
-                    small
-                    className={styles.tag}
-                  >
-                    {tag.label}
-                  </Tag>
+                  <li key={tag.slug}>
+                    <Tag
+                      data-testid={`resource-indexation-${slug}-${tag.slug}`}
+                      linkProps={{
+                        href: searchUrl('ressources', searchParams),
+                      }}
+                      small
+                      className={styles.tag}
+                    >
+                      {tag.label}
+                    </Tag>
+                  </li>
                 )
               } else {
                 return (
-                  <span
-                    key={tag.slug}
-                    className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}
-                  >
-                    {tag.label}
-                  </span>
+                  <li key={tag.slug}>
+                    <span
+                      className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}
+                    >
+                      {tag.label}
+                    </span>
+                  </li>
                 )
               }
             })}
           </>
         ) : (
-          <div className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}>
+          <li className={classNames('fr-tag', 'fr-tag--sm', styles.tag)}>
             Non renseigné
-          </div>
+          </li>
         )}
-      </div>
+      </ul>
     </div>
   ))
 }

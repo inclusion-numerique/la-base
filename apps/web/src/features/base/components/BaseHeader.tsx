@@ -93,11 +93,15 @@ const BaseHeader = ({
                               href: `mailto:${base.email}`,
                             }}
                           />
+                          <span className="fr-sr-only">
+                            Contacter par email
+                          </span>
                         </Tooltip>
                       </div>
                     )}
                     <div>
                       <CopyLinkButton
+                        context="base"
                         priority="secondary"
                         title="Partager"
                         size="small"

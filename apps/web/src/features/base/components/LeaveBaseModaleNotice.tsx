@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { createToast } from '@app/ui/toast/createToast'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
@@ -66,13 +67,13 @@ const LeaveBaseModaleNotice = ({
   if (isLastMember || isLastAdmin) {
     const noticeProps = {
       title: isLastMember ? (
-        <span className="fr-text--regular fr-text-default--grey">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul membre de cette base. Vous pouvez supprimer votre
           base depuis la page paramètre accessible en cliquant sur le bouton
           "modifier la base".
         </span>
       ) : (
-        <span className="fr-text--regular fr-text-default--grey">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous êtes le seul administrateur de cette base. Vous devez nommer au
           moins un des autres membres administrateur de la base avant de pouvoir
           la quitter.'
@@ -120,20 +121,18 @@ const LeaveBaseModaleNotice = ({
   const isContributor =
     createdResources.length > 0 || contributedResources.length > 0
   const knowMoreLink = (
-    <Link
+    <ExternalLink
       className="fr-link fr-link--no-underline fr-text--underline"
       href="https://docs.numerique.gouv.fr/docs/d43b7269-474c-4f12-a46d-8002c181dc55/"
-      target="_blank"
-      rel="noopener noreferrer"
     >
       En savoir plus
-    </Link>
+    </ExternalLink>
   )
 
   const noticeProps = {
     title: !isContributor ? (
       <>
-        <span className="fr-text--regular fr-text-default--grey">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous ne ferez plus partie des membres et ne pourrez donc plus
           contribuer aux ressources publiées via cette base.
           <br />
@@ -142,7 +141,7 @@ const LeaveBaseModaleNotice = ({
       </>
     ) : (
       <>
-        <span className="fr-text--regular fr-text-default--grey">
+        <span className="fr-text--regular fr-text-default--grey fr-mb-0">
           Vous ne pourrez plus éditer les ressources auxquelles vous avec
           contribué ou que vous avez publié sur cette base.
           <br />

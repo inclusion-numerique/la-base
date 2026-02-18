@@ -1,9 +1,9 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: metadataTitle('Mentions légales'),
@@ -63,12 +63,9 @@ const LegalPage = () => (
           <p>
             Pour en savoir plus sur la politique d’accessibilité numérique de
             l’État : <br />
-            <Link
-              href="http://references.modernisation.gouv.fr/accessibilite-numerique"
-              target="_blank"
-            >
+            <ExternalLink href="http://references.modernisation.gouv.fr/accessibilite-numerique">
               Cliquez ici
-            </Link>
+            </ExternalLink>
           </p>
           <h2>Sécurité</h2>
           <p>

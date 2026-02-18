@@ -73,6 +73,7 @@ const ProfileInformationsEdition = ({
     <EditableCardForm
       id="informations"
       title="Informations sur votre profil"
+      titleAs="h2"
       form={form}
       onSave={handleSave}
       preview={

@@ -45,7 +45,7 @@ const DraggableContentEdition = React.forwardRef(
       sendCommand: SendCommand
       content: ContentProjectionWithContext
       index: number
-      dragConstraints: RefObject<HTMLElement>
+      dragConstraints: RefObject<HTMLOListElement>
       editionState: ResourceEditionState
       isSelected: boolean
       onSelect: () => void

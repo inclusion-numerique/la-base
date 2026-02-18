@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import Link from 'next/link'
 
 const Webinaire = () => (
@@ -9,19 +10,17 @@ const Webinaire = () => (
             Participez à notre prochaine webinaire&nbsp;!
           </h2>
           <p>
-            Vous souhaitez en savoir plus sur Les Bases du numérique d’intérêt
+            Vous souhaitez en savoir plus sur Les Bases du numérique d'intérêt
             général&nbsp;? Nous organisons régulièrement des webinaires pour
             présenter la plateforme & les prochaines évolutions.
           </p>
-          <Link
+          <ExternalLink
             href="https://tally.so/r/n0OLxZ"
-            target="_blank"
-            rel="noreferrer"
-            title="Accéder à l'inscription au prochain webinaire - nouvelle fenêtre"
+            ariaLabel="Accéder à l'inscription au prochain webinaire"
             className="fr-btn"
           >
-            S’inscrire au prochain webinaire
-          </Link>
+            S'inscrire au prochain webinaire
+          </ExternalLink>
         </div>
         <div className="fr-border-right fr-border--blue-france fr-mx-md-10w" />
         <div className="fr-border-bottom fr-border--blue-france fr-my-3w fr-hidden-md" />

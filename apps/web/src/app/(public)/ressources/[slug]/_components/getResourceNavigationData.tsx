@@ -43,7 +43,11 @@ export const getResourceNavigationData = ({
   return {
     items,
     contentId: 'resource-content',
-    burgerMenuButtonText: 'Contenus',
+    burgerMenuButtonText: (
+      <h2 className="fr-text--md fr-mb-0 fr-text-title--blue-france fr-text--medium">
+        Contenus
+      </h2>
+    ),
   }
 }
 

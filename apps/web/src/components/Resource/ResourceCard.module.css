@@ -135,6 +135,13 @@
   flex-direction: column-reverse !important;
 }
 
+.contentNewsFeed {
+  @media (min-width: 768px) and (max-width: 991px) {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+}
+
 .clampTitle {
   display: -webkit-box;
   -webkit-box-orient: vertical;

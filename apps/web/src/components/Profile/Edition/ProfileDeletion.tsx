@@ -43,37 +43,39 @@ const ProfileDeletion = ({ userId }: { userId: string }) => {
       noBorder
       id="supprimer"
       className="fr-border-radius--8 fr-border"
+      titleAs="h2"
       title={
         <span className="fr-text-label--blue-france">
           Supprimer votre profil
         </span>
       }
-      description={
-        <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-flex-gap-4v">
+    >
+      <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-flex-gap-4v">
+        <p className="fr-text--sm fr-mb-0">
           Cette action est irréversible et entraîne la suppression définitive de
           votre profil et de toutes vos ressources.
-          <div>
-            <Button
-              className="fr-btn--danger fr-width-full fr-flex fr-justify-content-center"
-              data-testid="delete-profile-button"
-              {...deleteModalNativeButtonProps}
-            >
-              Supprimer
-            </Button>
-            <ConfirmDeleteModal
-              title="Supprimer votre profil"
-              message="Êtes-vous sûr de vouloir supprimer votre profil ?"
-              description="Toutes les ressources dont vous êtes le seul contributeur et les bases dont vous êtes le seul membre seront également supprimées."
-              confirmText="oui"
-              isLoading={mutation.isPending}
-              Component={DeleteModal}
-              onClose={closeDeleteModal}
-              onDelete={handleDeleteProfile}
-            />
-          </div>
+        </p>
+        <div>
+          <Button
+            className="fr-btn--danger fr-width-full fr-flex fr-justify-content-center"
+            data-testid="delete-profile-button"
+            {...deleteModalNativeButtonProps}
+          >
+            Supprimer
+          </Button>
+          <ConfirmDeleteModal
+            title="Supprimer votre profil"
+            message="Êtes-vous sûr de vouloir supprimer votre profil ?"
+            description="Toutes les ressources dont vous êtes le seul contributeur et les bases dont vous êtes le seul membre seront également supprimées."
+            confirmText="oui"
+            isLoading={mutation.isPending}
+            Component={DeleteModal}
+            onClose={closeDeleteModal}
+            onDelete={handleDeleteProfile}
+          />
         </div>
-      }
-    />
+      </div>
+    </Card>
   )
 }
 

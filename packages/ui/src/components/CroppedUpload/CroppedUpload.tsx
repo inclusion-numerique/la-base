@@ -18,6 +18,7 @@ import Cropping from './Cropping'
 import { CroppedImageType, ImageWithName } from './utils'
 
 const CroppedUpload = ({
+  context,
   modal,
   label,
   height,
@@ -29,6 +30,7 @@ const CroppedUpload = ({
   image,
   size,
 }: {
+  context: 'base' | 'collection' | 'resource' | 'profile'
   modal: CreateModalReturn
   label?: string
   height: number
@@ -137,6 +139,7 @@ const CroppedUpload = ({
           document.body,
         )}
       <CroppedImage
+        context={context}
         label={label}
         height={height}
         ratio={ratio}

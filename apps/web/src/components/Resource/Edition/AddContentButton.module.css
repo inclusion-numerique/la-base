@@ -77,7 +77,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 8px 16px;
   flex-direction: column;
 
   @media (min-width: 576px) {
@@ -85,8 +85,6 @@
   }
 
   img {
-    margin-bottom: 8px;
-
     @media (min-width: 576px) {
       margin-bottom: 0;
       margin-right: 8px;

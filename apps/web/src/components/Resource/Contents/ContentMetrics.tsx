@@ -10,19 +10,19 @@ const ContentMetrics = (props: ContentMetricsProps) => {
   if (props.type === 'link') {
     const count = props.clickCount ?? 0
     return (
-      <span className="fr-text--sm fr-text-mention--grey fr-flex fr-flex-gap-2v fr-mt-2v">
+      <p className="fr-text--sm fr-text-mention--grey fr-flex fr-flex-gap-2v fr-mt-2v fr-mb-0">
         <span className="ri-cursor-line" aria-hidden />
         <span className="fr-text--medium">
           {numberToString(count)} clic{sPluriel(count)}
         </span>
-      </span>
+      </p>
     )
   }
 
   const downloadCount = props.downloadCount ?? 0
   const previewCount = props.previewCount ?? 0
   return (
-    <span className="fr-text--sm fr-text-mention--grey fr-flex fr-flex-gap-2v fr-mt-2v">
+    <p className="fr-text--sm fr-text-mention--grey fr-flex fr-flex-gap-2v fr-mt-2v fr-mb-0">
       <Tooltip
         title={`${numberToString(downloadCount)} Téléchargement${sPluriel(downloadCount)}`}
       >
@@ -44,7 +44,7 @@ const ContentMetrics = (props: ContentMetricsProps) => {
           </span>
         </span>
       </Tooltip>
-    </span>
+    </p>
   )
 }
 

@@ -35,7 +35,7 @@ const SearchMenu = ({
   return (
     <div className={styles.menu}>
       <div className="fr-container fr-container--800">
-        <nav className="fr-nav">
+        <nav className="fr-nav" arua-label="Type de contenus">
           <ul className="fr-nav__list">
             <li className="fr-nav__item">
               <Link
@@ -53,6 +53,7 @@ const SearchMenu = ({
               >
                 Ressources
                 <MenuCount count={resourcesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -66,6 +67,7 @@ const SearchMenu = ({
               >
                 Bases
                 <MenuCount count={basesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
             <li className="fr-nav__item">
@@ -79,6 +81,7 @@ const SearchMenu = ({
               >
                 Profils
                 <MenuCount count={profilesCount} />
+                <span className="fr-sr-only"> éléments</span>
               </Link>
             </li>
           </ul>

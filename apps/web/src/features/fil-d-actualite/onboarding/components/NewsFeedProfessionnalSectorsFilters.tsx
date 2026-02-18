@@ -59,49 +59,50 @@ export const NewsFeedProfessionnalSectorsFilters = ({
         </Button>
       </div>
       {isOpen && (
-        <div className="fr-flex fr-direction-column">
+        <ul className="fr-raw-list fr-flex fr-direction-column">
           {sectors.map((ps) => (
-            <Button
-              key={ps}
-              priority="tertiary no outline"
-              className={classNames(
-                params === ps && commonStyles.activeButton,
-                'fr-width-full fr-text-mention--grey',
-                styles.button,
-              )}
-              linkProps={{ href: createSectorUrl(ps) }}
-            >
-              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
-                <div
-                  className={classNames(
-                    'fr-flex fr-align-items-center fr-flex-gap-2v',
-                    styles.flexWidth,
-                  )}
-                >
-                  <IconInSquare
-                    iconId={professionalSectorsIcon[ps]}
-                    size="small"
-                  />
-                  <span
+            <li key={ps}>
+              <Button
+                priority="tertiary no outline"
+                className={classNames(
+                  params === ps && commonStyles.activeButton,
+                  'fr-width-full fr-text-mention--grey',
+                  styles.button,
+                )}
+                linkProps={{ href: createSectorUrl(ps) }}
+              >
+                <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                  <div
                     className={classNames(
-                      'fr-mb-0 fr-text--xs fr-text--start',
+                      'fr-flex fr-align-items-center fr-flex-gap-2v',
                       styles.flexWidth,
-                      commonStyles.label,
-                      params === ps && 'fr-text--bold',
                     )}
                   >
-                    {professionalSectorsLabels[ps]}
+                    <IconInSquare
+                      iconId={professionalSectorsIcon[ps]}
+                      size="small"
+                    />
+                    <span
+                      className={classNames(
+                        'fr-mb-0 fr-text--xs fr-text--start',
+                        styles.flexWidth,
+                        commonStyles.label,
+                        params === ps && 'fr-text--bold',
+                      )}
+                    >
+                      {professionalSectorsLabels[ps]}
+                    </span>
+                  </div>
+                  <span
+                    className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                  >
+                    {counts[ps].count}
                   </span>
                 </div>
-                <span
-                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
-                >
-                  {counts[ps].count}
-                </span>
-              </div>
-            </Button>
+              </Button>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </>
   )

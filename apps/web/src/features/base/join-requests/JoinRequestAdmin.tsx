@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
@@ -7,7 +8,6 @@ import BaseJoinRequestButtons from '@app/web/features/base/join-requests/compone
 import { BaseJoinRequestByToken } from '@app/web/features/base/join-requests/db/getBaseJoinRequestByToken'
 import Notice from '@codegouvfr/react-dsfr/Notice'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './JoinRequestAdmin.module.css'
 
 const formatApplicantName = (applicant: {
@@ -76,14 +76,9 @@ export const JoinRequestAdmin = ({
             )}
             <div className="fr-text--center">
               <BaseJoinRequestButtons joinRequest={joinRequest} user={user} />
-              <Link
-                className="fr-link"
-                target="_blank"
-                rel="noreferrer"
-                href="/"
-              >
+              <ExternalLink className="fr-link" href="/">
                 En savoir plus sur Les Bases du numérique d&apos;intérêt général
-              </Link>
+              </ExternalLink>
             </div>
           </div>
         </div>
@@ -126,13 +121,13 @@ export const JoinRequestAdmin = ({
               /> */}
               <BasePrivacyTag small isPublic={joinRequest.base.isPublic} />
             </div>
-            <div className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
+            <p className="fr-text--lg fr-mb-0 fr-text--bold fr-text-label--blue-france">
               <span className="fr-icon-account-circle-line fr-mr-2v" />
               <span className="fr-text--bold">
                 {baseMembersCount} membre{sPluriel(baseMembersCount)} dans la
                 base
               </span>
-            </div>
+            </p>
 
             <div className="fr-mt-6v fr-pt-6v fr-border--top">
               <div className="fr-text--lg fr-mb-2v fr-text--bold fr-text-label--blue-france">

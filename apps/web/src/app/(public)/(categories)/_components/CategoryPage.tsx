@@ -1,6 +1,5 @@
 import { ThematicHeader } from '@app/web/app/(public)/(categories)/_components/ThematicHeader'
 import { ThematicTags } from '@app/web/app/(public)/(categories)/_components/ThematicTags'
-import { categoryStyles } from '@app/web/app/(public)/(categories)/_helpers/categoryStyles'
 import { createThematicLink } from '@app/web/app/(public)/(categories)/_helpers/createThematicLink'
 import Newsletter from '@app/web/app/(public)/Newsletter'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
@@ -55,8 +54,6 @@ const CategoryPage = async ({
   const categoryCounts = categoriesCount[category]
   const themeOptions = categoryThemesOptions[category]
   const categoryPath = categoryPagePaths[category]
-  const styles = categoryStyles[category]
-
   const searchParams = {
     ...searchParamsFromSegment(params?.searchSegment),
     themes: (urlPaginationParams.thematiques == null
@@ -85,7 +82,7 @@ const CategoryPage = async ({
               {category}
             </h2>
             <ThematicTags
-              className={styles.tagsClassName}
+              category={category}
               categoryPath={categoryPath}
               themeOptions={themeOptions}
               selected={searchParamToThemes(urlPaginationParams.thematiques)}

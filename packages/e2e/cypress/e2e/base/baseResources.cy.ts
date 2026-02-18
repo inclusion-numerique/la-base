@@ -13,7 +13,8 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 0 - Empty state', () => {
-    cy.testId('ressources-menu-button').click()
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
+    cy.dsfrShouldBeStarted()
     cy.testId('empty-box').should('exist')
 
     cy.dsfrModalsShouldBeBound()
@@ -27,10 +28,12 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.get('#create-resource')
       .findByLabelText(/^Description/)
       .type('Une description')
+    cy.intercept('/api/trpc/resource.create?*').as('resourceCreate')
     cy.get('#create-resource')
       .find('button')
       .contains('Commencer l’édition')
       .click()
+    cy.wait('@resourceCreate')
     cy.appUrlShouldBe(`/ressources/un-titre/editer`)
     cy.get('#create-resource').should('not.have.attr', 'open')
 
@@ -138,8 +141,9 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId(
       'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
     ).click()
-
+    cy.intercept('/api/trpc/resource.mutate?*').as('mutation')
     cy.testId('publish-resource-button').click()
+    cy.wait('@mutation')
     cy.url().should('contain', appUrl(`/ressources/un-titre`))
 
     cy.log('Check new state')

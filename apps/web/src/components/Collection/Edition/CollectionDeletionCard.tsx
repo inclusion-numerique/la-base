@@ -56,6 +56,7 @@ const CollectionDeletionModal = ({
   return (
     <Card
       id="supprimer"
+      titleAs="h2"
       title={
         <span className="fr-text-label--blue-france">
           Supprimer la collection

@@ -56,6 +56,7 @@ const ProfileContactsEdition = ({ profile }: { profile: ProfilePageData }) => {
     <EditableCardForm
       id="contacts"
       title="Vos contacts"
+      titleAs="h2"
       form={form}
       onSave={handleSave}
       preview={

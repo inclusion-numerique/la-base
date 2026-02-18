@@ -44,10 +44,10 @@ export const NewsFeedOnboardingDone = ({
             iconClassName={styles.icon}
             background={styles.iconContainer}
           />
-          <span className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
+          <h1 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
             Votre fil d'actualité est prêt !
-          </span>
-          <span
+          </h1>
+          <p
             className={classNames(
               styles.description,
               'fr-text--center fr-text-mention--grey fr-mb-0',
@@ -55,22 +55,20 @@ export const NewsFeedOnboardingDone = ({
           >
             Découvrez les ressources liées à vos préférences et restez informé
             des nouvelles publications.
-          </span>
+          </p>
         </div>
-        <div className="fr-flex fr-direction-column fr-align-items-center fr-justify-content-center fr-text-mention--grey fr-text--center">
+        <p className="fr-flex fr-direction-column fr-align-items-center fr-justify-content-center fr-text-mention--grey fr-text--center fr-mb-0">
           <span className="fr-text--bold">Bon à savoir :</span>
-          <span>
-            Utilisez le menu présentant vos préférences sur la gauche de l’écran
-            pour filtrer les ressources de votre fil d’actualité.
-          </span>
-        </div>
+          Utilisez le menu présentant vos préférences sur la gauche de l’écran
+          pour filtrer les ressources de votre fil d’actualité.
+        </p>
         <Notice
           title={
-            <span>
+            <p className="fr-mb-0">
               Vous pourrez modifier vos préférences à tout moment via la
               page&nbsp;
               <span className="fr-text--bold">Gérer mes préférences</span>.
-            </span>
+            </p>
           }
         />
         <div className="fr-width-full">

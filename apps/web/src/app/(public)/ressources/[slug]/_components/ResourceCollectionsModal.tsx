@@ -41,13 +41,16 @@ const ResourceCollectionsModal = ({
                 <CollectionPrivacyTag
                   isPublic
                   small
-                  className={classNames('fr-tag--icon-left', styles.privacyTag)}
+                  className={classNames(
+                    'fr-tag--icon-left fr-mb-0',
+                    styles.privacyTag,
+                  )}
                 />
-                <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+                <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {collectionsData.counts.public} collection
                   {sPluriel(collectionsData.counts.public)}
                   &nbsp;publique{sPluriel(collectionsData.counts.public)}
-                </span>
+                </p>
               </div>
             )}
             {collectionsData.counts.public > 0 &&
@@ -61,20 +64,23 @@ const ResourceCollectionsModal = ({
                 <CollectionPrivacyTag
                   isPublic={false}
                   small
-                  className={classNames('fr-tag--icon-left', styles.privacyTag)}
+                  className={classNames(
+                    'fr-mb-0 fr-tag--icon-left',
+                    styles.privacyTag,
+                  )}
                 />
-                <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+                <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {collectionsData.counts.private} collection
                   {sPluriel(collectionsData.counts.private)}
                   &nbsp;privée{sPluriel(collectionsData.counts.private)}
-                </span>
+                </p>
               </div>
             )}
           </div>
           {collectionsData.counts.visible === 0 && (
-            <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+            <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
               Aucune collection publique
-            </span>
+            </p>
           )}
           {collectionsData.visible.map((collection) => (
             <div

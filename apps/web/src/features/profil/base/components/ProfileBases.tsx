@@ -1,3 +1,4 @@
+import { sPluriel } from '@app/ui/utils/pluriel/sPluriel'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import IconInSquare from '@app/web/components/IconInSquare'
 import { UserBasesPendingJoinRequests } from '@app/web/features/base/join-requests/components/UserBasesPendingJoinRequests'
@@ -25,7 +26,8 @@ const ProfileBases = ({
         <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
           <IconInSquare iconId="ri-team-line" />
           <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-            {isOwner ? 'Mes bases' : 'Bases'} · {bases.length}
+            {isOwner ? 'Mes bases' : 'Bases'} · {bases.length}&nbsp;
+            <span className="fr-sr-only">base{sPluriel(bases.length)}</span>
           </h2>
         </div>
       </div>
@@ -36,15 +38,18 @@ const ProfileBases = ({
       )}
     </div>
     <UserBasesPendingJoinRequests user={user} />
-    {bases.map((base) => (
-      <ProfileBaseCard
-        profile={profile}
-        user={user}
-        base={base}
-        key={base.slug}
-        isOwner={isOwner}
-      />
-    ))}
+    <ul className="fr-raw-list">
+      {bases.map((base) => (
+        <li key={base.slug}>
+          <ProfileBaseCard
+            profile={profile}
+            user={user}
+            base={base}
+            isOwner={isOwner}
+          />
+        </li>
+      ))}
+    </ul>
   </div>
 )
 

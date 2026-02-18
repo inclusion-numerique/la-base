@@ -1,5 +1,6 @@
 'use client'
 
+import Button from '@codegouvfr/react-dsfr/Button'
 import { useEffect, useRef, useState } from 'react'
 import styles from './BaseDetailsDescription.module.css'
 
@@ -37,13 +38,17 @@ export const BaseDetailsDescription = ({
         }}
       />
       {showReadMoreButton && (
-        <button
+        <Button
+          priority="tertiary no outline"
           type="button"
-          className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm fr-mt-2v"
           onClick={() => setShowFullDescription(!showFullDescription)}
+          aria-expanded={showFullDescription}
+          nativeButtonProps={{
+            tabIndex: -1,
+          }}
         >
           {showFullDescription ? 'Lire moins' : 'Lire la suite'}
-        </button>
+        </Button>
       )}
     </div>
   )

@@ -27,6 +27,7 @@ const ResourceParametersSideMenu = ({
         burgerMenuButtonText="Contenus"
         contentId="resource-parameters"
         sticky
+        aria-label="Zones de contenu de la page"
       />
     </div>
   </div>

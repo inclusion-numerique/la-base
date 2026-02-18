@@ -1,3 +1,4 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
 export const EnvInformation = () => {
@@ -30,31 +31,21 @@ export const EnvInformation = () => {
             des données de démonstration.
           </p>
           <p className="fr-text--sm">
-            <a
-              href={prLink}
-              className="fr-mr-2w"
-              rel="noreferrer"
-              target="_blank"
-            >
+            <ExternalLink href={prLink} className="fr-mr-2w">
               <span className="fr-icon--sm fr-icon-github-fill" /> PR &#34;
               {branch}&#34; sur Github
-            </a>
+            </ExternalLink>
             <br className="fr-hidden-lg fr-mt-2v" />
-            <a
-              href={storybookLink}
-              className="fr-mr-2w"
-              rel="noreferrer"
-              target="_blank"
-            >
+            <ExternalLink href={storybookLink} className="fr-mr-2w">
               <span className="fr-icon--sm  fr-icon-image-line" /> Composants
               &#34;
               {branch}&#34; sur Storybook
-            </a>
+            </ExternalLink>
             <br className="fr-hidden-lg fr-mt-2v" />
-            <a href={mainLiveUrl} target="_blank" rel="noreferrer">
+            <ExternalLink href={mainLiveUrl}>
               <span className="fr-icon--sm fr-icon-france-line" /> Version
               officielle
-            </a>
+            </ExternalLink>
             <br className="fr-hidden-lg fr-mt-2v" />
           </p>
         </div>

@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
 import styles from './NewsFeedOnboardingPage.module.css'
 
 export const metadata: Metadata = {
-  title: metadataTitle("Fil d'actualité - Onboarding"),
+  title: metadataTitle("Fil d'actualité - définir vos préférences"),
 }
 
 export default async function NewsFeedParametragePage() {

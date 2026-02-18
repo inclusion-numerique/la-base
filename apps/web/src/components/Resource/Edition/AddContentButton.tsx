@@ -3,7 +3,6 @@
 import { fileUploadHint } from '@app/ui/components/Form/utils/fileValidation.server'
 import { imageUploadHint } from '@app/web/server/rpc/image/imageValidation'
 import Button from '@codegouvfr/react-dsfr/Button'
-import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import type { ContentType } from '@prisma/client'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -88,6 +87,7 @@ const AddContentButton = ({
               type="button"
               priority="tertiary no outline"
               iconId="fr-icon-add-line"
+              aria-expanded={open}
               nativeButtonProps={{ 'data-testid': 'add-content-button' }}
               className={styles.buttonWithBorder}
               disabled={disabled}
@@ -98,61 +98,66 @@ const AddContentButton = ({
           <hr className={styles.border} />
         </div>
       ) : (
-        <ButtonsGroup
-          buttons={[
-            {
-              onClick: () => setOpen(!open),
-              type: 'button',
-              priority: 'secondary',
-              iconId: 'fr-icon-add-line',
-              children: 'Ajouter un contenu',
-              nativeButtonProps: { 'data-testid': 'add-content-button' },
-              className: styles.button,
-              disabled,
-            },
-          ]}
-        />
+        <Button
+          onClick={() => setOpen(!open)}
+          type="button"
+          priority="secondary"
+          iconId="fr-icon-add-line"
+          nativeButtonProps={{ 'data-testid': 'add-content-button' }}
+          className={classNames(
+            'fr-flex fr-width-full fr-justify-content-center',
+            styles.button,
+          )}
+          aria-expanded={open}
+          disabled={disabled}
+        >
+          Ajouter un contenu
+        </Button>
       )}
       {!disabled && (
         <AnimatePresence>
           {open && (
-            <motion.div
+            <motion.ul
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.1 }}
-              className={styles.contents}
+              className={classNames('fr-raw-list', styles.contents)}
             >
               {contents.map((content) => (
-                <button
-                  type="button"
-                  data-testid={`add-${content.type}-content-button`}
-                  onClick={() => onAdd(content.type)}
-                  key={content.type}
+                <li
                   className={styles.content}
+                  key={content.type}
+                  onClick={() => onAdd(content.type)}
                 >
-                  <Image src={content.image} width={24} height={24} alt="" />
-                  <span className="fr-text--sm fr-text--medium fr-mb-0">
-                    {content.label}
-                  </span>
-                  {!!content.description && (
-                    <span
-                      className={classNames(
-                        'fr-text--sm fr-text--medium fr-mb-0',
-                        styles.dotSeparator,
-                      )}
-                    >
-                      {' · '}
+                  <button
+                    type="button"
+                    data-testid={`add-${content.type}-content-button`}
+                    className="fr-flex fr-align-items-center"
+                  >
+                    <Image src={content.image} width={24} height={24} alt="" />
+                    <span className="fr-text--sm fr-text--medium fr-mb-0">
+                      {content.label}
                     </span>
-                  )}
-                  {!!content.description && (
-                    <span className="fr-text--xs fr-mb-0">
-                      {content.description}
-                    </span>
-                  )}
-                </button>
+                    {!!content.description && (
+                      <span
+                        className={classNames(
+                          'fr-text--sm fr-text--medium fr-mb-0 fr-px-1v',
+                          styles.dotSeparator,
+                        )}
+                      >
+                        {' · '}
+                      </span>
+                    )}
+                    {!!content.description && (
+                      <span className="fr-text--xs fr-mb-0">
+                        {content.description}
+                      </span>
+                    )}
+                  </button>
+                </li>
               ))}
-            </motion.div>
+            </motion.ul>
           )}
         </AnimatePresence>
       )}

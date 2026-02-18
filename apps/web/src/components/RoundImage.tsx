@@ -23,7 +23,6 @@ const RoundImage = ({
     ? getImageAccessibilityProps(image.altText)
     : {
         alt: '' as const,
-        decorative: true as const,
         'aria-hidden': true as const,
         role: 'presentation' as const,
       }

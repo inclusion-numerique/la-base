@@ -87,96 +87,105 @@ export const NewsFeedBasesProfilesFilters = ({
         </Button>
       </div>
       {isOpen && (
-        <div className="fr-flex fr-direction-column">
+        <ul className="fr-raw-list fr-flex fr-direction-column">
           {displayedBases.map(({ base }) => (
-            <Button
-              key={base.id}
-              priority="tertiary no outline"
-              className={classNames(
-                params === base.slug && commonStyles.activeButton,
-                'fr-width-full fr-text-mention--grey',
-                styles.button,
-              )}
-              linkProps={{ href: createBaseUrl(base.slug) }}
-            >
-              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
-                <div
-                  className={classNames(
-                    'fr-flex fr-align-items-center fr-flex-gap-2v',
-                    styles.flexWidth,
-                  )}
-                >
-                  <BaseImage base={base} />
-                  <span
+            <li key={base.id}>
+              <Button
+                priority="tertiary no outline"
+                className={classNames(
+                  params === base.slug && commonStyles.activeButton,
+                  'fr-width-full fr-text-mention--grey',
+                  styles.button,
+                )}
+                linkProps={{ href: createBaseUrl(base.slug) }}
+              >
+                <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                  <div
                     className={classNames(
-                      'fr-mb-0 fr-text--xs fr-text--start',
+                      'fr-flex fr-align-items-center fr-flex-gap-2v',
                       styles.flexWidth,
-                      commonStyles.label,
-                      params === base.slug && 'fr-text--bold',
                     )}
                   >
-                    {base.title}
+                    <BaseImage base={base} />
+                    <span
+                      className={classNames(
+                        'fr-mb-0 fr-text--xs fr-text--start',
+                        styles.flexWidth,
+                        commonStyles.label,
+                        params === base.slug && 'fr-text--bold',
+                      )}
+                    >
+                      {base.title}
+                    </span>
+                  </div>
+                  <span
+                    className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                  >
+                    {baseCounts[base.slug].count}
                   </span>
                 </div>
-                <span
-                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
-                >
-                  {baseCounts[base.slug].count}
-                </span>
-              </div>
-            </Button>
+              </Button>
+            </li>
           ))}
           {displayedProfiles.map(({ profile }) => (
-            <Button
-              key={profile.id}
-              priority="tertiary no outline"
-              className={classNames(
-                params === profile.slug && commonStyles.activeButton,
-                'fr-width-full fr-text-mention--grey',
-                styles.button,
-              )}
-              linkProps={{ href: createProfileUrl(profile.slug) }}
-            >
-              <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
-                <div
-                  className={classNames(
-                    'fr-flex fr-align-items-center fr-flex-gap-2v',
-                    styles.flexWidth,
-                  )}
-                >
-                  <RoundProfileImage
-                    className="fr-mr-1w"
-                    user={profile}
-                    size={24}
-                  />
-                  <span
+            <li key={profile.id}>
+              <Button
+                priority="tertiary no outline"
+                className={classNames(
+                  params === profile.slug && commonStyles.activeButton,
+                  'fr-width-full fr-text-mention--grey',
+                  styles.button,
+                )}
+                linkProps={{ href: createProfileUrl(profile.slug) }}
+              >
+                <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
+                  <div
                     className={classNames(
-                      'fr-mb-0 fr-text--xs fr-text--start',
+                      'fr-flex fr-align-items-center fr-flex-gap-2v',
                       styles.flexWidth,
-                      commonStyles.label,
-                      params === profile.slug && 'fr-text--bold',
                     )}
                   >
-                    {profile.name}
+                    <RoundProfileImage
+                      className="fr-mr-1w"
+                      user={profile}
+                      size={24}
+                    />
+                    <span
+                      className={classNames(
+                        'fr-mb-0 fr-text--xs fr-text--start',
+                        styles.flexWidth,
+                        commonStyles.label,
+                        params === profile.slug && 'fr-text--bold',
+                      )}
+                    >
+                      {profile.name}
+                    </span>
+                  </div>
+                  <span
+                    className={classNames('fr-mb-0 fr-text--xs', styles.count)}
+                  >
+                    {profileCounts[profile.slug].count}
                   </span>
                 </div>
-                <span
-                  className={classNames('fr-mb-0 fr-text--xs', styles.count)}
-                >
-                  {profileCounts[profile.slug].count}
-                </span>
-              </div>
-            </Button>
+              </Button>
+            </li>
           ))}
           {allItems.length > 4 && (
-            <Button
-              priority="tertiary no outline"
-              onClick={() => setShowAll((prev) => !prev)}
-            >
-              {showAll ? 'Voir moins' : 'Tout voir'}
-            </Button>
+            <li>
+              <Button
+                priority="tertiary no outline"
+                onClick={() => setShowAll((prev) => !prev)}
+              >
+                {showAll ? 'Voir moins' : 'Voir toutes'}
+                <span className="fr-sr-only">
+                  {showAll
+                    ? ' de bases et profils suivis'
+                    : ' les bases et profils suivis'}
+                </span>
+              </Button>
+            </li>
           )}
-        </div>
+        </ul>
       )}
     </>
   )

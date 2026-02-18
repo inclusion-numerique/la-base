@@ -45,7 +45,9 @@
 }
 
 .active {
-  background-color: var(--grey-950-100-active) !important;
+  background-color: var(--background-action-high-blue-france) !important;
+  color: var(--text-inverted-blue-france) !important;
+  border-bottom: 2px solid var(--border-plain-blue-france);
 }
 
 .separator {

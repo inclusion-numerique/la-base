@@ -45,6 +45,7 @@ const BaseMembers = ({
             <IconInSquare iconId="ri-team-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
               Membres&nbsp;·&nbsp;{acceptedMembers.length}
+              <span className="fr-sr-only"> membres</span>
             </h2>
           </div>
         </div>
@@ -64,13 +65,13 @@ const BaseMembers = ({
       {isBaseAdmin && <AdminBasePendingJoinRequests base={base} />}
       <div className="fr-mb-2w fr-flex fr-align-items-center fr-justify-content-space-between fr-flex-gap-3v">
         <div className="fr-hidden fr-unhidden-sm fr-flex fr-align-items-center fr-flex-gap-3v">
-          <span className="fr-text--medium">
+          <p className="fr-text--medium fr-mb-0">
             {adminCount} administrateur{sPluriel(adminCount)}
             {contributorsCount > 0 &&
               ` · ${contributorsCount} contributeur${sPluriel(
                 contributorsCount,
               )}`}
-          </span>
+          </p>
           {invitationsCount > 0 && (
             <Tag small className="fr-tag--info fr-text--bold fr-mr-1w">
               {invitationsCount} Invitation{sPluriel(invitationsCount)} en
@@ -80,15 +81,18 @@ const BaseMembers = ({
         </div>
         <BaseMembersSort slug={base.slug} sortBy={sortBy} />
       </div>
-      {base.members.map((member) => (
-        <BaseMemberCard
-          base={base}
-          canChangeMemberRole={canChangeMemberRole}
-          member={member}
-          key={member.member.id}
-          user={user}
-        />
-      ))}
+      <ul className="fr-raw-list">
+        {base.members.map((member) => (
+          <li key={member.member.id}>
+            <BaseMemberCard
+              base={base}
+              canChangeMemberRole={canChangeMemberRole}
+              member={member}
+              user={user}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

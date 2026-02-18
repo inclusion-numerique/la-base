@@ -1,8 +1,8 @@
+import ExternalLink from '@app/ui/components/ExternalLink'
 import ResourceLicenceCCSymbol from '@app/web/features/resources/licence/components/symbols/ResourceLicenceCCSymbol'
 import { licenceDescriptionItems } from '@app/web/features/resources/licence/licence-description-items'
 import { ResourceLicence } from '@prisma/client'
 import classNames from 'classnames'
-import Link from 'next/link'
 import styles from './ResourceLicenceDescription.module.css'
 
 const ResourceLicenceDescription = ({
@@ -27,13 +27,12 @@ const ResourceLicenceDescription = ({
             Détails sur la Licence {licenceDescriptionItems[licence].name}
           </span>
         </div>
-        <Link
-          target="_blank"
+        <ExternalLink
           className="fr-link fr-text--sm"
           href={licenceDescriptionItems[licence].link}
         >
           En savoir plus
-        </Link>
+        </ExternalLink>
       </div>
       <div className="fr-flex fr-direction-column fr-align-items-center fr-flex-gap-4v">
         {licenceDescriptionItems[licence].items.map((item) => (
