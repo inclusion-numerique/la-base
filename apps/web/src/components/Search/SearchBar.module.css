@@ -4,6 +4,19 @@
   position: relative;
 }
 
+@media (max-width: 47.9375em) {
+  .label {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+  }
+}
+
 .input {
   border-bottom: 2px solid var(--blue-france-sun-113-625);
   border-bottom-left-radius: 0;

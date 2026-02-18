@@ -5,7 +5,12 @@ import { TextPayload } from '@app/web/server/resources/feature/Content'
 import type { UseFormReturn } from 'react-hook-form'
 
 const TextContentEdition = ({ form }: { form: UseFormReturn<TextPayload> }) => (
-  <RichInputFormField data-testid="text-input" form={form} path="text" />
+  <RichInputFormField
+    data-testid="text-input"
+    form={form}
+    path="text"
+    label="Contenu texte"
+  />
 )
 
 export default TextContentEdition

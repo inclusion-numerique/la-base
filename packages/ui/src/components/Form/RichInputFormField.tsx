@@ -47,12 +47,19 @@ const RichInputFormField = <T extends FieldValues>({
         field: { value, onChange, onBlur },
         fieldState: { invalid, isTouched, error },
       }) => {
-        let ariaDescribedBy: string | undefined
-        if (error) {
-          ariaDescribedBy = `${id}__error`
-        } else if (valid && isTouched && !invalid) {
-          ariaDescribedBy = `${id}__valid`
+        const ariaDescribedByParts: string[] = []
+        if (info) {
+          ariaDescribedByParts.push(`${id}__info`)
         }
+        if (error) {
+          ariaDescribedByParts.push(`${id}__error`)
+        } else if (valid && isTouched && !invalid) {
+          ariaDescribedByParts.push(`${id}__valid`)
+        }
+        const ariaDescribedBy =
+          ariaDescribedByParts.length > 0
+            ? ariaDescribedByParts.join(' ')
+            : undefined
 
         const input = (
           <RichInputForm

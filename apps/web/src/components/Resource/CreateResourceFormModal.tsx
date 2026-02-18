@@ -176,6 +176,11 @@ const CreateResourceFormModal = ({ user }: { user: SessionUser }) => {
                   Titre de la ressource <RedAsterisk />
                 </>
               }
+              maxCharactersInfo={
+                <span className="fr-sr-only">
+                  100 caractères maximums autorisés
+                </span>
+              }
               disabled={disabled}
               info={titleInfo}
             />

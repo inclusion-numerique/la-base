@@ -60,7 +60,7 @@ const SearchThematicsCategory = ({
           <Checkbox
             options={[
               {
-                label: 'Sélectionner toute la catégorie',
+                label: `Sélectionner tous les filtres de la thématique ${category}`,
                 nativeInputProps: {
                   name: category,
                   onChange: (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,6 +17,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 const visibilityTexts = (base: { id: string } | null) => ({
+  label: 'Visibilité de la ressource',
   publicTitle: 'Ressource publique',
   privateTitle: 'Ressource privée',
   publicHint: 'Visible par tous les visiteurs.',

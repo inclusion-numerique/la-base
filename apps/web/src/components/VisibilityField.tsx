@@ -41,12 +41,13 @@ const VisibilityField = <T extends FieldValues>({
       <fieldset
         className="fr-fieldset"
         id="radio-rich"
-        aria-labelledby="radio-rich-legend radio-rich-messages"
+        aria-labelledby="radio-rich-legend"
+        aria-describedby={error ? 'radio-rich-error' : undefined}
       >
         {!!label && (
           <legend
             id="radio-rich-legend"
-            className="fr-label fr-mb-2v fr-ml-1-5v"
+            className="fr-label fr-mb-2v fr-ml-1-5v fr-sr-only"
           >
             {label} {asterisk && <RedAsterisk />}
           </legend>
@@ -98,7 +99,7 @@ const VisibilityField = <T extends FieldValues>({
           </div>
         </ResourceBaseRichRadioElement>
         {error && (
-          <p className="fr-error-text" id="input-form-field__isPublic__error">
+          <p className="fr-error-text" id="radio-rich-error">
             {error.message}
           </p>
         )}

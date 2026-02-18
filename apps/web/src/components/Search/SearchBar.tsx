@@ -11,7 +11,7 @@ import {
 } from '@app/web/server/search/searchQueryParams'
 import { trpc } from '@app/web/trpc'
 import { Spinner } from '@app/web/ui/Spinner'
-import { searchId } from '@app/web/utils/skipLinks'
+import { searchInputId } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -189,7 +189,11 @@ const SearchBar = ({
           className={classNames('fr-search-bar fr-search-bar--lg')}
           role="search"
         >
-          <label className="fr-label" htmlFor={searchId}>
+          <label
+            className="fr-label"
+            htmlFor={searchInputId}
+            aria-label="Rechercher"
+          >
             Rechercher
           </label>
           <span className="fr-sr-only" id="search-description">
@@ -201,7 +205,7 @@ const SearchBar = ({
             value={query}
             onChange={onChange}
             className={classNames('fr-input fr-input--white', styles.input)}
-            id={searchId}
+            id={searchInputId}
             type="search"
             name="search"
             placeholder="Rechercher une ressource, une base, un profil..."

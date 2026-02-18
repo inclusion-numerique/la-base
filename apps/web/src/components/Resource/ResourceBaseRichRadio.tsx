@@ -33,6 +33,12 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
           id="radio-rich"
           aria-labelledby="radio-rich-legend radio-rich-messages"
         >
+          <legend
+            className="fr-fieldset__legend fr-fieldset__legend--regular fr-sr-only"
+            id="radio-rich-legend"
+          >
+            Emplacement de la ressource
+          </legend>
           {bases.length === 0 ? (
             <Notice
               className="fr-mx-2v fr-mt-4v"
@@ -56,10 +62,7 @@ const ResourceBaseRichRadio = <T extends FieldValues>({
                 <span>Ajouter uniquement à mon profil</span>
                 <ProfilePrivacyTag isPublic={user.isPublic} />
               </ResourceBaseRichRadioElement>
-              <p
-                className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-2v fr-mb-4v fr-py-0"
-                id="radio-rich-legend"
-              >
+              <p className="fr-fieldset__legend--regular fr-fieldset__legend fr-mt-2v fr-mb-4v fr-py-0">
                 Ajouter également cette ressource à l’une de vos bases&nbsp;:
               </p>
               {bases.map((base, index) => (

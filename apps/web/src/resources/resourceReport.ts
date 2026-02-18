@@ -24,7 +24,9 @@ export const ResourceReportValidation = z.object({
   reason: z.enum(resourceReportReasons, {
     required_error: 'Veuillez renseigner un motif',
   }),
-  comment: z.string().min(1, 'Veuillez renseigner une description'),
+  comment: z
+    .string({ required_error: 'Veuillez renseigner une description' })
+    .min(1, 'Veuillez renseigner une description'),
 })
 
 export type ResourceReportData = z.infer<typeof ResourceReportValidation>

@@ -48,6 +48,7 @@ const CopyLinkButton = ({
       )}
       <Button
         className={classNames(
+          styles.button,
           full ? 'fr-width-full fr-justify-content-center' : '',
           className,
         )}

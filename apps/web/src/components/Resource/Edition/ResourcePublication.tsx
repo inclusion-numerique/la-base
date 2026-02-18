@@ -17,6 +17,7 @@ import ResourceBaseEdition from './ResourceBaseEdition'
 import styles from './ResourcePublication.module.css'
 
 const visibilityTexts = (base: { id: string } | null) => ({
+  label: 'Visibilité de la ressource',
   publicTitle: 'Ressource publique',
   privateTitle: 'Ressource privée',
   publicHint: 'Visible par tous les visiteurs.',

@@ -72,6 +72,14 @@ const ToggleFormField = <T extends FieldValues>({
               }`}
               role="group"
             >
+              {label && (
+                <legend
+                  className="fr-fieldset__legend fr-sr-only"
+                  id={`${id}__legend`}
+                >
+                  {label}
+                </legend>
+              )}
               <div
                 className={classNames(
                   'fr-fieldset__element',
