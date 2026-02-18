@@ -39,6 +39,7 @@ const EditableCard = ({
     <Card
       id={id}
       className={classNames(className, 'fr-border-radius--8 fr-border')}
+      classes={{ content: 'fr-mt-0 fr-mt-md-1w' }}
       noBorder={noBorder}
       title={
         <div className="fr-flex fr-direction-column fr-direction-sm-row fr-justify-content-space-between fr-align-items-sm-center fr-flex-gap-3v">
@@ -65,7 +66,7 @@ const EditableCard = ({
       description={subtitle}
       titleAs="div"
     >
-      <div className="fr-hidden-sm fr-flex fr-justify-content-end">
+      <div className="fr-hidden-sm fr-flex fr-justify-content-end fr-mb-2w">
         {!isEditMode && (
           <Button
             data-testid={`${id}-edit-card-button`}

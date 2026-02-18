@@ -65,6 +65,14 @@ const CheckboxFormField = <T extends FieldValues>({
               }`}
               role="group"
             >
+              {label && (
+                <legend
+                  className="fr-fieldset__legend fr-sr-only"
+                  id={`${id}__legend`}
+                >
+                  {label}
+                </legend>
+              )}
               <div className="fr-fieldset__element fr-mb-0">
                 <div
                   className={classNames('fr-checkbox-group', {

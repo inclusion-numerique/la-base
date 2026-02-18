@@ -79,6 +79,7 @@ const NewsFeedProfessionnalsSectors = ({
         <CheckboxGroupFormField
           control={form.control}
           path="professionalSectors"
+          label="Secteurs professionnels"
           options={professionalSectorsOptions}
           classes={{
             checkboxGroup: 'fr-p-6v fr-border fr-border-radius--8',

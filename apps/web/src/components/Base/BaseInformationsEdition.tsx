@@ -24,6 +24,9 @@ const BaseInformationsEdition = ({
       label="Nom de la base "
       disabled={form.formState.isSubmitting}
       asterisk
+      maxCharactersInfo={
+        <span className="fr-sr-only">100 caractères maximums autorisés</span>
+      }
       info={baseTitleInfoText}
     />
     <SelectFormField

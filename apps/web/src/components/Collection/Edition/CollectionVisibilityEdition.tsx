@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 const visibilityTexts = (base: { id: string } | null) => ({
+  label: 'Visibilité de la collection',
   publicTitle: 'Collection publique',
   privateTitle: 'Collection privée',
   publicHint: 'Visible par tous les visiteurs.',

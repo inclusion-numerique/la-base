@@ -11,3 +11,7 @@
   top: -36px;
   right: 0;
 }
+
+.button::before {
+  margin-right: 0 !important;
+}

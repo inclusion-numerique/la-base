@@ -65,7 +65,11 @@ const ResourceLicenceForm = ({
       form={form}
       mutation={handleMutation}
       edition={
-        <ResourceLicenceFields control={form.control} path="payload.licence" />
+        <ResourceLicenceFields
+          control={form.control}
+          path="payload.licence"
+          label="Licence de la ressource"
+        />
       }
       view={<ResourceLicenceView resource={resource} />}
     />

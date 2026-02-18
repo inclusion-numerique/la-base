@@ -28,6 +28,7 @@ const {
 })
 
 const visibilityTexts = {
+  label: 'Visibilité de la base',
   publicTitle: 'Base publique',
   privateTitle: 'Base privée',
   publicHint:

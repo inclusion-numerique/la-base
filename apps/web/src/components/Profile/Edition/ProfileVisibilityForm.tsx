@@ -28,6 +28,7 @@ const {
 })
 
 const visibilityTexts = {
+  label: 'Visibilité du profil',
   publicTitle: 'Profil public',
   privateTitle: 'Profil privé',
   publicHint:

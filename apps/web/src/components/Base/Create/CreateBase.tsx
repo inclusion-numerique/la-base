@@ -197,6 +197,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               path="isPublic"
               control={control}
               disabled={isLoading}
+              label="Visibilité de la base"
               publicTitle="Base publique"
               privateTitle="Base privée"
               publicHint="Tout le monde peut vous suivre et visiter votre base pour y retrouver les contenus publics."
