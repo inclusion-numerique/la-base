@@ -25,7 +25,7 @@ import {
 } from '@app/web/themes/themes'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FiltersModal } from './FiltersModal'
 
 export type FiltersInitialValue = {
@@ -131,6 +131,19 @@ const SearchFilters = ({
     router.push(searchUrl(tab, updatedSearchParams as SearchParams))
   }
 
+  const filtersRef = useRef<HTMLDivElement>(null)
+  const previousSelectedLength = useRef(selected.length)
+
+  useEffect(() => {
+    if (selected.length !== previousSelectedLength.current) {
+      previousSelectedLength.current = selected.length
+      const focusable = filtersRef.current?.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      )
+      focusable?.focus()
+    }
+  }, [selected])
+
   const selectedThematics = selected.filter(
     (selectedItem) => selectedItem.category === 'themes',
   )
@@ -140,6 +153,10 @@ const SearchFilters = ({
 
   return (
     <div className="fr-mb-3w fr-mb-md-6w">
+      <p className="fr-sr-only">
+        Les résultats se mettent à jour automatiquement à l'activation d'un
+        filtre.
+      </p>
       <div className="fr-unhidden fr-hidden-md">
         <FiltersModal
           categories={categories}
@@ -150,7 +167,7 @@ const SearchFilters = ({
           onSelect={onSelect}
         />
       </div>
-      <div className="fr-unhidden-md fr-hidden">
+      <div className="fr-unhidden-md fr-hidden" ref={filtersRef}>
         <div className={styles.buttons}>
           {tab === 'ressources' && (
             <SearchThematicsFilters
@@ -189,26 +206,32 @@ const SearchFilters = ({
             'fr-flex fr-direction-column fr-align-items-center fr-justify-content-space-between fr-direction-md-row fr-flex-gap-6v',
           )}
         >
-          <div className={styles.selected}>
+          <ul className={classNames('fr-raw-list', styles.selected)}>
             {themeCategories.map((category) => {
-              const className =
-                CATEGORY_VARIANTS_TAG[category as ThemeCategory].default
+              const className = classNames(
+                'thematic-badge-base',
+                CATEGORY_VARIANTS_TAG[category as ThemeCategory].default,
+                CATEGORY_VARIANTS_TAG[category].hover,
+                CATEGORY_VARIANTS_TAG[category].border,
+              )
               const categoryIconClassName = classNames(
                 CATEGORY_VARIANTS[category as ThemeCategory].icon,
                 CATEGORY_VARIANTS[category as ThemeCategory].color,
               )
               if (isCategoryComplete(category, selectedThematics)) {
                 return (
-                  <ThematicOptionBadge
-                    categoryIconClassName={categoryIconClassName}
-                    iconId="fr-icon-close-line"
-                    iconClassName="fr-text-title--blue-france"
-                    textClassName="fr-text-label--grey"
-                    className={className}
-                    ariaLabelPrefix={`Retirer toutes les catégories de la thématique ${category}`}
-                    option={{ label: category, disabled: false }}
-                    onClick={() => onUnselectThematics(category as FilterKey)}
-                  />
+                  <li key={category}>
+                    <ThematicOptionBadge
+                      categoryIconClassName={categoryIconClassName}
+                      iconId="fr-icon-close-line"
+                      iconClassName="fr-text-title--blue-france"
+                      textClassName="fr-text-label--grey"
+                      className={className}
+                      ariaLabelPrefix={`Retirer toutes les catégories de la thématique ${category}`}
+                      option={{ label: category, disabled: false }}
+                      onClick={() => onUnselectThematics(category as FilterKey)}
+                    />
+                  </li>
                 )
               } else {
                 return selectedThematics
@@ -217,32 +240,36 @@ const SearchFilters = ({
                     return option.extra!.category === category
                   })
                   .map((selectedItem) => (
-                    <ThematicOptionBadge
-                      categoryIconClassName={categoryIconClassName}
-                      iconId="fr-icon-close-line"
-                      iconClassName="fr-text-title--blue-france"
-                      textClassName="fr-text-label--grey"
-                      className={className}
-                      ariaLabelPrefix="Retirer"
+                    <li
                       key={`${selectedItem.option.value}-${selectedItem.category}`}
-                      option={selectedItem.option}
-                      onClick={() =>
-                        onUnselect(selectedItem.option, selectedItem.category)
-                      }
-                    />
+                    >
+                      <ThematicOptionBadge
+                        categoryIconClassName={categoryIconClassName}
+                        iconId="fr-icon-close-line"
+                        iconClassName="fr-text-title--blue-france"
+                        textClassName="fr-text-label--grey"
+                        className={className}
+                        ariaLabelPrefix="Retirer"
+                        option={selectedItem.option}
+                        onClick={() =>
+                          onUnselect(selectedItem.option, selectedItem.category)
+                        }
+                      />
+                    </li>
                   ))
               }
             })}
             {otherSelected.map((selectedItem) => (
-              <OptionBadge
-                key={`${selectedItem.option.value}-${selectedItem.category}`}
-                option={selectedItem.option}
-                onClick={() =>
-                  onUnselect(selectedItem.option, selectedItem.category)
-                }
-              />
+              <li key={`${selectedItem.option.value}-${selectedItem.category}`}>
+                <OptionBadge
+                  option={selectedItem.option}
+                  onClick={() =>
+                    onUnselect(selectedItem.option, selectedItem.category)
+                  }
+                />
+              </li>
             ))}
-          </div>
+          </ul>
           <div>
             <DeleteSearchFiltersButton />
           </div>

@@ -45,7 +45,7 @@ const LinkContentView = ({
 
   return (
     <div data-testid="content-link">
-      {!!title && <h2 className="fr-mb-4v fr-h6">{title}</h2>}
+      {!!title && <h3 className="fr-mb-4v fr-h6">{title}</h3>}
       {showPreview && !!url ? (
         <LinkContentPreview
           url={url}

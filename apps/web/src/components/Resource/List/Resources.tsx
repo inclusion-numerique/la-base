@@ -74,8 +74,10 @@ const Resources = ({
           <div className="fr-flex fr-align-items-center fr-flex-gap-5v">
             <IconInSquare iconId="ri-file-text-line" />
             <h2 className="fr-mb-0 fr-h3 fr-text-label--blue-france">
-              {title} · {totalCount}
-              <span className="fr-sr-only"> ressources</span>
+              {title} · {totalCount}&nbsp;
+              <span className="fr-sr-only">
+                ressource{sPluriel(totalCount)}
+              </span>
             </h2>
           </div>
         </div>
@@ -117,7 +119,14 @@ const Resources = ({
         <Tabs
           tabs={[
             {
-              label: `Publiques · ${publics.length}`,
+              label: (
+                <>
+                  Publiques · {publics.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(publics.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-earth-line',
               content: (
                 <ResourceTab
@@ -129,7 +138,14 @@ const Resources = ({
               ),
             },
             {
-              label: `Privées · ${privates.length}`,
+              label: (
+                <>
+                  Privées · {privates.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(privates.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-lock-line',
               content: (
                 <ResourceTab
@@ -141,7 +157,14 @@ const Resources = ({
               ),
             },
             {
-              label: `Brouillons · ${drafts.length}`,
+              label: (
+                <>
+                  Brouillons · {drafts.length}{' '}
+                  <span className="fr-sr-only">
+                    ressource{sPluriel(drafts.length)}
+                  </span>
+                </>
+              ),
               iconId: 'fr-icon-draft-line',
               content: (
                 <ResourceTab

@@ -51,8 +51,12 @@ const ResourceLicenceFields = <T extends FieldValues>({
         <fieldset
           className="fr-fieldset"
           id="radio-licence"
-          aria-labelledby="radio-licence-legend radio-licence-messages"
+          aria-labelledby="radio-licence-legend radio-licence-hint radio-licence-messages"
         >
+          <p id="radio-licence-hint" className="fr-sr-only">
+            Les détails de la licence sélectionnée sont disponibles sous le
+            regroupement d'options.
+          </p>
           {!!label && (
             <legend
               id="radio-licence-legend"
@@ -78,7 +82,9 @@ const ResourceLicenceFields = <T extends FieldValues>({
                 onChange={() => onChange(licenceValue as ResourceLicence)}
               >
                 <div className="fr-flex-grow-1 fr-mr-1w">
-                  {title}
+                  <h3 className="fr-text--md fr-text--normal fr-mb-0">
+                    {title}
+                  </h3>
                   <p className="fr-text--xs fr-hint-text fr-mb-0">{hint}</p>
                 </div>
                 <div className="fr-hidden fr-unhidden-sm fr-ml-3w">

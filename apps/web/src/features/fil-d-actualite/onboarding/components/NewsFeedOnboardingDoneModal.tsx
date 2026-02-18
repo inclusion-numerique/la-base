@@ -44,9 +44,9 @@ export const NewsFeedOnboardingDone = ({
             iconClassName={styles.icon}
             background={styles.iconContainer}
           />
-          <h2 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
+          <h1 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
             Votre fil d'actualité est prêt !
-          </h2>
+          </h1>
           <p
             className={classNames(
               styles.description,

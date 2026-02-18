@@ -18,7 +18,11 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
           <span>
             {user.name ? (
               <>
-                <p className="fr-text--bold fr-text--md fr-mb-0 fr-text-default--grey">
+                <p
+                  role="heading"
+                  aria-level={1}
+                  className="fr-text--bold fr-text--md fr-mb-0 fr-text-default--grey"
+                >
                   {user.name}
                 </p>
                 <p className="fr-text--sm fr-text-mention--grey fr-mb-0">
@@ -43,7 +47,11 @@ export const HeaderUserMenu = ({ user }: { user: SessionUser }) => {
       {bases.length > 0 ? (
         <>
           <li className="fr-px-md-0 fr-px-2w">
-            <p className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w">
+            <p
+              role="heading"
+              saria-level={2}
+              className="fr-text-mention--grey fr-text--sm fr-p-1w fr-pl-md-2w fr-pl-1w"
+            >
               Mes bases
             </p>
           </li>

@@ -14,6 +14,7 @@ export const ThematicOptionBadge = ({
   size,
   className,
   ariaLabelPrefix,
+  as: Component = 'button',
   'data-testid': dataTestId,
 }: {
   option: Pick<SelectOptionValid, 'invalid' | 'disabled' | 'label'>
@@ -26,18 +27,25 @@ export const ThematicOptionBadge = ({
   size?: 'sm' | 'md'
   className?: string
   ariaLabelPrefix?: string
+  as?: 'button' | 'span'
   'data-testid'?: string
 }) => (
-  <button
+  <Component
     data-testid={dataTestId}
-    type="button"
+    {...(Component === 'button'
+      ? {
+          type: 'button' as const,
+          disabled: disabled || option.disabled,
+          onClick: disabled ? undefined : onClick,
+          'aria-label': ariaLabelPrefix
+            ? `${ariaLabelPrefix} ${option.label}`
+            : undefined,
+        }
+      : {})}
     className={classNames(
       `fr-tag ${size === 'sm' ? 'fr-tag--sm' : ''}`,
       className,
     )}
-    disabled={disabled || option.disabled}
-    onClick={disabled ? undefined : onClick}
-    aria-label={`${ariaLabelPrefix} ${option.label}`}
   >
     {!!categoryIconClassName && (
       <span
@@ -56,6 +64,6 @@ export const ThematicOptionBadge = ({
         className={classNames(iconId, iconClassName, 'fr-ml-1w fr-icon--sm')}
       />
     )}
-  </button>
+  </Component>
 )
 export default ThematicOptionBadge

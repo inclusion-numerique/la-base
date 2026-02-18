@@ -12,8 +12,9 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cleanUpAndCreateTestBase(true)
   })
 
-  it.only('Acceptation 0 - Empty state', () => {
-    cy.testId('ressources-menu-button').click()
+  it('Acceptation 0 - Empty state', () => {
+    cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
+    cy.dsfrShouldBeStarted()
     cy.testId('empty-box').should('exist')
 
     cy.dsfrModalsShouldBeBound()

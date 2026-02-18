@@ -76,6 +76,7 @@ const ProfileHeader = ({
                   )}
                   <div>
                     <CopyLinkButton
+                      context="profile"
                       full
                       size="small"
                       url={getServerUrl(`/profils/${profile.slug}`, {

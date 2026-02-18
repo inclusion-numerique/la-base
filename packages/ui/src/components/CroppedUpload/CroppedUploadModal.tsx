@@ -19,6 +19,7 @@ import Cropping from './Cropping'
 import { ImageWithName } from './utils'
 
 const CroppedUploadModal = <T extends FieldValues>({
+  context,
   form,
   path,
   modal,
@@ -34,6 +35,7 @@ const CroppedUploadModal = <T extends FieldValues>({
   inputTestId,
   deleteTestId,
 }: {
+  context: 'base' | 'collection' | 'resource' | 'profile'
   title: string
   modal: CreateModalReturn
   form: UseFormReturn<T>
@@ -187,6 +189,7 @@ const CroppedUploadModal = <T extends FieldValues>({
           )}
           <div className={croppingMode ? 'fr-hidden' : ''}>
             <CroppedImage
+              context={context}
               emptyChildren={emptyChildren}
               label={label}
               height={height}

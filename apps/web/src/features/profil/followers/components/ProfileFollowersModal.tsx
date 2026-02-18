@@ -31,7 +31,6 @@ const ProfileFollowersModal = ({
 
   return (
     <>
-      <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
       <Link
         href="#"
         className={classNames(
@@ -39,8 +38,10 @@ const ProfileFollowersModal = ({
           styles.feedbackLink,
         )}
         onClick={open}
+        role="button"
       >
-        <p className="fr-mb-0">
+        <p className="fr-text--sm fr-mb-0">
+          <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
           <b>{numberToString(counts.total)}</b>
           <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
         </p>
@@ -48,134 +49,139 @@ const ProfileFollowersModal = ({
 
       <FollowersModal title={title} className={styles.profileFollowersModal}>
         <>
-          <div className="fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-md-center fr-mb-4w">
+          <ul className="fr-raw-list fr-flex fr-direction-column fr-direction-sm-row fr-flex-gap-2v fr-align-items-md-center fr-mb-4w">
             {counts.public > 0 && (
-              <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
+              <li className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic
                   small
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
-                <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+                <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {counts.public} profil
                   {sPluriel(counts.public)}
                   &nbsp;public{sPluriel(counts.public)}
-                </span>
-              </div>
+                </p>
+              </li>
             )}
             {counts.public > 0 && counts.private > 0 && (
-              <span className="fr-hidden fr-unhidden-sm fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+              <li
+                aria-hidden
+                className="fr-hidden fr-unhidden-sm fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0"
+              >
                 ·
-              </span>
+              </li>
             )}
             {counts.private > 0 && (
-              <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
+              <li className="fr-flex fr-flex-gap-2v fr-align-items-center">
                 <ProfilePrivacyTag
                   isPublic={false}
                   small
                   className={classNames('fr-tag--icon-left', styles.privacyTag)}
                 />
-                <span className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
+                <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0">
                   {counts.private} profil
                   {sPluriel(counts.private)}
                   &nbsp;privé{sPluriel(counts.private)}
-                </span>
-              </div>
+                </p>
+              </li>
             )}
-          </div>
+          </ul>
           {counts.total === 0 && (
             <p className="fr-text--sm fr-text--medium fr-text-mention--grey fr-mb-0 fr-text--left">
               Aucun profil public
             </p>
           )}
-          {followedBy.map((follower, index) => {
-            const content = (
-              <div className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-width-full">
-                <div className="fr-flex fr-flex-gap-6v fr-align-items-center fr-width-full">
-                  <RoundProfileImage user={follower} />
-                  <div
-                    className={classNames(
-                      'fr-flex fr-flex-gap-1v fr-align-items-baseline fr-text--start',
-                      follower.isPublic && 'fr-direction-column',
-                      !follower.isPublic &&
-                        'fr-direction-row fr-justify-content-space-between fr-width-full',
-                    )}
-                  >
-                    {follower.isPublic ? (
-                      <Link
-                        className={classNames('fr-text--bold', styles.link)}
-                        href={`/profils/${follower.slug}`}
-                      >
-                        {follower.name}
-                      </Link>
-                    ) : (
-                      <span className="fr-text--bold">{follower.name}</span>
-                    )}
-                    <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
-                      {follower.isPublic && (
-                        <ProfileMetadata
-                          user={user}
-                          className="fr-text-mention--grey"
-                          resourcesCount={follower._count.resources}
-                          followedByCount={follower._count.followedBy}
-                          context="card"
-                        />
+          <ul className="fr-raw-list">
+            {followedBy.map((follower, index) => {
+              const content = (
+                <div className="fr-flex fr-py-2w fr-justify-content-space-between fr-align-items-center fr-width-full">
+                  <div className="fr-flex fr-flex-gap-6v fr-align-items-center fr-width-full">
+                    <RoundProfileImage user={follower} />
+                    <div
+                      className={classNames(
+                        'fr-flex fr-flex-gap-1v fr-align-items-baseline fr-text--start',
+                        follower.isPublic && 'fr-direction-column',
+                        !follower.isPublic &&
+                          'fr-direction-row fr-justify-content-space-between fr-width-full',
                       )}
-                      {!follower.isPublic && (
-                        <>
-                          <ProfilePrivacyTag
-                            isPublic={false}
-                            small
-                            label="Privé"
-                            className={classNames(
-                              'fr-tag--icon-left',
-                              styles.privacyTag,
-                            )}
+                    >
+                      {follower.isPublic ? (
+                        <Link
+                          className={classNames('fr-text--bold', styles.link)}
+                          href={`/profils/${follower.slug}`}
+                        >
+                          {follower.name}
+                        </Link>
+                      ) : (
+                        <span className="fr-text--bold">{follower.name}</span>
+                      )}
+                      <div className="fr-flex fr-flex-gap-2v fr-align-items-center">
+                        {follower.isPublic && (
+                          <ProfileMetadata
+                            user={user}
+                            className="fr-text-mention--grey"
+                            resourcesCount={follower._count.resources}
+                            followedByCount={follower._count.followedBy}
+                            context="card"
                           />
-                        </>
-                      )}
+                        )}
+                        {!follower.isPublic && (
+                          <>
+                            <ProfilePrivacyTag
+                              isPublic={false}
+                              small
+                              label="Privé"
+                              className={classNames(
+                                'fr-tag--icon-left',
+                                styles.privacyTag,
+                              )}
+                            />
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
+              )
 
-            return follower.isPublic ? (
-              <div
-                key={follower.id}
-                className={classNames(
-                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
-                  index === 0 && 'fr-border-top',
-                  follower.isPublic && styles.container,
-                )}
-              >
-                {content}
-                {follower.isPublic && (
-                  <div>
-                    <FollowButton
-                      user={user}
-                      profile={follower}
-                      followPriority="secondary"
-                      className={classNames(
-                        styles.followButton,
-                        'fr-justify-content-center',
-                      )}
-                    />
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div
-                key={follower.id}
-                className={classNames(
-                  'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom fr-width-full',
-                  styles.privateContainer,
-                )}
-              >
-                {content}
-              </div>
-            )
-          })}
+              return follower.isPublic ? (
+                <li
+                  key={follower.id}
+                  className={classNames(
+                    'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom',
+                    index === 0 && 'fr-border-top',
+                    follower.isPublic && styles.container,
+                  )}
+                >
+                  {content}
+                  {follower.isPublic && (
+                    <div>
+                      <FollowButton
+                        user={user}
+                        profile={follower}
+                        followPriority="secondary"
+                        className={classNames(
+                          styles.followButton,
+                          'fr-justify-content-center',
+                        )}
+                      />
+                    </div>
+                  )}
+                </li>
+              ) : (
+                <li
+                  key={follower.id}
+                  className={classNames(
+                    'fr-flex fr-justify-content-space-between fr-align-items-center fr-border-bottom fr-width-full',
+                    styles.privateContainer,
+                  )}
+                >
+                  {content}
+                </li>
+              )
+            })}
+          </ul>
         </>
       </FollowersModal>
     </>

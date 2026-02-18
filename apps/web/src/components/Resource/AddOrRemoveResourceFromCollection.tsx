@@ -40,7 +40,14 @@ const AddOrRemoveResourceFromCollection = ({
       <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
         <IconInSquare {...iconInSquareProps} />
         <div className={styles.content}>
-          <b className={styles.title}>{collection.title}</b>
+          <h3
+            className={classNames(
+              'fr-text--bold fr-text--sm fr-mb-0',
+              styles.title,
+            )}
+          >
+            {collection.title}
+          </h3>
           <div className={styles.collections}>
             {collection.slug && (
               <div className="fr-flex fr-justify-content-space-between fr-align-items-center">
@@ -74,11 +81,13 @@ const AddOrRemoveResourceFromCollection = ({
           disabled={disabled}
           type="button"
           nativeButtonProps={{
-            tabIndex: 1,
             'data-testid': 'added-in-collection-button',
           }}
         >
-          <span className="fr-hidden fr-unhidden-md">Déjà ajouté</span>
+          <span className="fr-sr-only">Déjà ajouté</span>
+          <span className="fr-hidden fr-unhidden-md" aria-hidden="true">
+            Déjà ajouté
+          </span>
           <span className="fr-icon-check-line fr-icon--sm fr-pl-md-2v" />
         </Button>
       ) : (
@@ -89,12 +98,17 @@ const AddOrRemoveResourceFromCollection = ({
           disabled={disabled}
           type="button"
           nativeButtonProps={{
-            tabIndex: 1,
             'data-testid': 'add-in-collection-button',
           }}
         >
-          <span className="fr-icon-add-line fr-icon--sm fr-hidden-md" />
-          <span className="fr-hidden fr-unhidden-md">Ajouter</span>
+          <span
+            className="fr-icon-add-line fr-icon--sm fr-hidden-md"
+            aria-hidden="true"
+          />
+          <span className="fr-sr-only">Ajouter</span>
+          <span className="fr-hidden fr-unhidden-md" aria-hidden="true">
+            Ajouter
+          </span>
         </Button>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
 import { redirectToUpdatedCguPageIfNeeded } from '@app/web/features/cgu/redirectToUpdatedCguPageIfNeeded'
+import { contentId } from '@app/web/utils/skipLinks'
 import { type PropsWithChildren } from 'react'
 
 const EditorLayout = async ({ children }: PropsWithChildren) => {
@@ -14,7 +15,9 @@ const EditorLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      <div style={{ flex: 1 }}>{children}</div>
+      <main id={contentId} style={{ flex: 1 }}>
+        {children}
+      </main>
     </div>
   )
 }

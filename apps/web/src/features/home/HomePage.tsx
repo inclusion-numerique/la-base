@@ -3,7 +3,7 @@ import Newsletter from '@app/web/app/(public)/Newsletter'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import WhoAreWe from '@app/web/features/home/components/WhoAreWe'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { contentId } from '@app/web/utils/skipLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Link from 'next/link'
 import Banner from './components/Banner'
@@ -25,13 +25,8 @@ const HomePage = async ({
 
   return (
     <>
-      <SkipLinksPortal
-        links={[
-          { label: 'Recherche', anchor: `#search-bar` },
-          ...defaultSkipLinks,
-        ]}
-      />
-      <main id={contentId}>
+      <SkipLinksPortal />
+      <div id={contentId}>
         <Banner />
         <div className="fr-container fr-pt-8w fr-pb-0 fr-py-md-10w">
           <div className="fr-text--center">
@@ -54,25 +49,25 @@ const HomePage = async ({
               </span>
             </p>
             <div className="fr-mb-6w fr-mb-md-10w">
-              <h2 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
+              <h3 className="fr-h6 fr-text--center fr-mb-md-4w fr-mb-3w">
                 Explorez les ressources grâce aux 4 grandes catégories
-              </h2>
+              </h3>
               <HomeCategories />
             </div>
-            <p className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
-              ressources à la une
-            </p>
+            <h3 className="fr-badge fr-badge--new fr-badge--yellow-tournesol fr-badge--lg fr-text--uppercase fr-mb-1w">
+              Ressources à la une
+            </h3>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters fr-mb-12v">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters fr-mb-12v">
             {featuredResources.map((resource) => (
-              <div
+              <li
                 key={resource.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-3w fr-pb-0"
               >
                 <FeaturedResource resource={resource} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="fr-text--center fr-mt-12v fr-mb-6w fr-mb-md-10w fr-unhidden-md fr-hidden">
             <Link
               href="/rechercher/tout/ressources"
@@ -155,16 +150,16 @@ const HomePage = async ({
               </Button>
             </div>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters">
             {featuredBases.map((base) => (
-              <div
+              <li
                 key={base.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-4w fr-pb-0"
               >
                 <FeaturedBase base={base} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <div className="fr-container">
           <hr />
@@ -199,16 +194,16 @@ const HomePage = async ({
               </Button>
             </div>
           </div>
-          <div className="fr-grid-row fr-grid-row--gutters">
+          <ul className="fr-raw-list fr-grid-row fr-grid-row--gutters">
             {featuredProfiles.map((profile) => (
-              <div
+              <li
                 key={profile.slug}
                 className="fr-col-lg-4 fr-col-md-6 fr-col-12 fr-mt-4w"
               >
                 <FeaturedProfil profile={profile} user={user} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="fr-unhidden fr-hidden-md fr-text--center fr-mt-4w fr-mb-8w">
             <Link
               href="/rechercher/tout/profils"
@@ -220,7 +215,7 @@ const HomePage = async ({
           <div className="fr-mt-6w fr-mt-md-10w fr-background-alt--yellow-tournesol fr-p-3w fr-p-md-6w fr-grid-row fr-border-radius--16">
             <div className="fr-flex fr-direction-column fr-justify-content-space-between">
               <h2>
-                Vous aussi rejoignez
+                Vous aussi rejoignez&nbsp;
                 <br />
                 la communauté&nbsp;!
               </h2>
@@ -234,8 +229,8 @@ const HomePage = async ({
               </Button>
             </div>
             <div className="fr-col-auto fr-border-right fr-border--blue-france fr-mx-md-5w fr-unhidden-md fr-hidden" />
-            <div className="fr-col-md fr-flex fr-direction-column">
-              <p className="fr-flex fr-align-items-center">
+            <ul className="fr-raw-list fr-col-md fr-flex fr-direction-column">
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-earth-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -244,8 +239,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Publiez</span> vos ressources
                   pour les partager avec la communauté
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center">
+              </li>
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-team-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -254,8 +249,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Collaborez</span> avec
                   d'autres créateurs grâce aux bases
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center">
+              </li>
+              <li className="fr-flex fr-align-items-center">
                 <span
                   className="ri-bookmark-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -264,8 +259,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Enregistrez</span> les
                   ressources qui vous intéressent grâce aux collections
                 </span>
-              </p>
-              <p className="fr-flex fr-align-items-center fr-mb-0">
+              </li>
+              <li className="fr-flex fr-align-items-center fr-mb-0">
                 <span
                   className="ri-user-add-fill ri-lg fr-text-label--blue-france fr-mr-3v fr-unhidden-lg fr-hidden"
                   aria-hidden
@@ -274,8 +269,8 @@ const HomePage = async ({
                   <span className="fr-text--bold">Suivez</span> les bases & les
                   profils qui vous intéressent
                 </span>
-              </p>
-            </div>
+              </li>
+            </ul>
             <div className="fr-width-full">
               <Link
                 href="/creer-un-compte"
@@ -290,7 +285,7 @@ const HomePage = async ({
         <HomeInfo />
         <WhoAreWe />
         <Newsletter />
-      </main>
+      </div>
     </>
   )
 }

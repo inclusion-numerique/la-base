@@ -43,30 +43,33 @@ const NewsFeedList = ({
     (!!params.secteur && params.secteur !== 'tout')
   return (
     <>
-      {paginatedResources.map((resource) => (
-        <ResourceCard
-          context="newsFeed"
-          key={resource.slug}
-          isContributor={
-            resourceAuthorization(resource, user).hasRole(
-              ResourceRoles.ResourceContributor,
-            ) ||
-            resourceAuthorization(resource, user).hasRole(
-              ResourceRoles.ResourceCreator,
-            )
-          }
-          resource={resource}
-          user={user}
-          withDate={false}
-          copyLinkUrl={`${baseUrl}/ressources/${resource.slug}`}
-        >
-          <NewsFeedOwnershipInformation
-            resource={resource}
-            newsFeedPageContext={newsFeedPageContext}
-            hasFilter={hasFilter}
-          />
-        </ResourceCard>
-      ))}
+      <ul className="fr-raw-list">
+        {paginatedResources.map((resource) => (
+          <li key={resource.slug}>
+            <ResourceCard
+              context="newsFeed"
+              isContributor={
+                resourceAuthorization(resource, user).hasRole(
+                  ResourceRoles.ResourceContributor,
+                ) ||
+                resourceAuthorization(resource, user).hasRole(
+                  ResourceRoles.ResourceCreator,
+                )
+              }
+              resource={resource}
+              user={user}
+              withDate={false}
+              copyLinkUrl={`${baseUrl}/ressources/${resource.slug}`}
+            >
+              <NewsFeedOwnershipInformation
+                resource={resource}
+                newsFeedPageContext={newsFeedPageContext}
+                hasFilter={hasFilter}
+              />
+            </ResourceCard>
+          </li>
+        ))}
+      </ul>
       {hasMore && (
         <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
           <Button priority="secondary" onClick={loadMore} disabled={isFetching}>

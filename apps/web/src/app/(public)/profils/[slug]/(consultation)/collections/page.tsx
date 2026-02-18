@@ -27,7 +27,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
       collectionsLabel={isOwner ? 'Mes collections' : 'Collections'}
       emptyBox={
         canWrite ? (
-          <EmptyBox title="Vous n’avez pas crée de collections" titleAs="h3">
+          <EmptyBox title="Vous n’avez pas créé de collections">
             Créez une collection directement associée à votre profil et elle
             apparaîtra ici.
             <Link
@@ -39,7 +39,7 @@ const ProfileCollectionsPage = async ({ params }: ProfilRouteParams) => {
             </Link>
           </EmptyBox>
         ) : (
-          <EmptyBox title="Ce profil n’a pas créé de collections" titleAs="h3">
+          <EmptyBox title="Ce profil n’a pas créé de collections" titleAs="h2">
             Revenez plus tard ou suivez ce profil afin d’être tenu informé de
             ses prochaines publications.
           </EmptyBox>

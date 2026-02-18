@@ -57,6 +57,7 @@ const CollectionImageEdition = ({
     <EditableCardForm
       id="apercu"
       title="Aperçu de la collection"
+      titleAs="h2"
       form={form}
       onSave={handleSave}
       preview={

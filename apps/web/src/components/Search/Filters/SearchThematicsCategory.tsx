@@ -46,14 +46,14 @@ const SearchThematicsCategory = ({
               )}
               aria-hidden
             />
-            <span
+            <h2
               className={classNames(
                 CATEGORY_VARIANTS[category].color,
                 'fr-text--xl fr-text--bold fr-text--start fr-mb-0',
               )}
             >
               {category}
-            </span>
+            </h2>
           </div>
         </div>
         {!!onSelectAllInCategory && (

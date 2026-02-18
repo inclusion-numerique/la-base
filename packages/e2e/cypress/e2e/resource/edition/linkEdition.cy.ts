@@ -50,7 +50,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
 
         cy.testId('content-edition_Link-3').within(() => {
           cy.testId('link-preview').should('not.exist')
-          cy.get('h2').should('have.text', "I'm beggin you for mercy")
+          cy.get('h3').should('have.text', "I'm beggin you for mercy")
           cy.get('a').should(
             'have.text',
             'https://www.youtube.com/watch?v=y7ZEVA5dy-Y Ouverture dans un nouvel onglet',
@@ -82,7 +82,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         submitValidContentEdition('Link-2')
 
         cy.testId('content-link').within(() => {
-          cy.get('h2').should('have.text', 'Vous avez vu mon lien2')
+          cy.get('h3').should('have.text', 'Vous avez vu mon lien2')
           cy.testId('link-caption').should('have.text', 'Il est beau hein !4')
           cy.get('a').should(
             'have.text',
@@ -122,7 +122,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('content-edition_Link-3').should('exist')
 
         cy.testId('content-edition_Link-3').within(() => {
-          cy.get('h2').should('have.text', 'Le Git')
+          cy.get('h3').should('have.text', 'Le Git')
           cy.get('img').should('exist')
           cy.get('a').should('have.attr', 'href', 'https://github.com')
         })

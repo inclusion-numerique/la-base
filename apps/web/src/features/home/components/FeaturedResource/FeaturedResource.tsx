@@ -66,11 +66,11 @@ export const FeaturedResource = ({
         <ProfileMetadata profile={createdBy} />
       )}
     </div>
-    <h3 className="fr-text--md fr-mb-1v">
+    <h4 className="fr-text--md fr-mb-1v">
       <Link href={`/ressources/${slug}`} aria-label={title}>
         <CropText limit={79}>{title}</CropText>
       </Link>
-    </h3>
+    </h4>
     {!!published && (
       <span className="fr-text--xs fr-mb-0">
         Publiée&nbsp;le&nbsp;{dateAsDay(new Date(published))}
