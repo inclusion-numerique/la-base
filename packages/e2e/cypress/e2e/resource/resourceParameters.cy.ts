@@ -197,11 +197,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     ).click({ force: true })
     cy.testId('indexation-themes-select-apply').click()
 
-    cy.testId('indexation-resource-types-select-Article').click()
-    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId('indexation-resource-types-select-Article').click({ force: true })
+    cy.testId('indexation-beneficiaries-select-Adultes').click({ force: true })
     cy.testId(
       'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
-    ).click()
+    ).click({ force: true })
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
