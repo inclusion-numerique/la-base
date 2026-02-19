@@ -106,7 +106,7 @@ const ManageCollectionsPage = async ({
       <div className="fr-container">
         <Breadcrumbs parents={parents} currentPage="Gérer mes collections" />
       </div>
-      <main id={contentId} className="fr-pt-1w">
+      <main role="main" id={contentId} className="fr-pt-1w">
         <CollectionOrderEdition
           redirectProps={redirectProps}
           collections={collections}

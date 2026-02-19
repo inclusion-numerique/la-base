@@ -15,6 +15,7 @@ const ContentMetrics = (props: ContentMetricsProps) => {
         <span className="fr-text--medium">
           {numberToString(count)} clic{sPluriel(count)}
         </span>
+        <span className="fr-sr-only"> sur ce lien</span>
       </p>
     )
   }
@@ -31,6 +32,10 @@ const ContentMetrics = (props: ContentMetricsProps) => {
           <span className="fr-text--medium">
             {numberToString(downloadCount)}
           </span>
+          <span className="fr-sr-only">
+            {' '}
+            téléchargement{sPluriel(downloadCount)}
+          </span>
         </span>
       </Tooltip>
       <span className="fr-text--medium">·</span>
@@ -42,6 +47,7 @@ const ContentMetrics = (props: ContentMetricsProps) => {
           <span className="fr-text--medium">
             {numberToString(previewCount)}
           </span>
+          <span className="fr-sr-only"> vue{sPluriel(previewCount)}</span>
         </span>
       </Tooltip>
     </p>

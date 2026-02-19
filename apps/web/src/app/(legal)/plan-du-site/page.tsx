@@ -14,6 +14,7 @@ const PlanDuSitePage = () => (
     <SkipLinksPortal />
     <Breadcrumbs currentPage="Plan du site" />
     <main
+      role="main"
       id={contentId}
       className="fr-container landing-main-container fr-mb-8w"
     >

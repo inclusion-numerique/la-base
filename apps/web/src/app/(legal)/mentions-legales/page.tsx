@@ -14,6 +14,7 @@ const LegalPage = () => (
     <SkipLinksPortal />
     <Breadcrumbs currentPage="Mentions légales" />
     <main
+      role="main"
       id={contentId}
       className="fr-container landing-main-container fr-my-8w"
     >

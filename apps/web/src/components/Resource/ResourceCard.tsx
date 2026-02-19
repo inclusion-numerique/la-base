@@ -52,7 +52,6 @@ const ResourceCard = ({
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
-    tabIndex={0}
   >
     <div
       className={classNames(

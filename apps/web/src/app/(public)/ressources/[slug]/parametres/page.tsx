@@ -70,7 +70,7 @@ const ResourceParametersPage = async ({
           currentChildPage="Paramètres"
         />
       </div>
-      <main id={contentId} className="fr-mt-1w fr-mb-4w">
+      <main role="main" id={contentId} className="fr-mt-1w fr-mb-4w">
         <ResourceParameters resource={resource} user={user} />
       </main>
     </>

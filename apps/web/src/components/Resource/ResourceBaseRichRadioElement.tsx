@@ -40,7 +40,6 @@ const ResourceBaseRichRadioElement = <T extends FieldValues>({
       <label
         className="fr-label"
         htmlFor={id}
-        tabIndex={disabled ? -1 : 0}
         onClick={() => {
           if (disabled) {
             return

@@ -18,7 +18,7 @@ const ChartPage = () => {
   return (
     <>
       <SkipLinksPortal />
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         <div className="fr-background-alt--blue-france">
           <div className="fr-container">
             <Breadcrumbs

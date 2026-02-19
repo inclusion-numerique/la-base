@@ -29,7 +29,7 @@ const AdministrationLayout = async ({ children }: PropsWithChildren) => {
           <div className={styles.sideNavContainer}>
             <AdministrationSideMenu user={user} />
           </div>
-          <main id={contentId} className={styles.pageContainer}>
+          <main role="main" id={contentId} className={styles.pageContainer}>
             {children}
           </main>
         </div>

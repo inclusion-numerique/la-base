@@ -183,12 +183,9 @@ const SearchBar = ({
   }, [])
 
   return (
-    <form onSubmit={onSubmit}>
+    <form role="search" onSubmit={onSubmit}>
       <div className={classNames(styles.container)}>
-        <div
-          className={classNames('fr-search-bar fr-search-bar--lg')}
-          role="search"
-        >
+        <div className={classNames('fr-search-bar fr-search-bar--lg')}>
           <label
             className="fr-label"
             htmlFor={searchInputId}
