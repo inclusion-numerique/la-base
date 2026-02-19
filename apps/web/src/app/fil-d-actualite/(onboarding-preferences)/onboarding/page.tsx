@@ -23,7 +23,7 @@ export default async function NewsFeedParametragePage() {
   return (
     <>
       <SkipLinksPortal />
-      <main id={contentId} className="fr-height-full">
+      <main role="main" id={contentId} className="fr-height-full">
         <div className={styles.container}>
           <div className="fr-container">
             <Breadcrumbs

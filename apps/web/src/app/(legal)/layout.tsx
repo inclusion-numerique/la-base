@@ -16,7 +16,7 @@ const LegalLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      <main id={contentId} style={{ flex: 1 }}>
+      <main role="main" id={contentId} style={{ flex: 1 }}>
         {children}
       </main>
       <PublicFooter />

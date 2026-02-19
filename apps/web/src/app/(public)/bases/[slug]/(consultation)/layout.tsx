@@ -85,7 +85,7 @@ const BaseLayout = async ({
       <>
         <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
         <BaseHeader base={base} canWrite={false} user={user} />
-        <main id={contentId}>
+        <main role="main" id={contentId}>
           <PrivateBox type="Base" />
         </main>
         <BaseJoinRequestFormModal user={user} base={base} />
@@ -98,7 +98,7 @@ const BaseLayout = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseHeader base={base} canWrite={canWrite} user={user} />
-      <main id={contentId} className="fr-overflow-hidden">
+      <main role="main" id={contentId} className="fr-overflow-hidden">
         <BaseMenu base={base} slug={slug} />
         {children}
       </main>

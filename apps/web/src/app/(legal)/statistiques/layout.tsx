@@ -15,7 +15,7 @@ const StatisticsLayout = ({ children }: PropsWithChildren) => (
     <div className="fr-container">
       <Breadcrumbs currentPage="Statistiques" />
     </div>
-    <main id={contentId} className="fr-container fr-pb-20v">
+    <main role="main" id={contentId} className="fr-container fr-pb-20v">
       <h1 className="fr-text-title--blue-france">Statistiques</h1>
       {children}
     </main>

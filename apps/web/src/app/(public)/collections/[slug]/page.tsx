@@ -138,7 +138,7 @@ const CollectionPage = async ({
           <CollectionBreadcrumbs collection={collection} className="fr-my-0" />
         </div>
       </div>
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         {canReadContent ? (
           <CollectionView
             collection={collection}

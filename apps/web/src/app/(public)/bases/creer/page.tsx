@@ -21,7 +21,7 @@ const BaseCreationPage = async () => {
       <div className="fr-container">
         <Breadcrumbs currentPage="Créer une base" />
       </div>
-      <main id={contentId} className="fr-pt-1w">
+      <main role="main" id={contentId} className="fr-pt-1w">
         <CreateBase user={user} />
       </main>
     </>

@@ -1,6 +1,7 @@
 import PublicFooter from '@app/web/app/(public)/PublicFooter'
 import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
+import RouteChangeFocusHandler from '@app/web/components/RouteChangeFocusHandler'
 import { redirectToUpdatedCguPageIfNeeded } from '@app/web/features/cgu/redirectToUpdatedCguPageIfNeeded'
 import { redirectToNewsFeedOnboarding } from '@app/web/features/fil-d-actualite/redirectToNewsFeedOnboarding'
 import { contentId } from '@app/web/utils/skipLinks'
@@ -17,7 +18,8 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
     >
       <div id="skip-links" />
       <Header user={user} />
-      <main id={contentId} style={{ flex: 1 }}>
+      <RouteChangeFocusHandler />
+      <main role="main" id={contentId} style={{ flex: 1 }}>
         {children}
       </main>
       <PublicFooter />

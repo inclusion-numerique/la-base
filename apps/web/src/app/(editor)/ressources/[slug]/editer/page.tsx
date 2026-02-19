@@ -53,7 +53,7 @@ const ResourceEditionPage = async ({
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} currentChildPage="Éditer" />
       </div>
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         <ResourceEdition
           resource={resource}
           draftResource={draftResource}
