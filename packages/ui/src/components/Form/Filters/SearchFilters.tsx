@@ -25,7 +25,7 @@ import {
 } from '@app/web/themes/themes'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FiltersModal } from './FiltersModal'
 
 export type FiltersInitialValue = {
@@ -53,6 +53,11 @@ const SearchFilters = ({
   >(initialValues || [])
 
   const onSelect = (option: SelectOption, category: FilterKey) => {
+    const nextUrl = searchUrl(tab, {
+      ...searchParams,
+      [category]: [...searchParams[category], option.value],
+    })
+
     setSelected([
       ...selected,
       {
@@ -60,15 +65,17 @@ const SearchFilters = ({
         option,
       },
     ])
-    router.push(
-      searchUrl(tab, {
-        ...searchParams,
-        [category]: [...searchParams[category], option.value],
-      }),
-    )
+    router.push(nextUrl)
   }
 
   const onUnselect = (option: SelectOption, category: FilterKey) => {
+    const nextUrl = searchUrl(tab, {
+      ...searchParams,
+      [category]: searchParams[category].filter(
+        (value) => value !== option.value,
+      ),
+    })
+
     setSelected(
       selected.filter(
         (selectedItem) =>
@@ -76,14 +83,7 @@ const SearchFilters = ({
           selectedItem.option.value !== option.value,
       ),
     )
-    router.push(
-      searchUrl(tab, {
-        ...searchParams,
-        [category]: searchParams[category].filter(
-          (value) => value !== option.value,
-        ),
-      }),
-    )
+    router.push(nextUrl)
   }
 
   const onSelectThematics = (options: SelectOption[], category: FilterKey) => {
@@ -131,19 +131,6 @@ const SearchFilters = ({
     router.push(searchUrl(tab, updatedSearchParams as SearchParams))
   }
 
-  const filtersRef = useRef<HTMLDivElement>(null)
-  const previousSelectedLength = useRef(selected.length)
-
-  useEffect(() => {
-    if (selected.length !== previousSelectedLength.current) {
-      previousSelectedLength.current = selected.length
-      const focusable = filtersRef.current?.querySelector<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      )
-      focusable?.focus()
-    }
-  }, [selected])
-
   const selectedThematics = selected.filter(
     (selectedItem) => selectedItem.category === 'themes',
   )
@@ -167,7 +154,7 @@ const SearchFilters = ({
           onSelect={onSelect}
         />
       </div>
-      <div className="fr-unhidden-md fr-hidden" ref={filtersRef}>
+      <div className="fr-unhidden-md fr-hidden">
         <div className={styles.buttons}>
           {tab === 'ressources' && (
             <SearchThematicsFilters

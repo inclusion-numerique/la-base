@@ -45,9 +45,51 @@
   margin: 0 16px;
 }
 
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
 .optionCategory {
   color: var(--blue-france-sun-113-625);
   font-weight: 500;
+}
+
+.optionListItem {
+  position: relative;
+}
+
+.optionListItem::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 0 solid transparent;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.optionInput {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.optionInput:focus + .option,
+.optionInput:focus-visible + .option,
+.optionListItem:focus-within .option {
+  outline: none;
+}
+
+.optionListItem:focus-within::after {
+  border-width: 2px;
+  border-color: var(--focus-color, #0a76f6);
 }
 
 .optionCategory,

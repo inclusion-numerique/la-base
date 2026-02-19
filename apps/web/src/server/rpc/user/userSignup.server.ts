@@ -9,7 +9,9 @@ export const ServerUserSignupValidation = UserSignupValidation.extend({
     .string({ required_error: 'Veuillez renseigner votre email' })
     .trim()
     .toLowerCase()
-    .email('Merci de renseigner un email valide')
+    .email(
+      'Merci de renseigner un email valide. Exemple: support@lesbases.anct.gouv.fr',
+    )
     .refine(async (email) => {
       const existing = await prismaClient.user.findUnique({
         where: { email, signedUpAt: { not: null } },

@@ -5,7 +5,9 @@ export const UserSignupValidation = z.object({
     .string({ required_error: 'Veuillez renseigner votre email' })
     .trim()
     .toLowerCase()
-    .email('Merci de renseigner un email valide'),
+    .email(
+      'Merci de renseigner un email valide. Exemple: support@lesbases.anct.gouv.fr',
+    ),
   firstName: z
     .string({ required_error: 'Veuillez renseigner votre prénom' })
     .trim()

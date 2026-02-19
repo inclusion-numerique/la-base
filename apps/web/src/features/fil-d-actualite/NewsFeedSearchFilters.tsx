@@ -49,7 +49,10 @@ export const NewsFeedSearchFilters = async ({
           'fr-width-full fr-text-mention--black fr-text--start',
           styles.button,
         )}
-        linkProps={{ href: createDefaultUrl() }}
+        linkProps={{
+          href: createDefaultUrl(),
+          'aria-current': !hasActiveFilters ? 'page' : undefined,
+        }}
       >
         <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
           <div

@@ -15,7 +15,9 @@ const SigninFormValidation = z.object({
   email: z
     .string({ required_error: 'Veuillez renseigner votre email' })
     .nonempty('Veuillez renseigner votre email')
-    .email('Merci de renseigner un email valide'),
+    .email(
+      'Merci de renseigner un email valide. Exemple: support@lesbases.anct.gouv.fr',
+    ),
 })
 type SigninFormData = z.infer<typeof SigninFormValidation>
 
@@ -44,6 +46,7 @@ export const EmailSigninForm = ({ callbackUrl }: { callbackUrl: Route }) => {
         path="email"
         label="Email"
         disabled={disabled}
+        autoComplete="email"
       />
       <div className="fr-width-full">
         <Button

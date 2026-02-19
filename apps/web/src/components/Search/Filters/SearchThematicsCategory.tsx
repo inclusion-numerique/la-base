@@ -12,7 +12,8 @@ import {
 } from '@app/web/themes/themes'
 import { Checkbox } from '@codegouvfr/react-dsfr/Checkbox'
 import classNames from 'classnames'
-import React from 'react'
+import React, { useId } from 'react'
+import styles from './SearchThematicsCategory.module.css'
 
 const SearchThematicsCategory = ({
   'data-testid': dataTestId,
@@ -31,6 +32,7 @@ const SearchThematicsCategory = ({
   onSelectAllInCategory?: (category: FilterKey, selected: boolean) => void
   disabled?: boolean
 }) => {
+  const groupId = useId()
   const handleOnClick = (opt: SelectOption) => onSelect(opt, 'themes')
 
   return (
@@ -84,37 +86,65 @@ const SearchThematicsCategory = ({
           />
         )}
       </div>
-      <div className="fr-flex fr-flex-wrap fr-flex-gap-2v">
-        {options.map((opt) => {
-          const isSelected = selected.some((s) => s.option.value === opt.value)
-          const iconId = isSelected ? 'fr-icon-check-line' : 'fr-icon-add-line'
-          const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
-          const className = classNames(
-            'thematic-badge-base',
-            CATEGORY_VARIANTS_TAG[category].default,
-            CATEGORY_VARIANTS_TAG[category].hover,
-            isSelected && CATEGORY_VARIANTS_TAG[category].border,
-          )
-          const textClassName = 'fr-text-label--grey'
-          const iconClassName = 'fr-text-title--blue-france'
+      <fieldset className={styles.fieldset}>
+        <legend className="fr-sr-only">{`Filtres de la thématique ${category}`}</legend>
+        <div className="fr-flex fr-flex-wrap fr-flex-gap-2v">
+          {options.map((opt) => {
+            const isSelected = selected.some(
+              (s) => s.option.value === opt.value,
+            )
+            const iconId = isSelected
+              ? 'fr-icon-check-line'
+              : 'fr-icon-add-line'
+            const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
+            const className = classNames(
+              'thematic-badge-base',
+              CATEGORY_VARIANTS_TAG[category].default,
+              CATEGORY_VARIANTS_TAG[category].hover,
+              isSelected && CATEGORY_VARIANTS_TAG[category].border,
+            )
+            const textClassName = 'fr-text-label--grey'
+            const iconClassName = 'fr-text-title--blue-france'
+            const optionId = `search-thematics-${groupId}-${opt.value}`
 
-          return (
-            <ThematicOptionBadge
-              key={opt.value}
-              data-testid={`${dataTestId}-${opt.value}`}
-              disabled={disabled}
-              iconId={iconId}
-              option={opt}
-              ariaLabelPrefix={ariaLabelPrefix}
-              onClick={() => handleOnClick(opt)}
-              size="md"
-              className={className}
-              iconClassName={iconClassName}
-              textClassName={textClassName}
-            />
-          )
-        })}
-      </div>
+            return (
+              <div key={opt.value} className={styles.optionItem}>
+                <input
+                  checked={isSelected}
+                  className={styles.optionInput}
+                  data-testid={`${dataTestId}-${opt.value}`}
+                  disabled={disabled || opt.disabled}
+                  id={optionId}
+                  type="checkbox"
+                  onChange={() => handleOnClick(opt)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      event.preventDefault()
+                      handleOnClick(opt)
+                    }
+                  }}
+                />
+                <label
+                  className={styles.optionLabel}
+                  htmlFor={optionId}
+                  aria-label={`${ariaLabelPrefix} ${opt.label}`}
+                >
+                  <ThematicOptionBadge
+                    as="span"
+                    disabled={disabled}
+                    iconId={iconId}
+                    option={opt}
+                    size="md"
+                    className={className}
+                    iconClassName={iconClassName}
+                    textClassName={textClassName}
+                  />
+                </label>
+              </div>
+            )
+          })}
+        </div>
+      </fieldset>
     </div>
   )
 }

@@ -22,10 +22,10 @@ const ResourceDesktopNavigation = ({
     />
     {!!navigationData && (
       <>
-        <hr className="fr-separator-6v fr-mb-2v" />
+        <hr className="fr-separator-6v fr-mb-0" />
         <NavigationSideMenu
           classes={{
-            root: 'fr-p-0 fr-pt-4v',
+            root: 'fr-p-0 fr-pt-3w',
             inner: styles.menuInner,
             item: styles.menuItem,
             link: styles.menuLink,

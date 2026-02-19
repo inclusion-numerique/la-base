@@ -1,0 +1,48 @@
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.optionInput {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.optionLabel {
+  cursor: pointer;
+}
+
+.optionInput:focus + .optionLabel > span,
+.optionInput:focus-visible + .optionLabel > span,
+.optionItem:focus-within .optionLabel > span {
+  outline: none;
+}
+
+.optionItem {
+  position: relative;
+}
+
+.optionItem::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 0 solid transparent;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.optionItem:focus-within::after {
+  border-width: 2px;
+  border-color: var(--focus-color, #0a76f6);
+}

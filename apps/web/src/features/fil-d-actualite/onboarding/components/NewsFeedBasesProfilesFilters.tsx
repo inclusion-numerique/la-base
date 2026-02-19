@@ -79,7 +79,10 @@ export const NewsFeedBasesProfilesFilters = ({
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: createFollowsUrl() }}
+          linkProps={{
+            href: createFollowsUrl(),
+            'aria-current': params === 'tout' ? 'page' : undefined,
+          }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mes bases et profils suivis
@@ -97,7 +100,10 @@ export const NewsFeedBasesProfilesFilters = ({
                   'fr-width-full fr-text-mention--grey',
                   styles.button,
                 )}
-                linkProps={{ href: createBaseUrl(base.slug) }}
+                linkProps={{
+                  href: createBaseUrl(base.slug),
+                  'aria-current': params === base.slug ? 'page' : undefined,
+                }}
               >
                 <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                   <div
@@ -136,7 +142,10 @@ export const NewsFeedBasesProfilesFilters = ({
                   'fr-width-full fr-text-mention--grey',
                   styles.button,
                 )}
-                linkProps={{ href: createProfileUrl(profile.slug) }}
+                linkProps={{
+                  href: createProfileUrl(profile.slug),
+                  'aria-current': params === profile.slug ? 'page' : undefined,
+                }}
               >
                 <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                   <div

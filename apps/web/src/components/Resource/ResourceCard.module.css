@@ -1,4 +1,6 @@
 .container {
+  display: flex;
+  flex-direction: column;
   padding-top: 16px;
   padding-bottom: 32px;
 
@@ -53,11 +55,16 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  order: 1;
 
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
   }
+}
+
+.body {
+  order: 2;
 }
 
 .separator {

@@ -1,7 +1,7 @@
 import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import { type FocusEvent, type RefObject, useRef, useState } from 'react'
+import { type RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FilterCategory } from './FilterCategory'
 import type { Category, FilterKey } from './filter'
@@ -24,18 +24,8 @@ const SearchFilter = ({
     setOpen(false),
   )
 
-  const handleBlur = (e: FocusEvent<HTMLDivElement>) => {
-    if (!optionsRef.current?.contains(e.relatedTarget as Node)) {
-      setOpen(false)
-    }
-  }
-
   return (
-    <div
-      className={styles.filterContainer}
-      ref={optionsRef}
-      onBlur={handleBlur}
-    >
+    <div className={styles.filterContainer} ref={optionsRef}>
       <Button
         className={classNames(styles.button, open && styles.buttonOpen)}
         priority="tertiary"

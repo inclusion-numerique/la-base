@@ -44,6 +44,7 @@
   width: 100%;
 
   &:hover,
+  &:focus-within,
   &.open {
     .border {
       background-image: linear-gradient(
