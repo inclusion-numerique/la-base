@@ -20,6 +20,7 @@ type UserToProcess = {
   firstName: string | null
   name: string | null
   lastLogin: Date | null
+  lastSeen: Date | null
   signedUpAt: Date | null
   created: Date
   accountInactivity: AccountInactivity | null
@@ -40,7 +41,7 @@ const processUser = async (
     loginUrl365: string
   },
 ): Promise<ProcessResult> => {
-  const lastActiveAt = user.lastLogin
+  const lastActiveAt = user.lastSeen ?? user.lastLogin
 
   if (!lastActiveAt) return { type: 'skipped' }
   const inactiveDays = daysSince(lastActiveAt, now)
@@ -135,6 +136,7 @@ export const executeAccountInactivityJob = async () => {
       firstName: true,
       name: true,
       lastLogin: true,
+      lastSeen: true,
       signedUpAt: true,
       created: true,
       accountInactivity: true,
