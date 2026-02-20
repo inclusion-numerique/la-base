@@ -52,26 +52,13 @@ const ResourceCard = ({
   <article
     className={classNames(styles.container, className)}
     data-testid="resource-card"
-    tabIndex={0}
   >
-    <div className={styles.header}>
-      {!children && context === 'list' && (
-        <OwnershipInformation
-          user={resource.createdBy}
-          base={resource.base}
-          attributionWording={
-            isDraft ? 'draft-resource' : getResourceAttributionWording(resource)
-          }
-        />
+    <div
+      className={classNames(
+        'fr-flex fr-direction-column fr-justify-content-space-between',
+        styles.body,
       )}
-      {children}
-      {withDate && (
-        <div className="fr-hidden fr-unhidden-md" aria-hidden="true">
-          <ResourceDates canEdit={isContributor} resource={resource} />
-        </div>
-      )}
-    </div>
-    <div className="fr-flex fr-direction-column fr-justify-content-space-between">
+    >
       <Link
         href={appendShareToken(`/ressources/${resource.slug}`, shareToken)}
         className={classNames(
@@ -83,12 +70,7 @@ const ResourceCard = ({
       >
         <div className={styles.textAndDescription}>
           {withDate && (
-            <div
-              className={classNames(
-                styles.dates,
-                'fr-hidden-md fr-text--xs fr-mb-1w',
-              )}
-            >
+            <div className={classNames(styles.dates, 'fr-hidden-md fr-mb-1w')}>
               <ResourceDates canEdit={isContributor} resource={resource} />
             </div>
           )}
@@ -143,6 +125,7 @@ const ResourceCard = ({
                 styles.metadataContainer,
             )}
             context="card"
+            showLabels
             resource={resource}
           >
             {resource._count.resourceFeedback > 0 && (
@@ -217,6 +200,23 @@ const ResourceCard = ({
           )}
         </div>
       </div>
+    </div>
+    <div className={styles.header}>
+      {!children && context === 'list' && (
+        <OwnershipInformation
+          user={resource.createdBy}
+          base={resource.base}
+          attributionWording={
+            isDraft ? 'draft-resource' : getResourceAttributionWording(resource)
+          }
+        />
+      )}
+      {children}
+      {withDate && (
+        <div className="fr-hidden fr-unhidden-md">
+          <ResourceDates canEdit={isContributor} resource={resource} />
+        </div>
+      )}
     </div>
   </article>
 )

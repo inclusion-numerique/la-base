@@ -134,6 +134,7 @@ const CreateCollection = ({
           <Card
             noBorder
             title="Visibilité de la collection"
+            titleClassName="fr-text-label--blue-france"
             titleAs="h2"
             className="fr-mt-3w fr-border-radius--8 fr-border"
             id="visibilite"
@@ -175,6 +176,7 @@ const CreateCollection = ({
                 path="isPublic"
                 control={control}
                 disabled={isLoading || (base != null && !base.isPublic)}
+                label="Visibilité de la collection"
                 publicTitle="Collection publique"
                 privateTitle="Collection privée"
                 publicHint="Visible par tous les visiteurs."

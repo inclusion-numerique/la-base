@@ -7,6 +7,10 @@ export const publicFooterProps = {
   accessibilityLinkProps: { href: '/accessibilite' },
   bottomItems: [
     {
+      text: 'Plan du site',
+      linkProps: { href: '/plan-du-site' },
+    },
+    {
       text: 'Mentions légales',
       linkProps: { href: '/mentions-legales' },
     },

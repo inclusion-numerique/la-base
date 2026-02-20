@@ -15,9 +15,10 @@ export const RichTextLinkModal = createModal({
 })
 
 const RichTextLinkValidation = z.object({
-  url: z
-    .string({ required_error: 'Veuillez renseigner le lien' })
-    .url({ message: 'Veuillez renseigner un lien valide' }),
+  url: z.string({ required_error: 'Veuillez renseigner le lien' }).url({
+    message:
+      'Veuillez renseigner un lien valide. Exemple: https://lesbases.anct.gouv.fr/',
+  }),
 })
 export type RichTextLink = z.infer<typeof RichTextLinkValidation>
 
@@ -103,7 +104,7 @@ const RichTextLinkModalForm = ({
         <InputFormField
           control={control}
           path="url"
-          label="Copier le lien ici"
+          label="Adresse du lien - Format attendu : L'adresse du lien doit commencer par https://"
           placeholder="https://"
           disabled={disabled}
         />

@@ -110,19 +110,23 @@ const EmailSignupForm = ({
           control={form.control}
           path="email"
           label="Email"
+          hint="Format attendu : support@lesbases.anct.gouv.fr"
           disabled={isLoading}
+          autoComplete="email"
         />
         <InputFormField
           control={form.control}
           path="firstName"
           label="Prénom"
           disabled={isLoading}
+          autoComplete="given-name"
         />
         <InputFormField
           control={form.control}
           path="lastName"
           label="Nom"
           disabled={isLoading}
+          autoComplete="family-name"
         />
         <div className="fr-my-6v">
           <CaptchaWidget

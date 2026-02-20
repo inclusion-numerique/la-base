@@ -49,7 +49,7 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
           ]}
           currentPage="Modifier"
         />
-        <main id={contentId} className="fr-mt-6w fr-mb-4w">
+        <main role="main" id={contentId} className="fr-mt-6w fr-mb-4w">
           <ProfilEdition profile={profile} resources={resources} />
         </main>
       </div>

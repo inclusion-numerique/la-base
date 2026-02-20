@@ -56,7 +56,10 @@ export const NewsFeedThematicsFilters = ({
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: createThemeUrl('tout') }}
+          linkProps={{
+            href: createThemeUrl('tout'),
+            'aria-current': params === 'tout' ? 'page' : undefined,
+          }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mes thématiques suivies
@@ -74,7 +77,10 @@ export const NewsFeedThematicsFilters = ({
                   'fr-width-full fr-text-mention--grey',
                   styles.button,
                 )}
-                linkProps={{ href: createThemeUrl(theme) }}
+                linkProps={{
+                  href: createThemeUrl(theme),
+                  'aria-current': params === theme ? 'page' : undefined,
+                }}
               >
                 <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                   <div

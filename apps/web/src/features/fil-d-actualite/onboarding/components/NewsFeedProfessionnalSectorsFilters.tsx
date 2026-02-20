@@ -51,7 +51,10 @@ export const NewsFeedProfessionnalSectorsFilters = ({
             'fr-text-mention--black fr-text--start fr-width-full',
             commonStyles.linkButton,
           )}
-          linkProps={{ href: createSectorUrl('tout') }}
+          linkProps={{
+            href: createSectorUrl('tout'),
+            'aria-current': params === 'tout' ? 'page' : undefined,
+          }}
         >
           <span className="fr-text--uppercase fr-text--xs fr-pl-3v">
             Mon secteur professionnel
@@ -69,7 +72,10 @@ export const NewsFeedProfessionnalSectorsFilters = ({
                   'fr-width-full fr-text-mention--grey',
                   styles.button,
                 )}
-                linkProps={{ href: createSectorUrl(ps) }}
+                linkProps={{
+                  href: createSectorUrl(ps),
+                  'aria-current': params === ps ? 'page' : undefined,
+                }}
               >
                 <div className="fr-width-full fr-flex fr-align-items-center fr-justify-content-space-between">
                   <div

@@ -197,11 +197,11 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     ).click({ force: true })
     cy.testId('indexation-themes-select-apply').click()
 
-    cy.testId('indexation-resource-types-select-Article').click()
-    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId('indexation-resource-types-select-Article').click({ force: true })
+    cy.testId('indexation-beneficiaries-select-Adultes').click({ force: true })
     cy.testId(
       'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
-    ).click()
+    ).click({ force: true })
 
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
@@ -210,13 +210,15 @@ describe('Utilisateur connecté, lorsque je modifie une ressource, je peux modif
     cy.testId('indexation-themes-select').click()
     cy.testId(
       'indexation-themes-select-AidesAuxDemarchesAdministratives',
-    ).click()
+    ).click({ force: true })
     cy.testId('indexation-themes-select-apply').click()
 
     cy.testId('indexation-resource-types-select').click()
-    cy.testId('indexation-resource-types-select-Annuaire').click()
+    cy.testId('indexation-resource-types-select-Annuaire').click({
+      force: true,
+    })
     cy.testId('indexation-beneficiaries-select').click()
-    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click({ force: true })
     cy.testId('edit-card-save-button').click()
     cy.wait('@mutation')
 

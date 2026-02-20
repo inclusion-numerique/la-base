@@ -9,6 +9,8 @@
 
 .focused {
   background-color: var(--grey-975-100);
+  outline: 2px solid var(--background-action-high-blue-france);
+  outline-offset: -2px;
 }
 
 .disabled {

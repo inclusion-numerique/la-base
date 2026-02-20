@@ -49,7 +49,7 @@ const ResourcePublicationPage = async ({
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} currentChildPage="Publier" />
       </div>
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         <Edition
           publishMode
           resource={resource}

@@ -65,7 +65,7 @@ const BaseEditionPage = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseEditionHeader base={base} />
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         <BaseEdition
           base={base}
           canDelete={hasPermission(BasePermissions.DeleteBase)}

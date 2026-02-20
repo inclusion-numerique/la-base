@@ -30,6 +30,7 @@ type CommonProps<T extends FieldValues> = {
   inputPre?: ReactNode
   inputPost?: ReactNode
   labelSrOnly?: boolean
+  maxCharactersInfo?: ReactNode
 }
 
 type InputProps = {
@@ -37,6 +38,7 @@ type InputProps = {
   min?: number | string
   max?: number | string
   step?: number | string
+  autoComplete?: string
 }
 
 type TextareaProps = {
@@ -67,6 +69,7 @@ const InputFormField = <T extends FieldValues = FieldValues>({
   inputPost,
   inputPre,
   labelSrOnly = false,
+  maxCharactersInfo,
   ...rest
 }: UiComponentProps & InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`
@@ -79,12 +82,19 @@ const InputFormField = <T extends FieldValues = FieldValues>({
         field: { onChange, onBlur, value, ref },
         fieldState: { invalid, isTouched, error },
       }) => {
-        let ariaDescribedBy: string | undefined
-        if (error) {
-          ariaDescribedBy = `${id}__error`
-        } else if (valid && isTouched && !invalid) {
-          ariaDescribedBy = `${id}__valid`
+        const ariaDescribedByParts: string[] = []
+        if (info) {
+          ariaDescribedByParts.push(`${id}__info`)
         }
+        if (error) {
+          ariaDescribedByParts.push(`${id}__error`)
+        } else if (valid && isTouched && !invalid) {
+          ariaDescribedByParts.push(`${id}__valid`)
+        }
+        const ariaDescribedBy =
+          ariaDescribedByParts.length > 0
+            ? ariaDescribedByParts.join(' ')
+            : undefined
 
         const inputOnChange: ChangeEventHandler<HTMLInputElement> =
           type === 'number'
@@ -129,6 +139,7 @@ const InputFormField = <T extends FieldValues = FieldValues>({
               min={rest.min}
               max={rest.max}
               step={rest.step}
+              autoComplete={rest.autoComplete}
             />
           )
 
@@ -153,6 +164,7 @@ const InputFormField = <T extends FieldValues = FieldValues>({
               htmlFor={id}
             >
               {label} {asterisk && <RedAsterisk />}
+              {maxCharactersInfo}
               {hint && <span className="fr-hint-text">{hint}</span>}
             </label>
             <div

@@ -135,16 +135,21 @@ const SearchThematicsFilters = ({
         ]}
       >
         <div className="fr-flex fr-direction-column fr-flex-gap-12v">
-          {Object.entries(categoryThemesOptions).map(([key, value]) => (
-            <SearchThematicsCategory
-              key={key}
-              onSelect={handleOnSelect}
-              selected={internalSelected}
-              category={key as Category}
-              options={value}
-              onSelectAllInCategory={onSelectAllInCategory}
-            />
-          ))}
+          <fieldset className={styles.fieldset}>
+            <legend className="fr-sr-only">Filtres par thématiques</legend>
+            <div className="fr-flex fr-direction-column fr-flex-gap-12v">
+              {Object.entries(categoryThemesOptions).map(([key, value]) => (
+                <SearchThematicsCategory
+                  key={key}
+                  onSelect={handleOnSelect}
+                  selected={internalSelected}
+                  category={key as Category}
+                  options={value}
+                  onSelectAllInCategory={onSelectAllInCategory}
+                />
+              ))}
+            </div>
+          </fieldset>
         </div>
       </modal.Component>
     </>

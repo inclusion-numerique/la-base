@@ -14,7 +14,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.visit('/creer-un-compte')
 
     cy.log('Signup form fill and submit')
-    cy.findByLabelText('Email').type(email)
+    cy.findByLabelText('Email', { exact: false }).type(email)
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName).type('{enter}')
 
@@ -28,7 +28,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.visit('/creer-un-compte')
 
     cy.log('Signup form fill and submit')
-    cy.findByLabelText('Email').type(email)
+    cy.findByLabelText('Email', { exact: false }).type(email)
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName)
     cy.get('#input-form-field__policyAccepted').check({ force: true })
@@ -63,7 +63,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.visit('/creer-un-compte')
 
     cy.log('Signup form fill and submit')
-    cy.findByLabelText('Email').type(email)
+    cy.findByLabelText('Email', { exact: false }).type(email)
     cy.findByLabelText('Prénom').type(firstName)
     cy.findByLabelText('Nom').type(lastName)
     cy.get('#input-form-field__policyAccepted').check({ force: true })

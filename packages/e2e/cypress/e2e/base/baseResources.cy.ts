@@ -131,16 +131,18 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.dsfrModalsShouldBeBound()
     cy.testId('visibility-radio-resource-public').click({ force: true })
     cy.testId('indexation-themes-select').click()
-    cy.testId('indexation-themes-select-IntelligenceArtificielle').click()
+    cy.testId('indexation-themes-select-IntelligenceArtificielle').click({
+      force: true,
+    })
     cy.testId('indexation-themes-select-apply').click()
     cy.testId('indexation-resource-types-select').click()
-    cy.testId('indexation-resource-types-select-Article').click()
+    cy.testId('indexation-resource-types-select-Article').click({ force: true })
     cy.testId('indexation-beneficiaries-select').click()
-    cy.testId('indexation-beneficiaries-select-Adultes').click()
+    cy.testId('indexation-beneficiaries-select-Adultes').click({ force: true })
     cy.testId('indexation-professional-sectors-select').click()
     cy.testId(
       'indexation-professional-sectors-select-AidantsEtMediateursNumeriques',
-    ).click()
+    ).click({ force: true })
     cy.intercept('/api/trpc/resource.mutate?*').as('mutation')
     cy.testId('publish-resource-button').click()
     cy.wait('@mutation')

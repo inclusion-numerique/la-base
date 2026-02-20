@@ -8,7 +8,7 @@ const PublicLayout = async ({ children }: PropsWithChildren) => {
       style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}
     >
       <div id="skip-links" />
-      <main id={contentId} style={{ flex: 1 }}>
+      <main role="main" id={contentId} style={{ flex: 1 }}>
         {children}
       </main>
       <MinimalFooter />

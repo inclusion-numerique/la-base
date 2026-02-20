@@ -68,7 +68,7 @@ const ManageCollectionResourcesPage = async (props: {
           <CollectionBreadcrumbs collection={collection} className="fr-my-0" />
         </div>
       </div>
-      <main id={contentId}>
+      <main role="main" id={contentId}>
         <CollectionResourcesOrderEdition
           collection={collection}
           isOwner={isOwner}

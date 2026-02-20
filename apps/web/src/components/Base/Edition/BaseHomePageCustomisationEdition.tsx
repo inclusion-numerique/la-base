@@ -90,6 +90,7 @@ const BaseHomePageCustomisationEdition = ({
         <ToggleFormField
           control={form.control}
           path="highlightCollections"
+          label="Collections à la une"
           className="fr-my-0"
           classes={{ fieldsetElement: 'fr-mb-0' }}
         />

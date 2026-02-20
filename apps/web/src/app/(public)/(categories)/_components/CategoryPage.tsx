@@ -90,7 +90,7 @@ const CategoryPage = async ({
               tri={urlPaginationParams.tri as Sorting}
             />
           </div>
-          <main id={contentId}>
+          <main role="main" id={contentId}>
             <SearchResults
               paginationParams={paginationParams}
               count={resourcesCount}

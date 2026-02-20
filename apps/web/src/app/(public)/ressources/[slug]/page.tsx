@@ -159,7 +159,7 @@ const RessourcePage = async ({
       <SkipLinksPortal />
       <div className="fr-container">
         <ResourceBreadcrumbs resource={resource} />
-        <main id={contentId}>
+        <main role="main" id={contentId}>
           {canReadContent ? (
             <ResourceView
               user={user}

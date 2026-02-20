@@ -1,7 +1,7 @@
 /* Override dsfr styles for minimalist menu */
 
 .menuInner {
-  padding: 0 !important;
+  padding-top: 4px !important;
   box-shadow: none;
 }
 

@@ -15,6 +15,7 @@ const AccessibilityStatementPage = () => (
     <Breadcrumbs currentPage="Accessibilité" />
 
     <main
+      role="main"
       id={contentId}
       className="fr-container landing-main-container fr-my-8w"
     >
