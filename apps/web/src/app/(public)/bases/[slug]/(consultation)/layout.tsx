@@ -12,7 +12,7 @@ import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLink
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
 import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { type PropsWithChildren } from 'react'
@@ -85,9 +85,7 @@ const BaseLayout = async ({
       <>
         <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
         <BaseHeader base={base} canWrite={false} user={user} />
-        <main role="main" id={contentId}>
-          <PrivateBox type="Base" />
-        </main>
+        <PrivateBox type="Base" />
         <BaseJoinRequestFormModal user={user} base={base} />
         <ShareLinkModal />
       </>
@@ -98,10 +96,10 @@ const BaseLayout = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseHeader base={base} canWrite={canWrite} user={user} />
-      <main role="main" id={contentId} className="fr-overflow-hidden">
+      <div className="fr-overflow-hidden">
         <BaseMenu base={base} slug={slug} />
         {children}
-      </main>
+      </div>
       <BaseJoinRequestFormModal user={user} base={base} />
       <ShareLinkModal />
     </>

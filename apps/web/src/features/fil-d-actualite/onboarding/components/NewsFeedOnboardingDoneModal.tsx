@@ -33,7 +33,7 @@ export const NewsFeedOnboardingDone = ({
   }
   return (
     <NewsFeedOnboardingDoneModal.Component
-      title=""
+      title="Votre fil d'actualité est prêt !"
       className={styles.modalContainer}
     >
       <div className="fr-flex fr-direction-column fr-justify-content-center fr-align-items-center fr-flex-gap-12v">
@@ -44,9 +44,12 @@ export const NewsFeedOnboardingDone = ({
             iconClassName={styles.icon}
             background={styles.iconContainer}
           />
-          <h1 className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0">
+          <p
+            className="fr-h3 fr-text-title--blue-france fr-text--center fr-mb-0"
+            aria-hidden="true"
+          >
             Votre fil d'actualité est prêt !
-          </h1>
+          </p>
           <p
             className={classNames(
               styles.description,
