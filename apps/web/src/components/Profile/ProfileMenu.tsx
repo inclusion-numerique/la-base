@@ -22,12 +22,10 @@ const MenuItem = ({
   href,
   currentTab,
   children,
-  ariaLabel,
 }: PropsWithChildren<{
   tab: ProfileTab
   href: string
   currentTab: ProfileTab
-  ariaLabel?: string
 }>) => (
   <li className="fr-nav__item">
     <Link
@@ -35,7 +33,6 @@ const MenuItem = ({
       href={href}
       aria-current={currentTab === tab ? 'page' : undefined}
       data-testid={`${tab}-menu-button`}
-      aria-label={ariaLabel}
     >
       {children}
     </Link>
@@ -67,7 +64,6 @@ const ProfileMenu = ({
               tab="ressources"
               currentTab={currentTab}
               href={`/profils/${profile.slug}`}
-              ariaLabel={isOwner ? 'Mes ressources' : 'Ressources du profil'}
             >
               <span>{isOwner ? 'Mes ressources' : 'Ressources'} · </span>
               <b>{resourcesCount}</b>
@@ -80,7 +76,6 @@ const ProfileMenu = ({
               tab="collections"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/collections`}
-              ariaLabel={isOwner ? 'Mes collections' : 'Collections du profil'}
             >
               {isOwner ? 'Mes collections' : 'Collections'} ·{' '}
               <b>{collectionsCount}</b>
@@ -93,7 +88,6 @@ const ProfileMenu = ({
               tab="bases"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/bases`}
-              ariaLabel={isOwner ? 'Mes bases' : 'Bases du profil'}
             >
               {isOwner ? 'Mes bases' : 'Bases'} · <b>{basesCount}</b>
               <span className="fr-sr-only"> base{sPluriel(basesCount)}</span>
@@ -102,7 +96,6 @@ const ProfileMenu = ({
               tab="a-propos"
               currentTab={currentTab}
               href={`/profils/${profile.slug}/a-propos`}
-              ariaLabel="À propos, informations du profil"
             >
               À propos
             </MenuItem>

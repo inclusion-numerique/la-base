@@ -131,7 +131,7 @@ const Header = ({
                     <Button
                       linkProps={{
                         href: searchUrl('ressources', defaultSearchParams),
-                        'aria-label': 'Accès à la recherche de ressources',
+                        'aria-label': 'Rechercher une ressource',
                         'aria-current': 'page',
                       }}
                     >
@@ -173,7 +173,6 @@ const Header = ({
                       data-testid="help-center-link"
                       className="fr-btn fr-btn--no-after"
                       href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
-                      aria-label="Aide - nouvelle fenêtre"
                     >
                       <span
                         className="fr-hidden-lg ri-question-line fr-mr-1w fr-text-label--blue-france"

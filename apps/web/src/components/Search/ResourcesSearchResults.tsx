@@ -28,9 +28,9 @@ const ResourcesSearchResults = ({
 }) => (
   <>
     <div className={styles.header}>
-      <h1 className="fr-text--lg fr-mb-0" role="status" aria-atomic="true">
+      <p className="fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
-      </h1>
+      </p>
       {children}
     </div>
     {resources.length > 0 ? (
