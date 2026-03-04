@@ -6,6 +6,7 @@ import AdministrationMailtoLink from '@app/web/app/administration/Administration
 import AdministrationPageContainer from '@app/web/app/administration/AdministrationPageContainer'
 import AdministrationTitle from '@app/web/app/administration/AdministrationTitle'
 import DeleteUserButton from '@app/web/app/administration/utilisateurs/[id]/DeleteUserButton'
+import DisconnectUserButton from '@app/web/app/administration/utilisateurs/[id]/DisconnectUserButton'
 import { getUserDetailsPageContext } from '@app/web/app/administration/utilisateurs/[id]/getUserDetailsPageContext'
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
@@ -44,6 +45,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     created,
     uploads,
     lastLogin,
+    lastSeen,
     slug,
     isPublic,
     description,
@@ -79,6 +81,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             >
               Modifier le profil
             </Button>
+            <DisconnectUserButton userId={id} />
             <DeleteUserButton userId={id} bases={bases} />
           </div>
         }
@@ -136,8 +139,14 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
               value: dateAsDay(created),
             },
             {
-              label: 'Dernière connexion',
+              label: 'Dernière connexion ProConnect / Email',
               value: lastLogin ? dateAsDayAndTime(lastLogin) : 'Jamais',
+            },
+            {
+              label: 'Dernière activité',
+              value: lastSeen
+                ? dateAsDayAndTime(lastSeen)
+                : 'Pas encore de données',
             },
             {
               label: 'Description',
