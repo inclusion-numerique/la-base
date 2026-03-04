@@ -38,9 +38,10 @@ const ToastContent = ({
   useEffect(() => {
     previousFocusRef.current = document.activeElement
 
-    const closeButton = containerRef.current?.querySelector<HTMLButtonElement>(
-      '[data-toast-close]',
-    )
+    const closeButton =
+      containerRef.current?.querySelector<HTMLButtonElement>(
+        '[data-toast-close]',
+      )
     closeButton?.focus()
 
     return () => {
@@ -75,11 +76,9 @@ const ToastContent = ({
         event.preventDefault()
         lastElement.focus()
       }
-    } else {
-      if (document.activeElement === lastElement) {
-        event.preventDefault()
-        firstElement.focus()
-      }
+    } else if (document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement.focus()
     }
   }
 
