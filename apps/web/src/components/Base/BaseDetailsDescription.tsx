@@ -1,7 +1,7 @@
 'use client'
 
 import Button from '@codegouvfr/react-dsfr/Button'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './BaseDetailsDescription.module.css'
 
 export const BaseDetailsDescription = ({
@@ -20,6 +20,15 @@ export const BaseDetailsDescription = ({
     }
   }, [description])
 
+  const onToggle = useCallback(() => {
+    const next = !showFullDescription
+    setShowFullDescription(next)
+    if (next && descriptionRef.current) {
+      // Use setTimeout to focus after the content is revealed
+      setTimeout(() => descriptionRef.current?.focus(), 0)
+    }
+  }, [showFullDescription])
+
   if (!description) {
     return (
       <div>
@@ -33,6 +42,9 @@ export const BaseDetailsDescription = ({
       <div
         ref={descriptionRef}
         className={showFullDescription ? '' : styles.truncatedDescription}
+        role="region"
+        aria-label="Description de la base"
+        tabIndex={-1}
         dangerouslySetInnerHTML={{
           __html: description,
         }}
@@ -41,11 +53,8 @@ export const BaseDetailsDescription = ({
         <Button
           priority="tertiary no outline"
           type="button"
-          onClick={() => setShowFullDescription(!showFullDescription)}
+          onClick={onToggle}
           aria-expanded={showFullDescription}
-          nativeButtonProps={{
-            tabIndex: -1,
-          }}
         >
           {showFullDescription ? 'Lire moins' : 'Lire la suite'}
         </Button>

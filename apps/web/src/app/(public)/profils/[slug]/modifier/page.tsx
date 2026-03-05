@@ -7,7 +7,6 @@ import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
-import { contentId } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
@@ -49,9 +48,9 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
           ]}
           currentPage="Modifier"
         />
-        <main role="main" id={contentId} className="fr-mt-6w fr-mb-4w">
+        <div className="fr-mt-6w fr-mb-4w">
           <ProfilEdition profile={profile} resources={resources} />
-        </main>
+        </div>
       </div>
     </>
   )

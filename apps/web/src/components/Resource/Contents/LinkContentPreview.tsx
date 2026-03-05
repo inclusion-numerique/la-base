@@ -75,6 +75,7 @@ const LinkContentPreview = ({
           <img
             src={externalImageLoader({ src: imageUrl, width: 200 })}
             className={styles.image}
+            alt=""
           />
         </picture>
       </div>

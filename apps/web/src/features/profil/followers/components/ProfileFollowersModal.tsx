@@ -38,12 +38,18 @@ const ProfileFollowersModal = ({
           styles.feedbackLink,
         )}
         onClick={open}
+        onKeyDown={(e) => {
+          if (e.key === ' ') {
+            e.preventDefault()
+            open()
+          }
+        }}
         role="button"
       >
         <p className="fr-text--sm fr-mb-0">
           <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
           <b>{numberToString(counts.total)}</b>
-          <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
+          <span>{`\u00a0Suivi${sPluriel(counts.total)}`}</span>
         </p>
       </Link>
 

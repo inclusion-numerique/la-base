@@ -36,7 +36,7 @@ const ResourceDates = ({
       ) : null
 
     const dateContent = (
-      <span className="fr-mb-0 fr-text--xs">
+      <p className="fr-mb-0 fr-text--xs">
         {onlyUpdatedDate && lastPublishedDay !== publishedDay ? (
           <>Mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastPublishedDay}</>
         ) : (
@@ -50,7 +50,7 @@ const ResourceDates = ({
             )}
           </>
         )}
-      </span>
+      </p>
     )
 
     if (unpublishedModifications) {

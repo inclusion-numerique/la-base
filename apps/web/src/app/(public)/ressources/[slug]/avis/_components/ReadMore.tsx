@@ -2,7 +2,7 @@
 
 import { CropText } from '@app/web/components/CropText/CropText'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export const ReadMore = ({
   limit,
@@ -12,16 +12,20 @@ export const ReadMore = ({
   children: string
 }) => {
   const [readMore, setReadMore] = useState(false)
+  const contentRef = useRef<HTMLSpanElement>(null)
 
   if (children.length <= limit) return children
 
   return readMore ? (
     <>
-      {children}
+      <span ref={contentRef} tabIndex={-1}>
+        {children}
+      </span>
       <Button
         type="button"
         className="fr-display-block fr-mt-2w"
         priority="tertiary no outline"
+        aria-expanded={readMore}
         onClick={() => setReadMore(false)}
       >
         Voir moins
@@ -34,7 +38,11 @@ export const ReadMore = ({
         type="button"
         className="fr-display-block fr-mt-1w"
         priority="tertiary no outline"
-        onClick={() => setReadMore(true)}
+        aria-expanded={readMore}
+        onClick={() => {
+          setReadMore(true)
+          setTimeout(() => contentRef.current?.focus(), 0)
+        }}
       >
         Lire la suite
       </Button>

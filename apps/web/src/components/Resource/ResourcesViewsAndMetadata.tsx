@@ -31,7 +31,7 @@ const ResourcesViewsAndMetadata = ({
       className,
     )}
   >
-    <span className="fr-flex fr-flex-gap-2v">
+    <p className="fr-flex fr-flex-gap-2v fr-mb-0">
       <span className="fr-icon-eye-line fr-icon--sm" aria-hidden />
       <span className="fr-text--medium" data-testid="resource-views-count">
         <span className="fr-text--nowrap">
@@ -83,10 +83,10 @@ const ResourcesViewsAndMetadata = ({
           </span>
         </span>
       )}
-    </span>
+    </p>
     {children && (
       <>
-        <span className="fr-flex fr-flex-gap-2v">{children}</span>
+        <p className="fr-flex fr-flex-gap-2v fr-mb-0">{children}</p>
       </>
     )}
     {!resource.isPublic && showPrivate && (

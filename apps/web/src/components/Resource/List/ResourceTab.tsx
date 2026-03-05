@@ -23,7 +23,7 @@ const ResourceTab = ({
 }) => (
   <div data-testid={dataTestId}>
     {resources.length === 0 ? (
-      <div className={styles.emptyBox}>{emptyText}</div>
+      <p className={styles.emptyBox}>{emptyText}</p>
     ) : (
       <CardList
         ariaLabel={

@@ -28,9 +28,18 @@ const ResourcesSearchResults = ({
 }) => (
   <>
     <div className={styles.header}>
-      <h1 className="fr-text--lg fr-mb-0" role="status" aria-atomic="true">
+      <p className="fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
-      </h1>
+      </p>
+      <p
+        className="fr-sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        Les résultats ont été mis à jour. {numberToString(totalCount)} ressource
+        {sPluriel(totalCount)} trouvée{sPluriel(totalCount)}.
+      </p>
       {children}
     </div>
     {resources.length > 0 ? (

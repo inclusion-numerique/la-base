@@ -17,7 +17,7 @@ const Newsletter = () => (
           <div className="fr-hidden fr-unhidden-md">
             <ExternalLink
               href="https://dc259ca5.sibforms.com/serve/MUIFANPiNe5NUHtDZqZYZ6iyYIKNDL-3EAzRq8JWjLYAWnMcQh9P3uAjtmLh31veRMNPcxBXxYCkAlJitPr2eUWPdUaJm1l96XxzDPx_DxSd2ZxhfXtUQY-P_Qaq7GOZeuww7DCboCBztN7lTtVVXhJFueIzPWFrvGN-0AIYrHUBfhmgtBP9WtP8Z7Hr5tbmTJQpoLmijiI8yb8H"
-              ariaLabel="Accéder à l'inscription à la lettre d'information"
+              ariaLabel="S'abonner à la lettre d'information - Ouverture dans une nouvelle fenêtre"
               className="fr-btn"
             >
               S'abonner
@@ -26,6 +26,7 @@ const Newsletter = () => (
           <div className="fr-unhidden fr-hidden-md">
             <ExternalLink
               href="https://dc259ca5.sibforms.com/serve/MUIFANPiNe5NUHtDZqZYZ6iyYIKNDL-3EAzRq8JWjLYAWnMcQh9P3uAjtmLh31veRMNPcxBXxYCkAlJitPr2eUWPdUaJm1l96XxzDPx_DxSd2ZxhfXtUQY-P_Qaq7GOZeuww7DCboCBztN7lTtVVXhJFueIzPWFrvGN-0AIYrHUBfhmgtBP9WtP8Z7Hr5tbmTJQpoLmijiI8yb8H"
+              ariaLabel="S'abonner à la lettre d'information - Ouverture dans une nouvelle fenêtre"
               className="fr-my-auto fr-ml-auto fr-width-full fr-text--center fr-mx-auto fr-btn fr-btn--lg fr-flex fr-justify-content-center"
             >
               S'abonner
