@@ -37,9 +37,9 @@ const NewsFeedOnboardingHeader = ({
       )}
       <div className="fr-flex fr-direction-column fr-flex-gap-4v fr-mb-12v fr-mt-4v">
         <div>
-          <span className="fr-text-mention--grey fr-text--sm fr-mb-1v">
+          <p className="fr-text-mention--grey fr-text--sm fr-mb-1v">
             Étape {step} sur 4
-          </span>
+          </p>
           <h1 className={classNames(styles.title, 'fr-mb-0 fr-text--bold')}>
             {title}
           </h1>

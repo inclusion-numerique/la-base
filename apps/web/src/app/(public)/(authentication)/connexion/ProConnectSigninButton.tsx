@@ -35,12 +35,13 @@ const ProConnectSigninButton = ({
           isLoading,
           'fr-mb-4v fr-width-full fr-justify-content-center',
         )}
+        nativeButtonProps={{ role: 'link' }}
         onClick={onClick}
         title="S’identifier avec ProConnect"
       >
         <img src="/images/services/pro-connect-logo.svg" alt="" />
         <span className="fr-ml-1v fr-text--left">
-          S’identifier avec&nbsp;
+          S'identifier avec&nbsp;
           <strong>ProConnect</strong>
         </span>
       </Button>

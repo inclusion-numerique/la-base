@@ -25,7 +25,7 @@ export const LabelAndValue = ({
         ) : (
           <p className="fr-mb-0">{children}</p>
         )}
-        <strong>{defaultValue}</strong>
+        <span className="fr-text--bold">{defaultValue}</span>
       </Component>
     ) : null
   }
@@ -37,9 +37,10 @@ export const LabelAndValue = ({
         <p className="fr-mb-0">{children}</p>
       )}
       {isHtml ? (
-        <strong>{value}</strong>
+        <span className="fr-text--bold">{value}</span>
       ) : (
-        <strong
+        <span
+          className="fr-text--bold"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(value.toString()),
           }}

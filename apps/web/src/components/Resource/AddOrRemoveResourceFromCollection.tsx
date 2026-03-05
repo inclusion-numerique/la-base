@@ -82,9 +82,9 @@ const AddOrRemoveResourceFromCollection = ({
           type="button"
           nativeButtonProps={{
             'data-testid': 'added-in-collection-button',
+            'aria-label': 'Déjà ajouté',
           }}
         >
-          <span className="fr-sr-only fr-hidden-md">Déjà ajouté</span>
           <span className="fr-hidden fr-unhidden-md">Déjà ajouté</span>
           <span className="fr-icon-check-line fr-icon--sm fr-pl-md-2v" />
         </Button>
@@ -97,13 +97,13 @@ const AddOrRemoveResourceFromCollection = ({
           type="button"
           nativeButtonProps={{
             'data-testid': 'add-in-collection-button',
+            'aria-label': 'Ajouter',
           }}
         >
           <span
             className="fr-icon-add-line fr-icon--sm fr-hidden-md"
             aria-hidden="true"
           />
-          <span className="fr-sr-only fr-hidden-md">Ajouter</span>
           <span className="fr-hidden fr-unhidden-md">Ajouter</span>
         </Button>
       )}
