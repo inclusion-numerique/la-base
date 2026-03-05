@@ -200,7 +200,6 @@ const Header = ({
                             : '/fil-d-actualite/tout'
                           : '/connexion?suivant=/fil-d-actualite/tout',
                         'aria-label': "Accès au fil d'actualité",
-                        title: "Fil d'actualité",
                       }}
                       size="small"
                     >

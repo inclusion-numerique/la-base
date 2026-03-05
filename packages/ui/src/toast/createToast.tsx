@@ -31,6 +31,7 @@ const ToastContent = ({
   priority: ToastPriority
   onDismiss: () => void
 }) => {
+  const labelId = useId()
   const descriptionId = useId()
   const containerRef = useRef<HTMLDivElement>(null)
   const previousFocusRef = useRef<Element | null>(null)
@@ -88,10 +89,13 @@ const ToastContent = ({
       className={classNames('fr-no-print', styles.toastContent)}
       role="alertdialog"
       aria-modal="true"
-      aria-label={priorityLabels[priority]}
+      aria-labelledby={labelId}
       aria-describedby={descriptionId}
       onKeyDown={handleKeyDown}
     >
+      <span id={labelId} className="fr-sr-only">
+        {priorityLabels[priority]}
+      </span>
       <span id={descriptionId}>{message}</span>
       {action && (
         <Button
@@ -142,8 +146,8 @@ export const createToast = ({
       className: classNames(styles.toast, styles[priority]),
       icon: <span className={classNames(styles.icon, icons[priority])} />,
       ariaProps: {
-        role: 'alert',
-        'aria-live': 'assertive',
+        role: 'status',
+        'aria-live': 'off',
       },
     },
   )

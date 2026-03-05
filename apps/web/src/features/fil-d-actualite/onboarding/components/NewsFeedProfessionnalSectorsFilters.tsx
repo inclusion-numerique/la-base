@@ -36,6 +36,7 @@ export const NewsFeedProfessionnalSectorsFilters = ({
             commonStyles.absoluteButton,
           )}
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
           aria-label={
             isOpen
               ? 'Masquer les secteurs professionnels'
@@ -103,6 +104,7 @@ export const NewsFeedProfessionnalSectorsFilters = ({
                     className={classNames('fr-mb-0 fr-text--xs', styles.count)}
                   >
                     {counts[ps].count}
+                    <span className="fr-sr-only"> ressources</span>
                   </span>
                 </div>
               </Button>

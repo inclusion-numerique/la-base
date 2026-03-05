@@ -31,6 +31,15 @@ const ResourcesSearchResults = ({
       <p className="fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
       </p>
+      <p
+        className="fr-sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        Les résultats ont été mis à jour. {numberToString(totalCount)} ressource
+        {sPluriel(totalCount)} trouvée{sPluriel(totalCount)}.
+      </p>
       {children}
     </div>
     {resources.length > 0 ? (

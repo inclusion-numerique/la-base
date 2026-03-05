@@ -321,7 +321,7 @@ const CreateBase = ({ user }: { user: SessionUser }) => {
               },
             ]}
           >
-            Êtes-vous sûr de vouloir annuler la création votre base ?
+            <p>Êtes-vous sûr de vouloir annuler la création votre base ?</p>
           </CancelModal>
         </div>
       </div>
