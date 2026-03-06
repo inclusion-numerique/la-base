@@ -22,7 +22,7 @@ const ResourceCollectionsModal = ({
   children,
 }: {
   resource: Resource
-  children: ReactNode
+  children?: ReactNode
 }) => {
   const { collectionsData } = resource
 
@@ -90,7 +90,9 @@ const ResourceCollectionsModal = ({
               <div className="fr-flex fr-flex-gap-6v fr-align-items-center">
                 <IconInSquare iconId="ri-folder-2-line" size="medium" />
                 <div className="fr-flex fr-direction-column fr-flex-gap-1v">
-                  <span className="fr-text--bold">{collection.title}</span>
+                  <h2 className="fr-mt-0 fr-mb-0 fr-text--bold fr-text--md">
+                    {collection.title}
+                  </h2>
                   <OwnershipInformation
                     withImage={false}
                     user={collection.createdBy}

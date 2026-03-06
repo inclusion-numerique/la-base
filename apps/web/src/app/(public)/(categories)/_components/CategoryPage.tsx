@@ -105,6 +105,8 @@ const CategoryPage = async ({
                 resources={resources}
                 user={user}
                 totalCount={resourcesCount}
+                titleAs="h2"
+                cardTitleAs="h3"
               >
                 <ThematicLinkSortingSelect
                   categoryPath={categoryPath}

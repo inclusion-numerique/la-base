@@ -85,7 +85,7 @@ const Header = ({
           </div>
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
-              <nav role="navigation" aria-label="Navigation principale">
+              <div>
                 <ul className="fr-btns-group fr-align-items-center">
                   <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
                     <Button
@@ -228,8 +228,8 @@ const Header = ({
                     </li>
                   )}
                 </ul>
-              </nav>
-              <nav role="navigation" aria-label="Navigation secondaire">
+              </div>
+              <div>
                 <ul className="fr-btns-group fr-align-items-center">
                   <li className="fr-position-relative">
                     {user ? (
@@ -273,7 +273,7 @@ const Header = ({
                     )}
                   </li>
                 </ul>
-              </nav>
+              </div>
             </div>
           </div>
         </div>

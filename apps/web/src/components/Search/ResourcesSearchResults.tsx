@@ -20,17 +20,21 @@ const ResourcesSearchResults = ({
   resources,
   user,
   children,
+  titleAs: TitleTag = 'p',
+  cardTitleAs = 'h2',
 }: {
   totalCount: number
   resources: Resource[] | BaseResource[]
   user: SessionUser | null
   children: ReactNode
+  titleAs?: 'p' | 'h2'
+  cardTitleAs?: 'h2' | 'h3'
 }) => (
   <>
     <div className={styles.header}>
-      <p className="fr-text--lg fr-mb-0">
+      <TitleTag className="fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
-      </p>
+      </TitleTag>
       <p
         className="fr-sr-only"
         role="status"
@@ -56,6 +60,7 @@ const ResourcesSearchResults = ({
           }
           resource={resource}
           user={user}
+          titleAs={cardTitleAs}
         />
       ))
     ) : (

@@ -23,9 +23,13 @@ const ResourceLicenceDescription = ({
       <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-flex-gap-2v fr-mb-2w">
         <div className="fr-flex fr-align-items-center fr-flex-gap-2v">
           <ResourceLicenceCCSymbol />
-          <span className="fr-text--uppercase fr-text--bold fr-text--xs fr-mb-0">
+          <p
+            role="heading"
+            aria-level={3}
+            className="fr-text--uppercase fr-text--bold fr-text--xs fr-mb-0"
+          >
             Détails sur la Licence {licenceDescriptionItems[licence].name}
-          </span>
+          </p>
         </div>
         <ExternalLink
           className="fr-link fr-text--sm"
@@ -34,9 +38,9 @@ const ResourceLicenceDescription = ({
           En savoir plus
         </ExternalLink>
       </div>
-      <div className="fr-flex fr-direction-column fr-align-items-center fr-flex-gap-4v">
+      <ul className="fr-raw-list fr-flex fr-direction-column fr-align-items-center fr-flex-gap-4v">
         {licenceDescriptionItems[licence].items.map((item) => (
-          <div
+          <li
             key={item.label}
             className="fr-flex fr-align-items-center fr-flex-gap-2v"
           >
@@ -47,9 +51,9 @@ const ResourceLicenceDescription = ({
                 {item.description}
               </span>
             </span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

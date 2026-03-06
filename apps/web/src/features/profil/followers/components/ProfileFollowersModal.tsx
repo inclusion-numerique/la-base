@@ -49,7 +49,7 @@ const ProfileFollowersModal = ({
         <p className="fr-text--sm fr-mb-0">
           <span className="fr-icon-user-heart-line fr-icon--sm fr-mr-1w" />
           <b>{numberToString(counts.total)}</b>
-          <span>{`\u00a0Suivi${sPluriel(counts.total)}`}</span>
+          <span>Suivi{sPluriel(counts.total)}</span>
         </p>
       </Link>
 

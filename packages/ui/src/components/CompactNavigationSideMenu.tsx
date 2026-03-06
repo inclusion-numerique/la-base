@@ -74,7 +74,6 @@ const CompactNavigationSideMenu = memo(
         <div className={classNames('fr-sidemenu__inner', classes.inner)}>
           <button
             type="button"
-            hidden
             aria-expanded="false"
             aria-controls={collapseId}
             className={classNames('fr-sidemenu__btn', classes.button)}
@@ -114,7 +113,7 @@ const CompactNavigationSideMenu = memo(
                           target="_self"
                           {...(item.linkProps as unknown as any)}
                           {...(item.isActive && {
-                            'aria-current': 'page',
+                            'aria-current': 'location',
                           })}
                           className={classNames(
                             'fr-sidemenu__link',
