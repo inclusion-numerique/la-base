@@ -13,7 +13,10 @@ import { ProfilePrivacyTag } from '@app/web/components/PrivacyTags'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import { dateAsDay } from '@app/web/utils/dateAsDay'
-import { dateAsDayAndTime } from '@app/web/utils/dateAsDayAndTime'
+import {
+  dateAsDayAndTime,
+  dateAsDayAndTimeInTimeZone,
+} from '@app/web/utils/dateAsDayAndTime'
 import { getUserDisplayName } from '@app/web/utils/user'
 import Button from '@codegouvfr/react-dsfr/Button'
 import Tag from '@codegouvfr/react-dsfr/Tag'
@@ -140,13 +143,15 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             },
             {
               label: 'Dernière connexion ProConnect / Email',
-              value: lastLogin ? dateAsDayAndTime(lastLogin) : 'Jamais',
+              value: lastLogin
+                ? dateAsDayAndTimeInTimeZone(lastLogin, 'Europe/Paris')
+                : '-',
             },
             {
               label: 'Dernière activité',
               value: lastSeen
-                ? dateAsDayAndTime(lastSeen)
-                : 'Pas encore de données',
+                ? dateAsDayAndTimeInTimeZone(lastSeen, 'Europe/Paris')
+                : '-',
             },
             {
               label: 'Description',
