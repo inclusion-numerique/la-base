@@ -90,25 +90,46 @@ Dans `.env`, remplacer les variables S3 pour pointer vers MinIO :
 
 ```bash
 S3_HOST=localhost:9000
-AWS_ACCESS_KEY_ID=minioadmin
-AWS_SECRET_ACCESS_KEY=minioadmin
+SCW_ACCESS_KEY=minioadmin
+SCW_SECRET_KEY=minioadmin
 ```
 
-Le client S3 detecte automatiquement `localhost` et active `forcePathStyle` + `http://` (requis par MinIO).
+### 3. Restaurer la base de donnees de production
 
-### 3. Synchroniser les donnees de production
-
-Prerequis : [MinIO Client (`mc`)](https://min.io/docs/minio/linux/reference/minio-mc.html) installe (`brew install minio/stable/mc`) -- ou utiliser le container docker de dev.
+Le script a besoin des donnees de la base de production pour comparer les fichiers S3 avec les records DB :
 
 ```bash
-# Synchroniser le prefix main/ (necessite les credentials Scaleway en variables d'env)
-SCW_ACCESS_KEY=<votre_cle> SCW_SECRET_KEY=<votre_secret> ./scripts/sync-s3-to-minio.sh
-
-# Ou un sous-ensemble specifique
-SCW_ACCESS_KEY=<votre_cle> SCW_SECRET_KEY=<votre_secret> ./scripts/sync-s3-to-minio.sh main/images/
+DATABASE_INSTANCE_ID=fr-par/<instance_id> SCW_SECRET_KEY=<votre_secret_scaleway> pnpm cli backup:locally-restore-latest-main
 ```
 
-### 4. Lancer le script
+Puis régénérer le client Prisma :
+
+```bash
+cd apps/web && pnpm prisma generate
+```
+
+### 4. Synchroniser les donnees S3 de production
+
+On utilise `mc` (MinIO Client) via Docker pour éviter l'installation locale :
+
+```bash
+# Configurer les alias (une seule fois)
+docker run --rm --network host -v minio-mc-config:/root/.mc minio/mc alias set local http://localhost:9000 minioadmin minioadmin
+docker run --rm --network host -v minio-mc-config:/root/.mc minio/mc alias set scw https://s3.fr-par.scw.cloud <SCW_ACCESS_KEY> <SCW_SECRET_KEY>
+
+# Synchroniser les uploads utilisateurs
+docker run --rm --network host -v minio-mc-config:/root/.mc minio/mc mirror --overwrite --retry scw/la-base-uploads/main/user/ local/la-base-uploads/main/user/
+
+# Synchroniser les fichiers legacy
+docker run --rm --network host -v minio-mc-config:/root/.mc minio/mc mirror --overwrite --retry scw/la-base-uploads/legacy/ local/la-base-uploads/legacy/
+
+# (Optionnel) Synchroniser les caches WebP
+docker run --rm --network host -v minio-mc-config:/root/.mc minio/mc mirror --overwrite scw/la-base-uploads/main/images/ local/la-base-uploads/main/images/
+```
+
+**Note :** La synchronisation peut nécessiter plusieurs executions si elle est interrompue. Relancer la commande pour reprendre les fichiers manquants.
+
+### 5. Lancer le script
 
 ```bash
 # Dry-run d'abord
