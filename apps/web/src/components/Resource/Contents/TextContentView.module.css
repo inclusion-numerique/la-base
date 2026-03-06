@@ -1,4 +1,12 @@
 .text {
+  --ul-type: disc;
+  --ol-type: decimal;
+  --ul-start: 1rem;
+  --ol-start: 1.5rem;
+  --xl-block: 0.5rem;
+  --li-bottom: 0.25rem;
+  --ol-content: counters(li-counter, '.') '.  ';
+
   > * {
     &:last-child {
       margin-bottom: 0;
