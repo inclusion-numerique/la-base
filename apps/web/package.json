@@ -59,7 +59,6 @@
     "@trpc/react-query": "11.3.1",
     "@trpc/server": "11.3.1",
     "avvvatars-react": "^0.4.2",
-    "date-fns-tz": "^3.2.0",
     "aws-crt": "^1.27.3",
     "axios": "^1.11.0",
     "change-case": "^5.4.4",
