@@ -52,131 +52,136 @@ const CroppedImage = ({
   size?: { w: number; h: number }
   inputTestId?: string
   deleteTestId?: string
-}) => (
-  <>
-    {imageSource ? (
-      <>
-        <div
-          className={classNames(styles.imageContainer, {
-            [styles.round]: round === true,
-            [styles.roundQuarter]: round === 'quarter',
-          })}
-          style={{ height, width: height * ratio }}
-        >
-          {croppedBox && imageBox ? (
-            <img
-              alt=""
-              className={styles.image}
-              src={imageSource}
-              style={{
-                marginTop: (-croppedBox.y * height) / croppedBox.height,
-                marginLeft: (-croppedBox.x * height * ratio) / croppedBox.width,
-                height: (imageBox.naturalHeight * height) / croppedBox.height,
-                width:
-                  (imageBox.naturalWidth * height * ratio) / croppedBox.width,
-              }}
-            />
-          ) : (
-            <div
-              style={{
-                height,
-                width: height * ratio,
-                backgroundImage: `url("${imageSource}")`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-              }}
-            />
-          )}
-        </div>
-        <div
-          className={classNames(
-            styles.existingImage,
-            'fr-flex-sm fr-display-block',
-          )}
-        >
-          {imageToUpload || image ? (
-            <ImageInfo
-              name={imageToUpload?.name ?? image?.upload.name ?? ''}
-              size={imageToUpload?.size ?? image?.upload.size ?? null}
-            />
-          ) : null}
-          <div
-            className={classNames(styles.imageActions, 'fr-mt-sm-0 fr-mt-2w')}
-          >
-            <Button
-              disabled={disabled}
-              type="button"
-              priority="tertiary no outline"
-              iconId="fr-icon-crop-line"
-              iconPosition="right"
-              onClick={onCrop}
-            >
-              Recadrer
-              <span className="fr-sr-only">
-                {' '}
-                l’image {context === 'base' ? 'de couverture' : 'de profil'}
-              </span>
-            </Button>
-            <Button
-              disabled={disabled}
-              type="button"
-              priority="tertiary no outline"
-              iconId="fr-icon-delete-line"
-              iconPosition="right"
-              onClick={onRemove}
-              data-testid={deleteTestId}
-            >
-              Supprimer
-              <span className="fr-sr-only">
-                {' '}
-                l’image {context === 'base' ? 'de couverture' : 'de profil'}
-              </span>
-            </Button>
-          </div>
-        </div>
-      </>
-    ) : (
-      emptyChildren && (
-        <div
-          className={classNames(styles.imageContainer, {
-            [styles.round]: round === true,
-            [styles.roundQuarter]: round === 'quarter',
-          })}
-          style={{ height, width: height * ratio }}
-        >
-          {emptyChildren}
-        </div>
-      )
-    )}
+}) => {
+  const srImageLabel = (() => {
+    if (!label) {
+      return `l'image ${context === 'base' ? 'de couverture' : 'de profil'}`
+    }
+    const lower = label.toLowerCase()
+    return /^[aeiouyàâéèêëïîôùûü]/i.test(lower) ? `l'${lower}` : `la ${lower}`
+  })()
 
-    <Upload
-      disabled={disabled}
-      state={error ? 'error' : 'default'}
-      stateRelatedMessage={error}
-      label={label}
-      hint={imageUploadHint(size)}
-      nativeInputProps={{
-        value: imageToUpload ? imageToUpload.filename : '',
-        accept: imageAllowedMimeTypes.join(','),
-        ...({
-          'data-testid': inputTestId,
-        } as React.InputHTMLAttributes<HTMLInputElement>),
-        onChange: (event) => {
-          // We want to emit a File from this onchange instead of the field value (that is the default implementation)
-          const { files, value } = event.target
-          if (!files) {
-            onRemove()
-            return
-          }
-          const file = files[0] as ImageWithName
-          if (file) {
-            file.filename = value
-          }
-          onUpload(file)
-        },
-      }}
-    />
-  </>
-)
+  return (
+    <>
+      {imageSource ? (
+        <>
+          <div
+            className={classNames(styles.imageContainer, {
+              [styles.round]: round === true,
+              [styles.roundQuarter]: round === 'quarter',
+            })}
+            style={{ height, width: height * ratio }}
+          >
+            {croppedBox && imageBox ? (
+              <img
+                alt=""
+                className={styles.image}
+                src={imageSource}
+                style={{
+                  marginTop: (-croppedBox.y * height) / croppedBox.height,
+                  marginLeft:
+                    (-croppedBox.x * height * ratio) / croppedBox.width,
+                  height: (imageBox.naturalHeight * height) / croppedBox.height,
+                  width:
+                    (imageBox.naturalWidth * height * ratio) / croppedBox.width,
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  height,
+                  width: height * ratio,
+                  backgroundImage: `url("${imageSource}")`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                }}
+              />
+            )}
+          </div>
+          <div
+            className={classNames(
+              styles.existingImage,
+              'fr-flex-sm fr-display-block',
+            )}
+          >
+            {imageToUpload || image ? (
+              <ImageInfo
+                name={imageToUpload?.name ?? image?.upload.name ?? ''}
+                size={imageToUpload?.size ?? image?.upload.size ?? null}
+              />
+            ) : null}
+            <div
+              className={classNames(styles.imageActions, 'fr-mt-sm-0 fr-mt-2w')}
+            >
+              <Button
+                disabled={disabled}
+                type="button"
+                priority="tertiary no outline"
+                iconId="fr-icon-crop-line"
+                iconPosition="right"
+                onClick={onCrop}
+              >
+                Recadrer
+                <span className="fr-sr-only">{srImageLabel}</span>
+              </Button>
+              <Button
+                disabled={disabled}
+                type="button"
+                priority="tertiary no outline"
+                iconId="fr-icon-delete-line"
+                iconPosition="right"
+                onClick={onRemove}
+                data-testid={deleteTestId}
+              >
+                Supprimer
+                <span className="fr-sr-only">{srImageLabel}</span>
+              </Button>
+            </div>
+          </div>
+        </>
+      ) : (
+        emptyChildren && (
+          <div
+            className={classNames(styles.imageContainer, {
+              [styles.round]: round === true,
+              [styles.roundQuarter]: round === 'quarter',
+            })}
+            style={{ height, width: height * ratio }}
+          >
+            {emptyChildren}
+          </div>
+        )
+      )}
+
+      <Upload
+        disabled={disabled}
+        state={error ? 'error' : 'default'}
+        stateRelatedMessage={error}
+        label={label}
+        hint={imageUploadHint(size)}
+        nativeInputProps={{
+          value: imageToUpload ? imageToUpload.filename : '',
+          accept: imageAllowedMimeTypes.join(','),
+          ...({
+            'data-testid': inputTestId,
+          } as React.InputHTMLAttributes<HTMLInputElement>),
+          onChange: (event) => {
+            // We want to emit a File from this onchange instead of the field value (that is the default implementation)
+            const { files, value } = event.target
+            if (!files) {
+              onRemove()
+              return
+            }
+            const file = files[0] as ImageWithName
+            if (file) {
+              file.filename = value
+            }
+            onUpload(file)
+          },
+        }}
+      />
+    </>
+  )
+}
 
 export default CroppedImage

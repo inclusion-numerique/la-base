@@ -51,33 +51,39 @@ export const ThematicTags = ({
   }
 
   return (
-    <ul className="fr-tags-group fr-justify-content-center">
-      {themeOptions.map(({ label, value }) => {
-        const isSelected = activeTags.includes(value)
-        const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
-        const tagClassName = classNames(
-          'thematic-badge-base',
-          CATEGORY_VARIANTS_TAG[category].default,
-          CATEGORY_VARIANTS_TAG[category].hover,
-          isSelected && CATEGORY_VARIANTS_TAG[category].border,
-        )
+    <>
+      <p className="fr-sr-only">
+        Les résultats se mettent à jour automatiquement à l'activation d'un
+        filtre.
+      </p>
+      <ul className="fr-tags-group fr-justify-content-center">
+        {themeOptions.map(({ label, value }) => {
+          const isSelected = activeTags.includes(value)
+          const ariaLabelPrefix = isSelected ? 'Retirer' : 'Ajouter'
+          const tagClassName = classNames(
+            'thematic-badge-base',
+            CATEGORY_VARIANTS_TAG[category].default,
+            CATEGORY_VARIANTS_TAG[category].hover,
+            isSelected && CATEGORY_VARIANTS_TAG[category].border,
+          )
 
-        return (
-          <li key={value}>
-            <ThematicOptionBadge
-              option={{ label, disabled: false }}
-              categoryIconClassName={classNames(
-                CATEGORY_VARIANTS[category].icon,
-                CATEGORY_VARIANTS[category].color,
-              )}
-              textClassName="fr-text-label--grey"
-              className={tagClassName}
-              onClick={() => (isSelected ? unselect(value) : select(value))}
-              ariaLabelPrefix={ariaLabelPrefix}
-            />
-          </li>
-        )
-      })}
-    </ul>
+          return (
+            <li key={value}>
+              <ThematicOptionBadge
+                option={{ label, disabled: false }}
+                categoryIconClassName={classNames(
+                  CATEGORY_VARIANTS[category].icon,
+                  CATEGORY_VARIANTS[category].color,
+                )}
+                textClassName="fr-text-label--grey"
+                className={tagClassName}
+                onClick={() => (isSelected ? unselect(value) : select(value))}
+                ariaLabelPrefix={ariaLabelPrefix}
+              />
+            </li>
+          )
+        })}
+      </ul>
+    </>
   )
 }

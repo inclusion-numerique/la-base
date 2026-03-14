@@ -16,6 +16,12 @@ const DeleteSearchFiltersButton = () => {
         departements: [],
       }),
     )
+    requestAnimationFrame(() => {
+      const firstFilter = document.querySelector<HTMLElement>(
+        '#search-filters-container button',
+      )
+      firstFilter?.focus()
+    })
   }
   return (
     <Button

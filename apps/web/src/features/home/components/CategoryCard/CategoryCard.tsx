@@ -45,10 +45,7 @@ export const CategoryCard = ({
       'fr-width-full fr-px-4w fr-pb-4w fr-pt-3w fr-border-radius--16 fr-height-full fr-flex fr-direction-column fr-enlarge-link fr-link--no-underline',
     )}
   >
-    <Link
-      href={CATEGORY_VARIANTS[category].href}
-      aria-label={`Découvrir ${category}`}
-    >
+    <Link href={CATEGORY_VARIANTS[category].href}>
       <div className="fr-flex fr-direction-column fr-flex-gap-8v">
         <div className="fr-flex fr-direction-column fr-flex-gap-2v fr-align-items-start">
           <span

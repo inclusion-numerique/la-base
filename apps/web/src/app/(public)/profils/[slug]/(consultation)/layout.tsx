@@ -11,7 +11,7 @@ import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'
-import { contentId, defaultSkipLinks } from '@app/web/utils/skipLinks'
+import { defaultSkipLinks } from '@app/web/utils/skipLinks'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { type PropsWithChildren } from 'react'
@@ -87,7 +87,7 @@ const ProfileLayout = async ({
         resourcesCount={resourcesCount}
         user={user}
       />
-      <main role="main" id={contentId} className="fr-overflow-hidden">
+      <div className="fr-overflow-hidden">
         <ProfileMenu
           profile={profile}
           resourcesCount={resourcesCount}
@@ -98,7 +98,7 @@ const ProfileLayout = async ({
         <div className="fr-container fr-container--medium fr-mb-24w">
           {children}
         </div>
-      </main>
+      </div>
     </>
   )
 }

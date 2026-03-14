@@ -129,7 +129,7 @@ const ResourceImageEdition = ({
         <label className="fr-label fr-mb-1v" htmlFor={id}>
           {label}
         </label>
-        <span className="fr-hint-text fr-mt-2v">{fileFieldHint}</span>
+        <p className="fr-hint-text fr-mt-2v fr-mb-0">{fileFieldHint}</p>
 
         <Button
           type="button"

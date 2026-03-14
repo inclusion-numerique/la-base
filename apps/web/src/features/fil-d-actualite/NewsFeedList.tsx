@@ -13,6 +13,7 @@ import { useNewsFeedPagination } from '@app/web/hooks/useNewsFeedPagination'
 import { NewsFeedParams } from '@app/web/server/newsFeed/newsFeedUrls'
 import { Spinner } from '@app/web/ui/Spinner'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { useCallback, useEffect, useRef } from 'react'
 
 const NewsFeedList = ({
   newsFeedPageContext,
@@ -38,12 +39,31 @@ const NewsFeedList = ({
     isFetching,
     hasMore,
   } = useNewsFeedPagination(resources, filters)
+  const listRef = useRef<HTMLUListElement>(null)
+  const previousCountRef = useRef(paginatedResources.length)
+
+  const handleLoadMore = useCallback(() => {
+    previousCountRef.current = paginatedResources.length
+    loadMore()
+  }, [loadMore, paginatedResources.length])
+
+  useEffect(() => {
+    if (paginatedResources.length > previousCountRef.current) {
+      const items = listRef.current?.children
+      if (items && items[previousCountRef.current]) {
+        const firstNewItem = items[previousCountRef.current] as HTMLElement
+        firstNewItem.setAttribute('tabindex', '-1')
+        firstNewItem.focus()
+      }
+      previousCountRef.current = paginatedResources.length
+    }
+  }, [paginatedResources.length])
   const hasFilter =
     (!!params.thematique && params.thematique !== 'tout') ||
     (!!params.secteur && params.secteur !== 'tout')
   return (
     <>
-      <ul className="fr-raw-list">
+      <ul ref={listRef} className="fr-raw-list">
         {paginatedResources.map((resource) => (
           <li key={resource.slug}>
             <ResourceCard
@@ -72,7 +92,11 @@ const NewsFeedList = ({
       </ul>
       {hasMore && (
         <div className="fr-text--center fr-hidden fr-unhidden-sm fr-flex fr-justify-content-center">
-          <Button priority="secondary" onClick={loadMore} disabled={isFetching}>
+          <Button
+            priority="secondary"
+            onClick={handleLoadMore}
+            disabled={isFetching}
+          >
             {isFetching ? (
               <>
                 <Spinner size="small" className="fr-mr-2v" />
@@ -89,7 +113,7 @@ const NewsFeedList = ({
           <Button
             priority="secondary"
             className="fr-flex fr-width-full fr-justify-content-center"
-            onClick={loadMore}
+            onClick={handleLoadMore}
             disabled={isFetching}
           >
             {isFetching ? (
