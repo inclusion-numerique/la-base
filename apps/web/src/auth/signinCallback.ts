@@ -63,7 +63,11 @@ export const signinCallback: <
     PublicWebAppConfig.isMain ||
     PublicWebAppConfig.isDev
   ) {
-    if (!!email && existingUser && !['User', 'Moderator'].includes(existingUser.role)) {
+    if (
+      !!email &&
+      existingUser &&
+      !['User', 'Moderator'].includes(existingUser.role)
+    ) {
       return `/connexion?error=ProConnectOnly`
     }
   }
