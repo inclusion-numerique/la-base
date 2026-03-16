@@ -55,16 +55,19 @@ export const signinCallback: <
   })
 
   /**
-   * Only basic users can sign in with email magic link
-   * Admins can sign in with ProConnect
-   * Support can sign in with ProConnect
+   * Basic users and moderators can sign in with email magic link
+   * Admins and Support can only sign in with ProConnect
    */
   if (
     PublicWebAppConfig.isLocal ||
     PublicWebAppConfig.isMain ||
     PublicWebAppConfig.isDev
   ) {
-    if (!!email && existingUser && existingUser.role !== 'User') {
+    if (
+      !!email &&
+      existingUser &&
+      !['User', 'Moderator'].includes(existingUser.role)
+    ) {
       return `/connexion?error=ProConnectOnly`
     }
   }
