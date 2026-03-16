@@ -3,10 +3,15 @@ import { getSessionUser } from '@app/web/auth/getSessionUser'
 import Header from '@app/web/components/Header'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { contentId } from '@app/web/utils/skipLinks'
+import { redirect } from 'next/navigation'
 import { type PropsWithChildren } from 'react'
 
 const NewsFeedLayout = async ({ children }: PropsWithChildren) => {
   const user = await getSessionUser()
+
+  if (!user) {
+    redirect('/connexion?suivant=/fil-d-actualite/onboarding')
+  }
 
   return (
     <div
