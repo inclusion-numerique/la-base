@@ -109,6 +109,7 @@ model User {
   created                  DateTime                  @default(now())
   updated                  DateTime                  @default(now())
   lastLogin                DateTime?                 @map("last_login")
+  lastSeen                 DateTime?                 @map("last_seen")
   ownedBases               Base[]
   createdResources         Resource[]
   uploads                  Upload[]

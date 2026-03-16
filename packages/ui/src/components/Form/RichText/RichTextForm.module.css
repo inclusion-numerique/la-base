@@ -11,6 +11,13 @@
     padding: 8px 16px;
     min-height: 260px;
     outline-offset: 0 !important;
+    --ul-type: disc;
+    --ol-type: decimal;
+    --ul-start: 1rem;
+    --ol-start: 1.5rem;
+    --xl-block: 0.5rem;
+    --li-bottom: 0.25rem;
+    --ol-content: counters(li-counter, '.') '.  ';
   }
 
   a {

@@ -94,6 +94,7 @@ export const getSessionUserFromSessionToken = async (
           updated: true,
           isPublic: true,
           hasSeenV2Onboarding: true,
+          lastSeen: true,
           lastCguAcceptedAt: true,
           cguVersion: true,
           newsFeed: true,
@@ -160,6 +161,19 @@ export const getSessionUserFromSessionToken = async (
 
   if (!res?.user) {
     return null
+  }
+
+  // Fire-and-forget: update lastSeen if older than 1 hour
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
+  if (!res.user.lastSeen || res.user.lastSeen < oneHourAgo) {
+    prismaClient.user
+      .update({
+        where: { id: res.user.id },
+        data: { lastSeen: new Date() },
+      })
+      .catch(() => {
+        // Silently ignore errors for fire-and-forget lastSeen update
+      })
   }
 
   return {

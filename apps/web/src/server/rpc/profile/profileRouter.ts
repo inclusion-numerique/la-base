@@ -235,6 +235,26 @@ export const profileRouter = router({
 
       return { success: true }
     }),
+  disconnectSessions: protectedProcedure
+    .input(z.object({ userId: z.string().uuid() }))
+    .mutation(async ({ input: { userId }, ctx: { user: sessionUser } }) => {
+      enforceIsAdmin(sessionUser)
+
+      const user = await prismaClient.user.findUnique({
+        where: { id: userId, deleted: null },
+        select: { id: true },
+      })
+
+      if (!user) {
+        throw invalidError('User not found')
+      }
+
+      await prismaClient.session.deleteMany({
+        where: { userId },
+      })
+
+      return { success: true }
+    }),
   delete: protectedProcedure
     .input(z.object({ userId: z.string().uuid() }))
     .mutation(async ({ input: { userId }, ctx: { user: sessionUser } }) => {
