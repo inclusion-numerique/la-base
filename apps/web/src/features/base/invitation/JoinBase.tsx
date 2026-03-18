@@ -41,7 +41,7 @@ export const JoinBase = ({
             <p>En rejoignant cette base, vous pourrez&nbsp;:</p>
             <ul>
               <li>Créer & publier des ressources via cette base</li>
-              <li>Contribuer aux ressources publiés sur cette base</li>
+              <li>Contribuer aux ressources publiées sur cette base</li>
               <li>Voir les ressources privées</li>
               <li>Inviter d&apos;autres membres</li>
             </ul>
