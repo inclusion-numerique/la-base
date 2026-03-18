@@ -27,6 +27,10 @@
   @media (min-width: 48em) {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  > * {
+    min-width: 0;
+  }
 }
 
 .resourceCard {

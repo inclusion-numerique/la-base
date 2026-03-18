@@ -115,7 +115,12 @@ const ResourceCard = ({
           </div>
         )}
       </Link>
-      <div className="fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w">
+      <div
+        className={classNames(
+          'fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w',
+          context === 'highlight' && isContributor && 'fr-flex-wrap',
+        )}
+      >
         {resource.published && (
           <ResourcesViewsAndMetadata
             className={classNames(
@@ -148,36 +153,15 @@ const ResourceCard = ({
         )}
         <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
           {isContributor && (
-            <>
-              <Button
-                data-testid="resource-card-edit-link"
-                title="Modifier"
-                size="small"
-                priority="tertiary no outline"
-                linkProps={{
-                  href: appendShareToken(
-                    `/ressources/${resource.slug}/editer`,
-                    shareToken,
-                  ),
-                  prefetch: false,
-                }}
-              >
-                <span className="fr-unhidden-sm fr-hidden fr-mr-1w">
-                  Modifier
-                </span>
-                <span className="fr-sr-only">Modifier</span>
-                <span className="ri-edit-line" aria-hidden />
-              </Button>
-              <ResourceMoreActionsDropdown
-                context="card"
-                user={user}
-                modalControlClassName="ri-lg"
-                dropdownControlClassName="fr-text--bold"
-                resource={resource}
-                copyLink={true}
-                canWrite
-              />
-            </>
+            <ResourceMoreActionsDropdown
+              context="card"
+              user={user}
+              modalControlClassName="ri-lg"
+              dropdownControlClassName="fr-text--bold"
+              resource={resource}
+              copyLink={true}
+              canWrite
+            />
           )}
           {!isContributor && context !== 'highlight' && (
             <>
@@ -199,6 +183,35 @@ const ResourceCard = ({
             </>
           )}
         </div>
+        {isContributor && (
+          <Button
+            data-testid="resource-card-edit-link"
+            title="Modifier"
+            size="small"
+            priority="tertiary no outline"
+            linkProps={{
+              href: appendShareToken(
+                `/ressources/${resource.slug}/editer`,
+                shareToken,
+              ),
+              prefetch: false,
+            }}
+          >
+            <span
+              className={
+                context === 'highlight'
+                  ? 'fr-mr-1w'
+                  : 'fr-unhidden-sm fr-hidden fr-mr-1w'
+              }
+            >
+              Modifier
+            </span>
+            {context !== 'highlight' && (
+              <span className="fr-sr-only">Modifier</span>
+            )}
+            <span className="ri-edit-line" aria-hidden />
+          </Button>
+        )}
       </div>
     </div>
     <div className={styles.header}>
