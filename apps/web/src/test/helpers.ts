@@ -107,6 +107,7 @@ export const createTestResource = (
       image: null,
     },
     createdById: createdBy.id,
+    lastContributedBy: null,
     baseId: base ? base.id : null,
     collections: [],
     collectionsData: {

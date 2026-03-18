@@ -27,6 +27,7 @@ export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
     updated: new Date('2025-10-14T15:00:44.714Z'),
     published: new Date('2024-07-17T13:45:21.299Z'),
     deleted: null,
+    lastContributedBy: createdBy,
     createdById: '74ace0b1-0c5d-491c-9468-a887f43b7178',
     baseId: '6c5bd2f5-b327-47ba-804c-cd3d18dfdf40',
     lastPublished: new Date('2025-10-14T15:00:44.714Z'),
@@ -66,6 +67,7 @@ export const MOCK_NEWS_FEED_RESOURCES: NewsFeedResourceServer[] = [
   {
     shareableLink: null,
     eventType: 'published',
+    lastContributedBy: createdBy,
     collectionId: undefined,
     addedToCollectionAt: undefined,
     id: '867911cc-3066-4c2e-be3e-61b527a25492',

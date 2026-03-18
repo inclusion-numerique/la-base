@@ -217,7 +217,7 @@ const ResourceCard = ({
     <div className={styles.header}>
       {!children && context === 'list' && (
         <OwnershipInformation
-          user={resource.createdBy}
+          user={resource.lastContributedBy ?? resource.createdBy}
           base={resource.base}
           attributionWording={
             isDraft ? 'draft-resource' : getResourceAttributionWording(resource)

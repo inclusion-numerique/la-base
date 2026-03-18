@@ -112,6 +112,7 @@ model User {
   lastSeen                 DateTime?                 @map("last_seen")
   ownedBases               Base[]
   createdResources         Resource[]
+  lastContributedResources Resource[]                @relation("lastContributedResources")
   uploads                  Upload[]
   resourceEvent            ResourceEvent[]
   bases                    BaseMembers[]             @relation(name: "member")
@@ -395,6 +396,9 @@ model Resource {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String @map("created_by_id") @db.Uuid
 
+  lastContributedBy   User?   @relation("lastContributedResources", fields: [lastContributedById], references: [id])
+  lastContributedById String? @map("last_contributed_by_id") @db.Uuid
+
   published     DateTime? // The first publication date
   lastPublished DateTime? @map("last_published") // The most recent re-publication date
   lastView      DateTime? @map("last_view") // The most recent view date to avoid joining the view table
@@ -420,6 +424,7 @@ model Resource {
 
   @@index([baseId])
   @@index([createdById])
+  @@index([lastContributedById])
   @@index(themes, name: "resources_themes_idx", type: Gin)
   @@index(resourceTypes, name: "resources_resource_types_idx", type: Gin)
   @@index(beneficiaries, name: "resources_beneficiaries_idx", type: Gin)
