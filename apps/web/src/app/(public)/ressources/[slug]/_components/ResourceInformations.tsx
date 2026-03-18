@@ -64,7 +64,7 @@ const ResourceInformations = ({ resource }: { resource: Resource }) => (
         themes
         beneficiaries
         professionalSectors
-        titleClassName="fr-text--sm"
+        titleClassName="fr-text--md"
         tagsClassName="fr-mt-1v"
       />
       <ResourceLicenceInformations resource={resource} />

@@ -58,7 +58,7 @@ const ResourceIndexation = ({ resource }: { resource: Resource }) => {
           <ResourceIndexationView
             resource={resource}
             withDescription
-            titleClassName="fr-text--sm"
+            titleClassName="fr-text--md"
             resourceTypes
             beneficiaries
             professionalSectors
