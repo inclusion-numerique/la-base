@@ -63,7 +63,7 @@ const ResourceView = ({
             {/* This div is used for top anchor */}
             <div id={resource.slug} className="fr-width-full">
               <OwnershipInformation
-                user={resource.createdBy}
+                user={resource.lastContributedBy ?? resource.createdBy}
                 base={resource.base}
                 attributionWording={getResourceAttributionWording(resource)}
               />

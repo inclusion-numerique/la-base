@@ -104,6 +104,23 @@ export const getResourceSelect = (_user: { id: string } | null) =>
         },
       },
     },
+    lastContributedBy: {
+      select: {
+        name: true,
+        id: true,
+        slug: true,
+        isPublic: true,
+        firstName: true,
+        email: true,
+        lastName: true,
+        image: {
+          select: {
+            id: true,
+            altText: true,
+          },
+        },
+      },
+    },
     baseId: true,
     collections: {
       select: {

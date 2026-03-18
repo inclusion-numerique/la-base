@@ -76,7 +76,10 @@ export const handleResourceMutationCommand = async (
 
     await t.resource.update({
       where: { id: resource.id },
-      data: { updated: resource.updated },
+      data: {
+        updated: resource.updated,
+        lastContributedById: user?.id ?? undefined,
+      },
     })
   }
 

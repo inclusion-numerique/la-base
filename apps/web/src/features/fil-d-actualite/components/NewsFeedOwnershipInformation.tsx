@@ -131,20 +131,26 @@ const newsFeedAttributionConfig = {
       resource: NewsFeedResource,
       timeAgo: string,
       isUpdated: boolean,
-    ) =>
-      resource.createdBy.name && (
-        <>
-          <Link
-            className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
-            href={`/profils/${resource.createdBy.slug}`}
-          >
-            {formatName(resource.createdBy.name)}
-          </Link>
-          &nbsp;a {getActionText(isUpdated, 'profile')} {timeAgo}
-        </>
-      ),
+    ) => {
+      const profileUser = resource.lastContributedBy ?? resource.createdBy
+      return (
+        profileUser.name && (
+          <>
+            <Link
+              className="fr-link fr-text--xs fr-text-decoration--none fr-link--underline-on-hover"
+              href={`/profils/${profileUser.slug}`}
+            >
+              {formatName(profileUser.name)}
+            </Link>
+            &nbsp;a {getActionText(isUpdated, 'profile')} {timeAgo}
+          </>
+        )
+      )
+    },
     getImage: (resource: NewsFeedResource) => (
-      <RoundProfileImage user={resource.createdBy} />
+      <RoundProfileImage
+        user={resource.lastContributedBy ?? resource.createdBy}
+      />
     ),
   },
   professional_sector: {

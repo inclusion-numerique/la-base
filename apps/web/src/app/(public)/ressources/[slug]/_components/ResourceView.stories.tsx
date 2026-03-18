@@ -52,6 +52,7 @@ const resource = (imageId: string | null) =>
       isPublic: true,
       image: null,
     },
+    lastContributedBy: null,
     imageId,
     image: imageId
       ? {
