@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   skip: theodo/skip@0.1.2
   queue: eddiewebb/queue@3.2.1
+  coveralls: coveralls/coveralls@2.2.5
 executors:
   node:
     docker:
