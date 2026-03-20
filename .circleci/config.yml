@@ -289,7 +289,7 @@ jobs:
           command: pnpm --silent -F @app/web prisma generate
       - run:
           name: 'Test all packages except @app/web with coverage'
-          command: pnpm -F '!@app/web' -F '!@app/e2e' test -- --coverage
+          command: pnpm -F '!@app/web' -F '!@app/e2e' -F '!@app/storybook' exec jest --coverage --passWithNoTests
       - run:
           name: 'Collect coverage reports'
           command: |
@@ -317,7 +317,7 @@ jobs:
           command: pnpm --silent -F @app/web prisma generate
       - run:
           name: 'Test @app/web with coverage'
-          command: pnpm --silent -F @app/web test -- --coverage
+          command: pnpm --silent -F @app/web exec jest --coverage -c jest.unit.config.ts
       - run:
           name: 'Collect coverage reports'
           command: |
