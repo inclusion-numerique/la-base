@@ -49,6 +49,23 @@ export const resourceListSelect = (user: { id: string } | null) =>
         },
       },
     },
+    lastContributedBy: {
+      select: {
+        name: true,
+        id: true,
+        slug: true,
+        firstName: true,
+        isPublic: true,
+        lastName: true,
+        email: true,
+        image: {
+          select: {
+            id: true,
+            altText: true,
+          },
+        },
+      },
+    },
     resourceFeedback: {
       where: {
         deleted: null,

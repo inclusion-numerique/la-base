@@ -1,5 +1,6 @@
 'use client'
 
+import { createToast } from '@app/ui/toast/createToast'
 import { buttonLoadingClassname } from '@app/ui/utils/buttonLoadingClassname'
 import { SessionUser } from '@app/web/auth/sessionUser'
 import { withTrpc } from '@app/web/components/trpc/withTrpc'
@@ -54,6 +55,11 @@ const BaseJoinRequestButtons = ({
 
   const onAccept = async () => {
     await acceptMutation.mutateAsync({ requestId: joinRequest.id })
+    createToast({
+      priority: 'success',
+      message: `${joinRequest.applicant.name ?? joinRequest.applicant.email} a rejoint la base`,
+    })
+    router.push(`/bases/${joinRequest.base.slug}/membres`)
     router.refresh()
   }
 

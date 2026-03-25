@@ -96,12 +96,9 @@ const ResourceIndexationView = ({
   )
 
   return resourceInfo.map(({ title, description, tags, slug }) => (
-    <div key={title}>
+    <div className="fr-mb-2w" key={title}>
       <TitleAs
-        className={classNames(
-          titleClassName,
-          'fr-mt-3w fr-mb-0 fr-text--normal',
-        )}
+        className={classNames(titleClassName, 'fr-mb-0 fr-text--normal')}
       >
         {title}
         {withDescription && (

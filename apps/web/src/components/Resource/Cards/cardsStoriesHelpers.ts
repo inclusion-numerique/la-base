@@ -41,6 +41,7 @@ export const resource = {
     image: { id: 'portrait', altText: 'Texte alternatif' },
     isPublic: true,
   },
+  lastContributedBy: null,
   feedbackAverage: 4,
   collections: [],
   contributors: [],

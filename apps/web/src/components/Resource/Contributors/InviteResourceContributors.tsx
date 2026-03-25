@@ -133,7 +133,7 @@ const InviteResourceContributors = ({
 
   return (
     <>
-      <TitleAs className="fr-text--md fr-text--normal fr-mb-2w">
+      <TitleAs className="fr-text--md fr-text--normal fr-mb-0">
         Liste des contributeurs de la ressource
       </TitleAs>
       {resource.base?.title && (

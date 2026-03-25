@@ -25,7 +25,7 @@ export type ContentProjection = Omit<
 
 export type ResourceProjection = Omit<
   Resource,
-  'contents' | 'createdBy' | 'base' | 'image'
+  'contents' | 'createdBy' | 'lastContributedBy' | 'base' | 'image'
 > & { contents: ContentProjection[] }
 
 export const applyMutationEvent = (

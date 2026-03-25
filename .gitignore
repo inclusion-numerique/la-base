@@ -10,7 +10,8 @@ node_modules
 
 # testing
 /coverage
-/apps/web/coverage
+/coverage-reports
+**/coverage
 
 # production
 /build

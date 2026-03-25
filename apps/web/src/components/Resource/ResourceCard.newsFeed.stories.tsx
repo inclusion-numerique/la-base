@@ -77,6 +77,7 @@ const baseResource = {
   base: mockBase,
   isPublic: true,
   createdBy: mockCreatedBy,
+  lastContributedBy: null,
   feedbackAverage: 4.5,
   collections: [],
   contributors: [],

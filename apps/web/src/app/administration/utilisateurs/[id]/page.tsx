@@ -31,7 +31,7 @@ export const revalidate = 0
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
 
-  const { user, bases } = await getUserDetailsPageContext(id)
+  const { user, bases, resources } = await getUserDetailsPageContext(id)
 
   if (!user) {
     notFound()
@@ -61,6 +61,20 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const sortedUploads = uploads.sort(
     (a, b) => b.created.getTime() - a.created.getTime(),
   )
+  const sortedResources = resources.map((resource) => {
+    const roles = [
+      ...(resource.createdById === id ? (['Créateur'] as const) : []),
+      ...(resource.contributors.length > 0 ? (['Contributeur'] as const) : []),
+      ...(resource.base?.members && resource.base?.members.length > 0
+        ? (['Membre de la base'] as const)
+        : []),
+    ]
+
+    return {
+      ...resource,
+      roles,
+    }
+  })
 
   const profileUrl = getServerUrl(`/profils/${slug}`)
   return (
@@ -235,6 +249,66 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
               ),
             }))}
           />
+        </AdministrationInfoCard>
+      )}
+      {sortedResources.length > 0 && (
+        <AdministrationInfoCard title="Ressources liées">
+          <div className="fr-flex fr-direction-column fr-flex-gap-4v">
+            {sortedResources.map((resource) => (
+              <div
+                key={resource.id}
+                className="fr-border fr-border-radius--8 fr-p-3v"
+              >
+                <div className="fr-flex fr-justify-content-space-between fr-align-items-center fr-flex-gap-2v fr-flex-wrap">
+                  <div
+                    className="fr-flex fr-direction-column fr-flex-gap-2v"
+                    style={{ flex: 1, minWidth: 0 }}
+                  >
+                    <p className="fr-text--bold fr-mb-0">{resource.title}</p>
+                    <div className="fr-flex fr-flex-gap-2v fr-flex-wrap">
+                      {resource.roles.map((role) => (
+                        <Tag key={`${resource.id}-${role}`} small>
+                          {role}
+                        </Tag>
+                      ))}
+                    </div>
+                    {resource.base && (
+                      <span className="fr-text--sm fr-mb-0">
+                        Base associée&nbsp;:&nbsp;
+                        <ExternalLink
+                          href={`/bases/${resource.base.slug}`}
+                          className="fr-link"
+                        >
+                          {resource.base.title}
+                        </ExternalLink>
+                      </span>
+                    )}
+                  </div>
+                  <div className="fr-flex fr-flex-gap-2v fr-flex-wrap fr-flex-shrink-0">
+                    <Button
+                      priority="secondary"
+                      size="small"
+                      linkProps={{
+                        href: `/administration/ressources/${resource.id}`,
+                      }}
+                    >
+                      Voir la fiche d’administration
+                    </Button>
+                    <Button
+                      priority="tertiary no outline"
+                      size="small"
+                      linkProps={{
+                        href: `/ressources/${resource.slug}`,
+                        target: '_blank',
+                      }}
+                    >
+                      Voir la ressource
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </AdministrationInfoCard>
       )}
     </AdministrationPageContainer>
