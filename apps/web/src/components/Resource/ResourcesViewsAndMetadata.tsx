@@ -87,7 +87,7 @@ const ResourcesViewsAndMetadata = ({
     )}
     {children && (
       <>
-        <p className="fr-flex fr-flex-gap-2v fr-mb-0">{children}</p>
+        <div className="fr-flex fr-flex-gap-2v fr-mb-0">{children}</div>
       </>
     )}
     {!resource.isPublic && showPrivate && (

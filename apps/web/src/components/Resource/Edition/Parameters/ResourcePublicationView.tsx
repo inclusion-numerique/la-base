@@ -32,22 +32,22 @@ const ResourcePublicationView = ({
       )}
       {resource.base ? (
         <div className={styles.baseInfo}>
-          <p className={classNames(styles.baseName, 'fr-mb-0')}>
+          <div className={classNames(styles.baseName, 'fr-mb-0')}>
             <BaseImage className="fr-mr-1w" base={resource.base} />
             <span>{resource.base.title}</span>
-          </p>
+          </div>
           <BasePrivacyTag isPublic={resource.base.isPublic} />
         </div>
       ) : (
         resource.createdBy && (
           <div className={styles.baseInfo}>
-            <p className={classNames(styles.baseName, 'fr-mb-0')}>
+            <div className={classNames(styles.baseName, 'fr-mb-0')}>
               <RoundProfileImage
                 className="fr-mr-1w"
                 user={resource.createdBy}
               />
               {resource.createdBy.name}
-            </p>
+            </div>
             <ProfilePrivacyTag isPublic={user.isPublic} />
           </div>
         )
