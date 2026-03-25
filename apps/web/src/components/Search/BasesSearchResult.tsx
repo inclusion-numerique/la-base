@@ -20,7 +20,7 @@ const BasesSearchResult = ({
 }) => (
   <>
     <div className={styles.header}>
-      <p className="fr-text--lg fr-mb-0">
+      <p className="fr-text--bold fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Base{sPluriel(totalCount)}
       </p>
       {children}

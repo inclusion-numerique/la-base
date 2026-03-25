@@ -25,7 +25,14 @@ const CollectionInformationsEdition = ({
       data-testid="collection-title-input"
       control={form.control}
       path="title"
-      label="Nom de la collection"
+      label={
+        <>
+          Nom de la collection{' '}
+          <span className="fr-sr-only">
+            {collectionTitleMaxLength} caractères maximums autorisés
+          </span>
+        </>
+      }
       disabled={form.formState.isSubmitting}
       asterisk
       info={titleInfo}

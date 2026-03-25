@@ -104,7 +104,7 @@ const Resources = ({
       </div>
       {!isOwner && (
         <div className={styles.header}>
-          <p className="fr-text--lg fr-mb-0">
+          <p className="fr-text--lg fr-text-–bold fr-mb-0">
             {numberToString(totalCount)} Ressource
             {sPluriel(totalCount)}
           </p>

@@ -464,7 +464,14 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 data-testid="collection-title-input"
                 control={createCollectionForm.control}
                 path="title"
-                label="Nom de la collection"
+                label={
+                  <>
+                    Nom de la collection{' '}
+                    <span className="fr-sr-only">
+                      {collectionTitleMaxLength} caractères maximums autorisés
+                    </span>
+                  </>
+                }
                 disabled={createCollectionForm.formState.isSubmitting}
                 asterisk
                 info={titleInfo}

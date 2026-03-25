@@ -31,7 +31,7 @@ const ResourcesViewsAndMetadata = ({
       className,
     )}
   >
-    <p className="fr-flex fr-flex-gap-2v fr-mb-0">
+    <p className="fr-flex fr-flex-gap-2v fr-mb-0 fr-text--sm">
       <span className="fr-icon-eye-line fr-icon--sm" aria-hidden />
       <span className="fr-text--medium" data-testid="resource-views-count">
         <span className="fr-text--nowrap">

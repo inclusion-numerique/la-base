@@ -1,4 +1,3 @@
-import ExternalLink from '@app/ui/components/ExternalLink'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import NewsFeedBadge from '@app/web/features/fil-d-actualite/components/NewsFeedBadge'
@@ -169,7 +168,7 @@ const Header = ({
                   </li>
                   {user && <HeaderUserMobileNotificationsButton />}
                   <li className="fr-px-md-0 fr-px-2w">
-                    <ExternalLink
+                    <Link
                       data-testid="help-center-link"
                       className="fr-btn fr-btn--no-after"
                       href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
@@ -183,7 +182,7 @@ const Header = ({
                         className="fr-hidden fr-unhidden-lg ri-question-line fr-ml-1w fr-text-label--blue-france"
                         aria-hidden
                       />
-                    </ExternalLink>
+                    </Link>
                   </li>
                   <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
                     <Button

@@ -32,7 +32,7 @@ const ResourcesSearchResults = ({
 }) => (
   <>
     <div className={styles.header}>
-      <TitleTag className="fr-text--lg fr-mb-0">
+      <TitleTag className="fr-text--bold fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
       </TitleTag>
       <p

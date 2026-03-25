@@ -164,6 +164,12 @@
   z-index: 2;
 }
 
+.actionsButtons {
+  @media (max-width: 576px) {
+    margin-left: auto;
+  }
+}
+
 .metadataContainer {
   flex-direction: column-reverse !important;
 }

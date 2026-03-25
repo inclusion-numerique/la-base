@@ -159,7 +159,12 @@ const ResourceCard = ({
             )}
           </ResourcesViewsAndMetadata>
         )}
-        <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
+        <div
+          className={classNames(
+            'fr-flex fr-align-items-center fr-mt-auto',
+            styles.actionsButtons,
+          )}
+        >
           {isContributor && (
             <ResourceMoreActionsDropdown
               context="card"

@@ -5,10 +5,6 @@
 
   /* 1 below modal */
   z-index: 1749;
-
-  :global(.fr-sidemenu__btn[hidden]) {
-    display: block !important;
-  }
 }
 
 .menuInner {
