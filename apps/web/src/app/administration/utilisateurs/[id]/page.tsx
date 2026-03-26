@@ -168,6 +168,14 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 : '-',
             },
             {
+              label: "Onboarding fil d'actualité",
+              value: user.newsFeed
+                ? user.newsFeed.hasCompleteOnboarding
+                  ? 'Oui'
+                  : 'Non'
+                : 'Pas inscrit',
+            },
+            {
               label: 'Description',
               value: description ? (
                 <span

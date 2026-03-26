@@ -7,10 +7,6 @@
       flex-direction: column;
 
       .fr-collapse {
-        /* we want full height to display last button at the bottom */
-
-        /* 72px for header, 48 for the 2 24px paddings */
-        min-height: calc(100vh - 72px - 48px);
         display: flex;
         flex-direction: column;
 
@@ -49,6 +45,21 @@
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+
+  :global .fr-sidemenu__btn[aria-expanded] {
+    @media (min-width: 48em) {
+      padding-left: 0.5rem;
+      padding-right: 2rem;
+    }
+  }
+
+  :global .fr-sidemenu__list .fr-sidemenu__list {
+    width: 100%;
+  }
+
+  :global .fr-sidemenu__list .fr-sidemenu__item {
+    width: 100%;
   }
 }
 
