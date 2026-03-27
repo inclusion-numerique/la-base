@@ -953,8 +953,10 @@ enum NotificationType {
   BaseMemberDeletion     @map("base_member_deletion")
   AskJoinBase            @map("ask_join_base")
   AcceptedAskJoinBase    @map("accepted_ask_join_base")
-  DeclinedAskJoinBase    @map("declined_ask_join_base")
-  ResourceReporting      @map("resource_reporting")
+  DeclinedAskJoinBase          @map("declined_ask_join_base")
+  MemberAcceptedAskJoinBase    @map("member_accepted_ask_join_base")
+  MemberDeclinedAskJoinBase    @map("member_declined_ask_join_base")
+  ResourceReporting            @map("resource_reporting")
   ReportResolved         @map("report_resolved")
 
   @@map("notification_type")
