@@ -1,4 +1,3 @@
-import ExternalLink from '@app/ui/components/ExternalLink'
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import { HeaderUserMenu } from '@app/web/components/HeaderUserMenu'
 import NewsFeedBadge from '@app/web/features/fil-d-actualite/components/NewsFeedBadge'
@@ -85,7 +84,7 @@ const Header = ({
           </div>
           <div className="fr-header__tools">
             <div className="fr-header__tools-links">
-              <nav role="navigation" aria-label="Navigation principale">
+              <div>
                 <ul className="fr-btns-group fr-align-items-center">
                   <li className="fr-px-md-0 fr-px-2w fr-hidden-lg">
                     <Button
@@ -131,7 +130,7 @@ const Header = ({
                     <Button
                       linkProps={{
                         href: searchUrl('ressources', defaultSearchParams),
-                        'aria-label': 'Accès à la recherche de ressources',
+                        'aria-label': 'Rechercher une ressource',
                         'aria-current': 'page',
                       }}
                     >
@@ -169,11 +168,10 @@ const Header = ({
                   </li>
                   {user && <HeaderUserMobileNotificationsButton />}
                   <li className="fr-px-md-0 fr-px-2w">
-                    <ExternalLink
+                    <Link
                       data-testid="help-center-link"
                       className="fr-btn fr-btn--no-after"
                       href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/"
-                      aria-label="Aide - nouvelle fenêtre"
                     >
                       <span
                         className="fr-hidden-lg ri-question-line fr-mr-1w fr-text-label--blue-france"
@@ -184,7 +182,7 @@ const Header = ({
                         className="fr-hidden fr-unhidden-lg ri-question-line fr-ml-1w fr-text-label--blue-france"
                         aria-hidden
                       />
-                    </ExternalLink>
+                    </Link>
                   </li>
                   <li className="fr-position-relative fr-hidden fr-unhidden-lg fr-px-md-0 fr-px-2w">
                     <Button
@@ -201,7 +199,6 @@ const Header = ({
                             : '/fil-d-actualite/tout'
                           : '/connexion?suivant=/fil-d-actualite/tout',
                         'aria-label': "Accès au fil d'actualité",
-                        title: "Fil d'actualité",
                       }}
                       size="small"
                     >
@@ -230,8 +227,8 @@ const Header = ({
                     </li>
                   )}
                 </ul>
-              </nav>
-              <nav role="navigation" aria-label="Navigation secondaire">
+              </div>
+              <div>
                 <ul className="fr-btns-group fr-align-items-center">
                   <li className="fr-position-relative">
                     {user ? (
@@ -275,7 +272,7 @@ const Header = ({
                     )}
                   </li>
                 </ul>
-              </nav>
+              </div>
             </div>
           </div>
         </div>

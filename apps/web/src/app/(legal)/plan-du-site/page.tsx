@@ -85,6 +85,22 @@ const PlanDuSitePage = () => (
             </li>
           </ul>
 
+          <h2 className="fr-h3">Fil d'actualité</h2>
+          <ul>
+            <li>
+              <Link href="/fil-d-actualite/tout">Fil d'actualité</Link>
+            </li>
+          </ul>
+
+          <h2 className="fr-h3">Aide</h2>
+          <ul>
+            <li>
+              <Link href="https://docs.numerique.gouv.fr/docs/a4351149-5e64-403b-a93f-2ac86e4c1043/">
+                Aide
+              </Link>
+            </li>
+          </ul>
+
           <h2 className="fr-h3">Informations légales</h2>
           <ul>
             <li>

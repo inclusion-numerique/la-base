@@ -67,6 +67,7 @@ const RichInputFormField = <T extends FieldValues>({
             path={path}
             menuBar={menuBar}
             id={id}
+            ariaLabel={label}
             ariaDescribedBy={ariaDescribedBy}
             disabled={disabled}
             placeholder={placeholder}
@@ -91,10 +92,12 @@ const RichInputFormField = <T extends FieldValues>({
               className,
             )}
           >
-            <label className="fr-label fr-mb-1v" htmlFor={id}>
-              {label}
-              {hint && <span className="fr-hint-text">{hint}</span>}
-            </label>
+            {(label || hint) && (
+              <label className="fr-label fr-mb-1v" htmlFor={id}>
+                {label}
+                {hint && <span className="fr-hint-text">{hint}</span>}
+              </label>
+            )}
             {icon ? (
               <div className={`fr-input-wrap ${icon}`}>{input}</div>
             ) : (

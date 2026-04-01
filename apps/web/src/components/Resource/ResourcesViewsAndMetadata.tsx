@@ -31,7 +31,7 @@ const ResourcesViewsAndMetadata = ({
       className,
     )}
   >
-    <span className="fr-flex fr-flex-gap-2v">
+    <p className="fr-flex fr-flex-gap-2v fr-mb-0 fr-text--sm">
       <span className="fr-icon-eye-line fr-icon--sm" aria-hidden />
       <span className="fr-text--medium" data-testid="resource-views-count">
         <span className="fr-text--nowrap">
@@ -51,13 +51,13 @@ const ResourcesViewsAndMetadata = ({
         >
           <span className="fr-text--nowrap">
             {numberToString(resource._count.collections)}
-            <span
-              className={classNames(
-                showLabels
-                  ? 'fr-hidden fr-unhidden-sm'
-                  : 'fr-hidden-sm fr-unhidden fr-sr-only',
-              )}
-            >
+            {showLabels && (
+              <span className="fr-hidden fr-unhidden-sm">
+                {' '}
+                Enregistrement{sPluriel(resource._count.collections)}
+              </span>
+            )}
+            <span className="fr-hidden-sm fr-unhidden fr-sr-only">
               {' '}
               Enregistrement{sPluriel(resource._count.collections)}
             </span>
@@ -65,14 +65,12 @@ const ResourcesViewsAndMetadata = ({
         </span>
       )}
       {context === 'view' && (
-        <ResourceCollectionsModal resource={resource as Resource}>
-          <ResourceInformationsModalButton
-            title={`${numberToString(
-              resource._count.collections,
-            )} Enregistrement${sPluriel(resource._count.collections)}`}
-            className={classNames('fr-text--medium', styles.feedbackLink)}
-          />
-        </ResourceCollectionsModal>
+        <ResourceInformationsModalButton
+          title={`${numberToString(
+            resource._count.collections,
+          )} Enregistrement${sPluriel(resource._count.collections)}`}
+          className={classNames('fr-text--medium', styles.feedbackLink)}
+        />
       )}
       {!resource.isPublic && showPrivate && (
         <span className="fr-unhidden fr-hidden-sm">
@@ -83,10 +81,13 @@ const ResourcesViewsAndMetadata = ({
           </span>
         </span>
       )}
-    </span>
+    </p>
+    {context === 'view' && (
+      <ResourceCollectionsModal resource={resource as Resource} />
+    )}
     {children && (
       <>
-        <span className="fr-flex fr-flex-gap-2v">{children}</span>
+        <div className="fr-flex fr-flex-gap-2v fr-mb-0">{children}</div>
       </>
     )}
     {!resource.isPublic && showPrivate && (

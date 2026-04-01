@@ -12,11 +12,13 @@ const SaveInNestedCollection = ({
   user,
   onClick,
   alreadyInCollections,
+  isExpanded = false,
 }: {
   base?: SessionUserBase
   user: SessionUser
   onClick: () => void
   alreadyInCollections: number
+  isExpanded?: boolean
 }) => {
   const isMobile = useIsMobile()
   const avatarSize = isMobile ? 32 : 48
@@ -30,7 +32,7 @@ const SaveInNestedCollection = ({
       onClick={onClick}
       type="button"
       data-testid="add-in-collection-bases"
-      aria-expanded={false}
+      aria-expanded={isExpanded}
     >
       <div className={styles.content}>
         <div className="fr-flex fr-justify fr-align-items-center fr-flex-gap-6v">

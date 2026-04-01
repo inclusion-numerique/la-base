@@ -6,5 +6,6 @@
 .urlContainer {
   white-space: nowrap;
   overflow-x: clip;
+  overflow-clip-margin: 3px;
   text-overflow: ellipsis;
 }

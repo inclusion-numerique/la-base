@@ -61,8 +61,11 @@ export const FeaturedResource = ({
 }: FeaturedResourceProps) => (
   <div className="fr-border-top fr-enlarge-link fr-no-hover-bg fr-flex fr-direction-column">
     <h4 className="fr-text--md fr-mb-1v" style={{ order: 2 }}>
-      <Link href={`/ressources/${slug}`} aria-label={title}>
-        <CropText limit={79}>{title}</CropText>
+      <Link href={`/ressources/${slug}`}>
+        <span aria-hidden="true">
+          <CropText limit={79}>{title}</CropText>
+        </span>
+        <span className="fr-sr-only">{title}</span>
       </Link>
     </h4>
     <div

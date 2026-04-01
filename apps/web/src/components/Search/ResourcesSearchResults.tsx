@@ -20,17 +20,30 @@ const ResourcesSearchResults = ({
   resources,
   user,
   children,
+  titleAs: TitleTag = 'p',
+  cardTitleAs = 'h2',
 }: {
   totalCount: number
   resources: Resource[] | BaseResource[]
   user: SessionUser | null
   children: ReactNode
+  titleAs?: 'p' | 'h2'
+  cardTitleAs?: 'h2' | 'h3'
 }) => (
   <>
     <div className={styles.header}>
-      <h1 className="fr-text--lg fr-mb-0" role="status" aria-atomic="true">
+      <TitleTag className="fr-text--bold fr-text--lg fr-mb-0">
         {numberToString(totalCount)} Ressource{sPluriel(totalCount)}
-      </h1>
+      </TitleTag>
+      <p
+        className="fr-sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        Les résultats ont été mis à jour. {numberToString(totalCount)} ressource
+        {sPluriel(totalCount)} trouvée{sPluriel(totalCount)}.
+      </p>
       {children}
     </div>
     {resources.length > 0 ? (
@@ -47,6 +60,7 @@ const ResourcesSearchResults = ({
           }
           resource={resource}
           user={user}
+          titleAs={cardTitleAs}
         />
       ))
     ) : (

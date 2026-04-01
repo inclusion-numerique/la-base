@@ -37,74 +37,81 @@ const VisibilityField = <T extends FieldValues>({
   <Controller
     control={control}
     name={path}
-    render={({ field: { onChange, name, value }, fieldState: { error } }) => (
-      <fieldset
-        className="fr-fieldset"
-        id="radio-rich"
-        aria-labelledby="radio-rich-legend"
-        aria-describedby={error ? 'radio-rich-error' : undefined}
-      >
-        {!!label && (
-          <legend
-            id="radio-rich-legend"
-            className="fr-label fr-mb-2v fr-ml-1-5v fr-sr-only"
+    render={({ field: { onChange, name, value }, fieldState: { error } }) => {
+      const fieldsetId = `radio-${model.toLowerCase()}`
+      const legendId = `${fieldsetId}-legend`
+      const errorId = `${fieldsetId}-error`
+      return (
+        <fieldset
+          className="fr-fieldset"
+          id={fieldsetId}
+          aria-labelledby={legendId}
+          aria-describedby={error ? errorId : undefined}
+        >
+          {!!label && (
+            <legend
+              id={legendId}
+              className="fr-label fr-mb-2v fr-ml-1-5v fr-sr-only"
+            >
+              {label} {asterisk && <RedAsterisk />}
+            </legend>
+          )}
+          <ResourceBaseRichRadioElement
+            id={`radio-${model.toLowerCase()}-public`}
+            disabled={disabled}
+            data-testid={`visibility-radio-${model.toLowerCase()}-public`}
+            name={name}
+            value={value == null ? null : `${value}`}
+            radioValue="true"
+            onChange={() => {
+              if (setIsPublic) {
+                setIsPublic(true)
+              }
+              onChange(true)
+            }}
           >
-            {label} {asterisk && <RedAsterisk />}
-          </legend>
-        )}
-        <ResourceBaseRichRadioElement
-          id={`radio-${model.toLowerCase()}-public`}
-          disabled={disabled}
-          data-testid={`visibility-radio-${model.toLowerCase()}-public`}
-          name={name}
-          value={value == null ? null : `${value}`}
-          radioValue="true"
-          onChange={() => {
-            if (setIsPublic) {
-              setIsPublic(true)
-            }
-            onChange(true)
-          }}
-        >
-          <div className="fr-flex-grow-1 fr-mr-1w">
-            <p className="fr-text--md fr-text--normal fr-mb-0">{publicTitle}</p>
-            <p className="fr-text--xs fr-hint-text fr-mb-0">{publicHint}</p>
-          </div>
-          <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
-            <PrivacyTag isPublic />
-          </div>
-        </ResourceBaseRichRadioElement>
-        <ResourceBaseRichRadioElement
-          id={`radio-${model.toLowerCase()}-private`}
-          data-testid={`visibility-radio-${model.toLowerCase()}-private`}
-          disabled={disabled}
-          name={name}
-          value={value == null ? null : `${value}`}
-          radioValue="false"
-          onChange={() => {
-            if (setIsPublic) {
-              setIsPublic(false)
-            }
-            onChange(false)
-          }}
-        >
-          <div className="fr-flex-grow-1 fr-mr-1w">
-            <p className="fr-text--md fr-text--normal fr-mb-0">
-              {privateTitle}
+            <div className="fr-flex-grow-1 fr-mr-1w">
+              <p className="fr-text--md fr-text--normal fr-mb-0">
+                {publicTitle}
+              </p>
+              <p className="fr-text--xs fr-hint-text fr-mb-0">{publicHint}</p>
+            </div>
+            <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
+              <PrivacyTag isPublic />
+            </div>
+          </ResourceBaseRichRadioElement>
+          <ResourceBaseRichRadioElement
+            id={`radio-${model.toLowerCase()}-private`}
+            data-testid={`visibility-radio-${model.toLowerCase()}-private`}
+            disabled={disabled}
+            name={name}
+            value={value == null ? null : `${value}`}
+            radioValue="false"
+            onChange={() => {
+              if (setIsPublic) {
+                setIsPublic(false)
+              }
+              onChange(false)
+            }}
+          >
+            <div className="fr-flex-grow-1 fr-mr-1w">
+              <p className="fr-text--md fr-text--normal fr-mb-0">
+                {privateTitle}
+              </p>
+              <p className="fr-text--xs fr-hint-text fr-mb-0">{privateHint}</p>
+            </div>
+            <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
+              <PrivacyTag />
+            </div>
+          </ResourceBaseRichRadioElement>
+          {error && (
+            <p className="fr-error-text" id={errorId}>
+              {error.message}
             </p>
-            <p className="fr-text--xs fr-hint-text fr-mb-0">{privateHint}</p>
-          </div>
-          <div className="fr-hidden fr-unhidden-sm fr-ml-3w">
-            <PrivacyTag />
-          </div>
-        </ResourceBaseRichRadioElement>
-        {error && (
-          <p className="fr-error-text" id="radio-rich-error">
-            {error.message}
-          </p>
-        )}
-      </fieldset>
-    )}
+          )}
+        </fieldset>
+      )
+    }}
   />
 )
 

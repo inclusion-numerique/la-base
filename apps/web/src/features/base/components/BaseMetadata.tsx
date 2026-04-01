@@ -31,6 +31,8 @@ const BaseMetadata = ({
     context === 'base'
       ? `Vue${sPluriel(resourcesViews)} sur les ressources`
       : `Vue${sPluriel(resourcesViews)}`
+  const textLabelClassName =
+    context === 'card' ? undefined : styles.spanMdDisplay
   return (
     <div
       className={classNames(
@@ -42,7 +44,7 @@ const BaseMetadata = ({
         <span className="fr-icon-file-text-line fr-icon--sm" />
         <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesCount)}</b>
-          <span className={styles.spanMdDisplay}>
+          <span className={textLabelClassName}>
             {' '}
             Ressource{sPluriel(resourcesCount)}
           </span>
@@ -58,7 +60,7 @@ const BaseMetadata = ({
             <span className="fr-icon-user-heart-line fr-icon--sm" />
             <p className="fr-mb-0 fr-text--sm">
               <b>{numberToString(followedBy)}</b>
-              <span className={styles.spanMdDisplay}>
+              <span className={textLabelClassName}>
                 {' '}
                 Suivi{sPluriel(followedBy)}
               </span>
@@ -69,7 +71,7 @@ const BaseMetadata = ({
         <span className="fr-icon-eye-line fr-icon--sm" />
         <p className="fr-mb-0 fr-text--sm">
           <b>{numberToString(resourcesViews)}</b>
-          <span className={styles.spanMdDisplay}> {viewsLabel}</span>
+          <span className={textLabelClassName}> {viewsLabel}</span>
         </p>
       </div>
       {!!base.department && context === 'base' && (

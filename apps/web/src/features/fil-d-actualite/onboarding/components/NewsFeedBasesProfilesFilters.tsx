@@ -13,7 +13,7 @@ import {
 } from '@app/web/server/newsFeed/newsFeedUrls'
 import Button from '@codegouvfr/react-dsfr/Button'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from '../../NewsFeedSearchFilters.module.css'
 import commonStyles from './NewsFeedFilters.module.css'
 
@@ -39,6 +39,7 @@ export const NewsFeedBasesProfilesFilters = ({
       ].findIndex((slug) => slug === params) > 4,
   )
 
+  const listRef = useRef<HTMLUListElement>(null)
   const allItems = [...bases, ...profiles]
   const displayedItems = showAll ? allItems : allItems.slice(0, 4)
   const displayedBases = displayedItems.filter(
@@ -64,6 +65,7 @@ export const NewsFeedBasesProfilesFilters = ({
             'fr-text-mention--black fr-px-1v',
           )}
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
           aria-label={
             isOpen
               ? 'Masquer les bases et profils suivis'
@@ -90,7 +92,7 @@ export const NewsFeedBasesProfilesFilters = ({
         </Button>
       </div>
       {isOpen && (
-        <ul className="fr-raw-list fr-flex fr-direction-column">
+        <ul ref={listRef} className="fr-raw-list fr-flex fr-direction-column">
           {displayedBases.map(({ base }) => (
             <li key={base.id}>
               <Button
@@ -128,6 +130,7 @@ export const NewsFeedBasesProfilesFilters = ({
                     className={classNames('fr-mb-0 fr-text--xs', styles.count)}
                   >
                     {baseCounts[base.slug].count}
+                    <span className="fr-sr-only"> ressources</span>
                   </span>
                 </div>
               </Button>
@@ -174,6 +177,7 @@ export const NewsFeedBasesProfilesFilters = ({
                     className={classNames('fr-mb-0 fr-text--xs', styles.count)}
                   >
                     {profileCounts[profile.slug].count}
+                    <span className="fr-sr-only"> ressources</span>
                   </span>
                 </div>
               </Button>
@@ -183,7 +187,21 @@ export const NewsFeedBasesProfilesFilters = ({
             <li>
               <Button
                 priority="tertiary no outline"
-                onClick={() => setShowAll((prev) => !prev)}
+                aria-expanded={showAll}
+                onClick={() => {
+                  const wasShowingAll = showAll
+                  setShowAll((prev) => !prev)
+                  if (!wasShowingAll) {
+                    setTimeout(() => {
+                      const items =
+                        listRef.current?.querySelectorAll('li a, li button')
+                      if (items && items.length > 4) {
+                        const firstNewItem = items[4] as HTMLElement
+                        firstNewItem?.focus()
+                      }
+                    }, 0)
+                  }
+                }}
               >
                 {showAll ? 'Voir moins' : 'Voir toutes'}
                 <span className="fr-sr-only">

@@ -5,8 +5,6 @@ import { BaseJoinRequest } from '@app/web/features/base/join-requests/components
 import type { BasePageData } from '@app/web/server/bases/getBase'
 import { getServerUrl } from '@app/web/utils/baseUrl'
 import Badge from '@codegouvfr/react-dsfr/Badge'
-import Button from '@codegouvfr/react-dsfr/Button'
-import Tooltip from '@codegouvfr/react-dsfr/Tooltip'
 import Link from 'next/link'
 import BaseImages from '../../../components/Base/BaseImages'
 import Breadcrumbs from '../../../components/Breadcrumbs'
@@ -83,20 +81,13 @@ const BaseHeader = ({
                     </div>
                     {!!base.email && base.emailIsPublic && (
                       <div>
-                        <Tooltip title="Contacter">
-                          <Button
-                            size="small"
-                            title="Contacter"
-                            iconId="fr-icon-mail-line"
-                            priority="secondary"
-                            linkProps={{
-                              href: `mailto:${base.email}`,
-                            }}
-                          />
-                          <span className="fr-sr-only">
-                            Contacter par email
-                          </span>
-                        </Tooltip>
+                        <Link
+                          className="fr-btn fr-btn--sm fr-btn--secondary fr-icon-mail-line fr-btn--icon-left fr-width-full fr-justify-content-center"
+                          href={`mailto:${base.email}`}
+                          aria-label="Contacter par email"
+                        >
+                          Contacter
+                        </Link>
                       </div>
                     )}
                     <div>

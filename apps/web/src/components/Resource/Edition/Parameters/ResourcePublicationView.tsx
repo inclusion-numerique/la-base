@@ -7,6 +7,7 @@ import {
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
 import Notice from '@codegouvfr/react-dsfr/Notice'
+import classNames from 'classnames'
 import styles from './ResourcePublicationView.module.css'
 
 const ResourcePublicationView = ({
@@ -31,7 +32,7 @@ const ResourcePublicationView = ({
       )}
       {resource.base ? (
         <div className={styles.baseInfo}>
-          <div className={styles.baseName}>
+          <div className={classNames(styles.baseName, 'fr-mb-0')}>
             <BaseImage className="fr-mr-1w" base={resource.base} />
             <span>{resource.base.title}</span>
           </div>
@@ -40,7 +41,7 @@ const ResourcePublicationView = ({
       ) : (
         resource.createdBy && (
           <div className={styles.baseInfo}>
-            <div className={styles.baseName}>
+            <div className={classNames(styles.baseName, 'fr-mb-0')}>
               <RoundProfileImage
                 className="fr-mr-1w"
                 user={resource.createdBy}

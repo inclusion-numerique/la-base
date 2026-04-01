@@ -1,6 +1,6 @@
 export const contentId = 'contenu'
 export const footerId = 'fr-footer'
-export const searchId = 'recherche'
+export const searchId = 'header-recherche'
 export const searchInputId = 'search-bar'
 
 export const contentSkipLink = { label: 'Contenu', anchor: `#${contentId}` }

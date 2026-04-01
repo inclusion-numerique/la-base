@@ -90,12 +90,12 @@ const HomePage = async ({
                 Les principes à suivre pour publier une ressource et contribuer
                 à la plateforme
               </h2>
-              <span className="fr-mb-4w fr-mb-md-3w">
+              <p className="fr-mb-4w fr-mb-md-3w">
                 Consultez notre charte indiquant les principes qui guident la
                 construction d'un numérique d'intérêt général, ainsi que
                 certaines conditions que les créateurs de ressources s'engagent
                 à respecter.
-              </span>
+              </p>
               <div>
                 <Button
                   linkProps={{ href: '/charte' }}

@@ -66,6 +66,10 @@ const SearchFilters = ({
       },
     ])
     router.push(nextUrl)
+    requestAnimationFrame(() => {
+      const status = document.querySelector<HTMLElement>('[role="status"]')
+      status?.focus()
+    })
   }
 
   const onUnselect = (option: SelectOption, category: FilterKey) => {
@@ -84,6 +88,10 @@ const SearchFilters = ({
       ),
     )
     router.push(nextUrl)
+    requestAnimationFrame(() => {
+      const status = document.querySelector<HTMLElement>('[role="status"]')
+      status?.focus()
+    })
   }
 
   const onSelectThematics = (options: SelectOption[], category: FilterKey) => {
@@ -139,7 +147,7 @@ const SearchFilters = ({
   )
 
   return (
-    <div className="fr-mb-3w fr-mb-md-6w">
+    <div className="fr-mb-3w fr-mb-md-6w" id="search-filters-container">
       <p className="fr-sr-only">
         Les résultats se mettent à jour automatiquement à l'activation d'un
         filtre.
