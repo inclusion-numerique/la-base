@@ -120,13 +120,12 @@ const ResourceCard = ({
             />
           </div>
         )}
-      </Link>
+      </div>
       <div
         className={classNames(
           'fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w',
           context === 'highlight' && isContributor && 'fr-flex-wrap',
-            styles.actions,
-
+          styles.actions,
         )}
       >
         {resource.published && (
