@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export const InvitationAlreadyProcessed = () => (
   <div
     className="fr-flex fr-direction-column fr-background-alt--blue-ecume"
@@ -10,11 +12,14 @@ export const InvitationAlreadyProcessed = () => (
         className="fr-mb-6v fr-mx-auto fr-display-block"
       />
       <h1 className="fr-h3 fr-text-title--blue-france fr-mb-0 fr-mx-md-12v">
-        Cette invitation n’est plus valide.
+        Cette invitation n'est plus valide.
       </h1>
       <p className="fr-my-12v">
         Vous avez déjà accepté ou refusé cette invitation.
       </p>
+      <Link className="fr-btn" href="/">
+        Retour à l&apos;accueil
+      </Link>
     </div>
   </div>
 )

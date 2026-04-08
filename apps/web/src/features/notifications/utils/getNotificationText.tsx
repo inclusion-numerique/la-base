@@ -238,6 +238,44 @@ const NOTIFICATION_TEXTS = {
       </Link>
     </>
   ),
+  MemberAcceptedAskJoinBase: (notification: NotificationWithRelations) => (
+    <>
+      La demande de&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/profils/${notification.initiator?.slug}`}
+      >
+        {formatName(notification.initiator?.name || '')}
+      </Link>
+      &nbsp;à rejoindre votre base&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/bases/${notification.base?.slug}`}
+      >
+        {notification.base?.title}
+      </Link>
+      &nbsp;a été acceptée
+    </>
+  ),
+  MemberDeclinedAskJoinBase: (notification: NotificationWithRelations) => (
+    <>
+      La demande de&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/profils/${notification.initiator?.slug}`}
+      >
+        {formatName(notification.initiator?.name || '')}
+      </Link>
+      &nbsp;à rejoindre votre base&nbsp;
+      <Link
+        className="fr-link fr-text--sm fr-text-decoration--none fr-link--underline-on-hover"
+        href={`/bases/${notification.base?.slug}`}
+      >
+        {notification.base?.title}
+      </Link>
+      &nbsp;a été refusée
+    </>
+  ),
   ResourceReporting: (notification: NotificationWithRelations) => (
     <>
       <Link
