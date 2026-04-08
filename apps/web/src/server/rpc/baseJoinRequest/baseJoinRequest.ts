@@ -209,7 +209,7 @@ export const baseJoinRequestRouter = router({
       ])
 
       sendJoinRequestAcceptedEmail({
-        url: `${process.env.NEXT_PUBLIC_APP_BASE_URL}/bases/${joinRequest.base.slug}`,
+        url: `/bases/${joinRequest.base.slug}`,
         email: joinRequest.applicant.email,
         baseTitle: joinRequest.base.title,
         adminName: user.name || user.email,
