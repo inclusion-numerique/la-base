@@ -8,6 +8,8 @@
 - [Installation](#installation)
 - [Demarrage](#demarrage)
 - [Scripts disponibles](#scripts-disponibles)
+- [CLI (`apps/cli`)](#cli-appscli)
+- [Jobs et crons](#jobs-et-crons)
 - [Infrastructure Terraform (CDK)](#infrastructure-terraform-cdk)
 - [Procedures de contribution](#procedures-de-contribution)
 - [Stack technique](#stack-technique)
@@ -227,6 +229,121 @@ pnpm dev
 
 ---
 
+## CLI (`apps/cli`)
+
+L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour l'automatisation, le deploiement et l'administration de la plateforme. Elle est construite avec [Commander.js](https://github.com/tj/commander.js).
+
+### Deploiement
+
+| Commande | Description |
+|----------|-------------|
+| `deployment:check-status <url>` | Verifie la sante d'un deploiement (endpoint `/health` + validite de la page d'accueil) |
+
+### Domaine metier
+
+| Commande | Description |
+|----------|-------------|
+| `domain:add-conseillers-numeriques-to-bases` | Ajoute les conseillers numeriques aux bases (follows + membres) |
+| `domain:remove-inactive-conseillers-numeriques` | Supprime les comptes conseillers numeriques auto-crees et inactifs |
+
+### GitHub Deployments
+
+| Commande | Description |
+|----------|-------------|
+| `github:deployment:create <branch>` | Cree un deploiement GitHub (production si `main`, sinon transient) |
+| `github:deployment:update <id> <state> [-u url] [-l log] [-d desc]` | Met a jour le statut d'un deploiement GitHub |
+| `github:deployment:deactivate <branch>` | Desactive tous les deploiements GitHub d'une branche |
+
+### Infrastructure Scaleway
+
+| Commande | Description |
+|----------|-------------|
+| `infrastructure:create <resource> <names> [--dry-run]` | Cree les ressources Scaleway manquantes (`database` ou `container`) |
+| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche un pipeline CircleCI) |
+| `infrastructure:inventory` | Outil interactif pour visualiser et nettoyer l'infrastructure (branches, conteneurs, BDD, buckets S3) |
+
+### Variables d'environnement et secrets
+
+| Commande | Description |
+|----------|-------------|
+| `dotenv:from-cdk <stack>` | Extrait les outputs CDK et les ajoute au `.env` (`web` ou `project`) |
+| `dotenv:from-secrets` | Recupere tous les secrets du Vault Scaleway et les ajoute au `.env` |
+| `dotenv:add-next-public <namespace> [--local]` | Ajoute les variables `NEXT_PUBLIC_*` au `.env` |
+| `terraform:vars-from-env <stack>` | Genere un `.tfvars.json` a partir des variables d'environnement |
+| `secrets:list` | Liste tous les noms de secrets disponibles |
+| `secrets:get <name>` | Recupere la valeur d'un secret |
+| `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD pour un namespace |
+| `secrets:database-password <namespace>` | Recupere le mot de passe BDD d'un namespace |
+
+### Execution de jobs
+
+| Commande | Description |
+|----------|-------------|
+| `job:execute <name> [data]` | Execute un job en local (directement dans le processus) |
+| `job:api:execute <name> [data] [--deployment main\|dev\|branch]` | Execute un job via l'API (`POST /api/jobs`, authentifie par `x-api-token`) |
+
+### Stockage et sauvegardes
+
+| Commande | Description |
+|----------|-------------|
+| `s3:recycle-orphaned-files [options]` | Identifie et supprime les fichiers S3 orphelins. Options : `--prefix`, `--include-legacy`, `--threshold-months` (defaut: 3), `--delete` (dry-run par defaut), `--batch-size` |
+| `storage-migration:migrate` | Migre les fichiers des buckets par environnement vers un bucket unifie avec prefixes (idempotent) |
+| `backup:locally-restore-latest-main [options]` | Restaure localement la derniere sauvegarde de la BDD main. Options : `-d <date>` (YYYY-MM-DD), `-l` (utiliser un backup deja telecharge), `--list`, `-t <type>` (weekly, daily, hourly) |
+
+### Sentry
+
+| Commande | Description |
+|----------|-------------|
+| `sentry:delete-environment-issues <environment>` | Supprime les issues Sentry d'un environnement (interdit pour `main`) |
+
+---
+
+## Jobs et crons
+
+### Systeme de jobs
+
+Les jobs sont des taches executables definies dans `apps/web/src/jobs/`. Chaque job possede un schema de validation Zod et un executeur. Ils peuvent etre declenches de 3 facons :
+
+1. **Cron Scaleway** : declenchement automatique programme (production uniquement)
+2. **CLI locale** : `pnpm cli job:execute <nom> [payload]`
+3. **API** : `POST /api/jobs` avec header `x-api-token` (duree max : 10 min)
+
+### Jobs disponibles
+
+| Job | Description | Payload |
+|-----|-------------|---------|
+| `backup-database` | Sauvegarde de la base de donnees | `{ databaseName: string, type: "weekly" \| "daily" \| "hourly" }` |
+| `account-inactivity` | Verification et traitement des comptes inactifs | aucun |
+| `monthly-newsletter-news-feed` | Envoi de la newsletter mensuelle | aucun |
+| `import-contacts-to-brevo` | Import des contacts vers Brevo (execution manuelle uniquement) | aucun |
+
+### Crons en production
+
+Les crons sont configures via des **Container Cron** Scaleway et ne s'executent que sur l'environnement `main` (production).
+
+| Cron | Planning | Description |
+|------|----------|-------------|
+| Sauvegarde horaire | `0 * * * *` | Backup BDD toutes les heures |
+| Sauvegarde quotidienne | `0 0 * * *` | Backup BDD chaque jour a minuit (UTC) |
+| Sauvegarde hebdomadaire | `0 0 * * 0` | Backup BDD chaque dimanche a minuit (UTC) |
+| Newsletter mensuelle | `0 8 1 * *` | Envoi le 1er du mois a 8h (UTC) |
+| Inactivite des comptes | `0 9 * * *` | Verification quotidienne a 9h (UTC) |
+
+Les sauvegardes sont stockees dans le bucket S3 `backups`. On peut les restaurer localement via :
+
+```bash
+# Lister les sauvegardes disponibles
+pnpm cli backup:locally-restore-latest-main --list
+
+# Restaurer la derniere sauvegarde hebdomadaire
+pnpm cli backup:locally-restore-latest-main -t weekly
+
+# Restaurer la sauvegarde d'une date specifique
+pnpm cli backup:locally-restore-latest-main -d 2025-01-15
+```
+
+---
+
 ## Infrastructure Terraform (CDK)
 
 L'infrastructure est definie en TypeScript avec [CDKTF](https://developer.hashicorp.com/terraform/cdktf) (CDK for Terraform) et deployee sur **Scaleway** (region `fr-par`).
@@ -302,7 +419,7 @@ WebAppStack
 
 | | Main (production) | Dev / Preview |
 |---|---|---|
-| **Domaine** | lesbases.anct.gouv.fr | v2.labase.incubateur.anct.gouv.fr |
+| **Domaine** | lesbases.anct.gouv.fr |
 | **Conteneurs** | 2 a 5 instances | 0 a 1 instance |
 | **CPU / Memoire** | 2240 mVCPU / 3072 Mo | 1120 mVCPU / 2048 Mo |
 | **Email** | Brevo + Scaleway TEM | MailDev |
