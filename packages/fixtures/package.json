@@ -20,7 +20,7 @@
     "dotenv": "^17.2.1",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
-    "uuid": "^11.1.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
