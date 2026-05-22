@@ -3,7 +3,7 @@ import { getServerDsfrTheme } from '@app/web/app/getServerDsfrTheme'
 import Footer, { type FooterProps } from '@codegouvfr/react-dsfr/Footer'
 
 export const publicFooterProps = {
-  accessibility: 'non compliant',
+  accessibility: 'partially compliant',
   accessibilityLinkProps: { href: '/accessibilite' },
   bottomItems: [
     {
