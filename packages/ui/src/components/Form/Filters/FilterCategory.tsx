@@ -40,6 +40,7 @@ export const FilterCategory = ({
                 onClick={() => {
                   setOpenedCategory(currentCategory ? '' : key)
                 }}
+                aria-expanded={currentCategory}
               >
                 <h3 className="fr-text--sm fr-text--medium fr-text-title--blue-france fr-mb-0">
                   {key}

@@ -12,6 +12,19 @@
     justify-content: flex-start;
   }
 
+  @media (max-width: 61.99em) {
+    :global(.fr-nav__link[aria-current]:not([aria-current='false']))::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 2px;
+      height: 1.5rem;
+      margin-top: -0.75rem;
+    }
+  }
+
   :global(.fr-nav__link) {
     &:hover {
       background-color: var(--background-alt-blue-cumulus-hover) !important;

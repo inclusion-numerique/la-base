@@ -6,7 +6,7 @@
   padding: 0;
   flex-direction: column-reverse;
   justify-content: stretch;
-  overflow: hidden;
+  overflow: clip;
   cursor: pointer;
 
   @media (min-width: 576px) {

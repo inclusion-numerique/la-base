@@ -4,7 +4,10 @@ import { sendBaseJoinRequestEmail } from '@app/web/features/base/join-requests/e
 import { sendJoinRequestAcceptedEmail } from '@app/web/features/base/join-requests/emails/sendJoinRequestAcceptedEmail'
 import { sendJoinRequestRejectedEmail } from '@app/web/features/base/join-requests/emails/sendJoinRequestRejectedEmail'
 import { prismaClient } from '@app/web/prismaClient'
-import { createNotification } from '@app/web/server/notifications/createNotificationWithDeduplication'
+import {
+  createNotification,
+  createNotifications,
+} from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
 import {
   authorizeOrThrow,
@@ -151,6 +154,14 @@ export const baseJoinRequestRouter = router({
             select: {
               title: true,
               slug: true,
+              members: {
+                where: {
+                  accepted: { not: null },
+                },
+                select: {
+                  memberId: true,
+                },
+              },
               ...baseAuthorizationTargetSelect,
             },
           },
@@ -198,18 +209,34 @@ export const baseJoinRequestRouter = router({
       ])
 
       sendJoinRequestAcceptedEmail({
-        url: `${process.env.NEXT_PUBLIC_APP_BASE_URL}/bases/${joinRequest.base.slug}`,
+        url: `/bases/${joinRequest.base.slug}`,
         email: joinRequest.applicant.email,
         baseTitle: joinRequest.base.title,
         adminName: user.name || user.email,
       }).catch((error) => Sentry.captureException(error))
 
+      // Notify the applicant
       await createNotification({
         userId: joinRequest.applicantId,
         type: 'AcceptedAskJoinBase',
         baseId: joinRequest.baseId,
         initiatorId: user.id,
       })
+
+      // Notify all other base members
+      const memberNotifications = joinRequest.base.members
+        .filter(
+          (member) =>
+            member.memberId !== user.id &&
+            member.memberId !== joinRequest.applicantId,
+        )
+        .map((member) => ({
+          userId: member.memberId,
+          type: 'MemberAcceptedAskJoinBase' as const,
+          baseId: joinRequest.baseId,
+          initiatorId: joinRequest.applicantId,
+        }))
+      await createNotifications(memberNotifications)
 
       return newMember
     }),
@@ -230,6 +257,14 @@ export const baseJoinRequestRouter = router({
           base: {
             select: {
               title: true,
+              members: {
+                where: {
+                  accepted: { not: null },
+                },
+                select: {
+                  memberId: true,
+                },
+              },
               ...baseAuthorizationTargetSelect,
             },
           },
@@ -266,6 +301,17 @@ export const baseJoinRequestRouter = router({
         baseId: joinRequest.baseId,
         initiatorId: user.id,
       })
+
+      // Notify all other base members
+      const memberNotifications = joinRequest.base.members
+        .filter((member) => member.memberId !== user.id)
+        .map((member) => ({
+          userId: member.memberId,
+          type: 'MemberDeclinedAskJoinBase' as const,
+          baseId: joinRequest.baseId,
+          initiatorId: joinRequest.applicantId,
+        }))
+      await createNotifications(memberNotifications)
     }),
   remove: protectedProcedure
     .input(z.object({ baseId: z.string().uuid() }))

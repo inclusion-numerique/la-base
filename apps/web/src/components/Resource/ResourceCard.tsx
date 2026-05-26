@@ -59,14 +59,11 @@ const ResourceCard = ({
         styles.body,
       )}
     >
-      <Link
-        href={appendShareToken(`/ressources/${resource.slug}`, shareToken)}
+      <div
         className={classNames(
           styles.content,
           context === 'newsFeed' && styles.contentNewsFeed,
         )}
-        data-testid="resource-card-link"
-        aria-label={`Consulter la ressource ${resource.title}`}
       >
         <div className={styles.textAndDescription}>
           {withDate && (
@@ -85,7 +82,16 @@ const ResourceCard = ({
               'fr-mb-md-3v fr-mb-1w',
             )}
           >
-            {resource.title}
+            <Link
+              href={appendShareToken(
+                `/ressources/${resource.slug}`,
+                shareToken,
+              )}
+              className={styles.titleLink}
+              data-testid="resource-card-link"
+            >
+              {resource.title}
+            </Link>
           </ResourceTitle>
           <p
             className={classNames(
@@ -114,11 +120,12 @@ const ResourceCard = ({
             />
           </div>
         )}
-      </Link>
+      </div>
       <div
         className={classNames(
           'fr-flex fr-align-items-center fr-justify-content-space-between fr-direction-row fr-my-2w',
           context === 'highlight' && isContributor && 'fr-flex-wrap',
+          styles.actions,
         )}
       >
         {resource.published && (
@@ -151,7 +158,12 @@ const ResourceCard = ({
             )}
           </ResourcesViewsAndMetadata>
         )}
-        <div className="fr-flex fr-align-items-center fr-ml-auto fr-mt-auto">
+        <div
+          className={classNames(
+            'fr-flex fr-align-items-center fr-mt-auto',
+            styles.actionsButtons,
+          )}
+        >
           {isContributor && (
             <ResourceMoreActionsDropdown
               context="card"

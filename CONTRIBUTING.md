@@ -1,209 +1,544 @@
 # Guide de Contribution
 
-## 📑 Table des matières
+## Table des matieres
 
-- 📦 [Prérequis](#prérequis)
-- 🚀 [Démarrage](#démarrage)
-- 🛠️ [Scripts Disponibles](#scripts-disponibles)
-- 🤝 [Procédures](#procédures)
-- 🏗️ [Construit avec](#construit-avec)
+- [Contexte du projet](#contexte-du-projet)
+- [Architecture du monorepo](#architecture-du-monorepo)
+- [Prerequis](#prerequis)
+- [Installation](#installation)
+- [Demarrage](#demarrage)
+- [Scripts disponibles](#scripts-disponibles)
+- [CLI (`apps/cli`)](#cli-appscli)
+- [Jobs et crons](#jobs-et-crons)
+- [Infrastructure Terraform (CDK)](#infrastructure-terraform-cdk)
+- [Procedures de contribution](#procedures-de-contribution)
+- [Stack technique](#stack-technique)
 
-<h2 id="prérequis">📦 Prérequis</h2>
+---
 
-- [Git](https://git-scm.com/) : Système de contrôle de version distribué
-- [Node.js](https://nodejs.org/) : Environnement d'exécution pour JavaScript (version 20.7 minimum)
-- [pnpm](https://pnpm.io/) : Gestionnaire de paquets pour les projets Node.js
-- [Docker](https://www.docker.com/) (optionnel) : Environnement d'exécution d'applications sous forme de conteneurs
-- [PostgreSQL](https://www.postgresql.org/) (optionnel si Docker est utilisé) : Système de gestion de base de données relationnelle
+## Contexte du projet
 
-### Recommandation
+**Les Bases** (https://lesbases.anct.gouv.fr) est une plateforme collaborative de partage de ressources et communs numeriques a l'echelle nationale, maintenue par l'Incubateur des Territoires (ANCT).
 
-> Pour une gestion plus facile de Node.js, envisagez d'utiliser [nvm](https://github.com/nvm-sh/nvm), qui vous permet d'obtenir rapidement et d'utiliser différentes versions de Node.js via la ligne de commande.
+Le projet est structure en [monorepo](https://en.wikipedia.org/wiki/Monorepo) et heberge sur [Scaleway](https://www.scaleway.com). Le deploiement est automatise via [CircleCI](https://circleci.com/) : toute fusion sur `main` declenche une mise en production. Chaque branche de feature genere un environnement de preview.
 
-<h2 id="démarrage">🚀 Démarrage</h2>
+Licence : [AGPL-3.0-or-later](./LICENSE)
 
-Suivez ces étapes pour configurer le projet :
+---
 
-### 1. Clonez le dépôt
+## Architecture du monorepo
+
+### Applications (`apps/`)
+
+| Dossier | Description |
+|---------|-------------|
+| [web](apps/web) | Application Next.js full-stack (front + back via React Server Components) |
+| [cli](apps/cli) | Outils en ligne de commande pour les scripts CI/CD (deploiement, migrations, etc.) |
+
+### Packages (`packages/`)
+
+| Dossier | Description |
+|---------|-------------|
+| [cdk](packages/cdk) | Infrastructure as Code avec Terraform CDK (CDKTF) pour Scaleway |
+| [config](packages/config) | Configuration des services via variables d'environnement |
+| [e2e](packages/e2e) | Tests end-to-end avec Cypress |
+| [emails](packages/emails) | Templates d'emails (MJML / React) |
+| [fixtures](packages/fixtures) | Donnees de test pour le seeding de la base |
+| [lint](packages/lint) | Configuration des regles de linting |
+| [storybook](packages/storybook) | Bibliotheque de composants UI |
+| [test](packages/test) | Configuration Jest (tests unitaires et integration) |
+| [ui](packages/ui) | Composants et utilitaires generiques de la [stack](https://github.com/inclusion-numerique/stack) |
+
+### Orchestration
+
+- **pnpm** : gestionnaire de paquets (workspaces)
+- **Turborepo** : orchestration des taches du monorepo (`turbo.json`)
+
+---
+
+## Prerequis
+
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) >= 22 (recommandation : utiliser [nvm](https://github.com/nvm-sh/nvm))
+- [pnpm](https://pnpm.io/) 10.x
+- [Docker](https://www.docker.com/) et Docker Compose (optionnel mais recommande)
+- [PostgreSQL](https://www.postgresql.org/) (optionnel si Docker est utilise)
+
+---
+
+## Installation
+
+### 1. Cloner le depot
 
 ```bash
 git clone git@github.com:inclusion-numerique/la-base.git
+cd la-base
 ```
 
-### 2. Installez la dernière version de node
+### 2. Installer la bonne version de Node
 
 ```bash
 nvm use --lts
 ```
 
-### 3. Installez les dépendances du projet
+### 3. Installer les dependances
 
 ```bash
-cd la-base
 pnpm install
 ```
 
-### 4. Paramétrer les variables pour le développement
-
-Créer le fichier `.env` contenant les variables d'environnement à partir de [.env.dist](.env.dist)
+### 4. Configurer les variables d'environnement
 
 ```bash
 cp .env.dist .env
 ```
 
-### 5. Démarrer les services de mail et de base de données en local
+Editez le fichier `.env` selon vos besoins. Les variables principales sont :
 
-#### Avec Docker
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | Connexion PostgreSQL principale |
+| `MIGRATION_DATABASE_URL` | Connexion PostgreSQL legacy |
+| `NEXTAUTH_SECRET` | Cle de chiffrement des sessions |
+| `NEXTAUTH_URL` | URL de callback d'authentification |
+| `SMTP_SERVER` / `SMTP_PORT` | Serveur SMTP (MailDev en dev) |
+| `S3_HOST` / `UPLOADS_BUCKET` | Stockage objet (MinIO en dev) |
+| `NEXT_PUBLIC_SENTRY_DSN` | DSN Sentry (monitoring) |
+
+La liste exhaustive est disponible dans [.env.dist](.env.dist).
+
+### 5. Demarrer les services Docker
 
 ```bash
 pnpm docker:start
 ```
 
-#### Sans Docker
+Cela demarre :
 
-[//]: # TODO
+| Service | Port | Description |
+|---------|------|-------------|
+| PostgreSQL (principal) | `5433` | `postgresql://la-base:password@localhost:5433/la-base` |
+| PostgreSQL (legacy) | `5435` | `postgresql://la-base:password@localhost:5435/la-base-legacy` |
+| MinIO (S3) | `9000` (API) / `9001` (Console) | Stockage objet compatible S3 (`minioadmin/minioadmin`) |
+| MailDev | `1080` (Web) / `1025` (SMTP) | Interception des emails (`mailuser/mailpassword`) |
 
-### 6. Générer le client prisma et initialiser la base de données
+### 6. Initialiser la base de donnees
 
 ```bash
 pnpm db:init
 ```
 
-### 7. Démarrer le client next en local
+### 7. Charger les fixtures (optionnel)
+
+```bash
+pnpm fixtures:load
+```
+
+Deux utilisateurs de test sont disponibles :
+
+- **Jean-Michel Sans Rien** : `user.les.bases+sans+rien@gmail.com`
+- **Jean-Michel Avec Tout** : `user.les.bases+avec+tout@gmail.com`
+
+> Lors de la connexion en dev, un "Magic link" apparait dans la console Next.js.
+
+---
+
+## Demarrage
+
+### Lancer uniquement l'application web
 
 ```bash
 pnpm start:web
 ```
 
-Une fois ces étapes terminées, vous êtes prêt à commencer à travailler sur le projet ! 🎉
+- Web : http://localhost:3000
 
-<h2 id="scripts-disponibles">🛠️ Scripts Disponibles</h2>
+### Lancer web + storybook
 
-Ces commandes sont essentielles pour le développement de l'application :
+```bash
+pnpm dev
+```
 
-### `pnpm start:web`
+- Web : http://localhost:3000
+- Storybook : http://localhost:6006
 
-Lance l'application `web` en local :
+---
 
-- `web` est disponible sur http://localhost:3000
+## Scripts disponibles
 
-### `pnpm dev`
+### Developpement et build
 
-Lance les applications `web` et `storybook` en local :
+| Commande | Description |
+|----------|-------------|
+| `pnpm dev` | Lance web + storybook en mode developpement |
+| `pnpm start:web` | Lance uniquement l'app web sur http://localhost:3000 |
+| `pnpm build` | Build des applications `cli` et `web` |
+| `pnpm -F web build:analyze` | Build web avec analyse du bundle |
 
-- `web` est disponible sur http://localhost:3000
-- `storybook` est disponible sur http://localhost:6006
+### Base de donnees
 
-### `pnpm db:init`
+| Commande | Description |
+|----------|-------------|
+| `pnpm db:init` | Genere le client Prisma et applique les migrations |
+| `pnpm prisma:generate-migration <nom>` | Cree une nouvelle migration a partir du schema Prisma |
+| `pnpm fixtures:load` | Charge les donnees de test dans la base |
 
-Génère le client prisma et initialise la base de données
+### Docker
 
-### `pnpm docker:start`
+| Commande | Description |
+|----------|-------------|
+| `pnpm docker:start` | Demarre les conteneurs (BDD, mail, MinIO) |
+| `pnpm docker:stop` | Arrete les conteneurs |
+| `pnpm docker:reset` | Reset complet : stop, suppression volumes, redemarrage, re-init BDD |
 
-Utilise Docker pour lancer les services de mail et de bases de données :
+### Tests
 
-- Le service d'interception des mails de l'application `MailDev` est disponible sur http://0.0.0.0:1080/
-- Par défault, la base est accessible sur `localhost`, port `5433`, avec l'utilisateur `la-base` et le mot de passe `password` : `postgresql://la-base:password@localhost:5433/la-base`
-- Par défault, la base (legacy) est accessible sur `localhost`, port `5435`, avec l'utilisateur `la-base` et le mot de passe `password` : `postgresql://la-base:password@localhost:5435/la-base-legacy`
+| Commande | Description |
+|----------|-------------|
+| `pnpm test` | Tests unitaires Jest (tout sauf e2e) |
+| `pnpm test:integration` | Tests d'integration (necessite Docker) |
+| `pnpm test:e2e` | Tests end-to-end Cypress |
+| `pnpm -F storybook test-storybook` | Tests des composants Storybook |
 
-### `pnpm docker:stop`
+### Qualite de code
 
-Utilise Docker pour arrêter les services de mail et de bases de données.
+| Commande | Description |
+|----------|-------------|
+| `pnpm lint` | Linting avec Biome |
+| `pnpm format` | Formatage avec Prettier (`*.ts`, `*.tsx`, `*.md`, `*.css`) |
+| `pnpm tsc` | Verification de types TypeScript |
 
-### `pnpm docker:reset`
+### Infrastructure (CDK)
 
-Utilise Docker pour réinitialiser la base de données.
+| Commande | Description |
+|----------|-------------|
+| `pnpm -F cdk synth` | Genere le code Terraform a partir du CDK |
+| `pnpm -F cdk cdktf` | Exécute le CLI cdktf |
+| `pnpm -F cdk output` | Affiche les outputs Terraform (donnees sensibles incluses) |
+| `pnpm -F cdk clean-cdktf` | Nettoie et reinitialise le CDKTF |
 
-### `pnpm fixtures:load`
+### Utilitaires
 
-Charge un ensemble de données prédéfinies par les [fixtures](packages/fixtures) dans la base. Il faut que la base de données soit accessible avant de lancer cette commande. \
-Ces données donnent l'accès à deux utilisateurs de tests :
+| Commande | Description |
+|----------|-------------|
+| `pnpm cli` | Execute l'application CLI (scripts de deploiement) |
+| `pnpm scw` | Execute des commandes Scaleway CLI |
+| `pnpm clean` | Supprime `node_modules` a la racine |
+| `pnpm clean:workspaces` | Supprime `node_modules` dans tous les workspaces |
+| `pnpm with-env` | Execute une commande avec les variables d'environnement chargees |
 
-- Jean-Michel Sans Rien : `user.les.bases+sans+rien@gmail.com`
-- Jean-Michel Avec Tout : `user.les.bases+avec+tout@gmail.com`
+---
 
-Lorsqu'on se connecte avec le mail d'un utilisateur existant en dev, un "Magic link" qui permet de se connecter apparaît dans les sorties de la console du client next.js.
+## CLI (`apps/cli`)
 
-### `pnpm prisma:generate-migration nom_de_la_migration`
+L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour l'automatisation, le deploiement et l'administration de la plateforme. Elle est construite avec [Commander.js](https://github.com/tj/commander.js).
 
-Pour modifier le schéma de base de données, il faut d'abord faire les modifications nécessaires dans le [schema.prisma](apps/web/prisma/schema.prisma). \
-Ensuite, il suffit d'exécuter la commande **avec le nom de la migration** pour générer le fichier de migration et l'appliquer sur le schéma de la base.
+### Deploiement
 
-### `pnpm build`
+| Commande | Description |
+|----------|-------------|
+| `deployment:check-status <url>` | Verifie la sante d'un deploiement (endpoint `/health` + validite de la page d'accueil) |
 
-Construit les applications `cli` et `web` :
+### Domaine metier
 
-- Le build de web est généré dans le dossier [apps/web/.next](apps/web/.next)
+| Commande | Description |
+|----------|-------------|
+| `domain:add-conseillers-numeriques-to-bases` | Ajoute les conseillers numeriques aux bases (follows + membres) |
+| `domain:remove-inactive-conseillers-numeriques` | Supprime les comptes conseillers numeriques auto-crees et inactifs |
 
-### `pnpm test`
+### GitHub Deployments
 
-Lance l'exécution de tests avec Jest de l'ensemble des applications et packages du monorepo sauf `e2e` : `app/cli`, `app/web`, `packages/cdk`, `packages/config`, `packages/emails`, `packages/fixtures`, `packages/lint`, `packages/storybook`, `packages/test`, `packages/ui`
+| Commande | Description |
+|----------|-------------|
+| `github:deployment:create <branch>` | Cree un deploiement GitHub (production si `main`, sinon transient) |
+| `github:deployment:update <id> <state> [-u url] [-l log] [-d desc]` | Met a jour le statut d'un deploiement GitHub |
+| `github:deployment:deactivate <branch>` | Desactive tous les deploiements GitHub d'une branche |
 
-### `pnpm test:integration`
+### Infrastructure Scaleway
 
-Lance l'exécution des tests d'intégration avec Jest. Dans le cas où Docker est utilisé, il faut qu'il soit lancé au préalable avec `pnpm docker: start`.
+| Commande | Description |
+|----------|-------------|
+| `infrastructure:create <resource> <names> [--dry-run]` | Cree les ressources Scaleway manquantes (`database` ou `container`) |
+| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche un pipeline CircleCI) |
+| `infrastructure:inventory` | Outil interactif pour visualiser et nettoyer l'infrastructure (branches, conteneurs, BDD, buckets S3) |
 
-### `pnpm test:e2e`
+### Variables d'environnement et secrets
 
-Lance l'exécution des tests de bout en bout avec Cypress. Dans le cas où Docker est utilisé, il faut qu'il soit lancé au préalable avec `pnpm docker: start`.
+| Commande | Description |
+|----------|-------------|
+| `dotenv:from-cdk <stack>` | Extrait les outputs CDK et les ajoute au `.env` (`web` ou `project`) |
+| `dotenv:from-secrets` | Recupere tous les secrets du Vault Scaleway et les ajoute au `.env` |
+| `dotenv:add-next-public <namespace> [--local]` | Ajoute les variables `NEXT_PUBLIC_*` au `.env` |
+| `terraform:vars-from-env <stack>` | Genere un `.tfvars.json` a partir des variables d'environnement |
+| `secrets:list` | Liste tous les noms de secrets disponibles |
+| `secrets:get <name>` | Recupere la valeur d'un secret |
+| `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD pour un namespace |
+| `secrets:database-password <namespace>` | Recupere le mot de passe BDD d'un namespace |
 
-### `pnpm cli`
+### Execution de jobs
 
-Lance l'application `cli`, qui propose un ensemble de commandes pour effectuer des traitements liés au déploiement.
+| Commande | Description |
+|----------|-------------|
+| `job:execute <name> [data]` | Execute un job en local (directement dans le processus) |
+| `job:api:execute <name> [data] [--deployment main\|dev\|branch]` | Execute un job via l'API (`POST /api/jobs`, authentifie par `x-api-token`) |
 
-### `pnpm clean`
+### Stockage et sauvegardes
 
-Supprime le dossier `node_modules` à la racine du monorepo.
+| Commande | Description |
+|----------|-------------|
+| `s3:recycle-orphaned-files [options]` | Identifie et supprime les fichiers S3 orphelins. Options : `--prefix`, `--include-legacy`, `--threshold-months` (defaut: 3), `--delete` (dry-run par defaut), `--batch-size` |
+| `storage-migration:migrate` | Migre les fichiers des buckets par environnement vers un bucket unifie avec prefixes (idempotent) |
+| `backup:locally-restore-latest-main [options]` | Restaure localement la derniere sauvegarde de la BDD main. Options : `-d <date>` (YYYY-MM-DD), `-l` (utiliser un backup deja telecharge), `--list`, `-t <type>` (weekly, daily, hourly) |
 
-### `pnpm clean:workspaces`
+### Sentry
 
-Supprime les dossiers `node_modules` de tous les projets contenus dans le monorepo.
+| Commande | Description |
+|----------|-------------|
+| `sentry:delete-environment-issues <environment>` | Supprime les issues Sentry d'un environnement (interdit pour `main`) |
 
-<h2 id="procédures">🤝 Procédures</h2>
+---
+
+## Jobs et crons
+
+### Systeme de jobs
+
+Les jobs sont des taches executables definies dans `apps/web/src/jobs/`. Chaque job possede un schema de validation Zod et un executeur. Ils peuvent etre declenches de 3 facons :
+
+1. **Cron Scaleway** : declenchement automatique programme (production uniquement)
+2. **CLI locale** : `pnpm cli job:execute <nom> [payload]`
+3. **API** : `POST /api/jobs` avec header `x-api-token` (duree max : 10 min)
+
+### Jobs disponibles
+
+| Job | Description | Payload |
+|-----|-------------|---------|
+| `backup-database` | Sauvegarde de la base de donnees | `{ databaseName: string, type: "weekly" \| "daily" \| "hourly" }` |
+| `account-inactivity` | Verification et traitement des comptes inactifs | aucun |
+| `monthly-newsletter-news-feed` | Envoi de la newsletter mensuelle | aucun |
+| `import-contacts-to-brevo` | Import des contacts vers Brevo (execution manuelle uniquement) | aucun |
+
+### Crons en production
+
+Les crons sont configures via des **Container Cron** Scaleway et ne s'executent que sur l'environnement `main` (production).
+
+| Cron | Planning | Description |
+|------|----------|-------------|
+| Sauvegarde horaire | `0 * * * *` | Backup BDD toutes les heures |
+| Sauvegarde quotidienne | `0 0 * * *` | Backup BDD chaque jour a minuit (UTC) |
+| Sauvegarde hebdomadaire | `0 0 * * 0` | Backup BDD chaque dimanche a minuit (UTC) |
+| Newsletter mensuelle | `0 8 1 * *` | Envoi le 1er du mois a 8h (UTC) |
+| Inactivite des comptes | `0 9 * * *` | Verification quotidienne a 9h (UTC) |
+
+Les sauvegardes sont stockees dans le bucket S3 `backups`. On peut les restaurer localement via :
+
+```bash
+# Lister les sauvegardes disponibles
+pnpm cli backup:locally-restore-latest-main --list
+
+# Restaurer la derniere sauvegarde hebdomadaire
+pnpm cli backup:locally-restore-latest-main -t weekly
+
+# Restaurer la sauvegarde d'une date specifique
+pnpm cli backup:locally-restore-latest-main -d 2025-01-15
+```
+
+---
+
+## Infrastructure Terraform (CDK)
+
+L'infrastructure est definie en TypeScript avec [CDKTF](https://developer.hashicorp.com/terraform/cdktf) (CDK for Terraform) et deployee sur **Scaleway** (region `fr-par`).
+
+### Architecture a deux stacks
+
+L'infrastructure est divisee en deux stacks Terraform :
+
+#### 1. `ProjectStack` (ressources partagees, deploye une seule fois)
+
+Contient les ressources communes a tous les environnements :
+
+```
+ProjectStack
+├── Compute
+│   ├── ContainerNamespace        # Namespace pour les conteneurs serverless
+│   └── RegistryNamespace         # Registre Docker (la-base-web-app)
+│
+├── Base de donnees
+│   └── RdbInstance                # PostgreSQL 14 manage (db-pro2-xxs)
+│       ├── Haute disponibilite activee
+│       ├── Stockage : 30 Go SBS_15K
+│       ├── Chiffrement au repos
+│       ├── Sauvegardes auto (quotidienne, hebdomadaire, mensuelle)
+│       └── 500 connexions max
+│
+├── Stockage objet
+│   ├── ObjectBucket (uploads)         # Fichiers uploades (CORS active)
+│   ├── ObjectBucket (legacy-uploads)  # Bucket de migration v1
+│   └── ObjectBucket (backups)         # Sauvegardes BDD
+│
+├── Email transactionnel
+│   └── TemDomain                 # Scaleway TEM (SPF, DKIM, DMARC)
+│
+├── DNS (DomainRecord)
+│   ├── NS     → ns0.dom.scw.cloud, ns1.dom.scw.cloud
+│   ├── A      → IP maildev
+│   ├── CNAME  → app web, email (imap, smtp, webmail), CDN uploads, DKIM Brevo
+│   ├── MX     → mx.ox.numerique.gouv.fr
+│   └── TXT    → SPF, DKIM, DMARC, verification Brevo
+│
+├── Monitoring
+│   ├── Cockpit                   # Observabilite Scaleway (metriques, logs)
+│   ├── CockpitToken              # Token d'authentification conteneurs
+│   └── CockpitGrafanaUser        # Utilisateurs Grafana (editor, viewer)
+│
+└── Secrets
+    ├── Secret                    # Scaleway Secret Manager
+    └── SecretVersion             # Versioning des secrets
+```
+
+#### 2. `WebAppStack` (ressources par branche/environnement)
+
+Deploye pour chaque environnement (`main`, `dev`, branches de feature) :
+
+```
+WebAppStack
+├── Container                     # Conteneur serverless de l'app web
+├── ContainerDomain               # Mapping domaine personnalise
+├── RdbDatabase                   # Base de donnees dediee a l'environnement
+├── RdbUser                       # Utilisateur BDD dedie
+├── RdbPrivilege                  # Droits d'acces BDD
+├── DomainRecord                  # Enregistrement DNS pour le sous-domaine
+└── ContainerCron (main uniquement)
+    ├── Sauvegarde horaire
+    ├── Sauvegarde quotidienne
+    ├── Sauvegarde hebdomadaire
+    ├── Envoi des newsletters
+    └── Verification d'inactivite des comptes
+```
+
+### Differences par environnement
+
+| | Main (production) | Dev / Preview |
+|---|---|---|
+| **Domaine** | lesbases.anct.gouv.fr |
+| **Conteneurs** | 2 a 5 instances | 0 a 1 instance |
+| **CPU / Memoire** | 2240 mVCPU / 3072 Mo | 1120 mVCPU / 2048 Mo |
+| **Email** | Brevo + Scaleway TEM | MailDev |
+| **SMTP** | smtp.tem.scw.cloud:587 | maildev.lesbases.anct.gouv.fr |
+| **Jobs planifies** | Actifs (sauvegardes, newsletters) | Desactives |
+| **Donnees** | Production | Dump de main + fixtures |
+
+### Backend Terraform
+
+L'etat Terraform est stocke dans un bucket S3 Scaleway : `la-base-terraform-state`.
+
+### Commandes CDK
+
+```bash
+# Generer le code Terraform
+pnpm -F cdk synth
+
+# Voir le plan d'execution
+pnpm -F cdk cdktf diff
+
+# Deployer l'infrastructure
+pnpm -F cdk cdktf deploy
+
+# Afficher les outputs (avec donnees sensibles)
+pnpm -F cdk output
+```
+
+### CI/CD (CircleCI)
+
+Le pipeline CircleCI definit 4 workflows :
+
+1. **web_app_deployment** (automatique a chaque push)
+   - Installation des dependances
+   - Lint et verification de types
+   - Tests unitaires, integration, composants, e2e
+   - Build de l'application web
+   - Deploiement du stack web
+
+2. **project_infrastructure_deployment** (declenchement manuel)
+   - Lint et tests de l'infrastructure
+   - Calcul du diff Terraform
+   - Approbation manuelle requise
+   - Deploiement de l'infrastructure projet
+
+3. **chromatic_deployment** (declenchement manuel)
+   - Deploiement du Storybook sur Chromatic
+
+4. **web_app_preview_deletion** (declenchement manuel)
+   - Destruction des environnements de preview
+
+---
+
+## Procedures de contribution
 
 ### Branches
 
-- **Branches à jour** : Les branches doivent être créées à partir d'une version à jour de la branche de développement `dev`.
-- **Préfixes conventionnels** : Lors de la création de nouvelles branches, assurez-vous qu'elles sont préfixées par l'une des catégories suivantes : `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/` ou `test/`, en fonction de la nature des modifications. Consultez les [types de commits conventionnels](https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index) pour en savoir plus sur ces catégories.
+- Creer les branches a partir d'une version a jour de `dev`
+- Prefixer avec : `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/` ou `test/`
+- Ref : [Conventional Commits](https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index)
 
 ### Commits
 
-- **Commits Conventionnels** : Les messages de commit doivent suivre la spécification [Commits Conventionnels](https://www.conventionalcommits.org/fr) pour être valides.
+Les messages de commit doivent suivre la specification [Commits Conventionnels](https://www.conventionalcommits.org/fr).
 
-### Création et publication d'une nouvelle fonctionnalité
+### Workflow de contribution
 
-1. **Créez une nouvelle branche** : Utilisez `git checkout -b feat/nom-de-la-fonctionnalité-incroyable` pour créer une nouvelle branche pour vos modifications.
-2. **Commitez vos modifications** : Effectuez vos modifications et commitez-les avec un message descriptif. Par exemple, `git commit -m "feat: ajoute une fonctionnalité incroyable"`.
-3. **Publiez votre branche** : Poussez votre branche de fonctionnalité vers le dépôt distant avec `git push origin feat/nom-de-la-fonctionnalité-incroyable`.
-4. **Ouvrez une Pull-Request** : Une fois vos modifications poussées, ouvrez une Pull-Request vers la branche de développement. Indiquez des détails sur les modifications et demandez une revue des contributeurs.
+1. Creer une branche : `git checkout -b feat/ma-fonctionnalite`
+2. Commiter : `git commit -m "feat: ajoute ma fonctionnalite"`
+3. Pousser : `git push origin feat/ma-fonctionnalite`
+4. Ouvrir une Pull Request vers `dev`
 
-### Déploiement
+### Deploiement
 
-Lorsqu'une branche est fusionnée avec `main`, cela déclenche automatiquement la mise à jour en production.
+La fusion d'une branche dans `main` declenche automatiquement le deploiement en production.
 
-<h2 id="construit-avec">🏗️ Construit avec</h2>
+---
 
-### Langages, frameworks et bibliothèques
+## Stack technique
 
-- [TypeScript](https://www.typescriptlang.org/) : Le langage de programmation utilisé ici, c'est un langage open source qui s'appuie sur JavaScript en ajoutant un typage statique.
-- [React](https://react.dev/) : Bibliothèque JavaScript qui permet de créer des interfaces utilisateurs interactives et prévisibles.
-- [React Hook Form](https://react-hook-form.com/) : Bibliothèque de construction de formulaires avec React.
-- [Next.js](https://nextjs.org/) : Framework full-stack pour construire des applications web avec React.
-- [Système de Design de l'État (dsfr)](https://www.systeme-de-design.gouv.fr/) : Ensemble de composants réutilisables répondant aux standards de l'état.
-- [React dsfr](https://github.com/codegouvfr/react-dsfr) : Surcouche de compatibilité React pour le Système de Design de l'État
-- [Remix Icon](https://remixicon.com/) : Collection d'icônes.
-- [Zod](https://zod.dev/) : Validation de schéma fondé sur TypeScript.
-- [tRPC](https://trpc.io/) : Intégrer des API stables en bénéficiant de l'inférence de Type de TypeScript.
-- [Prisma](https://www.prisma.io/) : ORM compatible avec TypeScript.
-- [mjml-react](https://github.com/Faire/mjml-react) : Écrire des templates de mails avec React et [mjml](https://mjml.io/)
-- [NextAuth.js](https://next-auth.js.org/) : Adaptateur pour services d'authentification.
+### Langages et frameworks
 
-### Outils
+- [TypeScript](https://www.typescriptlang.org/) - Langage principal
+- [React](https://react.dev/) 19 - Bibliotheque UI avec Server Components
+- [Next.js](https://nextjs.org/) 15 - Framework full-stack
+- [tRPC](https://trpc.io/) - API type-safe
+- [Prisma](https://www.prisma.io/) - ORM TypeScript / PostgreSQL
+- [Zod](https://zod.dev/) - Validation de schemas
 
-- [Biome](https://biomejs.dev/) : Formatteur et linteur pour JavaScript, CSS et TypeScript.
-- [Prettier](https://prettier.io/) : Formateur de code pour divers langages et syntaxes.
-- [Jest](https://jestjs.io/) : Environnement d'exécution des tests unitaires.
-- [Cypress](https://www.cypress.io) : Environnement d'exécution des tests de bout en bout et de tests de composants.
-- [Storybook](https://storybook.js.org) : Permet de créer, documenter et tester des composants UI.
-- [Sentry](https://sentry.io) : Plateforme de surveillance d'erreurs et de problèmes de performance.
-- [MailDev](https://maildev.github.io/maildev/) : Serveur local et interface web pour capter les mails envoyés pendant le développement.
+### UI et design
+
+- [DSFR](https://www.systeme-de-design.gouv.fr/) - Systeme de Design de l'Etat
+- [React DSFR](https://github.com/codegouvfr/react-dsfr) - Integration React du DSFR
+- [TipTap](https://tiptap.dev/) - Editeur de texte riche
+- [Recharts](https://recharts.org/) - Visualisation de donnees
+- [Remix Icon](https://remixicon.com/) - Icones
+- [Framer Motion](https://www.framer.com/motion/) - Animations
+
+### Backend et services
+
+- [NextAuth.js](https://next-auth.js.org/) - Authentification
+- [ProConnect](https://proconnect.gouv.fr/) - Authentification gouvernementale
+- [Nodemailer](https://nodemailer.com/) + [MJML](https://mjml.io/) - Emails transactionnels
+- [Brevo](https://www.brevo.com/) - Service d'email
+- [Friendly Captcha](https://friendlycaptcha.com/) - CAPTCHA
+
+### Infrastructure et deploiement
+
+- [Scaleway](https://www.scaleway.com/) - Hebergement cloud
+- [CDKTF](https://developer.hashicorp.com/terraform/cdktf) - Infrastructure as Code (TypeScript)
+- [Docker](https://www.docker.com/) - Conteneurisation
+- [CircleCI](https://circleci.com/) - CI/CD
+
+### Qualite et monitoring
+
+- [Biome](https://biomejs.dev/) - Linter et formateur
+- [Prettier](https://prettier.io/) - Formatage de code
+- [Jest](https://jestjs.io/) - Tests unitaires et integration
+- [Cypress](https://www.cypress.io/) - Tests end-to-end
+- [Storybook](https://storybook.js.org/) - Documentation de composants
+- [Sentry](https://sentry.io/) - Monitoring d'erreurs
+- [Matomo](https://matomo.org/) - Analytics
+- [Cockpit / Grafana](https://www.scaleway.com/en/cockpit/) - Observabilite infrastructure

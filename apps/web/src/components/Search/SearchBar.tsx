@@ -187,9 +187,8 @@ const SearchBar = ({
       <div className={classNames(styles.container)}>
         <div className={classNames('fr-search-bar fr-search-bar--lg')}>
           <label
-            className="fr-label"
+            className={classNames('fr-label', styles.label)}
             htmlFor={searchInputId}
-            aria-label="Rechercher"
           >
             Rechercher
           </label>

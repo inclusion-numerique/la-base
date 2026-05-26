@@ -22,7 +22,7 @@ const AccessibilityStatementPage = () => (
       <h1>Déclaration d'accessibilité</h1>
       <p>
         Établie le <span>04 mars 2024</span>. Mis à jour le{' '}
-        <span>31 juillet 2025</span>.
+        <span>22 mai 2026</span>.
       </p>
       <p>
         <span>Agence National de la Cohésion des Territoires</span> s'engage à
@@ -34,52 +34,51 @@ const AccessibilityStatementPage = () => (
         <strong>{PublicWebAppConfig.projectTitle}</strong>.
       </p>
 
-      <h2>Stratégie et plan d&apos;action</h2>
-      <p>
-        La stratégie d&apos;accessibilité suit{' '}
-        <ExternalLink href="https://beta.gouv.fr/accessibilite/schema-pluriannuel">
-          le schéma pluriannuel 2024-2027 publié par Beta gouv.
-        </ExternalLink>
-      </p>
-
-      <p>
-        La plateforme ayant été mise en ligne en 2024, il n&apos;y a pas de
-        bilan 2023 des actions menées.
-      </p>
-      <p>Le plan d&apos;action 2025 :</p>
-      <ul>
-        <li>Finalisation des fonctionnalités</li>
-        <li>Plateforme intégralement navigable au clavier</li>
-        <li>Hiérarchie des titres</li>
-        <li>Accessible en zoom 200%</li>
-        <li>Lien d&apos;évitements</li>
-        <li>Passage de l&apos;audit RGAA</li>
-      </ul>
-      <br />
       <h2>État de conformité</h2>
       <p>
-        <strong>{process.env.NEXT_PUBLIC_APP_NAME}</strong> est{' '}
+        <strong>{PublicWebAppConfig.projectTitle}</strong> est{' '}
         <strong>
-          <span data-printfilter="lowercase">non conforme</span>{' '}
-        </strong>
+          <span data-printfilter="lowercase">partiellement conforme</span>
+        </strong>{' '}
         avec le{' '}
         <abbr title="Référentiel général d'amélioration de l'accessibilité">
           RGAA
         </abbr>
-        . <span>Le site n'a encore pas été audité.</span>
+        . L&apos;audit de conformité réalisé en novembre 2025 et le contre-audit
+        réalisé en février 2026 révèle que sur l&apos;échantillon du site audité
+        50&nbsp;% des critères du RGAA version 4.1.2 sont respectés.
       </p>
-      <h2>Améliorations</h2>
-      <p>
-        Voici une liste des améliorations nécessaires recensées et en cours de
-        développement :
-      </p>
+      <p>Le taux moyen de conformité est de 77,87&nbsp;%.</p>
+      <p>Détail :</p>
       <ul>
-        <li>Le menu déroulant de profil n&apos;est pas navigable au clavier</li>
-        <li>
-          La création de ressource ne permet pas de déplacer les blocs de
-          contenu en glisser-déposer au clavier{' '}
-        </li>
+        <li>Nombre de critères applicables : 58</li>
+        <li>Nombre de critères conformes : 29</li>
+        <li>Nombre de critères non conformes : 29</li>
       </ul>
+      <p>
+        Le détail des non conformités est disponible{' '}
+        <ExternalLink href="https://ara.numerique.gouv.fr/rapport/578fGFkzQvnxvoA39-_Gb/resultats">
+          ici
+        </ExternalLink>
+        .
+      </p>
+
+      <h2>Stratégie et plan d&apos;action</h2>
+      <p>
+        La stratégie d&apos;accessibilité suit{' '}
+        <ExternalLink href="https://docs.numerique.gouv.fr/docs/b8f7f83e-56cd-489f-a474-55ec325a2ba6/">
+          le schéma pluriannuel d&apos;accessibilité de l&apos;Incubateur des
+          territoires 2025-2027.
+        </ExternalLink>
+      </p>
+      <p>Le plan d&apos;action 2026 :</p>
+      <p>
+        Un effort important a été mené durant le début d&apos;année 2026 avec
+        l&apos;audit puis le contre audit (passant la note de 33 à 50&nbsp;% des
+        critères respectés). Aucune action supplémentaire n&apos;est prévue à ce
+        jour dans le domaine de l&apos;accessibilité.
+      </p>
+
       <h2>Contact</h2>
       <p>
         Si vous n'arrivez pas à accéder à un contenu ou à un service, vous

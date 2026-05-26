@@ -1,5 +1,6 @@
 import { metadataTitle } from '@app/web/app/metadataTitle'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: metadataTitle('Demande refusée'),
@@ -21,6 +22,9 @@ const DeclineBaseJoinRequest = () => (
       <p className="fr-text--xl fr-mb-0">
         Le demandeur sera informé par email de ce refus.
       </p>
+      <Link className="fr-btn fr-mt-6v" href="/">
+        Retour à l&apos;accueil
+      </Link>
     </div>
   </div>
 )

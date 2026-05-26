@@ -14,6 +14,8 @@ const NOTIFICATION_BADGE_ICONS = {
   AskJoinBase: 'ri-user-add-fill',
   AcceptedAskJoinBase: 'ri-user-add-fill',
   DeclinedAskJoinBase: 'ri-close-circle-fill',
+  MemberAcceptedAskJoinBase: 'ri-user-add-fill',
+  MemberDeclinedAskJoinBase: 'ri-close-circle-fill',
   ResourcePublication: 'ri-article-fill',
   ResourceReporting: 'ri-alert-fill',
   ReportResolved: 'ri-check-fill',

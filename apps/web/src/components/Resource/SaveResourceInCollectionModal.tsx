@@ -332,6 +332,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
   const favoriteCollection = user.collections.find((c) => c.isFavorites)
   const isMobile = useIsMobile()
   const avatarSize = isMobile ? 32 : 48
+  const expandedBaseId = inBaseDirectory?.id
   return (
     <form onSubmit={onSubmit}>
       <RawModal
@@ -463,7 +464,14 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                 data-testid="collection-title-input"
                 control={createCollectionForm.control}
                 path="title"
-                label="Nom de la collection"
+                label={
+                  <>
+                    Nom de la collection{' '}
+                    <span className="fr-sr-only">
+                      {collectionTitleMaxLength} caractères maximums autorisés
+                    </span>
+                  </>
+                }
                 disabled={createCollectionForm.formState.isSubmitting}
                 asterisk
                 info={titleInfo}
@@ -671,6 +679,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                         ),
                       ).length
                     }
+                    isExpanded={inProfileDirectory}
                   />
                 </li>
               )}
@@ -690,6 +699,7 @@ const SaveResourceInCollectionModal = ({ user }: { user: SessionUser }) => {
                         ),
                       ).length
                     }
+                    isExpanded={expandedBaseId === base.id}
                   />
                 </li>
               ))}

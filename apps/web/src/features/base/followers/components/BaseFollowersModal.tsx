@@ -41,11 +41,17 @@ const BaseFollowersModal = ({
           styles.feedbackLink,
         )}
         onClick={open}
+        onKeyDown={(e) => {
+          if (e.key === ' ') {
+            e.preventDefault()
+            open()
+          }
+        }}
         role="button"
       >
         <p className="fr-text--sm fr-mb-0">
           <b>{numberToString(counts.total)}</b>
-          <span>&nbsp;Suivi{sPluriel(counts.total)}</span>
+          <span>{`\u00a0Suivi${sPluriel(counts.total)}`}</span>
         </p>
       </Link>
 

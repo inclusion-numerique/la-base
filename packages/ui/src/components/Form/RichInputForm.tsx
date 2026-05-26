@@ -31,6 +31,7 @@ const RichInputForm = <T extends FieldValues>({
   form,
   path,
   id,
+  ariaLabel,
   ariaDescribedBy,
   placeholder,
   disabled,
@@ -46,6 +47,7 @@ const RichInputForm = <T extends FieldValues>({
   form: UseFormReturn<T>
   path: FieldPath<T>
   id: string
+  ariaLabel?: string
   ariaDescribedBy?: string
   placeholder?: string
   disabled?: boolean
@@ -68,7 +70,7 @@ const RichInputForm = <T extends FieldValues>({
       attributes: {
         role: 'textbox',
         'aria-multiline': 'true',
-        'aria-label': 'Edition du contenu',
+        'aria-label': ariaLabel || 'Éditeur de texte',
       },
     },
     onUpdate: (event) => {
