@@ -25,7 +25,7 @@
     "jest-environment-jsdom": "^30.0.5",
     "jest-extended": "^6.0.0",
     "jest-joi": "^1.1.17",
-    "joi": "^17.13.3",
+    "joi": "^18.2.1",
     "ts-jest": "^29.4.1",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
