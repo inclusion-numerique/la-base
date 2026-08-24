@@ -36,6 +36,10 @@ export const ProConnectProvider = () =>
     id: proConnectProviderId,
     name: 'ProConnect',
     type: 'oauth',
+    // next-auth v4 créait systématiquement `state`, `pkce` et `nonce` ; Auth.js v5 se
+    // limite à `['pkce']` par défaut. ProConnect refuse la requête d'autorisation sans
+    // `state` (« state must be a string », code Y000400).
+    checks: ['pkce', 'state'],
     // Allow an email user to login with Inclusion Connect
     allowDangerousEmailAccountLinking: true,
     clientId: PublicWebAppConfig.ProConnect.clientId,
