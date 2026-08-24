@@ -52,7 +52,14 @@ const RichTextForm = <T extends FieldValues>({
   const editor = useEditor({
     // Le StarterKit de tiptap 3 embarque Link : sans cette désactivation, il entre en
     // conflit avec CustomLink, deux extensions ne pouvant porter le même nom.
-    extensions: [StarterKit.configure({ link: false }), CustomLink],
+    extensions: [
+      // Le StarterKit de tiptap 3 embarque Link, qui ferait doublon avec CustomLink, et
+      // TrailingNode, qui ajoute un paragraphe vide en fin de document. Ce dernier
+      // déplace le point d'insertion hors du bloc que l'on vient de créer : un titre
+      // ajouté en dernier reste vide et la saisie part dans le paragraphe suivant.
+      StarterKit.configure({ link: false, trailingNode: false }),
+      CustomLink,
+    ],
     content: form.getValues(path),
     immediatelyRender: false,
     onUpdate: (event) => {
