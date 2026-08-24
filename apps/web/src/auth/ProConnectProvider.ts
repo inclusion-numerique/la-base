@@ -56,6 +56,10 @@ export const ProConnectProvider = () =>
       },
     },
     token: {
+      // L'URL doit être déclarée en plus du handler : Auth.js v5 bascule sur la découverte
+      // OIDC (`/.well-known/openid-configuration`) dès que `token.url` et `userinfo.url`
+      // manquent tous deux, et celle de ProConnect ne répond pas au format attendu.
+      url: `${issuer}/api/v2/token`,
       request: async (context: TokenRequestContext) => {
         const body = {
           grant_type: 'authorization_code',
@@ -85,6 +89,7 @@ export const ProConnectProvider = () =>
       },
     },
     userinfo: {
+      url: `${issuer}/api/v2/userinfo`,
       request: async ({ tokens }: UserinfoRequestContext) => {
         const r = await axios<string>({
           method: 'GET',
