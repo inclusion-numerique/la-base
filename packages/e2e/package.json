@@ -20,8 +20,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-hook-form": "^7.85.0",
-    "uuid": "^14.0.1",
-    "@cypress/react18": "^2.0.1"
+    "uuid": "^14.0.1"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^7.1.1",
@@ -32,7 +31,6 @@
     "cypress-file-upload": "^5.0.8",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.23.11",
-    "typescript": "^7.0.2",
-    "@types/uuid": "^10.0.0"
+    "typescript": "^7.0.2"
   }
 }

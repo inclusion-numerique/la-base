@@ -48,8 +48,6 @@
     "@types/react-dom": "^19.2.5",
     "jest": "^30.4.2",
     "storybook": "^10.5.7",
-    "typescript": "^7.0.2",
-    "@types/testing-library__jest-dom": "^6.0.0",
-    "typescript-plugin-css-modules": "^5.2.0"
+    "typescript": "^7.0.2"
   }
 }
