@@ -83,7 +83,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^16.1.1",
     "postcss-loader": "^8.2.1",
-    "postcss-nested": "^8.0.1",
+    "postcss-nested": "^7.0.2",
     "postcss-preset-env": "^10.4.0",
     "prisma": "^7.9.1",
     "react": "^19.2.8",

@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import nextConfig from '../../apps/web/next.config'
+import nextConfig from '../../apps/web/next.config.mjs'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const publicDsfr = path.resolve(dirname, '../../apps/web/public/dsfr')
