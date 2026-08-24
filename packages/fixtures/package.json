@@ -19,12 +19,12 @@
     "@prisma/client": "^7.9.1",
     "dotenv": "^17.4.2",
     "tsx": "^4.23.11",
-    "typescript": "^5.9.2",
+    "typescript": "^7.0.2",
     "uuid": "^14.0.1"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.0.9",
+    "@types/node": "^26.2.0",
     "jest": "^30.4.2",
     "@types/uuid": "^10.0.0",
     "commander": "^14.0.0"
