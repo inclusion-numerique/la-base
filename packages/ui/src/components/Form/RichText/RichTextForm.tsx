@@ -50,7 +50,9 @@ const RichTextForm = <T extends FieldValues>({
   onChange?: (text: PathValue<T, Path<T>>) => void
 }) => {
   const editor = useEditor({
-    extensions: [StarterKit, CustomLink],
+    // Le StarterKit de tiptap 3 embarque Link : sans cette désactivation, il entre en
+    // conflit avec CustomLink, deux extensions ne pouvant porter le même nom.
+    extensions: [StarterKit.configure({ link: false }), CustomLink],
     content: form.getValues(path),
     immediatelyRender: false,
     onUpdate: (event) => {

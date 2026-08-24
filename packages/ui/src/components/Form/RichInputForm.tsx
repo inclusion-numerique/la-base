@@ -66,7 +66,9 @@ const RichInputForm = <T extends FieldValues>({
   const firstRenderUpdateDone = useRef(false)
 
   const editor = useEditor({
-    extensions: [StarterKit, CustomLink],
+    // Le StarterKit de tiptap 3 embarque Link : sans cette désactivation, il entre en
+    // conflit avec CustomLink, deux extensions ne pouvant porter le même nom.
+    extensions: [StarterKit.configure({ link: false }), CustomLink],
     content: form.getValues(path) ?? '',
     editorProps: {
       attributes: {
