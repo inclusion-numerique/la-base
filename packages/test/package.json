@@ -25,7 +25,7 @@
     "jest-extended": "^7.0.0",
     "tsx": "^4.23.11",
     "typescript": "^5.9.2",
-    "zod": "^3.25.76",
+    "zod": "^4.4.3",
     "jest-environment-jsdom": "^30.0.5",
     "jest-joi": "^1.1.17",
     "joi": "^17.13.3",

@@ -53,7 +53,7 @@ describe('EditContentCommandValidation', () => {
       [
         {
           path: ['name'],
-          message: 'Invalid literal value, expected "EditContent"',
+          message: 'Invalid input: expected "EditContent"',
         },
       ],
     )
@@ -69,7 +69,7 @@ describe('EditContentCommandValidation', () => {
       [
         {
           path: ['payload'],
-          message: 'Required',
+          message: 'Invalid input: expected object, received undefined',
         },
       ],
     )
@@ -88,7 +88,7 @@ describe('EditContentCommandValidation', () => {
       [
         {
           path: ['payload', 'resourceId'],
-          message: 'Required',
+          message: 'Invalid input: expected string, received undefined',
         },
       ],
     )
@@ -104,7 +104,7 @@ describe('EditContentCommandValidation', () => {
       [
         {
           path: ['payload', 'id'],
-          message: 'Required',
+          message: 'Invalid input: expected string, received undefined',
         },
       ],
     )

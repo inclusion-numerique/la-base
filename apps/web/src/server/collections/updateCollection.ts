@@ -8,12 +8,12 @@ import {
 
 export const collectionIdValidation = z
   .string({
-    required_error: "Veuillez renseigner l'id de la collection",
+    error: "Veuillez renseigner l'id de la collection",
   })
   .uuid()
 
 export const titleValidation = z
-  .string({ required_error: 'Veuillez renseigner le nom de la collection' })
+  .string({ error: 'Veuillez renseigner le nom de la collection' })
   .trim()
   .min(1, 'Veuillez renseigner le nom de la collection')
   .max(
@@ -31,11 +31,14 @@ export const descriptionValidation = z
       message: `La description ne doit pas dépasser ${collectionDescriptionMaxLength} caractères`,
     },
   )
-  .optional()
+  // `.optional()` après `.transform()` : en zod 4 un transform placé en dernier rend la
+  // clé obligatoire en sortie alors qu'elle reste optionnelle en entrée, ce qui désaligne
+  // les types input/output attendus par react-hook-form. Comportement inchangé.
   .transform((text) => (text ? sanitizeHtml(text) : text))
+  .optional()
 
 export const isPublicValidation = z.boolean({
-  required_error: 'Veuillez spécifier la visibilité de la collection',
+  error: 'Veuillez spécifier la visibilité de la collection',
 })
 
 export const UpdateCollectionInformationsCommandValidation = z.object({

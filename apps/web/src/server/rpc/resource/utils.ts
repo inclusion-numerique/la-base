@@ -9,7 +9,7 @@ export const resourceSectionTitleMaxLength = 100
 export const resourceEditionValues = {
   id: z.string(),
   title: z
-    .string({ required_error: 'Veuillez renseigner le titre' })
+    .string({ error: 'Veuillez renseigner le titre' })
     .trim()
     .nonempty('Veuillez renseigner le titre')
     .max(
@@ -17,7 +17,7 @@ export const resourceEditionValues = {
       `Le titre ne doit pas dépasser ${resourceTitleMaxLength} caractères`,
     ),
   description: z
-    .string({ required_error: 'Veuillez renseigner une description' })
+    .string({ error: 'Veuillez renseigner une description' })
     .trim()
     .nonempty('Veuillez renseigner une description')
     .max(

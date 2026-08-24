@@ -14,7 +14,7 @@ export const professionalSectorsLimit = 5
 export const indexationCommand = {
   themes: z
     .array(z.nativeEnum(Theme), {
-      required_error: 'Merci d’ajouter au moins une thématique',
+      error: 'Merci d’ajouter au moins une thématique',
     })
     .max(
       themesLimit,
@@ -22,7 +22,7 @@ export const indexationCommand = {
     ),
   resourceTypes: z
     .array(z.nativeEnum(ResourceType), {
-      required_error: 'Merci d’ajouter au moins un type de ressource',
+      error: 'Merci d’ajouter au moins un type de ressource',
     })
     .max(
       resourceTypesLimit,
@@ -37,7 +37,7 @@ export const indexationCommand = {
     .optional(),
   professionalSectors: z
     .array(z.nativeEnum(ProfessionalSector), {
-      required_error: 'Merci d’ajouter au moins un secteur professionnel',
+      error: 'Merci d’ajouter au moins un secteur professionnel',
     })
     .max(
       professionalSectorsLimit,
@@ -72,11 +72,8 @@ export const PublishCommandValidation = z.object({
         isPublic: z.literal(false),
       }),
     ],
-    {
-      errorMap: () => ({
-        message: 'Veuillez specifier la visibilité de la ressource',
-      }),
-    },
+    // zod 4 remplace errorMap par error
+    { error: () => 'Veuillez specifier la visibilité de la ressource' },
   ),
 })
 
