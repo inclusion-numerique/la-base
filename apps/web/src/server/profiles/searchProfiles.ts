@@ -188,7 +188,7 @@ export const rankProfiles = async (
                    WHEN ${paginationParams.sort === 'suivis'} THEN follows_count
                    WHEN ${
                      paginationParams.sort === 'ressources'
-                   } THEN resources_count
+} THEN resources_count
                    END DESC,
                CASE
                    /* All these sort options use the most recent in case of equality */

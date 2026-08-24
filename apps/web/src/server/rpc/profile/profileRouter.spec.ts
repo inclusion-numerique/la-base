@@ -41,17 +41,15 @@ describe('profileRouter - updateContacts', () => {
     } as any)
 
     // Mock de prismaClient.user.update pour simuler la mise à jour
-    jest
-      .spyOn(prismaClient.user, 'update')
-      .mockResolvedValue({
-        id: mockUserId,
-        email: mockUserEmail,
-        emailIsPublic: false,
-        website: 'https://example.com',
-        facebook: null,
-        twitter: null,
-        linkedin: null,
-      } as any)
+    jest.spyOn(prismaClient.user, 'update').mockResolvedValue({
+      id: mockUserId,
+      email: mockUserEmail,
+      emailIsPublic: false,
+      website: 'https://example.com',
+      facebook: null,
+      twitter: null,
+      linkedin: null,
+    } as any)
 
     // Mock de deleteSuspiciousProfile pour qu'il retourne false (pas de suppression)
     ;(deleteSuspiciousProfile as jest.Mock).mockResolvedValue(false)
@@ -95,17 +93,15 @@ describe('profileRouter - updateContacts', () => {
     } as any)
 
     // Mock de prismaClient.user.update pour simuler la mise à jour
-    jest
-      .spyOn(prismaClient.user, 'update')
-      .mockResolvedValue({
-        id: mockUserId,
-        email: mockUserEmail,
-        emailIsPublic: false,
-        website: 'https://example.com',
-        facebook: null,
-        twitter: null,
-        linkedin: null,
-      } as any)
+    jest.spyOn(prismaClient.user, 'update').mockResolvedValue({
+      id: mockUserId,
+      email: mockUserEmail,
+      emailIsPublic: false,
+      website: 'https://example.com',
+      facebook: null,
+      twitter: null,
+      linkedin: null,
+    } as any)
 
     // Mock de deleteSuspiciousProfile pour qu'il retourne true (suppression)
     ;(deleteSuspiciousProfile as jest.Mock).mockResolvedValue(true)

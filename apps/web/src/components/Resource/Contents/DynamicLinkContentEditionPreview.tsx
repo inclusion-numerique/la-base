@@ -48,7 +48,7 @@ const DynamicLinkContentEditionPreview = ({
     )
   }
 
-  if (!!metadataError || isError) {
+  if (metadataError || isError) {
     return (
       <p className="fr-error-text fr-mt-0 fr-mb-4v">
         {metadataError ?? error?.message}

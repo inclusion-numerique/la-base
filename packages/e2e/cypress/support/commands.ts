@@ -136,9 +136,7 @@ Cypress.Commands.add('testId', (testId: string) =>
 )
 Cypress.Commands.add('removeHover', () =>
   // reset hovering by putting mouse away (e.g. here top left corner of body)
-  cy
-    .get('body')
-    .realHover({ position: 'topLeft' }),
+  cy.get('body').realHover({ position: 'topLeft' }),
 )
 
 Cypress.Commands.add('getToast', (contains: string | RegExp) =>

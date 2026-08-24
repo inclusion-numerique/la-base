@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-import { UseFormWatch } from 'react-hook-form'
-import { FieldValues } from 'react-hook-form/dist/types/fields'
-import { WatchObserver } from 'react-hook-form/dist/types/form'
+import { FieldValues, UseFormWatch, WatchObserver } from 'react-hook-form'
 
 /**
  * We use this hook to listen to form changes as unsubscription must be managed on our side.

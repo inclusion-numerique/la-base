@@ -22,10 +22,10 @@ export const resourceReportReasonOptions = labelsToOptions(
 export const ResourceReportValidation = z.object({
   resourceId: z.string().uuid(),
   reason: z.enum(resourceReportReasons, {
-    required_error: 'Veuillez renseigner un motif',
+    error: 'Veuillez renseigner un motif',
   }),
   comment: z
-    .string({ required_error: 'Veuillez renseigner une description' })
+    .string({ error: 'Veuillez renseigner une description' })
     .min(1, 'Veuillez renseigner une description'),
 })
 

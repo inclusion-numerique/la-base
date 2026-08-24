@@ -105,7 +105,7 @@ export const getResourcePermissions = (
   }
 
   // Other users can only see published public resources
-  if (!!resource.published && resource.isPublic) {
+  if (resource.published && resource.isPublic) {
     permissions.push(ResourcePermissions.ReadResourceContent)
     // Only connected users can save/unsave or report a published resource
     if (roles.includes(UserSecurityRoles.User)) {

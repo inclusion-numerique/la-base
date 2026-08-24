@@ -1,8 +1,7 @@
 import type { AppRouter } from '@app/web/server/rpc/appRouter'
 import { getZodValidationMutationError } from '@app/web/utils/getZodValidationMutationError'
 import type { TRPCClientError } from '@trpc/client'
-import type { FieldPath, FieldValues } from 'react-hook-form'
-import type { UseFormSetError } from 'react-hook-form/dist/types/form'
+import type { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form'
 
 export const applyZodValidationMutationErrorsToForm = <T extends FieldValues>(
   mutationError: unknown,
