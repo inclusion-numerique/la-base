@@ -62,7 +62,8 @@ dist="$(mktemp -d)"
 cp -r apps/web/.next/standalone/. "$dist/"
 cp -r apps/web/public "$dist/apps/web/public"
 cp -r apps/web/.next/static "$dist/apps/web/.next/static"
-( cd "$dist" && HOSTNAME=localhost node --env-file="$env_file" apps/web/server.js >"$dist/app.log" 2>&1 ) &
+app_log="$repo/.e2e-app.log"
+( cd "$dist" && HOSTNAME=localhost node --env-file="$env_file" apps/web/server.js >"$app_log" 2>&1 ) &
 app_pid=$!
 trap 'kill "$app_pid" 2>/dev/null || true; rm -rf "$dist"' EXIT
 
@@ -71,6 +72,6 @@ for _ in $(seq 1 60); do
   sleep 1
 done
 
-echo "▸ Cypress"
+echo "▸ Cypress   (journal de l'application : .e2e-app.log)"
 # Le fichier e2e passe en premier : dotenv-cli fait gagner la première occurrence.
 pnpm -F @app/e2e exec dotenv -e "$env_file" -e ../../.env -e ./cypress.env -- cypress run "$@"
