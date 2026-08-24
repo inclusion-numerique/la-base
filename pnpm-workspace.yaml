@@ -19,5 +19,44 @@ minimumReleaseAgeExclude:
   - "@types/node"
   - "@types/react"
   - "@types/react-dom"
+  # TypeScript 7 distribue son compilateur natif dans des paquets par plateforme, tirés par
+  # `typescript@next` (tag republié chaque nuit). Sans cette exclusion, tout install à froid
+  # échoue dès qu'une nightly a moins de 15 jours.
+  - "@typescript/*"
   - next
-  - "@next/env"
+  # Même motif que TypeScript : Next distribue son compilateur natif dans des paquets par
+  # plateforme (`@next/swc-*`) publiés avec `next`. Remplace l'entrée `@next/env` seule.
+  - "@next/*"
+  # Next 16 épingle postcss à exactement 8.5.23, publiée le 24/07 : sous quarantaine, la
+  # montée est impossible. C'est par ailleurs le correctif de l'avis modéré qui frappait la
+  # 8.5.21 (lecture de fichiers .map arbitraires via un sourceMappingURL contrôlé).
+  - postcss
+
+# Peers qu'on ne peut pas corriger : dépendances transitives de cdktf-cli (ink,
+# ink-select-input, react-reconciler) figées sur React 16/17. Rien à l'exécution
+# ne charge React depuis @app/cdk, on autorise explicitement la version installée.
+# Version EXACTE, pas une plage : c'est ce qui borne la levée de quarantaine ci-dessus à un
+# artefact connu.
+overrides:
+  postcss: 8.5.23
+
+peerDependencyRules:
+  allowedVersions:
+    react-reconciler>react: '19'
+    ink-select-input>react: '19'
+    # Auth.js plafonne nodemailer à ^7.0.7 || ^8.0.5, mais son provider n'appelle
+    # createTransport que depuis son sendVerificationRequest par défaut — que nous
+    # remplaçons par le nôtre (apps/web/src/auth/sendVerificationRequest.ts). Les six
+    # sous-chemins lib/*-transport qu'il importe existent toujours en 9.x.
+    # À réévaluer dès qu'Auth.js élargit sa plage.
+    next-auth>nodemailer: '9'
+    '@auth/core>nodemailer': '9'
+    # @hookform/resolvers 5.7 déclare en peers optionnels tous les validateurs qu'il sait
+    # adapter (ajv, yup, joi, vest…). Nous n'utilisons que zod ; ajv-formats n'est ici que
+    # parce que schema-utils/webpack le tire, et il s'apparie correctement avec son ajv 8.
+    'ajv-formats>ajv': '6'
+    '@hookform/resolvers>ajv': '6'
+    '@hookform/resolvers>joi': '18'
+    # i18next arrive en transitif via opening_hours (@gouvfr-anct/timetable-to-osm-opening-hours)
+    # et plafonne TypeScript à ^5. Rien ne l'instancie ici : le paquet n'est importé nulle part.
+    'i18next>typescript': '7'

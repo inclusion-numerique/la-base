@@ -15,11 +15,6 @@
     "tf:web:backend-reconfigure": "cd cdktf.out/stacks/web && terraform init -reconfigure",
     "scw": "pnpm --silent with-env scw"
   },
-  "overrides": {
-    "cdktf-cli": {
-      "react": "*"
-    }
-  },
   "dependencies": {
     "cdktf": "^0.21.0",
     "cdktf-cli": "^0.21.0",

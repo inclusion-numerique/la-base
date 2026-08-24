@@ -33,9 +33,6 @@
     "coverage:merge": "rm -rf coverage/.nyc_output && mkdir -p coverage/.nyc_output && find coverage-reports -name '*.json' -exec cp {} coverage/.nyc_output/ \\; && nyc report --temp-dir ./coverage/.nyc_output --reporter=lcov --reporter=html --reporter=text-summary --report-dir=./coverage",
     "coverage:upload": "cat ./coverage/lcov.info | coveralls"
   },
-  "pnpm": {
-    "overrides": {}
-  },
   "optionalDependencies": {
     "turbo-linux-64": "^2.5.5",
     "turbo-linux-arm64": "^2.5.5"

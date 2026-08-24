@@ -17,11 +17,6 @@
   "engines": {
     "node": "^24.19"
   },
-  "overrides": {
-    "storybook": {
-      "react": "*"
-    }
-  },
   "dependencies": {
     "@storybook/addon-a11y": "^9.1.8",
     "@storybook/addon-docs": "^9.1.8",

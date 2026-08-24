@@ -12,11 +12,6 @@
   "engines": {
     "node": "^24.19"
   },
-  "overrides": {
-    "@faire/mjml-react": {
-      "react": "*"
-    }
-  },
   "dependencies": {
     "@faire/mjml-react": "^3.5.0",
     "html-minifier": "^4.0.0",
