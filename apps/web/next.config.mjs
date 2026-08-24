@@ -26,7 +26,9 @@ const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   transpilePackages: ['@app/emails'],
-  serverExternalPackages: ['html-minifier'],
+  // pg (via @prisma/adapter-pg) charge pg-native de façon optionnelle : on laisse Node
+  // résoudre le paquet au lieu de le bundler.
+  serverExternalPackages: ['html-minifier', '@prisma/adapter-pg', 'pg'],
   // This includes files from the monorepo base two directories up
   outputFileTracingRoot: path.join(dirname, '../../'),
   modularizeImports,

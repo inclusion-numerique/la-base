@@ -4,9 +4,13 @@ import {
   defaultNewsFeedPaginationParams,
   getNewsFeedResourcesServer,
 } from '@app/web/server/newsFeed/getNewsFeedResources'
+import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+// Prisma 7 : la connexion passe par un driver adapter
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+})
 
 export const executeMonthlyNewsletterNewsFeed = async () => {
   output('Starting sending news feed newsletter ...')
