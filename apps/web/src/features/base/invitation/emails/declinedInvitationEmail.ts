@@ -21,7 +21,7 @@ export const sendDeclinedInvitationEmail = async ({
 
     subject: `Demande de rejoindre la base ${baseTitle} refusée !`,
     text: rejectedBaseInvitation.text({ memberName, baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       rejectedBaseInvitation.mjml({
         memberName,
         baseTitle,

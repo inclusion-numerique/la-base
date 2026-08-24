@@ -22,7 +22,7 @@
     "@storybook/addon-docs": "^9.1.8",
     "@storybook/addon-links": "^9.1.8",
     "@storybook/nextjs": "^9.1.8",
-    "chromatic": "^11.28.2",
+    "chromatic": "^18.1.0",
     "dotenv": "^17.4.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

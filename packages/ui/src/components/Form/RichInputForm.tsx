@@ -1,7 +1,7 @@
 'use client'
 
 import RichInputFormLinkTooltip from '@app/ui/components/Form/RichInputFormLinkTooltip'
-import { Link } from '@tiptap/extension-link'
+import { Link, type LinkOptions } from '@tiptap/extension-link'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import classNames from 'classnames'
@@ -19,7 +19,9 @@ import RichInputFormMenuBar from './RichInputFormMenuBar'
 const CustomLink = Link.extend({
   addOptions() {
     return {
-      ...this.parent?.(),
+      // `.extend()` a toujours un parent, mais tiptap 3 le type comme optionnel
+      // et rend les champs de LinkOptions obligatoires
+      ...(this.parent?.() as LinkOptions),
       openOnClick: false,
     }
   },

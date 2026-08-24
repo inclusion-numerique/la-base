@@ -1,7 +1,6 @@
 import type { CroppedImageType } from '@app/ui/components/CroppedUpload/utils'
 import { createToast } from '@app/ui/toast/createToast'
-import type { FieldValues, UseFormReturn } from 'react-hook-form'
-import type { FieldPath } from 'react-hook-form/dist/types/path'
+import type { FieldPath, FieldValues, UseFormReturn } from 'react-hook-form'
 import { trpc } from '../trpc'
 import { getZodValidationMutationError } from '../utils/getZodValidationMutationError'
 import { useFileUpload } from './useFileUpload'

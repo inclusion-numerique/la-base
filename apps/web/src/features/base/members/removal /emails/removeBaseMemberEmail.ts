@@ -21,7 +21,7 @@ export const sendRemoveBaseMemberEmail = async ({
 
     subject: `Vous n'êtes plus membre de la base ${baseTitle}`,
     text: removeBaseMember.text({ baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       removeBaseMember.mjml({
         userRemovingName,
         baseTitle,

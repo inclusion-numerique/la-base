@@ -16,7 +16,7 @@
     "axios": "^1.19.0",
     "dotenv": "^17.4.2",
     "dotenv-cli": "^11.0.0",
-    "nanoid": "^5.1.5"
+    "nanoid": "^6.0.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

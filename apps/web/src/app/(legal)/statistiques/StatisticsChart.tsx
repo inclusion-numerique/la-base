@@ -34,13 +34,16 @@ const StatisticsTooltip = <T extends object>({
   <Tooltip
     wrapperClassName="fr-text--sm fr-text-default--grey "
     isAnimationActive={false}
-    content={<CustomTooltip />}
+    content={CustomTooltip}
     cursor={{ fill: 'var(--background-alt-blue-france)' }}
     labelFormatter={(label, payload) => {
       const labelAsString = `${label}`
       if (!tooltipLabelDataKey) return labelAsString
 
-      return `${(payload[0]?.payload as T)[tooltipLabelDataKey]}` || null
+      const firstPayload = payload[0]?.payload as T | undefined
+      if (!firstPayload) return labelAsString
+
+      return `${firstPayload[tooltipLabelDataKey]}` || null
     }}
     formatter={(_value, name) =>
       legends.find((legend) => legend.key === name)?.label

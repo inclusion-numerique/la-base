@@ -3,8 +3,7 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import { type ComponentType, type CSSProperties, ReactNode } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 
 export type LabelComponentPropsType<O extends SelectOption> = {
   option: O
@@ -101,7 +100,7 @@ const RadioFormField = <
               }`}
               role="group"
             >
-              {!!label || !!hint ? (
+              {label || hint ? (
                 <legend
                   className="fr-fieldset__legend fr-fieldset__legend--regular fr-grid-row--full"
                   id={`${id}__legend`}

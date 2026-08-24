@@ -5,8 +5,13 @@ import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import { ReactNode, useCallback, useState } from 'react'
-import { Control, Controller, FieldValues, PathValue } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import {
+  Control,
+  Controller,
+  FieldPath,
+  FieldValues,
+  PathValue,
+} from 'react-hook-form'
 import type { GroupBase, OnChangeValue, Options } from 'react-select'
 
 export type CustomSelectFormFieldProps<

@@ -8,6 +8,14 @@ import type { OAuthConfig } from 'next-auth/providers'
 
 const issuer = `https://${PublicWebAppConfig.ProConnect.hostname}`
 
+/**
+ * `@auth/core` ships an `oauth.d.ts` that references an `EndpointHandler` type it does not
+ * declare, so these two handlers get no contextual typing and would be implicitly `any`.
+ * We spell out the shapes we actually rely on.
+ */
+type TokenRequestContext = { params: { code?: string } }
+type UserinfoRequestContext = { tokens: { access_token?: string } }
+
 export type ProConnectProfile = {
   sub: string
   email: string
@@ -28,7 +36,6 @@ export const ProConnectProvider = () =>
     id: proConnectProviderId,
     name: 'ProConnect',
     type: 'oauth',
-    version: '2.0',
     // Allow an email user to login with Inclusion Connect
     allowDangerousEmailAccountLinking: true,
     clientId: PublicWebAppConfig.ProConnect.clientId,
@@ -45,7 +52,7 @@ export const ProConnectProvider = () =>
       },
     },
     token: {
-      request: async (context) => {
+      request: async (context: TokenRequestContext) => {
         const body = {
           grant_type: 'authorization_code',
           client_id: PublicWebAppConfig.ProConnect.clientId,
@@ -74,7 +81,7 @@ export const ProConnectProvider = () =>
       },
     },
     userinfo: {
-      request: async ({ tokens }) => {
+      request: async ({ tokens }: UserinfoRequestContext) => {
         const r = await axios<string>({
           method: 'GET',
           url: `${issuer}/api/v2/userinfo`,
