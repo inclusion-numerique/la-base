@@ -5,7 +5,7 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "engines": {
-    "node": "^25.4"
+    "node": "^24.19"
   },
   "packageManager": "pnpm@10.16.1",
   "scripts": {
@@ -41,7 +41,7 @@
     "turbo-linux-arm64": "^2.5.5"
   },
   "volta": {
-    "node": "24.5.0"
+    "node": "24.19.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.3",

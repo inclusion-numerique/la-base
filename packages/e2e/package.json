@@ -9,7 +9,7 @@
     "cy": "dotenv -e ../../.env -e ./cypress.env -- cypress"
   },
   "engines": {
-    "node": "^25.4"
+    "node": "^24.19"
   },
   "dependencies": {
     "@cypress/react18": "^2.0.1",
