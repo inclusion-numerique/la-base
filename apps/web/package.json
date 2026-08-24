@@ -4,8 +4,8 @@
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --silent with-env next dev --webpack",
-    "build": "pnpm --silent with-env next build --webpack",
+    "dev": "pnpm --silent with-env next dev",
+    "build": "pnpm --silent with-env next build",
     "build:analyze": "ANALYZE=true pnpm --silent with-env next build --webpack",
     "modclean": "modclean -Pr",
     "modclean:root": "modclean -Pr -p ./../..",

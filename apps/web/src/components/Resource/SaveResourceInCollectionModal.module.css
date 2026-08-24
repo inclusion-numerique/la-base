@@ -51,7 +51,7 @@
 }
 
 .modal:has(.createCollectionButton) {
-  :global .fr-modal__footer {
+  :global(.fr-modal__footer) {
     border-top: 1px solid var(--border-default-grey);
 
     li {
