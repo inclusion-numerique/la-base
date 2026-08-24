@@ -148,7 +148,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Signin form fill and submit')
     cy.findByLabelText('Email').type(`${email}{enter}`)
 
-    cy.appUrlShouldBe('/connexion/verification', {
+    cy.appPathShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
 

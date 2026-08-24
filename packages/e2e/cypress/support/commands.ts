@@ -199,6 +199,15 @@ Cypress.Commands.add('appUrlShouldBe', (url: string, options) => {
   cy.url().should('equal', appUrl(url), options)
 })
 
+/**
+ * Compare le seul chemin, en ignorant la query string. Auth.js v5 propage les paramètres
+ * de sa route interne vers les pages personnalisées — `/connexion/verification` reçoit
+ * ainsi `?provider=email&type=email`, ce que la v4 ne faisait pas.
+ */
+Cypress.Commands.add('appPathShouldBe', (path: string, options) => {
+  cy.location('pathname', options).should('equal', path)
+})
+
 Cypress.Commands.add('allowNextRedirectException', () => {
   Cypress.on('uncaught:exception', (error) => {
     if (error.message.includes('NEXT_REDIRECT')) {
@@ -329,6 +338,11 @@ declare global {
 
       appUrlShouldBe(
         url: string,
+        options?: { timeout?: number },
+      ): Chainable<void>
+
+      appPathShouldBe(
+        path: string,
         options?: { timeout?: number },
       ): Chainable<void>
 
