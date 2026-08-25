@@ -13,5 +13,7 @@
  * le comportement partout où la distinction n'a pas lieu d'être — la CI et les
  * déploiements, où ces clés désignent bien le vrai compte Scaleway.
  */
+// `||` et non `??` : une variable présente mais vide — ce que produit un `.env` généré
+// depuis le gabarit — doit être traitée comme absente, sinon elle neutralise le repli.
 export const scalewayApiToken = () =>
-  process.env.SCW_API_KEY_SECRET ?? process.env.SCW_SECRET_KEY ?? ''
+  process.env.SCW_API_KEY_SECRET || process.env.SCW_SECRET_KEY || ''
