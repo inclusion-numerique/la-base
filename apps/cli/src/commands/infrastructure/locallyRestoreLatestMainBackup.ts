@@ -4,6 +4,7 @@ import path from 'node:path'
 import { promisify } from 'node:util'
 import { output } from '@app/cli/output'
 import { createVarDirectory } from '@app/config/createVarDirectory'
+import { scalewayApiToken } from '@app/config/scalewayApiToken'
 import { varDirectory } from '@app/config/varDirectory'
 import { prismaClient } from '@app/web/prismaClient'
 import { Command } from '@commander-js/extra-typings'
@@ -122,7 +123,7 @@ export const locallyRestoreLatestMainBackup = new Command(
     const databaseInstanceIdWithRegion = process.env.DATABASE_INSTANCE_ID ?? ''
     const databaseInstanceId = databaseInstanceIdWithRegion.split('/')[1]
     const backupDatabaseName = process.env.BACKUP_DATABASE_NAME ?? ''
-    const secretKey = process.env.SCW_SECRET_KEY ?? ''
+    const secretKey = scalewayApiToken()
     const databaseUrl = process.env.DATABASE_URL ?? ''
     const databaseUrlObject = new URL(databaseUrl ?? '')
     const user = databaseUrlObject.username
@@ -161,7 +162,7 @@ export const locallyRestoreLatestMainBackup = new Command(
       const client = axios.create({
         baseURL: 'https://api.scaleway.com/rdb/v1/regions/fr-par',
         headers: {
-          'X-Auth-Token': process.env.SCW_SECRET_KEY,
+          'X-Auth-Token': scalewayApiToken(),
         },
       })
       axiosRetry(client, {

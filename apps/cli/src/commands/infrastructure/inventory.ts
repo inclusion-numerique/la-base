@@ -6,6 +6,7 @@ import {
   projectSlug,
   region,
 } from '@app/config/config'
+import { scalewayApiToken } from '@app/config/scalewayApiToken'
 import {
   ListBucketsCommand,
   ListObjectsV2Command,
@@ -80,10 +81,10 @@ type NoGitBranchResource = {
 }
 
 const fetchScalewayContainers = async () => {
-  const secretKey = process.env.SCW_SECRET_KEY
+  const secretKey = scalewayApiToken()
   if (!secretKey) {
     outputError(
-      'Missing SCW_SECRET_KEY env variable, skipping Scaleway containers check',
+      'Missing SCW_API_KEY_SECRET/SCW_SECRET_KEY env variable, skipping Scaleway containers check',
     )
     return []
   }
@@ -205,10 +206,10 @@ const getMissingEnvValidationErrors = () => {
     errors.push('CIRCLE_CI_TOKEN is required to trigger cleanup pipelines.')
   }
 
-  const scwSecretConfigured = hasValue(process.env.SCW_SECRET_KEY)
+  const scwSecretConfigured = hasValue(scalewayApiToken())
   if (!scwSecretConfigured) {
     errors.push(
-      'SCW_SECRET_KEY is required to query Scaleway container/database inventory.',
+      'SCW_API_KEY_SECRET (or SCW_SECRET_KEY) is required to query Scaleway container/database inventory.',
     )
   }
 
@@ -390,10 +391,10 @@ const parsePreviewDatabaseNamespace = (databaseName: string) => {
 }
 
 const fetchPreviewDatabases = async (): Promise<PreviewDatabase[]> => {
-  const secretKey = process.env.SCW_SECRET_KEY
+  const secretKey = scalewayApiToken()
   if (!secretKey) {
     outputError(
-      'Missing SCW_SECRET_KEY env variable, skipping preview databases check',
+      'Missing SCW_API_KEY_SECRET/SCW_SECRET_KEY env variable, skipping preview databases check',
     )
     return []
   }
