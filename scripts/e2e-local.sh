@@ -58,12 +58,20 @@ echo "▸ Build"
 pnpm --silent -F @app/web exec dotenv -e "$env_file" -- next build >/dev/null
 
 echo "▸ Démarrage de l'application"
+if ss -lntH 'sport = :3000' 2>/dev/null | grep -q .; then
+  echo "  ✖ le port 3000 est déjà occupé — les tests interrogeraient cette application-là." >&2
+  exit 1
+fi
 dist="$(mktemp -d)"
 cp -r apps/web/.next/standalone/. "$dist/"
 cp -r apps/web/public "$dist/apps/web/public"
 cp -r apps/web/.next/static "$dist/apps/web/.next/static"
 app_log="$repo/.e2e-app.log"
-( cd "$dist" && HOSTNAME=localhost node --env-file="$env_file" apps/web/server.js >"$app_log" 2>&1 ) &
+# `exec` remplace le sous-shell par node : `$!` désigne alors le serveur lui-même. Sans
+# cela, le `kill` du trap ne tue que le sous-shell, node survit orphelin en gardant le
+# port 3000, et le run suivant interroge ce zombie — dont le répertoire vient d'être
+# supprimé — au lieu de sa propre application.
+( cd "$dist" && exec env HOSTNAME=localhost node --env-file="$env_file" apps/web/server.js >"$app_log" 2>&1 ) &
 app_pid=$!
 trap 'kill "$app_pid" 2>/dev/null || true; rm -rf "$dist"' EXIT
 
