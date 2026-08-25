@@ -37,7 +37,7 @@ executors:
         environment:
           TZ: 'UTC'
           CI_DATABASE_URL: postgresql://postgres@localhost/test
-      - image: maildev/maildev:latest
+      - image: maildev/maildev:2.2.1
         environment:
           MAILDEV_INCOMING_USER: mailuser
           MAILDEV_INCOMING_PASS: mailpassword

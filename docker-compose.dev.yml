@@ -1,6 +1,6 @@
 services:
   maildev:
-    image: maildev/maildev
+    image: maildev/maildev:2.2.1
     environment:
       MAILDEV_INCOMING_USER: mailuser
       MAILDEV_INCOMING_PASS: mailpassword
