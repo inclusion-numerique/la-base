@@ -67,11 +67,17 @@ cp -r apps/web/.next/standalone/. "$dist/"
 cp -r apps/web/public "$dist/apps/web/public"
 cp -r apps/web/.next/static "$dist/apps/web/.next/static"
 app_log="$repo/.e2e-app.log"
-# `exec` remplace le sous-shell par node : `$!` désigne alors le serveur lui-même. Sans
-# cela, le `kill` du trap ne tue que le sous-shell, node survit orphelin en gardant le
+# `dotenv` plutôt que `node --env-file` : ce dernier ne développe pas les références
+# `$VAR`, or treize entrées du `.env` sont définies ainsi — dont `PROCONNECT_CLIENT_SECRET`,
+# qui parvenait au serveur sous la forme littérale « $PROCONNECT_LOCAL_CLIENT_SECRET » et
+# faisait rejeter l'échange de jeton par ProConnect. `dotenv` est déjà le chargeur utilisé
+# pour le build et par `pnpm dev`, les valeurs sont donc les mêmes partout.
+#
+# `exec` remplace le sous-shell par le processus : `$!` désigne alors le serveur lui-même.
+# Sans cela, le `kill` du trap ne tue que le sous-shell, node survit orphelin en gardant le
 # port 3000, et le run suivant interroge ce zombie — dont le répertoire vient d'être
 # supprimé — au lieu de sa propre application.
-( cd "$dist" && exec env HOSTNAME=localhost node --env-file="$env_file" apps/web/server.js >"$app_log" 2>&1 ) &
+( cd "$dist" && exec env HOSTNAME=localhost "$repo/node_modules/.bin/dotenv" -e "$env_file" -- node apps/web/server.js >"$app_log" 2>&1 ) &
 app_pid=$!
 trap 'kill "$app_pid" 2>/dev/null || true; rm -rf "$dist"' EXIT
 
