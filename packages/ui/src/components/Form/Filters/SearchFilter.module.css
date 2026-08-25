@@ -32,7 +32,14 @@
 .options {
   width: 325px;
   position: absolute;
-  z-index: 1;
+
+  /* Le panneau se déplie vers le bas, sur les résultats de recherche : le layout place
+     SearchFilters et les cartes dans le même conteneur, donc dans le même contexte
+     d'empilement. Or ResourceCard porte .header et .actions à 2, et arrive après dans le
+     DOM — avec z-index: 1, le panneau passait dessous. Un panneau déplié flotte au-dessus
+     du contenu de la page ; même valeur que .actions ouvert dans ResourceCard.module.css,
+     les deux ne pouvant être ouverts en même temps (useOnClickOutside). */
+  z-index: 1000;
   left: 0;
   min-width: 100%;
   background-color: var(--background-default-grey);
