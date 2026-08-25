@@ -6,7 +6,11 @@ import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import type { OAuthConfig } from 'next-auth/providers'
 
-const issuer = `https://${PublicWebAppConfig.ProConnect.hostname}`
+// ProConnect publie son document de découverte sous `/api/v2` et renvoie `iss` sur le
+// callback d'autorisation (`authorization_response_iss_parameter_supported: true`).
+// Auth.js v5 valide ce paramètre — next-auth v4 l'ignorait — donc l'issuer déclaré doit
+// être l'identifiant exact, chemin `/api/v2` compris, et non la seule origine.
+const issuer = `https://${PublicWebAppConfig.ProConnect.hostname}/api/v2`
 
 /**
  * `@auth/core` ships an `oauth.d.ts` that references an `EndpointHandler` type it does not
@@ -46,7 +50,7 @@ export const ProConnectProvider = () =>
     clientSecret: ServerWebAppConfig.ProConnect.clientSecret,
     issuer,
     authorization: {
-      url: `${issuer}/api/v2/authorize`,
+      url: `${issuer}/authorize`,
       params: {
         // https://github.com/numerique-gouv/agentconnect-documentation/blob/main/doc_fs/scope-claims.md#correspondance-entre-scope-et-claims-sur-agentconnect
         scope: 'openid given_name usual_name email',
@@ -56,10 +60,10 @@ export const ProConnectProvider = () =>
       },
     },
     token: {
-      // L'URL doit être déclarée en plus du handler : Auth.js v5 bascule sur la découverte
-      // OIDC (`/.well-known/openid-configuration`) dès que `token.url` et `userinfo.url`
-      // manquent tous deux, et celle de ProConnect ne répond pas au format attendu.
-      url: `${issuer}/api/v2/token`,
+      // L'URL est déclarée en plus du handler : Auth.js v5 bascule sur la découverte OIDC
+      // dès que `token.url` et `userinfo.url` manquent tous deux. La déclarer nous en
+      // dispense — un aller-retour réseau de moins au démarrage du flux.
+      url: `${issuer}/token`,
       request: async (context: TokenRequestContext) => {
         const body = {
           grant_type: 'authorization_code',
@@ -82,18 +86,18 @@ export const ProConnectProvider = () =>
             'content-type': 'application/x-www-form-urlencoded',
           },
           data,
-          url: `${issuer}/api/v2/token`,
+          url: `${issuer}/token`,
         })
 
         return { tokens: r.data }
       },
     },
     userinfo: {
-      url: `${issuer}/api/v2/userinfo`,
+      url: `${issuer}/userinfo`,
       request: async ({ tokens }: UserinfoRequestContext) => {
         const r = await axios<string>({
           method: 'GET',
-          url: `${issuer}/api/v2/userinfo`,
+          url: `${issuer}/userinfo`,
           headers: {
             Authorization: tokens.access_token
               ? `Bearer ${tokens.access_token}`
