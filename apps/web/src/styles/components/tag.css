@@ -21,8 +21,8 @@ input[type='button'].fr-tag--yellow-tournesol[aria-pressed='true']:disabled {
 
 button.fr-tag--green-archipel[aria-pressed='true']:not(:disabled),
 input[type='button'].fr-tag--green-archipel[aria-pressed='true']:not(
-    :disabled
-  ) {
+  :disabled
+) {
   background-color: var(--background-alt-green-archipel);
   background-image: none;
   color: var(--text-label-green-archipel);
@@ -50,8 +50,8 @@ input[type='button'].fr-tag--green-archipel[aria-pressed='true']::after {
 
 button.fr-tag--green-bourgeon[aria-pressed='true']:not(:disabled),
 input[type='button'].fr-tag--green-bourgeon[aria-pressed='true']:not(
-    :disabled
-  ) {
+  :disabled
+) {
   background-color: var(--background-alt-green-bourgeon);
   background-image: none;
   color: var(--text-label-green-bourgeon);
@@ -106,8 +106,8 @@ input[type='button'].fr-tag--pink-tuile[aria-pressed='true']::after {
 
 button.fr-tag--yellow-tournesol[aria-pressed='true']:not(:disabled),
 input[type='button'].fr-tag--yellow-tournesol[aria-pressed='true']:not(
-    :disabled
-  ) {
+  :disabled
+) {
   background-color: var(--background-alt-yellow-tournesol);
   background-image: none;
   color: var(--text-label-yellow-tournesol);

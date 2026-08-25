@@ -22,7 +22,7 @@ export const sendJoinRequestAcceptedEmail = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: `${adminName} a accepté votre demande de rejoindre la base ${baseTitle}`,
     text: acceptedBaseJoinRequest.text({ adminName, baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       acceptedBaseJoinRequest.mjml({
         url,
         adminName,

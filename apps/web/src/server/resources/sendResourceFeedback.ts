@@ -3,7 +3,7 @@ import z from 'zod'
 export const SendResourceFeedbackClientValidation = z.object({
   rating: z
     .string({
-      required_error: 'Veuillez renseigner le niveau de satisfaction',
+      error: 'Veuillez renseigner le niveau de satisfaction',
     })
     .regex(/^[1-4]$/),
   comment: z
@@ -24,7 +24,7 @@ export const SendResourceFeedbackValidation =
       (value) => (value == null ? value : Number.parseInt(value as string, 10)),
       z
         .number({
-          required_error: 'Veuillez renseigner le niveau de satisfaction',
+          error: 'Veuillez renseigner le niveau de satisfaction',
         })
         .int()
         .min(1)

@@ -70,7 +70,7 @@ describe('UpdateBaseInformationsCommand', () => {
       [
         {
           path: ['department'],
-          message: 'Expected string, received number',
+          message: 'Invalid input: expected string, received number',
         },
       ],
     )
@@ -86,7 +86,7 @@ describe('UpdateBaseInformationsCommand', () => {
       [
         {
           path: ['description'],
-          message: 'Expected string, received number',
+          message: 'Invalid input: expected string, received number',
         },
       ],
     )
@@ -212,7 +212,7 @@ describe('UpdateBaseContactsCommand', () => {
       [
         {
           path: ['emailIsPublic'],
-          message: 'Required',
+          message: 'Invalid input: expected boolean, received undefined',
         },
       ],
     )

@@ -2,30 +2,30 @@ import z from 'zod'
 
 export const UserSignupValidation = z.object({
   email: z
-    .string({ required_error: 'Veuillez renseigner votre email' })
+    .string({ error: 'Veuillez renseigner votre email' })
     .trim()
     .toLowerCase()
     .email(
       'Merci de renseigner un email valide. Exemple: support@lesbases.anct.gouv.fr',
     ),
   firstName: z
-    .string({ required_error: 'Veuillez renseigner votre prénom' })
+    .string({ error: 'Veuillez renseigner votre prénom' })
     .trim()
     .min(1, 'Veuillez renseigner votre prénom'),
   lastName: z
-    .string({ required_error: 'Veuillez renseigner votre nom' })
+    .string({ error: 'Veuillez renseigner votre nom' })
     .trim()
     .min(1, 'Veuillez renseigner votre nom'),
   policyAccepted: z
     .boolean({
-      required_error: `Veuillez accepter les conditions générales d'utilisation`,
+      error: `Veuillez accepter les conditions générales d'utilisation`,
     })
     .refine((value) => value, {
       message: `Veuillez accepter les conditions générales d'utilisation`,
       path: ['policyAccepted'],
     }),
   captcha: z.string({
-    required_error: 'Veuillez vérifier que vous n’êtes pas un robot',
+    error: 'Veuillez vérifier que vous n’êtes pas un robot',
   }),
 })
 

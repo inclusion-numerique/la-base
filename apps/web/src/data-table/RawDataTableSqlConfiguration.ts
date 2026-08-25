@@ -3,7 +3,7 @@ import type {
   DataTableFilter,
 } from '@app/web/data-table/DataTableConfiguration'
 import type { SortDirection } from '@app/web/data-table/SortLink'
-import type { Sql } from '@prisma/client/runtime/library'
+import type { Sql } from '@prisma/client/runtime/client'
 
 type ExtractFilters<Column> = Column extends { filters: infer F }
   ? F extends DataTableFilter[]

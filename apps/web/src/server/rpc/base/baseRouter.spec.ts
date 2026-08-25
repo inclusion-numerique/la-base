@@ -55,9 +55,7 @@ describe('baseRouter - create', () => {
       slug: 'test-base',
       created: new Date(),
     }
-    jest
-      .spyOn(prismaClient.base, 'create')
-      .mockResolvedValue(mockBase as any)
+    jest.spyOn(prismaClient.base, 'create').mockResolvedValue(mockBase as any)
 
     // Mock de deleteSuspiciousBase pour qu'il retourne false (pas de suppression)
     ;(deleteSuspiciousBase as jest.Mock).mockResolvedValue(false)
@@ -109,9 +107,7 @@ describe('baseRouter - create', () => {
       slug: 'test-base',
       created: new Date(),
     }
-    jest
-      .spyOn(prismaClient.base, 'create')
-      .mockResolvedValue(mockBase as any)
+    jest.spyOn(prismaClient.base, 'create').mockResolvedValue(mockBase as any)
 
     // Mock de deleteSuspiciousBase pour qu'il retourne true (suppression)
     ;(deleteSuspiciousBase as jest.Mock).mockResolvedValue(true)

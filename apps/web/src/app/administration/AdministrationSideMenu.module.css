@@ -1,7 +1,7 @@
 .sideMenu {
   /* md */
   @media (min-width: 48em) {
-    :global .fr-sidemenu__inner {
+    :global(.fr-sidemenu__inner) {
       padding: 24px !important;
       display: flex;
       flex-direction: column;
@@ -23,7 +23,7 @@
 .item {
   margin-bottom: 8px;
 
-  :global .fr-sidemenu__link {
+  :global(.fr-sidemenu__link) {
     font-weight: 500;
     padding: 8px;
     line-height: 24px;
@@ -35,7 +35,7 @@
     }
   }
 
-  :global .fr-sidemenu__link:has(.fr-btn) {
+  :global(.fr-sidemenu__link:has(.fr-btn)) {
     padding: 0 !important;
 
     &:hover {
@@ -47,18 +47,18 @@
     margin-bottom: 0;
   }
 
-  :global .fr-sidemenu__btn[aria-expanded] {
+  :global(.fr-sidemenu__btn[aria-expanded]) {
     @media (min-width: 48em) {
       padding-left: 0.5rem;
       padding-right: 2rem;
     }
   }
 
-  :global .fr-sidemenu__list .fr-sidemenu__list {
+  :global(.fr-sidemenu__list .fr-sidemenu__list) {
     width: 100%;
   }
 
-  :global .fr-sidemenu__list .fr-sidemenu__item {
+  :global(.fr-sidemenu__list .fr-sidemenu__item) {
     width: 100%;
   }
 }

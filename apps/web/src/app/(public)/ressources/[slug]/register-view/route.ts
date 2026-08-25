@@ -2,7 +2,7 @@ import { getSessionTokenFromCookies } from '@app/web/auth/getSessionTokenFromCoo
 import { getSessionUserFromSessionToken } from '@app/web/auth/getSessionUserFromSessionToken'
 import { prismaClient } from '@app/web/prismaClient'
 import { getOrSetVisitHashCookie } from '@app/web/server/visitHash/getOrSetVisitHashCookie'
-import * as cookie from 'cookie'
+import { parseCookie } from 'cookie'
 import type { NextRequest } from 'next/server'
 import { v4 } from 'uuid'
 
@@ -50,7 +50,7 @@ export const POST = async (
     })
   }
 
-  const cookies = cookie.parse(request.headers.get('cookie') || '')
+  const cookies = parseCookie(request.headers.get('cookie') || '')
   const sessionToken = getSessionTokenFromCookies(cookies)
   const user = sessionToken
     ? await getSessionUserFromSessionToken(sessionToken)

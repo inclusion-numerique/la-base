@@ -173,6 +173,9 @@ export class WebAppStack extends TerraformStack {
       ? projectTitle
       : `[${namespace}] ${projectTitle}`
 
+    // `sslmode=require` reste la seule écriture comprise à la fois par libpq (`psql`,
+    // `pg_restore`) et par le moteur de migration de Prisma. La tolérance au certificat
+    // auto-signé de Scaleway est déclarée côté driver — voir apps/web/src/prismaPgAdapter.ts
     const databaseUrl = Fn.format('postgres://%s:%s@%s:%s/%s?sslmode=require', [
       databaseUser,
       databasePasswordVariable.value,

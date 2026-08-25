@@ -300,7 +300,7 @@ export const rankResources = async (
                    /* in case of same recommendation score, we sort by feedbacks count */
                    WHEN ${
                      paginationParams.sort
-                   } = 'recommandations' THEN feedbacks_count
+} = 'recommandations' THEN feedbacks_count
                    END DESC,
                CASE
                    /* All these sort options use the most recent resources in case of equality */

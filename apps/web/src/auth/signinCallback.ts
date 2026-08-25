@@ -9,36 +9,34 @@ import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { prismaClient } from '@app/web/prismaClient'
 import { registerLastLogin } from '@app/web/security/registerLastLogin'
 import * as Sentry from '@sentry/nextjs'
-import type { Account, Profile, User } from 'next-auth'
+import type { NextAuthConfig } from 'next-auth'
 
-export const signinCallback: <
-  P extends Profile = Profile,
-  A extends Account = Account,
->(params: {
-  user: User
-  account: A | null
-  /**
-   * If OAuth provider is used, it contains the full
-   * OAuth profile returned by your provider.
-   */
-  profile?: P
-  /**
-   * If Email provider is used, on the first call, it contains a
-   * `verificationRequest: true` property to indicate it is being triggered in the verification request flow.
-   * When the callback is invoked after a user has clicked on a sign in link,
-   * this property will not be present. You can check for the `verificationRequest` property
-   * to avoid sending emails to addresses or domains on a blocklist or to only explicitly generate them
-   * for email address in an allow list.
-   */
-  email?: {
-    verificationRequest?: boolean
-  }
-}) => Promise<string | boolean> = async ({ account, profile, user, email }) => {
+/**
+ * v5 widens `user` to `AdapterUser | User`, makes `account` optional and adds `credentials`,
+ * so we take the callback signature straight from the config instead of restating it.
+ */
+type SignInCallback = NonNullable<
+  NonNullable<NextAuthConfig['callbacks']>['signIn']
+>
+
+export const signinCallback: SignInCallback = async ({
+  account,
+  profile,
+  user,
+  email,
+}) => {
   const userEmail = user.email
 
   if (!userEmail) {
     // Our providers always return an email, this case is not expected
     return `/connexion?error=MissingProviderEmail`
+  }
+
+  const userId = user.id
+
+  if (!userId) {
+    // Our adapter always returns a persisted user, this case is not expected
+    return `/connexion?error=MissingProviderUserId`
   }
 
   const existingUser = await prismaClient.user.findUnique({
@@ -64,7 +62,7 @@ export const signinCallback: <
     PublicWebAppConfig.isDev
   ) {
     if (
-      !!email &&
+      email &&
       existingUser &&
       !['User', 'Moderator'].includes(existingUser.role)
     ) {
@@ -106,7 +104,7 @@ export const signinCallback: <
       }
     }
     updateAccountTokens({
-      userId: user.id,
+      userId,
       provider: proConnectProviderId,
       tokens: {
         access_token: account.access_token,
@@ -143,7 +141,7 @@ export const signinCallback: <
     // We check this with existence of prisma fields
     if (isUserCreatedInDatabase) {
       // User exists, signin is ok
-      registerLastLogin({ userId: user.id }).catch((error) => {
+      registerLastLogin({ userId }).catch((error) => {
         Sentry.captureException(error)
       })
       return true
@@ -156,7 +154,7 @@ export const signinCallback: <
   }
 
   await updateUserEmailFromProvider({ user, profile })
-  registerLastLogin({ userId: user.id }).catch((error) => {
+  registerLastLogin({ userId }).catch((error) => {
     Sentry.captureException(error)
   })
   return true

@@ -3,10 +3,15 @@ import { emailSignin } from '@app/emails/templates/emailSignin'
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 import { emailTransport } from '@app/web/server/email/emailTransport'
 import { throwOnSendMailFailure } from '@app/web/server/email/throwOnSendMailFailure'
-import type { SendVerificationRequestParams } from 'next-auth/providers'
+import type { NodemailerConfig } from 'next-auth/providers/nodemailer'
 import { getServerUrl } from '../utils/baseUrl'
 
 const debugMagicLink = !PublicWebAppConfig.isMain
+
+/** v5 no longer exports a standalone params type, we derive it from the provider config. */
+type SendVerificationRequestParams = Parameters<
+  NodemailerConfig['sendVerificationRequest']
+>[0]
 
 export const sendVerificationRequest = async ({
   url,
@@ -37,7 +42,7 @@ export const sendVerificationRequest = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: `Connexion à ${PublicWebAppConfig.projectTitle}`,
     text: emailSignin.text({ url: finalUrl }),
-    html: compileMjml(emailSignin.mjml({ url: finalUrl })),
+    html: await compileMjml(emailSignin.mjml({ url: finalUrl })),
   })
 
   throwOnSendMailFailure(result)

@@ -8,7 +8,7 @@ import z from 'zod'
 
 export const contentEditionValues = {
   title: z
-    .string({ required_error: 'Veuillez renseigner le titre' })
+    .string({ error: 'Veuillez renseigner le titre' })
     .trim()
     .nonempty('Veuillez renseigner le titre')
     .max(
@@ -16,7 +16,7 @@ export const contentEditionValues = {
       `Le titre ne doit pas dépasser ${resourceSectionTitleMaxLength} caractères`,
     ),
   text: z
-    .string({ required_error: 'Veuillez renseigner le texte' })
+    .string({ error: 'Veuillez renseigner le texte' })
     .trim()
     .nonempty('Veuillez renseigner le texte')
     .transform((text) => sanitizeHtml(text)),
@@ -39,11 +39,11 @@ export type TextPayload = z.infer<typeof TextPayloadCommandValidation>
 export const ImagePayloadCommandValidation = z.object({
   type: z.literal('Image'),
   imageId: z
-    .string({ required_error: 'Veuillez choisir une image' })
+    .string({ error: 'Veuillez choisir une image' })
     .uuid()
     .nonempty('Veuillez choisir une image'),
   title: z
-    .string({ required_error: 'Veuillez renseigner le titre' })
+    .string({ error: 'Veuillez renseigner le titre' })
     .trim()
     .max(
       contentTitleMaxLength,
@@ -72,7 +72,7 @@ export type ImagePayload = z.infer<typeof ImagePayloadCommandValidation>
 export const LinkPayloadCommandValidation = z.object({
   type: z.literal('Link'),
   title: z
-    .string({ required_error: 'Veuillez renseigner le titre' })
+    .string({ error: 'Veuillez renseigner le titre' })
     .trim()
     .max(
       contentTitleMaxLength,
@@ -80,12 +80,12 @@ export const LinkPayloadCommandValidation = z.object({
     )
     .nullish(),
   url: z
-    .string({ required_error: "Veuillez renseigner l'URL" })
+    .string({ error: "Veuillez renseigner l'URL" })
     .trim()
     .nonempty("Veuillez renseigner l'URL")
     .url('URL non valide'),
   caption: z
-    .string({ required_error: 'Veuillez renseigner la légende' })
+    .string({ error: 'Veuillez renseigner la légende' })
     .trim()
     .max(
       contentCaptionMaxLength,
@@ -103,10 +103,10 @@ export type LinkPayload = z.infer<typeof LinkPayloadCommandValidation>
 export const FilePayloadCommandValidation = z.object({
   type: z.literal('File'),
   fileKey: z
-    .string({ required_error: 'Veuillez choisir un fichier' })
+    .string({ error: 'Veuillez choisir un fichier' })
     .nonempty('Veuillez choisir un fichier'),
   title: z
-    .string({ required_error: 'Veuillez renseigner le titre' })
+    .string({ error: 'Veuillez renseigner le titre' })
     .trim()
     .max(
       contentTitleMaxLength,
@@ -114,7 +114,7 @@ export const FilePayloadCommandValidation = z.object({
     )
     .nullish(),
   caption: z
-    .string({ required_error: 'Veuillez renseigner la légende' })
+    .string({ error: 'Veuillez renseigner la légende' })
     .trim()
     .max(
       contentCaptionMaxLength,

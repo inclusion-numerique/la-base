@@ -1,6 +1,7 @@
 import { initializeSentry } from '@app/web/sentry'
 import { shouldDropRequestError } from '@app/web/utils/sentryFilter'
 import * as Sentry from '@sentry/nextjs'
+import type { Instrumentation } from 'next'
 
 /**
  * See https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation
@@ -11,26 +12,20 @@ export async function register() {
   initializeSentry()
 }
 
-export const onRequestError = (
-  error: unknown,
-  request: { pathname: string },
+/**
+ * Next nomme ce champ `path`, et fournit aussi la méthode et les en-têtes. Le paramètre
+ * était déclaré `{ pathname }` : la valeur lue était donc toujours `undefined`, et le
+ * filtre échouait sur « Cannot read properties of undefined (reading 'includes') » à
+ * chaque erreur de requête — aucune n'a jamais atteint Sentry.
+ */
+export const onRequestError: Instrumentation.onRequestError = (
+  error,
+  request,
+  context,
 ) => {
-  if (shouldDropRequestError({ error, pathname: request.pathname })) {
+  if (shouldDropRequestError({ error, pathname: request.path })) {
     return // Don't capture this error
   }
   // Capture other errors normally
-  // Adapt Next.js request format to Sentry's expected format
-  Sentry.captureRequestError(
-    error,
-    {
-      path: request.pathname,
-      method: 'GET', // Default since we don't have method info
-      headers: {},
-    },
-    {
-      routerKind: 'app',
-      routePath: request.pathname,
-      routeType: 'route',
-    },
-  )
+  Sentry.captureRequestError(error, request, context)
 }

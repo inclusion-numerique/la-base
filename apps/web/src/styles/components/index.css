@@ -1,4 +1,4 @@
-@import url('./overrides');
+@import url('./overrides/index.css');
 @import url('./badge.css');
 @import url('./button.css');
 @import url('./card.css');

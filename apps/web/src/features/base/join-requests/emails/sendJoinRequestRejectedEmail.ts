@@ -20,7 +20,7 @@ export const sendJoinRequestRejectedEmail = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: `${adminName} a refusé votre demande de rejoindre la base ${baseTitle}`,
     text: rejectedBaseJoinRequest.text({ adminName, baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       rejectedBaseJoinRequest.mjml({
         adminName,
         baseTitle,

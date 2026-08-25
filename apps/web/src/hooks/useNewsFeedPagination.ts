@@ -1,7 +1,7 @@
 'use client'
 
 import { NewsFeedResource } from '@app/web/features/fil-d-actualite/db/getNewsFeedPageContext'
-import { NEWS_FEED_DEFAULT_PER_PAGE } from '@app/web/server/newsFeed/getNewsFeedResources'
+import { NEWS_FEED_DEFAULT_PER_PAGE } from '@app/web/server/newsFeed/newsFeedPagination'
 import { trpc } from '@app/web/trpc'
 import { useCallback, useEffect, useState } from 'react'
 

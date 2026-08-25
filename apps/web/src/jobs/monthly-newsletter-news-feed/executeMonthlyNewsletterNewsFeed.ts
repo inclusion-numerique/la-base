@@ -1,12 +1,16 @@
 import { output } from '@app/cli/output'
 import { sendNewsFeedNewsletterEmail } from '@app/web/features/fil-d-actualite/components/emails/sendNewsFeedNewsletterEmail'
+import { createPrismaPgAdapter } from '@app/web/prismaPgAdapter'
 import {
   defaultNewsFeedPaginationParams,
   getNewsFeedResourcesServer,
 } from '@app/web/server/newsFeed/getNewsFeedResources'
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+// Prisma 7 : la connexion passe par un driver adapter
+const prisma = new PrismaClient({
+  adapter: createPrismaPgAdapter(),
+})
 
 export const executeMonthlyNewsletterNewsFeed = async () => {
   output('Starting sending news feed newsletter ...')

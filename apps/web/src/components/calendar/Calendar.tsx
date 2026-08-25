@@ -1,8 +1,8 @@
 import { dateAsIsoDay } from '@app/web/utils/dateAsIsoDay'
 import { dateFormatter } from '@app/web/utils/formatDate'
 import classNames from 'classnames'
+import type { CalendarProps } from 'react-calendar'
 import ReactCalendar from 'react-calendar'
-import type { CalendarProps } from 'react-calendar/src/Calendar'
 import styles from './Calendar.module.css'
 
 const today = dateAsIsoDay(new Date())

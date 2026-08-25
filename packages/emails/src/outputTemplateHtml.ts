@@ -28,7 +28,7 @@ export async function outputMjmlTemplate(
   name: string,
   mjmlTemplate: string,
 ): Promise<void> {
-  const htmlContent = compileMjml(mjmlTemplate)
+  const htmlContent = await compileMjml(mjmlTemplate)
   await outputHtmlTemplate(name, htmlContent)
   await fs.writeFile(`${outputDirectory}/${name}.mjml`, mjmlTemplate)
 }

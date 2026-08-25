@@ -6,7 +6,19 @@ import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import type { OAuthConfig } from 'next-auth/providers'
 
-const issuer = `https://${PublicWebAppConfig.ProConnect.hostname}`
+// ProConnect publie son document de découverte sous `/api/v2` et renvoie `iss` sur le
+// callback d'autorisation (`authorization_response_iss_parameter_supported: true`).
+// Auth.js v5 valide ce paramètre — next-auth v4 l'ignorait — donc l'issuer déclaré doit
+// être l'identifiant exact, chemin `/api/v2` compris, et non la seule origine.
+const issuer = `https://${PublicWebAppConfig.ProConnect.hostname}/api/v2`
+
+/**
+ * `@auth/core` ships an `oauth.d.ts` that references an `EndpointHandler` type it does not
+ * declare, so these two handlers get no contextual typing and would be implicitly `any`.
+ * We spell out the shapes we actually rely on.
+ */
+type TokenRequestContext = { params: { code?: string } }
+type UserinfoRequestContext = { tokens: { access_token?: string } }
 
 export type ProConnectProfile = {
   sub: string
@@ -28,14 +40,17 @@ export const ProConnectProvider = () =>
     id: proConnectProviderId,
     name: 'ProConnect',
     type: 'oauth',
-    version: '2.0',
+    // next-auth v4 créait systématiquement `state`, `pkce` et `nonce` ; Auth.js v5 se
+    // limite à `['pkce']` par défaut. ProConnect refuse la requête d'autorisation sans
+    // `state` (« state must be a string », code Y000400).
+    checks: ['pkce', 'state'],
     // Allow an email user to login with Inclusion Connect
     allowDangerousEmailAccountLinking: true,
     clientId: PublicWebAppConfig.ProConnect.clientId,
     clientSecret: ServerWebAppConfig.ProConnect.clientSecret,
     issuer,
     authorization: {
-      url: `${issuer}/api/v2/authorize`,
+      url: `${issuer}/authorize`,
       params: {
         // https://github.com/numerique-gouv/agentconnect-documentation/blob/main/doc_fs/scope-claims.md#correspondance-entre-scope-et-claims-sur-agentconnect
         scope: 'openid given_name usual_name email',
@@ -45,7 +60,11 @@ export const ProConnectProvider = () =>
       },
     },
     token: {
-      request: async (context) => {
+      // L'URL est déclarée en plus du handler : Auth.js v5 bascule sur la découverte OIDC
+      // dès que `token.url` et `userinfo.url` manquent tous deux. La déclarer nous en
+      // dispense — un aller-retour réseau de moins au démarrage du flux.
+      url: `${issuer}/token`,
+      request: async (context: TokenRequestContext) => {
         const body = {
           grant_type: 'authorization_code',
           client_id: PublicWebAppConfig.ProConnect.clientId,
@@ -67,17 +86,18 @@ export const ProConnectProvider = () =>
             'content-type': 'application/x-www-form-urlencoded',
           },
           data,
-          url: `${issuer}/api/v2/token`,
+          url: `${issuer}/token`,
         })
 
         return { tokens: r.data }
       },
     },
     userinfo: {
-      request: async ({ tokens }) => {
+      url: `${issuer}/userinfo`,
+      request: async ({ tokens }: UserinfoRequestContext) => {
         const r = await axios<string>({
           method: 'GET',
-          url: `${issuer}/api/v2/userinfo`,
+          url: `${issuer}/userinfo`,
           headers: {
             Authorization: tokens.access_token
               ? `Bearer ${tokens.access_token}`

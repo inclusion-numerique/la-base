@@ -7,8 +7,7 @@ import type {
   HTMLProps,
   ReactNode,
 } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 
 type CommonProps<T extends FieldValues> = {
   control: Control<T>

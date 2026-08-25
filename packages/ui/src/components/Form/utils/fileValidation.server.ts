@@ -55,7 +55,7 @@ export const fileValidation = ({
 
   return z.object(
     {
-      key: z.string({ required_error: 'Veuillez téléverser un fichier' }),
+      key: z.string({ error: 'Veuillez téléverser un fichier' }),
       mimeType:
         acceptedMimeTypes && typeValidation
           ? z
@@ -78,7 +78,7 @@ export const fileValidation = ({
               )
           : z.number().int().positive(),
     },
-    { required_error: requiredMessage },
+    { error: requiredMessage },
   )
 }
 

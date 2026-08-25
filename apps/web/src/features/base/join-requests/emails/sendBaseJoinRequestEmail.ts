@@ -34,7 +34,7 @@ export const sendBaseJoinRequestEmail = async ({
         : applicant.name || applicant.email
     } demande à rejoindre la base ${baseTitle}`,
     text: baseJoinRequest.text({ url, baseTitle, applicant }),
-    html: compileMjml(
+    html: await compileMjml(
       baseJoinRequest.mjml({
         url,
         baseTitle,

@@ -167,6 +167,9 @@ const ResourceCard = ({
           {isContributor && (
             <ResourceMoreActionsDropdown
               context="card"
+              // À la une, la rangée d'actions passe à la ligne et le bouton se retrouve à
+              // gauche de la carte : ancré à droite, le panneau déborderait vers l'extérieur.
+              alignRight={context !== 'highlight'}
               user={user}
               modalControlClassName="ri-lg"
               dropdownControlClassName="fr-text--bold"
@@ -194,36 +197,36 @@ const ResourceCard = ({
               />
             </>
           )}
-        </div>
-        {isContributor && (
-          <Button
-            data-testid="resource-card-edit-link"
-            title="Modifier"
-            size="small"
-            priority="tertiary no outline"
-            linkProps={{
-              href: appendShareToken(
-                `/ressources/${resource.slug}/editer`,
-                shareToken,
-              ),
-              prefetch: false,
-            }}
-          >
-            <span
-              className={
-                context === 'highlight'
-                  ? 'fr-mr-1w'
-                  : 'fr-unhidden-sm fr-hidden fr-mr-1w'
-              }
+          {isContributor && (
+            <Button
+              data-testid="resource-card-edit-link"
+              title="Modifier"
+              size="small"
+              priority="tertiary no outline"
+              linkProps={{
+                href: appendShareToken(
+                  `/ressources/${resource.slug}/editer`,
+                  shareToken,
+                ),
+                prefetch: false,
+              }}
             >
-              Modifier
-            </span>
-            {context !== 'highlight' && (
-              <span className="fr-sr-only">Modifier</span>
-            )}
-            <span className="ri-edit-line" aria-hidden />
-          </Button>
-        )}
+              <span
+                className={
+                  context === 'highlight'
+                    ? 'fr-mr-1w'
+                    : 'fr-unhidden-sm fr-hidden fr-mr-1w'
+                }
+              >
+                Modifier
+              </span>
+              {context !== 'highlight' && (
+                <span className="fr-sr-only">Modifier</span>
+              )}
+              <span className="ri-edit-line" aria-hidden />
+            </Button>
+          )}
+        </div>
       </div>
     </div>
     <div className={styles.header}>

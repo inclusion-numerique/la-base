@@ -162,6 +162,16 @@
 .actions {
   position: relative;
   z-index: 2;
+
+  /* Le panneau du menu d'actions est enfermé dans le contexte d'empilement que crée ce
+     z-index : le sien (dropdown.css) ne le classe donc que vis-à-vis de ses frères, pas
+     face à .header — qui vaut aussi 2 et l'emporte en étant écrit après. Tant que le menu
+     est déplié, on élève .actions au-dessus de .header et des cartes suivantes.
+     Le z-index de base ne peut pas être relevé en permanence : il doit rester au-dessus
+     du calque de clic de .titleLink::before, mais sans recouvrir les cartes voisines. */
+  &:has([aria-expanded='true']) {
+    z-index: 1000;
+  }
 }
 
 .actionsButtons {

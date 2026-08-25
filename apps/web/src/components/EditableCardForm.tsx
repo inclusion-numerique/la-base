@@ -3,8 +3,7 @@
 import { applyZodValidationMutationErrorsToForm } from '@app/web/utils/applyZodValidationMutationErrorsToForm'
 import { useRouter } from 'next/navigation'
 import { type ReactNode, useState } from 'react'
-import type { UseFormReturn } from 'react-hook-form'
-import type { FieldValues } from 'react-hook-form/dist/types/fields'
+import type { FieldValues, UseFormReturn } from 'react-hook-form'
 import EditableCard from './EditableCard'
 
 const EditableCardForm = <T extends FieldValues>({

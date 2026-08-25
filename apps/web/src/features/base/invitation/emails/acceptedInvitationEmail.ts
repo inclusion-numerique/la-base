@@ -23,7 +23,7 @@ export const sendAcceptedInvitationEmail = async ({
 
     subject: `Demande de rejoindre la base ${baseTitle} acceptée !`,
     text: acceptedBaseInvitation.text({ memberName, baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       acceptedBaseInvitation.mjml({
         url,
         memberName,

@@ -110,6 +110,7 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
   })
 
   it('Acceptation 7 - Création de base avec membres', () => {
+    cy.intercept('/api/trpc/base.create?*').as('mutation')
     cy.intercept('/api/trpc/profile.searchProfileForMember?*').as('getUser')
 
     cy.visit('/bases/creer')
@@ -125,6 +126,12 @@ describe('Utilisateur connecté, lorsque je créé une base, je peux voir ses re
     cy.testId('invite-member-modal-input-option-0').click()
 
     cy.testId('create-button').click()
+
+    // Sans cette attente, la page des membres est visitée pendant que `base.create` est
+    // encore en vol : la base n'existe pas encore et la page répond 404.
+    cy.wait('@mutation')
+    cy.url().should('contain', appUrl('/bases/ma-declaration'))
+
     cy.visit('/bases/ma-declaration/membres')
 
     // Leila Huissoud + Jean Biche

@@ -2,8 +2,7 @@ import RedAsterisk from '@app/ui/components/Form/RedAsterisk'
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 
 export type CheckboxFormFieldProps<T extends FieldValues> = {
   control: Control<T>

@@ -46,7 +46,7 @@ const SearchMenu = ({
                 )}
                 aria-disabled={!searchParams}
                 aria-current={
-                  !!searchParams && activeTab === 'ressources'
+                  searchParams && activeTab === 'ressources'
                     ? 'page'
                     : undefined
                 }
@@ -62,7 +62,7 @@ const SearchMenu = ({
                 href={searchUrl('bases', searchParams ?? defaultSearchParams)}
                 aria-disabled={!searchParams}
                 aria-current={
-                  !!searchParams && activeTab === 'bases' ? 'page' : undefined
+                  searchParams && activeTab === 'bases' ? 'page' : undefined
                 }
               >
                 Bases
@@ -76,7 +76,7 @@ const SearchMenu = ({
                 href={searchUrl('profils', searchParams ?? defaultSearchParams)}
                 aria-disabled={!searchParams}
                 aria-current={
-                  !!searchParams && activeTab === 'profils' ? 'page' : undefined
+                  searchParams && activeTab === 'profils' ? 'page' : undefined
                 }
               >
                 Profils

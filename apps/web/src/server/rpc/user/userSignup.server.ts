@@ -6,7 +6,7 @@ import z from 'zod'
 
 export const ServerUserSignupValidation = UserSignupValidation.extend({
   email: z
-    .string({ required_error: 'Veuillez renseigner votre email' })
+    .string({ error: 'Veuillez renseigner votre email' })
     .trim()
     .toLowerCase()
     .email(
@@ -22,7 +22,7 @@ export const ServerUserSignupValidation = UserSignupValidation.extend({
     }, 'Un compte existe déjà avec cet email'),
   captcha: z
     .string({
-      required_error: 'Veuillez vérifier que vous n’êtes pas un robot',
+      error: 'Veuillez vérifier que vous n’êtes pas un robot',
     })
     .refine(async (captcha) => {
       // We disable the captcha check in CI as we don't want to block the e2e tests

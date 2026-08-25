@@ -5,7 +5,7 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "engines": {
-    "node": "^25.4"
+    "node": "^24.19"
   },
   "packageManager": "pnpm@10.16.1",
   "scripts": {
@@ -33,24 +33,16 @@
     "coverage:merge": "rm -rf coverage/.nyc_output && mkdir -p coverage/.nyc_output && find coverage-reports -name '*.json' -exec cp {} coverage/.nyc_output/ \\; && nyc report --temp-dir ./coverage/.nyc_output --reporter=lcov --reporter=html --reporter=text-summary --report-dir=./coverage",
     "coverage:upload": "cat ./coverage/lcov.info | coveralls"
   },
-  "pnpm": {
-    "overrides": {}
-  },
-  "optionalDependencies": {
-    "turbo-linux-64": "^2.5.5",
-    "turbo-linux-arm64": "^2.5.5"
-  },
   "volta": {
-    "node": "24.5.0"
+    "node": "24.19.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.3",
-    "@manypkg/cli": "^0.24.0",
+    "@biomejs/biome": "^2.5.7",
+    "@manypkg/cli": "^0.25.1",
     "coveralls": "^3.1.1",
-    "dotenv": "^17.2.1",
-    "dotenv-cli": "^10.0.0",
-    "nyc": "^17.1.0",
-    "ts-node": "^10.9.2",
-    "turbo": "^2.5.5"
+    "dotenv": "^17.4.2",
+    "dotenv-cli": "^11.0.0",
+    "nyc": "^18.0.0",
+    "turbo": "^2.10.9"
   }
 }

@@ -1,4 +1,5 @@
 import { prismaClient } from '@app/web/prismaClient'
+import { NEWS_FEED_DEFAULT_PER_PAGE } from '@app/web/server/newsFeed/newsFeedPagination'
 import {
   resourceListSelect,
   toResourceWithFeedbackAverage,
@@ -8,7 +9,8 @@ import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import { Prisma, ProfessionalSector, Theme } from '@prisma/client'
 import { pascalCase } from 'change-case'
 
-export const NEWS_FEED_DEFAULT_PER_PAGE = 20
+export { NEWS_FEED_DEFAULT_PER_PAGE }
+
 export const defaultNewsFeedPaginationParams: Readonly<PaginationParams> = {
   page: 1,
   perPage: NEWS_FEED_DEFAULT_PER_PAGE,

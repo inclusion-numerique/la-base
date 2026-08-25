@@ -13,7 +13,7 @@ import z from 'zod'
 
 const SigninFormValidation = z.object({
   email: z
-    .string({ required_error: 'Veuillez renseigner votre email' })
+    .string({ error: 'Veuillez renseigner votre email' })
     .nonempty('Veuillez renseigner votre email')
     .email(
       'Merci de renseigner un email valide. Exemple: support@lesbases.anct.gouv.fr',

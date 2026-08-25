@@ -1,4 +1,4 @@
-@import url('./overrides');
+@import url('./overrides/index.css');
 @import url('./borders.css');
 @import url('./colors.css');
 @import url('./container.css');

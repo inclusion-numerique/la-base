@@ -2,7 +2,8 @@ import { givenUser } from '@app/e2e/support/given/givenUser'
 import { cleanUpAndCreateTestPublishedResource } from '../edition/editionTestUtils'
 
 let interceptCounter = 0
-const interceptRegisterView = () => {
+// Cypress 15 exige le type littéral `@${string}` pour cy.wait, que l'inférence élargirait en string
+const interceptRegisterView = (): `@${string}` => {
   interceptCounter += 1
   const alias = `registerView${interceptCounter}`
   cy.intercept('/ressources/*/register-view').as(alias)

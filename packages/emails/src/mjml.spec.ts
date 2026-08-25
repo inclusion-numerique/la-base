@@ -1,8 +1,8 @@
 import { compileMjml } from '@app/emails/mjml'
 
 describe('mjml', () => {
-  it('Compiles mjml templates', () => {
-    const result = compileMjml(`
+  it('Compiles mjml templates', async () => {
+    const result = await compileMjml(`
 <mjml>
   <mj-body>
     <mj-section>

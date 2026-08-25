@@ -3,7 +3,7 @@ import { createStopwatch } from '@app/web/utils/stopwatch'
 import type { GetObjectCommandOutput } from '@aws-sdk/client-s3'
 import type { Image } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import sharp from 'sharp'
+import sharp, { type Sharp } from 'sharp'
 
 export const processImage = async ({
   originalImageBuffer,
@@ -19,7 +19,7 @@ export const processImage = async ({
   quality: number
   width?: number
 }) => {
-  let sharpImage: sharp.Sharp | null = null
+  let sharpImage: Sharp | null = null
 
   const stopwatch = createStopwatch()
   // biome-ignore lint/suspicious/noConsole: needed for debugging sharp race conditions
@@ -31,7 +31,7 @@ export const processImage = async ({
     // Create sharp instance with memory limits
     sharpImage = sharp(await originalImageBuffer.transformToByteArray(), {
       limitInputPixels: 268402689, // 16k x 16k max
-      failOnError: true,
+      failOn: 'warning',
     })
 
     // biome-ignore lint/suspicious/noConsole: needed for debugging sharp race conditions

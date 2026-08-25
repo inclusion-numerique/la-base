@@ -33,7 +33,7 @@ describe('ETQ Utilisateur, lorsque je clique sur “Se créer un compte”, je p
     cy.findByLabelText('Nom').type(lastName)
     cy.get('#input-form-field__policyAccepted').check({ force: true })
     cy.findByText('Créer mon compte').click()
-    cy.appUrlShouldBe('/connexion/verification', {
+    cy.appPathShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
 

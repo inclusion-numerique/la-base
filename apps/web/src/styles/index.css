@@ -1,6 +1,8 @@
-@import url('/dsfr/dsfr.min.css');
-@import url('/dsfr/utility/utility.min.css');
+/* Chemins relatifs et extensions explicites : Turbopack résout ces imports au build,
+   là où webpack les laissait au navigateur (règle de contournement des .min.css). */
+@import url('../../public/dsfr/dsfr.min.css');
+@import url('../../public/dsfr/utility/utility.min.css');
 @import url('https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css');
-@import url('./components');
-@import url('./helpers');
+@import url('./components/index.css');
+@import url('./helpers/index.css');
 @import url('./layout.css');

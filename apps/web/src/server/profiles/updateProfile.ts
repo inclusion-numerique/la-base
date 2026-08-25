@@ -6,7 +6,7 @@ import {
 } from './profileConstraints'
 
 const lastNameValidation = z
-  .string({ required_error: 'Veuillez renseigner votre nom' })
+  .string({ error: 'Veuillez renseigner votre nom' })
   .trim()
   .min(1, 'Veuillez renseigner votre nom')
   .max(
@@ -15,7 +15,7 @@ const lastNameValidation = z
   )
 
 const firstNameValidation = z
-  .string({ required_error: 'Veuillez renseigner votre prénom' })
+  .string({ error: 'Veuillez renseigner votre prénom' })
   .trim()
   .min(1, 'Veuillez renseigner votre prénom')
   .max(
@@ -28,8 +28,11 @@ const departmentValidation = z.string().trim().optional()
 const descriptionValidation = z
   .string()
   .trim()
-  .optional()
+  // `.optional()` après `.transform()` : en zod 4 un transform placé en dernier rend la
+  // clé obligatoire en sortie alors qu'elle reste optionnelle en entrée, ce qui désaligne
+  // les types input/output attendus par react-hook-form. Comportement inchangé.
   .transform((text) => (text ? sanitizeHtml(text) : text))
+  .optional()
 
 const emailIsPublicValidation = z.boolean()
 
@@ -59,7 +62,7 @@ export const UpdateProfileContactsCommandValidation = z.object({
 
 export const UpdateProfileVisibilityCommandValidation = z.object({
   isPublic: z.boolean({
-    required_error: 'Veuillez spécifier la visibilité du profil',
+    error: 'Veuillez spécifier la visibilité du profil',
   }),
 })
 

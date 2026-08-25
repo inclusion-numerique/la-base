@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { createPrismaPgAdapter } from './prismaPgAdapter'
 
 // https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices
 const globalForPrisma = global as unknown as {
@@ -7,9 +8,13 @@ const globalForPrisma = global as unknown as {
 
 const debugLog = false
 
+// Prisma 7 ne lit plus l'URL depuis le schéma : la connexion passe par un driver adapter.
+const adapter = createPrismaPgAdapter()
+
 export const prismaClient =
   globalForPrisma.prismaClient ??
   new PrismaClient({
+    adapter,
     log: debugLog
       ? [
           {
