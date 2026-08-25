@@ -1,6 +1,6 @@
 import type { SelectInputOption } from '@app/ui/components/Form/utils/options'
 import type { SortDirection } from '@app/web/data-table/SortLink'
-import type { Sql } from '@prisma/client/runtime/library'
+import type { Sql } from '@prisma/client/runtime/client'
 import type { ReactNode } from 'react'
 
 export type DataTableRow = any

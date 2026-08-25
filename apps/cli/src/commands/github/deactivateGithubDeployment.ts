@@ -16,7 +16,10 @@ export const deactivateGithubDeployment = new Command()
       environment,
     })
 
-    const deploymentIds = deployments.map(({ id }) => id)
+    // octokit v18 élargit les identifiants à `number | bigint`, mais
+    // createDeploymentStatus attend toujours un `number`. Les identifiants de
+    // déploiement restent très en deçà de Number.MAX_SAFE_INTEGER.
+    const deploymentIds = deployments.map(({ id }) => Number(id))
 
     output(
       `Found ${deploymentIds.length} deployment${

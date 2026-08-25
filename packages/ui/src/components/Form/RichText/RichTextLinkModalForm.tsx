@@ -15,7 +15,7 @@ export const RichTextLinkModal = createModal({
 })
 
 const RichTextLinkValidation = z.object({
-  url: z.string({ required_error: 'Veuillez renseigner le lien' }).url({
+  url: z.string({ error: 'Veuillez renseigner le lien' }).url({
     message:
       'Veuillez renseigner un lien valide. Exemple: https://lesbases.anct.gouv.fr/',
   }),

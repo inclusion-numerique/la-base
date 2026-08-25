@@ -6,9 +6,11 @@ import {
 import { prismaClient } from '@app/web/prismaClient'
 import { createAvailableSlug } from '@app/web/server/slug/createAvailableSlug'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import type { Awaitable } from 'next-auth'
 import type { Adapter, AdapterAccount, AdapterUser } from 'next-auth/adapters'
 import { v4 } from 'uuid'
+
+/** v5 no longer re-exports this helper from `next-auth`. */
+type Awaitable<T> = T | PromiseLike<T>
 
 /**
  * Ensuring that needed methods are defined when creating adapter
@@ -84,7 +86,7 @@ export const nextAuthAdapter = {
     } catch (error) {
       // See https://www.prisma.io/docs/reference/api-reference/error-reference#p2025
       if (
-        !!error &&
+        error &&
         typeof error === 'object' &&
         'code' in error &&
         error.code === 'P2025'

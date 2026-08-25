@@ -29,4 +29,5 @@ const handler = async (request: Request) => {
   // 301 permanent and post => get
   return NextResponse.redirect(redirectTo, { status: 301 })
 }
+
 export { handler as GET, handler as POST }

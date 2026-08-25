@@ -25,7 +25,7 @@ export const sendNewContributorEmail = async ({
 
     subject: `Invitation à contribuer à la ressource ${resource.title}`,
     text: inviteContributor.text({ resourceTitle: resource.title }),
-    html: compileMjml(
+    html: await compileMjml(
       inviteContributor.mjml({
         url,
         resourceTitle: resource.title,

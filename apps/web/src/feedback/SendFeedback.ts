@@ -24,14 +24,13 @@ export const SendFeedbackValidation = z
   .object({
     rating: z
       .number({
-        required_error: 'Veuillez renseigner une note de satisfaction',
+        error: 'Veuillez renseigner une note de satisfaction',
       })
       .int()
       .min(1)
       .max(10),
     hadDifficulty: z.enum(yesOrNo, {
-      required_error:
-        'Veuillez renseigner si vous avez rencontré des difficultés',
+      error: 'Veuillez renseigner si vous avez rencontré des difficultés',
     }),
     difficultyArea: z.enum(difficultyAreas).nullish(),
     difficultyComment: z

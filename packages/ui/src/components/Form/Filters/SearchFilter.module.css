@@ -32,11 +32,26 @@
 .options {
   width: 325px;
   position: absolute;
-  z-index: 1;
+
+  /* Le panneau se déplie vers le bas, sur les résultats de recherche : le layout place
+     SearchFilters et les cartes dans le même conteneur, donc dans le même contexte
+     d'empilement. Or ResourceCard porte .header et .actions à 2, et arrive après dans le
+     DOM — avec z-index: 1, le panneau passait dessous. Un panneau déplié flotte au-dessus
+     du contenu de la page ; même valeur que .actions ouvert dans ResourceCard.module.css,
+     les deux ne pouvant être ouverts en même temps (useOnClickOutside). */
+  z-index: 1000;
   left: 0;
   min-width: 100%;
   background-color: var(--background-default-grey);
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
+
+  /* Certaines listes — les départements notamment — sont plus hautes que la fenêtre. On
+     borne le panneau et on le rend défilant. `auto` plutôt que `scroll` : les listes
+     courtes, qui sont la majorité, n'affichent alors aucune barre. La borne suit `100dvh`
+     pour rester utilisable sur une fenêtre basse, sans dépasser les 400 px retenus
+     ailleurs dans le projet (MultipleSearchableSelect). */
+  max-height: min(400px, 60dvh);
+  overflow-y: auto;
 }
 
 .separator {

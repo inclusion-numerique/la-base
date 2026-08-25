@@ -53,7 +53,7 @@ describe('AddContentCommandValidation', () => {
       [
         {
           path: ['name'],
-          message: 'Invalid literal value, expected "AddContent"',
+          message: 'Invalid input: expected "AddContent"',
         },
       ],
     )
@@ -69,7 +69,7 @@ describe('AddContentCommandValidation', () => {
       [
         {
           path: ['payload'],
-          message: 'Required',
+          message: 'Invalid input: expected object, received undefined',
         },
       ],
     )
@@ -85,7 +85,7 @@ describe('AddContentCommandValidation', () => {
       [
         {
           path: ['payload', 'resourceId'],
-          message: 'Required',
+          message: 'Invalid input: expected string, received undefined',
         },
       ],
     )

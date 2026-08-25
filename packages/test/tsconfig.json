@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": ["node","jest"]
+    "types": ["node", "jest"],
+    // jest 30 charge les configs via import() natif : les imports relatifs doivent porter
+    // leur extension .ts (voir packageJestConfig.ts)
+    "allowImportingTsExtensions": true
   },
   "include": ["./src"]
 }

@@ -87,7 +87,7 @@ const ProfileLayout = async ({
         resourcesCount={resourcesCount}
         user={user}
       />
-      <div className="fr-overflow-hidden">
+      <div className="fr-overflow-x-clip">
         <ProfileMenu
           profile={profile}
           resourcesCount={resourcesCount}

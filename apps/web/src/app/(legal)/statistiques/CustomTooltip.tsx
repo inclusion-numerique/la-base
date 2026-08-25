@@ -1,21 +1,17 @@
 import { numberToString } from '@app/web/utils/formatNumber'
 import { isDefinedAndNotNull } from '@app/web/utils/isDefinedAndNotNull'
 import type { ReactNode } from 'react'
-import type { TooltipProps } from 'recharts'
-import type {
-  NameType,
-  ValueType,
-} from 'recharts/types/component/DefaultTooltipContent'
+import type { TooltipContentProps } from 'recharts'
 import styles from './CustomTooltip.module.css'
 
-const CustomTooltip = <TValue extends ValueType, TName extends NameType>({
+const CustomTooltip = ({
   active,
   payload,
   label,
   // Formatter is a function that takes the value, name, and the payload and returns a string
   formatter,
   labelFormatter,
-}: TooltipProps<TValue, TName>) => {
+}: TooltipContentProps) => {
   if (active && payload && payload.length > 0) {
     const title = labelFormatter
       ? labelFormatter(label, payload)
@@ -26,29 +22,13 @@ const CustomTooltip = <TValue extends ValueType, TName extends NameType>({
         <p className={styles.title}>{title}</p>
         {payload.map((item, index) => {
           const formatedName = formatter
-            ? formatter(
-                item.value as TValue,
-                item.name as TName,
-                item,
-                index,
-                payload,
-              )
+            ? formatter(item.value, item.name, item, index, payload)
             : item.name
 
           return (
             <p key={item.name} className={styles.series}>
               {isDefinedAndNotNull(formatedName) ? (
-                <span>
-                  {formatter
-                    ? formatter(
-                        item.value as TValue,
-                        item.name as TName,
-                        item,
-                        index,
-                        payload,
-                      )
-                    : item.name}
-                </span>
+                <span>{formatedName}</span>
               ) : null}
               <span className="fr-text--bold">
                 {typeof item.value === 'number'

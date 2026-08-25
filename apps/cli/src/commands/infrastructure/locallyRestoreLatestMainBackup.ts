@@ -1,16 +1,24 @@
-import { exec as callbackExec } from 'node:child_process'
+import { execFile as callbackExecFile } from 'node:child_process'
 import { createWriteStream, existsSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { promisify } from 'node:util'
 import { output } from '@app/cli/output'
 import { createVarDirectory } from '@app/config/createVarDirectory'
+import { scalewayApiToken } from '@app/config/scalewayApiToken'
 import { varDirectory } from '@app/config/varDirectory'
 import { prismaClient } from '@app/web/prismaClient'
 import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
 
-const exec = promisify(callbackExec)
+/**
+ * `execFile` plutôt que `exec` : les arguments sont passés au binaire sans passer par un
+ * shell. L'URL de connexion porte un mot de passe généré, et `pg_restore`/`psql` étaient
+ * jusqu'ici interpolés dans une chaîne shell — un `&`, un `$` ou une espace y coupaient la
+ * commande. Un `&` a d'ailleurs fait lancer `pg_restore` en arrière-plan, dont le code de
+ * sortie était alors perdu : la restauration semblait réussir sans avoir été vérifiée.
+ */
+const execFile = promisify(callbackExecFile)
 
 const formatBytes = (bytes: number): string => {
   if (bytes === 0) return '0 B'
@@ -115,7 +123,7 @@ export const locallyRestoreLatestMainBackup = new Command(
     const databaseInstanceIdWithRegion = process.env.DATABASE_INSTANCE_ID ?? ''
     const databaseInstanceId = databaseInstanceIdWithRegion.split('/')[1]
     const backupDatabaseName = process.env.BACKUP_DATABASE_NAME ?? ''
-    const secretKey = process.env.SCW_SECRET_KEY ?? ''
+    const secretKey = scalewayApiToken()
     const databaseUrl = process.env.DATABASE_URL ?? ''
     const databaseUrlObject = new URL(databaseUrl ?? '')
     const user = databaseUrlObject.username
@@ -154,7 +162,7 @@ export const locallyRestoreLatestMainBackup = new Command(
       const client = axios.create({
         baseURL: 'https://api.scaleway.com/rdb/v1/regions/fr-par',
         headers: {
-          'X-Auth-Token': process.env.SCW_SECRET_KEY,
+          'X-Auth-Token': scalewayApiToken(),
         },
       })
       axiosRetry(client, {
@@ -349,17 +357,20 @@ export const locallyRestoreLatestMainBackup = new Command(
     }
 
     output('Restoring database from backup file')
-    await exec(
-      `pg_restore --no-owner --no-acl -d ${databaseUrl} < ${mainBackupFile}`,
+    await execFile(
+      'pg_restore',
+      ['--no-owner', '--no-acl', '-d', databaseUrl, mainBackupFile],
       {
         maxBuffer: 5 * 1024 * 1024,
       },
     )
 
     output(`Granting all privileges to "${user}" role`)
-    await exec(
-      `psql ${databaseUrl} -c 'GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";'`,
-    )
+    await execFile('psql', [
+      databaseUrl,
+      '-c',
+      `GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";`,
+    ])
 
     output(`Restored database to ${host}/${database} for "${user}" role`)
   })

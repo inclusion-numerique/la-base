@@ -2,8 +2,12 @@
 
 import { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
-import { Controller, FieldValues, UseFormReturn } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
+import {
+  Controller,
+  FieldPath,
+  FieldValues,
+  UseFormReturn,
+} from 'react-hook-form'
 import RichInputForm from './RichInputForm'
 
 export type RichInputFormFieldProps<T extends FieldValues> = {

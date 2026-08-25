@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const SendResourceFeedbackCommentClientValidation = z.object({
   content: z
     .string({
-      required_error: 'Veuillez renseigner votre commentaire',
+      error: 'Veuillez renseigner votre commentaire',
     })
     .min(1, 'Veuillez renseigner votre commentaire')
     .trim(),

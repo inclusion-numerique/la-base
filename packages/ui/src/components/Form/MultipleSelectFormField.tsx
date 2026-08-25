@@ -11,8 +11,8 @@ import {
   useRef,
   useState,
 } from 'react'
+import type { FieldPath } from 'react-hook-form'
 import { Control, Controller, FieldValues } from 'react-hook-form'
-import type { FieldPath } from 'react-hook-form/dist/types/path'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './MultipleSelectFormField.module.css'
 import type { SelectOption } from './utils/options'

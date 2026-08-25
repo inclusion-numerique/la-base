@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod/dist/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Meta, StoryObj } from '@storybook/nextjs'
 import { useForm } from 'react-hook-form'
 import z from 'zod'

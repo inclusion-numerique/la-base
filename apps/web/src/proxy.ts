@@ -62,7 +62,8 @@ const redirectToBaseDomain = ({
   return NextResponse.redirect(redirectTo, { status: 308 })
 }
 
-const middleware = (request: NextRequest) => {
+// Next 16 renomme la convention `middleware` en `proxy`, pour clarifier la frontière réseau.
+const proxy = (request: NextRequest) => {
   const requestHost = request.headers.get('host')
   const baseUrl = process.env.BASE_URL ?? ''
 
@@ -116,4 +117,4 @@ const middleware = (request: NextRequest) => {
   return response
 }
 
-export default middleware
+export default proxy

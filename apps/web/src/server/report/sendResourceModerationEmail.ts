@@ -37,7 +37,7 @@ export const sendResourceModerationEmail = async ({
       moderatorName,
       moderatorEmail,
     }),
-    html: compileMjml(
+    html: await compileMjml(
       reportedResourceModeration.mjml({
         resourceName,
         creatorName,

@@ -1,8 +1,11 @@
+import { assertDisposableDatabase } from '@app/e2e/tasks/handlers/assertDisposableDatabase'
 import { prismaClient } from '@app/web/prismaClient'
 
 export const deleteAllData = async (
   _emptyParametersNeededForTypesafety: Record<string, string>,
 ) => {
+  assertDisposableDatabase('deleteAllData')
+
   const tables = await prismaClient.$queryRaw<
     { table_name: string }[]
   >`SELECT table_name

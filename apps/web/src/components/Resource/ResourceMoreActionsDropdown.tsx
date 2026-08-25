@@ -28,6 +28,7 @@ export const ResourceMoreActionsDropdown = ({
   copyLink = true,
   canWrite = false,
   context = 'view',
+  alignRight = true,
   shareToken,
 }: {
   resource: BaseResource | Resource
@@ -42,6 +43,13 @@ export const ResourceMoreActionsDropdown = ({
   copyLink?: boolean
   canWrite?: boolean
   context?: 'view' | 'card'
+  /**
+   * Ancre le panneau par sa droite, donc le déploie vers la gauche. C'est le bon choix
+   * quand le bouton est à droite de son conteneur. Sur les cartes à la une, la rangée
+   * d'actions passe à la ligne et le bouton se retrouve à gauche : le panneau déborderait
+   * alors hors de la carte.
+   */
+  alignRight?: boolean
   shareToken?: string
 }) => (
   <Dropdown
@@ -52,7 +60,7 @@ export const ResourceMoreActionsDropdown = ({
     modalControlClassName={modalControlClassName}
     dropdownControlClassName={dropdownControlClassName}
     size={size}
-    alignRight
+    alignRight={alignRight}
     displayDropdownArrow={false}
     control={
       <>

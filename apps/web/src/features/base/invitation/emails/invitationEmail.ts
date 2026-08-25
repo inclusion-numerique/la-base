@@ -26,7 +26,7 @@ export const sendInviteMemberEmail = async ({
 
     subject: `Invitation à rejoindre la base ${baseTitle}`,
     text: inviteMember.text({ url, baseTitle }),
-    html: compileMjml(
+    html: await compileMjml(
       inviteMember.mjml({
         url,
         baseTitle,

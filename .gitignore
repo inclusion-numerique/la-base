@@ -72,3 +72,5 @@ packages/cdk/cdk.out.json
 /packages/ui/.next
 /packages/ui/public/dsfr
 
+.env.e2e.local
+.e2e-app.log

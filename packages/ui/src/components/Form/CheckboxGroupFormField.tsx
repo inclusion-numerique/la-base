@@ -3,8 +3,8 @@ import type { SelectOption } from '@app/ui/components/Form/utils/options'
 import type { UiComponentProps } from '@app/ui/utils/uiComponentProps'
 import classNames from 'classnames'
 import { type ComponentType, type CSSProperties, type ReactNode } from 'react'
+import type { FieldPath } from 'react-hook-form'
 import { type Control, Controller, type FieldValues } from 'react-hook-form'
-import type { FieldPath } from 'react-hook-form/dist/types/path'
 
 type LabelComponentPropsType<O extends SelectOption> = {
   option: O
@@ -106,7 +106,7 @@ const CheckboxGroupFormField = <
               }`}
               role="group"
             >
-              {!!label || !!hint ? (
+              {label || hint ? (
                 <legend
                   className="fr-fieldset__legend fr-fieldset__legend--regular fr-grid-row--full"
                   id={`${id}__legend`}

@@ -6,11 +6,11 @@ import { HTMLProps, ReactNode } from 'react'
 import {
   Control,
   Controller,
+  FieldPath,
   FieldValues,
   Path,
   PathValue,
 } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
 
 export type FileFormFieldProps<T extends FieldValues> = {
   control: Control<T>

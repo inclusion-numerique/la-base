@@ -31,3 +31,11 @@
     display: block;
   }
 }
+
+/* `overflow-x: clip` plutôt que `fr-overflow-hidden` : dès qu'un axe vaut `hidden`, l'autre
+   ne peut plus rester `visible` et devient `auto` — il rogne donc lui aussi. `clip` échappe
+   à cette règle et laisse le débordement vertical s'afficher, ce dont les menus déroulants
+   des cartes ont besoin pour dépasser du conteneur de la page. */
+.fr-overflow-x-clip {
+  overflow-x: clip;
+}

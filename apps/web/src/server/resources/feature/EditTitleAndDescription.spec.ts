@@ -27,7 +27,12 @@ describe('EditTitleAndDescriptionCommand', () => {
       {
         payload: { ...validCommand.payload, resourceId: undefined },
       },
-      [{ path: ['payload', 'resourceId'], message: 'Required' }],
+      [
+        {
+          path: ['payload', 'resourceId'],
+          message: 'Invalid input: expected string, received undefined',
+        },
+      ],
     )
   })
 

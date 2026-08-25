@@ -27,6 +27,10 @@ describe('Utilisateur connecté, lorsque je créé une ressource, je peux la ret
 
     cy.testId('publish-resource-button').click()
 
+    // Même course que dans sectionTitleEdition : le profil est rendu côté serveur, il faut
+    // que la publication soit enregistrée avant de le visiter.
+    cy.wait('@mutation')
+
     cy.visit(`/profils/${slug}`)
 
     cy.contains('Publiques').click()

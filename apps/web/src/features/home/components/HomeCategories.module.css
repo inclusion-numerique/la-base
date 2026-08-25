@@ -47,7 +47,7 @@
   gap: 12px 8px;
   padding-top: 8px;
 
-  :global .fr-tag {
+  :global(.fr-tag) {
     white-space: nowrap;
   }
 }

@@ -22,7 +22,7 @@ export const sendAccountInactiveEmail = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: 'Votre compte est inactif',
     text: accountInactive.text({ firstname, email, url }),
-    html: compileMjml(accountInactive.mjml({ firstname, email, url })),
+    html: await compileMjml(accountInactive.mjml({ firstname, email, url })),
   })
 
   throwOnSendMailFailure(result)
@@ -45,7 +45,7 @@ export const sendAccountDeletionSoonEmail = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: title,
     text: accountDeletionSoon.text({ firstname, email, url }),
-    html: compileMjml(
+    html: await compileMjml(
       accountDeletionSoon.mjml({ firstname, email, url, title }),
     ),
   })
@@ -66,7 +66,7 @@ export const sendAccountDeletedEmail = async ({
     replyTo: PublicWebAppConfig.contactEmail,
     subject: 'Votre compte a été supprimé',
     text: accountDeleted.text({ url }),
-    html: compileMjml(accountDeleted.mjml({ url })),
+    html: await compileMjml(accountDeleted.mjml({ url })),
   })
 
   throwOnSendMailFailure(result)

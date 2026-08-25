@@ -173,6 +173,9 @@ export class WebAppStack extends TerraformStack {
       ? projectTitle
       : `[${namespace}] ${projectTitle}`
 
+    // `sslmode=require` reste la seule écriture comprise à la fois par libpq (`psql`,
+    // `pg_restore`) et par le moteur de migration de Prisma. La tolérance au certificat
+    // auto-signé de Scaleway est déclarée côté driver — voir apps/web/src/prismaPgAdapter.ts
     const databaseUrl = Fn.format('postgres://%s:%s@%s:%s/%s?sslmode=require', [
       databaseUser,
       databasePasswordVariable.value,
@@ -201,8 +204,16 @@ export class WebAppStack extends TerraformStack {
         EMAIL_FROM_NAME: emailFromName,
         STACK_WEB_IMAGE: environmentVariables.WEB_CONTAINER_IMAGE.value,
         UPLOADS_BUCKET: environmentVariables.UPLOADS_BUCKET.value,
+        // `hostname` est nu, sans schéma : c'est ce qu'attendent les consommateurs de
+        // BASE_URL, qui le préfixent eux-mêmes (utils/baseUrl.ts, api/redirection) ou le
+        // comparent à l'en-tête `host` (proxy.ts). Le préfixer ici produirait des URL
+        // doublées.
         BASE_URL: hostname,
-        NEXTAUTH_URL: hostname,
+        // Auth.js v5 passe cette valeur à `new URL()` sans la protéger
+        // (next-auth/lib/env.js, `reqWithEnvURL`), à chaque requête sur /api/auth/*. Une
+        // valeur sans schéma y lève « TypeError: Invalid URL » et fait échouer toute
+        // l'authentification. La v4 s'en accommodait.
+        NEXTAUTH_URL: `https://${hostname}`,
         BRANCH: branch,
         NAMESPACE: namespace,
         // This env variable is reserved at the level of container namespace. We inject it here even if its shared.

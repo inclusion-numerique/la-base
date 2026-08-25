@@ -35,7 +35,7 @@ const AddContent = React.forwardRef(
     }
 
     const isAddingContentType =
-      !!editing && editing.startsWith('add-') && editing.endsWith(`-${index}`)
+      editing && editing.startsWith('add-') && editing.endsWith(`-${index}`)
         ? (editing?.split('-')[1] as ContentType)
         : null
 

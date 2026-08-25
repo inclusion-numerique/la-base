@@ -109,7 +109,7 @@ const ShareLink = () => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: dont need the onsubmit in the deps array
   useEffect(() => {
-    if (!!entity && enabledValue !== !!shareLink?.enabled) {
+    if (entity && enabledValue !== !!shareLink?.enabled) {
       onSubmit({
         enabled: enabledValue,
         baseId: entityType === 'base' ? entity?.id : undefined,

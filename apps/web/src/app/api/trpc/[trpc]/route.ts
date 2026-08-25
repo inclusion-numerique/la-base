@@ -12,4 +12,5 @@ const handler = (request: Request) =>
     router: appRouter,
     createContext,
   })
+
 export { handler as GET, handler as POST }

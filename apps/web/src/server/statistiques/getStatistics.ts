@@ -400,7 +400,7 @@ export const getCreationsStatistics = async (_params: StatisticsParams) => {
                                                    _params.creation !== 'total'
                                                      ? ` - INTERVAL '${creationStatisticsDaysInterval} days'`
                                                      : ''
-                                                 },
+},
                                                  '${creationStatisticsDaysInterval} days'::interval) AS start_date),
                range AS (SELECT start_date, (start_date + INTERVAL '${creationStatisticsDaysInterval} days') AS end_date
                          FROM series)

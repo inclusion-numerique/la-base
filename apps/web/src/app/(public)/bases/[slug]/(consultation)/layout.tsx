@@ -96,7 +96,7 @@ const BaseLayout = async ({
     <>
       <SkipLinksPortal links={[headerSkipLink, ...defaultSkipLinks]} />
       <BaseHeader base={base} canWrite={canWrite} user={user} />
-      <div className="fr-overflow-hidden">
+      <div className="fr-overflow-x-clip">
         <BaseMenu base={base} slug={slug} />
         {children}
       </div>

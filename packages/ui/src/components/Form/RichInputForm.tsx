@@ -1,7 +1,7 @@
 'use client'
 
 import RichInputFormLinkTooltip from '@app/ui/components/Form/RichInputFormLinkTooltip'
-import { Link } from '@tiptap/extension-link'
+import { Link, type LinkOptions } from '@tiptap/extension-link'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import classNames from 'classnames'
@@ -19,7 +19,9 @@ import RichInputFormMenuBar from './RichInputFormMenuBar'
 const CustomLink = Link.extend({
   addOptions() {
     return {
-      ...this.parent?.(),
+      // `.extend()` a toujours un parent, mais tiptap 3 le type comme optionnel
+      // et rend les champs de LinkOptions obligatoires
+      ...(this.parent?.() as LinkOptions),
       openOnClick: false,
     }
   },
@@ -64,7 +66,16 @@ const RichInputForm = <T extends FieldValues>({
   const firstRenderUpdateDone = useRef(false)
 
   const editor = useEditor({
-    extensions: [StarterKit, CustomLink],
+    // Le StarterKit de tiptap 3 embarque Link : sans cette désactivation, il entre en
+    // conflit avec CustomLink, deux extensions ne pouvant porter le même nom.
+    extensions: [
+      // Le StarterKit de tiptap 3 embarque Link, qui ferait doublon avec CustomLink, et
+      // TrailingNode, qui ajoute un paragraphe vide en fin de document. Ce dernier
+      // déplace le point d'insertion hors du bloc que l'on vient de créer : un titre
+      // ajouté en dernier reste vide et la saisie part dans le paragraphe suivant.
+      StarterKit.configure({ link: false, trailingNode: false }),
+      CustomLink,
+    ],
     content: form.getValues(path) ?? '',
     editorProps: {
       attributes: {

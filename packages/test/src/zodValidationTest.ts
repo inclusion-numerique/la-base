@@ -1,7 +1,7 @@
 import z from 'zod'
 
 export const normalizeZodErrorForTestExpect = (
-  errors: { path: (string | number)[]; message: string }[],
+  errors: { path: readonly PropertyKey[]; message: string }[],
 ) =>
   Object.fromEntries(
     errors
@@ -9,12 +9,10 @@ export const normalizeZodErrorForTestExpect = (
       .sort((a, b) => a[0].localeCompare(b[0])),
   )
 
-export const expectZodValidationToFail = <
-  T,
-  U extends object,
-  V extends z.ZodRawShape,
->(
-  validation: z.ZodObject<V, 'strict' | 'strip', z.ZodTypeAny, T, T>,
+export const expectZodValidationToFail = <T, U extends object>(
+  // zod 4 réduit ZodObject à <Shape, Config> : on s'appuie sur le type de sortie,
+  // seul safeParse est utilisé ici
+  validation: z.ZodType<T>,
   validObject: T,
   fields: U,
   errors: { path: string[]; message: string }[],

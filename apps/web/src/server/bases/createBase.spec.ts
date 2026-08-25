@@ -74,7 +74,7 @@ describe('CreateBaseCommand', () => {
       [
         {
           path: ['department'],
-          message: 'Expected string, received number',
+          message: 'Invalid input: expected string, received number',
         },
       ],
     )
@@ -90,7 +90,7 @@ describe('CreateBaseCommand', () => {
       [
         {
           path: ['description'],
-          message: 'Expected string, received number',
+          message: 'Invalid input: expected string, received number',
         },
       ],
     )
@@ -182,7 +182,7 @@ describe('CreateBaseCommand', () => {
       [
         {
           path: ['emailIsPublic'],
-          message: 'Required',
+          message: 'Invalid input: expected boolean, received undefined',
         },
       ],
     )

@@ -5,11 +5,11 @@ import { ReactNode } from 'react'
 import {
   Control,
   Controller,
+  FieldPath,
   FieldValues,
   Path,
   PathValue,
 } from 'react-hook-form'
-import { FieldPath } from 'react-hook-form/dist/types/path'
 import { RichRadioOption } from './utils/options'
 
 export type RichRadioFormFieldProps<T extends FieldValues> = {

@@ -9,7 +9,7 @@
     align-items: center;
   }
 
-  :global .fr-tag {
+  :global(.fr-tag) {
     flex-shrink: 0;
   }
 }

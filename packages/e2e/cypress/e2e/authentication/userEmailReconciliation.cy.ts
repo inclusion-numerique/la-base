@@ -31,7 +31,7 @@ describe('ETQ Utilisateur, je peux me connecter avec un nouvel email qui a été
     cy.log('Signin form fill and submit')
     cy.findByLabelText('Email').type(`${newEmail}{enter}`)
 
-    cy.appUrlShouldBe('/connexion/verification', {
+    cy.appPathShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
 

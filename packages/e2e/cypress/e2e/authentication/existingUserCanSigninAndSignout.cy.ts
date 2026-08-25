@@ -62,6 +62,8 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
   })
 
   it('Acceptation 1 - Connexion avec ProConnect', () => {
+    cy.intercept('/api/trpc/user.acceptCurrentCgu?*').as('acceptCgu')
+
     cy.visit('/connexion')
     // Cypress deletes some cookies on redirection between domains
     // See https://github.com/cypress-io/cypress/issues/20476
@@ -101,6 +103,11 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
 
     cy.appUrlShouldBe('/cgu/mise-a-jour')
     cy.testId('accept-cgu-button').click()
+
+    // La page suivante est rendue côté serveur : sans cette attente, elle est demandée
+    // alors que `user.acceptCurrentCgu` est encore en vol, et la redirection ramène sur
+    // /cgu/mise-a-jour d'après un état déjà périmé.
+    cy.wait('@acceptCgu')
 
     // Accept onboarding
     cy.visit('/')
@@ -148,7 +155,7 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Signin form fill and submit')
     cy.findByLabelText('Email').type(`${email}{enter}`)
 
-    cy.appUrlShouldBe('/connexion/verification', {
+    cy.appPathShouldBe('/connexion/verification', {
       timeout: 10_000,
     })
 

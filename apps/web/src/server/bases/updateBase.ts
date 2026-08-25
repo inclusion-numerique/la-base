@@ -9,7 +9,7 @@ export const baseTitleInfoText = (title?: string | null) =>
   `${title?.length ?? 0}/${resourceTitleMaxLength} caractères`
 
 export const titleValidation = z
-  .string({ required_error: 'Veuillez renseigner le nom de la base' })
+  .string({ error: 'Veuillez renseigner le nom de la base' })
   .trim()
   .nonempty('Veuillez renseigner le nom de la base')
   .max(
@@ -20,14 +20,17 @@ export const departmentValidation = z.string().trim().optional()
 export const descriptionValidation = z
   .string()
   .trim()
-  .optional()
+  // `.optional()` après `.transform()` : en zod 4 un transform placé en dernier rend la
+  // clé obligatoire en sortie alors qu'elle reste optionnelle en entrée, ce qui désaligne
+  // les types input/output attendus par react-hook-form. Comportement inchangé.
   .transform((text) => (text ? sanitizeHtml(text) : text))
+  .optional()
 
 export const isPublicValidation = z.boolean({
-  required_error: 'Veuillez spécifier la visibilité de la base',
+  error: 'Veuillez spécifier la visibilité de la base',
 })
 export const emailValidation = z
-  .string({ required_error: 'Veuillez renseigner une adresse e-mail' })
+  .string({ error: 'Veuillez renseigner une adresse e-mail' })
   .email('Veuillez entrer une adresse e-mail valide')
   .toLowerCase()
   .trim()
@@ -68,7 +71,7 @@ export const UpdateBaseHomePageCustomisationCommandValidation = z.object({
 })
 
 export const UpdateBaseCommandValidation = z.object({
-  id: z.string({ required_error: "Veuillez renseigner l'id de la base" }),
+  id: z.string({ error: "Veuillez renseigner l'id de la base" }),
   data: z.union([
     UpdateBaseInformationsCommandValidation,
     UpdateBaseVisibilityCommandValidation,
@@ -100,7 +103,7 @@ export type UpdateBaseCommand =
   | UpdateBaseHomePageCustomisationCommand
 
 export const UpdateBaseImageCommandValidation = z.object({
-  id: z.string({ required_error: "Veuillez renseigner l'id de la base" }),
+  id: z.string({ error: "Veuillez renseigner l'id de la base" }),
   imageId: z.string().uuid().nullable().optional(),
   coverImageId: z.string().uuid().nullable().optional(),
 })
