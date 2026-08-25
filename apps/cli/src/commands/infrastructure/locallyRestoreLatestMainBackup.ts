@@ -1,4 +1,4 @@
-import { exec as callbackExec } from 'node:child_process'
+import { execFile as callbackExecFile } from 'node:child_process'
 import { createWriteStream, existsSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { promisify } from 'node:util'
@@ -10,7 +10,14 @@ import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
 
-const exec = promisify(callbackExec)
+/**
+ * `execFile` plutôt que `exec` : les arguments sont passés au binaire sans passer par un
+ * shell. L'URL de connexion porte un mot de passe généré, et `pg_restore`/`psql` étaient
+ * jusqu'ici interpolés dans une chaîne shell — un `&`, un `$` ou une espace y coupaient la
+ * commande. Un `&` a d'ailleurs fait lancer `pg_restore` en arrière-plan, dont le code de
+ * sortie était alors perdu : la restauration semblait réussir sans avoir été vérifiée.
+ */
+const execFile = promisify(callbackExecFile)
 
 const formatBytes = (bytes: number): string => {
   if (bytes === 0) return '0 B'
@@ -349,17 +356,20 @@ export const locallyRestoreLatestMainBackup = new Command(
     }
 
     output('Restoring database from backup file')
-    await exec(
-      `pg_restore --no-owner --no-acl -d ${databaseUrl} < ${mainBackupFile}`,
+    await execFile(
+      'pg_restore',
+      ['--no-owner', '--no-acl', '-d', databaseUrl, mainBackupFile],
       {
         maxBuffer: 5 * 1024 * 1024,
       },
     )
 
     output(`Granting all privileges to "${user}" role`)
-    await exec(
-      `psql ${databaseUrl} -c 'GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";'`,
-    )
+    await execFile('psql', [
+      databaseUrl,
+      '-c',
+      `GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";`,
+    ])
 
     output(`Restored database to ${host}/${database} for "${user}" role`)
   })
