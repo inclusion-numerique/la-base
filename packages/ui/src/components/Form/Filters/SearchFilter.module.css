@@ -44,6 +44,14 @@
   min-width: 100%;
   background-color: var(--background-default-grey);
   box-shadow: 0 12px 32px -8px rgb(0 0 36 / 12%);
+
+  /* Certaines listes — les départements notamment — sont plus hautes que la fenêtre. On
+     borne le panneau et on le rend défilant. `auto` plutôt que `scroll` : les listes
+     courtes, qui sont la majorité, n'affichent alors aucune barre. La borne suit `100dvh`
+     pour rester utilisable sur une fenêtre basse, sans dépasser les 400 px retenus
+     ailleurs dans le projet (MultipleSearchableSelect). */
+  max-height: min(400px, 60dvh);
+  overflow-y: auto;
 }
 
 .separator {
