@@ -173,13 +173,21 @@ export class WebAppStack extends TerraformStack {
       ? projectTitle
       : `[${namespace}] ${projectTitle}`
 
-    const databaseUrl = Fn.format('postgres://%s:%s@%s:%s/%s?sslmode=require', [
-      databaseUser,
-      databasePasswordVariable.value,
-      databaseInstance.endpointIp,
-      databaseInstance.endpointPort,
-      databaseName,
-    ]) as string
+    // `pg` traite désormais `sslmode=require` comme `verify-full` (pg-connection-string
+    // 2.14), là où le moteur Rust de Prisma 6 appliquait la sémantique libpq : chiffrer
+    // sans vérifier la chaîne. Le certificat de la base managée Scaleway étant signé par
+    // sa propre autorité, la connexion échouait sur « self-signed certificate » depuis le
+    // passage au driver adapter. `uselibpqcompat` rétablit le comportement d'origine.
+    const databaseUrl = Fn.format(
+      'postgres://%s:%s@%s:%s/%s?sslmode=require&uselibpqcompat=true',
+      [
+        databaseUser,
+        databasePasswordVariable.value,
+        databaseInstance.endpointIp,
+        databaseInstance.endpointPort,
+        databaseName,
+      ],
+    ) as string
 
     // Changing the name will recreate a new container
     // The names fails with max length so we shorten it
