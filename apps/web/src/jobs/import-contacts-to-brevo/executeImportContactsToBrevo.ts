@@ -3,13 +3,13 @@ import {
   createContact,
   toBrevoContact,
 } from '@app/web/external-apis/brevo/contact'
-import { PrismaPg } from '@prisma/adapter-pg'
+import { createPrismaPgAdapter } from '@app/web/prismaPgAdapter'
 import { PrismaClient } from '@prisma/client'
 
 const userListId = Number.parseInt(process.env.BREVO_USERS_LIST_ID!, 10)
 // Prisma 7 : la connexion passe par un driver adapter
 const prisma = new PrismaClient({
-  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+  adapter: createPrismaPgAdapter(),
 })
 
 export const executeImportContactsToBrevo = async () => {
