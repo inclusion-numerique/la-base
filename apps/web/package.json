@@ -39,7 +39,7 @@
     "@friendlycaptcha/sdk": "^1.0.2",
     "@gouvfr-anct/lieux-de-mediation-numerique": "^2.3.0",
     "@gouvfr-anct/timetable-to-osm-opening-hours": "^2.1.0",
-    "@gouvfr/dsfr": "1.15.0",
+    "@gouvfr/dsfr": "1.14.2",
     "@hookform/resolvers": "^5.7.1",
     "@next/bundle-analyzer": "^16.3.0",
     "@prisma/client": "^7.9.1",
