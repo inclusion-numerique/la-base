@@ -82,6 +82,11 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('section-title-input').type("C'est que le début")
         cy.testId('publish-resource-button').click()
 
+        // La publication passe par `resource.mutate`. Sans cette attente, la ressource est
+        // rechargée avant que la modification du titre ne soit enregistrée, et la page
+        // rendue côté serveur affiche encore l'ancien titre.
+        cy.wait('@mutation')
+
         const [ressourceCommand] = testResource.commands
 
         cy.visit(
