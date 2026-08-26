@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface AutoscalingInstanceTemplateConfig extends cdktf.TerraformMetaAr
   /**
   * Cloud-config to apply to each instance (will be passed in Base64 format)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#cloud_init AutoscalingInstanceTemplate#cloud_init}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#cloud_init AutoscalingInstanceTemplate#cloud_init}
   */
   readonly cloudInit?: string;
   /**
   * Name of Instance commercial type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#commercial_type AutoscalingInstanceTemplate#commercial_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#commercial_type AutoscalingInstanceTemplate#commercial_type}
   */
   readonly commercialType: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#id AutoscalingInstanceTemplate#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#id AutoscalingInstanceTemplate#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,67 +29,67 @@ export interface AutoscalingInstanceTemplateConfig extends cdktf.TerraformMetaAr
   /**
   * Instance image ID. Can be an ID of a marketplace or personal image. This image must be compatible with `volume` and `commercial_type` template
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#image_id AutoscalingInstanceTemplate#image_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#image_id AutoscalingInstanceTemplate#image_id}
   */
   readonly imageId?: string;
   /**
   * The Instance template name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#name AutoscalingInstanceTemplate#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#name AutoscalingInstanceTemplate#name}
   */
   readonly name?: string;
   /**
   * Instance placement group ID. This is optional, but it is highly recommended to set a preference for Instance location within Availability Zone
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#placement_group_id AutoscalingInstanceTemplate#placement_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#placement_group_id AutoscalingInstanceTemplate#placement_group_id}
   */
   readonly placementGroupId?: string;
   /**
   * Private Network IDs to attach to the new Instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#private_network_ids AutoscalingInstanceTemplate#private_network_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#private_network_ids AutoscalingInstanceTemplate#private_network_ids}
   */
   readonly privateNetworkIds?: string[];
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#project_id AutoscalingInstanceTemplate#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#project_id AutoscalingInstanceTemplate#project_id}
   */
   readonly projectId?: string;
   /**
   * Number of flexible IPv4 addresses to attach to the new Instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#public_ips_v4_count AutoscalingInstanceTemplate#public_ips_v4_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#public_ips_v4_count AutoscalingInstanceTemplate#public_ips_v4_count}
   */
   readonly publicIpsV4Count?: number;
   /**
   * Number of flexible IPv6 addresses to attach to the new Instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#public_ips_v6_count AutoscalingInstanceTemplate#public_ips_v6_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#public_ips_v6_count AutoscalingInstanceTemplate#public_ips_v6_count}
   */
   readonly publicIpsV6Count?: number;
   /**
   * Instance security group ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#security_group_id AutoscalingInstanceTemplate#security_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#security_group_id AutoscalingInstanceTemplate#security_group_id}
   */
   readonly securityGroupId?: string;
   /**
   * The tags associated with the Instance template
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#tags AutoscalingInstanceTemplate#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#tags AutoscalingInstanceTemplate#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#zone AutoscalingInstanceTemplate#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#zone AutoscalingInstanceTemplate#zone}
   */
   readonly zone?: string;
   /**
   * volumes block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#volumes AutoscalingInstanceTemplate#volumes}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#volumes AutoscalingInstanceTemplate#volumes}
   */
   readonly volumes?: AutoscalingInstanceTemplateVolumes[] | cdktf.IResolvable;
 }
@@ -97,7 +97,7 @@ export interface AutoscalingInstanceTemplateVolumesFromEmpty {
   /**
   * Size in GB of the new empty volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#size AutoscalingInstanceTemplate#size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#size AutoscalingInstanceTemplate#size}
   */
   readonly size: number;
 }
@@ -180,13 +180,13 @@ export interface AutoscalingInstanceTemplateVolumesFromSnapshot {
   /**
   * Override size (in GB) of the cloned volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#size AutoscalingInstanceTemplate#size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#size AutoscalingInstanceTemplate#size}
   */
   readonly size?: number;
   /**
   * ID of the snapshot to clone
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#snapshot_id AutoscalingInstanceTemplate#snapshot_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#snapshot_id AutoscalingInstanceTemplate#snapshot_id}
   */
   readonly snapshotId: string;
 }
@@ -298,43 +298,43 @@ export interface AutoscalingInstanceTemplateVolumes {
   /**
   * Force the Instance to boot on this volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#boot AutoscalingInstanceTemplate#boot}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#boot AutoscalingInstanceTemplate#boot}
   */
   readonly boot?: boolean | cdktf.IResolvable;
   /**
   * The name of the volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#name AutoscalingInstanceTemplate#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#name AutoscalingInstanceTemplate#name}
   */
   readonly name: string;
   /**
   * The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#perf_iops AutoscalingInstanceTemplate#perf_iops}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#perf_iops AutoscalingInstanceTemplate#perf_iops}
   */
   readonly perfIops?: number;
   /**
   * List of tags assigned to the volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#tags AutoscalingInstanceTemplate#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#tags AutoscalingInstanceTemplate#tags}
   */
   readonly tags?: string[];
   /**
   * Type of the volume
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#volume_type AutoscalingInstanceTemplate#volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#volume_type AutoscalingInstanceTemplate#volume_type}
   */
   readonly volumeType: string;
   /**
   * from_empty block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#from_empty AutoscalingInstanceTemplate#from_empty}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#from_empty AutoscalingInstanceTemplate#from_empty}
   */
   readonly fromEmpty?: AutoscalingInstanceTemplateVolumesFromEmpty;
   /**
   * from_snapshot block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#from_snapshot AutoscalingInstanceTemplate#from_snapshot}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#from_snapshot AutoscalingInstanceTemplate#from_snapshot}
   */
   readonly fromSnapshot?: AutoscalingInstanceTemplateVolumesFromSnapshot;
 }
@@ -618,7 +618,7 @@ export class AutoscalingInstanceTemplateVolumesList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template scaleway_autoscaling_instance_template}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template scaleway_autoscaling_instance_template}
 */
 export class AutoscalingInstanceTemplate extends cdktf.TerraformResource {
 
@@ -634,7 +634,7 @@ export class AutoscalingInstanceTemplate extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a AutoscalingInstanceTemplate resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the AutoscalingInstanceTemplate to import
-  * @param importFromId The id of the existing AutoscalingInstanceTemplate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing AutoscalingInstanceTemplate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the AutoscalingInstanceTemplate to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -646,7 +646,7 @@ export class AutoscalingInstanceTemplate extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_template scaleway_autoscaling_instance_template} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_template scaleway_autoscaling_instance_template} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -657,8 +657,8 @@ export class AutoscalingInstanceTemplate extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_autoscaling_instance_template',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

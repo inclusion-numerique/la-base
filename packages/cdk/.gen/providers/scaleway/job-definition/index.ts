@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,78 +8,120 @@ import * as cdktf from 'cdktf';
 
 export interface JobDefinitionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#command JobDefinition#command}
+  * Job arguments in list format. Overrides the default arguments defined in the job image.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#args JobDefinition#args}
+  */
+  readonly args?: string[];
+  /**
+  * Command to use for the job (in string format)
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#command JobDefinition#command}
   */
   readonly command?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
+  * CPU limit of the job
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
   */
   readonly cpuLimit: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#description JobDefinition#description}
+  * The job description
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#description JobDefinition#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#env JobDefinition#env}
+  * Environment variables to pass to the job
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#env JobDefinition#env}
   */
   readonly env?: { [key: string]: string };
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#id JobDefinition#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#id JobDefinition#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#image_uri JobDefinition#image_uri}
+  * Image URI to use for the job
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#image_uri JobDefinition#image_uri}
   */
-  readonly imageUri?: string;
+  readonly imageUri: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
+  * Local storage capacity of the job in MiB
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#local_storage_capacity JobDefinition#local_storage_capacity}
+  */
+  readonly localStorageCapacity: number;
+  /**
+  * Memory limit of the job
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
   */
   readonly memoryLimit: number;
   /**
   * The job name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#name JobDefinition#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#name JobDefinition#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#project_id JobDefinition#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#project_id JobDefinition#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#region JobDefinition#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#region JobDefinition#region}
   */
   readonly region?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#timeout JobDefinition#timeout}
+  * Command to use for the job (in list format). Overrides the default command defined in the job image.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#startup_command JobDefinition#startup_command}
+  */
+  readonly startupCommand?: string[];
+  /**
+  * Timeout for the job in seconds
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#timeout JobDefinition#timeout}
   */
   readonly timeout?: string;
   /**
   * cron block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#cron JobDefinition#cron}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#cron JobDefinition#cron}
   */
   readonly cron?: JobDefinitionCron;
   /**
+  * retry_policy block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#retry_policy JobDefinition#retry_policy}
+  */
+  readonly retryPolicy?: JobDefinitionRetryPolicy;
+  /**
   * secret_reference block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#secret_reference JobDefinition#secret_reference}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_reference JobDefinition#secret_reference}
   */
   readonly secretReference?: JobDefinitionSecretReference[] | cdktf.IResolvable;
 }
 export interface JobDefinitionCron {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#schedule JobDefinition#schedule}
+  * UNIX cron schedule to run job
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#schedule JobDefinition#schedule}
   */
   readonly schedule: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#timezone JobDefinition#timezone}
+  * Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#timezone JobDefinition#timezone}
   */
   readonly timezone: string;
 }
@@ -184,29 +226,115 @@ export class JobDefinitionCronOutputReference extends cdktf.ComplexObject {
     return this._timezone;
   }
 }
+export interface JobDefinitionRetryPolicy {
+  /**
+  * The maximum number of retries upon job failure.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#max_retries JobDefinition#max_retries}
+  */
+  readonly maxRetries?: number;
+}
+
+export function jobDefinitionRetryPolicyToTerraform(struct?: JobDefinitionRetryPolicyOutputReference | JobDefinitionRetryPolicy): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    max_retries: cdktf.numberToTerraform(struct!.maxRetries),
+  }
+}
+
+
+export function jobDefinitionRetryPolicyToHclTerraform(struct?: JobDefinitionRetryPolicyOutputReference | JobDefinitionRetryPolicy): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    max_retries: {
+      value: cdktf.numberToHclTerraform(struct!.maxRetries),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class JobDefinitionRetryPolicyOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): JobDefinitionRetryPolicy | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._maxRetries !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.maxRetries = this._maxRetries;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: JobDefinitionRetryPolicy | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._maxRetries = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._maxRetries = value.maxRetries;
+    }
+  }
+
+  // max_retries - computed: false, optional: true, required: false
+  private _maxRetries?: number; 
+  public get maxRetries() {
+    return this.getNumberAttribute('max_retries');
+  }
+  public set maxRetries(value: number) {
+    this._maxRetries = value;
+  }
+  public resetMaxRetries() {
+    this._maxRetries = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get maxRetriesInput() {
+    return this._maxRetries;
+  }
+}
 export interface JobDefinitionSecretReference {
   /**
   * An environment variable containing the secret value.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#environment JobDefinition#environment}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#environment JobDefinition#environment}
   */
   readonly environment?: string;
   /**
   * The absolute file path where the secret will be mounted.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#file JobDefinition#file}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#file JobDefinition#file}
   */
   readonly file?: string;
   /**
   * The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#secret_id JobDefinition#secret_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_id JobDefinition#secret_id}
   */
   readonly secretId: string;
   /**
   * The secret version.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#secret_version JobDefinition#secret_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_version JobDefinition#secret_version}
   */
   readonly secretVersion?: string;
 }
@@ -411,7 +539,7 @@ export class JobDefinitionSecretReferenceList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition scaleway_job_definition}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition scaleway_job_definition}
 */
 export class JobDefinition extends cdktf.TerraformResource {
 
@@ -427,7 +555,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a JobDefinition resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the JobDefinition to import
-  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the JobDefinition to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -439,7 +567,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/job_definition scaleway_job_definition} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition scaleway_job_definition} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -450,8 +578,8 @@ export class JobDefinition extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_job_definition',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -461,24 +589,44 @@ export class JobDefinition extends cdktf.TerraformResource {
       connection: config.connection,
       forEach: config.forEach
     });
+    this._args = config.args;
     this._command = config.command;
     this._cpuLimit = config.cpuLimit;
     this._description = config.description;
     this._env = config.env;
     this._id = config.id;
     this._imageUri = config.imageUri;
+    this._localStorageCapacity = config.localStorageCapacity;
     this._memoryLimit = config.memoryLimit;
     this._name = config.name;
     this._projectId = config.projectId;
     this._region = config.region;
+    this._startupCommand = config.startupCommand;
     this._timeout = config.timeout;
     this._cron.internalValue = config.cron;
+    this._retryPolicy.internalValue = config.retryPolicy;
     this._secretReference.internalValue = config.secretReference;
   }
 
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // args - computed: false, optional: true, required: false
+  private _args?: string[]; 
+  public get args() {
+    return this.getListAttribute('args');
+  }
+  public set args(value: string[]) {
+    this._args = value;
+  }
+  public resetArgs() {
+    this._args = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get argsInput() {
+    return this._args;
+  }
 
   // command - computed: false, optional: true, required: false
   private _command?: string; 
@@ -557,7 +705,7 @@ export class JobDefinition extends cdktf.TerraformResource {
     return this._id;
   }
 
-  // image_uri - computed: false, optional: true, required: false
+  // image_uri - computed: false, optional: false, required: true
   private _imageUri?: string; 
   public get imageUri() {
     return this.getStringAttribute('image_uri');
@@ -565,12 +713,22 @@ export class JobDefinition extends cdktf.TerraformResource {
   public set imageUri(value: string) {
     this._imageUri = value;
   }
-  public resetImageUri() {
-    this._imageUri = undefined;
-  }
   // Temporarily expose input value. Use with caution.
   public get imageUriInput() {
     return this._imageUri;
+  }
+
+  // local_storage_capacity - computed: false, optional: false, required: true
+  private _localStorageCapacity?: number; 
+  public get localStorageCapacity() {
+    return this.getNumberAttribute('local_storage_capacity');
+  }
+  public set localStorageCapacity(value: number) {
+    this._localStorageCapacity = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get localStorageCapacityInput() {
+    return this._localStorageCapacity;
   }
 
   // memory_limit - computed: false, optional: false, required: true
@@ -634,6 +792,22 @@ export class JobDefinition extends cdktf.TerraformResource {
     return this._region;
   }
 
+  // startup_command - computed: false, optional: true, required: false
+  private _startupCommand?: string[]; 
+  public get startupCommand() {
+    return this.getListAttribute('startup_command');
+  }
+  public set startupCommand(value: string[]) {
+    this._startupCommand = value;
+  }
+  public resetStartupCommand() {
+    this._startupCommand = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get startupCommandInput() {
+    return this._startupCommand;
+  }
+
   // timeout - computed: true, optional: true, required: false
   private _timeout?: string; 
   public get timeout() {
@@ -666,6 +840,22 @@ export class JobDefinition extends cdktf.TerraformResource {
     return this._cron.internalValue;
   }
 
+  // retry_policy - computed: false, optional: true, required: false
+  private _retryPolicy = new JobDefinitionRetryPolicyOutputReference(this, "retry_policy");
+  public get retryPolicy() {
+    return this._retryPolicy;
+  }
+  public putRetryPolicy(value: JobDefinitionRetryPolicy) {
+    this._retryPolicy.internalValue = value;
+  }
+  public resetRetryPolicy() {
+    this._retryPolicy.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get retryPolicyInput() {
+    return this._retryPolicy.internalValue;
+  }
+
   // secret_reference - computed: false, optional: true, required: false
   private _secretReference = new JobDefinitionSecretReferenceList(this, "secret_reference", true);
   public get secretReference() {
@@ -688,24 +878,34 @@ export class JobDefinition extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      args: cdktf.listMapper(cdktf.stringToTerraform, false)(this._args),
       command: cdktf.stringToTerraform(this._command),
       cpu_limit: cdktf.numberToTerraform(this._cpuLimit),
       description: cdktf.stringToTerraform(this._description),
       env: cdktf.hashMapper(cdktf.stringToTerraform)(this._env),
       id: cdktf.stringToTerraform(this._id),
       image_uri: cdktf.stringToTerraform(this._imageUri),
+      local_storage_capacity: cdktf.numberToTerraform(this._localStorageCapacity),
       memory_limit: cdktf.numberToTerraform(this._memoryLimit),
       name: cdktf.stringToTerraform(this._name),
       project_id: cdktf.stringToTerraform(this._projectId),
       region: cdktf.stringToTerraform(this._region),
+      startup_command: cdktf.listMapper(cdktf.stringToTerraform, false)(this._startupCommand),
       timeout: cdktf.stringToTerraform(this._timeout),
       cron: jobDefinitionCronToTerraform(this._cron.internalValue),
+      retry_policy: jobDefinitionRetryPolicyToTerraform(this._retryPolicy.internalValue),
       secret_reference: cdktf.listMapper(jobDefinitionSecretReferenceToTerraform, true)(this._secretReference.internalValue),
     };
   }
 
   protected synthesizeHclAttributes(): { [name: string]: any } {
     const attrs = {
+      args: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._args),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
       command: {
         value: cdktf.stringToHclTerraform(this._command),
         isBlock: false,
@@ -742,6 +942,12 @@ export class JobDefinition extends cdktf.TerraformResource {
         type: "simple",
         storageClassType: "string",
       },
+      local_storage_capacity: {
+        value: cdktf.numberToHclTerraform(this._localStorageCapacity),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
       memory_limit: {
         value: cdktf.numberToHclTerraform(this._memoryLimit),
         isBlock: false,
@@ -766,6 +972,12 @@ export class JobDefinition extends cdktf.TerraformResource {
         type: "simple",
         storageClassType: "string",
       },
+      startup_command: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._startupCommand),
+        isBlock: false,
+        type: "list",
+        storageClassType: "stringList",
+      },
       timeout: {
         value: cdktf.stringToHclTerraform(this._timeout),
         isBlock: false,
@@ -777,6 +989,12 @@ export class JobDefinition extends cdktf.TerraformResource {
         isBlock: true,
         type: "list",
         storageClassType: "JobDefinitionCronList",
+      },
+      retry_policy: {
+        value: jobDefinitionRetryPolicyToHclTerraform(this._retryPolicy.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "JobDefinitionRetryPolicyList",
       },
       secret_reference: {
         value: cdktf.listMapperHcl(jobDefinitionSecretReferenceToHclTerraform, true)(this._secretReference.internalValue),

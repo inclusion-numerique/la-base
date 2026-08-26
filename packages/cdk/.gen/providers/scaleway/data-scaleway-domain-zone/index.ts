@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayDomainZoneConfig extends cdktf.TerraformMetaArgumen
   /**
   * The domain where the DNS zone will be created.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone#domain DataScalewayDomainZone#domain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone#domain DataScalewayDomainZone#domain}
   */
   readonly domain?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone#id DataScalewayDomainZone#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone#id DataScalewayDomainZone#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayDomainZoneConfig extends cdktf.TerraformMetaArgumen
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone#project_id DataScalewayDomainZone#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone#project_id DataScalewayDomainZone#project_id}
   */
   readonly projectId?: string;
   /**
   * The subdomain of the DNS zone to create.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone#subdomain DataScalewayDomainZone#subdomain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone#subdomain DataScalewayDomainZone#subdomain}
   */
   readonly subdomain?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone scaleway_domain_zone}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone scaleway_domain_zone}
 */
 export class DataScalewayDomainZone extends cdktf.TerraformDataSource {
 
@@ -51,7 +51,7 @@ export class DataScalewayDomainZone extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayDomainZone resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayDomainZone to import
-  * @param importFromId The id of the existing DataScalewayDomainZone that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayDomainZone that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayDomainZone to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -63,7 +63,7 @@ export class DataScalewayDomainZone extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/domain_zone scaleway_domain_zone} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/domain_zone scaleway_domain_zone} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -74,8 +74,8 @@ export class DataScalewayDomainZone extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_domain_zone',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,29 +10,29 @@ export interface K8SPoolConfig extends cdktf.TerraformMetaArguments {
   /**
   * Enable the autohealing on the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#autohealing K8SPool#autohealing}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#autohealing K8SPool#autohealing}
   */
   readonly autohealing?: boolean | cdktf.IResolvable;
   /**
   * Enable the autoscaling on the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#autoscaling K8SPool#autoscaling}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#autoscaling K8SPool#autoscaling}
   */
   readonly autoscaling?: boolean | cdktf.IResolvable;
   /**
   * The ID of the cluster on which this pool will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#cluster_id K8SPool#cluster_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#cluster_id K8SPool#cluster_id}
   */
   readonly clusterId: string;
   /**
   * Container runtime for the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#container_runtime K8SPool#container_runtime}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#container_runtime K8SPool#container_runtime}
   */
   readonly containerRuntime?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#id K8SPool#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#id K8SPool#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -41,103 +41,127 @@ export interface K8SPoolConfig extends cdktf.TerraformMetaArguments {
   /**
   * The Kubelet arguments to be used by this pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#kubelet_args K8SPool#kubelet_args}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#kubelet_args K8SPool#kubelet_args}
   */
   readonly kubeletArgs?: { [key: string]: string };
   /**
+  * Kubernetes labels applied and reconciled on the nodes.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#labels K8SPool#labels}
+  */
+  readonly labels?: { [key: string]: string };
+  /**
   * Maximum size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#max_size K8SPool#max_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#max_size K8SPool#max_size}
   */
   readonly maxSize?: number;
   /**
   * Minimum size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#min_size K8SPool#min_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#min_size K8SPool#min_size}
   */
   readonly minSize?: number;
   /**
-  * The name of the cluster
+  * The name of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#name K8SPool#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#name K8SPool#name}
   */
-  readonly name: string;
+  readonly name?: string;
   /**
   * Server type of the pool servers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#node_type K8SPool#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#node_type K8SPool#node_type}
   */
   readonly nodeType: string;
   /**
   * ID of the placement group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#placement_group_id K8SPool#placement_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#placement_group_id K8SPool#placement_group_id}
   */
   readonly placementGroupId?: string;
   /**
   * Defines if the public IP should be removed from the nodes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#public_ip_disabled K8SPool#public_ip_disabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#public_ip_disabled K8SPool#public_ip_disabled}
   */
   readonly publicIpDisabled?: boolean | cdktf.IResolvable;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#region K8SPool#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#region K8SPool#region}
   */
   readonly region?: string;
   /**
   * The size of the system volume of the nodes in gigabyte
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#root_volume_size_in_gb K8SPool#root_volume_size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#root_volume_size_in_gb K8SPool#root_volume_size_in_gb}
   */
   readonly rootVolumeSizeInGb?: number;
   /**
   * System volume type of the nodes composing the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#root_volume_type K8SPool#root_volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#root_volume_type K8SPool#root_volume_type}
   */
   readonly rootVolumeType?: string;
   /**
   * The ID of the security group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#security_group_id K8SPool#security_group_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#security_group_id K8SPool#security_group_id}
   */
   readonly securityGroupId?: string;
   /**
   * Size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#size K8SPool#size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#size K8SPool#size}
   */
   readonly size: number;
   /**
   * The tags associated with the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#tags K8SPool#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#tags K8SPool#tags}
   */
   readonly tags?: string[];
   /**
+  * The Kubernetes version of the pool
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#version K8SPool#version}
+  */
+  readonly version?: string;
+  /**
   * Whether to wait for the pool to be ready
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#wait_for_pool_ready K8SPool#wait_for_pool_ready}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#wait_for_pool_ready K8SPool#wait_for_pool_ready}
   */
   readonly waitForPoolReady?: boolean | cdktf.IResolvable;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#zone K8SPool#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#zone K8SPool#zone}
   */
   readonly zone?: string;
   /**
+  * startup_taints block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#startup_taints K8SPool#startup_taints}
+  */
+  readonly startupTaints?: K8SPoolStartupTaints[] | cdktf.IResolvable;
+  /**
+  * taints block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#taints K8SPool#taints}
+  */
+  readonly taints?: K8SPoolTaints[] | cdktf.IResolvable;
+  /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#timeouts K8SPool#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#timeouts K8SPool#timeouts}
   */
   readonly timeouts?: K8SPoolTimeouts;
   /**
   * upgrade_policy block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#upgrade_policy K8SPool#upgrade_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#upgrade_policy K8SPool#upgrade_policy}
   */
   readonly upgradePolicy?: K8SPoolUpgradePolicy;
 }
@@ -298,6 +322,11 @@ export class K8SPoolNodesOutputReference extends cdktf.ComplexObject {
     return this.getStringAttribute('public_ip_v6');
   }
 
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -322,17 +351,375 @@ export class K8SPoolNodesList extends cdktf.ComplexList {
     return new K8SPoolNodesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface K8SPoolStartupTaints {
+  /**
+  * Effect of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#effect K8SPool#effect}
+  */
+  readonly effect: string;
+  /**
+  * Key of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#key K8SPool#key}
+  */
+  readonly key: string;
+  /**
+  * Value of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#value K8SPool#value}
+  */
+  readonly value: string;
+}
+
+export function k8SPoolStartupTaintsToTerraform(struct?: K8SPoolStartupTaints | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    effect: cdktf.stringToTerraform(struct!.effect),
+    key: cdktf.stringToTerraform(struct!.key),
+    value: cdktf.stringToTerraform(struct!.value),
+  }
+}
+
+
+export function k8SPoolStartupTaintsToHclTerraform(struct?: K8SPoolStartupTaints | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    effect: {
+      value: cdktf.stringToHclTerraform(struct!.effect),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    key: {
+      value: cdktf.stringToHclTerraform(struct!.key),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    value: {
+      value: cdktf.stringToHclTerraform(struct!.value),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class K8SPoolStartupTaintsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): K8SPoolStartupTaints | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._effect !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.effect = this._effect;
+    }
+    if (this._key !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.key = this._key;
+    }
+    if (this._value !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.value = this._value;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: K8SPoolStartupTaints | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._effect = undefined;
+      this._key = undefined;
+      this._value = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._effect = value.effect;
+      this._key = value.key;
+      this._value = value.value;
+    }
+  }
+
+  // effect - computed: false, optional: false, required: true
+  private _effect?: string; 
+  public get effect() {
+    return this.getStringAttribute('effect');
+  }
+  public set effect(value: string) {
+    this._effect = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get effectInput() {
+    return this._effect;
+  }
+
+  // key - computed: false, optional: false, required: true
+  private _key?: string; 
+  public get key() {
+    return this.getStringAttribute('key');
+  }
+  public set key(value: string) {
+    this._key = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get keyInput() {
+    return this._key;
+  }
+
+  // value - computed: false, optional: false, required: true
+  private _value?: string; 
+  public get value() {
+    return this.getStringAttribute('value');
+  }
+  public set value(value: string) {
+    this._value = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get valueInput() {
+    return this._value;
+  }
+}
+
+export class K8SPoolStartupTaintsList extends cdktf.ComplexList {
+  public internalValue? : K8SPoolStartupTaints[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): K8SPoolStartupTaintsOutputReference {
+    return new K8SPoolStartupTaintsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface K8SPoolTaints {
+  /**
+  * Effect of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#effect K8SPool#effect}
+  */
+  readonly effect: string;
+  /**
+  * Key of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#key K8SPool#key}
+  */
+  readonly key: string;
+  /**
+  * Value of the taint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#value K8SPool#value}
+  */
+  readonly value: string;
+}
+
+export function k8SPoolTaintsToTerraform(struct?: K8SPoolTaints | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    effect: cdktf.stringToTerraform(struct!.effect),
+    key: cdktf.stringToTerraform(struct!.key),
+    value: cdktf.stringToTerraform(struct!.value),
+  }
+}
+
+
+export function k8SPoolTaintsToHclTerraform(struct?: K8SPoolTaints | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    effect: {
+      value: cdktf.stringToHclTerraform(struct!.effect),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    key: {
+      value: cdktf.stringToHclTerraform(struct!.key),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    value: {
+      value: cdktf.stringToHclTerraform(struct!.value),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class K8SPoolTaintsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): K8SPoolTaints | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._effect !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.effect = this._effect;
+    }
+    if (this._key !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.key = this._key;
+    }
+    if (this._value !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.value = this._value;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: K8SPoolTaints | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._effect = undefined;
+      this._key = undefined;
+      this._value = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._effect = value.effect;
+      this._key = value.key;
+      this._value = value.value;
+    }
+  }
+
+  // effect - computed: false, optional: false, required: true
+  private _effect?: string; 
+  public get effect() {
+    return this.getStringAttribute('effect');
+  }
+  public set effect(value: string) {
+    this._effect = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get effectInput() {
+    return this._effect;
+  }
+
+  // key - computed: false, optional: false, required: true
+  private _key?: string; 
+  public get key() {
+    return this.getStringAttribute('key');
+  }
+  public set key(value: string) {
+    this._key = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get keyInput() {
+    return this._key;
+  }
+
+  // value - computed: false, optional: false, required: true
+  private _value?: string; 
+  public get value() {
+    return this.getStringAttribute('value');
+  }
+  public set value(value: string) {
+    this._value = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get valueInput() {
+    return this._value;
+  }
+}
+
+export class K8SPoolTaintsList extends cdktf.ComplexList {
+  public internalValue? : K8SPoolTaints[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): K8SPoolTaintsOutputReference {
+    return new K8SPoolTaintsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface K8SPoolTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#create K8SPool#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#create K8SPool#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#default K8SPool#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#default K8SPool#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#update K8SPool#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#update K8SPool#update}
   */
   readonly update?: string;
 }
@@ -486,13 +873,13 @@ export interface K8SPoolUpgradePolicy {
   /**
   * The maximum number of nodes to be created during the upgrade
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#max_surge K8SPool#max_surge}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#max_surge K8SPool#max_surge}
   */
   readonly maxSurge?: number;
   /**
   * The maximum number of nodes that can be not ready at the same time
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#max_unavailable K8SPool#max_unavailable}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#max_unavailable K8SPool#max_unavailable}
   */
   readonly maxUnavailable?: number;
 }
@@ -605,7 +992,7 @@ export class K8SPoolUpgradePolicyOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool scaleway_k8s_pool}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool scaleway_k8s_pool}
 */
 export class K8SPool extends cdktf.TerraformResource {
 
@@ -621,7 +1008,7 @@ export class K8SPool extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a K8SPool resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the K8SPool to import
-  * @param importFromId The id of the existing K8SPool that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing K8SPool that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the K8SPool to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -633,7 +1020,7 @@ export class K8SPool extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_pool scaleway_k8s_pool} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_pool scaleway_k8s_pool} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -644,8 +1031,8 @@ export class K8SPool extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_k8s_pool',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -661,6 +1048,7 @@ export class K8SPool extends cdktf.TerraformResource {
     this._containerRuntime = config.containerRuntime;
     this._id = config.id;
     this._kubeletArgs = config.kubeletArgs;
+    this._labels = config.labels;
     this._maxSize = config.maxSize;
     this._minSize = config.minSize;
     this._name = config.name;
@@ -673,8 +1061,11 @@ export class K8SPool extends cdktf.TerraformResource {
     this._securityGroupId = config.securityGroupId;
     this._size = config.size;
     this._tags = config.tags;
+    this._version = config.version;
     this._waitForPoolReady = config.waitForPoolReady;
     this._zone = config.zone;
+    this._startupTaints.internalValue = config.startupTaints;
+    this._taints.internalValue = config.taints;
     this._timeouts.internalValue = config.timeouts;
     this._upgradePolicy.internalValue = config.upgradePolicy;
   }
@@ -786,6 +1177,22 @@ export class K8SPool extends cdktf.TerraformResource {
     return this._kubeletArgs;
   }
 
+  // labels - computed: false, optional: true, required: false
+  private _labels?: { [key: string]: string }; 
+  public get labels() {
+    return this.getStringMapAttribute('labels');
+  }
+  public set labels(value: { [key: string]: string }) {
+    this._labels = value;
+  }
+  public resetLabels() {
+    this._labels = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get labelsInput() {
+    return this._labels;
+  }
+
   // max_size - computed: true, optional: true, required: false
   private _maxSize?: number; 
   public get maxSize() {
@@ -802,7 +1209,7 @@ export class K8SPool extends cdktf.TerraformResource {
     return this._maxSize;
   }
 
-  // min_size - computed: false, optional: true, required: false
+  // min_size - computed: true, optional: true, required: false
   private _minSize?: number; 
   public get minSize() {
     return this.getNumberAttribute('min_size');
@@ -818,13 +1225,16 @@ export class K8SPool extends cdktf.TerraformResource {
     return this._minSize;
   }
 
-  // name - computed: false, optional: false, required: true
+  // name - computed: false, optional: true, required: false
   private _name?: string; 
   public get name() {
     return this.getStringAttribute('name');
   }
   public set name(value: string) {
     this._name = value;
+  }
+  public resetName() {
+    this._name = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get nameInput() {
@@ -959,6 +1369,11 @@ export class K8SPool extends cdktf.TerraformResource {
     return this._size;
   }
 
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -985,9 +1400,20 @@ export class K8SPool extends cdktf.TerraformResource {
     return this.getStringAttribute('updated_at');
   }
 
-  // version - computed: true, optional: false, required: false
+  // version - computed: true, optional: true, required: false
+  private _version?: string; 
   public get version() {
     return this.getStringAttribute('version');
+  }
+  public set version(value: string) {
+    this._version = value;
+  }
+  public resetVersion() {
+    this._version = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get versionInput() {
+    return this._version;
   }
 
   // wait_for_pool_ready - computed: false, optional: true, required: false
@@ -1020,6 +1446,38 @@ export class K8SPool extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get zoneInput() {
     return this._zone;
+  }
+
+  // startup_taints - computed: false, optional: true, required: false
+  private _startupTaints = new K8SPoolStartupTaintsList(this, "startup_taints", true);
+  public get startupTaints() {
+    return this._startupTaints;
+  }
+  public putStartupTaints(value: K8SPoolStartupTaints[] | cdktf.IResolvable) {
+    this._startupTaints.internalValue = value;
+  }
+  public resetStartupTaints() {
+    this._startupTaints.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get startupTaintsInput() {
+    return this._startupTaints.internalValue;
+  }
+
+  // taints - computed: false, optional: true, required: false
+  private _taints = new K8SPoolTaintsList(this, "taints", true);
+  public get taints() {
+    return this._taints;
+  }
+  public putTaints(value: K8SPoolTaints[] | cdktf.IResolvable) {
+    this._taints.internalValue = value;
+  }
+  public resetTaints() {
+    this._taints.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get taintsInput() {
+    return this._taints.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -1066,6 +1524,7 @@ export class K8SPool extends cdktf.TerraformResource {
       container_runtime: cdktf.stringToTerraform(this._containerRuntime),
       id: cdktf.stringToTerraform(this._id),
       kubelet_args: cdktf.hashMapper(cdktf.stringToTerraform)(this._kubeletArgs),
+      labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       max_size: cdktf.numberToTerraform(this._maxSize),
       min_size: cdktf.numberToTerraform(this._minSize),
       name: cdktf.stringToTerraform(this._name),
@@ -1078,8 +1537,11 @@ export class K8SPool extends cdktf.TerraformResource {
       security_group_id: cdktf.stringToTerraform(this._securityGroupId),
       size: cdktf.numberToTerraform(this._size),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
+      version: cdktf.stringToTerraform(this._version),
       wait_for_pool_ready: cdktf.booleanToTerraform(this._waitForPoolReady),
       zone: cdktf.stringToTerraform(this._zone),
+      startup_taints: cdktf.listMapper(k8SPoolStartupTaintsToTerraform, true)(this._startupTaints.internalValue),
+      taints: cdktf.listMapper(k8SPoolTaintsToTerraform, true)(this._taints.internalValue),
       timeouts: k8SPoolTimeoutsToTerraform(this._timeouts.internalValue),
       upgrade_policy: k8SPoolUpgradePolicyToTerraform(this._upgradePolicy.internalValue),
     };
@@ -1119,6 +1581,12 @@ export class K8SPool extends cdktf.TerraformResource {
       },
       kubelet_args: {
         value: cdktf.hashMapperHcl(cdktf.stringToHclTerraform)(this._kubeletArgs),
+        isBlock: false,
+        type: "map",
+        storageClassType: "stringMap",
+      },
+      labels: {
+        value: cdktf.hashMapperHcl(cdktf.stringToHclTerraform)(this._labels),
         isBlock: false,
         type: "map",
         storageClassType: "stringMap",
@@ -1195,6 +1663,12 @@ export class K8SPool extends cdktf.TerraformResource {
         type: "list",
         storageClassType: "stringList",
       },
+      version: {
+        value: cdktf.stringToHclTerraform(this._version),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
       wait_for_pool_ready: {
         value: cdktf.booleanToHclTerraform(this._waitForPoolReady),
         isBlock: false,
@@ -1206,6 +1680,18 @@ export class K8SPool extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      startup_taints: {
+        value: cdktf.listMapperHcl(k8SPoolStartupTaintsToHclTerraform, true)(this._startupTaints.internalValue),
+        isBlock: true,
+        type: "set",
+        storageClassType: "K8SPoolStartupTaintsList",
+      },
+      taints: {
+        value: cdktf.listMapperHcl(k8SPoolTaintsToHclTerraform, true)(this._taints.internalValue),
+        isBlock: true,
+        type: "set",
+        storageClassType: "K8SPoolTaintsList",
       },
       timeouts: {
         value: k8SPoolTimeoutsToHclTerraform(this._timeouts.internalValue),

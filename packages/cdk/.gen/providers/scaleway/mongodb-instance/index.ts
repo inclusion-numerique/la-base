@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,112 +8,142 @@ import * as cdktf from 'cdktf';
 
 export interface MongodbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#id MongodbInstance#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#id MongodbInstance#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
+  * Enable or disable automatic snapshot scheduling
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#is_snapshot_schedule_enabled MongodbInstance#is_snapshot_schedule_enabled}
+  */
+  readonly isSnapshotScheduleEnabled?: boolean | cdktf.IResolvable;
+  /**
   * Name of the MongoDB cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#name MongodbInstance#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#name MongodbInstance#name}
   */
   readonly name?: string;
   /**
   * Number of nodes in the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#node_number MongodbInstance#node_number}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#node_number MongodbInstance#node_number}
   */
   readonly nodeNumber: number;
   /**
   * Type of node to use for the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#node_type MongodbInstance#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#node_type MongodbInstance#node_type}
   */
   readonly nodeType: string;
   /**
-  * Password of the user
+  * Password of the user. Only one of `password` or `password_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#password MongodbInstance#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#password MongodbInstance#password}
   */
   readonly password?: string;
   /**
+  * Password of the user in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. `password_wo` will not be set in the Terraform state. To update the `password_wo`, you must also update the `password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#password_wo MongodbInstance#password_wo}
+  */
+  readonly passwordWo?: string;
+  /**
+  * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#password_wo_version MongodbInstance#password_wo_version}
+  */
+  readonly passwordWoVersion?: number;
+  /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#project_id MongodbInstance#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#project_id MongodbInstance#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#region MongodbInstance#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#region MongodbInstance#region}
   */
   readonly region?: string;
   /**
   * Map of settings to define for the instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#settings MongodbInstance#settings}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#settings MongodbInstance#settings}
   */
   readonly settings?: { [key: string]: string };
   /**
   * Snapshot ID to restore the MongoDB instance from
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#snapshot_id MongodbInstance#snapshot_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#snapshot_id MongodbInstance#snapshot_id}
   */
   readonly snapshotId?: string;
   /**
+  * Snapshot schedule frequency in hours
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#snapshot_schedule_frequency_hours MongodbInstance#snapshot_schedule_frequency_hours}
+  */
+  readonly snapshotScheduleFrequencyHours?: number;
+  /**
+  * Snapshot schedule retention in days
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#snapshot_schedule_retention_days MongodbInstance#snapshot_schedule_retention_days}
+  */
+  readonly snapshotScheduleRetentionDays?: number;
+  /**
   * List of tags ["tag1", "tag2", ...] attached to a MongoDB instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#tags MongodbInstance#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#tags MongodbInstance#tags}
   */
   readonly tags?: string[];
   /**
   * Name of the user created when the cluster is created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#user_name MongodbInstance#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#user_name MongodbInstance#user_name}
   */
   readonly userName?: string;
   /**
   * MongoDB version of the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#version MongodbInstance#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#version MongodbInstance#version}
   */
   readonly version?: string;
   /**
   * Volume size (in GB)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#volume_size_in_gb MongodbInstance#volume_size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#volume_size_in_gb MongodbInstance#volume_size_in_gb}
   */
   readonly volumeSizeInGb?: number;
   /**
   * Volume type of the instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#volume_type MongodbInstance#volume_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#volume_type MongodbInstance#volume_type}
   */
   readonly volumeType?: string;
   /**
   * private_ip block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#private_ip MongodbInstance#private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#private_ip MongodbInstance#private_ip}
   */
   readonly privateIp?: MongodbInstancePrivateIp[] | cdktf.IResolvable;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#private_network MongodbInstance#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#private_network MongodbInstance#private_network}
   */
   readonly privateNetwork?: MongodbInstancePrivateNetwork;
   /**
   * public_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#public_network MongodbInstance#public_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#public_network MongodbInstance#public_network}
   */
   readonly publicNetwork?: MongodbInstancePublicNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#timeouts MongodbInstance#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#timeouts MongodbInstance#timeouts}
   */
   readonly timeouts?: MongodbInstanceTimeouts;
 }
@@ -212,7 +242,7 @@ export interface MongodbInstancePrivateNetwork {
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#pn_id MongodbInstance#pn_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#pn_id MongodbInstance#pn_id}
   */
   readonly pnId: string;
 }
@@ -312,6 +342,27 @@ export class MongodbInstancePrivateNetworkOutputReference extends cdktf.ComplexO
   }
 }
 export interface MongodbInstancePublicNetwork {
+  /**
+  * The DNS record of your endpoint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#dns_record MongodbInstance#dns_record}
+  */
+  readonly dnsRecord?: string;
+  /**
+  * ID of the public network
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#id MongodbInstance#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
+  * TCP port of the endpoint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#port MongodbInstance#port}
+  */
+  readonly port?: number;
 }
 
 export function mongodbInstancePublicNetworkToTerraform(struct?: MongodbInstancePublicNetworkOutputReference | MongodbInstancePublicNetwork): any {
@@ -320,6 +371,9 @@ export function mongodbInstancePublicNetworkToTerraform(struct?: MongodbInstance
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
+    dns_record: cdktf.stringToTerraform(struct!.dnsRecord),
+    id: cdktf.stringToTerraform(struct!.id),
+    port: cdktf.numberToTerraform(struct!.port),
   }
 }
 
@@ -330,8 +384,28 @@ export function mongodbInstancePublicNetworkToHclTerraform(struct?: MongodbInsta
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   const attrs = {
+    dns_record: {
+      value: cdktf.stringToHclTerraform(struct!.dnsRecord),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    id: {
+      value: cdktf.stringToHclTerraform(struct!.id),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    port: {
+      value: cdktf.numberToHclTerraform(struct!.port),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "number",
+    },
   };
-  return attrs;
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
 }
 
 export class MongodbInstancePublicNetworkOutputReference extends cdktf.ComplexObject {
@@ -348,48 +422,99 @@ export class MongodbInstancePublicNetworkOutputReference extends cdktf.ComplexOb
   public get internalValue(): MongodbInstancePublicNetwork | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
+    if (this._dnsRecord !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsRecord = this._dnsRecord;
+    }
+    if (this._id !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.id = this._id;
+    }
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
     return hasAnyValues ? internalValueResult : undefined;
   }
 
   public set internalValue(value: MongodbInstancePublicNetwork | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this._dnsRecord = undefined;
+      this._id = undefined;
+      this._port = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this._dnsRecord = value.dnsRecord;
+      this._id = value.id;
+      this._port = value.port;
     }
   }
 
-  // dns_record - computed: true, optional: false, required: false
+  // dns_record - computed: true, optional: true, required: false
+  private _dnsRecord?: string; 
   public get dnsRecord() {
     return this.getStringAttribute('dns_record');
   }
+  public set dnsRecord(value: string) {
+    this._dnsRecord = value;
+  }
+  public resetDnsRecord() {
+    this._dnsRecord = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsRecordInput() {
+    return this._dnsRecord;
+  }
 
-  // id - computed: true, optional: false, required: false
+  // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
   }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
+  }
 
-  // port - computed: true, optional: false, required: false
+  // port - computed: true, optional: true, required: false
+  private _port?: number; 
   public get port() {
     return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  public resetPort() {
+    this._port = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
   }
 }
 export interface MongodbInstanceTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#create MongodbInstance#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#create MongodbInstance#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#default MongodbInstance#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#default MongodbInstance#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#delete MongodbInstance#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#delete MongodbInstance#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#update MongodbInstance#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#update MongodbInstance#update}
   */
   readonly update?: string;
 }
@@ -570,7 +695,7 @@ export class MongodbInstanceTimeoutsOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance scaleway_mongodb_instance}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance scaleway_mongodb_instance}
 */
 export class MongodbInstance extends cdktf.TerraformResource {
 
@@ -586,7 +711,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MongodbInstance resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MongodbInstance to import
-  * @param importFromId The id of the existing MongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MongodbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MongodbInstance to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -598,7 +723,7 @@ export class MongodbInstance extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/mongodb_instance scaleway_mongodb_instance} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_instance scaleway_mongodb_instance} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -609,8 +734,8 @@ export class MongodbInstance extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mongodb_instance',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -621,14 +746,19 @@ export class MongodbInstance extends cdktf.TerraformResource {
       forEach: config.forEach
     });
     this._id = config.id;
+    this._isSnapshotScheduleEnabled = config.isSnapshotScheduleEnabled;
     this._name = config.name;
     this._nodeNumber = config.nodeNumber;
     this._nodeType = config.nodeType;
     this._password = config.password;
+    this._passwordWo = config.passwordWo;
+    this._passwordWoVersion = config.passwordWoVersion;
     this._projectId = config.projectId;
     this._region = config.region;
     this._settings = config.settings;
     this._snapshotId = config.snapshotId;
+    this._snapshotScheduleFrequencyHours = config.snapshotScheduleFrequencyHours;
+    this._snapshotScheduleRetentionDays = config.snapshotScheduleRetentionDays;
     this._tags = config.tags;
     this._userName = config.userName;
     this._version = config.version;
@@ -663,6 +793,22 @@ export class MongodbInstance extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get idInput() {
     return this._id;
+  }
+
+  // is_snapshot_schedule_enabled - computed: true, optional: true, required: false
+  private _isSnapshotScheduleEnabled?: boolean | cdktf.IResolvable; 
+  public get isSnapshotScheduleEnabled() {
+    return this.getBooleanAttribute('is_snapshot_schedule_enabled');
+  }
+  public set isSnapshotScheduleEnabled(value: boolean | cdktf.IResolvable) {
+    this._isSnapshotScheduleEnabled = value;
+  }
+  public resetIsSnapshotScheduleEnabled() {
+    this._isSnapshotScheduleEnabled = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get isSnapshotScheduleEnabledInput() {
+    return this._isSnapshotScheduleEnabled;
   }
 
   // name - computed: true, optional: true, required: false
@@ -721,6 +867,38 @@ export class MongodbInstance extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get passwordInput() {
     return this._password;
+  }
+
+  // password_wo - computed: false, optional: true, required: false
+  private _passwordWo?: string; 
+  public get passwordWo() {
+    return this.getStringAttribute('password_wo');
+  }
+  public set passwordWo(value: string) {
+    this._passwordWo = value;
+  }
+  public resetPasswordWo() {
+    this._passwordWo = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordWoInput() {
+    return this._passwordWo;
+  }
+
+  // password_wo_version - computed: false, optional: true, required: false
+  private _passwordWoVersion?: number; 
+  public get passwordWoVersion() {
+    return this.getNumberAttribute('password_wo_version');
+  }
+  public set passwordWoVersion(value: number) {
+    this._passwordWoVersion = value;
+  }
+  public resetPasswordWoVersion() {
+    this._passwordWoVersion = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordWoVersionInput() {
+    return this._passwordWoVersion;
   }
 
   // project_id - computed: true, optional: true, required: false
@@ -787,6 +965,38 @@ export class MongodbInstance extends cdktf.TerraformResource {
     return this._snapshotId;
   }
 
+  // snapshot_schedule_frequency_hours - computed: true, optional: true, required: false
+  private _snapshotScheduleFrequencyHours?: number; 
+  public get snapshotScheduleFrequencyHours() {
+    return this.getNumberAttribute('snapshot_schedule_frequency_hours');
+  }
+  public set snapshotScheduleFrequencyHours(value: number) {
+    this._snapshotScheduleFrequencyHours = value;
+  }
+  public resetSnapshotScheduleFrequencyHours() {
+    this._snapshotScheduleFrequencyHours = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get snapshotScheduleFrequencyHoursInput() {
+    return this._snapshotScheduleFrequencyHours;
+  }
+
+  // snapshot_schedule_retention_days - computed: true, optional: true, required: false
+  private _snapshotScheduleRetentionDays?: number; 
+  public get snapshotScheduleRetentionDays() {
+    return this.getNumberAttribute('snapshot_schedule_retention_days');
+  }
+  public set snapshotScheduleRetentionDays(value: number) {
+    this._snapshotScheduleRetentionDays = value;
+  }
+  public resetSnapshotScheduleRetentionDays() {
+    this._snapshotScheduleRetentionDays = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get snapshotScheduleRetentionDaysInput() {
+    return this._snapshotScheduleRetentionDays;
+  }
+
   // tags - computed: false, optional: true, required: false
   private _tags?: string[]; 
   public get tags() {
@@ -801,6 +1011,11 @@ export class MongodbInstance extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get tagsInput() {
     return this._tags;
+  }
+
+  // tls_certificate - computed: true, optional: false, required: false
+  public get tlsCertificate() {
+    return this.getStringAttribute('tls_certificate');
   }
 
   // updated_at - computed: true, optional: false, required: false
@@ -943,14 +1158,19 @@ export class MongodbInstance extends cdktf.TerraformResource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       id: cdktf.stringToTerraform(this._id),
+      is_snapshot_schedule_enabled: cdktf.booleanToTerraform(this._isSnapshotScheduleEnabled),
       name: cdktf.stringToTerraform(this._name),
       node_number: cdktf.numberToTerraform(this._nodeNumber),
       node_type: cdktf.stringToTerraform(this._nodeType),
       password: cdktf.stringToTerraform(this._password),
+      password_wo: cdktf.stringToTerraform(this._passwordWo),
+      password_wo_version: cdktf.numberToTerraform(this._passwordWoVersion),
       project_id: cdktf.stringToTerraform(this._projectId),
       region: cdktf.stringToTerraform(this._region),
       settings: cdktf.hashMapper(cdktf.stringToTerraform)(this._settings),
       snapshot_id: cdktf.stringToTerraform(this._snapshotId),
+      snapshot_schedule_frequency_hours: cdktf.numberToTerraform(this._snapshotScheduleFrequencyHours),
+      snapshot_schedule_retention_days: cdktf.numberToTerraform(this._snapshotScheduleRetentionDays),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       user_name: cdktf.stringToTerraform(this._userName),
       version: cdktf.stringToTerraform(this._version),
@@ -970,6 +1190,12 @@ export class MongodbInstance extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      is_snapshot_schedule_enabled: {
+        value: cdktf.booleanToHclTerraform(this._isSnapshotScheduleEnabled),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
       },
       name: {
         value: cdktf.stringToHclTerraform(this._name),
@@ -995,6 +1221,18 @@ export class MongodbInstance extends cdktf.TerraformResource {
         type: "simple",
         storageClassType: "string",
       },
+      password_wo: {
+        value: cdktf.stringToHclTerraform(this._passwordWo),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      password_wo_version: {
+        value: cdktf.numberToHclTerraform(this._passwordWoVersion),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
       project_id: {
         value: cdktf.stringToHclTerraform(this._projectId),
         isBlock: false,
@@ -1018,6 +1256,18 @@ export class MongodbInstance extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      snapshot_schedule_frequency_hours: {
+        value: cdktf.numberToHclTerraform(this._snapshotScheduleFrequencyHours),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
+      snapshot_schedule_retention_days: {
+        value: cdktf.numberToHclTerraform(this._snapshotScheduleRetentionDays),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
       },
       tags: {
         value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._tags),

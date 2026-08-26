@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface EdgeServicesCacheStageConfig extends cdktf.TerraformMetaArgumen
   /**
   * The backend stage ID the cache stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#backend_stage_id EdgeServicesCacheStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#backend_stage_id EdgeServicesCacheStage#backend_stage_id}
   */
   readonly backendStageId?: string;
   /**
   * The Time To Live (TTL) in seconds. Defines how long content is cached
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#fallback_ttl EdgeServicesCacheStage#fallback_ttl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#fallback_ttl EdgeServicesCacheStage#fallback_ttl}
   */
   readonly fallbackTtl?: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#id EdgeServicesCacheStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#id EdgeServicesCacheStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,43 +29,43 @@ export interface EdgeServicesCacheStageConfig extends cdktf.TerraformMetaArgumen
   /**
   * Defines whether responses to requests with cookies must be stored in the cache
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#include_cookies EdgeServicesCacheStage#include_cookies}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#include_cookies EdgeServicesCacheStage#include_cookies}
   */
   readonly includeCookies?: boolean | cdktf.IResolvable;
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#pipeline_id EdgeServicesCacheStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#pipeline_id EdgeServicesCacheStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#project_id EdgeServicesCacheStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#project_id EdgeServicesCacheStage#project_id}
   */
   readonly projectId?: string;
   /**
   * Trigger a refresh of the cache by changing this field's value
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#refresh_cache EdgeServicesCacheStage#refresh_cache}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#refresh_cache EdgeServicesCacheStage#refresh_cache}
   */
   readonly refreshCache?: string;
   /**
   * The route stage ID the cache stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#route_stage_id EdgeServicesCacheStage#route_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#route_stage_id EdgeServicesCacheStage#route_stage_id}
   */
   readonly routeStageId?: string;
   /**
   * The WAF stage ID the cache stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#waf_stage_id EdgeServicesCacheStage#waf_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#waf_stage_id EdgeServicesCacheStage#waf_stage_id}
   */
   readonly wafStageId?: string;
   /**
   * purge_requests block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#purge_requests EdgeServicesCacheStage#purge_requests}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#purge_requests EdgeServicesCacheStage#purge_requests}
   */
   readonly purgeRequests?: EdgeServicesCacheStagePurgeRequests[] | cdktf.IResolvable;
 }
@@ -73,19 +73,19 @@ export interface EdgeServicesCacheStagePurgeRequests {
   /**
   * Defines whether to purge all content
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#all EdgeServicesCacheStage#all}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#all EdgeServicesCacheStage#all}
   */
   readonly all?: boolean | cdktf.IResolvable;
   /**
   * The list of asserts to purge
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#assets EdgeServicesCacheStage#assets}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#assets EdgeServicesCacheStage#assets}
   */
   readonly assets?: string[];
   /**
   * The pipeline ID in which the purge request will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#pipeline_id EdgeServicesCacheStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#pipeline_id EdgeServicesCacheStage#pipeline_id}
   */
   readonly pipelineId?: string;
 }
@@ -259,7 +259,7 @@ export class EdgeServicesCacheStagePurgeRequestsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage scaleway_edge_services_cache_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage scaleway_edge_services_cache_stage}
 */
 export class EdgeServicesCacheStage extends cdktf.TerraformResource {
 
@@ -275,7 +275,7 @@ export class EdgeServicesCacheStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesCacheStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesCacheStage to import
-  * @param importFromId The id of the existing EdgeServicesCacheStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesCacheStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesCacheStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -287,7 +287,7 @@ export class EdgeServicesCacheStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_cache_stage scaleway_edge_services_cache_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_cache_stage scaleway_edge_services_cache_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -298,8 +298,8 @@ export class EdgeServicesCacheStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_cache_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

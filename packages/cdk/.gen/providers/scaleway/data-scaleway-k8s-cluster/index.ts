@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayK8SClusterConfig extends cdktf.TerraformMetaArgumen
   /**
   * The ID of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#cluster_id DataScalewayK8SCluster#cluster_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#cluster_id DataScalewayK8SCluster#cluster_id}
   */
   readonly clusterId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#id DataScalewayK8SCluster#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#id DataScalewayK8SCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayK8SClusterConfig extends cdktf.TerraformMetaArgumen
   /**
   * The name of the cluster
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#name DataScalewayK8SCluster#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#name DataScalewayK8SCluster#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#project_id DataScalewayK8SCluster#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#project_id DataScalewayK8SCluster#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#region DataScalewayK8SCluster#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#region DataScalewayK8SCluster#region}
   */
   readonly region?: string;
 }
@@ -205,6 +205,11 @@ export class DataScalewayK8SClusterAutoscalerConfigOutputReference extends cdktf
     return this.getBooleanAttribute('ignore_daemonsets_utilization');
   }
 
+  // log_level - computed: true, optional: false, required: false
+  public get logLevel() {
+    return this.getNumberAttribute('log_level');
+  }
+
   // max_graceful_termination_sec - computed: true, optional: false, required: false
   public get maxGracefulTerminationSec() {
     return this.getNumberAttribute('max_graceful_termination_sec');
@@ -223,6 +228,11 @@ export class DataScalewayK8SClusterAutoscalerConfigOutputReference extends cdktf
   // scale_down_utilization_threshold - computed: true, optional: false, required: false
   public get scaleDownUtilizationThreshold() {
     return this.getNumberAttribute('scale_down_utilization_threshold');
+  }
+
+  // skip_nodes_with_local_storage - computed: true, optional: false, required: false
+  public get skipNodesWithLocalStorage() {
+    return this.getBooleanAttribute('skip_nodes_with_local_storage');
   }
 }
 
@@ -441,7 +451,7 @@ export class DataScalewayK8SClusterOpenIdConnectConfigList extends cdktf.Complex
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster scaleway_k8s_cluster}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster scaleway_k8s_cluster}
 */
 export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
 
@@ -457,7 +467,7 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayK8SCluster resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayK8SCluster to import
-  * @param importFromId The id of the existing DataScalewayK8SCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayK8SCluster that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayK8SCluster to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -469,7 +479,7 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/k8s_cluster scaleway_k8s_cluster} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/k8s_cluster scaleway_k8s_cluster} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -480,8 +490,8 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_k8s_cluster',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -614,6 +624,11 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
     return this.getStringAttribute('organization_id');
   }
 
+  // pod_cidr - computed: true, optional: false, required: false
+  public get podCidr() {
+    return this.getStringAttribute('pod_cidr');
+  }
+
   // private_network_id - computed: true, optional: false, required: false
   public get privateNetworkId() {
     return this.getStringAttribute('private_network_id');
@@ -651,6 +666,21 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
     return this._region;
   }
 
+  // service_cidr - computed: true, optional: false, required: false
+  public get serviceCidr() {
+    return this.getStringAttribute('service_cidr');
+  }
+
+  // service_dns_ip - computed: true, optional: false, required: false
+  public get serviceDnsIp() {
+    return this.getStringAttribute('service_dns_ip');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -674,6 +704,11 @@ export class DataScalewayK8SCluster extends cdktf.TerraformDataSource {
   // upgrade_available - computed: true, optional: false, required: false
   public get upgradeAvailable() {
     return this.getBooleanAttribute('upgrade_available');
+  }
+
+  // upgrade_pools - computed: true, optional: false, required: false
+  public get upgradePools() {
+    return this.getBooleanAttribute('upgrade_pools');
   }
 
   // version - computed: true, optional: false, required: false
