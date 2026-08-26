@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,19 +8,25 @@ import * as cdktf from 'cdktf';
 
 export interface BaremetalServerConfig extends cdktf.TerraformMetaArguments {
   /**
+  * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#cloud_init BaremetalServer#cloud_init}
+  */
+  readonly cloudInit?: string;
+  /**
   * Some description to associate to the server, max 255 characters
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#description BaremetalServer#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#description BaremetalServer#description}
   */
   readonly description?: string;
   /**
   * Hostname of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#hostname BaremetalServer#hostname}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#hostname BaremetalServer#hostname}
   */
   readonly hostname?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#id BaremetalServer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#id BaremetalServer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,61 +35,91 @@ export interface BaremetalServerConfig extends cdktf.TerraformMetaArguments {
   /**
   * If True, this boolean allows to create a server without the install config if you want to provide it later
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#install_config_afterward BaremetalServer#install_config_afterward}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#install_config_afterward BaremetalServer#install_config_afterward}
   */
   readonly installConfigAfterward?: boolean | cdktf.IResolvable;
   /**
   * Name of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#name BaremetalServer#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#name BaremetalServer#name}
   */
   readonly name?: string;
   /**
   * ID or name of the server offer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#offer BaremetalServer#offer}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#offer BaremetalServer#offer}
   */
   readonly offer: string;
   /**
   * The base image of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#os BaremetalServer#os}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#os BaremetalServer#os}
   */
   readonly os?: string;
   /**
   * The partitioning schema in json format
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#partitioning BaremetalServer#partitioning}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#partitioning BaremetalServer#partitioning}
   */
   readonly partitioning?: string;
   /**
-  * Password used for the installation.
+  * Password used for the installation. Only one of `password` or `password_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#password BaremetalServer#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#password BaremetalServer#password}
   */
   readonly password?: string;
   /**
+  * Password used for the installation in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. `password_wo` will not be set in the Terraform state. To update the `password_wo`, you must also update the `password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#password_wo BaremetalServer#password_wo}
+  */
+  readonly passwordWo?: string;
+  /**
+  * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#password_wo_version BaremetalServer#password_wo_version}
+  */
+  readonly passwordWoVersion?: number;
+  /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#project_id BaremetalServer#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#project_id BaremetalServer#project_id}
   */
   readonly projectId?: string;
   /**
+  * If true, the baremetal server is protected against accidental deletion via the Scaleway API.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#protected BaremetalServer#protected}
+  */
+  readonly protected?: boolean | cdktf.IResolvable;
+  /**
   * If True, this boolean allows to reinstall the server on SSH key IDs, user or password changes
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#reinstall_on_config_changes BaremetalServer#reinstall_on_config_changes}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#reinstall_on_config_changes BaremetalServer#reinstall_on_config_changes}
   */
   readonly reinstallOnConfigChanges?: boolean | cdktf.IResolvable;
   /**
-  * Password used for the service to install.
+  * Password used for the service to install. Only one of `service_password` or `service_password_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#service_password BaremetalServer#service_password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#service_password BaremetalServer#service_password}
   */
   readonly servicePassword?: string;
   /**
+  * Password used for the service to install in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `service_password` or `service_password_wo` should be specified. `service_password_wo` will not be set in the Terraform state. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#service_password_wo BaremetalServer#service_password_wo}
+  */
+  readonly servicePasswordWo?: string;
+  /**
+  * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) service password. To update the `service_password_wo`, you must also update the `service_password_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#service_password_wo_version BaremetalServer#service_password_wo_version}
+  */
+  readonly servicePasswordWoVersion?: number;
+  /**
   * User used for the service to install.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#service_user BaremetalServer#service_user}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#service_user BaremetalServer#service_user}
   */
   readonly serviceUser?: string;
   /**
@@ -92,49 +128,49 @@ export interface BaremetalServerConfig extends cdktf.TerraformMetaArguments {
   * **NOTE** : If you are attempting to update your SSH key IDs, it will induce the reinstall of your server. 
   * If this behaviour is wanted, please set 'reinstall_on_ssh_key_changes' argument to true.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#ssh_key_ids BaremetalServer#ssh_key_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#ssh_key_ids BaremetalServer#ssh_key_ids}
   */
   readonly sshKeyIds?: string[];
   /**
   * Array of tags to associate with the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#tags BaremetalServer#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#tags BaremetalServer#tags}
   */
   readonly tags?: string[];
   /**
   * User used for the installation.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#user BaremetalServer#user}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#user BaremetalServer#user}
   */
   readonly user?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#zone BaremetalServer#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#zone BaremetalServer#zone}
   */
   readonly zone?: string;
   /**
   * options block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#options BaremetalServer#options}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#options BaremetalServer#options}
   */
   readonly options?: BaremetalServerOptions[] | cdktf.IResolvable;
   /**
   * private_ips block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#private_ips BaremetalServer#private_ips}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#private_ips BaremetalServer#private_ips}
   */
   readonly privateIps?: BaremetalServerPrivateIps[] | cdktf.IResolvable;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#private_network BaremetalServer#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#private_network BaremetalServer#private_network}
   */
   readonly privateNetwork?: BaremetalServerPrivateNetwork[] | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#timeouts BaremetalServer#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#timeouts BaremetalServer#timeouts}
   */
   readonly timeouts?: BaremetalServerTimeouts;
 }
@@ -412,13 +448,13 @@ export interface BaremetalServerOptions {
   /**
   * Auto expire the option after this date
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#expires_at BaremetalServer#expires_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#expires_at BaremetalServer#expires_at}
   */
   readonly expiresAt?: string;
   /**
   * IDs of the options
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#id BaremetalServer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#id BaremetalServer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -661,7 +697,7 @@ export interface BaremetalServerPrivateNetwork {
   /**
   * The ID of the private network to associate with the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#id BaremetalServer#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#id BaremetalServer#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -670,7 +706,7 @@ export interface BaremetalServerPrivateNetwork {
   /**
   * List of IPAM IP IDs to attach to the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#ipam_ip_ids BaremetalServer#ipam_ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#ipam_ip_ids BaremetalServer#ipam_ip_ids}
   */
   readonly ipamIpIds?: string[];
 }
@@ -837,19 +873,19 @@ export class BaremetalServerPrivateNetworkList extends cdktf.ComplexList {
 }
 export interface BaremetalServerTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#create BaremetalServer#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#create BaremetalServer#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#default BaremetalServer#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#default BaremetalServer#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#delete BaremetalServer#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#delete BaremetalServer#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#update BaremetalServer#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#update BaremetalServer#update}
   */
   readonly update?: string;
 }
@@ -1030,7 +1066,7 @@ export class BaremetalServerTimeoutsOutputReference extends cdktf.ComplexObject 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server scaleway_baremetal_server}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server scaleway_baremetal_server}
 */
 export class BaremetalServer extends cdktf.TerraformResource {
 
@@ -1046,7 +1082,7 @@ export class BaremetalServer extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a BaremetalServer resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the BaremetalServer to import
-  * @param importFromId The id of the existing BaremetalServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing BaremetalServer that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the BaremetalServer to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -1058,7 +1094,7 @@ export class BaremetalServer extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/baremetal_server scaleway_baremetal_server} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/baremetal_server scaleway_baremetal_server} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -1069,8 +1105,8 @@ export class BaremetalServer extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_baremetal_server',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1080,6 +1116,7 @@ export class BaremetalServer extends cdktf.TerraformResource {
       connection: config.connection,
       forEach: config.forEach
     });
+    this._cloudInit = config.cloudInit;
     this._description = config.description;
     this._hostname = config.hostname;
     this._id = config.id;
@@ -1089,9 +1126,14 @@ export class BaremetalServer extends cdktf.TerraformResource {
     this._os = config.os;
     this._partitioning = config.partitioning;
     this._password = config.password;
+    this._passwordWo = config.passwordWo;
+    this._passwordWoVersion = config.passwordWoVersion;
     this._projectId = config.projectId;
+    this._protected = config.protected;
     this._reinstallOnConfigChanges = config.reinstallOnConfigChanges;
     this._servicePassword = config.servicePassword;
+    this._servicePasswordWo = config.servicePasswordWo;
+    this._servicePasswordWoVersion = config.servicePasswordWoVersion;
     this._serviceUser = config.serviceUser;
     this._sshKeyIds = config.sshKeyIds;
     this._tags = config.tags;
@@ -1106,6 +1148,22 @@ export class BaremetalServer extends cdktf.TerraformResource {
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // cloud_init - computed: true, optional: true, required: false
+  private _cloudInit?: string; 
+  public get cloudInit() {
+    return this.getStringAttribute('cloud_init');
+  }
+  public set cloudInit(value: string) {
+    this._cloudInit = value;
+  }
+  public resetCloudInit() {
+    this._cloudInit = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get cloudInitInput() {
+    return this._cloudInit;
+  }
 
   // description - computed: false, optional: true, required: false
   private _description?: string; 
@@ -1291,6 +1349,38 @@ export class BaremetalServer extends cdktf.TerraformResource {
     return this._password;
   }
 
+  // password_wo - computed: false, optional: true, required: false
+  private _passwordWo?: string; 
+  public get passwordWo() {
+    return this.getStringAttribute('password_wo');
+  }
+  public set passwordWo(value: string) {
+    this._passwordWo = value;
+  }
+  public resetPasswordWo() {
+    this._passwordWo = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordWoInput() {
+    return this._passwordWo;
+  }
+
+  // password_wo_version - computed: false, optional: true, required: false
+  private _passwordWoVersion?: number; 
+  public get passwordWoVersion() {
+    return this.getNumberAttribute('password_wo_version');
+  }
+  public set passwordWoVersion(value: number) {
+    this._passwordWoVersion = value;
+  }
+  public resetPasswordWoVersion() {
+    this._passwordWoVersion = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordWoVersionInput() {
+    return this._passwordWoVersion;
+  }
+
   // project_id - computed: true, optional: true, required: false
   private _projectId?: string; 
   public get projectId() {
@@ -1305,6 +1395,22 @@ export class BaremetalServer extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get projectIdInput() {
     return this._projectId;
+  }
+
+  // protected - computed: false, optional: true, required: false
+  private _protected?: boolean | cdktf.IResolvable; 
+  public get protected() {
+    return this.getBooleanAttribute('protected');
+  }
+  public set protected(value: boolean | cdktf.IResolvable) {
+    this._protected = value;
+  }
+  public resetProtected() {
+    this._protected = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get protectedInput() {
+    return this._protected;
   }
 
   // reinstall_on_config_changes - computed: false, optional: true, required: false
@@ -1337,6 +1443,38 @@ export class BaremetalServer extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get servicePasswordInput() {
     return this._servicePassword;
+  }
+
+  // service_password_wo - computed: false, optional: true, required: false
+  private _servicePasswordWo?: string; 
+  public get servicePasswordWo() {
+    return this.getStringAttribute('service_password_wo');
+  }
+  public set servicePasswordWo(value: string) {
+    this._servicePasswordWo = value;
+  }
+  public resetServicePasswordWo() {
+    this._servicePasswordWo = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get servicePasswordWoInput() {
+    return this._servicePasswordWo;
+  }
+
+  // service_password_wo_version - computed: false, optional: true, required: false
+  private _servicePasswordWoVersion?: number; 
+  public get servicePasswordWoVersion() {
+    return this.getNumberAttribute('service_password_wo_version');
+  }
+  public set servicePasswordWoVersion(value: number) {
+    this._servicePasswordWoVersion = value;
+  }
+  public resetServicePasswordWoVersion() {
+    this._servicePasswordWoVersion = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get servicePasswordWoVersionInput() {
+    return this._servicePasswordWoVersion;
   }
 
   // service_user - computed: true, optional: true, required: false
@@ -1489,6 +1627,7 @@ export class BaremetalServer extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      cloud_init: cdktf.stringToTerraform(this._cloudInit),
       description: cdktf.stringToTerraform(this._description),
       hostname: cdktf.stringToTerraform(this._hostname),
       id: cdktf.stringToTerraform(this._id),
@@ -1498,9 +1637,14 @@ export class BaremetalServer extends cdktf.TerraformResource {
       os: cdktf.stringToTerraform(this._os),
       partitioning: cdktf.stringToTerraform(this._partitioning),
       password: cdktf.stringToTerraform(this._password),
+      password_wo: cdktf.stringToTerraform(this._passwordWo),
+      password_wo_version: cdktf.numberToTerraform(this._passwordWoVersion),
       project_id: cdktf.stringToTerraform(this._projectId),
+      protected: cdktf.booleanToTerraform(this._protected),
       reinstall_on_config_changes: cdktf.booleanToTerraform(this._reinstallOnConfigChanges),
       service_password: cdktf.stringToTerraform(this._servicePassword),
+      service_password_wo: cdktf.stringToTerraform(this._servicePasswordWo),
+      service_password_wo_version: cdktf.numberToTerraform(this._servicePasswordWoVersion),
       service_user: cdktf.stringToTerraform(this._serviceUser),
       ssh_key_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._sshKeyIds),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
@@ -1515,6 +1659,12 @@ export class BaremetalServer extends cdktf.TerraformResource {
 
   protected synthesizeHclAttributes(): { [name: string]: any } {
     const attrs = {
+      cloud_init: {
+        value: cdktf.stringToHclTerraform(this._cloudInit),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
       description: {
         value: cdktf.stringToHclTerraform(this._description),
         isBlock: false,
@@ -1569,11 +1719,29 @@ export class BaremetalServer extends cdktf.TerraformResource {
         type: "simple",
         storageClassType: "string",
       },
+      password_wo: {
+        value: cdktf.stringToHclTerraform(this._passwordWo),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      password_wo_version: {
+        value: cdktf.numberToHclTerraform(this._passwordWoVersion),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
+      },
       project_id: {
         value: cdktf.stringToHclTerraform(this._projectId),
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      protected: {
+        value: cdktf.booleanToHclTerraform(this._protected),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "boolean",
       },
       reinstall_on_config_changes: {
         value: cdktf.booleanToHclTerraform(this._reinstallOnConfigChanges),
@@ -1586,6 +1754,18 @@ export class BaremetalServer extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      service_password_wo: {
+        value: cdktf.stringToHclTerraform(this._servicePasswordWo),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      service_password_wo_version: {
+        value: cdktf.numberToHclTerraform(this._servicePasswordWoVersion),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
       },
       service_user: {
         value: cdktf.stringToHclTerraform(this._serviceUser),

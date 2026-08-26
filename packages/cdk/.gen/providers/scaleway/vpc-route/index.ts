@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface VpcRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The route description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#description VpcRoute#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#description VpcRoute#description}
   */
   readonly description?: string;
   /**
   * The destination IP or IP range of the route
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#destination VpcRoute#destination}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#destination VpcRoute#destination}
   */
   readonly destination?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#id VpcRoute#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#id VpcRoute#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,37 +29,43 @@ export interface VpcRouteConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the nexthop private network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#nexthop_private_network_id VpcRoute#nexthop_private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#nexthop_private_network_id VpcRoute#nexthop_private_network_id}
   */
   readonly nexthopPrivateNetworkId?: string;
   /**
   * The ID of the nexthop resource
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#nexthop_resource_id VpcRoute#nexthop_resource_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#nexthop_resource_id VpcRoute#nexthop_resource_id}
   */
   readonly nexthopResourceId?: string;
   /**
+  * The ID of the nexthop VPC Connector
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#nexthop_vpc_connector_id VpcRoute#nexthop_vpc_connector_id}
+  */
+  readonly nexthopVpcConnectorId?: string;
+  /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#region VpcRoute#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#region VpcRoute#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the Route
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#tags VpcRoute#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#tags VpcRoute#tags}
   */
   readonly tags?: string[];
   /**
   * VPC ID the Route belongs to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#vpc_id VpcRoute#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#vpc_id VpcRoute#vpc_id}
   */
   readonly vpcId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route scaleway_vpc_route}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route scaleway_vpc_route}
 */
 export class VpcRoute extends cdktf.TerraformResource {
 
@@ -75,7 +81,7 @@ export class VpcRoute extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a VpcRoute resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the VpcRoute to import
-  * @param importFromId The id of the existing VpcRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing VpcRoute that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the VpcRoute to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +93,7 @@ export class VpcRoute extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/vpc_route scaleway_vpc_route} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_route scaleway_vpc_route} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +104,8 @@ export class VpcRoute extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_route',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -114,6 +120,7 @@ export class VpcRoute extends cdktf.TerraformResource {
     this._id = config.id;
     this._nexthopPrivateNetworkId = config.nexthopPrivateNetworkId;
     this._nexthopResourceId = config.nexthopResourceId;
+    this._nexthopVpcConnectorId = config.nexthopVpcConnectorId;
     this._region = config.region;
     this._tags = config.tags;
     this._vpcId = config.vpcId;
@@ -128,7 +135,7 @@ export class VpcRoute extends cdktf.TerraformResource {
     return this.getStringAttribute('created_at');
   }
 
-  // description - computed: false, optional: true, required: false
+  // description - computed: true, optional: true, required: false
   private _description?: string; 
   public get description() {
     return this.getStringAttribute('description');
@@ -208,6 +215,22 @@ export class VpcRoute extends cdktf.TerraformResource {
     return this._nexthopResourceId;
   }
 
+  // nexthop_vpc_connector_id - computed: false, optional: true, required: false
+  private _nexthopVpcConnectorId?: string; 
+  public get nexthopVpcConnectorId() {
+    return this.getStringAttribute('nexthop_vpc_connector_id');
+  }
+  public set nexthopVpcConnectorId(value: string) {
+    this._nexthopVpcConnectorId = value;
+  }
+  public resetNexthopVpcConnectorId() {
+    this._nexthopVpcConnectorId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nexthopVpcConnectorIdInput() {
+    return this._nexthopVpcConnectorId;
+  }
+
   // region - computed: true, optional: true, required: false
   private _region?: string; 
   public get region() {
@@ -222,6 +245,11 @@ export class VpcRoute extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // tags - computed: false, optional: true, required: false
@@ -269,6 +297,7 @@ export class VpcRoute extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       nexthop_private_network_id: cdktf.stringToTerraform(this._nexthopPrivateNetworkId),
       nexthop_resource_id: cdktf.stringToTerraform(this._nexthopResourceId),
+      nexthop_vpc_connector_id: cdktf.stringToTerraform(this._nexthopVpcConnectorId),
       region: cdktf.stringToTerraform(this._region),
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       vpc_id: cdktf.stringToTerraform(this._vpcId),
@@ -303,6 +332,12 @@ export class VpcRoute extends cdktf.TerraformResource {
       },
       nexthop_resource_id: {
         value: cdktf.stringToHclTerraform(this._nexthopResourceId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      nexthop_vpc_connector_id: {
+        value: cdktf.stringToHclTerraform(this._nexthopVpcConnectorId),
         isBlock: false,
         type: "simple",
         storageClassType: "string",

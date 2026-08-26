@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInstanceServersConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#id DataScalewayInstanceServers#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#id DataScalewayInstanceServers#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,27 +17,107 @@ export interface DataScalewayInstanceServersConfig extends cdktf.TerraformMetaAr
   /**
   * Servers with a name like it are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#name DataScalewayInstanceServers#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#name DataScalewayInstanceServers#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#project_id DataScalewayInstanceServers#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#project_id DataScalewayInstanceServers#project_id}
   */
   readonly projectId?: string;
   /**
   * Servers with these exact tags are listed.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#tags DataScalewayInstanceServers#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#tags DataScalewayInstanceServers#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#zone DataScalewayInstanceServers#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#zone DataScalewayInstanceServers#zone}
   */
   readonly zone?: string;
+}
+export interface DataScalewayInstanceServersServersPrivateIps {
+}
+
+export function dataScalewayInstanceServersServersPrivateIpsToTerraform(struct?: DataScalewayInstanceServersServersPrivateIps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayInstanceServersServersPrivateIpsToHclTerraform(struct?: DataScalewayInstanceServersServersPrivateIps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayInstanceServersServersPrivateIpsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayInstanceServersServersPrivateIps | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayInstanceServersServersPrivateIps | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // address - computed: true, optional: false, required: false
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+}
+
+export class DataScalewayInstanceServersServersPrivateIpsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayInstanceServersServersPrivateIpsOutputReference {
+    return new DataScalewayInstanceServersServersPrivateIpsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
 }
 export interface DataScalewayInstanceServersServersPublicIps {
 }
@@ -95,9 +175,34 @@ export class DataScalewayInstanceServersServersPublicIpsOutputReference extends 
     return this.getStringAttribute('address');
   }
 
+  // dynamic - computed: true, optional: false, required: false
+  public get dynamic() {
+    return this.getBooleanAttribute('dynamic');
+  }
+
+  // family - computed: true, optional: false, required: false
+  public get family() {
+    return this.getStringAttribute('family');
+  }
+
+  // gateway - computed: true, optional: false, required: false
+  public get gateway() {
+    return this.getStringAttribute('gateway');
+  }
+
   // id - computed: true, optional: false, required: false
   public get id() {
     return this.getStringAttribute('id');
+  }
+
+  // netmask - computed: true, optional: false, required: false
+  public get netmask() {
+    return this.getStringAttribute('netmask');
+  }
+
+  // provisioning_mode - computed: true, optional: false, required: false
+  public get provisioningMode() {
+    return this.getStringAttribute('provisioning_mode');
   }
 }
 
@@ -185,11 +290,6 @@ export class DataScalewayInstanceServersServersOutputReference extends cdktf.Com
     return this.getBooleanAttribute('enable_dynamic_ip');
   }
 
-  // enable_ipv6 - computed: true, optional: false, required: false
-  public get enableIpv6() {
-    return this.getBooleanAttribute('enable_ipv6');
-  }
-
   // id - computed: true, optional: false, required: false
   public get id() {
     return this.getStringAttribute('id');
@@ -198,21 +298,6 @@ export class DataScalewayInstanceServersServersOutputReference extends cdktf.Com
   // image - computed: true, optional: false, required: false
   public get image() {
     return this.getStringAttribute('image');
-  }
-
-  // ipv6_address - computed: true, optional: false, required: false
-  public get ipv6Address() {
-    return this.getStringAttribute('ipv6_address');
-  }
-
-  // ipv6_gateway - computed: true, optional: false, required: false
-  public get ipv6Gateway() {
-    return this.getStringAttribute('ipv6_gateway');
-  }
-
-  // ipv6_prefix_length - computed: true, optional: false, required: false
-  public get ipv6PrefixLength() {
-    return this.getNumberAttribute('ipv6_prefix_length');
   }
 
   // name - computed: true, optional: false, required: false
@@ -235,19 +320,15 @@ export class DataScalewayInstanceServersServersOutputReference extends cdktf.Com
     return this.getBooleanAttribute('placement_group_policy_respected');
   }
 
-  // private_ip - computed: true, optional: false, required: false
-  public get privateIp() {
-    return this.getStringAttribute('private_ip');
+  // private_ips - computed: true, optional: false, required: false
+  private _privateIps = new DataScalewayInstanceServersServersPrivateIpsList(this, "private_ips", false);
+  public get privateIps() {
+    return this._privateIps;
   }
 
   // project_id - computed: true, optional: false, required: false
   public get projectId() {
     return this.getStringAttribute('project_id');
-  }
-
-  // public_ip - computed: true, optional: false, required: false
-  public get publicIp() {
-    return this.getStringAttribute('public_ip');
   }
 
   // public_ips - computed: true, optional: false, required: false
@@ -302,7 +383,7 @@ export class DataScalewayInstanceServersServersList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers scaleway_instance_servers}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers scaleway_instance_servers}
 */
 export class DataScalewayInstanceServers extends cdktf.TerraformDataSource {
 
@@ -318,7 +399,7 @@ export class DataScalewayInstanceServers extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInstanceServers resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInstanceServers to import
-  * @param importFromId The id of the existing DataScalewayInstanceServers that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInstanceServers that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInstanceServers to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -330,7 +411,7 @@ export class DataScalewayInstanceServers extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_servers scaleway_instance_servers} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_servers scaleway_instance_servers} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -341,8 +422,8 @@ export class DataScalewayInstanceServers extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_servers',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

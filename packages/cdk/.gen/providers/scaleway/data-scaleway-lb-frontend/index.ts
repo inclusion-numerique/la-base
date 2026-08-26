@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayLbFrontendConfig extends cdktf.TerraformMetaArgumen
   /**
   * The ID of the frontend
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend#frontend_id DataScalewayLbFrontend#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend#frontend_id DataScalewayLbFrontend#frontend_id}
   */
   readonly frontendId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend#id DataScalewayLbFrontend#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend#id DataScalewayLbFrontend#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,13 +23,13 @@ export interface DataScalewayLbFrontendConfig extends cdktf.TerraformMetaArgumen
   /**
   * The load-balancer ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend#lb_id DataScalewayLbFrontend#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend#lb_id DataScalewayLbFrontend#lb_id}
   */
   readonly lbId?: string;
   /**
   * The name of the frontend
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend#name DataScalewayLbFrontend#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend#name DataScalewayLbFrontend#name}
   */
   readonly name?: string;
 }
@@ -403,7 +403,7 @@ export class DataScalewayLbFrontendAclList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend scaleway_lb_frontend}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend scaleway_lb_frontend}
 */
 export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
 
@@ -419,7 +419,7 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayLbFrontend resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayLbFrontend to import
-  * @param importFromId The id of the existing DataScalewayLbFrontend that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayLbFrontend that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayLbFrontend to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -431,7 +431,7 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/lb_frontend scaleway_lb_frontend} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/lb_frontend scaleway_lb_frontend} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -442,8 +442,8 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_lb_frontend',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -487,6 +487,16 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   // connection_rate_limit - computed: true, optional: false, required: false
   public get connectionRateLimit() {
     return this.getNumberAttribute('connection_rate_limit');
+  }
+
+  // created_at - computed: true, optional: false, required: false
+  public get createdAt() {
+    return this.getStringAttribute('created_at');
+  }
+
+  // enable_access_logs - computed: true, optional: false, required: false
+  public get enableAccessLogs() {
+    return this.getBooleanAttribute('enable_access_logs');
   }
 
   // enable_http3 - computed: true, optional: false, required: false
@@ -571,6 +581,11 @@ export class DataScalewayLbFrontend extends cdktf.TerraformDataSource {
   // timeout_client - computed: true, optional: false, required: false
   public get timeoutClient() {
     return this.getStringAttribute('timeout_client');
+  }
+
+  // updated_at - computed: true, optional: false, required: false
+  public get updatedAt() {
+    return this.getStringAttribute('updated_at');
   }
 
   // =========

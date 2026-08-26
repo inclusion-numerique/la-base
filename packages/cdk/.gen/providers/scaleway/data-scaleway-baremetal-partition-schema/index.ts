@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DataScalewayBaremetalPartitionSchemaConfig extends cdktf.Terraf
   /**
   * Mount point must be an absolute path
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#ext_4_mountpoint DataScalewayBaremetalPartitionSchema#ext_4_mountpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#ext_4_mountpoint DataScalewayBaremetalPartitionSchema#ext_4_mountpoint}
   */
   readonly ext4Mountpoint?: string;
   /**
   * set extra ext_4 partition
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#extra_partition DataScalewayBaremetalPartitionSchema#extra_partition}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#extra_partition DataScalewayBaremetalPartitionSchema#extra_partition}
   */
   readonly extraPartition?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#id DataScalewayBaremetalPartitionSchema#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#id DataScalewayBaremetalPartitionSchema#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,25 +29,25 @@ export interface DataScalewayBaremetalPartitionSchemaConfig extends cdktf.Terraf
   /**
   * ID of the server offer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#offer_id DataScalewayBaremetalPartitionSchema#offer_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#offer_id DataScalewayBaremetalPartitionSchema#offer_id}
   */
   readonly offerId: string;
   /**
   * The base image of the server
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#os_id DataScalewayBaremetalPartitionSchema#os_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#os_id DataScalewayBaremetalPartitionSchema#os_id}
   */
   readonly osId: string;
   /**
   * set swap partition
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#swap DataScalewayBaremetalPartitionSchema#swap}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#swap DataScalewayBaremetalPartitionSchema#swap}
   */
   readonly swap?: boolean | cdktf.IResolvable;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema}
 */
 export class DataScalewayBaremetalPartitionSchema extends cdktf.TerraformDataSource {
 
@@ -63,7 +63,7 @@ export class DataScalewayBaremetalPartitionSchema extends cdktf.TerraformDataSou
   * Generates CDKTF code for importing a DataScalewayBaremetalPartitionSchema resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayBaremetalPartitionSchema to import
-  * @param importFromId The id of the existing DataScalewayBaremetalPartitionSchema that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayBaremetalPartitionSchema that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayBaremetalPartitionSchema to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -75,7 +75,7 @@ export class DataScalewayBaremetalPartitionSchema extends cdktf.TerraformDataSou
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/baremetal_partition_schema scaleway_baremetal_partition_schema} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -86,8 +86,8 @@ export class DataScalewayBaremetalPartitionSchema extends cdktf.TerraformDataSou
       terraformResourceType: 'scaleway_baremetal_partition_schema',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

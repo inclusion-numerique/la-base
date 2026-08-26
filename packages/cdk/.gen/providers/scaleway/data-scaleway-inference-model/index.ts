@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInferenceModelConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model#id DataScalewayInferenceModel#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model#id DataScalewayInferenceModel#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayInferenceModelConfig extends cdktf.TerraformMetaArg
   /**
   * The ID of the model
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model#model_id DataScalewayInferenceModel#model_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model#model_id DataScalewayInferenceModel#model_id}
   */
   readonly modelId?: string;
   /**
   * The name of the model
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model#name DataScalewayInferenceModel#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model#name DataScalewayInferenceModel#name}
   */
   readonly name?: string;
   /**
   * The HTTPS URL to the model archive or repository. Typically, this is a Hugging Face repository URL (e.g., `https://huggingface.co/your-org/your-model`). The URL must be publicly accessible or require a valid secret for authentication.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model#url DataScalewayInferenceModel#url}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model#url DataScalewayInferenceModel#url}
   */
   readonly url?: string;
 }
@@ -201,7 +201,7 @@ export class DataScalewayInferenceModelNodesSupportList extends cdktf.ComplexLis
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model scaleway_inference_model}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model scaleway_inference_model}
 */
 export class DataScalewayInferenceModel extends cdktf.TerraformDataSource {
 
@@ -217,7 +217,7 @@ export class DataScalewayInferenceModel extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInferenceModel resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInferenceModel to import
-  * @param importFromId The id of the existing DataScalewayInferenceModel that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInferenceModel that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInferenceModel to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -229,7 +229,7 @@ export class DataScalewayInferenceModel extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/inference_model scaleway_inference_model} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/inference_model scaleway_inference_model} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -240,8 +240,8 @@ export class DataScalewayInferenceModel extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_inference_model',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -348,6 +348,16 @@ export class DataScalewayInferenceModel extends cdktf.TerraformDataSource {
   // secret - computed: true, optional: false, required: false
   public get secret() {
     return this.getStringAttribute('secret');
+  }
+
+  // secret_wo - computed: true, optional: false, required: false
+  public get secretWo() {
+    return this.getStringAttribute('secret_wo');
+  }
+
+  // secret_wo_version - computed: true, optional: false, required: false
+  public get secretWoVersion() {
+    return this.getNumberAttribute('secret_wo_version');
   }
 
   // size_bytes - computed: true, optional: false, required: false

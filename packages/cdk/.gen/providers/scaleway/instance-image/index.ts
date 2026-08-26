@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface InstanceImageConfig extends cdktf.TerraformMetaArguments {
   /**
   * The IDs of the additional volumes attached to the image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#additional_volume_ids InstanceImage#additional_volume_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#additional_volume_ids InstanceImage#additional_volume_ids}
   */
   readonly additionalVolumeIds?: string[];
   /**
   * Architecture of the image (default = x86_64)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#architecture InstanceImage#architecture}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#architecture InstanceImage#architecture}
   */
   readonly architecture?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#id InstanceImage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#id InstanceImage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,43 +29,43 @@ export interface InstanceImageConfig extends cdktf.TerraformMetaArguments {
   /**
   * The name of the image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#name InstanceImage#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#name InstanceImage#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#project_id InstanceImage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#project_id InstanceImage#project_id}
   */
   readonly projectId?: string;
   /**
   * If true, the image will be public
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#public InstanceImage#public}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#public InstanceImage#public}
   */
   readonly public?: boolean | cdktf.IResolvable;
   /**
   * UUID of the snapshot from which the image is to be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#root_volume_id InstanceImage#root_volume_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#root_volume_id InstanceImage#root_volume_id}
   */
   readonly rootVolumeId: string;
   /**
   * List of tags ["tag1", "tag2", ...] attached to the image
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#tags InstanceImage#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#tags InstanceImage#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#zone InstanceImage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#zone InstanceImage#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#timeouts InstanceImage#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#timeouts InstanceImage#timeouts}
   */
   readonly timeouts?: InstanceImageTimeouts;
 }
@@ -120,39 +120,14 @@ export class InstanceImageAdditionalVolumesOutputReference extends cdktf.Complex
     }
   }
 
-  // creation_date - computed: true, optional: false, required: false
-  public get creationDate() {
-    return this.getStringAttribute('creation_date');
-  }
-
-  // export_uri - computed: true, optional: false, required: false
-  public get exportUri() {
-    return this.getStringAttribute('export_uri');
-  }
-
   // id - computed: true, optional: false, required: false
   public get id() {
     return this.getStringAttribute('id');
   }
 
-  // modification_date - computed: true, optional: false, required: false
-  public get modificationDate() {
-    return this.getStringAttribute('modification_date');
-  }
-
   // name - computed: true, optional: false, required: false
   public get name() {
     return this.getStringAttribute('name');
-  }
-
-  // organization - computed: true, optional: false, required: false
-  public get organization() {
-    return this.getStringAttribute('organization');
-  }
-
-  // project - computed: true, optional: false, required: false
-  public get project() {
-    return this.getStringAttribute('project');
   }
 
   // server - computed: true, optional: false, required: false
@@ -166,11 +141,6 @@ export class InstanceImageAdditionalVolumesOutputReference extends cdktf.Complex
     return this.getNumberAttribute('size');
   }
 
-  // state - computed: true, optional: false, required: false
-  public get state() {
-    return this.getStringAttribute('state');
-  }
-
   // tags - computed: true, optional: false, required: false
   public get tags() {
     return this.getListAttribute('tags');
@@ -179,11 +149,6 @@ export class InstanceImageAdditionalVolumesOutputReference extends cdktf.Complex
   // volume_type - computed: true, optional: false, required: false
   public get volumeType() {
     return this.getStringAttribute('volume_type');
-  }
-
-  // zone - computed: true, optional: false, required: false
-  public get zone() {
-    return this.getStringAttribute('zone');
   }
 }
 
@@ -205,25 +170,115 @@ export class InstanceImageAdditionalVolumesList extends cdktf.ComplexList {
     return new InstanceImageAdditionalVolumesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface InstanceImageRootVolume {
+}
+
+export function instanceImageRootVolumeToTerraform(struct?: InstanceImageRootVolume): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function instanceImageRootVolumeToHclTerraform(struct?: InstanceImageRootVolume): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class InstanceImageRootVolumeOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): InstanceImageRootVolume | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: InstanceImageRootVolume | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // size - computed: true, optional: false, required: false
+  public get size() {
+    return this.getNumberAttribute('size');
+  }
+
+  // volume_type - computed: true, optional: false, required: false
+  public get volumeType() {
+    return this.getStringAttribute('volume_type');
+  }
+}
+
+export class InstanceImageRootVolumeList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): InstanceImageRootVolumeOutputReference {
+    return new InstanceImageRootVolumeOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface InstanceImageTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#create InstanceImage#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#create InstanceImage#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#default InstanceImage#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#default InstanceImage#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#delete InstanceImage#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#delete InstanceImage#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#read InstanceImage#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#read InstanceImage#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#update InstanceImage#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#update InstanceImage#update}
   */
   readonly update?: string;
 }
@@ -433,7 +488,7 @@ export class InstanceImageTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image scaleway_instance_image}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image scaleway_instance_image}
 */
 export class InstanceImage extends cdktf.TerraformResource {
 
@@ -449,7 +504,7 @@ export class InstanceImage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InstanceImage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InstanceImage to import
-  * @param importFromId The id of the existing InstanceImage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InstanceImage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InstanceImage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -461,7 +516,7 @@ export class InstanceImage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/instance_image scaleway_instance_image} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/instance_image scaleway_instance_image} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -472,8 +527,8 @@ export class InstanceImage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_instance_image',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -619,6 +674,12 @@ export class InstanceImage extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get publicInput() {
     return this._public;
+  }
+
+  // root_volume - computed: true, optional: false, required: false
+  private _rootVolume = new InstanceImageRootVolumeList(this, "root_volume", false);
+  public get rootVolume() {
+    return this._rootVolume;
   }
 
   // root_volume_id - computed: false, optional: false, required: true

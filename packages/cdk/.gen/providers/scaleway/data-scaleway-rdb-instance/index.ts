@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayRdbInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#id DataScalewayRdbInstance#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#id DataScalewayRdbInstance#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayRdbInstanceConfig extends cdktf.TerraformMetaArgume
   /**
   * The ID of the RDB instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#instance_id DataScalewayRdbInstance#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#instance_id DataScalewayRdbInstance#instance_id}
   */
   readonly instanceId?: string;
   /**
   * Name of the database instance
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#name DataScalewayRdbInstance#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#name DataScalewayRdbInstance#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#project_id DataScalewayRdbInstance#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#project_id DataScalewayRdbInstance#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#region DataScalewayRdbInstance#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#region DataScalewayRdbInstance#region}
   */
   readonly region?: string;
 }
@@ -212,6 +212,111 @@ export class DataScalewayRdbInstanceLogsPolicyList extends cdktf.ComplexList {
   */
   public get(index: number): DataScalewayRdbInstanceLogsPolicyOutputReference {
     return new DataScalewayRdbInstanceLogsPolicyOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayRdbInstanceMaintenances {
+}
+
+export function dataScalewayRdbInstanceMaintenancesToTerraform(struct?: DataScalewayRdbInstanceMaintenances): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayRdbInstanceMaintenancesToHclTerraform(struct?: DataScalewayRdbInstanceMaintenances): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayRdbInstanceMaintenancesOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayRdbInstanceMaintenances | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayRdbInstanceMaintenances | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // closed_at - computed: true, optional: false, required: false
+  public get closedAt() {
+    return this.getStringAttribute('closed_at');
+  }
+
+  // forced_at - computed: true, optional: false, required: false
+  public get forcedAt() {
+    return this.getStringAttribute('forced_at');
+  }
+
+  // is_applicable - computed: true, optional: false, required: false
+  public get isApplicable() {
+    return this.getBooleanAttribute('is_applicable');
+  }
+
+  // reason - computed: true, optional: false, required: false
+  public get reason() {
+    return this.getStringAttribute('reason');
+  }
+
+  // starts_at - computed: true, optional: false, required: false
+  public get startsAt() {
+    return this.getStringAttribute('starts_at');
+  }
+
+  // status - computed: true, optional: false, required: false
+  public get status() {
+    return this.getStringAttribute('status');
+  }
+
+  // stops_at - computed: true, optional: false, required: false
+  public get stopsAt() {
+    return this.getStringAttribute('stops_at');
+  }
+}
+
+export class DataScalewayRdbInstanceMaintenancesList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayRdbInstanceMaintenancesOutputReference {
+    return new DataScalewayRdbInstanceMaintenancesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
 export interface DataScalewayRdbInstancePrivateIp {
@@ -494,9 +599,99 @@ export class DataScalewayRdbInstanceReadReplicasList extends cdktf.ComplexList {
     return new DataScalewayRdbInstanceReadReplicasOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataScalewayRdbInstanceUpgradableVersions {
+}
+
+export function dataScalewayRdbInstanceUpgradableVersionsToTerraform(struct?: DataScalewayRdbInstanceUpgradableVersions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayRdbInstanceUpgradableVersionsToHclTerraform(struct?: DataScalewayRdbInstanceUpgradableVersions): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayRdbInstanceUpgradableVersionsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayRdbInstanceUpgradableVersions | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayRdbInstanceUpgradableVersions | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // minor_version - computed: true, optional: false, required: false
+  public get minorVersion() {
+    return this.getStringAttribute('minor_version');
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // version - computed: true, optional: false, required: false
+  public get version() {
+    return this.getStringAttribute('version');
+  }
+}
+
+export class DataScalewayRdbInstanceUpgradableVersionsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayRdbInstanceUpgradableVersionsOutputReference {
+    return new DataScalewayRdbInstanceUpgradableVersionsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance scaleway_rdb_instance}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance scaleway_rdb_instance}
 */
 export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
 
@@ -512,7 +707,7 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayRdbInstance resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayRdbInstance to import
-  * @param importFromId The id of the existing DataScalewayRdbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayRdbInstance that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayRdbInstance to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -524,7 +719,7 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/rdb_instance scaleway_rdb_instance} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/rdb_instance scaleway_rdb_instance} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -535,8 +730,8 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_rdb_instance',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -657,6 +852,12 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
     return this._logsPolicy;
   }
 
+  // maintenances - computed: true, optional: false, required: false
+  private _maintenances = new DataScalewayRdbInstanceMaintenancesList(this, "maintenances", false);
+  public get maintenances() {
+    return this._maintenances;
+  }
+
   // name - computed: false, optional: true, required: false
   private _name?: string; 
   public get name() {
@@ -686,6 +887,16 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
   // password - computed: true, optional: false, required: false
   public get password() {
     return this.getStringAttribute('password');
+  }
+
+  // password_wo - computed: true, optional: false, required: false
+  public get passwordWo() {
+    return this.getStringAttribute('password_wo');
+  }
+
+  // password_wo_version - computed: true, optional: false, required: false
+  public get passwordWoVersion() {
+    return this.getNumberAttribute('password_wo_version');
   }
 
   // private_ip - computed: true, optional: false, required: false
@@ -752,6 +963,12 @@ export class DataScalewayRdbInstance extends cdktf.TerraformDataSource {
   // tags - computed: true, optional: false, required: false
   public get tags() {
     return this.getListAttribute('tags');
+  }
+
+  // upgradable_versions - computed: true, optional: false, required: false
+  private _upgradableVersions = new DataScalewayRdbInstanceUpgradableVersionsList(this, "upgradable_versions", false);
+  public get upgradableVersions() {
+    return this._upgradableVersions;
   }
 
   // user_name - computed: true, optional: false, required: false

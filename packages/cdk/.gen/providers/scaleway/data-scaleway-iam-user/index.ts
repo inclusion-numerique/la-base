@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayIamUserConfig extends cdktf.TerraformMetaArguments 
   /**
   * The email address of the IAM user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#email DataScalewayIamUser#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#email DataScalewayIamUser#email}
   */
   readonly email?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#id DataScalewayIamUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#id DataScalewayIamUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface DataScalewayIamUserConfig extends cdktf.TerraformMetaArguments 
   /**
   * The organization_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#organization_id DataScalewayIamUser#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#organization_id DataScalewayIamUser#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The tags associated with the user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#tags DataScalewayIamUser#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#tags DataScalewayIamUser#tags}
   */
   readonly tags?: string[];
   /**
   * The ID of the IAM user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#user_id DataScalewayIamUser#user_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#user_id DataScalewayIamUser#user_id}
   */
   readonly userId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user scaleway_iam_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user scaleway_iam_user}
 */
 export class DataScalewayIamUser extends cdktf.TerraformDataSource {
 
@@ -57,7 +57,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayIamUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayIamUser to import
-  * @param importFromId The id of the existing DataScalewayIamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayIamUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayIamUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -69,7 +69,7 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/iam_user scaleway_iam_user} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_user scaleway_iam_user} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -80,8 +80,8 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iam_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -102,6 +102,21 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // ATTRIBUTES
   // ==========
 
+  // account_root_user_id - computed: true, optional: false, required: false
+  public get accountRootUserId() {
+    return this.getStringAttribute('account_root_user_id');
+  }
+
+  // created_at - computed: true, optional: false, required: false
+  public get createdAt() {
+    return this.getStringAttribute('created_at');
+  }
+
+  // deletable - computed: true, optional: false, required: false
+  public get deletable() {
+    return this.getBooleanAttribute('deletable');
+  }
+
   // email - computed: false, optional: true, required: false
   private _email?: string; 
   public get email() {
@@ -116,6 +131,11 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get emailInput() {
     return this._email;
+  }
+
+  // first_name - computed: true, optional: false, required: false
+  public get firstName() {
+    return this.getStringAttribute('first_name');
   }
 
   // id - computed: true, optional: true, required: false
@@ -134,6 +154,31 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
     return this._id;
   }
 
+  // last_login_at - computed: true, optional: false, required: false
+  public get lastLoginAt() {
+    return this.getStringAttribute('last_login_at');
+  }
+
+  // last_name - computed: true, optional: false, required: false
+  public get lastName() {
+    return this.getStringAttribute('last_name');
+  }
+
+  // locale - computed: true, optional: false, required: false
+  public get locale() {
+    return this.getStringAttribute('locale');
+  }
+
+  // locked - computed: true, optional: false, required: false
+  public get locked() {
+    return this.getBooleanAttribute('locked');
+  }
+
+  // mfa - computed: true, optional: false, required: false
+  public get mfa() {
+    return this.getBooleanAttribute('mfa');
+  }
+
   // organization_id - computed: false, optional: true, required: false
   private _organizationId?: string; 
   public get organizationId() {
@@ -148,6 +193,41 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get organizationIdInput() {
     return this._organizationId;
+  }
+
+  // password - computed: true, optional: false, required: false
+  public get password() {
+    return this.getStringAttribute('password');
+  }
+
+  // password_wo - computed: true, optional: false, required: false
+  public get passwordWo() {
+    return this.getStringAttribute('password_wo');
+  }
+
+  // password_wo_version - computed: true, optional: false, required: false
+  public get passwordWoVersion() {
+    return this.getNumberAttribute('password_wo_version');
+  }
+
+  // phone_number - computed: true, optional: false, required: false
+  public get phoneNumber() {
+    return this.getStringAttribute('phone_number');
+  }
+
+  // send_password_email - computed: true, optional: false, required: false
+  public get sendPasswordEmail() {
+    return this.getBooleanAttribute('send_password_email');
+  }
+
+  // send_welcome_email - computed: true, optional: false, required: false
+  public get sendWelcomeEmail() {
+    return this.getBooleanAttribute('send_welcome_email');
+  }
+
+  // status - computed: true, optional: false, required: false
+  public get status() {
+    return this.getStringAttribute('status');
   }
 
   // tags - computed: false, optional: true, required: false
@@ -166,6 +246,16 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
     return this._tags;
   }
 
+  // type - computed: true, optional: false, required: false
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+
+  // updated_at - computed: true, optional: false, required: false
+  public get updatedAt() {
+    return this.getStringAttribute('updated_at');
+  }
+
   // user_id - computed: false, optional: true, required: false
   private _userId?: string; 
   public get userId() {
@@ -180,6 +270,11 @@ export class DataScalewayIamUser extends cdktf.TerraformDataSource {
   // Temporarily expose input value. Use with caution.
   public get userIdInput() {
     return this._userId;
+  }
+
+  // username - computed: true, optional: false, required: false
+  public get username() {
+    return this.getStringAttribute('username');
   }
 
   // =========
