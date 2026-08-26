@@ -113,21 +113,41 @@ Cypress.Commands.add('dsfrStylesShouldBeLoaded', () => {
   cy.get('body').should('have.css', 'color', 'rgb(58, 58, 58)')
 })
 
+// These assertions wait for dsfr to boot on the client, which is not an
+// instant invariant: its duration depends on machine load. Cypress' 4s default
+// is too tight in CI, where three spec runners share the container with next,
+// maildev and postgres — hence intermittent failures spread across specs.
+// A generous budget costs nothing on green runs, as each assertion resolves as
+// soon as it holds; it only moves the threshold at which we call it a failure.
+const dsfrBootTimeout = 30_000
+
 Cypress.Commands.add('dsfrShouldBeStarted', () => {
-  cy.get('html').should('have.attr', 'data-fr-js', 'true')
+  cy.get('html', { timeout: dsfrBootTimeout }).should(
+    'have.attr',
+    'data-fr-js',
+    'true',
+  )
 })
 
 Cypress.Commands.add('dsfrModalsShouldBeBound', () => {
   cy.get('dialog.fr-modal').each((modal) => {
     // TODO There is a regression in the current version of dsfr where this is not sufficient and needs a timeout
-    cy.wrap(modal).should('have.attr', 'data-fr-js-modal', 'true')
+    cy.wrap(modal, { timeout: dsfrBootTimeout }).should(
+      'have.attr',
+      'data-fr-js-modal',
+      'true',
+    )
     cy.wait(120)
   })
 })
 Cypress.Commands.add('dsfrCollapsesShouldBeBound', () => {
   cy.get('.fr-collapse').each((modal) => {
     // TODO There is a regression in the current version of dsfr where this is not sufficient and needs a timeout
-    cy.wrap(modal).should('have.attr', 'data-fr-js-collapse', 'true')
+    cy.wrap(modal, { timeout: dsfrBootTimeout }).should(
+      'have.attr',
+      'data-fr-js-collapse',
+      'true',
+    )
     cy.wait(120)
   })
 })
