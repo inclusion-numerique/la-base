@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,19 +8,31 @@ import * as cdktf from 'cdktf';
 
 export interface SecretVersionConfig extends cdktf.TerraformMetaArguments {
   /**
-  * The data payload of your secret version.
+  * The raw data payload of the secret version. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#data SecretVersion#data}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#data SecretVersion#data}
   */
-  readonly data: string;
+  readonly data?: string;
+  /**
+  * The raw data payload of your secret version in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Must not exceed 64KiB in size (e.g. `my-secret-version-payload`). Only one of `data` or `data_wo` should be specified. `data_wo` will not be set in the Terraform state. To update the `data_wo`, you must also update the `data_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#data_wo SecretVersion#data_wo}
+  */
+  readonly dataWo?: string;
+  /**
+  * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) data. To update the `data_wo`, you must also update the `data_wo_version`.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#data_wo_version SecretVersion#data_wo_version}
+  */
+  readonly dataWoVersion?: number;
   /**
   * Description of the secret version
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#description SecretVersion#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#description SecretVersion#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#id SecretVersion#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#id SecretVersion#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,25 +41,25 @@ export interface SecretVersionConfig extends cdktf.TerraformMetaArguments {
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#region SecretVersion#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#region SecretVersion#region}
   */
   readonly region?: string;
   /**
   * The secret ID associated with this version
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#secret_id SecretVersion#secret_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#secret_id SecretVersion#secret_id}
   */
   readonly secretId: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#timeouts SecretVersion#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#timeouts SecretVersion#timeouts}
   */
   readonly timeouts?: SecretVersionTimeouts;
 }
 export interface SecretVersionTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#default SecretVersion#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#default SecretVersion#default}
   */
   readonly default?: string;
 }
@@ -141,7 +153,7 @@ export class SecretVersionTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version scaleway_secret_version}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version scaleway_secret_version}
 */
 export class SecretVersion extends cdktf.TerraformResource {
 
@@ -157,7 +169,7 @@ export class SecretVersion extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a SecretVersion resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the SecretVersion to import
-  * @param importFromId The id of the existing SecretVersion that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing SecretVersion that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the SecretVersion to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -169,7 +181,7 @@ export class SecretVersion extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/secret_version scaleway_secret_version} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/secret_version scaleway_secret_version} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -180,8 +192,8 @@ export class SecretVersion extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_secret_version',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -192,6 +204,8 @@ export class SecretVersion extends cdktf.TerraformResource {
       forEach: config.forEach
     });
     this._data = config.data;
+    this._dataWo = config.dataWo;
+    this._dataWoVersion = config.dataWoVersion;
     this._description = config.description;
     this._id = config.id;
     this._region = config.region;
@@ -208,7 +222,7 @@ export class SecretVersion extends cdktf.TerraformResource {
     return this.getStringAttribute('created_at');
   }
 
-  // data - computed: false, optional: false, required: true
+  // data - computed: false, optional: true, required: false
   private _data?: string; 
   public get data() {
     return this.getStringAttribute('data');
@@ -216,9 +230,44 @@ export class SecretVersion extends cdktf.TerraformResource {
   public set data(value: string) {
     this._data = value;
   }
+  public resetData() {
+    this._data = undefined;
+  }
   // Temporarily expose input value. Use with caution.
   public get dataInput() {
     return this._data;
+  }
+
+  // data_wo - computed: false, optional: true, required: false
+  private _dataWo?: string; 
+  public get dataWo() {
+    return this.getStringAttribute('data_wo');
+  }
+  public set dataWo(value: string) {
+    this._dataWo = value;
+  }
+  public resetDataWo() {
+    this._dataWo = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dataWoInput() {
+    return this._dataWo;
+  }
+
+  // data_wo_version - computed: false, optional: true, required: false
+  private _dataWoVersion?: number; 
+  public get dataWoVersion() {
+    return this.getNumberAttribute('data_wo_version');
+  }
+  public set dataWoVersion(value: number) {
+    this._dataWoVersion = value;
+  }
+  public resetDataWoVersion() {
+    this._dataWoVersion = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dataWoVersionInput() {
+    return this._dataWoVersion;
   }
 
   // description - computed: false, optional: true, required: false
@@ -287,6 +336,11 @@ export class SecretVersion extends cdktf.TerraformResource {
     return this._secretId;
   }
 
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
+  }
+
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
@@ -320,6 +374,8 @@ export class SecretVersion extends cdktf.TerraformResource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       data: cdktf.stringToTerraform(this._data),
+      data_wo: cdktf.stringToTerraform(this._dataWo),
+      data_wo_version: cdktf.numberToTerraform(this._dataWoVersion),
       description: cdktf.stringToTerraform(this._description),
       id: cdktf.stringToTerraform(this._id),
       region: cdktf.stringToTerraform(this._region),
@@ -335,6 +391,18 @@ export class SecretVersion extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      data_wo: {
+        value: cdktf.stringToHclTerraform(this._dataWo),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
+      data_wo_version: {
+        value: cdktf.numberToHclTerraform(this._dataWoVersion),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "number",
       },
       description: {
         value: cdktf.stringToHclTerraform(this._description),

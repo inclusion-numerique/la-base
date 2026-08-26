@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,13 @@ import * as cdktf from 'cdktf';
 
 export interface EdgeServicesRouteStageConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#id EdgeServicesRouteStage#id}
+  * The ID of the backend stage HTTP requests should be forwarded to when no rules are matched
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#backend_stage_id EdgeServicesRouteStage#backend_stage_id}
+  */
+  readonly backendStageId?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#id EdgeServicesRouteStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,39 +23,154 @@ export interface EdgeServicesRouteStageConfig extends cdktf.TerraformMetaArgumen
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#pipeline_id EdgeServicesRouteStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#pipeline_id EdgeServicesRouteStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#project_id EdgeServicesRouteStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#project_id EdgeServicesRouteStage#project_id}
   */
   readonly projectId?: string;
   /**
   * The ID of the WAF stage HTTP requests should be forwarded to when no rules are matched
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#waf_stage_id EdgeServicesRouteStage#waf_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#waf_stage_id EdgeServicesRouteStage#waf_stage_id}
   */
   readonly wafStageId?: string;
   /**
   * rule block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#rule EdgeServicesRouteStage#rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#rule EdgeServicesRouteStage#rule}
   */
   readonly rule?: EdgeServicesRouteStageRule[] | cdktf.IResolvable;
+}
+export interface EdgeServicesRouteStageRuleRuleHttpMatchHostFilter {
+  /**
+  * The type of filter to match for the host path
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#host_filter_type EdgeServicesRouteStage#host_filter_type}
+  */
+  readonly hostFilterType: string;
+  /**
+  * The value to be matched for the host path
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#value EdgeServicesRouteStage#value}
+  */
+  readonly value: string;
+}
+
+export function edgeServicesRouteStageRuleRuleHttpMatchHostFilterToTerraform(struct?: EdgeServicesRouteStageRuleRuleHttpMatchHostFilterOutputReference | EdgeServicesRouteStageRuleRuleHttpMatchHostFilter): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    host_filter_type: cdktf.stringToTerraform(struct!.hostFilterType),
+    value: cdktf.stringToTerraform(struct!.value),
+  }
+}
+
+
+export function edgeServicesRouteStageRuleRuleHttpMatchHostFilterToHclTerraform(struct?: EdgeServicesRouteStageRuleRuleHttpMatchHostFilterOutputReference | EdgeServicesRouteStageRuleRuleHttpMatchHostFilter): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    host_filter_type: {
+      value: cdktf.stringToHclTerraform(struct!.hostFilterType),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    value: {
+      value: cdktf.stringToHclTerraform(struct!.value),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class EdgeServicesRouteStageRuleRuleHttpMatchHostFilterOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): EdgeServicesRouteStageRuleRuleHttpMatchHostFilter | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._hostFilterType !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.hostFilterType = this._hostFilterType;
+    }
+    if (this._value !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.value = this._value;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: EdgeServicesRouteStageRuleRuleHttpMatchHostFilter | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._hostFilterType = undefined;
+      this._value = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._hostFilterType = value.hostFilterType;
+      this._value = value.value;
+    }
+  }
+
+  // host_filter_type - computed: false, optional: false, required: true
+  private _hostFilterType?: string; 
+  public get hostFilterType() {
+    return this.getStringAttribute('host_filter_type');
+  }
+  public set hostFilterType(value: string) {
+    this._hostFilterType = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hostFilterTypeInput() {
+    return this._hostFilterType;
+  }
+
+  // value - computed: false, optional: false, required: true
+  private _value?: string; 
+  public get value() {
+    return this.getStringAttribute('value');
+  }
+  public set value(value: string) {
+    this._value = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get valueInput() {
+    return this._value;
+  }
 }
 export interface EdgeServicesRouteStageRuleRuleHttpMatchPathFilter {
   /**
   * The type of filter to match for the HTTP URL path. For now, all path filters must be written in regex and use the `regex` type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#path_filter_type EdgeServicesRouteStage#path_filter_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#path_filter_type EdgeServicesRouteStage#path_filter_type}
   */
   readonly pathFilterType: string;
   /**
   * The value to be matched for the HTTP URL path
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#value EdgeServicesRouteStage#value}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#value EdgeServicesRouteStage#value}
   */
   readonly value: string;
 }
@@ -158,13 +279,19 @@ export interface EdgeServicesRouteStageRuleRuleHttpMatch {
   /**
   * HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are `get`, `post`, `put`, `patch`, `delete`, `head`, `options`. All methods will match if none is provided
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#method_filters EdgeServicesRouteStage#method_filters}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#method_filters EdgeServicesRouteStage#method_filters}
   */
   readonly methodFilters?: string[];
   /**
+  * host_filter block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#host_filter EdgeServicesRouteStage#host_filter}
+  */
+  readonly hostFilter?: EdgeServicesRouteStageRuleRuleHttpMatchHostFilter;
+  /**
   * path_filter block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#path_filter EdgeServicesRouteStage#path_filter}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#path_filter EdgeServicesRouteStage#path_filter}
   */
   readonly pathFilter?: EdgeServicesRouteStageRuleRuleHttpMatchPathFilter;
 }
@@ -176,6 +303,7 @@ export function edgeServicesRouteStageRuleRuleHttpMatchToTerraform(struct?: Edge
   }
   return {
     method_filters: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.methodFilters),
+    host_filter: edgeServicesRouteStageRuleRuleHttpMatchHostFilterToTerraform(struct!.hostFilter),
     path_filter: edgeServicesRouteStageRuleRuleHttpMatchPathFilterToTerraform(struct!.pathFilter),
   }
 }
@@ -192,6 +320,12 @@ export function edgeServicesRouteStageRuleRuleHttpMatchToHclTerraform(struct?: E
       isBlock: false,
       type: "list",
       storageClassType: "stringList",
+    },
+    host_filter: {
+      value: edgeServicesRouteStageRuleRuleHttpMatchHostFilterToHclTerraform(struct!.hostFilter),
+      isBlock: true,
+      type: "list",
+      storageClassType: "EdgeServicesRouteStageRuleRuleHttpMatchHostFilterList",
     },
     path_filter: {
       value: edgeServicesRouteStageRuleRuleHttpMatchPathFilterToHclTerraform(struct!.pathFilter),
@@ -223,6 +357,10 @@ export class EdgeServicesRouteStageRuleRuleHttpMatchOutputReference extends cdkt
       hasAnyValues = true;
       internalValueResult.methodFilters = this._methodFilters;
     }
+    if (this._hostFilter?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.hostFilter = this._hostFilter?.internalValue;
+    }
     if (this._pathFilter?.internalValue !== undefined) {
       hasAnyValues = true;
       internalValueResult.pathFilter = this._pathFilter?.internalValue;
@@ -234,11 +372,13 @@ export class EdgeServicesRouteStageRuleRuleHttpMatchOutputReference extends cdkt
     if (value === undefined) {
       this.isEmptyObject = false;
       this._methodFilters = undefined;
+      this._hostFilter.internalValue = undefined;
       this._pathFilter.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._methodFilters = value.methodFilters;
+      this._hostFilter.internalValue = value.hostFilter;
       this._pathFilter.internalValue = value.pathFilter;
     }
   }
@@ -257,6 +397,22 @@ export class EdgeServicesRouteStageRuleRuleHttpMatchOutputReference extends cdkt
   // Temporarily expose input value. Use with caution.
   public get methodFiltersInput() {
     return this._methodFilters;
+  }
+
+  // host_filter - computed: false, optional: true, required: false
+  private _hostFilter = new EdgeServicesRouteStageRuleRuleHttpMatchHostFilterOutputReference(this, "host_filter");
+  public get hostFilter() {
+    return this._hostFilter;
+  }
+  public putHostFilter(value: EdgeServicesRouteStageRuleRuleHttpMatchHostFilter) {
+    this._hostFilter.internalValue = value;
+  }
+  public resetHostFilter() {
+    this._hostFilter.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hostFilterInput() {
+    return this._hostFilter.internalValue;
   }
 
   // path_filter - computed: false, optional: true, required: false
@@ -279,13 +435,19 @@ export interface EdgeServicesRouteStageRule {
   /**
   * ID of the backend stage that requests matching the rule should be forwarded to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#backend_stage_id EdgeServicesRouteStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#backend_stage_id EdgeServicesRouteStage#backend_stage_id}
   */
-  readonly backendStageId: string;
+  readonly backendStageId?: string;
+  /**
+  * ID of the WAF stage that requests matching the rule should be forwarded to
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#waf_stage_id EdgeServicesRouteStage#waf_stage_id}
+  */
+  readonly wafStageId?: string;
   /**
   * rule_http_match block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#rule_http_match EdgeServicesRouteStage#rule_http_match}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#rule_http_match EdgeServicesRouteStage#rule_http_match}
   */
   readonly ruleHttpMatch?: EdgeServicesRouteStageRuleRuleHttpMatch;
 }
@@ -297,6 +459,7 @@ export function edgeServicesRouteStageRuleToTerraform(struct?: EdgeServicesRoute
   }
   return {
     backend_stage_id: cdktf.stringToTerraform(struct!.backendStageId),
+    waf_stage_id: cdktf.stringToTerraform(struct!.wafStageId),
     rule_http_match: edgeServicesRouteStageRuleRuleHttpMatchToTerraform(struct!.ruleHttpMatch),
   }
 }
@@ -310,6 +473,12 @@ export function edgeServicesRouteStageRuleToHclTerraform(struct?: EdgeServicesRo
   const attrs = {
     backend_stage_id: {
       value: cdktf.stringToHclTerraform(struct!.backendStageId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    waf_stage_id: {
+      value: cdktf.stringToHclTerraform(struct!.wafStageId),
       isBlock: false,
       type: "simple",
       storageClassType: "string",
@@ -350,6 +519,10 @@ export class EdgeServicesRouteStageRuleOutputReference extends cdktf.ComplexObje
       hasAnyValues = true;
       internalValueResult.backendStageId = this._backendStageId;
     }
+    if (this._wafStageId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.wafStageId = this._wafStageId;
+    }
     if (this._ruleHttpMatch?.internalValue !== undefined) {
       hasAnyValues = true;
       internalValueResult.ruleHttpMatch = this._ruleHttpMatch?.internalValue;
@@ -362,6 +535,7 @@ export class EdgeServicesRouteStageRuleOutputReference extends cdktf.ComplexObje
       this.isEmptyObject = false;
       this.resolvableValue = undefined;
       this._backendStageId = undefined;
+      this._wafStageId = undefined;
       this._ruleHttpMatch.internalValue = undefined;
     }
     else if (cdktf.Tokenization.isResolvable(value)) {
@@ -372,11 +546,12 @@ export class EdgeServicesRouteStageRuleOutputReference extends cdktf.ComplexObje
       this.isEmptyObject = Object.keys(value).length === 0;
       this.resolvableValue = undefined;
       this._backendStageId = value.backendStageId;
+      this._wafStageId = value.wafStageId;
       this._ruleHttpMatch.internalValue = value.ruleHttpMatch;
     }
   }
 
-  // backend_stage_id - computed: false, optional: false, required: true
+  // backend_stage_id - computed: false, optional: true, required: false
   private _backendStageId?: string; 
   public get backendStageId() {
     return this.getStringAttribute('backend_stage_id');
@@ -384,9 +559,28 @@ export class EdgeServicesRouteStageRuleOutputReference extends cdktf.ComplexObje
   public set backendStageId(value: string) {
     this._backendStageId = value;
   }
+  public resetBackendStageId() {
+    this._backendStageId = undefined;
+  }
   // Temporarily expose input value. Use with caution.
   public get backendStageIdInput() {
     return this._backendStageId;
+  }
+
+  // waf_stage_id - computed: false, optional: true, required: false
+  private _wafStageId?: string; 
+  public get wafStageId() {
+    return this.getStringAttribute('waf_stage_id');
+  }
+  public set wafStageId(value: string) {
+    this._wafStageId = value;
+  }
+  public resetWafStageId() {
+    this._wafStageId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get wafStageIdInput() {
+    return this._wafStageId;
   }
 
   // rule_http_match - computed: false, optional: true, required: false
@@ -427,7 +621,7 @@ export class EdgeServicesRouteStageRuleList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage}
 */
 export class EdgeServicesRouteStage extends cdktf.TerraformResource {
 
@@ -443,7 +637,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesRouteStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesRouteStage to import
-  * @param importFromId The id of the existing EdgeServicesRouteStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesRouteStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesRouteStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -455,7 +649,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_route_stage scaleway_edge_services_route_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -466,8 +660,8 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_route_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -477,6 +671,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
       connection: config.connection,
       forEach: config.forEach
     });
+    this._backendStageId = config.backendStageId;
     this._id = config.id;
     this._pipelineId = config.pipelineId;
     this._projectId = config.projectId;
@@ -487,6 +682,22 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // backend_stage_id - computed: false, optional: true, required: false
+  private _backendStageId?: string; 
+  public get backendStageId() {
+    return this.getStringAttribute('backend_stage_id');
+  }
+  public set backendStageId(value: string) {
+    this._backendStageId = value;
+  }
+  public resetBackendStageId() {
+    this._backendStageId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get backendStageIdInput() {
+    return this._backendStageId;
+  }
 
   // created_at - computed: true, optional: false, required: false
   public get createdAt() {
@@ -581,6 +792,7 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      backend_stage_id: cdktf.stringToTerraform(this._backendStageId),
       id: cdktf.stringToTerraform(this._id),
       pipeline_id: cdktf.stringToTerraform(this._pipelineId),
       project_id: cdktf.stringToTerraform(this._projectId),
@@ -591,6 +803,12 @@ export class EdgeServicesRouteStage extends cdktf.TerraformResource {
 
   protected synthesizeHclAttributes(): { [name: string]: any } {
     const attrs = {
+      backend_stage_id: {
+        value: cdktf.stringToHclTerraform(this._backendStageId),
+        isBlock: false,
+        type: "simple",
+        storageClassType: "string",
+      },
       id: {
         value: cdktf.stringToHclTerraform(this._id),
         isBlock: false,

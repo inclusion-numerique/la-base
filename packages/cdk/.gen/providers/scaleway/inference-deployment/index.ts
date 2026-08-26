@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface InferenceDeploymentConfig extends cdktf.TerraformMetaArguments 
   /**
   * Whether or not the deployment is accepting eula
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#accept_eula InferenceDeployment#accept_eula}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#accept_eula InferenceDeployment#accept_eula}
   */
   readonly acceptEula?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#id InferenceDeployment#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#id InferenceDeployment#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,79 +23,79 @@ export interface InferenceDeploymentConfig extends cdktf.TerraformMetaArguments 
   /**
   * The maximum size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#max_size InferenceDeployment#max_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#max_size InferenceDeployment#max_size}
   */
   readonly maxSize?: number;
   /**
   * The minimum size of the pool
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#min_size InferenceDeployment#min_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#min_size InferenceDeployment#min_size}
   */
   readonly minSize?: number;
   /**
   * The model id used for the deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#model_id InferenceDeployment#model_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#model_id InferenceDeployment#model_id}
   */
   readonly modelId: string;
   /**
   * The deployment name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#name InferenceDeployment#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#name InferenceDeployment#name}
   */
   readonly name?: string;
   /**
   * The node type to use for the deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#node_type InferenceDeployment#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#node_type InferenceDeployment#node_type}
   */
   readonly nodeType: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#project_id InferenceDeployment#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#project_id InferenceDeployment#project_id}
   */
   readonly projectId?: string;
   /**
   * The number of bits each model parameter should be quantized to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#quantization InferenceDeployment#quantization}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#quantization InferenceDeployment#quantization}
   */
   readonly quantization?: number;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#region InferenceDeployment#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#region InferenceDeployment#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#tags InferenceDeployment#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#tags InferenceDeployment#tags}
   */
   readonly tags?: string[];
   /**
   * private_endpoint block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#private_endpoint InferenceDeployment#private_endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#private_endpoint InferenceDeployment#private_endpoint}
   */
   readonly privateEndpoint?: InferenceDeploymentPrivateEndpoint;
   /**
   * private_ip block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#private_ip InferenceDeployment#private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#private_ip InferenceDeployment#private_ip}
   */
   readonly privateIp?: InferenceDeploymentPrivateIp[] | cdktf.IResolvable;
   /**
   * public_endpoint block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#public_endpoint InferenceDeployment#public_endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#public_endpoint InferenceDeployment#public_endpoint}
   */
   readonly publicEndpoint?: InferenceDeploymentPublicEndpoint;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#timeouts InferenceDeployment#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#timeouts InferenceDeployment#timeouts}
   */
   readonly timeouts?: InferenceDeploymentTimeouts;
 }
@@ -103,13 +103,13 @@ export interface InferenceDeploymentPrivateEndpoint {
   /**
   * Disable the authentication on the endpoint.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#disable_auth InferenceDeployment#disable_auth}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#disable_auth InferenceDeployment#disable_auth}
   */
   readonly disableAuth?: boolean | cdktf.IResolvable;
   /**
   * The id of the private network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#private_network_id InferenceDeployment#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#private_network_id InferenceDeployment#private_network_id}
   */
   readonly privateNetworkId?: string;
 }
@@ -325,13 +325,13 @@ export interface InferenceDeploymentPublicEndpoint {
   /**
   * Disable the authentication on the endpoint.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#disable_auth InferenceDeployment#disable_auth}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#disable_auth InferenceDeployment#disable_auth}
   */
   readonly disableAuth?: boolean | cdktf.IResolvable;
   /**
   * Enable or disable public endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#is_enabled InferenceDeployment#is_enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#is_enabled InferenceDeployment#is_enabled}
   */
   readonly isEnabled?: boolean | cdktf.IResolvable;
 }
@@ -454,23 +454,23 @@ export class InferenceDeploymentPublicEndpointOutputReference extends cdktf.Comp
 }
 export interface InferenceDeploymentTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#create InferenceDeployment#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#create InferenceDeployment#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#default InferenceDeployment#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#default InferenceDeployment#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#delete InferenceDeployment#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#delete InferenceDeployment#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#read InferenceDeployment#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#read InferenceDeployment#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#update InferenceDeployment#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#update InferenceDeployment#update}
   */
   readonly update?: string;
 }
@@ -680,7 +680,7 @@ export class InferenceDeploymentTimeoutsOutputReference extends cdktf.ComplexObj
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment scaleway_inference_deployment}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment scaleway_inference_deployment}
 */
 export class InferenceDeployment extends cdktf.TerraformResource {
 
@@ -696,7 +696,7 @@ export class InferenceDeployment extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InferenceDeployment resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InferenceDeployment to import
-  * @param importFromId The id of the existing InferenceDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InferenceDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InferenceDeployment to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -708,7 +708,7 @@ export class InferenceDeployment extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/inference_deployment scaleway_inference_deployment} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/inference_deployment scaleway_inference_deployment} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -719,8 +719,8 @@ export class InferenceDeployment extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_inference_deployment',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

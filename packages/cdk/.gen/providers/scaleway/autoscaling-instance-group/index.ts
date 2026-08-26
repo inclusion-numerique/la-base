@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface AutoscalingInstanceGroupConfig extends cdktf.TerraformMetaArgum
   /**
   * Whether to delete all instances in this group when the group is destroyed. Set to `true` to tear them down, `false` (the default) leaves them running
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#delete_servers_on_destroy AutoscalingInstanceGroup#delete_servers_on_destroy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#delete_servers_on_destroy AutoscalingInstanceGroup#delete_servers_on_destroy}
   */
   readonly deleteServersOnDestroy?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#id AutoscalingInstanceGroup#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#id AutoscalingInstanceGroup#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface AutoscalingInstanceGroupConfig extends cdktf.TerraformMetaArgum
   /**
   * The Instance group name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#name AutoscalingInstanceGroup#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#name AutoscalingInstanceGroup#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#project_id AutoscalingInstanceGroup#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#project_id AutoscalingInstanceGroup#project_id}
   */
   readonly projectId?: string;
   /**
   * The tags associated with the Instance group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#tags AutoscalingInstanceGroup#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#tags AutoscalingInstanceGroup#tags}
   */
   readonly tags?: string[];
   /**
   * ID of the Instance template to attach to the Instance group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#template_id AutoscalingInstanceGroup#template_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#template_id AutoscalingInstanceGroup#template_id}
   */
   readonly templateId: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#zone AutoscalingInstanceGroup#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#zone AutoscalingInstanceGroup#zone}
   */
   readonly zone?: string;
   /**
   * capacity block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#capacity AutoscalingInstanceGroup#capacity}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#capacity AutoscalingInstanceGroup#capacity}
   */
   readonly capacity?: AutoscalingInstanceGroupCapacity[] | cdktf.IResolvable;
   /**
   * load_balancer block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#load_balancer AutoscalingInstanceGroup#load_balancer}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#load_balancer AutoscalingInstanceGroup#load_balancer}
   */
   readonly loadBalancer?: AutoscalingInstanceGroupLoadBalancer[] | cdktf.IResolvable;
 }
@@ -67,19 +67,19 @@ export interface AutoscalingInstanceGroupCapacity {
   /**
   * Time (in seconds) after a scaling action during which requests to carry out a new scaling action will be denied
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#cooldown_delay AutoscalingInstanceGroup#cooldown_delay}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#cooldown_delay AutoscalingInstanceGroup#cooldown_delay}
   */
   readonly cooldownDelay?: number;
   /**
   * The maximum count of Instances for the Instance group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#max_replicas AutoscalingInstanceGroup#max_replicas}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#max_replicas AutoscalingInstanceGroup#max_replicas}
   */
   readonly maxReplicas?: number;
   /**
   * The minimum count of Instances for the Instance group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#min_replicas AutoscalingInstanceGroup#min_replicas}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#min_replicas AutoscalingInstanceGroup#min_replicas}
   */
   readonly minReplicas?: number;
 }
@@ -255,13 +255,13 @@ export interface AutoscalingInstanceGroupLoadBalancer {
   /**
   * The Load Balancer backend IDs
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#backend_ids AutoscalingInstanceGroup#backend_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#backend_ids AutoscalingInstanceGroup#backend_ids}
   */
   readonly backendIds?: string[];
   /**
   * The ID of the load balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#id AutoscalingInstanceGroup#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#id AutoscalingInstanceGroup#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -270,7 +270,7 @@ export interface AutoscalingInstanceGroupLoadBalancer {
   /**
   * The ID of the Private Network attached to the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#private_network_id AutoscalingInstanceGroup#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#private_network_id AutoscalingInstanceGroup#private_network_id}
   */
   readonly privateNetworkId?: string;
 }
@@ -444,7 +444,7 @@ export class AutoscalingInstanceGroupLoadBalancerList extends cdktf.ComplexList 
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group scaleway_autoscaling_instance_group}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group scaleway_autoscaling_instance_group}
 */
 export class AutoscalingInstanceGroup extends cdktf.TerraformResource {
 
@@ -460,7 +460,7 @@ export class AutoscalingInstanceGroup extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a AutoscalingInstanceGroup resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the AutoscalingInstanceGroup to import
-  * @param importFromId The id of the existing AutoscalingInstanceGroup that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing AutoscalingInstanceGroup that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the AutoscalingInstanceGroup to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -472,7 +472,7 @@ export class AutoscalingInstanceGroup extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/autoscaling_instance_group scaleway_autoscaling_instance_group} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/autoscaling_instance_group scaleway_autoscaling_instance_group} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -483,8 +483,8 @@ export class AutoscalingInstanceGroup extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_autoscaling_instance_group',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

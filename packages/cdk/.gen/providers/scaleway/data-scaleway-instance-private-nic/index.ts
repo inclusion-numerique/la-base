@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInstancePrivateNicConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#id DataScalewayInstancePrivateNic#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#id DataScalewayInstancePrivateNic#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface DataScalewayInstancePrivateNicConfig extends cdktf.TerraformMet
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#private_network_id DataScalewayInstancePrivateNic#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#private_network_id DataScalewayInstancePrivateNic#private_network_id}
   */
   readonly privateNetworkId?: string;
   /**
   * The ID of the Private NIC
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#private_nic_id DataScalewayInstancePrivateNic#private_nic_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#private_nic_id DataScalewayInstancePrivateNic#private_nic_id}
   */
   readonly privateNicId?: string;
   /**
   * The server ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#server_id DataScalewayInstancePrivateNic#server_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#server_id DataScalewayInstancePrivateNic#server_id}
   */
   readonly serverId: string;
   /**
   * The tags associated with the private-nic
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#tags DataScalewayInstancePrivateNic#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#tags DataScalewayInstancePrivateNic#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#zone DataScalewayInstancePrivateNic#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#zone DataScalewayInstancePrivateNic#zone}
   */
   readonly zone?: string;
 }
@@ -127,7 +127,7 @@ export class DataScalewayInstancePrivateNicPrivateIpsList extends cdktf.ComplexL
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic scaleway_instance_private_nic}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic scaleway_instance_private_nic}
 */
 export class DataScalewayInstancePrivateNic extends cdktf.TerraformDataSource {
 
@@ -143,7 +143,7 @@ export class DataScalewayInstancePrivateNic extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInstancePrivateNic resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInstancePrivateNic to import
-  * @param importFromId The id of the existing DataScalewayInstancePrivateNic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInstancePrivateNic that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInstancePrivateNic to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -155,7 +155,7 @@ export class DataScalewayInstancePrivateNic extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/instance_private_nic scaleway_instance_private_nic} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/instance_private_nic scaleway_instance_private_nic} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -166,8 +166,8 @@ export class DataScalewayInstancePrivateNic extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_instance_private_nic',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

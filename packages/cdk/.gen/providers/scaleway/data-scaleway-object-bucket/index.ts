@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayObjectBucketConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket#id DataScalewayObjectBucket#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket#id DataScalewayObjectBucket#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayObjectBucketConfig extends cdktf.TerraformMetaArgum
   /**
   * The name of the bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket#name DataScalewayObjectBucket#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket#name DataScalewayObjectBucket#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket#project_id DataScalewayObjectBucket#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket#project_id DataScalewayObjectBucket#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket#region DataScalewayObjectBucket#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket#region DataScalewayObjectBucket#region}
   */
   readonly region?: string;
 }
@@ -179,9 +179,19 @@ export class DataScalewayObjectBucketLifecycleRuleExpirationOutputReference exte
     }
   }
 
+  // date - computed: true, optional: false, required: false
+  public get date() {
+    return this.getStringAttribute('date');
+  }
+
   // days - computed: true, optional: false, required: false
   public get days() {
     return this.getNumberAttribute('days');
+  }
+
+  // expired_object_delete_marker - computed: true, optional: false, required: false
+  public get expiredObjectDeleteMarker() {
+    return this.getBooleanAttribute('expired_object_delete_marker');
   }
 }
 
@@ -201,6 +211,171 @@ export class DataScalewayObjectBucketLifecycleRuleExpirationList extends cdktf.C
   */
   public get(index: number): DataScalewayObjectBucketLifecycleRuleExpirationOutputReference {
     return new DataScalewayObjectBucketLifecycleRuleExpirationOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpiration {
+}
+
+export function dataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationToTerraform(struct?: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpiration): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationToHclTerraform(struct?: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpiration): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpiration | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpiration | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // newer_noncurrent_versions - computed: true, optional: false, required: false
+  public get newerNoncurrentVersions() {
+    return this.getNumberAttribute('newer_noncurrent_versions');
+  }
+
+  // noncurrent_days - computed: true, optional: false, required: false
+  public get noncurrentDays() {
+    return this.getNumberAttribute('noncurrent_days');
+  }
+}
+
+export class DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationOutputReference {
+    return new DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransition {
+}
+
+export function dataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionToTerraform(struct?: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransition): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function dataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionToHclTerraform(struct?: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransition): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransition | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransition | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // newer_noncurrent_versions - computed: true, optional: false, required: false
+  public get newerNoncurrentVersions() {
+    return this.getNumberAttribute('newer_noncurrent_versions');
+  }
+
+  // noncurrent_days - computed: true, optional: false, required: false
+  public get noncurrentDays() {
+    return this.getNumberAttribute('noncurrent_days');
+  }
+
+  // storage_class - computed: true, optional: false, required: false
+  public get storageClass() {
+    return this.getStringAttribute('storage_class');
+  }
+}
+
+export class DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionOutputReference {
+    return new DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
 export interface DataScalewayObjectBucketLifecycleRuleTransition {
@@ -252,6 +427,11 @@ export class DataScalewayObjectBucketLifecycleRuleTransitionOutputReference exte
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
     }
+  }
+
+  // date - computed: true, optional: false, required: false
+  public get date() {
+    return this.getStringAttribute('date');
   }
 
   // days - computed: true, optional: false, required: false
@@ -353,6 +533,28 @@ export class DataScalewayObjectBucketLifecycleRuleOutputReference extends cdktf.
   // id - computed: true, optional: false, required: false
   public get id() {
     return this.getStringAttribute('id');
+  }
+
+  // noncurrent_version_expiration - computed: true, optional: false, required: false
+  private _noncurrentVersionExpiration = new DataScalewayObjectBucketLifecycleRuleNoncurrentVersionExpirationList(this, "noncurrent_version_expiration", false);
+  public get noncurrentVersionExpiration() {
+    return this._noncurrentVersionExpiration;
+  }
+
+  // noncurrent_version_transition - computed: true, optional: false, required: false
+  private _noncurrentVersionTransition = new DataScalewayObjectBucketLifecycleRuleNoncurrentVersionTransitionList(this, "noncurrent_version_transition", true);
+  public get noncurrentVersionTransition() {
+    return this._noncurrentVersionTransition;
+  }
+
+  // object_size_greater_than - computed: true, optional: false, required: false
+  public get objectSizeGreaterThan() {
+    return this.getNumberAttribute('object_size_greater_than');
+  }
+
+  // object_size_less_than - computed: true, optional: false, required: false
+  public get objectSizeLessThan() {
+    return this.getNumberAttribute('object_size_less_than');
   }
 
   // prefix - computed: true, optional: false, required: false
@@ -468,7 +670,7 @@ export class DataScalewayObjectBucketVersioningList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket scaleway_object_bucket}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket scaleway_object_bucket}
 */
 export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
 
@@ -484,7 +686,7 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayObjectBucket resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayObjectBucket to import
-  * @param importFromId The id of the existing DataScalewayObjectBucket that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayObjectBucket that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayObjectBucket to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -496,7 +698,7 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/data-sources/object_bucket scaleway_object_bucket} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/object_bucket scaleway_object_bucket} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -507,8 +709,8 @@ export class DataScalewayObjectBucket extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_object_bucket',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

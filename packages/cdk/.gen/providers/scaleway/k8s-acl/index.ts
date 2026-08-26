@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface K8SAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * Cluster on which the ACL should be applied
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#cluster_id K8SAcl#cluster_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#cluster_id K8SAcl#cluster_id}
   */
   readonly clusterId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#id K8SAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#id K8SAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface K8SAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * If true, no IP will be allowed and the cluster will be fully isolated
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#no_ip_allowed K8SAcl#no_ip_allowed}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#no_ip_allowed K8SAcl#no_ip_allowed}
   */
   readonly noIpAllowed?: boolean | cdktf.IResolvable;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#region K8SAcl#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#region K8SAcl#region}
   */
   readonly region?: string;
   /**
   * acl_rules block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#acl_rules K8SAcl#acl_rules}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#acl_rules K8SAcl#acl_rules}
   */
   readonly aclRules?: K8SAclAclRules[] | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#timeouts K8SAcl#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#timeouts K8SAcl#timeouts}
   */
   readonly timeouts?: K8SAclTimeouts;
 }
@@ -49,19 +49,19 @@ export interface K8SAclAclRules {
   /**
   * The description of the ACL rule
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#description K8SAcl#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#description K8SAcl#description}
   */
   readonly description?: string;
   /**
   * The IP subnet to be allowed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#ip K8SAcl#ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#ip K8SAcl#ip}
   */
   readonly ip?: string;
   /**
   * Allow access to cluster from all Scaleway ranges
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#scaleway_ranges K8SAcl#scaleway_ranges}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#scaleway_ranges K8SAcl#scaleway_ranges}
   */
   readonly scalewayRanges?: boolean | cdktf.IResolvable;
 }
@@ -217,6 +217,11 @@ export class K8SAclAclRulesOutputReference extends cdktf.ComplexObject {
   public get scalewayRangesInput() {
     return this._scalewayRanges;
   }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
+  }
 }
 
 export class K8SAclAclRulesList extends cdktf.ComplexList {
@@ -240,23 +245,23 @@ export class K8SAclAclRulesList extends cdktf.ComplexList {
 }
 export interface K8SAclTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#create K8SAcl#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#create K8SAcl#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#default K8SAcl#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#default K8SAcl#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#delete K8SAcl#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#delete K8SAcl#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#read K8SAcl#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#read K8SAcl#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#update K8SAcl#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#update K8SAcl#update}
   */
   readonly update?: string;
 }
@@ -466,7 +471,7 @@ export class K8SAclTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl scaleway_k8s_acl}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl scaleway_k8s_acl}
 */
 export class K8SAcl extends cdktf.TerraformResource {
 
@@ -482,7 +487,7 @@ export class K8SAcl extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a K8SAcl resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the K8SAcl to import
-  * @param importFromId The id of the existing K8SAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing K8SAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the K8SAcl to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -494,7 +499,7 @@ export class K8SAcl extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/k8s_acl scaleway_k8s_acl} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/k8s_acl scaleway_k8s_acl} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -505,8 +510,8 @@ export class K8SAcl extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_k8s_acl',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -590,7 +595,7 @@ export class K8SAcl extends cdktf.TerraformResource {
   }
 
   // acl_rules - computed: false, optional: true, required: false
-  private _aclRules = new K8SAclAclRulesList(this, "acl_rules", false);
+  private _aclRules = new K8SAclAclRulesList(this, "acl_rules", true);
   public get aclRules() {
     return this._aclRules;
   }
@@ -665,7 +670,7 @@ export class K8SAcl extends cdktf.TerraformResource {
       acl_rules: {
         value: cdktf.listMapperHcl(k8SAclAclRulesToHclTerraform, true)(this._aclRules.internalValue),
         isBlock: true,
-        type: "list",
+        type: "set",
         storageClassType: "K8SAclAclRulesList",
       },
       timeouts: {

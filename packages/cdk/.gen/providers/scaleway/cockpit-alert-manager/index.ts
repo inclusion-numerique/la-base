@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,34 +8,40 @@ import * as cdktf from 'cdktf';
 
 export interface CockpitAlertManagerConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Enable or disable the alert manager
+  * Enable or disable the alert manager (deprecated)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#enable_managed_alerts CockpitAlertManager#enable_managed_alerts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#enable_managed_alerts CockpitAlertManager#enable_managed_alerts}
   */
   readonly enableManagedAlerts?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#id CockpitAlertManager#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#id CockpitAlertManager#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
+  * List of preconfigured alert rule IDs to enable explicitly. Use the scaleway_cockpit_preconfigured_alert data source to list available alerts.
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#preconfigured_alert_ids CockpitAlertManager#preconfigured_alert_ids}
+  */
+  readonly preconfiguredAlertIds?: string[];
+  /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#project_id CockpitAlertManager#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#project_id CockpitAlertManager#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#region CockpitAlertManager#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#region CockpitAlertManager#region}
   */
   readonly region?: string;
   /**
   * contact_points block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#contact_points CockpitAlertManager#contact_points}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#contact_points CockpitAlertManager#contact_points}
   */
   readonly contactPoints?: CockpitAlertManagerContactPoints[] | cdktf.IResolvable;
 }
@@ -43,7 +49,7 @@ export interface CockpitAlertManagerContactPoints {
   /**
   * Email addresses for the alert receivers
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#email CockpitAlertManager#email}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#email CockpitAlertManager#email}
   */
   readonly email?: string;
 }
@@ -159,7 +165,7 @@ export class CockpitAlertManagerContactPointsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager}
 */
 export class CockpitAlertManager extends cdktf.TerraformResource {
 
@@ -175,7 +181,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a CockpitAlertManager resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the CockpitAlertManager to import
-  * @param importFromId The id of the existing CockpitAlertManager that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing CockpitAlertManager that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the CockpitAlertManager to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -187,7 +193,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/cockpit_alert_manager scaleway_cockpit_alert_manager} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -198,8 +204,8 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_cockpit_alert_manager',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -211,6 +217,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
     });
     this._enableManagedAlerts = config.enableManagedAlerts;
     this._id = config.id;
+    this._preconfiguredAlertIds = config.preconfiguredAlertIds;
     this._projectId = config.projectId;
     this._region = config.region;
     this._contactPoints.internalValue = config.contactPoints;
@@ -225,7 +232,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
     return this.getStringAttribute('alert_manager_url');
   }
 
-  // enable_managed_alerts - computed: false, optional: true, required: false
+  // enable_managed_alerts - computed: true, optional: true, required: false
   private _enableManagedAlerts?: boolean | cdktf.IResolvable; 
   public get enableManagedAlerts() {
     return this.getBooleanAttribute('enable_managed_alerts');
@@ -255,6 +262,22 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get idInput() {
     return this._id;
+  }
+
+  // preconfigured_alert_ids - computed: false, optional: true, required: false
+  private _preconfiguredAlertIds?: string[]; 
+  public get preconfiguredAlertIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('preconfigured_alert_ids'));
+  }
+  public set preconfiguredAlertIds(value: string[]) {
+    this._preconfiguredAlertIds = value;
+  }
+  public resetPreconfiguredAlertIds() {
+    this._preconfiguredAlertIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get preconfiguredAlertIdsInput() {
+    return this._preconfiguredAlertIds;
   }
 
   // project_id - computed: true, optional: true, required: false
@@ -313,6 +336,7 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
     return {
       enable_managed_alerts: cdktf.booleanToTerraform(this._enableManagedAlerts),
       id: cdktf.stringToTerraform(this._id),
+      preconfigured_alert_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._preconfiguredAlertIds),
       project_id: cdktf.stringToTerraform(this._projectId),
       region: cdktf.stringToTerraform(this._region),
       contact_points: cdktf.listMapper(cockpitAlertManagerContactPointsToTerraform, true)(this._contactPoints.internalValue),
@@ -332,6 +356,12 @@ export class CockpitAlertManager extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      preconfigured_alert_ids: {
+        value: cdktf.listMapperHcl(cdktf.stringToHclTerraform, false)(this._preconfiguredAlertIds),
+        isBlock: false,
+        type: "set",
+        storageClassType: "stringList",
       },
       project_id: {
         value: cdktf.stringToHclTerraform(this._projectId),

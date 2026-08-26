@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface EdgeServicesBackendStageConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,45 +17,299 @@ export interface EdgeServicesBackendStageConfig extends cdktf.TerraformMetaArgum
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#pipeline_id EdgeServicesBackendStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#pipeline_id EdgeServicesBackendStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#project_id EdgeServicesBackendStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#project_id EdgeServicesBackendStage#project_id}
   */
   readonly projectId?: string;
   /**
+  * container_backend_config block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#container_backend_config EdgeServicesBackendStage#container_backend_config}
+  */
+  readonly containerBackendConfig?: EdgeServicesBackendStageContainerBackendConfig;
+  /**
+  * function_backend_config block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#function_backend_config EdgeServicesBackendStage#function_backend_config}
+  */
+  readonly functionBackendConfig?: EdgeServicesBackendStageFunctionBackendConfig;
+  /**
   * lb_backend_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#lb_backend_config EdgeServicesBackendStage#lb_backend_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#lb_backend_config EdgeServicesBackendStage#lb_backend_config}
   */
   readonly lbBackendConfig?: EdgeServicesBackendStageLbBackendConfig[] | cdktf.IResolvable;
   /**
   * s3_backend_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#s3_backend_config EdgeServicesBackendStage#s3_backend_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#s3_backend_config EdgeServicesBackendStage#s3_backend_config}
   */
   readonly s3BackendConfig?: EdgeServicesBackendStageS3BackendConfig;
+}
+export interface EdgeServicesBackendStageContainerBackendConfig {
+  /**
+  * ID of the Serverless Container
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#container_id EdgeServicesBackendStage#container_id}
+  */
+  readonly containerId: string;
+  /**
+  * The region you want to attach the resource to
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#region EdgeServicesBackendStage#region}
+  */
+  readonly region?: string;
+}
+
+export function edgeServicesBackendStageContainerBackendConfigToTerraform(struct?: EdgeServicesBackendStageContainerBackendConfigOutputReference | EdgeServicesBackendStageContainerBackendConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    container_id: cdktf.stringToTerraform(struct!.containerId),
+    region: cdktf.stringToTerraform(struct!.region),
+  }
+}
+
+
+export function edgeServicesBackendStageContainerBackendConfigToHclTerraform(struct?: EdgeServicesBackendStageContainerBackendConfigOutputReference | EdgeServicesBackendStageContainerBackendConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    container_id: {
+      value: cdktf.stringToHclTerraform(struct!.containerId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    region: {
+      value: cdktf.stringToHclTerraform(struct!.region),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class EdgeServicesBackendStageContainerBackendConfigOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): EdgeServicesBackendStageContainerBackendConfig | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._containerId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.containerId = this._containerId;
+    }
+    if (this._region !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.region = this._region;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: EdgeServicesBackendStageContainerBackendConfig | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._containerId = undefined;
+      this._region = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._containerId = value.containerId;
+      this._region = value.region;
+    }
+  }
+
+  // container_id - computed: false, optional: false, required: true
+  private _containerId?: string; 
+  public get containerId() {
+    return this.getStringAttribute('container_id');
+  }
+  public set containerId(value: string) {
+    this._containerId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get containerIdInput() {
+    return this._containerId;
+  }
+
+  // region - computed: true, optional: true, required: false
+  private _region?: string; 
+  public get region() {
+    return this.getStringAttribute('region');
+  }
+  public set region(value: string) {
+    this._region = value;
+  }
+  public resetRegion() {
+    this._region = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regionInput() {
+    return this._region;
+  }
+}
+export interface EdgeServicesBackendStageFunctionBackendConfig {
+  /**
+  * ID of the Serverless Function
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#function_id EdgeServicesBackendStage#function_id}
+  */
+  readonly functionId: string;
+  /**
+  * The region you want to attach the resource to
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#region EdgeServicesBackendStage#region}
+  */
+  readonly region?: string;
+}
+
+export function edgeServicesBackendStageFunctionBackendConfigToTerraform(struct?: EdgeServicesBackendStageFunctionBackendConfigOutputReference | EdgeServicesBackendStageFunctionBackendConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    function_id: cdktf.stringToTerraform(struct!.functionId),
+    region: cdktf.stringToTerraform(struct!.region),
+  }
+}
+
+
+export function edgeServicesBackendStageFunctionBackendConfigToHclTerraform(struct?: EdgeServicesBackendStageFunctionBackendConfigOutputReference | EdgeServicesBackendStageFunctionBackendConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    function_id: {
+      value: cdktf.stringToHclTerraform(struct!.functionId),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+    region: {
+      value: cdktf.stringToHclTerraform(struct!.region),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class EdgeServicesBackendStageFunctionBackendConfigOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): EdgeServicesBackendStageFunctionBackendConfig | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._functionId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.functionId = this._functionId;
+    }
+    if (this._region !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.region = this._region;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: EdgeServicesBackendStageFunctionBackendConfig | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._functionId = undefined;
+      this._region = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._functionId = value.functionId;
+      this._region = value.region;
+    }
+  }
+
+  // function_id - computed: false, optional: false, required: true
+  private _functionId?: string; 
+  public get functionId() {
+    return this.getStringAttribute('function_id');
+  }
+  public set functionId(value: string) {
+    this._functionId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get functionIdInput() {
+    return this._functionId;
+  }
+
+  // region - computed: true, optional: true, required: false
+  private _region?: string; 
+  public get region() {
+    return this.getStringAttribute('region');
+  }
+  public set region(value: string) {
+    this._region = value;
+  }
+  public resetRegion() {
+    this._region = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regionInput() {
+    return this._region;
+  }
 }
 export interface EdgeServicesBackendStageLbBackendConfigLbConfig {
   /**
   * Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#domain_name EdgeServicesBackendStage#domain_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#domain_name EdgeServicesBackendStage#domain_name}
   */
   readonly domainName?: string;
   /**
   * ID of the frontend linked to the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#frontend_id EdgeServicesBackendStage#frontend_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#frontend_id EdgeServicesBackendStage#frontend_id}
   */
   readonly frontendId?: string;
   /**
+  * Defines whether to forward websocket requests to the load balancer
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#has_websocket EdgeServicesBackendStage#has_websocket}
+  */
+  readonly hasWebsocket?: boolean | cdktf.IResolvable;
+  /**
   * ID of the Load Balancer
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#id EdgeServicesBackendStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -64,13 +318,13 @@ export interface EdgeServicesBackendStageLbBackendConfigLbConfig {
   /**
   * Defines whether the Load Balancer's frontend handles SSL connections
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#is_ssl EdgeServicesBackendStage#is_ssl}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#is_ssl EdgeServicesBackendStage#is_ssl}
   */
   readonly isSsl?: boolean | cdktf.IResolvable;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#zone EdgeServicesBackendStage#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#zone EdgeServicesBackendStage#zone}
   */
   readonly zone?: string;
 }
@@ -83,6 +337,7 @@ export function edgeServicesBackendStageLbBackendConfigLbConfigToTerraform(struc
   return {
     domain_name: cdktf.stringToTerraform(struct!.domainName),
     frontend_id: cdktf.stringToTerraform(struct!.frontendId),
+    has_websocket: cdktf.booleanToTerraform(struct!.hasWebsocket),
     id: cdktf.stringToTerraform(struct!.id),
     is_ssl: cdktf.booleanToTerraform(struct!.isSsl),
     zone: cdktf.stringToTerraform(struct!.zone),
@@ -107,6 +362,12 @@ export function edgeServicesBackendStageLbBackendConfigLbConfigToHclTerraform(st
       isBlock: false,
       type: "simple",
       storageClassType: "string",
+    },
+    has_websocket: {
+      value: cdktf.booleanToHclTerraform(struct!.hasWebsocket),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "boolean",
     },
     id: {
       value: cdktf.stringToHclTerraform(struct!.id),
@@ -154,6 +415,10 @@ export class EdgeServicesBackendStageLbBackendConfigLbConfigOutputReference exte
       hasAnyValues = true;
       internalValueResult.frontendId = this._frontendId;
     }
+    if (this._hasWebsocket !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.hasWebsocket = this._hasWebsocket;
+    }
     if (this._id !== undefined) {
       hasAnyValues = true;
       internalValueResult.id = this._id;
@@ -174,6 +439,7 @@ export class EdgeServicesBackendStageLbBackendConfigLbConfigOutputReference exte
       this.isEmptyObject = false;
       this._domainName = undefined;
       this._frontendId = undefined;
+      this._hasWebsocket = undefined;
       this._id = undefined;
       this._isSsl = undefined;
       this._zone = undefined;
@@ -182,6 +448,7 @@ export class EdgeServicesBackendStageLbBackendConfigLbConfigOutputReference exte
       this.isEmptyObject = Object.keys(value).length === 0;
       this._domainName = value.domainName;
       this._frontendId = value.frontendId;
+      this._hasWebsocket = value.hasWebsocket;
       this._id = value.id;
       this._isSsl = value.isSsl;
       this._zone = value.zone;
@@ -218,6 +485,22 @@ export class EdgeServicesBackendStageLbBackendConfigLbConfigOutputReference exte
   // Temporarily expose input value. Use with caution.
   public get frontendIdInput() {
     return this._frontendId;
+  }
+
+  // has_websocket - computed: false, optional: true, required: false
+  private _hasWebsocket?: boolean | cdktf.IResolvable; 
+  public get hasWebsocket() {
+    return this.getBooleanAttribute('has_websocket');
+  }
+  public set hasWebsocket(value: boolean | cdktf.IResolvable) {
+    this._hasWebsocket = value;
+  }
+  public resetHasWebsocket() {
+    this._hasWebsocket = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hasWebsocketInput() {
+    return this._hasWebsocket;
   }
 
   // id - computed: false, optional: true, required: false
@@ -272,7 +555,7 @@ export interface EdgeServicesBackendStageLbBackendConfig {
   /**
   * lb_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#lb_config EdgeServicesBackendStage#lb_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#lb_config EdgeServicesBackendStage#lb_config}
   */
   readonly lbConfig?: EdgeServicesBackendStageLbBackendConfigLbConfig;
 }
@@ -390,19 +673,19 @@ export interface EdgeServicesBackendStageS3BackendConfig {
   /**
   * The name of the Bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#bucket_name EdgeServicesBackendStage#bucket_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#bucket_name EdgeServicesBackendStage#bucket_name}
   */
   readonly bucketName?: string;
   /**
   * The region of the Bucket
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#bucket_region EdgeServicesBackendStage#bucket_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#bucket_region EdgeServicesBackendStage#bucket_region}
   */
   readonly bucketRegion?: string;
   /**
   * Defines whether the bucket website feature is enabled.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#is_website EdgeServicesBackendStage#is_website}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#is_website EdgeServicesBackendStage#is_website}
   */
   readonly isWebsite?: boolean | cdktf.IResolvable;
 }
@@ -544,7 +827,7 @@ export class EdgeServicesBackendStageS3BackendConfigOutputReference extends cdkt
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage}
 */
 export class EdgeServicesBackendStage extends cdktf.TerraformResource {
 
@@ -560,7 +843,7 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesBackendStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesBackendStage to import
-  * @param importFromId The id of the existing EdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesBackendStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -572,7 +855,7 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.57.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_backend_stage scaleway_edge_services_backend_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -583,8 +866,8 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_backend_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.57.0',
-        providerVersionConstraint: '>= 2.57.0'
+        providerVersion: '2.81.0',
+        providerVersionConstraint: '>= 2.81.0'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -597,6 +880,8 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
     this._id = config.id;
     this._pipelineId = config.pipelineId;
     this._projectId = config.projectId;
+    this._containerBackendConfig.internalValue = config.containerBackendConfig;
+    this._functionBackendConfig.internalValue = config.functionBackendConfig;
     this._lbBackendConfig.internalValue = config.lbBackendConfig;
     this._s3BackendConfig.internalValue = config.s3BackendConfig;
   }
@@ -660,6 +945,38 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
     return this.getStringAttribute('updated_at');
   }
 
+  // container_backend_config - computed: false, optional: true, required: false
+  private _containerBackendConfig = new EdgeServicesBackendStageContainerBackendConfigOutputReference(this, "container_backend_config");
+  public get containerBackendConfig() {
+    return this._containerBackendConfig;
+  }
+  public putContainerBackendConfig(value: EdgeServicesBackendStageContainerBackendConfig) {
+    this._containerBackendConfig.internalValue = value;
+  }
+  public resetContainerBackendConfig() {
+    this._containerBackendConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get containerBackendConfigInput() {
+    return this._containerBackendConfig.internalValue;
+  }
+
+  // function_backend_config - computed: false, optional: true, required: false
+  private _functionBackendConfig = new EdgeServicesBackendStageFunctionBackendConfigOutputReference(this, "function_backend_config");
+  public get functionBackendConfig() {
+    return this._functionBackendConfig;
+  }
+  public putFunctionBackendConfig(value: EdgeServicesBackendStageFunctionBackendConfig) {
+    this._functionBackendConfig.internalValue = value;
+  }
+  public resetFunctionBackendConfig() {
+    this._functionBackendConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get functionBackendConfigInput() {
+    return this._functionBackendConfig.internalValue;
+  }
+
   // lb_backend_config - computed: false, optional: true, required: false
   private _lbBackendConfig = new EdgeServicesBackendStageLbBackendConfigList(this, "lb_backend_config", false);
   public get lbBackendConfig() {
@@ -701,6 +1018,8 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       pipeline_id: cdktf.stringToTerraform(this._pipelineId),
       project_id: cdktf.stringToTerraform(this._projectId),
+      container_backend_config: edgeServicesBackendStageContainerBackendConfigToTerraform(this._containerBackendConfig.internalValue),
+      function_backend_config: edgeServicesBackendStageFunctionBackendConfigToTerraform(this._functionBackendConfig.internalValue),
       lb_backend_config: cdktf.listMapper(edgeServicesBackendStageLbBackendConfigToTerraform, true)(this._lbBackendConfig.internalValue),
       s3_backend_config: edgeServicesBackendStageS3BackendConfigToTerraform(this._s3BackendConfig.internalValue),
     };
@@ -725,6 +1044,18 @@ export class EdgeServicesBackendStage extends cdktf.TerraformResource {
         isBlock: false,
         type: "simple",
         storageClassType: "string",
+      },
+      container_backend_config: {
+        value: edgeServicesBackendStageContainerBackendConfigToHclTerraform(this._containerBackendConfig.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "EdgeServicesBackendStageContainerBackendConfigList",
+      },
+      function_backend_config: {
+        value: edgeServicesBackendStageFunctionBackendConfigToHclTerraform(this._functionBackendConfig.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "EdgeServicesBackendStageFunctionBackendConfigList",
       },
       lb_backend_config: {
         value: cdktf.listMapperHcl(edgeServicesBackendStageLbBackendConfigToHclTerraform, true)(this._lbBackendConfig.internalValue),
