@@ -19,7 +19,7 @@
     "@codegouvfr/react-dsfr": "^1.32.4",
     "@gouvfr/dsfr": "1.14.2",
     "@hookform/resolvers": "^5.7.1",
-    "@tiptap/core": "^3.29.2",
+    "@tiptap/core": "^3.30.4",
     "@tiptap/extension-link": "^3.29.2",
     "@tiptap/pm": "^3.29.2",
     "@tiptap/react": "^3.29.2",
