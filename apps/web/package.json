@@ -93,7 +93,7 @@
     "react-hot-toast": "^2.5.2",
     "react-use-css-custom-property": "^0.1.1",
     "recharts": "^3.10.1",
-    "sanitize-html": "^2.17.6",
+    "sanitize-html": "^2.17.7",
     "server-only": "^0.0.1",
     "sharp": "^0.35.3",
     "slugify": "^1.6.9",
