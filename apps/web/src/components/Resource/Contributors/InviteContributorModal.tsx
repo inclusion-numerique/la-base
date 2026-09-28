@@ -17,10 +17,7 @@ const InviteContributorModal = () => {
   const { resource } = InviteContributorDynamicModal.useState()
 
   return (
-    <InviteContributorDynamicModal.Component
-      title="Inviter des contributeurs"
-      className="fr-modal--overflow-visible"
-    >
+    <InviteContributorDynamicModal.Component title="Inviter des contributeurs">
       <p className="fr-mb-4w">
         Les contributeurs peuvent voir, éditer, inviter d’autres contributeurs
         et supprimer la ressource.
