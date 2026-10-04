@@ -52,7 +52,7 @@
     "@trpc/react-query": "11.18.0",
     "@trpc/server": "11.18.0",
     "aws-crt": "^1.33.1",
-    "axios": "^1.19.0",
+    "axios": "^1.20.0",
     "change-case": "^5.4.4",
     "cheerio": "1.2.0",
     "classnames": "^2.5.1",
