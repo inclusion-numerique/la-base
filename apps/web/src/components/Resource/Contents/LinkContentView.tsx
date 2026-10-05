@@ -65,7 +65,7 @@ const LinkContentView = ({
                 'fr-icon--sm',
               )}
             />
-            <ExternalLink href={url} onClick={handleLinkClick}>
+            <ExternalLink href={url} onClick={handleLinkClick} userContent>
               {url}
             </ExternalLink>
           </div>

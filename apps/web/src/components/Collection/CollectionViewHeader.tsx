@@ -1,3 +1,4 @@
+import { addUserContentRelToLinks } from '@app/ui/utils/userContentLinks'
 import BackButton from '@app/web/components/BackButton'
 import Images, { HeartIconSvg } from '@app/web/components/Collection/Images'
 import OwnershipInformation from '@app/web/components/OwnershipInformation'
@@ -59,7 +60,7 @@ const CollectionViewHeader = ({
                   <div
                     className="fr-text--lg fr-mb-0"
                     dangerouslySetInnerHTML={{
-                      __html: collection.description,
+                      __html: addUserContentRelToLinks(collection.description),
                     }}
                   />
                 )}

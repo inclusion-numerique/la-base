@@ -1,3 +1,4 @@
+import { userContentLinkRel } from '@app/ui/utils/userContentLinks'
 import { type AnchorHTMLAttributes, type ReactNode } from 'react'
 
 const ExternalLink = ({
@@ -6,6 +7,7 @@ const ExternalLink = ({
   children,
   ariaLabel,
   className = 'fr-link',
+  userContent = false,
   ...rest
 }: {
   href: string | null
@@ -13,6 +15,8 @@ const ExternalLink = ({
   children: ReactNode
   ariaLabel?: string
   className?: string
+  // Lien saisi par un utilisateur : ne doit pas transmettre d'autorité SEO
+  userContent?: boolean
 } & Omit<
   AnchorHTMLAttributes<HTMLAnchorElement>,
   'href' | 'target' | 'rel' | 'className' | 'children'
@@ -21,7 +25,7 @@ const ExternalLink = ({
     <a
       href={href}
       className={className}
-      rel="noopener noreferrer"
+      rel={userContent ? userContentLinkRel : 'noopener noreferrer'}
       target="_blank"
       aria-label={ariaLabel}
       {...rest}

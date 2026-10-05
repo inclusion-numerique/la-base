@@ -36,6 +36,8 @@ export const GET = async (
     status: 200,
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      // Copie du contenu des utilisateurs : ni indexée, ni liens suivis
+      'X-Robots-Tag': 'noindex, nofollow',
     },
   })
 }

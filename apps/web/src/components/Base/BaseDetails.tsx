@@ -31,7 +31,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
             {base.website && (
               <li className="fr-mt-2w">
                 <p className="fr-mb-0">Site internet</p>
-                <ExternalLink href={base.website} className="fr-link">
+                <ExternalLink
+                  href={base.website}
+                  className="fr-link"
+                  userContent
+                >
                   {displayedUrl}
                 </ExternalLink>
               </li>
@@ -43,7 +47,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
               <ul className={`fr-raw-list ${styles.websites}`}>
                 {base.twitter && (
                   <li>
-                    <ExternalLink href={base.twitter} className="fr-link">
+                    <ExternalLink
+                      href={base.twitter}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
                       Twitter
                     </ExternalLink>
@@ -51,7 +59,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
                 )}
                 {base.linkedin && (
                   <li>
-                    <ExternalLink href={base.linkedin} className="fr-link">
+                    <ExternalLink
+                      href={base.linkedin}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
                       LinkedIn
                     </ExternalLink>
@@ -59,7 +71,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
                 )}
                 {base.facebook && (
                   <li>
-                    <ExternalLink href={base.facebook} className="fr-link">
+                    <ExternalLink
+                      href={base.facebook}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
                       Facebook
                     </ExternalLink>

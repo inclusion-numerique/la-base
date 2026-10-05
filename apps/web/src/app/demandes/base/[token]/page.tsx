@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: metadataTitle('Demande pour rejoindre une base'),
+  // Page à jeton : ni indexée, ni liens suivis (description de base libre)
+  robots: 'noindex, nofollow',
 }
 
 const AcceptBaseJoinRequest = async ({
