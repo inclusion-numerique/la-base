@@ -2,23 +2,22 @@ version: 2.1
 
 orbs:
   skip: theodo/skip@0.1.2
-  queue: eddiewebb/queue@3.2.1
   coveralls: coveralls/coveralls@2.2.5
 executors:
   node:
     docker:
-      - image: cimg/node:25.3.0
+      - image: cimg/node:24.21.0
         environment:
           TZ: 'UTC'
   node22:
     docker:
-      - image: cimg/node:22.22.0
+      - image: cimg/node:22.23.3
         environment:
           TZ: 'UTC'
 
   node-postgres:
     docker:
-      - image: cimg/node:25.3.0
+      - image: cimg/node:24.21.0
         environment:
           TZ: 'UTC'
           CI_PG_ADMIN_URL: postgresql://postgres@localhost
@@ -28,12 +27,12 @@ executors:
           POSTGRES_USER: postgres
   node-browsers:
     docker:
-      - image: cimg/node:25.3.0-browsers
+      - image: cimg/node:24.21.0-browsers
         environment:
           TZ: 'UTC'
   node-e2e:
     docker:
-      - image: cimg/node:25.3.0-browsers
+      - image: cimg/node:24.21.0-browsers
         environment:
           TZ: 'UTC'
           CI_DATABASE_URL: postgresql://postgres@localhost/test
@@ -118,6 +117,7 @@ workflows:
             - test_web_integration
 
       - deploy_web:
+          serial-group: << pipeline.project.slug >>/deploy-web-<< pipeline.git.branch >>
           requires:
             - lint_web
             - lint_packages
@@ -563,8 +563,6 @@ jobs:
           name: 'Generate Prisma client for this platform'
           command: |
             pnpm --silent -F @app/web prisma generate
-      - queue/until_front_of_line:
-          my-pipeline: <<pipeline.number>>
       - run:
           name: Create Pending Deployment
           command: |
