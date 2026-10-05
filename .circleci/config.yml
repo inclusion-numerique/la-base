@@ -23,7 +23,7 @@ executors:
           TZ: 'UTC'
           CI_PG_ADMIN_URL: postgresql://postgres@localhost
           CI_DATABASE_URL: postgresql://postgres@localhost/test
-      - image: cimg/postgres:14.0
+      - image: cimg/postgres:17.11
         environment:
           POSTGRES_USER: postgres
   node-browsers:
@@ -41,7 +41,7 @@ executors:
         environment:
           MAILDEV_INCOMING_USER: mailuser
           MAILDEV_INCOMING_PASS: mailpassword
-      - image: cimg/postgres:14.0
+      - image: cimg/postgres:17.11
         environment:
           POSTGRES_USER: postgres
 
@@ -552,7 +552,8 @@ jobs:
           name: 'Setup and export database password'
           command: |
             pnpm --silent cli secrets:database:setup $NAMESPACE
-            echo "export DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password $NAMESPACE)" >> ${BASH_ENV}
+            DATABASE_PASSWORD="$(pnpm --silent cli secrets:database-password $NAMESPACE)"
+            echo "export DATABASE_PASSWORD=$(printf '%q' "$DATABASE_PASSWORD")" >> ${BASH_ENV}
       - run:
           name: 'Create terraform variables file from environment variables'
           command: |
@@ -591,6 +592,7 @@ jobs:
               - not:
                   equal: [main, << pipeline.git.branch >>]
           steps:
+            - install_postgresql_client
             - run:
                 name: 'Import main database dump on preview envs'
                 command: |
@@ -764,6 +766,16 @@ commands:
             wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
             echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
             sudo apt update && sudo apt install terraform=1.5.7-*
+
+  install_postgresql_client:
+    steps:
+      - run:
+          name: 'Install PostgreSQL 17 client'
+          command: |
+            wget -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql-archive-keyring.gpg
+            echo "deb [signed-by=/usr/share/keyrings/postgresql-archive-keyring.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+            sudo apt update && sudo apt install -y postgresql-client-17
+            echo 'export PATH=/usr/lib/postgresql/17/bin:$PATH' >> ${BASH_ENV}
 
   install_dependencies:
     steps:
