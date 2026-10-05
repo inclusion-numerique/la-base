@@ -1,10 +1,13 @@
 import ExternalLink from '@app/ui/components/ExternalLink'
 import { BaseDetailsDescription } from '@app/web/components/Base/BaseDetailsDescription'
 import type { BasePageData } from '@app/web/server/bases/getBase'
+import classNames from 'classnames'
 import Link from 'next/link'
 import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => {
+  const showEmail = !!base.email && base.emailIsPublic
+  const showContact = showEmail || !!base.website
   const displayedUrl = base.website
     ?.replace('https://', '')
     .replace('https://www.', '')
@@ -20,30 +23,51 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           </div>
         </div>
         <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
-          <h2 className="fr-mb-2w fr-h6">Contact</h2>
-          <ul className="fr-raw-list">
-            <li>
-              <p className="fr-mb-0">Adresse mail de contact</p>
-              <Link href={`mailto:${base.email}`} className="fr-link">
-                {base.email}
-              </Link>
-            </li>
-            {base.website && (
-              <li className="fr-mt-2w">
-                <p className="fr-mb-0">Site internet</p>
-                <ExternalLink href={base.website} className="fr-link">
-                  {displayedUrl}
-                </ExternalLink>
-              </li>
-            )}
-          </ul>
+          {showContact && (
+            <>
+              <h2 className="fr-mb-2w fr-h6">Contact</h2>
+              <ul className="fr-raw-list">
+                {showEmail && (
+                  <li className="fr-mb-2w">
+                    <p className="fr-mb-0">Adresse mail de contact</p>
+                    <Link href={`mailto:${base.email}`} className="fr-link">
+                      {base.email}
+                    </Link>
+                  </li>
+                )}
+                {base.website && (
+                  <li>
+                    <p className="fr-mb-0">Site internet</p>
+                    <ExternalLink
+                      href={base.website}
+                      className="fr-link"
+                      userContent
+                    >
+                      {displayedUrl}
+                    </ExternalLink>
+                  </li>
+                )}
+              </ul>
+            </>
+          )}
           {(base.facebook || base.twitter || base.linkedin) && (
             <>
-              <h2 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h2>
+              <h2
+                className={classNames(
+                  'fr-mb-2w fr-h6',
+                  showContact && 'fr-mt-3w',
+                )}
+              >
+                Nous suivre
+              </h2>
               <ul className={`fr-raw-list ${styles.websites}`}>
                 {base.twitter && (
                   <li>
-                    <ExternalLink href={base.twitter} className="fr-link">
+                    <ExternalLink
+                      href={base.twitter}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-twitter-fill fr-mr-1w" />
                       Twitter
                     </ExternalLink>
@@ -51,7 +75,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
                 )}
                 {base.linkedin && (
                   <li>
-                    <ExternalLink href={base.linkedin} className="fr-link">
+                    <ExternalLink
+                      href={base.linkedin}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-linkedin-box-fill fr-mr-1w" />
                       LinkedIn
                     </ExternalLink>
@@ -59,7 +87,11 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
                 )}
                 {base.facebook && (
                   <li>
-                    <ExternalLink href={base.facebook} className="fr-link">
+                    <ExternalLink
+                      href={base.facebook}
+                      className="fr-link"
+                      userContent
+                    >
                       <span className="fr-icon--sm fr-icon-facebook-circle-fill fr-mr-1w" />
                       Facebook
                     </ExternalLink>

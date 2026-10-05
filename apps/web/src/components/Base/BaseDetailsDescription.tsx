@@ -1,5 +1,6 @@
 'use client'
 
+import { addUserContentRelToLinks } from '@app/ui/utils/userContentLinks'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './BaseDetailsDescription.module.css'
@@ -46,7 +47,7 @@ export const BaseDetailsDescription = ({
         aria-label="Description de la base"
         tabIndex={-1}
         dangerouslySetInnerHTML={{
-          __html: description,
+          __html: addUserContentRelToLinks(description),
         }}
       />
       {showReadMoreButton && (

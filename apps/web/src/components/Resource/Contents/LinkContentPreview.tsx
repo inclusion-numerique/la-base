@@ -31,6 +31,7 @@ const LinkContentPreview = ({
                 href={url}
                 className={styles.titleLink}
                 onClick={onLinkClick}
+                userContent
               >
                 {title}
               </ExternalLink>

@@ -1,3 +1,4 @@
+import { addUserContentRelToLinks } from '@app/ui/utils/userContentLinks'
 import CollectionActions from '@app/web/components/Collection/CollectionActions'
 import { appendShareToken } from '@app/web/features/shareableLink/utils/shareTokenUtils'
 import type { CollectionListItem } from '@app/web/server/collections/getCollectionsList'
@@ -69,7 +70,7 @@ const CollectionCard = ({
               <div
                 className="fr-text--sm fr-mb-3v fr-text-mention--grey fr-mb-0"
                 dangerouslySetInnerHTML={{
-                  __html: collection.description,
+                  __html: addUserContentRelToLinks(collection.description),
                 }}
               />
             )}

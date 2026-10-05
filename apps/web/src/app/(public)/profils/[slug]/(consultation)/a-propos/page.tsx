@@ -1,5 +1,6 @@
 import BlockWithLabel from '@app/ui/components/BlockWithLabel'
 import ExternalLink from '@app/ui/components/ExternalLink'
+import { addUserContentRelToLinks } from '@app/ui/utils/userContentLinks'
 import { getProfilePageContext } from '@app/web/app/(public)/profils/[slug]/(consultation)/getProfilePageContext'
 import type { ProfilRouteParams } from '@app/web/app/(public)/profils/[slug]/profilRouteParams'
 import IconInSquare from '@app/web/components/IconInSquare'
@@ -46,7 +47,7 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
               {!!profile.description && (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: profile.description,
+                    __html: addUserContentRelToLinks(profile.description),
                   }}
                 />
               )}
@@ -73,7 +74,7 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
                   label="Site internet"
                   canDisplay={profile.website}
                 >
-                  <ExternalLink href={profile.website}>
+                  <ExternalLink href={profile.website} userContent>
                     {profile.website}
                   </ExternalLink>
                 </BlockWithLabel>
@@ -86,15 +87,21 @@ const AProposPage = async ({ params }: ProfilRouteParams) => {
                   <ExternalLink
                     href={profile.facebook}
                     icon="ri-facebook-circle-fill"
+                    userContent
                   >
                     Facebook
                   </ExternalLink>
-                  <ExternalLink href={profile.twitter} icon="ri-twitter-fill">
+                  <ExternalLink
+                    href={profile.twitter}
+                    icon="ri-twitter-fill"
+                    userContent
+                  >
                     X (Twitter)
                   </ExternalLink>
                   <ExternalLink
                     href={profile.linkedin}
                     icon="ri-linkedin-box-fill"
+                    userContent
                   >
                     Linkedin
                   </ExternalLink>
