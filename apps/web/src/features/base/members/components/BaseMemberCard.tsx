@@ -24,7 +24,7 @@ const BaseMemberCard = ({
   member: BaseMember
   user: SessionUser | null
   canChangeMemberRole: boolean
-  // Réservé aux administrateurs de la base : la page membres est publique
+  // Réservé à qui gère les membres : la page membres est publique
   canSeeEmail: boolean
 }) => {
   const [isAdmin, setIsAdmin] = useState(member.isAdmin)
@@ -72,7 +72,7 @@ const BaseMemberCard = ({
                 {member.member.name ??
                   (canSeeEmail ? member.member.email : 'Membre invité')}
               </h3>
-              {canSeeEmail && !!member.member.email && member.member.name && (
+              {canSeeEmail && member.member.name && (
                 <span
                   className={classNames(
                     styles.role,

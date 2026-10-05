@@ -22,7 +22,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
 
     cy.testId('base-invite-member-button').should('not.exist')
     cy.testId('member-card').should('exist')
-    // Les emails des membres ne sont visibles que des administrateurs de la base
+    // Les emails des membres ne sont visibles que de qui gère les membres
     cy.testId('member-card').should('not.contain', '@')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
@@ -65,7 +65,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
 
     cy.testId('base-invite-member-button').should('not.exist')
     cy.testId('member-card').should('exist')
-    // Les emails des membres ne sont visibles que des administrateurs de la base
+    // Les emails des membres ne sont visibles que de qui gère les membres
     cy.testId('member-card').should('not.contain', '@')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
@@ -127,7 +127,7 @@ describe('Utilisateur sans droit, je ne peux ni voir et ni editer la base', () =
 
     cy.testId('base-invite-member-button').should('exist')
     cy.testId('member-card').should('exist')
-    // Les emails des membres ne sont visibles que des administrateurs de la base
+    // Les emails des membres ne sont visibles que de qui gère les membres
     cy.testId('member-card').should('not.contain', '@')
 
     cy.visit(`/bases/${defaultTestBaseSlug}/editer`)
