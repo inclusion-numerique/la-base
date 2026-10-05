@@ -1,3 +1,0 @@
-# `data_scaleway_webhosting`
-
-Refer to the Terraform Registry for docs: [`data_scaleway_webhosting`](https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/webhosting).

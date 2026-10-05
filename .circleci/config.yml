@@ -784,6 +784,16 @@ commands:
       - run:
           name: 'Fetch dependencies'
           command: pnpm install --virtual-store-dir << pipeline.parameters.virtual_store_dir >> --frozen-lockfile
+      - restore_cache:
+          keys:
+            - << pipeline.parameters.cache_version >>-cdktf-bindings-{{ checksum "packages/cdk/cdktf.json" }}-{{ checksum "packages/cdk/scripts/generate-bindings.sh" }}-{{ checksum "<< pipeline.parameters.lockfile >>" }}
+      - run:
+          name: 'Generate cdktf provider bindings'
+          command: pnpm --silent -F @app/cdk generate
+      - save_cache:
+          key: << pipeline.parameters.cache_version >>-cdktf-bindings-{{ checksum "packages/cdk/cdktf.json" }}-{{ checksum "packages/cdk/scripts/generate-bindings.sh" }}-{{ checksum "<< pipeline.parameters.lockfile >>" }}
+          paths:
+            - ./packages/cdk/.gen
 
   create_dotenv_file:
     steps:
