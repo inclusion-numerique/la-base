@@ -129,6 +129,12 @@ export const locallyRestoreLatestMainBackup = new Command(
     const user = databaseUrlObject.username
     const database = databaseUrlObject.pathname.split('/')[1]
     const host = databaseUrlObject.hostname
+    const databasePassword = decodeURIComponent(databaseUrlObject.password)
+    const databaseUrlWithoutPassword = new URL(databaseUrl)
+    databaseUrlWithoutPassword.password = ''
+    const postgresClientOptions = {
+      env: { ...process.env, PGPASSWORD: databasePassword },
+    }
 
     const variables = {
       databaseInstanceId,
@@ -293,7 +299,7 @@ export const locallyRestoreLatestMainBackup = new Command(
         throw new Error('No download url available')
       }
 
-      output(`Backup is ready for download at ${selectedBackup.download_url}`)
+      output('Backup is ready for download')
       output(`Downloading backup to ${mainBackupFile}`)
 
       createVarDirectory()
@@ -359,18 +365,29 @@ export const locallyRestoreLatestMainBackup = new Command(
     output('Restoring database from backup file')
     await execFile(
       'pg_restore',
-      ['--no-owner', '--no-acl', '-d', databaseUrl, mainBackupFile],
+      [
+        '--no-owner',
+        '--no-acl',
+        '-d',
+        databaseUrlWithoutPassword.toString(),
+        mainBackupFile,
+      ],
       {
+        ...postgresClientOptions,
         maxBuffer: 5 * 1024 * 1024,
       },
     )
 
     output(`Granting all privileges to "${user}" role`)
-    await execFile('psql', [
-      databaseUrl,
-      '-c',
-      `GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";`,
-    ])
+    await execFile(
+      'psql',
+      [
+        databaseUrlWithoutPassword.toString(),
+        '-c',
+        `GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";`,
+      ],
+      postgresClientOptions,
+    )
 
     output(`Restored database to ${host}/${database} for "${user}" role`)
   })

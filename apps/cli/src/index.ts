@@ -20,6 +20,8 @@ import { listSecrets } from '@app/cli/commands/secrets/listSecrets'
 import { setupDatabaseSecret } from '@app/cli/commands/secrets/setupDatabaseSecret'
 import { deleteSentryEnvironmentIssues } from '@app/cli/commands/sentry/deleteSentryEnvironmentIssues'
 import { recycleOrphanedFiles } from '@app/cli/commands/storage/recycleOrphanedFiles'
+import { outputError } from '@app/cli/output'
+import { redactSecrets } from '@app/cli/redactSecrets'
 import { Command } from '@commander-js/extra-typings'
 import { migrateStorage } from './commands/storage-migration/storageMigration'
 
@@ -49,4 +51,11 @@ program.addCommand(migrateStorage)
 program.addCommand(recycleOrphanedFiles)
 program.addCommand(deleteSentryEnvironmentIssues)
 
-program.parse()
+program.parseAsync().catch((error: unknown) => {
+  outputError(
+    redactSecrets(
+      error instanceof Error ? (error.stack ?? error.message) : String(error),
+    ),
+  )
+  process.exit(1)
+})
