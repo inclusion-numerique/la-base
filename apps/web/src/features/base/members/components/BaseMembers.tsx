@@ -87,6 +87,7 @@ const BaseMembers = ({
             <BaseMemberCard
               base={base}
               canChangeMemberRole={canChangeMemberRole}
+              canSeeEmail={isBaseAdmin}
               member={member}
               user={user}
             />

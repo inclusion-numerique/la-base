@@ -18,11 +18,14 @@ const BaseMemberCard = ({
   member,
   user,
   canChangeMemberRole,
+  canSeeEmail,
 }: {
   base: BasePageData
   member: BaseMember
   user: SessionUser | null
   canChangeMemberRole: boolean
+  // Réservé aux administrateurs de la base : la page membres est publique
+  canSeeEmail: boolean
 }) => {
   const [isAdmin, setIsAdmin] = useState(member.isAdmin)
   const mutate = trpc.baseMember.changeRole.useMutation()
@@ -66,9 +69,10 @@ const BaseMemberCard = ({
               href={`/profils/${member.member.slug}`}
             >
               <h3 className="fr-text--md fr-text--medium fr-my-auto">
-                {member.member.name ?? member.member.email}
+                {member.member.name ??
+                  (canSeeEmail ? member.member.email : 'Membre invité')}
               </h3>
-              {!!member.member.email && member.member.name && (
+              {canSeeEmail && !!member.member.email && member.member.name && (
                 <span
                   className={classNames(
                     styles.role,
