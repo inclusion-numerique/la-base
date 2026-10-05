@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_binding
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_binding
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,13 +10,13 @@ export interface DataScalewayAnnotationsBindingConfig extends cdktf.TerraformMet
   /**
   * The ID of the annotation binding to retrieve.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_binding#binding_id DataScalewayAnnotationsBinding#binding_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_binding#binding_id DataScalewayAnnotationsBinding#binding_id}
   */
   readonly bindingId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_binding scaleway_annotations_binding}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_binding scaleway_annotations_binding}
 */
 export class DataScalewayAnnotationsBinding extends cdktf.TerraformDataSource {
 
@@ -32,7 +32,7 @@ export class DataScalewayAnnotationsBinding extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayAnnotationsBinding resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayAnnotationsBinding to import
-  * @param importFromId The id of the existing DataScalewayAnnotationsBinding that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_binding#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayAnnotationsBinding that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_binding#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayAnnotationsBinding to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -44,7 +44,7 @@ export class DataScalewayAnnotationsBinding extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_binding scaleway_annotations_binding} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_binding scaleway_annotations_binding} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -55,8 +55,8 @@ export class DataScalewayAnnotationsBinding extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_annotations_binding',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

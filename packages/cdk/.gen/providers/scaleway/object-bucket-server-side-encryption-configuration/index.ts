@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface ObjectBucketServerSideEncryptionConfigurationConfig extends cdk
   /**
   * The bucket's name or regional ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#bucket ObjectBucketServerSideEncryptionConfiguration#bucket}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#bucket ObjectBucketServerSideEncryptionConfiguration#bucket}
   */
   readonly bucket: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#id ObjectBucketServerSideEncryptionConfiguration#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#id ObjectBucketServerSideEncryptionConfiguration#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface ObjectBucketServerSideEncryptionConfigurationConfig extends cdk
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#project_id ObjectBucketServerSideEncryptionConfiguration#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#project_id ObjectBucketServerSideEncryptionConfiguration#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#region ObjectBucketServerSideEncryptionConfiguration#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#region ObjectBucketServerSideEncryptionConfiguration#region}
   */
   readonly region?: string;
   /**
   * rule block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#rule ObjectBucketServerSideEncryptionConfiguration#rule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#rule ObjectBucketServerSideEncryptionConfiguration#rule}
   */
   readonly rule: ObjectBucketServerSideEncryptionConfigurationRule[] | cdktf.IResolvable;
 }
@@ -43,13 +43,13 @@ export interface ObjectBucketServerSideEncryptionConfigurationRuleApplyServerSid
   /**
   * Scaleway KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as 'aws:kms'. Will return an error if this element is absent while the sse_algorithm is 'aws:kms'.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#kms_master_key_id ObjectBucketServerSideEncryptionConfiguration#kms_master_key_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#kms_master_key_id ObjectBucketServerSideEncryptionConfiguration#kms_master_key_id}
   */
   readonly kmsMasterKeyId?: string;
   /**
   * Server-side encryption algorithm to use. Valid values are 'AES256', 'aws:kms'
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#sse_algorithm ObjectBucketServerSideEncryptionConfiguration#sse_algorithm}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#sse_algorithm ObjectBucketServerSideEncryptionConfiguration#sse_algorithm}
   */
   readonly sseAlgorithm: string;
 }
@@ -161,13 +161,13 @@ export interface ObjectBucketServerSideEncryptionConfigurationRule {
   /**
   * Whether or not to use Scaleway Object Bucket Keys for SSE-KMS.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#bucket_key_enabled ObjectBucketServerSideEncryptionConfiguration#bucket_key_enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#bucket_key_enabled ObjectBucketServerSideEncryptionConfiguration#bucket_key_enabled}
   */
   readonly bucketKeyEnabled?: boolean | cdktf.IResolvable;
   /**
   * apply_server_side_encryption_by_default block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#apply_server_side_encryption_by_default ObjectBucketServerSideEncryptionConfiguration#apply_server_side_encryption_by_default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#apply_server_side_encryption_by_default ObjectBucketServerSideEncryptionConfiguration#apply_server_side_encryption_by_default}
   */
   readonly applyServerSideEncryptionByDefault?: ObjectBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault;
 }
@@ -312,7 +312,7 @@ export class ObjectBucketServerSideEncryptionConfigurationRuleList extends cdktf
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration scaleway_object_bucket_server_side_encryption_configuration}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration scaleway_object_bucket_server_side_encryption_configuration}
 */
 export class ObjectBucketServerSideEncryptionConfiguration extends cdktf.TerraformResource {
 
@@ -328,7 +328,7 @@ export class ObjectBucketServerSideEncryptionConfiguration extends cdktf.Terrafo
   * Generates CDKTF code for importing a ObjectBucketServerSideEncryptionConfiguration resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the ObjectBucketServerSideEncryptionConfiguration to import
-  * @param importFromId The id of the existing ObjectBucketServerSideEncryptionConfiguration that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing ObjectBucketServerSideEncryptionConfiguration that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the ObjectBucketServerSideEncryptionConfiguration to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -340,7 +340,7 @@ export class ObjectBucketServerSideEncryptionConfiguration extends cdktf.Terrafo
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/object_bucket_server_side_encryption_configuration scaleway_object_bucket_server_side_encryption_configuration} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/object_bucket_server_side_encryption_configuration scaleway_object_bucket_server_side_encryption_configuration} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -351,8 +351,8 @@ export class ObjectBucketServerSideEncryptionConfiguration extends cdktf.Terrafo
       terraformResourceType: 'scaleway_object_bucket_server_side_encryption_configuration',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

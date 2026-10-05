@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,19 +10,19 @@ export interface AnnotationsBindingConfig extends cdktf.TerraformMetaArguments {
   /**
   * Scaleway Resource Number to associate.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding#srn AnnotationsBinding#srn}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding#srn AnnotationsBinding#srn}
   */
   readonly srn: string;
   /**
   * ID of the value to associate.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding#value_id AnnotationsBinding#value_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding#value_id AnnotationsBinding#value_id}
   */
   readonly valueId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding scaleway_annotations_binding}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding scaleway_annotations_binding}
 */
 export class AnnotationsBinding extends cdktf.TerraformResource {
 
@@ -38,7 +38,7 @@ export class AnnotationsBinding extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a AnnotationsBinding resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the AnnotationsBinding to import
-  * @param importFromId The id of the existing AnnotationsBinding that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing AnnotationsBinding that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the AnnotationsBinding to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -50,7 +50,7 @@ export class AnnotationsBinding extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_binding scaleway_annotations_binding} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_binding scaleway_annotations_binding} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -61,8 +61,8 @@ export class AnnotationsBinding extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_annotations_binding',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

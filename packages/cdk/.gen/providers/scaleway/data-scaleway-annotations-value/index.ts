@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_value
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_value
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,13 +10,13 @@ export interface DataScalewayAnnotationsValueConfig extends cdktf.TerraformMetaA
   /**
   * The ID of the annotation value to retrieve.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_value#value_id DataScalewayAnnotationsValue#value_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_value#value_id DataScalewayAnnotationsValue#value_id}
   */
   readonly valueId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_value scaleway_annotations_value}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_value scaleway_annotations_value}
 */
 export class DataScalewayAnnotationsValue extends cdktf.TerraformDataSource {
 
@@ -32,7 +32,7 @@ export class DataScalewayAnnotationsValue extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayAnnotationsValue resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayAnnotationsValue to import
-  * @param importFromId The id of the existing DataScalewayAnnotationsValue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_value#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayAnnotationsValue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_value#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayAnnotationsValue to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -44,7 +44,7 @@ export class DataScalewayAnnotationsValue extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/annotations_value scaleway_annotations_value} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/annotations_value scaleway_annotations_value} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -55,8 +55,8 @@ export class DataScalewayAnnotationsValue extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_annotations_value',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface MnqSqsQueueConfig extends cdktf.TerraformMetaArguments {
   /**
   * SQS access key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#access_key MnqSqsQueue#access_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#access_key MnqSqsQueue#access_key}
   */
   readonly accessKey: string;
   /**
   * Specifies whether to enable content-based deduplication. Allows omitting the deduplication ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#content_based_deduplication MnqSqsQueue#content_based_deduplication}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#content_based_deduplication MnqSqsQueue#content_based_deduplication}
   */
   readonly contentBasedDeduplication?: boolean | cdktf.IResolvable;
   /**
   * Whether the queue is a FIFO queue. If true, the queue name must end with .fifo
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#fifo_queue MnqSqsQueue#fifo_queue}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#fifo_queue MnqSqsQueue#fifo_queue}
   */
   readonly fifoQueue?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#id MnqSqsQueue#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#id MnqSqsQueue#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,73 +35,73 @@ export interface MnqSqsQueueConfig extends cdktf.TerraformMetaArguments {
   /**
   * The number of seconds the queue retains a message.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#message_max_age MnqSqsQueue#message_max_age}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#message_max_age MnqSqsQueue#message_max_age}
   */
   readonly messageMaxAge?: number;
   /**
   * The maximum size of a message. Should be in bytes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#message_max_size MnqSqsQueue#message_max_size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#message_max_size MnqSqsQueue#message_max_size}
   */
   readonly messageMaxSize?: number;
   /**
   * The name of the queue. Conflicts with name_prefix.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#name MnqSqsQueue#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#name MnqSqsQueue#name}
   */
   readonly name?: string;
   /**
   * Creates a unique name beginning with the specified prefix. Conflicts with name.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#name_prefix MnqSqsQueue#name_prefix}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#name_prefix MnqSqsQueue#name_prefix}
   */
   readonly namePrefix?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#project_id MnqSqsQueue#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#project_id MnqSqsQueue#project_id}
   */
   readonly projectId?: string;
   /**
   * The number of seconds to wait for a message to arrive in the queue before returning.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#receive_wait_time_seconds MnqSqsQueue#receive_wait_time_seconds}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#receive_wait_time_seconds MnqSqsQueue#receive_wait_time_seconds}
   */
   readonly receiveWaitTimeSeconds?: number;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#region MnqSqsQueue#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#region MnqSqsQueue#region}
   */
   readonly region?: string;
   /**
   * SQS secret key
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#secret_key MnqSqsQueue#secret_key}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#secret_key MnqSqsQueue#secret_key}
   */
   readonly secretKey: string;
   /**
   * The sqs endpoint
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#sqs_endpoint MnqSqsQueue#sqs_endpoint}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#sqs_endpoint MnqSqsQueue#sqs_endpoint}
   */
   readonly sqsEndpoint?: string;
   /**
   * The number of seconds a message is hidden from other consumers.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#visibility_timeout_seconds MnqSqsQueue#visibility_timeout_seconds}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#visibility_timeout_seconds MnqSqsQueue#visibility_timeout_seconds}
   */
   readonly visibilityTimeoutSeconds?: number;
   /**
   * dead_letter_queue block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#dead_letter_queue MnqSqsQueue#dead_letter_queue}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#dead_letter_queue MnqSqsQueue#dead_letter_queue}
   */
   readonly deadLetterQueue?: MnqSqsQueueDeadLetterQueue;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#timeouts MnqSqsQueue#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#timeouts MnqSqsQueue#timeouts}
   */
   readonly timeouts?: MnqSqsQueueTimeouts;
 }
@@ -109,7 +109,7 @@ export interface MnqSqsQueueDeadLetterQueue {
   /**
   * The ID or ARN of the dead-letter queue where messages are sent after the maximum receive count is exceeded.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#id MnqSqsQueue#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#id MnqSqsQueue#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -118,7 +118,7 @@ export interface MnqSqsQueueDeadLetterQueue {
   /**
   * The number of times a message is delivered to the source queue before being sent to the dead-letter queue. Must be between 1 and 1,000.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#max_receive_count MnqSqsQueue#max_receive_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#max_receive_count MnqSqsQueue#max_receive_count}
   */
   readonly maxReceiveCount: number;
 }
@@ -225,19 +225,19 @@ export class MnqSqsQueueDeadLetterQueueOutputReference extends cdktf.ComplexObje
 }
 export interface MnqSqsQueueTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#create MnqSqsQueue#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#create MnqSqsQueue#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#default MnqSqsQueue#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#default MnqSqsQueue#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#delete MnqSqsQueue#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#delete MnqSqsQueue#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#update MnqSqsQueue#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#update MnqSqsQueue#update}
   */
   readonly update?: string;
 }
@@ -418,7 +418,7 @@ export class MnqSqsQueueTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue scaleway_mnq_sqs_queue}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue scaleway_mnq_sqs_queue}
 */
 export class MnqSqsQueue extends cdktf.TerraformResource {
 
@@ -434,7 +434,7 @@ export class MnqSqsQueue extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MnqSqsQueue resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MnqSqsQueue to import
-  * @param importFromId The id of the existing MnqSqsQueue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MnqSqsQueue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MnqSqsQueue to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -446,7 +446,7 @@ export class MnqSqsQueue extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sqs_queue scaleway_mnq_sqs_queue} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sqs_queue scaleway_mnq_sqs_queue} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -457,8 +457,8 @@ export class MnqSqsQueue extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mnq_sqs_queue',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

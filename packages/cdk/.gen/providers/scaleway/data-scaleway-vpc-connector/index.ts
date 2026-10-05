@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayVpcConnectorConfig extends cdktf.TerraformMetaArgum
   /**
   * The ID of the VPC connector
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#connector_id DataScalewayVpcConnector#connector_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#connector_id DataScalewayVpcConnector#connector_id}
   */
   readonly connectorId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#id DataScalewayVpcConnector#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#id DataScalewayVpcConnector#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface DataScalewayVpcConnectorConfig extends cdktf.TerraformMetaArgum
   /**
   * The name of the VPC connector
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#name DataScalewayVpcConnector#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#name DataScalewayVpcConnector#name}
   */
   readonly name?: string;
   /**
   * The Scaleway Project the VPC connector belongs to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#project_id DataScalewayVpcConnector#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#project_id DataScalewayVpcConnector#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#region DataScalewayVpcConnector#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#region DataScalewayVpcConnector#region}
   */
   readonly region?: string;
   /**
   * The tags associated with the VPC connector
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#tags DataScalewayVpcConnector#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#tags DataScalewayVpcConnector#tags}
   */
   readonly tags?: string[];
   /**
   * The ID of the target VPC to connect to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#target_vpc_id DataScalewayVpcConnector#target_vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#target_vpc_id DataScalewayVpcConnector#target_vpc_id}
   */
   readonly targetVpcId?: string;
   /**
   * The ID of the source VPC
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#vpc_id DataScalewayVpcConnector#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#vpc_id DataScalewayVpcConnector#vpc_id}
   */
   readonly vpcId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector scaleway_vpc_connector}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector scaleway_vpc_connector}
 */
 export class DataScalewayVpcConnector extends cdktf.TerraformDataSource {
 
@@ -75,7 +75,7 @@ export class DataScalewayVpcConnector extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayVpcConnector resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcConnector to import
-  * @param importFromId The id of the existing DataScalewayVpcConnector that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcConnector that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcConnector to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +87,7 @@ export class DataScalewayVpcConnector extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_connector scaleway_vpc_connector} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_connector scaleway_vpc_connector} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +98,8 @@ export class DataScalewayVpcConnector extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_vpc_connector',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

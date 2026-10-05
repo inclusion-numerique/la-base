@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayAuditTrailEventConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#id DataScalewayAuditTrailEvent#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#id DataScalewayAuditTrailEvent#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,85 +17,85 @@ export interface DataScalewayAuditTrailEventConfig extends cdktf.TerraformMetaAr
   /**
   * Name of the method of the API call performed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#method_name DataScalewayAuditTrailEvent#method_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#method_name DataScalewayAuditTrailEvent#method_name}
   */
   readonly methodName?: string;
   /**
   * Defines the order in which events are returned. Default value: recorded_at_desc
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#order_by DataScalewayAuditTrailEvent#order_by}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#order_by DataScalewayAuditTrailEvent#order_by}
   */
   readonly orderBy?: string;
   /**
   * ID of the organization containing the Audit Trail events.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#organization_id DataScalewayAuditTrailEvent#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#organization_id DataScalewayAuditTrailEvent#organization_id}
   */
   readonly organizationId?: string;
   /**
   * ID of the User or IAM application at the origin of the event
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#principal_id DataScalewayAuditTrailEvent#principal_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#principal_id DataScalewayAuditTrailEvent#principal_id}
   */
   readonly principalId?: string;
   /**
   * Scaleway product associated with the listed events in a hyphenated format
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#product_name DataScalewayAuditTrailEvent#product_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#product_name DataScalewayAuditTrailEvent#product_name}
   */
   readonly productName?: string;
   /**
   * ID of the project containing the Audit Trail events.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#project_id DataScalewayAuditTrailEvent#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#project_id DataScalewayAuditTrailEvent#project_id}
   */
   readonly projectId?: string;
   /**
   * The `recorded_after` parameter defines the earliest timestamp from which Audit Trail events are retrieved. Returns `one hour ago` by default (Format ISO 8601)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#recorded_after DataScalewayAuditTrailEvent#recorded_after}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#recorded_after DataScalewayAuditTrailEvent#recorded_after}
   */
   readonly recordedAfter?: string;
   /**
   * The `recorded_before` parameter defines the latest timestamp up to which Audit Trail events are retrieved. Must be later than recorded_after. Returns `now` by default (Format ISO 8601)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#recorded_before DataScalewayAuditTrailEvent#recorded_before}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#recorded_before DataScalewayAuditTrailEvent#recorded_before}
   */
   readonly recordedBefore?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#region DataScalewayAuditTrailEvent#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#region DataScalewayAuditTrailEvent#region}
   */
   readonly region?: string;
   /**
   * ID of the Scaleway resource associated with the listed events
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#resource_id DataScalewayAuditTrailEvent#resource_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#resource_id DataScalewayAuditTrailEvent#resource_id}
   */
   readonly resourceId?: string;
   /**
   * Type of the scaleway resources associated with the listed events
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#resource_type DataScalewayAuditTrailEvent#resource_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#resource_type DataScalewayAuditTrailEvent#resource_type}
   */
   readonly resourceType?: string;
   /**
   * Name of the service of the API call performed
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#service_name DataScalewayAuditTrailEvent#service_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#service_name DataScalewayAuditTrailEvent#service_name}
   */
   readonly serviceName?: string;
   /**
   * IP address at the origin of the event
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#source_ip DataScalewayAuditTrailEvent#source_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#source_ip DataScalewayAuditTrailEvent#source_ip}
   */
   readonly sourceIp?: string;
   /**
   * HTTP status code of the request
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#status DataScalewayAuditTrailEvent#status}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#status DataScalewayAuditTrailEvent#status}
   */
   readonly status?: number;
 }
@@ -332,7 +332,7 @@ export class DataScalewayAuditTrailEventEventsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event scaleway_audit_trail_event}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event scaleway_audit_trail_event}
 */
 export class DataScalewayAuditTrailEvent extends cdktf.TerraformDataSource {
 
@@ -348,7 +348,7 @@ export class DataScalewayAuditTrailEvent extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayAuditTrailEvent resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayAuditTrailEvent to import
-  * @param importFromId The id of the existing DataScalewayAuditTrailEvent that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayAuditTrailEvent that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayAuditTrailEvent to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -360,7 +360,7 @@ export class DataScalewayAuditTrailEvent extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/audit_trail_event scaleway_audit_trail_event} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/audit_trail_event scaleway_audit_trail_event} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -371,8 +371,8 @@ export class DataScalewayAuditTrailEvent extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_audit_trail_event',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

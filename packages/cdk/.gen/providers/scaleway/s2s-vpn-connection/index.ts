@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface S2SVpnConnectionConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the customer gateway to attach to the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#customer_gateway_id S2SVpnConnection#customer_gateway_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#customer_gateway_id S2SVpnConnection#customer_gateway_id}
   */
   readonly customerGatewayId?: string;
   /**
   * Defines whether route propagation is enabled or not
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#enable_route_propagation S2SVpnConnection#enable_route_propagation}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#enable_route_propagation S2SVpnConnection#enable_route_propagation}
   */
   readonly enableRoutePropagation?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#id S2SVpnConnection#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#id S2SVpnConnection#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,67 +29,67 @@ export interface S2SVpnConnectionConfig extends cdktf.TerraformMetaArguments {
   /**
   * Defines who initiates the IPsec tunnel
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#initiation_policy S2SVpnConnection#initiation_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#initiation_policy S2SVpnConnection#initiation_policy}
   */
   readonly initiationPolicy?: string;
   /**
   * Defines IP version of the IPSec Tunnel
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#is_ipv6 S2SVpnConnection#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#is_ipv6 S2SVpnConnection#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The name of the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#name S2SVpnConnection#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#name S2SVpnConnection#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#project_id S2SVpnConnection#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#project_id S2SVpnConnection#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#region S2SVpnConnection#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#region S2SVpnConnection#region}
   */
   readonly region?: string;
   /**
   * The list of tags to apply to the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#tags S2SVpnConnection#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#tags S2SVpnConnection#tags}
   */
   readonly tags?: string[];
   /**
   * The ID of the VPN gateway to attach to the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#vpn_gateway_id S2SVpnConnection#vpn_gateway_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#vpn_gateway_id S2SVpnConnection#vpn_gateway_id}
   */
   readonly vpnGatewayId?: string;
   /**
   * bgp_config_ipv4 block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#bgp_config_ipv4 S2SVpnConnection#bgp_config_ipv4}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#bgp_config_ipv4 S2SVpnConnection#bgp_config_ipv4}
   */
   readonly bgpConfigIpv4?: S2SVpnConnectionBgpConfigIpv4[] | cdktf.IResolvable;
   /**
   * bgp_config_ipv6 block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#bgp_config_ipv6 S2SVpnConnection#bgp_config_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#bgp_config_ipv6 S2SVpnConnection#bgp_config_ipv6}
   */
   readonly bgpConfigIpv6?: S2SVpnConnectionBgpConfigIpv6[] | cdktf.IResolvable;
   /**
   * esp_ciphers block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#esp_ciphers S2SVpnConnection#esp_ciphers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#esp_ciphers S2SVpnConnection#esp_ciphers}
   */
   readonly espCiphers?: S2SVpnConnectionEspCiphers[] | cdktf.IResolvable;
   /**
   * ikev2_ciphers block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#ikev2_ciphers S2SVpnConnection#ikev2_ciphers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#ikev2_ciphers S2SVpnConnection#ikev2_ciphers}
   */
   readonly ikev2Ciphers?: S2SVpnConnectionIkev2Ciphers[] | cdktf.IResolvable;
 }
@@ -267,19 +267,19 @@ export interface S2SVpnConnectionBgpConfigIpv4 {
   /**
   * The BGP peer IP on customer side
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#peer_private_ip S2SVpnConnection#peer_private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#peer_private_ip S2SVpnConnection#peer_private_ip}
   */
   readonly peerPrivateIp?: string;
   /**
   * The BGP peer IP on Scaleway side
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#private_ip S2SVpnConnection#private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#private_ip S2SVpnConnection#private_ip}
   */
   readonly privateIp?: string;
   /**
   * The ID of the routing policy to use for BGP route filtering
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#routing_policy_id S2SVpnConnection#routing_policy_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#routing_policy_id S2SVpnConnection#routing_policy_id}
   */
   readonly routingPolicyId: string;
 }
@@ -452,19 +452,19 @@ export interface S2SVpnConnectionBgpConfigIpv6 {
   /**
   * The BGP peer IP on customer side
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#peer_private_ip S2SVpnConnection#peer_private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#peer_private_ip S2SVpnConnection#peer_private_ip}
   */
   readonly peerPrivateIp?: string;
   /**
   * The BGP peer IP on Scaleway side
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#private_ip S2SVpnConnection#private_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#private_ip S2SVpnConnection#private_ip}
   */
   readonly privateIp?: string;
   /**
   * The ID of the routing policy to use for BGP route filtering
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#routing_policy_id S2SVpnConnection#routing_policy_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#routing_policy_id S2SVpnConnection#routing_policy_id}
   */
   readonly routingPolicyId: string;
 }
@@ -637,19 +637,19 @@ export interface S2SVpnConnectionEspCiphers {
   /**
   * The Diffie-Hellman group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#dh_group S2SVpnConnection#dh_group}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#dh_group S2SVpnConnection#dh_group}
   */
   readonly dhGroup?: string;
   /**
   * The encryption algorithm
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#encryption S2SVpnConnection#encryption}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#encryption S2SVpnConnection#encryption}
   */
   readonly encryption: string;
   /**
   * The integrity/hash algorithm
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#integrity S2SVpnConnection#integrity}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#integrity S2SVpnConnection#integrity}
   */
   readonly integrity?: string;
 }
@@ -822,19 +822,19 @@ export interface S2SVpnConnectionIkev2Ciphers {
   /**
   * The Diffie-Hellman group
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#dh_group S2SVpnConnection#dh_group}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#dh_group S2SVpnConnection#dh_group}
   */
   readonly dhGroup?: string;
   /**
   * The encryption algorithm
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#encryption S2SVpnConnection#encryption}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#encryption S2SVpnConnection#encryption}
   */
   readonly encryption: string;
   /**
   * The integrity/hash algorithm
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#integrity S2SVpnConnection#integrity}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#integrity S2SVpnConnection#integrity}
   */
   readonly integrity?: string;
 }
@@ -1005,7 +1005,7 @@ export class S2SVpnConnectionIkev2CiphersList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection scaleway_s2s_vpn_connection}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection scaleway_s2s_vpn_connection}
 */
 export class S2SVpnConnection extends cdktf.TerraformResource {
 
@@ -1021,7 +1021,7 @@ export class S2SVpnConnection extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a S2SVpnConnection resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the S2SVpnConnection to import
-  * @param importFromId The id of the existing S2SVpnConnection that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing S2SVpnConnection that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the S2SVpnConnection to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -1033,7 +1033,7 @@ export class S2SVpnConnection extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_connection scaleway_s2s_vpn_connection} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_connection scaleway_s2s_vpn_connection} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -1044,8 +1044,8 @@ export class S2SVpnConnection extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_s2s_vpn_connection',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1248,6 +1248,11 @@ export class S2SVpnConnection extends cdktf.TerraformResource {
   // secret_version - computed: true, optional: false, required: false
   public get secretVersion() {
     return this.getNumberAttribute('secret_version');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

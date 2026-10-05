@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,55 +10,55 @@ export interface KeyManagerKeyMaterialConfig extends cdktf.TerraformMetaArgument
   /**
   * ID of the key to import key material into. The key's origin must be external (UUID format). Can be a plain UUID or a regional ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#key_id KeyManagerKeyMaterial#key_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#key_id KeyManagerKeyMaterial#key_id}
   */
   readonly keyId: string;
   /**
   * The key material to import. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#key_material KeyManagerKeyMaterial#key_material}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#key_material KeyManagerKeyMaterial#key_material}
   */
   readonly keyMaterial?: string;
   /**
   * The key material to import in write-only mode. The key material is a random sequence of bytes used to derive a cryptographic key. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). The key material will not be stored in the Terraform state.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#key_material_wo KeyManagerKeyMaterial#key_material_wo}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#key_material_wo KeyManagerKeyMaterial#key_material_wo}
   */
   readonly keyMaterialWo?: string;
   /**
   * Version number to track changes to the write-only key material. Increment this value to trigger resource recreation. Required when using 'key_material_wo'.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#key_material_wo_version KeyManagerKeyMaterial#key_material_wo_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#key_material_wo_version KeyManagerKeyMaterial#key_material_wo_version}
   */
   readonly keyMaterialWoVersion?: number;
   /**
   * Region of the key. If not set, the region is derived from the key_id when possible or from the provider configuration.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#region KeyManagerKeyMaterial#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#region KeyManagerKeyMaterial#region}
   */
   readonly region?: string;
   /**
   * Optional salt for key derivation. A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy). Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#salt KeyManagerKeyMaterial#salt}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#salt KeyManagerKeyMaterial#salt}
   */
   readonly salt?: string;
   /**
   * Optional salt for key derivation in write-only mode. A salt is random data added to key material to ensure unique derived keys. Can be provided as raw bytes or a base64-encoded string (the provider will automatically normalize the input). The salt will not be stored in the Terraform state.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#salt_wo KeyManagerKeyMaterial#salt_wo}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#salt_wo KeyManagerKeyMaterial#salt_wo}
   */
   readonly saltWo?: string;
   /**
   * Version number to track changes to the write-only salt. Increment this value to recreate the resource with new salt. Required when using 'salt_wo'.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#salt_wo_version KeyManagerKeyMaterial#salt_wo_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#salt_wo_version KeyManagerKeyMaterial#salt_wo_version}
   */
   readonly saltWoVersion?: number;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material scaleway_key_manager_key_material}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material scaleway_key_manager_key_material}
 */
 export class KeyManagerKeyMaterial extends cdktf.TerraformResource {
 
@@ -74,7 +74,7 @@ export class KeyManagerKeyMaterial extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a KeyManagerKeyMaterial resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the KeyManagerKeyMaterial to import
-  * @param importFromId The id of the existing KeyManagerKeyMaterial that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing KeyManagerKeyMaterial that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the KeyManagerKeyMaterial to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -86,7 +86,7 @@ export class KeyManagerKeyMaterial extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key_material scaleway_key_manager_key_material} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key_material scaleway_key_manager_key_material} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -97,8 +97,8 @@ export class KeyManagerKeyMaterial extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_key_manager_key_material',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

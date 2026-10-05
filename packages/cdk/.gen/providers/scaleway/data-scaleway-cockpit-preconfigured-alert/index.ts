@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayCockpitPreconfiguredAlertConfig extends cdktf.Terra
   /**
   * Filter alerts by data source ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#data_source_id DataScalewayCockpitPreconfiguredAlert#data_source_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#data_source_id DataScalewayCockpitPreconfiguredAlert#data_source_id}
   */
   readonly dataSourceId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#id DataScalewayCockpitPreconfiguredAlert#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#id DataScalewayCockpitPreconfiguredAlert#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayCockpitPreconfiguredAlertConfig extends cdktf.Terra
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#project_id DataScalewayCockpitPreconfiguredAlert#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#project_id DataScalewayCockpitPreconfiguredAlert#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#region DataScalewayCockpitPreconfiguredAlert#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#region DataScalewayCockpitPreconfiguredAlert#region}
   */
   readonly region?: string;
   /**
   * Filter alerts by rule status (enabled, disabled)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#rule_status DataScalewayCockpitPreconfiguredAlert#rule_status}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#rule_status DataScalewayCockpitPreconfiguredAlert#rule_status}
   */
   readonly ruleStatus?: string;
 }
@@ -172,7 +172,7 @@ export class DataScalewayCockpitPreconfiguredAlertAlertsList extends cdktf.Compl
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert scaleway_cockpit_preconfigured_alert}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert scaleway_cockpit_preconfigured_alert}
 */
 export class DataScalewayCockpitPreconfiguredAlert extends cdktf.TerraformDataSource {
 
@@ -188,7 +188,7 @@ export class DataScalewayCockpitPreconfiguredAlert extends cdktf.TerraformDataSo
   * Generates CDKTF code for importing a DataScalewayCockpitPreconfiguredAlert resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayCockpitPreconfiguredAlert to import
-  * @param importFromId The id of the existing DataScalewayCockpitPreconfiguredAlert that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayCockpitPreconfiguredAlert that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayCockpitPreconfiguredAlert to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -200,7 +200,7 @@ export class DataScalewayCockpitPreconfiguredAlert extends cdktf.TerraformDataSo
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_preconfigured_alert scaleway_cockpit_preconfigured_alert} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_preconfigured_alert scaleway_cockpit_preconfigured_alert} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -211,8 +211,8 @@ export class DataScalewayCockpitPreconfiguredAlert extends cdktf.TerraformDataSo
       terraformResourceType: 'scaleway_cockpit_preconfigured_alert',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

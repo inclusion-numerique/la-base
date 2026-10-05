@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface VpcIngressRuleConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ingress rule description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#description VpcIngressRule#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#description VpcIngressRule#description}
   */
   readonly description?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#id VpcIngressRule#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#id VpcIngressRule#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface VpcIngressRuleConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the nexthop private network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#nexthop_private_network_id VpcIngressRule#nexthop_private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#nexthop_private_network_id VpcIngressRule#nexthop_private_network_id}
   */
   readonly nexthopPrivateNetworkId: string;
   /**
   * IP of the nexthop resource for the ingress rule
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#nexthop_resource_ip VpcIngressRule#nexthop_resource_ip}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#nexthop_resource_ip VpcIngressRule#nexthop_resource_ip}
   */
   readonly nexthopResourceIp: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#region VpcIngressRule#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#region VpcIngressRule#region}
   */
   readonly region?: string;
   /**
   * Source IP range to which this rule applies (CIDR notation with subnet mask)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#source VpcIngressRule#source}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#source VpcIngressRule#source}
   */
   readonly source: string;
   /**
   * The tags associated with the ingress rule
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#tags VpcIngressRule#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#tags VpcIngressRule#tags}
   */
   readonly tags?: string[];
   /**
   * The ID of the VPC the ingress rule belongs to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#vpc_id VpcIngressRule#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#vpc_id VpcIngressRule#vpc_id}
   */
   readonly vpcId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule scaleway_vpc_ingress_rule}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule scaleway_vpc_ingress_rule}
 */
 export class VpcIngressRule extends cdktf.TerraformResource {
 
@@ -75,7 +75,7 @@ export class VpcIngressRule extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a VpcIngressRule resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the VpcIngressRule to import
-  * @param importFromId The id of the existing VpcIngressRule that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing VpcIngressRule that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the VpcIngressRule to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +87,7 @@ export class VpcIngressRule extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/vpc_ingress_rule scaleway_vpc_ingress_rule} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/vpc_ingress_rule scaleway_vpc_ingress_rule} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +98,8 @@ export class VpcIngressRule extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_vpc_ingress_rule',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

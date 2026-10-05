@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,31 +10,31 @@ export interface IamSamlCertificateConfig extends cdktf.TerraformMetaArguments {
   /**
   * The content of the SAML certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate#content IamSamlCertificate#content}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate#content IamSamlCertificate#content}
   */
   readonly content: string;
   /**
   * The organization ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate#organization_id IamSamlCertificate#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate#organization_id IamSamlCertificate#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The ID of the SAML configuration
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate#saml_id IamSamlCertificate#saml_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate#saml_id IamSamlCertificate#saml_id}
   */
   readonly samlId?: string;
   /**
   * The type of the SAML certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate#type IamSamlCertificate#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate#type IamSamlCertificate#type}
   */
   readonly type: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate scaleway_iam_saml_certificate}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate scaleway_iam_saml_certificate}
 */
 export class IamSamlCertificate extends cdktf.TerraformResource {
 
@@ -50,7 +50,7 @@ export class IamSamlCertificate extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IamSamlCertificate resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IamSamlCertificate to import
-  * @param importFromId The id of the existing IamSamlCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IamSamlCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IamSamlCertificate to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -62,7 +62,7 @@ export class IamSamlCertificate extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml_certificate scaleway_iam_saml_certificate} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml_certificate scaleway_iam_saml_certificate} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -73,8 +73,8 @@ export class IamSamlCertificate extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iam_saml_certificate',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -152,6 +152,11 @@ export class IamSamlCertificate extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get samlIdInput() {
     return this._samlId;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // type - computed: false, optional: false, required: true

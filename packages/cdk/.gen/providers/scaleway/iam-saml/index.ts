@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,7 +10,7 @@ export interface IamSamlConfig extends cdktf.TerraformMetaArguments {
   /**
   * The organization ID. If not provided, the default organization configured in the provider is used.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml#organization_id IamSaml#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml#organization_id IamSaml#organization_id}
   */
   readonly organizationId?: string;
 }
@@ -75,7 +75,7 @@ export class IamSamlServiceProviderOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml scaleway_iam_saml}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml scaleway_iam_saml}
 */
 export class IamSaml extends cdktf.TerraformResource {
 
@@ -91,7 +91,7 @@ export class IamSaml extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a IamSaml resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the IamSaml to import
-  * @param importFromId The id of the existing IamSaml that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing IamSaml that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the IamSaml to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -103,7 +103,7 @@ export class IamSaml extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/iam_saml scaleway_iam_saml} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/iam_saml scaleway_iam_saml} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -114,8 +114,8 @@ export class IamSaml extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_iam_saml',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -167,6 +167,11 @@ export class IamSaml extends cdktf.TerraformResource {
   // single_sign_on_url - computed: true, optional: false, required: false
   public get singleSignOnUrl() {
     return this.getStringAttribute('single_sign_on_url');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

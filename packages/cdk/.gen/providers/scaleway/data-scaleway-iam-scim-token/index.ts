@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,25 +10,25 @@ export interface DataScalewayIamScimTokenConfig extends cdktf.TerraformMetaArgum
   /**
   * The organization ID. If not provided, the default organization configured in the provider is used.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token#organization_id DataScalewayIamScimToken#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token#organization_id DataScalewayIamScimToken#organization_id}
   */
   readonly organizationId?: string;
   /**
   * The SCIM configuration ID. If not provided, the SCIM configuration for the organization is used.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token#scim_id DataScalewayIamScimToken#scim_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token#scim_id DataScalewayIamScimToken#scim_id}
   */
   readonly scimId?: string;
   /**
   * The ID of the SCIM token to retrieve.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token#token_id DataScalewayIamScimToken#token_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token#token_id DataScalewayIamScimToken#token_id}
   */
   readonly tokenId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token scaleway_iam_scim_token}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token scaleway_iam_scim_token}
 */
 export class DataScalewayIamScimToken extends cdktf.TerraformDataSource {
 
@@ -44,7 +44,7 @@ export class DataScalewayIamScimToken extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayIamScimToken resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayIamScimToken to import
-  * @param importFromId The id of the existing DataScalewayIamScimToken that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayIamScimToken that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayIamScimToken to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -56,7 +56,7 @@ export class DataScalewayIamScimToken extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_scim_token scaleway_iam_scim_token} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_scim_token scaleway_iam_scim_token} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -67,8 +67,8 @@ export class DataScalewayIamScimToken extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iam_scim_token',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,25 +10,25 @@ export interface BillingBudgetConfig extends cdktf.TerraformMetaArguments {
   /**
   * Cost limit for the budget in cents.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget#consumption_limit BillingBudget#consumption_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget#consumption_limit BillingBudget#consumption_limit}
   */
   readonly consumptionLimit: number;
   /**
   * Whether the budget is enabled or not.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget#enabled BillingBudget#enabled}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget#enabled BillingBudget#enabled}
   */
   readonly enabled?: boolean | cdktf.IResolvable;
   /**
   * The organization ID. If not provided, the default organization configured in the provider is used.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget#organization_id BillingBudget#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget#organization_id BillingBudget#organization_id}
   */
   readonly organizationId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget scaleway_billing_budget}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget scaleway_billing_budget}
 */
 export class BillingBudget extends cdktf.TerraformResource {
 
@@ -44,7 +44,7 @@ export class BillingBudget extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a BillingBudget resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the BillingBudget to import
-  * @param importFromId The id of the existing BillingBudget that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing BillingBudget that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the BillingBudget to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -56,7 +56,7 @@ export class BillingBudget extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget scaleway_billing_budget} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget scaleway_billing_budget} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -67,8 +67,8 @@ export class BillingBudget extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_billing_budget',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

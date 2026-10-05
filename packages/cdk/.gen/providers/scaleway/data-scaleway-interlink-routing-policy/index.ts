@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInterlinkRoutingPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#id DataScalewayInterlinkRoutingPolicy#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#id DataScalewayInterlinkRoutingPolicy#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,31 +17,31 @@ export interface DataScalewayInterlinkRoutingPolicyConfig extends cdktf.Terrafor
   /**
   * The name of the routing policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#name DataScalewayInterlinkRoutingPolicy#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#name DataScalewayInterlinkRoutingPolicy#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#project_id DataScalewayInterlinkRoutingPolicy#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#project_id DataScalewayInterlinkRoutingPolicy#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#region DataScalewayInterlinkRoutingPolicy#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#region DataScalewayInterlinkRoutingPolicy#region}
   */
   readonly region?: string;
   /**
   * The ID of the routing policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#routing_policy_id DataScalewayInterlinkRoutingPolicy#routing_policy_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#routing_policy_id DataScalewayInterlinkRoutingPolicy#routing_policy_id}
   */
   readonly routingPolicyId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy scaleway_interlink_routing_policy}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy scaleway_interlink_routing_policy}
 */
 export class DataScalewayInterlinkRoutingPolicy extends cdktf.TerraformDataSource {
 
@@ -57,7 +57,7 @@ export class DataScalewayInterlinkRoutingPolicy extends cdktf.TerraformDataSourc
   * Generates CDKTF code for importing a DataScalewayInterlinkRoutingPolicy resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInterlinkRoutingPolicy to import
-  * @param importFromId The id of the existing DataScalewayInterlinkRoutingPolicy that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInterlinkRoutingPolicy that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInterlinkRoutingPolicy to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -69,7 +69,7 @@ export class DataScalewayInterlinkRoutingPolicy extends cdktf.TerraformDataSourc
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_routing_policy scaleway_interlink_routing_policy} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_routing_policy scaleway_interlink_routing_policy} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -80,8 +80,8 @@ export class DataScalewayInterlinkRoutingPolicy extends cdktf.TerraformDataSourc
       terraformResourceType: 'scaleway_interlink_routing_policy',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -205,6 +205,11 @@ export class DataScalewayInterlinkRoutingPolicy extends cdktf.TerraformDataSourc
   // Temporarily expose input value. Use with caution.
   public get routingPolicyIdInput() {
     return this._routingPolicyId;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // tags - computed: true, optional: false, required: false

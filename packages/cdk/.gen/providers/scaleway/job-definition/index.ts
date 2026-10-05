@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,35 +10,35 @@ export interface JobDefinitionConfig extends cdktf.TerraformMetaArguments {
   /**
   * Job arguments in list format. Overrides the default arguments defined in the job image.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#args JobDefinition#args}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#args JobDefinition#args}
   */
   readonly args?: string[];
   /**
   * Command to use for the job (in string format)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#command JobDefinition#command}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#command JobDefinition#command}
   */
   readonly command?: string;
   /**
   * CPU limit of the job
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#cpu_limit JobDefinition#cpu_limit}
   */
   readonly cpuLimit: number;
   /**
   * The job description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#description JobDefinition#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#description JobDefinition#description}
   */
   readonly description?: string;
   /**
   * Environment variables to pass to the job
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#env JobDefinition#env}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#env JobDefinition#env}
   */
   readonly env?: { [key: string]: string };
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#id JobDefinition#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#id JobDefinition#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -47,67 +47,67 @@ export interface JobDefinitionConfig extends cdktf.TerraformMetaArguments {
   /**
   * Image URI to use for the job
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#image_uri JobDefinition#image_uri}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#image_uri JobDefinition#image_uri}
   */
   readonly imageUri: string;
   /**
   * Local storage capacity of the job in MiB
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#local_storage_capacity JobDefinition#local_storage_capacity}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#local_storage_capacity JobDefinition#local_storage_capacity}
   */
   readonly localStorageCapacity: number;
   /**
   * Memory limit of the job
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#memory_limit JobDefinition#memory_limit}
   */
   readonly memoryLimit: number;
   /**
   * The job name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#name JobDefinition#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#name JobDefinition#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#project_id JobDefinition#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#project_id JobDefinition#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#region JobDefinition#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#region JobDefinition#region}
   */
   readonly region?: string;
   /**
   * Command to use for the job (in list format). Overrides the default command defined in the job image.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#startup_command JobDefinition#startup_command}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#startup_command JobDefinition#startup_command}
   */
   readonly startupCommand?: string[];
   /**
   * Timeout for the job in seconds
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#timeout JobDefinition#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#timeout JobDefinition#timeout}
   */
   readonly timeout?: string;
   /**
   * cron block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#cron JobDefinition#cron}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#cron JobDefinition#cron}
   */
   readonly cron?: JobDefinitionCron;
   /**
   * retry_policy block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#retry_policy JobDefinition#retry_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#retry_policy JobDefinition#retry_policy}
   */
   readonly retryPolicy?: JobDefinitionRetryPolicy;
   /**
   * secret_reference block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_reference JobDefinition#secret_reference}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#secret_reference JobDefinition#secret_reference}
   */
   readonly secretReference?: JobDefinitionSecretReference[] | cdktf.IResolvable;
 }
@@ -115,13 +115,13 @@ export interface JobDefinitionCron {
   /**
   * UNIX cron schedule to run job
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#schedule JobDefinition#schedule}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#schedule JobDefinition#schedule}
   */
   readonly schedule: string;
   /**
   * Timezone for the cron schedule, in tz database format (e.g., 'Europe/Paris').
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#timezone JobDefinition#timezone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#timezone JobDefinition#timezone}
   */
   readonly timezone: string;
 }
@@ -230,7 +230,7 @@ export interface JobDefinitionRetryPolicy {
   /**
   * The maximum number of retries upon job failure.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#max_retries JobDefinition#max_retries}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#max_retries JobDefinition#max_retries}
   */
   readonly maxRetries?: number;
 }
@@ -316,25 +316,25 @@ export interface JobDefinitionSecretReference {
   /**
   * An environment variable containing the secret value.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#environment JobDefinition#environment}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#environment JobDefinition#environment}
   */
   readonly environment?: string;
   /**
   * The absolute file path where the secret will be mounted.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#file JobDefinition#file}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#file JobDefinition#file}
   */
   readonly file?: string;
   /**
   * The secret unique identifier, it could be formatted as region/UUID or UUID. In case the region is passed, it must be the same as the job definition.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_id JobDefinition#secret_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#secret_id JobDefinition#secret_id}
   */
   readonly secretId: string;
   /**
   * The secret version.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#secret_version JobDefinition#secret_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#secret_version JobDefinition#secret_version}
   */
   readonly secretVersion?: string;
 }
@@ -539,7 +539,7 @@ export class JobDefinitionSecretReferenceList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition scaleway_job_definition}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition scaleway_job_definition}
 */
 export class JobDefinition extends cdktf.TerraformResource {
 
@@ -555,7 +555,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a JobDefinition resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the JobDefinition to import
-  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing JobDefinition that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the JobDefinition to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -567,7 +567,7 @@ export class JobDefinition extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/job_definition scaleway_job_definition} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/job_definition scaleway_job_definition} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -578,8 +578,8 @@ export class JobDefinition extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_job_definition',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface S2SVpnCustomerGatewayConfig extends cdktf.TerraformMetaArgument
   /**
   * The AS Number of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#asn S2SVpnCustomerGateway#asn}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#asn S2SVpnCustomerGateway#asn}
   */
   readonly asn: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#id S2SVpnCustomerGateway#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#id S2SVpnCustomerGateway#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,43 +23,43 @@ export interface S2SVpnCustomerGatewayConfig extends cdktf.TerraformMetaArgument
   /**
   * The public IPv4 address of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#ipv4_public S2SVpnCustomerGateway#ipv4_public}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#ipv4_public S2SVpnCustomerGateway#ipv4_public}
   */
   readonly ipv4Public?: string;
   /**
   * The public IPv6 address of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#ipv6_public S2SVpnCustomerGateway#ipv6_public}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#ipv6_public S2SVpnCustomerGateway#ipv6_public}
   */
   readonly ipv6Public?: string;
   /**
   * The name of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#name S2SVpnCustomerGateway#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#name S2SVpnCustomerGateway#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#project_id S2SVpnCustomerGateway#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#project_id S2SVpnCustomerGateway#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#region S2SVpnCustomerGateway#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#region S2SVpnCustomerGateway#region}
   */
   readonly region?: string;
   /**
   * The list of tags to apply to the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#tags S2SVpnCustomerGateway#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#tags S2SVpnCustomerGateway#tags}
   */
   readonly tags?: string[];
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway}
 */
 export class S2SVpnCustomerGateway extends cdktf.TerraformResource {
 
@@ -75,7 +75,7 @@ export class S2SVpnCustomerGateway extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a S2SVpnCustomerGateway resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the S2SVpnCustomerGateway to import
-  * @param importFromId The id of the existing S2SVpnCustomerGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing S2SVpnCustomerGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the S2SVpnCustomerGateway to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +87,7 @@ export class S2SVpnCustomerGateway extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +98,8 @@ export class S2SVpnCustomerGateway extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_s2s_vpn_customer_gateway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -240,6 +240,11 @@ export class S2SVpnCustomerGateway extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // tags - computed: false, optional: true, required: false

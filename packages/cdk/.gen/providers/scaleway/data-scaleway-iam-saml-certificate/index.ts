@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_saml_certificate
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_saml_certificate
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,13 +10,13 @@ export interface DataScalewayIamSamlCertificateConfig extends cdktf.TerraformMet
   /**
   * The ID of the SAML certificate
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_saml_certificate#certificate_id DataScalewayIamSamlCertificate#certificate_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_saml_certificate#certificate_id DataScalewayIamSamlCertificate#certificate_id}
   */
   readonly certificateId: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_saml_certificate scaleway_iam_saml_certificate}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_saml_certificate scaleway_iam_saml_certificate}
 */
 export class DataScalewayIamSamlCertificate extends cdktf.TerraformDataSource {
 
@@ -32,7 +32,7 @@ export class DataScalewayIamSamlCertificate extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayIamSamlCertificate resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayIamSamlCertificate to import
-  * @param importFromId The id of the existing DataScalewayIamSamlCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_saml_certificate#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayIamSamlCertificate that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_saml_certificate#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayIamSamlCertificate to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -44,7 +44,7 @@ export class DataScalewayIamSamlCertificate extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/iam_saml_certificate scaleway_iam_saml_certificate} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/iam_saml_certificate scaleway_iam_saml_certificate} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -55,8 +55,8 @@ export class DataScalewayIamSamlCertificate extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_iam_saml_certificate',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -99,6 +99,11 @@ export class DataScalewayIamSamlCertificate extends cdktf.TerraformDataSource {
   // origin - computed: true, optional: false, required: false
   public get origin() {
     return this.getStringAttribute('origin');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // type - computed: true, optional: false, required: false

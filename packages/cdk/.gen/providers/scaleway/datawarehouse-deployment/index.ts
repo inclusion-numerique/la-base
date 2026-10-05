@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DatawarehouseDeploymentConfig extends cdktf.TerraformMetaArgume
   /**
   * Maximum CPU count
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#cpu_max DatawarehouseDeployment#cpu_max}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#cpu_max DatawarehouseDeployment#cpu_max}
   */
   readonly cpuMax: number;
   /**
   * Minimum CPU count
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#cpu_min DatawarehouseDeployment#cpu_min}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#cpu_min DatawarehouseDeployment#cpu_min}
   */
   readonly cpuMin: number;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#id DatawarehouseDeployment#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#id DatawarehouseDeployment#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,253 +29,93 @@ export interface DatawarehouseDeploymentConfig extends cdktf.TerraformMetaArgume
   /**
   * Name of the Datawarehouse deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#name DatawarehouseDeployment#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#name DatawarehouseDeployment#name}
   */
   readonly name: string;
   /**
   * Password for the first user of the deployment. Only one of `password` or `password_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#password DatawarehouseDeployment#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#password DatawarehouseDeployment#password}
   */
   readonly password?: string;
   /**
   * Password for the first user of the deployment in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. `password_wo` will not be set in the Terraform state. To update the `password_wo`, you must also update the `password_wo_version`. When updating, the password is rotated via the Data Warehouse Users API (the initial user is selected as an admin user when present, otherwise the first user by name).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#password_wo DatawarehouseDeployment#password_wo}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#password_wo DatawarehouseDeployment#password_wo}
   */
   readonly passwordWo?: string;
   /**
   * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#password_wo_version DatawarehouseDeployment#password_wo_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#password_wo_version DatawarehouseDeployment#password_wo_version}
   */
   readonly passwordWoVersion?: number;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#project_id DatawarehouseDeployment#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#project_id DatawarehouseDeployment#project_id}
   */
   readonly projectId?: string;
   /**
   * RAM per CPU (GB)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#ram_per_cpu DatawarehouseDeployment#ram_per_cpu}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#ram_per_cpu DatawarehouseDeployment#ram_per_cpu}
   */
   readonly ramPerCpu: number;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#region DatawarehouseDeployment#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#region DatawarehouseDeployment#region}
   */
   readonly region?: string;
   /**
   * Number of replicas
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#replica_count DatawarehouseDeployment#replica_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#replica_count DatawarehouseDeployment#replica_count}
   */
   readonly replicaCount: number;
   /**
   * Number of shards for the deployment. This value is immutable and cannot be changed after creation.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#shard_count DatawarehouseDeployment#shard_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#shard_count DatawarehouseDeployment#shard_count}
   */
   readonly shardCount?: number;
   /**
   * Whether the deployment should be running (`true`) or stopped (`false`). Maps to the Start deployment and Stop deployment API actions.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#started DatawarehouseDeployment#started}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#started DatawarehouseDeployment#started}
   */
   readonly started?: boolean | cdktf.IResolvable;
   /**
   * List of tags to apply
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#tags DatawarehouseDeployment#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#tags DatawarehouseDeployment#tags}
   */
   readonly tags?: string[];
   /**
   * ClickHouse version to use
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#version DatawarehouseDeployment#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#version DatawarehouseDeployment#version}
   */
   readonly version: string;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#private_network DatawarehouseDeployment#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#private_network DatawarehouseDeployment#private_network}
   */
   readonly privateNetwork?: DatawarehouseDeploymentPrivateNetwork;
   /**
+  * public_network block
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#public_network DatawarehouseDeployment#public_network}
+  */
+  readonly publicNetwork?: DatawarehouseDeploymentPublicNetwork;
+  /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#timeouts DatawarehouseDeployment#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#timeouts DatawarehouseDeployment#timeouts}
   */
   readonly timeouts?: DatawarehouseDeploymentTimeouts;
-}
-export interface DatawarehouseDeploymentPublicNetworkServices {
-}
-
-export function datawarehouseDeploymentPublicNetworkServicesToTerraform(struct?: DatawarehouseDeploymentPublicNetworkServices): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-
-export function datawarehouseDeploymentPublicNetworkServicesToHclTerraform(struct?: DatawarehouseDeploymentPublicNetworkServices): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  const attrs = {
-  };
-  return attrs;
-}
-
-export class DatawarehouseDeploymentPublicNetworkServicesOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DatawarehouseDeploymentPublicNetworkServices | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DatawarehouseDeploymentPublicNetworkServices | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // port - computed: true, optional: false, required: false
-  public get port() {
-    return this.getNumberAttribute('port');
-  }
-
-  // protocol - computed: true, optional: false, required: false
-  public get protocol() {
-    return this.getStringAttribute('protocol');
-  }
-}
-
-export class DatawarehouseDeploymentPublicNetworkServicesList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DatawarehouseDeploymentPublicNetworkServicesOutputReference {
-    return new DatawarehouseDeploymentPublicNetworkServicesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
-}
-export interface DatawarehouseDeploymentPublicNetwork {
-}
-
-export function datawarehouseDeploymentPublicNetworkToTerraform(struct?: DatawarehouseDeploymentPublicNetwork): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-
-export function datawarehouseDeploymentPublicNetworkToHclTerraform(struct?: DatawarehouseDeploymentPublicNetwork): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  const attrs = {
-  };
-  return attrs;
-}
-
-export class DatawarehouseDeploymentPublicNetworkOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DatawarehouseDeploymentPublicNetwork | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DatawarehouseDeploymentPublicNetwork | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // dns_record - computed: true, optional: false, required: false
-  public get dnsRecord() {
-    return this.getStringAttribute('dns_record');
-  }
-
-  // id - computed: true, optional: false, required: false
-  public get id() {
-    return this.getStringAttribute('id');
-  }
-
-  // services - computed: true, optional: false, required: false
-  private _services = new DatawarehouseDeploymentPublicNetworkServicesList(this, "services", false);
-  public get services() {
-    return this._services;
-  }
-}
-
-export class DatawarehouseDeploymentPublicNetworkList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DatawarehouseDeploymentPublicNetworkOutputReference {
-    return new DatawarehouseDeploymentPublicNetworkOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
 }
 export interface DatawarehouseDeploymentPrivateNetworkServices {
 }
@@ -361,7 +201,7 @@ export interface DatawarehouseDeploymentPrivateNetwork {
   /**
   * The private network ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#pn_id DatawarehouseDeployment#pn_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#pn_id DatawarehouseDeployment#pn_id}
   */
   readonly pnId: string;
 }
@@ -456,21 +296,201 @@ export class DatawarehouseDeploymentPrivateNetworkOutputReference extends cdktf.
     return this._services;
   }
 }
+export interface DatawarehouseDeploymentPublicNetworkServices {
+}
+
+export function datawarehouseDeploymentPublicNetworkServicesToTerraform(struct?: DatawarehouseDeploymentPublicNetworkServices): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+
+export function datawarehouseDeploymentPublicNetworkServicesToHclTerraform(struct?: DatawarehouseDeploymentPublicNetworkServices): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+  };
+  return attrs;
+}
+
+export class DatawarehouseDeploymentPublicNetworkServicesOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DatawarehouseDeploymentPublicNetworkServices | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DatawarehouseDeploymentPublicNetworkServices | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // port - computed: true, optional: false, required: false
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+
+  // protocol - computed: true, optional: false, required: false
+  public get protocol() {
+    return this.getStringAttribute('protocol');
+  }
+}
+
+export class DatawarehouseDeploymentPublicNetworkServicesList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DatawarehouseDeploymentPublicNetworkServicesOutputReference {
+    return new DatawarehouseDeploymentPublicNetworkServicesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DatawarehouseDeploymentPublicNetwork {
+  /**
+  * ID of the public endpoint
+  *
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#id DatawarehouseDeployment#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+}
+
+export function datawarehouseDeploymentPublicNetworkToTerraform(struct?: DatawarehouseDeploymentPublicNetworkOutputReference | DatawarehouseDeploymentPublicNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    id: cdktf.stringToTerraform(struct!.id),
+  }
+}
+
+
+export function datawarehouseDeploymentPublicNetworkToHclTerraform(struct?: DatawarehouseDeploymentPublicNetworkOutputReference | DatawarehouseDeploymentPublicNetwork): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  const attrs = {
+    id: {
+      value: cdktf.stringToHclTerraform(struct!.id),
+      isBlock: false,
+      type: "simple",
+      storageClassType: "string",
+    },
+  };
+
+  // remove undefined attributes
+  return Object.fromEntries(Object.entries(attrs).filter(([_, value]) => value !== undefined && value.value !== undefined));
+}
+
+export class DatawarehouseDeploymentPublicNetworkOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): DatawarehouseDeploymentPublicNetwork | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._id !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.id = this._id;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DatawarehouseDeploymentPublicNetwork | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._id = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._id = value.id;
+    }
+  }
+
+  // dns_record - computed: true, optional: false, required: false
+  public get dnsRecord() {
+    return this.getStringAttribute('dns_record');
+  }
+
+  // id - computed: true, optional: true, required: false
+  private _id?: string; 
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
+  }
+
+  // services - computed: true, optional: false, required: false
+  private _services = new DatawarehouseDeploymentPublicNetworkServicesList(this, "services", false);
+  public get services() {
+    return this._services;
+  }
+}
 export interface DatawarehouseDeploymentTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#create DatawarehouseDeployment#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#create DatawarehouseDeployment#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#delete DatawarehouseDeployment#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#delete DatawarehouseDeployment#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#read DatawarehouseDeployment#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#read DatawarehouseDeployment#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#update DatawarehouseDeployment#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#update DatawarehouseDeployment#update}
   */
   readonly update?: string;
 }
@@ -651,7 +671,7 @@ export class DatawarehouseDeploymentTimeoutsOutputReference extends cdktf.Comple
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment scaleway_datawarehouse_deployment}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment scaleway_datawarehouse_deployment}
 */
 export class DatawarehouseDeployment extends cdktf.TerraformResource {
 
@@ -667,7 +687,7 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a DatawarehouseDeployment resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DatawarehouseDeployment to import
-  * @param importFromId The id of the existing DatawarehouseDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DatawarehouseDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DatawarehouseDeployment to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -679,7 +699,7 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_deployment scaleway_datawarehouse_deployment} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_deployment scaleway_datawarehouse_deployment} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -690,8 +710,8 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_datawarehouse_deployment',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -717,6 +737,7 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
     this._tags = config.tags;
     this._version = config.version;
     this._privateNetwork.internalValue = config.privateNetwork;
+    this._publicNetwork.internalValue = config.publicNetwork;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -848,12 +869,6 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
     return this._projectId;
   }
 
-  // public_network - computed: true, optional: false, required: false
-  private _publicNetwork = new DatawarehouseDeploymentPublicNetworkList(this, "public_network", false);
-  public get publicNetwork() {
-    return this._publicNetwork;
-  }
-
   // ram_per_cpu - computed: false, optional: false, required: true
   private _ramPerCpu?: number; 
   public get ramPerCpu() {
@@ -910,6 +925,11 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get shardCountInput() {
     return this._shardCount;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // started - computed: false, optional: true, required: false
@@ -983,6 +1003,22 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
     return this._privateNetwork.internalValue;
   }
 
+  // public_network - computed: false, optional: true, required: false
+  private _publicNetwork = new DatawarehouseDeploymentPublicNetworkOutputReference(this, "public_network");
+  public get publicNetwork() {
+    return this._publicNetwork;
+  }
+  public putPublicNetwork(value: DatawarehouseDeploymentPublicNetwork) {
+    this._publicNetwork.internalValue = value;
+  }
+  public resetPublicNetwork() {
+    this._publicNetwork.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get publicNetworkInput() {
+    return this._publicNetwork.internalValue;
+  }
+
   // timeouts - computed: false, optional: true, required: false
   private _timeouts = new DatawarehouseDeploymentTimeoutsOutputReference(this, "timeouts");
   public get timeouts() {
@@ -1021,6 +1057,7 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
       tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       version: cdktf.stringToTerraform(this._version),
       private_network: datawarehouseDeploymentPrivateNetworkToTerraform(this._privateNetwork.internalValue),
+      public_network: datawarehouseDeploymentPublicNetworkToTerraform(this._publicNetwork.internalValue),
       timeouts: datawarehouseDeploymentTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }
@@ -1122,6 +1159,12 @@ export class DatawarehouseDeployment extends cdktf.TerraformResource {
         isBlock: true,
         type: "list",
         storageClassType: "DatawarehouseDeploymentPrivateNetworkList",
+      },
+      public_network: {
+        value: datawarehouseDeploymentPublicNetworkToHclTerraform(this._publicNetwork.internalValue),
+        isBlock: true,
+        type: "list",
+        storageClassType: "DatawarehouseDeploymentPublicNetworkList",
       },
       timeouts: {
         value: datawarehouseDeploymentTimeoutsToHclTerraform(this._timeouts.internalValue),

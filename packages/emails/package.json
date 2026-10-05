@@ -16,8 +16,8 @@
     "@faire/mjml-react": "^4.0.1",
     "html-minifier": "^4.0.0",
     "mjml": "^5.4.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@types/html-minifier": "^4.0.6",
@@ -25,9 +25,9 @@
     "@types/mjml": "^5.0.0",
     "@types/mjml-core": "^5.1.0",
     "@types/mjml-react": "^2.0.10",
-    "@types/node": "^26.2.0",
-    "@types/react": "^19.2.18",
-    "jest": "^30.4.2",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "jest": "^30.5.2",
     "typescript": "^7.0.2"
   }
 }

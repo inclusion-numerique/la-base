@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,53 +10,53 @@ export interface ContainerConfig extends cdktf.TerraformMetaArguments {
   /**
   * Arguments passed to the command from the command "field". Overrides the arguments from the container image.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#args Container#args}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#args Container#args}
   */
   readonly args?: string[];
   /**
   * Command executed when the container starts. Overrides the command from the container image.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#command Container#command}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#command Container#command}
   */
   readonly command?: string[];
   /**
   * The amount of vCPU computing resources to allocate to each container. Defaults to 70.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#cpu_limit Container#cpu_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#cpu_limit Container#cpu_limit}
   */
   readonly cpuLimit?: number;
   /**
   * This allows you to control your production environment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#deploy Container#deploy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#deploy Container#deploy}
   */
   readonly deploy?: boolean | cdktf.IResolvable;
   /**
   * The container description
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#description Container#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#description Container#description}
   */
   readonly description?: string;
   /**
   * The environment variables to be injected into your container at runtime.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#environment_variables Container#environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#environment_variables Container#environment_variables}
   */
   readonly environmentVariables?: { [key: string]: string };
   /**
   * HTTP traffic configuration
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#http_option Container#http_option}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#http_option Container#http_option}
   */
   readonly httpOption?: string;
   /**
   * If true, it will allow only HTTPS connections to access your container to prevent it from being triggered by insecure connections (HTTP).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#https_connections_only Container#https_connections_only}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#https_connections_only Container#https_connections_only}
   */
   readonly httpsConnectionsOnly?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#id Container#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#id Container#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -65,151 +65,151 @@ export interface ContainerConfig extends cdktf.TerraformMetaArguments {
   /**
   * The image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag" or "nginx:latest").
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#image Container#image}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#image Container#image}
   */
   readonly image?: string;
   /**
   * Local storage limit of the container (in MB)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#local_storage_limit Container#local_storage_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#local_storage_limit Container#local_storage_limit}
   */
   readonly localStorageLimit?: number;
   /**
   * Local storage limit of the container (in bytes)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#local_storage_limit_bytes Container#local_storage_limit_bytes}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#local_storage_limit_bytes Container#local_storage_limit_bytes}
   */
   readonly localStorageLimitBytes?: number;
   /**
   * The maximum of number of instances this container can scale to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#max_scale Container#max_scale}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#max_scale Container#max_scale}
   */
   readonly maxScale?: number;
   /**
   * The memory computing resources in MB to allocate to each container.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#memory_limit Container#memory_limit}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#memory_limit Container#memory_limit}
   */
   readonly memoryLimit?: number;
   /**
   * The memory computing resources in bytes to allocate to each container.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#memory_limit_bytes Container#memory_limit_bytes}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#memory_limit_bytes Container#memory_limit_bytes}
   */
   readonly memoryLimitBytes?: number;
   /**
   * The minimum of number of instances this container can scale to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#min_scale Container#min_scale}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#min_scale Container#min_scale}
   */
   readonly minScale?: number;
   /**
   * The container name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#name Container#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#name Container#name}
   */
   readonly name?: string;
   /**
   * The container namespace associated
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#namespace_id Container#namespace_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#namespace_id Container#namespace_id}
   */
   readonly namespaceId: string;
   /**
   * The port to expose the container.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#port Container#port}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#port Container#port}
   */
   readonly port?: number;
   /**
   * The privacy type defines the way to authenticate to your container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#privacy Container#privacy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#privacy Container#privacy}
   */
   readonly privacy?: string;
   /**
   * ID of the Private Network the container is connected to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#private_network_id Container#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#private_network_id Container#private_network_id}
   */
   readonly privateNetworkId?: string;
   /**
   * The communication protocol http1 or h2c. Defaults to http1.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#protocol Container#protocol}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#protocol Container#protocol}
   */
   readonly protocol?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#region Container#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#region Container#region}
   */
   readonly region?: string;
   /**
   * The scaleway registry image address
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#registry_image Container#registry_image}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#registry_image Container#registry_image}
   */
   readonly registryImage?: string;
   /**
   * The sha256 of your source registry image, changing it will re-apply the deployment. Can be any string
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#registry_sha256 Container#registry_sha256}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#registry_sha256 Container#registry_sha256}
   */
   readonly registrySha256?: string;
   /**
   * Execution environment of the container.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#sandbox Container#sandbox}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#sandbox Container#sandbox}
   */
   readonly sandbox?: string;
   /**
   * The secret environment variables to be injected into your container at runtime.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#secret_environment_variables Container#secret_environment_variables}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#secret_environment_variables Container#secret_environment_variables}
   */
   readonly secretEnvironmentVariables?: { [key: string]: string };
   /**
   * List of tags ["tag1", "tag2", ...] attached to the container.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#tags Container#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#tags Container#tags}
   */
   readonly tags?: string[];
   /**
   * The maximum amount of time in seconds during which your container can process a request before we stop it. Defaults to 300s.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#timeout Container#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#timeout Container#timeout}
   */
   readonly timeout?: number;
   /**
   * health_check block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#health_check Container#health_check}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#health_check Container#health_check}
   */
   readonly healthCheck?: ContainerHealthCheck;
   /**
   * liveness_probe block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#liveness_probe Container#liveness_probe}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#liveness_probe Container#liveness_probe}
   */
   readonly livenessProbe?: ContainerLivenessProbe;
   /**
   * scaling_option block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#scaling_option Container#scaling_option}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#scaling_option Container#scaling_option}
   */
   readonly scalingOption?: ContainerScalingOption[] | cdktf.IResolvable;
   /**
   * startup_probe block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#startup_probe Container#startup_probe}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#startup_probe Container#startup_probe}
   */
   readonly startupProbe?: ContainerStartupProbe;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#timeouts Container#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#timeouts Container#timeouts}
   */
   readonly timeouts?: ContainerTimeouts;
 }
@@ -217,7 +217,7 @@ export interface ContainerHealthCheckHttp {
   /**
   * Path to use for the HTTP health check.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#path Container#path}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#path Container#path}
   */
   readonly path?: string;
 }
@@ -303,25 +303,25 @@ export interface ContainerHealthCheck {
   /**
   * Number of consecutive health check failures before considering the container unhealthy.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#failure_threshold Container#failure_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#failure_threshold Container#failure_threshold}
   */
   readonly failureThreshold?: number;
   /**
   * Period between health checks.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#interval Container#interval}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#interval Container#interval}
   */
   readonly interval?: string;
   /**
   * Perform TCP check on the container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#tcp Container#tcp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#tcp Container#tcp}
   */
   readonly tcp?: boolean | cdktf.IResolvable;
   /**
   * http block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#http Container#http}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#http Container#http}
   */
   readonly http?: ContainerHealthCheckHttp;
 }
@@ -494,7 +494,7 @@ export interface ContainerLivenessProbeHttp {
   /**
   * Path to use for the HTTP health check.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#path Container#path}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#path Container#path}
   */
   readonly path: string;
 }
@@ -577,31 +577,31 @@ export interface ContainerLivenessProbe {
   /**
   * Number of consecutive failures before considering the container has to be restarted.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#failure_threshold Container#failure_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#failure_threshold Container#failure_threshold}
   */
   readonly failureThreshold: number;
   /**
   * Time interval between checks (in duration notation).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#interval Container#interval}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#interval Container#interval}
   */
   readonly interval: string;
   /**
   * Perform TCP check on the container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#tcp Container#tcp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#tcp Container#tcp}
   */
   readonly tcp?: boolean | cdktf.IResolvable;
   /**
   * Duration before the check times out (in duration notation).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#timeout Container#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#timeout Container#timeout}
   */
   readonly timeout: string;
   /**
   * http block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#http Container#http}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#http Container#http}
   */
   readonly http?: ContainerLivenessProbeHttp;
 }
@@ -794,19 +794,19 @@ export interface ContainerScalingOption {
   /**
   * Scale depending on the number of concurrent requests being processed per container instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#concurrent_requests_threshold Container#concurrent_requests_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#concurrent_requests_threshold Container#concurrent_requests_threshold}
   */
   readonly concurrentRequestsThreshold?: number;
   /**
   * Scale depending on the CPU usage of a container instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#cpu_usage_threshold Container#cpu_usage_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#cpu_usage_threshold Container#cpu_usage_threshold}
   */
   readonly cpuUsageThreshold?: number;
   /**
   * Scale depending on the memory usage of a container instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#memory_usage_threshold Container#memory_usage_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#memory_usage_threshold Container#memory_usage_threshold}
   */
   readonly memoryUsageThreshold?: number;
 }
@@ -982,7 +982,7 @@ export interface ContainerStartupProbeHttp {
   /**
   * Path to use for the HTTP health check.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#path Container#path}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#path Container#path}
   */
   readonly path: string;
 }
@@ -1065,31 +1065,31 @@ export interface ContainerStartupProbe {
   /**
   * Number of consecutive failures before considering the container has to be restarted.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#failure_threshold Container#failure_threshold}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#failure_threshold Container#failure_threshold}
   */
   readonly failureThreshold: number;
   /**
   * Time interval between checks (in duration notation).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#interval Container#interval}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#interval Container#interval}
   */
   readonly interval: string;
   /**
   * Perform TCP check on the container
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#tcp Container#tcp}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#tcp Container#tcp}
   */
   readonly tcp?: boolean | cdktf.IResolvable;
   /**
   * Duration before the check times out (in duration notation).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#timeout Container#timeout}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#timeout Container#timeout}
   */
   readonly timeout: string;
   /**
   * http block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#http Container#http}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#http Container#http}
   */
   readonly http?: ContainerStartupProbeHttp;
 }
@@ -1280,23 +1280,23 @@ export class ContainerStartupProbeOutputReference extends cdktf.ComplexObject {
 }
 export interface ContainerTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#create Container#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#create Container#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#default Container#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#default Container#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#delete Container#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#delete Container#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#read Container#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#read Container#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#update Container#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#update Container#update}
   */
   readonly update?: string;
 }
@@ -1506,7 +1506,7 @@ export class ContainerTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container scaleway_container}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container scaleway_container}
 */
 export class Container extends cdktf.TerraformResource {
 
@@ -1522,7 +1522,7 @@ export class Container extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a Container resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the Container to import
-  * @param importFromId The id of the existing Container that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing Container that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the Container to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -1534,7 +1534,7 @@ export class Container extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/container scaleway_container} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/container scaleway_container} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -1545,8 +1545,8 @@ export class Container extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_container',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

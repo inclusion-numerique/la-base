@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayMongodbDatabasesConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases#id DataScalewayMongodbDatabases#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases#id DataScalewayMongodbDatabases#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,13 +17,13 @@ export interface DataScalewayMongodbDatabasesConfig extends cdktf.TerraformMetaA
   /**
   * MongoDB instance ID. Can be a plain UUID or a regional ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases#instance_id DataScalewayMongodbDatabases#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases#instance_id DataScalewayMongodbDatabases#instance_id}
   */
   readonly instanceId: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases#region DataScalewayMongodbDatabases#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases#region DataScalewayMongodbDatabases#region}
   */
   readonly region?: string;
 }
@@ -104,7 +104,7 @@ export class DataScalewayMongodbDatabasesDatabasesList extends cdktf.ComplexList
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases scaleway_mongodb_databases}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases scaleway_mongodb_databases}
 */
 export class DataScalewayMongodbDatabases extends cdktf.TerraformDataSource {
 
@@ -120,7 +120,7 @@ export class DataScalewayMongodbDatabases extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayMongodbDatabases resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayMongodbDatabases to import
-  * @param importFromId The id of the existing DataScalewayMongodbDatabases that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayMongodbDatabases that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayMongodbDatabases to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -132,7 +132,7 @@ export class DataScalewayMongodbDatabases extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/mongodb_databases scaleway_mongodb_databases} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/mongodb_databases scaleway_mongodb_databases} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -143,8 +143,8 @@ export class DataScalewayMongodbDatabases extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_mongodb_databases',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface MongodbUserConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#id MongodbUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#id MongodbUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,49 +17,49 @@ export interface MongodbUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * Instance on which the user is created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#instance_id MongodbUser#instance_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#instance_id MongodbUser#instance_id}
   */
   readonly instanceId: string;
   /**
   * MongoDB user name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#name MongodbUser#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#name MongodbUser#name}
   */
   readonly name: string;
   /**
   * MongoDB user password. Only one of `password` or `password_wo` should be specified.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#password MongodbUser#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#password MongodbUser#password}
   */
   readonly password?: string;
   /**
   * MongoDB user password in [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) mode. Only one of `password` or `password_wo` should be specified. `password_wo` will not be set in the Terraform state. To update the `password_wo`, you must also update the `password_wo_version`.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#password_wo MongodbUser#password_wo}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#password_wo MongodbUser#password_wo}
   */
   readonly passwordWo?: string;
   /**
   * The version of the [write-only](https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/guides/using-write-only-arguments) password. To update the `password_wo`, you must also update the `password_wo_version`.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#password_wo_version MongodbUser#password_wo_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#password_wo_version MongodbUser#password_wo_version}
   */
   readonly passwordWoVersion?: number;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#region MongodbUser#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#region MongodbUser#region}
   */
   readonly region?: string;
   /**
   * roles block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#roles MongodbUser#roles}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#roles MongodbUser#roles}
   */
   readonly roles?: MongodbUserRoles[] | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#timeouts MongodbUser#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#timeouts MongodbUser#timeouts}
   */
   readonly timeouts?: MongodbUserTimeouts;
 }
@@ -67,19 +67,19 @@ export interface MongodbUserRoles {
   /**
   * Apply role to any database
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#any_database MongodbUser#any_database}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#any_database MongodbUser#any_database}
   */
   readonly anyDatabase?: boolean | cdktf.IResolvable;
   /**
   * Database name for the role
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#database_name MongodbUser#database_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#database_name MongodbUser#database_name}
   */
   readonly databaseName?: string;
   /**
   * Role name (read, read_write, db_admin, sync)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#role MongodbUser#role}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#role MongodbUser#role}
   */
   readonly role: string;
 }
@@ -250,23 +250,23 @@ export class MongodbUserRolesList extends cdktf.ComplexList {
 }
 export interface MongodbUserTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#create MongodbUser#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#create MongodbUser#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#default MongodbUser#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#default MongodbUser#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#delete MongodbUser#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#delete MongodbUser#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#read MongodbUser#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#read MongodbUser#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#update MongodbUser#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#update MongodbUser#update}
   */
   readonly update?: string;
 }
@@ -476,7 +476,7 @@ export class MongodbUserTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user scaleway_mongodb_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user scaleway_mongodb_user}
 */
 export class MongodbUser extends cdktf.TerraformResource {
 
@@ -492,7 +492,7 @@ export class MongodbUser extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a MongodbUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the MongodbUser to import
-  * @param importFromId The id of the existing MongodbUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing MongodbUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the MongodbUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -504,7 +504,7 @@ export class MongodbUser extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mongodb_user scaleway_mongodb_user} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mongodb_user scaleway_mongodb_user} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -515,8 +515,8 @@ export class MongodbUser extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_mongodb_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

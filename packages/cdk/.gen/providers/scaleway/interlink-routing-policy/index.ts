@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface InterlinkRoutingPolicyConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#id InterlinkRoutingPolicy#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#id InterlinkRoutingPolicy#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,49 +17,49 @@ export interface InterlinkRoutingPolicyConfig extends cdktf.TerraformMetaArgumen
   /**
   * IP prefixes version of the routing policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#is_ipv6 InterlinkRoutingPolicy#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#is_ipv6 InterlinkRoutingPolicy#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The name of the routing policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#name InterlinkRoutingPolicy#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#name InterlinkRoutingPolicy#name}
   */
   readonly name?: string;
   /**
   * IP prefixes to accept from the peer (ranges of route announcements to accept)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#prefix_filter_in InterlinkRoutingPolicy#prefix_filter_in}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#prefix_filter_in InterlinkRoutingPolicy#prefix_filter_in}
   */
   readonly prefixFilterIn?: string[];
   /**
   * IP prefix filters to advertise to the peer (ranges of routes to advertise)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#prefix_filter_out InterlinkRoutingPolicy#prefix_filter_out}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#prefix_filter_out InterlinkRoutingPolicy#prefix_filter_out}
   */
   readonly prefixFilterOut?: string[];
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#project_id InterlinkRoutingPolicy#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#project_id InterlinkRoutingPolicy#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#region InterlinkRoutingPolicy#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#region InterlinkRoutingPolicy#region}
   */
   readonly region?: string;
   /**
   * The list of tags associated with the routing policy
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#tags InterlinkRoutingPolicy#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#tags InterlinkRoutingPolicy#tags}
   */
   readonly tags?: string[];
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy scaleway_interlink_routing_policy}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy scaleway_interlink_routing_policy}
 */
 export class InterlinkRoutingPolicy extends cdktf.TerraformResource {
 
@@ -75,7 +75,7 @@ export class InterlinkRoutingPolicy extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InterlinkRoutingPolicy resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InterlinkRoutingPolicy to import
-  * @param importFromId The id of the existing InterlinkRoutingPolicy that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InterlinkRoutingPolicy that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InterlinkRoutingPolicy to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +87,7 @@ export class InterlinkRoutingPolicy extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_routing_policy scaleway_interlink_routing_policy} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_routing_policy scaleway_interlink_routing_policy} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +98,8 @@ export class InterlinkRoutingPolicy extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_interlink_routing_policy',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -243,6 +243,11 @@ export class InterlinkRoutingPolicy extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // tags - computed: false, optional: true, required: false

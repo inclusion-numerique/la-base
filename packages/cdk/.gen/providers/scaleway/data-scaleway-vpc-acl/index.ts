@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayVpcAclConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl#id DataScalewayVpcAcl#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl#id DataScalewayVpcAcl#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,19 +17,19 @@ export interface DataScalewayVpcAclConfig extends cdktf.TerraformMetaArguments {
   /**
   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl#is_ipv6 DataScalewayVpcAcl#is_ipv6}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl#is_ipv6 DataScalewayVpcAcl#is_ipv6}
   */
   readonly isIpv6?: boolean | cdktf.IResolvable;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl#region DataScalewayVpcAcl#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl#region DataScalewayVpcAcl#region}
   */
   readonly region?: string;
   /**
   * The VPC ID to look up the ACL for
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl#vpc_id DataScalewayVpcAcl#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl#vpc_id DataScalewayVpcAcl#vpc_id}
   */
   readonly vpcId: string;
 }
@@ -150,7 +150,7 @@ export class DataScalewayVpcAclRulesList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl scaleway_vpc_acl}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl scaleway_vpc_acl}
 */
 export class DataScalewayVpcAcl extends cdktf.TerraformDataSource {
 
@@ -166,7 +166,7 @@ export class DataScalewayVpcAcl extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayVpcAcl resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayVpcAcl to import
-  * @param importFromId The id of the existing DataScalewayVpcAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayVpcAcl that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayVpcAcl to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -178,7 +178,7 @@ export class DataScalewayVpcAcl extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/vpc_acl scaleway_vpc_acl} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/vpc_acl scaleway_vpc_acl} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -189,8 +189,8 @@ export class DataScalewayVpcAcl extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_vpc_acl',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
