@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,25 +10,25 @@ export interface DataScalewayBillingBudgetAlertConfig extends cdktf.TerraformMet
   /**
   * The ID of the budget alert to retrieve.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert#alert_id DataScalewayBillingBudgetAlert#alert_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert#alert_id DataScalewayBillingBudgetAlert#alert_id}
   */
   readonly alertId: string;
   /**
   * The ID of the budget. If not provided, it will be retrieved from the alert.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert#budget_id DataScalewayBillingBudgetAlert#budget_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert#budget_id DataScalewayBillingBudgetAlert#budget_id}
   */
   readonly budgetId?: string;
   /**
   * The organization ID. If not provided, the default organization configured in the provider is used.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert#organization_id DataScalewayBillingBudgetAlert#organization_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert#organization_id DataScalewayBillingBudgetAlert#organization_id}
   */
   readonly organizationId?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert scaleway_billing_budget_alert}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert scaleway_billing_budget_alert}
 */
 export class DataScalewayBillingBudgetAlert extends cdktf.TerraformDataSource {
 
@@ -44,7 +44,7 @@ export class DataScalewayBillingBudgetAlert extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayBillingBudgetAlert resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayBillingBudgetAlert to import
-  * @param importFromId The id of the existing DataScalewayBillingBudgetAlert that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayBillingBudgetAlert that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayBillingBudgetAlert to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -56,7 +56,7 @@ export class DataScalewayBillingBudgetAlert extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/billing_budget_alert scaleway_billing_budget_alert} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/billing_budget_alert scaleway_billing_budget_alert} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -67,8 +67,8 @@ export class DataScalewayBillingBudgetAlert extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_billing_budget_alert',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

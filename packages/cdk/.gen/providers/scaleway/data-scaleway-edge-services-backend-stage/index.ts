@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface DataScalewayEdgeServicesBackendStageConfig extends cdktf.Terraf
   /**
   * The ID of the backend stage
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#backend_stage_id DataScalewayEdgeServicesBackendStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#backend_stage_id DataScalewayEdgeServicesBackendStage#backend_stage_id}
   */
   readonly backendStageId?: string;
   /**
   * Filter by S3 bucket name
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#bucket_name DataScalewayEdgeServicesBackendStage#bucket_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#bucket_name DataScalewayEdgeServicesBackendStage#bucket_name}
   */
   readonly bucketName?: string;
   /**
   * Filter by S3 bucket region
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#bucket_region DataScalewayEdgeServicesBackendStage#bucket_region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#bucket_region DataScalewayEdgeServicesBackendStage#bucket_region}
   */
   readonly bucketRegion?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#id DataScalewayEdgeServicesBackendStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#id DataScalewayEdgeServicesBackendStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,13 +35,13 @@ export interface DataScalewayEdgeServicesBackendStageConfig extends cdktf.Terraf
   /**
   * Filter by Load Balancer ID
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#lb_id DataScalewayEdgeServicesBackendStage#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#lb_id DataScalewayEdgeServicesBackendStage#lb_id}
   */
   readonly lbId?: string;
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#pipeline_id DataScalewayEdgeServicesBackendStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#pipeline_id DataScalewayEdgeServicesBackendStage#pipeline_id}
   */
   readonly pipelineId?: string;
 }
@@ -468,7 +468,7 @@ export class DataScalewayEdgeServicesBackendStageS3BackendConfigList extends cdk
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage scaleway_edge_services_backend_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage scaleway_edge_services_backend_stage}
 */
 export class DataScalewayEdgeServicesBackendStage extends cdktf.TerraformDataSource {
 
@@ -484,7 +484,7 @@ export class DataScalewayEdgeServicesBackendStage extends cdktf.TerraformDataSou
   * Generates CDKTF code for importing a DataScalewayEdgeServicesBackendStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayEdgeServicesBackendStage to import
-  * @param importFromId The id of the existing DataScalewayEdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayEdgeServicesBackendStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayEdgeServicesBackendStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -496,7 +496,7 @@ export class DataScalewayEdgeServicesBackendStage extends cdktf.TerraformDataSou
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/edge_services_backend_stage scaleway_edge_services_backend_stage} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/edge_services_backend_stage scaleway_edge_services_backend_stage} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -507,8 +507,8 @@ export class DataScalewayEdgeServicesBackendStage extends cdktf.TerraformDataSou
       terraformResourceType: 'scaleway_edge_services_backend_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

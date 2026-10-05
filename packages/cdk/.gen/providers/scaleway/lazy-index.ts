@@ -6,6 +6,7 @@ Object.defineProperty(exports, 'annotationsKey', { get: function () { return req
 Object.defineProperty(exports, 'annotationsValue', { get: function () { return require('./annotations-value'); } });
 Object.defineProperty(exports, 'appleSiliconRunner', { get: function () { return require('./apple-silicon-runner'); } });
 Object.defineProperty(exports, 'appleSiliconServer', { get: function () { return require('./apple-silicon-server'); } });
+Object.defineProperty(exports, 'autoscalingGroup', { get: function () { return require('./autoscaling-group'); } });
 Object.defineProperty(exports, 'autoscalingInstanceGroup', { get: function () { return require('./autoscaling-instance-group'); } });
 Object.defineProperty(exports, 'autoscalingInstancePolicy', { get: function () { return require('./autoscaling-instance-policy'); } });
 Object.defineProperty(exports, 'autoscalingInstanceTemplate', { get: function () { return require('./autoscaling-instance-template'); } });
@@ -74,6 +75,7 @@ Object.defineProperty(exports, 'instanceSecurityGroup', { get: function () { ret
 Object.defineProperty(exports, 'instanceSecurityGroupRules', { get: function () { return require('./instance-security-group-rules'); } });
 Object.defineProperty(exports, 'instanceServer', { get: function () { return require('./instance-server'); } });
 Object.defineProperty(exports, 'instanceSnapshot', { get: function () { return require('./instance-snapshot'); } });
+Object.defineProperty(exports, 'instanceTemplate', { get: function () { return require('./instance-template'); } });
 Object.defineProperty(exports, 'instanceUserData', { get: function () { return require('./instance-user-data'); } });
 Object.defineProperty(exports, 'instanceVolume', { get: function () { return require('./instance-volume'); } });
 Object.defineProperty(exports, 'interlinkLink', { get: function () { return require('./interlink-link'); } });
@@ -240,6 +242,7 @@ Object.defineProperty(exports, 'dataScalewayK8SCluster', { get: function () { re
 Object.defineProperty(exports, 'dataScalewayK8SPool', { get: function () { return require('./data-scaleway-k8s-pool'); } });
 Object.defineProperty(exports, 'dataScalewayK8SVersion', { get: function () { return require('./data-scaleway-k8s-version'); } });
 Object.defineProperty(exports, 'dataScalewayKafkaCluster', { get: function () { return require('./data-scaleway-kafka-cluster'); } });
+Object.defineProperty(exports, 'dataScalewayKafkaVersion', { get: function () { return require('./data-scaleway-kafka-version'); } });
 Object.defineProperty(exports, 'dataScalewayKeyManagerKey', { get: function () { return require('./data-scaleway-key-manager-key'); } });
 Object.defineProperty(exports, 'dataScalewayKeyManagerVerify', { get: function () { return require('./data-scaleway-key-manager-verify'); } });
 Object.defineProperty(exports, 'dataScalewayLb', { get: function () { return require('./data-scaleway-lb'); } });

@@ -5,8 +5,6 @@ import { createOutput } from '@app/cdk/output'
 import { terraformBackend } from '@app/cdk/terraformBackend'
 import {
   chromaticAppId,
-  cockpitGrafanaEditors,
-  cockpitGrafanaViewers,
   containerNamespaceName,
   databaseInstanceName,
   mainDomain,
@@ -23,7 +21,6 @@ import {
   smtpPort,
 } from '@app/config/config'
 import { Cockpit } from '@app/scaleway/cockpit'
-import { CockpitGrafanaUser } from '@app/scaleway/cockpit-grafana-user'
 import { CockpitToken } from '@app/scaleway/cockpit-token'
 import { ContainerNamespace } from '@app/scaleway/container-namespace'
 import { DataScalewayDomainZone } from '@app/scaleway/data-scaleway-domain-zone'
@@ -206,33 +203,6 @@ export class ProjectStack extends TerraformStack {
 
     const cockpit = new Cockpit(this, 'cockpit', {})
     const cockpitEndpoints = cockpit.endpoints.get(0)
-
-    // https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/resources/cockpit_grafana_user
-
-    for (const [index, login] of cockpitGrafanaEditors.entries()) {
-      const user = new CockpitGrafanaUser(this, `grafanaEditor${index}`, {
-        role: 'editor',
-        login,
-      })
-
-      output(
-        `grafanaEditorPassword_${index}` as keyof ProjectCdkOutput,
-        user.password,
-        'sensitive',
-      )
-    }
-
-    for (const [index, login] of cockpitGrafanaViewers.entries()) {
-      const user = new CockpitGrafanaUser(this, `grafanaViewer${index}`, {
-        role: 'viewer',
-        login,
-      })
-      output(
-        `grafanaViewerPassword_${index}` as keyof ProjectCdkOutput,
-        user.password,
-        'sensitive',
-      )
-    }
 
     // Create cockpit token for web app containers
     // https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/resources/cockpit_token

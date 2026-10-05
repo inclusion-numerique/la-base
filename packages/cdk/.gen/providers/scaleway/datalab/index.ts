@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,67 +10,67 @@ export interface DatalabConfig extends cdktf.TerraformMetaArguments {
   /**
   * A description for the Datalab instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#description Datalab#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#description Datalab#description}
   */
   readonly description?: string;
   /**
   * Whether a JupyterLab notebook is associated with the Datalab.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#has_notebook Datalab#has_notebook}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#has_notebook Datalab#has_notebook}
   */
   readonly hasNotebook?: boolean | cdktf.IResolvable;
   /**
   * The Spark main node configuration.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#main Datalab#main}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#main Datalab#main}
   */
   readonly main?: DatalabMain;
   /**
   * The name of the Datalab instance. If not provided, a random name is generated.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#name Datalab#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#name Datalab#name}
   */
   readonly name?: string;
   /**
   * The ID of the private network to attach the Datalab to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#private_network_id Datalab#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#private_network_id Datalab#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * The project ID the Datalab belongs to. Defaults to the provider's project ID.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#project_id Datalab#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#project_id Datalab#project_id}
   */
   readonly projectId?: string;
   /**
   * The region the Datalab is in. Only `fr-par` is currently supported.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#region Datalab#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#region Datalab#region}
   */
   readonly region?: string;
   /**
   * The Spark version to use for the Datalab instance. Available versions can be retrieved from `ListClusterVersions`.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#spark_version Datalab#spark_version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#spark_version Datalab#spark_version}
   */
   readonly sparkVersion: string;
   /**
   * Tags associated with the Datalab instance.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#tags Datalab#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#tags Datalab#tags}
   */
   readonly tags?: string[];
   /**
   * Persistent volume storage configuration.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#total_storage Datalab#total_storage}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#total_storage Datalab#total_storage}
   */
   readonly totalStorage?: DatalabTotalStorage;
   /**
   * The Spark worker nodes configuration.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#worker Datalab#worker}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#worker Datalab#worker}
   */
   readonly worker?: DatalabWorker;
 }
@@ -137,7 +137,7 @@ export interface DatalabMain {
   /**
   * The node type for the main node.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#node_type Datalab#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#node_type Datalab#node_type}
   */
   readonly nodeType: string;
 }
@@ -246,13 +246,13 @@ export interface DatalabTotalStorage {
   /**
   * The volume size in bytes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#size Datalab#size}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#size Datalab#size}
   */
   readonly size?: number;
   /**
   * The volume type. Defaults to `sbs_5k`.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#type Datalab#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#type Datalab#type}
   */
   readonly type?: string;
 }
@@ -436,13 +436,13 @@ export interface DatalabWorker {
   /**
   * The number of worker nodes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#node_count Datalab#node_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#node_count Datalab#node_count}
   */
   readonly nodeCount: number;
   /**
   * The node type for worker nodes.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#node_type Datalab#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#node_type Datalab#node_type}
   */
   readonly nodeType: string;
 }
@@ -565,7 +565,7 @@ export class DatalabWorkerOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab scaleway_datalab}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab scaleway_datalab}
 */
 export class Datalab extends cdktf.TerraformResource {
 
@@ -581,7 +581,7 @@ export class Datalab extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a Datalab resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the Datalab to import
-  * @param importFromId The id of the existing Datalab that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing Datalab that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the Datalab to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -593,7 +593,7 @@ export class Datalab extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datalab scaleway_datalab} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datalab scaleway_datalab} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -604,8 +604,8 @@ export class Datalab extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_datalab',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayCockpitConfigAConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config#id DataScalewayCockpitConfigA#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config#id DataScalewayCockpitConfigA#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,7 +17,7 @@ export interface DataScalewayCockpitConfigAConfig extends cdktf.TerraformMetaArg
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config#region DataScalewayCockpitConfigA#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config#region DataScalewayCockpitConfigA#region}
   */
   readonly region?: string;
 }
@@ -448,7 +448,7 @@ export class DataScalewayCockpitConfigProductMetricsRetentionList extends cdktf.
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config scaleway_cockpit_config}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config scaleway_cockpit_config}
 */
 export class DataScalewayCockpitConfigA extends cdktf.TerraformDataSource {
 
@@ -464,7 +464,7 @@ export class DataScalewayCockpitConfigA extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayCockpitConfigA resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayCockpitConfigA to import
-  * @param importFromId The id of the existing DataScalewayCockpitConfigA that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayCockpitConfigA that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayCockpitConfigA to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -476,7 +476,7 @@ export class DataScalewayCockpitConfigA extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/cockpit_config scaleway_cockpit_config} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/cockpit_config scaleway_cockpit_config} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -487,8 +487,8 @@ export class DataScalewayCockpitConfigA extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_cockpit_config',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

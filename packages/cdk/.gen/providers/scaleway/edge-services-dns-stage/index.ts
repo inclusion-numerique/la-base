@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface EdgeServicesDnsStageConfig extends cdktf.TerraformMetaArguments
   /**
   * The backend stage ID the DNS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#backend_stage_id EdgeServicesDnsStage#backend_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#backend_stage_id EdgeServicesDnsStage#backend_stage_id}
   */
   readonly backendStageId?: string;
   /**
   * The cache stage ID the DNS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#cache_stage_id EdgeServicesDnsStage#cache_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#cache_stage_id EdgeServicesDnsStage#cache_stage_id}
   */
   readonly cacheStageId?: string;
   /**
   * Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#fqdns EdgeServicesDnsStage#fqdns}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#fqdns EdgeServicesDnsStage#fqdns}
   */
   readonly fqdns?: string[];
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#id EdgeServicesDnsStage#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#id EdgeServicesDnsStage#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,31 +35,31 @@ export interface EdgeServicesDnsStageConfig extends cdktf.TerraformMetaArguments
   /**
   * The ID of the pipeline
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#pipeline_id EdgeServicesDnsStage#pipeline_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#pipeline_id EdgeServicesDnsStage#pipeline_id}
   */
   readonly pipelineId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#project_id EdgeServicesDnsStage#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#project_id EdgeServicesDnsStage#project_id}
   */
   readonly projectId?: string;
   /**
   * The TLS stage ID the DNS stage will be linked to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#tls_stage_id EdgeServicesDnsStage#tls_stage_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#tls_stage_id EdgeServicesDnsStage#tls_stage_id}
   */
   readonly tlsStageId?: string;
   /**
   * Defines whether wildcard (subdomains) is supported for the given domain. A wildcard certificate is required to make it work
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#wildcard_domain EdgeServicesDnsStage#wildcard_domain}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#wildcard_domain EdgeServicesDnsStage#wildcard_domain}
   */
   readonly wildcardDomain?: boolean | cdktf.IResolvable;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage scaleway_edge_services_dns_stage}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage scaleway_edge_services_dns_stage}
 */
 export class EdgeServicesDnsStage extends cdktf.TerraformResource {
 
@@ -75,7 +75,7 @@ export class EdgeServicesDnsStage extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a EdgeServicesDnsStage resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the EdgeServicesDnsStage to import
-  * @param importFromId The id of the existing EdgeServicesDnsStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing EdgeServicesDnsStage that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the EdgeServicesDnsStage to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -87,7 +87,7 @@ export class EdgeServicesDnsStage extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/edge_services_dns_stage scaleway_edge_services_dns_stage} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/edge_services_dns_stage scaleway_edge_services_dns_stage} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -98,8 +98,8 @@ export class EdgeServicesDnsStage extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_edge_services_dns_stage',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

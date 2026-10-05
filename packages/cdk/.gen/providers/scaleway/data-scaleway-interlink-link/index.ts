@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface DataScalewayInterlinkLinkConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#id DataScalewayInterlinkLink#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#id DataScalewayInterlinkLink#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,25 +17,25 @@ export interface DataScalewayInterlinkLinkConfig extends cdktf.TerraformMetaArgu
   /**
   * The ID of the link
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#link_id DataScalewayInterlinkLink#link_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#link_id DataScalewayInterlinkLink#link_id}
   */
   readonly linkId?: string;
   /**
   * Name of the link
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#name DataScalewayInterlinkLink#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#name DataScalewayInterlinkLink#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#project_id DataScalewayInterlinkLink#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#project_id DataScalewayInterlinkLink#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#region DataScalewayInterlinkLink#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#region DataScalewayInterlinkLink#region}
   */
   readonly region?: string;
 }
@@ -211,7 +211,7 @@ export class DataScalewayInterlinkLinkScwBgpConfigList extends cdktf.ComplexList
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link scaleway_interlink_link}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link scaleway_interlink_link}
 */
 export class DataScalewayInterlinkLink extends cdktf.TerraformDataSource {
 
@@ -227,7 +227,7 @@ export class DataScalewayInterlinkLink extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInterlinkLink resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInterlinkLink to import
-  * @param importFromId The id of the existing DataScalewayInterlinkLink that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInterlinkLink that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInterlinkLink to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -239,7 +239,7 @@ export class DataScalewayInterlinkLink extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_link scaleway_interlink_link} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_link scaleway_interlink_link} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -250,8 +250,8 @@ export class DataScalewayInterlinkLink extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_interlink_link',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -427,6 +427,11 @@ export class DataScalewayInterlinkLink extends cdktf.TerraformDataSource {
   private _scwBgpConfig = new DataScalewayInterlinkLinkScwBgpConfigList(this, "scw_bgp_config", false);
   public get scwBgpConfig() {
     return this._scwBgpConfig;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

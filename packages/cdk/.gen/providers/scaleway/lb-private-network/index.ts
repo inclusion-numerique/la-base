@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface LbPrivateNetworkAConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#id LbPrivateNetworkA#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#id LbPrivateNetworkA#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,51 +17,51 @@ export interface LbPrivateNetworkAConfig extends cdktf.TerraformMetaArguments {
   /**
   * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#ipam_ip_ids LbPrivateNetworkA#ipam_ip_ids}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#ipam_ip_ids LbPrivateNetworkA#ipam_ip_ids}
   */
   readonly ipamIpIds?: string[];
   /**
   * The load-balancer ID to attach the private network to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#lb_id LbPrivateNetworkA#lb_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#lb_id LbPrivateNetworkA#lb_id}
   */
   readonly lbId: string;
   /**
   * The private network ID to attach
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#private_network_id LbPrivateNetworkA#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#private_network_id LbPrivateNetworkA#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#project_id LbPrivateNetworkA#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#project_id LbPrivateNetworkA#project_id}
   */
   readonly projectId?: string;
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#zone LbPrivateNetworkA#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#zone LbPrivateNetworkA#zone}
   */
   readonly zone?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#timeouts LbPrivateNetworkA#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#timeouts LbPrivateNetworkA#timeouts}
   */
   readonly timeouts?: LbPrivateNetworkTimeouts;
 }
 export interface LbPrivateNetworkTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#default LbPrivateNetworkA#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#default LbPrivateNetworkA#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#delete LbPrivateNetworkA#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#delete LbPrivateNetworkA#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#read LbPrivateNetworkA#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#read LbPrivateNetworkA#read}
   */
   readonly read?: string;
 }
@@ -213,7 +213,7 @@ export class LbPrivateNetworkTimeoutsOutputReference extends cdktf.ComplexObject
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network scaleway_lb_private_network}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network scaleway_lb_private_network}
 */
 export class LbPrivateNetworkA extends cdktf.TerraformResource {
 
@@ -229,7 +229,7 @@ export class LbPrivateNetworkA extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a LbPrivateNetworkA resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the LbPrivateNetworkA to import
-  * @param importFromId The id of the existing LbPrivateNetworkA that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing LbPrivateNetworkA that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the LbPrivateNetworkA to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -241,7 +241,7 @@ export class LbPrivateNetworkA extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/lb_private_network scaleway_lb_private_network} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/lb_private_network scaleway_lb_private_network} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -252,8 +252,8 @@ export class LbPrivateNetworkA extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_lb_private_network',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,17 +10,17 @@ export interface DataScalewayInterlinkPopsConfig extends cdktf.TerraformMetaArgu
   /**
   * Filter for PoPs with a dedicated connection available for self-hosted links
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#dedicated_available DataScalewayInterlinkPops#dedicated_available}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#dedicated_available DataScalewayInterlinkPops#dedicated_available}
   */
   readonly dedicatedAvailable?: boolean | cdktf.IResolvable;
   /**
   * Hosting provider name to filter for
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#hosting_provider_name DataScalewayInterlinkPops#hosting_provider_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#hosting_provider_name DataScalewayInterlinkPops#hosting_provider_name}
   */
   readonly hostingProviderName?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#id DataScalewayInterlinkPops#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#id DataScalewayInterlinkPops#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -29,25 +29,25 @@ export interface DataScalewayInterlinkPopsConfig extends cdktf.TerraformMetaArgu
   /**
   * Filter for PoPs with a shared connection allowing this bandwidth size
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#link_bandwidth_mbps DataScalewayInterlinkPops#link_bandwidth_mbps}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#link_bandwidth_mbps DataScalewayInterlinkPops#link_bandwidth_mbps}
   */
   readonly linkBandwidthMbps?: number;
   /**
   * PoP name to filter for
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#name DataScalewayInterlinkPops#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#name DataScalewayInterlinkPops#name}
   */
   readonly name?: string;
   /**
   * Filter for PoPs hosting an available shared connection from this partner
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#partner_id DataScalewayInterlinkPops#partner_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#partner_id DataScalewayInterlinkPops#partner_id}
   */
   readonly partnerId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#region DataScalewayInterlinkPops#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#region DataScalewayInterlinkPops#region}
   */
   readonly region?: string;
 }
@@ -168,7 +168,7 @@ export class DataScalewayInterlinkPopsPopsList extends cdktf.ComplexList {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops scaleway_interlink_pops}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops scaleway_interlink_pops}
 */
 export class DataScalewayInterlinkPops extends cdktf.TerraformDataSource {
 
@@ -184,7 +184,7 @@ export class DataScalewayInterlinkPops extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayInterlinkPops resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayInterlinkPops to import
-  * @param importFromId The id of the existing DataScalewayInterlinkPops that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayInterlinkPops that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayInterlinkPops to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -196,7 +196,7 @@ export class DataScalewayInterlinkPops extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/interlink_pops scaleway_interlink_pops} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/interlink_pops scaleway_interlink_pops} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -207,8 +207,8 @@ export class DataScalewayInterlinkPops extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_interlink_pops',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

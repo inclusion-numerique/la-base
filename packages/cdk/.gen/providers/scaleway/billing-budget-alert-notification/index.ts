@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,31 +10,31 @@ export interface BillingBudgetAlertNotificationConfig extends cdktf.TerraformMet
   /**
   * The ID of the budget alert to create notification for.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification#budget_alert_id BillingBudgetAlertNotification#budget_alert_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification#budget_alert_id BillingBudgetAlertNotification#budget_alert_id}
   */
   readonly budgetAlertId: string;
   /**
   * List of email addresses to receive email notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification#email_addresses BillingBudgetAlertNotification#email_addresses}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification#email_addresses BillingBudgetAlertNotification#email_addresses}
   */
   readonly emailAddresses?: string[];
   /**
   * List of phone numbers to receive SMS notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification#sms_phone_numbers BillingBudgetAlertNotification#sms_phone_numbers}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification#sms_phone_numbers BillingBudgetAlertNotification#sms_phone_numbers}
   */
   readonly smsPhoneNumbers?: string[];
   /**
   * List of webhook URLs to receive webhook notifications. Precisely one of sms_phone_numbers, email_addresses, or webhook_urls must be set.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification#webhook_urls BillingBudgetAlertNotification#webhook_urls}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification#webhook_urls BillingBudgetAlertNotification#webhook_urls}
   */
   readonly webhookUrls?: string[];
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification scaleway_billing_budget_alert_notification}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification scaleway_billing_budget_alert_notification}
 */
 export class BillingBudgetAlertNotification extends cdktf.TerraformResource {
 
@@ -50,7 +50,7 @@ export class BillingBudgetAlertNotification extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a BillingBudgetAlertNotification resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the BillingBudgetAlertNotification to import
-  * @param importFromId The id of the existing BillingBudgetAlertNotification that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing BillingBudgetAlertNotification that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the BillingBudgetAlertNotification to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -62,7 +62,7 @@ export class BillingBudgetAlertNotification extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/billing_budget_alert_notification scaleway_billing_budget_alert_notification} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/billing_budget_alert_notification scaleway_billing_budget_alert_notification} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -73,8 +73,8 @@ export class BillingBudgetAlertNotification extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_billing_budget_alert_notification',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

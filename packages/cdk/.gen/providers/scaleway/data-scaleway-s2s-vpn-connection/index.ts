@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayS2SVpnConnectionConfig extends cdktf.TerraformMetaA
   /**
   * The ID of the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#connection_id DataScalewayS2SVpnConnection#connection_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#connection_id DataScalewayS2SVpnConnection#connection_id}
   */
   readonly connectionId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#id DataScalewayS2SVpnConnection#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#id DataScalewayS2SVpnConnection#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DataScalewayS2SVpnConnectionConfig extends cdktf.TerraformMetaA
   /**
   * The name of the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#name DataScalewayS2SVpnConnection#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#name DataScalewayS2SVpnConnection#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#project_id DataScalewayS2SVpnConnection#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#project_id DataScalewayS2SVpnConnection#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#region DataScalewayS2SVpnConnection#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#region DataScalewayS2SVpnConnection#region}
   */
   readonly region?: string;
 }
@@ -551,7 +551,7 @@ export class DataScalewayS2SVpnConnectionIkev2CiphersList extends cdktf.ComplexL
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection scaleway_s2s_vpn_connection}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection scaleway_s2s_vpn_connection}
 */
 export class DataScalewayS2SVpnConnection extends cdktf.TerraformDataSource {
 
@@ -567,7 +567,7 @@ export class DataScalewayS2SVpnConnection extends cdktf.TerraformDataSource {
   * Generates CDKTF code for importing a DataScalewayS2SVpnConnection resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayS2SVpnConnection to import
-  * @param importFromId The id of the existing DataScalewayS2SVpnConnection that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayS2SVpnConnection that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayS2SVpnConnection to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -579,7 +579,7 @@ export class DataScalewayS2SVpnConnection extends cdktf.TerraformDataSource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_connection scaleway_s2s_vpn_connection} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_connection scaleway_s2s_vpn_connection} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -590,8 +590,8 @@ export class DataScalewayS2SVpnConnection extends cdktf.TerraformDataSource {
       terraformResourceType: 'scaleway_s2s_vpn_connection',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -781,6 +781,11 @@ export class DataScalewayS2SVpnConnection extends cdktf.TerraformDataSource {
   // secret_version - computed: true, optional: false, required: false
   public get secretVersion() {
     return this.getNumberAttribute('secret_version');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

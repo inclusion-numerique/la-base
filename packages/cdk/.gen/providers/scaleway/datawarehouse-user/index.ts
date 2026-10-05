@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DatawarehouseUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * ID of the Datawarehouse deployment to which this user belongs.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#deployment_id DatawarehouseUser#deployment_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#deployment_id DatawarehouseUser#deployment_id}
   */
   readonly deploymentId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#id DatawarehouseUser#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#id DatawarehouseUser#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,31 +23,31 @@ export interface DatawarehouseUserConfig extends cdktf.TerraformMetaArguments {
   /**
   * Whether the user has administrator privileges.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#is_admin DatawarehouseUser#is_admin}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#is_admin DatawarehouseUser#is_admin}
   */
   readonly isAdmin?: boolean | cdktf.IResolvable;
   /**
   * Name of the ClickHouse user.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#name DatawarehouseUser#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#name DatawarehouseUser#name}
   */
   readonly name: string;
   /**
   * Password for the ClickHouse user.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#password DatawarehouseUser#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#password DatawarehouseUser#password}
   */
   readonly password: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#region DatawarehouseUser#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#region DatawarehouseUser#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user scaleway_datawarehouse_user}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user scaleway_datawarehouse_user}
 */
 export class DatawarehouseUser extends cdktf.TerraformResource {
 
@@ -63,7 +63,7 @@ export class DatawarehouseUser extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a DatawarehouseUser resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DatawarehouseUser to import
-  * @param importFromId The id of the existing DatawarehouseUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DatawarehouseUser that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DatawarehouseUser to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -75,7 +75,7 @@ export class DatawarehouseUser extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_user scaleway_datawarehouse_user} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_user scaleway_datawarehouse_user} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -86,8 +86,8 @@ export class DatawarehouseUser extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_datawarehouse_user',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -194,6 +194,11 @@ export class DatawarehouseUser extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // =========

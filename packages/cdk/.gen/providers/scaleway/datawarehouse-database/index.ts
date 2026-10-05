@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DatawarehouseDatabaseConfig extends cdktf.TerraformMetaArgument
   /**
   * ID of the Datawarehouse deployment to which this database belongs.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database#deployment_id DatawarehouseDatabase#deployment_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database#deployment_id DatawarehouseDatabase#deployment_id}
   */
   readonly deploymentId: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database#id DatawarehouseDatabase#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database#id DatawarehouseDatabase#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,19 +23,19 @@ export interface DatawarehouseDatabaseConfig extends cdktf.TerraformMetaArgument
   /**
   * Name of the database.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database#name DatawarehouseDatabase#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database#name DatawarehouseDatabase#name}
   */
   readonly name: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database#region DatawarehouseDatabase#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database#region DatawarehouseDatabase#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database scaleway_datawarehouse_database}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database scaleway_datawarehouse_database}
 */
 export class DatawarehouseDatabase extends cdktf.TerraformResource {
 
@@ -51,7 +51,7 @@ export class DatawarehouseDatabase extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a DatawarehouseDatabase resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DatawarehouseDatabase to import
-  * @param importFromId The id of the existing DatawarehouseDatabase that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DatawarehouseDatabase that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DatawarehouseDatabase to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -63,7 +63,7 @@ export class DatawarehouseDatabase extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/datawarehouse_database scaleway_datawarehouse_database} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/datawarehouse_database scaleway_datawarehouse_database} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -74,8 +74,8 @@ export class DatawarehouseDatabase extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_datawarehouse_database',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -156,6 +156,11 @@ export class DatawarehouseDatabase extends cdktf.TerraformResource {
   // size - computed: true, optional: false, required: false
   public get size() {
     return this.getNumberAttribute('size');
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // =========

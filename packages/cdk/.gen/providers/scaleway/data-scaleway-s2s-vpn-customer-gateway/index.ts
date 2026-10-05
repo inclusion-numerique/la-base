@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface DataScalewayS2SVpnCustomerGatewayConfig extends cdktf.Terraform
   /**
   * The ID of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#customer_gateway_id DataScalewayS2SVpnCustomerGateway#customer_gateway_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#customer_gateway_id DataScalewayS2SVpnCustomerGateway#customer_gateway_id}
   */
   readonly customerGatewayId?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#id DataScalewayS2SVpnCustomerGateway#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#id DataScalewayS2SVpnCustomerGateway#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,25 +23,25 @@ export interface DataScalewayS2SVpnCustomerGatewayConfig extends cdktf.Terraform
   /**
   * The name of the customer gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#name DataScalewayS2SVpnCustomerGateway#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#name DataScalewayS2SVpnCustomerGateway#name}
   */
   readonly name?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#project_id DataScalewayS2SVpnCustomerGateway#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#project_id DataScalewayS2SVpnCustomerGateway#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#region DataScalewayS2SVpnCustomerGateway#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#region DataScalewayS2SVpnCustomerGateway#region}
   */
   readonly region?: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway}
 */
 export class DataScalewayS2SVpnCustomerGateway extends cdktf.TerraformDataSource {
 
@@ -57,7 +57,7 @@ export class DataScalewayS2SVpnCustomerGateway extends cdktf.TerraformDataSource
   * Generates CDKTF code for importing a DataScalewayS2SVpnCustomerGateway resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the DataScalewayS2SVpnCustomerGateway to import
-  * @param importFromId The id of the existing DataScalewayS2SVpnCustomerGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing DataScalewayS2SVpnCustomerGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the DataScalewayS2SVpnCustomerGateway to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -69,7 +69,7 @@ export class DataScalewayS2SVpnCustomerGateway extends cdktf.TerraformDataSource
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/data-sources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway} Data Source
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/data-sources/s2s_vpn_customer_gateway scaleway_s2s_vpn_customer_gateway} Data Source
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -80,8 +80,8 @@ export class DataScalewayS2SVpnCustomerGateway extends cdktf.TerraformDataSource
       terraformResourceType: 'scaleway_s2s_vpn_customer_gateway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -205,6 +205,11 @@ export class DataScalewayS2SVpnCustomerGateway extends cdktf.TerraformDataSource
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // tags - computed: true, optional: false, required: false

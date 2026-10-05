@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,61 +10,61 @@ export interface KeyManagerKeyConfig extends cdktf.TerraformMetaArguments {
   /**
   * Algorithm to use for the key. The valid algorithms depend on the usage type.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#algorithm KeyManagerKey#algorithm}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#algorithm KeyManagerKey#algorithm}
   */
   readonly algorithm: string;
   /**
   * Description of the key.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#description KeyManagerKey#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#description KeyManagerKey#description}
   */
   readonly description?: string;
   /**
   * Name of the key.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#name KeyManagerKey#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#name KeyManagerKey#name}
   */
   readonly name?: string;
   /**
   * Origin of the key material. Possible values: scaleway_kms (Key Manager generates the key material), external (key material comes from an external source).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#origin KeyManagerKey#origin}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#origin KeyManagerKey#origin}
   */
   readonly origin?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#project_id KeyManagerKey#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#project_id KeyManagerKey#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#region KeyManagerKey#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#region KeyManagerKey#region}
   */
   readonly region?: string;
   /**
   * List of the key's tags.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#tags KeyManagerKey#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#tags KeyManagerKey#tags}
   */
   readonly tags?: string[];
   /**
   * If true, the key is not protected against deletion.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#unprotected KeyManagerKey#unprotected}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#unprotected KeyManagerKey#unprotected}
   */
   readonly unprotected?: boolean | cdktf.IResolvable;
   /**
   * Key usage type. Possible values: symmetric_encryption, asymmetric_encryption, asymmetric_signing.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#usage KeyManagerKey#usage}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#usage KeyManagerKey#usage}
   */
   readonly usage: string;
   /**
   * rotation_policy block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#rotation_policy KeyManagerKey#rotation_policy}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#rotation_policy KeyManagerKey#rotation_policy}
   */
   readonly rotationPolicy?: KeyManagerKeyRotationPolicy;
 }
@@ -72,13 +72,13 @@ export interface KeyManagerKeyRotationPolicy {
   /**
   * Timestamp indicating the next scheduled rotation. Computed from rotation_period if not set.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#next_rotation_at KeyManagerKey#next_rotation_at}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#next_rotation_at KeyManagerKey#next_rotation_at}
   */
   readonly nextRotationAt?: string;
   /**
   * Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#rotation_period KeyManagerKey#rotation_period}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#rotation_period KeyManagerKey#rotation_period}
   */
   readonly rotationPeriod: string;
 }
@@ -188,7 +188,7 @@ export class KeyManagerKeyRotationPolicyOutputReference extends cdktf.ComplexObj
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key scaleway_key_manager_key}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key scaleway_key_manager_key}
 */
 export class KeyManagerKey extends cdktf.TerraformResource {
 
@@ -204,7 +204,7 @@ export class KeyManagerKey extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a KeyManagerKey resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the KeyManagerKey to import
-  * @param importFromId The id of the existing KeyManagerKey that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing KeyManagerKey that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the KeyManagerKey to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -216,7 +216,7 @@ export class KeyManagerKey extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/key_manager_key scaleway_key_manager_key} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/key_manager_key scaleway_key_manager_key} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -227,8 +227,8 @@ export class KeyManagerKey extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_key_manager_key',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

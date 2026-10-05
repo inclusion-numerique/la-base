@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -8,7 +8,7 @@ import * as cdktf from 'cdktf';
 
 export interface OpensearchDeploymentConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#id OpensearchDeployment#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#id OpensearchDeployment#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -17,79 +17,79 @@ export interface OpensearchDeploymentConfig extends cdktf.TerraformMetaArguments
   /**
   * Name of the OpenSearch deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#name OpensearchDeployment#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#name OpensearchDeployment#name}
   */
   readonly name?: string;
   /**
   * Number of nodes
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#node_amount OpensearchDeployment#node_amount}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#node_amount OpensearchDeployment#node_amount}
   */
   readonly nodeAmount?: number;
   /**
   * Number of nodes
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#node_count OpensearchDeployment#node_count}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#node_count OpensearchDeployment#node_count}
   */
   readonly nodeCount?: number;
   /**
   * Type of node
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#node_type OpensearchDeployment#node_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#node_type OpensearchDeployment#node_type}
   */
   readonly nodeType: string;
   /**
   * Password for the deployment user
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#password OpensearchDeployment#password}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#password OpensearchDeployment#password}
   */
   readonly password?: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#project_id OpensearchDeployment#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#project_id OpensearchDeployment#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#region OpensearchDeployment#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#region OpensearchDeployment#region}
   */
   readonly region?: string;
   /**
   * List of tags to apply
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#tags OpensearchDeployment#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#tags OpensearchDeployment#tags}
   */
   readonly tags?: string[];
   /**
   * Username for the deployment
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#user_name OpensearchDeployment#user_name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#user_name OpensearchDeployment#user_name}
   */
   readonly userName?: string;
   /**
   * OpenSearch version to use
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#version OpensearchDeployment#version}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#version OpensearchDeployment#version}
   */
   readonly version: string;
   /**
   * private_network block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#private_network OpensearchDeployment#private_network}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#private_network OpensearchDeployment#private_network}
   */
   readonly privateNetwork?: OpensearchDeploymentPrivateNetwork;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#timeouts OpensearchDeployment#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#timeouts OpensearchDeployment#timeouts}
   */
   readonly timeouts?: OpensearchDeploymentTimeouts;
   /**
   * volume block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#volume OpensearchDeployment#volume}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#volume OpensearchDeployment#volume}
   */
   readonly volume?: OpensearchDeploymentVolume;
 }
@@ -273,7 +273,7 @@ export interface OpensearchDeploymentPrivateNetwork {
   /**
   * UUID of the Private Network
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#private_network_id OpensearchDeployment#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#private_network_id OpensearchDeployment#private_network_id}
   */
   readonly privateNetworkId: string;
 }
@@ -354,19 +354,19 @@ export class OpensearchDeploymentPrivateNetworkOutputReference extends cdktf.Com
 }
 export interface OpensearchDeploymentTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#create OpensearchDeployment#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#create OpensearchDeployment#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#delete OpensearchDeployment#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#delete OpensearchDeployment#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#read OpensearchDeployment#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#read OpensearchDeployment#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#update OpensearchDeployment#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#update OpensearchDeployment#update}
   */
   readonly update?: string;
 }
@@ -549,13 +549,13 @@ export interface OpensearchDeploymentVolume {
   /**
   * Volume size in GB
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#size_in_gb OpensearchDeployment#size_in_gb}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#size_in_gb OpensearchDeployment#size_in_gb}
   */
   readonly sizeInGb: number;
   /**
   * Volume type (sbs_5k, sbs_15k)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#type OpensearchDeployment#type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#type OpensearchDeployment#type}
   */
   readonly type: string;
 }
@@ -662,7 +662,7 @@ export class OpensearchDeploymentVolumeOutputReference extends cdktf.ComplexObje
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment scaleway_opensearch_deployment}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment scaleway_opensearch_deployment}
 */
 export class OpensearchDeployment extends cdktf.TerraformResource {
 
@@ -678,7 +678,7 @@ export class OpensearchDeployment extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a OpensearchDeployment resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the OpensearchDeployment to import
-  * @param importFromId The id of the existing OpensearchDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing OpensearchDeployment that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the OpensearchDeployment to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -690,7 +690,7 @@ export class OpensearchDeployment extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/opensearch_deployment scaleway_opensearch_deployment} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/opensearch_deployment scaleway_opensearch_deployment} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -701,8 +701,8 @@ export class OpensearchDeployment extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_opensearch_deployment',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

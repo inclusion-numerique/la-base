@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,23 +10,23 @@ export interface InterlinkLinkConfig extends cdktf.TerraformMetaArguments {
   /**
   * Desired bandwidth for the link. Must be compatible with available link bandwidths and remaining bandwidth capacity of the connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#bandwidth_mbps InterlinkLink#bandwidth_mbps}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#bandwidth_mbps InterlinkLink#bandwidth_mbps}
   */
   readonly bandwidthMbps: number;
   /**
   * If set, creates a self-hosted link using this dedicated physical connection
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#connection_id InterlinkLink#connection_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#connection_id InterlinkLink#connection_id}
   */
   readonly connectionId?: string;
   /**
   * Defines whether route propagation is enabled or not. Defaults to false
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#enable_route_propagation InterlinkLink#enable_route_propagation}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#enable_route_propagation InterlinkLink#enable_route_propagation}
   */
   readonly enableRoutePropagation?: boolean | cdktf.IResolvable;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#id InterlinkLink#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#id InterlinkLink#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -35,73 +35,73 @@ export interface InterlinkLinkConfig extends cdktf.TerraformMetaArguments {
   /**
   * Name of the link
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#name InterlinkLink#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#name InterlinkLink#name}
   */
   readonly name?: string;
   /**
   * If set, creates a hosted link on a partner's connection. Specify the ID of the chosen partner, who already has a shared connection with available bandwidth
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#partner_id InterlinkLink#partner_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#partner_id InterlinkLink#partner_id}
   */
   readonly partnerId?: string;
   /**
   * For self-hosted links, the peer AS Number to establish BGP session. Required when `connection_id` is set
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#peer_asn InterlinkLink#peer_asn}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#peer_asn InterlinkLink#peer_asn}
   */
   readonly peerAsn?: number;
   /**
   * PoP (location) where the link will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#pop_id InterlinkLink#pop_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#pop_id InterlinkLink#pop_id}
   */
   readonly popId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#project_id InterlinkLink#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#project_id InterlinkLink#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#region InterlinkLink#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#region InterlinkLink#region}
   */
   readonly region?: string;
   /**
   * If set, attaches this routing policy containing IPv4 prefixes to the link. A BGP IPv4 session will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#routing_policy_v4_id InterlinkLink#routing_policy_v4_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#routing_policy_v4_id InterlinkLink#routing_policy_v4_id}
   */
   readonly routingPolicyV4Id?: string;
   /**
   * If set, attaches this routing policy containing IPv6 prefixes to the link. A BGP IPv6 session will be created
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#routing_policy_v6_id InterlinkLink#routing_policy_v6_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#routing_policy_v6_id InterlinkLink#routing_policy_v6_id}
   */
   readonly routingPolicyV6Id?: string;
   /**
   * List of tags associated with the link
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#tags InterlinkLink#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#tags InterlinkLink#tags}
   */
   readonly tags?: string[];
   /**
   * For self-hosted links only, the VLAN ID. If the VLAN is not available (already taken or out of range), an error is returned
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#vlan InterlinkLink#vlan}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#vlan InterlinkLink#vlan}
   */
   readonly vlan?: number;
   /**
   * ID of the Scaleway VPC to attach to the link
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#vpc_id InterlinkLink#vpc_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#vpc_id InterlinkLink#vpc_id}
   */
   readonly vpcId?: string;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#timeouts InterlinkLink#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#timeouts InterlinkLink#timeouts}
   */
   readonly timeouts?: InterlinkLinkTimeouts;
 }
@@ -277,23 +277,23 @@ export class InterlinkLinkScwBgpConfigList extends cdktf.ComplexList {
 }
 export interface InterlinkLinkTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#create InterlinkLink#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#create InterlinkLink#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#default InterlinkLink#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#default InterlinkLink#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#delete InterlinkLink#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#delete InterlinkLink#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#read InterlinkLink#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#read InterlinkLink#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#update InterlinkLink#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#update InterlinkLink#update}
   */
   readonly update?: string;
 }
@@ -503,7 +503,7 @@ export class InterlinkLinkTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link scaleway_interlink_link}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link scaleway_interlink_link}
 */
 export class InterlinkLink extends cdktf.TerraformResource {
 
@@ -519,7 +519,7 @@ export class InterlinkLink extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a InterlinkLink resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the InterlinkLink to import
-  * @param importFromId The id of the existing InterlinkLink that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing InterlinkLink that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the InterlinkLink to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -531,7 +531,7 @@ export class InterlinkLink extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/interlink_link scaleway_interlink_link} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/interlink_link scaleway_interlink_link} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -542,8 +542,8 @@ export class InterlinkLink extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_interlink_link',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -796,6 +796,11 @@ export class InterlinkLink extends cdktf.TerraformResource {
   private _scwBgpConfig = new InterlinkLinkScwBgpConfigList(this, "scw_bgp_config", false);
   public get scwBgpConfig() {
     return this._scwBgpConfig;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

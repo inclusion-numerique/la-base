@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,11 +10,11 @@ export interface S2SVpnGatewayConfig extends cdktf.TerraformMetaArguments {
   /**
   * The VPN gateway type (commercial offer type)
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#gateway_type S2SVpnGateway#gateway_type}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#gateway_type S2SVpnGateway#gateway_type}
   */
   readonly gatewayType: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#id S2SVpnGateway#id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#id S2SVpnGateway#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
@@ -23,75 +23,75 @@ export interface S2SVpnGatewayConfig extends cdktf.TerraformMetaArguments {
   /**
   * The ID of the IPAM private IPv4 address to attach to the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#ipam_private_ipv4_id S2SVpnGateway#ipam_private_ipv4_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#ipam_private_ipv4_id S2SVpnGateway#ipam_private_ipv4_id}
   */
   readonly ipamPrivateIpv4Id?: string;
   /**
   * The ID of the IPAM private IPv6 address to attach to the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#ipam_private_ipv6_id S2SVpnGateway#ipam_private_ipv6_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#ipam_private_ipv6_id S2SVpnGateway#ipam_private_ipv6_id}
   */
   readonly ipamPrivateIpv6Id?: string;
   /**
   * The name of the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#name S2SVpnGateway#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#name S2SVpnGateway#name}
   */
   readonly name?: string;
   /**
   * The ID of the Private Network to attach to the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#private_network_id S2SVpnGateway#private_network_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#private_network_id S2SVpnGateway#private_network_id}
   */
   readonly privateNetworkId: string;
   /**
   * The project_id you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#project_id S2SVpnGateway#project_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#project_id S2SVpnGateway#project_id}
   */
   readonly projectId?: string;
   /**
   * The region you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#region S2SVpnGateway#region}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#region S2SVpnGateway#region}
   */
   readonly region?: string;
   /**
   * The list of tags to apply to the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#tags S2SVpnGateway#tags}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#tags S2SVpnGateway#tags}
   */
   readonly tags?: string[];
   /**
   * The zone you want to attach the resource to
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#zone S2SVpnGateway#zone}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#zone S2SVpnGateway#zone}
   */
   readonly zone?: string;
   /**
   * public_config block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#public_config S2SVpnGateway#public_config}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#public_config S2SVpnGateway#public_config}
   */
   readonly publicConfig?: S2SVpnGatewayPublicConfig[] | cdktf.IResolvable;
   /**
   * timeouts block
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#timeouts S2SVpnGateway#timeouts}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#timeouts S2SVpnGateway#timeouts}
   */
   readonly timeouts?: S2SVpnGatewayTimeouts;
 }
 export interface S2SVpnGatewayPublicConfig {
   /**
-  *  The ID of the IPAM IPv4 address to use as the public IP for the VPN gateway
+  * The ID of the IPAM IPv4 address to use as the public IP for the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#ipam_ipv4_id S2SVpnGateway#ipam_ipv4_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#ipam_ipv4_id S2SVpnGateway#ipam_ipv4_id}
   */
   readonly ipamIpv4Id?: string;
   /**
-  *  The ID of the IPAM IPv6 address to use as the public IP for the VPN gateway
+  * The ID of the IPAM IPv6 address to use as the public IP for the VPN gateway
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#ipam_ipv6_id S2SVpnGateway#ipam_ipv6_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#ipam_ipv6_id S2SVpnGateway#ipam_ipv6_id}
   */
   readonly ipamIpv6Id?: string;
 }
@@ -182,7 +182,7 @@ export class S2SVpnGatewayPublicConfigOutputReference extends cdktf.ComplexObjec
     }
   }
 
-  // ipam_ipv4_id - computed: false, optional: true, required: false
+  // ipam_ipv4_id - computed: true, optional: true, required: false
   private _ipamIpv4Id?: string; 
   public get ipamIpv4Id() {
     return this.getStringAttribute('ipam_ipv4_id');
@@ -198,7 +198,7 @@ export class S2SVpnGatewayPublicConfigOutputReference extends cdktf.ComplexObjec
     return this._ipamIpv4Id;
   }
 
-  // ipam_ipv6_id - computed: false, optional: true, required: false
+  // ipam_ipv6_id - computed: true, optional: true, required: false
   private _ipamIpv6Id?: string; 
   public get ipamIpv6Id() {
     return this.getStringAttribute('ipam_ipv6_id');
@@ -236,23 +236,23 @@ export class S2SVpnGatewayPublicConfigList extends cdktf.ComplexList {
 }
 export interface S2SVpnGatewayTimeouts {
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#create S2SVpnGateway#create}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#create S2SVpnGateway#create}
   */
   readonly create?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#default S2SVpnGateway#default}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#default S2SVpnGateway#default}
   */
   readonly default?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#delete S2SVpnGateway#delete}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#delete S2SVpnGateway#delete}
   */
   readonly delete?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#read S2SVpnGateway#read}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#read S2SVpnGateway#read}
   */
   readonly read?: string;
   /**
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#update S2SVpnGateway#update}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#update S2SVpnGateway#update}
   */
   readonly update?: string;
 }
@@ -462,7 +462,7 @@ export class S2SVpnGatewayTimeoutsOutputReference extends cdktf.ComplexObject {
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway scaleway_s2s_vpn_gateway}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway scaleway_s2s_vpn_gateway}
 */
 export class S2SVpnGateway extends cdktf.TerraformResource {
 
@@ -478,7 +478,7 @@ export class S2SVpnGateway extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a S2SVpnGateway resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the S2SVpnGateway to import
-  * @param importFromId The id of the existing S2SVpnGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing S2SVpnGateway that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the S2SVpnGateway to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -490,7 +490,7 @@ export class S2SVpnGateway extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/s2s_vpn_gateway scaleway_s2s_vpn_gateway} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/s2s_vpn_gateway scaleway_s2s_vpn_gateway} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -501,8 +501,8 @@ export class S2SVpnGateway extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_s2s_vpn_gateway',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -665,6 +665,11 @@ export class S2SVpnGateway extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get regionInput() {
     return this._region;
+  }
+
+  // srn - computed: true, optional: false, required: false
+  public get srn() {
+    return this.getStringAttribute('srn');
   }
 
   // status - computed: true, optional: false, required: false

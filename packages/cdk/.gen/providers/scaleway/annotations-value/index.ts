@@ -1,4 +1,4 @@
-// https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value
+// https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -10,25 +10,25 @@ export interface AnnotationsValueConfig extends cdktf.TerraformMetaArguments {
   /**
   * Description of the annotation value.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value#description AnnotationsValue#description}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value#description AnnotationsValue#description}
   */
   readonly description?: string;
   /**
   * ID of the key the value is associated to.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value#key_id AnnotationsValue#key_id}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value#key_id AnnotationsValue#key_id}
   */
   readonly keyId: string;
   /**
   * Name of the annotation value.
   *
-  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value#name AnnotationsValue#name}
+  * Docs at Terraform Registry: {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value#name AnnotationsValue#name}
   */
   readonly name: string;
 }
 
 /**
-* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value scaleway_annotations_value}
+* Represents a {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value scaleway_annotations_value}
 */
 export class AnnotationsValue extends cdktf.TerraformResource {
 
@@ -44,7 +44,7 @@ export class AnnotationsValue extends cdktf.TerraformResource {
   * Generates CDKTF code for importing a AnnotationsValue resource upon running "cdktf plan <stack-name>"
   * @param scope The scope in which to define this construct
   * @param importToId The construct id used in the generated config for the AnnotationsValue to import
-  * @param importFromId The id of the existing AnnotationsValue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value#import import section} in the documentation of this resource for the id to use
+  * @param importFromId The id of the existing AnnotationsValue that should be imported. Refer to the {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value#import import section} in the documentation of this resource for the id to use
   * @param provider? Optional instance of the provider where the AnnotationsValue to import is found
   */
   public static generateConfigForImport(scope: Construct, importToId: string, importFromId: string, provider?: cdktf.TerraformProvider) {
@@ -56,7 +56,7 @@ export class AnnotationsValue extends cdktf.TerraformResource {
   // ===========
 
   /**
-  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/annotations_value scaleway_annotations_value} Resource
+  * Create a new {@link https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/annotations_value scaleway_annotations_value} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
@@ -67,8 +67,8 @@ export class AnnotationsValue extends cdktf.TerraformResource {
       terraformResourceType: 'scaleway_annotations_value',
       terraformGeneratorMetadata: {
         providerName: 'scaleway',
-        providerVersion: '2.81.0',
-        providerVersionConstraint: '>= 2.81.0'
+        providerVersion: '2.83.1',
+        providerVersionConstraint: '~> 2.83.1'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

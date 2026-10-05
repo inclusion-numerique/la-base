@@ -1,3 +1,3 @@
 # `scaleway_mnq_sns_topic`
 
-Refer to the Terraform Registry for docs: [`scaleway_mnq_sns_topic`](https://registry.terraform.io/providers/scaleway/scaleway/2.81.0/docs/resources/mnq_sns_topic).
+Refer to the Terraform Registry for docs: [`scaleway_mnq_sns_topic`](https://registry.terraform.io/providers/scaleway/scaleway/2.83.1/docs/resources/mnq_sns_topic).
