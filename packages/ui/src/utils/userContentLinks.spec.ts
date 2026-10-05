@@ -10,17 +10,25 @@ describe('addUserContentRelToLinks', () => {
         '<p>Voir <a target="_blank" href="https://exemple.fr/">ce site</a></p>',
       ),
     ).toEqual(
-      `<p>Voir <a target="_blank" href="https://exemple.fr/" rel="${userContentLinkRel}">ce site</a></p>`,
+      `<p>Voir <a rel="${userContentLinkRel}" target="_blank" href="https://exemple.fr/">ce site</a></p>`,
     )
   })
 
-  it('replaces an existing rel instead of duplicating it', () => {
+  it('puts its rel first, as the first of duplicated attributes wins', () => {
     expect(
       addUserContentRelToLinks(
         '<a href="https://exemple.fr/" rel="noopener noreferrer">lien</a>',
       ),
     ).toEqual(
-      `<a href="https://exemple.fr/" rel="${userContentLinkRel}">lien</a>`,
+      `<a rel="${userContentLinkRel}" href="https://exemple.fr/" rel="noopener noreferrer">lien</a>`,
+    )
+  })
+
+  it('cannot be escaped by a href containing a rel', () => {
+    expect(
+      addUserContentRelToLinks('<a href="https://exemple.fr/? rel=x">lien</a>'),
+    ).toEqual(
+      `<a rel="${userContentLinkRel}" href="https://exemple.fr/? rel=x">lien</a>`,
     )
   })
 

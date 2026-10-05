@@ -5,16 +5,11 @@
  */
 export const userContentLinkRel = 'nofollow ugc noopener noreferrer'
 
-const relAttributeRegex = /\s+rel\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi
-
 /**
- * Le html enregistré passe par sanitize-html, qui retire l'attribut rel et
- * échappe les ">" dans les valeurs d'attributs : une balise <a ...> ne
- * contient donc pas de ">" avant sa fermeture.
+ * Le rel est inséré en premier attribut : en html, seule la première
+ * occurrence d'un attribut dupliqué est prise en compte, et le html
+ * enregistré (passé par sanitize-html) échappe les "<" des textes et des
+ * valeurs d'attributs.
  */
 export const addUserContentRelToLinks = (html: string) =>
-  html.replaceAll(
-    /<a(\s[^>]*)?>/gi,
-    (_tag, attributes: string | undefined) =>
-      `<a${(attributes ?? '').replaceAll(relAttributeRegex, '')} rel="${userContentLinkRel}">`,
-  )
+  html.replaceAll(/<a(?=[\s>])/gi, `<a rel="${userContentLinkRel}"`)
