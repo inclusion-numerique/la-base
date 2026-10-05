@@ -29,6 +29,10 @@
       "cache": false
     },
     "tsc": {
+      "dependsOn": ["@app/cdk#generate"],
+      "cache": false
+    },
+    "@app/cdk#generate": {
       "cache": false
     }
   },

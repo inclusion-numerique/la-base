@@ -52,6 +52,7 @@ chromatic.log
 
 # next
 /apps/web/.next/
+/apps/web/next-env.d.ts
 
 /apps/web/public/dsfr
 
@@ -62,6 +63,7 @@ chromatic.log
 /packages/e2e/cypress/downloads
 
 # cdk
+/packages/cdk/.gen/
 /packages/cdk/cdktf.out/
 !/packages/cdk/cdktf.out/stacks/web/.terraform.lock.hcl
 terraform.*.tfstate
