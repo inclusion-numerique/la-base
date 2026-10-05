@@ -1,11 +1,13 @@
 import ExternalLink from '@app/ui/components/ExternalLink'
 import { BaseDetailsDescription } from '@app/web/components/Base/BaseDetailsDescription'
 import type { BasePageData } from '@app/web/server/bases/getBase'
+import classNames from 'classnames'
 import Link from 'next/link'
 import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => {
   const showEmail = !!base.email && base.emailIsPublic
+  const showContact = showEmail || !!base.website
   const displayedUrl = base.website
     ?.replace('https://', '')
     .replace('https://www.', '')
@@ -21,7 +23,7 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           </div>
         </div>
         <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
-          {(showEmail || base.website) && (
+          {showContact && (
             <>
               <h2 className="fr-mb-2w fr-h6">Contact</h2>
               <ul className="fr-raw-list">
@@ -50,7 +52,14 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           )}
           {(base.facebook || base.twitter || base.linkedin) && (
             <>
-              <h2 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h2>
+              <h2
+                className={classNames(
+                  'fr-mb-2w fr-h6',
+                  showContact && 'fr-mt-3w',
+                )}
+              >
+                Nous suivre
+              </h2>
               <ul className={`fr-raw-list ${styles.websites}`}>
                 {base.twitter && (
                   <li>

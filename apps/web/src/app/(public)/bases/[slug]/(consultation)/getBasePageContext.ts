@@ -59,11 +59,7 @@ export const getBasePageContext = cache(
     }
 
     return {
-      // La base est transmise à des composants clients : l'email masqué ne
-      // doit pas se retrouver dans la page
-      base: authorization.hasPermission(BasePermissions.ReadBaseEmail)
-        ? base
-        : { ...base, email: '' },
+      base,
       authorization,
       user,
       isUsingShareToken,
