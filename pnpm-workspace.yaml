@@ -47,10 +47,10 @@ peerDependencyRules:
     # Auth.js plafonne nodemailer à ^7.0.7 || ^8.0.5, mais son provider n'appelle
     # createTransport que depuis son sendVerificationRequest par défaut — que nous
     # remplaçons par le nôtre (apps/web/src/auth/sendVerificationRequest.ts). Les six
-    # sous-chemins lib/*-transport qu'il importe existent toujours en 9.x.
+    # sous-chemins lib/*-transport qu'il importe existent toujours en 10.x.
     # À réévaluer dès qu'Auth.js élargit sa plage.
-    next-auth>nodemailer: '9'
-    '@auth/core>nodemailer': '9'
+    next-auth>nodemailer: '10'
+    '@auth/core>nodemailer': '10'
     # @hookform/resolvers 5.7 déclare en peers optionnels tous les validateurs qu'il sait
     # adapter (ajv, yup, joi, vest…). Nous n'utilisons que zod ; ajv-formats n'est ici que
     # parce que schema-utils/webpack le tire, et il s'apparie correctement avec son ajv 8.
