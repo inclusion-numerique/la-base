@@ -5,6 +5,7 @@ import Link from 'next/link'
 import styles from './BaseDetails.module.css'
 
 const BaseDetails = ({ base }: { base: BasePageData }) => {
+  const showEmail = !!base.email && base.emailIsPublic
   const displayedUrl = base.website
     ?.replace('https://', '')
     .replace('https://www.', '')
@@ -20,27 +21,33 @@ const BaseDetails = ({ base }: { base: BasePageData }) => {
           </div>
         </div>
         <div className="fr-col-12 fr-col-lg-4 fr-mt-3w">
-          <h2 className="fr-mb-2w fr-h6">Contact</h2>
-          <ul className="fr-raw-list">
-            <li>
-              <p className="fr-mb-0">Adresse mail de contact</p>
-              <Link href={`mailto:${base.email}`} className="fr-link">
-                {base.email}
-              </Link>
-            </li>
-            {base.website && (
-              <li className="fr-mt-2w">
-                <p className="fr-mb-0">Site internet</p>
-                <ExternalLink
-                  href={base.website}
-                  className="fr-link"
-                  userContent
-                >
-                  {displayedUrl}
-                </ExternalLink>
-              </li>
-            )}
-          </ul>
+          {(showEmail || base.website) && (
+            <>
+              <h2 className="fr-mb-2w fr-h6">Contact</h2>
+              <ul className="fr-raw-list">
+                {showEmail && (
+                  <li className="fr-mb-2w">
+                    <p className="fr-mb-0">Adresse mail de contact</p>
+                    <Link href={`mailto:${base.email}`} className="fr-link">
+                      {base.email}
+                    </Link>
+                  </li>
+                )}
+                {base.website && (
+                  <li>
+                    <p className="fr-mb-0">Site internet</p>
+                    <ExternalLink
+                      href={base.website}
+                      className="fr-link"
+                      userContent
+                    >
+                      {displayedUrl}
+                    </ExternalLink>
+                  </li>
+                )}
+              </ul>
+            </>
+          )}
           {(base.facebook || base.twitter || base.linkedin) && (
             <>
               <h2 className="fr-mt-3w fr-mb-2w fr-h6">Nous suivre</h2>
