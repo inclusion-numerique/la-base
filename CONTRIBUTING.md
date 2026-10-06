@@ -245,6 +245,7 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 |----------|-------------|
 | `domain:add-conseillers-numeriques-to-bases` | Ajoute les conseillers numeriques aux bases (follows + membres) |
 | `domain:remove-inactive-conseillers-numeriques` | Supprime les comptes conseillers numeriques auto-crees et inactifs |
+| `domain:untrusted-users-report` | Lecture seule : compte les comptes, ressources, collections, profils et bases qui passent en noindex faute d'auteur de confiance. Option : `--views-only-since <date>` |
 
 ### GitHub Deployments
 

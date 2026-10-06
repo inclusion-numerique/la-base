@@ -7,6 +7,8 @@ import {
 import HeaderBackLink from '@app/web/components/HeaderBackLink'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { isTrustedUserId } from '@app/web/features/indexation/db/getTrustedIds'
+import { getUserContentRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import { prismaClient } from '@app/web/prismaClient'
 import { getResource } from '@app/web/server/resources/getResource'
 import { getResourceProjectionWithContext } from '@app/web/server/resources/getResourceFromEvents'
@@ -25,7 +27,7 @@ export const generateMetadata = async ({
 
   const resource = await prismaClient.resource.findUnique({
     where: { slug },
-    select: { title: true },
+    select: { title: true, isPublic: true, createdById: true },
   })
   if (!resource) {
     notFound()
@@ -33,6 +35,10 @@ export const generateMetadata = async ({
 
   return {
     title: metadataTitle(`Votre avis sur la ressource ${resource.title}`),
+    robots: await getUserContentRobots({
+      isPublic: resource.isPublic,
+      isTrusted: () => isTrustedUserId(resource.createdById),
+    }),
   }
 }
 
