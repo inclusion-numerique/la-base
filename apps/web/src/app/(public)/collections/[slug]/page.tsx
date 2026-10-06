@@ -9,6 +9,8 @@ import CollectionView from '@app/web/components/Collection/CollectionView'
 import CollectionBreadcrumbs from '@app/web/components/CollectionBreadcrumbs'
 import PrivateBox from '@app/web/components/PrivateBox'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { isTrustedUserId } from '@app/web/features/indexation/db/getTrustedIds'
+import { getUserContentRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
 import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
 import { prismaClient } from '@app/web/prismaClient'
@@ -58,6 +60,7 @@ export const generateMetadata = async ({
       title: true,
       description: true,
       isPublic: true,
+      createdById: true,
     },
   })
   if (!collection) {
@@ -67,7 +70,10 @@ export const generateMetadata = async ({
   return {
     title: metadataTitle(collection.title),
     description: collection.description || undefined,
-    robots: collection.isPublic ? undefined : 'noindex, nofollow',
+    robots: await getUserContentRobots({
+      isPublic: collection.isPublic,
+      isTrusted: () => isTrustedUserId(collection.createdById),
+    }),
   }
 }
 

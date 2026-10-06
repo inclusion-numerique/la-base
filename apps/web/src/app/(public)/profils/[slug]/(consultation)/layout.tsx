@@ -9,6 +9,8 @@ import ProfileHeader, {
 } from '@app/web/components/Profile/ProfileHeader'
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { isTrustedUserId } from '@app/web/features/indexation/db/getTrustedIds'
+import { getUserContentRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { defaultSkipLinks } from '@app/web/utils/skipLinks'
@@ -26,6 +28,7 @@ export const generateMetadata = async ({
       slug,
     },
     select: {
+      id: true,
       name: true,
       isPublic: true,
     },
@@ -38,7 +41,10 @@ export const generateMetadata = async ({
     title: metadataTitle(
       (profile.name && formatName(profile.name)) || 'Profil',
     ),
-    robots: profile.isPublic ? undefined : 'noindex, nofollow',
+    robots: await getUserContentRobots({
+      isPublic: profile.isPublic,
+      isTrusted: () => isTrustedUserId(profile.id),
+    }),
   }
 }
 
