@@ -9,7 +9,7 @@
     "cy": "dotenv -e ../../.env -e ./cypress.env -- cypress"
   },
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
   "dependencies": {
     "axe-core": "^4.13.0",

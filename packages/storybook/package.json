@@ -15,7 +15,7 @@
     "chromatic": "pnpm with-env chromatic --exit-zero-on-changes --exit-once-uploaded"
   },
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
   "dependencies": {
     "@storybook/addon-a11y": "^10.6.0",
