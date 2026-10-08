@@ -2,11 +2,11 @@
 
 ## Infrastructure
 
-Project is hosted by Scaleway, provisioning is done via Terraform with CDK.
+Project is hosted by Scaleway, provisioning is done via OpenTofu with CDK for Terraform.
 
-- Terraform: https://www.terraform.io
+- OpenTofu: https://opentofu.org
 - CDK for Terraform: https://developer.hashicorp.com/terraform/cdktf
-- Scaleway terraform provider : https://registry.terraform.io/providers/scaleway/scaleway/latest/docs
+- Scaleway provider : https://search.opentofu.org/provider/scaleway/scaleway/latest
 
 ### Manual operations
 

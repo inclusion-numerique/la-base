@@ -8,7 +8,7 @@ services:
       - '1080:1080'
       - '1025:1025'
   db:
-    image: postgres:16.2-alpine
+    image: postgres:17.11-alpine
     container_name: la-base_pg
     environment:
       - POSTGRES_DB=${NEXT_PUBLIC_APP_SLUG}

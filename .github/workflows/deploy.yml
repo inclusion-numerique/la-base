@@ -86,11 +86,11 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node-version: '22'
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v4
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@v2
         with:
-          terraform_version: 1.5.7
-          terraform_wrapper: false
+          tofu_version: 1.13.1
+          tofu_wrapper: false
       - name: Secrets environment
         uses: ./.github/actions/secrets-env
         with:

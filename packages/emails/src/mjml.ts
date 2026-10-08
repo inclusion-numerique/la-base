@@ -1,5 +1,5 @@
-import type { Options } from 'html-minifier'
-import { minify } from 'html-minifier'
+import type { Options } from 'html-minifier-terser'
+import { minify } from 'html-minifier-terser'
 import mjml2html from 'mjml'
 
 const MINIFIER_OPTIONS: Options = {

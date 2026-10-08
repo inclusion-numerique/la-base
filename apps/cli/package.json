@@ -12,10 +12,10 @@
     "build": "tsc"
   },
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1136.0",
+    "@aws-sdk/client-s3": "^3.1138.0",
     "@commander-js/extra-typings": "^15.0.0",
     "@inquirer/prompts": "^8.7.2",
     "@octokit/core": "^7.0.8",
@@ -32,13 +32,13 @@
     "slug": "^12.0.1",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.23.15",
-    "undici": "^8.10.2",
+    "undici": "^8.11.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.13.6",
     "@types/slug": "^5.0.9",
     "jest": "^30.5.2",
     "typescript": "^7.0.2"

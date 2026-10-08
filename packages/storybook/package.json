@@ -15,14 +15,14 @@
     "chromatic": "pnpm with-env chromatic --exit-zero-on-changes --exit-once-uploaded"
   },
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
   "dependencies": {
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/addon-links": "^10.6.0",
     "@storybook/nextjs": "^10.6.0",
-    "chromatic": "^18.9.4",
+    "chromatic": "^18.9.5",
     "dotenv": "^17.4.2",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@storybook/test-runner": "^0.24.5",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.13.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "jest": "^30.5.2",

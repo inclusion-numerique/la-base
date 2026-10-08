@@ -2,6 +2,13 @@
   "name": "@app/cdk",
   "version": "0.1.0",
   "license": "AGPL-3.0-or-later",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "22.23.3",
+      "onFail": "download"
+    }
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "with-env": "dotenv -e ../../.env --",
@@ -9,11 +16,11 @@
     "generate": "./scripts/generate-bindings.sh",
     "tsc": "pnpm --silent generate && tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "synth": "pnpm --silent generate && pnpm --silent with-env cdktf synth",
-    "cdktf": "pnpm --silent generate && pnpm --silent with-env cdktf",
+    "synth": "pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm --silent with-env cdktf synth",
+    "cdktf": "pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm --silent with-env cdktf",
     "output": "pnpm --silent clean-cdktf output --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs",
-    "clean-cdktf": "rm -rf cdktf.out && pnpm --silent generate && pnpm with-env cdktf",
-    "tf:web:backend-reconfigure": "cd cdktf.out/stacks/web && terraform init -reconfigure",
+    "clean-cdktf": "rm -rf cdktf.out && pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm with-env cdktf",
+    "tf:web:backend-reconfigure": "cd cdktf.out/stacks/web && tofu init -reconfigure",
     "scw": "pnpm --silent with-env scw"
   },
   "dependencies": {
@@ -27,7 +34,7 @@
   "devDependencies": {
     "@types/git-rev-sync": "^2.0.2",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.13.6",
     "jest": "^30.5.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.23.15",
