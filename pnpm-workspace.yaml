@@ -42,6 +42,12 @@ minimumReleaseAgeExclude:
 overrides:
   postcss: 8.5.23
   sharp: 0.35.5
+  follow-redirects@1: ^1.16.0
+  glob@10: ^10.5.0
+  minimatch@5: ^5.1.8
+  mysql2@3: ^3.23.1
+  tmp@<0.2.6: ^0.2.6
+  validator@13: ^13.15.22
 
 peerDependencyRules:
   allowedVersions:
