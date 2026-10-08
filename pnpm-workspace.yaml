@@ -27,10 +27,6 @@ minimumReleaseAgeExclude:
   # Même motif que TypeScript : Next distribue son compilateur natif dans des paquets par
   # plateforme (`@next/swc-*`) publiés avec `next`. Remplace l'entrée `@next/env` seule.
   - "@next/*"
-  # Next 16 épingle postcss à exactement 8.5.23, publiée le 24/07 : sous quarantaine, la
-  # montée est impossible. C'est par ailleurs le correctif de l'avis modéré qui frappait la
-  # 8.5.21 (lecture de fichiers .map arbitraires via un sourceMappingURL contrôlé).
-  - postcss
   - sharp
   - "@img/*"
 
@@ -40,7 +36,6 @@ minimumReleaseAgeExclude:
 # Version EXACTE, pas une plage : c'est ce qui borne la levée de quarantaine ci-dessus à un
 # artefact connu.
 overrides:
-  postcss: 8.5.23
   sharp: 0.35.5
   follow-redirects@1: ^1.16.0
   glob@10: ^10.5.0
