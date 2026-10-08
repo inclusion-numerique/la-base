@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   skip: theodo/skip@0.1.2
-  coveralls: coveralls/coveralls@2.2.5
 executors:
   node:
     docker:
@@ -66,7 +65,7 @@ parameters:
   trigger_workflow:
     type: enum
     default: 'web_app_deployment'
-    enum: ['web_app_deployment', 'web_app_preview_deletion', 'project_stack_deployment', 'chromatic_deployment']
+    enum: ['web_app_deployment', 'web_app_preview_deletion', 'project_stack_deployment']
   # Name of the environment to scrap
   web_app_docker_registry:
     # This is redundant with .env.dist but needed as jobs are way simpler to configure with this parameter
@@ -83,9 +82,6 @@ workflows:
       equal: [web_app_deployment, << pipeline.parameters.trigger_workflow >>]
     jobs:
       - prepare_workspace_dependencies
-      - test_web_integration:
-          requires:
-            - prepare_workspace_dependencies
       - build_web:
           requires:
             - prepare_workspace_dependencies
@@ -98,27 +94,12 @@ workflows:
           requires:
             - prepare_workspace_dependencies
 
-      - upload_coverage:
-          requires:
-            - test_web_integration
-
       - deploy_web:
           serial-group: << pipeline.project.slug >>/deploy-web-<< pipeline.git.branch >>
           requires:
             - build_web
-            - test_web_integration
             - test_components
             - test_web_e2e
-            - upload_coverage
-
-  chromatic_deployment:
-    when:
-      equal: [ chromatic_deployment, << pipeline.parameters.trigger_workflow >> ]
-    jobs:
-      - prepare_workspace_dependencies
-      - chromatic:
-          requires:
-            - prepare_workspace_dependencies
 
   project_infrastructure_deployment:
     when:
@@ -258,21 +239,6 @@ jobs:
             - ./apps/web/public
             - ./apps/web/private-static
 
-  chromatic:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - create_dotenv_file
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - add_secrets_to_dotenv_file
-      - run:
-          name: 'Build storybook and deploy on chromatic'
-          command: pnpm --silent -F @app/storybook chromatic
-
   test_components:
     executor: node-browsers
     resource_class: large
@@ -355,73 +321,6 @@ jobs:
           name: 'Run cypress e2e tests'
           command: |
             pnpm --silent -F @app/e2e cy run --record --parallel --group e2e-$CIRCLE_WORKFLOW_ID
-  test_web_integration:
-    executor: node-e2e
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - create_dotenv_file
-      - add_secrets_to_dotenv_file
-      - setup_docker_web_env
-      - run:
-          name: 'Add NEXT_PUBLIC_* env to .env'
-          command: |
-            pnpm --silent cli dotenv:add-next-public --local $NAMESPACE
-      - run:
-          name: 'Add e2e vars to .env'
-          command: |
-            echo "DATABASE_URL=$CI_DATABASE_URL" >> .env
-            echo "SMTP_SERVER=localhost" >> .env
-            echo "SMTP_PORT=1025" >> .env
-            echo "SMTP_USERNAME=mailuser" >> .env
-            echo "SMTP_PASSWORD=mailpassword" >> .env
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Create CI database schema'
-          command: |
-            pnpm --silent -F @app/web prisma migrate deploy
-      - run:
-          name: 'Load fixtures'
-          command: |
-            pnpm -F @app/fixtures load
-      - restore_cache:
-          key: << pipeline.id >>-web-build
-      - add_dotenv_vars_to_bash_env
-      - run:
-          name: 'Run web integrations jest test with coverage'
-          command: |
-            pnpm --silent -F @app/web test:integration -- --coverage
-      - run:
-          name: 'Collect coverage reports'
-          command: |
-            mkdir -p coverage-reports/web-integration
-            cp apps/web/coverage/coverage-final.json coverage-reports/web-integration/coverage.json 2>/dev/null || true
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage-reports/web-integration
-
-  upload_coverage:
-    executor: node
-    resource_class: medium
-    steps:
-      - checkout
-      - install_dependencies
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Merge coverage reports'
-          command: |
-            rm -rf coverage/.nyc_output
-            mkdir -p coverage/.nyc_output
-            find coverage-reports -name '*.json' -exec cp {} coverage/.nyc_output/ \;
-            npx nyc report --temp-dir ./coverage/.nyc_output --reporter=lcov --reporter=text-summary --report-dir=./coverage
-      - coveralls/upload:
-          coverage_file: ./coverage/lcov.info
-
   deploy_web:
     executor: node22
     resource_class: large

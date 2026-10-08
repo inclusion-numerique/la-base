@@ -23,3 +23,6 @@ runs:
       with:
         path: packages/cdk/.gen
         key: cdktf-bindings-${{ runner.os }}-${{ hashFiles('packages/cdk/cdktf.json', 'packages/cdk/scripts/generate-bindings.sh', 'pnpm-lock.yaml') }}
+    - name: Generate cdktf provider bindings
+      run: pnpm --silent -F @app/cdk generate
+      shell: bash

@@ -1,0 +1,39 @@
+name: 'Test environment'
+description: 'Create the .env file for tests against the CI database, then migrate it'
+
+inputs:
+  scw-access-key:
+    description: 'Scaleway access key reading the Secret Manager'
+    required: true
+  scw-secret-key:
+    description: 'Scaleway secret key reading the Secret Manager'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Create env file
+      run: cp .env.dist .env
+      shell: bash
+    - name: Add secrets to env file
+      run: pnpm --silent cli dotenv:from-secrets
+      shell: bash
+      env:
+        SCW_ACCESS_KEY: ${{ inputs.scw-access-key }}
+        SCW_SECRET_KEY: ${{ inputs.scw-secret-key }}
+    - name: Add NEXT_PUBLIC variables to env file
+      run: pnpm --silent cli dotenv:add-next-public --local "${GITHUB_REF_NAME//\//-}"
+      shell: bash
+    - name: Add test variables to env file
+      run: |
+        cat >> .env <<'DOTENV'
+        DATABASE_URL=postgresql://postgres@localhost/test
+        SMTP_SERVER=localhost
+        SMTP_PORT=1025
+        SMTP_USERNAME=mailuser
+        SMTP_PASSWORD=mailpassword
+        DOTENV
+      shell: bash
+    - name: Migrate database
+      run: pnpm --silent -F @app/web prisma migrate deploy
+      shell: bash
