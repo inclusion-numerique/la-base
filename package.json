@@ -29,7 +29,7 @@
     "db:init": "pnpm -F web prisma generate && pnpm -F web prisma migrate deploy",
     "docker:start": "docker compose -f ./docker-compose.dev.yml -p stack up -d",
     "docker:stop": "docker compose -f ./docker-compose.dev.yml -p stack down",
-    "docker:reset": "pnpm docker:stop && docker volume rm stack_pgdata && pnpm docker:start && pnpm db:init"
+    "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init"
   },
   "volta": {
     "node": "24.21.0"
