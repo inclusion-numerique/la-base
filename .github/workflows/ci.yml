@@ -160,13 +160,11 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
-      - name: Create env file
-        run: cp .env.dist .env
-      - name: Add secrets to env file
-        run: pnpm --silent cli dotenv:from-secrets
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
-          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
       - name: Build storybook and deploy on chromatic
         run: pnpm --silent -F @app/storybook chromatic
 
