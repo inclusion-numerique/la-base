@@ -168,6 +168,55 @@ jobs:
       - name: Build storybook and deploy on chromatic
         run: pnpm --silent -F @app/storybook chromatic
 
+  infrastructure-diff:
+    name: Infrastructure diff (${{ matrix.branche }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        branche:
+          - dev
+          - main
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-infrastructure-diff-${{ matrix.branche }}
+      cancel-in-progress: true
+    env:
+      CDK_FORCE_BRANCH: ${{ matrix.branche }}
+      NAMESPACE: ${{ matrix.branche }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node-version: '22'
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.1
+          tofu_wrapper: false
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Deployed image and database password
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_NUMBER=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy.yml --branch "$CDK_FORCE_BRANCH" --status success --limit 1 --json number --jq '.[0].number')
+          echo "WEB_CONTAINER_IMAGE=rg.fr-par.scw.cloud/la-base-web-app/la-base-web-$NAMESPACE:$RUN_NUMBER" >> "$GITHUB_ENV"
+          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
+          echo "::add-mask::$DATABASE_PASSWORD"
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
+      - name: Create terraform variables file from environment variables
+        run: pnpm --silent cli terraform:vars-from-env web
+      - name: Compute diff
+        run: pnpm --silent -F @app/cdk cdktf diff web --var-file .tfvars.json
+
   coverage:
     name: Coverage
     needs:
