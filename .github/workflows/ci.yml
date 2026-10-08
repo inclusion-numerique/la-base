@@ -94,11 +94,88 @@ jobs:
           parallel: true
           fail-on-error: false
 
+  integration-tests:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-integration-tests
+      cancel-in-progress: true
+    services:
+      postgres:
+        image: postgres:17.11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      maildev:
+        image: maildev/maildev:2.2.1
+        env:
+          MAILDEV_INCOMING_USER: mailuser
+          MAILDEV_INCOMING_PASS: mailpassword
+        ports:
+          - 1025:1025
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test environment
+        uses: ./.github/actions/test-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Load fixtures
+        run: pnpm -F @app/fixtures load
+      - name: Run web integration tests with coverage
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/web exec jest --coverage -c jest.integration.config.ts --runInBand
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          files: apps/web/coverage/lcov.info
+          flag-name: web-integration
+          parallel: true
+          fail-on-error: false
+
+  chromatic:
+    name: Chromatic
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-chromatic
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Create env file
+        run: cp .env.dist .env
+      - name: Add secrets to env file
+        run: pnpm --silent cli dotenv:from-secrets
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Build storybook and deploy on chromatic
+        run: pnpm --silent -F @app/storybook chromatic
+
   coverage:
     name: Coverage
     needs:
       - test-packages
       - test-web
+      - integration-tests
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
@@ -106,5 +183,5 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           parallel-finished: true
-          carryforward: 'packages,web-unit'
+          carryforward: 'packages,web-unit,web-integration'
           fail-on-error: false
