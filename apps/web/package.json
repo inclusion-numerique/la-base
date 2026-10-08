@@ -67,7 +67,6 @@
     "dotenv-cli": "^11.0.0",
     "eventemitter3": "^5.0.4",
     "framer-motion": "^13.0.0",
-    "html-minifier": "^4.0.0",
     "html-to-text": "^10.0.1",
     "js-cookie": "^3.0.8",
     "jsonwebtoken": "^9.0.3",
