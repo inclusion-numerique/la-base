@@ -31,6 +31,8 @@ minimumReleaseAgeExclude:
   # montée est impossible. C'est par ailleurs le correctif de l'avis modéré qui frappait la
   # 8.5.21 (lecture de fichiers .map arbitraires via un sourceMappingURL contrôlé).
   - postcss
+  - sharp
+  - "@img/*"
 
 # Peers qu'on ne peut pas corriger : dépendances transitives de cdktf-cli (ink,
 # ink-select-input, react-reconciler) figées sur React 16/17. Rien à l'exécution
@@ -39,6 +41,7 @@ minimumReleaseAgeExclude:
 # artefact connu.
 overrides:
   postcss: 8.5.23
+  sharp: 0.35.5
 
 peerDependencyRules:
   allowedVersions:
