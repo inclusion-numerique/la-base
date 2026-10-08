@@ -1,0 +1,75 @@
+---
+name: Preview deletion
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'dev'
+      - 'main'
+  delete:
+  workflow_dispatch:
+    inputs:
+      branche:
+        description: 'Branch whose preview environment to delete'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.event.ref || inputs.branche }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  delete-preview:
+    name: Delete preview environment
+    if: >-
+      (
+        (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||
+        (github.event_name == 'delete' && github.event.ref_type == 'branch') ||
+        github.event_name == 'workflow_dispatch'
+      ) &&
+      !contains(fromJSON('["main", "dev"]'), github.event.pull_request.head.ref || github.event.ref || inputs.branche)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      CDK_FORCE_BRANCH: ${{ github.event.pull_request.head.ref || github.event.ref || inputs.branche }}
+    steps:
+      - name: Refuse to delete a protected branch environment
+        if: env.CDK_FORCE_BRANCH == '' || env.CDK_FORCE_BRANCH == 'main' || env.CDK_FORCE_BRANCH == 'dev'
+        run: |
+          echo "Rien à supprimer pour « $CDK_FORCE_BRANCH » : main et dev ne sont jamais détruits"
+          exit 1
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: dev
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node-version: '22'
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.5.7
+          terraform_wrapper: false
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Create terraform variables file from environment variables
+        run: DATABASE_PASSWORD='placeholder_for_destroy' WEB_CONTAINER_IMAGE='placeholder_for_destroy' pnpm --silent cli terraform:vars-from-env web
+      - name: Destroy stack
+        run: pnpm --silent -F @app/cdk cdktf destroy web --auto-approve --var-file .tfvars.json
+      - name: Deactivate GitHub deployments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm --silent cli github:deployment:deactivate "$CDK_FORCE_BRANCH"
+      - name: Delete Sentry environment issues
+        run: pnpm --silent cli sentry:delete-environment-issues "$CDK_FORCE_BRANCH"

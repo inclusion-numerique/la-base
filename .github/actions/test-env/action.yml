@@ -12,15 +12,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Create env file
-      run: cp .env.dist .env
-      shell: bash
-    - name: Add secrets to env file
-      run: pnpm --silent cli dotenv:from-secrets
-      shell: bash
-      env:
-        SCW_ACCESS_KEY: ${{ inputs.scw-access-key }}
-        SCW_SECRET_KEY: ${{ inputs.scw-secret-key }}
+    - name: Secrets environment
+      uses: ./.github/actions/secrets-env
+      with:
+        scw-access-key: ${{ inputs.scw-access-key }}
+        scw-secret-key: ${{ inputs.scw-secret-key }}
     - name: Add NEXT_PUBLIC variables to env file
       run: pnpm --silent cli dotenv:add-next-public --local "${GITHUB_REF_NAME//\//-}"
       shell: bash

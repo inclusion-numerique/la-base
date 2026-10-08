@@ -1,0 +1,148 @@
+---
+name: Deploy
+
+on:
+  push:
+    branches:
+      - 'dev'
+      - 'main'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WEB_APP_DOCKER_REGISTRY: rg.fr-par.scw.cloud/la-base-web-app
+
+jobs:
+  build:
+    name: Build image
+    if: contains(fromJSON('["dev", "main"]'), github.ref_name)
+    runs-on: ubuntu-latest
+    outputs:
+      namespace: ${{ steps.namespace.outputs.namespace }}
+      image: ${{ steps.namespace.outputs.image }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Compute deployment names
+        id: namespace
+        env:
+          BRANCHE: ${{ github.ref_name }}
+        run: |
+          NAMESPACE="${BRANCHE//\//-}"
+          {
+            echo "namespace=$NAMESPACE"
+            echo "image=$WEB_APP_DOCKER_REGISTRY/la-base-web-$NAMESPACE:${{ github.run_number }}"
+          } >> "$GITHUB_OUTPUT"
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Add NEXT_PUBLIC variables to env file
+        run: pnpm --silent cli dotenv:add-next-public "${{ steps.namespace.outputs.namespace }}"
+      - name: Build cache
+        uses: actions/cache@v6
+        with:
+          path: apps/web/.next/cache
+          key: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('apps/web/src/**/*.ts', 'apps/web/src/**/*.tsx') }}
+          restore-keys: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      - name: Build next app
+        run: SENTRY_RELEASE=true pnpm --silent -F @app/web build
+      - name: Build docker image
+        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t "${{ steps.namespace.outputs.image }}" -f docker/web/Dockerfile .
+      - name: Push docker image
+        env:
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        run: |
+          echo "$SCW_SECRET_KEY" | docker login "$WEB_APP_DOCKER_REGISTRY" --username nologin --password-stdin
+          docker push "${{ steps.namespace.outputs.image }}"
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.status.outputs.url }}
+    env:
+      CDK_FORCE_BRANCH: ${{ github.ref_name }}
+      NAMESPACE: ${{ needs.build.outputs.namespace }}
+      WEB_CONTAINER_IMAGE: ${{ needs.build.outputs.image }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node-version: '22'
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.5.7
+          terraform_wrapper: false
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Setup and export database password
+        run: |
+          pnpm --silent cli secrets:database:setup "$NAMESPACE"
+          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
+          echo "::add-mask::$DATABASE_PASSWORD"
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
+      - name: Create terraform variables file from environment variables
+        run: pnpm --silent cli terraform:vars-from-env web
+      - name: Deploy web app stack
+        run: pnpm --silent -F @app/cdk cdktf deploy web --var-file .tfvars.json --auto-approve --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs
+      - name: Add web stack outputs to env file
+        run: pnpm --silent cli dotenv:from-cdk web
+      - name: Mask env file values
+        uses: ./.github/actions/mask-env
+      - name: Install PostgreSQL 17 client
+        if: github.ref_name != 'main'
+        run: |
+          wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/postgresql-archive-keyring.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+          echo "/usr/lib/postgresql/17/bin" >> "$GITHUB_PATH"
+      - name: Import main database dump
+        if: github.ref_name != 'main'
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent cli backup:locally-restore-latest-main
+      - name: Migrate database
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/web prisma migrate deploy
+      - name: Load fixtures
+        if: github.ref_name != 'main'
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/fixtures load
+      - name: Check that deployed container status is ok
+        id: status
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent cli deployment:check-status "https://$WEB_BASE_URL"
+          echo "url=https://$WEB_BASE_URL" >> "$GITHUB_OUTPUT"
