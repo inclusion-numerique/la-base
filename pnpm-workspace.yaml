@@ -69,3 +69,19 @@ peerDependencyRules:
     # i18next arrive en transitif via opening_hours (@gouvfr-anct/timetable-to-osm-opening-hours)
     # et plafonne TypeScript à ^5. Rien ne l'instancie ici : le paquet n'est importé nulle part.
     'i18next>typescript': '7'
+
+allowBuilds:
+  "@cdktf/node-pty-prebuilt-multiarch": false
+  "@gouvfr/dsfr": false
+  "@parcel/watcher": false
+  "@prisma/engines": false
+  "@sentry/cli": false
+  "@swc/core": false
+  aws-crt: false
+  core-js-pure: false
+  cypress: false
+  esbuild: false
+  prisma: false
+  unrs-resolver: false
+
+dedupePeerDependents: false
