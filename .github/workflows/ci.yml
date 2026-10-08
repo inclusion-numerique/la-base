@@ -1,0 +1,110 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - 'build/*'
+      - 'chore/*'
+      - 'ci/*'
+      - 'docs/*'
+      - 'feat/*'
+      - 'fix/*'
+      - 'perf/*'
+      - 'refactor/*'
+      - 'revert/*'
+      - 'style/*'
+      - 'test/*'
+      - 'dev'
+      - 'main'
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Monorepo manypkg check
+        run: pnpm manypkg check
+      - name: Tsc
+        run: pnpm tsc
+      - name: Lint all packages except @app/web
+        run: pnpm -F '!@app/web' lint
+      - name: Lint @app/web
+        run: pnpm -F '@app/web' lint
+
+  test-packages:
+    name: Test packages
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test-packages
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Create env file
+        run: cp .env.dist .env
+      - name: Test all packages except @app/web with coverage
+        run: pnpm -F '!la-base' -F '!@app/web' -F '!@app/e2e' -F '!@app/storybook' exec jest --coverage --passWithNoTests
+      - name: List coverage reports
+        id: coverage
+        run: |
+          shopt -s nullglob
+          files=(apps/*/coverage/lcov.info packages/*/coverage/lcov.info)
+          echo "files=${files[*]}" >> "$GITHUB_OUTPUT"
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          files: ${{ steps.coverage.outputs.files }}
+          flag-name: packages
+          parallel: true
+          fail-on-error: false
+
+  test-web:
+    name: Test web
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test-web
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Create env file
+        run: cp .env.dist .env
+      - name: Test @app/web with coverage
+        run: pnpm --silent -F @app/web exec jest --coverage -c jest.unit.config.ts
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          files: apps/web/coverage/lcov.info
+          flag-name: web-unit
+          parallel: true
+          fail-on-error: false
+
+  coverage:
+    name: Coverage
+    needs:
+      - test-packages
+      - test-web
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close parallel Coveralls build
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: 'packages,web-unit'
+          fail-on-error: false

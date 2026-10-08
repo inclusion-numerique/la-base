@@ -83,18 +83,6 @@ workflows:
       equal: [web_app_deployment, << pipeline.parameters.trigger_workflow >>]
     jobs:
       - prepare_workspace_dependencies
-      - lint_web:
-          requires:
-            - prepare_workspace_dependencies
-      - lint_packages:
-          requires:
-            - prepare_workspace_dependencies
-      - test_packages:
-          requires:
-            - prepare_workspace_dependencies
-      - test_web:
-          requires:
-            - prepare_workspace_dependencies
       - test_web_integration:
           requires:
             - prepare_workspace_dependencies
@@ -112,18 +100,12 @@ workflows:
 
       - upload_coverage:
           requires:
-            - test_packages
-            - test_web
             - test_web_integration
 
       - deploy_web:
           serial-group: << pipeline.project.slug >>/deploy-web-<< pipeline.git.branch >>
           requires:
-            - lint_web
-            - lint_packages
             - build_web
-            - test_packages
-            - test_web
             - test_web_integration
             - test_components
             - test_web_e2e
@@ -134,17 +116,9 @@ workflows:
       equal: [ chromatic_deployment, << pipeline.parameters.trigger_workflow >> ]
     jobs:
       - prepare_workspace_dependencies
-      - lint_web:
-          requires:
-            - prepare_workspace_dependencies
-      - lint_packages:
-          requires:
-            - prepare_workspace_dependencies
       - chromatic:
           requires:
             - prepare_workspace_dependencies
-            - lint_web
-            - lint_packages
 
   project_infrastructure_deployment:
     when:
@@ -199,9 +173,6 @@ jobs:
           name: 'Fetch dependencies'
           command: pnpm install --virtual-store-dir << pipeline.parameters.virtual_store_dir >> --frozen-lockfile
       - run:
-          name: 'Monorepo manypkg check'
-          command: pnpm manypkg check
-      - run:
           name: 'Install cypress binary'
           command: ./packages/e2e/node_modules/.bin/cypress install
       - save_cache:
@@ -227,40 +198,6 @@ jobs:
           paths:
             - /home/circleci/.cache/Cypress
 
-  lint_web:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Tsc'
-          command: pnpm tsc
-      - run:
-          name: 'Lint @app/web'
-          command: pnpm -F '@app/web' lint
-          no_output_timeout: 30m
-
-  lint_packages:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Tsc'
-          command: pnpm tsc
-      - run:
-          name: 'Lint all packages except @app/web'
-          command: pnpm -F '!@app/web' lint
-          no_output_timeout: 30m
-
   lint_and_test_cdk_package:
     executor: node
     resource_class: large
@@ -276,57 +213,6 @@ jobs:
       - run:
           name: 'Test config and cdk packages'
           command: pnpm -F @app/config -F @app/cdk test
-
-  test_packages:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - create_dotenv_file
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Test all packages except @app/web with coverage'
-          command: pnpm -F '!@app/web' -F '!@app/e2e' -F '!@app/storybook' exec jest --coverage --passWithNoTests
-      - run:
-          name: 'Collect coverage reports'
-          command: |
-            mkdir -p coverage-reports/packages
-            for dir in packages/*/coverage; do
-              if [ -d "$dir" ]; then
-                pkg=$(basename $(dirname $dir))
-                cp "$dir/coverage-final.json" "coverage-reports/packages/$pkg.json" 2>/dev/null || true
-              fi
-            done
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage-reports/packages
-
-  test_web:
-    executor: node
-    resource_class: large
-    steps:
-      - checkout
-      - install_dependencies
-      - create_dotenv_file
-      - run:
-          name: 'Prisma generate'
-          command: pnpm --silent -F @app/web prisma generate
-      - run:
-          name: 'Test @app/web with coverage'
-          command: pnpm --silent -F @app/web exec jest --coverage -c jest.unit.config.ts
-      - run:
-          name: 'Collect coverage reports'
-          command: |
-            mkdir -p coverage-reports/web-unit
-            cp apps/web/coverage/coverage-final.json coverage-reports/web-unit/coverage.json 2>/dev/null || true
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage-reports/web-unit
 
   build_web:
     executor: node
