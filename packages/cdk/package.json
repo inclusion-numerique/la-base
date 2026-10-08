@@ -16,11 +16,11 @@
     "generate": "./scripts/generate-bindings.sh",
     "tsc": "pnpm --silent generate && tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "synth": "pnpm --silent generate && pnpm --silent with-env cdktf synth",
-    "cdktf": "pnpm --silent generate && pnpm --silent with-env cdktf",
+    "synth": "pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm --silent with-env cdktf synth",
+    "cdktf": "pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm --silent with-env cdktf",
     "output": "pnpm --silent clean-cdktf output --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs",
-    "clean-cdktf": "rm -rf cdktf.out && pnpm --silent generate && pnpm with-env cdktf",
-    "tf:web:backend-reconfigure": "cd cdktf.out/stacks/web && terraform init -reconfigure",
+    "clean-cdktf": "rm -rf cdktf.out && pnpm --silent generate && TERRAFORM_BINARY_NAME=tofu pnpm with-env cdktf",
+    "tf:web:backend-reconfigure": "cd cdktf.out/stacks/web && tofu init -reconfigure",
     "scw": "pnpm --silent with-env scw"
   },
   "dependencies": {
