@@ -2,7 +2,6 @@
 set -euo pipefail
 
 terraform_version=1.5.7
-node_version=22.23.3
 
 cdk_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$cdk_dir"
@@ -62,4 +61,4 @@ else
 fi
 
 rm -rf .gen
-PATH="$terraform_dir:$PATH" npm_config_use_node_version="$node_version" pnpm exec cdktf get
+PATH="$terraform_dir:$PATH" pnpm exec cdktf get
