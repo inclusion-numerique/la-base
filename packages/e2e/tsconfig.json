@@ -15,7 +15,6 @@
       "@app/e2e/*": ["./cypress/*"],
       "@app/emails/*": ["../../packages/emails/src/*"],
       "@app/lint/*": ["../../packages/lint/src/*"],
-      "@app/scaleway/*": ["../../packages/cdk/.gen/providers/scaleway/*"],
       "@app/storybook/*": ["../../packages/storybook/src/*"],
       "@app/test/*": ["../../packages/test/src/*"],
       "@app/ui/*": ["../../packages/ui/src/*"],

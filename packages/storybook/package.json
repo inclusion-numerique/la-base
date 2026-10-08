@@ -18,23 +18,23 @@
     "node": "^24.19"
   },
   "dependencies": {
-    "@storybook/addon-a11y": "^10.5.7",
-    "@storybook/addon-docs": "^10.5.7",
-    "@storybook/addon-links": "^10.5.7",
-    "@storybook/nextjs": "^10.5.7",
-    "chromatic": "^18.1.0",
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-links": "^10.6.0",
+    "@storybook/nextjs": "^10.6.0",
+    "chromatic": "^18.9.4",
     "dotenv": "^17.4.2",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "storybook": "^10.5.7"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "storybook": "^10.6.0"
   },
   "devDependencies": {
-    "@storybook/test-runner": "^0.24.4",
+    "@storybook/test-runner": "^0.24.5",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.2.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
-    "jest": "^30.4.2",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "jest": "^30.5.2",
     "typescript": "^7.0.2"
   }
 }

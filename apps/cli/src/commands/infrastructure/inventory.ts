@@ -1,6 +1,10 @@
 import { octokit, owner, repo } from '@app/cli/github'
 import { output, outputError } from '@app/cli/output'
 import {
+  previewDeletionRunsUrl,
+  triggerPreviewDeletion,
+} from '@app/cli/triggerPreviewDeletion'
+import {
   containerNamespaceName,
   databaseInstanceName,
   projectSlug,
@@ -202,8 +206,8 @@ const resolveDatabaseInstanceIdentifier = () => {
 const getMissingEnvValidationErrors = () => {
   const errors: string[] = []
 
-  if (!hasValue(process.env.CIRCLE_CI_TOKEN)) {
-    errors.push('CIRCLE_CI_TOKEN is required to trigger cleanup pipelines.')
+  if (!hasValue(process.env.GITHUB_TOKEN)) {
+    errors.push('GITHUB_TOKEN is required to trigger cleanup workflows.')
   }
 
   const scwSecretConfigured = hasValue(scalewayApiToken())
@@ -463,42 +467,15 @@ const fetchPreviewDatabases = async (): Promise<PreviewDatabase[]> => {
   }
 }
 
-const triggerEnvDeletion = async (
-  branch: string,
-  circleCiToken: string,
-): Promise<boolean> => {
-  const circleCiApiUrl = `https://circleci.com/api/v2/project/gh/inclusion-numerique/${projectSlug}/pipeline`
-
+const triggerEnvDeletion = async (branch: string): Promise<boolean> => {
   try {
-    const response = await axios.post(
-      circleCiApiUrl,
-      {
-        branch: 'dev',
-        parameters: {
-          trigger_workflow: 'web_app_preview_deletion',
-          preview_deletion_branch: branch,
-        },
-      },
-      {
-        headers: {
-          'Circle-Token': circleCiToken,
-          'Content-Type': 'application/json',
-        },
-      },
-    )
-    const pipelineUrl = `https://app.circleci.com/pipelines/github/inclusion-numerique/${projectSlug}/${response.data.number}`
-    output(`  Env deletion pipeline triggered: ${pipelineUrl}`)
+    await triggerPreviewDeletion(branch)
+    output(`  Env deletion workflow triggered: ${previewDeletionRunsUrl}`)
     return true
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      outputError(
-        `  Env deletion failed: ${error.response?.status} ${error.response?.statusText ?? ''} - ${JSON.stringify(error.response?.data)}`,
-      )
-    } else {
-      outputError(
-        `  Env deletion failed: ${error instanceof Error ? error.message : String(error)}`,
-      )
-    }
+    outputError(
+      `  Env deletion failed: ${error instanceof Error ? error.message : String(error)}`,
+    )
     return false
   }
 }
@@ -530,15 +507,6 @@ export const infrastructureInventory = new Command()
   .action(async () => {
     try {
       if (!assertRequiredEnvForInventory()) {
-        process.exit(1)
-        return
-      }
-
-      const circleCiToken = process.env.CIRCLE_CI_TOKEN
-      if (!circleCiToken) {
-        outputError(
-          'Missing CIRCLE_CI_TOKEN env variable for CircleCI authentication',
-        )
         process.exit(1)
         return
       }
@@ -861,7 +829,7 @@ export const infrastructureInventory = new Command()
 
         if (action === 'env_and_branch' || action === 'env_only') {
           output(`  Triggering environment deletion for "${branch.name}"...`)
-          const success = await triggerEnvDeletion(branch.name, circleCiToken)
+          const success = await triggerEnvDeletion(branch.name)
           if (success) envDeletedCount++
         }
 
@@ -915,7 +883,6 @@ export const infrastructureInventory = new Command()
           )
           const success = await triggerEnvDeletion(
             noGitBranchResource.namespace,
-            circleCiToken,
           )
           if (success) envDeletedCount++
         } else {

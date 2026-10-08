@@ -20,7 +20,7 @@
 
 **Les Bases** (https://lesbases.anct.gouv.fr) est une plateforme collaborative de partage de ressources et communs numeriques a l'echelle nationale, maintenue par l'Incubateur des Territoires (ANCT).
 
-Le projet est structure en [monorepo](https://en.wikipedia.org/wiki/Monorepo) et heberge sur [Scaleway](https://www.scaleway.com). Le deploiement est automatise via [CircleCI](https://circleci.com/) : toute fusion sur `main` declenche une mise en production. Chaque branche de feature genere un environnement de preview.
+Le projet est structure en [monorepo](https://en.wikipedia.org/wiki/Monorepo) et heberge sur [Scaleway](https://www.scaleway.com). Le deploiement est automatise via [GitHub Actions](https://docs.github.com/actions) : toute fusion sur `dev` deploie l'environnement `dev`, toute fusion sur `main` declenche une mise en production.
 
 Licence : [AGPL-3.0-or-later](./LICENSE)
 
@@ -259,7 +259,7 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 | Commande | Description |
 |----------|-------------|
 | `infrastructure:create <resource> <names> [--dry-run]` | Cree les ressources Scaleway manquantes (`database` ou `container`) |
-| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche un pipeline CircleCI) |
+| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche le workflow GitHub Actions `Preview deletion`) |
 | `infrastructure:inventory` | Outil interactif pour visualiser et nettoyer l'infrastructure (branches, conteneurs, BDD, buckets S3) |
 
 ### Variables d'environnement et secrets
@@ -447,28 +447,26 @@ pnpm -F cdk cdktf deploy
 pnpm -F cdk output
 ```
 
-### CI/CD (CircleCI)
+### CI/CD (GitHub Actions)
 
-Le pipeline CircleCI definit 4 workflows :
+Les workflows sont dans `.github/workflows` :
 
-1. **web_app_deployment** (automatique a chaque push)
-   - Installation des dependances
+1. **CI** (a chaque push sur une branche prefixee, `dev` et `main`)
    - Lint et verification de types
-   - Tests unitaires, integration, composants, e2e
-   - Build de l'application web
-   - Deploiement du stack web
-
-2. **project_infrastructure_deployment** (declenchement manuel)
-   - Lint et tests de l'infrastructure
-   - Calcul du diff Terraform
-   - Approbation manuelle requise
-   - Deploiement de l'infrastructure projet
-
-3. **chromatic_deployment** (declenchement manuel)
+   - Tests unitaires et d'integration, couverture envoyee a Coveralls
    - Deploiement du Storybook sur Chromatic
 
-4. **web_app_preview_deletion** (declenchement manuel)
-   - Destruction des environnements de preview
+2. **Deploy** (a chaque push sur `dev` et `main`, ou a la main sur ces deux branches)
+   - Build de l'application web et de l'image Docker, poussee sur le registre Scaleway
+   - Deploiement du stack web
+   - Sur `dev` : import du dump de `main`, migrations et fixtures ; sur `main` : migrations
+
+3. **Preview deletion** (a la fusion d'une PR, a la suppression d'une branche, ou a la main)
+   - Destruction de l'environnement de preview de la branche, jamais de `dev` ni de `main`
+
+4. **Dependency Review** (sur chaque pull request)
+
+Le stack projet (`ProjectStack`) n'a pas de workflow : il se deploie a la main avec `pnpm -F @app/cdk cdktf deploy project`.
 
 ---
 
@@ -530,7 +528,7 @@ La fusion d'une branche dans `main` declenche automatiquement le deploiement en 
 - [Scaleway](https://www.scaleway.com/) - Hebergement cloud
 - [CDKTF](https://developer.hashicorp.com/terraform/cdktf) - Infrastructure as Code (TypeScript)
 - [Docker](https://www.docker.com/) - Conteneurisation
-- [CircleCI](https://circleci.com/) - CI/CD
+- [GitHub Actions](https://docs.github.com/actions) - CI/CD
 
 ### Qualite et monitoring
 

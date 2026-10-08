@@ -1,0 +1,34 @@
+name: 'Setup Node & pnpm'
+description: 'Install pnpm, Node.js and dependencies'
+
+inputs:
+  node-version:
+    description: 'Node.js version, instead of the one in .nvmrc'
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v6
+      with:
+        run_install: false
+    - name: Set up Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.node-version == '' && '.nvmrc' || '' }}
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
+      env:
+        CYPRESS_INSTALL_BINARY: '0'
+    - name: Cache cdktf provider bindings
+      uses: actions/cache@v6
+      with:
+        path: packages/cdk/.gen
+        key: cdktf-bindings-${{ runner.os }}-${{ hashFiles('packages/cdk/cdktf.json', 'packages/cdk/scripts/generate-bindings.sh', 'pnpm-lock.yaml') }}
+    - name: Generate cdktf provider bindings
+      run: pnpm --silent -F @app/cdk generate
+      shell: bash

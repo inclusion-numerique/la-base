@@ -29,6 +29,10 @@
       "cache": false
     },
     "tsc": {
+      "dependsOn": ["@app/cdk#generate"],
+      "cache": false
+    },
+    "@app/cdk#generate": {
       "cache": false
     }
   },
@@ -44,8 +48,6 @@
     "UPLOADS_S3_BUCKET",
     "BRANCH",
     "CDK_FORCE_BRANCH",
-    "COCKPIT_GRAPHANA_EDITORS",
-    "COCKPIT_GRAPHANA_VIEWERS",
     "COCKPIT_METRICS_URL",
     "COCKPIT_LOGS_URL",
     "COCKPIT_ALERT_MANAGER_URL",
