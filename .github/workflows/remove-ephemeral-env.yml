@@ -107,3 +107,5 @@ jobs:
           echo "Environnement « $ENVIRONNEMENT » supprimé"
       - name: Delete Sentry environment issues
         run: pnpm --silent cli sentry:delete-environment-issues "$BRANCHE"
+      - name: Delete container image
+        run: pnpm --silent cli infrastructure:delete-registry-image "$BRANCHE"

@@ -461,6 +461,7 @@ Les workflows sont dans `.github/workflows` :
    - Build des images de `dev` et de la production en parallele, poussees sur le registre Scaleway (`build.reusable.yml`)
    - Deploiement de l'environnement `dev`, puis de la production si `dev` a reussi (`deploy.reusable.yml`)
    - Hors production : import du dump de la production, migrations et fixtures ; en production : migrations
+   - Elagage du registre Scaleway apres la production (`infrastructure:prune-registry --apply`) : images des branches disparues supprimees, 10 derniers tags de `main` et 5 de `dev` conserves
 
 3. **Preview** (sur les pull requests portant le label `preview`)
    - Poser le label `preview` sur une PR deploie sa branche, avec les memes briques que **Release**
@@ -468,7 +469,7 @@ Les workflows sont dans `.github/workflows` :
    - Retirer le label, ou fermer la PR, detruit la preview
 
 4. **Remove ephemeral environment** (appele par **Preview**, ou a la main avec le nom de la branche)
-   - Destruction du stack de la branche, desactivation de ses deploiements, suppression de son environnement GitHub (GitHub App des Bases) et des issues Sentry de l'environnement
+   - Destruction du stack de la branche, suppression de son image dans le registre, desactivation de ses deploiements, suppression de son environnement GitHub (GitHub App des Bases) et des issues Sentry de l'environnement
    - Jamais `dev` ni `main`
 
 5. **Dependency Review** (sur chaque pull request)
