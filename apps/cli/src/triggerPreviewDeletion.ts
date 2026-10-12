@@ -7,6 +7,6 @@ export const triggerPreviewDeletion = (branche: string) =>
     owner,
     repo,
     workflow_id: 'remove-ephemeral-env.yml',
-    ref: 'dev',
+    ref: 'main',
     inputs: { branche },
   })

@@ -15,7 +15,6 @@ on:
       - 'revert/*'
       - 'style/*'
       - 'test/*'
-      - 'dev'
       - 'main'
 
 permissions:
@@ -369,12 +368,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RUN_NUMBER=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy.yml --branch "$CDK_FORCE_BRANCH" --status success --limit 1 --json number --jq '.[0].number')
-          if [[ -z "$RUN_NUMBER" || "$RUN_NUMBER" == "null" ]]; then
+          dernier_run_reussi() {
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$1/runs?branch=$2&status=success&per_page=1" --jq '.workflow_runs[0] | select(.) | "\(.id)-\(.run_attempt)"' 2> /dev/null || true
+          }
+          TAG=$(dernier_run_reussi release.yml main)
+          if [[ ! "$TAG" =~ ^[0-9]+-[0-9]+$ ]]; then
+            TAG=$(dernier_run_reussi deploy.yml "$CDK_FORCE_BRANCH")
+          fi
+          if [[ ! "$TAG" =~ ^[0-9]+-[0-9]+$ ]]; then
             echo "::error::Aucun déploiement réussi de $CDK_FORCE_BRANCH : impossible de calculer le diff contre l'image déployée"
             exit 1
           fi
-          echo "WEB_CONTAINER_IMAGE=rg.fr-par.scw.cloud/la-base-web-app/la-base-web-$NAMESPACE:$RUN_NUMBER" >> "$GITHUB_ENV"
+          echo "WEB_CONTAINER_IMAGE=rg.fr-par.scw.cloud/la-base-web-app/la-base-web-$NAMESPACE:$TAG" >> "$GITHUB_ENV"
           DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
           echo "::add-mask::$DATABASE_PASSWORD"
           echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
