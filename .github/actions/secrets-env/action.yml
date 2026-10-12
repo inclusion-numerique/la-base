@@ -1,0 +1,25 @@
+name: 'Secrets environment'
+description: 'Create the .env file from .env.dist and the Scaleway Secret Manager, its values masked in the logs'
+
+inputs:
+  scw-access-key:
+    description: 'Scaleway access key reading the Secret Manager'
+    required: true
+  scw-secret-key:
+    description: 'Scaleway secret key reading the Secret Manager'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Create env file
+      run: cp .env.dist .env
+      shell: bash
+    - name: Add secrets to env file
+      run: pnpm --silent cli dotenv:from-secrets
+      shell: bash
+      env:
+        SCW_ACCESS_KEY: ${{ inputs.scw-access-key }}
+        SCW_SECRET_KEY: ${{ inputs.scw-secret-key }}
+    - name: Mask env file values
+      uses: ./.github/actions/mask-env

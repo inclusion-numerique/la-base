@@ -5,6 +5,8 @@ import { createNodeModulesTransformIgnorePattern } from './transformIgnore.ts'
 // jest 30 charge les configs en ESM : __dirname n'existe plus, import.meta est disponible
 const dotenvFile = path.resolve(import.meta.dirname, '../../../.env')
 
+const racineDuDepot = path.resolve(import.meta.dirname, '../../..')
+
 export const testDotenvConfig = () => {
   dotenv.config({ path: dotenvFile })
 }
@@ -76,7 +78,11 @@ export const packageJestConfig = ({
     },
     // Coverage configuration
     coverageDirectory: '<rootDir>/coverage',
-    coverageReporters: ['json', 'lcov', 'text-summary'],
+    coverageReporters: [
+      'json',
+      ['lcov', { projectRoot: racineDuDepot }],
+      'text-summary',
+    ],
     collectCoverageFrom: [
       'src/**/*.{ts,tsx}',
       '!src/**/*.spec.{ts,tsx}',

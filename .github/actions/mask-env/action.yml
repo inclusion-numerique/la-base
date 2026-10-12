@@ -1,0 +1,16 @@
+name: 'Mask env file'
+description: 'Mask in the logs every value the .env file holds beyond .env.dist, public values aside'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Mask env file values
+      run: |
+        grep -vxFf .env.dist .env \
+          | grep -vE '^(NEXT_PUBLIC_[A-Za-z0-9_]*|WEB_BASE_URL)=' \
+          | sed -nE 's/^[A-Za-z0-9_]+="?([^"]+)"?$/\1/p' \
+          | while IFS= read -r valeur; do
+              [ "${#valeur}" -ge 4 ] && echo "::add-mask::$valeur"
+            done
+        exit 0
+      shell: bash
