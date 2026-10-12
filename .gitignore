@@ -2,7 +2,6 @@
 # ⚠️ Keep in sync with .eslintignore
 
 var
-.turbo
 # dependencies
 node_modules
 .pnp

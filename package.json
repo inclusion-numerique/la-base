@@ -9,15 +9,15 @@
   },
   "packageManager": "pnpm@12.6.0",
   "scripts": {
-    "build": "turbo build",
+    "build": "pnpm -r build",
     "cli": "dotenv -- ./apps/cli/node_modules/.bin/tsx apps/cli/src/index.ts",
     "clean": "rm -rf node_modules",
-    "clean:workspaces": "turbo clean",
-    "dev": "turbo dev --parallel",
+    "clean:workspaces": "pnpm -r exec rm -rf node_modules",
+    "dev": "pnpm -r --parallel dev",
     "format": "prettier --write \"**/*.{ts,tsx,md,css}\"",
-    "lint": "turbo lint",
-    "tsc": "turbo tsc",
-    "test": "turbo test",
+    "lint": "pnpm -r lint",
+    "tsc": "pnpm -F @app/cdk generate && pnpm -r tsc",
+    "test": "pnpm -r test",
     "test:integration": "pnpm -F web test:integration",
     "test:e2e": "pnpm -F e2e cy open",
     "with-env": "dotenv --",
@@ -43,7 +43,6 @@
     "@manypkg/cli": "^0.25.1",
     "dotenv": "^17.4.2",
     "dotenv-cli": "^11.0.0",
-    "husky": "^9.1.7",
-    "turbo": "^2.11.3"
+    "husky": "^9.1.7"
   }
 }
