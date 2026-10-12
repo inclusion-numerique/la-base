@@ -207,13 +207,14 @@ pnpm dev
 | `pnpm format` | Formatage avec Prettier (`*.ts`, `*.tsx`, `*.md`, `*.css`) |
 | `pnpm tsc` | Verification de types TypeScript |
 
-### Infrastructure (CDK)
+### Infrastructure
 
 | Commande | Description |
 |----------|-------------|
-| `pnpm -F cdk synth` | Genere le code Terraform a partir du CDK |
-| `pnpm -F cdk cdktf` | Exécute le CLI cdktf |
-| `pnpm -F cdk output` | Affiche les outputs Terraform (donnees sensibles incluses) |
+| `pnpm with-env tofu -chdir=infrastructure <commande>` | Exécute OpenTofu sur l'infrastructure d'un environnement (voir `infrastructure/README.md`) |
+| `pnpm -F cdk synth` | Genere le code Terraform du stack projet a partir du CDK |
+| `pnpm -F cdk cdktf` | Exécute le CLI cdktf (stack projet) |
+| `pnpm -F cdk output` | Affiche les outputs Terraform du stack projet (donnees sensibles incluses) |
 | `pnpm -F cdk clean-cdktf` | Nettoie et reinitialise le CDKTF |
 
 ### Utilitaires
@@ -266,10 +267,11 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 
 | Commande | Description |
 |----------|-------------|
-| `dotenv:from-cdk <stack>` | Extrait les outputs CDK et les ajoute au `.env` (`web` ou `project`) |
+| `dotenv:from-infrastructure` | Ajoute au `.env` les outputs OpenTofu de l'environnement (`infrastructure/outputs.json`) |
 | `dotenv:from-secrets` | Recupere tous les secrets du Vault Scaleway et les ajoute au `.env` |
 | `dotenv:add-next-public <namespace> [--local]` | Ajoute les variables `NEXT_PUBLIC_*` au `.env` |
-| `terraform:vars-from-env <stack>` | Genere un `.tfvars.json` a partir des variables d'environnement |
+| `infrastructure:vars-from-env` | Genere `infrastructure/.tfvars.json` a partir des variables d'environnement |
+| `terraform:vars-from-env` | Genere le `.tfvars.json` du stack projet CDK a partir des variables d'environnement |
 | `secrets:list` | Liste tous les noms de secrets disponibles |
 | `secrets:get <name>` | Recupere la valeur d'un secret |
 | `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD pour un namespace |
@@ -395,18 +397,19 @@ ProjectStack
     └── SecretVersion             # Versioning des secrets
 ```
 
-#### 2. `WebAppStack` (ressources par branche/environnement)
+#### 2. `infrastructure/` (ressources par branche/environnement)
 
-Deploye pour chaque environnement (`main`, `dev`, branches de feature) :
+Decrit en HCL et deploye avec OpenTofu pour chaque environnement (`main`, `dev`, previews), voir `infrastructure/README.md` :
 
 ```
-WebAppStack
+infrastructure/
 ├── Container                     # Conteneur serverless de l'app web
 ├── ContainerDomain               # Mapping domaine personnalise
 ├── RdbDatabase                   # Base de donnees dediee a l'environnement
 ├── RdbUser                       # Utilisateur BDD dedie
 ├── RdbPrivilege                  # Droits d'acces BDD
 ├── DomainRecord                  # Enregistrement DNS pour le sous-domaine
+├── ObjectBucket                  # Bucket uploads de l'environnement
 └── ContainerCron (main uniquement)
     ├── Sauvegarde horaire
     ├── Sauvegarde quotidienne
@@ -429,19 +432,19 @@ WebAppStack
 
 ### Backend Terraform
 
-L'etat Terraform est stocke dans un bucket S3 Scaleway : `la-base-terraform-state`.
+L'etat Terraform est stocke dans un bucket S3 Scaleway : `la-base-terraform-state`, sous la cle `la-base-web-<namespace>.tfstate` pour chaque environnement et `la-base-project.tfstate` pour le stack projet.
 
-### Commandes CDK
+### Commandes du stack projet (CDK)
 
 ```bash
 # Generer le code Terraform
 pnpm -F cdk synth
 
 # Voir le plan d'execution
-pnpm -F cdk cdktf diff
+pnpm -F cdk cdktf diff project
 
 # Deployer l'infrastructure
-pnpm -F cdk cdktf deploy
+pnpm -F cdk cdktf deploy project
 
 # Afficher les outputs (avec donnees sensibles)
 pnpm -F cdk output
@@ -455,9 +458,11 @@ Les workflows sont dans `.github/workflows` :
    - Lint et verification de types
    - Tests unitaires et d'integration, couverture envoyee a Coveralls
    - Deploiement du Storybook sur Chromatic
+   - Plan OpenTofu de `dev` et de la production quand la branche modifie `infrastructure/` (`infrastructure-plan.reusable.yml`)
 
 2. **Release** (a chaque fusion dans `main`)
    - Build des images de `dev` et de la production en parallele, poussees sur le registre Scaleway (`build.reusable.yml`)
+   - Plan OpenTofu de `dev` et de la production pendant les builds : si un plan change autre chose que les marques de sensibilite du state, le deploiement de cet environnement attend une approbation sur l'environnement GitHub `infrastructure-approval`
    - Deploiement de l'environnement `dev`, puis de la production si `dev` a reussi (`deploy.reusable.yml`)
    - Hors production : import du dump de la production, migrations et fixtures ; en production : migrations
    - Elagage du registre Scaleway apres la production (`infrastructure:prune-registry --apply`) : images des branches disparues supprimees, 10 derniers tags de `main` et 5 de `dev` conserves
@@ -468,7 +473,7 @@ Les workflows sont dans `.github/workflows` :
    - Retirer le label, ou fermer la PR, detruit la preview
 
 4. **Remove ephemeral environment** (appele par **Preview**, ou a la main avec le nom de la branche)
-   - Destruction du stack de la branche, suppression de son image dans le registre, desactivation de ses deploiements, suppression de son environnement GitHub (GitHub App des Bases) et des issues Sentry de l'environnement
+   - Destruction de l'infrastructure de la branche (`tofu destroy`), suppression de son image dans le registre, desactivation de ses deploiements, suppression de son environnement GitHub (GitHub App des Bases) et des issues Sentry de l'environnement
    - Jamais `dev` ni `main`
 
 5. **Dependency Review** (sur chaque pull request)

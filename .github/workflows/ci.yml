@@ -347,62 +347,44 @@ jobs:
       - name: Build storybook and deploy on chromatic
         run: pnpm --silent -F @app/storybook chromatic
 
-  infrastructure-diff:
-    name: Infrastructure diff (${{ matrix.branche }})
+  infrastructure-changes:
+    name: Infrastructure changes
+    if: github.ref_name != 'main'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: read
-    strategy:
-      fail-fast: false
-      matrix:
-        branche:
-          - dev
-          - main
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-infrastructure-diff-${{ matrix.branche }}
-      cancel-in-progress: true
-    env:
-      CDK_FORCE_BRANCH: ${{ matrix.branche }}
-      NAMESPACE: ${{ matrix.branche }}
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@v2
         with:
-          tofu_version: 1.13.1
-          tofu_wrapper: false
-      - name: Secrets environment
-        uses: ./.github/actions/secrets-env
-        with:
-          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
-          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
-      - name: Deployed image and database password
-        env:
-          GH_TOKEN: ${{ github.token }}
+          fetch-depth: 0
+      - name: Detect infrastructure changes
+        id: changes
         run: |
-          dernier_run_reussi() {
-            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$1/runs?branch=$2&status=success&per_page=1" --jq '.workflow_runs[0] | select(.) | "\(.id)-\(.run_attempt)"' 2> /dev/null || true
-          }
-          TAG=$(dernier_run_reussi release.yml main)
-          if [[ ! "$TAG" =~ ^[0-9]+-[0-9]+$ ]]; then
-            TAG=$(dernier_run_reussi deploy.yml "$CDK_FORCE_BRANCH")
+          if git diff --quiet origin/main...HEAD -- infrastructure/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Aucun changement dans infrastructure/ : rien à planifier"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-          if [[ ! "$TAG" =~ ^[0-9]+-[0-9]+$ ]]; then
-            echo "::error::Aucun déploiement réussi de $CDK_FORCE_BRANCH : impossible de calculer le diff contre l'image déployée"
-            exit 1
-          fi
-          echo "WEB_CONTAINER_IMAGE=rg.fr-par.scw.cloud/la-base-web-app/la-base-web-$NAMESPACE:$TAG" >> "$GITHUB_ENV"
-          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
-          echo "::add-mask::$DATABASE_PASSWORD"
-          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
-      - name: Create terraform variables file from environment variables
-        run: pnpm --silent cli terraform:vars-from-env web
-      - name: Compute diff
-        run: pnpm --silent -F @app/cdk cdktf diff web --var-file .tfvars.json
+
+  infrastructure-plan:
+    name: Infrastructure plan ${{ matrix.environnement }}
+    needs: infrastructure-changes
+    if: needs.infrastructure-changes.outputs.changed == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        environnement:
+          - dev
+          - main
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-infrastructure-plan-${{ matrix.environnement }}
+      cancel-in-progress: true
+    uses: ./.github/workflows/infrastructure-plan.reusable.yml
+    with:
+      environnement: ${{ matrix.environnement }}
+    secrets: inherit
 
   coverage:
     name: Coverage

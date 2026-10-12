@@ -1,0 +1,21 @@
+name: 'Infrastructure'
+description: 'Install OpenTofu and initialise the infrastructure state of an environment (after the secrets environment)'
+
+inputs:
+  namespace:
+    description: 'Namespace of the environment whose state to use'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install OpenTofu
+      uses: opentofu/setup-opentofu@v2
+      with:
+        tofu_version: 1.13.1
+        tofu_wrapper: false
+    - name: Initialise the infrastructure state
+      env:
+        NAMESPACE: ${{ inputs.namespace }}
+      run: pnpm --silent with-env tofu -chdir=infrastructure init -input=false -backend-config="key=la-base-web-$NAMESPACE.tfstate"
+      shell: bash

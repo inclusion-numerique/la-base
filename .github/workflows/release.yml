@@ -28,9 +28,48 @@ jobs:
       environnement: main
     secrets: inherit
 
+  plan-dev:
+    name: Plan dev
+    uses: ./.github/workflows/infrastructure-plan.reusable.yml
+    with:
+      environnement: dev
+    secrets: inherit
+
+  plan-production:
+    name: Plan production
+    uses: ./.github/workflows/infrastructure-plan.reusable.yml
+    with:
+      environnement: main
+    secrets: inherit
+
+  approve-dev:
+    name: Approve dev infrastructure
+    needs: plan-dev
+    if: needs.plan-dev.outputs.changes == 'true'
+    runs-on: ubuntu-latest
+    environment: infrastructure-approval
+    steps:
+      - name: Infrastructure plan approved
+        run: echo "Plan de l'infrastructure dev approuvé"
+
+  approve-production:
+    name: Approve production infrastructure
+    needs: plan-production
+    if: needs.plan-production.outputs.changes == 'true'
+    runs-on: ubuntu-latest
+    environment: infrastructure-approval
+    steps:
+      - name: Infrastructure plan approved
+        run: echo "Plan de l'infrastructure de production approuvé"
+
   deploy-dev:
     name: Deploy dev
-    needs: build-dev
+    needs: [build-dev, plan-dev, approve-dev]
+    if: >-
+      !cancelled()
+      && needs.build-dev.result == 'success'
+      && needs.plan-dev.result == 'success'
+      && contains(fromJSON('["success", "skipped"]'), needs.approve-dev.result)
     uses: ./.github/workflows/deploy.reusable.yml
     with:
       environnement: dev
@@ -44,7 +83,13 @@ jobs:
 
   deploy-production:
     name: Deploy production
-    needs: [build-production, deploy-dev]
+    needs: [build-production, plan-production, approve-production, deploy-dev]
+    if: >-
+      !cancelled()
+      && needs.build-production.result == 'success'
+      && needs.plan-production.result == 'success'
+      && contains(fromJSON('["success", "skipped"]'), needs.approve-production.result)
+      && needs.deploy-dev.result == 'success'
     uses: ./.github/workflows/deploy.reusable.yml
     with:
       environnement: main
