@@ -3,24 +3,20 @@ resource "scaleway_container_namespace" "webContainers" {
   description = "Web application containers"
 
   environment_variables = {
-    CHROMATIC_APP_ID          = var.CHROMATIC_APP_ID
-    NEXT_TELEMETRY_DISABLED   = var.NEXT_TELEMETRY_DISABLED
-    SENTRY_ORG                = var.SENTRY_ORG
-    SENTRY_PROJECT            = var.SENTRY_PROJECT
-    SENTRY_URL                = var.SENTRY_URL
-    COCKPIT_METRICS_URL       = scaleway_cockpit.cockpit.endpoints[0].metrics_url
-    COCKPIT_LOGS_URL          = scaleway_cockpit.cockpit.endpoints[0].logs_url
-    COCKPIT_ALERT_MANAGER_URL = scaleway_cockpit.cockpit.endpoints[0].alertmanager_url
-    COCKPIT_GRAFANA_URL       = scaleway_cockpit.cockpit.endpoints[0].grafana_url
-    SMTP_PORT                 = var.SMTP_PORT
-    SCW_DEFAULT_REGION        = var.SCW_DEFAULT_REGION
-    AWS_DEFAULT_REGION        = var.SCW_DEFAULT_REGION
-    S3_HOST                   = var.S3_HOST
-    LEGACY_UPLOADS_S3_BUCKET  = var.LEGACY_UPLOADS_S3_BUCKET
-    LEGACY_HOSTNAME           = var.LEGACY_HOSTNAME
-    NODE_ENV                  = "production"
-    TZ                        = "utc"
-    DATABASE_INSTANCE_ID      = scaleway_rdb_instance.database.id
+    CHROMATIC_APP_ID         = var.CHROMATIC_APP_ID
+    NEXT_TELEMETRY_DISABLED  = var.NEXT_TELEMETRY_DISABLED
+    SENTRY_ORG               = var.SENTRY_ORG
+    SENTRY_PROJECT           = var.SENTRY_PROJECT
+    SENTRY_URL               = var.SENTRY_URL
+    SMTP_PORT                = var.SMTP_PORT
+    SCW_DEFAULT_REGION       = var.SCW_DEFAULT_REGION
+    AWS_DEFAULT_REGION       = var.SCW_DEFAULT_REGION
+    S3_HOST                  = var.S3_HOST
+    LEGACY_UPLOADS_S3_BUCKET = var.LEGACY_UPLOADS_S3_BUCKET
+    LEGACY_HOSTNAME          = var.LEGACY_HOSTNAME
+    NODE_ENV                 = "production"
+    TZ                       = "utc"
+    DATABASE_INSTANCE_ID     = scaleway_rdb_instance.database.id
   }
 
   secret_environment_variables = {

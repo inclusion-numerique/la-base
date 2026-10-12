@@ -9,7 +9,7 @@ Resources shared by every environment, described in HCL and deployed with OpenTo
 - Uploads, legacy uploads and backups buckets (`storage.tf`)
 - Transactional emails domain (`email.tf`)
 - DNS records of the main and preview zones: name servers, emails, Brevo, uploads CDN, maildev (`dns.tf`)
-- Cockpit and the token of the web containers (`cockpit.tf`)
+- Cockpit token of the web containers (`cockpit.tf`); Cockpit itself is activated outside OpenTofu, and Grafana is reached through IAM
 - maildev instance, used by the previews (`maildev.tf`)
 
 The uploads CDN edge pipeline is configured by hand in the Scaleway console; `dns.tf` only points `storage` to it.

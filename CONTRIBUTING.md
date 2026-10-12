@@ -383,9 +383,7 @@ infrastructure/project/
 │   └── TXT    → SPF, DKIM, DMARC, verification Brevo
 │
 ├── Monitoring
-│   ├── Cockpit                   # Observabilite Scaleway (metriques, logs)
-│   ├── CockpitToken              # Token d'authentification conteneurs
-│   └── CockpitGrafanaUser        # Utilisateurs Grafana (editor, viewer)
+│   └── CockpitToken              # Token d'authentification conteneurs (Cockpit lui-meme est active hors OpenTofu, Grafana passe par IAM)
 │
 └── Secrets
     ├── Secret                    # Scaleway Secret Manager

@@ -1,7 +1,3 @@
-output "cockpitId" {
-  value = scaleway_cockpit.cockpit.id
-}
-
 output "mainDomainZoneId" {
   value = data.scaleway_domain_zone.mainDomainZone.id
 }
@@ -19,11 +15,11 @@ output "databaseInstanceId" {
 }
 
 output "databaseEndpointIp" {
-  value = scaleway_rdb_instance.database.endpoint_ip
+  value = scaleway_rdb_instance.database.load_balancer[0].ip
 }
 
 output "databaseEndpointPort" {
-  value = scaleway_rdb_instance.database.endpoint_port
+  value = scaleway_rdb_instance.database.load_balancer[0].port
 }
 
 output "uploadsHostName" {
