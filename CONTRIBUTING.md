@@ -20,7 +20,7 @@
 
 **Les Bases** (https://lesbases.anct.gouv.fr) est une plateforme collaborative de partage de ressources et communs numeriques a l'echelle nationale, maintenue par l'Incubateur des Territoires (ANCT).
 
-Le projet est structure en [monorepo](https://en.wikipedia.org/wiki/Monorepo) et heberge sur [Scaleway](https://www.scaleway.com). Le deploiement est automatise via [GitHub Actions](https://docs.github.com/actions) : toute fusion sur `dev` deploie l'environnement `dev`, toute fusion sur `main` declenche une mise en production.
+Le projet est structure en [monorepo](https://en.wikipedia.org/wiki/Monorepo) et heberge sur [Scaleway](https://www.scaleway.com). Le deploiement est automatise via [GitHub Actions](https://docs.github.com/actions) : toute fusion sur `main` deploie l'environnement `dev`, puis la production si `dev` a reussi.
 
 Licence : [AGPL-3.0-or-later](./LICENSE)
 
@@ -452,18 +452,18 @@ pnpm -F cdk output
 
 Les workflows sont dans `.github/workflows` :
 
-1. **CI** (a chaque push sur une branche prefixee, `dev` et `main`)
+1. **CI** (a chaque push sur une branche prefixee et sur `main`, ou elle tient a jour la couverture de reference et les captures Chromatic)
    - Lint et verification de types
    - Tests unitaires et d'integration, couverture envoyee a Coveralls
    - Deploiement du Storybook sur Chromatic
 
-2. **Deploy** (a chaque push sur `dev` et `main`, ou a la main sur ces deux branches)
-   - Build de l'application web et de l'image Docker, poussee sur le registre Scaleway (`build.reusable.yml`)
-   - Deploiement du stack web (`deploy.reusable.yml`)
-   - Hors `main` : import du dump de `main`, migrations et fixtures ; sur `main` : migrations
+2. **Release** (a chaque fusion dans `main`)
+   - Build des images de `dev` et de la production en parallele, poussees sur le registre Scaleway (`build.reusable.yml`)
+   - Deploiement de l'environnement `dev`, puis de la production si `dev` a reussi (`deploy.reusable.yml`)
+   - Hors production : import du dump de la production, migrations et fixtures ; en production : migrations
 
 3. **Preview** (sur les pull requests portant le label `preview`)
-   - Poser le label `preview` sur une PR deploie sa branche, avec les memes briques que **Deploy**
+   - Poser le label `preview` sur une PR deploie sa branche, avec les memes briques que **Release**
    - Chaque push sur la PR redeploie la preview
    - Retirer le label, ou fermer la PR, detruit la preview
 
@@ -481,7 +481,7 @@ Le stack projet (`ProjectStack`) n'a pas de workflow : il se deploie a la main a
 
 ### Branches
 
-- Creer les branches a partir d'une version a jour de `dev`
+- Creer les branches a partir d'une version a jour de `main`
 - Prefixer avec : `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/` ou `test/`
 - Ref : [Conventional Commits](https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index)
 
@@ -494,11 +494,11 @@ Les messages de commit doivent suivre la specification [Commits Conventionnels](
 1. Creer une branche : `git checkout -b feat/ma-fonctionnalite`
 2. Commiter : `git commit -m "feat: ajoute ma fonctionnalite"`
 3. Pousser : `git push origin feat/ma-fonctionnalite`
-4. Ouvrir une Pull Request vers `dev`
+4. Ouvrir une Pull Request vers `main`
 
 ### Deploiement
 
-La fusion d'une branche dans `main` declenche automatiquement le deploiement en production.
+La fusion d'une branche dans `main` deploie automatiquement l'environnement `dev`, puis la production. Pour tester une branche avant sa fusion, poser le label `preview` sur sa PR.
 
 ---
 

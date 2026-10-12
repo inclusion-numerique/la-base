@@ -42,7 +42,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
-          ref: dev
+          ref: main
           persist-credentials: false
       - name: Setup
         uses: ./.github/actions/setup

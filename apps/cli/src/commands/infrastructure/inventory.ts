@@ -74,7 +74,7 @@ type BranchDetail = {
   deployedContainer: boolean
   bucket: PreviewBucket | null
   stale: boolean
-  mergedInDev: boolean
+  mergedInMain: boolean
   deletable: boolean
 }
 
@@ -254,8 +254,10 @@ const assertRequiredEnvForInventory = () => {
 const formatBranchFlags = (branch: BranchDetail) => {
   const flags = [
     branch.isProtected ? pc.green('protected') : null,
-    branch.mergedInDev ? pc.green('merged-in-dev') : null,
-    !branch.isProtected && !branch.mergedInDev ? pc.yellow('not merged') : null,
+    branch.mergedInMain ? pc.green('merged-in-main') : null,
+    !branch.isProtected && !branch.mergedInMain
+      ? pc.yellow('not merged')
+      : null,
     branch.stale ? pc.yellow('stale') : null,
   ].filter(Boolean)
   return flags.length > 0 ? flags.join('\n') : '-'
@@ -565,24 +567,24 @@ export const infrastructureInventory = new Command()
             lastCommitDate !== 'unknown' ? daysAgo(lastCommitDate) : 0
           const stale = days > STALE_AFTER_DAYS
 
-          let mergedInDev = false
+          let mergedInMain = false
           if (!isProtected) {
             try {
               const { data: comparison } =
                 await octokit.rest.repos.compareCommits({
                   owner,
                   repo,
-                  base: 'dev',
+                  base: 'main',
                   head: branch.name,
                 })
-              mergedInDev = comparison.ahead_by === 0
+              mergedInMain = comparison.ahead_by === 0
             } catch {
               // If comparison fails, assume not merged
             }
           }
 
           const deletable =
-            !isProtected && ((!pr && stale) || (!pr && mergedInDev))
+            !isProtected && ((!pr && stale) || (!pr && mergedInMain))
 
           return {
             name: branch.name,
@@ -597,7 +599,7 @@ export const infrastructureInventory = new Command()
             deployedContainer,
             bucket,
             stale,
-            mergedInDev,
+            mergedInMain,
             deletable,
           }
         }),
@@ -799,7 +801,7 @@ export const infrastructureInventory = new Command()
             ),
           },
           { 'Bucket status': bucketCell(branch.bucket) },
-          { 'Merged in dev': yesNo(branch.mergedInDev) },
+          { 'Merged in main': yesNo(branch.mergedInMain) },
           {
             'Last commit': `${coloredCommitDate} by ${branch.lastCommitAuthor}\n${staleStatus}`,
           },
@@ -825,10 +827,10 @@ export const infrastructureInventory = new Command()
               ]
 
         const defaultAction: CleanupAction = canDeleteEnvironment
-          ? branch.mergedInDev
+          ? branch.mergedInMain
             ? 'env_and_branch'
             : 'skip'
-          : branch.mergedInDev
+          : branch.mergedInMain
             ? 'branch_only'
             : 'skip'
 

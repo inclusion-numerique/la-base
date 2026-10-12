@@ -1,0 +1,57 @@
+---
+name: Release
+
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-dev:
+    name: Build dev
+    uses: ./.github/workflows/build.reusable.yml
+    with:
+      environnement: dev
+    secrets: inherit
+
+  build-production:
+    name: Build production
+    uses: ./.github/workflows/build.reusable.yml
+    with:
+      environnement: main
+    secrets: inherit
+
+  deploy-dev:
+    name: Deploy dev
+    needs: build-dev
+    uses: ./.github/workflows/deploy.reusable.yml
+    with:
+      environnement: dev
+      namespace: ${{ needs.build-dev.outputs.namespace }}
+      environnement-github: ${{ needs.build-dev.outputs.environnement }}
+      image: ${{ needs.build-dev.outputs.image }}
+    permissions:
+      contents: read
+      deployments: write
+    secrets: inherit
+
+  deploy-production:
+    name: Deploy production
+    needs: [build-production, deploy-dev]
+    uses: ./.github/workflows/deploy.reusable.yml
+    with:
+      environnement: main
+      namespace: ${{ needs.build-production.outputs.namespace }}
+      environnement-github: ${{ needs.build-production.outputs.environnement }}
+      image: ${{ needs.build-production.outputs.image }}
+    permissions:
+      contents: read
+      deployments: write
+    secrets: inherit
