@@ -10,7 +10,7 @@
 - [Scripts disponibles](#scripts-disponibles)
 - [CLI (`apps/cli`)](#cli-appscli)
 - [Jobs et crons](#jobs-et-crons)
-- [Infrastructure Terraform (CDK)](#infrastructure-terraform-cdk)
+- [Infrastructure (OpenTofu)](#infrastructure-opentofu)
 - [Procedures de contribution](#procedures-de-contribution)
 - [Stack technique](#stack-technique)
 
@@ -212,10 +212,6 @@ pnpm dev
 | Commande | Description |
 |----------|-------------|
 | `pnpm with-env tofu -chdir=infrastructure <commande>` | Exécute OpenTofu sur l'infrastructure d'un environnement (voir `infrastructure/README.md`) |
-| `pnpm -F cdk synth` | Genere le code Terraform du stack projet a partir du CDK |
-| `pnpm -F cdk cdktf` | Exécute le CLI cdktf (stack projet) |
-| `pnpm -F cdk output` | Affiche les outputs Terraform du stack projet (donnees sensibles incluses) |
-| `pnpm -F cdk clean-cdktf` | Nettoie et reinitialise le CDKTF |
 
 ### Utilitaires
 
@@ -270,8 +266,7 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 | `dotenv:from-infrastructure` | Ajoute au `.env` les outputs OpenTofu de l'environnement (`infrastructure/outputs.json`) |
 | `dotenv:from-secrets` | Recupere tous les secrets du Vault Scaleway et les ajoute au `.env` |
 | `dotenv:add-next-public <namespace> [--local]` | Ajoute les variables `NEXT_PUBLIC_*` au `.env` |
-| `infrastructure:vars-from-env` | Genere `infrastructure/.tfvars.json` a partir des variables d'environnement |
-| `terraform:vars-from-env` | Genere le `.tfvars.json` du stack projet CDK a partir des variables d'environnement |
+| `infrastructure:vars-from-env [web\|project]` | Genere `infrastructure/.tfvars.json` (`web`, par defaut) ou `infrastructure/project/.tfvars.json` a partir des variables d'environnement |
 | `secrets:list` | Liste tous les noms de secrets disponibles |
 | `secrets:get <name>` | Recupere la valeur d'un secret |
 | `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD pour un namespace |
@@ -346,20 +341,20 @@ pnpm cli backup:locally-restore-latest-main -d 2025-01-15
 
 ---
 
-## Infrastructure Terraform (CDK)
+## Infrastructure (OpenTofu)
 
-L'infrastructure est definie en TypeScript avec [CDKTF](https://developer.hashicorp.com/terraform/cdktf) (CDK for Terraform), executee avec [OpenTofu](https://opentofu.org) 1.13 et deployee sur **Scaleway** (region `fr-par`). Les scripts de `@app/cdk` tournent en Node 22, que pnpm telecharge au besoin, et `pnpm -F @app/cdk generate` installe OpenTofu s'il est absent.
+L'infrastructure est decrite en HCL dans `infrastructure/`, executee avec [OpenTofu](https://opentofu.org) 1.13 et deployee sur **Scaleway** (region `fr-par`).
 
 ### Architecture a deux stacks
 
-L'infrastructure est divisee en deux stacks Terraform :
+L'infrastructure est divisee en deux stacks :
 
-#### 1. `ProjectStack` (ressources partagees, deploye une seule fois)
+#### 1. `infrastructure/project/` (ressources partagees)
 
 Contient les ressources communes a tous les environnements :
 
 ```
-ProjectStack
+infrastructure/project/
 ├── Compute
 │   ├── ContainerNamespace        # Namespace pour les conteneurs serverless
 │   └── RegistryNamespace         # Registre Docker (la-base-web-app)
@@ -434,21 +429,9 @@ infrastructure/
 
 L'etat Terraform est stocke dans un bucket S3 Scaleway : `la-base-terraform-state`, sous la cle `la-base-web-<namespace>.tfstate` pour chaque environnement et `la-base-project.tfstate` pour le stack projet.
 
-### Commandes du stack projet (CDK)
+### Deploiement du stack projet
 
-```bash
-# Generer le code Terraform
-pnpm -F cdk synth
-
-# Voir le plan d'execution
-pnpm -F cdk cdktf diff project
-
-# Deployer l'infrastructure
-pnpm -F cdk cdktf deploy project
-
-# Afficher les outputs (avec donnees sensibles)
-pnpm -F cdk output
-```
+Le workflow **Infrastructure project** se lance a la main sur `main` : il planifie le stack projet et publie le plan dans le resume du run. Avec l'option `apply`, il applique ensuite le plan, apres approbation sur l'environnement `infrastructure-approval` si le plan change autre chose que les marques de sensibilite. Voir `infrastructure/project/README.md`.
 
 ### CI/CD (GitHub Actions)
 
@@ -478,7 +461,9 @@ Les workflows sont dans `.github/workflows` :
 
 5. **Dependency Review** (sur chaque pull request)
 
-Le stack projet (`ProjectStack`) n'a pas de workflow : il se deploie a la main avec `pnpm -F @app/cdk cdktf deploy project`.
+6. **Infrastructure project** (a la main, sur `main`)
+   - Plan du stack projet, puis, avec l'option `apply`, approbation sur `infrastructure-approval` si le plan change vraiment l'infrastructure et application du plan approuve
+   - La CI planifie aussi le stack projet quand une branche modifie `infrastructure/project/`
 
 ---
 

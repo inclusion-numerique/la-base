@@ -31,3 +31,35 @@ export const optionalInfrastructureVariables = [
   'MAIN_SUBDOMAIN',
   'PREVIEW_SUBDOMAIN',
 ] as const
+
+export const requiredProjectInfrastructureVariables = [
+  'SCW_PROJECT_ID',
+  'SCW_DEFAULT_REGION',
+  'DATABASE_INSTANCE_NAME',
+  'CONTAINER_NAMESPACE_NAME',
+  'MAIN_ROOT_DOMAIN',
+  'PREVIEW_ROOT_DOMAIN',
+  'EMAIL_FROM_DOMAIN',
+  'UPLOADS_BUCKET',
+  'BACKUPS_BUCKET',
+  'LEGACY_UPLOADS_S3_BUCKET',
+  'WEB_APP_DOCKER_REGISTRY_NAME',
+  'S3_HOST',
+  'LEGACY_HOSTNAME',
+  'SMTP_PORT',
+  'NEXTAUTH_SECRET',
+  'SCW_ACCESS_KEY',
+  'SCW_SECRET_KEY',
+  'SMTP_MAILDEV_USERNAME',
+  'SMTP_MAILDEV_PASSWORD',
+] as const
+
+export const optionalProjectInfrastructureVariables = [
+  'MAIN_SUBDOMAIN',
+  'PREVIEW_SUBDOMAIN',
+  'CHROMATIC_APP_ID',
+  'NEXT_TELEMETRY_DISABLED',
+  'SENTRY_ORG',
+  'SENTRY_PROJECT',
+  'SENTRY_URL',
+] as const

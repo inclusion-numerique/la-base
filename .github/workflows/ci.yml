@@ -353,6 +353,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.changes.outputs.changed }}
+      project: ${{ steps.changes.outputs.project }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -361,11 +362,17 @@ jobs:
       - name: Detect infrastructure changes
         id: changes
         run: |
-          if git diff --quiet origin/main...HEAD -- infrastructure/; then
+          if git diff --quiet origin/main...HEAD -- infrastructure/ ':!infrastructure/project/'; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "Aucun changement dans infrastructure/ : rien à planifier"
+            echo "Aucun changement dans l'infrastructure web : rien à planifier"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          if git diff --quiet origin/main...HEAD -- infrastructure/project/; then
+            echo "project=false" >> "$GITHUB_OUTPUT"
+            echo "Aucun changement dans infrastructure/project/ : rien à planifier"
+          else
+            echo "project=true" >> "$GITHUB_OUTPUT"
           fi
 
   infrastructure-plan:
@@ -384,6 +391,18 @@ jobs:
     uses: ./.github/workflows/infrastructure-plan.reusable.yml
     with:
       environnement: ${{ matrix.environnement }}
+    secrets: inherit
+
+  infrastructure-project-plan:
+    name: Infrastructure plan project
+    needs: infrastructure-changes
+    if: needs.infrastructure-changes.outputs.project == 'true'
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-infrastructure-plan-project
+      cancel-in-progress: true
+    uses: ./.github/workflows/infrastructure-project.yml
+    with:
+      apply: false
     secrets: inherit
 
   coverage:

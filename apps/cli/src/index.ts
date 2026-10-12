@@ -8,7 +8,6 @@ import { updateGithubDeployment } from '@app/cli/commands/github/updateGithubDep
 import { addNextPublicVariablesToDotEnv } from '@app/cli/commands/infrastructure/addNextPublicVariablesToDotEnv'
 import { createDotEnvFromInfrastructure } from '@app/cli/commands/infrastructure/createDotEnvFromInfrastructure'
 import { createInfrastructureResources } from '@app/cli/commands/infrastructure/createInfrastructureResources'
-import { createProjectTfVarsFileFromEnvironment } from '@app/cli/commands/infrastructure/createProjectTfVarsFileFromEnvironment'
 import { createTfVarsFileFromEnvironment } from '@app/cli/commands/infrastructure/createTfVarsFileFromEnvironment'
 import { deletePreviewEnvironments } from '@app/cli/commands/infrastructure/deletePreviewEnvironments'
 import { infrastructureInventory } from '@app/cli/commands/infrastructure/inventory'
@@ -47,7 +46,6 @@ program.addCommand(createGithubDeployment)
 program.addCommand(updateGithubDeployment)
 program.addCommand(deactivateGithubDeployment)
 program.addCommand(createTfVarsFileFromEnvironment)
-program.addCommand(createProjectTfVarsFileFromEnvironment)
 program.addCommand(checkDeploymentStatus)
 program.addCommand(locallyRestoreLatestMainBackup)
 program.addCommand(addConseillersNumeriquesToBases)
