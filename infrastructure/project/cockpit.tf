@@ -1,4 +1,10 @@
-resource "scaleway_cockpit" "cockpit" {}
+removed {
+  from = scaleway_cockpit.cockpit
+
+  lifecycle {
+    destroy = false
+  }
+}
 
 resource "scaleway_cockpit_token" "cockpitWebToken" {
   name = "web-app"
