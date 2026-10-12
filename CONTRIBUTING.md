@@ -487,7 +487,10 @@ Le stack projet (`ProjectStack`) n'a pas de workflow : il se deploie a la main a
 
 ### Commits
 
-Les messages de commit doivent suivre la specification [Commits Conventionnels](https://www.conventionalcommits.org/fr).
+- Les messages de commit doivent suivre la specification [Commits Conventionnels](https://www.conventionalcommits.org/fr)
+- Ils sont verifies par `commitlint` (configuration `@commitlint/config-conventional`) : en local par le hook `commit-msg`, installe par `pnpm install`, et en CI par le check « Lint commits » sur tous les commits de la branche depuis `main` (`pnpm lint:commit`)
+- Les commits doivent etre signes
+- Les PR se fusionnent dans `main` par « Squash and merge » : le titre de la PR devient le message du commit, il suit donc lui aussi la specification Commits Conventionnels, et le corps reprend les messages des commits de la PR ; le check « Lint PR title » le verifie
 
 ### Workflow de contribution
 
@@ -499,6 +502,10 @@ Les messages de commit doivent suivre la specification [Commits Conventionnels](
 ### Deploiement
 
 La fusion d'une branche dans `main` deploie automatiquement l'environnement `dev`, puis la production. Pour tester une branche avant sa fusion, poser le label `preview` sur sa PR.
+
+### Incidents de securite
+
+Tout incident de securite, ou toute vulnerabilite decouverte, se signale et se traite selon la [Procedure de Reponse et Signalement des Incidents de Securite (PRIS)](https://docs.numerique.gouv.fr/docs/e8f1a2d1-3a6c-4e52-9ffd-639d772e76e7/). Le document est reserve aux agents : il s'ouvre apres connexion a Docs. Pour un signalement externe, voir [SECURITY.md](./SECURITY.md).
 
 ---
 

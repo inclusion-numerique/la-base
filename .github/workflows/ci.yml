@@ -41,6 +41,22 @@ jobs:
       - name: Lint @app/web
         run: pnpm -F '@app/web' lint
 
+  commit-check:
+    name: Lint commits
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-commit-check
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Lint commits
+        run: pnpm lint:commit
+
   test-packages:
     name: Test packages
     runs-on: ubuntu-latest

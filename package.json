@@ -29,16 +29,21 @@
     "db:init": "pnpm -F web prisma generate && pnpm -F web prisma migrate deploy",
     "docker:start": "docker compose -f ./docker-compose.dev.yml -p stack up -d",
     "docker:stop": "docker compose -f ./docker-compose.dev.yml -p stack down",
-    "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init"
+    "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init",
+    "lint:commit": "commitlint --from origin/main",
+    "prepare": "husky"
   },
   "volta": {
     "node": "24.21.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "@manypkg/cli": "^0.25.1",
     "dotenv": "^17.4.2",
     "dotenv-cli": "^11.0.0",
+    "husky": "^9.1.7",
     "turbo": "^2.11.3"
   }
 }

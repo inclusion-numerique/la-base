@@ -1,0 +1,33 @@
+---
+name: PR title
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  lint-pr-title:
+    name: Lint PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Lint PR title
+        env:
+          TITRE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$TITRE" | pnpm exec commitlint
