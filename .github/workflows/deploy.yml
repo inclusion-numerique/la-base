@@ -55,7 +55,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('apps/web/src/**/*.ts', 'apps/web/src/**/*.tsx') }}
           restore-keys: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-
       - name: Build next app
-        run: SENTRY_RELEASE=true pnpm --silent -F @app/web build
+        run: SENTRY_ENABLE_RELEASE=true pnpm --silent -F @app/web build
       - name: Build docker image
         run: DOCKER_BUILDKIT=1 docker build --progress=plain -t "${{ steps.namespace.outputs.image }}" -f docker/web/Dockerfile .
       - name: Push docker image
