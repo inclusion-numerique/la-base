@@ -287,6 +287,7 @@ jobs:
         env:
           SPLIT: 3
           SPLIT_INDEX: ${{ matrix.conteneur }}
+          SPLIT_FILE: timings.json
         with:
           install: false
           working-directory: packages/e2e
