@@ -6,6 +6,8 @@ import {
 } from '@app/web/authorization/models/resourceAuthorization'
 import ResourceBreadcrumbs from '@app/web/components/ResourceBreadcrumbs'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { isTrustedUserId } from '@app/web/features/indexation/db/getTrustedIds'
+import { getUserContentRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
 import { updateShareableLinkAccessCount } from '@app/web/features/shareableLink/db/updateShareableLinkAccessCount'
 import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
@@ -57,6 +59,7 @@ export const generateMetadata = async ({
       title: true,
       description: true,
       isPublic: true,
+      createdById: true,
       image: {
         include: {
           upload: true,
@@ -85,7 +88,10 @@ export const generateMetadata = async ({
     }),
     title: metadataTitle(resource.title),
     description: resource.description || undefined,
-    robots: resource.isPublic ? undefined : 'noindex, nofollow',
+    robots: await getUserContentRobots({
+      isPublic: resource.isPublic,
+      isTrusted: () => isTrustedUserId(resource.createdById),
+    }),
   }
 }
 

@@ -9,6 +9,7 @@ import ProfileHeader, {
 } from '@app/web/components/Profile/ProfileHeader'
 import ProfileMenu from '@app/web/components/Profile/ProfileMenu'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
+import { getNeverIndexedRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import { prismaClient } from '@app/web/prismaClient'
 import { formatName } from '@app/web/server/rpc/user/formatName'
 import { defaultSkipLinks } from '@app/web/utils/skipLinks'
@@ -38,7 +39,7 @@ export const generateMetadata = async ({
     title: metadataTitle(
       (profile.name && formatName(profile.name)) || 'Profil',
     ),
-    robots: profile.isPublic ? undefined : 'noindex, nofollow',
+    robots: getNeverIndexedRobots(profile),
   }
 }
 
