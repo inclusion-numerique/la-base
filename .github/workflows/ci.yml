@@ -70,6 +70,13 @@ jobs:
           flag-name: packages
           parallel: true
           fail-on-error: false
+      - name: Publish test summary
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: 'junit/*.xml'
+          check_name: 'Packages tests summary'
+          annotate_only: true
 
   test-web:
     name: Test web
@@ -93,6 +100,13 @@ jobs:
           flag-name: web-unit
           parallel: true
           fail-on-error: false
+      - name: Publish test summary
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: 'junit/*.xml'
+          check_name: 'Unit tests summary'
+          annotate_only: true
 
   integration-tests:
     name: Integration tests
@@ -146,6 +160,155 @@ jobs:
           flag-name: web-integration
           parallel: true
           fail-on-error: false
+      - name: Publish test summary
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: 'junit/*.xml'
+          check_name: 'Integration tests summary'
+          annotate_only: true
+
+  components:
+    name: Components
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-components
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          cypress: 'true'
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Run Cypress component tests
+        uses: cypress-io/github-action@v7
+        with:
+          install: false
+          working-directory: packages/e2e
+          command: pnpm cy run --component --reporter junit --reporter-options mochaFile=junit/components-[hash].xml
+      - name: Upload Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: components-cypress
+          path: packages/e2e/cypress/screenshots
+          retention-days: 30
+      - name: Publish test summary
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: 'packages/e2e/junit/*.xml'
+          check_name: 'Components tests summary'
+          annotate_only: true
+
+  e2e:
+    name: E2E ${{ matrix.conteneur }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-e2e-${{ matrix.conteneur }}
+      cancel-in-progress: true
+    strategy:
+      fail-fast: false
+      matrix:
+        conteneur: [0, 1, 2]
+    services:
+      postgres:
+        image: postgres:17.11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      maildev:
+        image: maildev/maildev:2.2.1
+        env:
+          MAILDEV_INCOMING_USER: mailuser
+          MAILDEV_INCOMING_PASS: mailpassword
+        ports:
+          - 1025:1025
+          - 1080:1080
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          cypress: 'true'
+      - name: Test environment
+        uses: ./.github/actions/test-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Add e2e variables to env file
+        run: |
+          cat >> .env <<'DOTENV'
+          IS_E2E=true
+          PROCONNECT_CLIENT_SECRET=$PROCONNECT_LOCAL_CLIENT_SECRET
+          CYPRESS_PROCONNECT_TEST_USER_EMAIL=$PROCONNECT_TEST_USER_EMAIL
+          CYPRESS_PROCONNECT_TEST_USER_PASSWORD=$PROCONNECT_TEST_USER_PASSWORD
+          DOTENV
+      - name: Build cache
+        uses: actions/cache@v6
+        with:
+          path: apps/web/.next/cache
+          key: ${{ runner.os }}-nextjs-e2e-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('apps/web/src/**/*.ts', 'apps/web/src/**/*.tsx') }}
+          restore-keys: ${{ runner.os }}-nextjs-e2e-${{ hashFiles('pnpm-lock.yaml') }}-
+      - name: Build next app
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/web build
+      - name: Start standalone server
+        run: |
+          mv apps/web/.next/standalone ~/dist
+          mv apps/web/public ~/dist/apps/web/public
+          cp -r apps/web/private-static ~/dist/apps/web/private-static
+          mv apps/web/.next/static ~/dist/apps/web/.next/static
+          set -a
+          source .env
+          set +a
+          cd ~/dist
+          NODE_TLS_REJECT_UNAUTHORIZED=0 HOSTNAME=localhost nohup node apps/web/server.js > "$GITHUB_WORKSPACE/server.log" 2>&1 &
+      - name: Run Cypress e2e tests
+        uses: cypress-io/github-action@v7
+        env:
+          SPLIT: 3
+          SPLIT_INDEX: ${{ matrix.conteneur }}
+        with:
+          install: false
+          working-directory: packages/e2e
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          command: pnpm cy run --reporter junit --reporter-options mochaFile=junit/e2e-[hash].xml
+      - name: Upload Cypress screenshots and server log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-cypress-${{ matrix.conteneur }}
+          path: |
+            packages/e2e/cypress/screenshots
+            server.log
+          retention-days: 30
+      - name: Publish test summary
+        if: ${{ !cancelled() }}
+        uses: mikepenz/action-junit-report@v6
+        with:
+          report_paths: 'packages/e2e/junit/*.xml'
+          check_name: 'E2E tests summary'
+          annotate_only: true
 
   chromatic:
     name: Chromatic
