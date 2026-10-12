@@ -1,3 +1,4 @@
+import { computeBranchNamespace } from '@app/cli/branchNamespace'
 import { octokit, owner, repo } from '@app/cli/github'
 import { output, outputError } from '@app/cli/output'
 import {
@@ -23,8 +24,6 @@ import Table from 'cli-table3'
 import { differenceInDays, format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import pc from 'picocolors'
-
-const { computeBranchNamespace } = await import('@app/cdk/utils')
 
 const PROTECTED_BRANCHES = ['main', 'dev'] as const
 const DEFAULT_SCW_REGION = 'fr-par'
