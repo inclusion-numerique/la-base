@@ -5,9 +5,9 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
     "build": "turbo build",
     "cli": "dotenv -- ./apps/cli/node_modules/.bin/tsx apps/cli/src/index.ts",
@@ -29,16 +29,16 @@
     "db:init": "pnpm -F web prisma generate && pnpm -F web prisma migrate deploy",
     "docker:start": "docker compose -f ./docker-compose.dev.yml -p stack up -d",
     "docker:stop": "docker compose -f ./docker-compose.dev.yml -p stack down",
-    "docker:reset": "pnpm docker:stop && docker volume rm stack_pgdata && pnpm docker:start && pnpm db:init"
+    "docker:reset": "pnpm docker:stop && docker volume rm la-base_pgdata && pnpm docker:start && pnpm db:init"
   },
   "volta": {
-    "node": "24.19.0"
+    "node": "24.21.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
     "@manypkg/cli": "^0.25.1",
     "dotenv": "^17.4.2",
     "dotenv-cli": "^11.0.0",
-    "turbo": "^2.11.2"
+    "turbo": "^2.11.3"
   }
 }

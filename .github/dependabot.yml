@@ -1,33 +1,83 @@
 version: 2
+
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
       day: monday
+      time: '06:00'
       timezone: Europe/Paris
     cooldown:
       default-days: 15
+    open-pull-requests-limit: 10
     commit-message:
-      prefix: chore
-      include: scope
+      prefix: chore(deps)
     groups:
-      npm-mineures-et-correctifs:
+      securite:
+        applies-to: security-updates
+        patterns:
+          - '*'
+      mineures-et-correctives:
+        applies-to: version-updates
         update-types:
           - minor
           - patch
+    ignore:
+      - dependency-name: dotenv
+        update-types:
+          - version-update:semver-major
+      - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-major
+      - dependency-name: postcss-nested
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
+      time: '06:00'
       timezone: Europe/Paris
     cooldown:
       default-days: 15
     commit-message:
-      prefix: ci
+      prefix: chore(ci)
     groups:
       actions:
+        patterns:
+          - '*'
+
+  - package-ecosystem: docker
+    directory: /docker/web
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Paris
+    cooldown:
+      default-days: 15
+    commit-message:
+      prefix: chore(docker)
+    ignore:
+      - dependency-name: node
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Paris
+    cooldown:
+      default-days: 15
+    commit-message:
+      prefix: chore(docker)
+    groups:
+      images:
         patterns:
           - '*'
