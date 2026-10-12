@@ -108,6 +108,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('resource-image').should('exist')
 
         cy.log("Je change l'image")
+        cy.get('#resource-image-edition').should('not.have.attr', 'open')
         cy.get('#resource-image-edition').should(
           'have.attr',
           'data-fr-js-modal',
@@ -126,6 +127,12 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.wait('@mutation')
 
         cy.log("Je peux supprimer l'image")
+        cy.get('#resource-image-edition').should('not.have.attr', 'open')
+        cy.get('#resource-image-edition').should(
+          'have.attr',
+          'data-fr-js-modal',
+          'true',
+        )
         cy.testId('resource-image-edit-button').click()
         cy.get('#resource-image-edition').should('have.attr', 'open')
         cy.testId('resource-image-delete').click()
