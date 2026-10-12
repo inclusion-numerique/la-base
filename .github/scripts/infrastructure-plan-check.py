@@ -29,12 +29,25 @@ def changed_attributes(before, after):
     return [key for key in sorted(set(before) | set(after)) if key != "secret_environment_variables" and before.get(key) != after.get(key)]
 
 
+def has_unknown(value):
+    if value is True:
+        return True
+    if isinstance(value, dict):
+        return any(has_unknown(item) for item in value.values())
+    if isinstance(value, list):
+        return any(has_unknown(item) for item in value)
+    return False
+
+
 def real_changes(change):
     before = change["change"].get("before") or {}
     after = change["change"].get("after") or {}
     if change["change"]["actions"] != ["update"]:
         return ["action " + ", ".join(change["change"]["actions"])]
-    return [f"attribut {key} modifié" for key in changed_attributes(before, after)] + [f"variable secrète {key} modifiée" for key in changed_secrets(before, after)]
+    changes = [f"attribut {key} modifié" for key in changed_attributes(before, after)] + [f"variable secrète {key} modifiée" for key in changed_secrets(before, after)]
+    if not changes and has_unknown(change["change"].get("after_unknown")):
+        return ["valeurs connues seulement après l'apply"]
+    return changes
 
 
 pending = [change for change in plan.get("resource_changes", []) if change["change"]["actions"] != ["no-op"]]
