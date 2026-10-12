@@ -17,7 +17,7 @@ import z from 'zod'
  * The payload should be serializable to JSON for easily being passed as POST data.
  *
  * Add your jobs here.
- * To add a cron trigger, see WebAppStack Jobs definitions.
+ * To add a cron trigger, see the jobs in infrastructure/locals.tf.
  */
 
 export const JobValidation = z.discriminatedUnion('name', [
