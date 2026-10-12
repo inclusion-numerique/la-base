@@ -1,0 +1,29 @@
+---
+name: Infrastructure inventory
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  inventory:
+    name: Inventory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Show infrastructure inventory
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FORCE_COLOR: '0'
+        run: pnpm --silent cli infrastructure:inventory --read-only
