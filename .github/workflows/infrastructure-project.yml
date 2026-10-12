@@ -1,0 +1,134 @@
+---
+name: Infrastructure project
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Apply the plan after approval'
+        type: boolean
+        default: false
+  workflow_call:
+    inputs:
+      apply:
+        description: 'Apply the plan after approval'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infrastructure-project-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    name: Plan
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.plan.outputs.changes }}
+      empreinte: ${{ steps.plan.outputs.empreinte }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Create infrastructure variables file from environment variables
+        run: pnpm --silent cli infrastructure:vars-from-env project
+      - name: Infrastructure
+        uses: ./.github/actions/infrastructure
+        with:
+          stack: project
+      - name: Plan
+        id: plan
+        run: |
+          pnpm --silent with-env tofu -chdir=infrastructure/project plan -input=false -var-file=.tfvars.json -out=plan.tfplan
+          pnpm --silent with-env tofu -chdir=infrastructure/project show -json plan.tfplan > plan.json
+          pip install --quiet argon2-cffi
+          STATUS=0
+          python3 .github/scripts/infrastructure-plan-check.py plan.json > plan-check.txt || STATUS=$?
+          cat plan-check.txt
+          {
+            echo "## Plan de l'infrastructure du projet"
+            echo
+            echo '```'
+            if [ -s plan-check.txt ]; then cat plan-check.txt; else echo "Aucun changement"; fi
+            echo '```'
+            echo
+            echo '<details><summary>Plan complet</summary>'
+            echo
+            echo '```'
+            pnpm --silent with-env tofu -chdir=infrastructure/project show -no-color plan.tfplan
+            echo '```'
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "empreinte=$(sha256sum plan-check.txt | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          rm -f plan.json plan-check.txt infrastructure/project/plan.tfplan
+          case "$STATUS" in
+            0) echo "changes=false" >> "$GITHUB_OUTPUT" ;;
+            10) echo "changes=true" >> "$GITHUB_OUTPUT" ;;
+            *) exit "$STATUS" ;;
+          esac
+
+  approve:
+    name: Approve project infrastructure
+    needs: plan
+    if: inputs.apply && needs.plan.outputs.changes == 'true'
+    runs-on: ubuntu-latest
+    environment: infrastructure-approval
+    steps:
+      - name: Infrastructure plan approved
+        run: echo "Plan de l'infrastructure du projet approuvé"
+
+  apply:
+    name: Apply
+    needs: [plan, approve]
+    if: >-
+      !cancelled()
+      && inputs.apply
+      && needs.plan.result == 'success'
+      && contains(fromJSON('["success", "skipped"]'), needs.approve.result)
+    runs-on: ubuntu-latest
+    env:
+      EMPREINTE: ${{ needs.plan.outputs.empreinte }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Create infrastructure variables file from environment variables
+        run: pnpm --silent cli infrastructure:vars-from-env project
+      - name: Infrastructure
+        uses: ./.github/actions/infrastructure
+        with:
+          stack: project
+      - name: Apply the approved plan
+        run: |
+          pnpm --silent with-env tofu -chdir=infrastructure/project plan -input=false -var-file=.tfvars.json -out=plan.tfplan
+          pnpm --silent with-env tofu -chdir=infrastructure/project show -json plan.tfplan > plan.json
+          pip install --quiet argon2-cffi
+          python3 .github/scripts/infrastructure-plan-check.py plan.json > plan-check.txt || true
+          rm -f plan.json
+          if [ "$(sha256sum plan-check.txt | cut -d' ' -f1)" != "$EMPREINTE" ]; then
+            echo "::error::Le plan a changé depuis son approbation"
+            cat plan-check.txt
+            exit 1
+          fi
+          pnpm --silent with-env tofu -chdir=infrastructure/project apply -input=false plan.tfplan
+          rm -f plan-check.txt infrastructure/project/plan.tfplan

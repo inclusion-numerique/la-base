@@ -1,10 +1,15 @@
 name: 'Infrastructure'
-description: 'Install OpenTofu and initialise the infrastructure state of an environment (after the secrets environment)'
+description: 'Install OpenTofu and initialise the infrastructure state of an environment or of the project (after the secrets environment)'
 
 inputs:
+  stack:
+    description: 'Infrastructure stack: web or project'
+    required: false
+    default: 'web'
   namespace:
-    description: 'Namespace of the environment whose state to use'
-    required: true
+    description: 'Namespace of the environment whose state to use (web stack)'
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
@@ -15,7 +20,17 @@ runs:
         tofu_version: 1.13.1
         tofu_wrapper: false
     - name: Initialise the infrastructure state
+      if: inputs.stack == 'web'
       env:
         NAMESPACE: ${{ inputs.namespace }}
-      run: pnpm --silent with-env tofu -chdir=infrastructure init -input=false -backend-config="key=la-base-web-$NAMESPACE.tfstate"
+      run: |
+        if [ -z "$NAMESPACE" ]; then
+          echo "::error::Namespace requis pour le stack web"
+          exit 1
+        fi
+        pnpm --silent with-env tofu -chdir=infrastructure init -input=false -backend-config="key=la-base-web-$NAMESPACE.tfstate"
+      shell: bash
+    - name: Initialise the project infrastructure state
+      if: inputs.stack == 'project'
+      run: pnpm --silent with-env tofu -chdir=infrastructure/project init -input=false
       shell: bash

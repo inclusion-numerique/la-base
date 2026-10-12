@@ -5,7 +5,7 @@ The infrastructure of each environment (`main`, `dev` and the previews) is descr
 - OpenTofu: https://opentofu.org
 - Scaleway provider: https://search.opentofu.org/provider/scaleway/scaleway/latest
 
-Resources shared by every environment (database instance, container namespace, registry, DNS zones, transactional emails, Cockpit) are still managed by the CDKTF project stack in `packages/cdk`.
+Resources shared by every environment (database instance, container namespace, registry, DNS zones, transactional emails, Cockpit) are managed by the project stack in `project/`, see `project/README.md`.
 
 ## Resources of an environment
 
