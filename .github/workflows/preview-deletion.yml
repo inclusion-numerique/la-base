@@ -43,7 +43,7 @@ jobs:
       - name: Refuse to delete a protected branch environment
         if: env.CDK_FORCE_BRANCH == '' || env.CDK_FORCE_BRANCH == 'main' || env.CDK_FORCE_BRANCH == 'dev' || startsWith(env.CDK_FORCE_BRANCH, 'refs/')
         run: |
-          echo "Rien à supprimer pour « $CDK_FORCE_BRANCH » : main et dev ne sont jamais détruits"
+          echo "Suppression refusée pour « $CDK_FORCE_BRANCH » : main et dev ne sont jamais détruits, et une valeur en refs/ signale une branche mal résolue"
           exit 1
       - name: Checkout repository
         uses: actions/checkout@v7
