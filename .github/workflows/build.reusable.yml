@@ -66,7 +66,9 @@ jobs:
           scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
           scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
       - name: Add NEXT_PUBLIC variables to env file
-        run: pnpm --silent cli dotenv:add-next-public "${{ steps.namespace.outputs.namespace }}"
+        env:
+          NAMESPACE: ${{ steps.namespace.outputs.namespace }}
+        run: pnpm --silent cli dotenv:add-next-public "$NAMESPACE"
       - name: Build cache
         uses: actions/cache@v6
         with:
@@ -76,10 +78,13 @@ jobs:
       - name: Build next app
         run: SENTRY_ENABLE_RELEASE=true pnpm --silent -F @app/web build
       - name: Build docker image
-        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t "${{ steps.namespace.outputs.image }}" -f docker/web/Dockerfile .
+        env:
+          IMAGE: ${{ steps.namespace.outputs.image }}
+        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t "$IMAGE" -f docker/web/Dockerfile .
       - name: Push docker image
         env:
+          IMAGE: ${{ steps.namespace.outputs.image }}
           SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
         run: |
           echo "$SCW_SECRET_KEY" | docker login "$WEB_APP_DOCKER_REGISTRY" --username nologin --password-stdin
-          docker push "${{ steps.namespace.outputs.image }}"
+          docker push "$IMAGE"
