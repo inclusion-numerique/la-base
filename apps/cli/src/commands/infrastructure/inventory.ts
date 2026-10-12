@@ -606,13 +606,22 @@ export const infrastructureInventory = new Command()
       )
 
       const noGitBranchContainers = containers.filter((container) => {
-        return !branchNamespaceToGitBranch.has(container.name)
+        return (
+          !isProtectedBranch(container.name) &&
+          !branchNamespaceToGitBranch.has(container.name)
+        )
       })
       const noGitBranchBuckets = previewBuckets.filter((bucket) => {
-        return !branchNamespaceToGitBranch.has(bucket.namespace)
+        return (
+          !isProtectedBranch(bucket.namespace) &&
+          !branchNamespaceToGitBranch.has(bucket.namespace)
+        )
       })
       const noGitBranchDatabases = previewDatabases.filter((database) => {
-        return !branchNamespaceToGitBranch.has(database.namespace)
+        return (
+          !isProtectedBranch(database.namespace) &&
+          !branchNamespaceToGitBranch.has(database.namespace)
+        )
       })
 
       const noGitBranchByNamespace = new Map<string, NoGitBranchResource>()
