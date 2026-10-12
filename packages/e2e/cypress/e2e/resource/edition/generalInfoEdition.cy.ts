@@ -108,6 +108,7 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('resource-image').should('exist')
 
         cy.log("Je change l'image")
+        cy.dsfrModalsShouldBeBound()
         cy.testId('resource-image-edit-button').click()
         cy.get('#resource-image-edition').should('have.attr', 'open')
         cy.testId('resource-image-delete').click()
