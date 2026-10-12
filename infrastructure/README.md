@@ -24,7 +24,7 @@ The state of each environment is stored in the `la-base-terraform-state` bucket 
 - Change the project variables in `packages/config/src/config.ts` and in `.env.dist`
 - Add the secrets to the Secret Manager (documented in `.env.dist`) and to `apps/cli/src/commands/infrastructure/infrastructureVariables.ts`
 - Create the `la-base-terraform-state` bucket for the OpenTofu states
-- Deploy the project stack with the `Infrastructure project` workflow, then validate the transactional emails domain in the Scaleway console
+- Run the `Infrastructure project` workflow with `apply` enabled, approve it on the `infrastructure-approval` environment, then validate the transactional emails domain in the Scaleway console
 
 ## Deployment
 
