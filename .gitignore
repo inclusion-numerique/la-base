@@ -76,6 +76,10 @@ packages/cdk/cdk.out.json
 /infrastructure/.tfvars.json
 /infrastructure/*.tfplan
 /infrastructure/outputs.json
+/infrastructure/project/.terraform
+!/infrastructure/project/.terraform.lock.hcl
+/infrastructure/project/.tfvars.json
+/infrastructure/project/*.tfplan
 
 # ui
 /packages/ui/.next
