@@ -33,27 +33,27 @@ locals {
     "backup-database-hourly" = {
       name     = "backup-${var.namespace}-database-hourly"
       schedule = "0 * * * *"
-      args     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "hourly" } })
+      body     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "hourly" } })
     }
     "backup-database-daily" = {
       name     = "backup-${var.namespace}-database-daily"
       schedule = "0 0 * * *"
-      args     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "daily" } })
+      body     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "daily" } })
     }
     "backup-database-weekly" = {
       name     = "backup-${var.namespace}-database-weekly"
       schedule = "0 0 * * 0"
-      args     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "weekly" } })
+      body     = jsonencode({ name = "backup-database", payload = { databaseName = local.database_name, type = "weekly" } })
     }
     "monthly-newsletter-news-feed" = {
       name     = "monthly-newsletter-news-feed"
       schedule = "0 8 1 * *"
-      args     = jsonencode({ name = "monthly-newsletter-news-feed" })
+      body     = jsonencode({ name = "monthly-newsletter-news-feed" })
     }
     "account-inactivity" = {
       name     = "account-inactivity-${var.namespace}"
       schedule = "0 9 * * *"
-      args     = jsonencode({ name = "account-inactivity" })
+      body     = jsonencode({ name = "account-inactivity" })
     }
   }
 

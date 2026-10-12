@@ -3,7 +3,7 @@ output "webBaseUrl" {
 }
 
 output "containerDomainName" {
-  value = scaleway_container.webContainer.domain_name
+  value = local.container_domain_name
 }
 
 output "databaseHost" {

@@ -3,15 +3,14 @@ data "scaleway_container_namespace" "containerNamespace" {
 }
 
 resource "scaleway_container" "webContainer" {
-  name           = local.container_name
-  namespace_id   = data.scaleway_container_namespace.containerNamespace.namespace_id
-  registry_image = var.WEB_CONTAINER_IMAGE
-  min_scale      = local.is_main ? 2 : var.namespace == "dev" ? 1 : 0
-  max_scale      = local.is_main ? 5 : 1
-  cpu_limit      = local.is_main ? 2240 : 1120
-  memory_limit   = local.is_main ? 3072 : 2048
-  deploy         = true
-  http_option    = "redirected"
+  name                   = local.container_name
+  namespace_id           = data.scaleway_container_namespace.containerNamespace.namespace_id
+  image                  = var.WEB_CONTAINER_IMAGE
+  min_scale              = local.is_main ? 2 : var.namespace == "dev" ? 1 : 0
+  max_scale              = local.is_main ? 5 : 1
+  cpu_limit              = local.is_main ? 2240 : 1120
+  memory_limit_bytes     = local.is_main ? 3072000000 : 2048000000
+  https_connections_only = true
 
   environment_variables = {
     NODE_OPTIONS           = local.is_main ? "--max-old-space-size=1536" : "--max-old-space-size=1024"
