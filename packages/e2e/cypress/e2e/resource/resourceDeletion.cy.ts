@@ -43,9 +43,10 @@ describe("Utilisateur connecté, lorsque j'édite une ressource, je peux la supp
     cy.visit(`/bases/${defaultTestBaseSlug}/ressources`)
     cy.testId('empty-box').should('exist')
 
-    cy.get('#header_user_menu')
-      .contains('Voir mon profil')
-      .click({ force: true })
+    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+      .filter(':visible')
+      .click()
+    cy.get('#header_user_menu').contains('Voir mon profil').click()
     cy.testId('empty-box').should('exist')
   })
 })

@@ -70,9 +70,10 @@ describe('Utilisateur connecté, je peux supprimer une base', () => {
 
       expect(resp.redirectedToUrl).to.be.undefined
     })
-    cy.get('#header_user_menu')
-      .contains('Voir mon profil')
-      .click({ force: true })
+    cy.get('.fr-header__tools button[aria-controls="header_user_menu"]')
+      .filter(':visible')
+      .click()
+    cy.get('#header_user_menu').contains('Voir mon profil').click()
 
     cy.testId('ressources-menu-button').should(
       'have.text',

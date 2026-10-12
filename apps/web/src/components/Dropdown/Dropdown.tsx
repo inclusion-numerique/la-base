@@ -49,7 +49,7 @@ export const Dropdown = ({
   const [isOpen, setIsOpen] = React.useState(false)
 
   const modal = createModal({
-    id: formattedId,
+    id: `${formattedId}_modal`,
     isOpenedByDefault: false,
   })
 
@@ -132,7 +132,6 @@ export const Dropdown = ({
             role="navigation"
             className="fr-dropdown__modal"
             style={{ [alignRight ? 'right' : 'left']: 0 }}
-            id={formattedId}
           >
             {children}
           </div>
