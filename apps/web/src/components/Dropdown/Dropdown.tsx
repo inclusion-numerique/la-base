@@ -8,7 +8,6 @@ import React, {
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
   type RefObject,
-  useEffect,
   useRef,
 } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -111,12 +110,6 @@ export const Dropdown = ({
     }
   })
 
-  useEffect(() => {
-    if (buttonRef.current) {
-      buttonRef.current.setAttribute('aria-expanded', `${isOpen}`)
-    }
-  }, [isOpen])
-
   return (
     <>
       <div className="fr-hidden-md">
@@ -166,7 +159,7 @@ export const Dropdown = ({
         {isOpen && (
           <div
             role="navigation"
-            className="fr-collapse fr-dropdown__pane"
+            className="fr-dropdown__pane"
             style={{ [alignRight ? 'right' : 'left']: 0 }}
             id={formattedId}
             ref={collapseRef}
