@@ -62,6 +62,11 @@ export const untrustedUsersReport = new Command('domain:untrusted-users-report')
     await configureDeploymentTarget(args)
 
     const viewsOnlySince = new Date(args.viewsOnlySince)
+    if (Number.isNaN(viewsOnlySince.getTime())) {
+      throw new Error(
+        `Date invalide pour --views-only-since : ${args.viewsOnlySince} (format attendu : AAAA-MM-JJ)`,
+      )
+    }
 
     const publicResources = await prismaClient.resource.findMany({
       where: { isPublic: true, published: { not: null }, deleted: null },
