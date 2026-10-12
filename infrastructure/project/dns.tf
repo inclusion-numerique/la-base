@@ -52,7 +52,8 @@ resource "scaleway_domain_record" "mx" {
   dns_zone = data.scaleway_domain_zone.mainDomainZone.id
   type     = "MX"
   name     = ""
-  data     = "1 mx.ox.numerique.gouv.fr."
+  data     = "mx.ox.numerique.gouv.fr."
+  priority = 1
   ttl      = 3600
 }
 
