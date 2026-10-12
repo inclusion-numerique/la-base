@@ -20,6 +20,19 @@ export const tagsBeyondTheMostRecent = (
 export const imageNameForBranch = (prefix: string, branch: string): string =>
   `${prefix}${branch.replaceAll('/', '-').toLowerCase()}`
 
+export const isProtectedImage = ({
+  prefix,
+  branch,
+  protectedBranches,
+}: {
+  readonly prefix: string
+  readonly branch: string
+  readonly protectedBranches: readonly string[]
+}): boolean =>
+  protectedBranches
+    .map((protectedBranch) => imageNameForBranch(prefix, protectedBranch))
+    .includes(imageNameForBranch(prefix, branch))
+
 export const orphanImages = ({
   images,
   prefix,

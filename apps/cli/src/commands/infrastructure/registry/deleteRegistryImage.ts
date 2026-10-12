@@ -1,6 +1,6 @@
 import { output } from '@app/cli/output'
 import { Command } from '@commander-js/extra-typings'
-import { imageNameForBranch } from './registryRetention'
+import { imageNameForBranch, isProtectedImage } from './registryRetention'
 import {
   deleteImage,
   listWebAppImages,
@@ -14,7 +14,9 @@ export const deleteRegistryImage = new Command()
   .description('Delete the container image of a preview branch')
   .argument('<branch>', 'Branch whose image to delete')
   .action(async (branch) => {
-    if (protectedBranches.includes(branch)) {
+    if (
+      isProtectedImage({ prefix: webAppImagePrefix, branch, protectedBranches })
+    ) {
       throw new Error(`The image of ${branch} is never deleted`)
     }
 
