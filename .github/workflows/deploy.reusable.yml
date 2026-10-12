@@ -42,8 +42,8 @@ jobs:
       name: ${{ inputs.environnement-github }}
       url: ${{ steps.status.outputs.url }}
     env:
-      CDK_FORCE_BRANCH: ${{ inputs.environnement }}
       NAMESPACE: ${{ inputs.namespace }}
+      ENVIRONNEMENT: ${{ inputs.environnement-github }}
       WEB_CONTAINER_IMAGE: ${{ inputs.image }}
     steps:
       - name: Checkout repository
@@ -53,11 +53,6 @@ jobs:
           persist-credentials: false
       - name: Setup
         uses: ./.github/actions/setup
-      - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@v2
-        with:
-          tofu_version: 1.13.1
-          tofu_wrapper: false
       - name: Secrets environment
         uses: ./.github/actions/secrets-env
         with:
@@ -69,12 +64,18 @@ jobs:
           DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
           echo "::add-mask::$DATABASE_PASSWORD"
           echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
-      - name: Create terraform variables file from environment variables
-        run: pnpm --silent cli terraform:vars-from-env web
-      - name: Deploy web app stack
-        run: pnpm --silent -F @app/cdk cdktf deploy web --var-file .tfvars.json --auto-approve --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs
-      - name: Add web stack outputs to env file
-        run: pnpm --silent cli dotenv:from-cdk web
+      - name: Create infrastructure variables file from environment variables
+        run: pnpm --silent cli infrastructure:vars-from-env
+      - name: Infrastructure
+        uses: ./.github/actions/infrastructure
+        with:
+          namespace: ${{ inputs.environnement-github }}
+      - name: Apply infrastructure
+        run: |
+          pnpm --silent with-env tofu -chdir=infrastructure apply -input=false -auto-approve -var-file=.tfvars.json -var "branch=$BRANCHE" -var "namespace=$ENVIRONNEMENT"
+          pnpm --silent with-env tofu -chdir=infrastructure output -json > infrastructure/outputs.json
+      - name: Add infrastructure outputs to env file
+        run: pnpm --silent cli dotenv:from-infrastructure
       - name: Mask env file values
         uses: ./.github/actions/mask-env
       - name: Install PostgreSQL 17 client

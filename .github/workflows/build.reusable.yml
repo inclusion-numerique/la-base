@@ -47,7 +47,7 @@ jobs:
         run: |
           NAMESPACE="${BRANCHE//\//-}"
           IMAGE_NAME="la-base-web-${NAMESPACE,,}"
-          ENVIRONNEMENT=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './packages/cdk/src/utils.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")
+          ENVIRONNEMENT=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './apps/cli/src/branchNamespace.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")
           case "$ENVIRONNEMENT" in
             ''|main|dev)
               if [[ "$BRANCHE" != "$ENVIRONNEMENT" ]]; then

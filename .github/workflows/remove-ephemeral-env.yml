@@ -32,7 +32,6 @@ jobs:
       deployments: write
     env:
       BRANCHE: ${{ inputs.branche }}
-      CDK_FORCE_BRANCH: ${{ inputs.branche }}
     steps:
       - name: Refuse to delete a protected branch environment
         if: env.BRANCHE == '' || env.BRANCHE == 'main' || env.BRANCHE == 'dev' || startsWith(env.BRANCHE, 'refs/')
@@ -48,7 +47,7 @@ jobs:
         uses: ./.github/actions/setup
       - name: Compute environment name
         id: environnement
-        run: echo "nom=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './packages/cdk/src/utils.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")" >> "$GITHUB_OUTPUT"
+        run: echo "nom=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './apps/cli/src/branchNamespace.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")" >> "$GITHUB_OUTPUT"
       - name: Refuse to delete a protected environment
         env:
           ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
@@ -59,20 +58,21 @@ jobs:
               exit 1
               ;;
           esac
-      - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@v2
-        with:
-          tofu_version: 1.13.1
-          tofu_wrapper: false
       - name: Secrets environment
         uses: ./.github/actions/secrets-env
         with:
           scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
           scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
-      - name: Create terraform variables file from environment variables
-        run: DATABASE_PASSWORD='placeholder_for_destroy' WEB_CONTAINER_IMAGE='placeholder_for_destroy' pnpm --silent cli terraform:vars-from-env web
-      - name: Destroy stack
-        run: pnpm --silent -F @app/cdk cdktf destroy web --auto-approve --var-file .tfvars.json
+      - name: Create infrastructure variables file from environment variables
+        run: DATABASE_PASSWORD='placeholder_for_destroy' WEB_CONTAINER_IMAGE='placeholder_for_destroy' pnpm --silent cli infrastructure:vars-from-env
+      - name: Infrastructure
+        uses: ./.github/actions/infrastructure
+        with:
+          namespace: ${{ steps.environnement.outputs.nom }}
+      - name: Destroy infrastructure
+        env:
+          ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
+        run: pnpm --silent with-env tofu -chdir=infrastructure destroy -input=false -auto-approve -var-file=.tfvars.json -var "branch=$BRANCHE" -var "namespace=$ENVIRONNEMENT"
       - name: Deactivate GitHub deployments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

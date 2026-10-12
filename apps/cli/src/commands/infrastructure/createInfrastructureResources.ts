@@ -1,4 +1,5 @@
 import { randomBytes } from 'node:crypto'
+import { computeBranchNamespace } from '@app/cli/branchNamespace'
 import { output, outputError } from '@app/cli/output'
 import {
   containerNamespaceName,
@@ -8,8 +9,6 @@ import {
 } from '@app/config/config'
 import { Command } from '@commander-js/extra-typings'
 import axios from 'axios'
-
-const { computeBranchNamespace } = await import('@app/cdk/utils')
 
 type ResourceKind = 'database' | 'container'
 
