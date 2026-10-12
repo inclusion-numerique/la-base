@@ -500,6 +500,10 @@ Les messages de commit doivent suivre la specification [Commits Conventionnels](
 
 La fusion d'une branche dans `main` deploie automatiquement l'environnement `dev`, puis la production. Pour tester une branche avant sa fusion, poser le label `preview` sur sa PR.
 
+### Incidents de securite
+
+Tout incident de securite, ou toute vulnerabilite decouverte, se signale et se traite selon la [Procedure de Reponse et Signalement des Incidents de Securite (PRIS)](https://docs.numerique.gouv.fr/docs/e8f1a2d1-3a6c-4e52-9ffd-639d772e76e7/). Le document est reserve aux agents : il s'ouvre apres connexion a Docs. Pour un signalement externe, voir [SECURITY.md](./SECURITY.md).
+
 ---
 
 ## Stack technique
