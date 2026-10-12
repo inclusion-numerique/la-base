@@ -97,11 +97,15 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         )
 
         cy.log("J'enregistre l'image")
+        cy.intercept({ method: 'GET', url: /\/editer\?_rsc=/ }).as(
+          'rafraichissementApresAjout',
+        )
         cy.get('#resource-image-edition').contains('Enregistrer').click()
 
         cy.log('Le fichier est uploadé')
         cy.wait('@imageCreate')
         cy.wait('@mutation')
+        cy.wait('@rafraichissementApresAjout')
 
         cy.log("Je vois l'image")
         cy.testId('resource-image-placeholder').should('not.exist')
@@ -114,11 +118,15 @@ describe("Utilisateur connecté, lorsque j'édite une ressource", () => {
         cy.testId('resource-image-file-field').selectFile(
           'cypress/fixtures/test_1px_image.png',
         )
+        cy.intercept({ method: 'GET', url: /\/editer\?_rsc=/ }).as(
+          'rafraichissementApresChangement',
+        )
         cy.get('#resource-image-edition').contains('Enregistrer').click()
 
         cy.log('Le fichier est changé')
         cy.wait('@imageCreate')
         cy.wait('@mutation')
+        cy.wait('@rafraichissementApresChangement')
 
         cy.log("Je peux supprimer l'image")
         cy.testId('resource-image-edit-button').click()

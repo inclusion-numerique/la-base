@@ -504,7 +504,8 @@ export const infrastructureInventory = new Command()
   .description(
     'Show infrastructure inventory and allow interactive cleanup actions',
   )
-  .action(async () => {
+  .option('--read-only', 'Show the inventory without cleanup actions')
+  .action(async ({ readOnly }) => {
     try {
       if (!assertRequiredEnvForInventory()) {
         process.exit(1)
@@ -608,6 +609,9 @@ export const infrastructureInventory = new Command()
       const noGitBranchBuckets = previewBuckets.filter((bucket) => {
         return !branchNamespaceToGitBranch.has(bucket.namespace)
       })
+      const noGitBranchDatabases = previewDatabases.filter((database) => {
+        return !branchNamespaceToGitBranch.has(database.namespace)
+      })
 
       const noGitBranchByNamespace = new Map<string, NoGitBranchResource>()
       for (const container of noGitBranchContainers) {
@@ -623,6 +627,14 @@ export const infrastructureInventory = new Command()
           namespace: bucket.namespace,
           container: existing?.container ?? null,
           bucket,
+        })
+      }
+      for (const database of noGitBranchDatabases) {
+        const existing = noGitBranchByNamespace.get(database.namespace)
+        noGitBranchByNamespace.set(database.namespace, {
+          namespace: database.namespace,
+          container: existing?.container ?? null,
+          bucket: existing?.bucket ?? null,
         })
       }
       const noGitBranchResources = [...noGitBranchByNamespace.values()].sort(
@@ -653,6 +665,7 @@ export const infrastructureInventory = new Command()
         { 'Deployed preview buckets': String(previewBuckets.length) },
         { 'No git branch containers': String(noGitBranchContainers.length) },
         { 'No git branch buckets': String(noGitBranchBuckets.length) },
+        { 'No git branch databases': String(noGitBranchDatabases.length) },
         { 'Preview buckets size (total)': formatBytes(knownBucketSizeTotal) },
       )
       output('SUMMARY:')
@@ -739,6 +752,10 @@ export const infrastructureInventory = new Command()
 
       if (deletable.length === 0 && noGitBranchResources.length === 0) {
         output('\nNothing to clean up.')
+        return
+      }
+
+      if (readOnly) {
         return
       }
 

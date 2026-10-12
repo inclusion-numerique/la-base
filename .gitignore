@@ -12,6 +12,7 @@ node_modules
 /coverage
 /coverage-reports
 **/coverage
+**/junit
 
 # production
 /build

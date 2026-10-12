@@ -15,19 +15,7 @@ export const deleteSentryEnvironmentIssues = new Command()
   .command('sentry:delete-environment-issues')
   .argument('<environment>', 'environment')
   .action(async (environmentArgument) => {
-    // We copy from computeBranchNamespace but keep digits for sentry env names
-    const environment = environmentArgument
-      // Replace special characters with hyphen
-      .replaceAll(/[./@_]/g, '-')
-      // When digits are removed, there might be multiple hyphens in a row
-      .replaceAll(/--+/g, '-')
-      // Remove prefix hyphen
-      .replace(/^-/, '')
-      // Namespace should be shorter than 32 chars to ensure all resources can be deployed
-      .slice(0, 32)
-      // Remove suffix hyphen
-      .replace(/-$/, '')
-      .toLowerCase()
+    const environment = environmentArgument.replaceAll('/', '-')
 
     if (environment === 'main') {
       output('You are trying to delete issues for the main environment')

@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import * as dotenv from 'dotenv'
 import { createNodeModulesTransformIgnorePattern } from './transformIgnore.ts'
@@ -6,6 +7,14 @@ import { createNodeModulesTransformIgnorePattern } from './transformIgnore.ts'
 const dotenvFile = path.resolve(import.meta.dirname, '../../../.env')
 
 const racineDuDepot = path.resolve(import.meta.dirname, '../../..')
+
+const rapportJUnit = [
+  createRequire(import.meta.url).resolve('jest-junit'),
+  {
+    outputDirectory: path.join(racineDuDepot, 'junit'),
+    uniqueOutputName: 'true',
+  },
+] as const
 
 export const testDotenvConfig = () => {
   dotenv.config({ path: dotenvFile })
@@ -78,6 +87,7 @@ export const packageJestConfig = ({
     },
     // Coverage configuration
     coverageDirectory: '<rootDir>/coverage',
+    reporters: process.env.CI ? ['default', rapportJUnit] : ['default'],
     coverageReporters: [
       'json',
       ['lcov', { projectRoot: racineDuDepot }],

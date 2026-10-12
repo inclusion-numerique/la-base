@@ -176,6 +176,12 @@ describe("Ajout d'un avis sur une ressource", () => {
       .click({ force: true })
     cy.get('dialog button').contains('Supprimer').click({ force: true })
     cy.wait('@deleteFeedback')
+      .its('response')
+      .then((response) => {
+        expect(response?.statusCode, JSON.stringify(response?.body)).to.equal(
+          200,
+        )
+      })
 
     cy.getToast('Avis supprimé')
   })

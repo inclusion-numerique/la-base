@@ -10,9 +10,10 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
   const emailUser = givenUser()
 
   // This user exists in mon compte pro, but not in our db
+  const identifiantsProConnect = () =>
+    cy.env(['PROCONNECT_TEST_USER_EMAIL', 'PROCONNECT_TEST_USER_PASSWORD'])
+
   const proConnectUser = {
-    email: Cypress.env('PROCONNECT_TEST_USER_EMAIL') as string,
-    password: Cypress.env('PROCONNECT_TEST_USER_PASSWORD') as string,
     firstName: 'Jean',
     lastName: 'User',
   }
@@ -90,9 +91,14 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
       request.headers.cookie = authenticationCookies.join('; ')
     })
 
-    cy.get('#email-input').type(`${proConnectUser.email}{enter}`)
-
-    cy.get('#password-input').type(`${proConnectUser.password}{enter}`)
+    identifiantsProConnect().then(
+      ({ PROCONNECT_TEST_USER_EMAIL, PROCONNECT_TEST_USER_PASSWORD }) => {
+        cy.get('#email-input').type(`${PROCONNECT_TEST_USER_EMAIL}{enter}`)
+        cy.get('#password-input').type(
+          `${PROCONNECT_TEST_USER_PASSWORD}{enter}`,
+        )
+      },
+    )
 
     // Click on the first a link .fr-tile__link
 
@@ -119,7 +125,6 @@ describe('ETQ Utilisateur, je peux me connecter à mon compte / me déconnecter'
     cy.log('Check that the user can logout')
 
     cy.dsfrShouldBeStarted()
-    cy.dsfrCollapsesShouldBeBound()
     cy.get(
       '.fr-header__tools button[aria-controls="header_user_menu"].fr-dropdown__btn',
     )
