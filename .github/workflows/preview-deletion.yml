@@ -17,7 +17,7 @@ on:
         type: string
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.event.ref || inputs.branche }}
+  group: ${{ github.workflow }}-${{ inputs.branche || github.event.pull_request.head.ref || github.event.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -32,18 +32,18 @@ jobs:
         (github.event_name == 'delete' && github.event.ref_type == 'branch') ||
         github.event_name == 'workflow_dispatch'
       ) &&
-      !contains(fromJSON('["main", "dev"]'), github.event.pull_request.head.ref || github.event.ref || inputs.branche)
+      !contains(fromJSON('["main", "dev"]'), inputs.branche || github.event.pull_request.head.ref || github.event.ref)
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
     env:
-      CDK_FORCE_BRANCH: ${{ github.event.pull_request.head.ref || github.event.ref || inputs.branche }}
+      CDK_FORCE_BRANCH: ${{ inputs.branche || github.event.pull_request.head.ref || github.event.ref }}
     steps:
       - name: Refuse to delete a protected branch environment
-        if: env.CDK_FORCE_BRANCH == '' || env.CDK_FORCE_BRANCH == 'main' || env.CDK_FORCE_BRANCH == 'dev'
+        if: env.CDK_FORCE_BRANCH == '' || env.CDK_FORCE_BRANCH == 'main' || env.CDK_FORCE_BRANCH == 'dev' || startsWith(env.CDK_FORCE_BRANCH, 'refs/')
         run: |
-          echo "Rien à supprimer pour « $CDK_FORCE_BRANCH » : main et dev ne sont jamais détruits"
+          echo "Suppression refusée pour « $CDK_FORCE_BRANCH » : main et dev ne sont jamais détruits, et une valeur en refs/ signale une branche mal résolue"
           exit 1
       - name: Checkout repository
         uses: actions/checkout@v7
