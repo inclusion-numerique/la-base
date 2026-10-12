@@ -13,7 +13,7 @@
     "setup:dsfr": "bash ../../setup-dsfr.sh"
   },
   "engines": {
-    "node": "^24.19"
+    "node": "^24.21"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.35.0",
@@ -25,9 +25,9 @@
     "@tiptap/react": "^3.31.3",
     "@tiptap/starter-kit": "^3.31.3",
     "classnames": "^2.5.1",
-    "cropperjs": "^1.6.2",
+    "cropperjs": "^1.6.3",
     "dotenv": "^17.4.2",
-    "framer-motion": "^13.0.0",
+    "framer-motion": "^13.4.2",
     "next": "^16.3.8",
     "react": "^19.3.0",
     "react-cropper": "^2.3.3",
@@ -43,7 +43,7 @@
     "@storybook/nextjs": "^10.6.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.13.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "jest": "^30.5.2",

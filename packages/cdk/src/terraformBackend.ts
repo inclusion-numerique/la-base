@@ -7,8 +7,11 @@ export const terraformBackend = (scope: Construct, stack: string) =>
     bucket: `${projectSlug}-terraform-state`,
     key: `${projectSlug}-${stack}.tfstate`,
     // Credentials are provided with AWS_*** env variables
-    endpoint: 'https://s3.fr-par.scw.cloud',
+    region: 'fr-par',
+    endpoints: { s3: 'https://s3.fr-par.scw.cloud' },
     skipCredentialsValidation: true,
     skipRegionValidation: true,
+    skipRequestingAccountId: true,
     skipMetadataApiCheck: true,
+    skipS3Checksum: true,
   })

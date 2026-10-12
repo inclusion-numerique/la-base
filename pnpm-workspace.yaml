@@ -27,10 +27,8 @@ minimumReleaseAgeExclude:
   # Même motif que TypeScript : Next distribue son compilateur natif dans des paquets par
   # plateforme (`@next/swc-*`) publiés avec `next`. Remplace l'entrée `@next/env` seule.
   - "@next/*"
-  # Next 16 épingle postcss à exactement 8.5.23, publiée le 24/07 : sous quarantaine, la
-  # montée est impossible. C'est par ailleurs le correctif de l'avis modéré qui frappait la
-  # 8.5.21 (lecture de fichiers .map arbitraires via un sourceMappingURL contrôlé).
-  - postcss
+  - sharp
+  - "@img/*"
 
 # Peers qu'on ne peut pas corriger : dépendances transitives de cdktf-cli (ink,
 # ink-select-input, react-reconciler) figées sur React 16/17. Rien à l'exécution
@@ -38,7 +36,13 @@ minimumReleaseAgeExclude:
 # Version EXACTE, pas une plage : c'est ce qui borne la levée de quarantaine ci-dessus à un
 # artefact connu.
 overrides:
-  postcss: 8.5.23
+  sharp: 0.35.5
+  follow-redirects@1: ^1.16.0
+  glob@10: ^10.5.0
+  minimatch@5: ^5.1.8
+  mysql2@3: ^3.23.1
+  tmp@<0.2.6: ^0.2.6
+  validator@13: ^13.15.22
 
 peerDependencyRules:
   allowedVersions:
@@ -60,3 +64,19 @@ peerDependencyRules:
     # i18next arrive en transitif via opening_hours (@gouvfr-anct/timetable-to-osm-opening-hours)
     # et plafonne TypeScript à ^5. Rien ne l'instancie ici : le paquet n'est importé nulle part.
     'i18next>typescript': '7'
+
+allowBuilds:
+  "@cdktf/node-pty-prebuilt-multiarch": false
+  "@gouvfr/dsfr": false
+  "@parcel/watcher": false
+  "@prisma/engines": false
+  "@sentry/cli": false
+  "@swc/core": false
+  aws-crt: false
+  core-js-pure: false
+  cypress: false
+  esbuild: false
+  prisma: false
+  unrs-resolver: false
+
+dedupePeerDependents: false

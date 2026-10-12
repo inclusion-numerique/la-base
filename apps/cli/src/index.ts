@@ -1,6 +1,7 @@
 import { checkDeploymentStatus } from '@app/cli/commands/deployment/checkDeploymentStatus'
 import { addConseillersNumeriquesToBases } from '@app/cli/commands/domain/addConseillersNumeriquesToBases'
 import { removeInactiveConseillersNumeriques } from '@app/cli/commands/domain/removeInactiveConseillersNumeriques'
+import { untrustedUsersReport } from '@app/cli/commands/domain/untrustedUsersReport'
 import { createGithubDeployment } from '@app/cli/commands/github/createGithubDeployment'
 import { deactivateGithubDeployment } from '@app/cli/commands/github/deactivateGithubDeployment'
 import { updateGithubDeployment } from '@app/cli/commands/github/updateGithubDeployment'
@@ -47,6 +48,7 @@ program.addCommand(checkDeploymentStatus)
 program.addCommand(locallyRestoreLatestMainBackup)
 program.addCommand(addConseillersNumeriquesToBases)
 program.addCommand(removeInactiveConseillersNumeriques)
+program.addCommand(untrustedUsersReport)
 program.addCommand(migrateStorage)
 program.addCommand(recycleOrphanedFiles)
 program.addCommand(deleteSentryEnvironmentIssues)

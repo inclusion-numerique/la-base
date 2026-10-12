@@ -8,6 +8,8 @@ import BaseHeader, {
 } from '@app/web/features/base/components/BaseHeader'
 import BaseMenu from '@app/web/features/base/components/BaseMenu'
 import BaseJoinRequestFormModal from '@app/web/features/base/join-requests/components/BaseJoinRequestFormModal'
+import { isTrustedBaseId } from '@app/web/features/indexation/db/getTrustedIds'
+import { getUserContentRobots } from '@app/web/features/indexation/db/getUserContentRobots'
 import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import { resolveShareableLinkToken } from '@app/web/features/shareableLink/db/resolveShareableLinkToken'
 import { isShareableLinkToken } from '@app/web/features/shareableLink/utils/isShareToken'
@@ -50,6 +52,7 @@ export const generateMetadata = async ({
       slug: slug,
     },
     select: {
+      id: true,
       title: true,
       description: true,
       isPublic: true,
@@ -62,7 +65,10 @@ export const generateMetadata = async ({
   return {
     title: metadataTitle(base.title),
     description: base.description || undefined,
-    robots: base.isPublic ? undefined : 'noindex, nofollow',
+    robots: await getUserContentRobots({
+      isPublic: base.isPublic,
+      isTrusted: () => isTrustedBaseId(base.id),
+    }),
   }
 }
 const BaseLayout = async ({

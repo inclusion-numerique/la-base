@@ -59,8 +59,8 @@ Licence : [AGPL-3.0-or-later](./LICENSE)
 ## Prerequis
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) >= 22 (recommandation : utiliser [nvm](https://github.com/nvm-sh/nvm))
-- [pnpm](https://pnpm.io/) 10.x
+- [Node.js](https://nodejs.org/) 24.21, version de `.nvmrc` (recommandation : utiliser [nvm](https://github.com/nvm-sh/nvm))
+- [pnpm](https://pnpm.io/) 12.x
 - [Docker](https://www.docker.com/) et Docker Compose (optionnel mais recommande)
 - [PostgreSQL](https://www.postgresql.org/) (optionnel si Docker est utilise)
 
@@ -78,7 +78,7 @@ cd la-base
 ### 2. Installer la bonne version de Node
 
 ```bash
-nvm use --lts
+nvm use
 ```
 
 ### 3. Installer les dependances
@@ -245,6 +245,7 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 |----------|-------------|
 | `domain:add-conseillers-numeriques-to-bases` | Ajoute les conseillers numeriques aux bases (follows + membres) |
 | `domain:remove-inactive-conseillers-numeriques` | Supprime les comptes conseillers numeriques auto-crees et inactifs |
+| `domain:untrusted-users-report` | Lecture seule : compte les ressources et collections qui passent en noindex faute d'auteur de confiance, et les bases sans membre de confiance (invitation acceptee). Option `--views-only-since <date>` |
 
 ### GitHub Deployments
 
@@ -346,7 +347,7 @@ pnpm cli backup:locally-restore-latest-main -d 2025-01-15
 
 ## Infrastructure Terraform (CDK)
 
-L'infrastructure est definie en TypeScript avec [CDKTF](https://developer.hashicorp.com/terraform/cdktf) (CDK for Terraform) et deployee sur **Scaleway** (region `fr-par`).
+L'infrastructure est definie en TypeScript avec [CDKTF](https://developer.hashicorp.com/terraform/cdktf) (CDK for Terraform), executee avec [OpenTofu](https://opentofu.org) 1.13 et deployee sur **Scaleway** (region `fr-par`). Les scripts de `@app/cdk` tournent en Node 22, que pnpm telecharge au besoin, et `pnpm -F @app/cdk generate` installe OpenTofu s'il est absent.
 
 ### Architecture a deux stacks
 
