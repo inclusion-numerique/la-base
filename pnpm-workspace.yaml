@@ -1,7 +1,6 @@
 packages:
   - apps/cli
   - apps/web
-  - packages/cdk
   - packages/config
   - packages/e2e
   - packages/emails
@@ -29,24 +28,17 @@ minimumReleaseAgeExclude:
   - sharp
   - "@img/*"
 
-# Peers qu'on ne peut pas corriger : dépendances transitives de cdktf-cli (ink,
-# ink-select-input, react-reconciler) figées sur React 16/17. Rien à l'exécution
-# ne charge React depuis @app/cdk, on autorise explicitement la version installée.
 # Version EXACTE, pas une plage : c'est ce qui borne la levée de quarantaine ci-dessus à un
 # artefact connu.
 overrides:
   sharp: 0.35.5
   follow-redirects@1: ^1.16.0
   glob@10: ^10.5.0
-  minimatch@5: ^5.1.8
   mysql2@3: ^3.23.1
   tmp@<0.2.6: ^0.2.6
-  validator@13: ^13.15.22
 
 peerDependencyRules:
   allowedVersions:
-    react-reconciler>react: '19'
-    ink-select-input>react: '19'
     # Auth.js plafonne nodemailer à ^7.0.7 || ^8.0.5, mais son provider n'appelle
     # createTransport que depuis son sendVerificationRequest par défaut — que nous
     # remplaçons par le nôtre (apps/web/src/auth/sendVerificationRequest.ts). Les six
@@ -65,7 +57,6 @@ peerDependencyRules:
     'i18next>typescript': '7'
 
 allowBuilds:
-  "@cdktf/node-pty-prebuilt-multiarch": false
   "@gouvfr/dsfr": false
   "@parcel/watcher": false
   "@prisma/engines": false

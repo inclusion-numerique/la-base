@@ -62,13 +62,8 @@ chromatic.log
 /packages/e2e/.next/
 /packages/e2e/cypress/downloads
 
-# cdk
-/packages/cdk/.gen/
-/packages/cdk/cdktf.out/
-!/packages/cdk/cdktf.out/stacks/web/.terraform.lock.hcl
 terraform.*.tfstate
 .terraform.*
-packages/cdk/cdk.out.json
 
 # infrastructure
 /infrastructure/.terraform

@@ -13,7 +13,6 @@
     "paths": {
       "@app/cli/*": ["../../apps/cli/src/*"],
       "@app/web/*": ["../../apps/web/src/*"],
-      "@app/cdk/*": ["../../packages/cdk/src/*"],
       "@app/config/*": ["../../packages/config/src/*"],
       "@app/e2e/*": ["../../packages/e2e/cypress/*"],
       "@app/emails/*": ["../../packages/emails/src/*"],

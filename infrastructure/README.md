@@ -17,6 +17,15 @@ Resources shared by every environment (database instance, container namespace, r
 
 The state of each environment is stored in the `la-base-terraform-state` bucket under the `la-base-web-<namespace>.tfstate` key, passed to `tofu init` with `-backend-config`.
 
+## Bootstrap of a new project
+
+- Create the project on Scaleway, add the relevant users with full access on its resources and Secret Manager, and an IAM application with the same access for the CI
+- Add the main and preview domains and validate them with DNS
+- Change the project variables in `packages/config/src/config.ts` and in `.env.dist`
+- Add the secrets to the Secret Manager (documented in `.env.dist`) and to `apps/cli/src/commands/infrastructure/infrastructureVariables.ts`
+- Create the `la-base-terraform-state` bucket for the OpenTofu states
+- Deploy the project stack with the `Infrastructure project` workflow, then validate the transactional emails domain in the Scaleway console
+
 ## Deployment
 
 Deployment is done via GitHub Actions, using the `Preview`, `Release` and `Remove ephemeral environment` workflows in `.github/workflows/`.
