@@ -96,11 +96,15 @@ jobs:
               exit 1
               ;;
           esac
-          if ! gh api "repos/${{ github.repository }}/environments/$ENVIRONNEMENT" > /dev/null 2>&1; then
-            echo "L'environnement « $ENVIRONNEMENT » n'existe plus"
-            exit 0
+          if ! erreur=$(gh api "repos/$GITHUB_REPOSITORY/environments/$ENVIRONNEMENT" 2>&1 > /dev/null); then
+            if [[ "$erreur" == *"HTTP 404"* ]]; then
+              echo "L'environnement « $ENVIRONNEMENT » n'existe plus"
+              exit 0
+            fi
+            echo "Lecture de l'environnement « $ENVIRONNEMENT » impossible : $erreur"
+            exit 1
           fi
-          gh api --method DELETE "repos/${{ github.repository }}/environments/$ENVIRONNEMENT"
+          gh api --method DELETE "repos/$GITHUB_REPOSITORY/environments/$ENVIRONNEMENT"
           echo "Environnement « $ENVIRONNEMENT » supprimé"
       - name: Delete Sentry environment issues
         run: pnpm --silent cli sentry:delete-environment-issues "$BRANCHE"
