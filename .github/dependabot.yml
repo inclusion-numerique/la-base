@@ -50,6 +50,18 @@ updates:
         patterns:
           - '*'
 
+  - package-ecosystem: terraform
+    directory: /infrastructure
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Paris
+    cooldown:
+      default-days: 15
+    commit-message:
+      prefix: chore(infrastructure)
+
   - package-ecosystem: docker
     directory: /docker/web
     schedule:

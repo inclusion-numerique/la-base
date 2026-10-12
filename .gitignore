@@ -70,6 +70,13 @@ terraform.*.tfstate
 .terraform.*
 packages/cdk/cdk.out.json
 
+# infrastructure
+/infrastructure/.terraform
+!/infrastructure/.terraform.lock.hcl
+/infrastructure/.tfvars.json
+/infrastructure/*.tfplan
+/infrastructure/outputs.json
+
 # ui
 /packages/ui/.next
 /packages/ui/public/dsfr
