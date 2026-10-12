@@ -24,7 +24,7 @@ Project is hosted by Scaleway, provisioning is done via OpenTofu with CDK for Te
 
 ### Deployment
 
-Deployment is done via GitHub Actions, using the `Deploy` and `Preview deletion` workflows in `.github/workflows`.
+Deployment is done via GitHub Actions, using the `Deploy`, `Preview` and `Remove ephemeral environment` workflows in `.github/workflows`.
 
 ### Project Stack
 
