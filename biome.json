@@ -211,7 +211,6 @@
     "includes": [
       "**",
       "!**/var",
-      "!**/.turbo",
       "!**/node_modules",
       "!**/.pnp",
       "!**/.pnp.js",

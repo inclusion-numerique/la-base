@@ -51,8 +51,7 @@ Licence : [AGPL-3.0-or-later](./LICENSE)
 
 ### Orchestration
 
-- **pnpm** : gestionnaire de paquets (workspaces)
-- **Turborepo** : orchestration des taches du monorepo (`turbo.json`)
+- **pnpm** : gestionnaire de paquets et orchestration des taches du monorepo (workspaces, `pnpm -r`)
 
 ---
 
