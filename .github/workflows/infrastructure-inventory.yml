@@ -27,3 +27,13 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           FORCE_COLOR: '0'
         run: pnpm --silent cli infrastructure:inventory --read-only
+      - name: Registry retention (dry run)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm --silent cli infrastructure:prune-registry --report registre.csv
+      - name: Upload registry retention report
+        uses: actions/upload-artifact@v7
+        with:
+          name: registry-retention-report
+          path: registre.csv
+          retention-days: 30

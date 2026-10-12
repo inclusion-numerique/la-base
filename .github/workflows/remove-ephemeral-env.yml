@@ -73,6 +73,8 @@ jobs:
         run: DATABASE_PASSWORD='placeholder_for_destroy' WEB_CONTAINER_IMAGE='placeholder_for_destroy' pnpm --silent cli terraform:vars-from-env web
       - name: Destroy stack
         run: pnpm --silent -F @app/cdk cdktf destroy web --auto-approve --var-file .tfvars.json
+      - name: Delete container image
+        run: pnpm --silent cli infrastructure:delete-registry-image "$BRANCHE"
       - name: Deactivate GitHub deployments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
