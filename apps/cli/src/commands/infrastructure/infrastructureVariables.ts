@@ -50,7 +50,6 @@ export const requiredProjectInfrastructureVariables = [
   'NEXTAUTH_SECRET',
   'SCW_ACCESS_KEY',
   'SCW_SECRET_KEY',
-  'SENTRY_AUTH_TOKEN',
   'SMTP_MAILDEV_USERNAME',
   'SMTP_MAILDEV_PASSWORD',
 ] as const

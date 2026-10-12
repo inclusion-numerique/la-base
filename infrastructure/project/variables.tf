@@ -104,11 +104,6 @@ variable "SCW_SECRET_KEY" {
   sensitive = true
 }
 
-variable "SENTRY_AUTH_TOKEN" {
-  type      = string
-  sensitive = true
-}
-
 variable "SMTP_MAILDEV_USERNAME" {
   type      = string
   sensitive = true

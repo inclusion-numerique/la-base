@@ -30,7 +30,6 @@ resource "scaleway_container_namespace" "webContainers" {
     SCW_SECRET_KEY        = var.SCW_SECRET_KEY
     AWS_ACCESS_KEY_ID     = var.SCW_ACCESS_KEY
     AWS_SECRET_ACCESS_KEY = var.SCW_SECRET_KEY
-    SENTRY_AUTH_TOKEN     = var.SENTRY_AUTH_TOKEN
   }
 }
 
