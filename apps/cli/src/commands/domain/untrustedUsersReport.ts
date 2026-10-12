@@ -49,7 +49,7 @@ const isTrustedByViewsOnly = (signals: TrustedUserSignals) =>
  */
 export const untrustedUsersReport = new Command('domain:untrusted-users-report')
   .description(
-    'Compte les comptes, ressources, collections, profils et bases qui passeraient en noindex (lecture seule)',
+    'Compte les comptes, ressources, collections et bases qui passeraient en noindex (lecture seule)',
   )
   .addOption(DeploymentTargetOption)
   .addOption(
@@ -76,10 +76,6 @@ export const untrustedUsersReport = new Command('domain:untrusted-users-report')
       where: { isPublic: true, deleted: null },
       select: { createdById: true },
     })
-    const publicProfiles = await prismaClient.user.findMany({
-      where: { isPublic: true, deleted: null },
-      select: { id: true, slug: true },
-    })
     const publicBases = await prismaClient.base.findMany({
       where: { isPublic: true, deleted: null },
       select: { id: true },
@@ -95,7 +91,6 @@ export const untrustedUsersReport = new Command('domain:untrusted-users-report')
           ...new Set([
             ...authorIds,
             ...publicCollections.map(({ createdById }) => createdById),
-            ...publicProfiles.map(({ id }) => id),
           ]),
         ],
         getTrustSignals,
@@ -131,17 +126,11 @@ export const untrustedUsersReport = new Command('domain:untrusted-users-report')
         .length,
     )
     outputCount(
-      'Profils publics',
-      publicProfiles.length,
-      publicProfiles.filter(({ id }) => !isTrusted(id)).length,
-    )
-    outputCount(
       'Bases publiques',
       publicBases.length,
       publicBases.filter(({ id }) => !trustedBaseIds.has(id)).length,
     )
 
-    const slugs = new Map(publicProfiles.map(({ id, slug }) => [id, slug]))
     const trustedByViewsOnly = authorIds.filter((id) => {
       const userSignals = signals.get(id)
       return (
@@ -153,10 +142,18 @@ export const untrustedUsersReport = new Command('domain:untrusted-users-report')
     output(
       `Comptes de confiance par les vues seules, créés depuis le ${args.viewsOnlySince} : ${trustedByViewsOnly.length}`,
     )
+    const slugs = new Map(
+      (
+        await prismaClient.user.findMany({
+          where: { id: { in: trustedByViewsOnly } },
+          select: { id: true, slug: true },
+        })
+      ).map(({ id, slug }) => [id, slug]),
+    )
     for (const id of trustedByViewsOnly) {
       const userSignals = signals.get(id)
       output(
-        `  ${slugs.get(id) ?? id} : ${userSignals?.publicResourcesViewsCount} vues, créé le ${userSignals?.created.toISOString().slice(0, 10)}`,
+        `  ${slugs.get(id) ?? id} :${userSignals?.publicResourcesViewsCount} vues, créé le ${userSignals?.created.toISOString().slice(0, 10)}`,
       )
     }
   })

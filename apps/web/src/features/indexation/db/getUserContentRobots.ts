@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 
 const privateRobots = 'noindex, nofollow'
 
-// Contenu public d'un auteur qui n'est pas de confiance : visible, mais pas
-// indexé. On garde "follow" pour que les moteurs suivent les liens internes.
-export const untrustedAuthorRobots = 'noindex, follow'
+// Page publique visible sur le site mais pas indexée. On garde "follow" pour
+// que les moteurs suivent les liens internes.
+const notIndexedRobots = 'noindex, follow'
 
 /**
  * Directive robots d'une page de contenu publié par les utilisateurs
- * (ressource, collection, profil, base) : un contenu public n'est indexable
- * que si son auteur est de confiance. `undefined` retire la balise robots (la
+ * (ressource, collection, base) : un contenu public n'est indexable que si
+ * son auteur est de confiance. `undefined` retire la balise robots (la
  * directive du layout racine n'est pas héritée) : c'est le comportement
  * existant des pages publiques. Hors production, on le conserve, robots.txt
  * bloquant déjà tout le site.
@@ -28,5 +28,16 @@ export const getUserContentRobots = async ({
   if (!PublicWebAppConfig.isMain) {
     return undefined
   }
-  return (await isTrusted()) ? undefined : untrustedAuthorRobots
+  return (await isTrusted()) ? undefined : notIndexedRobots
 }
+
+/**
+ * Pages jamais indexées, quel que soit l'auteur : profils et avis sur une
+ * ressource. Elles n'apportent rien à la recherche (doublon de la ressource,
+ * données personnelles) et peuvent porter du spam.
+ */
+export const getNeverIndexedRobots = ({
+  isPublic,
+}: {
+  isPublic: boolean | null
+}): Metadata['robots'] => (isPublic ? notIndexedRobots : privateRobots)
