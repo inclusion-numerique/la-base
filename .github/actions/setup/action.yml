@@ -2,6 +2,9 @@ name: 'Setup Node & pnpm'
 description: 'Install pnpm, Node.js and dependencies'
 
 inputs:
+  cypress:
+    description: 'Also install the Cypress binary'
+    default: 'false'
   node-version:
     description: 'Node.js version, instead of the one in .nvmrc'
     default: ''
@@ -31,4 +34,14 @@ runs:
         key: cdktf-bindings-${{ runner.os }}-${{ hashFiles('packages/cdk/cdktf.json', 'packages/cdk/scripts/generate-bindings.sh', 'pnpm-lock.yaml') }}
     - name: Generate cdktf provider bindings
       run: pnpm --silent -F @app/cdk generate
+      shell: bash
+    - name: Cache Cypress binary
+      if: inputs.cypress == 'true'
+      uses: actions/cache@v6
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+    - name: Install Cypress binary
+      if: inputs.cypress == 'true'
+      run: pnpm -F @app/e2e exec cypress install
       shell: bash

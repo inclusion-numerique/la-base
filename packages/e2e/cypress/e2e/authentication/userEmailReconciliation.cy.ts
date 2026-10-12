@@ -5,15 +5,13 @@ describe('ETQ Utilisateur, je peux me connecter avec un nouvel email qui a été
   // Unique user for this test
 
   // This user exists in mon compte pro, but not in our db
-  const proConnectUser = {
-    email: Cypress.env('PROCONNECT_TEST_USER_EMAIL') as string,
-    password: Cypress.env('PROCONNECT_TEST_USER_PASSWORD') as string,
-    firstName: 'Jean',
-    lastName: 'User',
-  }
+  const identifiantsProConnect = () =>
+    cy.env(['PROCONNECT_TEST_USER_EMAIL', 'PROCONNECT_TEST_USER_PASSWORD'])
 
   beforeEach(() => {
-    cy.execute('deleteAllData', { email: proConnectUser.email })
+    identifiantsProConnect().then(({ PROCONNECT_TEST_USER_EMAIL }) =>
+      cy.execute('deleteAllData', { email: PROCONNECT_TEST_USER_EMAIL }),
+    )
   })
 
   it('Acceptation 1 - Je peux me connecter sur mon ancien compte avec mon nouvel email, par magic link', () => {
@@ -59,56 +57,62 @@ describe('ETQ Utilisateur, je peux me connecter avec un nouvel email qui a été
   })
 
   it('Acceptation 2 - Je peux me connecter avec mon nouvel email, par ProConnect', () => {
-    cy.visit('/connexion')
+    identifiantsProConnect().then(
+      ({ PROCONNECT_TEST_USER_EMAIL, PROCONNECT_TEST_USER_PASSWORD }) => {
+        cy.visit('/connexion')
 
-    const existingUser = givenUser()
-    cy.execute('createUser', existingUser)
-    const newEmail = proConnectUser.email
+        const existingUser = givenUser()
+        cy.execute('createUser', existingUser)
+        const newEmail = PROCONNECT_TEST_USER_EMAIL
 
-    cy.execute('createEmailReconciliation', {
-      expectedNewEmail: newEmail,
-      oldEmail: existingUser.email,
-    })
+        cy.execute('createEmailReconciliation', {
+          expectedNewEmail: newEmail,
+          oldEmail: existingUser.email,
+        })
 
-    // Cypress deletes some cookies on redirection between domains
-    // See https://github.com/cypress-io/cypress/issues/20476
-    // Also see https://docs.cypress.io/guides/guides/cross-origin-testing
-    // We need to intercept the request to our auth endpoint to memorize the cookies
-    // then intercept the request for our auth endpoint during callback to add the cookies back
-    let authenticationCookies: string[]
+        // Cypress deletes some cookies on redirection between domains
+        // See https://github.com/cypress-io/cypress/issues/20476
+        // Also see https://docs.cypress.io/guides/guides/cross-origin-testing
+        // We need to intercept the request to our auth endpoint to memorize the cookies
+        // then intercept the request for our auth endpoint during callback to add the cookies back
+        let authenticationCookies: string[]
 
-    cy.intercept(/\/api\/auth\/signin\/proconnect/, (request) => {
-      request.continue((response) => {
-        // Memorize our cookies
-        const responseCookies = response.headers['set-cookie']
-        authenticationCookies = Array.isArray(responseCookies)
-          ? responseCookies
-          : [responseCookies]
-      })
-    })
+        cy.intercept(/\/api\/auth\/signin\/proconnect/, (request) => {
+          request.continue((response) => {
+            // Memorize our cookies
+            const responseCookies = response.headers['set-cookie']
+            authenticationCookies = Array.isArray(responseCookies)
+              ? responseCookies
+              : [responseCookies]
+          })
+        })
 
-    cy.get('button[title="S’identifier avec ProConnect"]').click()
-    cy.url().should('contain', 'fca.integ01.dev-agentconnect.fr')
+        cy.get('button[title="S’identifier avec ProConnect"]').click()
+        cy.url().should('contain', 'fca.integ01.dev-agentconnect.fr')
 
-    cy.intercept(/\/api\/auth\/callback/, (request) => {
-      // Add our cookies back
-      request.headers.cookie = authenticationCookies.join('; ')
-    })
+        cy.intercept(/\/api\/auth\/callback/, (request) => {
+          // Add our cookies back
+          request.headers.cookie = authenticationCookies.join('; ')
+        })
 
-    cy.get('#email-input').type(`${newEmail}{enter}`)
+        cy.get('#email-input').type(`${newEmail}{enter}`)
 
-    cy.get('#password-input').type(`${proConnectUser.password}{enter}`)
+        cy.get('#password-input').type(
+          `${PROCONNECT_TEST_USER_PASSWORD}{enter}`,
+        )
 
-    // Click on the first a link .fr-tile__link
+        // Click on the first a link .fr-tile__link
 
-    cy.get('.fr-tile__link').first().click()
+        cy.get('.fr-tile__link').first().click()
 
-    // Cookies are lost in redirect (Cypress issue)
-    // https://github.com/cypress-io/cypress/issues/20476#issuecomment-1298486439
+        // Cookies are lost in redirect (Cypress issue)
+        // https://github.com/cypress-io/cypress/issues/20476#issuecomment-1298486439
 
-    cy.appUrlShouldBe('/')
+        cy.appUrlShouldBe('/')
 
-    cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
-    cy.get('.fr-header__tools').should('contain', existingUser.name)
+        cy.get('.fr-header__tools').should('not.contain', 'Se connecter')
+        cy.get('.fr-header__tools').should('contain', existingUser.name)
+      },
+    )
   })
 })

@@ -1,0 +1,144 @@
+{
+  "durations": [
+    {
+      "spec": "cypress/e2e/accessibility.cy.ts",
+      "duration": 51000
+    },
+    {
+      "spec": "cypress/e2e/authentication/existingUserCanSigninAndSignout.cy.ts",
+      "duration": 27000
+    },
+    {
+      "spec": "cypress/e2e/authentication/userCanCreateAnAccountWithEmail.cy.ts",
+      "duration": 7000
+    },
+    {
+      "spec": "cypress/e2e/authentication/userEmailReconciliation.cy.ts",
+      "duration": 16000
+    },
+    {
+      "spec": "cypress/e2e/base/baseAuthorization.cy.ts",
+      "duration": 35000
+    },
+    {
+      "spec": "cypress/e2e/base/baseCreation.cy.ts",
+      "duration": 38000
+    },
+    {
+      "spec": "cypress/e2e/base/baseDeletion.cy.ts",
+      "duration": 14000
+    },
+    {
+      "spec": "cypress/e2e/base/baseEdition.cy.ts",
+      "duration": 37000
+    },
+    {
+      "spec": "cypress/e2e/base/baseInvitation.cy.ts",
+      "duration": 33000
+    },
+    {
+      "spec": "cypress/e2e/base/baseResources.cy.ts",
+      "duration": 22000
+    },
+    {
+      "spec": "cypress/e2e/collection/addResourcesToCollection.cy.ts",
+      "duration": 33000
+    },
+    {
+      "spec": "cypress/e2e/home.cy.ts",
+      "duration": 6000
+    },
+    {
+      "spec": "cypress/e2e/news-feed/newsFeedOnboarding.cy.ts",
+      "duration": 25000
+    },
+    {
+      "spec": "cypress/e2e/onboarding.cy.ts",
+      "duration": 11000
+    },
+    {
+      "spec": "cypress/e2e/profile/profileAuthorization.cy.ts",
+      "duration": 24000
+    },
+    {
+      "spec": "cypress/e2e/profile/profileEdition.cy.ts",
+      "duration": 12000
+    },
+    {
+      "spec": "cypress/e2e/report/resourceReport.cy.ts",
+      "duration": 15000
+    },
+    {
+      "spec": "cypress/e2e/resource/avis/resourceFeedbackList.cy.ts",
+      "duration": 54000
+    },
+    {
+      "spec": "cypress/e2e/resource/avis/resourceSendFeedbacks.cy.ts",
+      "duration": 42000
+    },
+    {
+      "spec": "cypress/e2e/resource/avis/resourceViewFeedbacks.cy.ts",
+      "duration": 97000
+    },
+    {
+      "spec": "cypress/e2e/resource/edition/defaultEditionState.cy.ts",
+      "duration": 13000
+    },
+    {
+      "spec": "cypress/e2e/resource/edition/generalInfoEdition.cy.ts",
+      "duration": 31000
+    },
+    {
+      "spec": "cypress/e2e/resource/edition/linkEdition.cy.ts",
+      "duration": 21000
+    },
+    {
+      "spec": "cypress/e2e/resource/edition/sectionTitleEdition.cy.ts",
+      "duration": 18000
+    },
+    {
+      "spec": "cypress/e2e/resource/edition/textEdition.cy.ts",
+      "duration": 14000
+    },
+    {
+      "spec": "cypress/e2e/resource/registerViews/registerResourcesViews.cy.ts",
+      "duration": 10000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceAuthorization.cy.ts",
+      "duration": 50000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceCreation.cy.ts",
+      "duration": 27000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceCreationRedirection.cy.ts",
+      "duration": 2000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceDeletion.cy.ts",
+      "duration": 6000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceEditionRedirection.cy.ts",
+      "duration": 3000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceInProfil.cy.ts",
+      "duration": 5000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceInvitation.cy.ts",
+      "duration": 19000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourceParameters.cy.ts",
+      "duration": 44000
+    },
+    {
+      "spec": "cypress/e2e/resource/resourcePublication.cy.ts",
+      "duration": 25000
+    }
+  ]
+}
