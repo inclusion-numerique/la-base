@@ -16,6 +16,7 @@ export default defineConfig({
     },
   },
   video: false,
+  keystrokeDelay: 10,
   viewportWidth: 1024,
   viewportHeight: 768,
 
