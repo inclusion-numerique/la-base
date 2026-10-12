@@ -71,6 +71,8 @@ export default withBundleAnalyzerConfig(
     },
     tunnelRoute: '/monitoring',
     widenClientFileUpload: true,
+    authToken: process.env.SENTRY_CI_TOKEN,
+    release: { create: enableRelease },
     hideSourceMaps: true,
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true,
