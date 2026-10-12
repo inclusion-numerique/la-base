@@ -1,0 +1,60 @@
+---
+name: Preview
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - reopened
+      - closed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build preview
+    if: >-
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      contains(github.event.pull_request.labels.*.name, 'preview') &&
+      (github.event.action != 'labeled' || github.event.label.name == 'preview')
+    uses: ./.github/workflows/build.reusable.yml
+    with:
+      environnement: ${{ github.head_ref }}
+    secrets: inherit
+
+  deploy:
+    name: Deploy preview
+    needs: build
+    uses: ./.github/workflows/deploy.reusable.yml
+    with:
+      environnement: ${{ github.head_ref }}
+      namespace: ${{ needs.build.outputs.namespace }}
+      environnement-github: ${{ needs.build.outputs.environnement }}
+      image: ${{ needs.build.outputs.image }}
+    permissions:
+      contents: read
+      deployments: write
+    secrets: inherit
+
+  destroy:
+    name: Destroy preview
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository && (
+        (github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, 'preview')) ||
+        (github.event.action == 'unlabeled' && github.event.label.name == 'preview')
+      )
+    uses: ./.github/workflows/remove-ephemeral-env.yml
+    with:
+      branche: ${{ github.head_ref }}
+    permissions:
+      contents: read
+      deployments: write
+    secrets: inherit

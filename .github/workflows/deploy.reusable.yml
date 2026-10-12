@@ -1,0 +1,115 @@
+---
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environnement:
+        description: 'Branch whose environment to deploy'
+        type: string
+        required: true
+      namespace:
+        description: 'Namespace derived from the branch'
+        type: string
+        required: true
+      environnement-github:
+        description: 'GitHub environment name of the branch'
+        type: string
+        required: true
+      image:
+        description: 'Container image to deploy'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ inputs.environnement }}
+  cancel-in-progress: false
+
+env:
+  BRANCHE: ${{ inputs.environnement }}
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    environment:
+      name: ${{ inputs.environnement-github }}
+      url: ${{ steps.status.outputs.url }}
+    env:
+      CDK_FORCE_BRANCH: ${{ inputs.environnement }}
+      NAMESPACE: ${{ inputs.namespace }}
+      WEB_CONTAINER_IMAGE: ${{ inputs.image }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.1
+          tofu_wrapper: false
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Setup and export database password
+        run: |
+          pnpm --silent cli secrets:database:setup "$NAMESPACE"
+          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
+          echo "::add-mask::$DATABASE_PASSWORD"
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
+      - name: Create terraform variables file from environment variables
+        run: pnpm --silent cli terraform:vars-from-env web
+      - name: Deploy web app stack
+        run: pnpm --silent -F @app/cdk cdktf deploy web --var-file .tfvars.json --auto-approve --outputs-file=cdk.out.json --outputs-file-include-sensitive-outputs
+      - name: Add web stack outputs to env file
+        run: pnpm --silent cli dotenv:from-cdk web
+      - name: Mask env file values
+        uses: ./.github/actions/mask-env
+      - name: Install PostgreSQL 17 client
+        if: env.BRANCHE != 'main'
+        run: |
+          wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/postgresql-archive-keyring.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+          echo "/usr/lib/postgresql/17/bin" >> "$GITHUB_PATH"
+      - name: Import main database dump
+        if: env.BRANCHE != 'main'
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent cli backup:locally-restore-latest-main
+      - name: Migrate database
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/web prisma migrate deploy
+      - name: Load fixtures
+        if: env.BRANCHE != 'main'
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent -F @app/fixtures load
+      - name: Check that deployed container status is ok
+        id: status
+        run: |
+          set -a
+          source .env
+          set +a
+          pnpm --silent cli deployment:check-status "https://$WEB_BASE_URL"
+          echo "url=https://$WEB_BASE_URL" >> "$GITHUB_OUTPUT"

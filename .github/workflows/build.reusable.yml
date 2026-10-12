@@ -1,0 +1,91 @@
+---
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      environnement:
+        description: 'Branch whose environment the image is built for'
+        type: string
+        required: true
+    outputs:
+      namespace:
+        description: 'Namespace derived from the branch'
+        value: ${{ jobs.build.outputs.namespace }}
+      environnement:
+        description: 'GitHub environment name of the branch'
+        value: ${{ jobs.build.outputs.environnement }}
+      image:
+        description: 'Pushed container image'
+        value: ${{ jobs.build.outputs.image }}
+
+permissions:
+  contents: read
+
+env:
+  WEB_APP_DOCKER_REGISTRY: rg.fr-par.scw.cloud/la-base-web-app
+  BRANCHE: ${{ inputs.environnement }}
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+    outputs:
+      namespace: ${{ steps.namespace.outputs.namespace }}
+      environnement: ${{ steps.namespace.outputs.environnement }}
+      image: ${{ steps.namespace.outputs.image }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Compute deployment names
+        id: namespace
+        run: |
+          NAMESPACE="${BRANCHE//\//-}"
+          IMAGE_NAME="la-base-web-${NAMESPACE,,}"
+          ENVIRONNEMENT=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './packages/cdk/src/utils.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")
+          case "$ENVIRONNEMENT" in
+            ''|main|dev)
+              if [[ "$BRANCHE" != "$ENVIRONNEMENT" ]]; then
+                echo "Déploiement refusé pour « $BRANCHE » : son namespace « $ENVIRONNEMENT » est celui de main ou de dev"
+                exit 1
+              fi
+              ;;
+          esac
+          {
+            echo "namespace=$NAMESPACE"
+            echo "environnement=$ENVIRONNEMENT"
+            echo "image=$WEB_APP_DOCKER_REGISTRY/$IMAGE_NAME:${{ github.run_id }}-${{ github.run_attempt }}"
+          } >> "$GITHUB_OUTPUT"
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Add NEXT_PUBLIC variables to env file
+        env:
+          NAMESPACE: ${{ steps.namespace.outputs.namespace }}
+        run: pnpm --silent cli dotenv:add-next-public "$NAMESPACE"
+      - name: Build cache
+        uses: actions/cache@v6
+        with:
+          path: apps/web/.next/cache
+          key: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('apps/web/src/**/*.ts', 'apps/web/src/**/*.tsx') }}
+          restore-keys: ${{ runner.os }}-nextjs-deploy-${{ steps.namespace.outputs.namespace }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      - name: Build next app
+        run: SENTRY_ENABLE_RELEASE=true pnpm --silent -F @app/web build
+      - name: Build docker image
+        env:
+          IMAGE: ${{ steps.namespace.outputs.image }}
+        run: DOCKER_BUILDKIT=1 docker build --progress=plain -t "$IMAGE" -f docker/web/Dockerfile .
+      - name: Push docker image
+        env:
+          IMAGE: ${{ steps.namespace.outputs.image }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        run: |
+          echo "$SCW_SECRET_KEY" | docker login "$WEB_APP_DOCKER_REGISTRY" --username nologin --password-stdin
+          docker push "$IMAGE"

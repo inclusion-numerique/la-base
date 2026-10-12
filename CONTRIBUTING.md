@@ -260,7 +260,7 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 | Commande | Description |
 |----------|-------------|
 | `infrastructure:create <resource> <names> [--dry-run]` | Cree les ressources Scaleway manquantes (`database` ou `container`) |
-| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche le workflow GitHub Actions `Preview deletion`) |
+| `infrastructure:delete-preview <branches>` | Supprime les environnements de preview (declenche le workflow GitHub Actions `Remove ephemeral environment`) |
 | `infrastructure:inventory` | Outil interactif pour visualiser et nettoyer l'infrastructure (branches, conteneurs, BDD, buckets S3) |
 
 ### Variables d'environnement et secrets
@@ -458,14 +458,20 @@ Les workflows sont dans `.github/workflows` :
    - Deploiement du Storybook sur Chromatic
 
 2. **Deploy** (a chaque push sur `dev` et `main`, ou a la main sur ces deux branches)
-   - Build de l'application web et de l'image Docker, poussee sur le registre Scaleway
-   - Deploiement du stack web
-   - Sur `dev` : import du dump de `main`, migrations et fixtures ; sur `main` : migrations
+   - Build de l'application web et de l'image Docker, poussee sur le registre Scaleway (`build.reusable.yml`)
+   - Deploiement du stack web (`deploy.reusable.yml`)
+   - Hors `main` : import du dump de `main`, migrations et fixtures ; sur `main` : migrations
 
-3. **Preview deletion** (a la fusion d'une PR, a la suppression d'une branche, ou a la main)
-   - Destruction de l'environnement de preview de la branche, jamais de `dev` ni de `main`
+3. **Preview** (sur les pull requests portant le label `preview`)
+   - Poser le label `preview` sur une PR deploie sa branche, avec les memes briques que **Deploy**
+   - Chaque push sur la PR redeploie la preview
+   - Retirer le label, ou fermer la PR, detruit la preview
 
-4. **Dependency Review** (sur chaque pull request)
+4. **Remove ephemeral environment** (appele par **Preview**, ou a la main avec le nom de la branche)
+   - Destruction du stack de la branche, desactivation de ses deploiements, suppression de son environnement GitHub (GitHub App des Bases) et des issues Sentry de l'environnement
+   - Jamais `dev` ni `main`
+
+5. **Dependency Review** (sur chaque pull request)
 
 Le stack projet (`ProjectStack`) n'a pas de workflow : il se deploie a la main avec `pnpm -F @app/cdk cdktf deploy project`.
 

@@ -1,0 +1,109 @@
+---
+name: Remove ephemeral environment
+
+on:
+  workflow_call:
+    inputs:
+      branche:
+        description: 'Branch whose preview environment to delete'
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      branche:
+        description: 'Branch whose preview environment to delete'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: remove-ephemeral-env-${{ inputs.branche }}
+  cancel-in-progress: false
+
+jobs:
+  delete-preview:
+    name: Delete preview environment
+    if: ${{ !contains(fromJSON('["main", "dev"]'), inputs.branche) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      BRANCHE: ${{ inputs.branche }}
+      CDK_FORCE_BRANCH: ${{ inputs.branche }}
+    steps:
+      - name: Refuse to delete a protected branch environment
+        if: env.BRANCHE == '' || env.BRANCHE == 'main' || env.BRANCHE == 'dev' || startsWith(env.BRANCHE, 'refs/')
+        run: |
+          echo "Suppression refusée pour « $BRANCHE » : main et dev ne sont jamais détruits, et une valeur en refs/ signale une branche mal résolue"
+          exit 1
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: dev
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Compute environment name
+        id: environnement
+        run: echo "nom=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './packages/cdk/src/utils.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")" >> "$GITHUB_OUTPUT"
+      - name: Refuse to delete a protected environment
+        env:
+          ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
+        run: |
+          case "$ENVIRONNEMENT" in
+            ''|main|dev)
+              echo "Suppression refusée pour « $BRANCHE » : son namespace « $ENVIRONNEMENT » est celui de main ou de dev"
+              exit 1
+              ;;
+          esac
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.1
+          tofu_wrapper: false
+      - name: Secrets environment
+        uses: ./.github/actions/secrets-env
+        with:
+          scw-access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
+      - name: Create terraform variables file from environment variables
+        run: DATABASE_PASSWORD='placeholder_for_destroy' WEB_CONTAINER_IMAGE='placeholder_for_destroy' pnpm --silent cli terraform:vars-from-env web
+      - name: Destroy stack
+        run: pnpm --silent -F @app/cdk cdktf destroy web --auto-approve --var-file .tfvars.json
+      - name: Deactivate GitHub deployments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm --silent cli github:deployment:deactivate "$BRANCHE"
+      - name: Create GitHub App token
+        id: jeton
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.BASES_CI_APP_CLIENT_ID }}
+          private-key: ${{ secrets.BASES_CI_APP_PRIVATE_KEY }}
+          permission-administration: write
+      - name: Delete GitHub environment
+        env:
+          GH_TOKEN: ${{ steps.jeton.outputs.token }}
+          ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
+        run: |
+          case "$ENVIRONNEMENT" in
+            ''|main|dev)
+              echo "L'environnement « $ENVIRONNEMENT » n'est jamais supprimé"
+              exit 1
+              ;;
+          esac
+          if ! erreur=$(gh api "repos/$GITHUB_REPOSITORY/environments/$ENVIRONNEMENT" 2>&1 > /dev/null); then
+            if [[ "$erreur" == *"HTTP 404"* ]]; then
+              echo "L'environnement « $ENVIRONNEMENT » n'existe plus"
+              exit 0
+            fi
+            echo "Lecture de l'environnement « $ENVIRONNEMENT » impossible : $erreur"
+            exit 1
+          fi
+          gh api --method DELETE "repos/$GITHUB_REPOSITORY/environments/$ENVIRONNEMENT"
+          echo "Environnement « $ENVIRONNEMENT » supprimé"
+      - name: Delete Sentry environment issues
+        run: pnpm --silent cli sentry:delete-environment-issues "$BRANCHE"
