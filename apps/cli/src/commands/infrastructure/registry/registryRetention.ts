@@ -9,6 +9,13 @@ export type RegistryImage = {
   readonly name: string
 }
 
+export const retentionCount = (value: string, option: string): number => {
+  if (!/^[1-9]\d*$/.test(value)) {
+    throw new Error(`${option} must be a positive integer, got "${value}"`)
+  }
+  return Number(value)
+}
+
 export const tagsBeyondTheMostRecent = (
   tags: readonly RegistryTag[],
   kept: number,

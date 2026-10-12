@@ -7,6 +7,7 @@ import {
   orphanImages,
   type RegistryImage,
   type RegistryTag,
+  retentionCount,
   tagsBeyondTheMostRecent,
 } from './registryRetention'
 import {
@@ -78,6 +79,9 @@ export const pruneRegistry = new Command()
   .option('--keep-dev <count>', 'Number of dev tags to keep', '5')
   .option('--report <file>', 'Write the removals to a CSV file')
   .action(async ({ apply, keepMain, keepDev, report }) => {
+    const keptMainTags = retentionCount(keepMain, '--keep-main')
+    const keptDevTags = retentionCount(keepDev, '--keep-dev')
+
     const [images, branches] = await Promise.all([
       listWebAppImages(),
       remoteBranches(),
@@ -97,8 +101,8 @@ export const pruneRegistry = new Command()
     }).map((image) => ({ kind: 'image', image }))
 
     const oldTags = [
-      ...(await tagsToRemove(images, 'main', Number(keepMain))),
-      ...(await tagsToRemove(images, 'dev', Number(keepDev))),
+      ...(await tagsToRemove(images, 'main', keptMainTags)),
+      ...(await tagsToRemove(images, 'dev', keptDevTags)),
     ]
 
     const removals = [...oldTags, ...orphans]
