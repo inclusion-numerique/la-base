@@ -47,6 +47,14 @@ jobs:
           NAMESPACE="${BRANCHE//\//-}"
           IMAGE_NAME="la-base-web-${NAMESPACE,,}"
           ENVIRONNEMENT=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './packages/cdk/src/utils.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")
+          case "$ENVIRONNEMENT" in
+            ''|main|dev)
+              if [[ "$BRANCHE" != "$ENVIRONNEMENT" ]]; then
+                echo "Déploiement refusé pour « $BRANCHE » : son namespace « $ENVIRONNEMENT » est celui de main ou de dev"
+                exit 1
+              fi
+              ;;
+          esac
           {
             echo "namespace=$NAMESPACE"
             echo "environnement=$ENVIRONNEMENT"
