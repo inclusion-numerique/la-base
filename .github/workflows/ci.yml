@@ -216,7 +216,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        conteneur: [0, 1, 2]
+        conteneur: [0, 1, 2, 3, 4]
     services:
       postgres:
         image: postgres:17.11
@@ -285,7 +285,7 @@ jobs:
       - name: Run Cypress e2e tests
         uses: cypress-io/github-action@v7
         env:
-          SPLIT: 3
+          SPLIT: 5
           SPLIT_INDEX: ${{ matrix.conteneur }}
           SPLIT_FILE: timings.json
         with:
