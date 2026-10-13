@@ -415,8 +415,8 @@ infrastructure/
 | | Main (production) | Dev / Preview |
 |---|---|---|
 | **Domaine** | lesbases.anct.gouv.fr |
-| **Conteneurs** | 2 a 5 instances | 0 a 1 instance |
-| **CPU / Memoire** | 2240 mVCPU / 3072 Mo | 1120 mVCPU / 2048 Mo |
+| **Conteneurs** | 2 a 3 instances | 0 a 1 instance (s'eteint au repos) |
+| **CPU / Memoire** | 1120 mVCPU / 3072 Mo | 560 mVCPU / 2048 Mo |
 | **Email** | Brevo + Scaleway TEM | MailDev |
 | **SMTP** | smtp.tem.scw.cloud:587 | maildev.lesbases.anct.gouv.fr |
 | **Jobs planifies** | Actifs (sauvegardes, newsletters) | Desactives |

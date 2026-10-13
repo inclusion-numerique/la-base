@@ -6,9 +6,9 @@ resource "scaleway_container" "webContainer" {
   name                   = local.container_name
   namespace_id           = data.scaleway_container_namespace.containerNamespace.namespace_id
   image                  = var.WEB_CONTAINER_IMAGE
-  min_scale              = local.is_main ? 2 : var.namespace == "dev" ? 1 : 0
-  max_scale              = local.is_main ? 5 : 1
-  cpu_limit              = local.is_main ? 2240 : 1120
+  min_scale              = local.is_main ? 2 : 0
+  max_scale              = local.is_main ? 3 : 1
+  cpu_limit              = local.is_main ? 1120 : 560
   memory_limit_bytes     = local.is_main ? 3072000000 : 2048000000
   https_connections_only = true
 
