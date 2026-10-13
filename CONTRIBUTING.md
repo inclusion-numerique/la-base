@@ -268,8 +268,9 @@ L'application CLI (`pnpm cli <commande>`) fournit un ensemble de commandes pour 
 | `infrastructure:vars-from-env [web\|project]` | Genere `infrastructure/.tfvars.json` (`web`, par defaut) ou `infrastructure/project/.tfvars.json` a partir des variables d'environnement |
 | `secrets:list` | Liste tous les noms de secrets disponibles |
 | `secrets:get <name>` | Recupere la valeur d'un secret |
-| `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD pour un namespace |
+| `secrets:database:setup <namespace>` | Cree le secret de mot de passe BDD d'un namespace (`DATABASE_PASSWORD_<NAMESPACE>`, un par preview) |
 | `secrets:database-password <namespace>` | Recupere le mot de passe BDD d'un namespace |
+| `secrets:database:delete <namespace>` | Supprime le secret de mot de passe BDD d'une preview (jamais `main` ni `dev`) ; appele par **Remove ephemeral environment** |
 
 ### Execution de jobs
 
