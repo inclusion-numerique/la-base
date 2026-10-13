@@ -1,3 +1,5 @@
+import { computeBranchNamespace } from '@app/cli/branchNamespace'
+
 export type RegistryTag = {
   readonly id: string
   readonly name: string
@@ -25,7 +27,7 @@ export const tagsBeyondTheMostRecent = (
     .slice(kept)
 
 export const imageNameForBranch = (prefix: string, branch: string): string =>
-  `${prefix}${branch.replaceAll('/', '-').toLowerCase()}`
+  `${prefix}${computeBranchNamespace(branch)}`
 
 export const isProtectedImage = ({
   prefix,

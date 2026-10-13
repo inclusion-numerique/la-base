@@ -1,3 +1,4 @@
+import { computeBranchNamespace } from '@app/cli/branchNamespace'
 import {
   imageNameForBranch,
   isProtectedImage,
@@ -50,15 +51,22 @@ describe('registryRetention', () => {
   })
 
   describe('imageNameForBranch', () => {
-    it('lowercases the branch because image names must be lowercase', () => {
+    it('names the image after the namespace of the branch, like the build does', () => {
       expect(imageNameForBranch('la-base-web-', 'fix/filterLieux')).toBe(
-        'la-base-web-fix-filterlieux',
+        `la-base-web-${computeBranchNamespace('fix/filterLieux')}`,
       )
     })
 
-    it('replaces the slashes of the branch like the build does', () => {
-      expect(imageNameForBranch('la-base-web-', 'feat/export/csv')).toBe(
-        'la-base-web-feat-export-csv',
+    it('keeps the images of main and dev under their historical names', () => {
+      expect(imageNameForBranch('la-base-web-', 'main')).toBe(
+        'la-base-web-main',
+      )
+      expect(imageNameForBranch('la-base-web-', 'dev')).toBe('la-base-web-dev')
+    })
+
+    it('gives distinct images to branches that only differ by a slash or a hyphen', () => {
+      expect(imageNameForBranch('la-base-web-', 'feat/a-b')).not.toBe(
+        imageNameForBranch('la-base-web-', 'feat/a/b'),
       )
     })
   })
@@ -79,10 +87,19 @@ describe('registryRetention', () => {
     const prefix = 'la-base-web-'
     const protectedBranches = ['main', 'dev']
 
-    it('protects a branch whose image name is the one of main once normalized', () => {
+    it('protects the images of main and dev', () => {
+      expect(
+        isProtectedImage({ prefix, branch: 'main', protectedBranches }),
+      ).toBe(true)
+      expect(
+        isProtectedImage({ prefix, branch: 'dev', protectedBranches }),
+      ).toBe(true)
+    })
+
+    it('does not mistake a branch spelled like main for main, as their images differ', () => {
       expect(
         isProtectedImage({ prefix, branch: 'MAIN', protectedBranches }),
-      ).toBe(true)
+      ).toBe(false)
     })
 
     it('does not protect a preview branch', () => {
@@ -100,8 +117,8 @@ describe('registryRetention', () => {
       const images = [
         image(`${prefix}main`),
         image(`${prefix}dev`),
-        image(`${prefix}feat-ouverte`),
-        image(`${prefix}fix-supprimee`),
+        image(imageNameForBranch(prefix, 'feat/ouverte')),
+        image(imageNameForBranch(prefix, 'fix/supprimee')),
       ]
 
       expect(
@@ -111,7 +128,7 @@ describe('registryRetention', () => {
           branches: ['main', 'feat/ouverte'],
           permanentBranches: ['main', 'dev'],
         }).map(({ name }) => name),
-      ).toEqual([`${prefix}fix-supprimee`])
+      ).toEqual([imageNameForBranch(prefix, 'fix/supprimee')])
     })
 
     it('ignores the images that do not belong to the web application', () => {

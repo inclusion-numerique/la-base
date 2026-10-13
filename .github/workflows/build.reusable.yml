@@ -9,9 +9,6 @@ on:
         type: string
         required: true
     outputs:
-      namespace:
-        description: 'Namespace derived from the branch'
-        value: ${{ jobs.build.outputs.namespace }}
       environnement:
         description: 'GitHub environment name of the branch'
         value: ${{ jobs.build.outputs.environnement }}
@@ -31,7 +28,6 @@ jobs:
     name: Build image
     runs-on: ubuntu-latest
     outputs:
-      namespace: ${{ steps.namespace.outputs.namespace }}
       environnement: ${{ steps.namespace.outputs.environnement }}
       image: ${{ steps.namespace.outputs.image }}
     steps:
@@ -46,8 +42,8 @@ jobs:
         id: namespace
         run: |
           NAMESPACE="${BRANCHE//\//-}"
-          IMAGE_NAME="la-base-web-${NAMESPACE,,}"
           ENVIRONNEMENT=$(./apps/cli/node_modules/.bin/tsx -e "import { computeBranchNamespace } from './apps/cli/src/branchNamespace.ts'; console.log(computeBranchNamespace(process.env.BRANCHE ?? ''))")
+          IMAGE_NAME="la-base-web-$ENVIRONNEMENT"
           case "$ENVIRONNEMENT" in
             ''|main|dev)
               if [[ "$BRANCHE" != "$ENVIRONNEMENT" ]]; then
