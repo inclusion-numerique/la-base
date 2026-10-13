@@ -9,13 +9,19 @@ export const deleteDatabaseSecret = new Command()
   .description('Delete the database password secret of a preview namespace')
   .addArgument(new Argument('<namespace>', 'Namespace of the preview'))
   .action(async (namespace) => {
-    if (['', 'main', 'dev'].includes(namespace)) {
+    const secretName = databasePasswordSecretName(namespace)
+
+    if (
+      namespace.trim() === '' ||
+      [
+        databasePasswordSecretName('main'),
+        databasePasswordSecretName('dev'),
+      ].includes(secretName)
+    ) {
       throw new Error(
-        `The database password secret of "${namespace}" is never deleted`,
+        `The database password secret of "${namespace}" (${secretName}) is never deleted`,
       )
     }
-
-    const secretName = databasePasswordSecretName(namespace)
     const { secrets } = await listSecrets()
     const secret = secrets.find(({ name }) => name === secretName)
 
