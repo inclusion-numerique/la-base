@@ -170,11 +170,11 @@ describe("Ajout d'un avis sur une ressource", () => {
     cy.contains('Partager mon avis').click()
     cy.wait('@feedback')
 
-    cy.testId('delete-feedback')
-      .filter(':visible')
-      .first()
-      .click({ force: true })
-    cy.get('dialog button').contains('Supprimer').click({ force: true })
+    cy.testId('delete-feedback').filter(':visible').first().click()
+    cy.get('dialog#delete-resource-feedback')
+      .should('be.visible')
+      .contains('button', 'Supprimer')
+      .click()
     cy.wait('@deleteFeedback')
       .its('response')
       .then((response) => {
@@ -184,5 +184,7 @@ describe("Ajout d'un avis sur une ressource", () => {
       })
 
     cy.getToast('Avis supprimé')
+    cy.get('dialog#delete-resource-feedback').should('not.exist')
+    cy.testId('resource-feedback').should('not.exist')
   })
 })

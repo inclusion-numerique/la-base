@@ -101,20 +101,20 @@ const ResourceFeedback = ({
   const onDelete = async () => {
     try {
       await mutate.mutateAsync({ resourceId: feedback.resourceId })
-
-      closeDeleteModal()
-      router.refresh()
-
-      createToast({
-        priority: 'success',
-        message: 'Avis supprimé',
-      })
     } catch {
       createToast({
         priority: 'error',
         message: "Votre avis n'a pas pu être supprimé",
       })
+      return
     }
+
+    createToast({
+      priority: 'success',
+      message: 'Avis supprimé',
+    })
+    router.refresh()
+    closeDeleteModal()
   }
 
   return (
@@ -196,24 +196,26 @@ const ResourceFeedback = ({
           </div>
         )}
       </div>
-      <DeleteModal
-        title="Supprimer votre avis"
-        buttons={[
-          {
-            children: 'Annuler',
-            priority: 'secondary',
-            disabled: isLoading,
-            onClick: closeDeleteModal,
-          },
-          {
-            children: 'Supprimer',
-            ...buttonLoadingClassname(isLoading, 'fr-btn--danger'),
-            onClick: () => onDelete(),
-          },
-        ]}
-      >
-        Êtes-vous sûr de vouloir supprimer votre avis sur cette ressource ?
-      </DeleteModal>
+      {isOwner && (
+        <DeleteModal
+          title="Supprimer votre avis"
+          buttons={[
+            {
+              children: 'Annuler',
+              priority: 'secondary',
+              disabled: isLoading,
+              onClick: closeDeleteModal,
+            },
+            {
+              children: 'Supprimer',
+              ...buttonLoadingClassname(isLoading, 'fr-btn--danger'),
+              onClick: () => onDelete(),
+            },
+          ]}
+        >
+          Êtes-vous sûr de vouloir supprimer votre avis sur cette ressource ?
+        </DeleteModal>
+      )}
     </article>
   )
 }
