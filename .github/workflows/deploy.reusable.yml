@@ -8,10 +8,6 @@ on:
         description: 'Branch whose environment to deploy'
         type: string
         required: true
-      namespace:
-        description: 'Namespace derived from the branch'
-        type: string
-        required: true
       environnement-github:
         description: 'GitHub environment name of the branch'
         type: string
@@ -42,7 +38,6 @@ jobs:
       name: ${{ inputs.environnement-github }}
       url: ${{ steps.status.outputs.url }}
     env:
-      NAMESPACE: ${{ inputs.namespace }}
       ENVIRONNEMENT: ${{ inputs.environnement-github }}
       WEB_CONTAINER_IMAGE: ${{ inputs.image }}
     steps:
@@ -60,8 +55,8 @@ jobs:
           scw-secret-key: ${{ secrets.SCW_SECRET_KEY }}
       - name: Setup and export database password
         run: |
-          pnpm --silent cli secrets:database:setup "$NAMESPACE"
-          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$NAMESPACE")
+          pnpm --silent cli secrets:database:setup "$ENVIRONNEMENT"
+          DATABASE_PASSWORD=$(pnpm --silent cli secrets:database-password "$ENVIRONNEMENT")
           echo "::add-mask::$DATABASE_PASSWORD"
           echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> "$GITHUB_ENV"
       - name: Create infrastructure variables file from environment variables

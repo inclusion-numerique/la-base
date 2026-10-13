@@ -15,6 +15,8 @@ Resources shared by every environment (database instance, container namespace, r
 - DNS record and container domain (`dns.tf`)
 - Job cron triggers of `main` (`jobs.tf`, UTC schedules in `locals.tf`)
 
+The namespace of an environment is `main`, `dev`, or for a preview the slug of its branch followed by six letters derived from the whole branch name (`apps/cli/src/branchNamespace.ts`), so that two branches never share resources. It also names the container image and the database password secret.
+
 The state of each environment is stored in the `la-base-terraform-state` bucket under the `la-base-web-<namespace>.tfstate` key, passed to `tofu init` with `-backend-config`.
 
 ## Bootstrap of a new project

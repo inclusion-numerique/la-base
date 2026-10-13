@@ -73,7 +73,6 @@ jobs:
     uses: ./.github/workflows/deploy.reusable.yml
     with:
       environnement: dev
-      namespace: ${{ needs.build-dev.outputs.namespace }}
       environnement-github: ${{ needs.build-dev.outputs.environnement }}
       image: ${{ needs.build-dev.outputs.image }}
     permissions:
@@ -93,7 +92,6 @@ jobs:
     uses: ./.github/workflows/deploy.reusable.yml
     with:
       environnement: main
-      namespace: ${{ needs.build-production.outputs.namespace }}
       environnement-github: ${{ needs.build-production.outputs.environnement }}
       image: ${{ needs.build-production.outputs.image }}
     permissions:

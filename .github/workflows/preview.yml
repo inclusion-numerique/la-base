@@ -36,7 +36,6 @@ jobs:
     uses: ./.github/workflows/deploy.reusable.yml
     with:
       environnement: ${{ github.head_ref }}
-      namespace: ${{ needs.build.outputs.namespace }}
       environnement-github: ${{ needs.build.outputs.environnement }}
       image: ${{ needs.build.outputs.image }}
     permissions:
