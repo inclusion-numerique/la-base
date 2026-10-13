@@ -16,7 +16,7 @@
     "dev": "pnpm -r --parallel dev",
     "format": "prettier --write \"**/*.{ts,tsx,md,css}\"",
     "lint": "pnpm -r lint",
-    "tsc": "pnpm -F @app/cdk generate && pnpm -r tsc",
+    "tsc": "pnpm -r tsc",
     "test": "pnpm -r test",
     "test:integration": "pnpm -F web test:integration",
     "test:e2e": "pnpm -F e2e cy open",

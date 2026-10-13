@@ -39,7 +39,6 @@ Licence : [AGPL-3.0-or-later](./LICENSE)
 
 | Dossier | Description |
 |---------|-------------|
-| [cdk](packages/cdk) | Infrastructure as Code avec Terraform CDK (CDKTF) pour Scaleway |
 | [config](packages/config) | Configuration des services via variables d'environnement |
 | [e2e](packages/e2e) | Tests end-to-end avec Cypress |
 | [emails](packages/emails) | Templates d'emails (MJML / React) |
@@ -343,7 +342,7 @@ pnpm cli backup:locally-restore-latest-main -d 2025-01-15
 
 ## Infrastructure (OpenTofu)
 
-L'infrastructure est decrite en HCL dans `infrastructure/`, executee avec [OpenTofu](https://opentofu.org) 1.13 et deployee sur **Scaleway** (region `fr-par`).
+L'infrastructure est decrite en HCL dans `infrastructure/`, executee avec [OpenTofu](https://opentofu.org) 1.13 et deployee sur **Scaleway** (region `fr-par`). Pour lire un plan en local, installer [OpenTofu](https://opentofu.org/docs/intro/install/) 1.13 et suivre `infrastructure/README.md`.
 
 ### Architecture a deux stacks
 
@@ -528,7 +527,7 @@ Tout incident de securite, ou toute vulnerabilite decouverte, se signale et se t
 ### Infrastructure et deploiement
 
 - [Scaleway](https://www.scaleway.com/) - Hebergement cloud
-- [CDKTF](https://developer.hashicorp.com/terraform/cdktf) - Infrastructure as Code (TypeScript)
+- [OpenTofu](https://opentofu.org/) - Infrastructure as Code (HCL)
 - [Docker](https://www.docker.com/) - Conteneurisation
 - [GitHub Actions](https://docs.github.com/actions) - CI/CD
 

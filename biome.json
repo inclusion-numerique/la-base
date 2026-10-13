@@ -14,8 +14,7 @@
       "**",
       "!**/var",
       "!**/apps/web/.next",
-      "!**/apps/web/public",
-      "!**/packages/cdk/.gen"
+      "!**/apps/web/public"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
@@ -238,10 +237,8 @@
       "!packages/e2e/cypress/videos",
       "!packages/e2e/cypress/screenshots",
       "!packages/e2e/.next/",
-      "!packages/cdk/cdktf.out/",
       "!**/terraform.*.tfstate",
       "!**/.terraform.*",
-      "!**/packages/cdk/cdk.out.json",
       "!packages/ui/.next",
       "!packages/ui/public/dsfr"
     ]

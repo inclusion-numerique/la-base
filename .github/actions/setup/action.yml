@@ -27,14 +27,6 @@ runs:
       shell: bash
       env:
         CYPRESS_INSTALL_BINARY: '0'
-    - name: Cache cdktf provider bindings
-      uses: actions/cache@v6
-      with:
-        path: packages/cdk/.gen
-        key: cdktf-bindings-${{ runner.os }}-${{ hashFiles('packages/cdk/cdktf.json', 'packages/cdk/scripts/generate-bindings.sh', 'pnpm-lock.yaml') }}
-    - name: Generate cdktf provider bindings
-      run: pnpm --silent -F @app/cdk generate
-      shell: bash
     - name: Cache Cypress binary
       if: inputs.cypress == 'true'
       uses: actions/cache@v6
