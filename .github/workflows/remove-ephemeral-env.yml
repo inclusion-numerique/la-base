@@ -73,6 +73,10 @@ jobs:
         env:
           ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
         run: pnpm --silent with-env tofu -chdir=infrastructure destroy -input=false -auto-approve -var-file=.tfvars.json -var "branch=$BRANCHE" -var "namespace=$ENVIRONNEMENT"
+      - name: Delete database password secret
+        env:
+          ENVIRONNEMENT: ${{ steps.environnement.outputs.nom }}
+        run: pnpm --silent cli secrets:database:delete "$ENVIRONNEMENT"
       - name: Deactivate GitHub deployments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
