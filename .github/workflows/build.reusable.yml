@@ -22,6 +22,8 @@ permissions:
 env:
   WEB_APP_DOCKER_REGISTRY: rg.fr-par.scw.cloud/la-base-web-app
   BRANCHE: ${{ inputs.environnement }}
+  # Lue par l'application (PublicWebAppConfig) pendant `next build`
+  BRANCH: ${{ inputs.environnement }}
 
 jobs:
   build:
