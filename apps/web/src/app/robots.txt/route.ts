@@ -1,27 +1,19 @@
 import { PublicWebAppConfig } from '@app/web/PublicWebAppConfig'
 
-// Calculé à chaque requête : prérendu au build, le fichier dépendait de la
-// variable BRANCH de l'environnement de build et bloquait toute la production
-// quand elle était absente. Le conteneur, lui, connaît toujours sa branche.
+// Dynamique : dépend de la branche du conteneur, pas de celle du build
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
-const headers = {
+const robotsHeaders = {
   'Content-Type': 'text/plain; charset=utf-8',
   'Cache-Control': 'public, max-age=3600',
 }
 
-// Disallow indexing of preview environments
+// Hors production (previews, dev, local), rien n'est exploré
 export const GET = () =>
-  PublicWebAppConfig.isMain
-    ? new Response(
-        `User-agent: *
-Allow: /
+  new Response(
+    `User-agent: *
+${PublicWebAppConfig.isMain ? 'Allow' : 'Disallow'}: /
 `,
-        { headers },
-      )
-    : new Response(
-        `User-agent: *
-Disallow: /
-`,
-        { headers },
-      )
+    { headers: robotsHeaders },
+  )
