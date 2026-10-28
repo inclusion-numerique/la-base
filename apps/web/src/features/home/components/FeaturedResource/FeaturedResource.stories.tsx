@@ -1,4 +1,7 @@
-import { resource } from '@app/web/components/Resource/Cards/cardsStoriesHelpers'
+import {
+  resource,
+  updated,
+} from '@app/web/components/Resource/Cards/cardsStoriesHelpers'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import {
   FeaturedResource,
@@ -36,6 +39,24 @@ export const PublishedInBase: Story = {
 }
 PublishedInBase.storyName =
   "Page d'accueil - Ressource à la une publiée dans une base"
+
+export const UpdatedInBase: Story = {
+  args: {
+    resource: {
+      ...FEATURED_RESSOURCE,
+      lastPublished: updated,
+      updated,
+    },
+    user: null,
+  },
+  render: (args) => (
+    <div style={{ width: '380px' }}>
+      <FeaturedResource {...args} />
+    </div>
+  ),
+}
+UpdatedInBase.storyName =
+  "Page d'accueil - Ressource à la une mise à jour après publication"
 
 export const PublishedInProfileProfile: Story = {
   args: {
