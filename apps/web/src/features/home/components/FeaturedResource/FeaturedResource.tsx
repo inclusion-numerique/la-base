@@ -1,9 +1,9 @@
 import type { SessionUser } from '@app/web/auth/sessionUser'
 import BaseImage from '@app/web/components/BaseImage'
 import { CropText } from '@app/web/components/CropText/CropText'
+import ResourceDates from '@app/web/components/Resource/ResourceDates'
 import RoundProfileImage from '@app/web/components/RoundProfileImage'
 import type { ResourceListItem } from '@app/web/server/resources/getResourcesList'
-import { dateAsDay } from '@app/web/utils/dateAsDay'
 import Link from 'next/link'
 
 export type FeaturedResourceProps = {
@@ -56,7 +56,16 @@ const ProfileMetadata = ({
 )
 
 export const FeaturedResource = ({
-  resource: { title, slug, published, base, createdBy },
+  resource: {
+    title,
+    slug,
+    published,
+    lastPublished,
+    created,
+    updated,
+    base,
+    createdBy,
+  },
   user,
 }: FeaturedResourceProps) => (
   <div className="fr-border-top fr-enlarge-link fr-no-hover-bg fr-flex fr-direction-column">
@@ -78,9 +87,13 @@ export const FeaturedResource = ({
       )}
     </div>
     {!!published && (
-      <span className="fr-text--xs fr-mb-0" style={{ order: 3 }}>
-        Publiée&nbsp;le&nbsp;{dateAsDay(new Date(published))}
-      </span>
+      <div style={{ order: 3 }}>
+        <ResourceDates
+          canEdit={false}
+          resource={{ published, lastPublished, created, updated }}
+          onlyUpdatedDate={false}
+        />
+      </div>
     )}
   </div>
 )
