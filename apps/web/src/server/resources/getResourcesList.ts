@@ -2,6 +2,10 @@ import type { SessionUser } from '@app/web/auth/sessionUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { getResourcesOrderBy } from '@app/web/server/resources/getResourcesOrderBy'
 import { getResourcesSearchBy } from '@app/web/server/resources/getResourcesSearchBy'
+import {
+  countResourcesByTab,
+  getResourcesTabWhere,
+} from '@app/web/server/resources/resourcesByTab'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import {
   type Category,
@@ -383,7 +387,11 @@ export const getProfileResources = async (
       }
     : {}
 
-  const where = { ...baseWhere, ...searchWhere }
+  const where = {
+    ...baseWhere,
+    ...searchWhere,
+    ...getResourcesTabWhere(paginationParams?.tab),
+  }
 
   const skip = paginationParams
     ? (paginationParams.page - 1) * paginationParams.perPage
@@ -415,6 +423,16 @@ export const getProfileResourcesCount = async (
     where,
   })
 }
+
+export const getProfileResourcesCountByTab = (
+  profileId: string,
+  user: Pick<SessionUser, 'id'> | null,
+  searchTerm?: string,
+) =>
+  countResourcesByTab({
+    ...computeResourcesListWhereForUserAndProfile(profileId, user),
+    ...getResourcesSearchBy(searchTerm),
+  })
 
 export type ResourceListItem = Awaited<
   ReturnType<typeof getProfileResources>
