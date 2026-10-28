@@ -10,8 +10,10 @@ import { getResourceProjectionWithContext } from '@app/web/server/resources/getR
 import {
   getProfileResources,
   getProfileResourcesCount,
+  getProfileResourcesCountByTab,
 } from '@app/web/server/resources/getResourcesList'
 import {
+  defaultResourcesTab,
   paginationParamsToUrlQueryParams,
   sanitizeUrlPaginationParams,
   UrlPaginationParams,
@@ -31,16 +33,23 @@ const ProfilePage = async ({
   // Auth and profile has been checked in layout
   const { profile, user, authorization } = await getProfilePageContext(slug)
 
-  const [resources, totalCount] = await Promise.all([
-    getProfileResources(profile.id, user, paginationParams),
-    getProfileResourcesCount(profile.id, user, paginationParams.search),
-  ])
-
   const isAdmin = user?.role === 'Admin'
   const isOwner = authorization.hasRole(ProfileRoles.ProfileOwner)
   const canWrite = isAdmin
     ? isOwner
     : authorization.hasPermission(ProfilePermissions.WriteProfile)
+
+  const tab = canWrite
+    ? (paginationParams.tab ?? defaultResourcesTab)
+    : undefined
+
+  const [resources, totalCount, tabCounts] = await Promise.all([
+    getProfileResources(profile.id, user, { ...paginationParams, tab }),
+    getProfileResourcesCount(profile.id, user, paginationParams.search),
+    canWrite
+      ? getProfileResourcesCountByTab(profile.id, user, paginationParams.search)
+      : null,
+  ])
 
   // Array of resources with their draft if they are in draft state
   const ressourcesAndDrafts = await Promise.all(
@@ -73,6 +82,7 @@ const ProfilePage = async ({
     if (urlParams.page) params.set('page', urlParams.page as string)
     if (urlParams.tri) params.set('tri', urlParams.tri as string)
     if (urlParams.search) params.set('search', urlParams.search as string)
+    if (urlParams.onglet) params.set('onglet', urlParams.onglet as string)
     const query = params.toString()
     return `/profils/${slug}${query ? `?${query}` : ''}`
   }
@@ -82,7 +92,7 @@ const ProfilePage = async ({
   ) : (
     <ResourcesPagination
       paginationParams={paginationParams}
-      count={totalCount}
+      count={tab && tabCounts ? tabCounts[tab] : totalCount}
       createPageLink={createPageLink}
     >
       <Resources
@@ -95,6 +105,7 @@ const ProfilePage = async ({
         slug={slug}
         baseId={null}
         totalCount={totalCount}
+        tabCounts={tabCounts}
       />
     </ResourcesPagination>
   )

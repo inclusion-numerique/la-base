@@ -4,9 +4,11 @@ import Resources from '@app/web/components/Resource/List/Resources'
 import ResourcesPagination from '@app/web/components/Resource/ResourcesPagination'
 import {
   getBaseResourcesCount,
+  getBaseResourcesCountByTab,
   getBaseResourcesPaginated,
 } from '@app/web/server/bases/getBase'
 import {
+  defaultResourcesTab,
   paginationParamsToUrlQueryParams,
   sanitizeUrlPaginationParams,
   UrlPaginationParams,
@@ -30,21 +32,6 @@ const BaseResourcesPage = async ({
     isUsingShareToken,
   } = await getBasePageContext(slug)
 
-  const [resources, totalCount] = await Promise.all([
-    getBaseResourcesPaginated(
-      base.id,
-      user,
-      paginationParams,
-      isUsingShareToken,
-    ),
-    getBaseResourcesCount(
-      base.id,
-      user,
-      paginationParams.search,
-      isUsingShareToken,
-    ),
-  ])
-
   const { id, members, createdById } = base
 
   const isAdmin = user?.role === 'Admin'
@@ -57,6 +44,33 @@ const BaseResourcesPage = async ({
     ? isBaseCreator || isBaseMember
     : hasPermission('WriteBase')
 
+  const tab = canWrite
+    ? (paginationParams.tab ?? defaultResourcesTab)
+    : undefined
+
+  const [resources, totalCount, tabCounts] = await Promise.all([
+    getBaseResourcesPaginated(
+      base.id,
+      user,
+      { ...paginationParams, tab },
+      isUsingShareToken,
+    ),
+    getBaseResourcesCount(
+      base.id,
+      user,
+      paginationParams.search,
+      isUsingShareToken,
+    ),
+    canWrite
+      ? getBaseResourcesCountByTab(
+          base.id,
+          user,
+          paginationParams.search,
+          isUsingShareToken,
+        )
+      : null,
+  ])
+
   const createPageLink = (page: number) => {
     const urlParams = paginationParamsToUrlQueryParams({
       ...paginationParams,
@@ -66,6 +80,7 @@ const BaseResourcesPage = async ({
     if (urlParams.page) params.set('page', urlParams.page as string)
     if (urlParams.tri) params.set('tri', urlParams.tri as string)
     if (urlParams.search) params.set('search', urlParams.search as string)
+    if (urlParams.onglet) params.set('onglet', urlParams.onglet as string)
     const query = params.toString()
     return `/bases/${slug}/ressources${query ? `?${query}` : ''}`
   }
@@ -75,7 +90,7 @@ const BaseResourcesPage = async ({
   ) : (
     <ResourcesPagination
       paginationParams={paginationParams}
-      count={totalCount}
+      count={tab && tabCounts ? tabCounts[tab] : totalCount}
       createPageLink={createPageLink}
     >
       <Resources
@@ -87,6 +102,7 @@ const BaseResourcesPage = async ({
         canWrite={canWrite}
         baseId={id}
         totalCount={totalCount}
+        tabCounts={tabCounts}
         token={slug}
       />
     </ResourcesPagination>

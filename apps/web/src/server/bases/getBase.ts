@@ -9,6 +9,10 @@ import {
 } from '@app/web/server/resources/getResourcesList'
 import { getResourcesOrderBy } from '@app/web/server/resources/getResourcesOrderBy'
 import { getResourcesSearchBy } from '@app/web/server/resources/getResourcesSearchBy'
+import {
+  countResourcesByTab,
+  getResourcesTabWhere,
+} from '@app/web/server/resources/resourcesByTab'
 import { PaginationParams } from '@app/web/server/search/searchQueryParams'
 import type { Prisma } from '@prisma/client'
 import { HighlightResourcesType } from '@prisma/client'
@@ -321,7 +325,11 @@ export const getBaseResourcesPaginated = async (
       }
     : {}
 
-  const where = { ...baseWhere, ...searchWhere }
+  const where = {
+    ...baseWhere,
+    ...searchWhere,
+    ...getResourcesTabWhere(paginationParams.tab),
+  }
 
   const skip = (paginationParams.page - 1) * paginationParams.perPage
   const take = paginationParams.perPage
@@ -356,3 +364,15 @@ export const getBaseResourcesCount = async (
     where,
   })
 }
+
+export const getBaseResourcesCountByTab = (
+  baseId: string,
+  user: Pick<SessionUser, 'id'> | null,
+  searchTerm?: string,
+  isFromShareableLink = false,
+) =>
+  countResourcesByTab({
+    ...computeResourcesListWhereForUser(user, {}, isFromShareableLink),
+    baseId,
+    ...getResourcesSearchBy(searchTerm),
+  })

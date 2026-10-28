@@ -17,12 +17,47 @@ import ResourcesSearch from '@app/web/components/Resource/ResourcesSearch'
 import SaveResourceInCollectionModal from '@app/web/components/Resource/SaveResourceInCollectionModal'
 import ShareLinkModal from '@app/web/features/shareableLink/components/ShareLinkModal'
 import type { BaseResource } from '@app/web/server/bases/getBase'
-import { PaginationParams } from '@app/web/server/search/searchQueryParams'
+import {
+  defaultResourcesTab,
+  PaginationParams,
+  paginationParamsToUrl,
+  type ResourcesTab,
+} from '@app/web/server/search/searchQueryParams'
 import { numberToString } from '@app/web/utils/formatNumber'
 import { Tabs } from '@codegouvfr/react-dsfr/Tabs'
-import { useMemo } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import InviteContributorModal from '../Contributors/InviteContributorModal'
 import styles from './Resources.module.css'
+
+const tabs = [
+  {
+    tabId: 'publiques',
+    label: 'Publiques',
+    iconId: 'fr-icon-earth-line',
+    emptyText: "Vous n'avez pas de ressources publiques.",
+    'data-testid': 'resources-public-tab',
+  },
+  {
+    tabId: 'privees',
+    label: 'Privées',
+    iconId: 'fr-icon-lock-line',
+    emptyText: "Vous n'avez pas de ressources privées.",
+    'data-testid': 'resources-private-tab',
+  },
+  {
+    tabId: 'brouillons',
+    label: 'Brouillons',
+    iconId: 'fr-icon-draft-line',
+    emptyText: "Vous n'avez pas de brouillons.",
+    'data-testid': 'resources-draft-tab',
+  },
+] as const satisfies {
+  tabId: ResourcesTab
+  label: string
+  iconId: string
+  emptyText: string
+  'data-testid': string
+}[]
 
 const Resources = ({
   isOwner = false,
@@ -34,6 +69,7 @@ const Resources = ({
   paginationParams,
   slug,
   totalCount,
+  tabCounts,
   token,
 }: {
   isOwner?: boolean
@@ -45,27 +81,24 @@ const Resources = ({
   paginationParams: PaginationParams
   slug: string
   totalCount: number
+  tabCounts?: Record<ResourcesTab, number> | null
   token?: string
 }) => {
-  const drafts = useMemo(
-    () => resources.filter((resource) => resource.published === null),
-    [resources],
-  )
-  const publics = useMemo(
-    () =>
-      resources.filter(
-        (resource) => resource.isPublic === true && resource.published !== null,
-      ),
-    [resources],
-  )
-  const privates = useMemo(
-    () =>
-      resources.filter(
-        (resource) =>
-          resource.isPublic === false && resource.published !== null,
-      ),
-    [resources],
-  )
+  const router = useRouter()
+  const pathname = usePathname()
+  const selectedTab =
+    tabs.find(
+      ({ tabId }) => tabId === (paginationParams.tab ?? defaultResourcesTab),
+    ) ?? tabs[0]
+
+  const onTabChange = (tabId: string) => {
+    const query = paginationParamsToUrl({
+      ...paginationParams,
+      tab: tabId as ResourcesTab,
+      page: 1,
+    })
+    router.push(`${pathname}${query ? `?${query}` : ''}`)
+  }
 
   return (
     <div data-testid="resources-list">
@@ -115,69 +148,31 @@ const Resources = ({
           />
         </div>
       )}
-      {canWrite ? (
+      {canWrite && tabCounts ? (
         <Tabs
-          tabs={[
-            {
-              label: (
-                <>
-                  Publiques · {publics.length}{' '}
-                  <span className="fr-sr-only">
-                    ressource{sPluriel(publics.length)}
-                  </span>
-                </>
-              ),
-              iconId: 'fr-icon-earth-line',
-              content: (
-                <ResourceTab
-                  resources={publics}
-                  user={user}
-                  emptyText="Vous n'avez pas de ressources publiques."
-                  data-testid="resources-public-tab"
-                />
-              ),
-            },
-            {
-              label: (
-                <>
-                  Privées · {privates.length}{' '}
-                  <span className="fr-sr-only">
-                    ressource{sPluriel(privates.length)}
-                  </span>
-                </>
-              ),
-              iconId: 'fr-icon-lock-line',
-              content: (
-                <ResourceTab
-                  resources={privates}
-                  user={user}
-                  emptyText="Vous n'avez pas de ressources privées."
-                  data-testid="resources-private-tab"
-                />
-              ),
-            },
-            {
-              label: (
-                <>
-                  Brouillons · {drafts.length}{' '}
-                  <span className="fr-sr-only">
-                    ressource{sPluriel(drafts.length)}
-                  </span>
-                </>
-              ),
-              iconId: 'fr-icon-draft-line',
-              content: (
-                <ResourceTab
-                  resources={drafts}
-                  user={user}
-                  emptyText="Vous n'avez pas de brouillons."
-                  data-testid="resources-draft-tab"
-                  isDraft
-                />
-              ),
-            },
-          ]}
-        />
+          selectedTabId={selectedTab.tabId}
+          onTabChange={onTabChange}
+          tabs={tabs.map(({ tabId, label, iconId }) => ({
+            tabId,
+            iconId,
+            label: (
+              <>
+                {label} · {tabCounts[tabId]}{' '}
+                <span className="fr-sr-only">
+                  ressource{sPluriel(tabCounts[tabId])}
+                </span>
+              </>
+            ),
+          }))}
+        >
+          <ResourceTab
+            resources={resources}
+            user={user}
+            emptyText={selectedTab.emptyText}
+            data-testid={selectedTab['data-testid']}
+            isDraft={selectedTab.tabId === 'brouillons'}
+          />
+        </Tabs>
       ) : (
         <CardList ariaLabel="Liste des ressources">
           {resources.map((resource) => (

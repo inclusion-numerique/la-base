@@ -23,6 +23,10 @@ export const searchTabFromString = (
     : 'ressources'
 }
 
+export const resourcesTabs = ['publiques', 'privees', 'brouillons'] as const
+export type ResourcesTab = (typeof resourcesTabs)[number]
+export const defaultResourcesTab: ResourcesTab = 'publiques'
+
 // We need a segment, even when there is no active search term
 export const searchSegmentAll = 'tout'
 
@@ -117,6 +121,7 @@ export type UrlPaginationParams = {
   page?: string | string[] | null
   tri?: string | string[] | null
   search?: string | string[] | null
+  onglet?: string | string[] | null
 }
 
 // Cleaned params for use in domain logic
@@ -134,6 +139,7 @@ export type PaginationParams = {
   perPage: number
   sort: Sorting
   search?: string
+  tab?: ResourcesTab
 }
 
 export const defaultSearchParams: Readonly<SearchParams> = {
@@ -232,11 +238,16 @@ export const sanitizeUrlPaginationParams = (
       ? params.search.trim() || undefined
       : undefined
 
+  const tab = resourcesTabs.includes(params?.onglet as ResourcesTab)
+    ? (params?.onglet as ResourcesTab)
+    : undefined
+
   return {
     page: page > 0 ? page : 1,
     perPage: defaultPaginationParams.perPage,
     sort,
     search,
+    tab,
   }
 }
 
@@ -263,6 +274,8 @@ export const paginationParamsToUrlQueryParams = (
   page: params.page > 1 ? params.page.toString(10) : undefined,
   tri: params.sort === 'pertinence' ? undefined : params.sort,
   search: params.search || undefined,
+  onglet:
+    params.tab && params.tab !== defaultResourcesTab ? params.tab : undefined,
 })
 
 const objectToQueryString = (params: Record<string, unknown>): string => {
