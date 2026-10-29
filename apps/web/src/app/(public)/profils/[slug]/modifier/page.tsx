@@ -6,6 +6,7 @@ import Breadcrumbs from '@app/web/components/Breadcrumbs'
 import ProfilEdition from '@app/web/components/Profile/Edition/ProfileEdition'
 import SkipLinksPortal from '@app/web/components/SkipLinksPortal'
 import { getProfilePageQuery } from '@app/web/server/profiles/getProfile'
+import { getReportEmailNotifications } from '@app/web/server/profiles/getReportEmailNotifications'
 import { getProfileResources } from '@app/web/server/resources/getResourcesList'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
@@ -34,6 +35,9 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
   }
 
   const resources = await getProfileResources(profile.id, user)
+  const reportEmailNotifications = isOwner
+    ? await getReportEmailNotifications(user)
+    : null
 
   return (
     <>
@@ -49,7 +53,11 @@ const ProfilEditionPage = async ({ params }: ProfilRouteParams) => {
           currentPage="Modifier"
         />
         <div className="fr-mt-6w fr-mb-4w">
-          <ProfilEdition profile={profile} resources={resources} />
+          <ProfilEdition
+            profile={profile}
+            resources={resources}
+            reportEmailNotifications={reportEmailNotifications}
+          />
         </div>
       </div>
     </>

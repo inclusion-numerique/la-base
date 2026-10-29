@@ -8,6 +8,7 @@ import {
   createNotifications,
 } from '@app/web/server/notifications/createNotificationWithDeduplication'
 import { getAdminAndModeratorUserIds } from '@app/web/server/notifications/getAdminAndModeratorUserIds'
+import { getReportEmailRecipients } from '@app/web/server/report/getReportEmailRecipients'
 import { sendResourceModerationEmail } from '@app/web/server/report/sendResourceModerationEmail'
 import { sendResourceReportModeratorEmail } from '@app/web/server/report/sendResourceReportModeratorEmail'
 import {
@@ -39,6 +40,8 @@ export const reportRouter = router({
                 slug: true,
                 title: true,
                 createdById: true,
+                isPublic: true,
+                base: { select: { isPublic: true } },
               },
             },
             sentBy: {
@@ -52,12 +55,11 @@ export const reportRouter = router({
           },
         })
 
-        // There will be an email sent to the sentBy user
-        // There will be an email sent to the resource creator ?
         await sendResourceReportModeratorEmail({
           report,
           resource: report.resource,
           sentBy: report.sentBy,
+          moderatorEmails: await getReportEmailRecipients(report.resource),
         })
 
         const adminAndModeratorIds = await getAdminAndModeratorUserIds(user.id)

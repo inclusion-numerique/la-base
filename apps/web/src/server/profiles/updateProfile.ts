@@ -66,6 +66,10 @@ export const UpdateProfileVisibilityCommandValidation = z.object({
   }),
 })
 
+export const UpdateProfileReportEmailNotificationsCommandValidation = z.object({
+  reportEmailNotifications: z.boolean(),
+})
+
 export type UpdateProfileImageCommand = z.infer<
   typeof UpdateProfileImageCommandValidation
 >
@@ -80,4 +84,8 @@ export type UpdateProfileContactsCommand = z.infer<
 
 export type UpdateProfileVisibilityCommand = z.infer<
   typeof UpdateProfileVisibilityCommandValidation
+>
+
+export type UpdateProfileReportEmailNotificationsCommand = z.infer<
+  typeof UpdateProfileReportEmailNotificationsCommandValidation
 >
