@@ -7,14 +7,17 @@ import ProfileDeletion from './ProfileDeletion'
 import styles from './ProfileEdition.module.css'
 import ProfileSideMenu from './ProfileEditionSideMenu'
 import ProfileInformationsEdition from './ProfileInformationsEdition'
+import ProfileNotificationsEdition from './ProfileNotificationsEdition'
 import ProfileVisibilityEdition from './ProfileVisibilityForm'
 
 const ProfileEdition = ({
   profile,
   resources,
+  reportEmailNotifications,
 }: {
   profile: ProfilePageData
   resources: ResourceListItem[]
+  reportEmailNotifications: boolean | null
 }) => (
   <>
     <div className="fr-grid-row">
@@ -29,7 +32,7 @@ const ProfileEdition = ({
       </div>
     </div>
     <div className="fr-grid-row">
-      <ProfileSideMenu />
+      <ProfileSideMenu withNotifications={reportEmailNotifications !== null} />
       <div className={classNames(styles.container, 'fr-col-12 fr-col-lg-6')}>
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-1w">
           <div className="fr-col-12">
@@ -41,6 +44,13 @@ const ProfileEdition = ({
           <div className="fr-col-12">
             <ProfileVisibilityEdition profile={profile} resources={resources} />
           </div>
+          {reportEmailNotifications !== null && (
+            <div className="fr-col-12">
+              <ProfileNotificationsEdition
+                reportEmailNotifications={reportEmailNotifications}
+              />
+            </div>
+          )}
           <div className="fr-col-12">
             <ProfileDeletion userId={profile.id} />
           </div>

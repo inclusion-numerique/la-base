@@ -10,10 +10,15 @@ import {
   UpdateProfileContactsCommandValidation,
   UpdateProfileImageCommandValidation,
   UpdateProfileInformationsCommandValidation,
+  UpdateProfileReportEmailNotificationsCommandValidation,
   UpdateProfileVisibilityCommandValidation,
 } from '@app/web/server/profiles/updateProfile'
 import { handleResourceMutationCommand } from '@app/web/server/resources/feature/handleResourceMutationCommand'
-import { protectedProcedure, router } from '@app/web/server/rpc/createRouter'
+import {
+  moderatorProcedure,
+  protectedProcedure,
+  router,
+} from '@app/web/server/rpc/createRouter'
 import { authorizeOrThrow, invalidError } from '@app/web/server/rpc/trpcErrors'
 import { findFirstAvailableSlug } from '@app/web/server/slug/findFirstAvailableSlug'
 import { createSlug } from '@app/web/utils/createSlug'
@@ -194,6 +199,15 @@ export const profileRouter = router({
 
       return updatedUser
     }),
+  updateReportEmailNotifications: moderatorProcedure
+    .input(UpdateProfileReportEmailNotificationsCommandValidation)
+    .mutation(async ({ input, ctx: { user } }) =>
+      prismaClient.user.update({
+        where: { id: user.id },
+        data: { reportEmailNotifications: input.reportEmailNotifications },
+        select: { reportEmailNotifications: true },
+      }),
+    ),
   updateImage: protectedProcedure
     .input(UpdateProfileImageCommandValidation)
     .mutation(async ({ input, ctx: { user } }) => {
