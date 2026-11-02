@@ -90,6 +90,7 @@
     "react-hot-toast": "^2.6.1",
     "react-use-css-custom-property": "^0.1.1",
     "recharts": "^3.10.1",
+    "remixicon": "4.9.1",
     "sanitize-html": "^2.17.7",
     "server-only": "^0.0.1",
     "sharp": "^0.35.5",
