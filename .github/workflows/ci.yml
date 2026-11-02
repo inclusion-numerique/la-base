@@ -40,6 +40,8 @@ jobs:
         run: pnpm -F '!@app/web' lint
       - name: Lint @app/web
         run: pnpm -F '@app/web' lint
+      - name: Lint secrets
+        run: pnpm lint:secrets
 
   commit-check:
     name: Lint commits
