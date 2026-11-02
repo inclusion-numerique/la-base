@@ -99,6 +99,36 @@ jobs:
       deployments: write
     secrets: inherit
 
+  changelog:
+    name: Changelog
+    needs: deploy-production
+    if: ${{ !cancelled() && needs.deploy-production.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub App token
+        id: jeton
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.BASES_CI_APP_CLIENT_ID }}
+          private-key: ${{ secrets.BASES_CI_APP_PRIVATE_KEY }}
+          permission-contents: write
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ steps.jeton.outputs.token }}
+          HUSKY: '0'
+          GIT_AUTHOR_NAME: inclusion-numerique-les-bases-ci[bot]
+          GIT_AUTHOR_EMAIL: 341550592+inclusion-numerique-les-bases-ci[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: inclusion-numerique-les-bases-ci[bot]
+          GIT_COMMITTER_EMAIL: 341550592+inclusion-numerique-les-bases-ci[bot]@users.noreply.github.com
+        run: pnpm exec semantic-release
+
   prune-registry:
     name: Prune registry
     needs: deploy-production

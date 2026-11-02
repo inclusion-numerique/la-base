@@ -447,6 +447,7 @@ Les workflows sont dans `.github/workflows` :
    - Deploiement de l'environnement `dev`, puis de la production si `dev` a reussi (`deploy.reusable.yml`)
    - Hors production : import du dump de la production, migrations et fixtures ; en production : migrations
    - Elagage du registre Scaleway apres la production (`infrastructure:prune-registry --apply`) : images des branches disparues supprimees, 10 derniers tags de `main` et 5 de `dev` conserves
+   - Apres la production : [semantic-release](https://semantic-release.gitbook.io/) calcule la version a partir des commits conventionnels, met a jour `CHANGELOG.md` et `package.json`, pousse le commit `chore(release)` sur `main` avec la GitHub App des Bases (seul acteur autorise a contourner le ruleset de `main`), pose le tag et publie la release GitHub
 
 3. **Preview** (sur les pull requests portant le label `preview`)
    - Poser le label `preview` sur une PR deploie sa branche, avec les memes briques que **Release**
