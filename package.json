@@ -16,6 +16,7 @@
     "dev": "pnpm -r --parallel dev",
     "format": "prettier --write \"**/*.{ts,tsx,md,css}\"",
     "lint": "pnpm -r lint",
+    "lint:secrets": "secretlint \"**/*\"",
     "tsc": "pnpm -r tsc",
     "test": "pnpm -r test",
     "test:integration": "pnpm -F web test:integration",
@@ -41,8 +42,11 @@
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@manypkg/cli": "^0.25.1",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
     "dotenv": "^17.4.2",
     "dotenv-cli": "^11.0.0",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "secretlint": "^13.0.7"
   }
 }
