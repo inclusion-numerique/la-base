@@ -173,6 +173,7 @@ const RessourcePage = async ({
               canWrite={canWrite}
               canDelete={canDelete}
               shareableLinkId={shareableLinkId}
+              isAuthorTrusted={await isTrustedUserId(resource.createdById)}
             />
           ) : (
             <PrivateResourceView resource={resource} />

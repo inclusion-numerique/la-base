@@ -14,6 +14,7 @@ const FileContentDetails = ({
   file: { name, size, key, mimeType },
   className,
   contentId,
+  isAuthorTrusted = true,
 }: {
   file: Pick<
     Exclude<ContentProjectionWithContext['file'], null>,
@@ -21,6 +22,9 @@ const FileContentDetails = ({
   >
   className?: string
   contentId?: string
+  // Un fichier déposé par un auteur qui n'est pas de confiance peut contenir
+  // des liens : les moteurs ne doivent pas le découvrir par ce lien
+  isAuthorTrusted?: boolean
   fileDownloadCount?: number | null
   filePreviewCount?: number | null
 }) => {
@@ -61,6 +65,7 @@ const FileContentDetails = ({
             'fr-hidden-md fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
           )}
           href={getStorageUrl({ key })}
+          userContent={!isAuthorTrusted}
           ariaLabel="Télécharger le fichier"
           download={name}
           onClick={handleDownloadClick}
@@ -72,6 +77,7 @@ const FileContentDetails = ({
             'fr-hidden fr-unhidden-md fr-btn--icon-right fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-download-line',
           )}
           href={getStorageUrl({ key })}
+          userContent={!isAuthorTrusted}
           ariaLabel="Télécharger le fichier"
           download={name}
           onClick={handleDownloadClick}
@@ -86,6 +92,7 @@ const FileContentDetails = ({
                 styles.externalLinkWithIcon,
               )}
               href={getStorageUrl({ key })}
+              userContent={!isAuthorTrusted}
               ariaLabel="Voir le fichier dans un nouvel onglet"
               onClick={handlePreviewClick}
             >
@@ -97,6 +104,7 @@ const FileContentDetails = ({
                 styles.externalLinkWithIcon,
               )}
               href={getStorageUrl({ key })}
+              userContent={!isAuthorTrusted}
               ariaLabel="Voir le fichier dans un nouvel onglet"
               onClick={handlePreviewClick}
             >

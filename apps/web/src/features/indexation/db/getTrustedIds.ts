@@ -6,6 +6,7 @@ import {
 } from '@app/web/features/indexation/trustedUser'
 import { prismaClient } from '@app/web/prismaClient'
 import { Prisma } from '@prisma/client'
+import { cache } from 'react'
 
 /**
  * Calcule à la volée, en une requête agrégée, les signaux de confiance des
@@ -121,8 +122,11 @@ export const getTrustedBaseIds = async (
   )
 }
 
-export const isTrustedUserId = async (userId: string) =>
-  (await getTrustedUserIds([userId])).has(userId)
+// Mis en cache pour la requête : les métadonnées et la page d'une ressource
+// demandent la confiance du même auteur
+export const isTrustedUserId = cache(async (userId: string) =>
+  (await getTrustedUserIds([userId])).has(userId),
+)
 
 export const isTrustedBaseId = async (baseId: string) =>
   (await getTrustedBaseIds([baseId])).has(baseId)
