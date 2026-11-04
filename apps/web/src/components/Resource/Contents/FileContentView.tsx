@@ -5,19 +5,25 @@ import styles from './FileContentView.module.css'
 
 const FileContentView = ({
   content: { id, title, file, caption, fileDownloadCount, filePreviewCount },
+  isAuthorTrusted,
 }: {
   content: Pick<ResourceContent, 'id' | 'title' | 'caption'> & {
     file: Exclude<ResourceContent['file'], null>
     fileDownloadCount?: number | null
     filePreviewCount?: number | null
   }
+  isAuthorTrusted?: boolean
 }) => (
   <div data-testid="content-file">
     <h2 data-testid="content-file-title" className="fr-mb-4v fr-h6">
       {title}
     </h2>
     <div className={styles.fileContainer}>
-      <FileContentDetails file={file} contentId={id} />
+      <FileContentDetails
+        file={file}
+        contentId={id}
+        isAuthorTrusted={isAuthorTrusted}
+      />
     </div>
     <ContentMetrics
       type="file"

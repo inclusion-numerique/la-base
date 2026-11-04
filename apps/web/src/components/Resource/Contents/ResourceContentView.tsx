@@ -10,7 +10,13 @@ import TextContentView from './TextContentView'
 // Accept both ContentProjectionWithContext (from events) and ResourceContent (from database)
 type ContentViewProps = ContentProjectionWithContext | ResourceContent
 
-const ResourceContentView = ({ content }: { content: ContentViewProps }) => {
+const ResourceContentView = ({
+  content,
+  isAuthorTrusted,
+}: {
+  content: ContentViewProps
+  isAuthorTrusted?: boolean
+}) => {
   const { type, image, file, id } = content
   switch (type) {
     case 'Text': {
@@ -42,7 +48,12 @@ const ResourceContentView = ({ content }: { content: ContentViewProps }) => {
         })
         return null
       }
-      return <FileContentView content={{ ...content, file }} />
+      return (
+        <FileContentView
+          content={{ ...content, file }}
+          isAuthorTrusted={isAuthorTrusted}
+        />
+      )
     }
     default: {
       throw new Error(`Unknown content type: ${type}`)

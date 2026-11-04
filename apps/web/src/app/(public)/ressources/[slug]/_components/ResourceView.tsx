@@ -31,12 +31,14 @@ const ResourceView = ({
   canDelete,
   canWrite,
   shareableLinkId,
+  isAuthorTrusted,
 }: {
   resource: Resource
   user: SessionUser | null
   canWrite: boolean
   canDelete: boolean
   shareableLinkId?: string
+  isAuthorTrusted: boolean
 }) => {
   const hasInformationSection = resource.isPublic || hasIndexation(resource)
   const contentsWithAnchor = addAnchorIdsToResourceContents(resource.contents)
@@ -147,7 +149,10 @@ const ResourceView = ({
                   index === 0 && 'fr-pt-6v',
                 )}
               >
-                <ResourceContentView content={content} />
+                <ResourceContentView
+                  content={content}
+                  isAuthorTrusted={isAuthorTrusted}
+                />
               </div>
             ))}
 
